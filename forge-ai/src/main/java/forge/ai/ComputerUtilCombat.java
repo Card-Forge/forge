@@ -2475,11 +2475,14 @@ public class ComputerUtilCombat {
                     }
                 }
                 poison += pd;
-                if (pd > 0 && attacker.hasDoubleStrike()) {
-                    poison += pd;
-                }
                 // TODO: Predict replacement effects for counters (doubled, reduced, additional counters, etc.)
             }
+            // intern toxic effect
+            poison += attacker.getKeywordMagnitude(Keyword.TOXIC);
+        }
+        if (attacker.hasDoubleStrike())
+        {
+            poison *= 2;
         }
         return poison;
     }
