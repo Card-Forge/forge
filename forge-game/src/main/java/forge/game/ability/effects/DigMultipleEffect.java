@@ -77,10 +77,20 @@ public class DigMultipleEffect extends SpellAbilityEffect {
             if (validMap.isEmpty()) {
                 chooser.getController().notifyOfValue(sa, null, Localizer.getInstance().getMessage("lblNoValidCards"));
             } else {
-                CardCollection chosen = chooser.getController().chooseCardsForEffectMultiple(validMap, sa, Localizer.getInstance().getMessage("lblChooseCards"), chooseOptional);
+                CardCollection chosen;
+                //ensure choosing something when possible and not optional
+                while (true) {
+                    chosen = chooser.getController().chooseCardsForEffectMultiple(validMap, sa,
+                            Localizer.getInstance().getMessage("lblChooseCards"), chooseOptional);
 
-                if (!chosen.isEmpty()) {
-                    game.getAction().reveal(chosen, chooser, true, Localizer.getInstance().getMessage("lblPlayerPickedCardFrom", chooser.getName()));
+                    if (!chosen.isEmpty()) {
+                        game.getAction().reveal(chosen, chooser, true,
+                                Localizer.getInstance().getMessage("lblPlayerPickedCardFrom", chooser.getName()));
+                        break;
+                    }
+                    if (chooseOptional) break;
+                    chooser.getController().notifyOfValue(sa, null,
+                            Localizer.getInstance().getMessage("lblMustChoose"));
                 }
 
                 if (sa.hasParam("ChooseAmount") || sa.hasParam("ChosenZone")) {
@@ -108,21 +118,23 @@ public class DigMultipleEffect extends SpellAbilityEffect {
                     final ZoneType origin = c.getZone().getZoneType();
                     final PlayerZone zone = c.getOwner().getZone(destZone1);
 
-                    if (zone.is(ZoneType.Library) || zone.is(ZoneType.PlanarDeck) || zone.is(ZoneType.SchemeDeck)) {
-                        if (libraryPosition == -1 || libraryPosition > zone.size()) {
-                            libraryPosition = zone.size();
-                        }
-                        c = game.getAction().moveTo(zone, c, libraryPosition, sa);
-                    } else {
-                        if (destZone1.equals(ZoneType.Battlefield)) {
-                            if (sa.hasParam("Tapped")) {
-                                c.setTapped(true);
+                    if (!sa.hasParam("ChangeLater")) {
+                        if (zone.is(ZoneType.Library) || zone.is(ZoneType.PlanarDeck) || zone.is(ZoneType.SchemeDeck)) {
+                            if (libraryPosition == -1 || libraryPosition > zone.size()) {
+                                libraryPosition = zone.size();
                             }
+                            c = game.getAction().moveTo(zone, c, libraryPosition, sa);
+                        } else {
+                            if (destZone1.equals(ZoneType.Battlefield)) {
+                                if (sa.hasParam("Tapped")) {
+                                    c.setTapped(true);
+                                }
+                            }
+                            c = game.getAction().moveTo(zone, c, sa);
                         }
-                        c = game.getAction().moveTo(zone, c, sa);
-                    }
-                    if (!origin.equals(c.getZone().getZoneType())) {
-                        table.put(origin, c.getZone().getZoneType(), c);
+                        if (!origin.equals(c.getZone().getZoneType())) {
+                            table.put(origin, c.getZone().getZoneType(), c);
+                        }
                     }
 
                     if (sa.hasParam("ExileFaceDown")) {
@@ -142,38 +154,45 @@ public class DigMultipleEffect extends SpellAbilityEffect {
             }
 
             // now, move the rest to destZone2
-            if (destZone2 == ZoneType.Library || destZone2 == ZoneType.PlanarDeck || destZone2 == ZoneType.SchemeDeck
-                    || destZone2 == ZoneType.Graveyard) {
-                CardCollection afterOrder = rest;
-                if (sa.hasParam("RestRandomOrder")) {
-                    CardLists.shuffle(afterOrder);
-                }
-                if (libraryPosition2 != -1) {
-                    // Closest to top
-                    Collections.reverse(afterOrder);
-                }
-                for (final Card c : afterOrder) {
-                    final ZoneType origin = c.getZone().getZoneType();
-                    Card m;
-                    if (destZone2 == ZoneType.Library) {
-                        m = game.getAction().moveToLibrary(c, libraryPosition2, sa);
-                    } else {
-                        m = game.getAction().moveToVariantDeck(c, destZone2, libraryPosition2, sa);
+            if (!sa.hasParam("ChangeLater")) {
+                if (destZone2 == ZoneType.Library || destZone2 == ZoneType.PlanarDeck
+                        || destZone2 == ZoneType.SchemeDeck || destZone2 == ZoneType.Graveyard) {
+                    CardCollection afterOrder = rest;
+                    if (sa.hasParam("RestRandomOrder")) {
+                        CardLists.shuffle(afterOrder);
                     }
-                    if (m != null && !origin.equals(m.getZone().getZoneType())) {
-                        table.put(origin, m.getZone().getZoneType(), m);
+                    if (libraryPosition2 != -1) {
+                        // Closest to top
+                        Collections.reverse(afterOrder);
+                    }
+                    for (final Card c : afterOrder) {
+                        final ZoneType origin = c.getZone().getZoneType();
+                        Card m;
+                        if (destZone2 == ZoneType.Library) {
+                            m = game.getAction().moveToLibrary(c, libraryPosition2, sa);
+                        } else {
+                            m = game.getAction().moveToVariantDeck(c, destZone2, libraryPosition2, sa);
+                        }
+                        if (m != null && !origin.equals(m.getZone().getZoneType())) {
+                            table.put(origin, m.getZone().getZoneType(), m);
+                        }
+                    }
+                } else {
+                    // just move them randomly
+                    for (int i = 0; i < rest.size(); i++) {
+                        Card c = rest.get(i);
+                        final ZoneType origin = c.getZone().getZoneType();
+                        final PlayerZone toZone = c.getOwner().getZone(destZone2);
+                        c = game.getAction().moveTo(toZone, c, sa);
+                        if (!origin.equals(c.getZone().getZoneType())) {
+                            table.put(origin, c.getZone().getZoneType(), c);
+                        }
                     }
                 }
-            } else {
-                // just move them randomly
-                for (int i = 0; i < rest.size(); i++) {
-                    Card c = rest.get(i);
-                    final ZoneType origin = c.getZone().getZoneType();
-                    final PlayerZone toZone = c.getOwner().getZone(destZone2);
-                    c = game.getAction().moveTo(toZone, c, sa);
-                    if (!origin.equals(c.getZone().getZoneType())) {
-                        table.put(origin, c.getZone().getZoneType(), c);
-                    }
+            }
+            if (sa.hasParam("ImprintRest")) {
+                for (Card c : rest) {
+                    host.addImprintedCard(c);
                 }
             }
         }

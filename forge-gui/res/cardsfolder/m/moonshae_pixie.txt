@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Creature Faerie
 PT:2/2
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw cards equal to the number of opponents who were dealt combat damage this turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw cards equal to the number of opponents who were dealt combat damage this turn.
 SVar:TrigDraw:DB$ Draw | NumCards$ X
 SVar:X:PlayerCountRegisteredOpponents$HasPropertywasDealtCombatDamageThisTurn
 AlternateMode:Adventure

@@ -1,9 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -12,6 +8,7 @@ import forge.game.card.CardCollection;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Lang;
 
 public class RemoveFromCombatEffect extends SpellAbilityEffect {
 
@@ -19,10 +16,8 @@ public class RemoveFromCombatEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<Card> tgtCards = getTargetCards(sa);
-
         sb.append("Remove ");
-        sb.append(StringUtils.join(tgtCards, ", "));
+        sb.append(Lang.joinHomogenous(getTargetCards(sa)));
         sb.append(" from combat.");
 
         return sb.toString();

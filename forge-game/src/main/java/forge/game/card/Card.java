@@ -226,7 +226,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean tributed = false;
     private boolean embalmed = false;
     private boolean eternalized = false;
-    private boolean madnessWithoutCast = false;
+    private boolean discarded = false;
 
     private boolean flipped = false;
     private boolean facedown = false;
@@ -324,6 +324,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private SpellAbility[] basicLandAbilities = new SpellAbility[MagicColor.WUBRG.length];
 
     private int planeswalkerAbilityActivated;
+    private boolean planeswalkerActivationLimitUsed;
 
     private final ActivationTable numberTurnActivations = new ActivationTable();
     private final ActivationTable numberGameActivations = new ActivationTable();
@@ -331,9 +332,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private final Map<SpellAbility, List<String>> chosenModesTurn = Maps.newHashMap();
     private final Map<SpellAbility, List<String>> chosenModesGame = Maps.newHashMap();
+    private final Map<SpellAbility, List<String>> chosenModesYourCombat = Maps.newHashMap();
+    private final Map<SpellAbility, List<String>> chosenModesYourLastCombat = Maps.newHashMap();
 
     private final Table<SpellAbility, StaticAbility, List<String>> chosenModesTurnStatic = HashBasedTable.create();
     private final Table<SpellAbility, StaticAbility, List<String>> chosenModesGameStatic = HashBasedTable.create();
+    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesYourCombatStatic = HashBasedTable.create();
+    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesYourLastCombatStatic = HashBasedTable.create();
 
     private CombatLki combatLKI;
 
@@ -3263,7 +3268,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isFlipped() {
         return flipped;
     }
-
     public final void setFlipped(boolean value) {
         flipped = value;
     }
@@ -3271,7 +3275,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setCanCounter(final boolean b) {
         canCounter = b;
     }
-
     public final boolean getCanCounter() {
         return canCounter;
     }
@@ -5458,13 +5461,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         damageHistory = history;
     }
 
-    public List<Pair<Integer, Boolean>> getDamageReceivedThisTurn() {
-        return damageReceivedThisTurn;
-    }
-    public void setDamageReceivedThisTurn(List<Pair<Integer, Boolean>> dmg) {
-        damageReceivedThisTurn.addAll(dmg);
-    }
-
     public final boolean hasDealtDamageToOpponentThisTurn() {
         return getDamageHistory().getDamageDoneThisTurn(null, true, null, "Player.Opponent", this, getController(), null) > 0;
     }
@@ -5805,8 +5801,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         return getCastSA().isMadness();
     }
-    public boolean getMadnessWithoutCast() { return madnessWithoutCast; }
-    public void setMadnessWithoutCast(boolean state) { madnessWithoutCast = state; }
+    public boolean wasDiscarded() { return discarded; }
+    public void setDiscarded(boolean state) { discarded = state; }
 
     public final boolean isMonstrous() {
         return monstrous;
@@ -6343,6 +6339,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public boolean isInPlay() {
         return isInZone(ZoneType.Battlefield);
+    }
+
+    public void onEndOfCombat(final Player active) {
+        if (this.getController().equals(active)) {
+            chosenModesYourLastCombat.clear();
+            chosenModesYourLastCombatStatic.clear();
+            chosenModesYourLastCombat.putAll(chosenModesYourCombat);
+            chosenModesYourLastCombatStatic.putAll(chosenModesYourCombatStatic);
+            chosenModesYourCombat.clear();
+            chosenModesYourCombatStatic.clear();
+            updateAbilityTextForView();
+        }
     }
 
     public void onCleanupPhase(final Player turn) {
@@ -7037,7 +7045,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         numberAbilityResolved.clear();
     }
 
-    public List<String> getChosenModesTurn(SpellAbility ability) {
+    public List<String> getChosenModes(SpellAbility ability, String type) {
         SpellAbility original = null;
         SpellAbility root = ability.getRootAbility();
 
@@ -7051,32 +7059,26 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         }
 
-        if (ability.getGrantorStatic() != null) {
-            return chosenModesTurnStatic.get(original, ability.getGrantorStatic());
-        }
-        return chosenModesTurn.get(original);
-    }
-    public List<String> getChosenModesGame(SpellAbility ability) {
-        SpellAbility original = null;
-        SpellAbility root = ability.getRootAbility();
-
-        // because trigger spell abilities are copied, try to get original one
-        if (root.isTrigger()) {
-            original = root.getTrigger().getOverridingAbility();
-        } else {
-            original = ability.getOriginalAbility();
-            if (original == null) {
-                original = ability;
+        if (type.equals("ThisTurn")) {
+            if (ability.getGrantorStatic() != null) {
+                return chosenModesTurnStatic.get(original, ability.getGrantorStatic());
             }
+            return chosenModesTurn.get(original);
+        } else if (type.equals("ThisGame")) {
+            if (ability.getGrantorStatic() != null) {
+                return chosenModesGameStatic.get(original, ability.getGrantorStatic());
+            }
+            return chosenModesGame.get(original);
+        } else if (type.equals("YourLastCombat")) {
+            if (ability.getGrantorStatic() != null) {
+                return chosenModesYourLastCombatStatic.get(original, ability.getGrantorStatic());
+            }
+            return chosenModesYourLastCombat.get(original);
         }
-
-        if (ability.getGrantorStatic() != null) {
-            return chosenModesGameStatic.get(original, ability.getGrantorStatic());
-        }
-        return chosenModesGame.get(original);
+        return null;
     }
 
-    public void addChosenModes(SpellAbility ability, String mode) {
+    public void addChosenModes(SpellAbility ability, String mode, boolean yourCombat) {
         SpellAbility original = null;
         SpellAbility root = ability.getRootAbility();
 
@@ -7103,6 +7105,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 chosenModesGameStatic.put(original, ability.getGrantorStatic(), result);
             }
             result.add(mode);
+            if (yourCombat) {
+                result = chosenModesYourCombatStatic.get(original, ability.getGrantorStatic());
+                if (result == null) {
+                    result = Lists.newArrayList();
+                    chosenModesYourCombatStatic.put(original, ability.getGrantorStatic(), result);
+                }
+            }
         } else {
             List<String> result = chosenModesTurn.get(original);
             if (result == null) {
@@ -7117,6 +7126,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 chosenModesGame.put(original, result);
             }
             result.add(mode);
+
+            if (yourCombat) {
+                result = chosenModesYourCombat.get(original);
+                if (result == null) {
+                    result = Lists.newArrayList();
+                    chosenModesYourCombat.put(original, result);
+                }
+                result.add(mode);
+            }
         }
     }
 
@@ -7130,11 +7148,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void addPlaneswalkerAbilityActivated() {
-        planeswalkerAbilityActivated++;
+        // track if increased limit was used for activation because if there are also additional ones they can count on top
+        if (++planeswalkerAbilityActivated == 2 && StaticAbilityNumLoyaltyAct.limitIncrease(this)) {
+            planeswalkerActivationLimitUsed = true;
+        }
+    }
+
+    public boolean planeswalkerActivationLimitUsed() {
+        return planeswalkerActivationLimitUsed;
     }
 
     public void resetActivationsPerTurn() {
         planeswalkerAbilityActivated = 0;
+        planeswalkerActivationLimitUsed = false;
         numberTurnActivations.clear();
     }
 

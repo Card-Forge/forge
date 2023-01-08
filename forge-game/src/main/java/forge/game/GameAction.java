@@ -164,8 +164,8 @@ public class GameAction {
             }
             if (!found) {
                 c.clearControllers();
-                if (c.removeChangedState()) {
-                    c.updateStateForView();
+                if (cause != null) {
+                    unanimateOnAbortedChange(cause, c);
                 }
                 return c;
             }
@@ -365,7 +365,18 @@ public class GameAction {
                 copied.getOwner().removeInboundToken(copied);
 
                 if (repres == ReplacementResult.Prevented) {
-                    if (game.getStack().isResolving(c) && !zoneTo.is(ZoneType.Graveyard)) {
+                    c.clearEtbCounters();
+                    c.clearControllers();
+                    if (cause != null) {
+                        unanimateOnAbortedChange(cause, c);
+                        if (cause.hasParam("Transformed") || cause.hasParam("FaceDown")) {
+                            c.setBackSide(false);
+                            c.changeToState(CardStateName.Original);
+                        }
+                        unattachCardLeavingBattlefield(c);
+                    }
+
+                    if (c.isInZone(ZoneType.Stack) && !zoneTo.is(ZoneType.Graveyard)) {
                         return moveToGraveyard(c, cause, params);
                     }
 
@@ -373,10 +384,8 @@ public class GameAction {
                     copied.clearDelved();
                     copied.clearConvoked();
                     copied.clearExploited();
-                }
-
-                // was replaced with another Zone Change
-                if (toBattlefield && !c.isInPlay()) {
+                } else if (toBattlefield && !c.isInPlay()) {
+                    // was replaced with another Zone Change
                     if (c.removeChangedState()) {
                         c.updateStateForView();
                     }
@@ -570,6 +579,12 @@ public class GameAction {
             c.setZone(zoneTo);
         }
 
+        if (fromBattlefield) {
+            // order here is important so it doesn't unattach cards that might have returned from UntilHostLeavesPlay
+            unattachCardLeavingBattlefield(copied);
+            c.runLeavesPlayCommands();
+        }
+
         // do ETB counters after zone add
         if (!suppress && toBattlefield && !copied.getEtbCounters().isEmpty()) {
             game.getTriggerHandler().registerActiveTrigger(copied, false);
@@ -697,7 +712,6 @@ public class GameAction {
 
                 copied.setState(CardStateName.Original, true);
             }
-            unattachCardLeavingBattlefield(copied);
         } else if (toBattlefield) {
             for (Player p : game.getPlayers()) {
                 copied.getDamageHistory().setNotAttackedSinceLastUpkeepOf(p);
@@ -973,9 +987,15 @@ public class GameAction {
         if (c.isInZone(ZoneType.Stack)) {
             c.getGame().getStack().remove(c);
         }
+
+        final Zone z = c.getZone();
         // in some corner cases there's no zone yet (copied spell that failed targeting)
-        if (c.getZone() != null) {
-            c.getZone().remove(c);
+        if (z != null) {
+            z.remove(c);
+            if (z.is(ZoneType.Battlefield)) {
+                c.runLeavesPlayCommands();
+            }
+
         }
 
         // CR 603.6c other players LTB triggers should work
@@ -1036,20 +1056,13 @@ public class GameAction {
         }
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        for (Player p : game.getPlayers()) {
-            ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(false);
-        }
-
-        final int tiz = c.getTurnInZone();
 
         oldBattlefield.remove(c);
         newBattlefield.add(c);
-        c.setSickness(true);
         if (game.getPhaseHandler().inCombat()) {
             game.getCombat().removeFromCombat(c);
         }
 
-        c.setTurnInZone(tiz);
         c.setCameUnderControlSinceLastUpkeep(true);
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
@@ -1057,9 +1070,6 @@ public class GameAction {
         game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams, false);
 
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-        for (Player p : game.getPlayers()) {
-            ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(true);
-        }
         c.runChangeControllerCommands();
     }
 
@@ -2559,5 +2569,18 @@ public class GameAction {
             }
         }
         return false;
+    }
+
+    private static void unanimateOnAbortedChange(final SpellAbility cause, final Card c) {
+        if (cause.hasParam("AnimateSubAbility")) {
+            long unanimateTimestamp = Long.valueOf(cause.getAdditionalAbility("AnimateSubAbility").getSVar("unanimateTimestamp"));
+            c.removeChangedCardKeywords(unanimateTimestamp, 0);
+            c.removeChangedCardTypes(unanimateTimestamp, 0);
+            c.removeChangedName(unanimateTimestamp, 0);
+            c.removeNewPT(unanimateTimestamp, 0);
+            if (c.removeChangedCardTraits(unanimateTimestamp, 0)) {
+                c.updateStateForView();
+            }
+        }
     }
 }

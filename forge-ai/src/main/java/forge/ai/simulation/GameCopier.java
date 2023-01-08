@@ -76,21 +76,23 @@ public class GameCopier {
         for (RegisteredPlayer p : origPlayers) {
             newPlayers.add(clonePlayer(p));
         }
+
         GameRules currentRules = origGame.getRules();
         Match newMatch = new Match(currentRules, newPlayers, origGame.getView().getTitle());
         Game newGame = new Game(newPlayers, currentRules, newMatch);
+
         for (int i = 0; i < origGame.getPlayers().size(); i++) {
             Player origPlayer = origGame.getPlayers().get(i);
             Player newPlayer = newGame.getPlayers().get(i);
             newPlayer.setLife(origPlayer.getLife(), null);
-            newPlayer.setActivateLoyaltyAbilityThisTurn(origPlayer.getActivateLoyaltyAbilityThisTurn());
-            for (int j = 0; j < origPlayer.getSpellsCastThisTurn(); j++)
-                newPlayer.addSpellCastThisTurn();
-            newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
-            newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
             newPlayer.setLifeLostLastTurn(origPlayer.getLifeLostLastTurn());
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
             newPlayer.setLifeGainedThisTurn(origPlayer.getLifeGainedThisTurn());
+            newPlayer.setLifeStartedThisTurnWith(origPlayer.getLifeStartedThisTurnWith());
+            newPlayer.setDamageReceivedThisTurn(origPlayer.getDamageReceivedThisTurn());
+            newPlayer.setActivateLoyaltyAbilityThisTurn(origPlayer.getActivateLoyaltyAbilityThisTurn());
+            newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
+            newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
             newPlayer.setBlessing(origPlayer.hasBlessing());
             newPlayer.setRevolt(origPlayer.hasRevolt());
             newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
@@ -350,6 +352,7 @@ public class GameCopier {
             newCard.setPTBoost(c.getPTBoostTable());
             // TODO copy by map
             newCard.setDamage(c.getDamage());
+            newCard.setDamageReceivedThisTurn(c.getDamageReceivedThisTurn());
 
             newCard.setChangedCardColors(c.getChangedCardColorsTable());
             newCard.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningTable());

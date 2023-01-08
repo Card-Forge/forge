@@ -2,7 +2,9 @@ Name:Wicked Guardian
 ManaCost:3 B
 Types:Creature Human Noble
 PT:4/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may have it deal 2 damage to another creature you control. If you do, draw a card.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another creature you control | NumDmg$ 2 | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, you may have it deal 2 damage to another creature you control. If you do, draw a card.
+SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.YouCtrl+Other | ChoiceZone$ Battlefield | ChoiceTitle$ Select another creature you control | SubAbility$ DBDamageChosen
+SVar:DBDamageChosen:DB$ DealDamage | Defined$ ChosenCard | NumDmg$ 2 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ ChosenCard | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 Oracle:When Wicked Guardian enters the battlefield, you may have it deal 2 damage to another creature you control. If you do, draw a card.

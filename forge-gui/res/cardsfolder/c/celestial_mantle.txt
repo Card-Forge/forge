@@ -5,8 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 3 W W W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Enchanted creature gets +3/+3.
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | Execute$ TrigSetLife | CombatDamage$ True | TriggerDescription$ Whenever enchanted creature deals combat damage to a player, double its controller's life total.
-SVar:TrigSetLife:DB$ Pump | RememberObjects$ TriggeredSourceController | SubAbility$ DBSet
-SVar:DBSet:DB$ SetLife | Defined$ Remembered | LifeAmount$ X | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:PlayerCountRemembered$LifeTotal/Twice
+SVar:TrigSetLife:DB$ SetLife | Defined$ TriggeredSourceController | LifeAmount$ X
+SVar:X:PlayerCountDefinedTriggeredSourceController$LifeTotal/Twice
 Oracle:Enchant creature\nEnchanted creature gets +3/+3.\nWhenever enchanted creature deals combat damage to a player, double its controller's life total.

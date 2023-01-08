@@ -136,10 +136,10 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
         CardCollectionView list;
 
-        if (!sa.usesTargeting() && !sa.hasParam("Defined")) {
-            list = game.getCardsIn(ZoneType.Battlefield);
-        } else {
+        if (sa.usesTargeting() || sa.hasParam("Defined")) {
             list = getTargetPlayers(sa).getCardsIn(ZoneType.Battlefield);
+        } else {
+            list = game.getCardsIn(ZoneType.Battlefield);
         }
 
         list = CardLists.getValidCards(list, valid, sa.getActivatingPlayer(), host, sa);
@@ -155,18 +155,18 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
             game.fireEvent(new GameEventCardStatsChanged(c));
 
-            final GameCommand unanimate = new GameCommand() {
-                private static final long serialVersionUID = -5861759814760561373L;
-
-                @Override
-                public void run() {
-                    doUnanimate(c, timestamp);
-
-                    game.fireEvent(new GameEventCardStatsChanged(c));
-                }
-            };
-
             if (!permanent) {
+                final GameCommand unanimate = new GameCommand() {
+                    private static final long serialVersionUID = -5861759814760561373L;
+
+                    @Override
+                    public void run() {
+                        doUnanimate(c, timestamp);
+
+                        game.fireEvent(new GameEventCardStatsChanged(c));
+                    }
+                };
+
                 addUntilCommand(sa, unanimate);
             }
         }

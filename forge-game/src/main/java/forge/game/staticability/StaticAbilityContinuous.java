@@ -563,6 +563,11 @@ public final class StaticAbilityContinuous {
                         p.setMaxHandSize(max);
                     }
                 }
+                if (params.containsKey("RaiseMaxHandSize")) {
+                    String rmhs = params.get("RaiseMaxHandSize");
+                    int rmax = AbilityUtils.calculateAmount(hostCard, rmhs, stAb);
+                    p.setMaxHandSize(p.getMaxHandSize() + rmax);
+                }
 
                 if (params.containsKey("AdjustLandPlays")) {
                     String mhs = params.get("AdjustLandPlays");
@@ -573,6 +578,7 @@ public final class StaticAbilityContinuous {
                         p.addMaxLandPlays(se.getTimestamp(), add);
                     }
                 }
+
                 if (params.containsKey("ControlOpponentsSearchingLibrary")) {
                     Player cntl = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, params.get("ControlOpponentsSearchingLibrary"), stAb), null);
                     p.addControlledWhileSearching(se.getTimestamp(), cntl);
@@ -590,12 +596,6 @@ public final class StaticAbilityContinuous {
                     String mhs = params.get("AdditionalOptionalVote");
                     int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
                     p.addAdditionalOptionalVote(se.getTimestamp(), add);
-                }
-
-                if (params.containsKey("RaiseMaxHandSize")) {
-                    String rmhs = params.get("RaiseMaxHandSize");
-                    int rmax = AbilityUtils.calculateAmount(hostCard, rmhs, stAb);
-                    p.setMaxHandSize(p.getMaxHandSize() + rmax);
                 }
 
                 if (params.containsKey("ManaConversion")) {

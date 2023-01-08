@@ -82,6 +82,7 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     private final DevLabel lblWalkTo = new DevLabel(Localizer.getInstance().getMessage("lblWalkTo"));
 
     private final DevLabel lblAskAI = new DevLabel(Localizer.getInstance().getMessage("lblAskAI"));
+    private final DevLabel lblAskSimulationAI = new DevLabel(Localizer.getInstance().getMessage("lblAskSimulationAI"));
 
 
     private final CDev controller;
@@ -91,7 +92,6 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     public VDev(final CDev controller) {
         this.controller = controller;
 
-        final String constraints = "w 95%!, gap 0 0 4px 0";
         final String halfConstraints = "w 47%!, gap 0 0 4px 0";
         final String halfConstraintsLeft = halfConstraints + ", split 2";
         viewport.setOpaque(false);
@@ -113,13 +113,14 @@ public class VDev implements IVDoc<CDev>, IDevListener {
         viewport.add(this.lblWinGame, halfConstraints);
         viewport.add(this.lblAddCounterPermanent, halfConstraintsLeft);
         viewport.add(this.lblSubCounterPermanent, halfConstraints);
-        viewport.add(this.lblSetupGame, halfConstraintsLeft);
-        viewport.add(this.lblDumpGame, halfConstraints);
         viewport.add(this.lblTapPermanent, halfConstraintsLeft);
         viewport.add(this.lblUntapPermanent, halfConstraints);
         viewport.add(this.lblRiggedRoll, halfConstraintsLeft);
         viewport.add(this.lblWalkTo, halfConstraints);
         viewport.add(this.lblAskAI, halfConstraintsLeft);
+        viewport.add(this.lblAskSimulationAI, halfConstraintsLeft);
+        viewport.add(this.lblSetupGame, halfConstraintsLeft);
+        viewport.add(this.lblDumpGame, halfConstraints);
     }
 
     //========= Overridden methods
@@ -302,20 +303,23 @@ public class VDev implements IVDoc<CDev>, IDevListener {
         return this.lblAskAI;
     }
 
+    public DevLabel getLblAskSimulationAI() {
+        return this.lblAskSimulationAI;
+    }
+
     /**
      * Labels that act as buttons which control dev mode functions. Labels are
      * used to support multiline text.
      */
-    public class DevLabel extends SkinnedLabel {
+    public static class DevLabel extends SkinnedLabel {
         private static final long serialVersionUID = 7917311680519060700L;
 
         private FSkin.SkinColor defaultBG;
         private final FSkin.SkinColor hoverBG = FSkin.getColor(FSkin.Colors.CLR_HOVER);
         private final FSkin.SkinColor pressedBG = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
         private boolean toggled;
-        private int w, h; // Width, height, radius, insets (for paintComponent)
 
-        private final int r, i;
+        private final int r, i; // Radius, insets (for paintComponent)
 
         public DevLabel(final String text0) {
             super();
@@ -380,10 +384,10 @@ public class VDev implements IVDoc<CDev>, IDevListener {
          */
         @Override
         protected void paintComponent(final Graphics g) {
-            this.w = this.getWidth();
-            this.h = this.getHeight();
+            int w = this.getWidth();
+            int h = this.getHeight();
             g.setColor(this.getBackground());
-            g.fillRoundRect(this.i, this.i, this.w - (2 * this.i), this.h - this.i, this.r, this.r);
+            g.fillRoundRect(this.i, this.i, w - (2 * this.i), h - this.i, this.r, this.r);
             super.paintComponent(g);
         }
     }

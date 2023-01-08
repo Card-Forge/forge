@@ -1,12 +1,10 @@
 package forge.game.trigger;
 
 import java.util.Map;
-import java.util.Set;
-
-import com.google.common.collect.Sets;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
@@ -79,11 +77,11 @@ public class TriggerDamageDoneOnce extends Trigger {
         return result;
     }
 
-    public Set<Card> getDamageSources(Map<Card, Integer> damageMap) {
+    public CardCollection getDamageSources(Map<Card, Integer> damageMap) {
         if (!hasParam("ValidSource")) {
-            return Sets.newHashSet(damageMap.keySet());
+            return new CardCollection(damageMap.keySet());
         }
-        Set<Card> result = Sets.newHashSet();
+        CardCollection result = new CardCollection();
         for (Card c : damageMap.keySet()) {
             if (matchesValid(c, getParam("ValidSource").split(","))) {
                 result.add(c);

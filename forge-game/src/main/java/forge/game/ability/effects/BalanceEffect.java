@@ -62,7 +62,7 @@ public class BalanceEffect extends SpellAbilityEffect {
                 discardedMap.put(p, p.getController().chooseCardsToDiscardFrom(p, sa, validCards.get(i), numToBalance, numToBalance));
             } else { // Battlefield
                 for (Card card : p.getController().choosePermanentsToSacrifice(sa, numToBalance, numToBalance, validCards.get(i), valid)) {
-                    if ( null == card ) continue; 
+                    if (null == card) continue; 
                     game.getAction().sacrifice(card, sa, true, table, params);
                 }
             }

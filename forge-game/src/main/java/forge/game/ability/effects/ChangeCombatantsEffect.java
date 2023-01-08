@@ -1,9 +1,6 @@
 package forge.game.ability.effects;
 
-import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Maps;
 
@@ -19,6 +16,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.util.CardTranslation;
+import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 
@@ -28,10 +26,9 @@ public class ChangeCombatantsEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<Card> tgtCards = getTargetCards(sa);
         // should update when adding effects for defined blocker
         sb.append("Reselect the defender of ");
-        sb.append(StringUtils.join(tgtCards, ", "));
+        sb.append(Lang.joinHomogenous(getTargetCards(sa)));
 
         return sb.toString();
     }

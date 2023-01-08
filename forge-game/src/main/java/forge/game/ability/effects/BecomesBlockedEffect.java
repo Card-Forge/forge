@@ -3,8 +3,6 @@ package forge.game.ability.effects;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
 
 import forge.game.Game;
@@ -14,6 +12,7 @@ import forge.game.card.Card;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
+import forge.util.Lang;
 
 public class BecomesBlockedEffect extends SpellAbilityEffect {
 
@@ -21,9 +20,7 @@ public class BecomesBlockedEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<Card> tgtCards = getTargetCards(sa);
-
-        sb.append(StringUtils.join(tgtCards, ", "));
+        sb.append(Lang.joinHomogenous(getTargetCards(sa)));
         sb.append(" becomes blocked.");
 
         return sb.toString();

@@ -7,5 +7,6 @@ ScryfallCode=PH21
 
 [cards]
 1 M Andrios, Roaming Explorer @Borja Pindado
+2 M Arteeoh, Dread Scavenger @Zoltan Boros
 3 M Byode, Inverse Sun @Dominik Mayer
 4 M Ersta, Friend to All @Winona Nelson

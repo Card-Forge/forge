@@ -2,11 +2,11 @@ Name:Eye of Singularity
 ManaCost:3 W
 Types:World Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ When CARDNAME enters the battlefield, destroy each permanent with the same name as another permanent, except for basic lands. They can't be regenerated.
-SVar:TrigRepeat:DB$ RepeatEach | RepeatCards$ Permanent.nonBasic | RepeatSubAbility$ DBDestroy | UseImprinted$ True | SubAbility$ DBCleanup
-SVar:DBDestroy:DB$ Destroy | Defined$ Valid Permanent.sharesNameWith Imprinted+IsNotImprinted | NoRegen$ True
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.nonBasic | TriggerZones$ Battlefield | Execute$ TrigDestroyRem | TriggerDescription$ Whenever a permanent other than a basic land enters the battlefield, destroy all other permanents with that name. They can't be regenerated.
-SVar:TrigDestroyRem:DB$ Pump | RememberObjects$ TriggeredCard | SubAbility$ DBDestroyAll
-SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.IsNotRemembered+sharesNameWith Remembered | NoRegen$ True | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigRepeat:DB$ RepeatEach | RepeatCards$ Permanent.nonBasic | RepeatSubAbility$ DBRem | SubAbility$ DBDestroy
+SVar:DBRem:DB$ Pump | ImprintCards$ Valid Permanent.sharesNameWith Remembered+IsNotRemembered
+SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Card.IsImprinted | NoRegen$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.nonBasic | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a permanent other than a basic land enters the battlefield, destroy all other permanents with that name. They can't be regenerated.
+SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Permanent.NotTriggeredCard+sharesNameWith TriggeredCard | NoRegen$ True
 AI:RemoveDeck:All
 Oracle:When Eye of Singularity enters the battlefield, destroy each permanent with the same name as another permanent, except for basic lands. They can't be regenerated.\nWhenever a permanent other than a basic land enters the battlefield, destroy all other permanents with that name. They can't be regenerated.
