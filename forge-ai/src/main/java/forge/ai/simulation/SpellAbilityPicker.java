@@ -70,8 +70,7 @@ public class SpellAbilityPicker {
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
         List<SpellAbility> candidateSAs = ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player);
         int writeIndex = 0;
-        for (int i = 0; i < candidateSAs.size(); i++) {
-            SpellAbility sa = candidateSAs.get(i);
+        for (SpellAbility sa : candidateSAs) {
             if (sa.isManaAbility()) {
                 continue;
             }
