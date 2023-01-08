@@ -6,7 +6,7 @@ K:Lifelink
 K:Toxic:1
 T:Mode$ Proliferate | ValidPlayer$ You | Execute$ TrigChoose | TriggerDescription$ Whenever you proliferate, ABILITY
 SVar:TrigChoose:DB$ Charm | Choices$ DBToken,DBPump
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ the_hollow_sentinel | TokenOwner$ You | ConditionPresent$ Creature.YouCtrl+namedThe Hollow Sentinel | PresentCompare$ EQ0 | SpellDescription$ If you don't control a creature named The Hollow Sentinel, create The Hollow Sentinel, a legendary 3/3 colorless Phyrexian Golem artifact creature token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ the_hollow_sentinel | TokenOwner$ You | ConditionPresent$ Creature.YouCtrl+namedThe Hollow Sentinel | ConditionCompare$ EQ0 | SpellDescription$ If you don't control a creature named The Hollow Sentinel, create The Hollow Sentinel, a legendary 3/3 colorless Phyrexian Golem artifact creature token.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature.Artifact+YouCtrl | TgtPrompt$ Select target artifact creature you control | KW$ Flying & Lifelink | SpellDescription$ Target artifact creature you control gains flying and lifelink until end of turn. 
 Oracle:Lifelink, toxic 1\nWhenever you proliferate, choose one -\n• If you don't control a creature named The Hollow Sentinel, create The Hollow Sentinel, a legendary 3/3 colorless Phyrexian Golem artifact creature token.\n• Target artifact creature you control gains flying and lifelink until end of turn.
 
