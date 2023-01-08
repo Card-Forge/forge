@@ -2052,6 +2052,25 @@ public class ComputerUtilCard {
         return false;
     }
 
+    public static CardCollection dedupeCards(CardCollection cc) {
+        CardCollection deduped = new CardCollection();
+        for (Card c : cc) {
+            boolean unique = true;
+            if (c.isInZone(ZoneType.Hand)) {
+                for (Card d : deduped) {
+                    if (d.isInZone(ZoneType.Hand) && d.getOwner().equals(c.getOwner()) && d.getName().equals(c.getName())) {
+                        unique = false;
+                        break;
+                    }
+                }
+            }
+            if (unique) {
+                deduped.add(c);
+            }
+        }
+        return deduped;
+    }
+
     // Determine if the AI has an AI:RemoveDeck:All or an AI:RemoveDeck:Random hint specified.
     // Includes a NPE guard on getRules() which might otherwise be tripped on some cards (e.g. tokens).
     public static boolean isCardRemAIDeck(final Card card) {

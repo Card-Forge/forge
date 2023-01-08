@@ -116,6 +116,9 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             else if (c.hasKeyword(Keyword.WITHER)) {
                 value += addValue(power * 10, "Wither");
             }
+            else if (c.hasKeyword(Keyword.TOXIC)) {
+                value += addValue(power * 10, "Toxic");
+            }
             value += addValue(c.getKeywordMagnitude(Keyword.RAMPAGE), "rampage");
             value += addValue(c.getKeywordMagnitude(Keyword.AFFLICT) * 5, "afflict");
         }

@@ -2,7 +2,6 @@ package forge.ai.simulation;
 
 import forge.util.MyRandom;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -10,6 +9,7 @@ import java.util.Set;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.ExploreAi;
@@ -66,24 +66,14 @@ public class SpellAbilityPicker {
 
     private List<SpellAbility> getCandidateSpellsAndAbilities() {
         CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
+        cards = ComputerUtilCard.dedupeCards(cards);
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
-        HashMap<String, Card> landsDeDupe = new HashMap<>();
         List<SpellAbility> candidateSAs = ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player);
         int writeIndex = 0;
         for (int i = 0; i < candidateSAs.size(); i++) {
             SpellAbility sa = candidateSAs.get(i);
             if (sa.isManaAbility()) {
                 continue;
-            }
-            // Skip identical lands.
-            if (sa instanceof LandAbility) {
-                Card land = sa.getHostCard();
-                Card previousLand = landsDeDupe.get(sa.getHostCard().getName());
-                if (previousLand != null && previousLand.getZone() == land.getZone() &&
-                    previousLand.getOwner() == land.getOwner()) {
-                    continue;
-                }
-                landsDeDupe.put(land.getName(), land);
             }
             sa.setActivatingPlayer(player, true);
 

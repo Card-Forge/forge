@@ -1240,7 +1240,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void removeMutatedStates() {
-        if (getMutatedTimestamp() != -1) {
+        if (isMutated()) {
             removeCloneState(getMutatedTimestamp());
         }
     }
@@ -5801,6 +5801,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         return getCastSA().isMadness();
     }
+
     public boolean wasDiscarded() { return discarded; }
     public void setDiscarded(boolean state) { discarded = state; }
 
