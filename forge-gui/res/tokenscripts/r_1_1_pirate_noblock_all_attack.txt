@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Creature Pirate
 Colors:red
 PT:1/1
-K:CARDNAME can't block.
+S:Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block.
 S:Mode$ MustAttack | ValidCreature$ Creature.YouCtrl | Description$ Creatures you control attack each combat if able.
 Oracle:This creature can't block.\nCreatures you control attack each combat if able.
