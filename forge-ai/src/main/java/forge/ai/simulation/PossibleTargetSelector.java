@@ -20,8 +20,8 @@ public class PossibleTargetSelector {
     private final SpellAbility targetingSa;
     private final int targetingSaIndex;
     private int maxTargets;
-    private int targetIndex;
-    private final List<GameObject> validTargets;
+    private int nextTargetIndex;
+    private final List<GameObject> validTargets = new ArrayList<>();
 
     public static class Targets {
         final int targetingSaIndex;
@@ -50,12 +50,11 @@ public class PossibleTargetSelector {
         this.sa = sa;
         this.targetingSa = targetingSa;
         this.targetingSaIndex = targetingSaIndex;
-        this.validTargets = new ArrayList<>();
-        generateValidTargets(sa.getHostCard().getController());
+        reset();
     }
 
     public void reset() {
-        targetIndex = 0;
+        nextTargetIndex = 0;
         validTargets.clear();
         generateValidTargets(sa.getHostCard().getController());
     }
@@ -189,34 +188,25 @@ public class PossibleTargetSelector {
     }
 
     public Targets getLastSelectedTargets() {
-        return new Targets(targetingSaIndex, validTargets.size(), targetIndex - 1, targetingSa.getTargets().toString());
-    }
-
-    public boolean selectTargetsByIndex(int targetIndex) {
-        if (targetIndex >= validTargets.size()) {
-            return false;
-        }
-        selectTargetsByIndexImpl(targetIndex);
-        this.targetIndex = targetIndex + 1;
-        return true;
+        return new Targets(targetingSaIndex, validTargets.size(), nextTargetIndex - 1, targetingSa.getTargets().toString());
     }
 
     public boolean selectTargets(Targets targets) {
-        if (targets.targetingSaIndex != targetingSaIndex) {
-            System.err.println("Expected: " + targetingSaIndex + " got: " + targets.targetingSaIndex);
+        if (targets.originalTargetCount != validTargets.size() || targets.targetingSaIndex != targetingSaIndex) {
+            System.err.println("Expected: " + validTargets.size() + " " + targetingSaIndex + " got: " + targets.originalTargetCount + " " + targets.targetingSaIndex);
             return false;
         }
         selectTargetsByIndexImpl(targets.targetIndex);
-        this.targetIndex = targets.targetIndex + 1;
+        this.nextTargetIndex = targets.targetIndex + 1;
         return true;
     }
 
     public boolean selectNextTargets() {
-        if (targetIndex >= validTargets.size()) {
+        if (nextTargetIndex >= validTargets.size()) {
             return false;
         }
-        selectTargetsByIndexImpl(targetIndex);
-        targetIndex++;
+        selectTargetsByIndexImpl(nextTargetIndex);
+        nextTargetIndex++;
         return true;
     }
 }

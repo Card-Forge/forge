@@ -83,6 +83,7 @@ public class MultiTargetSelector {
     }
 
     public void selectTargetsByIndex(int i) {
+        // The caller is telling us to select the i-th possible set of targets.
         if (i < currentIndex) {
             reset();
         }
@@ -91,25 +92,49 @@ public class MultiTargetSelector {
         }
     }
 
-    public boolean selectNextTargets() {
-        if (currentIndex == -1) {
-            for (PossibleTargetSelector selector : selectors) {
-                if (!selector.selectNextTargets()) {
+    private boolean selectTargetsStartingFrom(int selectorIndex) {
+        // Don't reset the current selector, as it still has the correct list of targets set and has
+        // to remember its current/next target index. Subsequent selectors need a reset since their
+        // possible targets may change based on what was chosen for earlier ones.
+        if (selectors.get(selectorIndex).selectNextTargets()) {
+            for (int i = selectorIndex + 1; i < selectors.size(); i++) {
+                selectors.get(i).reset();
+                if (!selectors.get(i).selectNextTargets()) {
                     return false;
                 }
             }
-            currentIndex = 0;
             return true;
         }
-        for (int i = selectors.size() - 1; i >= 0; i--) {
-            if (selectors.get(i).selectNextTargets()) {
-                currentIndex++;
+        return false;
+    }
+
+    public boolean selectNextTargets() {
+        if (selectors.size() == 0) {
+            return false;
+        }
+        if (currentIndex == -1) {
+            // Select the first set of targets (calls selectNextTargets() on each selector).
+            if (selectTargetsStartingFrom(0)) {
+                currentIndex = 0;
                 return true;
             }
-            selectors.get(i).reset();
-            selectors.get(i).selectNextTargets();
+            // No possible targets.
+            return false;
         }
-        return false;
+        // Subsequent call, first try selecting a new target for the last selector. If that doesn't
+        // work, backtrack (decrement selector index) and try selecting targets from there.
+        // This approach ensures that leaf selectors (end of list) are advanced first, before
+        // previous ones, so that we get an AA,AB,BA,BB ordering.
+        int selectorIndex = selectors.size() - 1;
+        while (!selectTargetsStartingFrom(selectorIndex)) {
+            if (selectorIndex == 0) {
+                // No more possible targets.
+                return false;
+            }
+            selectorIndex--;
+        }
+        currentIndex++;
+        return true;
     }
 
     private static boolean conditionsAreMet(SpellAbility saOrSubSa) {

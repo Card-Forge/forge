@@ -607,7 +607,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
     }
 
     @Test
-    public void threeTargetSpell() {
+    public void threeDistinctTargetSpell() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
@@ -634,5 +634,35 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         AssertJUnit.assertTrue(targets.toString().contains("Forest Bear"));
         AssertJUnit.assertTrue(targets.toString().contains("Runeclaw Bear"));
         AssertJUnit.assertTrue(targets.toString().contains("Grizzly Bear"));
+        // Expected 5*4*3=60 iterations (5 choices for first target, 4 for next, 3 for last.)
+        AssertJUnit.assertEquals(60, picker.getNumSimulations());
+    }
+
+    @Test
+    public void correctTargetChoicesWithTwoTargetSpell() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        addCardToZone("Rites of Reaping", p, ZoneType.Hand);
+        addCard("Swamp", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Flying Men", opponent);
+        addCard("Forest Bear", p);
+        addCard("Water Elemental", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertNotNull(sa);
+        MultiTargetSelector.Targets targets = picker.getPlan().getSelectedDecision().targets;
+        AssertJUnit.assertEquals(2, targets.size());
+        AssertJUnit.assertTrue(targets.toString().contains("Forest Bear"));
+        AssertJUnit.assertTrue(targets.toString().contains("Flying Men"));
     }
 }
