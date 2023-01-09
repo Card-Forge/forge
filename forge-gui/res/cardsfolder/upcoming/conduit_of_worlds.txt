@@ -2,7 +2,10 @@ Name:Conduit of Worlds
 ManaCost:2 G G
 Types:Artifact
 S:Mode$ Continuous | Affected$ Land.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands from your graveyard.
-S:Mode$ CantBeCast | ValidCard$ Card.nonArtifact | Caster$ Player | NumLimitEachTurn$ 1 | Description$ Each player who has cast a nonartifact spell this turn can't cast additional nonartifact spells.
-SVar:X:Count$ThisTurnCast_Creature.ActivePlayerCtrl
+A:AB$ Pump | Cost$ T | Defined$ You | SorcerySpeed$ True | ValidTgts$ Permanent.nonLand+YouCtrl | PumpZone$ Graveyard | TargetPrompt$ Choose a creature card in your graveyard | RememberTargets$ True | SubAbility$ DBPlay | SpellDescription$ Choose target nonland permanent card in your graveyard. If you haven't cast a spell this turn, you may cast that card. If you do, you can't cast additional spells this turn. Activate only as a sorcery.
+SVar:DBPlay:DB$ Play | Defined$ Targeted | ValidSA$ Spell | ConditionCheckSVar$ X | CondtionSVarCompare$ EQ0 | RememberPlayed$ True | Optional$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | Name$ Conduit of Worlds's Effect | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | StaticAbilities$ STCantBeCast
+SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ You | Description$ You can't cast additional spells this turn.
+SVar:X:Count$ThisTurnCast_Spell.YouCtrl
 DeckHints:Ability$Graveyard|Mill|Dredge
 Oracle:You may play lands from your graveyard.\n{T}: Choose target nonland permanent card in your graveyard. If you haven't cast a spell this turn, you may cast that card. If you do, you can't cast additional spells this turn. Activate only as a sorcery.
