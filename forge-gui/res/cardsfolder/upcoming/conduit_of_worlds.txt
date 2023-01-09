@@ -1,0 +1,8 @@
+Name:Conduit of Worlds
+ManaCost:2 G G
+Types:Artifact
+S:Mode$ Continuous | Affected$ Land.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands from your graveyard.
+S:Mode$ CantBeCast | ValidCard$ Card.nonArtifact | Caster$ Player | NumLimitEachTurn$ 1 | Description$ Each player who has cast a nonartifact spell this turn can't cast additional nonartifact spells.
+SVar:X:Count$ThisTurnCast_Creature.ActivePlayerCtrl
+DeckHints:Ability$Graveyard|Mill|Dredge
+Oracle:You may play lands from your graveyard.\n{T}: Choose target nonland permanent card in your graveyard. If you haven't cast a spell this turn, you may cast that card. If you do, you can't cast additional spells this turn. Activate only as a sorcery.
