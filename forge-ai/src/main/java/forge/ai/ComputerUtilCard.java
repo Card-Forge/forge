@@ -2053,6 +2053,9 @@ public class ComputerUtilCard {
     }
 
     public static CardCollection dedupeCards(CardCollection cc) {
+        if (cc.size() <= 1) {
+            return cc;
+        }
         CardCollection deduped = new CardCollection();
         for (Card c : cc) {
             boolean unique = true;
