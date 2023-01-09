@@ -1,0 +1,9 @@
+Name:The Mycosynth Gardens
+ManaCost:no cost
+Types:Land Sphere 
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 1 T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Clone | Cost$ X T | ValidTgts$ Artifact.YouCtrl+cmcEQX+nonToken | TgtPrompt$ Select target nontoken artifact you control | SpellDescription$ CARDNAME becomes a copy of target nontoken artifact you control with mana value X.
+SVar:X:Count$xPaid
+DeckHints:Type$Artifact
+Oracle:{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\n{X}, {T}: The Mycosynth Gardens becomes a copy of target nontoken artifact you control with mana value X.
