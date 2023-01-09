@@ -94,6 +94,7 @@ public enum TriggerType {
     PlanarDice(TriggerPlanarDice.class),
     PlaneswalkedFrom(TriggerPlaneswalkedFrom.class),
     PlaneswalkedTo(TriggerPlaneswalkedTo.class),
+    Proliferate(TriggerProliferate.class),
     Regenerated(TriggerRegenerated.class),
     Revealed(TriggerRevealed.class),
     RolledDie(TriggerRolledDie.class),

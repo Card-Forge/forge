@@ -11,6 +11,7 @@ Lair
 Locus
 Mine
 Power-Plant
+Sphere:Spheres
 Tower
 Urza's
 [CreatureTypes]
@@ -166,6 +167,7 @@ Merfolk:Merfolk
 Metathran:Metathrans
 Minion:Minions
 Minotaur:Minotaurs
+Mite:Mites
 Mole:Moles
 Monger:Mongers
 Mongoose:Mongooses
