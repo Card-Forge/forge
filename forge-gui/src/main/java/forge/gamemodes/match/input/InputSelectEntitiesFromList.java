@@ -124,7 +124,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
                 ? String.format(message, selected.size())
                         : String.format(message, max - selected.size()));
 
-        if (sa != null && sa.hasParam("Crew")) {
+        if (sa != null && sa.hasParam("Crew") && sa.getPayCosts().hasSpecificCostType(CostTapType.class)) {
             msg.append("\nCrewing: ").
             append(CardLists.getTotalPower((FCollection<Card>)getSelected(), true, true)).
             append(" / ").append(TextUtil.fastReplace(sa.getPayCosts().getCostPartByType(CostTapType.class).getType(), "Creature.Other+withTotalPowerGE", ""));
