@@ -2,8 +2,7 @@ Name:Conduit of Worlds
 ManaCost:2 G G
 Types:Artifact
 S:Mode$ Continuous | Affected$ Land.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands from your graveyard.
-A:AB$ Pump | Cost$ T | Defined$ You | SorcerySpeed$ True | ValidTgts$ Permanent.nonLand+YouOwn | PumpZone$ Graveyard | TgtZone$ Graveyard | TgtPrompt$ Choose a creature card in your graveyard | SubAbility$ DBPlay | ImprintTargets$ True | SpellDescription$ Choose target nonland permanent card in your graveyard. If you haven't cast a spell this turn, you may cast that card. If you do, you can't cast additional spells this turn. Activate only as a sorcery.
-SVar:DBPlay:DB$ Play | Defined$ Imprinted | ConditionCheckSVar$ X | CondtionSVarCompare$ EQ0 | RememberPlayed$ True | Optional$ True | SubAbility$ DBEffect
+A:AB$ Play | Cost$ T | Defined$ Targeted | SorcerySpeed$ True | TgtPrompt$ Choose a creature card in your graveyard | CheckSVar$ X | SVarCompare$ EQ0 | TgtZone$ Graveyard | ValidTgts$ Permanent.nonLand+YouOwn | RememberPlayed$ True | Optional$ True | SubAbility$ DBEffect |SpellDescription$ Choose target nonland permanent card in your graveyard. If you haven't cast a spell this turn, you may cast that card. If you do, you can't cast additional spells this turn. Activate only as a sorcery.
 SVar:DBEffect:DB$ Effect | Name$ Conduit of Worlds's Effect | ConditionDefined$ Remembered | ConditionPresent$ Card | StaticAbilities$ STCantBeCast
 SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ You | Description$ You can't cast additional spells this turn.
 SVar:X:Count$ThisTurnCast_Spell.YouCtrl
