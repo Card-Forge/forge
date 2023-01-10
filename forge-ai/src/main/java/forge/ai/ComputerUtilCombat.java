@@ -200,8 +200,8 @@ public class ComputerUtilCombat {
             return 0;
         }
 
-        damage += predictPowerBonusOfAttacker(attacker, null, combat, withoutAbilities);
         if (!attacker.hasKeyword(Keyword.INFECT)) {
+            damage += predictPowerBonusOfAttacker(attacker, null, combat, withoutAbilities);
             sum = predictDamageTo(attacked, damage, attacker, true);
             if (attacker.hasDoubleStrike()) {
                 sum *= 2;
@@ -2475,11 +2475,13 @@ public class ComputerUtilCombat {
                     }
                 }
                 poison += pd;
-                if (pd > 0 && attacker.hasDoubleStrike()) {
-                    poison += pd;
-                }
                 // TODO: Predict replacement effects for counters (doubled, reduced, additional counters, etc.)
             }
+            // intern toxic effect
+            poison += attacker.getKeywordMagnitude(Keyword.TOXIC);
+        }
+        if (attacker.hasDoubleStrike()) {
+            poison *= 2;
         }
         return poison;
     }

@@ -1,0 +1,10 @@
+Name:Blightbelly Rat
+ManaCost:1 B
+Types:Creature Phyrexian Rat
+PT:2/2
+K:Toxic:1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ When CARDNAME dies, proliferate.
+SVar:TrigProliferate:DB$ Proliferate
+DeckHas:Ability$Proliferate
+DeckNeeds:Ability$Counters
+Oracle:Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)\nWhen Blightbelly Rat dies, proliferate.

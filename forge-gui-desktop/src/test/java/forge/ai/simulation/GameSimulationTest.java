@@ -2495,4 +2495,41 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertNotNull(simMentor);
         AssertJUnit.assertEquals(1, simMentor.getCounters(CounterEnumType.P1P1));
     }
+
+    @Test
+    public void testHushbringer() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+
+        addCard("Naban, Dean of Iteration", p);
+        addCard("Hushbringer", p);
+        addCard("Ingenious Artillerist", p);
+
+        // both ETB together and Artillerist should still trigger from the non-creature
+        addCardToZone("Spellbook", p, ZoneType.Library);
+        // whereas Naban doesn't see Memnarch to double the trigger
+        addCardToZone("Memnarch", p, ZoneType.Library);
+
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Island", p);
+        addCard("Island", p);
+        addCard("Island", p);
+        addCard("Mountain", p);
+        addCard("Mountain", p);
+
+        Card genesis = addCardToZone("Genesis Ultimatum", p, ZoneType.Hand);
+
+        SpellAbility genesisSA = genesis.getFirstSpellAbility();
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(genesisSA);
+        Game simGame = sim.getSimulatedGameState();
+
+        // 2 damage dealt for 2 artifacts
+        AssertJUnit.assertEquals(18, simGame.getPlayers().get(1).getLife());
+    }
 }

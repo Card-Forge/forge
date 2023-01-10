@@ -671,8 +671,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         boolean infect = source.hasKeyword(Keyword.INFECT)
                 || hasKeyword("All damage is dealt to you as though its source had infect.");
 
+        int poisonCounters = 0;
         if (infect) {
-            addPoisonCounters(amount, source.getController(), counterTable);
+            poisonCounters += amount;
         }
         else if (!hasKeyword("Damage doesn't cause you to lose life.")) {
             // rule 118.2. Damage dealt to a player normally causes that player to lose that much life.
@@ -682,6 +683,14 @@ public class Player extends GameEntity implements Comparable<Player> {
             } else {
                 loseLife(amount, true, false);
             }
+        }
+
+        if (isCombat) {
+            poisonCounters += source.getKeywordMagnitude(Keyword.TOXIC);
+        }
+
+        if (poisonCounters > 0) {
+            addPoisonCounters(poisonCounters, source.getController(), counterTable);
         }
 
         //Oathbreaker, Tiny Leaders, and Brawl ignore commander damage rule
