@@ -4,7 +4,7 @@ Types:Creature Phyrexian Demon
 PT:6/6
 K:Flying
 K:etbCounter:OIL:4
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCtr | TriggerDescription$ At the beginning of your upkeep, remove an oil counter from Archfiend of the Dross. Then if it has no oil counters on it, you lose the game.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCtr | TriggerDescription$ At the beginning of your upkeep, remove an oil counter from CARDNAME. Then if it has no oil counters on it, you lose the game.
 SVar:TrigRemoveCtr:DB$ RemoveCounter | Defined$ Self | CounterType$ OIL | CounterNum$ 1 | SubAbility$ LoseGame
 SVar:LoseGame:DB$ LosesGame | Defined$ You | ConditionDefined$ Self | ConditionPresent$ Card.counters_EQ0_OIL
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature an opponent controls dies, its controller loses 2 life.
