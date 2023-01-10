@@ -188,7 +188,8 @@ public class PossibleTargetSelector {
     }
 
     public Targets getLastSelectedTargets() {
-        return new Targets(targetingSaIndex, validTargets.size(), nextTargetIndex - 1, targetingSa.getTargets().toString());
+        int targetIndex = Math.min(0, nextTargetIndex - 1);
+        return new Targets(targetingSaIndex, validTargets.size(), targetIndex, targetingSa.getTargets().toString());
     }
 
     public boolean selectTargets(Targets targets) {

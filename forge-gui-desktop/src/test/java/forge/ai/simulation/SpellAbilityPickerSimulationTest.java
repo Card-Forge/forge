@@ -95,11 +95,8 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
-        addCard("Island", p);
-        addCard("Island", p);
-        addCard("Forest", p);
-        addCard("Forest", p);
-        addCard("Forest", p);
+        addCards("Island", 2, p);
+        addCards("Forest", 3, p);
 
         Card tatyova = addCardToZone("Tatyova, Benthic Druid", p, ZoneType.Hand);
         addCardToZone("Forest", p, ZoneType.Hand);
@@ -169,10 +166,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
-        addCard("Mountain", p);
-        addCard("Mountain", p);
-        addCard("Mountain", p);
-        addCard("Mountain", p);
+        addCards("Mountain", 4, p);
         Card spell = addCardToZone("Fiery Confluence", p, ZoneType.Hand);
 
         Player opponent = game.getPlayers().get(0);
@@ -198,10 +192,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
-        addCard("Mountain", p);
-        addCard("Mountain", p);
-        addCard("Mountain", p);
-        addCard("Mountain", p);
+        addCards("Mountain", 4, p);
         Card spell = addCardToZone("Fiery Confluence", p, ZoneType.Hand);
 
         Player opponent = game.getPlayers().get(0);
@@ -226,8 +217,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
-        addCard("Mountain", p);
-        addCard("Mountain", p);
+        addCards("Mountain", 2, p);
         Card spell = addCardToZone("Arc Trail", p, ZoneType.Hand);
 
         Player opponent = game.getPlayers().get(0);
@@ -289,8 +279,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
-        addCard("Mountain", p);
-        addCard("Mountain", p);
+        addCards("Mountain", 2, p);
         Card abbot = addCardToZone("Abbot of Keral Keep", p, ZoneType.Hand);
         addCardToZone("Lightning Bolt", p, ZoneType.Hand);
         // Note: This assumes the top of library is revealed. If the AI is made
@@ -321,9 +310,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
-        addCard("Mountain", p);
-        addCard("Mountain", p);
-        addCard("Mountain", p);
+        addCards("Mountain", 3, p);
         Card abbot = addCardToZone("Abbot of Keral Keep", p, ZoneType.Hand);
         // Note: This assumes the top of library is revealed. If the AI is made
         // smarter to not assume that, then this test can be updated to have
@@ -426,8 +413,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         Card blocker = addCard("Fugitive Wizard", opponent);
         Card attacker1 = addCard("Dwarven Trader", p);
         attacker1.setSickness(false);
-        addCard("Swamp", p);
-        addCard("Swamp", p);
+        addCards("Swamp", 2, p);
         addCardToZone("Doom Blade", p, ZoneType.Hand);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
@@ -455,9 +441,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         Player opponent = game.getPlayers().get(0);
 
         addCardToZone("Chaos Warp", p, ZoneType.Hand);
-        addCard("Mountain", p);
-        addCard("Mountain", p);
-        addCard("Mountain", p);
+        addCards("Mountain", 3, p);
 
         addCard("Plains", opponent);
         addCard("Mountain", opponent);
@@ -489,8 +473,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
-        addCard("Island", p);
-        addCard("Island", p);
+        addCards("Forest", 2, p);
         addCardToZone("Counterspell", p, ZoneType.Hand);
         addCardToZone("Unsummon", p, ZoneType.Hand);
 
@@ -613,11 +596,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         Player opponent = game.getPlayers().get(0);
 
         addCardToZone("Incremental Growth", p, ZoneType.Hand);
-        addCard("Forest", p);
-        addCard("Forest", p);
-        addCard("Forest", p);
-        addCard("Forest", p);
-        addCard("Forest", p);
+        addCards("Forest", 5, p);
         addCard("Forest Bear", p);
         addCard("Flying Men", opponent);
         addCard("Runeclaw Bear", p);
@@ -639,6 +618,24 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
     }
 
     @Test
+    public void threeDistinctTargetSpellCantBeCast() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        addCardToZone("Incremental Growth", p, ZoneType.Hand);
+        addCards("Forest", 5, p);
+        addCard("Forest Bear", p);
+        addCard("Flying Men", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertNull(sa);
+    }
+
+    @Test
     public void correctTargetChoicesWithTwoTargetSpell() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -646,11 +643,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
         addCardToZone("Rites of Reaping", p, ZoneType.Hand);
         addCard("Swamp", p);
-        addCard("Forest", p);
-        addCard("Forest", p);
-        addCard("Forest", p);
-        addCard("Forest", p);
-        addCard("Forest", p);
+        addCards("Forest", 5, p);
         addCard("Flying Men", opponent);
         addCard("Forest Bear", p);
         addCard("Water Elemental", opponent);

@@ -82,14 +82,17 @@ public class MultiTargetSelector {
         currentIndex = -1;
     }
 
-    public void selectTargetsByIndex(int i) {
+    public boolean selectTargetsByIndex(int i) {
         // The caller is telling us to select the i-th possible set of targets.
         if (i < currentIndex) {
             reset();
         }
         while (currentIndex < i) {
-            selectNextTargets();
+            if (!selectNextTargets()) {
+                return false;
+            }
         }
+        return true;
     }
 
     private boolean selectTargetsStartingFrom(int selectorIndex) {
