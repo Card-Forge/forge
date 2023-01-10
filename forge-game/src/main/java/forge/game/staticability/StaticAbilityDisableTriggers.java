@@ -17,7 +17,7 @@ public class StaticAbilityDisableTriggers {
 
     static String MODE = "DisableTriggers";
 
-    public static boolean disabled(final Game game, final TriggerType triggerType, final Trigger regtrig, final Map<AbilityKey, Object> runParams)  {
+    public static boolean disabled(final Game game, final Trigger regtrig, final Map<AbilityKey, Object> runParams)  {
         CardCollectionView cardList = null;
         // if LTB look back
         if ((regtrig.getMode() == TriggerType.ChangesZone || regtrig.getMode() == TriggerType.ChangesZoneAll) && "Battlefield".equals(regtrig.getParam("Origin"))) {
@@ -37,7 +37,7 @@ public class StaticAbilityDisableTriggers {
                     continue;
                 }
 
-                if (isDisabled(stAb, triggerType, regtrig, runParams)) {
+                if (isDisabled(stAb, regtrig, runParams)) {
                     return true;
                 }
             }
@@ -45,7 +45,9 @@ public class StaticAbilityDisableTriggers {
         return false;
     }
 
-    public static boolean isDisabled(final StaticAbility stAb, final TriggerType triggerType, final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
+    public static boolean isDisabled(final StaticAbility stAb, final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
+        final TriggerType trigMode = regtrig.getMode();
+
         // CR 603.2e
         if (stAb.hasParam("ValidCard") && regtrig.getSpawningAbility() != null) {
             return false;
@@ -56,12 +58,12 @@ public class StaticAbilityDisableTriggers {
         }
 
         if (stAb.hasParam("ValidMode")) {
-            if (!ArrayUtils.contains(stAb.getParam("ValidMode").split(","), regtrig.getMode().toString())) {
+            if (!ArrayUtils.contains(stAb.getParam("ValidMode").split(","), trigMode.toString())) {
                 return false;
             }
         }
 
-        if (triggerType.equals(TriggerType.ChangesZone)) {
+        if (trigMode.equals(TriggerType.ChangesZone)) {
             // Cause of the trigger – the card changing zones
             if (!stAb.matchesValidParam("ValidCause", runParams.get(AbilityKey.Card))) {
                 return false;
@@ -81,7 +83,7 @@ public class StaticAbilityDisableTriggers {
                     return false;
                 }
             }
-        } else if (triggerType.equals(TriggerType.ChangesZoneAll)) {
+        } else if (trigMode.equals(TriggerType.ChangesZoneAll)) {
             final String origin = stAb.getParam("Origin");
             final String destination = stAb.getParam("Destination");
             // check if some causes were already ignored by a different ability, then the forbidden causes will be combined

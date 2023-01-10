@@ -444,7 +444,7 @@ public class TriggerHandler {
         }
 
         // check if any static abilities are disabling the trigger (Torpor Orb and the like)
-        if (!regtrig.isStatic() && StaticAbilityDisableTriggers.disabled(game, mode, regtrig, runParams)) {
+        if (!regtrig.isStatic() && StaticAbilityDisableTriggers.disabled(game, regtrig, runParams)) {
             return false;
         }
         return true;
