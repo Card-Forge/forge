@@ -1,0 +1,11 @@
+Name:Kemba, Kha Enduring
+ManaCost:1 W
+Types:Creature Cat Cleric
+PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Creature.Other+Cat+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigAttach | TriggerDescription$ Whenever CARDNAME or another Cat enters the battlefield under your control, attach up to one target Equipment you control to that creature.
+SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCard | Object$ Targeted | ValidTgts$ Equipment.YouCtrl | TgtPrompt$ Select target Equipment you control. | TargetMin$ 0 | TargetMax$ 1
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+equipped | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creatures you control get +1/+1.
+A:AB$ Token | Cost$ 3 W W | TokenScript$ w_2_2_cat | TokenAmount$ 1 | TokenOwner$ You | SpellDescription$ Create a 2/2 white Cat creature token.
+DeckNeeds:Type$Equipment
+DeckHas:Ability$Token
+Oracle:Whenever Kemba, Kha Enduring or another Cat enters the battlefield under your control, attach up to one target Equipment you control to that creature.\nEquipped creatures you control get +1/+1.\n{3}{W}{W}: Create a 2/2 white Cat creature token.

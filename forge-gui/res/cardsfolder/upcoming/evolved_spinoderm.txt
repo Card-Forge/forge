@@ -1,0 +1,13 @@
+Name:Evolved Spinoderm
+ManaCost:2 G G
+Types:Creature Phyrexian Beast
+PT:5/5
+K:etbCounter:OIL:4
+S:Mode$ Continuous | Affected$ Creature.Self+counters_LE2_OIL | AddKeyword$ Trample | Description$ CARDNAME has trample as long as it has two or fewer oil counters on it. Otherwise, it has hexproof.
+S:Mode$ Continuous | Affected$ Creature.Self+counters_GT2_OIL | AddKeyword$ Hexproof
+S:Mode$ Continuous | Affected$ Creature.Self | AddPower$ -2 | AddToughness$ -1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCtr | TriggerDescription$ At the beginning of your upkeep, remove an oil counter from CARDNAME. Then if it has no oil counters on it, sacrifice it.
+SVar:TrigRemoveCtr:DB$ RemoveCounter | Defined$ Self | CounterType$ OIL | CounterNum$ 1 | SubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ Sacrifice | ConditionDefined$ Self | ConditionPresent$ Card.counters_EQ0_OIL
+DeckHas:Ability$Counters
+Oracle:Evolved Spinoderm enters the battlefield with four oil counters on it.\nEvolved Spinoderm has trample as long as it has two or fewer oil counters on it. Otherwise, it has hexproof.\nAt the beginning of your upkeep, remove an oil counter from Evolved Spinoderm. Then if it has no oil counters on it, sacrifice it.
