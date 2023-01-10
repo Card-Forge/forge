@@ -35,7 +35,7 @@ public class PossibleTargetSelector {
             this.targetIndex = targetIndex;
             this.description = description;
 
-            if (targetIndex < 0 || targetIndex >= originalTargetCount) {
+            if (targetIndex != -1 && (targetIndex < 0 || targetIndex >= originalTargetCount)) {
                 throw new IllegalArgumentException("Invalid targetIndex=" + targetIndex);
             }
         }
@@ -188,8 +188,7 @@ public class PossibleTargetSelector {
     }
 
     public Targets getLastSelectedTargets() {
-        int targetIndex = Math.min(0, nextTargetIndex - 1);
-        return new Targets(targetingSaIndex, validTargets.size(), targetIndex, targetingSa.getTargets().toString());
+        return new Targets(targetingSaIndex, validTargets.size(), nextTargetIndex - 1, targetingSa.getTargets().toString());
     }
 
     public boolean selectTargets(Targets targets) {
