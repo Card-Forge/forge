@@ -448,9 +448,11 @@ public class ComputerUtil {
                 }
             }
 
+            // in some rare situations the call to lifeInDanger can lead us back here, this small chance will prevent an overflow
+            boolean chance = sa != null && sa.isManaAbility() ? !MyRandom.percentTrue(10) : true;
             // try everything when about to die
             if (game.getPhaseHandler().getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                    && ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat())) {
+                    && chance && ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat())) {
                 final CardCollection nonCreatures = CardLists.getNotType(typeList, "Creature");
                 if (!nonCreatures.isEmpty()) {
                     return ComputerUtilCard.getWorstAI(nonCreatures);
@@ -609,7 +611,7 @@ public class ComputerUtil {
         int count = 0;
 
         while (count < amount) {
-            Card prefCard = getCardPreference(ai, source, "SacCost", typeList);
+            Card prefCard = getCardPreference(ai, source, "SacCost", typeList, ability);
             if (prefCard == null) {
                 prefCard = ComputerUtilCard.getWorstAI(typeList);
             }

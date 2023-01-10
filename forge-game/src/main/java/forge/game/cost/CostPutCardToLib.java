@@ -82,7 +82,6 @@ public class CostPutCardToLib extends CostPartWithList {
             sb.append(Cost.convertAmountTypeToWords(i, getAmount(), desc));
         }
 
-
         if (sameZone) {
             sb.append(" from the same ").append(from);
         } else if (!this.payCostFromSource()) {
@@ -137,7 +136,7 @@ public class CostPutCardToLib extends CostPartWithList {
         }
 
         typeList = CardLists.getValidCards(typeList, getType().split(";"), payer, source, ability);
-        
+
         if (typeList.size() < i) {
             return false;
         }

@@ -316,7 +316,7 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (!ComputerUtilCost.checkForManaSacrificeCost(ai, ma.getPayCosts(), ma.getHostCard(), ma, ma.isTrigger())) {
+            if (!ComputerUtilCost.checkForManaSacrificeCost(ai, ma.getPayCosts(), ma, ma.isTrigger())) {
                 continue;
             }
 

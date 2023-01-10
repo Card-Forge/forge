@@ -686,7 +686,7 @@ public class ComputerUtilCombat {
         final int defenderDefense = blocker.getLethalDamage() - flankingMagnitude + defBushidoMagnitude;
 
         return defenderDefense;
-    } // shieldDamage
+    }
 
     // For AI safety measures like Regeneration
     /**
