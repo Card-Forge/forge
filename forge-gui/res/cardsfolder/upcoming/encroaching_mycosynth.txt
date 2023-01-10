@@ -1,0 +1,5 @@
+Name:Encroaching Mycosynth
+ManaCost:3 U
+Types:Artifact
+S:Mode$ Continuous | Affected$ Permanent.nonLand+YouCtrl | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | AddType$ Artifact | Description$ Nonland permanents you control are artifacts in addition to their other types. The same is true for permanent spells you control and nonland permanent cards you own that aren't on the battlefield.
+Oracle:Nonland permanents you control are artifacts in addition to their other types. The same is true for permanent spells you control and nonland permanent cards you own that aren't on the battlefield.
