@@ -1,0 +1,11 @@
+Name:Bloated Contaminator
+ManaCost:2 G
+Types:Creature Phyrexian Beast
+PT:4/4
+K:Trample
+K:Toxic:1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigProliferate | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, proliferate.
+SVar:TrigProliferate:DB$ Proliferate
+DeckHas:Ability$Proliferate
+DeckHints:Type$Planeswalker & Ability$Counters
+Oracle:Trample\nToxic 1\nWhenever Bloated Contaminator deals combat damage to a player, proliferate.
