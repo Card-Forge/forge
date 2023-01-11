@@ -73,7 +73,7 @@ public class MultiTargetSelector {
 
     public void reset() {
         for (PossibleTargetSelector selector : selectors) {
-             selector.reset();
+            selector.reset();
         }
         currentIndex = -1;
     }

@@ -4,7 +4,8 @@ Types:Creature Faerie
 PT:1/2
 K:Flying
 K:Lifelink
-S:Mode$ Continuous | GlobalRule$ Creatures entering the battlefield don't cause abilities to trigger. | Description$ Creatures entering the battlefield or dying don't cause abilities to trigger.
-S:Mode$ Continuous | GlobalRule$ Creatures dying don't cause abilities to trigger. | Secondary$ True | Description$ Creatures entering the battlefield or dying don't cause abilities to trigger.
+S:Mode$ DisableTriggers | ValidCause$ Creature | ValidMode$ ChangesZone,ChangesZoneAll | Destination$ Battlefield | Description$ Creatures entering the battlefield or dying don't cause abilities to trigger.
+S:Mode$ DisableTriggers | ValidCause$ Creature | ValidMode$ ChangesZone,ChangesZoneAll | Origin$ Battlefield | Destination$ Graveyard | Secondary$ True | Description$ Creatures entering the battlefield or dying don't cause abilities to trigger.
 AI:RemoveDeck:Random
+DeckHas:Ability$LifeGain
 Oracle:Flying, lifelink\nCreatures entering the battlefield or dying don't cause abilities to trigger.

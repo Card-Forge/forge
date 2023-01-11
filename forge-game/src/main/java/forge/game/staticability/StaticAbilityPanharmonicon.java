@@ -37,7 +37,7 @@ public class StaticAbilityPanharmonicon {
 
         CardCollectionView cardList = null;
         // if LTB look back
-        if (t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Origin"))) {
+        if ((t.getMode() == TriggerType.ChangesZone || t.getMode() == TriggerType.ChangesZoneAll) && "Battlefield".equals(t.getParam("Origin"))) {
             if (runParams.containsKey(AbilityKey.LastStateBattlefield)) {
                 cardList = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
             }
@@ -102,7 +102,11 @@ public class StaticAbilityPanharmonicon {
             // Check if the cards have a trigger at all
             final String origin = stAb.getParam("Origin");
             final String destination = stAb.getParam("Destination");
-            final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
+            // check if some causes were ignored
+            CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.CardsFiltered);
+            if (table == null) {
+                table = (CardZoneTable) runParams.get(AbilityKey.Cards);
+            }
 
             if (table.filterCards(origin == null ? null : ImmutableList.of(ZoneType.smartValueOf(origin)), ZoneType.smartValueOf(destination), stAb.getParam("ValidCause"), card, stAb).isEmpty()) {
                 return false;

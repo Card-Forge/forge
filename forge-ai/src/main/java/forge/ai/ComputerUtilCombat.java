@@ -200,8 +200,8 @@ public class ComputerUtilCombat {
             return 0;
         }
 
-        damage += predictPowerBonusOfAttacker(attacker, null, combat, withoutAbilities);
         if (!attacker.hasKeyword(Keyword.INFECT)) {
+            damage += predictPowerBonusOfAttacker(attacker, null, combat, withoutAbilities);
             sum = predictDamageTo(attacked, damage, attacker, true);
             if (attacker.hasDoubleStrike()) {
                 sum *= 2;
@@ -328,10 +328,10 @@ public class ComputerUtilCombat {
                 if (blockers.size() == 0
                         || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)) {
                     unblocked.add(attacker);
-                } else if (attacker.hasKeyword(Keyword.TRAMPLE)
-                        && getAttack(attacker) > totalShieldDamage(attacker, blockers)) {
-                    if (!attacker.hasKeyword(Keyword.INFECT)) {
-                        damage += getAttack(attacker) - totalShieldDamage(attacker, blockers);
+                } else if (attacker.hasKeyword(Keyword.TRAMPLE) && !attacker.hasKeyword(Keyword.INFECT)) {
+                    int dmgAfterShielding = getAttack(attacker) - totalShieldDamage(attacker, blockers);
+                    if (dmgAfterShielding > 0) {
+                        damage += dmgAfterShielding;
                     }
                 }
             }
@@ -369,13 +369,14 @@ public class ComputerUtilCombat {
             if (blockers.size() == 0
                     || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)) {
                 unblocked.add(attacker);
-            } else if (attacker.hasKeyword(Keyword.TRAMPLE)
-                    && getAttack(attacker) > totalShieldDamage(attacker, blockers)) {
+            } else if (attacker.hasKeyword(Keyword.TRAMPLE)) {
                 int trampleDamage = getAttack(attacker) - totalShieldDamage(attacker, blockers);
-                if (attacker.hasKeyword(Keyword.INFECT)) {
-                    poison += trampleDamage;
+                if (trampleDamage > 0) {
+                    if (attacker.hasKeyword(Keyword.INFECT)) {
+                        poison += trampleDamage;
+                    }
+                    poison += predictPoisonFromTriggers(attacker, ai, trampleDamage);
                 }
-                poison += predictPoisonFromTriggers(attacker, ai, trampleDamage);
             }
         }
 
@@ -686,7 +687,7 @@ public class ComputerUtilCombat {
         final int defenderDefense = blocker.getLethalDamage() - flankingMagnitude + defBushidoMagnitude;
 
         return defenderDefense;
-    } // shieldDamage
+    }
 
     // For AI safety measures like Regeneration
     /**
@@ -2475,11 +2476,13 @@ public class ComputerUtilCombat {
                     }
                 }
                 poison += pd;
-                if (pd > 0 && attacker.hasDoubleStrike()) {
-                    poison += pd;
-                }
                 // TODO: Predict replacement effects for counters (doubled, reduced, additional counters, etc.)
             }
+            // intern toxic effect
+            poison += attacker.getKeywordMagnitude(Keyword.TOXIC);
+        }
+        if (attacker.hasDoubleStrike()) {
+            poison *= 2;
         }
         return poison;
     }
