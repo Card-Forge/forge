@@ -1,0 +1,14 @@
+Name:Mercurial Spelldancer
+ManaCost:1 U
+Types:Creature Phyrexian Rogue
+PT:2/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, put an oil counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ OIL | CounterNum$ 1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDelayTrig | CombatDamage$ True | TriggerDescription$ Whenever Mercurial Spelldancer deals combat damage to a player, you may remove two oil counters from it. If you do, when you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+SVar:TrigDelayTrig:AB$ DelayedTrigger| Cost$ SubCounter<2/OIL> | Execute$ TrigReveal | AILogic$ SpellCopy | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+DeckHints:Type$Instant|Sorcery
+Oracle:Mercurial Spelldancer can't be blocked.\nWhenever you cast a noncreature spell, put an oil conter on Mercurial Spelldancer.\nWhenever Mercurial Spelldancer deals combat damage to a player, you may remove two oil counters from it. If you do, when you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.

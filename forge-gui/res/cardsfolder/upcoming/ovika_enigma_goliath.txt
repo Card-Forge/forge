@@ -1,0 +1,11 @@
+Name:Ovika, Enigma Goliath
+ManaCost:5 U R
+Types:Legendary Creature Phyrexian Nightmare
+PT:6/6
+K:Flying
+K:Ward:3 PayLife<3>
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a noncreature spell, create X 1/1 red Phyrexian Goblin creature tokens, where X is the mana value of that spell. They gain haste until end of turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ r_1_1_phyrexian_goblin | TokenOwner$ You | PumpKeywords$ Haste | PumpDuration$ EOT
+SVar:X:TriggeredStackInstance$CardManaCostLKI
+DeckHas:Ability$Token & Type$Goblin
+Oracle:Flying\nWard — {3}, Pay 3 life.\nWhenever you cast a noncreature spell, create X 1/1 red Phyrexian Goblin creature tokens, where X is the mana value of that spell. They gain haste until end of turn.
