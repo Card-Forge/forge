@@ -33,6 +33,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
+import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChooseGenericEffectAi;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.TokenAi;
@@ -449,14 +450,27 @@ public class ComputerUtil {
             }
 
             // try everything when about to die
-            if (game.getPhaseHandler().getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                    && ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat())) {
-                final CardCollection nonCreatures = CardLists.getNotType(typeList, "Creature");
-                if (!nonCreatures.isEmpty()) {
-                    return ComputerUtilCard.getWorstAI(nonCreatures);
-                } else if (!typeList.isEmpty()) {
-                    // TODO make sure survival is possible in case the creature blocks a trampler
-                    return ComputerUtilCard.getWorstAI(typeList);
+            if (game.getPhaseHandler().getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                // in some rare situations the call to lifeInDanger could lead us back here, this will prevent an overflow
+                boolean preventReturn = sa != null && sa.isManaAbility();
+                if (preventReturn) {
+                    AiCardMemory.rememberCard(ai, sa.getHostCard(), MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
+                }
+
+                boolean danger = ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat());
+
+                if (preventReturn) {
+                    AiCardMemory.forgetCard(ai, sa.getHostCard(), MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
+                }
+
+                if (danger) {
+                    final CardCollection nonCreatures = CardLists.getNotType(typeList, "Creature");
+                    if (!nonCreatures.isEmpty()) {
+                        return ComputerUtilCard.getWorstAI(nonCreatures);
+                    } else if (!typeList.isEmpty()) {
+                        // TODO make sure survival is possible in case the creature blocks a trampler
+                        return ComputerUtilCard.getWorstAI(typeList);
+                    }
                 }
             }
         }
@@ -609,7 +623,7 @@ public class ComputerUtil {
         int count = 0;
 
         while (count < amount) {
-            Card prefCard = getCardPreference(ai, source, "SacCost", typeList);
+            Card prefCard = getCardPreference(ai, source, "SacCost", typeList, ability);
             if (prefCard == null) {
                 prefCard = ComputerUtilCard.getWorstAI(typeList);
             }

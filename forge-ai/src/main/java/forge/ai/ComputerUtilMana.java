@@ -316,10 +316,6 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (!ComputerUtilCost.checkForManaSacrificeCost(ai, ma.getPayCosts(), ma.getHostCard(), ma, ma.isTrigger())) {
-                continue;
-            }
-
             if (sa.getApi() == ApiType.Animate) {
                 // For abilities like Genju of the Cedars, make sure that we're not activating the aura ability by tapping the enchanted card for mana
                 if (saHost.isAura() && "Enchanted".equals(sa.getParam("Defined"))
@@ -381,9 +377,15 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (canPayShardWithSpellAbility(toPay, ai, paymentChoice, sa, checkCosts, cost.getXManaCostPaidByColor())) {
-                return paymentChoice;
+            if (!canPayShardWithSpellAbility(toPay, ai, paymentChoice, sa, checkCosts, cost.getXManaCostPaidByColor())) {
+                continue;
             }
+
+            if (!ComputerUtilCost.checkForManaSacrificeCost(ai, ma.getPayCosts(), ma, ma.isTrigger())) {
+                continue;
+            }
+
+            return paymentChoice;
         }
         return null;
     }
