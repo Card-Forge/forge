@@ -2,8 +2,9 @@ Name:Blade of Shared Souls
 ManaCost:2 U
 Types:Artifact Equipment
 K:For Mirrodin
-T:Mode$ Attached | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever CARDNAME becomes attached to a creature, for as long as CARDNAME remains attached to it, you may have that creature become a copy of another target creature you control.
-SVar:TrigCopy:DB$ Clone | Choices$ Creature.YouCtrl+Other | CloneTarget$ Creature.AttachedBy | Duration$ UntilHostLeavesPlay
+T:Mode$ Attached | ValidSource$ Card.Self | Static$ True | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever CARDNAME becomes attached to a creature, for as long as CARDNAME remains attached to it, you may have that creature become a copy of another target creature you control.
+SVar:TrigCopy:DB$ Clone | Choices$ Creature.YouCtrl+Other | CloneTarget$ Creature.EquippedBy | Duration$ UntilUnattached | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
 K:Equip:2 R R
 DeckHas:Type$Rebel
 Oracle:For Mirrodin! (When this Equipment enters the battlefield, create a 2/2 red Rebel creature token, then attach this to it.)\nWhenever Blade of Shared Souls becomes attached to a creature, for as long as Blade of Shared Souls remains attached to it, you may have that creature become a copy of another target creature you control.\nEquipped creature gets +2/+2 and has flying and haste.\nEquip {2}
