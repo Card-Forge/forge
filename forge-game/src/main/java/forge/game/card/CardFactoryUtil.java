@@ -1219,7 +1219,7 @@ public class CardFactoryUtil {
             sbTrig.append("For Mirrodin !(").append(inst.getReminderText()).append(")");
 
             final String sbRebel = "DB$ Token | TokenScript$ r_2_2_rebel | TokenOwner$ You | RememberTokens$ True";
-            final SpellAbility saRebel= AbilityFactory.getAbility(sbRebel.toString(), card);
+            final SpellAbility saRebel= AbilityFactory.getAbility(sbRebel, card);
 
             final String sbAttach = "DB$ Attach | Defined$ Remembered";
             final AbilitySub saAttach = (AbilitySub) AbilityFactory.getAbility(sbAttach, card);
