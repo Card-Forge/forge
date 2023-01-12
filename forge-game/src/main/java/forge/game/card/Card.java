@@ -2209,7 +2209,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("UpkeepCost")) {
                 } else if (keyword.equals("Provoke") || keyword.equals("Ingest") || keyword.equals("Unleash")
                         || keyword.equals("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
-                        || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit") 
+                        || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
                         || keyword.equals("Changeling") || keyword.equals("Delve") || keyword.equals("Decayed")
                         || keyword.equals("Split second") || keyword.equals("Sunburst") || keyword.equals ("For Mirrodin")
                         || keyword.equals("Double team") || keyword.equals("Living metal")

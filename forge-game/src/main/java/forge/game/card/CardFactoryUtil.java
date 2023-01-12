@@ -1216,11 +1216,9 @@ public class CardFactoryUtil {
             final StringBuilder sbTrig = new StringBuilder();
             sbTrig.append("Mode$ ChangesZone | Destination$ Battlefield | ");
             sbTrig.append("ValidCard$ Card.Self | Secondary$ True | TriggerDescription$ ");
-            sbTrig.append("For Mirrodin (").append(inst.getReminderText()).append(")");
+            sbTrig.append("For Mirrodin !(").append(inst.getReminderText()).append(")");
 
-            final StringBuilder sbRebel = new StringBuilder();
-            sbRebel.append("DB$ Token | TokenAmount$ 1 | TokenScript$ r_2_2_rebel |TokenOwner$ You | RememberTokens$ True");
-
+            final String sbRebel = "DB$ Token | TokenScript$ r_2_2_rebel | TokenOwner$ You | RememberTokens$ True";
             final SpellAbility saRebel= AbilityFactory.getAbility(sbRebel.toString(), card);
 
             final String sbAttach = "DB$ Attach | Defined$ Remembered";
