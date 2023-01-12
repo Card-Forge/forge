@@ -9,6 +9,7 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Tri
 SVar:TrigDelayTrig:AB$ DelayedTrigger| Cost$ SubCounter<2/OIL> | AILogic$ SpellCopy | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
 SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 SVar:HasAttackEffect:TRUE
+SVar:BuffedBy:Card.nonCreature
 DeckHas:Ability$Counters
 DeckHints:Type$Instant|Sorcery
-Oracle:Mercurial Spelldancer can't be blocked.\nWhenever you cast a noncreature spell, put an oil conter on Mercurial Spelldancer.\nWhenever Mercurial Spelldancer deals combat damage to a player, you may remove two oil counters from it. If you do, when you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+Oracle:Mercurial Spelldancer can't be blocked.\nWhenever you cast a noncreature spell, put an oil counter on Mercurial Spelldancer.\nWhenever Mercurial Spelldancer deals combat damage to a player, you may remove two oil counters from it. If you do, when you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
