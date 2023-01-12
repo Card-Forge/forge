@@ -223,11 +223,6 @@ public class StaticAbilityCantAttackBlock {
         if (!stAb.matchesValidParam("ValidTarget", target)) {
             return false;
         }
-
-        final Player defender = target instanceof Card ? ((Card) target).getController() : (Player) target;
-        if (!stAb.matchesValidParam("ValidDefender", defender)) {
-            return false;
-        }
         return true;
     }
 

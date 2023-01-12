@@ -1132,9 +1132,6 @@ public class CombatUtil {
         if (!canBlock(blocker, nextTurn)) {
             return false;
         }
-        if (!canBeBlocked(attacker, blocker.getController())) {
-            return false;
-        }
         
         if (isUnblockableFromLandwalk(attacker, blocker.getController())
         		&& !blocker.hasKeyword("CARDNAME can block creatures with landwalk abilities as though they didn't have those abilities.")) {
