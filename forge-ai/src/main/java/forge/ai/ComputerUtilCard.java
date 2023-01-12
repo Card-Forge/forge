@@ -1730,6 +1730,7 @@ public class ComputerUtilCard {
         }
         final long timestamp2 = c.getGame().getNextTimestamp(); //is this necessary or can the timestamp be re-used?
         pumped.addChangedCardKeywordsInternal(toCopy, null, false, timestamp2, 0, false);
+        pumped.updateKeywordsCache(pumped.getCurrentState());
         applyStaticContPT(ai.getGame(), pumped, new CardCollection(c));
         return pumped;
     }

@@ -1353,17 +1353,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 }
             }
 
-            if (tr.isSameController()) {
-                Player newController;
-                if (entity instanceof Card) {
-                    newController = ((Card) entity).getController();
-                    for (final Card c : targetChosen.getTargetCards()) {
-                        if (entity != c && !c.getController().equals(newController))
-                            return false;
-                    }
-                }
-            }
-
             if (hasParam("MaxTotalTargetPower") && entity instanceof Card) {
                 int soFar = Aggregates.sum(getTargets().getTargetCards(), CardPredicates.Accessors.fnGetNetPower);
                 // only add if it isn't already targeting
@@ -1374,6 +1363,17 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
                 if (soFar > tr.getMaxTotalPower(getHostCard(),this)) {
                     return false;
+                }
+            }
+
+            if (tr.isSameController()) {
+                Player newController;
+                if (entity instanceof Card) {
+                    newController = ((Card) entity).getController();
+                    for (final Card c : targetChosen.getTargetCards()) {
+                        if (entity != c && !c.getController().equals(newController))
+                            return false;
+                    }
                 }
             }
 
