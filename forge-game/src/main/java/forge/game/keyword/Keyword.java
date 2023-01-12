@@ -86,6 +86,7 @@ public enum Keyword {
     FLASH("Flash", SimpleKeyword.class, true, "You may cast this spell any time you could cast an instant."),
     FLASHBACK("Flashback", KeywordWithCost.class, false, "You may cast this card from your graveyard for its flashback cost. Then exile it."),
     FLYING("Flying", SimpleKeyword.class, true, "This creature can't be blocked except by creatures with flying or reach."),
+    FOR_MIRRODIN("For Mirrodin", SimpleKeyword.class, false, "When this Equipment enters the battlefield, create a 2/2 red Rebel creature token, then attach this to it."),
     FORETELL("Foretell", KeywordWithCost.class, false, "During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost."),
     FORTIFY("Fortify", KeywordWithCost.class, false, "%s: Attach to target land you control. Fortify only as a sorcery."),
     FRENZY("Frenzy", KeywordWithAmount.class, false, "Whenever this creature attacks and isn't blocked, it gets +%d/+0 until end of turn."),
