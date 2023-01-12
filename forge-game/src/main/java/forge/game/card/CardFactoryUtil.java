@@ -3655,10 +3655,8 @@ public class CardFactoryUtil {
             String effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Daybound | Secondary$ True | Description$ This permanent can't be transformed except by its daybound ability.";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Decayed")) {
-            String effect = "Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | " +
-                    "Secondary$ True";
+            String effect = "Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Secondary$ True | Description$ CARDNAME can't block.";
             StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
-            st.setSVar("SacrificeEndCombat", "True");
             inst.addStaticAbility(st);
         } else if (keyword.equals("Defender")) {
             String effect = "Mode$ CantAttack | ValidCard$ Card.Self | DefenderKeyword$ True | Secondary$ True";
@@ -3777,7 +3775,7 @@ public class CardFactoryUtil {
                     " | Description$ Strive - " + inst.getReminderText();
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Unleash")) {
-            String effect = "Mode$ Continuous | Affected$ Card.Self+counters_GE1_P1P1 | AddHiddenKeyword$ CARDNAME can't block.";
+            String effect = "Mode$ CantBlockBy | ValidBlocker$ Creature.Self+counters_GE1_P1P1 | Secondary$ True | Description$ CARDNAME can't block.";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Undaunted")) {
             String effect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
