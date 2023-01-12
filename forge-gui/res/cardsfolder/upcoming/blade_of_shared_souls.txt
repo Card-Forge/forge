@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Artifact Equipment
 K:For Mirrodin
 T:Mode$ Attached | ValidSource$ Card.Self | TriggerZones$ Battlefield | ValidTarget$ Creature | Execute$ TrigCopy | TriggerDescription$ Whenever CARDNAME becomes attached to a creature, for as long as CARDNAME remains attached to it, you may have that creature become a copy of another target creature you control.
-SVar:TrigCopy:DB$ Clone | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Choose another target creature you control | CloneTarget$ Creature.EquippedBy | Duration$ UntilUnattached
+SVar:TrigCopy:DB$ Clone | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Choose another target creature you control | CloneTarget$ Equipped | Duration$ UntilUnattached
 K:Equip:2
 DeckHas:Type$Rebel
 Oracle:For Mirrodin! (When this Equipment enters the battlefield, create a 2/2 red Rebel creature token, then attach this to it.)\nWhenever Blade of Shared Souls becomes attached to a creature, for as long as Blade of Shared Souls remains attached to it, you may have that creature become a copy of another target creature you control.\nEquip {2}
