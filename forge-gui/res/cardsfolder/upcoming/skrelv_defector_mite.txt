@@ -1,0 +1,12 @@
+Name:Skrelv, Defector Mite
+ManaCost:W
+Types:Legendary Artifact Creature Phyrexian Mite
+PT:1/1
+K:Toxic:1
+S:Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block
+A:AB$ ChooseColor | Cost$ PW T  | Defined$ You | AILogic$ MostProminentInHumanDeck | SubAbility$ DBPump | SpellDescription$ Choose a color. Another target creature you control gains toxic 1 and hexproof from that color until end of turn. It can't be blocked by creatures of that color this turn. ({PW} may be paid for with either {W} or 2 life.)
+SVar:DBPump:DB$ Pump | Defined$ Targeted | ValidTgts$ Creature.YouCtrl | KW$ Hexproof:Card.ChosenColor:chosen & Toxic:1 | DefinedKW$ ChosenColor | SubAbility$ DBEffect | StackDescription$ None
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ CantBlockBy | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenColor$ True
+SVar:CantBlockBy:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.!ChosenColor | Description$ EFFECTSOURCE can't be blocked by creatures of the chosen color this turn.
+Oracle:Toxic 1\nSkrelv, Defector Mite can't block.\n{PW}, {T}: Choose a color. Another target creature you control gains toxic 1 and hexproof from that color until end of turn. It can't be blocked by creatures of that color this turn. ({PW} may be paid for with either {W} or 2 life.)
