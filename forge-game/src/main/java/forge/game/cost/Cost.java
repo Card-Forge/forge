@@ -254,7 +254,6 @@ public class Cost implements Serializable {
                 else
                     manaParts.append(part).append(" ");
             }
-
         }
 
         if (parsedMana == null && (manaParts.length() > 0 || xCantBe0)) {
