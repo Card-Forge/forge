@@ -1212,11 +1212,11 @@ public class CardFactoryUtil {
 
             inst.addTrigger(trigger);
             
-        } else if (keyword.equals("For Mirrodin")) {
+        } else if (keyword.equals("For Mirrodin!")) {
             final StringBuilder sbTrig = new StringBuilder();
             sbTrig.append("Mode$ ChangesZone | Destination$ Battlefield | ");
             sbTrig.append("ValidCard$ Card.Self | TriggerDescription$ ");
-            sbTrig.append("For Mirrodin !(").append(inst.getReminderText()).append(")");
+            sbTrig.append("For Mirrodin!(").append(inst.getReminderText()).append(")");
 
             final String sbRebel = "DB$ Token | TokenScript$ r_2_2_rebel | TokenOwner$ You | RememberTokens$ True";
             final SpellAbility saRebel= AbilityFactory.getAbility(sbRebel, card);
