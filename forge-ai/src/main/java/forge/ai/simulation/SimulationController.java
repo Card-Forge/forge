@@ -81,9 +81,11 @@ public class SimulationController {
     }
 
     public void doneEvaluating(Score score) {
-        if (score.value > bestScore.value) {
+        // if we're here during a deeper level this hasn't been called for the level above yet
+        // in such case we need to check that this decision has really lead to the improvement in score
+        if (getLastDecision().initialScore.value < score.value && score.value > bestScore.value) {
             bestScore = score;
-            bestSequence = currentStack.get(currentStack.size() - 1);
+            bestSequence = getLastDecision();
         }
         currentStack.remove(currentStack.size() - 1);
     }
