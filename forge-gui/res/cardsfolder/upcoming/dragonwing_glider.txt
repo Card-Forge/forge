@@ -1,7 +1,7 @@
 Name:Dragonwing Glider
 ManaCost:3 R R
 Types:Artifact Equipment
-K:For Mirrodin!
+K:For Mirrodin
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying & Haste | Description$ Equipped creature gets +2/+2 and has flying and haste.
 K:Equip:3 R R
 DeckHas:Ability$Token & Type$Rebel

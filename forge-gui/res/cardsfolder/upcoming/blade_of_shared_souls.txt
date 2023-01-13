@@ -1,7 +1,7 @@
 Name:Blade of Shared Souls
 ManaCost:2 U
 Types:Artifact Equipment
-K:For Mirrodin!
+K:For Mirrodin
 T:Mode$ Attached | ValidSource$ Card.Self | TriggerZones$ Battlefield | ValidTarget$ Creature | Execute$ TrigCopy | TriggerDescription$ Whenever CARDNAME becomes attached to a creature, for as long as CARDNAME remains attached to it, you may have that creature become a copy of another target creature you control.
 SVar:TrigCopy:DB$ Clone | ValidTgts$ Creature.YouCtrl+NotTriggeredTarget | TgtPrompt$ Choose another target creature you control | CloneTarget$ TriggeredTargetLKICopy | Duration$ UntilUnattached
 K:Equip:2
