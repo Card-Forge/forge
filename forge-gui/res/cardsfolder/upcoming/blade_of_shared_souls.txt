@@ -6,4 +6,4 @@ T:Mode$ Attached | ValidSource$ Card.Self | TriggerZones$ Battlefield | ValidTar
 SVar:TrigCopy:DB$ Clone | ValidTgts$ Creature.YouCtrl+NotTriggeredTarget | TgtPrompt$ Choose another target creature you control | CloneTarget$ TriggeredTargetLKICopy | Duration$ UntilUnattached
 K:Equip:2
 DeckHas:Ability$Token & Type$Rebel & Color$Red
-Oracle:For Mirrodin! (When this Equipment enters the battlefield, create a 2/2 red Rebel creature token, then attach this to it.)\nWhenever Blade of Shared Souls becomes attached to a creature, for as long as Blade of Shared Souls remains attached to it, you may have that creature become a copy of another target creature you control.\nEquip {2}
+Oracle:For Mirrodin!\nWhenever Blade of Shared Souls becomes attached to a creature, for as long as Blade of Shared Souls remains attached to it, you may have that creature become a copy of another target creature you control.\nEquip {2}

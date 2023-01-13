@@ -5,4 +5,4 @@ K:For Mirrodin
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying & Haste | Description$ Equipped creature gets +2/+2 and has flying and haste.
 K:Equip:3 R R
 DeckHas:Ability$Token & Type$Rebel
-Oracle:For Mirrodin! (When this Equipment enters the battlefield, create a 2/2 red Rebel creature token, then attach this to it.)\nEquipped creature gets +2/+2 and has flying and haste.\nEquip {3}{R}{R}
+Oracle:For Mirrodin!\nEquipped creature gets +2/+2 and has flying and haste.\nEquip {3}{R}{R}
