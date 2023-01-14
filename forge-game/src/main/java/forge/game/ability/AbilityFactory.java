@@ -185,7 +185,8 @@ public final class AbilityFactory {
             String cost = mapParams.get("Cost");
             if (cost == null) {
                 if (type == AbilityRecordType.Spell) {
-                    if (state.getFirstAbility() != null && state.getFirstAbility().isSpell()) {
+                    SpellAbility firstAbility = state.getFirstAbility();
+                    if (firstAbility != null && firstAbility.isSpell()) {
                         // TODO might remove when Enchant Keyword is refactored
                         System.err.println(state.getName() + " already has Spell using mana cost");
                     }
