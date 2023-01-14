@@ -2682,13 +2682,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         final StringBuilder sb = new StringBuilder();
 
         // Give spellText line breaks for easier reading
-        sb.append(text.replaceAll("\\\\r\\\\n", "\r\n"));
+        String spellText = text.replaceAll("\\\\r\\\\n", "\r\n");
+        sb.append(spellText);
 
         // NOTE:
-        if (sb.toString().contains(" (NOTE: ")) {
+        if (spellText.contains(" (NOTE: ")) {
             sb.insert(sb.indexOf("(NOTE: "), "\r\n");
         }
-        if (sb.toString().contains("(NOTE: ") && sb.toString().endsWith(".)") && !sb.toString().endsWith("\r\n")) {
+        if (spellText.contains("(NOTE: ") && spellText.endsWith(".)") && !spellText.endsWith("\r\n")) {
             sb.append("\r\n");
         }
 
@@ -3763,8 +3764,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // TODO add changed type by card text
     public Iterable<CardChangedType> getChangedCardTypes() {
+        // If there are no changed types, just return an empty immutable list, which actually
+        // produces a surprisingly large speedup by avoid lots of temp objects and making iteration
+        // over the result much faster. (This function gets called a lot!)
+        if (changedCardTypesByText.isEmpty() && changedTypeByText == null && changedCardTypesCharacterDefining.isEmpty() && changedCardTypes.isEmpty()) {
+            return ImmutableList.of();
+        }
         Iterable<CardChangedType> byText = changedTypeByText == null ? ImmutableList.of() : ImmutableList.of(this.changedTypeByText);
-
         return Iterables.unmodifiableIterable(Iterables.concat(
                 changedCardTypesByText.values(), // Layer 3
                 byText, // Layer 3 by Word Changes,
