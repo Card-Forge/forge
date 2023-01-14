@@ -185,7 +185,13 @@ public class StaticAbilityCantAttackBlock {
             }
         }
 
-        return new Cost(costString, true);
+        Cost cost = new Cost(costString, true);
+
+        if (stAb.hasParam("Trigger")) {
+            cost.getCostParts().get(0).setTrigger(stAb.getParam("Trigger"), stAb);
+        }
+
+        return cost;
     }
 
     /**

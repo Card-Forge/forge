@@ -596,7 +596,7 @@ public class PhaseHandler implements java.io.Serializable {
 
             if (!possibleExerters.isEmpty()) {
                 for (Card exerter : whoDeclares.getController().exertAttackers(possibleExerters)) {
-                    exerter.exert();
+                    //exerter.exert();
                 }
             }
         }

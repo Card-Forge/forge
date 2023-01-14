@@ -514,6 +514,9 @@ public class HumanPlay {
 
                 p.payEnergy(amount, source);
             }
+            else if (part instanceof CostExert) {
+                part.payAsDecided(p, PaymentDecision.card(source), sourceAbility, hcd.isEffect());
+            }
 
             else {
                 throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - An unhandled type of cost was met: " + part.getClass());

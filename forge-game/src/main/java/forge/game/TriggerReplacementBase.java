@@ -17,6 +17,7 @@ public abstract class TriggerReplacementBase extends CardTraitBase implements II
 
     /** The overriding ability. */
     private SpellAbility overridingAbility = null;
+    private CardTraitBase linkedAbility = null;
 
     @Override
     public void setHostCard(final Card c) {
@@ -74,6 +75,13 @@ public abstract class TriggerReplacementBase extends CardTraitBase implements II
      */
     public void setOverridingAbility(final SpellAbility overridingAbility0) {
         this.overridingAbility = overridingAbility0;
+    }
+
+    public CardTraitBase getLinkedAbility() {
+        return this.linkedAbility;
+    }
+    public void setLinkedAbility(final CardTraitBase linked) {
+        this.linkedAbility = linked;
     }
 
     abstract public SpellAbility ensureAbility();
