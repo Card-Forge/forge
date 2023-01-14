@@ -1119,7 +1119,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             clone.setPayCosts(getPayCosts().copy());
             if (manaPart != null) {
-                clone.manaPart = new AbilityManaPart(this, mapParams);
+                clone.manaPart = new AbilityManaPart(clone, mapParams);
             }
 
             // need to copy the damage tables

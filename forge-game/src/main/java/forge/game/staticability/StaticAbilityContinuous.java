@@ -249,7 +249,7 @@ public final class StaticAbilityContinuous {
                         }
                         // two variants for Red vs. red in keyword
                         if (input.contains("ColorsYouCtrl") || input.contains("colorsYouCtrl")) {
-                            final ColorSet colorsYouCtrl = CardUtil.getColorsYouCtrl(controller);
+                            final ColorSet colorsYouCtrl = CardUtil.getColorsFromCards(controller.getCardsIn(ZoneType.Battlefield));
 
                             for (byte color : colorsYouCtrl) {
                                 final String colorWord = MagicColor.toLongString(color);
