@@ -1,0 +1,9 @@
+Name:Tablet of Compleation
+ManaCost:2
+Types:Artifact
+A:AB$ PutCounter | Cost$ T | CounterType$ OIL | CounterNum$ 1 | SpellDescription$ Put an oil counter on CARDNAME.
+A:AB$ Mana | Cost$ T | CheckSVar$ X | Produced$ C | SVarCompare$ GE2 | SpellDescription$ Add {C}. Activate only if CARDNAME has two or more oil counters on it.
+A:AB$ Draw | Cost$ 1 T | CheckSVar$ X | SVarCompare$ GE5 | SpellDescription$ Draw a card. Activate only if CARDNAME has five or more oil counters on it.
+SVar:X:Count$CardCounters.OIL
+DeckHas:Ability$Counters
+Oracle:{T}: Put an oil counter on Tablet of Compleation.\n{T}: Add {C}. Activate only if Tablet of Compleation has two or more oil counters on it.\n{1}, {T}: Draw a card. Activate only if Tablet of Compleation has five or more oil counters on it.

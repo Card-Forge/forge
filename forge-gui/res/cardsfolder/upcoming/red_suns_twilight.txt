@@ -1,0 +1,9 @@
+Name:Red Sun's Twilight
+ManaCost:X R R
+Types:Sorcery
+A:SP$ Destroy | TargetMin$ X | TargetMax$ X | ValidTgts$ Artifact | TgtPrompt$ Select X target artifacts | RememberDestroyed$ True | SubAbility$ DBCopy | SpellDescription$ Destroy up to X target artifacts.
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remember | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 | PumpKeywords$ Haste | SubAbility$ DBCleanup | AtEOT$ Exile | AILogic$ BeforeCombat | SpellDescription$ 
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+DeckHas:Ability$Token
+Oracle:Destroy up to X target artifacts. If X is 5 or more, for each artifact destroyed this way, create a token that's a copy of it. Those tokens gain haste. Exile them at the beginning of the next end step.
