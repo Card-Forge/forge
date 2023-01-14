@@ -4,6 +4,6 @@ Types:Legendary Creature Troll Shaman
 PT:5/5
 K:This spell can't be countered.
 K:Trample
-S:Mode$ CantTarget | ValidCard$ Card.Self | ValidSource$ Card.nonGreen+OppCtrl | Description$ SpellDescription$ CARDNAME can't be the target of nongreen spells your opponents control or abilities from nongreen sources your opponents control.
+S:Mode$ CantTarget | ValidCard$ Card.Self | ValidSource$ Card.nonGreen+OppCtrl | Description$ CARDNAME can't be the target of nongreen spells your opponents control or abilities from nongreen sources your opponents control.
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | Condition$ PlayerTurn | Description$ As long as it's your turn, NICKNAME has indestructible.
 Oracle:This spell can't be countered.\nTrample\nThrun, Breaker of Silence can't be the target of nongreen spells your opponents control or abilities from nongreen sources your opponents control.\nAs long as it's your turn, Thrun has indestructible.

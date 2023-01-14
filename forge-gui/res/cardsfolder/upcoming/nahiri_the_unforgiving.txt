@@ -7,9 +7,9 @@ A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Cre
 SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | Description$ This creature attacks this turn if able.
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
-A:AB$ ChangeZone | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | SubAbility$ DBCopy | Origin$ Graveyard | RememberChanged$ True | Destination$ Exile | TgtPrompt$ | ValidTgts$ Creature.You+cmcLEX |SpellDescription$ Exile target creature or Equipment card with mana value less than NICKNAME's loyalty from your graveyard. Create a token that's a copy of it. That token gains haste. Exile it at the beginning of the next end step.
-SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | AtEOT$ ExileCombat | SubAbility$ DBCleanup
+A:AB$ ChangeZone | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | SubAbility$ DBCopy | Origin$ Graveyard | RememberChanged$ True | Destination$ Exile | TgtPrompt$ Select target creature or equipment in your graveyard | ValidTgts$ Creature.YouCtrl+cmcLTX,Equipment.YouCtrl+cmcLTX | SpellDescription$ Exile target creature or Equipment card with mana value less than NICKNAME's loyalty from your graveyard. Create a token that's a copy of it. That token gains haste. Exile it at the beginning of the next end step.
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | PumpKeywords$ Haste | AtEOT$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Discard
+DeckHas:Ability$Discard|Token
 SVar:X:Count$CardCounters.LOYALTY
 Oracle:Compleated ({R/W} can be paid with {R}, {W}, or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters.)\n[+1]: Until your next turn, up to one target creature attacks a player each combat if able.\n[+1]: Discard a card, then draw a card.\n[+0]:Exile target creature or Equipment card with mana value less than Nahiri's loyalty from your graveyard. Create a token that's a copy of it. That token gains haste. Exile it at the beginning of the next end step.
