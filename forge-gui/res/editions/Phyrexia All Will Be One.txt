@@ -7,11 +7,62 @@ ScryfallCode=ONE
 
 [cards]
 10 M Elesh Norn, Mother of Machines @Martina Fackova
+11 R The Eternal Wanderer @Alix Branwyn
+19 R Kemba, Kha Enduring @Zoltan Boros
+24 R Norn's Wellspring @Jonas De Ro
+33 R Skrelv, Defector Mite @Brian Valeza
+34 R Skrelv's Hive @Heonhwa Choe
+38 R White Sun's Twilight @Julian Kok Joon Wen
+42 R Blade of Shared Souls @Volkan Baǵa
 43 R Blue Sun's Twilight @Piotr Dura
+47 R Encroaching Mycosynth @Martin de Diego Sádaba
+61 R Mercurial Spelldancer @
+63 R Mindsplice Apparatus @Ovidio Cartagena
+75 R Unctus, Grand Metatect @Andrew Mar
+82 R Archfiend of the Dross @Lie Setiawan
+84 R Black Sun's Twilight @Jonas De Ro
+95 R Geth, Thane of Contracts @Martin de Diego Sádaba
+104 R Phyrexian Arena @Martina Fackova
 105 M Phyrexian Obliterator @Maxim Kostin
+126 R Dragonwing Glider @Andreas Zafiratos
 138 R Koth, Fire of Resistance @Eric Wilkerson
+145 R Red Sun's Twilight @Julian Kok Joon Wen
 149 R Slobad, Iron Goblin @Chris Seaman
+153 R Urabrask's Forge @Lie Setiawan
+154 R Vindictive Flamestoker @
+159 R Bloated Contaminator @Johann Bodin
+163 R Conduit of Worlds @Jokubas Uogintas
+166 R Evolved Spinoderm @Svetlin Velinov
+186 R Thrun, Breaker of Silence @Simon Dominic
+192 R Venerated Rotpriest @Brian Valeza
+201 R Ezuri, Stalker of Spheres @
+202 R Glissa Sunslayer @Gaboleps
 203 R Jor Kadeen, First Goldwarden @Jeremy Wilson
+204 R Kaito, Dancing Shadow @Daarken
+205 R Kaya, Intangible Slayer @Marta Nael
+206 R Kethek, Crucible Goliath @Zoltan Boros
+207 M Lukka, Bound to Ruin @Chase Stone
+209 R Melira, the Living Cure @Miranda Meeks
+210 R Migloz, Maze Crusher @Zezhou Chen
+211 R Nahiri, the Unforgiving @Chase Stone
+213 R Ovika, Enigma Goliath @Antonio José Manzanedo
+214 R Ria Ivor, Bane of Bladehold @Andreas Zafiratos
+218 R Venser, Corpse Puppet @Igor Kieryluk
+222 R Argentum Masticore @Zack Stella
+225 R Graaz, Unstoppable Juggernaut @Nestor Ossandon Leal
+227 R The Filigree Sylex @
+233 R Monument to Perfection @Igor Kieryluk
+241 R Soulless Jailer @Donato Giancola
+245 R Tablet of Compleation @Martin de Diego Sádaba
+246 R Zenith Chronicler @Johann Bodin
+248 R Blackcleave Cliffs @Yeong-Hao Han
+249 R Copperline Gorge @Yeong-Hao Han
+254 R Mirrex @
+255 R The Monumental Facade @Bruce Brenneise
+256 R The Mycosynth Gardens @Andrew Mar
+257 R Razorverge Thicket @
+258 R Seachrome Coast @Mauricio Calle
+259 R The Seedcore @
 262 L Plains @Alayna Danner
 263 L Island @Alayna Danner
 264 L Swamp @Alayna Danner
@@ -23,16 +74,19 @@ ScryfallCode=ONE
 270 L Mountain @Mark Riddick
 271 L Forest @Mark Riddick
 272 L Plains @Sergey Glushakov
-273 L Island @David Alvarez
+273 L Island @David Álvarez
 274 L Swamp @Julian Kok Joon Wen
 275 L Mountain @Muhammad Firdaus
 276 L Forest @Nadia Hurianova
+284 R Green Sun's Twilight @Piotr Dura
+292 R Karumonix, the Rat King @Jason A. Engle
 298 M Elesh Norn, Mother of Machines @Dominik Mayer
 308 M Phyrexian Obliterator @Yu-ki Nishimoto
 311 R Slobad, Iron Goblin @Dominik Mayer
 332 R Jor Kadeen, First Goldwarden @Sansyu
 338 R Koth, Fire of Resistance @Ai Nanahira
 345 M Elesh Norn, Mother of Machines @Pedro Potier
+358 R Koth, Fire of Resistance @Ai Nanahira
 365 L Plains @Dan Mumford
 366 L Island @Evan Cagle
 367 L Swamp @Daria Khlebnikova
