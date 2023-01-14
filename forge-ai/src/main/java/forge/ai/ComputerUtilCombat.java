@@ -2054,7 +2054,6 @@ public class ComputerUtilCombat {
         if (block.size() == 1) {
             final Card blocker = block.getFirst();
 
-            // trample
             if (hasTrample) {
                 int dmgToKill = getEnoughDamageToKill(blocker, dmgCanDeal, attacker, true);
 
@@ -2110,7 +2109,7 @@ public class ComputerUtilCombat {
             }
         }
         return damageMap;
-    } // setAssignedDamage()
+    }
 
     // how much damage is enough to kill the creature (for AI)
     /**

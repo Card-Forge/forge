@@ -140,7 +140,7 @@ public class SimulationTest {
 
     protected void addCards(String name, int count, Player p) {
         for (int i = 0; i < count; i++) {
-            addCardToZone(name, p, ZoneType.Battlefield);
+            addCard(name, p);
         }
     }
 }

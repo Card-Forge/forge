@@ -7288,4 +7288,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public boolean attackVigilance() {
         return StaticAbilityAttackVigilance.attackVigilance(this);
     }
+
+    public boolean isAbilitySick() {
+        if (!isSick()) {
+            return false;
+        }
+        return !StaticAbilityActivateAbilityAsIfHaste.canActivate(this);
+    }
 }
