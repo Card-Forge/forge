@@ -2442,14 +2442,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         // add As an additional cost to Permanent spells
-        if (state.getFirstAbility() != null && type.isPermanent()) {
-            SpellAbility first = state.getFirstAbility();
+        SpellAbility first = state.getFirstAbility();
+        if (first != null && type.isPermanent()) {
             if (first.isSpell()) {
                 Cost cost = first.getPayCosts();
                 if (cost != null && !cost.isOnlyManaCost()) {
                     String additionalDesc = "";
-                    if (state.getFirstAbility().hasParam("AdditionalDesc")) {
-                        additionalDesc = state.getFirstAbility().getParam("AdditionalDesc");
+                    if (first.hasParam("AdditionalDesc")) {
+                        additionalDesc = first.getParam("AdditionalDesc");
                     }
                     sb.append(cost.toString().replace("\n", "")).append(" ").append(additionalDesc);
                     sb.append(linebreak);
@@ -3757,7 +3757,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final CardTypeView getOriginalType() {
         return getOriginalType(currentState);
     }
-    public final  CardTypeView getOriginalType(CardState state) {
+    public final CardTypeView getOriginalType(CardState state) {
         return state.getType();
     }
 
