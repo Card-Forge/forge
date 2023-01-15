@@ -137,4 +137,10 @@ public class SimulationTest {
     protected Card addCard(String name, Player p) {
         return addCardToZone(name, p, ZoneType.Battlefield);
     }
+
+    protected void addCards(String name, int count, Player p) {
+        for (int i = 0; i < count; i++) {
+            addCard(name, p);
+        }
+    }
 }

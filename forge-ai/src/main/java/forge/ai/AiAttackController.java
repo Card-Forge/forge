@@ -179,7 +179,7 @@ public class AiAttackController {
 
             List<Player> opps = Lists.newArrayList(ai.getOpponents());
             if (forCombatDmg) {
-                for (Player p : ai.getOpponents().threadSafeIterable()) {
+                for (Player p : ai.getOpponents()) {
                     if (p.isMonarch() && ai.canBecomeMonarch()) {
                         // just increase the odds for now instead of being fully predictable
                         // as it could lead to other too complex factors giving this reasoning negative impact

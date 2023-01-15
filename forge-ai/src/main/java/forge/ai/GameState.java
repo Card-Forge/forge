@@ -1066,9 +1066,7 @@ public abstract class GameState {
         }
         top.addMergedCard(bottom);
 
-        if (top.getMutatedTimestamp() != -1) {
-            top.removeCloneState(top.getMutatedTimestamp());
-        }
+        top.removeMutatedStates();
 
         final long ts = game.getNextTimestamp();
         top.setMutatedTimestamp(ts);

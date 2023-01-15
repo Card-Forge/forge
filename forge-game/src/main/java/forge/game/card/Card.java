@@ -1240,7 +1240,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void removeMutatedStates() {
-        if (getMutatedTimestamp() != -1) {
+        if (isMutated()) {
             removeCloneState(getMutatedTimestamp());
         }
     }
@@ -2251,7 +2251,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift") || keyword.startsWith("Bushido")
                         || keyword.startsWith("Crew") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")
                         || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing")
-                        || keyword.startsWith("Afterlife") || keyword.startsWith("Hideaway")
+                        || keyword.startsWith("Afterlife") || keyword.startsWith("Hideaway") || keyword.startsWith("Toxic")
                         || keyword.startsWith("Afflict") || keyword.startsWith ("Poisonous") || keyword.startsWith("Rampage")
                         || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")) {
                     final String[] k = keyword.split(":");
@@ -2322,7 +2322,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
-                        || keyword.startsWith("Specialize") || keyword.equals("Ravenous")) {
+                        || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
+                        || keyword.equals("For Mirrodin")) {
                     // keyword parsing takes care of adding a proper description
                 } else if(keyword.startsWith("Read ahead")) {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
@@ -2441,14 +2442,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         // add As an additional cost to Permanent spells
-        if (state.getFirstAbility() != null && type.isPermanent()) {
-            SpellAbility first = state.getFirstAbility();
+        SpellAbility first = state.getFirstAbility();
+        if (first != null && type.isPermanent()) {
             if (first.isSpell()) {
                 Cost cost = first.getPayCosts();
                 if (cost != null && !cost.isOnlyManaCost()) {
                     String additionalDesc = "";
-                    if (state.getFirstAbility().hasParam("AdditionalDesc")) {
-                        additionalDesc = state.getFirstAbility().getParam("AdditionalDesc");
+                    if (first.hasParam("AdditionalDesc")) {
+                        additionalDesc = first.getParam("AdditionalDesc");
                     }
                     sb.append(cost.toString().replace("\n", "")).append(" ").append(additionalDesc);
                     sb.append(linebreak);
@@ -2681,13 +2682,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         final StringBuilder sb = new StringBuilder();
 
         // Give spellText line breaks for easier reading
-        sb.append(text.replaceAll("\\\\r\\\\n", "\r\n"));
+        String spellText = text.replaceAll("\\\\r\\\\n", "\r\n");
+        sb.append(spellText);
 
         // NOTE:
-        if (sb.toString().contains(" (NOTE: ")) {
+        if (spellText.contains(" (NOTE: ")) {
             sb.insert(sb.indexOf("(NOTE: "), "\r\n");
         }
-        if (sb.toString().contains("(NOTE: ") && sb.toString().endsWith(".)") && !sb.toString().endsWith("\r\n")) {
+        if (spellText.contains("(NOTE: ") && spellText.endsWith(".)") && !spellText.endsWith("\r\n")) {
             sb.append("\r\n");
         }
 
@@ -3756,14 +3758,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final CardTypeView getOriginalType() {
         return getOriginalType(currentState);
     }
-    public final  CardTypeView getOriginalType(CardState state) {
+    public final CardTypeView getOriginalType(CardState state) {
         return state.getType();
     }
 
     // TODO add changed type by card text
     public Iterable<CardChangedType> getChangedCardTypes() {
+        // If there are no changed types, just return an empty immutable list, which actually
+        // produces a surprisingly large speedup by avoid lots of temp objects and making iteration
+        // over the result much faster. (This function gets called a lot!)
+        if (changedCardTypesByText.isEmpty() && changedTypeByText == null && changedCardTypesCharacterDefining.isEmpty() && changedCardTypes.isEmpty()) {
+            return ImmutableList.of();
+        }
         Iterable<CardChangedType> byText = changedTypeByText == null ? ImmutableList.of() : ImmutableList.of(this.changedTypeByText);
-
         return Iterables.unmodifiableIterable(Iterables.concat(
                 changedCardTypesByText.values(), // Layer 3
                 byText, // Layer 3 by Word Changes,
@@ -5801,6 +5808,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         return getCastSA().isMadness();
     }
+
     public boolean wasDiscarded() { return discarded; }
     public void setDiscarded(boolean state) { discarded = state; }
 
@@ -7285,5 +7293,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public boolean attackVigilance() {
         return StaticAbilityAttackVigilance.attackVigilance(this);
+    }
+
+    public boolean isAbilitySick() {
+        if (!isSick()) {
+            return false;
+        }
+        return !StaticAbilityActivateAbilityAsIfHaste.canActivate(this);
     }
 }

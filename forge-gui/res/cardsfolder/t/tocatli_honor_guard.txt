@@ -2,5 +2,6 @@ Name:Tocatli Honor Guard
 ManaCost:1 W
 Types:Creature Human Soldier
 PT:1/3
-S:Mode$ Continuous | GlobalRule$ Creatures entering the battlefield don't cause abilities to trigger. | Description$ Creatures entering the battlefield don't cause abilities to trigger.
+S:Mode$ DisableTriggers | ValidCause$ Creature | ValidMode$ ChangesZone,ChangesZoneAll | Destination$ Battlefield | Description$ Creatures entering the battlefield don't cause abilities to trigger.
+AI:RemoveDeck:Random
 Oracle:Creatures entering the battlefield don't cause abilities to trigger.

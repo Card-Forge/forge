@@ -28,9 +28,7 @@ public class GameSimulationTest extends SimulationTest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
-        addCard("Plains", p);
-        addCard("Plains", p);
-        addCard("Plains", p);
+        addCards("Plains", 3, p);
         String heraldCardName = "Herald of Anafenza";
         Card herald = addCard(heraldCardName, p);
         herald.setSickness(false);
@@ -69,9 +67,7 @@ public class GameSimulationTest extends SimulationTest {
         sliver.setSickness(false);
         Card herald = addCard(heraldCardName, p);
         herald.setSickness(false);
-        addCard("Plains", p);
-        addCard("Plains", p);
-        addCard("Plains", p);
+        addCards("Plains", 3, p);
         addCard("Spear of Heliod", p);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
@@ -160,8 +156,7 @@ public class GameSimulationTest extends SimulationTest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         addCard("Black Knight", p);
-        for (int i = 0; i < 5; i++)
-            addCard("Swamp", p);
+        addCards("Swamp", 5, p);
 
         String merchantCardName = "Gray Merchant of Asphodel";
         Card c = addCardToZone(merchantCardName, p, ZoneType.Hand);
@@ -614,9 +609,7 @@ public class GameSimulationTest extends SimulationTest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
-        addCard("Forest", p);
-        addCard("Forest", p);
-        addCard("Forest", p);
+        addCards("Forest", 3, p);
         Card callTheScionsCard = addCardToZone("Call the Scions", p, ZoneType.Hand);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
@@ -692,9 +685,7 @@ public class GameSimulationTest extends SimulationTest {
         String broodName = "Brood Monitor";
 
         // enough to cast Chandra's Ignition
-        for (int i = 0; i < 5; ++i) {
-            addCard("Mountain", p1);
-        }
+        addCards("Mountain", 5, p1);
 
         Card kalitas = addCard(kalitasName, p1);
         Card pridemate = addCard(pridemateName, p1);
@@ -749,9 +740,7 @@ public class GameSimulationTest extends SimulationTest {
         String broodName = "Brood Monitor";
 
         // enough to cast Chandra's Ignition
-        for (int i = 0; i < 5; ++i) {
-            addCard("Mountain", p1);
-        }
+        addCards("Mountain", 5, p1);
 
         Card kalitas = addCard(kalitasName, p1);
         addCard(pridemateName, p1);
@@ -808,9 +797,7 @@ public class GameSimulationTest extends SimulationTest {
         String palisadeName = "Palisade Giant";
 
         // enough to cast Chandra's Ignition
-        for (int i = 0; i < 5; ++i) {
-            addCard("Mountain", p1);
-        }
+        addCards("Mountain", 5, p1);
 
         Card kalitas = addCard(kalitasName, p1);
         Card pridemate = addCard(pridemateName, p1);
@@ -875,9 +862,7 @@ public class GameSimulationTest extends SimulationTest {
         String meliraName = "Melira, Sylvok Outcast";
 
         // enough to cast Cone of Flame
-        for (int i = 0; i < 5; ++i) {
-            addCard("Mountain", p1);
-        }
+        addCards("Mountain", 5, p1);
 
         addCard(soulfireName, p1);
         addCard(pridemateName, p1);
@@ -890,10 +875,7 @@ public class GameSimulationTest extends SimulationTest {
 
         coneSA.setTargetCard(bearCard); // one damage to bear
         coneSA.getSubAbility().setTargetCard(giantCard); // two damage to giant
-        coneSA.getSubAbility().getSubAbility().getTargets().add(p2); // three
-                                                                     // damage
-                                                                     // to
-                                                                     // player
+        coneSA.getSubAbility().getSubAbility().getTargets().add(p2); // three damage to player
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p1);
         game.getAction().checkStateEffects(true);
@@ -906,8 +888,7 @@ public class GameSimulationTest extends SimulationTest {
         Card simGiant = findCardWithName(simGame, giantCardName);
         Card simPridemate = findCardWithName(simGame, pridemateName);
 
-        // spell deals multiple damages to multiple targets, only one cause of
-        // lifegain
+        // spell deals multiple damages to multiple targets, only one cause of lifegain
         AssertJUnit.assertNotNull(simPridemate);
         AssertJUnit.assertTrue(simPridemate.hasCounters());
         AssertJUnit.assertEquals(1, simPridemate.getCounters(CounterEnumType.P1P1));
@@ -1178,9 +1159,7 @@ public class GameSimulationTest extends SimulationTest {
         String bearName = "Runeclaw Bear";
         String greetingName = "Alchemist's Greeting";
 
-        for (int i = 0; i < 5; ++i) {
-            addCard("Mountain", p);
-        }
+        addCards("Mountain", 5, p);
 
         addCard(soulfireName, p);
         addCard(pridemateName, p);
@@ -1243,9 +1222,7 @@ public class GameSimulationTest extends SimulationTest {
         String elementalName = "Air Elemental";
         String shockName = "Shock";
 
-        for (int i = 0; i < 2; ++i) {
-            addCard("Mountain", p);
-        }
+        addCards("Mountain", 3, p);
 
         addCard(soulfireName, p);
         addCard(pridemateName, p);
@@ -1340,9 +1317,7 @@ public class GameSimulationTest extends SimulationTest {
         addCardToZone("Kalitas, Traitor of Ghet", p, ZoneType.Battlefield);
         addCardToZone("Anointed Procession", p, ZoneType.Battlefield);
         addCardToZone("Swamp", p, ZoneType.Battlefield);
-        for (int i = 0; i < 4; i++) {
-            addCardToZone("Mountain", p, ZoneType.Battlefield);
-        }
+        addCards("Mountain", 4, p);
 
         Card goblin = addCardToZone("Raging Goblin", opp, ZoneType.Battlefield);
         Card goblin2 = addCardToZone("Raging Goblin", opp, ZoneType.Battlefield);
@@ -1599,9 +1574,7 @@ public class GameSimulationTest extends SimulationTest {
         addCard("Teysa Karlov", p);
         addCard("Xathrid Necromancer", p);
 
-        for (int i = 0; i < 4; i++) {
-            addCardToZone("Plains", p, ZoneType.Battlefield);
-        }
+        addCards("Plains", 4, p);
 
         Card wrathOfGod = addCardToZone("Wrath of God", p, ZoneType.Hand);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
@@ -1780,10 +1753,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertFalse(giant.isDoubleFaced());
         AssertJUnit.assertFalse(giant.canTransform(null));
 
-        addCard("Forest", p);
-        addCard("Forest", p);
-        addCard("Forest", p);
-        addCard("Forest", p);
+        addCards("Forest", 4, p);
         addCard("Island", p);
 
         Card cytoCard = addCardToZone("Cytoshape", p, ZoneType.Hand);
@@ -1895,12 +1865,8 @@ public class GameSimulationTest extends SimulationTest {
         Player p = game.getPlayers().get(0);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
 
-        for (int i = 0; i < 7; i++) {
-            addCardToZone("Plains", p, ZoneType.Battlefield);
-        }
-        for (int i = 0; i < 7; i++) {
-            addCardToZone("Island", p, ZoneType.Battlefield);
-        }
+        addCards("Plains", 7, p);
+        addCards("Island", 7, p);
 
         Card gideon = addCardToZone("Gideon Blackblade", p, ZoneType.Hand);
         Card sparkDouble = addCardToZone("Spark Double", p, ZoneType.Hand);
@@ -1926,15 +1892,9 @@ public class GameSimulationTest extends SimulationTest {
         Player p = game.getPlayers().get(0);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
 
-        for (int i = 0; i < 7; i++) {
-            addCardToZone("Plains", p, ZoneType.Battlefield);
-        }
-        for (int i = 0; i < 7; i++) {
-            addCardToZone("Island", p, ZoneType.Battlefield);
-        }
-        for (int i = 0; i < 7; i++) {
-            addCardToZone("Forest", p, ZoneType.Battlefield);
-        }
+        addCards("Plains", 7, p);
+        addCards("Island", 7, p);
+        addCards("Forest", 7, p);
 
         Card tgtLand = addCardToZone("Wastes", p, ZoneType.Battlefield);
 
@@ -1967,12 +1927,8 @@ public class GameSimulationTest extends SimulationTest {
         Player p = game.getPlayers().get(0);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
 
-        for (int i = 0; i < 7; i++) {
-            addCardToZone("Swamp", p, ZoneType.Battlefield);
-        }
-        for (int i = 0; i < 7; i++) {
-            addCardToZone("Forest", p, ZoneType.Battlefield);
-        }
+        addCards("Swamp", 7, p);
+        addCards("Forest", 7, p);
 
         addCardToZone("Basking Rootwalla", p, ZoneType.Graveyard);
         Card ooze = addCardToZone("Necrotic Ooze", p, ZoneType.Hand);
@@ -1996,9 +1952,7 @@ public class GameSimulationTest extends SimulationTest {
         Player p = game.getPlayers().get(0);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
 
-        for (int i = 0; i < 7; i++) {
-            addCardToZone("Swamp", p, ZoneType.Battlefield);
-        }
+        addCards("Swamp", 7, p);
 
         Card epo = addCardToZone("Epochrasite", p, ZoneType.Graveyard);
         Card animate = addCardToZone("Animate Dead", p, ZoneType.Hand);
@@ -2145,9 +2099,7 @@ public class GameSimulationTest extends SimulationTest {
         Card serraAngel = addCardToZone("Serra Angel", p1, ZoneType.Battlefield);
         Card actOfTreason = addCardToZone("Act of Treason", p0, ZoneType.Hand);
         Card pathToExile = addCardToZone("Path to Exile", p0, ZoneType.Hand);
-        for (int i = 0; i < 4; i++) {
-            addCardToZone("Plateau", p0, ZoneType.Battlefield);
-        }
+        addCards("Plateau", 4, p0);
         addCardToZone("Island", p1, ZoneType.Library);
         addCardToZone("Forest", p0, ZoneType.Library);
 
@@ -2182,8 +2134,7 @@ public class GameSimulationTest extends SimulationTest {
         Player p = game.getPlayers().get(0);
         String WCname = "Woodland Champion";
         addCard(WCname, p);
-        for (int i = 0; i < 5; i++)
-            addCard("Island", p);
+        addCards("Island", 5, p);
 
         String CardName = "Eternal Skylord";
         Card c = addCardToZone(CardName, p, ZoneType.Hand);
@@ -2214,8 +2165,7 @@ public class GameSimulationTest extends SimulationTest {
         String waywardServant = "Wayward Servant";
         String goblin = "Raging Goblin";
 
-        for (int i = 0; i < 8; i++)
-            addCard("Swamp", p);
+        addCards("Swamp", 8, p);
 
         Card cardEverAfter = addCardToZone(everAfter, p, ZoneType.Hand);
         Card cardWaywardServant = addCardToZone(waywardServant, p, ZoneType.Graveyard);
@@ -2296,9 +2246,7 @@ public class GameSimulationTest extends SimulationTest {
         String alphaBrawlName = "Alpha Brawl";
 
         // enough to cast Alpha Brawl
-        for (int i = 0; i < 8; ++i) {
-            addCard("Mountain", p2);
-        }
+        addCards("Mountain", 8, p2);
 
         Card nishoba = addCard(nishobaName, p1);
         nishoba.addCounterInternal(CounterEnumType.P1P1, 7, p1, false, null, null);
@@ -2366,10 +2314,9 @@ public class GameSimulationTest extends SimulationTest {
 
         Card glarecaster = addCard(glarecasterName, p);
         // enough to activate Glarecaster and cast Inferno
-        for (int i = 0; i < 7; ++i) {
-            addCard("Plains", p);
-            addCard("Mountain", p);
-        }
+        addCards("Plains", 7, p);
+        addCards("Mountain", 7, p);
+
         Card infernoCard = addCardToZone("Inferno", p, ZoneType.Hand);
         SpellAbility infernoSA = infernoCard.getFirstSpellAbility();
 
@@ -2407,9 +2354,7 @@ public class GameSimulationTest extends SimulationTest {
         addCard(grumName, p);
         Card mowu = addCardToZone(mowuName, p, ZoneType.Hand);
 
-        for (int i = 0; i < 7; ++i) {
-            addCard("Forest", p);
-        }
+        addCards("Forest", 7, p);
         SpellAbility mowuSA = mowu.getFirstSpellAbility();
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
@@ -2437,10 +2382,8 @@ public class GameSimulationTest extends SimulationTest {
         addCard(grumName, p);
         Card corpsejack = addCardToZone(corpsejackName, p, ZoneType.Hand);
 
-        for (int i = 0; i < 7; ++i) {
-            addCard("Forest", p);
-            addCard("Swamp", p);
-        }
+        addCards("Forest", 7, p);
+        addCards("Swamp", 7, p);
         SpellAbility corpsejackSA = corpsejack.getFirstSpellAbility();
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
@@ -2473,9 +2416,7 @@ public class GameSimulationTest extends SimulationTest {
 
         Card everAfter = addCardToZone(everAfterName, p, ZoneType.Hand);
 
-        for (int i = 0; i < 7; ++i) {
-            addCard("Swamp", p);
-        }
+        addCards("Swamp", 7, p);
         SpellAbility everSA = everAfter.getFirstSpellAbility();
         everSA.getTargets().add(corpsejack);
         everSA.getTargets().add(mentor);
@@ -2494,5 +2435,42 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(1, simCorpsejack.getCounters(CounterEnumType.P1P1));
         AssertJUnit.assertNotNull(simMentor);
         AssertJUnit.assertEquals(1, simMentor.getCounters(CounterEnumType.P1P1));
+    }
+
+    @Test
+    public void testHushbringer() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+
+        addCard("Naban, Dean of Iteration", p);
+        addCard("Hushbringer", p);
+        addCard("Ingenious Artillerist", p);
+
+        // both ETB together and Artillerist should still trigger from the non-creature
+        addCardToZone("Spellbook", p, ZoneType.Library);
+        // whereas Naban doesn't see Memnarch to double the trigger
+        addCardToZone("Memnarch", p, ZoneType.Library);
+
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Island", p);
+        addCard("Island", p);
+        addCard("Island", p);
+        addCard("Mountain", p);
+        addCard("Mountain", p);
+
+        Card genesis = addCardToZone("Genesis Ultimatum", p, ZoneType.Hand);
+
+        SpellAbility genesisSA = genesis.getFirstSpellAbility();
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(genesisSA);
+        Game simGame = sim.getSimulatedGameState();
+
+        // 2 damage dealt for 2 artifacts
+        AssertJUnit.assertEquals(18, simGame.getPlayers().get(1).getLife());
     }
 }

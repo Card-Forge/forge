@@ -1,0 +1,10 @@
+Name:Venerated Rotpriest
+ManaCost:G
+Types:Creature Phyrexian Druid
+PT:1/2
+K:Toxic:1
+T:Mode$ BecomesTarget | ValidTarget$ Creature.YouCtrl | ValidSource$ Spell | TriggerZones$ Battlefield | Execute$ TrigPoison | TriggerDescription$ Whenever a creature you control becomes the target of a spell, target opponent gets a poison counter.
+SVar:TrigPoison:DB$ Poison | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Num$ 1
+DeckHas:Ability$Counters
+DeckHints:Type$Aura
+Oracle:Toxic 1\nWhenever a creature you control becomes the target of a spell, target opponent gets a poison counter.

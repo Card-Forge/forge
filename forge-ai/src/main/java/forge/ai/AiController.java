@@ -54,6 +54,7 @@ import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityDisableTriggers;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -262,11 +263,6 @@ public class AiController {
             }
         }
 
-        if (card.isCreature()
-                && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)) {
-            return api == null;
-        }
-
         boolean rightapi = false;
 
         // Trigger play improvements
@@ -279,6 +275,12 @@ public class AiController {
 
             if (!ZoneType.Battlefield.toString().equals(tr.getParam("Destination"))) {
                 continue;
+            }
+
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(tr.getHostCard());
+            runParams.put(AbilityKey.Destination, ZoneType.Battlefield.name());
+            if (StaticAbilityDisableTriggers.disabled(game, tr, runParams)) {
+                return api == null;
             }
 
             if (tr.hasParam("ValidCard")) {
@@ -1646,7 +1648,8 @@ public class AiController {
     }
 
     private final SpellAbility getSpellAbilityToPlay() {
-        final CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
+        CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
+        cards = ComputerUtilCard.dedupeCards(cards);
         List<SpellAbility> saList = Lists.newArrayList();
 
         SpellAbility top = null;

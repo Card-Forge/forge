@@ -1,0 +1,12 @@
+Name:Vindictive Flamestoker
+ManaCost:R
+Types:Creature Phyrexian Wizard
+PT:1/2
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, put an oil counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ OIL | CounterNum$ 1
+A:AB$ Discard | Cost$ 6 R Sac<1/CARDNAME> | Defined$ You | Mode$ Hand | ReduceCost$ X | SubAbility$ DBDraw | SpellDescription$ Discard your hand, then draw four cards. This ability costs {1} less to activate for each oil counter on CARDNAME.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 4
+SVar:X:Count$CardCounters.OIL
+DeckHints:Type$Instant|Sorcery
+DeckHas:Ability$Counters|Sacrifice|Discard
+Oracle:Whenever you cast a noncreature spell, put an oil counter on Vindictive Flamestoker.\n{6}{R}, Sacrifice Vindictive Flamestoker: Discard your hand, then draw four cards. This ability costs {1} less to activate for each oil counter on Vindictive Flamestoker.
