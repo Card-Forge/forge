@@ -184,7 +184,7 @@ public class GameAction {
             // if to Battlefield and it is caused by an replacement effect,
             // try to get previous LKI if able
             ReplacementEffect re = cause.getReplacementEffect();
-            if (ReplacementType.Moved.equals(re.getMode())) {
+            if (ReplacementType.Moved.equals(re.getMode()) && cause.getReplacingObject(AbilityKey.CardLKI).equals(c)) {
                 lastKnownInfo = (Card) cause.getReplacingObject(AbilityKey.CardLKI);
             }
         }

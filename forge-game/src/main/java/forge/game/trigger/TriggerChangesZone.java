@@ -109,6 +109,10 @@ public class TriggerChangesZone extends Trigger {
             if (leavesLKIZone) {
                 moved = (Card) runParams.get(AbilityKey.CardLKI);
             }
+            if ("Battlefield".equals(runParams.get(AbilityKey.Destination))) {
+                List<Card> etbLKI = moved.getController().getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null);
+                moved = etbLKI.get(etbLKI.lastIndexOf(moved));
+            }
 
             if (!matchesValid(moved, getParam("ValidCard").split(","))) {
                 return false;
