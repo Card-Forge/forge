@@ -27,7 +27,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbility;
 
 /**
  * The Class CostPart.
@@ -43,7 +42,6 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
     private String typeDescription, type;
 
     protected String trigger;
-    protected transient StaticAbility trigHost;
 
     /**
      * Instantiates a new cost part.
@@ -158,9 +156,8 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
         return AbilityUtils.calculateAmount(ability.getHostCard(), getAmount(), ability);
     }
 
-    public void setTrigger(String trig, StaticAbility host) {
+    public void setTrigger(String trig) {
         trigger = trig;
-        trigHost = host;
     }
 
     /**

@@ -5789,13 +5789,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return exertThisTurn;
     }
 
-    public void exert(StaticAbility host) {
+    public void exert() {
         exertedByPlayer.add(getController());
         exertThisTurn++;
         view.updateExertedThisTurn(this, true);
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
         runParams.put(AbilityKey.Player, getController());
-        runParams.put(AbilityKey.Source, host);
         game.getTriggerHandler().runTrigger(TriggerType.Exerted, runParams, false);
     }
 

@@ -27,9 +27,6 @@ public class TriggerExerted extends Trigger {
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
             return false;
         }
-        if (hasParam("Linked") && !runParams.get(AbilityKey.Source).equals(getLinkedAbility())) {
-            return false;
-        }
         return true;
     }
 

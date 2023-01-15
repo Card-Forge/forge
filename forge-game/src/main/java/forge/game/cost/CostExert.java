@@ -17,13 +17,13 @@
  */
 package forge.game.cost;
 
+import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 
 /**
@@ -99,12 +99,11 @@ public class CostExert extends CostPartWithList {
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
         if (trigger != null) {
-            TriggerHandler handler = targetCard.getGame().getTriggerHandler();
-            Trigger trig = TriggerHandler.parseTrigger(trigHost.getSVar(trigger), trigHost.getHostCard(), false);
-            trig.setLinkedAbility(trigHost);
-            handler.registerOneTrigger(trig);
+            SpellAbility trig =  AbilityFactory.getAbility(targetCard.getSVar(trigger), targetCard);
+            trig.setActivatingPlayer(ability.getActivatingPlayer());
+            AbilityUtils.resolve(trig);
         }
-    	targetCard.exert(trigHost);
+    	targetCard.exert();
         return targetCard;
     }
 
