@@ -43,8 +43,6 @@ import forge.game.card.CardView;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
-import forge.game.cost.CostAdjustment;
-import forge.game.cost.CostExile;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.keyword.KeywordInterface;
@@ -697,24 +695,6 @@ public class PlayerControllerAi extends PlayerController {
         final Ability ability = new AbilityStatic(c, cost, null) { @Override public void resolve() {} };
         ability.setActivatingPlayer(c.getController(), true);
         ability.setCardState(sa.getCardState());
-
-        // FIXME: This is a hack to check if the AI can play the "exile from library" pay costs (Cumulative Upkeep,
-        // e.g. Thought Lash). We have to do it and bail early if the AI can't pay, because otherwise the AI will
-        // pay the cost partially, which should not be possible
-        int nExileLib = 0;
-        List<CostPart> parts = CostAdjustment.adjust(cost, sa).getCostParts();
-        for (final CostPart part : parts) {
-            if (part instanceof CostExile) {
-                CostExile exile = (CostExile) part;
-                if (exile.from == ZoneType.Library) {
-                    nExileLib += exile.convertAmount();
-                }
-            }
-        }
-        if (nExileLib > c.getController().getCardsIn(ZoneType.Library).size()) {
-            return false;
-        }
-        // - End of hack for Exile a card from library Cumulative Upkeep -
 
         if (ComputerUtilCost.canPayCost(ability, c.getController(), true)) {
             ComputerUtil.playNoStack(c.getController(), ability, getGame(), true);

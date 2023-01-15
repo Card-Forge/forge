@@ -17,8 +17,14 @@
  */
 package forge.game.staticability;
 
+import java.util.Iterator;
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
@@ -149,15 +155,27 @@ public class StaticAbilityCantTarget {
             return false;
         }
 
-        if (spellAbility.hasParam("ValidTgts") &&
-                (stAb.hasParam("SourceCanOnlyTarget")
-                && (!spellAbility.getParam("ValidTgts").contains(stAb.getParam("SourceCanOnlyTarget"))
-                    || spellAbility.getParam("ValidTgts").contains(","))
-                    || spellAbility.getParam("ValidTgts").contains("non" + stAb.getParam("SourceCanOnlyTarget")
-                    )
-                )
-           ){
-            return false;
+        if (stAb.hasParam("SourceCanOnlyTarget")) {
+            SpellAbility root = spellAbility.getRootAbility();
+            List<SpellAbility> choices = null;
+            if (root.getApi() == ApiType.Charm) {
+                choices = Lists.newArrayList(root.getAdditionalAbilityList("Choices"));
+            } else {
+                choices = Lists.newArrayList(root);
+            }
+            Iterator<SpellAbility> it = choices.iterator();
+            SpellAbility next = it.next();
+            while (next != null) {
+                if (next.usesTargeting() && (!next.getParam("ValidTgts").contains(stAb.getParam("SourceCanOnlyTarget"))
+                        || next.getParam("ValidTgts").contains(","))
+                        || next.getParam("ValidTgts").contains("non" + stAb.getParam("SourceCanOnlyTarget"))) {
+                    return false;
+                }
+                next = next.getSubAbility();
+                if (next == null && it.hasNext()) {
+                    next = it.next();
+                }
+            }
         }
 
         return true;
