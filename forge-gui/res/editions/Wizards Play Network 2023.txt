@@ -1,6 +1,6 @@
 [metadata]
 Code=PW23
-Date=2023-03-05
+Date=2023-01-01
 Name=Wizards Play Network 2023
 Type=Promo
 ScryfallCode=PW23
