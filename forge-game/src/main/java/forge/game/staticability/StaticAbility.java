@@ -31,6 +31,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameStage;
 import forge.game.IIdentifiable;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -41,6 +42,7 @@ import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
@@ -63,6 +65,8 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     private final List<Player> ignoreEffectPlayers = Lists.newArrayList();
     private int mayPlayTurn = 0;
 
+    private SpellAbility payingTrigSA;
+
     @Override
     public final int getId() {
         return id;
@@ -78,6 +82,14 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return obj instanceof StaticAbility && this.id == ((StaticAbility) obj).id;
     }
 
+    public SpellAbility getPayingTrigSA() {
+        // already cached?
+        if (payingTrigSA == null) {
+            payingTrigSA = AbilityFactory.getAbility(getSVar(getParam("Trigger")), getHostCard());
+        }
+        return payingTrigSA;
+    }
+    
     /**
      * <p>
      * Getter for the field <code>mapParams</code>.

@@ -41,7 +41,7 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
     private final String originalType, originalTypeDescription;
     private String typeDescription, type;
 
-    protected String trigger;
+    protected transient SpellAbility payingTrigSA;
 
     /**
      * Instantiates a new cost part.
@@ -156,8 +156,8 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
         return AbilityUtils.calculateAmount(ability.getHostCard(), getAmount(), ability);
     }
 
-    public void setTrigger(String trig) {
-        trigger = trig;
+    public void setTrigger(SpellAbility sa) {
+        payingTrigSA = sa;
     }
 
     /**

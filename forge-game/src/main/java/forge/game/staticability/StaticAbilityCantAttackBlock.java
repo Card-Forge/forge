@@ -188,7 +188,7 @@ public class StaticAbilityCantAttackBlock {
         Cost cost = new Cost(costString, true);
 
         if (stAb.hasParam("Trigger")) {
-            cost.getCostParts().get(0).setTrigger(stAb.getParam("Trigger"));
+            cost.getCostParts().get(0).setTrigger(stAb.getPayingTrigSA());
         }
 
         return cost;

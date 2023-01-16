@@ -17,13 +17,18 @@
  */
 package forge.game.cost;
 
-import forge.game.ability.AbilityFactory;
-import forge.game.ability.AbilityUtils;
+import java.util.Map;
+
+import com.google.common.collect.Maps;
+
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 /**
@@ -98,10 +103,20 @@ public class CostExert extends CostPartWithList {
 
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
-        if (trigger != null) {
-            SpellAbility trig =  AbilityFactory.getAbility(targetCard.getSVar(trigger), targetCard);
-            trig.setActivatingPlayer(ability.getActivatingPlayer());
-            AbilityUtils.resolve(trig);
+        if (payingTrigSA != null) {
+            Map<String, String> mapParams = Maps.newHashMap();
+            mapParams.put("TriggerDescription", payingTrigSA.getParam("SpellDescription"));
+            mapParams.put("Mode", TriggerType.Immediate.name());
+
+            SpellAbility sa = payingTrigSA.copy(targetCard, ability.getActivatingPlayer(), false);
+
+            final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, targetCard, sa.isIntrinsic(), null);
+            immediateTrig.setSpawningAbility(ability); // make the StaticAbility the Spawning one?
+
+            immediateTrig.setOverridingAbility(sa);
+
+            // Instead of registering this, add to the delayed triggers as an immediate trigger type? Which means it'll fire as soon as possible
+            targetCard.getGame().getTriggerHandler().registerDelayedTrigger(immediateTrig);
         }
     	targetCard.exert();
         return targetCard;
