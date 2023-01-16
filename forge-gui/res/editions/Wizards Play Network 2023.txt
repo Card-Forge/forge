@@ -1,0 +1,9 @@
+[metadata]
+Code=PW23
+Date=2023-03-05
+Name=Wizards Play Network 2023
+Type=Promo
+ScryfallCode=PW23
+
+[cards]
+1 R Norn's Annex @James Paick
