@@ -116,13 +116,11 @@ public class CostAdjustment {
         int count = 0;
 
         if (st.hasParam("ForEachShard")) {
-            CostPartMana mc = cost.getCostMana();
-            if (mc != null) {
-                byte atom = ManaAtom.fromName(st.getParam("ForEachShard").toLowerCase());
-                for (ManaCostShard shard : mc.getManaCostFor(sa)) {
-                    if ((shard.getColorMask() & atom) != 0) {
-                        ++count;
-                    }
+            ManaCost mc = sa.getHostCard().getManaCost();
+            byte atom = ManaAtom.fromName(st.getParam("ForEachShard").toLowerCase());
+            for (ManaCostShard shard : mc) {
+                if ((shard.getColorMask() & atom) != 0) {
+                    ++count;
                 }
             }
         } else if (st.hasParam("Amount")) {

@@ -37,7 +37,6 @@ import forge.game.mana.ManaCostBeingPaid;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -200,12 +199,9 @@ public class CostPayment extends ManaConversionMatrix {
             PaymentDecision decision = part.accept(decisionMaker);
             if (null == decision) return false;
 
-            // the AI will try to exile the same card repeatedly unless it does it immediately
-            final boolean payImmediately = part instanceof CostExile && ((CostExile) part).from == ZoneType.Library;
-
             // wrap the payment and push onto the cost stack
             game.costPaymentStack.push(part, this);
-            if ((decisionMaker.paysRightAfterDecision() || payImmediately) && !part.payAsDecided(decisionMaker.getPlayer(), decision, ability, decisionMaker.isEffect())) {
+            if (decisionMaker.paysRightAfterDecision() && !part.payAsDecided(decisionMaker.getPlayer(), decision, ability, decisionMaker.isEffect())) {
                 game.costPaymentStack.pop(); // cost is resolved
                 return false;
             }

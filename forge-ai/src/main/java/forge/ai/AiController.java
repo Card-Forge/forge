@@ -1473,11 +1473,9 @@ public class AiController {
             return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));
         }
 
-        CardCollection landsWannaPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
         CardCollection playBeforeLand = CardLists.filter(
             player.getCardsIn(ZoneType.Hand), CardPredicates.hasSVar("PlayBeforeLandDrop")
         );
-
         if (!playBeforeLand.isEmpty()) {
             SpellAbility wantToPlayBeforeLand = chooseSpellAbilityToPlayFromList(
                 ComputerUtilAbility.getSpellAbilities(playBeforeLand, player), false
@@ -1486,7 +1484,8 @@ public class AiController {
                 return singleSpellAbilityList(wantToPlayBeforeLand);
             }
         }
-
+        
+        CardCollection landsWannaPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
         if (landsWannaPlay != null) {
             landsWannaPlay = filterLandsToPlay(landsWannaPlay);
             Log.debug("Computer " + game.getPhaseHandler().getPhase().nameForUi);
