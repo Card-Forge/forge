@@ -1,6 +1,6 @@
 package forge.adventure.data;
 
-import forge.adventure.util.CardUtil;
+import forge.adventure.util.*;
 import forge.deck.Deck;
 
 /**
@@ -11,7 +11,7 @@ import forge.deck.Deck;
 public class EnemyData {
     public String name;
     public String sprite;
-    public String deck;
+    public String[] deck;
     public boolean copyPlayerDeck = false;
     public String ai;
     public boolean boss = false;
@@ -54,6 +54,6 @@ public class EnemyData {
     }
 
     public Deck generateDeck(boolean isFantasyMode, boolean useGeneticAI) {
-        return CardUtil.getDeck(deck, true, isFantasyMode, colors, life > 13, life > 16 && useGeneticAI);
+        return CardUtil.getDeck(deck[Current.player().getEnemyDeckNumber(this.name, deck.length)], true, isFantasyMode, colors, life > 13, life > 16 && useGeneticAI);
     }
 }
