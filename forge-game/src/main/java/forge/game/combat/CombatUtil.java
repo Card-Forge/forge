@@ -25,6 +25,7 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -310,7 +311,7 @@ public class CombatUtil {
     }
 
     public static Cost getAttackCost(final Game game, final Card attacker, final GameEntity defender) {
-        return getAttackCost(game, attacker, defender, List.of());
+        return getAttackCost(game, attacker, defender, ImmutableList.of());
     }
     /**
      * Get the cost that has to be paid for a creature to attack a certain
