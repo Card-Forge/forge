@@ -559,9 +559,15 @@ public class PhaseHandler implements java.io.Serializable {
                     }
                 }
 
+                // Exert creatures here
+                List<Card> possibleExerters = CombatUtil.getOptionAttackCostCreatures(whoDeclares);
+                if (!possibleExerters.isEmpty()) {
+                    possibleExerters = whoDeclares.getController().exertAttackers(possibleExerters);
+                }
+
                 for (final Card attacker : combat.getAttackers()) {
                     // TODO currently doesn't refund previous attackers (can really only happen if you cancel paying for a creature with an attack requirement that could be satisfied without a tax)
-                    final boolean canAttack = CombatUtil.checkPropagandaEffects(game, attacker, combat);
+                    final boolean canAttack = CombatUtil.checkPropagandaEffects(game, attacker, combat, possibleExerters);
 
                     if (!canAttack) {
                         combat.removeFromCombat(attacker);
@@ -587,16 +593,6 @@ public class PhaseHandler implements java.io.Serializable {
                 if (!attacker.attackVigilance()) {
                     attacker.setTapped(false);
                     attacker.tap(true, true);
-                }
-            }
-
-            // Exert creatures here
-            List<Card> possibleExerters = CardLists.getKeyword(combat.getAttackers(),
-                    "You may exert CARDNAME as it attacks.");
-
-            if (!possibleExerters.isEmpty()) {
-                for (Card exerter : whoDeclares.getController().exertAttackers(possibleExerters)) {
-                    //exerter.exert();
                 }
             }
         }
