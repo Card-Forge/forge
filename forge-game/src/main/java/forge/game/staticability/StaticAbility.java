@@ -84,7 +84,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
     public SpellAbility getPayingTrigSA() {
         // already cached?
-        if (payingTrigSA == null) {
+        if (payingTrigSA == null && hasParam("Trigger")) {
             payingTrigSA = AbilityFactory.getAbility(getSVar(getParam("Trigger")), getHostCard());
         }
         return payingTrigSA;

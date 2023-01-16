@@ -20,6 +20,7 @@ package forge.ai;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -1432,11 +1433,11 @@ public class AiAttackController {
             // if card has a Exert Trigger which would target,
             // but there are no creatures it can target, no need to exert with it
             boolean missTarget = false;
-            for (Trigger t : c.getTriggers()) {
-                if (!TriggerType.Exerted.equals(t.getMode())) {
+            for (StaticAbility st : c.getStaticAbilities()) {
+                if (!"OptionalAttackCost".equals(st.getParam("Mode"))) {
                     continue;
                 }
-                SpellAbility sa = t.ensureAbility();
+                SpellAbility sa = st.getPayingTrigSA();
                 if (sa == null) {
                     continue;
                 }
