@@ -39,6 +39,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardState;
 import forge.game.cost.Cost;
+import forge.game.cost.CostExert;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -337,7 +338,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         if (this.isSuppressed() || !getParam("Mode").equals("OptionalAttackCost") || !this.checkConditions()) {
             return false;
         }
-        return StaticAbilityCantAttackBlock.getAttackCost(this, attacker, null) != null;
+        return StaticAbilityCantAttackBlock.getAttackCost(this, attacker, null).hasSpecificCostType(CostExert.class);
     }
 
     public final Cost getBlockCost(final Card blocker, final Card attacker) {

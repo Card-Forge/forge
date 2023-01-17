@@ -346,9 +346,9 @@ public class CombatUtil {
         return attackCost;
     }
 
-    public static CardCollection getOptionAttackCostCreatures(final Player attacker) {
+    public static CardCollection getOptionalAttackCostCreatures(final CardCollection attackers) {
         final CardCollection exerters = new CardCollection();
-        for (final Card card : attacker.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+        for (final Card card : attackers) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
                 if (stAb.hasExertCost(card)) {
                     exerters.add(card);

@@ -559,8 +559,8 @@ public class PhaseHandler implements java.io.Serializable {
                     }
                 }
 
-                // Exert creatures here
-                List<Card> possibleExerters = CombatUtil.getOptionAttackCostCreatures(whoDeclares);
+                // CR 508.1g
+                List<Card> possibleExerters = CombatUtil.getOptionalAttackCostCreatures(combat.getAttackers());
                 if (!possibleExerters.isEmpty()) {
                     possibleExerters = whoDeclares.getController().exertAttackers(possibleExerters);
                 }
