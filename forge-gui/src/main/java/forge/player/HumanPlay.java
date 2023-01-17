@@ -452,7 +452,6 @@ public class HumanPlay {
                         return false;
                     }
                 }
-                return true;
             }
             else if (part instanceof CostGainControl) {
                 int amount = Integer.parseInt(part.getAmount());
