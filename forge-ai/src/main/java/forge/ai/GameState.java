@@ -620,6 +620,9 @@ public abstract class GameState {
 
         game.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
 
+        // prevent interactions with objects from old state
+        game.copyLastState();
+
         // Set negative or zero life after state effects if need be, important for some puzzles that rely on
         // pre-setting negative life (e.g. PS_NEO4).
         for (int i = 0; i < playerStates.size(); i++) {
