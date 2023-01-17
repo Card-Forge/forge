@@ -884,15 +884,17 @@ public class Cost implements Serializable {
     }
 
     public void mergeTo(Cost source, int amt) {
-        if (source.isOnlyManaCost()) {
-            // multiply cost
-            for (int i = 0; i < amt; ++i) {
-                this.add(source);
+        // multiply to create the full cost
+        if (amt > 1) {
+            // to double itself we need to work on a copy
+            Cost sourceCpy = source.copy();
+            for (int i = 1; i < amt; ++i) {
+                // in theory setAmount could be used instead but it depends on the cost complexity (probably not worth trying to determine that first)
+                source.add(sourceCpy);
             }
-        } else {
-            source.getCostParts().get(0).setAmount(Integer.toString(amt));
-            this.add(source, false);
         }
+        // combine costs (these shouldn't mix together)
+        this.add(source, false);
     }
 
     public Cost add(Cost cost1) {
