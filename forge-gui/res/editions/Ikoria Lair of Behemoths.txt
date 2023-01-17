@@ -289,6 +289,7 @@ ScryfallCode=IKO
 
 [buy a box]
 275 M Zilortha, Strength Incarnate @Antonio José Manzanedo
+275a M Zilortha, Strength Incarnate @Chase Stone
 
 [borderless]
 276 M Lukka, Coppercoat Outcast @Kieran Yanner
