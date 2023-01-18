@@ -782,15 +782,9 @@ public class AiController {
                             return AiPlayDecision.CantAfford;
                         }
                     }
-                    if (wardCost.hasSpecificCostType(CostPayLife.class)) {
-                        int lifeToPay = wardCost.getCostPartByType(CostPayLife.class).convertAmount();
-                        if (lifeToPay > player.getLife() || (lifeToPay == player.getLife() && !player.cantLoseForZeroOrLessLife())) {
-                            return AiPlayDecision.CantAfford;
-                        }
-                    }
-                    if (wardCost.hasSpecificCostType(CostDiscard.class)
-                            && wardCost.getCostPartByType(CostDiscard.class).convertAmount() > player.getCardsIn(ZoneType.Hand).size()) {
-                        return AiPlayDecision.CantAfford;
+                    SpellAbilityAi topAI = new SpellAbilityAi() {};
+                    if (!topAI.willPayCosts(player, sa , wardCost, host)) {
+                        return AiPlayDecision.CostNotAcceptable;
                     }
                 }
             }

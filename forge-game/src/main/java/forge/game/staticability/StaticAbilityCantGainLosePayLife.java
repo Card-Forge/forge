@@ -72,7 +72,7 @@ public class StaticAbilityCantGainLosePayLife {
                 }
 
                 if (!stAb.matchesValidParam("ValidCause", cause)) {
-                    return false;
+                    continue;
                 }
 
                 if (applyCommonAbility(stAb, player)) {

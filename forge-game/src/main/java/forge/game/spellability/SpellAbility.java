@@ -127,7 +127,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private boolean aftermath = false;
 
-    private boolean cumulativeupkeep = false;
     private boolean blessing = false;
     private Integer chapter = null;
     private boolean lastChapter = false;
@@ -514,6 +513,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public boolean isNinjutsu() {
         return this.hasParam("Ninjutsu");
+    }
+
+    public boolean isCumulativeupkeep() {
+        return hasParam("CumulativeUpkeep");
     }
 
     public boolean isEpic() {
@@ -2138,13 +2141,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     @Override
     public boolean hasProperty(final String property, final Player sourceController, final Card source, CardTraitBase spellAbility) {
         return ForgeScript.spellAbilityHasProperty(this, property, sourceController, source, spellAbility);
-    }
-
-    public boolean isCumulativeupkeep() {
-        return cumulativeupkeep;
-    }
-    public void setCumulativeupkeep(boolean cumulativeupkeep0) {
-        cumulativeupkeep = cumulativeupkeep0;
     }
 
     // Return whether this spell tracks what color mana is spent to cast it for the sake of the effect

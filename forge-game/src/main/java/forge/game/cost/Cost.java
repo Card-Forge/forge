@@ -883,7 +883,24 @@ public class Cost implements Serializable {
         return sb.toString();
     }
 
+    public void mergeTo(Cost source, int amt) {
+        // multiply to create the full cost
+        if (amt > 1) {
+            // to double itself we need to work on a copy
+            Cost sourceCpy = source.copy();
+            for (int i = 1; i < amt; ++i) {
+                // in theory setAmount could be used instead but it depends on the cost complexity (probably not worth trying to determine that first)
+                source.add(sourceCpy);
+            }
+        }
+        // combine costs (these shouldn't mix together)
+        this.add(source, false);
+    }
+
     public Cost add(Cost cost1) {
+        return add(cost1, true);
+    }
+    public Cost add(Cost cost1, boolean mergeAdditional) {
         CostPartMana costPart2 = this.getCostMana();
         List<CostPart> toRemove = Lists.newArrayList();
         for (final CostPart part : cost1.getCostParts()) {
@@ -906,10 +923,10 @@ public class Cost implements Serializable {
                 } else {
                     costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r));
                 }
-            } else if (part instanceof CostDiscard || part instanceof CostDraw
-                    || part instanceof CostAddMana || part instanceof CostPayLife
-                    || part instanceof CostPutCounter || part instanceof CostTapType
-                    || part instanceof CostExile) {
+            } else if (part instanceof CostPutCounter || (mergeAdditional && // below usually not desired because they're from different causes
+                    (part instanceof CostDiscard || part instanceof CostDraw ||
+                    part instanceof CostAddMana || part instanceof CostPayLife ||
+                    part instanceof CostSacrifice || part instanceof CostTapType))) {
                 boolean alreadyAdded = false;
                 for (final CostPart other : costParts) {
                     if ((other.getClass().equals(part.getClass()) || (part instanceof CostPutCounter && ((CostPutCounter)part).getCounter().is(CounterEnumType.LOYALTY))) &&
@@ -917,7 +934,7 @@ public class Cost implements Serializable {
                             StringUtils.isNumeric(part.getAmount()) &&
                             StringUtils.isNumeric(other.getAmount())) {
                         String amount = String.valueOf(part.convertAmount() + other.convertAmount());
-                        if (part instanceof CostPutCounter) { // path for Carth & Cumulative Upkeep
+                        if (part instanceof CostPutCounter) { // CR 606.5 path for Carth
                             if (other instanceof CostPutCounter && ((CostPutCounter)other).getCounter().equals(((CostPutCounter) part).getCounter())) {
                                 costParts.add(new CostPutCounter(amount, ((CostPutCounter) part).getCounter(), part.getType(), part.getTypeDescription()));
                             } else if (other instanceof CostRemoveCounter && ((CostRemoveCounter)other).counter.is(CounterEnumType.LOYALTY)) {
@@ -931,6 +948,8 @@ public class Cost implements Serializable {
                             } else {
                                 continue;
                             }
+                        } else if (part instanceof CostSacrifice) {
+                            costParts.add(new CostSacrifice(amount, part.getType(), part.getTypeDescription()));
                         } else if (part instanceof CostDiscard) {
                             costParts.add(new CostDiscard(amount, part.getType(), part.getTypeDescription()));
                         } else if (part instanceof CostDraw) {
@@ -942,12 +961,6 @@ public class Cost implements Serializable {
                             costParts.add(new CostAddMana(amount, part.getType(), part.getTypeDescription()));
                         } else if (part instanceof CostPayLife) {
                             costParts.add(new CostPayLife(amount, part.getTypeDescription()));
-                        } else if (part instanceof CostExile) {
-                            ZoneType z = ((CostExile) part).getFrom();
-                            if (((CostExile) other).getFrom() != z) {
-                                continue;
-                            }
-                            costParts.add(new CostExile(amount, part.getType(), part.getTypeDescription(), z));
                         }
                         toRemove.add(other);
                         alreadyAdded = true;
