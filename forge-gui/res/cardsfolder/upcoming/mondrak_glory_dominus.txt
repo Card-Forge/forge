@@ -4,7 +4,7 @@ Types:Legendary Creature Phyrexian Horror
 PT:4/4
 R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Card.YouCtrl | ReplaceWith$ DoubleToken | Description$ If one or more tokens would be created under your control, twice that many of those tokens are created instead.
 SVar:DoubleToken:DB$ ReplaceToken | Type$ Amount | ValidCard$ Card.YouCtrl
-A:AB$ PutCounter | Cost$ 1 WP WP Sac<2/Artifact.Other;Creature.Other/other artifacts and/or creature> | Defined$ Self | CounterType$ Indestructible | CounterNum$ 1 | SpellDescription$ Put an indestructible counter on CARDNAME.
+A:AB$ PutCounter | Cost$ 1 WP WP Sac<2/Artifact.Other;Creature.Other/other artifacts and/or creature> | Defined$ Self | CounterType$ Indestructible | CounterNum$ 1 | SpellDescription$ Put an indestructible counter on CARDNAME. ({W/P} can be paid with either {W} or 2 life.)
 DeckHints:Ability$Token
 DeckHas:Ability$Sacrifice|Counters
 Oracle:If one or more tokens would be created under your control, twice that many of those tokens are created instead.\n{1}{W/P}{W/P}, Sacrifice two other artifacts and/or creatures: Put an indestructible counter on Mondrak, Glory Dominus. ({W/P} can be paid with either {W} or 2 life.)
