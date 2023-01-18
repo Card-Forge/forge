@@ -3,10 +3,10 @@ ManaCost:2 PU U
 Types:Legendary Planeswalker Jace
 Loyalty:5
 K:Compleated
-A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -3 | IsCurse$ True | Duration$ UntilYourNextTurn | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Until your next turn, up to one target creature gets -3/-0.
-A:AB$ Mill | Cost$ SubCounter<2/LOYALTY> | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Select a player | SubAbility$ DBDraw | SpellDescription$ Target player mills three cards. Then if a graveyard has twenty or more cards in it, you draw three cards. Otherwise, you draw a card.
-SVar:DBDraw:DB$ Draw | NumCards$ Y
-A:AB$ Mill | Cost$ SubCounter<X/LOYALTY> | NumCards$ Z | ValidTgts$ Player | TgtPrompt$ Select a player | SpellDescription$ Target player mills three times X cards.
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -3 | IsCurse$ True | Duration$ UntilYourNextTurn | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | SpellDescription$ Until your next turn, up to one target creature gets -3/-0.
+A:AB$ Mill | Cost$ SubCounter<2/LOYALTY> | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBDraw | SpellDescription$ Target player mills three cards.
+SVar:DBDraw:DB$ Draw | NumCards$ Y | SpellDescription$ Then if a graveyard has twenty or more cards in it, you draw three cards. Otherwise, you draw a card.
+A:AB$ Mill | Cost$ SubCounter<X/LOYALTY> | NumCards$ Z | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player mills three times X cards.
 SVar:Y:Count$Compare CheckGrave GE20.3.1
 SVar:CheckGrave:PlayerCountPlayers$HighestValidGraveyard Card.YouOwn
 SVar:X:Count$xPaid
