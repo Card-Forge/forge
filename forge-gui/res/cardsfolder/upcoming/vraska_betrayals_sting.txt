@@ -6,7 +6,7 @@ K:Compleated
 A:AB$ Draw | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and you lose 1 life. Proliferate.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | SubAbility$ DBProliferate 
 SVar:DBProliferate:DB$ Proliferate 
-A:AB$ Animate | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | RemoveAllAbilities$ True | Colors$ Green | Types$ Artifact,Treasure | Abilities$ TreasureSac | RemoveCreatureTypes$ True | RemoveCardTypes$ True | Duration$ Permanent | SpellDescription$ Target creature becomes a Treasure artifact with "{T}, Sacrifice this artifact: Add one mana of any color" and loses all other card types and abilities.
+A:AB$ Animate | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | RemoveAllAbilities$ True | Colors$ Green | Types$ Artifact,Treasure | Abilities$ TreasureSac | RemoveCardTypes$ True | Duration$ Permanent | SpellDescription$ Target creature becomes a Treasure artifact with "{T}, Sacrifice this artifact: Add one mana of any color" and loses all other card types and abilities.
 SVar:TreasureSac:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
 A:AB$ Poison | Cost$ SubCounter<9/LOYALTY> |  ValidTgts$ Player | TgtPrompt$ Select target player | ConditionCheckSVar$ X | ConditionSVarCompare$ LT9 | Num$ Difference | SpellDescription$ If target player has fewer than nine poison counters, they get a number of poison counters equal to the difference.
 SVar:X:TargetedPlayer$PoisonCounters
