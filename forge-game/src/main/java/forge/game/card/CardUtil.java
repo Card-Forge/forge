@@ -241,6 +241,8 @@ public final class CardUtil {
         newCopy.setColor(in.getColor().getColor());
         newCopy.setPhasedOut(in.getPhasedOut());
 
+        newCopy.setTapped(in.isTapped());
+
         newCopy.setDamageHistory(in.getDamageHistory());
         newCopy.setDamageReceivedThisTurn(in.getDamageReceivedThisTurn());
 
