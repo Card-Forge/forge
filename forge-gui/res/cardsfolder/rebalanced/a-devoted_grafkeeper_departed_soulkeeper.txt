@@ -9,7 +9,7 @@ SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select targe
 DeckHas:Ability$Mill|Graveyard
 K:Disturb:1 W U
 AlternateMode:DoubleFaced
-Oracle:When Devoted Grafkeeper enters the battlefield, mill four cards.\nWhenever you cast a spell from your graveyard, tap target creature you don't control.\nDisturb {1}{W}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
+Oracle:When Devoted Grafkeeper enters the battlefield, mill four cards.\nWhenever you cast a spell from your graveyard, tap target creature you don't control.\nDisturb {1}{W}{U}
 
 ALTERNATE
 
