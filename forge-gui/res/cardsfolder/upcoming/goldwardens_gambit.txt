@@ -3,8 +3,8 @@ ManaCost:6 R R
 Types:Sorcery
 K:Affinity:Equipment
 A:SP$ Token | TokenScript$ r_2_2_rebel | TokenOwner$ You | RememberTokens$ True | TokenAmount$ 5 | SubAbility$ DBRepeat | PumpKeywords$ Haste | PumpDuration$ EOT | SpellDescription$ Create five 2/2 red Rebel creature tokens. They gain haste until end of turn. For each of those tokens, you may attach an Equipment you control to it.
-SVar:DBRepeat:DB$ RepeatEach | DefinedCards$ DirectRemembered | RepeatSubAbility$ DBAttach
-SVar:DBAttach:DB$ Attach | Choices$ Equipment.YouCtrl | Defined$ Remembered | ChoiceTitle$ Select an equipment to attach to this token | Mandatory$ False 
+SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemembered | RepeatSubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Choices$ Equipment.YouCtrl | Defined$ Remembered | ChoiceTitle$ Select an equipment to attach to this token | Optional$ True 
 DeckHas:Ability$Token & Type$Rebel & Color$Red
 DeckNeeds:Type$Equipment
 Oracle:Affinity for Equipment (This spell costs {1} less to cast for each Equipment you control.)\nCreate five 2/2 red Rebel creature tokens. They gain haste until end of turn. For each of those tokens, you may attach an Equipment you control to it.
