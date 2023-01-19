@@ -10,4 +10,4 @@ A:AB$ PutCounterAll | Cost$ W U B R G T | ValidCards$ Myr.YouCtrl | CounterType$
 DeckHas:Ability$Token|Counters
 DeckHints:Type$Myr
 SVar:BuffedBy:Myr
-Oracle:Whenever you cast a Myr spell, create a 1/1 colorless Myr artifact creature token.\nAt the beginning of combat on your turn, untap each Myr you control. \n{W}{U}{B}{R}{G}, {T}, put three +1/+1 counters to each Myr you control. Activate only during your turn.
+Oracle:Whenever you cast a Myr spell, create a 1/1 colorless Myr artifact creature token.\nAt the beginning of combat on your turn, untap each Myr you control. \n{W}{U}{B}{R}{G}, {T}: put three +1/+1 counters on each Myr you control. Activate only during your turn.
