@@ -17,8 +17,9 @@ Colors:blue
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
-T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals combat damage to a player, draw a card.
-SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ TrigDamageDone | Description$ Enchanted creature has "Whenever this creature deals combat damage to a player, draw a card."
+SVar:TrigDamageDone:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
-Oracle:Enchant creature\nWhenever enchanted creature deals combat damage to a player, draw a card.\nIf Catlike Curiosity would be put into a graveyard from anywhere, exile it instead.
+Oracle:Enchant creature\nEnchanted creature has "Whenever this creature deals combat damage to a player, draw a card."\nIf Catlike Curiosity would be put into a graveyard from anywhere, exile it instead.
