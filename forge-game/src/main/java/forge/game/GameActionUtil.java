@@ -768,7 +768,7 @@ public final class GameActionUtil {
         final Game game = sourceCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
         eff.setTimestamp(game.getNextTimestamp());
-        eff.setName(sourceCard.getName() + "'s Effect");
+        eff.setName(sourceCard + "'s Effect");
         eff.setOwner(controller);
 
         eff.setImageKey(sourceCard.getImageKey());

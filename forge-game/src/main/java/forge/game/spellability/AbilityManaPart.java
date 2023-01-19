@@ -286,7 +286,7 @@ public class AbilityManaPart implements java.io.Serializable {
             return;
 
         TriggerHandler handler = card.getGame().getTriggerHandler();
-        Trigger trig = TriggerHandler.parseTrigger(sVarHolder.getSVar(this.triggersWhenSpent), sourceCard, false);
+        Trigger trig = TriggerHandler.parseTrigger(sVarHolder.getSVar(this.triggersWhenSpent), sourceCard, false, sVarHolder);
         handler.registerOneTrigger(trig);
     }
 

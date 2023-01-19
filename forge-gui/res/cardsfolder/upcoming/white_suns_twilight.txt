@@ -1,0 +1,10 @@
+Name:White Sun's Twilight
+ManaCost:X W W
+Types:Sorcery
+A:SP$ GainLife | LifeAmount$ X | SubAbility$ DBToken | SpellDescription$ You gain X life.
+SVar:DBToken:DB$ Token | RememberTokens$ True | TokenAmount$ X | TokenScript$ c_1_1_a_phyrexian_mite_toxic_noblock | TokenOwner$ You | SubAbility$ DBWrath | SpellDescription$ Create X 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and "This creature can't block."
+SVar:DBWrath:DB$ DestroyAll | ValidCards$ Creature.IsNotRemembered | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 | SubAbility$ DBCleanup | SpellDescription$ If X is 5 or more, Destroy all other creatures.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+DeckHas:Ability$Token|LifeGain & Type$Phyrexian|Mite|Artifact
+Oracle:You gain X life. Create X 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and "This creature can't block." If X is 5 or more, destroy all other creatures. (Players dealt combat damage by a creature with toxic 1 also get a poison counter.)

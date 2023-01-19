@@ -45,6 +45,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayEnergy;
 import forge.game.cost.CostRemoveCounter;
+import forge.game.cost.CostUntap;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
 import forge.game.keyword.KeywordInterface;
@@ -1417,12 +1418,14 @@ public class ComputerUtilCard {
                 double nonCombatChance = 0.0f;
                 double combatChance = 0.0f;
                 // non-combat Haste: has an activated ability with tap cost
-                for (SpellAbility ab : c.getSpellAbilities()) {
-                    Cost abCost = ab.getPayCosts();
-                    if (abCost != null && abCost.hasTapCost()
-                            && (!abCost.hasManaCost() || ComputerUtilMana.canPayManaCost(ab, ai, 0, false))) {
-                        nonCombatChance += 0.5f;
-                        break;
+                if (c.isAbilitySick()) {
+                    for (SpellAbility ab : c.getSpellAbilities()) {
+                        Cost abCost = ab.getPayCosts();
+                        if (abCost != null && (abCost.hasTapCost() || abCost.hasSpecificCostType(CostUntap.class))
+                                && (!abCost.hasManaCost() || ComputerUtilMana.canPayManaCost(ab, ai, sa.getPayCosts().getTotalMana().getCMC(), false))) {
+                            nonCombatChance += 0.5f;
+                            break;
+                        }
                     }
                 }
                 // combat Haste: only grant it if the creature will attack
@@ -1730,6 +1733,7 @@ public class ComputerUtilCard {
         }
         final long timestamp2 = c.getGame().getNextTimestamp(); //is this necessary or can the timestamp be re-used?
         pumped.addChangedCardKeywordsInternal(toCopy, null, false, timestamp2, 0, false);
+        pumped.updateKeywordsCache(pumped.getCurrentState());
         applyStaticContPT(ai.getGame(), pumped, new CardCollection(c));
         return pumped;
     }
@@ -1916,7 +1920,7 @@ public class ComputerUtilCard {
                 }
             }
             if (!canBeBlocked) {
-                boolean threat = atk.getNetCombatDamage() >= ai.getLife() - lifeInDanger;
+                boolean threat = ComputerUtilCombat.getAttack(atk) >= ai.getLife() - lifeInDanger;
                 if (!priorityRemovalOnlyInDanger || threat) {
                     priorityCards.add(atk);
                 }

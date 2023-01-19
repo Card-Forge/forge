@@ -693,4 +693,23 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         questFlags.clear();
     }
 
+    public int getEnemyDeckNumber(String enemyName, int maxDecks){
+    int deckNumber = 0;
+    if (statistic.getWinLossRecord().get(enemyName)!=null)
+    {
+        int playerWins = statistic.getWinLossRecord().get(enemyName).getKey();
+        int enemyWins = statistic.getWinLossRecord().get(enemyName).getValue();
+        if (playerWins > enemyWins){
+            int deckNumberAfterAlgorithmOutput = (int)((playerWins-enemyWins) * (difficultyData.enemyLifeFactor / 3));
+            if (deckNumberAfterAlgorithmOutput < maxDecks){
+                deckNumber = deckNumberAfterAlgorithmOutput;
+            }
+            else {
+                deckNumber = maxDecks-1;
+            }
+        }
+    }
+    return deckNumber;
+    }
+
 }

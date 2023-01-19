@@ -127,7 +127,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private boolean aftermath = false;
 
-    private boolean cumulativeupkeep = false;
     private boolean blessing = false;
     private Integer chapter = null;
     private boolean lastChapter = false;
@@ -514,6 +513,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public boolean isNinjutsu() {
         return this.hasParam("Ninjutsu");
+    }
+
+    public boolean isCumulativeupkeep() {
+        return hasParam("CumulativeUpkeep");
     }
 
     public boolean isEpic() {
@@ -1119,7 +1122,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             clone.setPayCosts(getPayCosts().copy());
             if (manaPart != null) {
-                clone.manaPart = new AbilityManaPart(this, mapParams);
+                clone.manaPart = new AbilityManaPart(clone, mapParams);
             }
 
             // need to copy the damage tables
@@ -1353,17 +1356,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 }
             }
 
-            if (tr.isSameController()) {
-                Player newController;
-                if (entity instanceof Card) {
-                    newController = ((Card) entity).getController();
-                    for (final Card c : targetChosen.getTargetCards()) {
-                        if (entity != c && !c.getController().equals(newController))
-                            return false;
-                    }
-                }
-            }
-
             if (hasParam("MaxTotalTargetPower") && entity instanceof Card) {
                 int soFar = Aggregates.sum(getTargets().getTargetCards(), CardPredicates.Accessors.fnGetNetPower);
                 // only add if it isn't already targeting
@@ -1374,6 +1366,17 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
                 if (soFar > tr.getMaxTotalPower(getHostCard(),this)) {
                     return false;
+                }
+            }
+
+            if (tr.isSameController()) {
+                Player newController;
+                if (entity instanceof Card) {
+                    newController = ((Card) entity).getController();
+                    for (final Card c : targetChosen.getTargetCards()) {
+                        if (entity != c && !c.getController().equals(newController))
+                            return false;
+                    }
                 }
             }
 
@@ -2138,13 +2141,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     @Override
     public boolean hasProperty(final String property, final Player sourceController, final Card source, CardTraitBase spellAbility) {
         return ForgeScript.spellAbilityHasProperty(this, property, sourceController, source, spellAbility);
-    }
-
-    public boolean isCumulativeupkeep() {
-        return cumulativeupkeep;
-    }
-    public void setCumulativeupkeep(boolean cumulativeupkeep0) {
-        cumulativeupkeep = cumulativeupkeep0;
     }
 
     // Return whether this spell tracks what color mana is spent to cast it for the sake of the effect

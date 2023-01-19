@@ -241,6 +241,8 @@ public final class CardUtil {
         newCopy.setColor(in.getColor().getColor());
         newCopy.setPhasedOut(in.getPhasedOut());
 
+        newCopy.setTapped(in.isTapped());
+
         newCopy.setDamageHistory(in.getDamageHistory());
         newCopy.setDamageReceivedThisTurn(in.getDamageReceivedThisTurn());
 
@@ -356,9 +358,9 @@ public final class CardUtil {
         return res;
     }
 
-    public static ColorSet getColorsYouCtrl(final Player p) {
+    public static ColorSet getColorsFromCards(Iterable<Card> list) {
         byte b = 0;
-        for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
+        for (Card c : list) {
             b |= c.getColor().getColor();
         }
         return ColorSet.fromMask(b);

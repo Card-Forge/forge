@@ -206,12 +206,7 @@ public class GameCopier {
             Card newCard = map.map(origHostCard);
             SpellAbility newSa = null;
             if (origSa.isSpell()) {
-                for (SpellAbility sa : newCard.getAllSpellAbilities()) {
-                    if (sa.getDescription().equals(origSa.getDescription())) {
-                        newSa = sa;
-                        break;
-                    }
-                }
+                newSa = findSAInCard(origSa, newCard);
             }
             if (newSa != null) {
                 newSa.setActivatingPlayer(map.map(origSa.getActivatingPlayer()), true);

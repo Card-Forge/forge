@@ -328,10 +328,10 @@ public class ComputerUtilCombat {
                 if (blockers.size() == 0
                         || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)) {
                     unblocked.add(attacker);
-                } else if (attacker.hasKeyword(Keyword.TRAMPLE)
-                        && getAttack(attacker) > totalShieldDamage(attacker, blockers)) {
-                    if (!attacker.hasKeyword(Keyword.INFECT)) {
-                        damage += getAttack(attacker) - totalShieldDamage(attacker, blockers);
+                } else if (attacker.hasKeyword(Keyword.TRAMPLE) && !attacker.hasKeyword(Keyword.INFECT)) {
+                    int dmgAfterShielding = getAttack(attacker) - totalShieldDamage(attacker, blockers);
+                    if (dmgAfterShielding > 0) {
+                        damage += dmgAfterShielding;
                     }
                 }
             }
@@ -369,13 +369,14 @@ public class ComputerUtilCombat {
             if (blockers.size() == 0
                     || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)) {
                 unblocked.add(attacker);
-            } else if (attacker.hasKeyword(Keyword.TRAMPLE)
-                    && getAttack(attacker) > totalShieldDamage(attacker, blockers)) {
+            } else if (attacker.hasKeyword(Keyword.TRAMPLE)) {
                 int trampleDamage = getAttack(attacker) - totalShieldDamage(attacker, blockers);
-                if (attacker.hasKeyword(Keyword.INFECT)) {
-                    poison += trampleDamage;
+                if (trampleDamage > 0) {
+                    if (attacker.hasKeyword(Keyword.INFECT)) {
+                        poison += trampleDamage;
+                    }
+                    poison += predictPoisonFromTriggers(attacker, ai, trampleDamage);
                 }
-                poison += predictPoisonFromTriggers(attacker, ai, trampleDamage);
             }
         }
 
@@ -686,7 +687,7 @@ public class ComputerUtilCombat {
         final int defenderDefense = blocker.getLethalDamage() - flankingMagnitude + defBushidoMagnitude;
 
         return defenderDefense;
-    } // shieldDamage
+    }
 
     // For AI safety measures like Regeneration
     /**
@@ -2053,7 +2054,6 @@ public class ComputerUtilCombat {
         if (block.size() == 1) {
             final Card blocker = block.getFirst();
 
-            // trample
             if (hasTrample) {
                 int dmgToKill = getEnoughDamageToKill(blocker, dmgCanDeal, attacker, true);
 
@@ -2109,7 +2109,7 @@ public class ComputerUtilCombat {
             }
         }
         return damageMap;
-    } // setAssignedDamage()
+    }
 
     // how much damage is enough to kill the creature (for AI)
     /**

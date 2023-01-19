@@ -782,15 +782,9 @@ public class AiController {
                             return AiPlayDecision.CantAfford;
                         }
                     }
-                    if (wardCost.hasSpecificCostType(CostPayLife.class)) {
-                        int lifeToPay = wardCost.getCostPartByType(CostPayLife.class).convertAmount();
-                        if (lifeToPay > player.getLife() || (lifeToPay == player.getLife() && !player.cantLoseForZeroOrLessLife())) {
-                            return AiPlayDecision.CantAfford;
-                        }
-                    }
-                    if (wardCost.hasSpecificCostType(CostDiscard.class)
-                            && wardCost.getCostPartByType(CostDiscard.class).convertAmount() > player.getCardsIn(ZoneType.Hand).size()) {
-                        return AiPlayDecision.CantAfford;
+                    SpellAbilityAi topAI = new SpellAbilityAi() {};
+                    if (!topAI.willPayCosts(player, sa , wardCost, host)) {
+                        return AiPlayDecision.CostNotAcceptable;
                     }
                 }
             }
@@ -1473,11 +1467,9 @@ public class AiController {
             return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));
         }
 
-        CardCollection landsWannaPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
         CardCollection playBeforeLand = CardLists.filter(
             player.getCardsIn(ZoneType.Hand), CardPredicates.hasSVar("PlayBeforeLandDrop")
         );
-
         if (!playBeforeLand.isEmpty()) {
             SpellAbility wantToPlayBeforeLand = chooseSpellAbilityToPlayFromList(
                 ComputerUtilAbility.getSpellAbilities(playBeforeLand, player), false
@@ -1486,7 +1478,8 @@ public class AiController {
                 return singleSpellAbilityList(wantToPlayBeforeLand);
             }
         }
-
+        
+        CardCollection landsWannaPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
         if (landsWannaPlay != null) {
             landsWannaPlay = filterLandsToPlay(landsWannaPlay);
             Log.debug("Computer " + game.getPhaseHandler().getPhase().nameForUi);

@@ -17,12 +17,11 @@ import forge.game.spellability.TargetRestrictions;
 
 public class PossibleTargetSelector {
     private final SpellAbility sa;
-    private SpellAbility targetingSa;
-    private int targetingSaIndex;
+    private final SpellAbility targetingSa;
+    private final int targetingSaIndex;
     private int maxTargets;
-    private TargetRestrictions tgt;
-    private int targetIndex;
-    private List<GameObject> validTargets;
+    private int nextTargetIndex;
+    private final List<GameObject> validTargets = new ArrayList<>();
 
     public static class Targets {
         final int targetingSaIndex;
@@ -36,7 +35,7 @@ public class PossibleTargetSelector {
             this.targetIndex = targetIndex;
             this.description = description;
 
-            if (targetIndex < 0 || targetIndex >= originalTargetCount) {
+            if (targetIndex != -1 && (targetIndex < 0 || targetIndex >= originalTargetCount)) {
                 throw new IllegalArgumentException("Invalid targetIndex=" + targetIndex);
             }
         }
@@ -51,12 +50,11 @@ public class PossibleTargetSelector {
         this.sa = sa;
         this.targetingSa = targetingSa;
         this.targetingSaIndex = targetingSaIndex;
-        this.validTargets = new ArrayList<>();
-        generateValidTargets(sa.getHostCard().getController());
+        reset();
     }
 
     public void reset() {
-        targetIndex = 0;
+        nextTargetIndex = 0;
         validTargets.clear();
         generateValidTargets(sa.getHostCard().getController());
     }
@@ -67,7 +65,7 @@ public class PossibleTargetSelector {
         }
         sa.setActivatingPlayer(player, true);
         targetingSa.resetTargets();
-        tgt = targetingSa.getTargetRestrictions();
+        TargetRestrictions tgt = targetingSa.getTargetRestrictions();
         maxTargets = tgt.getMaxTargets(sa.getHostCard(), targetingSa);
 
         SimilarTargetSkipper skipper = new SimilarTargetSkipper();
@@ -80,8 +78,8 @@ public class PossibleTargetSelector {
     }
 
     private static class SimilarTargetSkipper {
-        private ArrayListMultimap<String, Card> validTargetsMap = ArrayListMultimap.create();
-        private HashMap<Card, String> cardTypeStrings = new HashMap<>();
+        private final ArrayListMultimap<String, Card> validTargetsMap = ArrayListMultimap.create();
+        private final HashMap<Card, String> cardTypeStrings = new HashMap<>();
         private HashMap<Card, Integer> creatureScores;
 
         private int getCreatureScore(Card c) {
@@ -190,16 +188,7 @@ public class PossibleTargetSelector {
     }
 
     public Targets getLastSelectedTargets() {
-        return new Targets(targetingSaIndex, validTargets.size(), targetIndex - 1, targetingSa.getTargets().toString());
-    }
-
-    public boolean selectTargetsByIndex(int targetIndex) {
-        if (targetIndex >= validTargets.size()) {
-            return false;
-        }
-        selectTargetsByIndexImpl(targetIndex);
-        this.targetIndex = targetIndex + 1;
-        return true;
+        return new Targets(targetingSaIndex, validTargets.size(), nextTargetIndex - 1, targetingSa.getTargets().toString());
     }
 
     public boolean selectTargets(Targets targets) {
@@ -208,16 +197,16 @@ public class PossibleTargetSelector {
             return false;
         }
         selectTargetsByIndexImpl(targets.targetIndex);
-        this.targetIndex = targets.targetIndex + 1;
+        this.nextTargetIndex = targets.targetIndex + 1;
         return true;
     }
 
     public boolean selectNextTargets() {
-        if (targetIndex >= validTargets.size()) {
+        if (nextTargetIndex >= validTargets.size()) {
             return false;
         }
-        selectTargetsByIndexImpl(targetIndex);
-        targetIndex++;
+        selectTargetsByIndexImpl(nextTargetIndex);
+        nextTargetIndex++;
         return true;
     }
 }

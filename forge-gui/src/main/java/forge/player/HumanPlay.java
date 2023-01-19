@@ -322,7 +322,7 @@ public class HumanPlay {
                 } else {
                     from = costExile.getFrom();
                     CardCollection list = CardLists.getValidCards(p.getCardsIn(from), part.getType().split(";"), p, source, sourceAbility);
-                    final int nNeeded = getAmountFromPart(costPart, source, sourceAbility);
+                    final int nNeeded = getAmountFromPart(part, source, sourceAbility);
                     if (list.size() < nNeeded) {
                         return false;
                     }
@@ -452,7 +452,6 @@ public class HumanPlay {
                         return false;
                     }
                 }
-                return true;
             }
             else if (part instanceof CostGainControl) {
                 int amount = Integer.parseInt(part.getAmount());

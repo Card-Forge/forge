@@ -88,7 +88,6 @@ public class CostExert extends CostPartWithList {
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), payer, source, ability);
             final int amount = this.getAbilityAmount(ability);
 
-
             return needsAnnoucement || (typeList.size() >= amount);
         }
 

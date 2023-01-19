@@ -2843,11 +2843,7 @@ public class AbilityUtils {
         if (sq[0].startsWith("ColorsCtrl")) {
             final String restriction = l[0].substring(11);
             final CardCollection list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
-            byte n = 0;
-            for (final Card card : list) {
-                n |= card.getColor().getColor();
-            }
-            return doXMath(ColorSet.fromMask(n).countColors(), expr, c, ctb);
+            return doXMath(CardUtil.getColorsFromCards(list).countColors(), expr, c, ctb);
         }
 
         // TODO move below to handlePaid

@@ -84,7 +84,7 @@ public class EnemyEdit extends FormPanel {
         currentData.speed=  ((Double)  speed.getValue()).floatValue();
         currentData.spawnRate=((Double)  spawnRate.getValue()).floatValue();
         currentData.difficulty=((Double)  difficulty.getValue()).floatValue();
-        currentData.deck= deck.getEdit().getText();
+        currentData.deck= deck.getEdit().getText().split(",");
         currentData.rewards= rewards.getRewards();
         preview.setSpritePath(currentData.sprite);
     }
@@ -113,7 +113,7 @@ public class EnemyEdit extends FormPanel {
             equipment.setText(String.join(",",currentData.equipment));
         else
             equipment.setText("");
-        deck.getEdit().setText(currentData.deck);
+        deck.getEdit().setText(String.join(",",currentData.deck));
         speed.setValue(new Float(currentData.speed).doubleValue());
         spawnRate.setValue(new Float(currentData.spawnRate).doubleValue());
         difficulty.setValue(new Float(currentData.difficulty).doubleValue());
