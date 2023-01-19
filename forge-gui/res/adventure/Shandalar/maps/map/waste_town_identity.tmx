@@ -73,8 +73,8 @@
   <object id="52" template="../obj/shop.tx" x="352" y="272">
    <properties>
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
-    <property name="mythicShopList" value="Creature2Eldrazi,Legend"/>
-    <property name="rareShopList" value="White,Blue,Red,Green,Black,LegendLand4Colorless,Land4Colorless"/>
+    <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi"/>
     <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
    </properties>
   </object>
