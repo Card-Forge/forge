@@ -1,0 +1,30 @@
+[metadata]
+Code=ONC
+Date=2023-02-10
+Name=Phyrexia: All Will Be One Commander
+Type=Expansion
+ScryfallCode=ONC
+
+[cards]
+1 M Ixhel, Scion of Atraxa @Campbell White
+2 M Neyali, Suns' Vanguard @Bryan Sola
+3 M Otharri, Suns' Glory @Marta Nael
+4 M Vishgraz, the Doomhive @Andrew Mar
+5 R Clever Concealment @Alexey Kruglov
+6 R Glimmer Lens @Sidharth Chaturvedi
+7 R Kemba's Banner @Wisnu Tan
+8 R Norn's Choirmaster @Jason A. Engle
+9 R Norn's Decree @Nestor Ossandon Leal
+10 R Staff of the SToryteller @Dan Scott
+11 R Geth's Summons @Johann Bodin
+12 R Phyresis Outbreak @Matthew G. Lewis
+13 R Goldwardens' Gambit @Manuel Castañón
+14 R Hexplate Wallbreaker @Aaron Miller
+15 R Roar of Resistance @Lie Setiawan
+16 R Vulshok Factory @Cristi Balanescu
+17 R Contaminant Grafter @Lars Grant-West
+18 R Glissa's Retriever @Josu Hernaiz
+19 R Wurmquake @Xavier Ribeiro
+20 R Glistening Sphere @Tuan Duong Chu
+37 M Ixhel, Scion of Atraxa @Campbell White
+38 M Neyali, Suns' Vanguard @Bryan Sola
