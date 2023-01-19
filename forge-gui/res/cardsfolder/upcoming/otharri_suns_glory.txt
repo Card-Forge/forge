@@ -5,7 +5,7 @@ PT:3/3
 K:Flying
 K:Lifelink
 K:Haste
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExperience | TriggerDescription$ Whenever CARDNAME attacks, you get an experience counter.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExperience | TriggerDescription$ Whenever CARDNAME attacks, you get an experience counter. Then create a 2/2 red Rebel creature token that's tapped and attacking for each experience counter you have.
 SVar:TrigExperience:DB$ PutCounter | Defined$ You | CounterType$ Experience | CounterNum$ 1 | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ r_2_2_rebel | TokenOwner$ You | TokenAmount$ X | TokenAttacking$ True | TokenTapped$ True | SpellDescription$ Then create a 2/2 red Rebel creature token that's tapped and attacking for each experience counter you have.
 A:AB$ ChangeZone | Cost$ 2 R W tapXType<1/Rebel> | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | ActivationZone$ Graveyard | SpellDescription$ Return NICKNAME from your graveyard to the battlefield tapped.

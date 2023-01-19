@@ -1,4 +1,4 @@
-Name:Staff of the SToryteller
+Name:Staff of the Storyteller
 ManaCost:1 W
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Spirit creature token with flying.
