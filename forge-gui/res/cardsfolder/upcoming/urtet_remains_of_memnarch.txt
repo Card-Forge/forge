@@ -5,7 +5,7 @@ PT:2/2
 T:Mode$ SpellCast | ValidCard$ Myr | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a Myr spell, create a 1/1 colorless Myr artifact creature token. 
 SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_myr
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ UntapMyr | TriggerDescription$ At the beginning of combat on your turn, untap each Myr you control.
-SVar:UntapMyr:DB$ UntapAll | ValidCards$ Myr.YouCtrl | StackDescription$ Untap all Myr you control.
+SVar:UntapMyr:DB$ UntapAll | ValidCards$ Myr.YouCtrl
 A:AB$ PutCounterAll | Cost$ W U B R G T | ValidCards$ Myr.YouCtrl | CounterType$ P1P1 | CounterNum$ 3 | PlayerTurn$ True | SpellDescription$ Put three +1/+1 counters on each Myr you control. Activate only during your turn.
 DeckHas:Ability$Token|Counters
 DeckHints:Type$Myr
