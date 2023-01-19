@@ -2,6 +2,6 @@ Name:Roar of Resistance
 ManaCost:1 R
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Menace | Description$ Creatures you control have menace.
-T:Mode$ AttackersDeclared | AttackingPlayer$ Player | AttackedTarget$ Player,Planeswalker| ValidAttackers$ Creature | Execute$ TrigPumpAll | TriggerDescription$ Whenever one or more creatures attack, you may pay {1}{R). If you do, creatures attacking your opponents and/or planeswalkers they control get +2/+0 until end of turn.
-SVar:TrigPumpAll:AB$ PumpAll | Cost$ 1 R | ValidCards$ Creature.attacking Opponent, Creature.Attacking Planeswalker.OppCtrl | NumAtt$ +2
+T:Mode$ AttackersDeclared | Execute$ TrigPumpAll | TriggerDescription$ Whenever one or more creatures attack, you may pay {1}{R). If you do, creatures attacking your opponents and/or planeswalkers they control get +2/+0 until end of turn.
+SVar:TrigPumpAll:AB$ PumpAll | Cost$ 1 R | ValidCards$ Creature.attacking Opponent, Creature.attacking Planeswalker.OppCtrl | NumAtt$ +2
 Oracle:Creature tokens you control have haste.\nWhenever one or more creatures attack, you may pay {1}{R}. If you do, creatures attacking your opponents and/or planeswalkers they control get +2/+0 until end of turn.

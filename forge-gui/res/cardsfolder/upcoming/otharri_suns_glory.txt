@@ -11,6 +11,8 @@ SVar:DBToken:DB$ Token | TokenScript$ r_2_2_rebel | TokenOwner$ You | TokenAmoun
 A:AB$ ChangeZone | Cost$ 2 R W tapXType<1/Rebel> | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | ActivationZone$ Graveyard | SpellDescription$ Return NICKNAME from your graveyard to the battlefield tapped.
 SVar:X:Count$YourCountersExperience
 DeckHas:Ability$Graveyard|Counters|Token & Type$Rebel
+DeckHints:Type$Rebel
+SVar:HasAttackEffect:TRUE
 SVar:DiscardMe:2
 SVar:SacMe:1
 Oracle:Flying, lifelink, haste\nWhenever Otharri, Suns' Glory attacks, you get an experience counter. Then create a 2/2 red Rebel creature token that's tapped and attacking for each experience counter you have.\n{2}{R}{W}, Tap an untapped Rebel you control: Return Otharri from your graveyard to the battlefield tapped.
