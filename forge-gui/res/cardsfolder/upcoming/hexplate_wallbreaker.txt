@@ -4,7 +4,7 @@ Types:Artifact Equipment
 K:For Mirrodin
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2 .
 T:Mode$ Attacks | ValidCard$ Card.EquippedBy | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever equipped creature attacks, if it’s the first combat phase of the turn, untap each attacking creature. After this phase, there is an additional combat phase.
-SVar:TrigUntap:DB$ Untap | Defined$ Creature.attacking | SubAbility$ DBAddPhase
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature.attacking | SubAbility$ DBAddPhase
 SVar:DBAddPhase:DB$ AddPhase | ExtraPhase$ Combat | ConditionFirstCombat$ True | AfterPhase$ EndCombat
 K:Equip:3 R
 DeckHas:Ability$Token & Type$Rebel & Color$Red
