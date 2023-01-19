@@ -1,0 +1,11 @@
+Name:A-Ancestral Katana
+ManaCost:1 W
+Types:Artifact Equipment
+T:Mode$ Attacks | ValidCard$ Samurai.YouCtrl,Warrior.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever a Samurai or Warrior you control attacks alone, you may pay {1}. When you do, attach CARDNAME to it.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 1 | Execute$ TrigAttach | RememberObjects$ TriggeredAttackerLKICopy | TriggerDescription$ When you do, attach CARDNAME to it.
+SVar:TrigAttach:DB$ Attach | Defined$ DelayTriggerRememberedLKI
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddTrigger$ TrigAttacking | Description$ Equipped creature gets +2/+2 and has "This creature has first strike as long and it's attacking."
+SVar:TrigAttacking:Mode$ Continuous | Affected$ Creature.EquippedBy+attacking | AddKeyword$ First Strike | Description$ This creature has first strike as long and it's attacking.
+K:Equip:2
+DeckHints:Type$Samurai|Warrior
+Oracle:Whenever a Samurai or Warrior you control attacks alone, you may pay {1}. When you do, attach Ancestral Katana to it.\nEquipped creature gets +2/+2 and has "This creature has first strike as long and it's attacking."\nEquip {2}
