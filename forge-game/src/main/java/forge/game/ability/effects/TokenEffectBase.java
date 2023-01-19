@@ -33,6 +33,7 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 public abstract class TokenEffectBase extends SpellAbilityEffect {
@@ -103,6 +104,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
             pumpKeywords.addAll(Arrays.asList(sa.getParam("PumpKeywords").split(" & ")));
         }
         List<Card> allTokens = Lists.newArrayList();
+        List<Card> allOriginalTokens = Lists.newArrayList();
 
         CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
         CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
@@ -156,6 +158,9 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     tok.setCopiedPermanent(prototype);
                 }
 
+                Card lki = CardUtil.getLKICopy(tok);
+                moveParams.put(AbilityKey.CardLKI, lki);
+
                 // Should this be catching the Card that's returned?
                 Card moved = game.getAction().moveToPlay(tok, sa, moveParams);
                 if (moved == null || moved.getZone() == null) {
@@ -165,7 +170,8 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 }
                 triggerList.put(ZoneType.None, moved.getZone().getZoneType(), moved);
 
-                creator.addTokensCreatedThisTurn(tok);
+                creator.addTokensCreatedThisTurn(lki);
+                allOriginalTokens.add(lki);
 
                 if (clone) {
                     moved.setCloneOrigin(host);
@@ -209,6 +215,10 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 }
             }
         }
+
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Card, allOriginalTokens);
+        game.getTriggerHandler().runTrigger(TriggerType.TokenCreatedOnce, runParams, false);
 
         if (sa.hasParam("AtEOT")) {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), allTokens);

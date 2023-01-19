@@ -19,8 +19,11 @@ package forge.game.trigger;
 
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
@@ -52,25 +55,32 @@ public class TriggerTokenCreated extends Trigger {
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Localizer.getInstance().getMessage("lblPlayer")).append(": ").append(sa.getTriggeringObject(AbilityKey.Player));
-        return sb.toString();
+        Iterable<Card> tokens = (Iterable<Card>) sa.getTriggeringObject(AbilityKey.Card);
+
+        if (Iterables.size(tokens) == 1) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(Localizer.getInstance().getMessage("lblPlayer")).append(": ").append(Iterables.getOnlyElement(tokens).getOwner());
+            return sb.toString();
+        }
+
+        return "";
     }
 
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player, AbilityKey.Card);
+        Iterable<Card> tokens = (Iterable<Card>) runParams.get(AbilityKey.Card);
+        if (hasParam("ValidToken")) {
+            tokens = Iterables.filter(tokens, CardPredicates.restriction(getParam("ValidToken").split(","), getHostCard().getController(), getHostCard(), this));
+        }
+
+        sa.setTriggeringObject(AbilityKey.Card, tokens);
     }
 
     /** {@inheritDoc}
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
-            return false;
-        }
-
         if (!matchesValidParam("ValidToken", runParams.get(AbilityKey.Card))) {
             return false;
         }
