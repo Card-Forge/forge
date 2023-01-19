@@ -10,7 +10,7 @@ SVar:EnchantMe:Multiple
 DeckHas:Ability$Graveyard|Token
 DeckHints:Type$Enchantment
 AlternateMode:DoubleFaced
-Oracle:Whenever Brine Comber enters the battlefield or becomes the target of an Aura spell, create a 1/1 white Spirit creature token with flying.\nDisturb {W}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
+Oracle:Whenever Brine Comber enters the battlefield or becomes the target of an Aura spell, create a 1/1 white Spirit creature token with flying.\nDisturb {W}{U}
 
 ALTERNATE
 
