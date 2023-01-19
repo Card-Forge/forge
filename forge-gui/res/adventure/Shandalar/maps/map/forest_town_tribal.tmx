@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="49">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="55">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -12,7 +12,7 @@
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYMANbJgYGOYzUgfbMeG25yAa+yYetaQCkFkH8cgj+7GKmTw7jmMRq2DG72dq+pEUs9HltNmxs2lt70l27Gxa25vBwcDQzwbBZwjYSyg88MUxPjeh+xfdHkLhoY5m/lE89k4E+ncSB3ZzQWGhx46bjw3g8he6uD4nA4MBJ25z0cVgbsMV5ujmq+FxTx8bIo4zofGty44qBuPD5LM4sNuLK46Jzb/oYU5KWsdmB7H2khO32OzAF864AKF0hg5g5TM2OwiVo/jshdkNi/cJbNj1YbP3INRuYuowcssvYsIUmztAeAEjxN55ZNTFoHoOAIlHVtg=
+   eJy1lVkKwjAQhqctdMF76IO4HEA8j3oC8RBuB1ChJ+mDSMELeBsb7NA4TmbSYgOhaZb58s/fJgDusggBrsF/6jJ0cwrSfglz2xYTqxDGbY27iJ8zTmTGg+nbRrJmH42lwu0Sm47Z2rDdJzcf/DJKB1fLexvuKgU4xADr+ontScXYpN9rcB8aX/JY87cU8q7lf0Ti3wXuqdJ2tvTZsTEnz6R5nypsly7aP8sA5hnP5fq0nNP4Q9K/jxtf7Yp+G5+p7/Y4/QawuDz2PaOo7jb/Fsfw5VIvfbzlGDTPPoVqpGzqMZ7PHEM7RyUustH3Y8yv47hFzfa5w/o4L6V9mHoLPtxLh7vY3HNv0GRgvg==
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">
@@ -20,12 +20,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzT5mFg0AFieoE2bgh9EmjnKR7sckMFLCbDvYPNj5+0EWxjHQYGE52Bc8tgA8SGRxad7BkJYDCHBaXxPNjATWDev6WNW55W/v0KtPMbHnsHAuQAcS4Sn15xzcXIwMDNiGknre0HABP1EEs=
+   eJzT5mFg0AFieoE2bgh9EmjnKR7scsiAkZn2biIEhLUZGES0oRwk9yzG4l5CAJsfBxJ80kawjXUYGEx0yDPnHxN13IMMKHEPPe3PIsFMbOE00P6kFrDWYmCw0aLMjEETFljKHVLimVLARIdy7yYw79/Sxi1PK/9+Bdr5DY+9AwFygDgXiU/LuP6PVAZwMTIwcDNi2knrtAYAUVAVYg==
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBj8IAuH+EEgPgRlZwNxDhrOpYM7ljMyMKwAYh4g5oJibkbSzb6mjWCL6zAwSOhgqjmEKcTASaG9+MBxPHIwf4PwSirbiw5whQc97TlKppnHoLQWmfoHCiCHRRYD7jxICOhxUstF9APk+nUg7D5GWAlOcBNY5tzSRhUbSL9TC5wYaAfgAYMlfAGGKxXV
+   eJxjYBj8IAtKf9ViYPimhRA/CMSHoOxsIM5Bw7lUsl9Qm4FBSBvhDmSwnJGBYQUQ8wAxFxRzM5JuxzVtBFtch4FBQgdTzSFMIQZOCu3FB47jcQ/M3yC8ksr2ogNc4UFPe46SaeYxKA1KttjSDy2APNAyBS3C6vAB5LDIYiDf7XqclLljIAC94okadsPSFyn6YGpvAsucW9rY5YYKwObeE3R3BfFgsIQvALDsG08=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -35,7 +35,6 @@
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
     <property name="rareShopList" value="Simic,Golgari,Gruul,Selesnya,Creature6Green,Multicolor,Land4Green"/>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
   </object>
@@ -44,7 +43,6 @@
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
     <property name="rareShopList" value="Simic,Golgari,Gruul,Selesnya,Creature6Green,Multicolor,Land4Green"/>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
   </object>
@@ -53,7 +51,6 @@
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
     <property name="rareShopList" value="Simic,Golgari,Gruul,Selesnya,Creature6Green,Multicolor,Land4Green"/>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
   </object>
@@ -62,7 +59,6 @@
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
     <property name="rareShopList" value="Simic,Golgari,Gruul,Selesnya,Creature6Green,Multicolor,Land4Green"/>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
   </object>
@@ -71,7 +67,6 @@
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
     <property name="rareShopList" value="Simic,Golgari,Gruul,Selesnya,Creature6Green,Multicolor,Land4Green"/>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
   </object>
@@ -80,14 +75,35 @@
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
     <property name="rareShopList" value="Simic,Golgari,Gruul,Selesnya,Creature6Green,Multicolor,Land4Green"/>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
   </object>
   <object id="47" template="../obj/inn.tx" x="137" y="162"/>
   <object id="48" template="../obj/shop.tx" x="304" y="48">
    <properties>
-    <property name="shopList" value="Forest"/>
+    <property name="commonShopList" value="Forest"/>
+   </properties>
+  </object>
+  <object id="51" template="../obj/quest.tx" x="98" y="162">
+   <properties>
+    <property name="questtype" value="forest_town_tribal"/>
+   </properties>
+  </object>
+  <object id="52" template="../obj/shardtrader.tx" x="98" y="98"/>
+  <object id="53" template="../obj/shop.tx" x="272" y="98">
+   <properties>
+    <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
+    <property name="rareShopList" value="Simic,Golgari,Gruul,Selesnya,Creature6Green,Multicolor,Land4Green"/>
+    <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
+   </properties>
+  </object>
+  <object id="54" template="../obj/shop.tx" x="208" y="50">
+   <properties>
+    <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
+    <property name="rareShopList" value="Simic,Golgari,Gruul,Selesnya,Creature6Green,Multicolor,Land4Green"/>
+    <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
   </object>
  </objectgroup>

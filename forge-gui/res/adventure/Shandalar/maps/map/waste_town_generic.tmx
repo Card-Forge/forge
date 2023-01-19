@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="61">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="64">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -20,12 +20,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4B2YAcLA4M0jfEuFkx7Q1lJd+sUDtLUY7ODHHtJBdS211iHgcFEB5MNA7BwIcdeUsMUGxiK4TyZAn8TYy+2eMIGcMUtNv1DMZxB4D07Kk0IaDBit+MrCfZSkq5J8e9hoFvdNRkYPIBYjxNTfiTELyX2oudDmL3ExB+5eZhY/xJjPiytkmvvF1by6lBS6u1vSPai+4lQOKO7mZx0QU48UcNecgAp9lKj7iTHXmoCcu2l1O9Dzb+DxV4AiyIukg==
+   eJxjYBgFo4B2YAcLA4M0jfEuFkx7Q1lJd+sUDtLUY7ODHHtJBdS211iHgcFEB5NtpA2hYeFCjr2khik2QK9wNoT610SbcnsnU+BvYuxFjicQsNZiYLDRwtSHK25R2FTwLyWAUnvfs6PShIAGI3Y7vpJgLyXpmhT/Hga61V2TgcEDiPU4MeWJiV9y7KUG2ME2MPYi24GeD2H2EhN/hPKwjjZue4kRI6aMgKVVYgA2O76wkleHklJvf0OyF91PhMIZ3c3kpAtyylpq2EsOIMVeatSd5NhLTUCuvZT6faj5d7DYCwAfmzHo
   </data>
  </layer>
  <layer id="5" name="Overlay" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt0bENwCAQBMHtAlpA//33AtU4cIgtET7STnTBZQuSKmgJPfetuk47/bW1c20zYMW7Y0CO7599JUk3ewCmfgdy
+   eJzt0bERgCAUBNHtQjNI4f/+e4FqDMzUMYaZfdEFly1IWsGRcOZ7a13PTqVD7f8/O+9jBMy4dzTI9v2zryRpZxerjQgF
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -35,7 +35,6 @@
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
-    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
    </properties>
   </object>
@@ -44,7 +43,6 @@
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
-    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
    </properties>
   </object>
@@ -53,7 +51,6 @@
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
-    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
    </properties>
   </object>
@@ -62,7 +59,6 @@
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
-    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
    </properties>
   </object>
@@ -71,7 +67,6 @@
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
-    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
    </properties>
   </object>
@@ -80,7 +75,6 @@
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
-    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
    </properties>
   </object>
@@ -89,7 +83,6 @@
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
-    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
    </properties>
   </object>
@@ -98,14 +91,13 @@
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
-    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
    </properties>
   </object>
   <object id="47" template="../obj/inn.tx" x="150" y="273"/>
   <object id="48" template="../obj/shop.tx" x="104" y="272">
    <properties>
-    <property name="shopList" value="Equipment"/>
+    <property name="commonShopList" value="Equipment"/>
    </properties>
   </object>
   <object id="58" template="../obj/shop.tx" x="97" y="209">
@@ -113,8 +105,13 @@
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
-    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
+   </properties>
+  </object>
+  <object id="62" template="../obj/shardtrader.tx" x="400" y="288"/>
+  <object id="63" template="../obj/quest.tx" x="168" y="209">
+   <properties>
+    <property name="questtype" value="waste_town_generic"/>
    </properties>
   </object>
  </objectgroup>

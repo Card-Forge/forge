@@ -189,7 +189,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         AUTO_UPDATE("none"),
         USE_SENTRY("false"), // this controls whether automated bug reporting is done or not
 
-        EXPANDEDADVENTURESHOPS("false"),
         MATCH_HOT_SEAT_MODE("false"), //this only applies to mobile game
         MATCHPREF_PROMPT_FREE_BLOCKS("false"),
 

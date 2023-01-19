@@ -1,18 +1,18 @@
 {
-  "width": 480,
-  "height": 270,
+  "width": 270,
+  "height": 480,
   "yDown": true,
   "elements": [
     {
       "type": "Image",
-      "image": "ui/tavern.png",
-      "width": 480,
-      "height": 270
-    },
+      "image": "ui/market_portrait.png",
+      "width": 270,
+      "height": 480
+    },      
     {
       "type": "Image",
-      "name": "healIcon",
-      "image": "ui/heal.png",
+      "name": "shardIcon",
+      "image": "ui/buyshards.png",
       "x": 60,
       "y": 85,
       "width": 100,
@@ -20,49 +20,39 @@
     },
     {
       "type": "TextButton",
-      "name": "tempHitPointCost",
-      "text": "Cost",
-      "binding": "Status",
+      "name": "btnBuyShardsCost",
+      "text": "btnBuyShardsCost",
+	  "binding": "Status",
       "width": 100,
       "height": 30,
-      "x": 60,
-      "y": 200
-    },
-    {
-      "type": "Label",
-      "name": "tempHitPoints",
-      "text": "tr(lblTempHitPoints)",
-      "font": "default",
-      "width": 100,
-      "height": 30,
-      "x": 60,
-      "y": 170
+      "x": 165,
+      "y": 105
     },
     {
       "type": "Image",
       "name": "sellIcon",
       "image": "ui/sell.png",
-      "x": 190,
-      "y": 85,
+      "x": 60,
+      "y": 200,
       "width": 100,
       "height": 100
     },
     {
       "type": "TextButton",
-      "name": "sell",
-      "text": "tr(lblSell)",
-      "binding": "Equip",
+      "name": "btnSellShardsQuantity",
+      "text": "btnSellShardsQuantity",
+	  "binding": "Equip",
       "width": 100,
       "height": 30,
-      "x": 190,
-      "y": 200
+      "x": 165,
+      "y": 220
     },
     {
       "type": "Image",
       "name": "leaveIcon",
       "image": "ui/leave.png",
-      "x": 320,
-      "y": 85,
+      "x": 60,
+      "y": 315,
       "width": 100,
       "height": 100
     },
@@ -73,28 +63,28 @@
       "binding": "Back",
       "width": 100,
       "height": 30,
-      "x": 320,
-      "y": 200
+      "x": 165,
+      "y": 335
     },
 	{
       "type": "Label",
       "name": "playerGold",
 	  "style":"background",
       "text": "[+Gold]",
-      "width": 48,
-      "height": 30,
-      "x": 420,
-      "y": 200
+      "width": 128,
+      "height": 32,
+      "x": 16,
+      "y": 405
     },
 	{
       "type": "Label",
       "name": "playerShards",
 	  "style":"background",
       "text": "[+Shards]",
-      "width": 48,
-      "height": 30,
-      "x": 420,
-      "y": 240
+      "width": 128,
+      "height": 32,
+      "x": 16,
+      "y": 435
     }
   ]
 }

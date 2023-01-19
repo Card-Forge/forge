@@ -45,7 +45,7 @@ public class GameHUD extends Stage {
     private final Image miniMapPlayer;
     private final TextraLabel lifePoints;
     private final TextraLabel money;
-    private final TextraLabel mana;
+    private final TextraLabel shards;
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
     private final InputEvent eventTouchDown;
     private final InputEvent eventTouchUp;
@@ -120,12 +120,12 @@ public class GameHUD extends Stage {
         ui.onButtonPress("deck", () -> openDeck());
         ui.onButtonPress("exittoworldmap", () -> exitToWorldMap());
         lifePoints = ui.findActor("lifePoints");
-        mana = ui.findActor("mana");
+        shards = ui.findActor("shards");
         money = ui.findActor("money");
-        mana.setText("{Scale=80%}0/0");
+        shards.setText("{Scale=80%}0/0");
         lifePoints.setText("{Scale=80%}20/20");
         AdventurePlayer.current().onLifeChange(() -> lifePoints.setText("{Scale=80%}"+AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
-        AdventurePlayer.current().onManaChange(() -> mana.setText("{Scale=80%}"+AdventurePlayer.current().getMana() + "/" + AdventurePlayer.current().getMaxMana()));
+        AdventurePlayer.current().onShardsChange(() -> shards.setText("{Scale=80%}"+AdventurePlayer.current().getShards()));
 
         WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("{Scale=80%}"+String.valueOf(AdventurePlayer.current().getGold())));
         addActor(ui);
@@ -349,7 +349,7 @@ public class GameHUD extends Stage {
         setVisibility(miniMapPlayer, visible);
         setVisibility(gamehud, visible);
         setVisibility(lifePoints, visible);
-        setVisibility(mana, visible);
+        setVisibility(shards, visible);
         setVisibility(money, visible);
         setVisibility(blank, visible);
         setVisibility(exitToWorldMapActor, GameScene.instance().isInDungeonOrCave());

@@ -159,7 +159,7 @@ public class InventoryScene  extends UIScene {
 
         ItemData data = ItemData.getItem(itemLocation.get(selected));
         if(data==null)return;
-        Current.player().addMana(-data.manaNeeded);
+        Current.player().addShards(-data.shardsNeeded);
         done();
         ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
     }
@@ -192,12 +192,12 @@ public class InventoryScene  extends UIScene {
 
         boolean isInPoi = MapStage.getInstance().isInMap();
         useButton.setDisabled(!(isInPoi&&data.usableInPoi||!isInPoi&&data.usableOnWorldMap));
-        if(data.manaNeeded==0)
+        if(data.shardsNeeded==0)
             useButton.setText("Use");
         else
-            useButton.setText("Use "+data.manaNeeded+"[+Mana]");
+            useButton.setText("Use "+data.shardsNeeded+"[+Shards]");
         useButton.layout();
-        if(Current.player().getMana()<data.manaNeeded)
+        if(Current.player().getShards()<data.shardsNeeded)
             useButton.setDisabled(true);
 
         if(data.equipmentSlot==null|| data.equipmentSlot.equals(""))

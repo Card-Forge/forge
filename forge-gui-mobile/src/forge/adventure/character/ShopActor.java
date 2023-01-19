@@ -7,6 +7,8 @@ import forge.adventure.scene.RewardScene;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Reward;
 
+import java.util.Random;
+
 /**
  * Map actor that will open the Shop on collision
  */
@@ -15,15 +17,19 @@ public class ShopActor extends MapActor{
     private ShopData shopData;
     Array<Reward> rewardData;
 
+    float shopPriceModifier = 1.0f;
+    float townPriceModifier = 1.0f;
     public ShopActor(MapStage stage, int id, Array<Reward> rewardData, ShopData data)
     {
         super(id);
         this.stage = stage;
         this.shopData = data;
         this.rewardData = rewardData;
-
+        this.shopPriceModifier = stage.getChanges().getShopPriceModifier(id) ;
+        this.townPriceModifier = stage.getChanges().getTownPriceModifier();
     }
 
+    public float getPriceModifier() { return (shopPriceModifier > 0? shopPriceModifier:1.0f) * (townPriceModifier> 0? townPriceModifier:1.0f); }
     public MapStage getMapStage()
     {
         return stage;
@@ -51,4 +57,17 @@ public class ShopActor extends MapActor{
     public String getDescription() {
         return shopData.description;
     }
+
+    public int getRestockPrice() {
+        return shopData.restockPrice;
+    }
+
+    public boolean canRestock() {
+        return getRestockPrice() > 0;
+    }
+
+    public ShopData getShopData() { return shopData; }
+
+    public void setRewardData(Array<Reward> data) { rewardData = data; }
+    public Array<Reward> getRewardData() { return rewardData;}
 }

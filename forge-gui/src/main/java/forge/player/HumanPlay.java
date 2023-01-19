@@ -516,6 +516,17 @@ public class HumanPlay {
                 p.payEnergy(amount, source);
             }
 
+            else if (part instanceof CostPayShards) {
+                CounterType counterType = CounterType.get(CounterEnumType.MANASHARDS);
+                int amount = getAmountFromPartX(part, source, sourceAbility);
+
+                if (!mandatory && !p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantSpendNTargetTypeCounter", String.valueOf(amount), counterType.getName()), sourceAbility)) {
+                    return false;
+                }
+
+                p.payShards(amount, source);
+            }
+
             else {
                 throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - An unhandled type of cost was met: " + part.getClass());
             }

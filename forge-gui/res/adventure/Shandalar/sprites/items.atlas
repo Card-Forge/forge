@@ -26,7 +26,10 @@ CardBack
   size: 48, 64
 Gold 
   xy: 48, 0
-  size: 16, 16              
+  size: 16, 16    
+Shards
+  xy: 32, 768
+  size: 16, 16    
 Life 
   xy: 48, 16
   size: 16, 16            

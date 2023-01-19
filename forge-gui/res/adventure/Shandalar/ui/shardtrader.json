@@ -5,14 +5,14 @@
   "elements": [
     {
       "type": "Image",
-      "image": "ui/tavern.png",
+      "image": "ui/market.png",
       "width": 480,
       "height": 270
     },
     {
       "type": "Image",
-      "name": "healIcon",
-      "image": "ui/heal.png",
+      "name": "shardIcon",
+      "image": "ui/buyshards.png",
       "x": 60,
       "y": 85,
       "width": 100,
@@ -20,23 +20,13 @@
     },
     {
       "type": "TextButton",
-      "name": "tempHitPointCost",
-      "text": "Cost",
-      "binding": "Status",
+      "name": "btnBuyShardsCost",
+      "text": "btnBuyShardsCost",
+	  "binding": "Status",
       "width": 100,
       "height": 30,
       "x": 60,
       "y": 200
-    },
-    {
-      "type": "Label",
-      "name": "tempHitPoints",
-      "text": "tr(lblTempHitPoints)",
-      "font": "default",
-      "width": 100,
-      "height": 30,
-      "x": 60,
-      "y": 170
     },
     {
       "type": "Image",
@@ -49,9 +39,9 @@
     },
     {
       "type": "TextButton",
-      "name": "sell",
-      "text": "tr(lblSell)",
-      "binding": "Equip",
+      "name": "btnSellShardsQuantity",
+      "text": "btnSellShardsQuantity",
+	  "binding": "Equip",
       "width": 100,
       "height": 30,
       "x": 190,
@@ -75,6 +65,16 @@
       "height": 30,
       "x": 320,
       "y": 200
+    },
+    {
+      "type": "Label",
+      "name": "shopName",
+      "style":"background",
+      "text": "Shard Trader",
+      "width": 48,
+      "height": 20,
+      "x": 200,
+      "y": 0
     },
 	{
       "type": "Label",

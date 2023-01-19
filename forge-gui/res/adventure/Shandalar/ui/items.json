@@ -46,13 +46,32 @@
     }  ,
     {
       "type": "Label",
-      "name": "gold",
+      "name": "playerGold",
 	  "style":"background",
       "text": "[+Gold]",
       "width": 48,
       "height": 30,
       "x": 420,
+      "y": 200
+    },
+	{
+      "type": "TextButton",
+      "name": "restock",
+      "text": "Restock",
+      "width": 48,
+      "height": 30,
+      "x": 420,
       "y": 160
+    },
+	{
+      "type": "Label",
+      "name": "playerShards",
+	  "style":"background",
+      "text": "[+Shards]",
+      "width": 48,
+      "height": 30,
+      "x": 420,
+      "y": 240
     },
     {
       "type": "Label",

@@ -1,5 +1,6 @@
 package forge.adventure.pointofintrest;
 
+import forge.adventure.util.Current;
 import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.SaveFileData;
 
@@ -14,6 +15,8 @@ public class PointOfInterestChanges implements SaveFileContent  {
     private final HashSet<Integer> deletedObjects=new HashSet<>();
     private final HashMap<Integer, HashSet<Integer>> cardsBought = new HashMap<>();
     private final java.util.Map<String, Byte> mapFlags = new HashMap<>();
+    private final java.util.Map<Integer, Long> shopSeeds = new HashMap<>();
+    private final java.util.Map<Integer, Float> shopModifiers = new HashMap<>();
 
     public static class Map extends HashMap<String,PointOfInterestChanges> implements SaveFileContent {
         @Override
@@ -52,8 +55,12 @@ public class PointOfInterestChanges implements SaveFileContent  {
         deletedObjects.addAll((HashSet<Integer>) data.readObject("deletedObjects"));
         cardsBought.clear();
         cardsBought.putAll((HashMap<Integer, HashSet<Integer>>) data.readObject("cardsBought"));
+        shopSeeds.clear();
+        shopSeeds.putAll((java.util.Map<Integer, Long>) data.readObject("shopSeeds"));
         mapFlags.clear();
         mapFlags.putAll((java.util.Map<String, Byte>) data.readObject("mapFlags"));
+        shopModifiers.clear();
+        shopModifiers.putAll((java.util.Map<Integer, Float>) data.readObject("shopModifiers"));
     }
 
     @Override
@@ -62,6 +69,8 @@ public class PointOfInterestChanges implements SaveFileContent  {
         data.storeObject("deletedObjects",deletedObjects);
         data.storeObject("cardsBought",cardsBought);
         data.storeObject("mapFlags", mapFlags);
+        data.storeObject("shopSeeds", shopSeeds);
+        data.storeObject("shopModifiers", shopModifiers);
         return data;
     }
 
@@ -83,6 +92,43 @@ public class PointOfInterestChanges implements SaveFileContent  {
             return false;
         }
         return cardsBought.get(objectID).contains(cardIndex);
+    }
+
+    public long getShopSeed(int objectID){
+        if (!shopSeeds.containsKey(objectID))
+        {
+            generateNewShopSeed(objectID);
+        }
+        return shopSeeds.get(objectID);
+    }
+
+    public void generateNewShopSeed(int objectID){
+        shopSeeds.put(objectID, Current.world().getRandom().nextLong());
+        cardsBought.put(objectID, new HashSet<>()); //Allows cards to appear in slots of previous purchases
+    }
+
+    public float getShopPriceModifier(int objectID){
+        if (!shopModifiers.containsKey(objectID))
+        {
+            return -1.0f;
+        }
+        return shopModifiers.get(objectID);
+    }
+
+    public void setShopModifier(int objectID, float mod){
+        if (objectID!= 0) shopModifiers.put(objectID, mod);
+    }
+
+    public float getTownPriceModifier(){
+        if (!shopModifiers.containsKey(0))
+        {
+            return -1.0f;
+        }
+        return shopModifiers.get(0);
+    }
+
+    public void setTownModifier(float mod){
+        shopModifiers.put(0, mod);
     }
 
 }

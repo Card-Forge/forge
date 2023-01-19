@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="50">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="56">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -12,7 +12,7 @@
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFowA/KOWljz2T2BgYJkOxETtCXB8HmxxQRsAvZ9kJs2kBzrEj/J7LgWDncUDkCbmbXEArf2FLM/o4whMmjk5TCxCKU3SaWiAHKR7PY4lfGA2LY1oAWqdbZFDCi6DpaS8yGLWXOAAAywwdJA==
+   eJxjYBgFQwHosw+MvWeB9pby0s78SWwMDJOx4AtI/tXHwSYHlBHwy1l2wmxagHPsCL/nciDYeRwQeULuJhfQyl/Y0ow+jvCEiaPTlAJYmF4gEKfoNKX2Z0PjLAcpHs9jiV90GhbX1AS0TrfIoIQXQdPTXmQwai9xAADlPiO/
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">
@@ -20,12 +20,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKAfKORgYCgC4mIOOloKBPycDAwCQCzISV97KQWdWgwMXVr0t3cp0M5lQKw3SMLLWIeBwUQHk00pyOUiT24UkAdwxR1MHJ2mFaB13C7jpq35o4D64Ao7A8NVdvrbOxD1IQgAAJpJDjM=
+   eJxjYKAfKORgYCgC4mIOOloKBPycDAwCQCzISV97KQWdWgwMXVoQtrEOA4OJDu3s2qjOwLBJHcJeCrRzGRDrDZLwQvY7NcMhl4s8uZEInmiQp88amI5s0NLwWTSzYOLoNLXBS6i9hOJ2GTdl9lCqfxTQH1xhZ2C4yk5/eweiPgQBAMi+FTE=
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFgxV0ajEwdGkNtCsQQFyHgUFCB5M9CoYWwBV3MHF0ehSMglEwvAAARWUEkg==
+   eJxjYBgFpABxHQYGCR3amT9VnYFhmjqE3anFwNClRTu7SAXIfqd1OIwC7OCEBnn65IHpSAGalnDFHUwcnR4Fo2AUDC8AAJuECBU=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -35,7 +35,6 @@
     <property name="commonShopList" value="Blue,Blue,Enchantment4Blue,Creature2Blue,Instant4Blue"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue"/>
     <property name="rareShopList" value="RWU,RGU,UWG,RUB,UWB,UGB,Land4Blue,Creature6Blue"/>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
     <property name="uncommonShopList" value="Azorius,Izzet,Simic,Dimir,Azorius,Izzet,Simic,Dimir,Land"/>
    </properties>
   </object>
@@ -44,7 +43,6 @@
     <property name="commonShopList" value="Blue,Blue,Enchantment4Blue,Creature2Blue,Instant4Blue"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue"/>
     <property name="rareShopList" value="RWU,RGU,UWG,RUB,UWB,UGB,Land4Blue,Creature6Blue"/>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
     <property name="uncommonShopList" value="Azorius,Izzet,Simic,Dimir,Azorius,Izzet,Simic,Dimir,Land"/>
    </properties>
   </object>
@@ -53,7 +51,6 @@
     <property name="commonShopList" value="Blue,Blue,Enchantment4Blue,Creature2Blue,Instant4Blue"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue"/>
     <property name="rareShopList" value="RWU,RGU,UWG,RUB,UWB,UGB,Land4Blue,Creature6Blue"/>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
     <property name="uncommonShopList" value="Azorius,Izzet,Simic,Dimir,Azorius,Izzet,Simic,Dimir,Land"/>
    </properties>
   </object>
@@ -62,7 +59,6 @@
     <property name="commonShopList" value="Blue,Blue,Enchantment4Blue,Creature2Blue,Instant4Blue"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue"/>
     <property name="rareShopList" value="RWU,RGU,UWG,RUB,UWB,UGB,Land4Blue,Creature6Blue"/>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
     <property name="uncommonShopList" value="Azorius,Izzet,Simic,Dimir,Azorius,Izzet,Simic,Dimir,Land"/>
    </properties>
   </object>
@@ -71,7 +67,6 @@
     <property name="commonShopList" value="Blue,Blue,Enchantment4Blue,Creature2Blue,Instant4Blue"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue"/>
     <property name="rareShopList" value="RWU,RGU,UWG,RUB,UWB,UGB,Land4Blue,Creature6Blue"/>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
     <property name="uncommonShopList" value="Azorius,Izzet,Simic,Dimir,Azorius,Izzet,Simic,Dimir,Land"/>
    </properties>
   </object>
@@ -80,14 +75,35 @@
     <property name="commonShopList" value="Blue,Blue,Enchantment4Blue,Creature2Blue,Instant4Blue"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue"/>
     <property name="rareShopList" value="RWU,RGU,UWG,RUB,UWB,UGB,Land4Blue,Creature6Blue"/>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
     <property name="uncommonShopList" value="Azorius,Izzet,Simic,Dimir,Azorius,Izzet,Simic,Dimir,Land"/>
    </properties>
   </object>
   <object id="47" template="../obj/inn.tx" x="215" y="82"/>
   <object id="48" template="../obj/shop.tx" x="176" y="192">
    <properties>
-    <property name="shopList" value="Island"/>
+    <property name="commonShopList" value="Island"/>
+   </properties>
+  </object>
+  <object id="52" template="../obj/quest.tx" x="176" y="162">
+   <properties>
+    <property name="questtype" value="island_town_identity"/>
+   </properties>
+  </object>
+  <object id="53" template="../obj/shardtrader.tx" x="398" y="178"/>
+  <object id="54" template="../obj/shop.tx" x="256" y="66">
+   <properties>
+    <property name="commonShopList" value="Blue,Blue,Enchantment4Blue,Creature2Blue,Instant4Blue"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue"/>
+    <property name="rareShopList" value="RWU,RGU,UWG,RUB,UWB,UGB,Land4Blue,Creature6Blue"/>
+    <property name="uncommonShopList" value="Azorius,Izzet,Simic,Dimir,Azorius,Izzet,Simic,Dimir,Land"/>
+   </properties>
+  </object>
+  <object id="55" template="../obj/shop.tx" x="168" y="82">
+   <properties>
+    <property name="commonShopList" value="Blue,Blue,Enchantment4Blue,Creature2Blue,Instant4Blue"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue"/>
+    <property name="rareShopList" value="RWU,RGU,UWG,RUB,UWB,UGB,Land4Blue,Creature6Blue"/>
+    <property name="uncommonShopList" value="Azorius,Izzet,Simic,Dimir,Azorius,Izzet,Simic,Dimir,Land"/>
    </properties>
   </object>
  </objectgroup>

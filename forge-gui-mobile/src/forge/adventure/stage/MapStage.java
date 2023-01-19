@@ -382,9 +382,9 @@ public class MapStage extends GameStage {
         if (difficultyData.spawnRank == 0 && !spawnEasy) return false;
         return true;
     }
-
     private void loadObjects(MapLayer layer, String sourceMap) {
         player.setMoveModifier(2);
+        Array<String> shopsAlreadyPresent = new Array<>();
         for (MapObject obj : layer.getObjects()) {
             MapProperties prop = obj.getProperties();
             String type = prop.get("type", String.class);
@@ -477,6 +477,21 @@ public class MapStage extends GameStage {
                     case "spellsmith":
                         addMapActor(obj, new OnCollide(() -> Forge.switchScene(SpellSmithScene.instance())));
                         break;
+                    case "shardtrader":
+                        MapActor shardTraderActor = new OnCollide(() -> Forge.switchScene(ShardTraderScene.instance()));
+                        addMapActor(obj, shardTraderActor);
+                        if (prop.containsKey("hasSign") && Boolean.parseBoolean(prop.get("hasSign").toString()) && prop.containsKey("signYOffset") && prop.containsKey("signXOffset")) {
+                            try {
+                                TextureSprite sprite = new TextureSprite(Config.instance().getAtlas(ShardTraderScene.spriteAtlas).createSprite(ShardTraderScene.sprite));
+                                sprite.setX(shardTraderActor.getX() + Float.parseFloat(prop.get("signXOffset").toString()));
+                                sprite.setY(shardTraderActor.getY() + Float.parseFloat(prop.get("signYOffset").toString()));
+                                addMapActor(sprite);
+
+                            } catch (Exception e) {
+                                System.err.print("Can not create Texture for Shard Trader");
+                            }
+                        }
+                        break;
                     case "arena":
                         addMapActor(obj, new OnCollide(() -> {
                             ArenaData arenaData = JSONStringLoader.parse(ArenaData.class, prop.get("arena").toString(), "");
@@ -498,40 +513,63 @@ public class MapStage extends GameStage {
                             addMapActor(obj, dialog);
                         }
                         break;
+                    case "quest":
+                        DialogActor dialog;
+                        if (prop.containsKey("questtype")){
+                            TiledMapTileMapObject tiledObj = (TiledMapTileMapObject) obj;
+
+                            String questOrigin = prop.containsKey("questtype") ? prop.get("questtype").toString() : "";
+
+                            String placeholderText = "[" +
+                                    "  {" +
+                                    "    \"name\":\"Quest Offer\"," +
+                                    "    \"text\":\"Please, help us!\\n((QUEST DESCRIPTION))\"," +
+                                    "    \"condition\":[]," +
+                                    "    \"options\":[" +
+                                    "        { \"name\":\"No, I'm not ready yet.\nMaybe next snapshot.\" }," +
+                                    "    ]" +
+                                    "  }" +
+                                    "]";
+
+                            {
+                                dialog = new DialogActor(this, id, placeholderText,tiledObj.getTextureRegion());
+                            }
+                            dialog.setVisible(false);
+                            addMapActor(obj, dialog);
+                        }
+                        break;
                     case "shop":
-                        String shopList = new String();
-                        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.EXPANDEDADVENTURESHOPS))
-                        {
-                            int rarity = WorldSave.getCurrentSave().getWorld().getRandom().nextInt(100);
+                        String shopList = "";
+                        int restockPrice = 0;
 
-                            if (rarity > 95 & prop.containsKey("mythicShopList")){
-                                shopList = prop.get("mythicShopList").toString();
-                            }
-
-                            if (shopList.isEmpty() && (rarity > 85 & prop.containsKey("rareShopList"))){
-                                shopList = prop.get("rareShopList").toString();
-                            }
-
-                            if (shopList.isEmpty() && (rarity > 55 & prop.containsKey("uncommonShopList"))){
-                                shopList = prop.get("uncommonShopList").toString();
-                            }
-
-                            if (shopList.isEmpty() & prop.containsKey("commonShopList")){
-                                shopList = prop.get("commonShopList").toString();
-                            }
+                        int rarity = WorldSave.getCurrentSave().getWorld().getRandom().nextInt(100);
+                        if (rarity > 95 & prop.containsKey("mythicShopList")) {
+                            shopList = prop.get("mythicShopList").toString();
+                            restockPrice = 5;
                         }
-
-                        if (shopList.trim().isEmpty()){
-                            shopList = prop.get("shopList").toString();
+                        if (shopList.isEmpty() && (rarity > 85 & prop.containsKey("rareShopList"))) {
+                            shopList = prop.get("rareShopList").toString();
+                            restockPrice = 4;
                         }
-
-                        //refactor to tag Universes Beyond shops in some way but still include in rarity list above.
-                        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.EXPANDEDADVENTURESHOPS) & prop.containsKey("universesBeyondShopList"))
-                        {
-                            shopList = String.join(",", shopList, prop.get("universesBeyondShopList").toString());
+                        if (shopList.isEmpty() && (rarity > 55 & prop.containsKey("uncommonShopList"))) {
+                            shopList = prop.get("uncommonShopList").toString();
+                            restockPrice = 3;
+                        }
+                        if (shopList.isEmpty() && prop.containsKey("commonShopList")) {
+                            shopList = prop.get("commonShopList").toString();
+                            restockPrice = 2;
+                        }
+                        if (shopList.trim().isEmpty() && prop.containsKey("shopList")) {
+                            shopList = prop.get("shopList").toString(); //removed but included to not break existing custom planes
+                            restockPrice = 0; //Tied to restock button
                         }
                         shopList = shopList.replaceAll("\\s", "");
                         Array<String> possibleShops = new Array<>(shopList.split(","));
+                        Array<String> filteredPossibleShops = possibleShops;
+                        filteredPossibleShops.removeAll(shopsAlreadyPresent, false);
+                        if (filteredPossibleShops.notEmpty()){
+                            possibleShops = filteredPossibleShops;
+                        }
                         Array<ShopData> shops;
                         if (possibleShops.size == 0 || shopList.equals(""))
                             shops = WorldData.getShopList();
@@ -539,6 +577,7 @@ public class MapStage extends GameStage {
                             shops = new Array<>();
                             for (ShopData data : new Array.ArrayIterator<>(WorldData.getShopList())) {
                                 if (possibleShops.contains(data.name, false)) {
+                                    data.restockPrice = restockPrice;
                                     shops.add(data);
                                 }
                             }
@@ -546,13 +585,15 @@ public class MapStage extends GameStage {
                         if (shops.size == 0) continue;
 
                         ShopData data = shops.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(shops.size));
+                        shopsAlreadyPresent.add(data.name);
                         Array<Reward> ret = new Array<>();
+                        WorldSave.getCurrentSave().getWorld().getRandom().setSeed(changes.getShopSeed(id));
                         for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
                             ret.addAll(rdata.generate(false));
                         }
                         ShopActor actor = new ShopActor(this, id, ret, data);
                         addMapActor(obj, actor);
-                        if (prop.containsKey("signYOffset") && prop.containsKey("signXOffset")) {
+                        if (prop.containsKey("hasSign") && (boolean)prop.get("hasSign") && prop.containsKey("signYOffset") && prop.containsKey("signXOffset")) {
                             try {
                                 TextureSprite sprite = new TextureSprite(Config.instance().getAtlas(data.spriteAtlas).createSprite(data.sprite));
                                 sprite.setX(actor.getX() + Float.parseFloat(prop.get("signXOffset").toString()));

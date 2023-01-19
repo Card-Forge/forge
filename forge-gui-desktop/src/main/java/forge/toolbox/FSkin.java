@@ -1466,6 +1466,7 @@ public class FSkin {
         addEncodingSymbol("TK", FSkinProp.IMG_TICKET);
         addEncodingSymbol("EXPERIENCE", FSkinProp.IMG_EXPERIENCE);
         addEncodingSymbol("A-", FSkinProp.IMG_ALCHEMY);
+        addEncodingSymbol("M", FSkinProp.ICO_MANASHARD);
 
         // Set look and feel after skin loaded
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Setting look and feel...");

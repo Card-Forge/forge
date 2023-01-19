@@ -22,6 +22,7 @@ import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.game.GameRules;
 import forge.game.GameType;
+import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
@@ -87,6 +88,13 @@ public class DuelScene extends ForgeScene {
         boolean winner = false;
         try {
             winner = humanPlayer == hostedMatch.getGame().getMatch().getWinner();
+
+            //Persists expended (or potentially gained) shards back to Adventure
+            //TODO: Progress towards applicable Adventure quests also needs to be reported here.
+            List<PlayerControllerHuman> humans = hostedMatch.getHumanControllers();
+            if (humans.size() == 1) {
+                Current.player().setShards(humans.get(0).getPlayer().getCounters(CounterEnumType.MANASHARDS));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -157,16 +165,19 @@ public class DuelScene extends ForgeScene {
         //Apply various combat effects.
         int lifeMod = 0;
         int changeStartCards = 0;
+        int extraManaShards = 0;
         Array<IPaperCard> startCards = new Array<>();
 
         for (EffectData data : effects) {
             lifeMod += data.lifeModifier;
             changeStartCards += data.changeStartCards;
             startCards.addAll(data.startBattleWithCards());
+            extraManaShards += data.extraManaShards;
         }
         player.addExtraCardsOnBattlefield(startCards);
         player.setStartingLife(Math.max(1, lifeMod + player.getStartingLife()));
         player.setStartingHand(player.getStartingHand() + changeStartCards);
+        player.setManaShards((player.getManaShards() + extraManaShards));
     }
 
     public void setDungeonEffect(EffectData E) {
@@ -197,6 +208,7 @@ public class DuelScene extends ForgeScene {
         humanPlayer.setPlayer(playerObject);
         humanPlayer.setTeamNumber(0);
         humanPlayer.setStartingLife(advPlayer.getLife());
+        humanPlayer.setManaShards((advPlayer.getShards()));
 
         Array<EffectData> playerEffects = new Array<>();
         Array<EffectData> oppEffects = new Array<>();

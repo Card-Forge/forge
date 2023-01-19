@@ -267,6 +267,9 @@ public enum FSkinProp {
     ICO_QUEST_BIG_SWORD   (new int[] {320, 1360, 160, 160}, PropType.ICON),
     ICO_QUEST_BIG_BAG     (new int[] {480, 1360, 160, 160}, PropType.ICON),
 
+    //adventure icons
+    ICO_MANASHARD         (new int[] {0,0, 100,100}, PropType.ICON),
+
     //menu icon
     ICO_MENU_GALAXY       (new int[] {0, 1520, 80, 80}, PropType.ICON),
     ICO_MENU_STATS        (new int[] {80, 1520, 80, 80}, PropType.ICON),
@@ -575,6 +578,7 @@ public enum FSkinProp {
         MANAICONS,
         PHYREXIAN,
         PLANAR_CONQUEST,
+        ADVENTURE,
         DECKBOX,
         SETLOGO,
         WATERMARKS,

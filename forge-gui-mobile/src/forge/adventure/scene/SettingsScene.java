@@ -113,7 +113,6 @@ public class SettingsScene extends UIScene {
         addLabel(Forge.getLocalizer().getMessage("lblCreate")+Forge.getLocalizer().getMessage("lblWorld"));
         settingGroup.add(newPlane).align(Align.right).pad(2);
 
-        addCheckBox(Forge.getLocalizer().getMessage("lblExpandedShops"), ForgePreferences.FPref.EXPANDEDADVENTURESHOPS);
         if (!GuiBase.isAndroid()) {
             SelectBox videomode = Controls.newComboBox(new String[]{"720p", "768p", "900p", "1080p"}, Config.instance().getSettingData().videomode, o -> {
                 String mode = (String) o;

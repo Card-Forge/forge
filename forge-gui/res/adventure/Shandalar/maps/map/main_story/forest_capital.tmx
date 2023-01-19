@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="78">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="6321" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJztzjENADAIADDeBWOzgn8DM0FgR4/+rRNRAAAAAACMubl/8PP7VdfvAWT0x+U=
@@ -17,7 +17,7 @@
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzNmF1OwkAQx/cdDETUBCIPWlrQRi+lR/DrAgo8GRMRjiGGCyCgRoJnchu7YRhnvwv0n0zS7m63v87uzG43KjIWc4u4NbnlQWHKE6cWcJtym+WEb8I5GiljwvbN7arE2HVO7Ka0ZBRjultmrJIT2ysv/ThDfAfchluyfcQHtUvUNSXzo11grAOsW1itfyjQz+lEMVB1uv4naTxNJXG1CT7xjt6hus+A4Hnk909p2Qt6/qLO2GV9taxlyceId6qEv2fO/blwyFU2fMkYQsYB8APlA/w9kBnqFFwL34p2NnxZCPI1DNqvg4/yJcVHCc9tGz48r11FMX5J2m5ifBdVxn6qbs/68o3dXqsUnB8ufIOMxtlEPv5rS9YyX8F57sMXgj1syMcjksSs0FmNsfOaHastH4z/SUZ7WFVu942PtmLPcsRj9tgxbk0YZHUwVwkfJvvacTH7uWjLR+XW++LfXIzX8D/lM754Lup82ORzrCWJob4kZ2W5fkBG37wjYsaVL9QwZjXWNnyyfUnAyxqgHPsR+lK2D5D17TO+qv0MjGuZL03WblO+D00/MlZd3HyC6y6xtkCGmQF7D+2/sU6IMtvc05esv2ItUPFR0v3P4XWQav9skF/Ed5ryBTtypkiNrOWS8UUE353jeU4i3zOm25Kez+c8J6szJmp8X8t2ZzkjcP1W/t/HyLK/IeoP+89VlZr63lUUH84521RW/rOROK+D696UaJfkvndHPpNcMrfvdmVvLtjiDfsPn2t2CCZsm5TIGRRHBHwG738BVormxQ==
+   eJzNmElOw0AQAOcEkRIUKywfSHAC5gY3+Ah3lnBn+wAETogHwBsA8QFIAgjEK3gBOxcQbcWjdIbu2eyEtNSSl/G43Nu0JywIEYGGoFXQYZDphCdKtAzaAm0PCV8TOCoJY8x2D7pZFGJrSHS72GWUPi0FQowPiU4EXTu2Fb4p0PN/0kmFD0uJuFdl4qORF+IA6WG+9/5+nn7OJBQDdc80fzPJpxaTV4Pgk+9YjfRzlgmeIzg/Tq6tKc/PzwmxMNd7rebIJ4h36kT9ngew56NHrXLhi32IGevIDpQN1O/BzFhm0bG0rRznwpeFYL6Kxfh+8FG2pPgoUWPbhU+Na1+hGO+YsYPw7wkk42nNPK4ffFd+r9UKjg8fvnpGfraRNPZrMGtZWsFxnoZP9oxxv/MOc34Y7PoNMfjjGIeufDj/mxn1sLranjY/cN+i+vkZmp0XruGxFB8+XKukDeO+9qqQfSy68lG1da/QicWoD/9TafyrxiJlw0VY/JeSBuATxn8xObTOXM9y/cCMOB6jUbvnscic8eWbNjBiX9dz0J+OdHQj58bpwsf1Ja/gmzfG12puc30AN3ca/+r6GZzXXN7YrN22fDeGeThWLm+k3KLj5Rk9Q9uCXeYs12cSr3CuPevM+ivXAh0fJab/OXUdpMavWNQX+Z22fOUxninUIxu5OL6Q4Nv13M+JJe0e007RzJdmPyerPSbKv2eB217OJTq+CP7Ocek437kyn2o/X3mq6c99heJTa85/Slb2cxHZvuJ1r0WMi2vftSefTS15cJ+2pzeXbNGA7afuax4QTKoOUmTNoDhCZDN8/gsMt+8u
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -30,20 +30,23 @@
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1DkKgDAQBdDfuAupp8h59FTqlfRytk4vBsHAyOQ/SJFUswYgInpnisAcraOwxRrkw1rmtQtwiHUU+XA+/qfTfvROe2I1b5XubO1obylt0BkbneyQxz/6KadG39qPuXqsFxGVaQnAqmcL1pHcnZK+E1G5Ls9cDMw=
+   eJzt1EsKgCAUBdC7g4Y1q1lirrHf5lpB/xaT0DCKIOuF3QOCjny+jwAR0TWhASIjHYUs5sAd5tKtSgG1ko7CHfbH94wZMGXSUTxDqt/aFOjS9++l98QaSPS2n+38LJ7MkI9/9NGbeluz4WbdfMwXEf1THgCFXWUgHcleo87PRPRfKyQjEbs=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
   <object id="56" template="../../obj/shop.tx" x="208" y="162">
    <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
   <object id="47" template="../../obj/inn.tx" x="199" y="419"/>
   <object id="53" template="../../obj/spellsmith.tx" x="327" y="228"/>
   <object id="55" template="../../obj/shop.tx" x="479" y="453">
    <properties>
-    <property name="shopList" value="Forest"/>
+    <property name="commonShopList" value="Forest"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
@@ -56,49 +59,72 @@
   <object id="60" template="../../obj/entry_right.tx" x="254" y="623" width="16" height="85"/>
   <object id="62" template="../../obj/shop.tx" x="361" y="370">
    <properties>
-    <property name="shopList" value="GreenEquipment"/>
+    <property name="commonShopList" value="GreenEquipment"/>
+    <property name="hasSign" type="bool" value="false"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
   <object id="63" template="../../obj/shop.tx" x="216" y="290">
    <properties>
-    <property name="shopList" value="GreenItems"/>
+    <property name="commonShopList" value="GreenItems"/>
+    <property name="hasSign" type="bool" value="false"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
   <object id="64" template="../../obj/shop.tx" x="466" y="417">
    <properties>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
-  <object id="65" template="../../obj/shop.tx" x="529" y="386">
+  <object id="65" template="../../obj/shop.tx" x="530" y="386">
    <properties>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
   <object id="66" template="../../obj/shop.tx" x="449" y="305">
    <properties>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
   <object id="67" template="../../obj/shop.tx" x="513" y="241">
    <properties>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
   <object id="68" template="../../obj/shop.tx" x="448" y="130">
    <properties>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
   <object id="69" template="../../obj/shop.tx" x="257" y="194">
    <properties>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
   <object id="70" template="../../obj/shop.tx" x="97" y="417">
    <properties>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
   <object id="71" template="../../obj/arena.tx" x="359" y="290">
@@ -161,6 +187,31 @@
 		]
 		] 
 }</property>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/quest.tx" class="quest" x="312" y="370">
+   <properties>
+    <property name="questtype" value="forest_capital"/>
+   </properties>
+  </object>
+  <object id="76" template="../../obj/shop.tx" x="96" y="209">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="signXOffset" type="float" value="-16"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
+   </properties>
+  </object>
+  <object id="77" template="../../obj/shop.tx" x="112" y="304">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="signXOffset" type="float" value="-16"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
  </objectgroup>

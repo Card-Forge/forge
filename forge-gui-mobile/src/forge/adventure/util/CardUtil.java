@@ -240,31 +240,30 @@ public class CardUtil {
         }
     }
 
+    public static List<PaperCard> getPredicateResult(Iterable<PaperCard> cards,final RewardData data)
+    {
+        List<PaperCard> result = new ArrayList<>();
+        CardPredicate pre = new CardPredicate(data, true);
+        for (final PaperCard item : cards)
+        {
+            if(pre.apply(item))
+                result.add(item);
+        }
+        return result;
+    }
+
     public static List<PaperCard> generateCards(Iterable<PaperCard> cards,final RewardData data, final int count)
     {
-
         final List<PaperCard> result = new ArrayList<>();
-
-
-        for (int i=0;i<count;i++) {
-
-            CardPredicate pre=new CardPredicate(data, true);
-            PaperCard card = null;
-            int lowest = Integer.MAX_VALUE;
-            for (final PaperCard item : cards)
-            {
-                if(!pre.apply(item))
-                    continue;
-                int next = WorldSave.getCurrentSave().getWorld().getRandom().nextInt();
-                if(next < lowest) {
-                    lowest = next;
-                    card = item;
+        List<PaperCard> pool = getPredicateResult(cards, data);
+        if (pool.size() > 0) {
+            for (int i = 0; i < count; i++) {
+                PaperCard candidate = pool.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(pool.size()));
+                if (candidate != null) {
+                    result.add(candidate);
                 }
             }
-            if (card != null )
-                result.add(card);
         }
-
         return result;
     }
     public static int getCardPrice(PaperCard card)
@@ -296,7 +295,7 @@ public class CardUtil {
             return reward.getItem().cost;
         if(reward.getType()== Reward.Type.Life)
             return reward.getCount()*500;
-        if(reward.getType()== Reward.Type.Mana)
+        if(reward.getType()== Reward.Type.Shards)
             return reward.getCount()*500;
         if(reward.getType()== Reward.Type.Gold)
             return reward.getCount();

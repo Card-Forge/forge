@@ -468,6 +468,7 @@ public class VPlayerPanel extends FContainer {
         private int energyCounters = player.getCounters(CounterEnumType.ENERGY);
         private int experienceCounters = player.getCounters(CounterEnumType.EXPERIENCE);
         private int ticketCounters = player.getCounters(CounterEnumType.TICKET);
+        private int manaShards = player.getCounters(CounterEnumType.MANASHARDS);
         private String lifeStr = String.valueOf(life);
 
         private LifeLabel() {
@@ -496,6 +497,7 @@ public class VPlayerPanel extends FContainer {
 
             energyCounters = player.getCounters(CounterEnumType.ENERGY);
             experienceCounters = player.getCounters(CounterEnumType.EXPERIENCE);
+            manaShards = player.getCounters(CounterEnumType.MANASHARDS);
 
             //when gui player loses life, vibrate device for a length of time based on amount of life lost
             if (vibrateDuration > 0 && MatchController.instance.isLocalPlayer(player) &&
@@ -516,7 +518,7 @@ public class VPlayerPanel extends FContainer {
             adjustHeight = 1;
             float divider = Gdx.app.getGraphics().getHeight() > 900 ? 1.2f : 2f;
             if(Forge.altPlayerLayout && !Forge.altZoneTabs && Forge.isLandscapeMode()) {
-                if (poisonCounters == 0 && energyCounters == 0 && experienceCounters == 0 && ticketCounters ==0) {
+                if (poisonCounters == 0 && energyCounters == 0 && experienceCounters == 0 && ticketCounters ==0 && manaShards == 0) {
                     g.fillRect(Color.DARK_GRAY, 0, 0, INFO2_FONT.getBounds(lifeStr).width+1, INFO2_FONT.getBounds(lifeStr).height+1);
                     g.drawText(lifeStr, INFO2_FONT, getInfoForeColor().getColor(), 0, 0, getWidth(), getHeight(), false, Align.left, false);
                 } else {
@@ -551,10 +553,16 @@ public class VPlayerPanel extends FContainer {
                         g.drawText(String.valueOf(ticketCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
                         mod+=1;
                     }
+                    if (manaShards > 0) {
+                        g.fillRect(Color.DARK_GRAY, 0, (halfHeight*mod)+2, INFO_FONT.getBounds(String.valueOf(manaShards)).width+halfHeight+1, INFO_FONT.getBounds(String.valueOf(manaShards)).height+1);
+                        g.drawImage(FSkinImage.AETHER_SHARD, 0, (halfHeight*mod)+2, halfHeight, halfHeight);
+                        g.drawText(String.valueOf(manaShards), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
+                        mod+=1;
+                    }
                     adjustHeight = (mod > 2) && (avatar.getHeight() < halfHeight*mod)? mod : 1;
                 }
             } else {
-                if (poisonCounters == 0 && energyCounters == 0) {
+                if (poisonCounters == 0 && energyCounters == 0 && manaShards == 0) {
                     g.drawText(lifeStr, Forge.altZoneTabs ? LIFE_FONT_ALT : LIFE_FONT, getInfoForeColor(), 0, 0, getWidth(), getHeight(), false, Align.center, true);
                 } else {
                     float halfHeight = getHeight() / 2;
@@ -565,9 +573,13 @@ public class VPlayerPanel extends FContainer {
                     if (poisonCounters > 0) { //prioritize showing poison counters over energy counters
                         g.drawImage(FSkinImage.POISON, 0, halfHeight, halfHeight, halfHeight);
                         g.drawText(String.valueOf(poisonCounters), INFO_FONT, getInfoForeColor(), textStart, halfHeight, textWidth, halfHeight, false, Align.center, true);
-                    } else {
+                    } else if (energyCounters > 0) { //prioritize showing energy counters over mana shards
                         g.drawImage(FSkinImage.ENERGY, 0, halfHeight, halfHeight, halfHeight);
                         g.drawText(String.valueOf(energyCounters), INFO_FONT, getInfoForeColor(), textStart, halfHeight, textWidth, halfHeight, false, Align.center, true);
+                    }
+                    else {
+                        g.drawImage(FSkinImage.MANASHARD, 0, halfHeight, halfHeight, halfHeight);
+                        g.drawText(String.valueOf(manaShards), INFO_FONT, getInfoForeColor(), textStart, halfHeight, textWidth, halfHeight, false, Align.center, true);
                     }
                 }
             }

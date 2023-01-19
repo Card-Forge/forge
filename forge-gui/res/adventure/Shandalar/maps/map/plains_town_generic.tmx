@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="58">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="60">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -20,12 +20,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4D2YAsLA4M4FfE2FuLsDWTFLl6gicp/rYFfnpB55KojFlBqr542gv1JG5UmxrwqXtxqKnkHn39Hur1fgXH7jYT4JVedsQ4Dg4kO6W6gRTjrcVLPvMEev8PB3iqkcuMTlvIJxoaVxSAanzpke8vxlFfEuo8UgGxeBRa7YWKk2CuII1/hshcf+MBKfJ1KTF39iYrhB/MDteMEBiqxxEefJmF7semjBkC2NwdHO4PW9o6CUYANAABgVy0t
+   eJxjYBgFo4D2YAsLA4M4FfE2FuLsDWTFLl6gSRxfXouBQUGLsHmE7F3CTZw+GLAG2mlDBXthQE8bwf6kjUoTY14VL241lbzEu49YQKl/R7q9X4Fx+42E+CVXnbEOA4OJDuluoEU463FSz7zBHr/Dwd4qpHIDVBbpI5VLhkCsqw1hw8piEA3i66Cpg7GR7S3HU14R6z5SALJ5FVjshomRYq8gjnyFy1584AMr8XUqMXX1JyqGH8wP1I4TGKjEEh99moTtxaaPGgDZ3hxN/GppZe8oGAXYAAB7/jCB
   </data>
  </layer>
  <layer id="5" name="Overlay" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBhYMIuXgWE2DfEcXuz2WvDR1l9WOMwftRc/OK9BX3tbeRgYdKHsU1A+PewFgWvaqDS97CUHDEV7NTUZGLQ0CYtRYq8OHjPMgWnZAogt8aRpXTQ+sfaiJxlxoEMkoI4JBtoXAsShUHtvAhXfQtNwikx7VXGUp6L4AgIJoOcvbPbu0h7c6Yoe9uKrF2F1GjFqSLUXuSzCxSZF3WAP51F7R+0dyvZeA4pfJxIjA2L13KCxv0bB4AIAgOhQFg==
+   eJxjYBhYMIuXgWE2DfEcXuz2WvDR1l9WOMwftXdw2dvKw8CgC2WfgvLpYS8IXNNGpellLzlgKNqrqcnAoKVJWIwSe3XwmGGuAVQPxJYauNXoovGJtRc9yYgDHSIBdUww0L4QIA6F2nsTqPgWmoZTZNqriqM8FcUXEEgAPX9hs3eX9uBOV/SwF1+9CKvTiFFDqr3IZREuNinqBns4j9o7au9QtvcaUPw6kRgZEKvnBo39NQoGFwAAZ+tPHw==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -35,7 +35,6 @@
     <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB"/>
     <property name="rareShopList" value="Land4White,Azorius,Boros,Selesnya,Orzhov,Vehicle,Colorless"/>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Azorius,White,Creature,Instant,Angel"/>
     <property name="uncommonShopList" value="Artifact,Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White,Wand,Equip,Multicolor"/>
    </properties>
   </object>
@@ -44,7 +43,6 @@
     <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB"/>
     <property name="rareShopList" value="Land4White,Azorius,Boros,Selesnya,Orzhov,Vehicle,Colorless"/>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Azorius,White,Creature,Instant,Angel"/>
     <property name="uncommonShopList" value="Artifact,Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White,Wand,Equip,Multicolor"/>
    </properties>
   </object>
@@ -53,7 +51,6 @@
     <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB"/>
     <property name="rareShopList" value="Land4White,Azorius,Boros,Selesnya,Orzhov,Vehicle,Colorless"/>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Azorius,White,Creature,Instant,Angel"/>
     <property name="uncommonShopList" value="Artifact,Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White,Wand,Equip,Multicolor"/>
    </properties>
   </object>
@@ -62,14 +59,13 @@
     <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB"/>
     <property name="rareShopList" value="Land4White,Azorius,Boros,Selesnya,Orzhov,Vehicle,Colorless"/>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Azorius,White,Creature,Instant,Angel"/>
     <property name="uncommonShopList" value="Artifact,Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White,Wand,Equip,Multicolor"/>
    </properties>
   </object>
   <object id="47" template="../obj/inn.tx" x="224" y="211"/>
   <object id="48" template="../obj/shop.tx" x="290" y="225">
    <properties>
-    <property name="shopList" value="Plains"/>
+    <property name="commonShopList" value="Plains"/>
     <property name="signXOffset" type="float" value="-32"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
@@ -79,7 +75,6 @@
     <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB"/>
     <property name="rareShopList" value="Land4White,Azorius,Boros,Selesnya,Orzhov,Vehicle,Colorless"/>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Azorius,White,Creature,Instant,Angel"/>
     <property name="uncommonShopList" value="Artifact,Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White,Wand,Equip,Multicolor"/>
    </properties>
   </object>
@@ -88,7 +83,6 @@
     <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB"/>
     <property name="rareShopList" value="Land4White,Azorius,Boros,Selesnya,Orzhov,Vehicle,Colorless"/>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Azorius,White,Creature,Instant,Angel"/>
     <property name="uncommonShopList" value="Artifact,Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White,Wand,Equip,Multicolor"/>
    </properties>
   </object>
@@ -97,7 +91,6 @@
     <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB"/>
     <property name="rareShopList" value="Land4White,Azorius,Boros,Selesnya,Orzhov,Vehicle,Colorless"/>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Azorius,White,Creature,Instant,Angel"/>
     <property name="uncommonShopList" value="Artifact,Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White,Wand,Equip,Multicolor"/>
    </properties>
   </object>
@@ -106,7 +99,6 @@
     <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB"/>
     <property name="rareShopList" value="Land4White,Azorius,Boros,Selesnya,Orzhov,Vehicle,Colorless"/>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Azorius,White,Creature,Instant,Angel"/>
     <property name="uncommonShopList" value="Artifact,Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White,Wand,Equip,Multicolor"/>
    </properties>
   </object>
@@ -123,9 +115,15 @@
   </object>
   <object id="55" template="../obj/shop.tx" x="160" y="151">
    <properties>
-    <property name="shopList" value="Plains"/>
+    <property name="commonShopList" value="Plains"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
+  <object id="58" template="../obj/quest.tx" x="328" y="130">
+   <properties>
+    <property name="questtype" value="plains_town_generic"/>
+   </properties>
+  </object>
+  <object id="59" template="../obj/shardtrader.tx" x="128" y="130"/>
  </objectgroup>
 </map>

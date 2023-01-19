@@ -577,3 +577,6 @@ red_castle
 final_castle 
   xy: 128, 864
   size: 64, 64       
+shard_trader  
+  xy: 288, 896
+  size: 16, 16
