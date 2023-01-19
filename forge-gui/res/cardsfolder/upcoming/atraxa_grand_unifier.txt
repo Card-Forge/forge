@@ -1,0 +1,14 @@
+Name:Atraxa, Grand Unifier
+ManaCost:3 G W U B
+Types:Legendary Creature Phyrexian Angel Horror
+PT:7/7
+K:Flying
+K:Vigilance
+K:Deathtouch
+K:Lifelink
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigReveal | TriggerDescription$ When Atraxa, Grand Unifier enters the battlefield, reveal the top ten cards of your library. For each card type, you may put a card of that type from among the revealed cards into your hand. Put the rest on the bottom of your library in a random order. (Artifact, battle, creature, enchantment, instant, land, planeswalker, and sorcery are card types.)
+SVar:TrigReveal:DB$ Dig | DigNum$ 10 | Reveal$ True | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | RememberRevealed$ True | SubAbility$ TrigRepeatTypes
+SVar:TrigRepeatTypes:DB$ RepeatEach | RepeatTypesFrom$ Remembered | RepeatSubAbility$ ChooseCard | SubAbility$ DBChangeZone
+SVar:ChooseCard:DB$ ChooseCard | ChoiceZone$ Graveyard | Choices$ Card.ChosenType+IsRemembered
+SVar:DBChangeZone:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Graveyard | ChangeType$ Card.Chosen
+Oracle:Flying, vigilance, deathtouch, lifelink\nWhen Atraxa, Grand Unifier enters the battlefield, reveal the top ten cards of your library. For each card type, you may put a card of that type from among the revealed cards into your hand. Put the rest on the bottom of your library in a random order. (Artifact, battle, creature, enchantment, instant, land, planeswalker, and sorcery are card types.)
