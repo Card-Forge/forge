@@ -8,7 +8,7 @@ SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target 
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Graveyard
 AlternateMode:DoubleFaced
-Oracle:Whenever Binding Geist attacks, target creature an opponent controls gets -2/-0 until your next turn.\nDisturb {U} (You may cast this card from your graveyard transformed for its disturb cost.)
+Oracle:Whenever Binding Geist attacks, target creature an opponent controls gets -2/-0 until your next turn.\nDisturb {U}
 
 ALTERNATE
 
