@@ -41,8 +41,6 @@ import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.gui.FThreads;
-import forge.localinstance.properties.ForgePreferences;
-import forge.model.FModel;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
