@@ -7,7 +7,6 @@ import forge.adventure.scene.RewardScene;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Reward;
 
-import java.util.Random;
 
 /**
  * Map actor that will open the Shop on collision
