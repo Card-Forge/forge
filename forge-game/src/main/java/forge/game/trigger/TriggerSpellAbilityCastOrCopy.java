@@ -86,10 +86,6 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             return false;
         }
 
-        if (!matchesValidParam("ValidControllingPlayer", cast.getController())) {
-            return false;
-        }
-
         if (hasParam("ValidActivatingPlayer")) {
             Player activator;
             if (spellAbility.isManaAbility()) {
