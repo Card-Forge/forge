@@ -2,7 +2,7 @@ Name:Kemba's Banner
 ManaCost:3 W
 Types:Artifact Equipment
 K:For Mirrodin
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ X | AddPower$ X | Description$ Equipped creature gets +0/+2 and has protection from Demons and from Devils.equipped creature gets +1/+1 for each creature you control.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ X | AddPower$ X | Description$ Equipped creature gets +1/+1 for each creature you control.
 K:Equip:2 W
 SVar:X:Count$Valid Creature.YouCtrl
 DeckHas:Ability$Token & Type$Rebel & Color$Red
