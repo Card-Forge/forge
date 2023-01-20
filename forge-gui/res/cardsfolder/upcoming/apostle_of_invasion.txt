@@ -1,0 +1,10 @@
+﻿Name:Apostle of Invasion
+ManaCost:4 W W
+Types:Creature Phyrexian Angel
+PT:4/4
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | CheckSVar$ X | SVarCompare$ GE3 | AddKeyword$ Double Strike | Description$ Corrupted – As long as an opponent has three or more poison counters, CARDNAME has double strike.
+SVar:X:PlayerCountOpponents$HighestPoisonCounters
+AI:RemoveDeck:Random
+DeckNeeds:Ability$Counters
+Oracle:Flying\nCorrupted – As long as an opponent has three or more poison counters, Apostle of Invasion has double strike.
