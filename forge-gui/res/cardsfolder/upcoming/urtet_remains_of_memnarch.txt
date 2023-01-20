@@ -2,7 +2,7 @@ Name:Urtet, Remains of Memnarch
 ManaCost:3
 Types:Legendary Artifact Creature Myr
 PT:2/2
-T:Mode$ SpellCast | ValidCard$ Myr | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a Myr spell, create a 1/1 colorless Myr artifact creature token. 
+T:Mode$ SpellCast | ValidCard$ Myr | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a Myr spell, create a 1/1 colorless Myr artifact creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_myr
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ UntapMyr | TriggerDescription$ At the beginning of combat on your turn, untap each Myr you control.
 SVar:UntapMyr:DB$ UntapAll | ValidCards$ Myr.YouCtrl
