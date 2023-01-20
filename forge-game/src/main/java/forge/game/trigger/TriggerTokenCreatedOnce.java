@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import java.util.Collections;
 import java.util.Map;
 
 import com.google.common.collect.Iterables;
@@ -59,7 +60,7 @@ public class TriggerTokenCreatedOnce extends Trigger {
         }
 
         if (hasParam("OnlyFirst")) {
-            if (!((PlayerCollection) runParams.get(AbilityKey.FirstTime)).contains(AbilityUtils.getDefinedPlayers(getHostCard(), getParam("OnlyFirst"), this))) {
+            if (Collections.disjoint(((PlayerCollection) runParams.get(AbilityKey.FirstTime)), AbilityUtils.getDefinedPlayers(getHostCard(), getParam("OnlyFirst"), this))) {
                 return false;
             }
         }

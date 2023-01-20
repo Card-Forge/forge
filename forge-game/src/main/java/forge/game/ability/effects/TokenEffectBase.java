@@ -21,7 +21,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactory;
 import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
@@ -30,11 +29,9 @@ import forge.game.card.TokenCreateTable;
 import forge.game.card.token.TokenInfo;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
-import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 public abstract class TokenEffectBase extends SpellAbilityEffect {
@@ -105,16 +102,10 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
             pumpKeywords.addAll(Arrays.asList(sa.getParam("PumpKeywords").split(" & ")));
         }
         List<Card> allTokens = Lists.newArrayList();
-        List<Card> allOriginalTokens = Lists.newArrayList();
-
-        PlayerCollection firstTime = new PlayerCollection();
-
-        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
-        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-        moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+        moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, game.copyLastStateGraveyard());
 
         for (final Table.Cell<Player, Card, Integer> c : tokenTable.cellSet()) {
             Card prototype = c.getColumnKey();
@@ -173,11 +164,8 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 }
                 triggerList.put(ZoneType.None, moved.getZone().getZoneType(), moved);
 
-                if (creator.getNumTokenCreatedThisTurn() == 0) {
-                    firstTime.add(creator);
-                }
+                triggerList.addToken(lki, creator.getNumTokenCreatedThisTurn() == 0);
                 creator.addTokensCreatedThisTurn(lki);
-                allOriginalTokens.add(lki);
 
                 if (clone) {
                     moved.setCloneOrigin(host);
@@ -221,11 +209,6 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 }
             }
         }
-
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Cards, allOriginalTokens);
-        runParams.put(AbilityKey.FirstTime, firstTime);
-        game.getTriggerHandler().runTrigger(TriggerType.TokenCreatedOnce, runParams, false);
 
         if (sa.hasParam("AtEOT")) {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), allTokens);

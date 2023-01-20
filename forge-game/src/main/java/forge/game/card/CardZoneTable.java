@@ -10,6 +10,7 @@ import com.google.common.collect.*;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -17,6 +18,9 @@ import forge.game.zone.ZoneType;
 public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardCollection> {
     // TODO use EnumBasedTable if exist
     private Table<ZoneType, ZoneType, CardCollection> dataMap = HashBasedTable.create();
+
+    private CardCollection createdTokens = new CardCollection();
+    private PlayerCollection firstTimeTokenCreators = new PlayerCollection();
 
     public CardZoneTable(Table<ZoneType, ZoneType, CardCollection> cardZoneTable) {
         this.putAll(cardZoneTable);
@@ -52,6 +56,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     }
 
     public void triggerChangesZoneAll(final Game game, final SpellAbility cause) {
+        triggerTokenCreatedOnce(game);
         if (!isEmpty()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cards, new CardZoneTable(this));
@@ -62,6 +67,15 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
         if (this != untilTable) {
             untilTable.triggerChangesZoneAll(game, null);
             untilTable.clear();
+        }
+    }
+
+    private void triggerTokenCreatedOnce(Game game) {
+        if (!createdTokens.isEmpty()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Cards, createdTokens);
+            runParams.put(AbilityKey.FirstTime, firstTimeTokenCreators);
+            game.getTriggerHandler().runTrigger(TriggerType.TokenCreatedOnce, runParams, false);
         }
     }
 
@@ -102,5 +116,12 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
 
     public Iterable<Card> allCards() {
         return Iterables.concat(values());
+    }
+
+    public void addToken(Card c, boolean firstTime) {
+        createdTokens.add(c);
+        if (firstTime) {
+            firstTimeTokenCreators.add(c.getOwner());
+        }
     }
 }
