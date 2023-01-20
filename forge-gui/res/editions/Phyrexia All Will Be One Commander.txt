@@ -15,7 +15,7 @@ ScryfallCode=ONC
 7 R Kemba's Banner @Wisnu Tan
 8 R Norn's Choirmaster @Jason A. Engle
 9 R Norn's Decree @Nestor Ossandon Leal
-10 R Staff of the SToryteller @Dan Scott
+10 R Staff of the Storyteller @Dan Scott
 11 R Geth's Summons @Johann Bodin
 12 R Phyresis Outbreak @Matthew G. Lewis
 13 R Goldwardens' Gambit @Manuel Castañón
@@ -28,3 +28,11 @@ ScryfallCode=ONC
 20 R Glistening Sphere @Tuan Duong Chu
 37 M Ixhel, Scion of Atraxa @Campbell White
 38 M Neyali, Suns' Vanguard @Bryan Sola
+43 R Clever Concealment @Alexey Kruglov
+44 R Glimmer Lens @Sidharth Chaturvedi
+49 R Geth's Summons @Johann Bodin
+51 R Goldwardens' Gambit @Manuel Castañón
+52 R Hexplate Wallbreaker @Aaron Miller
+55 R Contaminant Grafter @Lars Grant-West
+56 R Glissa's Retriever @Josu Hernaiz
+58 R Glistening Sphere @Tuan Duong Chu
