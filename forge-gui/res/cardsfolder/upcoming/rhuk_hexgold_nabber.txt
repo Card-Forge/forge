@@ -1,0 +1,11 @@
+Name:Rhuk, Hexgold Nabber
+ManaCost:2 R
+Types:Legendary Creature Goblin Rebel
+PT:2/2
+K:Trample
+K:Haste
+T:Mode$ Attacks | ValidCard$ Creature.equipped+Other | Execute$ TrigAttach | TriggerDescription$ Whenever an equipped creature you control other than CARDNAME attacks or dies, you may attach all Equipment attached to that creature to NICKNAME.
+T:Mode$ ChangesZone | ValidCard$ Creature.equipped+Other | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigAttach | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever an equipped creature you control other than CARDNAME attacks or dies, you may attach all Equipment attached to that creature to NICKNAME.
+SVar:TrigAttach:DB$ Attach | Object$ AttachedTo TriggeredCard.Equipment | Defined$ Self
+DeckNeeds:Type$Equipment
+Oracle:Trample, haste\nWhenever an equipped creature you control other than Rhuk, Hexgold Nabber attacks or dies, you may attach all Equipment attached to that creature to Rhuk.
