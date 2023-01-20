@@ -5,4 +5,4 @@ Types:Creature Phyrexian Wurm
 PT:*/*
 K:Trample
 K:Toxic:1
-Oracle:Trample, toxic:1.
+Oracle:Trample, toxic 1.
