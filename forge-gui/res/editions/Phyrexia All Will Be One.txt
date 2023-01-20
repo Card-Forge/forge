@@ -10,11 +10,14 @@ ScryfallCode=ONE
 3 U Apostle of Invasion @Marcela Bolívar
 10 M Elesh Norn, Mother of Machines @Martina Fackova
 11 R The Eternal Wanderer @Alix Branwyn
+15 C Incisor Glider @Joe Slucher
+17 U Infested Fleshcutter @José Parodi
 18 U Jawbone Duelist @Nino Vecia
 19 R Kemba, Kha Enduring @Zoltan Boros
 23 M Mondrak, Glory Dominus @Jason A. Engle
 24 R Norn's Wellspring @Jonas De Ro
 26 U Ossification @Nino Vecia
+28 C Planar Disruption @Campbell White
 31 U Resistance Reunited @Aurore Folny
 32 C Sinew Dancer @Campbell White
 33 R Skrelv, Defector Mite @Brian Valeza
@@ -31,23 +34,32 @@ ScryfallCode=ONE
 62 C Mesmerizing Dose @Konstantin Porubov
 63 R Mindsplice Apparatus @Ovidio Cartagena
 64 U Minor Misstep @Lorenzo Mastroianni
+69 U Tamiyo's Immobilizer @Daren Bader
 75 R Unctus, Grand Metatect @Andrew Mar
 81 C Anoint with Affliction @David Astruga
 82 R Archfiend of the Dross @Lie Setiawan
 83 U Bilious Skulldweller @Svetlin Velinov
 84 R Black Sun's Twilight @Jonas De Ro
+85 C Blightbelly Rat @Yeong-Hao Han
+86 C Bonepicker Skirge @Dave Kendall
 95 R Geth, Thane of Contracts @Martin de Diego Sádaba
 98 R Karumonix, the Rat King @Jason A. Engle
+99 U Necrogen Communion @Ernanda Souza
 101 U Nimraiser Paladin @José Parodi
 104 R Phyrexian Arena @Martina Fackova
 105 M Phyrexian Obliterator @Maxim Kostin
 108 U Sheoldred's Edict @Helge C. Balzer
 115 M Vraska, Betrayal's Sting @Chase Stone
+124 U Cacophony Scamp @Svetlin Velinov
 125 M Capricious Hellraiser @Durion
 126 R Dragonwing Glider @Andreas Zafiratos
+134 U Gleeful Demolition @Tuan Duong Chu
 137 C Hexgold Slash @Eli Minaya
 138 R Koth, Fire of Resistance @Eric Wilkerson
+143 U Oxidda Finisher @Vladimir Krisetskiy
 145 R Red Sun's Twilight @Julian Kok Joon Wen
+146 U Resistance Skywarden @Jarel Threat
+147 C Sawblade Scamp @Helge C. Balzer
 149 R Slobad, Iron Goblin @Chris Seaman
 153 R Urabrask's Forge @Lie Setiawan
 154 R Vindictive Flamestoker @Xavier Ribeiro
@@ -57,12 +69,15 @@ ScryfallCode=ONE
 162 C Carnivorous Canopy @John Di Giovanni
 163 R Conduit of Worlds @Jokubas Uogintas
 166 R Evolved Spinoderm @Svetlin Velinov
+168 U Expand the Sphere @Sergey Glushakov
 169 R Green Sun's Twilight @Yeong-Hao Han
 175 M Nissa, Ascended Animist @Chase Stone
 176 U Noxious Assault @Billy Christian
 178 U Paladin of Predation @Lorenzo Mastroianni
 186 R Thrun, Breaker of Silence @Simon Dominic
 189 M Tyrranax Rex @Tuan Duong Chu
+190 U Tyvar's Stand @Kieran Yanner
+191 U Unnatural Restoration @Jeremy Wilson
 192 R Venerated Rotpriest @Brian Valeza
 196 M Atraxa, Grand Unifier @Marta Nael
 197 U Bladehold War-Whip @Tony Foti
@@ -89,6 +104,7 @@ ScryfallCode=ONE
 232 R Mirran Safehouse @Piotr Dura
 233 R Monument to Perfection @Igor Kieryluk
 234 U Myr Convert @José Parodi
+239 U Prosthetic Injector @Zezhou Chen
 241 R Soulless Jailer @Donato Giancola
 242 M Staff of Compleation @Igor Krstic
 244 M Sword of Forge and Frontier @Scott Murphy
@@ -126,6 +142,8 @@ ScryfallCode=ONE
 283 R Phyrexian Arena @Martina Fackova
 284 R Green Sun's Twilight @Piotr Dura
 286 C Sinew Dancer @Kekai Kotaki
+290 C Bonepicker Skirge @Flavio Girón
+296 U Necrogen Rotpriest @Dominik Mayer
 297 U Myr Convert @JungShan
 298 M Elesh Norn, Mother of Machines @Dominik Mayer
 299 M Mondrak, Glory Dominus @Flavio Girón
@@ -134,9 +152,11 @@ ScryfallCode=ONE
 306 R Geth, Thane of Contracts @Flavio Girón
 307 R Karumonix, the Rat King @Flavio Girón
 308 M Phyrexian Obliterator @Yu-ki Nishimoto
+310 M Capricious Hellraiser @Kekai Kotaki
 311 R Slobad, Iron Goblin @Dominik Mayer
 313 R Evolved Spinoderm @Ravenna Tran
 314 M Tyrranax Rex @Flavio Girón
+316 M Atraxa, Grand Unifier @Anato Finnstark
 317 R Ezuri, Stalker of Spheres @JungShan
 318 R Glissa Sunslayer @Ravenna Tran
 320 R Malcator, Purity Overseer @Dominik Mayer
@@ -150,7 +170,7 @@ ScryfallCode=ONE
 330 R Kemba, Kha Enduring @Izumi Tomoki
 332 R Jor Kadeen, First Goldwarden @Sansyu
 333 R Melira, the Living Cure @Miyuki Aramaki
-334 R Graaz, Unstoppable Juggernaut @Kutat
+334 R Graaz, Unstoppable Juggernaut @kutay
 335 R The Eternal Wanderer @Kento Matsuura
 336 M Jace, the Perfected Mind @Showichi Furumi
 337 M Vraska, Betrayal's Sting @Sansyu
@@ -164,7 +184,9 @@ ScryfallCode=ONE
 345 M Elesh Norn, Mother of Machines @Pedro Potier
 346 M Mondrak, Glory Dominus @rishxxv
 351 M Phyrexian Obliterator @Pedro Potier
+353 M Capricious Hellraiser @Steve Ellis
 355 M Tyrranax Rex @Phil Stone
+357 M Atraxa, Grand Unifier @Thomas M. Baxa
 358 M Staff of Compleation @Joshua Alvarado
 359 M Sword of Forge and Frontier @Phil Stone
 360 M Jace, the Perfected Mind @Joshua Alvarado
@@ -197,6 +219,8 @@ ScryfallCode=ONE
 390 R Conduit of Worlds @Jokubas Uogintas
 391 R Green Sun's Twilight @Yeong-Hao Han
 392 R Venerated Rotpriest @Brian Valeza
+395 R Mirran Safehouse @Piotr Dura
+396 R Monument to Perfection @Igor Kieryluk
 399 R Zenith Chronicler @Johann Bodin
 401 R The Monumental Facade @Bruce Brenneise
 403 R The Seedcore @Kasia 'Kafis' Zielińska
@@ -220,6 +244,7 @@ ScryfallCode=ONE
 422 R The Eternal Wanderer @Kento Matsuura
 423 R Kemba, Kha Enduring @Izumi Tomoki
 424 M Mondrak, Glory Dominus @Flavio Girón
+426 C Sinew Dancer @Kekai Kotaki
 427 R Skrelv, Defector Mite @Sidharth Chaturvedi
 428 M Jace, the Perfected Mind @Showichi Furumi
 429 M Jace, the Perfected Mind @Chase Stone
@@ -229,22 +254,27 @@ ScryfallCode=ONE
 440 M Phyrexian Obliterator @Yu-ki Nishimoto
 442 M Vraska, Betrayal's Sting @Sansyu
 443 M Vraska, Betrayal's Sting @Chase Stone
+444 M Capricious Hellraiser @Kekai Kotaki
 446 R Koth, Fire of Resistance @Ai Nanahira
 448 R Slobad, Iron Goblin @Dominik Mayer
+452 R Evolved Spinoderm @Ravenna Tran
 453 M Nissa, Ascended Animist @Chase Stone
 454 M Nissa, Ascended Animist @Gou Tanabe
+457 M Tyrranax Rex @Flavio Girón
+459 M Atraxa, Grand Unifier @Anato Finnstark
 461 R Glissa Sunslayer @Ravenna Tran
 462 R Jor Kadeen, First Goldwarden @Sansyu
 463 R Kaito, Dancing Shadow @Kento Matsuura
 464 R Kaya, Intangible Slayer @Showichi Furumi
+465 R Kethek, Crucible Goliath @Flavio Girón
 466 M Lukka, Bound to Ruin @Chase Stone
 467 M Lukka, Bound to Ruin @Yuki Fujisawa
 469 R Melira, the Living Cure @Miyuki Aramaki
 471 M Nahiri, the Unforgiving @Hiro Usuda
 472 M Nahiri, the Unforgiving @Chase Stone
+473 U Necrogen Rotpriest @Dominik Mayer
 474 R Ovika, Enigma Goliath @Dominik Mayer
 476 R Tyvar, Jubilant Brawler @Iinuma Yuuki
 477 R Venser, Corpse Puppet @Dominik Mayer
-478 R Graaz, Unstoppable Juggernaut @Kutat
+478 R Graaz, Unstoppable Juggernaut @kutay
 479 U Myr Convert @JungShan
-
