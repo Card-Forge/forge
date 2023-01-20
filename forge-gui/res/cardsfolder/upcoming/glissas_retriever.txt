@@ -9,7 +9,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.Sel
 SVar:TrigExile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ TriggeredCard | SubAbility$ DBImmediateTrigger
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigChangeZone | TriggerDescription$ When you do, return up to X target cards from your graveyard to your hand, where X is the number of opponents who have three or more poison counters.
 SVar:TrigChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Card.YouOwn | TgtPrompt$ Select X target cards in your graveyard | Origin$ Graveyard | Destination$ Hand
-SVar:X:Count$xPaid
 DeckHas:Ability$Graveyard
 DeckHints:Ability$Mill|Dredge
 SVar:X:PlayerCountOpponents$HasPropertyIsCorrupted
