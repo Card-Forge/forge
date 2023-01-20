@@ -1,0 +1,16 @@
+Name:Glissa's Retriever
+ManaCost:5 G
+Types:Creature Phyrexian Beast
+PT:6/6
+K:Haste
+K:Toxic:3
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Corrupted — When CARDNAME dies, exile it. When you do, return up to X target cards from your graveyard to your hand, where X is the number of opponents who have three or more poison counters.
+SVar:TrigExile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ TriggeredCard | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigChangeZone | TriggerDescription$ If a nontoken creature an opponent controls would die, exile it instead. When you do, you may pay {2}. If you do, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
+SVar:TrigChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Card.YouOwn | TgtPrompt$ Select X target cards in your graveyard | Origin$ Graveyard | Destination$ Hand
+SVar:X:Count$xPaid
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Mill|Dredge
+SVar:X:PlayerCountOpponents$HasPropertyIsCorrupted
+Oracle:Haste, toxic 3 (Players dealt combat damage by this creature also get three poison counters.)\nGlissa's Retriever can't be blocked by creatures with power 2 or less.\nCorrupted — When Glissa's Retriever dies, exile it. When you do, return up to X target cards from your graveyard to your hand, where X is the number of opponents who have three or more poison counters.
