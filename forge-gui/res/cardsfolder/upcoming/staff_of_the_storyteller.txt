@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Spirit creature token with flying.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
-T:Mode$ TokenCreated | ValidToken$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you create one or more creature tokens, put a story counter on CARDNAME.
+T:Mode$ TokenCreatedOnce | ValidToken$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you create one or more creature tokens, put a story counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter  | Defined$ Self | CounterType$ STORY | CounterNum$ 1 
 A:AB$ Draw | Cost$ W T SubCounter<1/STORY> | SpellDescription$ Draw a card.
 DeckHas:Ability$Counters|Token & Type$Spirit
