@@ -30,6 +30,7 @@ import forge.game.card.TokenCreateTable;
 import forge.game.card.token.TokenInfo;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
@@ -106,6 +107,8 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
         List<Card> allTokens = Lists.newArrayList();
         List<Card> allOriginalTokens = Lists.newArrayList();
 
+        PlayerCollection firstTime = new PlayerCollection();
+
         CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
         CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
@@ -170,6 +173,9 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 }
                 triggerList.put(ZoneType.None, moved.getZone().getZoneType(), moved);
 
+                if (creator.getNumTokenCreatedThisTurn() == 0) {
+                    firstTime.add(creator);
+                }
                 creator.addTokensCreatedThisTurn(lki);
                 allOriginalTokens.add(lki);
 
@@ -217,7 +223,8 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
         }
 
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Card, allOriginalTokens);
+        runParams.put(AbilityKey.Cards, allOriginalTokens);
+        runParams.put(AbilityKey.FirstTime, firstTime);
         game.getTriggerHandler().runTrigger(TriggerType.TokenCreatedOnce, runParams, false);
 
         if (sa.hasParam("AtEOT")) {

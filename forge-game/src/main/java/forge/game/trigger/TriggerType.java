@@ -116,7 +116,7 @@ public enum TriggerType {
     Taps(TriggerTaps.class),
     TapsForMana(TriggerTapsForMana.class),
     TokenCreated(TriggerTokenCreated.class),
-    TokenCreatedOnce(TriggerTokenCreated.class),
+    TokenCreatedOnce(TriggerTokenCreatedOnce.class),
     Trains(TriggerTrains.class),
     Transformed(TriggerTransformed.class),
     TurnBegin(TriggerTurnBegin.class),

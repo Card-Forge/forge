@@ -1487,10 +1487,14 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void addTokensCreatedThisTurn(Card token) {
         numTokenCreatedThisTurn++;
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.Num, numTokenCreatedThisTurn);
-        runParams.put(AbilityKey.Card, Collections.singletonList(token));
+        runParams.put(AbilityKey.Card, token);
         game.getTriggerHandler().runTrigger(TriggerType.TokenCreated, runParams, false);
+    }
+
+    public final int getNumTokenCreatedThisTurn() {
+        return numTokenCreatedThisTurn;
     }
 
     public final void resetNumTokenCreatedThisTurn() {
