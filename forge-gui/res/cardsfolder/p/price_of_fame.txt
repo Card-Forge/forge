@@ -2,7 +2,7 @@ Name:Price of Fame
 ManaCost:3 B
 Types:Instant
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | ValidTarget$ Creature.Legendary | EffectZone$ All | Description$ CARDNAME costs {2} less to cast if it targets a legendary creature.
-A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Creature | SubAbility$ DBSurveil | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+A:SP$ Destroy | ValidTgts$ Creature | SubAbility$ DBSurveil | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 SVar:DBSurveil:DB$ Surveil | Amount$ 2
 DeckHas:Ability$Surveil|Graveyard
 Oracle:This spell costs {2} less to cast if it targets a legendary creature.\nDestroy target creature.\nSurveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
