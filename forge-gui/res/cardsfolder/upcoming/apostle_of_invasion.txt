@@ -1,4 +1,4 @@
-﻿Name:Apostle of Invasion
+Name:Apostle of Invasion
 ManaCost:4 W W
 Types:Creature Phyrexian Angel
 PT:4/4
@@ -7,4 +7,4 @@ S:Mode$ Continuous | Affected$ Card.Self | CheckSVar$ X | SVarCompare$ GE3 | Add
 SVar:X:PlayerCountOpponents$HighestPoisonCounters
 AI:RemoveDeck:Random
 DeckNeeds:Ability$Counters
-Oracle:Flying\nCorrupted – As long as an opponent has three or more poison counters, Apostle of Invasion has double strike.
+Oracle:Flying\nCorrupted — As long as an opponent has three or more poison counters, Apostle of Invasion has double strike.
