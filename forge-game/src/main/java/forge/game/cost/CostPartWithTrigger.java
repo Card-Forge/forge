@@ -28,6 +28,7 @@ public abstract class CostPartWithTrigger extends CostPartWithList {
             mapParams.put("Mode", TriggerType.Immediate.name());
 
             SpellAbility sa = payingTrigSA.copy(source, ability.getActivatingPlayer(), false);
+            sa.changeText();
 
             final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, source, sa.isIntrinsic(), null);
             immediateTrig.setSpawningAbility(ability); // make the StaticAbility the Spawning one?

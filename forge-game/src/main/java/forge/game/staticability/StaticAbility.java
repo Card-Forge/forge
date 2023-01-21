@@ -87,10 +87,11 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         // already cached?
         if (payingTrigSA == null && hasParam("Trigger")) {
             payingTrigSA = AbilityFactory.getAbility(getSVar(getParam("Trigger")), getHostCard());
+            payingTrigSA.setIntrinsic(true);
         }
         return payingTrigSA;
     }
-    
+
     /**
      * <p>
      * Getter for the field <code>mapParams</code>.
