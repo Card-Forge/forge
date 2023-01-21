@@ -74,9 +74,7 @@ public class CostEnlist extends CostPartWithTrigger {
     protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
         targetCard.tap(true);
         // need to transfer info
-        for (Card c : getLKIList()) {
-            payTrig.addRemembered(c);
-        }
+        payTrig.addRemembered(targetCard);
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(payTrig.getHostCard());
         targetCard.getGame().getTriggerHandler().runTrigger(TriggerType.Enlisted, runParams, false);
