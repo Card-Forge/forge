@@ -17,9 +17,13 @@
  */
 package forge.game.cost;
 
+import java.util.Map;
+
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 
 /**
  * The Class CostExert.
@@ -73,6 +77,9 @@ public class CostEnlist extends CostPartWithTrigger {
         for (Card c : getLKIList()) {
             payTrig.addRemembered(c);
         }
+
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(payTrig.getHostCard());
+        targetCard.getGame().getTriggerHandler().runTrigger(TriggerType.Enlisted, runParams, false);
         return targetCard;
     }
 
