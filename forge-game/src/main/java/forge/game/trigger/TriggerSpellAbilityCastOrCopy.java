@@ -283,6 +283,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             }
             sa.setTriggeringObject(AbilityKey.SpellAbilityTargets, saTargets);
         }
+        sa.setTriggeringObject(AbilityKey.LifeAmount, castSA.getAmountLifePaid());
         sa.setTriggeringObjectsFrom(
                 runParams,
             AbilityKey.Player,
