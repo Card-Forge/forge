@@ -6,6 +6,7 @@ SVar:DBReturnCorrupted:DB$ ChangeZone | Origin$ Graveyard | TargetMin$ 0 | Targe
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ SpellCast | ValidCard$ Card.Self | Static$ True | Execute$ CountCorruptedPlayers
 SVar:CountCorruptedPlayers:DB$ Pump | RememberObjects$ Opponent.IsCorrupted
+T:Mode$ ChangesZone | Origin$ Stack | Destination$ Any | ValidCard$ Card.Self | Static$ True | Execute$ DBCleanup
 SVar:OneEach:PlayerCountOpponents$HasPropertyIsCorrupted
 DeckHints:Ability$Graveyard & Keyword$Toxic|Poisonous|Infect
 Oracle:Return up to one target creature card from your graveyard to the battlefield.\nCorrupted — For each opponent who has three or more poison counters as you cast this spell, put up to one target creature card from that player's graveyard onto the battlefield under your control.
