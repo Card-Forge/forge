@@ -262,7 +262,6 @@ public class PumpEffect extends SpellAbilityEffect {
             } else {
                 sb.append(".");
             }
-
         }
 
         return sb.toString();
