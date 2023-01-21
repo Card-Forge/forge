@@ -2,9 +2,9 @@ Name:Geth's Summons
 ManaCost:2 B B
 Types:Sorcery
 A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$0 | TargetMax$ 1 | TgtPrompt$ Choose up to one creature card in your graveyard | SubAbility$ DBReturnCorrupted | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return up to one target creature card from your graveyard to the battlefield. Corrupted — For each opponent who has three or more poison counters as you cast this spell, put up to one target creature card from that player’s graveyard onto the battlefield under your control.
-SVar:DBReturnCorrupted:DB$ ChangeZone | Origin$ Graveyard | TargetMin$ 0 | TargetMax$ 1 | DefinedPlayer$ Remembered | TgtZone$ Graveyard | GainControl$ True | Destination$ Battlefield | TgtPrompt$ Choose target card in an opponent's graveyard | ChangeNum$ 1 | ValidTgts$ Creature.OppCtrl | TargetsWithDifferentControllers$ True
+SVar:DBReturnCorrupted:DB$ ChangeZone | RememberObjects$ Targeted | Origin$ Graveyard | TargetMin$ 0 | TargetMax$ 1 | DefinedPlayer$ Remembered | TgtZone$ Graveyard | GainControl$ True | Destination$ Battlefield | TgtPrompt$ Choose target card in an opponent's graveyard | ChangeNum$ 1 | ValidTgts$ Creature.OppCtrl | TargetsWithDifferentControllers$ True
 T:Mode$ SpellCast | ValidCard$ Card.Self | Static$ True | Execute$ CountCorruptedPlayers
-SVar:CountCorruptedPlayers:DB$ Pump | ValidTgts$ Opponent.IsCorrupted | RememberObjects$ Targeted
+SVar:CountCorruptedPlayers:DB$ Pump | ValidTgts$ Opponent.IsCorrupted
 DeckNeeds:Ability$Graveyard
 DeckHints:Ability$Graveyard & Keyword$Toxic|Poisonous|Infect
 Oracle:Return up to one target creature card from your graveyard to the battlefield.\nCorrupted — For each opponent who has three or more poison counters as you cast this spell, put up to one target creature card from that player’s graveyard onto the battlefield under your control.
