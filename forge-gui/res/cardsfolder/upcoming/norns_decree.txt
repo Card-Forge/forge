@@ -1,7 +1,7 @@
 Name:Norn's Decree
 ManaCost:2 W
 Types:Enchantment
-T:Mode$ DamageDoneOnce | CombatDamage True | ValidSource$ Creature.OppCtrl | ValidTarget$ You | Execute$ TrigPoison | TriggerZones$ Battlefield | AttackedTarget$ You | TriggerDescription$ Whenever one or more creatures an opponent controls deal combat damage to you, that player gets a poison counter.
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.OppCtrl | ValidTarget$ You | Execute$ TrigPoison | TriggerZones$ Battlefield | AttackedTarget$ You | TriggerDescription$ Whenever one or more creatures an opponent controls deal combat damage to you, that player gets a poison counter.
 SVar:TrigPoison:DB$ Poison | Defined$ TriggeredSourceController | Num$ 1
 T:Mode$ AttackersDeclared | Execute$ TrigDraw | TriggerZones$ Battlefield | AttackedTarget$ Player.IsPoisoned | TriggerDescription$ Whenever a player attacks, if one or more players being attacked are poisoned, the attacking player draws a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredAttackingPlayer 
