@@ -2,7 +2,7 @@ Name:Glistening Sphere
 ManaCost:3 
 Types:Artifact
 K:CARDNAME enters the battlefield tapped.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ When CARDNAME enters the battlefield, proliferate
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ When CARDNAME enters the battlefield, proliferate.
 SVar:TrigProliferate:DB$ Proliferate
 A:AB$ Mana | Cost$ T | Produced$ Any |  SpellDescription$ Add one mana of any color.
 A:AB$ Mana | Cost$ T | Produced$ Any | CheckSVar$ X | SVarCompare$ GE3 | Amount$ 3 | PrecostDesc$ Corrupted — | SpellDescription$ Add three mana of any one color. Activate only if an opponent has three or more poison counters.

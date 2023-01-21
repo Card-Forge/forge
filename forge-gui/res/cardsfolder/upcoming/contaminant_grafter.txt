@@ -6,7 +6,7 @@ K:Trample
 K:Toxic:1
 T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigProliferate | TriggerDescription$ Whenever one or more creatures you control deal combat damage to one or more players, proliferate.
 SVar:TrigProliferate:DB$ Proliferate
-T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigDraw | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | TriggerDescription$ Corrupted — At the beginning of your end step, if an opponent has three or more poison counters, draw a card, then you may put a land card from your hand onto the battlefield.
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigDraw | CheckSVar$ X | SVarCompare$ GE3 | TriggerDescription$ Corrupted — At the beginning of your end step, if an opponent has three or more poison counters, draw a card, then you may put a land card from your hand onto the battlefield.
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ You may put a land card from your hand onto the battlefield.
 SVar:X:PlayerCountOpponents$HighestPoisonCounters
