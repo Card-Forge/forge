@@ -43,6 +43,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseType;
@@ -346,17 +347,17 @@ public class CombatUtil {
         return attackCost;
     }
 
-    public static CardCollection getOptionalAttackCostCreatures(final CardCollection attackers) {
-        final CardCollection exerters = new CardCollection();
+    public static CardCollection getOptionalAttackCostCreatures(final CardCollection attackers, Class<? extends CostPart> costType) {
+        final CardCollection attackersWithCost = new CardCollection();
         for (final Card card : attackers) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
-                if (stAb.hasExertCost(card)) {
-                    exerters.add(card);
+                if (stAb.hasAttackCost(card, costType)) {
+                    attackersWithCost.add(card);
                 }
             }
         }
 
-        return exerters;
+        return attackersWithCost;
     }
 
     public static boolean payRequiredBlockCosts(Game game, Card blocker, Card attacker) {

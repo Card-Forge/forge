@@ -40,6 +40,7 @@ import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.cost.CostExert;
 import forge.game.event.GameEventAttackersDeclared;
 import forge.game.event.GameEventBlockersDeclared;
 import forge.game.event.GameEventCardStatsChanged;
@@ -560,7 +561,7 @@ public class PhaseHandler implements java.io.Serializable {
                 }
 
                 // CR 508.1g
-                List<Card> possibleExerters = CombatUtil.getOptionalAttackCostCreatures(combat.getAttackers());
+                List<Card> possibleExerters = CombatUtil.getOptionalAttackCostCreatures(combat.getAttackers(), CostExert.class);
                 if (!possibleExerters.isEmpty()) {
                     possibleExerters = whoDeclares.getController().exertAttackers(possibleExerters);
                 }
