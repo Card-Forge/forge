@@ -341,6 +341,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public List<Card> enlistAttackers(List<Card> attackers) {
         // not able yet
+        // TODO get best creature that can't attack and check for lethal with it
         return Lists.newArrayList();
     }
 
