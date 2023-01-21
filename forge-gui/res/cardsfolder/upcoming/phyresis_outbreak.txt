@@ -4,6 +4,6 @@ Types:Sorcery
 A:SP$ Poison | Defined$ Opponent | Num$ 1 | SpellDescription$ Each opponent gets a poison counter. Then each creature your opponents control get -1/-1 for each poison counter its controller has.
 SVar:RepeatPlayers:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBDebuff
 SVar:DBDebuff:DB$ PumpAll | ValidCards$ Creature.RememberedPlayerCtrl | NumAtt$ -X | NumDef$ -X
-SVar:X:RememberedPlayer$PoisonCounters
+SVar:X:Count$PoisonCounters
 DeckHints:Ability$Proliferate & Keyword$Infect|Toxic
 Oracle:Each opponent gets a poison counter. Then each creature your opponents control get -1/-1 for each poison counter its controller has.
