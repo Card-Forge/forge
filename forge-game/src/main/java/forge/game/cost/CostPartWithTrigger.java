@@ -21,7 +21,7 @@ public abstract class CostPartWithTrigger extends CostPartWithList {
     @Override
     protected final void handleBeforePayment(Player ai, SpellAbility ability, CardCollectionView targetCards) {
         if (payingTrigSA != null) {
-            Card source = targetCards.get(0);
+            Card source = payingTrigSA.getHostCard();
 
             Map<String, String> mapParams = Maps.newHashMap();
             mapParams.put("TriggerDescription", payingTrigSA.getParam("SpellDescription"));

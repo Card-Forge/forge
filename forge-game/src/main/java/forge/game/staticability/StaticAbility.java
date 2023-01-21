@@ -623,6 +623,12 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         .result();
     }
 
+    @Override
+    public void setHostCard(Card host) {
+        super.setHostCard(host);
+        payingTrigSA.setHostCard(host);
+    }
+
     public StaticAbility copy(Card host, final boolean lki) {
         StaticAbility clone = null;
         try {
@@ -630,6 +636,9 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             clone.id = lki ? id : nextId();
 
             copyHelper(clone, host);
+
+            // reset to force refresh if needed
+            clone.payingTrigSA = null;
 
             clone.layers = this.generateLayer();
         } catch (final CloneNotSupportedException e) {
