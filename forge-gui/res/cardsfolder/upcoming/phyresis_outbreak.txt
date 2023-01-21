@@ -1,0 +1,9 @@
+Name:Phyresis Outbreak
+ManaCost:2 B
+Types:Sorcery
+SVar:X:Count$Valid Creature.RememberedPlayerCtrl+ChosenColor
+SVar:RepeatPlayers:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ TrigChange
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.RememberedPlayerCtrl | DefinedPlayer$ Player.Opponent | ChangeNum$ 1 | Hidden$ True | Optional$ True
+SVar:X:TriggeredTarget$PoisonCounters
+Oracle:
+Each opponent gets a poison counter. Then each creature your opponents control get -1/-1 for each poison counter its controller has.

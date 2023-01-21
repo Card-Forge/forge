@@ -1,0 +1,13 @@
+Name:Norn's Choirmaster
+ManaCost:3 W W
+Types:Creature Phyrexian Angel
+K:Flying
+K:First Strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.IsCommander+YouOwn | Execute$ TrigPutCounter | TriggerDescription$ Whenever your commander enters the battlefield or attacks, proliferate (Choose any number of permanents and/or players, then give each another counter kind of each kind they already have.)
+T:Mode$ Attacks | ValidCard$ Card.IsCommander+YouOwn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever your commander enters the battlefield or attacks, proliferate (Choose any number of permanents and/or players, then give each another counter kind of each kind they already have.)
+SVar:TrigProliferate:DB$ Proliferate
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Proliferate
+DeckHints:Ability$Counters|Planeswalker
+AI:RemoveDeck:NonCommander
+Oracle:Flying, first strike\nWhenever a commander you control enters the battlefield or attacks, proliferate. (Choose any number of permanents and/or players, then give each another counter kind of each kind they already have.)
