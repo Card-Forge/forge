@@ -1,0 +1,9 @@
+Name:Norn's Decree
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ DamageDone | ValidSource$ Creature.OppCtrl | ValidTarget$ You | Execute$ TrigPoison | TriggerZones$ Battlefield | AttackedTarget$ You,Planeswalker.YouCtrl | TriggerDescription$ Whenever one or more creatures an opponent controls deal combat damage to you, that player gets a poison counter.
+SVar:TrigPoison:DB$ Poison | Defined$ TriggeredCardController
+T:Mode$ AttackersDeclared | Execute$ TrigDraw | TriggerZones$ Battlefield | AttackedTarget$ Player.IsPoisoned | TriggerDescription$ Whenever a player attacks, if one or more players being attacked are poisoned, the attacking player draws a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredAttackingPlayer 
+DeckHints:Ability$Proliferate & Keyword$Infect|Toxic
+Oracle:Whenever one or more creatures an opponent controls deal combat damage to you, that player gets a poison counter.\nWhenever a player attacks, if one or more players being attacked are poisoned, the attacking player draws a card.
