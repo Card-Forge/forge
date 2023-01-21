@@ -337,6 +337,12 @@ public class PlayerControllerAi extends PlayerController {
     public List<Card> exertAttackers(List<Card> attackers) {
         return AiAttackController.exertAttackers(attackers, brains.getAttackAggression());
     }
+ 
+    @Override
+    public List<Card> enlistAttackers(List<Card> attackers) {
+        // not able yet
+        return Lists.newArrayList();
+    }
 
     @Override
     public CardCollection orderBlocker(Card attacker, Card blocker, CardCollection oldBlockers) {

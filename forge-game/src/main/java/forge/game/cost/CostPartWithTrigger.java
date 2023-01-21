@@ -18,6 +18,8 @@ public abstract class CostPartWithTrigger extends CostPartWithList {
         super(amount, type, description);
     }
 
+    protected Trigger payTrig;
+
     @Override
     protected final void handleBeforePayment(Player ai, SpellAbility ability, CardCollectionView targetCards) {
         if (payingTrigSA != null) {
@@ -30,13 +32,13 @@ public abstract class CostPartWithTrigger extends CostPartWithList {
             SpellAbility sa = payingTrigSA.copy(source, ability.getActivatingPlayer(), false);
             sa.changeText();
 
-            final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, source, sa.isIntrinsic(), null);
-            immediateTrig.setSpawningAbility(ability); // make the StaticAbility the Spawning one?
+            payTrig = TriggerHandler.parseTrigger(mapParams, source, sa.isIntrinsic(), null);
+            payTrig.setSpawningAbility(ability); // make the StaticAbility the Spawning one?
 
-            immediateTrig.setOverridingAbility(sa);
+            payTrig.setOverridingAbility(sa);
 
             // Instead of registering this, add to the delayed triggers as an immediate trigger type? Which means it'll fire as soon as possible
-            ai.getGame().getTriggerHandler().registerDelayedTrigger(immediateTrig);
+            ai.getGame().getTriggerHandler().registerDelayedTrigger(payTrig);
         }
     }
     

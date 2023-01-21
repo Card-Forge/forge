@@ -40,6 +40,7 @@ import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.cost.CostEnlist;
 import forge.game.cost.CostExert;
 import forge.game.event.GameEventAttackersDeclared;
 import forge.game.event.GameEventBlockersDeclared;
@@ -564,6 +565,13 @@ public class PhaseHandler implements java.io.Serializable {
                 List<Card> possibleExerters = CombatUtil.getOptionalAttackCostCreatures(combat.getAttackers(), CostExert.class);
                 if (!possibleExerters.isEmpty()) {
                     possibleExerters = whoDeclares.getController().exertAttackers(possibleExerters);
+                }
+
+                List<Card> possibleEnlisters = CombatUtil.getOptionalAttackCostCreatures(combat.getAttackers(), CostEnlist.class);
+                if (!possibleEnlisters.isEmpty()) {
+                    // TODO might want to skip if can't be paid
+                    possibleEnlisters = whoDeclares.getController().enlistAttackers(possibleEnlisters);
+                    possibleExerters.addAll(possibleEnlisters);
                 }
 
                 for (final Card attacker : combat.getAttackers()) {

@@ -876,6 +876,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public List<Card> enlistAttackers(List<Card> attackers) {
+        GameEntityViewMap<Card, CardView> gameCacheExert = GameEntityView.getMap(attackers);
+        List<CardView> chosen = getGui().order(localizer.getMessage("lblEnlistAttackersConfirm"), localizer.getMessage("lblEnlisted"),
+                0, gameCacheExert.size(), gameCacheExert.getTrackableKeys(), null, null, false);
+
+        List<Card> chosenCards = new CardCollection();
+        gameCacheExert.addToList(chosen, chosenCards);
+        return chosenCards;
+    }
+
+    @Override
     public CardCollection orderBlocker(final Card attacker, final Card blocker, final CardCollection oldBlockers) {
         GameEntityViewMap<Card, CardView> gameCacheBlockers = GameEntityView.getMap(oldBlockers);
         final CardView vAttacker = CardView.get(attacker);

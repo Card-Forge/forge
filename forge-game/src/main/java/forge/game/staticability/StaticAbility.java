@@ -325,8 +325,8 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return false;
     }
 
-    public final Cost getAttackCost(final Card attacker, final GameEntity target, final List<Card> exerters) {
-        if (!getParam("Mode").equals("CantAttackUnless") && (!getParam("Mode").equals("OptionalAttackCost") || !exerters.contains(attacker))) {
+    public final Cost getAttackCost(final Card attacker, final GameEntity target, final List<Card> attackersWithOptionalCost) {
+        if (!getParam("Mode").equals("CantAttackUnless") && (!getParam("Mode").equals("OptionalAttackCost") || !attackersWithOptionalCost.contains(attacker))) {
             return null;
         }
         if (this.isSuppressed() || !this.checkConditions()) {

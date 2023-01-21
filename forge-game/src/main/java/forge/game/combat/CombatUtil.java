@@ -297,8 +297,8 @@ public class CombatUtil {
      * @param attacker
      *            a {@link forge.game.card.Card} object.
      */
-    public static boolean checkPropagandaEffects(final Game game, final Card attacker, final Combat combat, final List<Card> exerters) {
-        final Cost attackCost = getAttackCost(game, attacker,  combat.getDefenderByAttacker(attacker), exerters);
+    public static boolean checkPropagandaEffects(final Game game, final Card attacker, final Combat combat, final List<Card> attackersWithOptionalCost) {
+        final Cost attackCost = getAttackCost(game, attacker,  combat.getDefenderByAttacker(attacker), attackersWithOptionalCost);
         if (attackCost == null) {
             return true;
         }
@@ -327,13 +327,13 @@ public class CombatUtil {
      * @return the {@link Cost} of attacking, or {@code null} if there is no
      *         cost.
      */
-    public static Cost getAttackCost(final Game game, final Card attacker, final GameEntity defender, final List<Card> exerters) {
+    public static Cost getAttackCost(final Game game, final Card attacker, final GameEntity defender, final List<Card> attackersWithOptionalCost) {
         final Cost attackCost = new Cost(ManaCost.ZERO, true);
         boolean hasCost = false;
         // Sort abilities to apply them in proper order
         for (final Card card : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
-                final Cost additionalCost = stAb.getAttackCost(attacker, defender, exerters);
+                final Cost additionalCost = stAb.getAttackCost(attacker, defender, attackersWithOptionalCost);
                 if (null != additionalCost) {
                     attackCost.add(additionalCost);
                     hasCost = true;
