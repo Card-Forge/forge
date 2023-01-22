@@ -2,7 +2,7 @@ Name:Ichorplate Golem
 ManaCost:3
 Types:Artifact Creature Phyrexian Golem
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Creature.YouCtrl+counters_GE1_OIL | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature enters the battlefield under your control, if it has one or more oil counters on it, put an oil counter on it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Creature.YouCtrl+counters_GE1_OIL | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature enters the battlefield under your control, if it has one or more oil counters on it, put an oil counter on it.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCard | CounterNum$ 1 | CounterType$ OIL
 S:Mode$ Continuous | AddPower$ 1 | AddToughness$ 1 |  Affected$ Creature.YouCtrl+counters_GE1_OIL | Description$ Creatures you control with oil counters on them get +1/+1.
 DeckHas:Ability$Counters

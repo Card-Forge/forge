@@ -5,7 +5,7 @@ PT:5/4
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Whenever another nontoken creature you control dies, you may pay 2 life and exile it. If you do, create a token that's a copy of that creature, except it’s 1/1 and has toxic 1. (Players dealt combat damage by it also get a poison counter.)
 SVar:TrigExile:AB$ ChangeZone | Cost$ PayLife<2> | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBCopy
-SVar:DBCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | SetPower$ 1 | SetToughness$ 1 | AddKeyword$ Toxic:1 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCopy:DB$ CopyPermanent | PumpKeywords$ Toxic:1 | Defined$ TriggeredCardLKICopy | SetPower$ 1 | SetToughness$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token
 Oracle:Flying\nWhenever another nontoken creature you control dies, you may pay 2 life and exile it. If you do, create a token that's a copy of that creature, except it’s 1/1 and has toxic 1. (Players dealt combat damage by it also get a poison counter.)
