@@ -1,7 +1,7 @@
 Name:Anoint with Affliction
 ManaCost:1 B
 Types:Instant
-A:SP$ ChangeZone | Defined$ Targeted | ValidTgts$ Creature | CondtionCheckSVar$ X | ConditionCheckSVarCompare$ GE3 | Origin$ Battlefield | Destination$ Exile | SubAbility$ NotPoisoned | SpellDescription$ Corrupted — Exile that creature instead if its controller has three or more poison counters.
+A:SP$ ChangeZone | Defined$ Targeted | ValidTgts$ Creature | ConditionSVar$ X | ConditionSVarCompare$ GE3 | Origin$ Battlefield | Destination$ Exile | SubAbility$ NotPoisoned | SpellDescription$ Corrupted — Exile that creature instead if its controller has three or more poison counters.
 SVar:NotPoisoned:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Exile | ConditionDefined$ Targeted | ConditionPresent$ Permanent.nonLand+cmcLE3 | SpellDescription$ Exile target creature if it has mana value 3 or less.
 DeckHints:Ability$Proliferate & Keyword$Infect|Toxic
 SVar:X:TargetedController$PoisonCounters

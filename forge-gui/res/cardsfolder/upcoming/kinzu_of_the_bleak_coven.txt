@@ -3,7 +3,7 @@ ManaCost:4 B
 Types:Legendary Creature Phyrexian Vampire
 PT:5/4
 K:Flying
-T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Whenever another nontoken creature you control dies, you may pay 2 life and exile it. If you do, create a token that's a copy of that creature, except it’s 1/1 and has toxic 1. (Players dealt combat damage by it also get a poison counter.)
-SVar:TrigExile:AB$ CopyPermanent | Cost$ PayLife<2> ExileFromGrave<1/Card.TriggeredCard> | PumpKeywords$ Toxic:1 | Defined$ TriggeredCardLKICopy | SetPower$ 1 | SetToughness$ 1
+T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Whenever another nontoken creature you control dies, you may pay 2 life and exile it. If you do, create a token that's a copy of that creature, except it's 1/1 and has toxic 1. (Players dealt combat damage by it also get a poison counter.)
+SVar:TrigExile:AB$ CopyPermanent | Cost$ PayLife<2> ExileFromGrave<1/Card.TriggeredCard/Exile nontoken creature that just died> | PumpKeywords$ Toxic:1 | Defined$ TriggeredCardLKICopy | SetPower$ 1 | SetToughness$ 1
 DeckHas:Ability$Token
-Oracle:Flying\nWhenever another nontoken creature you control dies, you may pay 2 life and exile it. If you do, create a token that's a copy of that creature, except it’s 1/1 and has toxic 1. (Players dealt combat damage by it also get a poison counter.)
+Oracle:Flying\nWhenever another nontoken creature you control dies, you may pay 2 life and exile it. If you do, create a token that's a copy of that creature, except it's 1/1 and has toxic 1. (Players dealt combat damage by it also get a poison counter.)
