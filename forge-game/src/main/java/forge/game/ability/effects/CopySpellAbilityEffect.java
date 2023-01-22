@@ -160,7 +160,6 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                             copies.add(copy);
                         }
                     }
-
                 }
             } else {
                 for (int i = 0; i < amount; i++) {
@@ -238,7 +237,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 card.addRemembered(copies);
             }
         }
-    } // end resolve
+    }
 
     private void resetFirstTargetOnCopy(SpellAbility copy, GameEntity obj, SpellAbility targetedSA) {
         copy.resetFirstTarget(obj, targetedSA);
