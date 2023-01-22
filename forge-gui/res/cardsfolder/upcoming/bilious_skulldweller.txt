@@ -2,6 +2,6 @@ Name:Bilious Skulldweller
 ManaCost:B
 Types:Creature Phyrexian Insect
 PT:1/1
-K:Deatchtouch
+K:Deathtouch
 K:Toxic:1
 Oracle:Deathtouch\nToxic 1 (Players dealt combat damage by this creature also get a poison counter.)
