@@ -48,10 +48,11 @@ public class DestroyAllEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final boolean noRegen = sa.hasParam("NoRegen");
         final Card card = sa.getHostCard();
-        boolean isOptional = sa.hasParam("Optional");
+        final boolean isOptional = sa.hasParam("Optional");
         final Game game = sa.getActivatingPlayer().getGame();
 
         Player targetPlayer = sa.getTargets().getFirstTargetedPlayer();
+        
         String valid = sa.getParamOrDefault("ValidCards", "");
 
         // Ugh. If calculateAmount needs to be called with DestroyAll it _needs_
@@ -79,7 +80,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
             card.addRemembered(list);
         }
         
-        if (isOptional && sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeToDestroyCard", CardTranslation.getTranslatedName(card.getName())), null)) {
+        if (isOptional && sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeToDestroyCard",CardTranslation.getTranslatedName(card.getName())), null)) {
             return;
         }
 
