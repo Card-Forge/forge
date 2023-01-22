@@ -1641,6 +1641,12 @@ public class GameAction {
         boolean checkAgain = false;
         if (c.isRealToken()) {
             final Zone zoneFrom = game.getZoneOf(c);
+
+            // card copies are allowed on the stack
+            if (zoneFrom.is(ZoneType.Stack) && c.getCopiedPermanent() != null) {
+                return false;
+            }
+
             if (!zoneFrom.is(ZoneType.Battlefield)) {
                 zoneFrom.remove(c);
                 checkAgain = true;
