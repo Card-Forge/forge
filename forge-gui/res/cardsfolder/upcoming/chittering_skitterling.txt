@@ -1,0 +1,8 @@
+Name:Chittering Skitterling
+ManaCost:2 B
+Types:Creature Phyrexian Rat
+PT:1/4
+A:AB$ Draw | PrecostDesc$ Corrupted — | Cost$ Sac<1/Artifact;Creature/artifact or creature> | ActivationLimit$ 1 | CheckSVar$ X | SVarCompare$ GE3 | SpellDescription$ Draw a card. Activate only if an opponent has three or more poison counters and only once each turn.
+SVar:X:PlayerCountOpponents$HighestPoisonCounters
+DeckHints:Keyword$Toxic|Infect & Ability$Proliferate
+Oracle:Corrupted — Sacrifice an artifact or creature: Draw a card. Activate only if an opponent has three or more poison counters and only once each turn.

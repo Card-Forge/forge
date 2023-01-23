@@ -1,0 +1,10 @@
+Name:Mesmerizing Dose
+ManaCost:1 U U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature.YouCtrl | AITgts$ Card.nonToken | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted creature, then proliferate.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBProliferate
+SVar:DBProliferate:DB$ Proliferate
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
+Oracle:Enchant creature\nWhen Mesmerizing Dose enters the battlefield, tap enchanted creature, then proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)\nEnchanted creature doesn’t untap during its controller's untap step.
