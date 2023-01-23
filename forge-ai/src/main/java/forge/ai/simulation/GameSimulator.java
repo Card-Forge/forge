@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import forge.ai.ComputerUtil;
+import forge.ai.GameState;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
@@ -17,6 +18,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
+import forge.item.IPaperCard;
 import forge.util.collect.FCollectionView;
 
 public class GameSimulator {
@@ -76,8 +78,17 @@ public class GameSimulator {
             eval.getScoreForGameState(origGame, origAiPlayer);
             // Print debug info.
             printDiff(origLines, simLines);
+            GameState GS = new GameState() {
+                @Override //todo get specific card edition for this function?
+                public IPaperCard getPaperCard(final String cardName) {
+                    return null;
+                }
+            };
+            GS.initFromGame(origGame);
+            System.out.println(GS);
             // make sure it gets printed
             System.out.flush();
+
             throw new RuntimeException("Game copy error. See diff output above for details.");
         }
         eval.setDebugging(false);
