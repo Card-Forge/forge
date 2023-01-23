@@ -7,4 +7,4 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_phyrexian_mite_
 K:Equip:2 W
 DeckHas:Type$Phyrexian|Mite & Ability$Token
 SVar:AE:SVar:HasAttackEffect:TRUE
-Oracle:Equipped creature gets +2/+0.\nWhenever equipped creature attacks, create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can’t block." (Players dealt combat damage by it also get a poison counter.)\nEquip {2}{W}
+Oracle:Equipped creature gets +2/+0.\nWhenever equipped creature attacks, create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block." (Players dealt combat damage by it also get a poison counter.)\nEquip {2}{W}
