@@ -1,0 +1,11 @@
+Name:Birthing Pod
+ManaCost:3 PG
+Types:Artifact
+A:AB$ ChangeZone |
+ Cost$ 1 PG T ExileFromHand<1/Spell.YouCtrl+cmcGEX> | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcEQX | ChangeNum$ 1 | SorcerySpeed$ True |
+SpellDescription$  Target opponent reveals cards from the top of their library until they reveal a card with mana value equal to 1 plus the exiled spell's mana value. Exile taht card, then that player shuffles. You may cast that exiled card without paying its mana cost. 
+SVar:X:Sacrificed$CardManaCost/Plus.1
+SVar:X:Count$xPaid
+# AI Preference is needed to make the AI consider the ability. Further constraints are defined by AILogic SacAndUpgrade.
+AI:RemoveDeck:All
+Oracle:({U/P} can be paid with either {G} or 2 life.)\n{1}{U/P}, {T}, Exile a spell you control: Target opponent reveals cards from the top of their library until they reveal a card with mana value equal to 1 plus the exiled spell's mana value. Exile taht card, then that player shuffles. You may cast that exiled card without paying its mana cost. 

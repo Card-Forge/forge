@@ -1,0 +1,10 @@
+Name:Tangleweave Armor
+ManaCost:2 G G
+Types:Artifact Equipment
+K:Living Weapon
+K:Equip:4
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +X/+X, where X is the greatest mana value among your commanders.
+SVar:X:Count$Valid Card.IsCommander+YouOwn$GreatestCMC
+AI:RemoveDeck:NonCommander
+DeckHas:Ability$Token & Type$Phyrexian|Germ
+Oracle:Living weapon (When this Equipment enters the battlefield, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +X/+X, where X is the greatest mana value among your commanders.\nEquip {4}
