@@ -2710,8 +2710,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public int getCommanderCast(Card commander) {
-        Integer cast = commanderCast.get(commander);
-        return cast == null ? 0 : cast.intValue();
+        return commanderCast.getOrDefault(commander, 0);
     }
     public void incCommanderCast(Card commander) {
         commanderCast.put(commander, getCommanderCast(commander) + 1);
