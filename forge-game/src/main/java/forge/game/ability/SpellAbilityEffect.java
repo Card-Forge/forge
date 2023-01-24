@@ -373,7 +373,7 @@ public abstract class SpellAbilityEffect {
         return saForget;
     }
 
-    protected static void addForgetOnMovedTrigger(final Card card, final String zone) {
+    public static void addForgetOnMovedTrigger(final Card card, final String zone) {
         String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | ExcludedDestinations$ Stack | Destination$ Any | TriggerZones$ Command | Static$ True";
 
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);

@@ -741,6 +741,12 @@ public class CardProperty {
                     case "Commander":
                         final List<Card> cmdrs = sourceController.getCommanders();
                         for (Card cmdr : cmdrs) {
+                            cmdr = game.getCardState(cmdr);
+                            // if your commander is in a hidden zone or phased out
+                            // it's considered to have no creature types
+                            if (cmdr.getZone().getZoneType().isHidden() || cmdr.isPhasedOut()) {
+                                continue;
+                            }
                             if (card.sharesCreatureTypeWith(cmdr)) {
                                 return true;
                             }

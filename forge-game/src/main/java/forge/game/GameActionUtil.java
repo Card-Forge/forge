@@ -32,6 +32,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
+import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
@@ -46,7 +47,6 @@ import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -799,19 +799,8 @@ public final class GameActionUtil {
 
         eff.addReplacementEffect(re);
 
-        // Forgot Trigger
-        String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Any | TriggerZones$ Command | Static$ True";
-        String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
-        String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
-                + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
+        SpellAbilityEffect.addForgetOnMovedTrigger(eff, "Stack");
 
-        SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, eff);
-        AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, eff);
-        saForget.setSubAbility(saExile);
-
-        final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, eff, true);
-        parsedTrigger.setOverridingAbility(saForget);
-        eff.addTrigger(parsedTrigger);
         eff.updateStateForView();
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
