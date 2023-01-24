@@ -6,6 +6,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -33,28 +34,32 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
+        int num = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa) : 1;
+
         final Player p = sa.getActivatingPlayer();
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
 
         PlayerController pc = p.getController();
 
-        FCollection<GameEntity> list = new FCollection<>();
+        for (int i = 0; i < num; i++) {
+            FCollection<GameEntity> list = new FCollection<>();
 
-        list.addAll(game.getPlayers().filter(PlayerPredicates.hasCounters()));
-        list.addAll(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.hasCounters()));
+            list.addAll(game.getPlayers().filter(PlayerPredicates.hasCounters()));
+            list.addAll(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.hasCounters()));
 
-        List<GameEntity> result = pc.chooseEntitiesForEffect(list, 0, list.size(), null, sa,
-                Localizer.getInstance().getMessage("lblChooseProliferateTarget"), p, null);
+            List<GameEntity> result = pc.chooseEntitiesForEffect(list, 0, list.size(), null, sa,
+                    Localizer.getInstance().getMessage("lblChooseProliferateTarget"), p, null);
 
-        GameEntityCounterTable table = new GameEntityCounterTable();
-        for (final GameEntity ge : result) {
-            for (final CounterType ct : ge.getCounters().keySet()) {
-                ge.addCounter(ct, 1, p, table);
+            GameEntityCounterTable table = new GameEntityCounterTable();
+            for (final GameEntity ge : result) {
+                for (final CounterType ct : ge.getCounters().keySet()) {
+                    ge.addCounter(ct, 1, p, table);
+                }
             }
-        }
-        table.replaceCounterEffect(game, sa, true);
+            table.replaceCounterEffect(game, sa, true);
 
-        game.getTriggerHandler().runTrigger(TriggerType.Proliferate, AbilityKey.mapFromPlayer(p), false);
+            game.getTriggerHandler().runTrigger(TriggerType.Proliferate, AbilityKey.mapFromPlayer(p), false);
+        }
     }
 }
