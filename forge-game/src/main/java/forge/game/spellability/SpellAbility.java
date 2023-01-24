@@ -1947,8 +1947,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         final String splitTargetRestrictions = tgt.getSAValidTargeting();
         if (splitTargetRestrictions != null) {
-            // TODO Ensure that spells with subabilities are processed correctly
-
             boolean result = false;
             SpellAbility subAb = topSA;
             while (subAb != null && !result) {
@@ -1958,6 +1956,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                         continue;
                     }
                     for (final GameObject o : matchTgt) {
+                        // CR 115.9b need to check current target state but nothing else that could make it illegal
                         if (o.isValid(splitTargetRestrictions.split(","), getActivatingPlayer(), getHostCard(), this)) {
                             result = true;
                             break;

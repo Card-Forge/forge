@@ -230,6 +230,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostExile cost) {
+        if (cost.payCostFromSource()) {
+            return source.getZone() == player.getZone(cost.from) && confirmAction(cost, Localizer.getInstance().getMessage("lblExileConfirm", CardTranslation.getTranslatedName(source.getName()))) ? PaymentDecision.card(source) : null;
+        }
+
         final Game game = player.getGame();
 
         String type = cost.getType();
@@ -240,21 +244,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         CardCollection list;
-        if (cost.getFrom().equals(ZoneType.Stack)) {
-            list = new CardCollection();
-            for (final SpellAbilityStackInstance si : game.getStack()) {
-                list.add(si.getSourceCard());
-            }
-        }
-        else if (cost.sameZone) {
+        if (cost.sameZone) {
             list = new CardCollection(game.getCardsIn(cost.from));
-        }
-        else {
+        } else {
             list = new CardCollection(player.getCardsIn(cost.from));
-        }
-
-        if (cost.payCostFromSource()) {
-            return source.getZone() == player.getZone(cost.from) && confirmAction(cost, Localizer.getInstance().getMessage("lblExileConfirm", CardTranslation.getTranslatedName(source.getName()))) ? PaymentDecision.card(source) : null;
         }
 
         if (type.equals("All")) {
