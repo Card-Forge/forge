@@ -2,7 +2,7 @@
 Code=ONC
 Date=2023-02-10
 Name=Phyrexia: All Will Be One Commander
-Type=Expansion
+Type=Commander
 ScryfallCode=ONC
 
 [cards]
@@ -15,7 +15,7 @@ ScryfallCode=ONC
 7 R Kemba's Banner @Wisnu Tan
 8 R Norn's Choirmaster @Jason A. Engle
 9 R Norn's Decree @Nestor Ossandon Leal
-10 R Staff of the SToryteller @Dan Scott
+10 R Staff of the Storyteller @Dan Scott
 11 R Geth's Summons @Johann Bodin
 12 R Phyresis Outbreak @Matthew G. Lewis
 13 R Goldwardens' Gambit @Manuel Castañón
@@ -28,3 +28,137 @@ ScryfallCode=ONC
 20 R Glistening Sphere @Tuan Duong Chu
 37 M Ixhel, Scion of Atraxa @Campbell White
 38 M Neyali, Suns' Vanguard @Bryan Sola
+39 M Otharri, Suns' Glory @Marta Nael
+40 M Vishgraz, the Doomhive @Andrew Mar
+43 R Clever Concealment @Alexey Kruglov
+44 R Glimmer Lens @Sidharth Chaturvedi
+45 R Kemba's Banner @Wisnu Tan
+46 R Norn's Choirmaster @Jason A. Engle
+47 R Norn's Decree @Nestor Ossandon Leal
+48 R Staff of the Storyteller @Dan Scott
+49 R Geth's Summons @Johann Bodin
+50 R Phyresis Outbreak @Matthew G. Lewis
+51 R Goldwardens' Gambit @Manuel Castañón
+52 R Hexplate Wallbreaker @Aaron Miller
+53 R Roar of Resistance @Lie Setiawan
+54 R Vulshok Factory @Cristi Balanescu
+55 R Contaminant Grafter @Lars Grant-West
+56 R Glissa's Retriever @Josu Hernaiz
+57 R Wurmquake @Xavier Ribeiro
+58 R Glistening Sphere @Tuan Duong Chu
+59 C Battle Screech @Randy Gallegos
+60 R Call the Coppercoats @Cristi Balanescu
+61 R Collective Effort @Eric Deschamps
+62 R Court of Grace @Denman Rooke
+63 C Cut a Deal @Fajareka Setiawan
+64 M Elspeth Tirel @Michael Komarck
+65 R Emeria Angel @Jim Murray
+66 R Felidar Retreat @Ralph Horsley
+67 M Finale of Glory @Stanton Feng
+68 R Flawless Maneuver @Zoltan Boros
+69 R Fumigate @Svetlin Velinov
+70 U Generous Gift @Kev Walker
+71 U Ghostly Prison @Daarken
+72 U Goldnight Commander @Chris Rahn
+73 U Grateful Apparition @Izzy
+74 M Harmonious Archon @Anastasia Ovchinnikova
+75 R Hour of Reckoning @Joseph Meehan
+76 R Increasing Devotion @Daniel Ljunggren
+77 C Intangible Virtue @
+78 C Mace of the Valiant @
+79 R Martial Coup @Greg Staples
+80 R Maul of the Skyclaves @Joseph Meehan
+81 C Mentor of the Meek @Jana Schirmer & Johannes Voss
+82 U Midnight Haunting @Matt Stewart
+83 R Norn's Annex @James Paick
+84 U Path to Exile @Todd Lockwood
+85 U Phantom General @Christopher Moeller
+86 R Phyrexian Rebirth @Scott Chou
+87 C Prava of the Steel Legion
+88 R Silverwing Squadron @Johannes Voss
+89 U Swords to Plowshares @Jesper Ejsing
+90 R White Sun's Zenith @Mike Bierek
+91 R Windborn Muse @Adam Rex
+92 U Caress of Phyrexia @Karl Kopinski
+93 U Ichor Rats @Matt Stewart
+94 C Night's Whisper @John Severin Brassell
+95 R Painful Truths @Winona Nelson
+96 C Plague Stinger @Ryan Pancoast
+97 R Chain Reaction @Trevor Claxton
+98 M Dragonmaster Outcast @Raymond Swanland
+99 C Hate Mirage @
+100 C Hordeling Outburst @Zoltan Boros
+101 R Legion Warboss @Alex Konstad
+102 U Loyal Apprentice @Joe Slucher
+103 R Siege-Gang Commander @Aaron Miller
+104 S Beast Within @Dave Allsop
+105 C Blight Mamba @Drew Baker
+106 U Carrion Call @Adrian Smith
+107 C Cultivate @Anthony Palumbo
+108 U Evolution Sage @Simon Dominic
+109 U Mycosynth Fiend @Kev Walker
+110 U Noxious Revival @Matt Stewart
+111 R Phyrexian Swarmlord @Svetlin Velinov
+112 R Scavenging Ooze @Austin Hsu
+113 U Viridian Corrupter @Matt Cavotta
+114 R Adriana, Captain of the Guard @Chris Rallis
+115 R Assemble the Legion @Eric Deschamps
+116 U Boros Charm @Zoltan Boros
+117 R Culling Ritual @Lorenzo Mastroianni
+118 U Heroic Reinforcements @Scott Murphy
+119 R Jor Kadeen, the Prevailer @Austin Hsu
+120 R Merciless Eviction @Richard Wright
+121 U Moldervine Reclamation @Antonio José Manzanedo
+122 U Mortify @Anthony Palumbo
+123 U Putrefy @Clint Cearley
+124 U Rip Apart @Anna Podedworna
+125 C Arcane Signet @Dan Scott
+126 C Boros Signet @Mike Sass
+127 R Chromatic Lantern @Jung Park
+128 C Commander's Sphere @Ryan Alexander Lee
+129 U Contagion Clasp @Anthony Palumbo
+130 U Fellwar Stone @John Avon
+131 C Golgari Signet @Raoul Vitale
+132 U Grafted Exoskeleton @Allen Williams
+133 C Ichorclaw Myr @Eric Deschamps
+134 R Idol of Oblivion @Piotr Dura
+135 R Loxodon Warhammer @Jeremy Jarvis
+136 U Mask of Memory @Alan Pollack
+137 C Mind Stone @Adam Rex
+138 R Myr Battlesphere @Franz Vohwinkel
+139 U Plague Myr @Efrem Palacios
+140 U Sol Ring @Mike Bierek
+141 R Solemn Simulacrum @Donato Giancola
+142 U Soul-Guide Lantern @Cliff Childs
+143 U Talisman of Conviction @Lindsey Look
+144 U Trailblazer's Boots @Zoltan Boros & Gabor Szikszai
+145 C Bojuka Bog @Howard Lyon
+146 U Boros Garrison @John Avon
+147 U Buried Ruin @Franz Vohwinkel
+148 R Canopy Vista @Adam Paquette
+149 R Castle Ardenvale @Volkan Baǵa
+150 R Castle Embereth @Jaime Jones
+151 C Command Tower @Evan Shipard
+152 R Exotic Orchard @Steven Belledin
+153 C Forgotten Cave @Tony Szczudlo
+154 R Fortified Village @Cliff Childs
+155 R Furycalm Snarl @Sam Burley
+156 R Karn's Bastion @Adam Paquette
+157 R Kher Keep @Paolo Parente
+158 U Krosan Verge @Ruxing Gao
+159 U Myriad Landscape @Jonas De Ro
+160 R Necroblossom Snarl @Sam Burley
+161 C Path of Ancestry @Alayna Danner
+162 U Sandsteppe Citadel @Sam Burley
+163 U Secluded Steppe @Heather Hudson
+164 R Shineshadow Snarl @Sam Burley
+165 R Slayers' Stronghold @Karl Kopinski
+166 R Sungrass Prairie @Alayna Danner
+167 U Tainted Field @Don Hazeltine
+168 U Tainted Wood @Rob Alexander
+169 R Temple of Malady @Titus Lunter
+170 R Temple of Plenty @Chris Ostrowski
+171 R Temple of Silence @Adam Paquette
+172 U Temple of the False God @James Zapata
+173 R Temple of Triumph @Piotr Dura
+174 R Windbrisk Heights @Omar Rayyan

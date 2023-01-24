@@ -328,9 +328,9 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
         return false;
     }
 
-    public String getFirstPhyrexianHybridPip() {
+    public String getFirstPhyrexianPip() {
         for (ManaCostShard shard : shards) {
-            if (shard.isHybrid() && shard.isPhyrexian()) {
+            if (shard.isPhyrexian()) {
                 return shard.toString();
             }
         }

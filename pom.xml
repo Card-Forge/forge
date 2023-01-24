@@ -70,9 +70,9 @@
 
     <distributionManagement>
         <repository>
-            <id>cardforge-repo</id>
-            <name>Forge Releases</name>
-            <url>ftp://ftp.cardforge.org/maven/releases/</url>
+            <id>github</id>
+            <name>Github Releases</name>
+            <url>https://maven.pkg.github.com/Card-Forge/forge</url>
         </repository>
         <snapshotRepository>
             <id>cardforge-snapshot-repo</id>

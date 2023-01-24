@@ -94,6 +94,7 @@ public class HumanPlaySpellAbility {
 
         if (!ability.isCopied()) {
             ability.resetPaidHash();
+            ability.setPaidLife(0);
         }
 
         ability = GameActionUtil.addExtraKeywordCost(ability);

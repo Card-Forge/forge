@@ -72,7 +72,7 @@ F60 R Treacherous Trapezist @Dave Greco
 64 C Wizards of the _____ @Anna Christenson
 F65 R Animate Graveyard @Mike Burns
 66 U Attempted Murder @Greg Staples
-67 R Black Hole @Greg Borowski
+67 R Black Hole @Greg Bobrowski
 68 C Carnival Carnivore @Carl Critchlow
 69 C Deadbeat Attendant @Sebastian Giacobino
 70 U Discourtesy Clerk @Vladimir Krisetskiy
@@ -96,7 +96,7 @@ F87 U A Real Handful @Tomek Larek
 88 R Saw in Half @Sebastian Giacobino
 89 U Scampire @Armand Baltazar
 90 C Scared Stiff @José Parodi
-F91 C Scooch @Filip Burburan
+F91 C Scooch @Filipe Pagliuso
 92 C Six-Sided Die @Ben Wootten
 93 C Soul Swindler @Alexander Mokhov
 94 C Step Right Up @Bruce Brenneise
@@ -121,15 +121,15 @@ F112 R Ignacio of Myra's Marvels @Gaboleps
 F113 U Juggletron @Matt Dixon
 114 C Minotaur de Force @Gaboleps
 115 C Non-Human Cannonball @Ralph Horsley
-F116 R Omniclown Colossus // Pie-roclasm @Ralph Horsley
+F116 R Omniclown Colossus @Ralph Horsley
 117 C One-Clown Band @Ralph Horsley
-F118 M Opening Ceremony @Greg Borowski
-119 U Priority Boarding @Greg Borowski
+F118 M Opening Ceremony @Greg Bobrowski
+119 U Priority Boarding @Greg Bobrowski
 120 U Proficient Pyrodancer @John Thacker
 121 C Rad Rascal @Dmitry Burmak
 F122 C Rock Star @Dave Allsop
-123 C Slight Malfunction @Greg Borowski
-F124 U Ticking Mime Bomb @Greg Borowski
+123 C Slight Malfunction @Greg Bobrowski
+F124 U Ticking Mime Bomb @Greg Bobrowski
 F125 U Trigger Happy @Jamroz Gary
 F126 M Vorthos, Steward of Myth @Caroline Gariba
 127 C Wee Champion @Raluca Marinescu
@@ -148,7 +148,7 @@ F129 C Alpha Guard @Caroline Gariba
 140 C Grabby Tabby @Filipe Pagliuso
 F141 R Hardy of Myra's Marvels @Gaboleps
 F142 U Icing Manipulator @Raluca Marinescu
-F143 C An Incident Has Occurred @Greg Borowski
+F143 C An Incident Has Occurred @Greg Bobrowski
 F144 R Jermane, Pride of the Circus @Alexander Mokhov
 F145 M Killer Cosplay @Leonardo Santanna
 146 U Lineprancers @Ben Maier
@@ -237,7 +237,7 @@ F228 U Squirrel Stack @Andrea Radeck
 229 R Storybook Ride @Dmitry Burmak
 F230 U The Superlatorium @Simon Dominic
 231 R Swinging Ship @Mike Burns
-232 U Trash Bin @Greg Borowski
+232 U Trash Bin @Greg Bobrowski
 F233 U Trivia Contest @Caroline Gariba
 234 R Tunnel of Love @Vladimir Krisetskiy
 235 L Plains @Adam Paquette
@@ -278,7 +278,7 @@ F268 U Pietra, Crafter of Clowns @Stephanie Buscema
 270 U The Space Family Goblinson @David Semple
 271 U Spinnerette, Arachnobat @David Semple
 F272 R Truss, Chief Engineer @Scooter
-273 U Tusk and Whiskers
+273 U Tusk and Whiskers @David Semple
 F274 R D00-DL, Caricaturist @Scooter
 275 M Comet, Stellar Pup @David Semple
 276 M Space Beleren @Scooter
@@ -358,7 +358,7 @@ F346 R Treacherous Trapezist @Dave Greco
 350 C Wizards of the _____ @Anna Christenson
 F351 R Animate Graveyard @Mike Burns
 352 U Attempted Murder @Greg Staples
-353 R Black Hole @Greg Borowski
+353 R Black Hole @Greg Bobrowski
 354 C Carnival Carnivore @Carl Critchlow
 355 C Deadbeat Attendant @Sebastian Giacobino
 356 U Discourtesy Clerk @Vladimir Krisetskiy
@@ -407,15 +407,15 @@ F398 R Ignacio of Myra's Marvels @Gaboleps
 F399 U Juggletron @Matt Dixon
 400 C Minotaur de Force @Gaboleps
 401 C Non-Human Cannonball @Ralph Horsley
-F402 R Omniclown Colossus // Pie-roclasm @Ralph Horsley
+F402 R Omniclown Colossus @Ralph Horsley
 403 C One-Clown Band @Ralph Horsley
-F404 M Opening Ceremony @Greg Borowski
-405 U Priority Boarding @Greg Borowski
+F404 M Opening Ceremony @Greg Bobrowski
+405 U Priority Boarding @Greg Bobrowski
 406 U Proficient Pyrodancer @John Thacker
 407 C Rad Rascal @Dmitry Burmak
 F408 C Rock Star @Dave Allsop
-409 C Slight Malfunction @Greg Borowski
-F410 U Ticking Mime Bomb @Greg Borowski
+409 C Slight Malfunction @Greg Bobrowski
+F410 U Ticking Mime Bomb @Greg Bobrowski
 F411 U Trigger Happy @Jamroz Gary
 F412 M Vorthos, Steward of Myth @Caroline Gariba
 413 C Wee Champion @Raluca Marinescu
@@ -434,7 +434,7 @@ F415 C Alpha Guard @Caroline Gariba
 426 C Grabby Tabby @Filipe Pagliuso
 F427 R Hardy of Myra's Marvels @Gaboleps
 F428 U Icing Manipulator @Raluca Marinescu
-F429 C An Incident Has Occurred @Greg Borowski
+F429 C An Incident Has Occurred @Greg Bobrowski
 F430 R Jermane, Pride of the Circus @Alexander Mokhov
 F431 M Killer Cosplay @Leonardo Santanna
 432 U Lineprancers @Ben Maier

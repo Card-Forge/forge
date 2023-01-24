@@ -12,4 +12,12 @@
             <url>http://4thline.org/m2</url>
         </mirror>
     </mirrors>
+
+    <servers>
+        <server>
+            <id>cardforge-repo</id>
+            <username>${cardforge-repo.username}</username>
+            <password>${cardforge-repo.password}</password>
+        </server>
+    </servers>
 </settings>
