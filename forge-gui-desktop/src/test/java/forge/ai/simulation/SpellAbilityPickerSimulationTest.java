@@ -10,6 +10,7 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -657,5 +658,100 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(2, targets.size());
         AssertJUnit.assertTrue(targets.toString().contains("Forest Bear"));
         AssertJUnit.assertTrue(targets.toString().contains("Flying Men"));
+    }
+
+    @Test
+    public void testLethalOnBoard() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        Card bearCard1 = addCard("Forest Bear", p);
+        bearCard1.setSickness(false);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        opponent.setLife(2, null);
+
+        GameSimulator sim = createSimulator(game, p);
+        int origScore = sim.getScoreForOrigGame().value;
+        System.out.println("OrigScore: " + origScore);
+
+        AssertJUnit.assertTrue(origScore == 2147483647);
+    }
+
+    @Test
+    public void testNotLethalOnBoard() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        Card bearCard1 = addCard("Forest Bear", p);
+        bearCard1.setSickness(false);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        opponent.setLife(3, null);
+
+        GameSimulator sim = createSimulator(game, p);
+        int origScore = sim.getScoreForOrigGame().value;
+        System.out.println("OrigScore: " + origScore);
+
+        AssertJUnit.assertTrue(origScore != 2147483647);
+    }
+
+    @Test
+    public void testLethalButPacified() {
+        // This should not have an instant win score because
+        // pacifism keeps the bear from swinging
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        Card bearCard1 = addCard("Forest Bear", p);
+        bearCard1.setSickness(false);
+
+        Card pacifism = addAura("Pacifism", opponent, bearCard1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        opponent.setLife(2, null);
+
+        AssertJUnit.assertTrue(bearCard1.isEnchanted());
+        AssertJUnit.assertTrue(bearCard1.hasCardAttachment(pacifism));
+        AssertJUnit.assertEquals(false, CombatUtil.canAttack(bearCard1));
+
+        GameSimulator sim = createSimulator(game, p);
+        int origScore = sim.getScoreForOrigGame().value;
+        System.out.println("OrigScore: " + origScore);
+
+        AssertJUnit.assertTrue(origScore != 2147483647);
+    }
+
+    @Test
+    public void testBuffNonPacifiedCreature() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        addCards("Forest", 2, p);
+        Card bearCard1 = addCard("Forest Bear", p);
+        bearCard1.setSickness(false);
+        Card bearCard2 = addCard("Forest Bear", p);
+        bearCard2.setSickness(false);
+        addCardToZone("Monstrous Growth", p, ZoneType.Hand);
+
+        addAura("Pacifism", opponent, bearCard1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        opponent.setLife(5, null);
+        game.getAction().checkStateEffects(true);
+
+        
+
+        // AssertJUnit.assertEquals(true, bearCard1.hasKeyword("CARDNAME can't attack or block."));
+        AssertJUnit.assertEquals(false, CombatUtil.canAttack(bearCard1));
+
+
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertNotNull(sa);
+        AssertJUnit.assertEquals(bearCard2, sa.getTargetCard());
     }
 }
