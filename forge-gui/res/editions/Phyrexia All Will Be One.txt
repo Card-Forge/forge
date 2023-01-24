@@ -8,6 +8,7 @@ ScryfallCode=ONE
 [cards]
 2 U Annex Sentry @David Astruga
 3 U Apostle of Invasion @Marcela Bolívar
+5 U Bladed Ambassador @Nino Vecia
 7 C Compleat Devotion @Filipe Pagliuso
 10 M Elesh Norn, Mother of Machines @Martina Fackova
 11 R The Eternal Wanderer @Alix Branwyn
@@ -18,6 +19,7 @@ ScryfallCode=ONE
 23 M Mondrak, Glory Dominus @Jason A. Engle
 24 R Norn's Wellspring @Jonas De Ro
 26 U Ossification @Nino Vecia
+27 M Phyrexian Vindicator @Denys Tsiperko
 28 C Planar Disruption @Campbell White
 31 U Resistance Reunited @Aurore Folny
 32 C Sinew Dancer @Campbell White
@@ -30,14 +32,22 @@ ScryfallCode=ONE
 43 R Blue Sun's Twilight @Piotr Dura
 47 R Encroaching Mycosynth @Martin de Diego Sádaba
 49 C Experimental Augury @Donato Giancola
+56 M Ichormoon Gauntlet @Tiffany Turrill
 57 M Jace, the Perfected Mind @Chase Stone
 61 R Mercurial Spelldancer @Marcela Bolívar
 62 C Mesmerizing Dose @Konstantin Porubov
 63 R Mindsplice Apparatus @Ovidio Cartagena
 64 U Minor Misstep @Lorenzo Mastroianni
+66 C Quicksilver Fisher @Filip Burburan
+68 U Serum Snare @Lauren K. Cannon
 69 U Tamiyo's Immobilizer @Daren Bader
+70 U Tamiyo's Logbook @Piotr Dura
+71 M Tekuthal, Inquiry Dominus @Martin de Diego Sádaba
 73 U Transplant Theorist @Xavier Ribeiro
+74 U Trawler Drake @Daniel Ljunggren
 75 R Unctus, Grand Metatect @Andrew Mar
+78 U Watchful Blisterzoa @Chris Cold
+79 U Ambulatory Edifice @Ariel Perez
 81 C Anoint with Affliction @David Astruga
 82 R Archfiend of the Dross @Lie Setiawan
 83 U Bilious Skulldweller @Svetlin Velinov
@@ -47,23 +57,28 @@ ScryfallCode=ONE
 87 C Chittering Skitterling @Nils Hamm
 93 U Feed the Infection @Jason A. Engle
 95 R Geth, Thane of Contracts @Martin de Diego Sádaba
-98 R Karumonix, the Rat King @Jason A. Engle
+98 R Karumonix, the Rat King @Helge C. Balzer
 99 U Necrogen Communion @Ernanda Souza
 101 U Nimraiser Paladin @José Parodi
 104 R Phyrexian Arena @Martina Fackova
 105 M Phyrexian Obliterator @Maxim Kostin
 107 U Scheming Aspirant @Lauren K. Cannon
 108 U Sheoldred's Edict @Helge C. Balzer
-114 C Vraan, Executioner Thane @Helge C. Balzer
+113 U Vat of Rebirth @Peter Polach
+114 R Vraan, Executioner Thane @Helge C. Balzer
 115 M Vraska, Betrayal's Sting @Chase Stone
 119 U Awaken the Sleeper @Mathias Kollros
 124 U Cacophony Scamp @Svetlin Velinov
 125 M Capricious Hellraiser @Durion
 126 R Dragonwing Glider @Andreas Zafiratos
+129 U Exuberant Fuseling @Billy Christian
+132 U Furnace Punisher @Lauren K. Cannon
 134 U Gleeful Demolition @Tuan Duong Chu
 136 U Hexgold Halberd @Heonhwa Choe
 137 C Hexgold Slash @Eli Minaya
 138 R Koth, Fire of Resistance @Eric Wilkerson
+140 U Magmatic Sprinter @Samuel Araya
+142 U Nahiri's Sacrifice @Andrey Kuzinskiy
 143 U Oxidda Finisher @Vladimir Krisetskiy
 145 R Red Sun's Twilight @Julian Kok Joon Wen
 146 U Resistance Skywarden @Jarel Threat
@@ -80,9 +95,11 @@ ScryfallCode=ONE
 166 R Evolved Spinoderm @Svetlin Velinov
 168 U Expand the Sphere @Sergey Glushakov
 169 R Green Sun's Twilight @Yeong-Hao Han
+172 U Infectious Bite @Campbell White
 175 M Nissa, Ascended Animist @Chase Stone
 176 U Noxious Assault @Billy Christian
 178 U Paladin of Predation @Lorenzo Mastroianni
+181 C Rustvine Cultivator @Lauren K. Cannon
 186 R Thrun, Breaker of Silence @Simon Dominic
 189 M Tyrranax Rex @Tuan Duong Chu
 190 U Tyvar's Stand @Kieran Yanner
@@ -106,16 +123,18 @@ ScryfallCode=ONE
 213 R Ovika, Enigma Goliath @Antonio José Manzanedo
 214 R Ria Ivor, Bane of Bladehold @Andreas Zafiratos
 216 U Slaughter Singer @Adam Burn
+217 U Tainted Observer @Johann Bodin
 218 R Tyvar, Jubilant Brawler @Victor Adame Minguez
 219 R Venser, Corpse Puppet @Igor Kieryluk
 222 R Argentum Masticore @Zack Stella
+223 U Atraxa's Skitterfang @Billy Christian
 224 C Basilica Skullbomb @Gaboleps
 225 C Dross Skullbomb @Gaboleps
-227 R The Filigree Sylex @
-228 C Furnace Skullbomb @Gaboleps
+227 R The Filigree Sylex @Leanna Crossan
+228 C Furnace Skullbomb @Matt Forsyth
 229 R Graaz, Unstoppable Juggernaut @Nestor Ossandon Leal
 230 U Ichorplate Golem @Sam Wolfe Connelly
-231 C Maze Skullbomb @Gaboleps
+231 C Maze Skullbomb @Matt Forsyth
 232 R Mirran Safehouse @Piotr Dura
 233 R Monument to Perfection @Igor Kieryluk
 234 U Myr Convert @José Parodi
@@ -128,7 +147,7 @@ ScryfallCode=ONE
 246 R Zenith Chronicler @Johann Bodin
 248 R Blackcleave Cliffs @Yeong-Hao Han
 249 R Copperline Gorge @Yeong-Hao Han
-254 R Mirrex @
+254 R Mirrex @Adam Burn
 255 R The Monumental Facade @Bruce Brenneise
 256 R The Mycosynth Gardens @Andrew Mar
 257 R Razorverge Thicket @Randy Gallegos
@@ -158,18 +177,23 @@ ScryfallCode=ONE
 283 R Phyrexian Arena @Martina Fackova
 284 R Green Sun's Twilight @Piotr Dura
 286 C Sinew Dancer @Kekai Kotaki
+287 C Quicksilver Fisher @Sidharth Chaturvedi
+289 C Blightbelly Rat @Flavio Girón
 290 C Bonepicker Skirge @Flavio Girón
 292 C Sawblade Scamp @Flavio Girón
 293 U Urabrask's Anointer @JungShan
+294 U Cankerbloom @Ravenna Tran
 296 U Necrogen Rotpriest @Dominik Mayer
 297 U Myr Convert @JungShan
 298 M Elesh Norn, Mother of Machines @Dominik Mayer
 299 M Mondrak, Glory Dominus @Flavio Girón
 301 R Skrelv, Defector Mite @Sidharth Chaturvedi
+302 M Tekuthal, Inquiry Dominus @Dominik Mayer
 304 R Archfiend of the Dross @Sidharth Chaturvedi
 306 R Geth, Thane of Contracts @Flavio Girón
 307 R Karumonix, the Rat King @Flavio Girón
 308 M Phyrexian Obliterator @Yu-ki Nishimoto
+309 R Vraan, Executioner Thane @shikee
 310 M Capricious Hellraiser @Kekai Kotaki
 311 R Slobad, Iron Goblin @Dominik Mayer
 313 R Evolved Spinoderm @Ravenna Tran
@@ -202,6 +226,8 @@ ScryfallCode=ONE
 344 R Tyvar, Jubilant Brawler @Iinuma Yuuki
 345 M Elesh Norn, Mother of Machines @Pedro Potier
 346 M Mondrak, Glory Dominus @rishxxv
+348 M Ichormoon Gauntlet @Cabrol
+349 M Tekuthal, Inquiry Dominus @Alejandro Mirabal
 351 M Phyrexian Obliterator @Pedro Potier
 353 M Capricious Hellraiser @Steve Ellis
 355 M Tyrranax Rex @Phil Stone
@@ -269,10 +295,15 @@ ScryfallCode=ONE
 427 R Skrelv, Defector Mite @Sidharth Chaturvedi
 428 M Jace, the Perfected Mind @Showichi Furumi
 429 M Jace, the Perfected Mind @Chase Stone
+430 C Quicksilver Fisher @Sidharth Chaturvedi
+431 M Tekuthal, Inquiry Dominus @Dominik Mayer
 434 R Archfiend of the Dross @Sidharth Chaturvedi
+435 U Blightbelly Rat @Flavio Girón
+436 C Bonepicker Skirge @Flavio Girón
 438 R Geth, Thane of Contracts @Flavio Girón
 439 R Karumonix, the Rat King @Flavio Girón
 440 M Phyrexian Obliterator @Yu-ki Nishimoto
+441 R Vraan, Executioner Thane @shikee
 442 M Vraska, Betrayal's Sting @Sansyu
 443 M Vraska, Betrayal's Sting @Chase Stone
 444 M Capricious Hellraiser @Kekai Kotaki
