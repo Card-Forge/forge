@@ -700,7 +700,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testLethalButPacified() {
-        // This should not have an instant win score because
+        // This should not be an instant win score because
         // pacifism keeps the bear from swinging
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -717,14 +717,6 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         opponent.setLife(2, null);
         game.getAction().checkStateEffects(true);
 
-        System.out.println(bearCard1.getStaticAbilities());
-        System.out.println(bearCard1);
-        System.out.println(pacifism);
-        System.out.println(bearCard1.getCurrentState().getCachedKeywords());
-        System.out.println(bearCard1.getCurrentState().getIntrinsicKeywords());
-        System.out.println(bearCard1.getKeywords());
-
-        System.out.println("Asserting:");
         AssertJUnit.assertTrue(bearCard1.isEnchanted());
         AssertJUnit.assertTrue(bearCard1.hasCardAttachment(pacifism));
         AssertJUnit.assertFalse(CombatUtil.canAttack(bearCard1));
@@ -766,18 +758,6 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testEnchantNonPacifiedCreature() {
-        /*
-        spells to test from chat:
-        Curiosity
-        Artful Dodge
-        Soratami Mirror-Guard's ability
-
-
-        more stuff to test:
-        make it target a 1/1 over a manadork
-        don't cast artful dodge if there are no blockers and no prowess, but do if there is prowess
-
-         */
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
@@ -797,38 +777,6 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
 
         AssertJUnit.assertEquals(false, CombatUtil.canAttack(bearCard1));
-
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
-        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        AssertJUnit.assertNotNull(sa);
-        AssertJUnit.assertEquals(bearCard2, sa.getTargetCard());
-    }
-
-    @Test
-    public void testSomethingOrOther() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(1);
-        Player opponent = game.getPlayers().get(0);
-
-        addCards("Forest", 2, p);
-        Card bearCard1 = addCard("Forest Bear", p);
-        bearCard1.setSickness(false);
-        Card bearCard2 = addCard("Forest Bear", p);
-        bearCard2.setSickness(false);
-        addCardToZone("Sixth Sense", p, ZoneType.Hand);
-
-        Card pacifism = addCard("Sixth Sense", p);
-        pacifism.attachToEntity(bearCard1, null);
-        game.getAction().checkStateEffects(true);
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
-        opponent.setLife(5, null);
-        game.getAction().checkStateEffects(true);
-
-        System.out.println(bearCard1.getKeywords());
-        System.out.println(bearCard1.getReplacementEffects());
-        System.out.println(bearCard1.getTriggers());
-
-
 
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);

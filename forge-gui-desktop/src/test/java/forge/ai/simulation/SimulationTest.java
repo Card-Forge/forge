@@ -143,13 +143,4 @@ public class SimulationTest {
             addCard(name, p);
         }
     }
-
-    protected Card addAura(String name, Player p, Card target) {
-        Card c = createCard(name, p);
-        // card need a new Timestamp otherwise Static Abilities might collide
-        c.setTimestamp(p.getGame().getNextTimestamp());
-        addCardToZone(name, p, ZoneType.Battlefield);
-        c.attachToEntity(target, null);
-        return c;
-    }
 }
