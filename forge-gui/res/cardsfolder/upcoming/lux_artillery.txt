@@ -1,8 +1,8 @@
 Name:Lux Artillery
 ManaCost:4
 Types:Artifact
-T:Mode$ SpellCast | ValidCard$ Artifact.Creature | ValidActivatingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact creature spell, it gains sunburst. (It enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.)
-SVar:TrigAnimate:DB$ Animate | Keywords$ Sunburst | Defined$ TriggeredCard | Triggers$ ETBAttach | Duration$ Permanent
+T:Mode$ SpellCast | ValidCard$ Artifact.Creature | ValidActivatingPlayer$ You | Execute$ TrigAnimate | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact creature spell, it gains sunburst. (It enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.)
+SVar:TrigAnimate:DB$ Animate | Keywords$ Sunburst | Defined$ TriggeredCard | Duration$ Permanent
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | ConditionCheckSVar$ X | ConditionCompare$ GE30 | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if there are thirty or more counters among artifacts and creatures you control, CARDNAME deals 10 damage to each opponent.
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 10
 SVar:X:Count$Valid Artifact.YouCtrl+Other$CardCounters.P1P1

@@ -1,8 +1,9 @@
 Name:Synthesis Pod
 ManaCost:3 PU
 Types:Artifact
-A:AB$ DigUntil | Cost$ 1 PG T ExileFromHand<1/Spell.YouCtrl/spell you control> | ValidTgts$ Opponent | Valid$ Card.cmcEQX | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | RememberRevealed$ True | Shuffle$ True | SubAbility$ DBPlay | SpellAbility$ Target opponent reveals cards from the top of their library until they reveal a card with mana value equal to 1 plus the exiled spell's mana value. Exile that card, then that player shuffles. You may cast that exiled card without paying its mana cost. 
+A:AB$ DigUntil | Cost$ 1 PG T Exile<1/Spell.YouCtrl/spell you control> | ValidTgts$ Opponent | Valid$ Card.cmcEQX | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | Shuffle$ True | SubAbility$ DBPlay | SpellDescription$ Target opponent reveals cards from the top of their library until they reveal a card with mana value equal to 1 plus the exiled spell's mana value. Exile that card, then that player shuffles. You may cast that exiled card without paying its mana cost. 
 SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Exiled$CardManaCost/Plus.1
+AI:RemoveDeck:All
 Oracle:{1}{U/P}, {T}, Exile a spell you control: Target opponent reveals cards from the top of their library until they reveal a card with mana value equal to 1 plus the exiled spell's mana value. Exile that card, then that player shuffles. You may cast that exiled card without paying its mana cost.
