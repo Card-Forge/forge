@@ -6,6 +6,7 @@ Type=Expansion
 ScryfallCode=ONE
 
 [cards]
+1 U Against All Odds @Rudy Siswanto
 2 U Annex Sentry @David Astruga
 3 U Apostle of Invasion @Marcela Bolívar
 5 U Bladed Ambassador @Nino Vecia
@@ -21,6 +22,7 @@ ScryfallCode=ONE
 26 U Ossification @Nino Vecia
 27 M Phyrexian Vindicator @Denys Tsiperko
 28 C Planar Disruption @Campbell White
+30 U Porcelain Zealot @Krharts
 31 U Resistance Reunited @Aurore Folny
 32 C Sinew Dancer @Campbell White
 33 R Skrelv, Defector Mite @Brian Valeza
@@ -30,6 +32,7 @@ ScryfallCode=ONE
 38 R White Sun's Twilight @Julian Kok Joon Wen
 42 R Blade of Shared Souls @Volkan Baǵa
 43 R Blue Sun's Twilight @Piotr Dura
+44 C Bring the Ending @LA Draws
 47 R Encroaching Mycosynth @Martin de Diego Sádaba
 49 C Experimental Augury @Donato Giancola
 56 M Ichormoon Gauntlet @Tiffany Turrill
@@ -39,10 +42,12 @@ ScryfallCode=ONE
 63 R Mindsplice Apparatus @Ovidio Cartagena
 64 U Minor Misstep @Lorenzo Mastroianni
 66 C Quicksilver Fisher @Filip Burburan
+67 U Reject Imperfection @David Astruga
 68 U Serum Snare @Lauren K. Cannon
 69 U Tamiyo's Immobilizer @Daren Bader
 70 U Tamiyo's Logbook @Piotr Dura
 71 M Tekuthal, Inquiry Dominus @Martin de Diego Sádaba
+72 U Thrummingbird @José Parodi
 73 U Transplant Theorist @Xavier Ribeiro
 74 U Trawler Drake @Daniel Ljunggren
 75 R Unctus, Grand Metatect @Andrew Mar
@@ -54,7 +59,9 @@ ScryfallCode=ONE
 84 R Black Sun's Twilight @Jonas De Ro
 85 C Blightbelly Rat @Yeong-Hao Han
 86 C Bonepicker Skirge @Dave Kendall
-87 C Chittering Skitterling @Nils Hamm
+87 U Chittering Skitterling @Nils Hamm
+90 M Drivnod, Carnage Dominus @Bogdan Rezunenko
+91 U Drown in Ichor @Tiffany Turrill
 93 U Feed the Infection @Jason A. Engle
 95 R Geth, Thane of Contracts @Martin de Diego Sádaba
 98 R Karumonix, the Rat King @Helge C. Balzer
@@ -67,6 +74,7 @@ ScryfallCode=ONE
 113 U Vat of Rebirth @Peter Polach
 114 R Vraan, Executioner Thane @Helge C. Balzer
 115 M Vraska, Betrayal's Sting @Chase Stone
+118 M All Will Be One @Chris Rahn
 119 U Awaken the Sleeper @Mathias Kollros
 124 U Cacophony Scamp @Svetlin Velinov
 125 M Capricious Hellraiser @Durion
@@ -80,6 +88,7 @@ ScryfallCode=ONE
 140 U Magmatic Sprinter @Samuel Araya
 142 U Nahiri's Sacrifice @Andrey Kuzinskiy
 143 U Oxidda Finisher @Vladimir Krisetskiy
+144 U Rebel Salvo @Khurrum
 145 R Red Sun's Twilight @Julian Kok Joon Wen
 146 U Resistance Skywarden @Jarel Threat
 147 C Sawblade Scamp @Helge C. Balzer
@@ -90,6 +99,8 @@ ScryfallCode=ONE
 155 C Volt Charge @Deruchenko Alexander
 156 C Vulshok Splitter @Kai Carpenter
 159 R Bloated Contaminator @Johann Bodin
+160 C Branchblight Stalker @Krharts
+161 U Cankerbloom @Nicholas Gregory
 162 C Carnivorous Canopy @John Di Giovanni
 163 R Conduit of Worlds @Jokubas Uogintas
 166 R Evolved Spinoderm @Svetlin Velinov
@@ -99,15 +110,18 @@ ScryfallCode=ONE
 175 M Nissa, Ascended Animist @Chase Stone
 176 U Noxious Assault @Billy Christian
 178 U Paladin of Predation @Lorenzo Mastroianni
+179 C Plague Nurse @Marcela Bolívar
 181 C Rustvine Cultivator @Lauren K. Cannon
 186 R Thrun, Breaker of Silence @Simon Dominic
 189 M Tyrranax Rex @Tuan Duong Chu
 190 U Tyvar's Stand @Kieran Yanner
 191 U Unnatural Restoration @Jeremy Wilson
 192 R Venerated Rotpriest @Brian Valeza
+193 U Venomous Brutalizer @Mike Jordana
 194 U Viral Spawning @Denis Zhbankov
 196 M Atraxa, Grand Unifier @Marta Nael
 197 U Bladehold War-Whip @Tony Foti
+199 U Charforger @Svetlin Velinov
 201 R Ezuri, Stalker of Spheres @Fariba Khamseh
 202 R Glissa Sunslayer @Gaboleps
 203 R Jor Kadeen, First Goldwarden @Jeremy Wilson
@@ -130,6 +144,7 @@ ScryfallCode=ONE
 223 U Atraxa's Skitterfang @Billy Christian
 224 C Basilica Skullbomb @Gaboleps
 225 C Dross Skullbomb @Gaboleps
+226 C Dune Mover @Kev Walker
 227 R The Filigree Sylex @Leanna Crossan
 228 C Furnace Skullbomb @Matt Forsyth
 229 R Graaz, Unstoppable Juggernaut @Nestor Ossandon Leal
@@ -145,14 +160,19 @@ ScryfallCode=ONE
 244 M Sword of Forge and Frontier @Scott Murphy
 245 R Tablet of Compleation @Martin de Diego Sádaba
 246 R Zenith Chronicler @Johann Bodin
+247 C The Autonomous Furnace @Muhammad Firdaus
 248 R Blackcleave Cliffs @Yeong-Hao Han
 249 R Copperline Gorge @Yeong-Hao Han
+251 C The Dross Pits @Martin de Diego Sádaba
+252 C The Fair Basilica @Marc Simonetti
+253 C The Hunter Maze @Alayna Danner
 254 R Mirrex @Adam Burn
 255 R The Monumental Facade @Bruce Brenneise
 256 R The Mycosynth Gardens @Andrew Mar
 257 R Razorverge Thicket @Randy Gallegos
 258 R Seachrome Coast @Mauricio Calle
 259 R The Seedcore @Kasia 'Kafis' Zielińska
+260 C The Surgical Bay @Sarah Finnigan
 262 L Plains @Alayna Danner
 263 L Island @Alayna Danner
 264 L Swamp @Alayna Danner
@@ -178,6 +198,7 @@ ScryfallCode=ONE
 284 R Green Sun's Twilight @Piotr Dura
 286 C Sinew Dancer @Kekai Kotaki
 287 C Quicksilver Fisher @Sidharth Chaturvedi
+288 U Thrummingbird @Flavio Girón
 289 C Blightbelly Rat @Flavio Girón
 290 C Bonepicker Skirge @Flavio Girón
 292 C Sawblade Scamp @Flavio Girón
@@ -187,9 +208,12 @@ ScryfallCode=ONE
 297 U Myr Convert @JungShan
 298 M Elesh Norn, Mother of Machines @Dominik Mayer
 299 M Mondrak, Glory Dominus @Flavio Girón
+300 M Phyrexian Vindicator @shikee
 301 R Skrelv, Defector Mite @Sidharth Chaturvedi
 302 M Tekuthal, Inquiry Dominus @Dominik Mayer
+303 R Unctus, Grand Metatect @Sidharth Chaturvedi
 304 R Archfiend of the Dross @Sidharth Chaturvedi
+305 M Drivnod, Carnage Dominus @Dominik Mayer
 306 R Geth, Thane of Contracts @Flavio Girón
 307 R Karumonix, the Rat King @Flavio Girón
 308 M Phyrexian Obliterator @Yu-ki Nishimoto
@@ -204,6 +228,7 @@ ScryfallCode=ONE
 319 R Kethek, Crucible Goliath @Flavio Girón
 320 R Malcator, Purity Overseer @Dominik Mayer
 322 R Ovika, Enigma Goliath @Dominik Mayer
+323 R Ria Ivor, Bane of Bladehold @Ravenna Tran
 324 R Venser, Corpse Puppet @Dominik Mayer
 325 M Jace, the Perfected Mind @Chase Stone
 326 M Vraska, Betrayal's Sting @Chase Stone
@@ -211,6 +236,7 @@ ScryfallCode=ONE
 328 M Lukka, Bound to Ruin @Chase Stone
 329 M Nahiri, the Unforgiving @Chase Stone
 330 R Kemba, Kha Enduring @Izumi Tomoki
+331 R Thrun, Breaker of Silence @Yuki Fujisawa
 332 R Jor Kadeen, First Goldwarden @Sansyu
 333 R Melira, the Living Cure @Miyuki Aramaki
 334 R Graaz, Unstoppable Juggernaut @kutay
@@ -226,9 +252,12 @@ ScryfallCode=ONE
 344 R Tyvar, Jubilant Brawler @Iinuma Yuuki
 345 M Elesh Norn, Mother of Machines @Pedro Potier
 346 M Mondrak, Glory Dominus @rishxxv
+347 M Phyrexian Vindicator @DZO
 348 M Ichormoon Gauntlet @Cabrol
 349 M Tekuthal, Inquiry Dominus @Alejandro Mirabal
+350 M Drivnod, Carnage Dominus @Thomas M. Baxa
 351 M Phyrexian Obliterator @Pedro Potier
+352 M All Will Be One @Alejandro Mirabal
 353 M Capricious Hellraiser @Steve Ellis
 355 M Tyrranax Rex @Phil Stone
 357 M Atraxa, Grand Unifier @Thomas M. Baxa
@@ -268,6 +297,7 @@ ScryfallCode=ONE
 394 R The Filigree Sylex @Leanna Crossan
 395 R Mirran Safehouse @Piotr Dura
 396 R Monument to Perfection @Igor Kieryluk
+397 R Soulless Jailer @Donato Giancola
 399 R Zenith Chronicler @Johann Bodin
 401 R The Monumental Facade @Bruce Brenneise
 403 R The Seedcore @Kasia 'Kafis' Zielińska
@@ -291,12 +321,14 @@ ScryfallCode=ONE
 422 R The Eternal Wanderer @Kento Matsuura
 423 R Kemba, Kha Enduring @Izumi Tomoki
 424 M Mondrak, Glory Dominus @Flavio Girón
+425 M Phyrexian Vindicator @shikee
 426 C Sinew Dancer @Kekai Kotaki
 427 R Skrelv, Defector Mite @Sidharth Chaturvedi
 428 M Jace, the Perfected Mind @Showichi Furumi
 429 M Jace, the Perfected Mind @Chase Stone
 430 C Quicksilver Fisher @Sidharth Chaturvedi
 431 M Tekuthal, Inquiry Dominus @Dominik Mayer
+432 U Thrummingbird @Flavio Girón
 434 R Archfiend of the Dross @Sidharth Chaturvedi
 435 U Blightbelly Rat @Flavio Girón
 436 C Bonepicker Skirge @Flavio Girón
@@ -314,6 +346,7 @@ ScryfallCode=ONE
 452 R Evolved Spinoderm @Ravenna Tran
 453 M Nissa, Ascended Animist @Chase Stone
 454 M Nissa, Ascended Animist @Gou Tanabe
+455 C Rustvine Cultivator @JungShan
 457 M Tyrranax Rex @Flavio Girón
 459 M Atraxa, Grand Unifier @Anato Finnstark
 460 R Ezuri, Stalker of Spheres @JungShan
