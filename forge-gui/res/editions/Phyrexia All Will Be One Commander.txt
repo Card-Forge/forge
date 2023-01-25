@@ -43,7 +43,7 @@ ScryfallCode=ONC
 39 M Otharri, Suns' Glory @Marta Nael
 40 M Vishgraz, the Doomhive @Andrew Mar
 41 R Lux Artillery @Jason Kang
-42 M Urtet, Remnant of Memnarch @Simon Dominic
+42 R Urtet, Remnant of Memnarch @Simon Dominic
 43 R Clever Concealment @Alexey Kruglov
 44 R Glimmer Lens @Sidharth Chaturvedi
 45 R Kemba's Banner @Wisnu Tan
