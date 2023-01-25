@@ -1,10 +1,17 @@
-Name:Baldin, Century Herdmaster
-ManaCost:4 W W
-Types:Legendary Creature Human Warrior
-PT:0/7
-S:Mode$ CombatDamageToughness | Condition$ PlayerTurn | ValidCard$ Creature | Description$ As long as it's your turn, each creature assigns combat damage equal to its toughness rather than its power.
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, up to one hundred target creatures each get +0/+X until end of turn, where X is the number of cards in your hand.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 100 | NumDef$ +X | AILogic$ Pump
+Name:Chiss-Goria, Forge Tyrant
+ManaCost:6 R R
+Types:Legendary Creature Dragon
+PT:5/4
+K:Affinity:Artifact
+K:Flying
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME attacks, exile the top five cards of your library. You may cast an artifact spell from among them this turn. If you do, it has affinity for artifacts.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 5 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBBranch
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | Triggers$ Play1 | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Exile,Stack | AffectedZone$ Stack | AddKeyword$ Affinity:Artifact | Affected$ Card.IsRemembered | MayPlay$ True | Description$ You may play one of those cards until end of turn.
+SVar:Play1:Mode$ SpellCast | ValidCard$ Card.IsRemembered | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ ExileSelf | Static$ True
+SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HasAttackEffect:TRUE
-SVar:X:Count$CardsInYourHand
-Oracle:As long as it's your turn, each creature assigns combat damage equal to its toughness rather than its power.\nWhenever Baldin, Century Herdmaster attacks, up to one hundred target creatures each get +0/+X until end of turn, where X is the number of cards in your hand.
+DeckNeeds:Type$Artifact
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)Flying, haste\nWhenever Chiss-Goria, Forge Tyrant attacks, exile the top five cards of your library. You may cast an artifact spell from among them this turn. If you do, it has affinity for artifacts.
