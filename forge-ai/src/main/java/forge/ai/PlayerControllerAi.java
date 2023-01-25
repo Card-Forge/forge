@@ -43,6 +43,7 @@ import forge.game.card.CardView;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
+import forge.game.cost.CostEnlist;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.keyword.KeywordInterface;
@@ -340,9 +341,12 @@ public class PlayerControllerAi extends PlayerController {
  
     @Override
     public List<Card> enlistAttackers(List<Card> attackers) {
-        // not able yet
-        // TODO get best creature that can't attack and check for lethal with it
-        return Lists.newArrayList();
+        CardCollection cards = CostEnlist.getCardsForEnlisting(brains.getPlayer(), null, null);
+        ComputerUtilCard.sortByEvaluateCreature(new CardCollection(attackers));
+        // do not enlist more than available payment choices
+        attackers = attackers.subList(0, cards.size());
+        // TODO check if not needed as defender
+        return attackers;
     }
 
     @Override

@@ -101,7 +101,7 @@ public class CostEnlist extends CostPartWithTrigger {
         return visitor.visit(this);
     }
 
-    public CardCollection getCardsForEnlisting(Player active, Card source, SpellAbility paySA) {
+    public static CardCollection getCardsForEnlisting(Player active, Card source, SpellAbility paySA) {
         return CardLists.getValidCards(active.getCardsIn(ZoneType.Battlefield), "Creature.notattacking+untapped+!sick", active, source, paySA);
     }
 
