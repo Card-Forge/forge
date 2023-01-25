@@ -21,6 +21,7 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -109,6 +110,7 @@ public class CostExileFromStack extends CostPart {
                 game.getStack().remove(si);
             }
             game.getAction().exile(sa.getHostCard(), null);
+            ability.addCostToHashList(CardUtil.getLKICopy(sa.getHostCard()), "Exiled");
         }
         return true;
     }
