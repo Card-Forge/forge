@@ -468,7 +468,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostEnlist cost) {
-        CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), "Creature.notattacking+untapped+!sick", player, source, ability);
+        CardCollectionView list = cost.getCardsForEnlisting(player, source, ability);
         if (list.isEmpty()) {
             return null;
         }

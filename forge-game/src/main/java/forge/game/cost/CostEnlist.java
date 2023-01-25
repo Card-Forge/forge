@@ -21,9 +21,12 @@ import java.util.Map;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
 
 /**
  * The Class CostExert.
@@ -96,6 +99,10 @@ public class CostEnlist extends CostPartWithTrigger {
     // Inputs
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
+    }
+
+    public CardCollection getCardsForEnlisting(Player active, Card source, SpellAbility paySA) {
+        return CardLists.getValidCards(active.getCardsIn(ZoneType.Battlefield), "Creature.notattacking+untapped+!sick", active, source, paySA);
     }
 
 }
