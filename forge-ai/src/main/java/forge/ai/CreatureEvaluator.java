@@ -119,6 +119,11 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value += addValue(c.getKeywordMagnitude(Keyword.TOXIC) * 5, "toxic");
             value += addValue(c.getKeywordMagnitude(Keyword.AFFLICT) * 5, "afflict");
             value += addValue(c.getKeywordMagnitude(Keyword.RAMPAGE), "rampage");
+
+            if (c.hasTriggerContaining("Whenever this creature deals combat damage") ||
+                    c.hasTriggerContaining("Whenever this creature deals damage")) {
+                value += addValue(10, "cdamage_trigger");
+            }
         }
 
         value += addValue(c.getKeywordMagnitude(Keyword.ANNIHILATOR) * 50, "eldrazi");
@@ -162,17 +167,6 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value += addValue(20, "protection");
         }
 
-        for (final SpellAbility sa : c.getSpellAbilities()) {
-            if (sa.isAbility()) {
-                value += addValue(evaluateSpellAbility(sa), "sa: " + sa);
-            }
-        }
-
-        // paired creatures are more valuable because they grant a bonus to the other creature
-        if (c.isPaired()) {
-            value += addValue(14, "paired");
-        }
-
         if (c.hasEncodedCard()) {
             value += addValue(24, "encoded");
         }
@@ -181,12 +175,10 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value += addValue(30, "revive");
         }
 
-        // Bad keywords
-        if (c.hasKeyword(Keyword.DEFENDER) || c.hasKeyword("CARDNAME can't attack.")) {
-            value -= subValue((power * 9) + 40, "defender");
-        } else if (c.getSVar("SacrificeEndCombat").equals("True")) {
-            value -= subValue(40, "sac-end");
-        }
+        // END COMBAT RELEVANT EFFECTS
+
+
+        // This needs to go before the actively negative effects, and after all the combat effects
         if (c.hasKeyword("CARDNAME can't attack or block.")) {
             value = addValue(50 + (c.getCMC() * 5), "useless"); // reset everything - useless
         } else if (c.hasKeyword("CARDNAME can't block.")) {
@@ -200,6 +192,24 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             }/* else if (c.hasKeyword("CARDNAME can block only creatures with flying.")) {
             value -= subValue(toughness * 5, "reverse-reach");
         }//*/
+        }
+
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isAbility()) {
+                value += addValue(evaluateSpellAbility(sa), "sa: " + sa);
+            }
+        }
+
+        // paired creatures are more valuable because they grant a bonus to the other creature
+        if (c.isPaired()) {
+            value += addValue(14, "paired");
+        }
+
+        // Bad keywords
+        if (c.hasKeyword(Keyword.DEFENDER) || c.hasKeyword("CARDNAME can't attack.")) {
+            value -= subValue((power * 9) + 40, "defender");
+        } else if (c.getSVar("SacrificeEndCombat").equals("True")) {
+            value -= subValue(40, "sac-end");
         }
 
         if (c.hasSVar("DestroyWhenDamaged")) {
@@ -247,7 +257,13 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         // TODO no longer a KW
         if (c.hasStartOfKeyword("At the beginning of your upkeep, CARDNAME deals")) {
             value -= subValue(20, "upkeep-dmg");
-        } 
+        }
+
+        // add a small bonus for each trigger that the card has
+        int trigger_count = c.getTriggers().size();
+        if (trigger_count > 0) {
+            value += addValue(trigger_count, "triggers");
+        }
 
         // card-specific evaluation modifier
         if (c.hasSVar("AIEvaluationModifier")) {

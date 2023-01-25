@@ -709,13 +709,25 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         Card bearCard1 = addCard("Forest Bear", p);
         bearCard1.setSickness(false);
 
-        Card pacifism = addAura("Pacifism", opponent, bearCard1);
+        Card pacifism = addCard("Pacifism", opponent);
+        pacifism.attachToEntity(bearCard1, null);
+        game.getAction().checkStateEffects(true);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
         opponent.setLife(2, null);
+        game.getAction().checkStateEffects(true);
 
+        System.out.println(bearCard1.getStaticAbilities());
+        System.out.println(bearCard1);
+        System.out.println(pacifism);
+        System.out.println(bearCard1.getCurrentState().getCachedKeywords());
+        System.out.println(bearCard1.getCurrentState().getIntrinsicKeywords());
+        System.out.println(bearCard1.getKeywords());
+
+        System.out.println("Asserting:");
         AssertJUnit.assertTrue(bearCard1.isEnchanted());
         AssertJUnit.assertTrue(bearCard1.hasCardAttachment(pacifism));
-        AssertJUnit.assertEquals(false, CombatUtil.canAttack(bearCard1));
+        AssertJUnit.assertFalse(CombatUtil.canAttack(bearCard1));
 
         GameSimulator sim = createSimulator(game, p);
         int origScore = sim.getScoreForOrigGame().value;
@@ -737,15 +749,84 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         bearCard2.setSickness(false);
         addCardToZone("Monstrous Growth", p, ZoneType.Hand);
 
-        addAura("Pacifism", opponent, bearCard1);
+        Card pacifism = addCard("Pacifism", opponent);
+        pacifism.attachToEntity(bearCard1, null);
+        game.getAction().checkStateEffects(true);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        opponent.setLife(8, null);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertEquals(false, CombatUtil.canAttack(bearCard1));
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertNotNull(sa);
+        AssertJUnit.assertEquals(bearCard2, sa.getTargetCard());
+    }
+
+    @Test
+    public void testEnchantNonPacifiedCreature() {
+        /*
+        spells to test from chat:
+        Curiosity
+        Artful Dodge
+        Soratami Mirror-Guard's ability
+
+
+        more stuff to test:
+        make it target a 1/1 over a manadork
+        don't cast artful dodge if there are no blockers and no prowess, but do if there is prowess
+
+         */
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        addCards("Forest", 2, p);
+        Card bearCard1 = addCard("Forest Bear", p);
+        bearCard1.setSickness(false);
+        Card bearCard2 = addCard("Forest Bear", p);
+        bearCard2.setSickness(false);
+        addCardToZone("Sixth Sense", p, ZoneType.Hand);
+
+        Card pacifism = addCard("Pacifism", opponent);
+        pacifism.attachToEntity(bearCard1, null);
+        game.getAction().checkStateEffects(true);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         opponent.setLife(5, null);
         game.getAction().checkStateEffects(true);
 
-        
-
-        // AssertJUnit.assertEquals(true, bearCard1.hasKeyword("CARDNAME can't attack or block."));
         AssertJUnit.assertEquals(false, CombatUtil.canAttack(bearCard1));
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertNotNull(sa);
+        AssertJUnit.assertEquals(bearCard2, sa.getTargetCard());
+    }
+
+    @Test
+    public void testSomethingOrOther() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        addCards("Forest", 2, p);
+        Card bearCard1 = addCard("Forest Bear", p);
+        bearCard1.setSickness(false);
+        Card bearCard2 = addCard("Forest Bear", p);
+        bearCard2.setSickness(false);
+        addCardToZone("Sixth Sense", p, ZoneType.Hand);
+
+        Card pacifism = addCard("Sixth Sense", p);
+        pacifism.attachToEntity(bearCard1, null);
+        game.getAction().checkStateEffects(true);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        opponent.setLife(5, null);
+        game.getAction().checkStateEffects(true);
+
+        System.out.println(bearCard1.getKeywords());
+        System.out.println(bearCard1.getReplacementEffects());
+        System.out.println(bearCard1.getTriggers());
 
 
 

@@ -5182,6 +5182,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return visitor.getResult();
     }
 
+    public final boolean hasTriggerContaining(final String value) {
+        for (Trigger t: this.getTriggers()) {
+            if (t.toString().contains(value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public final boolean hasAnyKeyword(final Iterable<String> keywords) {
         return hasAnyKeyword(keywords, currentState);
     }
