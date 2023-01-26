@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="54">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="57">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -82,6 +82,7 @@
   <object id="48" template="../obj/shop.tx" x="160" y="96">
    <properties>
     <property name="commonShopList" value="Mountain"/>
+    <property name="noRestock" type="bool" value="true"/>
    </properties>
   </object>
   <object id="50" template="../obj/shardtrader.tx" x="335" y="81">
@@ -95,15 +96,13 @@
     <property name="questtype" value="mountain_town_identity"/>
    </properties>
   </object>
-  <object id="52" template="../obj/shop.tx" x="240" y="97">
+  <object id="55" template="../obj/RotatingShop.tx" x="240" y="97">
    <properties>
-    <property name="commonShopList" value="Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
-    <property name="rareShopList" value="RGU,RWG,RWU,RUB,RWB,RGB,Land4Red,Creature6Red"/>
-    <property name="uncommonShopList" value="Gruul,Izzet,Rakdos,Boros,Gruul,Izzet,Rakdos,Boros,Land"/>
+    <property name="rotation" value="Red1,Red2,Red3,Red4,Red5,Red6"/>
+    <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
-  <object id="53" template="../obj/shop.tx" x="304" y="97">
+  <object id="56" template="../obj/shop.tx" x="304" y="97">
    <properties>
     <property name="commonShopList" value="Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>

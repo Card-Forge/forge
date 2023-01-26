@@ -1,7 +1,553 @@
-[{                                      
+[
+{                                      
+"name":"Black1",                  
+"description":"Certain Death",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Black",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "(destroy|exile) target|sacrifice",
+	  "colors": ["black"]
+    },
+	{
+      "count":2,
+	  "cardText": "(destroy|exile) target|sacrifice"
+    }]
+},{                                      
+"name":"Black2",                  
+"description":"March of the Returned",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Black",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "destroyed|dies|return.*(hand|battlefield|library|to play)|put.*battlefield from",
+	  "colors": ["black"]
+    },
+	{
+      "count":2,
+	  "cardText": "destroyed|dies|return.*(hand|battlefield|library|to play)|put.*battlefield from"
+    }]
+},{                                      
+"name":"Black3",                  
+"description":"Essence Extraction",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Black",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "pay.*life.*:|(lose|gain).*life|deal.*damage",
+	  "colors": ["black"]
+    },
+	{
+      "count":2,
+	  "cardText": "pay.*life.*:|(lose|gain).*life|deal.*damage"
+    }]
+},{                                      
+"name":"Black4",                  
+"description":"Demonic Tutor",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Black",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "search|seek|reveal.*library|choose|choice|unless",
+	  "colors": ["black"]
+    },
+	{
+      "count":2,
+	  "cardText": "search|seek|reveal.*library|choose|choice|unless"
+    }]
+},{                                      
+"name":"Black5",                  
+"description":"Grotesque Mutations",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Black",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "deathtouch|fear|intimidate|menace|ninjitsu|regenerate\b",
+	  "colors": ["black"]
+    },
+	{
+      "count":2,
+	  "cardText": "deathtouch|fear|intimidate|menace|ninjitsu|regenerate\b"
+    }]
+},{                                      
+"name":"Black6",                  
+"description":"Phyrexian Boons",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Black",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "([+-])\\d?/([+-])\\d?",
+	  "colors": ["black"]
+    },
+	{
+      "count":2,
+	  "cardText": "([+-])\\d?/([+-])\\d?"
+    }]
+},{                                      
+"name":"Blue1",                  
+"description":"Control Magic",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Blue",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "return.*to.*(hand|top of.*library)|gain(s)? control of|mill|tap |untap|counter target",
+	  "colors": ["blue"]
+    },
+	{
+      "count":2,
+	  "cardText": "return.*to.*(hand|top of.*library)|gain(s)? control of|mill|tap |untap|counter target"
+    }]
+},{                                      
+"name":"Blue2",                  
+"description":"Tolarian Digsite",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Blue",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "artifact|historic|explores|connive|clue token|investigate",
+	  "colors": ["blue"]
+    },
+	{
+      "count":2,
+	  "cardText": "artifact|historic|explores|connive|clue token|investigate"
+    }]
+},{                                      
+"name":"Blue3",                  
+"description":"Cloaks of Invisibility",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Blue",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "flying|prowess|unblockable|hexproof|shroud|morph|ninjitsu|phas(ing|(es (in|out)))",
+	  "colors": ["blue"]
+    },
+	{
+      "count":2,
+	  "cardText": "flying|prowess|unblockable|hexproof|shroud|morph|ninjitsu|phas(ing|(es (in|out)))"
+    }]
+},{
+"name":"Blue4",                  
+"description":"Sleights of Mind",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Blue",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "(change|copy).*(that|target)|color(s|ed)?\\b|land type|mana|name|flashback|overload|splice|rebound|buyback|morph|madness|delve|instead",
+	  "colors": ["blue"]
+    },
+	{
+      "count":2,
+	  "cardText": "(change|copy).*(that|target)|color(s|ed)?\\b|land type|mana|name|flashback|overload|splice|rebound|buyback|morph|madness|delve|instead"
+    }]
+},{     
+"name":"Blue5",                  
+"description":"Library of Lat-Nam",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Blue",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "draw(s)?|(exile|reveal|look|search).*library|scry|seek|conjure ",
+	  "colors": ["blue"]
+    },
+	{
+      "count":2,
+	  "cardText": "draw(s)?|(exile|reveal|look|search).*library|scry|seek|conjure "
+    }]
+},
+{     
+"name":"Blue6",                  
+"description":"Rules & Regulations",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Blue",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "can't|must|whenever|unless|becomes|until|upkeep|(leave|enter)(s)|doesn't? .*(play|battlefield)|each",
+	  "colors": ["blue"]
+    },
+	{
+      "count":2,
+	  "cardText": "can't|must|whenever|unless|becomes|until|upkeep|(leave|enter)(s)|doesn't? .*(play|battlefield)|each"
+    }]
+},{     
+"name":"Green1",                  
+"description":"Explosive Growth",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Green",
+  "rewards": [
+    {
+      "count":6,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "cardText": "counter.*on |counter.*distribute|distribute.*counter|proliferate|creature(s)? from",
+		  "colors": ["green"]
+		},
+		{
+		  "count":1,
+		  "cardText": "([+-])\\d?/([+-])\\d?",
+		  "colors": ["green"]
+		}
+	  ]
+      
+    },
+	{
+      "count":2,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "cardText": "counter.*on |counter.*distribute|distribute.*counter|proliferate|creature(s)? from",
+		},
+		{
+		  "count":1,
+		  "cardText": "([+-])\\d?/([+-])\\d?",
+		}
+	  ]
+    }]
+},{                                      
+"name":"Green2",                  
+"description":"Jungle Expeditions",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Green",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "still a land|(exile|reveal|look|search).*library|scry|explores|additional land|land from.*(graveyard|hand)|put.*land(s)?from|landfall",
+	  "colors": ["green"]
+
+    },
+	{
+      "count":2,
+	  "cardText": "still a land|(exile|reveal|look|search).*library|scry|explores|additional land|land from.*(graveyard|hand)|put.*land(s)?from|landfall"
+    }]
+},{                                      
+"name":"Green3",                  
+"description":"Dominant Predators",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Green",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": " fight(s)?|deal(s)? damage equal|(power|toughness) equal to the number",
+	  "colors": ["green"]
+
+    },
+	{
+      "count":2,
+	  "cardText": " fight(s)?|deal(s)? damage equal|(power|toughness) equal to the number"
+    }]
+},{                                      
+"name":"Green4",                  
+"description":"Natural Selection",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Green",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "trample|reach|hexproof|regenerate|shroud|deathtouch",
+	  "colors": ["green"]
+
+    },
+	{
+      "count":2,
+	  "cardText": "trample|reach|hexproof|regenerate|shroud|deathtouch"
+    }]
+},{                                      
+"name":"Green5",                  
+"description":"Cycle of Life",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Green",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "gain.*life|token|draw|food",
+	  "colors": ["green"]
+    },
+	{
+      "count":2,
+	  "cardText": "gain.*life|token|draw|food"
+    }]
+},{
+"name":"Green6",                  
+"description":"Verdant Haven",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Green",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "tap.*mana|:.*add.*(\\{[gburw]\\}|to your mana)|untap",
+	  "colors": ["green"]
+    },
+	{
+      "count":2,
+	  "cardText": "tap.*mana|:.*add.*(\\{[gburw]\\}|to your mana)|untap"
+    }]
+},{
+"name":"Red1",                  
+"description":"Burn Baby Burn",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Red",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "deal.*damage|destroy",
+	  "colors": ["red"]
+
+    },
+	{
+      "count":2,
+	  "cardText": "deal.*damage|destroy"
+    }]
+},
+{                                      
+"name":"Red2",                  
+"description":"Weaponize the Monsters",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Red",
+  "rewards": [
+    {
+      "count":68,
+	  "cardText": "haste|(first |double )strike | prowess|return .* to hand at end of turn|At the beginning of (your|the) end step, (sacrifice|return .* to (your|its owner).*hand)",
+	  "colors": ["red"]
+
+    },
+	{
+      "count":2,
+	  "cardText": "haste|(first |double )strike | prowess|return .* to hand at end of turn|At the beginning of (your|the) end step, (sacrifice|return .* to (your|its owner).*hand)"
+    }]
+},{                                      
+"name":"Red3",                  
+"description":"Mana Cache",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Red",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "each creature|each player|any player may|unless|choose|choice",
+	  "colors": ["red"] 
+    },
+	{
+      "count":2,
+	  "cardText": "each creature|each player|any player may|unless|choose|choice"
+    }]
+},{
+"name":"Red4",
+"description":"Seismic Strike",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Red",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "each mountain|number of mountains|sacrifice.*:",
+	  "colors": ["red"] 
+    },
+	{
+      "count":2,
+	  "cardText": "each mountain|number of mountains|sacrifice.*:"
+    }]
+},{	
+"name":"Red5",                  
+"description":"Destructive Urge",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Red",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "gain control of|when.*(cast|copy).*spell|if able",
+	  "colors": ["red"] 
+    },
+	{
+      "count":2,
+	  "cardText": "gain control of|when.*(cast|copy).*spell|if able"
+    }]
+},{	
+"name":"Red6",                  
+"description":"Wheel of Fate",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Red",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "top of your library|random|roll.*di(c)?e|flip .*coin|coin .*flip|draw .*discard|discard .*draw",
+	  "colors": ["red"] 
+    },
+	{
+      "count":2,
+	  "cardText": "top of your library|random|roll.*di(c)?e|flip .*coin|coin .*flip|draw .*discard|discard .*draw"
+    }]
+},{	
+"name":"White1",                  
+"description":"Ounce of Prevention",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6White",
+    "rewards": [
+    {
+      "count":6,
+	  "cardText": "Prevent.*Damage",
+	  "colors": ["white"]
+    },
+	{
+      "count":2,
+	  "cardText": "Prevent.*Damage"
+    }]
+ 
+},{	
+"name":"White2",                  
+"description":"Pound of Cure",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6White",
+    "rewards": [
+    {
+      "count":6,
+	  "cardText": "gain.*life|life total",
+	  "colors": ["white"] 
+    },
+	{
+      "count":2,
+	  "cardText": "gain.*life|life total"
+    }]
+},{                                      
+"name":"White3",                  
+"description":"Swords, Plowshares, and Beyond",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6White",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "(Destroy|exile).*(attacking|defending|tapped|with)",
+	  "colors": ["white"]
+
+    },
+	{
+      "count":2,
+	  "cardText": "(Destroy|exile).*(attacking|defending|tapped|with)"
+    }]
+},{                                      
+"name":"White4",                  
+"description":"Only mostly dead",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6White",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "Return.*to.*(your hand|battlefield|play)",
+	  "colors": ["white"] 
+    },
+	{
+      "count":2,
+	  "cardText": "Return.*to.*(your hand|battlefield|play)"
+    }]
+},{                                      
+"name":"White5",                  
+"description":"Weights and Measures",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6White",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText":"pays|more|less|tap target creature",
+	  "colors": ["white"] 
+
+    },
+	{
+      "count":2,
+	  "cardText": "pays|more|less|tap target creature"
+    }]
+},{                                      
+"name":"White6",                  
+"description":"Strict dogma",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6White",
+  "rewards": [
+    {
+      "count":6,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "cardText": "(Vigilance|Lifelink|Protection|First Strike|Double Strike|Flying)",
+		  "colors": ["white"]
+		},
+		{
+		  "count":1,
+		  "cardText": "([+-])\\d?/([+-])\\d?",
+		  "colors": ["white"]
+		}
+	  ]
+      
+    },
+	{
+      "count":2,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "cardText": "(Vigilance|Lifelink|Protection|First Strike|Double Strike|Flying)",
+		},
+		{
+		  "count":1,
+		  "cardText": "([+-])\\d?/([+-])\\d?",
+		}
+	  ]
+    }]
+},{                                      
+"name":"Graveyard",                  
+"description":"Better Call Sol",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"BlackShop",
+"overlaySprite":"Overlay8Red",
+  "rewards": [
+    {
+      "count":8,
+	  "deckNeeds": ["Ability$Graveyard"]
+    }]
+},{                                      
 "name":"WhiteEquipment",                  
 "spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"CapitalShop",   
+"sprite":"EquipmentShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Life Amulet"  },
     { "type": "item","count":1, "itemName": "Gold Armor"  },
@@ -19,7 +565,11 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "White rune"  },
     { "type": "item","count":1, "itemName": "White Staff"  },
-    { "type": "mana","count":2    },
+	{ "type": "item","count":1, "itemName": "Cursed Treasure"  },
+	{ "type": "item","count":1, "itemName": "Farmer's Tools"  },
+	{ "type": "item","count":1, "itemName": "Piper's Charm"  },
+	{ "type": "item","count":1, "itemName": "Sleep Wand"  },
+	{ "type": "item","count":1, "itemName": "Hill Giant Club"  },
     { "type": "life","count":1    }
     
     ]
@@ -27,7 +577,7 @@
 },{                                      
 "name":"RedEquipment",                  
 "spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"CapitalShop",   
+"sprite":"EquipmentShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Axt"  },
     { "type": "item","count":1, "itemName": "Aladdin's Ring"  },
@@ -45,15 +595,18 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Red rune"  },
     { "type": "item","count":1, "itemName": "Red Staff"  },
-    { "type": "mana","count":2    },
+	{ "type": "item","count":1, "itemName": "Cursed Treasure"  },
+	{ "type": "item","count":1, "itemName": "Farmer's Tools"  },
+	{ "type": "item","count":1, "itemName": "Piper's Charm"  },
+	{ "type": "item","count":1, "itemName": "Sleep Wand"  },
+	{ "type": "item","count":1, "itemName": "Hill Giant Club"  },
     { "type": "life","count":1    }
-    
     ]
 
 },{                                      
 "name":"BlueEquipment",                  
 "spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"CapitalShop",   
+"sprite":"EquipmentShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Traveler's Amulet"  },
     { "type": "item","count":1, "itemName": "Magic Shard"  },
@@ -71,7 +624,11 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Blue rune"  },
     { "type": "item","count":1, "itemName": "Blue Staff"  },
-    { "type": "mana","count":2    },
+	{ "type": "item","count":1, "itemName": "Cursed Treasure"  },
+	{ "type": "item","count":1, "itemName": "Farmer's Tools"  },
+	{ "type": "item","count":1, "itemName": "Piper's Charm"  },
+	{ "type": "item","count":1, "itemName": "Sleep Wand"  },
+	{ "type": "item","count":1, "itemName": "Hill Giant Club"  },
     { "type": "life","count":1    }
     
     ]
@@ -80,7 +637,7 @@
 {                                      
 "name":"BlackEquipment",                  
 "spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"CapitalShop",   
+"sprite":"EquipmentShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Death Ring"  },
     { "type": "item","count":1, "itemName": "Dark Amulet"  },
@@ -98,7 +655,11 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Black rune"  },
     { "type": "item","count":1, "itemName": "Black Staff"  },
-    { "type": "mana","count":2    },
+	{ "type": "item","count":1, "itemName": "Cursed Treasure"  },
+	{ "type": "item","count":1, "itemName": "Farmer's Tools"  },
+	{ "type": "item","count":1, "itemName": "Piper's Charm"  },
+	{ "type": "item","count":1, "itemName": "Sleep Wand"  },
+	{ "type": "item","count":1, "itemName": "Hill Giant Club"  },
     { "type": "life","count":1    }
     
     ]
@@ -107,7 +668,7 @@
 {                                      
 "name":"GreenEquipment",                  
 "spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"CapitalShop",   
+"sprite":"EquipmentShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Jungle Shield"  },
     { "type": "item","count":1, "itemName": "Ring of Three Wishes"  },
@@ -125,7 +686,11 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Green rune"  },
     { "type": "item","count":1, "itemName": "Green Staff"  },
-    { "type": "mana","count":2    },
+	{ "type": "item","count":1, "itemName": "Cursed Treasure"  },
+	{ "type": "item","count":1, "itemName": "Farmer's Tools"  },
+	{ "type": "item","count":1, "itemName": "Piper's Charm"  },
+	{ "type": "item","count":1, "itemName": "Sleep Wand"  },
+	{ "type": "item","count":1, "itemName": "Hill Giant Club"  },
     { "type": "life","count":1   }
     
     ]
@@ -1468,7 +2033,7 @@
 	}]
 },{
   "name":"Sliver2Green",
-  "description":"Venomous Hive",
+  "description":"Mighty Hive",
   "spriteAtlas":"maps/tileset/buildings.atlas",
   "sprite":"SliverShop",
   "overlaySprite":"Overlay2Green",
@@ -1542,7 +2107,7 @@
 	}]
 },{
   "name":"Sliver2White",
-  "description":"Warded Hive",
+  "description":"Plated Hive",
   "spriteAtlas":"maps/tileset/buildings.atlas",
   "sprite":"SliverShop",
   "overlaySprite":"Overlay2White",
@@ -1563,6 +2128,191 @@
 	},
 	{
 	  "count":2,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Sliver"],
+		  "colors": ["white"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Sliver",
+		  "colors": ["white"]
+		}
+	  ]
+	}]
+},{
+  "name":"Sliver4Black",
+  "description":"Spectral Hive",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SliverShop",
+  "overlaySprite":"Overlay4Black",
+  "rewards": [
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Sliver"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Sliver"
+		}
+	  ]
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Sliver"],
+		  "colors": ["black"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Sliver",
+		  "colors": ["black"]
+		}
+	  ]
+	}]
+},{
+  "name":"Sliver4Blue",
+  "description":"Mistform Hive",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SliverShop",
+  "overlaySprite":"Overlay2Blue",
+  "rewards": [
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Sliver"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Sliver"
+		}
+	  ]
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Sliver"],
+		  "colors": ["blue"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Sliver",
+		  "colors": ["blue"]
+		}
+	  ]
+	}]
+},{
+  "name":"Sliver4Green",
+  "description":"Venemous Hive",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SliverShop",
+  "overlaySprite":"Overlay4Green",
+  "rewards": [
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Sliver"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Sliver"
+		}
+	  ]
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Sliver"],
+		  "colors": ["green"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Sliver",
+		  "colors": ["green"]
+		}
+	  ]
+	}]
+},{
+  "name":"Sliver4Red",
+  "description":"Furious Hive",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SliverShop",
+  "overlaySprite":"Overlay2Red",
+  "rewards": [
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Sliver"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Sliver"
+		}
+	  ]
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Sliver"],
+		  "colors": ["red"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Sliver",
+		  "colors": ["red"]
+		}
+	  ]
+	}]
+},{
+  "name":"Sliver4White",
+  "description":"Warded Hive",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SliverShop",
+  "overlaySprite":"Overlay2White",
+  "rewards": [
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Sliver"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Sliver"
+		}
+	  ]
+	},
+	{
+	  "count":4,
 	  "type":"Union",
 	  "cardUnion": [
 		{
@@ -1904,11 +2654,28 @@
 "sprite":"MultiColorShop",
 "overlaySprite":"Overlay8Black",
   "rewards": [
-    {
-      "count":8,
-      "colorType": "MultiColor",
-	  "colors": ["Black"]
-    }]
+	{
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Black","Blue"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Black","Green"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Black","Red"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Black","White"]
+		}
+	  ]
+	}]
 },{                                    
 "name":"Multicolor8Blue",                  
 "description":"The Goldsmith",
@@ -1916,11 +2683,28 @@
 "sprite":"MultiColorShop",
 "overlaySprite":"Overlay8Blue",
   "rewards": [
-    {
-      "count":8,
-      "colorType": "MultiColor",
-	  "colors": ["Blue"]
-    }]
+	{
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Blue","Black"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Blue","Green"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Blue","Red"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Blue","White"]
+		}
+	  ]
+	}]
 },{                                    
 "name":"Multicolor8Green",                  
 "description":"The Goldsmith",
@@ -1928,11 +2712,28 @@
 "sprite":"MultiColorShop",
 "overlaySprite":"Overlay8Green",
   "rewards": [
-    {
-      "count":8,
-      "colorType": "MultiColor",
-	  "colors": ["Green"]
-    }]
+	{
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Green","Black"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Green","Blue"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Green","Red"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Green","White"]
+		}
+	  ]
+	}]
 },{                                    
 "name":"Multicolor8Red",                  
 "description":"The Goldsmith",
@@ -1940,11 +2741,28 @@
 "sprite":"MultiColorShop",
 "overlaySprite":"Overlay8Red",
   "rewards": [
-    {
-      "count":8,
-      "colorType": "MultiColor",
-	  "colors": ["Red"]
-    }]
+	{
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Red","Black"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Red","Blue"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Red","Green"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Red","White"]
+		}
+	  ]
+	}]
 },{                                    
 "name":"Multicolor8White",                  
 "description":"The Goldsmith",
@@ -1952,11 +2770,28 @@
 "sprite":"MultiColorShop",
 "overlaySprite":"Overlay8White",
   "rewards": [
-    {
-      "count":8,
-      "colorType": "MultiColor",
-	  "colors": ["White"]
-    }]
+	{
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["White","Black"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["White","Blue"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["White","Green"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["White","Red"]
+		}
+	  ]
+	}]
 },{
   "name":"SpaceMarine",
   "description":"The Codex",

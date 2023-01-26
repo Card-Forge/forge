@@ -231,12 +231,16 @@ public class RewardScene extends UIScene {
     }
 
     void updateRestockButton(){
+        if (!shopActor.canRestock())
+            return;
         int price = shopActor.getRestockPrice();
         restockButton.setText("Refresh\n " + price + "[+shards]");
         restockButton.setDisabled(WorldSave.getCurrentSave().getPlayer().getShards() < price);
     }
 
     void restockShop(){
+        if (!shopActor.canRestock())
+            return;
         int price = shopActor.getRestockPrice();
         if(changes!=null)
             changes.generateNewShopSeed(shopActor.getObjectId());
@@ -328,6 +332,10 @@ public class RewardScene extends UIScene {
 
                 if (shopActor.canRestock()) {
                     restockButton.setVisible(true);
+                }
+                else{
+                    restockButton.setVisible(false);
+                    restockButton.setDisabled(true);
                 }
                 break;
             case Loot:

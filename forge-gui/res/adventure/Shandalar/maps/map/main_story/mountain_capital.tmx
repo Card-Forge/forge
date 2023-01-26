@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="70">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="73">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -12,12 +12,12 @@
  </layer>
  <layer id="2" name="Ground" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1cEJwCAMhWEHsOAApWt002I7rQVvgpBCbCL+30UQDzGRZwgAAOh6ou456KHnWN25WVfgl7feSOvJb67dgmzzdj/gD/z7c5Nk21d54Ju4Ojnb27eyp7oeybYOjMF8AbQKejsINQ==
+   eJzt1UEKgCAQhWG3QYEHiNZ1gm4a1mkLWkTBhMTYK/i/jSAuxlHehAAAgK+l9j0HP/QcCn2lruAwNuoKzgZ6Y8qtJ225Nmdk29fuB7yBuf9vd9n2dH6kgn9iMnLW2ldp4752UVsHyuB9AVytTOkIyg==
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -39,39 +39,44 @@
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
-  <object id="56" template="../../obj/shop.tx" x="153" y="371">
+  <object id="56" template="../../obj/shop.tx" x="152" y="370">
    <properties>
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
-  <object id="57" template="../../obj/shop.tx" x="201" y="418">
+  <object id="57" template="../../obj/shop.tx" x="200" y="418">
    <properties>
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
-  <object id="43" template="../../obj/shop.tx" x="105" y="370">
+  <object id="43" template="../../obj/shop.tx" x="104" y="370">
    <properties>
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
   <object id="47" template="../../obj/inn.tx" x="376" y="370"/>
-  <object id="49" template="../../obj/shop.tx" x="105" y="418">
+  <object id="49" template="../../obj/shop.tx" x="104" y="418">
    <properties>
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
@@ -80,14 +85,16 @@
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
-  <object id="51" template="../../obj/shop.tx" x="248" y="417">
+  <object id="51" template="../../obj/shop.tx" x="248" y="418">
    <properties>
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
@@ -95,6 +102,7 @@
   <object id="55" template="../../obj/shop.tx" x="366" y="433">
    <properties>
     <property name="commonShopList" value="Mountain"/>
+    <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
@@ -173,22 +181,25 @@
   <object id="62" template="../../obj/shop.tx" x="361" y="258">
    <properties>
     <property name="commonShopList" value="RedEquipment"/>
-    <property name="hasSign" type="bool" value="false"/>
-    <property name="signYOffset" type="float" value="0"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="-4"/>
    </properties>
   </object>
   <object id="63" template="../../obj/shop.tx" x="409" y="259">
    <properties>
     <property name="commonShopList" value="RedItems"/>
-    <property name="hasSign" type="bool" value="false"/>
-    <property name="signYOffset" type="float" value="0"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="-4"/>
    </properties>
   </object>
-  <object id="65" template="../../obj/shop.tx" x="202" y="367.25">
+  <object id="65" template="../../obj/shop.tx" x="200" y="370">
    <properties>
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
@@ -197,10 +208,10 @@
     <property name="questtype" value="mountain_capital"/>
    </properties>
   </object>
-  <object id="67" template="../../obj/shardtrader.tx" x="336" y="402">
+  <object id="67" template="../../obj/shardtrader.tx" x="337" y="403">
    <properties>
     <property name="signXOffset" type="float" value="14"/>
-    <property name="signYOffset" type="float" value="-8"/>
+    <property name="signYOffset" type="float" value="-2"/>
    </properties>
   </object>
   <object id="68" template="../../obj/shop.tx" x="400" y="337">
@@ -208,6 +219,7 @@
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-2"/>
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
@@ -216,7 +228,27 @@
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
+    <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/RotatingShop.tx" x="495.917" y="305.432">
+   <properties>
+    <property name="rotation" value="Red1,Red2,Red3,Red4,Red5,Red6"/>
+    <property name="signXOffset" type="float" value="16"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/RotatingShop.tx" x="511.091" y="227.455">
+   <properties>
+    <property name="rotation" value="Red1,Red2,Red3,Red4,Red5,Red6"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/RotatingShop.tx" x="527.455" y="193.455">
+   <properties>
+    <property name="rotation" value="Red1,Red2,Red3,Red4,Red5,Red6"/>
+    <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
  </objectgroup>

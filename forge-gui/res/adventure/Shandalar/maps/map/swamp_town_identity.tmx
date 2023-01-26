@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="53">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="54">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -82,6 +82,7 @@
   <object id="48" template="../obj/shop.tx" x="336" y="80">
    <properties>
     <property name="commonShopList" value="Swamp"/>
+    <property name="noRestock" type="bool" value="true"/>
    </properties>
   </object>
   <object id="49" template="../obj/quest.tx" x="114" y="114">
@@ -99,13 +100,11 @@
     <property name="uncommonShopList" value="Dimir,Rakdos,Orzhov,Golgari,Dimir,Rakdos,Orzhov,Golgari,Land"/>
    </properties>
   </object>
-  <object id="52" template="../obj/shop.tx" x="167" y="88">
+  <object id="53" template="../obj/RotatingShop.tx" class="RotatingShop" x="167" y="88">
    <properties>
-    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Black"/>
-    <property name="rareShopList" value="RWB,RUB,RGB,UWB,UGB,UWB,Land4Black,Creature6Black"/>
+    <property name="rotation" value="Black1,Black2,Black3,Black4,Black5,Black6"/>
     <property name="signXOffset" type="float" value="4"/>
-    <property name="uncommonShopList" value="Dimir,Rakdos,Orzhov,Golgari,Dimir,Rakdos,Orzhov,Golgari,Land"/>
+    <property name="signYOffset" type="float" value="-16"/>
    </properties>
   </object>
  </objectgroup>

@@ -1,0 +1,8 @@
+Name:Cursed Treasure
+ManaCost:no cost
+Types:Artifact
+S:Mode$ Continuous | Description$ Provided by Cursed Treasure (Equipped Item - Right)
+StackDescription$ Create a Treasure token. You lose 2 life. | SpellDescription$ Create a Treasure token. You lose 2 life.
+A:AB$ Token | Cost$ PayShards<1> Sac<1/CARDNAME> | TokenScript$ c_a_treasure_sac | SubAbility$ DBLoseLife2 | SpellDescription$ Create a Treasure token.
+SVar:DBLoseLife2:DB$ LoseLife | LifeAmount$ 2 | Defined$ You
+Oracle: Provided by Cursed Treasure. Pay {M}, sacrifice Cursed Treasure: Create a Treasure token. You lose 2 life.

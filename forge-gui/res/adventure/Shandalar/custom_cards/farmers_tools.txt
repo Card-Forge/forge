@@ -1,0 +1,6 @@
+Name:Farmer's Tools
+ManaCost:no cost
+Types:Artifact
+S:Mode$ Continuous | Description$ Provided by Farmer's Tools (Equipped Item - Left)
+A:AB$ ChangeZone | Cost$ PayShards<2> Sac<1/CARDNAME> | ExileOnMoved$ Battlefield | Optional$ True | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | DefinedPlayer$ Player | ChangeNum$ 1 | StackDescription$  Each player may put a land card from their hand onto the battlefield.
+Oracle: Provided by Farmer's Tools. Pay {M}{M}, sacrifice Farmer's Tools: Starting with you, each player may place a land card from their hand onto the battlefield.

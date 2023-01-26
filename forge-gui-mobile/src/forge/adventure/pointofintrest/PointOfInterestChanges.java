@@ -107,6 +107,13 @@ public class PointOfInterestChanges implements SaveFileContent  {
         cardsBought.put(objectID, new HashSet<>()); //Allows cards to appear in slots of previous purchases
     }
 
+    public void setRotatingShopSeed(int objectID, long seed){
+        if (shopSeeds.containsKey(objectID) && shopSeeds.get(objectID) != seed) {
+            cardsBought.put(objectID, new HashSet<>()); //Allows cards to appear in slots of previous purchases
+        }
+        shopSeeds.put(objectID, seed);
+    }
+
     public float getShopPriceModifier(int objectID){
         if (!shopModifiers.containsKey(objectID))
         {

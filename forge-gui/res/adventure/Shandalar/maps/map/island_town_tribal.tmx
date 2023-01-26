@@ -82,6 +82,7 @@
   <object id="48" template="../obj/shop.tx" x="176" y="192">
    <properties>
     <property name="commonShopList" value="Island"/>
+    <property name="noRestock" type="bool" value="true"/>
    </properties>
   </object>
   <object id="52" template="../obj/quest.tx" x="176" y="162">

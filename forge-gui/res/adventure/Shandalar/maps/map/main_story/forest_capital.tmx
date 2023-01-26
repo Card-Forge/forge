@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="78">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="81">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -17,7 +17,7 @@
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzNmElOw0AQAOcEkRIUKywfSHAC5gY3+Ah3lnBn+wAETogHwBsA8QFIAgjEK3gBOxcQbcWjdIbu2eyEtNSSl/G43Nu0JywIEYGGoFXQYZDphCdKtAzaAm0PCV8TOCoJY8x2D7pZFGJrSHS72GWUPi0FQowPiU4EXTu2Fb4p0PN/0kmFD0uJuFdl4qORF+IA6WG+9/5+nn7OJBQDdc80fzPJpxaTV4Pgk+9YjfRzlgmeIzg/Tq6tKc/PzwmxMNd7rebIJ4h36kT9ngew56NHrXLhi32IGevIDpQN1O/BzFhm0bG0rRznwpeFYL6Kxfh+8FG2pPgoUWPbhU+Na1+hGO+YsYPw7wkk42nNPK4ffFd+r9UKjg8fvnpGfraRNPZrMGtZWsFxnoZP9oxxv/MOc34Y7PoNMfjjGIeufDj/mxn1sLranjY/cN+i+vkZmp0XruGxFB8+XKukDeO+9qqQfSy68lG1da/QicWoD/9TafyrxiJlw0VY/JeSBuATxn8xObTOXM9y/cCMOB6jUbvnscic8eWbNjBiX9dz0J+OdHQj58bpwsf1Ja/gmzfG12puc30AN3ca/+r6GZzXXN7YrN22fDeGeThWLm+k3KLj5Rk9Q9uCXeYs12cSr3CuPevM+ivXAh0fJab/OXUdpMavWNQX+Z22fOUxninUIxu5OL6Q4Nv13M+JJe0e007RzJdmPyerPSbKv2eB217OJTq+CP7Ocek437kyn2o/X3mq6c99heJTa85/Slb2cxHZvuJ1r0WMi2vftSefTS15cJ+2pzeXbNGA7afuax4QTKoOUmTNoDhCZDN8/gsMt+8u
+   eJzNmElOw0AQAOcEkRKUKCwfSHAC5gY3+Ah3lnBn+wAETogHwBsA8QFwAgjEK3gBOxcQbcWjdIbu2eyEtNSSl/G43Nu0JygIEYIGoDXQYZDphCdMtALaAm0PCV8EHNWEMWa7B90sCrE1JLpd7DJKn5ZLQowPiU6UunZsK3xToOf/pJMKH5Yyca/GxEczL8QB0sN87/39PP2cSSgG6p5p/ijJpxaTV4Pgk+9YDfVzVgieIzg/Tq6tKc/PzwmxMNd7re7IJ4h36kT9ngew56NHrXLhi32IGRvIDpQN1O/BzFhm0bG0rRznwpeFYL6qxfh+8FG2pPgoUWPbhU+Na1+hGO+YsYPw7wkk42ndPK4ffFd+r9UKjg8fvkZGfraRNPZrMmtZWsFxnoZP9oxxv/MOc34Y7PoNMfjjGIcufGruRxn1sLranjY/cN+i+vkZmp0XruGxFB8+XKukDeO+9qqQfSy68lG1da/QicWwD/9TafyL4zFibLgIi/9S0gB8wvgvJofWmetZrh+YEcdjOGr3PBaZM7580wZG7OtGDvrTkY5u5Nw4Xfi4vuQVfPPG+FrNba4P4OZO419dP4Pzmssbm7Xblu/GMA/HyuWNlFt0vDyjZ2hbsMuc5fpM4hXOtWedWX/lWqDjo8T0P6eug9T4FYv6Ir/Tlq8yxjMFemQjF8cXEHy7nvs5saTdY9opmvnS7OdktcdE+fes5LaXc4mOL0p/57h0nO9cmU+1n6881fXnvkLxqTXnPyUr+7mIbF/xutcixsW179qTz6aWPLhP29ObS7ZwwPZT9zUPCCZVBymyZlAcAbIZPv8FDvfvLg==
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -39,6 +39,7 @@
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
     <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="signYOffset" type="float" value="-2"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
@@ -47,6 +48,7 @@
   <object id="55" template="../../obj/shop.tx" x="479" y="453">
    <properties>
     <property name="commonShopList" value="Forest"/>
+    <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
@@ -60,14 +62,16 @@
   <object id="62" template="../../obj/shop.tx" x="361" y="370">
    <properties>
     <property name="commonShopList" value="GreenEquipment"/>
-    <property name="hasSign" type="bool" value="false"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
   <object id="63" template="../../obj/shop.tx" x="216" y="290">
    <properties>
     <property name="commonShopList" value="GreenItems"/>
-    <property name="hasSign" type="bool" value="false"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
@@ -76,6 +80,7 @@
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
     <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="signYOffset" type="float" value="-2"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
@@ -84,6 +89,7 @@
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
     <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="signYOffset" type="float" value="-2"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
@@ -92,6 +98,7 @@
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
     <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="signYOffset" type="float" value="-2"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
@@ -100,6 +107,7 @@
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
     <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="signYOffset" type="float" value="-2"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
@@ -108,6 +116,7 @@
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
     <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="signYOffset" type="float" value="-2"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
@@ -116,6 +125,7 @@
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
     <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="signYOffset" type="float" value="-2"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
@@ -124,6 +134,7 @@
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
     <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="signYOffset" type="float" value="-2"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
@@ -204,7 +215,7 @@
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
-  <object id="77" template="../../obj/shop.tx" x="112" y="304">
+  <object id="77" template="../../obj/shop.tx" x="96" y="304">
    <properties>
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green"/>
@@ -212,6 +223,23 @@
     <property name="signXOffset" type="float" value="-16"/>
     <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
+   </properties>
+  </object>
+  <object id="78" template="../../obj/RotatingShop.tx" x="462" y="369">
+   <properties>
+    <property name="rotation" value="Green1,Green2,Green3,Green4,Green5,Green6"/>
+   </properties>
+  </object>
+  <object id="79" template="../../obj/RotatingShop.tx" x="160" y="161">
+   <properties>
+    <property name="rotation" value="Green1,Green2,Green3,Green4,Green5,Green6"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="80" template="../../obj/RotatingShop.tx" x="160" y="370">
+   <properties>
+    <property name="rotation" value="Green1,Green2,Green3,Green4,Green5,Green6"/>
+    <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
  </objectgroup>

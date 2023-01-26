@@ -51,6 +51,21 @@ Status
 Menu 
   xy: 32, 64
   size: 16, 16  
+CursedTreasure
+  xy: 336, 64
+  size: 16, 16  
+PipersCharm
+  xy: 240, 976
+  size: 16, 16  
+HillGiantClub
+  xy: 192, 576
+  size: 16, 16  
+SleepWand
+  xy: 304, 544
+  size: 16, 16  
+FarmersTools
+  xy: 288, 976
+  size: 16, 16  
 SolRing
   xy: 320, 144
   size: 16, 16          

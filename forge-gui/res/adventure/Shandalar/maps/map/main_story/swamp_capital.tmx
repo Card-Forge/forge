@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="85">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="94">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -12,12 +12,12 @@
  </layer>
  <layer id="2" name="Ground" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzNWM1S20AM3uKEabg4yUswcOn0XDp9BLhAXwBcKHQKbd+jhZ4DHcPbUOBZ+DsWkFpr+Kxo15vUSawZjYdFu/70fZLsOEudS7rOtZXPkX9I/c57Nul6RlexLBCrz+e9p91n30qH78/7Wp69Ot5ynYPGIRiss+YhL7Yc4vD+udovnOTdcn4+t87U+BMD85nClylNhDe2lnGmz7fT8rmydx5y0phRS43LOieDnDS+cTXFdVxLInK29rQj8VXV8aRd8GkcPj1i63Ict3IXfNhPjy+de7cw7K4z7KF13Gdd0V90yrkLVgvfgGKPp+wnHXveWPhyY//qsnNry9PDJxhj8e0Str0p4xOLwVflnwn7/n/g/6XwrZO270Ffnjsye8fBVzd/h4Tnp5ovMktmgU/zJxxa+kr/HpBeXwzNvtLat5pr0aq/Q+AP9Z3FfLH4w/6Ytb5V/du0/tD48J2xCc+PpuGrqr82aNyU+SKG7w3cI03TV1sd+P4sOvewWA9/+KybVf2F+MNn3aTwrS81S99J1l/T+lfbG/o9sEKedMLXFYhrkc8ZcdYeXJe/3y7E4wuZ7iWxgcHBq55zr3tx5/nOHdWklzL1LSEvaggx7fad+9QPY/tBZ92nwz1q5RAyzUWufhsLvguK2emXY3UuYre0dp36cWHcvdqvz9RcyLc0fOdhfBy3p2J1Lnjf77S+AfwID8iHxCGHvjPx//h9YTDijGBjTY8KFw6F/4/kV73nGmCebyp09ukk+EaZET5jfJeFMz7m7q7Q1+IRsSXFOxjntJGWdcnH4M8yro/fhOu8969GBB/jYh7vjFr8e3/Qk3W5ScuxdfHHdSfasgk+dB+HaLr3YvkL1Qib7i/kQjxUizKLrHeKGP6q+s4yzWFoXvrW69LXh485Oyq41DMpxiaF7wlOe1vw
+   eJzNmM9u00AQxpc6qUgvTvISkXJBPbeIR4AL5QWKW/pH0Jb3gJZzAJm+TVt4FtLmCHQGPOrnyex6E5zEI42sbmfXv/1mZu04S51Lus61la+R76V+5zm7dL2kq1gWiNXr89xv3Qd/nU7fn+e1PHN1vOV6D5pDGKy11mFfbDnE4f1zNV80ybvl/fncWlPzJwbzpeLLVE5EN7aWsabP99PyujJ3HfakmTGXmstaJ4M9ab55c4rjOJZE7Nma047kq6rjRbvwaQ5fPmLrch639i582E9/Hjv3bGPaXWfaQ+M4z7qiP+qU9y6sFt+IYj8v2b907PPG4suN+c+Hzr0YLo9PGGP5DontaMl8YjF8Vf6W2N/9B/9XxfeScvsK8svnjpy98/DVrd858XxS54ucJavg0/qJhlZ+pX9PKF+nRs7OaOx9zbVo1d856If5XcX5YumH/bHq/Fb1b9P6Q/PhO2MTnh9N46uqvzbkuCnnixi+N3CPNC2/2urg+zVw7vegHv3wWbeq+gvph8+6JvItIr+L5Gta/2rbot8D2+RJJ3zdhrgW+ZoRZ83Bcfn76UY8X8h0L4mNDA2e9Jzb7MWt51t3VpNeytS3hLyoIWQ67Dt33A+zfaS1Jul0j1p7CJnWIle/jYXvhmLe9Muxei9itzT2M/VzYdxEzddrai3kWxq+8zAfxx2pWL0XvO8HGt8BfUQH1EPiUEPfmvh//L4wmvGMYOOcXhQuGor+B+Q/eg81wDqPK/Lsy5PwzXJG+Iz5vhfOfKzdXZFfS0dkS4p3MN7TTlrOSz6HfpZxfVwT11XvX40IH3OxjndGLf69P+ST8zJOy7F16cd1J7llEz50n4Zouvdi9QvVCJvuL9RCPFSLchZZ7xQx+lX1nWVaw9B56RuvK78+PtbsotBSn0kxtii+e9gCXBk=
   </data>
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztV0tOwzAQHQk2iZNcoWGbK8AK0SB6D7gH5SpA20OBShvugUeNlcHyP25akJ80iuPYnpd5Hn8AEhIS/gteS4C3E9l7aed3WwG03L4mtjm3u8qNn0u72HD1G4PfPgf4zv36TMnvmQG8ML8+Y/n5xITy+2gAPhs/v0+G9jp+6HOV6ftR/th2zsuto2G/sfHbZGbN6Hfkl/H33GJLdnheFeP52eJH+dn+RWBJ2sh+dRrTdqhZ19t9PmjWSc9W+o5l07/Y+C0aPUfabsbjXhd6feg3lh00xToWIX46hK4vqKmImcgPGt9OMqxDfrr8WDjoa8M1H+OmGTjZ8oPGuybaxMgPFWjOUH6u+RHiV7S74HG57GOjK8v8TPrKOtNyyPq3l8ZU+dDlLM0rkTcqXcV7iL7Uh5zDwkct8VBp6qr1sfNXtad1uftaeIz5R7EhOsrxRv1i86N7h27+0TqMk2/OhvJbl8P8U61ZqnrWr8+h95dV6cZv63lv6LjtqmH/2PZ1IXeQnee8f2h+P00wnZnlcVzG8+X2aBnTdv6KyS0EIXeOKRGy504Jm76nBj3/nSPOff7NCrd9LCHhL+EHYaXfpQ==
+   eJztV0tOwzAQHQk2iZtcoWFJrgArRIPoniPAPShXgZYeClRacw88aqwMlv9x06rKk0ZxHNvzMs/jD8CIESPOBe8FwMeRbFm4+d2VAI2wn4FtJuy+9OPn0y41fP2m4LfLAX7zsD5D8ntlAG8srE9ffiExofy+aoDvOszvi6W9iR/6XGXmfpQ/tp2JcuNp2K9v/NaZXTP6Hfll4j132ILtn1eT/vxc8aP8XP8isSBtVL8mjWk71Iy39pB3mnHl2SjfsWz7Fxe/eW3mSNtNRdyriVkf+o1le02xjiWInwmx6wtqKmMm84PGlyuGdcjPlB9zD31duBFj3NYdJ1d+0HhXRJsU+aEDzRnKzzc/YvzKdhciLpdtbExllZ9NX1VnWo5Z/3bKmDofppyleSXzRqerfI/Rl/pQc1j6qBQeOk19tT50/ur2NJ77r4WHmH8Ua6KjGm/U7+k6LT+6d5jmH63DOIXmbCy/z6Kbf7o1S1fP2vU59v6yKvz4bQLvDVzYtuz2j01bF3MH2QbO+8f6/9MG25lZHcdnvFBuz44xXeevlNxiEHPnGBIxe+6QcOl7bNDz3yni1OfftD2HjBhxTvgDGpfgIw==
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -25,12 +25,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztzsEJgDAMBdAsIHQA8d7OrZPpDnr0JAXBQxEV4T0I5EM+JAIAuGsuEUupec0RW/7uHwCAt0xd2xzGxt65/4Q+1X1I13cAwD/scwwWyg==
+   eJzt0sEJwCAMheG3gOAA0rvOXSdrd9BjT8UiFipFRPg/CCSQQCCRAADAX0eQzlDq5KXs5+0DzPL8/S851sJ9AbRE0xe3vXOunh/B2ZJv9r0PAACs4QIr1ijS
   </data>
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt0rENgzAQBdC/ASNAh+x1IAnThKwWGtgBGtIkG5AyV6SwBCIUdk62/pMsnb9k+aQ7gIiISE9lgdqu87tknZP3Ug/OfTTAZML3R2snmcN5Y2YXyZqNnPxyd/9I/W+L/Ps2x2vfctnBIuI9DDnfp7x5mf36F+35xmwugUep3YUeH/tHabhmQPs9t0y7GyIiIkrdB4cVPLM=
+   eJzt0sEJg0AQheHXgSWYm6ztRGOqibZmLqYHc0kuWkbmEGHBJeTgsiT+HwizD4SBeRIAAOkcS6kq13lv2dXLB5tv3nt00t3F3w9rtd3hFLhZY9k5kGNbfve/mfcmtw4efriHMe872T+z+zwjnkchPYvUW6RD/7C4ZFL7/ros9TYAAODfvQDOSyqr
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -39,7 +39,8 @@
   <object id="55" template="../../obj/shop.tx" x="416" y="402">
    <properties>
     <property name="commonShopList" value="Swamp"/>
-    <property name="signYOffset" type="float" value="0"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="-2"/>
    </properties>
   </object>
   <object id="58" template="../../obj/entry_up.tx" x="258" y="639" width="97" height="20">
@@ -107,14 +108,16 @@
   <object id="62" template="../../obj/shop.tx" x="216" y="241">
    <properties>
     <property name="commonShopList" value="BlackItems"/>
-    <property name="hasSign" type="bool" value="false"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
   <object id="63" template="../../obj/shop.tx" x="115" y="241">
    <properties>
     <property name="commonShopList" value="BlackEquipment"/>
-    <property name="hasSign" type="bool" value="false"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
@@ -123,6 +126,7 @@
     <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
    </properties>
   </object>
@@ -131,6 +135,7 @@
     <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
    </properties>
   </object>
@@ -139,6 +144,8 @@
     <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signXOffset" type="float" value="18"/>
+    <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
    </properties>
   </object>
@@ -147,6 +154,7 @@
     <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
    </properties>
   </object>
@@ -155,6 +163,7 @@
     <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
    </properties>
   </object>
@@ -163,6 +172,7 @@
     <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
    </properties>
   </object>
@@ -171,6 +181,7 @@
     <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
    </properties>
   </object>
@@ -179,6 +190,7 @@
     <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
    </properties>
   </object>
@@ -192,6 +204,7 @@
     <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
    </properties>
   </object>
@@ -200,7 +213,31 @@
     <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="90" template="../../obj/RotatingShop.tx" class="RotatingShop" x="200" y="402">
+   <properties>
+    <property name="rotation" value="Black1,Black2,Black3,Black4,Black5,Black6"/>
+    <property name="signYOffset" type="float" value="-8"/>
+   </properties>
+  </object>
+  <object id="91" template="../../obj/RotatingShop.tx" class="RotatingShop" x="153" y="402">
+   <properties>
+    <property name="rotation" value="Black1,Black2,Black3,Black4,Black5,Black6"/>
+    <property name="signYOffset" type="float" value="-8"/>
+   </properties>
+  </object>
+  <object id="92" template="../../obj/RotatingShop.tx" class="RotatingShop" x="106" y="402">
+   <properties>
+    <property name="rotation" value="Black1,Black2,Black3,Black4,Black5,Black6"/>
+    <property name="signYOffset" type="float" value="-8"/>
+   </properties>
+  </object>
+  <object id="93" template="../../obj/shardtrader.tx" x="152" y="339">
+   <properties>
+    <property name="signYOffset" type="float" value="-8"/>
    </properties>
   </object>
  </objectgroup>

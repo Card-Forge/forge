@@ -82,6 +82,7 @@
   <object id="48" template="../obj/shop.tx" x="336" y="80">
    <properties>
     <property name="commonShopList" value="Swamp"/>
+    <property name="noRestock" type="bool" value="true"/>
    </properties>
   </object>
   <object id="49" template="../obj/quest.tx" x="114" y="114">

@@ -66,6 +66,7 @@
   <object id="48" template="../obj/shop.tx" x="290" y="225">
    <properties>
     <property name="commonShopList" value="Plains"/>
+    <property name="noRestock" type="bool" value="true"/>
     <property name="signXOffset" type="float" value="-32"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
@@ -116,6 +117,7 @@
   <object id="55" template="../obj/shop.tx" x="160" y="151">
    <properties>
     <property name="commonShopList" value="Plains"/>
+    <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>

@@ -82,6 +82,7 @@
   <object id="48" template="../obj/shop.tx" x="160" y="96">
    <properties>
     <property name="commonShopList" value="Mountain"/>
+    <property name="noRestock" type="bool" value="true"/>
    </properties>
   </object>
   <object id="50" template="../obj/shardtrader.tx" x="335" y="81">

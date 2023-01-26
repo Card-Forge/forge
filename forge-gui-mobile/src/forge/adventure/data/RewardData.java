@@ -45,6 +45,8 @@ public class RewardData {
     public boolean matchAllSubTypes;
     public boolean matchAllColors;
     public RewardData[] cardUnion;
+    public String[] deckNeeds;
+    public RewardData[] rotation;
 
     public RewardData() { }
 
@@ -69,6 +71,8 @@ public class RewardData {
         matchAllSubTypes    =rewardData.matchAllSubTypes;
         matchAllColors =rewardData.matchAllColors;
         cardUnion         =rewardData.cardUnion==null?null:rewardData.cardUnion.clone();
+        rotation          =rewardData.rotation==null?null:rewardData.rotation.clone();
+        deckNeeds         =rewardData.deckNeeds==null?null:rewardData.deckNeeds.clone();
     }
 
     private static Iterable<PaperCard> allCards;
@@ -131,8 +135,10 @@ public class RewardData {
                     }
                     ArrayList<PaperCard> finalPool = new ArrayList(pool);
 
-                    for(int i = 0; i < count; i++) {
-                        ret.add(new Reward(finalPool.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(finalPool.size()))));
+                    if (finalPool.size() > 0){
+                        for (int i = 0; i < count; i++) {
+                            ret.add(new Reward(finalPool.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(finalPool.size()))));
+                        }
                     }
                     break;
                 case "card":

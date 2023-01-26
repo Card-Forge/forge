@@ -15,7 +15,7 @@ public class ShardTraderScene extends UIScene {
     private static ShardTraderScene object;
 
     public static final String spriteAtlas = "maps/tileset/buildings.atlas";
-    public static final String sprite = "shard_trader";
+    public static final String sprite = "ShardTrader";
 
     public static ShardTraderScene instance() {
         if(object==null)

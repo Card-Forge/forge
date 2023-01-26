@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="53">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="54">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -82,6 +82,7 @@
   <object id="48" template="../obj/shop.tx" x="304" y="48">
    <properties>
     <property name="commonShopList" value="Forest"/>
+    <property name="noRestock" type="bool" value="true"/>
    </properties>
   </object>
   <object id="49" template="../obj/quest.tx" x="98" y="162">
@@ -90,7 +91,7 @@
    </properties>
   </object>
   <object id="50" template="../obj/shardtrader.tx" x="98" y="98"/>
-  <object id="51" template="../obj/shop.tx" x="208" y="50">
+  <object id="52" template="../obj/shop.tx" x="272" y="98">
    <properties>
     <property name="commonShopList" value="Green,Green,Enchantment4Green,Creature2Green,Instant4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
@@ -98,12 +99,9 @@
     <property name="uncommonShopList" value="Simic,Golgari,Gruul,Selesnya,Simic,Golgari,Gruul,Selesnya,Land"/>
    </properties>
   </object>
-  <object id="52" template="../obj/shop.tx" x="272" y="98">
+  <object id="53" template="../obj/RotatingShop.tx" x="208" y="50">
    <properties>
-    <property name="commonShopList" value="Green,Green,Enchantment4Green,Creature2Green,Instant4Green"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
-    <property name="rareShopList" value="RGU,UWG,UGB,RWG,RGB,GWB,Land4Green,Creature6Green"/>
-    <property name="uncommonShopList" value="Simic,Golgari,Gruul,Selesnya,Simic,Golgari,Gruul,Selesnya,Land"/>
+    <property name="rotation" value="Green1,Green2,Green3,Green4,Green5,Green6"/>
    </properties>
   </object>
  </objectgroup>

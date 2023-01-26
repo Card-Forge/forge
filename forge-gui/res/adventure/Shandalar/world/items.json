@@ -1,11 +1,47 @@
 [ 
   {
-    "name": "PCharm",
+    "name": "Piper's Charm",
     "equipmentSlot": "Neck",
-    "iconName": "SolRing",
+    "iconName": "PipersCharm",
     "effect": {
       "startBattleWithCard": [
         "Piper's Charm"
+      ]
+    }
+  },{
+    "name": "Sleep Wand",
+    "equipmentSlot": "Left",
+    "iconName": "SleepWand",
+    "effect": {
+      "startBattleWithCard": [
+        "Sleep Wand"
+      ]
+    }
+  },{
+    "name": "Hill Giant Club",
+    "equipmentSlot": "Right",
+    "iconName": "HillGiantClub",
+    "effect": {
+      "startBattleWithCard": [
+        "Hill Giant Club"
+      ]
+    }
+  },{
+    "name": "Cursed Treasure",
+    "equipmentSlot": "Right",
+    "iconName": "CursedTreasure",
+    "effect": {
+      "startBattleWithCard": [
+        "Cursed Treasure"
+      ]
+    }
+  },{
+    "name": "Farmer's Tools",
+    "equipmentSlot": "Left",
+    "iconName": "FarmersTools",
+    "effect": {
+      "startBattleWithCard": [
+        "Farmer's Tools"
       ]
     }
   },{

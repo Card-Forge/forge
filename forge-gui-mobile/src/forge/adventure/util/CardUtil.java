@@ -19,10 +19,7 @@ import forge.item.PaperCard;
 import forge.model.FModel;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import static forge.adventure.data.RewardData.generateAllCards;
@@ -52,6 +49,7 @@ public class CardUtil {
         private  int colors;
         private final ColorType colorType;
         private final boolean shouldBeEqual;
+        private final List<String> deckNeeds=new ArrayList<>();
 
         @Override
         public boolean apply(final PaperCard card) {
@@ -171,6 +169,28 @@ public class CardUtil {
                     return !this.shouldBeEqual;
             }
 
+            if(!this.deckNeeds.isEmpty())
+            {
+                boolean found = false;
+                for(String need:this.deckNeeds)
+                {
+                    //FormatExpected: X$Y, where X is DeckHints.Type and Y is a string descriptor
+                    String[] parts = need.split("\\$");
+
+                    if (parts.length != 2){
+                        continue;
+                    }
+                    DeckHints.Type t = DeckHints.Type.valueOf(parts[0].toUpperCase());
+
+                    DeckHints hints = card.getRules().getAiHints().getDeckHints();
+                    if (hints != null && hints.contains(t, parts[1])){
+                        found=true;
+                        break;
+                    }
+                }
+                if(!found)
+                    return !this.shouldBeEqual;
+            }
 
 
             return this.shouldBeEqual;
@@ -237,6 +257,9 @@ public class CardUtil {
             {
                 this.colorType=ColorType.Any;
             }
+            if(type.deckNeeds!=null&&type.deckNeeds.length!=0){
+                deckNeeds.addAll(Arrays.asList(type.deckNeeds));
+            }
         }
     }
 
@@ -244,6 +267,9 @@ public class CardUtil {
     {
         List<PaperCard> result = new ArrayList<>();
         CardPredicate pre = new CardPredicate(data, true);
+
+        java.util.Map<String, String> tempMap = new HashMap<>();
+
         for (final PaperCard item : cards)
         {
             if(pre.apply(item))

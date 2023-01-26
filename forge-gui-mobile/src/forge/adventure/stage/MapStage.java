@@ -46,6 +46,7 @@ import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 
 import java.util.Map;
+import java.util.Random;
 
 
 /**
@@ -392,6 +393,8 @@ public class MapStage extends GameStage {
                     continue;
                 boolean hidden = !obj.isVisible(); //Check if the object is invisible.
 
+                String rotatingShop = "";
+
                 switch (type) {
                     case "entry":
                         float x = Float.parseFloat(prop.get("x").toString());
@@ -536,35 +539,70 @@ public class MapStage extends GameStage {
                             addMapActor(obj, dialog);
                         }
                         break;
-                    case "shop":
-                        String shopList = "";
-                        int restockPrice = 0;
 
-                        int rarity = WorldSave.getCurrentSave().getWorld().getRandom().nextInt(100);
-                        if (rarity > 95 & prop.containsKey("mythicShopList")) {
-                            shopList = prop.get("mythicShopList").toString();
-                            restockPrice = 5;
+                    case "Rotating":
+                        String rotation = "";
+                        if (prop.containsKey("rotation")) {
+                            rotation = prop.get("rotation").toString();
                         }
-                        if (shopList.isEmpty() && (rarity > 85 & prop.containsKey("rareShopList"))) {
-                            shopList = prop.get("rareShopList").toString();
-                            restockPrice = 4;
+
+                        Array<String> possibleShops = new Array<>(rotation.split(","));
+
+                        if (possibleShops.size > 0){
+                            long rotatingRandomSeed = WorldSave.getCurrentSave().getWorld().getRandom().nextLong() + java.time.LocalDate.now().plusDays(5).toEpochDay();
+                            Random rotatingShopRandom = new Random(rotatingRandomSeed);
+                            rotatingShop = possibleShops.get(rotatingShopRandom.nextInt(possibleShops.size));
+                            changes.setRotatingShopSeed(id, rotatingRandomSeed);
                         }
-                        if (shopList.isEmpty() && (rarity > 55 & prop.containsKey("uncommonShopList"))) {
-                            shopList = prop.get("uncommonShopList").toString();
-                            restockPrice = 3;
+
+                    //Intentionally not breaking here.
+                    //Flow continues into "shop" case with above data overriding base logic.
+
+                    case "shop":
+
+                        int restockPrice = 0;
+                        String shopList = "";
+
+                        boolean isRotatingShop = !rotatingShop.isEmpty();
+
+                        if (isRotatingShop){
+                            shopList = rotatingShop;
+                            restockPrice = 7;
                         }
-                        if (shopList.isEmpty() && prop.containsKey("commonShopList")) {
-                            shopList = prop.get("commonShopList").toString();
-                            restockPrice = 2;
+                        else{
+                            int rarity = WorldSave.getCurrentSave().getWorld().getRandom().nextInt(100);
+                            if (rarity > 95 & prop.containsKey("mythicShopList")) {
+                                shopList = prop.get("mythicShopList").toString();
+                                restockPrice = 5;
+                            }
+                            if (shopList.isEmpty() && (rarity > 85 & prop.containsKey("rareShopList"))) {
+                                shopList = prop.get("rareShopList").toString();
+                                restockPrice = 4;
+                            }
+                            if (shopList.isEmpty() && (rarity > 55 & prop.containsKey("uncommonShopList"))) {
+                                shopList = prop.get("uncommonShopList").toString();
+                                restockPrice = 3;
+                            }
+                            if (shopList.isEmpty() && prop.containsKey("commonShopList")) {
+                                shopList = prop.get("commonShopList").toString();
+                                restockPrice = 2;
+                            }
+                            if (shopList.trim().isEmpty() && prop.containsKey("shopList")) {
+                                shopList = prop.get("shopList").toString(); //removed but included to not break existing custom planes
+                                restockPrice = 0; //Tied to restock button
+                            }
+                            shopList = shopList.replaceAll("\\s", "");
+
                         }
-                        if (shopList.trim().isEmpty() && prop.containsKey("shopList")) {
-                            shopList = prop.get("shopList").toString(); //removed but included to not break existing custom planes
-                            restockPrice = 0; //Tied to restock button
+
+                        if (prop.containsKey("noRestock") && (boolean)prop.get("noRestock")){
+                            restockPrice = 0;
                         }
-                        shopList = shopList.replaceAll("\\s", "");
-                        Array<String> possibleShops = new Array<>(shopList.split(","));
+
+                        possibleShops = new Array<>(shopList.split(","));
                         Array<String> filteredPossibleShops = possibleShops;
-                        filteredPossibleShops.removeAll(shopsAlreadyPresent, false);
+                        if (!isRotatingShop)
+                            filteredPossibleShops.removeAll(shopsAlreadyPresent, false);
                         if (filteredPossibleShops.notEmpty()){
                             possibleShops = filteredPossibleShops;
                         }
