@@ -1651,7 +1651,16 @@ public class AbilityUtils {
         final String s2 = applyAbilityTextChangeEffects(s, ctb);
         final String[] l = s2.split("/");
         final String expr = CardFactoryUtil.extractOperators(s2);
-        final Player player = ctb == null ? null : ctb instanceof SpellAbility ? ((SpellAbility)ctb).getActivatingPlayer() : ctb.getHostCard().getController();
+
+        Player player = null;
+        if (ctb != null) {
+            if (ctb instanceof SpellAbility) {
+                player = ((SpellAbility)ctb).getActivatingPlayer();
+            }
+            if (player == null) {
+                player = ctb.getHostCard().getController();
+            }
+        }
 
         // accept straight numbers
         if (l[0].startsWith("Number$")) {

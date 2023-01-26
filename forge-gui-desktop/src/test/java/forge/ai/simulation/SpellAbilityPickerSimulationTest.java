@@ -279,6 +279,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
+        // start with a hand with a basic, a tapland, and a card that can't be cast
         addCard("Forest", p);
         addCardToZone("Forest", p, ZoneType.Hand);
         Card guildgate = addCardToZone("Simic Guildgate", p, ZoneType.Hand);
@@ -286,9 +287,31 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
+        // ensure that the tapland is paid
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(guildgate, sa.getHostCard());
+    }
+
+    @Test
+    public void playTronOverBasic() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        // start with a hand with a basic, a Tron land, and a card that can't be cast
+        addCard("Urza's Tower", p);
+        addCard("Urza's Mine", p);
+        addCardToZone("Forest", p, ZoneType.Hand);
+        Card desired = addCardToZone("Urza's Power Plant", p, ZoneType.Hand);
+        addCardToZone("Opt", p, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+        AssertJUnit.assertEquals(p, desired.getController());
+
+        // ensure that the tapland is paid
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertEquals(desired, sa.getHostCard());
     }
 
     @Test

@@ -6,7 +6,10 @@ import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import static java.lang.Math.max;
 
 public class GameStateEvaluator {
     private boolean debugging = false;
@@ -153,7 +156,16 @@ public class GameStateEvaluator {
         if (c.isCreature()) {
             return eval.evaluateCreature(c);
         } else if (c.isLand()) {
-            return 100;
+            int value = 100;
+            // for each mana color a land generates for free, increase the value by one
+            // for each mana a land can produce, add one hundred.
+            int max_produced = 0;
+            int possible_colors = 0;
+            for (SpellAbility m: c.getManaAbilities()) {
+                max_produced = max(max_produced, m.amountOfManaGenerated(false));
+            }
+            value = 100 * max_produced;
+            return value;
         } else if (c.isEnchantingCard()) {
             // TODO: Should provide value in whatever it's enchanting?
             // Else the computer would think that casting a Lifelink enchantment
