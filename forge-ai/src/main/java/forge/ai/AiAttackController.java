@@ -1439,7 +1439,21 @@ public class AiAttackController {
                 }
                 SpellAbility sa = st.getPayingTrigSA();
                 if (sa == null) {
-                    continue;
+                    // not the delayed variant
+                    for (Trigger t : c.getTriggers()) {
+                        if (!TriggerType.Exerted.equals(t.getMode())) {
+                            continue;
+                        }
+                        sa = t.ensureAbility();
+                        if (c.getController().isAI()) {
+                            PlayerControllerAi aic = ((PlayerControllerAi) c.getController().getController());
+                            if (!aic.getAi().doTrigger(sa, false)) {
+                                missTarget = true;
+                                break;
+                            }
+                        }
+                    }
+                    break;
                 }
                 if (sa.usesTargeting()) {
                     sa.setActivatingPlayer(c.getController(), true);
