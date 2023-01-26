@@ -1,0 +1,8 @@
+Name:Dune Mover
+ManaCost:2
+Types:Artifact Creature Phyrexian Golem
+PT:2/1
+K:Toxic:1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card, reveal it, then shuffle and put that card on top.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Land.Basic
+Oracle:Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)/nWhen Dune Mover enters the battlefield, you may search your library for a basic land card, reveal it, then shuffle and put that card on top.

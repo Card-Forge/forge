@@ -1,0 +1,14 @@
+Name:Lukka, Bound to Ruin
+ManaCost:2 RG R G
+Types:Legendary Planeswalker Lukka
+Loyalty:5
+K:Compleated 
+A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Produced$ R G | Amount$ 1 | RestrictValid$ Spell.Creature,Activated.Creature+inZoneBattlefield | SpellDescription$ Add {R}{G}. Spend this mana only to cast creature spells or activate abilities of creatures.
+A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ g_3_3_phyrexian_beast_toxic | SpellDescription$ Create a 3/3 green Phyrexian Beast creature token with toxic 1.
+A:AB$ DealDamage | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select any number of creatures and planeswalkers to distribute damage to | NumDmg$ OrigPower | TargetMin$ Min | TargetMax$ OrigPower | DividedAsYouChoose$ OrigPower | SpellDescription$ NICKNAME deals X damage divided as you choose among any number of target creatures and/or planeswalkers, where X is the greatest power among creatures you controlled as you activated this ability.
+T:Mode$ SpellCast | ValidCard$ Card.Self | Static$ True | Execute$ CountPowerAtCast
+SVar:CountPowerAtCast:DB$ StoreSVar | SVar$ OrigPower | Type$ Calculate | Expression$ OrigPower
+SVar:OrigPower:Count$Valid Creature.YouCtrl$GreatestPower
+SVar:Min:SVar$OrigPower/LimitMax.1
+DeckHas:Type$Beast|Phyrexian & Ability$Counters
+Oracle:Compleated ({R/G/P} can be paid with {R}, {G}, or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters.)\n[+1]: Add {R}{G}. Spend this mana only to cast creature spells or activate abilities of creatures.\n[−1]: Create a 3/3 green Phyrexian Beast creature token with toxic 1.\n[−4]: Lukka deals X damage divided as you choose among any number of target creatures and/or planeswalkers, where X is the greatest power among creatures you controlled as you activated this ability.
