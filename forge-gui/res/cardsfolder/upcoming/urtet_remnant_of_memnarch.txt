@@ -1,4 +1,4 @@
-Name:Urtet, Remains of Memnarch
+Name:Urtet, Remnant of Memnarch
 ManaCost:3
 Types:Legendary Artifact Creature Myr
 PT:2/2

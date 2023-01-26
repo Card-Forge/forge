@@ -180,8 +180,10 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                                 }
                             });
                         }
-                        GameEntity choice = Aggregates.random(candidates);
-                        resetFirstTargetOnCopy(copy, choice, chosenSA);
+                        if (!candidates.isEmpty()) {
+                            GameEntity choice = Aggregates.random(candidates);
+                            resetFirstTargetOnCopy(copy, choice, chosenSA);
+                        }
                     }
 
                     // extra case for Epic to remove the keyword and the last part of the SpellAbility

@@ -359,8 +359,7 @@ public final class AbilityFactory {
             abTgt.setMaxTotalPower(mapParams.get("MaxTotalTargetPower"));
         }
 
-        // TargetValidTargeting most for Counter: e.g. target spell that
-        // targets X.
+        // TargetValidTargeting most for Counter: e.g. target spell that targets X.
         if (mapParams.containsKey("TargetValidTargeting")) {
             abTgt.setSAValidTargeting(mapParams.get("TargetValidTargeting"));
         }

@@ -4,7 +4,7 @@
     <artifactId>forge</artifactId>
     <packaging>pom</packaging>
     <name>Forge Parent</name>
-    <version>1.6.54-SNAPSHOT</version>
+    <version>1.6.55-SNAPSHOT</version>
 
     <description>
         Forge lets you play the card game Magic: The Gathering against a computer opponent using all of the rules.
@@ -70,9 +70,9 @@
 
     <distributionManagement>
         <repository>
-            <id>github</id>
-            <name>Github Releases</name>
-            <url>https://maven.pkg.github.com/Card-Forge/forge</url>
+            <id>cardforge-repo</id>
+            <name>Forge Releases</name>
+            <url>ftp://ftp.cardforge.org/maven/releases/</url>
         </repository>
         <snapshotRepository>
             <id>cardforge-snapshot-repo</id>

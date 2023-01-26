@@ -1195,7 +1195,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             private static final long serialVersionUID = -5774108410928795591L;
 
             @Override
-            protected boolean hasAllTargets() {
+            protected boolean hasEnoughTargets() {
                 for (final Card c : selected) {
                     for (String part : splitUTypes) {
                         if (c.getType().hasStringType(part)) {
@@ -1207,7 +1207,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                         }
                     }
                 }
-                return super.hasAllTargets();
+                return super.hasEnoughTargets();
             }
         };
         int n = 1;
