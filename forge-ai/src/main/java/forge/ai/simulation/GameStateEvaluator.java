@@ -139,6 +139,11 @@ public class GameStateEvaluator {
                 debugPrint("    "+nonAbilityText.replaceAll("CARDNAME", c.getName()));
             }
         }
+
+        // TODO evaluate mana base quality
+
+        // TODO evaluate holding mana open for counterspells
+
         debugPrint("Score = " + score);
         return new Score(score, summonSickScore);
     }
