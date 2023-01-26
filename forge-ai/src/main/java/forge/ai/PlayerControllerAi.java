@@ -343,7 +343,7 @@ public class PlayerControllerAi extends PlayerController {
     public List<Card> enlistAttackers(List<Card> attackers) {
         CardCollection cards = CostEnlist.getCardsForEnlisting(brains.getPlayer());
         ComputerUtilCard.sortByEvaluateCreature(new CardCollection(attackers));
-        // do not enlist more than available payment choices
+        // do not enlist more than available payment choices (currently ignores multiple instances of Enlist, but can that even happen?)
         attackers = attackers.subList(0, cards.size());
         // TODO check if not needed as defender
         return attackers;
