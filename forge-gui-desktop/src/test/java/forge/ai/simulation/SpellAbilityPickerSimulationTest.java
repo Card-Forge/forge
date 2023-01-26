@@ -275,6 +275,23 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
     }
 
     @Test
+    public void playTaplandIfNoPlays() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Forest", p);
+        addCardToZone("Forest", p, ZoneType.Hand);
+        Card guildgate = addCardToZone("Simic Guildgate", p, ZoneType.Hand);
+        addCardToZone("Centaur Courser", p, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertEquals(guildgate, sa.getHostCard());
+    }
+
+    @Test
     public void testPlayRememberedCardsLand() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
