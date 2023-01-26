@@ -26,7 +26,6 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.ZoneType;
 
 /**
  * The Class CostExert.
@@ -70,7 +69,7 @@ public class CostEnlist extends CostPartWithTrigger {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
-        return true;
+        return !getCardsForEnlisting(payer).isEmpty();
     }
 
     @Override
@@ -101,8 +100,8 @@ public class CostEnlist extends CostPartWithTrigger {
         return visitor.visit(this);
     }
 
-    public static CardCollection getCardsForEnlisting(Player active, Card source, SpellAbility paySA) {
-        return CardLists.getValidCards(active.getCardsIn(ZoneType.Battlefield), "Creature.notattacking+untapped+!sick", active, source, paySA);
+    public static CardCollection getCardsForEnlisting(Player active) {
+        return CardLists.filter(active.getCreaturesInPlay(), c -> c.isUntapped() && !c.isSick() && !c.isAttacking());
     }
 
 }

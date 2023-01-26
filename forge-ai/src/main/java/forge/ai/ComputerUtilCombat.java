@@ -1208,6 +1208,8 @@ public class ComputerUtilCombat {
             theTriggers.addAll(blocker.getTriggers());
         }
 
+        // TODO consider Exert + Enlist
+
         // look out for continuous static abilities that only care for attacking creatures
         if (!withoutCombatStaticAbilities) {
             final CardCollectionView cardList = CardCollection.combine(game.getCardsIn(ZoneType.Battlefield), game.getCardsIn(ZoneType.Command));

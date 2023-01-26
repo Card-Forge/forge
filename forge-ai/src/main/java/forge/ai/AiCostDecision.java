@@ -240,9 +240,9 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostEnlist cost) {
-        CardCollection choices = cost.getCardsForEnlisting(player, source, ability);
+        CardCollection choices = CostEnlist.getCardsForEnlisting(player);
         CardLists.sortByPowerDesc(choices);
-        return PaymentDecision.card(choices.getFirst());
+        return choices.isEmpty() ? null : PaymentDecision.card(choices.getFirst());
     }
 
     @Override

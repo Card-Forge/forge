@@ -468,7 +468,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostEnlist cost) {
-        CardCollectionView list = cost.getCardsForEnlisting(player, source, ability);
+        CardCollectionView list = CostEnlist.getCardsForEnlisting(player);
         if (list.isEmpty()) {
             return null;
         }

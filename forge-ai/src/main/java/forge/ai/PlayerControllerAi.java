@@ -341,7 +341,7 @@ public class PlayerControllerAi extends PlayerController {
  
     @Override
     public List<Card> enlistAttackers(List<Card> attackers) {
-        CardCollection cards = CostEnlist.getCardsForEnlisting(brains.getPlayer(), null, null);
+        CardCollection cards = CostEnlist.getCardsForEnlisting(brains.getPlayer());
         ComputerUtilCard.sortByEvaluateCreature(new CardCollection(attackers));
         // do not enlist more than available payment choices
         attackers = attackers.subList(0, cards.size());

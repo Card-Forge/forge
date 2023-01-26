@@ -1637,6 +1637,8 @@ public class AiController {
             return false;
         }
 
+        // TODO needed to pay propaganda
+
         return true;
     }
 

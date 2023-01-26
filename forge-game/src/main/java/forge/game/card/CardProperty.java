@@ -1081,10 +1081,6 @@ public class CardProperty {
             if (card.isFirstTurnControlled()) {
                 return false;
             }
-        } else if (property.startsWith("sick")) {
-            if (!card.isSick()) {
-                return false;
-            }
         } else if (property.startsWith("startedTheTurnUntapped")) {
             if (!card.hasStartedTheTurnUntapped()) {
                 return false;
