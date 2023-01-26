@@ -13,8 +13,10 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.staticability.StaticAbilityMustAttack;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class CreatureEvaluator implements Function<Card, Integer> {
@@ -120,8 +122,11 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value += addValue(c.getKeywordMagnitude(Keyword.AFFLICT) * 5, "afflict");
             value += addValue(c.getKeywordMagnitude(Keyword.RAMPAGE), "rampage");
 
-            if (c.hasTriggerContaining("Whenever this creature deals combat damage") ||
-                    c.hasTriggerContaining("Whenever this creature deals damage")) {
+            if (c.hasTriggerThatMatches(Arrays.asList(
+                    TriggerType.DamageDealtOnce,
+                    TriggerType.DamageDone,
+                    TriggerType.DamageDoneOnce,
+                    TriggerType.DamageDoneOnceByController))) {
                 value += addValue(10, "cdamage_trigger");
             }
         }

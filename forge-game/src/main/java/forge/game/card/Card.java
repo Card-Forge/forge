@@ -1330,6 +1330,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return currentState.hasTrigger(id);
     }
 
+    public final boolean hasTriggerThatMatches(final List<TriggerType> value) {
+        for (Trigger t: this.getTriggers()) {
+            if (value.contains(t.getMode())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void updateTriggers(List<Trigger> list, CardState state) {
         for (final CardTraitChanges ck : getChangedCardTraitsList(state)) {
             if (ck.isRemoveAll()) {
@@ -5180,15 +5189,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         HasKeywordVisitor visitor = new HasKeywordVisitor(keyword, true);
         visitUnhiddenKeywords(state, visitor);
         return visitor.getResult();
-    }
-
-    public final boolean hasTriggerContaining(final String value) {
-        for (Trigger t: this.getTriggers()) {
-            if (t.toString().contains(value)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public final boolean hasAnyKeyword(final Iterable<String> keywords) {
