@@ -421,7 +421,15 @@ public class AbilityUtils {
         // return empty strings and constants
         if (StringUtils.isBlank(amount)) { return 0; }
         if (card == null) { return 0; }
-        final Player player = ability instanceof SpellAbility ? ((SpellAbility)ability).getActivatingPlayer() : card.getController();
+
+        Player player = null;
+        if (ability instanceof SpellAbility) {
+            player = ((SpellAbility)ability).getActivatingPlayer();
+        }
+        if (player == null) {
+            player = card.getController();
+        }
+
         final Game game = card.getGame();
 
         // Strip and save sign for calculations
