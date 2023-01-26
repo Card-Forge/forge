@@ -1,7 +1,7 @@
 Name:Bring the Ending
 ManaCost:1 U
 Types:Instant
-A:SP$ Branch | BranchConditionSVar$ X | TargetType$ Spell | TgtZone$ Stack | ValidTgts$ Card | BranchConditionSVarCompare$ GE3 | TrueSubAbility$ Counter | FalseSubAbility$ CounterUnless Counter target spell unless its controller pays {2}. Corrupted — Counter that spell instead of its controller has three or more poison counter.
+A:SP$ Branch | BranchConditionSVar$ X | TargetType$ Spell | TgtZone$ Stack | ValidTgts$ Card | BranchConditionSVarCompare$ GE3 | TrueSubAbility$ Counter | FalseSubAbility$ CounterUnless | SpellDescription$ Counter target spell unless its controller pays {2}. Corrupted — Counter that spell instead of its controller has three or more poison counter.
 SVar:CounterUnless:DB$ Counter | Defined$ Targeted | UnlessCost$ 2
 SVar:Counter:DB$ Counter | Defined$ Targeted
 SVar:X:TargetedController$PoisonCounters
