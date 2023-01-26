@@ -355,15 +355,13 @@ public class CardUtil {
                     case MagicColor.RED:    targetName = "Mountain";break;
                     case MagicColor.GREEN:  targetName = "Forest";  break;
                 }
-                if(jumpStartSheetsCandidates==null)
+
+                jumpStartSheetsCandidates=new ArrayList<>();
+                for(PrintSheet sheet : StaticData.instance().getPrintSheets())
                 {
-                    jumpStartSheetsCandidates=new ArrayList<>();
-                    for(PrintSheet sheet : StaticData.instance().getPrintSheets())
+                    if(sheet.containsCardNamed(targetName,3) && sheet.getName().startsWith("JMP") && sheet.all().size() == 20)//dodge the rainbow jumpstart sheet and the sheet for every card
                     {
-                        if(sheet.containsCardNamed(targetName,3) && sheet.getName().startsWith("JMP") && sheet.all().size() == 20)//dodge the rainbow jumpstart sheet and the sheet for every card
-                        {
-                            jumpStartSheetsCandidates.add(sheet);
-                        }
+                        jumpStartSheetsCandidates.add(sheet);
                     }
                 }
                 PrintSheet sheet=jumpStartSheetsCandidates.get(Current.world().getRandom().nextInt(jumpStartSheetsCandidates.size()));
