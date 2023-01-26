@@ -5,6 +5,6 @@ A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBFlicker,DBReturnArtifact
 SVar:DBFlicker:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl,Artifact.YouCtrl | TgtPrompt$ Select target creature or artifact you control | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile target artifact or creature you control, then return it to the battlefield under its owner's control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:DBReturnArtifact:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl | TgtPrompt$ Select target artifact or creature to return from your graveyard | SpellDescription$ Return target artifact or creature card with mana value 3 or less from your graveyard to the battlefield.
+SVar:DBReturnArtifact:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.YouCtrl+cmcLE3,Creature.YouCtrl+cmcLE3 | TgtPrompt$ Select target artifact or creature to return from your graveyard | SpellDescription$ Return target artifact or creature card with mana value 3 or less from your graveyard to the battlefield.
 DeckHas:Ability$Graveyard
 Oracle:Choose one or both —\n• Exile target artifact or creature you control, then return it to the battlefield under its owner's control.\n• Return target artifact or creature card with mana value 3 or less from your graveyard to the battlefield.
