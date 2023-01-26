@@ -549,7 +549,7 @@ public class MapStage extends GameStage {
                         Array<String> possibleShops = new Array<>(rotation.split(","));
 
                         if (possibleShops.size > 0){
-                            long rotatingRandomSeed = WorldSave.getCurrentSave().getWorld().getRandom().nextLong() + java.time.LocalDate.now().plusDays(5).toEpochDay();
+                            long rotatingRandomSeed = WorldSave.getCurrentSave().getWorld().getRandom().nextLong() + java.time.LocalDate.now().toEpochDay();
                             Random rotatingShopRandom = new Random(rotatingRandomSeed);
                             rotatingShop = possibleShops.get(rotatingShopRandom.nextInt(possibleShops.size));
                             changes.setRotatingShopSeed(id, rotatingRandomSeed);
