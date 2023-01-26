@@ -1,0 +1,9 @@
+Name:Skyhunter Strike Force
+ManaCost:2 W
+Types:Creature Cat Knight
+PT:2/2
+K:Flying
+K:Melee
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | AddKeyword$ Melee | Description$ Lieutenant - As long as you control your commander, other creatures you control have melee.
+AI:RemoveDeck:NonCommander
+Oracle:Flying\nMelee (Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)\nLieutenant - As long as you control your commander, other creatures you control have melee.
