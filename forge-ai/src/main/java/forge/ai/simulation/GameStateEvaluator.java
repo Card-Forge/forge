@@ -6,8 +6,13 @@ import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import static java.lang.Math.max;
 
@@ -160,11 +165,15 @@ public class GameStateEvaluator {
             // for each mana color a land generates for free, increase the value by one
             // for each mana a land can produce, add one hundred.
             int max_produced = 0;
-            int possible_colors = 0;
+            Set<String> colors_produced = new HashSet<>();
             for (SpellAbility m: c.getManaAbilities()) {
-                max_produced = max(max_produced, m.amountOfManaGenerated(false));
+                max_produced = max(max_produced, m.amountOfManaGenerated(true));
+                for (AbilityManaPart mp : m.getAllManaParts()) {
+                    colors_produced.addAll(Arrays.asList(mp.mana(m).split(" ")));
+                }
             }
             value = 100 * max_produced;
+            value += colors_produced.size();
             return value;
         } else if (c.isEnchantingCard()) {
             // TODO: Should provide value in whatever it's enchanting?

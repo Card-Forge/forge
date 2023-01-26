@@ -282,7 +282,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         // start with a hand with a basic, a tapland, and a card that can't be cast
         addCard("Forest", p);
         addCardToZone("Forest", p, ZoneType.Hand);
-        Card guildgate = addCardToZone("Simic Guildgate", p, ZoneType.Hand);
+        Card desired = addCardToZone("Simic Guildgate", p, ZoneType.Hand);
         addCardToZone("Centaur Courser", p, ZoneType.Hand);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
@@ -290,7 +290,28 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         // ensure that the tapland is paid
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        AssertJUnit.assertEquals(guildgate, sa.getHostCard());
+        AssertJUnit.assertEquals(desired, sa.getHostCard());
+    }
+
+    @Test
+    public void playBouncelandIfNoPlays() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        // start with a hand with a basic, a bounceland, and a card that can't be cast
+        addCard("Forest", p);
+        addCardToZone("Forest", p, ZoneType.Hand);
+        Card desired = addCardToZone("Simic Growth Chamber", p, ZoneType.Hand);
+        addCardToZone("Centaur Courser", p, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        System.out.println(new GameStateEvaluator().evalCard(game, null, desired));
+
+        // ensure that the tapland is paid
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertEquals(desired, sa.getHostCard());
     }
 
     @Test
