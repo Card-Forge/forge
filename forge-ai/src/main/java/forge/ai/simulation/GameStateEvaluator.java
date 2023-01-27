@@ -167,6 +167,7 @@ public class GameStateEvaluator {
             int max_produced = 0;
             Set<String> colors_produced = new HashSet<>();
             for (SpellAbility m: c.getManaAbilities()) {
+                m.setActivatingPlayer(c.getController());
                 max_produced = max(max_produced, m.amountOfManaGenerated(true));
                 for (AbilityManaPart mp : m.getAllManaParts()) {
                     colors_produced.addAll(Arrays.asList(mp.mana(m).split(" ")));
