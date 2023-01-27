@@ -536,6 +536,15 @@ ScryfallCode=NEO
 513 M Jin-Gitaxias, Progress Tyrant @Richard Whitters
 514 M Jin-Gitaxias, Progress Tyrant @Richard Whitters
 
+[rebalanced]
+A1 C A-Ancestral Katana @Daniel Ljunggren
+A10 C A-Eiganjo Exemplar @Ernanda Souza
+A19 C A-Imperial Subduer @Zara Alfonso
+A131 C A-Akki Ronin @Olivier Bernard
+A156 C A-Peerless Samurai @Micah Epstein
+A215 U A-Asari Captain @Donato Giancola
+A232 R A-Raiyuu, Storm's Edge @Heonhwa Choe
+
 [lands]
 1 Plains|NEO|1
 1 Plains|NEO|2
