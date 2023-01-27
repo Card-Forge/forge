@@ -467,6 +467,22 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(final CostEnlist cost) {
+        CardCollectionView list = CostEnlist.getCardsForEnlisting(player);
+        if (list.isEmpty()) {
+            return null;
+        }
+        final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, list, ability);
+        inp.setMessage(Localizer.getInstance().getMessage("lblSelectACostToEnlist", cost.getDescriptiveType(), "%d"));
+        inp.setCancelAllowed(true);
+        inp.showAndWait();
+        if (inp.hasCancelled()) {
+            return null;
+        }
+        return PaymentDecision.card(inp.getSelected());
+    }
+
+    @Override
     public PaymentDecision visit(final CostFlipCoin cost) {
         Integer c = cost.getAbilityAmount(ability);
 

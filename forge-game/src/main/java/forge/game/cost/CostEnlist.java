@@ -17,17 +17,20 @@
  */
 package forge.game.cost;
 
+import java.util.Map;
+
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
+import forge.game.trigger.TriggerType;
 
 /**
  * The Class CostExert.
  */
-public class CostExert extends CostPartWithTrigger {
+public class CostEnlist extends CostPartWithTrigger {
 
     private static final long serialVersionUID = 1L;
 
@@ -41,7 +44,7 @@ public class CostExert extends CostPartWithTrigger {
      * @param description
      *            the description
      */
-    public CostExert(final String amount, final String type, final String description) {
+    public CostEnlist(final String amount, final String type, final String description) {
         super(amount, type, description);
     }
 
@@ -53,20 +56,7 @@ public class CostExert extends CostPartWithTrigger {
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Exert ");
-
-        final Integer i = this.convertAmount();
-
-        if (this.payCostFromSource()) {
-            sb.append(this.getType());
-        } else {
-            final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
-            if (i != null) {
-                sb.append(Cost.convertIntAndTypeToWords(i, desc));
-            } else {
-                sb.append(Cost.convertAmountTypeToWords(this.getAmount(), desc));
-            }
-        }
+        sb.append("Enlist " + this.getType());
         return sb.toString();
     }
 
@@ -79,24 +69,17 @@ public class CostExert extends CostPartWithTrigger {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
-        final Card source = ability.getHostCard();
-
-        if (!this.payCostFromSource()) {
-            boolean needsAnnoucement = ability.hasParam("Announce") && this.getType().contains(ability.getParam("Announce"));
-
-            CardCollectionView typeList = payer.getCardsIn(ZoneType.Battlefield);
-            typeList = CardLists.getValidCards(typeList, this.getType().split(";"), payer, source, ability);
-            final int amount = this.getAbilityAmount(ability);
-
-            return needsAnnoucement || (typeList.size() >= amount);
-        }
-
-        return true;
+        return !getCardsForEnlisting(payer).isEmpty();
     }
 
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
-    	targetCard.exert();
+        targetCard.tap(true);
+        // need to transfer info
+        payTrig.addRemembered(targetCard);
+
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(payTrig.getHostCard());
+        targetCard.getGame().getTriggerHandler().runTrigger(TriggerType.Enlisted, runParams, false);
         return targetCard;
     }
 
@@ -105,16 +88,20 @@ public class CostExert extends CostPartWithTrigger {
      */
     @Override
     public String getHashForLKIList() {
-        return "Exerted";
+        return "Enlisted";
     }
     @Override
     public String getHashForCardList() {
-    	return "ExertedCards";
+        return "EnlistedCards";
     }
 
     // Inputs
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
+    }
+
+    public static CardCollection getCardsForEnlisting(Player active) {
+        return CardLists.filter(active.getCreaturesInPlay(), c -> c.isUntapped() && !c.isSick() && !c.isAttacking());
     }
 
 }

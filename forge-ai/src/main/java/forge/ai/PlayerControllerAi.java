@@ -43,6 +43,7 @@ import forge.game.card.CardView;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
+import forge.game.cost.CostEnlist;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.keyword.KeywordInterface;
@@ -336,6 +337,16 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public List<Card> exertAttackers(List<Card> attackers) {
         return AiAttackController.exertAttackers(attackers, brains.getAttackAggression());
+    }
+ 
+    @Override
+    public List<Card> enlistAttackers(List<Card> attackers) {
+        CardCollection cards = CostEnlist.getCardsForEnlisting(brains.getPlayer());
+        ComputerUtilCard.sortByEvaluateCreature(new CardCollection(attackers));
+        // do not enlist more than available payment choices (currently ignores multiple instances of Enlist, but can that even happen?)
+        attackers = attackers.subList(0, cards.size());
+        // TODO check if not needed as defender
+        return attackers;
     }
 
     @Override
