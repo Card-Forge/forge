@@ -1,4 +1,4 @@
-Name:_____ Goblin
+Name:Mind Goblin
 ManaCost:2 R
 Types:Creature Goblin Guest
 PT:1/1
