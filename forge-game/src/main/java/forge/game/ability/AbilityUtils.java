@@ -958,6 +958,7 @@ public class AbilityUtils {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a {@link java.util.ArrayList} object.
      */
+    @SuppressWarnings("unchecked")
     public static PlayerCollection getDefinedPlayers(final Card card, final String def, final CardTraitBase sa) {
         final PlayerCollection players = new PlayerCollection();
         String changedDef = (def == null) ? "You" : applyAbilityTextChangeEffects(def, sa); // default to Self
@@ -2744,6 +2745,12 @@ public class AbilityUtils {
             CounterType cType = CounterType.getType(parts[1]);
 
             return doXMath(game.getCounterAddedThisTurn(cType, parts[2], parts[3], c, player, ctb), expr, c, ctb);
+        }
+        if (sq[0].startsWith("CountersRemovedThisTurn")) {
+            final String[] parts = l[0].split(" ");
+            CounterType cType = CounterType.getType(parts[1]);
+
+            return doXMath(game.getCounterRemovedThisTurn(cType, parts[2], c, player, ctb), expr, c, ctb);
         }
 
         // count valid cards in any specified zone/s
