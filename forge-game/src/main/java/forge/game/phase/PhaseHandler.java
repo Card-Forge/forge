@@ -40,6 +40,8 @@ import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.cost.CostEnlist;
+import forge.game.cost.CostExert;
 import forge.game.event.GameEventAttackersDeclared;
 import forge.game.event.GameEventBlockersDeclared;
 import forge.game.event.GameEventCardStatsChanged;
@@ -559,9 +561,22 @@ public class PhaseHandler implements java.io.Serializable {
                     }
                 }
 
+                // CR 508.1g
+                List<Card> possibleExerters = CombatUtil.getOptionalAttackCostCreatures(combat.getAttackers(), CostExert.class);
+                if (!possibleExerters.isEmpty()) {
+                    possibleExerters = whoDeclares.getController().exertAttackers(possibleExerters);
+                }
+
+                List<Card> possibleEnlisters = CombatUtil.getOptionalAttackCostCreatures(combat.getAttackers(), CostEnlist.class);
+                if (!possibleEnlisters.isEmpty()) {
+                    // TODO might want to skip if can't be paid
+                    possibleEnlisters = whoDeclares.getController().enlistAttackers(possibleEnlisters);
+                    possibleExerters.addAll(possibleEnlisters);
+                }
+
                 for (final Card attacker : combat.getAttackers()) {
                     // TODO currently doesn't refund previous attackers (can really only happen if you cancel paying for a creature with an attack requirement that could be satisfied without a tax)
-                    final boolean canAttack = CombatUtil.checkPropagandaEffects(game, attacker, combat);
+                    final boolean canAttack = CombatUtil.checkPropagandaEffects(game, attacker, combat, possibleExerters);
 
                     if (!canAttack) {
                         combat.removeFromCombat(attacker);
@@ -587,16 +602,6 @@ public class PhaseHandler implements java.io.Serializable {
                 if (!attacker.attackVigilance()) {
                     attacker.setTapped(false);
                     attacker.tap(true, true);
-                }
-            }
-
-            // Exert creatures here
-            List<Card> possibleExerters = CardLists.getKeyword(combat.getAttackers(),
-                    "You may exert CARDNAME as it attacks.");
-
-            if (!possibleExerters.isEmpty()) {
-                for (Card exerter : whoDeclares.getController().exertAttackers(possibleExerters)) {
-                    exerter.exert();
                 }
             }
         }

@@ -2,7 +2,6 @@ Name:Glory-Bound Initiate
 ManaCost:1 W
 Types:Creature Human Warrior
 PT:3/1
-K:You may exert CARDNAME as it attacks.
-T:Mode$ Exerted | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When you exert CARDNAME, it gets +1/+3 and gains lifelink until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 3 | KW$ Lifelink
+S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Trigger$ TrigPump | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. When you do, it gets +1/+3 and gains lifelink until end of turn. (An exerted creature won't untap during your next untap step.)
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 3 | KW$ Lifelink | SpellDescription$ When you do, it gets +1/+3 and gains lifelink until end of turn.
 Oracle:You may exert Glory-Bound Initiate as it attacks. When you do, it gets +1/+3 and gains lifelink until end of turn. (An exerted creature won't untap during your next untap step.)

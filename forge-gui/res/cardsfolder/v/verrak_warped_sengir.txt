@@ -7,5 +7,5 @@ K:Deathtouch
 K:Lifelink
 T:Mode$ AbilityCast | ValidActivatingPlayer$ You | ValidSA$ SpellAbility.nonManaAbility | Condition$ LifePaid | TriggerZones$ Battlefield | Execute$ TrigCopySpell | TriggerDescription$ Whenever you activate an ability that isn't a mana ability, if life was paid to activate it, you may pay that much life again. If you do, copy that ability. You may choose new targets for the copy.
 SVar:TrigCopySpell:AB$ CopySpellAbility | Cost$ PayLife<X> | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
-SVar:X:Count$TriggeredLifeSpent
+SVar:X:TriggerCount$LifeAmount
 Oracle:Flying, deathtouch, lifelink\nWhenever you activate an ability that isn't a mana ability, if life was paid to activate it, you may pay that much life again. If you do, copy that ability. You may choose new targets for the copy.

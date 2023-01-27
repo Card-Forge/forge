@@ -584,4 +584,7 @@ public class WrappedAbility extends Ability {
         sa.setChosenList(choices);
     }
 
+    public boolean isIntrinsic() {
+        return sa.isIntrinsic();
+    }
 }

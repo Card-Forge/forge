@@ -128,6 +128,7 @@ public class ComputerUtil {
 
         if (!sa.isCopied()) {
             sa.resetPaidHash();
+            sa.setPaidLife(0);
         }
 
         sa = GameActionUtil.addExtraKeywordCost(sa);
@@ -336,27 +337,30 @@ public class ComputerUtil {
         return true;
     }
 
-    public static final void playNoStack(final Player ai, SpellAbility sa, final Game game, final boolean effect) {
+    public static final boolean playNoStack(final Player ai, SpellAbility sa, final Game game, final boolean effect) {
         sa.setActivatingPlayer(ai, true);
         // TODO: We should really restrict what doesn't use the Stack
-        if (ComputerUtilCost.canPayCost(sa, ai, effect)) {
-            final Card source = sa.getHostCard();
-            if (sa.isSpell() && !source.isCopiedSpell()) {
-                sa.setHostCard(game.getAction().moveToStack(source, sa));
-            }
-
-            sa = GameActionUtil.addExtraKeywordCost(sa);
-
-            final Cost cost = sa.getPayCosts();
-            if (cost == null) {
-                ComputerUtilMana.payManaCost(ai, sa, effect);
-            } else {
-                final CostPayment pay = new CostPayment(cost, sa);
-                pay.payComputerCosts(new AiCostDecision(ai, sa, effect));
-            }
-
-            AbilityUtils.resolve(sa);
+        if (!ComputerUtilCost.canPayCost(sa, ai, effect)) {
+            return false;
         }
+
+        final Card source = sa.getHostCard();
+        if (sa.isSpell() && !source.isCopiedSpell()) {
+            sa.setHostCard(game.getAction().moveToStack(source, sa));
+        }
+
+        sa = GameActionUtil.addExtraKeywordCost(sa);
+
+        final Cost cost = sa.getPayCosts();
+        if (cost == null) {
+            ComputerUtilMana.payManaCost(ai, sa, effect);
+        } else {
+            final CostPayment pay = new CostPayment(cost, sa);
+            pay.payComputerCosts(new AiCostDecision(ai, sa, effect));
+        }
+
+        AbilityUtils.resolve(sa);
+        return true;
     }
 
     public static Card getCardPreference(final Player ai, final Card activate, final String pref, final CardCollection typeList) {

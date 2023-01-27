@@ -160,7 +160,6 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                             copies.add(copy);
                         }
                     }
-
                 }
             } else {
                 for (int i = 0; i < amount; i++) {
@@ -181,8 +180,10 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                                 }
                             });
                         }
-                        GameEntity choice = Aggregates.random(candidates);
-                        resetFirstTargetOnCopy(copy, choice, chosenSA);
+                        if (!candidates.isEmpty()) {
+                            GameEntity choice = Aggregates.random(candidates);
+                            resetFirstTargetOnCopy(copy, choice, chosenSA);
+                        }
                     }
 
                     // extra case for Epic to remove the keyword and the last part of the SpellAbility
@@ -238,7 +239,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 card.addRemembered(copies);
             }
         }
-    } // end resolve
+    }
 
     private void resetFirstTargetOnCopy(SpellAbility copy, GameEntity obj, SpellAbility targetedSA) {
         copy.resetFirstTarget(obj, targetedSA);

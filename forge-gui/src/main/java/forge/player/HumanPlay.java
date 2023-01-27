@@ -283,6 +283,7 @@ public class HumanPlay {
                     || part instanceof CostFlipCoin
                     || part instanceof CostRollDice
                     || part instanceof CostDamage
+                    || part instanceof CostEnlist
                     || part instanceof CostPutCounter
                     || part instanceof CostRemoveCounter
                     || part instanceof CostRemoveAnyCounter
@@ -513,6 +514,9 @@ public class HumanPlay {
                 }
 
                 p.payEnergy(amount, source);
+            }
+            else if (part instanceof CostExert) {
+                part.payAsDecided(p, PaymentDecision.card(source), sourceAbility, hcd.isEffect());
             }
 
             else if (part instanceof CostPayShards) {

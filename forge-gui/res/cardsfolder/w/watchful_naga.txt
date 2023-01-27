@@ -2,7 +2,6 @@ Name:Watchful Naga
 ManaCost:2 G
 Types:Creature Naga Wizard
 PT:2/2
-K:You may exert CARDNAME as it attacks.
-T:Mode$ Exerted | ValidCard$ Card.Self | Execute$ DBDraw | TriggerDescription$ When you exert CARDNAME, draw a card.
-SVar:DBDraw:DB$ Draw | Defined$ TriggeredPlayer
+S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Trigger$ DBDraw | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. When you do, draw a card. (An exerted creature won't untap during your next untap step.)
+SVar:DBDraw:DB$ Draw | SpellDescription$ When you do, draw a card.
 Oracle:You may exert Watchful Naga as it attacks. When you do, draw a card. (An exerted creature won't untap during your next untap step.)

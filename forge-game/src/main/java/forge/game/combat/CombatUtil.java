@@ -25,6 +25,7 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -42,6 +43,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseType;
@@ -295,8 +297,8 @@ public class CombatUtil {
      * @param attacker
      *            a {@link forge.game.card.Card} object.
      */
-    public static boolean checkPropagandaEffects(final Game game, final Card attacker, final Combat combat) {
-        final Cost attackCost = getAttackCost(game, attacker,  combat.getDefenderByAttacker(attacker));
+    public static boolean checkPropagandaEffects(final Game game, final Card attacker, final Combat combat, final List<Card> attackersWithOptionalCost) {
+        final Cost attackCost = getAttackCost(game, attacker,  combat.getDefenderByAttacker(attacker), attackersWithOptionalCost);
         if (attackCost == null) {
             return true;
         }
@@ -309,6 +311,9 @@ public class CombatUtil {
                 "Pay additional cost to declare " + attacker + " an attacker", ManaPaymentPurpose.DeclareAttacker);
     }
 
+    public static Cost getAttackCost(final Game game, final Card attacker, final GameEntity defender) {
+        return getAttackCost(game, attacker, defender, ImmutableList.of());
+    }
     /**
      * Get the cost that has to be paid for a creature to attack a certain
      * defender.
@@ -322,13 +327,13 @@ public class CombatUtil {
      * @return the {@link Cost} of attacking, or {@code null} if there is no
      *         cost.
      */
-    public static Cost getAttackCost(final Game game, final Card attacker, final GameEntity defender) {
+    public static Cost getAttackCost(final Game game, final Card attacker, final GameEntity defender, final List<Card> attackersWithOptionalCost) {
         final Cost attackCost = new Cost(ManaCost.ZERO, true);
         boolean hasCost = false;
         // Sort abilities to apply them in proper order
         for (final Card card : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
-                final Cost additionalCost = stAb.getAttackCost(attacker, defender);
+                final Cost additionalCost = stAb.getAttackCost(attacker, defender, attackersWithOptionalCost);
                 if (null != additionalCost) {
                     attackCost.add(additionalCost);
                     hasCost = true;
@@ -340,6 +345,19 @@ public class CombatUtil {
             return null;
         }
         return attackCost;
+    }
+
+    public static CardCollection getOptionalAttackCostCreatures(final CardCollection attackers, Class<? extends CostPart> costType) {
+        final CardCollection attackersWithCost = new CardCollection();
+        for (final Card card : attackers) {
+            for (final StaticAbility stAb : card.getStaticAbilities()) {
+                if (stAb.hasAttackCost(card, costType)) {
+                    attackersWithCost.add(card);
+                }
+            }
+        }
+
+        return attackersWithCost;
     }
 
     public static boolean payRequiredBlockCosts(Game game, Card blocker, Card attacker) {

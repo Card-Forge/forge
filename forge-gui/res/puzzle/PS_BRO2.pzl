@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - The Brothers' War #02
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2022/12/213.-BRO2-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume your opponent has no mana available. Remember that your solution must satisfy all possible blocking decisions.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Giant Growth;Mishra's Command;Audacity;Sibling Rivalry
+p0battlefield=Rootwire Amalgam;Cradle Clearcutter;Hurler Cyclops;Rockfall Vale;Rockfall Vale;Mountain;Mountain;Forest
+p1life=26
+p1battlefield=Ivy, Gleeful Spellthief|Counters:P1P1=1

@@ -390,7 +390,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     private boolean hasAllTargets() {
-        return sa.isMaxTargetChosen() || (divisionValues != null && sa.getStillToDivide() == 0)
+        return sa.isMaxTargetChosen() || (divisionValues != null && sa.getStillToDivide() <= 0)
             || (divisionValues == null && sa.isDividedAsYouChoose() && sa.getTargets().size() == sa.getStillToDivide());
     }
 
