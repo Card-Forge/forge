@@ -503,4 +503,8 @@ public class HostedMatch {
             });
         }
     }
+
+    public List<PlayerControllerHuman> getHumanControllers(){
+        return humanControllers;
+    }
 }

@@ -42,7 +42,7 @@ public class DeckHints {
     }
 
     private boolean valid = false;
-    private List<Pair<Type, String>> filters = null;
+    public List<Pair<Type, String>> filters = null;
 
     /**
      * Construct a DeckHints from the SVar string.

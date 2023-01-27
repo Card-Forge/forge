@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.game.card.*;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
@@ -45,16 +46,6 @@ import forge.card.CardRarity;
 import forge.card.CardStateName;
 import forge.card.CardType.Supertype;
 import forge.game.ability.AbilityKey;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageHistory;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CardView;
-import forge.game.card.CardZoneTable;
-import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.event.Event;
 import forge.game.event.GameEventDayTimeChanged;
@@ -305,6 +296,9 @@ public class Game {
             pl.setMaxHandSize(psc.getStartingHand());
             pl.setStartingHandSize(psc.getStartingHand());
 
+            if (psc.getManaShards() > 0) {
+                pl.setCounters(CounterEnumType.MANASHARDS, psc.getManaShards(), true);
+            }
             int teamNum = psc.getTeamNumber();
             if (teamNum == -1) {
                 // RegisteredPlayer doesn't have an assigned team, set it to 1 higher than the highest found team number

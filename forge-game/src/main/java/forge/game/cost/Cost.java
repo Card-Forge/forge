@@ -324,6 +324,11 @@ public class Cost implements Serializable {
             final String[] splitStr = abCostParse(parse, 1);
             return new CostPayEnergy(splitStr[0]);
         }
+        if (parse.startsWith("PayShards<")) { //Adventure specific energy-esque tokens
+            // Payshards<ShardCost>
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostPayShards(splitStr[0]);
+        }
 
         if (parse.startsWith("GainLife<")) {
             // PayLife<LifeCost>

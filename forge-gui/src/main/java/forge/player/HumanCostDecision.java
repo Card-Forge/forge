@@ -597,6 +597,17 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(final CostPayShards cost) {
+        Integer c = cost.getAbilityAmount(ability);
+
+        if (player.canPayShards(c) &&
+                confirmAction(cost, Localizer.getInstance().getMessage("lblPayShardsConfirm", cost.toString(), String.valueOf(player.getCounters(CounterEnumType.MANASHARDS)), "{M} (Mana Shards)"))) {
+            return PaymentDecision.number(c);
+        }
+        return null;
+    }
+
+    @Override
     public PaymentDecision visit(final CostPartMana cost) {
         // only interactive payment possible for now =(
         return new PaymentDecision(0);

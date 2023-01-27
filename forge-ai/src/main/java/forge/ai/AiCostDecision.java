@@ -793,6 +793,11 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(CostPayShards cost) {
+        return PaymentDecision.number(0);
+    }
+
+    @Override
     public PaymentDecision visit(CostUnattach cost) {
         final Card cardToUnattach = cost.findCardToUnattach(source, player, ability);
         if (cardToUnattach == null) {

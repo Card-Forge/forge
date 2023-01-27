@@ -19,10 +19,7 @@ import forge.item.PaperCard;
 import forge.model.FModel;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import static forge.adventure.data.RewardData.generateAllCards;
@@ -48,9 +45,11 @@ public class CardUtil {
         private final List<Integer> manaCosts =new ArrayList<>();
         private final Pattern text;
         private final boolean matchAllSubTypes;
+        private final boolean matchAllColors;
         private  int colors;
         private final ColorType colorType;
         private final boolean shouldBeEqual;
+        private final List<String> deckNeeds=new ArrayList<>();
 
         @Override
         public boolean apply(final PaperCard card) {
@@ -62,6 +61,14 @@ public class CardUtil {
                 return !this.shouldBeEqual;
             if(this.text!=null&& !this.text.matcher(card.getRules().getOracleText()).find())
                 return !this.shouldBeEqual;
+
+            if(this.matchAllColors)
+            {
+                if(!card.getRules().getColor().hasAllColors(this.colors))
+                {
+                    return !this.shouldBeEqual;
+                }
+            }
 
             if(this.colors!= MagicColor.ALL_COLORS)
             {
@@ -162,6 +169,28 @@ public class CardUtil {
                     return !this.shouldBeEqual;
             }
 
+            if(!this.deckNeeds.isEmpty())
+            {
+                boolean found = false;
+                for(String need:this.deckNeeds)
+                {
+                    //FormatExpected: X$Y, where X is DeckHints.Type and Y is a string descriptor
+                    String[] parts = need.split("\\$");
+
+                    if (parts.length != 2){
+                        continue;
+                    }
+                    DeckHints.Type t = DeckHints.Type.valueOf(parts[0].toUpperCase());
+
+                    DeckHints hints = card.getRules().getAiHints().getDeckHints();
+                    if (hints != null && hints.contains(t, parts[1])){
+                        found=true;
+                        break;
+                    }
+                }
+                if(!found)
+                    return !this.shouldBeEqual;
+            }
 
 
             return this.shouldBeEqual;
@@ -169,6 +198,7 @@ public class CardUtil {
 
         public CardPredicate(final RewardData type, final boolean wantEqual) {
             this.matchAllSubTypes=type.matchAllSubTypes;
+            this.matchAllColors=type.matchAllColors;
             this.shouldBeEqual = wantEqual;
             for(int i=0;type.manaCosts!=null&&i<type.manaCosts.length;i++)
                 manaCosts.add(type.manaCosts[i]);
@@ -227,34 +257,39 @@ public class CardUtil {
             {
                 this.colorType=ColorType.Any;
             }
+            if(type.deckNeeds!=null&&type.deckNeeds.length!=0){
+                deckNeeds.addAll(Arrays.asList(type.deckNeeds));
+            }
         }
+    }
+
+    public static List<PaperCard> getPredicateResult(Iterable<PaperCard> cards,final RewardData data)
+    {
+        List<PaperCard> result = new ArrayList<>();
+        CardPredicate pre = new CardPredicate(data, true);
+
+        java.util.Map<String, String> tempMap = new HashMap<>();
+
+        for (final PaperCard item : cards)
+        {
+            if(pre.apply(item))
+                result.add(item);
+        }
+        return result;
     }
 
     public static List<PaperCard> generateCards(Iterable<PaperCard> cards,final RewardData data, final int count)
     {
-
         final List<PaperCard> result = new ArrayList<>();
-
-
-        for (int i=0;i<count;i++) {
-
-            CardPredicate pre=new CardPredicate(data, true);
-            PaperCard card = null;
-            int lowest = Integer.MAX_VALUE;
-            for (final PaperCard item : cards)
-            {
-                if(!pre.apply(item))
-                    continue;
-                int next = WorldSave.getCurrentSave().getWorld().getRandom().nextInt();
-                if(next < lowest) {
-                    lowest = next;
-                    card = item;
+        List<PaperCard> pool = getPredicateResult(cards, data);
+        if (pool.size() > 0) {
+            for (int i = 0; i < count; i++) {
+                PaperCard candidate = pool.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(pool.size()));
+                if (candidate != null) {
+                    result.add(candidate);
                 }
             }
-            if (card != null )
-                result.add(card);
         }
-
         return result;
     }
     public static int getCardPrice(PaperCard card)
@@ -286,7 +321,7 @@ public class CardUtil {
             return reward.getItem().cost;
         if(reward.getType()== Reward.Type.Life)
             return reward.getCount()*500;
-        if(reward.getType()== Reward.Type.Mana)
+        if(reward.getType()== Reward.Type.Shards)
             return reward.getCount()*500;
         if(reward.getType()== Reward.Type.Gold)
             return reward.getCount();
@@ -320,15 +355,13 @@ public class CardUtil {
                     case MagicColor.RED:    targetName = "Mountain";break;
                     case MagicColor.GREEN:  targetName = "Forest";  break;
                 }
-                if(jumpStartSheetsCandidates==null)
+
+                jumpStartSheetsCandidates=new ArrayList<>();
+                for(PrintSheet sheet : StaticData.instance().getPrintSheets())
                 {
-                    jumpStartSheetsCandidates=new ArrayList<>();
-                    for(PrintSheet sheet : StaticData.instance().getPrintSheets())
+                    if(sheet.containsCardNamed(targetName,3) && sheet.getName().startsWith("JMP") && sheet.all().size() == 20)//dodge the rainbow jumpstart sheet and the sheet for every card
                     {
-                        if(sheet.containsCardNamed(targetName,3) && sheet.getName().startsWith("JMP") && sheet.all().size() == 20)//dodge the rainbow jumpstart sheet and the sheet for every card
-                        {
-                            jumpStartSheetsCandidates.add(sheet);
-                        }
+                        jumpStartSheetsCandidates.add(sheet);
                     }
                 }
                 PrintSheet sheet=jumpStartSheetsCandidates.get(Current.world().getRandom().nextInt(jumpStartSheetsCandidates.size()));
