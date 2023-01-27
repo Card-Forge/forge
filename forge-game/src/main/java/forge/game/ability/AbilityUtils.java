@@ -1961,17 +1961,6 @@ public class AbilityUtils {
 
         } // end ctb != null
 
-        if (sq[0].contains("OppsAtLifeTotal")) {
-            final int lifeTotal = calculateAmount(c, sq[1], ctb);
-            int number = 0;
-            for (final Player opp : player.getOpponents()) {
-                if (opp.getLife() == lifeTotal) {
-                    number++;
-                }
-            }
-            return doXMath(number, expr, c, ctb);
-        }
-
         //Count$SearchedLibrary.<DefinedPlayer>
         if (sq[0].contains("SearchedLibrary")) {
             int sum = 0;
