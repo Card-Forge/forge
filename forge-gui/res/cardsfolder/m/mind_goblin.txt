@@ -1,5 +1,5 @@
 Name:________ Goblin
-ManaCost:R
+ManaCost:2 R
 Types:Creature Goblin Guest
 PT:1/1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigRollDice | TriggerDescription$ When CARDNAME enters the battlefield, you may put a name sticker on it. Add {R} for each unique vowel on that sticker. (The vowels are A, E, I, O, U, and Y.)
