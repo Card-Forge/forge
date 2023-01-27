@@ -1090,7 +1090,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
         for (final SpellAbility sa : getAi().orderPlaySa(activePlayerSAs)) {
-            if (sa.isTrigger()) {
+            if (sa.isTrigger() && !sa.isCopied()) {
                 if (prepareSingleSa(sa.getHostCard(), sa, true)) {
                     ComputerUtil.playStack(sa, player, getGame());
                 }

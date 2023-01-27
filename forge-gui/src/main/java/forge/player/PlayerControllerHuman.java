@@ -1946,7 +1946,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         for (int i = orderedSAs.size() - 1; i >= 0; i--) {
             final SpellAbility next = orderedSAs.get(i);
-            if (next.isTrigger()) {
+            if (next.isTrigger() && !next.isCopied()) {
                 HumanPlay.playSpellAbility(this, player, next);
             } else {
                 if (next.isCopied()) {
