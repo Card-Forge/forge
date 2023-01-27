@@ -1,0 +1,11 @@
+Name:Tyrranax Rex
+ManaCost:4 G G G
+Types:Creature Phyrexian Dinosaur
+PT:8/8
+K:This spell can't be countered.
+K:Trample
+K:Ward:4
+K:Haste
+K:Toxic:4
+DeckHas:Ability$Counters
+Oracle:This spell can't be countered.\nTrample, ward {4}, haste\nToxic 4 (Players dealt combat damage by this creature also get four poison counters.)
