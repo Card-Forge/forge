@@ -1,0 +1,22 @@
+Name:A-Lantern Bearer
+ManaCost:U
+Types:Creature Spirit
+PT:1/1
+K:Flying
+K:Disturb:1 U
+DeckHas:Ability$Graveyard
+AlternateMode:DoubleFaced
+Oracle:Flying\nDisturb {1}{U}
+
+ALTERNATE
+
+Name:A-Lanterns' Lift
+ManaCost:no cost
+Colors:blue
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying | Description$ Enchanted creature gets +1/+1 and has flying.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has flying.\nIf Lanterns' Lift would be put into a graveyard from anywhere, exile it instead.

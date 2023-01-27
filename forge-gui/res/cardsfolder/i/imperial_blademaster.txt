@@ -1,7 +1,7 @@
 Name:Imperial Blademaster
 ManaCost:1 R W
 Types:Creature Human Samurai
-PT:2/2
+PT:2/3
 K:Double Strike
 T:Mode$ Attacks | ValidCard$ Samurai.YouCtrl,Warrior.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigDraft | TriggerDescription$ Whenever a Samurai or Warrior you control attacks alone, draft a card from Imperial Blademaster's spellbook.
 SVar:TrigDraft:DB$ Draft | Spellbook$ Eiganjo Exemplar,Imperial Subduer,Ancestral Katana,Selfless Samurai,Norika Yamazaki; the Poet,Akki Ronin,Peerless Samurai,Heiko Yamazaki; the General,Asari Captain,Eiganjo Uprising,Eater of Virtue,Sunblade Samurai,Reinforced Ronin,Adamant Will,Tempered in Solitude
