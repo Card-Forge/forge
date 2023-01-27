@@ -34,10 +34,12 @@ ScryfallCode=ONC
 26 R Tangleweave Armor @Johann Bodin
 27 R Lux Artillery @Jason Kang
 28 M Urtet, Remnant of Memnarch @Simon Dominic
+31 R Skyhunter Strike Force @Slawomir Maniak
 32 R Mirage Mockery @Anna Pavleeva
 33 R Synthesis Pod @Campbell White
 34 R Monumental Corruption @Sergey Glushakov
 35 M Chiss-Goria, Forge Tyrant @Svetlin Velinov
+36 R Tangleweave Armor @Johann Bodin
 37 M Ixhel, Scion of Atraxa @Campbell White
 38 M Neyali, Suns' Vanguard @Bryan Sola
 39 M Otharri, Suns' Glory @Marta Nael
