@@ -3,10 +3,10 @@ ManaCost:2 R
 Types:Creature Goblin Guest
 PT:1/1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigRollDice | TriggerDescription$ When CARDNAME enters the battlefield, you may put a name sticker on it. Add {R} for each unique vowel on that sticker. (The vowels are A, E, I, O, U, and Y.)
-SVar:TrigRollDice:DB$ RollDice | Sides$ 10 | ResultSubAbilities$ 1:TrigMana3,2-7:TrigMana4,8-9:TrigMana5,10:TrigMana6 | SpellDescription$ add a sticker.
-SVar:TrigMana3:DB$ Mana | Produced$ R R R
-SVar:TrigMana4:DB$ Mana | Produced$ R R R R
-SVar:TrigMana5:DB$ Mana | Produced$ R R R R R
-SVar:TrigMana6:DB$ Mana | Produced$ R R R R R R
+SVar:TrigRollDice:DB$ Charm | Random$ True | Choices$ TrigMana3,TrigMana4,TrigMana4,TrigMana4,TrigMana4,TrigMana4,TrigMana4,TrigMana5,TrigMana5,TrigMana6
+SVar:TrigMana3:DB$ Mana | Produced$ R R R | SpellDescription$ Add {R}{R}{R}.
+SVar:TrigMana4:DB$ Mana | Produced$ R R R R | SpellDescription$ Add {R}{R}{R}{R}.
+SVar:TrigMana5:DB$ Mana | Produced$ R R R R R | SpellDescription$ Add {R}{R}{R}{R}{R}.
+SVar:TrigMana6:DB$ Mana | Produced$ R R R R R R | SpellDescription$ Add {R}{R}{R}{R}{R}{R}.
 SVar:FreeSpellAI:True
 Oracle:When this creature enters the battlefield, you may put a name sticker on it. Add {R} for each unique vowel on that sticker. (The vowels are A, E, I, O, U, and Y.)
