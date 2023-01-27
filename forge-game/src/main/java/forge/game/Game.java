@@ -124,6 +124,7 @@ public class Game {
     private CardZoneTable untilHostLeavesPlayTriggerList = new CardZoneTable();
 
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
+    private Multimap<CounterType, Pair<Card, Integer>> countersRemovedThisTurn = ArrayListMultimap.create();
 
     private FCollection<CardDamageHistory> globalDamageHistory = new FCollection<>();
     private IdentityHashMap<Pair<Integer, Boolean>, Pair<Card, GameEntity>> damageThisTurnLKI = new IdentityHashMap<>();
@@ -1102,6 +1103,7 @@ public class Game {
 
     public void onCleanupPhase() {
         clearCounterAddedThisTurn();
+        clearCounterRemovedThisTurn();
         clearGlobalDamageHistory();
         // some cards need this info updated even after a player lost, so don't skip them
         for (Player player : getRegisteredPlayers()) {
@@ -1140,6 +1142,24 @@ public class Game {
 
     public void clearCounterAddedThisTurn() {
         countersAddedThisTurn.clear();
+    }
+
+    public void addCounterRemovedThisTurn(CounterType cType, Card card, Integer value) {
+        countersRemovedThisTurn.put(cType, Pair.of(CardUtil.getLKICopy(card), value));
+    }
+
+    public int getCounterRemovedThisTurn(CounterType cType, String validCard, Card source, Player sourceController, CardTraitBase ctb) {
+        int result = 0;
+        for (Pair<Card, Integer> p : countersRemovedThisTurn.get(cType)) {
+            if (p.getKey().isValid(validCard.split(","), sourceController, source, ctb)) {
+                result += p.getValue();
+            }
+        }
+        return result;
+    }
+
+    public void clearCounterRemovedThisTurn() {
+        countersRemovedThisTurn.clear();
     }
 
     /**
