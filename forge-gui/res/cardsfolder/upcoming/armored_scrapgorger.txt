@@ -1,0 +1,11 @@
+Name:Armored Scrapgorger
+ManaCost:1 G
+Types:Creature Phyrexian Beast
+PT:0/3
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE3_OIL | AddPower$ 3 | Description$ CARDNAME gets +3/+0 as long as it has three or more oil counters on it.
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME becomes tapped, exile target card from a graveyard and put an oil counter on CARDNAME.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | Mandatory$ True | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ OIL | CounterNum$ 1
+DeckHas:Ability$Counters|Graveyard
+Oracle:Armored Scrapgorger gets +3/+0 as long as it has three or more oil counters on it.\n{T}: Add one mana of any color.\nWhen Armored Scrapgorger becomes tapped, exile target card from a graveyard and put an oil counter on Armored Scrapgorger.
