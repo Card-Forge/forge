@@ -2,8 +2,8 @@ Name:Gleeful Demolition
 ManaCost:R
 Types:Sorcery
 K:For Mirrodin
-A:SP$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DBToken | RememberTargets$ True | SpellDescription$ Destroy target artifact. If you controlled that artifact, creature three 1/1 red Phyrexian Goblin creature tokens. 
-SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenScript$ r_1_1_phyrexian_goblin | TokenOwner$ You | ConditionDefined$ Remembered | ConditionPresent$ Card.YouCtrl | SubAbility$ DBCleanup | SpellDescription$ If you controlled that artifact, creature three 1/1 red Phyrexian Goblin creature tokens. 
+A:SP$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DBToken | RememberLKI$ True | AlwaysRemember$ True | SpellDescription$ Destroy target artifact. If you controlled that artifact, creature three 1/1 red Phyrexian Goblin creature tokens. 
+SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenScript$ r_1_1_phyrexian_goblin | TokenOwner$ You | ConditionDefined$ RememberedLKI | ConditionPresent$ Card.YouCtrl | SubAbility$ DBCleanup | SpellDescription$ If you controlled that artifact, creature three 1/1 red Phyrexian Goblin creature tokens. 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Type$Goblin|Phryexian & Ability$Token
 Oracle:Destroy target artifact. If you controlled that artifact, creature three 1/1 red Phyrexian Goblin creature tokens.
