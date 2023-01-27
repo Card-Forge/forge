@@ -16,6 +16,8 @@ import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
 import forge.deck.io.DeckSerializer;
 import forge.item.PaperCard;
+import forge.item.SealedProduct;
+import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
 
 import java.io.File;
@@ -327,10 +329,10 @@ public class CardUtil {
             return reward.getCount();
         return 1000;
     }
-
-    static List<PrintSheet> jumpStartSheetsCandidates=null;
-    public static Deck generateDeck(GeneratedDeckData data)
+    static List<List<PaperCard>> packCandidates=null;
+    public static Deck generateDeck(GeneratedDeckData data, CardEdition starterEdition)
     {
+        List<String> editionCodes = (starterEdition != null)?Arrays.asList(starterEdition.getCode(), starterEdition.getCode2()):Arrays.asList("JMP", "J22", "DMU","BRO");
         Deck deck= new Deck(data.name);
         if(data.mainDeck!=null)
         {
@@ -345,8 +347,9 @@ public class CardUtil {
             for(int i=0;i<data.jumpstartPacks.length;i++)
             {
 
+                final byte targetColor = MagicColor.fromName(data.jumpstartPacks[i]);
                 String targetName;
-                switch (MagicColor.fromName(data.jumpstartPacks[i]))
+                switch (targetColor)
                 {
                     default:
                     case MagicColor.WHITE:  targetName = "Plains";  break;
@@ -356,16 +359,18 @@ public class CardUtil {
                     case MagicColor.GREEN:  targetName = "Forest";  break;
                 }
 
-                jumpStartSheetsCandidates=new ArrayList<>();
-                for(PrintSheet sheet : StaticData.instance().getPrintSheets())
+                packCandidates=new ArrayList<>();
+                for(SealedProduct.Template template : StaticData.instance().getSpecialBoosters())
                 {
-                    if(sheet.containsCardNamed(targetName,3) && sheet.getName().startsWith("JMP") && sheet.all().size() == 20)//dodge the rainbow jumpstart sheet and the sheet for every card
-                    {
-                        jumpStartSheetsCandidates.add(sheet);
-                    }
+                    if (!editionCodes.contains(template.getEdition().split("\\s",2)[0]))
+                        continue;
+                    List<PaperCard> packContents = new UnOpenedProduct(template).get();
+                    if (packContents.size() < 20 | packContents.size() > 25)
+                        continue;
+                    if (packContents.stream().filter(x -> x.getName().equals(targetName)).count() >=3)
+                        packCandidates.add(packContents);
                 }
-                PrintSheet sheet=jumpStartSheetsCandidates.get(Current.world().getRandom().nextInt(jumpStartSheetsCandidates.size()));
-                deck.getOrCreate(DeckSection.Main).addAllFlat(sheet.all());
+                deck.getOrCreate(DeckSection.Main).addAllFlat(packCandidates.get(Current.world().getRandom().nextInt(packCandidates.size())));
             }
             return deck;
         }
@@ -577,7 +582,11 @@ public class CardUtil {
         return  ret;
     }
 
-    public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme, boolean useGeneticAI)
+    public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme, boolean useGeneticAI) {
+        return getDeck(path, forAI, isFantasyMode, colors, isTheme, useGeneticAI, null);
+    }
+
+    public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme, boolean useGeneticAI, CardEdition starterEdition)
     {
         if(path.endsWith(".dck"))
             return DeckSerializer.fromFile(new File(Config.instance().getFilePath(path)));
@@ -590,7 +599,7 @@ public class CardUtil {
         Json json = new Json();
         FileHandle handle = Config.instance().getFile(path);
         if (handle.exists())
-            return generateDeck(json.fromJson(GeneratedDeckData.class, handle));
+            return generateDeck(json.fromJson(GeneratedDeckData.class, handle), starterEdition);
         return null;
 
     }
