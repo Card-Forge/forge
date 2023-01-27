@@ -1,0 +1,8 @@
+Name:Yavimaya Steelcrusher
+ManaCost:1 R
+Types:Creature Ape Warrior
+PT:2/2
+K:Enlist
+A:AB$ Destroy | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+DeckHas:Ability$Sacrifice
+Oracle:Enlist (As this creature attacks, you may tap a nonattacking creature you control without summoning sickness. When you do, add its power to this creature's until end of turn.)\n{1}, Sacrifice Yavimaya Steelcrusher: Destroy target artifact.

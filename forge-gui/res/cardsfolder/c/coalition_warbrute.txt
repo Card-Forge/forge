@@ -1,0 +1,7 @@
+Name:Coalition Warbrute
+ManaCost:3 R
+Types:Creature Minotaur Berserker
+PT:3/4
+K:Enlist
+K:Trample
+Oracle:Enlist (As this creature attacks, you may tap a nonattacking creature you control without summoning sickness. When you do, add its power to this creature's until end of turn.)\nTrample
