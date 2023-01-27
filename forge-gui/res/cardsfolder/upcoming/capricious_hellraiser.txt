@@ -11,4 +11,4 @@ SVar:DBPlay:DB$ Play | Defined$ ChosenCard | ValidSA$ Spell | Controller$ You | 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Graveyard
 DeckHints:Ability$Mill
-Oracle:This spell costs {3} less to cast if you have nine or more cards in your graveyard.Flying\nWhen Capricious Hellraiser enters the battlefield, exile three cards at random from your graveyard. Choose a noncreature, nonland card from among them and copy it. You may cast the copy without paying its mana cost.
+Oracle:This spell costs {3} less to cast if you have nine or more cards in your graveyard.\nFlying\nWhen Capricious Hellraiser enters the battlefield, exile three cards at random from your graveyard. Choose a noncreature, nonland card from among them and copy it. You may cast the copy without paying its mana cost.
