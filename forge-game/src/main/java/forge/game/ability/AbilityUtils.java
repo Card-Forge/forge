@@ -421,8 +421,16 @@ public class AbilityUtils {
         // return empty strings and constants
         if (StringUtils.isBlank(amount)) { return 0; }
         if (card == null) { return 0; }
-        final Player player = card.getController();
-        final Game game = player == null ? card.getGame() : player.getGame();
+
+        Player player = null;
+        if (ability instanceof SpellAbility) {
+            player = ((SpellAbility)ability).getActivatingPlayer();
+        }
+        if (player == null) {
+            player = card.getController();
+        }
+
+        final Game game = card.getGame();
 
         // Strip and save sign for calculations
         final boolean startsWithPlus = amount.charAt(0) == '+';
@@ -519,12 +527,7 @@ public class AbilityUtils {
                 players.remove(game.getPhaseHandler().getPlayerTurn());
                 val = playerXCount(players, calcX[1], card, ability);
             } else if (hType.startsWith("PropertyYou")) {
-                if (ability instanceof SpellAbility) {
-                    // Hollow One
-                    players.add(((SpellAbility) ability).getActivatingPlayer());
-                } else {
-                    players.add(player);
-                }
+                players.add(player);
                 val = playerXCount(players, calcX[1], card, ability);
             } else if (hType.startsWith("Property")) {
                 String defined = hType.split("Property")[1];
@@ -3232,12 +3235,13 @@ public class AbilityUtils {
      * @return a int.
      */
     public static int playerXCount(final List<Player> players, final String s, final Card source, CardTraitBase ctb) {
-        if (players.size() == 0) {
+        if (players.isEmpty()) {
             return 0;
         }
 
         final String[] l = s.split("/");
         final String m = CardFactoryUtil.extractOperators(s);
+        final Player controller = ctb instanceof SpellAbility ? ((SpellAbility)ctb).getActivatingPlayer() : source.getController();
 
         int n = 0;
 
@@ -3318,7 +3322,7 @@ public class AbilityUtils {
             int totPlayer = 0;
             String property = sq[0].substring(11);
             for (Player p : players) {
-                if (p.hasProperty(property, source.getController(), source, ctb)) {
+                if (p.hasProperty(property, controller, source, ctb)) {
                     totPlayer++;
                 }
             }

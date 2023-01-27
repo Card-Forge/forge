@@ -707,8 +707,7 @@ public class PlayerControllerAi extends PlayerController {
         ability.setActivatingPlayer(c.getController(), true);
         ability.setCardState(sa.getCardState());
 
-        if (ComputerUtilCost.canPayCost(ability, c.getController(), true)) {
-            ComputerUtil.playNoStack(c.getController(), ability, getGame(), true);
+        if (ComputerUtil.playNoStack(c.getController(), ability, getGame(), true)) {
             // transfer this info for Balduvian Fallen
             sa.setPayingMana(ability.getPayingMana());
             return true;
@@ -1082,9 +1081,8 @@ public class PlayerControllerAi extends PlayerController {
         emptyAbility.setSVars(sa.getSVars());
         emptyAbility.setCardState(sa.getCardState());
         emptyAbility.setXManaCostPaid(sa.getRootAbility().getXManaCostPaid());
-        if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers) && ComputerUtilCost.canPayCost(emptyAbility, player, true)) {
-            ComputerUtil.playNoStack(player, emptyAbility, getGame(), true); // AI needs something to resolve to pay that cost
-            return true;
+        if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers)) {
+            return ComputerUtil.playNoStack(player, emptyAbility, getGame(), true); // AI needs something to resolve to pay that cost
         }
         return false;
     }
