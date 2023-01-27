@@ -70,7 +70,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     /**
-     * Create a new deck with a list of cards
+     * Create a new deck from a cardpool
      */
     public Deck(final String name0, CardPool main) {
         super(name0);
