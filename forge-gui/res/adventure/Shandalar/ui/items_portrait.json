@@ -57,7 +57,6 @@
       "type": "TextButton",
       "name": "restock",
       "text": "Restock",
-	  "style":"background",
       "width": 128,
       "height": 30,
       "x": 140,
