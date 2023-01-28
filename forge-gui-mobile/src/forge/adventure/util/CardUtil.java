@@ -206,7 +206,6 @@ public class CardUtil {
                 System.err.println("[" + type.cardName + "|" + type.itemName + "]\n" + e);
                 return null;
             }
-            return null;
         }
         public CardPredicate(final RewardData type, final boolean wantEqual) {
             this.matchAllSubTypes=type.matchAllSubTypes;
