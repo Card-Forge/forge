@@ -1,9 +1,11 @@
 [metadata]
-Code=PWCQ
+Code=WMC
 Date=2013-04-06
 Name=World Magic Cup Qualifiers
+Code2=PWCQ
+Alias=PWCQ
 Type=Promo
-ScryfallCode=PWCQ
+ScryfallCode=WMC
 
 [cards]
 2013 M Vengevine @Trevor Claxton

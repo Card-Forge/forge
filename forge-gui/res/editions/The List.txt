@@ -970,3 +970,53 @@ F567 R Puresteel Angel @Lukas Litzsinger
 962 R Thran Quarry @Michael Sutfin
 963 U Urza's Factory @Mark Tedin
 964 R Urza's Saga @Titus Lunter
+965 U Due Respect @James Ryman
+966 U High Ground @rk post
+967 U Kemba's Legion @Anthony Francisco
+968 R Leonin Arbiter @Shelly Wan
+969 C Priests of Norn @Igor Kieryluk
+970 R Rout @Igor Kieryluk
+971 C Survival Cache @Scott Chou
+972 R Game Plan @Seb McKinnon
+973 C Gitaxian Probe @Chippy
+974 R Mirrodin Besieged @Bram Sels
+975 R Venser, Shaper Savant @Aleksi Briclot
+976 C Geth's Verdict @Whit Brachna
+977 C Lose Hope @Matt Cavotta
+978 C Phyrexian Monitor @Carl Critchlow
+979 U Phyrexian Prowler @Mark Zug
+980 U Reaper of Sheoldred @Stephan Martiniere
+981 U Vile Requiem @Carl Critchlow
+982 C Artillerize @Johann Bodin
+983 U Implode @Arnie Swekel
+984 C Mana Geyser @Martina Pilcerova
+985 R Slobad, Goblin Tinkerer @Kev Walker
+986 C Toxic Iguanar @Brandon Kitkouski
+987 R Ezuri, Renegade Leader @Karl Kopinski
+988 C Glissa's Courier @Dave Kendall
+989 U Melira's Keepers @Eric Deschamps
+990 M Praetor's Counsel @Daarken
+991 C Sabertooth Cobra @Andrew Robinson
+992 M Tyvar Kell @Chris Rallis
+993 C Virulent Sliver @Franz Vohwinkel
+994 M Kaito Shizuki @Yongjae Choi
+995 M Kaya, Orzhov Usurper @Yongjae Choi
+996 R Xantcha, Sleeper Agent @Mark Winters
+997 R Argentum Armor @Matt Cavotta
+998 M Blightsteel Colossus @Chris Rahn
+999 R Fist of Suns @Arnie Swekel
+1000 U Geth's Grimoire @Heather Hudson
+1001 M Kaldra Compleat @Vincent Proce
+1002 U Lantern of Insight @Tim Hildebrandt
+1003 M Mycosynth Lattice @Anthony S. Waters
+1004 C Nihil Spellbomb @Franz Vohwinkel
+1005 R Phyrexian Altar @Yigit Koroglu
+1006 U Phyrexian Snowcrusher @Dave Allsop
+1007 U Phyrexian Splicer @Brom
+1008 M Phyrexian Triniform @Adam Paquette
+1009 U Phyrexian Vault @Hannibal King
+1010 M Soul of New Phyrexia @Daarken
+1011 M Sword of Feast and Famine @Chris Rahn
+1012 M Sword of War and Peace @Chris Rahn
+1013 C Great Furnace @Rob Alexander
+1014 U Interplanar Beacon @Adam Paquette

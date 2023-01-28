@@ -1,0 +1,5 @@
+Name:Minor Misstep
+ManaCost:U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell with mana value 1 or less | ValidTgts$ Card.cmcLE1 | SpellDescription$ Counter target spell with mana value 1 or less.
+Oracle:Counter target spell with mana value 1 or less.

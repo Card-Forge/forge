@@ -1,0 +1,10 @@
+Name:Ossification
+ManaCost:1 W
+Types:Enchantment Aura
+K:Enchant basic land you control
+A:SP$ Attach | ValidTgts$ Land.YouCtrl+Basic | TgtPrompt$ Select target basic land you control | AILogic$ Pump 
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature or planeswalker an opponent controls until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls | Duration$ UntilHostLeavesPlay
+SVar:PlayMain1:TRUE
+SVar:NeedsToPlay:Creature.OppCtrl
+Oracle:Enchant basic land you control\nWhen Ossification enters the battlefield, exile target creature or planeswalker an opponent controls until Ossification leaves the battlefield.

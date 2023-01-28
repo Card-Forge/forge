@@ -341,7 +341,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
 
         // host controller will be null when adding card in a simulation game
-        if (this.getHostCard().getController() == null || game.getAge() != GameStage.Play || !meetsCommonRequirements(this.mapParams)) {
+        if (this.getHostCard().getController() == null || (game.getAge() != GameStage.Play && game.getAge() != GameStage.RestartedByKarn) || !meetsCommonRequirements(this.mapParams)) {
             return false;
         }
 

@@ -58,14 +58,15 @@
     {
       "name": "Easy",
       "startingLife": 16,
-      "startingMana": 32,
+      "startingShards": 5,
       "staringMoney": 500,
       "enemyLifeFactor": 0.8,
       "spawnRank": 0,          
       "goldLoss": 0.02,          
       "lifeLoss": 0.1,
       "rewardMaxFactor" : 1.5,
-      "sellFactor": 0.6,        
+      "sellFactor": 0.6,  
+      "shardSellRatio": 0.95,
       "starterDecks": {
         "W":"decks/starter/white_e.json",
         "B":"decks/starter/black_e.json",
@@ -94,7 +95,7 @@
     },{
       "name": "Normal",
       "startingLife": 12,
-      "startingMana": 25,
+      "startingShards": 2,
       "staringMoney": 250,
       "startingDifficulty": true,
       "enemyLifeFactor": 1.0,
@@ -103,6 +104,7 @@
       "goldLoss": 0.1,             
       "lifeLoss": 0.2,  
       "sellFactor": 0.5,      
+      "shardSellRatio": 0.8,
       "starterDecks": {
         "W":"decks/starter/white_n.json",
         "B":"decks/starter/black_n.json",
@@ -130,14 +132,15 @@
     },{
       "name": "Hard",
       "startingLife": 8,
-      "startingMana": 10,
+      "startingShards": 0,
       "staringMoney": 125,
       "enemyLifeFactor": 1.5,
       "rewardMaxFactor" : 0.5,
       "spawnRank": 2,         
       "goldLoss": 0.3,
       "lifeLoss": 0.3,  
-      "sellFactor": 0.25,      
+      "sellFactor": 0.25,
+      "shardSellRatio": 0.6,
       "starterDecks": {
         "W":"decks/starter/white_h.json",
         "B":"decks/starter/black_h.json",
@@ -162,7 +165,7 @@
     },{
       "name": "Insane",
       "startingLife": 7,
-      "startingMana": 10,
+      "startingShards": 0,
       "staringMoney": 0,
       "enemyLifeFactor": 2.5,
       "rewardMaxFactor" : 0.0,
@@ -170,6 +173,7 @@
       "goldLoss": 0.5,
       "lifeLoss": 0.3,
       "sellFactor": 0.05,
+      "shardSellRatio": 0.3,
       "starterDecks": {
         "W":"decks/starter/white_h.json",
         "B":"decks/starter/black_h.json",
@@ -192,6 +196,20 @@
         "G":"decks/starter/pile_green_h.json"
       }
     }
-  ]
+  ],
+  "starterEditions": [
+	"JMP",
+	"DMU",
+	"BRO",
+	"J22"
+	"(All)"
+  ],
+  "starterEditionNames": [
+	"Jumpstart",
+	"Dominaria United",
+	"Brother's War",
+	"Jumpstart 22"
+	"(All)"
+	]
 }
 

@@ -15,6 +15,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Selector;
 import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
+import forge.card.CardEdition;
 import forge.card.ColorSet;
 import forge.deck.DeckProxy;
 import forge.localinstance.properties.ForgePreferences;
@@ -31,6 +32,7 @@ import java.util.Random;
 public class NewGameScene extends UIScene {
     TextField selectedName;
     ColorSet[] colorIds;
+    CardEdition[] editionIds;
     private final Image avatarImage;
     private int avatarIndex = 0;
     private final Selector race;
@@ -38,6 +40,8 @@ public class NewGameScene extends UIScene {
     private final Selector gender;
     private final Selector mode;
     private final Selector difficulty;
+    private final Selector starterEdition;
+    private final TextraLabel starterEditionLabel;
     private final Array<String> custom;
     private final TextraLabel colorLabel;
 
@@ -88,6 +92,19 @@ public class NewGameScene extends UIScene {
             }
             break;
         }
+
+        starterEdition = ui.findActor("starterEdition");
+        starterEditionLabel = ui.findActor("starterEditionL");
+        String[] starterEditions = Config.instance().starterEditions();
+        String[] starterEditionNames = Config.instance().starterEditionNames();
+        editionIds = new CardEdition[starterEditions.length];
+        for (int i = 0; i < editionIds.length; i++)
+            editionIds[i] = FModel.getMagicDb().getEditions().get(starterEditions[i]);
+        Array<String> editionNames = new Array<>(editionIds.length);
+        for (String editionName : starterEditionNames)
+            editionNames.add(UIActor.localize(editionName));
+        starterEdition.setTextList(editionNames);
+
         modes.add(AdventureModes.Chaos);
         AdventureModes.Chaos.setSelectionName("[BLACK]"+Forge.getLocalizer().getMessage("lblDeck")+":");
         AdventureModes.Chaos.setModes(new Array<>(new String[]{Forge.getLocalizer().getMessage("lblRandomDeck")}));
@@ -113,6 +130,8 @@ public class NewGameScene extends UIScene {
                 AdventureModes smode=modes.get(mode.getCurrentIndex());
                 colorLabel.setText(smode.getSelectionName());
                 colorId.setTextList(smode.getModes());
+                starterEdition.setVisible(smode == AdventureModes.Standard);
+                starterEditionLabel.setVisible(smode == AdventureModes.Standard);
             }
         });
         race = ui.findActor("race");
@@ -165,7 +184,8 @@ public class NewGameScene extends UIScene {
                     avatarIndex,
                     colorIds[colorId.getCurrentIndex()],
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
-                    modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(), 0);//maybe replace with enum
+                    modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
+                    editionIds[starterEdition.getCurrentIndex()], 0);//maybe replace with enum
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             Forge.switchScene(GameScene.instance());
         };
@@ -208,7 +228,8 @@ public class NewGameScene extends UIScene {
                     avatarIndex,
                     colorIds[colorId.getCurrentIndex()],
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
-                    modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(), 0);
+                    modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
+                    editionIds[starterEdition.getCurrentIndex()],0);
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             Forge.switchScene(GameScene.instance());
         }

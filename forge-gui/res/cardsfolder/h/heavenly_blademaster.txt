@@ -5,9 +5,7 @@ PT:3/6
 K:Flying
 K:Double Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBAttach | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may attach any number of Auras and Equipment you control to it.
-SVar:DBAttach:DB$ RepeatEach | RepeatSubAbility$ DBRepeatAttach | RepeatCards$ Aura.YouCtrl,Equipment.YouCtrl
-SVar:DBRepeatAttach:DB$ Attach | Object$ Remembered | Optional$ True | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBAttach:DB$ Attach | Object$ Valid Aura.YouCtrl,Equipment.YouCtrl | Optional$ True
 AI:RemoveDeck:Random
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ X | AddToughness$ X | Description$ Other creatures you control get +1/+1 for each Aura and Equipment attached to CARDNAME.
 SVar:X:Count$Valid Equipment.Attached,Aura.Attached

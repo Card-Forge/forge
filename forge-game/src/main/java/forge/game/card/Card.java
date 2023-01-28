@@ -1427,7 +1427,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean hasDoubleStrike() {
         return hasKeyword(Keyword.DOUBLE_STRIKE);
     }
-    
+
     public final boolean hasDoubleTeam() {
         return hasKeyword(Keyword.DOUBLE_TEAM);
     }
@@ -1588,6 +1588,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         // Play the Subtract Counter sound
         getGame().fireEvent(new GameEventCardCounters(this, counterName, oldValue, newValue));
+
+        getGame().addCounterRemovedThisTurn(counterName, this, delta);
 
         // Run triggers
         int curCounters = oldValue;
@@ -2227,14 +2229,24 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.equals("Compleated")) {
                     sbLong.append(keyword).append(" (");
                     final ManaCost mc = this.getManaCost();
-                    if (mc != ManaCost.NO_COST && mc.getFirstPhyrexianHybridPip() != null) {
-                        String hybrid = mc.getFirstPhyrexianHybridPip().replaceAll("\\{", "")
-                                .replaceAll("\\}","");
-                        String[] parts = hybrid.split("/");
-                        String rem = "{" + hybrid + "} can be paid with {" + parts[1] + "}, {" + parts[2] + "}, or 2 life. ";
-                        sbLong.append(rem);
+                    if (mc != ManaCost.NO_COST && mc.hasPhyrexian()) {
+                        String pip = mc.getFirstPhyrexianPip();
+                        String[] parts = pip.substring(1, pip.length() - 1).split("/");
+                        final StringBuilder rem = new StringBuilder();
+                        rem.append(pip).append(" can be paid with {").append(parts[1]).append("}");
+                        if (parts.length > 2) {
+                            rem.append(", {").append(parts[2]).append("},");
+                        }
+                        rem.append(" or 2 life. ");
+                        if (mc.getPhyrexianCount() > 1) {
+                            rem.append("For each ").append(pip).append(" paid with life,");
+                        } else {
+                            rem.append("If life was paid,");
+                        }
+                        rem.append(" this planeswalker enters with two fewer loyalty counters.");
+                        sbLong.append(rem.toString());
                     }
-                    sbLong.append(inst.getReminderText()).append(")");
+                    sbLong.append(")");
                 } else if (keyword.startsWith("Devour ")) {
                     final String[] k = keyword.split(":");
                     final String[] s = (k[0]).split(" ");

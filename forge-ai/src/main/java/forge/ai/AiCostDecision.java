@@ -239,6 +239,13 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(final CostEnlist cost) {
+        CardCollection choices = CostEnlist.getCardsForEnlisting(player);
+        CardLists.sortByPowerDesc(choices);
+        return choices.isEmpty() ? null : PaymentDecision.card(choices.getFirst());
+    }
+
+    @Override
     public PaymentDecision visit(CostFlipCoin cost) {
         int c = cost.getAbilityAmount(ability);
         return PaymentDecision.number(c);
@@ -782,6 +789,11 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostUntap cost) {
+        return PaymentDecision.number(0);
+    }
+
+    @Override
+    public PaymentDecision visit(CostPayShards cost) {
         return PaymentDecision.number(0);
     }
 

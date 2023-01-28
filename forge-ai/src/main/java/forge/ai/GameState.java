@@ -1,16 +1,11 @@
 package forge.ai;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.*;
-import java.util.Map.Entry;
-
-import com.google.common.collect.*;
-import java.util.stream.Stream;
-import org.apache.commons.lang3.StringUtils;
-
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import forge.StaticData;
+import forge.card.CardEdition;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -18,12 +13,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.effects.DetachedCardEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCloneStates;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactory;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -38,8 +28,17 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.item.PaperToken;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Stream;
 
 public abstract class GameState {
     private static final Map<ZoneType, String> ZONES = new HashMap<>();
@@ -1201,6 +1200,15 @@ public abstract class GameState {
                 // TODO Make sure Game State conversion works with new tokens
                 String tokenStr = cardinfo[0].substring(2);
                 c = new TokenInfo(tokenStr).makeOneToken(player);
+            } else if (cardinfo[0].startsWith("T:")) {
+                String tokenStr = cardinfo[0].substring(2);
+                PaperToken token = StaticData.instance().getAllTokens().getToken(tokenStr,
+                        setCode != null ? setCode : CardEdition.UNKNOWN.getName());
+                if (token == null) {
+                    System.err.println("ERROR: Tried to create a non-existent token named " + cardinfo[0] + " when loading game state!");
+                    continue;
+                }
+                c = Card.fromPaperCard(token, player, player.getGame());
             } else {
                 PaperCard pc = StaticData.instance().getCommonCards().getCard(cardinfo[0], setCode);
                 if (pc == null) {

@@ -42,17 +42,45 @@
       "width": 128,
       "height": 32,
       "x": 140,
-      "y": 405
+      "y": 435
     }  ,
     {
       "type": "Label",
-      "name": "gold",
-	  "style":"background",
+      "name": "playerGold",
       "text": "[+Gold]",
       "width": 128,
       "height": 32,
       "x": 16,
       "y": 405
+    },
+	{
+      "type": "TextButton",
+      "name": "restock",
+      "text": "Restock",
+      "width": 128,
+      "height": 30,
+      "x": 140,
+      "y": 405
+    },
+	{
+      "type": "Label",
+      "name": "playerShards",
+      "text": "[+Shards]",
+	  "style":"background",
+      "width": 128,
+      "height": 32,
+      "x": 16,
+      "y": 435
+    },
+    {
+      "type": "Label",
+      "name": "shopName",
+      "style":"background",
+      "text": "A Street Market",
+      "width": 48,
+      "height": 20,
+      "x": 200,
+      "y": 0
     }
   ]
 }

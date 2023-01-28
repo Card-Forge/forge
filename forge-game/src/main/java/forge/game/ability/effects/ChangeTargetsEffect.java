@@ -65,8 +65,6 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                     changingTgtSI = changingTgtSI.getSubInstance();
                 }
                 if (allTargets.isEmpty()) {
-                    // is it an error or not?
-                    System.err.println("Player managed to target a spell without targets with Spellskite's ability.");
                     return;
                 }
 
@@ -98,7 +96,6 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                         // random target and DefinedMagnet works on single targets
                         if (sa.hasParam("RandomTarget")) {
                             int div = changingTgtSA.getTotalDividedValue();
-                            changingTgtSA.resetTargets();
                             List<GameEntity> candidates = changingTgtSA.getTargetRestrictions().getAllCandidates(changingTgtSA, true);
                             if (sa.hasParam("RandomTargetRestriction")) {
                                 candidates.removeIf(new java.util.function.Predicate<GameEntity>() {
@@ -108,6 +105,11 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                                     }
                                 });
                             }
+                            // CR 115.7a If a target can't be changed to another legal target, the original target is unchanged
+                            if (candidates.isEmpty()) {
+                                return;
+                            }
+                            changingTgtSA.resetTargets();
                             GameEntity choice = Aggregates.random(candidates);
                             changingTgtSA.getTargets().add(choice);
                             if (changingTgtSA.isDividedAsYouChoose()) {

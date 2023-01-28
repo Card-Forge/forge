@@ -1,0 +1,9 @@
+Name:Blazing Crescendo
+ManaCost:1 R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +3 | NumDef$ +1 | SubAbility$ DBExile | SpellDescription$ Target creature gets +3/+1 until end of turn.
+SVar:DBExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Until the end of your next turn, you may play that card.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | Duration$ UntilYourNextTurn | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Target creature gets +3/+1 until end of turn.\nExile the top card of your library. Until the end of your next turn, you may play that card.

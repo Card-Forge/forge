@@ -1,0 +1,10 @@
+Name:Annex Sentry
+ManaCost:2 W
+Types:Artifact Creature Phyrexian Cleric
+PT:1/4
+K:Toxic:1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target artifact or creature an opponent controls with mana value 3 or less until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact.OppCtrl+cmcLE3,Creature.OppCtrl+cmcLE3 | TgtPrompt$ Select target artifact or creature an opponent controls with mana value 3 or less | Duration$ UntilHostLeavesPlay
+SVar:PlayMain1:TRUE
+SVar:NeedsToPlay:Creature.OppCtrl+cmcLE3
+Oracle:Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)\nWhen Annex Sentry enters the battlefield, exile target artifact or creature an opponent controls with mana value 3 or less until Annex Sentry leaves the battlefield.

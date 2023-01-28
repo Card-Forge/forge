@@ -262,6 +262,18 @@ public class ForgeScript {
                 return false;
             }
             return source.equals(m.getHostCard());
+        } else if (property.startsWith("singleTarget")) {
+            // this doesn't allow a second target, even if same object
+            int num = 0;
+            for (TargetChoices tc : sa.getAllTargetChoices()) {
+                num += tc.size();
+                if (num > 1) {
+                    return false;
+                }
+            }
+            if (num != 1) {
+                return false;
+            }
         } else if (property.startsWith("numTargets")) {
             Set<GameObject> targets = new HashSet<>();
             for (TargetChoices tc : sa.getAllTargetChoices()) {

@@ -132,18 +132,47 @@
     },
     {
       "type": "Label",
-      "name": "gold", 
-      "x": 0,
-      "y": 0,
-      "width": 120,
+      "name": "playerGold", 
+	  "style":"background",
+      "x": 5,
+      "y": 5,
+      "width": 80,
       "height": 20
     },
     {
       "type": "TextButton",
       "selectable": true,
-      "name": "pull",
+      "name": "pullUsingGold",
+      "binding": "Status",
+      "text": "tr(lblDraw) [+gold]",  
+      "x": 70,
+      "y": 5,
+      "width": 90,
+      "height": 20
+    },
+	{
+      "type": "Label",
+      "name": "playerShards", 
+	  "style":"background",
+      "x": 280,
+      "y": 5,
+      "width": 80,
+      "height": 20
+    },
+	{
+      "type": "TextButton",
+      "selectable": true,
+      "name": "pullUsingShards",
       "binding": "Equip",
-      "text": "tr(lblDraw)",  
+      "text": "tr(lblDraw) [+shards]",  
+      "x": 345,
+      "y": 5,
+      "width": 90,
+      "height": 20
+    },
+	{
+      "type": "Label",
+      "name": "poolSize", 
       "x": 360,
       "y": 180,
       "width": 90,

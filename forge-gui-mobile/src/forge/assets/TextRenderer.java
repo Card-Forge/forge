@@ -76,6 +76,7 @@ public class TextRenderer {
         Forge.getAssets().symbolLookup().put("AE", FSkinImage.AETHER_SHARD);
         Forge.getAssets().symbolLookup().put("PW", FSkinImage.PW_BADGE_COMMON);
         Forge.getAssets().symbolLookup().put("CR", FSkinImage.QUEST_COINSTACK);
+        Forge.getAssets().symbolLookup().put("M", FSkinImage.MANASHARD);
     }
 
     public static String startColor(Color color) {

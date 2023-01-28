@@ -1,0 +1,7 @@
+Name:Hexbane Tortoise
+ManaCost:2 G
+Types:Creature Turtle
+PT:3/2
+K:Ward:2
+K:Enlist
+Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nEnlist (As this creature attacks, you may tap a nonattacking creature you control without summoning sickness. When you do, add its power to this creature's until end of turn.)

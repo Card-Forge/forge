@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature you don't control
 A:SP$ Attach | Cost$ 3 W | ValidTgts$ Creature.YouDontCtrl | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Enchanted creature can't attack.
-T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | IsSingleTarget$ True | TriggerZones$ Battlefield | Execute$ TrigChangeTarget | TriggerDescription$ Whenever an opponent casts a spell, if it has a single target, change the target to enchanted creature if able.
+T:Mode$ SpellCast | ValidSA$ Spell.singleTarget | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigChangeTarget | TriggerDescription$ Whenever an opponent casts a spell, if it has a single target, change the target to enchanted creature if able.
 SVar:TrigChangeTarget:DB$ ChangeTargets | TargetType$ Spell | Defined$ TriggeredStackInstance | DefinedMagnet$ Enchanted
 Oracle:Enchant creature you don't control\nEnchanted creature can't attack.\nWhenever an opponent casts a spell, if it has a single target, change the target to enchanted creature if able.

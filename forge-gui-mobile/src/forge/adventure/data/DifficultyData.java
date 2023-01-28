@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 public class DifficultyData {
     public String name="";
     public int startingLife=10;
-    public int startingMana=100;
+    public int startingShards=1;
     public int staringMoney=10;
     public float enemyLifeFactor=1;
     public boolean startingDifficulty;
@@ -18,6 +18,7 @@ public class DifficultyData {
     public float sellFactor=0.2f;
     public float goldLoss=0.2f;
     public float lifeLoss=0.2f;
+    public float shardSellRatio = 0.8f;
 
     public float rewardMaxFactor=1f;
     public String[] startItems=new String[0];
