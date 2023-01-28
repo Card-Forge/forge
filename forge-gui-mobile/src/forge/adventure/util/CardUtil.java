@@ -197,14 +197,24 @@ public class CardUtil {
 
             return this.shouldBeEqual;
         }
-
+        private Pattern getPattern(RewardData type) {
+            if (type.cardText == null || type.cardText.isEmpty())
+                return null;
+            try {
+                Pattern.compile(type.cardText, Pattern.CASE_INSENSITIVE);
+            } catch (Exception e) {
+                System.err.println("[" + type.cardName + "|" + type.itemName + "]\n" + e);
+                return null;
+            }
+            return null;
+        }
         public CardPredicate(final RewardData type, final boolean wantEqual) {
             this.matchAllSubTypes=type.matchAllSubTypes;
             this.matchAllColors=type.matchAllColors;
             this.shouldBeEqual = wantEqual;
             for(int i=0;type.manaCosts!=null&&i<type.manaCosts.length;i++)
                 manaCosts.add(type.manaCosts[i]);
-            text = type.cardText==null||type.cardText.isEmpty()?null:Pattern.compile(type.cardText, Pattern.CASE_INSENSITIVE);
+            text = getPattern(type);
             if(type.colors==null||type.colors.length==0)
             {
                 this.colors=MagicColor.ALL_COLORS;
