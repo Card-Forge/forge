@@ -4,7 +4,7 @@ Types:Creature Phyrexian Drake
 PT:0/0
 K:Flying
 K:etbCounter:OIL:1
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddThoughness$ X | Description$ CARDNAME gets +1/+1 for each oil counter on it.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each oil counter on it.
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, put an oil counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ OIL
 SVar:X:Count$CardCounters.OIL

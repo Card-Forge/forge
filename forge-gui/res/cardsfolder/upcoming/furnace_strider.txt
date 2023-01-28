@@ -2,7 +2,7 @@ Name:Furnace Strider
 ManaCost:4 R
 Types:Creature Phyrexian Beast
 PT:4/5
-
+K:etbCounter:OIL:2
+A:AB$ Pump | Cost$ SubCounter<1/OIL> | KW$ Haste | ValidTgts$ Creature.YouCtrl | SpellDescription$ Target creature you control gains haste until end of turn.
 DeckHas:Ability$Counters & Keyword$Haste
-Oracle:Furnace Strider enters the battlefield with two oil counters on it.
-\nRemove an oil counter from Furnace Strider: Target creature you control gains haste until end of turn.
+Oracle:Furnace Strider enters the battlefield with two oil counters on it.\nRemove an oil counter from Furnace Strider: Target creature you control gains haste until end of turn.

@@ -3,6 +3,6 @@ ManaCost:1 R
 Types:Creature Phyrexian Wizard
 PT:1/3
 K:etbCounter:OIL:2
-A:AB$ Draw | Cost$ 1 T SubCounter<1/OIL> | SpellDescription$ Draw a card.
+A:AB$ Draw | Cost$ T SubCounter<1/OIL> | SpellDescription$ Draw a card.
 DeckHas:Ability$Counters
 Oracle:Axiom Engraver enters the battlefield with two oil counters on it.\n{T}, Remove an oil counter from Axiom Engraver, Discard a card: Draw a card.
