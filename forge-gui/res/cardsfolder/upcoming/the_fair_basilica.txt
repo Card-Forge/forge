@@ -1,0 +1,8 @@
+Name:The Fair Basilica
+ManaCost:no cost
+Types:Land Sphere
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ Draw | Cost$ 1 W T Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice
+Oracle:The Fair Basilica enters the battlefield tapped.\n{T}: Add {W}.\n{1}{W}, {T}, Sacrifice The Fair Basilica: Draw a card.

@@ -1,0 +1,13 @@
+Name:Trawler Drake
+ManaCost:2 U
+Types:Creature Phyrexian Drake
+PT:0/0
+K:Flying
+K:etbCounter:OIL:1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddThoughness$ X | Description$ CARDNAME gets +1/+1 for each oil counter on it.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, put an oil counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ OIL
+SVar:X:Count$CardCounters.OIL
+SVar:BuffedBy:Card.nonCreature
+DeckHints:Ability$Counters
+Oracle:Flying\nTrawler Drake enters the battlefield with an oil counter on it.\nTrawler Drake gets +1/+1 for each oil counter on it.\nWhenever you cast a noncreature spell, put an oil counter on Trawler Drake.
