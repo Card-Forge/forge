@@ -3,6 +3,10 @@ Code=ONE
 Date=2023-02-10
 Name=Phyrexia: All Will Be One
 Type=Expansion
+BoosterCovers=3
+Booster=10 Common:fromsheet("ONE cards"), 3 Uncommon:fromSheet("ONE cards"), 1 RareMythic:fromSheet("ONE cards"), 1 BasicLand:fromSheet("ONE cards")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=ONE
 
 [cards]
@@ -282,14 +286,20 @@ ScryfallCode=ONE
 274 L Swamp @Julian Kok Joon Wen
 275 L Mountain @Muhammad Firdaus
 276 L Forest @Nadia Hurianova
-277 U Ossification @Nino Vecia
-278 C Experimental Augury @Donato Giancola
-279 U Sheoldred's Edict @Helge C. Balzer
-280 U Bladehold War-Whip @Tony Foti
-281 U Slaughter Singer @Adam Burn
-282 R Karumonix, the Rat King @Jason A. Engle
-283 R Phyrexian Arena @Martina Fackova
-284 R Green Sun's Twilight @Piotr Dura
+
+[jumpstart]
+404 R Mite Overseer @Nestor Ossandon Leal
+405 R Serum Sovereign @Chris Rallis
+406 R Kinzu of the Bleak Coven @Andreas Zafiratos
+407 R Rhuk, Hexgold Nabber @Andrea De Dominicis
+408 R Goliath Hatchery @Simon Dominic
+409 R Mite Overseer @Nestor Ossandon Leal
+410 R Serum Sovereign @Chris Rallis
+411 R Kinzu of the Bleak Coven @Andreas Zafiratos
+412 R Rhuk, Hexgold Nabber @Andrea De Dominicis
+413 R Goliath Hatchery @Simon Dominic
+
+[showcase]
 285 U Bladed Ambassador @Ravenna Tran
 286 C Sinew Dancer @Kekai Kotaki
 287 C Quicksilver Fisher @Sidharth Chaturvedi
@@ -340,16 +350,6 @@ ScryfallCode=ONE
 332 R Jor Kadeen, First Goldwarden @Sansyu
 333 R Melira, the Living Cure @Miyuki Aramaki
 334 R Graaz, Unstoppable Juggernaut @kutay
-335 R The Eternal Wanderer @Kento Matsuura
-336 M Jace, the Perfected Mind @Showichi Furumi
-337 M Vraska, Betrayal's Sting @Sansyu
-338 R Koth, Fire of Resistance @Ai Nanahira
-339 M Nissa, Ascended Animist @Gou Tanabe
-340 R Kaito, Dancing Shadow @Kento Matsuura
-341 R Kaya, Intangible Slayer @Showichi Furumi
-342 M Lukka, Bound to Ruin @Yuki Fujisawa
-343 M Nahiri, the Unforgiving @Hiro Usuda
-344 R Tyvar, Jubilant Brawler @Iinuma Yuuki
 345 M Elesh Norn, Mother of Machines @Pedro Potier
 346 M Mondrak, Glory Dominus @rishxxv
 347 M Phyrexian Vindicator @DZO
@@ -375,53 +375,8 @@ ScryfallCode=ONE
 367 L Swamp @Daria Khlebnikova
 368 L Mountain @Indra Nugroho
 369 L Forest @Alayna Danner
-370 R Blackcleave Cliffs @Daniel Ljunggren
-371 R Copperline Gorge @Sergey Glushakov
-372 R Darkslick Shores @Daria Khlebnikova
-373 R Razorverge Thicket @Jokubas Uogintas
-374 R Seachrome Coast @Jokubas Uogintas
-375 R Norn's Wellspring @Jonas De Ro
-376 R Skrelv's Hive @Heonhwa Choe
-377 R White Sun's Twilight @Julian Kok Joon Wen
-378 R Blade of Shared Souls @Volkan Baǵa
-379 R Blue Sun's Twilight @Piotr Dura
-380 R Encroaching Mycosynth @Martin de Diego Sádaba
-381 R Mercurial Spelldancer @Marcela Bolívar
-382 R Mindsplice Apparatus @Ovidio Cartagena
-383 R Black Sun's Twilight @Jonas De Ro
-384 R Phyrexian Arena @Martina Fackova
-385 R Dragonwing Glider @Andreas Zafiratos
-386 R Red Sun's Twilight @Julian Kok Joon Wen
-387 R Urabrask's Forge @Lie Setiawan
-388 R Vindictive Flamestoker @Xavier Ribeiro
-389 R Bloated Contaminator @Johann Bodin
-390 R Conduit of Worlds @Jokubas Uogintas
-391 R Green Sun's Twilight @Yeong-Hao Han
-392 R Venerated Rotpriest @Brian Valeza
-393 R Argentum Masticore @Zack Stella
-394 R The Filigree Sylex @Leanna Crossan
-395 R Mirran Safehouse @Piotr Dura
-396 R Monument to Perfection @Igor Kieryluk
-397 R Soulless Jailer @Donato Giancola
-398 R Tablet of Compleation @Martin de Diego Sádaba
-399 R Zenith Chronicler @Johann Bodin
-400 R Mirrex @Adam Burn
-401 R The Monumental Facade @Bruce Brenneise
-402 R The Mycosynth Gardens @Andrew Mar
-403 R The Seedcore @Kasia 'Kafis' Zielińska
-404 R Mite Overseer @Nestor Ossandon Leal
-405 R Serum Sovereign @Chris Rallis
-406 R Kinzu of the Bleak Coven @Andreas Zafiratos
-407 R Rhuk, Hexgold Nabber @Andrea De Dominicis
-408 R Goliath Hatchery @Simon Dominic
-409 R Mite Overseer @Nestor Ossandon Leal
-410 R Serum Sovereign @Chris Rallis
-411 R Kinzu of the Bleak Coven @Andreas Zafiratos
-412 R Rhuk, Hexgold Nabber @Andrea De Dominicis
-413 R Goliath Hatchery @Simon Dominic
 414 M Elesh Norn, Mother of Machines @Martina Fackova
 415 M Elesh Norn, Mother of Machines @Junji Ito
-416 M Elesh Norn, Mother of Machines @Richard Whitters
 417 U Bladed Ambassador @Ravenna Tran
 418 M Elesh Norn, Mother of Machines @Martina Fackova
 419 M Elesh Norn, Mother of Machines @Junji Ito
@@ -485,3 +440,64 @@ ScryfallCode=ONE
 477 R Venser, Corpse Puppet @Dominik Mayer
 478 R Graaz, Unstoppable Juggernaut @kutay
 479 U Myr Convert @JungShan
+
+[borderless]
+335 R The Eternal Wanderer @Kento Matsuura
+336 M Jace, the Perfected Mind @Showichi Furumi
+337 M Vraska, Betrayal's Sting @Sansyu
+338 R Koth, Fire of Resistance @Ai Nanahira
+339 M Nissa, Ascended Animist @Gou Tanabe
+340 R Kaito, Dancing Shadow @Kento Matsuura
+341 R Kaya, Intangible Slayer @Showichi Furumi
+342 M Lukka, Bound to Ruin @Yuki Fujisawa
+343 M Nahiri, the Unforgiving @Hiro Usuda
+344 R Tyvar, Jubilant Brawler @Iinuma Yuuki
+370 R Blackcleave Cliffs @Daniel Ljunggren
+371 R Copperline Gorge @Sergey Glushakov
+372 R Darkslick Shores @Daria Khlebnikova
+373 R Razorverge Thicket @Jokubas Uogintas
+374 R Seachrome Coast @Jokubas Uogintas
+416 M Elesh Norn, Mother of Machines @Richard Whitters
+
+[extended art]
+375 R Norn's Wellspring @Jonas De Ro
+376 R Skrelv's Hive @Heonhwa Choe
+377 R White Sun's Twilight @Julian Kok Joon Wen
+378 R Blade of Shared Souls @Volkan Baǵa
+379 R Blue Sun's Twilight @Piotr Dura
+380 R Encroaching Mycosynth @Martin de Diego Sádaba
+381 R Mercurial Spelldancer @Marcela Bolívar
+382 R Mindsplice Apparatus @Ovidio Cartagena
+383 R Black Sun's Twilight @Jonas De Ro
+384 R Phyrexian Arena @Martina Fackova
+385 R Dragonwing Glider @Andreas Zafiratos
+386 R Red Sun's Twilight @Julian Kok Joon Wen
+387 R Urabrask's Forge @Lie Setiawan
+388 R Vindictive Flamestoker @Xavier Ribeiro
+389 R Bloated Contaminator @Johann Bodin
+390 R Conduit of Worlds @Jokubas Uogintas
+391 R Green Sun's Twilight @Yeong-Hao Han
+392 R Venerated Rotpriest @Brian Valeza
+393 R Argentum Masticore @Zack Stella
+394 R The Filigree Sylex @Leanna Crossan
+395 R Mirran Safehouse @Piotr Dura
+396 R Monument to Perfection @Igor Kieryluk
+397 R Soulless Jailer @Donato Giancola
+398 R Tablet of Compleation @Martin de Diego Sádaba
+399 R Zenith Chronicler @Johann Bodin
+400 R Mirrex @Adam Burn
+401 R The Monumental Facade @Bruce Brenneise
+402 R The Mycosynth Gardens @Andrew Mar
+403 R The Seedcore @Kasia 'Kafis' Zielińska
+
+[buy a box]
+284 R Green Sun's Twilight @Piotr Dura
+
+[promo]
+277 U Ossification @Nino Vecia
+278 C Experimental Augury @Donato Giancola
+279 U Sheoldred's Edict @Helge C. Balzer
+280 U Bladehold War-Whip @Tony Foti
+281 U Slaughter Singer @Adam Burn
+282 R Karumonix, the Rat King @Jason A. Engle
+283 R Phyrexian Arena @Martina Fackova
