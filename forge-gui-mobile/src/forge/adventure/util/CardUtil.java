@@ -201,7 +201,7 @@ public class CardUtil {
             if (type.cardText == null || type.cardText.isEmpty())
                 return null;
             try {
-                Pattern.compile(type.cardText, Pattern.CASE_INSENSITIVE);
+                return Pattern.compile(type.cardText, Pattern.CASE_INSENSITIVE);
             } catch (Exception e) {
                 System.err.println("[" + type.cardName + "|" + type.itemName + "]\n" + e);
                 return null;
