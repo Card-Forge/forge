@@ -1,0 +1,10 @@
+Name:Necrogen Communion
+ManaCost:1 B
+Types:Enchantment Aura
+K:Enchant creature you control
+A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature.YouCtrl | AITgts$ Card.nonToken | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Toxic:2 | Description$ Enchanted creature has toxic 2. (Players dealt combat damage by it also get two poison counters.)
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigReturn | TriggerDescription$ When enchanted creature dies, return that card to the battlefield under your control.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Destination$ Battlefield | GainControl$ True
+SVar:PlayMain1:TRUE
+Oracle:Enchant creature you control\nEnchanted creature has toxic 2. (Players dealt combat damage by it also get two poison counters.)\nWhen enchanted creature dies, return that card to the battlefield under your control.

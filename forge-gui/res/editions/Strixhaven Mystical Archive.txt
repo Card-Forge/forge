@@ -5,7 +5,7 @@ Name=Strixhaven Mystical Archive
 Type=Collector_Edition
 ScryfallCode=STA
 
-[borderless]
+[cards]
 1 M Approach of the Second Sun @Minttu Hynninen
 2 M Day of Judgment @Anato Finnstark
 3 U Defiant Strike @Dominik Mayer
@@ -47,7 +47,7 @@ ScryfallCode=STA
 39 R Grapeshot @Minttu Hynninen
 40 M Increasing Vengeance @Dominik Mayer
 41 U Infuriate @Benjamin Ee
-42 C Lightning Bolt @Anato Finnstark
+42 R Lightning Bolt @Anato Finnstark
 43 M Mizzix's Mastery @Olena Richards
 44 U Shock @Dominik Mayer
 45 R Stone Rain @Justin Hernandez & Alexis Hernandez
@@ -101,7 +101,7 @@ ScryfallCode=STA
 93 U Eliminate @Karuta Shiki
 94 R Inquisition of Kozilek @Yuka Oka
 95 R Sign in Blood @Kaoru Yukishiro
-96 M Tainted Pact @Yuusuke Katekari
+96 M Tainted Pact @Yusuke Katekari
 97 R Tendrils of Agony @Daken
 98 U Village Rites @Hagiya Kaoru
 99 M Chaos Warp @Hisashi Momose
@@ -110,7 +110,7 @@ ScryfallCode=STA
 102 R Grapeshot @Hatori Kyoka
 103 M Increasing Vengeance @D-suzuki
 104 U Infuriate @Yangygan & Xiaji
-105 C Lightning Bolt @Ezoi
+105 R Lightning Bolt @Ezoi
 106 M Mizzix's Mastery @Hiro Suda
 107 U Shock @Ryanroro
 108 R Stone Rain @Tobihachi
@@ -132,131 +132,3 @@ ScryfallCode=STA
 124 R Growth Spiral @Karuta Shiki
 125 R Lightning Helix @Daken
 126 R Putrefy @Magane Okuda
-
-[etched]
-1e M Approach of the Second Sun @Minttu Hynninen
-2e M Day of Judgment @Anato Finnstark
-3e U Defiant Strike @Dominik Mayer
-4e U Divine Gambit @Matthew G. Lewis
-5e R Ephemerate @Rovina Cai
-6e R Gift of Estates @Justin Hernandez & Alexis Hernandez
-7e R Gods Willing @Dominik Mayer
-8e R Mana Tithe @Robbie Trevino
-9e U Revitalize @Justin Hernandez & Alexis Hernandez
-10e R Swords to Plowshares @Mark Tedin
-11e M Teferi's Protection @Minttu Hynninen
-12e M Blue Sun's Zenith @Dominik Mayer
-13e R Brainstorm @Justin Hernandez & Alexis Hernandez
-14e R Compulsive Research @Kristina Collantes
-15e R Counterspell @Olena Richards
-16e R Memory Lapse @Kristina Collantes
-17e M Mind's Desire @Minttu Hynninen
-18e U Negate @Dominik Mayer
-19e U Opt @Kristina Collantes
-20e U Strategic Planning @Robbie Trevino
-21e R Tezzeret's Gambit @Jason Felix
-22e M Time Warp @Dominik Mayer
-23e U Whirlwind Denial @Anato Finnstark
-24e U Agonizing Remorse @Robbie Trevino
-25e M Crux of Fate @Jason Felix
-26e R Dark Ritual @Robbie Trevino
-27e M Demonic Tutor @Anato Finnstark
-28e R Doom Blade @Matthew G. Lewis
-29e U Duress @Kristina Collantes
-30e U Eliminate @Rovina Cai
-31e R Inquisition of Kozilek @Matthew G. Lewis
-32e R Sign in Blood @Minttu Hynninen
-33e M Tainted Pact @Benjamin Ee
-34e R Tendrils of Agony @Rovina Cai
-35e U Village Rites @Matthew G. Lewis
-36e M Chaos Warp @Anato Finnstark
-37e U Claim the Firstborn @Anato Finnstark
-38e R Faithless Looting @Carly Mazur
-39e R Grapeshot @Minttu Hynninen
-40e M Increasing Vengeance @Dominik Mayer
-41e U Infuriate @Benjamin Ee
-42e C Lightning Bolt @Anato Finnstark
-43e M Mizzix's Mastery @Olena Richards
-44e U Shock @Dominik Mayer
-45e R Stone Rain @Justin Hernandez & Alexis Hernandez
-46e U Thrill of Possibility @Minttu Hynninen
-47e R Urza's Rage @Dominik Mayer
-48e R Abundant Harvest @Barbara Rosiak
-49e U Adventurous Impulse @Minttu Hynninen
-50e M Channel @Kristina Collantes
-51e U Cultivate @Jason Felix
-52e R Harmonize @Carly Mazur
-53e R Krosan Grip @Minttu Hynninen
-54e M Natural Order @Anato Finnstark
-55e M Primal Command @Olena Richards
-56e R Regrowth @Minttu Hynninen
-57e U Snakeskin Veil @Anato Finnstark
-58e R Weather the Storm @Justin Hernandez & Alexis Hernandez
-59e R Despark @Mark Tedin
-60e R Electrolyze @Dominik Mayer
-61e R Growth Spiral @Barbara Rosiak
-62e R Lightning Helix @Minttu Hynninen
-63e R Putrefy @Minttu Hynninen
-64e M Approach of the Second Sun @Nagano
-65e M Day of Judgment @Maiko Yoshizawa
-66e U Defiant Strike @Amayagido
-67e U Divine Gambit @Kiritada
-68e R Ephemerate @Yumeko
-69e R Gift of Estates @Yaya
-70e R Gods Willing @Tada
-71e R Mana Tithe @Magane Okuda
-72e U Revitalize @Yaomojun
-73e R Swords to Plowshares @Nagano
-74e M Teferi's Protection @So-Taro
-75e M Blue Sun's Zenith @Ezoi
-76e R Brainstorm @Ayako Ishiguro
-77e R Compulsive Research @Tomohito
-78e R Counterspell @Rindo Karasuba
-79e R Memory Lapse @Yumeko
-80e M Mind's Desire @Yaya
-81e U Negate @Koji Nishino
-82e U Opt @Rien.
-83e U Strategic Planning @Hatori Kyoka
-84e R Tezzeret's Gambit @Tomohito
-85e M Time Warp @Shie Nanahara
-86e U Whirlwind Denial @Aogachou
-87e U Agonizing Remorse @Maiko Aoji
-88e M Crux of Fate @Kota Nakatsubo
-89e R Dark Ritual @Rien.
-90e M Demonic Tutor @Sumie Okazu
-91e R Doom Blade @Rindo Karasuba
-92e U Duress @Romiy
-93e U Eliminate @Karuta Shiki
-94e R Inquisition of Kozilek @Yuka Oka
-95e R Sign in Blood @Kaoru Yukishiro
-96e M Tainted Pact @Yuusuke Katekari
-97e R Tendrils of Agony @Daken
-98e U Village Rites @Hagiya Kaoru
-99e M Chaos Warp @Hisashi Momose
-100e U Claim the Firstborn @Norikatsu Miyoshi
-101e R Faithless Looting @Shiro Yayoi
-102e R Grapeshot @Hatori Kyoka
-103e M Increasing Vengeance @D-suzuki
-104e U Infuriate @Yangygan & Xiaji
-105e C Lightning Bolt @Ezoi
-106e M Mizzix's Mastery @Hiro Suda
-107e U Shock @Ryanroro
-108e R Stone Rain @Tobihachi
-109e U Thrill of Possibility @Ayako Ishiguro
-110e R Urza's Rage @Maiko Aoji
-111e R Abundant Harvest @Yuka Sakuma
-112e U Adventurous Impulse @Sakura Tomo
-113e M Channel @Shie Nanahara
-114e U Cultivate @Uichi Ukumo
-115e R Harmonize @Yuka Sakuma
-116e R Krosan Grip @Norikatsu Miyoshi
-117e M Natural Order @Ayami Nakashima
-118e M Primal Command @Kukka
-119e R Regrowth @Romiy
-120e U Snakeskin Veil @Yuhki Takeuchi
-121e R Weather the Storm @Kukka
-122e R Despark @Kiritada
-123e R Electrolyze @Hatori Kyoka
-124e R Growth Spiral @Karuta Shiki
-125e R Lightning Helix @Daken
-126e R Putrefy @Magane Okuda

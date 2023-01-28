@@ -1,0 +1,8 @@
+Name:Noxious Assault
+ManaCost:3 G G
+Types:Sorcery
+A:SP$ PumpAll | NumAtt$ +2 | NumDef$ +2 | ValidCards$ Creature.YouCtrl | SubAbility$ DBEffect | SpellDescription$ Creatures you control get +2/+2 until end of turn. Whenever a creature blocks this turn, its controller gets a poison counter.
+SVar:DBEffect:DB$ Effect | Triggers$ TrigBlock
+SVar:TrigBlock:Mode$ Blocks | ValidCard$ Creature | Execute$ TrigPoison | TriggerDescription$ Whenever a creature blocks this turn, its controller gets a poison counter.
+SVar:TrigPoison:DB$ Poison | Defined$ TriggeredBlockerController | Num$ 1
+Oracle:Creatures you control get +2/+2 until end of turn.\nWhenever a creature blocks this turn, its controller gets a poison counter.
