@@ -5,8 +5,9 @@ PT:3/2
 K:etbCounter:OIL:2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+Other,Artifact.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature or artifact you control is put into a graveyard from the battlefield, put an oil counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ OIL | CounterNum$ 1
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may remove two oil counters from it. When you do, target creature can't block this turn.
-SVar:TrigPump:AB$ Pump | Cost$ SubCounter<2/OIL> | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't block.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever CARDNAME attacks, you may remove two oil counters from it. When you do, target creature can't block this turn.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ SubCounter<2/OIL> | SubAbility$ TrigPump | TriggerDescription$  When you do, target creature can't block this turn.
+SVar:TrigPump:DB$ Pump | Cost$ SubCounter<2/OIL> | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't block.
 SVar:X:Count$CardCounters.OIL
 DeckHas:Ability$Counters
 Oracle:Whenever another creature or artifact you control is put into a graveyard from the battlefield, put an oil counter on Forgehammer Centurion.\nWhenever Forgehammer Centurion attacks, you may remove two oil counters from it. When you do, target creature can't block this turn.
