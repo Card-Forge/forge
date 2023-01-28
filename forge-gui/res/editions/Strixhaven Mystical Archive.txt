@@ -5,7 +5,7 @@ Name=Strixhaven Mystical Archive
 Type=Collector_Edition
 ScryfallCode=STA
 
-[borderless]
+[cards]
 1 M Approach of the Second Sun @Minttu Hynninen
 2 M Day of Judgment @Anato Finnstark
 3 U Defiant Strike @Dominik Mayer
@@ -47,7 +47,7 @@ ScryfallCode=STA
 39 R Grapeshot @Minttu Hynninen
 40 M Increasing Vengeance @Dominik Mayer
 41 U Infuriate @Benjamin Ee
-42 C Lightning Bolt @Anato Finnstark
+42 R Lightning Bolt @Anato Finnstark
 43 M Mizzix's Mastery @Olena Richards
 44 U Shock @Dominik Mayer
 45 R Stone Rain @Justin Hernandez & Alexis Hernandez
@@ -101,7 +101,7 @@ ScryfallCode=STA
 93 U Eliminate @Karuta Shiki
 94 R Inquisition of Kozilek @Yuka Oka
 95 R Sign in Blood @Kaoru Yukishiro
-96 M Tainted Pact @Yuusuke Katekari
+96 M Tainted Pact @Yusuke Katekari
 97 R Tendrils of Agony @Daken
 98 U Village Rites @Hagiya Kaoru
 99 M Chaos Warp @Hisashi Momose
@@ -110,7 +110,7 @@ ScryfallCode=STA
 102 R Grapeshot @Hatori Kyoka
 103 M Increasing Vengeance @D-suzuki
 104 U Infuriate @Yangygan & Xiaji
-105 C Lightning Bolt @Ezoi
+105 R Lightning Bolt @Ezoi
 106 M Mizzix's Mastery @Hiro Suda
 107 U Shock @Ryanroro
 108 R Stone Rain @Tobihachi
