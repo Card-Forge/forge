@@ -98,13 +98,9 @@ public class TriggerCounterAddedOnce extends Trigger {
         sb.append(" ").append(Localizer.getInstance().getMessage("lblAmount")).append(": ").append(sa.getTriggeringObject(AbilityKey.Amount));
         return sb.toString();
     }
+    
     static protected boolean commonAbility(StaticAbility stAb, GameEntity entity, final SpellAbility spellAbility) {
-        final Player activator = spellAbility.getActivatingPlayer();
-
-        if (!stAb.matchesValidParam("Activator", activator)) {
-            return false;
-        }
-
+    	
         if (!stAb.matchesValidParam("ValidEntity", entity)) {
             return false;
         }
