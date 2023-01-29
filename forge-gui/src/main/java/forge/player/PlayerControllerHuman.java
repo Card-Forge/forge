@@ -876,6 +876,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public List<Card> enlistAttackers(List<Card> attackers) {
+        GameEntityViewMap<Card, CardView> gameCacheExert = GameEntityView.getMap(attackers);
+        List<CardView> chosen = getGui().order(localizer.getMessage("lblEnlistAttackersConfirm"), localizer.getMessage("lblEnlisted"),
+                0, gameCacheExert.size(), gameCacheExert.getTrackableKeys(), null, null, false);
+
+        List<Card> chosenCards = new CardCollection();
+        gameCacheExert.addToList(chosen, chosenCards);
+        return chosenCards;
+    }
+
+    @Override
     public CardCollection orderBlocker(final Card attacker, final Card blocker, final CardCollection oldBlockers) {
         GameEntityViewMap<Card, CardView> gameCacheBlockers = GameEntityView.getMap(oldBlockers);
         final CardView vAttacker = CardView.get(attacker);
@@ -1935,7 +1946,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         for (int i = orderedSAs.size() - 1; i >= 0; i--) {
             final SpellAbility next = orderedSAs.get(i);
-            if (next.isTrigger()) {
+            if (next.isTrigger() && !next.isCopied()) {
                 HumanPlay.playSpellAbility(this, player, next);
             } else {
                 if (next.isCopied()) {

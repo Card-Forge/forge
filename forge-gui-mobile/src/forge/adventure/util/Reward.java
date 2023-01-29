@@ -12,7 +12,7 @@ public class Reward {
         Gold,
         Item,
         Life,
-        Mana
+        Shards
     }
     Type type;
     PaperCard card;

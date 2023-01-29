@@ -27,7 +27,7 @@ import forge.game.zone.ZoneType;
 /**
  * The Class CostExert.
  */
-public class CostExert extends CostPartWithList {
+public class CostExert extends CostPartWithTrigger {
 
     private static final long serialVersionUID = 1L;
 

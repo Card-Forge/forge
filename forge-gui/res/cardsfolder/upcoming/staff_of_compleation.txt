@@ -1,0 +1,11 @@
+Name:Staff of Compleation
+ManaCost:3
+Types:Artifact
+A:AB$ Destroy | Cost$ T PayLife<1> | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent you own | SpellDescription$ Destroy target permanent you own.
+A:AB$ Mana | Cost$ T PayLife<2> | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Proliferate | Cost$ T PayLife<3> | SpellDescription$ Proliferate.
+A:AB$ Draw | Cost$ T PayLife<4> | NumCards$ 1 | SpellDescription$ Draw a card.
+A:AB$ Untap | Cost$ 5 | SpellDescription$ Untap CARDNAME.
+DeckHas:Ability$Proliferate
+DeckHints:Ability$Counters
+Oracle:{T}, Pay 1 life: Destroy target permanent you own.\n{T}, Pay 2 life: Add one mana of any color.\n{T}, Pay 3 life: Proliferate.\n{T}, Pay 4 life: Draw a card.\n{5}: Untap Staff of Compleation.

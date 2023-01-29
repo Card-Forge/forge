@@ -421,8 +421,16 @@ public class AbilityUtils {
         // return empty strings and constants
         if (StringUtils.isBlank(amount)) { return 0; }
         if (card == null) { return 0; }
-        final Player player = card.getController();
-        final Game game = player == null ? card.getGame() : player.getGame();
+
+        Player player = null;
+        if (ability instanceof SpellAbility) {
+            player = ((SpellAbility)ability).getActivatingPlayer();
+        }
+        if (player == null) {
+            player = card.getController();
+        }
+
+        final Game game = card.getGame();
 
         // Strip and save sign for calculations
         final boolean startsWithPlus = amount.charAt(0) == '+';
@@ -519,12 +527,7 @@ public class AbilityUtils {
                 players.remove(game.getPhaseHandler().getPlayerTurn());
                 val = playerXCount(players, calcX[1], card, ability);
             } else if (hType.startsWith("PropertyYou")) {
-                if (ability instanceof SpellAbility) {
-                    // Hollow One
-                    players.add(((SpellAbility) ability).getActivatingPlayer());
-                } else {
-                    players.add(player);
-                }
+                players.add(player);
                 val = playerXCount(players, calcX[1], card, ability);
             } else if (hType.startsWith("Property")) {
                 String defined = hType.split("Property")[1];
@@ -958,6 +961,7 @@ public class AbilityUtils {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a {@link java.util.ArrayList} object.
      */
+    @SuppressWarnings("unchecked")
     public static PlayerCollection getDefinedPlayers(final Card card, final String def, final CardTraitBase sa) {
         final PlayerCollection players = new PlayerCollection();
         String changedDef = (def == null) ? "You" : applyAbilityTextChangeEffects(def, sa); // default to Self
@@ -1961,17 +1965,6 @@ public class AbilityUtils {
 
         } // end ctb != null
 
-        if (sq[0].contains("OppsAtLifeTotal")) {
-            final int lifeTotal = calculateAmount(c, sq[1], ctb);
-            int number = 0;
-            for (final Player opp : player.getOpponents()) {
-                if (opp.getLife() == lifeTotal) {
-                    number++;
-                }
-            }
-            return doXMath(number, expr, c, ctb);
-        }
-
         //Count$SearchedLibrary.<DefinedPlayer>
         if (sq[0].contains("SearchedLibrary")) {
             int sum = 0;
@@ -2745,6 +2738,12 @@ public class AbilityUtils {
 
             return doXMath(game.getCounterAddedThisTurn(cType, parts[2], parts[3], c, player, ctb), expr, c, ctb);
         }
+        if (sq[0].startsWith("CountersRemovedThisTurn")) {
+            final String[] parts = l[0].split(" ");
+            CounterType cType = CounterType.getType(parts[1]);
+
+            return doXMath(game.getCounterRemovedThisTurn(cType, parts[2], c, player, ctb), expr, c, ctb);
+        }
 
         // count valid cards in any specified zone/s
         if (sq[0].startsWith("Valid")) {
@@ -3225,12 +3224,13 @@ public class AbilityUtils {
      * @return a int.
      */
     public static int playerXCount(final List<Player> players, final String s, final Card source, CardTraitBase ctb) {
-        if (players.size() == 0) {
+        if (players.isEmpty()) {
             return 0;
         }
 
         final String[] l = s.split("/");
         final String m = CardFactoryUtil.extractOperators(s);
+        final Player controller = ctb instanceof SpellAbility ? ((SpellAbility)ctb).getActivatingPlayer() : source.getController();
 
         int n = 0;
 
@@ -3311,7 +3311,7 @@ public class AbilityUtils {
             int totPlayer = 0;
             String property = sq[0].substring(11);
             for (Player p : players) {
-                if (p.hasProperty(property, source.getController(), source, ctb)) {
+                if (p.hasProperty(property, controller, source, ctb)) {
                     totPlayer++;
                 }
             }

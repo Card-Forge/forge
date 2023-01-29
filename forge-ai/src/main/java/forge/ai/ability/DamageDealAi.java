@@ -738,11 +738,7 @@ public class DamageDealAi extends DamageAiBase {
                             dump = true;
                         }
                         final int assignedDamage = dump ? dmg : ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
-                        if (assignedDamage <= dmg) {
-                            sa.addDividedAllocation(c, assignedDamage);
-                        } else {
-                            sa.addDividedAllocation(c, dmg);
-                        }
+                        sa.addDividedAllocation(c, Math.min(assignedDamage, dmg));
                         dmg = dmg - assignedDamage;
                         if (dmg <= 0) {
                             break;
@@ -752,10 +748,12 @@ public class DamageDealAi extends DamageAiBase {
                 }
             } else if ("OppAtTenLife".equals(logic)) {
                 for (final Player p : ai.getOpponents()) {
-                    if (sa.canTarget(p) && p.getLife() == 10 && tcs.size() < tgt.getMaxTargets(source, sa)) {
+                    if (sa.canTarget(p) && p.getLife() == 10) {
                         tcs.add(p);
+                        return true;
                     }
                 }
+                return false;
             }
             // TODO: Improve Damage, we shouldn't just target the player just because we can
             if (sa.canTarget(enemy) && tcs.size() < tgt.getMaxTargets(source, sa)) {

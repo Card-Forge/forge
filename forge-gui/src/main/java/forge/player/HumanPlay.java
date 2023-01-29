@@ -283,6 +283,7 @@ public class HumanPlay {
                     || part instanceof CostFlipCoin
                     || part instanceof CostRollDice
                     || part instanceof CostDamage
+                    || part instanceof CostEnlist
                     || part instanceof CostPutCounter
                     || part instanceof CostRemoveCounter
                     || part instanceof CostRemoveAnyCounter
@@ -513,6 +514,20 @@ public class HumanPlay {
                 }
 
                 p.payEnergy(amount, source);
+            }
+            else if (part instanceof CostExert) {
+                part.payAsDecided(p, PaymentDecision.card(source), sourceAbility, hcd.isEffect());
+            }
+
+            else if (part instanceof CostPayShards) {
+                CounterType counterType = CounterType.get(CounterEnumType.MANASHARDS);
+                int amount = getAmountFromPartX(part, source, sourceAbility);
+
+                if (!mandatory && !p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantSpendNTargetTypeCounter", String.valueOf(amount), counterType.getName()), sourceAbility)) {
+                    return false;
+                }
+
+                p.payShards(amount, source);
             }
 
             else {

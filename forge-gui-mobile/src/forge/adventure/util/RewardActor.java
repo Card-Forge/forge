@@ -257,7 +257,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 break;
             }
             case Life:
-            case Mana:
+            case Shards:
             case Gold: {
                 TextureAtlas atlas = Config.instance().getAtlas(ITEMS_ATLAS);
                 Sprite backSprite = atlas.createSprite("CardBack");

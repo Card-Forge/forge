@@ -144,6 +144,8 @@ public abstract class PlayerController {
 
     public abstract CardCollection orderBlockers(Card attacker, CardCollection blockers);
     public abstract List<Card> exertAttackers(List<Card> attackers);
+    public abstract List<Card> enlistAttackers(List<Card> attackers);
+
     /**
      * Add a card to a pre-existing blocking order.
      * @param attacker the attacking creature.
