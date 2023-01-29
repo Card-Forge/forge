@@ -279,8 +279,6 @@ public class CardUtil {
         List<PaperCard> result = new ArrayList<>();
         CardPredicate pre = new CardPredicate(data, true);
 
-        java.util.Map<String, String> tempMap = new HashMap<>();
-
         for (final PaperCard item : cards)
         {
             if(pre.apply(item))
@@ -338,8 +336,8 @@ public class CardUtil {
             return reward.getCount();
         return 1000;
     }
-    static List<List<PaperCard>> packCandidates=null;
-    public static Deck generateDeck(GeneratedDeckData data, CardEdition starterEdition)
+
+    public static Deck generateDeck(GeneratedDeckData data, CardEdition starterEdition, boolean discourageDuplicates)
     {
         List<String> editionCodes = (starterEdition != null)?Arrays.asList(starterEdition.getCode(), starterEdition.getCode2()):Arrays.asList("JMP", "J22", "DMU","BRO");
         Deck deck= new Deck(data.name);
@@ -353,6 +351,10 @@ public class CardUtil {
         if(data.jumpstartPacks!=null)
         {
             deck.getOrCreate(DeckSection.Main);
+
+            Map <String, List<PaperCard>> packCandidates=null;
+            List<String> usedPackNames=new ArrayList<String>();
+
             for(int i=0;i<data.jumpstartPacks.length;i++)
             {
 
@@ -368,7 +370,7 @@ public class CardUtil {
                     case MagicColor.GREEN:  targetName = "Forest";  break;
                 }
 
-                packCandidates=new ArrayList<>();
+                packCandidates=new HashMap<>();
                 for(SealedProduct.Template template : StaticData.instance().getSpecialBoosters())
                 {
                     if (!editionCodes.contains(template.getEdition().split("\\s",2)[0]))
@@ -377,9 +379,30 @@ public class CardUtil {
                     if (packContents.size() < 20 | packContents.size() > 25)
                         continue;
                     if (packContents.stream().filter(x -> x.getName().equals(targetName)).count() >=3)
-                        packCandidates.add(packContents);
+                        packCandidates.putIfAbsent(template.getEdition(), packContents);
                 }
-                deck.getOrCreate(DeckSection.Main).addAllFlat(packCandidates.get(Current.world().getRandom().nextInt(packCandidates.size())));
+                List<PaperCard> selectedPack;
+                if (discourageDuplicates) {
+                    Map <String, List<PaperCard>> filteredPackCandidates= new HashMap<>();
+                    for (java.util.Map.Entry<String, List<PaperCard>>  entry: packCandidates.entrySet()){
+                        if (!usedPackNames.contains(entry.getKey())){
+                            filteredPackCandidates.put(entry.getKey(), entry.getValue()); //deep copy so that packCandidates can be used if filtered ends up being empty
+                        }
+                    }
+                    //Only re-use a pack if all possibilities have already been chosen
+                    if (filteredPackCandidates.size() == 0)
+                        filteredPackCandidates = packCandidates;
+                    Object[] keys = filteredPackCandidates.keySet().toArray();
+
+                    String keyName = (String)keys[Current.world().getRandom().nextInt(keys.length)];
+                    usedPackNames.add(keyName);
+                    selectedPack = filteredPackCandidates.remove(keyName);
+                }
+                else{
+                    Object[] keys = packCandidates.keySet().toArray();
+                    selectedPack = packCandidates.get((String)keys[Current.world().getRandom().nextInt(keys.length)]);
+                }
+                deck.getOrCreate(DeckSection.Main).addAllFlat(selectedPack);
             }
             return deck;
         }
@@ -592,10 +615,10 @@ public class CardUtil {
     }
 
     public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme, boolean useGeneticAI) {
-        return getDeck(path, forAI, isFantasyMode, colors, isTheme, useGeneticAI, null);
+        return getDeck(path, forAI, isFantasyMode, colors, isTheme, useGeneticAI, null,true);
     }
 
-    public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme, boolean useGeneticAI, CardEdition starterEdition)
+    public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme, boolean useGeneticAI, CardEdition starterEdition, boolean discourageDuplicates)
     {
         if(path.endsWith(".dck"))
             return DeckSerializer.fromFile(new File(Config.instance().getFilePath(path)));
@@ -608,8 +631,11 @@ public class CardUtil {
         Json json = new Json();
         FileHandle handle = Config.instance().getFile(path);
         if (handle.exists())
-            return generateDeck(json.fromJson(GeneratedDeckData.class, handle), starterEdition);
+            return generateDeck(json.fromJson(GeneratedDeckData.class, handle), starterEdition, discourageDuplicates);
         return null;
 
     }
+
+
 }
+
