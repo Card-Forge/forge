@@ -19,12 +19,10 @@ package forge.game.trigger;
 
 import java.util.Map;
 
-import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbility;
 import forge.util.Localizer;
 
 /**
@@ -96,14 +94,5 @@ public class TriggerCounterAddedOnce extends Trigger {
 
         sb.append(" ").append(Localizer.getInstance().getMessage("lblAmount")).append(": ").append(sa.getTriggeringObject(AbilityKey.Amount));
         return sb.toString();
-    }
-    
-    static protected boolean commonAbility(StaticAbility stAb, GameEntity entity, final SpellAbility spellAbility) {
-    	
-        if (!stAb.matchesValidParam("ValidEntity", entity)) {
-            return false;
-        }
-
-        return true;
     }
 }
