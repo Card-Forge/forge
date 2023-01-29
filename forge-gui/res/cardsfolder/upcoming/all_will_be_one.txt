@@ -1,7 +1,7 @@
 Name:All Will Be One
 ManaCost:3 R R
 Types:Enchantment
-T:Mode$ CounterAddedOnce | TriggerZones$ Battlefield | ValidSource$ You | Execute$ TrigDamage | TriggerDescription$ Whenever you put one or more counters on a permanent or player, CARDNAME deals that much damage to target opponent, creature an opponent controls, or planeswalker an opponent controls.
+T:Mode$ CounterAddedOnce | ValidEntity$ Permanent,Player | TriggerZones$ Battlefield | ValidSource$ You | Execute$ TrigDamage | TriggerDescription$ Whenever you put one or more counters on a permanent or player, CARDNAME deals that much damage to target opponent, creature an opponent controls, or planeswalker an opponent controls.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl,Opponent | TgtPrompt$ Select target opponent, creature an opponent controls, or planeswalker an opponent controls.| NumDmg$ X
 SVar:X:TriggerCount$Amount
 DeckNeeds:Ability$Counters
