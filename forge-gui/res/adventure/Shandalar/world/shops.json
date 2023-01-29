@@ -339,7 +339,7 @@
 "overlaySprite":"Overlay6Red",
   "rewards": [
     {
-      "count":68,
+      "count":6,
 	  "cardText": "haste|(first |double )strike | prowess|return .* to hand at end of turn|At the beginning of (your|the) end step, (sacrifice|return .* to (your|its owner).*hand)",
 	  "colors": ["red"]
 
