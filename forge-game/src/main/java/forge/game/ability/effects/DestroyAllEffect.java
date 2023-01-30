@@ -79,7 +79,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
             card.addRemembered(list);
         }
         
-        if (isOptional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeDestroy",("ValidCards")), null)) {
+        if (isOptional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeDestroy",(valid)), null)) {
         return;
         }
         // exclude cards that can't be destroyed at this moment
