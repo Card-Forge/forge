@@ -4,6 +4,6 @@ Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, put an oil counter on another target nontoken artifact or creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Artifact.nonToken+YouCtrl+Other,Creature.YouCtrl+Other | CounterType$ OIL| CounterNum$ 1
 A:AB$ Token | Cost$ 2 T | TokenScript$ r_1_1_phyrexian_goblin | CheckSVar$ CountCountersRemoved | CheckSVarCompare$ GE1 | SpellDescription$ Create a 1/1 red Phyrexian Goblin creature token. Activate only if an oil counter was removed from a permanent you controlled this turn or a permanent with an oil counter on it was put into a graveyard this turn.
-SVar:CountCountersRemoved:Count$Valid CountersRemovedThisTurn
+SVar:CountCountersRemoved:Count$CountersRemovedThisTurn OIL Card.YouCtrl
 DeckHas:Ability$Token/Counters & Type$Goblin|Phyrexian
 Oracle:At the beginning of your upkeep, put an oil counter on another target nontoken artifact or creature you control.\n{2}, {T}: Create a 1/1 red Phyrexian Goblin creature token. Activate only if an oil counter was removed from a permanent you controlled this turn or a permanent with an oil counter on it was put into a graveyard this turn.

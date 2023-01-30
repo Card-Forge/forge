@@ -7,7 +7,8 @@ T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | T
 SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ OIL | CounterNum$ 1
 A:AB$ Draw | Cost$ SubCounter<3/OIL> | SorcerySpeed$ True | SubAbility$ DBDiscard | SpellDescription$ Draw a card. Then you may discard a nonland card. When you discard a card this way, CARDNAME deals 3 damage to target creature or planeswalker. Activate only as a sorcery.
 SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBImmediateTrig
-SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ TrigDamage | TriggerDescription$  When you discard a card this way, CARDNAME deals 3 damage to target creature or planeswalker.
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | Execute$ TrigDamage | SubAbility$ DBCleanup | TriggerDescription$  When you discard a card this way, CARDNAME deals 3 damage to target creature or planeswalker.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 3
-DeckHas:Ability$Counters
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters|Discard
 Oracle:Flying\nWhenever you cast a noncreature spell, put an oil counter on Serum-Core Chimera.\nRemove three oil counters from Serum-Core Chimera: Draw a card. Then you may discard a nonland card. When you discard a card this way, Serum-Core Chimera deals 3 damage to target creature or planeswalker. Activate only as a sorcery.
