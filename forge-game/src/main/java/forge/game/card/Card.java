@@ -1427,7 +1427,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean hasDoubleStrike() {
         return hasKeyword(Keyword.DOUBLE_STRIKE);
     }
-    
+
     public final boolean hasDoubleTeam() {
         return hasKeyword(Keyword.DOUBLE_TEAM);
     }
@@ -1588,6 +1588,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         // Play the Subtract Counter sound
         getGame().fireEvent(new GameEventCardCounters(this, counterName, oldValue, newValue));
+
+        getGame().addCounterRemovedThisTurn(counterName, this, delta);
 
         // Run triggers
         int curCounters = oldValue;

@@ -1,0 +1,7 @@
+Name:Piper's Charm
+ManaCost:no cost
+Types:Artifact
+S:Mode$ Continuous | Description$ Provided by Piper's Charm (Equipped Item - Neck)
+A:AB$ Effect | Cost$ PayShards<3> Sac<1/CARDNAME> | ValidTgts$ Creature | ExileOnMoved$ Battlefield | StaticAbilities$ MustBlock | RememberObjects$ Targeted | StackDescription$ {c:Targeted} blocks this turn if able. | SpellDescription$ Target creature blocks this turn if able.
+SVar:MustBlock:Mode$ MustBlock | ValidCreature$ Card.IsRemembered | Description$ This creature blocks this turn if able.
+Oracle: Provided by Piper's Charm. Pay {M}{M}{M}, sacrifice Piper's Charm: Target creature blocks this turn if able.

@@ -14,6 +14,7 @@ import forge.model.FModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -42,6 +43,10 @@ public class RewardData {
     public String colorType;
     public String cardText;
     public boolean matchAllSubTypes;
+    public boolean matchAllColors;
+    public RewardData[] cardUnion;
+    public String[] deckNeeds;
+    public RewardData[] rotation;
 
     public RewardData() { }
 
@@ -64,6 +69,10 @@ public class RewardData {
         colorType   =rewardData.colorType;
         cardText    =rewardData.cardText;
         matchAllSubTypes    =rewardData.matchAllSubTypes;
+        matchAllColors =rewardData.matchAllColors;
+        cardUnion         =rewardData.cardUnion==null?null:rewardData.cardUnion.clone();
+        rotation          =rewardData.rotation==null?null:rewardData.rotation.clone();
+        deckNeeds         =rewardData.deckNeeds==null?null:rewardData.deckNeeds.clone();
     }
 
     private static Iterable<PaperCard> allCards;
@@ -119,6 +128,19 @@ public class RewardData {
             int addedCount = (maxCount > 0 ? WorldSave.getCurrentSave().getWorld().getRandom().nextInt(maxCount) : 0);
 
             switch(type) {
+                case "Union":
+                    HashSet<PaperCard> pool = new HashSet<>();
+                    for (RewardData r : cardUnion) {
+                        pool.addAll(CardUtil.getPredicateResult(allCards, r));
+                    }
+                    ArrayList<PaperCard> finalPool = new ArrayList(pool);
+
+                    if (finalPool.size() > 0){
+                        for (int i = 0; i < count; i++) {
+                            ret.add(new Reward(finalPool.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(finalPool.size()))));
+                        }
+                    }
+                    break;
                 case "card":
                 case "randomCard":
                     if( cardName != null && !cardName.isEmpty() ) {
@@ -156,8 +178,9 @@ public class RewardData {
                 case "life":
                     ret.add(new Reward(Reward.Type.Life, count + addedCount));
                     break;
-                case "mana":
-                    ret.add(new Reward(Reward.Type.Mana, count + addedCount));
+                case "mana": //backwards compatibility for reward data
+                case "shards":
+                    ret.add(new Reward(Reward.Type.Shards, count + addedCount));
                     break;
             }
         }

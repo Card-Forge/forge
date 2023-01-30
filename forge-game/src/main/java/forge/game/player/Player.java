@@ -661,6 +661,28 @@ public class Player extends GameEntity implements Comparable<Player> {
         return canPayEnergy(energyPayment) && loseEnergy(energyPayment) > -1;
     }
 
+    public final boolean canPayShards(final int shardPayment) {
+        int cnt = getCounters(CounterEnumType.MANASHARDS);
+        return cnt >= shardPayment;
+    }
+
+    public final int loseShards(int lostShards) {
+        int cnt = getCounters(CounterEnumType.MANASHARDS);
+        if (lostShards > cnt) {
+            return -1;
+        }
+        cnt -= lostShards;
+        this.setCounters(CounterEnumType.MANASHARDS, cnt, true);
+        return cnt;
+    }
+
+    public final boolean payShards(final int shardPayment, final Card source) {
+        if (shardPayment <= 0)
+            return true;
+
+        return canPayShards(shardPayment) && loseShards(shardPayment) > -1;
+    }
+
     // This function handles damage after replacement and prevention effects are applied
     @Override
     public final int addDamageAfterPrevention(final int amount, final Card source, final boolean isCombat, GameEntityCounterTable counterTable) {
@@ -2710,8 +2732,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public int getCommanderCast(Card commander) {
-        Integer cast = commanderCast.get(commander);
-        return cast == null ? 0 : cast.intValue();
+        return commanderCast.getOrDefault(commander, 0);
     }
     public void incCommanderCast(Card commander) {
         commanderCast.put(commander, getCommanderCast(commander) + 1);

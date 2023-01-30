@@ -66,6 +66,7 @@ public enum TriggerType {
     DungeonCompleted(TriggerCompletedDungeon.class),
     Evolved(TriggerEvolved.class),
     ExcessDamage(TriggerExcessDamage.class),
+    Enlisted(TriggerEnlisted.class),
     Exerted(TriggerExerted.class),
     Exiled(TriggerExiled.class),
     Exploited(TriggerExploited.class),

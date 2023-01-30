@@ -75,6 +75,26 @@
       "height": 30,
       "x": 165,
       "y": 335
+    },
+	{
+      "type": "Label",
+      "name": "playerGold",
+	  "style":"background",
+      "text": "[+Gold]",
+      "width": 128,
+      "height": 32,
+      "x": 16,
+      "y": 405
+    },
+	{
+      "type": "Label",
+      "name": "playerShards",
+	  "style":"background",
+      "text": "[+Shards]",
+      "width": 128,
+      "height": 32,
+      "x": 16,
+      "y": 435
     }
   ]
 }

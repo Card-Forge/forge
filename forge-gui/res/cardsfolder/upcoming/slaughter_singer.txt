@@ -1,0 +1,8 @@
+Name:Slaughter Singer
+ManaCost:G W
+Types:Creature Phyrexian Cleric
+PT:2/2
+K:Toxic:2
+T:Mode$ Attacks | ValidCard$ Creature.withToxic+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature you control with toxic attacks, it gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +1 | NumDef$ +1
+Oracle:Toxic 2 (Players dealt combat damage by this creature also get two poison counters.)\nWhenever another creature you control with toxic attacks, it gets +1/+1 until end of turn.

@@ -129,12 +129,57 @@
 	"radiusFactor": 0.5
 },
 {
-	"name": "Waste Town",
+	"name": "Waste Town Generic",
 	"type": "town",
-	"count": 100,
+	"count": 30,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "WasteTown",
-	"map": "maps/map/waste_town.tmx",
+	"map": "maps/map/waste_town_generic.tmx",
+	"radiusFactor": 0.8
+},
+{
+	"name": "Waste Town Identity",
+	"type": "town",
+	"count": 35,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "WasteTown",
+	"map": "maps/map/waste_town_identity.tmx",
+	"radiusFactor": 0.8
+},
+{
+	"name": "Waste Town Tribal",
+	"type": "town",
+	"count": 35,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "WasteTown",
+	"map": "maps/map/waste_town_tribal.tmx",
+	"radiusFactor": 0.8
+},
+{
+	"name": "Forest Town Generic",
+	"type": "town",
+	"count": 30,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "ForestTown",
+	"map": "maps/map/forest_town_generic.tmx",
+	"radiusFactor": 0.8
+},
+{
+	"name": "Forest Town Identity",
+	"type": "town",
+	"count": 35,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "ForestTown",
+	"map": "maps/map/forest_town_identity.tmx",
+	"radiusFactor": 0.8
+},
+{
+	"name": "Forest Town Tribal",
+	"type": "town",
+	"count": 35,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "ForestTown",
+	"map": "maps/map/forest_town_tribal.tmx",
 	"radiusFactor": 0.8
 },
 {
@@ -147,6 +192,32 @@
 	"radiusFactor": 0.8
 },
 {
+	"name": "Plains Town Generic",
+	"type": "town",
+	"count": 30,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "PlainsTown",
+	"map": "maps/map/plains_town_generic.tmx",
+	"radiusFactor": 0.8
+},
+{
+	"name": "Plains Town Identity",
+	"type": "town",
+	"count": 35,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "PlainsTown",
+	"map": "maps/map/plains_town_identity.tmx",
+	"radiusFactor": 0.8
+},
+{
+	"name": "Plains Town Tribal",
+	"type": "town",
+	"count": 35,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "PlainsTown",
+	"map": "maps/map/plains_town_tribal.tmx",
+	"radiusFactor": 0.8
+},{
 	"name": "Plains Town",
 	"type": "town",
 	"count": 100,
@@ -156,6 +227,32 @@
 	"radiusFactor": 0.8
 },
 {
+	"name": "Island Town Generic",
+	"type": "town",
+	"count": 30,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "IslandTown",
+	"map": "maps/map/island_town_generic.tmx",
+	"radiusFactor": 0.8
+},
+{
+	"name": "Island Town Identity",
+	"type": "town",
+	"count": 35,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "IslandTown",
+	"map": "maps/map/island_town_identity.tmx",
+	"radiusFactor": 0.8
+},
+{
+	"name": "Island Town Tribal",
+	"type": "town",
+	"count": 35,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "IslandTown",
+	"map": "maps/map/island_town_tribal.tmx",
+	"radiusFactor": 0.8
+},{
 	"name": "Island Town",
 	"type": "town",
 	"count": 100,
@@ -165,12 +262,65 @@
 	"radiusFactor": 0.8
 },
 {
+	"name": "Mountain Town Generic",
+	"type": "town",
+	"count": 30,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "MountainTown",
+	"map": "maps/map/mountain_town_generic.tmx",
+	"radiusFactor": 0.8
+},
+{
+	"name": "Mountain Town Identity",
+	"type": "town",
+	"count": 35,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "MountainTown",
+	"map": "maps/map/mountain_town_identity.tmx",
+	"radiusFactor": 0.8
+},
+{
+	"name": "Mountain Town Tribal",
+	"type": "town",
+	"count": 35,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "MountainTown",
+	"map": "maps/map/mountain_town_tribal.tmx",
+	"radiusFactor": 0.8
+},{
 	"name": "Mountain Town",
 	"type": "town",
 	"count": 100,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MountainTown",
 	"map": "maps/map/mountain_town.tmx",
+	"radiusFactor": 0.8
+},
+{
+	"name": "Swamp Town Generic",
+	"type": "town",
+	"count": 30,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "SwampTown",
+	"map": "maps/map/swamp_town_generic.tmx",
+	"radiusFactor": 0.8
+},
+{
+	"name": "Swamp Town Identity",
+	"type": "town",
+	"count": 35,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "SwampTown",
+	"map": "maps/map/swamp_town_identity.tmx",
+	"radiusFactor": 0.8
+},
+{
+	"name": "Swamp Town Tribal",
+	"type": "town",
+	"count": 35,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "SwampTown",
+	"map": "maps/map/Swamp_town_tribal.tmx",
 	"radiusFactor": 0.8
 },
 {

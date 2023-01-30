@@ -16,6 +16,8 @@ public class ConfigData {
     public float playerBaseSpeed;
     public String[] colorIds;
     public String[] colorIdNames;
+    public String[] starterEditions;
+    public String[] starterEditionNames;
     public DifficultyData[] difficulties;
     public RewardData legalCards;
     public String[] restrictedCards;

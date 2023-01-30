@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="64">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="72">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="6321" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztmEEOgjAQRbsAzmOiHse7cAQlKd5TTcSdbaRJGafDVFo6Jiz+poTw+n+npdPXSt0rpQ7NVA8z1tcydDU6VVPpAhy+T74/Uvh8Dh0Yj+Fz870h6+OXdRLiuxi9xvGn0WDUzfhvdWy+5wW1b6ZzoHgtxxD4vmPHfHNcHB4ub2z9OXbIbdlScGGcKWopB9tSL3N5RnFyGddmi2EsxcZlxPbBtRXad0t7R3kohS3EKCFXKmfJfNKyhRlL9M73cOPb+Epp18jmk+6fBncPSbL3oO4Pzo9/4JOWsZ+tNEaMTVLOVN+itIeUd6UZOWylGOfYXK/A/+d3/Y6cnFQvCqsLrN+Qy0vKM+gXrFt4f0rp5ehZS/Xv3H1D1zif/wyuy/OHtbXi8LoMx/fILCGHDvjDraW57GNqEvKFzhDOeuXu6bE97FB/d4lS8mH93TfVKOm8
+   eJzNmEtOwzAQhrPIoxdhyUMFjsMJYAE36BGgbdpTcRmgtGwqMkp+MRnG9jhxCpVGVVPF/vzPwx5viix7z7PspuzbR/NsU/wP2zZ2l/et/gMOrhPX57/wcY7a8TyGD+t9U+JjSJy4+F4a++qe7xs7NLYM6E92W/5el7Trsr8GHy9xHBzzg92lG7FZeKy8sfkH9qVgwjhP1Xg2yTk2l9bN96po13tRtvyfiRmHaKn5kjhpHC2XUnBaGX1xVjty/VSMoRw4Vq1NwWdhDGkzNR/iaEz9IL6zBHXGZ7LGWdl2eVt/qBalzGNtjtD+q713zupBakbfvmXh47mbutbsHFwxviWmddHnjdGQGJ67PQo5Rt+Hzi/cn8RE+/UYDa7KuNiAPo9Vn49+0zrx/7z80WFovaX5Hqow307EFM4/nA9nGxlrWNMQvprNt/a8X7MzxmvDMZu54wH7PMaL8Y/Ug7QLsfGYJc77qn3POp/MQZo7FOs181GITc4F/11G1HbScOuJRfrgPIs4GppPqyLeX5xJqxf0OVb9c32Mbq64tdYkMPEc4z0AzgNjmDQ+i4b73F2zkZupzyqIX8t6fX3QWD9qhnpmHVfjs65tiMWcHV2+nersHsPni7sp+eAv5J4rh333FvweIbVh/4JRvyoZQzk7NaPUifvLwnZKRtITGlpqnezjUaen5MT+MDf2ldp9w1Racs34+VTTS+at7JNTatn1QQvf/R36Dd9+qOU5cXY9xILMwou+DL2HL84kR+3Qx5pLId/H5KTk097V7gBjxrT4wDpWqvvvlHza/e435SQojA==
   </data>
  </layer>
  <layer id="2" name="Ground" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzlWM1KA0EMHrGt0CL9wZM3xbvtU/gW4n0VFYpP4U1fwKpFqeIriHf1afTsDDY0DclusrvjKH4QxJ1k803+ZjvO/S1s953b6admIWN/4NzBIJ3/rV8cm/+Ajc00tlVwlcZtJXCcGxH9wbunwrr0PAV2PdmhUUYxg0d4tVvO3Xs5bOrkzut2WvXw5HqM43XU1L8zU/K09ndZXlItanlquWl4TYmNxh/lWYbja+ObmyWPwebd4Cubc7TYTAy+Pvz6J9KhNnSdg3VPGjuYvRd+/5fN5TrFdQXrAVIaqB8NVag97b6Cjzciki19HGytNSjV3oRXL+SXdz5banAN+dPoQ33hfsT9rqk/iz+rPq4vzg6v09jjmFI7KU9YH9dEq5gq60eLmHMJz2TsR5rVtBY1vcide9q+wnrAT9v/+IwK9YrPoqKzOMs5f2DejRrLsQZ+uP+xLrc36xkVADmQ8gzzBGYxzGX6d0jiQ/dombESuDzjeULnHhbp24LmtQpwnuk3cbuAH2cjxfTay00Fjtw3cR43Lo5YgFus336ZkmMdObQC5kBeHZb5HRALNJZSzOAcOk9wjwAcU+RTQui3W/R/2fP3p5DHb7xe7d1wL7jXzdc79usnjJx2F/zydLQ4Y/YTuBXdX856zj0QefLy2Fvwm82fUb2gU4SY98s4v9pvRopnz+0lEr+shnkX8/57pePcaqfed34BjJbWzg==
+   eJzVWEtOwzAQ9SI1iAr1cwMQC1ilnIJLIMS+IEBC3If+1KogroDYp1yCg2CLDJ1OZmwnTlN40ogm2Jnn+ctK/S8c95Q66e2ahYyrvlLX/d3pPxJs89wsDRF7uyawZXydbj5rbc6si+vSRKnzxL23CWSGw2cS/r5plOHXJF3wK/CYqU2fNmk/To3V3zb8DvTP30Ei/x4wsVgnaKynuf6FkZuWX+aIK5dLZcDlGPWVfV6V8N+Q4cnZs0x+a+QbayvMBfTdtvi9M/J8ecbzjLEl2Ah8GMKFq3mub8fkT5Zzk3hJezidUyPLmviNBF1jI5OK/Ch88RECly46S6RJsaZQP0dQKSBlcsIF8BeW2No89+jjYm/EL/fyG8dR/QXMXmV700Sv6wbk+9RROyAepFx32a4Kv5B9I7IuJgagt8IZQ8to6Lkov9C6CRii3umrAdLM4tJp48HGgo0Brf25SPuelAccwNZ41grRmaEzLXKuuBfFzNrYNmCLNuKEdWqhHmb5OWBdnaBxBhxXwkzIcchIjcVnDq1HUAfo3Ib5vaB3uP7h2ZBySxneVWoGtQuet/B8BPGGuWHfDpBe2M99s0q9mWh5Jl4lm/pAsG+BL8A1Z8fMCxzvuS72NSq+Ga2u3ocBdQD3NY6Xr8/Vgf2ANdSWUs2AVzDvN4khmg/qjKMY2Hl6ip7/yp2GBBe/x0P/fleowr3gRcf9jTvz/3tGHjprfq41oXhizmO5SfeXgGXX9Awib0Zeu2t+y/wdXWfX+FD2frlMfcL+rVpW3g23jy3df9eRH9u6/4YeHHtvQfENf1fcDQ==
+  </data>
+ </layer>
+ <layer id="8" name="Bridges" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1kkOgkAUhOG3cXYPW2fDbXC6FU4XxekAFkmTEMWYELVLUl/yNqz+hOY1ZiJSV53IrBv5rnhtgrYpcZ98xiowW7vZBL5rnl3QdHVzI+zbh2YHN8fQd40wi3F+F5gl4TnOpOg6Yc7qq6Ssj+meT7CftphdYU/pnv+9mHgHZFLCb6yBM9p055Sxb4C2IXFfUfKwA+os/7etqoV32v7ifsz/Hd/poaFf0jHCszHB/p6hYU7QISIi/+0OQfQkaQ==
   </data>
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1kEKgzAQheE5RDfq4W3PYXsKtbHozrbncBYBlWajjImU/4PZiCSPiUkUAQD8k7YQeRZ27wFLe76bTy7yzY+fB/GVmcjV1y1LneZXpZnuvh4nzOc0U+frdcJ8mMU+k46cr9Zxm8DYTp91nLtBvfZl2NCbUe+898Z7D/FY7y/+WdK6sNdW6Ed6lmvAegI2JkGoI2Y=
+   eJztlU0OQDAUhN9xcAXuhHPgFH5K2Pk5kYN4i25EF0SbtsyXvIUumjHTdogAAKZoI6Iuur8O/ECVX8zfCbI2zh/8/OI/riHRFtpW4Re+9EcaEGVy8sC2misFayrlVIb0vclEsKZezuCgf8AeJu96zfs2ir0Fr/UOvS8uMbIv0wNvZu68xfPee3MGXesq8G129OcJ+GEfnRkgTwD0cABSpCk/
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -30,55 +35,88 @@
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1jsOgzAMBmDfgBm4K/Qm0FPwFmy0PVFHPEQC0S60DjbR/0leUIitBCcQAVzHO9Z5F2CrSYnaVG5cKDR7LKT+/uW7eSZEr8R/HoC9gnuvdHE32Icd19S7GAzWB6uzzySf+Sqet/4yd8fPeqGcFu+9f2oaeV2mA2sz8533OHjvwXmk+wv/LLosnjeasB76JPcA+/kpi4hyF7dIuxoAGQufWSj0
+   eJxjYBgFo2DogBMaqPxOLQaGLi1MddjE0fWOgsELsMWfPJCvQGRcjwLyASXhOZB5jBS7h2OamanJwDBLc6BdMbQAKfXHKMAN8oF5rwCKC2lUBlASJ91AN/VAce9oO2AUIAFa5vV2oLkdWMzuBor1UMnOwdiupcRN/cBwmUBC2EwH1nkzhni9R0kaHK2rRgE9wWAsbwYSjIbHwANqxsFofGKCOn4GhnoobuAfaNeMglFAHQAAkqgpdw==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="41" template="../../obj/shop.tx" x="232" y="162">
+  <object id="41" template="../../obj/shop.tx" x="232" y="146">
    <properties>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+    <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
    </properties>
   </object>
-  <object id="56" template="../../obj/shop.tx" x="103" y="226">
+  <object id="56" template="../../obj/shop.tx" x="106" y="210">
    <properties>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+    <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
    </properties>
   </object>
-  <object id="57" template="../../obj/shop.tx" x="392" y="162">
+  <object id="57" template="../../obj/shop.tx" x="408" y="146">
    <properties>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+    <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
    </properties>
   </object>
-  <object id="43" template="../../obj/shop.tx" x="152" y="451">
+  <object id="43" template="../../obj/shop.tx" x="152" y="435">
    <properties>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+    <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
    </properties>
   </object>
   <object id="47" template="../../obj/inn.tx" x="311" y="227"/>
-  <object id="49" template="../../obj/shop.tx" x="520" y="225">
+  <object id="49" template="../../obj/shop.tx" x="360" y="258">
    <properties>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+    <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
    </properties>
   </object>
   <object id="50" template="../../obj/shop.tx" x="536" y="354">
    <properties>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+    <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
    </properties>
   </object>
-  <object id="51" template="../../obj/shop.tx" x="472" y="450">
+  <object id="51" template="../../obj/shop.tx" x="552" y="418">
    <properties>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+    <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
    </properties>
   </object>
-  <object id="52" template="../../obj/shop.tx" x="88" y="354">
+  <object id="52" template="../../obj/shop.tx" x="56" y="306">
    <properties>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+    <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
    </properties>
   </object>
   <object id="53" template="../../obj/spellsmith.tx" x="408" y="402"/>
-  <object id="55" template="../../obj/shop.tx" x="465" y="515">
+  <object id="55" template="../../obj/shop.tx" x="462" y="515">
    <properties>
-    <property name="shopList" value="Island"/>
+    <property name="commonShopList" value="Island"/>
+    <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
@@ -141,14 +179,66 @@
   </object>
   <object id="62" template="../../obj/shop.tx" x="360" y="370">
    <properties>
-    <property name="shopList" value="BlueItems"/>
+    <property name="commonShopList" value="BlueItems"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
   <object id="63" template="../../obj/shop.tx" x="263" y="371">
    <properties>
-    <property name="shopList" value="BlueEquipment"/>
+    <property name="commonShopList" value="BlueEquipment"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/quest.tx" x="312" y="146">
+   <properties>
+    <property name="questtype" value="island_capital"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/shop.tx" x="264" y="258">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/shop.tx" x="472" y="178">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="signYOffset" type="float" value="-4"/>
+    <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/RotatingShop.tx" x="574" y="471">
+   <properties>
+    <property name="rotation" value="Blue1,Blue2,Blue3,Blue4,Blue5,Blue6"/>
+    <property name="signXOffset" type="float" value="-4"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/RotatingShop.tx" x="50" y="472">
+   <properties>
+    <property name="rotation" value="Blue1,Blue2,Blue3,Blue4,Blue5,Blue6"/>
+    <property name="signXOffset" type="float" value="14"/>
+    <property name="signYOffset" type="float" value="14"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/RotatingShop.tx" x="136" y="130">
+   <properties>
+    <property name="rotation" value="Blue1,Blue2,Blue3,Blue4,Blue5,Blue6"/>
+    <property name="signXOffset" type="float" value="-16"/>
+    <property name="signYOffset" type="float" value="-4"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/shardtrader.tx" x="400.909" y="208.727">
+   <properties>
+    <property name="signYOffset" type="float" value="-4"/>
    </properties>
   </object>
  </objectgroup>

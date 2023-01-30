@@ -5,7 +5,7 @@ PT:3/3
 T:Mode$ ChangesZone  | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {3}. If you do, proliferate twice.
 SVar:TrigProliferate:AB$ Proliferate | Cost$ 3 | SubAbility$ TrigProliferate2
 SVar:TrigProliferate2:DB$ Proliferate
-T:Mode$ Proliferate | ValidPlayer$ You | Execute$ TrigDraw | TriggerDescription$ Whenever you proliferate, draw a card.
+T:Mode$ Proliferate | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you proliferate, draw a card.
 SVar:TrigDraw:DB$ Draw
 DeckHas:Ability$Proliferate|Counters
 DeckNeeds:Ability$Counters

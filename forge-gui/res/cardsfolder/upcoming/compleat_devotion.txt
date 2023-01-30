@@ -1,0 +1,7 @@
+Name:Compleat Devotion
+ManaCost:1 W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBDraw | SpellDescription$ Target creature gets +2/+2 until end of turn. If it has toxic, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Targeted | ConditionPresent$ Card.withToxic
+DeckHints:Keyword$Toxic
+Oracle:Target creature gets +2/+2 until end of turn. If it has toxic, draw a card.

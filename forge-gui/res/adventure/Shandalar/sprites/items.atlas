@@ -26,7 +26,10 @@ CardBack
   size: 48, 64
 Gold 
   xy: 48, 0
-  size: 16, 16              
+  size: 16, 16    
+Shards
+  xy: 32, 768
+  size: 16, 16    
 Life 
   xy: 48, 16
   size: 16, 16            
@@ -47,6 +50,21 @@ Status
   size: 16, 16  
 Menu 
   xy: 32, 64
+  size: 16, 16  
+CursedTreasure
+  xy: 336, 64
+  size: 16, 16  
+PipersCharm
+  xy: 240, 976
+  size: 16, 16  
+HillGiantClub
+  xy: 192, 576
+  size: 16, 16  
+SleepWand
+  xy: 304, 544
+  size: 16, 16  
+FarmersTools
+  xy: 288, 976
   size: 16, 16  
 SolRing
   xy: 320, 144

@@ -1,0 +1,10 @@
+Name:A-Raiyuu, Storm's Edge
+ManaCost:2 R W
+Types:Legendary Creature Human Samurai
+PT:4/4
+K:First Strike
+T:Mode$ Attacks | ValidCard$ Samurai.YouCtrl,Warrior.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever a Samurai or Warrior you control attacks alone, untap it. If it's the first combat phase of the turn, there is an additional combat phase after this phase.
+SVar:TrigUntap:DB$ Untap | Defined$ TriggeredAttackerLKICopy | SubAbility$ DBAddPhase
+SVar:DBAddPhase:DB$ AddPhase | ExtraPhase$ Combat | ConditionFirstCombat$ True | AfterPhase$ EndCombat
+DeckHints:Type$Samurai|Warrior
+Oracle:First strike\nWhenever a Samurai or Warrior you control attacks alone, untap it. If it's the first combat phase of the turn, there is an additional combat phase after this phase.
