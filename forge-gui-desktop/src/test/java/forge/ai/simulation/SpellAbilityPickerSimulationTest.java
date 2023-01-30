@@ -308,7 +308,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
         System.out.println(new GameStateEvaluator().evalCard(game, null, desired));
 
-        // ensure that the tapland is paid
+        // ensure that the tapland is played
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(desired, sa.getHostCard());
@@ -329,7 +329,24 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
         AssertJUnit.assertEquals(p, desired.getController());
 
-        // ensure that the tapland is paid
+        // ensure that the tron land is played
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertEquals(desired, sa.getHostCard());
+    }
+
+    @Test
+    public void playManalessLands() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        // start with a hand with a land that can't produce mana.
+        Card desired = addCardToZone("Maze of Ith", p, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+        AssertJUnit.assertEquals(p, desired.getController());
+
+        // ensure that the land is played
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(desired, sa.getHostCard());
