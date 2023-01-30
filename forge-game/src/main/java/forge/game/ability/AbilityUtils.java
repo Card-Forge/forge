@@ -2058,8 +2058,8 @@ public class AbilityUtils {
             return doXMath(count, expr, c, ctb);
         }
 
-        if (sq[0].contains("BushidoPoint")) {
-            return doXMath(c.getKeywordMagnitude(Keyword.BUSHIDO), expr, c, ctb);
+        if (sq[0].contains("TotalValue")) {
+            return doXMath(c.getKeywordMagnitude(Keyword.smartValueOf(l[0].split(" ")[1])), expr, c, ctb);
         }
         if (sq[0].contains("TimesKicked")) {
             return doXMath(c.getKickerMagnitude(), expr, c, ctb);
