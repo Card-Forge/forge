@@ -1,0 +1,10 @@
+Name:Ichormoon Gauntlet
+ManaCost:2 U
+Types:Artifact
+S:Mode$ Continuous | Affected$ Planeswalker.YouCtrl | AddAbility$ PWProliferate & PWExtraTurn | Description$ Planeswalkers you control have "[0]: Proliferate" and "[-12]: Take an extra turn after this one."
+SVar:PWProliferate:AB$ Proliferate | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | SpellDescription$ Proliferate
+SVar:PWExtraTurn:AB$ AddTurn | Cost$ SubCounter<12/LOYALTY> | Planeswalker$ True | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a noncreature spell, choose a counter on target permanent. Put an additional counter of that kind on that permanent.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | CounterType$ ExistingCounter | CounterNum$ 1
+DeckHints:Type$Planeswalker & Ability$Counters
+Oracle:Planeswalkers you control have "[0]: Proliferate" and "[-12]: Take an extra turn after this one."\nWhenever you cast a noncreature spell, choose a counter on target permanent. Put an additional counter of that kind on that permanent.

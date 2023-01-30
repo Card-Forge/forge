@@ -196,7 +196,7 @@ public class Config {
                 {
                     if(ColorSet.fromNames(entry.key.toCharArray()).getColor()==color.getColor())
                     {
-                        return CardUtil.getDeck(entry.value, false, false, "", false, false, starterEdition);
+                        return CardUtil.getDeck(entry.value, false, false, "", false, false, starterEdition, true);
                     }
                 }
             case Chaos:
