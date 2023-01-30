@@ -3,10 +3,11 @@ ManaCost:4 G G
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 3/3 green Phyrexian Beast creature tokens with toxic 1. (Players dealt combat damage by them also get a poison counter.)
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_3_3_phyrexian_beast_toxic
-T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigChooseCard| CheckSVar$ X | SVarCompare$ GE3 | TriggerDescription$ Corrupted — At the beginning of your upkeep, if an opponent has three or more poison counters, choose a creature you control, then draw cards equal to its total toxic value.
-SVar:TrigChooseCard:DB$ ChooseCard | Choices$ Creature.YouCrl | SubAbility$ DBDraw
+T:Mode$ Phase | Phase$ Upkeep  | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigChooseCard | CheckSVar$ X | SVarCompare$ GE3 | TriggerDescription$ Corrupted — At the beginning of your upkeep, if an opponent has three or more poison counters, choose a creature you control, then draw cards equal to its total toxic value.
+SVar:TrigChooseCard:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.YouCtrl | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ AffectedX
-SVar:AffectedX:Count$Valid Card.ChosenCard$TotalValue Toxic
+SVar:X:PlayerCountOpponents$HighestPoisonCounters
+SVar:AffectedX:Count$Valid ChosenCard$TotalValue Toxic
 DeckHas:Ability$Token & Type$Beast|Phyrexian
 DeckHints:Keyword$Toxic|Infect
 Oracle:When Goliath Hatchery enters the battlefield, create two 3/3 green Phyrexian Beast creature tokens with toxic 1. (Players dealt combat damage by them also get a poison counter.)\nCorrupted — At the beginning of your upkeep, if an opponent has three or more poison counters, choose a creature you control, then draw cards equal to its total toxic value.
