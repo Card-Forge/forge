@@ -355,6 +355,8 @@ public class AbilityUtils {
             }
             cards.addAll(CardLists.getValidCards(candidates, validDefined, hostCard.getController(), hostCard, sa));
             return cards;
+        } else if (defined.startsWith("ExiledWith")) {
+            cards.addAll(hostCard.getExiledCards());
         } else {
             CardCollection list = getPaidCards(sa, defined);
             if (list != null) {

@@ -1373,7 +1373,8 @@ public class CardFactoryUtil {
 
             String hideawayDig = "DB$ Dig | Defined$ You | DigNum$ " + n + " | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | RestRandomOrder$ True";
             String hideawayEffect = "DB$ Effect | StaticAbilities$ STHideawayEffectLookAtCard | ForgetOnMoved$ Exile | RememberObjects$ Remembered | Duration$ Permanent";
-
+            String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
+            
             String lookAtCard = "Mode$ Continuous | Affected$ Card.IsRemembered | MayLookAt$ EffectSourceController | EffectZone$ Command | AffectedZone$ Exile | Description$ Any player who has controlled the permanent that exiled this card may look at this card in the exile zone.";
 
             SpellAbility digSA = AbilityFactory.getAbility(hideawayDig, card);
@@ -1381,17 +1382,14 @@ public class CardFactoryUtil {
             AbilitySub effectSA = (AbilitySub) AbilityFactory.getAbility(hideawayEffect, card);
             effectSA.setSVar("STHideawayEffectLookAtCard", lookAtCard);
 
+            AbilitySub cleanSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
+
             digSA.setSubAbility(effectSA);
+            effectSA.setSubAbility(cleanSA);
 
             hideawayTrigger.setOverridingAbility(digSA);
 
             triggers.add(hideawayTrigger);
-
-            // when the card with hideaway leaves the battlefield, forget all exiled cards
-            final Trigger changeZoneTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | TriggerZones$ Battlefield | Static$ True", card, intrinsic);
-            String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
-            changeZoneTrigger.setOverridingAbility(AbilityFactory.getAbility(cleanupStr, card));
-            triggers.add(changeZoneTrigger);
 
             for (final Trigger trigger : triggers) {
                 inst.addTrigger(trigger);
