@@ -161,7 +161,7 @@ public class GameStateEvaluator {
         if (c.isCreature()) {
             return eval.evaluateCreature(c);
         } else if (c.isLand()) {
-            int value = 100;
+            int value = 0;
             // for each mana color a land generates for free, increase the value by one
             // for each mana a land can produce, add one hundred.
             int max_produced = 0;
@@ -174,7 +174,17 @@ public class GameStateEvaluator {
                 }
             }
             value = 100 * max_produced;
-            value += colors_produced.size();
+            int size = max(colors_produced.size(), colors_produced.contains("Any") ? 5 : 0);
+            value += size * 2;
+
+            // add a value for each activated ability that the land has that's not an activated ability.
+            for (SpellAbility m: c.getNonManaAbilities()) {
+                // more than the value of having a card in hand, so if a land has an activated ability but
+                // not a mana ability, it will still be played.
+                value += 6;
+            }
+
+
             return value;
         } else if (c.isEnchantingCard()) {
             // TODO: Should provide value in whatever it's enchanting?
