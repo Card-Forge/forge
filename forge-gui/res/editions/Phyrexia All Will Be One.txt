@@ -501,3 +501,17 @@ ScryfallCode=ONE
 281 U Slaughter Singer @Adam Burn
 282 R Karumonix, the Rat King @Jason A. Engle
 283 R Phyrexian Arena @Martina Fackova
+
+[tokens]
+c_1_1_a_phyrexian_mite_toxic_noblock
+c_1_1_a_phyrexian_mite_toxic_noblock
+c_2_2_a_drone_deathtouch_leavedrain
+c_3_3_a_phyrexian_golem
+g_3_3_phyrexian_beast_toxic
+g_x_x_phyrexian_horror
+r_1_1_phyrexian_goblin
+r_2_2_rebel
+r_x_1_phyrexian_horror_trample_haste
+the_hollow_sentinel
+w_2_2_cat
+w_2_2_samurai_double_strike
