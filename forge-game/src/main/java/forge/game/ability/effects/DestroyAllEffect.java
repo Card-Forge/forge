@@ -49,6 +49,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         final Card card = sa.getHostCard();
         final boolean isOptional = sa.hasParam("Optional");
         final Game game = sa.getActivatingPlayer().getGame();
+        final String desc = sa.getParamOrDefault("ValidDescription", "");
 
         Player targetPlayer = sa.getTargets().getFirstTargetedPlayer();
         
@@ -79,7 +80,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
             card.addRemembered(list);
         }
         
-        if (isOptional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeDestroy",(valid)), null)) {
+        if (isOptional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeDestroy",(desc)), null)) {;
         return;
         }
         // exclude cards that can't be destroyed at this moment
