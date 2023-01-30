@@ -7,8 +7,8 @@ SVar:X:Count$xPaid
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self+counters_GE1_P1P1 | ReplaceWith$ Counters | PreventionEffect$ True | AlwaysReplace$ True | Description$ If damage would be dealt to CARDNAME while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from it. When one or more counters are removed from Magma Pummeler this way, it deals that much damage to any target.
 SVar:Counters:DB$ RemoveCounter | Defined$ ReplacedTarget | CounterType$ P1P1 | CounterNum$ Y | RememberRemoved$ True | SubAbility$ DBImmediateTrigger
 SVar:Y:ReplaceCount$DamageAmount
-SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigDamage | SubAbility$ DBCleanup | TriggerDescription$ When one or more counters are removed from CARDNAME this way, it deals that much damage to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ Z
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigDamage | RememberSVarAmount$ Z | SubAbility$ DBCleanup | TriggerDescription$ When one or more counters are removed from CARDNAME this way, it deals that much damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ Count$TriggerRememberAmount
 SVar:Z:Count$RememberedSize
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters

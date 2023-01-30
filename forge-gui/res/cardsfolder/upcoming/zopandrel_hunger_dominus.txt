@@ -1,0 +1,13 @@
+Name:Zopandrel, Hunger Dominus
+ManaCost:5 G G
+Types:Legendary Creature Phyrexian Horror
+PT:4/6
+K:Reach
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigDouble | TriggerDescription$ At the beginning of each combat, double the power and toughness of each creature you control until end of turn.
+SVar:TrigDouble:DB$ RepeatEach | RepeatCards$ Creature.YouCtrl | RepeatSubAbility$ DBDouble
+SVar:DBDouble:DB$ Pump | Defined$ Remembered | NumAtt$ X | NumDef$ Y | Double$ True
+A:AB$ PutCounter | Cost$ 1 GP GP Sac<2/Creature.Other/Other creature> | Defined$ Self | CounterType$ Indestructible | CounterNum$ 1 | SpellDescription$ Put an indestructible counter on CARDNAME. ({GP} can be paid with either {G} or 2 life.)
+SVar:X:Remembered$CardPower
+SVar:Y:Remembered$CardToughness
+DeckHas:Ability$Sacrifice|Counters
+Oracle:Reach\nAt the beginning of each combat, double the power and toughness of each creature you control until end of turn.\n{G/P}{G/P}, Sacrifice two other creatures: Put an indestructible counter on Zopandrel, Hunger Dominus. ({GP} can be paid with either {G} or 2 life.)
