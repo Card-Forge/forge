@@ -332,6 +332,8 @@ public class GameCopier {
         final Card newCard = createCardCopy(newGame, owner, c);
         cardMap.put(c, newCard);
 
+        // TODO ExiledWith
+
         Player zoneOwner = owner;
         // everything the CreatureEvaluator checks must be set here
         if (zone == ZoneType.Battlefield) {

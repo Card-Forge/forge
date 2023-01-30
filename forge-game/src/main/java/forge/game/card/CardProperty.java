@@ -372,14 +372,14 @@ public class CardProperty {
                 }
             }
 
-            if (!card.getExiledWith().equals(host)) {
+            if (!card.getExiledWith().equalsWithTimestamp(host)) {
                 return false;
             }
         } else if (property.equals("ExiledWithEffectSource")) {
             if (card.getExiledWith() == null) {
                 return false;
             }
-            if (!card.getExiledWith().equals(source.getEffectSource())) {
+            if (!card.getExiledWith().equalsWithTimestamp(source.getEffectSource())) {
                 return false;
             }
         } else if (property.equals("EncodedWithSource")) {
