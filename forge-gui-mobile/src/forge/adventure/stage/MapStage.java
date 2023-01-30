@@ -599,20 +599,25 @@ public class MapStage extends GameStage {
                             restockPrice = 0;
                         }
 
-                        possibleShops = new Array<>(shopList.split(","));
-                        Array<String> filteredPossibleShops = possibleShops;
-                        if (!isRotatingShop)
-                            filteredPossibleShops.removeAll(shopsAlreadyPresent, false);
-                        if (filteredPossibleShops.notEmpty()){
-                            possibleShops = filteredPossibleShops;
+                        possibleShops = new Array<String>(shopList.split(","));
+                        Array<String> filteredPossibleShops = new Array<>();
+                        if (!isRotatingShop){
+                            for (String candidate : possibleShops)
+                            {
+                                if (!shopsAlreadyPresent.contains(candidate, false))
+                                    filteredPossibleShops.add(candidate);
+                            }
+                        }
+                        if (filteredPossibleShops.isEmpty()){
+                            filteredPossibleShops = possibleShops;
                         }
                         Array<ShopData> shops;
-                        if (possibleShops.size == 0 || shopList.equals(""))
+                        if (filteredPossibleShops.size == 0 || shopList.equals(""))
                             shops = WorldData.getShopList();
                         else {
                             shops = new Array<>();
                             for (ShopData data : new Array.ArrayIterator<>(WorldData.getShopList())) {
-                                if (possibleShops.contains(data.name, false)) {
+                                if (filteredPossibleShops.contains(data.name, false)) {
                                     data.restockPrice = restockPrice;
                                     shops.add(data);
                                 }
