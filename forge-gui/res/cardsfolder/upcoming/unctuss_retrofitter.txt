@@ -3,6 +3,6 @@ ManaCost:2 U
 Types:Creature Phyrexian Artificer
 PT:2/3
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME enters the battlefield, up to one target artifact you control becomes an artifact creature with base power and toughness 4/4 for as long as CARDNAME remains on the battlefield.
-SVar:TrigAnimate:DB$ Animate | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control | Power$ 4 | Toughness$ 4 | Types$ Artifact,Creature | Duration$ UntilHostLeavesPlay
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Artifact.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target artifact you control | Power$ 4 | Toughness$ 4 | Types$ Artifact,Creature | Duration$ UntilHostLeavesPlay
 SVar:PlayMain1:TRUE
 Oracle:Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)\nWhen Unctus's Retrofitter enters the battlefield, up to one target artifact you control becomes an artifact creature with base power and toughness 4/4 for as long as Unctus's Retrofitter remains on the battlefield.
