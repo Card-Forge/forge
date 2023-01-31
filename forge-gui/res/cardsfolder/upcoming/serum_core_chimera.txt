@@ -6,7 +6,7 @@ K:Flying
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever you cast a noncreature spell, put an oil counter on CARDNAME.
 SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ OIL | CounterNum$ 1
 A:AB$ Draw | Cost$ SubCounter<3/OIL> | SorcerySpeed$ True | SubAbility$ DBDiscard | SpellDescription$ Draw a card. Then you may discard a nonland card. When you discard a card this way, CARDNAME deals 3 damage to target creature or planeswalker. Activate only as a sorcery.
-SVar:DBDiscard:DB$ Discard | NumCards$ 1 | DiscardValid$ Card.nonLand | DiscardValidDesc$ Select up to one nonland card in your hand to discard | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBImmediateTrig
+SVar:DBDiscard:DB$ Discard | NumCards$ 1 | DiscardValid$ Card.nonLand | Optional$ True | DiscardValidDesc$ Select up to one nonland card in your hand to discard | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBImmediateTrig
 SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | Execute$ TrigDamage | SubAbility$ DBCleanup | TriggerDescription$  When you discard a card this way, CARDNAME deals 3 damage to target creature or planeswalker.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 3
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
