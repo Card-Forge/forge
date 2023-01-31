@@ -1,0 +1,7 @@
+Name:Maze's Mantle
+ManaCost:2 G
+Types:Enchantment Aura
+K:Flash
+K:Toxic:1
+Maze's Mante
+Oracle:Flash\nEnchant creature\nWhen Maze's Mantle enters the battlefield, if enchanted creature has toxic, that creature gains hexproof until end of turn.\nEnchanted creature gets +2/+2.

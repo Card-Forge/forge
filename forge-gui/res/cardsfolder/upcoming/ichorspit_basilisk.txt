@@ -1,0 +1,7 @@
+Name:Ichorspit Basilisk
+ManaCost:2 G
+Types:Creature Phyrexian Basilisk
+PT:1/3
+K:Deathtouch
+K:Toxic:1
+Oracle:Deathtouch\nToxic 1 (Players dealt combat damage by this creature also get a poison counter.)

@@ -1,0 +1,9 @@
+Name:Porcelain Zealot
+ManaCost:3 W
+Types:Creature Phyrexian Soldier
+PT:2/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gets +1/+1 until end of turn. If that creature has toxic, instead it gets +2/+2 until end of turn.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ X | RememberTargets$ True
+SVar:Y:Targeted$Valid Creature.withToxic
+SVar:X:Count$Compare Y GE1.1.2
+Oracle:At the beginning of combat on your turn, target creature you control gets +1/+1 until end of turn. If that creature has toxic, instead it gets +2/+2 until end of turn.
