@@ -6,5 +6,5 @@ K:Flying
 K:Toxic:1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, another target creature you control with toxic gets +1/+1 and gains flying until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+withToxic+Other | NumAtt$ 1 | NumDef$ 1 | KW$ Flying
+DeckHints:Keyword$Toxic
 Oracle:Flying\nToxic 1 (Players dealt combat damage by this creature also get a poison counter.)\nWhen Flensing Raptor enters the battlefield, another target creature you control with toxic gets +1/+1 and gains flying until end of turn.
-
