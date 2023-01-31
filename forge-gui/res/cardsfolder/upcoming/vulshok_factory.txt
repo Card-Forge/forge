@@ -1,0 +1,9 @@
+Name:Vulshok Factory
+ManaCost:2 R
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBCounter | SpellDescription$ Add {R}. Put a charge counter on CARDNAME.
+SVar:DBCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 1
+A:AB$ Token | Cost$ 2 R T Sac<1/CARDNAME> | SorcerySpeed$ True | TokenScript$ c_x_x_a_golem_haste | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X colorless Golem artifact creature token with haste, where X is the number of charge counters on CARDNAME. Activate only as a sorcery.
+SVar:X:Count$CardCounters.CHARGE
+DeckHas:Ability$Counters|Tokens|Sacrifice & Type$Golem
+Oracle:{T}: Add {R}. Put a charge counter on Vulshok Factory.\n{2}{R}, {T}, Sacrifice Vulshok Factory: Create an X/X colorless Golem artifact creature token with haste, where X is the number of charge counters on Vulshok Factory. Activate only as a sorcery.
