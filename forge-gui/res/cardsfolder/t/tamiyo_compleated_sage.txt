@@ -1,5 +1,5 @@
 Name:Tamiyo, Compleated Sage
-ManaCost:2 G PGU U
+ManaCost:2 G GUP U
 Types:Legendary Planeswalker Tamiyo
 Loyalty:5
 K:Compleated
@@ -10,4 +10,4 @@ SVar:DBCopy:DB$ CopyPermanent | Defined$ Targeted | SpellDescription$ Create a t
 SVar:X:Count$xPaid
 A:AB$ Token | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | TokenScript$ tamiyos_notebook | SpellDescription$ Create Tamiyo's Notebook, a legendary colorless artifact token with "Spells you cast cost {2} less to cast" and "{T}: Draw a card."
 DeckHas:Ability$Token & Type$Artifact
-Oracle:Compleated ({P/G/U} can be paid with {G}, {U}, or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters.)\n[+1]: Tap up to one target artifact or creature. It doesn't untap during its controller's next untap step.\n[−X]: Exile target nonland permanent card with mana value X from your graveyard. Create a token that's a copy of that card.\n[−7]: Create Tamiyo's Notebook, a legendary colorless artifact token with "Spells you cast cost {2} less to cast" and "{T}: Draw a card."
+Oracle:Compleated ({G/U/P} can be paid with {G}, {U}, or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters.)\n[+1]: Tap up to one target artifact or creature. It doesn't untap during its controller's next untap step.\n[−X]: Exile target nonland permanent card with mana value X from your graveyard. Create a token that's a copy of that card.\n[−7]: Create Tamiyo's Notebook, a legendary colorless artifact token with "Spells you cast cost {2} less to cast" and "{T}: Draw a card."

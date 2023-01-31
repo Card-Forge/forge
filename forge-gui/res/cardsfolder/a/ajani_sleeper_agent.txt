@@ -1,5 +1,5 @@
 Name:Ajani, Sleeper Agent
-ManaCost:1 G PGW W
+ManaCost:1 G GWP W
 Types:Legendary Planeswalker Ajani
 Loyalty:4
 K:Compleated
@@ -13,4 +13,4 @@ SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Creature,Planeswalker | ValidAct
 SVar:EffSpellCast:DB$ Poison | ValidTgts$ Opponent | Num$ 2
 SVar:BuffedBy:Creature,Planeswalker
 DeckHints:Type$Creature|Planeswalker
-Oracle:Compleated ({P/G/W} can be paid with {G}, {W}, or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters.)\n[+1]: Reveal the top card of your library. If it's a creature or planeswalker card, put it into your hand. Otherwise, you may put it on the bottom of your library.\n[-3]: Distribute three +1/+1 counters among up to three target creatures. They gain vigilance until end of turn.\n[-6]: You get an emblem with "Whenever you cast a creature or planeswalker spell, target opponent gets two poison counters."
+Oracle:Compleated ({G/W/P} can be paid with {G}, {W}, or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters.)\n[+1]: Reveal the top card of your library. If it's a creature or planeswalker card, put it into your hand. Otherwise, you may put it on the bottom of your library.\n[-3]: Distribute three +1/+1 counters among up to three target creatures. They gain vigilance until end of turn.\n[-6]: You get an emblem with "Whenever you cast a creature or planeswalker spell, target opponent gets two poison counters."

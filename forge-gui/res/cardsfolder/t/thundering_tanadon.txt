@@ -1,5 +1,5 @@
 Name:Thundering Tanadon
-ManaCost:4 PG PG
+ManaCost:4 GP GP
 Types:Artifact Creature Phyrexian Beast
 PT:5/4
 K:Trample
