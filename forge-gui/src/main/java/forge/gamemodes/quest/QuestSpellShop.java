@@ -128,6 +128,7 @@ public class QuestSpellShop {
         }
 
         if (value == 0) {
+            System.out.println("HERE");
             value = 1; // no freebies for the shop or the player, things should cost at least 1 credit
         }
 
@@ -149,7 +150,7 @@ public class QuestSpellShop {
     public static final Function<Entry<? extends InventoryItem, Integer>, Object> fnPriceSellGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-            return (int) (multiplier * getCardValue(from.getKey()));
+            return Math.max((int) (multiplier * getCardValue(from.getKey())), 1);
         }
     };
     public static final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
@@ -300,7 +301,7 @@ public class QuestSpellShop {
         for (Entry<InventoryItem, Integer> itemEntry : items) {
             final InventoryItem item = itemEntry.getKey();
             if (item instanceof PaperCard) {
-                totalValue += itemEntry.getValue() * Math.min((int) (multiplier * getCardValue(item)), sellPriceLimit);
+                totalValue += itemEntry.getValue() * Math.max(Math.min((int) (multiplier * getCardValue(item)), sellPriceLimit), 1);
             }
         }
         return totalValue;
@@ -318,7 +319,7 @@ public class QuestSpellShop {
             if (item instanceof PaperCard) {
                 final int qty = itemEntry.getValue();
                 itemsToSell.add(item, qty);
-                totalReceived += qty * Math.min((int) (multiplier * getCardValue(item)), sellPriceLimit);
+                totalReceived += qty * Math.max(Math.min((int) (multiplier * getCardValue(item)), sellPriceLimit), 1);
             }
         }
 
@@ -341,7 +342,8 @@ public class QuestSpellShop {
         for (Entry<InventoryItem, Integer> itemEntry : itemsToSell) {
 
             final PaperCard card = (PaperCard) itemEntry.getKey();
-            final int pricePerCard = Math.min((int) (multiplier * getCardValue(card)), FModel.getQuest().getCards().getSellPriceLimit());
+            final int pricePerCard = Math.max(Math.min((int) (multiplier * getCardValue(card)), 1),
+                    FModel.getQuest().getCards().getSellPriceLimit());
 
             sellCard(card, itemEntry.getValue(), pricePerCard);
 
@@ -395,7 +397,8 @@ public class QuestSpellShop {
             }
 
             PaperCard card = (PaperCard)item.getKey();
-            final int pricePerCard = Math.min((int) (multiplier * getCardValue(card)), FModel.getQuest().getCards().getSellPriceLimit());
+            final int pricePerCard = Math.max(Math.min((int) (multiplier * getCardValue(card)), 1),
+                    FModel.getQuest().getCards().getSellPriceLimit());
 
             sellCard(card, item.getValue(), pricePerCard);
 
