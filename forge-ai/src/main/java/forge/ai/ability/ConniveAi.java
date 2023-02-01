@@ -17,7 +17,6 @@ public class ConniveAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         boolean preferred = true;
         CardCollection list;
-        final int amount = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("ConniveNum", "1"), sa);
         list = CardLists.getTargetableCards(new CardCollection(ai.getCardsIn(ZoneType.Battlefield)), sa);
 
         // Filter AI-specific targets if provided
