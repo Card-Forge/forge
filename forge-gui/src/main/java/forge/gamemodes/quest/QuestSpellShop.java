@@ -128,7 +128,6 @@ public class QuestSpellShop {
         }
 
         if (value == 0) {
-            System.out.println("HERE");
             value = 1; // no freebies for the shop or the player, things should cost at least 1 credit
         }
 
