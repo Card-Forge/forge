@@ -1,0 +1,7 @@
+Name:Cutthroat Centurion
+ManaCost:2 B
+Types:Artifact Creature Phyrexian Warrior
+PT:2/2
+A:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | Defined$ Self | NumDef$ 2 | NumAtt$ +2 | AILogic$ Aristocrat | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate only once each turn.
+DeckHas:Ability$Sacrifice
+Oracle:Sacrifice another artifact or creature: Cutthroat Centurion gets +2/+2 until end of turn. Activate only once each turn.
