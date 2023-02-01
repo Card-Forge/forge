@@ -174,10 +174,11 @@ public class ReplacementHandler {
             @Override
             public boolean visit(Card crd) {
                 Card c = preList.get(crd);
-                Zone cardZone = game.getChangeZoneLKIInfo(c).getLastKnownZone();
+                Zone cardZone = game.getZoneOf(c);
+                Zone lkiZone = game.getChangeZoneLKIInfo(c).getLastKnownZone();
 
                 // only when not prelist
-                if (c == crd && cardZone.is(ZoneType.Battlefield) && event == ReplacementType.Moved && 
+                if (c == crd && lkiZone.is(ZoneType.Battlefield) && event == ReplacementType.Moved && 
                         runParams.containsKey(AbilityKey.LastStateBattlefield) && runParams.get(AbilityKey.LastStateBattlefield) != null) {
                     Card lastState = ((CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield)).get(crd);
                     // no LKI found for this card so it shouldn't apply, this can happen during simultaneous zone changes
@@ -186,6 +187,7 @@ public class ReplacementHandler {
                     }
                     // use the LKI because it has the right RE from the state before the effect started
                     c = lastState;
+                    cardZone = lkiZone;
                 }
 
                 for (final ReplacementEffect replacementEffect : c.getReplacementEffects()) {
