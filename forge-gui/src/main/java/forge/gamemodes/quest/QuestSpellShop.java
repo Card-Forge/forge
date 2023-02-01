@@ -127,6 +127,10 @@ public class QuestSpellShop {
             value *= foilMultiplier;
         }
 
+        if (value == 0) {
+            value = 1; // no freebies for the shop or the player, things should cost at least 1 credit
+        }
+
         return value;
     }
 
