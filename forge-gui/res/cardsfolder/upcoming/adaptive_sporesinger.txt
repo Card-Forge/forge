@@ -1,9 +1,11 @@
-Name:Cephalopod Sentry
-ManaCost:2 W U
-Types:Artifact Creature Phyrexian Squid
-PT:*/5
-K:Flying
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of artifacts you control.
-SVar:X:Count$Valid Artifact.YouCtrl
-DeckNeeds:Type$Artifact
-Oracle:Flying\nCephalopod Sentry's power is equal to the number of artifacts you control.
+Name:Adaptive Sporesinger
+ManaCost:2 G
+Types:Creature Phyrexian Druid
+PT:2/2
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPump,DBProliferate
+SVar:DBPump:DB$ Pump | NumAtt$ 2 | NumDef$ 2 | ValidTgts$ Creature | NumAtt$ 5 | NumDef$ 5 | KW$ Trample | SpellDescription$ Target creature gets +2/+2 and gains vigilance until end of turn.
+SVar:DBProliferate:DB$ Proliferate | SpellDescription$ Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+DeckHas:Ability$Proliferate
+Oracle:Vigilance\nWhen Adaptive Sporesinger enters the battlefield, choose one—\n• Target creature gets +2/+2 and gains vigilance until end of turn.\n• Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

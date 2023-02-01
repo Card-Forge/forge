@@ -1,8 +1,8 @@
-Name:Chimney Rabble
-ManaCost:3 R
-Types:Creature Phyrexian Goblin Warrior
-PT:3/3
-K:Haste
-T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 red Phyrexian Goblin creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_phyrexian_goblin
-Oracle:Haste\nWhen Chimney Rabble enters the battlefield, create a 1/1 red Phyrexian Goblin creature token.
+Name:Annihilating Glare
+ManaCost:B
+Types:Sorcery
+K:AlternateAdditionalCost:Sac<1/Creature;Artifact/artifact or creature>:4
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE3
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtsDescription$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
+DeckHas:Ability$Sacrifice
+Oracle:As an additional cost to cast this spell, pay {4} or sacrifice an artifact or creature.\nDestroy target creature or planeswalker.
