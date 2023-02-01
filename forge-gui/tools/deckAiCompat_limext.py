@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-CARDSFOLDER = "/home/agetian/Software/ForgeDeckAnalyzer/cardsfolder"
+CARDSFOLDER = "../../res/cardsfolder"
 DECKFOLDER = "."
 
 import argparse, os, re
