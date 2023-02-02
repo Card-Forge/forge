@@ -60,6 +60,11 @@ public class CardFaceSymbols {
         Forge.getAssets().manaImages().put("PU", FSkinImage.MANA_PHRYX_U);
         Forge.getAssets().manaImages().put("PB", FSkinImage.MANA_PHRYX_B);
         Forge.getAssets().manaImages().put("PG", FSkinImage.MANA_PHRYX_G);
+        Forge.getAssets().manaImages().put("WP", FSkinImage.MANA_PHRYX_W);
+        Forge.getAssets().manaImages().put("RP", FSkinImage.MANA_PHRYX_R);
+        Forge.getAssets().manaImages().put("UP", FSkinImage.MANA_PHRYX_U);
+        Forge.getAssets().manaImages().put("BP", FSkinImage.MANA_PHRYX_B);
+        Forge.getAssets().manaImages().put("GP", FSkinImage.MANA_PHRYX_G);
         Forge.getAssets().manaImages().put("PBG", FSkinImage.MANA_PHRYX_BG);
         Forge.getAssets().manaImages().put("PBR", FSkinImage.MANA_PHRYX_BR);
         Forge.getAssets().manaImages().put("PGU", FSkinImage.MANA_PHRYX_GU);
@@ -70,6 +75,16 @@ public class CardFaceSymbols {
         Forge.getAssets().manaImages().put("PUR", FSkinImage.MANA_PHRYX_UR);
         Forge.getAssets().manaImages().put("PWB", FSkinImage.MANA_PHRYX_WB);
         Forge.getAssets().manaImages().put("PWU", FSkinImage.MANA_PHRYX_WU);
+        Forge.getAssets().manaImages().put("BGP", FSkinImage.MANA_PHRYX_BG);
+        Forge.getAssets().manaImages().put("BRP", FSkinImage.MANA_PHRYX_BR);
+        Forge.getAssets().manaImages().put("GUP", FSkinImage.MANA_PHRYX_GU);
+        Forge.getAssets().manaImages().put("GWP", FSkinImage.MANA_PHRYX_GW);
+        Forge.getAssets().manaImages().put("RGP", FSkinImage.MANA_PHRYX_RG);
+        Forge.getAssets().manaImages().put("RWP", FSkinImage.MANA_PHRYX_RW);
+        Forge.getAssets().manaImages().put("UBP", FSkinImage.MANA_PHRYX_UB);
+        Forge.getAssets().manaImages().put("URP", FSkinImage.MANA_PHRYX_UR);
+        Forge.getAssets().manaImages().put("WBP", FSkinImage.MANA_PHRYX_WB);
+        Forge.getAssets().manaImages().put("WUP", FSkinImage.MANA_PHRYX_WU);
         Forge.getAssets().manaImages().put("2W", FSkinImage.MANA_2W);
         Forge.getAssets().manaImages().put("2U", FSkinImage.MANA_2U);
         Forge.getAssets().manaImages().put("2R", FSkinImage.MANA_2R);

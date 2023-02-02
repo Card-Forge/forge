@@ -1,5 +1,5 @@
 Name:Vault Skirge
-ManaCost:1 PB
+ManaCost:1 BP
 Types:Artifact Creature Phyrexian Imp
 PT:1/1
 K:Flying

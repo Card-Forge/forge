@@ -2,7 +2,7 @@ Name:Lashwrithe
 ManaCost:4
 Types:Artifact Equipment
 K:Living Weapon
-K:Equip:PB PB
+K:Equip:BP BP
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each Swamp you control.
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:BuffedBy:Swamp

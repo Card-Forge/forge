@@ -1,5 +1,5 @@
 Name:Jace, the Perfected Mind
-ManaCost:2 PU U
+ManaCost:2 UP U
 Types:Legendary Planeswalker Jace
 Loyalty:5
 K:Compleated

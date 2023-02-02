@@ -1,5 +1,5 @@
 Name:Vraska, Betrayal's Sting
-ManaCost:4 B PB
+ManaCost:4 B BP
 Types:Legendary Planeswalker Vraska
 Loyalty:6
 K:Compleated
@@ -12,4 +12,4 @@ A:AB$ Poison | Cost$ SubCounter<9/LOYALTY> | ValidTgts$ Player | Planeswalker$ T
 SVar:X:TargetedPlayer$PoisonCounters
 SVar:Difference:Number$9/Minus.X
 DeckHints:Ability$Counters & Keyword$Infect|Toxic|Poisonous
-Oracle:Compleated ({PB} can be paid with {B} or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters.)\n[0]: You draw a card and you lose 1 life. Proliferate.\n[−2]: Target creature becomes a Treasure artifact with "{T}, Sacrifice this artifact: Add one mana of any color" and loses all other card types and abilities.\n[−9]: If target player has fewer than nine poison counters, they get a number of poison counters equal to the difference.
+Oracle:Compleated ({B/P} can be paid with {B} or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters.)\n[0]: You draw a card and you lose 1 life. Proliferate.\n[−2]: Target creature becomes a Treasure artifact with "{T}, Sacrifice this artifact: Add one mana of any color" and loses all other card types and abilities.\n[−9]: If target player has fewer than nine poison counters, they get a number of poison counters equal to the difference.

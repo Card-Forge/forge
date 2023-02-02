@@ -1,5 +1,5 @@
 Name:Ruthless Invasion
-ManaCost:3 PR
+ManaCost:3 RP
 Types:Sorcery
 A:SP$ Effect | StaticAbilities$ KWPump | AILogic$ Evasion | SpellDescription$ Nonartifact creatures can't block this turn.
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.nonArtifact | AddHiddenKeyword$ CARDNAME can't block. | Description$ Nonartifact creatures can't block this turn.

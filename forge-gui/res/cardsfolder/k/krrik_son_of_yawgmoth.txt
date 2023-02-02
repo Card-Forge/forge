@@ -1,5 +1,5 @@
 Name:K'rrik, Son of Yawgmoth
-ManaCost:4 B/P B/P B/P
+ManaCost:4 BP BP BP
 Types:Legendary Creature Phyrexian Horror Minion
 PT:2/2
 K:Lifelink

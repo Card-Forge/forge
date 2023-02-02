@@ -99,7 +99,7 @@ public class CardReaderExperiments {
         for (int i = 0; i < lines.size(); i++) {
             String newLine = lines.get(i).replaceAll("\\{([WUBRG2P])([WUBRG])\\}", "\\{$1/$2\\}")
                     .replaceAll("\\{([WUBRG])/2\\}", "\\{2/$1\\}")
-                    .replaceAll("\\{([WUBRG])/P\\}", "\\{P/$1\\}");
+                    .replaceAll("\\{([WUBRG])/P\\}", "\\{$1/P\\}");
             if (!newLine.equals(lines.get(i))) {
                 updated = true;
                 lines.set(i, newLine);
