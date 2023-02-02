@@ -1,0 +1,6 @@
+Name:Nahiri's Sacrifice
+ManaCost:1 R
+Types:Sorcery
+A:SP$ DealDamage | TargetMin$ X | TargetMax$ X | DividedAsYouChoose$ X | Numdmg$ X | SpellDescription$ Nahiri's Sacrifice deals X damage divided as you choose among any number of target creatures.
+DeckHas:Ability$Sacrifice
+Oracle:As an additional cost to cast this spell, sacrifice an artifact or creature with mana value X.\nNahiri's Sacrifice deals X damage divided as you choose among any number of target creatures.

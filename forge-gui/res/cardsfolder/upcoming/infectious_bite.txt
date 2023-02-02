@@ -1,0 +1,9 @@
+Name:Infectious Bite
+ManaCost:1 G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBFight | StackDescription$ Target creature you control [{c:ThisTargetedCard}] | SpellDescription$ Target creature you control deals damage equal to its power to target creature you don't control. Each opponent gets a poison counter.
+SVar:DBFight:DB$ Damage| ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | NumDmg$ X | StackDescription$ fights target creature you don't control [{c:ThisTargetedCard}]. (Each deals damage equal to its power to the other.)
+SVar:DBPoison:DB$ Poison | Defined$ Opponent
+SVar:X:Targeted$CardPower
+DeckHints:Ability$Proliferate a Keyword$Infect|Toxic
+Oracle:Target creature you control deals damage equal to its power to target creature you don't control. Each opponent gets a poison counter.

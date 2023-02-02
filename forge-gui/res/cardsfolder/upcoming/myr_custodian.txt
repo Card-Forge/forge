@@ -1,0 +1,8 @@
+Name:Myr Custodian
+ManaCost:3
+Types:Artifact Creature Myr
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2. Then each opponent may scry 1. (To scry X, that player looks at the top X cards of their library, then put any number of them on the bottom and the rest on top in any order.)
+SVar:TrigScry:DB$ Scry | ScryNum$ 2 | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 1 | Defined$ Opponent | Optional$ True
+Oracle:When Myr Custodian enters the battlefield, scry 2. Then each opponent may scry 1. (To scry X, that player looks at the top X cards of their library, then put any number of them on the bottom and the rest on top in any order.)
