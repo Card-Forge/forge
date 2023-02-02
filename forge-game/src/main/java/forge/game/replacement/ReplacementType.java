@@ -34,6 +34,7 @@ public enum ReplacementType {
     Mill(ReplaceMill.class),
     Moved(ReplaceMoved.class),
     ProduceMana(ReplaceProduceMana.class),
+    Proliferate(ReplaceProliferate.class),
     Scry(ReplaceScry.class),
     SetInMotion(ReplaceSetInMotion.class),
     Surveil(ReplaceSurveil.class),

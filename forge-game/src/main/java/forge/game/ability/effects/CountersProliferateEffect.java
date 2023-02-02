@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import java.util.List;
+import java.util.Map;
 
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -15,6 +16,7 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerPredicates;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -35,10 +37,22 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         int num = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa) : 1;
-
         final Player p = sa.getActivatingPlayer();
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
+
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(p);
+        repParams.put(AbilityKey.Source, sa);
+        repParams.put(AbilityKey.Num, num);
+
+        switch (game.getReplacementHandler().run(ReplacementType.Proliferate, repParams)) {
+            case NotReplaced:
+                break;
+            case Updated: {
+                num = (int) repParams.get(AbilityKey.Num);
+                break;
+            }
+        }
 
         PlayerController pc = p.getController();
 
