@@ -5,19 +5,10 @@ import json, os
 
 # Note: currently only loads the first json file found in the folder!
 files = os.listdir(".")
-metadata_filename = None
 for filename in files:
     if filename.endswith(".json"):
         metadata_filename = filename
         break
-
-if not metadata_filename:
-    print("This script generates all-prices.txt based on the Scryfall bulk data available at:")
-    print("https://scryfall.com/docs/api/bulk-data")
-    print("Please download the 'Default Cards' JSON file and put it in the same folder as the script.")
-    print("Then run the script to generate the all-prices.txt file.")
-    print("Note: if you have multiple JSON files present, only the first one will be loaded.")
-    exit(1)
 
 print(f"Loading {metadata_filename}...")
 metadata_file = open(metadata_filename, "r")
@@ -31,8 +22,6 @@ always_with_artindex = ["Plains", "Island", "Swamp", "Mountain", "Forest", "Wast
 for object in metadata:
     obj_type = object["object"]
     if obj_type == "card":
-        #print(object)
-        #print("====================")
         card_name = object["name"]
         # split cards use //, other cards with two sides (e.g. DFC) use the front face in Forge
         if card_name.find("//") != -1 and object["layout"] != "split":
@@ -57,7 +46,7 @@ for object in metadata:
             card_price = object["prices"]["tix"].replace(".", "")
         if card_price == None:
             continue
-        if card_price.startswith("00"):
+        elif card_price.startswith("00"):
             card_price = card_price[2:]
         elif card_price.startswith("0"):
             card_price = card_price[1:]
@@ -73,7 +62,6 @@ for object in metadata:
     if card_name in prices[card_set] or card_name in always_with_artindex:
         card_name += f" ({art_indexes[card_set][card_name]})"
     prices[card_set][card_name] = card_price
-    #print(card_name + "|" + card_set + "=" + card_price)
 
 # Merge with the previous price list if appropriate
 if os.path.exists("all-prices.prev"):
