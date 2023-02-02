@@ -3,7 +3,8 @@ ManaCost:3
 Types:Artifact Creature Phyrexian Insect
 PT:2/2
 K:etbCounter:OIL:3
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, you may remove an oil counter from CARDNAME. When you do, target creature you control gains your choice of flying, vigilance, deathtouch, or lifelink until end of turn.
-SVar:TrigPump:AB$ ImmediateTrigger | Cost$ SubCounter<1/OIL> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select a target creature you control | KWChoice$ Flying,Vigilance,Deathtouch,Lifelink
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ DBTrigger | TriggerDescription$ At the beginning of combat on your turn, you may remove an oil counter from CARDNAME. When you do, target creature you control gains your choice of flying, vigilance, deathtouch, or lifelink until end of turn.
+SVar:DBTrigger:AB$ ImmediateTrigger | Cost$ SubCounter<1/OIL> | Execute$ TrigPump
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select a target creature you control | KWChoice$ Flying,Vigilance,Deathtouch,Lifelink
 SVar:PlayMain1:TRUE
 Oracle:Atraxa's Skitterfang enters the battlefield with three oil counters on it.\nAt the beginning of combat on your turn, you may remove an oil counter from Atraxa's Skitterfang. When you do, target creature you control gains your choice of flying, vigilance, deathtouch, or lifelink until end of turn.
