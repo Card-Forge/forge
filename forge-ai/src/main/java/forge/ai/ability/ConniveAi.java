@@ -12,16 +12,67 @@ import forge.game.zone.ZoneType;
 
 public class ConniveAi extends SpellAbilityAi {
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Card source = sa.getHostCard();
-        boolean preferred = true;
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+        if (!ai.canDraw()) {
+            return false; // can't draw anything
+        }
+
         CardCollection list;
         list = CardLists.getTargetableCards(new CardCollection(ai.getCardsIn(ZoneType.Battlefield)), sa);
 
         // Filter AI-specific targets if provided
         list = ComputerUtil.filterAITgts(sa, ai, list, false);
 
-        int totalTargets = list.size();
+        int maxTargets = sa.getMaxTargets();
+        if ("X".equals(sa.getParam("TargetMax")) && "Count$xPaid".equals(sa.getSVar("X"))) {
+            // TODO: consider making the library margin (currently hardcoded to 5) a configurable AI parameter
+            maxTargets = Math.min(list.size(), Math.max(0, ai.getCardsIn(ZoneType.Library).size() - 5));
+            sa.setXManaCostPaid(maxTargets);
+        }
+
+        sa.resetTargets();
+        while (sa.canAddMoreTarget()) {
+            if ((list.isEmpty() && sa.isTargetNumberValid() && !sa.getTargets().isEmpty())) {
+                return true;
+            }
+
+            if (list.isEmpty()) {
+                // Still an empty list, but we have to choose something (mandatory); expand targeting to
+                // include AI's own cards to see if there's anything targetable (e.g. Plague Belcher).
+                list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
+            }
+
+            if (list.isEmpty()) {
+                // Not mandatory, or the the list was regenerated and is still empty,
+                // so return whether or not we found enough targets
+                return sa.isTargetNumberValid();
+            }
+
+            Card choice = ComputerUtilCard.getBestCreatureAI(list);
+
+            if (choice != null) {
+                sa.getTargets().add(choice);
+                list.remove(choice);
+            } else {
+                // Didn't want to choose anything?
+                list.clear();
+            }
+        }
+        return !sa.getTargets().isEmpty() && sa.isTargetNumberValid();
+    }
+
+    @Override
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        if (!ai.canDraw() && !mandatory) {
+            return false; // can't draw anything
+        }
+
+        boolean preferred = true;
+        CardCollection list;
+        list = CardLists.getTargetableCards(new CardCollection(ai.getCardsIn(ZoneType.Battlefield)), sa);
+
+        // Filter AI-specific targets if provided
+        list = ComputerUtil.filterAITgts(sa, ai, list, false);
 
         sa.resetTargets();
         while (sa.canAddMoreTarget()) {
