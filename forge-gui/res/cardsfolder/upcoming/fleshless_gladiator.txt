@@ -2,7 +2,8 @@ Name:Fleshless Gladiator
 ManaCost:1 B
 Types:Creature Phyrexian Skeleton
 PT:2/2
-A:AB$ ChangeZone | Cost$ 2 B | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | ConditionCheckSVar x | ConditionSVarCompare$ GE3 | PrecostDesc$ Corrupted - | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped. You lose 1 life. Activate only if an opponent has three or more poison counters.
+A:AB$ ChangeZone | Cost$ 2 B | Defined$ Self | ActivationZone$ Graveyard | Origin$ Graveyard | Destination$ Battlefield | CheckSVar$ X | ConditionSVarCompare$ GE3 | PrecostDesc$ Corrupted - | Tapped$ True | SubAbility$ DBLoseLife | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped. You lose 1 life. Activate only if an opponent has three or more poison counters.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
 SVar:X:PlayerCountOpponents$HighestPoisonCounters
 DeckHas:Ability$Graveyard
 DeckHints:Keyword$Toxic|Infect
