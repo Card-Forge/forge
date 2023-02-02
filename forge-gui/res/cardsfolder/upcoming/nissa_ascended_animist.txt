@@ -1,5 +1,5 @@
 Name:Nissa, Ascended Animist
-ManaCost:3 G G PG PG
+ManaCost:3 G G GP GP
 Types:Legendary Planeswalker Nissa
 Loyalty:7
 K:Compleated

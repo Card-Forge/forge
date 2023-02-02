@@ -1,5 +1,5 @@
 Name:Phyrexian Metamorph
-ManaCost:3 PU
+ManaCost:3 UP
 Types:Artifact Creature Phyrexian Shapeshifter
 PT:0/0
 K:ETBReplacement:Copy:DBCopy:Optional

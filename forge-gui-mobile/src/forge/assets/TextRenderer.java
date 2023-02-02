@@ -61,6 +61,16 @@ public class TextRenderer {
         Forge.getAssets().symbolLookup().put("P/U/R", FSkinImage.MANA_PHRYX_UR);
         Forge.getAssets().symbolLookup().put("P/W/B", FSkinImage.MANA_PHRYX_WB);
         Forge.getAssets().symbolLookup().put("P/W/U", FSkinImage.MANA_PHRYX_WU);
+        Forge.getAssets().symbolLookup().put("B/G/P", FSkinImage.MANA_PHRYX_BG);
+        Forge.getAssets().symbolLookup().put("B/R/P", FSkinImage.MANA_PHRYX_BR);
+        Forge.getAssets().symbolLookup().put("G/U/P", FSkinImage.MANA_PHRYX_GU);
+        Forge.getAssets().symbolLookup().put("G/W/P", FSkinImage.MANA_PHRYX_GW);
+        Forge.getAssets().symbolLookup().put("R/G/P", FSkinImage.MANA_PHRYX_RG);
+        Forge.getAssets().symbolLookup().put("R/W/P", FSkinImage.MANA_PHRYX_RW);
+        Forge.getAssets().symbolLookup().put("U/B/P", FSkinImage.MANA_PHRYX_UB);
+        Forge.getAssets().symbolLookup().put("U/R/P", FSkinImage.MANA_PHRYX_UR);
+        Forge.getAssets().symbolLookup().put("W/B/P", FSkinImage.MANA_PHRYX_WB);
+        Forge.getAssets().symbolLookup().put("W/U/P", FSkinImage.MANA_PHRYX_WU);
         for (int i = 0; i <= 20; i++) {
             Forge.getAssets().symbolLookup().put(String.valueOf(i), FSkinImage.valueOf("MANA_" + i));
         }
