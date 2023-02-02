@@ -3,13 +3,39 @@
 
 import json, os
 
+# Set this to the current Forge editions folder (under res)
+EDITIONS_FOLDER = "../res/editions"
+
+# Load the editions and map Scryfall codes to the set codes used in Forge
+set_map = {}
+for filename in os.listdir(EDITIONS_FOLDER):
+    if filename.endswith(".txt"):
+        ed_file = open(os.path.join(EDITIONS_FOLDER, filename), "r")
+        ed_data = ed_file.readlines()
+        ed_file.close()
+        forge_code = "????"
+        scryfall_code = "????"
+        for line in ed_data:
+            if line.startswith("[cards]"):
+                break
+            elif line.lower().startswith("code="):
+                forge_code = line.split("=")[1].strip()
+            elif line.lower().startswith("scryfallcode="):
+                scryfall_code = line.split("=")[1].strip()
+        set_map[scryfall_code] = forge_code
+        
 # Note: currently only loads the first json file found in the folder!
+metadata_file = None
 files = os.listdir(".")
 for filename in files:
     if filename.endswith(".json"):
         metadata_filename = filename
         break
 
+if metadata_file is None:
+    print("Please download the Default Cards bulk data json file from https://scryfall.com/docs/api/bulk-data and place it in the script folder.")
+    exit(1)
+    
 print(f"Loading {metadata_filename}...")
 metadata_file = open(metadata_filename, "r")
 metadata = json.load(metadata_file)
@@ -50,6 +76,9 @@ for object in metadata:
             card_price = card_price[2:]
         elif card_price.startswith("0"):
             card_price = card_price[1:]
+    # tweak the card set to the Forge notation
+    if card_set in set_map:
+        card_set = set_map[card_set]
     # add a key to the prices dictionary, per set
     if not card_set in prices:
         prices[card_set] = {}
