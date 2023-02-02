@@ -2,7 +2,7 @@ Name:Mesmerizing Dose
 ManaCost:1 U U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted creature, then proliferate.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBProliferate
 SVar:DBProliferate:DB$ Proliferate
