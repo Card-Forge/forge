@@ -1,0 +1,8 @@
+Name:Molten Rebuke
+ManaCost:4 R
+Types:Sorcery
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBTap,DBDmg
+SVar:DBDamage:DB$ Damage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 5 | SpellDescription$ SpellDescription$ CARDNAME deals 5 damage to target creature or planeswalker.
+SVar:DBDestroy
+SpellDescription$ Destroy target Equipment.
+Oracle:Choose one or both—\n• Molten Rebuke deals 5 damage to target creature or planeswalker.\n• Destroy target Equipment.

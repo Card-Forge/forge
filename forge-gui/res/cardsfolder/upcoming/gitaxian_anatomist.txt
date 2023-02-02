@@ -1,0 +1,8 @@
+Name:Gitaxian Anatomist
+ManaCost:3 U
+Types:Creature Phyrexian Wizard
+PT:2/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange| TriggerDescription$ When CARDNAME enters the battlefield, you may tap it. If you do, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+SVar:TrigProliferate:DB$ Proliferate | Cost$ Tap<1/CARDNAME>
+DeckHas:Ability$Proliferate
+Oracle:When Gitaxian Anatomist enters the battlefield, you may tap it. If you do, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
