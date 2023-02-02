@@ -1,8 +1,12 @@
 package forge.ai.simulation;
 
 import forge.game.spellability.LandAbility;
+
+import java.util.ArrayList;
 import java.util.List;
 
+import forge.item.PaperCard;
+import forge.model.FModel;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
@@ -370,6 +374,84 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(desired, sa.getTargetCard());
     }
+
+    @Test
+    public void ensureAllLandsArePlayable() {
+        initAndCreateGame();
+
+        System.out.println("Adding lands to hand");
+
+        // add every land to the player's hand
+//        SimulationController.MAX_DEPTH = 0;
+        List<Card> funky = new ArrayList<>();
+        String previous = "";
+        for (PaperCard c : FModel.getMagicDb().getCommonCards().getAllCards()) {
+            // reset the game
+            Game game = resetGame();
+            Player p = game.getPlayers().get(1);
+            Player opponent = game.getPlayers().get(0);
+            opponent.setLife(20, null);
+
+            // add one of each basic to the battlefield so that bouncelands and similar work
+            addCard("Plains", p);
+            addCard("Island", p);
+            addCard("Swamp", p);
+            addCard("Mountain", p);
+            addCard("Forest", p);
+            // Add basics to library to ensure fetches work
+            addCardToZone("Plains", p, ZoneType.Library);
+            addCardToZone("Island", p, ZoneType.Library);
+            addCardToZone("Swamp", p, ZoneType.Library);
+            addCardToZone("Mountain", p, ZoneType.Library);
+            addCardToZone("Forest", p, ZoneType.Library);
+
+            game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+            game.getAction().checkStateEffects(true);
+
+            // Only add one version at a time
+            if (c.getName().equals(previous)) {
+                continue;
+            }
+            previous = c.getName();
+            if (c.getRules().getType().isLand()) {
+                // Skip glacial chasm, it's really weird.
+                if (c.getName().equals("Glacial Chasm")) {
+                    System.out.println("Skipping " + c.getName());
+                    continue;
+                }
+
+                addCardToZone(c.getName(), p, ZoneType.Hand);
+
+                // Once the card has been added to the hand, test it
+
+                GameStateEvaluator.Score s = new GameStateEvaluator().getScoreForGameState(game, p);
+                System.out.println("Starting score: " + s);
+                SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+                List<SpellAbility> candidateSAs = picker.getCandidateSpellsAndAbilities();
+                for (int i = 0; i < candidateSAs.size(); i++) {
+                    SpellAbility sa = candidateSAs.get(i);
+                    if (sa.isActivatedAbility()) {
+                        continue;
+                    }
+                    GameStateEvaluator.Score value = picker.evaluateSa(new SimulationController(s), game.getPhaseHandler().getPhase(), candidateSAs, i);
+                    System.out.println("sa: " + sa.getHostCard() + ", value: " + value);
+                    if (!(value.value > s.value)) {
+                        funky.add(sa.getHostCard());
+                    }
+                }
+            }
+        }
+
+        // ensure that every land play has a higher evaluation than doing nothing
+        System.out.println(funky);
+        for (Card c : funky) {
+            GameStateEvaluator gse = new GameStateEvaluator();
+            Game game = resetGame();
+            System.out.println(c.getName() + ": " + gse.evalCard(game, game.getStartingPlayer(), c));
+        }
+        AssertJUnit.assertEquals(0, funky.size());
+    }
+
 
     @Test
     public void testPlayRememberedCardsLand() {
