@@ -32,7 +32,7 @@ for filename in files:
         metadata_filename = filename
         break
 
-if metadata_file is None:
+if metadata_filename is None:
     print("Please download the Default Cards bulk data json file from https://scryfall.com/docs/api/bulk-data and place it in the script folder.")
     exit(1)
     
