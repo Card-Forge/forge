@@ -2,8 +2,10 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.stage.GameHUD;
+import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 
 /**
@@ -20,6 +22,7 @@ public class InnScene extends UIScene {
 
     TextraButton tempHitPointCost, sell, leave;
     Image healIcon, sellIcon, leaveIcon;
+    private TextraLabel playerGold,playerShards;
 
     private InnScene() {
 
@@ -30,7 +33,8 @@ public class InnScene extends UIScene {
         ui.onButtonPress("sell", InnScene.this::sell);
         leave = ui.findActor("done");
         sell = ui.findActor("sell");
-
+        playerGold = Controls.newAccountingLabel(ui.findActor("playerGold"), false);
+        playerShards = Controls.newAccountingLabel(ui.findActor("playerShards"),true);
 
         leaveIcon = ui.findActor("leaveIcon");
         healIcon = ui.findActor("healIcon");
@@ -45,7 +49,9 @@ public class InnScene extends UIScene {
     }
 
     public void potionOfFalseLife() {
-        Current.player().potionOfFalseLife();
+        if (Current.player().potionOfFalseLife()){
+            refreshStatus();
+        }
     }
 
     @Override
@@ -59,12 +65,16 @@ public class InnScene extends UIScene {
         super.render();
     }
 
+    int tempHealthCost = 0;
+
     @Override
     public void enter() {
         super.enter();
-        int tempHealthCost = Current.player().falseLifeCost();
-        if (tempHealthCost < 0) // if computed negative set 250 as minimum
-            tempHealthCost = 250;
+        refreshStatus();
+    }
+
+    private void refreshStatus(){
+        tempHealthCost = Current.player().falseLifeCost();
         boolean purchaseable = Current.player().getMaxLife() == Current.player().getLife() &&
                 tempHealthCost <= Current.player().getGold();
 
@@ -75,6 +85,5 @@ public class InnScene extends UIScene {
     private void sell() {
         Forge.switchScene(ShopScene.instance());
     }
-
 
 }

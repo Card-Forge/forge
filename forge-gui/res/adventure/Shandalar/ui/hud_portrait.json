@@ -65,7 +65,7 @@
     },
     {
       "type": "Label",
-      "name": "mana",
+      "name": "shards",
       "font": "default",
       "width": 48,
       "height": 3,

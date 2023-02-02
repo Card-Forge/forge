@@ -1,0 +1,11 @@
+Name:Cinderslash Ravager
+ManaCost:4 R G
+Types:Creature Phyrexian Warrior
+PT:5/5
+K:Vigilance
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each permanent you control with oil counters on it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to each creature your opponents control.
+SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature.OppCtrl | NumDmg$ 1 
+SVar:X:Count$Valid Permanent.YouCtrl+counters_GE1_OIL
+DeckHints:Ability$Counters
+Oracle:This spell costs {1} less to cast for each permanent you control with oil counters on it.\nVigilance\nWhen Cinderslash Ravager enters the battlefield, it deals 1 damage to each creature your opponents control.

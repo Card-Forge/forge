@@ -65,9 +65,9 @@
       "name": "done",
       "text": "tr(lblBack)",
       "binding": "Back",
-      "x": 175,
+      "x": 180,
       "y": 150,
-      "width": 70,
+      "width": 90,
       "height": 20
     },
     {
@@ -139,11 +139,48 @@
       "height": 20
     },
     {
+      "type": "Label",
+      "name": "playerGold", 
+	  "style":"background",
+      "x": 180,
+      "y": 0,
+      "width": 90,
+      "height": 20
+    },
+	{
       "type": "TextButton",
-      "name": "pull",
-      "text": "tr(lblDraw)",
       "selectable": true,
+      "name": "pullUsingGold",
+      "binding": "Status",
+      "text": "tr(lblDraw) [+gold]",  
+      "x": 180,
+      "y": 25,
+      "width": 90,
+      "height": 20
+    },
+	{
+      "type": "Label",
+      "name": "playerShards", 
+	  "style":"background",
+      "x": 180,
+      "y": 50,
+      "width": 90,
+      "height": 20
+    },
+	{
+      "type": "TextButton",
+      "selectable": true,
+      "name": "pullUsingShards",
       "binding": "Equip",
+      "text": "tr(lblDraw) [+shards]",  
+      "x": 180,
+      "y": 75,
+      "width": 90,
+      "height": 20
+    },
+	{
+      "type": "Label",
+      "name": "poolSize", 
       "x": 16,
       "y": 150,
       "width": 97,

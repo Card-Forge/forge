@@ -173,21 +173,24 @@ public class ReplacementHandler {
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
             public boolean visit(Card crd) {
-                final Card c = preList.get(crd);
+                Card c = preList.get(crd);
+                Zone cardZone = game.getZoneOf(c);
+                Zone lkiZone = game.getChangeZoneLKIInfo(c).getLastKnownZone();
+
+                // only when not prelist
+                if (c == crd && lkiZone.is(ZoneType.Battlefield) && event == ReplacementType.Moved && 
+                        runParams.containsKey(AbilityKey.LastStateBattlefield) && runParams.get(AbilityKey.LastStateBattlefield) != null) {
+                    Card lastState = ((CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield)).get(crd);
+                    // no LKI found for this card so it shouldn't apply, this can happen during simultaneous zone changes
+                    if (lastState == crd) {
+                        return true;
+                    }
+                    // use the LKI because it has the right RE from the state before the effect started
+                    c = lastState;
+                    cardZone = lkiZone;
+                }
 
                 for (final ReplacementEffect replacementEffect : c.getReplacementEffects()) {
-                    Zone cardZone;
-                    // Use "CheckLKIZone" parameter to test for effects that care about where the card was last (e.g. Kalitas, Traitor of Ghet
-                    // getting hit by mass removal should still produce tokens).
-                    if ("True".equals(replacementEffect.getParam("CheckSelfLKIZone"))) {
-                        cardZone = game.getChangeZoneLKIInfo(c).getLastKnownZone();
-                        if (cardZone.is(ZoneType.Battlefield) && runParams.containsKey(AbilityKey.LastStateBattlefield) && runParams.get(AbilityKey.LastStateBattlefield) != null && !((CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield)).contains(crd)) {
-                            continue;
-                        }
-                    } else {
-                        cardZone = game.getZoneOf(c);
-                    }
-
                     // Replacement effects that are tied to keywords (e.g. damage prevention effects - if the keyword is removed, the replacement
                     // effect should be inactive)
                     if (replacementEffect.hasParam("TiedToKeyword")) {

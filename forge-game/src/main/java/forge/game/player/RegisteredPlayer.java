@@ -26,6 +26,7 @@ public class RegisteredPlayer {
     
     private int startingLife = 20;
     private int startingHand = 7;
+    private int manaShards = 0;
     private Iterable<IPaperCard> cardsOnBattlefield = null;
     private Iterable<IPaperCard> extraCardsOnBattlefield = null;
     private Iterable<? extends IPaperCard> schemes = null;
@@ -56,6 +57,14 @@ public class RegisteredPlayer {
 
     public final void setStartingLife(int startingLife) {
         this.startingLife = startingLife;
+    }
+
+    public final int getManaShards() {
+        return manaShards;
+    }
+
+    public final void setManaShards(int manaShards) {
+        this.manaShards = manaShards;
     }
 
     public final void setCardsOnBattlefield(Iterable<IPaperCard> cardsOnTable) {

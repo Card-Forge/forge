@@ -22,7 +22,7 @@ K:Flying
 T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl+Other+withFlying | Execute$ DBGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack with one or more other creatures with flying, you gain twice that much life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:TriggerObjectsAttackers$Valid Creature.withFlying/Twice
-DeckHas:Ability$Lifegain
+DeckHas:Ability$LifeGain
 Oracle:Flying\nWhenever you attack with one or more other creatures with flying, you gain twice that much life.
 
 SPECIALIZE:BLUE

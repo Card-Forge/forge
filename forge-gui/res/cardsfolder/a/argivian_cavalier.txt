@@ -1,0 +1,9 @@
+Name:Argivian Cavalier
+ManaCost:2 W
+Types:Creature Orc Knight
+PT:2/2
+K:Enlist
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_soldier
+DeckHas:Ability$Token & Type$Soldier
+Oracle:Enlist (As this creature attacks, you may tap a nonattacking creature you control without summoning sickness. When you do, add its power to this creature's until end of turn.)\nWhen Argivian Cavalier enters the battlefield, create a 1/1 white Soldier creature token.

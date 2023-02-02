@@ -31,6 +31,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameStage;
 import forge.game.IIdentifiable;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -38,9 +39,11 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardState;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
@@ -63,6 +66,8 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     private final List<Player> ignoreEffectPlayers = Lists.newArrayList();
     private int mayPlayTurn = 0;
 
+    private SpellAbility payingTrigSA;
+
     @Override
     public final int getId() {
         return id;
@@ -76,6 +81,15 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     @Override
     public boolean equals(final Object obj) {
         return obj instanceof StaticAbility && this.id == ((StaticAbility) obj).id;
+    }
+
+    public SpellAbility getPayingTrigSA() {
+        // already cached?
+        if (payingTrigSA == null && hasParam("Trigger")) {
+            payingTrigSA = AbilityFactory.getAbility(getSVar(getParam("Trigger")), getHostCard());
+            payingTrigSA.setIntrinsic(true);
+        }
+        return payingTrigSA;
     }
 
     /**
@@ -311,11 +325,21 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return false;
     }
 
-    public final Cost getAttackCost(final Card attacker, final GameEntity target) {
-        if (this.isSuppressed() || !getParam("Mode").equals("CantAttackUnless") || !this.checkConditions()) {
+    public final Cost getAttackCost(final Card attacker, final GameEntity target, final List<Card> attackersWithOptionalCost) {
+        if (!getParam("Mode").equals("CantAttackUnless") && (!getParam("Mode").equals("OptionalAttackCost") || !attackersWithOptionalCost.contains(attacker))) {
+            return null;
+        }
+        if (this.isSuppressed() || !this.checkConditions()) {
             return null;
         }
         return StaticAbilityCantAttackBlock.getAttackCost(this, attacker, target);
+    }
+
+    public final boolean hasAttackCost(final Card attacker, Class<? extends CostPart> costType) {
+        if (this.isSuppressed() || !getParam("Mode").equals("OptionalAttackCost") || !this.checkConditions()) {
+            return false;
+        }
+        return StaticAbilityCantAttackBlock.getAttackCost(this, attacker, null).hasSpecificCostType(costType);
     }
 
     public final Cost getBlockCost(final Card blocker, final Card attacker) {
@@ -599,6 +623,14 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         .result();
     }
 
+    @Override
+    public void setHostCard(Card host) {
+        super.setHostCard(host);
+        if (payingTrigSA != null) {
+            payingTrigSA.setHostCard(host);
+        }
+    }
+
     public StaticAbility copy(Card host, final boolean lki) {
         StaticAbility clone = null;
         try {
@@ -606,6 +638,9 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             clone.id = lki ? id : nextId();
 
             copyHelper(clone, host);
+
+            // reset to force refresh if needed
+            clone.payingTrigSA = null;
 
             clone.layers = this.generateLayer();
         } catch (final CloneNotSupportedException e) {

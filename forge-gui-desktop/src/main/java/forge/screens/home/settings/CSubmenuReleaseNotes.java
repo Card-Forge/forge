@@ -70,7 +70,6 @@ public enum CSubmenuReleaseNotes implements ICDoc {
      * Returns content of README.txt (release) or CHANGES.txt (snapshot).
      */
     private static String getReleaseNotes() {
-
         final String filename = ForgeConstants.CHANGES_FILE_NO_RELEASE;
         final String filePath = FileUtil.pathCombine(System.getProperty("user.dir"), filename);
 
@@ -87,7 +86,6 @@ public enum CSubmenuReleaseNotes implements ICDoc {
         } else {
             notes = filePath + "\nis MISSING!";
         }
-
         return notes;
 
     }

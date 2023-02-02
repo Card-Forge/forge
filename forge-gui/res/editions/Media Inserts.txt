@@ -51,3 +51,4 @@ ScryfallCode=PMEI
 48 R Harald, King of Skemfar @Grzegorz Rutkowski
 49 R Usher of the Fallen @Anastasia Ovchinnikova
 50 R Frantic Search @Jeff Miracola
+51 R Mental Misstep @Erica Yang

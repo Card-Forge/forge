@@ -154,7 +154,7 @@ public static ConsoleCommandInterpreter getInstance()
             Current.player().giveGold(amount);
             return "Added "+amount+" gold";
         });
-        registerCommand(new String[]{"give", "mana"}, s -> {
+        registerCommand(new String[]{"give", "shards"}, s -> {
             if(s.length<1) return "Command needs 1 parameter: Amount.";
             int amount;
             try {
@@ -163,8 +163,8 @@ public static ConsoleCommandInterpreter getInstance()
             catch (Exception e) {
                 return "Can not convert " + s[0] + " to number";
             }
-            Current.player().addMaxMana(amount);
-            return "Added " + amount + " max mana";
+            Current.player().addShards(amount);
+            return "Added " + amount + " shards";
         });
         registerCommand(new String[]{"give", "life"}, s -> {
             if(s.length<1) return "Command needs 1 parameter: Amount.";
@@ -279,26 +279,26 @@ public static ConsoleCommandInterpreter getInstance()
             return "Player healed to " + Current.player().getLife() + "/" + Current.player().getMaxLife();
         });
 
-        registerCommand(new String[]{"getMana", "amount"}, s -> {
+        registerCommand(new String[]{"getShards", "amount"}, s -> {
             if(s.length<1) return "Command needs 1 parameter: Amount";
             int value;
             try { value = Integer.parseInt(s[0]); }
             catch (Exception e) { return "Can not convert " + s[0] + " to integer"; }
-            Current.player().addMana(value);
-            return "Player healed to " + Current.player().getLife() + "/" + Current.player().getMaxLife();
+            Current.player().addShards(value);
+            return "Player now has " + Current.player().getShards() + " shards";
         });
-        registerCommand(new String[]{"getMana", "percent"}, s -> {
-            if(s.length<1) return "Command needs 1 parameter: Amount";
-            float value = 0;
-            try { value = Float.parseFloat(s[0]); }
-            catch (Exception e) { return "Can not convert " + s[0] + " to integer"; }
-            Current.player().addManaPercent(value);
-            return "Player healed to " + Current.player().getLife() + "/" + Current.player().getMaxLife();
-        });
-        registerCommand(new String[]{"getMana", "full"}, s -> {
-            Current.player().addManaPercent(1.0f);
-            return "Player healed to " + Current.player().getLife() + "/" + Current.player().getMaxLife();
-        });
+//        registerCommand(new String[]{"getMana", "percent"}, s -> {
+//            if(s.length<1) return "Command needs 1 parameter: Amount";
+//            float value = 0;
+//            try { value = Float.parseFloat(s[0]); }
+//            catch (Exception e) { return "Can not convert " + s[0] + " to integer"; }
+//            Current.player().addManaPercent(value);
+//            return "Player healed to " + Current.player().getLife() + "/" + Current.player().getMaxLife();
+//        });
+//        registerCommand(new String[]{"getMana", "full"}, s -> {
+//            Current.player().addManaPercent(1.0f);
+//            return "Player healed to " + Current.player().getLife() + "/" + Current.player().getMaxLife();
+//        });
         registerCommand(new String[]{"debug","map"}, s -> {
             GameHUD.getInstance().setDebug(true);
             return "Debug map ON";
@@ -356,7 +356,7 @@ public static ConsoleCommandInterpreter getInstance()
             if(!MapStage.getInstance().isInMap())
                 return "Only supported for PoI";
             MapStage.getInstance().deleteObject(id);
-            return "Femoved enemy "+s[0];
+            return "Removed enemy "+s[0];
         });
     }
 }

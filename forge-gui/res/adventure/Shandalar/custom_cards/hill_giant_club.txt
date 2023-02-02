@@ -1,0 +1,10 @@
+Name:Hill Giant Club
+ManaCost:no cost
+Types:Artifact
+S:Mode$ Continuous | Description$ Provided by Hill Giant Club (Equipped Item - Right)
+A:AB$ Effect | Cost$ PayShards<2> Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | ExileOnMoved$ Battlefield | StaticAbilities$ UnblockableLE2 | RememberObjects$ Targeted | StackDescription$ {c:Targeted} can't be blocked by creatures with power 2 or less this turn. | SpellDescription$ Targe creature can't be blocked by creatures with power 2 or less this turn.
+SVar:UnblockableLE2:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | ValidBlocker$ Creature.powerLE2 | Description$ {c:Targeted} can't be blocked by creatures with power 2 or less this turn.
+Oracle: Provided by Hill Giant Club. Pay {M}{M}, sacrifice Hill Giant Club: Target creature can't be blocked by creatures with power 2 or less this turn.
+
+
+

@@ -16,13 +16,12 @@ import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
 import forge.deck.io.DeckSerializer;
 import forge.item.PaperCard;
+import forge.item.SealedProduct;
+import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import static forge.adventure.data.RewardData.generateAllCards;
@@ -48,9 +47,11 @@ public class CardUtil {
         private final List<Integer> manaCosts =new ArrayList<>();
         private final Pattern text;
         private final boolean matchAllSubTypes;
+        private final boolean matchAllColors;
         private  int colors;
         private final ColorType colorType;
         private final boolean shouldBeEqual;
+        private final List<String> deckNeeds=new ArrayList<>();
 
         @Override
         public boolean apply(final PaperCard card) {
@@ -62,6 +63,14 @@ public class CardUtil {
                 return !this.shouldBeEqual;
             if(this.text!=null&& !this.text.matcher(card.getRules().getOracleText()).find())
                 return !this.shouldBeEqual;
+
+            if(this.matchAllColors)
+            {
+                if(!card.getRules().getColor().hasAllColors(this.colors))
+                {
+                    return !this.shouldBeEqual;
+                }
+            }
 
             if(this.colors!= MagicColor.ALL_COLORS)
             {
@@ -162,17 +171,49 @@ public class CardUtil {
                     return !this.shouldBeEqual;
             }
 
+            if(!this.deckNeeds.isEmpty())
+            {
+                boolean found = false;
+                for(String need:this.deckNeeds)
+                {
+                    //FormatExpected: X$Y, where X is DeckHints.Type and Y is a string descriptor
+                    String[] parts = need.split("\\$");
+
+                    if (parts.length != 2){
+                        continue;
+                    }
+                    DeckHints.Type t = DeckHints.Type.valueOf(parts[0].toUpperCase());
+
+                    DeckHints hints = card.getRules().getAiHints().getDeckHints();
+                    if (hints != null && hints.contains(t, parts[1])){
+                        found=true;
+                        break;
+                    }
+                }
+                if(!found)
+                    return !this.shouldBeEqual;
+            }
 
 
             return this.shouldBeEqual;
         }
-
+        private Pattern getPattern(RewardData type) {
+            if (type.cardText == null || type.cardText.isEmpty())
+                return null;
+            try {
+                return Pattern.compile(type.cardText, Pattern.CASE_INSENSITIVE);
+            } catch (Exception e) {
+                System.err.println("[" + type.cardName + "|" + type.itemName + "]\n" + e);
+                return null;
+            }
+        }
         public CardPredicate(final RewardData type, final boolean wantEqual) {
             this.matchAllSubTypes=type.matchAllSubTypes;
+            this.matchAllColors=type.matchAllColors;
             this.shouldBeEqual = wantEqual;
             for(int i=0;type.manaCosts!=null&&i<type.manaCosts.length;i++)
                 manaCosts.add(type.manaCosts[i]);
-            text = type.cardText==null||type.cardText.isEmpty()?null:Pattern.compile(type.cardText, Pattern.CASE_INSENSITIVE);
+            text = getPattern(type);
             if(type.colors==null||type.colors.length==0)
             {
                 this.colors=MagicColor.ALL_COLORS;
@@ -227,34 +268,37 @@ public class CardUtil {
             {
                 this.colorType=ColorType.Any;
             }
+            if(type.deckNeeds!=null&&type.deckNeeds.length!=0){
+                deckNeeds.addAll(Arrays.asList(type.deckNeeds));
+            }
         }
+    }
+
+    public static List<PaperCard> getPredicateResult(Iterable<PaperCard> cards,final RewardData data)
+    {
+        List<PaperCard> result = new ArrayList<>();
+        CardPredicate pre = new CardPredicate(data, true);
+
+        for (final PaperCard item : cards)
+        {
+            if(pre.apply(item))
+                result.add(item);
+        }
+        return result;
     }
 
     public static List<PaperCard> generateCards(Iterable<PaperCard> cards,final RewardData data, final int count)
     {
-
         final List<PaperCard> result = new ArrayList<>();
-
-
-        for (int i=0;i<count;i++) {
-
-            CardPredicate pre=new CardPredicate(data, true);
-            PaperCard card = null;
-            int lowest = Integer.MAX_VALUE;
-            for (final PaperCard item : cards)
-            {
-                if(!pre.apply(item))
-                    continue;
-                int next = WorldSave.getCurrentSave().getWorld().getRandom().nextInt();
-                if(next < lowest) {
-                    lowest = next;
-                    card = item;
+        List<PaperCard> pool = getPredicateResult(cards, data);
+        if (pool.size() > 0) {
+            for (int i = 0; i < count; i++) {
+                PaperCard candidate = pool.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(pool.size()));
+                if (candidate != null) {
+                    result.add(candidate);
                 }
             }
-            if (card != null )
-                result.add(card);
         }
-
         return result;
     }
     public static int getCardPrice(PaperCard card)
@@ -286,16 +330,16 @@ public class CardUtil {
             return reward.getItem().cost;
         if(reward.getType()== Reward.Type.Life)
             return reward.getCount()*500;
-        if(reward.getType()== Reward.Type.Mana)
+        if(reward.getType()== Reward.Type.Shards)
             return reward.getCount()*500;
         if(reward.getType()== Reward.Type.Gold)
             return reward.getCount();
         return 1000;
     }
 
-    static List<PrintSheet> jumpStartSheetsCandidates=null;
-    public static Deck generateDeck(GeneratedDeckData data)
+    public static Deck generateDeck(GeneratedDeckData data, CardEdition starterEdition, boolean discourageDuplicates)
     {
+        List<String> editionCodes = (starterEdition != null)?Arrays.asList(starterEdition.getCode(), starterEdition.getCode2()):Arrays.asList("JMP", "J22", "DMU","BRO");
         Deck deck= new Deck(data.name);
         if(data.mainDeck!=null)
         {
@@ -307,11 +351,16 @@ public class CardUtil {
         if(data.jumpstartPacks!=null)
         {
             deck.getOrCreate(DeckSection.Main);
+
+            Map <String, List<PaperCard>> packCandidates=null;
+            List<String> usedPackNames=new ArrayList<String>();
+
             for(int i=0;i<data.jumpstartPacks.length;i++)
             {
 
+                final byte targetColor = MagicColor.fromName(data.jumpstartPacks[i]);
                 String targetName;
-                switch (MagicColor.fromName(data.jumpstartPacks[i]))
+                switch (targetColor)
                 {
                     default:
                     case MagicColor.WHITE:  targetName = "Plains";  break;
@@ -320,19 +369,40 @@ public class CardUtil {
                     case MagicColor.RED:    targetName = "Mountain";break;
                     case MagicColor.GREEN:  targetName = "Forest";  break;
                 }
-                if(jumpStartSheetsCandidates==null)
+
+                packCandidates=new HashMap<>();
+                for(SealedProduct.Template template : StaticData.instance().getSpecialBoosters())
                 {
-                    jumpStartSheetsCandidates=new ArrayList<>();
-                    for(PrintSheet sheet : StaticData.instance().getPrintSheets())
-                    {
-                        if(sheet.containsCardNamed(targetName,3) && sheet.getName().startsWith("JMP") && sheet.all().size() == 20)//dodge the rainbow jumpstart sheet and the sheet for every card
-                        {
-                            jumpStartSheetsCandidates.add(sheet);
+                    if (!editionCodes.contains(template.getEdition().split("\\s",2)[0]))
+                        continue;
+                    List<PaperCard> packContents = new UnOpenedProduct(template).get();
+                    if (packContents.size() < 20 | packContents.size() > 25)
+                        continue;
+                    if (packContents.stream().filter(x -> x.getName().equals(targetName)).count() >=3)
+                        packCandidates.putIfAbsent(template.getEdition(), packContents);
+                }
+                List<PaperCard> selectedPack;
+                if (discourageDuplicates) {
+                    Map <String, List<PaperCard>> filteredPackCandidates= new HashMap<>();
+                    for (java.util.Map.Entry<String, List<PaperCard>>  entry: packCandidates.entrySet()){
+                        if (!usedPackNames.contains(entry.getKey())){
+                            filteredPackCandidates.put(entry.getKey(), entry.getValue()); //deep copy so that packCandidates can be used if filtered ends up being empty
                         }
                     }
+                    //Only re-use a pack if all possibilities have already been chosen
+                    if (filteredPackCandidates.size() == 0)
+                        filteredPackCandidates = packCandidates;
+                    Object[] keys = filteredPackCandidates.keySet().toArray();
+
+                    String keyName = (String)keys[Current.world().getRandom().nextInt(keys.length)];
+                    usedPackNames.add(keyName);
+                    selectedPack = filteredPackCandidates.remove(keyName);
                 }
-                PrintSheet sheet=jumpStartSheetsCandidates.get(Current.world().getRandom().nextInt(jumpStartSheetsCandidates.size()));
-                deck.getOrCreate(DeckSection.Main).addAllFlat(sheet.all());
+                else{
+                    Object[] keys = packCandidates.keySet().toArray();
+                    selectedPack = packCandidates.get((String)keys[Current.world().getRandom().nextInt(keys.length)]);
+                }
+                deck.getOrCreate(DeckSection.Main).addAllFlat(selectedPack);
             }
             return deck;
         }
@@ -544,7 +614,11 @@ public class CardUtil {
         return  ret;
     }
 
-    public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme, boolean useGeneticAI)
+    public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme, boolean useGeneticAI) {
+        return getDeck(path, forAI, isFantasyMode, colors, isTheme, useGeneticAI, null,true);
+    }
+
+    public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme, boolean useGeneticAI, CardEdition starterEdition, boolean discourageDuplicates)
     {
         if(path.endsWith(".dck"))
             return DeckSerializer.fromFile(new File(Config.instance().getFilePath(path)));
@@ -557,8 +631,11 @@ public class CardUtil {
         Json json = new Json();
         FileHandle handle = Config.instance().getFile(path);
         if (handle.exists())
-            return generateDeck(json.fromJson(GeneratedDeckData.class, handle));
+            return generateDeck(json.fromJson(GeneratedDeckData.class, handle), starterEdition, discourageDuplicates);
         return null;
 
     }
+
+
 }
+

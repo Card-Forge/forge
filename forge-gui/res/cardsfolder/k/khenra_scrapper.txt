@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Creature Jackal Warrior
 PT:2/3
 K:Menace
-K:You may exert CARDNAME as it attacks.
-T:Mode$ Exerted | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When you exert CARDNAME, it gets +2/+0 until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2
+S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Trigger$ TrigPump | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. When you do, it gets +2/+0 until end of turn. (An exerted creature won't untap during your next untap step.)
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | SpellDescription$ When you do, it gets +2/+0 until end of turn.
 Oracle:Menace\nYou may exert Khenra Scrapper as it attacks. When you do, it gets +2/+0 until end of turn. (An exerted creature won't untap during your next untap step.)

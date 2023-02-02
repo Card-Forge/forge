@@ -313,6 +313,7 @@ public final class CardUtil {
 
         newCopy.setExiledBy(in.getExiledBy());
         newCopy.setExiledWith(getLKICopy(in.getExiledWith(), cachedMap));
+        newCopy.addExiledCards(in.getExiledCards());
 
         if (in.getGame().getCombat() != null && in.isPermanent()) {
             newCopy.setCombatLKI(in.getGame().getCombat().saveLKI(newCopy)); 

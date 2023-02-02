@@ -1452,6 +1452,16 @@ public class FSkin {
         addEncodingSymbol("P/U/R", FSkinProp.IMG_MANA_PHRYX_UR);
         addEncodingSymbol("P/W/B", FSkinProp.IMG_MANA_PHRYX_WB);
         addEncodingSymbol("P/W/U", FSkinProp.IMG_MANA_PHRYX_WU);
+        addEncodingSymbol("B/G/P", FSkinProp.IMG_MANA_PHRYX_BG);
+        addEncodingSymbol("B/R/P", FSkinProp.IMG_MANA_PHRYX_BR);
+        addEncodingSymbol("G/U/P", FSkinProp.IMG_MANA_PHRYX_GU);
+        addEncodingSymbol("G/W/P", FSkinProp.IMG_MANA_PHRYX_GW);
+        addEncodingSymbol("R/G/P", FSkinProp.IMG_MANA_PHRYX_RG);
+        addEncodingSymbol("R/W/P", FSkinProp.IMG_MANA_PHRYX_RW);
+        addEncodingSymbol("U/B/P", FSkinProp.IMG_MANA_PHRYX_UB);
+        addEncodingSymbol("U/R/P", FSkinProp.IMG_MANA_PHRYX_UR);
+        addEncodingSymbol("W/B/P", FSkinProp.IMG_MANA_PHRYX_WB);
+        addEncodingSymbol("W/U/P", FSkinProp.IMG_MANA_PHRYX_WU);
         for (int i = 0; i <= 20; i++) {
             addEncodingSymbol(String.valueOf(i), FSkinProp.valueOf("IMG_MANA_" + i));
         }
@@ -1466,6 +1476,7 @@ public class FSkin {
         addEncodingSymbol("TK", FSkinProp.IMG_TICKET);
         addEncodingSymbol("EXPERIENCE", FSkinProp.IMG_EXPERIENCE);
         addEncodingSymbol("A-", FSkinProp.IMG_ALCHEMY);
+        addEncodingSymbol("M", FSkinProp.ICO_MANASHARD);
 
         // Set look and feel after skin loaded
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Setting look and feel...");

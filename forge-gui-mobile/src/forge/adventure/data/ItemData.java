@@ -27,7 +27,7 @@ public class ItemData {
     public boolean usableOnWorldMap;
     public boolean usableInPoi;
     public String commandOnUse;
-    public int manaNeeded;
+    public int shardsNeeded;
 
 
     public ItemData()
@@ -46,7 +46,7 @@ public class ItemData {
         usableInPoi       = cpy.usableInPoi;
         usableOnWorldMap  = cpy.usableOnWorldMap;
         commandOnUse      = cpy.commandOnUse;
-        manaNeeded        = cpy.manaNeeded;
+        shardsNeeded      = cpy.shardsNeeded;
     }
 
     public Sprite sprite()
@@ -90,8 +90,8 @@ public class ItemData {
             result += "Slot: " + this.equipmentSlot + "\n";
         if(effect != null)
             result += effect.getDescription();
-        if(manaNeeded != 0)
-            result +=  manaNeeded+" [+Mana]";
+        if(shardsNeeded != 0)
+            result +=  shardsNeeded+" [+Shards]";
         return result;
     }
 

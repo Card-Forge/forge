@@ -2,7 +2,6 @@ Name:Champion of Rhonas
 ManaCost:3 G
 Types:Creature Jackal Warrior
 PT:3/3
-K:You may exert CARDNAME as it attacks.
-T:Mode$ Exerted | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When you exert CARDNAME, you may put a creature card from your hand onto the battlefield.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ You may put a creature card from your hand onto the battlefield.
+S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Trigger$ TrigChangeZone | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. When you do, you may put a creature card from your hand onto the battlefield. (An exerted creature won't untap during your next untap step.)
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ When you do, you may put a creature card from your hand onto the battlefield.
 Oracle:You may exert Champion of Rhonas as it attacks. When you do, you may put a creature card from your hand onto the battlefield. (An exerted creature won't untap during your next untap step.)

@@ -1,5 +1,5 @@
 Name:Slash Panther
-ManaCost:4 PR
+ManaCost:4 RP
 Types:Artifact Creature Phyrexian Cat
 PT:4/2
 K:Haste
