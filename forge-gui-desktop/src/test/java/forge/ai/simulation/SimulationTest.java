@@ -33,6 +33,22 @@ import forge.model.FModel;
 public class SimulationTest {
     private static boolean initialized = false;
 
+    public Game resetGame() {
+        // need to be done after FModel.initialize, or the Localizer isn't loaded yet
+        List<RegisteredPlayer> players = Lists.newArrayList();
+        Deck d1 = new Deck();
+        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p2", null)));
+        Set<AIOption> options = new HashSet<>();
+        options.add(AIOption.USE_SIMULATION);
+        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p1", options)));
+        GameRules rules = new GameRules(GameType.Constructed);
+        Match match = new Match(rules, players, "Test");
+        Game game = new Game(players, rules, match);
+        game.setAge(GameStage.Play);
+
+        return game;
+    }
+
     protected Game initAndCreateGame() {
         if (!initialized) {
             GuiBase.setInterface(new GuiDesktop());
@@ -47,19 +63,7 @@ public class SimulationTest {
             initialized = true;
         }
 
-        // need to be done after FModel.initialize, or the Localizer isn't loaded yet
-        List<RegisteredPlayer> players = Lists.newArrayList();
-        Deck d1 = new Deck();
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p2", null)));
-        Set<AIOption> options = new HashSet<>();
-        options.add(AIOption.USE_SIMULATION);
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p1", options)));
-        GameRules rules = new GameRules(GameType.Constructed);
-        Match match = new Match(rules, players, "Test");
-        Game game = new Game(players, rules, match);
-        game.setAge(GameStage.Play);
-
-        return game;
+        return resetGame();
     }
 
     protected GameSimulator createSimulator(Game game, Player p) {

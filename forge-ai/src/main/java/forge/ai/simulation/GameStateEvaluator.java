@@ -8,6 +8,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 
 import java.util.Arrays;
@@ -173,14 +174,20 @@ public class GameStateEvaluator {
                     colors_produced.addAll(Arrays.asList(mp.mana(m).split(" ")));
                 }
             }
-            value = 100 * max_produced;
+            value += 100 * max_produced;
             int size = max(colors_produced.size(), colors_produced.contains("Any") ? 5 : 0);
-            value += size * 2;
+            value += size * 6;
 
             // add a value for each activated ability that the land has that's not an activated ability.
             for (SpellAbility m: c.getNonManaAbilities()) {
                 // more than the value of having a card in hand, so if a land has an activated ability but
                 // not a mana ability, it will still be played.
+                value += 6;
+            }
+
+            // Add a value for each static ability that the land has
+            for (StaticAbility s : c.getStaticAbilities()) {
+                // More than the value of having a card in hand. See comment above
                 value += 6;
             }
 

@@ -64,7 +64,7 @@ public class SpellAbilityPicker {
         print("---- choose ability  (phase = " + phaseStr + ")");
     }
 
-    private List<SpellAbility> getCandidateSpellsAndAbilities() {
+    public List<SpellAbility> getCandidateSpellsAndAbilities() {
         CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
         cards = ComputerUtilCard.dedupeCards(cards);
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
@@ -351,7 +351,7 @@ public class SpellAbilityPicker {
         return AiPlayDecision.WillPlay;
     }
 
-    private Score evaluateSa(final SimulationController controller, PhaseType phase, List<SpellAbility> saList, int saIndex) {
+    public Score evaluateSa(final SimulationController controller, PhaseType phase, List<SpellAbility> saList, int saIndex) {
         controller.evaluateSpellAbility(saList, saIndex);
         SpellAbility sa = saList.get(saIndex);
 
