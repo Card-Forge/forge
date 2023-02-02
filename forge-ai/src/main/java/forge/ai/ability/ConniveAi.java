@@ -13,6 +13,10 @@ import forge.game.zone.ZoneType;
 public class ConniveAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
+        if (!ai.canDraw()) {
+            return false; // can't draw anything
+        }
+
         CardCollection list;
         list = CardLists.getTargetableCards(new CardCollection(ai.getCardsIn(ZoneType.Battlefield)), sa);
 
@@ -59,6 +63,10 @@ public class ConniveAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        if (!ai.canDraw() && !mandatory) {
+            return false; // can't draw anything
+        }
+
         boolean preferred = true;
         CardCollection list;
         list = CardLists.getTargetableCards(new CardCollection(ai.getCardsIn(ZoneType.Battlefield)), sa);
