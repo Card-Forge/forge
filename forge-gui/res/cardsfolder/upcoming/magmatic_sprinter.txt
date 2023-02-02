@@ -6,6 +6,6 @@ K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put two oil counters on target artifact or creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl | TgtPrompt$ Select target artifact or creature you control | CounterType$ OIL | CounterNum$ 2
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of your end step, return CARDNAME to its owner's hand unless you remove two oil counters from it.
-SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Card.Self | UnlessCost$ SubCounter<2/OIL> | UnlessPayer$ You
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Card.Self | UnlessCost$ SubCounter<2/OIL> | UnlessPayer$ You
 AI:RemoveDeck:Random
 Oracle:Haste\nWhen Magmatic Sprinter enters the battlefield, put two oil counters on target artifact or creature you control.\nAt the beginning of your end step, return Magmatic Sprinter to its owner's hand unless you remove two oil counters from it.
