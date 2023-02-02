@@ -3,5 +3,5 @@ ManaCost:2 B
 Types:Artifact Creature Phyrexian Construct
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDebuff | TriggerDescription$ When CARDNAME enters the battlefield, you may pay 2 life. When you do, target creature gets -1/-1 until end of turn.
-SVar:TrigDebuff:AB$ Pump | Cost$ PayLife<2> | Optional$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
+SVar:TrigDebuff:AB$ Pump | Cost$ PayLife<2> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 Oracle:When Ambulatory Edifice enters the battlefield, you may pay 2 life. When you do, target creature gets -1/-1 until end of turn.
