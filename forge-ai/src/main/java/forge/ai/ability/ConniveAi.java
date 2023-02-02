@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -23,10 +24,10 @@ public class ConniveAi extends SpellAbilityAi {
         // Filter AI-specific targets if provided
         list = ComputerUtil.filterAITgts(sa, ai, list, false);
 
-        int maxTargets = sa.getMaxTargets();
         if ("X".equals(sa.getParam("TargetMax")) && "Count$xPaid".equals(sa.getSVar("X"))) {
             // TODO: consider making the library margin (currently hardcoded to 5) a configurable AI parameter
-            maxTargets = Math.min(list.size(), Math.max(0, ai.getCardsIn(ZoneType.Library).size() - 5));
+            int maxTargets = Math.min(list.size(), Math.max(0, ai.getCardsIn(ZoneType.Library).size() - 5));
+            maxTargets = Math.min(maxTargets, ComputerUtilMana.getAvailableManaEstimate(ai));
             sa.setXManaCostPaid(maxTargets);
         }
 
