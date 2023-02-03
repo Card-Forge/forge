@@ -26,8 +26,6 @@ public enum GlobalRuleChange {
     attackerChoosesBlockers ("The attacking player chooses how each creature blocks each combat."),
     manaBurn ("A player losing unspent mana causes that player to lose that much life."),
     noNight ("It can't become night."),
-    /* onlyOneAttackerATurn ("No more than one creature can attack each turn."), */
-    onlyOneAttackerACombat ("No more than one creature can attack each combat."),
     onlyOneBlocker ("No more than one creature can block each combat."),
     onlyOneBlockerPerOpponent ("Each opponent can't block with more than one creature."),
     onlyTwoBlockers ("No more than two creatures can block each combat."),
