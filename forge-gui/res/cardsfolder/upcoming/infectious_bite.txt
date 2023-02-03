@@ -1,10 +1,9 @@
 Name:Infectious Bite
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | RememberTargets$ True | SubAbility$ DBFight | StackDescription$ Target creature you control [{c:ThisTargetedCard}] | SpellDescription$ Target creature you control deals damage equal to its power to target creature you don't control. Each opponent gets a poison counter.
-SVar:DBFight:DB$ DealDamage| ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | NumDmg$ X | SubAbility$ DBPoison 
-SVar:DBPoison:DB$ Poison | Defined$ Player.Opponent | Num$ 1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$CardPower
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBFight | StackDescription$ Target creature you control [{c:ThisTargetedCard}] | SpellDescription$ Target creature you control deals damage equal to its power to target creature you don't control. Each opponent gets a poison counter.
+SVar:DBFight:DB$ DealDamage| ValidTgts$ Creature.YouDontCtrl | DamageSource$ ParentTarget | TgtPrompt$ Choose target creature you don't control | NumDmg$ X | SubAbility$ DBPoison 
+SVar:DBPoison:DB$ Poison | Defined$ Player.Opponent | Num$ 1
+SVar:X:ParentTarget$CardPower
 DeckHints:Ability$Proliferate a Keyword$Infect|Toxic
 Oracle:Target creature you control deals damage equal to its power to target creature you don't control. Each opponent gets a poison counter.
