@@ -3,8 +3,8 @@ ManaCost:G W
 Types:Legendary Creature Human Scout
 PT:3/3
 R:Event$ AddCounter | ActiveZones$ Battlefield | ValidPlayer$ You | ValidCounterType$ POISON | ReplaceWith$ OnlyOnePoison | Description$ If you would get one or more poison counters, instead you get one poison counter and you can't get additional poison counters this turn.
-SVar:OnlyOnePoison:DB$ ReplaceCounter | ValidCounterType$ POISON | Amount$ 1 | SubAbility$ DBDelayedTrigger
-SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ CounterAddedOnce | ValidPlayer$ You | CounterType$ POISON | TriggerZones$ Battlefield | Static$ True | Execute$ TrigEffect
+SVar:OnlyOnePoison:DB$ ReplaceCounter | ValidCounterType$ POISON | Amount$ 1 | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Static$ True | Execute$ TrigEffect | AfterReplacement$ True
 SVar:TrigEffect:DB$ Effect | StaticAbilities$ NoMorePoison
 SVar:NoMorePoison:Mode$ CantPutCounter | ValidPlayer$ You | CounterType$ POISON | Description$ You can't get additional poison counters this turn.
 A:AB$ DelayedTrigger | Cost$ Exile<1/CARDNAME> | ValidTgts$ Creature.Other,Artifact.Other | TgtPrompt$ Select another target creature or artifact | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigReturn | StackDescription$ When {c:Targeted} is put into a graveyard this turn, return it to the battlefield under its owner's control. | SpellDescription$ Choose another target creature or artifact. When it's put into a graveyard this turn, return that card to the battlefield under its owner's control.

@@ -34,6 +34,10 @@ public class TriggerImmediate extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        if (hasParam("AfterReplacement") && hostCard.getGame().getReplacementHandler().isReplacing()) {
+            return false;
+        }
+
         return true;
     }
 
