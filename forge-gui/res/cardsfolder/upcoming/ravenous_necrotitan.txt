@@ -2,9 +2,9 @@ Name:Ravenous Necrotitan
 ManaCost:2 B B
 Types:Creature Phyrexian Horror
 PT:6/6
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | ConditionCheckSVar$ X | ConditionSVarCompare$ LT3 | Execute$ TrigSacrifice | TriggerDescription$ Corrupted — When CARDNAME enters the battlefield, sacrifice a creature unless an opponent has three or more poison counters.
-SVar:TrigSacrifice:DB$ Sacrifice | SacValid$ Creature | Defined$ You
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ Corrupted — When CARDNAME enters the battlefield, sacrifice a creature unless an opponent has three or more poison counters.
+SVar:TrigSacrifice:DB$ Sacrifice | SacValid$ Creature | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ LT3
 SVar:X:PlayerCountOpponents$HighestPoisonCounters
-DeckHints$Keyword$Toxic|Infect
+DeckHints:Keyword$Toxic|Infect
 DeckHas:Ability$Sacrifice
 Oracle:Corrupted — When Ravenous Necrotitan enters the battlefield, sacrifice a creature unless an opponent has three or more poison counters.
