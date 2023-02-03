@@ -1,5 +1,5 @@
 Name:Lukka, Bound to Ruin
-ManaCost:2 R PRG  G
+ManaCost:2 R PRG G
 Types:Legendary Planeswalker Lukka
 Loyalty:5
 K:Compleated
