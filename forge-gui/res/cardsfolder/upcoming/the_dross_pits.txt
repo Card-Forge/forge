@@ -1,0 +1,8 @@
+Name:The Dross Pits
+ManaCost:no cost
+Types:Land Sphere
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Draw | Cost$ 1 B T Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice
+Oracle:The Dross Pits enters the battlefield tapped.\n{T}: Add {B}.\n{1}{B}, {T}, Sacrifice The Dross Pits: Draw a card.

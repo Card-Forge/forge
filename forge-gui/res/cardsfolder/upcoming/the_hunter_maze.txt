@@ -1,0 +1,8 @@
+Name:The Hunter Maze
+ManaCost:no cost
+Types:Land Sphere
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Draw | Cost$ 1 G T Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice
+Oracle:The Hunter Maze enters the battlefield tapped.\n{T}: Add {G}.\n{1}{G}, {T}, Sacrifice The Hunter Maze: Draw a card.

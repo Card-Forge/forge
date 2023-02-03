@@ -1,0 +1,7 @@
+Name:Free from Flesh
+ManaCost:R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ 2 | NumDef$ 2 | SubAbility$ DBCounter | SpellDescription$ Target creature gets +2/+2 until end of turn. Put two oil counters on it.
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ OIL | CounterNum$ 2
+DeckHints:Ability$Counters
+Oracle:Target creature gets +2/+2 until end of turn. Put two oil counters on it.
