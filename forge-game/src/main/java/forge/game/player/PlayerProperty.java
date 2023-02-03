@@ -194,6 +194,20 @@ public class PlayerProperty {
             if (source.isRemembered(player)) {
                 return false;
             }
+        } else if (property.equals("IsTriggerRemembered")) {
+            boolean found = false;
+            for (Object o : spellAbility.getTriggerRemembered()) {
+                if (o instanceof Player) {
+                    Player trigRem = (Player) o;
+                    if (trigRem.equals(player)) {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if (!found) {
+                return false;
+            }
         } else if (property.equals("EnchantedBy")) {
             if (!player.isEnchantedBy(source)) {
                 return false;
