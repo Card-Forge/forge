@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-CARDSFOLDER = "../../res/cardsfolder"
+CARDSFOLDER = "../res/cardsfolder"
 DECKFOLDER = "."
 
 import argparse, os, re

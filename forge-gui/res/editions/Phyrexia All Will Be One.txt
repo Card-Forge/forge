@@ -119,7 +119,7 @@ ScryfallCode=ONE
 107 U Scheming Aspirant @Lauren K. Cannon
 108 U Sheoldred's Edict @Helge C. Balzer
 109 C Sheoldred's Headcleaver @Andrey Kuzinskiy
-110 C Stinghive Master @Lie Setiawan
+110 C Stinging Hivemaster @Lie Setiawan
 111 C Testament Bearer @Raluca Marinescu
 112 U Vat Emergence @Andreas Zafiratos
 113 U Vat of Rebirth @Peter Polach

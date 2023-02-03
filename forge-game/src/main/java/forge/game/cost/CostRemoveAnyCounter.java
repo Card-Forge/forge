@@ -111,7 +111,7 @@ public class CostRemoveAnyCounter extends CostPart {
             sb.append(Cost.convertAmountTypeToWords(this.convertAmount(), this.getAmount(), counters));
             sb.append(this.getAmount().equals("1") ? "" : "s");
         }
-        sb.append(" from ").append(desc);
+        sb.append(" from ").append(desc).append(" you control");
 
         return sb.toString();
     }

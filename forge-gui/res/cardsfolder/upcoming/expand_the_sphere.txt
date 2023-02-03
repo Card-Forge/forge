@@ -1,0 +1,10 @@
+Name:Expand the Sphere
+ManaCost:3 G
+Types:Sorcery
+A:SP$ Dig | DigNum$ 6 | ChangeNum$ 2 | Optional$ True | ChangeValid$ Land | DestinationZone$ Battlefield | Tapped$ True | RestRandomOrder$ True | RememberChanged$ True | SubAbility$ DBProliferate | StackDescription$ SpellDescription | SpellDescription$ Look at the top six cards of your library. Put up to two land cards from among them onto the battlefield tapped and the rest on the bottom of your library in a random order. If you put fewer than two lands onto the battlefield this way, proliferate a number of times equal to the difference. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+SVar:DBProliferate:DB$ Proliferate | Amount$ Number$2/Minus.Y | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Count$RememberedSize
+DeckHas:Ability$Proliferate
+DeckHints:Type$Planeswalker & Ability$Counters
+Oracle:Look at the top six cards of your library. Put up to two land cards from among them onto the battlefield tapped and the rest on the bottom of your library in a random order. If you put fewer than two lands onto the battlefield this way, proliferate a number of times equal to the difference. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
