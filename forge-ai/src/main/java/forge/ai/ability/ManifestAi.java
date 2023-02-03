@@ -98,9 +98,9 @@ public class ManifestAi extends SpellAbilityAi {
         topCopy.setManifested(true);
 
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(topCopy);
+        repParams.put(AbilityKey.CardLKI, topCopy);
         repParams.put(AbilityKey.Origin, card.getZone().getZoneType());
         repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
-        repParams.put(AbilityKey.Source, sa.getHostCard());
         List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.CantHappen);
         if (!list.isEmpty()) {
             return false;

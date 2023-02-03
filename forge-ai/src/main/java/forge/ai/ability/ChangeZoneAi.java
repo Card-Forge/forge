@@ -26,6 +26,9 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -673,10 +676,19 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return false;
             }
 
-            // if (origin.equals("Graveyard")) {
             // return this card from graveyard: cards like Hammer of Bogardan
-            // in general this is cool, but we should add some type of
-            // restrictions
+            // in general this is cool, but we should add some type of restrictions
+            if (origin.contains(ZoneType.Graveyard)) {
+                Card first = retrieval.get(0);
+                final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(first);
+                repParams.put(AbilityKey.CardLKI, first);
+                repParams.put(AbilityKey.Origin, first.getZone().getZoneType());
+                repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
+                List<ReplacementEffect> list = ai.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.CantHappen);
+                if (!list.isEmpty()) {
+                    return false;
+                }
+            }
 
             // return this card from battlefield: cards like Blinking Spirit
             // in general this should only be used to protect from Imminent Harm
