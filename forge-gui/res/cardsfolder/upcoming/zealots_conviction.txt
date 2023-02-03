@@ -1,0 +1,11 @@
+Name:Zealot's Conviction
+ManaCost:W
+Types:Enchantment Aura
+K:Flash
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | CheckSVar$ X | SVarCompare$ GE3 | AddKeyword$ First Strike | Description$ Corrupted — As long as an opponent has three or more poison counters, enchanted creature gets an additional +1/+0 and has first strike.
+SVar:X:PlayerCountOpponents$HighestPoisonCounters
+DeckHints:Keyword$Toxic|Infect
+Oracle:Flash\nEnchant creature\nEnchanted creature gets +1/+1.\nCorrupted — As long as an opponent has three or more poison counters, enchanted creature gets an additional +1/+0 and has first strike.
