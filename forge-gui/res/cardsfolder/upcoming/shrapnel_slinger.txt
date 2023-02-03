@@ -1,0 +1,10 @@
+Name:Shrapnel Slinger
+ManaCost:1 R
+Types:Artifact Creature — Phyrexian Beast
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$
+When CARDNAME enters the battlefield, you may sacrifice a creature. When you do, destroy target artifact an opponent controls.
+SVar:TrigSac:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other/another creature> | Execute$ TrigDestroy | TriggerDescription$ When you do, destroy target artifact an opponent controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.OppCtrl | TgtPrompt$ Select target artifact an opponent controls
+DeckHas:Ability$Sacrifice
+Oracle:When CARDNAME enters the battlefield, you may sacrifice a creature. When you do, destroy target artifact an opponent controls.

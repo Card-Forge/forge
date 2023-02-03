@@ -1,0 +1,11 @@
+Name:Ravenous Necrotitan
+ManaCost:2 B B
+Types:Creature Phyrexian Horror
+PT:6/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a land. Then conjure two cards named Mishra's Foundry onto the battlefield tapped.
+SVar:TrigSacrifice:DB$ Sacrifice | SacValid$ Creature | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ LE3
+Corrupted — When CARDNAME enters the battlefield, sacrifice a creature unless an opponent has three or more poison counters.
+SVar:X:PlayerCountOpponents$HighestPoisonCounters
+DeckHints$Keyword$Toxic|Infect
+DeckHas:Ability$Sacrifice
+Oracle:Corrupted — When Ravenous Necrotitan enters the battlefield, sacrifice a creature unless an opponent has three or more poison counters.
