@@ -1,0 +1,8 @@
+Name:Skyscythe Engulfer
+ManaCost:5 G
+Types:Creature Phyrexian Beast
+PT:6/5
+K:Reach
+K:Trample
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withFlying | Description$ CARDNAME can't be blocked by creatures with flying.
+Oracle:Reach, trample\nSkyscythe Engulfer can't be blocked by creatures with flying.
