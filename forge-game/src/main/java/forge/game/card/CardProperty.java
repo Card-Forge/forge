@@ -362,16 +362,19 @@ public class CardProperty {
                 return false;
             }
 
-            Card host = source;
+            Card exiledWithHost = source;
             //Static Abilites doesn't have spellAbility or OriginalHost
-            if (spellAbility != null) {
-                host = spellAbility.getOriginalHost();
-                if (host == null) {
-                    host = spellAbility.getHostCard();
+            if (spellAbility instanceof SpellAbility) {
+                SpellAbility origSa = ((SpellAbility)spellAbility).getOriginalAbility();
+                if (origSa != null) {
+                    exiledWithHost = origSa.getHostCard();
+                }
+                if (exiledWithHost == null) {
+                    exiledWithHost = spellAbility.getHostCard();
                 }
             }
 
-            if (!card.getExiledWith().equalsWithTimestamp(host)) {
+            if (!source.hasExiledCard(card) || !source.getExiledCards().get(card).getExiledWith().equalsWithTimestamp(exiledWithHost)) {
                 return false;
             }
         } else if (property.equals("ExiledWithEffectSource")) {

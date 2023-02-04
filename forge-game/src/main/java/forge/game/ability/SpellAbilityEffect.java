@@ -892,4 +892,19 @@ public abstract class SpellAbilityEffect {
         }
         return activator.getController().chooseSingleEntityForEffect(options, sa, Localizer.getInstance().getMessage("lblChoosePlayer") , null);
     }
+
+    public void handleExiledWith(Card exilingSource, Card movedCard, SpellAbility cause) {
+        // during replacement LKI might be used
+        if (cause.isReplacementAbility() && exilingSource.isLKI()) {
+            exilingSource = exilingSource.getGame().getCardState(exilingSource);
+        }
+        Card exiledWithSource = exilingSource;
+        SpellAbility origSa = cause.getOriginalAbility();
+        if (origSa != null) {
+            exiledWithSource = origSa.getHostCard();
+        }
+        exilingSource.addExiledCard(movedCard);
+        movedCard.setExiledWith(exiledWithSource);
+        movedCard.setExiledBy(cause.getActivatingPlayer());
+    }
 }
