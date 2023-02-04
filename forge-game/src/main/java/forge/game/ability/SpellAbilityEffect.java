@@ -898,13 +898,16 @@ public abstract class SpellAbilityEffect {
         if (cause.isReplacementAbility() && exilingSource.isLKI()) {
             exilingSource = exilingSource.getGame().getCardState(exilingSource);
         }
-        Card exiledWithSource = exilingSource;
+        // only want this on permanents
+        if (exilingSource.isImmutable() || exilingSource.isInPlay()) {
+            exilingSource.addExiledCard(movedCard);
+        }
+        // if ability was granted use that source so they can be kept apart later
         SpellAbility origSa = cause.getOriginalAbility();
         if (origSa != null) {
-            exiledWithSource = origSa.getHostCard();
+            exilingSource = origSa.getHostCard();
         }
-        exilingSource.addExiledCard(movedCard);
-        movedCard.setExiledWith(exiledWithSource);
+        movedCard.setExiledWith(exilingSource);
         movedCard.setExiledBy(cause.getActivatingPlayer());
     }
 }
