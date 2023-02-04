@@ -52,7 +52,6 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         final String desc = sa.getParamOrDefault("ValidDescription", "");
 
         Player targetPlayer = sa.getTargets().getFirstTargetedPlayer();
-        
         String valid = sa.getParamOrDefault("ValidCards", "");
 
         // Ugh. If calculateAmount needs to be called with DestroyAll it _needs_
@@ -79,7 +78,9 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         if (sa.hasParam("RememberAllObjects")) {
             card.addRemembered(list);
         }
-        
+        if (list.isEmpty() && isOptional) {
+            return;
+        }
         if (isOptional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeDestroy",(desc)), null)) {
         return;
         
