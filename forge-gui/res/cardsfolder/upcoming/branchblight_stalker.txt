@@ -1,0 +1,6 @@
+Name:Branchblight Stalker
+ManaCost:1 G
+Types:Creature Phyrexian Elf Scout
+PT:3/1
+K:Toxic:2
+Oracle:Toxic 2 (Players dealt combat damage by this creature also get two poison counters.)

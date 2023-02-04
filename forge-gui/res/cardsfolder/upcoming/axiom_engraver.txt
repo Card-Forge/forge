@@ -1,0 +1,8 @@
+Name:Axiom Engraver
+ManaCost:1 R
+Types:Creature Phyrexian Wizard
+PT:1/3
+K:etbCounter:OIL:2
+A:AB$ Draw | Cost$ T SubCounter<1/OIL> Discard<1/Card> | SpellDescription$ Draw a card.
+DeckHas:Ability$Counters|Discard
+Oracle:Axiom Engraver enters the battlefield with two oil counters on it.\n{T}, Remove an oil counter from Axiom Engraver, Discard a card: Draw a card.

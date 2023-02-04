@@ -1,0 +1,10 @@
+Name:Hexgold Hoverwings
+ManaCost:3 W
+Types:Artifact Equipment
+K:For Mirrodin
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying | Description$ Equipped creature has flying.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+equipped | AddPower$ 1 | AddToughness$ 0 | Description$ Creatures you control that are equipped get +1/+0.
+K:Equip:2 W
+DeckHints:Type$Equipment
+DeckHas:Type$Rebel & Ability$Token & Color$Red
+Oracle:For Mirrodin! (When this Equipment enters the battlefield, create a 2/2 red Rebel creature token, then attach this to it.)\nEquipped creature has flying.\nCreatures you control that are equipped get +1/+0.\nEquip {2}{W}

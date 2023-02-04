@@ -1,6 +1,6 @@
 Name:Kemba, Kha Enduring
 ManaCost:1 W
-Types:Creature Cat Cleric
+Types:Legendary Creature Cat Cleric
 PT:2/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self,Creature.Other+Cat+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigAttach | TriggerDescription$ Whenever CARDNAME or another Cat enters the battlefield under your control, attach up to one target Equipment you control to that creature.
 SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCard | Object$ Targeted | ValidTgts$ Equipment.YouCtrl | TgtPrompt$ Select up to one target Equipment you control | TargetMin$ 0 | TargetMax$ 1
