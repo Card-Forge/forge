@@ -1,0 +1,9 @@
+Name:Dross Skullbomb
+ManaCost:1
+Types:Artifact
+A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+A:AB$ ChangeZone | Cost$ 1 B Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SorcerySpeed$ True | SubAbility$ DBDraw | SpellDescription$ Return target creature card from your graveyard to your hand. Draw a card. Activate only as a sorcery.
+SVar:DBDraw:DB$ Draw
+AI:RemoveDeck:Random
+DeckHas:Color$Black & Ability$Sacrifice|Graveyard
+Oracle:{1}, Sacrifice Dross Skullbomb: Draw a card.\n{2}{B}, Sacrifice Dross Skullbomb: Return target creature card from your graveyard to your hand. Draw a card. Activate only as a sorcery.
