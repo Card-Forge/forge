@@ -4,13 +4,13 @@ Types:Legendary Artifact Creature Robot
 PT:2/4
 K:More Than Meets the Eye:1 W
 T:Mode$ LifeGained | TriggerZones$ Battlefield | ValidPlayer$ You | OptionalDecider$ You | NoResolvingCheck$ True | Execute$ TrigConvert | TriggerDescription$ Whenever you gain life, you may convert NICKNAME. When you do, return target artifact card with mana value less than or equal to the amount of life you gained this turn from your graveyard to the battlefield tapped.
-SVar:TrigConvert:DB$ SetState | Mode$ Convert | SubAbility$ DBImmediateTrig  | RememberChanged$ True 
+SVar:TrigConvert:DB$ SetState | Mode$ Transform | SubAbility$ DBImmediateTrig | RememberChanged$ True
 SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | ConditionCompare$ GE1 | Execute$ DBReturn | TriggerDescription$ When you do, return target artifact card with mana value less than or equal to the amount of life you gained this turn from your graveyard to the battlefield tapped.
 SVar:DBReturn:DB$ ChangeZone | ValidTgts$ Artifact.cmcLEX+YouOwn | TgtPrompt$ Select target artifact card with mana value equal or less than the amount of life you gained this turn from your graveyard | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$LifeYouGainedThisTurn
 DeckHas:Ability$LifeGain|Graveyard
-AlternateMode:Convert
+AlternateMode:DoubleFaced
 Oracle:More Than Meets the Eye {1}{W} (You may cast this card converted for {1}{W}.)\nLifelink\nWhenever you gain life, you may convert Ratchet. When you do, return target artifact card with mana value less than or equal to the amount of life you gained this turn from your graveyard to the battlefield tapped.
 
 ALTERNATE
@@ -23,7 +23,7 @@ PT:1/4
 K:Living metal
 K:Lifelink
 T:Mode$ ChangesZoneAll | ValidCards$ Artifact.YouCtrl+nonToken | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigConvert | TriggerDescription$ Whenever one or more nontoken artifacts you control are put into a graveyard from the battlefield, convert NICKNAME. This ability triggers only once each turn.
-SVar:TrigConvert:DB$ SetState | Mode$ Convert
+SVar:TrigConvert:DB$ SetState | Mode$ Transform
 DeckHas:Ability$LifeGain
 DeckHints:Type$Artifact
 Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nLifelink\nWhenever one or more nontoken artifacts you control are put into a graveyard from the battlefield, convert Ratchet. This ability triggers only once each turn.

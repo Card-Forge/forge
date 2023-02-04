@@ -5,9 +5,9 @@ PT:3/4
 K:More Than Meets the Eye:3 U
 K:Flying
 A:AB$ Mana | Cost$ RemoveAnyCounter<X1+/P1P1/Artifact.YouCtrl/among artifacts you control> | ValidTgts$ Player | Produced$ C | Amount$ X | AmountDesc$ for each counter removed | XCantBe0$ True | RestrictValid$ CantCastNonArtifactSpells | SpellDescription$ Target player adds that much {C}. This mana can't be spent to cast nonartifact spells.
-SVar:DBConvert:DB$ SetState | Mode$ Convert | StackDescription$ SpellDescription | SpellDescription$ Convert NICKNAME.
+SVar:DBConvert:DB$ SetState | Mode$ Transform | StackDescription$ SpellDescription | SpellDescription$ Convert NICKNAME.
 SVar:X:Count$xPaid
-AlternateMode:Convert
+AlternateMode:DoubleFaced
 AI:RemoveDeck:All
 DeckHints:Ability$Counters & Keyword$Adapt|Modular
 Oracle:More Than Meets the Eye {3}{U} (You may cast this card converted for {3}{U}.)\nFlying\nRemove one or more +1/+1 counters from among artifacts you control: Target player adds that much {C}. This mana can't be spent to cast nonartifact spells. Convert Jetfire.
@@ -21,7 +21,7 @@ Types:Legendary Artifact Vehicle
 PT:3/4
 K:Living metal
 K:Flying
-A:AB$ SetState | Cost$ U U U | Mode$ Convert | SubAbility$ DBAdapt | StackDescription$ Convert NICKNAME, | SpellDescription$ Convert NICKNAME, then adapt 3. (If it has no +1/+1 counters on it, put three +1/+1 counters on it.)
+A:AB$ SetState | Cost$ U U U | Mode$ Transform | SubAbility$ DBAdapt | StackDescription$ Convert NICKNAME, | SpellDescription$ Convert NICKNAME, then adapt 3. (If it has no +1/+1 counters on it, put three +1/+1 counters on it.)
 SVar:DBAdapt:DB$ PutCounter | Adapt$ True | CounterNum$ 3 | CounterType$ P1P1 | StackDescription$ then adapt 3.
 DeckHas:Ability$Counters
 Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nFlying\n{U}{U}{U}: Convert Jetfire, then adapt 3. (If it has no +1/+1 counters on it, put three +1/+1 counters on it.)
