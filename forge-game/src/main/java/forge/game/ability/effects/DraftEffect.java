@@ -71,7 +71,7 @@ import java.util.*;
          for (final Card c : drafted) {
              Card made = game.getAction().moveTo(zone, c, sa, moveParams);
              if (zone.equals(ZoneType.Exile)) {
-                 handleExiledWith(source, made, sa);
+                 handleExiledWith(made, sa);
                  if (sa.hasParam("ExileFaceDown")) {
                      made.turnFaceDown(true);
                  }

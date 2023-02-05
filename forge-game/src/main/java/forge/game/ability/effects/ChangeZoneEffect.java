@@ -734,7 +734,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 } else {
                     // might set before card is moved only for nontoken
                     if (destination.equals(ZoneType.Exile) && !gameCard.isToken()) {
-                        handleExiledWith(hostCard, gameCard, sa);
+                        handleExiledWith(gameCard, sa);
                     }
 
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
@@ -759,7 +759,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     // might set after card is moved again if something has changed
                     if (destination.equals(ZoneType.Exile) && !movedCard.isToken()) {
                         // need to remove first?
-                        handleExiledWith(hostCard, movedCard, sa);
+                        handleExiledWith(movedCard, sa);
                     }
 
                     if (sa.hasParam("WithCountersType")) {
@@ -1422,7 +1422,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 else if (destination.equals(ZoneType.Exile)) {
                     movedCard = game.getAction().exile(c, sa, moveParams);
                     if (!c.isToken()) {
-                        handleExiledWith(source, movedCard, sa);
+                        handleExiledWith(movedCard, sa);
                     }
                     if (sa.hasParam("ExileFaceDown")) {
                         movedCard.turnFaceDown(true);
@@ -1586,7 +1586,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 movedCard = game.getAction().moveToGraveyard(tgtHost, srcSA, params);
             } else if (srcSA.getParam("Destination").equals("Exile")) {
                 movedCard = game.getAction().exile(tgtHost, srcSA, params);
-                handleExiledWith(srcSA.getHostCard(), movedCard, srcSA);
+                handleExiledWith(movedCard, srcSA);
             } else if (srcSA.getParam("Destination").equals("TopOfLibrary")) {
                 movedCard = game.getAction().moveToLibrary(tgtHost, srcSA, params);
             } else if (srcSA.getParam("Destination").equals("Hand")) {

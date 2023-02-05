@@ -68,7 +68,7 @@ public class MillEffect extends SpellAbilityEffect {
             }
             if (destination.equals(ZoneType.Exile)) {
                 for (final Card c : milled) {
-                    handleExiledWith(source, c, sa);
+                    handleExiledWith(c, sa);
                     if (facedown) {
                         c.turnFaceDown(true);
                     }
