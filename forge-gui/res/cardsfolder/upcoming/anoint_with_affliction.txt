@@ -1,0 +1,8 @@
+Name:Anoint with Affliction
+ManaCost:1 B
+Types:Instant
+A:SP$ ChangeZone | Defined$ Targeted | ValidTgts$ Creature | ConditionCheckSVar$ X | CondtionSVarCompare$ GE3 | Origin$ Battlefield | Destination$ Exile | SubAbility$ NotPoisoned | SpellDescription$ Exile target creature if it has mana value 3 or less. Corrupted — Exile that creature instead if its controller has three or more poison counters.
+SVar:NotPoisoned:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Exile | ConditionDefined$ Targeted | ConditionPresent$ Permanent.nonLand+cmcLE3
+DeckHints:Ability$Proliferate & Keyword$Infect|Toxic
+SVar:X:TargetedController$PoisonCounters
+Oracle:Exile target creature if it has mana value 3 or less.\nCorrupted — Exile that creature instead if its controller has three or more poison counters.

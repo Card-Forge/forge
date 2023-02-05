@@ -18,6 +18,7 @@ import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 
 public class DestroyAllEffect extends SpellAbilityEffect {
@@ -46,10 +47,11 @@ public class DestroyAllEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final boolean noRegen = sa.hasParam("NoRegen");
         final Card card = sa.getHostCard();
+        final boolean isOptional = sa.hasParam("Optional");
         final Game game = sa.getActivatingPlayer().getGame();
+        final String desc = sa.getParamOrDefault("ValidDescription", "");
 
         Player targetPlayer = sa.getTargets().getFirstTargetedPlayer();
-
         String valid = sa.getParamOrDefault("ValidCards", "");
 
         // Ugh. If calculateAmount needs to be called with DestroyAll it _needs_
@@ -76,7 +78,12 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         if (sa.hasParam("RememberAllObjects")) {
             card.addRemembered(list);
         }
-
+        if (list.isEmpty() && isOptional) {
+            return;
+        }
+        if (isOptional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeDestroy", desc), null)) {
+            return;
+        }     
         // exclude cards that can't be destroyed at this moment
         list = CardLists.filter(list, CardPredicates.Presets.CAN_BE_DESTROYED);
 
