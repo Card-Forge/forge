@@ -489,7 +489,7 @@ public final class CardScriptParser {
             "blockedBySourceThisTurn", "blockedSource",
             "isBlockedByRemembered", "blockedRemembered",
             "blockedByRemembered", "unblocked", "attackersBandedWith",
-            "kicked", "kicked1", "kicked2", "notkicked", "evoked",
+            "kicked", "kicked1", "kicked2", "evoked",
             "HasDevoured", "HasNotDevoured", "IsMonstrous", "IsNotMonstrous",
             "CostsPhyrexianMana", "IsRemembered", "IsNotRemembered",
             "IsImprinted", "IsNotImprinted", "hasActivatedAbilityWithTapCost",

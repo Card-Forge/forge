@@ -1708,6 +1708,19 @@ public class CardProperty {
             if (!game.getPhaseHandler().isPlayerTurn(controller)) return false;
             return CombatUtil.couldAttackButNotAttacking(combat, card);
         } else if (property.startsWith("kicked")) {
+            // CR 607.2i check cost is linked
+            Card host = spellAbility.getOriginalHost();
+            SpellAbility castSA = source.getCastSA();
+            if (host != null && castSA != null) {
+                Card castHost = castSA.getOriginalHost();
+                if (castHost == null) {
+                    castHost = castSA.getHostCard();
+                }
+                // impossible to match with the other part when not even from same host
+                if (!host.equals(castHost)) {
+                    return false;
+                }
+            }
             if (property.equals("kicked")) {
                 if (card.getKickerMagnitude() == 0) {
                     return false;
@@ -1716,10 +1729,6 @@ public class CardProperty {
                 String s = property.split("kicked ")[1];
                 if ("1".equals(s) && !card.isOptionalCostPaid(OptionalCost.Kicker1)) return false;
                 if ("2".equals(s) && !card.isOptionalCostPaid(OptionalCost.Kicker2)) return false;
-            }
-        } else if (property.startsWith("notkicked")) {
-            if (card.getKickerMagnitude() > 0) {
-                return false;
             }
         } else if (property.startsWith("pseudokicked")) {
             if (property.equals("pseudokicked")) {
