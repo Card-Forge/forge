@@ -376,6 +376,30 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
     }
 
     @Test
+    public void targetUtilityLandOverRainbow() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+        opponent.setLife(20, null);
+
+        // start with the opponent having a basic land, a dual, and a rainbow
+        addCard("Forest", opponent);
+        addCard("Breeding Pool", opponent);
+        addCard("Mana Confluence", opponent);
+        Card desired = addCard("Mutavault", opponent);
+        addCard("Strip Mine", p);
+
+        // It doesn't want to use strip mine in main
+        game.getPhaseHandler().devModeSet(PhaseType.COMBAT_DECLARE_BLOCKERS, p);
+        game.getAction().checkStateEffects(true);
+
+        // ensure that the land is played
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertEquals(desired, sa.getTargetCard());
+    }
+
+    @Test
     public void ensureAllLandsArePlayable() {
         initAndCreateGame();
 

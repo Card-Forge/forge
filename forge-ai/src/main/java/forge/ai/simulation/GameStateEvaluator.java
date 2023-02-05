@@ -4,6 +4,7 @@ import forge.ai.CreatureEvaluator;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
+import forge.game.cost.CostSacrifice;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
@@ -162,37 +163,7 @@ public class GameStateEvaluator {
         if (c.isCreature()) {
             return eval.evaluateCreature(c);
         } else if (c.isLand()) {
-            int value = 0;
-            // for each mana color a land generates for free, increase the value by one
-            // for each mana a land can produce, add one hundred.
-            int max_produced = 0;
-            Set<String> colors_produced = new HashSet<>();
-            for (SpellAbility m: c.getManaAbilities()) {
-                m.setActivatingPlayer(c.getController());
-                max_produced = max(max_produced, m.amountOfManaGenerated(true));
-                for (AbilityManaPart mp : m.getAllManaParts()) {
-                    colors_produced.addAll(Arrays.asList(mp.mana(m).split(" ")));
-                }
-            }
-            value += 100 * max_produced;
-            int size = max(colors_produced.size(), colors_produced.contains("Any") ? 5 : 0);
-            value += size * 6;
-
-            // add a value for each activated ability that the land has that's not an activated ability.
-            for (SpellAbility m: c.getNonManaAbilities()) {
-                // more than the value of having a card in hand, so if a land has an activated ability but
-                // not a mana ability, it will still be played.
-                value += 6;
-            }
-
-            // Add a value for each static ability that the land has
-            for (StaticAbility s : c.getStaticAbilities()) {
-                // More than the value of having a card in hand. See comment above
-                value += 6;
-            }
-
-
-            return value;
+            return evaluateLand(c);
         } else if (c.isEnchantingCard()) {
             // TODO: Should provide value in whatever it's enchanting?
             // Else the computer would think that casting a Lifelink enchantment
@@ -207,6 +178,50 @@ public class GameStateEvaluator {
             }
             return value;
         }
+    }
+
+    public static int evaluateLand(Card c) {
+        int value = 3;
+        // for each mana color a land generates for free, increase the value by one
+        // for each mana a land can produce, add one hundred.
+        int max_produced = 0;
+        Set<String> colors_produced = new HashSet<>();
+        for (SpellAbility m: c.getManaAbilities()) {
+            m.setActivatingPlayer(c.getController());
+            max_produced = max(max_produced, m.amountOfManaGenerated(true));
+            for (AbilityManaPart mp : m.getAllManaParts()) {
+                colors_produced.addAll(Arrays.asList(mp.mana(m).split(" ")));
+            }
+        }
+        value += 100 * max_produced;
+        int size = max(colors_produced.size(), colors_produced.contains("Any") ? 5 : 0);
+        value += size * 3;
+
+        // add a value for each activated ability that the land has that's not an activated ability.
+        // The value should be more than the value of having a card in hand, so if a land has an
+        // activated ability but not a mana ability, it will still be played.
+        for (SpellAbility m: c.getNonManaAbilities()) {
+
+            if (!m.getPayCosts().hasTapCost()) {
+                // probably a manland, rate it higher than a rainbow land
+                value += 25;
+            } else if (m.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+                // Sacrifice ability, so not repeatable. Less good than a utility land that gets you ahead
+                value += 10;
+            } else {
+                // Repeatable utility land, probably gets you ahead on board over time.
+                // big value, probably more than a manland
+                value += 50;
+            }
+        }
+
+        // Add a value for each static ability that the land has
+        for (StaticAbility s : c.getStaticAbilities()) {
+            // More than the value of having a card in hand. See comment above
+            value += 6;
+        }
+
+        return value;
     }
 
     private class SimulationCreatureEvaluator extends CreatureEvaluator {
