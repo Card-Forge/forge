@@ -1709,17 +1709,8 @@ public class CardProperty {
             return CombatUtil.couldAttackButNotAttacking(combat, card);
         } else if (property.startsWith("kicked")) {
             // CR 607.2i check cost is linked
-            Card host = spellAbility.getOriginalHost();
-            SpellAbility castSA = source.getCastSA();
-            if (host != null && castSA != null) {
-                Card castHost = castSA.getOriginalHost();
-                if (castHost == null) {
-                    castHost = castSA.getHostCard();
-                }
-                // impossible to match with the other part when not even from same host
-                if (!host.equals(castHost)) {
-                    return false;
-                }
+            if (AbilityUtils.isUnlinkedAbility(spellAbility, card)) {
+                return false;
             }
             if (property.equals("kicked")) {
                 if (card.getKickerMagnitude() == 0) {
