@@ -275,28 +275,6 @@ public final class GameActionUtil {
                         foretold.setPayCosts(new Cost(k[1], false));
 
                         alternatives.add(foretold);
-                    } else if (keyword.startsWith("More Than Meets the Eye")) {
-                        final String[] k = keyword.split(":");
-                        final Cost convertCost = new Cost(k[1], true);
-
-                        final SpellAbility newSA = new SpellPermanent(source);
-                        newSA.setCardState(source.getAlternateState());
-                        newSA.setPayCosts(convertCost);
-                        newSA.setActivatingPlayer(activator);
-
-                        newSA.putParam("PrecostDesc", k[0] + " ");
-                        newSA.putParam("CostDesc", convertCost.toString());
-
-                        // makes new SpellDescription
-                        final StringBuilder desc = new StringBuilder();
-                        desc.append(newSA.getCostDescription());
-                        desc.append("(").append(inst.getReminderText()).append(")");
-                        newSA.setDescription(desc.toString());
-                        newSA.putParam("AfterDescription", "(Converted)");
-
-                        newSA.setAlternativeCost(AlternativeCost.MTMtE);
-
-                        alternatives.add(newSA);
                     }
                 }
 

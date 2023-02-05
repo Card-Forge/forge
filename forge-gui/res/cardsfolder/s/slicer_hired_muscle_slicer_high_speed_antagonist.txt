@@ -10,9 +10,9 @@ SVar:TrigGainControl:DB$ GainControl | Optional$ True | NewController$ Triggered
 SVar:DBGoad:DB$ Goad | Defined$ Remembered | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | ForgetOnMoved$ Battlefield | EffectOwner$ TriggeredPlayer | StaticAbilities$ CantSac | SubAbility$ DBConvert
 SVar:CantSac:Mode$ CantSacrifice | ValidCard$ Card.IsRemembered | Description$ EFFECTSOURCE can't be sacrificed this turn.
-SVar:DBConvert:DB$ SetState | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | Mode$ Convert | SubAbility$ DBCleanup
+SVar:DBConvert:DB$ SetState | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | Mode$ Transform | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-AlternateMode:Convert
+AlternateMode:DoubleFaced
 Oracle:More Than Meets the Eye {2}{R} (You may cast this card converted for {2}{R}.)\nDouble strike, haste\nAt the beginning of each opponent's upkeep, you may have that player gain control of Slicer until end of turn. If you do, untap Slicer, goad it, and it can't be sacrificed this turn. If you don't, convert it.
 
 ALTERNATE
@@ -27,5 +27,5 @@ K:First Strike
 K:Haste
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigDelTrig | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, convert it at end of combat.
 SVar:TrigDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigConvert | TriggerDescription$ Convert NICKNAME at end of combat.
-SVar:TrigConvert:DB$ SetState | Mode$ Convert
+SVar:TrigConvert:DB$ SetState | Mode$ Transform
 Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nFirst strike, haste\nWhenever Slicer deals combat damage to a player, convert it at end of combat.

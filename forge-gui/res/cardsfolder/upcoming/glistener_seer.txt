@@ -1,0 +1,8 @@
+Name:Glistener Seer
+ManaCost:U
+Types:Creature Phyrexian Advisor
+PT:0/3
+K:etbCounter:OIL:3
+A:AB$ Scry | Cost$ T SubCounter<1/OIL/CARDNAME> | ScryNum$ 1 | SpellDescription$ Scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+DeckHas:Ability$Counters
+Oracle:Glistener Seer enters the battlefield with three oil counters on it.\n{T}, Remove an oil counter from Glistener Seer: Scry 1. (Look at the top card of your library. You may put that card on the bottom.)

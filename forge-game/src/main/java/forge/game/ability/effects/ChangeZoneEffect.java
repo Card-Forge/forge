@@ -604,14 +604,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             continue;
                         }
                     }
-                    if (sa.hasParam("Converted")) {
-                        if (gameCard.isConvertable()) {
-                            gameCard.changeCardState("Convert", null, sa);
-                        } else {
-                            // If it can't convert, don't change zones.
-                            continue;
-                        }
-                    }
                     if (sa.hasParam("WithCountersType")) {
                         CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                         int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);

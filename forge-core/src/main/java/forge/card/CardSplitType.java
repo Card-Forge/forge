@@ -5,7 +5,6 @@ import forge.card.CardFace.FaceSelectionMethod;
 public enum CardSplitType
 {
     None(FaceSelectionMethod.USE_PRIMARY_FACE, null),
-    Convert(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.Converted),
     Transform(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.Transformed),
     Meld(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.Meld),
     Split(FaceSelectionMethod.COMBINE, CardStateName.RightSplit),
