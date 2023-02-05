@@ -53,9 +53,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
             case "Creature":
                 if (sa.hasParam("TypesFromDefined")) {
                     for (final Card c : AbilityUtils.getDefinedCards(card, sa.getParam("TypesFromDefined"), sa)) {
-                        for (String t : c.getType().getCreatureTypes()) {
-                            validTypes.add(t);
-                        }
+                        validTypes.addAll(c.getType().getCreatureTypes());
                     }
                 } else if (sa.hasParam("MostPrevalentInDefinedZone")) {
                     final String[] info = sa.getParam("MostPrevalentInDefinedZone").split("_");

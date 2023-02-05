@@ -890,7 +890,7 @@ public abstract class SpellAbilityEffect {
         } else {
             options = activator.getAllOtherPlayers();
         }
-        return activator.getController().chooseSingleEntityForEffect(options, sa, Localizer.getInstance().getMessage("lblChoosePlayer") , null);
+        return activator.getController().chooseSingleEntityForEffect(options, sa, Localizer.getInstance().getMessage("lblChoosePlayer"), null);
     }
 
     public void handleExiledWith(Card exilingSource, Card movedCard, SpellAbility cause) {
