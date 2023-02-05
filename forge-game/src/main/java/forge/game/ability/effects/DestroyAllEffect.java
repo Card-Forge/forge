@@ -83,7 +83,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         }
         if (isOptional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeDestroy", desc), null)) {
             return;
-        }     
+        }
         // exclude cards that can't be destroyed at this moment
         list = CardLists.filter(list, CardPredicates.Presets.CAN_BE_DESTROYED);
 

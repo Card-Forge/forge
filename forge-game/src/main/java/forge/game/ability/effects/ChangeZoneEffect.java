@@ -585,7 +585,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             moveParams.put(AbilityKey.CardLKI, sa.getReplacingObject(AbilityKey.CardLKI));
                         }
                     }
- 
+
                     if (sa.hasParam("Tapped") || sa.isNinjutsu()) {
                         gameCard.setTapped(true);
                     }

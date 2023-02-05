@@ -80,7 +80,7 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
                 for (Map.Entry<Player, Integer> e : byController.entrySet()) {
                     for (String script : sa.getParam("TokenScript").split(",")) {
                         final Card token = TokenInfo.getProtoType(script, sa, p);
-    
+
                         if (token == null) {
                             throw new RuntimeException("don't find Token for TokenScript: " + script);
                         }

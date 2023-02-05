@@ -12,7 +12,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
  *
  */

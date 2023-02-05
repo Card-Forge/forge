@@ -133,7 +133,7 @@ public class VentureEffect  extends SpellAbilityEffect {
 
         for (final Player p : getTargetPlayers(sa)) {
             if (!p.isInGame()) {
-                continue; 
+                continue;
             }
             ventureIntoDungeon(sa, p, moveParams);
         }
