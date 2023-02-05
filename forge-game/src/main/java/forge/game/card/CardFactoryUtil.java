@@ -3134,6 +3134,7 @@ public class CardFactoryUtil {
             final Cost convertCost = new Cost(n[1], false);
 
             final SpellAbility sa = new SpellPermanent(host, host.getAlternateState(), convertCost);
+            sa.setDescription(host.getAlternateState().getName() + " (" + inst.getReminderText() + ")");
             sa.setCardState(host.getAlternateState());
             sa.setAlternativeCost(AlternativeCost.MTMtE);
 
