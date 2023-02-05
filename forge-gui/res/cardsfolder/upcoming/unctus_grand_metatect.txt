@@ -4,7 +4,7 @@ Types:Legendary Artifact Creature Phyrexian Vedalken
 PT:2/4
 S:Mode$ Continuous | Affected$ Creature.Other+Blue+YouCtrl | AddTrigger$ LootTrig | Description$ Other blue creatures you control have "Whenever this creature becomes tapped, draw a card, then discard a card."
 SVar:LootTrig:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever this creature becomes tapped, draw a card, then discard a card.
-SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard 
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
 S:Mode$ Continuous | Affected$ Creature.Artifact+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other artifact creatures you control get +1/+1.
 A:AB$ Animate | Cost$ UP | ValidTgts$ Creature.YouCtrl | Colors$ Blue | Types$ Artifact | SorcerySpeed$ True | SpellDescription$ Until end of turn, target creature you control becomes a blue artifact in addition to its other colors and types. Activate only as a sorcery. ({U/P} can be paid with either {U} or 2 life.)

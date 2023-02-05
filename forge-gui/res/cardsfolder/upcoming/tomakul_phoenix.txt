@@ -1,5 +1,5 @@
 Name:Tomakul Phoenix
-ManaCost:1 R R 
+ManaCost:1 R R
 Types:Creature Phoenix
 PT:2/2
 K:Flying

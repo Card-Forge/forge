@@ -1,6 +1,6 @@
 Name:The Seedcore
 ManaCost:no cost
-Types:Land Sphere 
+Types:Land Sphere
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Creature+Phyrexian | SpellDescription$ Add one mana of any color. Spend this mana only to cast Phyrexian creature spells.
 A:AB$ Pump | Cost$ T | PrecostDesc$ Corrupted — | CheckSVar$ X | SVarCompare$ GE3 | ValidTgts$ Creature.powerEQ1+toughnessEQ1 | TgtPrompt$ Select target 1/1 creature  | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Target 1/1 creature gets +2/+1 until end of turn. Activate only if an opponent has three or more poison counters.
