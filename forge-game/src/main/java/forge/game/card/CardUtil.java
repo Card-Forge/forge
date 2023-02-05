@@ -266,6 +266,15 @@ public final class CardUtil {
         newCopy.addImprintedCards(in.getImprintedCards());
         newCopy.setChosenCards(new CardCollection(in.getChosenCards()));
 
+        newCopy.setChosenType(in.getChosenType());
+        newCopy.setChosenType2(in.getChosenType2());
+        newCopy.setChosenName(in.getChosenName());
+        newCopy.setChosenName2(in.getChosenName2());
+        newCopy.setChosenColors(Lists.newArrayList(in.getChosenColors()));
+        if (in.hasChosenNumber()) {
+            newCopy.setChosenNumber(in.getChosenNumber());
+        }
+
         for (Table.Cell<Player, CounterType, Integer> cl : in.getEtbCounters()) {
             newCopy.addEtbCounter(cl.getColumnKey(), cl.getValue(), cl.getRowKey());
         }
