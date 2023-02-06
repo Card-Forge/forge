@@ -415,9 +415,9 @@ public final class ImageKeys {
                 if (code != null) {
                     if (!code.equalsIgnoreCase(setFolder))
                         aliasSet.add(code);
-                    if (!aliasSet.isEmpty())
-                        editionAlias.put(setFolder, aliasSet);
                 }
+                if (!aliasSet.isEmpty())
+                    editionAlias.put(setFolder, aliasSet);
             }
             editionHasImage = FileUtil.isDirectoryWithFiles(CACHE_CARD_PICS_DIR + setFolder);
             editionImageLookup.put(pc.getEdition(), editionHasImage);
