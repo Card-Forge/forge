@@ -402,7 +402,10 @@ public final class ImageKeys {
             CardEdition ed = StaticData.instance().getEditions().get(setFolder);
             if (ed != null && !editionAlias.containsKey(setFolder)) {
                 String alias = ed.getAlias();
-                editionAlias.put(setFolder, alias == null ? ed.getCode() : alias);
+                if (alias == null)
+                    alias = ed.getCode();
+                if (!alias.equalsIgnoreCase(setFolder))
+                    editionAlias.put(setFolder, alias);
             }
             editionHasImage = FileUtil.isDirectoryWithFiles(CACHE_CARD_PICS_DIR + setFolder);
             editionImageLookup.put(pc.getEdition(), editionHasImage);
