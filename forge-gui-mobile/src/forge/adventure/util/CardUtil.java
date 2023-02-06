@@ -57,8 +57,18 @@ public class CardUtil {
         public boolean apply(final PaperCard card) {
             if(!this.rarities.isEmpty()&&!this.rarities.contains(card.getRarity()))
                 return !this.shouldBeEqual;
-            if(!this.editions.isEmpty()&&!this.editions.contains(card.getEdition()))
-                return !this.shouldBeEqual;
+            if(!this.editions.isEmpty()&&!this.editions.contains(card.getEdition())) {
+                boolean found = false;
+                List<PaperCard> allPrintings = FModel.getMagicDb().getCommonCards().getAllCards(card.getCardName());
+                for (PaperCard c : allPrintings){
+                    if (this.editions.contains(c.getEdition())) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                    return !this.shouldBeEqual;
+            }
             if(!this.manaCosts.isEmpty()&&!this.manaCosts.contains(card.getRules().getManaCost().getCMC()))
                 return !this.shouldBeEqual;
             if(this.text!=null&& !this.text.matcher(card.getRules().getOracleText()).find())
