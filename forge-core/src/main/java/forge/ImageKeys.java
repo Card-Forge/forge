@@ -272,6 +272,34 @@ public final class ImageKeys {
                         return file;
                     }
                 }
+                //lookup other cards like planechase/phenomenon
+                if (!filename.contains(".full")) {
+                    String newFilename = TextUtil.addSuffix(filename,".full");
+                    file = findFile(dir, newFilename);
+                    if (file != null) {
+                        cachedCards.put(filename, file);
+                        return file;
+                    }
+                    String newFilename2 = TextUtil.addSuffix(filename,".fullborder");
+                    file = findFile(dir, newFilename2);
+                    if (file != null) {
+                        cachedCards.put(filename, file);
+                        return file;
+                    }
+                    String setCode = filename.substring(0, filename.indexOf("/"));
+                    if (!setCode.isEmpty() && editionAlias.containsKey(setCode)) {
+                        file = findFile(dir, TextUtil.fastReplace(newFilename, setCode + "/", editionAlias.get(setCode) + "/"));
+                        if (file != null) {
+                            cachedCards.put(filename, file);
+                            return file;
+                        }
+                        file = findFile(dir, TextUtil.fastReplace(newFilename2, setCode + "/", editionAlias.get(setCode) + "/"));
+                        if (file != null) {
+                            cachedCards.put(filename, file);
+                            return file;
+                        }
+                    }
+                }
             }
         }
 
@@ -374,7 +402,10 @@ public final class ImageKeys {
             CardEdition ed = StaticData.instance().getEditions().get(setFolder);
             if (ed != null && !editionAlias.containsKey(setFolder)) {
                 String alias = ed.getAlias();
-                editionAlias.put(setFolder, alias == null ? ed.getCode() : alias);
+                if (alias == null)
+                    alias = ed.getCode();
+                if (!alias.equalsIgnoreCase(setFolder))
+                    editionAlias.put(setFolder, alias);
             }
             editionHasImage = FileUtil.isDirectoryWithFiles(CACHE_CARD_PICS_DIR + setFolder);
             editionImageLookup.put(pc.getEdition(), editionHasImage);
