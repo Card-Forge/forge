@@ -1,0 +1,14 @@
+Name:Kaya, Intangible Slayer
+ManaCost:3 W W B B
+Types:Legendary Planeswalker Kaya
+Loyalty:6
+K:Hexproof
+A:AB$ LoseLife | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Defined$ Opponent | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 3 life and you gain 3 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
+A:AB$ Draw | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | NumCards$ 2 | SubAbility$ DBScry | SpellDescription$ You draw two cards.
+SVar:DBScry:DB$ Scry | Defined$ Opponent | Optional$ True | StackDescription$ SpellDescription | SpellDescription$ Then each opponent may scry 1.
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Enchantment | TgtPrompt$ Select target creature or enchantment | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ DBCopy | SpellDescription$ Exile target creature or enchantment.
+SVar:DBCopy:DB$ CopyPermanent | ConditionDefined$ RememberedLKI | ConditionPresent$ Card.nonAura | Defined$ RememberedLKI | SetPower$ 1 | SetToughness$ 1 | AddTypes$ Creature & Spirit | AddKeywords$ Flying | SetColor$ White | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ If it wasn't an Aura, create a token that's a copy of it, except it's a 1/1 white Spirit creature with flying in addition to its other types.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$LifeGain|Token & Type$Spirit
+Oracle:Hexproof\n[+2]: Each opponent loses 3 life and you gain 3 life.\n[0]: You draw two cards. Then each opponent may scry 1.\n[−3]: Exile target creature or enchantment. If it wasn't an Aura, create a token that's a copy of it, except it's a 1/1 white Spirit creature with flying in addition to its other types.
