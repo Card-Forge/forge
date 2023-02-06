@@ -585,7 +585,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             moveParams.put(AbilityKey.CardLKI, sa.getReplacingObject(AbilityKey.CardLKI));
                         }
                     }
- 
+
                     if (sa.hasParam("Tapped") || sa.isNinjutsu()) {
                         gameCard.setTapped(true);
                     }
@@ -601,14 +601,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             gameCard.changeCardState("Transform", null, sa);
                         } else {
                             // If it can't Transform, don't change zones.
-                            continue;
-                        }
-                    }
-                    if (sa.hasParam("Converted")) {
-                        if (gameCard.isConvertable()) {
-                            gameCard.changeCardState("Convert", null, sa);
-                        } else {
-                            // If it can't convert, don't change zones.
                             continue;
                         }
                     }

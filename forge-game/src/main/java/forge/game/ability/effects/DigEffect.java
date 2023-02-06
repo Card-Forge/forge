@@ -344,7 +344,7 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                     } else {
                         String prompt;
-                        
+
                         if (sa.hasParam("PrimaryPrompt")) {
                             prompt = sa.getParam("PrimaryPrompt");
                         } else {

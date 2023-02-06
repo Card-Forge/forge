@@ -116,7 +116,7 @@ public class SwitchBlockEffect extends SpellAbilityEffect {
         } else { // For Sorrow's Path
             // If targeting blockers but only one remains, this fizzles.
             if (blockers.size() == 1) return;
- 
+
             final Card blocker1 = blockers.get(0);
             final Card blocker2 = blockers.get(1);
 

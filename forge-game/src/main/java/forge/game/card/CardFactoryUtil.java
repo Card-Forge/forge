@@ -67,6 +67,7 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
+import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantBeCast;
 import forge.game.trigger.Trigger;
@@ -3128,6 +3129,20 @@ public class CardFactoryUtil {
 
             inst.addSpellAbility(abilityMorphDown(card));
             inst.addSpellAbility(abilityMorphUp(card, k[1], true));
+        } else if (keyword.startsWith("More Than Meets the Eye")) {
+            final String[] n = keyword.split(":");
+            final Cost convertCost = new Cost(n[1], false);
+
+            final SpellAbility sa = new SpellPermanent(host, host.getAlternateState(), convertCost);
+            sa.setDescription(host.getAlternateState().getName() + " (" + inst.getReminderText() + ")");
+            sa.setCardState(host.getAlternateState());
+            sa.setAlternativeCost(AlternativeCost.MTMtE);
+
+            sa.putParam("PrecostDesc", n[0] + " ");
+            sa.putParam("CostDesc", convertCost.toString());
+            sa.putParam("AfterDescription", "(Converted)");
+            sa.setIntrinsic(intrinsic);
+            inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Multikicker")) {
             final String[] n = keyword.split(":");
             final SpellAbility sa = card.getFirstSpellAbility();

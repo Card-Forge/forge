@@ -24,6 +24,7 @@ import com.google.common.collect.Maps;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellApiBased;
 import forge.game.card.Card;
+import forge.game.card.CardState;
 import forge.game.cost.Cost;
 
 /**
@@ -47,8 +48,14 @@ public class SpellPermanent extends SpellApiBased {
      *            a {@link forge.game.card.Card} object.
      */
     public SpellPermanent(final Card sourceCard) {
-        super(sourceCard.isCreature() ? ApiType.PermanentCreature : ApiType.PermanentNoncreature, sourceCard,
-                new Cost(sourceCard.getManaCost(), false), null, Maps.newHashMap());
+        this(sourceCard, sourceCard.getCurrentState(), new Cost(sourceCard.getManaCost(), false));
+    }
+    public SpellPermanent(final Card sourceCard, final CardState cardstate) {
+        this(sourceCard, cardstate, new Cost(cardstate.getManaCost(), false));
+    }
+    public SpellPermanent(final Card sourceCard, final CardState cardstate, final Cost cost) {
+        super(cardstate.getType().isCreature() ? ApiType.PermanentCreature : ApiType.PermanentNoncreature, sourceCard,
+                cost, null, Maps.newHashMap());
 
         // reset StackDescription for something with Text
         this.setStackDescription("");

@@ -1,5 +1,5 @@
 Name:Archfiend of the Dross
-ManaCost:2 B
+ManaCost:2 B B
 Types:Creature Phyrexian Demon
 PT:6/6
 K:Flying

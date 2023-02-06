@@ -54,7 +54,7 @@ public class MeldEffect extends SpellAbilityEffect {
                 return;
             }
         }
-        
+
         if (sa.hasParam("Tapped")) {
             primary.setTapped(true);
         }

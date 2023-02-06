@@ -97,7 +97,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                 }
             }
 
-            // special for Protection:Card.<color>:Protection from <color>:*             
+            // special for Protection:Card.<color>:Protection from <color>:*
             for (final KeywordInterface inst : tgtC.getUnhiddenKeywords()) {
                 String keyword = inst.getOriginal();
                 if (keyword.startsWith("Protection:")) {

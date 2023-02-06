@@ -82,7 +82,7 @@ public class MustBlockEffect extends SpellAbilityEffect {
                 }
             };
             addUntilCommand(sa, removeBlockingRequirements);
-        } 
+        }
     }
 
     @Override

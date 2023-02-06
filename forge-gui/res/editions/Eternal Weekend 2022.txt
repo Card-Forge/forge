@@ -7,10 +7,4 @@ ScryfallCode=PEWK
 
 [cards]
 1 R Gush @Sam White
-1AVC S Bazaar of Baghdad @Chris Seaman
-1ALC S Gaea's Cradle @Ralph Horsley
-1ELC S The Tabernacle at Pendrell Vale @Milivoj Ceran
-1EVC S Ancestral Recall @Volkan Baga
-1NALC S Scrubland @Raoul Vitale
-1NAVC S Time Walk @Tyler Walpole
 2 R Ponder @Julie Dillon

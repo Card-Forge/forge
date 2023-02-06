@@ -42,7 +42,7 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
      * <p>
      * generatedReflectedMana.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param colors

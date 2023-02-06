@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Artifact Creature Phyrexian Cleric
 PT:2/1
 K:Lifelink
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.Other+YouCtrl | Execute$ TrigPump | TriggerDescription$ Whenever another artifact enters the battlefield under your control, CARDNAME gets +1/+1 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another artifact enters the battlefield under your control, CARDNAME gets +1/+1 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
 DeckHints:Type$Artifact
 DeckHas:Ability$LifeGain

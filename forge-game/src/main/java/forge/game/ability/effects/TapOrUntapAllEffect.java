@@ -42,7 +42,7 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
         } else {
             validCards = getTargetCards(sa);
         }
-        
+
         if (sa.usesTargeting() || sa.hasParam("Defined")) {
             validCards = CardLists.filterControlledBy(validCards, getTargetPlayers(sa));
         }

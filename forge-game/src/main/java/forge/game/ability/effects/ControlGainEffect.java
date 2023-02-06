@@ -279,7 +279,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             private static final long serialVersionUID = 878543373519872418L;
 
             @Override
-            public void run() { 
+            public void run() {
                 doLoseControl(c, hostCard, tStamp);
                 c.removeChangedSVars(tStamp, 0);
             }

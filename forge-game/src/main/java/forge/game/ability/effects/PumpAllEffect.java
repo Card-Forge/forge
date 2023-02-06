@@ -70,7 +70,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
             if (sa.hasParam("RememberAllPumped")) {
                 sa.getHostCard().addRemembered(tgtC);
             }
-        
+
             if (!"Permanent".equals(sa.getParam("Duration"))) {
                 // If not Permanent, remove Pumped at EOT
                 final GameCommand untilEOT = new GameCommand() {

@@ -3,7 +3,6 @@ Code=PLG20
 Date=2020-05-18
 Name=Love Your LGS 2020
 Code2=PLGS
-Alias=PLGS
 Type=Promo
 ScryfallCode=PLG20
 

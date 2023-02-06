@@ -1515,6 +1515,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.TokenCreated, runParams, false);
     }
 
+    public final int getNumTokenCreatedThisTurn() {
+        return numTokenCreatedThisTurn;
+    }
+
     public final void resetNumTokenCreatedThisTurn() {
         numTokenCreatedThisTurn = 0;
     }

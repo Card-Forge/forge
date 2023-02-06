@@ -28,7 +28,7 @@ public class ReplaceManaEffect extends SpellAbilityEffect {
 
         @SuppressWarnings("unchecked")
         Map<AbilityKey, Object> params = (Map<AbilityKey, Object>) sa.getReplacingObject(AbilityKey.OriginalParams);
-        
+
         String replaced = (String)sa.getReplacingObject(AbilityKey.Mana);
         if (sa.hasParam("ReplaceMana")) {
             // replace type and amount
@@ -49,14 +49,14 @@ public class ReplaceManaEffect extends SpellAbilityEffect {
             for (byte c : MagicColor.WUBRGC) {
                 String s = MagicColor.toShortString(c);
                 replaced = replaced.replace(s, color);
-            }            
+            }
         } else if (sa.hasParam("ReplaceColor")) {
             // replace color
             String color = sa.getParam("ReplaceColor");
             if ("Chosen".equals(color)) {
                 if (card.hasChosenColor()) {
                     color = MagicColor.toShortString(card.getChosenColor());
-                } 
+                }
             }
             if (sa.hasParam("ReplaceOnly")) {
                 replaced = replaced.replace(sa.getParam("ReplaceOnly"), color);
