@@ -1709,7 +1709,7 @@ public class CardProperty {
             return CombatUtil.couldAttackButNotAttacking(combat, card);
         } else if (property.startsWith("kicked")) {
             // CR 607.2i check cost is linked
-            if (AbilityUtils.isUnlinkedAbility(spellAbility, card)) {
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
                 return false;
             }
             if (property.equals("kicked")) {

@@ -1757,7 +1757,7 @@ public class AbilityUtils {
 
                 // Count$Kicked.<numHB>.<numNotHB>
                 if (sq[0].startsWith("Kicked")) {
-                    boolean kicked = sa.isKicked() || (!isUnlinkedAbility(ctb, c) && c.getKickerMagnitude() > 0);
+                    boolean kicked = sa.isKicked() || (!isUnlinkedFromCastSA(ctb, c) && c.getKickerMagnitude() > 0);
                     return doXMath(Integer.parseInt(kicked ? sq[1] : sq[2]), expr, c, ctb);
                 }
 
@@ -1995,7 +1995,7 @@ public class AbilityUtils {
         }
 
         if (sq[0].startsWith("Kicked")) { // fallback for not spellAbility
-            return doXMath(calculateAmount(c, sq[!isUnlinkedAbility(ctb, c) && c.getKickerMagnitude() > 0 ? 1 : 2], ctb), expr, c, ctb);
+            return doXMath(calculateAmount(c, sq[!isUnlinkedFromCastSA(ctb, c) && c.getKickerMagnitude() > 0 ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].startsWith("Escaped")) {
             return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isEscape() ? 1 : 2], ctb), expr, c, ctb);
@@ -2064,7 +2064,7 @@ public class AbilityUtils {
             return doXMath(c.getKeywordMagnitude(Keyword.smartValueOf(l[0].split(" ")[1])), expr, c, ctb);
         }
         if (sq[0].contains("TimesKicked")) {
-            return doXMath(isUnlinkedAbility(ctb, c) ? 0 : c.getKickerMagnitude(), expr, c, ctb);
+            return doXMath(isUnlinkedFromCastSA(ctb, c) ? 0 : c.getKickerMagnitude(), expr, c, ctb);
         }
         if (sq[0].contains("TimesPseudokicked")) {
             return doXMath(c.getPseudoKickerMagnitude(), expr, c, ctb);
@@ -3886,7 +3886,19 @@ public class AbilityUtils {
         return types.size();
     }
 
-    public static boolean isUnlinkedAbility(CardTraitBase ctb, Card card) {
+    /**
+     * Checks if an ability source can be considered a "broken link" on a specific host
+     * (which usually means it won't have its normal effect).
+     * <br>
+     * Because castSA gets used to compare it can only make a safe conclusion for
+     * links that depend on stack decisions and can't be gained by other means
+     * e.g. Kicker costs.
+     *
+     * @param ctb the source of the ability
+     * @param card the host that it should be linked to
+     * @return true if the ability can't be linked
+     */
+    public static boolean isUnlinkedFromCastSA(final CardTraitBase ctb, final Card card) {
         // check if it should come from same host
         if (ctb != null && ctb.getHostCard().equals(card)) {
             Card host = ctb.getOriginalHost();
