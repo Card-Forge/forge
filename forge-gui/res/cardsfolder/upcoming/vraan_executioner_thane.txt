@@ -1,0 +1,9 @@
+Name:Vraan, Executioner Thane
+ManaCost:1 B
+Types:Legendary Creature Phyrexian Vampire
+PT:2/2
+T:Mode$ ChangesZoneAll | TriggerZones$ Battlefield | ValidCards$ Creature.Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDrain | ActivationLimit$ 1 | TriggerDescription$ Whenever one or more other creatures you control die, each opponent loses 2 life and you gain 2 life. This ability triggers only once each turn.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:Whenever one or more other creatures you control die, each opponent loses 2 life and you gain 2 life. This ability triggers only once each turn.
