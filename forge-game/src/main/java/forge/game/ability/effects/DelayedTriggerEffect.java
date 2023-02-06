@@ -110,7 +110,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
                 @Override
                 public void run() {
                     trigHandler.registerDelayedTrigger(delTrig);
-                    
+
                 }
             };
             game.getCleanup().addUntil(upcomingTurnTrig);

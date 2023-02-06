@@ -72,7 +72,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
             if (!p.isInGame()) {
                 continue;
             }
- 
+
             CardCollectionView pool0;
             if (sa.hasParam("DefinedCards")) {
                 pool0 = AbilityUtils.getDefinedCards(card, sa.getParam("DefinedCards"), sa);

@@ -46,7 +46,7 @@ public class ClashEffect extends SpellAbilityEffect {
                 AbilityUtils.resolve(sub);
             }
         }
-        
+
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
         runParams.put(AbilityKey.Won, player.equals(winner) ? "True" : "False");
@@ -68,7 +68,7 @@ public class ClashEffect extends SpellAbilityEffect {
          * Each clashing player reveals the top card of his or her library, then
          * puts that card on the top or bottom. A player wins if his or her card
          * had a higher mana cost.
-         * 
+         *
          * Clash you win or win you don't. There is no tie.
          */
         final Card source = sa.getHostCard();

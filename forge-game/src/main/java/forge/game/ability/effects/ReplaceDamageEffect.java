@@ -33,10 +33,10 @@ public class ReplaceDamageEffect extends SpellAbilityEffect {
         @SuppressWarnings("unchecked")
         Map<AbilityKey, Object> originalParams = (Map<AbilityKey, Object>) sa.getReplacingObject(AbilityKey.OriginalParams);
         Integer dmg = (Integer) sa.getReplacingObject(AbilityKey.DamageAmount);
-                
+
         String varValue = sa.getParamOrDefault("Amount", "1");
         int prevent = AbilityUtils.calculateAmount(card, varValue, sa);
-        
+
         if (prevent > 0) {
             int n = Math.min(dmg, prevent);
             // if the effect has divided shield, use that

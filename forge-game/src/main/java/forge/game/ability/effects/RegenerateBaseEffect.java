@@ -51,7 +51,7 @@ public abstract class RegenerateBaseEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("RegenerationTrigger")) {
-            final String str = sa.getSVar(sa.getParam("RegenerationTrigger")); 
+            final String str = sa.getSVar(sa.getParam("RegenerationTrigger"));
 
             SpellAbility trigSA = AbilityFactory.getAbility(str, eff);
 

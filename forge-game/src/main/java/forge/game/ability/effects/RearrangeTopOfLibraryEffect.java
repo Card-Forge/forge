@@ -84,7 +84,7 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
     /**
      * use this when Human needs to rearrange the top X cards in a player's
      * library. You may also specify a shuffle when done
-     * 
+     *
      * @param src
      *            the source card
      * @param player

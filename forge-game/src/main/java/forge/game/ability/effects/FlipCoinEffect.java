@@ -224,7 +224,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
      * <p>
      * flipCoinNoCall  Flip a coin without any call.
      * </p>
-     * 
+     *
      * @param sa   the source card.
      * @param flipper  the player flipping the coin.
      * @param multiplier
@@ -246,7 +246,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             }
             flipper.getGame().getAction().notifyOfValue(sa, flipper, result ? Localizer.getInstance().getMessage("lblHeads") : Localizer.getInstance().getMessage("lblTails"), null);
         } while (sa.hasParam("FlipUntilYouLose") && result != false);
-        
+
         if (sa.hasParam("FlipUntilYouLose") && sa.hasAdditionalAbility("LoseSubAbility")) {
             sa.getAdditionalAbility("LoseSubAbility").setSVar(varName, "Number$" + numSuccesses);
         }
@@ -258,7 +258,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
      * <p>
      * flipCoinCall.
      * </p>
-     * 
+     *
      * @param caller
      * @param sa
      * @param multiplier
@@ -297,7 +297,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             runParams.put(AbilityKey.Result, wonFlip);
             caller.getGame().getTriggerHandler().runTrigger(TriggerType.FlippedCoin, runParams, false);
         } while (sa.hasParam("FlipUntilYouLose") && wonFlip);
-        
+
         if (sa.hasParam("FlipUntilYouLose") && sa.hasAdditionalAbility("LoseSubAbility")) {
             sa.getAdditionalAbility("LoseSubAbility").setSVar(varName, "Number$" + numSuccesses);
         }

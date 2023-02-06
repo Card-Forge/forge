@@ -277,7 +277,7 @@ public class CounterEffect extends SpellAbilityEffect {
         final Card c = tgtSA.getHostCard();
         final Zone originZone = c.getZone();
 
-        // Run any applicable replacement effects. 
+        // Run any applicable replacement effects.
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(tgtSA.getHostCard());
         repParams.put(AbilityKey.TgtSA, tgtSA);
         repParams.put(AbilityKey.Cause, srcSA.getHostCard());

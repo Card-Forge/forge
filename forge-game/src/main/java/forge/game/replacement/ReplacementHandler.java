@@ -1010,4 +1010,8 @@ public class ReplacementHandler {
         });
         return !list.isEmpty();
     }
+
+    public boolean isReplacing() {
+        return !hasRun.isEmpty();
+    }
 }

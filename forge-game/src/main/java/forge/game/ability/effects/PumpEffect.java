@@ -126,7 +126,7 @@ public class PumpEffect extends SpellAbilityEffect {
             final List<String> keywords, final long timestamp) {
         final Card host = sa.getHostCard();
         final String duration = sa.getParam("Duration");
-        
+
         //if host is not on the battlefield don't apply
         // Suspend should does Affect the Stack
         if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration))
