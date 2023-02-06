@@ -1,5 +1,5 @@
 Name:Gulping Scraptrap
-ManaCost:3 U
+ManaCost:4 B
 Types:Creature Phyrexian Horror
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ When CARDNAME enters the battlefield or dies, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
