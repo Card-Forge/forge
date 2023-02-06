@@ -2,8 +2,7 @@
 Code=HOP
 Date=2009-09-04
 Name=Planechase
-Alias=PCH
-Code2=HOP
+Code2=PCH
 Type=Multiplayer
 ScryfallCode=HOP
 
