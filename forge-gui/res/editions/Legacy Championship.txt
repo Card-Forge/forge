@@ -27,3 +27,6 @@ ScryfallCode=OLGC
 2021A M Wasteland @Mark Tedin
 2021B M Bayou @Sidharth Chaturvedi
 2021C M Sylvan Library @Raoul Vitale
+2022A M Gaea's Cradle @Ralph Horsley
+2022B M Scrubland @Raoul Vitale
+2022C M The Tabernacle at Pendrell Vale @Milivoj Ćeran
