@@ -40,7 +40,7 @@ public final class ImageKeys {
 
     private static Map<String, Boolean> editionImageLookup = new HashMap<>();
 
-    private static Map<String, String> editionAlias = new HashMap<>();
+    private static Map<String, Set<String>> editionAlias = new HashMap<>();
     private static Set<String> toFind = new HashSet<>();
 
     private static boolean isLibGDXPort = false;
@@ -192,15 +192,17 @@ public final class ImageKeys {
                 }
                 String setCode = filename.contains("/") ? filename.substring(0, filename.indexOf("/")) : "";
                 if (!setCode.isEmpty() && editionAlias.containsKey(setCode)) {
-                    file = findFile(dir, TextUtil.fastReplace(filename, setCode + "/", editionAlias.get(setCode) + "/"));
-                    if (file != null) {
-                        cachedCards.put(filename, file);
-                        return file;
-                    }
-                    file = findFile(dir, TextUtil.fastReplace(fullborderFile, setCode + "/", editionAlias.get(setCode) + "/"));
-                    if (file != null) {
-                        cachedCards.put(filename, file);
-                        return file;
+                    for (String alias : editionAlias.get(setCode)) {
+                        file = findFile(dir, TextUtil.fastReplace(filename, setCode + "/", alias + "/"));
+                        if (file != null) {
+                            cachedCards.put(filename, file);
+                            return file;
+                        }
+                        file = findFile(dir, TextUtil.fastReplace(fullborderFile, setCode + "/", alias + "/"));
+                        if (file != null) {
+                            cachedCards.put(filename, file);
+                            return file;
+                        }
                     }
                 }
             }
@@ -288,15 +290,17 @@ public final class ImageKeys {
                     }
                     String setCode = filename.substring(0, filename.indexOf("/"));
                     if (!setCode.isEmpty() && editionAlias.containsKey(setCode)) {
-                        file = findFile(dir, TextUtil.fastReplace(newFilename, setCode + "/", editionAlias.get(setCode) + "/"));
-                        if (file != null) {
-                            cachedCards.put(filename, file);
-                            return file;
-                        }
-                        file = findFile(dir, TextUtil.fastReplace(newFilename2, setCode + "/", editionAlias.get(setCode) + "/"));
-                        if (file != null) {
-                            cachedCards.put(filename, file);
-                            return file;
+                        for (String alias : editionAlias.get(setCode)) {
+                            file = findFile(dir, TextUtil.fastReplace(newFilename, setCode + "/", alias + "/"));
+                            if (file != null) {
+                                cachedCards.put(filename, file);
+                                return file;
+                            }
+                            file = findFile(dir, TextUtil.fastReplace(newFilename2, setCode + "/", alias + "/"));
+                            if (file != null) {
+                                cachedCards.put(filename, file);
+                                return file;
+                            }
                         }
                     }
                 }
@@ -402,10 +406,18 @@ public final class ImageKeys {
             CardEdition ed = StaticData.instance().getEditions().get(setFolder);
             if (ed != null && !editionAlias.containsKey(setFolder)) {
                 String alias = ed.getAlias();
-                if (alias == null)
-                    alias = ed.getCode();
-                if (!alias.equalsIgnoreCase(setFolder))
-                    editionAlias.put(setFolder, alias);
+                Set aliasSet = new HashSet<>();
+                if (alias != null) {
+                    if (!alias.equalsIgnoreCase(setFolder))
+                        aliasSet.add(alias);
+                }
+                String code = ed.getCode();
+                if (code != null) {
+                    if (!code.equalsIgnoreCase(setFolder))
+                        aliasSet.add(code);
+                    if (!aliasSet.isEmpty())
+                        editionAlias.put(setFolder, aliasSet);
+                }
             }
             editionHasImage = FileUtil.isDirectoryWithFiles(CACHE_CARD_PICS_DIR + setFolder);
             editionImageLookup.put(pc.getEdition(), editionHasImage);
