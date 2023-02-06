@@ -3900,7 +3900,7 @@ public class AbilityUtils {
      */
     public static boolean isUnlinkedFromCastSA(final CardTraitBase ctb, final Card card) {
         // check if it should come from same host
-        if (ctb != null && ctb.getHostCard().equals(card)) {
+        if (ctb != null && ctb.isIntrinsic() && ctb.getHostCard().equals(card)) {
             Card host = ctb.getOriginalHost();
             SpellAbility castSA = card.getCastSA();
             if (host != null && castSA != null) {
