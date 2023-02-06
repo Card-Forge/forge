@@ -3,7 +3,6 @@ Code=PW12
 Date=2012-01-01
 Name=Wizards Play Network 2012
 Code2=PWP12
-Alias=PWP12
 Type=Promo
 ScryfallCode=PW12
 

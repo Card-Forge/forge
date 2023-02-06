@@ -1,5 +1,6 @@
 package forge;
 
+import forge.card.CardEdition;
 import forge.item.PaperCard;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
@@ -38,6 +39,8 @@ public final class ImageKeys {
     private static Map<String, String> CACHE_CARD_PICS_SUBDIR;
 
     private static Map<String, Boolean> editionImageLookup = new HashMap<>();
+
+    private static Map<String, String> editionAlias = new HashMap<>();
     private static Set<String> toFind = new HashSet<>();
 
     private static boolean isLibGDXPort = false;
@@ -185,6 +188,19 @@ public final class ImageKeys {
                         });
                     } catch (Exception e) {
                         toFind.remove(filename);
+                    }
+                }
+                String setCode = filename.contains("/") ? filename.substring(0, filename.indexOf("/")) : "";
+                if (!setCode.isEmpty() && editionAlias.containsKey(setCode)) {
+                    file = findFile(dir, TextUtil.fastReplace(filename, setCode + "/", editionAlias.get(setCode) + "/"));
+                    if (file != null) {
+                        cachedCards.put(filename, file);
+                        return file;
+                    }
+                    file = findFile(dir, TextUtil.fastReplace(fullborderFile, setCode + "/", editionAlias.get(setCode) + "/"));
+                    if (file != null) {
+                        cachedCards.put(filename, file);
+                        return file;
                     }
                 }
             }
@@ -355,6 +371,11 @@ public final class ImageKeys {
         Boolean editionHasImage = editionImageLookup.get(pc.getEdition());
         if (editionHasImage == null) {
             String setFolder = getSetFolder(pc.getEdition());
+            CardEdition ed = StaticData.instance().getEditions().get(setFolder);
+            if (ed != null && !editionAlias.containsKey(setFolder)) {
+                String alias = ed.getAlias();
+                editionAlias.put(setFolder, alias == null ? ed.getCode() : alias);
+            }
             editionHasImage = FileUtil.isDirectoryWithFiles(CACHE_CARD_PICS_DIR + setFolder);
             editionImageLookup.put(pc.getEdition(), editionHasImage);
             if (editionHasImage) {
