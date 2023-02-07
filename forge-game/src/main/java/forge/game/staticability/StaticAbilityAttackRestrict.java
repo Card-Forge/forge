@@ -30,18 +30,24 @@ public class StaticAbilityAttackRestrict {
 
     static public int attackRestrictNum(GameEntity defender) {
         final Game game = defender.getGame();
+        int num = Integer.MAX_VALUE;
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
+                if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()
+                        || !stAb.hasParam("ValidDefender")) {
                     continue;
                 }
                 if (attackRestrict(stAb, defender)) {
-                    return AbilityUtils.calculateAmount(stAb.getHostCard(),
+                    int stNum = AbilityUtils.calculateAmount(stAb.getHostCard(),
                             stAb.getParamOrDefault("MaxAttackers", "1"), stAb);
+                    if (stNum < num) {
+                        num = stNum;
+                    }
                 }
+
             }
         }
-        return -1;
+        return num < Integer.MAX_VALUE ? num : -1;
     }
 
     static public boolean attackRestrict(StaticAbility stAb, GameEntity defender) {
