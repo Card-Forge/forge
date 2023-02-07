@@ -3,4 +3,5 @@ ManaCost:3 U
 Types:Artifact
 K:etbCounter:OIL:4
 A:AB$ Tap | Cost$ 1 SubCounter<1/OIL/CARDNAME> | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | SpellDescription$ Tap target artifact or creature.
+DeckHas:Ability$Counters
 Oracle:Tamiyo's Immobilizer enters the battlefield with four oil counters on it.\n{T}, Remove an oil counter from Tamiyo's Immobilizer: Tap target artifact or creature.
