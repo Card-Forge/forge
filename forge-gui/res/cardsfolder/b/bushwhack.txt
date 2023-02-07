@@ -5,4 +5,4 @@ A:SP$ Charm | Choices$ FetchBasic,Fight
 SVar:FetchBasic:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
 SVar:Fight:DB$ Pump | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBFight | SpellDescription$ Target creature you control fights target creature you don't control.
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
-Oracle:Choose one —\n• Search your library for a basic land card, reveal it, put it into your hand, then shuffle.\n• Target creature you control fights target creature you don’t control. (Each deals damage equal to its power to the other.)
+Oracle:Choose one —\n• Search your library for a basic land card, reveal it, put it into your hand, then shuffle.\n• Target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)
