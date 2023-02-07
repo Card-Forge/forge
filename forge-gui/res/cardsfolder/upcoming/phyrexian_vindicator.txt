@@ -3,7 +3,7 @@ ManaCost:W W W W
 Types:Creature Phyrexian Horror
 PT:5/5
 K:Flying
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ DBImmediateTrigger | PreventionEffect$ True | AlwaysReplace$ True | Description$ If damage would be dealt to CARDNAME, prevent that damage. When damage is prevented this way, CARDNAME deals that much damage to any other target.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ DBImmediateTrigger | PreventionEffect$ True | Description$ If damage would be dealt to CARDNAME, prevent that damage. When damage is prevented this way, CARDNAME deals that much damage to any other target.
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigDamage | RememberSVarAmount$ X | TriggerDescription$ If damage would be dealt to CARDNAME, prevent that damage. When damage is prevented this way, CARDNAME deals that much damage to any other target.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.Other,Player,Planeswalker.Other | TgtPrompt$ Select any other target | NumDmg$ Y
 SVar:X:ReplaceCount$DamageAmount
