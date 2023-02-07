@@ -2,7 +2,7 @@ Name:Serum Snare
 ManaCost:1 U
 Types:Instant
 A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | RememberLKI$ True | SubAbility$ DBProliferate | SpellDescription$ Return target nonland permanent to its owner's hand. If that permanent had mana value 3 or less, proliferate.
-SVar:DBProliferate:DB$ Proliferate | ConditionDefined$ Remembered | ConditionPresent$ Card.cmcLE3 | SubAbility$ DBCleanup
+SVar:DBProliferate:DB$ Proliferate | ConditionDefined$ RememberedLKI | ConditionPresent$ Card.cmcLE3 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters
