@@ -4486,7 +4486,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Liliana, Death's Majesty|J22
 1 Deadly Plot|J22
 1 Lord of the Accursed|J22
-1 Stitcher’s Supplier|J22
+1 Stitcher's Supplier|J22
 1 Gravedigger|J22
 1 Suspicious Shambler|J22
 1 Returned Reveler|J22
