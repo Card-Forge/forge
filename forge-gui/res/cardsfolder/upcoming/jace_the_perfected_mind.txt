@@ -6,7 +6,7 @@ K:Compleated
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -3 | IsCurse$ True | Duration$ UntilYourNextTurn | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | SpellDescription$ Until your next turn, up to one target creature gets -3/-0.
 A:AB$ Mill | Cost$ SubCounter<2/LOYALTY> | NumCards$ 3 | Planeswalker$ True | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBDraw | SpellDescription$ Target player mills three cards.
 SVar:DBDraw:DB$ Draw | NumCards$ Y | SpellDescription$ Then if a graveyard has twenty or more cards in it, you draw three cards. Otherwise, you draw a card.
-A:AB$ Mill | Cost$ SubCounter<X/LOYALTY> | NumCards$ Z | Planeswalker$ True | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player mills three times X cards.
+A:AB$ Mill | Cost$ SubCounter<X/LOYALTY> | NumCards$ Z | Planeswalker$ True | Ultimate$ True | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player mills three times X cards.
 SVar:Y:Count$Compare CheckGrave GE20.3.1
 SVar:CheckGrave:PlayerCountPlayers$HighestValidGraveyard Card.YouOwn
 SVar:X:Count$xPaid
