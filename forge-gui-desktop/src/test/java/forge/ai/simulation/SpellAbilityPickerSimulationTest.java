@@ -353,6 +353,27 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
     }
 
     @Test
+    public void playBasicOverUtility() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        // start with a hand with a colorless utility land and a basic
+        addCardToZone("Rogue's Passage", p,  ZoneType.Hand);
+        Card desired = addCardToZone("Forest", p, ZoneType.Hand);
+
+        // make sure that there is a card in the library with G mana cost
+        addCardToZone("Grizzly Bears", p,  ZoneType.Library);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        // ensure that the basic land is played
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertEquals(desired, sa.getHostCard());
+    }
+
+    @Test
     public void targetRainbowLandOverDual() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
