@@ -124,6 +124,21 @@ public class GameStateEvaluator {
                 opponentIndex++;
         }
         score -= 2* opponentLife / (game.getPlayers().size() - 1);
+
+        // evaluate mana base quality
+        score += evalManaBase(game, aiPlayer);
+        int opponentManaScore = 0;
+        for (Player opponent : aiPlayer.getOpponents()) {
+            opponentManaScore += evalManaBase(game, opponent);
+        }
+        score -= opponentManaScore / (game.getPlayers().size() - 1);
+
+
+        // get the colors of mana we can produce and the maximum number of pips
+        // Compare against the maximums in the deck
+
+        // TODO evaluate holding mana open for counterspells
+
         int summonSickScore = score;
         PhaseType gamePhase = game.getPhaseHandler().getPhase();
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
@@ -150,12 +165,37 @@ public class GameStateEvaluator {
             }
         }
 
-        // TODO evaluate mana base quality
-
-        // TODO evaluate holding mana open for counterspells
-
         debugPrint("Score = " + score);
         return new Score(score, summonSickScore);
+    }
+
+    public int evalManaBase(Game game, Player player) {
+        // get the colors of mana we can produce and the maximum number of pips
+        int max_colored = 0;
+        int max_total = 0;
+        // this logic taken from ManaCost.getColorShardCounts()
+        int[] counts = new int[6]; // in WUBRGC order
+
+        for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
+            int max_produced = 0;
+            Set<String> colors_produced = new HashSet<>();
+            for (SpellAbility m: c.getManaAbilities()) {
+                m.setActivatingPlayer(c.getController());
+                int mana_cost = m.getPayCosts().getTotalMana().getCMC();
+                max_produced = max(max_produced, m.amountOfManaGenerated(true) - mana_cost);
+                for (AbilityManaPart mp : m.getAllManaParts()) {
+                    colors_produced.addAll(Arrays.asList(mp.mana(m).split(" ")));
+                    for (String part : mp.mana(m).split(" ")) {
+                        counts[ManaAtom.getIndexFromName(part)] += 1;
+                    }
+                }
+            }
+            max_total += max_produced;
+        }
+        // Compare against the maximums in the deck and in the hand
+
+        return max_total * 50;
+
     }
 
     public int evalCard(Game game, Player aiPlayer, Card c) {
@@ -188,7 +228,8 @@ public class GameStateEvaluator {
         Set<String> colors_produced = new HashSet<>();
         for (SpellAbility m: c.getManaAbilities()) {
             m.setActivatingPlayer(c.getController());
-            max_produced = max(max_produced, m.amountOfManaGenerated(true));
+            int mana_cost = m.getPayCosts().getTotalMana().getCMC();
+            max_produced = max(max_produced, m.amountOfManaGenerated(true) - mana_cost);
             for (AbilityManaPart mp : m.getAllManaParts()) {
                 colors_produced.addAll(Arrays.asList(mp.mana(m).split(" ")));
             }
