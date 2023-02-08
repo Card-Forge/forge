@@ -45,7 +45,7 @@ public class SimulationController {
         currentStack = new ArrayList<>();
     }
     
-    private int getRecursionDepth() {
+    public int getRecursionDepth() {
         return scoreStack.size() - 1;
     }
 
