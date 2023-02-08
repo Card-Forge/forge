@@ -16,6 +16,8 @@ import java.util.Map;
 public class AIDeckStatistics {
 
     public float averageCMC = 0;
+    // TODO implement this. Use a numerically stable algorithm from
+    // https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Weighted_incremental_algorithm
     public float stddevCMC = 0;
     public int maxCost = 0;
     public int maxColoredCost = 0;
