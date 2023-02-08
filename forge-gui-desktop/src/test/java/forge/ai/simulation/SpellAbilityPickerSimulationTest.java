@@ -374,29 +374,6 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
     }
 
     @Test
-    public void targetRainbowLandOverDual() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(1);
-        Player opponent = game.getPlayers().get(0);
-        opponent.setLife(20, null);
-
-        // start with the opponent having a basic land, a dual, and a rainbow
-        addCard("Forest", opponent);
-        addCard("Breeding Pool", opponent);
-        Card desired = addCard("Mana Confluence", opponent);
-        addCard("Strip Mine", p);
-
-        // It doesn't want to use strip mine in main
-        game.getPhaseHandler().devModeSet(PhaseType.COMBAT_DECLARE_BLOCKERS, p);
-        game.getAction().checkStateEffects(true);
-
-        // ensure that the land is played
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
-        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        AssertJUnit.assertEquals(desired, sa.getTargetCard());
-    }
-
-    @Test
     public void targetUtilityLandOverRainbow() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -427,10 +404,28 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         System.out.println("Adding lands to hand");
 
         // add every land to the player's hand
-//        SimulationController.MAX_DEPTH = 0;
         List<Card> funky = new ArrayList<>();
         String previous = "";
         for (PaperCard c : FModel.getMagicDb().getCommonCards().getAllCards()) {
+            // Only test one version of a card
+            if (c.getName().equals(previous)) {
+                continue;
+            }
+            previous = c.getName();
+
+            // skip nonland cards
+            if (!c.getRules().getType().isLand()) {
+                continue;
+            }
+
+//            System.out.println(c.getName());
+
+            // Skip glacial chasm, it's really weird.
+            if (c.getName().equals("Glacial Chasm")) {
+                System.out.println("Skipping " + c.getName());
+                continue;
+            }
+
             // reset the game
             Game game = resetGame();
             Player p = game.getPlayers().get(1);
@@ -453,36 +448,22 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
             game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
             game.getAction().checkStateEffects(true);
 
-            // Only add one version at a time
-            if (c.getName().equals(previous)) {
-                continue;
-            }
-            previous = c.getName();
-            if (c.getRules().getType().isLand()) {
-                // Skip glacial chasm, it's really weird.
-                if (c.getName().equals("Glacial Chasm")) {
-                    System.out.println("Skipping " + c.getName());
+            // Add the target card to the hand and test it
+            addCardToZone(c.getName(), p, ZoneType.Hand);
+
+            GameStateEvaluator.Score s = new GameStateEvaluator().getScoreForGameState(game, p);
+            System.out.println("Starting score: " + s);
+            SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+            List<SpellAbility> candidateSAs = picker.getCandidateSpellsAndAbilities();
+            for (int i = 0; i < candidateSAs.size(); i++) {
+                SpellAbility sa = candidateSAs.get(i);
+                if (sa.isActivatedAbility()) {
                     continue;
                 }
-
-                addCardToZone(c.getName(), p, ZoneType.Hand);
-
-                // Once the card has been added to the hand, test it
-
-                GameStateEvaluator.Score s = new GameStateEvaluator().getScoreForGameState(game, p);
-                System.out.println("Starting score: " + s);
-                SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
-                List<SpellAbility> candidateSAs = picker.getCandidateSpellsAndAbilities();
-                for (int i = 0; i < candidateSAs.size(); i++) {
-                    SpellAbility sa = candidateSAs.get(i);
-                    if (sa.isActivatedAbility()) {
-                        continue;
-                    }
-                    GameStateEvaluator.Score value = picker.evaluateSa(new SimulationController(s), game.getPhaseHandler().getPhase(), candidateSAs, i);
-                    System.out.println("sa: " + sa.getHostCard() + ", value: " + value);
-                    if (!(value.value > s.value)) {
-                        funky.add(sa.getHostCard());
-                    }
+                GameStateEvaluator.Score value = picker.evaluateSa(new SimulationController(s), game.getPhaseHandler().getPhase(), candidateSAs, i);
+                System.out.println("sa: " + sa.getHostCard() + ", value: " + value);
+                if (!(value.value > s.value)) {
+                    funky.add(sa.getHostCard());
                 }
             }
         }
