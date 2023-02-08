@@ -1,6 +1,8 @@
 package forge.ai.simulation;
 
+import forge.ai.AIDeckStatistics;
 import forge.ai.CreatureEvaluator;
+import forge.card.mana.ManaAtom;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
@@ -17,6 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 public class GameStateEvaluator {
     private boolean debugging = false;
@@ -113,6 +116,7 @@ public class GameStateEvaluator {
             score += myCards - aiPlayer.getMaxHandSize();
             myCards = aiPlayer.getMaxHandSize();
         }
+        // TODO weight cards in hand more if opponent has discard or if we have looting or can bluff a trick
         score += 5 * myCards - 4 * theirCards;
         debugPrint("  My life: " + aiPlayer.getLife());
         score += 2 * aiPlayer.getLife();
@@ -124,6 +128,18 @@ public class GameStateEvaluator {
                 opponentIndex++;
         }
         score -= 2* opponentLife / (game.getPlayers().size() - 1);
+
+        // evaluate mana base quality
+        score += evalManaBase(game, aiPlayer, AIDeckStatistics.fromPlayer(aiPlayer));
+        // TODO deal with opponents. Do we want to use perfect information to evaluate their manabase?
+//        int opponentManaScore = 0;
+//        for (Player opponent : aiPlayer.getOpponents()) {
+//            opponentManaScore += evalManaBase(game, opponent);
+//        }
+//        score -= opponentManaScore / (game.getPlayers().size() - 1);
+
+        // TODO evaluate holding mana open for counterspells
+
         int summonSickScore = score;
         PhaseType gamePhase = game.getPhaseHandler().getPhase();
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
@@ -150,12 +166,52 @@ public class GameStateEvaluator {
             }
         }
 
-        // TODO evaluate mana base quality
-
-        // TODO evaluate holding mana open for counterspells
-
         debugPrint("Score = " + score);
         return new Score(score, summonSickScore);
+    }
+
+    public int evalManaBase(Game game, Player player, AIDeckStatistics statistics) {
+        // TODO should these be fixed quantities or should they be linear out of like 1000/(desired - total)?
+        int value = 0;
+        // get the colors of mana we can produce and the maximum number of pips
+        int max_colored = 0;
+        int max_total = 0;
+        // this logic taken from ManaCost.getColorShardCounts()
+        int[] counts = new int[6]; // in WUBRGC order
+
+        for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
+            int max_produced = 0;
+            for (SpellAbility m: c.getManaAbilities()) {
+                m.setActivatingPlayer(c.getController());
+                int mana_cost = m.getPayCosts().getTotalMana().getCMC();
+                max_produced = max(max_produced, m.amountOfManaGenerated(true) - mana_cost);
+                for (AbilityManaPart mp : m.getAllManaParts()) {
+                    for (String part : mp.mana(m).split(" ")) {
+                        // TODO handle any
+                        int index = ManaAtom.getIndexFromName(part);
+                        if (index != -1) {
+                            counts[index] += 1;
+                        }
+                    }
+                }
+            }
+            max_total += max_produced;
+        }
+
+        // Compare against the maximums in the deck and in the hand
+        // TODO check number of castable cards in hand
+        for (int i = 0; i < counts.length; i++) {
+            // for each color pip, add 100
+            value += Math.min(counts[i], statistics.maxPips[i]) * 100;
+        }
+        // value for being able to cast all the cards in your deck
+        value += min(max_total, statistics.maxCost) * 100;
+
+        // excess mana is valued less than getting enough to use everything
+        value += max(0, max_total - statistics.maxCost) * 5;
+
+
+        return value;
     }
 
     public int evalCard(Game game, Player aiPlayer, Card c) {
@@ -188,7 +244,8 @@ public class GameStateEvaluator {
         Set<String> colors_produced = new HashSet<>();
         for (SpellAbility m: c.getManaAbilities()) {
             m.setActivatingPlayer(c.getController());
-            max_produced = max(max_produced, m.amountOfManaGenerated(true));
+            int mana_cost = m.getPayCosts().getTotalMana().getCMC();
+            max_produced = max(max_produced, m.amountOfManaGenerated(true) - mana_cost);
             for (AbilityManaPart mp : m.getAllManaParts()) {
                 colors_produced.addAll(Arrays.asList(mp.mana(m).split(" ")));
             }
