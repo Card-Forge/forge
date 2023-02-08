@@ -4425,7 +4425,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             storedTrigger.put(stAb, str, result);
         }
         return result;
-
     }
 
     public final ReplacementEffect getReplacementEffectForStaticAbility(final String str, final StaticAbility stAb) {
