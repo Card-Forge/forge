@@ -105,7 +105,16 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 if (targetedSA == null) {
                     continue;
                 }
-                final List<GameEntity> candidates = targetedSA.getTargetRestrictions().getAllCandidates(targetedSA, true);
+
+                SpellAbility copy = null;
+                final List<GameEntity> candidates;
+                if (sa.hasParam("CopyForNewController")) {
+                    copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
+                    candidates = copy.getTargetRestrictions().getAllCandidates(copy, true);
+                } else {
+                    candidates = targetedSA.getTargetRestrictions().getAllCandidates(targetedSA, true);
+                }
+
                 if (sa.hasParam("CanTargetPlayer")) {
                     // Radiate
                     // Remove targeted players because getAllCandidates include all the valid players
@@ -113,7 +122,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                         candidates.remove(p);
 
                     for (GameEntity o : candidates) {
-                        SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
+                        copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
                         resetFirstTargetOnCopy(copy, o, targetedSA);
                         copies.add(copy);
                     }
@@ -129,12 +138,12 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                             final Player p = (Player) o;
                             if (p.equals(originalTargetPlayer))
                                 continue;
-                            if (p.isValid(type.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
+                            if (p.isValid(type.split(","), sa.getActivatingPlayer(), card, sa)) {
                                 players.add(p);
                             }
                         }
                     }
-                    valid = CardLists.getValidCards(valid, type, sa.getActivatingPlayer(), sa.getHostCard(), sa);
+                    valid = CardLists.getValidCards(valid, type, sa.getActivatingPlayer(), card, sa);
                     Card originalTarget = Iterables.getFirst(getTargetCards(chosenSA), null);
                     valid.remove(originalTarget);
 
@@ -144,20 +153,26 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                         GameEntity choice = controller.getController().chooseSingleEntityForEffect(all, sa,
                                 Localizer.getInstance().getMessage("lblChooseOne"), null);
                         if (choice != null) {
-                            SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
+                            copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
                             resetFirstTargetOnCopy(copy, choice, targetedSA);
                             copies.add(copy);
                         }
                     } else {
                         for (final Card c : valid) {
-                            SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
+                            if (copy == null) {
+                                copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
+                            }
                             resetFirstTargetOnCopy(copy, c, targetedSA);
                             copies.add(copy);
+                            copy = null;
                         }
                         for (final Player p : players) {
-                            SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
+                            if (copy == null) {
+                                copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
+                            }
                             resetFirstTargetOnCopy(copy, p, targetedSA);
                             copies.add(copy);
+                            copy = null;
                         }
                     }
                 }
@@ -176,7 +191,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                             candidates.removeIf(new Predicate<GameEntity>() {
                                 @Override
                                 public boolean test(GameEntity c) {
-                                    return !c.isValid(sa.getParam("RandomTargetRestriction").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+                                    return !c.isValid(sa.getParam("RandomTargetRestriction").split(","), sa.getActivatingPlayer(), card, sa);
                                 }
                             });
                         }
