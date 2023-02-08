@@ -196,6 +196,20 @@
         "G":"decks/starter/pile_green_h.json"
       }
     }
-  ]
+  ],
+  "starterEditions": [
+	"JMP",
+	"DMU",
+	"BRO",
+	"J22"
+	"(All)"
+  ],
+  "starterEditionNames": [
+	"Jumpstart",
+	"Dominaria United",
+	"Brother's War",
+	"Jumpstart 22"
+	"(All)"
+	]
 }
 

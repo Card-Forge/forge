@@ -1,0 +1,7 @@
+Name:Veil of Assimilation
+ManaCost:1 W
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Artifact.YouCtrl+Other | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME or another artifact enters the battlefield under your control, target creature you control gets +1/+1 and gains vigilance until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Vigilance
+DeckHints:Type$Artifact
+Oracle:Whenever Veil of Assimilation or another artifact enters the battlefield under your control, target creature you control gets +1/+1 and gains vigilance until end of turn.

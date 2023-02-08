@@ -1,5 +1,5 @@
 Name:Pith Driller
-ManaCost:4 PB
+ManaCost:4 BP
 Types:Artifact Creature Phyrexian Horror
 PT:2/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a -1/-1 counter on target creature.

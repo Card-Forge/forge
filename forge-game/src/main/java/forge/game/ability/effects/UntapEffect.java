@@ -72,7 +72,7 @@ public class UntapEffect extends SpellAbilityEffect {
      * <p>
      * Choose cards to untap.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link SpellAbility}.
      * @param mandatory
@@ -93,7 +93,7 @@ public class UntapEffect extends SpellAbilityEffect {
 
             final CardCollectionView selected = p.getController().chooseCardsForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectCardToUntap"), mandatory ? num : 0, num, !mandatory, null);
             if (selected != null) {
-                for (final Card c : selected) { 
+                for (final Card c : selected) {
                     c.untap(true);
                 }
             }

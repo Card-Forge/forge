@@ -17,7 +17,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 public class SkipPhaseEffect extends SpellAbilityEffect {
-    
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();

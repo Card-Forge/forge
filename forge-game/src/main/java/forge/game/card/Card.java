@@ -636,29 +636,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
             return retResult;
 
-        } else if (mode.equals("Convert") && (isConvertable() || hasMergedCard())) {
-            // Need to remove mutated states, otherwise the changeToState() will fail
-            if (hasMergedCard()) {
-                removeMutatedStates();
-            }
-            CardCollectionView cards = hasMergedCard() ? getMergedCards() : new CardCollection(this);
-            boolean retResult = false;
-            for (final Card c : cards) {
-                if (!c.isConvertable()) {
-                    continue;
-                }
-                c.backside = !c.backside;
-
-                boolean result = c.changeToState(c.backside ? CardStateName.Converted : CardStateName.Original);
-                retResult = retResult || result;
-            }
-            if (hasMergedCard()) {
-                rebuildMutatedStates(cause);
-                game.getTriggerHandler().clearActiveTriggers(this, null);
-                game.getTriggerHandler().registerActiveTrigger(this, false);
-            }
-            return retResult;
-
         } else if (mode.equals("Flip")) {
             // 709.4. Flipping a permanent is a one-way process.
             if (isFlipped()) {
@@ -963,16 +940,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getRules() != null && getRules().getSplitType() == CardSplitType.Meld;
     }
 
-    public final boolean isConvertable() {
-        return getRules() != null && getRules().getSplitType() == CardSplitType.Convert;
-    }
-
     public final boolean isModal() {
         return getRules() != null && getRules().getSplitType() == CardSplitType.Modal;
     }
 
     public final boolean hasBackSide() {
-        return isDoubleFaced() || isMeldable() || isModal() || isConvertable();
+        return isDoubleFaced() || isMeldable() || isModal();
     }
 
     public final boolean isFlipCard() {

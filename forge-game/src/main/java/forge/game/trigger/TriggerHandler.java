@@ -367,8 +367,8 @@ public class TriggerHandler {
         for (final Trigger deltrig : delayedTriggersWorkingCopy) {
             if (deltrig.getHostCard().getController().equals(player)) {
                 if (isTriggerActive(deltrig) && canRunTrigger(deltrig, mode, runParams)) {
-                    runSingleTrigger(deltrig, runParams);
                     delayedTriggers.remove(deltrig);
+                    runSingleTrigger(deltrig, runParams);
                 }
             }
         }

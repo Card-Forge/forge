@@ -1,0 +1,8 @@
+Name:Feed the Infection
+ManaCost:3 B
+Types:Sorcery
+A:SP$ Draw |  NumCards$ 3 | SubAbility$ DBLoseLife | SpellDescription$ You draw three cards and you lose 3 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3 | SubAbility$ DBPoisoned
+SVar:DBPoisoned:DB$ LoseLife | LifeAmount$ 3 | Defined$ Opponent.IsCorrupted | SpellDescription$ Corrupted — Each opponent who has three or more poison counters loses 3 life.
+DeckHints:Keyword$Infect|Toxic|Poisonous & Ability$Proliferate
+Oracle:You draw three cards and you lose 3 life.\nCorrupted — Each opponent who has three or more poison counters loses 3 life.

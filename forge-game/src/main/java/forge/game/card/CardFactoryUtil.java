@@ -67,6 +67,7 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
+import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantBeCast;
 import forge.game.trigger.Trigger;
@@ -1373,7 +1374,8 @@ public class CardFactoryUtil {
 
             String hideawayDig = "DB$ Dig | Defined$ You | DigNum$ " + n + " | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | RestRandomOrder$ True";
             String hideawayEffect = "DB$ Effect | StaticAbilities$ STHideawayEffectLookAtCard | ForgetOnMoved$ Exile | RememberObjects$ Remembered | Duration$ Permanent";
-
+            String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
+            
             String lookAtCard = "Mode$ Continuous | Affected$ Card.IsRemembered | MayLookAt$ EffectSourceController | EffectZone$ Command | AffectedZone$ Exile | Description$ Any player who has controlled the permanent that exiled this card may look at this card in the exile zone.";
 
             SpellAbility digSA = AbilityFactory.getAbility(hideawayDig, card);
@@ -1381,17 +1383,14 @@ public class CardFactoryUtil {
             AbilitySub effectSA = (AbilitySub) AbilityFactory.getAbility(hideawayEffect, card);
             effectSA.setSVar("STHideawayEffectLookAtCard", lookAtCard);
 
+            AbilitySub cleanSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
+
             digSA.setSubAbility(effectSA);
+            effectSA.setSubAbility(cleanSA);
 
             hideawayTrigger.setOverridingAbility(digSA);
 
             triggers.add(hideawayTrigger);
-
-            // when the card with hideaway leaves the battlefield, forget all exiled cards
-            final Trigger changeZoneTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | TriggerZones$ Battlefield | Static$ True", card, intrinsic);
-            String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
-            changeZoneTrigger.setOverridingAbility(AbilityFactory.getAbility(cleanupStr, card));
-            triggers.add(changeZoneTrigger);
 
             for (final Trigger trigger : triggers) {
                 inst.addTrigger(trigger);
@@ -3130,6 +3129,20 @@ public class CardFactoryUtil {
 
             inst.addSpellAbility(abilityMorphDown(card));
             inst.addSpellAbility(abilityMorphUp(card, k[1], true));
+        } else if (keyword.startsWith("More Than Meets the Eye")) {
+            final String[] n = keyword.split(":");
+            final Cost convertCost = new Cost(n[1], false);
+
+            final SpellAbility sa = new SpellPermanent(host, host.getAlternateState(), convertCost);
+            sa.setDescription(host.getAlternateState().getName() + " (" + inst.getReminderText() + ")");
+            sa.setCardState(host.getAlternateState());
+            sa.setAlternativeCost(AlternativeCost.MTMtE);
+
+            sa.putParam("PrecostDesc", n[0] + " ");
+            sa.putParam("CostDesc", convertCost.toString());
+            sa.putParam("AfterDescription", "(Converted)");
+            sa.setIntrinsic(intrinsic);
+            inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Multikicker")) {
             final String[] n = keyword.split(":");
             final SpellAbility sa = card.getFirstSpellAbility();
@@ -3707,7 +3720,7 @@ public class CardFactoryUtil {
                     + " | Description$ " + sb.toString() + " (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Enlist")) {
-            String effect = "Mode$ OptionalAttackCost | ValidCard$ Card.Self | Cost$ Enlist<1/CARDNAME> | Secondary$ True" +
+            String effect = "Mode$ OptionalAttackCost | ValidCard$ Card.Self | Cost$ Enlist<1/CARDNAME/creature> | Secondary$ True" +
                     "| Trigger$ TrigEnlist | Description$ Enlist ( " + inst.getReminderText() + ")";
             StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
             st.setSVar("TrigEnlist", "DB$ Pump | NumAtt$ TriggerRemembered$CardPower" +

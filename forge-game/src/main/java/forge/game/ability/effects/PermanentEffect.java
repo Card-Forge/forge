@@ -18,7 +18,7 @@ public class PermanentEffect extends SpellAbilityEffect {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * forge.card.abilityfactory.SpellEffect#resolve(forge.card.spellability.
      * SpellAbility)

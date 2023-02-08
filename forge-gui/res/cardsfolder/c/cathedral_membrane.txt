@@ -1,5 +1,5 @@
 Name:Cathedral Membrane
-ManaCost:1 PW
+ManaCost:1 WP
 Types:Artifact Creature Phyrexian Wall
 PT:0/3
 K:Defender

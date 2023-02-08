@@ -5,5 +5,5 @@ PT:2/1
 K:Hideaway:4
 K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBReturn | TriggerDescription$ When CARDNAME leaves the battlefield, put the exiled card into its owner's hand.
-SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand
+SVar:DBReturn:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Hand
 Oracle:Hideaway 4 (When this permanent enters the battlefield, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\nWatcher for Tomorrow enters the battlefield tapped.\nWhen Watcher for Tomorrow leaves the battlefield, put the exiled card into its owner's hand.

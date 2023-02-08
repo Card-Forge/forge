@@ -68,7 +68,7 @@ public class CloneEffect extends SpellAbilityEffect {
 
         // find cloning source i.e. thing to be copied
         Card cardToCopy = null;
-        
+
         if (sa.hasParam("Choices")) {
             ZoneType choiceZone = ZoneType.Battlefield;
             if (sa.hasParam("ChoiceZone")) {

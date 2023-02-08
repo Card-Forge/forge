@@ -27,7 +27,7 @@ public class AssignGroupEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         return sa.getDescription();
     }
-    
+
     /*
      * (non-Javadoc)
      * @see forge.game.ability.SpellAbilityEffect#resolve(forge.game.spellability.SpellAbility)

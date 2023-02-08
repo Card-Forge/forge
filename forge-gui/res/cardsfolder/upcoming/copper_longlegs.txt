@@ -1,0 +1,8 @@
+Name:Copper Longlegs
+ManaCost:1 G
+Types:Creature Phyrexian Spider
+PT:1/3
+K:Reach
+A:AB$ Proliferate | Cost$ 1 G Sac<1/CARDNAME> | SpellDescription$  Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+DeckHas:Ability$Proliferate|Sacrifice
+Oracle:Reach\n{1}{G}, Sacrifice Copper Longlegs: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

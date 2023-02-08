@@ -17,7 +17,6 @@ import forge.game.combat.AttackRequirement;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
@@ -372,14 +371,14 @@ public class CardProperty {
                 }
             }
 
-            if (!card.getExiledWith().equals(host)) {
+            if (!card.getExiledWith().equalsWithTimestamp(host)) {
                 return false;
             }
         } else if (property.equals("ExiledWithEffectSource")) {
             if (card.getExiledWith() == null) {
                 return false;
             }
-            if (!card.getExiledWith().equals(source.getEffectSource())) {
+            if (!card.getExiledWith().equalsWithTimestamp(source.getEffectSource())) {
                 return false;
             }
         } else if (property.equals("EncodedWithSource")) {
@@ -1018,11 +1017,6 @@ public class CardProperty {
         } else if (property.startsWith("hasKeyword")) {
             // "withFlash" would find Flashback cards, add this to fix Mystical Teachings
             if (!card.hasKeyword(property.substring(10))) {
-                return false;
-            }
-        } else if (property.startsWith("withFlashback")) {
-            boolean fb = card.hasKeyword(Keyword.FLASHBACK);
-            if (!fb) {
                 return false;
             }
         } else if (property.startsWith("with")) {

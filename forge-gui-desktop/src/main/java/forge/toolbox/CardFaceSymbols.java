@@ -79,6 +79,11 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("PU", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_U));
         MANA_IMAGES.put("PB", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_B));
         MANA_IMAGES.put("PG", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_G));
+        MANA_IMAGES.put("WP", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_W));
+        MANA_IMAGES.put("RP", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_R));
+        MANA_IMAGES.put("UP", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_U));
+        MANA_IMAGES.put("BP", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_B));
+        MANA_IMAGES.put("GP", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_G));
         MANA_IMAGES.put("PBG", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_BG));
         MANA_IMAGES.put("PBR", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_BR));
         MANA_IMAGES.put("PGU", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_GU));
@@ -89,6 +94,16 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("PUR", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_UR));
         MANA_IMAGES.put("PWB", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_WB));
         MANA_IMAGES.put("PWU", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_WU));
+        MANA_IMAGES.put("BGP", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_BG));
+        MANA_IMAGES.put("BRP", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_BR));
+        MANA_IMAGES.put("GUP", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_GU));
+        MANA_IMAGES.put("GWP", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_GW));
+        MANA_IMAGES.put("RGP", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_RG));
+        MANA_IMAGES.put("RWP", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_RW));
+        MANA_IMAGES.put("UBP", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_UB));
+        MANA_IMAGES.put("URP", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_UR));
+        MANA_IMAGES.put("WBP", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_WB));
+        MANA_IMAGES.put("WUP", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_WU));
         MANA_IMAGES.put("2W", FSkin.getImage(FSkinProp.IMG_MANA_2W));
         MANA_IMAGES.put("2U", FSkin.getImage(FSkinProp.IMG_MANA_2U));
         MANA_IMAGES.put("2R", FSkin.getImage(FSkinProp.IMG_MANA_2R));

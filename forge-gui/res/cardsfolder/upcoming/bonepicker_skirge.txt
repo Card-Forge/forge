@@ -3,9 +3,8 @@ ManaCost:2 B
 Types:Creature Phyrexian Imp
 PT:2/2
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self | CheckSVar$ X | SVarCompare$ GE3 | AddKeyword$ Deathtouch & Lifelink | Description$ Corrupted – As long as an opponent has three or more poison counters, CARDNAME has deathtouch and lifelink.
+S:Mode$ Continuous | Affected$ Card.Self | CheckSVar$ X | SVarCompare$ GE3 | AddKeyword$ Deathtouch & Lifelink | Description$ Corrupted — As long as an opponent has three or more poison counters, CARDNAME has deathtouch and lifelink.
 SVar:X:PlayerCountOpponents$HighestPoisonCounters
 DeckHas:Ability$LifeGain
-AI:RemoveDeck:Random
-DeckNeeds:Ability$Counters
-Oracle:Flying\nCorrupted – As long as an opponent has three or more poison counters, Bonepicker Skirge has deathtouch and lifelink.
+DeckNeeds:Keyword$Toxic|Infect
+Oracle:Flying\nCorrupted — As long as an opponent has three or more poison counters, Bonepicker Skirge has deathtouch and lifelink.

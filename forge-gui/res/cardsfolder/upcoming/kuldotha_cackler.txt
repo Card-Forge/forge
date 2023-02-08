@@ -1,0 +1,12 @@
+Name:Kuldotha Cackler
+ManaCost:2 R
+Types:Creature Phyrexian Hyena
+PT:2/3
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ HeroPump | TriggerDescription$ TriggerDescription$ Whenever CARDNAME attacks, it gets +X/+0 until end of turn, where X is the number of permanents you control with oil counters on them.
+SVar:HeroPump:DB$ Pump | Defined$ Self | NumAtt$ X
+SVar:X:Count$Valid Permanent.YouCtrl+counters_GE1_OIL
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:Trample\nWhenever Kuldotha Cackler attacks, it gets +X/+0 until end of turn, where X is the number of permanents you control with oil counters on them.

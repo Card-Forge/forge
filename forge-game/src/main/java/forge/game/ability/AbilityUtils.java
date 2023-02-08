@@ -355,6 +355,8 @@ public class AbilityUtils {
             }
             cards.addAll(CardLists.getValidCards(candidates, validDefined, hostCard.getController(), hostCard, sa));
             return cards;
+        } else if (defined.startsWith("ExiledWith")) {
+            cards.addAll(hostCard.getExiledCards());
         } else {
             CardCollection list = getPaidCards(sa, defined);
             if (list != null) {
@@ -1655,7 +1657,16 @@ public class AbilityUtils {
         final String s2 = applyAbilityTextChangeEffects(s, ctb);
         final String[] l = s2.split("/");
         final String expr = CardFactoryUtil.extractOperators(s2);
-        final Player player = ctb == null ? null : ctb instanceof SpellAbility ? ((SpellAbility)ctb).getActivatingPlayer() : ctb.getHostCard().getController();
+
+        Player player = null;
+        if (ctb != null) {
+            if (ctb instanceof SpellAbility) {
+                player = ((SpellAbility)ctb).getActivatingPlayer();
+            }
+            if (player == null) {
+                player = ctb.getHostCard().getController();
+            }
+        }
 
         // accept straight numbers
         if (l[0].startsWith("Number$")) {
@@ -2058,8 +2069,8 @@ public class AbilityUtils {
             return doXMath(count, expr, c, ctb);
         }
 
-        if (sq[0].contains("BushidoPoint")) {
-            return doXMath(c.getKeywordMagnitude(Keyword.BUSHIDO), expr, c, ctb);
+        if (sq[0].contains("TotalValue")) {
+            return doXMath(c.getKeywordMagnitude(Keyword.smartValueOf(l[0].split(" ")[1])), expr, c, ctb);
         }
         if (sq[0].contains("TimesKicked")) {
             return doXMath(c.getKickerMagnitude(), expr, c, ctb);

@@ -1,5 +1,6 @@
 package forge;
 
+import forge.card.CardEdition;
 import forge.item.PaperCard;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
@@ -38,6 +39,8 @@ public final class ImageKeys {
     private static Map<String, String> CACHE_CARD_PICS_SUBDIR;
 
     private static Map<String, Boolean> editionImageLookup = new HashMap<>();
+
+    private static Map<String, Set<String>> editionAlias = new HashMap<>();
     private static Set<String> toFind = new HashSet<>();
 
     private static boolean isLibGDXPort = false;
@@ -187,6 +190,21 @@ public final class ImageKeys {
                         toFind.remove(filename);
                     }
                 }
+                String setCode = filename.contains("/") ? filename.substring(0, filename.indexOf("/")) : "";
+                if (!setCode.isEmpty() && editionAlias.containsKey(setCode)) {
+                    for (String alias : editionAlias.get(setCode)) {
+                        file = findFile(dir, TextUtil.fastReplace(filename, setCode + "/", alias + "/"));
+                        if (file != null) {
+                            cachedCards.put(filename, file);
+                            return file;
+                        }
+                        file = findFile(dir, TextUtil.fastReplace(fullborderFile, setCode + "/", alias + "/"));
+                        if (file != null) {
+                            cachedCards.put(filename, file);
+                            return file;
+                        }
+                    }
+                }
             }
             //if an image, like phenomenon or planes is missing .full in their filenames but you have an existing images that have .full/.fullborder
             if (!filename.contains(".full")) {
@@ -254,6 +272,36 @@ public final class ImageKeys {
                     if (file != null) {
                         cachedCards.put(filename, file);
                         return file;
+                    }
+                }
+                //lookup other cards like planechase/phenomenon
+                if (!filename.contains(".full")) {
+                    String newFilename = TextUtil.addSuffix(filename,".full");
+                    file = findFile(dir, newFilename);
+                    if (file != null) {
+                        cachedCards.put(filename, file);
+                        return file;
+                    }
+                    String newFilename2 = TextUtil.addSuffix(filename,".fullborder");
+                    file = findFile(dir, newFilename2);
+                    if (file != null) {
+                        cachedCards.put(filename, file);
+                        return file;
+                    }
+                    String setCode = filename.substring(0, filename.indexOf("/"));
+                    if (!setCode.isEmpty() && editionAlias.containsKey(setCode)) {
+                        for (String alias : editionAlias.get(setCode)) {
+                            file = findFile(dir, TextUtil.fastReplace(newFilename, setCode + "/", alias + "/"));
+                            if (file != null) {
+                                cachedCards.put(filename, file);
+                                return file;
+                            }
+                            file = findFile(dir, TextUtil.fastReplace(newFilename2, setCode + "/", alias + "/"));
+                            if (file != null) {
+                                cachedCards.put(filename, file);
+                                return file;
+                            }
+                        }
                     }
                 }
             }
@@ -355,6 +403,22 @@ public final class ImageKeys {
         Boolean editionHasImage = editionImageLookup.get(pc.getEdition());
         if (editionHasImage == null) {
             String setFolder = getSetFolder(pc.getEdition());
+            CardEdition ed = StaticData.instance().getEditions().get(setFolder);
+            if (ed != null && !editionAlias.containsKey(setFolder)) {
+                String alias = ed.getAlias();
+                Set aliasSet = new HashSet<>();
+                if (alias != null) {
+                    if (!alias.equalsIgnoreCase(setFolder))
+                        aliasSet.add(alias);
+                }
+                String code = ed.getCode();
+                if (code != null) {
+                    if (!code.equalsIgnoreCase(setFolder))
+                        aliasSet.add(code);
+                }
+                if (!aliasSet.isEmpty())
+                    editionAlias.put(setFolder, aliasSet);
+            }
             editionHasImage = FileUtil.isDirectoryWithFiles(CACHE_CARD_PICS_DIR + setFolder);
             editionImageLookup.put(pc.getEdition(), editionHasImage);
             if (editionHasImage) {

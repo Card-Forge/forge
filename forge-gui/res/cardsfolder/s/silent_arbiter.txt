@@ -2,6 +2,6 @@ Name:Silent Arbiter
 ManaCost:4
 Types:Artifact Creature Construct
 PT:1/5
-S:Mode$ Continuous | GlobalRule$ No more than one creature can attack each combat. | Description$ No more than one creature can attack each combat.
+S:Mode$ AttackRestrict | MaxAttackers$ 1 | Description$ No more than one creature can attack each combat.
 S:Mode$ Continuous | GlobalRule$ No more than one creature can block each combat. | Description$ No more than one creature can block each combat.
 Oracle:No more than one creature can attack each combat.\nNo more than one creature can block each combat.

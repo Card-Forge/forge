@@ -1,0 +1,8 @@
+Name:Font of Progress
+ManaCost:U
+Types:Artifact
+K:etbCounter:OIL:2
+A:AB$ Mill | Cost$ 3 T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills X cards, where X is the number of oil counters on CARDNAME.
+SVar:X:Count$CardCounters.OIL
+DeckHas:Ability$Counters|Mill
+Oracle:Font of Progress enters the battlefield with two oil counters on it.\n{3}, {T}: Target player mills X cards, where X is the number of oil counters on Font of Progress.

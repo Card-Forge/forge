@@ -31,7 +31,7 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final List<Card> tgtCards = getTargetCards(sa);
         PlayerController pc = sa.getActivatingPlayer().getController();
-        
+
         for (final Card tgtC : tgtCards) {
             if (!tgtC.isInPlay()) {
                 continue;

@@ -18,8 +18,8 @@ public class ShuffleEffect extends SpellAbilityEffect {
             if (!p.isInGame()) {
                 continue;
             }
-            boolean mustShuffle = !optional || sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblHaveTargetShuffle", p.getName()), null); 
-            if (mustShuffle) 
+            boolean mustShuffle = !optional || sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblHaveTargetShuffle", p.getName()), null);
+            if (mustShuffle)
                 p.shuffle(sa);
         }
     }

@@ -34,6 +34,8 @@ ScryfallCode=ONC
 26 R Tangleweave Armor @Johann Bodin
 27 R Lux Artillery @Jason Kang
 28 M Urtet, Remnant of Memnarch @Simon Dominic
+29 M Ixhel, Scion of Atraxa @Campbell White
+30 M Neyali, Suns' Vanguard @Bryan Sola
 31 R Skyhunter Strike Force @Slawomir Maniak
 32 R Mirage Mockery @Anna Pavleeva
 33 R Synthesis Pod @Campbell White
@@ -178,3 +180,27 @@ ScryfallCode=ONC
 172 U Temple of the False God @James Zapata
 173 R Temple of Triumph @Piotr Dura
 174 R Windbrisk Heights @Omar Rayyan
+
+[tokens]
+b_0_0_phyrexian_germ
+c_10_10_eldrazi
+c_1_1_a_myr
+c_1_1_a_thopter_flying
+c_x_x_a_golem_haste
+c_x_x_a_phyrexian_horror
+g_1_1_phyrexian_insect_infect
+g_3_3_beast
+g_3_3_elephant
+g_x_x_phyrexian_wurm_trample_toxic
+kobolds_of_kher_keep
+r_1_1_goblin
+r_5_5_dragon_flying
+rw_1_1_soldier_haste
+w_1_1_bird_flying
+w_1_1_human
+w_1_1_human_soldier
+w_1_1_soldier
+w_1_1_spirit_flying
+w_2_2_soldier_vigilance
+w_4_4_angel_flying
+w_4_4_angel_flying_vigilance

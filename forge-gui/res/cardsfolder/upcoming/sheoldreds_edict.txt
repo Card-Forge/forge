@@ -1,0 +1,9 @@
+Name:Sheoldred's Edict
+ManaCost:1 B
+Types:Instant
+A:SP$ Charm | Choices$ SacNontoken,SacToken,SacPW | CharmNum$ 1
+SVar:SacNontoken:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature.nonToken | Amount$ 1 | SpellDescription$ Each opponent sacrifices a nontoken creature.
+SVar:SacToken:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature.token | Amount$ 1 | SpellDescription$ Each opponent sacrifices a creature token.
+SVar:SacPW:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Planeswalker | Amount$ 1 | SpellDescription$ Each opponent sacrifices a planeswalker.
+DeckHas:Ability$Sacrifice
+Oracle:Choose one —\n• Each opponent sacrifices a nontoken creature.\n• Each opponent sacrifices a creature token.\n• Each opponent sacrifices a planeswalker.

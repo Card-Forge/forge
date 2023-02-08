@@ -3,7 +3,7 @@ ManaCost:2 G U
 Types:Creature Human Artificer
 PT:3/4
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddAbility$ AnyMana | Description$ Creatures you control have "{T}: add {C}. This mana can't be spent to cast a nonartifact spell."
-SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | RestrictValid$ CantCastNonArtifactSpells | SpellDescription$ add {C}. This mana can’t be spent to cast a nonartifact spell.
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | RestrictValid$ CantCastNonArtifactSpells | SpellDescription$ add {C}. This mana can't be spent to cast a nonartifact spell.
 T:Mode$ SpellCast | ValidCard$ Artifact.cmcGE6 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ DBDraw | TriggerDescription$ Whenever you cast an artifact spell with mana value 6 or greater, draw a card.
 SVar:DBDraw:DB$ Draw
 DeckNeeds:Type$Artifact

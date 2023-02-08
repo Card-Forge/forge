@@ -4486,7 +4486,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Liliana, Death's Majesty|J22
 1 Deadly Plot|J22
 1 Lord of the Accursed|J22
-1 Stitcher’s Supplier|J22
+1 Stitcher's Supplier|J22
 1 Gravedigger|J22
 1 Suspicious Shambler|J22
 1 Returned Reveler|J22
@@ -5389,3 +5389,404 @@ Kaya, Ghost Assassin|CN2|2
 3 Urza's Tower|J22
 2 Urza's Power Plant|J22
 2 Urza's Mine|J22
+
+[DMU Coalition Corps]
+1 Clockwork Drawbridge|DMU
+1 Resolute Reinforcements|DMU
+1 Argivian Cavalier|DMU
+1 Charismatic Vanguard|DMU
+1 Griffin Protector|DMU
+1 Argivian Phalanx|DMU
+1 Serra Redeemer|DMU
+1 Captain's Call|DMU
+1 Prayer of Binding|DMU
+1 Love Song of Night and Day|DMU
+1 Join Forces|DMU
+8 Plains|DMU|1
+
+[DMU Coalition Legion]
+1 Samite Herbalist|DMU
+1 Benalish Faithbonder|DMU
+1 Knight of Dawn's Light|DMU
+1 Argivian Cavalier|DMU
+1 Charismatic Vanguard|DMU
+1 Griffin Protector|DMU
+1 Serra Redeemer|DMU
+1 Take Up the Shield|DMU
+1 Join Forces|DMU
+1 Prayer of Binding|DMU
+1 Love Song of Night and Day|DMU
+8 Plains|DMU|1
+
+[DMU Mystic Mischief]
+1 Coral Colony|DMU
+1 Soaring Drake|DMU
+1 Academy Wall|DMU
+1 Talas Lookout|DMU
+1 Tolarian Terror|DMU
+1 Frostfist Strider|DMU
+1 Impulse|DMU
+1 Ertai's Scorn|DMU
+1 Founding the Third Path|DMU
+1 Cosmic Epiphany|DMU
+1 Impede Momentum|DMU
+8 Island|DMU|1
+
+[DMU Arcane Mischief]
+1 Haunting Figment|DMU
+1 Soaring Drake|DMU
+1 Academy Wall|DMU
+1 Talas Lookout|DMU
+1 Frostfist Strider|DMU
+1 Djinn of the Fountain|DMU
+1 Impulse|DMU
+1 Shore Up|DMU
+1 Combat Research|DMU
+1 Cosmic Epiphany|DMU
+1 Impede Momentum|DMU
+8 Island|DMU|1
+
+[DMU Totally Ruthless]
+1 Cult Conscript|DMU
+1 Phyrexian Vivisector|DMU
+1 Splatter Goblin|DMU
+1 Phyrexian Rager|DMU
+1 Gibbering Barricade|DMU
+1 Sengir Connoisseur|DMU
+1 Tyrannical Pitlord|DMU
+1 Bone Splinters|DMU
+1 Cut Down|DMU
+1 Battle-Rage Blessing|DMU
+1 Braids's Frightful Return|DMU
+8 Swamp|DMU|1
+
+[DMU Totally Merciless]
+1 Knight of Dusk's Shadow|DMU
+1 Phyrexian Vivisector|DMU
+1 Eerie Soultender|DMU
+1 Phyrexian Rager|DMU
+1 Sengir Connoisseur|DMU
+1 Writhing Necromass|DMU
+1 Tyrannical Pitlord|DMU
+1 Battle-Rage Blessing|DMU
+1 Extinguish the Light|DMU
+1 Braids's Frightful Return|DMU
+1 Pilfer|DMU
+8 Swamp|DMU|1
+
+[DMU Ready to Attack]
+1 Phoenix Chick|DMU
+1 Electrostatic Infantry|DMU
+1 Goblin Picker|DMU
+1 Flowstone Kavu|DMU
+1 Dragon Whelp|DMU
+1 Coalition Warbrute|DMU
+1 Ragefire Hellkite|DMU
+1 Hammerhand|DMU
+1 Lightning Strike|DMU
+1 Twinferno|DMU
+1 Jaya's Firenado|DMU
+8 Mountain|DMU|1
+
+[DMU Ready to Charge]
+1 Electrostatic Infantry|DMU
+1 Yavimaya Steelcrusher|DMU
+1 Balduvian Berserker|DMU
+1 Dragon Whelp|DMU
+1 Coalition Warbrute|DMU
+1 Molten Monstrosity|DMU
+1 Ragefire Hellkite|DMU
+1 Flowstone Infusion|DMU
+1 Twinferno|DMU
+1 Furious Bellow|DMU
+1 Jaya's Firenado|DMU
+8 Mountain|DMU|1
+
+[DMU Beast Territory]
+1 Floriferous Vinewall|DMU
+1 Sunbathing Rootwalla|DMU
+1 Deathbloom Gardener|DMU
+1 Magnigoth Sentry|DMU
+1 Territorial Maro|DMU
+1 Linebreaker Baloth|DMU
+1 Mossbeard Ancient|DMU
+1 Briar Hydra|DMU
+1 Bite Down|DMU
+1 Broken Wings|DMU
+1 Slimefoot's Survey|DMU
+1 Tangled Islet|DMU
+1 Wooded Ridgeline|DMU
+1 Radiant Grove|DMU
+1 Haunted Mire|DMU
+4 Forest|DMU|1
+
+[DMU Monster Territory]
+1 Floriferous Vinewall|DMU
+1 Sunbathing Rootwalla|DMU
+1 Nishoba Brawler|DMU
+1 Briar Hydra|DMU
+1 Magnigoth Sentry|DMU
+1 Territorial Maro|DMU
+1 Yavimaya Sojourner|DMU
+1 Gaea's Might|DMU
+1 Bite Down|DMU
+1 Slimefoot's Survey|DMU
+1 The Weatherseed Treaty|DMU
+1 Tangled Islet|DMU
+1 Wooded Ridgeline|DMU
+1 Radiant Grove|DMU
+1 Haunted Mire|DMU
+4 Forest|DMU|1
+
+[DMU White Inserts]
+1 Karn, Living Legacy|DMU
+1 Anointed Peacekeeper|DMU
+1 Archangel of Wrath|DMU
+1 Danitha, Benalia's Hope|DMU
+1 Defiler of Faith|DMU
+1 Guardian of New Benalia|DMU
+1 Leyline Binding|DMU
+1 Temporary Lockdown|DMU
+1 Urza Assembles the Titans|DMU
+1 Valiant Veteran|DMU
+1 Serra Paragon|DMU
+
+[DMU Blue Inserts]
+1 Academy Loremaster|DMU
+1 Aether Channeler|DMU
+1 Defiler of Dreams|DMU
+1 Haughty Djinn|DMU
+1 Silver Scrutiny|DMU
+1 The Phasing of Zhalfir|DMU
+1 Vodalian Hexcatcher|DMU
+1 Vodalian Mindsinger|DMU
+1 Sphinx of Clear Skies|DMU
+1 Vesuvan Duplimancy|DMU
+
+[DMU Black Inserts]
+1 Weatherlight Compleated|DMU
+1 Braids, Arisen Nightmare|DMU
+1 Defiler of Flesh|DMU
+1 Drag to the Bottom|DMU
+1 Evolved Sleeper|DMU
+1 Stronghold Arena|DMU
+1 The Cruelty of Gix|DMU
+1 The Raven Man|DMU
+1 Liliana of the Veil|DMU
+1 Sheoldred, the Apocalypse|DMU
+
+[DMU Red Inserts]
+1 Chaotic Transformation|DMU
+1 Defiler of Instinct|DMU
+1 The Elder Dragon War|DMU
+1 Keldon Flamesage|DMU
+1 Radha's Firebrand|DMU
+1 Rundvelt Hordemaster|DMU
+1 Squee, Dubious Monarch|DMU
+1 Temporal Firestorm|DMU
+1 Jaya, Fiery Negotiator|DMU
+1 Shivan Devastator|DMU
+
+[DMU Green Inserts]
+1 Defiler of Vigor|DMU
+1 Herd Migration|DMU
+1 Leaf-Crowned Visionary|DMU
+1 Llanowar Greenwidow|DMU
+1 Llanowar Loamspeaker|DMU
+1 Quirion Beastcaller|DMU
+1 Threats Undetected|DMU
+1 Urborg Lhurgoyf|DMU
+1 Silverback Elder|DMU
+1 The World Spell|DMU
+
+[BRO Infantry 1]
+1 Rescue Retriever|BRO
+1 Aeronaut Cavalry|BRO
+1 Airlift Chaplain|BRO
+1 Phalanx Vanguard|BRO
+1 Warlord's Elite|BRO
+1 Reconstructed Thopter|BRO
+1 Recruitment Officer|BRO
+1 Lay Down Arms|BRO
+1 Recommission|BRO
+1 Veteran's Powerblade|BRO
+1 Static Net|BRO
+8 Plains|BRO|1
+
+[BRO Infantry 2]
+1 Rescue Retriever|BRO
+1 Aeronaut Cavalry|BRO
+1 Ambush Paratrooper|BRO
+1 Phalanx Vanguard|BRO
+1 Thopter Architect|BRO
+1 Warlord's Elite|BRO
+1 Scrapwork Cohort|BRO
+1 Yotian Frontliner|BRO
+1 Lay Down Arms|BRO
+1 Static Net|BRO
+1 Veteran's Powerblade|BRO
+8 Plains|BRO|1
+
+[BRO Powerstones 1]
+1 Geology Enthusiast|BRO
+1 Koilos Roc|BRO
+1 Third Path Savant|BRO
+1 Thopter Mechanic|BRO
+1 Urza, Powerstone Prodigy|BRO
+1 Combat Courier|BRO
+1 Spotter Thopter|BRO
+1 Stern Lesson|BRO
+1 Urza's Rebuff|BRO
+1 Take Flight|BRO
+1 Weakstone's Subjugation|BRO
+8 Island|BRO|1
+
+[BRO Powerstones 2]
+1 Geology Enthusiast|BRO
+1 Koilos Roc|BRO
+1 Lat-Nam Adept|BRO
+1 Thopter Mechanic|BRO
+1 Urza, Powerstone Prodigy|BRO
+1 Combat Courier|BRO
+1 Hulking Metamorph|BRO
+1 Stern Lesson|BRO
+1 Involuntary Cooldown|BRO
+1 Mightstone's Animation|BRO
+1 Weakstone's Subjugation|BRO
+8 Island|BRO|1
+
+[BRO Unearthed 1]
+1 Terror Ballista|BRO
+1 Ravenous Gigamole|BRO
+1 Thraxodemon|BRO
+1 Ashnod's Harvester|BRO
+1 Clay Revenant|BRO
+1 Scrapwork Rager|BRO
+1 Kill-Zone Acrobat|BRO
+1 Ashnod's Intervention|BRO
+1 Go for the Throat|BRO
+1 Gruesome Realization|BRO
+1 No One Left Behind|BRO
+8 Swamp|BRO|1
+
+[BRO Unearthed 2]
+1 Terror Ballista|BRO
+1 Gixian Skullflayer|BRO
+1 Gnawing Vermin|BRO
+1 Ravenous Gigamole|BRO
+1 Thraxodemon|BRO
+1 Ashnod's Harvester|BRO
+1 Scrapwork Rager|BRO
+1 Gruesome Realization|BRO
+1 Overwhelming Remorse|BRO
+1 Dredging Claw|BRO
+1 Transmogrant Altar|BRO
+8 Swamp|BRO|1
+
+[BRO Welded 1]
+1 Artificer's Dragon|BRO
+1 Fallaji Chaindancer|BRO
+1 Horned Stoneseeker|BRO
+1 Mishra, Excavation Prodigy|BRO
+1 Mishra's Juggernaut|BRO
+1 Scrapwork Mutt|BRO
+1 Fallaji Dragon Engine|BRO
+1 Obliterating Bolt|BRO
+1 Unleash Shell|BRO
+1 Whirling Strike|BRO
+1 Bitter Reunion|BRO
+8 Mountain|BRO|1
+
+[BRO Welded 2]
+1 Artificer's Dragon|BRO
+1 Horned Stoneseeker|BRO
+1 Mishra, Excavation Prodigy|BRO
+1 Scrapwork Mutt|BRO
+1 Tomakul Scrapsmith|BRO
+1 Fallaji Dragon Engine|BRO
+1 Mishra's Juggernaut|BRO
+1 Excavation Explosion|BRO
+1 Mishra's Onslaught|BRO
+1 Unleash Shell|BRO
+1 Mishra's Research Desk|BRO
+8 Mountain|BRO|1
+
+[BRO Titanic 1]
+1 Woodcaller Automaton|BRO
+1 Argothian Opportunist|BRO
+1 Blanchwood Prowler|BRO
+1 Sarinth Steelseeker|BRO
+1 Iron-Craw Crusher|BRO
+1 Rust Goliath|BRO
+1 Cradle Clearcutter|BRO
+1 Giant Growth|BRO
+1 Gaea's Gift|BRO
+1 Shoot Down|BRO
+1 Bushwhack|BRO
+8 Forest|BRO|1
+
+[BRO Titanic 2]
+1 Woodcaller Automaton|BRO
+1 Argothian Sprite|BRO
+1 Cradle Clearcutter|BRO
+1 Iron-Craw Crusher|BRO
+1 Rust Goliath|BRO
+1 Perimeter Patrol|BRO
+1 Sarinth Steelseeker|BRO
+1 Tawnos's Tinkering|BRO
+1 Bushwhack|BRO
+1 Shoot Down|BRO
+1 Epic Confrontation|BRO
+8 Forest|BRO|1
+
+[BRO Black Inserts]
+1 Ashnod, Flesh Mechanist|BRO
+1 Diabolic Intent|BRO
+1 Fateful Handoff|BRO
+1 Gix's Command|BRO
+1 Gixian Puppeteer|BRO
+1 Hostile Negotiations|BRO
+1 Misery's Shadow|BRO
+1 Painful Quandary|BRO
+1 Gix, Yawgmoth Praetor|BRO
+  
+[BRO Blue Inserts]
+1 Liberator, Urza's Battlethopter|BRO
+1 Thran Spider|BRO
+1 Drafna, Founder of Lat-Nam|BRO
+1 Hurkyl's Final Meditation|BRO
+1 Hurkyl, Master Wizard|BRO
+1 Skystrike Officer|BRO
+1 The Temporal Anchor|BRO
+1 Urza's Command|BRO
+1 One with the Multiverse|BRO
+1 Teferi, Temporal Pilgrim|BRO
+
+[BRO Green Inserts]
+1 Fade from History|BRO
+1 Fauna Shaman|BRO
+1 Gwenna, Eyes of Gaea|BRO
+1 Teething Wurmlet|BRO
+1 Titania's Command|BRO
+1 Awaken the Woods|BRO
+1 Titania, Voice of Gaea|BRO
+  
+[BRO Red Inserts]
+1 Brotherhood's End|BRO
+1 Feldon, Ronom Excavator|BRO
+1 Mechanized Warfare|BRO
+1 Mishra's Command|BRO
+1 Over the Top|BRO
+1 Tyrant of Kher Ridges|BRO
+1 Visions of Phyrexia|BRO
+1 Draconic Destiny|BRO
+
+[BRO White Inserts]
+1 Kayla's Command|BRO
+1 Kayla's Reconstruction|BRO
+1 Loran of the Third Path|BRO
+1 Siege Veteran|BRO
+1 Soul Partition|BRO
+1 Tocasia's Welcome|BRO
+1 In the Trenches|BRO
+1 Myrel, Shield of Argive|BRO

@@ -3,6 +3,6 @@ ManaCost:1
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature dies, you may pay {1}. If you do, you gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 1 | Defined$ You | LifeAmount$ 1
-DeckHas:Ability$Lifegain
+DeckHas:Ability$LifeGain
 DeckHints:Ability$Sacrifice
 Oracle:Whenever a creature dies, you may pay {1}. If you do, you gain 1 life.

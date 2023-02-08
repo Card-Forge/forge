@@ -1,0 +1,13 @@
+Name:Keldon Flamesage
+ManaCost:2 R
+Types:Creature Human Shaman
+PT:2/3
+K:Enlist
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME attacks, look at the top X cards of your library, where X is CARDNAME's power. You may exile an instant or sorcery card with mana value X or less from among them. Put the rest on the bottom of your library in a random order. You may cast the exiled card without paying its mana cost.
+SVar:TrigDig:DB$ Dig | DigNum$ X | ChangeNum$ 1 | Optional$ True | ChangeValid$ Instant.cmcLEX,Sorcery.cmcLEX | DestinationZone$ Exile | DestinationZone2$ Library | LibraryPosition$ -1 | RememberChanged$ True | SubAbility$ DBCast
+SVar:DBCast:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:HasAttackEffect:TRUE
+SVar:X:Count$CardPower
+DeckHints:Type$Sorcery|Instant
+Oracle:Enlist\nWhenever Keldon Flamesage attacks, look at the top X cards of your library, where X is Keldon Flamesage's power. You may exile an instant or sorcery card with mana value X or less from among them. Put the rest on the bottom of your library in a random order. You may cast the exiled card without paying its mana cost.

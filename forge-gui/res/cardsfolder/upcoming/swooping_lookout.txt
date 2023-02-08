@@ -1,0 +1,7 @@
+Name:Swooping Lookout
+ManaCost:W
+Types:Artifact Creature Phyrexian Construct
+PT:1/2
+K:Flying
+K:Vigilance
+Oracle:Flying, vigilance

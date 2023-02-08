@@ -1,0 +1,16 @@
+[metadata]
+Code=PL23
+Date=2023-02-10
+Name=Year of the Rabbit 2023
+Type=Promo
+ScryfallCode=PL23
+
+[cards]
+1 R Rabbit Battery @TSWCK
+3 R Kwain, Itinerant Meddler @Song Qijin
+4 R Swiftfoot Boots @Walleystation
+5 R Ethereal Armor @Song Qijin
+6 R Arcbound Ravager @Walleystation
+
+[tokens]
+c_a_food_sac

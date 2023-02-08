@@ -7,10 +7,9 @@ import com.google.common.primitives.Ints;
 
 import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.GlobalRuleChange;
 import forge.game.card.Card;
 import forge.game.player.Player;
-import forge.game.zone.ZoneType;
+import forge.game.staticability.StaticAbilityAttackRestrict;
 import forge.util.collect.FCollectionView;
 import forge.util.maps.LinkedHashMapToAmount;
 import forge.util.maps.MapToAmount;
@@ -107,33 +106,13 @@ public class GlobalAttackRestrictions {
      * @return a {@link GlobalAttackRestrictions} object.
      */
     public static GlobalAttackRestrictions getGlobalRestrictions(final Player attackingPlayer, final FCollectionView<GameEntity> possibleDefenders) {
-        int max = -1;
         final MapToAmount<GameEntity> defenderMax = new LinkedHashMapToAmount<>(possibleDefenders.size());
         final Game game = attackingPlayer.getGame();
 
-        /* if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerATurn)) {
-            if (!attackingPlayer.getAttackedWithCreatureThisTurn().isEmpty()) {
-                max = 0;
-            } else {
-                max = 1;
-            }
-        } */
-
-        if (max == -1 && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerACombat)) {
-            max = 1;
-        }
-
-        if (max == -1) {
-            for (final Card card : game.getCardsIn(ZoneType.Battlefield)) {
-                if (card.hasKeyword("No more than two creatures can attack each combat.")) {
-                    max = 2;
-                    break;
-                }
-            }
-        }
+        int max = StaticAbilityAttackRestrict.globalAttackRestrict(game);
 
         for (final GameEntity defender : possibleDefenders) {
-            final int defMax = getMaxAttackTo(defender);
+            final int defMax = StaticAbilityAttackRestrict.attackRestrictNum(defender);
             if (defMax != -1) {
                 defenderMax.add(defender, defMax);
             }
@@ -144,28 +123,5 @@ public class GlobalAttackRestrictions {
         }
 
         return new GlobalAttackRestrictions(max, defenderMax);
-    }
-
-    /**
-     * <p>
-     * Get the maximum number of creatures allowed to attack a certain defender.
-     * </p>
-     * 
-     * @param defender
-     *            the defending {@link GameEntity}.
-     * @return the maximum number of creatures, or -1 if it is unlimited.
-     */
-    private static int getMaxAttackTo(final GameEntity defender) {
-        if (defender instanceof Player) {
-            for (final Card card : ((Player) defender).getCardsIn(ZoneType.Battlefield)) {
-                if (card.hasKeyword("No more than one creature can attack you each combat.")) {
-                    return 1;
-                } else if (card.hasKeyword("No more than two creatures can attack you each combat.")) {
-                    return 2;
-                }
-            }
-        }
-
-        return -1;
     }
 }

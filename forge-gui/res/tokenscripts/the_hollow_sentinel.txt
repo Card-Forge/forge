@@ -1,5 +1,5 @@
 Name:The Hollow Sentinel
 ManaCost:no cost
-Types:Legendary Creature Phyrexian Golem
+Types:Legendary Artifact Creature Phyrexian Golem
 PT:3/3
 Oracle:

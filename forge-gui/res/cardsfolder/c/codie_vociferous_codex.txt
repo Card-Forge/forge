@@ -8,7 +8,8 @@ SVar:DBTrigger:DB$ DelayedTrigger | Mode$ SpellCast | ValidActivatingPlayer$ You
 SVar:DBDig:DB$ DigUntil | Defined$ You | Valid$ Instant.cmcLTX,Sorcery.cmcLTX | FoundDestination$ Exile | RevealedDestination$ Exile | RememberRevealed$ True | ImprintFound$ True | SkipReorder$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Imprinted | ForgetOnMoved$ Exile | SubAbility$ DBRestRandomOrder
 SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ Until end of turn, you may cast that card without paying its mana cost.
-SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True
+SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:TriggeredCard$CardManaCost
 AI:RemoveDeck:Random
 DeckNeeds:Type$Instant|Sorcery

@@ -84,7 +84,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         if (sa.hasParam("ClearRemembered")) {
             source.clearRemembered();
         }
-        
+
         if (sa.hasParam("DamageMap")) {
             sa.setDamageMap(new CardDamageMap());
             sa.setPreventMap(new CardDamageMap());
@@ -210,7 +210,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 }
             }
         }
-        
+
         if (sa.hasParam("DamageMap")) {
             game.getAction().dealDamage(false, sa.getDamageMap(), sa.getPreventMap(), sa.getCounterTable(), sa);
         }

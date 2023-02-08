@@ -6,5 +6,5 @@ SVar:DBDestroy:DB$ Destroy | ValidTgts$ Land.ControlledBy ParentTarget,Land.Cont
 SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedPlayer | NumDmg$ 3 | SubAbility$ DBDamageAll | DamageMap$ True | StackDescription$ None 
 SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature.ControlledBy TargetedPlayer | NumDmg$ 1 | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve | SubAbility$ DBCleanup
-Svar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Choose target opponent. Destroy target land that player controls. The Fall of Kroog deals 3 damage to that player and 1 damage to each creature they control.

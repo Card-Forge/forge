@@ -1,0 +1,13 @@
+Name:Neyali, Suns' Vanguard
+ManaCost:2 R W
+Types:Legendary Creature Human Rebel
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl+token | AddKeyword$ Double Strike | Description$ Attacking tokens you control have double strike.
+T:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Creature.token+YouCtrl | Execute$ TrigExile | AttackedTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more tokens you control attack a player, exile the top card of your library. During any turn you attacked with a token, you may play that card.
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ExileOnMoved$ Exile | Duration$ Permanent
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | CheckSVar$ Z | Description$ During any turn you attacked with a token, you may play that card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Z:Count$CreaturesAttackedThisTurn Creature.token
+DeckHints:Ability$Token
+Oracle:Attacking tokens you control have double strike.\nWhenever one or more tokens you control attack a player, exile the top card of your library. During any turn you attacked with a token, you may play that card.

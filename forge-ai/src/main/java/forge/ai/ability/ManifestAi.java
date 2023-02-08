@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Predicate;
@@ -11,7 +10,6 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
-import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -21,9 +19,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-import forge.game.replacement.ReplacementEffect;
-import forge.game.replacement.ReplacementLayer;
-import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -90,19 +85,13 @@ public class ManifestAi extends SpellAbilityAi {
     }
 
     static boolean shouldManyfest(final Card card, final Player ai, final SpellAbility sa) {
-        final Game game = ai.getGame();
         // check to ensure that there are no replacement effects that prevent creatures ETBing from library
         // (e.g. Grafdigger's Cage)
         Card topCopy = CardUtil.getLKICopy(card);
         topCopy.turnFaceDownNoUpdate();
         topCopy.setManifested(true);
 
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(topCopy);
-        repParams.put(AbilityKey.Origin, card.getZone().getZoneType());
-        repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
-        repParams.put(AbilityKey.Source, sa.getHostCard());
-        List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.CantHappen);
-        if (!list.isEmpty()) {
+        if (ComputerUtil.isETBprevented(topCopy)) {
             return false;
         }
 

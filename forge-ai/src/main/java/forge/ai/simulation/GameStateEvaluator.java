@@ -1,12 +1,25 @@
 package forge.ai.simulation;
 
+import forge.ai.AIDeckStatistics;
 import forge.ai.CreatureEvaluator;
+import forge.card.mana.ManaAtom;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
+import forge.game.cost.CostSacrifice;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.AbilityManaPart;
+import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 public class GameStateEvaluator {
     private boolean debugging = false;
@@ -103,6 +116,7 @@ public class GameStateEvaluator {
             score += myCards - aiPlayer.getMaxHandSize();
             myCards = aiPlayer.getMaxHandSize();
         }
+        // TODO weight cards in hand more if opponent has discard or if we have looting or can bluff a trick
         score += 5 * myCards - 4 * theirCards;
         debugPrint("  My life: " + aiPlayer.getLife());
         score += 2 * aiPlayer.getLife();
@@ -114,6 +128,18 @@ public class GameStateEvaluator {
                 opponentIndex++;
         }
         score -= 2* opponentLife / (game.getPlayers().size() - 1);
+
+        // evaluate mana base quality
+        score += evalManaBase(game, aiPlayer, AIDeckStatistics.fromPlayer(aiPlayer));
+        // TODO deal with opponents. Do we want to use perfect information to evaluate their manabase?
+//        int opponentManaScore = 0;
+//        for (Player opponent : aiPlayer.getOpponents()) {
+//            opponentManaScore += evalManaBase(game, opponent);
+//        }
+//        score -= opponentManaScore / (game.getPlayers().size() - 1);
+
+        // TODO evaluate holding mana open for counterspells
+
         int summonSickScore = score;
         PhaseType gamePhase = game.getPhaseHandler().getPhase();
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
@@ -139,8 +165,53 @@ public class GameStateEvaluator {
                 debugPrint("    "+nonAbilityText.replaceAll("CARDNAME", c.getName()));
             }
         }
+
         debugPrint("Score = " + score);
         return new Score(score, summonSickScore);
+    }
+
+    public int evalManaBase(Game game, Player player, AIDeckStatistics statistics) {
+        // TODO should these be fixed quantities or should they be linear out of like 1000/(desired - total)?
+        int value = 0;
+        // get the colors of mana we can produce and the maximum number of pips
+        int max_colored = 0;
+        int max_total = 0;
+        // this logic taken from ManaCost.getColorShardCounts()
+        int[] counts = new int[6]; // in WUBRGC order
+
+        for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
+            int max_produced = 0;
+            for (SpellAbility m: c.getManaAbilities()) {
+                m.setActivatingPlayer(c.getController());
+                int mana_cost = m.getPayCosts().getTotalMana().getCMC();
+                max_produced = max(max_produced, m.amountOfManaGenerated(true) - mana_cost);
+                for (AbilityManaPart mp : m.getAllManaParts()) {
+                    for (String part : mp.mana(m).split(" ")) {
+                        // TODO handle any
+                        int index = ManaAtom.getIndexFromName(part);
+                        if (index != -1) {
+                            counts[index] += 1;
+                        }
+                    }
+                }
+            }
+            max_total += max_produced;
+        }
+
+        // Compare against the maximums in the deck and in the hand
+        // TODO check number of castable cards in hand
+        for (int i = 0; i < counts.length; i++) {
+            // for each color pip, add 100
+            value += Math.min(counts[i], statistics.maxPips[i]) * 100;
+        }
+        // value for being able to cast all the cards in your deck
+        value += min(max_total, statistics.maxCost) * 100;
+
+        // excess mana is valued less than getting enough to use everything
+        value += max(0, max_total - statistics.maxCost) * 5;
+
+
+        return value;
     }
 
     public int evalCard(Game game, Player aiPlayer, Card c) {
@@ -148,7 +219,7 @@ public class GameStateEvaluator {
         if (c.isCreature()) {
             return eval.evaluateCreature(c);
         } else if (c.isLand()) {
-            return 100;
+            return evaluateLand(c);
         } else if (c.isEnchantingCard()) {
             // TODO: Should provide value in whatever it's enchanting?
             // Else the computer would think that casting a Lifelink enchantment
@@ -163,6 +234,51 @@ public class GameStateEvaluator {
             }
             return value;
         }
+    }
+
+    public static int evaluateLand(Card c) {
+        int value = 3;
+        // for each mana color a land generates for free, increase the value by one
+        // for each mana a land can produce, add one hundred.
+        int max_produced = 0;
+        Set<String> colors_produced = new HashSet<>();
+        for (SpellAbility m: c.getManaAbilities()) {
+            m.setActivatingPlayer(c.getController());
+            int mana_cost = m.getPayCosts().getTotalMana().getCMC();
+            max_produced = max(max_produced, m.amountOfManaGenerated(true) - mana_cost);
+            for (AbilityManaPart mp : m.getAllManaParts()) {
+                colors_produced.addAll(Arrays.asList(mp.mana(m).split(" ")));
+            }
+        }
+        value += 100 * max_produced;
+        int size = max(colors_produced.size(), colors_produced.contains("Any") ? 5 : 0);
+        value += size * 3;
+
+        // add a value for each activated ability that the land has that's not an activated ability.
+        // The value should be more than the value of having a card in hand, so if a land has an
+        // activated ability but not a mana ability, it will still be played.
+        for (SpellAbility m: c.getNonManaAbilities()) {
+
+            if (!m.getPayCosts().hasTapCost()) {
+                // probably a manland, rate it higher than a rainbow land
+                value += 25;
+            } else if (m.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+                // Sacrifice ability, so not repeatable. Less good than a utility land that gets you ahead
+                value += 10;
+            } else {
+                // Repeatable utility land, probably gets you ahead on board over time.
+                // big value, probably more than a manland
+                value += 50;
+            }
+        }
+
+        // Add a value for each static ability that the land has
+        for (StaticAbility s : c.getStaticAbilities()) {
+            // More than the value of having a card in hand. See comment above
+            value += 6;
+        }
+
+        return value;
     }
 
     private class SimulationCreatureEvaluator extends CreatureEvaluator {

@@ -89,11 +89,11 @@ public class PlayAi extends SpellAbilityAi {
             }
         }
 
-        if (source != null && source.hasKeyword(Keyword.HIDEAWAY) && source.hasRemembered()) {
+        if (source != null && source.hasKeyword(Keyword.HIDEAWAY) && source.hasExiledCard()) {
             // AI is not very good at playing non-permanent spells this way, at least yet
             // (might be possible to enable it for Sorceries in Main1/Main2 if target is available,
             // but definitely not for most Instants)
-            Card rem = (Card) source.getFirstRemembered();
+            Card rem = source.getExiledCards().getFirst();
             CardTypeView t = rem.getState(CardStateName.Original).getType();
 
             return t.isPermanent() && !t.isLand();

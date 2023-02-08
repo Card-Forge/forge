@@ -36,6 +36,9 @@ gen
 # Ignore macOS Spotlight rubbish
 .DS_Store
 
+# ignore vim swapfiles
+*.swp
+
 # TODO: specify what these ignores are for (releasing?)
 
 forge.profile.properties

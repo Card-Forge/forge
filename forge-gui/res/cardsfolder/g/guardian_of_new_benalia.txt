@@ -7,4 +7,4 @@ T:Mode$ Enlisted | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ T
 SVar:TrigScry:DB$ Scry | ScryNum$ 2
 A:AB$ Pump | Cost$ Discard<1/Card> | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ CARDNAME gains indestructible until end of turn. Tap it.
 SVar:DBTap:DB$ Tap
-Oracle:Enlist (As this creature attacks, you may tap a nonattacking creature you control without summoning sickness. When you do, add its power to this creature’s until end of turn.)\nWhenever Guardian of New Benalia enlists a creature, scry 2.\nDiscard a card: Guardian of New Benalia gains indestructible until end of turn. Tap it.
+Oracle:Enlist (As this creature attacks, you may tap a nonattacking creature you control without summoning sickness. When you do, add its power to this creature's until end of turn.)\nWhenever Guardian of New Benalia enlists a creature, scry 2.\nDiscard a card: Guardian of New Benalia gains indestructible until end of turn. Tap it.

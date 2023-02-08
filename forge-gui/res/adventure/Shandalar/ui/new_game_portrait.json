@@ -16,7 +16,7 @@
       "x": 5,
       "y": 60,
       "width": 256,
-      "height": 323
+      "height": 355
     },
     {
       "type": "Label",
@@ -77,6 +77,15 @@
       "type": "Label",
       "name" : "modeL",
       "text": "[BLACK]tr(lblMode)",
+      "width": 128,
+      "height": 24,
+      "x": 16,
+      "yOffset": 8
+    },
+	{
+      "type": "Label",
+      "name" : "starterEditionL",
+      "text": "[BLACK]Starter Edition:",
       "width": 128,
       "height": 24,
       "x": 16,
@@ -164,6 +173,15 @@
       "x": 96,
       "yOffset": 8
     },
+	{
+      "type": "Selector",
+      "name": "starterEdition",
+      "selectable": true,
+      "width": 168,
+      "height": 24,
+      "x": 96,
+      "yOffset": 8
+    },
     {
       "type": "TextButton",
       "name": "back",
@@ -173,7 +191,7 @@
       "width": 64,
       "height": 28,
       "x": 32,
-      "y": 344
+      "y": 376
     },
     {
       "type": "TextButton",
@@ -184,7 +202,7 @@
       "width": 64,
       "height": 28,
       "x": 165,
-      "y": 344
+      "y": 376
     }
   ]
 }

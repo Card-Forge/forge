@@ -47,7 +47,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             }
             // determine if any of the choices are not valid
             List<SpellAbility> saToRemove = Lists.newArrayList();
-            
+
             for (SpellAbility saChoice : abilities) {
                 if (saChoice.getRestrictions() != null && !saChoice.getRestrictions().checkOtherRestrictions(host, saChoice, sa.getActivatingPlayer())) {
                     saToRemove.add(saChoice);
@@ -103,7 +103,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                 if (fallback != null) {
                     p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), fallback.getDescription(),
                             sa.hasParam("ShowChoice"), random));
-                    AbilityUtils.resolve(fallback);                
+                    AbilityUtils.resolve(fallback);
                 } else if (!random) {
                     System.err.println("Warning: all Unless costs were unpayable for " + host.getName() +", but it had no FallbackAbility defined. Doing nothing (this is most likely incorrect behavior).");
                 }

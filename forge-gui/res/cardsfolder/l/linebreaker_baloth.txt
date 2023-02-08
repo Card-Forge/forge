@@ -1,0 +1,7 @@
+Name:Linebreaker Baloth
+ManaCost:3 G G
+Types:Creature Beast
+PT:4/5
+K:Enlist
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+Oracle:Enlist (As this creature attacks, you may tap a nonattacking creature you control without summoning sickness. When you do, add its power to this creature's until end of turn.)\nLinebreaker Baloth can't be blocked by creatures with power 2 or less.

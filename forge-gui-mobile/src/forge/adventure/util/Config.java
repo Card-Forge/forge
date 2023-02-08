@@ -171,7 +171,15 @@ public class Config {
 
         return configData.colorIds;
     }
-    public Deck starterDeck(ColorSet color, DifficultyData difficultyData, AdventureModes mode,int index) {
+    public String[] starterEditionNames() {
+
+        return configData.starterEditionNames;
+    }
+    public String[] starterEditions() {
+
+        return configData.starterEditions;
+    }
+    public Deck starterDeck(ColorSet color, DifficultyData difficultyData, AdventureModes mode,int index,CardEdition starterEdition) {
         switch (mode)
         {
             case Constructed:
@@ -188,7 +196,7 @@ public class Config {
                 {
                     if(ColorSet.fromNames(entry.key.toCharArray()).getColor()==color.getColor())
                     {
-                        return CardUtil.getDeck(entry.value, false, false, "", false, false);
+                        return CardUtil.getDeck(entry.value, false, false, "", false, false, starterEdition, true);
                     }
                 }
             case Chaos:

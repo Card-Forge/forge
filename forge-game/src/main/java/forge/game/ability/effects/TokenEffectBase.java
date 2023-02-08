@@ -21,7 +21,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactory;
 import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
@@ -104,12 +103,9 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
         }
         List<Card> allTokens = Lists.newArrayList();
 
-        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
-        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
-
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-        moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+        moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, game.copyLastStateGraveyard());
 
         for (final Table.Cell<Player, Card, Integer> c : tokenTable.cellSet()) {
             Card prototype = c.getColumnKey();
@@ -156,6 +152,9 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     tok.setCopiedPermanent(prototype);
                 }
 
+                Card lki = CardUtil.getLKICopy(tok);
+                moveParams.put(AbilityKey.CardLKI, lki);
+
                 // Should this be catching the Card that's returned?
                 Card moved = game.getAction().moveToPlay(tok, sa, moveParams);
                 if (moved == null || moved.getZone() == null) {
@@ -165,7 +164,8 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 }
                 triggerList.put(ZoneType.None, moved.getZone().getZoneType(), moved);
 
-                creator.addTokensCreatedThisTurn(tok);
+                triggerList.addToken(lki, creator.getNumTokenCreatedThisTurn() == 0);
+                creator.addTokensCreatedThisTurn(lki);
 
                 if (clone) {
                     moved.setCloneOrigin(host);

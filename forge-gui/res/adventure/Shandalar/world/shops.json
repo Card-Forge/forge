@@ -306,12 +306,12 @@
   "rewards": [
     {
       "count":6,
-	  "cardText": "tap.*mana|:.*add.*(\\{[gburw]\\}|to your mana)|untap",
+	  "cardText": "tap.*mana|:.*add.*({[gburw]}|to your mana)|untap",
 	  "colors": ["green"]
     },
 	{
       "count":2,
-	  "cardText": "tap.*mana|:.*add.*(\\{[gburw]\\}|to your mana)|untap"
+	  "cardText": "tap.*mana|:.*add.*({[gburw]}|to your mana)|untap"
     }]
 },{
 "name":"Red1",                  
@@ -339,7 +339,7 @@
 "overlaySprite":"Overlay6Red",
   "rewards": [
     {
-      "count":68,
+      "count":6,
 	  "cardText": "haste|(first |double )strike | prowess|return .* to hand at end of turn|At the beginning of (your|the) end step, (sacrifice|return .* to (your|its owner).*hand)",
 	  "colors": ["red"]
 
@@ -1217,7 +1217,7 @@
     {
       "count":4,
       "cardTypes": ["Land"],
-	  "cardText": "\\Q{\\EU\\Q\\E}"
+	  "cardText": "\\Q{\\EU\\Q}\\E"
     },
 	{
       "count":4,
@@ -1233,7 +1233,7 @@
     {
       "count":8,
       "cardTypes": ["Land"],
-	  "cardText": "\\Q{\\EU\\Q\\E}"
+	  "cardText": "\\Q{\\EU\\Q}\\E"
     }]
 },{
   "name":"Land4Black",
@@ -1245,7 +1245,7 @@
     {
       "count":4,
       "cardTypes": ["Land"],
-	  "cardText": "\\Q{\\EB\\Q\\E}"
+	  "cardText": "\\Q{\\EB\\Q}\\E"
     },
 	{
       "count":4,
@@ -1261,7 +1261,7 @@
     {
       "count":8,
       "cardTypes": ["Land"],
-	  "cardText": "\\Q{\\EB\\Q\\E}"
+	  "cardText": "\\Q{\\EB\\Q}\\E"
     }]
 },{
   "name":"Land4Red",
@@ -1273,7 +1273,7 @@
     {
       "count":4,
       "cardTypes": ["Land"],
-	  "cardText": "\\Q{\\ER\\Q\\E}"
+	  "cardText": "\\Q{\\ER\\Q}\\E"
     },
 	{
       "count":4,
@@ -1289,7 +1289,7 @@
     {
       "count":8,
       "cardTypes": ["Land"],
-	  "cardText": "\\Q{\\ER\\Q\\E}"
+	  "cardText": "\\Q{\\ER\\Q}\\E"
     }]
 },{
   "name":"Land4Green",
@@ -1301,7 +1301,7 @@
     {
       "count":4,
       "cardTypes": ["Land"],
-	  "cardText": "\\Q{\\EG\\Q\\E}"
+	  "cardText": "\\Q{\\EG\\Q}\\E"
     },
 	{
       "count":4,
@@ -1317,7 +1317,7 @@
     {
       "count":8,
       "cardTypes": ["Land"],
-	  "cardText": "\\Q{\\EG\\Q\\E}"
+	  "cardText": "\\Q{\\EG\\Q}\\E"
     }]
 },{
   "name":"Land4White",
@@ -1329,7 +1329,7 @@
     {
       "count":4,
       "cardTypes": ["Land"],
-	  "cardText": "\\Q{\\EW\\Q\\E}"
+	  "cardText": "\\Q{\\EW\\Q}\\E"
     },
 	{
       "count":4,
@@ -1345,7 +1345,7 @@
     {
       "count":8,
       "cardTypes": ["Land"],
-	  "cardText": "\\Q{\\EW\\Q\\E}"
+	  "cardText": "\\Q{\\EW\\Q}\\E"
     }]
 },{
   "name":"Land4Colorless",
@@ -1361,12 +1361,12 @@
 		{
 		  "count":1,
 		  "cardTypes": ["Land"],
-		  "cardText": "\\Q{\\EC\\Q\\E}"
+		  "cardText": "\\Q{\\EC\\Q}\\E"
 		},
 		{
 		  "count":1,
 		  "cardTypes": ["Land"],
-		  "cardText": "\\Q{\\E1\\Q\\E}"
+		  "cardText": "\\Q{\\E1\\Q}\\E"
 		}
 	  ]
 	},
@@ -3549,7 +3549,7 @@
     {
       "count":8,
       "cardTypes": ["Artifact"],
-	  "cardText": "\\Q{\\ET\\Q\\E}"
+	  "cardText": "\\Q{\\ET\\Q}\\E"
     }]
 },{
   "name":"Wand2Black",
@@ -3561,7 +3561,7 @@
     {
       "count":6,
       "cardTypes": ["Artifact"],
-	  "cardText": "\\Q{\\ET\\Q\\E}"
+	  "cardText": "\\Q{\\ET\\Q}\\E"
     },
 	{
       "count":2,
@@ -3570,7 +3570,7 @@
 		{
 		  "count":1,
 		  "cardTypes": ["Artifact"],
-		  "cardText": "\\Q{\\EB\\Q\\E}"
+		  "cardText": "\\Q{\\EB\\Q}\\E"
 		},
 		{
 		  "count":1,
@@ -3589,7 +3589,7 @@
     {
       "count":4,
       "cardTypes": ["Artifact"],
-	  "cardText": "\\Q{\\ET\\Q\\E}"
+	  "cardText": "\\Q{\\ET\\Q}\\E"
     },
 	{
       "count":4,
@@ -3598,7 +3598,7 @@
 		{
 		  "count":1,
 		  "cardTypes": ["Artifact"],
-		  "cardText": "\\Q{\\EB\\Q\\E}"
+		  "cardText": "\\Q{\\EB\\Q}\\E"
 		},
 		{
 		  "count":1,
@@ -3617,7 +3617,7 @@
     {
       "count":6,
       "cardTypes": ["Artifact"],
-	  "cardText": "\\Q{\\ET\\Q\\E}"
+	  "cardText": "\\Q{\\ET\\Q}\\E"
     },
 	{
       "count":2,
@@ -3626,7 +3626,7 @@
 		{
 		  "count":1,
 		  "cardTypes": ["Artifact"],
-		  "cardText": "\\Q{\\EU\\Q\\E}"
+		  "cardText": "\\Q{\\EU\\Q}\\E"
 		},
 		{
 		  "count":1,
@@ -3645,7 +3645,7 @@
     {
       "count":4,
       "cardTypes": ["Artifact"],
-	  "cardText": "\\Q{\\ET\\Q\\E}"
+	  "cardText": "\\Q{\\ET\\Q}\\E"
     },
 	{
       "count":4,
@@ -3654,7 +3654,7 @@
 		{
 		  "count":1,
 		  "cardTypes": ["Artifact"],
-		  "cardText": "\\Q{\\EU\\Q\\E}"
+		  "cardText": "\\Q{\\EU\\Q}\\E"
 		},
 		{
 		  "count":1,
@@ -3673,7 +3673,7 @@
     {
       "count":6,
       "cardTypes": ["Artifact"],
-	  "cardText": "\\Q{\\ET\\Q\\E}"
+	  "cardText": "\\Q{\\ET\\Q}\\E"
     },
 	{
       "count":2,
@@ -3682,7 +3682,7 @@
 		{
 		  "count":1,
 		  "cardTypes": ["Artifact"],
-		  "cardText": "\\Q{\\EG\\Q\\E}"
+		  "cardText": "\\Q{\\EG\\Q}\\E"
 		},
 		{
 		  "count":1,
@@ -3701,7 +3701,7 @@
     {
       "count":4,
       "cardTypes": ["Artifact"],
-	  "cardText": "\\Q{\\ET\\Q\\E}"
+	  "cardText": "\\Q{\\ET\\Q}\\E"
     },
 	{
       "count":4,
@@ -3710,7 +3710,7 @@
 		{
 		  "count":1,
 		  "cardTypes": ["Artifact"],
-		  "cardText": "\\Q{\\EG\\Q\\E}"
+		  "cardText": "\\Q{\\EG\\Q}\\E"
 		},
 		{
 		  "count":1,
@@ -3729,7 +3729,7 @@
     {
       "count":6,
       "cardTypes": ["Artifact"],
-	  "cardText": "\\Q{\\ET\\Q\\E}"
+	  "cardText": "\\Q{\\ET\\Q}\\E"
     },
 	{
       "count":2,
@@ -3738,7 +3738,7 @@
 		{
 		  "count":1,
 		  "cardTypes": ["Artifact"],
-		  "cardText": "\\Q{\\ER\\Q\\E}"
+		  "cardText": "\\Q{\\ER\\Q}\\E"
 		},
 		{
 		  "count":1,
@@ -3757,7 +3757,7 @@
     {
       "count":4,
       "cardTypes": ["Artifact"],
-	  "cardText": "\\Q{\\ET\\Q\\E}"
+	  "cardText": "\\Q{\\ET\\Q}\\E"
     },
 	{
       "count":4,
@@ -3766,7 +3766,7 @@
 		{
 		  "count":1,
 		  "cardTypes": ["Artifact"],
-		  "cardText": "\\Q{\\ER\\Q\\E}"
+		  "cardText": "\\Q{\\ER\\Q}\\E"
 		},
 		{
 		  "count":1,
@@ -3785,7 +3785,7 @@
     {
       "count":6,
       "cardTypes": ["Artifact"],
-	  "cardText": "\\Q{\\ET\\Q\\E}"
+	  "cardText": "\\Q{\\ET\\Q}\\E"
     },
 	{
       "count":2,
@@ -3794,7 +3794,7 @@
 		{
 		  "count":1,
 		  "cardTypes": ["Artifact"],
-		  "cardText": "\\Q{\\EW\\Q\\E}"
+		  "cardText": "\\Q{\\EW\\Q}\\E"
 		},
 		{
 		  "count":1,
@@ -3813,7 +3813,7 @@
     {
       "count":4,
       "cardTypes": ["Artifact"],
-	  "cardText": "\\Q{\\ET\\Q\\E}"
+	  "cardText": "\\Q{\\ET\\Q}\\E"
     },
 	{
       "count":4,
@@ -3822,7 +3822,7 @@
 		{
 		  "count":1,
 		  "cardTypes": ["Artifact"],
-		  "cardText": "\\Q{\\EW\\Q\\E}"
+		  "cardText": "\\Q{\\EW\\Q}\\E"
 		},
 		{
 		  "count":1,

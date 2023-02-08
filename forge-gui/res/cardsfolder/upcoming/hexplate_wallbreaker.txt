@@ -1,0 +1,11 @@
+Name:Hexplate Wallbreaker
+ManaCost:3 R R
+Types:Artifact Equipment
+K:For Mirrodin
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2.
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | FirstCombat$ True | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever equipped creature attacks, if it's the first combat phase of the turn, untap each attacking creature. After this phase, there is an additional combat phase.
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature.attacking | SubAbility$ DBAddPhase
+SVar:DBAddPhase:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat
+K:Equip:3 R
+DeckHas:Ability$Token & Type$Rebel & Color$Red
+Oracle:For Mirrodin! (When this Equipment enters the battlefield, create a 2/2 red Rebel creature token, then attach this to it.)\nEquipped creature gets +2/+2.\nWhenever equipped creature attacks, if it's the first combat phase of the turn, untap each attacking creature. After this phase, there is an additional combat phase.\nEquip {3}{R}

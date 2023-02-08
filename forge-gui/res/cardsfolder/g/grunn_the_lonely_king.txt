@@ -5,7 +5,7 @@ PT:5/5
 K:Kicker:3
 K:etbCounter:P1P1:5:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with five +1/+1 counters on it.
 SVar:WasKicked:Count$Kicked.1.0
-T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks alone, double its power and toughness until end of turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever NICKNAME attacks alone, double its power and toughness until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +Y | Double$ True
 SVar:X:Count$CardPower
 SVar:Y:Count$CardToughness

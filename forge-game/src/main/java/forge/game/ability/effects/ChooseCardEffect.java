@@ -105,13 +105,13 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             }
             boolean dontRevealToOwner = true;
             if (sa.hasParam("EachBasicType")) {
-                // Get all lands, 
+                // Get all lands,
                 List<Card> land = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
                 String eachBasic = sa.getParam("EachBasicType");
                 if (eachBasic.equals("Controlled")) {
                     land = CardLists.filterControlledBy(land, p);
                 }
-                
+
                 // Choose one of each BasicLand given special place
                 for (final String type : CardType.getBasicTypes()) {
                     final CardCollectionView cl = CardLists.getType(land, type);

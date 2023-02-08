@@ -63,6 +63,10 @@ public class TriggerCounterAddedOnce extends Trigger {
             }
         }
 
+        if (!matchesValidParam("ValidEntity", runParams.get(AbilityKey.Card)) && !matchesValidParam("ValidEntity", runParams.get(AbilityKey.Player))) {
+            return false;
+        }
+
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
             return false;
         }

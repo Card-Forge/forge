@@ -87,6 +87,7 @@ Jace, Mirror Mage|Jace the Bob|Really not much of an achievement at all, but wha
 Jace, Telepath Unbound|Jace's Erasure|First empty your mind and then... nope, that's it.
 Jace, the Living Guildpact|Jace's Timetwister|Symmetry? What symmetry?
 Jace, the Mind Sculptor|Jace's Lobotomy|What do you mean, "overpowered"?
+Jace, the Perfected Mind|Jace's Keening Insight|I'll tear down your mind, so it can be rebuilt.
 Jace, Unraveler of Secrets|Jace's Perfect Plan|So, I've read about this neat guy named Erayo...
 Jace, Wielder of Mysteries|Jace's Neat Solution|Everything is solved. No loose ends.
 Jared Carthalion|Jared's Rainbow Recycling|No matter what you believe in, I still need your help.
@@ -103,6 +104,7 @@ Kaya, Orzhov Usurper|Kaya's Revenge of Emptiness|Nothing I do can hurt you. Lite
 Kiora, Master of the Depths|Kiora's Fight Club|First rule is not to talk about the sucker punches
 Kiora, the Crashing Wave|Kiora's Kraken|Say hello to Cthulhu for me!
 Koth of the Hammer|Koth's Eruption|You won't like the mountains when they are angry!
+Koth, Fire of Resistance|Koth's Molten Pinnacle|I learned this one at Valakut.
 Liliana Vess|Liliana's Bidding|Stop being lazy and go to work!
 Liliana of the Dark Realms|Liliana's Ritual|What do you mean, "out of character"?
 Liliana of the Veil|Liliana's Choice|Which one of your children do you love best?
@@ -117,6 +119,7 @@ Liliana, Untouched by Death|Liliana's Graveyard Party|What? I'm not touching you
 Liliana, Waker of the Dead|Liliana's Rotten Reserves|They awaken, feeling well-rested.
 Lord Windgrace|Windgrace's Hunting Party|Let me show you a true cat-astrophe.
 Lolth, Spider Queen|Lolth's Eight-legged Strike|I eight all my opponents alive.
+Lukka, Bound to Ruin|Lukka's Command of Ruin|Fetch. Roll. Spit acid.
 Lukka, Coppercoat Outcast|Lukka's Ultimatum|Get them.
 Lukka, Wayward Bonder|Lukka's Pandemonium|At them, girl!
 Mordenkainen|Mordenkainen's Library|All the manuals you could ever need.
@@ -132,6 +135,7 @@ Nicol Bolas, the Arisen|Bolas's Mind Wipe|Anything Jace can do, I can do better.
 Nicol Bolas, the Deceiver|Bolas's Cunning Hit|I know exactly how to hurt you.
 Nissa of Shadowed Boughs|Nissa's Reanimation|Every land hides some secrets deep down.
 Nissa Revane|Nissa's Summoning|The whole village is here!
+Nissa, Ascended Animist|Nissa's Overgrown Overrun|Small creatures hide in the woods. Large use them as a weapon.
 Nissa, Genesis Mage|Nissa's Genesis Wave|Let's see who shows up.
 Nissa, Nature's Artisan|Nissa's Stampede|Big enough for you?
 Nissa, Sage Animist|Nissa's Wake-Up Call|Wake up! Time to work!
@@ -201,6 +205,7 @@ Vivien, Arkbow Ranger|Vivien's Wish|Welcome, old friend. I was afraid I lost you
 Vivien, Monsters' Advocate|Vivien's Nature Documentary|Awww, look! He has a little buddy!
 Vivien, Nature's Avenger|Vivien's Magnification|Magnificent!
 Vraska the Unseen|Vraska's Crew|Say hello to my little friends!
+Vraska, Betrayal's Sting|Vraska's Near-Death Experience|Taste your penultimate pain!
 Vraska, Golgari Queen|Vraska's Training Regime|Step one - give them a scratch. There's no step two.
 Vraska, Regal Gorgon|Vraska's Scavenger Hunt|Death is not the opposite of life - it's its complement.
 Vraska, Relic Seeker|Vraska's Mark|Never play hide and seek with a Gorgon.

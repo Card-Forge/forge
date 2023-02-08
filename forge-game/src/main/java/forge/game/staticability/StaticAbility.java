@@ -626,7 +626,9 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     @Override
     public void setHostCard(Card host) {
         super.setHostCard(host);
-        payingTrigSA.setHostCard(host);
+        if (payingTrigSA != null) {
+            payingTrigSA.setHostCard(host);
+        }
     }
 
     public StaticAbility copy(Card host, final boolean lki) {
