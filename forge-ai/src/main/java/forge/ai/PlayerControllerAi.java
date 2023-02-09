@@ -1082,7 +1082,12 @@ public class PlayerControllerAi extends PlayerController {
         emptyAbility.setCardState(sa.getCardState());
         emptyAbility.setXManaCostPaid(sa.getRootAbility().getXManaCostPaid());
         if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers)) {
-            return ComputerUtil.playNoStack(player, emptyAbility, getGame(), true); // AI needs something to resolve to pay that cost
+            boolean result = ComputerUtil.playNoStack(player, emptyAbility, getGame(), true); // AI needs something to resolve to pay that cost
+            if (!emptyAbility.getPaidHash().isEmpty()) {
+                // report info to original sa (Argentum Masticore)
+                sa.setPaidHash(emptyAbility.getPaidHash());
+            }
+            return result;
         }
         return false;
     }
