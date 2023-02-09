@@ -298,3 +298,15 @@ BRO Welded 1: 1 wholeSheet("BRO Welded 1"), 1 RareMythic:fromSheet("BRO Red Inse
 BRO Welded 2: 1 wholeSheet("BRO Welded 2"), 1 RareMythic:fromSheet("BRO Red Inserts")
 BRO Titanic 1: 1 wholeSheet("BRO Titanic 1"), 1 RareMythic:fromSheet("BRO Green Inserts")
 BRO Titanic 2: 1 wholeSheet("BRO Titanic 2"), 1 RareMythic:fromSheet("BRO Green Inserts")
+
+# ONE Jumpstart
+ONE Mite-y 1: 1 wholeSheet("ONE Mite-y 1"), 1 RareMythic:fromSheet("ONE White Inserts")
+ONE Mite-y 2: 1 wholeSheet("ONE Mite-y 2"), 1 RareMythic:fromSheet("ONE White Inserts")
+ONE Progress 1: 1 wholeSheet("ONE Progress 1"), 1 RareMythic:fromSheet("ONE Blue Inserts")
+ONE Progress 2: 1 wholeSheet("ONE Progress 2"), 1 RareMythic:fromSheet("ONE Blue Inserts")
+ONE Corruption 1: 1 wholeSheet("ONE Corruption 1"), 1 RareMythic:fromSheet("ONE Black Inserts")
+ONE Corruption 2: 1 wholeSheet("ONE Corruption 2"), 1 RareMythic:fromSheet("ONE Black Inserts")
+ONE Rebellious 1: 1 wholeSheet("ONE Rebellious 1"), 1 RareMythic:fromSheet("ONE Red Inserts")
+ONE Rebellious 2: 1 wholeSheet("ONE Rebellious 2"), 1 RareMythic:fromSheet("ONE Red Inserts")
+ONE Toxic 1: 1 wholeSheet("ONE Toxic 1"), 1 RareMythic:fromSheet("ONE Green Inserts")
+ONE Toxic 2: 1 wholeSheet("ONE Toxic 2"), 1 RareMythic:fromSheet("ONE Green Inserts")
