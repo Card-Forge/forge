@@ -4425,7 +4425,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             storedTrigger.put(stAb, str, result);
         }
         return result;
-
     }
 
     public final ReplacementEffect getReplacementEffectForStaticAbility(final String str, final StaticAbility stAb) {
@@ -4730,7 +4729,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
      * Update the changed text of the intrinsic spell abilities and keywords.
      */
     public void updateChangedText() {
-
         // update type
         List<String> toAdd = Lists.newArrayList();
         List<String> toRemove = Lists.newArrayList();

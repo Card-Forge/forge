@@ -2,8 +2,7 @@ Name:Training Drone
 ManaCost:3
 Types:Artifact Creature Drone
 PT:4/4
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack. & CARDNAME can't block. | CheckSVar$ X | SVarCompare$ EQ1 | Description$ CARDNAME can't attack or block unless it's equipped.
-SVar:X:Count$Valid Card.Self+unequipped
+S:Mode$ Continuous | Affected$ Card.Self+unequipped | AddHiddenKeyword$ CARDNAME can't attack. & CARDNAME can't block. | Description$ CARDNAME can't attack or block unless it's equipped.
 SVar:BuffedBy:Artifact.Equipment
 SVar:EquipMe:Once
 AI:RemoveDeck:Random
