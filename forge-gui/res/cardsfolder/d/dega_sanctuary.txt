@@ -8,6 +8,5 @@ SVar:Z:Count$Valid Permanent.Red+YouCtrl/LimitMax.1
 SVar:X:SVar$Y/Plus.Z
 SVar:L:Count$Compare X EQ2.4.2
 DeckHas:Ability$LifeGain
-DeckHints:Color$Black|Red
-AI:RemoveDeck:Random
+DeckNeeds:Color$Black|Red
 Oracle:At the beginning of your upkeep, if you control a black or red permanent, you gain 2 life. If you control a black permanent and a red permanent, you gain 4 life instead.

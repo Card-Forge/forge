@@ -1,12 +1,13 @@
 Name:Ceta Sanctuary
 ManaCost:2 U
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Permanent.YouCtrl+Red | IsPresent2$ Permanent.YouCtrl+Green | PresentCompare2$ EQ0 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Permanent.YouCtrl+Green | IsPresent2$ Permanent.YouCtrl+Red | PresentCompare2$ EQ0 | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Permanent.YouCtrl+Red | IsPresent2$ Permanent.YouCtrl+Green | Execute$ TrigDraw2 | Secondary$ True | TriggerDescription$ At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBDiscard
-SVar:TrigDraw2:DB$ Draw | NumCards$ 2 | SubAbility$ DBDiscard
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Permanent.YouCtrl+Red,Permanent.YouCtrl+Green | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ C | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
+SVar:Y:Count$Valid Permanent.Red+YouCtrl/LimitMax.1
+SVar:Z:Count$Valid Permanent.Green+YouCtrl/LimitMax.1
+SVar:X:SVar$Y/Plus.Z
+SVar:C:Count$Compare X EQ2.2.1
 DeckHas:Ability$Discard
 DeckNeeds:Color$Red|Green
 Oracle:At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card.
