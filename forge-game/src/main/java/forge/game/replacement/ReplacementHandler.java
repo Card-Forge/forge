@@ -200,7 +200,7 @@ public class ReplacementHandler {
                         }
                     }
 
-                    if (!replacementEffect.hasRun()
+                    if (!replacementEffect.hasRun() && !hasRun.contains(replacementEffect)
                             && (layer == null || replacementEffect.getLayer() == layer)
                             && event.equals(replacementEffect.getMode())
                             && !possibleReplacers.contains(replacementEffect)
