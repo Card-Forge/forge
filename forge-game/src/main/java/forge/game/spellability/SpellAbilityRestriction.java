@@ -168,10 +168,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (params.containsKey("PresentDefined")) {
             this.setPresentDefined(params.get("PresentDefined"));
         }
-        if (params.containsKey("IsNotPresent")) {
-            this.setIsPresent(params.get("IsNotPresent"));
-            this.setPresentCompare("EQ0");
-        }
 
         // basically PresentCompare for life totals:
         if (params.containsKey("ActivationLifeTotal")) {

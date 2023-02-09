@@ -168,10 +168,19 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (params.containsKey("ConditionCompare")) {
                 this.setPresentCompare(params.get("ConditionCompare"));
             }
+            if (params.containsKey("ConditionPresent2")) {
+                this.setIsPresent2(params.get("ConditionPresent2"));
+                if (params.containsKey("ConditionCompare2")) {
+                    this.setPresentCompare2(params.get("ConditionCompare2"));
+                }
+            }
         }
 
         if (params.containsKey("ConditionDefined")) {
             this.setPresentDefined(params.get("ConditionDefined"));
+        }
+        if (params.containsKey("ConditionDefined2")) {
+            this.setPresentDefined2(params.get("ConditionDefined2"));
         }
 
         if (params.containsKey("ConditionZone")) {
@@ -390,6 +399,37 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             int right = AbilityUtils.calculateAmount(host, rightString, sa);
 
             if (!Expressions.compare(left, this.getPresentCompare(), right)) {
+                return false;
+            }
+        }
+
+        if (getIsPresent2() != null) {
+            FCollection<GameObject> list = null;
+            if (getPresentDefined2() != null) {
+                list = AbilityUtils.getDefinedObjects(host, getPresentDefined2(), sa);
+            } else {
+                boolean usedLastState = false;
+                if (sa.isReplacementAbility()) {
+                    //for now, we will always look in the same zone as the other present
+                    if (getPresentZone().equals(ZoneType.Battlefield)) {
+                        list = new FCollection<>(sa.getRootAbility().getLastStateBattlefield());
+                        usedLastState = true;
+                    } else if (getPresentZone().equals(ZoneType.Graveyard)) {
+                        list = new FCollection<>(sa.getRootAbility().getLastStateGraveyard());
+                        usedLastState = true;
+                    }
+                }
+                if (!usedLastState) {
+                    list = new FCollection<>(game.getCardsIn(getPresentZone()));
+                }
+            }
+
+            final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent2().split(","), sa.getActivatingPlayer(), host, sa)));
+
+            final String rightString = this.getPresentCompare2().substring(2);
+            int right = AbilityUtils.calculateAmount(host, rightString, sa);
+
+            if (!Expressions.compare(left, this.getPresentCompare2(), right)) {
                 return false;
             }
         }
