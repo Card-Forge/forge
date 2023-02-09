@@ -37,6 +37,7 @@ public class RegisteredPlayer {
     private PaperCard planeswalker = null;
     private int teamNumber = -1; // members of teams with negative id will play FFA.
     private boolean randomFoil = false;
+    private boolean enableETBCountersEffect = false;
     
     public RegisteredPlayer(Deck deck0) {
         originalDeck = deck0;
@@ -65,6 +66,13 @@ public class RegisteredPlayer {
 
     public final void setManaShards(int manaShards) {
         this.manaShards = manaShards;
+    }
+
+    public boolean hasEnableETBCountersEffect() {
+        return enableETBCountersEffect;
+    }
+    public void setEnableETBCountersEffect(boolean value) {
+        enableETBCountersEffect = value;
     }
 
     public final void setCardsOnBattlefield(Iterable<IPaperCard> cardsOnTable) {

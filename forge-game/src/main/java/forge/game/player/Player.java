@@ -2801,6 +2801,19 @@ public class Player extends GameEntity implements Comparable<Player> {
                 bf.add(c);
                 c.setSickness(true);
                 c.setStartsGameInPlay(true);
+                if (registeredPlayer.hasEnableETBCountersEffect()) {
+                    for (KeywordInterface inst : c.getKeywords()) {
+                        String keyword = inst.getOriginal();
+                        try {
+                            if (keyword.startsWith("etbCounter")) {
+                                final String[] p = keyword.split(":");
+                                c.addCounterInternal(CounterType.getType(p[1]), Integer.valueOf(p[2]), null, false, null, null);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
             }
         }
 
