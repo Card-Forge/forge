@@ -6,4 +6,5 @@ S:Mode$ Continuous | Affected$ Card.Self | CheckSVar$ X | SVarCompare$ GE3 | Eff
 DeckHas:Ability$Graveyard|Token & Type$Phyrexian|Beast
 DeckHints:Ability$Proliferate & Keyword$Infect|Toxic
 SVar:X:PlayerCountOpponents$HighestPoisonCounters
+DeckHas:Ability$Token
 Oracle:Create a 3/3 green Phyrexian Beast creature token with toxic 1. (Players dealt combat damage by this creature also get a poison counter.)\nCorrupted — As long as an opponent has three or more poison counters and Viral Spawning is in your graveyard, it has flashback {2}{G}. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
