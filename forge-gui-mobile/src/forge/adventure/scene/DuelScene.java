@@ -178,6 +178,7 @@ public class DuelScene extends ForgeScene {
         player.setStartingLife(Math.max(1, lifeMod + player.getStartingLife()));
         player.setStartingHand(player.getStartingHand() + changeStartCards);
         player.setManaShards((player.getManaShards() + extraManaShards));
+        player.setEnableETBCountersEffect(true); //enable etbcounters on starting cards like Ring of Three Wishes, etc...
     }
 
     public void setDungeonEffect(EffectData E) {
