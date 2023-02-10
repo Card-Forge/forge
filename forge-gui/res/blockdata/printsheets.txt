@@ -5804,7 +5804,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Charge of the Mites|ONE
 1 Vanish into Eternity|ONE
 1 Infested Fleshcutter|ONE
-7 Plains|ONE
+7 Plain|ONE
 1 The Fair Basilica|ONE
 
 [ONE Mite-y 2]
@@ -5820,7 +5820,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Ossification|ONE
 1 Compleat Devotion|ONE
 1 Vanish into Eternity|ONE
-7 Plains|ONE
+7 Plain|ONE
 1 The Fair Basilica|ONE
 
 [ONE Progress 1]
@@ -5836,7 +5836,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Tamiyo's Immobilizer|ONE
 1 Distorted Curiosity|ONE
 1 The Surgical Bay|ONE
-7 Islands|ONE
+7 Island|ONE
 
 [ONE Progress 2]
 
@@ -5851,7 +5851,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Distorted Curiosity|ONE
 1 Surgical Skullbomb|ONE
 1 The Surgical Bay|ONE
-7 Islands|ONE
+7 Island|ONE
 
 [ONE Corruption 1]
 
@@ -5867,7 +5867,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Anoint with Affliction|ONE
 1 Dross Skullbomb|ONE
 1 The Dross Pits|ONE
-7 Swamps|ONE
+7 Swamp|ONE
 
 [ONE Corruption 2]
 
@@ -5883,7 +5883,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Infectious Inquiry|ONE
 1 Necrogen Communion|ONE
 1 The Dross Pits|ONE
-7 Swamps|ONE
+7 Swamp|ONE
 
 [ONE Rebellious 1]
 
@@ -5898,7 +5898,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Vulshok Splitter|ONE
 1 Hexgold Halberd|ONE
 1 The Autonomous Furnace|ONE
-7 Mountains|ONE
+7 Mountain|ONE
 
 [ONE Rebellious 2]
 
@@ -5914,7 +5914,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Prosthetic Injector|ONE
 1 Hexgold Halberd|ONE
 1 The Autonomous Furnace|ONE
-7 Mountains|ONE
+7 Mountain|ONE
 
 [ONE Toxic 1]
 
@@ -5929,7 +5929,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Phyrexian Atlas|ONE
 1 Goliath Hatchery|ONE
 1 The Hunter Maze|ONE
-7 Forests|ONE
+7 Forest|ONE
 
 [ONE Toxic 2]
 
@@ -5945,7 +5945,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Goliath Hatchery|ONE
 1 Maze's Mantle|ONE
 1 The Hunter Maze|ONE
-7 Forests|ONE
+7 Forest|ONE
 
 [ONE Blue Inserts]
 
