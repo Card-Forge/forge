@@ -3384,7 +3384,7 @@
 		{
 			"type": "gold",
 			"probability": 0.3,
-			"count": 10	,
+			"count": 10,
 			"addMaxCount": 90
 		}
 	],
