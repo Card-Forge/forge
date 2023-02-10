@@ -2,8 +2,7 @@ Name:Ghitu Lavarunner
 ManaCost:R
 Types:Creature Human Wizard
 PT:1/2
-S:Mode$ Continuous | Affected$ Card.Self | CheckSVar$ X | SVarCompare$ GE2 | AddPower$ 1 | AddKeyword$ Haste | Description$ As long as there are two or more instant and/or sorcery cards in your graveyard, CARDNAME gets +1/+0 and has haste.
-SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+S:Mode$ Continuous | Affected$ Card.Self | IsPresent$ Instant.YouOwn,Sorcery.YouOwn | PresentCompare$ GE2 | PresentZone$ Graveyard | AddPower$ 1 | AddKeyword$ Haste | Description$ As long as there are two or more instant and/or sorcery cards in your graveyard, CARDNAME gets +1/+0 and has haste.
 SVar:BuffedBy:Instant,Sorcery
 SVar:PlayMain1:TRUE
 DeckHints:Type$Instant|Sorcery

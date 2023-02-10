@@ -2,8 +2,6 @@ Name:Kavu Runner
 ManaCost:3 R
 Types:Creature Kavu
 PT:3/3
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME has haste as long as no opponent controls a white or blue creature.
-SVar:X:Count$Valid Creature.White+OppCtrl/Plus.Y
-SVar:Y:Count$Valid Creature.Blue+OppCtrl
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | IsPresent$ Creature.White+OppCtrl,Creature.Blue+OppCtrl | PresentCompare$ EQ0 | Description$ CARDNAME has haste as long as no opponent controls a white or blue creature.
 SVar:AntiBuffedBy:Creature.White,Creature.Blue
 Oracle:Kavu Runner has haste as long as no opponent controls a white or blue creature.

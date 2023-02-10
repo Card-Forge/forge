@@ -4,6 +4,6 @@ Types:Creature Angel
 PT:3/3
 K:Flying
 K:Vigilance
-S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | SVarCompare$ LE3 | Description$ You can't play Serra Avenger during your first, second, or third turns of the game.
+S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | SVarCompare$ LE3 | Description$ You can't cast this spell during your first, second, or third turns of the game.
 SVar:X:Count$YourTurns
 Oracle:You can't cast this spell during your first, second, or third turns of the game.\nFlying, vigilance

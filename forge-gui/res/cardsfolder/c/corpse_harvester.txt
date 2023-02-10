@@ -2,7 +2,6 @@ Name:Corpse Harvester
 ManaCost:3 B B
 Types:Creature Zombie Wizard
 PT:3/3
-A:AB$ ChangeZone | Cost$ 1 B T Sac<1/Creature> | Origin$ Library | Destination$ Hand | ChangeType$ Zombie | ChangeNum$ 1 | SubAbility$ DBSwamp | SpellDescription$ Search your library for a Zombie card and a Swamp card, reveal them, put them into your hand, then shuffle.
-SVar:DBSwamp:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Swamp | ChangeNum$ 1
-AI:RemoveDeck:All
+A:AB$ ChangeZone | Cost$ 1 B T Sac<1/Creature> | Origin$ Library | Destination$ Hand | ChangeType$ EACH Zombie & Swamp | ChangeNum$ 1 | SpellDescription$ Search your library for a Zombie card and a Swamp card, reveal them, put them into your hand, then shuffle.
+DeckHas:Ability$Sacrifice
 Oracle:{1}{B}, {T}, Sacrifice a creature: Search your library for a Zombie card and a Swamp card, reveal them, put them into your hand, then shuffle.
