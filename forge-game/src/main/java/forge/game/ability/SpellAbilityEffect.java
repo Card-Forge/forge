@@ -890,6 +890,24 @@ public abstract class SpellAbilityEffect {
         } else {
             options = activator.getAllOtherPlayers();
         }
-        return activator.getController().chooseSingleEntityForEffect(options, sa, Localizer.getInstance().getMessage("lblChoosePlayer") , null);
+        return activator.getController().chooseSingleEntityForEffect(options, sa, Localizer.getInstance().getMessage("lblChoosePlayer"), null);
+    }
+
+    public void handleExiledWith(final Card movedCard, final SpellAbility cause) {
+        Card exilingSource = cause.getHostCard();
+        // during replacement LKI might be used
+        if (cause.isReplacementAbility() && exilingSource.isLKI()) {
+            exilingSource = exilingSource.getGame().getCardState(exilingSource);
+        }
+        // only want this on permanents
+        if (exilingSource.isImmutable() || exilingSource.isInPlay()) {
+            exilingSource.addExiledCard(movedCard);
+        }
+        // if ability was granted use that source so they can be kept apart later
+        if (cause.isCopiedTrait()) {
+            exilingSource = cause.getOriginalHost();
+        }
+        movedCard.setExiledWith(exilingSource);
+        movedCard.setExiledBy(cause.getActivatingPlayer());
     }
 }

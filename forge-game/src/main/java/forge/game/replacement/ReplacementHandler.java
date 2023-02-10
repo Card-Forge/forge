@@ -260,7 +260,6 @@ public class ReplacementHandler {
         }
 
         return ReplacementResult.NotReplaced;
-
     }
 
     private ReplacementResult run(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer, final Player decider) {

@@ -370,8 +370,7 @@ public class CardProperty {
                     host = spellAbility.getHostCard();
                 }
             }
-
-            if (!card.getExiledWith().equalsWithTimestamp(host)) {
+            if (!source.hasExiledCard(card) || !card.getExiledWith().equalsWithTimestamp(host)) {
                 return false;
             }
         } else if (property.equals("ExiledWithEffectSource")) {

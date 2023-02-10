@@ -293,6 +293,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private String sector = null;
     private String chosenSector = null;
 
+    // points to the host that exiled this card, usually the one that has this object it its exiledCards field
+    // however it could also be a different card which isn't an error but means the exiling SA was gained
     private Card exiledWith;
     private Player exiledBy;
 
@@ -1733,7 +1735,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean hasChosenNumber() {
         return chosenNumber != null;
     }
-
     public final Integer getChosenNumber() {
         return chosenNumber;
     }
@@ -1754,6 +1755,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return;
         }
 
+        // TODO this may not find the right card in case the ability was granted
         exiledWith.removeExiledCard(this);
         exiledWith.removeUntilLeavesBattlefield(this);
 
@@ -1766,16 +1768,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         exiledBy = ep;
     }
 
-    // used for cards like Belbe's Portal, Conspiracy, Cover of Darkness, etc.
     public final String getChosenType() {
         return chosenType;
     }
-
     public final void setChosenType(final String s) {
         chosenType = s;
         view.updateChosenType(this);
     }
-
     public final boolean hasChosenType() {
         return chosenType != null && !chosenType.isEmpty();
     }
@@ -1784,12 +1783,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final String getChosenType2() {
         return chosenType2;
     }
-
     public final void setChosenType2(final String s) {
         chosenType2 = s;
         view.updateChosenType2(this);
     }
-
     public final boolean hasChosenType2() {
         return chosenType2 != null && !chosenType2.isEmpty();
     }
