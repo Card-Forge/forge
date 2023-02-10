@@ -238,6 +238,10 @@ public final class CardUtil {
 
         newCopy.setCounters(Maps.newHashMap(in.getCounters()));
 
+        newCopy.setTributed(in.isTributed());
+        newCopy.setMonstrous(in.isMonstrous());
+        newCopy.setRenowned(in.isRenowned());
+
         newCopy.setColor(in.getColor().getColor());
         newCopy.setPhasedOut(in.getPhasedOut());
 
