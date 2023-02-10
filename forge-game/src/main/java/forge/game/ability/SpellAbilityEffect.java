@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import forge.util.lang.LangEnglish;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
@@ -80,14 +81,34 @@ public abstract class SpellAbilityEffect {
         // Own description
         String stackDesc = params.get("StackDescription");
         if (stackDesc != null) {
+            String[] reps = null;
+            if (stackDesc.startsWith("REP")) {
+                reps = stackDesc.substring(4).split(" & ");
+                stackDesc = "SpellDescription";
+            }
             // by typing "SpellDescription" they want to bypass the Effect's string builder
             if ("SpellDescription".equalsIgnoreCase(stackDesc)) {
-            	if (params.get("SpellDescription") != null) {
-            		sb.append(CardTranslation.translateSingleDescriptionText(params.get("SpellDescription"), sa.getHostCard().getName()));
-            	}
-            	if (sa.getTargets() != null && !sa.getTargets().isEmpty()) {
-            		sb.append(" (Targeting: ").append(sa.getTargets()).append(")");
-            	}
+                if (params.get("SpellDescription") != null) {
+                    String spellDesc = CardTranslation.translateSingleDescriptionText(params.get("SpellDescription"),
+                            sa.getHostCard().getName());
+                    if (Lang.getInstance() instanceof LangEnglish && reps != null) {
+                        for (String s : reps) {
+                            String[] rep = s.split("_",2);
+                            spellDesc = spellDesc.replaceFirst(rep[0], rep[1]);
+                        }
+                    }
+                    if (spellDesc.contains("(")) { //trim reminder text from StackDesc
+                        spellDesc = spellDesc.substring(0, spellDesc.indexOf("(") - 1);
+                    }
+                    if (reps == null) {
+                        sb.append(spellDesc);
+                    } else {
+                        tokenizeString(sa, sb, spellDesc);
+                    }
+                }
+                if (sa.getTargets() != null && !sa.getTargets().isEmpty() && reps == null) {
+                    sb.append(" (Targeting: ").append(Lang.joinHomogenous(sa.getTargets())).append(")");
+                }
             } else if (!"None".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
                 tokenizeString(sa, sb, stackDesc);
             }
