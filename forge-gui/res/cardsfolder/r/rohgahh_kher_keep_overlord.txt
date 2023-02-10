@@ -9,4 +9,5 @@ T:Mode$ SpellCast | ValidCard$ Dragon | ValidActivatingPlayer$ You | Execute$ Tr
 SVar:TrigTokenKobold:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ kobolds_of_kher_keep 
 DeckHints:Name$Kobolds of Kher Keep
 DeckNeeds:Type$Dragon
+SVar:PlayMain1:TRUE
 Oracle:Other Kobolds you control get +2/+2.\nWhenever you cast a Kobold spell, you may pay {2}. If you do, create a 4/4 red Dragon creature token with flying.\nWhenever you cast a Dragon spell, create a 0/1 red Kobold creature token named Kobolds of Kher Keep.
