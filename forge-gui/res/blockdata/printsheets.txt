@@ -5804,7 +5804,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Charge of the Mites|ONE
 1 Vanish into Eternity|ONE
 1 Infested Fleshcutter|ONE
-7 Plain|ONE
+7 Plains|ONE
 1 The Fair Basilica|ONE
 
 [ONE Mite-y 2]
@@ -5820,7 +5820,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Ossification|ONE
 1 Compleat Devotion|ONE
 1 Vanish into Eternity|ONE
-7 Plain|ONE
+7 Plains|ONE
 1 The Fair Basilica|ONE
 
 [ONE Progress 1]
