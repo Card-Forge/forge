@@ -618,6 +618,15 @@ public class GameAction {
         // Need to apply any static effects to produce correct triggers
         checkStaticAbilities();
 
+        // 400.7g try adding keyword back into card if it doesn't already have it
+        if (zoneTo.is(ZoneType.Stack) && cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
+            if (cause.getKeyword() != null) {
+                if (!copied.getKeywords().contains(cause.getKeyword())) {
+                    copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, game.getTimestamp(), 0, false);
+                }
+            }
+        }
+
         // CR 603.6b
         if (toBattlefield) {
             zoneTo.saveLKI(copied, lastKnownInfo);

@@ -254,6 +254,7 @@ public final class GameActionUtil {
                         }
                         flashback.setAlternativeCost(AlternativeCost.Flashback);
                         flashback.getRestrictions().setZone(ZoneType.Graveyard);
+                        flashback.setKeyword(inst);
                         alternatives.add(flashback);
                     } else if (keyword.startsWith("Foretell")) {
                         // Foretell cast only from Exile
