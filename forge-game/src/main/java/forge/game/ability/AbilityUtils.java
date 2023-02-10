@@ -1766,7 +1766,7 @@ public class AbilityUtils {
 
                 // Count$Kicked.<numHB>.<numNotHB>
                 if (sq[0].startsWith("Kicked")) {
-                    boolean kicked = sa.isKicked() || c.getKickerMagnitude() > 0;
+                    boolean kicked = sa.isKicked() || (!isUnlinkedFromCastSA(ctb, c) && c.getKickerMagnitude() > 0);
                     return doXMath(Integer.parseInt(kicked ? sq[1] : sq[2]), expr, c, ctb);
                 }
 
@@ -2004,7 +2004,7 @@ public class AbilityUtils {
         }
 
         if (sq[0].startsWith("Kicked")) { // fallback for not spellAbility
-            return doXMath(calculateAmount(c, sq[c.getKickerMagnitude() > 0 ? 1 : 2], ctb), expr, c, ctb);
+            return doXMath(calculateAmount(c, sq[!isUnlinkedFromCastSA(ctb, c) && c.getKickerMagnitude() > 0 ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].startsWith("Escaped")) {
             return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isEscape() ? 1 : 2], ctb), expr, c, ctb);
@@ -2073,7 +2073,7 @@ public class AbilityUtils {
             return doXMath(c.getKeywordMagnitude(Keyword.smartValueOf(l[0].split(" ")[1])), expr, c, ctb);
         }
         if (sq[0].contains("TimesKicked")) {
-            return doXMath(c.getKickerMagnitude(), expr, c, ctb);
+            return doXMath(isUnlinkedFromCastSA(ctb, c) ? 0 : c.getKickerMagnitude(), expr, c, ctb);
         }
         if (sq[0].contains("TimesPseudokicked")) {
             return doXMath(c.getPseudoKickerMagnitude(), expr, c, ctb);
@@ -3893,5 +3893,36 @@ public class AbilityUtils {
             Iterables.addAll(types, c1.getType().getCoreTypes());
         }
         return types.size();
+    }
+
+    /**
+     * Checks if an ability source can be considered a "broken link" on a specific host
+     * (which usually means it won't have its normal effect).
+     * <br>
+     * Because castSA gets used to compare it can only make a safe conclusion for
+     * links that depend on stack decisions and can't be gained by other means
+     * e.g. Kicker costs.
+     *
+     * @param ctb the source of the ability
+     * @param card the host that it should be linked to
+     * @return true if the ability can't be linked
+     */
+    public static boolean isUnlinkedFromCastSA(final CardTraitBase ctb, final Card card) {
+        // check if it should come from same host
+        if (ctb != null && ctb.isIntrinsic() && ctb.getHostCard().equals(card)) {
+            Card host = ctb.getOriginalHost();
+            SpellAbility castSA = card.getCastSA();
+            if (host != null && castSA != null) {
+                Card castHost = castSA.getOriginalHost();
+                if (castHost == null) {
+                    castHost = castSA.getHostCard();
+                }
+                // impossible to match with the other part when not even from same host
+                if (!host.equals(castHost)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

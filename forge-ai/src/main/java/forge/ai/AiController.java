@@ -232,7 +232,7 @@ public class AiController {
                 if (!validCard.contains("Self")) {
                     continue;
                 }
-                if (validCard.contains("notkicked")) {
+                if (validCard.contains("!kicked")) {
                     if (sa.isKicked()) {
                         continue;
                     }
@@ -288,7 +288,7 @@ public class AiController {
                 if (!validCard.contains("Self")) {
                     continue;
                 }
-                if (validCard.contains("notkicked")) {
+                if (validCard.contains("!kicked")) {
                     if (sa.isKicked()) {
                         continue;
                     }
