@@ -82,7 +82,7 @@ public abstract class SpellAbilityEffect {
         String stackDesc = params.get("StackDescription");
         if (stackDesc != null) {
             String[] reps = null;
-            if (stackDesc.startsWith("REP")) {
+            if (stackDesc.startsWith("REP") && Lang.getInstance() instanceof LangEnglish) {
                 reps = stackDesc.substring(4).split(" & ");
                 stackDesc = "SpellDescription";
             }
@@ -91,19 +91,17 @@ public abstract class SpellAbilityEffect {
                 if (params.get("SpellDescription") != null) {
                     String spellDesc = CardTranslation.translateSingleDescriptionText(params.get("SpellDescription"),
                             sa.getHostCard().getName());
-                    if (Lang.getInstance() instanceof LangEnglish && reps != null) {
+                    if (spellDesc.contains("(")) { //trim reminder text from StackDesc
+                        spellDesc = spellDesc.substring(0, spellDesc.indexOf("(") - 1);
+                    }
+                    if (reps != null) {
                         for (String s : reps) {
                             String[] rep = s.split("_",2);
                             spellDesc = spellDesc.replaceFirst(rep[0], rep[1]);
                         }
-                    }
-                    if (spellDesc.contains("(")) { //trim reminder text from StackDesc
-                        spellDesc = spellDesc.substring(0, spellDesc.indexOf("(") - 1);
-                    }
-                    if (reps == null) {
-                        sb.append(spellDesc);
-                    } else {
                         tokenizeString(sa, sb, spellDesc);
+                    } else {
+                        sb.append(spellDesc);
                     }
                 }
                 if (sa.getTargets() != null && !sa.getTargets().isEmpty() && reps == null) {
