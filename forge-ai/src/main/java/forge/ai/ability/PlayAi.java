@@ -180,13 +180,21 @@ public class PlayAi extends SpellAbilityAi {
                         // Before accepting, see if the spell has a valid number of targets (it should at this point).
                         // Proceeding past this point if the spell is not correctly targeted will result
                         // in "Failed to add to stack" error and the card disappearing from the game completely.
+                        if (!sa.hasParam("WithoutManaCost") && !ComputerUtilCost.canPayCost(spell, ai, true)) {
+                            // if we won't be able to pay the cost, don't choose the card
+                            return false;
+                        }
                         return spell.isTargetNumberValid();
                     }
                 }
                 return false;
             }
         });
-        return ComputerUtilCard.getBestAI(tgtCards);
+        final Card best = ComputerUtilCard.getBestAI(tgtCards);
+        if (sa.usesTargeting() && !sa.isTargetNumberValid()) {
+            sa.getTargets().add(best);
+        }
+        return best;
     }
 
     private static List<Card> getPlayableCards(SpellAbility sa, Player ai) {
