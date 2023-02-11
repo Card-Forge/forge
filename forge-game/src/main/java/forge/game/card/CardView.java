@@ -1378,6 +1378,7 @@ public class CardView extends GameEntityView {
         public String getProtectionKey() { return get(TrackableProperty.ProtectionKey); }
         public String getHexproofKey() { return get(TrackableProperty.HexproofKey); }
         public boolean hasDeathtouch() { return get(TrackableProperty.HasDeathtouch); }
+        public boolean hasToxic() { return get(TrackableProperty.HasToxic); }
         public boolean hasDevoid() { return get(TrackableProperty.HasDevoid); }
         public boolean hasDefender() { return get(TrackableProperty.HasDefender); }
         public boolean hasDivideDamage() { return get(TrackableProperty.HasDivideDamage); }
@@ -1451,6 +1452,7 @@ public class CardView extends GameEntityView {
         void updateKeywords(Card c, CardState state) {
             c.updateKeywordsCache(state);
             set(TrackableProperty.HasDeathtouch, c.hasKeyword(Keyword.DEATHTOUCH, state));
+            set(TrackableProperty.HasToxic, c.hasKeyword(Keyword.TOXIC, state));
             set(TrackableProperty.HasDevoid, c.hasKeyword(Keyword.DEVOID, state));
             set(TrackableProperty.HasDefender, c.hasKeyword(Keyword.DEFENDER, state));
             set(TrackableProperty.HasDivideDamage, c.hasKeyword("You may assign CARDNAME's combat damage divided as " +

@@ -880,6 +880,15 @@ public class CardRenderer {
             abiY += abiSpace;
             abiCount += 1;
         }
+        if (card.getCurrentState().hasToxic()) {
+            if (abiCount > 5) {
+                abiY = cy + (abiSpace * (abiCount - 6));
+                abiX = cx + ((cw * 2) / 1.92f);
+            }
+            CardFaceSymbols.drawSymbol("toxic", g, abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+            abiCount += 1;
+        }
         if (card.getCurrentState().hasIndestructible()) {
             if (abiCount > 5) {
                 abiY = cy + (abiSpace * (abiCount - 6));

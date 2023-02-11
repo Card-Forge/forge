@@ -138,6 +138,7 @@ public enum TrackableProperty {
 
     KeywordKey(TrackableTypes.StringType),
     HasDeathtouch(TrackableTypes.BooleanType),
+    HasToxic(TrackableTypes.BooleanType),
     HasDevoid(TrackableTypes.BooleanType),
     HasDefender(TrackableTypes.BooleanType),
     HasDivideDamage(TrackableTypes.BooleanType),
