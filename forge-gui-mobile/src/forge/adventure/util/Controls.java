@@ -395,9 +395,8 @@ public class Controls {
     {
         if(textraFont==null)
         {
-            textraFont=new Font(getSkin().getFont("default"));
+            textraFont=new Font(getSkin().getFont("default"), 0f, 1.5f, 0f, 0f);
             textraFont.addAtlas(Config.instance().getAtlas(Paths.ITEMS_ATLAS));
-            textraFont.adjustLineHeight(0.8f);//not sure why this is needed maybe the font is bad
         }
         return textraFont;
     }

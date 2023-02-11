@@ -44,13 +44,13 @@ public enum KeyBinding {
     public String getLabelText(boolean pressed) {
         if(Controllers.getCurrent()!=null)
         {
-            return "{Scale=125%}[+"+controllerPrefix+Input.Keys.toString(bindingController).replace(" Button","")+(pressed?"_pressed]":"]");
+            return "[%125][+"+controllerPrefix+Input.Keys.toString(bindingController).replace(" Button","")+(pressed?"_pressed]":"]");
         }
         else
         {
             if(GuiBase.isAndroid())
                 return "";
-            return "{Scale=125%}[+"+Input.Keys.toString(binding)+(pressed?"_pressed]":"]");
+            return "[%125][+"+Input.Keys.toString(binding)+(pressed?"_pressed]":"]");
         }
 
     }

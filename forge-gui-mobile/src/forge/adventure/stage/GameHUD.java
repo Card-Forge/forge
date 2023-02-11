@@ -122,12 +122,12 @@ public class GameHUD extends Stage {
         lifePoints = ui.findActor("lifePoints");
         shards = ui.findActor("shards");
         money = ui.findActor("money");
-        shards.setText("{Scale=80%}0/0");
-        lifePoints.setText("{Scale=80%}20/20");
-        AdventurePlayer.current().onLifeChange(() -> lifePoints.setText("{Scale=80%}"+AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
-        AdventurePlayer.current().onShardsChange(() -> shards.setText("{Scale=80%}"+AdventurePlayer.current().getShards()));
+        shards.setText("[%80]0/0");
+        lifePoints.setText("[%80]20/20");
+        AdventurePlayer.current().onLifeChange(() -> lifePoints.setText("[%80]"+AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
+        AdventurePlayer.current().onShardsChange(() -> shards.setText("[%80]"+AdventurePlayer.current().getShards()));
 
-        WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("{Scale=80%}"+String.valueOf(AdventurePlayer.current().getGold())));
+        WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("[%80]"+String.valueOf(AdventurePlayer.current().getGold())));
         addActor(ui);
         addActor(miniMapPlayer);
         console = new Console();
