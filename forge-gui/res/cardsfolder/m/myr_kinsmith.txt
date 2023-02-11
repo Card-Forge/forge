@@ -1,0 +1,8 @@
+Name:Myr Kinsmith
+ManaCost:4
+Types:Artifact Creature Myr
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a Myr card, reveal it, put it into your hand, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Myr | ChangeNum$ 1 | Shuffle$ True
+DeckHints:Type$Myr
+Oracle:When Myr Kinsmith enters the battlefield, you may search your library for a Myr card, reveal it, put it into your hand, then shuffle.

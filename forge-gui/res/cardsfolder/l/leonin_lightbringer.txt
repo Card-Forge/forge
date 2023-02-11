@@ -1,0 +1,9 @@
+Name:Leonin Lightbringer
+ManaCost:2 W
+Types:Creature Cat Rebel
+PT:3/2
+K:Ward:2
+S:Mode$ Continuous | Affected$ Card.Self+equipped | AddPower$ 1 | AddToughness$ 1 | Description$ As long as CARDNAME is equipped, it gets +1/+1.
+SVar:EquipMe:Once
+DeckHints:Type$Equipment
+Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nAs long as Leonin Lightbringer is equipped, it gets +1/+1.

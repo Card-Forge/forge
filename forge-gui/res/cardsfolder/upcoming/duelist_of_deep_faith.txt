@@ -1,7 +1,0 @@
-Name:Duelist of Deep Faith
-ManaCost:1 W
-Types:Creature Phyrexian Soldier
-PT:2/2
-K:Toxic:1
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has first strike.
-Oracle:Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)\nAs long as it's your turn, Duelist of Deep Faith has first strike.

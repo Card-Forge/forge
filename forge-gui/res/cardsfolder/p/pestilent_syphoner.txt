@@ -1,0 +1,7 @@
+Name:Pestilent Syphoner
+ManaCost:1 B
+Types:Creature Phyrexian Insect
+PT:1/1
+K:Flying
+K:Toxic:1
+Oracle:Flying\nToxic 1 (Players dealt combat damage by this creature also get a poison counter.)

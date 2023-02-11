@@ -1,0 +1,9 @@
+Name:Gitaxian Raptor
+ManaCost:2 U
+Types:Creature Phyrexian Bird
+PT:1/4
+K:Flying
+K:etbCounter:OIL:3
+A:AB$ Pump | Cost$ SubCounter<1/OIL> | Defined$ Self | NumAtt$ 1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
+DeckHas:Ability$Counters
+Oracle:Flying\nGitaxian Raptor enters the battlefield with three oil counters on it.\nRemove an oil counter from Gitaxian Raptor: Gitaxian Raptor gets +1/-1 until end of turn.
