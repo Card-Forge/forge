@@ -61,7 +61,7 @@
       "font": "default",
       "width": 64,
       "height": 16,
-      "x": 442,
+      "x": 427,
       "y": 56
     },
     {
@@ -70,7 +70,7 @@
       "font": "default",
       "width": 64,
       "height": 16,
-      "x": 442,
+      "x": 427,
       "y": 73
     },
     {
@@ -79,7 +79,7 @@
       "font": "default",
       "width": 64,
       "height": 16,
-      "x": 442,
+      "x": 427,
       "y": 90
     },
 	{
@@ -141,7 +141,7 @@
     {
       "type": "TextButton",
       "name": "openmap",
-      "text": "[=][%150]tr(lblZoom)",
+      "text": "[%80]tr(lblZoom)",
       "binding": "Map",
       "width": 80,
       "height": 18,
