@@ -122,12 +122,13 @@ public class GameHUD extends Stage {
         lifePoints = ui.findActor("lifePoints");
         shards = ui.findActor("shards");
         money = ui.findActor("money");
-        shards.setText("[%80]0/0");
-        lifePoints.setText("[%80]20/20");
-        AdventurePlayer.current().onLifeChange(() -> lifePoints.setText("[%80]"+AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
-        AdventurePlayer.current().onShardsChange(() -> shards.setText("[%80]"+AdventurePlayer.current().getShards()));
+        shards.setText("[%95][+Shards] 0");
+        money.setText("[%95][+Gold] ");
+        lifePoints.setText("[%95][+Life] 20/20");
+        AdventurePlayer.current().onLifeChange(() -> lifePoints.setText("[%95][+Life] "+AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
+        AdventurePlayer.current().onShardsChange(() -> shards.setText("[%95][+Shards] "+AdventurePlayer.current().getShards()));
 
-        WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("[%80]"+String.valueOf(AdventurePlayer.current().getGold())));
+        WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("[%95][+Gold] "+String.valueOf(AdventurePlayer.current().getGold())));
         addActor(ui);
         addActor(miniMapPlayer);
         console = new Console();
@@ -247,12 +248,12 @@ public class GameHUD extends Stage {
         //colored lifepoints
         if (Current.player().getLife() >= Current.player().getMaxLife()) {
             //color green if max life
-            lifePoints.setColor(Color.GREEN);
+            lifePoints.setText("[%95][+Life] [GREEN]"+AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
         } else if (Current.player().getLife() <= 5) {
             //color red if critical
-            lifePoints.setColor(Color.RED);
+            lifePoints.setText("[%95][+Life] [RED]"+AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
         } else {
-            lifePoints.setColor(Color.WHITE);
+            lifePoints.setText("[%95][+Life] "+AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
         }
     }
 
