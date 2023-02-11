@@ -79,6 +79,7 @@ public class CostEnlist extends CostPartWithTrigger {
         payTrig.addRemembered(targetCard);
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(payTrig.getHostCard());
+        runParams.put(AbilityKey.Enlisted, targetCard);
         targetCard.getGame().getTriggerHandler().runTrigger(TriggerType.Enlisted, runParams, false);
         return targetCard;
     }
