@@ -20,6 +20,9 @@ import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
 public abstract class KeywordInstance<T extends KeywordInstance<?>> implements KeywordInterface {
+    private Card hostCard = null;
+    private boolean intrinsic = false;
+
     private Keyword keyword;
     private String original;
     private long staticId = 0;
@@ -87,6 +90,8 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
      * @see forge.game.keyword.KeywordInterface#createTraits(forge.game.card.Card, boolean, boolean)
      */
     public final void createTraits(final Card host, final boolean intrinsic, final boolean clear) {
+        this.hostCard = host;
+        this.intrinsic = intrinsic;
         if (clear) {
             triggers.clear();
             replacements.clear();
@@ -249,7 +254,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     public KeywordInterface copy(final Card host, final boolean lki) {
         try {
             KeywordInstance<?> result = (KeywordInstance<?>) super.clone();
-
+            result.hostCard = host;
             result.abilities = Lists.newArrayList();
             for (SpellAbility sa : this.abilities) {
                 SpellAbility copy = sa.copy(host, lki);
@@ -300,11 +305,17 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
         return !list.isEmpty() && keyword.isMultipleRedundant;
     }
 
+    @Override
+    public Card getHostCard() {
+        return hostCard;
+    }
+
     /* (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#setHostCard(forge.game.card.Card)
      */
     @Override
     public void setHostCard(Card host) {
+        this.hostCard = host;
         for (SpellAbility sa : this.abilities) {
             sa.setHostCard(host);
         }
@@ -323,7 +334,13 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     }
 
     @Override
+    public boolean isIntrinsic() {
+        return intrinsic;
+    }
+
+    @Override
     public void setIntrinsic(final boolean value) {
+        this.intrinsic = value;
         for (SpellAbility sa : this.abilities) {
             sa.setIntrinsic(value);
         }
