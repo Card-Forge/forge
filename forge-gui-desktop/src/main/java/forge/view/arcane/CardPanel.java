@@ -574,6 +574,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                     CardFaceSymbols.drawAbilitySymbol("deathtouch", g, abiX, abiY, abiScale, abiScale);
                     abiY += abiSpace;
                 }
+                if (card.getCurrentState().hasToxic()) {
+                    CardFaceSymbols.drawAbilitySymbol("toxic", g, abiX, abiY, abiScale, abiScale);
+                    abiY += abiSpace;
+                }
                 if (card.getCurrentState().hasIndestructible()) {
                     CardFaceSymbols.drawAbilitySymbol("indestructible", g, abiX, abiY, abiScale, abiScale);
                     abiY += abiSpace;
