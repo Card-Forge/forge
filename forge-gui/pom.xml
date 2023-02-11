@@ -43,7 +43,7 @@
         <dependency>
             <groupId>com.github.tommyettinger</groupId>
             <artifactId>textratypist</artifactId>
-            <version>0.7.2</version>
+            <version>0.7.6</version>
         </dependency>
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>

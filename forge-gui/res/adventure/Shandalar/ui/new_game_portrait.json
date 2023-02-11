@@ -21,7 +21,7 @@
     {
       "type": "Label",
       "name" : "titleL",
-      "text": "{SIZE=150%}[BLACK]tr(lblCreateACharacter)",
+      "text": "[%150][BLACK]tr(lblCreateACharacter)",
       "width": 128,
       "height": 32,
       "scale": 2,
