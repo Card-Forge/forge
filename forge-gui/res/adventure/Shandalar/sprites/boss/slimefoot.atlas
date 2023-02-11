@@ -1,0 +1,17 @@
+slimefoot.png
+size: 35,35
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 44,39
+  size: 23, 16    
+Idle 
+  xy: 0, 0
+  size: 36, 33 
+Idle 
+  xy: 38, 0
+  size: 30, 33
+Idle 
+  xy: 75, 1
+  size: 31, 31

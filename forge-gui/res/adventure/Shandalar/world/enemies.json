@@ -7852,9 +7852,9 @@
 },
 {
 	"name": "Slimefoot",
-	"sprite": "sprites/fungus.atlas",
+	"sprite": "sprites/boss/slimefoot.atlas",
 	"deck": [
-		"decks/slimefoot.dck"
+		"decks/miniboss/slimefoot.dck"
 	],
 	"ai": "",
 	"flying": false,
