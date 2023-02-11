@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="55">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Thallid Shell-Dweller&quot;,&quot;Slimefoot, Thallid Transplant&quot;, &quot;Thallid Shell-Dweller&quot; ]
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzt1T0OgCAMBeDu4gmIF5OzeDB/DqdNNOkg7atSJ1/SsBQ+OhBKT7QkvUagh6uAfXzecKxapo5oM3o4bK5AHycn3UVNjnV/1PWYnlk1N9KsudFmzc3GOWy9jdd9Oh/izuf7ijJr7p3d0tRcabc2LfeyW5uIG5Xf/c5F/ktZMt69snZp5kVE
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxbwM7AsGAUj+JRPIpH8SgexSMCAwB2ckzC
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy9lWsOgjAMx6dO0Ev52Vc4jjcwEj2CCuFGnsJnPIKPldFQmnUTP9CkCVmhv38fYcNYqWEHvho33RdD75lY37hi730ie94ncVfeXzXRfMuBUjfjW61Ko5xDrBq2Z3xfzS4m5NvoOh+wT8ryJZuSWPktq13qM9bIa0BLTN6zwH06dKWE7ePmcVNzW8OePEiOwlMz5eIsqdF+h4z3Y89mLXFRN7DnJMeU7FVbKwLcI5krzPJace9V/xbkTLJZpW+na+20Zmmfc7ZTa215SYB3r+KXQT1nqrMQuPjMuS57mb2fjKy/I8tcMF1cZ4gLvYZcPl7G3oezkM4s0GeJDTsNdUn/Udc3qW7WKu0VZ2MvwX3MUK+y2F1f6N7w3SPcOZsz/+X+crdgr1xMH7erO/gL5SiFxQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1VctOw0AM9AGk9tATX1ISaIWEyt/wFSgIvo7jJm164WPICI8ycbYpfTDSar1rr8frON7ZnY3wsejl1I1adA9jcyvdpnAZmAW/93OzlcjAthuN2NbCl8Q3se7GS4Y7nlm5b9yj9b3K77ScD/lKG3PF2KfA3CTZw3nc6zH4a8WWMWtuT+Ump959HWyefC6sv+85iHFFX9Qj98g112Xm7KXczF+O3yb2L0UdZtTSs8usr//iBviNd7KHOvs+cu5acdAP+8O1v2tcM5f8n8nd2t/ruMj4OwVNJraUtfyF/hfsicf4G5EP5RT75C2CrpZ97WHlBGcO2iMB9C/2E/hOwp1knuor1eKAwmPc+Rz7Fr83a538lLVvbnxu7byaxBn2bK6JKtT6p9zn62boh+9aBN89vgf7oGe+NVcaD/Xvrn+97deIh3ZbGwI+Yv7ffP0D2AVMNQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="208" y="281">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="49" template="../obj/gold.tx" x="209.038" y="33.8697"/>
+  <object id="53" template="../obj/enemy.tx" x="223.924" y="99.93">
+   <properties>
+    <property name="enemy" value="Slimefoot"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

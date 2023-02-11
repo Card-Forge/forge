@@ -945,5 +945,16 @@
 	"questItem": true,
 	"shardsNeeded": 5,
 	"cost": 1000
+},
+{
+    "name": "Slimefoot's Slimy Staff",
+    "equipmentSlot": "Left",
+    "iconName": "GreenStaff",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Thallid Shell-Dweller"
+      ]
+}
 }
 ]

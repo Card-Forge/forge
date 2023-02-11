@@ -1831,5 +1831,14 @@
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "LavaForge",
 	"map": "maps/map/kobold_mine.tmx"
+},
+{
+	"name": "Slimefoot's Lair",
+	"type": "dungeon",
+	"count": 1,
+	"radiusFactor": 0.8,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "EvilGrove",
+	"map": "maps/map/slimefoot_boss.tmx"
 }
 ]
