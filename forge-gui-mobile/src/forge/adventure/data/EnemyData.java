@@ -19,6 +19,7 @@ public class EnemyData {
     public float spawnRate;
     public float difficulty;
     public float speed;
+    public float scale;
     public int life;
     public RewardData[] rewards;
     public String[] equipment;
@@ -39,6 +40,7 @@ public class EnemyData {
         copyPlayerDeck = enemyData.copyPlayerDeck;
         difficulty     = enemyData.difficulty;
         speed          = enemyData.speed;
+        scale          = enemyData.scale;
         life           = enemyData.life;
         equipment      = enemyData.equipment;
         colors         = enemyData.colors;

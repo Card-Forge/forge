@@ -1833,7 +1833,7 @@
 	"map": "maps/map/kobold_mine.tmx"
 },
 {
-	"name": "Slimefoot's Lair",
+	"name": "Slimefoots Lair",
 	"type": "dungeon",
 	"count": 1,
 	"radiusFactor": 0.8,

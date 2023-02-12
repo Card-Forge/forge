@@ -31,11 +31,13 @@
   </object>
   <object id="55" template="../obj/treasure.tx" x="30.5746" y="103.158"/>
   <object id="64" template="../obj/treasure.tx" x="225.969" y="32.1053"/>
-  <object id="56" template="../obj/enemy.tx" x="241.165" y="62.5288" width="20.2535" height="21.6702">
+  <object id="56" template="../obj/enemy.tx" x="241.165" y="62.5288" width="16" height="16">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Kraken Hatchling&quot;,&quot;Tropical Island&quot; ]
 }</property>
     <property name="enemy" value="Kiora"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
    </properties>
   </object>
   <object id="57" template="../obj/enemy.tx" x="212.325" y="170.425">
@@ -52,6 +54,8 @@
   <object id="66" template="../obj/enemy.tx" x="26.7491" y="125.752">
    <properties>
     <property name="enemy" value="Crab"/>
+    <property name="scaleX" type="float" value="0.5"/>
+    <property name="scaleY" type="float" value="0.5"/>
    </properties>
   </object>
   <object id="67" template="../obj/enemy.tx" x="93.0526" y="236.342">

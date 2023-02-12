@@ -37,7 +37,6 @@ public class EnemySprite extends CharacterSprite {
     public String nameOverride = ""; //Override name of this enemy in battles.
     public RewardData[] rewards; //Additional rewards for this enemy.
     public DialogData.ConditionData spawnCondition; //Condition to spawn.
-
     public EnemySprite(EnemyData enemyData) {
         this(0,enemyData);
     }
@@ -49,7 +48,8 @@ public class EnemySprite extends CharacterSprite {
 
     @Override
     void updateBoundingRect() { //We want enemies to take the full tile.
-        boundingRect.set(getX(), getY(), getWidth(), getHeight());
+        float scale = this instanceof EnemySprite ? 2f :1f;
+        boundingRect.set(getX(), getY(), getWidth()*scale, getHeight()*scale);
     }
 
     public void moveTo(Actor other, float delta) {

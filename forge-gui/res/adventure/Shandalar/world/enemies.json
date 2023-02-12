@@ -7853,6 +7853,7 @@
 {
 	"name": "Slimefoot",
 	"sprite": "sprites/dungeon/slimefoot.atlas",
+	"scale": 0.25,
 	"deck": [
 		"decks/miniboss/slimefoot.dck"
 	],
@@ -7959,6 +7960,7 @@
     {
 	"name": "Crab",
 	"sprite": "sprites/dungeon/crab.atlas",
+	"scale": 0.5,
 	"deck": [
 		"decks/crab.dck"
 	],
@@ -8019,6 +8021,7 @@
     {	
 	"name": "Kiora",
 	"sprite": "sprites/dungeon/kiora.atlas",
+	"scale": 0.25,
 	"deck": [
 		"decks/miniboss/kiora.dck"
 	],
