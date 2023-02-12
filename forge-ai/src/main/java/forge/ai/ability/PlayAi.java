@@ -5,7 +5,6 @@ import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.card.CardStateName;
 import forge.card.CardTypeView;
-import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
@@ -74,8 +73,7 @@ public class PlayAi extends SpellAbilityAi {
             // Try to play only when there are more than three playable cards.
             if (cards.size() < 3)
                 return false;
-            ManaCost mana = sa.getPayCosts().getTotalMana();
-            if (mana.countX() > 0) {
+            if (sa.costHasManaX()) {
                 int amount = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                 if (amount < ComputerUtilCard.getBestAI(cards).getCMC())
                     return false;
@@ -160,7 +158,7 @@ public class PlayAi extends SpellAbilityAi {
                     if (sa.hasParam("WithoutManaCost")) {
                         // Try to avoid casting instants and sorceries with X in their cost, since X will be assumed to be 0.
                         if (!(spell instanceof SpellPermanent)) {
-                            if (spell.getPayCosts().getTotalMana().countX() > 0) {
+                            if (spell.costHasManaX()) {
                                 continue;
                             }
                         }
@@ -180,11 +178,11 @@ public class PlayAi extends SpellAbilityAi {
                         // Before accepting, see if the spell has a valid number of targets (it should at this point).
                         // Proceeding past this point if the spell is not correctly targeted will result
                         // in "Failed to add to stack" error and the card disappearing from the game completely.
-                        if (!sa.hasParam("WithoutManaCost") && !ComputerUtilCost.canPayCost(spell, ai, true)) {
+                        if (!spell.isTargetNumberValid() || !ComputerUtilCost.canPayCost(spell, ai, true)) {
                             // if we won't be able to pay the cost, don't choose the card
                             return false;
                         }
-                        return spell.isTargetNumberValid();
+                        return true;
                     }
                 }
                 return false;

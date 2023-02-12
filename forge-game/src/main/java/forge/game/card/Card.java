@@ -2596,7 +2596,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
                         String currentName = host.getName();
                         String desc1 = TextUtil.fastReplace(stAb.toString(), "CARDNAME", currentName);
-                        String desc = TextUtil.fastReplace(desc1,"NICKNAME", currentName.split(" ")[0].replace(",", ""));
+                        String desc = TextUtil.fastReplace(desc1, "NICKNAME", currentName.split(" ")[0].replace(",", ""));
                         if (host.getEffectSource() != null) {
                             desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", host.getEffectSource().getName());
                         }

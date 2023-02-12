@@ -958,4 +958,4 @@ public class SpellAbilityVariables implements Cloneable {
     public void setClassLevelOperator(String op) {
         classLevelOperator = op;
     }
-} // end class SpellAbilityVariables
+}

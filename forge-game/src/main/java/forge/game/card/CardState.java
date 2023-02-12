@@ -118,6 +118,10 @@ public class CardState extends GameObject implements IHasSVars {
         return name + " (" + view.getState() + ")";
     }
 
+    public CardTypeView getTypeWithChanges() {
+        return getType().getTypeWithChanges(card.getChangedCardTypes());
+    }
+
     public final CardTypeView getType() {
         return type;
     }
@@ -466,12 +470,7 @@ public class CardState extends GameObject implements IHasSVars {
         return getReplacementEffects().contains(re);
     }
     public final boolean hasReplacementEffect(final int id) {
-        for (final ReplacementEffect r : getReplacementEffects()) {
-            if (id == r.getId()) {
-                return true;
-            }
-        }
-        return false;
+        return getReplacementEffect(id) != null;
     }
 
     public final ReplacementEffect getReplacementEffect(final int id) {
@@ -657,11 +656,6 @@ public class CardState extends GameObject implements IHasSVars {
     public String getSetCode() {
         return setCode;
     }
-
-    public CardTypeView getTypeWithChanges() {
-        return getType().getTypeWithChanges(card.getChangedCardTypes());
-    }
-
     public void setSetCode(String setCode0) {
         setCode = setCode0;
         view.updateSetCode(this);

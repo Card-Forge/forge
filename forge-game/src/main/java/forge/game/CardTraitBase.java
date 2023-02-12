@@ -672,7 +672,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             } else if (descriptiveKeys.contains(key)) {
                 // change descriptions differently
                 newValue = AbilityUtils.applyTextChangeEffects(value, true, colorMap, typeMap);
-            }else if (this.getHostCard().hasSVar(value)) {
+            } else if (this.getHostCard().hasSVar(value)) {
                 // don't change literal SVar names!
                 continue;
             } else {
