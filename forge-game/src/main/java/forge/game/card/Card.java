@@ -6876,19 +6876,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         this.changedCardTypesCharacterDefining.putAll(changedCardTypes);
     }
 
-    public void setChangedCardKeywords(Table<Long, Long, KeywordsChange> changedCardKeywords, boolean copy) {
+    public void setChangedCardKeywords(Table<Long, Long, KeywordsChange> changedCardKeywords) {
         this.changedCardKeywords.clear();
         for (Table.Cell<Long, Long, KeywordsChange> entry : changedCardKeywords.cellSet()) {
-            KeywordsChange result = entry.getValue();
-            if (copy) {
-                result = result.copy(this, true);
-            } else {
-                // do not copy the keywords, just update the host
-                for (KeywordInterface k : result.getKeywords()) {
-                    k.setHostCard(this);
-                }
-            }
-            this.changedCardKeywords.put(entry.getRowKey(), entry.getColumnKey(), result);
+            this.changedCardKeywords.put(entry.getRowKey(), entry.getColumnKey(), entry.getValue().copy(this, true));
         }
     }
 
