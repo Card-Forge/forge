@@ -244,7 +244,7 @@ public class MapStage extends GameStage {
         dialog.getContentTable().clear();
         dialog.getButtonTable().clear();
         dialog.clearListeners();
-        dialog.getContentTable().add(Controls.newTypingLabel(Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)))).align(Align.center);
+        dialog.getContentTable().add(Controls.newTypingLabel("[%150]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)))).align(Align.center);
         dialog.getContentTable().add().row();
 
         TypingLabel L = Controls.newTypingLabel(message);

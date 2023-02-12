@@ -481,6 +481,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             Matrix4 m = new Matrix4();
             GlyphLayout layout = new GlyphLayout();
             ItemData item = getReward().getItem();
+            boolean itemExists = item != null;
             FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, preview_w, preview_h, false);
             frameBuffer.begin();
             try {
@@ -491,32 +492,36 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 getGraphics().drawImage(backSprite, 0, 0, preview_w, preview_h);
                 getGraphics().drawImage(icon, preview_w / 2 - 75, 160, 160, 160);
                 BitmapFont font = Controls.getBitmapFont("default", 4 / (preview_h / preview_w));
-                layout.setText(font, item != null ? item.name : getReward().type.name(), Color.WHITE, preview_w - 64, Align.center, true);
+                layout.setText(font, itemExists ? item.name : getReward().type.name(), Color.WHITE, preview_w - 64, Align.center, true);
                 getGraphics().drawText(font, layout, 32, preview_h - 70);
                 font = Controls.getBitmapFont("default", 3.5f / (preview_h / preview_w));
-                if (item != null) {
+                float xDescription = 64f;
+                float yDescription = (preview_h / 2.5f);
+                float targetWidth = preview_w - 128;
+                int align = itemExists ? Align.left : Align.center;
+                float scale = font.getLineHeight();
+                if (itemExists) {
                     String text = item.getDescription();
                     if (text.contains("[+Shards]")) {
                         Sprite iconSprite = atlas.createSprite("Shards");
                         if (iconSprite == null) {
-                            layout.setText(font, text, Color.WHITE, preview_w - 128, Align.left, true);
+                            layout.setText(font, text, Color.WHITE, targetWidth, Align.left, true);
                         } else {
                             int index = text.lastIndexOf("\n");//currently [+Shards] is the last line in the description
-                            GlyphLayout c = new GlyphLayout();
-                            c.setText(font, text.substring(index < 0 ? 0 : index, text.indexOf("[+")));//get the glyphcount
-                            float xmod = c.glyphCount * font.getLineHeight()/4;
+                            GlyphLayout shardsCount = new GlyphLayout();
+                            shardsCount.setText(font, text.substring(index < 0 ? 0 : index, text.indexOf(" [+")));
                             String newText = text.replace("[+Shards]", "");
-                            layout.setText(font, newText, Color.WHITE, preview_w - 128, Align.left, true);
-                            getGraphics().drawImage(iconSprite,  xmod+64,  (preview_h / 2.5f) + c.height + layout.height + font.getLineHeight()/1.5f, font.getLineHeight(), font.getLineHeight());
+                            layout.setText(font, newText, Color.WHITE, targetWidth, Align.left, true);
+                            getGraphics().drawImage(iconSprite, xDescription + shardsCount.width,  yDescription + shardsCount.height + layout.height + scale/1.5f, scale, scale);
                         }
                     } else {
-                        layout.setText(font, text, Color.WHITE, preview_w - 128, item != null ? Align.left : Align.center, true);
+                        layout.setText(font, text, Color.WHITE, targetWidth, align, true);
                     }
                 } else {
-                    layout.setText(font, "Adds " + String.valueOf(getReward().getCount()) + " " + getReward().type, Color.WHITE, preview_w - 128, item != null ? Align.left : Align.center, true);
+                    layout.setText(font, "Adds " + String.valueOf(getReward().getCount()) + " " + getReward().type, Color.WHITE, targetWidth, align, true);
                 }
 
-                getGraphics().drawText(font, layout, 64, preview_h / 2.5f);
+                getGraphics().drawText(font, layout, xDescription, yDescription);
                 getGraphics().end();
                 getGraphics().endClip();
                 generatedTooltip = new Texture(Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h), Forge.isTextureFilteringEnabled());
