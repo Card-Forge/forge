@@ -956,5 +956,16 @@
         "Thallid Shell-Dweller"
       ]
 }
+},
+{
+    "name": "Kiora's Bident",
+    "equipmentSlot": "Left",
+    "iconName": "SleepWand",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Kraken Hatchling"
+      ]
+}
 }
 ]
