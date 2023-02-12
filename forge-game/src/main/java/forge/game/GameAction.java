@@ -265,25 +265,13 @@ public class GameAction {
             copied.setTimestamp(c.getTimestamp());
 
             if (zoneTo.is(ZoneType.Stack)) {
-                // when moving to stack, copy changed card information
-                copied.setChangedCardColors(c.getChangedCardColorsTable());
-                copied.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningTable());
-                copied.setChangedCardKeywords(c.getChangedCardKeywords(), false);
-                copied.setChangedCardTypes(c.getChangedCardTypesTable());
-                copied.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningTable());
-                copied.setChangedCardNames(c.getChangedCardNames());
-                copied.setChangedCardTraits(c.getChangedCardTraits());
-                copied.setDrawnThisTurn(c.getDrawnThisTurn());
-
-                copied.copyChangedTextFrom(c);
-
-                // clean up changes that come from its own static abilities
-                copied.cleanupCopiedChangesFrom(c);
+                // try not to copy changed stats when moving to stack
 
                 // copy exiled properties when adding to stack
                 // will be cleanup later in MagicStack
                 copied.setExiledWith(c.getExiledWith());
                 copied.setExiledBy(c.getExiledBy());
+                copied.setDrawnThisTurn(c.getDrawnThisTurn());
 
                 // copy bestow timestamp
                 copied.setBestowTimestamp(c.getBestowTimestamp());
