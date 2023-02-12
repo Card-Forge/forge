@@ -31,7 +31,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.common.collect.Table;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -48,10 +47,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
 import forge.game.card.CardState;
-import forge.game.card.CardTraitChanges;
 import forge.game.card.CardUtil;
-import forge.game.keyword.KeywordInterface;
-import forge.game.keyword.KeywordsChange;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.AbilitySub;
@@ -109,53 +105,6 @@ public class ReplacementHandler {
             preList.add(affectedLKI);
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(affectedLKI), preList);
             checkAgain = true;
-
-            // need to check if Intrinsic has run
-            for (ReplacementEffect re : affectedLKI.getReplacementEffects()) {
-                if (re.isIntrinsic() && this.hasRun.contains(re)) {
-                    re.setHasRun(true);
-                }
-            }
-
-            // need to check non Intrinsic
-            for (Table.Cell<Long, Long, CardTraitChanges> e : affectedLKI.getChangedCardTraits().cellSet()) {
-                boolean hasRunRE = false;
-                String skey = String.valueOf(e.getRowKey()) + ":" + String.valueOf(e.getColumnKey());
-
-                for (ReplacementEffect re : this.hasRun) {
-                    if (!re.isIntrinsic() && skey.equals(re.getSVar("_ReplacedTimestamp"))) {
-                        hasRunRE = true;
-                        break;
-                    }
-                }
-
-                for (ReplacementEffect re : e.getValue().getReplacements()) {
-                    re.setSVar("_ReplacedTimestamp", skey);
-                    if (hasRunRE) {
-                        re.setHasRun(true);
-                    }
-                }
-            }
-            for (Table.Cell<Long, Long, KeywordsChange> e : affectedLKI.getChangedCardKeywords().cellSet()) {
-                boolean hasRunRE = false;
-                String skey = String.valueOf(e.getRowKey()) + ":" + String.valueOf(e.getColumnKey());
-
-                for (ReplacementEffect re : this.hasRun) {
-                    if (!re.isIntrinsic() && skey.equals(re.getSVar("_ReplacedTimestamp"))) {
-                        hasRunRE = true;
-                        break;
-                    }
-                }
-
-                for (KeywordInterface k : e.getValue().getKeywords()) {
-                    for (ReplacementEffect re : k.getReplacements()) {
-                        re.setSVar("_ReplacedTimestamp", skey);
-                        if (hasRunRE) {
-                            re.setHasRun(true);
-                        }
-                    }
-                }
-            }
 
             runParams.put(AbilityKey.Affected, affectedLKI);
         }
@@ -222,6 +171,8 @@ public class ReplacementHandler {
                 for (final ReplacementEffect re : affectedLKI.getReplacementEffects()) {
                     re.setHostCard(affectedCard);
                 }
+                // need to copy stored keywords from lki into real object to prevent the replacement effect from making new ones
+                affectedCard.setStoredKeywords(affectedLKI.getStoredKeywords(), true);
                 runParams.put(AbilityKey.Affected, affectedCard);
                 runParams.put(AbilityKey.NewCard, CardUtil.getLKICopy(affectedLKI));
             }

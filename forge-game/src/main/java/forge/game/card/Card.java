@@ -20,6 +20,7 @@ package forge.game.card;
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
+
 import forge.GameCommand;
 import forge.StaticData;
 import forge.card.*;
@@ -4584,6 +4585,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void addKeywordForStaticAbility(KeywordInterface kw) {
         if (kw.getStaticId() > 0) {
             storedKeywords.put(kw.getStaticId(), kw.getOriginal(), kw);
+        }
+    }
+
+    public Table<Long, String, KeywordInterface> getStoredKeywords() {
+        return storedKeywords;
+    }
+
+    public void setStoredKeywords(Table<Long, String, KeywordInterface> table, boolean lki) {
+        storedKeywords.clear();
+        for (Table.Cell<Long, String, KeywordInterface> c : table.cellSet()) {
+            storedKeywords.put(c.getRowKey(), c.getColumnKey(), c.getValue().copy(this, lki));
         }
     }
 
