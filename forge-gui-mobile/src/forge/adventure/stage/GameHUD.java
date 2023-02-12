@@ -66,6 +66,7 @@ public class GameHUD extends Stage {
     private final Dialog dialog;
     private boolean dialogOnlyInput;
     private final Array<TextraButton> dialogButtonMap = new Array<>();
+    private String lifepointsTextColor = "";
     TextraButton selectedKey;
 
     private GameHUD(GameStage gameStage) {
@@ -248,12 +249,21 @@ public class GameHUD extends Stage {
         //colored lifepoints
         if (Current.player().getLife() >= Current.player().getMaxLife()) {
             //color green if max life
-            lifePoints.setText("[%95][+Life] [GREEN]"+AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
+            if (!lifepointsTextColor.equalsIgnoreCase("green")) {
+                lifePoints.setText("[%95][+Life] [GREEN]" + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
+                lifepointsTextColor = "green";
+            }
         } else if (Current.player().getLife() <= 5) {
             //color red if critical
-            lifePoints.setText("[%95][+Life] [RED]"+AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
+            if (!lifepointsTextColor.equalsIgnoreCase("red")) {
+                lifePoints.setText("[%95][+Life] [RED]" + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
+                lifepointsTextColor = "red";
+            }
         } else {
-            lifePoints.setText("[%95][+Life] "+AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
+            if (!lifepointsTextColor.equals("")) {
+                lifePoints.setText("[%95][+Life] " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
+                lifepointsTextColor = "";
+            }
         }
     }
 
