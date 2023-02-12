@@ -131,12 +131,16 @@ public class MakeCardEffect extends SpellAbilityEffect {
                             AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCounterNum", "1"), sa),
                             player);
                 }
-                Card made = game.getAction().moveTo(zone, c, sa, moveParams);
+
+                final int libraryPos = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(source, sa.getParam("LibraryPosition"), sa) : 0;
+                Card made = game.getAction().moveTo(zone, c, libraryPos, sa, moveParams);
+
                 if (sa.hasParam("WithCounter") && zone != null && !zone.equals(ZoneType.Battlefield)) {
                     made.addCounter(CounterType.getType(sa.getParam("WithCounter")),
                             AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCounterNum", "1"), sa),
                             player, counterTable);
                 }
+
                 if (sa.hasParam("FaceDown")) {
                     made.turnFaceDown(true);
                 }
