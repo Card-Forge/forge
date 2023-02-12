@@ -201,14 +201,16 @@
 	"JMP",
 	"DMU",
 	"BRO",
-	"J22"
+	"J22",
+	"ONE",
 	"(All)"
   ],
   "starterEditionNames": [
 	"Jumpstart",
 	"Dominaria United",
 	"Brother's War",
-	"Jumpstart 22"
+	"Jumpstart 22",
+	"Phyrexia: All Will Be One",
 	"(All)"
 	]
 }

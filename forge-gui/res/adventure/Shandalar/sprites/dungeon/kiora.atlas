@@ -1,11 +1,11 @@
 kiora.png
-size: 35,35
+size: 28,51
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
-  xy: 3,11
-  size: 14,8
+  xy: 1,18
+  size: 27,19
 Idle 
-  xy: 2, 2
-  size: 15, 26
+  xy: 21,8
+  size: 28, 51

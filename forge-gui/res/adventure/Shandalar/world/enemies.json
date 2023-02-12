@@ -3392,7 +3392,7 @@
 },
 {
 	"name": "Kobold",
-	"sprite": "sprites/imp.atlas",
+	"sprite": "sprites/dungeon/kobold.atlas",
 	"deck": [
 		"decks/kobold.dck"
 	],
@@ -7852,7 +7852,7 @@
 },
 {
 	"name": "Slimefoot",
-	"sprite": "sprites/boss/slimefoot.atlas",
+	"sprite": "sprites/dungeon/slimefoot.atlas",
 	"deck": [
 		"decks/miniboss/slimefoot.dck"
 	],
