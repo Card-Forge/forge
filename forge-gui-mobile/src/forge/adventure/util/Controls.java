@@ -351,20 +351,20 @@ public class Controls {
 
     public static String colorIdToTypingString(ColorSet color)
     {
-        String coloerId="";
+        String colorId="";
         if(color.hasWhite())
-            coloerId+="[+w]";
+            colorId+="[+w]";
         if(color.hasBlue())
-            coloerId+="[+u]";
+            colorId+="[+u]";
         if(color.hasBlack())
-            coloerId+="[+b]";
+            colorId+="[+b]";
         if(color.hasRed())
-            coloerId+="[+r]";
+            colorId+="[+r]";
         if(color.hasGreen())
-            coloerId+="[+g]";
+            colorId+="[+g]";
         if(color.isColorless())
-            coloerId+="[+c]";
-        return coloerId;
+            colorId+="[+c]";
+        return colorId;
     }
     public static TypingLabel newTypingLabel(String name) {
         TypingLabel ret = new TypingLabel(name==null?"":name, getSkin(),getTextraFont());
