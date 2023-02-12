@@ -2,6 +2,7 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.google.common.collect.Sets;
 import forge.Forge;
 import forge.adventure.data.BiomeData;
 import forge.adventure.stage.MapStage;
@@ -11,6 +12,7 @@ import forge.adventure.world.World;
 import forge.util.TextUtil;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Game scene main over world scene
@@ -19,9 +21,7 @@ import java.util.List;
 public class GameScene extends HudScene {
     public GameScene() {
         super(WorldStage.getInstance());
-
     }
-
 
     private static GameScene object;
 
@@ -47,7 +47,6 @@ public class GameScene extends HudScene {
         stage.draw();
         hud.draw();
     }
-
 
     @Override
     public void enter() {
@@ -77,9 +76,10 @@ public class GameScene extends HudScene {
         return location;
     }
 
-    public boolean isInDungeonOrCave() {
+    public boolean isNotInWorldMap() {
         String location = getAdventurePlayerLocation(false);
-        return location.equalsIgnoreCase("dungeon") || location.equalsIgnoreCase("cave");
+        Set<String> locationTypes = Sets.newHashSet("capital", "castle", "cave", "dungeon", "town");
+        return locationTypes.contains(location);
     }
 }
 
