@@ -250,7 +250,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - item.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1.7f), item);
                 //DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getItem().name), 0, (int) ((backSprite.getHeight() / 8f) * 1f), backSprite.getWidth(), false);
 
-                setItemTooltips(item, backSprite);
+                setItemTooltips(item, backSprite, atlas);
                 image = new Texture(drawingMap);
                 drawingMap.dispose();
                 needsToBeDisposed = true;
@@ -268,7 +268,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - item.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1f), item);
                 DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f) - 1, backSprite.getWidth(), true, Color.WHITE);
 
-                setItemTooltips(item, backSprite);
+                setItemTooltips(item, backSprite, atlas);
                 image = new Texture(drawingMap);
                 drawingMap.dispose();
                 needsToBeDisposed = true;
@@ -476,7 +476,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         return result;
     }
 
-    private void setItemTooltips(Sprite icon, Sprite backSprite) {
+    private void setItemTooltips(Sprite icon, Sprite backSprite, TextureAtlas atlas) {
         if (generatedTooltip == null) {
             Matrix4 m = new Matrix4();
             GlyphLayout layout = new GlyphLayout();
@@ -494,8 +494,28 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 layout.setText(font, item != null ? item.name : getReward().type.name(), Color.WHITE, preview_w - 64, Align.center, true);
                 getGraphics().drawText(font, layout, 32, preview_h - 70);
                 font = Controls.getBitmapFont("default", 3.5f / (preview_h / preview_w));
-                layout.setText(font, item != null ? item.getDescription() : "Adds " +
-                        String.valueOf(getReward().getCount()) + " " + getReward().type, Color.WHITE, preview_w - 128, item != null ? Align.left : Align.center, true);
+                if (item != null) {
+                    String text = item.getDescription();
+                    if (text.contains("[+Shards]")) {
+                        Sprite iconSprite = atlas.createSprite("Shards");
+                        if (iconSprite == null) {
+                            layout.setText(font, text, Color.WHITE, preview_w - 128, Align.left, true);
+                        } else {
+                            int index = text.lastIndexOf("\n");//currently [+Shards] is the last line in the description
+                            GlyphLayout c = new GlyphLayout();
+                            c.setText(font, text.substring(index < 0 ? 0 : index, text.indexOf("[+")));//get the glyphcount
+                            float xmod = c.glyphCount * font.getLineHeight()/4;
+                            String newText = text.replace("[+Shards]", "");
+                            layout.setText(font, newText, Color.WHITE, preview_w - 128, Align.left, true);
+                            getGraphics().drawImage(iconSprite,  xmod+64,  (preview_h / 2.5f) + c.height + layout.height + font.getLineHeight()/1.5f, font.getLineHeight(), font.getLineHeight());
+                        }
+                    } else {
+                        layout.setText(font, text, Color.WHITE, preview_w - 128, item != null ? Align.left : Align.center, true);
+                    }
+                } else {
+                    layout.setText(font, "Adds " + String.valueOf(getReward().getCount()) + " " + getReward().type, Color.WHITE, preview_w - 128, item != null ? Align.left : Align.center, true);
+                }
+
                 getGraphics().drawText(font, layout, 64, preview_h / 2.5f);
                 getGraphics().end();
                 getGraphics().endClip();
