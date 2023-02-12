@@ -356,7 +356,7 @@ public class GameCopier {
 
             newCard.setChangedCardTypes(c.getChangedCardTypesTable());
             newCard.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningTable());
-            newCard.setChangedCardKeywords(c.getChangedCardKeywords());
+            newCard.setChangedCardKeywords(c.getChangedCardKeywords(), true);
             newCard.setChangedCardNames(c.getChangedCardNames());
 
             for (Table.Cell<Long, Long, List<String>> kw : c.getHiddenExtrinsicKeywordsTable().cellSet()) {

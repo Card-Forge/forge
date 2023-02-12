@@ -268,7 +268,7 @@ public class GameAction {
                 // when moving to stack, copy changed card information
                 copied.setChangedCardColors(c.getChangedCardColorsTable());
                 copied.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningTable());
-                copied.setChangedCardKeywords(c.getChangedCardKeywords());
+                copied.setChangedCardKeywords(c.getChangedCardKeywords(), false);
                 copied.setChangedCardTypes(c.getChangedCardTypesTable());
                 copied.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningTable());
                 copied.setChangedCardNames(c.getChangedCardNames());
@@ -622,7 +622,9 @@ public class GameAction {
         if (zoneTo.is(ZoneType.Stack) && cause != null && cause.isSpell() && !cause.isIntrinsic() && c.equals(cause.getHostCard())) {
             if (cause.getKeyword() != null) {
                 if (!copied.getKeywords().contains(cause.getKeyword())) {
-                    copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, game.getTimestamp(), 0, false);
+                    copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, game.getNextTimestamp(), 0, false);
+                    // update Keyword Cache
+                    copied.updateKeywords();
                 }
             }
         }
