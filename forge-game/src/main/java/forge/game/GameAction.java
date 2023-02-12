@@ -273,11 +273,13 @@ public class GameAction {
                 copied.setExiledBy(c.getExiledBy());
                 copied.setDrawnThisTurn(c.getDrawnThisTurn());
 
-                // copy bestow timestamp
-                copied.setBestowTimestamp(c.getBestowTimestamp());
 
                 if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
                     copied.setCastSA(cause);
+                    copied.setSplitStateToPlayAbility(cause);
+
+                    // CR 112.2 A spell’s controller is, by default, the player who put it on the stack.
+                    copied.setController(cause.getActivatingPlayer(), 0);
                     KeywordInterface kw = cause.getKeyword();
                     if (kw != null) {
                         copied.addKeywordForStaticAbility(kw);
@@ -864,17 +866,7 @@ public class GameAction {
         return moveToStack(c, cause, params);
     }
     public final Card moveToStack(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
-        Card result = moveTo(game.getStackZone(), c, cause, params);
-        if (cause != null && cause.isSpell() && result.equals(cause.getHostCard())) {
-            result.setSplitStateToPlayAbility(cause);
-
-            // CR 112.2 A spell’s controller is, by default, the player who put it on the stack.
-            result.setController(cause.getActivatingPlayer(), 0);
-            // for triggers like from Wild-Magic Sorcerer
-            game.getAction().checkStaticAbilities(false);
-            game.getTriggerHandler().resetActiveTriggers();
-        }
-        return result;
+        return moveTo(game.getStackZone(), c, cause, params);
     }
 
     public final Card moveToGraveyard(final Card c, SpellAbility cause) {
