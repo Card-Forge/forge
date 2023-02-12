@@ -23,12 +23,12 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
-import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
@@ -194,6 +194,7 @@ public class MapStage extends GameStage {
     private void effectDialog(EffectData effectData) {
         dialog.getButtonTable().clear();
         dialog.getContentTable().clear();
+        dialog.clearListeners();
         TextraButton ok = Controls.newTextButton("OK", this::hideDialog);
         ok.setVisible(false);
         TypingLabel L = Controls.newTypingLabel("{GRADIENT=CYAN;WHITE;1;1}Strange magical energies flow within this place...{ENDGRADIENT}\nAll opponents get:\n" + effectData.getDescription());
@@ -202,6 +203,13 @@ public class MapStage extends GameStage {
             @Override
             public void end() {
                 ok.setVisible(true);
+            }
+        });
+        dialog.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                L.skipToTheEnd();
+                super.clicked(event, x, y);
             }
         });
         dialog.getButtonTable().add(ok).width(250f);
@@ -213,6 +221,7 @@ public class MapStage extends GameStage {
     public void showImageDialog(String message, Texture texture) {
         dialog.getContentTable().clear();
         dialog.getButtonTable().clear();
+        dialog.clearListeners();
         if (texture != null) {
             TextureRegion tr = new TextureRegion(texture);
             tr.flip(true, true);
@@ -221,8 +230,9 @@ public class MapStage extends GameStage {
             dialog.getContentTable().add(image).height(100);
             dialog.getContentTable().add().row();
         }
-        TextraLabel L = Controls.newTextraLabel(message);
+        TypingLabel L = Controls.newTypingLabel(message);
         L.setWrap(true);
+        L.skipToTheEnd();
         dialog.getContentTable().add(L).width(250f);
         dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(250f);
         dialog.setKeepWithinStage(true);
@@ -233,7 +243,7 @@ public class MapStage extends GameStage {
     public void showDeckAwardDialog(String message, Deck deck) {
         dialog.getContentTable().clear();
         dialog.getButtonTable().clear();
-
+        dialog.clearListeners();
         dialog.getContentTable().add(Controls.newTypingLabel(Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)))).align(Align.center);
         dialog.getContentTable().add().row();
 

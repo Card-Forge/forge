@@ -1,8 +1,12 @@
 package forge.adventure.util;
 
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
@@ -64,6 +68,7 @@ public class MapDialog {
         Dialog D = stage.getDialog();
         Localizer L = Forge.getLocalizer();
         D.getContentTable().clear(); D.getButtonTable().clear(); //Clear tables to start fresh.
+        D.clearListeners();
         String text; //Check for localized string (locname), otherwise print text.
         if(dialog.loctext != null && !dialog.loctext.isEmpty()) text = L.getMessage(dialog.loctext);
         else text = dialog.text;
@@ -77,6 +82,22 @@ public class MapDialog {
         }
         TypingLabel A = Controls.newTypingLabel(text);
         A.setWrap(true);
+        Array<TextraButton> buttons = new Array<>();
+        A.setTypingListener(new TypingAdapter() {
+            @Override
+            public void end() {
+                float delay = 0.09f;
+                for (TextraButton button : buttons) {
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
+                            button.setVisible(true);
+                        }
+                    }, delay);
+                    delay += 0.10f;
+                }
+            }
+        });
         D.getContentTable().add(A).width(WIDTH); //Add() returns a Cell, which is what the width is being applied to.
         if(dialog.options != null) {
             int i=0;
@@ -87,12 +108,21 @@ public class MapDialog {
                     else name = option.name;
                     TextraButton B = Controls.newTextButton(name,() -> loadDialog(option));
                     B.getTextraLabel().setWrap(true); //We want this to wrap in case it's a wordy choice.
+                    buttons.add(B);
+                    B.setVisible(false);
                     D.getButtonTable().add(B).width(WIDTH - 10); //The button table also returns a Cell when adding.
                     //TODO: Reducing the space a tiny bit could help. But should be fine as long as there aren't more than 4-5 options.
                     D.getButtonTable().row(); //Add a row. Tried to allow a few per row but it was a bit erratic.
                     i++;
                 }
             }
+            D.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    A.skipToTheEnd();
+                    super.clicked(event, x, y);
+                }
+            });
             if(i==0)
                 stage.hideDialog();
             else
