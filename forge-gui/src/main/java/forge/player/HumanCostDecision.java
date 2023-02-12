@@ -1030,11 +1030,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final String amount = cost.getAmount();
         final String type = cost.getType();
 
-        CardCollectionView list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.canBeSacrificedBy(ability, isEffect()));
-        list = CardLists.getValidCards(list, type.split(";"), player, source, ability);
-
         if (cost.payCostFromSource()) {
-            if (source.getController() == ability.getActivatingPlayer() && source.isInPlay()) {
+            if (source.getController() == ability.getActivatingPlayer() && source.canBeSacrificedBy(ability, isEffect())) {
                 return mandatory || confirmAction(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(source.getName()))) ? PaymentDecision.card(source) : null;
             }
             return null;
@@ -1042,11 +1039,14 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         if (type.equals("OriginalHost")) {
             Card host = ability.getOriginalHost();
-            if (host.getController() == ability.getActivatingPlayer() && host.isInPlay()) {
+            if (host.getController() == ability.getActivatingPlayer() && host.canBeSacrificedBy(ability, isEffect())) {
                 return confirmAction(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(host.getName()))) ? PaymentDecision.card(host) : null;
             }
             return null;
         }
+
+        CardCollectionView list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.canBeSacrificedBy(ability, isEffect()));
+        list = CardLists.getValidCards(list, type.split(";"), player, source, ability);
 
         if (amount.equals("All")) {
             return PaymentDecision.card(list);
@@ -1059,6 +1059,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (list.size() < c) {
             return null;
         }
+
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, list, ability);
         inp.setMessage(Localizer.getInstance().getMessage("lblSelectATargetToSacrifice", cost.getDescriptiveType(), "%d"));
         inp.setCancelAllowed(!mandatory);

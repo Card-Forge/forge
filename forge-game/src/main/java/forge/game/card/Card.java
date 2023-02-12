@@ -6473,7 +6473,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             System.out.println("Trying to sacrifice immutables: " + this);
             return false;
         }
+
         if (!isInPlay() || isPhasedOut()) {
+            return false;
+        }
+
+        final Card gameCard = game.getCardState(this, null);
+        // gameCard is LKI in that case, the card is not in game anymore
+        // or the timestamp did change
+        // this should check Self too
+        if (gameCard == null || !this.equalsWithTimestamp(gameCard)) {
             return false;
         }
 
