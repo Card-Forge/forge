@@ -37,7 +37,7 @@ public class EnemySprite extends CharacterSprite {
     public String nameOverride = ""; //Override name of this enemy in battles.
     public RewardData[] rewards; //Additional rewards for this enemy.
     public DialogData.ConditionData spawnCondition; //Condition to spawn.
-    
+
     public EnemySprite(EnemyData enemyData) {
         this(0,enemyData);
     }
@@ -53,8 +53,7 @@ public class EnemySprite extends CharacterSprite {
     }
 
     public void moveTo(Actor other, float delta) {
-        float scale = this instanceof EnemySprite ? 2f :1f;
-        Vector2 diff = new Vector2(other.getX()*scale, other.getY()*scale).sub(pos());
+        Vector2 diff = new Vector2(other.getX(), other.getY()).sub(pos());
 
         diff.setLength(data.speed*delta);
         moveBy(diff.x, diff.y);
