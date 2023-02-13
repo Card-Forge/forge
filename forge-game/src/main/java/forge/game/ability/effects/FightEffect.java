@@ -10,12 +10,14 @@ import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardDamageMap;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.util.CardTranslation;
+import forge.util.Lang;
 import forge.util.Localizer;
 
 public class FightEffect extends DamageBaseEffect {
@@ -30,10 +32,17 @@ public class FightEffect extends DamageBaseEffect {
         List<Card> fighters = getFighters(sa);
 
         if (fighters.size() > 1) {
-            sb.append(fighters.get(0)).append(" fights ").append(fighters.get(1));
+            sb.append(fighters.get(0)).append(" fights ").append(fighters.get(1)).append(".");
         }
         else if (fighters.size() == 1) {
-            sb.append(fighters.get(0)).append(" fights unknown");
+            sb.append(fighters.get(0)).append(" fights.");
+        }
+        if (sa.hasParam("ReplaceDyingDefined")) {
+            CardCollection cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("ReplaceDyingDefined"), sa);
+            if (!cards.isEmpty()) {
+                sb.append(" If ").append(Lang.joinHomogenous(cards, null, "or"));
+                sb.append(" would die this turn, exile it instead.");
+            }
         }
         return sb.toString();
     }
@@ -117,8 +126,9 @@ public class FightEffect extends DamageBaseEffect {
                 if (defined.size() > 1 && fighter1 == null) {
                     fighter1 = defined.get(0);
                     fighter2 = defined.get(1);
-                } else {
-                    fighter2 = defined.get(0);
+                } else { // template often Defined$ ParentTarget vs. Targeted - this yields good StackDesc order
+                    fighter2 = fighter1;
+                    fighter1 = defined.get(0);
                 }
             }
         } else if (tgts.size() > 1) {
