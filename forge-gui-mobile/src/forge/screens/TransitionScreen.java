@@ -11,6 +11,7 @@ import forge.Graphics;
 import forge.adventure.scene.ArenaScene;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
+import forge.adventure.util.Current;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkin;
 import forge.assets.FSkinImage;
@@ -20,6 +21,7 @@ import forge.gui.GuiBase;
 import forge.sound.SoundSystem;
 import forge.toolbox.FContainer;
 import forge.toolbox.FProgressBar;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class TransitionScreen extends FContainer {
     private BGAnimation bgAnimation;
@@ -155,18 +157,26 @@ public class TransitionScreen extends FContainer {
                     g.setAlphaComposite(oldAlpha);
                 }
                 if (Forge.isLandscapeMode()) {
+                    String wins = "";
+                    String loss = "";
+                    //stats
+                    Pair<Integer, Integer> winloss = Current.player().getStatistic().getWinLossRecord().get(enemyAvatarName);
+                    if (winloss != null) {
+                        wins = "\n" + winloss.getKey() + " - " + winloss.getValue();
+                        loss = "\n" + winloss.getValue() + " - " + winloss.getKey();
+                    }
                     //player
                     float playerAvatarX = (screenW/4 - scale/2) * percentage;
                     float playerAvatarY = centerY - scale/2;
                     g.drawImage(playerAvatar, playerAvatarX, playerAvatarY, scale, scale);
                     layout.setText(font, playerAvatarName);
-                    g.drawText(playerAvatarName, font, screenW/4 - layout.width/2, playerAvatarY - layout.height, Color.WHITE, percentage);
+                    g.drawText(playerAvatarName+wins, font, screenW/4 - layout.width/2, playerAvatarY - layout.height, Color.WHITE, percentage);
                     //enemy
                     float enemyAvatarX = screenW - screenW/4 - (scale/2 * percentage);
                     float enemyAvatarY = centerY - scale/2;
                     g.drawImage(enemyAvatar, enemyAvatarX, enemyAvatarY, scale, scale);
                     layout.setText(font, enemyAvatarName);
-                    g.drawText(enemyAvatarName, font,  screenW - screenW/4 - layout.width/2, enemyAvatarY - layout.height, Color.WHITE, percentage);
+                    g.drawText(enemyAvatarName+loss, font,  screenW - screenW/4 - layout.width/2, enemyAvatarY - layout.height, Color.WHITE, percentage);
                     //vs
                     float vsScale = (screenW / 3.2f);
                     g.drawHueShift(vsTexture, centerX - vsScale / 2, centerY - vsScale / 2, vsScale, vsScale, percentage*4);
