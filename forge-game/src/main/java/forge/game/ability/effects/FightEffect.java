@@ -10,6 +10,7 @@ import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
@@ -84,10 +85,10 @@ public class FightEffect extends DamageBaseEffect {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
 
-        List<Card> tgts = null;
+        CardCollectionView tgts = null;
         if (sa.usesTargeting()) {
-            tgts = Lists.newArrayList(sa.getTargets().getTargetCards());
-            if (tgts.size() > 0) {
+            tgts = sa.getTargets().getTargetCards();
+            if (!tgts.isEmpty()) {
                 fighter1 = tgts.get(0);
             }
         }
@@ -104,7 +105,7 @@ public class FightEffect extends DamageBaseEffect {
                 // 701.12b If a creature instructed to fight is no longer on the battlefield or is no longer a creature,
                 // no damage is dealt. If a creature is an illegal target
                 // for a resolving spell or ability that instructs it to fight, no damage is dealt.
-                if (g == null || !g.equalsWithTimestamp(d) || !d.isInPlay() || !d.isCreature()) {
+                if (g == null || !g.equalsWithTimestamp(d) || !d.isInPlay() || d.isPhasedOut() || !d.isCreature()) {
                     // Test to see if the card we're trying to add is in the expected state
                     continue;
                 }

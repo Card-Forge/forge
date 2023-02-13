@@ -45,7 +45,7 @@ public class PlayerFactoryUtil {
             inst.addStaticAbility(StaticAbility.create(effect, card, card.getCurrentState(), false));
 
             // Attach
-            effect = "Mode$ CantAttach | Protection$ True | Target$ Player.You| EffectZone$ Command | Secondary$ True ";
+            effect = "Mode$ CantAttach | Protection$ True | Target$ Player.You | EffectZone$ Command | Secondary$ True ";
             if (!valid.isEmpty()) {
                 effect += "| ValidCard$ " + valid;
             }
