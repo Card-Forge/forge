@@ -29,7 +29,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
-import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
@@ -260,7 +259,8 @@ public class MapStage extends GameStage {
             image.setWidth(70);
             image.setHeight(100);
             image.setPosition(0, 15);
-            TextraLabel label = Controls.newTextraLabel("[%125]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck))+"\n[%]"+deck.getName());
+            TypingLabel label = Controls.newTypingLabel("[%125]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck))+"\n[%]"+deck.getName());
+            label.skipToTheEnd();
             label.setAlignment(Align.center);
             label.setPosition(34, 20);
             Group group = new Group();
@@ -270,7 +270,10 @@ public class MapStage extends GameStage {
             dialog.getContentTable().add(group).height(100).width(65).center();
             dialog.getContentTable().add().row();
         } else {
-            dialog.getContentTable().add(Controls.newTextraLabel("[%125]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)))+"\n[%]"+deck.getName()).align(Align.center);
+            TypingLabel label = Controls.newTypingLabel("[%125]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck))+"\n[%]"+deck.getName());
+            label.skipToTheEnd();
+            label.setAlignment(Align.center);
+            dialog.getContentTable().add(label).align(Align.center);
             dialog.getContentTable().add().row();
         }
 
