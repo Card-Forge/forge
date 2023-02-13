@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBicoF2DgaFDY+DsXwy0e8kA2o8NdALd04Xkpvua9LV/KdDuZYMkTAKB7ghCcwuvNvXM/0NAPhdodx6OsIgD4o/s1HMLIRCBxS5TOqeNUTA4wV1gOrinSVlZwalDnDpeYH7gQ8sTP4H2/qKT/ZpAu7XQ7N8P5B8A4lQtyu3X1oZgUsBtoN13BrDMrNJBYHIBlw4qHgXDBwAA0oUcTA==
+   eJxjYBicoF2DgaFDY+DsXwy0e8kA2o8NdALd04Xkpvua9LV/KdDuZYMsTJABrzb1zPoDpZ14IPQCHoScMw+GchT5OCD+yE49txACEVjsMqVz2hgFgxPcBaaDe5qUlRWcOtjTPDpwwqLmJ9DeX1Swn1ywH1heHQDiVC3K7dfWhmBSwG2g3XcGsMys0kFgcgGXDirGBzaxkW8PNcECItLrKGBgAAAKVx0W
   </data>
  </layer>
  <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
@@ -35,39 +35,34 @@
    </properties>
   </object>
   <object id="115" template="../obj/gold.tx" x="315.713" y="81.5369"/>
-  <object id="117" template="../obj/enemy.tx" x="228.711" y="210.816">
+  <object id="117" template="../obj/enemy.tx" x="339.381" y="258.584">
    <properties>
     <property name="enemy" value="Kobold"/>
    </properties>
   </object>
-  <object id="118" template="../obj/enemy.tx" x="358.017" y="177.044">
+  <object id="118" template="../obj/enemy.tx" x="412.406" y="226.704">
    <properties>
     <property name="enemy" value="Kobold"/>
     <property name="spawn.Easy" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="119" template="../obj/enemy.tx" x="308.018" y="162.055">
+  <object id="119" template="../obj/enemy.tx" x="323.625" y="196.58">
    <properties>
     <property name="enemy" value="Kobold"/>
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="120" template="../obj/enemy.tx" x="324.956" y="261.386">
+  <object id="122" template="../obj/enemy.tx" x="181.555" y="194.825">
    <properties>
     <property name="enemy" value="Kobold"/>
    </properties>
   </object>
-  <object id="122" template="../obj/enemy.tx" x="166.894" y="207.122">
+  <object id="136" template="../obj/enemy.tx" x="223.023" y="100.373">
    <properties>
     <property name="enemy" value="Kobold"/>
    </properties>
   </object>
-  <object id="136" template="../obj/enemy.tx" x="131.744" y="73.8879">
-   <properties>
-    <property name="enemy" value="Kobold"/>
-   </properties>
-  </object>
-  <object id="137" template="../obj/enemy.tx" x="179.463" y="116.229">
+  <object id="137" template="../obj/enemy.tx" x="144.938" y="98.257">
    <properties>
     <property name="enemy" value="Kobold"/>
    </properties>
@@ -118,12 +113,6 @@
   &quot;addMaxCount&quot;: 2
 }]</property>
     <property name="spawn.Hard" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="149" template="../obj/enemy.tx" x="359.509" y="215.772">
-   <properties>
-    <property name="enemy" value="Kobold"/>
-    <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
   <object id="150" template="../obj/enemy.tx" x="307.842" y="123.772">

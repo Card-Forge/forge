@@ -3393,6 +3393,7 @@
 {
 	"name": "Kobold",
 	"sprite": "sprites/dungeon/kobold.atlas",
+	"scale": 0.25,
 	"deck": [
 		"decks/kobold.dck"
 	],
