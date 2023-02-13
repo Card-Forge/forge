@@ -61,7 +61,7 @@
       "font": "default",
       "width": 64,
       "height": 16,
-      "x": 419,
+      "x": 425,
       "y": 56
     },
     {
@@ -70,8 +70,8 @@
       "font": "default",
       "width": 64,
       "height": 16,
-      "x": 419,
-      "y": 73
+      "x": 425,
+      "y": 70
     },
     {
       "type": "Label",
@@ -79,8 +79,8 @@
       "font": "default",
       "width": 64,
       "height": 16,
-      "x": 419,
-      "y": 90
+      "x": 425,
+      "y": 84
     },
     {
       "type": "TextButton",

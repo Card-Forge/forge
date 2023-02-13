@@ -258,14 +258,13 @@ public class WorldStage extends GameStage implements SaveFileContent {
         //spriteGroup.setCullingArea(new Rectangle(player.getX()-getViewport().getWorldHeight()/2,player.getY()-getViewport().getWorldHeight()/2,getViewport().getWorldHeight(),getViewport().getWorldHeight()));
         super.draw();
         if (WorldSave.getCurrentSave().getPlayer().hasAnnounceFantasy()) {
-            MapStage.getInstance().showDeckAwardDialog("{BLINK=WHITE;RED}Chaos Mode!{ENDBLINK}\n" + WorldSave.getCurrentSave().getPlayer().getName() + "'s Deck: " +
-                    WorldSave.getCurrentSave().getPlayer().getSelectedDeck().getName() +
-                    "\nEnemy will use Preconstructed or Random Generated Decks. Genetic AI Decks will be available to some enemies on Hard difficulty.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
+            MapStage.getInstance().showDeckAwardDialog("{BLINK=WHITE;RED}Chaos Mode!{ENDBLINK}\n" +
+                    "Enemy will use Preconstructed or Random Generated Decks. Genetic AI Decks will be available to some enemies on Hard difficulty.",
+                    WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
             WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
         } else if (WorldSave.getCurrentSave().getPlayer().hasAnnounceCustom()) {
-            MapStage.getInstance().showDeckAwardDialog("{GRADIENT}Custom Deck Mode!{ENDGRADIENT}\n" + WorldSave.getCurrentSave().getPlayer().getName() + "'s Deck: " +
-                    WorldSave.getCurrentSave().getPlayer().getSelectedDeck().getName() +
-                    "\nSome enemies will use Genetic AI Decks randomly.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
+            MapStage.getInstance().showDeckAwardDialog("{GRADIENT}Custom Deck Mode!{ENDGRADIENT}\n" +
+                    "Some enemies will use Genetic AI Decks randomly.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
             WorldSave.getCurrentSave().getPlayer().clearAnnounceCustom();
         }
     }

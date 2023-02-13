@@ -60,7 +60,7 @@
       "name": "lifePoints", 
       "width": 48,
       "height": 3,
-      "x": 209,
+      "x": 215,
       "y": 62
     },
     {
@@ -69,7 +69,7 @@
       "font": "default",
       "width": 48,
       "height": 3,
-      "x": 209,
+      "x": 215,
       "y": 76
     },
     {
@@ -78,7 +78,7 @@
       "font": "default",
       "width": 48,
       "height": 3,
-      "x": 209,
+      "x": 215,
       "y": 90
     },
     {
