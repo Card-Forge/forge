@@ -77,6 +77,7 @@ public class CostGainControl extends CostPartWithList {
         final Card source = ability.getHostCard();
         CardCollectionView typeList = payer.getGame().getCardsIn(ZoneType.Battlefield);
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), payer, source, ability);
+        typeList = CardLists.filter(typeList, c -> c.canBeControlledBy(payer));
 
         return typeList.size() >= getAbilityAmount(ability);
     }

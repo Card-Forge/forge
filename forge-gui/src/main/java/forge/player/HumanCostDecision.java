@@ -509,7 +509,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         int c = cost.getAbilityAmount(ability);
 
         final CardCollectionView list = player.getCardsIn(ZoneType.Battlefield);
-        final CardCollectionView validCards = CardLists.getValidCards(list, cost.getType().split(";"), player, source, ability);
+        CardCollectionView validCards = CardLists.getValidCards(list, cost.getType().split(";"), player, source, ability);
+        validCards = CardLists.filter(validCards, crd -> crd.canBeControlledBy(player));
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, validCards, ability);
         final String desc = cost.getTypeDescription() == null ? cost.getType() : cost.getTypeDescription();
