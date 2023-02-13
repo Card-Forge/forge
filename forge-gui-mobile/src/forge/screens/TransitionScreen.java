@@ -5,11 +5,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Timer;
 import forge.Forge;
 import forge.Graphics;
 import forge.adventure.scene.ArenaScene;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
+import forge.adventure.util.Current;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkin;
 import forge.assets.FSkinImage;
@@ -19,6 +21,7 @@ import forge.gui.GuiBase;
 import forge.sound.SoundSystem;
 import forge.toolbox.FContainer;
 import forge.toolbox.FProgressBar;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class TransitionScreen extends FContainer {
     private BGAnimation bgAnimation;
@@ -153,6 +156,14 @@ public class TransitionScreen extends FContainer {
                     g.drawImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
                     g.setAlphaComposite(oldAlpha);
                 }
+                String wins = "0 - 0";
+                String loss = "0 - 0";
+                //stats
+                Pair<Integer, Integer> winloss = Current.player().getStatistic().getWinLossRecord().get(enemyAvatarName);
+                if (winloss != null) {
+                    wins = "" + winloss.getKey() + " - " + winloss.getValue();
+                    loss = "" + winloss.getValue() + " - " + winloss.getKey();
+                }
                 if (Forge.isLandscapeMode()) {
                     //player
                     float playerAvatarX = (screenW/4 - scale/2) * percentage;
@@ -160,12 +171,16 @@ public class TransitionScreen extends FContainer {
                     g.drawImage(playerAvatar, playerAvatarX, playerAvatarY, scale, scale);
                     layout.setText(font, playerAvatarName);
                     g.drawText(playerAvatarName, font, screenW/4 - layout.width/2, playerAvatarY - layout.height, Color.WHITE, percentage);
+                    layout.setText(font, wins);
+                    g.drawText(wins, font, screenW/4 - layout.width/2, playerAvatarY - layout.height*2.5f, Color.WHITE, percentage);
                     //enemy
                     float enemyAvatarX = screenW - screenW/4 - (scale/2 * percentage);
                     float enemyAvatarY = centerY - scale/2;
                     g.drawImage(enemyAvatar, enemyAvatarX, enemyAvatarY, scale, scale);
                     layout.setText(font, enemyAvatarName);
                     g.drawText(enemyAvatarName, font,  screenW - screenW/4 - layout.width/2, enemyAvatarY - layout.height, Color.WHITE, percentage);
+                    layout.setText(font, loss);
+                    g.drawText(loss, font,  screenW - screenW/4 - layout.width/2, enemyAvatarY - layout.height*2.5f, Color.WHITE, percentage);
                     //vs
                     float vsScale = (screenW / 3.2f);
                     g.drawHueShift(vsTexture, centerX - vsScale / 2, centerY - vsScale / 2, vsScale, vsScale, percentage*4);
@@ -214,11 +229,26 @@ public class TransitionScreen extends FContainer {
             progress += dt;
             return progress < DURATION;
         }
-
+        final boolean[] run = {false};//clears transition via runnable so this will reset anyway
         @Override
         protected void onEnd(boolean endingAll) {
             if (runnable != null) {
-                FThreads.invokeInEdtNowOrLater(runnable);
+                if (isMatchTransition()) {
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
+                            if (run[0])
+                                return;
+                            run[0] = true;
+                            FThreads.invokeInEdtNowOrLater(runnable);
+                        }
+                    }, 2.5f);
+                } else {
+                    if (run[0])
+                        return;
+                    run[0] = true;
+                    FThreads.invokeInEdtNowOrLater(runnable);
+                }
             }
         }
     }
