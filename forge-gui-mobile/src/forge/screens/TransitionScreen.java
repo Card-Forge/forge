@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Timer;
 import forge.Forge;
 import forge.Graphics;
 import forge.adventure.scene.ArenaScene;
@@ -214,11 +215,26 @@ public class TransitionScreen extends FContainer {
             progress += dt;
             return progress < DURATION;
         }
-
+        final boolean[] run = {false};//clears transition via runnable so this will reset anyway
         @Override
         protected void onEnd(boolean endingAll) {
             if (runnable != null) {
-                FThreads.invokeInEdtNowOrLater(runnable);
+                if (isMatchTransition()) {
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
+                            if (run[0])
+                                return;
+                            run[0] = true;
+                            FThreads.invokeInEdtNowOrLater(runnable);
+                        }
+                    }, 2.5f);
+                } else {
+                    if (run[0])
+                        return;
+                    run[0] = true;
+                    FThreads.invokeInEdtNowOrLater(runnable);
+                }
             }
         }
     }
