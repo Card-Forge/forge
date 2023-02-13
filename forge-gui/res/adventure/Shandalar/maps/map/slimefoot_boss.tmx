@@ -40,7 +40,7 @@
    </properties>
   </object>
   <object id="49" template="../obj/gold.tx" x="209.038" y="33.8697"/>
-  <object id="53" template="../obj/enemy.tx" x="223.924" y="99.93">
+  <object id="53" template="../obj/enemy.tx" x="223.924" y="101.602" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Slimefoot"/>
    </properties>

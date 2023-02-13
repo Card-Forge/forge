@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import forge.adventure.stage.SpriteGroup;
 import forge.adventure.util.Config;
-
 import java.util.HashMap;
 
 /**
@@ -228,6 +227,8 @@ public class CharacterSprite extends MapActor {
         Color oldColor=batch.getColor().cpy();
         batch.setColor(getColor());
         batch.draw(currentFrame, getX(), getY());
+		float scale = this instanceof EnemySprite ? 2f : 1f ;
+		batch.draw(currentFrame, getX(), getY(), getWidth()*scale, getHeight()*scale);
         batch.setColor(oldColor);
         super.draw(batch,parentAlpha);
         //batch.draw(getDebugTexture(),getX(),getY());

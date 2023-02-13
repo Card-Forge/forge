@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="76">
+<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="77">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -36,8 +36,8 @@
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Kraken Hatchling&quot;,&quot;Tropical Island&quot; ]
 }</property>
     <property name="enemy" value="Kiora"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
+    <property name="scaleX" type="float" value="0.1"/>
+    <property name="scaleY" type="float" value="0.1"/>
    </properties>
   </object>
   <object id="57" template="../obj/enemy.tx" x="212.325" y="170.425">
@@ -51,13 +51,6 @@
     <property name="enemy" value="Sea Monster"/>
    </properties>
   </object>
-  <object id="66" template="../obj/enemy.tx" x="26.7491" y="125.752">
-   <properties>
-    <property name="enemy" value="Crab"/>
-    <property name="scaleX" type="float" value="0.5"/>
-    <property name="scaleY" type="float" value="0.5"/>
-   </properties>
-  </object>
   <object id="67" template="../obj/enemy.tx" x="93.0526" y="236.342">
    <properties>
     <property name="enemy" value="Sea Monster"/>
@@ -66,6 +59,11 @@
   <object id="68" template="../obj/enemy.tx" x="288.447" y="109.237">
    <properties>
     <property name="enemy" value="Merfolk"/>
+   </properties>
+  </object>
+  <object id="76" template="../obj/enemy.tx" x="19.093" y="127.799">
+   <properties>
+    <property name="enemy" value="Crab"/>
    </properties>
   </object>
  </objectgroup>
