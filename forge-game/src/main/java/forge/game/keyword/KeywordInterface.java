@@ -11,6 +11,11 @@ import forge.game.trigger.Trigger;
 
 public interface KeywordInterface extends Cloneable {
 
+    Card getHostCard();
+    void setHostCard(final Card host);
+    boolean isIntrinsic();
+    void setIntrinsic(final boolean value);
+
     String getOriginal();
 
     Keyword getKeyword();
@@ -34,8 +39,6 @@ public interface KeywordInterface extends Cloneable {
     void addSpellAbility(final SpellAbility s);
     void addStaticAbility(final StaticAbility st);
 
-    void setHostCard(final Card host);
-    void setIntrinsic(final boolean value);
 
     /**
      * @return the triggers

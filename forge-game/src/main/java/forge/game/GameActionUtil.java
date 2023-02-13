@@ -224,6 +224,7 @@ public final class GameActionUtil {
 
                         newSA.setAlternativeCost(AlternativeCost.Escape);
                         newSA.getRestrictions().setZone(ZoneType.Graveyard);
+                        newSA.setIntrinsic(inst.isIntrinsic());
 
                         alternatives.add(newSA);
                     } else if (keyword.startsWith("Flashback")) {
@@ -255,6 +256,7 @@ public final class GameActionUtil {
                         flashback.setAlternativeCost(AlternativeCost.Flashback);
                         flashback.getRestrictions().setZone(ZoneType.Graveyard);
                         flashback.setKeyword(inst);
+                        flashback.setIntrinsic(inst.isIntrinsic());
                         alternatives.add(flashback);
                     } else if (keyword.startsWith("Foretell")) {
                         // Foretell cast only from Exile

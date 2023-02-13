@@ -2285,7 +2285,7 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Flashback")) {
             StringBuilder sb = new StringBuilder();
             sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
-            sb.append("| ValidStackSa$ Spell.Flashback | Description$ Flashback");
+            sb.append("| ValidStackSa$ Spell.Flashback+castKeyword | Description$ Flashback");
 
             if (keyword.contains(":")) { // K:Flashback:Cost:ExtraParams:ExtraDescription
                 final String[] k = keyword.split(":");

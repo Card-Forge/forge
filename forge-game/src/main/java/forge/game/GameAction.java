@@ -265,31 +265,21 @@ public class GameAction {
             copied.setTimestamp(c.getTimestamp());
 
             if (zoneTo.is(ZoneType.Stack)) {
-                // when moving to stack, copy changed card information
-                copied.setChangedCardColors(c.getChangedCardColorsTable());
-                copied.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningTable());
-                copied.setChangedCardKeywords(c.getChangedCardKeywords());
-                copied.setChangedCardTypes(c.getChangedCardTypesTable());
-                copied.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningTable());
-                copied.setChangedCardNames(c.getChangedCardNames());
-                copied.setChangedCardTraits(c.getChangedCardTraits());
-                copied.setDrawnThisTurn(c.getDrawnThisTurn());
-
-                copied.copyChangedTextFrom(c);
-
-                // clean up changes that come from its own static abilities
-                copied.cleanupCopiedChangesFrom(c);
+                // try not to copy changed stats when moving to stack
 
                 // copy exiled properties when adding to stack
                 // will be cleanup later in MagicStack
                 copied.setExiledWith(c.getExiledWith());
                 copied.setExiledBy(c.getExiledBy());
+                copied.setDrawnThisTurn(c.getDrawnThisTurn());
 
-                // copy bestow timestamp
-                copied.setBestowTimestamp(c.getBestowTimestamp());
 
                 if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
                     copied.setCastSA(cause);
+                    copied.setSplitStateToPlayAbility(cause);
+
+                    // CR 112.2 A spell’s controller is, by default, the player who put it on the stack.
+                    copied.setController(cause.getActivatingPlayer(), 0);
                     KeywordInterface kw = cause.getKeyword();
                     if (kw != null) {
                         copied.addKeywordForStaticAbility(kw);
@@ -619,10 +609,12 @@ public class GameAction {
         checkStaticAbilities();
 
         // 400.7g try adding keyword back into card if it doesn't already have it
-        if (zoneTo.is(ZoneType.Stack) && cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
+        if (zoneTo.is(ZoneType.Stack) && cause != null && cause.isSpell() && !cause.isIntrinsic() && c.equals(cause.getHostCard())) {
             if (cause.getKeyword() != null) {
                 if (!copied.getKeywords().contains(cause.getKeyword())) {
-                    copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, game.getTimestamp(), 0, false);
+                    copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, game.getNextTimestamp(), 0, false);
+                    // update Keyword Cache
+                    copied.updateKeywords();
                 }
             }
         }
@@ -874,17 +866,7 @@ public class GameAction {
         return moveToStack(c, cause, params);
     }
     public final Card moveToStack(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
-        Card result = moveTo(game.getStackZone(), c, cause, params);
-        if (cause != null && cause.isSpell() && result.equals(cause.getHostCard())) {
-            result.setSplitStateToPlayAbility(cause);
-
-            // CR 112.2 A spell’s controller is, by default, the player who put it on the stack.
-            result.setController(cause.getActivatingPlayer(), 0);
-            // for triggers like from Wild-Magic Sorcerer
-            game.getAction().checkStaticAbilities(false);
-            game.getTriggerHandler().resetActiveTriggers();
-        }
-        return result;
+        return moveTo(game.getStackZone(), c, cause, params);
     }
 
     public final Card moveToGraveyard(final Card c, SpellAbility cause) {

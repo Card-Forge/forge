@@ -293,6 +293,8 @@ public final class CardUtil {
         newCopy.setChangedCardNames(in.getChangedCardNames());
         newCopy.setChangedCardTraits(in.getChangedCardTraits());
 
+        newCopy.setStoredKeywords(in.getStoredKeywords(), true);
+
         newCopy.copyChangedTextFrom(in);
 
         newCopy.setTimestamp(in.getTimestamp());
