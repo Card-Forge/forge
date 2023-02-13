@@ -29,6 +29,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
@@ -38,8 +39,12 @@ import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.*;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
+import forge.assets.FImageComplex;
+import forge.assets.FSkin;
+import forge.card.CardRenderer;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
+import forge.game.GameType;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
@@ -212,7 +217,7 @@ public class MapStage extends GameStage {
                 super.clicked(event, x, y);
             }
         });
-        dialog.getButtonTable().add(ok).width(250f);
+        dialog.getButtonTable().add(ok).width(240f);
         dialog.getContentTable().add(L).width(250f);
         dialog.setKeepWithinStage(true);
         showDialog();
@@ -234,7 +239,7 @@ public class MapStage extends GameStage {
         L.setWrap(true);
         L.skipToTheEnd();
         dialog.getContentTable().add(L).width(250f);
-        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(250f);
+        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(240f);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
         showDialog();
@@ -244,14 +249,36 @@ public class MapStage extends GameStage {
         dialog.getContentTable().clear();
         dialog.getButtonTable().clear();
         dialog.clearListeners();
-        dialog.getContentTable().add(Controls.newTypingLabel("[%150]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)))).align(Align.center);
-        dialog.getContentTable().add().row();
+        DeckProxy dp = new DeckProxy(deck, "Constructed", GameType.Constructed, null);
+        FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard());
+        if (cardArt != null) {
+            Image art = new Image(cardArt.getTextureRegion());
+            art.setWidth(50);
+            art.setHeight(40);
+            art.setPosition(10, 43);
+            Image image = new Image(FSkin.getDeckbox().get(1));
+            image.setWidth(70);
+            image.setHeight(100);
+            image.setPosition(0, 15);
+            TextraLabel label = Controls.newTextraLabel("[%125]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck))+"\n[%]"+deck.getName());
+            label.setAlignment(Align.center);
+            label.setPosition(34, 20);
+            Group group = new Group();
+            group.addActor(art);
+            group.addActor(image);
+            group.addActor(label);
+            dialog.getContentTable().add(group).height(100).width(65).center();
+            dialog.getContentTable().add().row();
+        } else {
+            dialog.getContentTable().add(Controls.newTextraLabel("[%125]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)))+"\n[%]"+deck.getName()).align(Align.center);
+            dialog.getContentTable().add().row();
+        }
 
         TypingLabel L = Controls.newTypingLabel(message);
         L.setWrap(true);
         L.skipToTheEnd();
 
-        dialog.getContentTable().add(L).width(240);
+        dialog.getContentTable().add(L).width(250);
         dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(240);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());

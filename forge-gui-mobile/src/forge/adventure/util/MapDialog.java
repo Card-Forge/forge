@@ -28,7 +28,7 @@ public class MapDialog {
     private final MapStage stage;
     private  Array<DialogData> data;
     private final int parentID;
-    private final static float WIDTH = 260f;
+    private final static float WIDTH = 250f;
     static private final String defaultJSON = "[\n" +
             "  {\n" +
             "    \"effect\":[],\n" +
