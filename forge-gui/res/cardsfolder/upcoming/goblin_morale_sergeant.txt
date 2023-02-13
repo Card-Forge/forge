@@ -4,10 +4,10 @@ Types:Creature Goblin Soldier
 PT:2/1
 K:Haste
 K:Enlist
-T:Mode$ Enlisted | ValidCard$ Card.Self | ValidEnlisted$ Card.nonToken | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigConjure | TriggerDescription$ Whenever CARDNAME Sergeant enlists a nontoken creature, you may conjure a duplicate of that creature into the top five cards of your library at random. The duplicate perpetually gets +1/+0 and gains haste.
-SVar:TrigConjure:DB$ MakeCard | Conjure$ True | DefinedName$ TriggeredEnlisted | Zone$ Library | RememberMade$ True | SubAbility$ DBReorder
-SVar:DBReorder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | Defined$ Top5 | SubAbility$ DBEffect
+T:Mode$ Enlisted | ValidCard$ Card.Self | ValidEnlisted$ Card.nonToken | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigConjure | TriggerDescription$ Whenever CARDNAME enlists a nontoken creature, you may conjure a duplicate of that creature into the top five cards of your library at random. The duplicate perpetually gets +1/+0 and gains haste.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | DefinedName$ TriggeredEnlisted | Zone$ Library | LibraryPosition$ Z | RememberMade$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Name$ Goblin Morale Sergeant's Perpetual Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:PerpetualAbility:Mode$ Continuous | AddPower$ 1 | AddKeyword$ Haste | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The duplicate perpetually gets +1/+0 and gains haste.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Z:Count$Random.0.4
 Oracle:Haste\nEnlist\nWhenever Goblin Morale Sergeant enlists a nontoken creature, you may conjure a duplicate of that creature into the top five cards of your library at random. The duplicate perpetually gets +1/+0 and gains haste.

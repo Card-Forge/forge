@@ -230,7 +230,7 @@ public class PermanentCreatureAi extends PermanentAi {
          * worth it. Not sure what 4. is for. 5. needs to be updated to ensure
          * that the net toughness is still positive after static effects.
          */
-        final Card copy = CardUtil.getLKICopy(sa.getHostCard());
+        final Card copy = CardUtil.getLKICopy(card);
         ComputerUtilCard.applyStaticContPT(game, copy, null);
         // AiPlayDecision.WouldBecomeZeroToughnessCreature
         return copy.getNetToughness() > 0 || copy.hasStartOfKeyword("etbCounter") || mana.countX() != 0

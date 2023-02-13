@@ -1313,11 +1313,23 @@ public class AttachAi extends SpellAbilityAi {
         // at some point can support attaching a different card
         Card attachSource = sa.getHostCard();
         if (sa.hasParam("Object")) {
-            attachSource = AbilityUtils.getDefinedCards(attachSource, sa.getParam("Object"), sa).get(0);
+            CardCollection objs = AbilityUtils.getDefinedCards(attachSource, sa.getParam("Object"), sa);
+            if (objs.isEmpty()) {
+                if (!mandatory) {
+                    return null;
+                }
+            } else {
+                attachSource = objs.get(0);
+            }
         }
 
         // Don't equip if DontEquip SVar is set
         if (attachSource.hasSVar("DontEquip")) {
+            return null;
+        }
+
+        // is no attachment so no using attach
+        if (!mandatory && !attachSource.isAttachment()) {
             return null;
         }
 
@@ -1345,31 +1357,26 @@ public class AttachAi extends SpellAbilityAi {
             return preferred.isEmpty() ? Aggregates.random(list) : Aggregates.random(preferred);
         }
 
-        // is no attachment so no using attach
-        if (!attachSource.isAttachment()) {
-            return null;
-        }
-
         // Don't fortify if already fortifying
         if (attachSource.isFortification() && attachSource.getAttachedTo() != null
                 && attachSource.getAttachedTo().getController() == aiPlayer) {
             return null;
         }
 
-        CardCollection list = null;
+        List<Card> list = null;
         if (tgt == null) {
             list = AbilityUtils.getDefinedCards(attachSource, sa.getParam("Defined"), sa);
         } else {
-            list = CardLists.filter(CardUtil.getValidCardsToTarget(tgt, sa), CardPredicates.canBeAttached(attachSource, sa));
+            list = CardUtil.getValidCardsToTarget(tgt, sa);
         }
 
         if (list.isEmpty()) {
             return null;
         }
-        CardCollection prefList = list;
+        CardCollection prefList = CardLists.filter(list, CardPredicates.canBeAttached(attachSource, sa));
 
         // Filter AI-specific targets if provided
-        prefList = ComputerUtil.filterAITgts(sa, aiPlayer, list, true);
+        prefList = ComputerUtil.filterAITgts(sa, aiPlayer, prefList, true);
 
         Card c = attachGeneralAI(aiPlayer, sa, prefList, mandatory, attachSource, sa.getParam("AILogic"));
 
@@ -1425,8 +1432,9 @@ public class AttachAi extends SpellAbilityAi {
 
         if (c == null && mandatory) {
             CardLists.shuffle(list);
-            c = list.getFirst();
+            c = list.get(0);
         }
+
         return c;
     }
 
