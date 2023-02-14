@@ -35,34 +35,34 @@
    </properties>
   </object>
   <object id="115" template="../obj/gold.tx" x="315.713" y="81.5369"/>
-  <object id="117" template="../obj/enemy.tx" x="339.381" y="258.584">
+  <object id="117" template="../obj/enemy.tx" x="332.76" y="260.476">
    <properties>
     <property name="enemy" value="Kobold"/>
    </properties>
   </object>
-  <object id="118" template="../obj/enemy.tx" x="412.406" y="226.704">
+  <object id="118" template="../obj/enemy.tx" x="363.693" y="217.245">
    <properties>
     <property name="enemy" value="Kobold"/>
     <property name="spawn.Easy" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="119" template="../obj/enemy.tx" x="323.625" y="196.58">
+  <object id="119" template="../obj/enemy.tx" x="316.531" y="196.107">
    <properties>
     <property name="enemy" value="Kobold"/>
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="122" template="../obj/enemy.tx" x="181.555" y="194.825">
+  <object id="122" template="../obj/enemy.tx" x="173.042" y="195.771">
    <properties>
     <property name="enemy" value="Kobold"/>
    </properties>
   </object>
-  <object id="136" template="../obj/enemy.tx" x="223.023" y="100.373">
+  <object id="136" template="../obj/enemy.tx" x="219.712" y="98.4812">
    <properties>
     <property name="enemy" value="Kobold"/>
    </properties>
   </object>
-  <object id="137" template="../obj/enemy.tx" x="144.938" y="98.257">
+  <object id="137" template="../obj/enemy.tx" x="139.263" y="98.7299">
    <properties>
     <property name="enemy" value="Kobold"/>
    </properties>

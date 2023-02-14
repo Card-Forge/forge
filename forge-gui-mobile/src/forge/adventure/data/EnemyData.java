@@ -19,7 +19,7 @@ public class EnemyData {
     public float spawnRate;
     public float difficulty;
     public float speed;
-    public float scale;
+    public float scale = 1.0f;
     public int life;
     public RewardData[] rewards;
     public String[] equipment;
@@ -45,9 +45,9 @@ public class EnemyData {
         equipment      = enemyData.equipment;
         colors         = enemyData.colors;
         teamNumber     = enemyData.teamNumber;
-        nextEnemy     =enemyData.nextEnemy==null?null: new EnemyData(enemyData.nextEnemy);
+        nextEnemy      =enemyData.nextEnemy==null?null: new EnemyData(enemyData.nextEnemy);
         if(enemyData.scale == 0.0f) {
-            scale=1.0f; 
+        	scale =1.0f; 
         }
         if(enemyData.rewards == null) {
             rewards=null;

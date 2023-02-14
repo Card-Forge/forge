@@ -3392,8 +3392,7 @@
 },
 {
 	"name": "Kobold",
-	"sprite": "sprites/dungeon/kobold.atlas",
-	"scale": 0.25,
+	"sprite": "sprites/imp.atlas",
 	"deck": [
 		"decks/kobold.dck"
 	],
@@ -7854,7 +7853,7 @@
 {
 	"name": "Slimefoot",
 	"sprite": "sprites/dungeon/slimefoot.atlas",
-	"scale": 0.25,
+	"scale": 0.50,
 	"deck": [
 		"decks/miniboss/slimefoot.dck"
 	],
@@ -8022,7 +8021,7 @@
     {	
 	"name": "Kiora",
 	"sprite": "sprites/dungeon/kiora.atlas",
-	"scale": 0.25,
+	"scale": 0.35,
 	"deck": [
 		"decks/miniboss/kiora.dck"
 	],

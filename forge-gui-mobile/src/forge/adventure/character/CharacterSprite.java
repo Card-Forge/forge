@@ -33,12 +33,8 @@ public class CharacterSprite extends MapActor {
     }
 
     @Override
-    void updateBoundingRect() {
-    	float scale = 1f;
-    	if (this instanceof EnemySprite) {
-    	    scale = ((EnemySprite) this).getData().scale;
-    	}//We want a slimmer box for the player entity so it can navigate terrain without getting stuck.
-        boundingRect.set(getX() + 4, getY(), getWidth()*scale - 6, getHeight() * collisionHeight * scale);
+    void updateBoundingRect() {//We want a slimmer box for the player entity so it can navigate terrain without getting stuck.
+        boundingRect.set(getX() + 4, getY(), getWidth() - 6, getHeight() * collisionHeight);
     }
 
     protected void load(String path) {
