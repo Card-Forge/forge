@@ -1,0 +1,17 @@
+crab.png
+size: 189,30
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 18,12
+  size: 27,12
+Idle 
+  xy: 0, 1
+  size: 61, 29
+Idle 
+  xy: 67, 1
+  size: 57, 31
+Idle 
+  xy: 129, 0
+  size: 56, 30

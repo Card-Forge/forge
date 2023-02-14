@@ -12,10 +12,10 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzt1T0OgCAMBeDu4gmIF5OzeDB/DqdNNOkg7atSJ1/SsBQ+OhBKT7QkvUagh6uAfXzecKxapo5oM3o4bK5AHycn3UVNjnV/1PWYnlk1N9KsudFmzc3GOWy9jdd9Oh/izuf7ijJr7p3d0tRcabc2LfeyW5uIG5Xf/c5F/ktZMt69snZp5kVE
+   eJyL5mVg2MWDH0cRoQaEo4lUBzJPFkjjA7XcDAx7CKgBAZCdu4lQBwLSPPjtJdZOUgE+e2llJz57aWknLntpbScue6VpbOdgs5ceYNTeUXtH7aWOvcTUl8gYGZCqFxkDAGuQN1o=
   </data>
  </layer>
- <layer id="1" name="Background" width="30" height="17">
+ <layer id="1" name="Background" width="30" height="17" visible="0">
   <data encoding="base64" compression="zlib">
    eJxbwM7AsGAUj+JRPIpH8SgexSMCAwB2ckzC
   </data>
@@ -40,7 +40,7 @@
    </properties>
   </object>
   <object id="49" template="../obj/gold.tx" x="209.038" y="33.8697"/>
-  <object id="53" template="../obj/enemy.tx" x="223.924" y="99.93">
+  <object id="53" template="../obj/enemy.tx" x="223.924" y="101.602" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Slimefoot"/>
    </properties>

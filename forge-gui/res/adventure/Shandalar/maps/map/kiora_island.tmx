@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="77">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy9lTtOxDAQhgeJtRdBKJA4BgViC64Ap1nB0lBtCVRU227NQyI3yAGogXLPwAUQM4p/2ZnYjqNFjPQriu2Zz/NQsm+JDlgV65BV/5OeWM+sF9Zroc+NIbrfI3pg3bGuzXjuakL0GVHOJ2Z/zQ3fS2xbbk5D3PDs0rYqqRnykx4OcY5VjBRXz22OK09hp/bH5KvnNuULfx0npZMd7/dm+9yLKdHltMuN1SrFS+2Bq9fD/l6Zfr4yX6LG1XFhuv4bXv9xPouq21/cGzGXkXxjcyV3XZPX16SN9aG4sb7mcgyV486t1zn7n1aeJVyw5fyRjdf93fh8V+4Oa8pzv3e7eUO185VYM9Oen6lv48bFmVvPQtxY/iV2puYB/dTfU/AQ+9H2Z7Khcq424d5Wvr+wWnFRc/2/24YbGthhPmCKwv/dmDoPcUMDF31uqN8L0S8+a/oe
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytlD1OxDAQhWd/ksmmYkHUUACiAglRcIQtgL0AcAq4AEKBasuVgDMA4gYIaCNRgGipwx0Q8+REcRxn17F2pKc4ztjfxDPjaUBedtcnWu8SrXXbrdvLeVNP7mRQqo19eHDPQ6KLsMostBMT7cbue+ncw4joxTg3sI5l/l7ONRmUsrGhL8f/2A8VC0K+Em3tZ6Def6MqcxHcVa7uN+Ty2xLXeSZ7RIvhmutsbMS2wvb/da3veVzYQVDVH6u8Y3zSIzoVZTJ31SG6FD1xfY9Z3O3Y7ZxQ0/A/ilTNQeA+shsThvMCGzGf9dRcIjFfi246df/vQPkXQn5HefxDRyYMfZQZ/huSo03RliVXJhfxLrNSG7NxX4X3JnpvqJGM/VizuLh3TemGfjfj9LFxVNbxc0O/PrDi485Cr6R5D9325+/fZEU9ozbHlnvJdkelWu+CjZ6CfLi6fqh8FmNdOnei+bn2UBNXZ5pcvKeWNeC34f4DqEaAgw==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYGBgKOdloBuooJNdn1hoZ3YVHj9MYCXOjIXM5NtDSXzZI4VLCdScSizmVdMxTcAANn89YyDNLcSqhakrGQB/0goghx8rEekLHWBLB6SCxXjspWVYOxKR3+lV9gxXwMYNoelZXxCbn/GVyeiAknSIy+8w8WcUmIlsNilhTE66BgApvhNH
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="193.279" y="271.297" width="49.7826" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="55" template="../obj/treasure.tx" x="30.5746" y="103.158"/>
+  <object id="64" template="../obj/treasure.tx" x="225.969" y="32.1053"/>
+  <object id="56" template="../obj/enemy.tx" x="241.165" y="62.5288" width="16" height="16">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Kraken Hatchling&quot;,&quot;Tropical Island&quot; ]
+}</property>
+    <property name="enemy" value="Kiora"/>
+    <property name="scaleX" type="float" value="0.1"/>
+    <property name="scaleY" type="float" value="0.1"/>
+   </properties>
+  </object>
+  <object id="57" template="../obj/enemy.tx" x="212.325" y="170.425">
+   <properties>
+    <property name="enemy" value="Merfolk"/>
+   </properties>
+  </object>
+  <object id="60" template="../obj/gold.tx" x="256.263" y="31"/>
+  <object id="65" template="../obj/enemy.tx" x="18.4474" y="220.158">
+   <properties>
+    <property name="enemy" value="Sea Monster"/>
+   </properties>
+  </object>
+  <object id="67" template="../obj/enemy.tx" x="93.0526" y="236.342">
+   <properties>
+    <property name="enemy" value="Sea Monster"/>
+   </properties>
+  </object>
+  <object id="68" template="../obj/enemy.tx" x="288.447" y="109.237">
+   <properties>
+    <property name="enemy" value="Merfolk"/>
+   </properties>
+  </object>
+  <object id="76" template="../obj/enemy.tx" x="19.093" y="127.799">
+   <properties>
+    <property name="enemy" value="Crab"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

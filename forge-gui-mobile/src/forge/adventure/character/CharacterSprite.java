@@ -7,9 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import forge.adventure.stage.SpriteGroup;
 import forge.adventure.util.Config;
-
 import java.util.HashMap;
-
 /**
  * CharacterSprite base class for animated sprites on the map
  */
@@ -35,7 +33,7 @@ public class CharacterSprite extends MapActor {
     }
 
     @Override
-    void updateBoundingRect() { //We want a slimmer box for the player entity so it can navigate terrain without getting stuck.
+    void updateBoundingRect() {//We want a slimmer box for the player entity so it can navigate terrain without getting stuck.
         boundingRect.set(getX() + 4, getY(), getWidth() - 6, getHeight() * collisionHeight);
     }
 
@@ -227,7 +225,11 @@ public class CharacterSprite extends MapActor {
         setWidth(currentFrame.getRegionWidth());
         Color oldColor=batch.getColor().cpy();
         batch.setColor(getColor());
-        batch.draw(currentFrame, getX(), getY());
+        float scale = 1f;
+        if (this instanceof EnemySprite) {
+            scale = ((EnemySprite) this).getData().scale;
+        }
+        batch.draw(currentFrame, getX(), getY(), getWidth()*scale, getHeight()*scale);
         batch.setColor(oldColor);
         super.draw(batch,parentAlpha);
         //batch.draw(getDebugTexture(),getX(),getY());
