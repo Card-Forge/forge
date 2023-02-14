@@ -187,6 +187,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final Map<String, Integer> notedNum = Maps.newHashMap();
 
     private boolean revolt = false;
+    private boolean hasToAttack = false;
 
     private List<Card> sacrificedThisTurn = new ArrayList<>();
 
@@ -2051,6 +2052,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void setRevolt(final boolean val) {
         revolt = val;
+    }
+
+    public final boolean mustAttack() {
+        return hasToAttack;
+    }
+    public final void setMustAttack(final boolean val) {
+        hasToAttack = val;
     }
 
     public final boolean hasDelirium() {

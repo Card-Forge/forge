@@ -43,7 +43,6 @@ public class AttackConstraints {
     private final CardCollection possibleAttackers;
     private final FCollectionView<GameEntity> possibleDefenders;
     private final GlobalAttackRestrictions globalRestrictions;
-    private boolean mustAttack = false;
 
     private final Map<Card, AttackRestriction> restrictions = Maps.newHashMap();
     private final Map<Card, AttackRequirement> requirements = Maps.newHashMap();
@@ -56,7 +55,7 @@ public class AttackConstraints {
         globalRestrictions = GlobalAttackRestrictions.getGlobalRestrictions(combat.getAttackingPlayer(), possibleDefenders);
 
         if (StaticAbilityPlayerMustAttack.mustAttack(attackingP)) {
-            mustAttack = true;
+            attackingP.setMustAttack(true);
         }
 
         // Number of "must attack" constraints on each creature with a magnet counter (equal to the number of permanents requiring that constraint).
@@ -413,10 +412,11 @@ public class AttackConstraints {
         }
 
         int violations = 0;
-        if (mustAttack && attackers.size() < 1) {
-            violations++;
-        }
+
         for (final Card possibleAttacker : possibleAttackers) {
+            if (possibleAttacker.getController().mustAttack() && attackers.size() < 1) {
+                violations++;
+            }
             final AttackRequirement requirement = requirements.get(possibleAttacker);
             if (requirement != null) {
                 violations += requirement.countViolations(attackers.get(possibleAttacker), attackers);
