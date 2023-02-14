@@ -1251,6 +1251,13 @@ public class AbilityUtils {
         else if (defined.startsWith("NextPlayerToYour")) {
             Direction dir = defined.substring(16).equals("Left") ? Direction.Left : Direction.Right;
             players.add(game.getNextPlayerAfter(player, dir));
+        } else if (defined.startsWith("NextOpponentToYour")) {
+            Direction dir = defined.substring(18).equals("Left") ? Direction.Left : Direction.Right;
+            Player next = game.getNextPlayerAfter(player, dir);
+            while (!next.isOpponentOf(player)) {
+                next = game.getNextPlayerAfter(next, dir);
+            }
+            players.add(next);
         }
         else {
             // will be filtered below

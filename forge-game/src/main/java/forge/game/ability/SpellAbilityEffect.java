@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import forge.util.lang.LangEnglish;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
@@ -82,7 +81,7 @@ public abstract class SpellAbilityEffect {
         String stackDesc = params.get("StackDescription");
         if (stackDesc != null) {
             String[] reps = null;
-            if (stackDesc.startsWith("REP") && Lang.getInstance() instanceof LangEnglish) {
+            if (stackDesc.startsWith("REP")) {
                 reps = stackDesc.substring(4).split(" & ");
                 stackDesc = "SpellDescription";
             }
@@ -97,7 +96,9 @@ public abstract class SpellAbilityEffect {
                     if (reps != null) {
                         for (String s : reps) {
                             String[] rep = s.split("_",2);
-                            spellDesc = spellDesc.replaceFirst(rep[0], rep[1]);
+                            if (spellDesc.contains(rep[0])) {
+                                spellDesc = spellDesc.replaceFirst(rep[0], rep[1]);
+                            }
                         }
                         tokenizeString(sa, sb, spellDesc);
                     } else {
