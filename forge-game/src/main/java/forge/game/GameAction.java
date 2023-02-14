@@ -2524,17 +2524,12 @@ public class GameAction {
 
         Player p = source.getController();
         if (tgt.canTgtPlayer()) {
-            final FCollection<Player> players = new FCollection<>();
+            final FCollection<Player> players = game.getPlayers().filter(PlayerPredicates.canBeAttached(source, aura));
 
-            for (Player player : game.getPlayers()) {
-                if (player.isValid(tgt.getValidTgts(), aura.getActivatingPlayer(), source, aura)) {
-                    players.add(player);
-                }
-            }
             final Player pa = p.getController().chooseSingleEntityForEffect(players, aura,
                     Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", CardTranslation.getTranslatedName(source.getName())), null);
             if (pa != null) {
-                source.attachToEntity(pa, null);
+                source.attachToEntity(pa, null, true);
                 return true;
             }
         } else {
@@ -2553,7 +2548,7 @@ public class GameAction {
             }
             list.addAll(game.getCardsIn(zones));
 
-            list = CardLists.getValidCards(list, tgt.getValidTgts(), aura.getActivatingPlayer(), source, aura);
+            list = CardLists.filter(list, CardPredicates.canBeAttached(source, aura));
             if (list.isEmpty()) {
                 return false;
             }

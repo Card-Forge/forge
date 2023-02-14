@@ -1,12 +1,12 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardDamageMap;
 import forge.game.card.CardLists;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
@@ -77,21 +77,20 @@ public class DamageEachEffect extends DamageBaseEffect {
             usedDamageMap = false;
         }
 
-        for (final Object o : getTargetEntities(sa, "DefinedPlayers")) {
+        for (final GameEntity ge : getTargetEntities(sa, "DefinedPlayers")) {
             for (final Card source : sources) {
                 final Card sourceLKI = game.getChangeZoneLKIInfo(source);
 
                 // TODO shouldn't that be using Num or something first?
                 final int dmg = AbilityUtils.calculateAmount(source, "X", sa);
 
-                if (o instanceof Card) {
-                    final Card c = (Card) o;
-                    if (c.isInPlay()) {
+                if (ge instanceof Card) {
+                    final Card c = (Card) ge;
+                    if (c.isInPlay() && !c.isPhasedOut()) {
                         damageMap.put(sourceLKI, c, dmg);
                     }
-
-                } else if (o instanceof Player) {
-                    damageMap.put(sourceLKI, (Player) o, dmg);
+                } else {
+                    damageMap.put(sourceLKI, ge, dmg);
                 }
             }
         }

@@ -13,6 +13,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CardPredicates;
@@ -150,12 +151,12 @@ public class AttachEffect extends SpellAbilityEffect {
 
             ZoneType previousZone = source.getZone().getZoneType();
 
-            //CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
-            //CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+            CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
+            CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
             Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
-            //moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-            //moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+            moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+            moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
 
             // The Spell_Permanent (Auras) version of this AF needs to
             // move the card into play before Attaching
