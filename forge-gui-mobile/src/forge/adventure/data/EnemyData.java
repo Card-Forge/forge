@@ -35,7 +35,7 @@ public class EnemyData {
         deck           = enemyData.deck;
         ai             = enemyData.ai;
         boss           = enemyData.boss;
-        flying           = enemyData.flying;
+        flying         = enemyData.flying;
         spawnRate      = enemyData.spawnRate;
         copyPlayerDeck = enemyData.copyPlayerDeck;
         difficulty     = enemyData.difficulty;
@@ -46,13 +46,16 @@ public class EnemyData {
         colors         = enemyData.colors;
         teamNumber     = enemyData.teamNumber;
         nextEnemy     =enemyData.nextEnemy==null?null: new EnemyData(enemyData.nextEnemy);
+        if(enemyData.scale == 0.0f) {
+            scale=1.0f; 
+        }
         if(enemyData.rewards == null) {
             rewards=null;
         } else {
             rewards = new RewardData[enemyData.rewards.length];
             for(int i=0; i<rewards.length; i++)
                 rewards[i]=new RewardData(enemyData.rewards[i]);
-        }
+        }        
     }
 
     public Deck generateDeck(boolean isFantasyMode, boolean useGeneticAI) {
