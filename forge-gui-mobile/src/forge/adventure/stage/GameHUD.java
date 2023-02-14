@@ -60,7 +60,7 @@ public class GameHUD extends Stage {
     float TOUCHPAD_SCALE = 70f, referenceX;
     boolean isHiding = false, isShowing = false;
     float opacity = 1f;
-    private boolean debugMap;
+    private boolean debugMap, updatelife;
 
     private final Dialog dialog;
     private boolean dialogOnlyInput;
@@ -125,7 +125,7 @@ public class GameHUD extends Stage {
         shards.setText("[%95][+Shards] 0");
         money.setText("[%95][+Gold] ");
         lifePoints.setText("[%95][+Life] 20/20");
-        AdventurePlayer.current().onLifeChange(() -> lifePoints.setText("[%95][+Life] "+AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
+        AdventurePlayer.current().onLifeChange(() -> lifePoints.setText("[%95][+Life]"+ lifepointsTextColor +" "+AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
         AdventurePlayer.current().onShardsChange(() -> shards.setText("[%95][+Shards] "+AdventurePlayer.current().getShards()));
 
         WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("[%95][+Gold] "+String.valueOf(AdventurePlayer.current().getGold())));
@@ -236,6 +236,7 @@ public class GameHUD extends Stage {
 
     @Override
     public void draw() {
+        updatelife = false;
         int yPos = (int) gameStage.player.getY();
         int xPos = (int) gameStage.player.getX();
         act(Gdx.graphics.getDeltaTime()); //act the Hud
@@ -248,21 +249,25 @@ public class GameHUD extends Stage {
         //colored lifepoints
         if (Current.player().getLife() >= Current.player().getMaxLife()) {
             //color green if max life
-            if (!lifepointsTextColor.equalsIgnoreCase("green")) {
-                lifePoints.setText("[%95][+Life] [GREEN]" + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
-                lifepointsTextColor = "green";
+            if (!lifepointsTextColor.equals("[GREEN]")) {
+                lifepointsTextColor = "[GREEN]";
+                updatelife = true;
             }
         } else if (Current.player().getLife() <= 5) {
             //color red if critical
-            if (!lifepointsTextColor.equalsIgnoreCase("red")) {
-                lifePoints.setText("[%95][+Life] [RED]" + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
-                lifepointsTextColor = "red";
+            if (!lifepointsTextColor.equals("[RED]")) {
+                lifepointsTextColor = "[RED]";
+                updatelife = true;
             }
         } else {
             if (!lifepointsTextColor.equals("")) {
-                lifePoints.setText("[%95][+Life] " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
                 lifepointsTextColor = "";
+                updatelife = true;
             }
+        }
+        if (updatelife) {
+            updatelife = false;
+            lifePoints.setText("[%95][+Life]" + lifepointsTextColor + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
         }
     }
 
