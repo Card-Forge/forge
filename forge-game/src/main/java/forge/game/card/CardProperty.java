@@ -865,7 +865,7 @@ public class CardProperty {
                     if (!(spellAbility instanceof SpellAbility)) {
                         System.out.println("Looking at TriggeredCard but no SA?");
                     } else {
-                        Card triggeredCard = ((Card) ((SpellAbility) spellAbility).getTriggeringObject(AbilityKey.Card));
+                        Card triggeredCard = ((Card) ((SpellAbility) spellAbility).getRootAbility().getTriggeringObject(AbilityKey.Card));
                         if (triggeredCard != null && card.sharesNameWith(triggeredCard)) {
                             return true;
                         }
