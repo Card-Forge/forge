@@ -20,7 +20,6 @@ import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
 import forge.util.CardTranslation;
@@ -77,7 +76,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
 
         final List<SpellAbility> tgtSpells = getTargetSpells(sa);
 
-        if (tgtSpells.size() == 0 || amount == 0) {
+        if (tgtSpells.isEmpty() || amount == 0) {
             return;
         }
 
@@ -97,7 +96,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 // Find subability or rootability that has targets
                 SpellAbility targetedSA = chosenSA;
                 while (targetedSA != null) {
-                    if (targetedSA.usesTargeting() && targetedSA.getTargets().size() != 0) {
+                    if (targetedSA.usesTargeting() && !targetedSA.getTargets().isEmpty()) {
                         break;
                     }
                     targetedSA = targetedSA.getSubAbility();
@@ -105,7 +104,9 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 if (targetedSA == null) {
                     continue;
                 }
+
                 final List<GameEntity> candidates = targetedSA.getTargetRestrictions().getAllCandidates(targetedSA, true);
+
                 if (sa.hasParam("CanTargetPlayer")) {
                     // Radiate
                     // Remove targeted players because getAllCandidates include all the valid players
@@ -129,12 +130,12 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                             final Player p = (Player) o;
                             if (p.equals(originalTargetPlayer))
                                 continue;
-                            if (p.isValid(type.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
+                            if (p.isValid(type.split(","), sa.getActivatingPlayer(), card, sa)) {
                                 players.add(p);
                             }
                         }
                     }
-                    valid = CardLists.getValidCards(valid, type, sa.getActivatingPlayer(), sa.getHostCard(), sa);
+                    valid = CardLists.getValidCards(valid, type, sa.getActivatingPlayer(), card, sa);
                     Card originalTarget = Iterables.getFirst(getTargetCards(chosenSA), null);
                     valid.remove(originalTarget);
 
@@ -176,7 +177,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                             candidates.removeIf(new Predicate<GameEntity>() {
                                 @Override
                                 public boolean test(GameEntity c) {
-                                    return !c.isValid(sa.getParam("RandomTargetRestriction").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+                                    return !c.isValid(sa.getParam("RandomTargetRestriction").split(","), sa.getActivatingPlayer(), card, sa);
                                 }
                             });
                         }
@@ -196,6 +197,30 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                         if (sub != null) {
                             sub.getParent().setSubAbility(sub.getSubAbility());
                         }
+                    }
+
+                    if (sa.hasParam("DefinedTarget")) {
+                        final List<GameEntity> tgts = getDefinedEntitiesOrTargeted(sa, "DefinedTarget");
+                        if (tgts.isEmpty()) {
+                            continue;
+                        }
+                        final GameEntity tgt = tgts.get(0);
+
+                        // Find subability or rootability that has targets
+                        SpellAbility targetedSA = copy;
+                        while (targetedSA != null) {
+                            if (targetedSA.usesTargeting() && !targetedSA.getTargets().isEmpty()) {
+                                break;
+                            }
+                            targetedSA = targetedSA.getSubAbility();
+                        }
+                        if (targetedSA == null) {
+                            continue;
+                        }
+                        if (!targetedSA.canTarget(tgt)) {
+                            continue;
+                        }
+                        resetFirstTargetOnCopy(copy, tgt, targetedSA);
                     }
 
                     copies.add(copy);
@@ -242,8 +267,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
     }
 
     private void resetFirstTargetOnCopy(SpellAbility copy, GameEntity obj, SpellAbility targetedSA) {
-        copy.resetFirstTarget(obj, targetedSA);
-        AbilitySub subAb = copy.getSubAbility();
+        SpellAbility subAb = copy;
         while (subAb != null) {
             subAb.resetFirstTarget(obj, targetedSA);
             subAb = subAb.getSubAbility();
