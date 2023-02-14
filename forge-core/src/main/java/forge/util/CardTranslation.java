@@ -53,7 +53,7 @@ public class CardTranslation {
                 int splitIndex = name.indexOf(" // ");
                 String leftname = name.substring(0, splitIndex);
                 String rightname = name.substring(splitIndex + 4, name.length());
-                return translatednames.get(leftname) + " // " + translatednames.get(rightname);
+                return translatednames.getOrDefault(leftname, leftname) + " // " + translatednames.getOrDefault(rightname, rightname);
             }
             String tname = translatednames.get(name);
             return (tname == null || tname.isEmpty()) ? name : tname;

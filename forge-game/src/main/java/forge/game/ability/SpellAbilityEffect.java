@@ -88,12 +88,15 @@ public abstract class SpellAbilityEffect {
             }
             // by typing "SpellDescription" they want to bypass the Effect's string builder
             if ("SpellDescription".equalsIgnoreCase(stackDesc)) {
-                if (params.get("SpellDescription") != null) {
+                if (params.containsKey("SpellDescription")) {
                     String spellDesc = CardTranslation.translateSingleDescriptionText(params.get("SpellDescription"),
                             sa.getHostCard().getName());
-                    if (spellDesc.contains("(")) { //trim reminder text from StackDesc
+
+                    int idx = spellDesc.indexOf("(");
+                    if (idx > 0) { //trim reminder text from StackDesc
                         spellDesc = spellDesc.substring(0, spellDesc.indexOf("(") - 1);
                     }
+
                     if (reps != null) {
                         for (String s : reps) {
                             String[] rep = s.split("_",2);
