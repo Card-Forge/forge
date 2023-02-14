@@ -1,17 +1,13 @@
 package forge.game.staticability;
 
 import com.google.common.collect.Lists;
-import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class StaticAbilityPlayerMustAttack {
 
