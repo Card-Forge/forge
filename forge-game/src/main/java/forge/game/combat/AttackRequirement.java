@@ -54,20 +54,18 @@ public class AttackRequirement {
             defenderSpecific.add(e);
         }
 
-        Map<Integer, List<GameEntity>> requirements = StaticAbilityPlayerMustAttack.mustAttack(attacker.getController());
+        List<GameEntity> requirements =
+                StaticAbilityPlayerMustAttack.mustAttackSpecific(attacker.getController(), possibleDefenders);
         if (!requirements.isEmpty()) {
-
-            for (Map.Entry<Integer, List<GameEntity>> e : requirements.entrySet()) {
-                for (GameEntity ge : e.getValue()) {
-                    if (ge instanceof Player && !defenderOrPWSpecific.containsKey(ge)) {
-                        defenderOrPWSpecific.put(ge, e.getKey());
-                    } else if (ge instanceof Card) {
-                        final Card pw = (Card) ge;
-                        if (!defenderSpecificAlternatives.containsKey(pw.getController())) {
-                            defenderSpecificAlternatives.put(pw.getController(), Lists.newArrayList());
-                        }
-                        defenderSpecificAlternatives.get(pw.getController()).add(pw);
+            for (GameEntity ge : requirements) {
+                if (ge instanceof Player && !defenderOrPWSpecific.containsKey(ge)) {
+                    defenderOrPWSpecific.put(ge, 1);
+                } else if (ge instanceof Card) {
+                    final Card pw = (Card) ge;
+                    if (!defenderSpecificAlternatives.containsKey(pw.getController())) {
+                        defenderSpecificAlternatives.put(pw.getController(), Lists.newArrayList());
                     }
+                    defenderSpecificAlternatives.get(pw.getController()).add(pw);
                 }
             }
         }

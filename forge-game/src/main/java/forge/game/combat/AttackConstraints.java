@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import forge.game.staticability.StaticAbilityPlayerMustAttack;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
@@ -24,6 +25,7 @@ import com.google.common.primitives.Ints;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.player.Player;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
@@ -41,15 +43,21 @@ public class AttackConstraints {
     private final CardCollection possibleAttackers;
     private final FCollectionView<GameEntity> possibleDefenders;
     private final GlobalAttackRestrictions globalRestrictions;
+    private boolean mustAttack = false;
 
     private final Map<Card, AttackRestriction> restrictions = Maps.newHashMap();
     private final Map<Card, AttackRequirement> requirements = Maps.newHashMap();
 
     public AttackConstraints(final Combat combat) {
-        final Game game = combat.getAttackingPlayer().getGame();
+        final Player attackingP = combat.getAttackingPlayer();
+        final Game game = attackingP.getGame();
         possibleAttackers = combat.getAttackingPlayer().getCreaturesInPlay();
         possibleDefenders = combat.getDefenders();
         globalRestrictions = GlobalAttackRestrictions.getGlobalRestrictions(combat.getAttackingPlayer(), possibleDefenders);
+
+        if (StaticAbilityPlayerMustAttack.mustAttack(attackingP)) {
+            mustAttack = true;
+        }
 
         // Number of "must attack" constraints on each creature with a magnet counter (equal to the number of permanents requiring that constraint).
         int nMagnetRequirements = 0;
@@ -405,6 +413,9 @@ public class AttackConstraints {
         }
 
         int violations = 0;
+        if (mustAttack && attackers.size() < 1) {
+            violations++;
+        }
         for (final Card possibleAttacker : possibleAttackers) {
             final AttackRequirement requirement = requirements.get(possibleAttacker);
             if (requirement != null) {
