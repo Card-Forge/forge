@@ -173,6 +173,10 @@ public class ReplacementHandler {
                 }
                 // need to copy stored keywords from lki into real object to prevent the replacement effect from making new ones
                 affectedCard.setStoredKeywords(affectedLKI.getStoredKeywords(), true);
+                if (affectedCard.getCastSA() != null && affectedCard.getCastSA().getKeyword() != null) {
+                   // need to readd the CastSA Keyword into the Card
+                   affectedCard.addKeywordForStaticAbility(affectedCard.getCastSA().getKeyword());
+                }
                 runParams.put(AbilityKey.Affected, affectedCard);
                 runParams.put(AbilityKey.NewCard, CardUtil.getLKICopy(affectedLKI));
             }
