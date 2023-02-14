@@ -15,7 +15,7 @@
    eJyL5mVg2MWDH0cRoQaEo4lUBzJPFkjjA7XcDAx7CKgBAZCdu4lQBwLSPPjtJdZOUgE+e2llJz57aWknLntpbScue6VpbOdgs5ceYNTeUXtH7aWOvcTUl8gYGZCqFxkDAGuQN1o=
   </data>
  </layer>
- <layer id="1" name="Background" width="30" height="17" visible="0">
+ <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxbwM7AsGAUj+JRPIpH8SgexSMCAwB2ckzC
   </data>
