@@ -220,15 +220,13 @@ public class EffectEffect extends SpellAbilityEffect {
                 eff.addRemembered(rememberList);
                 if (sa.hasParam("ForgetOnMoved")) {
                     addForgetOnMovedTrigger(eff, sa.getParam("ForgetOnMoved"));
-                    if (!"Stack".equals(sa.getParam("ForgetOnMoved"))) {
+                    if (!"Stack".equals(sa.getParam("ForgetOnMoved")) && !"False".equalsIgnoreCase(sa.getParam("ForgetOnCast"))) {
                         addForgetOnCastTrigger(eff);
                     }
                 } else if (sa.hasParam("ForgetOnCast")) {
                     addForgetOnCastTrigger(eff);
                 } else if (sa.hasParam("ExileOnMoved")) {
                     addExileOnMovedTrigger(eff, sa.getParam("ExileOnMoved"));
-                } else if (sa.hasParam("ExileOnCast")) {
-                    addExileOnCastOrMoveTrigger(eff, sa.getParam("ExileOnCast"));
                 }
                 if (sa.hasParam("ForgetOnPhasedIn")) {
                     addForgetOnPhasedInTrigger(eff);
