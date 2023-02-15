@@ -967,5 +967,16 @@
         "Kraken Hatchling"
       ]
 }
+},
+{
+    "name": "Slime-Covered Boots",
+    "equipmentSlot": "Boots",
+    "iconName": "SteelBoots",
+    "effect": {
+      "lifeModifier": -1,
+      "startBattleWithCard": [
+        "Ooze Flux"
+      ]
+}
 }
 ]

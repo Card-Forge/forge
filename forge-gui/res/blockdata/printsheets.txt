@@ -5948,61 +5948,56 @@ Kaya, Ghost Assassin|CN2|2
 7 Forest|ONE
 
 [ONE Blue Inserts]
-
-Blade of Shared Souls|ONE
-Blue Sun's Twilight|ONE
-Encroaching Mycosynth|ONE
-Mercurial Spelldancer|ONE
-Mindsplice Apparatus|ONE
-Unctus, Grand Metatect|ONE
-Ichormoon Gauntlet|ONE
-Jace, the Perfected Mind|ONE
-Tekuthal, Inquiry Dominus|ONE
+1 Blade of Shared Souls|ONE
+1 Blue Sun's Twilight|ONE
+1 Encroaching Mycosynth|ONE
+1 Mercurial Spelldancer|ONE
+1 Mindsplice Apparatus|ONE
+1 Unctus, Grand Metatect|ONE
+1 Ichormoon Gauntlet|ONE
+1 Jace, the Perfected Mind|ONE
+1 Tekuthal, Inquiry Dominus|ONE
 
 [ONE Red Inserts]
-
-All Will Be One|ONE
-Capricious Hellraiser|ONE
-Solphim, Mayhem Dominus|ONE
-Dragonwing Glider|ONE
-Koth, Fire of Resistance|ONE
-Red Sun's Twilight|ONE
-Slobad, Iron Goblin|ONE
-Urabrask's Forge|ONE
-Vindictive Flamestoker|ONE
+1 All Will Be One|ONE
+1 Capricious Hellraiser|ONE
+1 Solphim, Mayhem Dominus|ONE
+1 Dragonwing Glider|ONE
+1 Koth, Fire of Resistance|ONE
+1 Red Sun's Twilight|ONE
+1 Slobad, Iron Goblin|ONE
+1 Urabrask's Forge|ONE
+1 Vindictive Flamestoker|ONE
 
 [ONE Black Inserts]
-
-Archfiend of the Dross|ONE
-Black Sun's Twilight|ONE
-Geth, Thane of Contracts|ONE
-Karumonix, the Rat King|ONE
-Phyrexian Arena|ONE
-Vraan, Executioner Thane|ONE
-Drivnod, Carnage Dominus|ONE
-Phyrexian Obliterator|ONE
-Vraska, Betrayal's Sting|ONE
+1 Archfiend of the Dross|ONE
+1 Black Sun's Twilight|ONE
+1 Geth, Thane of Contracts|ONE
+1 Karumonix, the Rat King|ONE
+1 Phyrexian Arena|ONE
+1 Vraan, Executioner Thane|ONE
+1 Drivnod, Carnage Dominus|ONE
+1 Phyrexian Obliterator|ONE
+1 Vraska, Betrayal's Sting|ONE
 
 [ONE Green Inserts]
-
-Nissa, Ascended Animist|ONE
-Tyrranax Rex|ONE
-Zopandrel, Hunger Dominus|ONE
-Bloated Contaminator|ONE
-Thrun, Breaker of Silence|ONE
-Venerated Rotpriest|ONE
-Conduit of Worlds|ONE
-Evolved Spinoderm|ONE
-Green Sun's Twilight|ONE
+1 Nissa, Ascended Animist|ONE
+1 Tyrranax Rex|ONE
+1 Zopandrel, Hunger Dominus|ONE
+1 Bloated Contaminator|ONE
+1 Thrun, Breaker of Silence|ONE
+1 Venerated Rotpriest|ONE
+1 Conduit of Worlds|ONE
+1 Evolved Spinoderm|ONE
+1 Green Sun's Twilight|ONE
 
 [ONE White Inserts]
-
-Kemba, Kha Enduring|ONE
-The Eternal Wanderer|ONE
-Norn's Wellspring|ONE
-Skrelv, Defector Mite|ONE
-Skrelv's Hive|ONE
-White Sun's Twilight|ONE
-Elesh Norn, Mother of Machines|ONE
-Mondrak, Glory Dominus|ONE
-Phyrexian Vindicator|ONE
+1 Kemba, Kha Enduring|ONE
+1 The Eternal Wanderer|ONE
+1 Norn's Wellspring|ONE
+1 Skrelv, Defector Mite|ONE
+1 Skrelv's Hive|ONE
+1 White Sun's Twilight|ONE
+1 Elesh Norn, Mother of Machines|ONE
+1 Mondrak, Glory Dominus|ONE
+1 Phyrexian Vindicator|ONE

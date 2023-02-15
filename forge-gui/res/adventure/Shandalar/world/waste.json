@@ -52,7 +52,8 @@
 	"White Wiz1",
 	"White Wiz2",
 	"White Wiz3",
-	"Doppelganger"
+	"Doppelganger",
+	"Pirate"
 ],
 "pointsOfInterest": [
 	"Spawn",
@@ -95,7 +96,8 @@
 	"Crawlspace",
 	"Dream Halls",
 	"Lich's Mirror",
-	"Kobold Mine"
+	"Kobold Mine",
+	"Slime Cave"
 ],
 "structures": [
 	{
