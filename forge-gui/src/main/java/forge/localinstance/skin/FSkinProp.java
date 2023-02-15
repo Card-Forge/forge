@@ -268,7 +268,8 @@ public enum FSkinProp {
     ICO_QUEST_BIG_BAG     (new int[] {480, 1360, 160, 160}, PropType.ICON),
 
     //adventure icons
-    ICO_MANASHARD         (new int[] {0,0, 100,100}, PropType.ICON),
+    ICO_MANASHARD         (new int[] {2, 304, 100, 100}, PropType.ADVENTURE),
+    ICO_ADVLOGO           (new int[] {2, 2, 300, 300}, PropType.ADVENTURE),
 
     //menu icon
     ICO_MENU_GALAXY       (new int[] {0, 1520, 80, 80}, PropType.ICON),

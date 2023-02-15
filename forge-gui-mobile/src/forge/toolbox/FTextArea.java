@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
+import forge.animation.GifAnimation;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
@@ -15,17 +16,22 @@ public class FTextArea extends FScrollPane {
     private Vector2 insets;
     private FSkinColor textColor;
     private final TextRenderer renderer;
+    private GifAnimation animation;
     private boolean centerVertically;
 
     public FTextArea(boolean parseReminderText0) {
         this(parseReminderText0, "");
     }
     public FTextArea(boolean parseReminderText0, String text0) {
+        this(parseReminderText0, text0, null);
+    }
+    public FTextArea(boolean parseReminderText0, String text0, GifAnimation gifAnimation) {
         text = text0;
         font = FSkinFont.get(14);
         alignment = Align.left;
         insets = new Vector2(1, 1); //prevent text getting cut off by clip
         textColor = FLabel.getDefaultTextColor();
+        animation = gifAnimation;
         renderer = new TextRenderer(parseReminderText0);
     }
 
@@ -80,5 +86,16 @@ public class FTextArea extends FScrollPane {
     @Override
     protected void drawBackground(Graphics g) {
         renderer.drawText(g, text, font, textColor, insets.x - getScrollLeft(), insets.y - getScrollTop(), getScrollWidth() - 2 * insets.x, getScrollHeight() - 2 * insets.y, 0, getHeight(), true, alignment, centerVertically);
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        if (animation != null) {
+            float w = getScrollWidth() - 2 * insets.x;
+            float h = w * 0.6f;
+            float y = getPreferredHeight(w);
+            animation.draw(g, insets.x - getScrollLeft(), (insets.y - getScrollTop()) + y, w, h);
+        }
+        super.draw(g);
     }
 }
