@@ -1,13 +1,9 @@
 package forge.screens.home;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.utils.Align;
 import forge.Forge;
-import forge.Graphics;
 import forge.animation.GifAnimation;
-import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.localinstance.properties.ForgeConstants;
 import forge.screens.LaunchScreen;
