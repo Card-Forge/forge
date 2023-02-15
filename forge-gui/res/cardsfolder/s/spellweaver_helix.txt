@@ -4,9 +4,8 @@ Types:Artifact
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigSpellweaverExile | OptionalDecider$ You | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, you may exile two target sorcery cards from a single graveyard.
 SVar:TrigSpellweaverExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetsFromSingleZone$ True | ValidTgts$ Card.Sorcery | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select two target sorcery cards from a single graveyard | Imprint$ True | SpellDescription$ Exile two sorcery cards from a single graveyard.
 T:Mode$ SpellCast | ValidCard$ Card.sharesNameWith Imprinted+nonToken | Execute$ TrigSpellweaverCopy | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a card, if it has the same name as one of the cards exiled with CARDNAME, you may copy the other. If you do, you may cast the copy without paying its mana cost.
-SVar:TrigSpellweaverCopy:DB$ Pump | RememberObjects$ TriggeredCard | SubAbility$ DBPlay
-SVar:DBPlay:DB$ Play | Defined$ ValidAll Card.IsImprinted+doesNotShareNameWith Remembered+inZoneExile | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | CopyCard$ True | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigSpellweaverCopy:DB$ Play | Defined$ ValidExile Card.IsImprinted+!sharesNameWith TriggeredCard | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | CopyCard$ True | ConditionPresent$ Card.IsImprinted+sharesNameWith TriggeredCard | ConditionZone$ Exile | ConditionCompare$ EQ1 | SubAbility$ TrigSpellweaverCopySame
+SVar:TrigSpellweaverCopySame:DB$ Play | Defined$ ValidExile Card.IsImprinted | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | CopyCard$ True | ConditionPresent$ Card.IsImprinted+sharesNameWith TriggeredCard | ConditionZone$ Exile | ConditionCompare$ EQ2
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanImprinted | Static$ True
 SVar:DBCleanImprinted:DB$ Cleanup | ClearImprinted$ True
 AI:RemoveDeck:All
