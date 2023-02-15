@@ -2069,7 +2069,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbLong.append(TextUtil.fastReplace(keyword, ":", " ")).append("\r\n");
                 } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph")
                         || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
-                        || keyword.startsWith("Disturb") || keyword.startsWith("Madness:")
+                        || keyword.startsWith("Madness:")
                         || keyword.startsWith("Reconfigure") || keyword.startsWith("Squad")
                         || keyword.startsWith("Miracle") || keyword.startsWith("More Than Meets the Eye")
                         || keyword.startsWith("Level up")) {
@@ -2294,8 +2294,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortify") || keyword.startsWith("Outlast")
                         || keyword.startsWith("Unearth") || keyword.startsWith("Scavenge")
                         || keyword.startsWith("Spectacle") || keyword.startsWith("Evoke")
-                        || keyword.startsWith("Bestow") || keyword.startsWith("Dash") || keyword.startsWith("Surge")
+                        || keyword.startsWith("Bestow") || keyword.startsWith("Surge")
                         || keyword.startsWith("Transmute") || keyword.startsWith("Suspend")
+                        || keyword.startsWith("Dash") || keyword.startsWith("Disturb")
                         || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity")
                         || keyword.startsWith("Embalm") || keyword.equals("Prowess")
                         || keyword.startsWith("Eternalize") || keyword.startsWith("Reinforce")

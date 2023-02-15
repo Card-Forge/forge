@@ -2826,6 +2826,39 @@ public class CardFactoryUtil {
             newSA.setAlternativeCost(AlternativeCost.Dash);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Disturb")) {
+            final String[] k = keyword.split(":");
+            final Cost disturbCost = new Cost(k[1], true);
+
+            SpellAbility newSA;
+            if (host.getAlternateState().getType().hasSubtype("Aura")) {
+                newSA = host.getAlternateState().getFirstAbility().copyWithDefinedCost(disturbCost);
+                newSA.setCardState(host.getAlternateState());
+            } else {
+                newSA = new SpellPermanent(host, host.getAlternateState(), disturbCost);
+            }
+
+            StringBuilder sbCost = new StringBuilder("Disturb");
+            if (!disturbCost.isOnlyManaCost()) { //Something other than a mana cost
+                sbCost.append("—");
+            } else {
+                sbCost.append(" ");
+            }
+
+            newSA.putParam("PrecostDesc", sbCost.toString());
+            newSA.putParam("CostDesc", disturbCost.toString());
+
+            // makes new SpellDescription
+            final StringBuilder desc = new StringBuilder();
+            desc.append(newSA.getCostDescription());
+            desc.append("(").append(inst.getReminderText()).append(")");
+            newSA.setDescription(desc.toString());
+            newSA.putParam("AfterDescription", "(Disturbed)");
+
+            newSA.setAlternativeCost(AlternativeCost.Disturb);
+            newSA.getRestrictions().setZone(ZoneType.Graveyard);
+            newSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Emerge")) {
             final String[] kw = keyword.split(":");
             String costStr = kw[1];
