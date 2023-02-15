@@ -130,12 +130,12 @@ public class ClashEffect extends SpellAbilityEffect {
 
         // no winner, still show the revealed cards rather than do nothing
         if (pCMC == oCMC) {
-            reveal.append(Localizer.getInstance().getMessage("lblItsADraw"));
+            reveal.append(Localizer.getInstance().getMessage("lblNoWinner"));
             player.getGame().getAction().revealTo(toReveal, player.getGame().getPlayers(), reveal.toString());
             return null;
         }
 
-        reveal.append(player).append(pCMC > oCMC ? " " + Localizer.getInstance().getMessage("lblWinsClash") + "." : " " + Localizer.getInstance().getMessage("lblLosesClash") + ".");
+        reveal.append(pCMC > oCMC ? player + " " + Localizer.getInstance().getMessage("lblWinsClash") + "." : opponent + " " + Localizer.getInstance().getMessage("lblWinsClash") + ".");
         player.getGame().getAction().revealTo(toReveal, player.getGame().getPlayers(), reveal.toString());
         return pCMC > oCMC ? player : opponent;
     }
