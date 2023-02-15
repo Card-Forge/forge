@@ -9,4 +9,5 @@ Feature Article | https://downloads.cardforge.org/decks/feature-brawl.zip
 How to Build | https://downloads.cardforge.org/decks/howtobuild-brawl.zip
 Much Abrew About Nothing | https://downloads.cardforge.org/decks/muchabrewaboutnothing-brawl.zip
 Ready to Brawl? | https://downloads.cardforge.org/decks/readytobrawl.zip
+The Command Zone | https://downloads.cardforge.org/decks/commandzone-brawl.zip
 Ways to Play | https://downloads.cardforge.org/decks/waystoplay-brawl.zip

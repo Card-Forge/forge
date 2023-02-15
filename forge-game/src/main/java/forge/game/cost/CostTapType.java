@@ -90,9 +90,9 @@ public class CostTapType extends CostPartWithList {
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
 
-        final Integer i = this.convertAmount();
         final String desc = this.getDescriptiveType();
         final String type = this.getType();
+        final String amt = this.getAmount();
 
         if (type.contains("+withTotalPowerGE")) {
             String num = type.split("\\+withTotalPowerGE")[1];
@@ -102,9 +102,7 @@ public class CostTapType extends CostPartWithList {
         }
 
         sb.append("Tap ");
-        if (type.contains("sharesCreatureTypeWith")) {
-            sb.append("two untapped creatures you control that share a creature type");
-        } else if (type.contains("Other")) {
+        if (type.contains("Other")) {
             String rep = type.contains(".Other") ? ".Other" : "+Other";
             String descTrim = desc.replace(rep, "");
             if (CardType.CoreType.isValidEnum(descTrim)) {
@@ -114,8 +112,13 @@ public class CostTapType extends CostPartWithList {
             if (!descTrim.contains("you control")) {
                 sb.append(" you control");
             }
+        } else if (amt.equals("X")) {
+            sb.append("any number of untapped ").append(desc).append("s you control");
         } else {
-            sb.append(Lang.nounWithNumeralExceptOne(this.getAmount(), "untapped " + desc)).append(" you control");
+            sb.append(Lang.nounWithNumeralExceptOne(amt, "untapped " + desc)).append(" you control");
+        }
+        if (type.contains("sharesCreatureTypeWith")) {
+            sb.append(" that share a creature type");
         }
         return sb.toString();
     }
