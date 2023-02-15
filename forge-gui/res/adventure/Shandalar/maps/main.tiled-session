@@ -6,10 +6,10 @@
     "activeFile": "map/slime_hive.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "obj",
         "map",
-        "map/main_story",
-        "tileset"
+        "tileset",
+        "obj",
+        "map/main_story"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -2819,8 +2819,8 @@
             "scale": 3,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 206.5,
-                "y": 195.16666666666663
+                "x": 295.83333333333337,
+                "y": 183.83333333333331
             }
         },
         "map/snowabbey_1.tmx": {

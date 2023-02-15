@@ -973,9 +973,9 @@
     "equipmentSlot": "Boots",
     "iconName": "SteelBoots",
     "effect": {
-      "lifeModifier": -3,
+      "lifeModifier": -1,
       "startBattleWithCard": [
-        "Kraken Hatchling"
+        "Ooze Flux"
       ]
 }
 }
