@@ -42,4 +42,14 @@ public class GifAnimation extends ForgeAnimation {
     @Override
     protected void onEnd(boolean endingAll) {
     }
+
+    public void dispose() {
+        if (animation != null) {
+            for (TextureRegion tr: animation.getKeyFrames()) {
+                try {
+                    tr.getTexture().dispose();
+                } catch (Exception e) {}
+            }
+        }
+    }
 }

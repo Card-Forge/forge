@@ -712,6 +712,7 @@ public class GifDecoder {
         }
 
         Texture texture = new Texture(target);
+        target.dispose();
         Array<TextureRegion> texReg = new Array<>();
 
         for(h = 0; h < hzones; h++) {
