@@ -16,6 +16,10 @@ public class GifAnimation extends ForgeAnimation {
         animation = GifDecoder.loadGIFAnimation(PlayMode.NORMAL, Gdx.files.absolute(filename).read());
     }
 
+    public GifAnimation(String filename, PlayMode mode) {
+        animation = GifDecoder.loadGIFAnimation(mode, Gdx.files.absolute(filename).read());
+    }
+
     @Override
     public void start() {
         currentFrame = animation.getKeyFrame(0);

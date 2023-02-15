@@ -35,6 +35,7 @@ import forge.screens.ClosingScreen;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
 import forge.screens.TransitionScreen;
+import forge.screens.home.AdventureScreen;
 import forge.screens.home.HomeScreen;
 import forge.screens.home.NewGameMenu;
 import forge.screens.match.MatchController;
@@ -354,6 +355,7 @@ public class Forge implements ApplicationListener {
                 Forge.getAssets().fallback_skins().put(1, new Texture(transitionFile));
             if (titleBGFile.exists())
                 Forge.getAssets().fallback_skins().put(0, new Texture(titleBGFile));
+            AdventureScreen.preload();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -641,7 +643,6 @@ public class Forge implements ApplicationListener {
 
         final List<String> options = new ArrayList<>();
         options.add(getLocalizer().getMessage("lblExit"));
-        options.add(getLocalizer().getMessage("lblAdventure"));
         options.add(getLocalizer().getMessage("lblCancel"));
 
         Callback<Integer> callback = new Callback<Integer>() {
@@ -650,8 +651,6 @@ public class Forge implements ApplicationListener {
                 if (result == 0) {
                     exited = true;
                     exitAnimation(false);
-                } else if (result == 1) {
-                    switchToAdventure();
                 }
             }
         };
