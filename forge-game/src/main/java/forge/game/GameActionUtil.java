@@ -169,40 +169,7 @@ public final class GameActionUtil {
                 for (final KeywordInterface inst : source.getKeywords()) {
                     final String keyword = inst.getOriginal();
 
-                    if (keyword.startsWith("Disturb")) {
-                        if (!source.isInZone(ZoneType.Graveyard)) {
-                            continue;
-                        }
-
-                        final String[] k = keyword.split(":");
-                        final Cost disturbCost = new Cost(k[1], true);
-
-                        SpellAbility newSA;
-                        if (source.getAlternateState().getType().hasSubtype("Aura")) {
-                            newSA = source.getAlternateState().getFirstAbility().copyWithManaCostReplaced(activator, disturbCost);
-                        } else {
-                            newSA = new SpellPermanent(source);
-                            newSA.setCardState(source.getAlternateState());
-                            newSA.setPayCosts(disturbCost);
-                            newSA.setActivatingPlayer(activator);
-                        }
-
-                        newSA.putParam("PrecostDesc", "Disturb —");
-                        newSA.putParam("CostDesc", disturbCost.toString());
-
-                        // makes new SpellDescription
-                        final StringBuilder desc = new StringBuilder();
-                        desc.append(newSA.getCostDescription());
-                        desc.append("(").append(inst.getReminderText()).append(")");
-                        newSA.setDescription(desc.toString());
-                        newSA.putParam("AfterDescription", "(Disturbed)");
-
-                        newSA.setAlternativeCost(AlternativeCost.Disturb);
-                        newSA.getRestrictions().setZone(ZoneType.Graveyard);
-                        newSA.setCardState(source.getAlternateState());
-
-                        alternatives.add(newSA);
-                    } else if (keyword.startsWith("Escape")) {
+                    if (keyword.startsWith("Escape")) {
                         if (!source.isInZone(ZoneType.Graveyard)) {
                             continue;
                         }
