@@ -8,6 +8,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -87,6 +88,7 @@ public class ClashEffect extends SpellAbilityEffect {
         }
 
         final StringBuilder reveal = new StringBuilder();
+        reveal.append("OVERRIDE "); //will return substring with the original message parsed here..
         Card pCard = null;
         Card oCard = null;
 
@@ -104,7 +106,7 @@ public class ClashEffect extends SpellAbilityEffect {
             pCMC = pCard.getCMC();
 
             reveal.append(player).append(" " + Localizer.getInstance().getMessage("lblReveals") + ": ").append(pCard.getName()).append(". " + Localizer.getInstance().getMessage("lblCMC") + "= ").append(pCMC);
-            reveal.append("\r\n");
+            reveal.append("\n");
             clashMoveToTopOrBottom(player, pCard, sa);
         }
         else {
@@ -114,21 +116,27 @@ public class ClashEffect extends SpellAbilityEffect {
             oCMC = oCard.getCMC();
 
             reveal.append(opponent).append(" " + Localizer.getInstance().getMessage("lblReveals") + ": ").append(oCard.getName()).append(". " + Localizer.getInstance().getMessage("lblCMC") + "= ").append(oCMC);
-            reveal.append("\r\n\r\n");
+            reveal.append("\n");
             clashMoveToTopOrBottom(opponent, oCard, sa);
         }
         else {
             oCMC = -1;
         }
+        final CardCollection toReveal = new CardCollection();
+        if (pCard != null)
+            toReveal.add(pCard);
+        if (oCard != null)
+            toReveal.add(oCard);
 
-        // no winner
+        // no winner, still show the revealed cards rather than do nothing
         if (pCMC == oCMC) {
+            reveal.append(Localizer.getInstance().getMessage("lblNoWinner"));
+            player.getGame().getAction().revealTo(toReveal, player.getGame().getPlayers(), reveal.toString());
             return null;
         }
 
-        reveal.append(player).append(pCMC > oCMC ? " " + Localizer.getInstance().getMessage("lblWinsClash") + "." : " " + Localizer.getInstance().getMessage("lblLosesClash") + ".");
-        player.getGame().getAction().notifyOfValue(sa, source, reveal.toString(), null);
-
+        reveal.append(pCMC > oCMC ? player + " " + Localizer.getInstance().getMessage("lblWinsClash") + "." : opponent + " " + Localizer.getInstance().getMessage("lblWinsClash") + ".");
+        player.getGame().getAction().revealTo(toReveal, player.getGame().getPlayers(), reveal.toString());
         return pCMC > oCMC ? player : opponent;
     }
 

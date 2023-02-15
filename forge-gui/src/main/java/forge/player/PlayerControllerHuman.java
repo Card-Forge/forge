@@ -1691,8 +1691,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (sa != null && sa.isManaAbility()) {
             getGame().getGameLog().add(GameLogEntryType.LAND, message);
         } else {
-            getGui().message(message,
-                    sa == null || sa.getHostCard() == null ? "" : CardView.get(sa.getHostCard()).toString());
+            if (sa != null && sa.getHostCard() != null && GuiBase.getInterface().isLibgdxPort()) {
+                CardView cardView;
+                IPaperCard iPaperCard = sa.getHostCard().getPaperCard();
+                if (iPaperCard != null)
+                    cardView = CardView.getCardForUi(iPaperCard);
+                else
+                    cardView = sa.getHostCard().getView();
+                getGui().confirm(cardView, message, ImmutableList.of(localizer.getMessage("lblOk")));
+            } else {
+                getGui().message(message, sa == null || sa.getHostCard() == null ? "" : CardView.get(sa.getHostCard()).toString());
+            }
         }
     }
 

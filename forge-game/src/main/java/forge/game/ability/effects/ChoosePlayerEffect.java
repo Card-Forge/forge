@@ -55,6 +55,7 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
                 if (sa.hasParam("RememberChosen")) {
                     card.addRemembered(chosen);
                 }
+                p.getGame().getAction().notifyOfValue(sa, p, Localizer.getInstance().getMessage("lblPlayerPickedChosen", sa.getActivatingPlayer(), chosen), null);
 
                 // SubAbility that only fires if a player is chosen
                 SpellAbility chosenSA = sa.getAdditionalAbility("ChooseSubAbility");

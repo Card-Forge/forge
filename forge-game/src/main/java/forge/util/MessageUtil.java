@@ -34,7 +34,9 @@ public class MessageUtil {
         }
         String choser = StringUtils.capitalize(mayBeYou(player, target));
         switch(sa.getApi()) {
+            case ChoosePlayer:
             case ChooseDirection:
+            case Clash:
             case DigMultiple:
                 return value;
             case ChooseColor:
