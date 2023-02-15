@@ -64,4 +64,10 @@ public class AdventureScreen extends LaunchScreen {
         if (Gdx.files.absolute(demo).exists())
             animation = new GifAnimation(demo, Animation.PlayMode.LOOP);
     }
+    public static void dispose() {
+        if (animation != null) {
+            animation.dispose();
+        }
+        animation = null;
+    }
 }

@@ -997,13 +997,14 @@ public class Forge implements ApplicationListener {
             currentScreen = null;
         }
         FOverlay.hideAll();
-        assets.dispose();
         Dscreens.clear();
         graphics.dispose();
         SoundSystem.instance.dispose();
         try {
             ExceptionHandler.unregisterErrorHandling();
             lastPreview.dispose();
+            assets.dispose();
+            AdventureScreen.dispose();
         } catch (Exception e) {
         }
     }
