@@ -211,10 +211,14 @@ public class AiController {
     }
 
     public boolean checkETBEffects(final Card card, final SpellAbility sa, final ApiType api) {
-        final Player activatingPlayer = sa.getActivatingPlayer();
-
         // for xPaid stuff
         card.setCastSA(sa);
+        boolean result = checkETBEffectsPreparedCard(card, sa, api);
+        card.setCastSA(null);
+        return result;
+    }
+    private boolean checkETBEffectsPreparedCard(final Card card, final SpellAbility sa, final ApiType api) {
+        final Player activator = sa.getActivatingPlayer();
 
         // Replacement effects
         for (final ReplacementEffect re : card.getReplacementEffects()) {
@@ -253,7 +257,7 @@ public class AiController {
             SpellAbility exSA = re.getOverridingAbility();
 
             if (exSA != null) {
-                exSA = exSA.copy(activatingPlayer);
+                exSA = exSA.copy(activator);
 
                 // ETBReplacement uses overriding abilities.
                 // These checks only work if the Executing SpellAbility is an Ability_Sub.
@@ -312,17 +316,15 @@ public class AiController {
                 continue;
             }
 
-            SpellAbility exSA = tr.ensureAbility().copy(activatingPlayer);
+            SpellAbility exSA = tr.ensureAbility().copy(activator);
 
             if (api != null) {
                 if (exSA.getApi() != api) {
                     continue;
                 }
                 rightapi = true;
-                if (!(exSA instanceof AbilitySub)) {
-                    if (!ComputerUtilCost.canPayCost(exSA, player, true)) {
-                        return false;
-                    }
+                if (!(exSA instanceof AbilitySub) && !ComputerUtilCost.canPayCost(exSA, player, true)) {
+                    return false;
                 }
             }
 
@@ -344,7 +346,7 @@ public class AiController {
             if (exSA instanceof AbilitySub && !doTrigger(exSA, false)) {
                 // AI would not run this trigger if given the chance
                 if (api == null && card.isCreature() && !ComputerUtilAbility.isFullyTargetable(exSA) &&
-                        (ComputerUtil.aiLifeInDanger(activatingPlayer, true, 0) || "BadETB".equals(tr.getParam("AILogic")))) {
+                        (ComputerUtil.aiLifeInDanger(activator, true, 0) || "BadETB".equals(tr.getParam("AILogic")))) {
                     // trigger will not run due to lack of targets and we 1. desperately need a creature or 2. are happy about that
                     continue;
                 }
