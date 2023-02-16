@@ -4999,6 +4999,43 @@
 	"colors": "G"
 },
 {
+	"name": "Illusionist",
+	"sprite": "sprites/blue_wiz2.atlas",
+	"deck": [
+		"decks/illusion.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Blue"
+			],
+			"rarity": [
+				"rare"
+			]
+		}
+	],
+	"colors": "U"
+},
+{
 	"name": "Immersturm Demon",
 	"sprite": "sprites/devil_2.atlas",
 	"deck": [
@@ -5070,6 +5107,92 @@
 		}
 	],
 	"colors": "BR"
+},
+{
+	"name": "Jace",
+	"sprite": "sprites/dungeon/jace.atlas",
+	"deck": [
+		"decks/jace_boss.dck"
+	],
+	"spawnRate": 1,
+	"scale": 0.5,
+	"difficulty": 0.1,
+	"speed": 30,
+	"life": 24,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Jace, the Mind Sculptor"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Jace, the Perfected Mind"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Jace's Defeat"
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Enchantment",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 100,
+			"addMaxCount": 900
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Jace's Signature Hoodie"
+		}
+	],
+	"colors": "UW"
 },
 {
 	"name": "Kavu",

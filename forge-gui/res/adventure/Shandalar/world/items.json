@@ -978,5 +978,17 @@
         "Ooze Flux"
       ]
 }
+},
+{
+    "name": "Jace's Signature Hoodie",
+    "equipmentSlot": "Body",
+    "iconName": "IronArmor",
+    "effect": {
+      "lifeModifier": -1,
+      "cardRewardBonus": 1,
+      "startBattleWithCard": [
+        "Jace's Signature Hoodie"
+      ]
+}
 }
 ]
