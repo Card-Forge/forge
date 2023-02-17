@@ -6307,7 +6307,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public SpellAbility getCastSA() {
         return castSA;
     }
-
     public void setCastSA(SpellAbility castSA) {
         this.castSA = castSA;
     }
