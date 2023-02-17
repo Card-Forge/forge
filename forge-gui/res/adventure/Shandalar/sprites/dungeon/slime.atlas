@@ -1,29 +1,20 @@
 slime.png
-size: 480,230
+size: 246,91
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
-  xy: 51,38
-  size: 43, 39
+  xy: 2,23
+  size: 12, 9
 Idle 
-  xy: 18, 10
-  size: 87, 97
+  xy: 2, 14
+  size: 59, 31
 Idle 
-  xy: 116, 12
-  size: 88, 89
+  xy: 69, 15
+  size: 50, 29
 Idle 
-  xy: 211, 18
-  size: 88, 88
-Attack 
-  xy: 16, 152
-  size: 108, 83
-Attack 
-  xy: 127, 125
-  size: 110, 105
-Attack 
-  xy: 252, 107
-  size: 116, 123
-Attack 
-  xy: 378, 125
-  size: 100, 94
+  xy: 136, 10
+  size: 40, 35
+Idle 
+  xy: 198, 13
+  size: 47, 32

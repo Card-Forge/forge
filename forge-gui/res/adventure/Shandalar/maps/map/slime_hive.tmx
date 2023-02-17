@@ -7,17 +7,17 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="13" name="subsublaag" width="37" height="23">
   <data encoding="base64" compression="zlib">
-   eJztlDEKgDAMRV1UBD2Ui0fwvJ7GQzhJKBksiW1qajL0wR+kkjzS0K5rNPI5e2sDnmN8foOrlS/25vpvk7xebScJq9JctZzQR8uLYlhCcoh3kfKCfyBwFieHaw7RQuqA/hhpL4lLjhPsEOdR+y3g9hid3uYjfQu+Es+Jmou1E4WVU+ru/vZKgU6evDy5ILWd9oL6tZ1K6nu8O4/cko4uDQ==
+   eJxjYBgFo4Ay4MY50C7ABF4D7KYPWMSQ3URqmD1jpcg5YPCBAbu7yAGOVHAPDFDDTTD3UNNd6ICNF4KJAQfYUfm0cNcvHgimJkB3N60ALeNpqIGBLD9x5b3BWKYPVjcNNnfB3DSY3DWY3AIDtHZTGBnm09pN5Jg/GONuMAIA0TkQYA==
   </data>
  </layer>
  <layer id="10" name="sublaag" width="37" height="23">
   <data encoding="base64" compression="zlib">
-   eJzNll9OwzAMxieklQax3Wma1CPsEXjkaHALJs6y7QY8bsyk1pyvX5yUFglLn5I2sf2Lk/5pVotF4+jjngvnbNfzqZbluIzKMdlrG9/G+EsmNhfv1TLhWlks0evjkEnNY2I52bruVilPDZOtE/MpSQz9bH4mmXMKUYzF86thLOV/b291Z7USs0xsfWiMdQzfIQxjlXxwHzbLqEuIbU0d3X261ukcYqv3xq550/vsAvfxfNk8iWOFz1HpbP/wPKQxZI2YB01rW+JRJnnWVcjEjMXZhVuO2vOmfp9tKpmDTLmcJUm9Lr3EXvrW1hp57Dg+x/ZdgLkOTSqPS8dtq31W4+eQMum7VvpdiP1uIg+ylHz2bcp0CsPvDjKNEfKzmpXqhN8iMY+pM2L3GFOOUftnOFPsO91l9n0uJqbSv8MUpt9yKRMbUybcP8zr6T8ylbjeWn/868r2FDjTFMm7N5dTz0xuXHis5mLyaoVM9jr3Py5r1LVOkcczVt+PMc9P
+   eJy1lsFtwzAMRXVolARou0UHcQN4hB577hbpFD3mWnSLjJJLc84ESUzYRFj2k6JthcBDLEUwnylZcn5KKTvslxg9ZvNcj6jLcdFjOcm2vL+MezqhsbrPc5JtFMjn4/G/E4fnhJ4Zxdfa7yvVSc9ZhFKMdZIekm1O6TPHHOc6aS+dk64puF9eW36eC/LRTqgm+v7NoucVjJVE6uNhOaG5aIZ8B6NONZxkrUpruxl+37rxL8sbPw91a0TvOqOdUJxS76Rh10iMdTqlMsjp3LHruAS8OPfOoR2IOLED6vNyTIH22XYdqxPy/M3z8n+v/rowU52IWnXRZ5HnxPOrx3A7mterJ3mguUsTnFrHQb9T+n/97VDTqRUOnp/lRPuctcbR/Mm8cozuKzkh2Km0J5R8LGrvBchpjE/EC60Zi3c1d3OJOnGb3kXre5zOF7qnPG+mENl7olwBkLWVdw==
   </data>
  </layer>
  <layer id="9" name="slim" width="37" height="23">
   <data encoding="base64" compression="zlib">
-   eJy1Vktug0AMpeqPiULvlAVJlAN02UVWvU5PQZP0EL0LJOEEXURVW6yZJx7GgUnVPumJCRD72WObSZI+5q7lwvl7Oa1XtBYsnafGXWbzNxAt2zRJ3lLvu2iudfCLdawmsbMLtsQua7pEM/JTNtyHaxXWedC7j9TEeYYmJmKH9sr1bQjlv4eGx8BN8+77vWdOz15Tf4UmK2bO8zb4RM4Qm8ScZN6eUGtCHbFu+R80rcg2WNJa/HH8or923dxy3kWvxCx2xd9p2s83bPFeiBYAeUJMGxXXivxjn6ENuWWgPnLKg8aS6gg43HpdchVUrpvDIm39Wb2gc6uBdxEr70GltEDPLFAwU78B1ClyXAbdeyNGxlfQzPPnOutS7wXj0XV1MTC/hvwL1uEZ+0FPWtD9xn1nxSf4dp4xWJ95TzQ9T1vO3TgXkT7H9BRpOz9A1CADfc81taM5gJoYxaTvDz7Rn6Xr9gf8aPbyMPldHrQ/ns1DcWHu1f+wN5bGsfyKlqPr65m77nzEnjNR5/rZUI/G4Co7X8MH6i3MFXyTWDfmiEDHwijSfj0hBo4L+dFnBytXglz5X1ygCXEx+Vxh7dPJ8An7hYoBz/Et5Xs3Eeezlwc7Vu531J2endCk5zz863usi+uK982at2xf53ml7OP7V6v7Q4Bt1sX7hnMq9wOeIz9PDT+y9jusY7ZyEavr0zj3cE5wtuO653NhPeD7Ej38H+5dAcet63GMfwE+xwJWf8XyB8LPIec=
+   eJytVktOwzAQDaKlMWqOwUFASlvlEKw5UZddsOn3EBwFKf1kyYpFxYKM4keeJ5MmrRjpyVacjN+88UwcRU2buBpTVz1LaZ7RXGzmKmh7SGzcYsJlE0fRLq72XpZj4ffFvC8n8bP1vsQvc7qGM/TJSxz8uPfz1PM99OTEOoMTA7GD+941fQjk22OJk8e6fPdjVCGltVVcjeBkxcw6b/ye8xJfUYi59yfQnHCOmLdoAk4Z+QZymkvMrL/wL1TsFifxK/udx029oSXnQrjAoBNiWqu4MiOHlmlOKemgbUbn6C/WYfjO3oUaLuM6l1oTy2aGTgXFyjnYKy7g8+zxQnPNc2fEx8b9hXMgecxcuH6fhNC5YPv0PCxOaYc+mtOckNKa9R3Xm+C9xILefRpVAKfjsMYl47rQuRBOb+Nqf4xdmLZoIDzkLMl46tDJ8qHP4IRGXdtb6gPbuBmXjrFN9y5O2Ae1hnlDh8fLvtssd2E9cm9ui2vhahQ9c3Ot8bnT/cR6Fz1E89G1uYzrfgjg/6LXdI0uroztLmk/w0dX+89d+B9n3ugjYjoW5oT4xXQMHBf00XcHSyuxVO0/7cHJMq4X3CusPJ2NPWcUI8eAdfxL+dnghvsZc9rEYb9iTmLgpPs89tfP2nghb3zPYWP/WudM+cf/r1DPLxl8D5LmecT5mLqwHrAOfV5LfCf1HUvHbGnRl9ePce9hTXC3Q+9exeG9sLiw9zV8+BuuXTGOW5/HLvyH4bxyj7Tqqy9+AV6VDtE=
   </data>
  </layer>
  <layer id="12" name="clutter" width="37" height="23">
@@ -25,14 +25,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYCAPuHEi2K6cqPyBAoPNTW6cg9dNMDwY3IQOng4y99AbLOdgYFjJgSr2eIDDBGQ/LF4cWRE0jI2sjt4A7AYuBoYwoN3/ODHdhA2AwngFlnCmBngODYNPaGEBCy8YBoXVDx5EfIP4TziJT/9svAhMCjjAAcEgMI0BdzySkw/JdRMIoIcXDCynQRzBwhyXnTBgzEh9u3EBbGGO7D50t25iw20WIX/BAKGwJWQOMfkH3QwQn1j3URPgC8uBACvQ0uAtFgaG2yzUtSOCnTT1oLaAxyAIG3IBoXgdDPE+mMA8npFpNy0AAKwTN0M=
+   eJzllU0OgjAQhcdEgRo9hqfQGDei8QQeyDO4k62/t1LUJUeQBprWsaVTfsTEl7wE0qHvYzoEgHIKmbyes/f7tkRlCpm0ba3Ke+GMOpiK6ky69zLr9jIxmTJPAcAZeVWRCSt24OFepk7Sml3qCLLruplceFSmcQdg0inPJHQlPENlEt6nZ/csw8Skcb8EZxEHVuIQjcXzZ32ALZOe9vW1LkxV9Mj3E30e+ZlZV84Y96qAh8LkDaWpSjTmXBsP4BC4M/EZaoJJzIRtpnVM+Fu5BJ+1uiwbT5Lvfcut7kudoYhlpsjUE926KpVrYcnC5+eqI+H5SPnPCCZqD+qUmomZlkyejcsZVRH/3nAmny/xX41rYFr7bvWiF1zf7AVVNpai9V98l7Z5osF/ZjehF6Zzhr0=
   </data>
  </layer>
  <objectgroup id="11" name="obj">
   <object id="75" gid="303" x="506.5" y="325" width="16" height="16"/>
   <object id="76" gid="303" x="316" y="366" width="16" height="16"/>
-  <object id="77" gid="2347" x="442" y="305.5" width="16" height="16"/>
-  <object id="78" gid="5197" x="273" y="298.5" width="16" height="16"/>
   <object id="89" template="../obj/enemy.tx" x="78" y="219.5">
    <properties>
     <property name="enemy" value="Cave Spider"/>
@@ -63,7 +61,7 @@
     <property name="enemy" value="Horror"/>
    </properties>
   </object>
-  <object id="100" template="../obj/enemy.tx" x="176.588" y="143.029">
+  <object id="100" template="../obj/enemy.tx" x="178.088" y="149.029">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Slime Boss Effect&quot;]
 }</property>

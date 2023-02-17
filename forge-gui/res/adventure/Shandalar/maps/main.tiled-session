@@ -2318,8 +2318,8 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240.33333333333331,
-                "y": 238.33333333333334
+                "x": 240.66666666666666,
+                "y": 238.3333333333333
             }
         },
         "map/main_story/spawn.tmx": {
@@ -2533,7 +2533,7 @@
             "scale": 0.75,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 401.3333333333333,
+                "x": 399.9999999999999,
                 "y": 400.6666666666667
             }
         },
@@ -2816,11 +2816,11 @@
             "expandedObjectLayers": [
                 11
             ],
-            "scale": 3,
-            "selectedLayer": 3,
+            "scale": 2,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 296,
-                "y": 183.83333333333331
+                "x": 442,
+                "y": 171.25
             }
         },
         "map/snowabbey_1.tmx": {
@@ -2836,7 +2836,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 240.45280072864483,
-                "y": 136.46477132262055
+                "y": 137.08932405178587
             }
         },
         "map/snowabbey_3.tmx": {
