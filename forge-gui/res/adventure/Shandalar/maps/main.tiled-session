@@ -6,9 +6,9 @@
     "activeFile": "map/jacehold.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "map/main_story",
-        "tileset",
         "obj",
+        "tileset",
+        "map/main_story",
         "map"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -1995,7 +1995,7 @@
             "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 267,
+                "x": 265.5,
                 "y": 123.25
             }
         },
@@ -3028,7 +3028,7 @@
             }
         },
         "tileset/buildings.tsx": {
-            "scaleInDock": 3,
+            "scaleInDock": 1,
             "scaleInEditor": 1.5
         },
         "tileset/main.tsx": {
