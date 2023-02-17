@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="68">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzt0s0JgDAMBeDi707u5QaO4RAFd3EckR4CaUzatLEHwQe55PC+EnUujp/dI2EH0yq0H5tfc89R70oTOuhYzZyrcVImvhd9d86FrBNvXeh93PeR7qZxwYT9Mceu9halLr2Zf8FNDY70b2vdEpu6nG11ub2ms8Sl2fv6Tou7DHIn7YWdxdMEO2BtXVvzT31uHSBzzQ==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJwrYGdgKBgkGASQ2djAQNlLC7tJAeh6W/gQmFZ2fuBAYHT7sNmLHo7oNDGglI2BQZQdFU9jRXULMkZ3KyUA3V4Q7uOE4DYCmFSA7FZ0O0GAGHtJBddZSdeDDxCKE1rZiwvocTEw6KPhgQCiBNI7IXlyAShNbKOR2aNgeAEAYnxXXg==
+  </data>
+ </layer>
+ <layer id="2" name="Grass" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgaYAM7Kh7q9rYxEqfuGisqpjVAtw+Go1jw6/vAAcGU2osN1DPh1tfHCcGU2AsComhx60kgfkDq0fWQai/MDGSzCJmLrpZUgG4nJXig7CXWPfpc9LEXHYsMgJ3o6WcUj2J8GAClWjJl
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYKAOqGPEL2/IysBgxIpfnhwgw4Rf/jzQ3At4zD5Ppr2DFSxkxhSbwUKeWbNYUDE28IodQtuTYAch91TzQugqKN0AjGMPtPQFs5daoA1ofjsUdwCxMdDuNZwMDM+Q7F2KpN6YlzL7ZkPDQATJH2pIaRnZ3mosdi3FFCIIlIHmb2PDtHcHEvsZlnyMzX5S7YWBQ0D2YSDWBOIwDogYKJ7R7S0DurMciCvYIPGADND5+OyFpSFcepDtBcUpKFxEgVgMLX2VI4UBKDzmMCP0kApA5ncwobprE1BsMxBvYUe1C90OK7S8A9MPokFmaDKh6tGAhjcIqwLdrIZePjBDMRqYzEY8NmJHuL+ZCYJbkOIc5DYDduLMwhb+S7kRbOSwyeGA6DHEY3YeByKMjNHiEBkghz8+gJyOzpJZBhFKv4TkcdmLrg89HSEDAPhsSyM=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="209.458" y="270.126">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="287.57" y="95.548"/>
+  <object id="50" template="../obj/enemy.tx" x="68.9926" y="171.149">
+   <properties>
+    <property name="enemy" value="Water Elemental"/>
+   </properties>
+  </object>
+  <object id="52" template="../obj/gold.tx" x="445.46" y="107.702"/>
+  <object id="62" template="../obj/gold.tx" x="40.5566" y="168.819"/>
+  <object id="63" template="../obj/enemy.tx" x="352.052" y="110.643">
+   <properties>
+    <property name="enemy" value="Water Elemental"/>
+   </properties>
+  </object>
+  <object id="64" template="../obj/enemy.tx" x="431.758" y="142.251">
+   <properties>
+    <property name="enemy" value="Crab"/>
+   </properties>
+  </object>
+  <object id="65" template="../obj/enemy.tx" x="298.456" y="190.349">
+   <properties>
+    <property name="enemy" value="Disciple of Teferi"/>
+   </properties>
+  </object>
+  <object id="66" template="../obj/enemy.tx" x="271.887" y="156.909">
+   <properties>
+    <property name="enemy" value="Disciple of Teferi"/>
+   </properties>
+  </object>
+  <object id="67" template="../obj/enemy.tx" x="241.196" y="129.424">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Eidolon of Rhetoric&quot;,&quot;Static Orb&quot;,&quot;Grafdigger's Cage&quot;,&quot;Torpor Orb&quot;]
+}</property>
+    <property name="enemy" value="Teferi"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
