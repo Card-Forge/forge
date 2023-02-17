@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Phyrexia: All Will Be One #01
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/01/latest-3-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn.
+[state]
+humanlife=20
+humancounters=POISON=7
+ailife=11
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Sawblade Scamp;Claim the Firstborn;Dismember;Gleeful Demolition;Roar of Resistance
+humanbattlefield=Dauthi Voidwalker;Fable of the Mirror-Breaker|Transformed;Swamp;Swamp;Mountain;Mountain
+aibattlefield=Venerated Rotpriest;Spellskite
+humanprecast=Wily Goblin:TrigToken
