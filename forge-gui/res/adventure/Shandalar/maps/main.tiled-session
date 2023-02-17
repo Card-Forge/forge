@@ -6,8 +6,8 @@
     "activeFile": "map/jacehold.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "obj",
         "tileset",
+        "obj",
         "map/main_story",
         "map"
     ],
@@ -1993,7 +1993,7 @@
                 4
             ],
             "scale": 2,
-            "selectedLayer": 3,
+            "selectedLayer": 0,
             "viewCenter": {
                 "x": 265.5,
                 "y": 123.25
