@@ -29,8 +29,8 @@ public class SpellSmithScene extends UIScene {
     private static SpellSmithScene object;
 
     public static SpellSmithScene instance() {
-        if(object==null)
-            object=new SpellSmithScene();
+        if (object == null)
+            object = new SpellSmithScene();
         return object;
     }
 
@@ -42,54 +42,34 @@ public class SpellSmithScene extends UIScene {
     SelectBox<CardEdition> editionList;
     //Button containers.
     final private HashMap<String, TextraButton> rarityButtons = new HashMap<>();
-    final private HashMap<String, TextraButton> costButtons   = new HashMap<>();
-    final private HashMap<String, TextraButton> colorButtons  = new HashMap<>();
+    final private HashMap<String, TextraButton> costButtons = new HashMap<>();
+    final private HashMap<String, TextraButton> colorButtons = new HashMap<>();
     //Filter variables.
     private String edition = "";
-    private String rarity  = "";
-    private int cost_low   = -1;
-    private int cost_high  = 9999;
+    private String rarity = "";
+    private int cost_low = -1;
+    private int cost_high = 9999;
     //Other
-    private final float basePrice  = 125f;
+    private final float basePrice = 125f;
     private int currentPrice = 0;
     private int currentShardPrice = 0;
+    private List<CardEdition> editions = null;
 
-    private SpellSmithScene() { super(Forge.isLandscapeMode() ? "ui/spellsmith.json" : "ui/spellsmith_portrait.json");
+    private SpellSmithScene() {
+        super(Forge.isLandscapeMode() ? "ui/spellsmith.json" : "ui/spellsmith_portrait.json");
 
-        List<CardEdition> editions = StaticData.instance().getSortedEditions();
-        editions = editions.stream().filter(input -> {
-            if(input == null)
-                return false;
-            if(input.getType()==        CardEdition.Type.REPRINT||input.getType()== CardEdition.Type.PROMO||input.getType()== CardEdition.Type.COLLECTOR_EDITION)
-                return false;
-            List<PaperCard> it = StreamSupport.stream(RewardData.getAllCards().spliterator(), false)
-                    .filter(input2 -> input2.getEdition().equals(input.getCode())).collect(Collectors.toList());
-            if(it.size()==0)
-                return false;
-            return (!Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getCode()));
-        }).collect(Collectors.toList());
+
         editionList = ui.findActor("BSelectPlane");
         rewardDummy = ui.findActor("RewardDummy");
         rewardDummy.setVisible(false);
-        editionList.clearItems();
-        editionList.showScrollPane();
-        editionList.setItems(editions.toArray(new CardEdition[editions.size()]));
-        editionList.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                CardEdition E = editionList.getSelected();
-                edition = E.getCode();
-                editionList.setColor(Color.RED);
-                filterResults();
-            }
-        });
+
 
         pullUsingGold = ui.findActor("pullUsingGold");
         pullUsingGold.setDisabled(true);
         pullUsingShards = ui.findActor("pullUsingShards");
         pullUsingShards.setDisabled(true);
         playerGold = Controls.newAccountingLabel(ui.findActor("playerGold"), false);
-        playerShards = Controls.newAccountingLabel(ui.findActor("playerShards"),true);
+        playerShards = Controls.newAccountingLabel(ui.findActor("playerShards"), true);
         poolSize = ui.findActor("poolSize");
         for (String i : new String[]{"BBlack", "BBlue", "BGreen", "BRed", "BWhite", "BColorless"}) {
             TextraButton button = ui.findActor(i);
@@ -141,6 +121,21 @@ public class SpellSmithScene extends UIScene {
         });
     }
 
+    public void loadEditions() {
+        if (editions != null)
+            return;
+        editions = StaticData.instance().getSortedEditions().stream().filter(input -> {
+            if (input == null)
+                return false;
+            if (input.getType() == CardEdition.Type.REPRINT || input.getType() == CardEdition.Type.PROMO || input.getType() == CardEdition.Type.COLLECTOR_EDITION)
+                return false;
+            List<PaperCard> it = StreamSupport.stream(RewardData.getAllCards().spliterator(), false)
+                    .filter(input2 -> input2.getEdition().equals(input.getCode())).collect(Collectors.toList());
+            if (it.size() == 0)
+                return false;
+            return (!Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getCode()));
+        }).collect(Collectors.toList());
+    }
 
     public boolean done() {
         if (rewardActor != null) rewardActor.remove();
@@ -269,6 +264,20 @@ public class SpellSmithScene extends UIScene {
         for (Map.Entry<String, TextraButton> B : colorButtons.entrySet()) B.getValue().setColor(Color.WHITE);
         for (Map.Entry<String, TextraButton> B : costButtons.entrySet()) B.getValue().setColor(Color.WHITE);
         for (Map.Entry<String, TextraButton> B : rarityButtons.entrySet()) B.getValue().setColor(Color.WHITE);
+        loadEditions(); //just to be safe since it's preloaded, if somehow edition is null, then reload it
+        editionList.clearListeners();
+        editionList.clearItems();
+        editionList.showScrollPane();
+        editionList.setItems(editions.toArray(new CardEdition[editions.size()]));
+        editionList.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                CardEdition E = editionList.getSelected();
+                edition = E.getCode();
+                editionList.setColor(Color.RED);
+                filterResults();
+            }
+        });
         editionList.setColor(Color.WHITE);
         filterResults();
         super.enter();
