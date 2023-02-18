@@ -7,6 +7,5 @@ SVar:Y:Count$Valid Permanent.Blue+YouCtrl/LimitMax.1
 SVar:Z:Count$Valid Permanent.Black+YouCtrl/LimitMax.1
 SVar:X:SVar$Y/Plus.Z
 SVar:P:Count$Compare X EQ2.5.1
-DeckHints:Color$Blue|Black
-AI:RemoveDeck:Random
+DeckNeeds:Color$Blue|Black
 Oracle:At the beginning of your upkeep, if you control a blue or black permanent, target creature gets +1/+1 until end of turn. If you control a blue permanent and a black permanent, that creature gets +5/+5 until end of turn instead.

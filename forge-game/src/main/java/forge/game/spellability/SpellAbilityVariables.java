@@ -76,8 +76,11 @@ public class SpellAbilityVariables implements Cloneable {
         this.allTargetsLegal = sav.isAllTargetsLegal();
         this.shareAllColors = sav.getShareAllColors();
         this.isPresent = sav.getIsPresent();
+        this.isPresent2 = sav.getIsPresent2();
         this.presentCompare = sav.getPresentCompare();
+        this.presentCompare2 = sav.getPresentCompare2();
         this.presentDefined = sav.getPresentDefined();
+        this.presentDefined2 = sav.getPresentDefined2();
         this.playerDefined = sav.getPlayerDefined();
         this.playerContains = sav.getPlayerContains();
         this.presentZone = sav.getPresentZone();
@@ -154,13 +157,15 @@ public class SpellAbilityVariables implements Cloneable {
 
     /** The s is present. */
     private String isPresent = null;
+    private String isPresent2 = null;
 
     /** The present compare. */
-    private String presentCompare = "GE1"; // Default Compare to Greater or
-                                           // Equal to 1
+    private String presentCompare = "GE1"; // Default: greater than or equal to 1
+    private String presentCompare2 = "GE1";
 
     /** The present defined. */
     private String presentDefined = null;
+    private String presentDefined2 = null;
 
     /** The player defined. */
     private String playerDefined = null;
@@ -463,6 +468,10 @@ public class SpellAbilityVariables implements Cloneable {
         this.isPresent = present;
     }
 
+    public final void setIsPresent2(final String present) {
+        this.isPresent2 = present;
+    }
+
     /**
      * <p>
      * Setter for the field <code>presentCompare</code>.
@@ -473,6 +482,10 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public final void setPresentCompare(final String compare) {
         this.presentCompare = compare;
+    }
+
+    public final void setPresentCompare2(final String compare) {
+        this.presentCompare2 = compare;
     }
 
     /**
@@ -504,6 +517,10 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public final void setPresentDefined(final String defined) {
         this.presentDefined = defined;
+    }
+
+    public final void setPresentDefined2(final String defined) {
+        this.presentDefined2 = defined;
     }
 
     // Checking the values of SVars (Mostly for Traps)
@@ -658,6 +675,9 @@ public class SpellAbilityVariables implements Cloneable {
     public final String getPresentCompare() {
         return this.presentCompare;
     }
+    public final String getPresentCompare2() {
+        return this.presentCompare2;
+    }
 
     /**
      * Gets the life total.
@@ -726,6 +746,10 @@ public class SpellAbilityVariables implements Cloneable {
     public final String getPresentDefined() {
         return this.presentDefined;
     }
+    public final String getPresentDefined2() {
+        return this.presentDefined2;
+    }
+
 
     /**
      * Set the player defined.
@@ -877,6 +901,9 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public final String getIsPresent() {
         return this.isPresent;
+    }
+    public final String getIsPresent2() {
+        return this.isPresent2;
     }
 
     public final void setColorToCheck(final String s) {
