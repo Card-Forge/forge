@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -125,10 +126,10 @@ public class GameHUD extends Stage {
         shards.setText("[%95][+Shards] 0");
         money.setText("[%95][+Gold] ");
         lifePoints.setText("[%95][+Life] 20/20");
-        AdventurePlayer.current().onLifeChange(() -> lifePoints.setText("[%95][+Life]"+ lifepointsTextColor +" "+AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
-        AdventurePlayer.current().onShardsChange(() -> shards.setText("[%95][+Shards] "+AdventurePlayer.current().getShards()));
+        AdventurePlayer.current().onLifeChange(() -> lifePoints.setText("[%95][+Life]" + lifepointsTextColor + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
+        AdventurePlayer.current().onShardsChange(() -> shards.setText("[%95][+Shards] " + AdventurePlayer.current().getShards()));
 
-        WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("[%95][+Gold] "+String.valueOf(AdventurePlayer.current().getGold())));
+        WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("[%95][+Gold] " + String.valueOf(AdventurePlayer.current().getGold())));
         addActor(ui);
         addActor(miniMapPlayer);
         console = new Console();
@@ -305,7 +306,7 @@ public class GameHUD extends Stage {
         Forge.switchScene(InventoryScene.instance());
     }
 
-    private void exitToWorldMap(){
+    private void exitToWorldMap() {
         if (!GameScene.instance().isNotInWorldMap()) //prevent showing this dialog to WorldMap
             return;
         dialog.getButtonTable().clear();
@@ -323,26 +324,25 @@ public class GameHUD extends Stage {
         showDialog();
 
     }
-    private void exitDungeonCallback(){
-        hideDialog();
-        Forge.switchScene(GameScene.instance());
-        WorldStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
-        MapStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
 
-        gameStage.getPlayerSprite().stop();
-        exitToWorldMapActor.setVisible(false);
+    private void exitDungeonCallback() {
+        hideDialog(true);
+    }
+
+    private void hideDialog() {
+        hideDialog(false);
     }
 
     private void menu() {
         gameStage.openMenu();
     }
 
-    public void setVisibility(Actor actor, boolean visible) {
+    private void setVisibility(Actor actor, boolean visible) {
         if (actor != null)
             actor.setVisible(visible);
     }
 
-    public void setAlpha(Actor actor, boolean visible) {
+    private void setAlpha(Actor actor, boolean visible) {
         if (actor != null) {
             if (visible)
                 actor.getColor().a = 1f;
@@ -407,7 +407,7 @@ public class GameHUD extends Stage {
         return super.keyDown(keycode);
     }
 
-    public boolean dialogInput(int keycode) {
+    private boolean dialogInput(int keycode) {
         if (dialogOnlyInput) {
             if (KeyBinding.Up.isPressed(keycode)) {
                 selectPreviousDialogButton();
@@ -422,7 +422,7 @@ public class GameHUD extends Stage {
         return true;
     }
 
-    public void performTouch(Actor actor) {
+    private void performTouch(Actor actor) {
         if (actor == null)
             return;
         actor.fire(eventTouchDown);
@@ -434,7 +434,7 @@ public class GameHUD extends Stage {
         }, 0.10f);
     }
 
-    public void hideButtons() {
+    private void hideButtons() {
         if (isShowing)
             return;
         if (isHiding)
@@ -449,7 +449,7 @@ public class GameHUD extends Stage {
         FThreads.delayInEDT(300, () -> isHiding = false);
     }
 
-    public void showButtons() {
+    private void showButtons() {
         if (console.isVisible())
             return;
         if (isHiding)
@@ -470,7 +470,7 @@ public class GameHUD extends Stage {
         debugMap = b;
     }
 
-    public void showDialog() {
+    private void showDialog() {
 
         dialogButtonMap.clear();
         for (int i = 0; i < dialog.getButtonTable().getCells().size; i++) {
@@ -483,8 +483,21 @@ public class GameHUD extends Stage {
             this.setKeyboardFocus(dialogButtonMap.first());
     }
 
-    public void hideDialog() {
-        dialog.hide(Actions.sequence(Actions.sizeTo(dialog.getOriginX(), dialog.getOriginY(), 0.3f), Actions.hide()));
+    private void hideDialog(boolean exitDungeon) {
+        //move exit dungeon code here to ensure the hide animation is finished before exiting to worldmap
+        dialog.hide(Actions.sequence(Actions.sizeTo(dialog.getOriginX(), dialog.getOriginY(), 0.3f), Actions.hide(), new Action() {
+            @Override
+            public boolean act(float v) {
+                if (exitDungeon) {
+                    Forge.switchScene(GameScene.instance());
+                    WorldStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
+                    MapStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
+                    gameStage.getPlayerSprite().stop();
+                    exitToWorldMapActor.setVisible(false);
+                }
+                return true;
+            }
+        }));
         dialogOnlyInput = false;
         selectedKey = null;
     }
