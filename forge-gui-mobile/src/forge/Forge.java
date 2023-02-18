@@ -337,6 +337,7 @@ public class Forge implements ApplicationListener {
     private static void loadAdventureResources(boolean startScene) {
         try {
             Config.instance().loadResources();
+            SpellSmithScene.instance().loadEditions();
             if (startScene)
                 switchScene(StartScene.instance());
         } catch (Exception e) {
