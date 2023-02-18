@@ -20,6 +20,7 @@ import forge.assets.FBufferedImage;
 import forge.assets.FSkin;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
+import forge.deck.DeckSection;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.card.CounterEnumType;
@@ -167,14 +168,19 @@ public class DuelScene extends ForgeScene {
         int changeStartCards = 0;
         int extraManaShards = 0;
         Array<IPaperCard> startCards = new Array<>();
+        Array<IPaperCard> startCardsInCommandZone = new Array<>();
 
         for (EffectData data : effects) {
             lifeMod += data.lifeModifier;
             changeStartCards += data.changeStartCards;
             startCards.addAll(data.startBattleWithCards());
+            startCardsInCommandZone.addAll(data.startBattleWithCardsInCommandZone());
+
             extraManaShards += data.extraManaShards;
         }
         player.addExtraCardsOnBattlefield(startCards);
+        player.addExtraCardsInCommandZone(startCardsInCommandZone);
+
         player.setStartingLife(Math.max(1, lifeMod + player.getStartingLife()));
         player.setStartingHand(player.getStartingHand() + changeStartCards);
         player.setManaShards((player.getManaShards() + extraManaShards));

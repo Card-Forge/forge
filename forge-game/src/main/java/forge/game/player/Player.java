@@ -2891,6 +2891,16 @@ public class Player extends GameEntity implements Comparable<Player> {
             com.add(conspire);
         }
 
+        // Adventure Mode items
+        Iterable<? extends IPaperCard> adventureItemCards = registeredPlayer.getExtraCardsInCommandZone();
+        if (adventureItemCards != null) {
+            for (final IPaperCard cp : adventureItemCards) {
+                Card c = Card.fromPaperCard(cp, this);
+                com.add(c);
+                c.setStartsGameInPlay(true);
+            }
+        }
+
         for (final Card c : getCardsIn(ZoneType.Library)) {
             for (KeywordInterface inst : c.getKeywords()) {
                 String kw = inst.getOriginal();

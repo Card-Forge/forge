@@ -2,5 +2,6 @@ Name:Sleep Wand
 ManaCost:no cost
 Types:Artifact
 S:Mode$ Continuous | Description$ Provided by Sleep Wand (Equipped Item - Left)
-A:AB$ PutCounter | Cost$ PayShards<2> Sac<1/CARDNAME> | ValidTgts$ Creature | ExileOnMoved$ Battlefield ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ Stun | CounterNum$ 1 | StackDescription$ Put a stun counter on target creature. (If a permanent with a stun counter would become untapped, remove one from it instead.)
-Oracle: Provided by Sleep Wand. Pay {M}, sacrifice Sleep Wand: Put a stun counter on target creature.
+A:AB$ PutCounter | Cost$ PayShards<2> T | ActivationZone$ Command | SubAbility$ Eject | ValidTgts$ Creature | ExileOnMoved$ Battlefield ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ Stun | CounterNum$ 1 | StackDescription$ Put a stun counter on target creature. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+Oracle: Pay {M}, exile Sleep Wand: Put a stun counter on target creature.
+SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
