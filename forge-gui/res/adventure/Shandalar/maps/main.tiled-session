@@ -3,11 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/teferi.tmx",
+    "activeFile": "map/slime_hive.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "map",
         "obj",
+        "map",
         "map/main_story",
         "tileset"
     ],
@@ -2215,7 +2215,7 @@
             "selectedLayer": 4,
             "viewCenter": {
                 "x": 240,
-                "y": 911.6666666666665
+                "y": 911
             }
         },
         "map/main_story/final_castle_f1.tmx": {
@@ -2817,9 +2817,9 @@
                 11
             ],
             "scale": 2,
-            "selectedLayer": 4,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 442,
+                "x": 118.5,
                 "y": 171.25
             }
         },
@@ -3054,7 +3054,8 @@
         "map/monastery_3.tmx",
         "map/slime_hive.tmx",
         "map/kiora_island.tmx",
-        "map/teferi.tmx"
+        "map/teferi.tmx",
+        "map/main_story/skep.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",

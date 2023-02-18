@@ -1860,7 +1860,7 @@
 	"map": "maps/map/slime_hive.tmx"
 },
 {
-	"name": "Teferi's Hideout",
+	"name": "Teferi Hideout",
 	"type": "dungeon",
 	"count": 1,
 	"radiusFactor": 0.8,
