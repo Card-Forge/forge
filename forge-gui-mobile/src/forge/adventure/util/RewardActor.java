@@ -840,12 +840,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         public boolean longPress(Actor actor, float x, float y) {
             if (!frontSideUp())
                 return false;
-            TextraButton done = actor.getStage().getRoot().findActor("done");
-            if (done != null && Reward.Type.Card.equals(reward.type)) {
-                switchButton.setBounds(done.getX(), done.getY(), done.getWidth(), done.getHeight());
-                if (reward.getCard().hasBackFace())
-                    actor.getStage().addActor(switchButton);
-            }
             show();
             return super.longPress(actor, x, y);
         }
@@ -871,6 +865,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             tooltip_actor.setBounds(tooltip_actor.cImage.getX(), tooltip_actor.cImage.getY(), tooltip_actor.cImage.getPrefWidth(), tooltip_actor.cImage.getPrefHeight());
             tooltip_actor.cLabel.setX(Scene.getIntendedWidth() / 2 - tooltip_actor.width / 2);
             getStage().addActor(tooltip_actor);
+            TextraButton done = getStage().getRoot().findActor("done");
+            if (done != null && Reward.Type.Card.equals(reward.type)) {
+                switchButton.setBounds(done.getX(), done.getY(), done.getWidth(), done.getHeight());
+                if (reward.getCard().hasBackFace())
+                    getStage().addActor(switchButton);
+            }
             shown = true;
         }
 
