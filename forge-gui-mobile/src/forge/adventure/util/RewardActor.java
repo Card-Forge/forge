@@ -864,6 +864,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 return;
             tooltip_actor.setBounds(tooltip_actor.cImage.getX(), tooltip_actor.cImage.getY(), tooltip_actor.cImage.getPrefWidth(), tooltip_actor.cImage.getPrefHeight());
             tooltip_actor.cLabel.setX(Scene.getIntendedWidth() / 2 - tooltip_actor.width / 2);
+            tooltip_actor.cLabel.setY(Scene.getIntendedHeight() / 2 - tooltip_actor.inset);
             getStage().addActor(tooltip_actor);
             TextraButton done = getStage().getRoot().findActor("done");
             if (done != null && Reward.Type.Card.equals(reward.type)) {
