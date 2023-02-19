@@ -74,7 +74,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     boolean loaded = true;
     boolean alternate = false, shown = false;
 
-    public static int renderedCount = 0; //Counter for cards that require rendering a preview.
+    public int renderedCount = 0; //Counter for cards that require rendering a preview.
     static final ImageFetcher fetcher = GuiBase.getInterface().getImageFetcher();
     RewardImage toolTipImage;
     String description = "";
@@ -653,7 +653,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 drawCard(batch, image, x, width);
             } else if (!loaded) {
                 if (T == null)
-                    T = renderPlaceholder(getGraphics(), reward.getCard(), false);
+                    T = renderPlaceholder(new Graphics(), reward.getCard(), false);
                 drawCard(batch, T, x, width);
             }
         } else if (image != null) {
