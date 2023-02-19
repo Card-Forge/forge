@@ -14,7 +14,7 @@ public class StaticAbilityAttackRestrict {
         int max = Integer.MAX_VALUE;
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()
+                if (!stAb.checkConditions(MODE)
                         || stAb.hasParam("ValidDefender")) {
                     continue;
                 }
@@ -33,7 +33,7 @@ public class StaticAbilityAttackRestrict {
         int num = Integer.MAX_VALUE;
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()
+                if (!stAb.checkConditions(MODE)
                         || !stAb.hasParam("ValidDefender")) {
                     continue;
                 }
