@@ -75,7 +75,7 @@ public class CostAdjustment {
         // Sort abilities to apply them in proper order
         for (Card c : cardsOnBattlefield) {
             for (final StaticAbility stAb : c.getStaticAbilities()) {
-                if (stAb.getParam("Mode").equals("RaiseCost")) {
+                if (stAb.checkMode("RaiseCost")) {
                     raiseAbilities.add(stAb);
                 }
             }
@@ -191,10 +191,10 @@ public class CostAdjustment {
         // Sort abilities to apply them in proper order
         for (Card c : cardsOnBattlefield) {
             for (final StaticAbility stAb : c.getStaticAbilities()) {
-                if (stAb.getParam("Mode").equals("ReduceCost")) {
+                if (stAb.checkMode("ReduceCost")) {
                     reduceAbilities.add(stAb);
                 }
-                else if (stAb.getParam("Mode").equals("SetCost")) {
+                else if (stAb.checkMode("SetCost")) {
                     setAbilities.add(stAb);
                 }
             }

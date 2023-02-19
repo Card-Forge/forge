@@ -2580,14 +2580,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     }
 
                     boolean found = false;
-                    if (stAb.getParam("Mode").equals("CantBlockBy")) {
+                    if (stAb.checkMode("CantBlockBy")) {
                         if (!stAb.hasParam("ValidAttacker") || (stAb.hasParam("ValidBlocker") && stAb.getParam("ValidBlocker").equals("Creature.Self"))) {
                             continue;
                         }
                         if (stAb.matchesValidParam("ValidAttacker", this)) {
                             found = true;
                         }
-                    } else if (stAb.getParam("Mode").equals(StaticAbilityCantAttackBlock.MinMaxBlockerMode)) {
+                    } else if (stAb.checkMode(StaticAbilityCantAttackBlock.MinMaxBlockerMode)) {
                         if (stAb.matchesValidParam("ValidCard", this)) {
                             found = true;
                         }
@@ -5560,17 +5560,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean canDamagePrevented(final boolean isCombat) {
-        CardCollection list = new CardCollection(getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
-        list.add(this);
-        for (final Card ca : list) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.applyAbility("CantPreventDamage", this, isCombat)) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
+        return !StaticAbilityCantPreventDamage.cantPreventDamage(this, isCombat);
     }
 
     // This is used by the AI to forecast an effect (so it must not change the game state)

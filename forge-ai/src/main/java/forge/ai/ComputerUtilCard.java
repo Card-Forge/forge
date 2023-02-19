@@ -1758,7 +1758,7 @@ public class ComputerUtilCard {
             // remove old boost that might be copied
             for (final StaticAbility stAb : c.getStaticAbilities()) {
                 vCard.removePTBoost(c.getTimestamp(), stAb.getId());
-                if (!stAb.getParam("Mode").equals("Continuous")) {
+                if (!stAb.checkMode("Continuous")) {
                     continue;
                 }
                 if (!stAb.hasParam("Affected")) {

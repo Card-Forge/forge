@@ -119,7 +119,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      * @return the applicable layers.
      */
     private final Set<StaticAbilityLayer> generateLayer() {
-        if (!getParam("Mode").equals("Continuous")) {
+        if (!checkMode("Continuous")) {
             return EnumSet.noneOf(StaticAbilityLayer.class);
         }
 
@@ -273,77 +273,28 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      *         conditions are fulfilled.
      */
     private boolean shouldApplyContinuousAbility(final StaticAbilityLayer layer, final boolean previousRun) {
-        return getParam("Mode").equals("Continuous") && layers.contains(layer) && !isSuppressed() && checkConditions() && (previousRun || getHostCard().getStaticAbilities().contains(this));
-    }
-
-    public final boolean applyAbility(final String mode, final Card card, final boolean isCombat) {
-        // don't apply the ability if it hasn't got the right mode
-        if (!getParam("Mode").equals(mode)) {
-            return false;
-        }
-
-        if (this.isSuppressed() || !this.checkConditions()) {
-            return false;
-        }
-
-        if (mode.equals("CantPreventDamage")) {
-            return StaticAbilityCantPreventDamage.applyCantPreventDamage(this, card, isCombat);
-        }
-
-        return false;
-    }
-
-    /**
-     * Apply ability.
-     *
-     * @param mode
-     *            the mode
-     * @param card
-     *            the card
-     * @param target
-     *            the target
-     * @return true, if successful
-     */
-    public final boolean applyAbility(final String mode, final Card card, final GameEntity target) {
-        // don't apply the ability if it hasn't got the right mode
-        if (!getParam("Mode").equals(mode)) {
-            return false;
-        }
-
-        if (this.isSuppressed() || !this.checkConditions()) {
-            return false;
-        }
-
-        if (mode.equals("CantAttack")) {
-            return StaticAbilityCantAttackBlock.applyCantAttackAbility(this, card, target);
-        } else if (mode.equals("CantBlockBy")) { // null allowed, so no instanceof check
-            return StaticAbilityCantAttackBlock.applyCantBlockByAbility(this, card, (Card)target);
-        } else if (mode.equals("CanAttackIfHaste")) {
-            return StaticAbilityCantAttackBlock.applyCanAttackHasteAbility(this, card, target);
-        }
-
-        return false;
+        return layers.contains(layer) && checkConditions("Continuous") && (previousRun || getHostCard().getStaticAbilities().contains(this));
     }
 
     public final Cost getAttackCost(final Card attacker, final GameEntity target, final List<Card> attackersWithOptionalCost) {
-        if (!getParam("Mode").equals("CantAttackUnless") && (!getParam("Mode").equals("OptionalAttackCost") || !attackersWithOptionalCost.contains(attacker))) {
+        if (!checkMode("CantAttackUnless") && (!checkMode("OptionalAttackCost") || !attackersWithOptionalCost.contains(attacker))) {
             return null;
         }
-        if (this.isSuppressed() || !this.checkConditions()) {
+        if (!this.checkConditions()) {
             return null;
         }
         return StaticAbilityCantAttackBlock.getAttackCost(this, attacker, target);
     }
 
     public final boolean hasAttackCost(final Card attacker, Class<? extends CostPart> costType) {
-        if (this.isSuppressed() || !getParam("Mode").equals("OptionalAttackCost") || !this.checkConditions()) {
+        if (!checkConditions("OptionalAttackCost")) {
             return false;
         }
         return StaticAbilityCantAttackBlock.getAttackCost(this, attacker, null).hasSpecificCostType(costType);
     }
 
     public final Cost getBlockCost(final Card blocker, final Card attacker) {
-        if (this.isSuppressed() || !getParam("Mode").equals("CantBlockUnless") || !this.checkConditions()) {
+        if (!checkConditions("CantBlockUnless")) {
             return null;
         }
         return StaticAbilityCantAttackBlock.getBlockCost(this, blocker, attacker);
@@ -365,6 +316,14 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return true;
     }
 
+    public final boolean checkMode(String mode) {
+        return getParam("Mode").equals(mode);
+    }
+
+    public final boolean checkConditions(String mode) {
+        return checkMode(mode) && checkConditions();
+    }
+
     /**
      * Check conditions.
      *
@@ -375,6 +334,9 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         final Game game = getHostCard().getGame();
         final PhaseHandler ph = game.getPhaseHandler();
 
+        if (isSuppressed()) {
+            return false;
+        }
         if (getHostCard().isPhasedOut()) {
             return false;
         }
