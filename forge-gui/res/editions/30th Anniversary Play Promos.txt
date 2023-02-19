@@ -37,4 +37,5 @@ ScryfallCode=P30A
 29 R Deadly Dispute @Irina Nordsol
 30 R Urza, Prince of Kroog @Joshua Raphael
 1F R Arcane Signet @Gaboleps
+1F★ R Arcane Signet @Gaboleps
 F1★ R Richard Garfield, Ph.D. @Dave Dorman

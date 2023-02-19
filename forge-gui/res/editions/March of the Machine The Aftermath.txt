@@ -1,0 +1,9 @@
+[metadata]
+Code=MAT
+Date=2023-05-12
+Name=March of the Machine: The Aftermath
+Type=Expansion
+ScryfallCode=MAT
+
+[cards]
+34 R The Kenriths' Royal Funeral @Manuel Castañón
