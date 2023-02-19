@@ -488,7 +488,7 @@ public class CardFactory {
         }
 
         // SpellPermanent only for Original State
-        if (c.getCurrentStateName() == CardStateName.Original || c.getCurrentStateName() == CardStateName.Modal) {
+        if (c.getCurrentStateName() == CardStateName.Original || c.getCurrentStateName() == CardStateName.Modal || c.getCurrentStateName().toString().startsWith("Specialize")) {
             // this is the "default" spell for permanents like creatures and artifacts
             if (c.isPermanent() && !c.isAura() && !c.isLand()) {
                 SpellAbility sa = new SpellPermanent(c);
