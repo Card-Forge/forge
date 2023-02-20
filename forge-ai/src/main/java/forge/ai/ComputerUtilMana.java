@@ -1354,7 +1354,10 @@ public class ComputerUtilMana {
                 manaToAdd = 1;
             }
 
-            String xColor = sa.getParamOrDefault("XColor", "1");
+            String xColor = sa.getXColor();
+            if (xColor == null) {
+                xColor = "1";
+            }
             if (card.hasKeyword("Spend only colored mana on X. No more than one mana of each color may be spent this way.")) {
                 xColor = "WUBRGX";
             }

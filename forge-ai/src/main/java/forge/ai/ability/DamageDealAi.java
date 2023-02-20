@@ -23,6 +23,7 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -1011,7 +1012,7 @@ public class DamageDealAi extends DamageAiBase {
         Player opponent = ai.getWeakestOpponent();
 
         // TODO: somehow account for the possible cost reduction?
-        int dmg = ComputerUtilMana.determineLeftoverMana(sa, ai, saTgt.getParam("XColor"), false);
+        int dmg = ComputerUtilMana.determineLeftoverMana(sa, ai, MagicColor.toShortString(saTgt.getParam("XColor")), false);
 
         while (!ComputerUtilMana.canPayManaCost(sa, ai, dmg, false) && dmg > 0) {
             // TODO: ideally should never get here, currently put here as a precaution for complex mana base cases where the miscalculation might occur. Will remove later if it proves to never trigger.
