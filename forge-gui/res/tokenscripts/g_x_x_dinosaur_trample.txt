@@ -1,4 +1,4 @@
-Name:Dinosaur Beast Token
+Name:Dinosaur Token
 ManaCost:no cost
 Colors:green
 Types:Creature Dinosaur
