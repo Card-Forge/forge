@@ -57,6 +57,9 @@ public class ReplaceManaEffect extends SpellAbilityEffect {
                 if (card.hasChosenColor()) {
                     color = MagicColor.toShortString(card.getChosenColor());
                 }
+            } else {
+                // convert in case Color Word used
+                color = MagicColor.toShortString(color);
             }
             if (sa.hasParam("ReplaceOnly")) {
                 replaced = replaced.replace(sa.getParam("ReplaceOnly"), color);
