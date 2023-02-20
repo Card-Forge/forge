@@ -1,6 +1,5 @@
 Name:Yargle and Multani
-Manacost:3 B B G
-Type:Legendary Creature Frog Spirit Elemental
+ManaCost:3 B B G
+Types:Legendary Creature Frog Spirit Elemental
 PT:18/6
 Oracle:
-

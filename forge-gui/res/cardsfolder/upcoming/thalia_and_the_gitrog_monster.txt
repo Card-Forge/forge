@@ -1,6 +1,6 @@
 Name:Thalia and The Gitrog Monster
-Manacost:1 W B G
-Type:Legendary Creature Human Frog Horror
+ManaCost:1 W B G
+Types:Legendary Creature Human Frog Horror
 PT:4/4
 K:Fist Strike
 K:Deathtouch
