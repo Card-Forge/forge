@@ -794,7 +794,7 @@ public class StaticData {
                     if (!loadNonLegalCards && CardEdition.Type.FUNNY.equals(e.getType()))
                         continue;
                     if (!cniHeader) {
-                        cardNotImplemented.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                        cardNotImplemented.append("\nEdition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
                         cniHeader = true;
                     }
                     cardNotImplemented.append(" ").append(c).append("\n");
