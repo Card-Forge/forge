@@ -34,16 +34,14 @@ public class ReplaceManaEffect extends SpellAbilityEffect {
             // replace type and amount
             replaced = sa.getParam("ReplaceMana");
             if ("Any".equals(replaced)) {
-                byte rs = MagicColor.GREEN;
-                rs = player.getController().chooseColor("Choose a color", sa, ColorSet.ALL_COLORS);
+                byte rs = player.getController().chooseColor("Choose a color", sa, ColorSet.ALL_COLORS);
                 replaced = MagicColor.toShortString(rs);
             }
         } else if (sa.hasParam("ReplaceType")) {
             // replace color and colorless
             String color = sa.getParam("ReplaceType");
             if ("Any".equals(color)) {
-                byte rs = MagicColor.GREEN;
-                rs = player.getController().chooseColor("Choose a color", sa, ColorSet.ALL_COLORS);
+                byte rs = player.getController().chooseColor("Choose a color", sa, ColorSet.ALL_COLORS);
                 color = MagicColor.toShortString(rs);
             }
             for (byte c : MagicColor.WUBRGC) {

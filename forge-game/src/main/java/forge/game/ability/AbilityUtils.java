@@ -2653,13 +2653,19 @@ public class AbilityUtils {
             }
 
             int colorOcurrencices = 0;
-            byte colorCode = ManaAtom.fromName(sq[1]);
+            byte colorCode;
+            if (sq.length > 1) {
+                colorCode = ManaAtom.fromName(sq[1]);
+            } else {
+                colorCode = ManaAtom.ALL_MANA_COLORS;
+            }
             for (Card c0 : cards) {
                 for (ManaCostShard sh : c0.getManaCost()) {
                     if (sh.isColor(colorCode))
                         colorOcurrencices++;
                 }
             }
+
             return doXMath(colorOcurrencices, expr, c, ctb);
         }
 
