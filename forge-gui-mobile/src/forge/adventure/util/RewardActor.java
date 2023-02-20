@@ -484,10 +484,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         g.end();
         g.endClip();
         //Rendering ends here. Create a new Pixmap to Texture with mipmaps, otherwise will render as full black.
-        Texture result = new Texture(Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h), Forge.isTextureFilteringEnabled());
+        Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h);
+        Texture result = new Texture(pixmap, Forge.isTextureFilteringEnabled());
         frameBuffer.end();
         g.dispose();
         frameBuffer.dispose();
+        pixmap.dispose();
         return result;
     }
 
@@ -519,7 +521,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 }
                 getGraphics().end();
                 getGraphics().endClip();
-                generatedTooltip = new Texture(Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h), Forge.isTextureFilteringEnabled());
+                Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h);
+                generatedTooltip = new Texture(pixmap, Forge.isTextureFilteringEnabled());
+                pixmap.dispose();
             } catch (Exception e) {
                 //e.printStackTrace();
             } finally {
