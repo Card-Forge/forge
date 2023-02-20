@@ -954,6 +954,9 @@
       "lifeModifier": 2,
       "startBattleWithCard": [
         "Thallid Shell-Dweller"
+      ],
+      "startBattleWithCardInCommandZone":[
+        "Slimefoot's Slimy Staff"
       ]
 }
 },
@@ -962,9 +965,12 @@
     "equipmentSlot": "Left",
     "iconName": "SleepWand",
     "effect": {
-      "lifeModifier": 2,
+      "lifeModifier": -1,
       "startBattleWithCard": [
         "Kraken Hatchling"
+      ],
+      "startBattleWithCardInCommandZone":[
+        "Thassa's Bident"
       ]
 }
 },
@@ -986,8 +992,20 @@
     "effect": {
       "lifeModifier": -1,
       "cardRewardBonus": 1,
-      "startBattleWithCard": [
+      "startBattleWithCardInCommandZone": [
         "Jace's Signature Hoodie"
+      ]
+}
+},
+{
+    "name": "Teferi's Staff",
+    "equipmentSlot": "Left",
+    "iconName": "MadStaff",
+    "effect": {
+      "lifeModifier": 1,
+      "cardRewardBonus": 1,
+      "startBattleWithCardInCommandZone": [
+        "Teferi's Staff"
       ]
 }
 }

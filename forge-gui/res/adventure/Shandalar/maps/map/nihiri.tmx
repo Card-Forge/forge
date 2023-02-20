@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="68">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../../../Sprites/AlchemistLabTileset.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1LEJgDAQQNEDbRwg2UEF98kA6pp2aim4hUt4ENIIFhE0or94XBEOPlfEFSIOyQyNn1vupe458+a+0HYU3t7aF3PT0ohUqjbPtcbsjdo1qfnmvqtaK9Kp3qZvAQB825KlbwCAYOVPAgAAP7cDGLtzhg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmF9OwzAMxvswpKV3QgPusTFxC8TgOFwDtvHMCdC09x6h+0Os7qOuF6ct7ZogYenT1shNfvGSOPPBJEk2KjQzpe6tpOW27WNc9VvZ57XVXvhPTdUPvtJP2pv1OZJPWr7H+bTxyD5Hbi3HzXwPpvCl7xobuIhjx9jAlykMdaqbg+8dyUaan+LTlQtaJIV++/7UVOO2Z3zU1pZP+i8argVNtLZd6ypnv3GX+GXKmmrK67O++GQfsGsbg+e00IvVIm3H2YWrrb5MqaYx1OZ/aUaNDWfg0TEHfpb1zYU+75T4/fixcwa81LYSZ2ffbOjzMS0YNV+ec8BG7XPPO32LGG+V8ZDD1uPheHzxlOJnYEi+OvZ/vva/bRuf0IqJD+dcaI6/ILJtTQ4JrS27J/juMzEo1ji+XlW1MWH2LMbXuKCnNDmzEHHS5LJY+Mjv/XQvveQdtAufq8Yw9Br08VHtRNZVYuLLTTV2Q+a7Jnwkbg+BzhufeOySNC6+ifi/NossfsgfvM4IvlzJgUPuow3bG2CUhloJ+dO9YjLgWSTzW+6okfJ7GX1u2JpYXni/Ywxu/JliR/Ul8N2Yck5UP5T12b75aE/MRcwOLN+h7kB8YJP1au7fB6evfzLZhroD4uaq2UtG39jeeCXndX6Zf2U92mXEuDtxuur7GI/fg2l+mJuLC/yoS6FvWd/9BpcEZH4=
+  </data>
+ </layer>
+ <layer id="7" name="Mountain Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmMFSgzAQholTT46Oh1aEJ/FZfAxP1eL0nSQFnsS7D6Fnk5EdtttssqEpcPCf+acwpN2P3YQszVWW5QI/X/GmY9fGB+KNME6McRxgAcG5RvFhfKOyE2l1Pi+9b1ccTnrE+BjOdf/7O3mIJNICRssEvoS2xm+e6w8BtkrI9rkajp9Wx9cqz/dsjjrjV4bTx1cYl8K6vlzz1yoBo63jhzpl9NW47e/NV9/mfuA7mOOvuz9bwWeIL8TI5RD4oMY+Tl/+pALGR7LWJXxgYLR5g9yl4gMWm8N9BB8wYT6qlHw5ySE3B4GvcDDS+ZSKD8/DUA7p/KN1xoyp+IAF9gQJX9kzlmowXi+htRmjd+NauEaADxg75AK5VM5Qo+TKHcfXEcYWnbfkPCUfzZ3dA2uGz9auS8xA1dz4r0PucA+1QXypcxQr6LdwzfXMfPvwkKP6TiX8/LM9jY8Tr9sphft9rveyawav3bmkCSe4VsvgA4Wef3PLt39Mpe982Xw/DB+3f9B95tLi+Lj+dCzf7nbZfGPF8XH9s+tdag4+q6XkkNM/33ni+Kaegy5xz7+l5ND3H9GcfPZdDnoVH9/UNd4KuSgj9x8dFyNmLO3tpFwcJ8eK753Le0oeKSsXSzJmrH8B75DDjA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztllFKw0AQhqdQqIJJii9FqT7XEhUFxUf1HLagB+hrUbDtDdQzeATRau+gF/Gp9QL9IS5Nl2S76U6yJc0HP0k2Q/bfyWYmRPli3CCaNPRiTzaD4+/W/PitT3Tn8/oSOAdELnRRDnRaSf6MR3jrMfkbhc5b8NWGdppEu81g7FvhT85b0vtx/JQDydzD2wN0Bm/nEf7eS0Qf0LA0f65C7AETf+JdhiXGOxuzuG6MsqDnEfWhgaeOC3vSzaEJtSrmgOrQHrT/fy3LFrUFc4+xxyfQX8Re70pHGzw5RM/QixMfc4l6eQVda9ZNTg5doiPo2I2PuYGvFtS24K9gNXhL4Zlewh76qbi3bK/jQvQkuW+OosNZ0Vm78BXV15OgqrccmPrTqbcqXhf0WlN/OvVWJu2cmxLOeZXhv5j7W14m52my7c9kQha1ZRXhyl9afNk2wEie1rJOrGttsEXdtoGCzBjaNlBQkBOmhnVK2g==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="48" template="../obj/treasure.tx" x="270" y="50.25"/>
+  <object id="50" template="../obj/enemy.tx" x="178.5" y="255.5">
+   <properties>
+    <property name="enemy" value="Rogue"/>
+   </properties>
+  </object>
+  <object id="51" template="../obj/treasure.tx" x="135.833" y="53.833"/>
+  <object id="57" template="../obj/enemy.tx" x="428.333" y="58.3337">
+   <properties>
+    <property name="enemy" value="Berserker"/>
+   </properties>
+  </object>
+  <object id="58" template="../obj/enemy.tx" x="275.5" y="265.667">
+   <properties>
+    <property name="enemy" value="Bandit"/>
+   </properties>
+  </object>
+  <object id="59" template="../obj/enemy.tx" x="327" y="243">
+   <properties>
+    <property name="enemy" value="Dwarf"/>
+   </properties>
+  </object>
+  <object id="61" template="../obj/entry_right.tx" x="602.5" y="313.5">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object id="67" template="../obj/gold.tx" x="132.5" y="207.5"/>
+ </objectgroup>
+</map>

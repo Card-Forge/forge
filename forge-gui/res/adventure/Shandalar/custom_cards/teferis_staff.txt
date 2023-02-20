@@ -1,8 +1,7 @@
 Name:Teferi's Staff
 ManaCost:no cost
 Types:Artifact Equipment
-A:AB$ Phases | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | IsCurse$ True | SpellDescription$ Target creature you don't control phases out. (Treat it and anything attached to it as though they don't exist until its controllers's next turn.)
-S:Mode$ Continuous | Description$ Provided by Hill Giant Club (Equipped Item - Right)
-A:AB$ Effect | Cost$ PayShards<2> Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | ExileOnMoved$ Battlefield | StaticAbilities$ UnblockableLE2 | RememberObjects$ Targeted | StackDescription$ {c:Targeted} can't be blocked by creatures with power 2 or less this turn. | SpellDescription$ Targe creature can't be blocked by creatures with power 2 or less this turn.
-SVar:UnblockableLE2:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | ValidBlocker$ Creature.powerLE2 | Description$ {c:Targeted} can't be blocked by creatures with power 2 or less this turn.
-Oracle: Provided by Hill Giant Club. Pay {M}{M}, sacrifice Hill Giant Club: Target creature can't be blocked by creatures with power 2 or less this turn.
+A:AB$ Phases | Cost$ U W PayShards<2> | ValidTgts$ Permanent | ActivationZone$ Command | SpellDescription$ Target permanent phases out. (Treat it and anything attached to it as though they don't exist until its controllers's next turn.)
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigUntap | TriggerDescription$ At the beginning of your end step, untap target artifact or land you control.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Artifact.YouCtrl,Land.YouCtrl | TgtPrompt$ Select target artifact or land you control
+Oracle:Provided by Teferi's Staff.\n At the beginning of your end step, untap target artifact or land you control.\n{U{W}, {M}{M}, Exile Teferi's Staff: Target permanent phases out. (Treat it and anything attached to it as though they don't exist until its controllers's next turn.)
