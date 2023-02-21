@@ -1,0 +1,11 @@
+[metadata]
+Code=SIR
+Date=2023-03-21
+Name=Shadows over Innistrad Remastered
+Type=Online
+ScryfallCode=SIR
+
+[cards]
+0 R Sigarda's Aid @Howard Lyon
+0 R Thing in the Ice @Svetlin Velinov
+0 M Relentless Dead @Ryan Yee
