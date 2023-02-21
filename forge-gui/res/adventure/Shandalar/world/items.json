@@ -952,9 +952,6 @@
     "iconName": "GreenStaff",
     "effect": {
       "lifeModifier": 2,
-      "startBattleWithCard": [
-        "Thallid Shell-Dweller"
-      ],
       "startBattleWithCardInCommandZone":[
         "Slimefoot's Slimy Staff"
       ]

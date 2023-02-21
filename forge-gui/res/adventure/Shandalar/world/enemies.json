@@ -1686,19 +1686,10 @@
 			"count": 1,
 			"addMaxCount": 2,
 			"rarity": [
-				"uncommon"
+				"rare"
 			],
 			"cardTypes": [
 				"Enchantment"
-			]
-		},
-		{
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
 			]
 		},
 		{
@@ -1711,6 +1702,12 @@
 			"cardTypes": [
 				"Land"
 			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Lightning Bolt"
 		},
 		{
 			"type": "gold",
@@ -3685,12 +3682,6 @@
 	"life": 30,
 	"rewards": [
 		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 3,
-			"addMaxCount": 7
-		},
-				{
 			"type": "item",
 			"probability": 1,
 			"count": 1,
@@ -3719,7 +3710,25 @@
 			"probability": 1,
 			"count": 1,
 			"cardName": "Dark Ritual"
-		}
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Biogenic Ooze"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Gelatinous Cube"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Scavenging Ooze"
+		}		
 	],
 	"colors": "GB"
 },
@@ -5061,7 +5070,7 @@
 		{
 			"type": "card",
 			"probability": 0.5,
-			"count": 3,
+			"count": 1,
 			"colors": [
 				"Blue"
 			],
@@ -5176,45 +5185,22 @@
 			"cardName": "Jace's Defeat"
 		},
 		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
-			"count": 2,
-			"addMaxCount": 5,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Enchantment",
-				"Sorcery"
-			]
+			"count": 1,
+			"cardName": "Treasure Cruise"
 		},
 		{
-			"type": "deckCard",
-			"probability": 0.1,
+			"type": "card",
+			"probability": 1,
 			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
+			"cardName": "Castaway's Despair"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Counterspell"
 		},
 		{
 			"type": "gold",
@@ -5395,55 +5381,6 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-				{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 1,
 			"rarity": [
 				"rare"
 			],
@@ -5474,6 +5411,30 @@
 			"probability": 1,
 			"count": 1,
 			"cardName": "Kiora, the Crashing Wave"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Kiora Bests the Sea God"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Kiora, Behemoth Beckoner"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Kiora, Master of the Depths"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 4,
+			"cardName": "Kiora's Follower"
 		},
 		{
 			"type": "item",
@@ -5532,7 +5493,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
-	"life": 16,
+	"life": 12,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -5546,41 +5507,12 @@
 		},
 		{
 			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
 			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"kobold"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
+				"uncommon",
 				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
 			]
 		},
 		{
@@ -6878,56 +6810,7 @@
 	"speed": 31,
 	"life": 25,
 	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-				{
+	{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 1,
@@ -6955,6 +6838,24 @@
 			"probability": 1,
 			"count": 1,
 			"cardName": "Slimefoot, Thallid Transplant"
+		},
+				{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Ghave, Guru of Spores"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Corpsejack Menace"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Mycoloth"
 		},
 		{
 			"type": "card",
@@ -7256,40 +7157,6 @@
 	"life": 25,
 	"rewards": [
 		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-				{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
 			"type": "gold",
 			"probability": 1,
 			"count": 500,
@@ -7318,6 +7185,18 @@
 			"probability": 1,
 			"count": 1,
 			"cardName": "Teferi, Hero of Dominaria"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Borrowed Time"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Teferi's Moat"
 		},
 		{
 			"type": "item",
