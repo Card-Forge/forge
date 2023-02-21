@@ -117,6 +117,7 @@ public class SpellSmithScene extends UIScene {
         ui.onButtonPress("BResetEdition", () -> {
             editionList.setColor(Color.WHITE);
             edition = "";
+            editionList.setUserObject(edition);
             filterResults();
         });
     }
@@ -267,7 +268,6 @@ public class SpellSmithScene extends UIScene {
         loadEditions(); //just to be safe since it's preloaded, if somehow edition is null, then reload it
         editionList.clearListeners();
         editionList.clearItems();
-        editionList.showScrollPane();
         editionList.setItems(editions.toArray(new CardEdition[editions.size()]));
         editionList.addListener(new ChangeListener() {
             @Override
@@ -276,6 +276,12 @@ public class SpellSmithScene extends UIScene {
                 edition = E.getCode();
                 editionList.setColor(Color.RED);
                 filterResults();
+            }
+        });
+        editionList.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                editionList.showScrollPane();
             }
         });
         editionList.setColor(Color.WHITE);
@@ -357,6 +363,7 @@ public class SpellSmithScene extends UIScene {
         pullUsingShards.setText("Pull: " + currentShardPrice + "[+shards]");
         pullUsingGold.setDisabled(!(cardPool.size() > 0) || Current.player().getGold() < totalCost);
         pullUsingShards.setDisabled(!(cardPool.size() > 0) || Current.player().getShards() < currentShardPrice);
+        editionList.setUserObject(edition);
     }
 
     public void pullCard(boolean usingShards) {
