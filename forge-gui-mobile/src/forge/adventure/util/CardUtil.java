@@ -19,6 +19,7 @@ import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
+import forge.util.Aggregates;
 
 import java.io.File;
 import java.util.*;
@@ -386,7 +387,7 @@ public class CardUtil {
                     if (!editionCodes.contains(template.getEdition().split("\\s",2)[0]))
                         continue;
                     List<PaperCard> packContents = new UnOpenedProduct(template).get();
-                    if (packContents.size() < 20 | packContents.size() > 25)
+                    if (packContents.size() < 18 | packContents.size() > 25)
                         continue;
                     if (packContents.stream().filter(x -> x.getName().equals(targetName)).count() >=3)
                         packCandidates.putIfAbsent(template.getEdition(), packContents);
@@ -411,6 +412,11 @@ public class CardUtil {
                 else{
                     Object[] keys = packCandidates.keySet().toArray();
                     selectedPack = packCandidates.get((String)keys[Current.world().getRandom().nextInt(keys.length)]);
+                }
+                //if the packContents size above is below 20, just get random card
+                int size = 20 - selectedPack.size();
+                for (int c = 0; c < size; c++) {
+                    selectedPack.add(Aggregates.random(selectedPack));
                 }
                 deck.getOrCreate(DeckSection.Main).addAllFlat(selectedPack);
             }
