@@ -209,6 +209,12 @@ public abstract class SpellAbilityEffect {
 
     private static CardCollection getCards(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
+        if (sa.hasParam("ThisDefinedAndTgts")) {
+            CardCollection cards =
+                    AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("ThisDefinedAndTgts"), sa);
+            cards.addAll(sa.getTargets().getTargetCards());
+            return cards;
+        }
         return useTargets ? new CardCollection(sa.getTargets().getTargetCards())
                 : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
