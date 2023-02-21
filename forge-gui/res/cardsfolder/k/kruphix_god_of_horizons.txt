@@ -6,6 +6,7 @@ K:Indestructible
 S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to green and blue is less than seven, CARDNAME isn't a creature.
 SVar:X:Count$DevotionDual.Green.Blue
 S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
-R:Event$ LoseMana | ValidPlayer$ You | ReplacementResult$ Replaced | ActiveZones$ Battlefield | Description$ If you would lose unspent mana, that mana becomes colorless instead.
+R:Event$ LoseMana | ValidPlayer$ You | ReplacementResult$ Replaced | ReplaceWith$ ConvertMana | ActiveZones$ Battlefield | Description$ If you would lose unspent mana, that mana becomes colorless instead.
+SVar:ConvertMana:DB$ ReplaceMana | ReplaceType$ C
 SVar:BuffedBy:Permanent.Green,Permanent.Blue
 Oracle:Indestructible\nAs long as your devotion to green and blue is less than seven, Kruphix isn't a creature.\nYou have no maximum hand size.\nIf you would lose unspent mana, that mana becomes colorless instead.
