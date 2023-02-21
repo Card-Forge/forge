@@ -50,6 +50,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
@@ -477,8 +478,6 @@ public class AiController {
             // If nothing is done here, proceeds to the default land picking strategy
         }
 
-        return ComputerUtilCard.getBestLandToPlayAI(landList);
-/*
         //Skip reflected lands.
         CardCollection unreflectedLands = new CardCollection(landList);
         for (Card l : landList) {
@@ -577,7 +576,7 @@ public class AiController {
                 landList = CardLists.filter(landList, Predicates.not(CardPredicates.Presets.BASIC_LANDS));
             }
         }
-        return landList.get(0);*/
+        return ComputerUtilCard.getBestLandToPlayAI(landList);
     }
 
     // if return true, go to next phase
