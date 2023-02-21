@@ -43,20 +43,13 @@ public class UntapEffect extends SpellAbilityEffect {
         } else if (sa.hasParam("UntapExactly")) {
             untapChoose(sa, true);
         } else {
-            final CardCollection untargetedCards = CardUtil.getRadiance(sa);
-            for (final Card tgtC : getTargetCards(sa)) {
+            final CardCollection affectedCards = getTargetCards(sa);
+            affectedCards.addAll(CardUtil.getRadiance(sa));
+
+            for (final Card tgtC : affectedCards) {
                 if (tgtC.isPhasedOut()) {
                     continue;
                 }
-                if (tgtC.isInPlay()) {
-                    tgtC.untap(true);
-                }
-                if (sa.hasParam("ETB")) {
-                    // do not fire triggers
-                    tgtC.setTapped(false);
-                }
-            }
-            for (final Card tgtC : untargetedCards) {
                 if (tgtC.isInPlay()) {
                     tgtC.untap(true);
                 }

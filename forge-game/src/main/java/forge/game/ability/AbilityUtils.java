@@ -534,9 +534,7 @@ public class AbilityUtils {
             } else if (hType.startsWith("Property")) {
                 String defined = hType.split("Property")[1];
                 for (Player p : game.getPlayersInTurnOrder()) {
-                    if (ability instanceof SpellAbility && p.hasProperty(defined, ((SpellAbility) ability).getActivatingPlayer(), ability.getHostCard(), ability)) {
-                        players.add(p);
-                    } else if (!(ability instanceof SpellAbility) && p.hasProperty(defined, player, ability.getHostCard(), ability)) {
+                    if (p.hasProperty(defined, player, ability.getHostCard(), ability)) {
                         players.add(p);
                     }
                 }
