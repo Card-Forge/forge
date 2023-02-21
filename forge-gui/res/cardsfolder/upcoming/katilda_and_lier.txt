@@ -1,0 +1,10 @@
+Name:Katilda and Lier
+ManaCost:G W U
+Types:Legendary Creature Human
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Human | ValidActivatingPlayer$ You | Execute$ TrigFlashback| TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Human spell, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost. (You may cast that card from your graveyard for its flashback cost. Then exile it.)
+SVar:TrigFlashback:DB$ Pump | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card in your graveyard | KW$ Flashback | PumpZone$ Graveyard | AILogic$ ReplaySpell
+DeckHas:Ability$Graveyard & Keyword$Flashback
+DeckNeeds:Type$Human
+DeckHints:Ability$Graveyard|Mill & Type$Instant|Sorcery
+Oracle:Whenever you cast a Human spell, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost. (You may cast that card from your graveyard for its flashback cost. Then exile it.)
