@@ -2833,10 +2833,10 @@ public class CardFactoryUtil {
             SpellAbility newSA;
             if (host.getAlternateState().getType().hasSubtype("Aura")) {
                 newSA = host.getAlternateState().getFirstAbility().copyWithDefinedCost(disturbCost);
-                newSA.setCardState(host.getAlternateState());
             } else {
                 newSA = new SpellPermanent(host, host.getAlternateState(), disturbCost);
             }
+            newSA.setCardState(host.getAlternateState());
 
             StringBuilder sbCost = new StringBuilder("Disturb");
             if (!disturbCost.isOnlyManaCost()) { //Something other than a mana cost
