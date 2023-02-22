@@ -127,8 +127,11 @@ public class ReplacementHandler {
                 Zone lkiZone = game.getChangeZoneLKIInfo(c).getLastKnownZone();
 
                 // only when not prelist
-                if (c == crd && lkiZone.is(ZoneType.Battlefield) && event == ReplacementType.Moved && 
-                        runParams.containsKey(AbilityKey.LastStateBattlefield) && runParams.get(AbilityKey.LastStateBattlefield) != null) {
+                boolean noLKIstate = c != crd || event != ReplacementType.Moved;
+                // might be inbound token
+                noLKIstate |= lkiZone == null || !lkiZone.is(ZoneType.Battlefield);
+                noLKIstate |= !runParams.containsKey(AbilityKey.LastStateBattlefield) || runParams.get(AbilityKey.LastStateBattlefield) == null;
+                if (!noLKIstate) {
                     Card lastState = ((CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield)).get(crd);
                     // no LKI found for this card so it shouldn't apply, this can happen during simultaneous zone changes
                     if (lastState == crd) {
