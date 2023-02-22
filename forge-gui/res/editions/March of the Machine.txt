@@ -1,0 +1,41 @@
+[metadata]
+Code=MOM
+Date=2023-04-21
+Name=March of the Machine
+Type=Expansion
+ScryfallCode=MOM
+
+[cards]
+17 R Heliod, the Radiant Dawn @Victor Adame Minguez
+58 R Faerie Mastermind @Joshua Raphael
+65 M Jin-Gitaxias @Ekaterina Burmak
+67 C Moment of Truth @Rovina Cai
+94 R Breach the Multiverse @Liiga Smilshkalne
+134 M Chandra, Hope's Beacon @Kieran Yanner
+222 R Drana and Linvala @Raluca Marinescu
+225 R Ghalta and Mavren @Zezhou Chen
+249 R Omnath, Locus of All @Bryan Sola
+255 M Thalia and The Gitrog Monster @Howard Lyon
+256 R Yargle and Multani @Slawomir Maniak
+267 C Bloodfell Caves @Jorge Jacinto
+268 C Blossoming Sands @Robin Olausson
+269 C Dismal Backwater @Chris Ostrowski
+270 C Jungle Hollow @Thomas Stoop
+271 C Rugged Highlands @Thomas Stoop
+272 C Scoured Barrens @Robin Olausson
+273 M Swiftwater Cliffs @Julian Kok Joon Wen
+274 C Thornwood Falls @Roman Kuteynikov
+275 C Tranquil Cove @Chris Ostrowski
+276 C Wind-Scarred Crag @Roman Kuteynikov
+293 R Heliod, the Radiant Dawn @Jason A. Engle
+294 M Jin-Gitaxias @Dominik Mayer
+307 R Ghalta and Mavren @Jody Clark
+313 R Omnath, Locus of All @Jessica Rossier
+316 M Thalia and The Gitrog Monster @Sami Makkonen
+317 R Yargle and Multani @Lisa Heidhoff
+321 M Chandra, Hope's Beacon @Randy Vargas
+339 M Jin-Gitaxias @Julian Kok Joon Wen
+352 R Faerie Mastermind @Joshua Raphael
+358 R Breach the Multiverse @Liiga Smilshkalne
+386 R Ghalta and Mavren @Betty Jiang
+387 R Omnath, Locus of All @Jessica Rossier

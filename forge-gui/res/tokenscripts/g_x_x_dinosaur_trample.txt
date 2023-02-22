@@ -1,0 +1,7 @@
+Name:Dinosaur Token
+ManaCost:no cost
+Colors:green
+Types:Creature Dinosaur
+PT:*/*
+K:Trample
+Oracle:Trample

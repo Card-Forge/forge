@@ -357,6 +357,29 @@ public class CardProperty {
             if (!card.getExiledBy().equals(sourceController)) {
                 return false;
             }
+        } else if (property.startsWith("ExiledWithSourceLKI")) {
+            List<Card> exiled = card.getZone().getCardsAddedThisTurn(null);
+            int idx = exiled.lastIndexOf(card);
+            if (idx == -1) {
+                return false;
+            }
+            Card lkiExiled = exiled.get(idx);
+
+            if (lkiExiled.getExiledWith() == null) {
+                return false;
+            }
+
+            Card host = source;
+            //Static Abilites doesn't have spellAbility or OriginalHost
+            if (spellAbility != null) {
+                host = spellAbility.getOriginalHost();
+                if (host == null) {
+                    host = spellAbility.getHostCard();
+                }
+            }
+            if (!lkiExiled.getExiledWith().equalsWithTimestamp(host)) {
+                return false;
+            }
         } else if (property.startsWith("ExiledWithSource")) {
             if (card.getExiledWith() == null) {
                 return false;

@@ -89,7 +89,6 @@ public class GameAction {
     public Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause) {
         return changeZone(zoneFrom, zoneTo, c, position, cause, null);
     }
-
     private Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause, Map<AbilityKey, Object> params) {
         // 111.11. A copy of a permanent spell becomes a token as it resolves.
         // The token has the characteristics of the spell that became that token.
@@ -272,7 +271,6 @@ public class GameAction {
                 copied.setExiledWith(c.getExiledWith());
                 copied.setExiledBy(c.getExiledBy());
                 copied.setDrawnThisTurn(c.getDrawnThisTurn());
-
 
                 if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
                     copied.setCastSA(cause);
@@ -481,10 +479,6 @@ public class GameAction {
                 }
             }
 
-            if (!zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Stack)) {
-                c.cleanupExiledWith();
-            }
-
             // 400.7a Effects from static abilities that give a permanent spell on the stack an ability
             // that allows it to be cast for an alternative cost continue to apply to the permanent that spell becomes.
             if (zoneFrom.is(ZoneType.Stack) && toBattlefield) {
@@ -622,6 +616,11 @@ public class GameAction {
         // CR 603.6b
         if (toBattlefield) {
             zoneTo.saveLKI(copied, lastKnownInfo);
+        }
+
+        // only now that the LKI preserved it
+        if (!zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Stack)) {
+            c.cleanupExiledWith();
         }
 
         game.getTriggerHandler().clearActiveTriggers(copied, null);
@@ -803,11 +802,11 @@ public class GameAction {
 
         // need to refresh ability text for affected cards
         for (final StaticAbility stAb : c.getStaticAbilities()) {
-            if (stAb.isSuppressed() || !stAb.checkConditions()) {
+            if (!stAb.checkConditions()) {
                 continue;
             }
 
-            if (stAb.getParam("Mode").equals("CantBlockBy")) {
+            if (stAb.checkMode("CantBlockBy")) {
                 if (!stAb.hasParam("ValidAttacker") || (stAb.hasParam("ValidBlocker") && stAb.getParam("ValidBlocker").equals("Creature.Self"))) {
                     continue;
                 }
@@ -817,7 +816,7 @@ public class GameAction {
                     }
                 }
             }
-            if (stAb.getParam("Mode").equals(StaticAbilityCantAttackBlock.MinMaxBlockerMode)) {
+            if (stAb.checkMode(StaticAbilityCantAttackBlock.MinMaxBlockerMode)) {
                 for (Card creature : Iterables.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)) {
                     if (stAb.matchesValidParam("ValidCard", creature)) {
                         creature.updateAbilityTextForView();
@@ -1077,7 +1076,7 @@ public class GameAction {
     public boolean hasStaticAbilityAffectingZone(ZoneType zone, StaticAbilityLayer layer) {
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.getParam("Mode").equals("Continuous") || stAb.isSuppressed() || !stAb.checkConditions()) {
+                if (!stAb.checkConditions("Continuous")) {
                     continue;
                 }
                 if (layer != null && !stAb.getLayers().contains(layer)) {
@@ -1126,7 +1125,7 @@ public class GameAction {
                 // need to get Card from preList if able
                 final Card co = preList.get(c);
                 for (StaticAbility stAb : co.getStaticAbilities()) {
-                    if (stAb.getParam("Mode").equals("Continuous")) {
+                    if (stAb.checkMode("Continuous")) {
                         staticAbilities.add(stAb);
                     }
                  }

@@ -32,7 +32,7 @@ public abstract class DrawOnPixmap {
         BitmapFont font = bigText ? Controls.getBitmapFont("big") : Controls.getBitmapFont("default");
 
         FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, drawingMap.getWidth(), drawingMap.getHeight(), false);
-        SpriteBatch batch=new SpriteBatch();
+        SpriteBatch batch = new SpriteBatch();
 
         frameBuffer.begin();
 
@@ -46,16 +46,17 @@ public abstract class DrawOnPixmap {
         batch.begin();
         //Rendering ends here. Create a new Pixmap to Texture with mipmaps, otherwise will render as full black.
         Texture texture = new Texture(drawingMap);
-        batch.draw(texture,0,0);
+        batch.draw(texture, 0, 0);
         font.setColor(color);
-        font.draw(batch,itemText,x,y,width, Align.center,true);
+        font.draw(batch, itemText, x, y, width, Align.center, true);
         batch.end();
-        drawingMap.drawPixmap(Pixmap.createFromFrameBuffer(0, 0, drawingMap.getWidth(), drawingMap.getHeight()),0,0);
+        Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, drawingMap.getWidth(), drawingMap.getHeight());
+        drawingMap.drawPixmap(pixmap, 0, 0);
         frameBuffer.end();
         texture.dispose();
         batch.dispose();
+        pixmap.dispose();
         if (bigText) //don't know why this is needed to circumvent bug getting default size for the same pixelfont
             Controls.getBitmapFont("default");
-
     }
 }

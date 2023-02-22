@@ -17,7 +17,7 @@ public class StaticAbilityCastWithFlash {
         allp.add(card);
         for (final Card ca : allp) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
+                if (!stAb.checkConditions(MODE)) {
                     continue;
                 }
                 if (applyWithFlashNeedsInfo(stAb, sa, card, activator)) {
@@ -34,7 +34,7 @@ public class StaticAbilityCastWithFlash {
         allp.add(card);
         for (final Card ca : allp) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
+                if (!stAb.checkConditions(MODE)) {
                     continue;
                 }
                 if (applyWithFlashAbility(stAb, sa, card, activator)) {

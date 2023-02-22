@@ -1,0 +1,10 @@
+[metadata]
+Code=MUL
+Date=2023-04-21
+Name=Multiverse Legends
+Type=Collector_Edition
+ScryfallCode=MUL
+
+[cards]
+21 M Ragavan, Nimble Pilferer @Magali Villeneuve
+33 M Atraxa, Praetors' Voice @Justin Hernandez & Alexis Hernandez

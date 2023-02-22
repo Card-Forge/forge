@@ -33,7 +33,7 @@ public class StaticAbilityDisableTriggers {
 
         for (final Card ca : cardList) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
+                if (!stAb.checkConditions(MODE)) {
                     continue;
                 }
 

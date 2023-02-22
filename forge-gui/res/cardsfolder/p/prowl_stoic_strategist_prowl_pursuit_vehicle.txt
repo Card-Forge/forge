@@ -1,0 +1,30 @@
+Name:Prowl, Stoic Strategist
+ManaCost:3 W
+Types:Legendary Artifact Creature Robot
+PT:3/3
+K:More Than Meets the Eye:2 W
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever NICKNAME attacks, exile up to one other target tapped creature or Vehicle. For as long as that card remains exiled, its owner may play it.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.Other+tapped,Vehicle.Other+tapped | TgtPrompt$ Select up to one other target tapped creature or Vehicle | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ Play | ForgetOnMoved$ Exile | EffectOwner$ TargetedOwner | Duration$ Permanent
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ For as long as that card remains exiled, its owner may play it.
+T:Mode$ SpellCast | ValidCard$ Card.ExiledWithSourceLKI | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a player plays a card exiled with NICKNAME, you draw a card and convert NICKNAME.
+T:Mode$ LandPlayed | ValidCard$ Card.ExiledWithSourceLKI | TriggerZones$ Battlefield | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Whenever a player plays a card exiled with NICKNAME, you draw a card and convert NICKNAME.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBConvert
+SVar:DBConvert:DB$ SetState | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:More Than Meets the Eye {1}{R}{G} (You may cast this card converted for {1}{R}{G}.)\nWhenever Prowl attacks, exile up to one other target tapped creature or Vehicle. For as long as that card remains exiled, its owner may play it.\nWhenever a player plays a card exiled with Prowl, you draw a card and convert Prowl.
+
+ALTERNATE
+
+Name:Prowl, Pursuit Vehicle
+ManaCost:no cost
+Colors:white
+Types:Legendary Artifact Vehicle
+PT:2/3
+K:Living metal
+T:Mode$ ChangesZone | ValidCard$ Creature.Other,Vehicle | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever another creature or Vehicle enters the battlefield under your control, put a +1/+1 counter on NICKNAME. If this is the second time this ability has resolved this turn, convert NICKNAME.
+SVar:TrigCounter:DB$ PutCounter | CounterType$ P1P1 | SubAbility$ DBConvert
+SVar:DBConvert:DB$ SetState | Mode$ Transform | ConditionCheckSVar$ TrigAmount | ConditionSVarCompare$ EQ2
+SVar:TrigAmount:Count$ResolvedThisTurn
+DeckHas:Ability$Counters
+Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nWhenever another creature or Vehicle enters the battlefield under your control, put a +1/+1 counter on Prowl. If this is the second time this ability has resolved this turn, convert Prowl.

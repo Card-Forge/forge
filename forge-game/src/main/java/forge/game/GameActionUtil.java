@@ -396,7 +396,7 @@ public final class GameActionUtil {
 
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.getParam("Mode").equals("OptionalCost") || stAb.isSuppressed() || !stAb.checkConditions()) {
+                if (!stAb.checkConditions("OptionalCost")) {
                     continue;
                 }
 

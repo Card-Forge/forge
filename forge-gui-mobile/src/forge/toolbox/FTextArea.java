@@ -3,6 +3,7 @@ package forge.toolbox;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.animation.GifAnimation;
 import forge.assets.FSkinColor;
@@ -22,9 +23,11 @@ public class FTextArea extends FScrollPane {
     public FTextArea(boolean parseReminderText0) {
         this(parseReminderText0, "");
     }
+
     public FTextArea(boolean parseReminderText0, String text0) {
         this(parseReminderText0, text0, null);
     }
+
     public FTextArea(boolean parseReminderText0, String text0, GifAnimation gifAnimation) {
         text = text0;
         font = FSkinFont.get(14);
@@ -38,6 +41,7 @@ public class FTextArea extends FScrollPane {
     public String getText() {
         return text;
     }
+
     public void setText(String text0) {
         text = text0;
         revalidate();
@@ -46,6 +50,7 @@ public class FTextArea extends FScrollPane {
     public int getAlignment() {
         return alignment;
     }
+
     public void setAlignment(int alignment0) {
         alignment = alignment0;
     }
@@ -53,6 +58,7 @@ public class FTextArea extends FScrollPane {
     public boolean getCenterVertically() {
         return centerVertically;
     }
+
     public void setCenterVertically(boolean centerVertically0) {
         centerVertically = centerVertically0;
     }
@@ -60,6 +66,7 @@ public class FTextArea extends FScrollPane {
     public FSkinFont getFont() {
         return font;
     }
+
     public void setFont(FSkinFont font0) {
         font = font0;
         revalidate();
@@ -68,6 +75,7 @@ public class FTextArea extends FScrollPane {
     public FSkinColor getTextColor() {
         return textColor;
     }
+
     public void setTextColor(FSkinColor textColor0) {
         textColor = textColor0;
     }
@@ -92,7 +100,8 @@ public class FTextArea extends FScrollPane {
     public void draw(Graphics g) {
         if (animation != null) {
             float w = getScrollWidth() - 2 * insets.x;
-            float h = w * 0.6f;
+            float multiplier = "extrawide".equalsIgnoreCase(Forge.extrawide) ? 0.5f : 0.6f;
+            float h = w * multiplier;
             float y = getPreferredHeight(w);
             animation.draw(g, insets.x - getScrollLeft(), (insets.y - getScrollTop()) + y, w, h);
         }

@@ -1,0 +1,17 @@
+[metadata]
+Code=MOC
+Date=2023-04-21
+Name=March of the Machine Commander
+Type=Commander
+ScryfallCode=MOC
+
+[cards]
+67 C Towashi @Kamila Szutenberg
+147 C Isle of Vesuva @Zoltan Boros & Gabor Szikszai
+158 C Spatial Merging @Gabor Szikszai
+445 M Goro-Goro and Satoru @Johannes Mücke
+446 M Katilda and Lier @Justyna Dura
+447 M Slimefoot and Squee @Victor Adame Minguez
+448 M Goro-Goro and Satoru @Yamada Rokkaku
+449 M Katilda and Lier @Sami Makkonen
+450 M Slimefoot and Squee @Ivan Shavrin

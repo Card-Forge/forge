@@ -1,0 +1,14 @@
+Name:The Kenriths' Royal Funeral
+ManaCost:2 W B
+Types:Legendary Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile up to two target legendary creature cards from your graveyard. You draw X cards and you lose X life, where X is the greatest mana value among cards exiled this way.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.Legendary+YouCtrl | SubAbility$ DBDraw | RememberChanged$ True | TgtPrompt$ Select up to two target legendary creature cards in your graveyard
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$GreatestCMC
+S:Mode$ ReduceCost | ValidCard$ Legendary | Type$ Spell | Activator$ You | Amount$ Y | Description$ Legendary spells you cast cost {1} less to cast for each card exiled with CARDNAME.
+SVar:Y:Count$ValidExile Card.ExiledWithSource
+DeckHints:Ability$Graveyard
+DeckNeeds:Type$Legendary
+Oracle:When The Kenriths' Royal Funeral enters the battlefield, exile up to two target legendary creature cards from your graveyard. You draw X cards and you lose X life, where X is the greatest mana value among cards exiled this way.\nLegendary spells you cast cost {1} less to cast for each card exiled with The Kenriths' Royal Funeral.

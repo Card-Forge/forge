@@ -634,7 +634,7 @@ public class HumanPlay {
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestriction());
 
         String xInCard = source.getSVar("X");
-        String xColor = ability.getParam("XColor");
+        String xColor = ability.getXColor();
         if (source.hasKeyword("Spend only colored mana on X. No more than one mana of each color may be spent this way.")) {
             xColor = "WUBRGX";
         }
