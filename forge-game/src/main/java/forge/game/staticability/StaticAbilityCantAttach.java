@@ -12,7 +12,7 @@ public class StaticAbilityCantAttach {
         // CantTarget static abilities
         for (final Card ca : target.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
+                if (!stAb.checkConditions(MODE)) {
                     continue;
                 }
 

@@ -3,13 +3,11 @@ ManaCost:3 W
 Types:Creature Vampire Cleric
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature an opponent controls until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Duration$ UntilHostLeavesPlay | RememberChanged$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Duration$ UntilHostLeavesPlay
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target Vampire gets +X/+X until end of turn, where X is the power of the exiled card.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Vampire | TgtPrompt$ Select target Vampire | NumAtt$ X | NumDef$ X
-SVar:X:Count$ValidExile Card.IsRemembered+ExiledWithSource$CardPower
+SVar:X:Count$ValidExile Card.ExiledWithSource$CardPower
 # Release notes indicate that this effect should work with Vehicle cards.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
 DeckHints:Type$Vampire
 Oracle:When Bishop of Binding enters the battlefield, exile target creature an opponent controls until Bishop of Binding leaves the battlefield.\nWhenever Bishop of Binding attacks, target Vampire gets +X/+X until end of turn, where X is the power of the exiled card.

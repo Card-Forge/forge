@@ -66,7 +66,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
         int numPeek = AbilityUtils.calculateAmount(source, peekAmount, sa);
 
         List<Player> libraryPlayers = getDefinedPlayersOrTargeted(sa);
-        Player peekingPlayer = sa.getActivatingPlayer();
+        final Player peekingPlayer = sa.getActivatingPlayer();
 
         for (Player libraryToPeek : libraryPlayers) {
             final PlayerZone library = libraryToPeek.getZone(ZoneType.Library);
@@ -77,8 +77,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
                 peekCards.add(library.get(i));
             }
 
-            CardCollectionView revealableCards = CardLists.getValidCards(peekCards, revealValid,
-                    sa.getActivatingPlayer(), source, sa);
+            CardCollectionView revealableCards = CardLists.getValidCards(peekCards, revealValid, peekingPlayer, source, sa);
             boolean doReveal = !sa.hasParam("NoReveal") && !revealableCards.isEmpty();
             if (!noPeek) {
                 peekingPlayer.getController().reveal(peekCards, ZoneType.Library, libraryToPeek,

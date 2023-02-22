@@ -51,7 +51,7 @@ public class StaticAbilityPanharmonicon {
         // Checks only the battlefield, as those effects only work from there
         for (final Card ca : cardList) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
+                if (!stAb.checkConditions(MODE)) {
                     continue;
                 }
                 if (applyPanharmoniconAbility(stAb, t, runParams)) {

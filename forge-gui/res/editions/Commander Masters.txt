@@ -1,0 +1,16 @@
+[metadata]
+Code=CMM
+Date=2023-08-04
+Name=Commander Masters
+Type=Commander
+ScryfallCode=CMM
+
+[cards]
+79 M Capture of Jingzhou @Jack Wei
+361 M The Ur-Dragon @Jaime Jones
+396 M Jeweled Lotus @Alayna Danner
+483 M Capture of Jingzhou @Jack Wei
+594 M The Ur-Dragon @Jaime Jones
+611 M Jeweled Lotus @Alayna Danner
+689 M The Ur-Dragon @Tyler Walpole
+702 M Jeweled Lotus @Olena Richards

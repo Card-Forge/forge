@@ -2,7 +2,9 @@ package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
@@ -147,6 +149,15 @@ public class Controls {
                 } else {
                     return  (this.isOver() || hasKeyboardFocus()) && this.getStyle().backgroundOver != null ? this.getStyle().backgroundOver : this.getStyle().background;
                 }
+            }
+
+            @Override
+            protected GlyphLayout drawItem(Batch batch, BitmapFont font, T item, float x, float y, float width) {
+                if (getUserObject() != null && getUserObject() instanceof String) { //currently this is used on spellsmith...
+                    if (((String) getUserObject()).isEmpty())
+                        return super.drawItem(batch, font, (T) Forge.getLocalizer().getMessage("lblSelectingFilter"), x, y, width);
+                }
+                return super.drawItem(batch, font, item, x, y, width);
             }
         };
     }

@@ -121,16 +121,17 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         List<Mana> cleared = Lists.newArrayList();
         if (floatingMana.isEmpty()) { return cleared; }
 
-        boolean convertToColorless = false;
+        Byte convertTo = null;
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(owner);
+        runParams.put(AbilityKey.Mana, "C");
         switch (owner.getGame().getReplacementHandler().run(ReplacementType.LoseMana, runParams)) {
         case NotReplaced:
             break;
         case Skipped:
             return cleared;
-        default: // the only ones that does replace losing Mana are making it colorless instead
-            convertToColorless = true;
+        default:
+            convertTo = ManaAtom.fromName((String) runParams.get(AbilityKey.Mana));
             break;
 
         }
@@ -139,8 +140,8 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         if (isEndOfPhase) {
             keys.removeAll(StaticAbilityUnspentMana.getManaToKeep(owner));
         }
-        if (convertToColorless) {
-            keys.remove(Byte.valueOf((byte)ManaAtom.COLORLESS));
+        if (convertTo != null) {
+            keys.remove(convertTo);
         }
 
         for (Byte b : keys) {
@@ -148,14 +149,14 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             final List<Mana> pMana = Lists.newArrayList();
             if (isEndOfPhase && !owner.getGame().getPhaseHandler().is(PhaseType.CLEANUP)) {
                 for (final Mana mana : cm) {
-                    if (mana.getManaAbility()!= null && mana.getManaAbility().isPersistentMana()) {
+                    if (mana.getManaAbility() != null && mana.getManaAbility().isPersistentMana()) {
                         pMana.add(mana);
                     }
                 }
             }
             cm.removeAll(pMana);
-            if (convertToColorless) {
-                convertManaColor(b, (byte)ManaAtom.COLORLESS);
+            if (convertTo != null) {
+                convertManaColor(b, convertTo);
                 cm.addAll(pMana);
             } else {
                 cleared.addAll(cm);

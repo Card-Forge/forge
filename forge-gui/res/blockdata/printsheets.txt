@@ -5792,7 +5792,6 @@ Kaya, Ghost Assassin|CN2|2
 1 Myrel, Shield of Argive|BRO
 
 [ONE Mite-y 1]
-
 1 Mite Overseer|ONE
 1 Bladed Ambassador|ONE
 1 Sinew Dancer|ONE
@@ -5808,7 +5807,6 @@ Kaya, Ghost Assassin|CN2|2
 1 The Fair Basilica|ONE
 
 [ONE Mite-y 2]
-
 1 Mite Overseer|ONE
 1 Bladed Ambassador|ONE
 1 Crawling Chorus|ONE
@@ -5824,8 +5822,8 @@ Kaya, Ghost Assassin|CN2|2
 1 The Fair Basilica|ONE
 
 [ONE Progress 1]
-
 1 Serum Sovereign|ONE
+1 Thrummingbird|ONE
 1 Glistener Seer|ONE
 1 Ichor Synthesizer|ONE
 1 Chrome Prowler|ONE
@@ -5839,8 +5837,8 @@ Kaya, Ghost Assassin|CN2|2
 7 Island|ONE
 
 [ONE Progress 2]
-
 1 Serum Sovereign|ONE
+1 Thrummingbird|ONE
 1 Chrome Prowler|ONE
 1 Atmosphere Surgeon|ONE
 1 Trawler Drake|ONE
@@ -5854,7 +5852,6 @@ Kaya, Ghost Assassin|CN2|2
 7 Island|ONE
 
 [ONE Corruption 1]
-
 1 Kinzu of the Bleak Coven|ONE
 1 Bonepicker Skirge|ONE
 1 Pestilent Syphoner|ONE
@@ -5870,7 +5867,6 @@ Kaya, Ghost Assassin|CN2|2
 7 Swamp|ONE
 
 [ONE Corruption 2]
-
 1 Kinzu of the Bleak Coven|ONE
 1 Bonepicker Skirge|ONE
 1 Stinging Hivemaster|ONE
@@ -5886,13 +5882,13 @@ Kaya, Ghost Assassin|CN2|2
 7 Swamp|ONE
 
 [ONE Rebellious 1]
-
 1 Rhuk, Hexgold Nabber|ONE
 1 Furnace Punisher|ONE
 1 Chimney Rabble|ONE
 1 Furnace Strider|ONE
 1 Resistance Skywarden|ONE
 1 Free from Flesh|ONE
+1 Volt Charge|ONE
 1 Rebel Salvo|ONE
 1 Barbed Batterfist|ONE
 1 Vulshok Splitter|ONE
@@ -5901,7 +5897,6 @@ Kaya, Ghost Assassin|CN2|2
 7 Mountain|ONE
 
 [ONE Rebellious 2]
-
 1 Rhuk, Hexgold Nabber|ONE
 1 Furnace Punisher|ONE
 1 Bladegraft Aspirant|ONE
@@ -5917,7 +5912,6 @@ Kaya, Ghost Assassin|CN2|2
 7 Mountain|ONE
 
 [ONE Toxic 1]
-
 1 Cankerbloom|ONE
 1 Copper Longlegs|ONE
 1 Branchblight Stalker|ONE
@@ -5925,6 +5919,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Venomous Brutalizer|ONE
 1 Paladin of Predation|ONE
 1 Ichorspit Basilisk|ONE
+1 Titanic Growth|ONE
 1 Infectious Bite|ONE
 1 Phyrexian Atlas|ONE
 1 Goliath Hatchery|ONE
@@ -5932,7 +5927,6 @@ Kaya, Ghost Assassin|CN2|2
 7 Forest|ONE
 
 [ONE Toxic 2]
-
 1 Cankerbloom|ONE
 1 Rustvine Cultivator|ONE
 1 Branchblight Stalker|ONE

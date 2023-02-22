@@ -44,6 +44,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -662,13 +663,8 @@ public class AttachAi extends SpellAbilityAi {
                 cardPriority += 40;
             }
             //check if card is generally unblockable
-            for (final Card ca : card.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-                for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                    if (stAb.applyAbility("CantBlockBy", card, null)) {
-                        cardPriority += 50;
-                        break;
-                    }
-                }
+            if (StaticAbilityCantAttackBlock.cantBlockBy(card, null)) {
+                cardPriority += 50;
             }
             // Prefer "tap to deal damage"
             // TODO : Skip this one if triggers on combat damage only?

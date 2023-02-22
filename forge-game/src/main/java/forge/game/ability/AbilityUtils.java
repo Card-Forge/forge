@@ -534,9 +534,7 @@ public class AbilityUtils {
             } else if (hType.startsWith("Property")) {
                 String defined = hType.split("Property")[1];
                 for (Player p : game.getPlayersInTurnOrder()) {
-                    if (ability instanceof SpellAbility && p.hasProperty(defined, ((SpellAbility) ability).getActivatingPlayer(), ability.getHostCard(), ability)) {
-                        players.add(p);
-                    } else if (!(ability instanceof SpellAbility) && p.hasProperty(defined, player, ability.getHostCard(), ability)) {
+                    if (p.hasProperty(defined, player, ability.getHostCard(), ability)) {
                         players.add(p);
                     }
                 }
@@ -2653,13 +2651,19 @@ public class AbilityUtils {
             }
 
             int colorOcurrencices = 0;
-            byte colorCode = ManaAtom.fromName(sq[1]);
+            byte colorCode;
+            if (sq.length > 1) {
+                colorCode = ManaAtom.fromName(sq[1]);
+            } else {
+                colorCode = ManaAtom.ALL_MANA_COLORS;
+            }
             for (Card c0 : cards) {
                 for (ManaCostShard sh : c0.getManaCost()) {
                     if (sh.isColor(colorCode))
                         colorOcurrencices++;
                 }
             }
+
             return doXMath(colorOcurrencices, expr, c, ctb);
         }
 
