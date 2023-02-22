@@ -68,10 +68,9 @@ public class HumanPlay {
         FThreads.assertExecutedByEdt(false);
 
         Card source = sa.getHostCard();
-        boolean isforetold = source.isForetold();
+        sa.setActivatingPlayer(p);
 
         if (sa instanceof LandAbility) {
-            sa.setActivatingPlayer(p);
             if (sa.canPlay()) {
                 sa.resolve();
                 p.getGame().updateLastStateForCard(source);
@@ -79,9 +78,8 @@ public class HumanPlay {
             return false;
         }
 
+        boolean isforetold = source.isForetold();
         boolean castFaceDown = sa.isCastFaceDown();
-
-        sa.setActivatingPlayer(p);
         boolean flippedToCast = sa.isSpell() && source.isFaceDown();
 
         sa = chooseOptionalAdditionalCosts(p, sa);

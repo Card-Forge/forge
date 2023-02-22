@@ -108,6 +108,8 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             safeMana += getAmountOfColor(c);
         }
 
+        // TODO isPersistentMana
+
         return totalMana() != safeMana; //won't lose floating mana if all mana is of colors that aren't going to be emptied
     }
 
@@ -123,6 +125,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
 
         Byte convertTo = null;
 
+        // TODO move this lower in case all mana would be persistent
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(owner);
         runParams.put(AbilityKey.Mana, "C");
         switch (owner.getGame().getReplacementHandler().run(ReplacementType.LoseMana, runParams)) {
