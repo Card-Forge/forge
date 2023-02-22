@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/snowabbey_1.tmx",
+    "activeFile": "map/nihiri.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "map/main_story",
-        "map",
+        "obj",
         "tileset",
-        "obj"
+        "map/main_story",
+        "map"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -2578,10 +2578,10 @@
         },
         "map/nihiri.tmx": {
             "scale": 2,
-            "selectedLayer": 2,
+            "selectedLayer": 3,
             "viewCenter": {
                 "x": 320.25,
-                "y": 246.75
+                "y": 214.25
             }
         },
         "map/plains_town.tmx": {
@@ -2866,8 +2866,8 @@
             "scale": 1.6011458333333333,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240.76507709322752,
-                "y": 136.46477132262055
+                "x": 240.1405243640622,
+                "y": 136.46477132262052
             }
         },
         "map/snowabbey_2.tmx": {
@@ -2913,7 +2913,7 @@
             "selectedLayer": 4,
             "viewCenter": {
                 "x": 240.26339647850358,
-                "y": 69.39924607529704
+                "y": 136.27904757360312
             }
         },
         "map/tileset/buildings.tsx": {

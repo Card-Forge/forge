@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="68">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="68">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../../../Sprites/AlchemistLabTileset.tsx"/>
- <layer id="1" name="Background" width="40" height="40">
+ <layer id="1" name="Background" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJzt1LEJgDAQQNEDbRwg2UEF98kA6pp2aim4hUt4ENIIFhE0or94XBEOPlfEFSIOyQyNn1vupe458+a+0HYU3t7aF3PT0ohUqjbPtcbsjdo1qfnmvqtaK9Kp3qZvAQB825KlbwCAYOVPAgAAP7cDGLtzhg==
+   eJyL5GRgiBzFA4ZBAES/ZoHggXYPLjyY3QdzGzqGyQ1W95ESppqiDAxaQKwtSj+3kqLvONBdJ4D4JI3dRy5OFWNgSAPidDHS9cLy6CgexaN4FI/iUUwMvsg88G4YxaN4FI9iGL5C5TIJAJK3m8c=
   </data>
  </layer>
- <layer id="2" name="Ground" width="40" height="40">
+ <layer id="2" name="Ground" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJztmF9OwzAMxvswpKV3QgPusTFxC8TgOFwDtvHMCdC09x6h+0Os7qOuF6ct7ZogYenT1shNfvGSOPPBJEk2KjQzpe6tpOW27WNc9VvZ57XVXvhPTdUPvtJP2pv1OZJPWr7H+bTxyD5Hbi3HzXwPpvCl7xobuIhjx9jAlykMdaqbg+8dyUaan+LTlQtaJIV++/7UVOO2Z3zU1pZP+i8argVNtLZd6ypnv3GX+GXKmmrK67O++GQfsGsbg+e00IvVIm3H2YWrrb5MqaYx1OZ/aUaNDWfg0TEHfpb1zYU+75T4/fixcwa81LYSZ2ffbOjzMS0YNV+ec8BG7XPPO32LGG+V8ZDD1uPheHzxlOJnYEi+OvZ/vva/bRuf0IqJD+dcaI6/ILJtTQ4JrS27J/juMzEo1ji+XlW1MWH2LMbXuKCnNDmzEHHS5LJY+Mjv/XQvveQdtAufq8Yw9Br08VHtRNZVYuLLTTV2Q+a7Jnwkbg+BzhufeOySNC6+ifi/NossfsgfvM4IvlzJgUPuow3bG2CUhloJ+dO9YjLgWSTzW+6okfJ7GX1u2JpYXni/Ywxu/JliR/Ul8N2Yck5UP5T12b75aE/MRcwOLN+h7kB8YJP1au7fB6evfzLZhroD4uaq2UtG39jeeCXndX6Zf2U92mXEuDtxuur7GI/fg2l+mJuLC/yoS6FvWd/9BpcEZH4=
+   eJztllFuwjAMhvvApCZH2c7Aw7gHG9eYVjjOrgGje94JEOp7j9AViBVMXS9O27UsRcLSL5X0T/LFDU4OKoryidWLqvRqxKMwbV9x3bc1v1Ojkvnnqu5DL/fxWBvPETy66kf5pPkgvidufcbtvAdlvfAssSEXcPwQNuTLBYYmNa3B14ezgRbn/PTlQiWR1V/7z1U9byXhg7aufNyftNwLkmBvu/ZVQb5xn/zlwp5qy+uLofj4GBhTk4OltloZJbobZx8urkfD8qTk9ztVqW0OpfVfSy4+GlgDj4410Fo2NBeOORPyd/GROoO80LZltXNoNhzzTVtGyUvPHGSD9oWnz9ACxmdhPjzD0vj/eHz55KI1MCRfE/udr/u37eIJrTHxYZ0LzXELgsgazpDQysg9wXefGYPGmsePh7r2Ksx/Fub2caHedfQrQuRJkivGwge+zfleSu+gJ9lk5cQ=
   </data>
  </layer>
- <layer id="7" name="Mountain Walls" width="40" height="40">
+ <layer id="7" name="Mountain Walls" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJztmMFSgzAQholTT46Oh1aEJ/FZfAxP1eL0nSQFnsS7D6Fnk5EdtttssqEpcPCf+acwpN2P3YQszVWW5QI/X/GmY9fGB+KNME6McRxgAcG5RvFhfKOyE2l1Pi+9b1ccTnrE+BjOdf/7O3mIJNICRssEvoS2xm+e6w8BtkrI9rkajp9Wx9cqz/dsjjrjV4bTx1cYl8K6vlzz1yoBo63jhzpl9NW47e/NV9/mfuA7mOOvuz9bwWeIL8TI5RD4oMY+Tl/+pALGR7LWJXxgYLR5g9yl4gMWm8N9BB8wYT6qlHw5ySE3B4GvcDDS+ZSKD8/DUA7p/KN1xoyp+IAF9gQJX9kzlmowXi+htRmjd+NauEaADxg75AK5VM5Qo+TKHcfXEcYWnbfkPCUfzZ3dA2uGz9auS8xA1dz4r0PucA+1QXypcxQr6LdwzfXMfPvwkKP6TiX8/LM9jY8Tr9sphft9rveyawav3bmkCSe4VsvgA4Wef3PLt39Mpe982Xw/DB+3f9B95tLi+Lj+dCzf7nbZfGPF8XH9s+tdag4+q6XkkNM/33ni+Kaegy5xz7+l5ND3H9GcfPZdDnoVH9/UNd4KuSgj9x8dFyNmLO3tpFwcJ8eK753Le0oeKSsXSzJmrH8B75DDjA==
+   eJy9lk1Og0AUx5lKZWHiqi3CBXoFtyaewmO48gPTW/QCvUAjWLiEuvIAuuzOGN1pnAm89PXNN478k38KZeD9eG8eMymLotTBFyO96dgJ9wPx1DGOj3EcYAHBeYXiw/gNiyRV7O+89L1VcXSqeoz34Zx0z781PPMxcY/vw2ljFExg0HtAlivuG8P1mYWtiMx5Az0j5tN4/1phuE/kqOG+1nCa+DLu3FJX0OVYf61wYBR1vGcyo6nGdfdutL6rAwdgDz4boy6HwAc1Bp/F0uON+XMVMJ6QXnfhA9NchuQDFpHDhQcfMA3Fl5Ic6uYg8GUKRjqfQvHheWjLIZ1/tM6YkfKNPHsIa4bWBBe+vGPM2c64X2y96aM77tKxR4APGBvkDDlnylC9pMqdjq8hjDU6r8l5SD6aO7EGlho+UbsmAINpPm6Odsfnx2pmuoeaIr7QOfIV7LdwzSsPvtd5FL3N+8X+IHshyN9CHioJ19ekb87205OPCn//xJ7GxIn7dkjh/b5u7yV6BvfuUHo5bL1OWleEE1yy/+GD+NhPsfyf0BrNTdv3LyTbcrzvbdL+Ck7hpWItN60fIaWKve3y9Jnq7xuKz6QvDZ9u/fgFuiSuWA==
   </data>
  </layer>
- <layer id="3" name="Clutter" width="40" height="40">
+ <layer id="3" name="Clutter" width="40" height="26">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztllFKw0AQhqdQqIJJii9FqT7XEhUFxUf1HLagB+hrUbDtDdQzeATRau+gF/Gp9QL9IS5Nl2S76U6yJc0HP0k2Q/bfyWYmRPli3CCaNPRiTzaD4+/W/PitT3Tn8/oSOAdELnRRDnRaSf6MR3jrMfkbhc5b8NWGdppEu81g7FvhT85b0vtx/JQDydzD2wN0Bm/nEf7eS0Qf0LA0f65C7AETf+JdhiXGOxuzuG6MsqDnEfWhgaeOC3vSzaEJtSrmgOrQHrT/fy3LFrUFc4+xxyfQX8Re70pHGzw5RM/QixMfc4l6eQVda9ZNTg5doiPo2I2PuYGvFtS24K9gNXhL4Zlewh76qbi3bK/jQvQkuW+OosNZ0Vm78BXV15OgqrccmPrTqbcqXhf0WlN/OvVWJu2cmxLOeZXhv5j7W14m52my7c9kQha1ZRXhyl9afNk2wEie1rJOrGttsEXdtoGCzBjaNlBQkBOmhnVK2g==
+   eJzdVctKAzEUvQPWUrG1olBaP6BTqa+F4lL9B3cq6NqVIF3U1x+oSx87f0CQPqjuXGsXinXnXlFQf8AbZsLciUkm40wVPHC4mZuZyclJcgPwP/BqA7wh35Efttk3UyknvvT786tlgLVyvPpSJYA+ZBqZKUX71zZq24lJX4u0b5JOzI8CFEaDvxV9C9uvw0ivR1HfNGqbkeirWQB1ZMPyt3XgeyAMZnvkpH28TVFR8C+xmPQ/U02mHv4UuSz+n5Ctbz0r518gR8YtW/7I8Y57/AP5KdnrFSGKiHI+GHS+VNNO3Md4gDxMf+/jmMN6OY9cMKybcWIsAzCOnMio31lCXcvIlV/QN4RjDCvG4et1if1Xwjsbie7q4pjAcScDfOhg/6P7zqd7vqm+6y75ONirro0PijznEKnzTxJ9F13QO0DuUJP1a2r6op7lIFB9u+jPnusRry23PR4pWhA/xLmyZ6rvBLWd2v7+kuXpjAJZvTW5Q3V7U7c/OyH1yuptGJwp7lrur+gfnZeJVpN6K94PujtO1Megqi+yNQiCydpSz7PkTDdQR9P+rk9WXyjiPssqz+9Qx73t+LCZ8Hzn53g94TAKqsgtSU6W56C1hJP5J+bayPOk4icGY9IcjXnLYUFyFkRvqEcsHhUBjotOux3i7NIxuRaao7Hhsml5c6BzYWMzXyif3VhDbfWilzcFHZNroTlVzAtk34nadAzCF1prpDI=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
