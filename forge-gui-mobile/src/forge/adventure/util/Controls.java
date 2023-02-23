@@ -362,6 +362,7 @@ public class Controls {
 
     public static String colorIdToTypingString(ColorSet color)
     {
+        //NOTE converting to uppercase will use pixelmana.atlas, higher quality pixel mana symbol.
         String colorId="";
         if(color.hasWhite())
             colorId+="[+w]";
@@ -408,6 +409,7 @@ public class Controls {
         {
             textraFont=new Font(getSkin().getFont("default"), 0f, 1.5f, 0f, 0f);
             textraFont.addAtlas(Config.instance().getAtlas(Paths.ITEMS_ATLAS));
+            textraFont.addAtlas(Config.instance().getAtlas(Paths.PIXELMANA_ATLAS));
         }
         return textraFont;
     }
