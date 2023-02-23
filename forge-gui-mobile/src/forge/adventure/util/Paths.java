@@ -13,6 +13,7 @@ public class Paths {
     public static final String SKIN = "skin/ui_skin.json";
     public static final String ITEMS_EQUIP = "skin/equip.png";
     public static final String ITEMS_ATLAS = "sprites/items.atlas";
+    public static final String PIXELMANA_ATLAS = "sprites/pixelmana.atlas";
     public static final String KEYS_ATLAS = "skin/keys.atlas";
     public static final String COLOR_FRAME_ATLAS = "ui/color_frames.atlas";
     public static final String ARENA_ATLAS = "ui/arena.atlas";
