@@ -39,7 +39,6 @@ import forge.adventure.scene.*;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.assets.FImageComplex;
-import forge.assets.FSkin;
 import forge.assets.FSkinImage;
 import forge.card.CardRenderer;
 import forge.deck.Deck;
