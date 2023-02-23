@@ -307,7 +307,7 @@
     {
       "type": "TextButton",
       "selectable": true,
-      "name": "BResetEdition",
+      "name": "BReset",
       "text": "tr(lblReset)",  
       "x": 250,
       "y": 60,
