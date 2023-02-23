@@ -2034,3 +2034,16 @@
 2023-01-21 12512378 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2023-01-21-12512378-pauper-challenge.zip
 2023-01-22 12512391 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2023-01-22-12512391-pauper-challenge.zip
 2023-01-25 Pauper League (40 decks) | https://downloads.cardforge.org/decks/archive/pauper/2023-01-25-pauper-league.zip
+2023-01-28 12515832 Pauper Qualifier (16 decks) | https://downloads.cardforge.org/decks/archive/pauper/2023-01-28-12515832-pauper-qualifier.zip
+2023-01-28 12515837 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2023-01-28-12515837-pauper-challenge.zip
+2023-01-29 12515850 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2023-01-29-12515850-pauper-challenge.zip
+2023-02-01 Pauper League (35 decks) | https://downloads.cardforge.org/decks/archive/pauper/2023-02-01-pauper-league.zip
+2023-02-04 12517106 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2023-02-04-12517106-pauper-challenge.zip
+2023-02-05 12517120 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2023-02-05-12517120-pauper-challenge.zip
+2023-02-08 Pauper League (33 decks) | https://downloads.cardforge.org/decks/archive/pauper/2023-02-08-pauper-league.zip
+2023-02-11 12520684 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2023-02-11-12520684-pauper-challenge.zip
+2023-02-12 12 520696 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2023-02-12-12-520696-pauper-challenge.zip
+2023-02-15 Pauper League (37 decks) | https://downloads.cardforge.org/decks/archive/pauper/2023-02-15-pauper-league.zip
+2023-02-18 12523121 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2023-02-18-12523121-pauper-challenge.zip
+2023-02-19 12523135 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2023-02-19-12523135-pauper-challenge.zip
+Pauper League (20 decks) | https://downloads.cardforge.org/decks/archive/pauper/pauper-league.zip
