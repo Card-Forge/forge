@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Array;
 public enum AdventureModes {
     Standard("Standard"),
     Constructed("Constructed"),
-    Chaos("[RED]Chaos"),
+    Chaos("[GOLD]Chaos"),
     Pile("Pile"),
     Custom("Custom");
 
