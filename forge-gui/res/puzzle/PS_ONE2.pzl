@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Phyrexia: All Will Be One #02
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/02/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your Rabbit Battery is attached to your Queen Allenal of Ruadach. Your Barbed Batterfist is attached to your Rebel token. 
+[state]
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanlife=20
+ailife=16
+aicounters=POISON=6
+humanhand=Bladehold War-Whip;Sokenzan, Crucible of Defiance;Plated Onslaught
+humanbattlefield=Elegant Entourage;Queen Allenal of Ruadach|Id:1;Rabbit Battery|AttachedTo:1;T:r_2_2_rebel|Id:2;Barbed Batterfist|AttachedTo:2;T:w_1_1_soldier;The Seedcore;Jetmir's Garden;Jetmir's Garden;Jetmir's Garden
+aibattlefield=Charforger;T:r_1_1_phyrexian_goblin;T:r_1_1_phyrexian_goblin;T:r_1_1_phyrexian_goblin
