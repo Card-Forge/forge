@@ -32,7 +32,6 @@ import forge.game.card.*;
 import forge.game.event.*;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
-import forge.game.keyword.KeywordsChange;
 import forge.game.mulligan.MulliganService;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
@@ -481,33 +480,10 @@ public class GameAction {
 
             // 400.7a Effects from static abilities that give a permanent spell on the stack an ability
             // that allows it to be cast for an alternative cost continue to apply to the permanent that spell becomes.
-            if (zoneFrom.is(ZoneType.Stack) && toBattlefield) {
-                List<KeywordInterface> newKw = Lists.newArrayList();
-                for (Table.Cell<Long, Long, KeywordsChange> cell : c.getChangedCardKeywords().cellSet()) {
-                    // comes from a static ability
-                    if (cell.getColumnKey() == 0) {
-                        continue;
-                    }
-                    for (KeywordInterface ki : cell.getValue().getKeywords()) {
-                        boolean keepKeyword = false;
-                        for (SpellAbility sa : ki.getAbilities()) {
-                            if (!sa.isSpell()) {
-                                continue;
-                            }
-                            if (sa.getAlternativeCost() != null) {
-                                keepKeyword = true;
-                                break;
-                            }
-                        }
-                        if (keepKeyword) {
-                            ki.setHostCard(copied);
-                            newKw.add(ki);
-                        }
-                    }
-                }
-                if (!newKw.isEmpty()) {
-                    copied.addChangedCardKeywordsInternal(newKw, null, false, copied.getTimestamp(), 0, true);
-                }
+            if (zoneFrom.is(ZoneType.Stack) && toBattlefield && c.getCastSA() != null && c.getCastSA().getKeyword() != null) {
+                KeywordInterface ki = c.getCastSA().getKeyword();
+                ki.setHostCard(copied);
+                copied.addChangedCardKeywordsInternal(ImmutableList.of(ki), null, false, copied.getTimestamp(), 0, true);
             }
         }
 
