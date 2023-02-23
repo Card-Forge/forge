@@ -2507,7 +2507,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (!matchesValidParam("ValidAfterStack", this)) {
             return false;
         }
-        // TODO add checks for Lurrus
         return true;
     }
 }
