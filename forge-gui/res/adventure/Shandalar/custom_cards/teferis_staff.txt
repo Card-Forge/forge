@@ -4,5 +4,4 @@ Types:Artifact Equipment
 A:AB$ Phases | Cost$ U W PayShards<2> | ValidTgts$ Permanent | ActivationZone$ Command | SpellDescription$ Target permanent phases out. (Treat it and anything attached to it as though they don't exist until its controllers's next turn.)
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigUntap | TriggerDescription$ At the beginning of your end step, untap target artifact or land you control.
 SVar:TrigUntap:DB$ Untap | ValidTgts$ Artifact.YouCtrl,Land.YouCtrl | TgtPrompt$ Select target artifact or land you control
-Oracle:
-Provided by Teferi's Staff.\n At the beginning of your end step, untap target artifact or land you control.\n{U{W}, {M}{M}, Exile Teferi's Staff: Target permanent phases out. (Treat it and anything attached to it as though they don't exist until its controllers's next turn.)
+Oracle:Provided by Teferi's Staff.\n At the beginning of your end step, untap target artifact or land you control.\n{M}{M}, {U{W}, Exile Teferi's Staff: Target permanent phases out. (Treat it and anything attached to it as though they don't exist until its controllers's next turn.)
