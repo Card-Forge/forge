@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import forge.Forge;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 
@@ -67,7 +68,7 @@ public class HeroListData {
             instance = read();
         Array<String> ret = new Array<>();
         for (HeroData hero : instance.heroes) {
-            ret.add(hero.name);
+            ret.add(Forge.getLocalizer().getMessageorUseDefault("lbl"+hero.name, hero.name));
         }
         return ret;
     }
