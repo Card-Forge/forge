@@ -2580,8 +2580,8 @@
             "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 320.25,
-                "y": 214.25
+                "x": 291.75,
+                "y": 197.75
             }
         },
         "map/plains_town.tmx": {
@@ -2867,7 +2867,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 240.1405243640622,
-                "y": 136.46477132262052
+                "y": 136.46477132262055
             }
         },
         "map/snowabbey_2.tmx": {
@@ -3101,7 +3101,6 @@
         "map/kobold_mine.tmx",
         "map/barbariancamp_4.tmx",
         "map/nihiri.tmx",
-        "C:/Users/simon/Documents/Sprites/AlchemistLabTileset.tsx",
         "map/snowabbey_1.tmx"
     ],
     "project": "main.tiled-project",

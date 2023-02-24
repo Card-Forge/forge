@@ -49,7 +49,9 @@
 	"White Dwarf",
 	"White Wiz1",
 	"White Wiz2",
-	"White Wiz3"
+	"White Wiz3",
+	"Armored Knight",
+	"Kor Warrior"
 ],
 "pointsOfInterest": [
 	"White Castle",
@@ -78,7 +80,8 @@
 	"CaveW3",
 	"CaveW4",
 	"CaveW5",
-	"CaveW6"
+	"CaveW6",
+	"Nahiri Encampment"
 ],
 "structures": [
 	{
