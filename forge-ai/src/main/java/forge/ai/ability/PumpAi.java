@@ -438,7 +438,7 @@ public class PumpAi extends PumpAiBase {
                 list = CardLists.getTargetableCards(list, sa);
                 CardLists.sortByPowerDesc(list);
 
-                if (source.hasKeyword("You may choose not to untap CARDNAME during your untap step.") && sa.getPayCosts().hasTapCost()) {
+                if (list.contains(source) && source.hasKeyword("You may choose not to untap CARDNAME during your untap step.") && sa.getPayCosts().hasTapCost()) {
                     list.remove(source); // don't tap a card that will be tapped as a part of the cost and won't untap normally.
                 }
 
