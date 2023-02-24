@@ -30,7 +30,6 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
-import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -40,7 +39,8 @@ import forge.game.zone.ZoneType;
 public class StaticAbilityCantAttackBlock {
     public static String CantAttackMode = "CantAttack";
     public static String CantBlockByMode = "CantBlockBy";
-    public static String CanAttackHasteMode = "CanAttackIfHaste";
+    public static String CanAttackIfHasteMode = "CanAttackIfHaste";
+    public static String CanBlockIfReachMode = "CanBlockIfReach";
     public static String MinMaxBlockerMode = "MinMaxBlocker";
 
     public static boolean cantAttack(final Card attacker, final GameEntity defender) {
@@ -67,10 +67,8 @@ public class StaticAbilityCantAttackBlock {
     /**
      * TODO Write javadoc for this method.
      *
-     * @param stAb
-     *            a StaticAbility
-     * @param card
-     *            the card
+     * @param stAb a StaticAbility
+     * @param card the card
      * @return a Cost
      */
     public static boolean applyCantAttackAbility(final StaticAbility stAb, final Card card, final GameEntity target) {
@@ -86,7 +84,7 @@ public class StaticAbilityCantAttackBlock {
         }
 
         if (stAb.hasParam("DefenderKeyword")) {
-            //check for "can attack as if didn't have defender" static
+            // check for "can attack as if didn't have defender" static
             if (StaticAbilityCanAttackDefender.canAttack(card, target)) {
                 return false;
             }
@@ -97,19 +95,20 @@ public class StaticAbilityCantAttackBlock {
         if (stAb.hasParam("UnlessDefenderControls")) {
             String type = stAb.getParam("UnlessDefenderControls");
             CardCollectionView list = defender.getCardsIn(ZoneType.Battlefield);
-            if (Iterables.any(list, CardPredicates.restriction(type.split(","), hostCard.getController(), hostCard, stAb))) {
+            if (Iterables.any(list,
+                    CardPredicates.restriction(type.split(","), hostCard.getController(), hostCard, stAb))) {
                 return false;
             }
         }
         if (stAb.hasParam("IfDefenderControls")) {
             String type = stAb.getParam("IfDefenderControls");
             CardCollectionView list = defender.getCardsIn(ZoneType.Battlefield);
-            if (!Iterables.any(list, CardPredicates.restriction(type.split(","), hostCard.getController(), hostCard, stAb))) {
+            if (!Iterables.any(list,
+                    CardPredicates.restriction(type.split(","), hostCard.getController(), hostCard, stAb))) {
                 return false;
             }
         }
-        if (stAb.hasParam("DefenderNotNearestToYouInChosenDirection")
-                && (hostCard.getChosenDirection() == null
+        if (stAb.hasParam("DefenderNotNearestToYouInChosenDirection") && (hostCard.getChosenDirection() == null
                 || defender.equals(game.getNextPlayerAfter(card.getController(), hostCard.getChosenDirection())))) {
             return false;
         }
@@ -123,8 +122,7 @@ public class StaticAbilityCantAttackBlock {
         return true;
     }
 
-    public static boolean cantBlockBy(final Card attacker, final Card blocker)
-    {
+    public static boolean cantBlockBy(final Card attacker, final Card blocker) {
         for (final Card ca : attacker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(CantBlockByMode)) {
@@ -140,6 +138,7 @@ public class StaticAbilityCantAttackBlock {
 
     /**
      * returns true if attacker can't be blocked by blocker
+     *
      * @param stAb
      * @param attacker
      * @param blocker
@@ -155,18 +154,9 @@ public class StaticAbilityCantAttackBlock {
             for (final String v : stAb.getParam("ValidBlocker").split(",")) {
                 if (blocker != null && blocker.isValid(v, host.getController(), host, stAb)) {
                     stillblock = false;
-                    //Dragon Hunter check
-                    if (v.contains("withoutReach") && blocker.hasStartOfKeyword("IfReach")) {
-                        for (KeywordInterface inst : blocker.getKeywords()) {
-                            String k = inst.getOriginal();
-                            if (k.startsWith("IfReach")) {
-                                String[] n = k.split(":");
-                                if (attacker.getType().hasCreatureType(n[1])) {
-                                    stillblock = true;
-                                    break;
-                                }
-                            }
-                        }
+                    // Dragon Hunter check
+                    if (v.contains("withoutReach") && canBlockIfReach(attacker, blocker)) {
+                        stillblock = true;
                     }
                     if (!stillblock) {
                         break;
@@ -192,13 +182,36 @@ public class StaticAbilityCantAttackBlock {
         return true;
     }
 
+    public static boolean canBlockIfReach(final Card attacker, final Card blocker) {
+        for (final Card ca : attacker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.checkConditions(CanBlockIfReachMode)) {
+                    continue;
+                }
+                if (applyCanBlockIfReachAbility(stAb, attacker, blocker)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean applyCanBlockIfReachAbility(final StaticAbility stAb, final Card attacker,
+            final Card blocker) {
+        if (!stAb.matchesValidParam("ValidAttacker", attacker)) {
+            return false;
+        }
+        if (!stAb.matchesValidParam("ValidBlocker", blocker)) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * TODO Write javadoc for this method.
      *
-     * @param stAb
-     *            a StaticAbility
-     * @param attacker
-     *            the card
+     * @param stAb     a StaticAbility
+     * @param attacker the card
      * @return a Cost
      */
     public static Cost getAttackCost(final StaticAbility stAb, final Card attacker, final GameEntity target) {
@@ -235,10 +248,8 @@ public class StaticAbilityCantAttackBlock {
     /**
      * TODO Write javadoc for this method.
      *
-     * @param stAb
-     *            a StaticAbility
-     * @param blocker
-     *            the card
+     * @param stAb    a StaticAbility
+     * @param blocker the card
      * @return a Cost
      */
     public static Cost getBlockCost(final StaticAbility stAb, final Card blocker, final GameEntity attacker) {
@@ -266,7 +277,7 @@ public class StaticAbilityCantAttackBlock {
         }
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(CanAttackHasteMode)) {
+                if (!stAb.checkConditions(CanAttackIfHasteMode)) {
                     continue;
                 }
                 if (applyCanAttackHasteAbility(stAb, attacker, defender)) {
@@ -277,7 +288,8 @@ public class StaticAbilityCantAttackBlock {
         return false;
     }
 
-    public static boolean applyCanAttackHasteAbility(final StaticAbility stAb, final Card card, final GameEntity target) {
+    public static boolean applyCanAttackHasteAbility(final StaticAbility stAb, final Card card,
+            final GameEntity target) {
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
@@ -313,7 +325,8 @@ public class StaticAbilityCantAttackBlock {
         return result;
     }
 
-    public static void applyMinMaxBlockerAbility(final StaticAbility stAb, final Card attacker, final Player defender, MutablePair<Integer, Integer> result) {
+    public static void applyMinMaxBlockerAbility(final StaticAbility stAb, final Card attacker, final Player defender,
+            MutablePair<Integer, Integer> result) {
         if (!stAb.matchesValidParam("ValidCard", attacker)) {
             return;
         }

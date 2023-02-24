@@ -17,7 +17,6 @@
  */
 package forge.game.staticability;
 
-import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.zone.ZoneType;
@@ -47,8 +46,6 @@ public class StaticAbilityCanAttackDefender {
     }
 
     public static boolean applyCanAttackAbility(final StaticAbility stAb, final Card card, final GameEntity target) {
-        final Card hostCard = stAb.getHostCard();
-        final Game game = hostCard.getGame();
 
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
