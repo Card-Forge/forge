@@ -2000,11 +2000,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (keyword.startsWith("CantBeCounteredBy")) {
                 final String[] p = keyword.split(":");
                 sbLong.append(p[2]).append("\r\n");
-            } else if (keyword.startsWith("IfReach")) {
-                String[] k = keyword.split(":");
-                sbLong.append(getName()).append(" can block ")
-                .append(CardType.getPluralType(k[1]))
-                .append(" as though it had reach.\r\n");
             } else {
                 sbLong.append(keyword).append("\r\n");
             }
@@ -2313,11 +2308,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
                     sb.append(" ").append(Localizer.getInstance().getMessage("lblSagaFooter")).append(" ").append(TextUtil.toRoman(getFinalChapterNr())).append(".");
                     sb.append(")").append("\r\n\r\n");
-                } else if (keyword.startsWith("IfReach")) {
-                    String[] k = keyword.split(":");
-                    sbLong.append(getName()).append(" can block ")
-                    .append(CardType.getPluralType(k[1]))
-                    .append(" as though it had reach.\r\n");
                 } else if (keyword.startsWith("MayEffectFromOpening")) {
                     final String[] k = keyword.split(":");
                     // need to get SpellDescription from Svar

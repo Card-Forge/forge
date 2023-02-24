@@ -3,5 +3,5 @@ ManaCost:W
 Types:Creature Human Warrior
 PT:2/1
 K:Protection from Dragons
-K:IfReach:Dragon
+S:Mode$ CanBlockIfReach | ValidAttacker$ Dragon | ValidBlocker$ Card.Self | Description$ CARDNAME can block Dragons as though it had reach.
 Oracle:Protection from Dragons\nDragon Hunter can block Dragons as though it had reach.
