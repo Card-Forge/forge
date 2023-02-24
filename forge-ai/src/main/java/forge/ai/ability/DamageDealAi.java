@@ -431,7 +431,7 @@ public class DamageDealAi extends DamageAiBase {
         final Game game = source.getGame();
         List<Card> hPlay = CardLists.filter(getTargetableCards(ai, sa, pl, tgt, activator, source, game), CardPredicates.Presets.PLANESWALKERS);
 
-        List<Card> killables = CardLists.filter(hPlay, new Predicate<Card>() {
+        CardCollection killables = CardLists.filter(hPlay, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.getSVar("Targeting").equals("Dies")
@@ -442,7 +442,7 @@ public class DamageDealAi extends DamageAiBase {
         });
 
         // Filter AI-specific targets if provided
-        killables = ComputerUtil.filterAITgts(sa, ai, new CardCollection(killables), true);
+        killables = ComputerUtil.filterAITgts(sa, ai, killables, true);
 
         // We can kill a planeswalker, so go for it
         if (pl.isOpponentOf(ai) && activator.equals(ai) && !killables.isEmpty()) {

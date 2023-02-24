@@ -268,7 +268,7 @@ public final class CardUtil {
 
         newCopy.addRemembered(in.getRemembered());
         newCopy.addImprintedCards(in.getImprintedCards());
-        newCopy.setChosenCards(new CardCollection(in.getChosenCards()));
+        newCopy.setChosenCards(in.getChosenCards());
 
         newCopy.setChosenType(in.getChosenType());
         newCopy.setChosenType2(in.getChosenType2());

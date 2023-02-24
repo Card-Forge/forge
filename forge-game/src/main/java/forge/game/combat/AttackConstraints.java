@@ -141,10 +141,7 @@ public class AttackConstraints {
                 attackersToRemove.add(attacker);
             }
         }
-        myPossibleAttackers.removeAll((Iterable<Card>) attackersToRemove);
-        for (final Card toRemove : attackersToRemove) {
-            reqs.removeAll(findAll(reqs, toRemove));
-        }
+        myPossibleAttackers.removeAll(attackersToRemove);
         attackersToRemove.clear();
 
         // Next, remove creatures with constraints that can't be fulfilled.

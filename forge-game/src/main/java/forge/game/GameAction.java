@@ -918,9 +918,6 @@ public class GameAction {
         return changeZone(game.getZoneOf(c), library, c, libPosition, cause, params);
     }
 
-    public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition, SpellAbility cause) {
-        return moveToVariantDeck(c, zone, deckPosition, cause, null);
-    }
     public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
         final PlayerZone deck = c.getOwner().getZone(zone);
         if (deckPosition == -1 || deckPosition > deck.size()) {
@@ -1809,7 +1806,6 @@ public class GameAction {
         // remove the ones that got already removed by other legend rule above
         emptyNameAllNonLegendary.removeAll(removed);
         if (emptyNameAllNonLegendary.size() > 1) {
-
             recheck = true;
 
             Card toKeep = p.getController().chooseSingleEntityForEffect(emptyNameAllNonLegendary, new SpellAbility.EmptySa(ApiType.InternalLegendaryRule, new Card(-1, game), p),

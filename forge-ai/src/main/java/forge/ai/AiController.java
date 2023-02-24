@@ -376,7 +376,7 @@ public class AiController {
     }
 
     private CardCollection filterLandsToPlay(CardCollection landList) {
-        final CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
+        final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
         CardCollection nonLandList = CardLists.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
         if (landList.size() == 1 && nonLandList.size() < 3) {
             CardCollectionView cardsInPlay = player.getCardsIn(ZoneType.Battlefield);
@@ -1148,7 +1148,6 @@ public class AiController {
     public CardCollection getCardsToDiscard(final int numDiscard, final String[] uTypes, final SpellAbility sa) {
         return getCardsToDiscard(numDiscard, uTypes, sa, CardCollection.EMPTY);
     }
-
     public CardCollection getCardsToDiscard(final int numDiscard, final String[] uTypes, final SpellAbility sa, final CardCollectionView exclude) {
         boolean noFiltering = sa != null && "DiscardCMCX".equals(sa.getParam("AILogic")); // list AI logic for which filtering is taken care of elsewhere
         CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
