@@ -88,7 +88,7 @@
     {
       "type": "TextButton",
       "name": "delete",
-      "text": "Discard",
+      "text": "tr(lblDispose)",
       "binding": "Status",
       "width": 60,
       "height": 30,
@@ -98,7 +98,7 @@
     {
       "type": "TextButton",
       "name": "equip",
-      "text": "Equip",
+      "text": "tr(lblEquip)",
       "binding": "Equip",
       "width": 60,
       "height": 30,
@@ -108,7 +108,7 @@
     {
       "type": "TextButton",
       "name": "use",
-      "text": "Use",
+      "text": "tr(lblUse)",
       "binding": "Use",
       "width": 60,
       "height": 30,
