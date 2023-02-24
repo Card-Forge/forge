@@ -42,6 +42,9 @@ Deck
 ExitToWorldMap 
   xy: 48, 64
   size: 16, 16
+MovementSpeed 
+  xy: 48, 80
+  size: 16, 16
 Item 
   xy: 0, 64
   size: 16, 16  
