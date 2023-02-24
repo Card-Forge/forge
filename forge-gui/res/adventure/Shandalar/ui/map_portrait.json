@@ -12,7 +12,7 @@
     {
       "type": "TextButton",
       "name": "done",
-      "text": "tr(lblBack)",
+      "text": "[%80]tr(lblBack)",
       "binding": "Back",
       "width": 48,
       "height": 20,
