@@ -11,6 +11,7 @@ import com.badlogic.gdx.files.FileHandle;
 
 import forge.Forge;
 import forge.gui.GuiBase;
+import forge.localinstance.properties.ForgeConstants;
 
 public class LibGDXImageFetcher extends ImageFetcher {
     @Override
@@ -30,8 +31,8 @@ public class LibGDXImageFetcher extends ImageFetcher {
         }
 
         private void doFetch(String urlToDownload) throws IOException {
-            String newdespath = urlToDownload.contains(".fullborder.jpg") ?
-                    TextUtil.fastReplace(destPath, ".full.jpg", ".fullborder.jpg") : destPath;
+            String newdespath = urlToDownload.contains(".fullborder.") || urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD) ?
+                    TextUtil.fastReplace(destPath, ".full.", ".fullborder.") : destPath;
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
             java.net.URLConnection c = url.openConnection();
