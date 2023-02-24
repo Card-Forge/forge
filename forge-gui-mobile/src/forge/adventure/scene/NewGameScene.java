@@ -1,9 +1,11 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.github.tommyettinger.textra.TextraLabel;
@@ -45,7 +47,8 @@ public class NewGameScene extends UIScene {
     private final Array<String> custom;
     private final TextraLabel colorLabel;
 
-    private final Array<AdventureModes> modes=new Array<>();
+    private final Array<AdventureModes> modes = new Array<>();
+
     private NewGameScene() {
 
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
@@ -71,21 +74,18 @@ public class NewGameScene extends UIScene {
 
         for (DifficultyData diff : Config.instance().getConfigData().difficulties)//check first difficulty if exists
         {
-            if(diff.starterDecks!=null)
-            {
+            if (diff.starterDecks != null) {
                 modes.add(AdventureModes.Standard);
                 AdventureModes.Standard.setSelectionName(colorIdLabel);
                 AdventureModes.Standard.setModes(colorNames);
             }
 
-            if(diff.constructedStarterDecks!=null)
-            {
+            if (diff.constructedStarterDecks != null) {
                 modes.add(AdventureModes.Constructed);
                 AdventureModes.Constructed.setSelectionName(colorIdLabel);
                 AdventureModes.Constructed.setModes(colorNames);
             }
-            if(diff.pileDecks!=null)
-            {
+            if (diff.pileDecks != null) {
                 modes.add(AdventureModes.Pile);
                 AdventureModes.Pile.setSelectionName(colorIdLabel);
                 AdventureModes.Pile.setModes(colorNames);
@@ -106,28 +106,36 @@ public class NewGameScene extends UIScene {
         starterEdition.setTextList(editionNames);
 
         modes.add(AdventureModes.Chaos);
-        AdventureModes.Chaos.setSelectionName("[BLACK]"+Forge.getLocalizer().getMessage("lblDeck")+":");
+        AdventureModes.Chaos.setSelectionName("[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":");
         AdventureModes.Chaos.setModes(new Array<>(new String[]{Forge.getLocalizer().getMessage("lblRandomDeck")}));
         for (DeckProxy deckProxy : DeckProxy.getAllCustomStarterDecks())
             custom.add(deckProxy.getName());
-        if(!custom.isEmpty())
-        {
+        if (!custom.isEmpty()) {
             modes.add(AdventureModes.Custom);
-            AdventureModes.Custom.setSelectionName("[BLACK]"+Forge.getLocalizer().getMessage("lblDeck")+":");
+            AdventureModes.Custom.setSelectionName("[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":");
             AdventureModes.Custom.setModes(custom);
         }
-        String[] modeNames=new String[modes.size];
-        for(int i=0;i<modes.size;i++)
-            modeNames[i]=modes.get(i).getName();
+        String[] modeNames = new String[modes.size];
+        for (int i = 0; i < modes.size; i++)
+            modeNames[i] = modes.get(i).getName();
         mode.setTextList(modeNames);
 
-        gender.setTextList(new String[]{"Male", "Female"});
+        gender.setTextList(new String[]{Forge.getLocalizer().getInstance().getMessage("lblMale"), Forge.getLocalizer().getInstance().getMessage("lblFemale")});
+        gender.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                //gender should be either Male or Female
+                String val = gender.getCurrentIndex() > 0 ? "Female" : "Male";
+                selectedName.setText(NameGenerator.getRandomName(val, "Any", ""));
+                super.clicked(event, x, y);
+            }
+        });
         gender.addListener(event -> NewGameScene.this.updateAvatar());
 
         mode.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                AdventureModes smode=modes.get(mode.getCurrentIndex());
+                AdventureModes smode = modes.get(mode.getCurrentIndex());
                 colorLabel.setText(smode.getSelectionName());
                 colorId.setTextList(smode.getModes());
                 starterEdition.setVisible(smode == AdventureModes.Standard);
@@ -145,7 +153,7 @@ public class NewGameScene extends UIScene {
         for (DifficultyData diff : Config.instance().getConfigData().difficulties) {
             if (diff.startingDifficulty)
                 startingDifficulty = i;
-            diffList.add(diff.name);
+            diffList.add(Forge.getLocalizer().getInstance().getMessageorUseDefault("lbl" + diff.name, diff.name));
             i++;
         }
         difficulty.setTextList(diffList);
@@ -166,17 +174,22 @@ public class NewGameScene extends UIScene {
     private static NewGameScene object;
 
     public static NewGameScene instance() {
-        if(object==null)
-            object=new NewGameScene();
+        if (object == null)
+            object = new NewGameScene();
         return object;
     }
 
+    boolean started = false;
 
     public boolean start() {
+        if (started)
+            return true;
+        started = true;
         if (selectedName.getText().isEmpty()) {
             selectedName.setText(NameGenerator.getRandomName("Any", "Any", ""));
         }
         Runnable runnable = () -> {
+            started = false;
             FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
             WorldSave.generateNewWorld(selectedName.getText(),
                     gender.getCurrentIndex() == 0,
@@ -229,7 +242,7 @@ public class NewGameScene extends UIScene {
                     colorIds[colorId.getCurrentIndex()],
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
-                    editionIds[starterEdition.getCurrentIndex()],0);
+                    editionIds[starterEdition.getCurrentIndex()], 0);
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             Forge.switchScene(GameScene.instance());
         }

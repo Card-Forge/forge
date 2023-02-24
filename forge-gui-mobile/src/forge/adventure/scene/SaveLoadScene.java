@@ -62,7 +62,7 @@ public class SaveLoadScene extends UIScene {
         int c = 0;
         String[] diffList = new String[Config.instance().getConfigData().difficulties.length];
         for (DifficultyData diff : Config.instance().getConfigData().difficulties) {
-            diffList[c] = diff.name;
+            diffList[c] = Forge.getLocalizer().getMessageorUseDefault("lbl" + diff.name, diff.name);
             c++;
         }
 
@@ -75,7 +75,7 @@ public class SaveLoadScene extends UIScene {
         playerLocation = Controls.newTextraLabel("");
         playerLocation.setText("");
         playerLocation.setX(previewImage.getX());
-        playerLocation.setY(previewImage.getY()+5);
+        playerLocation.setY(previewImage.getY() + 5);
         ui.addActor(playerLocation);
         header = Controls.newTextraLabel(Forge.getLocalizer().getMessage("lblSave"));
         header.setAlignment(Align.center);
@@ -98,33 +98,31 @@ public class SaveLoadScene extends UIScene {
         difficulty.setSelectedIndex(1);
         difficulty.setAlignment(Align.center);
         difficulty.getStyle().fontColor = Color.GOLD;
-        difficulty.setX(scrollPane.getWidth()-difficulty.getWidth()+5);
-        difficulty.setY(scrollPane.getTop()-difficulty.getHeight()-5);
+        difficulty.setX(scrollPane.getWidth() - difficulty.getWidth() + 5);
+        difficulty.setY(scrollPane.getTop() - difficulty.getHeight() - 5);
     }
 
 
     private static SaveLoadScene object;
 
     public static SaveLoadScene instance() {
-        if(object==null)
-            object=new SaveLoadScene();
+        if (object == null)
+            object = new SaveLoadScene();
         return object;
     }
 
-    public class SaveSlot extends Selectable<TextraButton>
-    {
+    public class SaveSlot extends Selectable<TextraButton> {
         private int slotNumber;
 
-        public SaveSlot(  int slotNumber) {
+        public SaveSlot(int slotNumber) {
             super(Controls.newTextButton("..."));
             this.slotNumber = slotNumber;
-            SaveSlot self=this;
+            SaveSlot self = this;
             actor.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     try {
-                        if (!actor.isDisabled())
-                        {
+                        if (!actor.isDisabled()) {
                             selectActor(self);
                         }
                     } catch (Exception e) {
@@ -133,9 +131,9 @@ public class SaveLoadScene extends UIScene {
                 }
             });
         }
+
         @Override
-        public void onSelect(UIScene scene)
-        {
+        public void onSelect(UIScene scene) {
             super.onSelect(scene);
             updateSlot(slotNumber);
         }
@@ -145,17 +143,17 @@ public class SaveLoadScene extends UIScene {
     private Selectable<TextraButton> addSaveSlot(String name, int i) {
         layout.add(Controls.newLabel(name)).align(Align.left).pad(2, 5, 2, 10);
         SaveSlot button = new SaveSlot(i);
-        layout.add(button.actor).fill(true,false).expand(true,false).align(Align.left).expandX();
+        layout.add(button.actor).fill(true, false).expand(true, false).align(Align.left).expandX();
         buttons.put(i, button);
         layout.row();
-        addToSelectable(button) ;
+        addToSelectable(button);
         return button;
 
     }
 
 
     public boolean select(int slot) {
-        if(!buttons.containsKey(slot))
+        if (!buttons.containsKey(slot))
             return false;
         selectActor(buttons.get(slot));
         return updateSlot(slot);
@@ -175,7 +173,7 @@ public class SaveLoadScene extends UIScene {
                 previewImage.setVisible(true);
                 previewDate.setVisible(true);
                 if (header.saveDate != null)
-                    previewDate.setText("[%98]"+DateFormat.getDateInstance().format(header.saveDate) + " " + DateFormat.getTimeInstance(DateFormat.SHORT).format(header.saveDate));
+                    previewDate.setText("[%98]" + DateFormat.getDateInstance().format(header.saveDate) + " " + DateFormat.getTimeInstance(DateFormat.SHORT).format(header.saveDate));
                 else
                     previewDate.setText("");
                 if (header.name.contains(Character.toString(ASCII_179))) {
@@ -206,7 +204,7 @@ public class SaveLoadScene extends UIScene {
                     //prevent NPE, allowed saveslot is 1 to 10..
                     textInput.setText(buttons.get(currentSlot).actor.getText().toString());
 
-                    Dialog dialog=prepareDialog(Forge.getLocalizer().getMessage("lblSave"),ButtonOk|ButtonAbort,() -> SaveLoadScene.this.save());
+                    Dialog dialog = prepareDialog(Forge.getLocalizer().getMessage("lblSave"), ButtonOk | ButtonAbort, () -> SaveLoadScene.this.save());
 
                     dialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2).pad(2, 15, 2, 15);
                     dialog.getContentTable().row();
@@ -255,7 +253,7 @@ public class SaveLoadScene extends UIScene {
 
 
     public void save() {
-        if (WorldSave.getCurrentSave().save(textInput.getText()+ASCII_179+GameScene.instance().getAdventurePlayerLocation(true), currentSlot)) {
+        if (WorldSave.getCurrentSave().save(textInput.getText() + ASCII_179 + GameScene.instance().getAdventurePlayerLocation(true), currentSlot)) {
             updateFiles();
             //ensure the dialog is hidden before switching
 
