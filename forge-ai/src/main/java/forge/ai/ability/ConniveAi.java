@@ -18,8 +18,7 @@ public class ConniveAi extends SpellAbilityAi {
             return false; // can't draw anything
         }
 
-        CardCollection list;
-        list = CardLists.getTargetableCards(new CardCollection(ai.getCardsIn(ZoneType.Battlefield)), sa);
+        CardCollection list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
 
         // Filter AI-specific targets if provided
         list = ComputerUtil.filterAITgts(sa, ai, list, false);
@@ -69,8 +68,7 @@ public class ConniveAi extends SpellAbilityAi {
         }
 
         boolean preferred = true;
-        CardCollection list;
-        list = CardLists.getTargetableCards(new CardCollection(ai.getCardsIn(ZoneType.Battlefield)), sa);
+        CardCollection list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
 
         // Filter AI-specific targets if provided
         list = ComputerUtil.filterAITgts(sa, ai, list, false);

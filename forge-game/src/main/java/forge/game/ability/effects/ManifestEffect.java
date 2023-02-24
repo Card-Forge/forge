@@ -43,7 +43,7 @@ public class ManifestEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ChoiceZone")) {
                     choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
                 }
-                CardCollection choices = new CardCollection(game.getCardsIn(choiceZone));
+                CardCollectionView choices = game.getCardsIn(choiceZone);
                 if (sa.hasParam("Choices")) {
                     choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, source, sa);
                 }

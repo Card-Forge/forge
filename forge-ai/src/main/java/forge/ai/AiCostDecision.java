@@ -340,9 +340,9 @@ public class AiCostDecision extends CostDecisionMakerBase {
         CardCollectionView list;
 
         if (cost.isSameZone()) {
-            list = new CardCollection(game.getCardsIn(cost.getFrom()));
+            list = game.getCardsIn(cost.getFrom());
         } else {
-            list = new CardCollection(player.getCardsIn(cost.getFrom()));
+            list = player.getCardsIn(cost.getFrom());
         }
 
         int c = cost.getAbilityAmount(ability);

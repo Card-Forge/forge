@@ -117,7 +117,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
             cardSelectLocked = true;
             ThreadUtil.invokeInGameThread(new Runnable() {
                 @Override public void run() {
-                    final CardCollection hand = new CardCollection(c0.getController().getCardsIn(ZoneType.Hand));
+                    final CardCollectionView hand = c0.getController().getCardsIn(ZoneType.Hand);
                     for (final Card c : hand) {
                         player.getGame().getAction().exile(c, null);
                     }

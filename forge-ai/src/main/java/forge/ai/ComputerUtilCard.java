@@ -537,7 +537,7 @@ public class ComputerUtilCard {
 
     public static final Card getCheapestSpellAI(final Iterable<Card> list) {
         if (!Iterables.isEmpty(list)) {
-            CardCollection cc = CardLists.filter(new CardCollection(list),
+            CardCollection cc = CardLists.filter(list,
                     Predicates.or(CardPredicates.isType("Instant"), CardPredicates.isType("Sorcery")));
             Collections.sort(cc, CardLists.CmcComparatorInv);
 
