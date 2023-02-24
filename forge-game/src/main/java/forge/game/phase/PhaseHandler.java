@@ -825,9 +825,10 @@ public class PhaseHandler implements java.io.Serializable {
         game.fireEvent(new GameEventCombatChanged());
     }
 
-    public void resetExtra() {
+    public void restart() {
         extraPhases.clear();
         extraTurns.clear();
+        turn = 0;
     }
 
     private Player handleNextTurn() {
