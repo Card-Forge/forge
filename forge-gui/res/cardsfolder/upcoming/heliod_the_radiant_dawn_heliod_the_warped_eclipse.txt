@@ -1,0 +1,23 @@
+Name:Heliod, the Radiant Dawn
+ManaCost:2 W W
+Types:Legendary Enchantment Creature God
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone |  TriggerDescription$ When CARDNAME enters the battlefield, return target enchantment card that isn't a God from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Enchantment.YouCtrl+nonGod
+A:AB$ SetState | Cost$ 3 UP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
+DeckHas:Type$Enchantment
+AlternateMode:DoubleFaced
+Oracle:When Heliod, the Radiant Dawn enters the battlefield, return target enchantment card that isn't a God from your graveyard to your hand.\n{3}{U/P}: Transform Heliod, the Radiant Dawn. Activate only as a sorcery. ({U/P} can be paid with either {U} or 2 life.)
+
+ALTERNATE
+
+Name:Heliod, the Warped Eclipse
+ManaCost:no cost
+Colors:white,blue
+Types:Legendary Enchantment Creature Phyrexian God
+PT:4/6
+S:Mode$ CastWithFlash | ValidCard$ Card | ValidSA$ Spell | Caster$ You | Description$ You may cast spells as though they had flash.
+S:Mode$ ReduceCost | Type$ Spell | Activator$ You | Amount$ X | Description$ Spells you cast cost {1} less to cast for each card your opponents have drawn this turn.
+SVar:X:PlayerCountOpponents$CardsDrawn
+SVar:NonStackingEffect:True
+Oracle:You may cast spells as though they had flash.\nSpells you cast cost {1} less to cast for each card your opponents have drawn this turn.
