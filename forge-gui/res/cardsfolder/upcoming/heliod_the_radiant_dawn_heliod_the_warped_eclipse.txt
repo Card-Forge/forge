@@ -17,6 +17,6 @@ Types:Legendary Enchantment Creature Phyrexian God
 PT:4/6
 S:Mode$ CastWithFlash | ValidCard$ Card | ValidSA$ Spell | Caster$ You | Description$ You may cast spells as though they had flash.
 S:Mode$ ReduceCost | Type$ Spell | Activator$ You | Amount$ X | Description$ Spells you cast cost {1} less to cast for each card your opponents have drawn this turn.
-SVar:X:Count$CardsOppsDrewThisTurn
+SVar:X:PlayerCountOpponents$CardsDrawn
 SVar:NonStackingEffect:True
 Oracle:You may cast spells as though they had flash.\nSpells you cast cost {1} less to cast for each card your opponents have drawn this turn.
