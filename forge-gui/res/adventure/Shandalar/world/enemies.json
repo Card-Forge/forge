@@ -1669,19 +1669,19 @@
 	],
 	"colors": "RU"
 	},
-    {
+	{
 	"name": "Crab",
 	"sprite": "sprites/dungeon/crab.atlas",
-	"scale": 0.5,
+	"scale": 0.9,
 	"deck": [
-		"decks/crab.dck"
+		"decks/crab.json"
 	],
 	"ai": "",
 	"flying": false,
 	"spawnRate": 1,
-	"difficulty": 0.4,
-	"speed": 31,
-	"life": 15,
+	"difficulty": 0.1,
+	"speed": 20,
+	"life": 11,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -1729,8 +1729,8 @@
 		}
 	],
 	"colors": "UB"
-},	
-{
+	},
+    { 
 	"name": "Curselord",
 	"sprite": "sprites/black_wiz2.atlas",
 	"deck": [
@@ -2182,6 +2182,67 @@
 	],
 	"colors": "R"
 },
+{
+	"name": "Giant Crab",
+	"sprite": "sprites/dungeon/giant_crab.atlas",
+	"scale": 0.5,
+	"deck": [
+		"decks/giant_crab.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.4,
+	"speed": 31,
+	"life": 15,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		}
+	],
+	"colors": "U"
+},	
 {
 	"name": "Dino",
 	"sprite": "sprites/ancient.atlas",
@@ -3473,6 +3534,63 @@
 	"colors": "W"
 },
 {
+	"name": "Garruk",
+	"sprite": "sprites/dungeon/garruk.atlas",
+	"deck": [
+		"decks/miniboss/garruk_boss.dck"
+	],
+	"spawnRate": 1,
+	"scale": 0.5,
+	"difficulty": 1,
+	"speed": 30,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Garruk Wildspeaker"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Garruk, Apex Predator"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Exploration"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Primeval Titan"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "In Garruk's Wake"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 100,
+			"addMaxCount": 900
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Garruk's Mighty Axe"
+		}
+	],
+	"colors": "GB"
+},
+{
 	"name": "Geist",
 	"sprite": "sprites/ghost.atlas",
 	"deck": [
@@ -3743,11 +3861,11 @@
 	"colors": "UR"
 },
 {
-	"name": "Slime Boss",
-	"sprite": "sprites/dungeon/slime.atlas",
+	"name": "Ooze Boss",
+	"sprite": "sprites/dungeon/ooze_boss.atlas",
 	"scale": 0.5,
 	"deck": [
-		"decks/slime_boss.dck"
+		"decks/ooze_boss.dck"
 	],
 	"spawnRate": 1,
 	"difficulty": 0.1,
