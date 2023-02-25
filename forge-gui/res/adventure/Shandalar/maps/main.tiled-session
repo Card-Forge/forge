@@ -3,12 +3,12 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/jacehold.tmx",
+    "activeFile": "map/garruk.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
+        "map/main_story",
         "tileset",
         "obj",
-        "map/main_story",
         "map"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -1736,6 +1736,17 @@
                 "y": 239.75
             }
         },
+        "map/garruk.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2.0504166666666666,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 99.97967892704736,
+                "y": 234.34261328998173
+            }
+        },
         "map/graveyard.tmx": {
             "expandedObjectLayers": [
                 4
@@ -1931,7 +1942,7 @@
             "selectedLayer": 3,
             "viewCenter": {
                 "x": 240,
-                "y": 135.99999999999994
+                "y": 136.33333333333334
             }
         },
         "map/grove_5.tmx": {
@@ -1995,7 +2006,7 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 265.5,
+                "x": 265,
                 "y": 123.25
             }
         },
@@ -2014,8 +2025,8 @@
             "scale": 2.177083333333333,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 240.2296650717704,
-                "y": 136.19138755980865
+                "x": 239.31100478468903,
+                "y": 136.65071770334927
             }
         },
         "map/kobold_mine.tmx": {
@@ -3060,23 +3071,25 @@
         "map/kiora_island.tmx",
         "map/kobold_mine.tmx",
         "map/lavaforge_1.tmx",
-        "map/lavaforge_2.tmx"
+        "map/lavaforge_2.tmx",
+        "map/garruk.tmx",
+        "map/grove_4.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "map/lavaforge_2.tmx",
-        "map/lavaforge_1.tmx",
-        "map/kobold_mine.tmx",
-        "map/kiora_island.tmx",
-        "map/fort_9.tmx",
-        "map/forest_town_generic.tmx",
-        "map/factory_3.tmx",
-        "map/factory_2.tmx",
-        "map/factory_1.tmx",
-        "map/fort_3.tmx",
+        "map/jacehold.tmx",
+        "map/fort_6.tmx",
+        "map/fort_5.tmx",
         "map/fort_4.tmx",
-        "map/fort_5.tmx"
+        "map/fort_3.tmx",
+        "map/factory_1.tmx",
+        "map/factory_2.tmx",
+        "map/factory_3.tmx",
+        "map/forest_town_generic.tmx",
+        "map/fort_9.tmx",
+        "map/kiora_island.tmx",
+        "map/kobold_mine.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true

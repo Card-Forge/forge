@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="34" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="73">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="10" name="Kopie van Background" width="34" height="27">
+  <data encoding="base64" compression="zlib">
+   eJz7ysbA8JWOeBsrA8N2VvraiW4/CIcA2focA+uOiewDZ/9gcgfIDQuYGBhuMQ+sGwYyPcDcMJB5Y9QduN0BwjYDmD5H3ULYHYMprXweJO4Y6DAZdceoO0bdMfTcgewWO+7B4Q5QmKRxQvBAugUWN4PFHQMdN9jcAQAl6G1f
+  </data>
+ </layer>
+ <layer id="8" name="Background" width="34" height="27">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2DgwTZWCB4Fo2CwgsGURkHueDjQjoCCwRQm1ABt3IPDHZSCweKOUTAKRsHQBRPYB9oFEDDqjqEDAOvPCcs=
+  </data>
+ </layer>
+ <layer id="7" name="Background" width="34" height="27">
+  <data encoding="base64" compression="zlib">
+   eJzFljtOw0AQhgeQsa1YgoYj8KroqBCn4AzQuaSmwjwauAGngAOEgOgoaKALHAHRs6N45PF4dr0rr6H4lKzjeL78M+u4mgBcGC4NV4aqXlfi+LXhZ3U49wnAQ9I9vlkAbBm2DTtFs5bHd4vh9ZEj834v634+Ndd/NMwMT4WeAx5/juBxm/qfTzmU+QKeA66T1I0th1CPae0wYy7kgJzW+Hhwh7tlgI+VsAyppubBa2brzetnZnfQ5iGGB+aBtTlnefsax7m+N16gvX4Dfw8OeVAONg/XHpVINxdYt1RyIGRfpEdIrZBeEV/ZAtteRQ7q+XyP5IKApb+l0hfNJQZ8pk6WmnnkeYW6DM2InNCDu7g8fGZ2SG/IxebBXb6Vz2Qm9Btdexo5n9g9yrydEffYh24mc8+asr52/sZad0bwPO4zVm9kNgB6DrjGc3w9ZM81yrypK3vDc5IuLo+++5uWv/zPsSE9blJ3HvOI9zcXrxB/Pqr62TX0e2N5hLiEzOlfQC6HkZ79fTLr6422x4mQe1qfh+1avDc2j7HzkB7/PSOaxy/koAJP
+  </data>
+ </layer>
+ <layer id="9" name="Tree" width="34" height="27">
+  <data encoding="base64" compression="zlib">
+   eJyVV0tuE0EQbYjsidUdOAUmEQlrpJwmO8SCFWLLbnCMFJ/GXCBOIt+BFVfwNotMafqp37ypHkNJpWrP9FS9elX9cQhFfsYQ9k0It7Efr2IZq75LRfn5Ssb2/XYWwu+sHAvvNd5lh+HLaQjvs/9lKmPVe1J+vpSxfb+l+BB+r/GMC+XBxvdprLtOH7Lyc/4ec7YVHtQHfhsO5QFjzLEx5PVJCH/TMM82DvXm1XQ9NOfb3BuMi8f4zuTH2TD289s6hmP18HL+3PXGx0ptbGxzEBPx/3R21oxxKAY815p6ObdxujYPuQaIzXo3D2Ez7/No47AngMHWwWbuK+fbZt61NjwHYrUBBuMFscDpphnjsBzXnf0Vi/XqhbkcS9egxfy+6OcyH1wTw7JcFEXOtiecdz4uUrEQzt1kLz51nWovmnxoxs+vTsf9YfLY+XhKxeKd1kVxTNWU8/y66LXN/jwsxu86Fp2qi3EK/1d5f7Xn5gN41cInsJg/YOE+MTlPRWt1AXewur8Cr1r2aTh2+Z3HyWOl7731AtE1DLxqUetZM+yntsIJ+6zVRXEwX5z/Ko754P0M/eDh0LXh1YVVe5bzRw9wf2AtQ2prx8ud63IIw/XBvto4jLtLYz64v5hb5cTjg7Fd0vrQnFqpw5J8KS/ah/+CQ899L5caH1wj5kX78PrkeH/oua89UuPjgtafrhvlQ/vU40vvY9iz8P7bmd+nT2l4D2QLQZypPvU44r10Q+c418fjVy3HOYQxJ97eyb2O8+YT7eFT2A7Br59Xf70ra17G8Zp86DmvMSz23tkjPOU5x3CgZ/7nnDcch1C/P3Ksuzf92HrEuy/Dcu76/8fjAjhMavdHFeDnHtHe5tyP1YT5MKnd7T3stb0M9gXQnYgH
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="209" y="431.5">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="522.915" y="383.179"/>
+  <object id="54" template="../obj/enemy.tx" x="102.34" y="282.824">
+   <properties>
+    <property name="enemy" value="Mammoth"/>
+   </properties>
+  </object>
+  <object id="55" template="../obj/enemy.tx" x="253.388" y="115.167">
+   <properties>
+    <property name="enemy" value="Garruk"/>
+   </properties>
+  </object>
+  <object id="56" template="../obj/enemy.tx" x="310.809" y="193.554">
+   <properties>
+    <property name="enemy" value="Beastlord"/>
+   </properties>
+  </object>
+  <object id="62" template="../obj/enemy.tx" x="140.389" y="364.701">
+   <properties>
+    <property name="enemy" value="Squirrel"/>
+   </properties>
+  </object>
+  <object id="63" template="../obj/enemy.tx" x="519.21" y="217.808">
+   <properties>
+    <property name="enemy" value="Treefolk"/>
+   </properties>
+  </object>
+  <object id="64" template="../obj/enemy.tx" x="527.989" y="340.222">
+   <properties>
+    <property name="enemy" value="Greensleeves"/>
+   </properties>
+  </object>
+  <object id="65" template="../obj/enemy.tx" x="387.042" y="397.283">
+   <properties>
+    <property name="enemy" value="Enchantress"/>
+   </properties>
+  </object>
+  <object id="66" template="../obj/enemy.tx" x="66.619" y="143.189">
+   <properties>
+    <property name="enemy" value="Bear"/>
+   </properties>
+  </object>
+  <object id="67" template="../obj/enemy.tx" x="515.308" y="140.263">
+   <properties>
+    <property name="enemy" value="Treefolk"/>
+   </properties>
+  </object>
+  <object id="68" template="../obj/treasure.tx" x="222.685" y="60.7665"/>
+  <object id="70" template="../obj/gold.tx" x="68.0821" y="226.099"/>
+  <object id="71" template="../obj/gold.tx" x="401.185" y="431.423"/>
+  <object id="72" template="../obj/gold.tx" x="63.6927" y="29.0656"/>
+ </objectgroup>
+</map>

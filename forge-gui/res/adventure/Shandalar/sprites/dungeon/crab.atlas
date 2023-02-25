@@ -1,17 +1,59 @@
 crab.png
-size: 189,30
+size: 128,128
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
-  xy: 18,12
-  size: 27,12
+  xy: 10, 87
+  size: 13, 7     
 Idle 
-  xy: 0, 1
-  size: 61, 29
+  xy: 7, 20
+  size: 19, 15   
 Idle 
-  xy: 67, 1
-  size: 57, 31
+  xy: 39, 20
+  size: 19, 14
 Idle 
-  xy: 129, 0
-  size: 56, 30
+  xy: 69, 20
+  size: 21, 15
+Idle 
+  xy: 101, 22
+  size: 22, 12 
+Walk
+  xy: 6, 53
+  size: 19, 13      
+Walk 
+  xy: 36, 55
+  size: 21, 11
+Walk 
+  xy: 68, 53
+  size: 25, 13
+Walk 
+  xy: 101, 53
+  size: 22, 12  
+Attack 
+  xy: 7, 76
+  size: 19, 21      
+Attack 
+  xy: 6, 117
+  size: 19, 11 
+Attack 
+  xy: 38, 112
+  size: 22, 16 
+Attack 
+  xy: 71, 115
+  size: 25, 13 
+Attack 
+  xy: 103, 117
+  size: 20, 11              
+Death 
+  xy: 7, 85
+  size: 19, 11      
+Death 
+  xy: 38, 87
+  size: 21, 10 
+Death 
+  xy: 69, 87
+  size: 21, 11 
+Death 
+  xy: 100, 86
+  size: 23, 12

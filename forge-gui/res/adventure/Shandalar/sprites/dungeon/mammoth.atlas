@@ -1,0 +1,50 @@
+mammoth.png
+size: 648,214
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 17, 9
+  size: 56, 56 
+Idle 
+  xy: 12, 69
+  size: 85, 64
+Idle 
+  xy: 100, 67
+  size: 87, 65
+Idle 
+  xy: 191, 77
+  size: 84, 59
+Idle 
+  xy: 280, 71
+  size: 82, 67
+Idle 
+  xy: 371, 70
+  size: 84, 63      
+Idle 
+  xy: 456, 76
+  size: 88, 61 
+Idle 
+  xy: 545, 74
+  size: 94, 62 
+Idle 
+  xy: 102, 108
+  size: 20, 22   
+Attack 
+  xy: 6, 155
+  size: 86, 60      
+Attack 
+  xy: 109, 153
+  size: 90, 61 
+Attack 
+  xy: 217, 156
+  size: 87, 57 
+Attack 
+  xy: 332, 146
+  size: 113, 68 
+Attack 
+  xy: 447, 141
+  size: 102, 75      
+Attack 
+  xy: 553, 147
+  size: 95, 68 

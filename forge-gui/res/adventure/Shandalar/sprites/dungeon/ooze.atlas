@@ -1,0 +1,83 @@
+squirrel.png
+size: 256,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 9, 151
+  size: 15, 9     
+Idle 
+  xy: 8, 23
+  size: 17, 14   
+Idle 
+  xy: 39, 23
+  size: 19, 10
+Idle 
+  xy: 74, 21
+  size: 13, 12
+Idle 
+  xy: 104, 23
+  size: 18, 10   
+Walk 
+  xy: 8, 55
+  size: 18, 9
+Walk 
+  xy: 40, 55
+  size: 16, 10
+Walk 
+  xy: 75, 51
+  size: 10, 16  
+Walk 
+  xy: 106, 49
+  size: 15, 16
+Walk 
+  xy: 138, 51
+  size: 16, 15
+Walk 
+  xy: 168, 50
+  size: 16, 15  
+Walk 
+  xy: 201, 48
+  size: 16, 15
+Walk 
+  xy: 232, 48
+  size: 16, 15
+Attack 
+  xy: 8, 85
+  size: 19, 14      
+Attack 
+  xy: 39, 85
+  size: 19, 14 
+Attack 
+  xy: 71, 81
+  size: 19, 19 
+Attack 
+  xy: 102, 75
+  size: 22, 25 
+Attack 
+  xy: 134, 75
+  size: 22, 25 
+Attack 
+  xy: 198, 72
+  size: 22, 25 
+Attack 
+  xy: 102, 75
+  size: 22, 25              
+Death 
+  xy: 8, 150
+  size: 17, 9      
+Death 
+  xy: 41, 150
+  size: 18, 10 
+Death 
+  xy: 71, 147
+  size: 18, 12 
+Death 
+  xy: 99, 145
+  size: 25, 14
+Death 
+  xy: 128, 146
+  size: 25, 14 
+Death 
+  xy: 157, 146
+  size: 25, 14
