@@ -1668,8 +1668,8 @@
 		}
 	],
 	"colors": "RU"
-	},
-	{
+},
+{
 	"name": "Crab",
 	"sprite": "sprites/dungeon/crab.atlas",
 	"scale": 0.9,
@@ -3309,6 +3309,66 @@
 	"colors": "R"
 },
 {
+	"name": "Fox",
+	"sprite": "sprites/dungeon/fox.atlas",
+	"deck": [
+		"decks/fox.json"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"Common"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 30,
+			"addMaxCount": 100
+		},
+    {
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"White"
+			]
+		}
+	],
+	"colors": "W"
+},
+{
 	"name": "Frost Titan",
 	"sprite": "sprites/titan.atlas",
 	"deck": [
@@ -3537,7 +3597,7 @@
 	"name": "Garruk",
 	"sprite": "sprites/dungeon/garruk.atlas",
 	"deck": [
-		"decks/miniboss/garruk_boss.dck"
+		"decks/miniboss/garruk.dck"
 	],
 	"spawnRate": 1,
 	"scale": 0.5,
@@ -3793,6 +3853,74 @@
 	"colors": "G"
 },
 {
+	"name": "Mammoth",
+	"sprite": "sprites/dungeon/mammoth.atlas",
+	"deck": [
+		"decks/mammoth.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"Common"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 30,
+			"addMaxCount": 100
+		},
+    {
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"White"
+			]
+		},
+		   {
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Green"
+			]
+		}
+	],
+	"colors": "WG"
+},
+{
 	"name": "Pirate",
 	"sprite": "sprites/pirate.atlas",
 	"deck": [
@@ -3861,11 +3989,79 @@
 	"colors": "UR"
 },
 {
+	"name": "Ooze",
+	"sprite": "sprites/dungeon/ooze.atlas",
+	"deck": [
+		"decks/ooze.json"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"Common"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 30,
+			"addMaxCount": 100
+		},
+    {
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Green"
+			]
+		},
+    {
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"Blue"
+			]
+		}
+	],
+	"colors": "UG"
+},
+{
 	"name": "Ooze Boss",
 	"sprite": "sprites/dungeon/ooze_boss.atlas",
 	"scale": 0.5,
 	"deck": [
-		"decks/ooze_boss.dck"
+		"decks/miniboss/ooze_boss.dck"
 	],
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -5349,7 +5545,7 @@
 	"name": "Jace",
 	"sprite": "sprites/dungeon/jace.atlas",
 	"deck": [
-		"decks/miniboss/jace_boss.dck"
+		"decks/miniboss/jace.dck"
 	],
 	"spawnRate": 1,
 	"scale": 0.5,
@@ -5675,7 +5871,7 @@
 },
 {
 	"name": "Kobold",
-	"sprite": "sprites/imp.atlas",
+	"sprite": "sprites/dungeon/kobold.atlas",
 	"deck": [
 		"decks/kobold.dck"
 	],
