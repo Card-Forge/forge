@@ -3496,6 +3496,18 @@
    <object id="1" x="0" y="0" width="15" height="15"/>
   </objectgroup>
  </tile>
+ <tile id="2343">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="12.9511" width="16" height="3.00638"/>
+   <object id="2" x="0.0850611" y="0.0217969" width="16" height="1.90058"/>
+  </objectgroup>
+ </tile>
+ <tile id="2344">
+  <objectgroup draworder="index" id="2">
+   <object id="3" x="-0.0839979" y="0" width="2.13291" height="16"/>
+   <object id="4" x="14.1212" y="-0.0425306" width="1.83519" height="16"/>
+  </objectgroup>
+ </tile>
  <tile id="2345">
   <objectgroup draworder="index" id="2">
    <object id="1" x="2" y="0" width="14" height="15"/>
