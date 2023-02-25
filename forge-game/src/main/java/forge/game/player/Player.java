@@ -2090,6 +2090,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         return lost;
     }
 
+    public final int getOpponentNumDrawnThisTurn() {
+        int drawn = 0;
+        for (Player opp : getRegisteredOpponents()) {
+            drawn += opp.getNumDrawnThisTurn();
+        }
+        return drawn;
+    }
+
     public final boolean hasProwl(final Set<String> types) {
         StringBuilder sb = new StringBuilder();
         for (String type : types) {

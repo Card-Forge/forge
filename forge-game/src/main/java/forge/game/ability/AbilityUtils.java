@@ -2367,6 +2367,9 @@ public class AbilityUtils {
         if (sq[0].contains("LifeOppsLostThisTurn")) {
             return doXMath(player.getOpponentLostLifeThisTurn(), expr, c, ctb);
         }
+        if (sq[0].contains("CardsOppsDrewThisTurn")) {
+            return doXMath(player.getOpponentNumDrawnThisTurn(), expr, c, ctb);
+        }
         if (sq[0].equals("BloodthirstAmount")) {
             return doXMath(player.getBloodthirstAmount(), expr, c, ctb);
         }
