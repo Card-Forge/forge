@@ -4,15 +4,11 @@ Types:Creature Phyrexian Ooze
 PT:3/3
 K:Trample
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard  | Execute$ TrigConjure | Secondary$ True | TriggerDescription$ Whenever CARDNAME dies ,conjure a card named Mephidross Slime into your graveyard. Perpetually double the power and toughness of CARDNAME and that card. then shuffle them into their owner's library.
-SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Mephidross Slime | Amount$ 1 | Zone$ Library | RememberMade$ True | NumAtt$ +X | Double$ True | SubAbility$ DoubleMade
-SVar:DoubleMade:DB$ Effect | Name$ Mephidross Slime's Perpetual Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualDoubleMade | Duration$ Permanent | SubAbility$ DoubleSelf 
-SVar:DoubleSelf:DB$ Effect | Name$ Mephidross Slime's Perpetual Effect | StaticAbilities$ PerpetualDoubleSelf | ImprintCards$ TriggeredCard | Duration$ Permanent | SubAbility$ ShuffleIntoLibrary
-SVar:PerpetualDoubleMade:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ Z | AddToughness$ W | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Perpetually double the power and toughness of this creature.
-SVar:PerpetualDoubleSelf:Mode$ Continuous | Affected$ Card.IsImprinted | AddPower$ X | AddToughness$ Y | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Perpetually double the power and toughness of this creature.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Mephidross Slime | Amount$ 1 | Zone$ Graveyard | RememberMade$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | Name$ Mephidross Slime's Perpetual Effect | RememberObjects$ Remembered | ImprintCards$ TriggeredCard | StaticAbilities$ PerpetualDouble | Duration$ Permanent | SubAbility$ ShuffleIntoLibrary 
+SVar:PerpetualDouble:Mode$ Continuous | Affected$ Card.IsRemembered,Card.IsImprinted | AddPower$ AffectedX | AddToughness$ AffectedY | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Perpetually double the power and toughness of this creature.
 SVar:ShuffleIntoLibrary:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ChangeType$ Card.IsImprinted,Card.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
-SVar:X:Imprinted$CardPower
-SVar:Y:Imprinted$CardToughness
-SVar:Z:Remembered$CardPower
-SVar:W:Remembered$CardToughness
+SVar:AffectedX:Count$CardPower
+SVar:AffectedY:Count$CardToughness
 Oracle:Trample\nWhenever Mephidross Slime dies ,conjure a card named Mephidross Slime into your graveyard. Perpetually double the power and toughness of Mephidross Slime and that card. then shuffle them into their owner's library.
