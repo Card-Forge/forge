@@ -1,7 +1,6 @@
 Name:Farmer's Tools
 ManaCost:no cost
 Types:Artifact
-S:Mode$ Continuous | Description$ Provided by Farmer's Tools (Equipped Item - Left)
-A:AB$ ChangeZone | Cost$ PayShards<2> T | ActivationZone$ Command | SubAbility$ Eject | ExileOnMoved$ Battlefield | Optional$ True | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | DefinedPlayer$ Player | ChangeNum$ 1 | StackDescription$  Each player may put a land card from their hand onto the battlefield.
-Oracle: Pay {M}{M}, exile Farmer's Tools: Starting with you, each player may place a land card from their hand onto the battlefield.
+A:AB$ ChangeZone | Cost$ PayShards<2> | ActivationZone$ Command | SubAbility$ Eject | ExileOnMoved$ Battlefield | Optional$ True | Origin$ Hand | Destination$ Battlefield | GameActivationLimit$ 1 | ChangeType$ Land | DefinedPlayer$ Player | ChangeNum$ 1 | StackDescription$  Each player may put a land card from their hand onto the battlefield.
+Oracle: Pay {M}{M}:Starting with you, each player may place a land card from their hand onto the battlefield. Exile CARDNAME. Activate only once.
 SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
