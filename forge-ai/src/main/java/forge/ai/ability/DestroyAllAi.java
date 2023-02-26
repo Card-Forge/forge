@@ -8,6 +8,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
@@ -21,7 +22,7 @@ public class DestroyAllAi extends SpellAbilityAi {
     private static final Predicate<Card> predicate = new Predicate<Card>() {
         @Override
         public boolean apply(final Card c) {
-            return !(c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getSVar("SacMe").length() > 0);
+            return !(c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getCounters(CounterEnumType.SHIELD) > 0 || c.hasSVar("SacMe"));
         }
     };
 
