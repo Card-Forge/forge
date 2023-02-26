@@ -17,7 +17,7 @@
  </layer>
  <layer id="7" name="Background" width="34" height="27">
   <data encoding="base64" compression="zlib">
-   eJzFljtOxDAQhgdQSKKNBA1H4FXRUSFOwRlAokhJTUV4NHADTgEHWBa0HQUNdAtHQPTYWo8yGY8dW/HCSr927Xg9X/6ZcdKMAC6VrpSulRozbtj8jdLP6nA9ZACPmT2/WQFsKW0r7VTtmM/vVsPjax2p33uFfX2s9n9Smig9V7IPev4lAcddHr4efajLuagPepzlfrl8iOUYG4YJYUEGrTOjEA7KcL8M8LES5yHGlDhozGK9/f4s3AxSPaTg0H7o2FTnZXeP41LujSl0x28gM0xzm4MKOdAHF4evR62YDhZJmeHjPqB4XugnNlZMrlBfxVyuXtU6MPX5nogF71PKby3kRWJJIVpTJ0ttPVK/YlmGeoRMmoOy+DhCanZIbpDFxUFZvoVr3BO8R1dPoy5Gbo667HpEOfbB9mQWGJPHl9ZvrNk1otdRniG5OQ04j9EbANkHPdZrQjl4ziXVZRuX54b6xFl8HH3nm+Q/f+a4xDluc78fs4Tnm0+vkL53G/PuGvu/RXHEsMTU6V8IWQ4TvfuHeNaXG6nHUTFnWh+Hay+aGxfHov3gHP9dIxLHLzyJ/xo=
+   eJzFljtOw0AQhkcgY1uxBA1H4FXRUSFOwRkoKFxSU2EeDdyAU8ABQkDpKGigCxwB0bOj7MiT8exLdiDSr2TXm51v/5mx3YwALo2ujK6NGjtuxPyN0c9afz1kAI9Zd36rAtg22jHardqxnN+r+sdHHZvf+0X3+tjs/2Q0MXqudB9w/mUAjrs8fj35UJdzcR9wnOV+uXxI5RhbhgljIQbUmRWPzccuhvsVgI/VNA8ppsbB4xcb7fdn4WbQ6mEIDjw/xuY6Lxf3OCn13pjC4vgNdIZp3uXg4nkgBhxLDl+PdmI6WDTOzPLx2NwPmRf+CcUKxfblivRVzOXqVdShrc/3BJaQwJFfZNLOIVmGEPUsieqR+xXjC1dfj+jsyMFZfJ7E1Gyf3BCLyw/O8q1ck57QWXz1iroYuTnqctEjznEAXU9mkTFlfG395nq3RnAd5+mTm9OI+zF5A6D7gGNcE8shc66pLtu4MjfcJ8ni4wjd33BfmQP5zHFJctzmfj9mPXs3Vq8wfO829t019X/L4khhSanTvxCxHA307h/jWSg3Wo+TUu5pIQ7XXjw3Lo5l+yE5/rtGNI5ff6f+Yg==
   </data>
  </layer>
  <layer id="9" name="Tree" width="34" height="27">
@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJylVstOwzAQNFR9KQE+omorBOWMxNdwQxw4Ia7c2gak9mvKD7QF9R848Qu9ciCrZJTpeu0mwtIoaZrsjmfHaw9S5wYlpolzu25xHaTHMazxjmDVdu6jBIY8n+d5shLM4Trn8NgL86ibFxgRDz3w/7iEpcX8iB7rHJsGfFZKB0BibEtYPEaRmMId47Tl3E/qz5Nj3p/49QCypKqNxSM2VxmvZ4e5fy+K6zTxOVj14DmhNvzdQ+6NmyM+RU7k/86v7a7PQ3OQ/2JgHnVqIwO5GYuOc8tONQ/2BGLLOlh2bOh6ymAfyv2M6oghtQEH0QW5oOmy6/PAHBkhX+26h7mG5XpFHSXnS794l/WAtuAy6lfAnHVPuExtHjI05zWt021qz+fKmOek5/tDe+gr9Z/pNVOnpjzPp34B9B+Li+irPRmqi2iK+BPqrxID/Q1ewfUtx3tScRlRPPaJnnuoLqwdajSj72L9DXUVHhuKZ9UHMTNDj0z5FzyGlP9YLxe/ruld1FZrgn2Ke7OlB/NYp/X14H7GftA8EHMb4cFocgbA922jb+jasB7gzDH27nB9IFYTHpyfn7MmMT30+YPnVJcHMEt8fk14cO/Q2jblwj68a9n+sPpHqP/rPXHcgAfWpfapXre6huCB84XcP58d8hAtPwN59bkReWI+tfTgXrqkfZzro/XVPYV/S5698zVhf1jrBbglDWLc9i7uHfahPivH9n3LZ9ojknunekSoB/E7/+ERii08oIU+22cq/+K8uBeP8HkZZ6uZEQOwztDQAjyQh3s9zkp6gD97hPetujrwM80jtPdp7qFeBvwBgVEfGw==
+   eJydV8FOwkAQXSVQCK0/QQSM4tnEr/FmPHgyXvWEogn9GvwBwKR3jp78BX7ATsqkj+nM7tZNXkor7Lx5b2a6jlLnRiXmwwpFUl1HaRjnEd8hrLrOfR3Ai2K8K3Ho+VXJ4aEfzyOEMfCQy4qBWoR4rEtsWvBZCR18MWJ5TNJ6z9OOc7/pcZ5yz7uTph8+zrE8aL1kTY1lDObg82Ni8Lgva+M6UKcck3P/Ka/dpBlDckA/NNBvPuE+1C+0ODZi2XMu79V5aDVBfZD3dGi5hniwN8wB+541zZMmD/SdYdVVkRzH0rg8D6rvoh7MnbmMBzU4Z5oJPo8xV43z6NCn21TP51L5zayv13KM/pp2Pk8xz8cy752r56TGRerr84U05f1nSa2l5RGCuBDGsB/WSRs9UMMiiZ+Z7CtpsoH9pCYhPRaifl+zisf08PcLJe5U3BOHdVrXE3traeLzBZelx7ehx07UJHn5Xx6Itr7QPNxBPKt35OyU3PbuuD9oSe1jakS+o6QmMm/5DM8fvDQPLF8Yb0r9Wzy0Zzg7UNs2eiD4jHDbia8Pa/4jj1iPuLcWhzihOpUeMg8+X9Dnpyzsg+UZ87BmiKUHztIc3uNYe7jWAU7ky941NdFmBd9/DOteusmO3+MWt73z89imdWx5Vsb+wnvN+wlwxt4ujNy0PFnLWB4xwPcO8ZH9ieD4y7PqM9UInpd99S2vUif2mvXw/R+Fa670jYzTFsgD61T2FNfXHrhYtUr4A7deBhY=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -35,14 +35,14 @@
    </properties>
   </object>
   <object id="48" template="../obj/treasure.tx" x="522.915" y="383.179"/>
-  <object id="54" template="../obj/enemy.tx" x="109.656" y="272.582">
+  <object id="54" template="../obj/enemy.tx" x="104.779" y="294.529">
    <properties>
     <property name="enemy" value="Mammoth"/>
    </properties>
   </object>
   <object id="55" template="../obj/enemy.tx" x="253.388" y="115.167">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Garruk's Boss Effect, Phase One&quot;,&quot;Garruk's Boss Effect, Phase Two&quot;]
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Garruk's Boss Effect Phase One&quot;,&quot;Garruk's Boss Effect Phase Two&quot;]
 }</property>
     <property name="enemy" value="Garruk"/>
    </properties>
