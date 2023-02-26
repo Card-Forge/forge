@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/garruk.tmx",
+    "activeFile": "map/nahiri.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "map/main_story",
         "map",
-        "obj",
-        "tileset"
+        "tileset",
+        "map/main_story",
+        "obj"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -1743,8 +1743,8 @@
             "scale": 2.0504166666666666,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 245.8036984352774,
-                "y": 108.0268238162975
+                "x": 271.6521032310506,
+                "y": 215.8097947571632
             }
         },
         "map/graveyard.tmx": {
@@ -2596,10 +2596,10 @@
                 4
             ],
             "scale": 1.5333593749999999,
-            "selectedLayer": 4,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 319.5597900850869,
-                "y": 208.36602639221485
+                "x": 206.73561929994398,
+                "y": 209.01818922912318
             }
         },
         "map/nest_blue_1.tmx": {
