@@ -6,10 +6,10 @@
     "activeFile": "map/nahiri.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "map",
-        "tileset",
         "map/main_story",
-        "obj"
+        "obj",
+        "tileset",
+        "map"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -2598,7 +2598,7 @@
             "scale": 1.5333593749999999,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 206.73561929994398,
+                "x": 324.77709278035366,
                 "y": 209.01818922912318
             }
         },

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="73">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="74">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -7,17 +7,17 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJzt1+EKQDAQB/AVXzyAp/BEexKPKF+U8hZeQheyrs3uZttNqH+E2s/dUXSjlH6Yqb5ydw3n6bocn+3Y58thhA3WWR1ruww5ndhnru+reQ4frt165LxGmYmURpeP2j/zvq5N12PX/PuccH5o9/2YyGfrE8UV452GLcTHrTeeS8lwZ0DKF1J7CV9JvYX0xJn+jXbXGWnLnU/a8fXMlbyBk5K+T2/0Ufy5n4HzT1ZCTaQ9lFpJm3BvOa4l8jdpAzGXyS8=
+   eJzllm0KgCAMhoX80xE9SdAhg6BbeIkQCsJm23TOQcH7o5jt0X0ZZudCpTb/FsUGsi2tbxHHL2YrzYf5vX1BvNS9SfPkXFi8of+2sFE546VkH/03X+kbl6/2LClxl4qxROxzPskc5OQBVgOcvWBKTw0flB/cetcQla93fKl8Oad2HnLOr2SnGWvJXteb7/m+EOtuBG9is8pnme1P2qfxDBxZ6gkafCPmhPYZl+4jVmY8dqdbnQ0+yPfoOcq5695rDuGedAJSX/Xt
   </data>
  </layer>
  <layer id="2" name="Ground" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJztl2EKgjAUx0cY+IKOaHQQz9M1pKSvfg+6wY5QaY318G1uc23mKhJ+EPHf28+9ObEFxngm2UBPk0nEhb8RUw6zeBWg5gSHnLEbMOdVPTKdyKz6cdRP1KhJHd3NxD4fzmPKtSCz+r1QN/QSHtenW0P8uIePiTG3sTHUTbDV1ifUCymZJHR8Aeq66f1z+R1h+J+eLz366+IC6r7S63CLhy/csKdC94deA5+PmP5OUcPkGVvvHdj8prj/KdzwDOwi9lvo3F65lfn8n6NnPlnb++lTwHdYnc8zX7t4LU/PwNRr5doLf794x9QeY46pHahLNdPzmorT+vf65uIMktQePp6pHUzsliqpeo9z27yoHzrOef7ZfL7JD7MdqN/Td14fBmg=
+   eJz7x8nAcI5lYDAIILNBYD8HA8N/oJsYuBgY4jgheKDchuw+ZAxy0yGgO/8A6dcDFHbo4QfmcyHYCZy43T8QOBYaj7Bww+Z+XPgoljSALdxh5g0mf+OLL3LNwJc2KcHUSsu0dONIcB+sDPw/gGUz3vAb4LKZGDzY3TcU8GDNH0PFfaN4FA8lfJN34N0wijHxnUFajy1jRcUD6Q587kJ3H73rDVzuIRR+9HInKW5DbpOCAABBQjfn
   </data>
  </layer>
  <layer id="7" name="Mountain Walls" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJy9ljtOw0AQhr3GeTSQJomxj8AJaJE4BcegChCUIi0dUi7ABSJisC9BqGg4QjqEoMYre+TJeGcftskv/YrsXXu+zOysNxSeF1r4yudN545zvxBPLOO4GMcBFhBcJyg+zH8VXk2JaM9L/7cqDqekwXwXznH5/jvNO98G9vFdOE2MkgkM+uqQZZb7VjM+NbDNPX3eQO+I+TzYH5trnpM5ynLfMJw6vih3bKgr6LrHj80tGGUdn0WdUVfjtPxvtL5PRxbADN/j0J2RyyHwQY3BF0Ht9dr82QoYT0mv2/CBaS7b8m2DysAic7hw4AOmQ/GFJIfcGgS+SMFI1zvlWx4348Xr0JRDuv5onTEj5fPLHnoYFuaU9ev3puibYMMXl4yxqIz7Rbd3uOo+98ayR4APGDPkCDkWylCNpModx5cRxhRdp+T6s+F6U/HR3Mlv4Ibhk7UDvjbyNXv6Fu2nlydqZnqGmiC+1JKvac+aBOctXPOkAR+WjhXGZO9+o3PFmajyt6g/VhOur426WIN4/5NnGh0n7luTolE+d1Rdt6k1Pu9zZy/ZM7h3bTRTrG1XffQLrweFE8IJ3oj/4YP42LJ/6T2pNVqbpv2vC0HsVW/fu0HxC+eEleKsoft+dClV7F2Zp5+Qf+5QfDr9Mnzc9+MPp1e4YA==
+   eJy9ljFOwzAUhpPS0i7QpW1IjgAXYEXiFByDqYWiDqxsSFyAC1Q0kFyCMrFwhG4IwUxM8iuvL362k1T80q/WsRN/ee/ZTuB7XuDgi45sPnaU+Zl57DhPHdN5wAKhHZP5Mf7F9yqK/fa8/L1180iKG4yvwzkqnn9teOZr333+Opw2RsUEQ587ZJlmvjL0Tyxsc88cN+iNMJ92t/vmhvtUjNLMM4HTxBdmjix5hS57nnci1NjcgVHl8cmvMppynBTvxvP7uOcALPDdD+ozSjEEH3IMn3Urj/+LX1uB8YjlwYUP5rFsy7fulgaLiuGiBh+Y/osvYDGUahB8oYaR1zvnuz1oxkvr0BZDXn88z5SR83WKNXQ3yC0p3a9em5AzwYUvKhgjvzRdL6a9o65uMq8c1wj4wJgSh8SRsO81kS52El/KGBPSTlj7o2G96fh47NQZuBL4VO7A10Ydw56+Jvvp+aGemX9DjQlf4sjXdM3ahO8tmvO4AR+ViRV9au1+ke+KY7+M36J6W0U0vy7S1SDde11E97+ZhZOuW5vCYTZ2WLYRI34+uDKizqRvL7Vm6Np10ZTVNmXCfxvr+37uZT93zDjhld+cj7JQPhgMsO6a0pLUpm3/qyPKovNDb9ubfv5L+7lM58cu2CDd3JsiTt+B/Nxd8NnYbPoR+KTz4xdQH9Hf
   </data>
  </layer>
  <layer id="3" name="Clutter" width="40" height="26">
@@ -25,11 +25,11 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy9lc1O20AQxweUEFGREAQSCjxAnCh8HUAcad+BGyDBuadKVZHSAm8AHPm48QJIiCQCbpwphyLojTuolYB71VnZI48ns2s7BP7SX2t7196fxzNjgHh9e4XfS388gL/oJ/Sz186gMc30++PjQPRZqzWAtVp3+forAB/QeXSh0j6fJl4/kG2jS3xn7Pgq54+lKsBYNbpO45Nxk4qbd2m8L7Tkm0W2OQtf2lykHEij+YxuPkfHafnes2aMFnPhsatm3qKuR4sADWbzfRtF3UnULT66f5TtW+uJjqQnzPFn9IuS67ZvSued1ge9oysu9bw/buO4g97Nt8+RFrBffkR/8qLP74QpbR5PFAAm0VMF+5ol5FpGr3TIl6bWhnGPEU9/Dn2vc5y/EGu+ZPX9kvJp92n3T+G+0xY+0h3O/w7WvGBN/euN8l0q/8ckfJxRWzPUZ++Nt5br5GHW5++V9ztJyJdGg+wfyuNjU4vtJ+Ngq+Vu9UvOt4nx2WK1YPQzE5rrDNxKw7Ye1Kh8V3PO+Q6Q7dCLzpscNKqK/hknyaf1W1qz7ughrtx05eddxv5MjU/rtyQXH+nIEh+Kr4wffy+NVfK5+i3xyf+D6x8n+YwuLf1J+wZx+ZckP3nMi6ymm8jR8tr5tP7C9Shy67X1a4v5L+S48fw4fM2Gcac6/pz1HScXn8Yf1/t5LyGb+Mlr1+jjnOUhlv2+W65LlzDPx5RakLHhMTLjXhlgv+wfX8fULpfZj/asB5z8Gh+bgVs9OrvZ28SF+yEYT5GtUQ6vJxXfk1j4NdtYEjb3STaX4/QfSwbNig==
+   eJyllz1vE0EQhueQnSgIG6OgmIPCpS+WIVCAKCG/A5CgpkJCNkFA/gFQ8tHxB5BwTAR0qSEFEaFLDwIpSY+Y1e3o5uZmP85+pVd7vq99bmZ2NuklAD3r7hwege55RWxjPH6E3nDc9ycD+Is+RB9lBRd/TjJdWcrH36fK77o7BLg3rMe3YudLE/2+pVWAk+gWur1a8NFz55L4eD1Btqc1+EwMJjhuWT4+zyd2/HUxH9MBwPlBfkzPTRU+GTep0HXiW2F5Ir4LC4Ul31Vku2b5eH5DtajFl2rAxzcR+TXvud6oGqB6zPNbZy3FiuqP59dVg5p4fuuu93n5uh2cl9nkd9rRLSXn5znu1vh+4iNLPtIwKY+kQ6zxI/SxUusjMZKIL3Z9aHzmnVpcSI9b+fgcxxfol63qNdIN7Jc30etZ/jvUa2P5YnSxDXAJvdZ233MLuW6j71g+vqZm4aP4a4zLOMfZTH8X5eszXv8i7nnQLN45idivXHxyz5Jaw3kvO/hI+3j9p73nGNfUvxNlvp0sPoau/JJ53z6zoPdF4x+O8+Rl1ucPsmoMPjj4Ug9byvKt9cTTdg81c1B8fNq2o9y3jVxrOQ2wcUttMHO+ZxifTZtfquFvjcLdpNzXfeJ8IY3b+rea35zvDbK9zcrXTQ0aDWr0Zo1P67cUg7Gnh/hq01ef+40wH8+f1m9JPj7SO0d8KL4UP9rr+HdprHJP8/Vb4pP7g2+Pk3xGO6I/UX60HPQC9Rezj/CYd9jfxR+RYzur8h0E+ievb977ZpUr5t+RYy/L4/CwWcSd1vH9Zm6fQnxabxmBuwdtQm7eT4xN/OS5XfT7RT+fr8/5OHhflzZ8FBseIzO+6gO87ufHu4G1K+MX2uv4/wC+58zcJi7cv+y4hWzTfnF+Vr6Y/cT1rGTzOaT/W07H9w==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="48" template="../obj/treasure.tx" x="270" y="50.25"/>
+  <object id="48" template="../obj/treasure.tx" x="122.611" y="290.898"/>
   <object id="50" template="../obj/enemy.tx" x="181.5" y="221.5">
    <properties>
     <property name="enemy" value="Armored Knight"/>
@@ -56,7 +56,7 @@
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object id="67" template="../obj/gold.tx" x="132.5" y="207.5"/>
+  <object id="67" template="../obj/gold.tx" x="140.978" y="184.022"/>
   <object id="68" template="../obj/enemy.tx" x="471" y="285">
    <properties>
     <property name="enemy" value="Kor Warrior"/>
@@ -79,6 +79,11 @@
     <property name="enemy" value="Nahiri"/>
    </properties>
   </object>
-  <object id="72" template="../obj/treasure.tx" x="321.5" y="47.5"/>
+  <object id="72" template="../obj/treasure.tx" x="399.107" y="62.4997"/>
+  <object id="73" template="../obj/enemy.tx" x="446.557" y="366.341">
+   <properties>
+    <property name="enemy" value="Armored Knight "/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
