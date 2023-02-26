@@ -121,6 +121,16 @@ public class BiomeTexture implements Serializable {
                     ArrayList<Pixmap> spics = new ArrayList<>();
                     if(!region.getTexture().getTextureData().isPrepared())
                         region.getTexture().getTextureData().prepare();
+                    //try to fix bleeding...
+                    float fix = 0.01f;
+                    float rx = region.getRegionX();
+                    float ry = region.getRegionY();
+                    float rwidth = region.getRegionWidth();
+                    float rheight = region.getRegionHeight();
+                    float invTexWidth = 1f / region.getTexture().getWidth();
+                    float invTexHeight = 1f / region.getTexture().getHeight();
+                    region.setRegion((rx + fix) * invTexWidth, (ry + fix) * invTexHeight, (rx + rwidth - fix) * invTexWidth, (ry + rheight - fix) * invTexHeight); // Trims Region
+                    //
                     Pixmap completePicture = region.getTexture().getTextureData().consumePixmap();
                     for (int y = 0; y < 4; y++) {
                         for (int x = 0; x < 3; x++) {

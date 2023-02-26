@@ -253,7 +253,8 @@ public abstract class ImageFetcher {
             FThreads.assertExecutedByEdt(true);
 
             for (Callback o : currentFetches.get(destPath)) {
-                o.onImageFetched();
+                if (o != null)
+                    o.onImageFetched();
             }
             currentFetches.remove(destPath);
         };
