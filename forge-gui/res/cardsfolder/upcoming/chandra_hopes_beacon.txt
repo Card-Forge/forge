@@ -1,7 +1,7 @@
 Name:Chandra, Hope's Beacon
 ManaCost:4 R R
 Types:Legendary Planeswalker Chandra
-LOYALTY:5
+Loyalty:5
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ TrigCopySpell | TriggerZones$ Battlefield | ActivationLimit$ 1 | TriggerDescription$ Whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy. This ability triggers only once each turn.
 SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | AILogic$ Always | MayChooseTarget$ True
 A:AB$ Mana | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Produced$ Combo Any | Amount$ 2 | SpellDescription$ Add two mana in any combination of colors.
