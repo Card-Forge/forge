@@ -688,10 +688,6 @@ public class ComputerUtilMana {
         ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test,
                 checkPlayable, manaSpentToPay, hasConverge, ignoreColor, ignoreType);
 
-        if (sourcesForShards == null && !purePhyrexian) {
-            return false;    // no mana abilities to use for paying
-        }
-
         int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
         final ManaPool manapool = ai.getManaPool();
         ManaCostShard toPay = null;
@@ -712,7 +708,7 @@ public class ComputerUtilMana {
                 manapool.applyCardMatrix(pay);
 
                 for (byte color : ManaAtom.MANATYPES) {
-                    if (manapool.tryPayCostWithColor(color, sa, cost)) {
+                    if (manapool.tryPayCostWithColor(color, sa, cost, manaSpentToPay)) {
                         found = true;
                         break;
                     }
@@ -724,6 +720,11 @@ public class ComputerUtilMana {
             if (cost.isPaid()) {
                 break;
             }
+
+            if (sourcesForShards == null && !purePhyrexian) {
+                return false;    // no mana abilities to use for paying
+            }
+
             toPay = getNextShardToPay(cost);
 
             boolean lifeInsteadOfBlack = toPay.isBlack() && ai.hasKeyword("PayLifeInsteadOf:B");
@@ -1323,9 +1324,9 @@ public class ComputerUtilMana {
     public static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
         Card card = sa.getHostCard();
         Zone castFromBackup = null;
-        if (test && sa.isSpell()) {
+        if (test && sa.isSpell() && !card.isInZone(ZoneType.Stack)) {
             castFromBackup = card.getCastFrom();
-            sa.getHostCard().setCastFrom(card.getZone() != null ? card.getZone() : null);
+            card.setCastFrom(card.getZone() != null ? card.getZone() : null);
         }
 
         Cost payCosts = CostAdjustment.adjust(sa.getPayCosts(), sa);
@@ -1354,7 +1355,10 @@ public class ComputerUtilMana {
                 manaToAdd = 1;
             }
 
-            String xColor = sa.getParamOrDefault("XColor", "1");
+            String xColor = sa.getXColor();
+            if (xColor == null) {
+                xColor = "1";
+            }
             if (card.hasKeyword("Spend only colored mana on X. No more than one mana of each color may be spent this way.")) {
                 xColor = "WUBRGX";
             }

@@ -44,6 +44,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -662,13 +663,8 @@ public class AttachAi extends SpellAbilityAi {
                 cardPriority += 40;
             }
             //check if card is generally unblockable
-            for (final Card ca : card.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-                for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                    if (stAb.applyAbility("CantBlockBy", card, null)) {
-                        cardPriority += 50;
-                        break;
-                    }
-                }
+            if (StaticAbilityCantAttackBlock.cantBlockBy(card, null)) {
+                cardPriority += 50;
             }
             // Prefer "tap to deal damage"
             // TODO : Skip this one if triggers on combat damage only?
@@ -1337,8 +1333,7 @@ public class AttachAi extends SpellAbilityAi {
 
         // Is a SA that moves target attachment
         if ("MoveTgtAura".equals(sa.getParam("AILogic"))) {
-            CardCollection list = new CardCollection(CardUtil.getValidCardsToTarget(tgt, sa));
-            list = CardLists.filter(list, Predicates.or(CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()), new Predicate<Card>() {
+            CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(tgt, sa), Predicates.or(CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()), new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card card) {
                     return ComputerUtilCard.isUselessCreature(aiPlayer, card.getAttachedTo());
@@ -1347,7 +1342,7 @@ public class AttachAi extends SpellAbilityAi {
 
             return !list.isEmpty() ? ComputerUtilCard.getBestAI(list) : null;
         } else if ("Unenchanted".equals(sa.getParam("AILogic"))) {
-            CardCollection list = new CardCollection(CardUtil.getValidCardsToTarget(tgt, sa));
+            List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
             CardCollection preferred = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card card) {

@@ -47,6 +47,7 @@ public class ReplaceLoseMana extends ReplacementEffect {
     @Override
     public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
         sa.setReplacingObject(AbilityKey.Player, runParams.get(AbilityKey.Affected));
+        sa.setReplacingObject(AbilityKey.Mana, runParams.get(AbilityKey.Mana));
     }
 
 }

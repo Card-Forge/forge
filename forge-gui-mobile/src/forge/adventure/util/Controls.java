@@ -2,7 +2,9 @@ package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
@@ -147,6 +149,15 @@ public class Controls {
                 } else {
                     return  (this.isOver() || hasKeyboardFocus()) && this.getStyle().backgroundOver != null ? this.getStyle().backgroundOver : this.getStyle().background;
                 }
+            }
+
+            @Override
+            protected GlyphLayout drawItem(Batch batch, BitmapFont font, T item, float x, float y, float width) {
+                if (getUserObject() != null && getUserObject() instanceof String) { //currently this is used on spellsmith...
+                    if (((String) getUserObject()).isEmpty())
+                        return super.drawItem(batch, font, (T) Forge.getLocalizer().getMessage("lblSelectingFilter"), x, y, width);
+                }
+                return super.drawItem(batch, font, item, x, y, width);
             }
         };
     }
@@ -351,6 +362,7 @@ public class Controls {
 
     public static String colorIdToTypingString(ColorSet color)
     {
+        //NOTE converting to uppercase will use pixelmana.atlas, higher quality pixel mana symbol.
         String colorId="";
         if(color.hasWhite())
             colorId+="[+w]";
@@ -397,6 +409,7 @@ public class Controls {
         {
             textraFont=new Font(getSkin().getFont("default"), 0f, 1.5f, 0f, 0f);
             textraFont.addAtlas(Config.instance().getAtlas(Paths.ITEMS_ATLAS));
+            textraFont.addAtlas(Config.instance().getAtlas(Paths.PIXELMANA_ATLAS));
         }
         return textraFont;
     }
@@ -434,7 +447,7 @@ public class Controls {
             }
             else {
                 currencyAmount = Current.player().getGold();
-                currencyIcon = "[+Gold]";
+                currencyIcon = "[+Gold] "; //fix space since gold sprite is wider than a single glyph
                 Current.player().onGoldChange(() -> update(AdventurePlayer.current().getGold(),true));
             }
             label.setText(getLabelText(currencyAmount));

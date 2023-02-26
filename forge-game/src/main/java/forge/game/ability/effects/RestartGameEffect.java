@@ -43,7 +43,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
         // Avoid Psychic Surgery trigger in new game
         trigHandler.suppressMode(TriggerType.Shuffled);
 
-        game.getPhaseHandler().resetExtra();
+        game.getPhaseHandler().restart();
         game.getPhaseHandler().setPlayerDeclaresAttackers(null);
         game.getPhaseHandler().setPlayerDeclaresBlockers(null);
         game.getUntap().clearCommands();
@@ -105,9 +105,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
         game.resetTurnOrder();
         game.setAge(GameStage.RestartedByKarn);
         // For the rare case that you get to resolve it during another players turn
-        game.getPhaseHandler().setPlayerTurn(sa.getActivatingPlayer());
-
-        // Set turn number?
+        game.getPhaseHandler().setPlayerTurn(activator);
 
         // The rest is handled by phaseHandler
     }

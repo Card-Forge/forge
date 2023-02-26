@@ -114,11 +114,22 @@ public class SpellSmithScene extends UIScene {
         ui.onButtonPress("done", () -> SpellSmithScene.this.done());
         ui.onButtonPress("pullUsingGold", () -> SpellSmithScene.this.pullCard(false));
         ui.onButtonPress("pullUsingShards", () -> SpellSmithScene.this.pullCard(true));
-        ui.onButtonPress("BResetEdition", () -> {
-            editionList.setColor(Color.WHITE);
-            edition = "";
+        ui.onButtonPress("BReset", () -> {
+            reset();
             filterResults();
         });
+    }
+    private void reset() {
+        edition = "";
+        cost_low = -1;
+        cost_high = 9999;
+        rarity = "";
+        currentPrice = (int) basePrice;
+        for (Map.Entry<String, TextraButton> B : colorButtons.entrySet()) B.getValue().setColor(Color.WHITE);
+        for (Map.Entry<String, TextraButton> B : costButtons.entrySet()) B.getValue().setColor(Color.WHITE);
+        for (Map.Entry<String, TextraButton> B : rarityButtons.entrySet()) B.getValue().setColor(Color.WHITE);
+        editionList.setColor(Color.WHITE);
+        editionList.setUserObject(edition);
     }
 
     public void loadEditions() {
@@ -255,19 +266,10 @@ public class SpellSmithScene extends UIScene {
 
     @Override
     public void enter() {
-        edition = "";
-        cost_low = -1;
-        cost_high = 9999;
-        rarity = "";
-        currentPrice = (int) basePrice;
-
-        for (Map.Entry<String, TextraButton> B : colorButtons.entrySet()) B.getValue().setColor(Color.WHITE);
-        for (Map.Entry<String, TextraButton> B : costButtons.entrySet()) B.getValue().setColor(Color.WHITE);
-        for (Map.Entry<String, TextraButton> B : rarityButtons.entrySet()) B.getValue().setColor(Color.WHITE);
+        reset();
         loadEditions(); //just to be safe since it's preloaded, if somehow edition is null, then reload it
         editionList.clearListeners();
         editionList.clearItems();
-        editionList.showScrollPane();
         editionList.setItems(editions.toArray(new CardEdition[editions.size()]));
         editionList.addListener(new ChangeListener() {
             @Override
@@ -276,6 +278,12 @@ public class SpellSmithScene extends UIScene {
                 edition = E.getCode();
                 editionList.setColor(Color.RED);
                 filterResults();
+            }
+        });
+        editionList.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                editionList.showScrollPane();
             }
         });
         editionList.setColor(Color.WHITE);
@@ -350,13 +358,14 @@ public class SpellSmithScene extends UIScene {
         if (cost_low > -1) totalCost *= 2.5f; //And CMC cost multiplier.
 
         cardPool = StreamSupport.stream(P.spliterator(), false).collect(Collectors.toList());
-        poolSize.setText(((cardPool.size() > 0 ? "[FOREST]" : "[RED]")) + cardPool.size() + " possible card" + (cardPool.size() != 1 ? "s" : ""));
+        poolSize.setText(((cardPool.size() > 0 ? "[/][FOREST]" : "[/][RED]")) + cardPool.size() + " possible card" + (cardPool.size() != 1 ? "s" : ""));
         currentPrice = (int) totalCost;
         currentShardPrice = (int) (totalCost * 0.2f); //Intentionally rounding up via the cast to int
         pullUsingGold.setText("Pull: " + currentPrice + "[+gold]");
         pullUsingShards.setText("Pull: " + currentShardPrice + "[+shards]");
         pullUsingGold.setDisabled(!(cardPool.size() > 0) || Current.player().getGold() < totalCost);
         pullUsingShards.setDisabled(!(cardPool.size() > 0) || Current.player().getShards() < currentShardPrice);
+        editionList.setUserObject(edition);
     }
 
     public void pullCard(boolean usingShards) {

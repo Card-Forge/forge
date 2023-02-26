@@ -2324,7 +2324,7 @@ public class ComputerUtil {
 
         CardLists.sortByCmcDesc(goodChoices);
 
-        return new CardCollection(Aggregates.random(goodChoices, max));
+        return goodChoices.subList(0, max);
     }
 
     public static CardCollection getCardsToDiscardFromFriend(Player aiChooser, Player p, SpellAbility sa, CardCollection validCards, int min, int max) {
@@ -3164,7 +3164,7 @@ public class ComputerUtil {
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(c);
         // don't need to bother with real LKI since this is a passive check and the card isn't going anywhere
         repParams.put(AbilityKey.CardLKI, c);
-        repParams.put(AbilityKey.Origin, c.getZone().getZoneType());
+        repParams.put(AbilityKey.Origin, c.getLastKnownZone().getZoneType());
         repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
         List<ReplacementEffect> list = c.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.CantHappen);
         return !list.isEmpty();

@@ -108,6 +108,8 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             safeMana += getAmountOfColor(c);
         }
 
+        // TODO isPersistentMana
+
         return totalMana() != safeMana; //won't lose floating mana if all mana is of colors that aren't going to be emptied
     }
 
@@ -121,16 +123,18 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         List<Mana> cleared = Lists.newArrayList();
         if (floatingMana.isEmpty()) { return cleared; }
 
-        boolean convertToColorless = false;
+        Byte convertTo = null;
 
+        // TODO move this lower in case all mana would be persistent
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(owner);
+        runParams.put(AbilityKey.Mana, "C");
         switch (owner.getGame().getReplacementHandler().run(ReplacementType.LoseMana, runParams)) {
         case NotReplaced:
             break;
         case Skipped:
             return cleared;
-        default: // the only ones that does replace losing Mana are making it colorless instead
-            convertToColorless = true;
+        default:
+            convertTo = ManaAtom.fromName((String) runParams.get(AbilityKey.Mana));
             break;
 
         }
@@ -139,8 +143,8 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         if (isEndOfPhase) {
             keys.removeAll(StaticAbilityUnspentMana.getManaToKeep(owner));
         }
-        if (convertToColorless) {
-            keys.remove(Byte.valueOf((byte)ManaAtom.COLORLESS));
+        if (convertTo != null) {
+            keys.remove(convertTo);
         }
 
         for (Byte b : keys) {
@@ -148,14 +152,14 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             final List<Mana> pMana = Lists.newArrayList();
             if (isEndOfPhase && !owner.getGame().getPhaseHandler().is(PhaseType.CLEANUP)) {
                 for (final Mana mana : cm) {
-                    if (mana.getManaAbility()!= null && mana.getManaAbility().isPersistentMana()) {
+                    if (mana.getManaAbility() != null && mana.getManaAbility().isPersistentMana()) {
                         pMana.add(mana);
                     }
                 }
             }
             cm.removeAll(pMana);
-            if (convertToColorless) {
-                convertManaColor(b, (byte)ManaAtom.COLORLESS);
+            if (convertTo != null) {
+                convertManaColor(b, convertTo);
                 cm.addAll(pMana);
             } else {
                 cleared.addAll(cm);
@@ -208,7 +212,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         }
     }
 
-    public boolean tryPayCostWithColor(byte colorCode, SpellAbility saPaidFor, ManaCostBeingPaid manaCost) {
+    public boolean tryPayCostWithColor(byte colorCode, SpellAbility saPaidFor, ManaCostBeingPaid manaCost, List<Mana> manaSpentToPay) {
         Mana manaFound = null;
         String restriction = manaCost.getSourceRestriction();
         Collection<Mana> cm = floatingMana.get(colorCode);
@@ -227,7 +231,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         }
 
         if (manaFound != null && tryPayCostWithMana(saPaidFor, manaCost, manaFound, false)) {
-            saPaidFor.getPayingMana().add(0, manaFound);
+            manaSpentToPay.add(0, manaFound);
             return true;
         }
         return false;

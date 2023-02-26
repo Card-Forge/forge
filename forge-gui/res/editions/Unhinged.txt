@@ -15,12 +15,12 @@ ScryfallCode=UNH
 3 U Bosom Buddy @Dan Scott
 4 C Cardpecker @Richard Sardinha
 5 C Cheap Ass @Randy Gallegos
-6 C Circle of Protection: Art @Jim “Stop the Da Vinci Beatdown” Pavelec
+6 C Circle of Protection: Art @Jim "Stop the Da Vinci Beatdown" Pavelec
 7 R Collector Protector @Christopher Rush
-8 R Drawn Together @Pete “Fear Me” Venters
+8 R Drawn Together @Pete "Fear Me" Venters
 9 U Emcee @Quinton Hoover
-10 C Erase (Not the Urza's Legacy One) @Pete “Yes the Urza's Legacy One” Venters
-11 C Fascist Art Director @Edward P. “Feed Me” Beard, Jr.
+10 C Erase (Not the Urza's Legacy One) @Pete "Yes the Urza's Legacy One" Venters
+11 C Fascist Art Director @Edward P. "Feed Me" Beard, Jr.
 12 U First Come, First Served @Thomas Gianni
 13 R Frankie Peanuts @Thomas M. Baxa
 14 U Head to Head @Thomas Gianni
@@ -34,16 +34,16 @@ ScryfallCode=UNH
 22 C Wordmail @Ron Spencer
 23 U _ @Ron Spears
 24 R Ambiguity @Stephen Daniele
-25 C Artful Looter @Heather “Erica Gassalasca-Jape” Hudson
+25 C Artful Looter @Heather "Erica Gassalasca-Jape" Hudson
 26 R Avatar of Me @Greg Hildebrandt
-27 C Brushstroke Paintermage @Ron “Don't You Dare Change Me” Spears
-28 C Bursting Beebles @David “Beeblemania” Martin
+27 C Brushstroke Paintermage @Ron "Don't You Dare Change Me" Spears
+28 C Bursting Beebles @David "Beeblemania" Martin
 29 C Carnivorous Death-Parrot @Tim Hildebrandt
 30 U Cheatyface @Doug Chaffee
 31 C Double Header @Richard Sardinha
 32 C Flaccify @Tim Hildebrandt
-33 C Framed! @Alan “Don't Feel Like You Have to Pick Me” Pollack
-34 R Greater Morphling @Greg “Six-Pack” Staples
+33 C Framed! @Alan "Don't Feel Like You Have to Pick Me" Pollack
+34 R Greater Morphling @Greg "Six-Pack" Staples
 35 R Johnny, Combo Player @Kensuke Okabayashi
 36 C Loose Lips @John Matson
 37 U Magical Hacker @Doug Chaffee
@@ -57,7 +57,7 @@ ScryfallCode=UNH
 45 C Smart Ass @Trevor Hairsine
 46 U Spell Counter @Doug Chaffee
 47 R Topsy Turvy @Jeff Miracola
-48 R Aesthetic Consultation @David “Help Me” Martin
+48 R Aesthetic Consultation @David "Help Me" Martin
 49 C Bad Ass @Thomas M. Baxa
 50 C Bloodletter @Daren Bader
 51 U Booster Tutor @Christopher Rush
@@ -70,7 +70,7 @@ ScryfallCode=UNH
 58 U Kill! Destroy! @Corey D. Macourek
 59 C Mother of Goons @Darrell Riche
 60 R Necro-Impotence @Mark Tedin
-61 U Persecute Artist @Rebecca “Don't Mess with Me” Guay
+61 U Persecute Artist @Rebecca "Don't Mess with Me" Guay
 62 U Phyrexian Librarian @Kev Walker
 63 C Stop That @Anson Maddocks
 64 C Tainted Monkey @Mark Zug
@@ -78,7 +78,7 @@ ScryfallCode=UNH
 66 C Wet Willie of the Damned @Greg Staples
 67 C When Fluffy Bunnies Attack @Ray Lago
 68 U Working Stiff @Darrell Riche
-69 U Zombie Fanboy @Matt “I'm Your Boy” Cavotta
+69 U Zombie Fanboy @Matt "I'm Your Boy" Cavotta
 70 R Zzzyxas's Abyss @Pete Venters
 71 R Assquatch @Jeremy Jarvis
 72 R Blast from the Past @Douglas Shuler
@@ -90,7 +90,7 @@ ScryfallCode=UNH
 78 C Goblin Mime @Franz Vohwinkel
 79 C Goblin Secret Agent @Tony Szczudlo
 80 C Goblin S.W.A.T. Team @Eric Deschamps
-81 C Mana Flair @Paolo “That's Actually Me” Parente
+81 C Mana Flair @Paolo "That's Actually Me" Parente
 82 C Mons's Goblin Waiters @Pete Venters
 83 C Orcish Paratroopers @Matt Thompson
 84 C Punctuate @Jim Pavelec
@@ -109,7 +109,7 @@ ScryfallCode=UNH
 97 R Fraction Jackson @Mark Poole
 98 U Gluetius Maximus @Jeff Easley
 99 U Granny's Payback @Joel Thomas
-100 C Graphic Violence @Wayne “King of” England
+100 C Graphic Violence @Wayne "King of" England
 101 C Keeper of the Sacred Word @Dany Orizio
 102 C Land Aid '04 @Jim Nelson
 103 C Laughing Hyena @Mark Poole
@@ -117,7 +117,7 @@ ScryfallCode=UNH
 105 U Name Dropping @Tony Szczudlo
 106 R Old Fogey @Douglas Shuler
 107 C Our Market Research Shows That Players Like Really Long Card Names So We Made this Card to Have the Absolute Longest Card Name Ever Elemental @Greg Hildebrandt
-108 C Remodel @Lars Grant-“Wild Wild”-West
+108 C Remodel @Lars Grant-"Wild Wild"-West
 109 C Shoe Tree @Francis Tsai
 110 U Side to Side @Jim Nelson
 111 C S.N.O.T. @Cyril Van Der Haegen

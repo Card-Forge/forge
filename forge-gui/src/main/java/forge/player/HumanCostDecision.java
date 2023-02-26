@@ -282,7 +282,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         for (final Player p : players) {
             final CardCollection enoughType = CardLists.filter(list, CardPredicates.isOwner(p));
             if (enoughType.size() < c) {
-                list.removeAll((CardCollectionView)enoughType);
+                list.removeAll(enoughType);
             } else {
                 payableZone.add(p);
             }

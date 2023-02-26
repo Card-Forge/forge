@@ -330,7 +330,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             tgts = sa.knownDetermineDefined(sa.getParam("Defined"));
         }
 
-        sbTargets.append(" ").append(sa.getParamOrDefault("DefinedDesc", StringUtils.join(tgts, ", ")));
+        sbTargets.append(" ").append(sa.getParamOrDefault("DefinedDesc", Lang.joinHomogenous(tgts)));
 
         final String targetname = sbTargets.toString();
 
@@ -448,7 +448,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
     private void changeKnownOriginResolve(final SpellAbility sa) {
-        Iterable<Card> tgtCards = getTargetCards(sa);
+        CardCollectionView tgtCards = getTargetCards(sa);
         final Player player = sa.getActivatingPlayer();
         final Card hostCard = sa.getHostCard();
         final Game game = player.getGame();
@@ -517,15 +517,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
         // CR 401.4
-        if (destination.equals(ZoneType.Library) && !shuffle && Iterables.size(tgtCards) > 1) {
+        if (destination.equals(ZoneType.Library) && !shuffle && tgtCards.size() > 1) {
             if (sa.hasParam("RandomOrder")) {
                 final CardCollection random = new CardCollection(tgtCards);
                 CardLists.shuffle(random);
                 tgtCards = random;
             } else if (sa.hasParam("Chooser")) {
-                tgtCards = chooser.getController().orderMoveToZoneList(new CardCollection(tgtCards), destination, sa);
+                tgtCards = chooser.getController().orderMoveToZoneList(tgtCards, destination, sa);
             } else {
-                tgtCards = GameActionUtil.orderCardsByTheirOwners(game, new CardCollection(tgtCards), destination, sa);
+                tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, destination, sa);
             }
         }
 
@@ -733,12 +733,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
                     moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
                     movedCard = game.getAction().moveTo(destination, gameCard, sa, moveParams);
+
                     if (ZoneType.Hand.equals(destination) && ZoneType.Command.equals(originZone.getZoneType())) {
                         StringBuilder sb = new StringBuilder();
                         sb.append(movedCard.getName()).append(" has moved from Command Zone to ").append(player).append("'s hand.");
                         game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, sb.toString());
                         commandCards.add(movedCard); //add to list to reveal the commandzone cards
                     }
+
                     // If a card is Exiled from the stack, remove its spells from the stack
                     if (sa.hasParam("Fizzle")) {
                         if (gameCard.isInZone(ZoneType.Exile) || gameCard.isInZone(ZoneType.Hand)

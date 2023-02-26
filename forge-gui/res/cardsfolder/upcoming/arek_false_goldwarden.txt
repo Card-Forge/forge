@@ -1,0 +1,12 @@
+Name:Arek, False Goldwarden
+ManaCost:W B
+Types:Legendary Creature Human Cleric
+PT:2/2
+K:Starting intensity:0
+T:Mode$ ChangesZone | ValidCard$ Creature.YouCtrl+Other | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigIntensify | TriggerDescription$ Whenever another creature enters the battlefield under your control, perpetually increase the intensity of NICKNAME and all cards named Arek, False Goldwarden in your graveyard, hand and library by 1.
+SVar:TrigIntensify:DB$ Intensify | AllDefined$ Card.Self,Card.inZoneGraveyard+namedArek; False Goldwarden+YouOwn,Card.inZoneHand+namedArek; False Goldwarden+YouOwn,Card.inZoneLibrary+namedArek; False Goldwarden+YouOwn
+A:AB$ LoseLife | Cost$ 3 W B T Sac<1/NICKNAME> | LifeAmount$ X | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses X life and you gain X life, where X is NICKNAME's Intensity.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X 
+SVar:X:Count$Intensity
+DeckHas:Ability$LifeGain|Sacrifice
+Oracle:Starting intensity 0\nWhenever another creature enters the battlefield under your control, perpetually increase the intensity of Arek and all cards named Arek, False Goldwarden in your graveyard, hand and library by 1. \n{3}{W}{B}, {T}: Sacrifice Arek: Target opponent loses X life and you gain X life, where X is Arek's Intensity.

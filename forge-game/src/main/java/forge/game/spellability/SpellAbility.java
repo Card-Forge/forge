@@ -28,6 +28,7 @@ import com.google.common.collect.*;
 import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.CardTraitBase;
 import forge.game.ForgeScript;
@@ -2417,6 +2418,23 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         xManaCostPaid = n;
     }
 
+    public String getXColor() {
+        if (!hasParam("XColor")) {
+            return null;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        String parts[] = getParam("XColor").split(",");
+        for (String col : parts) {
+            // color word used
+            if (col.length() > 2) {
+                col = MagicColor.toShortString(col);
+            }
+            sb.append(col);
+        }
+        return sb.toString();
+    }
+
     public boolean canCastTiming(Player activator) {
         return canCastTiming(getHostCard(), activator);
     }
@@ -2489,7 +2507,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (!matchesValidParam("ValidAfterStack", this)) {
             return false;
         }
-        // TODO add checks for Lurrus
         return true;
     }
 }

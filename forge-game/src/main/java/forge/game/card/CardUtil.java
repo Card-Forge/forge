@@ -63,7 +63,7 @@ public final class CardUtil {
             "Cycling", "Echo", "Kicker", "Flashback", "Madness", "Morph",
             "Affinity", "Entwine", "Splice", "Ninjutsu", "Presence",
             "Transmute", "Replicate", "Recover", "Squad", "Suspend", "Aura swap",
-            "Fortify", "Transfigure", "Champion", "Evoke", "Prowl", "IfReach",
+            "Fortify", "Transfigure", "Champion", "Evoke", "Prowl",
             "Reinforce", "Unearth", "Level up", "Miracle", "Overload", "Cleave",
             "Scavenge", "Encore", "Bestow", "Outlast", "Dash", "Surge", "Emerge", "Hexproof:",
             "etbCounter", "Reflect", "Ward").build();
@@ -268,7 +268,7 @@ public final class CardUtil {
 
         newCopy.addRemembered(in.getRemembered());
         newCopy.addImprintedCards(in.getImprintedCards());
-        newCopy.setChosenCards(new CardCollection(in.getChosenCards()));
+        newCopy.setChosenCards(in.getChosenCards());
 
         newCopy.setChosenType(in.getChosenType());
         newCopy.setChosenType2(in.getChosenType2());

@@ -39,7 +39,7 @@ import forge.adventure.scene.*;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.assets.FImageComplex;
-import forge.assets.FSkin;
+import forge.assets.FSkinImage;
 import forge.card.CardRenderer;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
@@ -254,12 +254,12 @@ public class MapStage extends GameStage {
             Image art = new Image(cardArt.getTextureRegion());
             art.setWidth(50);
             art.setHeight(40);
-            art.setPosition(10, 43);
-            Image image = new Image(FSkin.getDeckbox().get(1));
-            image.setWidth(70);
-            image.setHeight(100);
-            image.setPosition(0, 15);
-            TypingLabel label = Controls.newTypingLabel("[%125]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck))+"\n[%]"+deck.getName());
+            art.setPosition(8, 40);
+            Image image = new Image(FSkinImage.ADV_DECKBOX.getTextureRegion());
+            image.setWidth(59);
+            image.setHeight(80);
+            image.setPosition(4, 7);
+            TypingLabel label = Controls.newTypingLabel("[%125]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)).toUpperCase()+"\n[%]"+deck.getName());
             label.skipToTheEnd();
             label.setAlignment(Align.center);
             label.setPosition(34, 20);
@@ -270,7 +270,7 @@ public class MapStage extends GameStage {
             dialog.getContentTable().add(group).height(100).width(65).center();
             dialog.getContentTable().add().row();
         } else {
-            TypingLabel label = Controls.newTypingLabel("[%125]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck))+"\n[%]"+deck.getName());
+            TypingLabel label = Controls.newTypingLabel("[%125]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)).toUpperCase()+"\n[%]"+deck.getName());
             label.skipToTheEnd();
             label.setAlignment(Align.center);
             dialog.getContentTable().add(label).align(Align.center);

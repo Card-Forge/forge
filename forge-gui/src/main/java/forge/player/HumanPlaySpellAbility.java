@@ -90,6 +90,7 @@ public class HumanPlaySpellAbility {
                 zonePosition = fromZone.getCards().indexOf(c);
             }
             ability.setHostCard(game.getAction().moveToStack(c, ability));
+            ability.changeText();
         }
 
         if (!ability.isCopied()) {

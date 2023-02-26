@@ -3,42 +3,42 @@ size: 374,64
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-pixB
+B
   rotate: false
   xy: 2, 2
   size: 60, 60
   orig: 60, 60
   offset: 0, 0
   index: -1
-pixC
+C
   rotate: false
   xy: 64, 2
   size: 60, 60
   orig: 60, 60
   offset: 0, 0
   index: -1
-pixG
+G
   rotate: false
   xy: 126, 2
   size: 60, 60
   orig: 60, 60
   offset: 0, 0
   index: -1
-pixR
+R
   rotate: false
   xy: 188, 2
   size: 60, 60
   orig: 60, 60
   offset: 0, 0
   index: -1
-pixU
+U
   rotate: false
   xy: 250, 2
   size: 60, 60
   orig: 60, 60
   offset: 0, 0
   index: -1
-pixW
+W
   rotate: false
   xy: 312, 2
   size: 60, 60

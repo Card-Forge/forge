@@ -1,0 +1,38 @@
+[metadata]
+Code=YONE
+Date=2023-02-28
+Name=Alchemy: Phyrexia
+Type=Online
+ScryfallCode=YONE
+
+[cards]
+1 M Ghalma the Shaper @PINDURSKI
+2 U Kemba's Outfitter @Samuel Perin
+3 R Nettling Host @Dominik Mayer
+4 U Norn's Fetchling @Carlos Palma Cruchaga
+5 R Quicksilver Servitor @Samuel Araya
+6 R Surgical Metamorph @Nestor Ossandon Leal
+7 U Tezzeret's Reckoning @Camille Alquier
+8 R Blightwing Whelp @Jean Pierre Targete
+9 U March Toward Perfection @Brian Valeza
+10 R Sheoldred's Assimilator @Diego Gisbert
+11 U Hexgold Sledge @David Sondered
+12 R Magmatic Scorchwing @Filip Burburan
+13 M Phyrexian Harvester @José Parodi
+14 M Rothga, Bonded Engulfer @Tuan Duong Chu
+15 U Phyresis Roach @Tuan Duong Chu
+16 R Spawning Pod @Chris Seaman
+17 M Arek, False Goldwarden @Josh Hass
+18 R Bladehold Cleaver @Volkan Baǵa
+19 R Contagion Dispenser @Bruce Brenneise
+20 M Darksteel Hydra @Monztre
+21 R Glistening Extractor @Jonas De Ro
+22 R Gyox, Brutal Carnivora @Daniel Ljunggren
+23 R Ichor Aberration @Jean Pierre Targete
+24 R Innovative Metatect @LA Draws
+25 U Mephidross Slime @Yeong-Hao Han
+26 U Quicksilver Lapidary @Caroline Gariba
+27 U Seething Skitter-Priest @Monztre
+28 U Skullpiercer Gnat @David Sondered
+29 R Vexyr, Ich-Tekik's Heir @Michele Giorgi
+30 R Phyrexian Scrapyard @Piotr Dura

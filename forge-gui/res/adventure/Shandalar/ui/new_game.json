@@ -85,7 +85,7 @@
 	{
       "type": "Label",
       "name" : "starterEditionL",
-      "text": "[BLACK]Starter Edition",
+      "text": "[BLACK]tr(lblStarterEdition):",
       "width": 128,
       "height": 16,
       "x": 75,

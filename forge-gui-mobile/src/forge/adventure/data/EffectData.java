@@ -91,7 +91,7 @@ public class EffectData implements Serializable {
         if(changeStartCards != 0)
             description+="Starting hand: " + changeStartCards + "\n";
         if(moveSpeed!=0 && moveSpeed != 1)
-            description+="Movement speed: " + ((lifeModifier > 0) ? "+" : "") + Math.round((moveSpeed-1.f)*100) + "%\n";
+            description+="[+MovementSpeed] " + ((moveSpeed > 0) ? "+" : "") + Math.round((moveSpeed-1.f)*100) + "%\n";
         if(goldModifier > 0.0f)
             description+="Shop discount: x" + (goldModifier) + "\n";
         if(cardRewardBonus > 0)

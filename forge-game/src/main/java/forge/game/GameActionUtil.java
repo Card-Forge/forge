@@ -134,6 +134,11 @@ public final class GameActionUtil {
                 } else {
                     newSA = sa.copy(activator);
                 }
+
+                if (o.getAbility().hasParam("ValidAfterStack")) {
+                    newSA.getMapParams().put("ValidAfterStack", o.getAbility().getParam("ValidAfterStack"));
+                }
+
                 final SpellAbilityRestriction sar = newSA.getRestrictions();
                 if (o.isWithFlash()) {
                     sar.setInstantSpeed(true);
@@ -396,7 +401,7 @@ public final class GameActionUtil {
 
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.getParam("Mode").equals("OptionalCost") || stAb.isSuppressed() || !stAb.checkConditions()) {
+                if (!stAb.checkConditions("OptionalCost")) {
                     continue;
                 }
 

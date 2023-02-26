@@ -1371,3 +1371,44 @@
 2023-01-26 12512419 Pioneer Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-01-26-12512419-pioneer-preliminary.zip
 2023-01-26 12515799 Pioneer Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-01-26-12515799-pioneer-preliminary.zip
 2023-01-26 Pioneer League (35 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-01-26-pioneer-league.zip
+2023-01-27 12515806 Pioneer Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-01-27-12515806-pioneer-preliminary.zip
+2023-01-28 12515843 Pioneer Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-01-28-12515843-pioneer-challenge.zip
+2023-01-29 12515848 Pioneer Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-01-29-12515848-pioneer-challenge.zip
+2023-01-30 12515818 Pioneer Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-01-30-12515818-pioneer-preliminary.zip
+2023-01-30 Pioneer League (37 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-01-30-pioneer-league.zip
+2023-01-31 12515821 Pioneer Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-01-31-12515821-pioneer-preliminary.zip
+2023-01-31 12515824 Pioneer Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-01-31-12515824-pioneer-preliminary.zip
+2023-02-01 12517081 Pioneer Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-01-12517081-pioneer-preliminary.zip
+2023-02-02 12517087 Pioneer Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-02-12517087-pioneer-preliminary.zip
+2023-02-02 Pioneer League (38 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-02-pioneer-league.zip
+2023-02-03 12517101 Pioneer Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-03-12517101-pioneer-preliminary.zip
+2023-02-04 12517112 Pioneer Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-04-12517112-pioneer-challenge.zip
+2023-02-05 12517118 Pioneer Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-05-12517118-pioneer-challenge.zip
+2023-02-06 12517132 Pioneer Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-06-12517132-pioneer-preliminary.zip
+2023-02-06 Pioneer League (34 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-06-pioneer-league.zip
+2023-02-07 12517135 Pioneer Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-07-12517135-pioneer-preliminary.zip
+2023-02-07 12520653 Pioneer Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-07-12520653-pioneer-preliminary.zip
+2023-02-08 12520659 Pioneer Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-08-12520659-pioneer-preliminary.zip
+2023-02-09 12520665 Pioneer Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-09-12520665-pioneer-preliminary.zip
+2023-02-09 12520672 Pioneer Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-09-12520672-pioneer-preliminary.zip
+2023-02-09 Pioneer League (42 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-09-pioneer-league.zip
+2023-02-10 12520679 Pioneer Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-10-12520679-pioneer-preliminary.zip
+2023-02-11 12520682 Pioneer Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-11-12520682-pioneer-preliminary.zip
+2023-02-11 12520689 Pioneer Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-11-12520689-pioneer-challenge.zip
+2023-02-12 12 520651 Pioneer Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-12-12-520651-pioneer-showcase-challenge.zip
+2023-02-13 12520708 Pioneer Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-13-12520708-pioneer-preliminary.zip
+2023-02-13 Pioneer League (51 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-13-pioneer-league.zip
+2023-02-14 12520711 Pioneer Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-14-12520711-pioneer-preliminary.zip
+2023-02-14 12520714 Pioneer Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-14-12520714-pioneer-preliminary.zip
+2023-02-15 12523163 Pioneer Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-15-12523163-pioneer-preliminary.zip
+2023-02-16 12523109 Pioneer Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-16-12523109-pioneer-preliminary.zip
+2023-02-16 Pioneer League (47 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-16-pioneer-league.zip
+2023-02-17 12523116 Pioneer Preliminary (3 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-17-12523116-pioneer-preliminary.zip
+2023-02-18 12523093 Pioneer Super Qualifier (32 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-18-12523093-pioneer-super-qualifier.zip
+2023-02-18 12523127 Pioneer Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-18-12523127-pioneer-challenge.zip
+2023-02-19 12523133 Pioneer Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-19-12523133-pioneer-challenge.zip
+2023-02-20 12523139 Pioneer Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-20-12523139-pioneer-preliminary.zip
+2023-02-20 12523147 Pioneer Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-20-12523147-pioneer-preliminary.zip
+2023-02-20 Pioneer League (51 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-20-pioneer-league.zip
+2023-02-21 12523150 Pioneer Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-21-12523150-pioneer-preliminary.zip
+2023-02-21 12523153 Pioneer Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2023-02-21-12523153-pioneer-preliminary.zip

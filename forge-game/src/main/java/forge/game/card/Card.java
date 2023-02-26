@@ -1844,7 +1844,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final CardCollectionView getChosenCards() {
         return CardCollection.getView(chosenCards);
     }
-    public final void setChosenCards(final CardCollection cards) {
+    public final void setChosenCards(final Iterable<Card> cards) {
         chosenCards = view.setCards(chosenCards, cards, TrackableProperty.ChosenCards);
     }
     public boolean hasChosenCard() {
@@ -2000,11 +2000,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (keyword.startsWith("CantBeCounteredBy")) {
                 final String[] p = keyword.split(":");
                 sbLong.append(p[2]).append("\r\n");
-            } else if (keyword.startsWith("IfReach")) {
-                String[] k = keyword.split(":");
-                sbLong.append(getName()).append(" can block ")
-                .append(CardType.getPluralType(k[1]))
-                .append(" as though it had reach.\r\n");
             } else {
                 sbLong.append(keyword).append("\r\n");
             }
@@ -2313,11 +2308,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
                     sb.append(" ").append(Localizer.getInstance().getMessage("lblSagaFooter")).append(" ").append(TextUtil.toRoman(getFinalChapterNr())).append(".");
                     sb.append(")").append("\r\n\r\n");
-                } else if (keyword.startsWith("IfReach")) {
-                    String[] k = keyword.split(":");
-                    sbLong.append(getName()).append(" can block ")
-                    .append(CardType.getPluralType(k[1]))
-                    .append(" as though it had reach.\r\n");
                 } else if (keyword.startsWith("MayEffectFromOpening")) {
                     final String[] k = keyword.split(":");
                     // need to get SpellDescription from Svar
@@ -2580,14 +2570,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     }
 
                     boolean found = false;
-                    if (stAb.getParam("Mode").equals("CantBlockBy")) {
+                    if (stAb.checkMode("CantBlockBy")) {
                         if (!stAb.hasParam("ValidAttacker") || (stAb.hasParam("ValidBlocker") && stAb.getParam("ValidBlocker").equals("Creature.Self"))) {
                             continue;
                         }
                         if (stAb.matchesValidParam("ValidAttacker", this)) {
                             found = true;
                         }
-                    } else if (stAb.getParam("Mode").equals(StaticAbilityCantAttackBlock.MinMaxBlockerMode)) {
+                    } else if (stAb.checkMode(StaticAbilityCantAttackBlock.MinMaxBlockerMode)) {
                         if (stAb.matchesValidParam("ValidCard", this)) {
                             found = true;
                         }
@@ -5560,17 +5550,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean canDamagePrevented(final boolean isCombat) {
-        CardCollection list = new CardCollection(getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
-        list.add(this);
-        for (final Card ca : list) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.applyAbility("CantPreventDamage", this, isCombat)) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
+        return !StaticAbilityCantPreventDamage.cantPreventDamage(this, isCombat);
     }
 
     // This is used by the AI to forecast an effect (so it must not change the game state)
@@ -6307,7 +6287,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public SpellAbility getCastSA() {
         return castSA;
     }
-
     public void setCastSA(SpellAbility castSA) {
         this.castSA = castSA;
     }

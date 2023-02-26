@@ -65,8 +65,14 @@ public abstract class ManaAtom {
             case "AnyType": return ALL_MANA_TYPES;
         }
         byte b = 0;
-        for (char c : s.toCharArray()) {
-            b |= fromName(c);
+        if (s.length() > 2) {
+            // check for color word
+            b = fromName(s);
+        }
+        if (b == 0) {
+            for (char c : s.toCharArray()) {
+                b |= fromName(c);
+            }
         }
         return b;
     }

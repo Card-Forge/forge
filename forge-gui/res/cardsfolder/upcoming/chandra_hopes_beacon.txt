@@ -1,0 +1,15 @@
+Name:Chandra, Hope's Beacon
+ManaCost:4 R R
+Types:Legendary Planeswalker Chandra
+Loyalty:5
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ TrigCopySpell | TriggerZones$ Battlefield | ActivationLimit$ 1 | TriggerDescription$ Whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy. This ability triggers only once each turn.
+SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | AILogic$ Always | MayChooseTarget$ True
+A:AB$ Mana | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Produced$ Combo Any | Amount$ 2 | SpellDescription$ Add two mana in any combination of colors.
+A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DestinationZone$ Exile | DigNum$ 5 | ChangeNum$ All | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top five cards of your library. Until the end of your next turn, you may cast an instant or sorcery spell from among those exiled cards.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Exile,Stack | Affected$ Instant.IsRemembered,Sorcery.IsRemembered | MayPlay$ True | MayPlayLimit$ 1 | Description$ Until the end of your next turn, you may cast an instant or sorcery spell from among the exiled cards.
+A:AB$ DealDamage | Cost$ SubCounter<X/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Creature,Planeswalker,Player | TgtPrompt$ Select any target | TargetMin$ 0 | TargetMax$ 2 | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each of up to two targets.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+DeckNeeds:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy. This ability triggers only once each turn.\n[+2]: Add two mana in any combination of colors.\n[+1]: Exile the top five cards of your library. Until the end of your next turn, you may cast an instant or sorcery spell from among those exiled cards.\n[−X]: Chandra, Hope's Beacon deals X damage to each of up to two targets.

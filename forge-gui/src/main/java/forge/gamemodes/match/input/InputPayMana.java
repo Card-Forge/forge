@@ -201,7 +201,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     public void useManaFromPool(byte colorCode) {
         // find the matching mana in pool.
-        if (player.getManaPool().tryPayCostWithColor(colorCode, saPaidFor, manaCost)) {
+        if (player.getManaPool().tryPayCostWithColor(colorCode, saPaidFor, manaCost, saPaidFor.getPayingMana())) {
             onManaAbilityPaid();
             showMessage();
         }
