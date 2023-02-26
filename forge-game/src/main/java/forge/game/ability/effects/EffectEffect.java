@@ -255,7 +255,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
             // Set Chosen Cards
             if (hostCard.hasChosenCard()) {
-                eff.setChosenCards(new CardCollection(hostCard.getChosenCards()));
+                eff.setChosenCards(hostCard.getChosenCards());
             }
 
             // Set Chosen Player

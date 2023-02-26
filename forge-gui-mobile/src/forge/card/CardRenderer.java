@@ -828,7 +828,10 @@ public class CardRenderer {
                             else
                                 drawManaCost(g, card.getLeftSplitState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
                         } else {
-                            drawManaCost(g, card.getCurrentState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
+                            ManaCost leftManaCost = card.getLeftSplitState().getManaCost();
+                            ManaCost rightManaCost = card.getRightSplitState().getManaCost();
+                            drawManaCost(g, leftManaCost, x - padding, y-(manaSymbolSize/1.5f), w + 2 * padding, h, manaSymbolSize);
+                            drawManaCost(g, rightManaCost, x - padding, y+(manaSymbolSize/1.5f), w + 2 * padding, h, manaSymbolSize);
                         }
                     }
                 } else {

@@ -34,7 +34,7 @@ public class AttachEffect extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
 
-        CardCollection attachments;
+        CardCollectionView attachments;
 
         final Player p = sa.getActivatingPlayer();
 
@@ -130,7 +130,7 @@ public class AttachEffect extends SpellAbilityEffect {
             attachToName = attachTo.toString();
         }
 
-        attachments = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, attachments, ZoneType.Battlefield, sa);
+        attachments = GameActionUtil.orderCardsByTheirOwners(game, attachments, ZoneType.Battlefield, sa);
 
         // If Cast Targets will be checked on the Stack
         for (final Card attachment : attachments) {

@@ -2324,7 +2324,7 @@ public class ComputerUtil {
 
         CardLists.sortByCmcDesc(goodChoices);
 
-        return new CardCollection(Aggregates.random(goodChoices, max));
+        return goodChoices.subList(0, max);
     }
 
     public static CardCollection getCardsToDiscardFromFriend(Player aiChooser, Player p, SpellAbility sa, CardCollection validCards, int min, int max) {

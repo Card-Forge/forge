@@ -212,7 +212,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         }
     }
 
-    public boolean tryPayCostWithColor(byte colorCode, SpellAbility saPaidFor, ManaCostBeingPaid manaCost) {
+    public boolean tryPayCostWithColor(byte colorCode, SpellAbility saPaidFor, ManaCostBeingPaid manaCost, List<Mana> manaSpentToPay) {
         Mana manaFound = null;
         String restriction = manaCost.getSourceRestriction();
         Collection<Mana> cm = floatingMana.get(colorCode);
@@ -231,7 +231,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         }
 
         if (manaFound != null && tryPayCostWithMana(saPaidFor, manaCost, manaFound, false)) {
-            saPaidFor.getPayingMana().add(0, manaFound);
+            manaSpentToPay.add(0, manaFound);
             return true;
         }
         return false;

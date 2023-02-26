@@ -805,6 +805,16 @@ public class World implements Disposable, SaveFileContent {
         {
             TextureAtlas atlas=Config.instance().getAtlas(tilesetName);
             TextureAtlas.AtlasRegion region=atlas.findRegion(tileSetNameWithIndex);
+            //try to fix bleeding...
+            float fix = 0.01f;
+            float rx = region.getRegionX();
+            float ry = region.getRegionY();
+            float rwidth = region.getRegionWidth();
+            float rheight = region.getRegionHeight();
+            float invTexWidth = 1f / region.getTexture().getWidth();
+            float invTexHeight = 1f / region.getTexture().getHeight();
+            region.setRegion((rx + fix) * invTexWidth, (ry + fix) * invTexHeight, (rx + rwidth - fix) * invTexWidth, (ry + rheight - fix) * invTexHeight); // Trims Region
+            //
             int tileSize=data.tileSize;
             Pixmap smallPixmap=new Pixmap(data.miniMapTileSize,data.miniMapTileSize, Pixmap.Format.RGBA8888);
             smallPixmap.setColor(0,0,0,0);

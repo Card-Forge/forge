@@ -120,10 +120,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
 
                     if (!sa.hasParam("ChangeLater")) {
                         if (zone.is(ZoneType.Library) || zone.is(ZoneType.PlanarDeck) || zone.is(ZoneType.SchemeDeck)) {
-                            if (libraryPosition == -1 || libraryPosition > zone.size()) {
-                                libraryPosition = zone.size();
-                            }
-                            c = game.getAction().moveTo(zone, c, libraryPosition, sa);
+                            c = game.getAction().moveTo(destZone1, c, libraryPosition, sa);
                         } else {
                             if (destZone1.equals(ZoneType.Battlefield)) {
                                 if (sa.hasParam("Tapped")) {
@@ -167,12 +164,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
                     }
                     for (final Card c : afterOrder) {
                         final ZoneType origin = c.getZone().getZoneType();
-                        Card m;
-                        if (destZone2 == ZoneType.Library) {
-                            m = game.getAction().moveToLibrary(c, libraryPosition2, sa);
-                        } else {
-                            m = game.getAction().moveToVariantDeck(c, destZone2, libraryPosition2, sa);
-                        }
+                        Card m = game.getAction().moveTo(destZone2, c, libraryPosition2, sa);
                         if (m != null && !origin.equals(m.getZone().getZoneType())) {
                             table.put(origin, m.getZone().getZoneType(), m);
                         }
