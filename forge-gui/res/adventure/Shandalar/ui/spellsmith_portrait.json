@@ -189,7 +189,7 @@
     {
       "type": "Label",
       "name": "colorLabel",
-      "text": "tr(lblColors)", 
+      "text": "[/][BLACK]tr(lblColors)",
       "x": 10,
       "y": 260,
       "width": 100,
@@ -198,7 +198,7 @@
     {
       "type": "Label",
       "name": "vnXYKZJw_P5wMnHa1tH7-3",
-      "text": "tr(lblPlane)", 
+      "text": "[/][BLACK]tr(lblPlane)",
       "x": 10,
       "y": 190,
       "width": 100,
@@ -217,7 +217,7 @@
     {
       "type": "Label",
       "name": "vnXYKZJw_P5wMnHa1tH7-5",
-      "text": "tr(lblManaCost)",  
+      "text": "[/][BLACK]tr(lblManaCost)",
       "x": 10,
       "y": 360,
       "width": 100,
@@ -266,7 +266,7 @@
     {
       "type": "Label",
       "name": "vnXYKZJw_P5wMnHa1tH7-10",
-      "text": "tr(lblRarity)",  
+      "text": "[/][BLACK]tr(lblRarity)",
       "x": 10,
       "y": 427,
       "width": 100,

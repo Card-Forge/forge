@@ -230,6 +230,7 @@ public class InventoryScene  extends UIScene {
             }
         }
         itemDescription.setText(data.name+"\n"+data.getDescription());
+        itemDescription.layout();
 
 
     }

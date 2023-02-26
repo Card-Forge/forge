@@ -254,7 +254,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         fetcher.fetchImage(reward.getCard().getImageKey(false), this);
                         if (reward.getCard().hasBackFace()) {
                             if (!ImageCache.imageKeyFileExists(reward.getCard().getImageKey(true))) {
-                                fetcher.fetchImage(reward.getCard().getImageKey(true), this);
+                                fetcher.fetchImage(reward.getCard().getImageKey(true), null);
                             }
                         }
                     }
