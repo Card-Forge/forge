@@ -7,77 +7,87 @@ Avatar
   xy: 9, 151
   size: 15, 9     
 Idle 
-  xy: 8, 23
-  size: 17, 14   
+  xy: 0, 0
+  size: 32, 32  
 Idle 
-  xy: 39, 23
-  size: 19, 10
+  xy: 32, 0
+  size: 32, 32  
 Idle 
-  xy: 74, 21
-  size: 13, 12
+  xy: 64, 0
+  size: 32, 32  
 Idle 
-  xy: 104, 23
-  size: 18, 10   
+  xy: 96, 0
+  size: 32, 32
+Idle 
+  xy: 0, 96
+  size: 32, 32  
+Idle 
+  xy: 32, 96
+  size: 32, 32  
+Idle 
+  xy: 64, 96
+  size: 32, 32  
+Idle 
+  xy: 96, 96
+  size: 32, 32     
 Walk 
-  xy: 8, 55
-  size: 18, 9
+  xy: 0, 32
+  size: 32, 32  
+Walk
+  xy: 32, 32
+  size: 32, 32  
 Walk 
-  xy: 40, 55
-  size: 16, 10
+  xy: 64, 32
+  size: 32, 32  
 Walk 
-  xy: 75, 51
-  size: 10, 16  
+  xy: 96, 32
+  size: 32, 32   
 Walk 
-  xy: 106, 49
-  size: 15, 16
+  xy: 128, 32
+  size: 32, 32  
+Walk
+  xy: 160, 32
+  size: 32, 32  
 Walk 
-  xy: 138, 51
-  size: 16, 15
+  xy: 192, 32
+  size: 32, 32  
 Walk 
-  xy: 168, 50
-  size: 16, 15  
-Walk 
-  xy: 201, 48
-  size: 16, 15
-Walk 
-  xy: 232, 48
-  size: 16, 15
+  xy: 224, 32
+  size: 32, 32 
 Attack 
-  xy: 8, 85
-  size: 19, 14      
+  xy: 0, 64
+  size: 32, 32     
 Attack 
-  xy: 39, 85
-  size: 19, 14 
+  xy: 32, 64
+  size: 32, 32  
 Attack 
-  xy: 71, 81
-  size: 19, 19 
+  xy: 64, 64
+  size: 32, 32  
 Attack 
-  xy: 102, 75
-  size: 22, 25 
+  xy: 96, 64
+  size: 32, 32  
 Attack 
-  xy: 134, 75
-  size: 22, 25 
+  xy: 128, 64
+  size: 32, 32  
 Attack 
-  xy: 198, 72
-  size: 22, 25 
-Attack 
-  xy: 102, 75
-  size: 22, 25              
+  xy: 160, 64
+  size: 32, 32              
 Death 
-  xy: 8, 150
-  size: 17, 9      
+  xy: 0, 128
+  size: 32, 32
 Death 
-  xy: 41, 150
-  size: 18, 10 
+  xy: 32, 128
+  size: 32, 32      
 Death 
-  xy: 71, 147
-  size: 18, 12 
+  xy: 64, 128
+  size: 32, 32      
 Death 
-  xy: 99, 145
-  size: 25, 14
+  xy: 96, 128
+  size: 32, 32      
 Death 
-  xy: 128, 146
-  size: 25, 14 
+  xy: 128, 128
+  size: 32, 32      
 Death 
-  xy: 157, 146
-  size: 25, 14
+  xy: 160, 128
+  size: 32, 32      
+

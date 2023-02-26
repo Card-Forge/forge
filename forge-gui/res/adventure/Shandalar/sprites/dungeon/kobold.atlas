@@ -7,95 +7,83 @@ Avatar
   xy: 12, 13
   size: 14, 11     
 Idle 
-  xy: 4, 11
-  size: 21, 21   
+  xy: 0, 0
+  size: 32, 32   
 Idle 
-  xy: 39, 13
-  size: 20, 21
+  xy: 32, 0
+  size: 32, 32   
 Idle 
-  xy: 72, 12
-  size: 19, 22
+  xy: 64, 0
+  size: 32, 32  
 Idle 
-  xy: 102, 13
-  size: 21, 20
-Idle 
-  xy: 5, 109
-  size: 21, 20      
-Idle 
-  xy: 36, 109
-  size: 20, 20 
-Idle 
-  xy: 70, 110
-  size: 18, 19 
-Idle 
-  xy: 102, 108
-  size: 20, 22   
+  xy: 96, 0
+  size: 32, 32   
 Walk
-  xy: 6, 44
-  size: 21, 24      
-Walk 
-  xy: 39, 42
-  size: 19, 23
-Walk 
-  xy: 70, 42
-  size: 20, 22
-Walk 
-  xy: 102, 43
-  size: 21, 21  
-Walk 
-  xy: 133, 43
-  size: 21, 23
-Walk 
-  xy: 166, 43
-  size: 22, 20 
-Walk 
-  xy: 199, 41
-  size: 19, 21
-Walk 
-  xy: 231, 43
-  size: 19, 19
+  xy: 0, 32
+  size: 32, 32      
+Walk
+  xy: 32, 32
+  size: 32, 32      
+Walk
+  xy: 64, 32
+  size: 32, 32      
+Walk
+  xy: 96, 32
+  size: 32, 32      
+Walk
+  xy: 128, 32
+  size: 32, 32      
+Walk
+  xy: 160, 32
+  size: 32, 32      
+Walk
+  xy: 192, 32
+  size: 32, 32      
+Walk
+  xy: 224, 32
+  size: 32, 32      
 Attack 
-  xy: 7, 76
-  size: 19, 21      
+  xy: 0, 64
+  size: 32, 32  
 Attack 
-  xy: 38, 78
-  size: 20, 19 
+  xy: 32, 64
+  size: 32, 32  
 Attack 
-  xy: 70, 77
-  size: 17, 20 
+  xy: 64, 64
+  size: 32, 32  
 Attack 
-  xy: 102, 78
-  size: 18, 19 
+  xy: 96, 64
+  size: 32, 32  
 Attack 
-  xy: 134, 78
-  size: 26, 18      
+  xy: 128, 64
+  size: 32, 32  
 Attack 
-  xy: 165, 78
-  size: 26, 18 
+  xy: 160, 64
+  size: 32, 32  
 Attack 
-  xy: 197, 77
-  size: 22, 19
+  xy: 192, 64
+  size: 32, 32  
 Attack 
-  xy: 230, 76
-  size: 21, 21             
+  xy: 224, 64
+  size: 32, 32           
 Death 
-  xy: 7, 141
-  size: 20, 21      
+  xy: 0, 128
+  size: 32, 32  
 Death 
-  xy: 39, 143
-  size: 22, 18 
+  xy: 32, 128
+  size: 32, 32  
 Death 
-  xy: 71, 145
-  size: 23, 16 
+  xy: 64, 128
+  size: 32, 32  
 Death 
-  xy: 101, 150
-  size: 29, 11
+  xy: 96, 128
+  size: 32, 32  
 Death 
-  xy: 132, 149
-  size: 29, 13 
+  xy: 128, 128
+  size: 32, 32  
 Death 
-  xy: 165, 151
-  size: 28, 10 
+  xy: 160, 128
+  size: 32, 32  
 Death 
-  xy: 198, 150
-  size: 26, 12
+  xy: 192, 128
+  size: 32, 32  

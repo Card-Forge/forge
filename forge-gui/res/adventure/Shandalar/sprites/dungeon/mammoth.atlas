@@ -7,26 +7,26 @@ Avatar
   xy: 23, 17
   size: 46, 41 
 Idle 
-  xy: 12, 69
-  size: 85, 64
+  xy: 0, 70
+  size: 92, 60
 Idle 
-  xy: 100, 67
-  size: 87, 65
+  xy: 94, 70
+  size: 92, 60
 Idle 
-  xy: 191, 77
-  size: 84, 59
+  xy: 180, 70
+  size: 92, 60
 Idle 
-  xy: 280, 71
-  size: 82, 67
+  xy: 270, 70
+  size: 92, 60
 Idle 
-  xy: 371, 70
-  size: 84, 63      
+  xy: 470, 70
+  size: 92, 60 
 Idle 
-  xy: 456, 76
-  size: 88, 61 
+  xy: 450, 70
+  size: 92, 60
 Idle 
-  xy: 545, 74
-  size: 94, 62 
+  xy: 550, 70
+  size: 92, 60
 Attack 
   xy: 6, 155
   size: 86, 60      

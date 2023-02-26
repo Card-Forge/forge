@@ -7,14 +7,14 @@ Avatar
   xy: 83,57
   size: 34, 25
 Idle 
-  xy: 2, 14
-  size: 59, 31
+  xy: 0, 0
+  size: 64, 40
 Idle 
-  xy: 69, 15
-  size: 50, 29
+  xy: 64, 0
+  size: 64, 40
 Idle 
-  xy: 136, 10
-  size: 40, 35
+  xy: 128, 0
+  size: 64, 40
 Idle 
-  xy: 198, 13
-  size: 47, 32
+  xy: 192,0
+  size: 64, 40
