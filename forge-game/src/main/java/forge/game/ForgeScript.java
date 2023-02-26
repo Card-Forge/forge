@@ -188,7 +188,7 @@ public class ForgeScript {
         } else if (property.startsWith("XCost")) {
             String comparator = property.substring(5, 7);
             int y = AbilityUtils.calculateAmount(sa.getHostCard(), property.substring(7), sa);
-            return Expressions.compare(sa.getXManaCostPaid(), comparator, y);
+            return Expressions.compare(sa.getXManaCostPaid() == null ? 0 : sa.getXManaCostPaid(), comparator, y);
         } else if (property.equals("hasTapCost")) {
             Cost cost = sa.getPayCosts();
             return cost != null && cost.hasTapCost();
