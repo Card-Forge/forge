@@ -1,7 +1,7 @@
 Name:Garruk's Boss Effect Phase Two
 ManaCost:no cost
 Types:Enchantment
-S:Mode$ Continuous | EffectZone$ Command | Affected$ Card.Self | RemoveAllAbilities$ True | IsPresent$ Card.YouOwn+NamedGarruk's Boss Effect Phase One | PresentZone$ Command | PresentCompare$ EQ1 | Description$ Garruk's Boss Effect, Phase Two is inactive as long as Garruk's Boss Effect, Phase One is on the battlefield. 
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Card.Self | AffectedZone$ Command | RemoveAllAbilities$ True | IsPresent$ Card.namedGarruk's Boss Effect Phase One | PresentZone$ Command | PresentCompare$ EQ1 | Description$ Garruk's Boss Effect, Phase Two is inactive as long as Garruk's Boss Effect, Phase One is on the battlefield. 
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Forest.YouCtrl | AddType$ Swamp | Description$ Each Forest you control is a Swamp in addition to its other land types.
 S:Mode$ Continuous | Affected$ Beast.YouCtrl | AddPower$ 3 | AddToughness 3 | AddKeyword$ Trample & Deathtouch | Description$ Beast creatures you control get +3/+3 and have trample and Deathtouch
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | PresentZone$ Command | Execute$ TrigConjure | TriggerDescription$ At the beginning of your upkeep, conjure a card of Garruk Phase 2's Spellbook into your hand.
