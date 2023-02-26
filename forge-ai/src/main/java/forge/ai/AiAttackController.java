@@ -816,6 +816,7 @@ public class AiAttackController {
                     if (combat.getAttackConstraints().getRequirements().get(attacker) == null) continue;
                     // check defenders in order of maximum requirements
                     for (Pair<GameEntity, Integer> e : combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements()) {
+                        // TODO check if desired defender would also have the same amount
                         if (e.getRight() == 0) continue;
                         GameEntity mustAttackDefMaybe = e.getLeft();
                         // Gideon Jura returns LKI
