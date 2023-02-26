@@ -20,7 +20,6 @@ import forge.assets.FBufferedImage;
 import forge.assets.FSkin;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
-import forge.deck.DeckSection;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.card.CounterEnumType;
