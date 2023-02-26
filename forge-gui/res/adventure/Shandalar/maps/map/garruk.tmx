@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJydV8FOwkAQXSVQCK0/QQSM4tnEr/FmPHgyXvWEogn9GvwBwKR3jp78BX7ATsqkj+nM7tZNXkor7Lx5b2a6jlLnRiXmwwpFUl1HaRjnEd8hrLrOfR3Ai2K8K3Ho+VXJ4aEfzyOEMfCQy4qBWoR4rEtsWvBZCR18MWJ5TNJ6z9OOc7/pcZ5yz7uTph8+zrE8aL1kTY1lDObg82Ni8Lgva+M6UKcck3P/Ka/dpBlDckA/NNBvPuE+1C+0ODZi2XMu79V5aDVBfZD3dGi5hniwN8wB+541zZMmD/SdYdVVkRzH0rg8D6rvoh7MnbmMBzU4Z5oJPo8xV43z6NCn21TP51L5zayv13KM/pp2Pk8xz8cy752r56TGRerr84U05f1nSa2l5RGCuBDGsB/WSRs9UMMiiZ+Z7CtpsoH9pCYhPRaifl+zisf08PcLJe5U3BOHdVrXE3traeLzBZelx7ehx07UJHn5Xx6Itr7QPNxBPKt35OyU3PbuuD9oSe1jakS+o6QmMm/5DM8fvDQPLF8Yb0r9Wzy0Zzg7UNs2eiD4jHDbia8Pa/4jj1iPuLcWhzihOpUeMg8+X9Dnpyzsg+UZ87BmiKUHztIc3uNYe7jWAU7ky941NdFmBd9/DOteusmO3+MWt73z89imdWx5Vsb+wnvN+wlwxt4ujNy0PFnLWB4xwPcO8ZH9ieD4y7PqM9UInpd99S2vUif2mvXw/R+Fa670jYzTFsgD61T2FNfXHrhYtUr4A7deBhY=
+   eJydV8tOwlAQvUqkEFp/ohEwimsTv8adceHKuNUViCb0a/AHAJPuWbryF/oDdtJOejqd+6g3OSnFcufMOTPTaxobk5ZYTirkUXVNYz8uAp4hbM+M+arBi2K8K3Ho++uSw+MonIcPU+Ahly0GauHjsSux78FnK3RwxQjlMYubPU8HxvzG7TzlnvcnXT9cnEN50HpNuhrLGMzB5cfMwuOhrI0bT51yTM79p7yeRd0YkgP6oYF+8wn3vn6hxbERm6Ex2bDJQ6sJ6oNsqEPL1ceDvWEO2PesaRZ1eaDvDFtd5VE7lsblZVw9i3owd+YyHTfgnGkmuDzGXDXOad2nh1jP50r5zWKk13KI/pp2Lk8xz6cy76Np5qTGRerr8oU05f0XUaOlzSMEcSFMYT+skz56oIZ5FD4z2VfSZA/7SU18eqxF/b4lFY95/fdLJe5c3BOHXdzUE3tr08TlCy6bHt8WPY6iJsnL//JA9PWF5uER4tl6R85Oya0w7f6gJbUPqRFtb9RE5i2/w/MHL80Dmy+MVQ8e2nc4O1DbPnoweAu63g3C68M2/5FHqEfcW+s6jq9O5XmBefD5gj4/J34fbJ4xD9sMsemBszSD9zhzkn2983Cic05huppos4LvPyZNL90m7fe4jVth3DwOcRNbnpWxv/Be834GnLG3c0tuWp6sZSiPEOB7h/isPOclen5zXn2mGsHzsqu+5VXqxF6zHq7/o3Atlb6RcfoCeWCdyp7i+iqAi61WCX9fbgUK
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -37,7 +37,7 @@
   <object id="48" template="../obj/treasure.tx" x="522.915" y="383.179"/>
   <object id="54" template="../obj/enemy.tx" x="104.779" y="294.529">
    <properties>
-    <property name="enemy" value="Mammoth"/>
+    <property name="enemy" value="Viper"/>
    </properties>
   </object>
   <object id="55" template="../obj/enemy.tx" x="253.388" y="115.167">
@@ -64,7 +64,7 @@
   </object>
   <object id="64" template="../obj/enemy.tx" x="527.989" y="340.222">
    <properties>
-    <property name="enemy" value="Greensleeves"/>
+    <property name="enemy" value="Green Beast"/>
    </properties>
   </object>
   <object id="65" template="../obj/enemy.tx" x="387.042" y="397.283">

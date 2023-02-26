@@ -7,9 +7,9 @@
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
         "map/main_story",
+        "map",
         "obj",
-        "tileset",
-        "map"
+        "tileset"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -1743,8 +1743,8 @@
             "scale": 2.0504166666666666,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 129.2420239788661,
-                "y": 264.58036984352776
+                "x": 245.8036984352774,
+                "y": 108.0268238162975
             }
         },
         "map/graveyard.tmx": {
