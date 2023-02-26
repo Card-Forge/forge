@@ -74,6 +74,8 @@
   </object>
   <object id="71" template="../obj/enemy.tx" x="177" y="94">
    <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Nahiri Boss Effect&quot;]
+}</property>
     <property name="enemy" value="Nahiri"/>
    </properties>
   </object>

@@ -6,10 +6,10 @@
     "activeFile": "map/garruk.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "map/main_story",
         "tileset",
-        "obj",
-        "map"
+        "map/main_story",
+        "map",
+        "obj"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -1741,10 +1741,10 @@
                 4
             ],
             "scale": 2.0504166666666666,
-            "selectedLayer": 3,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 99.97967892704736,
-                "y": 234.34261328998173
+                "x": 53.159926844137374,
+                "y": 254.82625482625485
             }
         },
         "map/graveyard.tmx": {
@@ -2004,7 +2004,7 @@
                 4
             ],
             "scale": 2,
-            "selectedLayer": 0,
+            "selectedLayer": 4,
             "viewCenter": {
                 "x": 265,
                 "y": 123.25
@@ -2023,9 +2023,9 @@
                 4
             ],
             "scale": 2.177083333333333,
-            "selectedLayer": 3,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 239.31100478468903,
+                "x": 239.7703349282297,
                 "y": 136.65071770334927
             }
         },
@@ -2591,6 +2591,17 @@
                 "y": 135.5
             }
         },
+        "map/nahiri.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.5333593749999999,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 320.2119529219952,
+                "y": 208.36602639221485
+            }
+        },
         "map/nest_blue_1.tmx": {
             "scale": 0.75,
             "selectedLayer": 4,
@@ -2879,10 +2890,21 @@
                 11
             ],
             "scale": 3,
-            "selectedLayer": 3,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 229,
+                "x": 296,
                 "y": 183.83333333333331
+            }
+        },
+        "map/slimefoot_boss.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2.044479166666666,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 183.90992000815208,
+                "y": 136.22051255922963
             }
         },
         "map/snowabbey_1.tmx": {
@@ -2926,6 +2948,14 @@
             "viewCenter": {
                 "x": 320,
                 "y": 320.5
+            }
+        },
+        "map/teferi.tmx": {
+            "scale": 3,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 240,
+                "y": 136.16666666666663
             }
         },
         "map/tileset/buildings.tsx": {
@@ -3073,7 +3103,10 @@
         "map/lavaforge_1.tmx",
         "map/lavaforge_2.tmx",
         "map/garruk.tmx",
-        "map/grove_4.tmx"
+        "map/grove_4.tmx",
+        "map/slime_hive.tmx",
+        "map/slimefoot_boss.tmx",
+        "map/nahiri.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",

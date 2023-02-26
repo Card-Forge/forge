@@ -967,7 +967,7 @@
         "Kraken Hatchling"
       ],
       "startBattleWithCardInCommandZone":[
-        "Thassa's Bident"
+        "Kiora's Bident"
       ]
 }
 },
@@ -985,7 +985,7 @@
 {
     "name": "Jace's Signature Hoodie",
     "equipmentSlot": "Body",
-    "iconName": "IronArmor",
+    "iconName": "BlueRobes",
     "effect": {
       "lifeModifier": -1,
       "cardRewardBonus": 1,
@@ -1003,6 +1003,28 @@
       "cardRewardBonus": 1,
       "startBattleWithCardInCommandZone": [
         "Teferi's Staff"
+      ]
+}
+},
+{
+    "name": "Garruk's Mighty Axe",
+    "equipmentSlot": "Left",
+    "iconName": "GarrukAxe",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCardInCommandZone": [
+        "Garruk's Mighty Axe"
+      ]
+}
+},
+{
+    "name": "Nahiri's Armory",
+    "equipmentSlot": "Right",
+    "iconName": "Armory",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCardInCommandZone": [
+        "Nahiri's Armory"
       ]
 }
 }

@@ -31,9 +31,9 @@
  <objectgroup id="11" name="obj">
   <object id="75" gid="303" x="506.5" y="325" width="16" height="16"/>
   <object id="76" gid="303" x="316" y="366" width="16" height="16"/>
-  <object id="89" template="../obj/enemy.tx" x="112" y="231">
+  <object id="89" template="../obj/enemy.tx" x="132" y="219">
    <properties>
-    <property name="enemy" value="Cave Spider"/>
+    <property name="enemy" value="Ooze"/>
    </properties>
   </object>
   <object id="91" template="../obj/enemy.tx" x="424.992" y="215.718">
@@ -53,19 +53,19 @@
   </object>
   <object id="97" template="../obj/enemy.tx" x="275.333" y="233.5">
    <properties>
-    <property name="enemy" value="Skeleton"/>
+    <property name="enemy" value="Ooze"/>
    </properties>
   </object>
-  <object id="98" template="../obj/enemy.tx" x="472.833" y="172.167">
+  <object id="98" template="../obj/enemy.tx" x="505.833" y="115.167">
    <properties>
     <property name="enemy" value="Horror"/>
    </properties>
   </object>
   <object id="100" template="../obj/enemy.tx" x="178.088" y="149.029">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Slime Boss Effect&quot;]
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Slime Boss Effect&quot;]
 }</property>
-    <property name="enemy" value="Slime Boss"/>
+    <property name="enemy" value="Ooze Boss"/>
    </properties>
   </object>
   <object id="101" template="../obj/enemy.tx" x="461" y="329">
@@ -74,7 +74,7 @@
    </properties>
   </object>
   <object id="104" template="../obj/gold.tx" x="532" y="73"/>
-  <object id="106" template="../obj/gold.tx" x="529" y="206.5"/>
+  <object id="106" template="../obj/gold.tx" x="522.333" y="202.833"/>
   <object id="107" template="../obj/gold.tx" x="169.5" y="276"/>
   <object id="108" template="../obj/treasure.tx" x="88" y="275.5"/>
   <object id="109" template="../obj/treasure.tx" x="476.75" y="76"/>

@@ -4058,7 +4058,7 @@
 },
 {
 	"name": "Ooze Boss",
-	"sprite": "sprites/dungeon/ooze_boss.atlas",
+	"sprite": "sprites/dungeon/oozeboss.atlas",
 	"scale": 0.5,
 	"deck": [
 		"decks/miniboss/ooze_boss.dck"
@@ -5880,6 +5880,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
+	"scale": 0.75,
 	"life": 12,
 	"rewards": [
 		{
@@ -6727,7 +6728,7 @@
 			"type": "item",
 			"probability": 1,
 			"count": 1,
-			"itemName": "Nahiri's Arsenal"
+			"itemName": "Nahiri's Armory"
 		}
 	],
 	"colors": "RW"
@@ -7557,6 +7558,32 @@
 		{
 			"type": "gold",
 			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "BG"
+},
+{
+	"name": "Squirrel",
+	"sprite": "sprites/dungeon/squirrel.atlas",
+	"deck": [
+		"decks/squirrel.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 23,
+	"life": 13,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 3,
+			"addMaxCount": 7
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
 			"count": 10,
 			"addMaxCount": 90
 		}

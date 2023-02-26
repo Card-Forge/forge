@@ -1,7 +1,15 @@
-Name:Farmer's Tools
+Name:Garruk's Boss Effect, Phase Two
 ManaCost:no cost
-Types:Artifact
-A:AB$ RepeatEach | Cost$ PayShards<2> | ActivationZone$ Command | RepeatSubAbility$ DBChangeZone | RepeatPlayers$ Player | SubAbility$ Eject | StartingWithActivator$ True | SpellDescription$ Starting with you, each player may put a land card from their hand onto the battlefield. Exile Farmer's Tools. 
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land.RememberedPlayerCtrl | DefinedPlayer$ Player.IsRemembered | Chooser$ Player.IsRemembered | ChangeNum$ 1 | Hidden$ True
-SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-Oracle:{M}{M}: Starting with you, each player may put a land card from their hand onto the battlefield. Exile Farmer's Tools. 
+Types:Enchantment
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Forest.YouCtrl | AddType$ Swamp | Description$ Each Forest you control is a Swamp in addition to its other land types.
+S:Mode$ Continuous | Affected$ Beast.YouCtrl | AddPower$ 3 | AddToughness 3 | AddKeyword$ Trample & Deathtouch | Description$ Beast creatures you control get +3/+3 and have trample and Deathtouch
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | PresentZone$ Command | Execute$ TrigConjure | TriggerDescription$ At the beginning of your upkeep, conjure a card of Garruk Phase 2's Spellbook into your hand.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Zone$ Hand | AtRandom$ True | Spellbook$ Garruk; Apex Predator,Garruk; Cursed Huntsman,Garruk Relentless,In Garruk's Wake,Rampaging Baloths,Manglehorn,Elder Gargaroth,Gemrazer,Thragtusk,Sawtusk Demolisher,Avenger of Zendikar,Soul of the Harvest,Kogla;the Titan Ape,Terastodon,Bane of Progress
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Opponent | Execute$ DBEffect | TriggerZones$ Command | TriggerDescription$ Whenever an opponent casts a noncreature spell,perpetually increase the power and toughness of creatures you control and creature cards in your hand, library, and graveyard by 1.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Valid Creature.YouCtrl,ValidHand Creature.YouOwn,ValidGraveyard Creature.YouOwn,ValidLibrary Creature.YouOwn | StaticAbilities$ PerpetualP1P1 | Name$ Garruk's Rage Effect | Duration$ Permanent
+SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ At the beginning of your end step, creatures you control and creature cards in your hand, library, and graveyard perpetually get +1/+1.
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+T:Mode$ Phase | Phase$ End Step | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigReanimate | TriggerDescription$ At the beginning of your end step, return a random creature card from your graveyard to the battlefield. It gains "If this creature would leave the battlefield, exile it instead".
+SVar:TrigChangeZone:DB$ ChangeZone | ChangeType$ Creature.YouOwn | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | AtRandom$ True | Destination$ Battlefield | LeaveBattlefield$ Exile
+Oracle:Each Forest you control is a Swamp in addition to its other land types.\nBeast creatures you control get +3/+3 and have trample and Deathtouch\nAt the beginning of your upkeep, conjure a card of Garruk Phase 2's spellbook into your hand.\nWhenever an opponent casts a noncreature spell,perpetually increase the power and toughness of creatures you control and creature cards in your hand, library, and graveyard by 1. At the beginning of your end step, return a random creature card from your graveyard to the battlefield. It gains "If this creature would leave the battlefield, exile it instead".
