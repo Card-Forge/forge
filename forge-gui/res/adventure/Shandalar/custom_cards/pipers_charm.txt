@@ -1,7 +1,7 @@
 Name:Piper's Charm
 ManaCost:no cost
 Types:Artifact
-S:Mode$ Continuous | Description$ Provided by Piper's Charm (Equipped Item - Neck)
-A:AB$ Effect | Cost$ PayShards<3> Sac<1/CARDNAME> | ValidTgts$ Creature | ExileOnMoved$ Battlefield | StaticAbilities$ MustBlock | RememberObjects$ Targeted | StackDescription$ {c:Targeted} blocks this turn if able. | SpellDescription$ Target creature blocks this turn if able.
+A:AB$ Effect | Cost$ PayShards<3> | ActivationZone$ Command | SubAbility$ Eject | ValidTgts$ Creature | ExileOnMoved$ Battlefield | StaticAbilities$ MustBlock | RememberObjects$ Targeted | GameActivationLimit$ 1 | SpellDescription$ Target creature blocks this turn if able. | StackDescription$ SpellDescription
 SVar:MustBlock:Mode$ MustBlock | ValidCreature$ Card.IsRemembered | Description$ This creature blocks this turn if able.
-Oracle: Provided by Piper's Charm. Pay {M}{M}{M}, sacrifice Piper's Charm: Target creature blocks this turn if able.
+Oracle: Pay {M}{M}{M}: Target creature blocks this turn if able.  Exile CARDNAME. Activate only once.
+SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

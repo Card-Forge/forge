@@ -4,7 +4,7 @@
     "equipmentSlot": "Neck",
     "iconName": "PipersCharm",
     "effect": {
-      "startBattleWithCard": [
+      "startBattleWithCardInCommandZone": [
         "Piper's Charm"
       ]
     }
@@ -13,7 +13,7 @@
     "equipmentSlot": "Left",
     "iconName": "SleepWand",
     "effect": {
-      "startBattleWithCard": [
+      "startBattleWithCardInCommandZone": [
         "Sleep Wand"
       ]
     }
@@ -22,7 +22,7 @@
     "equipmentSlot": "Right",
     "iconName": "HillGiantClub",
     "effect": {
-      "startBattleWithCard": [
+      "startBattleWithCardInCommandZone": [
         "Hill Giant Club"
       ]
     }
@@ -31,7 +31,7 @@
     "equipmentSlot": "Right",
     "iconName": "CursedTreasure",
     "effect": {
-      "startBattleWithCard": [
+      "startBattleWithCardInCommandZone": [
         "Cursed Treasure"
       ]
     }
@@ -40,7 +40,7 @@
     "equipmentSlot": "Left",
     "iconName": "FarmersTools",
     "effect": {
-      "startBattleWithCard": [
+      "startBattleWithCardInCommandZone": [
         "Farmer's Tools"
       ]
     }
