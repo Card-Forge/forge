@@ -1324,9 +1324,9 @@ public class ComputerUtilMana {
     public static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
         Card card = sa.getHostCard();
         Zone castFromBackup = null;
-        if (test && sa.isSpell()) {
+        if (test && sa.isSpell() && !card.isInZone(ZoneType.Stack)) {
             castFromBackup = card.getCastFrom();
-            sa.getHostCard().setCastFrom(card.getZone() != null ? card.getZone() : null);
+            card.setCastFrom(card.getZone() != null ? card.getZone() : null);
         }
 
         Cost payCosts = CostAdjustment.adjust(sa.getPayCosts(), sa);
