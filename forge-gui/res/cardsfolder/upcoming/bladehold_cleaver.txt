@@ -7,4 +7,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDraft:DB$ Draft | Spellbook$ Accorder Paladin,Ardent Recruit,Auriok Sunchaser,Blade-Tribe Berserkers,Goblin Gaveleer,Hero of Bladehold,Hero of Oxid Ridge,Mirran Crusader,Oxidda Scrapmelter,Sunspear Shikari,Oxidda Finisher,Barbed Batterfist,Bladehold War-Whip,Dragonwing Glider,Jor Kadeen; the Prevailer
 DeckHas:Ability$Token & Type$Rebel|Cat|Soldier|Beast|Knight|Goblin|Beserker
 K:Equip:3
-Oracle:For Mirrodin\n Equipped creature gets +2/+2.\n Whenever equipped creature dies, draft a card from Bladehold Cleaver's spellbook.\nEquip {3}.
+Oracle:For Mirrodin!\nEquipped creature gets +2/+2.\n Whenever equipped creature dies, draft a card from Bladehold Cleaver's spellbook.\nEquip {3}.
