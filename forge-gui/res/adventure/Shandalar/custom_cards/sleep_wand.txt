@@ -1,6 +1,6 @@
 Name:Sleep Wand
 ManaCost:no cost
 Types:Artifact
-A:AB$ PutCounter | Cost$ PayShards<2> T | ActivationZone$ Command | SubAbility$ Eject | ValidTgts$ Creature | ExileOnMoved$ Battlefield ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ Stun | CounterNum$ 1 | GameActivationLimit$ 1 | StackDescription$ Put a stun counter on target creature. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+A:AB$ PutCounter | Cost$ PayShards<2> | ActivationZone$ Command | SubAbility$ Eject | ValidTgts$ Creature | ExileOnMoved$ Battlefield ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ Stun | CounterNum$ 1 | GameActivationLimit$ 1 | StackDescription$ Put a stun counter on target creature. (If a permanent with a stun counter would become untapped, remove one from it instead.)
 Oracle: Pay {M}: Put a stun counter on target creature. Exile CARDNAME. Activate only once.
 SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
