@@ -1,0 +1,9 @@
+Name:Glistening Extractor
+ManaCost:2 U B
+Types:Artifact
+K:etbCounter:OIL:4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+counters_GE1_OIL | Execute$ TrigSeek | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if there are one or more oil counters on CARDNAME, seek a card with mana value equal to the number of oil counters on CARDNAME, then remove an oil counter from CARDNAME.
+SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.cmcEQX | ChangeNum$ 1 | SubAbility$ DBRemoveCounter
+SVar:DBRemoveCounter:DB$ RemoveCounter | CounterType$ OIL
+SVar:X:Count$CardCounters.OIL
+Oracle:Glistening Extractor enters the battlefield with four oil counters on it.\nAt the beginning of your upkeep, if there are one or more oil counters on Glistening Extractor, seek a card with mana value equal to the number of oil counters on Glistening Extractor, then remove an oil counter from Glistening Extractor.

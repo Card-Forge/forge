@@ -10,7 +10,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigReveal:DB$ PeekAndReveal | PeekAmount$ 10 | Reveal$ True | ImprintRevealed$ True | SubAbility$ TrigRepeatTypes
 SVar:TrigRepeatTypes:DB$ RepeatEach | RepeatTypesFrom$ Card.IsImprinted | TypesFromZone$ Library | RepeatSubAbility$ ChooseCard | SubAbility$ DBChangeZone
 SVar:ChooseCard:DB$ ChooseCard | Choices$ Card.ChosenType+YouOwn+IsImprinted | ChoiceZone$ Library | RememberChosen$ True
-SVar:DBChangeZone:DB$ ChangeZoneAll | Origin$ Library | Destination$ Hand | ChangeType$ Card.IsRemembered | SubAbility$ ShuffleRest
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | Defined$ Remembered | SubAbility$ ShuffleRest
 SVar:ShuffleRest:DB$ ChangeZoneAll | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | Hidden$ True | Mandatory$ True | NoReveal$ True | NoLooking$ True | ChangeType$ Card.IsImprinted+!IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 DeckHas:Ability$LifeGain
