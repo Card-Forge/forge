@@ -48,7 +48,10 @@
 	"Sea Monster",
 	"Tarkir Djinn",
 	"Doppelganger",
-	"Pirate"
+	"Pirate",
+	"Illusionist",
+	"Water Elemental",
+	"Crab"
 ],
 "pointsOfInterest": [
 	"Blue Castle",
@@ -82,6 +85,7 @@
 	"CaveU3",
 	"CaveU4",
 	"Kiora Island",
+	"Teferi Hideout",
 	"Jacehold"
 ],
 "structures": [

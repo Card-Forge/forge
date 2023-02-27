@@ -128,7 +128,7 @@ public class ComputerUtilCombat {
         //        || (attacker.hasKeyword(Keyword.FADING) && attacker.getCounters(CounterEnumType.FADE) == 0)
         //        || attacker.hasSVar("EndOfTurnLeavePlay"));
         // The creature won't untap next turn
-        return !attacker.isTapped() || Untap.canUntap(attacker);
+        return !attacker.isTapped() || (attacker.getCounters(CounterEnumType.STUN) == 0 && Untap.canUntap(attacker));
     }
 
     /**
@@ -1628,14 +1628,18 @@ public class ComputerUtilCombat {
      *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
-    public static boolean combatantCantBeDestroyed(Player ai, final Card combatant) {
-        // either indestructible or may regenerate
-        if (combatant.hasKeyword(Keyword.INDESTRUCTIBLE) || ComputerUtil.canRegenerate(ai, combatant)) {
+    public static boolean combatantCantBeDestroyed(final Player ai, final Card combatant) {
+        if (combatant.getCounters(CounterEnumType.SHIELD) > 0) {
             return true;
         }
 
         // will regenerate
         if (combatant.getShieldCount() > 0 && combatant.canBeShielded()) {
+            return true;
+        }
+
+        // either indestructible or may regenerate
+        if (combatant.hasKeyword(Keyword.INDESTRUCTIBLE) || ComputerUtil.canRegenerate(ai, combatant)) {
             return true;
         }
 
@@ -2150,7 +2154,7 @@ public class ComputerUtilCombat {
             final boolean noPrevention) {
         final int killDamage = getDamageToKill(c, false);
 
-        if (c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getShieldCount() > 0) {
+        if (c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getCounters(CounterEnumType.SHIELD) > 0 || (c.getShieldCount() > 0 && c.canBeShielded())) {
             if (!(source.hasKeyword(Keyword.WITHER) || source.hasKeyword(Keyword.INFECT))) {
                 return maxDamage + 1;
             }

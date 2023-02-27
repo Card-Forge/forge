@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="72">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzVkkEKwjAQRQMaszLLHkYoXsmNV8lK0CN4mm7sWcQOEjImPyGTRsQPn6YDnTf5U6U+dTcqEdW8r6qPcwzE/BW3F7PEzXnSqX0vp7/DJYYreBJw+dwS7nmXzsy5dI73w/vHmdVyh+X9tn/b6cA+WhAiUAuXNNrw5Ptq5ZbM7zVm+tdySSeDXeI+lv4zYCAu7UKimJu7Y4nrv6nJ4bLB9RouEsoF6bDF9adJ2bMNlkqSP+e0sLgoe8l/2Etr5/4nvQB8DZ5Y
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJwrYGdgKBgkGASQ2djAQNlLC7tJAeh6W/gQmBZ2fuCAYH0uCA2y5yMHwj5s9qKHIzpNDChlY2AQZUfFHDwI96BjdPeSA0TZETQ67uOE4DYCmBTwixlhPjZ7QYAYe0kF11lJ14MPEIoTWtmLC+hxQdIrDM+nj7UYQJRAeickTy4ApYltNDJ7FAwvAAAbI1g2
+  </data>
+ </layer>
+ <layer id="2" name="Grass" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgaYAM7Kh7q9rYxEqfuGisqpjUA2fGeg4FhFgsDgz4XKsYHPnBAMCX29nIyMIhiCeN2PGHVxwnB5AIDoL9UmDDt9SQQPyD12NxKLAD5CWYGslmEzEVXSypAt5MSPFD2EuMeWJqlh73oWGQA7ERPP5TiMjYGhnIgrmAbGL+MYtpiADBJMKU=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17" opacity="0.9">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYICAlewMDKuAeDUQrwHiaayomBCoY8Qvbwg0wwiLOe4cDAweQOwJxF4cmPYSsluGCb/8eaD+C3jMINZ/QwUsZMYUm8FCmhlt0LicxYKKO7DE8St2CG1Pgh243KMCjctqXghdBaXVgOIeaHbD7KUUgPzaDjW7HcoG+dMYaPcaTgaGZ0j2LkXSZ8xLmZ0gv4oC/SCC5A81pLSMbG81FruWYgoRBCC7trEh2DCwA4n9DEscY7OfVHth4BDQj4eBWBOIwzggYqB4Rre3DOjOciCuYIPEAzJA52MDBlwQe2FpCJceZHtBcQrSA4oXMSQ3LwPicqQwAIXHHGaEHlIByPwOJlR3bQKKbQbiLeyodqHbYYWWd2D6QTTIDE0mVD0a0PAGYVWgm9XQywdmKEYDk9mIx0bsCPc3M0FwC1JaBrnNgJ04s7CF/1JuBBs5bHI4IHoM8Zidx4EII2O0OEQGyOGPDyCno7NklkGE0i8heVz2outDT0fIAABjWlca
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="209.458" y="270.126">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="287.57" y="95.548"/>
+  <object id="50" template="../obj/enemy.tx" x="68.9926" y="171.149">
+   <properties>
+    <property name="enemy" value="Water Elemental"/>
+   </properties>
+  </object>
+  <object id="52" template="../obj/gold.tx" x="433.092" y="88.0045"/>
+  <object id="62" template="../obj/gold.tx" x="40.5566" y="168.819"/>
+  <object id="63" template="../obj/enemy.tx" x="436.339" y="216.002">
+   <properties>
+    <property name="enemy" value="Water Elemental"/>
+   </properties>
+  </object>
+  <object id="64" template="../obj/enemy.tx" x="437.255" y="107.437" width="15.5419" height="16.9162">
+   <properties>
+    <property name="enemy" value="Giant Crab"/>
+   </properties>
+  </object>
+  <object id="65" template="../obj/enemy.tx" x="298.456" y="190.349">
+   <properties>
+    <property name="enemy" value="Disciple of Teferi"/>
+   </properties>
+  </object>
+  <object id="66" template="../obj/enemy.tx" x="271.887" y="156.909">
+   <properties>
+    <property name="enemy" value="Disciple of Teferi"/>
+   </properties>
+  </object>
+  <object id="67" template="../obj/enemy.tx" x="241.196" y="129.424">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Eidolon of Rhetoric&quot;,&quot;Static Orb&quot;,&quot;Grafdigger's Cage&quot;,&quot;Torpor Orb&quot;]
+}</property>
+    <property name="enemy" value="Teferi"/>
+   </properties>
+  </object>
+  <object id="68" gid="3139" x="-1.12879" y="160.083" width="16" height="16"/>
+  <object id="69" gid="3139" x="302.579" y="128.933" width="16" height="16"/>
+  <object id="70" gid="3139" x="464.281" y="256.738" width="16" height="16"/>
+  <object id="71" template="../obj/enemy.tx" x="336.935" y="106.978">
+   <properties>
+    <property name="enemy" value="Water Elemental"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

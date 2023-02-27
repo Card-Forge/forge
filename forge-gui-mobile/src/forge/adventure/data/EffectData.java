@@ -7,6 +7,10 @@ import forge.item.PaperToken;
 import forge.model.FModel;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class EffectData implements Serializable {
     public String name = null;           //Effect name. Can be checked for.
@@ -70,13 +74,10 @@ public class EffectData implements Serializable {
         return startCardsInCommandZone;
     }
 
-    public String cardNames() {
+    public String itemize(Array<IPaperCard> paperCards) {
         StringBuilder ret = new StringBuilder();
-        Array<IPaperCard> array=startBattleWithCards();
-        for(int i =0;i<array.size;i++) {
-            ret.append(array.get(i).toString());
-            if(i!=array.size-1) ret.append(" , ");
-        }
+        Map<IPaperCard, Integer> duplicateCountMap = Arrays.stream(paperCards.toArray()).collect(Collectors.toMap(Function.identity(), cards -> 1, Math::addExact));
+        duplicateCountMap.forEach((key, value) -> ret.append("\n").append(value).append("x ").append(key));
         return ret.toString();
     }
 
@@ -87,7 +88,9 @@ public class EffectData implements Serializable {
         if(lifeModifier != 0)
             description += "[+Life] " + ((lifeModifier > 0) ? "+" : "") + lifeModifier + "\n";
         if(startBattleWithCard != null && startBattleWithCard.length != 0)
-            description+="Cards on battlefield: \n" + cardNames() + "\n";
+            description+="Battlefield:" + itemize(startBattleWithCards()) + "\n";
+        if(startBattleWithCardInCommandZone != null && startBattleWithCardInCommandZone.length != 0)
+            description+="Command:" + itemize(startBattleWithCardsInCommandZone()) + "\n";
         if(changeStartCards != 0)
             description+="Starting hand: " + changeStartCards + "\n";
         if(moveSpeed!=0 && moveSpeed != 1)

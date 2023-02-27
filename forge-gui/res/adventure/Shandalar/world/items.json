@@ -952,8 +952,8 @@
     "iconName": "GreenStaff",
     "effect": {
       "lifeModifier": 2,
-      "startBattleWithCard": [
-        "Thallid Shell-Dweller"
+      "startBattleWithCardInCommandZone":[
+        "Slimefoot's Slimy Staff"
       ]
 }
 },
@@ -962,9 +962,12 @@
     "equipmentSlot": "Left",
     "iconName": "SleepWand",
     "effect": {
-      "lifeModifier": 2,
+      "lifeModifier": -1,
       "startBattleWithCard": [
         "Kraken Hatchling"
+      ],
+      "startBattleWithCardInCommandZone":[
+        "Kiora's Bident"
       ]
 }
 },
@@ -982,12 +985,46 @@
 {
     "name": "Jace's Signature Hoodie",
     "equipmentSlot": "Body",
-    "iconName": "IronArmor",
+    "iconName": "BlueRobes",
     "effect": {
       "lifeModifier": -1,
       "cardRewardBonus": 1,
-      "startBattleWithCard": [
+      "startBattleWithCardInCommandZone": [
         "Jace's Signature Hoodie"
+      ]
+}
+},
+{
+    "name": "Teferi's Staff",
+    "equipmentSlot": "Left",
+    "iconName": "MadStaff",
+    "effect": {
+      "lifeModifier": 1,
+      "cardRewardBonus": 1,
+      "startBattleWithCardInCommandZone": [
+        "Teferi's Staff"
+      ]
+}
+},
+{
+    "name": "Garruk's Mighty Axe",
+    "equipmentSlot": "Left",
+    "iconName": "GarrukAxe",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCardInCommandZone": [
+        "Garruk's Mighty Axe"
+      ]
+}
+},
+{
+    "name": "Nahiri's Armory",
+    "equipmentSlot": "Right",
+    "iconName": "Armory",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCardInCommandZone": [
+        "Nahiri's Armory"
       ]
 }
 }

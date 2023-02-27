@@ -342,3 +342,12 @@ BlueStaff
 WhiteStaff
   xy: 352,160
   size: 16, 16
+GarrukAxe
+  xy: 303,273
+  size: 19, 15
+BlueRobes
+  xy: 272,63
+  size: 16, 18
+Armory
+  xy: 129,512
+  size: 14, 17

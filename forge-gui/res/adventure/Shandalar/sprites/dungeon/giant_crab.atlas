@@ -1,0 +1,17 @@
+giant_crab.png
+size: 189,30
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 18,12
+  size: 27,12
+Idle 
+  xy: 0, 0
+  size: 62, 30
+Idle 
+  xy: 62, 0
+  size: 62, 30
+Idle 
+  xy: 124, 0
+  size: 62, 30

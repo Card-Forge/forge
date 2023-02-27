@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="39" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="70">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="39" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="74">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -7,17 +7,17 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="39" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYEAFX9kgGATyOGmDGRkgmFSwjZU0DPIHqXp6OBEYBpDF0OXQw45WgJEB1W4QvYRp8LkN2X3Euo0c+wiB90gYl/3ocTwQQIWNcBgNlNuQ7ad2HFILDDZ3IadNWrmL3PITBogJM/RykV5uIwYYczAwmACxKRCbcdDYsgEA9AhDUgEjGiYWGLIiMAzA2hi0rJMoAQPlLlx15mAuf/EBAMRoTfA=
+   eJzFlkkOgzAMRR0kpk3vUjEci5NwGFY9SO/SXReAIgsnYNNQnDzpCZQs/idBBACXT2FdGWodDVi1wefgeD+slLHePBrz50LyJL6ZlcOAm02v2t3OoN2kXly3K3khYPZU7seP7u9G2lfMXrtR/fmU0PXzu8UEs2kHbs1iI3W7m6vfT+yCeym9V6/cVbtbCE0F0C52i32lHJaAWOdjCMbzV575JoL/GJpn0j+k6sWdmRpnaAxmG6hDZg==
   </data>
  </layer>
  <layer id="1" name="Background" width="39" height="17">
   <data encoding="base64" compression="zlib">
-   eJytlrFOxDAMhkOPNlS9ARCPABISEwszvAX7SQwM9wxM6MQAN3VEQqwMXTjExsIb8AxMDCB0GwOxfFZd4zRNyy/9atK09RcndbvMjFkKS72K/oHzWd60ds/56louGQs8t8YsUn1M+qL4G1szXKtxdrmvLxtXmTfbpZIjrp8ELUX3UYxkx5jK4hHYHjbj2WKkMX0yP4/x3JeL8cH4qB3iOh3ApunQ8b679XpxDNMR+sa1r2zNBu2K+VvJEc8brR+thexL+c7vWRyDIxg4QZdbyEbmbNcWOd7y2sQHug3sK8mVFP5x4iKD9rebbNAntonyznC20J4HHY9xDsSm2TfH3cyfN41NrilIPluL1TYPLZ8Q9zHVudpqTZd4MWyapjm+D5ItVAf7iLOF9un9COMC21MaV6OHsoV0st6PzScYK/NhdRnE48awHW20PzeWa9YyNllzNdlx3SWMNasdm7eua97lOwjfz/mqzsl/GS1voEXRdB+F+CvGJVl8a/pf0p5F53gdq5S8Sf8C0KXdjQ==
+   eJytlrFOwzAQhk2gNVY7AOIRqITExMIMb8FeqQNDH6MDQ+nUsVJ3Bk9FbCy8Ac/QiQGEujHg09nK5XpOcym/9Ctx7Pg+3yVONl1jNsxc76x9FTxyVUv3PMSxVDwWeGaNWXXkPomNx5YMYyXOJvftwwZaOL1/C3SuP8Uozo3xFo/A9nyiY9MKmLi+iF/7eO07xPgkfOl8F9d9ZJu0R6zoOvCuQ73eAsP4EP0Uzh8t9vt47ol/hBzRvM1daanNtXU9tgcW++AIXsfnanK6PUdim1oc8+FKJz7QIsOQ4yp6+f7ElQy6PMM6gjnbUHhnKFsuP1S3fVxDYpOcW+MFqxmtqcTGawric0ux6tYh5XPs8JmTuOr2mibxNGz83YU2Zctx1bFpRNloXilX2vfAo8j20tHt0fuyUUlsd0ft2HKCvrnTsdM8JUYaV8N2c1wfS5tTysQ1PAh7cuBaFoS1W1qbt6Y1b/IdhO/nLL4L/F9Gyhto1au6jXbxe8LFWXI1/S9Jc6VrdL/wQt64/wAAbfTL
   </data>
  </layer>
  <layer id="2" name="Ground" width="39" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYEAAbSDO40TF+IA2fmkMkIVD/DYzA8N2VsL6kd2FyyxS7CWkvpqFeLfB3KfKDsGibKjs2doIPjoGyT3kwRQ/jmQeDLwHmvUJinm5EG4j5Edkt5GC/zBhspEBuvuQAbZwu8qIiilxGzZ3PmPFxMFs2N1nxwzBn6HyX9lQcQkTeW5Dj2vkMETHIHv6cYQfCISiue01C6rbkOOAEJbFksaQ8S4eVAyyh48f4RZGJHdNxOFmcsINFF743IYt7+ALN1xuAwEhZlS3oYcftvAkFG7oGB/Q58AtByvbKM0L+PAlJPurWBAY3V2T2RGYXLdREm7vCYQjtnADAVq4jVyAXpfCsDWw3J4GpG25cKshBZMKzDjwm3eSnXI3pUExtcIMhjM5iFOnC/RDPxsqzuJAlKMgt22D1k/MTNRxG7EYV/jC3AZy12BymwoDIp2R4jYABLGkug==
+   eJxjYEAAbSDO40TF+IA2fmkMkIVD/DYzA8N2VsL6kd2FyyxS7CWkvpqFeLfB3LeLh3T8hwk7GxnL8EDseM/GwPAJinm5EG4j5EeQ21TZSccg96CzkQFMDhvAFm5XGVExJW7D5s5nrJg4mA27++yYIfgzVP4rGyouYSLPbbO10fjMmGqmQc3VBdrbjyP8QCAUzW2vWVDdhhwHhLAsD3559DQHsoePH7u7JuJwMznhBgovfG5DD08QBtmDK9xwuQ0EhJhR3YYeftjCk1C4oWN8QJ8DtxysbKM0L+DDJ5Hsq2JBYHR3TWZHYHLdRkm4vScQjtjCDQRo4TZyAXpdCsPWXJD8b8uFWw0pmFRgxoHfvJPslLspDYqpFWYwnMlBnDpdoB/62VBxFgeiHAW5bRu0fmJmoo7biMW4whfmNpC7BpPbVBgQ6YwUtwEAsGSvSg==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="39" height="17">
@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy1Vs9LFVEUviPvzQ/fey7bZK6Eeo5gCoW7+iesoL2LWbetXEWCIJaBILjVnUIL8QXRAxXtx9+Q/gNFSUHQwnM453jPnHfHxkUffNy5v85897tzzx3nnGu23AUKLnMXRqH6iop+i+nMP+93qXwfeQpuAk8a5bkrqXOvUnruA990nHvW+n98zl6MmzVIffSab5uCdd0GPulQ/Xob+oE32gETHLXnUZk45++Qc6dQnvAzjjvMPHXcKBDXtn0OjMEYPeC7Cm0h4JxOTpqQ3xLS0Gp47nFcq20uoXJf6TsAPozJLyyR8p4QIuZlvgl/srZ7w4Os2g8L1PMopu/sE8yJh+g9W11PhK5j7JWR8tqttjH2/TH0fe36cX9c2bfIUDDOen6Dtl/smWjrKSJ67XqUsfp7EJ9eqPo2vG+HqfdFdOF5fw3eryaksa+06bWGgHHu19wb1PKB8wiWotV6FjofGlZbl5NZnpep12lxDO//qHJalTatr+nCe9pXbWtJfd+uAqst5JnwS2A/7kD+vZuSNsmRExW+Ve3BRjbYJj495dxrz+ki5+KLO4ljZNA+zH0zGfXbHFmVJ5HrOa1hKfVE6LpoCeX0vom7DnwAezcBwTch7larPGbPnL0F1j5W86z+i/oMY76V+9bexS+5xL18GxOtP5NsnJTiWcGl9kh8k7jfwYNJ4HLseSvznG0QNaRNz7mMiLrj9Fi7d3hHLoPWqZRy6pHxynon82aywbbQP4/2bjWl8iwZHFOosVL/AXp2m6QLKedAw/47hTRcRWuVLgGuYT4jzxBn6i5CyDen/+vOAVKSt+c=
+   eJydVk1LHEEQ7ZXdmWlnzdGLHyfBrCOYCAZv+ieSCN497NmrSU6iEBATA4FArvGWQA7BFUIWTDAh/0H9A4qKQiCHVFFd6Zqabp3kwaOne6qrX1d114wxxrRy8xdd164OmSDwfaFs9XuN+9Y/H3So/dzwZEwCj5vluduZMS8y0tOH/iton4Dep7mpIKa5js1aXvY7od5zf3TYj83Avu5Z73OkDe+BY+3wGjheNMrEOT3gCfDYPaPdN+sp/TYCfvXYz4ANr7Mf0RYCzhmCZP8eIJ6mpCFveu4JzVLHw5TaA6HvK/BxQvHCFsnrrEf2hYzFjXUhL5y2hcEqY/nQQD1LCZ0zPMfJAK2z2/FEyD763r5T3rvWNu7ivixscO4vUy+nE07PNWi7cjFjbT1BRK9dj2wrzwPHaV3038N6Hxy1Nr4TLyH2Oylp7AttR52bok1+FmvmBrV8cXUE21BO+bwgQnXIBLR1XDErijLZXwjfYf0foqbdpg39tEw4p30x9jqtH7f/AWvj+Y0AQ5iD+vsgI21cI6cicYv5eWurYxwnrr2xe8q5LJwPC7aDrk7PWnqva2TsTiHfFLSH55knQvZZS6im97VjwCPI3RQ4fwd+d/OyzZ66e8+c9vGad/U2yjuM9Za/t/oObLgWc/kxIer4TLvAccsx67pWxojjxn7PIAbTwK3E8671nG8SJXhMzrmJiLp20lbnDr+RW6B1JqOaeqhipWPH82ZtdSxWazh2Oxm1l2nVpitsuX8Oej61SBdyM/Cvo/+dQhr+RWtMFwP3sGIpZohL8S1C8JmT/3V/AEXhquc=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -35,7 +35,7 @@
    </properties>
   </object>
   <object id="47" template="../obj/gold.tx" x="282.663" y="66.101"/>
-  <object id="56" template="../obj/gold.tx" x="422.5" y="97.5">
+  <object id="56" template="../obj/gold.tx" x="400" y="95.75">
    <properties>
     <property name="reward">[
   {
@@ -104,7 +104,7 @@
   </object>
   <object id="54" template="../obj/enemy.tx" gid="11419" x="323.079" y="72.763">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Jace Boss Effect&quot; ]
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Jace Boss Effect&quot; ]
 }</property>
     <property name="enemy" value="Jace"/>
    </properties>
@@ -202,5 +202,9 @@
     <property name="enemy" value="Bandit"/>
    </properties>
   </object>
+  <object id="70" gid="3139" x="247.75" y="96.5" width="16" height="16"/>
+  <object id="71" gid="3139" x="-1.25" y="93.75" width="16" height="16"/>
+  <object id="72" gid="3139" x="463.75" y="16.75" width="16" height="16"/>
+  <object id="73" gid="3139" x="608" y="15.25" width="16" height="16"/>
  </objectgroup>
 </map>
