@@ -105,7 +105,7 @@ public class Untap extends Phase {
     public static final Predicate<Card> CANUNTAP = new Predicate<Card>() {
         @Override
         public boolean apply(Card c) {
-            return Untap.canUntap(c);
+            return canUntap(c);
         }
     };
 

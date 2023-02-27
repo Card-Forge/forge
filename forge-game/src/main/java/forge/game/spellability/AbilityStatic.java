@@ -20,7 +20,6 @@ package forge.game.spellability;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
-import forge.game.player.Player;
 
 /**
  * <p>
@@ -51,11 +50,6 @@ public abstract class AbilityStatic extends Ability implements Cloneable {
     }
     @Override
     public boolean canPlay() {
-        Player player = getActivatingPlayer();
-        if (player == null) {
-            player = this.getHostCard().getController();
-        }
-
         final Card c = this.getHostCard();
 
         return this.getRestrictions().canPlay(c, this);
