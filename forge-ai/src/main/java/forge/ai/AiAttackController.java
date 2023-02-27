@@ -18,6 +18,8 @@
 package forge.ai;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import forge.game.staticability.StaticAbility;
@@ -815,14 +817,37 @@ public class AiAttackController {
                 } else {
                     if (combat.getAttackConstraints().getRequirements().get(attacker) == null) continue;
                     // check defenders in order of maximum requirements
-                    for (Pair<GameEntity, Integer> e : combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements()) {
-                        // TODO check if desired defender would also have the same amount
+                    List<Pair<GameEntity, Integer>> reqs = combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
+                    final GameEntity def = defender;
+                    Collections.sort(reqs, new Comparator<Pair<GameEntity, Integer>>() {
+                        @Override
+                        public int compare(Pair<GameEntity, Integer> r1, Pair<GameEntity, Integer> r2) {
+                            if (r1.getValue() == r2.getValue()) {
+                                // try to attack the designated defender
+                                if (r1.getKey().equals(def) && !r2.getKey().equals(def)) {
+                                    return -1;
+                                }
+                                if (r2.getKey().equals(def) && !r1.getKey().equals(def)) {
+                                    return 1;    
+                                }
+                                // otherwise PW
+                                if (r1.getKey() instanceof Card && r2.getKey() instanceof Player) {
+                                    return -1;
+                                }
+                                if (r2.getKey() instanceof Card && r1.getKey() instanceof Player) {
+                                    return 1;
+                                }
+                                // or weakest player
+                                if (r1.getKey() instanceof Player && r2.getKey() instanceof Player) {
+                                    return ((Player) r1.getKey()).getLife() - ((Player) r2.getKey()).getLife();
+                                }
+                            }
+                            return r2.getValue() - r1.getValue();
+                        }
+                    });
+                    for (Pair<GameEntity, Integer> e : reqs) {
                         if (e.getRight() == 0) continue;
                         GameEntity mustAttackDefMaybe = e.getLeft();
-                        // Gideon Jura returns LKI
-                        if (mustAttackDefMaybe instanceof Card) {
-                            mustAttackDefMaybe = ai.getGame().getCardState((Card) mustAttackDefMaybe);
-                        }
                         if (canAttackWrapper(attacker, mustAttackDefMaybe) && CombatUtil.getAttackCost(ai.getGame(), attacker, mustAttackDefMaybe) == null) {
                             mustAttackDef = mustAttackDefMaybe;
                             break;
