@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="34" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="73">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="10" name="Kopie van Background" width="34" height="27">
+  <data encoding="base64" compression="zlib">
+   eJz7ysbA8JWOeBsrA8N2VvraiW4/CIcA2focA+uOiewDZ/9gcgfIDQuYGBhuMQ+sGwYyPcDcMJB5YzC5AxkMhvAAYZsBTJ+jbiHsjoFOs8hu+TxI3DHQYTLqjlF3jLpj6LkD2S123IPDHaAwSeOE4IF0CyxuBos7BjpusLkDAFXcau0=
+  </data>
+ </layer>
+ <layer id="8" name="Background" width="34" height="27">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2DgwTZWCB4FowAEbrMh8GABgymNgtzxcKAdAQWDKUyoAdq4B4c7KAWDxR2jYBSMgqELJrAPtAsgYNQdQwcAAJf3DG4=
+  </data>
+ </layer>
+ <layer id="7" name="Background" width="34" height="27">
+  <data encoding="base64" compression="zlib">
+   eJzFljtOw0AQhkcgY1uxBA1H4FXRUSFOwRkoKFxSU2EeDdyAU8ABQkDpKGigCxwB0bOj7MiT8exLdiDSr2TXm51v/5mx3YwALo2ujK6NGjtuxPyN0c9afz1kAI9Zd36rAtg22jHardqxnN+r+sdHHZvf+0X3+tjs/2Q0MXqudB9w/mUAjrs8fj35UJdzcR9wnOV+uXxI5RhbhgljIQbUmRWPzccuhvsVgI/VNA8ppsbB4xcb7fdn4WbQ6mEIDjw/xuY6Lxf3OCn13pjC4vgNdIZp3uXg4nkgBhxLDl+PdmI6WDTOzPLx2NwPmRf+CcUKxfblivRVzOXqVdShrc/3BJaQwJFfZNLOIVmGEPUsieqR+xXjC1dfj+jsyMFZfJ7E1Gyf3BCLyw/O8q1ck57QWXz1iroYuTnqctEjznEAXU9mkTFlfG395nq3RnAd5+mTm9OI+zF5A6D7gGNcE8shc66pLtu4MjfcJ8ni4wjd33BfmQP5zHFJctzmfj9mPXs3Vq8wfO829t019X/L4khhSanTvxCxHA307h/jWSg3Wo+TUu5pIQ7XXjw3Lo5l+yE5/rtGNI5ff6f+Yg==
+  </data>
+ </layer>
+ <layer id="9" name="Tree" width="34" height="27">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJydV8tOwlAQvUqkEFp/ohEwimsTv8adceHKuNUViCb0a/AHAJPuWbryF/oDdtJOejqd+6g3OSnFcufMOTPTaxobk5ZYTirkUXVNYz8uAp4hbM+M+arBi2K8K3Ho++uSw+MonIcPU+Ahly0GauHjsSux78FnK3RwxQjlMYubPU8HxvzG7TzlnvcnXT9cnEN50HpNuhrLGMzB5cfMwuOhrI0bT51yTM79p7yeRd0YkgP6oYF+8wn3vn6hxbERm6Ex2bDJQ6sJ6oNsqEPL1ceDvWEO2PesaRZ1eaDvDFtd5VE7lsblZVw9i3owd+YyHTfgnGkmuDzGXDXOad2nh1jP50r5zWKk13KI/pp2Lk8xz6cy76Np5qTGRerr8oU05f0XUaOlzSMEcSFMYT+skz56oIZ5FD4z2VfSZA/7SU18eqxF/b4lFY95/fdLJe5c3BOHXdzUE3tr08TlCy6bHt8WPY6iJsnL//JA9PWF5uER4tl6R85Oya0w7f6gJbUPqRFtb9RE5i2/w/MHL80Dmy+MVQ8e2nc4O1DbPnoweAu63g3C68M2/5FHqEfcW+s6jq9O5XmBefD5gj4/J34fbJ4xD9sMsemBszSD9zhzkn2983Cic05huppos4LvPyZNL90m7fe4jVth3DwOcRNbnpWxv/Be834GnLG3c0tuWp6sZSiPEOB7h/isPOclen5zXn2mGsHzsqu+5VXqxF6zHq7/o3Atlb6RcfoCeWCdyp7i+iqAi61WCX9fbgUK
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="209" y="431.5">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="522.915" y="383.179"/>
+  <object id="54" template="../obj/enemy.tx" x="104.779" y="294.529">
+   <properties>
+    <property name="enemy" value="Viper"/>
+   </properties>
+  </object>
+  <object id="55" template="../obj/enemy.tx" x="253.388" y="115.167">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Garruk's Boss Effect Phase One&quot;,&quot;Garruk's Boss Effect Phase Two&quot;]
+}</property>
+    <property name="enemy" value="Garruk"/>
+   </properties>
+  </object>
+  <object id="56" template="../obj/enemy.tx" x="310.809" y="193.554">
+   <properties>
+    <property name="enemy" value="Beastmaster"/>
+   </properties>
+  </object>
+  <object id="62" template="../obj/enemy.tx" x="140.389" y="364.701">
+   <properties>
+    <property name="enemy" value="Squirrel"/>
+   </properties>
+  </object>
+  <object id="63" template="../obj/enemy.tx" x="519.21" y="217.808">
+   <properties>
+    <property name="enemy" value="Treefolk"/>
+   </properties>
+  </object>
+  <object id="64" template="../obj/enemy.tx" x="527.989" y="340.222">
+   <properties>
+    <property name="enemy" value="Green Beast"/>
+   </properties>
+  </object>
+  <object id="65" template="../obj/enemy.tx" x="387.042" y="397.283">
+   <properties>
+    <property name="enemy" value="Fox"/>
+   </properties>
+  </object>
+  <object id="66" template="../obj/enemy.tx" x="69.0575" y="142.701">
+   <properties>
+    <property name="enemy" value="Bear"/>
+   </properties>
+  </object>
+  <object id="67" template="../obj/enemy.tx" x="515.308" y="140.263">
+   <properties>
+    <property name="enemy" value="Treefolk"/>
+   </properties>
+  </object>
+  <object id="68" template="../obj/treasure.tx" x="222.685" y="60.7665"/>
+  <object id="70" template="../obj/gold.tx" x="68.0821" y="226.099"/>
+  <object id="71" template="../obj/gold.tx" x="401.185" y="431.423"/>
+  <object id="72" template="../obj/gold.tx" x="63.6927" y="29.0656"/>
+ </objectgroup>
+</map>
