@@ -203,6 +203,9 @@ public class CardRenderer {
     }
 
     public static FImageComplex getCardArt(IPaperCard pc, boolean backFace) {
+        if (pc.getRules() == null) {
+            return getCardArt(pc.getImageKey(backFace), false, false, false, false, false, false, false, false, true);
+        }
         CardType type = pc.getRules().getType();
         return getCardArt(pc.getImageKey(backFace), pc.getRules().getSplitType() == CardSplitType.Split,
                 type.isPlane() || type.isPhenomenon(), pc.getRules().getOracleText().contains("Aftermath"),
