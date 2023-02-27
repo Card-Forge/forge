@@ -585,7 +585,7 @@ c_1_1_spirit
 c_a_treasure_sac
 g_1_1_human_monk_g
 g_4_5_spirit
-g_x_x_spirit_total_lands
+g_x_x_spirit
 keimi
 mechtitan
 r_2_2_goblin_shaman_treasure
