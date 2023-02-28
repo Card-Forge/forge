@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/nahiri.tmx",
+    "activeFile": "map/catlair_3.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
         "map/main_story",
         "obj",
-        "tileset",
-        "map"
+        "map",
+        "tileset"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -141,11 +141,11 @@
             }
         },
         "map/catlair_3.tmx": {
-            "scale": 1.5,
-            "selectedLayer": 3,
+            "scale": 4,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 225,
-                "y": 201.33333333333334
+                "x": 224.875,
+                "y": 201.125
             }
         },
         "map/cave6.tmx": {
@@ -219,8 +219,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 233.25,
-                "y": 135.5
+                "x": 239.75,
+                "y": 136.25
             }
         },
         "map/cave_15.tmx": {
@@ -1505,8 +1505,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240,
-                "y": 136.25
+                "x": 235.75,
+                "y": 131.75
             }
         },
         "map/evilgrove_1.tmx": {
@@ -1553,7 +1553,7 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 239.99999999999997,
+                "x": 239.66666666666663,
                 "y": 136.33333333333334
             }
         },
@@ -1561,7 +1561,7 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240,
+                "x": 239.75,
                 "y": 136.25
             }
         },
@@ -1569,7 +1569,7 @@
             "scale": 4,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 240,
+                "x": 239.875,
                 "y": 135.875
             }
         },
@@ -1596,7 +1596,7 @@
             "scale": 1.3517708333333331,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240.42536795869617,
+                "x": 240.05548277722124,
                 "y": 136.48763196424449
             }
         },
@@ -1684,7 +1684,7 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240,
+                "x": 239.75,
                 "y": 136.25
             }
         },
@@ -1692,7 +1692,7 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240,
+                "x": 239.75,
                 "y": 136.25
             }
         },
@@ -1700,7 +1700,7 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240,
+                "x": 239.75,
                 "y": 136.25
             }
         },
@@ -1708,7 +1708,7 @@
             "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 240,
+                "x": 239.75,
                 "y": 136.25
             }
         },
@@ -1732,7 +1732,7 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240,
+                "x": 239.75,
                 "y": 239.75
             }
         },
@@ -1743,7 +1743,7 @@
             "scale": 2.0504166666666666,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 271.6521032310506,
+                "x": 271.89595610648246,
                 "y": 215.8097947571632
             }
         },
@@ -1941,7 +1941,7 @@
             "scale": 1.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 239.99999999999997,
+                "x": 239.66666666666663,
                 "y": 136.33333333333334
             }
         },
@@ -2006,7 +2006,7 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 265,
+                "x": 264.75,
                 "y": 123.25
             }
         },
@@ -2025,7 +2025,7 @@
             "scale": 2.177083333333333,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 239.77033492822972,
+                "x": 239.54066985645935,
                 "y": 136.19138755980865
             }
         },
@@ -2033,7 +2033,7 @@
             "scale": 1.2623540856031128,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 255.07898589812743,
+                "x": 255.47507127995686,
                 "y": 159.62240887724434
             }
         },
@@ -2041,7 +2041,7 @@
             "scale": 1.3517708333333331,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240.42536795869617,
+                "x": 240.05548277722124,
                 "y": 136.48763196424449
             }
         },
@@ -2049,7 +2049,7 @@
             "scale": 1.3517708333333331,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240.42536795869617,
+                "x": 240.05548277722124,
                 "y": 136.48763196424449
             }
         },
@@ -2598,8 +2598,8 @@
             "scale": 1.5333593749999999,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 324.77709278035366,
-                "y": 209.01818922912318
+                "x": 319.88587150354107,
+                "y": 208.36602639221485
             }
         },
         "map/nest_blue_1.tmx": {
@@ -2892,7 +2892,7 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 296,
+                "x": 295.8333333333333,
                 "y": 183.83333333333331
             }
         },
@@ -2903,7 +2903,7 @@
             "scale": 2.044479166666666,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 239.6698425638152,
+                "x": 239.91440362765582,
                 "y": 136.22051255922963
             }
         },
@@ -2917,18 +2917,18 @@
         },
         "map/snowabbey_2.tmx": {
             "scale": 1.6011458333333333,
-            "selectedLayer": 0,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 240.45280072864483,
-                "y": 136.46477132262052
+                "x": 239.5159716348969,
+                "y": 136.46477132262055
             }
         },
         "map/snowabbey_3.tmx": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 239.75,
-                "y": 136
+                "x": 235.75,
+                "y": 131.75
             }
         },
         "map/swamp_town.tmx": {
@@ -2936,9 +2936,9 @@
                 4
             ],
             "scale": 2,
-            "selectedLayer": 4,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 240,
+                "x": 239.75,
                 "y": 136.25
             }
         },
@@ -2952,9 +2952,9 @@
         },
         "map/teferi.tmx": {
             "scale": 3,
-            "selectedLayer": 1,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 240,
+                "x": 239.83333333333331,
                 "y": 136.16666666666663
             }
         },
@@ -3074,8 +3074,8 @@
         },
         "tileset/main.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1,
-            "scaleInEditor": 3
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
         }
     },
     "last.exportedFilePath": "G:/Develop/Forge/forge/forge-gui/res/adventure/Shandalar/maps/map",
@@ -3106,7 +3106,13 @@
         "map/grove_4.tmx",
         "map/slime_hive.tmx",
         "map/slimefoot_boss.tmx",
-        "map/nahiri.tmx"
+        "map/nahiri.tmx",
+        "map/cave_14.tmx",
+        "map/teferi.tmx",
+        "map/swamp_town.tmx",
+        "tileset/main.tsx",
+        "map/snowabbey_2.tmx",
+        "map/catlair_3.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
