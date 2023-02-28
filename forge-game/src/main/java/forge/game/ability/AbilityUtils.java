@@ -2402,7 +2402,7 @@ public class AbilityUtils {
             }
             int num;
             List<Integer> dmgInstances = game.getDamageDoneThisTurn(isCombat, false, props[1], props[2], c, player, ctb);
-            if (sq[0].contains("Max")) {
+            if (!dmgInstances.isEmpty() && sq[0].contains("Max")) {
                 num = Collections.max(dmgInstances);
             } else {
                 num = dmgInstances.size();

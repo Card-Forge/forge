@@ -752,7 +752,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                     // might set after card is moved again if something has changed
                     if (destination.equals(ZoneType.Exile) && !movedCard.isToken()) {
-                        // need to remove first?
                         handleExiledWith(movedCard, sa);
                     }
 
