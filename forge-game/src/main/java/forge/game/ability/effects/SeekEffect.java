@@ -88,15 +88,15 @@ public class SeekEffect extends SpellAbilityEffect {
                     if (originZone != null) {
                         triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
                     }
-                    if (sa.hasParam("RememberFound")) {
-                        source.addRemembered(movedCard);
-                    }
-                    if (sa.hasParam("ImprintFound")) {
-                        source.addImprintedCards(movedCard);
-                    }
                 }
             }
             if (!soughtCards.isEmpty()) {
+                if (sa.hasParam("RememberFound")) {
+                    source.addRemembered(soughtCards);
+                }
+                if (sa.hasParam("ImprintFound")) {
+                    source.addImprintedCards(soughtCards);
+                }
                 game.getTriggerHandler().runTrigger(TriggerType.SeekAll, AbilityKey.mapFromPlayer(seeker), false);
             }
             triggerList.triggerChangesZoneAll(game, sa);
