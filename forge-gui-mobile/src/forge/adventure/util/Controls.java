@@ -447,7 +447,7 @@ public class Controls {
             }
             else {
                 currencyAmount = Current.player().getGold();
-                currencyIcon = "[+Gold]";
+                currencyIcon = "[+Gold] "; //fix space since gold sprite is wider than a single glyph
                 Current.player().onGoldChange(() -> update(AdventurePlayer.current().getGold(),true));
             }
             label.setText(getLabelText(currencyAmount));

@@ -5,7 +5,7 @@ A:SP$ Sacrifice | Cost$ 2 U B R | SacValid$ Creature,Planeswalker | SacMessage$ 
 SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | Defined$ Player.Opponent | SubAbility$ DBRaiseDead
 SVar:DBRaiseDead:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouOwn,Planeswalker.YouOwn | SubAbility$ DBDraw | StackDescription$ You return a creature or planeswalker card from your graveyard to your hand
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You
-T:Mode$ SpellCast | ValidCard$ Planeswalker.Bolas | TriggerZones$ Graveyard | Execute$ DBExileSelf | TriggerDescription$ When you cast a Bolas planeswalker spell, exile Dark Intimations from your graveyard. That planeswalker enters the battlefield with an additional loyalty counter on it.
+T:Mode$ SpellCast | ValidCard$ Planeswalker.Bolas | TriggerZones$ Graveyard | Execute$ DBExileSelf | TriggerDescription$ When you cast a Bolas planeswalker spell, exile CARDNAME from your graveyard. That planeswalker enters the battlefield with an additional loyalty counter on it.
 SVar:DBExileSelf:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ Self | SubAbility$ DBExtraLoyaltyEffect
 SVar:DBExtraLoyaltyEffect:DB$ Effect | ReplacementEffects$ DBBoostLoyalty | RememberObjects$ TriggeredCard | ExileOnMoved$ Stack
 SVar:DBBoostLoyalty:Event$ Moved | ReplacementResult$ Updated | ActiveZones$ Command | Destination$ Battlefield | ValidCard$ Card.IsRemembered | ReplaceWith$ AddExtraCounter | Description$ That planeswalker enters the battlefield with an additional loyalty counter on it.

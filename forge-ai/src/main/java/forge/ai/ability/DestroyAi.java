@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
@@ -174,6 +175,8 @@ public class DestroyAi extends SpellAbilityAi {
                 list = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, list, false);
             }
             if (!SpellAbilityAi.playReusable(ai, sa)) {
+                list = CardLists.filter(list, Predicates.not(CardPredicates.hasCounter(CounterEnumType.SHIELD, 1)));
+
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
@@ -196,7 +199,7 @@ public class DestroyAi extends SpellAbilityAi {
                             return false;
                         }
                         //Check for undying
-                        return (!c.hasKeyword(Keyword.UNDYING) || c.getCounters(CounterEnumType.P1P1) > 0);
+                        return !c.hasKeyword(Keyword.UNDYING) || c.getCounters(CounterEnumType.P1P1) > 0;
                     }
                 });
             }
@@ -333,6 +336,7 @@ public class DestroyAi extends SpellAbilityAi {
 
             CardCollection preferred = CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE);
             preferred = CardLists.filterControlledBy(preferred, ai.getOpponents());
+            preferred = CardLists.filter(preferred, Predicates.not(CardPredicates.hasCounter(CounterEnumType.SHIELD, 1)));
             if (CardLists.getNotType(preferred, "Creature").isEmpty()) {
                 preferred = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, preferred, false);
             }

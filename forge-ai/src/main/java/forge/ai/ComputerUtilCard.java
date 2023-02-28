@@ -1312,7 +1312,6 @@ public class ComputerUtilCard {
                                          final int power, final List<String> keywords) {
         return shouldPumpCard(ai, sa, c, toughness, power, keywords, false);
     }
-
     public static boolean shouldPumpCard(final Player ai, final SpellAbility sa, final Card c, final int toughness,
                                          final int power, final List<String> keywords, boolean immediately) {
         final Game game = ai.getGame();
@@ -1546,35 +1545,37 @@ public class ComputerUtilCard {
                             || ("PumpForTrample".equals(sa.getParam("AILogic")))) {
                         return true;
                     }
-                }
-                // try to determine if pumping a creature for more power will give lethal on board
-                // considering all unblocked creatures after the blockers are already declared
-                if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && pumpedDmg > dmg) {
-                    int totalPowerUnblocked = 0;
-                    for (Card atk : combat.getAttackers()) {
-                        if (combat.isBlocked(atk) && !atk.hasKeyword(Keyword.TRAMPLE)) {
-                            continue;
-                        }
-                        if (atk == c) {
-                            totalPowerUnblocked += pumpedDmg; // this accounts for Trample by now
-                        } else {
-                            totalPowerUnblocked += ComputerUtilCombat.damageIfUnblocked(atk, opp, combat, true);
-                            if (combat.isBlocked(atk)) {
-                                // consider Trample damage properly for a blocked creature
-                                for (Card blk : combat.getBlockers(atk)) {
-                                    totalPowerUnblocked -= ComputerUtilCombat.getDamageToKill(blk, false);
+
+                    // try to determine if pumping a creature for more power will give lethal on board
+                    // considering all unblocked creatures after the blockers are already declared
+                    if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                        int totalPowerUnblocked = 0;
+                        for (Card atk : combat.getAttackers()) {
+                            if (combat.isBlocked(atk) && !atk.hasKeyword(Keyword.TRAMPLE)) {
+                                continue;
+                            }
+                            if (atk == c) {
+                                totalPowerUnblocked += pumpedDmg; // this accounts for Trample by now
+                            } else {
+                                totalPowerUnblocked += ComputerUtilCombat.damageIfUnblocked(atk, opp, combat, true);
+                                if (combat.isBlocked(atk)) {
+                                    // consider Trample damage properly for a blocked creature
+                                    for (Card blk : combat.getBlockers(atk)) {
+                                        totalPowerUnblocked -= ComputerUtilCombat.getDamageToKill(blk, false);
+                                    }
                                 }
                             }
                         }
-                    }
-                    if (totalPowerUnblocked >= opp.getLife()) {
-                        return true;
-                    } else if (totalPowerUnblocked > dmg && sa.getHostCard() != null && sa.getHostCard().isInPlay()) {
-                        if (sa.getPayCosts().hasNoManaCost()) {
-                            return true; // always activate abilities which cost no mana and which can increase unblocked damage
+                        if (totalPowerUnblocked >= opp.getLife()) {
+                            return true;
+                        } else if (totalPowerUnblocked > dmg && sa.getHostCard() != null && sa.getHostCard().isInPlay()) {
+                            if (sa.getPayCosts().hasNoManaCost()) {
+                                return true; // always activate abilities which cost no mana and which can increase unblocked damage
+                            }
                         }
                     }
                 }
+
                 float value = 1.0f * (pumpedDmg - dmg);
                 if (c == sa.getHostCard() && power > 0) {
                     int divisor = sa.getPayCosts().getTotalMana().getCMC();

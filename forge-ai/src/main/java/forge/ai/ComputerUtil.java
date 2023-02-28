@@ -1741,6 +1741,10 @@ public class ComputerUtil {
                         continue;
                     }
 
+                    if (c.getCounters(CounterEnumType.SHIELD) > 0) {
+                        continue;
+                    }
+
                     // already regenerated
                     if (c.getShieldCount() > 0) {
                         continue;
@@ -1852,6 +1856,10 @@ public class ComputerUtil {
                     final Card c = (Card) o;
                     // indestructible
                     if (c.hasKeyword(Keyword.INDESTRUCTIBLE)) {
+                        continue;
+                    }
+
+                    if (c.getCounters(CounterEnumType.SHIELD) > 0) {
                         continue;
                     }
 

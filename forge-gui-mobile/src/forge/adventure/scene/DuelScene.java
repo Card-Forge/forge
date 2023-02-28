@@ -167,14 +167,19 @@ public class DuelScene extends ForgeScene {
         int changeStartCards = 0;
         int extraManaShards = 0;
         Array<IPaperCard> startCards = new Array<>();
+        Array<IPaperCard> startCardsInCommandZone = new Array<>();
 
         for (EffectData data : effects) {
             lifeMod += data.lifeModifier;
             changeStartCards += data.changeStartCards;
             startCards.addAll(data.startBattleWithCards());
+            startCardsInCommandZone.addAll(data.startBattleWithCardsInCommandZone());
+
             extraManaShards += data.extraManaShards;
         }
         player.addExtraCardsOnBattlefield(startCards);
+        player.addExtraCardsInCommandZone(startCardsInCommandZone);
+
         player.setStartingLife(Math.max(1, lifeMod + player.getStartingLife()));
         player.setStartingHand(player.getStartingHand() + changeStartCards);
         player.setManaShards((player.getManaShards() + extraManaShards));

@@ -2064,7 +2064,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbLong.append(TextUtil.fastReplace(keyword, ":", " ")).append("\r\n");
                 } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph")
                         || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
-                        || keyword.startsWith("Madness:")
+                        || keyword.startsWith("Madness:")|| keyword.startsWith("Recover")
                         || keyword.startsWith("Reconfigure") || keyword.startsWith("Squad")
                         || keyword.startsWith("Miracle") || keyword.startsWith("More Than Meets the Eye")
                         || keyword.startsWith("Level up")) {
@@ -2072,11 +2072,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbLong.append(k[0]);
                     if (k.length > 1) {
                         final Cost mCost = new Cost(k[1], true);
-                        if (!mCost.isOnlyManaCost()) {
-                            sbLong.append("—");
-                        }
                         if (mCost.isOnlyManaCost()) {
                             sbLong.append(" ");
+                        } else {
+                            sbLong.append("—");
                         }
                         sbLong.append(mCost.toString());
                         if (!mCost.isOnlyManaCost()) {

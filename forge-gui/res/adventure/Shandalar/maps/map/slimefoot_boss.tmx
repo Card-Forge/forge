@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="55">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="55">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -12,7 +12,7 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJyL5mVg2MWDH0cRoQaEo4lUBzJPFkjjA7XcDAx7CKgBAZCdu4lQBwLSPPjtJdZOUgE+e2llJz57aWknLntpbScue6VpbOdgs5ceYNTeUXtH7aWOvcTUl8gYGZCqFxkDAGuQN1o=
+   eJyL5mVg2MWDH0cRoQaEo4lUBzJPFkjTG0jzjNo7au+ovaP2jto7au/gsJeY+hIZIwNS9SJjAAIUL00=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -42,6 +42,8 @@
   <object id="49" template="../obj/gold.tx" x="209.038" y="33.8697"/>
   <object id="53" template="../obj/enemy.tx" x="223.924" y="101.602" width="16" height="17.6724">
    <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Slimefoot's Boss Effect&quot;]
+}</property>
     <property name="enemy" value="Slimefoot"/>
    </properties>
   </object>

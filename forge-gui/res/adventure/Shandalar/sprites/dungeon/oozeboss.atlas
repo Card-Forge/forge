@@ -1,0 +1,20 @@
+oozeboss.png
+size: 246,91
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 83,57
+  size: 34, 25
+Idle 
+  xy: 0, 0
+  size: 64, 40
+Idle 
+  xy: 64, 0
+  size: 64, 40
+Idle 
+  xy: 128, 0
+  size: 64, 40
+Idle 
+  xy: 192,0
+  size: 64, 40

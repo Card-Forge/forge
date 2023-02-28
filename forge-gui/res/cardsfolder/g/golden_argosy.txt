@@ -1,6 +1,6 @@
 Name:Golden Argosy
 ManaCost:4
-Types:Artifact Vehicle
+Types:Legendary Artifact Vehicle
 PT:3/6
 T:Mode$ BecomesCrewed | ValidVehicle$ Card.Self | Execute$ RememberCrew | Static$ True
 SVar:RememberCrew:DB$ PumpAll | ValidCards$ Creature.TriggeredCrew | RememberAllPumped$ True

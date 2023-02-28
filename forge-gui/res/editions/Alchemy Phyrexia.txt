@@ -13,7 +13,7 @@ ScryfallCode=YONE
 5 R Quicksilver Servitor @Samuel Araya
 6 R Surgical Metamorph @Nestor Ossandon Leal
 7 U Tezzeret's Reckoning @Camille Alquier
-8 R Blightwing Whelp @Jean Pierre Targete
+8 R Blightwing Whelp @J.P. Targete
 9 U March Toward Perfection @Brian Valeza
 10 R Sheoldred's Assimilator @Diego Gisbert
 11 U Hexgold Sledge @David Sondered
@@ -28,7 +28,7 @@ ScryfallCode=YONE
 20 M Darksteel Hydra @Monztre
 21 R Glistening Extractor @Jonas De Ro
 22 R Gyox, Brutal Carnivora @Daniel Ljunggren
-23 R Ichor Aberration @Jean Pierre Targete
+23 R Ichor Aberration @J.P. Targete
 24 R Innovative Metatect @LA Draws
 25 U Mephidross Slime @Yeong-Hao Han
 26 U Quicksilver Lapidary @Caroline Gariba
