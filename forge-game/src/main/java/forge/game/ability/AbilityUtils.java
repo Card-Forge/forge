@@ -288,12 +288,12 @@ public class AbilityUtils {
             } else {
                 System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
             }
-        } else if (defined.equals("FirstRemembered")) {
+        } else if (defined.equals("RememberedFirst")) {
             Object o = hostCard.getFirstRemembered();
             if (o instanceof Card) {
                 cards.add(game.getCardState((Card) o));
             }
-        } else if (defined.equals("LastRemembered")) {
+        } else if (defined.equals("RememberedLast")) {
             Object o = Iterables.getLast(hostCard.getRemembered(), null);
             if (o instanceof Card) {
                 cards.add(game.getCardState((Card) o));

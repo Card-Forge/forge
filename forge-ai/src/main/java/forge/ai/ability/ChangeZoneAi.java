@@ -33,7 +33,6 @@ import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
-import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -1759,7 +1758,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         // Called when attaching Aura to player or adding creature to combat
         if (params != null && params.containsKey("Attacker")) {
-            return (Player) ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
+            return (Player) ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), options);
         }
         return AttachAi.attachToPlayerAIPreferences(ai, sa, true, (List<Player>)options);
     }
@@ -1767,7 +1766,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     @Override
     protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
         if (params != null && params.containsKey("Attacker")) {
-            return ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
+            return ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), options);
         }
         // should not be reached
         return super.chooseSinglePlayerOrPlaneswalker(ai, sa, options, params);

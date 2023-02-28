@@ -359,7 +359,7 @@ public final class CardScriptParser {
             "Self", "OriginalHost", "EffectSource", "Equipped", "Enchanted",
             "TopOfLibrary", "BottomOfLibrary", "Targeted", "ThisTargetedCard",
             "ParentTarget", "Remembered", "DirectRemembered",
-            "DelayTriggerRemembered", "FirstRemembered", "Clones", "Imprinted",
+            "DelayTriggerRemembered", "RememberedFirst", "Clones", "Imprinted",
             "ChosenCard", "SacrificedCards", "Sacrificed", "DiscardedCards",
             "Discarded", "ExiledCards", "Exiled", "TappedCards", "Tapped",
             "UntappedCards", "Untapped", "Parent", "SourceFirstSpell");
