@@ -8,6 +8,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -47,6 +48,7 @@ public class SeekEffect extends SpellAbilityEffect {
             final CardZoneTable triggerList = new CardZoneTable();
             CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
             CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+            CardCollection soughtCards = new CardCollection();
             for (String seekType : seekTypes) {
                 CardCollection pool;
                 if (sa.hasParam("DefinedCards")) {
@@ -54,7 +56,11 @@ public class SeekEffect extends SpellAbilityEffect {
                 } else {
                     pool = new CardCollection(seeker.getCardsIn(ZoneType.Library));
                 }
-                pool = (CardCollection)AbilityUtils.filterListByType(pool, seekType, sa);
+                pool = CardLists.getValidCards(pool, seekType, source.getController(), source, sa);
+
+                if (pool.isEmpty()) {
+                    continue; // can't find if nothing to seek
+                }
 
                 CardCollection found = new CardCollection();
                 for (int i = 0; i < seekNum; i++) {
@@ -70,6 +76,7 @@ public class SeekEffect extends SpellAbilityEffect {
                     moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
                     moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
                     movedCard = game.getAction().moveTo(ZoneType.Hand, c, 0, sa, moveParams);
+                    soughtCards.add(movedCard);
                     if (originZone != null) {
                         triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
                     }
@@ -78,7 +85,9 @@ public class SeekEffect extends SpellAbilityEffect {
                     }
                 }
             }
-            game.getTriggerHandler().runTrigger(TriggerType.SeekAll, AbilityKey.mapFromPlayer(seeker), false);
+            if (!soughtCards.isEmpty()) {
+                game.getTriggerHandler().runTrigger(TriggerType.SeekAll, AbilityKey.mapFromPlayer(seeker), false);
+            }
             triggerList.triggerChangesZoneAll(game, sa);
         }
     }
