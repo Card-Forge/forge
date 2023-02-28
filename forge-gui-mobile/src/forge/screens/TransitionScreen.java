@@ -242,7 +242,7 @@ public class TransitionScreen extends FContainer {
                             run[0] = true;
                             FThreads.invokeInEdtNowOrLater(runnable);
                         }
-                    }, 2.5f);
+                    }, 2f);
                 } else {
                     if (run[0])
                         return;
