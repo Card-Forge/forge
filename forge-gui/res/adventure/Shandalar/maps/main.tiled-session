@@ -3,12 +3,12 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/catlair_3.tmx",
+    "activeFile": "map/vampirecastle_2.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "map/main_story",
         "obj",
         "map",
+        "map/main_story",
         "tileset"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -144,8 +144,8 @@
             "scale": 4,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 224.875,
-                "y": 201.125
+                "x": 239.875,
+                "y": 135.875
             }
         },
         "map/cave6.tmx": {
@@ -2981,11 +2981,11 @@
             }
         },
         "map/vampirecastle_2.tmx": {
-            "scale": 1.5002083333333331,
-            "selectedLayer": 4,
+            "scale": 4,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 240.6332453825858,
-                "y": 136.31440077766982
+                "x": 412.625,
+                "y": 235.125
             }
         },
         "map/vampirecastle_3.tmx": {
@@ -3112,7 +3112,8 @@
         "map/swamp_town.tmx",
         "tileset/main.tsx",
         "map/snowabbey_2.tmx",
-        "map/catlair_3.tmx"
+        "map/catlair_3.tmx",
+        "map/vampirecastle_2.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
