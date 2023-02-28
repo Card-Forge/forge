@@ -92,7 +92,7 @@ public class SeekEffect extends SpellAbilityEffect {
                         source.addRemembered(movedCard);
                     }
                     if (sa.hasParam("ImprintFound")) {
-                        host.addImprintedCards(movedCard);
+                        source.addImprintedCards(movedCard);
                     }
                 }
             }
