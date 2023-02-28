@@ -39,7 +39,7 @@ SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | 
 SVar:DBEffect:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ PerpetualStatic | Duration$ Permanent
 SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ CARDNAME can't block. | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ It perpetually gains "This creature can't block."
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When this card specializes from any zone, seek an instant or sorcery card with mana value 3 or less. Until end of turn, you may cast that card without paying its mana cost.
-SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ 1 | ChangeType$ Instant.cmcLE3,Sorcery.cmcLE3 | RememberChanged$ True
+SVar:TrigSeek:DB$ Seek | Type$ Instant.cmcLE3,Sorcery.cmcLE3 | RememberFound$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Remembered | ForgetOnMoved$ Hand | SubAbility$ DBCleanup
 SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered+nonLand | MayPlayWithoutManaCost$ True | EffectZone$ Command | AffectedZone$ Hand
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
