@@ -23,6 +23,14 @@ import java.util.Map;
 
 public class SeekEffect extends SpellAbilityEffect {
 
+    /* (non-Javadoc)
+     * @see forge.game.ability.SpellAbilityEffect#getStackDescription(forge.game.spellability.SpellAbility)
+     */
+    @Override
+    protected String getStackDescription(SpellAbility sa) {
+        return sa.getDescription();
+    }
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
