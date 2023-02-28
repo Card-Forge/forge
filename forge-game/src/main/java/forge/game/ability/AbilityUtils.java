@@ -18,6 +18,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.base.Functions;
 import com.google.common.base.Predicate;
 
 import forge.card.CardStateName;
@@ -2404,8 +2405,10 @@ public class AbilityUtils {
             List<Integer> dmgInstances = game.getDamageDoneThisTurn(isCombat, false, props[1], props[2], c, player, ctb);
             if (!dmgInstances.isEmpty() && sq[0].contains("Max")) {
                 num = Collections.max(dmgInstances);
-            } else {
+            } else if (sq[0].startsWith("Num")) {
                 num = dmgInstances.size();
+            } else {
+                num = Aggregates.sum(dmgInstances, Functions.identity());
             }
             return doXMath(num, expr, c, ctb);
         }
