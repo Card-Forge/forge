@@ -2,13 +2,13 @@ Name:Parallel Thoughts
 ManaCost:3 U U
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library for seven cards, exile them in a face-down pile, and shuffle that pile. Then shuffle your library.
-SVar:TrigSearch:DB$ ChangeZone | ChangeNum$ 7 | ChangeType$ Card | Origin$ Library | Destination$ Exile | ShuffleChangedPile$ True | ExileFaceDown$ True | RememberChanged$ True
+SVar:TrigSearch:DB$ ChangeZone | ChangeNum$ 7 | ChangeType$ Card | Mandatory$ True | Origin$ Library | Destination$ Exile | ShuffleChangedPile$ True | ExileFaceDown$ True | RememberChanged$ True
 T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | Static$ True | Execute$ TrigForget
 SVar:TrigForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReset | Static$ True
 SVar:TrigReset:DB$ Cleanup | ClearRemembered$ True
 R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ RepParallelThoughts | Optional$ True | OptionalDecider$ You | Description$ If you would draw a card, you may instead put the top card of the pile you exiled into your hand.
-SVar:RepParallelThoughts:DB$ ChangeZone | Defined$ FirstRemembered | Origin$ Exile | Destination$ Hand
+SVar:RepParallelThoughts:DB$ ChangeZone | Defined$ RememberedFirst | Origin$ Exile | Destination$ Hand
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 Oracle:When Parallel Thoughts enters the battlefield, search your library for seven cards, exile them in a face-down pile, and shuffle that pile. Then shuffle your library.\nIf you would draw a card, you may instead put the top card of the pile you exiled into your hand.
