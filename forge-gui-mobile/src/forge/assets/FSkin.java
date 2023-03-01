@@ -260,7 +260,9 @@ public class FSkin {
         final FileHandle f9 = getDefaultSkinFile(ForgeConstants.SPRITE_SLEEVES2_FILE);
         final FileHandle f10 = getDefaultSkinFile(ForgeConstants.SPRITE_BORDER_FILE);
         final FileHandle f11 = getSkinFile(ForgeConstants.SPRITE_BUTTONS_FILE);
+        final FileHandle f11b = getDefaultSkinFile(ForgeConstants.SPRITE_BUTTONS_FILE);
         final FileHandle f12 = getSkinFile(ForgeConstants.SPRITE_START_FILE);
+        final FileHandle f12b = getDefaultSkinFile(ForgeConstants.SPRITE_START_FILE);
         final FileHandle f13 = getDefaultSkinFile(ForgeConstants.SPRITE_DECKBOX_FILE);
         final FileHandle f17 = getDefaultSkinFile(ForgeConstants.SPRITE_CRACKS_FILE);
         final FileHandle f18 = getDefaultSkinFile(ForgeConstants.SPRITE_PHYREXIAN_FILE);
@@ -313,6 +315,10 @@ public class FSkin {
                     manager.finishLoadingAsset(f11.path());
                     Forge.hdbuttons = true;
                 }
+            } else if (f11b.exists() && Forge.allowCardBG) {
+                manager.load(f11b.path(), Texture.class, Forge.getAssets().getTextureFilter());
+                manager.finishLoadingAsset(f11b.path());
+                Forge.hdbuttons = true;
             } else { Forge.hdbuttons = false; } //how to refresh buttons when a theme don't have hd buttons?
             if (f12.exists()) {
                 if (!Forge.allowCardBG) {
@@ -322,6 +328,10 @@ public class FSkin {
                     manager.finishLoadingAsset(f12.path());
                     Forge.hdstart = true;
                 }
+            } else if (f12b.exists() && Forge.allowCardBG) {
+                manager.load(f12b.path(), Texture.class, Forge.getAssets().getTextureFilter());
+                manager.finishLoadingAsset(f12b.path());
+                Forge.hdstart = true;
             } else { Forge.hdstart = false; }
             //update colors
             for (final FSkinColor.Colors c : FSkinColor.Colors.values()) {
