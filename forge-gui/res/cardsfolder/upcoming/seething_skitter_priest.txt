@@ -11,4 +11,4 @@ SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_phyrexian_mite_toxic_noblock | T
 SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
 SVar:DBUpdate:DB$ UpdateRemember
 DeckHas:Type$Mite|Artifact & Ability$Token
-Oracle:Toxic 1\nWhen Seething Skitter-Priest enters the battlefield, creatures you control and creature cards in your hand perpetually gain "When this creature dies, create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and 'This creature can't block.'"
+Oracle:Toxic 1\nWhen Seething Skitter-Priest enters the battlefield, creatures you control and creature cards in your hand perpetually gain "When this creature dies, create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and This creature can't block."
