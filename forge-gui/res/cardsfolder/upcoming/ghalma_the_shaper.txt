@@ -1,4 +1,4 @@
-Name:Ghalma, the Shaper
+Name:Ghalma the Shaper
 ManaCost:1 W W
 Types:Legendary Creature Elephant Artificer
 PT:3/3
@@ -9,4 +9,4 @@ SVar:DBToken:DB$ Token | TokenScript$ c_1_1_a_myr
 DeckHas:Type$Enchantment|Myr|Artifact
 DeckHints:Type$Artifact
 SVar:HasAttackEffect:TRUE
-Oracle:Vigilance\nWhenever Ghalma, the Shaper attacks, conjure a card named Tempered Steel into your hand, then create a 1/1 colorless Myr artifact creature token. 
+Oracle:Vigilance\nWhenever Ghalma the Shaper attacks, conjure a card named Tempered Steel into your hand, then create a 1/1 colorless Myr artifact creature token.
