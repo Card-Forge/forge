@@ -3,7 +3,7 @@ ManaCost:3 G G W W
 Types:Legendary Creature Dinosaur Vampire
 PT:12/12
 K:Trample
-T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigCharm | TriggerDescription$ Whenever you attack, ABILITY
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, ABILITY
 SVar:TrigCharm:DB$ Charm | CharmNum$ 1 | Choices$ DBDino,DBVampire
 SVar:DBDino:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ g_x_x_dinosaur_trample | TokenPower$ X | TokenToughness$ X | TokenTapped$ True | TokenAttacking$ True | TokenOwner$ You | SpellDescription$ Create a tapped and attacking X/X green Dinosaur creature token with trample, where X is the greatest power among other attacking creatures.
 SVar:DBVampire:DB$ Token | TokenAmount$ Y | TokenScript$ w_1_1_vampire_lifelink | TokenOwner$ You | SpellDescription$ Create X 1/1 white Vampire creature tokens with lifelink, where X is the number of other attacking creatures.
