@@ -1,4 +1,5 @@
 99 Problems | https://downloads.cardforge.org/decks/99problems.zip
+Brewer's Kitchen | https://downloads.cardforge.org/decks/brewerskitchen-commander.zip
 Budget Commander | https://downloads.cardforge.org/decks/budgetcommander.zip
 Card Preview | https://downloads.cardforge.org/decks/cardpreview-commander.zip
 Command Tower | https://downloads.cardforge.org/decks/commandtower.zip
