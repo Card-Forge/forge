@@ -1722,7 +1722,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("hadToAttackThisCombat")) {
-            AttackRequirement e = combat.getAttackConstraints().getRequirements().get(card);
+            AttackRequirement e = combat == null ? null : combat.getAttackConstraints().getRequirements().get(card);
             if (e == null || !e.hasCreatureRequirement() || !e.getAttacker().equalsWithTimestamp(card)) {
                 return false;
             }
