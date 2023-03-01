@@ -35,7 +35,7 @@ A12 R Xathrid Necromancer @Maciej Kuciara
 141★ R Goblin Chieftain @Sam Wood
 147 R Bristling Hydra @Chris Rahn
 149 R Atarka, World Render @Karl Kopinski
-149* R Lathliss, Dragon Queen @Alex Konstad
+149★ R Lathliss, Dragon Queen @Alex Konstad
 162 R Kogla, the Titan Ape @Chris Rahn
 172 R Gargos, Vicious Watcher @Mathias Kollros
 176 R Genesis Hydra @Peter Mohrbacher

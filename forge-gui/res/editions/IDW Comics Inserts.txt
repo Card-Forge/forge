@@ -1,7 +1,7 @@
 [metadata]
 Code=PIDW
 Date=2012-01-01
-Name=IDW Comics 2012
+Name=IDW Comics Inserts
 Type=Promo
 ScryfallCode=PIDW
 
@@ -15,3 +15,11 @@ ScryfallCode=PIDW
 7 R Standstill @Matt Stewart
 8 R Breath of Malfegor @Alex Horley-Orlandelli
 9 R Turnabout @Dan Scott
+10 R Voidmage Husher @Ryan Pancoast
+11 R Ogre Arsonist @Chris Rahn
+12 R Corrupt @Alex Horley-Orlandelli
+13 R High Tide @Eric Deschamps
+14 R Gaze of Granite @Dan Scott
+15 R Wash Out @Volkan Baǵa
+16 R Acquire @Anthony Francisco
+17 R Duress @Michael Komarck
