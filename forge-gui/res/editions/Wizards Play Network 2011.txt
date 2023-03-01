@@ -7,17 +7,6 @@ Type=Promo
 ScryfallCode=PW11
 
 [cards]
-64 R Master's Call @Erica Yang
-65 R Plague Myr @Ryan Pancoast
-66 R Signal Pest @Chippy
-69 R Fling @Daren Bader
-70 R Sylvan Ranger @Ciruelo
-71 R Vault Skirge @Lars Grant-West
-72 R Maul Splicer @Erica Yang
-73 R Shrine of Burning Rage @Nils Hamm
-76 R Tormented Soul @John Stanko
-77 R Auramancer @Wayne Reynolds
-78 R Circle of Flame @James Paick
 80 R Curse of the Bloody Tome @John Stanko
 83 R Bloodcrazed Neonate @Dave Kendall
 84 R Boneyard Wurm @Austin Hsu

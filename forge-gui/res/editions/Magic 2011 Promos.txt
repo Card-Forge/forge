@@ -7,7 +7,5 @@ ScryfallCode=PM11
 
 [cards]
 35★ M Sun Titan @Chris Rahn
-53 R Mitotic Slime @Ron Spencer
-104 C Liliana's Specter @Jaime Jones
 122★ R Ancient Hellkite @Wayne Reynolds
 165★ R Birds of Paradise @Terese Nielsen
