@@ -6,7 +6,7 @@ SVar:ShuffleHand:DB$ ChangeZoneAll | Defined$ Player.IsRemembered | Origin$ Hand
 SVar:PsychoDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | SubAbility$ MindFlame
 SVar:MindFlame:DB$ DealDamage | Defined$ Player.Opponent+IsRemembered | NumDmg$ Y | ConditionPresent$ Artifact.YouCtrl | ConditionCompare$ GE3 | StackDescription$ None | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount/Minus.1
+SVar:X:Remembered$Amount
 SVar:Y:PlayerCountRemembered$CardsDrawn
 SVar:NeedsToPlayVar:Z LE2
 SVar:Z:Count$InYourHand

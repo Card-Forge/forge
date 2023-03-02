@@ -9,5 +9,5 @@ SVar:DBDiscard:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBInce
 SVar:DBIncendiaryDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBIncendiaryDraw
 SVar:DBIncendiaryDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | SubAbility$ CleanIncendiary
 SVar:CleanIncendiary:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount/Minus.1
+SVar:X:Remembered$Amount
 Oracle:Choose two —\n• Incendiary Command deals 4 damage to target player or planeswalker.\n• Incendiary Command deals 2 damage to each creature.\n• Destroy target nonbasic land.\n• Each player discards all the cards in their hand, then draws that many cards.
