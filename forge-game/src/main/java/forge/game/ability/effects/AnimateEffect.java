@@ -198,6 +198,7 @@ public class AnimateEffect extends AnimateEffectBase {
 
             if (sa.hasParam("Crew")) {
                 c.becomesCrewed(sa);
+                c.updatePowerToughnessForView();
             }
 
             game.fireEvent(new GameEventCardStatsChanged(c));
