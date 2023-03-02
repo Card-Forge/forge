@@ -34,15 +34,8 @@ public class SeekEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
-        List<Player> seekers;
-
-        if (sa.hasParam("Defined")) {
-            seekers = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
-        } else {
-            seekers = Lists.newArrayList(sa.getActivatingPlayer());
-        }
-
         final Game game = source.getGame();
+
         List<String> seekTypes = Lists.newArrayList();
         if (sa.hasParam("Types")) {
             seekTypes.addAll(Arrays.asList(sa.getParam("Types").split(",")));
@@ -50,13 +43,22 @@ public class SeekEffect extends SpellAbilityEffect {
             seekTypes.add(sa.getParamOrDefault("Type", "Card"));
         }
 
-        int seekNum = sa.hasParam("Num") ? AbilityUtils.calculateAmount(source, sa.getParam("Num"), sa) : 1;
+        int seekNum = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
+        if (seekNum <= 0) {
+            return;
+        }
 
-        for (Player seeker : seekers) {
-            final CardZoneTable triggerList = new CardZoneTable();
-            CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
-            CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+        final CardZoneTable triggerList = new CardZoneTable();
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
+        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+
+        for (Player seeker : getTargetPlayers(sa)) {
+            if (!seeker.isInGame()) {
+                continue;
+            }
+
             CardCollection soughtCards = new CardCollection();
+
             for (String seekType : seekTypes) {
                 CardCollection pool;
                 if (sa.hasParam("DefinedCards")) {
@@ -64,30 +66,22 @@ public class SeekEffect extends SpellAbilityEffect {
                 } else {
                     pool = new CardCollection(seeker.getCardsIn(ZoneType.Library));
                 }
-                pool = CardLists.getValidCards(pool, seekType, source.getController(), source, sa);
-
+                if (!changeType.equals("Card")) {
+                    pool = CardLists.getValidCards(pool, seekType, source.getController(), source, sa);
+                }
                 if (pool.isEmpty()) {
                     continue; // can't find if nothing to seek
                 }
 
-                CardCollection found = new CardCollection();
-                for (int i = 0; i < seekNum; i++) {
-                    Card c = Aggregates.random(pool);
-                    pool.remove(c);
-                    found.add(c);
-                }
+                for (final Card c : Aggregates.random(pool, seekNum)) {
 
-                for (final Card c : found) {
-                    Card movedCard = null;
-                    final Zone originZone = game.getZoneOf(c);
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                     moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
                     moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
-                    movedCard = game.getAction().moveTo(ZoneType.Hand, c, 0, sa, moveParams);
+                    Card movedCard = game.getAction().moveToHand(c, sa, moveParams);
                     soughtCards.add(movedCard);
-                    if (originZone != null) {
-                        triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
-                    }
+
+                    triggerList.put(ZoneType.Library, movedCard.getZone().getZoneType(), movedCard);
                 }
             }
             if (!soughtCards.isEmpty()) {
@@ -99,7 +93,7 @@ public class SeekEffect extends SpellAbilityEffect {
                 }
                 game.getTriggerHandler().runTrigger(TriggerType.SeekAll, AbilityKey.mapFromPlayer(seeker), false);
             }
-            triggerList.triggerChangesZoneAll(game, sa);
         }
+        triggerList.triggerChangesZoneAll(game, sa);
     }
 }
