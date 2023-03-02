@@ -49,7 +49,10 @@ public class EnemySprite extends CharacterSprite {
 
     @Override
     void updateBoundingRect() { //We want enemies to take the full tile.
-        boundingRect.set(getX(), getY(), getWidth(), getHeight());
+        float scale = data == null ? 1f : data.scale;
+        if (scale < 0)
+            scale = 1f;
+        boundingRect.set(getX(), getY(), getWidth()*scale, getHeight()*scale);
     }
 
     public void moveTo(Actor other, float delta) {
