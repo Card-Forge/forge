@@ -41,7 +41,7 @@ public class EffectData implements Serializable {
     }
 
     public Array<IPaperCard> startBattleWithCards() {
-        Array<IPaperCard> startCards=new Array<>();
+        Array<IPaperCard> startCards=new Array<>(IPaperCard.class);
         if(startBattleWithCard != null) {
             for (String name:startBattleWithCard) {
                 PaperCard C = FModel.getMagicDb().getCommonCards().getCard(name);
