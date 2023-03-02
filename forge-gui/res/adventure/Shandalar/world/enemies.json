@@ -3993,6 +3993,7 @@
 {
 	"name": "Ooze",
 	"sprite": "sprites/dungeon/ooze.atlas",
+	"scale": 0.6,
 	"deck": [
 		"decks/ooze.json"
 	],
