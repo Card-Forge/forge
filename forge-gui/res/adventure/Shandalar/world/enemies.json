@@ -3960,6 +3960,87 @@
 	"colors": "G"
 },
 {
+	"name": "Gorilla",
+	"sprite": "sprites/dungeon/gorilla.atlas",
+	"scale": 0.75,
+	"deck": [
+		"decks/gorilla.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.8,
+	"speed": 31,
+	"life": 30,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"Common"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Silverback Elder"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Kogla, the Titan Ape"
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 30,
+			"addMaxCount": 100
+		},
+   		 {	
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Red"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Green"
+			]
+			}
+			],
+	"colors": "RG"
+},
+{
 	"name": "Mammoth",
 	"sprite": "sprites/dungeon/mammoth.atlas",
 	"deck": [

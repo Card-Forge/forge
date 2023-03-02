@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="62">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="66">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJztlWEOgyAMhft/zxMsXmw7i9u5AL3bJNjsSagMs+gfX0IK6aNfTdSKfPXsRDxEHl3ac8zzLeIaJfVI8Y601+iQeJzfYnisV4B9J/qDwVVp3mXPzKxg1C9xmfmrHOqsGrdvZO7RxW3njrN/arzzD65+10dz9+jinseN7+b7djzXo8we5vNrWVZf7NnyWXNB2VxjpH+w1Rd7eGYN1If6LOXzy2OdYzYzazXyWlEfbFNAdQ==
@@ -34,5 +34,21 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
+  <object id="62" template="../obj/enemy.tx" x="216.5" y="171.5">
+   <properties>
+    <property name="enemy" value="Gorilla"/>
+   </properties>
+  </object>
+  <object id="63" template="../obj/enemy.tx" x="65.5" y="60">
+   <properties>
+    <property name="enemy" value="Fox"/>
+   </properties>
+  </object>
+  <object id="64" template="../obj/enemy.tx" x="325" y="71">
+   <properties>
+    <property name="enemy" value="Squirrel"/>
+   </properties>
+  </object>
+  <object id="65" template="../obj/treasure.tx" x="216" y="158"/>
  </objectgroup>
 </map>

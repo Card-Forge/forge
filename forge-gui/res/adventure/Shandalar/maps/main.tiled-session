@@ -3,12 +3,12 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/scarecrow_farm.tmx",
+    "activeFile": "map/grove_4.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
+        "map/main_story",
         "obj",
         "tileset",
-        "map/main_story",
         "map"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -35,10 +35,10 @@
         },
         "map/aerie_1.tmx": {
             "scale": 3,
-            "selectedLayer": -1,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 232.16666666666666,
-                "y": 167
+                "x": 239.83333333333331,
+                "y": 136.16666666666663
             }
         },
         "map/aerie_1B.tmx": {
@@ -1513,7 +1513,7 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240,
+                "x": 240.33333333333337,
                 "y": 136.33333333333334
             }
         },
@@ -1741,7 +1741,7 @@
                 4
             ],
             "scale": 2.0504166666666666,
-            "selectedLayer": 3,
+            "selectedLayer": 4,
             "viewCenter": {
                 "x": 271.89595610648246,
                 "y": 215.8097947571632
@@ -1797,8 +1797,8 @@
             "scale": 1.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 255.99999999999997,
-                "y": 104
+                "x": 240.33333333333337,
+                "y": 136.33333333333334
             }
         },
         "map/grove_10.tmx": {
@@ -1925,21 +1925,24 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240,
-                "y": 136
+                "x": 239.75,
+                "y": 136.25
             }
         },
         "map/grove_3.tmx": {
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 240,
-                "y": 136
+                "x": 239.75,
+                "y": 136.25
             }
         },
         "map/grove_4.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 2,
-            "selectedLayer": 1,
+            "selectedLayer": 4,
             "viewCenter": {
                 "x": 239.75,
                 "y": 136.25
@@ -2868,8 +2871,8 @@
             "scale": 1.4329166666666666,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 248.79325385286424,
-                "y": 136.43501017737714
+                "x": 264.14655423088107,
+                "y": 192.26519337016572
             }
         },
         "map/skullcave_1.tmx": {
@@ -3130,7 +3133,12 @@
         "map/maze_3.tmx",
         "map/maze_2.tmx",
         "map/grove_6.tmx",
-        "map/scarecrow_farm.tmx"
+        "map/scarecrow_farm.tmx",
+        "map/aerie_1.tmx",
+        "map/evilgrove_1.tmx",
+        "map/grove_1.tmx",
+        "map/grove_2.tmx",
+        "map/grove_3.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
