@@ -2040,7 +2040,7 @@ public class ComputerUtilCombat {
 
         final boolean hasTrample = attacker.hasKeyword(Keyword.TRAMPLE);
 
-        if (combat != null && hasTrample && attacker.isAttacking()) {
+        if (combat != null && remaining != null && hasTrample && attacker.isAttacking()) {
             // if attacker has trample and some of its blockers are also blocking others it's generally a good idea
             // to assign those without trample first so we can maximize the damage to the defender
             for (final Card c : remaining) {
