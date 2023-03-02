@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/vampirecastle_2.tmx",
+    "activeFile": "map/maze_3.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
+        "tileset",
         "obj",
-        "map",
         "map/main_story",
-        "tileset"
+        "map"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -126,10 +126,10 @@
         },
         "map/catlair_1.tmx": {
             "scale": 4,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 240,
-                "y": 136
+                "x": 239.875,
+                "y": 135.875
             }
         },
         "map/catlair_2.tmx": {
@@ -208,11 +208,11 @@
             }
         },
         "map/cave_13.tmx": {
-            "scale": 1.5,
-            "selectedLayer": 4,
+            "scale": 4,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 223.99999999999997,
-                "y": 135.33333333333334
+                "x": 239.875,
+                "y": 135.875
             }
         },
         "map/cave_14.tmx": {
@@ -2031,7 +2031,7 @@
         },
         "map/kobold_mine.tmx": {
             "scale": 1.2623540856031128,
-            "selectedLayer": 0,
+            "selectedLayer": 3,
             "viewCenter": {
                 "x": 255.47507127995686,
                 "y": 159.62240887724434
@@ -2464,8 +2464,8 @@
             "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 232,
-                "y": 137
+                "x": 240.5,
+                "y": 136.5
             }
         },
         "map/maze_4.tmx": {
@@ -2984,8 +2984,8 @@
             "scale": 4,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 412.625,
-                "y": 235.125
+                "x": 239.875,
+                "y": 135.875
             }
         },
         "map/vampirecastle_3.tmx": {
@@ -3113,7 +3113,10 @@
         "tileset/main.tsx",
         "map/snowabbey_2.tmx",
         "map/catlair_3.tmx",
-        "map/vampirecastle_2.tmx"
+        "map/vampirecastle_2.tmx",
+        "map/catlair_1.tmx",
+        "map/cave_13.tmx",
+        "map/maze_3.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
