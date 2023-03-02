@@ -38,7 +38,7 @@ public class SeekEffect extends SpellAbilityEffect {
             seekTypes.add(sa.getParamOrDefault("Type", "Card"));
         }
 
-        int seekNum = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
+        int seekNum = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("Num", "1"), sa);
         if (seekNum <= 0) {
             return;
         }
@@ -61,7 +61,7 @@ public class SeekEffect extends SpellAbilityEffect {
                 } else {
                     pool = new CardCollection(seeker.getCardsIn(ZoneType.Library));
                 }
-                if (!changeType.equals("Card")) {
+                if (!seekType.equals("Card")) {
                     pool = CardLists.getValidCards(pool, seekType, source.getController(), source, sa);
                 }
                 if (pool.isEmpty()) {
