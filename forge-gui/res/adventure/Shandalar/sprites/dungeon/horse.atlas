@@ -19,28 +19,28 @@ Idle
   xy: 192, 0
   size: 64, 64 
 Walk
-  xy: 0, 64
+  xy: 0, 128
   size: 64, 64
 Walk
-  xy: 64, 64
+  xy: 64, 128
   size: 64, 64   
 Walk
-  xy: 128, 64
+  xy: 128, 128
   size: 64, 64   
 Walk
-  xy: 192, 64
+  xy: 192, 128
   size: 64, 64   
 Walk
-  xy: 256, 64
+  xy: 256, 128
   size: 64, 64   
 Walk 
-  xy: 320, 64
+  xy: 320, 128
   size: 64, 64
 Walk 
-  xy: 384, 64
+  xy: 384, 128
   size: 64, 64  
 Walk 
-  xy: 448, 64
+  xy: 448, 128
   size: 64, 64   
 Attack 
   xy: 0, 192

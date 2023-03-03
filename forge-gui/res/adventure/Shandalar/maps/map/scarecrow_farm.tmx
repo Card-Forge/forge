@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="33" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="78">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="33" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="79">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -10,17 +10,17 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="11" name="collision" width="33" height="24">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgDBewQPBgAzC248CgYBaNgaAEAJNwEpw==
+   eJxjYBgF5ABRfgR24Bto1yDAQLkF2d5rrAPjBhD4xz7wbhgFo2CwAcNBkB8GgxtGASooYIfgwQBgbsGFR8EoGAVDCwAApgsJJA==
   </data>
  </layer>
  <layer id="1" name="Background" width="33" height="24">
   <data encoding="base64" compression="zlib">
-   eJzVk0EKhDAMRbuQAXGOMDvP5xHceik3Xmr20kUhhKT+JC1FISCt+f/1m+5TSjtQV7LX/4MV4o9y0G9QfwtD0V6/sQw09uKh+aL/4vzZ/bn+U/bbrPdSBi0LK4P0bY2B9xwLxpC5JR3PPZB6PDlI663uJcLPvfg9izDwPT43kqf37BqHta88UZ7cJzFQPS2PwkF7krJH31vmUOPinl4Guibtt5qFHjl4GXqcDa08b5ShNn+IVoscoueJMkQ0ojV6HmmNzKGnv0V3dAZvqhsY7Ep0
+   eJzVkzEKwzAMRZVSAqU5QrderWuPkLXn6D2y5FLdiweDEFL6JdmYBv5iW/rPP/J6JloB7eTXZ8aE+KMc/Azq72Gove9LLgOLvXpYvui/2G5+f9n/V/bPi13LGawsvAzaWcnA+8qa1xVjKNxa5pF3oNVEctDWW71LhF96yXeWYZB7cm40z+jdLQ5vXf2yPKVOY+D9rDwqB68hY+8x9cnhiIvE2vsUY+Br2n6rWeiRQ5Shx91QlXnjDEfzh/RqkUP2PlmGTI+sRs8j18gcevp7+o7O4J/0BfndS/U=
   </data>
  </layer>
  <layer id="8" name="Tilelaag 3" width="33" height="24">
   <data encoding="base64" compression="zlib">
-   eJxjYCAOLGMlUiENATXcsIyJcjeAsDIP5W4Z6iCXkzT1X9kG1g3o9n9RxI2JAdtYERgGCjWJdw85boDZBaLvMiPEs5UZGCYS6W5qAZgbtqHly3YyzGqWZmBowYEJuQGEvcQgfF12BoZ+NgQ+w05bNyCnAVg4nESyEz09ZNHADdjAIUYEW4UNQasg5QFcbqGWG2AghA2CQUCPA4JxAWxuyiIgjwzauHGLI8sFI7mJFLdQCrC5T5cDES74woaWbkAGoHJSl0puAZkFw6S4ARnkkVDGYzMX2Q3I7tjBwsAgDcW7WPDbT8gNsPSFns4IgVBW7GxsbiAEyHXDF1ZIGBACMDeA6PcD1B5EdgMp6WIUDAwAAM07WOw=
+   eJxjYCAOLGMlUiENATXcsIyJcjeAsDIP5W4Z6iCXkzT1X9kG1g3o9n9RxI2JAdtYERgGCjUZGNaKEu8mUt0AswtE32VGiGcrMzBMJNLd1AIwN2xDy5ftZJjVLM3A0IIDE3IDCHuJQfi67AwM/WwIfIadtm5ATgOwcEjnQMiD0gMyyKKBG7CBQ4wItgobglZBygO43EItN8BACBsEg4AeBwTjAtjclEVAHhm0ceMWR5YLRnITKW6hFGBzny4HIlzwhQ0lYDIBNyADUDmpSyW3gMwC4Slo7iDkBmSQR0IZj81cmBtgGAZ2sEBoKSC9iwW//YTcAEtf6OmMEAhlxc7G5gZCgFw3fAHaK43H/+huANHvB6g9iOwGUtLFKBgYAADMGFns
   </data>
  </layer>
  <layer id="7" name="water" width="33" height="24">
@@ -28,7 +28,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy9lT1vE0EQhjck5z0rR0ETglNhI9sxsSNF4gfQ0kUKHX0CoqSiAcR3AiQBpNAgUfEHEswPAIEsEFFaOkCBgs+YD0HHvNod3dx61zmFiJFe7d3e7cwzM3t77Uipdg4ta6WuDofVsc8rSVi/Cv55+P9Izz6RPpO+FPIxYK2PwccxVTTzD/coNTvgZ7hO6+dJC6QbOlyL78R3R6f6Q/cTNC7SeCo2sQ6rrDXtCAY2tx7wXaP1ddI4qRH378c8+VogXSH9LJj8wYJYuIeB44S9PrOX2B0uH0NegaFOa8aTLMOPgskTc1x3xP3t1I11V/8bwzNa89wyTJazDMzBQr54Zztr9ak96+yQ0evB1L9SaR1uk/YN9gr5XqP3Zqr9GeBv0dmHR8bMONxQKmmYPdfS2TUw7MeTsXnuU1OHn0nBXzNQixrFrzfSfI9SD54MmPjID3ObJaXee/ShZJ5fpHwuWYWsmvhrAcEe03hsRKk5m6+0l7vMgFrMUIwlbcQMMJwLG3ZvbYg91rH9eWrvN3fIIL93rseSUxPUgmNvEc9oZFQpmvFAlGWBoVezcT4G/t7dnkzE2W+G4+Ia9YLKReODnzPLIdXLJOddqyapwPDIxrll63xTpzGh42JPdHTWl2SVTGyoYdcjGX/L/q8mKf81Og/2B9QeShl8+yTEhPtW3CveBxwf+SN+N+r1yTYdZevwqmwkWSQTx0Ju63aezxiMkpHzd+O7OTLDnDifcIYxS0gyNox5ZE2kfze2vJ52GPm8ekPf49uA3pX8/eW+ujn6euurA2ylptS9Wj4GrLufhH2xfYv8+3CUNGKvZa9WKf5aToavTjz0Agx5/il59CLH/4l7uu70VZ5jO9XlMVOHczSeD+gCaZVquHwwZXiQ/H8GX5+7u8iAf8N2DDDUQY6nK0r9BU5NdHg=
+   eJy9lbtvFDEQxh1y+4iyFBSEcKlI0L3IXSSk/AG0dJFCR5+AKKloAPFOyAuQoEFKRUuRcKEHgU4gorR0gAIFzxwPQcd8skc767MvqxAx0ifvetczvxnPepuBUs0cWoqUutbvV8s8H0n8+hW65+H/Iz37RPpM+hLmY8BaF4OL42ifnn+wR6mpHjfDDVo/Q5ol3Yz8tfhOfLejVH/ofpTGBRpPxzrWEZW1uhnBwGbXA77LtL5CqpJqcff9mCFfs6SrpJ+hzh8siIV7GDhOmuuze4nd4nIx5BUYKrSmmmQZfoQ6T8xx3RH3t1U31p3o3xie0ZrnhmFsOMvAHCzki3e2s0aX2rPOFbRe96b+lUrrcIu0r7dTyPc6vTdZ6s4AfwtWH44P6bG/plRCmqdYjSi7BoZ+PBXrnnSpHvmfScFf3VOLMsWv1NJ8j9EePOnR8ZEf5jaLSr136ENRP79E+Vw28lkpcdcCgq3ReHxAqelY5yXt5S4zoBaTlO9ipMUMMJwLG6a3NkSPtQzTU3O/uUMG+b1zPRatmqAWHHuLeAYDrWqfHg8GWRYY9moqzsfA37u9J6Nx9pvhuLhGvSAwwPg5sxxWnUxy3rZSkgoMj0yceVPnuSiNCZ0I07Utqz8kq2RiQw3bDsn4W+Z/NUb5r9J5cMCjZiFlcPWJjwn3jbhT3AccH/kjfjvo9Mk2EWTr8GpYS7JIJo6F3NbNPJ8xGCUj54/4S4dSH3aOzDAtziecYczik4wNYx5ZE+nfji2v8c7jQpYLNXlD3+Nbj94V3fvbtPywfxlP1gP2cH+W825ZqXvlfAxYdz9x11Tat8Ddh4OkAXMte2WF4q/mZPhqxcNegCHPPyWPXuT4P/Gerlv7Ks+xnerKkK7DeRoveHSRtFLQe8sMy8n/Z3Dtc3sXGfBv2I5B9jiPZ0aU+guG2HZ/
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -91,7 +91,7 @@
     <property name="enemy" value="Scarecrow"/>
    </properties>
   </object>
-  <object id="71" template="../obj/enemy.tx" x="155.147" y="290.219">
+  <object id="71" template="../obj/enemy.tx" x="141.814" y="278.886">
    <properties>
     <property name="enemy" value="Bull"/>
    </properties>
@@ -114,6 +114,11 @@
   <object id="77" template="../obj/enemy.tx" x="472.682" y="349.959">
    <properties>
     <property name="enemy" value="Horse"/>
+   </properties>
+  </object>
+  <object id="78" template="../obj/enemy.tx" x="112.333" y="254.667">
+   <properties>
+    <property name="enemy" value="Bull"/>
    </properties>
   </object>
  </objectgroup>

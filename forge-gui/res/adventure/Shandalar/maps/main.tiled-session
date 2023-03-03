@@ -6,10 +6,10 @@
     "activeFile": "map/scarecrow_farm.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
+        "tileset",
         "map/main_story",
-        "obj",
         "map",
-        "tileset"
+        "obj"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -2480,43 +2480,49 @@
             }
         },
         "map/merfolkpool_1.tmx": {
+            "scale": 2,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 239.75,
+                "y": 136.25
+            }
+        },
+        "map/merfolkpool_2.tmx": {
             "scale": 4,
-            "selectedLayer": 4,
+            "selectedLayer": 3,
             "viewCenter": {
                 "x": 239.875,
                 "y": 135.875
             }
         },
-        "map/merfolkpool_2.tmx": {
-            "scale": 1,
-            "selectedLayer": 4,
-            "viewCenter": {
-                "x": 240,
-                "y": 136.5
-            }
-        },
         "map/merfolkpool_3.tmx": {
-            "scale": 1.5,
-            "selectedLayer": 4,
+            "scale": 4,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 240,
-                "y": 136.33333333333334
+                "x": 239.875,
+                "y": 135.875
             }
         },
         "map/merfolkpool_4.tmx": {
-            "scale": 1.5,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 240,
-                "y": 136.33333333333334
+                "x": 239.75,
+                "y": 136.25
             }
         },
         "map/merfolkpool_5.tmx": {
-            "scale": 1,
-            "selectedLayer": 4,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 3,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 240,
-                "y": 136.5
+                "x": 239.83333333333331,
+                "y": 136.16666666666663
             }
         },
         "map/merfolkpool_6.tmx": {
@@ -2868,11 +2874,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 1.5,
+            "scale": 3,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 264.33333333333337,
-                "y": 192.33333333333334
+                "x": 331.8333333333333,
+                "y": 279.5
             }
         },
         "map/skullcave_1.tmx": {
@@ -3130,7 +3136,12 @@
         "map/grove_5.tmx",
         "map/grove_7.tmx",
         "map/grove_8.tmx",
-        "map/grove_9.tmx"
+        "map/grove_9.tmx",
+        "map/merfolkpool_1.tmx",
+        "map/merfolkpool_2.tmx",
+        "map/merfolkpool_3.tmx",
+        "map/merfolkpool_4.tmx",
+        "map/merfolkpool_5.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",

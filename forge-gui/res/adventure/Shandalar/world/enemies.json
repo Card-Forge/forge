@@ -5743,6 +5743,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
+	"flying": true,
 	"scale": 0.5,
 	"life": 14,
 	"rewards": [
@@ -7437,8 +7438,9 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
+	"flying": true,
 	"scale": 0.35,
-	"life": 19,
+	"life": 13,
 	"rewards": [
 		{
 			"type": "deckCard",

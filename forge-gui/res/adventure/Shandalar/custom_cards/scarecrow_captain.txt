@@ -1,6 +1,5 @@
-Name:Scarecrow Captain
+Name:Scarecrow Leader
 ManaCost:no cost
-Colors:Blue
 Types:Enchantment
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigChoose | TriggerDescription$ At the beginning of your end step, conjure a duplicate of a random creature card from your opponent's library into your hand. The duplicate perpetually becomes an Artifact Scarecrow in addition to it's other types. 
 SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.OppCtrl | ChoiceZone$ Library | AtRandom$ True | SubAbility$ DBConjure
