@@ -6,5 +6,5 @@ SVar:DBSac:DB$ Sacrifice | Defined$ Remembered | Amount$ SacX | SacValid$ Creatu
 SVar:DBMana:DB$ Mana | Produced$ B | Amount$ ManaX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Creature
-SVar:ManaX:Remembered$Amount.Twice
+SVar:ManaX:Remembered$Amount/Twice
 Oracle:Your team may sacrifice any number of creatures. For each creature sacrificed this way, you add {B}{B}.

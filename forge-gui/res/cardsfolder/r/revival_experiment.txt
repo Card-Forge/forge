@@ -2,7 +2,7 @@ Name:Revival Experiment
 ManaCost:4 B G
 Types:Sorcery
 A:SP$ RepeatEach | RepeatTypesFrom$ Permanent.YouOwn | TypesFromZone$ Graveyard | RepeatSubAbility$ ChooseCard | SubAbility$ DBReturn | SpellDescription$ For each permanent type, return up to one card of that type from your graveyard to the battlefield.
-SVar:ChooseCard:DB$ ChooseCard | Choices$ Card.ChosenType+YouOwn | ChoiceTitle$ Choose up to one card of this type to return | ChoiceTitleAppend$ ChosenType | RememberChosen$ True
+SVar:ChooseCard:DB$ ChooseCard | Choices$ Card.ChosenType+YouOwn | ChoiceZone$ Graveyard | ChoiceTitle$ Choose up to one card of this type to return | ChoiceTitleAppend$ ChosenType | RememberChosen$ True
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Remembered | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | SubAbility$ DBChange | StackDescription$ SpellDescription | SubAbility$ DBExile | SpellDescription$ You lose 3 life for each card returned this way.
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup | SpellDescription$ Exile CARDNAME.

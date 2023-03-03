@@ -3,6 +3,6 @@ ManaCost:4 B B
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 4 B B | ValidCards$ Creature | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | RememberDestroyed$ True | SubAbility$ DBLoseLife | SpellDescription$ Destroy all creatures target opponent controls. You lose 2 life for each creature destroyed this way.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
-SVar:X:Remembered$Amount.Twice
+SVar:X:Remembered$Amount/Twice
 AI:RemoveDeck:All
 Oracle:Destroy all creatures target opponent controls. You lose 2 life for each creature destroyed this way.

@@ -6,7 +6,7 @@ SVar:DBFluxDiscard:DB$ Discard | Defined$ Player.IsRemembered | AnyNumber$ True 
 SVar:DBFluxDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | SubAbility$ CleanTheFlux
 SVar:CleanTheFlux:DB$ Cleanup | ClearRemembered$ True
 SVar:DBDraw:DB$ Draw | NumCards$ 1
-SVar:X:Remembered$Amount/Minus.1
+SVar:X:Remembered$Amount
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 Oracle:Each player discards any number of cards, then draws that many cards.\nDraw a card.

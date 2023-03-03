@@ -167,7 +167,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 game.getTriggerHandler().runTrigger(TriggerType.ConjureAll, runParams, false);
             }
 
-            if (zone.equals(ZoneType.Library)) {
+            if (zone.equals(ZoneType.Library) && !sa.hasParam("LibraryPosition")) {
                 player.shuffle(sa);
             }
         }
