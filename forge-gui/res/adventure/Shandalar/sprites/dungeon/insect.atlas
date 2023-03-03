@@ -2,9 +2,10 @@ insect.png
 size: 192,160
 format: RGBA8888
 filter: Nearest,Nearest
-repeat: none          
-  xy: 76, 41
-  size: 14, 12     
+repeat: none    
+Avatar      
+  xy: 109, 75
+  size: 11, 10     
 Idle 
   xy: 0, 0
   size: 32, 32  

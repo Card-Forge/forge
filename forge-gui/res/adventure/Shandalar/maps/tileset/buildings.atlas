@@ -583,3 +583,6 @@ red_castle
 final_castle 
   xy: 128, 864
   size: 64, 64       
+farm
+  xy:351, 0
+  size: 33,33

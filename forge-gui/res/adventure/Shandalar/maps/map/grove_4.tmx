@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJydVVFOwzAMtZCQNrW3aKETQoJD7DQ9CExiIMGNuo2O3YhPYjWPPoyTMJ5krbM9v2fHa1oR6WXC+mJ6hj1UIle1yHWwrp7j7P+vaS2JPKPMgH8fcg7B3uuJD2Z5m5gHawu8QE+cQ+wJftamfv2+NzzQhdyPAjfXtdj57m+gd9Y8UizH3ZtaKQ3nAjuS4kYOa1U09Lxy6g7m+zF+djKfkUL78Lj/0p+dCYM5LFaUY/eQ63aZ+i09vy5E3hZpXZiFzuwUny0v+r3NcGL+0HW3FLlfZn5AuEnwstZj1F7aY443yawZ2pvHq367J965W5937ql9Sc3Z21lF6sxT+VYX9s7yboL/JcZ4Zrb/EnI7+Xnpv8+HeuI+5/8CXd5cWbPGvfO13FxHubbBnqvfsVQcOdCpvW4L9xe4oVPzdzGG2qPhRb2n6ufMcGdyjZwN8cw3Tn5H95e+Rx5NDnTjrshxfgEAQ2tW
+   eJydVUFOw0AMtJA4Jb9IIBXiGbwmD4FKFP6UFlL4UY+slR0yGHuXMJLVxLY8Y6+b7UVklAUPV8sz7LERuWlFbpMN7Rpn/39Na0nmmWUF/KeU85bsvV34YJa3y3mwvsILjMQ55Z7gZ23q1/eT4YEu5H5UuLmuxdF3fwO9s+aZYiXu0dSKNGwFdiTiRg5rVXT0vHPqTub9nH8HWc9IoX143H/pz86EwRwWO8qxe8h1h0L9foMuzEJn9pmfLS/6vS/UxfxLuiLcBbys9Zy11/aY412YtUJ783jVb/fEO3fr88492pdozt7OKqLZRvlWF/bO8u6T/zXHeGa2/xpKZ3+59r/nU7twb/m/QJc3V9asce98LTfXUa5DspfmdyyKIwc6tddD5f4CN3Rq/jHHUHs2vKj33PycGe5MrlGyKZ/53skf6P7S78iTyYFu3BUlzi/cwWmy
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -34,7 +34,7 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="62" template="../obj/enemy.tx" x="216.5" y="171.5">
+  <object id="62" template="../obj/enemy.tx" x="194.5" y="111.5">
    <properties>
     <property name="enemy" value="Gorilla"/>
    </properties>
@@ -46,9 +46,9 @@
   </object>
   <object id="64" template="../obj/enemy.tx" x="325" y="71">
    <properties>
-    <property name="enemy" value="Squirrel"/>
+    <property name="enemy" value="Boar"/>
    </properties>
   </object>
-  <object id="65" template="../obj/treasure.tx" x="216" y="158"/>
+  <object id="65" template="../obj/treasure.tx" x="195.5" y="96"/>
  </objectgroup>
 </map>

@@ -2,9 +2,10 @@ gorilla.png
 size: 768,640
 format: RGBA8888
 filter: Nearest,Nearest
-repeat: none          
-  xy: 22, 20
-  size: 24, 28     
+repeat: none
+Avatar          
+  xy: 278, 214
+  size: 22, 19      
 Idle 
   xy: 00, 00
   size: 64, 64  
@@ -49,7 +50,22 @@ Attack
   size: 64, 64 
 Attack 
   xy: 384, 320
-  size: 64, 64     
+  size: 64, 64 
+Attack 
+  xy: 448, 320
+  size: 64, 64 
+Attack 
+  xy: 512, 320
+  size: 64, 64 
+Attack 
+  xy: 576, 320
+  size: 64, 64 
+Attack 
+  xy: 640, 320
+  size: 64, 64 
+Attack 
+  xy: 704, 320
+  size: 64, 64      
 Death 
   xy: 0,512
   size: 64, 64

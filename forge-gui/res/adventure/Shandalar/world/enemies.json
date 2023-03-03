@@ -1231,7 +1231,7 @@
 {
 	"name": "Boar",
 	"sprite": "sprites/dungeon/boar.atlas",
-	"scale": 0.50,
+	"scale": 0.55,
 	"deck": [
 		"decks/boar.json"
 	],
@@ -1240,9 +1240,32 @@
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
-	"life": 25,
+	"life": 13,
 	"rewards": [
 	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 1,
@@ -1256,53 +1279,11 @@
 		{
 			"type": "gold",
 			"probability": 1,
-			"count": 500,
-			"addMaxCount": 1000
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Tendershoot Dryad"
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Slimefoot, Thallid Transplant"
-		},
-				{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Ghave, Guru of Spores"
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Corpsejack Menace"
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Mycoloth"
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Doubling Season"
-		},
-		{
-			"type": "item",
-			"probability": 1,
-			"count": 1,
-			"itemName": "Slimefoot's Slimy Staff"
+			"count": 50,
+			"addMaxCount": 100
 		}
 	],
-	"colors": "BG"
+	"colors": "G"
 },
 {
 	"name": "Boggart",
@@ -1340,6 +1321,63 @@
 		}
 	],
 	"colors": "GR"
+},
+{
+	"name": "Bull",
+	"sprite": "sprites/dungeon/bull.atlas",
+	"scale": 0.65,
+	"deck": [
+		"decks/bull.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.8,
+	"speed": 31,
+	"life": 13,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		}
+	],
+	"colors": "G"
 },
 {
 	"name": "Cat",
@@ -3962,7 +4000,7 @@
 {
 	"name": "Gorilla",
 	"sprite": "sprites/dungeon/gorilla.atlas",
-	"scale": 0.75,
+	"scale": 0.55,
 	"deck": [
 		"decks/gorilla.dck"
 	],
@@ -5437,6 +5475,44 @@
 	"colors": "BU"
 },
 {
+	"name": "Horse",
+	"sprite": "sprites/dungeon/horse.atlas",
+	"deck": [
+		"decks/horse.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"scale": 0.5,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
+		}
+	],
+	"colors": "GW"
+},
+{
 	"name": "Horseman",
 	"sprite": "sprites/cavalier_2.atlas",
 	"deck": [
@@ -5657,6 +5733,44 @@
 		}
 	],
 	"colors": "U"
+},
+{
+	"name": "Insect",
+	"sprite": "sprites/dungeon/insect.atlas",
+	"deck": [
+		"decks/insect.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"scale": 0.5,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
+		}
+	],
+	"colors": "WBG"
 },
 {
 	"name": "Immersturm Demon",
@@ -7323,6 +7437,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
+	"scale": 0.35,
 	"life": 19,
 	"rewards": [
 		{
@@ -7389,14 +7504,15 @@
 },
 {
 	"name": "Scarecrow Leader",
-	"sprite": "sprites/dungeon/scarecrowleader.atlas",
+	"sprite": "sprites/dungeon/scarecrowcaptain.atlas",
 	"deck": [
-		"decks/scarecrowleader.dck"
+		"decks/scarecrowcaptain.dck"
 	],
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
-	"life": 19,
+	"scale": 0.40,
+	"life": 30,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -7909,7 +8025,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
-	"scale": 0.5,
+	"scale": 0.7,
 	"life": 13,
 	"rewards": [
 		{
