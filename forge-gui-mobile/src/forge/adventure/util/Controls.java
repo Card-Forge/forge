@@ -407,9 +407,10 @@ public class Controls {
     {
         if(textraFont==null)
         {
-            textraFont=new Font(getSkin().getFont("default"), 0f, 1.5f, 0f, 0f);
-            textraFont.addAtlas(Config.instance().getAtlas(Paths.ITEMS_ATLAS));
-            textraFont.addAtlas(Config.instance().getAtlas(Paths.PIXELMANA_ATLAS));
+            textraFont=new Font(getSkin().getFont("default"), 0f, 2f, 0f, 0f);
+            textraFont.integerPosition = false;
+            textraFont.addAtlas(Config.instance().getAtlas(Paths.ITEMS_ATLAS), 0, 0, 0);
+            textraFont.addAtlas(Config.instance().getAtlas(Paths.PIXELMANA_ATLAS), 0, -12f, 0);
         }
         return textraFont;
     }
