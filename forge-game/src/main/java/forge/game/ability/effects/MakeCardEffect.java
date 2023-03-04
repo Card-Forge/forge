@@ -92,7 +92,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
             }
 
             final ZoneType zone = ZoneType.smartValueOf(sa.getParamOrDefault("Zone", "Library"));
-            final int amount = sa.hasParam("Amount") ?
+            	final int amount = sa.hasParam("Amount") ?
             AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa) : 1;
             CardCollection cards = new CardCollection();
 
