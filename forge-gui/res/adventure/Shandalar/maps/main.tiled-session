@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/maze_3.tmx",
+    "activeFile": "map/grove_4.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "tileset",
-        "obj",
+        "map",
         "map/main_story",
-        "map"
+        "obj",
+        "tileset"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -35,10 +35,10 @@
         },
         "map/aerie_1.tmx": {
             "scale": 3,
-            "selectedLayer": -1,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 232.16666666666666,
-                "y": 167
+                "x": 239.83333333333331,
+                "y": 136.16666666666663
             }
         },
         "map/aerie_1B.tmx": {
@@ -1513,7 +1513,7 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240,
+                "x": 240.33333333333337,
                 "y": 136.33333333333334
             }
         },
@@ -1553,7 +1553,7 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 239.66666666666663,
+                "x": 240.33333333333337,
                 "y": 136.33333333333334
             }
         },
@@ -1741,7 +1741,7 @@
                 4
             ],
             "scale": 2.0504166666666666,
-            "selectedLayer": 3,
+            "selectedLayer": 4,
             "viewCenter": {
                 "x": 271.89595610648246,
                 "y": 215.8097947571632
@@ -1797,8 +1797,8 @@
             "scale": 1.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 255.99999999999997,
-                "y": 104
+                "x": 240.33333333333337,
+                "y": 136.33333333333334
             }
         },
         "map/grove_10.tmx": {
@@ -1925,56 +1925,59 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240,
-                "y": 136
+                "x": 239.75,
+                "y": 136.25
             }
         },
         "map/grove_3.tmx": {
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 240,
-                "y": 136
+                "x": 239.75,
+                "y": 136.25
             }
         },
         "map/grove_4.tmx": {
-            "scale": 1.5,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 239.66666666666663,
-                "y": 136.33333333333334
+                "x": 239.75,
+                "y": 136.25
             }
         },
         "map/grove_5.tmx": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240,
-                "y": 136
+                "x": 239.75,
+                "y": 136.25
             }
         },
         "map/grove_6.tmx": {
             "scale": 2,
-            "selectedLayer": 0,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 240,
-                "y": 136
+                "x": 239.75,
+                "y": 136.25
             }
         },
         "map/grove_7.tmx": {
             "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 240,
-                "y": 136
+                "x": 239.75,
+                "y": 136.25
             }
         },
         "map/grove_8.tmx": {
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 239.99999999999997,
-                "y": 136
+                "x": 240.33333333333337,
+                "y": 136.33333333333334
             }
         },
         "map/grove_9.tmx": {
@@ -1984,8 +1987,8 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 245.66666666666666,
-                "y": 115
+                "x": 240.33333333333337,
+                "y": 136.33333333333334
             }
         },
         "map/island_town.tmx": {
@@ -2025,7 +2028,7 @@
             "scale": 2.177083333333333,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 239.54066985645935,
+                "x": 239.54066985645937,
                 "y": 136.19138755980865
             }
         },
@@ -2456,8 +2459,8 @@
             "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 232,
-                "y": 137
+                "x": 240.5,
+                "y": 136.5
             }
         },
         "map/maze_3.tmx": {
@@ -2477,43 +2480,49 @@
             }
         },
         "map/merfolkpool_1.tmx": {
+            "scale": 2,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 239.75,
+                "y": 136.25
+            }
+        },
+        "map/merfolkpool_2.tmx": {
             "scale": 4,
-            "selectedLayer": 4,
+            "selectedLayer": 3,
             "viewCenter": {
                 "x": 239.875,
                 "y": 135.875
             }
         },
-        "map/merfolkpool_2.tmx": {
-            "scale": 1,
-            "selectedLayer": 4,
-            "viewCenter": {
-                "x": 240,
-                "y": 136.5
-            }
-        },
         "map/merfolkpool_3.tmx": {
-            "scale": 1.5,
-            "selectedLayer": 4,
+            "scale": 4,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 240,
-                "y": 136.33333333333334
+                "x": 239.875,
+                "y": 135.875
             }
         },
         "map/merfolkpool_4.tmx": {
-            "scale": 1.5,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 240,
-                "y": 136.33333333333334
+                "x": 239.75,
+                "y": 136.25
             }
         },
         "map/merfolkpool_5.tmx": {
-            "scale": 1,
-            "selectedLayer": 4,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 3,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 240,
-                "y": 136.5
+                "x": 239.83333333333331,
+                "y": 136.16666666666663
             }
         },
         "map/merfolkpool_6.tmx": {
@@ -2596,10 +2605,10 @@
                 4
             ],
             "scale": 1.5333593749999999,
-            "selectedLayer": 3,
+            "selectedLayer": 4,
             "viewCenter": {
                 "x": 319.88587150354107,
-                "y": 208.36602639221485
+                "y": 209.01818922912318
             }
         },
         "map/nest_blue_1.tmx": {
@@ -2861,6 +2870,17 @@
                 "y": 135.5
             }
         },
+        "map/scarecrow_farm.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 3,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 263.8333333333333,
+                "y": 191.83333333333331
+            }
+        },
         "map/skullcave_1.tmx": {
             "scale": 2,
             "selectedLayer": 0,
@@ -2919,7 +2939,7 @@
             "scale": 1.6011458333333333,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 239.5159716348969,
+                "x": 240.1405243640622,
                 "y": 136.46477132262055
             }
         },
@@ -2952,7 +2972,7 @@
         },
         "map/teferi.tmx": {
             "scale": 3,
-            "selectedLayer": 3,
+            "selectedLayer": 4,
             "viewCenter": {
                 "x": 239.83333333333331,
                 "y": 136.16666666666663
@@ -2982,7 +3002,7 @@
         },
         "map/vampirecastle_2.tmx": {
             "scale": 4,
-            "selectedLayer": 2,
+            "selectedLayer": 3,
             "viewCenter": {
                 "x": 239.875,
                 "y": 135.875
@@ -3074,7 +3094,7 @@
         },
         "tileset/main.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1.5,
+            "scaleInDock": 1,
             "scaleInEditor": 1
         }
     },
@@ -3089,13 +3109,6 @@
     "map.width": 90,
     "openFiles": [
         "map/jacehold.tmx",
-        "map/fort_6.tmx",
-        "map/fort_5.tmx",
-        "map/fort_4.tmx",
-        "map/fort_3.tmx",
-        "map/factory_1.tmx",
-        "map/factory_2.tmx",
-        "map/factory_3.tmx",
         "map/forest_town_generic.tmx",
         "map/fort_9.tmx",
         "map/kiora_island.tmx",
@@ -3104,11 +3117,6 @@
         "map/lavaforge_2.tmx",
         "map/garruk.tmx",
         "map/grove_4.tmx",
-        "map/slime_hive.tmx",
-        "map/slimefoot_boss.tmx",
-        "map/nahiri.tmx",
-        "map/cave_14.tmx",
-        "map/teferi.tmx",
         "map/swamp_town.tmx",
         "tileset/main.tsx",
         "map/snowabbey_2.tmx",
@@ -3116,23 +3124,40 @@
         "map/vampirecastle_2.tmx",
         "map/catlair_1.tmx",
         "map/cave_13.tmx",
-        "map/maze_3.tmx"
+        "map/maze_3.tmx",
+        "map/maze_2.tmx",
+        "map/grove_6.tmx",
+        "map/scarecrow_farm.tmx",
+        "map/aerie_1.tmx",
+        "map/evilgrove_1.tmx",
+        "map/grove_1.tmx",
+        "map/grove_2.tmx",
+        "map/grove_3.tmx",
+        "map/grove_5.tmx",
+        "map/grove_7.tmx",
+        "map/grove_8.tmx",
+        "map/grove_9.tmx",
+        "map/merfolkpool_1.tmx",
+        "map/merfolkpool_2.tmx",
+        "map/merfolkpool_3.tmx",
+        "map/merfolkpool_4.tmx",
+        "map/merfolkpool_5.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
     "recentFiles": [
         "map/jacehold.tmx",
-        "map/fort_6.tmx",
-        "map/fort_5.tmx",
-        "map/fort_4.tmx",
-        "map/fort_3.tmx",
-        "map/factory_1.tmx",
-        "map/factory_2.tmx",
-        "map/factory_3.tmx",
         "map/forest_town_generic.tmx",
         "map/fort_9.tmx",
         "map/kiora_island.tmx",
-        "map/kobold_mine.tmx"
+        "map/kobold_mine.tmx",
+        "map/lavaforge_1.tmx",
+        "map/lavaforge_2.tmx",
+        "map/garruk.tmx",
+        "map/merfolkpool_5.tmx",
+        "map/merfolkpool_4.tmx",
+        "map/merfolkpool_3.tmx",
+        "map/merfolkpool_2.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true

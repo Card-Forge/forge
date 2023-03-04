@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="55">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="55">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJzFlVEOgyAQBfmHnoB4sfYspeeyxbvVTd30uT6pxKKTEAGzDLAKzq1zuzj3DJ9yhTr2b3lXg8S/wrcdx3o3teWZ/Pyd0kFd6MOyjyHjWSfz9mHbuu7+t5f59pJPcAql/LZyCmv5belUmHcY+x5+2f9P2F4fsd5I9lra8SRva5j3iPyyf1jOmlbuDOcZo+SWcy5Xzkti0obzUbFudeq8MuQpmrtHYzGmhmG6a5Kf75MW9OJ6cG61ThzDFuti32gpl5Y3seJGkA==
-  </data>
- </layer>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzr42Rg6BuE+BgrBNPLvgXsEAyzF8QmVS+5enBhbP6HuQ0dU8tObHbjspMW9pKCB8LOgbQXn92j9o7aSwt7ibGbXPeRW3ZQWt7QslzHZj8peumFARMCPzI=
+   eJzr42Rg6BuE+BgrBNPLvgXsEAyzF8QmVS+5etAxDGDzP0hMjhmCSbUXn50grMgKwbBwQLYTXZ5W9pIiT4mdg8FeXHbjkyPFXmR7SMFD1V5SwnKg7cWlj1b2EsKUpGlS3EesnfjsprS8oWW5js1+UvTSCwMAMOsgoA==
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJy9VUFOw0AMNJRDWNRXVKB+hyMUOHNpTpQrN4R4Ah+Bz3BGabmHFiHhUddi4uxGyYGMtIq06/HYjr1bFSKrqUgZRO702xdnal8p9/ZE5LPozwNMx/jPx83zpfpeTESudD3q2flh28eT7n843ftp038KyNPin4e/fejd6HrT9Rq1zU9Jdoh5TrVCrNeRCw7bAqtMLMb5mjT367hv/jwWdG7cH7JbF/v/sQxprtdL4f1gr22x53isi3rgX26Kdj9899BkbZ+fR021QR9A1xaAPuib61BwzjYD3HdDch2COtEPFdX5v3QBztn391i6PEeIYSxdgGdpTF1gFrW3enbZoX2hZy9H3TYpPOi87RzHZtmQ0gYPeuCiPtuoz6sLPlebY8zSjOrN2rlYPSyWXLxeF/c5tPGelKHtZ5e41z02cRbRp1wLrwfAl71d0M29V7m3Yx3vnNPQfgM9zDfs7c3D//oFRbpnUw==
+   eJy9lbFOAzEMhg0B6RrUh0AVqBM8CyO0MLP0JsrKhhCP0BeBl2FG17IxlBYh4V8Xqz4nOQ6Q+ktW1ST2Z+fipCqIpn2i0hPd8G9XHfP6in2vD4jeiu5+kHDE/7HXnJ9w7JEjGrPd89zZbhzjgcdfDfe234yfEuqU/Id+Mw7eFdsz21Ngp+Ig56HaK+R6GXzhU/rm+mkmF/H5cM3xJf8/3K9t7GK/kZoX3y+1bl7U32Pi076Wl9LLTs2W3HN+mov9wLdcFPF5+OzA1Oz3orZcrku32RucA3DFIJyDrrVayd7mpGuWHtDn7je1prg5tq5ZVKl9/itXs3PSNdvzvS2u7iPksC0upHvpP9yfZLnQILBXPHfRwj7nudle+5qU7rjf1sZHelmUYsMPPPhif07YToNhHNYmW6v0MXppoPZbs3O5Wq1czNf5Wi7uc7DxnpQ+jrNO3OtWi9CLOKfil+JBiCVvF7i59yr3dszDnXPk4zfQSmJjvbx5+F7footnNw==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="17">
@@ -25,7 +20,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzFlWsOwjAIgEl7Qh+LeiinyfSaWo1zf4VEEkTY6mMrCVlKGR/QBABeZRUAthHghN9dfNc9asK7i1Lyp7ta+JHosxbirVEr1DtqF2w/GeusmCQz4z/LxkzmUYwDxjg6+Vl8r5YhbivyzuF9Ih6TpIn5Nf6T23c3Nntq7hS5lOKWZGtGqXrneN6MzCbGAnUpOHXGvPmVVz3n0tWor6/ub98iiTnozVOvbmJafeJc2S5zYzvttVsY7ifvJK6bYyWnT9qu+5rDlHE6kT/vY4vbCi75671svSfLA3PgUBw=
+   eJzFlW0OgjAMhud2D0/jBfwg6qEEE/WaBozIX9tsTcrSjmEEmjRkpdvztoTVmL4drTEXZ8wTnpXzXthxjnuuzp9Xuv46NuSdwr4PeGflPG5b6z2OSXkak3hY5x20PRR9Q1wtT7IW4k1gpnhr5z31frPKY6LdXH6NYy3FzenVVOy5uXNoWYq7JDvnP5+Du4P1eWI2MvbgB8YpE3fnv3hFuJdeQn2pun/9FjW7B7XZoNWNTKlPpJXiXBvFca697XA/aSZR3XRWrfQpjsd9zWHyczqmn+axxG0ZF/Npf6Po5PYFQiZGyQ==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -42,12 +37,12 @@
    </properties>
   </object>
   <object id="51" template="../obj/treasure.tx" x="304.492" y="32.777"/>
-  <object id="53" template="../obj/enemy.tx" x="189.233" y="61.6296">
+  <object id="53" template="../obj/enemy.tx" x="220.733" y="51.6296">
    <properties>
     <property name="enemy" value="Merfolk warrior"/>
    </properties>
   </object>
-  <object id="54" template="../obj/enemy.tx" x="303" y="57.6667">
+  <object id="54" template="../obj/enemy.tx" x="283.5" y="37.1667">
    <properties>
     <property name="enemy" value="Merfolk Avatar"/>
    </properties>

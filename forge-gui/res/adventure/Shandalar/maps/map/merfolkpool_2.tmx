@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="56">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="56">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJy1lFEOgyAQRPkXT0C8WD1L7bna4t3aTbpxXGcBSzsJH4Lw3NnBEI6axxAecT8uMOete/Ot0v1MCc6c4n7+SfbczXslnse0srWKrkMIy3vchu25xC3VeEbJeJGdM+fxN0ypK5MeeP2dGvwvKcVjlpDr9beHqVwmPJcx1rhl4F9c5rX0luW/l4v1JOK1PHt7a9IsMWGPPW5NXnZKdx197OG2Su8k9o55In2oZUu54iv7B+OwvNr/z2NrD2WN+cWk/8rWO2rZmBtZyyYrWLvuLWWtxl4+36s+sVyy2vXbvhWy0a8a94xeNEZbgw==
-  </data>
- </layer>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzr42Rg6BuE+BgrBNPLvgXsEAyzF8QmVe8DBtL14MPY/A9zGzIG2UuM3cTYic1ubHbCwona9hLjLmLspaadpIQzLe3FZzct7CXGz6P2Dr34beNEtZPSNI1LDbodyLiNgnKSkB589pJbRhOrB91+Yv1JbwwA6nRIuw==
+   eJzr42Rg6BuE+BgrBNPLvgXsEAyzF8QmVe8DBtL14MPY/A9zGzIG2UuM3cTYic1ubHbCwona9hLjLmLspaadpIQzLe3FZzct7CXGz6P2Dr34beNEtZPSNA1To8iKwOj+QsdtFJSThPTgs5fcMppYPej2E+tPemMAaWRHOA==
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJy9lbFOw0AMhl2VIQnqAzBXIF6JFjKzNBPpyoYQj8CLlJfpXKVlh5RW4n7VVhzHh1Ip4pdOke7O/myfL1clROWEqMiInsL3PyScKrAfL4ne0vb6IsQyHxPdh/GSdu1jWk7a/q1PqODvTfjeZs06eHkYH2GsmC1+iow60gyJ9TDu7isjNX1g3rex+eL5nH1azdU6bI+Guw01/UyafK2t5Xlaj05sid2zW5n4UA+c5Y75Wj89mJqdR2oDXYW5vcr5NT1xZUDog7659tWRfelao4fQw7rvzsn1XK7tr0rVeWiuPl/d6/YuDM2FvFqXJoahudJXlgvpuzQUF7z3i4bpcaEps+uwNvuDfcf+7B6ZlwHeUtXyedTlyl0WeWzYiT/Up3Y4Xj6xXOUeI7apqrdmg7l3YvWEGLx4PS7eAbA3Sbu/a3VG3hugteO7KH0qdfBqAF8b3g9uLIfY27Hlf8618hOT+MZ+efNwXr+7hW38
+   eJy9lbFOw0AMhl2VIQnqAzBXIAZeCAqdWchEurIhxCP0RcrLMFdp2SGBStyv2Irj+FAqRfySFel858/n8+XKhKiYEeUZ0WP4/oeEUwb2/SnRa9r1P4RcFlOi22DPaX99TKtZN76NCeX8vQjfy6z1g7cM9hZsw2yJk2fUk2ZIrj/T/rwiUtM75n2ZNZ88vuSYVgvlx9qD4e5CTT+Sdr92reV5ep80bMndW7cx+aEeOMs987W+BzA1+yprzMv1LIzVas8vacMVg9AHQ/c6VAeOpWuNHkIP6747Zq/Hcm1/larOY3P1+epet3dhbC7k1bowOYzNlb6yXEjfpbG44K1PWqbHhebMroLv5g/2Ncezc2RcDLyVquXTpM+Vuyzy2Fgn8VCfyvhrp1+1rE/uMXKbq3prNpi1k6sn5Obl63HxDoC9Tbr9Xakz8t4ArT3fRelTqbdXA8Ta8nxwY3uIvR07/uecqzgxSWzMlzcP5/UL2zxrzA==
   </data>
  </layer>
  <layer id="3" name="Mountains" width="30" height="17">
@@ -25,7 +20,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy9leEOgkAIx9ndE1o566Gytuo1y1zm12CLDRGuy6ls7PRk/O7PTQAYWhUAjhHgjuspjv2M3uC3p3KKp2+1iCPT72RFGPL26CX6G70P4BrneiimZ4WTqxI8ynHFHLdEHs0nppdbcje47kRcJ86dw/vHmMn31wruJeZrnMrtjPtL1Wgu9pLaUly56ucluZqzBtfjrKV5babFoX/5sDCbGFvVM+qY7nFz8MpvX2oNfSndU++C5wfPGEufp5uYVp34rLwvz8b71BdfP2YGGc8k1s25GqdOel/XNYcp8/Rh3M8tbie4FK/nsnWfbB8wBVhJ
+   eJy9lVEOgjAMhpvtxXAY41VQCHoo0US9piIRebVNbCxlnWiAJs1gNP34u6wF6FrhAPYe4Irrwff9iF7ht7tyiqdvpYgj0+9kqevytug5+hO9dWAa57oppmWpkasQPMpxxhyXSB7NJ6aVW3LXuGYirhH/PYT3izGTz68W3JMfrvFfbhM4v1iNxmJPqS3Glat+npKrOXNwLc5cmudmhjh0l3cTs4mxUT2j9PEeNwYvf/elOqAvplvWaJngXFh8fJXYXJ4fPGNC+izdxAzVSerJ1D3hfeqLjy8zg4xnEuvmXJVRJ72v6zqEKfO0rt/PQ9xGcClez+XQebK9AL0kW6M=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -35,17 +30,17 @@
    </properties>
   </object>
   <object id="48" template="../obj/treasure.tx" x="240.729" y="64.3787"/>
-  <object id="50" template="../obj/enemy.tx" x="233.373" y="216.523">
+  <object id="50" template="../obj/enemy.tx" x="215.123" y="212.273">
    <properties>
     <property name="enemy" value="Merfolk"/>
    </properties>
   </object>
-  <object id="53" template="../obj/enemy.tx" x="291.96" y="66.0084">
+  <object id="53" template="../obj/enemy.tx" x="249.96" y="79.2584">
    <properties>
     <property name="enemy" value="Merfolk warrior"/>
    </properties>
   </object>
-  <object id="54" template="../obj/enemy.tx" x="221" y="147.167">
+  <object id="54" template="../obj/enemy.tx" x="129.5" y="90.917">
    <properties>
     <property name="enemy" value="Merfolk Avatar"/>
    </properties>

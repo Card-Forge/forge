@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="33" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="79">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="spriteLayer" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="11" name="collision" width="33" height="24">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAfCGSlo2V43EANd4jyI7ADH/luoTYg1S3UcgOyvddwmCnOghtTC8DMwuWGgQDU9N8oGAXkAMNBkB8GgxtGASooYIfgwQBgbsGFR8EoGAVDCwAAAuYKwA==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="33" height="24">
+  <data encoding="base64" compression="zlib">
+   eJzVkzEKwzAMRZVSAqU5QrderWuPkLXn6D2y5FLdiweDEFL6JdmYBv5iW/rPP/J6JloB7eTXZ8aE+KMc/Azq72Gove9LLgOLvXpYvui/2G5+f9n/V/bPi13LGawsvAzaWcnA+8qa1xVjKNxa5pF3oNVEctDWW71LhF96yXeWYZB7cm40z+jdLQ5vXf2yPKVOY+D9rDwqB68hY+8x9cnhiIvE2vsUY+Br2n6rWeiRQ5Shx91QlXnjDEfzh/RqkUP2PlmGTI+sRs8j18gcevp7+o7O4J/0BfndS/U=
+  </data>
+ </layer>
+ <layer id="8" name="Tilelaag 3" width="33" height="24">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOLGMlUiENATXcsIyJcjeAsDIP5W4Z6iCXkzT1X9kG1g3o9n9RxI2JAdtYERgGCjUZGNaKEu8mUt0AswtE32VGiGcrMzBMJNLd1AIwN2xDy5ftZJjVLM3A0IIDE3IDCHuJQfi67AwM/WwIfIadtm5ATgOwcEjnQMiD0gMyyKKBG7CBQ4wItgobglZBygO43EItN8BACBsEg4AeBwTjAtjclEVAHhm0ceMWR5YLRnITKW6hFGBzny4HIlzwhQ0lYDIBNyADUDmpSyW3gMwC4Slo7iDkBmSQR0IZj81cmBtgGAZ2sEBoKSC9iwW//YTcAEtf6OmMEAhlxc7G5gZCgFw3fAHaK43H/+huANHvB6g9iOwGUtLFKBgYAADMGFns
+  </data>
+ </layer>
+ <layer id="7" name="water" width="33" height="24">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9lbtvE0EQxjfE57soR0FBEuyKBPlF7EhI/AG0dEiho09AlFQ0gHgnJHEgEjRIVLQUCYYeBLJARGnpAAUKnjEPQcd82h3d3HrXPoWIkT7t3d7tzG9m5/ZagVKtDFoOlbo67FfbPJ+I/fqVd8/D/0d69on0mfQln40Ba10MLo5DQ3r+/i6lZgbcDNdp/RxpnnQj9NfiO/HdChP9oftJGpdoPBXpWAdV2upmBAObXQ/4LtP6CqlKqkW992OOfM2TrpB+5nX+YEEs3MPAccJcn9lN7BaXiyGrwFChNdU4zfAjr/PEHNcdcX9bdWOthP/G8IzWPDcMU+NpBuZgIV+8088aPWrPOpvTej2Y+FcqqcNN0p7BbiHfa/TedKk3A/wtWX14uKjH4ZpSMWmRYjXC9BoY+vFkpHvSpXrofyYFf3VPLcoUv1JL8j1Ce/BkQMdHfpjbLCj13qEPBf38IuVzychnpdhdCwj2iMajI0rNRjovaS93mAG1mKZ8m6EWM8BwLmyY3toQPdY2TE/N/eY2GeT3zvVoWjVBLTj2FvGMBVrVIT3uC9IsMOzVTJSNgb93e08mo/Q3w3FxjXpBYIDxc2Y5oLqZ5LxtpTgRGB6aOIumzgthEhM6nk/Wtq3+kKySiQ017Dgk42+Z/9UU5b9G58GoR61cwuDqEx8T7htRt7gPOD7yR/xO0O2T7ViQrsOrcS3JIpk4FnJbN/N8xmCUjJw/4i/vT3zYOTLDrDifcIYxi08yNox5ZE2kfzu2vMY7j3NpLtTkDX2Pbz16V3Dvb8vyw/5lPFkP2IO9ac7bZaXulLMxYN3d2F1Tad8Cdx+OkUbMteyVVYq/lpHhqxUPewGGLP+ULHrR5//UJK3mdI3XrX2V59h2dbmo63COxvMeXSjqeNhbZrgX/38G1z53dpAB/4Z+DLLHeTw9odRfR6Z21g==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="289.953" y="376.879">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="447.956" y="56.4352"/>
+  <object id="54" template="../obj/enemy.tx" x="463.371" y="300.481">
+   <properties>
+    <property name="enemy" value="Horse"/>
+   </properties>
+  </object>
+  <object id="55" template="../obj/enemy.tx" x="456.602" y="169.35">
+   <properties>
+    <property name="enemy" value="Boar"/>
+   </properties>
+  </object>
+  <object id="56" template="../obj/enemy.tx" x="190.83" y="157.846">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Scarecrow Leader&quot;]
+}</property>
+    <property name="enemy" value="Scarecrow Leader"/>
+   </properties>
+  </object>
+  <object id="62" template="../obj/enemy.tx" x="353.762" y="308.389">
+   <properties>
+    <property name="enemy" value="Scarecrow"/>
+   </properties>
+  </object>
+  <object id="63" template="../obj/enemy.tx" x="354.896" y="52.7154">
+   <properties>
+    <property name="enemy" value="Squirrel"/>
+   </properties>
+  </object>
+  <object id="64" template="../obj/treasure.tx" x="57.7799" y="374.217"/>
+  <object id="65" template="../obj/enemy.tx" x="254.374" y="297.137">
+   <properties>
+    <property name="enemy" value="Chicken"/>
+   </properties>
+  </object>
+  <object id="66" template="../obj/enemy.tx" x="357" y="366.5">
+   <properties>
+    <property name="enemy" value="Scarecrow"/>
+   </properties>
+  </object>
+  <object id="67" template="../obj/enemy.tx" x="314.5" y="155">
+   <properties>
+    <property name="enemy" value="Bear"/>
+   </properties>
+  </object>
+  <object id="68" template="../obj/enemy.tx" x="238" y="307.5">
+   <properties>
+    <property name="enemy" value="Chicken"/>
+   </properties>
+  </object>
+  <object id="69" template="../obj/enemy.tx" x="78.5" y="364.75">
+   <properties>
+    <property name="enemy" value="Scarecrow"/>
+   </properties>
+  </object>
+  <object id="71" template="../obj/enemy.tx" x="141.814" y="278.886">
+   <properties>
+    <property name="enemy" value="Bull"/>
+   </properties>
+  </object>
+  <object id="74" template="../obj/enemy.tx" x="200" y="365">
+   <properties>
+    <property name="enemy" value="Scarecrow"/>
+   </properties>
+  </object>
+  <object id="75" template="../obj/enemy.tx" x="242.5" y="225.5">
+   <properties>
+    <property name="enemy" value="Scarecrow"/>
+   </properties>
+  </object>
+  <object id="76" template="../obj/enemy.tx" x="260.5" y="98.5">
+   <properties>
+    <property name="enemy" value="Scarecrow"/>
+   </properties>
+  </object>
+  <object id="77" template="../obj/enemy.tx" x="472.682" y="349.959">
+   <properties>
+    <property name="enemy" value="Horse"/>
+   </properties>
+  </object>
+  <object id="78" template="../obj/enemy.tx" x="112.333" y="254.667">
+   <properties>
+    <property name="enemy" value="Bull"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

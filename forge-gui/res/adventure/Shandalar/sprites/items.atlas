@@ -351,3 +351,13 @@ BlueRobes
 Armory
   xy: 129,512
   size: 14, 17
+HorseHoove
+  xy: 80,496
+  size: 17, 16
+PirateFlag
+  xy: 0,495
+  size: 18, 17
+Scyte
+  xy: 288,977
+  size: 18, 14
+	
