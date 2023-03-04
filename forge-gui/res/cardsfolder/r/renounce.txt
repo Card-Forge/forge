@@ -5,6 +5,6 @@ A:SP$ Sacrifice | Cost$ 1 W | Defined$ You | Amount$ SacX | SacValid$ Permanent 
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ LifeX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Permanent.YouCtrl
-SVar:LifeX:Remembered$Amount.Twice
+SVar:LifeX:Remembered$Amount/Twice
 AI:RemoveDeck:All
 Oracle:Sacrifice any number of permanents. You gain 2 life for each permanent sacrificed this way.

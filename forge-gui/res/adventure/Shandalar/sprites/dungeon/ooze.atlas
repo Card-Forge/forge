@@ -1,93 +1,90 @@
 ooze.png
-size: 256,160
+size: 242, 106
 format: RGBA8888
-filter: Nearest,Nearest
-repeat: none          
+filter: Nearest, Nearest
+repeat: none
 Avatar
-  xy: 9, 151
-  size: 15, 9     
-Idle 
-  xy: 0, 0
-  size: 32, 32  
-Idle 
-  xy: 32, 0
-  size: 32, 32  
-Idle 
-  xy: 64, 0
-  size: 32, 32  
-Idle 
-  xy: 96, 0
+  xy: 36, 4
   size: 32, 32
-Idle 
-  xy: 0, 96
-  size: 32, 32  
-Idle 
-  xy: 32, 96
-  size: 32, 32  
-Idle 
-  xy: 64, 96
-  size: 32, 32  
-Idle 
-  xy: 96, 96
-  size: 32, 32     
-Walk 
-  xy: 0, 32
-  size: 32, 32  
-Walk
-  xy: 32, 32
-  size: 32, 32  
-Walk 
-  xy: 64, 32
-  size: 32, 32  
-Walk 
-  xy: 96, 32
-  size: 32, 32   
-Walk 
-  xy: 128, 32
-  size: 32, 32  
-Walk
-  xy: 160, 32
-  size: 32, 32  
-Walk 
-  xy: 192, 32
-  size: 32, 32  
-Walk 
-  xy: 224, 32
-  size: 32, 32 
-Attack 
-  xy: 0, 64
-  size: 32, 32     
-Attack 
-  xy: 32, 64
-  size: 32, 32  
-Attack 
-  xy: 64, 64
-  size: 32, 32  
-Attack 
-  xy: 96, 64
-  size: 32, 32  
-Attack 
-  xy: 128, 64
-  size: 32, 32  
-Attack 
-  xy: 160, 64
-  size: 32, 32              
-Death 
-  xy: 0, 128
+Idle
+  xy: 172, 4
   size: 32, 32
-Death 
-  xy: 32, 128
-  size: 32, 32      
-Death 
-  xy: 64, 128
-  size: 32, 32      
-Death 
-  xy: 96, 128
-  size: 32, 32      
-Death 
-  xy: 128, 128
-  size: 32, 32      
-Death 
-  xy: 160, 128
-  size: 32, 32      
-
+Idle
+  xy: 2, 4
+  size: 32, 32
+  orig: 32, 32
+Idle
+  xy: 36, 4
+  size: 32, 32
+Idle
+  xy: 172, 4
+  size: 32, 32
+Idle
+  xy: 70, 4
+  size: 32, 32
+Idle
+  xy: 104, 4
+  size: 32, 32
+Idle
+  xy: 138, 4
+  size: 32, 32
+Walk
+  xy: 172, 4
+  size: 32, 32
+Walk
+  xy: 2, 4
+  size: 32, 32
+Walk
+  xy: 206, 4
+  size: 32, 32
+Walk
+  xy: 2, 38
+  size: 32, 32
+Walk
+  xy: 36, 38
+  size: 32, 32
+Walk
+  xy: 70, 38
+  size: 32, 32
+Walk
+  xy: 104, 38
+  size: 32, 32
+Walk
+  xy: 138, 38
+  size: 32, 32
+Attack
+  xy: 172, 4
+  size: 32, 32
+Attack
+  xy: 2, 4
+  size: 32, 32
+Attack
+  xy: 172, 38
+  size: 32, 32
+Attack
+  xy: 206, 38
+  size: 32, 32
+Attack
+  xy: 2, 72
+  size: 32, 32
+Attack
+  xy: 36, 72
+  size: 32, 32
+Death
+  xy: 172, 4
+  size: 32, 32
+Death
+  xy: 70, 72
+  size: 32, 32
+Death
+  xy: 104, 72
+  size: 32, 32
+Death
+  xy: 138, 72
+  size: 32, 32
+Death
+  xy: 172, 72
+  size: 32, 32
+Death
+  xy: 206, 72
+  size: 32, 32

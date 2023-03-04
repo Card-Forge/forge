@@ -1,0 +1,13 @@
+Name:Norn's Fetchling
+ManaCost:1 W
+Types:Creature Phyrexian Beast
+PT:1/1
+K:Toxic:1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBranch | TriggerDescription$ When CARDNAME enters the battlefield, conjure a card named Plains into your hand. If an opponent has three or more poison counters, you may seek a nonland card instead.  
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE3 | TrueSubAbility$ DBGenericChoice | FalseSubAbility$ ConjurePlains
+SVar:DBGenericChoice:DB$ GenericChoice | Choices$ SeekNonLand,ConjurePlains
+SVar:SeekNonLand:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.nonLand | ChangeNum$ 1 | StackDescription$ Seek a nonland card.
+SVar:ConjurePlains:DB$ MakeCard | Conjure$ True | Name$ Plains | Zone$ Hand | StackDescription$ Conjure a card named Plains into your hand 
+SVar:X:PlayerCountOpponents$HighestPoisonCounters
+DeckHints:Keyword$Toxic|Infect
+Oracle:Toxic 1\nCorrupted - When Norn's Fetchling enters the battlefield, conjure a card named Plains into your hand. If an opponent has three or more poison counters, you may seek a nonland card instead.

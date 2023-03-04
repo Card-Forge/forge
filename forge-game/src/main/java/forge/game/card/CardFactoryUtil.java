@@ -1691,14 +1691,20 @@ public class CardFactoryUtil {
             AbilitySub exileSA = (AbilitySub) AbilityFactory.getAbility(exileStr, card);
             changeSA.setSubAbility(exileSA);
 
+            final Cost cost = new Cost(recoverCost, false);
+            String costDesc = cost.toSimpleString();
+            if (!cost.isOnlyManaCost()) {
+                costDesc = "—" + costDesc;
+            }
+
             String trigObject = card.isCreature() ? "Creature.Other+YouOwn" : "Creature.YouOwn";
             String trigArticle = card.isCreature() ? "another" : "a";
             String trigStr = "Mode$ ChangesZone | ValidCard$ " + trigObject
                     + " | Origin$ Battlefield | Destination$ Graveyard | "
                     + "TriggerZones$ Graveyard | Secondary$ True | "
-                    + "TriggerDescription$ Recover " + recoverCost + " (When " + trigArticle + " creature is "
+                    + "TriggerDescription$ Recover " + costDesc + " (When " + trigArticle + " creature is "
                     + "put into your graveyard from the battlefield, you "
-                    + "may pay " + recoverCost + ". If you do, return "
+                    + "may pay " + costDesc + ". If you do, return "
                     + "CARDNAME from your graveyard to your hand. Otherwise,"
                     + " exile CARDNAME.)";
             final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);

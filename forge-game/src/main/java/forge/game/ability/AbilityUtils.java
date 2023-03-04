@@ -18,6 +18,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.base.Functions;
 import com.google.common.base.Predicate;
 
 import forge.card.CardStateName;
@@ -288,12 +289,12 @@ public class AbilityUtils {
             } else {
                 System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
             }
-        } else if (defined.equals("FirstRemembered")) {
+        } else if (defined.equals("RememberedFirst")) {
             Object o = hostCard.getFirstRemembered();
             if (o instanceof Card) {
                 cards.add(game.getCardState((Card) o));
             }
-        } else if (defined.equals("LastRemembered")) {
+        } else if (defined.equals("RememberedLast")) {
             Object o = Iterables.getLast(hostCard.getRemembered(), null);
             if (o instanceof Card) {
                 cards.add(game.getCardState((Card) o));
@@ -2402,10 +2403,12 @@ public class AbilityUtils {
             }
             int num;
             List<Integer> dmgInstances = game.getDamageDoneThisTurn(isCombat, false, props[1], props[2], c, player, ctb);
-            if (sq[0].contains("Max")) {
+            if (!dmgInstances.isEmpty() && sq[0].contains("Max")) {
                 num = Collections.max(dmgInstances);
-            } else {
+            } else if (sq[0].startsWith("Num")) {
                 num = dmgInstances.size();
+            } else {
+                num = Aggregates.sum(dmgInstances, Functions.identity());
             }
             return doXMath(num, expr, c, ctb);
         }
@@ -3227,7 +3230,6 @@ public class AbilityUtils {
                 return num;
             }
             return secondaryNum;
-
         } else {
             return num;
         }
@@ -3386,15 +3388,15 @@ public class AbilityUtils {
             String[] lparts = l[0].split(" ", 2);
             final List<ZoneType> vZone = ZoneType.listValueOf(lparts[0].split("Valid")[1]);
             String restrictions = TextUtil.fastReplace(l[0], TextUtil.addSuffix(lparts[0]," "), "");
-            CardCollection cards = CardLists.getValidCards(game.getCardsIn(vZone), restrictions, player, source, ctb);
-            return doXMath(cards.size(), m, source, ctb);
+            int num = CardLists.getValidCardCount(game.getCardsIn(vZone), restrictions, player, source, ctb);
+            return doXMath(num, m, source, ctb);
         }
 
         // count valid cards on the battlefield
         if (l[0].startsWith("Valid ")) {
             final String restrictions = l[0].substring(6);
-            CardCollection cardsonbattlefield = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restrictions, player, source, ctb);
-            return doXMath(cardsonbattlefield.size(), m, source, ctb);
+            int num = CardLists.getValidCardCount(game.getCardsIn(ZoneType.Battlefield), restrictions, player, source, ctb);
+            return doXMath(num, m, source, ctb);
         }
 
         if (l[0].startsWith("ThisTurnEntered")) {
@@ -3603,21 +3605,10 @@ public class AbilityUtils {
      */
     public static int handlePaid(final Iterable<Card> paidList, final String string, final Card source, CardTraitBase ctb) {
         if (Iterables.isEmpty(paidList)) {
-            if (string.contains(".")) {
-                final String[] splitString = string.split("\\.", 2);
-                return doXMath(0, splitString[1], source, ctb);
-            } else {
-                return 0;
-            }
+            return doXMath(0, CardFactoryUtil.extractOperators(string), source, ctb);
         }
         if (string.startsWith("Amount")) {
-            int size = Iterables.size(paidList);
-            if (string.contains(".")) {
-                final String[] splitString = string.split("\\.", 2);
-                return doXMath(size, splitString[1], source, ctb);
-            } else {
-                return size;
-            }
+            return doXMath(Iterables.size(paidList), CardFactoryUtil.extractOperators(string), source, ctb);
         }
 
         if (string.startsWith("GreatestPower")) {
@@ -3650,8 +3641,8 @@ public class AbilityUtils {
         if (string.startsWith("Valid")) {
             final String[] splitString = string.split("/", 2);
             String valid = splitString[0].substring(6);
-            final List<Card> list = CardLists.getValidCardsAsList(paidList, valid, source.getController(), source, ctb);
-            return doXMath(list.size(), splitString.length > 1 ? splitString[1] : null, source, ctb);
+            final int num = CardLists.getValidCardCount(paidList, valid, source.getController(), source, ctb);
+            return doXMath(num, splitString.length > 1 ? splitString[1] : null, source, ctb);
         }
 
         String filteredString = string;

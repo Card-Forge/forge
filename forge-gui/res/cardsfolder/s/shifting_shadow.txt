@@ -10,6 +10,6 @@ SVar:ShadowUpkeepTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZo
 SVar:ShadowRememberSelf:DB$ Pump | ImprintCards$ OriginalHost | SubAbility$ ShadowDestroyEnchanted
 SVar:ShadowDestroyEnchanted:DB$ Destroy | Defined$ Self | SubAbility$ ShadowRevealCards
 SVar:ShadowRevealCards:DB$ DigUntil | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | RememberFound$ True | SubAbility$ ShadowReattach
-SVar:ShadowReattach:DB$ Attach | Defined$ LastRemembered | Object$ Imprinted | SubAbility$ DBCleanup
+SVar:ShadowReattach:DB$ Attach | Defined$ RememberedLast | Object$ Imprinted | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 Oracle:Enchant creature\nEnchanted creature has haste and "At the beginning of your upkeep, destroy this creature. Reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and attach Shifting Shadow to it, then put all other cards revealed this way on the bottom of your library in a random order."

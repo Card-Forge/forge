@@ -2040,7 +2040,7 @@ public class ComputerUtilCombat {
 
         final boolean hasTrample = attacker.hasKeyword(Keyword.TRAMPLE);
 
-        if (combat != null && hasTrample && attacker.isAttacking()) {
+        if (combat != null && remaining != null && hasTrample && attacker.isAttacking()) {
             // if attacker has trample and some of its blockers are also blocking others it's generally a good idea
             // to assign those without trample first so we can maximize the damage to the defender
             for (final Card c : remaining) {
@@ -2492,12 +2492,12 @@ public class ComputerUtilCombat {
         return poison;
     }
 
-    public static GameEntity addAttackerToCombat(SpellAbility sa, Card attacker, FCollection<GameEntity> defenders) {
+    public static GameEntity addAttackerToCombat(SpellAbility sa, Card attacker, Iterable<? extends GameEntity> defenders) {
         Combat combat = sa.getHostCard().getGame().getCombat();
         if (combat != null) {
             // 1. If the card that spawned the attacker was sent at a planeswalker, attack the same. Consider improving.
             GameEntity def = combat.getDefenderByAttacker(sa.getHostCard());
-            if (def instanceof Card && ((Card)def).isPlaneswalker() && defenders.contains(def)) {
+            if (def instanceof Card && ((Card)def).isPlaneswalker() && Iterables.contains(defenders, def)) {
                 return def;
             }
             // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.

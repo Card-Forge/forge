@@ -8,7 +8,7 @@ SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | SubAbility$ 
 SVar:FoeRepeat:DB$ RepeatEach | RepeatPlayers$ Remembered | ClearRememberedBeforeLoop$ True | RepeatSubAbility$ DBDmg | DamageMap$ True | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals damage to each foe equal to the number of cards in their hand.
 SVar:DBDmg:DB$ DealDamage | Defined$ Player.IsRemembered | NumDmg$ Y
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount.Plus.1
+SVar:X:Remembered$Amount/Plus.1
 SVar:Y:Count$ValidHand Card.RememberedPlayerCtrl
 SVar:NeedsToPlayVar:Z GE4
 SVar:Z:Count$ValidHand Card.OppCtrl

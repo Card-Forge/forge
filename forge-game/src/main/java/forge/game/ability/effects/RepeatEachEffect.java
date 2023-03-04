@@ -161,7 +161,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             if (sa.hasParam("ChooseOrder") && !sa.getParam("ChooseOrder").equals("True")) {
                 chooser = AbilityUtils.getDefinedPlayers(source, sa.getParam("ChooseOrder"), sa).get(0);
             }
-            while (validTypes.size() > 0) {
+            while (!validTypes.isEmpty()) {
                 String chosenT = chooser.getController().chooseSomeType("card", sa, validTypes, null);
                 source.setChosenType(chosenT);
                 AbilityUtils.resolve(repeat);

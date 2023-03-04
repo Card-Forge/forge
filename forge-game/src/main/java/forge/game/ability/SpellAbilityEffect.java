@@ -913,6 +913,8 @@ public abstract class SpellAbilityEffect {
         }
         // only want this on permanents
         if (exilingSource.isImmutable() || exilingSource.isInPlay()) {
+            // make sure it gets updated
+            exilingSource.removeExiledCard(movedCard);
             exilingSource.addExiledCard(movedCard);
         }
         // if ability was granted use that source so they can be kept apart later
