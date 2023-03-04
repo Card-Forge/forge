@@ -93,8 +93,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
 
             final ZoneType zone = ZoneType.smartValueOf(sa.getParamOrDefault("Zone", "Library"));
             final int amount = sa.hasParam("Amount") ?
-                    AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa) : 1;
-
+            AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa) : 1;
             CardCollection cards = new CardCollection();
 
             for (final String name : names) {
@@ -118,7 +117,12 @@ public class MakeCardEffect extends SpellAbilityEffect {
                         if (sa.hasParam("Tapped")) {
                             card.setTapped(true);
                         }
+                        final String desc = sa.getParamOrDefault("OptionPrompt", "");
+                        if (sa.hasParam("Optional") && sa.hasParam("OptionPrompt") && //for now, OptionPrompt is needed {
+                                !player.getController().confirmAction(sa, null, Localizer.getInstance().getMessage(desc), null)) {
+                        		return;
                     }
+                }
                 }
             }
 
