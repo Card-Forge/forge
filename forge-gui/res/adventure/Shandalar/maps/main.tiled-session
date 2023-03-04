@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/scarecrow_farm.tmx",
+    "activeFile": "map/grove_4.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "tileset",
-        "map/main_story",
         "map",
-        "obj"
+        "map/main_story",
+        "obj",
+        "tileset"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -2875,10 +2875,10 @@
                 4
             ],
             "scale": 3,
-            "selectedLayer": 3,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 331.8333333333333,
-                "y": 279.5
+                "x": 263.8333333333333,
+                "y": 191.83333333333331
             }
         },
         "map/skullcave_1.tmx": {
@@ -3154,10 +3154,10 @@
         "map/lavaforge_1.tmx",
         "map/lavaforge_2.tmx",
         "map/garruk.tmx",
-        "map/grove_4.tmx",
-        "map/swamp_town.tmx",
-        "tileset/main.tsx",
-        "map/snowabbey_2.tmx"
+        "map/merfolkpool_5.tmx",
+        "map/merfolkpool_4.tmx",
+        "map/merfolkpool_3.tmx",
+        "map/merfolkpool_2.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true
