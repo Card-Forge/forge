@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="79">
- <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
- </editorsettings>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="77">
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="40" height="26">
@@ -17,7 +14,7 @@
  </layer>
  <layer id="7" name="Mountain Walls" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJzFljtOw0AQhncDeTRAE7CShh4uQMs1OAMVVUiCKGjpkLgAF4iIIb4EUNFwhHQIQY1H3pHH45192EH80q/I3vXOl9mZtROtVOLx67bdZ53CfP4w9xPzfkCcWGMcYKGCa7gPbCmJL80Hpbo9L//fz7oeR1LaYH4M59CsP3Os+dIPjx/D6WMEJjTqcwMsUt3y/T/wsM0Zm61+QG+E+YTNmQfyTVWd0cU3yj3WYXwXXaWOhRqbC4wuXpRrj1e5M13dX3j2YcsTTIgNuhvUx2n/xuwx8uEez0ysU0sOIX9tFVuDlA9te74NH2eyMfr4MHf/xSfVIPKNdLm30h5wvpud9ry+HPL6c51VnK9jeuh2UFhS1pMZ6TvHxTfWdS7OuyldKfuaNBbnw/sZu/4LPmlNHi8xLCtdsq0I86Exjn80rLcQvomFD5mwZ7OI7w+bOo4znbJI55+PL2QPm/asT+mG+KhcrDgGvftFviuOCMd1QAzkw55wabJb1KBU1zGC+Y95zEvl5sSzJYQPNN4r52GOmvQ4/V7IDOeUzYGewV4N5YMcIhP95fdca733Ci/6hc+7VU70Uvv5eL0CHz8LbHORAW27B1qQ2rS9PzJdP6OlmDG+71a97he/dJzL9X5z5cyXUz7PFntt8vSd1Mdi+ThLDJtPPwIf1MzSwvcLyvwheQ==
+   eJzFlrFOwzAQhu1Cmy7AUojahR1egJXX4BmYmEpbxMDKhsQL8AIVLTQvAUwsPEI3hGAmp+TU6+V8tpMifulXFcfxfT3fOUmtManHr9uyz1qF+fxe7ifm/YA4scY4wEIF1zAObHMSH+c/W1MRzmvCy/+3FMeleY35MZy9cv2xsuZLEh4/htPHCExo1OcGWFx1y+vlwMM2YWz8edQbYT5hcyaBfCNTZdT4+rkHNozvom3MsaPGJg5GjRel7fEid2bX9xeefdjyBFP47rrV+7R/Y/YY+XCPxyXfqZBDyF9TxdYg5UNLzzfh40wSo48Pc/dffK4aRL6+Xe2taw84381Oc15fDnn9aWcV52uVPXTbLexS1nEz0neOxjewVS7OuyldGXlNGovz4XjGrv+Cz7Umj5eWLAu7YlsQ5sPSeP1Rs95C+IYCHzJhz2YR3x+SWsqZTllc598m+Or2rE/zAL7YGtNY8R707hf5rjgiHNcBMZAPe0LTcLeoQVddxwjmP+YxL43OiWdLCB9osLeahzmq0+P0eyErOUdsDvQM9mYoH+QQmegvH9PWeu8UniaFz9vrnOiZ9fPxegU+17lIx5ABLY2BpqQ2pfdHZqtntJQTiVXzfXvdy6T4pfe5tPebljNfTvk8KfayzNN3Wr0Xy8dZYth8+nHwQS/MBL5fKrUfNg==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="40" height="26">
@@ -25,11 +22,11 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="48" template="../obj/treasure.tx" x="142.944" y="306.398"/>
+  <object id="48" template="../obj/treasure.tx" x="168.611" y="342.398"/>
   <object id="50" template="../obj/enemy.tx" x="181.5" y="221.5">
    <properties>
     <property name="enemy" value="Armored Knight"/>
@@ -56,7 +53,7 @@
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object id="67" template="../obj/gold.tx" x="416.978" y="181.522"/>
+  <object id="67" template="../obj/gold.tx" x="277.978" y="162.522"/>
   <object id="68" template="../obj/enemy.tx" x="471" y="285">
    <properties>
     <property name="enemy" value="Kor Warrior"/>
@@ -79,21 +76,22 @@
     <property name="enemy" value="Nahiri"/>
    </properties>
   </object>
-  <object id="72" template="../obj/treasure.tx" x="142.274" y="323.667"/>
+  <object id="72" template="../obj/treasure.tx" x="149.607" y="343"/>
   <object id="73" template="../obj/enemy.tx" x="446.557" y="366.341">
    <properties>
     <property name="enemy" value="Armored Knight "/>
    </properties>
   </object>
-  <object id="77" template="../obj/door_down.tx" x="119" y="286.5">
+  <object id="75" template="../obj/entry_right.tx" x="120.5" y="288.5">
    <properties>
+    <property name="direction" value="right"/>
     <property name="teleport" value="maps/map/nahiricave.tmx"/>
-    <property name="teleportObjectId" value="67"/>
+    <property name="teleportObjectId" value="57"/>
    </properties>
   </object>
-  <object id="78" template="../obj/door_down.tx" x="469" y="53">
+  <object id="76" template="../obj/entry_right.tx" x="472" y="61">
    <properties>
-    <property name="direction" value="down"/>
+    <property name="direction" value="right"/>
     <property name="teleport" value="maps/map/nahiricave.tmx"/>
     <property name="teleportObjectId" value="58"/>
    </properties>
