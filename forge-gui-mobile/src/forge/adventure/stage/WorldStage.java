@@ -108,6 +108,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
                 if (player.collideWith(mob)) {
                     player.setAnimation(CharacterSprite.AnimationTypes.Attack);
+                    player.playEffect(Paths.EFFECT_SPARKS, 0.5f);
                     mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
                     SoundSystem.instance.play(SoundEffectType.Block, false);
                     Gdx.input.vibrate(50);
@@ -155,7 +156,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
             Current.player().win();
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
-            startPause(0.5f, () -> {
+            currentMob.playEffect(Paths.EFFECT_BLOOD, 0.5f);
+            startPause(1f, () -> {
                 RewardScene.instance().loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
                 WorldStage.this.removeEnemy(currentMob);
                 currentMob = null;

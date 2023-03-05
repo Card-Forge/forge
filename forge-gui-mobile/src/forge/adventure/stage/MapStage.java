@@ -716,7 +716,8 @@ public class MapStage extends GameStage {
             Current.player().win();
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
-            startPause(0.3f, MapStage.this::getReward);
+            currentMob.playEffect(Paths.EFFECT_BLOOD, 0.5f);
+            startPause(1f, MapStage.this::getReward);
         } else {
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
@@ -830,6 +831,7 @@ public class MapStage extends GameStage {
         if (mob == null) return;
         currentMob = mob;
         player.setAnimation(CharacterSprite.AnimationTypes.Attack);
+        player.playEffect(Paths.EFFECT_SPARKS, 0.5f);
         mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
         SoundSystem.instance.play(SoundEffectType.Block, false);
         Gdx.input.vibrate(50);
