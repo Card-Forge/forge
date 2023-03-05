@@ -1683,8 +1683,7 @@ public class CardFactoryUtil {
             final String recoverCost = keyword.split(":")[1];
             final String changeStr = "DB$ ChangeZone | Defined$ Self"
                         + " | Origin$ Graveyard | Destination$ Hand | UnlessCost$ "
-                    + recoverCost + " | UnlessPayer$ You | UnlessSwitched$ True"
-                    + " | UnlessResolveSubs$ WhenNotPaid";
+                    + recoverCost + " | UnlessPayer$ You | UnlessSwitched$ True | UnlessResolveSubs$ WhenNotPaid";
             final String exileStr = "DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Exile";
 
             SpellAbility changeSA = AbilityFactory.getAbility(changeStr, card);
@@ -1700,13 +1699,11 @@ public class CardFactoryUtil {
             String trigObject = card.isCreature() ? "Creature.Other+YouOwn" : "Creature.YouOwn";
             String trigArticle = card.isCreature() ? "another" : "a";
             String trigStr = "Mode$ ChangesZone | ValidCard$ " + trigObject
-                    + " | Origin$ Battlefield | Destination$ Graveyard | "
-                    + "TriggerZones$ Graveyard | Secondary$ True | "
+                    + " | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Graveyard | Secondary$ True | "
                     + "TriggerDescription$ Recover " + costDesc + " (When " + trigArticle + " creature is "
                     + "put into your graveyard from the battlefield, you "
                     + "may pay " + costDesc + ". If you do, return "
-                    + "CARDNAME from your graveyard to your hand. Otherwise,"
-                    + " exile CARDNAME.)";
+                    + "CARDNAME from your graveyard to your hand. Otherwise, exile CARDNAME.)";
             final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
             changeSA.setIntrinsic(intrinsic);
             myTrigger.setOverridingAbility(changeSA);
@@ -1732,8 +1729,7 @@ public class CardFactoryUtil {
             final String abString = "DB$ PeekAndReveal | PeekAmount$ " + num + " | RememberRevealed$ True";
 
             final String dbCast = "DB$ Play | Valid$ Card.IsRemembered+sameName | ValidSA$ Spell | " +
-                    "ValidZone$ Library | WithoutManaCost$ True | Optional$ True | " +
-                    "Amount$ All";
+                    "ValidZone$ Library | WithoutManaCost$ True | Optional$ True | Amount$ All";
 
             final String toBottom = "DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered "
                     + "| Origin$ Library | Destination$ Library | LibraryPosition$ -1";
@@ -1974,8 +1970,7 @@ public class CardFactoryUtil {
             upkeepTrig.append(" | TriggerDescription$ At the beginning of your upkeep, " +
                     "if CARDNAME has a time counter on it, remove a time counter from it.");
 
-            final String remove = "DB$ RemoveCounter | Defined$ Self" +
-                    " | CounterType$ TIME | CounterNum$ 1";
+            final String remove = "DB$ RemoveCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1";
             final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig.toString(), card, intrinsic);
             parsedUpkeepTrig.setOverridingAbility(AbilityFactory.getAbility(remove, card));
 

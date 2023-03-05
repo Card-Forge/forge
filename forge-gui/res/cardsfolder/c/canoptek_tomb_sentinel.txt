@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact Creature Insect
 PT:4/3
 K:Vigilance
-T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ DBChangeZone | SpellDescription$ Exile Cannon — When CARDNAME enters the battlefield from a graveyard, exile up to one target nonland permanent.
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ DBChangeZone | TriggerDescription$ Exile Cannon — When CARDNAME enters the battlefield from a graveyard, exile up to one target nonland permanent.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | TargetMin$ 0 | TargetMax$ 1
 K:Unearth:7
 DeckHas:Ability$Graveyard
