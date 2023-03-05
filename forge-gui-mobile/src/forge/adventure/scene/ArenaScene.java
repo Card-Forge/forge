@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Array;
 import com.github.tommyettinger.textra.TextraButton;
@@ -186,8 +187,10 @@ public class ArenaScene extends UIScene implements IAfterMatch {
             leftImg.setPosition(actor.getX() + (i * (leftPlayer ? 1 : -1)) * gridSize + widthDiff / 2, actor.getY() + gridSize * 2 + widthDiff / 2);
             arenaPlane.addActor(leftImg);
         }
-        if (Forge.isLandscapeMode())
-            actor.moveBy((float) (gridSize * stepsToTheSide * (leftPlayer ? 1 : -1)), gridSize * 2f);
+        if (Forge.isLandscapeMode()) {
+            actor.toFront();
+            actor.addAction(Actions.sequence(Actions.moveBy(0f, gridSize * 2f, 1), Actions.moveBy((float) (gridSize * stepsToTheSide * (leftPlayer ? 1 : -1)), 0f, 1)));
+        }
     }
 
     private void markLostFighter(Actor fighter) {
