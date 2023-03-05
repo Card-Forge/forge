@@ -124,7 +124,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                         if (sa.hasParam("Tapped")) {
                             card.setTapped(true);
                         }
-                }
+                    }
                 }
             }
 
