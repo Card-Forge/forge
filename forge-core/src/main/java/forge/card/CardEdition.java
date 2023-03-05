@@ -375,7 +375,8 @@ public final class CardEdition implements Comparable<CardEdition> {
     public String getSheetReplaceCardFromSheet2() { return sheetReplaceCardFromSheet2; }
     public String[] getChaosDraftThemes() { return chaosDraftThemes; }
 
-    public List<CardInSet> getCards() { return cardMap.get("cards"); }
+    public List<CardInSet> getCards() { return cardMap.get(EditionSectionWithCollectorNumbers.CARDS.getName()); }
+    public List<CardInSet> getRebalancedCards() { return cardMap.get(EditionSectionWithCollectorNumbers.REBALANCED.getName()); }
     public List<CardInSet> getAllCardsInSet() {
         return cardsInSet;
     }
@@ -399,6 +400,15 @@ public final class CardEdition implements Comparable<CardEdition> {
             }
         }
         return this.cardsInSetLookupMap.get(cardName);
+    }
+
+    public boolean isRebalanced(String cardName) {
+        for (CardInSet cis : getRebalancedCards()) {
+            if (cis.name.equals(cardName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isModern() { return getDate().after(parseDate("2003-07-27")); } //8ED and above are modern except some promo cards and others
@@ -899,7 +909,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                         }
                     }));
             Iterator<CardEdition> editionsIterator = editionsWithBasicLands.iterator();
-            List<CardEdition> selectedEditions = new ArrayList();
+            List<CardEdition> selectedEditions = new ArrayList<CardEdition>();
             while (editionsIterator.hasNext())
                 selectedEditions.add(editionsIterator.next());
             if (selectedEditions.isEmpty())

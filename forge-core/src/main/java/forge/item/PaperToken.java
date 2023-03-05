@@ -13,6 +13,7 @@ import forge.card.ColorSet;
 import forge.util.MyRandom;
 
 public class PaperToken implements InventoryItemFromSet, IPaperCard {
+    private static final long serialVersionUID = 1L;
     private String name;
     private CardEdition edition;
     private ArrayList<String> imageFileName = new ArrayList<>();
@@ -199,5 +200,8 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
 
     public String getImageKey(int artIndex) {
         return ImageKeys.TOKEN_PREFIX + imageFileName.get(artIndex).replace(" ", "_");
+    }
+    public boolean isRebalanced() {
+        return false;
     }
 }

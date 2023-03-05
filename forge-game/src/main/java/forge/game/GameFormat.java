@@ -139,6 +139,13 @@ public class GameFormat implements Comparable<GameFormat> {
     }
     protected Predicate<PaperCard> buildFilter(boolean printed) {
         Predicate<PaperCard> p = Predicates.not(IPaperCard.Predicates.names(this.getBannedCardNames()));
+
+        if (FormatSubType.ARENA.equals(this.getFormatSubType())) {
+            p = Predicates.and(p, Predicates.not(IPaperCard.Predicates.Presets.IS_UNREBALANCED));
+        } else {
+            p = Predicates.and(p, Predicates.not(IPaperCard.Predicates.Presets.IS_REBALANCED));
+        }
+
         if (!this.getAllowedSetCodes().isEmpty()) {
             p = Predicates.and(p, printed ?
                     IPaperCard.Predicates.printedInSets(this.getAllowedSetCodes(), printed) :
