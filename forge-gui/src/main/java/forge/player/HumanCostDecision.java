@@ -292,12 +292,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     // Inputs
 
-    // Exile<Num/Type{/TypeDescription}>
-    // ExileFromHand<Num/Type{/TypeDescription}>
-    // ExileFromGrave<Num/Type{/TypeDescription}>
-    // ExileFromTop<Num/Type{/TypeDescription}> (of library)
-    // ExileSameGrave<Num/Type{/TypeDescription}>
-
     private PaymentDecision exileFromSame(final CostExile cost, final CardCollectionView list, final int nNeeded, final List<Player> payableZone) {
         if (nNeeded == 0) {
             return PaymentDecision.number(0);

@@ -686,7 +686,7 @@ public class ComputerUtilMana {
         }
         boolean hasConverge = sa.getHostCard().hasConverge();
         ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test,
-                checkPlayable, manaSpentToPay, hasConverge, ignoreColor, ignoreType);
+                checkPlayable, hasConverge, ignoreColor, ignoreType);
 
         int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
         final ManaPool manapool = ai.getManaPool();
@@ -722,7 +722,7 @@ public class ComputerUtilMana {
             }
 
             if (sourcesForShards == null && !purePhyrexian) {
-                return false;    // no mana abilities to use for paying
+                break;    // no mana abilities to use for paying
             }
 
             toPay = getNextShardToPay(cost);
@@ -916,13 +916,11 @@ public class ComputerUtilMana {
      */
     private static ListMultimap<ManaCostShard, SpellAbility> getSourcesForShards(final ManaCostBeingPaid cost,
             final SpellAbility sa, final Player ai, final boolean test, final boolean checkPlayable,
-            List<Mana> manaSpentToPay, final boolean hasConverge, final boolean ignoreColor, final boolean ignoreType) {
+            final boolean hasConverge, final boolean ignoreColor, final boolean ignoreType) {
         // arrange all mana abilities by color produced.
         final ListMultimap<Integer, SpellAbility> manaAbilityMap = groupSourcesByManaColor(ai, checkPlayable);
         if (manaAbilityMap.isEmpty()) {
             // no mana abilities, bailing out
-            ManaPool.refundMana(manaSpentToPay, ai, sa);
-            CostPayment.handleOfferings(sa, test, cost.isPaid());
             return null;
         }
         if (DEBUG_MANA_PAYMENT) {

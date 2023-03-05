@@ -1,7 +1,7 @@
 Name:Citizen's Arrest
 ManaCost:1 W W
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | SpellDescription$ When CARDNAME enters the battlefield, exile target creature or planeswalker an opponent controls until CARDNAME leaves the battlefield.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature or planeswalker an opponent controls until CARDNAME leaves the battlefield.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | Duration$ UntilHostLeavesPlay
 SVar:PlayMain1:TRUE
 Oracle:When Citizen's Arrest enters the battlefield, exile target creature or planeswalker an opponent controls until Citizen's Arrest leaves the battlefield.
