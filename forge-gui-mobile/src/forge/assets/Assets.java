@@ -11,9 +11,11 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
+import com.github.tommyettinger.textra.Font;
 import forge.Forge;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
@@ -42,7 +44,9 @@ public class Assets implements Disposable {
     private ObjectMap<String, Texture> tmxMap;
     private Texture defaultImage, dummy;
     private TextureParameter textureParameter;
+    private ObjectMap<String, Font> textrafonts;
     private int cGen = 0, cGenVal = 0, cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0, aDF = 0, cDFVal = 0;
+
     public Assets() {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
         try {
@@ -62,6 +66,7 @@ public class Assets implements Disposable {
             fallback_skins().put(1, getDummy());
         }
     }
+
     @Override
     public void dispose() {
         try {
@@ -81,6 +86,10 @@ public class Assets implements Disposable {
                 defaultImage.dispose();
             if (dummy != null)
                 dummy.dispose();
+            if (textrafonts != null) {
+                for (Font f : textrafonts.values())
+                    f.dispose();
+            }
             cardArtCache.clear();
             avatarImages.clear();
             manaImages.clear();
@@ -102,91 +111,109 @@ public class Assets implements Disposable {
             e.printStackTrace();
         }
     }
+
     public MemoryTrackingAssetManager manager() {
         if (manager == null)
             manager = new MemoryTrackingAssetManager(new AbsoluteFileHandleResolver());
         return manager;
     }
+
     public HashMap<Integer, FSkinFont> fonts() {
         if (fonts == null)
             fonts = new HashMap<>();
         return fonts;
     }
+
     public HashMap<String, FImageComplex> cardArtCache() {
         if (cardArtCache == null)
             cardArtCache = new HashMap<>(1024);
         return cardArtCache;
     }
+
     public HashMap<String, FImage> avatarImages() {
         if (avatarImages == null)
             avatarImages = new HashMap<>();
         return avatarImages;
     }
+
     public HashMap<String, FSkinImage> manaImages() {
         if (manaImages == null)
             manaImages = new HashMap<>(128);
         return manaImages;
     }
+
     public HashMap<String, FSkinImage> symbolLookup() {
         if (symbolLookup == null)
             symbolLookup = new HashMap<>(64);
         return symbolLookup;
     }
+
     public HashMap<FSkinProp, FSkinImage> images() {
         if (images == null)
             images = new HashMap<>(512);
         return images;
     }
+
     public HashMap<Integer, TextureRegion> avatars() {
         if (avatars == null)
             avatars = new HashMap<>(150);
         return avatars;
     }
+
     public HashMap<Integer, TextureRegion> sleeves() {
         if (sleeves == null)
             sleeves = new HashMap<>(64);
         return sleeves;
     }
+
     public HashMap<Integer, TextureRegion> cracks() {
         if (cracks == null)
             cracks = new HashMap<>(16);
         return cracks;
     }
+
     public HashMap<Integer, TextureRegion> borders() {
         if (borders == null)
             borders = new HashMap<>();
         return borders;
     }
+
     public HashMap<Integer, TextureRegion> deckbox() {
         if (deckbox == null)
             deckbox = new HashMap<>();
         return deckbox;
     }
+
     public HashMap<Integer, TextureRegion> cursor() {
         if (cursor == null)
             cursor = new HashMap<>();
         return cursor;
     }
+
     public ObjectMap<Integer, BitmapFont> counterFonts() {
         if (counterFonts == null)
             counterFonts = new ObjectMap<>();
         return counterFonts;
     }
+
     public ObjectMap<String, Texture> generatedCards() {
         if (generatedCards == null)
             generatedCards = new ObjectMap<>(512);
         return generatedCards;
     }
+
     public ObjectMap<Integer, Texture> fallback_skins() {
         if (fallback_skins == null)
             fallback_skins = new ObjectMap<>();
         return fallback_skins;
     }
+
     public ObjectMap<String, Texture> tmxMap() {
         if (tmxMap == null)
             tmxMap = new ObjectMap<>();
         return tmxMap;
     }
+
     public TextureParameter getTextureFilter() {
         if (textureParameter == null)
             textureParameter = new TextureParameter();
@@ -201,6 +228,7 @@ public class Assets implements Disposable {
         }
         return textureParameter;
     }
+
     public Texture getDefaultImage() {
         if (defaultImage == null) {
             FileHandle blankImage = Gdx.files.absolute(ForgeConstants.NO_CARD_FILE);
@@ -228,6 +256,44 @@ public class Assets implements Disposable {
         }
         return dummy;
     }
+
+    public Font getTextraFont(BitmapFont bitmapFont, TextureAtlas item_atlas, TextureAtlas pixelmana_atlas) {
+        if (textrafonts == null)
+            textrafonts = new ObjectMap<>();
+        if (!textrafonts.containsKey("textrafont")) {
+            Font font = new Font(bitmapFont, 0f, 2f, 0f, 0f);
+            font.addAtlas(item_atlas, 0f, 0f, 0f);
+            font.addAtlas(pixelmana_atlas, 0f, -12f, 0f);
+            font.integerPosition = false;
+            textrafonts.put("textrafont", font);
+        }
+        return textrafonts.get("textrafont");
+    }
+
+    public Font getKeysFont(BitmapFont bitmapFont, TextureAtlas keys_atlas) {
+        if (textrafonts == null)
+            textrafonts = new ObjectMap<>();
+        if (!textrafonts.containsKey("keysfont")) {
+            Font font = new Font(bitmapFont);
+            font.addAtlas(keys_atlas);
+            font.integerPosition = false;
+            textrafonts.put("keysfont", font);
+        }
+        return textrafonts.get("keysfont");
+    }
+
+    public Font getTextraFont(String name, BitmapFont bitmapFont, TextureAtlas items_atlas) {
+        if (textrafonts == null)
+            textrafonts = new ObjectMap<>();
+        if (!textrafonts.containsKey(name)) {
+            Font font = new Font(bitmapFont);
+            font.addAtlas(items_atlas);
+            font.integerPosition = false;
+            textrafonts.put(name, font);
+        }
+        return textrafonts.get(name);
+    }
+
     public class MemoryTrackingAssetManager extends AssetManager {
         private int currentMemory;
         private Map<String, Integer> memoryPerFile;
@@ -247,7 +313,7 @@ public class Assets implements Disposable {
             TextureData textureData = texture.getTextureData();
             int textureSize = textureData.getWidth() * textureData.getHeight();
             if (Forge.isTextureFilteringEnabled())
-                textureSize = textureSize + (textureSize/3);
+                textureSize = textureSize + (textureSize / 3);
             switch (textureData.getFormat()) {
                 case RGB565:
                     textureSize *= 2;
@@ -268,6 +334,7 @@ public class Assets implements Disposable {
                     + calculateObjectMaps(generatedCards()) + calculateObjectMaps(fallback_skins()) + calculateObjectMaps(tmxMap());
             return sum;
         }
+
         @SuppressWarnings("unchecked")
         private int calculateObjectMaps(ObjectMap<?, Texture> objectMap) {
             if (!Forge.showFPS)
@@ -297,7 +364,7 @@ public class Assets implements Disposable {
                 TextureData textureData = texture.getTextureData();
                 int textureSize = textureData.getWidth() * textureData.getHeight();
                 if (Forge.isTextureFilteringEnabled())
-                    textureSize = textureSize + (textureSize/3);
+                    textureSize = textureSize + (textureSize / 3);
                 switch (textureData.getFormat()) {
                     case RGB565:
                         textureSize *= 2;
@@ -322,6 +389,7 @@ public class Assets implements Disposable {
                 cFBVal = sum;
             return sum;
         }
+
         private int calcFonts() {
             if (!Forge.showFPS)
                 return 0;
@@ -337,6 +405,7 @@ public class Assets implements Disposable {
             cSFVal = val;
             return cSFVal;
         }
+
         private int calcCounterFonts() {
             if (!Forge.showFPS)
                 return 0;
@@ -351,13 +420,14 @@ public class Assets implements Disposable {
             cCFVal = val;
             return cCFVal;
         }
+
         private int calcBitmapFont(BitmapFont bitmapFont) {
             if (bitmapFont == null)
                 return 0;
             int val = 0;
             for (TextureRegion tr : bitmapFont.getRegions()) {
                 Texture t = tr.getTexture();
-                val += (t.getWidth()*t.getHeight())*4;
+                val += (t.getWidth() * t.getHeight()) * 4;
             }
             return val;
         }
