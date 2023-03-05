@@ -1,0 +1,11 @@
+Name:Tezzeret's Reckoning
+ManaCost:1 U
+Types:Instant
+A:SP$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Card | ChangeNum$ 3 | Hidden$ True | AtRandom$ True | NoShuffle$ True | FaceDown$ True | Mandatory$ True | NoLooking$ True | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile three random cards from your library face down and look at them. For as long as they remain exiled, you may play one of those cards.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | Triggers$ Play1,Play2 | SubAbility$ DBCleanup | ExileOnMoved$ Exile | Duration$ Permanent
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayLookAt$ You | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ For as long as they remain exiled, you may play one of those cards
+SVar:Play1:Mode$ SpellCast | ValidCard$ Card.IsRemembered | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ ExileSelf | Static$ True
+SVar:Play2:Mode$ LandPlayed | ValidCard$ Land.IsRemembered | TriggerZones$ Command | Execute$ ExileSelf | Static$ True
+SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Exile three random cards from your library face down and look at them. For as long as they remain exiled, you may play one of those cards.

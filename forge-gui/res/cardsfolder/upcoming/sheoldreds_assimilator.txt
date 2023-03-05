@@ -1,0 +1,14 @@
+Name:Sheoldred's Assimilator
+ManaCost:1 B
+Types:Creature Phyrexian Horror
+PT:3/1
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, exile up to one target card from a graveyard. If a card is exiled this way, you may conjure a duplicate of that card into the top five cards of your library at random.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, exile up to one target card from a graveyard. If a card is exiled this way, you may conjure a duplicate of that card into the top five cards of your library at random.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select up to one target card in a graveyard | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Card | RememberChanged$ True | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | Optional$ True | OptionPrompt$ Would you like to conjure a duplicate of the targeted card into the top five cards of your library ? | DefinedName$ Remembered | Zone$ Library | LibraryPosition$ Z | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Z:Count$Random.0.4
+DeckHints:Ability$Graveyard
+SVar:HasAttackEffect:TRUE
+Oracle:Menace\nWhenever Sheoldred's Assimilator enters the battlefield or attacks, exile up to one target card from a graveyard. If a card is exiled this way, you may conjure a duplicate of that card into the top five cards of your library at random.

@@ -1,0 +1,9 @@
+Name:Phyrexian Scrapyard
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ MakeCard | Cost$ 1 T Discard<1/Card> | Name$ Phyrexian Scrapyard | Zone$ Hand | SpellDescription$ Conjure a card named Phyrexian Scrapyard into your hand.
+A:AB$ MakeCard | Cost$ 2 T Sac<3/Land.namedPhyrexian Scrapyard/lands named Phyrexian Scrapyard> | Name$ Soul of New Phyrexia | Zone$ Battlefield | SorcerySpeed$ True | SpellDescription$ Conjure a card named Soul of New Phyrexia onto the battlefield. Activate only as a sorcery.
+DeckHas:Ability$Discard|Sacrifice & Type$Artifact|Avatar|Phyrexian
+AI:RemoveDeck:Random
+Oracle:{T}: Add {C}.\n{1}, {T}, Discard a card: Conjure a card named Phyrexian Scrapyard into your hand.\n{2}, {T}, Sacrifice three lands named Phyrexian Scrapyard: Conjure a card named Soul of New Phyrexia onto the battlefield. Activate only as a sorcery.
