@@ -379,8 +379,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     private PaymentDecision exileFromMiscZone(final CostExile cost, final SpellAbility sa, final int nNeeded, final CardCollection typeList) {
         if (typeList.size() < nNeeded) { return null; }
 
-        final List<ZoneType> origin = Lists.newArrayList();
-        origin.add(cost.from);
+        final List<ZoneType> origin = Lists.newArrayList(cost.from);
         final CardCollection exiled = new CardCollection();
 
         final List<Card> chosen = controller.chooseCardsForZoneChange(ZoneType.Exile, origin, sa, typeList, mandatory ? nNeeded : 0,
