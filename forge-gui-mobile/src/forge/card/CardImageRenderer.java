@@ -234,13 +234,36 @@ public class CardImageRenderer {
         if (showArtist)
             g.drawOutlinedText(artist, TEXT_FONT, Color.WHITE, Color.DARK_GRAY, x + (TYPE_FONT.getCapHeight() / 2), y + (TYPE_FONT.getCapHeight() / 2), w, h, false, Align.left, false);
     }
-
+    private static void drawOutlineColor(Graphics g, ColorSet colors, float x, float y, float w, float h) {
+        switch (colors.countColors()) {
+            case 0:
+                g.drawRect(BORDER_THICKNESS*2, Color.valueOf("#A0A6A4"), x, y, w, h);
+                break;
+            case 1:
+                if (colors.hasBlack())
+                    g.drawRect(BORDER_THICKNESS*2, Color.valueOf("#48494a"), x, y, w, h);
+                else if (colors.hasGreen())
+                    g.drawRect(BORDER_THICKNESS*2, Color.valueOf("#66cb35"), x, y, w, h);
+                else if (colors.hasBlue())
+                    g.drawRect(BORDER_THICKNESS*2, Color.valueOf("#62b5f8"), x, y, w, h);
+                else if (colors.hasRed())
+                    g.drawRect(BORDER_THICKNESS*2, Color.valueOf("#f6532d"), x, y, w, h);
+                else if (colors.hasWhite())
+                    g.drawRect(BORDER_THICKNESS*2, Color.valueOf("#EEEBE1"), x, y, w, h);
+                break;
+            default:
+                g.drawRect(BORDER_THICKNESS*2, Color.valueOf("#F9E084"), x, y, w, h);
+                break;
+        }
+    }
     private static void drawHeader(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean noText, boolean isAdventure) {
         float oldAlpha = g.getfloatAlphaComposite();
         if (isAdventure)
             g.setAlphaComposite(0.8f);
         fillColorBackground(g, colors, x, y, w, h);
         g.setAlphaComposite(oldAlpha);
+        //draw outline color here
+        drawOutlineColor(g, state.getColors(), x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         float padding = h / 8;
@@ -300,10 +323,12 @@ public class CardImageRenderer {
         boolean isSaga = cv.getCurrentState().getType().hasSubtype("Saga");
         boolean isClass = cv.getCurrentState().getType().hasSubtype("Class");
         boolean isDungeon = cv.getCurrentState().getType().isDungeon();
+        ColorSet colorSet = cv.getCurrentState().getColors();
         if (altState && cv.hasAlternateState()) {
             isSaga = cv.getAlternateState().getType().hasSubtype("Saga");
             isClass = cv.getAlternateState().getType().hasSubtype("Class");
             isDungeon = cv.getAlternateState().getType().isDungeon();
+            colorSet = cv.getAlternateState().getColors();
         }
         if (cv == null) {
             if (isFaceDown) {
@@ -373,6 +398,8 @@ public class CardImageRenderer {
                 g.drawImage(forgeArt, x, y, w, h);
             }
         }
+        //draw outline color here
+        drawOutlineColor(g, colorSet, x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
     }
 
@@ -421,6 +448,8 @@ public class CardImageRenderer {
             g.setAlphaComposite(0.6f);
         fillColorBackground(g, colors, x, y, w, h);
         g.setAlphaComposite(oldAlpha);
+        //draw outline color here
+        drawOutlineColor(g, state.getColors(), x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         float padding = h / 8;
@@ -588,6 +617,8 @@ public class CardImageRenderer {
                 g.setAlphaComposite(oldAlpha);
             }
         }
+        //draw outline color here
+        drawOutlineColor(g, state.getColors(), x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         if (!onTop) {
@@ -707,6 +738,8 @@ public class CardImageRenderer {
         h = boxHeight;
 
         fillColorBackground(g, colors, x, y, w, h);
+        //draw outline color here
+        drawOutlineColor(g, state.getColors(), x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         if (noText)
@@ -919,6 +952,8 @@ public class CardImageRenderer {
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
                     else if (isNyx)
                         g.drawImage(FSkinTexture.NYX_M, x, y, w, h);
+                    else if (state.isArtifact() && !isPW)
+                        g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
                     else
                         g.drawImage(isPW ? FSkinTexture.PWBG_M : FSkinTexture.CARDBG_M, x, y, w, h);
                 } else if (backColors.get(0) == DetailColors.COLORLESS) {
@@ -926,10 +961,10 @@ public class CardImageRenderer {
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
                     else if (isPW)
                         g.drawImage(FSkinTexture.PWBG_C, x, y, w, h);
-                    else if (state.isArtifact())
-                        g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
                     else if (isNyx)
                         g.drawImage(FSkinTexture.NYX_C, x, y, w, h);
+                    else if (state.isArtifact())
+                        g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
                     else
                         g.drawImage(FSkinTexture.CARDBG_C, x, y, w, h);
                 } else if (backColors.get(0) == DetailColors.GREEN) {
@@ -937,6 +972,8 @@ public class CardImageRenderer {
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
                     else if (isNyx)
                         g.drawImage(FSkinTexture.NYX_G, x, y, w, h);
+                    else if (state.isArtifact() && !isPW)
+                        g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
                     else
                         g.drawImage(isPW ? FSkinTexture.PWBG_G : FSkinTexture.CARDBG_G, x, y, w, h);
                 } else if (backColors.get(0) == DetailColors.RED) {
@@ -944,6 +981,8 @@ public class CardImageRenderer {
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
                     else if (isNyx)
                         g.drawImage(FSkinTexture.NYX_R, x, y, w, h);
+                    else if (state.isArtifact() && !isPW)
+                        g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
                     else
                         g.drawImage(isPW ? FSkinTexture.PWBG_R : FSkinTexture.CARDBG_R, x, y, w, h);
                 } else if (backColors.get(0) == DetailColors.BLACK) {
@@ -951,6 +990,8 @@ public class CardImageRenderer {
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
                     else if (isNyx)
                         g.drawImage(FSkinTexture.NYX_B, x, y, w, h);
+                    else if (state.isArtifact() && !isPW)
+                        g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
                     else
                         g.drawImage(isPW ? FSkinTexture.PWBG_B : FSkinTexture.CARDBG_B, x, y, w, h);
                 } else if (backColors.get(0) == DetailColors.BLUE) {
@@ -958,6 +999,8 @@ public class CardImageRenderer {
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
                     else if (isNyx)
                         g.drawImage(FSkinTexture.NYX_U, x, y, w, h);
+                    else if (state.isArtifact() && !isPW)
+                        g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
                     else
                         g.drawImage(isPW ? FSkinTexture.PWBG_U : FSkinTexture.CARDBG_U, x, y, w, h);
                 } else if (backColors.get(0) == DetailColors.WHITE) {
@@ -965,6 +1008,8 @@ public class CardImageRenderer {
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
                     else if (isNyx)
                         g.drawImage(FSkinTexture.NYX_W, x, y, w, h);
+                    else if (state.isArtifact() && !isPW)
+                        g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
                     else
                         g.drawImage(isPW ? FSkinTexture.PWBG_W : FSkinTexture.CARDBG_W, x, y, w, h);
                 }
@@ -974,6 +1019,8 @@ public class CardImageRenderer {
                     g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
                 else if (isNyx)
                     g.drawImage(FSkinTexture.NYX_M, x, y, w, h);
+                else if (state.isArtifact() && !isPW)
+                    g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
                 else {
                     if (!isHybrid) {
                         g.drawImage(isPW ? FSkinTexture.PWBG_M : FSkinTexture.CARDBG_M, x, y, w, h);
@@ -1005,6 +1052,8 @@ public class CardImageRenderer {
                     g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
                 else if (isNyx)
                     g.drawImage(FSkinTexture.NYX_M, x, y, w, h);
+                else if (state.isArtifact() && !isPW)
+                    g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
                 else
                     g.drawImage(isPW ? FSkinTexture.PWBG_M : FSkinTexture.CARDBG_M, x, y, w, h);
                 break;
@@ -1013,6 +1062,8 @@ public class CardImageRenderer {
                     g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
                 else if (isNyx)
                     g.drawImage(FSkinTexture.NYX_C, x, y, w, h);
+                else if (state.isArtifact() && !isPW)
+                    g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
                 else
                     g.drawImage(isPW ? FSkinTexture.PWBG_C : FSkinTexture.CARDBG_C, x, y, w, h);
                 break;
