@@ -102,6 +102,7 @@ Innistrad: Midnight Hunt, 3/6/MID, MID
 Innistrad: Crimson Vow, 3/6/VOW, VOW
 Innistrad: Double Feature, 3/6/MID, DBL
 Kamigawa: Neon Dynasty, 3/6/NEO, NEO
+Alchemy: Kamigawa, 3/6/NEO, YNEO
 Streets of New Capenna, 3/6/SNC, SNC
 Alchemy: New Capenna, 3/6/SNC, YSNC
 Alchemy Horizons: Baldur's Gate, 3/6/HBG, HBG
