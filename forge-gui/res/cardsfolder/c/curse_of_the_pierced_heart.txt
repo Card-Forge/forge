@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Enchantment Aura Curse
 K:Enchant player
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Player | AILogic$ Curse
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ DBChooseCard | TriggerDescription$ At the beginning of enchanted player's upkeep, CARDNAME deals 1 damage to that player.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ DBChooseCard | TriggerDescription$ At the beginning of enchanted player's upkeep, CARDNAME deals 1 damage to that player or a planeswalker that player controls.
 SVar:DBChooseCard:DB$ ChooseCard | Choices$ Planeswalker.ControlledBy TriggeredPlayer | Amount$ 1 | SubAbility$ DBDamagePlayer
 SVar:DBDamagePlayer:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1 | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBDamageChosen
 SVar:DBDamageChosen:DB$ DealDamage | Defined$ ChosenCard | NumDmg$ 1 | SubAbility$ DBCleanup
