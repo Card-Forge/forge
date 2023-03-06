@@ -1,5 +1,5 @@
 Name:Nettling Host
-ManaCost:2 B
+ManaCost:2 W
 Types:Creature Phyrexian Rat
 PT:1/4
 K:Toxic:2
