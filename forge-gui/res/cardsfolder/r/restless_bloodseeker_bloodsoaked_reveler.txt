@@ -23,4 +23,4 @@ SVar:X:Count$LifeYouGainedThisTurn
 SVar:DBToken:DB$ Token | TokenScript$ c_a_blood_draw
 A:AB$ LoseLife | Cost$ 4 B | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 2 life and you gain 2 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
-Oracle:At the beginning of your end step, if you gained life this turn, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")\nSacrifice two Blood tokens: Transform Restless Bloodseeker. Activate only as a sorcery.\n{4}{B}: Each opponent loses 2 life and you gain 2 life.
+Oracle:At the beginning of your end step, if you gained life this turn, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")\n{4}{B}: Each opponent loses 2 life and you gain 2 life.

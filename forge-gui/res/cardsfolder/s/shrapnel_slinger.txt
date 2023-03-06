@@ -6,4 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigSac:AB$ ImmediateTrigger | Cost$ Sac<1/Creature> | Execute$ TrigDestroy | TriggerDescription$ When you do, destroy target artifact an opponent controls.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.OppCtrl | TgtPrompt$ Select target artifact an opponent controls
 DeckHas:Ability$Sacrifice
-Oracle:When CARDNAME enters the battlefield, you may sacrifice a creature. When you do, destroy target artifact an opponent controls.
+Oracle:When Shrapnel Slinger enters the battlefield, you may sacrifice a creature. When you do, destroy target artifact an opponent controls.
