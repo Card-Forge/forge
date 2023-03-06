@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/nahiri.tmx",
+    "activeFile": "map/scarecrow_farm.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "tileset",
-        "map/main_story",
         "map",
-        "obj"
+        "obj",
+        "tileset",
+        "map/main_story"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -2613,7 +2613,7 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 495.25,
+                "x": 319.75,
                 "y": 208.25
             }
         },
@@ -2892,10 +2892,10 @@
                 4
             ],
             "scale": 3,
-            "selectedLayer": 3,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 263.83333333333337,
-                "y": 191.83333333333331
+                "x": 259.5,
+                "y": 288.5
             }
         },
         "map/skullcave_1.tmx": {
@@ -2927,7 +2927,7 @@
                 11
             ],
             "scale": 3,
-            "selectedLayer": 2,
+            "selectedLayer": 4,
             "viewCenter": {
                 "x": 504.8333333333333,
                 "y": 183.83333333333331
@@ -3111,7 +3111,7 @@
         },
         "tileset/main.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 2,
+            "scaleInDock": 1,
             "scaleInEditor": 1
         }
     },
@@ -3138,13 +3138,13 @@
     "property.type": "string",
     "recentFiles": [
         "map/aerie_1.tmx",
+        "map/nahiri.tmx",
+        "map/nahiricave.tmx",
+        "map/aerie_1B.tmx",
+        "map/graveyard_2.tmx",
+        "map/garruk.tmx",
         "map/slime_hive.tmx",
         "map/scarecrow_farm.tmx",
-        "map/garruk.tmx",
-        "map/graveyard_2.tmx",
-        "map/aerie_1B.tmx",
-        "map/nahiricave.tmx",
-        "map/nahiri.tmx",
         "map/swamp_town.tmx",
         "map/grove_4.tmx",
         "map/lavaforge_2.tmx",

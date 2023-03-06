@@ -1628,6 +1628,12 @@
 			"probability": 1,
 			"count": 2,
 			"cardName": "Chicken Egg"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Chicken Egg"
 		}
 	    ],
 	"colors": "WG"
@@ -7485,21 +7491,34 @@
 			]
 		},
 		{
-			"type": "deckCard",
-			"probability": 0.1,
+			"type": "card",
+			"probability": 1,
 			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
+			"cardName": "Reaper King"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Wickerwing Effigy"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Pili-Pala"
 		},
 		{
 			"type": "gold",
 			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Giant Scythe"
 		}
 	],
 	"colors": "WUBRG"
@@ -7528,34 +7547,13 @@
 		},
 		{
 			"type": "deckCard",
-			"probability": 0.5,
+			"probability": 0.1,
 			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
 			"rarity": [
 				"rare"
 			],
 			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
+				"Land"
 			]
 		},
 		{
@@ -7572,8 +7570,8 @@
 		{
 			"type": "gold",
 			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
+			"count": 100,
+			"addMaxCount": 200
 		}
 	],
 	"colors": "WUBRG"
