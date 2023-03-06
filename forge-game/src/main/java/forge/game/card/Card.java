@@ -2564,7 +2564,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     continue;
                 }
                 for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                    if (stAb.isSuppressed() || !stAb.checkConditions()) {
+                    if (!stAb.checkConditions()) {
                         continue;
                     }
 

@@ -1752,7 +1752,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isZeroTargets() {
-        return getMinTargets() == 0 && getTargets().size() == 0;
+        return getMinTargets() == 0 && getTargets().isEmpty();
     }
 
     public boolean isMinTargetChosen() {
