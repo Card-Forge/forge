@@ -905,7 +905,7 @@ public abstract class SpellAbilityEffect {
         return activator.getController().chooseSingleEntityForEffect(options, sa, Localizer.getInstance().getMessage("lblChoosePlayer"), null);
     }
 
-    public void handleExiledWith(final Card movedCard, final SpellAbility cause) {
+    public static void handleExiledWith(final Card movedCard, final SpellAbility cause) {
         Card exilingSource = cause.getHostCard();
         // during replacement LKI might be used
         if (cause.isReplacementAbility() && exilingSource.isLKI()) {

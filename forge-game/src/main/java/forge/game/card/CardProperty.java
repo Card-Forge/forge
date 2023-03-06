@@ -1501,32 +1501,13 @@ public class CardProperty {
                 return false;
             }
         }
-
-        // syntax example: countersGE9 P1P1 or countersLT12TIME (greater number
-        // than 99 not supported)
-        /*
-         * slapshot5 - fair warning, you cannot use numbers with 2 digits
-         * (greater number than 9 not supported you can use X and the
-         * SVar:X:Number$12 to get two digits. This will need a better fix, and
-         * I have the beginnings of a regex below
-         */
         else if (property.startsWith("counters")) {
-            /*
-             * Pattern p = Pattern.compile("[a-z]*[A-Z][A-Z][X0-9]+.*$");
-             * String[] parse = ???
-             * System.out.println("Parsing completed of: "+Property); for (int i
-             * = 0; i < parse.length; i++) {
-             * System.out.println("parse["+i+"]: "+parse[i]); }
-             */
-
-            // TODO get a working regex out of this pattern so the amount of
-            // digits doesn't matter
+            // syntax example: counters_GE9_P1P1 or counters_LT12_TIME
             final String[] splitProperty = property.split("_");
             final String strNum = splitProperty[1].substring(2);
             final String comparator = splitProperty[1].substring(0, 2);
-            String counterType;
-            int number = AbilityUtils.calculateAmount(source, strNum, spellAbility);
-            counterType = splitProperty[2];
+            final String counterType = splitProperty[2];
+            final int number = AbilityUtils.calculateAmount(source, strNum, spellAbility);
 
             final int actualnumber = card.getCounters(CounterType.getType(counterType));
 
