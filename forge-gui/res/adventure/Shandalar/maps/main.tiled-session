@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/scarecrow_farm.tmx",
+    "activeFile": "map/main_story/white_castle.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "map",
-        "obj",
         "tileset",
-        "map/main_story"
+        "map",
+        "map/main_story",
+        "obj"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -40,7 +40,7 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 245.83333333333334,
+                "x": 245.66666666666666,
                 "y": 136.16666666666663
             }
         },
@@ -62,8 +62,8 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 459.25,
-                "y": 319.25
+                "x": 399.75,
+                "y": 319.75
             }
         },
         "map/barbariancamp_1.tmx": {
@@ -2032,10 +2032,10 @@
                 4
             ],
             "scale": 2.177083333333333,
-            "selectedLayer": 2,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 239.54066985645937,
-                "y": 136.19138755980865
+                "x": 155.02392344497608,
+                "y": 136.65071770334927
             }
         },
         "map/kobold_mine.tmx": {
@@ -2436,10 +2436,10 @@
                 4
             ],
             "scale": 1.5,
-            "selectedLayer": 3,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 383.66666666666663,
-                "y": 383.66666666666663
+                "x": 301.99999999999994,
+                "y": 383
             }
         },
         "map/main_story/white_castle_f1.tmx": {
@@ -2449,8 +2449,8 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 286.5,
-                "y": 176
+                "x": 245.33333333333331,
+                "y": 447.83333333333326
             }
         },
         "map/maze_1.tmx": {
@@ -2610,11 +2610,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 2,
+            "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 319.75,
-                "y": 208.25
+                "x": 106,
+                "y": 253.83333333333331
             }
         },
         "map/nahiricave.tmx": {
@@ -2624,7 +2624,7 @@
             "scale": 1,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 368.5,
+                "x": 643,
                 "y": 200.5
             }
         },
@@ -2894,8 +2894,8 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 259.5,
-                "y": 288.5
+                "x": 263.83333333333337,
+                "y": 191.83333333333331
             }
         },
         "map/skullcave_1.tmx": {
@@ -2929,7 +2929,7 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 504.8333333333333,
+                "x": 295.83333333333337,
                 "y": 183.83333333333331
             }
         },
@@ -3125,30 +3125,29 @@
     "map.tileWidth": 16,
     "map.width": 90,
     "openFiles": [
-        "map/aerie_1.tmx",
         "map/nahiri.tmx",
         "map/nahiricave.tmx",
+        "map/aerie_1.tmx",
         "map/aerie_1B.tmx",
-        "map/graveyard_2.tmx",
-        "map/garruk.tmx",
-        "map/scarecrow_farm.tmx",
-        "map/slime_hive.tmx"
+        "map/aerie_1C.tmx",
+        "map/main_story/white_castle_f1.tmx",
+        "map/main_story/white_castle.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "map/aerie_1.tmx",
         "map/nahiri.tmx",
         "map/nahiricave.tmx",
+        "map/aerie_1.tmx",
         "map/aerie_1B.tmx",
-        "map/graveyard_2.tmx",
-        "map/garruk.tmx",
+        "map/aerie_1C.tmx",
+        "map/main_story/white_castle_f1.tmx",
+        "map/main_story/white_castle.tmx",
+        "map/kiora_island.tmx",
         "map/slime_hive.tmx",
         "map/scarecrow_farm.tmx",
-        "map/swamp_town.tmx",
-        "map/grove_4.tmx",
-        "map/lavaforge_2.tmx",
-        "map/lavaforge_1.tmx"
+        "map/garruk.tmx",
+        "map/graveyard_2.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true
