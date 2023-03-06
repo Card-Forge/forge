@@ -3,6 +3,7 @@ Code=YONE
 Date=2023-02-28
 Name=Alchemy: Phyrexia
 Type=Online
+Booster=1 UncommonRareMythic, 9 Common:fromsheet("ONE cards"), 3 Uncommon:fromSheet("ONE cards"), 1 RareMythic:fromSheet("ONE cards"), 1 BasicLand:fromSheet("ONE cards")
 ScryfallCode=YONE
 
 [cards]
