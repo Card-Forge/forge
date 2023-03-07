@@ -7524,7 +7524,7 @@
 	"colors": "WUBRG"
 },
 {
-	"name": "Scarecrow Leader",
+	"name": "Scarecrow Captain",
 	"sprite": "sprites/dungeon/scarecrowcaptain.atlas",
 	"deck": [
 		"decks/scarecrowcaptain.dck"
