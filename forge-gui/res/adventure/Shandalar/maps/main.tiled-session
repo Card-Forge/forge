@@ -6,10 +6,10 @@
     "activeFile": "map/scarecrow_farm.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "map/main_story",
-        "tileset",
+        "obj",
         "map",
-        "obj"
+        "map/main_story",
+        "tileset"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {

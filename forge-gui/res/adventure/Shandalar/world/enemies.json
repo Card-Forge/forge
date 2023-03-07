@@ -7491,37 +7491,24 @@
 			]
 		},
 		{
-			"type": "card",
-			"probability": 1,
+			"type": "deckCard",
+			"probability": 0.1,
 			"count": 1,
-			"cardName": "Reaper King"
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Wickerwing Effigy"
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Pili-Pala"
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
 			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
-		},
-		{
-			"type": "item",
-			"probability": 1,
-			"count": 1,
-			"itemName": "Giant Scythe"
 		}
 	],
-	"colors": "WUBRG"
+	"colors": "U"
 },
 {
 	"name": "Scarecrow Captain",
@@ -7572,6 +7559,36 @@
 			"probability": 0.3,
 			"count": 100,
 			"addMaxCount": 200
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Reaper King"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Wickerwing Effigy"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Pili-Pala"
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Giant Scythe"
 		}
 	],
 	"colors": "WUBRG"
