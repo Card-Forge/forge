@@ -118,32 +118,7 @@ public class Main {
             config.setWindowedMode(Config.instance().getSettingData().width, Config.instance().getSettingData().height);
         }
         config.setTitle("Forge");
-        config.setWindowListener(new Lwjgl3WindowListener() {
-            @Override
-            public void created(Lwjgl3Window lwjgl3Window) {
-
-            }
-
-            @Override
-            public void iconified(boolean b) {
-
-            }
-
-            @Override
-            public void maximized(boolean b) {
-
-            }
-
-            @Override
-            public void focusLost() {
-
-            }
-
-            @Override
-            public void focusGained() {
-
-            }
-
+        config.setWindowListener(new Lwjgl3WindowAdapter(){
             @Override
             public boolean closeRequested() {
                 //use the device adpater to exit properly
@@ -151,17 +126,8 @@ public class Main {
                     Forge.exit(true);
                 return false;
             }
-
-            @Override
-            public void filesDropped(String[] strings) {
-
-            }
-
-            @Override
-            public void refreshRequested() {
-
-            }
         });
+
         if (desktopMode)
             config.setHdpiMode(HdpiMode.Logical);
 
