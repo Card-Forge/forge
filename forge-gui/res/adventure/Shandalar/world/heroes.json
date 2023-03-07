@@ -51,6 +51,13 @@
     "maleAvatar":"Viashino_m" 
   }   ,
   {
+    "name":"Phyrexian",
+    "female":"sprites/heroes/phyrexian_r.atlas",      
+    "male":"sprites/heroes/phyrexian_u.atlas",      
+    "femaleAvatar":"Phyrexian_f",      
+    "maleAvatar":"Phyrexian_m" 
+  }   ,
+  {
     "name":"Dwarf",
     "female":"sprites/heroes/dwarf_f.atlas",      
     "male":"sprites/heroes/dwarf_m.atlas",      

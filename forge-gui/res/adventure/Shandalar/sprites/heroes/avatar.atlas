@@ -1,5 +1,5 @@
 avatar.png
-size: 160,256
+size: 160,288
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none       
@@ -483,3 +483,63 @@ Dwarf_f
 Dwarf_f
   xy: 144, 240
   size: 16, 16        
+Phyrexian_m
+  xy: 0, 256
+  size: 16, 16         
+Phyrexian_m
+  xy: 16, 256
+  size: 16, 16        
+Phyrexian_m
+  xy: 32, 256
+  size: 16, 16        
+Phyrexian_m
+  xy: 48, 256
+  size: 16, 16        
+Phyrexian_m
+  xy: 64, 256
+  size: 16, 16        
+Phyrexian_m
+  xy: 80, 256
+  size: 16, 16        
+Phyrexian_m
+  xy: 96, 256
+  size: 16, 16        
+Phyrexian_m
+  xy: 112, 256
+  size: 16, 16        
+Phyrexian_m
+  xy: 128, 256
+  size: 16, 16        
+Phyrexian_m
+  xy: 144, 256
+  size: 16, 16        
+Phyrexian_f
+  xy: 0, 272
+  size: 16, 16         
+Phyrexian_f
+  xy: 16, 272
+  size: 16, 16        
+Phyrexian_f
+  xy: 32, 272
+  size: 16, 16        
+Phyrexian_f
+  xy: 48, 272
+  size: 16, 16        
+Phyrexian_f
+  xy: 64, 272
+  size: 16, 16        
+Phyrexian_f
+  xy: 80, 272
+  size: 16, 16        
+Phyrexian_f
+  xy: 96, 272
+  size: 16, 16        
+Phyrexian_f
+  xy: 112, 272
+  size: 16, 16        
+Phyrexian_f
+  xy: 128, 272
+  size: 16, 16        
+Phyrexian_f
+  size: 16, 16        
+  xy: 144, 272
