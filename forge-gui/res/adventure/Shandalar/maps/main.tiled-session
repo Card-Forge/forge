@@ -3,12 +3,12 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/scarecrow_farm.tmx",
+    "activeFile": "map/nest_blue_1.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "map",
-        "map/main_story",
         "tileset",
+        "map/main_story",
+        "map",
         "obj"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -2629,11 +2629,11 @@
             }
         },
         "map/nest_blue_1.tmx": {
-            "scale": 0.75,
-            "selectedLayer": 4,
+            "scale": 1,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 401.3333333333333,
-                "y": 400.6666666666667
+                "x": 509,
+                "y": 282.5
             }
         },
         "map/nest_white_1.tmx": {
@@ -2991,8 +2991,8 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 239.83333333333331,
-                "y": 136.16666666666663
+                "x": 377.66666666666663,
+                "y": 117.83333333333334
             }
         },
         "map/tileset/buildings.tsx": {
@@ -3111,7 +3111,7 @@
         },
         "tileset/main.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         }
     },
@@ -3132,7 +3132,8 @@
         "map/aerie_1C.tmx",
         "map/main_story/white_castle_f1.tmx",
         "map/main_story/white_castle.tmx",
-        "map/scarecrow_farm.tmx"
+        "map/scarecrow_farm.tmx",
+        "map/nest_blue_1.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
@@ -3145,10 +3146,10 @@
         "map/main_story/white_castle_f1.tmx",
         "map/main_story/white_castle.tmx",
         "map/scarecrow_farm.tmx",
+        "map/nest_blue_1.tmx",
+        "map/teferi.tmx",
         "map/kiora_island.tmx",
-        "map/slime_hive.tmx",
-        "map/garruk.tmx",
-        "map/graveyard_2.tmx"
+        "map/slime_hive.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true
