@@ -362,20 +362,25 @@ public class Controls {
     }
 
     public static String colorIdToTypingString(ColorSet color) {
+        return colorIdToTypingString(color, false);
+    }
+
+    public static String colorIdToTypingString(ColorSet color, boolean vertical) {
+        String nextline = vertical ? "\n" : "";
         //NOTE converting to uppercase will use pixelmana.atlas, higher quality pixel mana symbol.
         String colorId = "";
         if (color.hasWhite())
-            colorId += "[+w]";
+            colorId += "[+w]"+nextline;
         if (color.hasBlue())
-            colorId += "[+u]";
+            colorId += "[+u]"+nextline;
         if (color.hasBlack())
-            colorId += "[+b]";
+            colorId += "[+b]"+nextline;
         if (color.hasRed())
-            colorId += "[+r]";
+            colorId += "[+r]"+nextline;
         if (color.hasGreen())
-            colorId += "[+g]";
+            colorId += "[+g]"+nextline;
         if (color.isColorless())
-            colorId += "[+c]";
+            colorId += "[+c]"+nextline;
         return colorId;
     }
 
