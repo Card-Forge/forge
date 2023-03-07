@@ -52,7 +52,7 @@
    <properties>
     <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Scarecrow Leader&quot;]
 }</property>
-    <property name="enemy" value="Scarecrow Leader"/>
+    <property name="enemy" value="Scarecrow Captain"/>
    </properties>
   </object>
   <object id="62" template="../obj/enemy.tx" x="353.762" y="308.389">

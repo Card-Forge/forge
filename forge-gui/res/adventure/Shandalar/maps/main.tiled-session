@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/main_story/white_castle.tmx",
+    "activeFile": "map/scarecrow_farm.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
+        "obj",
         "tileset",
         "map",
-        "map/main_story",
-        "obj"
+        "map/main_story"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -40,7 +40,7 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 245.66666666666666,
+                "x": 240,
                 "y": 136.16666666666663
             }
         },
@@ -51,7 +51,7 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240.25,
+                "x": 240,
                 "y": 136.25
             }
         },
@@ -62,7 +62,7 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 399.75,
+                "x": 400,
                 "y": 319.75
             }
         },
@@ -2438,8 +2438,8 @@
             "scale": 1.5,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 301.99999999999994,
-                "y": 383
+                "x": 384,
+                "y": 383.66666666666663
             }
         },
         "map/main_story/white_castle_f1.tmx": {
@@ -2449,8 +2449,8 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 245.33333333333331,
-                "y": 447.83333333333326
+                "x": 240,
+                "y": 239.83333333333331
             }
         },
         "map/maze_1.tmx": {
@@ -2624,7 +2624,7 @@
             "scale": 1,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 643,
+                "x": 368,
                 "y": 200.5
             }
         },
@@ -2894,7 +2894,7 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 263.83333333333337,
+                "x": 263.66666666666663,
                 "y": 191.83333333333331
             }
         },
@@ -3131,7 +3131,8 @@
         "map/aerie_1B.tmx",
         "map/aerie_1C.tmx",
         "map/main_story/white_castle_f1.tmx",
-        "map/main_story/white_castle.tmx"
+        "map/main_story/white_castle.tmx",
+        "map/scarecrow_farm.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
@@ -3143,9 +3144,9 @@
         "map/aerie_1C.tmx",
         "map/main_story/white_castle_f1.tmx",
         "map/main_story/white_castle.tmx",
+        "map/scarecrow_farm.tmx",
         "map/kiora_island.tmx",
         "map/slime_hive.tmx",
-        "map/scarecrow_farm.tmx",
         "map/garruk.tmx",
         "map/graveyard_2.tmx"
     ],
