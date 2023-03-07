@@ -263,7 +263,7 @@ public class MapStage extends GameStage {
             TypingLabel deckColors = Controls.newTypingLabel(Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck), true).toUpperCase());
             deckColors.skipToTheEnd();
             deckColors.setAlignment(Align.left);
-            deckColors.setPosition(58, 60);
+            deckColors.setPosition(58, 40);
             TextraLabel deckname = Controls.newTextraLabel(deck.getName());
             deckname.setAlignment(Align.center);
             deckname.setWrap(true);
