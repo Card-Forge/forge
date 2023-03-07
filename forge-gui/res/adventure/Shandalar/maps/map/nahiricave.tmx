@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="46" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="68">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="46" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="74">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -7,7 +7,7 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="7" name="background" width="46" height="25">
   <data encoding="base64" compression="zlib">
-   eJzt1EsOgCAMBFAWbrwYx/cW3sO4MCEEaqcdPlGadAf1QalxDyGuXPnjrMVol9U98xm0cWx9Dd71t/dJqV5p/5tDCsYZU3dpXalGrbY2NG5NL1N37jgBT7ofNUu91b4r5P4Y92x1eyySDTFY5rs0n0w3akcjn1GNCf0+26wJ9C6ZbnRtbZ/W4nV7++OZfa/BMxfW/wDjPbeoPauZ1UPvO57V3dLPrN3T3bJ/oz1fdl+Y8gOQ
+   eJzt1EsOgCAMBFAWbrwYx/dMxoUJMQVnyvCJ0qQ7rK+WGvcQ4sqVP85cjHZ53TP3gMax9TXUnr+8d5bqWc+/OUqh6DF1W+esGrnaaCBuZJap2+OwXKy5NFv0XtW6vWbWbdVX2BiDZ7+t/VS6WTsbzx1FTOz71WYk2G+pdHt7RPYY3Z2W55l+Vf8I5t2q+XoTiRa1ZzWrZlh7j2d1t/Qra/d0t5zfaM+X3Sf+6QIE
   </data>
  </layer>
  <layer id="9" name="Tilelaag 4" width="46" height="25">
@@ -30,12 +30,6 @@
  </layer>
  <objectgroup id="4" name="Objects">
   <object id="53" template="../obj/treasure.tx" x="120.5" y="177"/>
-  <object id="58" template="../obj/entry_up.tx" x="695" y="136">
-   <properties>
-    <property name="teleport" value="maps/map/nahiri.tmx"/>
-    <property name="teleportObjectId" value="78"/>
-   </properties>
-  </object>
   <object id="59" template="../obj/enemy.tx" x="320" y="189">
    <properties>
     <property name="enemy" value="Cave Spider"/>
@@ -64,10 +58,16 @@
   <object id="64" template="../obj/gold.tx" x="681" y="244"/>
   <object id="65" template="../obj/gold.tx" x="498" y="322"/>
   <object id="66" template="../obj/gold.tx" x="147" y="312"/>
-  <object id="67" template="../obj/door_right.tx" x="45" y="395.333">
+  <object id="71" template="../obj/door_up.tx" x="716" y="133">
    <properties>
     <property name="teleport" value="maps/map/nahiri.tmx"/>
-    <property name="teleportObjectId" value="77"/>
+    <property name="teleportObjectId" value="79"/>
+   </properties>
+  </object>
+  <object id="73" template="../obj/door_right.tx" x="43" y="395">
+   <properties>
+    <property name="teleport" value="maps/map/nahiri.tmx"/>
+    <property name="teleportObjectId" value="83"/>
    </properties>
   </object>
  </objectgroup>

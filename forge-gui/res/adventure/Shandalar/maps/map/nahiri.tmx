@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="79">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="84">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJytlrtvE0EQxtfIzkMixijIzpmC0ivrQkgBogT+DkCCGhokdMYOj46OQBmgS0WHhGMsoKMGCiICVXqoID1iRrejnRvP7tkWI33ae+zjd3O7326rYkyrRG3QHlMyY/1Qm2mijA01Aj2GutaVQ2XMPjzPTP585MbeXM7LX8d9G9SN1Jib6fx88vsp9qvFtkPBuObqrijjLLHr+8D2IC32PQvfGmv3TmmTdOEbuvl1032DbIeBeYsF5XUevtMLXhSfFvPyPLBdYHzUbgvu70XUV8bHOdAMMIbmG/JdrE4KQ143A31oIn7JqfHF+pH/KRb0f8uUCM6+6GMevlYD1iIT/t9RQxeu3Yz1n4nxMqZEyYFkJP8p46NIK8WS4jfM8T+gI2UtZKKkGDoPwvVBa30Wvi3X56hhgjFwHW9D+RT0bMV7yEAYzCVrzGXQFZvf98zkPOR83L81Pi3/oVivG3MWtFEP17kKXNdA161n0eZ5Ipj49RmFU/ODVRjjlNU5yO/ew/sPos6dWl7if+G+ruVwWj6NcQPGPRfgoziA999dnSNYU3+PFfk+Wj2HsXUc4uOedXJB90XUt8Bz0irz+UOF740peqnGlwQU8sQTqc8J5ScWY1fi+hiYYr84N6TXcz7kkOeCJ7Agt5eKZxIe3NM430PIzyPr62B8rnrxswzvl5hDa7Yt6qewN64v+/te3X8rD7znfC+A7aUtvsc5iNGN+II8OyWCD3Ot+S3loCc8hNtcbG7G5ucBO7PJfA4ZH+WO+60MyafFbiA/lF/KX899N/8uzkoh97SY3/5wzHJ/iO1xkg+D/IWC/o/2D8rOLHLv1HLIc95g5/a3wDG2k3yHJf7J5/esZyqNL5Tzr8Cxb/M83K35vNM6fgX5ulWLn6HL+HCe8D0E+Wh/j52TuZ+gMH/y2RfQ68U4F1+7fclick+i8yQp5lNt1xfmhQsDy52OMc87+fXtiKdrfeMeMq5MxxE72+LYmBeun67cA7ZRxz+fhut/CvkkW0yxwP7+Ac3T4hA=
+   eJylVj1vE0EQ3SA7HxIxRkHnOPwAr6wLgSKIEvI7AAlqaJCQnTNfHR2BkkBHlQ4J54ggHTVQEBGo0kMF6VFmdDvaufHsnm2e9LT3sbf77u3M7LZmjGlVcAW4y9iesH/oG0LoufZOYw58Cn2ta4eBOXumeJ67OS4tFO3v0/4b5K3UmNupUVGlXft/wkGtPNZQaFx2fReVeefZ9UPQ9igtjx2Cpm+ZffdB+abdhX/oFtdJ4DsE+hYD+TqNvvOznoTPc0W7DtouK/oewP1mhJkyP8ZAosRcSBvpu1IbJUJeJ4ExNJJ+qZPrG2ccuU4xJEquamwLnZkYYxp9rSbkIiOub97UibnbY3Pya7ontl0Oyv/kuRtbY66PkM6UW8IfiPG/wGMlF3qiJQxdDcL8oFzX4iTmJ2rMmyaIgRt4C9rnwBeLvoYMRIG5ao25BtywxX3fjMZhouip0jcOVhvGXACuNcJ9roOuG8Cb1muhOssh631MH1KrB0swxzmr66B69xHe74s+9+pFi2vN67r0cBJ9msY1mPdiQB/hEN7/cH2OIaf+nSrr+2R1D6fRx2vW2Vm9LiK/B54Tl1idP1L0vTOjOTyOvlg8nkm9J+RPDHuuxfwYmLI+jI0q/+S54Bkk5NZ8+UzCwWsa1/cY/HlifR/El5onP8vwcUlziCuifwp74+qCv+83/L9y4D3X9wq0vbbl9xiDiG6kLkiPZD7jGmr1ljzoixrCy1wsNmPxecjObNLPoeIdr7cSUp+GNwF/yF/yr+/+m/8X10qQ8R+rtz+dZrk/xPY4qQ9B9YVA66OtQdV+IfdOzUPueZOd29+Djj07qu9I1M+WmJvH96T7maYv5Pk30HFgCx/u173vlMc74NedevwMXaUP44TvIaiP9vfYOZnXEyT6J599Bb6di+vi+jKpxfiaRO8y5VtZo3As9IUTge3LjjHbneL6bqCmj7PnZqa6Xob2GZwbfeH85dpd0JZ3/PNJtf0vUZ/UFmPIP2pPAOHq4Qo=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -36,7 +36,7 @@
    </properties>
   </object>
   <object id="51" template="../obj/treasure.tx" x="176.166" y="54.6663"/>
-  <object id="57" template="../obj/enemy.tx" x="469.833" y="71.8337">
+  <object id="57" template="../obj/enemy.tx" x="483.5" y="86.8337">
    <properties>
     <property name="enemy" value="Bear"/>
    </properties>
@@ -85,17 +85,16 @@
     <property name="enemy" value="Armored Knight "/>
    </properties>
   </object>
-  <object id="77" template="../obj/door_down.tx" x="119" y="286.5">
+  <object id="79" template="../obj/door_down.tx" x="471" y="65.1667">
    <properties>
     <property name="teleport" value="maps/map/nahiricave.tmx"/>
-    <property name="teleportObjectId" value="67"/>
+    <property name="teleportObjectId" value="71"/>
    </properties>
   </object>
-  <object id="78" template="../obj/door_down.tx" x="469" y="53">
+  <object id="83" template="../obj/door_left.tx" x="119.333" y="287">
    <properties>
-    <property name="direction" value="down"/>
     <property name="teleport" value="maps/map/nahiricave.tmx"/>
-    <property name="teleportObjectId" value="58"/>
+    <property name="teleportObjectId" value="73"/>
    </properties>
   </object>
  </objectgroup>

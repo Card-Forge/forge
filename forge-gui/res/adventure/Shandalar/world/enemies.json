@@ -1628,6 +1628,12 @@
 			"probability": 1,
 			"count": 2,
 			"cardName": "Chicken Egg"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Chicken Egg"
 		}
 	    ],
 	"colors": "WG"
@@ -7502,10 +7508,10 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "WUBRG"
+	"colors": "U"
 },
 {
-	"name": "Scarecrow Leader",
+	"name": "Scarecrow Captain",
 	"sprite": "sprites/dungeon/scarecrowcaptain.atlas",
 	"deck": [
 		"decks/scarecrowcaptain.dck"
@@ -7514,7 +7520,7 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"scale": 0.40,
-	"life": 30,
+	"life": 35,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -7524,38 +7530,6 @@
 			"rarity": [
 				"common",
 				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
 			]
 		},
 		{
@@ -7570,10 +7544,34 @@
 			]
 		},
 		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Reaper King"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Wickerwing Effigy"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Pili-Pala"
+		},
+		{
 			"type": "gold",
 			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
+			"count": 100,
+			"addMaxCount": 500
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Giant Scythe"
 		}
 	],
 	"colors": "WUBRG"
