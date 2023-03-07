@@ -102,12 +102,14 @@ public class GameHUD extends Stage {
         touchpad.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                if (gameStage == null || gameStage.isPaused())
-                    return;
                 if (MapStage.getInstance().isInMap()) {
+                    if (MapStage.getInstance().isPaused())
+                        return;
                     MapStage.getInstance().getPlayerSprite().getMovementDirection().x += ((Touchpad) actor).getKnobPercentX();
                     MapStage.getInstance().getPlayerSprite().getMovementDirection().y += ((Touchpad) actor).getKnobPercentY();
                 } else {
+                    if (WorldStage.getInstance().isPaused())
+                        return;
                     WorldStage.getInstance().getPlayerSprite().getMovementDirection().x += ((Touchpad) actor).getKnobPercentX();
                     WorldStage.getInstance().getPlayerSprite().getMovementDirection().y += ((Touchpad) actor).getKnobPercentY();
                 }
