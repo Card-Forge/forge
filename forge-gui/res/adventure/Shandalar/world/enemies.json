@@ -7520,7 +7520,7 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"scale": 0.40,
-	"life": 30,
+	"life": 35,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -7544,23 +7544,6 @@
 			]
 		},
 		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.3,
-			"count": 100,
-			"addMaxCount": 200
-		},
-		{
 			"type": "card",
 			"probability": 1,
 			"count": 1,
@@ -7581,8 +7564,8 @@
 		{
 			"type": "gold",
 			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
+			"count": 100,
+			"addMaxCount": 500
 		},
 		{
 			"type": "item",
