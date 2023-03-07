@@ -1606,7 +1606,7 @@
 {
 	"name": "Chicken",
 	"sprite": "sprites/dungeon/chicken.atlas",
-	"scale": 0.50,
+	"scale": 0.75,
 	"deck": [
 		"decks/chicken.dck"
 	],
