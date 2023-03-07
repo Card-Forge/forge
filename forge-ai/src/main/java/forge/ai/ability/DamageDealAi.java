@@ -358,7 +358,7 @@ public class DamageDealAi extends DamageAiBase {
                 return c.getSVar("Targeting").equals("Dies")
                         || (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d)
                             && !ComputerUtil.canRegenerate(ai, c)
-                            && !(c.getSVar("SacMe").length() > 0)
+                            && !c.hasSVar("SacMe")
                             && !ComputerUtilCard.hasActiveUndyingOrPersist(c);
             }
         });
@@ -437,7 +437,7 @@ public class DamageDealAi extends DamageAiBase {
                 return c.getSVar("Targeting").equals("Dies")
                         || (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d)
                         && !ComputerUtil.canRegenerate(ai, c)
-                        && !(c.getSVar("SacMe").length() > 0);
+                        && !c.hasSVar("SacMe");
             }
         });
 

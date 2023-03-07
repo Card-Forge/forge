@@ -503,8 +503,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         if (thisHasFizzled) { // Fizzle
             if (sa.isBestow()) {
-                // 702.102d: if its target is illegal,
-                // the effect making it an Aura spell ends.
+                // 702.102e: if its target is illegal, the effect making it an Aura spell ends.
                 // It continues resolving as a creature spell.
                 source.unanimateBestow();
                 SpellAbility first = source.getFirstSpellAbility();
@@ -834,10 +833,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
 
             if (activator.equals(activePlayer)) {
+                adjustAuraHost(sa);
                 activePlayerSAs.add(sa);
             }
-
-            adjustAuraHost(sa);
         }
         simultaneousStackEntryList.removeAll(activePlayerSAs);
 

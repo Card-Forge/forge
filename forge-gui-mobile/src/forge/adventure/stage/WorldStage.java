@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import forge.Forge;
 import forge.adventure.character.CharacterSprite;
@@ -155,14 +156,21 @@ public class WorldStage extends GameStage implements SaveFileContent {
         if (playerIsWinner) {
             Current.player().win();
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
-            currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
-            currentMob.playEffect(Paths.EFFECT_BLOOD, 0.5f);
-            startPause(1f, () -> {
-                RewardScene.instance().loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
-                WorldStage.this.removeEnemy(currentMob);
-                currentMob = null;
-                Forge.switchScene(RewardScene.instance());
-            });
+            float vx = currentMob.getData().scale == 1f ? 0f : -((currentMob.getWidth()*currentMob.getData().scale)/2);
+            float vy = currentMob.getData().scale == 1f ? 0f : -((currentMob.getHeight()*currentMob.getData().scale)/2);
+            currentMob.playEffect(Paths.EFFECT_BLOOD, 0.5f, true, new Vector2(vx, vy));
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
+                    startPause(0.3f, () -> {
+                        RewardScene.instance().loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
+                        WorldStage.this.removeEnemy(currentMob);
+                        currentMob = null;
+                        Forge.switchScene(RewardScene.instance());
+                    });
+                }
+            }, 1f);
         } else {
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
