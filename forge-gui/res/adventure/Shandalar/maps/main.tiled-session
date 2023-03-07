@@ -6,10 +6,10 @@
     "activeFile": "map/scarecrow_farm.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "obj",
+        "map/main_story",
         "tileset",
         "map",
-        "map/main_story"
+        "obj"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -2894,7 +2894,7 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 263.66666666666663,
+                "x": 263.3333333333333,
                 "y": 191.83333333333331
             }
         },
