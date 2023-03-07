@@ -1,4 +1,4 @@
-Name:Scarecrow Captain
+Name:Scarecrow Totem
 ManaCost:no cost
 Types:Artifact
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigChoose | TriggerDescription$ At the beginning of your end step, conjure a duplicate of a random creature card from your opponent's library into your hand. The duplicate perpetually becomes an Artifact Scarecrow in addition to it's other types and has alternative manacost {4}.
