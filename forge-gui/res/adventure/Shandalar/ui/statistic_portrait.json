@@ -19,12 +19,20 @@
       "height": 98
     },
     {
-      "type": "Scroll",
-      "name": "enemies",
+      "type": "Window",
+      "name": "scrollWindow",
       "x": 4,
       "y": 106,
       "width": 262,
       "height": 327
+    },
+    {
+      "type": "Table",
+      "name": "enemies",
+      "x": 4,
+      "y": 110,
+      "width": 262,
+      "height": 318
     },
     {
       "type": "Image",
