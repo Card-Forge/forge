@@ -10,7 +10,7 @@
       "height": 480
     },
     {
-      "type": "Scroll",
+      "type": "Window",
       "name": "deckSlots",
       "x": 4,
       "y": 4,

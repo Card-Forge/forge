@@ -344,6 +344,7 @@ public class SaveLoadScene extends UIScene {
                 difficulty.setVisible(false);
             }
         }
+        performTouch(scrollPane); //can use mouse wheel if available to scroll
         super.enter();
     }
 }
