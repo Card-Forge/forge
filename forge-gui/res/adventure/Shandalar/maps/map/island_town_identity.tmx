@@ -20,12 +20,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKAfKORgYCgC4mIOOloKBPycDAwCQCzISV97KQWdWgwMXVoQtrEOA4OJDu3s2qjOwLBJHcJeCrRzGRDrDZLwQvY7NcMhl4s8uZEInmiQp88amI5s0NLwWTSzYOLoNLXBS6i9hOJ2GTdl9lCqfxTQH1xhZ2C4yk5/eweiPgQBAMi+FTE=
+   eJxjYKAfKORgYCgC4mIOOloKBPycDAwCQCzISV97KQWdWgwMXVoQtrEOA4OJDu3s2qjOwLBJHcJeCrRzGRDrDZLwQvY7rcNhFGAHTzTI02cNTEc2BNIwTBydHiiwjHtg9Y8C+oMr7AwMV9npb+9A1IcgAAAvOBHG
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFpABxHQYGCR3amT9VnYFhmjqE3anFwNClRTu7SAXIfqd1OIwC7OCEBnn65IHpSAGalnDFHUwcnR4Fo2AUDC8AAJuECBU=
+   eJxjYBgFpABxHQYGCR3amT9VnYFhmjqE3anFwNClRTu7SAXIfqd1ONAD5HKRJzeQ4IQGefrkgelIAZqWcMUdTBydpjY4S6YfKAUvofYO1rgdBaOAXgAANRkLgA==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

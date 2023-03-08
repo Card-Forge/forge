@@ -7,7 +7,7 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJyL4GZgiBjFo3gUj+JRPIpH8YjAAH23xTs=
+   eJyL4GZgiBjFo3gUj2I6YRgYKfaO4lE82DAAbVDDrw==
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
@@ -20,12 +20,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKAcNPJSJk9tQG/7KAUNQPc6MDEwLGYkDzsxkW5nPTSM7kL1emqhYnxgETeqXmIBsh/rmBH2wgCI/VmdgeGLOm4zdLRJtxek3hpotg0ef+mzE2cOsQAUpzD1+Mw+iyRnrMPAYKKDySbHvzCzcZmJbK8+DjYl9uIyE9nec0D2ZDYIzuOg3N4coBm5QGzEjuDD2DB7dbVR3QACsHAh116YfpB9MP9cQLPXgB3hR1j+gYULufZiS1dn0eyFuckQS1hTEs4gc0BhC/IXiEa3F9k96GUbLO+Tai8MgOwH+QEW3yC/5SKFPcyPpPoPHdQw4y9zsfmNFP/VkVFP3YXaS6nfAKsYWFc=
+   eJxjYKAcNPJSJk9tQG/7KAUNQPc6MDEwLGYkDzsxkW5nPTSM7kL1emqhYnxgETeqXmIBsh/rmLGr+azOwPBFHb85pNoLUm8N9JMNHn/psxNnDrEAFKcw9fjMPoskZ6zDwGCig8kmx78ws3GZiWyvPg42JfbiMhPZ3nNA9mQ2CM7joNzeHKAZuUBsxI7gw9hncbgBBGDhQq69MP0g+2D+uYBmrwE7wo+w/AMLF3LtxZauzqLZC3OTIZawpiScQeaAwhbkLxCNbi+ye9DLNlx5n5C9MACyH+QHWHyD/JaLFPYwP5LqP3RQw4y/zMXmN1L8V0dGPXUXai+lfgMA8KZWwg==
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBg8oIZ3oF0wCmDgujoDww116psrr8XAoKAFYTcN0vgW12FgkNDBZNPKTD1Oys0fDoDSsKZWXCGDlkGSRgeLO4gB9VRwK8y/zUPI30MJAACVSQnZ
+   eJxjYBg8oIZ3oF0wCmDgujoDww116psrr8XAoKAFYTcB49tTCyGHzMYFdLSp7yZ0IK7DwCChg8mmlZl6nJSbPxwApWFNjH5dEtNPyyApkwaLO4gB9VRwK8y/zUPI30MJAABPuwtu
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

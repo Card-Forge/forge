@@ -20,7 +20,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzT5mFg0AFieoE2bgh9EmjnKR7scoMNCGszMIhoY4ovJsO9g82Pn5D8ZazDwGCiM3BuQQcD7R5i7c8ixUws6Wig/UktYK3FwGCjRZkZgzksSIlneoMsJEwsuAlMi7ewpEdkM4mxl1i1MPAVaOc3PPYSC15oUG4GDOQAcS4Sn15xzcXIwMDNiGknre0HAGN/FdI=
+   eJzT5mFg0AFieoE2bgh9EmjnKR7scoMNCGszMIhoY4ovJsO9g82Pn5D8ZazDwGCiM3BuQQcD7R5i7c+ikz2DHVhrMTDYaFFmxmAOC0rjmZYgCwkTC24C8/4tLOUaspnE2EusWhj4CrTzGx57iQUvNCg3AwZygDgXiU+vuOZiZGDgZsS0k9b2AwC5nBV0
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">

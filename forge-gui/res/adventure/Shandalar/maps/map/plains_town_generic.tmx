@@ -20,12 +20,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4D2YAsLA4M4FfE2FuLsDWTFLl6gSRxfXouBQUGLsHmE7F3CTZw+GLAG2mlDBXthQE8bwf6kjUoTY14VL241lbzEu49YQKl/R7q9X4Fx+42E+CVXnbEOA4OJDuluoEU463FSz7zBHr/Dwd4qpHIDVBbpI5VLhkCsqw1hw8piEA3i66Cpg7GR7S3HU14R6z5SALJ5FVjshomRYq8gjnyFy1584AMr8XUqMXX1JyqGH8wP1I4TGKjEEh99moTtxaaPGgDZ3hxN/GppZe8oGAXYAAB7/jCB
+   eJxjYBgFo4D2YAsLA4M4FfE2FuLsDWTFLl6gSRxfXouBQUGLsHmE7F3CTZw+GLAG2mlDBXthQE8bwf6kjUoTY14VL241lbzEu49YQKl/R7q9X4Fx+42E+CVXnbEOA4OJDuluGC7hPGov+eZVIZUbn7CUT+hsYtTBzCvHU14R6z5SALJ5FVjshokNVPx+YCW+TiWmrv5ERX/A/EDtsIGBSizx0adJ2F5s+qgBkO3N0cSvllb2joJRgA0AAORDLRo=
   </data>
  </layer>
  <layer id="5" name="Overlay" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBhYMIuXgWE2DfEcXuz2WvDR1l9WOMwftXdw2dvKw8CgC2WfgvLpYS8IXNNGpellLzlgKNqrqcnAoKVJWIwSe3XwmGGuAVQPxJYauNXoovGJtRc9yYgDHSIBdUww0L4QIA6F2nsTqPgWmoZTZNqriqM8FcUXEEgAPX9hs3eX9uBOV/SwF1+9CKvTiFFDqr3IZREuNinqBns4j9o7au9QtvcaUPw6kRgZEKvnBo39NQoGFwAAZ+tPHw==
+   eJxjYBhYMIuXgWE2DfEcXuz2WvDR1l9WOMwftXdw2dvKw8CgC2WfgvLpYS8IXNNGpellLzlgKNqrqcnAoKVJWIwSe3XwmGGuAVQPxJYauNXoovGJtRc9yYgDHSIBdUww0L4QIA6F2nsTqPgWmoZTZNqriqM8FcUXEEgAPX9hs3eXNnnpSo+TeLWDPT3jqxdhdRoxaki1F7kswsUmRR0p4ayPpNcQyNaF8gs0UWkdNHXYwGCPX2KAIJF5itr2kgJG7R1Ye68Bxa8TiZEBsXpu0Nhfo2BwAQD/l1KG
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

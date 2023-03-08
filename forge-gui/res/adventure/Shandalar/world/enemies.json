@@ -1603,8 +1603,6 @@
 	],
 	"colors": "GW"
 },
-
-
 {
 	"name": "Chandra",
 	"sprite": "sprites/red_wiz2.atlas",
@@ -1656,7 +1654,8 @@
 				}
 				
 			]
-		}
+		},
+		{
 		"count": 1,
 			"cardName": "Chandra's Defeat"
 		},
@@ -2370,8 +2369,7 @@
 	"difficulty": 0.8,
 	"speed": 31,
 	"life": 8,
-	{
-			"rewards": [
+	"rewards": [
 		{
 			"type": "card",
 			"probability": 1,
@@ -2391,10 +2389,8 @@
 
 			"itemName": "Chicken Egg"
 		}
-	    ],
+	    ]
 	"colors": "WG"
-	}
-
 },
 {
 	"name": "ClayGolem",
