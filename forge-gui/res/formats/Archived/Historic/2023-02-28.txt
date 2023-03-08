@@ -1,5 +1,5 @@
 [format]
-Name:Alchemy (YONE)
+Name:Historic (YONE)
 Type:Archived
 Subtype:Arena
 Effective:2023-02-28

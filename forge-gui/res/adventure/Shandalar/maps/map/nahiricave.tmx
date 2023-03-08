@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="46" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="74">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="7" name="background" width="46" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzt1EsOgCAMBFAWbrwYx/dMxoUJMQVnyvCJ0qQ7rK+WGvcQ4sqVP85cjHZ53TP3gMax9TXUnr+8d5bqWc+/OUqh6DF1W+esGrnaaCBuZJap2+OwXKy5NFv0XtW6vWbWbdVX2BiDZ7+t/VS6WTsbzx1FTOz71WYk2G+pdHt7RPYY3Z2W55l+Vf8I5t2q+XoTiRa1ZzWrZlh7j2d1t/Qra/d0t5zfaM+X3Sf+6QIE
+  </data>
+ </layer>
+ <layer id="9" name="Tilelaag 4" width="46" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAfCJSlo2WjYBSMglEwAOAcy0C7gDTwjBNCg9xNa7cv56CuHSC3w9xNK7fTymzkcKcmoHV4POXEFFvAjso/xkqamfRIe6NgFIyCUTAKRsEoGAUjGQAAmOwSmQ==
+  </data>
+ </layer>
+ <layer id="8" name="Tilelaag 3" width="46" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztlEEOwjAMBHsAFX7DO3gg5974CUfehKoqwrJMvNs4ViOxkqU2ddaTOOk05WmZtxhNf+5cZXO/T3awOgo3u4ZMboS5NzdbL+JsFBVmyf06f8OrjyqTWXJ7PWX2ukWSuYRmXsdq9eT4/erX3NMjLYtRPpeo7fPzgjOz3LqXMiTfjTwH6zvKizL+6i0yjv6b9p5XtBbKaOWw9RlmdB1ejucfze3Ns3Ie6nttDsPBcrfke+tFvVkG9m60zmfE3r0o3yMyI/5Rnr3Ug9vy7aFI70zuSGnuUTQi9wfig/q9
+  </data>
+ </layer>
+ <layer id="6" name="Tilelaag 1" width="46" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztl0FqwzAQRVXIwoIeputuC63x7brpFUKcnqWXaK30GM1gfTyejqyRagSBfhiInEjz9KWRHOfaqffODb5hwp30z91WrbnHzrmziPeufJzW3L2S69OXz6ElN3k9XXO9xvbFr+PUzXOwsNdya+ttYX66n9vfSs4Qn4H9lBhz7H6PMWbWC98Tw8dhHVvMpGM3+6oxc3HfJTvmL5mn2B6UuXDeYxwTny8bLEEZMydtz4CP18OZMRMHzWfLW+pLz3PMUOl+7GNO3kfWNHIjiPn5Gi9+7SevHxLaFgXD/oBG5hU8x7OHwxLSd4ovv/SVPu15Bmn1PbGxsfbwH6F5qfkvua3nVY4xJfANfvGa11SNl9hnWCcL/6jUifSHeyfrSNZUjZdB9LHsGRr3za1ZU/s9MHbqI88ELV+Id0OOhbNb6o2vkWV9QsL/FDf6WFisv+P3AnlSWhtyDjW1ZZW8q6SsZ6JUYOx7vFdKZn4nyahlluykx7vl+V/O5tS7wt4Cu6XOLcL9QCo5J2tUcgfnxLlJe+yLFuLct/S/NTDuW/CZ9AO3tOux
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="53" template="../obj/treasure.tx" x="120.5" y="177"/>
+  <object id="59" template="../obj/enemy.tx" x="320" y="189">
+   <properties>
+    <property name="enemy" value="Cave Spider"/>
+   </properties>
+  </object>
+  <object id="60" template="../obj/enemy.tx" x="405.5" y="284.5">
+   <properties>
+    <property name="enemy" value="Horror"/>
+   </properties>
+  </object>
+  <object id="61" template="../obj/enemy.tx" x="204" y="235">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+   </properties>
+  </object>
+  <object id="62" template="../obj/enemy.tx" x="441.5" y="199.5">
+   <properties>
+    <property name="enemy" value="Water Elemental"/>
+   </properties>
+  </object>
+  <object id="63" template="../obj/enemy.tx" x="649.5" y="190">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="64" template="../obj/gold.tx" x="681" y="244"/>
+  <object id="65" template="../obj/gold.tx" x="498" y="322"/>
+  <object id="66" template="../obj/gold.tx" x="147" y="312"/>
+  <object id="71" template="../obj/door_up.tx" x="716" y="133">
+   <properties>
+    <property name="teleport" value="maps/map/nahiri.tmx"/>
+    <property name="teleportObjectId" value="79"/>
+   </properties>
+  </object>
+  <object id="73" template="../obj/door_right.tx" x="43" y="395">
+   <properties>
+    <property name="teleport" value="maps/map/nahiri.tmx"/>
+    <property name="teleportObjectId" value="83"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

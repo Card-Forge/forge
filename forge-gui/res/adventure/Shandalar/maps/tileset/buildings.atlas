@@ -586,6 +586,9 @@ red_castle
 final_castle 
   xy: 128, 864
   size: 64, 64   
+farm
+  xy:351, 0
+  size: 33,33
 hall_of_flame
   xy: 194, 864
-  size: 32, 32    
+  size: 32, 32     

@@ -207,7 +207,7 @@ public class AnimateEffect extends AnimateEffectBase {
         if (sa.hasParam("AtEOT") && !tgts.isEmpty()) {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), tgts);
         }
-    } // animateResolve extends SpellEffect {
+    }
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)

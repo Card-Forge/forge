@@ -29,6 +29,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
@@ -286,14 +287,20 @@ public class MapStage extends GameStage {
             image.setWidth(59);
             image.setHeight(80);
             image.setPosition(4, 7);
-            TypingLabel label = Controls.newTypingLabel("[%125]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)).toUpperCase()+"\n[%]"+deck.getName());
-            label.skipToTheEnd();
-            label.setAlignment(Align.center);
-            label.setPosition(34, 20);
+            TypingLabel deckColors = Controls.newTypingLabel(Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck), true).toUpperCase());
+            deckColors.skipToTheEnd();
+            deckColors.setAlignment(Align.left);
+            deckColors.setPosition(58, 40);
+            TextraLabel deckname = Controls.newTextraLabel(deck.getName());
+            deckname.setAlignment(Align.center);
+            deckname.setWrap(true);
+            deckname.setWidth(70);
+            deckname.setPosition(0, 30);
             Group group = new Group();
             group.addActor(art);
             group.addActor(image);
-            group.addActor(label);
+            group.addActor(deckColors);
+            group.addActor(deckname);
             dialog.getContentTable().add(group).height(100).width(65).center();
             dialog.getContentTable().add().row();
         } else {
@@ -791,8 +798,16 @@ public class MapStage extends GameStage {
 
             Current.player().win();
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
-            currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
-            startPause(0.3f, MapStage.this::getReward);
+            float vx = currentMob.getData().scale == 1f ? 0f : -((currentMob.getWidth()*currentMob.getData().scale)/2);
+            float vy = currentMob.getData().scale == 1f ? 0f : -((currentMob.getHeight()*currentMob.getData().scale)/2);
+            currentMob.playEffect(Paths.EFFECT_BLOOD, 0.5f, true, new Vector2(vx, vy));
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
+                    startPause(0.3f, MapStage.this::getReward);
+                }
+            }, 1f);
         } else {
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
@@ -977,6 +992,7 @@ public class MapStage extends GameStage {
         if (mob == null) return;
         currentMob = mob;
         player.setAnimation(CharacterSprite.AnimationTypes.Attack);
+        player.playEffect(Paths.EFFECT_SPARKS, 0.5f);
         mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
         SoundSystem.instance.play(SoundEffectType.Block, false);
         Gdx.input.vibrate(50);

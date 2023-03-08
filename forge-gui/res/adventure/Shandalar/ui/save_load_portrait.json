@@ -10,7 +10,7 @@
       "height": 480
     },
     {
-      "type": "Scroll",
+      "type": "Window",
       "name": "saveSlots",
       "x": 10,
       "y": 106,

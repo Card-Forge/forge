@@ -35,12 +35,11 @@ import java.util.function.Function;
  * Class to create ui elements in the correct style
  */
 public class Controls {
-    static class LabelFix extends TextraLabel
-    {
-        public LabelFix(String text)
-        {
-            super(text, getSkin(),getTextraFont());
+    static class LabelFix extends TextraLabel {
+        public LabelFix(String text) {
+            super(text, getSkin(), getTextraFont());
         }
+
         @Override
         public void setText(@Null String text) {
             this.storedText = text;
@@ -50,19 +49,19 @@ public class Controls {
             layout();
         }
     }
-    static class TextButtonFix extends TextraButton
-    {
-        public TextButtonFix(@Null String text)
-        {
-            super(text==null?"NULL":text, Controls.getSkin(),Controls.getTextraFont()) ;
+
+    static class TextButtonFix extends TextraButton {
+        public TextButtonFix(@Null String text) {
+            super(text == null ? "NULL" : text, Controls.getSkin(), Controls.getTextraFont());
         }
 
         @Override
         public void setStyle(Button.ButtonStyle style, boolean makeGridGlyphs) {
-            super.setStyle(style,makeGridGlyphs);
-            this.getTextraLabel().setFont( Controls.getTextraFont());
+            super.setStyle(style, makeGridGlyphs);
+            this.getTextraLabel().setFont(Controls.getTextraFont());
 
         }
+
         @Override
         public String getText() {
             return this.getTextraLabel().storedText;
@@ -77,16 +76,18 @@ public class Controls {
             layout();
         }
     }
+
     static public TextraButton newTextButton(String text) {
-        TextraButton button= new TextButtonFix(text);
-       // button.getTextraLabelCell().fill(true,false).expand(true,false);//keep it the same as TextButton
+        TextraButton button = new TextButtonFix(text);
         button.getTextraLabel().setWrap(false);
         return button;
     }
+
     static public Rectangle getBoundingRect(Actor actor) {
-        return new Rectangle(actor.getX(),actor.getY(),actor.getWidth(),actor.getHeight());
+        return new Rectangle(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
     }
-    static public boolean actorContainsVector (Actor actor, Vector2 point) {
+
+    static public boolean actorContainsVector(Actor actor, Vector2 point) {
         if (actor == null)
             return false;
         if (!actor.isVisible())
@@ -135,10 +136,9 @@ public class Controls {
         ret.setAlignment(Align.right);
         return ret;
     }
-    static public<T> SelectBox newComboBox()
-    {
-        return new SelectBox<T>(getSkin())
-        {
+
+    static public <T> SelectBox newComboBox() {
+        return new SelectBox<T>(getSkin()) {
 
             @Null
             protected Drawable getBackgroundDrawable() {
@@ -147,7 +147,7 @@ public class Controls {
                 } else if (this.getScrollPane().hasParent() && this.getStyle().backgroundOpen != null) {
                     return this.getStyle().backgroundOpen;
                 } else {
-                    return  (this.isOver() || hasKeyboardFocus()) && this.getStyle().backgroundOver != null ? this.getStyle().backgroundOver : this.getStyle().background;
+                    return (this.isOver() || hasKeyboardFocus()) && this.getStyle().backgroundOver != null ? this.getStyle().backgroundOver : this.getStyle().background;
                 }
             }
 
@@ -161,8 +161,9 @@ public class Controls {
             }
         };
     }
+
     static public SelectBox<Float> newComboBox(Float[] text, float item, Function<Object, Void> func) {
-        SelectBox<Float> ret =   newComboBox();
+        SelectBox<Float> ret = newComboBox();
         ret.getStyle().listStyle.selection.setTopHeight(4);
         ret.setItems(text);
         ret.addListener(new ChangeListener() {
@@ -219,11 +220,10 @@ public class Controls {
     }
 
     static public Slider newSlider(float min, float max, float step, boolean vertical) {
-        Slider ret = new Slider(min, max, step, vertical, getSkin())
-        {
+        Slider ret = new Slider(min, max, step, vertical, getSkin()) {
             @Override
             protected Drawable getBackgroundDrawable() {
-                SliderStyle style = (SliderStyle)super.getStyle();
+                SliderStyle style = (SliderStyle) super.getStyle();
                 if (this.isDisabled() && style.disabledBackground != null) {
                     return style.disabledBackground;
                 } else if (this.isDragging() && style.backgroundDown != null) {
@@ -250,6 +250,7 @@ public class Controls {
                 return getBitmapFont("default", 1);
         }
     }
+
     static public BitmapFont getBitmapFont(String fontName, float scaleXY) {
         getSkin().getFont(fontName).getData().setScale(scaleXY, scaleXY);
         return getSkin().getFont("default");
@@ -275,82 +276,82 @@ public class Controls {
         }
         return Forge.getAssets().manager().get(skinFile.path(), Skin.class);
     }
+
     public static Label newLabel(String name) {
         Label ret = new Label(name, getSkin());
         return ret;
     }
-    static public Color colorFromString(String name)
-    {
-        String upperCase=name.toUpperCase();
-        if(upperCase.startsWith("0X")||upperCase.startsWith("#"))
-        {
-            return new Color( Long.decode(upperCase).intValue());
+
+    static public Color colorFromString(String name) {
+        String upperCase = name.toUpperCase();
+        if (upperCase.startsWith("0X") || upperCase.startsWith("#")) {
+            return new Color(Long.decode(upperCase).intValue());
         }
-        if(upperCase.equals("WHITE"))
+        if (upperCase.equals("WHITE"))
             return Color.WHITE;
-        if(upperCase.equals("LIGHT_GRAY"))
+        if (upperCase.equals("LIGHT_GRAY"))
             return Color.LIGHT_GRAY;
-        if(upperCase.equals("GRAY"))
+        if (upperCase.equals("GRAY"))
             return Color.GRAY;
-        if(upperCase.equals("DARK_GRAY"))
+        if (upperCase.equals("DARK_GRAY"))
             return Color.DARK_GRAY;
-        if(upperCase.equals("BLACK"))
+        if (upperCase.equals("BLACK"))
             return Color.BLACK;
-        if(upperCase.equals("CLEAR"))
+        if (upperCase.equals("CLEAR"))
             return Color.CLEAR;
-        if(upperCase.equals("BLUE"))
+        if (upperCase.equals("BLUE"))
             return Color.BLUE;
-        if(upperCase.equals("NAVY"))
+        if (upperCase.equals("NAVY"))
             return Color.NAVY;
-        if(upperCase.equals("ROYAL"))
+        if (upperCase.equals("ROYAL"))
             return Color.ROYAL;
-        if(upperCase.equals("SLATE"))
+        if (upperCase.equals("SLATE"))
             return Color.SLATE;
-        if(upperCase.equals("SKY"))
+        if (upperCase.equals("SKY"))
             return Color.SKY;
-        if(upperCase.equals("CYAN"))
+        if (upperCase.equals("CYAN"))
             return Color.CYAN;
-        if(upperCase.equals("TEAL"))
+        if (upperCase.equals("TEAL"))
             return Color.TEAL;
-        if(upperCase.equals("GREEN"))
+        if (upperCase.equals("GREEN"))
             return Color.GREEN;
-        if(upperCase.equals("CHARTREUSE"))
+        if (upperCase.equals("CHARTREUSE"))
             return Color.CHARTREUSE;
-        if(upperCase.equals("LIME"))
+        if (upperCase.equals("LIME"))
             return Color.LIME;
-        if(upperCase.equals("FOREST"))
+        if (upperCase.equals("FOREST"))
             return Color.FOREST;
-        if(upperCase.equals("OLIVE"))
+        if (upperCase.equals("OLIVE"))
             return Color.OLIVE;
-        if(upperCase.equals("YELLOW"))
+        if (upperCase.equals("YELLOW"))
             return Color.YELLOW;
-        if(upperCase.equals("GOLD"))
+        if (upperCase.equals("GOLD"))
             return Color.GOLD;
-        if(upperCase.equals("GOLDENROD"))
+        if (upperCase.equals("GOLDENROD"))
             return Color.GOLDENROD;
-        if(upperCase.equals("ORANGE"))
+        if (upperCase.equals("ORANGE"))
             return Color.ORANGE;
-        if(upperCase.equals("TAN"))
+        if (upperCase.equals("TAN"))
             return Color.TAN;
-        if(upperCase.equals("FIREBRICK"))
+        if (upperCase.equals("FIREBRICK"))
             return Color.FIREBRICK;
-        if(upperCase.equals("RED"))
+        if (upperCase.equals("RED"))
             return Color.RED;
-        if(upperCase.equals("SCARLET"))
+        if (upperCase.equals("SCARLET"))
             return Color.SCARLET;
-        if(upperCase.equals("CORAL"))
+        if (upperCase.equals("CORAL"))
             return Color.CORAL;
-        if(upperCase.equals("SALMON"))
+        if (upperCase.equals("SALMON"))
             return Color.SALMON;
-        if(upperCase.equals("PINK"))
+        if (upperCase.equals("PINK"))
             return Color.PINK;
-        if(upperCase.equals("MAGENTA"))
+        if (upperCase.equals("MAGENTA"))
             return Color.MAGENTA;
-        if(upperCase.equals("PURPLE"))
+        if (upperCase.equals("PURPLE"))
             return Color.PURPLE;
-        if(upperCase.equals("VIOLET"))
+        if (upperCase.equals("VIOLET"))
             return Color.VIOLET;
-        if(upperCase.equals("MAROON"))
+        if (upperCase.equals("MAROON"))
             return Color.MAROON;
         return Color.BLACK;
     }
@@ -360,31 +361,36 @@ public class Controls {
         return ret;
     }
 
-    public static String colorIdToTypingString(ColorSet color)
-    {
+    public static String colorIdToTypingString(ColorSet color) {
+        return colorIdToTypingString(color, false);
+    }
+
+    public static String colorIdToTypingString(ColorSet color, boolean vertical) {
+        String nextline = vertical ? "\n" : "";
         //NOTE converting to uppercase will use pixelmana.atlas, higher quality pixel mana symbol.
-        String colorId="";
-        if(color.hasWhite())
-            colorId+="[+w]";
-        if(color.hasBlue())
-            colorId+="[+u]";
-        if(color.hasBlack())
-            colorId+="[+b]";
-        if(color.hasRed())
-            colorId+="[+r]";
-        if(color.hasGreen())
-            colorId+="[+g]";
-        if(color.isColorless())
-            colorId+="[+c]";
+        String colorId = "";
+        if (color.hasWhite())
+            colorId += "[+w]"+nextline;
+        if (color.hasBlue())
+            colorId += "[+u]"+nextline;
+        if (color.hasBlack())
+            colorId += "[+b]"+nextline;
+        if (color.hasRed())
+            colorId += "[+r]"+nextline;
+        if (color.hasGreen())
+            colorId += "[+g]"+nextline;
+        if (color.isColorless())
+            colorId += "[+c]"+nextline;
         return colorId;
     }
+
     public static TypingLabel newTypingLabel(String name) {
-        TypingLabel ret = new TypingLabel(name==null?"":name, getSkin(),getTextraFont());
-        ret.setVariable("player_name",Current.player().getName());
-        ret.setVariable("player_color_id",colorIdToTypingString(Current.player().getColorIdentity()));
+        TypingLabel ret = new TypingLabel(name == null ? "" : name, getSkin(), getTextraFont());
+        ret.setVariable("player_name", Current.player().getName());
+        ret.setVariable("player_color_id", colorIdToTypingString(Current.player().getColorIdentity()));
         return ret;
     }
-    
+
 
     public static Dialog newDialog(String title) {
         Dialog ret = new Dialog(title, getSkin());
@@ -392,34 +398,17 @@ public class Controls {
         return ret;
     }
 
-    static Font textraFont=null;
-    static Font keysFont=null;
-    static public Font getKeysFont()
-    {
-        if(keysFont==null)
-        {
-            keysFont=new Font(getSkin().getFont("default"));
-            keysFont.addAtlas(Config.instance().getAtlas(Paths.KEYS_ATLAS));
-        }
-        return keysFont;
-    }
-    static public Font getTextraFont()
-    {
-        if(textraFont==null)
-        {
-            textraFont=new Font(getSkin().getFont("default"), 0f, 1.5f, 0f, 0f);
-            textraFont.addAtlas(Config.instance().getAtlas(Paths.ITEMS_ATLAS));
-            textraFont.addAtlas(Config.instance().getAtlas(Paths.PIXELMANA_ATLAS));
-        }
-        return textraFont;
-    }
-    static public Font getTextraFont(String name)
-    {
-        Font font=new Font(getSkin().getFont(name));
-        font.addAtlas(Config.instance().getAtlas(Paths.ITEMS_ATLAS));
-        return font;
+    static public Font getKeysFont() {
+        return Forge.getAssets().getKeysFont(getSkin().getFont("default"), Config.instance().getAtlas(Paths.KEYS_ATLAS));
     }
 
+    static public Font getTextraFont() {
+        return Forge.getAssets().getTextraFont(getSkin().getFont("default"), Config.instance().getAtlas(Paths.ITEMS_ATLAS), Config.instance().getAtlas(Paths.PIXELMANA_ATLAS));
+    }
+
+    static public Font getTextraFont(String name) {
+        return Forge.getAssets().getTextraFont(name, getSkin().getFont(name), Config.instance().getAtlas(Paths.ITEMS_ATLAS));
+    }
 
 
     static public class AccountingLabel extends TextraLabel {
@@ -436,19 +425,18 @@ public class Controls {
         public AccountingLabel(TextraLabel target, boolean isShards) {
             target.setVisible(false);
             placeholder = target;
-            label = Controls.newTextraLabel(target.getName()+"Replacement");
-            currencyAmount = isShards?Current.player().getShards():Current.player().getGold();
+            label = Controls.newTextraLabel(target.getName() + "Replacement");
+            currencyAmount = isShards ? Current.player().getShards() : Current.player().getGold();
             this.isShards = isShards;
 
-            if (isShards){
+            if (isShards) {
                 currencyAmount = Current.player().getShards();
                 currencyIcon = "[+Shards]";
-                Current.player().onShardsChange(() -> update(AdventurePlayer.current().getShards(),true));
-            }
-            else {
+                Current.player().onShardsChange(() -> update(AdventurePlayer.current().getShards(), true));
+            } else {
                 currencyAmount = Current.player().getGold();
                 currencyIcon = "[+Gold] "; //fix space since gold sprite is wider than a single glyph
-                Current.player().onGoldChange(() -> update(AdventurePlayer.current().getGold(),true));
+                Current.player().onGoldChange(() -> update(AdventurePlayer.current().getGold(), true));
             }
             label.setText(getLabelText(currencyAmount));
             setName(label.getName());
@@ -458,13 +446,16 @@ public class Controls {
         public void setAnimationDelay(float animationDelay) {
             this.animationDelay = animationDelay;
         }
+
         public float getAnimationDelay() {
             return animationDelay;
         }
-        public void update(int newAmount){
+
+        public void update(int newAmount) {
             update(newAmount, false);
         }
-        public void update(int newAmount, boolean animate){
+
+        public void update(int newAmount, boolean animate) {
 
             if (animate) {
                 TextraLabel temporaryLabel = getUpdateLabel(newAmount);
@@ -472,14 +463,13 @@ public class Controls {
                 replaceLabel(temporaryLabel);
 
                 t.schedule(new AccountingLabelUpdater(temporaryLabel), animationDelay);
-            }
-            else{
+            } else {
                 currencyAmount = newAmount;
                 drawFinalLabel(false);
             }
         }
 
-        private void drawFinalLabel(boolean fadeIn){
+        private void drawFinalLabel(boolean fadeIn) {
 
             TextraLabel finalLabel = getDefaultLabel();
             if (fadeIn) {
@@ -491,21 +481,24 @@ public class Controls {
             replaceLabel(finalLabel);
         }
 
-        private TextraLabel getDefaultLabel(){
+        private TextraLabel getDefaultLabel() {
             return Controls.newTextraLabel(getLabelText(currencyAmount));
         }
-        private TextraLabel getUpdateLabel(int newAmount){
+
+        private TextraLabel getUpdateLabel(int newAmount) {
             int delta = newAmount - currencyAmount;
-            String updateText = delta==0?"":(delta<0?NEGDECOR + delta *-1:POSDECOR + delta);
+            String updateText = delta == 0 ? "" : (delta < 0 ? NEGDECOR + delta * -1 : POSDECOR + delta);
             return Controls.newTextraLabel(getLabelText(currencyAmount, updateText));
         }
 
-        private String getLabelText(int amount){
+        private String getLabelText(int amount) {
             return getLabelText(amount, "");
         }
-        private String getLabelText(int amount, String updateText){
+
+        private String getLabelText(int amount, String updateText) {
             return amount + " " + currencyIcon + updateText;
         }
+
         private void replaceLabel(TextraLabel newLabel) {
             newLabel.setName(label.getName());
             newLabel.style = placeholder.style;
@@ -520,15 +513,17 @@ public class Controls {
             placeholder.getStage().addActor(label);
         }
 
-        private class AccountingLabelUpdater extends Timer.Task{
+        private class AccountingLabelUpdater extends Timer.Task {
             @Override
             public void run() {
-                if (label.equals(target)){
+                if (label.equals(target)) {
                     drawFinalLabel(true);
                 }
             }
+
             TextraLabel target;
-            AccountingLabelUpdater(TextraLabel replacement){
+
+            AccountingLabelUpdater(TextraLabel replacement) {
                 this.target = replacement;
             }
         }

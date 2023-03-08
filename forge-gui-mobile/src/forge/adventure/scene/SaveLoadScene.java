@@ -56,8 +56,11 @@ public class SaveLoadScene extends UIScene {
     private SaveLoadScene() {
         super(Forge.isLandscapeMode() ? "ui/save_load.json" : "ui/save_load_portrait.json");
 
+        Table root = new Table();
         layout = new Table();
-        stage.addActor(layout);
+        scrollPane = new ScrollPane(layout);
+        Window window = ui.findActor("saveSlots");
+        window.add(root);
         textInput = Controls.newTextField("");
         int c = 0;
         String[] diffList = new String[Config.instance().getConfigData().difficulties.length];
@@ -78,9 +81,11 @@ public class SaveLoadScene extends UIScene {
         playerLocation.setY(previewImage.getY() + 5);
         ui.addActor(playerLocation);
         header = Controls.newTextraLabel(Forge.getLocalizer().getMessage("lblSave"));
-        header.setAlignment(Align.center);
-        layout.add(header).pad(2).colspan(4).align(Align.center).expandX();
-        layout.row();
+        root.row();
+        root.add(header).grow();
+        root.add(difficulty);
+        root.row();
+        root.add(scrollPane).colspan(2).width(window.getWidth() - 20);
         autoSave = addSaveSlot(Forge.getLocalizer().getMessage("lblAutoSave"), WorldSave.AUTO_SAVE_SLOT);
         quickSave = addSaveSlot(Forge.getLocalizer().getMessage("lblQuickSave"), WorldSave.QUICK_SAVE_SLOT);
         for (int i = 1; i < NUMBEROFSAVESLOTS; i++)
@@ -91,10 +96,6 @@ public class SaveLoadScene extends UIScene {
         ui.onButtonPress("save", () -> SaveLoadScene.this.loadSave());
         back = ui.findActor("return");
         ui.onButtonPress("return", () -> SaveLoadScene.this.back());
-
-        scrollPane = ui.findActor("saveSlots");
-        scrollPane.setActor(layout);
-        ui.addActor(difficulty);
         difficulty.setSelectedIndex(1);
         difficulty.setAlignment(Align.center);
         difficulty.getStyle().fontColor = Color.GOLD;
@@ -137,7 +138,6 @@ public class SaveLoadScene extends UIScene {
             super.onSelect(scene);
             updateSlot(slotNumber);
         }
-
     }
 
     private Selectable<TextraButton> addSaveSlot(String name, int i) {
@@ -150,7 +150,6 @@ public class SaveLoadScene extends UIScene {
         return button;
 
     }
-
 
     public boolean select(int slot) {
         if (!buttons.containsKey(slot))
@@ -193,7 +192,6 @@ public class SaveLoadScene extends UIScene {
             if (previewDate != null)
                 previewDate.setVisible(false);
         }
-
         return true;
     }
 
@@ -247,7 +245,6 @@ public class SaveLoadScene extends UIScene {
                     Forge.clearTransitionScreen();
                 }
                 break;
-
         }
     }
 
@@ -281,7 +278,6 @@ public class SaveLoadScene extends UIScene {
         for (File name : names) {
             if (WorldSave.isSafeFile(name.getName())) {
                 try {
-
                     try (FileInputStream fos = new FileInputStream(name.getAbsolutePath());
                          InflaterInputStream inf = new InflaterInputStream(fos);
                          ObjectInputStream oos = new ObjectInputStream(inf)) {
@@ -298,10 +294,7 @@ public class SaveLoadScene extends UIScene {
                         }
                         previews.put(slot, header);
                     }
-
                 } catch (ClassNotFoundException | IOException | GdxRuntimeException e) {
-
-
                 }
             }
         }
@@ -353,5 +346,4 @@ public class SaveLoadScene extends UIScene {
         }
         super.enter();
     }
-
 }

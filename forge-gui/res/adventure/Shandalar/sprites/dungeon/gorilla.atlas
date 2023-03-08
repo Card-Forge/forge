@@ -1,0 +1,83 @@
+gorilla.png
+size: 768,640
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar          
+  xy: 278, 214
+  size: 22, 19      
+Idle 
+  xy: 10,27
+  size: 38,37 
+Idle 
+  xy: 74,27
+  size: 38,37
+Idle 
+  xy: 138,27
+  size: 38,37  
+Idle 
+  xy: 202,27
+  size: 38,37 
+Walk
+  xy: 0, 64
+  size: 64, 64
+Walk
+  xy: 64, 64
+  size: 64, 64   
+Walk
+  xy: 128, 64
+  size: 64, 64
+Walk
+  xy: 192, 64
+  size: 64, 64   
+Attack 
+  xy: 0, 320
+  size: 64, 64 
+Attack 
+  xy: 64, 320
+  size: 64, 64 
+Attack 
+  xy: 128, 320
+  size: 64, 64 
+Attack 
+  xy: 192, 320
+  size: 64, 64 
+Attack 
+  xy: 256,320
+  size: 64, 64 
+Attack 
+  xy: 320, 320
+  size: 64, 64 
+Attack 
+  xy: 384, 320
+  size: 64, 64 
+Attack 
+  xy: 448, 320
+  size: 64, 64 
+Attack 
+  xy: 512, 320
+  size: 64, 64 
+Attack 
+  xy: 576, 320
+  size: 64, 64 
+Attack 
+  xy: 640, 320
+  size: 64, 64 
+Attack 
+  xy: 704, 320
+  size: 64, 64      
+Death 
+  xy: 0,512
+  size: 64, 64
+Death 
+  xy: 64, 512
+  size: 64, 64
+Death 
+  xy: 128, 512
+  size: 64, 64
+Death 
+  xy: 192, 512
+  size: 64, 64
+Death 
+  xy: 256, 512
+  size: 64, 64

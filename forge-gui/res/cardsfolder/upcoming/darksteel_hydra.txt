@@ -10,4 +10,4 @@ SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Names$ Darksteel Ingot,Darksteel
 SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.OIL/Twice
 DeckHas:Ability$Counters
-Oracle:Indestructible\nDarksteel Hydra enters the battlefield with X oil counters on it.\Darksteel Hydra's power and toughness are each equal to twice the number of oil counters on it.\nWhen Darksteel Hydra enters the battlefield, conjure a card named Darksteel Ingot and a card named Darksteel Plate into your hand.
+Oracle:Indestructible\nDarksteel Hydra enters the battlefield with X oil counters on it.\nDarksteel Hydra's power and toughness are each equal to twice the number of oil counters on it.\nWhen Darksteel Hydra enters the battlefield, conjure a card named Darksteel Ingot and a card named Darksteel Plate into your hand.

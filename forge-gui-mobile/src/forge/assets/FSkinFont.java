@@ -360,6 +360,7 @@ public class FSkinFont {
             return langUniqueCharacterSet.get(langCode);
         }
         StringBuilder characters = new StringBuilder(FreeTypeFontGenerator.DEFAULT_CHARS);
+        characters.append("•").append("—");//add bullet and long dash to default characters
         IntSet characterSet = new IntSet();
         for (int offset = 0; offset < FreeTypeFontGenerator.DEFAULT_CHARS.length();) {
             final int codePoint = FreeTypeFontGenerator.DEFAULT_CHARS.codePointAt(offset);

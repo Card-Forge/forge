@@ -430,7 +430,7 @@ public class CostAdjustment {
     }    
 
     private static boolean checkRequirement(final SpellAbility sa, final StaticAbility st) {
-        if (st.isSuppressed() || !st.checkConditions()) {
+        if (!st.checkConditions()) {
             return false;
         }
 

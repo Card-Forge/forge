@@ -1378,7 +1378,7 @@ public class AbilityUtils {
         Player pl = sa.getActivatingPlayer();
         final Game game = pl.getGame();
 
-        if (sa.isTrigger() && sa.getParent() == null) {
+        if (sa.isTrigger() && !sa.getTrigger().isStatic() && sa.getParent() == null) {
             // when trigger cost are paid before the effect does resolve, need to clean the trigger
             game.getTriggerHandler().resetActiveTriggers();
         }
@@ -1459,20 +1459,6 @@ public class AbilityUtils {
         String unlessCost = sa.getParam("UnlessCost").trim();
         if (unlessCost.equals("CardManaCost")) {
             cost = new Cost(source.getManaCost(), true);
-        }
-        else if (unlessCost.equals("TriggeredSpellManaCost")) {
-            SpellAbility triggered = (SpellAbility) sa.getRootAbility().getTriggeringObject(AbilityKey.SpellAbility);
-            Card triggeredCard = triggered.getHostCard();
-            if (triggeredCard.getManaCost() == null) {
-                cost = new Cost(ManaCost.ZERO, true);
-            } else {
-                int xCount = triggeredCard.getManaCost().countX();
-                int xPaid = triggeredCard.getXManaCostPaid() * xCount;
-                ManaCostBeingPaid toPay = new ManaCostBeingPaid(triggeredCard.getManaCost());
-                toPay.decreaseShard(ManaCostShard.X, xCount);
-                toPay.increaseGenericMana(xPaid);
-                cost = new Cost(toPay.toManaCost(), true);
-            }
         }
         else if (unlessCost.equals("ChosenManaCost")) {
             if (!source.hasChosenCard()) {
@@ -2734,12 +2720,12 @@ public class AbilityUtils {
 
         // Count$ThisTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>
         if (sq[0].startsWith("ThisTurnEntered")) {
-            final String[] workingCopy = l[0].split("_");
+            final String[] workingCopy = l[0].split("_", 5);
 
             ZoneType destination = ZoneType.smartValueOf(workingCopy[1]);
             final boolean hasFrom = workingCopy[2].equals("from");
             ZoneType origin = hasFrom ? ZoneType.smartValueOf(workingCopy[3]) : null;
-            String validFilter = workingCopy[hasFrom ? 4 : 2] ;
+            String validFilter = workingCopy[hasFrom ? 4 : 2];
 
             final List<Card> res = CardUtil.getThisTurnEntered(destination, origin, validFilter, c, ctb);
             return doXMath(res.size(), expr, c, ctb);
@@ -2747,12 +2733,12 @@ public class AbilityUtils {
 
         // Count$LastTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>
         if (sq[0].startsWith("LastTurnEntered")) {
-            final String[] workingCopy = l[0].split("_");
+            final String[] workingCopy = l[0].split("_", 5);
 
             ZoneType destination = ZoneType.smartValueOf(workingCopy[1]);
             final boolean hasFrom = workingCopy[2].equals("from");
             ZoneType origin = hasFrom ? ZoneType.smartValueOf(workingCopy[3]) : null;
-            String validFilter = workingCopy[hasFrom ? 4 : 2] ;
+            String validFilter = workingCopy[hasFrom ? 4 : 2];
 
             final List<Card> res = CardUtil.getLastTurnEntered(destination, origin, validFilter, c, ctb);
             return doXMath(res.size(), expr, c, ctb);

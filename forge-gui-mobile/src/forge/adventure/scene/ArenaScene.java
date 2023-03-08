@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Array;
 import com.github.tommyettinger.textra.TextraButton;
@@ -11,6 +12,7 @@ import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.ArenaData;
+import forge.adventure.data.EnemyData;
 import forge.adventure.data.WorldData;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
@@ -40,6 +42,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     private final TextraLabel goldLabel;
 
     private final Group arenaPlane;
+    private final Table arenaTable;
     private final Random rand = new Random();
 
     final Sprite fighterSpot;
@@ -82,6 +85,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         doneButton = ui.findActor("done");
         ScrollPane pane = ui.findActor("arena");
         arenaPlane = new Table();
+        arenaTable = new Table();
         pane.setActor(arenaPlane);
 
         startButton = ui.findActor("start");
@@ -96,7 +100,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     }
 
     private void loose() {
-        doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
+        doneButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblLeave"));
         doneButton.layout();
         startButton.setDisabled(true);
         arenaStarted = false;
@@ -117,9 +121,9 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     private void startArena() {
         goldLabel.setVisible(false);
         arenaStarted = true;
-        startButton.setText(Forge.getLocalizer().getMessage("lblContinue"));
+        startButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblContinue"));
         startButton.layout();
-        doneButton.setText(Forge.getLocalizer().getMessage("lblConcede"));
+        doneButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblConcede"));
         doneButton.layout();
         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
         Current.player().takeGold(arenaData.entryFee);
@@ -128,30 +132,30 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
     @Override
     public void setWinner(boolean winner) {
-        Array<Actor> winners = new Array<>();
+        Array<ArenaRecord> winners = new Array<>();
         Array<EnemySprite> winnersEnemies = new Array<>();
         for (int i = 0; i < fighters.size - 2; i += 2) {
             boolean leftWon = rand.nextBoolean();
             if (leftWon) {
                 winners.add(fighters.get(i));
                 winnersEnemies.add(enemies.get(i));
-                moveFighter(fighters.get(i), true);
-                markLostFighter(fighters.get(i + 1));
+                moveFighter(fighters.get(i).actor, true);
+                markLostFighter(fighters.get(i + 1).actor);
             } else {
-                markLostFighter(fighters.get(i));
-                moveFighter(fighters.get(i + 1), false);
+                markLostFighter(fighters.get(i).actor);
+                moveFighter(fighters.get(i + 1).actor, false);
                 winners.add(fighters.get(i + 1));
                 winnersEnemies.add(enemies.get(i + 1));
             }
         }
         if (winner) {
-            markLostFighter(fighters.get(fighters.size - 2));
-            moveFighter(fighters.get(fighters.size - 1), false);
+            markLostFighter(fighters.get(fighters.size - 2).actor);
+            moveFighter(fighters.get(fighters.size - 1).actor, false);
             winners.add(fighters.get(fighters.size - 1));
             roundsWon++;
         } else {
-            markLostFighter(fighters.get(fighters.size - 1));
-            moveFighter(fighters.get(fighters.size - 2), true);
+            markLostFighter(fighters.get(fighters.size - 1).actor);
+            moveFighter(fighters.get(fighters.size - 2).actor, true);
             winners.add(fighters.get(fighters.size - 2));
             loose();
         }
@@ -161,9 +165,11 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         if (roundsWon >= arenaData.rounds) {
             arenaStarted = false;
             startButton.setDisabled(true);
-            doneButton.setText(Forge.getLocalizer().getMessage("lblDone"));
+            doneButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblDone"));
             doneButton.layout();
         }
+        if (!Forge.isLandscapeMode())
+            drawArena();//update
     }
 
     private void moveFighter(Actor actor, boolean leftPlayer) {
@@ -181,9 +187,10 @@ public class ArenaScene extends UIScene implements IAfterMatch {
             leftImg.setPosition(actor.getX() + (i * (leftPlayer ? 1 : -1)) * gridSize + widthDiff / 2, actor.getY() + gridSize * 2 + widthDiff / 2);
             arenaPlane.addActor(leftImg);
         }
-
-
-        actor.moveBy((float) (gridSize * stepsToTheSide * (leftPlayer ? 1 : -1)), gridSize * 2f);
+        if (Forge.isLandscapeMode()) {
+            actor.toFront();
+            actor.addAction(Actions.sequence(Actions.moveBy(0f, gridSize * 2f, 1), Actions.moveBy((float) (gridSize * stepsToTheSide * (leftPlayer ? 1 : -1)), 0f, 1)));
+        }
     }
 
     private void markLostFighter(Actor fighter) {
@@ -232,13 +239,13 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
 
     Array<EnemySprite> enemies = new Array<>();
-    Array<Actor> fighters = new Array<>();
+    Array<ArenaRecord> fighters = new Array<>();
     Actor player;
 
     public void loadArenaData(ArenaData data, long seed) {
-        startButton.setText(Forge.getLocalizer().getMessage("lblStart"));
+        startButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblStart"));
         startButton.layout();
-        doneButton.setText(Forge.getLocalizer().getMessage("lblDone"));
+        doneButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblDone"));
         doneButton.layout();
         arenaData = data;
         //rand.setSeed(seed); allow to reshuffle arena enemies for now
@@ -251,12 +258,13 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
 
         for (int i = 0; i < numberOfEnemies; i++) {
-            EnemySprite enemy = new EnemySprite(WorldData.getEnemy(data.enemyPool[rand.nextInt(data.enemyPool.length)]));
+            EnemyData enemyData = WorldData.getEnemy(data.enemyPool[rand.nextInt(data.enemyPool.length)]);
+            EnemySprite enemy = new EnemySprite(enemyData);
             enemies.add(enemy);
-            fighters.add(new Image(enemy.getAvatar()));
+            fighters.add(new ArenaRecord(new Image(enemy.getAvatar()), enemyData.name));
         }
-        fighters.add(new Image(Current.player().avatar()));
-        player = fighters.get(fighters.size - 1);
+        fighters.add(new ArenaRecord(new Image(Current.player().avatar()), Current.player().getName()));
+        player = fighters.get(fighters.size - 1).actor;
 
 
         goldLabel.setText(data.entryFee + " [+Gold]");
@@ -274,9 +282,9 @@ public class ArenaScene extends UIScene implements IAfterMatch {
                 if (x % Math.pow(2, y + 1) == Math.pow(2, y)) {
                     if (y == 0) {
                         if (fighterIndex < fighters.size) {
-                            float widthDiff = gridSize - fighters.get(fighterIndex).getWidth();
-                            fighters.get(fighterIndex).setPosition(x * gridSize + widthDiff / 2, y * gridSize * 2 + widthDiff / 2);
-                            arenaPlane.addActor(fighters.get(fighterIndex));
+                            float widthDiff = gridSize - fighters.get(fighterIndex).actor.getWidth();
+                            fighters.get(fighterIndex).actor.setPosition(x * gridSize + widthDiff / 2, y * gridSize * 2 + widthDiff / 2);
+                            arenaPlane.addActor(fighters.get(fighterIndex).actor);
                             fighterIndex++;
                         }
                     }
@@ -308,6 +316,57 @@ public class ArenaScene extends UIScene implements IAfterMatch {
                     }
                 }
             }
+        }
+        drawArena();
+    }
+
+    void drawArena() {
+        //center the arenaPlane
+        ScrollPane pane = ui.findActor("arena");
+        if (pane != null) {
+            pane.clear();
+            arenaTable.clear();
+            if (Forge.isLandscapeMode()) {
+                arenaTable.add(Controls.newTextraLabel("[;][%150]" + GameScene.instance().getAdventurePlayerLocation(true) + " Arena")).top();
+                arenaTable.row();
+                arenaTable.add(arenaPlane).width(arenaPlane.getWidth()).height(arenaPlane.getHeight());
+                pane.setActor(arenaTable);
+            } else {
+                arenaTable.add(Controls.newTextraLabel("[;][%150]" + GameScene.instance().getAdventurePlayerLocation(true) + " Arena")).colspan(3).top();
+                arenaTable.row();
+                int size = fighters.size;
+                int pv = 0;
+                for (int x = 0; x < size; x++) {
+                    ArenaRecord record = fighters.get(x);
+                    int divider = size == 1 ? 2 : size == 2 ? 3 : size;
+                    arenaTable.add(record.actor).pad(20, 5, 20, 5).size(pane.getWidth() / divider);
+                    pv++;
+                    if (pv == 1) {
+                        if (size > 1)
+                            arenaTable.add(Controls.newTextraLabel("[%135]VS")).padLeft(5).padRight(5);
+                        else {
+                            arenaTable.row();
+                            arenaTable.add(Controls.newTextraLabel("[%135]Winner!")).padLeft(5).padRight(5);
+                        }
+                    }
+                    if (pv == 2) {
+                        arenaTable.row();
+                        pv = 0;
+                    }
+
+                }
+                pane.setActor(arenaTable);
+            }
+        }
+    }
+
+    class ArenaRecord {
+        Actor actor;
+        String name;
+
+        ArenaRecord(Actor a, String n) {
+            actor = a;
+            name = n;
         }
     }
 }

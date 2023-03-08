@@ -1,0 +1,14 @@
+Name:Seething Skitter-Priest
+ManaCost:2 W B
+Types:Creature Phyrexian Cleric
+PT:3/3
+K:Toxic:1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters the battlefield, creatures you control and creature cards in your hand perpetually gain "When this creature dies, create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and 'This creature can't block.'"
+SVar:TrigEffect:DB$ Effect | RememberObjects$ Valid Creature.YouCtrl,ValidHand Creature.YouOwn | StaticAbilities$ PerpetualTokenTrig | Name$ Seething Skitter-Priest's Perpetual Effect | Duration$ Permanent
+SVar:PerpetualTokenTrig:Mode$ Continuous | Affected$ Card.IsRemembered | AddTrigger$ DieToken | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains "When this creature dies, create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and 'This creature can't block.'"
+SVar:DieToken:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature dies, create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and 'This creature can't block.'
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_phyrexian_mite_toxic_noblock | TokenOwner$ You
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+DeckHas:Type$Mite|Artifact & Ability$Token
+Oracle:Toxic 1\nWhen Seething Skitter-Priest enters the battlefield, creatures you control and creature cards in your hand perpetually gain "When this creature dies, create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and 'This creature can't block.'"

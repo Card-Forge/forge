@@ -1065,5 +1065,27 @@
         "Nahiri's Armory"
       ]
 }
+},
+{
+    "name": "Giant Scythe",
+    "equipmentSlot": "Left",
+    "iconName": "Scythe",
+    "effect": {
+      "lifeModifier": 1,
+      "startBattleWithCardInCommandZone": [
+        "Giant Scythe"
+      ]
+}
+},
+{
+    "name": "Chicken Egg",
+    "equipmentSlot": "Right",
+    "iconName": "ChickenEgg",
+    "effect": {
+      "lifeModifier": 1,
+      "startBattleWithCard": [
+        "Chicken Egg"
+      ]
+}
 }
 ]

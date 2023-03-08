@@ -1226,6 +1226,64 @@
 		}
 	],
 	"colors": "U"
+	
+},
+{
+	"name": "Boar",
+	"sprite": "sprites/dungeon/boar.atlas",
+	"scale": 0.55,
+	"deck": [
+		"decks/boar.json"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.8,
+	"speed": 31,
+	"life": 13,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		}
+	],
+	"colors": "G"
 },
 {
 	"name": "Boggart",
@@ -1263,6 +1321,63 @@
 		}
 	],
 	"colors": "GR"
+},
+{
+	"name": "Bull",
+	"sprite": "sprites/dungeon/bull.atlas",
+	"scale": 0.65,
+	"deck": [
+		"decks/bull.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.8,
+	"speed": 31,
+	"life": 13,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		}
+	],
+	"colors": "G"
 },
 {
 	"name": "Cat",
@@ -1488,6 +1603,8 @@
 	],
 	"colors": "GW"
 },
+
+
 {
 	"name": "Chandra",
 	"sprite": "sprites/red_wiz2.atlas",
@@ -1539,11 +1656,8 @@
 				}
 				
 			]
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
+		}
+		"count": 1,
 			"cardName": "Chandra's Defeat"
 		},
 		{
@@ -1567,11 +1681,6 @@
 			"probability": 1,
 			"count": 1000,
 			"addMaxCount": 9000
-		},
-		{
-			"type": "item",
-			"probability": 1,
-			"count": 1,
 			"itemName": "Chandra's Stone"
 		}
 	],
@@ -2247,6 +2356,45 @@
 		}
 	],
 	"colors": "R"
+},
+{
+	"name": "Chicken",
+	"sprite": "sprites/dungeon/chicken.atlas",
+	"scale": 0.75,
+	"deck": [
+		"decks/chicken.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.8,
+	"speed": 31,
+	"life": 8,
+	{
+			"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 3,
+			"cardName": "Zodiac Rooster"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"cardName": "Chicken Egg"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+
+			"itemName": "Chicken Egg"
+		}
+	    ],
+	"colors": "WG"
+	}
+
 },
 {
 	"name": "ClayGolem",
@@ -4614,6 +4762,87 @@
 	"colors": "G"
 },
 {
+	"name": "Gorilla",
+	"sprite": "sprites/dungeon/gorilla.atlas",
+	"scale": 0.55,
+	"deck": [
+		"decks/gorilla.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.8,
+	"speed": 31,
+	"life": 30,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"Common"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Silverback Elder"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Kogla, the Titan Ape"
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 30,
+			"addMaxCount": 100
+		},
+   		 {	
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Red"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Green"
+			]
+			}
+			],
+	"colors": "RG"
+},
+{
 	"name": "Mammoth",
 	"sprite": "sprites/dungeon/mammoth.atlas",
 	"deck": [
@@ -6011,6 +6240,44 @@
 	"colors": "BU"
 },
 {
+	"name": "Horse",
+	"sprite": "sprites/dungeon/horse.atlas",
+	"deck": [
+		"decks/horse.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"scale": 0.5,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
+		}
+	],
+	"colors": "GW"
+},
+{
 	"name": "Horseman",
 	"sprite": "sprites/cavalier_2.atlas",
 	"deck": [
@@ -6231,6 +6498,45 @@
 		}
 	],
 	"colors": "U"
+},
+{
+	"name": "Insect",
+	"sprite": "sprites/dungeon/insect.atlas",
+	"deck": [
+		"decks/insect.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"flying": true,
+	"scale": 0.5,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
+		}
+	],
+	"colors": "WBG"
 },
 {
 	"name": "Immersturm Demon",
@@ -8177,6 +8483,147 @@
 	"colors": "GR"
 },
 {
+	"name": "Scarecrow",
+	"sprite": "sprites/dungeon/scarecrow.atlas",
+	"deck": [
+		"decks/scarecrow.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"flying": true,
+	"scale": 0.35,
+	"life": 13,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "U"
+},
+{
+	"name": "Scarecrow Captain",
+	"sprite": "sprites/dungeon/scarecrowcaptain.atlas",
+	"deck": [
+		"decks/scarecrowcaptain.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.40,
+	"life": 35,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Reaper King"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Wickerwing Effigy"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Pili-Pala"
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 100,
+			"addMaxCount": 500
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Giant Scythe"
+		}
+	],
+	"colors": "WUBRG"
+},
+{
 	"name": "Sea Monster",
 	"sprite": "sprites/leech_2.atlas",
 	"deck": [
@@ -8626,7 +9073,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
-	"scale": 0.5,
+	"scale": 0.7,
 	"life": 13,
 	"rewards": [
 		{
