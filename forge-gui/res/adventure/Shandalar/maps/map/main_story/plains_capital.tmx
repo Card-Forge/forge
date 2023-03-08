@@ -17,7 +17,7 @@
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBgF1AJN3NTDo+4bdR+13BeswcAQAsShGoPTfYM9/Ia7+xKYBrf7qAUG0n3pRIQxPdynq8XAoKdFuvvp5T5KwEhzn7EOA4OJDn42DGATo7X7qA1G3Te43Dea/kbdN+o++rlPnoeBQQGIuTghNAzLCEBoOQGEHIhGZyOLEQKJVGoTjoJRMApGDmjgH2gXDH0AKs9BQE5gYN0xCkbBcAcAvBH7ug==
+   eJztl80KwjAMgIM3f8A+gEyPY0wv+ibqXaeojyE+uStzOMomTc3a0OWD0J8d+pGMLQUQqHhN6SIGv+uItx8Wn37FJ3c3RA67ztqnAIcyjinOD1s/V78h1peT34mozj7zd3ZwDlnfu4WvD791BrDJ8P6+/Lq4MMnfP1D7bXOAXf57XtO217cfNeLHy0/eP/Hj6mf+L2x6We75W84AVmVMxtVYx0JVY6K+z/Rozpt7bTwaOXLpr0JSMPC16VE4YPb7Nr1p35hO5pr6LjokqO53Njzn/s6KFf091yQqrIcgxM4bns4Cfg==
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -30,7 +30,7 @@
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4A2IIVpoF1AH2CuwcBgAcSWGtQzMwkadmkDGIbDJf6uazMw3NAeaFeggg7NgXYB7cA1bexsXHLoaogBiYM0bQpqMTAIaQ20K4YfSCYhvg2BecsIR/6SB8aNAlL8SAPZMjjiS1yHgUFCBz8bm1pCwBdP3rcGusUGzT0Wo+lpRAJapT985TM2MXLK51EwCgYSoNcXlLRl6/gZGOqBuIGfMjfRAixixs8nBWQMgjZVgSZ+Pi6QRGe3W2JxFyltFFoBYsIvAc2d6YPA3ehuQucPl77oQAD0sBzpYDCX56NgFIwC+gEAnUUjHg==
+   eJxjYBgFo2AUUALMNRgYLIDYUmOgXTIKsIHr2gwMN7QH2hWooENzoF1AO3BNGzsblxy6mqEMBLUYGIS0BtoVIxsYAvOWEY78JQ+MGwWk+JEGsmVwxJe4DgODhA5+Nja1hIAvnrxvDXSLDZp7LEbT04gEtEp/+MpnbGLDqXweBaOAVFDHz8BQD8QN/APtEkywiBk/f6iBAk38/MECLAepu4ZK+I2CUTBQYDCX56NgFIwC+gEAuogcaQ==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

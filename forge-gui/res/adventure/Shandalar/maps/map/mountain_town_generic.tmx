@@ -20,12 +20,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFQwXsYGFgkMaDd7FQph8X/saKas4uNgYGeS0GBgUtCD+UFdMuZIBPHmQWDGRqMjBkAfF6dQaGDeoIcWMdBgYTID7LzsBgDbTThgR7YXqRzUEGepwMDK1AO9uAWJ8d04zJQPedZ4fQeRzE24tsFjZzQeAsOyqNSx7ZXEL25nBA3ArCF3CYew7NP5Ta+4UVNQ0i60cOc1ziyPGLzCdkL7obz+IIc1zi+mjhD+OTai9ymOcisWHpBl0cxobRxKYrZIAc5uhlAMg/pOR19PxNDoCFPyl+oAYYtZc8AABIiEAy
+   eJxjYBgFQwXsYGFgkMaDd7FQph8X/saKas4uNgYGeS0GBgUtCD+UFdMuZIAsr6uNaRYMZGoyMGQB8Xp1BoYN6hAxPaB6Yx0GBhMgPsvOwGANtNOGBHthekEAmQ0DepwMDK1AO9uAWJ8d1X05HAwMk4HuO88OofM4iLcXZBYMILORwVl2VBquXhu7ODH2wtwMwhdw2HsOzT+43EWsvV9YUdMgsn7kMMcljhy/yHxC9qK78SyOMMclro8W/jA+qfYih3kuEhuWbtDFYWwYTWy6QgbIYY5eBoD8Q0peR8/f5ABY+JPiB2qAUXvJAwB5S0IJ
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFowA7mKzOwDBFHcEX12FgkNAhzyyYXl1t0szR0ybPPnKBLpJ9ORz0tRsG9GngZ1xhjiyOroaS+B4Fo2AUDF4AAPN8Bv4=
+   eJxjYBgFowA7mKzOwDBFHcEX12FgkNAhzyxkvZSYMwrIA7jCHF+8jMbTKBgFwxMAAMK5BSc=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

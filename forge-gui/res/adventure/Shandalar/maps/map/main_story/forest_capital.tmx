@@ -17,7 +17,7 @@
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzNmF1OwkAQx/dJScBA8OMCQEHLm77pRTyAiu9+XUDBJ+MB9AxiuAACajSewhP47YvGaejKsMy2O9sC/SeTtHS7++vszuywTkYIF8wBK4MlQSWfx/WtANYF6yWErwMcRZ/RY3sA28sKsZ8QO8gOGOWc5nNCzCfEFnIDP/YUviWw5pRsUeHDyhPPypr1UU8L0UB2mh5+fpKm3wsTxUA9C+u/48dTVxNXk+AzHaNA8JzB/bnm/dWqEGvV4d8qTD5BjBkk9XsewZ9PFrmKw+fNIR6z5g6uKR+o36ObgxWCS7bj8MUhzFc0aD8OPsqXFJ+JOHzb7mgbG1GM9zHw2eoCgvGyEt5uHHxtu2EDhdfHpOODqyh8dc1elhQ+WTN69c4HxM5nSPz8wBr8Za5DDt+WMn4npho2KLdHXX/1gJrlBYqdV13BYygbPpyrpA+9uradiX8tcvmo3Hqc6a9Fdwz/p6LML16PHY0P12Hz3/ALgC9o/62JoR3N73HmP8yI16M7a/Y+lowZW75SCCOe61oK6tOZvu2meJwcPl1d8gZz866ZazW2dXWAru9x7W84rnVxY7J3m/Ld8hH/OYNyzx263lwOZugx2HV1JjFEpNyDGeReYMLHUZR9EDPI7zTlK8zp+3X4KEZ8DsF3ZHme4ynqGdNhNpwvynlOXGdM1Pxe5XhnOS10fZ0b7aPF7K+p9Kf6z1bPleB7W1F8as6ZpuLyH0eyfMX7Xpdo5+W+G0s+k1zyyO92qDaXbO6E/aeeazYIJtUmKZkzKA4H+Qzf/wF3/Oa2
+   eJzNmElOw0AQAOcEkRKUKCwfSHAC5gY3+Ah3lnBn+wAETogHwBsA8QFwAgjEK3gBOxcQbcWjdIbu2eyEtNSSl/G43Nu0JygIEYIGoDXQYZDphCdMtALaAm0PCV8EHNWEMWa7B90sCrE1JLpd7DJKn5ZLQowPiU6UunZsK3xToOf/pJMKH5Yyca/GxEczL8QB0sN87/39PP2cSSgG6p5p/ijJpxaTV4Pgk+9YDfVzVgieIzg/Tq6tKc/PzwmxMNd7re7IJ4h36kT9ngew56NHrXLhi32IGRvIDpQN1O/BzFhm0bG0rRznwpeFYL6qxfh+8FG2pPgoUWPbhU+Na1+hGO+YsYPw7wkk42ndPK4ffFd+r9UKjg8fvkZGfraRNPZrMmtZWsFxnoZP9oxxv/MOc34Y7PoNMfjjGIcufGruRxn1sLranjY/cN+i+vkZmp0XruGxFB8+XKukDeO+9qqQfSy68lG1da/QicWwD/9TafyL4zFibLgIi/9S0gB8wvgvJofWmetZrh+YEcdjOGr3PBaZM7580wZG7OtGDvrTkY5u5Nw4Xfi4vuQVfPPG+FrNba4P4OZO419dP4Pzmssbm7Xblu/GMA/HyuWNlFt0vDyjZ2hbsMuc5fpM4hXOtWedWX/lWqDjo8T0P6eug9T4FYv6Ir/Tlq8yxjMFemQjF8cXEHy7nvs5saTdY9opmvnS7OdktcdE+fes5LaXc4mOL0p/57h0nO9cmU+1n6881fXnvkLxqTXnPyUr+7mIbF/xutcixsW179qTz6aWPLhP29ObS7ZwwPZT9zUPCCZVBymyZlAcAbIZPv8FDvfvLg==
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -30,7 +30,7 @@
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1l0OgjAMB/D/DXjUN3ljQY4l6in8upwn8APwMI74JjiVzbbM/hISSBjtuqYBUEqpz0wKYFqE+14591u/9Fw/hKsGvvuRhKK2oftJEo5e2BvgYOjj/krM/dFaj3BeVDbnOlDeHPPbhavfThlwzujjKjqzHEjzx31j+/4mrPeHinFGv9rTxZ7Z1fPcYqzXO9LmvIuUXCn+H1eBY3ybc9/7CyH1fyY1L26bBNjaa5dwZ9J1NO5npdT/ugO7Dxoz
+   eJzt1EsKgCAUBdC7g4Y1q1lirrHf5lpB/xaT0DCKIOuF3QOCjny+jwAR0TWhASIjHYUs5sAd5tKtSgG1ko7CHfbH94wZMGXSUTxDqt/aFOjS9++l98QaSPS2n+38LJ7MkI9/9NGbeluz4WbdfMwXEf1THgCFXWUgHcleo87PRPRfKyQjEbs=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

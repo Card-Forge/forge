@@ -20,12 +20,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKAfKORgYCgC4mIOOloKBPycDAwCQCzISV97KQWdWgwMXVoQtrEOA4OJDu3s2qjOwLBJHcJeCrRzGRDrDZLwQvY7rcNhFFAXWAPTkQ2BNAwTR6cHCizjHlj9o4D+4Ao7A8NVdvrbOxD1IQgAADFkELo=
+   eJxjYKAfKORgYCgC4mIOOloKBPycDAwCQCzISV97KQWdWgwMXVoQtrEOA4OJDu3s2qjOwLBJHcJeCrRzGRDrDZLwQvY7NcMhl4s8uZEI9LXJ02cNTEc2BNIwTBydphUgFLfLuBkYDMn0L0z/YAUmUH8ZUOC/4QiusDMwXGWnv70DUR+CAAAD6BOP
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFpABxHQYGCR3amT9VnYFhmjqE3anFwNClRTu7SAXIfqd1ONAD5HKRJzcUgTwwHSlA0xKuuIOJo9MgoK9NP7fSGhATt4bDyL/IwATqL4Nh6r9RQBwAAGp0Cfo=
+   eJxjYBgFpABxHQYGCR3amT9VnYFhmjqE3anFwNClRTu7SAXIfqd1OIwC6gJ5YDpSgKYlXHEHE0enR8EoGAXDCwAAl/AHJQ==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
