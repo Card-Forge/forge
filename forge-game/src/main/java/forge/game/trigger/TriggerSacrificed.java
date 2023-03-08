@@ -91,7 +91,7 @@ public class TriggerSacrificed extends Trigger {
                 for (IndividualCostPaymentInstance individual : stack) {
                     sa = individual.getPayment().getAbility();
 
-                    if (sa == null ||  sa.getHostCard() == null)
+                    if (sa == null || sa.getHostCard() == null)
                         continue;
 
                     if (sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword)) {

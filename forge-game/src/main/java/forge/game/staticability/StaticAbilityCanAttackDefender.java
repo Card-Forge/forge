@@ -46,7 +46,6 @@ public class StaticAbilityCanAttackDefender {
     }
 
     public static boolean applyCanAttackAbility(final StaticAbility stAb, final Card card, final GameEntity target) {
-
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }

@@ -225,7 +225,7 @@ public class StaticData {
         return foil ? card.getFoiled() : card;
     }
 
-    public void attemptToLoadCard(String cardName){
+    public void attemptToLoadCard(String cardName) {
         this.attemptToLoadCard(cardName, null);
     }
     public void attemptToLoadCard(String cardName, String setCode) {

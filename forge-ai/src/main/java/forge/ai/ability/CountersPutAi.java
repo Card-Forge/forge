@@ -994,7 +994,7 @@ public class CountersPutAi extends CountersAi {
             types.add((CounterType)params.get("CounterType"));
         } else {
             for (String s : sa.getParam("CounterType").split(",")) {
-                CounterType.getType(s);
+                types.add(CounterType.getType(s));
             }
         }
 
