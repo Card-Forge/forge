@@ -5,6 +5,7 @@
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJztzrENACAMwLAOSFzZ7zmEJ6qCwEPmOEdEqqQ174iPj4+Pj4+Pj4+Pj4+Pj+98fHx87/kq6/rw8f3s21DxrDk=
@@ -17,7 +18,7 @@
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztl80KwjAMgIM3f8A+gEyPY0wv+ibqXaeojyE+uStzOMomTc3a0OWD0J8d+pGMLQUQqHhN6SIGv+uItx8Wn37FJ3c3RA67ztqnAIcyjinOD1s/V78h1peT34mozj7zd3ZwDlnfu4WvD791BrDJ8P6+/Lq4MMnfP1D7bXOAXf57XtO217cfNeLHy0/eP/Hj6mf+L2x6We75W84AVmVMxtVYx0JVY6K+z/Rozpt7bTwaOXLpr0JSMPC16VE4YPb7Nr1p35hO5pr6LjokqO53Njzn/s6KFf091yQqrIcgxM4bns4Cfg==
+   eJxjYBgF1AJN3NTDw8F9PkaD232kAnq6zwsadn4khCEuu4I1GBhCgDhUgzT3kRp/5LpvJMbvYHJfAtPgdh824ElG2hzI+E0nIozp4T5dLQYGPS3S3U8v9+EC3kTE90jLv8Y6DAwmOvjZMIBNjNbuozYYdd/gct9o+ht132B1H3p9QUxbdrCHnzwPA4MCEHNxQmgYlhGA0HICCDkQjc5GFsMGApDCKJFKbUJ6AS8q91XIAcS0UQYD8EBzp/8gcDe6m9D51O6LjiSAHpa0BA389LNruAJQeQ4CcgID645RMAqGOwAAxtsEFg==
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -25,12 +26,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmEsOwiAQhlmYmJLUe1ijW6t1oXHvAX1tvFN15+MInkCJEsc6QNvpAyJ/MhFmMsPXWiYBxtzQOmRsY4ltw1++uMfY5G2zpx0JlpSokYD1pz09HxYvorhEDdP6MXjmUwt8KXiPKj7qe6uilirXdb5DQF+DkmuqueD0NSi5no+WC/33wccvx5IPi0FfE3yXJ0s3eNn1PV7y7zkc33i+NYSGEWOjiMaHyab/F5NNfKLXrfpqPtgLx9Fvb6ybD3tX0JeNZ+dN7g9pS2RfSCuyP6rgw2TT94fJJj5df87GsXmb/dl/f+7y7TXnPcGX9wy6C+vhU50JxXlJ8KWKuCqnaj7MP++8fs/8e16XmjgfUeT5aHKZb6+5PzJpjdw/YT5Tvqo3Ue+HsPwiNfPcD8m4qk+berKOz1QTy4cq0nvz9uayNan3Z15e/6IHVk/fZg==
+   eJztmEsOgjAQhrswMZDAPcTowo0oLjTuPaCvjXdCdz6OwAmk0cYBphQYHm3kTya2nczMZ1MmaRkzQ3uHsYMmdnSyfL7L2OJrq9iuBAsq5AhA/aWbz4f5y8ivkENV3wf/+dYBXwj2UcZH3bc6csliTee7WPQalFhVzo1Nr0GJNYkvnP3WxVjwYT641gZfBOpFKT7MF7XM94hZhtbHnt/x1k7O4fhlF6vBNfEYm3o0Pkw6nT9MOvHxXrcbyflgL5x72d7YNB+2V3At7U/P2/w+hG2R70JYme+jDj5MOp0/TDrxRePfuhhDPujH5l325/78mct3zrnvcb6id9CT0wyf7E7I70ucL5T4ZTF182Hr68Hn924n502pjfsRRT0fTSbznXPej1TaI+9P2JoqXtabqO9DWHyZnEXeh4Rf1qdVPTmPT5UTi4cq03uL9uaqOanvZ716/YvekfTksQ==
   </data>
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUUALMNRgYLIDYUmOgXTIKsIHr2gwMN7QH2hWooENzoF1AO3BNGzsblxy6mqEMBLUYGIS0BtoVIxsYAvOWEY78JQ+MGwWk+JEGsmVwxJe4DgODhA5+Nja1hIAvnrxvDXSLDZp7LEbT04gEtEp/+MpnbGLDqXweBaOAVFDHz8BQD8QN/APtEkywiBk/f6iBAk38/MECLAepu4ZK+I2CUTBQYDCX56NgFIwC+gEAuogcaQ==
+   eJxjYBgFo2AUUALMNRgYLIDYUmOgXTIKsIHr2gwMN7QH2hWooENzoF0wCmgBBLUYGIS0BtoVIxsYAvOWEY78JQ+MGwWk+JEGsmVwxJe4DgODhA5+Nja1hIAvnrxvDXSLDZp7LEbT04gEtEp/17Sxs3GJYVMzCkbBSAF1/AwM9UDcwD/QLsEEi5jx84caKDDAzx8swHKQtt+HSviNglEwUGAwl+ejYBSMAvoBAFbjF4A=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

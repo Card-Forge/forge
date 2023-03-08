@@ -5,6 +5,7 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJyL4GZgiBjFo3gUj+JRPIpH8YjAAH23xTs=
@@ -20,7 +21,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy1lU0KwjAQhacNWEE8R0EK9W+nC3HnXawnkKpn8AZ6nooX6Cl0rWYwQ9K0KU2iD4JTat43b1ojgL9OQ7/7v9Y/eCH7vSfpyPtdhQDXwG2tQ3vmQcyoFHs3o+qqScl/GVT3dpWaMWeSS8L6EQM843YfWy5+f8G9l025hNKom8+7IxufKfXZ5l0o92YJwDyp1y55ydvkqXJTQ+3DNXmq3Buvz73v2vX9uVvukfE1jeQ11YWhBxTNxZVL+5FHee4adxzJjPT7obm4cpveq0LjUk8Tbdb4HrtwX6H0xNliLvzUuQGT1/rZlluepXqfyMcM9LwxW6bMnjLa5tO1Z+1nblM2m3y5w/9UKbi+2T6mSVq2
+   eJxjYKAcNPJSJk9tQAv7mJipbyYMNADd68DEwLCYkTzsxES6nfXQMLoL1euphYrRQZoRgr2IG1UvsQDZj3XQ8PQ0RMiD2J/VGRi+qOM3h1R7QeqtgX6yweIvGNBnJ86c/0TaDYpTmDvxmX0WSc5Yh4HBRAeTTY5/YWbjMhPZXn0cbErsxWUmsr3ngOzJbBCcx0G5vTlAM3KB2IgdwYexz+JwAwjAwoVce2H6QfbB/HMBzV4DdoQfYfkHFi7k2ostXZ1FsxfmJkO0sE41Is/eFCOEmaCwBfkLRKPbm26E4KOXbXUklqXo7gTZD/IDLL5BfstFCnuYH0n1HzqoYcZf5mLzGyn+qyOjnroLtZdSvwEAtUZbGg==
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
