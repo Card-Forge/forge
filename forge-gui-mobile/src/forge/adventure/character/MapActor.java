@@ -42,7 +42,7 @@ public class MapActor extends Actor {
     }
 
     Texture debugTexture;
-    protected float collisionHeight=1.0f;
+    protected float collisionHeight=0.4f;
     final int objectId;
     Array<CurrentEffect> effects=new Array<>();
 
@@ -181,7 +181,7 @@ public class MapActor extends Actor {
     }
 
     void updateBoundingRect() {
-        boundingRect.set(getX(), getY(), getWidth(), getHeight()*collisionHeight);
+        boundingRect.set(getX(), getY(), getWidth(), getHeight());
     }
 
     public Rectangle boundingRect() {

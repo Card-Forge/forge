@@ -1,5 +1,43 @@
 [ 
   {
+    "name": "Chandra's Tome",
+	"description": "Draft a Chandra themed card that can be cast with mana of any color.",
+    "equipmentSlot": "Left",
+    "iconName": "ChandrasTome",
+    "effect": {
+      "startBattleWithCardInCommandZone": [
+        "Chandra's Tome"
+      ]
+    }
+  },
+  {
+    "name": "Phoenix Charm",
+	"description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
+    "equipmentSlot": "Neck",
+    "iconName": "PhoenixCharm",
+    "effect": {
+      "startBattleWithCardInCommandZone": [
+        "Phoenix Charm"
+      ]
+    }
+  },
+  {
+    "name": "Chandra's Stone",
+	"description": "A small red gemstone recovered after your battle with Chandra.",
+    "iconName": "r"
+  },
+  {
+    "name": "Phoenix",
+	"description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
+    "equipmentSlot": "Neck",
+    "iconName": "PhoenixCharm",
+    "effect": {
+      "startBattleWithCardInCommandZone": [
+        "Phoenix Charm"
+      ]
+    }
+  },
+  {
     "name": "Piper's Charm",
     "equipmentSlot": "Neck",
     "iconName": "PipersCharm",

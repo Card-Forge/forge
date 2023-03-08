@@ -180,7 +180,7 @@ public static ConsoleCommandInterpreter getInstance()
         });
         registerCommand(new String[]{"leave"}, s -> {
             if(!MapStage.getInstance().isInMap()) return "not on a map";
-            MapStage.getInstance().exit();
+            MapStage.getInstance().exitDungeon();
             return "Got out";
         });
         registerCommand(new String[]{"debug","collision"}, s -> {

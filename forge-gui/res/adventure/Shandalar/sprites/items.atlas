@@ -68,7 +68,16 @@ SleepWand
   size: 16, 16  
 FarmersTools
   xy: 288, 976
+  size: 16, 16
+PhoenixCharm
+  xy: 320, 160
   size: 16, 16  
+ChandrasTome
+  xy: 240, 816
+  size: 16, 16  
+ChandrasStone
+  xy: 16, 768
+  size: 16,16
 SolRing
   xy: 320, 144
   size: 16, 16          

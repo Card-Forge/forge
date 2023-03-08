@@ -58,7 +58,7 @@ public class EffectData implements Serializable {
     }
 
     public Array<IPaperCard> startBattleWithCardsInCommandZone(){
-        Array<IPaperCard> startCardsInCommandZone=new Array<>();
+        Array<IPaperCard> startCardsInCommandZone=new Array<>(IPaperCard.class);
         if(startBattleWithCardInCommandZone != null) {
             for (String name:startBattleWithCardInCommandZone) {
                 PaperCard C = FModel.getMagicDb().getCommonCards().getCard(name);
@@ -83,7 +83,6 @@ public class EffectData implements Serializable {
 
     public String getDescription() {
         String description = "";
-        if(name != null && !name.isEmpty()) description += name + "\n";
         if(colorView) description += "Manasight.\n";
         if(lifeModifier != 0)
             description += "[+Life] " + ((lifeModifier > 0) ? "+" : "") + lifeModifier + "\n";

@@ -14,6 +14,7 @@ public class EnemyEdit extends FormPanel {
     JTextField ai=new JTextField();
     JCheckBox flying=new JCheckBox();
     JCheckBox boss=new JCheckBox();
+    JCheckBox ignoreDungeonEffect=new JCheckBox();
     FloatSpinner lifeFiled= new FloatSpinner(0, 1000, 1);
     FloatSpinner spawnRate= new FloatSpinner(  0.f, 1, 0.1f);
     FloatSpinner difficulty= new FloatSpinner(  0.f, 1, 0.1f);
@@ -55,7 +56,7 @@ public class EnemyEdit extends FormPanel {
         ai.getDocument().addDocumentListener(new DocumentChangeListener(() -> EnemyEdit.this.updateEnemy()));
         flying.addChangeListener(e -> EnemyEdit.this.updateEnemy());
         boss.addChangeListener(e -> EnemyEdit.this.updateEnemy());
-
+        ignoreDungeonEffect.addChangeListener(e -> EnemyEdit.this.updateEnemy());
         nameField.getDocument().addDocumentListener(new DocumentChangeListener(() -> EnemyEdit.this.updateEnemy()));
         deck.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> EnemyEdit.this.updateEnemy()));
         lifeFiled.addChangeListener(e -> EnemyEdit.this.updateEnemy());

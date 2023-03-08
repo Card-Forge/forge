@@ -49,8 +49,8 @@ import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 
-import java.util.Map;
-import java.util.Random;
+import java.time.LocalDate;
+import java.util.*;
 
 
 /**
@@ -86,7 +86,9 @@ public class MapStage extends GameStage {
     public InputEvent eventTouchDown, eventTouchUp;
     TextraButton selectedKey;
     private boolean respawnEnemies;
-
+    private boolean canFailDungeon = false;
+    protected ArrayList<EnemySprite> enemies = new ArrayList<>();
+    protected Map<Integer, Vector2> waypoints = new HashMap<>();
 
     public boolean getDialogOnlyInput() {
         return dialogOnlyInput;
@@ -159,6 +161,31 @@ public class MapStage extends GameStage {
             }
         }
         return false;
+    }
+
+    public float lengthWithoutCollision(EnemySprite mob, Vector2 end){
+        Vector2 start = mob.pos();
+        Vector2 safeVector = start.cpy().add(end);
+
+        int segmentsToCheck = 100;
+        float safeLen = safeVector.len();
+        float partialLength = safeLen / segmentsToCheck;
+
+        for (Rectangle collision : collisionRect) {
+            float uncollidedLen = 0.0f;
+            while (uncollidedLen < safeLen){
+                Rectangle mRect = new Rectangle(mob.navigationBoundingRect());
+                Vector2 testVector = new Vector2(end).setLength(uncollidedLen + partialLength);
+                mRect.setPosition(mRect.x+testVector.x, mRect.y + testVector.y);
+                if (mRect.overlaps(collision)){
+                    break;
+                }
+                uncollidedLen += partialLength;
+            }
+            safeLen = Math.min(safeLen, uncollidedLen);
+        }
+
+        return safeLen;
     }
 
 
@@ -328,6 +355,11 @@ public class MapStage extends GameStage {
         } else {
             respawnEnemies = false;
         }
+        if (MP.get("canFailDungeon") != null && MP.get("canFailDungeon") instanceof Boolean && (Boolean) MP.get("canFailDungeon")) {
+            canFailDungeon = true;
+        } else {
+            canFailDungeon = false;
+        }
         if (MP.get("preventEscape") != null) preventEscape = (boolean) MP.get("preventEscape");
 
         if (MP.get("music") != null && !MP.get("music").toString().isEmpty()) {
@@ -339,6 +371,7 @@ public class MapStage extends GameStage {
         otherEntries.clear();
         spawnClassified.clear();
         sourceMapMatch.clear();
+        enemies.clear();
         for (MapLayer layer : map.getLayers()) {
             if (layer.getProperties().containsKey("spriteLayer") && layer.getProperties().get("spriteLayer", boolean.class)) {
                 spriteLayer = layer;
@@ -384,7 +417,21 @@ public class MapStage extends GameStage {
         } while (oldSize != collisionRect.size);
         if (spriteLayer == null) System.err.print("Warning: No spriteLayer present in map.\n");
 
+        replaceWaypoints();
+
         getPlayerSprite().stop();
+    }
+
+    void replaceWaypoints(){
+        for (EnemySprite enemy : enemies)
+              {
+            for (EnemySprite.MovementBehavior behavior : enemy.movementBehaviors){
+                if (behavior.getDestination() > 0 && waypoints.containsKey(behavior.getDestination())){
+                    behavior.setX(waypoints.get(behavior.getDestination()).x);
+                    behavior.setY(waypoints.get(behavior.getDestination()).y);
+                }
+              }
+        }
     }
 
     static public boolean containsOrEquals(Rectangle r1, Rectangle r2) {
@@ -436,6 +483,16 @@ public class MapStage extends GameStage {
                 String rotatingShop = "";
 
                 switch (type) {
+                    case "collision":
+                        float cX = Float.parseFloat(prop.get("x").toString());
+                        float cY = Float.parseFloat(prop.get("y").toString());
+                        float cW = Float.parseFloat(prop.get("width").toString());
+                        float cH = Float.parseFloat(prop.get("height").toString());
+                        collisionRect.add(new Rectangle(cX, cY, cW, cH));
+                        break;
+                    case "waypoint":
+                        waypoints.put(id, new Vector2(Float.parseFloat(prop.get("x").toString()), Float.parseFloat(prop.get("y").toString())));
+                        break;
                     case "entry":
                         float x = Float.parseFloat(prop.get("x").toString());
                         float y = Float.parseFloat(prop.get("y").toString());
@@ -497,11 +554,30 @@ public class MapStage extends GameStage {
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.effect = JSONStringLoader.parse(EffectData.class, dialogObject.toString(), "");
                             }
+                            dialogObject = prop.get("ignoreDungeonEffect"); //Check for special effects.
+                            if (dialogObject != null && !dialogObject.toString().isEmpty()) {
+                                mob.ignoreDungeonEffect = Boolean.parseBoolean(dialogObject.toString());
+                            }
                             dialogObject = prop.get("reward"); //Check for additional rewards.
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.rewards = JSONStringLoader.parse(RewardData[].class, dialogObject.toString(), "[]");
                             }
+                            if (prop.containsKey("threatRange")) //Check for threat range.
+                            {
+                                mob.threatRange = Float.parseFloat(prop.get("threatRange").toString());
+                            }
+                            if (prop.containsKey("fleeRange")) //Check for flee range.
+                            {
+                                mob.fleeRange = Float.parseFloat(prop.get("fleeRange").toString());
+                            }
                             mob.hidden = hidden; //Evil.
+
+                            dialogObject = prop.get("waypoints");
+                            if (dialogObject != null && !dialogObject.toString().isEmpty()) {
+                                mob.parseWaypoints(dialogObject.toString());
+                            }
+
+                            enemies.add(mob);
                             addMapActor(obj, mob);
                         }
                         break;
@@ -541,7 +617,7 @@ public class MapStage extends GameStage {
                         }));
                         break;
                     case "exit":
-                        addMapActor(obj, new OnCollide(MapStage.this::exit));
+                        addMapActor(obj, new OnCollide(MapStage.this::exitDungeon));
                         break;
                     case "dialog":
                         if (obj instanceof TiledMapTileMapObject) {
@@ -589,7 +665,7 @@ public class MapStage extends GameStage {
                         Array<String> possibleShops = new Array<>(rotation.split(","));
 
                         if (possibleShops.size > 0){
-                            long rotatingRandomSeed = WorldSave.getCurrentSave().getWorld().getRandom().nextLong() + java.time.LocalDate.now().toEpochDay();
+                            long rotatingRandomSeed = WorldSave.getCurrentSave().getWorld().getRandom().nextLong() + LocalDate.now().toEpochDay();
                             Random rotatingShopRandom = new Random(rotatingRandomSeed);
                             rotatingShop = possibleShops.get(rotatingShopRandom.nextInt(possibleShops.size));
                             changes.setRotatingShopSeed(id, rotatingRandomSeed);
@@ -699,7 +775,7 @@ public class MapStage extends GameStage {
         }
     }
 
-    public boolean exit() {
+    public boolean exitDungeon() {
         isLoadingMatch = false;
         effect = null; //Reset dungeon effects.
         clearIsInMap();
@@ -720,16 +796,51 @@ public class MapStage extends GameStage {
         } else {
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
+
             startPause(0.3f, () -> {
                 player.setAnimation(CharacterSprite.AnimationTypes.Idle);
                 currentMob.setAnimation(CharacterSprite.AnimationTypes.Idle);
                 player.setPosition(oldPosition4);
-                Current.player().defeated();
+                currentMob.freezeMovement();
+                boolean defeated = Current.player().defeated();
+                if (canFailDungeon && defeated)
+                {
+                    //If hardcore mode is added, check and redirect to game over screen here
+                    dungeonFailedDialog();
+                    exitDungeon();
+                }
                 MapStage.this.stop();
                 currentMob = null;
             });
         }
+    }
 
+    private void dungeonFailedDialog() {
+        dialog.getButtonTable().clear();
+        dialog.getContentTable().clear();
+        dialog.clearListeners();
+        TextraButton ok = Controls.newTextButton("OK", this::hideDialog);
+        ok.setVisible(false);
+        TypingLabel L = Controls.newTypingLabel("{GRADIENT=RED;WHITE;1;1}Defeated and unable to continue, you use the last of your power to escape the area.");
+        L.setWrap(true);
+        L.setTypingListener(new TypingAdapter() {
+            @Override
+            public void end() {
+                ok.setVisible(true);
+            }
+        });
+        dialog.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                L.skipToTheEnd();
+                super.clicked(event, x, y);
+                //exitDungeon();
+            }
+        });
+        dialog.getButtonTable().add(ok).width(240f);
+        dialog.getContentTable().add(L).width(250f);
+        dialog.setKeepWithinStage(true);
+        showDialog();
     }
 
     public boolean deleteObject(int id) {
@@ -790,6 +901,42 @@ public class MapStage extends GameStage {
 
     @Override
     protected void onActing(float delta) {
+        Iterator<EnemySprite> it = enemies.iterator();
+        while (it.hasNext()) {
+            EnemySprite mob = it.next();
+            mob.updatePositon();
+            mob.targetVector = mob.getTargetVector(player, delta);
+            Vector2 currentVector = new Vector2(mob.targetVector);
+            mob.clearActions();
+            if (mob.targetVector.len() == 0.0f) {
+                mob.setAnimation(CharacterSprite.AnimationTypes.Idle);
+                continue;
+            }
+
+            if (!mob.getData().flying)//if direct path is not possible
+            {
+                //Todo: fix below for collision logic
+                float safeLen = lengthWithoutCollision(mob, mob.targetVector);
+                if (safeLen > 0.1f) {
+                    currentVector.setLength(Math.min(safeLen, mob.targetVector.len()));
+                }
+                else {
+                    currentVector = Vector2.Zero;
+                }
+            }
+
+
+            //mob.targetVector.setLength(Math.min(mob.speed() * delta, mob.targetVector.len()));
+//            if (mob.targetVector.len() < 0.3f) {
+//                mob.targetVector = Vector2.Zero;
+//            }
+            currentVector.setLength(Math.min(mob.speed() * delta, mob.targetVector.len()));
+            //if (destination.len() < 0.3f) destination = Vector2.Zero;
+            mob.moveBy(currentVector.x, currentVector.y);
+
+        }
+
+
         float sprintingMod = currentModifications.containsKey(PlayerModification.Sprint) ? 2 : 1;
         player.setMoveModifier(2 * sprintingMod);
         oldPosition4.set(oldPosition3);
@@ -845,7 +992,7 @@ public class MapStage extends GameStage {
                     isLoadingMatch = true;
                     Forge.setTransitionScreen(new TransitionScreen(() -> {
                         duelScene.initDuels(player, mob);
-                        if (isInMap && effect != null)
+                        if (isInMap && effect != null && !mob.ignoreDungeonEffect)
                             duelScene.setDungeonEffect(effect);
                         Forge.switchScene(duelScene);
                     }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.nameOverride.isEmpty() ? mob.getData().name : mob.nameOverride));

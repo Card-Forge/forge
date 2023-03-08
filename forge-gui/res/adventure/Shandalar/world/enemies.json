@@ -1489,6 +1489,766 @@
 	"colors": "GW"
 },
 {
+	"name": "Chandra",
+	"sprite": "sprites/red_wiz2.atlas",
+	"deck": [
+		"decks/miniboss/Fire of Kaladesh.dck"
+	],
+	"boss": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"life": 70,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Chandra, Fire Of Kaladesh"
+		},
+		{
+			"count":4,
+			"type":"Union",
+			"probability": 1,
+			"cardUnion": [
+				{
+					"count":1,
+					"subTypes": ["Chandra"]
+				},
+				{
+					"count":1,
+					"superTypes": ["Legend","Legendary"],
+					"colors": ["red"],
+					"cardText": "Chandra"
+				},
+				{
+					"count":1,
+					"cardName": "Oath of Chandra"
+				},
+				{
+					"count":1,
+					"cardName": "Pyromancer's Goggles"
+				},
+				{
+					"count":1,
+					"cardName": "Pyromancer's Gauntlet"
+				},
+				{
+					"count":1,
+					"cardName": "Chandra's Regulator"
+				}
+				
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Chandra's Defeat"
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 4,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 1000,
+			"addMaxCount": 9000
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Chandra's Stone"
+		}
+	],
+	"colors": "R"
+},
+{
+	"name": "Chandra's Acolyte",
+	"sprite": "sprites/red_wiz2.atlas",
+	"deck": [
+		"decks/chandra1.dck"		
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 1,
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 2,
+			"rarity": [
+				"rare"
+			],
+			"colorType": "Colorless"
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.3,
+			"count": 1,
+			"rarity": [
+				"uncommon","rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"cardText": "\\Q{\\ER\\Q}\\E"
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "R"
+},
+{
+	"name": "Chandra's Firestarter",
+	"sprite": "sprites/red_wiz3.atlas",
+	"deck": [
+		"decks/chandra2.dck"		
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 1,
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 2,
+			"rarity": [
+				"rare"
+			],
+			"colorType": "Colorless"
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.3,
+			"count": 1,
+			"rarity": [
+				"uncommon","rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"cardText": "\\Q{\\ER\\Q}\\E"
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "R"
+},
+{
+	"name": "Chandra's Hellhound",
+	"sprite": "sprites/hellhound_2.atlas",
+	"deck": [
+		"decks/hellhound2.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 1,
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 2,
+			"rarity": [
+				"rare"
+			],
+			"colorType": "Colorless"
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.3,
+			"count": 1,
+			"rarity": [
+				"uncommon","rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"cardText": "\\Q{\\ER\\Q}\\E"
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "R"
+},
+{
+	"name": "Chandra's Immolator",
+	"sprite": "sprites/red_wiz2.atlas",
+	"deck": [
+		"decks/chandra3.dck"		
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 1,
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 2,
+			"rarity": [
+				"rare"
+			],
+			"colorType": "Colorless"
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.3,
+			"count": 1,
+			"rarity": [
+				"uncommon","rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"cardText": "\\Q{\\ER\\Q}\\E"
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "R"
+},
+{
+	"name": "Chandra's Lavamancer",
+	"sprite": "sprites/red_wiz3.atlas",
+	"deck": [
+		"decks/chandra4.dck"		
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 1,
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 2,
+			"rarity": [
+				"rare"
+			],
+			"colorType": "Colorless"
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.3,
+			"count": 1,
+			"rarity": [
+				"uncommon","rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"cardText": "\\Q{\\ER\\Q}\\E"
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "R"
+},
+{
+	"name": "Chandra's Pyromancer",
+	"sprite": "sprites/red_wiz2.atlas",
+	"deck": [
+		"decks/chandra5.dck"		
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 1,
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 2,
+			"rarity": [
+				"rare"
+			],
+			"colorType": "Colorless"
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.3,
+			"count": 1,
+			"rarity": [
+				"uncommon","rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"cardText": "\\Q{\\ER\\Q}\\E"
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "R"
+},
+{
+	"name": "Chandra's Scorcher",
+	"sprite": "sprites/red_wiz2.atlas",
+	"deck": [
+		"decks/chandra6.dck"		
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 1,
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 2,
+			"rarity": [
+				"rare"
+			],
+			"colorType": "Colorless"
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.3,
+			"count": 1,
+			"rarity": [
+				"uncommon","rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"cardText": "\\Q{\\ER\\Q}\\E"
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "R"
+},
+{
 	"name": "ClayGolem",
 	"sprite": "sprites/golem_2.atlas",
 	"deck": [
@@ -4066,6 +4826,7 @@
 	"deck": [
 		"decks/miniboss/ooze_boss.dck"
 	],
+	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
@@ -5550,6 +6311,7 @@
 	"deck": [
 		"decks/miniboss/jace.dck"
 	],
+	"boss": true,
 	"spawnRate": 1,
 	"scale": 0.5,
 	"difficulty": 0.1,
@@ -5760,6 +6522,7 @@
 	"deck": [
 		"decks/miniboss/kiora.dck"
 	],
+	"boss": true,
 	"ai": "",
 	"flying": false,
 	"spawnRate": 1,
@@ -6062,6 +6825,196 @@
 	"colors": "B"
 },
 {
+	"name": "Lightning Elemental",
+	"sprite": "sprites/lightningelemental.atlas",
+	"deck": [
+		"decks/lightning_elemental.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"flying": true,
+	"speed": 32,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 1,
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 2,
+			"rarity": [
+				"rare"
+			],
+			"colorType": "Colorless"
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.3,
+			"count": 1,
+			"rarity": [
+				"uncommon","rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"cardText": "\\Q{\\ER\\Q}\\E"
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "R"
+},{
+	"name": "Magma Elemental",
+	"sprite": "sprites/magmaelemental.atlas",
+	"deck": [
+		"decks/magma_elemental.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 25,
+	"flying": true,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 1,
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 2,
+			"rarity": [
+				"rare"
+			],
+			"colorType": "Colorless"
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.3,
+			"count": 1,
+			"rarity": [
+				"uncommon","rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"cardText": "\\Q{\\ER\\Q}\\E"
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "R"
+},{
 	"name": "Merfolk",
 	"sprite": "sprites/waterelemental.atlas",
 	"deck": [
@@ -6737,6 +7690,102 @@
 	"colors": "RW"
 },
 {
+	"name": "Phoenix",
+	"sprite": "sprites/phoenix.atlas",
+	"deck": [
+		"decks/phoenix.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"flying": true,
+	"speed": 28,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 1,
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 2,
+			"rarity": [
+				"rare"
+			],
+			"colorType": "Colorless"
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.3,
+			"count": 1,
+			"rarity": [
+				"uncommon","rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"cardText": "\\Q{\\ER\\Q}\\E"
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "R"
+},
+{
 	"name": "Pirate",
 	"sprite": "sprites/pirate.atlas",
 	"deck": [
@@ -7330,6 +8379,7 @@
 	"deck": [
 		"decks/miniboss/slimefoot.dck"
 	],
+	"boss": true,
 	"ai": "",
 	"flying": false,
 	"spawnRate": 1,
@@ -8167,8 +9217,101 @@
 		}
 	],
 	"colors": "BG"
-},
-{
+},{
+	"name": "Volcano Elemental",
+	"sprite": "sprites/volcanoelemental.atlas",
+	"deck": [
+		"decks/br_elemental.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 28,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 1,
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 2,
+			"rarity": [
+				"rare"
+			],
+			"colorType": "Colorless"
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.3,
+			"count": 1,
+			"rarity": [
+				"uncommon","rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"cardText": "\\Q{\\ER\\Q}\\E"
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "BR"
+},{
 	"name": "Werewolf",
 	"sprite": "sprites/hellhound.atlas",
 	"deck": [

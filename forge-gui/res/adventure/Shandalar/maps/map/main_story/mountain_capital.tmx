@@ -137,8 +137,10 @@
 	&quot;Hellhound&quot;,
 	&quot;Immersturm Demon&quot;,
 	&quot;Khan&quot;,
+	&quot;Magma Elemental&quot;,
 	&quot;Minotaur&quot;,
 	&quot;Minotaur Flayer&quot;,
+	&quot;Phoenix&quot;,
 	&quot;Red Beast&quot;,
 	&quot;Red Wiz1&quot;,
 	&quot;Red Wiz2&quot;,
@@ -147,6 +149,7 @@
 	&quot;Troll&quot;,
 	&quot;Vampire Lord&quot;,
 	&quot;Viashino&quot;,
+	&quot;Volcano Elemental&quot;,
 	&quot;Yeti&quot;
 	],
     &quot;rounds&quot;:3,
