@@ -415,7 +415,7 @@ public abstract class GameStage extends Stage {
             if (adjDirX.x >= 0)
                 adjDirX.x = Math.max(0, adjDirX.x - 0.2f);
             else
-                adjDirX.x = Math.max(0, adjDirX.x + 0.2f);
+                adjDirX.x = Math.min(0, adjDirX.x + 0.2f);
         }
         while (true) {
             if (!isColliding(new Rectangle(boundingRect.x + adjDirY.x, boundingRect.y + adjDirY.y, boundingRect.width, boundingRect.height))) {
@@ -428,7 +428,7 @@ public abstract class GameStage extends Stage {
             if (adjDirY.y >= 0)
                 adjDirY.y = (Math.max(0, adjDirY.y - 0.2f));
             else
-                adjDirY.y = (Math.max(0, adjDirY.y + 0.2f));
+                adjDirY.y = (Math.min(0, adjDirY.y + 0.2f));
         }
         if (foundY && foundX)
             return adjDirX.len() > adjDirY.len() ? adjDirX : adjDirY;

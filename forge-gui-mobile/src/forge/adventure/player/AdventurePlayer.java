@@ -493,11 +493,14 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         life =  Math.min(life + (int)(maxLife*percent), maxLife);
         onLifeTotalChangeList.emit();
     }
-    public void defeated() {
+    public boolean defeated() {
         gold= (int) (gold-(gold*difficultyData.goldLoss));
-        life=Math.max(1,(int)(life-(maxLife*difficultyData.lifeLoss)));
+        int newLife=(int)(life-(maxLife*difficultyData.lifeLoss));
+        life=Math.max(1,newLife);
         onLifeTotalChangeList.emit();
         onGoldChangeList.emit();
+        return newLife < 1;
+        //If true, the player would have had 0 or less, and thus is actually "defeated" if the caller cares about it
     }
     public void win() {
         Current.player().addShards(1);

@@ -99,7 +99,7 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         if (random) {
-            sb.append("at random.");
+            sb.append(" at random.");
         }
         if (repeat) {
             sb.append(". You may choose the same mode more than once.");

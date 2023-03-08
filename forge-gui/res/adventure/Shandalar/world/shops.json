@@ -306,12 +306,12 @@
   "rewards": [
     {
       "count":6,
-	  "cardText": "tap.*mana|:.*add.*({[gburw]}|to your mana)|untap",
+	  "cardText": "tap.*mana|:.*add.*(\\{[gburw]\\}|to your mana)|untap",
 	  "colors": ["green"]
     },
 	{
       "count":2,
-	  "cardText": "tap.*mana|:.*add.*({[gburw]}|to your mana)|untap"
+	  "cardText": "tap.*mana|:.*add.*(\\{[gburw]\\}|to your mana)|untap"
     }]
 },{
 "name":"Red1",                  

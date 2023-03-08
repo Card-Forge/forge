@@ -295,6 +295,9 @@ LegendShop
 ShardTrader  
   xy: 288, 896
   size: 16, 16
+Waypoint  
+  xy: 288, 912
+  size: 16, 16
 Overlay8Black
   xy: 400, 704
   size: 5, 16  
@@ -582,7 +585,10 @@ red_castle
   size: 64, 64        
 final_castle 
   xy: 128, 864
-  size: 64, 64       
+  size: 64, 64   
 farm
   xy:351, 0
   size: 33,33
+hall_of_flame
+  xy: 194, 864
+  size: 32, 32     

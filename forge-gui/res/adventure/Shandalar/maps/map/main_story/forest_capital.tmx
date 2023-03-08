@@ -5,6 +5,7 @@
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJztzjENADAIADDeBWOzgn8DM0FgR4/+rRNRAAAAAACMubl/8PP7VdfvAWT0x+U=
@@ -17,7 +18,7 @@
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzNmElOw0AQAOcEkRKUKCwfSHAC5gY3+Ah3lnBn+wAETogHwBsA8QFwAgjEK3gBOxcQbcWjdIbu2eyEtNSSl/G43Nu0JygIEYIGoDXQYZDphCdMtALaAm0PCV8EHNWEMWa7B90sCrE1JLpd7DJKn5ZLQowPiU6UunZsK3xToOf/pJMKH5Yyca/GxEczL8QB0sN87/39PP2cSSgG6p5p/ijJpxaTV4Pgk+9YDfVzVgieIzg/Tq6tKc/PzwmxMNd7re7IJ4h36kT9ngew56NHrXLhi32IGRvIDpQN1O/BzFhm0bG0rRznwpeFYL6qxfh+8FG2pPgoUWPbhU+Na1+hGO+YsYPw7wkk42ndPK4ffFd+r9UKjg8fvkZGfraRNPZrMmtZWsFxnoZP9oxxv/MOc34Y7PoNMfjjGIcufGruRxn1sLranjY/cN+i+vkZmp0XruGxFB8+XKukDeO+9qqQfSy68lG1da/QicWwD/9TafyL4zFibLgIi/9S0gB8wvgvJofWmetZrh+YEcdjOGr3PBaZM7580wZG7OtGDvrTkY5u5Nw4Xfi4vuQVfPPG+FrNba4P4OZO419dP4Pzmssbm7Xblu/GMA/HyuWNlFt0vDyjZ2hbsMuc5fpM4hXOtWedWX/lWqDjo8T0P6eug9T4FYv6Ir/Tlq8yxjMFemQjF8cXEHy7nvs5saTdY9opmvnS7OdktcdE+fes5LaXc4mOL0p/57h0nO9cmU+1n6881fXnvkLxqTXnPyUr+7mIbF/xutcixsW179qTz6aWPLhP29ObS7ZwwPZT9zUPCCZVBymyZlAcAbIZPv8FDvfvLg==
+   eJzNmEtOwzAQhr0CpBa14nWBQiiEFbCDi7CnUPa8LgCFFeIAcAZAXADaAqLiFJyANxsQExGr02HGjp209JdGysNxvow944mDvFIhWAA2DdYPmop5wthKYA2wZp/w1YFjMmaM2O7BNgtKbfWJbRfajHpMR4pKjfaJjRXbfmwSvgmw83+yccKHNcLcmxbmRy2n1AGyw1zn/f0c/5xNHAN3z9Z/PY6nhhBXveDT76jMm/ssMTxHcH4cX1sjzy/MKbU413mt7MinmHeaRL+nBf588MhVLnzRGGLGatg+5nxAvwczY82iY+1b3c6FLwthvskE7bvBx/mS4+NE57YL31r4t42POMY7oW0vxvcEgvG0bG/XDb4rv9caheeHD1/Vkv+yVBr/1YS1LK1w/k7Dp2vGqN55g9h5t8TPF8zBb8d56MJXIe+vZ1TDmnJ72vioGWqWJyh2nqWCJ6F8+HCu0j6M6tqrfPZz0ZWPy617+d+5GHbhfyrN+OL5WBd8uASL/3JcAHxA+08hhtaF61muH5gRz8dwMNnzWDpmfPmmLIx4rKtDUJ8O/NrGkBunC59Ul7zA2LwKY01jW6oDpL7TjC+t07FwXEtxk2TtTsp3Y+lHYpXiRusWHa/MmBmaCdgrpP6mYl7hnHvWhfVXrwUmPk62/zm6DnLtV4U+MIP+zqR8pWGZKTAjW7kkvoDh2/Xcz4mUdo9pp2DnS7Ofk9UeEze+Z0W3vZxLdHxR/NvHpWN/56Q/6j9fPZbN577i+GjO+U9l5T8X6fIVr3sNpl2U+649+ZLkkpZ7tx21uWYLe+w/uq95wDBR66V0zuA4AuQzfP4DEgnvlw==
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">

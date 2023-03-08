@@ -5,6 +5,7 @@
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJztmG0OwiAMhon/hufRGQ+ye0ydF/VjHkca10jIGF9CUfvjDckC6UMLZH3HRoiR9TPaKLUVcNi4Hkr3yvYBsc5SiJN8jTY+mLdVGqZ5t0J8kLOrpjk+3APO2SkdZXk+W9xefdsTsJl5WaoZ7mO19pe+PmSdKV++lBipsp09vcaUfCDX20LN53ozqPlc95Kaz+fOMx/zMR/zMR/zMV9ZPkq2b+CD3rGtmM/1j0/NBz1kzf/Qvv5GiMwYnUcM6MUOU8+NvoY+Lp3BEHWRfDon+gIujyNFGAe8B8hLiP+AvgCsRdZP82GcGE/p0rw9Fax7Dn8l9mz3mXjm8pCjLv/CV6pONekJ5zkFQw==
@@ -12,7 +13,7 @@
  </layer>
  <layer id="2" name="Ground" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
@@ -137,8 +138,10 @@
 	&quot;Hellhound&quot;,
 	&quot;Immersturm Demon&quot;,
 	&quot;Khan&quot;,
+	&quot;Magma Elemental&quot;,
 	&quot;Minotaur&quot;,
 	&quot;Minotaur Flayer&quot;,
+	&quot;Phoenix&quot;,
 	&quot;Red Beast&quot;,
 	&quot;Red Wiz1&quot;,
 	&quot;Red Wiz2&quot;,
@@ -147,6 +150,7 @@
 	&quot;Troll&quot;,
 	&quot;Vampire Lord&quot;,
 	&quot;Viashino&quot;,
+	&quot;Volcano Elemental&quot;,
 	&quot;Yeti&quot;
 	],
     &quot;rounds&quot;:3,

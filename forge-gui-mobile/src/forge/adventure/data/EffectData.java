@@ -83,7 +83,6 @@ public class EffectData implements Serializable {
 
     public String getDescription() {
         String description = "";
-        if(name != null && !name.isEmpty()) description += name + "\n";
         if(colorView) description += "Manasight.\n";
         if(lifeModifier != 0)
             description += "[+Life] " + ((lifeModifier > 0) ? "+" : "") + lifeModifier + "\n";
