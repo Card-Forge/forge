@@ -48,9 +48,10 @@ public class InventoryScene extends UIScene {
         useButton.setDisabled(true);
         deleteButton = ui.findActor("delete");
         itemDescription = ui.findActor("item_description");
-        ScrollPane pane = new ScrollPane(itemDescription);
-        pane.setBounds(itemDescription.getX(), itemDescription.getY(), itemDescription.getWidth() - 5, itemDescription.getHeight() - 5);
         itemDescription.setAlignment(Align.topLeft);
+        itemDescription.setWrap(true);
+        ScrollPane pane = new ScrollPane(itemDescription);
+        pane.setBounds(itemDescription.getX(), itemDescription.getY(), itemDescription.getWidth() - 5, itemDescription.getHeight() - 8);
         ui.addActor(pane);
 
         Array<Actor> children = ui.getChildren();
@@ -98,7 +99,6 @@ public class InventoryScene extends UIScene {
         columns -= 1;
         if (columns <= 0) columns = 1;
         scrollPane.setActor(inventory);
-        itemDescription.setWrap(true);
     }
 
     private void showConfirm() {
@@ -210,9 +210,8 @@ public class InventoryScene extends UIScene {
                 button.setChecked(false);
             }
         }
-        itemDescription.setText(data.name + "\n" + data.getDescription());
-        itemDescription.setWrap(true);
-        itemDescription.layout();
+        itemDescription.setText(data.name + "\n[%98]" + data.getDescription());
+        performTouch(scrollPaneOfActor(itemDescription)); //can use mouse wheel if available to scroll after selection
     }
 
     private void updateInventory() {

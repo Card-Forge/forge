@@ -154,5 +154,6 @@ public class PlayerStatisticScene extends UIScene {
             scrollContainer.add(entry.getValue().getLeft().toString() + "/" + entry.getValue().getRight().toString()).pad(3, 5, 3, 10).center();
             scrollContainer.row();
         }
+        performTouch(scrollPaneOfActor(scrollContainer)); //can use mouse wheel if available to scroll
     }
 }
