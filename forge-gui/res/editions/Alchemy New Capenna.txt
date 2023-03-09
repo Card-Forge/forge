@@ -3,6 +3,7 @@ Code=YSNC
 Date=2022-06-02
 Name=Alchemy: New Capenna
 Type=Online
+Booster=1 UncommonRareMythic, 9 Common:fromsheet("SNC cards"), 3 Uncommon:fromSheet("SNC cards"), 1 RareMythic:fromSheet("SNC cards"), 1 fromSheet("SNC lands")
 ScryfallCode=YSNC
 
 [cards]
