@@ -1605,7 +1605,7 @@
 },
 {
 	"name": "Chandra",
-	"sprite": "sprites/red_wiz2.atlas",
+	"sprite": "sprites/boss/chandra.atlas",
 	"deck": [
 		"decks/miniboss/Fire of Kaladesh.dck"
 	],
