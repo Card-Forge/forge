@@ -60,7 +60,7 @@ public class InputLondonMulligan extends InputSyncronizedBase {
 
         StringBuilder sb = new StringBuilder();
 
-        getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOk"), "", cardsLeft == 0, false, true);
+        getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOk"), localizer.getMessage("lblAuto"), cardsLeft == 0, cardsLeft != 0, true);
 
         sb.append(String.format(localizer.getMessage("lblReturnForLondon"), cardsLeft));
 
@@ -77,6 +77,25 @@ public class InputLondonMulligan extends InputSyncronizedBase {
     protected final void onOk() {
         cardSelectLocked = true;
         done();
+    }
+
+    @Override
+    protected final void onCancel() {
+        int cardsLeft = toReturn - selected.size();
+        int count = 0;
+        for(Card c : player.getZone(ZoneType.Hand).getCards()) {
+            if (selected.contains(c)) { continue; }
+
+            selected.add(c);
+            setCardHighlight(c, selected.contains(c));
+            count++;
+
+            if (cardsLeft == count) {
+                break;
+            }
+        }
+
+        onOk();
     }
 
     private void done() {
