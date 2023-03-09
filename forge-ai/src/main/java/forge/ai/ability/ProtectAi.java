@@ -20,13 +20,13 @@ import forge.game.ability.effects.ProtectEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class ProtectAi extends SpellAbilityAi {
@@ -168,23 +168,23 @@ public class ProtectAi extends SpellAbilityAi {
     
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
-        if (!sa.usesTargeting()) {
-            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
-            if (cards.size() == 0) {
-                return false;
-            } else if (cards.size() == 1) {
-                // Affecting single card
-                return getProtectCreatures(ai, sa).contains(cards.get(0));
-            }
-            /*
-             * when this happens we need to expand AI to consider if its ok
-             * for everything? for (Card card : cards) { // TODO if AI doesn't
-             * control Card and Pump is a Curse, than maybe use?
-             * }
-             */
-        } else {
+        if (sa.usesTargeting()) {
             return protectTgtAI(ai, sa, false);
         }
+
+        final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+        if (cards.size() == 0) {
+            return false;
+        } else if (cards.size() == 1) {
+            // Affecting single card
+            return getProtectCreatures(ai, sa).contains(cards.get(0));
+        }
+        /*
+         * when this happens we need to expand AI to consider if its ok
+         * for everything? for (Card card : cards) { // TODO if AI doesn't
+         * control Card and Pump is a Curse, than maybe use?
+         * }
+         */
         return false;
     }
 
@@ -256,19 +256,13 @@ public class ProtectAi extends SpellAbilityAi {
     } // protectTgtAI()
 
     private static boolean protectMandatoryTarget(final Player ai, final SpellAbility sa) {
-        final Game game = ai.getGame();
-
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        CardCollection list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
+        final Card source = sa.getHostCard();
+        final List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
 
-        if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+        if (list.size() < tgt.getMinTargets(source, sa)) {
             sa.resetTargets();
             return false;
-        }
-
-        // Remove anything that's already been targeted
-        for (final Card c : sa.getTargets().getTargetCards()) {
-            list.remove(c);
         }
 
         CardCollection pref = CardLists.filterControlledBy(list, ai);
@@ -286,7 +280,6 @@ public class ProtectAi extends SpellAbilityAi {
             }
         });
         final List<Card> forced = CardLists.filterControlledBy(list, ai);
-        final Card source = sa.getHostCard();
 
         while (sa.canAddMoreTarget()) {
             if (pref.isEmpty()) {
@@ -308,13 +301,13 @@ public class ProtectAi extends SpellAbilityAi {
             sa.getTargets().add(c);
         }
 
-        while (sa.getTargets().size() < tgt.getMinTargets(source, sa)) {
+        while (!sa.isMinTargetChosen()) {
             if (forced.isEmpty()) {
                 break;
             }
 
             Card c;
-            if (CardLists.getNotType(forced, "Creature").size() == 0) {
+            if (CardLists.getNotType(forced, "Creature").isEmpty()) {
                 c = ComputerUtilCard.getWorstCreatureAI(forced);
             } else {
                 c = ComputerUtilCard.getCheapestPermanentAI(forced, sa, false);
@@ -323,7 +316,7 @@ public class ProtectAi extends SpellAbilityAi {
             sa.getTargets().add(c);
         }
 
-        if (sa.getTargets().size() < tgt.getMinTargets(source, sa)) {
+        if (!sa.isMinTargetChosen()) {
             sa.resetTargets();
             return false;
         }
