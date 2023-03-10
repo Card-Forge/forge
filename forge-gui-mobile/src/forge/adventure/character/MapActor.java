@@ -63,6 +63,7 @@ public class MapActor extends Actor {
     {
         ParticleEffect effect = new ParticleEffect();
         effect.load(Config.instance().getFile(path),Config.instance().getFile(path).parent());
+        effect.setPosition(getCenterX(), getCenterY());
         effects.add(new CurrentEffect(path, effect, offset, overlay));
         if(duration!=0)//ParticleEffect.setDuration uses an integer for some reason
         {
@@ -147,16 +148,29 @@ public class MapActor extends Actor {
                 effect.effect.draw(batch);
         }
     }
+    float getCenterX() {
+        float scale = 1f;
+        if (this instanceof EnemySprite) {
+            scale = ((EnemySprite) this).getData().scale;
+        }
+        return getX()+(getWidth()*scale)/2;
+    }
+    float getCenterY() {
+        float scale = 1f;
+        if (this instanceof EnemySprite) {
+            scale = ((EnemySprite) this).getData().scale;
+        }
+        return getY()+(getHeight()*scale)/2;
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
-
-
         for(int i=0;i<effects.size;i++)
         {
             CurrentEffect effect=effects.get(i);
             effect.effect.update(delta);
-            effect.effect.setPosition(getX()+getHeight()/2+effect.offset.x,getY()+getWidth()/2+effect.offset.y);
+            effect.effect.setPosition(getCenterX()+effect.offset.x,getCenterY()+effect.offset.y);
             if(effect.effect.isComplete())
             {
                 effects.removeIndex(i);
