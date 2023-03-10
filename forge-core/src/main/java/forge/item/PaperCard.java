@@ -418,4 +418,10 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     public String getSortableName() {
         return sortableName;
     }
+    public boolean isUnRebalanced() {
+        return StaticData.instance().isRebalanced("A-" + name);
+    }
+    public boolean isRebalanced() {
+        return StaticData.instance().isRebalanced(name);
+    }
 }

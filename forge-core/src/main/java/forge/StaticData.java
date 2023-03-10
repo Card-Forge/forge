@@ -900,4 +900,17 @@ public class StaticData {
         this.enableSmartCardArtSelection = isEnabled;
     }
 
+    public boolean isRebalanced(String name)
+    {
+        if (!name.startsWith("A-")) {
+            return false;
+        }
+        for(PaperCard pc : this.getCommonCards().getAllCards(name)) {
+            CardEdition e = this.editions.get(pc.getEdition());
+            if (e != null && e.isRebalanced(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -51,7 +51,6 @@ public abstract class ItemPredicate {
      */
     public static class Presets {
         /** The Item IsPack. */
-        @SuppressWarnings("unchecked")
         public static final Predicate<InventoryItem> IS_PACK_OR_DECK = Predicates.or(IsBoosterPack, IsFatPack, IsTournamentPack, IsStarterDeck, IsPrebuiltDeck);
     }
 }
