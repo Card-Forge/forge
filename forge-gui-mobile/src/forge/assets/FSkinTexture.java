@@ -202,13 +202,7 @@ public enum FSkinTexture implements FImage {
         FileHandle preferredFile = isPlanechaseBG ? FSkin.getCachePlanechaseFile(filename) : FSkin.getSkinFile(filename);
         if (preferredFile.exists()) {
             try {
-                if (preferredFile.path().contains("fallback_skin")) {
-                    texture = new Texture(preferredFile);
-                } else {
-                    Forge.getAssets().manager().load(preferredFile.path(), Texture.class);
-                    Forge.getAssets().manager().finishLoadingAsset(preferredFile.path());
-                    texture = Forge.getAssets().manager().get(preferredFile.path(), Texture.class);
-                }
+                texture = Forge.getAssets().getTexture(preferredFile);
                 isloaded = true;
             }
             catch (final Exception e) {
@@ -229,13 +223,7 @@ public enum FSkinTexture implements FImage {
 
             if (defaultFile.exists()) {
                 try {
-                    if (defaultFile.path().contains("fallback_skin")) {
-                        texture = new Texture(defaultFile);
-                    } else {
-                        Forge.getAssets().manager().load(defaultFile.path(), Texture.class);
-                        Forge.getAssets().manager().finishLoadingAsset(defaultFile.path());
-                        texture = Forge.getAssets().manager().get(defaultFile.path(), Texture.class);
-                    }
+                    texture = Forge.getAssets().getTexture(defaultFile);
                     isloaded = true;
                 }
                 catch (final Exception e) {

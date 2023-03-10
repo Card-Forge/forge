@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
+import forge.Forge;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestMap;
@@ -912,7 +913,7 @@ public class World implements Disposable, SaveFileContent {
 
     public Texture getGlobalTexture() {
         if (globalTexture == null) {
-            globalTexture = new Texture(Config.instance().getFile("ui/sprite_markers.png"));
+            globalTexture = Forge.getAssets().getTexture(Config.instance().getFile("ui/sprite_markers.png"));
             System.out.print("Loading auxiliary sprites.\n");
         }
         return globalTexture;

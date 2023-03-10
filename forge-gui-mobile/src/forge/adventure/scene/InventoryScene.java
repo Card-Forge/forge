@@ -37,7 +37,7 @@ public class InventoryScene extends UIScene {
 
     public InventoryScene() {
         super(Forge.isLandscapeMode() ? "ui/inventory.json" : "ui/inventory_portrait.json");
-        equipOverlay = new Texture(Config.instance().getFile(Paths.ITEMS_EQUIP));
+        equipOverlay = Forge.getAssets().getTexture(Config.instance().getFile(Paths.ITEMS_EQUIP));
         ui.onButtonPress("return", () -> done());
         leave = ui.findActor("return");
         ui.onButtonPress("delete", () -> showConfirm());

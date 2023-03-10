@@ -287,7 +287,7 @@ public class UIActor extends Group {
         for (ObjectMap.Entry property : entries) {
             switch (property.key.toString()) {
                 case "image":
-                    Texture t = new Texture(Config.instance().getFile(property.value.toString()));
+                    Texture t = Forge.getAssets().getTexture(Config.instance().getFile(property.value.toString()));
                     TextureRegion tr = new TextureRegion(t);
                     newActor.setDrawable(new TextureRegionDrawable(tr));
                     break;

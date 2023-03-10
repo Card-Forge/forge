@@ -40,7 +40,7 @@ public class Assets implements Disposable {
     private HashMap<Integer, TextureRegion> cursor;
     private ObjectMap<Integer, BitmapFont> counterFonts;
     private ObjectMap<String, Texture> generatedCards;
-    private ObjectMap<Integer, Texture> fallback_skins;
+    private ObjectMap<String, Texture> fallback_skins;
     private ObjectMap<String, Texture> tmxMap;
     private Texture defaultImage, dummy;
     private TextureParameter textureParameter;
@@ -54,16 +54,16 @@ public class Assets implements Disposable {
             Texture titleBG_LQ = GuiBase.isAndroid() ?
                     new Texture(Gdx.files.internal("fallback_skin").child(titleFilename)) :
                     new Texture(Gdx.files.classpath("fallback_skin").child(titleFilename));
-            fallback_skins().put(0, titleBG_LQ == null ? getDummy() : titleBG_LQ);
+            fallback_skins().put("title", titleBG_LQ == null ? getDummy() : titleBG_LQ);
             //init transition
             Texture transitionLQ = GuiBase.isAndroid() ?
                     new Texture(Gdx.files.internal("fallback_skin").child("transition.png")) :
                     new Texture(Gdx.files.classpath("fallback_skin").child("transition.png"));
-            fallback_skins().put(1, transitionLQ == null ? getDummy() : transitionLQ);
+            fallback_skins().put("transition", transitionLQ == null ? getDummy() : transitionLQ);
         } catch (Exception e) {
             fallback_skins().clear();
-            fallback_skins().put(0, getDummy());
-            fallback_skins().put(1, getDummy());
+            fallback_skins().put("title", getDummy());
+            fallback_skins().put("transition", getDummy());
         }
     }
 
@@ -202,7 +202,7 @@ public class Assets implements Disposable {
         return generatedCards;
     }
 
-    public ObjectMap<Integer, Texture> fallback_skins() {
+    public ObjectMap<String, Texture> fallback_skins() {
         if (fallback_skins == null)
             fallback_skins = new ObjectMap<>();
         return fallback_skins;
@@ -227,6 +227,28 @@ public class Assets implements Disposable {
             textureParameter.magFilter = Texture.TextureFilter.Nearest;
         }
         return textureParameter;
+    }
+
+    public Texture getTexture(FileHandle file) {
+        if (file == null || !file.exists()) {
+            System.err.println("Failed to load: " + file +"!. Creating dummy texture.");
+            return getDummy();
+        }
+        //internal path can be inside apk or jar..
+        if (file.path().contains("fallback_skin")) {
+            Texture f = fallback_skins().get(file.path());
+            if (f == null) {
+                fallback_skins().put(file.path(), new Texture(file));
+            }
+            return f;
+        }
+        Texture t = manager.get(file.path(), Texture.class, false);
+        if (t == null) {
+            manager.load(file.path(), Texture.class, getTextureFilter());
+            manager.finishLoadingAsset(file.path());
+            t = manager.get(file.path(), Texture.class);
+        }
+        return t;
     }
 
     public Texture getDefaultImage() {
