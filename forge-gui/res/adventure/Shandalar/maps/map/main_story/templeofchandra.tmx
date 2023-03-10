@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="60" height="61" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="183">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="60" height="61" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="184">
  <properties>
   <property name="canFailDungeon" type="bool" value="true"/>
   <property name="dungeonEffect">{
@@ -708,7 +708,7 @@
   <object id="41" template="../../obj/enemy.tx" x="736" y="508.33">
    <properties>
     <property name="effect">{
- &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Chandra, Supreme Pyromancer&quot; ]
+ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Fire of Kaladesh&quot; ]
 }</property>
     <property name="enemy" value="Chandra"/>
     <property name="ignoreDungeonEffect" type="bool" value="false"/>
@@ -782,7 +782,7 @@
    <properties>
     <property name="enemy" value="Magma Elemental"/>
     <property name="flying" type="bool" value="true"/>
-	<property name="reward">[
+    <property name="reward">[
   {
     &quot;type&quot;: &quot;item&quot;,
     &quot;probability&quot;: 0.01,
@@ -832,9 +832,7 @@
  &quot;startBattleWithCard&quot;: [ &quot;Lightning Coils&quot; ]
 }</property>
     <property name="enemy" value="Lightning Elemental"/>
-    <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="98,wait2,99,100,wait2,99"/>
-	<property name="reward">[
+    <property name="reward">[
   {
     &quot;type&quot;: &quot;item&quot;,
     &quot;probability&quot;: 0.01,
@@ -843,6 +841,8 @@
   }
 ]
 </property>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="98,wait2,99,100,wait2,99"/>
    </properties>
   </object>
   <object id="49" template="../../obj/enemy.tx" x="509.333" y="510.83">
@@ -1511,6 +1511,26 @@
    </properties>
   </object>
   <object id="181" template="../../obj/treasure.tx" x="535.273" y="131.45"/>
+  <object id="183" template="../../obj/enemy.tx" x="67" y="940.5">
+   <properties>
+    <property name="effect">{
+ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Chandra, Supreme Pyromancer&quot; ]
+}</property>
+    <property name="enemy" value="Chandra"/>
+    <property name="ignoreDungeonEffect" type="bool" value="false"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.01,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Phoenix Charm&quot;
+  }
+]
+</property>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="7" name="Waypoints">
   <object id="74" template="../../obj/waypoint.tx" x="501.5" y="770.5"/>

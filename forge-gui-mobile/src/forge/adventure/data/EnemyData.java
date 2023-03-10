@@ -2,6 +2,7 @@ package forge.adventure.data;
 
 import forge.adventure.util.*;
 import forge.deck.Deck;
+import forge.util.Aggregates;
 
 /**
  * Data class that will be used to read Json configuration files
@@ -16,6 +17,7 @@ public class EnemyData {
     public String ai;
     public boolean boss = false;
     public boolean flying = false;
+    public boolean randomizeDeck = false;
     public float spawnRate;
     public float difficulty;
     public float speed;
@@ -36,6 +38,7 @@ public class EnemyData {
         ai             = enemyData.ai;
         boss           = enemyData.boss;
         flying         = enemyData.flying;
+        randomizeDeck  = enemyData.randomizeDeck;
         spawnRate      = enemyData.spawnRate;
         copyPlayerDeck = enemyData.copyPlayerDeck;
         difficulty     = enemyData.difficulty;
@@ -59,6 +62,10 @@ public class EnemyData {
     }
 
     public Deck generateDeck(boolean isFantasyMode, boolean useGeneticAI) {
+        if (randomizeDeck)
+        {
+            return CardUtil.getDeck(Aggregates.random(deck), true, isFantasyMode, colors, life > 13, life > 16 && useGeneticAI);
+        }
         return CardUtil.getDeck(deck[Current.player().getEnemyDeckNumber(this.name, deck.length)], true, isFantasyMode, colors, life > 13, life > 16 && useGeneticAI);
     }
 }
