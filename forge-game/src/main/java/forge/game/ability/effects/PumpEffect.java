@@ -415,10 +415,7 @@ public class PumpEffect extends SpellAbilityEffect {
         final ZoneType pumpZone = sa.hasParam("PumpZone") ? ZoneType.smartValueOf(sa.getParam("PumpZone"))
                 : ZoneType.Battlefield;
 
-        final int size = tgtCards.size();
-        for (int j = 0; j < size; j++) {
-            final Card tgtC = tgtCards.get(j);
-
+        for (Card tgtC : tgtCards) {
             // CR 702.26e
             if (tgtC.isPhasedOut()) {
                 continue;

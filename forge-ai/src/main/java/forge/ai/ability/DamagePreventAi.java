@@ -130,7 +130,7 @@ public class DamagePreventAi extends SpellAbilityAi {
                 ComputerUtilCard.sortByEvaluateCreature(combatants);
 
                 for (final Card c : combatants) {
-                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && tcs.size() < tgt.getMaxTargets(hostCard, sa)) {
+                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && sa.canAddMoreTarget()) {
                     	tcs.add(c);
                         chance = true;
                     }
