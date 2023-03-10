@@ -28,6 +28,10 @@
             <id>gdx-nightlies</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
     <dependencies>
         <dependency>
@@ -49,6 +53,11 @@
             <groupId>forge</groupId>
             <artifactId>forge-gui</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tommyettinger</groupId>
+            <artifactId>textratypist</artifactId>
+            <version>0.7.9</version>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx-controllers</groupId>

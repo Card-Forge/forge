@@ -253,7 +253,7 @@ public class Forge implements ApplicationListener {
     public static boolean hasGamepad() {
         //Classic Mode Various Screen GUI are not yet supported, needs control mapping for each screens
         if (isMobileAdventureMode) {
-            return hasGamepad && Forge.isLandscapeMode(); //portrait is not supported for Gamepad
+            return hasGamepad && isLandscapeMode(); //portrait is not supported for Gamepad
         }
         return false;
     }
@@ -348,14 +348,14 @@ public class Forge implements ApplicationListener {
         //override transition & title bg
         try {
             FileHandle transitionFile = Config.instance().getFile("ui/transition.png");
-            FileHandle titleBGFile = Forge.isLandscapeMode() ? Config.instance().getFile("ui/title_bg.png") : Config.instance().getFile("ui/title_bg_portrait.png");
+            FileHandle titleBGFile = isLandscapeMode() ? Config.instance().getFile("ui/title_bg.png") : Config.instance().getFile("ui/title_bg_portrait.png");
             FileHandle vsIcon = Config.instance().getFile("ui/vs.png");
             if (vsIcon.exists())
-                Forge.getAssets().fallback_skins().put(2, new Texture(vsIcon));
+                getAssets().fallback_skins().put("vs", new Texture(vsIcon));
             if (transitionFile.exists())
-                Forge.getAssets().fallback_skins().put(1, new Texture(transitionFile));
+                getAssets().fallback_skins().put("transition", new Texture(transitionFile));
             if (titleBGFile.exists())
-                Forge.getAssets().fallback_skins().put(0, new Texture(titleBGFile));
+                getAssets().fallback_skins().put("title", new Texture(titleBGFile));
             AdventureScreen.preload();
         } catch (Exception e) {
             e.printStackTrace();
@@ -383,7 +383,7 @@ public class Forge implements ApplicationListener {
                     if (selector.equals("Adventure")) {
                         //preload adventure resources to speedup startup if selector is adventure. Needs in edt when setting up worldstage
                         loadAdventureResources(false);
-                        Forge.isMobileAdventureMode = true;
+                        isMobileAdventureMode = true;
                     }
                     //selection transition
                     setTransitionScreen(new TransitionScreen(() -> {
@@ -408,7 +408,7 @@ public class Forge implements ApplicationListener {
                         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
                         safeToClose = true;
                         clearTransitionScreen();
-                    }, Forge.takeScreenshot(), false, false, true, false));
+                    }, takeScreenshot(), false, false, true, false));
                 });
             });
         }));
@@ -829,7 +829,7 @@ public class Forge implements ApplicationListener {
     @Override
     public void render() {
         if (showFPS)
-            frameRate.update(ImageCache.counter, Forge.getAssets().manager().getMemoryInMegabytes());
+            frameRate.update(ImageCache.counter, getAssets().manager().getMemoryInMegabytes());
 
         try {
             ImageCache.allowSingleLoad();
@@ -865,8 +865,8 @@ public class Forge implements ApplicationListener {
                                 animationBatch.setColor(1, 1, 1, 1);
                                 animationBatch.draw(lastScreenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.setColor(1, 1, 1, 1 - (1 / transitionTime) * animationTimeout);
-                                animationBatch.draw(getAssets().fallback_skins().get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                                animationBatch.draw(getAssets().fallback_skins().get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.end();
                                 if (animationTimeout < 0) {
                                     currentScene.render();
@@ -885,8 +885,8 @@ public class Forge implements ApplicationListener {
                                 animationBatch.setColor(1, 1, 1, 1);
                                 animationBatch.draw(lastScreenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.setColor(1, 1, 1, (1 / transitionTime) * (animationTimeout + transitionTime));
-                                animationBatch.draw(getAssets().fallback_skins().get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                                animationBatch.draw(getAssets().fallback_skins().get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.end();
                                 return;
                             }

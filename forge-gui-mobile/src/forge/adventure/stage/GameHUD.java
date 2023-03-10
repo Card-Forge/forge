@@ -95,7 +95,7 @@ public class GameHUD extends Stage {
         exitToWorldMapActor = ui.findActor("exittoworldmap");
         dialog = Controls.newDialog("");
 
-        miniMapPlayer = new Image(new Texture(Config.instance().getFile("ui/minimap_player.png")));
+        miniMapPlayer = new Image(Forge.getAssets().getTexture(Config.instance().getFile("ui/minimap_player.png")));
         //create touchpad
         touchpad = new Touchpad(10, Controls.getSkin());
         touchpad.setBounds(15, 15, TOUCHPAD_SCALE, TOUCHPAD_SCALE);

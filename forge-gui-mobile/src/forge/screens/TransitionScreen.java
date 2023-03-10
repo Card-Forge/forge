@@ -67,7 +67,7 @@ public class TransitionScreen extends FContainer {
         playerAvatarName = playerName;
         enemyAvatarName = enemyName;
         enemyAtlasPath = enemyAtlas;
-        vsTexture = Forge.getAssets().fallback_skins().get(2);
+        vsTexture = Forge.getAssets().fallback_skins().get("vs");
         layout = new GlyphLayout();
     }
 
@@ -207,7 +207,7 @@ public class TransitionScreen extends FContainer {
             } else if (isIntro) {
                 if (textureRegion != null) {
                     if (Forge.advStartup) {
-                        g.drawGrayTransitionImage(Forge.getAssets().fallback_skins().get(0), 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), false, percentage);
+                        g.drawGrayTransitionImage(Forge.getAssets().fallback_skins().get("title"), 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), false, percentage);
                         g.setAlphaComposite(1-percentage);
                         g.drawImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
                         g.setAlphaComposite(oldAlpha);

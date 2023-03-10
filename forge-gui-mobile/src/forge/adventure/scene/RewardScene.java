@@ -305,7 +305,6 @@ public class RewardScene extends UIScene {
             if(background!=null)
                 background.setVisible(false);
         }
-        // card.setDrawable(new TextureRegionDrawable(new Texture(Res.CurrentRes.GetFile("ui/transition.png"))));
 
         float targetWidth = card.getWidth();
         float targetHeight = card.getHeight();
