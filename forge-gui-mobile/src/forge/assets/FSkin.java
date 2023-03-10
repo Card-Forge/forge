@@ -316,9 +316,13 @@ public class FSkin {
                     Forge.hdbuttons = true;
                 }
             } else if (f11b.exists() && Forge.allowCardBG) {
-                manager.load(f11b.path(), Texture.class, Forge.getAssets().getTextureFilter());
-                manager.finishLoadingAsset(f11b.path());
-                Forge.hdbuttons = true;
+                if (FSkin.preferredName.isEmpty() || FSkin.preferredName.equalsIgnoreCase("default")) {
+                    manager.load(f11b.path(), Texture.class, Forge.getAssets().getTextureFilter());
+                    manager.finishLoadingAsset(f11b.path());
+                    Forge.hdbuttons = true;
+                } else {
+                    Forge.hdbuttons = false;
+                }
             } else { Forge.hdbuttons = false; } //how to refresh buttons when a theme don't have hd buttons?
             if (f12.exists()) {
                 if (!Forge.allowCardBG) {
@@ -329,9 +333,13 @@ public class FSkin {
                     Forge.hdstart = true;
                 }
             } else if (f12b.exists() && Forge.allowCardBG) {
-                manager.load(f12b.path(), Texture.class, Forge.getAssets().getTextureFilter());
-                manager.finishLoadingAsset(f12b.path());
-                Forge.hdstart = true;
+                if (FSkin.preferredName.isEmpty() || FSkin.preferredName.equalsIgnoreCase("default")) {
+                    manager.load(f12b.path(), Texture.class, Forge.getAssets().getTextureFilter());
+                    manager.finishLoadingAsset(f12b.path());
+                    Forge.hdstart = true;
+                } else {
+                    Forge.hdstart = false;
+                }
             } else { Forge.hdstart = false; }
             //update colors
             for (final FSkinColor.Colors c : FSkinColor.Colors.values()) {
