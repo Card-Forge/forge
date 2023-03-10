@@ -17,6 +17,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
@@ -24,7 +25,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.zone.ZoneType;
 
 public class DebuffAi extends SpellAbilityAi {
 
@@ -195,15 +195,12 @@ public class DebuffAi extends SpellAbilityAi {
      */
     private boolean debuffMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        CardCollection list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
+        List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
 
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();
             return false;
         }
-
-        // Remove anything that's already been targeted
-        list.removeAll(sa.getTargets().getTargetCards());
 
         final CardCollection pref = CardLists.filterControlledBy(list, ai.getOpponents());
         final CardCollection forced = CardLists.filterControlledBy(list, ai);
@@ -219,7 +216,7 @@ public class DebuffAi extends SpellAbilityAi {
             sa.getTargets().add(c);
         }
 
-        while (sa.getTargets().size() < tgt.getMinTargets(source, sa)) {
+        while (!sa.isMinTargetChosen()) {
             if (forced.isEmpty()) {
                 break;
             }
@@ -237,13 +234,13 @@ public class DebuffAi extends SpellAbilityAi {
             sa.getTargets().add(c);
         }
 
-        if (sa.getTargets().size() < tgt.getMinTargets(source, sa)) {
+        if (!sa.isMinTargetChosen()) {
             sa.resetTargets();
             return false;
         }
 
         return true;
-    } // pumpMandatoryTarget()
+    }
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {

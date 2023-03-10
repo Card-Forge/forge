@@ -757,7 +757,7 @@ public class DamageDealAi extends DamageAiBase {
                 return false;
             }
             // TODO: Improve Damage, we shouldn't just target the player just because we can
-            if (sa.canTarget(enemy) && tcs.size() < tgt.getMaxTargets(source, sa)) {
+            if (sa.canTarget(enemy) && sa.canAddMoreTarget()) {
                 if (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (SpellAbilityAi.isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
                         || ("PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai))

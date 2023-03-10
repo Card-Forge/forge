@@ -96,6 +96,13 @@ public class AbilityUtils {
         final Game game = hostCard.getGame();
 
         Card c = null;
+        Player player = null;
+        if (sa instanceof SpellAbility) {
+            player = ((SpellAbility)sa).getActivatingPlayer();
+        }
+        if (player == null) {
+            player = hostCard.getController();
+        }
 
         if (defined.equals("Self")) {
             c = hostCard;
@@ -143,7 +150,7 @@ public class AbilityUtils {
                 }
             }
         } else if (defined.equals("TopOfGraveyard")) {
-            final CardCollectionView grave = hostCard.getController().getCardsIn(ZoneType.Graveyard);
+            final CardCollectionView grave = player.getCardsIn(ZoneType.Graveyard);
 
             if (grave.size() > 0) {
                 c = grave.getLast();
@@ -153,7 +160,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.endsWith("OfLibrary")) {
-            final CardCollectionView lib = hostCard.getController().getCardsIn(ZoneType.Library);
+            final CardCollectionView lib = player.getCardsIn(ZoneType.Library);
             int libSize = lib.size();
             if (libSize > 0) { // TopOfLibrary or BottomOfLibrary
                 if (defined.startsWith("TopThird")) {
@@ -354,7 +361,7 @@ public class AbilityUtils {
                 candidates = game.getCardsIn(ZoneType.smartValueOf(zone));
                 validDefined = s[1];
             }
-            cards.addAll(CardLists.getValidCards(candidates, validDefined, hostCard.getController(), hostCard, sa));
+            cards.addAll(CardLists.getValidCards(candidates, validDefined, player, hostCard, sa));
             return cards;
         } else if (defined.startsWith("ExiledWith")) {
             cards.addAll(hostCard.getExiledCards());
@@ -375,7 +382,7 @@ public class AbilityUtils {
             for (int i = 0; i < valids.length; i++) {
                 valids[i] = "Card." + valids[i];
             }
-            cards = CardLists.getValidCards(cards, valids, hostCard.getController(), hostCard, sa);
+            cards = CardLists.getValidCards(cards, valids, player, hostCard, sa);
         }
 
         return cards;

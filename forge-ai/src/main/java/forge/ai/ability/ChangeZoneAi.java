@@ -1090,7 +1090,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // Exile and bounce opponents stuff
         if (destination.equals(ZoneType.Exile) || origin.contains(ZoneType.Battlefield)) {
-
             // don't rush bouncing stuff when not going to attack
             if (!immediately && game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                     && game.getPhaseHandler().isPlayerTurn(ai)
@@ -1433,17 +1432,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), ai, source, sa);
-        list = CardLists.getTargetableCards(list, sa);
-
-        list.removeAll(sa.getTargets().getTargetCards());
+        CardCollection list = new CardCollection(CardUtil.getValidCardsToTarget(tgt, sa));
 
         if (list.isEmpty()) {
             return false;
         }
 
         // target loop
-        while (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+        while (!sa.isMinTargetChosen()) {
             // AI Targeting
             Card choice = null;
 
