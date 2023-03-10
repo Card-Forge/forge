@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="162">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="178">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -7,54 +7,54 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="14" name="Tilelaag 2" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJztl1EOwiAMhsnefJYlxt3AF2/hNYz38jp79E6GYBNEKFDbwpL9yf8wxtjXppTNGF5NM26n2yFvEDYnnCcle/Kezt5wDcYYsRi4tR7zhjheizdwhyrlWYP7bo152O+xEndOPfIdstdyj1Qnlw/rdfHeCneLJOs7tRbGnYojFZf0vqRwu70Kds+kYunBnVKY2/jZmHU07lwtSHHX1mrre2D8Of/Ow9bg7Ce1/aMln9rnZRxLT26s97qzoyXfXKbkLb7XcqZocnNqi9zaddLCH/8XlCxd36W9qcFK6SeUbzoQZ31Q+gmFW4K5Nt//aOcuc8M4R2wj5RuLV8s7ty73GwfLAgU=
+   eJztmEEOwiAQRUl3rqWJsTdw4y28hjG9Vq/j0jsZgpMgDsOAM4CJP/kLkbZvfqdQNUZW00zb6bJLG0TNCedpyR68p6M3fAZTjFQN0rrv04Y6Hos3cIfK5dyC+2qNudn3sRx3Sj3yDtm53CP1yenFel68f4W7RJr9jZ2L4sbqwOrSfi5ruN2zCnbHYLX04MYUZhsfG7OOxp3qBS1ubq+WXgfGt/lzHnUOyfWEu36U5Nl6v4xr6cntrr9a/Du3d5TkDV6tLje1Z9TsKRJZc7kllePh3oeW3FJZl3Bz+ePfBTlr9zfF3Yq1Zj2peacDSfZHzXpSw63BzM37G/Xmxv5PGI0bxiXuSe+8sbpaMf65+3M/AZ71Ayg=
   </data>
  </layer>
  <layer id="13" name="background" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJzVmEFOwzAQRV0KCzYVUpNA0lvAskqBDfeIVDgJtwC1lBU34ASwLifgKKUjZ5TpZMY2kVPKSF+yE2v8Mv6x047OjBlF0iA1Zp5bVXnTPiLXN4ntg6DNg+ZzRSxm0BJ4CqtN3rRN0bRhzN2p1VO6yyi1Nf7Y3Dw+xruCMS+1lqmcR+LbJzdwVokV9mHM+4WVxu17lj6412Ob9/HcmPutVx5y2z4punPvwyfIDTHcsh4XbZ8cIjcG1Ji3udef02ZvkTQU3pcY3Dyk95IG517V4y8nxlxN9Pt/xc15ONd6y/w1aY/dJ7fGiPokQi68N0/icMP5N8saUd9Jfiwzt1c5O+eO5RNt3SHfG5GvxqCyfnbKX7K+j5uusY9bWr+bLIxVY3H1Y9U7ZO5D5Kb+Rk2z3e86Sd+K16d1jtc696InbgyeM2Tv0ITfLCBXHh/3QKnZwvG+d+GukjY3npkztg64Fi5uzWOufSqUu0rkazHq3Sd3nz7xcUPQuQ6d+7bep5Gb8sN89Dk0LirpPZo6ztjrrHu9KTevk8TGuUPr99sI4ZZq+F+5V6ne1/ZV17p34S6FM1E6y0K56e+vvgL/y6DCObV1COXuMyRuZPd987i4+w6t1i7/oFcpNx0b08da/AD1ZsjP
+   eJzNmEtOwzAQht0WFmwipCaGZM8pqvAQEveIxGPDMbgFqKXqhhtwgiKx4wD0LKUjd5TJZPxIlISO9Et24thffo8dt9GpUlFHGiVK3adGRVqWx+T6NjZ1EJR50P5c0RUzaAE8mdE2LcsqK8vQ5u7E6DWpMkplG3/X3DzW06qgzftei0TuR+Ibkhs4i9gI69Dm89zIxu17lz64f6am35czpR52ufKYmvJx1p57iDxBbojJjvUoq+fJIXJjgMe8zHP9LSn3FtBGV+sTYb10wc1DWpc0OPdSWA+u+0Nzcx4X139x2xhRX0TA9RyX97478hu+f5e6FM27saCctPnV1XydJHV25GoyHyHctnmH/j6IfB6D8v27U/6c1X3cdI593Otp3ZNrbR/L5d9TbFg4Wx9+2/oL8Tjk2b64MbdXpDzT1XOdpJXl+oz1N++JG0M6H7X1HM8sIFc/Pu6RxZu5Y7234S7iOjd+MzfCvM493LYcc+1TodxFLF/rwu823DeOPWWoPKHc2wv5OTrWoeS3zW/0FLkpP4xH38PGRSWto5m270lXun2eUG7uk8TGuUP9axoh3JKHh8zNz/VUy8SfA03mvQ13rqvnPhSOcxvVxf2GOr3v+o3VReB/GVQ4psQLgpC4uR99hsQNsjGHcvcdTb125cmQ8QcTuLbW
   </data>
  </layer>
- <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+ <layer id="15" name="Tilelaag 3" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwSggH7SI00cPsaCOF5VGBv8ksYsPFCA2HLC5eTD5YyiBwZZehwOgJHwOSeDnowNVNHk1CQimN1gpip8/WIGyBH4+OoCF72geGAWjYBSMguEPAK5IDOc=
+  </data>
+ </layer>
+ <layer id="16" name="Tilelaag 4" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4D+wIFnoF0wCkbB4AHajBA8GMBHdggtKIcp95WXvm4ZBfQBhSoQzKmKwCBwVBiBQeAnFKODd+yE7cCmj1IAcjPMbdjASSxys4B1zwIeCP1HErs+5HQuygahseUHcgHI3dhAizimGMxedHezqeG34wcWMWZmkpw5IECcjf52rhCFYGqDX9Q3Ei+gZholBqSL4JYj5JZDEqg0IXFsgNx6k5JwWimKSmtKoPK1oHxsZQ86iCPTLfjKPFxAWQKVRhcnFdA7bY8CygG+/DoKRsEoGAXIAAAOACWf
+  </data>
+ </layer>
+ <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="2.65789" offsety="6.89474">
   <object id="114" template="../obj/entry_up.tx" x="255.798" y="434.553">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="115" template="../obj/gold.tx" x="315.713" y="81.5369"/>
-  <object id="117" template="../obj/enemy.tx" x="157.819" y="324.621">
+  <object id="115" template="../obj/gold.tx" x="587.213" y="138.537"/>
+  <object id="117" template="../obj/enemy.tx" x="159.319" y="212.121">
    <properties>
-    <property name="enemy" value="Kobold"/>
+    <property name="enemy" value="Devil "/>
    </properties>
   </object>
-  <object id="118" template="../obj/enemy.tx" x="363.693" y="217.245">
+  <object id="118" template="../obj/enemy.tx" x="463.526" y="311.245">
    <properties>
-    <property name="enemy" value="Kobold"/>
+    <property name="enemy" value="Devil"/>
     <property name="spawn.Easy" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="119" template="../obj/enemy.tx" x="316.531" y="196.107">
+  <object id="119" template="../obj/enemy.tx" x="349.864" y="185.274">
    <properties>
-    <property name="enemy" value="Kobold"/>
+    <property name="enemy" value="Torturer"/>
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="122" template="../obj/enemy.tx" x="183.039" y="273.245">
+  <object id="136" template="../obj/enemy.tx" x="323.191" y="253.24">
    <properties>
-    <property name="enemy" value="Kobold"/>
+    <property name="enemy" value="Devil"/>
    </properties>
   </object>
-  <object id="136" template="../obj/enemy.tx" x="282.191" y="315.907">
-   <properties>
-    <property name="enemy" value="Kobold"/>
-   </properties>
-  </object>
-  <object id="137" template="../obj/enemy.tx" x="65.9546" y="291.998">
-   <properties>
-    <property name="enemy" value="Kobold"/>
-   </properties>
-  </object>
-  <object id="140" template="../obj/treasure.tx" x="374.666" y="46.6168">
+  <object id="140" template="../obj/treasure.tx" x="573.166" y="123.617">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -70,7 +70,7 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="141" template="../obj/treasure.tx" x="531.336" y="155.008">
+  <object id="141" template="../obj/treasure.tx" x="545.836" y="124.508">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -86,29 +86,13 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="142" template="../obj/treasure.tx" x="52.6921" y="335.851">
+  <object id="150" template="../obj/enemy.tx" x="377.342" y="117.772">
    <properties>
-    <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
-},{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 4,
-  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
-  &quot;addMaxCount&quot;: 2
-}]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="150" template="../obj/enemy.tx" x="307.842" y="123.772">
-   <properties>
-    <property name="enemy" value="Curselord"/>
+    <property name="enemy" value="Alchemist"/>
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="159" template="../obj/treasure.tx" x="562.936" y="295.783">
+  <object id="159" template="../obj/treasure.tx" x="601.436" y="123.283">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -122,16 +106,106 @@
   &quot;addMaxCount&quot;: 2
 }]</property>
     <property name="spawn.Hard" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="160" template="../obj/entry_up.tx" x="141.29" y="199.865">
-   <properties>
-    <property name="teleport" value=""/>
    </properties>
   </object>
   <object id="161" template="../obj/entry_up.tx" x="468.679" y="89.9027">
    <properties>
-    <property name="teleport" value=""/>
+    <property name="teleport" value="maps/map/tibalt_f2.tmx"/>
+    <property name="teleportObjectId" value="87"/>
+   </properties>
+  </object>
+  <object id="163" name="gate" class="dialog" gid="5538" x="574.509" y="265.105" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;This gate appears to be locked in place by some mechanism, but you do not see any controls here.&quot;,
+    &quot;options&quot;:[ { &quot;name&quot;:&quot;Time to find them. Again...&quot; } ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="164" gid="5538" x="572.342" y="373.105" width="16" height="16"/>
+  <object id="166" template="../obj/enemy.tx" x="56.8421" y="320.605">
+   <properties>
+    <property name="enemy" value="Encaged Demon"/>
+   </properties>
+  </object>
+  <object id="167" template="../obj/enemy.tx" x="162.342" y="302.105">
+   <properties>
+    <property name="enemy" value="Encaged Demon"/>
+   </properties>
+  </object>
+  <object id="168" template="../obj/gold.tx" x="584.842" y="148.605"/>
+  <object id="169" template="../obj/gold.tx" x="598.342" y="158.605"/>
+  <object id="170" template="../obj/gold.tx" x="597.842" y="141.605"/>
+  <object id="171" template="../obj/gold.tx" x="586.842" y="164.105"/>
+  <object id="172" template="../obj/manashards.tx" x="317.675" y="40.7719"/>
+  <object id="173" template="../obj/manashards.tx" x="412.342" y="216.105"/>
+  <object id="174" template="../obj/manashards.tx" x="509.342" y="169.105"/>
+  <object id="175" name="switch" class="dialog" gid="5223" x="29.3421" y="281.439" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;Hmm a big switch is embedded upon the wall&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;You hear some loud sounds from the east&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;flip the switch&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:18}],
+			&quot;name&quot;:&quot;ok&quot; }]
+	},
+	{ &quot;name&quot;:&quot;go away&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="176" name="switch" class="dialog" gid="5223" x="429.342" y="200.772" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;You hear some loud sounds from the east&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;flip the switch&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:18}],
+			&quot;name&quot;:&quot;ok&quot; }]
+	},
+	{ &quot;name&quot;:&quot;go away&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="177" name="switch" class="dialog" gid="5223" x="125.675" y="361.105" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;You hear some loud sounds from the east&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;flip the switch&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:18}],
+			&quot;name&quot;:&quot;ok&quot; }]
+	},
+	{ &quot;name&quot;:&quot;go away&quot; } 	
+	] 
+	} 
+	
+]</property>
    </properties>
   </object>
  </objectgroup>

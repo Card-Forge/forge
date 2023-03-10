@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/lavaforge_1.tmx",
+    "activeFile": "map/tibalt_f1.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "obj",
+        "map",
         "tileset",
         "map/main_story",
-        "map"
+        "obj"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -40,8 +40,8 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 237.16666666666666,
-                "y": 133.16666666666666
+                "x": 240,
+                "y": 136.16666666666663
             }
         },
         "map/aerie_1B.tmx": {
@@ -1559,32 +1559,32 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240.33333333333337,
-                "y": 136.33333333333334
+                "x": 100.66666666666664,
+                "y": 114.33333333333334
             }
         },
         "map/factory_2.tmx": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 239.75,
-                "y": 136.25
+                "x": 344,
+                "y": 152.75
             }
         },
         "map/factory_3.tmx": {
-            "scale": 4,
+            "scale": 1,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 239.875,
-                "y": 135.875
+                "x": 292,
+                "y": 144.5
             }
         },
         "map/factory_4.tmx": {
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 456,
-                "y": 318
+                "x": 876,
+                "y": 385
             }
         },
         "map/forest_town.tmx": {
@@ -2054,15 +2054,18 @@
             "selectedLayer": 4,
             "viewCenter": {
                 "x": 240.05548277722127,
-                "y": 137.2274023271943
+                "y": 137.9671726901441
             }
         },
         "map/lavaforge_2.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 1.3517708333333331,
-            "selectedLayer": 4,
+            "selectedLayer": 5,
             "viewCenter": {
                 "x": 240.05548277722127,
-                "y": 137.2274023271943
+                "y": 137.9671726901441
             }
         },
         "map/lichsmirror.tmx": {
@@ -2424,10 +2427,10 @@
                 2
             ],
             "scale": 1.5,
-            "selectedLayer": 4,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 711,
-                "y": 857.6666666666665
+                "x": 259.33333333333326,
+                "y": 252.3333333333333
             }
         },
         "map/main_story/unbenannt.tmx": {
@@ -3011,27 +3014,36 @@
             }
         },
         "map/tibalt.tmx": {
+            "expandedObjectLayers": [
+                12
+            ],
             "scale": 2,
-            "selectedLayer": 4,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 215.75,
-                "y": 183.75
+                "x": 248,
+                "y": 176.25
             }
         },
         "map/tibalt_f1.tmx": {
-            "scale": 0.6582880434782609,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 3,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 687.389060887513,
-                "y": 274.1960784313726
+                "x": 368,
+                "y": 223.83333333333331
             }
         },
         "map/tibalt_f2.tmx": {
+            "expandedObjectLayers": [
+                12
+            ],
             "scale": 1.3764204545454546,
-            "selectedLayer": 0,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 328.75128998968006,
-                "y": 192.16511867905058
+                "x": 176.5448916408669,
+                "y": 168.18988648090817
             }
         },
         "map/tileset/buildings.tsx": {
@@ -3150,7 +3162,7 @@
         },
         "tileset/main.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         }
     },
@@ -3164,30 +3176,25 @@
     "map.tileWidth": 16,
     "map.width": 90,
     "openFiles": [
-        "map/nahiri.tmx",
-        "map/nahiricave.tmx",
-        "map/aerie_1.tmx",
-        "map/aerie_1B.tmx",
         "map/main_story/templeofchandra.tmx",
         "map/tibalt.tmx",
         "map/tibalt_f1.tmx",
         "map/tibalt_f2.tmx",
-        "map/lavaforge_1.tmx",
-        "map/lavaforge_2.tmx"
+        "map/aerie_1.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "map/nahiri.tmx",
-        "map/nahiricave.tmx",
-        "map/aerie_1.tmx",
-        "map/aerie_1B.tmx",
         "map/main_story/templeofchandra.tmx",
         "map/tibalt.tmx",
-        "map/tibalt_f1.tmx",
+        "map/aerie_1.tmx",
         "map/tibalt_f2.tmx",
+        "map/tibalt_f1.tmx",
         "map/lavaforge_2.tmx",
         "map/lavaforge_1.tmx",
+        "map/aerie_1B.tmx",
+        "map/nahiricave.tmx",
+        "map/nahiri.tmx",
         "map/kobold_mine.tmx",
         "map/nest_blue_1.tmx"
     ],

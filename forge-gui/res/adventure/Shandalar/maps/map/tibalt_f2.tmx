@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="22" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="166">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="22" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="167">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -49,7 +49,7 @@
   <object id="161" template="../obj/gold.tx" x="237.342" y="118.605"/>
   <object id="162" template="../obj/gold.tx" x="256.842" y="118.105"/>
   <object id="163" template="../obj/gold.tx" x="279.842" y="116.105"/>
-  <object id="164" template="../obj/treasure.tx" x="275.842" y="89.1053">
+  <object id="164" template="../obj/treasure.tx" x="280.928" y="120.346">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -67,8 +67,9 @@
   </object>
   <object id="165" template="../obj/entry_up.tx" x="136.342" y="288.605">
    <properties>
-    <property name="teleport" value="tibalt_f1"/>
+    <property name="teleport" value="maps/map/tibalt_f1.tmx"/>
    </properties>
   </object>
+  <object id="166" template="../obj/manashards.tx" x="275.818" y="86.5449"/>
  </objectgroup>
 </map>
