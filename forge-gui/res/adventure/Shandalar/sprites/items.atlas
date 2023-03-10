@@ -352,25 +352,26 @@ WhiteStaff
   xy: 352,160
   size: 16, 16
 GarrukAxe
-  xy: 303,273
-  size: 19, 15
+  xy: 304,272
+  size: 16, 16
 BlueRobes
-  xy: 272,63
-  size: 16, 18
+  xy: 272,64
+  size: 16, 16
 Armory
-  xy: 129,512
-  size: 14, 17
+  xy: 128,512
+  size: 16, 16
 HorseHoove
   xy: 80,496
-  size: 17, 16
+  size: 16, 16
 PirateFlag
-  xy: 0,495
-  size: 18, 17
+  xy: 0,496
+  size: 16, 16
 Scythe
-  xy: 288,977
-  size: 18, 14
+  xy: 288,976
+  size: 16, 16
 ChickenEgg
-  xy: 306,800
-  size: 13, 15
-
-	
+  xy: 304,800
+  size: 16, 16
+ChallengeCoin
+  xy: 32,512
+  size: 16, 16

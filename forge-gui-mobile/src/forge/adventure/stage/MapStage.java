@@ -798,9 +798,7 @@ public class MapStage extends GameStage {
 
             Current.player().win();
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
-            float vx = currentMob.getData().scale == 1f ? 0f : -((currentMob.getWidth()*currentMob.getData().scale)/2);
-            float vy = currentMob.getData().scale == 1f ? 0f : -((currentMob.getHeight()*currentMob.getData().scale)/2);
-            currentMob.playEffect(Paths.EFFECT_BLOOD, 0.5f, true, new Vector2(vx, vy));
+            currentMob.playEffect(Paths.EFFECT_BLOOD, 0.5f);
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {

@@ -1,5 +1,10 @@
 [ 
   {
+    "name": "Challenge Coin",
+	"description": "A heavy coin made of unknown material.",
+    "iconName": "ChallengeCoin"
+  },
+  {
     "name": "Chandra's Tome",
 	"description": "Draft a Chandra themed card that can be cast with mana of any color.",
     "equipmentSlot": "Left",

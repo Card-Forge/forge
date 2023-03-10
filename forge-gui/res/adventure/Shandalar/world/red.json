@@ -33,9 +33,11 @@
 	"Ashmouth Devil",
 	"Axgard Dwarf",
 	"Berserker",
-	"Boar",
 	"Boggart",
-	"Bull",
+	"Challenger 1",
+	"Challenger 2",
+	"Challenger 3",
+	"Challenger 4",
 	"Cyclops",
 	"Devil",
 	"Dinosaur",
@@ -43,7 +45,6 @@
 	"Dwarf",
 	"Efreet",
 	"Fire Elemental",
-	"Fire Giant",
 	"Flame Elemental",
 	"Goblin",
 	"Goblin Chief",
@@ -52,8 +53,6 @@
 	"Immersturm Demon",
 	"Kavu",
 	"Khan",
-	"Kobold",
-	"Magma Elemental",
 	"Mindclaw Shaman",
 	"Minotaur",
 	"Minotaur Flayer",
@@ -66,7 +65,10 @@
 	"Vampire Lord",
 	"Viashino",
 	"Wild-Magic Sorcerer",
-	"Yeti"
+	"Yeti",
+	"Kobold",
+	"Boar",
+	"Bull"
 ],
 "pointsOfInterest": [
 	"Red Castle",
@@ -113,8 +115,7 @@
 	"CaveRH",
 	"CaveRJ",
 	"Kobold Mine",
-	"Temple of Chandra",
-	"Tibalts Dungeon"
+	"Temple of Chandra"
 ],
 "structures": [
 	{

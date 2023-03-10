@@ -1604,8 +1604,257 @@
 	"colors": "GW"
 },
 {
+	"name": "Challenger 20",
+	"nameOverride": "Challenger",
+	"sprite": "sprites/doppelganger.atlas",
+	"deck": [
+		"decks/challenger_20_allied_fires.dck",
+		"decks/challenger_20_cavalcade_charge.dck",
+		"decks/challenger_20_final_adventure.dck",
+		"decks/challenger_20_flash_of_ferocity.dck"
+	],
+	"randomizeDeck": true
+	"spawnRate": 0.25,
+	"difficulty": 0.25,
+	"speed": 28,
+	"life": 22,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 210,
+			"addMaxCount": 90
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Challenge Coin"
+		}
+	],
+	"colors": "UBRWG"
+},
+{
+	"name": "Challenger 21",
+	"nameOverride": "Challenger",
+	"sprite": "sprites/doppelganger.atlas",
+	"deck": [
+		"decks/challenger_21_azorius_control.dck",
+		"decks/challenger_21_dimir_rogue.dck",
+		"decks/challenger_21_mono-green_stompy.dck",
+		"decks/challenger_21_mono-red_aggro.dck"
+	],
+	"randomizeDeck": true
+	"spawnRate": 0.25,
+	"difficulty": 0.25,
+	"speed": 28,
+	"life": 22,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 210,
+			"addMaxCount": 90
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Challenge Coin"
+		}
+	],
+	"colors": "UBRWG"
+},
+{
+	"name": "Challenger 22",
+	"nameOverride": "Challenger",
+	"sprite": "sprites/doppelganger.atlas",
+	"deck": [
+		"decks/challenger_22_dimir_control.dck",
+		"decks/challenger_22_gruul_stompy.dck",
+		"decks/challenger_22_mono_white_aggro.dck",
+		"decks/challenger_22_rakdos_vampires.dck"
+	],
+	"randomizeDeck": true
+	"spawnRate": 0.25,
+	"difficulty": 0.25,
+	"speed": 28,
+	"life": 22,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 210,
+			"addMaxCount": 90
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Challenge Coin"
+		}
+	],
+	"colors": "UBRWG"
+},
+{
 	"name": "Chandra",
-	"sprite": "sprites/red_wiz2.atlas",
+	"sprite": "sprites/boss/chandra.atlas",
 	"deck": [
 		"decks/miniboss/Fire of Kaladesh.dck"
 	],
@@ -1680,6 +1929,11 @@
 			"probability": 1,
 			"count": 1000,
 			"addMaxCount": 9000
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
 			"itemName": "Chandra's Stone"
 		}
 	],
