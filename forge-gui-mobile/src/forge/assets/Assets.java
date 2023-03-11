@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
+import com.badlogic.gdx.assets.loaders.ParticleEffectLoader;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.assets.loaders.resolvers.AbsoluteFileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
@@ -270,6 +272,19 @@ public class Assets implements Disposable {
         }
         return t;
     }
+    public ParticleEffect getEffect(FileHandle file) {
+        if (file == null || !file.exists() || !FileType.Absolute.equals(file.type())) {
+            System.err.println("Failed to load: " + file +"!.");
+            return null;
+        }
+        ParticleEffect effect = manager().get(file.path(), ParticleEffect.class, false);
+        if (effect == null) {
+            manager().load(file.path(), ParticleEffect.class, new ParticleEffectLoader.ParticleEffectParameter());
+            manager().finishLoadingAsset(file.path());
+            effect = manager().get(file.path(), ParticleEffect.class);
+        }
+        return effect;
+    }
 
     public Texture getDefaultImage() {
         if (defaultImage == null) {
@@ -506,9 +521,7 @@ public class Assets implements Disposable {
 
                     currentMemory = calculateTextureSize(assetManager, fileName1, type1);
                 };
-
             }
-
             super.load(fileName, type, parameter);
         }
 
