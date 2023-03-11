@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="84">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="103">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -67,7 +67,7 @@
     <property name="enemy" value="Kor Warrior"/>
    </properties>
   </object>
-  <object id="70" template="../obj/enemy.tx" x="176" y="145">
+  <object id="70" template="../obj/enemy.tx" x="175.5" y="175">
    <properties>
     <property name="enemy" value="Armored Knight "/>
    </properties>
@@ -80,7 +80,7 @@
    </properties>
   </object>
   <object id="72" template="../obj/treasure.tx" x="142.274" y="323.667"/>
-  <object id="73" template="../obj/enemy.tx" x="446.557" y="366.341">
+  <object id="73" template="../obj/enemy.tx" x="417.057" y="399.841">
    <properties>
     <property name="enemy" value="Armored Knight "/>
    </properties>
@@ -97,5 +97,24 @@
     <property name="teleportObjectId" value="73"/>
    </properties>
   </object>
+  <object id="84" template="../obj/waypoint.tx" x="513" y="142"/>
+  <object id="85" template="../obj/waypoint.tx" x="391.5" y="57"/>
+  <object id="86" template="../obj/waypoint.tx" x="493" y="89"/>
+  <object id="87" template="../obj/waypoint.tx" x="505" y="112"/>
+  <object id="88" template="../obj/waypoint.tx" x="468.5" y="65.5"/>
+  <object id="89" template="../obj/waypoint.tx" x="437" y="58.5"/>
+  <object id="90" template="../obj/waypoint.tx" x="522" y="172.5"/>
+  <object id="91" template="../obj/waypoint.tx" x="414.5" y="290"/>
+  <object id="92" template="../obj/waypoint.tx" x="289" y="289"/>
+  <object id="93" template="../obj/waypoint.tx" x="412.5" y="225"/>
+  <object id="94" template="../obj/waypoint.tx" x="289" y="224.5"/>
+  <object id="95" template="../obj/waypoint.tx" x="180.5" y="221.5"/>
+  <object id="96" template="../obj/waypoint.tx" x="178" y="144.5"/>
+  <object id="97" template="../obj/waypoint.tx" x="414.5" y="351"/>
+  <object id="98" template="../obj/manashards.tx" x="233" y="107.5"/>
+  <object id="99" template="../obj/manashards.tx" x="338.5" y="52.5"/>
+  <object id="100" template="../obj/manashards.tx" x="167" y="340.5"/>
+  <object id="101" template="../obj/manashards.tx" x="168" y="360"/>
+  <object id="102" template="../obj/manashards.tx" x="486" y="375"/>
  </objectgroup>
 </map>

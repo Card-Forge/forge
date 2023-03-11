@@ -187,7 +187,7 @@
     <property name="enemy" value="Illusionist"/>
    </properties>
   </object>
-  <object id="67" template="../obj/enemy.tx" x="161.5" y="196.5">
+  <object id="67" template="../obj/enemy.tx" x="160.5" y="193.5">
    <properties>
     <property name="enemy" value="Illusionist"/>
    </properties>

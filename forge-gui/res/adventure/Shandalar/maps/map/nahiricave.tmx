@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="46" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="74">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="46" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="78">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztl0FqwzAQRVXIwoIeputuC63x7brpFUKcnqWXaK30GM1gfTyejqyRagSBfhiInEjz9KWRHOfaqffODb5hwp30z91WrbnHzrmziPeufJzW3L2S69OXz6ElN3k9XXO9xvbFr+PUzXOwsNdya+ttYX66n9vfSs4Qn4H9lBhz7H6PMWbWC98Tw8dhHVvMpGM3+6oxc3HfJTvmL5mn2B6UuXDeYxwTny8bLEEZMydtz4CP18OZMRMHzWfLW+pLz3PMUOl+7GNO3kfWNHIjiPn5Gi9+7SevHxLaFgXD/oBG5hU8x7OHwxLSd4ovv/SVPu15Bmn1PbGxsfbwH6F5qfkvua3nVY4xJfANfvGa11SNl9hnWCcL/6jUifSHeyfrSNZUjZdB9LHsGRr3za1ZU/s9MHbqI88ELV+Id0OOhbNb6o2vkWV9QsL/FDf6WFisv+P3AnlSWhtyDjW1ZZW8q6SsZ6JUYOx7vFdKZn4nyahlluykx7vl+V/O5tS7wt4Cu6XOLcL9QCo5J2tUcgfnxLlJe+yLFuLct/S/NTDuW/CZ9AO3tOux
+   eJztl1FKAzEQhiP0IQEP43NfBV32dr54hdLUs3gJNfUYduj+7Ow42UziEij4w0A3bTJf/mSSrXP9NATnxtAx4Ub65+6r3tzRO3cS8ebrx+nNPSi5PkL9HHpyk9dfl1wv0/M5LOPor3OwsLdya+ttYYa+lZxpagP7MTNm9L/HiIX1wvfE8L5bxhoz6eCvvmrMXNx3yY75S2Z4Mipz4byHaUx8Pq+wJGXMkrQ9Az5eDyfGTBw0nzVvqS+1l5ih2v04TDl5H1nTyI0g5qdLPIeln7x+SHi2KBn2BxSZV/AcbQ+7OaTvFJ9h7it92vIM0uqb1y/WHv4jNC81/yW39bwqMeYEvjHMXvOaavES+wzrZOGPSp1If7h3so5kTbV4mUQfy56hcV/dkjW33xNjpz7yTNDyWc8szm6pN75GlvVJGf9z3OhjYbH+jt8Lj/f1tSHn0FJbVsm7Ssp6Jkolxr7Fe6Vk5neSjFZmyU7a383tfzmbc+8KWwvsljq3CPcDqeacbFHNHVwS5yZtsS96iHPf0v/WxLhvwWfSD7Qu6xM=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -33,26 +33,36 @@
   <object id="59" template="../obj/enemy.tx" x="320" y="189">
    <properties>
     <property name="enemy" value="Cave Spider"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="81,82"/>
    </properties>
   </object>
   <object id="60" template="../obj/enemy.tx" x="405.5" y="284.5">
    <properties>
     <property name="enemy" value="Horror"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="81,82"/>
    </properties>
   </object>
   <object id="61" template="../obj/enemy.tx" x="204" y="235">
    <properties>
     <property name="enemy" value="Skeleton"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="81,82"/>
    </properties>
   </object>
   <object id="62" template="../obj/enemy.tx" x="441.5" y="199.5">
    <properties>
     <property name="enemy" value="Water Elemental"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="81,82"/>
    </properties>
   </object>
   <object id="63" template="../obj/enemy.tx" x="649.5" y="190">
    <properties>
     <property name="enemy" value="Zombie"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="81,82"/>
    </properties>
   </object>
   <object id="64" template="../obj/gold.tx" x="681" y="244"/>
@@ -70,5 +80,9 @@
     <property name="teleportObjectId" value="83"/>
    </properties>
   </object>
+  <object id="74" template="../obj/manashards.tx" x="520" y="263"/>
+  <object id="75" template="../obj/manashards.tx" x="484" y="321"/>
+  <object id="76" template="../obj/manashards.tx" x="152" y="298"/>
+  <object id="77" template="../obj/manashards.tx" x="165" y="101"/>
  </objectgroup>
 </map>

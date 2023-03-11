@@ -1613,7 +1613,7 @@
 		"decks/challenger_20_final_adventure.dck",
 		"decks/challenger_20_flash_of_ferocity.dck"
 	],
-	"randomizeDeck": true
+	"randomizeDeck": true,
 	"spawnRate": 0.25,
 	"difficulty": 0.25,
 	"speed": 28,
@@ -1696,7 +1696,7 @@
 		"decks/challenger_21_mono-green_stompy.dck",
 		"decks/challenger_21_mono-red_aggro.dck"
 	],
-	"randomizeDeck": true
+	"randomizeDeck": true,
 	"spawnRate": 0.25,
 	"difficulty": 0.25,
 	"speed": 28,
@@ -1779,7 +1779,7 @@
 		"decks/challenger_22_mono_white_aggro.dck",
 		"decks/challenger_22_rakdos_vampires.dck"
 	],
-	"randomizeDeck": true
+	"randomizeDeck": true,
 	"spawnRate": 0.25,
 	"difficulty": 0.25,
 	"speed": 28,
@@ -2643,7 +2643,7 @@
 
 			"itemName": "Chicken Egg"
 		}
-	    ]
+	    ],
 	"colors": "WG"
 },
 {
@@ -5377,7 +5377,11 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
 		},
 		{
 			"type": "gold",
@@ -5387,13 +5391,63 @@
 		},
 		{
 			"type": "card",
-			"probability": 0.5,
-			"count": 3,
-			"colors": [
-				"Red"
+			"count": 1,
+			"cardTypes": [
+				"land"
 			],
 			"rarity": [
-				"Rare"
+				"common",
+				"uncommon"
+			]
+		}
+	],
+	"colors": "R"
+},
+{
+	"name": "Goblin Artificer",
+	"sprite": "sprites/goblin.atlas",
+	"deck": [
+		"decks/goblin_artificer.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.3,
+	"speed": 27,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"count": 1,
+			"probability": 0.5,
+			"rarity": [
+				"rare"
+			]
+		},
+		{
+			"type": "card",
+			"count": 1,
+			"probability": 1,
+			"cardTypes": [
+				"land"
+			],
+			"rarity": [
+				"common",
+				"uncommon"
 			]
 		}
 	],
@@ -9169,6 +9223,82 @@
 	"colors": "GRW"
 },
 {
+	"name": "Slobad",
+	"sprite": "sprites/dungeon/slobad.atlas",
+	"scale": 0.75,
+	"deck": [
+		"decks/miniboss/slobad.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.8,
+	"speed": 15,
+	"life": 40,
+	"rewards": [
+	{
+			"type": "Card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 500,
+			"addMaxCount": 1000
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Solemn Simulacrum"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Slobad, Goblin Tinkerer"
+		},
+				{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Slobad, Iron Goblin"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Gilded Lotus"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Goblin Engineer"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "March of the Machines"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Slobad's Trinket"
+		}
+	],
+	"colors": "R"
+},
+{
 	"name": "Snake",
 	"sprite": "sprites/big_snake.atlas",
 	"deck": [
@@ -10462,6 +10592,58 @@
 		}
 	],
 	"colors": "GRU"
+},
+{
+	"name": "Vulture",
+	"sprite": "sprites/dungeon/vulture.atlas",
+	"deck": [
+		"decks/vulture.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"scale": 0.60,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 11,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "B"
 },
 {
 	"name": "Zombie",
