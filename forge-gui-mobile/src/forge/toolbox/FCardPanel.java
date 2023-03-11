@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
-import forge.assets.FSkin;
 import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
@@ -179,7 +178,7 @@ public class FCardPanel extends FDisplayObject {
     private class CardDestroyedAnimation extends ForgeAnimation {
         private static final float DURATION = 0.6f;
         private float progress = 0;
-        private Texture splatter = FSkin.splatter;
+        private Texture splatter = Forge.getAssets().getSplatter();
 
         private void drawCard(Graphics g, CardView card, float x, float y, float w, float h, float edgeOffset) {
             float percentage = progress / DURATION;

@@ -697,9 +697,7 @@ public class CardImageRenderer {
     }
 
     private static void drawAlphaLines(Graphics g, float x, float y, float w, float h) {
-        if (FSkin.overlay_alpha != null) {
-            g.drawImage(FSkin.overlay_alpha, x, y, w, h);
-        }
+        g.drawImage(Forge.getAssets().getOverlay_alpha(), x, y, w, h);
     }
 
     private static void drawPtBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean noText) {

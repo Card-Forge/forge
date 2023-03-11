@@ -1,5 +1,6 @@
 package forge.assets;
 
+import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
@@ -42,7 +43,8 @@ public class Assets implements Disposable {
     private ObjectMap<String, Texture> generatedCards;
     private ObjectMap<String, Texture> fallback_skins;
     private ObjectMap<String, Texture> tmxMap;
-    private Texture defaultImage, dummy;
+    private Texture defaultImage, dummy, deckImage, sideboardImage, binderImage, sellIconImage;
+    private Texture hdLogoTexture, advLogoTexture, overlay_alpha, splatter;
     private TextureParameter textureParameter;
     private ObjectMap<String, Font> textrafonts;
     private int cGen = 0, cGenVal = 0, cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0, aDF = 0, cDFVal = 0;
@@ -51,15 +53,15 @@ public class Assets implements Disposable {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
         try {
             //init titleLQ
-            Texture titleBG_LQ = GuiBase.isAndroid() ?
-                    new Texture(Gdx.files.internal("fallback_skin").child(titleFilename)) :
-                    new Texture(Gdx.files.classpath("fallback_skin").child(titleFilename));
-            fallback_skins().put("title", titleBG_LQ == null ? getDummy() : titleBG_LQ);
+            if (GuiBase.isAndroid())
+                getTexture(Gdx.files.internal("fallback_skin").child(titleFilename));
+            else
+                getTexture(Gdx.files.classpath("fallback_skin").child(titleFilename));
             //init transition
-            Texture transitionLQ = GuiBase.isAndroid() ?
-                    new Texture(Gdx.files.internal("fallback_skin").child("transition.png")) :
-                    new Texture(Gdx.files.classpath("fallback_skin").child("transition.png"));
-            fallback_skins().put("transition", transitionLQ == null ? getDummy() : transitionLQ);
+            if (GuiBase.isAndroid())
+                getTexture(Gdx.files.internal("fallback_skin").child("transition.png"));
+            else
+                getTexture(Gdx.files.classpath("fallback_skin").child("transition.png"));
         } catch (Exception e) {
             fallback_skins().clear();
             fallback_skins().put("title", getDummy());
@@ -108,7 +110,7 @@ public class Assets implements Disposable {
             tmxMap.clear();
             manager.dispose();
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -126,7 +128,7 @@ public class Assets implements Disposable {
 
     public HashMap<String, FImageComplex> cardArtCache() {
         if (cardArtCache == null)
-            cardArtCache = new HashMap<>(1024);
+            cardArtCache = new HashMap<>();
         return cardArtCache;
     }
 
@@ -138,37 +140,37 @@ public class Assets implements Disposable {
 
     public HashMap<String, FSkinImage> manaImages() {
         if (manaImages == null)
-            manaImages = new HashMap<>(128);
+            manaImages = new HashMap<>();
         return manaImages;
     }
 
     public HashMap<String, FSkinImage> symbolLookup() {
         if (symbolLookup == null)
-            symbolLookup = new HashMap<>(64);
+            symbolLookup = new HashMap<>();
         return symbolLookup;
     }
 
     public HashMap<FSkinProp, FSkinImage> images() {
         if (images == null)
-            images = new HashMap<>(512);
+            images = new HashMap<>();
         return images;
     }
 
     public HashMap<Integer, TextureRegion> avatars() {
         if (avatars == null)
-            avatars = new HashMap<>(150);
+            avatars = new HashMap<>();
         return avatars;
     }
 
     public HashMap<Integer, TextureRegion> sleeves() {
         if (sleeves == null)
-            sleeves = new HashMap<>(64);
+            sleeves = new HashMap<>();
         return sleeves;
     }
 
     public HashMap<Integer, TextureRegion> cracks() {
         if (cracks == null)
-            cracks = new HashMap<>(16);
+            cracks = new HashMap<>();
         return cracks;
     }
 
@@ -198,13 +200,21 @@ public class Assets implements Disposable {
 
     public ObjectMap<String, Texture> generatedCards() {
         if (generatedCards == null)
-            generatedCards = new ObjectMap<>(512);
+            generatedCards = new ObjectMap<>();
         return generatedCards;
     }
 
     public ObjectMap<String, Texture> fallback_skins() {
         if (fallback_skins == null)
-            fallback_skins = new ObjectMap<>();
+            fallback_skins = new ObjectMap<String, Texture>() {
+                @Override
+                public Texture put(String key, Texture value) {
+                    Texture old = remove(key);
+                    if (old != null)
+                        old.dispose();
+                    return super.put(key, value);
+                }
+            };
         return fallback_skins;
     }
 
@@ -230,23 +240,29 @@ public class Assets implements Disposable {
     }
 
     public Texture getTexture(FileHandle file) {
+        return getTexture(file, true);
+    }
+    public Texture getTexture(FileHandle file, boolean required) {
         if (file == null || !file.exists()) {
+            if (!required)
+                return null;
             System.err.println("Failed to load: " + file +"!. Creating dummy texture.");
             return getDummy();
         }
         //internal path can be inside apk or jar..
-        if (file.path().contains("fallback_skin")) {
+        if (!FileType.Absolute.equals(file.type()) || file.path().contains("fallback_skin")) {
             Texture f = fallback_skins().get(file.path());
             if (f == null) {
-                fallback_skins().put(file.path(), new Texture(file));
+                f = new Texture(file);
+                fallback_skins().put(file.path(), f);
             }
             return f;
         }
-        Texture t = manager.get(file.path(), Texture.class, false);
+        Texture t = manager().get(file.path(), Texture.class, false);
         if (t == null) {
-            manager.load(file.path(), Texture.class, getTextureFilter());
-            manager.finishLoadingAsset(file.path());
-            t = manager.get(file.path(), Texture.class);
+            manager().load(file.path(), Texture.class, getTextureFilter());
+            manager().finishLoadingAsset(file.path());
+            t = manager().get(file.path(), Texture.class);
         }
         return t;
     }
@@ -255,19 +271,118 @@ public class Assets implements Disposable {
         if (defaultImage == null) {
             FileHandle blankImage = Gdx.files.absolute(ForgeConstants.NO_CARD_FILE);
             if (blankImage.exists()) {
-                defaultImage = manager.get(blankImage.path(), Texture.class, false);
+                defaultImage = manager().get(blankImage.path(), Texture.class, false);
                 if (defaultImage != null)
                     return defaultImage;
                 //if not loaded yet, load to assetmanager
-                manager.load(blankImage.path(), Texture.class, getTextureFilter());
-                manager.finishLoadingAsset(blankImage.path());
-                defaultImage = manager.get(blankImage.path());
+                manager().load(blankImage.path(), Texture.class, getTextureFilter());
+                manager().finishLoadingAsset(blankImage.path());
+                defaultImage = manager().get(blankImage.path());
             } else {
                 defaultImage = getDummy();
             }
         }
         return defaultImage;
     }
+
+    public Texture getDeckImage(FileHandle file) {
+        if (file == null || !file.exists())
+            return null;
+        deckImage = manager().get(file.path(), Texture.class, false);
+        if (deckImage == null) {
+            manager().load(file.path(), Texture.class, getTextureFilter());
+            manager().finishLoadingAsset(file.path());
+            deckImage = manager().get(file.path(), Texture.class);
+        }
+        return deckImage;
+    }
+
+    public Texture getSideboardImage(FileHandle file) {
+        if (file == null || !file.exists())
+            return null;
+        sideboardImage = manager().get(file.path(), Texture.class, false);
+        if (sideboardImage == null) {
+            manager().load(file.path(), Texture.class, getTextureFilter());
+            manager().finishLoadingAsset(file.path());
+            sideboardImage = manager().get(file.path(), Texture.class);
+        }
+        return sideboardImage;
+    }
+
+    public Texture getBinderImage(FileHandle file) {
+        if (file == null || !file.exists())
+            return null;
+        binderImage = manager().get(file.path(), Texture.class, false);
+        if (binderImage == null) {
+            manager().load(file.path(), Texture.class, getTextureFilter());
+            manager().finishLoadingAsset(file.path());
+            binderImage = manager().get(file.path(), Texture.class);
+        }
+        return binderImage;
+    }
+
+    public Texture getSellIconImage(FileHandle file) {
+        if (file == null || !file.exists())
+            return null;
+        sellIconImage = manager().get(file.path(), Texture.class, false);
+        if (sellIconImage == null) {
+            manager().load(file.path(), Texture.class, getTextureFilter());
+            manager().finishLoadingAsset(file.path());
+            sellIconImage = manager().get(file.path(), Texture.class);
+        }
+        return sellIconImage;
+    }
+
+    public Texture getHdLogoTexture(FileHandle file) {
+        if (file == null || !file.exists())
+            return null;
+        if (hdLogoTexture == null) {
+            manager().load(file.path(), Texture.class, getTextureFilter());
+            manager().finishLoadingAsset(file.path());
+            hdLogoTexture = manager().get(file.path(), Texture.class);
+        }
+        return hdLogoTexture;
+    }
+
+    public Texture getAdvLogoTexture(FileHandle file) {
+        if (file == null || !file.exists())
+            return null;
+        if (advLogoTexture == null) {
+            manager().load(file.path(), Texture.class, getTextureFilter());
+            manager().finishLoadingAsset(file.path());
+            advLogoTexture = manager().get(file.path(), Texture.class);
+        }
+        return advLogoTexture;
+    }
+
+    public Texture getSplatter() {
+        return splatter;
+    }
+
+    public Texture getOverlay_alpha() {
+        return overlay_alpha;
+    }
+
+    public void loadTexture(FileHandle file) {
+        loadTexture(file, getTextureFilter());
+    }
+    public void loadTexture(FileHandle file, TextureParameter parameter) {
+        try {
+            if (file == null || !file.exists())
+                return;
+            if (!FileType.Absolute.equals(file.type()))
+                return;
+            manager().load(file.path(), Texture.class, parameter);
+            manager().finishLoadingAsset(file.path());
+            if (file.path().contains("overlay_alpha.png"))
+                overlay_alpha = manager().get(file.path(), Texture.class, false);
+            if (file.path().contains("splatter.png"))
+                splatter = manager().get(file.path(), Texture.class, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private Texture getDummy() {
         if (dummy == null) {
             Pixmap P = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
@@ -352,9 +467,8 @@ public class Assets implements Disposable {
             }
             memoryPerFile.put(fileName, textureSize);
 
-            int sum = memoryPerFile.values().stream().mapToInt(Integer::intValue).sum() + calcFonts() + calcCounterFonts()
+            return memoryPerFile.values().stream().mapToInt(Integer::intValue).sum() + calcFonts() + calcCounterFonts()
                     + calculateObjectMaps(generatedCards()) + calculateObjectMaps(fallback_skins()) + calculateObjectMaps(tmxMap());
-            return sum;
         }
 
         @SuppressWarnings("unchecked")
