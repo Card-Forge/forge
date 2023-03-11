@@ -168,31 +168,39 @@ public class FSkin {
             }
 
             try {
-                int w=0, h=0;
-                Texture texF = Forge.getAssets().getTexture(f);
-                if (f2.exists()) {
-                    Texture texF2 = Forge.getAssets().getTexture(f2);
-                    w = texF2.getWidth();
-                    h = texF2.getHeight();
-                    splashScreen.setSplashTexture(new TextureRegion(texF2));
-                } else if (texF != null) {
-                    w = texF.getWidth();
-                    h = texF.getHeight();
-                    splashScreen.setSplashTexture(new TextureRegion(texF, 0, 0, w, h - 100));
+                int w, h;
+                if (f.path().contains("fallback_skin")) {
+                    //the file is not accesible by the assetmanager using absolute fileresolver since it resides on internal path or classpath
+                    Texture txSplash = new Texture(f);
+                    w = txSplash.getWidth();
+                    h = txSplash.getHeight();
+                    splashScreen.setSplashTexture(new TextureRegion(txSplash, 0, 0, w, h - 100));
+                } else {
+                    manager.load(f.path(), Texture.class);
+                    manager.finishLoadingAsset(f.path());
+                    w = manager.get(f.path(), Texture.class).getWidth();
+                    h = manager.get(f.path(), Texture.class).getHeight();
 
+                    if (f2.exists()) {
+                        manager.load(f2.path(), Texture.class, Forge.getAssets().getTextureFilter());
+                        manager.finishLoadingAsset(f2.path());
+                        splashScreen.setSplashTexture(new TextureRegion(manager.get(f2.path(), Texture.class)));
+                    } else {
+                        splashScreen.setSplashTexture(new TextureRegion(manager.get(f.path(), Texture.class), 0, 0, w, h - 100));
+                    }
                 }
                 Pixmap pxSplash = new Pixmap(f);
                 //override splashscreen startup
                 if (Forge.selector.equals("Adventure")) {
                     if (f3.exists()) {
-                        Texture advSplash = Forge.getAssets().getTexture(f3);
+                        Texture advSplash = new Texture(f3);
                         w = advSplash.getWidth();
                         h = advSplash.getHeight();
                         splashScreen.setSplashTexture(new TextureRegion(advSplash, 0, 0, w, h - 100));
                         pxSplash = new Pixmap(f3);
                     }
                     if (f4.exists()) {
-                        Texture advBG = Forge.getAssets().getTexture(f4);
+                        Texture advBG = new Texture(f4);
                         advBG.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
                         splashScreen.setSplashBGTexture(advBG);
                     }

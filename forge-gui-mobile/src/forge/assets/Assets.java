@@ -1,6 +1,5 @@
 package forge.assets;
 
-import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
@@ -236,11 +235,12 @@ public class Assets implements Disposable {
             return getDummy();
         }
         //internal path can be inside apk or jar..
-        if (!FileType.Absolute.equals(file.type()) || file.path().contains("fallback_skin")) {
-            if (!fallback_skins().containsKey(file.path())) {
+        if (file.path().contains("fallback_skin")) {
+            Texture f = fallback_skins().get(file.path());
+            if (f == null) {
                 fallback_skins().put(file.path(), new Texture(file));
             }
-            return fallback_skins().get(file.path());
+            return f;
         }
         Texture t = manager.get(file.path(), Texture.class, false);
         if (t == null) {
