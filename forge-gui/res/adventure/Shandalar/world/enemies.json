@@ -2758,7 +2758,8 @@
 	"name": "Construct",
 	"sprite": "sprites/golem_3.atlas",
 	"deck": [
-		"decks/artificer.dck"
+		"decks/artificer.dck",
+		"decks/construct.json"
 	],
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -4394,6 +4395,56 @@
 	"colors": "R"
 },
 {
+	"name": "Fire Giant",
+	"sprite": "sprites/dungeon/firegiant.atlas",
+	"deck": [
+		"decks/firegiant.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 23,
+	"life": 15,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "R"
+},
+{
 	"name": "Flame Elemental",
 	"sprite": "sprites/magmaelemental.atlas",
 	"deck": [
@@ -5091,6 +5142,57 @@
 			}
 			],
 	"colors": "RG"
+},
+{
+	"name": "Magma Elemental",
+	"sprite": "sprites/dungeon/magmaelemental.atlas",
+	"deck": [
+		"decks/magma_elemental.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.5,
+	"speed": 15,
+	"life": 15,
+	"flying":true,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "R"
 },
 {
 	"name": "Mammoth",

@@ -1,46 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="178">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="185">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
- <layer id="14" name="Tilelaag 2" width="46" height="28">
+ <layer id="17" name="Collision" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJztmEEOwiAQRUl3rqWJsTdw4y28hjG9Vq/j0jsZgpMgDsOAM4CJP/kLkbZvfqdQNUZW00zb6bJLG0TNCedpyR68p6M3fAZTjFQN0rrv04Y6Hos3cIfK5dyC+2qNudn3sRx3Sj3yDtm53CP1yenFel68f4W7RJr9jZ2L4sbqwOrSfi5ruN2zCnbHYLX04MYUZhsfG7OOxp3qBS1ubq+WXgfGt/lzHnUOyfWEu36U5Nl6v4xr6cntrr9a/Du3d5TkDV6tLje1Z9TsKRJZc7kllePh3oeW3FJZl3Bz+ePfBTlr9zfF3Yq1Zj2peacDSfZHzXpSw63BzM37G/Xmxv5PGI0bxiXuSe+8sbpaMf65+3M/AZ71Ayg=
+   eJzVlWEKwyAMhWX/9qcMtt1kZ9g9dtjdp0cYYQRciM9YY6YPQq3V9OORaEp+ep5TOt3rQetqwfnQd09uKxOvb907ivt1+w1tjTZuZY/gzt8RdylnJDeNt8s3eF6yWv8fyc3MFKRVuLWxtv6x4RhRJ1o+Wd+oR4kL6R/cFs3G3bJ/D+T26gviGsHtce6jOzLvP425l1sK1QL7V8ot50vc/O2ob+gutgj5jbh7z0Fe97769Qb3Y35+a+rh3hPuHasQW2l+Bu6SNB50HkRws5fofmGGvF5qXvdwU717cCNPZvdbnuP8PMpNnjK3R51b6tYaFnn1ZTS3l6K4W/Z6Mo30W+Me7fEobpl3Fb9XrZPI+AC1E7ck
+  </data>
+ </layer>
+ <layer id="18" name="Tilelaag 5" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzt1DEKACEMBED/cH7Qx96/DjsRsVCOEJiBQIottklKgTitRjc403uPk0Xm3qsduDf/BTfGzvv8mwcAIMYHz/AJAQ==
   </data>
  </layer>
  <layer id="13" name="background" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJzNmEtOwzAQht0WFmwipCaGZM8pqvAQEveIxGPDMbgFqKXqhhtwgiKx4wD0LKUjd5TJZPxIlISO9Et24thffo8dt9GpUlFHGiVK3adGRVqWx+T6NjZ1EJR50P5c0RUzaAE8mdE2LcsqK8vQ5u7E6DWpMkplG3/X3DzW06qgzftei0TuR+Ibkhs4i9gI69Dm89zIxu17lz64f6am35czpR52ufKYmvJx1p57iDxBbojJjvUoq+fJIXJjgMe8zHP9LSn3FtBGV+sTYb10wc1DWpc0OPdSWA+u+0Nzcx4X139x2xhRX0TA9RyX97478hu+f5e6FM27saCctPnV1XydJHV25GoyHyHctnmH/j6IfB6D8v27U/6c1X3cdI593Otp3ZNrbR/L5d9TbFg4Wx9+2/oL8Tjk2b64MbdXpDzT1XOdpJXl+oz1N++JG0M6H7X1HM8sIFc/Pu6RxZu5Y7234S7iOjd+MzfCvM493LYcc+1TodxFLF/rwu823DeOPWWoPKHc2wv5OTrWoeS3zW/0FLkpP4xH38PGRSWto5m270lXun2eUG7uk8TGuUP9axoh3JKHh8zNz/VUy8SfA03mvQ13rqvnPhSOcxvVxf2GOr3v+o3VReB/GVQ4psQLgpC4uR99hsQNsjGHcvcdTb125cmQ8QcTuLbW
+   eJzNmE1OwzAQhd0WFmwqpCaGZM8pqvAjJO4RCVhxDG4Baqm64QacoEjsOAC9AzcoHbmjTCZjO7Wc0JGeZCeO/eV57Lgdnyo1jqRBqtR9ZlRmVXlIrm8SUwdBmQftzxWxmEFz4MmNNllVVnlVhjZ3J0YvaZ1RKtv4Y3PzWE3qgjZvO81TuR+Jr09u4CwTI6xDm49zIxu371264P6emH6fz5R62ObKY2bKx3k4dx95gtwQoy3rUd7Mk0PkxgCPeZnn+mta7S2gta7XR8J6icHNQ1qXNDj3Ytv+V1WS7v8nN+excXP2PrltjKhPIuB6Sqp7X5H8hu/fpa5E824oqCBtfnQ9X0dpkx25XPMRwm2bd+jvncjnMajYvTvlL1jdx03n2Me9mjQ9udb2sXhbWsd35mxd+G3rr43HbZ7tihtze0nKU10/10laWq5PWX+zjrgxpPNRqOd4ZgG5+vFxDyzezBzrPYS7TJrc+M1cC/M683Dbcsy1T7XlLhP5Wgy/Q7hvHHtKX3lCuTcX8nN0rEPJb5vf6ClyU34Yj76HjYtKWkdTbd+TrnR4nlBu7pPExrnb+rdvtOGWPDxkbn6up1qk/hzYZ95DuAtdP/ehcJzbcVPcb6jT+67fWDEC/8ugwjElXhCExM396DIkbpCNuS1317Gv16486TP+AFSVvBM=
   </data>
  </layer>
  <layer id="15" name="Tilelaag 3" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwSggH7SI00cPsaCOF5VGBv8ksYsPFCA2HLC5eTD5YyiBwZZehwOgJHwOSeDnowNVNHk1CQimN1gpip8/WIGyBH4+OoCF72geGAWjYBSMguEPAK5IDOc=
+   eJxjYBgFo2AUjIJRMAoQIFEEgUfBKCAGtIjTRw+xoI4XlUYG/ySxiw8UIDYcsLl5MPljKIHBll6HA6AkfA5J4OejA1U0eTUJCKY3WCmKnz9YgbIEfj46gIXvaB4YBaNgFIyC4Q8A5qUORg==
   </data>
  </layer>
  <layer id="16" name="Tilelaag 4" width="46" height="28">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4D+wIFnoF0wCkbB4AHajBA8GMBHdggtKIcp95WXvm4ZBfQBhSoQzKmKwCBwVBiBQeAnFKODd+yE7cCmj1IAcjPMbdjASSxys4B1zwIeCP1HErs+5HQuygahseUHcgHI3dhAizimGMxedHezqeG34wcWMWZmkpw5IECcjf52rhCFYGqDX9Q3Ei+gZholBqSL4JYj5JZDEqg0IXFsgNx6k5JwWimKSmtKoPK1oHxsZQ86iCPTLfjKPFxAWQKVRhcnFdA7bY8CygG+/DoKRsEoGAXIAAAOACWf
+   eJxjYBhAIDqQlo+CgQQOPAPtglGADCzFBtoFIxtoM0LwYAAf2SG0oBym3Fde+rplOID/ItjFrQdRnitUgWBOVQQGgaPCCAwCP6EYHbxjJ2wHNn2UApCbYW7DBk5ikZsFrHsW8EBoZL3IbOR0LsoGobHlB3IByN3YQIs4phjMXmR3/5FkYGBTw2/HDyxizMwkORMFzKFTe02cjT72IIMVohBMbfCL+kbiBZSm0WN48hKpgJBbDkmg0oTEsQFy601KwmmlKCqtKYHK14LysZU9DmhlfhyZbsFX5uECyhKoNLo4qYDeaXsUjAJ0MG+QjyG4cRInNhTAqLvpCwaDuwFboCsq
   </data>
  </layer>
  <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="2.65789" offsety="6.89474">
-  <object id="114" template="../obj/entry_up.tx" x="255.798" y="434.553">
+  <object id="114" template="../obj/entry_up.tx" x="254.465" y="426.886">
    <properties>
-    <property name="teleport" value=""/>
+    <property name="teleport" value="maps/map/tibalt.tmx"/>
    </properties>
   </object>
   <object id="115" template="../obj/gold.tx" x="587.213" y="138.537"/>
   <object id="117" template="../obj/enemy.tx" x="159.319" y="212.121">
    <properties>
     <property name="enemy" value="Devil "/>
+    <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="118" template="../obj/enemy.tx" x="463.526" y="311.245">
+  <object id="118" template="../obj/enemy.tx" x="463.526" y="279.912">
    <properties>
     <property name="enemy" value="Devil"/>
     <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="175,176,177,176"/>
    </properties>
   </object>
   <object id="119" template="../obj/enemy.tx" x="349.864" y="185.274">
@@ -52,22 +63,6 @@
   <object id="136" template="../obj/enemy.tx" x="323.191" y="253.24">
    <properties>
     <property name="enemy" value="Devil"/>
-   </properties>
-  </object>
-  <object id="140" template="../obj/treasure.tx" x="573.166" y="123.617">
-   <properties>
-    <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
-},{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 4,
-  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
-  &quot;addMaxCount&quot;: 2
-}]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
   <object id="141" template="../obj/treasure.tx" x="545.836" y="124.508">
@@ -86,45 +81,19 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="150" template="../obj/enemy.tx" x="377.342" y="117.772">
+  <object id="150" template="../obj/enemy.tx" x="389.009" y="137.772">
    <properties>
-    <property name="enemy" value="Alchemist"/>
+    <property name="enemy" value="Necromancer"/>
     <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="180,183,181,182,183"/>
    </properties>
   </object>
-  <object id="159" template="../obj/treasure.tx" x="601.436" y="123.283">
-   <properties>
-    <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
-},{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 4,
-  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
-  &quot;addMaxCount&quot;: 2
-}]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="161" template="../obj/entry_up.tx" x="468.679" y="89.9027">
+  <object id="161" template="../obj/entry_up.tx" x="468.679" y="104.903">
    <properties>
     <property name="teleport" value="maps/map/tibalt_f2.tmx"/>
-    <property name="teleportObjectId" value="87"/>
    </properties>
   </object>
-  <object id="163" name="gate" class="dialog" gid="5538" x="574.509" y="265.105" width="16" height="16">
-   <properties>
-    <property name="dialog">[
-  {
-    &quot;text&quot;:&quot;This gate appears to be locked in place by some mechanism, but you do not see any controls here.&quot;,
-    &quot;options&quot;:[ { &quot;name&quot;:&quot;Time to find them. Again...&quot; } ]
-  }
-]</property>
-   </properties>
-  </object>
-  <object id="164" gid="5538" x="572.342" y="373.105" width="16" height="16"/>
   <object id="166" template="../obj/enemy.tx" x="56.8421" y="320.605">
    <properties>
     <property name="enemy" value="Encaged Demon"/>
@@ -142,7 +111,7 @@
   <object id="172" template="../obj/manashards.tx" x="317.675" y="40.7719"/>
   <object id="173" template="../obj/manashards.tx" x="412.342" y="216.105"/>
   <object id="174" template="../obj/manashards.tx" x="509.342" y="169.105"/>
-  <object id="175" name="switch" class="dialog" gid="5223" x="29.3421" y="281.439" width="16" height="16">
+  <object id="175" name="switch" class="dialog" gid="5223" x="30.6754" y="280.106" width="16" height="16">
    <properties>
     <property name="dialog">[
   { 
@@ -164,7 +133,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="176" name="switch" class="dialog" gid="5223" x="429.342" y="200.772" width="16" height="16">
+  <object id="176" name="switch" class="dialog" gid="5223" x="428.342" y="201.772" width="16" height="16">
    <properties>
     <property name="dialog">[
   { 
@@ -186,7 +155,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="177" name="switch" class="dialog" gid="5223" x="125.675" y="361.105" width="16" height="16">
+  <object id="177" name="switch" class="dialog" gid="5223" x="125.008" y="361.772" width="16" height="16">
    <properties>
     <property name="dialog">[
   { 
@@ -205,6 +174,50 @@
 	] 
 	} 
 	
+]</property>
+   </properties>
+  </object>
+  <object id="178" template="../obj/enemy.tx" x="280.675" y="345.439">
+   <properties>
+    <property name="enemy" value="Devil"/>
+   </properties>
+  </object>
+  <object id="179" template="../obj/booster.tx" x="570.009" y="124.105">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="180" template="../obj/waypoint.tx" x="354.675" y="142.772"/>
+  <object id="181" template="../obj/waypoint.tx" x="423.342" y="49.4386"/>
+  <object id="182" template="../obj/waypoint.tx" x="338.342" y="49.4386"/>
+  <object id="183" template="../obj/waypoint.tx" x="467.675" y="140.105"/>
+  <object id="184" template="../obj/gate.tx" x="574.009" y="267.772">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;This gate appears to be locked in place by some mechanism, but you do not see any controls here.&quot;,
+    &quot;options&quot;:[ { &quot;name&quot;:&quot;Time to find them. Again...&quot; } ]
+  }
 ]</property>
    </properties>
   </object>

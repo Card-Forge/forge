@@ -1921,5 +1921,14 @@
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Factory",
 	"map": "maps/map/slobad_factory.tmx"
+},
+{
+	"name": "Tibalts Fortress",
+	"type": "dungeon",
+	"count": 1,
+	"radiusFactor": 0.8,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "LavaForge",
+	"map": "maps/map/tibalt.tmx"
 }
 ]

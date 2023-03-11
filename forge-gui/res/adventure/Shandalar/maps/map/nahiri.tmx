@@ -7,17 +7,17 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJzVltsJhTAMhgsq4oDnwUkEp3AyQXALl5CCgsTUJG3a5gj/g5KaL7e24+DcGKm1fYtjg9mG1qdI4pey1eaj/N6+MF5ubNo8kIuqN/bfFDYu53HJ2x/tN1/om5QvNpecumvVWKP2kE+zByV9QM2AJBZK/onhw/pDOu8lxOXLXV8uH+Qs3YeS/IXsStZac6/Lzfd8n5hzV4PXs1nly8X26+rH9k98W2Obz3r+oPzcaTLm2Ae/+GL9LX1ajJDP0hlP3elmZ4MP8137HJXcde81e6PLcAIa5vV6
+   eJzVlm0KgzAMhgsqsgPuhycRdgpPJgx2C+8wRmHCiKl50ya1E94fSmqefLWdbiFMmVr7oxAbzja1vkQav5KtNZ/kd/fF8aKxWfNQLqne3H9L2FDO7atov/XnfKlvWr7cXCJ1t6qxRe0pn2UPavpAmgFNLJLik8PH9Yd23msI5fOuL8pHOWv3oSZ/Kbuatbbc67z5ft9ncO6u4I1srfJ5sd2H62P7J75n1zZf6/mjinNnyeixD57x5fpbxrIYKV9LZ7x0p3sEjO9dkCOEj/OtyZUHn+auu695dbYMH5Pp9sA=
   </data>
  </layer>
  <layer id="2" name="Ground" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJztlkEKgCAQRWdRkd2x6HRBpwiCtl2kK0SmlDSFiYQxEznw0IWLxx8dXATAmNCgC+91dTmAVE5QAFRig8oN+2G0U688Z7VORNlZnYtjX4t7fwrKvY8mt2v/XQyWO8Apd+/+BOgHrtB+oTJ90/EPfmYGSsLZ7MyPeDb7wN3vC3B9H1/xi0Qikae0Gb2DiyY9Q+nh8uLg5wNnP3MW/0l1rewQO7c=
+   eJztllEKwyAMhvNQ1+odN3aAnavQUxQGe91FdoViZ1hLY1GR4hZlBj70zY8/GtQS4NnwgEX3WGMHMBsnUAAX+YHLjfpR0OluPCezvpiyczqrbX+Vfn8Ozksf19z2/Q/xcNyBnHKP7k+CftBK7Zcq0286/oPfOgNnxtkczI95NseQu18J5Po+SvGrVCqVowwnfocQvbD55dm6tbkJvxeH3z4ndPR55eAX60b/pFhvFxQ8ow==
   </data>
  </layer>
  <layer id="7" name="Mountain Walls" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJzFljtOw0AQhncDeTRAE7CShh4uQMs1OAMVVUiCKGjpkLgAF4iIIb4EUNFwhHQIQY1H3pHH45192EH80q/I3vXOl9mZtROtVOLx67bdZ53CfP4w9xPzfkCcWGMcYKGCa7gPbCmJL80Hpbo9L//fz7oeR1LaYH4M59CsP3Os+dIPjx/D6WMEJjTqcwMsUt3y/T/wsM0Zm61+QG+E+YTNmQfyTVWd0cU3yj3WYXwXXaWOhRqbC4wuXpRrj1e5M13dX3j2YcsTTIgNuhvUx2n/xuwx8uEez0ysU0sOIX9tFVuDlA9te74NH2eyMfr4MHf/xSfVIPKNdLm30h5wvpud9ry+HPL6c51VnK9jeuh2UFhS1pMZ6TvHxTfWdS7OuyldKfuaNBbnw/sZu/4LPmlNHi8xLCtdsq0I86Exjn80rLcQvomFD5mwZ7OI7w+bOo4znbJI55+PL2QPm/asT+mG+KhcrDgGvftFviuOCMd1QAzkw55wabJb1KBU1zGC+Y95zEvl5sSzJYQPNN4r52GOmvQ4/V7IDOeUzYGewV4N5YMcIhP95fdca733Ci/6hc+7VU70Uvv5eL0CHz8LbHORAW27B1qQ2rS9PzJdP6OlmDG+71a97he/dJzL9X5z5cyXUz7PFntt8vSd1Mdi+ThLDJtPPwIf1MzSwvcLyvwheQ==
+   eJzFljtOw0AQhncDeTRAE7CShh4uQMs1OAMVVUiCKGjpkLgAF4iIwb4EUNFwBDqEoER45B1lMt7Zh23EL/2K7F3vfJmdWTvRSiUeP2/afdIpzecPCz8w7wbEiTXGARYquIb7wJaS+NJ8UKqb8/L//aircSSlNebHcA7N+jPHmk/98PgxnD5GYEKjPlpgkeqW7/+eh23O2Gz1A3ohzEdszjyQb6qqjC6+UeGxDuM76yp1KNTYXGB08aJce5wVzvX6/sKzdxueYEJs0M2gOk77N2aPkQ/3eGZiHVtyCPlrqtgapHxo2/NN+DiTjdHHh7n7Lz6pBpFvpFd7K+0B57vaas7ryyGvP9dZxfk6poeuB6Ul5T2Zkb5zXHxjXeXivG3pQtnXpLE4H97P2fVf8Elr8niJYcn0ii0jzPvGOP5Ws95C+CYWPmTCns0jvj9s6jjOdMoinX8+vpA9rNuzPqUt8VG5WHEMeveTfFccEI7LgBjIhz3h0mS7rEGprmME8++LmOfKzYlnSwgfaLyzmoc5qtPj9HshN5xTNgd6Bns1lA9yiEz0l99zrfXaK73olz7trnOil9rPx+sV+PhZYJuLDGjbPdCC1Kbt/ZHr6hktxYzxbXfd7/3yl45zud5vrpz5csrn2WL/mDx9JdWxWD7OEsPm07fABzWztPD9AtvcIY0=
   </data>
  </layer>
  <layer id="3" name="Clutter" width="40" height="26">
@@ -30,25 +30,31 @@
  </layer>
  <objectgroup id="4" name="Objects">
   <object id="48" template="../obj/treasure.tx" x="142.944" y="306.398"/>
-  <object id="50" template="../obj/enemy.tx" x="181.5" y="221.5">
+  <object id="50" template="../obj/enemy.tx" x="225" y="209">
    <properties>
     <property name="enemy" value="Armored Knight"/>
    </properties>
   </object>
   <object id="51" template="../obj/treasure.tx" x="176.166" y="54.6663"/>
-  <object id="57" template="../obj/enemy.tx" x="483.5" y="86.8337">
+  <object id="57" template="../obj/enemy.tx" x="477.5" y="80.3337">
    <properties>
     <property name="enemy" value="Bear"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="86,87,84,90,84,87,86,89,85"/>
    </properties>
   </object>
   <object id="58" template="../obj/enemy.tx" x="339.5" y="288.167">
    <properties>
     <property name="enemy" value="Kor Warrior"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="91,92"/>
    </properties>
   </object>
-  <object id="59" template="../obj/enemy.tx" x="417" y="198">
+  <object id="59" template="../obj/enemy.tx" x="422.5" y="192.5">
    <properties>
     <property name="enemy" value="Dwarf"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="93,94"/>
    </properties>
   </object>
   <object id="61" template="../obj/entry_right.tx" x="602.5" y="313.5">
@@ -60,16 +66,21 @@
   <object id="68" template="../obj/enemy.tx" x="471" y="285">
    <properties>
     <property name="enemy" value="Kor Warrior"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="69" template="../obj/enemy.tx" x="290.5" y="222.5">
+  <object id="69" template="../obj/enemy.tx" x="288" y="224">
    <properties>
     <property name="enemy" value="Kor Warrior"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="94,95"/>
    </properties>
   </object>
-  <object id="70" template="../obj/enemy.tx" x="175.5" y="175">
+  <object id="70" template="../obj/enemy.tx" x="177" y="171">
    <properties>
     <property name="enemy" value="Armored Knight "/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="96,95"/>
    </properties>
   </object>
   <object id="71" template="../obj/enemy.tx" x="176" y="107.5">
@@ -83,6 +94,8 @@
   <object id="73" template="../obj/enemy.tx" x="417.057" y="399.841">
    <properties>
     <property name="enemy" value="Armored Knight "/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="97,91"/>
    </properties>
   </object>
   <object id="79" template="../obj/door_down.tx" x="471" y="65.1667">
@@ -106,9 +119,9 @@
   <object id="90" template="../obj/waypoint.tx" x="522" y="172.5"/>
   <object id="91" template="../obj/waypoint.tx" x="414.5" y="290"/>
   <object id="92" template="../obj/waypoint.tx" x="289" y="289"/>
-  <object id="93" template="../obj/waypoint.tx" x="412.5" y="225"/>
-  <object id="94" template="../obj/waypoint.tx" x="289" y="224.5"/>
-  <object id="95" template="../obj/waypoint.tx" x="180.5" y="221.5"/>
+  <object id="93" template="../obj/waypoint.tx" x="423.5" y="230"/>
+  <object id="94" template="../obj/waypoint.tx" x="308.5" y="228"/>
+  <object id="95" template="../obj/waypoint.tx" x="176.5" y="208"/>
   <object id="96" template="../obj/waypoint.tx" x="178" y="144.5"/>
   <object id="97" template="../obj/waypoint.tx" x="414.5" y="351"/>
   <object id="98" template="../obj/manashards.tx" x="233" y="107.5"/>

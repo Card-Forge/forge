@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="22" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="167">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="22" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="168">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="16" name="Collision" width="22" height="21">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFuIAJH2E8CgYfQI4XGBub2FABQ8m9o/mC9mCohC+t3IktT9MbAADPUwUp
+  </data>
+ </layer>
  <layer id="15" name="Tilelaag 3" width="22" height="21">
   <data encoding="base64" compression="zlib">
-   eJxjYBgeIFEENx6s5h4VxsTUMhcZDAVzaREOMAwzjxrxhgzQw4NaIFkEE1PLXHTzR80d/OYimz9qLu3MJQUAAPJ0K4A=
+   eJxjYBhY4MaJwJTqJ4RJNRcEEkVwY2R15Jh7VBgTI5tLih/QzUUG6Obi0kuJufj0EmMuvnAg11wYhpmHHm+khi+6Olh4UJLOsLk9WQQTU8tcdPNHzaWuuSZ8EAxjU8NcEICZSU33jpqLai46xgcAXgw/JA==
   </data>
  </layer>
  <layer id="14" name="Tilelaag 2" width="22" height="21">
   <data encoding="base64" compression="zlib">
-   eJxjYMAOnPkow7gAtc1lEiUOE7IbGzgqjNsfyPLkmtvIz8DQhISb+VHlFQQgGMZGtgufufICCL0grCiAKg+ikfFAm7sXaM4+IFaF0vupZC4ItIgzMCgJQGhk+TnQNAELVxjAZy4oHcH8DjJDCUqjpzVy8gW627GlvVFzKQdDzVx84Lw0Ag8Fc6kN1osOnN0AINxNyw==
+   eJxjYMAOnPkow7gAtc1lEiUOE7IbGzgqjNsfyPLkmtvIz8DQhISb+VHlFQQgGMZGtgufufICCL0grCiAKg+ikfFAm7sXaM4+IFaF0vupZC4ItIgzMCgJQGhk+TnQNAELVxjAZy4oHcH8DjJDCUqjpzVy8gW627GlvVFzKQe0NveYMCamBsBmznlpBB4K5lIDIJu7XpQ2dhADAAQqVJQ=
   </data>
  </layer>
  <layer id="13" name="background" width="22" height="21">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJxz42RgcMOCKQXYzKSFuYyiDAxMQJwoycCQBMTJQJyCBTOLkmbufKB6LikGhv9AvQxAmhGImbDghWSYSwyYA/UXMkb2A6nmJotAaGzqFhJhLkw/LuAoRp65tHDvWyxuQQZsatjD1x5JH7q5tlA5OzHMtHRDDKIfJDePxPSALUyUBFD1tIiTns6IMRcEqG3uP2B+UZGgrXvx6R1Icw8IIMqjxVB6HoXmbpeAYOTwhKUHaptLjXBANldNgnrmwtjUNBeUp+2g2BqJDcKgsgCfXgA/4GxS
   </data>
  </layer>
  <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
-  <object id="115" template="../obj/gold.tx" x="264.213" y="117.537"/>
-  <object id="140" template="../obj/treasure.tx" x="240.675" y="91.2719">
+  <object id="140" template="../obj/treasure.tx" x="240.675" y="89.0923">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -40,36 +47,44 @@
   </object>
   <object id="150" template="../obj/enemy.tx" x="141.842" y="91.272">
    <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Tibalt's Boss Effect&quot;]
+}</property>
     <property name="enemy" value="Tibalt"/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="160" template="../obj/gold.tx" x="250.342" y="117.105"/>
-  <object id="161" template="../obj/gold.tx" x="237.342" y="118.605"/>
-  <object id="162" template="../obj/gold.tx" x="256.842" y="118.105"/>
-  <object id="163" template="../obj/gold.tx" x="279.842" y="116.105"/>
-  <object id="164" template="../obj/treasure.tx" x="280.928" y="120.346">
-   <properties>
-    <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
-},{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 4,
-  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
-  &quot;addMaxCount&quot;: 2
-}]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-   </properties>
-  </object>
   <object id="165" template="../obj/entry_up.tx" x="136.342" y="288.605">
    <properties>
     <property name="teleport" value="maps/map/tibalt_f1.tmx"/>
+    <property name="teleportObjectId" value="161"/>
    </properties>
   </object>
   <object id="166" template="../obj/manashards.tx" x="275.818" y="86.5449"/>
+  <object id="167" template="../obj/booster.tx" x="242.398" y="116.332">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

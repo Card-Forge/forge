@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="67">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="7" name="Collision" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt0LENgDAQBMErwK4A0Ri0anqDAiwiC4SZST/5vQQAAAAAAAAYaSnJWt7+4jntaj1+1LvVZK/928xb9Nrutvi6mdsAGOsEY9gHcQ==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztz0ENADAIBDC+C4ZnBbfIuIT0UQGdVzUBvzMSV19fX19fX19fX19fX19fAAAAAABuWiKHCi4=
+  </data>
+ </layer>
+ <layer id="6" name="Background 2" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJydWEtuYzEM0yo3Sy/anCubl4MMshCGZUiJjgED7Yv1ISXLsp9V9YR5o/kQ33ii/C/972bLqvXpN9Z1F/5M69Xah7Gn1tYB3iLbE74S39j3xKZa/yPwvse1YJ58clgRG3O+4b3XOVb0+RJ+VP2P78Sv8v8EL8sg9kn3CdYeLi8Zq4t/67hCvAqrk+v9fTfrErw9VD7zbwov2mM9G94Jq8thpxP3wISVuXI5ueFV6yfMvV7Z37hUOrcYO26bp1+aD+HzBbr6t1eA19lO83qKseIvscc8KbxFulz92uK0xXna/yrGmIcTVs7Xm/jeuav0OL+4JpzEthbdCnP3RJstFcPuqRKut9w7PRsV15vdB+BNdLfcRfaQr83uNLs28Dnm/OGc22wjhg2z6hW7n6r63ItJjEusT/W07TSHkB/ErM4plTfKnvKV46Bq0ynm1qnwKk6LsE61k/FO3CJnTtbhYD8mzK2zfXgZ/VWfPji8aJNr+Pt/tccukuV6hjl8CXnGh/dAPk8c37xPUr7f815/77SNNbnXoD0+c5I97mK94a36tL/xOuXudMfFmGLtV/OEsyfonfKxSNZhdbwyl6ruTPUN67fjZvJHcbi9n7jacQ/kWP+0X9EG4k17H5wvste9b4nvjk/FzcTttk9cTrZcc/EN3q0/71oy7UGlL3mLUnjdWwqei26fn+JlXdwfTZw7/lxOJv4ovKd9nuOzhC6Umc6rFC/b2HoRXFPG5oaX60CVPrs3ne6Oq3K4h/MX3ykUXierfHsJ3ehH20jfNzC/tn4RcTp/Wfet/o7+nWvVaU6zH9v5ibJbTlX5OrXxut0p0vxTucX62s72xuHyinXz+Tz5jbIodwm5rRfg/HXcnd7N0c+qzz2NfiT543jaYqjyQmFVfkyY1XsS32XcmbXFVvn/zXtOGX0T5w4z96zTmxHLOZ3ON8XvlhfJu0WSUy/AmtpQdwO+uyVYXf/BnNWCN9lPuPdOz2f8/k0P1n//wHp1DjBnad/7nlyXq/Ze5MQO+qdq6iVkkKNkjzpfNgwF65K6PdnBHok5Td6kcC3i5N6jeytVPyaciFXtI5cTyk5yniRnVo+E+6S2IU7HS2qrx0lvP+Et0rHds0/7rcn2dv/BnuPk/c759R7XIK9wKxsO55ZXSe/WPefp+93mV8tO91rW32PqkU/OKsaa6nAxSGK/1QK80yf60jnFIj3DevwDPUeHFg==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzlWc1uEzEQtmgrZUX2yokbz9HeSEMkzki0fRVepgf6w7FvAzeUFIkXKAkC1sp+ypfJjD3e3WoPWLKa3bXH8818Mx67syqE2Qj99XSc3kXXu0kI903/Mvk/8J43/SSE8L3qjlnqARvCjmPilf5cNf22+f3mZQiLgfw7b96hLRL+72uXHMbYl83zZdjHFn183cPHEsOyxfu5+f3DwMvjAq09BN5o7/eNzJ9h3+74Dh9Dv654u2JlzPcFPrf0Oa5DeKy2PeJi2fBn9HFfPnt5zONOD2Ef4Ldwe3SL2BGvLHPZEy989jWD1/Jt5IP0SQ43YjUXgyuS+a5d+28z/6TuhldiSHF5bmDl8atKxy5jHLGqxYEW09divS5YIcuD1fJtivur6jAOgVmuzXZ50fruTzNuPd2uC04vBC+Qz+OcXD3izVHs21nTPzjxSjtd0XgLLzBHnE/T7TOw4tuy2o9lfg+dcjzO6W3pltujrViRsRlbzH8PYRufR/W2b6Y7vJ/qnZzIm/jtoX0+qndcknuz1GPtxLsxfMFxKesFtBuxhhVPUW+Oz+N6h4tthm9yPORxXpBxmOMyYlHmXtgZc2V8wN5nChcsjln70qbl9ttMPtL0ZH1Y31x9IDktOTEnrJCpvWM+P1b7euTyqmff1TBDdg6nJxYZL7/HHG1s6T4C23j3IsbMNvLi9exbcQz7nH3iXWfIzrFcWt8z9zSs8CWwMR+GxIu9t9RHnL+GOOeCP8CGZ08u1DBpesGGHt2t+mhI7KgPIUPyO4dP7h+y1pT68zk45VvOz976vjRe+BxTwrsuTVuD89VpOORdbCV1YorTbFMPlyPeCwUH75nsm+jXVw5drTOurOs9eloxxpi9eVH6d2boYNU8nvOcxYFU/pWx9NvA5L076MKLVYFfZH4uiVGrToMsK69440LWB7mxnrpQ6lwaozz/KejxFd91XUPuaUN0q54t0cmqO1btuz5ryD2tT+c9eCiZKZuW+Oluou+9pTpa51Et7vril2e8Erypu47U/ZZVq8R22f6d6aJNn3v+lyD9U4KXbXStq2bit2pGb9PuK3L/S0jdwec4k6pzY/tIvy0/9W2puxD5PWfjHGZvLSnzPt5p9dfYzfv/CrRv4hl5XrsP6WK7knaW+GbxrRSvNt9zN9EHb44r1vnK0tfSMVW3eeZrsq5a/W7arumOd+tg1+oalyx9L0i2p+7T7PrLOV+TxfdcWs2du6/x2FX6vqusVIyWdN6nz1uua/e5XWT3sddzduCReMfW67n7nPCOsf4/mOfSNw==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt0MEJg0AQQNGpQGxB+9BeTB+xRQXtIgFTgnMWAuJhBXnvNssc5m8EAAAAAAAAwHVNHdHWd19RTpet/Z/eqYqYq7L3lDJk1+vQ9sn5e3hbcl4f8AfvbBhPdGy583tALwDX7VuXCmE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="464.953" y="638.755">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="53" template="../obj/gold.tx" x="222.167" y="40.75"/>
+  <object id="54" template="../obj/gold.tx" x="299" y="358.333"/>
+  <object id="56" template="../obj/enemy.tx" x="331.833" y="199.333">
+   <properties>
+    <property name="enemy" value="Giant Spider"/>
+   </properties>
+  </object>
+  <object id="57" template="../obj/enemy.tx" x="24.8333" y="182.417">
+   <properties>
+    <property name="enemy" value="Mimic"/>
+   </properties>
+  </object>
+  <object id="58" template="../obj/enemy.tx" x="855.75" y="315.167">
+   <properties>
+    <property name="enemy" value="Wurm"/>
+   </properties>
+  </object>
+  <object id="59" template="../obj/enemy.tx" x="266" y="201.25">
+   <properties>
+    <property name="enemy" value="Giant Spider"/>
+   </properties>
+  </object>
+  <object id="60" template="../obj/gold.tx" x="534.292" y="538.792"/>
+  <object id="61" template="../obj/gold.tx" x="580.375" y="58"/>
+  <object id="62" template="../obj/gold.tx" x="654.333" y="283.333"/>
+  <object id="63" template="../obj/gold.tx" x="648" y="393.333"/>
+  <object id="64" template="../obj/enemy.tx" x="463.667" y="577.333">
+   <properties>
+    <property name="enemy" value="Dwarf"/>
+   </properties>
+  </object>
+  <object id="65" template="../obj/enemy.tx" x="320" y="519.667">
+   <properties>
+    <property name="enemy" value="Dwarf"/>
+   </properties>
+  </object>
+  <object id="66" template="../obj/enemy.tx" x="494.5" y="497">
+   <properties>
+    <property name="enemy" value="Dwarf"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
