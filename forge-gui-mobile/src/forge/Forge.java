@@ -350,12 +350,21 @@ public class Forge implements ApplicationListener {
             FileHandle transitionFile = Config.instance().getFile("ui/transition.png");
             FileHandle titleBGFile = isLandscapeMode() ? Config.instance().getFile("ui/title_bg.png") : Config.instance().getFile("ui/title_bg_portrait.png");
             FileHandle vsIcon = Config.instance().getFile("ui/vs.png");
-            if (vsIcon.exists())
-                getAssets().fallback_skins().put("vs", new Texture(vsIcon));
-            if (transitionFile.exists())
-                getAssets().fallback_skins().put("transition", new Texture(transitionFile));
-            if (titleBGFile.exists())
-                getAssets().fallback_skins().put("title", new Texture(titleBGFile));
+            if (vsIcon.exists()) {
+                Texture old = getAssets().fallback_skins().put("vs", new Texture(vsIcon));
+                if (old != null)
+                    old.dispose();
+            }
+            if (transitionFile.exists()) {
+                Texture old = getAssets().fallback_skins().put("transition", new Texture(transitionFile));
+                if (old != null)
+                    old.dispose();
+            }
+            if (titleBGFile.exists()) {
+                Texture old = getAssets().fallback_skins().put("title", new Texture(titleBGFile));
+                if (old != null)
+                    old.dispose();
+            }
             AdventureScreen.preload();
         } catch (Exception e) {
             e.printStackTrace();
