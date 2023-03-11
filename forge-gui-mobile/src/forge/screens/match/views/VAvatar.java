@@ -19,6 +19,8 @@ import forge.toolbox.FDisplayObject;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 
+import static forge.assets.FSkin.getDefaultSkinFile;
+
 public class VAvatar extends FDisplayObject {
     public static final float WIDTH = Utils.AVG_FINGER_WIDTH;
     public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT;
@@ -45,7 +47,7 @@ public class VAvatar extends FDisplayObject {
     private class AvatarAnimation extends ForgeAnimation {
         private static final float DURATION = 1.2f;
         private float progress = 0;
-        Texture splatter = Forge.getAssets().getSplatter();
+        Texture splatter = Forge.getAssets().getTexture(getDefaultSkinFile("splatter.png"));
 
         private void drawAvatar(Graphics g, FImage image, float x, float y, float w, float h) {
             float percentage = progress / DURATION;

@@ -14,6 +14,8 @@ import forge.game.zone.ZoneType;
 import forge.screens.match.MatchController;
 import forge.util.Utils;
 
+import static forge.assets.FSkin.getDefaultSkinFile;
+
 public class FCardPanel extends FDisplayObject {
     public static final float ASPECT_RATIO = 3.5f / 2.5f;
     public static final float PADDING = Utils.scale(2);
@@ -178,7 +180,7 @@ public class FCardPanel extends FDisplayObject {
     private class CardDestroyedAnimation extends ForgeAnimation {
         private static final float DURATION = 0.6f;
         private float progress = 0;
-        private Texture splatter = Forge.getAssets().getSplatter();
+        private Texture splatter = Forge.getAssets().getTexture(getDefaultSkinFile("splatter.png"));
 
         private void drawCard(Graphics g, CardView card, float x, float y, float w, float h, float edgeOffset) {
             float percentage = progress / DURATION;

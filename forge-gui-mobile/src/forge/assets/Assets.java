@@ -43,8 +43,7 @@ public class Assets implements Disposable {
     private ObjectMap<String, Texture> generatedCards;
     private ObjectMap<String, Texture> fallback_skins;
     private ObjectMap<String, Texture> tmxMap;
-    private Texture defaultImage, dummy, deckImage, sideboardImage, binderImage, sellIconImage;
-    private Texture hdLogoTexture, advLogoTexture, overlay_alpha, splatter;
+    private Texture defaultImage, dummy;
     private TextureParameter textureParameter;
     private ObjectMap<String, Font> textrafonts;
     private int cGen = 0, cGenVal = 0, cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0, aDF = 0, cDFVal = 0;
@@ -72,18 +71,26 @@ public class Assets implements Disposable {
     @Override
     public void dispose() {
         try {
-            if (counterFonts != null)
+            if (counterFonts != null) {
                 for (BitmapFont bitmapFont : counterFonts.values())
                     bitmapFont.dispose();
-            if (generatedCards != null)
+                counterFonts.clear();
+            }
+            if (generatedCards != null) {
                 for (Texture texture : generatedCards.values())
                     texture.dispose();
-            if (fallback_skins != null)
+                generatedCards.clear();
+            }
+            if (fallback_skins != null) {
                 for (Texture texture : fallback_skins.values())
                     texture.dispose();
-            if (tmxMap != null)
+                fallback_skins.clear();
+            }
+            if (tmxMap != null) {
                 for (Texture texture : tmxMap.values())
                     texture.dispose();
+                tmxMap.clear();
+            }
             if (defaultImage != null)
                 defaultImage.dispose();
             if (dummy != null)
@@ -104,11 +111,8 @@ public class Assets implements Disposable {
             deckbox.clear();
             cursor.clear();
             fonts.clear();
-            counterFonts.clear();
-            generatedCards.clear();
-            fallback_skins.clear();
-            tmxMap.clear();
-            manager.dispose();
+            if (manager != null)
+                manager.dispose();
         } catch (Exception e) {
             //e.printStackTrace();
         }
@@ -285,84 +289,6 @@ public class Assets implements Disposable {
         return defaultImage;
     }
 
-    public Texture getDeckImage(FileHandle file) {
-        if (file == null || !file.exists())
-            return null;
-        deckImage = manager().get(file.path(), Texture.class, false);
-        if (deckImage == null) {
-            manager().load(file.path(), Texture.class, getTextureFilter());
-            manager().finishLoadingAsset(file.path());
-            deckImage = manager().get(file.path(), Texture.class);
-        }
-        return deckImage;
-    }
-
-    public Texture getSideboardImage(FileHandle file) {
-        if (file == null || !file.exists())
-            return null;
-        sideboardImage = manager().get(file.path(), Texture.class, false);
-        if (sideboardImage == null) {
-            manager().load(file.path(), Texture.class, getTextureFilter());
-            manager().finishLoadingAsset(file.path());
-            sideboardImage = manager().get(file.path(), Texture.class);
-        }
-        return sideboardImage;
-    }
-
-    public Texture getBinderImage(FileHandle file) {
-        if (file == null || !file.exists())
-            return null;
-        binderImage = manager().get(file.path(), Texture.class, false);
-        if (binderImage == null) {
-            manager().load(file.path(), Texture.class, getTextureFilter());
-            manager().finishLoadingAsset(file.path());
-            binderImage = manager().get(file.path(), Texture.class);
-        }
-        return binderImage;
-    }
-
-    public Texture getSellIconImage(FileHandle file) {
-        if (file == null || !file.exists())
-            return null;
-        sellIconImage = manager().get(file.path(), Texture.class, false);
-        if (sellIconImage == null) {
-            manager().load(file.path(), Texture.class, getTextureFilter());
-            manager().finishLoadingAsset(file.path());
-            sellIconImage = manager().get(file.path(), Texture.class);
-        }
-        return sellIconImage;
-    }
-
-    public Texture getHdLogoTexture(FileHandle file) {
-        if (file == null || !file.exists())
-            return null;
-        if (hdLogoTexture == null) {
-            manager().load(file.path(), Texture.class, getTextureFilter());
-            manager().finishLoadingAsset(file.path());
-            hdLogoTexture = manager().get(file.path(), Texture.class);
-        }
-        return hdLogoTexture;
-    }
-
-    public Texture getAdvLogoTexture(FileHandle file) {
-        if (file == null || !file.exists())
-            return null;
-        if (advLogoTexture == null) {
-            manager().load(file.path(), Texture.class, getTextureFilter());
-            manager().finishLoadingAsset(file.path());
-            advLogoTexture = manager().get(file.path(), Texture.class);
-        }
-        return advLogoTexture;
-    }
-
-    public Texture getSplatter() {
-        return splatter;
-    }
-
-    public Texture getOverlay_alpha() {
-        return overlay_alpha;
-    }
-
     public void loadTexture(FileHandle file) {
         loadTexture(file, getTextureFilter());
     }
@@ -374,10 +300,6 @@ public class Assets implements Disposable {
                 return;
             manager().load(file.path(), Texture.class, parameter);
             manager().finishLoadingAsset(file.path());
-            if (file.path().contains("overlay_alpha.png"))
-                overlay_alpha = manager().get(file.path(), Texture.class, false);
-            if (file.path().contains("splatter.png"))
-                splatter = manager().get(file.path(), Texture.class, false);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -439,7 +361,7 @@ public class Assets implements Disposable {
             super(resolver);
 
             currentMemory = 0;
-            memoryPerFile = new HashMap<String, Integer>();
+            memoryPerFile = new HashMap<>();
         }
 
         @SuppressWarnings("unchecked")

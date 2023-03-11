@@ -34,8 +34,8 @@ public class FSkin {
 
     public static Texture getLogo() {
         if (Forge.isMobileAdventureMode)
-            return Forge.getAssets().getAdvLogoTexture(getDefaultSkinFile("adv_logo.png"));
-        return Forge.getAssets().getHdLogoTexture(getSkinFile("hd_logo.png"));
+            return Forge.getAssets().getTexture(getDefaultSkinFile("adv_logo.png"));
+        return Forge.getAssets().getTexture(getSkinFile("hd_logo.png"));
     }
 
     public static void changeSkin(final String skinName) {
@@ -135,12 +135,24 @@ public class FSkin {
             }
 
             try {
-                int w, h, mod;
-                mod = f2.exists() ? 0 : 100;
-                Texture txSplash = Forge.getAssets().getTexture(f2.exists() ? f2 : f);
-                w = txSplash.getWidth();
-                h = txSplash.getHeight();
-                splashScreen.setSplashTexture(new TextureRegion(txSplash, 0, 0, w, h - mod));
+                int w, h;
+                if (f.path().contains("fallback_skin")) {
+                    Texture txSplash = Forge.getAssets().getTexture(f);
+                    w = txSplash.getWidth();
+                    h = txSplash.getHeight();
+                    splashScreen.setSplashTexture(new TextureRegion(txSplash, 0, 0, w, h - 100));
+                } else {
+                    Forge.getAssets().loadTexture(f);
+                    w = Forge.getAssets().getTexture(f).getWidth();
+                    h = Forge.getAssets().getTexture(f).getHeight();
+
+                    if (f2.exists()) {
+                        Forge.getAssets().loadTexture(f2);
+                        splashScreen.setSplashTexture(new TextureRegion(Forge.getAssets().getTexture(f2)));
+                    } else {
+                        splashScreen.setSplashTexture(new TextureRegion(Forge.getAssets().getTexture(f2), 0, 0, w, h - 100));
+                    }
+                }
                 Pixmap pxSplash = new Pixmap(f);
                 //override splashscreen startup
                 if (Forge.selector.equals("Adventure")) {

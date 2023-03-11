@@ -50,7 +50,7 @@ import java.util.Map;
             }
             @Override
             public void draw(Graphics g, float x, float y, float w, float h) {
-                g.drawImage(Forge.getAssets().getDeckImage(deckIcon), x, y, w, h);
+                g.drawImage(Forge.getAssets().getTexture(deckIcon), x, y, w, h);
             }
         } : Forge.hdbuttons ? FSkinImage.HDLIBRARY :FSkinImage.DECKLIST;
         private static final FileHandle sideIcon = Config.instance().getFile("ui/sideboard.png");
@@ -65,7 +65,7 @@ import java.util.Map;
             }
             @Override
             public void draw(Graphics g, float x, float y, float w, float h) {
-                g.drawImage(Forge.getAssets().getSideboardImage(sideIcon), x, y, w, h);
+                g.drawImage(Forge.getAssets().getTexture(sideIcon), x, y, w, h);
             }
         } : Forge.hdbuttons ? FSkinImage.HDSIDEBOARD : FSkinImage.FLASHBACK;
         private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
@@ -81,11 +81,11 @@ import java.util.Map;
             }
             @Override
             public void draw(Graphics g, float x, float y, float w, float h) {
-                g.drawImage(Forge.getAssets().getBinderImage(binderIcon), x, y, w, h);
+                g.drawImage(Forge.getAssets().getTexture(binderIcon), x, y, w, h);
             }
         } : FSkinImage.QUEST_BOX;
         private static final FileHandle sellIcon = Config.instance().getFile("ui/sell.png");
-        private static final FLabel lblGold = new FLabel.Builder().text("0").icon( Forge.getAssets().getSellIconImage(sellIcon) == null ? FSkinImage.QUEST_COINSTACK :
+        private static final FLabel lblGold = new FLabel.Builder().text("0").icon( Forge.getAssets().getTexture(sellIcon) == null ? FSkinImage.QUEST_COINSTACK :
                 new FImage() {
                     @Override
                     public float getWidth() {
@@ -97,7 +97,7 @@ import java.util.Map;
                     }
                     @Override
                     public void draw(Graphics g, float x, float y, float w, float h) {
-                        g.drawImage(Forge.getAssets().getSellIconImage(sellIcon), x, y, w, h);
+                        g.drawImage(Forge.getAssets().getTexture(sellIcon), x, y, w, h);
                     }
                 }
         ).font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build();
