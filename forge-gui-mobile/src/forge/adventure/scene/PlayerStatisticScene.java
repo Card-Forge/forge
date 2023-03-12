@@ -2,12 +2,15 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Scaling;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
@@ -20,7 +23,12 @@ import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.util.Paths;
 import forge.adventure.world.WorldSave;
+import forge.assets.FBufferedImage;
 import forge.card.ColorSet;
+import forge.game.GameType;
+import forge.localinstance.achievements.Achievement;
+import forge.localinstance.achievements.AchievementCollection;
+import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -33,15 +41,20 @@ public class PlayerStatisticScene extends UIScene {
     TextraLabel wins, totalWins;
     TextraLabel loss, totalLoss;
     TextraLabel winloss, lossWinRatio;
-    TextraLabel playerName;
-    TextraButton back;
-    private final Table scrollContainer;
+    TextraLabel playerName, headerAchievements, headerAvatar, headerName, headerWinLoss;
+    TextraButton back, toggleAward;
+    private final Table scrollContainer, achievementContainer;
     TextraLabel blessingScroll;
+    ScrollPane scroller;
+    Table root;
+    boolean toggle = false;
+    AchievementCollection achievements;
 
     private PlayerStatisticScene() {
         super(Forge.isLandscapeMode() ? "ui/statistic.json" : "ui/statistic_portrait.json");
         scrollContainer = new Table(Controls.getSkin());
         scrollContainer.row();
+        achievementContainer = new Table(Controls.getSkin());
         blessingScroll = Controls.newTextraLabel("");
         blessingScroll.setColor(Color.BLACK);
         blessingScroll.setAlignment(Align.topLeft);
@@ -62,13 +75,25 @@ public class PlayerStatisticScene extends UIScene {
         winloss = ui.findActor("winloss");
         lossWinRatio = ui.findActor("lossWinRatio");
         back = ui.findActor("return");
+        toggleAward = ui.findActor("toggleAward");
+        headerAchievements = Controls.newTextraLabel("[%110]" + Forge.getLocalizer().getMessage("lblAchievements"));
+        headerAvatar = Controls.newTextraLabel("[%110]" + Forge.getLocalizer().getMessage("lblAvatar"));
+        headerName = Controls.newTextraLabel("[%110]" + Forge.getLocalizer().getMessage("lblName"));
+        headerWinLoss = Controls.newTextraLabel("[%110]" + Forge.getLocalizer().getMessage("lblWinProper") + "/" + Forge.getLocalizer().getMessage("lblLossProper"));
+        toggleAward.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                toggleScroller();
+            }
+        });
+
         Window window = ui.findActor("scrollWindow");
-        Table root = ui.findActor("enemies");
-        root.add(Forge.getLocalizer().getMessage("lblAvatar")).pad(3, 10, 3, 10).center();
-        root.add(Forge.getLocalizer().getMessage("lblName")).fillX().pad(3, 10, 3, 60).center();
-        root.add(Forge.getLocalizer().getMessage("lblWinProper") + "/" + Forge.getLocalizer().getMessage("lblLossProper")).pad(3, 5, 3, 10).center();
+        root = ui.findActor("enemies");
+        root.add(headerAvatar).pad(5).center();
+        root.add(headerName).fillX().pad(5).width(100).center();
+        root.add(headerWinLoss).pad(5).center();
         root.row();
-        ScrollPane scroller = new ScrollPane(scrollContainer);
+        scroller = new ScrollPane(scrollContainer);
         root.add(scroller).colspan(3);
         ScrollPane blessing = ui.findActor("blessingInfo");
         blessing.setActor(blessingScroll);
@@ -89,6 +114,27 @@ public class PlayerStatisticScene extends UIScene {
 
     }
 
+    private void toggleScroller() {
+        toggle = !toggle;
+        if (toggle) {
+            root.clear();
+            root.add(headerAchievements).pad(5).colspan(2).center().expand();
+            root.row();
+            root.add(scroller).expand();
+            scroller.setActor(achievementContainer);
+            toggleAward.setText("[%125][+VS]");
+        } else {
+            root.clear();
+            root.add(headerAvatar).pad(5).center();
+            root.add(headerName).fillX().pad(5).width(100).center();
+            root.add(headerWinLoss).pad(5).center();
+            root.row();
+            root.add(scroller).colspan(3);
+            scroller.setActor(scrollContainer);
+            toggleAward.setText("[%125][+AWARD]");
+        }
+        performTouch(scroller);
+    }
 
     private TextureRegion getColorFrame(ColorSet color) {
         String colorName = "color_";
@@ -108,6 +154,27 @@ public class PlayerStatisticScene extends UIScene {
     @Override
     public void enter() {
         super.enter();
+        achievements = FModel.getAchievements(GameType.Constructed);
+        achievementContainer.clear();
+        for (Achievement a : achievements) {
+            GameType g = GameType.smartValueOf(a.getKey());
+            if (g != null) //skip variants
+                continue;
+            TextureRegion textureRegion = new TextureRegion(((FBufferedImage) a.getImage()).getTexture());
+            textureRegion.flip(true, true);
+            Image image = new Image(textureRegion);
+            float alpha = a.isActive() ? 1f : 0.25f;
+            image.getColor().a = alpha;
+            achievementContainer.add(image).height(50).width(40).center().pad(5);
+            String value = "[%105]" + a.getDisplayName() + "[%98]";
+            String subTitle = a.getSubTitle(true);
+            if (subTitle != null)
+                value += "\n" + subTitle;
+            TextraLabel label = Controls.newTextraLabel(value);
+            label.getColor().a = alpha;
+            achievementContainer.add(label).left().pad(5);
+            achievementContainer.row();
+        }
         scrollContainer.clear();
 
         if (playerName != null) {
@@ -145,13 +212,12 @@ public class PlayerStatisticScene extends UIScene {
         for (Map.Entry<String, Pair<Integer, Integer>> entry : Current.player().getStatistic().getWinLossRecord().entrySet()) {
             EnemyData data = WorldData.getEnemy(entry.getKey());
             if (data == null) continue;
-            Image enemyImage = new Image();
-            enemyImage.setDrawable(new TextureRegionDrawable(new EnemySprite(data).getAvatar()));
-            enemyImage.setSize(8, 8);
-
-            scrollContainer.add(enemyImage).pad(3, 10, 3, 10).center();
-            scrollContainer.add((data.name)).fillX().pad(3, 10, 3, 40).center();
-            scrollContainer.add(entry.getValue().getLeft().toString() + "/" + entry.getValue().getRight().toString()).pad(3, 5, 3, 10).center();
+            Image enemyImage = new Image(new EnemySprite(data).getAvatar());
+            enemyImage.setScaling(Scaling.stretch);
+            scrollContainer.add(enemyImage).pad(5).size(16).fillY();
+            scrollContainer.add().width(16);
+            scrollContainer.add((data.name)).fillX().pad(5).width(120);
+            scrollContainer.add(entry.getValue().getLeft().toString() + "/" + entry.getValue().getRight().toString()).pad(5);
             scrollContainer.row();
         }
         performTouch(scrollPaneOfActor(scrollContainer)); //can use mouse wheel if available to scroll

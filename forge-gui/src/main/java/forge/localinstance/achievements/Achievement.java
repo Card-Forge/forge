@@ -123,6 +123,10 @@ public abstract class Achievement {
 
     protected abstract int evaluate(Player player, Game game);
 
+    public boolean isActive() {
+        return earnedSpecial() || earnedMythic() || earnedRare() || earnedUncommon() || earnedCommon();
+    }
+
     private void updateTrophyImage() {
         FSkinProp background;
         float opacity = 1;

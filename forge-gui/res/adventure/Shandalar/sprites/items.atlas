@@ -45,6 +45,12 @@ ExitToWorldMap
 MovementSpeed 
   xy: 48, 80
   size: 16, 16
+VS
+  xy: 208, 928
+  size: 16, 16
+AWARD
+  xy: 144, 496
+  size: 16, 16
 Item 
   xy: 0, 64
   size: 16, 16  
