@@ -61,7 +61,7 @@ Death
   xy: 64, 40
   size: 14, 14 
 Death 
-  xy: 96, 128
+  xy: 96, 40
   size: 14, 14
 Death 
   xy: 128, 40
@@ -73,5 +73,5 @@ Death
   xy: 192, 40
   size: 14, 14 
 Death 
-  xy: 224, 128
+  xy: 224, 40
   size: 14, 14

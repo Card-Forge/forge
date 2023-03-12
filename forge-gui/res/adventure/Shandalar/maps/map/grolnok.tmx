@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="36" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="76">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Thallid Shell-Dweller&quot;,&quot;Slimefoot, Thallid Transplant&quot;, &quot;Thallid Shell-Dweller&quot; ]
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="36" height="24">
+  <data encoding="base64" compression="zlib">
+   eJytVFsKxDAIlIVS9mJ79J6rdL9K0HkYhVAwOo6jTUTE7xt/e77vk/kmzmqrb62d+RBuVgPlZjGIz1TPHW2QT50dMhSj5Fd8kN5dc3IzbXYx3VxF287MOnwm8F0uau8O3nX095xhKzEsT+Xl8t15ZzK/0l/Fx8FGvHc4Ke+eMgPEjdVleIxbZUjHKp71pfjf9jn1uSr8GT+mkaJppkWlUXXv7ivj0NEH8VB1RzqqtTqcsp1y/iVnp5w9Uv491rPiV+/VHhzr5EwY0mgan2mkzmRHcxTD8G4RPXek
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="36" height="24">
+  <data encoding="base64" compression="zlib">
+   eJxbwM7AsGAUw/F/NuqZtRgJD7RbRvHQxQyDwA3IeOEgcMMoHsWjeBQTiys5B8besgGyFxdmIlH9MVZUeiDxJQbsbqMUk2sOtrildziB3ICM6WXvQix209MNgyE9UgMDAG2aMkY=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="36" height="24">
+  <data encoding="base64" compression="zlib">
+   eJydl01O5DAQhU2TpAMSK4YzwBwC1kAjLgGsZwWcgGEER4AG+jDAFqkXwAUQP5orMOTRLvymUpVOeFIp6cQuf66yy+kQku7LEO6q600easr79WcHc8m43TTTbTGeGKvXn5jFY4l5vLHlndfmX+HzLM6H8KOypfl2PFZ7jsE0Hs0Cu6qeP1R5eiyTj66SPjKmZvPsOq/z7Md4H87ZLGjzUP7/2+L5joHn10wIu0UyxBzvvBwxb5sYdeVZ6IWwNWuvd0vMu1YmY/U6smDdBBr3Nq+zSP66zO8y9h92zNNQmEgSI+bhOfJeZpvpp7qg1Yt9P9/1m2vB76zef4XWJni4r+bAfITjxPB1rvjOFFcbHp0rrhXCEFRsEVfU8JdZ3986vTvO6rHCtan/ftw70l5ioecs2q58PUV/iJUY9Nfg/UNMwoM2Q8f/lfF8vYFf9BrHFhMGieEb+RipGMn8PSYt+NQxPc7qbXQ9Fj2pvmdqLfHalHHGYcKHenJh7GNh2iTfiJu1ntto5PAMyL91RnMMsVaeY3vJz4CeedqI3KdZmhPHiA1+sd/GDg/uL1Vej7IJx3bLdQWGrdiW+UcGT1N85F7zTNN7kVjgZ+BwWzws1NvPuqjqIHL2XpguXU1jgS4MnnF8h77Yk1/fZgaTJf4+2I3Me0XKt/j0YqPXM0vqTBMTn+kY1zvbYDsNMUX8rDMJ3x23kV/XCT5jmsb1zsnVss4hsfH8X0cWrBuuodp3Vxb+zpK8iuT+p/qmWVZ5fVE8OLvAyWucn4cGDrZRvCJ/co89e5Mn/yvGf4oPICnEOg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="36" height="24">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJyVlzmPE0EQhcvrOewAVojVhBwSQpCQ2AaJKzc2GRlHhAg3QGhDYv4C16LdRSIEfgAgIQEpPkDalAQkREDMWU/d5a4p93jHJT1N9/T19etjbCIfOdFHflwqiFJO/8uIJqoM7/HuQ0q0zfk261VC9Jr1htXi/I4Syg8nTkdYR1k3Ulfvae7G2PXdd1lTn8aYV1Zd+k4jCPGe2/9iht+ZY3qXuvcn+Zlw/io/r7GuszI1Bp6J57XMwgINC8fS9Sz3EprFxVZZEve53YM85MH/o+k80n7oOd9i/meKVzMjtC/Q/pVy/5uKWeb3OA8exWLITIOm8+o75++2ifpFYLHrJ8w2wAJfZL02fR0w9IvAhb0ClolnEi7LB6/ActkzYZ0OJcGLuXkUwRuJrpL2ZKNdZoHEuyeR/sGK/Q0O0fYCL2IxVWxghcABgeOE9wR7SFjOU1g/Cb3HSK239hixW242m3uqzofmEV8aedkTHf2i3J94C8/+ZIF7UQxVH6hr16ujymR9EJZFz0/mrs/oQ86v5M5X8n2hbMQaq7ZnFNdn1X6q6nQo+BbzRYdmqBvjBWVVfeHMgnHLs4ivIwpztP3+PF7OT2m5GKh7MNYW3oDn7JL91o0xzfth8zEu7AHoW3PvusuG+C0cdh9K9Finvey3wq5LLPT5RTp2T0lgbLv28g37m4U6otZBd9cstW/9maobI/8cqPOP8R6peYCDTL0qpjqeSXutverO0knQJInXqYrYvtLj22cdHsTGMad9WeCK3Vd1QjMs8kavF/bczczJtsH+WU+Xu//OteZZbEwqymZ7Lw9338TUWVffuSom+36z4vzaNnK+xJ8Lfi64/0ZJrNX8ulnv5Sx+WXP5UwfCs2HOu9wnvQpWMLzInFbVORWP9DdMuBZprNI91vMs9K/1ktWJtBeGr804C/a1/c0igTIdqHfbry381+X6uydpfT9/Wiv3Zc/NVh7602tj7y3N9lbxSFvMDb8XML78byGfBg98WPTt+g/yt8bP
+  </data>
+ </layer>
+ <layer id="7" name="Tilelaag 5" width="36" height="24">
+  <data encoding="base64" compression="zlib">
+   eJzNlsENgzAMRXPoDB2hC5RLN2Q9yAI99tgRWlQMxnKwQz5JnxQlUZD8428MIfyI39HNa5onBmWP4GGcR0ULZ0istRhWLOuc9HRipEDlKIc9PVzzvY6cjZ49bRzpg9c/D9wzyz8PRzTJmDJHntpCcSRGDOt7iUR605Lcuj0jH5x/yYuE95FJm6fnyRqnO71v5Xqot3n7G8UfFW1ITV7fRqaHj5a+a37V6k+t6Oe59Dv5um5nL4i6S2kpBaENpSWF5VuLf7Oz4vf2IwvPCzAwGFlXcp9zz5og3ocPIpQsmw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="256" y="393">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="49" template="../obj/gold.tx" x="107.705" y="136.536"/>
+  <object id="53" template="../obj/enemy.tx" x="271.708" y="215.489" width="16" height="17.6724">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Slimefoot's Boss Effect&quot;]
+}</property>
+    <property name="enemy" value="Frogboss"/>
+   </properties>
+  </object>
+  <object id="55" template="../obj/manashards.tx" x="17.6527" y="84.3978"/>
+  <object id="56" template="../obj/enemy.tx" x="383" y="94.4971" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Frog"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="71,64,72"/>
+   </properties>
+  </object>
+  <object id="57" template="../obj/enemy.tx" x="453.333" y="44.4971" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Insect"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="71,64,72,63,68,66,65,67"/>
+   </properties>
+  </object>
+  <object id="58" template="../obj/enemy.tx" x="462.667" y="103.83" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Insect"/>
+   </properties>
+  </object>
+  <object id="59" template="../obj/booster.tx" x="31" y="15.3333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DMR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DMR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DMR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="60" template="../obj/manashards.tx" x="484.667" y="18"/>
+  <object id="61" template="../obj/treasure.tx" x="467.333" y="138.667">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;addMaxCount&quot;: 2
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="63" template="../obj/waypoint.tx" x="318.667" y="41.6667"/>
+  <object id="64" template="../obj/waypoint.tx" x="493.667" y="258"/>
+  <object id="65" template="../obj/waypoint.tx" x="276" y="215.333"/>
+  <object id="66" template="../obj/waypoint.tx" x="80" y="162.333"/>
+  <object id="67" template="../obj/waypoint.tx" x="416.667" y="369.333"/>
+  <object id="68" template="../obj/waypoint.tx" x="123" y="38"/>
+  <object id="69" template="../obj/waypoint.tx" x="40" y="72"/>
+  <object id="70" template="../obj/waypoint.tx" x="554" y="103"/>
+  <object id="71" template="../obj/waypoint.tx" x="413" y="148"/>
+  <object id="72" template="../obj/waypoint.tx" x="473" y="330"/>
+  <object id="73" template="../obj/enemy.tx" x="32" y="285.164" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Insect"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="71,64,72,63,68,66,65,67"/>
+   </properties>
+  </object>
+  <object id="74" template="../obj/enemy.tx" x="116" y="134.164" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Frog"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="71,64,72"/>
+   </properties>
+  </object>
+  <object id="75" template="../obj/waypoint.tx" x="175" y="129"/>
+ </objectgroup>
+</map>

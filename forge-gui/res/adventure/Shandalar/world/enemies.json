@@ -14,26 +14,10 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
+			"addMaxCount": 6,
 			"rarity": [
 				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
 				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
 			]
 		},
 		{
@@ -87,27 +71,10 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
+			"addMaxCount": 6,
 			"rarity": [
 				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
 				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery",
-				"Land"
 			]
 		},
 		{
@@ -166,7 +133,7 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
+				"uncommon"
 			]
 		},
 		{
@@ -239,7 +206,7 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
+				"uncommon"
 			]
 		},
 		{
@@ -312,7 +279,7 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
+				"uncommon"
 			]
 		},
 		{
@@ -371,61 +338,90 @@
 	"name": "Armored Knight",
 	"sprite": "sprites/knight.atlas",
 	"deck": [
-		"decks/armored_knight.dck"
+	"decks/armored_knight.dck"
 	],
+	"ai": "",
+	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"speed": 30,
-	"life": 15,
+	"speed": 20,
+	"life": 25,
 	"rewards": [
-		{
+	{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
+			"addMaxCount": 6
 		},
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 0.5,
 			"count": 1,
-			"addMaxCount": 2,
 			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
+				"Rare"
 			]
 		},
 		{
-			"type": "deckCard",
-			"probability": 0.25,
+			"type": "card",
+			"probability": 1,
 			"count": 1,
-			"addMaxCount": 1,
 			"rarity": [
-				"rare"
+				"uncommon",
+				"common"
 			],
 			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
+				"Land"
 			]
 		},
 		{
-			"type": "deckCard",
+			"type": "item",
 			"probability": 0.1,
 			"count": 1,
+			"itemName": "Steel Armor"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		}
+		]
+},
+{
+	"name": "Crab",
+	"sprite": "sprites/dungeon/crab.atlas",
+	"scale": 0.9,
+	"deck": [
+		"decks/crab.json"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 20,
+	"life": 11,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
 			"rarity": [
-				"rare"
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
 			],
 			"cardTypes": [
 				"Land"
@@ -433,12 +429,11 @@
 		},
 		{
 			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
 		}
-	],
-	"colors": "RW"
+		]
 },
 {
 	"name": "Ashmouth Devil",
@@ -1238,7 +1233,7 @@
 	"ai": "",
 	"flying": false,
 	"spawnRate": 1,
-	"difficulty": 0.8,
+	"difficulty": 0.4,
 	"speed": 31,
 	"life": 13,
 	"rewards": [
@@ -1247,12 +1242,6 @@
 			"probability": 1,
 			"count": 2,
 			"addMaxCount": 4
-		},
-		{
-			"type": "gold",
-			"probability": 0.7,
-			"count": 10,
-			"addMaxCount": 90
 		},
 		{
 			"type": "card",
@@ -1266,11 +1255,12 @@
 			]
 		},
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 1,
 			"rarity": [
-				"rare"
+				"uncommon",
+				"common"
 			],
 			"cardTypes": [
 				"Land"
@@ -1343,15 +1333,9 @@
 			"addMaxCount": 4
 		},
 		{
-			"type": "gold",
-			"probability": 0.7,
-			"count": 10,
-			"addMaxCount": 90
-		},
-		{
 			"type": "card",
 			"probability": 0.5,
-			"count": 3,
+			"count": 2,
 			"colors": [
 				"Green"
 			],
@@ -1360,11 +1344,12 @@
 			]
 		},
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 1,
 			"rarity": [
-				"rare"
+				"uncommon",
+				"common"
 			],
 			"cardTypes": [
 				"Land"
@@ -1536,17 +1521,31 @@
 	"speed": 23,
 	"life": 18,
 	"rewards": [
-		{
+	{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 3,
-			"addMaxCount": 7
+			"count": 4,
+			"addMaxCount": 6
 		},
 		{
-			"type": "gold",
-			"probability": 0.7,
-			"count": 10,
-			"addMaxCount": 90
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		}
 	],
 	"colors": "RGB"
@@ -2640,7 +2639,6 @@
 			"type": "item",
 			"probability": 1,
 			"count": 1,
-
 			"itemName": "Chicken Egg"
 		}
 	    ],
@@ -2773,47 +2771,33 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
 				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
 			]
 		},
 		{
 			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
 			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
+				"Artifact"
+			],
+			"rarity": [
+				"Rare"
 			]
 		},
 		{
-			"type": "deckCard",
-			"probability": 0.1,
+			"type": "card",
+			"probability": 1,
 			"count": 1,
 			"rarity": [
-				"rare"
+				"uncommon",
+				"common"
 			],
 			"cardTypes": [
 				"Land"
@@ -2821,9 +2805,9 @@
 		},
 		{
 			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
 		}
 	],
 	"colors": "RU"
@@ -2842,54 +2826,42 @@
 	"speed": 20,
 	"life": 11,
 	"rewards": [
-		{
+	{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
+			"addMaxCount": 4
 		},
 		{
 			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
 			"probability": 1,
-			"count": 50,
-			"addMaxCount": 100
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		}
 	],
 	"colors": "UB"
-	},
-    { 
+},
+{ 
 	"name": "Curselord",
 	"sprite": "sprites/black_wiz2.atlas",
 	"deck": [
@@ -2902,50 +2874,37 @@
 	"speed": 31,
 	"life": 20,
 	"rewards": [
-		{
+	{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
+			"count": 3,
+			"addMaxCount": 6
 		},
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
+			"count": 4,
 			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Enchantment"
+				"Rare"
 			]
 		},
 		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
+			"type": "card",
+			"probability": 1,
+			"count": 3,
 			"rarity": [
-				"rare"
+				"uncomon",
+				"common"
 			],
 			"cardTypes": [
 				"Land"
 			]
 		},
 		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Lightning Bolt"
-		},
-		{
 			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
 		}
 	],
 	"colors": "RBU"
@@ -3279,118 +3238,18 @@
 	"speed": 24,
 	"life": 11,
 	"rewards": [
-		{
+	{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
+			"addMaxCount": 4
 		},
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 0.5,
 			"count": 1,
-			"addMaxCount": 2,
 			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
-		}
-	],
-	"colors": "R"
-},
-{
-	"name": "Giant Crab",
-	"sprite": "sprites/dungeon/giant_crab.atlas",
-	"scale": 0.5,
-	"deck": [
-		"decks/giant_crab.dck"
-	],
-	"ai": "",
-	"flying": false,
-	"spawnRate": 1,
-	"difficulty": 0.4,
-	"speed": 31,
-	"life": 15,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
+				"Rare"
 			]
 		},
 		{
@@ -3398,9 +3257,21 @@
 			"probability": 1,
 			"count": 50,
 			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		}
 	],
-	"colors": "U"
+	"colors": "R"
 },	
 {
 	"name": "Dino",
@@ -4405,15 +4276,25 @@
 	"speed": 23,
 	"life": 15,
 	"rewards": [
-		{
+	{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
+			"addMaxCount": 4
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 4,
 			"rarity": [
-				"common",
-				"uncommon"
+				"Rare"
 			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 200
 		},
 		{
 			"type": "card",
@@ -4426,20 +4307,6 @@
 			"cardTypes": [
 				"Land"
 			]
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 1,
-			"rarity": [
-				"Rare"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.7,
-			"count": 10,
-			"addMaxCount": 90
 		}
 	],
 	"colors": "R"
@@ -4531,52 +4398,89 @@
 	"scale": 0.5,
 	"life": 10,
 	"rewards": [
-		{
+	{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"Common"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
+			"count": 2,
+			"addMaxCount": 8
 		},
 		{
-			"type": "deckCard",
-			"probability": 0.25,
+			"type": "card",
+			"probability": 0.5,
 			"count": 1,
 			"rarity": [
 				"Rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
 			]
 		},
 		{
 			"type": "gold",
 			"probability": 1,
-			"count": 30,
+			"count": 50,
 			"addMaxCount": 100
 		},
-    {
+		{
 			"type": "card",
-			"probability": 0.5,
-			"count": 2,
-			"colors": [
-				"White"
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
 			]
 		}
 	],
 	"colors": "W"
+},
+{
+	"name": "Frog",
+	"sprite": "sprites/dungeon/frog.atlas",
+	"deck": [
+		"decks/frog.json"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.5,
+	"life": 10,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "BGU" 
 },
 {
 	"name": "Frost Titan",
@@ -4813,43 +4717,55 @@
 	"scale": 0.5,
 	"difficulty": 1,
 	"speed": 30,
-	"life": 20,
+	"life": 25,
 	"rewards": [
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Garruk Wildspeaker"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Garruk, Apex Predator"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Exploration"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Primeval Titan"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "In Garruk's Wake"
 		},
 		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Elder Gargaroth"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Thragtusk"
+		},
+		{
 			"type": "gold",
 			"probability": 1,
-			"count": 100,
-			"addMaxCount": 900
+			"count": 1000,
+			"addMaxCount": 9000
 		},
 		{
 			"type": "item",
@@ -5037,6 +4953,55 @@
 	"colors": "B"
 },
 {
+	"name": "Giant Crab",
+	"sprite": "sprites/dungeon/giant_crab.atlas",
+	"scale": 0.4,
+	"deck": [
+		"decks/giant_crab.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.4,
+	"speed": 31,
+	"life": 15,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 4,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 200,
+			"addMaxCount": 500
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "U"
+},
+{
 	"name": "Giant Spider",
 	"sprite": "sprites/spider_2.atlas",
 	"deck": [
@@ -5063,6 +5028,89 @@
 	"colors": "G"
 },
 {
+	"name": "Grolnok",
+	"sprite": "sprites/dungeon/frogboss.atlas",
+	"scale": 0.50,
+	"deck": [
+		"decks/miniboss/frogboss.dck"
+	],
+	"boss": true,
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.8,
+	"speed": 31,
+	"life": 50,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 500,
+			"addMaxCount": 1000
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Grolnok, the Omnivore"
+		},
+		{
+			"type": "card",
+			"probability": 0.50,
+			"count": 1,
+			"cardName": "The Gitrog Monster"
+		},
+				{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Thalia and The Gitrog Monster"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Damnation"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Gitrog, Horror of Zhava"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Froghemoth"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Yargle and Multani"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Grolnok's poisonous skin"
+		}
+	],
+	"colors": "BGU"
+},
+{
 	"name": "Gorilla",
 	"sprite": "sprites/dungeon/gorilla.atlas",
 	"scale": 0.55,
@@ -5079,68 +5127,36 @@
 	{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"Common"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
+			"count": 2,
+			"addMaxCount": 4
 		},
 		{
 			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Silverback Elder"
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Kogla, the Titan Ape"
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
+			"probability": 0.5,
+			"count": 4,
 			"rarity": [
 				"Rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
 			]
 		},
 		{
 			"type": "gold",
 			"probability": 1,
-			"count": 30,
-			"addMaxCount": 100
-		},
-   		 {	
-			"type": "card",
-			"probability": 0.5,
-			"count": 2,
-			"colors": [
-				"Red"
-			]
+			"count": 200,
+			"addMaxCount": 500
 		},
 		{
 			"type": "card",
-			"probability": 0.5,
-			"count": 2,
-			"colors": [
-				"Green"
-			]
-			}
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
 			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
 	"colors": "RG"
 },
 {
@@ -9741,6 +9757,90 @@
 	"colors": "WU"
 },
 {
+	"name": "Tibalt",
+	"sprite": "sprites/dungeon/tibalt.atlas",
+	"scale": 0.50,
+	"deck": [
+		"decks/miniboss/tibalt.dck"
+	],
+	"boss": true,
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.8,
+	"speed": 31,
+	"life": 50,
+	"rewards": [
+	{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 500,
+			"addMaxCount": 1000
+		},
+		{
+			"type": "card",
+			"probability": 0.50,
+			"count": 1,
+			"cardName": "Valki, God of Lies"
+		},
+		{
+			"type": "card",
+			"probability": 0.50,
+			"count": 1,
+			"cardName": "Tibalt, Wicked Tormentor"
+		},
+				{
+			"type": "card",
+			"probability": 0.50,
+			"count": 1,
+			"cardName": "Mayhem Devil"
+		},
+		{
+			"type": "card",
+			"probability": 0.50,
+			"count": 1,
+			"cardName": "Fiendish Duo"
+		},
+		{
+			"type": "card",
+			"probability": 0.50,
+			"count": 1,
+			"cardName": "Hellrider"
+		},
+		{
+			"type": "card",
+			"probability": 0.50,
+			"count": 1,
+			"cardName": "Badlands"
+		},
+				{
+			"type": "card",
+			"probability": 0.50,
+			"count": 1,
+			"cardName": "Wheel of Fortune"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Tibalt's Box of Tricks"
+		}
+	],
+	"colors": "R"
+
+},
+{
 	"name": "Treefolk",
 	"sprite": "sprites/treant.atlas",
 	"deck": [
@@ -9755,30 +9855,14 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
+			"addMaxCount": 6,
 			"rarity": [
 				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
 				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
 			]
 		},
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 0.25,
 			"count": 1,
 			"addMaxCount": 1,
@@ -9791,17 +9875,6 @@
 				"Enchantment",
 				"Instant",
 				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
 			]
 		},
 		{
