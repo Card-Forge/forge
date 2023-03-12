@@ -9,4 +9,5 @@ SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ Perpet
 SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | AddType$ Angel | AddKeyword$ Flying | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets +1/+1, gains flying, and becomes an Angel in addition to its other types.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
 Oracle:Flying\nWhen Skyline Savior enters the battlefield, return a permanent you control to its owner's hand. If it's a non-Angel creature card, it perpetually gets +1/+1, gains flying, and becomes an Angel in addition to its other types.
