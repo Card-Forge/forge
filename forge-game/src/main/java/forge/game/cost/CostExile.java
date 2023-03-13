@@ -101,10 +101,7 @@ public class CostExile extends CostPartWithList {
         }
 
         if (this.from.equals(ZoneType.Battlefield)) {
-            if (!this.payCostFromSource()) {
-                return String.format("Exile %s you control", Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
-            }
-            return String.format("Exile %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
+            return String.format("Exile %s you control", Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
         }
 
         if (!desc.equals("Card") && !desc.contains("card")) {

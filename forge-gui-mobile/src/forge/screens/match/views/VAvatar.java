@@ -10,7 +10,6 @@ import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
-import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.game.card.CounterEnumType;
@@ -19,6 +18,8 @@ import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
+
+import static forge.assets.FSkin.getDefaultSkinFile;
 
 public class VAvatar extends FDisplayObject {
     public static final float WIDTH = Utils.AVG_FINGER_WIDTH;
@@ -46,7 +47,7 @@ public class VAvatar extends FDisplayObject {
     private class AvatarAnimation extends ForgeAnimation {
         private static final float DURATION = 1.2f;
         private float progress = 0;
-        Texture splatter = FSkin.splatter;
+        Texture splatter = Forge.getAssets().getTexture(getDefaultSkinFile("splatter.png"));
 
         private void drawAvatar(Graphics g, FImage image, float x, float y, float w, float h) {
             float percentage = progress / DURATION;

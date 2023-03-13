@@ -19,13 +19,6 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
-        <repository>
-        <id>4thline-repo</id>
-        <url>http://4thline.org/m2</url>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
-    </repository>
     </repositories>
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
@@ -273,16 +266,6 @@
         <dependency>
             <groupId>forge</groupId>
             <artifactId>forge-core</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>forge</groupId>
-            <artifactId>forge-game</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>forge</groupId>
-            <artifactId>forge-ai</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

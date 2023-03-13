@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import forge.Forge;
 import forge.Graphics;
 
 //Special wrapper for a texture to be loaded later when it's needed
@@ -28,7 +29,7 @@ public class FDelayLoadImage extends FImageComplex {
     @Override
     public Texture getTexture() {
         if (texture == null) {
-            texture = new Texture(Gdx.files.absolute(filename));
+            texture = Forge.getAssets().getTexture(Gdx.files.absolute(filename));
         }
         return texture;
     }
@@ -36,7 +37,7 @@ public class FDelayLoadImage extends FImageComplex {
     @Override
     public TextureRegion getTextureRegion() {
         if (texture == null) {
-            texture = new Texture(Gdx.files.absolute(filename));
+            texture = Forge.getAssets().getTexture(Gdx.files.absolute(filename));
         }
         return new TextureRegion(texture);
     }

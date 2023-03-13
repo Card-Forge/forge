@@ -1,5 +1,6 @@
 package forge.card;
 
+import static forge.assets.FSkin.getDefaultSkinFile;
 import static forge.card.CardRenderer.CROP_MULTIPLIER;
 import static forge.card.CardRenderer.isModernFrame;
 
@@ -697,9 +698,7 @@ public class CardImageRenderer {
     }
 
     private static void drawAlphaLines(Graphics g, float x, float y, float w, float h) {
-        if (FSkin.overlay_alpha != null) {
-            g.drawImage(FSkin.overlay_alpha, x, y, w, h);
-        }
+        g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("overlay_alpha.png")), x, y, w, h);
     }
 
     private static void drawPtBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean noText) {

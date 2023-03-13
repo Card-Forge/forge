@@ -7,7 +7,7 @@ SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUnblockable | TriggerDescription$ Whenever CARDNAME attacks, you may pay {3}. If you do, CARDNAME can't be blocked this turn and it perpetually gets +2/+0.
 SVar:TrigUnblockable:AB$ Effect | Cost$ 3 | StaticAbilities$ Unblockable | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualPump | Duration$ Permanent | Name$ Hurkyl's Prodigy's Perpetual Effect
-SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ This creature can't be blocked.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.EffectSource | Description$ This creature can't be blocked.
 SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.EffectSource | AddPower$ 2 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ EFFECTSOURCE perpetually gets +2/+0.
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token & Type$Artifact|Powerstone

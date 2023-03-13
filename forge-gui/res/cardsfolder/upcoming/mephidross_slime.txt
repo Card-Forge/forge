@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Mephidross Slime | Amount$ 1 | Zone$ Graveyard | RememberMade$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Name$ Mephidross Slime's Perpetual Effect | RememberObjects$ Remembered | ImprintCards$ TriggeredCard | StaticAbilities$ PerpetualDouble | Duration$ Permanent | SubAbility$ ShuffleIntoLibrary 
 SVar:PerpetualDouble:Mode$ Continuous | Affected$ Card.IsRemembered,Card.IsImprinted | AddPower$ AffectedX | AddToughness$ AffectedY | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Perpetually double the power and toughness of this creature.
-SVar:ShuffleIntoLibrary:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Library | ChangeType$ Card.Self,Card.IsRemembered | SubAbility$ DBCleanup
+SVar:ShuffleIntoLibrary:DB$ ChangeZoneAll | Origin$ Graveyard | Shuffle$ True | Destination$ Library | ChangeType$ Card.Self,Card.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:AffectedX:Count$CardPower
 SVar:AffectedY:Count$CardToughness

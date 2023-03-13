@@ -105,7 +105,7 @@ public class GuiMobile implements IGuiBase {
     @Override
     public ISkinImage getUnskinnedIcon(final String path) {
         if (isGuiThread()) {
-            return new FTextureImage(new Texture(Gdx.files.absolute(path)));
+            return new FTextureImage(Forge.getAssets().getTexture(Gdx.files.absolute(path)));
         }
 
         //use a delay load image to avoid an error if called from background thread
@@ -131,7 +131,7 @@ public class GuiMobile implements IGuiBase {
 
                 if (FileUtil.doesFileExist(overlayFilename)) {
                     try {
-                        final Texture overlay = new Texture(Gdx.files.absolute(overlayFilename));
+                        final Texture overlay = Forge.getAssets().getTexture(Gdx.files.absolute(overlayFilename));
                         g.drawImage(overlay, (background.getWidth() - overlay.getWidth()) / 2, (background.getHeight() - overlay.getHeight()) / 2, overlay.getWidth(), overlay.getHeight());
                     } catch (final Exception e) {
                     }

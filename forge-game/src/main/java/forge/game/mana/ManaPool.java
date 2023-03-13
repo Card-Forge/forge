@@ -27,7 +27,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
 
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
@@ -57,7 +56,7 @@ import forge.game.zone.ZoneType;
  */
 public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     private final Player owner;
-    private final Multimap<Byte, Mana> floatingMana = ArrayListMultimap.create();
+    private final ArrayListMultimap<Byte, Mana> floatingMana = ArrayListMultimap.create();
 
     public ManaPool(final Player player) {
         owner = player;
@@ -188,12 +187,17 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         return removeMana(mana, true);
     }
     public boolean removeMana(final Mana mana, boolean updateView) {
-        if (floatingMana.remove(mana.getColor(), mana) && updateView) {
+        boolean success = false;
+        // make sure to remove the most recent in case of rollback
+        int lastIdx = floatingMana.get(mana.getColor()).lastIndexOf(mana);
+        if (lastIdx != -1) {
+            success = floatingMana.get(mana.getColor()).remove(lastIdx) != null;
+        }
+        if (success && updateView) {
             owner.updateManaForView();
             owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Removed, mana));
-            return true;
         }
-        return false;
+        return success;
     }
 
     public final void payManaFromAbility(final SpellAbility saPaidFor, ManaCostBeingPaid manaCost, final SpellAbility saPayment) {
@@ -289,8 +293,8 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             return false;
         }
 
-        for (int k = 0; k < removeFloating.size(); k++) {
-            removeMana(removeFloating.get(k));
+        for (Mana m : removeFloating) {
+            removeMana(m);
         }
         return true;
     }
@@ -304,6 +308,8 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     }
 
     public final void refundManaPaid(final SpellAbility sa) {
+        Player p = sa.getActivatingPlayer();
+
         // Send all mana back to your mana pool, before accounting for it.
 
         // move non-undoable paying mana back to floating
@@ -322,12 +328,12 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         for (final SpellAbility am : payingAbilities) {
             // Recursively refund abilities that were used.
             refundManaPaid(am);
+            p.getGame().getStack().clearUndoStack(am);
         }
 
         payingAbilities.clear();
 
         // update battlefield of activating player - to redraw cards used to pay mana as untapped
-        Player p = sa.getActivatingPlayer();
         p.getGame().fireEvent(new GameEventZone(ZoneType.Battlefield, p, EventValueChangeType.ComplexUpdate, null));
     }
 

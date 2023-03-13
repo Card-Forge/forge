@@ -1,16 +1,21 @@
 package forge.assets;
 
+import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
+import com.badlogic.gdx.assets.loaders.ParticleEffectLoader;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.assets.loaders.resolvers.AbsoluteFileHandleResolver;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
@@ -40,7 +45,7 @@ public class Assets implements Disposable {
     private HashMap<Integer, TextureRegion> cursor;
     private ObjectMap<Integer, BitmapFont> counterFonts;
     private ObjectMap<String, Texture> generatedCards;
-    private ObjectMap<Integer, Texture> fallback_skins;
+    private ObjectMap<String, Texture> fallback_skins;
     private ObjectMap<String, Texture> tmxMap;
     private Texture defaultImage, dummy;
     private TextureParameter textureParameter;
@@ -51,37 +56,45 @@ public class Assets implements Disposable {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
         try {
             //init titleLQ
-            Texture titleBG_LQ = GuiBase.isAndroid() ?
-                    new Texture(Gdx.files.internal("fallback_skin").child(titleFilename)) :
-                    new Texture(Gdx.files.classpath("fallback_skin").child(titleFilename));
-            fallback_skins().put(0, titleBG_LQ == null ? getDummy() : titleBG_LQ);
+            if (GuiBase.isAndroid())
+                getTexture(Gdx.files.internal("fallback_skin").child(titleFilename));
+            else
+                getTexture(Gdx.files.classpath("fallback_skin").child(titleFilename));
             //init transition
-            Texture transitionLQ = GuiBase.isAndroid() ?
-                    new Texture(Gdx.files.internal("fallback_skin").child("transition.png")) :
-                    new Texture(Gdx.files.classpath("fallback_skin").child("transition.png"));
-            fallback_skins().put(1, transitionLQ == null ? getDummy() : transitionLQ);
+            if (GuiBase.isAndroid())
+                getTexture(Gdx.files.internal("fallback_skin").child("transition.png"));
+            else
+                getTexture(Gdx.files.classpath("fallback_skin").child("transition.png"));
         } catch (Exception e) {
             fallback_skins().clear();
-            fallback_skins().put(0, getDummy());
-            fallback_skins().put(1, getDummy());
+            fallback_skins().put("title", getDummy());
+            fallback_skins().put("transition", getDummy());
         }
     }
 
     @Override
     public void dispose() {
         try {
-            if (counterFonts != null)
+            if (counterFonts != null) {
                 for (BitmapFont bitmapFont : counterFonts.values())
                     bitmapFont.dispose();
-            if (generatedCards != null)
+                counterFonts.clear();
+            }
+            if (generatedCards != null) {
                 for (Texture texture : generatedCards.values())
                     texture.dispose();
-            if (fallback_skins != null)
+                generatedCards.clear();
+            }
+            if (fallback_skins != null) {
                 for (Texture texture : fallback_skins.values())
                     texture.dispose();
-            if (tmxMap != null)
+                fallback_skins.clear();
+            }
+            if (tmxMap != null) {
                 for (Texture texture : tmxMap.values())
                     texture.dispose();
+                tmxMap.clear();
+            }
             if (defaultImage != null)
                 defaultImage.dispose();
             if (dummy != null)
@@ -102,13 +115,10 @@ public class Assets implements Disposable {
             deckbox.clear();
             cursor.clear();
             fonts.clear();
-            counterFonts.clear();
-            generatedCards.clear();
-            fallback_skins.clear();
-            tmxMap.clear();
-            manager.dispose();
+            if (manager != null)
+                manager.dispose();
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -126,7 +136,7 @@ public class Assets implements Disposable {
 
     public HashMap<String, FImageComplex> cardArtCache() {
         if (cardArtCache == null)
-            cardArtCache = new HashMap<>(1024);
+            cardArtCache = new HashMap<>();
         return cardArtCache;
     }
 
@@ -138,37 +148,37 @@ public class Assets implements Disposable {
 
     public HashMap<String, FSkinImage> manaImages() {
         if (manaImages == null)
-            manaImages = new HashMap<>(128);
+            manaImages = new HashMap<>();
         return manaImages;
     }
 
     public HashMap<String, FSkinImage> symbolLookup() {
         if (symbolLookup == null)
-            symbolLookup = new HashMap<>(64);
+            symbolLookup = new HashMap<>();
         return symbolLookup;
     }
 
     public HashMap<FSkinProp, FSkinImage> images() {
         if (images == null)
-            images = new HashMap<>(512);
+            images = new HashMap<>();
         return images;
     }
 
     public HashMap<Integer, TextureRegion> avatars() {
         if (avatars == null)
-            avatars = new HashMap<>(150);
+            avatars = new HashMap<>();
         return avatars;
     }
 
     public HashMap<Integer, TextureRegion> sleeves() {
         if (sleeves == null)
-            sleeves = new HashMap<>(64);
+            sleeves = new HashMap<>();
         return sleeves;
     }
 
     public HashMap<Integer, TextureRegion> cracks() {
         if (cracks == null)
-            cracks = new HashMap<>(16);
+            cracks = new HashMap<>();
         return cracks;
     }
 
@@ -198,13 +208,21 @@ public class Assets implements Disposable {
 
     public ObjectMap<String, Texture> generatedCards() {
         if (generatedCards == null)
-            generatedCards = new ObjectMap<>(512);
+            generatedCards = new ObjectMap<>();
         return generatedCards;
     }
 
-    public ObjectMap<Integer, Texture> fallback_skins() {
+    public ObjectMap<String, Texture> fallback_skins() {
         if (fallback_skins == null)
-            fallback_skins = new ObjectMap<>();
+            fallback_skins = new ObjectMap<String, Texture>() {
+                @Override
+                public Texture put(String key, Texture value) {
+                    Texture old = remove(key);
+                    if (old != null)
+                        old.dispose();
+                    return super.put(key, value);
+                }
+            };
         return fallback_skins;
     }
 
@@ -229,23 +247,81 @@ public class Assets implements Disposable {
         return textureParameter;
     }
 
+    public Texture getTexture(FileHandle file) {
+        return getTexture(file, true);
+    }
+    public Texture getTexture(FileHandle file, boolean required) {
+        if (file == null || !file.exists()) {
+            if (!required)
+                return null;
+            System.err.println("Failed to load: " + file +"!. Creating dummy texture.");
+            return getDummy();
+        }
+        //internal path can be inside apk or jar..
+        if (!FileType.Absolute.equals(file.type()) || file.path().contains("fallback_skin")) {
+            Texture f = fallback_skins().get(file.path());
+            if (f == null) {
+                f = new Texture(file);
+                fallback_skins().put(file.path(), f);
+            }
+            return f;
+        }
+        Texture t = manager().get(file.path(), Texture.class, false);
+        if (t == null) {
+            manager().load(file.path(), Texture.class, getTextureFilter());
+            manager().finishLoadingAsset(file.path());
+            t = manager().get(file.path(), Texture.class);
+        }
+        return t;
+    }
+    public ParticleEffect getEffect(FileHandle file) {
+        if (file == null || !file.exists() || !FileType.Absolute.equals(file.type())) {
+            System.err.println("Failed to load: " + file +"!.");
+            return null;
+        }
+        ParticleEffect effect = manager().get(file.path(), ParticleEffect.class, false);
+        if (effect == null) {
+            manager().load(file.path(), ParticleEffect.class, new ParticleEffectLoader.ParticleEffectParameter());
+            manager().finishLoadingAsset(file.path());
+            effect = manager().get(file.path(), ParticleEffect.class);
+        }
+        return effect;
+    }
+
     public Texture getDefaultImage() {
         if (defaultImage == null) {
             FileHandle blankImage = Gdx.files.absolute(ForgeConstants.NO_CARD_FILE);
             if (blankImage.exists()) {
-                defaultImage = manager.get(blankImage.path(), Texture.class, false);
+                defaultImage = manager().get(blankImage.path(), Texture.class, false);
                 if (defaultImage != null)
                     return defaultImage;
                 //if not loaded yet, load to assetmanager
-                manager.load(blankImage.path(), Texture.class, getTextureFilter());
-                manager.finishLoadingAsset(blankImage.path());
-                defaultImage = manager.get(blankImage.path());
+                manager().load(blankImage.path(), Texture.class, getTextureFilter());
+                manager().finishLoadingAsset(blankImage.path());
+                defaultImage = manager().get(blankImage.path());
             } else {
                 defaultImage = getDummy();
             }
         }
         return defaultImage;
     }
+
+    public void loadTexture(FileHandle file) {
+        loadTexture(file, getTextureFilter());
+    }
+    public void loadTexture(FileHandle file, TextureParameter parameter) {
+        try {
+            if (file == null || !file.exists())
+                return;
+            if (!FileType.Absolute.equals(file.type()))
+                return;
+            manager().load(file.path(), Texture.class, parameter);
+            manager().finishLoadingAsset(file.path());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private Texture getDummy() {
         if (dummy == null) {
             Pixmap P = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
@@ -294,6 +370,34 @@ public class Assets implements Disposable {
         return textrafonts.get(name);
     }
 
+    public Music getMusic(FileHandle file) {
+        if (file == null || !file.exists() || !FileType.Absolute.equals(file.type())) {
+            System.err.println("Failed to load: " + file +"!.");
+            return null;
+        }
+        Music music = manager().get(file.path(), Music.class, false);
+        if (music == null) {
+            manager().load(file.path(), Music.class);
+            manager().finishLoadingAsset(file.path());
+            music = manager().get(file.path(), Music.class);
+        }
+        return music;
+    }
+
+    public Sound getSound(FileHandle file) {
+        if (file == null || !file.exists() || !FileType.Absolute.equals(file.type())) {
+            System.err.println("Failed to load: " + file +"!.");
+            return null;
+        }
+        Sound sound = manager().get(file.path(), Sound.class, false);
+        if (sound == null) {
+            manager().load(file.path(), Sound.class);
+            manager().finishLoadingAsset(file.path());
+            sound = manager().get(file.path(), Sound.class);
+        }
+        return sound;
+    }
+
     public class MemoryTrackingAssetManager extends AssetManager {
         private int currentMemory;
         private Map<String, Integer> memoryPerFile;
@@ -302,7 +406,7 @@ public class Assets implements Disposable {
             super(resolver);
 
             currentMemory = 0;
-            memoryPerFile = new HashMap<String, Integer>();
+            memoryPerFile = new HashMap<>();
         }
 
         @SuppressWarnings("unchecked")
@@ -330,9 +434,8 @@ public class Assets implements Disposable {
             }
             memoryPerFile.put(fileName, textureSize);
 
-            int sum = memoryPerFile.values().stream().mapToInt(Integer::intValue).sum() + calcFonts() + calcCounterFonts()
+            return memoryPerFile.values().stream().mapToInt(Integer::intValue).sum() + calcFonts() + calcCounterFonts()
                     + calculateObjectMaps(generatedCards()) + calculateObjectMaps(fallback_skins()) + calculateObjectMaps(tmxMap());
-            return sum;
         }
 
         @SuppressWarnings("unchecked")
@@ -448,9 +551,7 @@ public class Assets implements Disposable {
 
                     currentMemory = calculateTextureSize(assetManager, fileName1, type1);
                 };
-
             }
-
             super.load(fileName, type, parameter);
         }
 
@@ -459,8 +560,8 @@ public class Assets implements Disposable {
             super.unload(fileName);
             if (memoryPerFile.containsKey(fileName)) {
                 memoryPerFile.remove(fileName);
+                cardArtCache().clear();
             }
-            cardArtCache().clear();
         }
 
         public float getMemoryInMegabytes() {
