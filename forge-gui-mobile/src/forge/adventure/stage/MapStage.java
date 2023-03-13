@@ -42,6 +42,7 @@ import forge.adventure.world.WorldSave;
 import forge.assets.FImageComplex;
 import forge.assets.FSkinImage;
 import forge.card.CardRenderer;
+import forge.card.ColorSet;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.game.GameType;
@@ -280,28 +281,47 @@ public class MapStage extends GameStage {
         FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard());
         if (cardArt != null) {
             Image art = new Image(cardArt.getTextureRegion());
-            art.setWidth(50);
-            art.setHeight(40);
-            art.setPosition(8, 40);
+            art.setWidth(57);
+            art.setHeight(41);
+            art.setPosition(23, 30);
             Image image = new Image(FSkinImage.ADV_DECKBOX.getTextureRegion());
-            image.setWidth(59);
-            image.setHeight(80);
-            image.setPosition(4, 7);
-            TypingLabel deckColors = Controls.newTypingLabel(Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck), true).toUpperCase());
+            image.setWidth(60);
+            image.setHeight(50);
+            image.setPosition(22, 22);
+            ColorSet colorSet = DeckProxy.getColorIdentity(deck);
+            TypingLabel deckColors = Controls.newTypingLabel(Controls.colorIdToTypingString(colorSet, false).toUpperCase());
             deckColors.skipToTheEnd();
             deckColors.setAlignment(Align.left);
-            deckColors.setPosition(58, 40);
+            float padding;
+            switch (colorSet.countColors()) {
+                case 1:
+                    padding = 24f;
+                    break;
+                case 2:
+                    padding = 18f;
+                    break;
+                case 3:
+                    padding = 12f;
+                    break;
+                case 4:
+                    padding = 6f;
+                    break;
+                default:
+                    padding = 0f;
+                    break;
+            }
+            deckColors.setPosition(22 + padding, 15);
             TextraLabel deckname = Controls.newTextraLabel(deck.getName());
-            deckname.setAlignment(Align.center);
+            deckname.setAlignment(Align.bottom);
             deckname.setWrap(true);
-            deckname.setWidth(70);
-            deckname.setPosition(0, 30);
+            deckname.setWidth(100);
+            deckname.setPosition(0, 75);
             Group group = new Group();
             group.addActor(art);
             group.addActor(image);
             group.addActor(deckColors);
             group.addActor(deckname);
-            dialog.getContentTable().add(group).height(100).width(65).center();
+            dialog.getContentTable().add(group).height(100).width(100).center();
             dialog.getContentTable().add().row();
         } else {
             TypingLabel label = Controls.newTypingLabel("[%125]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)).toUpperCase()+"\n[%]"+deck.getName());
