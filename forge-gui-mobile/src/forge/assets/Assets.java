@@ -8,6 +8,8 @@ import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.ParticleEffectLoader;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.assets.loaders.resolvers.AbsoluteFileHandleResolver;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -368,6 +370,34 @@ public class Assets implements Disposable {
         return textrafonts.get(name);
     }
 
+    public Music getMusic(FileHandle file) {
+        if (file == null || !file.exists() || !FileType.Absolute.equals(file.type())) {
+            System.err.println("Failed to load: " + file +"!.");
+            return null;
+        }
+        Music music = manager().get(file.path(), Music.class, false);
+        if (music == null) {
+            manager().load(file.path(), Music.class);
+            manager().finishLoadingAsset(file.path());
+            music = manager().get(file.path(), Music.class);
+        }
+        return music;
+    }
+
+    public Sound getSound(FileHandle file) {
+        if (file == null || !file.exists() || !FileType.Absolute.equals(file.type())) {
+            System.err.println("Failed to load: " + file +"!.");
+            return null;
+        }
+        Sound sound = manager().get(file.path(), Sound.class, false);
+        if (sound == null) {
+            manager().load(file.path(), Sound.class);
+            manager().finishLoadingAsset(file.path());
+            sound = manager().get(file.path(), Sound.class);
+        }
+        return sound;
+    }
+
     public class MemoryTrackingAssetManager extends AssetManager {
         private int currentMemory;
         private Map<String, Integer> memoryPerFile;
@@ -530,8 +560,8 @@ public class Assets implements Disposable {
             super.unload(fileName);
             if (memoryPerFile.containsKey(fileName)) {
                 memoryPerFile.remove(fileName);
+                cardArtCache().clear();
             }
-            cardArtCache().clear();
         }
 
         public float getMemoryInMegabytes() {

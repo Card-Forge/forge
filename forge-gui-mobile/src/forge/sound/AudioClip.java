@@ -21,6 +21,7 @@ package forge.sound;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
+import forge.Forge;
 
 public class AudioClip implements IAudioClip {
     private Sound clip;
@@ -33,7 +34,7 @@ public class AudioClip implements IAudioClip {
 
     private AudioClip(final FileHandle fileHandle) {
         try {
-            clip = Gdx.audio.newSound(fileHandle);
+            clip = Forge.getAssets().getSound(fileHandle);
         }
         catch (Exception ex) {
             System.err.println("Unable to load sound file: " + fileHandle.toString());
@@ -48,7 +49,7 @@ public class AudioClip implements IAudioClip {
             Thread.sleep(SoundSystem.DELAY);
         }
         catch (InterruptedException ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
         clip.play(value);
     }
@@ -61,7 +62,7 @@ public class AudioClip implements IAudioClip {
             Thread.sleep(SoundSystem.DELAY);
         }
         catch (InterruptedException ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
         clip.loop();
     }

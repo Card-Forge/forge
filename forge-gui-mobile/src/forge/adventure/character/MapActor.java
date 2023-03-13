@@ -1,5 +1,6 @@
 package forge.adventure.character;
 
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -26,7 +27,8 @@ public class MapActor extends Actor {
     }
 
     static class CurrentEffect {
-        public CurrentEffect(String path, ParticleEffect effect, Vector2 offset, boolean overlay) {
+        public CurrentEffect(FileHandle file, String path, ParticleEffect effect, Vector2 offset, boolean overlay) {
+            this.fileHandle = file;
             this.path = path;
             this.effect = effect;
             this.offset = offset;
@@ -34,6 +36,7 @@ public class MapActor extends Actor {
         }
 
         private final String path;
+        private FileHandle fileHandle;
         public ParticleEffect effect;
         public Vector2 offset;
         public boolean overlay = true;
@@ -57,10 +60,11 @@ public class MapActor extends Actor {
     }
 
     public void playEffect(String path, float duration, boolean overlay, Vector2 offset) {
-        ParticleEffect effect = Forge.getAssets().getEffect(Config.instance().getFile(path));
+        FileHandle file = Config.instance().getFile(path);
+        ParticleEffect effect = Forge.getAssets().getEffect(file);
         if (effect != null) {
             effect.setPosition(getCenter().x, getCenter().y);
-            effects.add(new CurrentEffect(path, effect, offset, overlay));
+            effects.add(new CurrentEffect(file, path, effect, offset, overlay));
             //ParticleEffect.setDuration uses an integer for some reason
             if (duration != 0) {
                 for (ParticleEmitter emitter : effect.getEmitters()) {
@@ -159,8 +163,7 @@ public class MapActor extends Actor {
             if (effect.effect.isComplete()) {
                 effects.removeIndex(i);
                 i--;
-                //assetmanager should handle dispose automatically
-                //effect.effect.dispose();
+                Forge.getAssets().manager().unload(effect.fileHandle.path());
             }
         }
         if (effects.size == 0 && removeIfEffectsAreFinished && getParent() != null)
