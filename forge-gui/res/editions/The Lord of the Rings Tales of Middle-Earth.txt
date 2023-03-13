@@ -1,0 +1,16 @@
+[metadata]
+Code=LTR
+Date=2023-06-23
+Name=The Lord of the Rings: Tales of Middle-Earth
+Type=Draft
+ScryfallCode=LTR
+
+[cards]
+207 R Gandalf the Grey @Aaron Miller
+246 M The One Ring @Veli Nystrom
+273 L Plains @Deven Rue
+275 L Island @Deven Rue
+277 L Swamp @Deven Rue
+279 L Mountain @Deven Rue
+281 L Forest @Deven Rue
+322 R Gandalf the Grey @Anato Finnstark
