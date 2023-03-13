@@ -199,12 +199,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         sa.undo();
         clearUndoStack(sa);
         sa.getActivatingPlayer().getManaPool().refundManaPaid(sa);
-        if (undoStack.isEmpty()) {
-            undoStackOwner = null;
-        }
         return true;
     }
-    private final void clearUndoStack(SpellAbility sa) {
+    public final void clearUndoStack(SpellAbility sa) {
         clearUndoStack(Lists.newArrayList(sa));
     }
     private final void clearUndoStack(List<SpellAbility> sas) {
@@ -212,6 +209,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // reset in case a trigger stopped it on a previous activation
             sa.setUndoable(true);
             undoStack.remove(undoStack.lastIndexOf(sa));
+        }
+        if (undoStack.isEmpty()) {
+            undoStackOwner = null;
         }
     }
     public final void clearUndoStack() {
