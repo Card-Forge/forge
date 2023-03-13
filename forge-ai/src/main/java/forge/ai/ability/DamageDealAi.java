@@ -65,27 +65,27 @@ public class DamageDealAi extends DamageAiBase {
             return SpecialCardAi.SarkhanTheMad.considerDig(ai, sa);
         }
 
-        if (damage.equals("X") && sa.getSVar(damage).equals("Count$ChosenNumber")) {
-            int energy = ai.getCounters(CounterEnumType.ENERGY);
-            for (SpellAbility s : source.getSpellAbilities()) {
-                if ("PayEnergy".equals(s.getParam("AILogic"))) {
-                    energy += AbilityUtils.calculateAmount(source, s.getParam("CounterNum"), sa);
-                    break;
-                }
-            }
-            for (; energy > 0; energy--) {
-                if (damageTargetAI(ai, sa, energy, false)) {
-                    dmg = ComputerUtilCombat.getEnoughDamageToKill(sa.getTargetCard(), energy, source, false, false);
-                    if (dmg > energy || dmg < 1) {
-                        continue; // in case the calculation gets messed up somewhere
-                    }
-                    root.setSVar("EnergyToPay", "Number$" + dmg);
-                    return true;
-                }
-            }
-            return false;
-        }
         if (damage.equals("X")) {
+            if (sa.getSVar(damage).equals("Count$ChosenNumber")) {
+                int energy = ai.getCounters(CounterEnumType.ENERGY);
+                for (SpellAbility s : source.getSpellAbilities()) {
+                    if ("PayEnergy".equals(s.getParam("AILogic"))) {
+                        energy += AbilityUtils.calculateAmount(source, s.getParam("CounterNum"), sa);
+                        break;
+                    }
+                }
+                for (; energy > 0; energy--) {
+                    if (damageTargetAI(ai, sa, energy, false)) {
+                        dmg = ComputerUtilCombat.getEnoughDamageToKill(sa.getTargetCard(), energy, source, false, false);
+                        if (dmg > energy || dmg < 1) {
+                            continue; // in case the calculation gets messed up somewhere
+                        }
+                        root.setSVar("EnergyToPay", "Number$" + dmg);
+                        return true;
+                    }
+                }
+                return false;
+            }
             if (sa.getSVar(damage).equals("Count$xPaid")) {
                 // Life Drain
                 if ("XLifeDrain".equals(logic)) {
@@ -111,7 +111,7 @@ public class DamageDealAi extends DamageAiBase {
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(source, damage, sa);
 
-        if (damage.equals("X")) {
+        if (damage.equals("X") || sourceName.equals("Crater's Claws")) {
             if (sa.getSVar(damage).equals("Count$xPaid") || sourceName.equals("Crater's Claws")) {
                 dmg = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
 
@@ -542,13 +542,6 @@ public class DamageDealAi extends DamageAiBase {
                 sa.getTargets().add(enemy);
             }
             return true;
-        } else if ("DamageAfterPutCounter".equals(logic)
-                && sa.getParent() != null
-                && "P1P1".equals(sa.getParent().getParam("CounterType"))) {
-            // assuming the SA parent is of PutCounter type. Perhaps it's possible to predict counter multipliers here somehow?
-            final String amountStr = sa.getParent().getParamOrDefault("CounterNum", "1");
-            final int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
-            dmg += amount;
         }
 
         // AssumeAtLeastOneTarget is used for cards with funky targeting implementation like Fight with Fire which would
@@ -557,11 +550,7 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        immediately = immediately || ComputerUtil.playImmediately(ai, sa);
-
-        if (!(sa.getParent() != null && sa.getParent().isTargetNumberValid())) {
-            sa.resetTargets();
-        }
+        sa.resetTargets();
 
         // target loop
         TargetChoices tcs = sa.getTargets();
@@ -621,6 +610,8 @@ public class DamageDealAi extends DamageAiBase {
                 return true;
             }
         }
+
+        immediately = immediately || ComputerUtil.playImmediately(ai, sa);
 
         int totalTargetedSoFar = -1;
         while (sa.canAddMoreTarget()) {
