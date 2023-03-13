@@ -208,7 +208,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         for (SpellAbility sa : sas) {
             // reset in case a trigger stopped it on a previous activation
             sa.setUndoable(true);
-            undoStack.remove(undoStack.lastIndexOf(sa));
+            int idx = undoStack.lastIndexOf(sa);
+            if (idx != -1) {
+                undoStack.remove(idx);
+            }
         }
         if (undoStack.isEmpty()) {
             undoStackOwner = null;
