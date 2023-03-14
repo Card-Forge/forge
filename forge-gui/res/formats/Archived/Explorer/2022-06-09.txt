@@ -1,7 +1,7 @@
 [format]
 Name:Explorer (2022-06-09)
 Type:Archived
-Subtype:Arena
+Subtype:Pioneer
 Effective:2022-06-09
 Sets:XLN, RIX, DOM, M19, GRN, G18, RNA, WAR, M20, ELD, THB, IKO, M21, ZNR, KHM, STX, AFR, MID, VOW, NEO, SNC
 Banned:Expressive Iteration; Field of the Dead; Kethis, the Hidden Hand; Leyline of Abundance; Lurrus of the Dream-Den; Nexus of Fate; Oko, Thief of Crowns; Once Upon a Time; Teferi, Time Raveler; Tibalt's Trickery; Underworld Breach; Uro, Titan of Nature's Wrath; Veil of Summer; Wilderness Reclamation; Winota, Joiner of Forces
