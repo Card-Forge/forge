@@ -192,7 +192,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
         private void updatePreview() {
             PaperCard planeswalker = lstPlaneswalkers.getSelectedItem();
             if (planeswalker != null) {
-                tokenDisplay.setIcon((FImage)PlaneswalkerAchievements.getTrophyImage(planeswalker.getName()));
+                tokenDisplay.setIcon((FImage)PlaneswalkerAchievements.getTrophyImage(planeswalker.getName(), planeswalker));
             }
             else {
                 tokenDisplay.setIcon(null);
