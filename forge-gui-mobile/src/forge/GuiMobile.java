@@ -134,7 +134,7 @@ public class GuiMobile implements IGuiBase {
                 if (paperCard != null)
                     cardImage = ImageCache.getImage(paperCard.getCardImageKey(), false);
 
-                if (FileUtil.doesFileExist(overlayFilename) && cardImage == null) {
+                if (FileUtil.doesFileExist(overlayFilename)) {
                     try {
                         final Texture overlay = Forge.getAssets().getTexture(Gdx.files.absolute(overlayFilename));
                         g.drawImage(overlay, (background.getWidth() - overlay.getWidth()) / 2, (background.getHeight() - overlay.getHeight()) / 2, overlay.getWidth(), overlay.getHeight());

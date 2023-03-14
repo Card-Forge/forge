@@ -155,7 +155,7 @@ public class GuiDesktop implements IGuiBase {
         if (paperCard != null)
             cardImage = ImageCache.scaleImage(paperCard.getCardImageKey(), cardImageWidth, cardImageHeight, false, null);
 
-        if (FileUtil.doesFileExist(overlayFilename) && cardImage == null) {
+        if (FileUtil.doesFileExist(overlayFilename)) {
             final ImageIcon overlay = new ImageIcon(overlayFilename);
             g.drawImage(overlay.getImage(), (background.getWidth() - overlay.getIconWidth()) / 2, (background.getHeight() - overlay.getIconHeight()) / 2, overlay.getIconWidth(), overlay.getIconHeight(), null);
         } else if (cardImage != null) {
