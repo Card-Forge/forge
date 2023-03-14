@@ -590,7 +590,7 @@ public class ComputerUtilMana {
                 final Mana mana = CostPayment.getMana(ai, part, sa, cost.getSourceRestriction(), (byte) -1, cost.getXManaCostPaidByColor());
                 if (mana != null) {
                     if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana, false)) {
-                        manaSpentToPay.add(0, mana);
+                        manaSpentToPay.add(mana);
                     }
                 }
             }

@@ -572,11 +572,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         curResolvingCard = null;
 
-        // TODO: this is a huge hack. Why is this necessary?
-        // hostCard in AF is not the same object that's on the battlefield
-        // verified by System.identityHashCode(card);
-        final Card tmp = sa.getHostCard();
-        if (!(sa instanceof WrappedAbility && sa.isTrigger())) { tmp.setCanCounter(true); } // reset mana pumped counter magic flag
         // xManaCostPaid will reset when cast the spell, comment out to fix Venarian Gold
         // sa.getHostCard().setXManaCostPaid(0);
     }

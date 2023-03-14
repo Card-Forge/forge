@@ -193,7 +193,7 @@ public class HumanPlaySpellAbility {
 
         if (isFree || payment.isFullyPaid()) {
             //track when planeswalker ultimates are activated
-            ability.getActivatingPlayer().getAchievementTracker().onSpellAbilityPlayed(ability);
+            human.getAchievementTracker().onSpellAbilityPlayed(ability);
 
             if (skipStack) {
                 AbilityUtils.resolve(ability);

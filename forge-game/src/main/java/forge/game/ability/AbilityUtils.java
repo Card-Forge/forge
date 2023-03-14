@@ -1580,7 +1580,7 @@ public class AbilityUtils {
             List<Mana> payingMana = sa.getPayingMana();
             // even if the cost was raised, we only care about mana from activation part
             // let's just assume the first shards spent are that for easy handling
-            List<Mana> activationPaid = payingMana.subList(payingMana.size() - activationShards, payingMana.size());
+            List<Mana> activationPaid = payingMana.subList(0, activationShards);
             StringBuilder sb = new StringBuilder();
             int nMana = 0;
             for (Mana m : activationPaid) {
