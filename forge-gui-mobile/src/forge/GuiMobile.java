@@ -130,9 +130,6 @@ public class GuiMobile implements IGuiBase {
                 g.drawImage(FSkin.getImages().get(background), 0, 0, background.getWidth(), background.getHeight());
                 final float cardImageWidth = 90f;
                 final float cardImageHeight = 128f;
-                Texture cardImage = null;
-                if (paperCard != null)
-                    cardImage = ImageCache.getImage(paperCard.getCardImageKey(), false);
 
                 if (FileUtil.doesFileExist(overlayFilename)) {
                     try {
@@ -140,8 +137,10 @@ public class GuiMobile implements IGuiBase {
                         g.drawImage(overlay, (background.getWidth() - overlay.getWidth()) / 2, (background.getHeight() - overlay.getHeight()) / 2, overlay.getWidth(), overlay.getHeight());
                     } catch (final Exception e) {
                     }
-                } else if (cardImage != null) {
-                    g.drawCardRoundRect(cardImage, null, (background.getWidth() - cardImageWidth) / 2, (background.getHeight() - cardImageHeight) / 3.8f, cardImageWidth, cardImageHeight, false, false);
+                } else {
+                    Texture cardImage = ImageCache.getImage(paperCard.getCardImageKey(), false);
+                    if (cardImage != null)
+                        g.drawCardRoundRect(cardImage, null, (background.getWidth() - cardImageWidth) / 2, (background.getHeight() - cardImageHeight) / 3.8f, cardImageWidth, cardImageHeight, false, false);
                 }
 
                 Gdx.graphics.requestRendering(); //ensure image appears right away
