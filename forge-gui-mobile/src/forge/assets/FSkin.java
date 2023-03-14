@@ -35,7 +35,7 @@ public class FSkin {
     public static Texture getLogo() {
         if (Forge.isMobileAdventureMode)
             return Forge.getAssets().getTexture(getDefaultSkinFile("adv_logo.png"));
-        return Forge.getAssets().getTexture(getSkinFile("hd_logo.png"));
+        return Forge.getAssets().getTexture(getSkinFile("hd_logo.png"), false);
     }
 
     public static void changeSkin(final String skinName) {
@@ -150,7 +150,7 @@ public class FSkin {
                         Forge.getAssets().loadTexture(f2);
                         splashScreen.setSplashTexture(new TextureRegion(Forge.getAssets().getTexture(f2)));
                     } else {
-                        splashScreen.setSplashTexture(new TextureRegion(Forge.getAssets().getTexture(f2), 0, 0, w, h - 100));
+                        splashScreen.setSplashTexture(new TextureRegion(Forge.getAssets().getTexture(f), 0, 0, w, h - 100));
                     }
                 }
                 Pixmap pxSplash = new Pixmap(f);

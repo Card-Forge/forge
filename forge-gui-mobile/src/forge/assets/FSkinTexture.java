@@ -202,8 +202,9 @@ public enum FSkinTexture implements FImage {
         FileHandle preferredFile = isPlanechaseBG ? FSkin.getCachePlanechaseFile(filename) : FSkin.getSkinFile(filename);
         if (preferredFile.exists()) {
             try {
-                texture = Forge.getAssets().getTexture(preferredFile);
-                isloaded = true;
+                texture = Forge.getAssets().getTexture(preferredFile, false);
+                if (texture != null)
+                    isloaded = true;
             }
             catch (final Exception e) {
                 System.err.println("Failed to load skin file: " + preferredFile);
@@ -242,7 +243,8 @@ public enum FSkinTexture implements FImage {
             }
         }
         if (repeat) {
-            texture.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
+            if (texture != null)
+                texture.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
         }
     }
 
