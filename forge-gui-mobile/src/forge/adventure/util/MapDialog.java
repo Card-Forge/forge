@@ -66,6 +66,44 @@ public class MapDialog {
     Pair<FileHandle, Music> audio = null;
     float fade = 1f;
 
+    void unload() {
+        if (audio != null) {
+            audio.getRight().setOnCompletionListener(null);
+            audio.getRight().stop();
+            Forge.getAssets().manager().unload(audio.getLeft().path());
+            audio = null;
+        }
+    }
+
+    void disposeAudio() {
+        disposeAudio(false);
+    }
+
+    void disposeAudio(boolean fadeout) {
+        if (fadeout) {
+            final float[] v = {1f};
+            for (int i = 10; i > 1; i--) {
+                float delay = i * 0.1f;
+                float j = i;
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        v[0] -= 0.1f;
+                        if (v[0] < 0.1f)
+                            v[0] = 0.1f;
+                        if (audio != null && j == 2) {
+                            unload();
+                        } else if (audio != null && j == 10) {
+                            audio.getRight().setVolume(v[0]);
+                        }
+                    }
+                }, delay);
+            }
+        } else {
+            unload();
+        }
+    }
+
     private void loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
         setEffects(dialog.action);
         Dialog D = stage.getDialog();
@@ -76,11 +114,7 @@ public class MapDialog {
         String text; //Check for localized string (locname), otherwise print text.
         if (dialog.loctext != null && !dialog.loctext.isEmpty()) text = L.getMessage(dialog.loctext);
         else text = dialog.text;
-        if (audio != null) {
-            audio.getRight().stop();
-            Forge.getAssets().manager().unload(audio.getLeft().path());
-            audio = null;
-        }
+        disposeAudio();
         if (dialog.voiceFile != null) {
             FileHandle file = Gdx.files.absolute(Config.instance().getFilePath(dialog.voiceFile));
             if (file.exists()) {
@@ -151,16 +185,11 @@ public class MapDialog {
     }
 
     void fadeIn() {
-        if (audio != null) {
-            audio.getRight().setOnCompletionListener(null);
-            audio.getRight().stop();
-            Forge.getAssets().manager().unload(audio.getLeft().path());
-            audio = null;
-        }
+        disposeAudio(true);
         if (fade >= 1f)
             return;
         for (int i = 10; i > 1; i--) {
-            float delay = i*0.1f;
+            float delay = i * 0.1f;
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
@@ -175,7 +204,7 @@ public class MapDialog {
 
     void fadeOut() {
         for (int i = 10; i > 1; i--) {
-            float delay = i*0.1f;
+            float delay = i * 0.1f;
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {

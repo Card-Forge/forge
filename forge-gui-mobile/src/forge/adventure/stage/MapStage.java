@@ -281,41 +281,23 @@ public class MapStage extends GameStage {
         FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard());
         if (cardArt != null) {
             Image art = new Image(cardArt.getTextureRegion());
-            art.setWidth(57);
-            art.setHeight(41);
-            art.setPosition(23, 30);
+            art.setWidth(58);
+            art.setHeight(46);
+            art.setPosition(25, 43);
             Image image = new Image(FSkinImage.ADV_DECKBOX.getTextureRegion());
             image.setWidth(60);
-            image.setHeight(50);
-            image.setPosition(22, 22);
+            image.setHeight(80);
+            image.setPosition(24, 10);
             ColorSet colorSet = DeckProxy.getColorIdentity(deck);
-            TypingLabel deckColors = Controls.newTypingLabel(Controls.colorIdToTypingString(colorSet, false).toUpperCase());
+            TypingLabel deckColors = Controls.newTypingLabel(Controls.colorIdToTypingString(colorSet, true).toUpperCase());
             deckColors.skipToTheEnd();
-            deckColors.setAlignment(Align.left);
-            float padding;
-            switch (colorSet.countColors()) {
-                case 1:
-                    padding = 24f;
-                    break;
-                case 2:
-                    padding = 18f;
-                    break;
-                case 3:
-                    padding = 12f;
-                    break;
-                case 4:
-                    padding = 6f;
-                    break;
-                default:
-                    padding = 0f;
-                    break;
-            }
-            deckColors.setPosition(22 + padding, 15);
+            deckColors.setAlignment(Align.center);
+            deckColors.setPosition(14, 44);
             TextraLabel deckname = Controls.newTextraLabel(deck.getName());
-            deckname.setAlignment(Align.bottom);
+            deckname.setAlignment(Align.center);
             deckname.setWrap(true);
-            deckname.setWidth(100);
-            deckname.setPosition(0, 75);
+            deckname.setWidth(80);
+            deckname.setPosition(14, 28);
             Group group = new Group();
             group.addActor(art);
             group.addActor(image);
