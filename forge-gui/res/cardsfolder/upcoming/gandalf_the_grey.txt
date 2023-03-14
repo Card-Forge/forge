@@ -1,0 +1,12 @@
+Name:Gandalf the Grey
+ManaCost:3 U R
+Types:Legendary Creature Avatar Wizard
+PT:3/4
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Whenever you cast an instant or sorcery spell, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBTapUntap,DBDamage,DBCopy,DBChangeZone | ChoiceRestriction$ ThisGame | CharmNum$ 1
+SVar:DBTapUntap:DB$ TapOrUntap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent to tap or untap | SpellDescription$ You may tap or untap target permanent.
+SVar:DBDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to each opponent.
+SVar:DBCopy:DB$ CopySpellAbility | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TgtPrompt$ Select target instant or sorcery spell you control | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell you control. You may choose new targets for the copy.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put NICKNAME on top of its owner's library.
+DeckNeeds:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, choose one that hasn't been chosen —\n• You may tap or untap target permanent.\n• Gandalf the Grey deals 3 damage to each opponent.\n• Copy target instant or sorcery spell you control. You may choose new targets for the copy.\n• Put Gandalf on top of its owner's library.
