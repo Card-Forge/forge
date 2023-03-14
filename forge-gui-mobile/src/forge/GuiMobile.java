@@ -137,7 +137,7 @@ public class GuiMobile implements IGuiBase {
                         g.drawImage(overlay, (background.getWidth() - overlay.getWidth()) / 2, (background.getHeight() - overlay.getHeight()) / 2, overlay.getWidth(), overlay.getHeight());
                     } catch (final Exception e) {
                     }
-                } else {
+                } else if (paperCard != null) {
                     Texture cardImage = ImageCache.getImage(paperCard.getCardImageKey(), false);
                     if (cardImage != null)
                         g.drawCardRoundRect(cardImage, null, (background.getWidth() - cardImageWidth) / 2, (background.getHeight() - cardImageHeight) / 3.8f, cardImageWidth, cardImageHeight, false, false);
