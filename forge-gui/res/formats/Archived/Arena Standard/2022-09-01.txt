@@ -1,6 +1,6 @@
 [format]
 Name:Arena Standard (DMU)
 Type:Archived
-Subtype:Arena
+Subtype:Standard
 Effective:2022-09-01
 Sets:MID, VOW, NEO, SNC, DMU
