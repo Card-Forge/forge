@@ -7,6 +7,9 @@ Avatar
   xy: 23, 146
   size: 45, 45
 Idle 
+  xy: 0, 0
+  size: 86, 50   
+Idle 
   xy: 0, 50
   size: 86, 50   
 Idle 
@@ -21,24 +24,21 @@ Idle
 Idle 
   xy: 0, 250
   size: 86, 50 
-Idle 
+Walk 
   xy: 0, 300
   size: 86, 50  
-Idle 
+Walk 
   xy: 0, 350
   size: 86, 50   
-Idle 
+Walk 
   xy: 0, 400
   size: 86, 50
-Idle 
+Walk 
   xy: 0, 450
   size: 86, 50
-Idle 
+Walk 
   xy: 0, 500
   size: 86, 50
-Idle 
+Walk 
   xy: 0, 550
-  size: 86, 50 
-Idle 
-  xy: 0, 600
-  size: 86, 50  
+  size: 86, 50

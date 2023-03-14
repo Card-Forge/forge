@@ -3,11 +3,6 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <properties>
-  <property name="dungeonEffect">{
-  &quot;startBattleWithCard&quot;: [ &quot;Thallid Shell-Dweller&quot;,&quot;Slimefoot, Thallid Transplant&quot;, &quot;Thallid Shell-Dweller&quot; ]
-}</property>
- </properties>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="36" height="24">
@@ -34,6 +29,9 @@
   </data>
  </layer>
  <layer id="7" name="Tilelaag 5" width="36" height="24">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJzNlsENgzAMRXPoDB2hC5RLN2Q9yAI99tgRWlQMxnKwQz5JnxQlUZD8428MIfyI39HNa5onBmWP4GGcR0ULZ0istRhWLOuc9HRipEDlKIc9PVzzvY6cjZ49bRzpg9c/D9wzyz8PRzTJmDJHntpCcSRGDOt7iUR605Lcuj0jH5x/yYuE95FJm6fnyRqnO71v5Xqot3n7G8UfFW1ITV7fRqaHj5a+a37V6k+t6Oe59Dv5um5nL4i6S2kpBaENpSWF5VuLf7Oz4vf2IwvPCzAwGFlXcp9zz5og3ocPIpQsmw==
   </data>
@@ -47,9 +45,9 @@
   <object id="49" template="../obj/gold.tx" x="107.705" y="136.536"/>
   <object id="53" template="../obj/enemy.tx" x="271.708" y="215.489" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Slimefoot's Boss Effect&quot;]
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Grolnok&quot;]
 }</property>
-    <property name="enemy" value="Frogboss"/>
+    <property name="enemy" value="Grolnok"/>
    </properties>
   </object>
   <object id="55" template="../obj/manashards.tx" x="17.6527" y="84.3978"/>
@@ -67,9 +65,10 @@
     <property name="waypoints" value="71,64,72,63,68,66,65,67"/>
    </properties>
   </object>
-  <object id="58" template="../obj/enemy.tx" x="462.667" y="103.83" width="16" height="17.6724">
+  <object id="58" template="../obj/enemy.tx" x="6.667" y="107.83" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Insect"/>
+    <property name="spriteLayer" type="bool" value="true"/>
    </properties>
   </object>
   <object id="59" template="../obj/booster.tx" x="31" y="15.3333">

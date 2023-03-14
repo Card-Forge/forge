@@ -8,8 +8,8 @@
     "expandedProjectPaths": [
         "map",
         "tileset",
-        "obj",
-        "map/main_story"
+        "map/main_story",
+        "obj"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -70,7 +70,7 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 265,
+                "x": 265.33333333333326,
                 "y": 79
             }
         },
@@ -1815,11 +1815,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 1,
+            "scale": 1.5,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 277,
-                "y": 131.5
+                "x": 277.33333333333326,
+                "y": 131.66666666666669
             }
         },
         "map/grove_1.tmx": {
@@ -2446,8 +2446,8 @@
         },
         "map/main_story/templeofchandra.tmx": {
             "expandedObjectLayers": [
-                7,
-                2
+                2,
+                7
             ],
             "scale": 1.5,
             "selectedLayer": 5,
@@ -2987,7 +2987,7 @@
                 4
             ],
             "scale": 2.044479166666666,
-            "selectedLayer": 4,
+            "selectedLayer": 3,
             "viewCenter": {
                 "x": 245.05018596830902,
                 "y": 136.22051255922963
@@ -3073,8 +3073,8 @@
             "scale": 5.5,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 317.72727272727275,
-                "y": 128.45454545454547
+                "x": 248,
+                "y": 175.90909090909093
             }
         },
         "map/tibalt_f1.tmx": {
@@ -3084,8 +3084,8 @@
             "scale": 3,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 514.5,
-                "y": 166.83333333333334
+                "x": 368,
+                "y": 223.83333333333331
             }
         },
         "map/tibalt_f2.tmx": {
@@ -3095,8 +3095,8 @@
             "scale": 1.3764204545454546,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 176.90815273477813,
-                "y": 168.91640866873067
+                "x": 176.54489164086687,
+                "y": 168.18988648090817
             }
         },
         "map/tileset/buildings.tsx": {
@@ -3198,10 +3198,10 @@
                 4
             ],
             "scale": 2,
-            "selectedLayer": 2,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 221.5,
-                "y": 130.75
+                "x": 317,
+                "y": 162.75
             }
         },
         "map/yule_town.tmx": {
@@ -3249,9 +3249,7 @@
         "map/tibalt_f2.tmx",
         "map/grolnok.tmx",
         "map/slimefoot_boss.tmx",
-        "map/xira.tmx",
-        "map/wurmpond_1.tmx",
-        "map/swamp_town_generic.tmx"
+        "map/xira.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
@@ -3262,12 +3260,12 @@
         "map/tibalt_f2.tmx",
         "map/grolnok.tmx",
         "map/slimefoot_boss.tmx",
-        "map/swamp_town_generic.tmx",
-        "map/wurmpond_1.tmx",
         "map/xira.tmx",
+        "map/wurmpond_1.tmx",
+        "map/swamp_town_generic.tmx",
+        "map/barbariancamp_1.tmx",
         "map/main_story/black_castle.tmx",
-        "map/main_story/black_castle_f1.tmx",
-        "map/aerie_1.tmx"
+        "map/main_story/black_castle_f1.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true
