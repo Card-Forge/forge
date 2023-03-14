@@ -6,11 +6,40 @@ Type=Draft
 ScryfallCode=LTR
 
 [cards]
+18 R Frodo, Sauron's Bane @Dmitry Burmak
+26 U Reprieve @Justyna Dura
+28 U Samwise the Stouthearted @Irvin Rodriguez
+38 U You Cannot Pass! @Leonardo Borazio
+84 U Gollum, Patient Plotter @Lorenzo Mastroianni
 207 R Gandalf the Grey @Aaron Miller
+234 M Tom Bombadil @Dmitry Burmak
 246 M The One Ring @Veli Nystrom
+258 M Mount Doom @Jonas De Ro
+272 L Plains @Deven Rue
 273 L Plains @Deven Rue
+274 L Island @Deven Rue
 275 L Island @Deven Rue
+276 L Swamp @Deven Rue
 277 L Swamp @Deven Rue
+278 L Mountain @Deven Rue
 279 L Mountain @Deven Rue
+280 L Forest @Deven Rue
 281 L Forest @Deven Rue
+287 M Aragorn and Arwen, Wed @Magali Villeneuve
+288 M Sauron, the Lidless Eye @Yigit Koroglu
+304 R Frodo, Sauron's Bane @Andreas Rocha
+306 U Samwise the Stouthearted @Marko Manev
+309 U Gollum, Patient Plotter @Dominik Mayer
 322 R Gandalf the Grey @Anato Finnstark
+331 M Tom Bombadil @Marko Manev
+343 M Mount Doom @Logan Feliciano
+345 R The Shire @Calder Moore
+380 M The One Ring @Veli Nystrom
+394 M Aragorn and Arwen, Wed @Magali Villeneuve
+396 M Sauron, the Lidless Eye @Yigit Koroglu
+398 R Trailblazer's Boots @Alexander Gering
+448 R Frodo, Sauron's Bane @Marta Nael
+449 U Samwise the Stouthearted @Marta Nael
+450 U Gollum, Patient Plotter @Marta Nael
+451 M The One Ring @Marta Nael
+001 M The One Ring @Veli Nystrom
