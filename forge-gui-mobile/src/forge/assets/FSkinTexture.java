@@ -202,7 +202,7 @@ public enum FSkinTexture implements FImage {
         FileHandle preferredFile = isPlanechaseBG ? FSkin.getCachePlanechaseFile(filename) : FSkin.getSkinFile(filename);
         if (preferredFile.exists()) {
             try {
-                texture = Forge.getAssets().getTexture(preferredFile);
+                texture = Forge.getAssets().getTexture(preferredFile, false);
                 isloaded = true;
             }
             catch (final Exception e) {
