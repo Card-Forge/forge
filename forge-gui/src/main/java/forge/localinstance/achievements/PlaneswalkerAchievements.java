@@ -4,6 +4,7 @@ import forge.game.Game;
 import forge.game.player.Player;
 import forge.gui.GuiBase;
 import forge.item.IPaperCard;
+import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.skin.FSkinProp;
 import forge.localinstance.skin.ISkinImage;
@@ -14,8 +15,8 @@ import forge.util.Localizer;
 public class PlaneswalkerAchievements extends AchievementCollection {
     public static final PlaneswalkerAchievements instance = new PlaneswalkerAchievements();
 
-    public static ISkinImage getTrophyImage(String planeswalkerName) {
-        return GuiBase.getInterface().createLayeredImage(FSkinProp.IMG_SPECIAL_TROPHY, ForgeConstants.CACHE_ACHIEVEMENTS_DIR + "/" + planeswalkerName + ".png", 1);
+    public static ISkinImage getTrophyImage(String planeswalkerName, PaperCard paperCard) {
+        return GuiBase.getInterface().createLayeredImage(paperCard, FSkinProp.IMG_SPECIAL_TROPHY, ForgeConstants.CACHE_ACHIEVEMENTS_DIR + "/" + planeswalkerName + ".png", 1);
     }
 
     private PlaneswalkerAchievements() {
