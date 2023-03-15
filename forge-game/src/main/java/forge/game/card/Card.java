@@ -199,8 +199,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Card copiedPermanent;
     private boolean copiedSpell = false;
 
-    private boolean canCounter = true;
-
     private boolean unearthed;
 
     private boolean monstrous;
@@ -2927,7 +2925,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final SpellAbility getFirstSpellAbility() {
-        return currentState.getNonManaAbilities().isEmpty() ? null : currentState.getNonManaAbilities().getFirst();
+        return Iterables.getFirst(currentState.getNonManaAbilities(), null);
     }
 
     /**
@@ -3245,13 +3243,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setFlipped(boolean value) {
         flipped = value;
-    }
-
-    public final void setCanCounter(final boolean b) {
-        canCounter = b;
-    }
-    public final boolean getCanCounter() {
-        return canCounter;
     }
 
     public final void addLeavesPlayCommand(final GameCommand c) {
@@ -3669,9 +3660,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         entity.removeAttachedCard(this);
 
         // Handle Bestowed Aura part
-        if (isBestowed()) {
-            unanimateBestow();
-        }
+        unanimateBestow();
+
         getGame().fireEvent(new GameEventCardAttachment(this, entity, null));
 
         // Run triggers

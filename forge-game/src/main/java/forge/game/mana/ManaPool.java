@@ -210,7 +210,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         for (AbilityManaPart mp : saPayment.getAllManaParts()) {
             for (final Mana mana : mp.getLastManaProduced()) {
                 if (tryPayCostWithMana(saPaidFor, manaCost, mana, false)) {
-                    saPaidFor.getPayingMana().add(0, mana);
+                    saPaidFor.getPayingMana().add(mana);
                 }
             }
         }
@@ -235,7 +235,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         }
 
         if (manaFound != null && tryPayCostWithMana(saPaidFor, manaCost, manaFound, false)) {
-            manaSpentToPay.add(0, manaFound);
+            manaSpentToPay.add(manaFound);
             return true;
         }
         return false;
@@ -300,9 +300,6 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     }
 
     public static void refundMana(List<Mana> manaSpent, Player player, SpellAbility sa) {
-        if (sa.getHostCard() != null) {
-            sa.getHostCard().setCanCounter(true);
-        }
         player.getManaPool().add(manaSpent);
         manaSpent.clear();
     }
@@ -383,7 +380,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
                 final Mana mana = CostPayment.getMana(player, part, sa, cost.getSourceRestriction(), hasConverge ? cost.getColorsPaid() : -1, cost.getXManaCostPaidByColor());
                 if (mana != null) {
                     if (player.getManaPool().tryPayCostWithMana(sa, cost, mana, test)) {
-                        manaSpentToPay.add(0, mana);
+                        manaSpentToPay.add(mana);
                     }
                 }
             }

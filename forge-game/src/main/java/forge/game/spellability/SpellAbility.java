@@ -645,8 +645,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 mana.getManaAbility().createETBCounters(host, getActivatingPlayer());
             }
 
-            if (mana.addsNoCounterMagic(this) && host != null) {
-                host.setCanCounter(false);
+            if (mana.addsNoCounterMagic(this)) {
+                mana.getManaAbility().addNoCounterEffect(this);
             }
 
             if (isSpell() && host != null) {

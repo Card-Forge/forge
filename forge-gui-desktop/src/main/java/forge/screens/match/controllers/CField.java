@@ -70,7 +70,7 @@ public class CField implements ICDoc {
         final ZoneAction flashBackAction = new ZoneAction(matchUI, player, ZoneType.Flashback);
         final ZoneAction commandAction   = new ZoneAction(matchUI, player, ZoneType.Command);
         final ZoneAction anteAction      = new ZoneAction(matchUI, player, ZoneType.Ante);
-        final ZoneAction sideboardAction   = new ZoneAction(matchUI, player, ZoneType.Sideboard);
+        final ZoneAction sideboardAction = new ZoneAction(matchUI, player, ZoneType.Sideboard);
 
         final Function<Byte, Boolean> manaAction = new Function<Byte, Boolean>() {
             @Override public final Boolean apply(final Byte colorCode) {
@@ -113,4 +113,4 @@ public class CField implements ICDoc {
     public void update() {
     }
 
-} // End class CField
+}
