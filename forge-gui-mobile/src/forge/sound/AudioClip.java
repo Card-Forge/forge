@@ -68,6 +68,14 @@ public class AudioClip implements IAudioClip {
         clip.loop();
     }
 
+    @Override
+    public void dispose() {
+        if (clip != null) {
+            clip.dispose();
+            clip = null;
+        }
+    }
+
     public final void stop() {
         if (clip == null) {
             return;

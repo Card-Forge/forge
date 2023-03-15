@@ -5,4 +5,5 @@ public interface IAudioClip {
     boolean isDone();
     void stop();
     void loop();
+    void dispose();
 }

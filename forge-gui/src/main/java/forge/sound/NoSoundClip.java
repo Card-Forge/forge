@@ -15,4 +15,7 @@ public class NoSoundClip implements IAudioClip {
     @Override
     public void loop() { }
 
+    @Override
+    public void dispose() { }
+
 }
