@@ -265,7 +265,7 @@ public class CardFactoryUtil {
 
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(c);
         List<ReplacementEffect> list = c.getGame().getReplacementHandler().getReplacementList(ReplacementType.Counter, repParams, ReplacementLayer.CantHappen);
-        return !list.isEmpty();
+        return list.isEmpty();
     }
 
     /**

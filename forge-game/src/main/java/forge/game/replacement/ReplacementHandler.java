@@ -227,7 +227,13 @@ public class ReplacementHandler {
             return ReplacementResult.NotReplaced;
         }
 
-        ReplacementEffect chosenRE = decider.getController().chooseSingleReplacementEffect(Localizer.getInstance().getMessage("lblChooseFirstApplyReplacementEffect"), possibleReplacers);
+        ReplacementEffect chosenRE;
+        // "can't" is never a choice
+        if (layer == ReplacementLayer.CantHappen) {
+            chosenRE = possibleReplacers.get(0);
+        } else {
+            chosenRE = decider.getController().chooseSingleReplacementEffect(Localizer.getInstance().getMessage("lblChooseFirstApplyReplacementEffect"), possibleReplacers);
+        }
 
         possibleReplacers.remove(chosenRE);
 
