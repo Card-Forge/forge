@@ -199,8 +199,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Card copiedPermanent;
     private boolean copiedSpell = false;
 
-    private boolean canCounter = true;
-
     private boolean unearthed;
 
     private boolean monstrous;
@@ -3245,13 +3243,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setFlipped(boolean value) {
         flipped = value;
-    }
-
-    public final void setCanCounter(final boolean b) {
-        canCounter = b;
-    }
-    public final boolean getCanCounter() {
-        return canCounter;
     }
 
     public final void addLeavesPlayCommand(final GameCommand c) {

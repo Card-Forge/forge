@@ -60,6 +60,7 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.AlternativeCost;
@@ -258,8 +259,13 @@ public class CardFactoryUtil {
      * @return a boolean.
      */
     public static boolean isCounterable(final Card c) {
-        return !(c.hasKeyword("CARDNAME can't be countered.") || c.hasKeyword("This spell can't be countered."))
-                && c.getCanCounter();
+        if (c.hasKeyword("CARDNAME can't be countered.") || c.hasKeyword("This spell can't be countered.")) {
+            return false;
+        }
+
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(c);
+        List<ReplacementEffect> list = c.getGame().getReplacementHandler().getReplacementList(ReplacementType.Counter, repParams, ReplacementLayer.CantHappen);
+        return !list.isEmpty();
     }
 
     /**
