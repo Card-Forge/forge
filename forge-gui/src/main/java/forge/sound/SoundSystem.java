@@ -57,9 +57,9 @@ public class SoundSystem {
             final String resource = type.getResourceFileName();
             clip = GuiBase.getInterface().createAudioClip(resource);
             if (clip == null) {
-                clip = emptySound;
-            }
-            loadedClips.put(type, clip);
+                return emptySound;
+            } else
+                loadedClips.put(type, clip);
         }
         return clip;
     }
@@ -85,9 +85,9 @@ public class SoundSystem {
         if (null == clip) { // cache miss
             clip = GuiBase.getInterface().createAudioClip(fileName);
             if (clip == null) {
-                clip = emptySound;
-            }
-            loadedScriptClips.put(fileName, clip);
+                return emptySound;
+            } else
+                loadedScriptClips.put(fileName, clip);
         }
         return clip;
     }
@@ -243,6 +243,7 @@ public class SoundSystem {
             currentTrack.dispose();
             currentTrack = null;
         }
+        invalidateSoundCache();
     }
 
     public void fadeModifier(float value) {
@@ -288,7 +289,13 @@ public class SoundSystem {
     }
 
     public void invalidateSoundCache() {
+        for (IAudioClip c : loadedClips.values()) {
+            c.dispose();
+        }
         loadedClips.clear();
+        for (IAudioClip c : loadedScriptClips.values()) {
+            c.dispose();
+        }
         loadedScriptClips.clear();
     }
 

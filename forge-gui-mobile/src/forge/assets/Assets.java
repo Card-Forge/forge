@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.github.tommyettinger.textra.Font;
 import forge.Forge;
+import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.skin.FSkinProp;
@@ -562,6 +563,12 @@ public class Assets implements Disposable {
                 memoryPerFile.remove(fileName);
                 cardArtCache().clear();
             }
+        }
+
+        @Override
+        public <T> T finishLoadingAsset(String fileName) {
+            FThreads.assertExecutedByEdt(true);
+            return super.finishLoadingAsset(fileName);
         }
 
         public float getMemoryInMegabytes() {

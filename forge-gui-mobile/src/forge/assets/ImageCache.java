@@ -120,7 +120,7 @@ public class ImageCache {
         CardRenderer.clearcardArtCache();
         //unload all cardsLoaded
         for (String fileName : cardsLoaded) {
-            if (Forge.getAssets().manager().contains(fileName)) {
+            if (Forge.getAssets().manager().get(fileName, Texture.class, false) != null) {
                 Forge.getAssets().manager().unload(fileName);
             }
         }
@@ -303,7 +303,7 @@ public class ImageCache {
         String fileName = file.getPath();
         //load to assetmanager
         try {
-            if (!Forge.getAssets().manager().contains(fileName, Texture.class)) {
+            if (Forge.getAssets().manager().get(fileName, Texture.class, false) == null) {
                 Forge.getAssets().manager().load(fileName, Texture.class, Forge.getAssets().getTextureFilter());
                 Forge.getAssets().manager().finishLoadingAsset(fileName);
                 counter += 1;
@@ -367,7 +367,7 @@ public class ImageCache {
         //unload from assetmanager to save RAM
         try {
             for (String asset : toUnload) {
-                if (Forge.getAssets().manager().contains(asset)) {
+                if (Forge.getAssets().manager().get(asset, Texture.class, false) != null) {
                     Forge.getAssets().manager().unload(asset);
                 }
                 cardsLoaded.remove(asset);
