@@ -362,7 +362,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                     }
 
                     if (restrictionsMet) {
-                        player.getManaPool().payManaFromAbility(saPaidFor, InputPayMana.this.manaCost, chosen);
+                        player.getManaPool().payManaFromAbility(saPaidFor, manaCost, chosen);
                     }
                     onManaAbilityPaid();
                 }

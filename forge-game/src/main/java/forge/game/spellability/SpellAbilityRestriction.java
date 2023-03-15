@@ -219,9 +219,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     cp = CardUtil.getLKICopy(c);
                 }
 
-                if (!cp.isBestowed()) {
-                    cp.animateBestow(!cp.isLKI());
-                }
+                cp.animateBestow(!cp.isLKI());
             }
         }
 
