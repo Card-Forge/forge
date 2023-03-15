@@ -448,10 +448,16 @@ public class Cost implements Serializable {
             return new CostExile(splitStr[0], splitStr[1], description, ZoneType.Library);
         }
 
+        if (parse.startsWith("ExileAnyGrave<")) {
+            final String[] splitStr = abCostParse(parse, 3);
+            final String description = splitStr.length > 2 ? splitStr[2] : null;
+            return new CostExile(splitStr[0], splitStr[1], description, ZoneType.Graveyard, -1);
+        }
+
         if (parse.startsWith("ExileSameGrave<")) {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            return new CostExile(splitStr[0], splitStr[1], description, ZoneType.Graveyard, true);
+            return new CostExile(splitStr[0], splitStr[1], description, ZoneType.Graveyard, 0);
         }
 
         if (parse.startsWith("Return<")) {

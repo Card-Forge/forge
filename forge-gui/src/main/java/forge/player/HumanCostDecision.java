@@ -244,7 +244,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         CardCollection list;
-        if (cost.sameZone) {
+        if (cost.zoneRestriction != 1) {
             list = new CardCollection(game.getCardsIn(cost.from));
         } else {
             list = new CardCollection(player.getCardsIn(cost.from));
@@ -275,7 +275,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         if (cost.from == ZoneType.Library) { return exileFromTop(cost, ability, player, c); }
         if (fromTopGrave) { return exileFromTopGraveType(ability, c, list); }
-        if (!cost.sameZone) { return exileFromMiscZone(cost, ability, c, list); }
+        if (cost.zoneRestriction != 0) { return exileFromMiscZone(cost, ability, c, list); }
 
         final FCollectionView<Player> players = game.getPlayers();
         final List<Player> payableZone = new ArrayList<>();

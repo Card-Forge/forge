@@ -173,7 +173,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         if (cost.getFrom().equals(ZoneType.Library)) {
             return PaymentDecision.card(player.getCardsIn(ZoneType.Library, c));
         }
-        else if (cost.sameZone) {
+        else if (cost.zoneRestriction == 0) {
             // TODO Determine exile from same zone for AI
             return null;
         } else {
