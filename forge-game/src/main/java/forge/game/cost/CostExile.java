@@ -46,20 +46,20 @@ public class CostExile extends CostPartWithList {
      */
     private static final long serialVersionUID = 1L;
     public final ZoneType from;
-    public final boolean sameZone;
+    public final int zoneRestriction;
 
     public final ZoneType getFrom() {
         return this.from;
     }
 
     public CostExile(final String amount, final String type, final String description, final ZoneType from) {
-        this(amount, type, description, from, false);
+        this(amount, type, description, from, 1);
     }
 
-    public CostExile(final String amount, final String type, final String description, final ZoneType from, final boolean sameZone) {
+    public CostExile(final String amount, final String type, final String description, final ZoneType from, final int zoneMode) {
         super(amount, type, description);
         this.from = from != null ? from : ZoneType.Battlefield;
-        this.sameZone = sameZone;
+        this.zoneRestriction = zoneMode;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class CostExile extends CostPartWithList {
         final Game game = source.getGame();
 
         CardCollectionView typeList;
-        if (this.sameZone) {
+        if (zoneRestriction != 1) {
             typeList = game.getCardsIn(this.from);
         } else {
             typeList = payer.getCardsIn(this.from);
@@ -105,15 +105,21 @@ public class CostExile extends CostPartWithList {
         }
 
         if (!desc.equals("Card") && !desc.contains("card")) {
-            if (this.sameZone) {
-                return String.format("Exile %s from the same %s", Lang.nounWithNumeralExceptOne(this.getAmount(),
-                        desc + " card"), origin);
+            StringBuilder sb = new StringBuilder();
+            sb.append("Exile %s from ");
+            if (zoneRestriction == 0) {
+                sb.append("the same");
+            } else if (zoneRestriction == -1) {
+                sb.append("a");
+            } else {
+                sb.append("your");
             }
-            return String.format("Exile %s from your %s", Lang.nounWithNumeralExceptOne(this.getAmount(),
+            sb.append(" %s");
+            return String.format(sb.toString(), Lang.nounWithNumeralExceptOne(this.getAmount(),
                     desc + " card"), origin);
         }
 
-        if (this.sameZone) {
+        if (zoneRestriction == 0) {
             return String.format("Exile %s from the same %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
         }
 
@@ -143,7 +149,7 @@ public class CostExile extends CostPartWithList {
         }
 
         CardCollectionView list;
-        if (this.sameZone) {
+        if (zoneRestriction != 1) {
             list = game.getCardsIn(this.from);
         } else {
             list = payer.getCardsIn(this.from);
@@ -168,7 +174,7 @@ public class CostExile extends CostPartWithList {
             return false;
         }
 
-        if (this.sameZone) {
+        if (zoneRestriction == 0) {
             boolean foundPayable = false;
             FCollectionView<Player> players = game.getPlayers();
             for (Player p : players) {
