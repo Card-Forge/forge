@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -258,23 +257,13 @@ public class Controls {
 
     static public Skin getSkin() {
         FileHandle skinFile = Config.instance().getFile(Paths.SKIN);
-        if (!Forge.getAssets().manager().contains(skinFile.path(), Skin.class)) {
+        Skin skin = Forge.getAssets().manager().get(skinFile.path(), Skin.class, false);
+        if (skin == null) {
             Forge.getAssets().manager().load(skinFile.path(), Skin.class);
             Forge.getAssets().manager().finishLoadingAsset(skinFile.path());
-            FileHandle atlasFile = skinFile.sibling(skinFile.nameWithoutExtension() + ".atlas");
-            Forge.getAssets().manager().load(atlasFile.path(), TextureAtlas.class);
-            Forge.getAssets().manager().finishLoadingAsset(atlasFile.path());
-            /*/font skin will load the LanaPixel.fnt now
-            FileHandle pixelFont = Config.instance().getFile(Paths.SKIN).sibling("LanaPixel.fnt");
-            Forge.getAssets().manager().load(pixelFont.path(), BitmapFont.class);
-            Forge.getAssets().manager().finishLoadingAsset(pixelFont.path());
-            Forge.getAssets().manager().get(skinFile.path(), Skin.class).add("default", Forge.getAssets().manager().get(pixelFont.path(), BitmapFont.class), BitmapFont.class);
-            Forge.getAssets().manager().get(skinFile.path(), Skin.class).addRegions(Forge.getAssets().manager().get(atlasFile.path(), TextureAtlas.class));
-            Forge.getAssets().manager().finishLoadingAsset(skinFile.path());
-            */
-
+            skin = Forge.getAssets().manager().get(skinFile.path(), Skin.class, false);
         }
-        return Forge.getAssets().manager().get(skinFile.path(), Skin.class);
+        return skin;
     }
 
     public static Label newLabel(String name) {

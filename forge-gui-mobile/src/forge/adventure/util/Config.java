@@ -217,11 +217,13 @@ public class Config {
 
     public TextureAtlas getAtlas(String spriteAtlas) {
         String fileName = getFile(spriteAtlas).path();
-        if (!Forge.getAssets().manager().contains(fileName, TextureAtlas.class)) {
+        TextureAtlas atlas = Forge.getAssets().manager().get(fileName, TextureAtlas.class, false);
+        if (atlas == null) {
             Forge.getAssets().manager().load(fileName, TextureAtlas.class);
             Forge.getAssets().manager().finishLoadingAsset(fileName);
+            atlas = Forge.getAssets().manager().get(fileName, TextureAtlas.class, false);
         }
-        return Forge.getAssets().manager().get(fileName);
+        return atlas;
     }
     public SettingData getSettingData()
     {

@@ -114,21 +114,22 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (StringUtils.isBlank(imageKey))
             return;
         File imageFile = ImageKeys.getImageFile(imageKey);
-        if (imageFile == null)
+        if (imageFile == null || !imageFile.exists())
             return;
-        if (!Forge.getAssets().manager().contains(imageFile.getPath())) {
+        Texture replacement = Forge.getAssets().manager().get(imageFile.getPath(), Texture.class, false);
+        if (replacement == null) {
             try {
                 Forge.getAssets().manager().load(imageFile.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
                 Forge.getAssets().manager().finishLoadingAsset(imageFile.getPath());
-                count += 1;
+                replacement = Forge.getAssets().manager().get(imageFile.getPath(), Texture.class, false);
             } catch (Exception e) {
                 //e.printStackTrace();
                 return;
             }
         }
-        Texture replacement = Forge.getAssets().manager().get(imageFile.getPath(), Texture.class, false);
         if (replacement == null)
             return;
+        count += 1;
         image = replacement;
         loaded = true;
         if (toolTipImage != null) {
@@ -169,13 +170,14 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     File frontFace = ImageKeys.getImageFile(card.getCardImageKey());
                     if (frontFace != null) {
                         try {
-                            if (!Forge.getAssets().manager().contains(frontFace.getPath())) {
+                            Texture front = Forge.getAssets().manager().get(frontFace.getPath(), Texture.class, false);
+                            if (front == null) {
                                 Forge.getAssets().manager().load(frontFace.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
                                 Forge.getAssets().manager().finishLoadingAsset(frontFace.getPath());
-                                count += 1;
+                                front = Forge.getAssets().manager().get(frontFace.getPath(), Texture.class, false);
                             }
-                            Texture front = Forge.getAssets().manager().get(frontFace.getPath(), Texture.class, false);
                             if (front != null) {
+                                count += 1;
                                 setCardImage(front);
                             } else {
                                 loaded = false;
@@ -194,13 +196,14 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         File backFace = ImageKeys.getImageFile(cardBack.getCardAltImageKey());
                         if (backFace != null) {
                             try {
-                                if (!Forge.getAssets().manager().contains(backFace.getPath())) {
+                                Texture back = Forge.getAssets().manager().get(backFace.getPath(), Texture.class, false);
+                                if (back == null) {
                                     Forge.getAssets().manager().load(backFace.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
                                     Forge.getAssets().manager().finishLoadingAsset(backFace.getPath());
-                                    ImageCache.updateSynqCount(backFace, 1);
+                                    back = Forge.getAssets().manager().get(backFace.getPath(), Texture.class, false);
                                 }
-                                Texture back = Forge.getAssets().manager().get(backFace.getPath(), Texture.class, false);
                                 if (back != null) {
+                                    ImageCache.updateSynqCount(backFace, 1);
                                     if (holdTooltip != null) {
                                         if (holdTooltip.tooltip_actor.getChildren().size <= 2) {
                                             holdTooltip.tooltip_actor.altcImage = new RewardImage(processDrawable(back));
@@ -230,13 +233,14 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     int count = 0;
                     if (lookup != null) {
                         try {
-                            if (!Forge.getAssets().manager().contains(lookup.getPath())) {
+                            Texture replacement = Forge.getAssets().manager().get(lookup.getPath(), Texture.class, false);
+                            if (replacement == null) {
                                 Forge.getAssets().manager().load(lookup.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
                                 Forge.getAssets().manager().finishLoadingAsset(lookup.getPath());
-                                count += 1;
+                                replacement = Forge.getAssets().manager().get(lookup.getPath(), Texture.class, false);
                             }
-                            Texture replacement = Forge.getAssets().manager().get(lookup.getPath(), Texture.class, false);
                             if (replacement != null) {
+                                count += 1;
                                 setCardImage(replacement);
                             } else {
                                 loaded = false;
