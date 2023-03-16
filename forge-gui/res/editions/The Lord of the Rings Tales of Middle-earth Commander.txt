@@ -7,7 +7,9 @@ ScryfallCode=LTC
 
 [cards]
 7 M Sam, Loyal Attendant @Campbell White
-66 R Radagast, Wizard of the Wilds @Tomas Duchek
+66 R Radagast, Wizard of Wilds @Tomas Duchek
+90 M Sam, Loyal Attendant @Campbell White
+147 R Radagast, Wizard of Wilds @Tomas Duchek
 284 U Sol Ring @L J Koh
 348 M The Great Henge @Jeremy Paillotin
 350 M Ensnaring Bridge @Stephen Stark
