@@ -132,6 +132,10 @@ public class RewardScene extends UIScene {
         ImageCache.unloadCardTextures(true);
         Forge.switchToLast();
     }
+    public void reactivateInputs() {
+        Gdx.input.setInputProcessor(stage);
+        doneButton.toFront();
+    }
     public boolean done() {
         return done(false);
     }

@@ -32,6 +32,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
 import forge.adventure.data.ItemData;
+import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.assets.FSkin;
 import forge.assets.ImageCache;
@@ -139,10 +140,14 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             toolTipImage.remove();
             toolTipImage = new RewardImage(processDrawable(image));
             if (GuiBase.isAndroid() || Forge.hasGamepad()) {
+                if (shown) {
+                    holdTooltip.getTouchDownTarget().fire(RewardScene.eventTouchUp());
+                    Gdx.input.setInputProcessor(null);
+                }
                 if (holdTooltip.getImage() != null && holdTooltip.getImage().getDrawable() instanceof TextureRegionDrawable) {
                     ((TextureRegionDrawable) holdTooltip.getImage().getDrawable()).getRegion().getTexture().dispose();
                 }
-                holdTooltip.tooltip_actor.clear();
+                holdTooltip.hide();
                 holdTooltip.tooltip_actor = new ComplexTooltip(toolTipImage);
             } else {
                 tooltip.setActor(new ComplexTooltip(toolTipImage));
@@ -153,6 +158,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (alternate && Talt != null)
             Talt.dispose();
         ImageCache.updateSynqCount(imageFile, count);
+        RewardScene.instance().reactivateInputs();
         Gdx.graphics.requestRendering();
     }
 
