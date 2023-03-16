@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="185">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="197">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -7,7 +7,7 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="17" name="Collision" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJzVlWEKwyAMhWX/9qcMtt1kZ9g9dtjdp0cYYQRciM9YY6YPQq3V9OORaEp+ep5TOt3rQetqwfnQd09uKxOvb907ivt1+w1tjTZuZY/gzt8RdylnJDeNt8s3eF6yWv8fyc3MFKRVuLWxtv6x4RhRJ1o+Wd+oR4kL6R/cFs3G3bJ/D+T26gviGsHtce6jOzLvP425l1sK1QL7V8ot50vc/O2ob+gutgj5jbh7z0Fe97769Qb3Y35+a+rh3hPuHasQW2l+Bu6SNB50HkRws5fofmGGvF5qXvdwU717cCNPZvdbnuP8PMpNnjK3R51b6tYaFnn1ZTS3l6K4W/Z6Mo30W+Me7fEobpl3Fb9XrZPI+AC1E7ck
+   eJzVlVEOwjAIhhvffFlM1Jt4Bu/hYb3PjmDIJKkEKKwFOxKyWij7JH9ZKePseS7ldNcdciyO9bT4SG4rE+Z7z0Zxv26/zuVway97Bnf9W+OWamZyw3q5bI77lNX6/kxuZAYHOwo3stZrLv+x6B6hE64e1bd2R4FLs39wW2w2bs/5NYDb+y3wzlzgyua2mna2vn8ccy83NU0L2D+pNt2XuDE2itvbc5pr5R7Rb/D31a9lLb5+41H9hvrc3emdRTWbtN/ibvUlktvLQ/OkmhZuWkd6Su8Aq/XS6nUPN+hd4m7t16bN79n7Tec4PkdwU/49+vbMo159lzLuXmZze2MzcLfORjB5uC1sWr/3/vce7j3W6nckcyR3hk6OyP0BqjbOBA==
   </data>
  </layer>
  <layer id="18" name="Tilelaag 5" width="46" height="28">
@@ -22,7 +22,7 @@
  </layer>
  <layer id="15" name="Tilelaag 3" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMAoQIFEEgUfBKCAGtIjTRw+xoI4XlUYG/ySxiw8UIDYcsLl5MPljKIHBll6HA6AkfA5J4OejA1U0eTUJCKY3WCmKnz9YgbIEfj46gIXvaB4YBaNgFIyC4Q8A5qUORg==
+   eJxjYBgFo2AUjIJRMAoQIFEEgUfBKCAGtIjTRw+xoI4XlUYG/ySxiw8UIDYcsLl5MPljKAFapr2hCkQkKNNPSZgeksDPRweqaPJqEhBMb7BSFD9/sAJlCfx8dAAL39F8MwpGwSgYBcMfAADf2A3X
   </data>
  </layer>
  <layer id="16" name="Tilelaag 4" width="46" height="28">
@@ -30,7 +30,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBhAIDqQlo+CgQQOPAPtglGADCzFBtoFIxtoM0LwYAAf2SG0oBym3Fde+rplOID/ItjFrQdRnitUgWBOVQQGgaPCCAwCP6EYHbxjJ2wHNn2UApCbYW7DBk5ikZsFrHsW8EBoZL3IbOR0LsoGobHlB3IByN3YQIs4phjMXmR3/5FkYGBTw2/HDyxizMwkORMFzKFTe02cjT72IIMVohBMbfCL+kbiBZSm0WN48hKpgJBbDkmg0oTEsQFy601KwmmlKCqtKYHK14LysZU9DmhlfhyZbsFX5uECyhKoNLo4qYDeaXsUjAJ0MG+QjyG4cRInNhTAqLvpCwaDuwFboCsq
+   eJxjYBhAIDqQlo+CgQQOPAPtglGADCzFBtoFIxtoM0LwYAAf2SG0oBym3Fde+rplOID/ItjFrQdRnitUgWBOVQQGgaPCCAwCP6EYHbxjJ2wHNn2UApCbYW7DBk5ikZsFrHsW8EBoZL3IbOR0LsoGobHlB3IByN3YQIs4phjMXmR3/5FkYGBTw2/HDyxizMwkORMFzKFTe02cjT720AP8orN9lKbRxVSMY0JuOSSBShMSxwbIrTcpCaeVoqi0pgQqXwvKx1b2OKCV+XFkugVfmYcLKEug0ujipAJ6p+1RMArQwbxBPobgxkmc2FAAo+6mLxgM7gYA5lspjw==
   </data>
  </layer>
  <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="2.65789" offsety="6.89474">
@@ -46,23 +46,27 @@
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="118" template="../obj/enemy.tx" x="463.526" y="279.912">
-   <properties>
-    <property name="enemy" value="Devil"/>
-    <property name="spawn.Easy" type="bool" value="true"/>
-    <property name="threatRange" type="int" value="20"/>
-    <property name="waypoints" value="175,176,177,176"/>
-   </properties>
-  </object>
-  <object id="119" template="../obj/enemy.tx" x="349.864" y="185.274">
+  <object id="119" template="../obj/enemy.tx" x="348.198" y="185.94">
    <properties>
     <property name="enemy" value="Torturer"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Torturer's Key&quot;
+  }
+]
+</property>
     <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="136" template="../obj/enemy.tx" x="323.191" y="253.24">
+  <object id="136" template="../obj/enemy.tx" x="434.191" y="249.907">
    <properties>
     <property name="enemy" value="Devil"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="196,185,186,185"/>
    </properties>
   </object>
   <object id="141" template="../obj/treasure.tx" x="545.836" y="124.508">
@@ -81,27 +85,31 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="150" template="../obj/enemy.tx" x="389.009" y="137.772">
+  <object id="150" template="../obj/enemy.tx" x="372.676" y="109.772">
    <properties>
     <property name="enemy" value="Necromancer"/>
     <property name="spawn.Hard" type="bool" value="true"/>
     <property name="threatRange" type="int" value="60"/>
-    <property name="waypoints" value="180,183,181,182,183"/>
+    <property name="waypoints" value="183,181,182,181"/>
    </properties>
   </object>
-  <object id="161" template="../obj/entry_up.tx" x="468.679" y="104.903">
+  <object id="161" template="../obj/entry_up.tx" x="464.012" y="105.236">
    <properties>
     <property name="teleport" value="maps/map/tibalt_f2.tmx"/>
    </properties>
   </object>
   <object id="166" template="../obj/enemy.tx" x="56.8421" y="320.605">
    <properties>
-    <property name="enemy" value="Encaged Demon"/>
+    <property name="enemy" value="Demon"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="191,190"/>
    </properties>
   </object>
   <object id="167" template="../obj/enemy.tx" x="162.342" y="302.105">
    <properties>
-    <property name="enemy" value="Encaged Demon"/>
+    <property name="enemy" value="Demon"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="192,193,194,195"/>
    </properties>
   </object>
   <object id="168" template="../obj/gold.tx" x="584.842" y="148.605"/>
@@ -110,76 +118,12 @@
   <object id="171" template="../obj/gold.tx" x="586.842" y="164.105"/>
   <object id="172" template="../obj/manashards.tx" x="317.675" y="40.7719"/>
   <object id="173" template="../obj/manashards.tx" x="412.342" y="216.105"/>
-  <object id="174" template="../obj/manashards.tx" x="509.342" y="169.105"/>
-  <object id="175" name="switch" class="dialog" gid="5223" x="30.6754" y="280.106" width="16" height="16">
-   <properties>
-    <property name="dialog">[
-  { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded upon the wall&quot;, 
-    &quot;options&quot;:[ 
-	{ 
-		&quot;text&quot;:&quot;You hear some loud sounds from the east&quot;,
-		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
-		&quot;name&quot;:&quot;flip the switch&quot; 
-			&quot;options&quot;:[{
-			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
-			&quot;action&quot;:[{&quot;deleteMapObject&quot;:18}],
-			&quot;name&quot;:&quot;ok&quot; }]
-	},
-	{ &quot;name&quot;:&quot;go away&quot; } 	
-	] 
-	} 
-	
-]</property>
-   </properties>
-  </object>
-  <object id="176" name="switch" class="dialog" gid="5223" x="428.342" y="201.772" width="16" height="16">
-   <properties>
-    <property name="dialog">[
-  { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall&quot;, 
-    &quot;options&quot;:[ 
-	{ 
-		&quot;text&quot;:&quot;You hear some loud sounds from the east&quot;,
-		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
-		&quot;name&quot;:&quot;flip the switch&quot; 
-			&quot;options&quot;:[{
-			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
-			&quot;action&quot;:[{&quot;deleteMapObject&quot;:18}],
-			&quot;name&quot;:&quot;ok&quot; }]
-	},
-	{ &quot;name&quot;:&quot;go away&quot; } 	
-	] 
-	} 
-	
-]</property>
-   </properties>
-  </object>
-  <object id="177" name="switch" class="dialog" gid="5223" x="125.008" y="361.772" width="16" height="16">
-   <properties>
-    <property name="dialog">[
-  { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall&quot;, 
-    &quot;options&quot;:[ 
-	{ 
-		&quot;text&quot;:&quot;You hear some loud sounds from the east&quot;,
-		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
-		&quot;name&quot;:&quot;flip the switch&quot; 
-			&quot;options&quot;:[{
-			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
-			&quot;action&quot;:[{&quot;deleteMapObject&quot;:18}],
-			&quot;name&quot;:&quot;ok&quot; }]
-	},
-	{ &quot;name&quot;:&quot;go away&quot; } 	
-	] 
-	} 
-	
-]</property>
-   </properties>
-  </object>
-  <object id="178" template="../obj/enemy.tx" x="280.675" y="345.439">
+  <object id="174" template="../obj/manashards.tx" x="511.009" y="169.105"/>
+  <object id="178" template="../obj/enemy.tx" x="339.342" y="334.439">
    <properties>
     <property name="enemy" value="Devil"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="188,189,187,189"/>
    </properties>
   </object>
   <object id="179" template="../obj/booster.tx" x="570.009" y="124.105">
@@ -207,19 +151,36 @@
 </property>
    </properties>
   </object>
-  <object id="180" template="../obj/waypoint.tx" x="354.675" y="142.772"/>
   <object id="181" template="../obj/waypoint.tx" x="423.342" y="49.4386"/>
   <object id="182" template="../obj/waypoint.tx" x="338.342" y="49.4386"/>
-  <object id="183" template="../obj/waypoint.tx" x="467.675" y="140.105"/>
-  <object id="184" template="../obj/gate.tx" x="574.009" y="267.772">
+  <object id="183" template="../obj/waypoint.tx" x="421.008" y="138.105"/>
+  <object id="184" template="../obj/gate.tx" x="574.009" y="280.439" width="15.3333" height="13.3333">
    <properties>
-    <property name="dialog">[
-  {
-    &quot;text&quot;:&quot;This gate appears to be locked in place by some mechanism, but you do not see any controls here.&quot;,
-    &quot;options&quot;:[ { &quot;name&quot;:&quot;Time to find them. Again...&quot; } ]
-  }
-]</property>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This door is locked&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;go away&quot; },
+    {      
+        &quot;name&quot;:&quot;unlock with Torturer's key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Torturer's Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Torturer's Key&quot;}]} ]
+    }
+    ]
+}]</property>
    </properties>
   </object>
+  <object id="185" template="../obj/waypoint.tx" x="486.342" y="253.772"/>
+  <object id="186" template="../obj/waypoint.tx" x="486.675" y="307.772"/>
+  <object id="187" template="../obj/waypoint.tx" x="242.009" y="253.105"/>
+  <object id="188" template="../obj/waypoint.tx" x="405.675" y="356.105"/>
+  <object id="189" template="../obj/waypoint.tx" x="244.009" y="352.772"/>
+  <object id="190" template="../obj/waypoint.tx" x="35.3421" y="369.105"/>
+  <object id="191" template="../obj/waypoint.tx" x="63.3421" y="289.439"/>
+  <object id="192" template="../obj/waypoint.tx" x="138.675" y="258.105"/>
+  <object id="193" template="../obj/waypoint.tx" x="200.009" y="289.439"/>
+  <object id="194" template="../obj/waypoint.tx" x="202.009" y="355.105"/>
+  <object id="195" template="../obj/waypoint.tx" x="130.009" y="360.105"/>
+  <object id="196" template="../obj/waypoint.tx" x="344.342" y="253.772"/>
  </objectgroup>
 </map>

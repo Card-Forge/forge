@@ -1,10 +1,2 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<template>
- <tileset firstgid="1" source="../tileset/buildings.tsx"/>
- <object name="entryDown" type="entry" gid="1073743055" width="16" height="16">
-  <properties>
-   <property name="direction" value="down"/>
-   <property name="teleport" value=""/>
-  </properties>
- </object>
-</template>
+[\n  {\n    "text":"This gate appears to be locked in place by some mechanism, but you do not see any controls here.",\n    "options":[ { "name":"Time to find them. Again..." } ]\n  }\n]
+[\n  { \n    "text":"Hmm a big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.", \n    "options":[ \n	{ "name":"go away" } 	\n	] \n	} \n	\n]

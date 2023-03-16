@@ -3362,17 +3362,37 @@
 	"speed": 23,
 	"life": 12,
 	"rewards": [
-		{
+	{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4
+			"addMaxCount": 8
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
-			"count": 10,
-			"addMaxCount": 90
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "card",
@@ -4116,6 +4136,55 @@
 	"colors": "G"
 },
 {
+	"name": "Eye",
+	"sprite": "sprites/dungeon/eye.atlas",
+	"deck": [
+		"decks/eye.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"scale":0.80,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 25,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "B" 
+},
+{
 	"name": "Faerie",
 	"sprite": "sprites/pixie_2.atlas",
 	"deck": [
@@ -4555,6 +4624,55 @@
 		}
 	],
 	"colors": "WU"
+},
+{
+	"name": "Fungus",
+	"sprite": "sprites/dungeon/fungus.atlas",
+	"deck": [
+		"decks/fungus.json"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"scale": 0.75,
+	"life": 10,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "G" 
 },
 {
 	"name": "Gargoyle",
@@ -5038,7 +5156,7 @@
 	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.8,
-	"speed": 31,
+	"speed": 15,
 	"life": 50,
 	"rewards": [
 	{
@@ -5072,31 +5190,31 @@
 		},
 				{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Thalia and The Gitrog Monster"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Damnation"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Gitrog, Horror of Zhava"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Froghemoth"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Yargle and Multani"
 		},
@@ -5104,7 +5222,7 @@
 			"type": "item",
 			"probability": 1,
 			"count": 1,
-			"itemName": "Grolnok's poisonous skin"
+			"itemName": "Grolnok's Skin"
 		}
 	],
 	"colors": "BGU"
@@ -5195,7 +5313,7 @@
 		{
 			"type": "card",
 			"probability": 0.5,
-			"count": 1,
+			"count": 4,
 			"rarity": [
 				"Rare"
 			]
@@ -5208,207 +5326,6 @@
 		}
 	],
 	"colors": "R"
-},
-{
-	"name": "Pirate",
-	"sprite": "sprites/pirate.atlas",
-	"deck": [
-		"decks/pirate.dck"
-	],
-	"ai": "",
-	"flying": false,
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 24,
-	"life": 16,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"Common"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"rarity": [
-				"Rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 30,
-			"addMaxCount": 100
-		},
-    {
-			"type": "card",
-			"probability": 0.5,
-			"count": 2,
-			"colors": [
-				"Red"
-			]
-		},
-    {
-			"type": "card",
-			"probability": 0.5,
-			"count": 1,
-			"colors": [
-				"Blue"
-			]
-		}
-	],
-	"colors": "UR"
-},
-{
-	"name": "Ooze",
-	"sprite": "sprites/dungeon/ooze.atlas",
-	"scale": 0.6,
-	"deck": [
-		"decks/ooze.json"
-	],
-	"ai": "",
-	"flying": false,
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 15,
-	"life": 12,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"Common"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"rarity": [
-				"Rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 30,
-			"addMaxCount": 100
-		},
-    {
-			"type": "card",
-			"probability": 0.5,
-			"count": 2,
-			"colors": [
-				"Green"
-			]
-		},
-    {
-			"type": "card",
-			"probability": 0.5,
-			"count": 1,
-			"colors": [
-				"Blue"
-			]
-		}
-	],
-	"colors": "UG"
-},
-{
-	"name": "Ooze Boss",
-	"sprite": "sprites/dungeon/oozeboss.atlas",
-	"scale": 0.5,
-	"deck": [
-		"decks/miniboss/ooze_boss.dck"
-	],
-	"boss": true,
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 23,
-	"life": 30,
-	"rewards": [
-		{
-			"type": "item",
-			"probability": 1,
-			"count": 1,
-			"itemName": "Slime-Covered Boots"
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 500,
-			"addMaxCount": 500
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Experiment Kraj"
-		},
-				{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "The Mimeoplasm"
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Dark Ritual"
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Biogenic Ooze"
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Gelatinous Cube"
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Scavenging Ooze"
-		}		
-	],
-	"colors": "GB"
 },
 {
 	"name": "Goblin",
@@ -5687,7 +5604,7 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
+				"uncommon"
 			]
 		},
 		{
@@ -5760,7 +5677,7 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
+				"uncommon"
 			]
 		},
 		{
@@ -5833,7 +5750,7 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
+				"uncommon"
 			]
 		},
 		{
@@ -5979,7 +5896,7 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
+				"uncommon"
 			]
 		},
 		{
@@ -6127,7 +6044,7 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
+				"uncommon"
 			]
 		},
 		{
@@ -6603,27 +6520,36 @@
 	"scale": 0.5,
 	"life": 14,
 	"rewards": [
-		{
+	{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4
-		},
-		{
-			"type": "gold",
-			"probability": 0.7,
-			"count": 10,
-			"addMaxCount": 90
+			"addMaxCount": 8
 		},
 		{
 			"type": "card",
 			"probability": 0.5,
-			"count": 2,
-			"colors": [
-				"White"
-			],
+			"count": 1,
 			"rarity": [
-				"Mythic Rare"
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
 			]
 		}
 	],
@@ -6886,6 +6812,24 @@
 			"rarity": [
 				"Mythic Rare"
 			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		}
 	],
 	"colors": "WBG"
@@ -6974,49 +6918,49 @@
 	"scale": 0.5,
 	"difficulty": 0.1,
 	"speed": 30,
-	"life": 24,
+	"life": 40,
 	"rewards": [
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Jace, the Mind Sculptor"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Jace, the Perfected Mind"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Jace's Defeat"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Treasure Cruise"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Castaway's Despair"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Counterspell"
 		},
 		{
 			"type": "gold",
 			"probability": 1,
-			"count": 100,
-			"addMaxCount": 900
+			"count": 1000,
+			"addMaxCount": 5000
 		},
 		{
 			"type": "item",
@@ -7045,7 +6989,7 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
+				"uncommon"
 			]
 		},
 		{
@@ -7186,7 +7130,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
-	"life": 25,
+	"life": 40,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -7202,48 +7146,48 @@
 		{
 			"type": "gold",
 			"probability": 1,
-			"count": 500,
-			"addMaxCount": 1000
+			"count": 1000,
+			"addMaxCount": 5000
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Bident of Thassa"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Kiora, the Tide's Fury"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Kiora, the Crashing Wave"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Kiora Bests the Sea God"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Kiora, Behemoth Beckoner"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Kiora, Master of the Depths"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 4,
 			"cardName": "Kiora's Follower"
 		},
@@ -7307,31 +7251,37 @@
 	"scale": 0.75,
 	"life": 12,
 	"rewards": [
-		{
+	{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
+			"addMaxCount": 8
 		},
 		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
 			"rarity": [
-				"uncommon",
-				"rare"
+				"Rare"
 			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		}
 	],
 	"colors": "RB"
@@ -7346,65 +7296,38 @@
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 15,
-	"rewards": [
-		{
+	"rewards":[
+	{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
+			"addMaxCount": 8
 		},
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 0.5,
 			"count": 1,
-			"addMaxCount": 2,
 			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
+				"Rare"
 			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		}
 	],
 	"colors": "RW"
@@ -8294,49 +8217,49 @@
 	"scale": 0.5,
 	"difficulty": 0.1,
 	"speed": 30,
-	"life": 35,
+	"life": 40,
 	"rewards": [
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Nahiri, Heir of the Ancients"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Embercleave"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Skullclamp"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Lightning Bolt"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Wheel of Fortune"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Sword of Fire and Ice"
 		},
 		{
 			"type": "gold",
 			"probability": 1,
-			"count": 100,
-			"addMaxCount": 900
+			"count": 1000,
+			"addMaxCount": 5000
 		},
 		{
 			"type": "item",
@@ -8346,6 +8269,247 @@
 		}
 	],
 	"colors": "RW"
+},
+{ 
+	"name": "Necromancer",
+	"sprite": "sprites/black_wiz2.atlas",
+	"deck": [
+		"decks/reanimator.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 31,
+	"life": 20,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 3,
+			"addMaxCount": 6
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 4,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 3,
+			"rarity": [
+				"uncomon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		}
+	],
+	"colors": "B"
+},
+{
+	"name": "Ooze",
+	"sprite": "sprites/dungeon/ooze.atlas",
+	"scale": 0.6,
+	"deck": [
+		"decks/ooze.json"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 12,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "UG"
+},
+{
+	"name": "Ooze Boss",
+	"sprite": "sprites/dungeon/oozeboss.atlas",
+	"scale": 0.5,
+	"deck": [
+		"decks/miniboss/ooze_boss.dck"
+	],
+	"boss": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 23,
+	"life": 30,
+	"rewards": [
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Slime-Covered Boots"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 1000,
+			"addMaxCount": 5000
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Experiment Kraj"
+		},
+				{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "The Mimeoplasm"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Dark Ritual"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Biogenic Ooze"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Gelatinous Cube"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Scavenging Ooze"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Rampant Growth"	
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Cultivate"
+		}	
+	],
+	"colors": "GB"
+},
+{
+	"name": "Pirate",
+	"sprite": "sprites/pirate.atlas",
+	"deck": [
+		"decks/pirate.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 16,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"Common"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 30,
+			"addMaxCount": 100
+		},
+   		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Red"
+			]
+		},
+    	{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"Blue"
+			]
+		 }
+	],
+		"colors": "UR"
 },
 {
 	"name": "Phoenix",
@@ -8442,74 +8606,6 @@
 		}
 	],
 	"colors": "R"
-},
-{
-	"name": "Pirate",
-	"sprite": "sprites/pirate.atlas",
-	"deck": [
-		"decks/pirate.dck"
-	],
-	"ai": "",
-	"flying": false,
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 24,
-	"life": 16,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"Common"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"rarity": [
-				"Rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 30,
-			"addMaxCount": 100
-		},
-    {
-			"type": "card",
-			"probability": 0.5,
-			"count": 2,
-			"colors": [
-				"Red"
-			]
-		},
-    {
-			"type": "card",
-			"probability": 0.5,
-			"count": 1,
-			"colors": [
-				"Blue"
-			]
-		}
-	],
-	"colors": "UR"
 },
 {
 	"name": "Rakdos Devil",
@@ -8847,64 +8943,37 @@
 	"scale": 0.35,
 	"life": 13,
 	"rewards": [
-		{
+	{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
+			"addMaxCount": 8
 		},
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 0.5,
 			"count": 1,
-			"addMaxCount": 2,
 			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
+				"Rare"
 			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		}
 	],
 	"colors": "U"
@@ -8918,8 +8987,9 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
+	"flying": true,
 	"scale": 0.40,
-	"life": 35,
+	"life": 40,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -8928,13 +8998,13 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
+				"uncommon"
 			]
 		},
 		{
 			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
+			"probability": 1,
+			"count": 2,
 			"rarity": [
 				"rare"
 			],
@@ -8944,27 +9014,27 @@
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Reaper King"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
 			"cardName": "Wickerwing Effigy"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Pili-Pala"
 		},
 		{
 			"type": "gold",
-			"probability": 0.3,
-			"count": 100,
-			"addMaxCount": 500
+			"probability": 1,
+			"count": 1000,
+			"addMaxCount": 5000
 		},
 		{
 			"type": "item",
@@ -9184,7 +9254,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
-	"life": 25,
+	"life": 40,
 	"rewards": [
 	{
 			"type": "deckCard",
@@ -9200,42 +9270,42 @@
 		{
 			"type": "gold",
 			"probability": 1,
-			"count": 500,
-			"addMaxCount": 1000
+			"count": 1000,
+			"addMaxCount": 5000
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Tendershoot Dryad"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Slimefoot, Thallid Transplant"
 		},
 				{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Ghave, Guru of Spores"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Corpsejack Menace"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Mycoloth"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Doubling Season"
 		},
@@ -9298,8 +9368,8 @@
 		{
 			"type": "gold",
 			"probability": 1,
-			"count": 500,
-			"addMaxCount": 1000
+			"count": 1000,
+			"addMaxCount": 5000
 		},
 		{
 			"type": "card",
@@ -9341,7 +9411,7 @@
 			"type": "item",
 			"probability": 1,
 			"count": 1,
-			"itemName": "Slobad's Trinket"
+			"itemName": "Slobad's Iron Boots"
 		}
 	],
 	"colors": "R"
@@ -9699,7 +9769,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
-	"life": 50,
+	"life": 40,
 	"rewards": [
 	{
 			"type": "card",
@@ -9715,8 +9785,8 @@
 		{
 			"type": "gold",
 			"probability": 1,
-			"count": 500,
-			"addMaxCount": 1000
+			"count": 1000,
+			"addMaxCount": 5000
 		},
 		{
 			"type": "card",
@@ -9764,11 +9834,108 @@
 			"type": "item",
 			"probability": 1,
 			"count": 1,
-			"itemName": "Tibalt's Box of Tricks"
+			"itemName": "Tibalt's Bag of Tricks"
 		}
 	],
 	"colors": "R"
-
+},
+{
+	"name": "Torturer",
+	"sprite": "sprites/dungeon/torturer.atlas",
+	"deck": [
+		"decks/torturer.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"scale":0.5,
+	"difficulty": 0.1,
+	"speed": 20,
+	"life": 30,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "B" 
+},
+{
+	"name": "Turtle",
+	"sprite": "sprites/dungeon/turtle.atlas",
+	"deck": [
+		"decks/turtle.json"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 5,
+	"scale":0.80,
+	"life": 10,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "U" 
 },
 {
 	"name": "Treefolk",
@@ -10828,56 +10995,56 @@
 		{
 			"type": "gold",
 			"probability": 1,
-			"count": 500,
-			"addMaxCount": 1000
+			"count": 100,
+			"addMaxCount": 5000
 		},
 		{
 			"type": "card",
 			"probability": 1,
 			"count": 1,
-			"cardName": "Grolnok, the Omnivore"
+			"cardName": "Luminous Broodmoth"
 		},
 		{
 			"type": "card",
 			"probability": 0.50,
 			"count": 1,
-			"cardName": "The Gitrog Monster"
+			"cardName": "Zask, Skittering Swarmlord"
 		},
 				{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
-			"cardName": "Thalia and The Gitrog Monster"
+			"cardName": "Mazirek, Kraul Death Priest"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
-			"cardName": "Damnation"
+			"cardName": "Scute Swarm"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
-			"cardName": "Gitrog, Horror of Zhava"
+			"cardName": "Fatal Push"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
-			"cardName": "Froghemoth"
+			"cardName": "Grist, the Hunger Tide"
 		},
 		{
 			"type": "card",
-			"probability": 1,
+			"probability": 0.50,
 			"count": 1,
-			"cardName": "Yargle and Multani"
+			"cardName": "Doom Blade"
 		},
 		{
 			"type": "item",
 			"probability": 1,
 			"count": 1,
-			"itemName": "Grolnok's poisonous skin"
+			"itemName": "Xira's Fancy Hat"
 		}
 	],
 	"colors": "BGR"

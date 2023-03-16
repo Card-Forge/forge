@@ -381,3 +381,15 @@ ChickenEgg
 ChallengeCoin
   xy: 32,512
   size: 16, 16
+MetallicBoots
+  xy: 80,144
+  size: 16, 16
+BrownHat
+  xy: 80,336
+  size: 16, 16
+FrogSkin
+  xy: 111,495
+  size: 18, 18
+BurningBook
+  xy: 239,815
+  size: 18, 18

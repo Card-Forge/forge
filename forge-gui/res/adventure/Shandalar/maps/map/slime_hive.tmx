@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="37" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="134">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="37" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="135">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -87,7 +87,6 @@
   <object id="104" template="../obj/gold.tx" x="532" y="73"/>
   <object id="106" template="../obj/gold.tx" x="522.333" y="202.833"/>
   <object id="107" template="../obj/gold.tx" x="169.5" y="276"/>
-  <object id="108" template="../obj/treasure.tx" x="88" y="275.5"/>
   <object id="109" template="../obj/treasure.tx" x="476.75" y="76"/>
   <object id="110" template="../obj/treasure.tx" x="545.5" y="289"/>
   <object id="111" template="../obj/entry_up.tx" x="325.5" y="362">
@@ -108,5 +107,30 @@
   <object id="130" template="../obj/waypoint.tx" x="249.333" y="228"/>
   <object id="131" template="../obj/waypoint.tx" x="161.667" y="222"/>
   <object id="132" template="../obj/waypoint.tx" x="199.667" y="222.667"/>
+  <object id="134" template="../obj/booster.tx" x="84.6667" y="276.667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ZEN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ZEN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ZEN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -3,6 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Hornet Nest&quot; ]}"/>
+ </properties>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="11" name="Collision" width="40" height="26">
@@ -29,7 +32,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects" opacity="0.9">
-  <object id="67" template="../obj/enemy.tx" x="301" y="79.1638" width="16" height="17.6724">
+  <object id="67" template="../obj/enemy.tx" x="350" y="56.6638" width="16" height="17.6724">
    <properties>
     <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Xira&quot;]
 }</property>
@@ -106,7 +109,7 @@
    <properties>
     <property name="enemy" value="Wasp"/>
     <property name="threatRange" type="int" value="60"/>
-    <property name="waypoints" value="85,84,86"/>
+    <property name="waypoints" value="85,84,85,86,85"/>
    </properties>
   </object>
   <object id="80" template="../obj/enemy.tx" x="154.5" y="355.664" width="16" height="17.6724">
