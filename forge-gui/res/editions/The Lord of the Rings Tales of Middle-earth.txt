@@ -17,16 +17,16 @@ ScryfallCode=LTR
 246 M The One Ring @Veli Nystrom
 258 M Mount Doom @Jonas De Ro
 260 R The Shire @Jonas De Ro
-272 C Plains @Deven Rue
-273 C Plains @Deven Rue
-274 C Island @Deven Rue
-275 C Island @Deven Rue
-276 C Swamp @Deven Rue
-277 C Swamp @Deven Rue
-278 C Mountain @Deven Rue
-279 C Mountain @Deven Rue
-280 C Forest @Deven Rue
-281 C Forest @Deven Rue
+272 L Plains @Deven Rue
+273 L Plains @Deven Rue
+274 L Island @Deven Rue
+275 L Island @Deven Rue
+276 L Swamp @Deven Rue
+277 L Swamp @Deven Rue
+278 L Mountain @Deven Rue
+279 L Mountain @Deven Rue
+280 L Forest @Deven Rue
+281 L Forest @Deven Rue
 287 M Aragorn and Arwen, Wed @Magali Villeneuve
 288 M Sauron, the Lidless Eye @Yigit Koroglu
 304 R Frodo, Sauron's Bane @Andreas Rocha
