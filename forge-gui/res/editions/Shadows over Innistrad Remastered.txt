@@ -37,7 +37,7 @@ ScryfallCode=SIR
 29 C Fiend Binder @David Gaillet
 30 M Gisela, the Broken Blade @Clint Cearley
 31 U Gryff's Boon @Svetlin Velinov
-32 C Guardian of Pilgrims @
+32 C Guardian of Pilgrims @Lordigan
 33 U Hope Against Hope @David Seguin
 34 U Humble the Brute @Daarken
 35 U Ironclad Slayer @Ryan Pancoast
@@ -228,7 +228,7 @@ ScryfallCode=SIR
 220 R Traverse the Ulvenwald @Vincent Proce
 221 C Ulvenwald Captive @Chris Rahn
 222 R Ulvenwald Hydra @Raymond Swanland
-223 U Ulvenwald Mysteries @
+223 U Ulvenwald Mysteries @Nereida
 224 U Vessel of Nascency @Kieran Yanner
 225 U Veteran Cathar @Deruchenko Alexander
 226 C Weirding Wood @Jung Park

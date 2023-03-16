@@ -17,7 +17,7 @@ ScryfallCode=SIS
 9 U Lingering Souls @Bud Cook
 10 U Rally the Peasants @Jaime Jones
 11 R Requiem Angel @Eric Deschamps
-12 U Séance @David Rapoza
+12 U Seance @David Rapoza
 13 C Battleground Geist @Clint Cearley
 14 R Cackling Counterpart @David Rapoza
 15 C Forbidden Alchemy @David Rapoza
@@ -53,7 +53,7 @@ ScryfallCode=SIS
 45 C Traitorous Blood @Raymond Swanland
 46 C Vampiric Fury @Matt Stewart
 47 R Zealous Conscripts @Steve Prescott
-48 C Avacyn's Pilgrim @
+48 C Avacyn's Pilgrim @Jana Schirmer & Johannes Voss
 49 M Garruk Relentless @Eric Deschamps
 50 C Gnaw to the Bone @Scott Chou
 51 R Gutter Grime @Erica Yang
@@ -72,7 +72,7 @@ ScryfallCode=SIS
 64 M Huntmaster of the Fells @Chris Rahn
 65 U Immerwolf @Cristi Balanescu
 66 M Sigarda, Host of Herons @Chris Rahn
-67 U Stromkirk Captain @
+67 U Stromkirk Captain @Jana Schirmer & Johannes Voss
 68 U Avacyn's Collar @James Paick
 69 C Blazing Torch @Scott Chou
 70 U Butcher's Cleaver @Jason Felix
