@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/grolnok.tmx",
+    "activeFile": "map/cursed_swamp.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "map",
         "tileset",
-        "obj",
-        "map/main_story"
+        "map",
+        "map/main_story",
+        "obj"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -1467,6 +1467,14 @@
                 "y": 319
             }
         },
+        "map/cursed_swamp.tmx": {
+            "scale": 1.7317708333333333,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 240.21654135338346,
+                "y": 136.5654135338346
+            }
+        },
         "map/debug_map.tmx": {
             "scale": 3,
             "selectedLayer": 4,
@@ -1818,8 +1826,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 140.5,
-                "y": 213.25
+                "x": 288,
+                "y": 192.25
             }
         },
         "map/grove_1.tmx": {
@@ -2446,13 +2454,13 @@
         },
         "map/main_story/templeofchandra.tmx": {
             "expandedObjectLayers": [
-                7,
-                2
+                2,
+                7
             ],
             "scale": 1.5,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 465.66666666666663,
+                "x": 465.3333333333333,
                 "y": 405.66666666666663
             }
         },
@@ -2662,8 +2670,8 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 410.3333333333333,
-                "y": 324.8333333333333
+                "x": 320,
+                "y": 207.83333333333331
             }
         },
         "map/nahiricave.tmx": {
@@ -2673,8 +2681,8 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 102,
-                "y": 201
+                "x": 368,
+                "y": 200.33333333333334
             }
         },
         "map/nest_blue_1.tmx": {
@@ -3073,7 +3081,7 @@
             "scale": 2,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 330.75,
+                "x": 248,
                 "y": 176.25
             }
         },
@@ -3084,8 +3092,8 @@
             "scale": 3,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 321.8333333333333,
-                "y": 254.5
+                "x": 368,
+                "y": 223.83333333333331
             }
         },
         "map/tibalt_f2.tmx": {
@@ -3095,8 +3103,8 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 186.83333333333331,
-                "y": 120.16666666666664
+                "x": 176,
+                "y": 167.83333333333334
             }
         },
         "map/tileset/buildings.tsx": {
@@ -3249,7 +3257,8 @@
         "map/tibalt_f2.tmx",
         "map/grolnok.tmx",
         "map/nahiri.tmx",
-        "map/nahiricave.tmx"
+        "map/nahiricave.tmx",
+        "map/cursed_swamp.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
@@ -3258,14 +3267,14 @@
         "map/tibalt_f1.tmx",
         "map/tibalt.tmx",
         "map/tibalt_f2.tmx",
-        "map/nahiricave.tmx",
-        "map/nahiri.tmx",
         "map/grolnok.tmx",
+        "map/nahiri.tmx",
+        "map/nahiricave.tmx",
+        "map/cursed_swamp.tmx",
         "map/slobad_factory.tmx",
         "map/xira.tmx",
         "map/main_story/blue_castle_f1.tmx",
-        "map/kiora_island.tmx",
-        "map/teferi.tmx"
+        "map/kiora_island.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true
