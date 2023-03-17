@@ -9,4 +9,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | TriggerZones$ Command | Destination$
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ b_1_1_insect_flying | TokenNum$ X 
 SVar:X:TriggeredCard$CardCounters.EGG
-Oracle:Nontoken insects you control have +1/+1 and Double Team\nAt the beginning of your upkeep, put an egg counter on each creature you don't control without an egg counter on it.\nWhen a creature with an egg counter dies,  draw a card and create a 1/1 black Insect creature token with flying. 
+Oracle:Nontoken insects you control have +1/+1 and Double Team\nAt the beginning of your upkeep, put an egg counter on each creature.\nWhen a creature with an egg counter dies,  draw a card and create X 1/1 black Insect creature token with flying where X is the amount of Egg counters on that creature. 
