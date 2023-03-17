@@ -122,7 +122,8 @@ public enum CSubmenuGauntletLoad implements ICDoc {
         Deck userDeck = gd.getUserDeck();
         if (userDeck == null) {
             //give user a chance to select a deck if none saved with gauntlet
-            userDeck = FDeckChooser.promptForDeck(null, "Select a deck to play for this gauntlet", DeckType.CUSTOM_DECK, false);
+            userDeck = FDeckChooser.promptForDeck(null, "Select a deck to play for this gauntlet", gd.isCommanderGauntlet()
+                    ? DeckType.COMMANDER_DECK : DeckType.CUSTOM_DECK, false);
             if (userDeck == null) { return; } //prevent crash if user doesn't select a deck
             gd.setUserDeck(userDeck);
             GauntletIO.saveGauntlet(gd);
@@ -139,9 +140,13 @@ public enum CSubmenuGauntletLoad implements ICDoc {
         });
 
         final List<RegisteredPlayer> starter = new ArrayList<>();
-        final RegisteredPlayer human = new RegisteredPlayer(userDeck).setPlayer(GamePlayerUtil.getGuiPlayer());
+        final RegisteredPlayer human = gd.isCommanderGauntlet()
+                ? RegisteredPlayer.forCommander(userDeck).setPlayer(GamePlayerUtil.getGuiPlayer())
+                : new RegisteredPlayer(userDeck).setPlayer(GamePlayerUtil.getGuiPlayer());
         starter.add(human);
-        starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
+        starter.add(gd.isCommanderGauntlet()
+                ? RegisteredPlayer.forCommander(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer())
+                : new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
 
         gd.startRound(starter, human);
 

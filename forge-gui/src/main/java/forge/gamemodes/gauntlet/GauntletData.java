@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -34,8 +35,18 @@ public final class GauntletData {
     private List<String> eventNames = new ArrayList<>();
     private Deck userDeck;
     private List<Deck> decks;
+    private boolean isCommanderGauntlet = false;
+
+    public GauntletData(boolean isCommander) {
+        isCommanderGauntlet = isCommander;
+    }
 
     public GauntletData() {
+        this(false);
+    }
+
+    public boolean isCommanderGauntlet() {
+        return isCommanderGauntlet;
     }
 
     public void setName(String name0) {
@@ -132,7 +143,7 @@ public final class GauntletData {
 
     public void startRound(final List<RegisteredPlayer> players, final RegisteredPlayer human) {
         hostedMatch = GuiBase.getInterface().hostMatch();
-        hostedMatch.startMatch(GameType.Gauntlet, null, players, human, GuiBase.getInterface().getNewGuiGame());
+        hostedMatch.startMatch(isCommanderGauntlet ? GameType.CommanderGauntlet : GameType.Gauntlet, isCommanderGauntlet ? Collections.singleton(GameType.Commander) : null , players, human, GuiBase.getInterface().getNewGuiGame());
     }
 
     public void nextRound(final List<RegisteredPlayer> players, final RegisteredPlayer human) {

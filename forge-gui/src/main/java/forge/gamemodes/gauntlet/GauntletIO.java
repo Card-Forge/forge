@@ -47,6 +47,8 @@ public class GauntletIO {
     public static final String PREFIX_QUICK = "Quick_";
     /** Prefix for custom gauntlet save files. */
     public static final String PREFIX_CUSTOM = "Custom_";
+    /** Prefix for commander gauntlet save files. */
+    public static final String PREFIX_COMMANDER = "Commander_";
     /** Regex for locked gauntlet save files. */
     public static final String PREFIX_LOCKED = "LOCKED_";
 

@@ -15,10 +15,7 @@ import forge.screens.deckeditor.views.VOathbreakerDecks;
 import forge.screens.deckeditor.views.VProbabilities;
 import forge.screens.deckeditor.views.VStatistics;
 import forge.screens.deckeditor.views.VTinyLeadersDecks;
-import forge.screens.home.gauntlet.VSubmenuGauntletBuild;
-import forge.screens.home.gauntlet.VSubmenuGauntletContests;
-import forge.screens.home.gauntlet.VSubmenuGauntletLoad;
-import forge.screens.home.gauntlet.VSubmenuGauntletQuick;
+import forge.screens.home.gauntlet.*;
 import forge.screens.home.online.VSubmenuOnlineLobby;
 import forge.screens.home.puzzle.VSubmenuPuzzleCreate;
 import forge.screens.home.puzzle.VSubmenuPuzzleSolve;
@@ -79,6 +76,7 @@ public enum EDocID {
     HOME_GAUNTLETBUILD (VSubmenuGauntletBuild.SINGLETON_INSTANCE),
     HOME_GAUNTLETLOAD (VSubmenuGauntletLoad.SINGLETON_INSTANCE),
     HOME_GAUNTLETQUICK (VSubmenuGauntletQuick.SINGLETON_INSTANCE),
+    HOME_GAUNTLETCOMMANDER (VSubmenuGauntletCommander.SINGLETON_INSTANCE),
     HOME_GAUNTLETCONTESTS (VSubmenuGauntletContests.SINGLETON_INSTANCE),
     HOME_PREFERENCES (VSubmenuPreferences.SINGLETON_INSTANCE),
     HOME_ACHIEVEMENTS (VSubmenuAchievements.SINGLETON_INSTANCE),

@@ -10,6 +10,7 @@ import forge.deck.Deck;
 import forge.deck.DeckType;
 import forge.deck.DeckgenUtil;
 import forge.deck.NetDeckCategory;
+import forge.game.GameType;
 import forge.model.FModel;
 import forge.util.MyRandom;
 
@@ -82,6 +83,47 @@ public class GauntletUtil {
                 break;
             default:
                 continue;
+            }
+            decks.add(deck);
+        }
+
+        gauntlet.setDecks(decks);
+        gauntlet.setEventNames(eventNames);
+        gauntlet.setUserDeck(userDeck);
+
+        // Reset all variable fields to 0, stamps and saves automatically.
+        gauntlet.reset();
+        return gauntlet;
+    }
+    public static GauntletData createCommanderGauntlet(final Deck userDeck, final int numOpponents, final List<DeckType> allowedDeckTypes, NetDeckCategory netDecks) {
+        GauntletData gauntlet = new GauntletData(true);
+        setDefaultGauntletName(gauntlet, GauntletIO.PREFIX_COMMANDER);
+        FModel.setGauntletData(gauntlet);
+
+        // Generate gauntlet decks
+        Deck deck;
+        final List<String> eventNames = new ArrayList<>();
+        final List<Deck> decks = new ArrayList<>();
+
+        final Object[] netDeckNames = netDecks != null ? netDecks.getItemNames().toArray() : null;
+
+        for (int i = 0; i < numOpponents; i++) {
+            int randType = (int)Math.floor(MyRandom.getRandom().nextDouble() * allowedDeckTypes.size());
+            switch (allowedDeckTypes.get(randType)) {
+                case RANDOM_COMMANDER_DECK:
+                    deck = DeckgenUtil.generateCommanderDeck(true, GameType.Commander);
+                    eventNames.add(deck.getName());
+                    break;
+                case PRECON_COMMANDER_DECK:
+                    deck = DeckgenUtil.getRandomCommanderPreconDeck();
+                    eventNames.add(deck.getName());
+                    break;
+                case COMMANDER_DECK:
+                    deck = DeckgenUtil.getCommanderDeck();
+                    eventNames.add(deck.getName());
+                    break;
+                default:
+                    continue;
             }
             decks.add(deck);
         }
