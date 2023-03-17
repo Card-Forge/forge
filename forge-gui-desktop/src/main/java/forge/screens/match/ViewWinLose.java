@@ -49,7 +49,9 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     private final SkinnedLabel lblStats = new SkinnedLabel("WinLoseFrame > lblStats needs updating.");
     private final JPanel pnlOutcomes = new JPanel(new MigLayout("wrap, ax center, ay center"));
 
-    /** String constraint parameters for title blocks and cardviewer blocks. */
+    /**
+     * String constraint parameters for title blocks and cardviewer blocks.
+     */
     private static final SkinColor FORE_COLOR = FSkin.getColor(Colors.CLR_TEXT);
     private static final String CONSTRAINTS_TITLE = "w 95%!, gap 0 0 20px 10px";
     private static final String CONSTRAINTS_TEXT = "w 95%!, h 220px!, gap 0 0 0 20px";
@@ -77,25 +79,26 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         // modes.
         ControlWinLose control = null;
         switch (game0.getGameType()) {
-        case Quest:
-            control = new QuestWinLose(this, game0, matchUI);
-            break;
-        case QuestDraft:
-            control = new QuestDraftWinLose(this, game0, matchUI);
-            break;
-        case Draft:
-            if (!FModel.getGauntletMini().isGauntletDraft()) {
+            case Quest:
+                control = new QuestWinLose(this, game0, matchUI);
                 break;
-            }
-            //$FALL-THROUGH$
-        case Sealed:
-            control = new LimitedWinLose(this, game0, matchUI);
-            break;
-        case Gauntlet:
-            control = new GauntletWinLose(this, game0, matchUI);
-            break;
-        default: // will catch it after switch
-            break;
+            case QuestDraft:
+                control = new QuestDraftWinLose(this, game0, matchUI);
+                break;
+            case Draft:
+                if (!FModel.getGauntletMini().isGauntletDraft()) {
+                    break;
+                }
+                //$FALL-THROUGH$
+            case Sealed:
+                control = new LimitedWinLose(this, game0, matchUI);
+                break;
+            case CommanderGauntlet:
+            case Gauntlet:
+                control = new GauntletWinLose(this, game0, matchUI);
+                break;
+            default: // will catch it after switch
+                break;
         }
         if (null == control) {
             control = new ControlWinLose(this, game0, matchUI);
@@ -179,7 +182,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
 
         pnlLog.add(
                 new FLabel.Builder().text(localizer.getMessage("lblGameLog")).fontAlign(SwingConstants.CENTER).fontSize(18)
-                .fontStyle(Font.BOLD).build(), "w 300px!, h 28px!, gaptop 20px");
+                        .fontStyle(Font.BOLD).build(), "w 300px!, h 28px!, gaptop 20px");
 
         pnlLog.add(scrLog, "w 300px!, h 100px!, gap 0 0 10 10");
         pnlLog.add(btnCopyLog, "center, w pref+16, h pref+8");
@@ -224,25 +227,33 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         }
     }
 
-    /** @return {@link forge.toolbox.FButton} */
+    /**
+     * @return {@link forge.toolbox.FButton}
+     */
     @Override
     public FButton getBtnContinue() {
         return this.btnContinue;
     }
 
-    /** @return {@link forge.toolbox.FButton} */
+    /**
+     * @return {@link forge.toolbox.FButton}
+     */
     @Override
     public FButton getBtnRestart() {
         return this.btnRestart;
     }
 
-    /** @return {@link forge.toolbox.FButton} */
+    /**
+     * @return {@link forge.toolbox.FButton}
+     */
     @Override
     public FButton getBtnQuit() {
         return this.btnQuit;
     }
 
-    /** @return {@link javax.swing.JPanel} */
+    /**
+     * @return {@link javax.swing.JPanel}
+     */
     public SkinnedPanel getPnlCustom() {
         return this.pnlCustom;
     }
@@ -279,8 +290,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         getPnlCustom().add(new TitleLabel(title), CONSTRAINTS_TITLE);
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_LARGE_CARD_VIEWERS)) {
             getPnlCustom().add(cv, CONSTRAINTS_CARDS_LARGE);
-        }
-        else {
+        } else {
             getPnlCustom().add(cv, CONSTRAINTS_CARDS);
         }
     }

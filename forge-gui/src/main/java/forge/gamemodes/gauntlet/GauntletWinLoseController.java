@@ -117,11 +117,15 @@ public abstract class GauntletWinLoseController {
         if (lastGame.isMatchOver()) {
             // To change the AI deck, we have to create a new match.
             final GauntletData gd = FModel.getGauntletData();
-            final RegisteredPlayer human = new RegisteredPlayer(gd.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
+            final RegisteredPlayer human = gd.isCommanderGauntlet()
+                    ? RegisteredPlayer.forCommander(gd.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer())
+                    : new RegisteredPlayer(gd.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
             final Deck aiDeck = gd.getDecks().get(gd.getCompleted());
             final List<RegisteredPlayer> players = Lists.newArrayList();
             players.add(human);
-            players.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
+            players.add(gd.isCommanderGauntlet()
+                    ? RegisteredPlayer.forCommander(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer())
+                    : new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
 
             view.hide();
             saveOptions();

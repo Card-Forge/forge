@@ -433,6 +433,16 @@ public class DeckgenUtil {
     }
 
     /** @return {@link forge.deck.Deck} */
+    public static Deck getCommanderDeck() {
+        final IStorage<Deck> allDecks = FModel.getDecks().getCommander();
+        // in case user has not created any yet
+        if (allDecks.size() == 0) { return null; }
+        final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allDecks.size()));
+        final String name = allDecks.getItemNames().toArray(new String[0])[rand];
+        return allDecks.get(name);
+    }
+
+    /** @return {@link forge.deck.Deck} */
     public static Deck getRandomOrPreconOrThemeDeck(String colors, boolean forAi, boolean isTheme, boolean useGeneticAI) {
         final List<String> selection = new ArrayList<>();
         Deck deck = null;
@@ -492,6 +502,12 @@ public class DeckgenUtil {
         final List<DeckProxy> allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons());
         final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allDecks.size()));
         return allDecks.get(rand).getDeck();
+    }
+
+    /** @return {@link forge.deck.Deck} */
+    public static Deck getRandomCommanderPreconDeck() {
+        final Iterable<DeckProxy> allDecks = DeckProxy.getAllCommanderPreconDecks();
+        return Aggregates.random(allDecks).getDeck();
     }
 
     /** @return {@link forge.deck.Deck} */

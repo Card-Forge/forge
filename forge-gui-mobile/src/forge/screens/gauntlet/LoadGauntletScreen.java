@@ -106,7 +106,8 @@ public class LoadGauntletScreen extends LaunchScreen {
         Deck userDeck = gauntlet.getUserDeck();
         if (userDeck == null) {
             //give user a chance to select a deck if none saved with gauntlet
-            FDeckChooser.promptForDeck(Forge.getLocalizer().getMessage("lblSelectGauntletDeck"), GameType.Gauntlet, false, new Callback<Deck>() {
+            FDeckChooser.promptForDeck(Forge.getLocalizer().getMessage("lblSelectGauntletDeck"), gauntlet.isCommanderGauntlet()
+                    ? GameType.CommanderGauntlet : GameType.Gauntlet, false, new Callback<Deck>() {
                 @Override
                 public void run(Deck result) {
                     if (result != null) {
@@ -121,9 +122,13 @@ public class LoadGauntletScreen extends LaunchScreen {
         LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), true, () -> {
             final GauntletData gauntlet1 = FModel.getGauntletData();
             List<RegisteredPlayer> players = new ArrayList<>();
-            RegisteredPlayer humanPlayer = new RegisteredPlayer(gauntlet1.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
+            RegisteredPlayer humanPlayer = gauntlet1.isCommanderGauntlet()
+                    ? RegisteredPlayer.forCommander(gauntlet1.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer())
+                    : new RegisteredPlayer(gauntlet1.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
             players.add(humanPlayer);
-            players.add(new RegisteredPlayer(gauntlet1.getDecks().get(gauntlet1.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
+            players.add(gauntlet1.isCommanderGauntlet()
+                    ? RegisteredPlayer.forCommander(gauntlet1.getDecks().get(gauntlet1.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer())
+                    : new RegisteredPlayer(gauntlet1.getDecks().get(gauntlet1.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
             gauntlet1.startRound(players, humanPlayer);
         });
     }
