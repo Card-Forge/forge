@@ -1,6 +1,6 @@
 Name:Slobad's Iron Boots
 ManaCost:no cost
-Types:Enchantment
+Types:Artifact
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+Artifact | AddToughness$ 1 | EffectZone$ Command | Description$ Artifact Creatures you control get +1/+1
 T:Mode$ ChangesZone | ValidCard$ Artifact.nonToken+YouCtrl | ActivationLimit$ 1 | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerZones$ Command | TriggerDescription$ Whenever a nontoken artifact you control is put into a graveyard from the battlefield, create a colorless artifact token named Scrap. This ability triggers only once each turn. 
 SVar:TrigToken:DB$ Token | TokenScript$ scrap 
