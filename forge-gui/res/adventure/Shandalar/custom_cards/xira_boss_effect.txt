@@ -1,4 +1,4 @@
-Name:Xira
+Name:Xira's Boss Effect
 ManaCost:no cost
 Colors:black,green,red
 Types:Enchantment

@@ -1,4 +1,4 @@
-Name:Slobad
+Name:Slobad's Boss Effect
 ManaCost:no cost
 Types:Artifact
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+Artifact | AddToughness$ 2 | EffectZone$ Command | Description$ Artifact Creatures you control get +0/+2

@@ -1,4 +1,4 @@
-Name:Tibalt
+Name:Tibalt's Boss Effect
 ManaCost:no cost
 Colors:red,black
 Types:Enchantment

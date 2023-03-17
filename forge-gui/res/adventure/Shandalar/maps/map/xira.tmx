@@ -34,7 +34,7 @@
  <objectgroup id="4" name="Objects" opacity="0.9">
   <object id="67" template="../obj/enemy.tx" x="350" y="56.6638" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Xira&quot;]
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Xira's Boss Effect&quot;]
 }</property>
     <property name="enemy" value="Xira"/>
    </properties>

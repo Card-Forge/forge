@@ -3,12 +3,12 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/cursed_swamp.tmx",
+    "activeFile": "",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
         "tileset",
-        "map",
         "map/main_story",
+        "map",
         "obj"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -1824,7 +1824,7 @@
                 4
             ],
             "scale": 2,
-            "selectedLayer": 0,
+            "selectedLayer": 5,
             "viewCenter": {
                 "x": 288,
                 "y": 192.25
@@ -2454,8 +2454,8 @@
         },
         "map/main_story/templeofchandra.tmx": {
             "expandedObjectLayers": [
-                2,
-                7
+                7,
+                2
             ],
             "scale": 1.5,
             "selectedLayer": 5,
@@ -3208,7 +3208,7 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 390.75,
+                "x": 390.5,
                 "y": 221.75
             }
         },
@@ -3251,28 +3251,20 @@
     "map.tileWidth": 16,
     "map.width": 90,
     "openFiles": [
-        "map/main_story/templeofchandra.tmx",
-        "map/tibalt_f1.tmx",
-        "map/tibalt.tmx",
-        "map/tibalt_f2.tmx",
-        "map/grolnok.tmx",
-        "map/nahiri.tmx",
-        "map/nahiricave.tmx",
-        "map/cursed_swamp.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
     "recentFiles": [
         "map/main_story/templeofchandra.tmx",
-        "map/tibalt_f1.tmx",
         "map/tibalt.tmx",
-        "map/tibalt_f2.tmx",
-        "map/grolnok.tmx",
-        "map/nahiri.tmx",
+        "map/tibalt_f1.tmx",
+        "map/xira.tmx",
         "map/nahiricave.tmx",
+        "map/nahiri.tmx",
+        "map/grolnok.tmx",
+        "map/tibalt_f2.tmx",
         "map/cursed_swamp.tmx",
         "map/slobad_factory.tmx",
-        "map/xira.tmx",
         "map/main_story/blue_castle_f1.tmx",
         "map/kiora_island.tmx"
     ],
