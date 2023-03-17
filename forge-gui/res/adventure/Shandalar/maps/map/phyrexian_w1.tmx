@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="76">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../tileset/phyrexiantiles.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxz42RgcBtEGAZAbBM+whhdD7XsxQdoYS85YKjaiysu8cnBwpxcjM9OGKClvaQAatlLTLxhs3uo2jtQ4UyK3bRIz/S0F18847KXGvYRSj/IgBb24bOfHvZR214AR9VyvQ==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybrsfAMH0Uj+JRPIpH8SgexSMCAwDPKoiG
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMOWAYN41IHA8hsfABdD6X2unESZy+yOmrYSw4YavYSG7a4AEj/SLMX3e7hbu9Ii19y7JWhMP9iM5fYckOGDH+D1OPzCzH2IttNyH6YGkL+INZedLvR7UcWJ8YPpNiLrgc9HklxPzIGAAplras=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzFlc8KgCAMh3si31GP1bXYtXvz7OOlsGCkFOamP/jwT5sfWNA05VlNO3/C+9I8RDBiaZ5Gz8Zg8h4JL36cAwrenv0jvY7hCSBSgL1bfNRLeoEcPEjPNLw1kfDaQu8S92bGXqixCt4z7m2MQ8E76p5dpVvje+7pvanxtv4XSn6JOim/lq/kf1vX5AI3G2Wi
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzVlc0KwjAQhPNE+5KCxZv2ZtJ60Ip4Uvw5CPpuZnFKl9iWhI2KA8O2SWa/Q5bWmHctyJgKXglXA1Xus6fU0zRCtcjt8XxHvQX1hDoTmToDt6COOSRml5m538z/kuu8N95z74f3BT6i50GsnYPzGm6DrKXX/V177lmuL7G3VXK5j03Mc0bL1egfuQ4zkiKXca5i2S7jXK0xJzFqcN4quIX4vk8ie/C59n9SKudD8seUixfL/xQv1I7G31P0BGjeW8s=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="207.833" y="267.665">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="65" template="../obj/treasure.tx" x="96.667" y="33"/>
+  <object id="67" template="../obj/treasure.tx" x="320" y="32.5"/>
+  <object id="68" template="../obj/enemy.tx" x="207" y="94">
+   <properties>
+    <property name="enemy" value="Orthodoxy Angel"/>
+   </properties>
+  </object>
+  <object id="74" template="../obj/enemy.tx" x="239.167" y="176">
+   <properties>
+    <property name="enemy" value="Orthodoxy Duelist"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="waypoints" value="70,71,70"/>
+   </properties>
+  </object>
+  <object id="75" template="../obj/enemy.tx" x="175" y="128">
+   <properties>
+    <property name="enemy" value="Orthodoxy Duelist"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="waypoints" value="72,73,72"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="8" name="Waypoints">
+  <object id="70" template="../obj/waypoint.tx" x="144" y="176"/>
+  <object id="71" template="../obj/waypoint.tx" x="272" y="176"/>
+  <object id="72" template="../obj/waypoint.tx" x="272" y="128"/>
+  <object id="73" template="../obj/waypoint.tx" x="144" y="128"/>
+ </objectgroup>
+</map>
