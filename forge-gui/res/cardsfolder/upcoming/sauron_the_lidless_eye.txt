@@ -1,0 +1,10 @@
+Name:Sauron, the Lidless Eye
+ManaCost:3 B R
+Types:Legendary Creature Avatar Horror
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, gain control of target creature an opponent controls until end of turn. Untap it. It gains haste until end of turn.
+SVar:TrigChange:DB$ GainControl | TgtPrompt$ Choose target creature an opponent controls | ValidTgts$ Creature.OppCtrl | LoseControl$ EOT | Untap$ True | AddKWs$ Haste
+A:AB$ PumpAll | Cost$ 1 B R | ValidCards$ Creature.YouCtrl | NumAtt$ 2 | SubAbility$ LoseTwo | SpellDescription$ Creatures you control get +2/+0 until end of turn. Each opponent loses 2 life.
+SVar:LoseTwo:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2
+SVar:PlayMain1:OPPONENTCREATURES
+Oracle:When Sauron, the Lidless Eye enters the battlefield, gain control of target creature an opponent controls until end of turn. Untap it. It gains haste until end of turn.\n{1}{B}{R}: Creatures you control get +2/+0 until end of turn. Each opponent loses 2 life.

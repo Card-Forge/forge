@@ -1,0 +1,12 @@
+Name:Sam, Loyal Attendant
+ManaCost:1 G W
+Types:Legendary Creature Halfling Peasant
+PT:2/4
+K:Partner: Frodo, Adventurous Hobbit
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of combat on your turn, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac
+S:Mode$ ReduceCost | ValidCard$ Food.YouCtrl | Type$ Ability | Amount$ 1 | AffectedZone$ Battlefield | Description$ Activated abilities of Foods you control cost {1} less to activate.
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token & Type$Artifact
+DeckHints:Type$Food
+Oracle:Partner with Frodo, Adventurous Hobbit (When this creature enters the battlefield, target player may put Frodo into their hand from their library, then shuffle.)\nAt the beginning of combat on your turn, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nActivated abilities of Foods you control cost {1} less to activate.
