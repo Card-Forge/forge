@@ -11,4 +11,4 @@ SVar:TrigCounter:DB$ PutCounter | CounterType$ EGG | CounterNum$ 1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create X 1/1 black Insect tokens for each egg counter on CARDNAME.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ b_1_1_insect_flying | TokenOwner$ You
 SVar:X:TriggeredCard$CardCounters.EGG
-Oracle:Nontoken Insects you control have +1/+1 and double team.\nWhen a source an opponent controls deals damage to you, put an egg counter on Xira's Hive.\n When Xira's Hive dies, create X 1/1 black Insect tokens for each egg counter on Xira's Hive.
+Oracle:Defender, reach.\nNontoken Insects you control have +1/+1 and double team.\nWhen a source an opponent controls deals damage to you, put an egg counter on Xira's Hive.\n When Xira's Hive dies, create X 1/1 black Insect tokens for each egg counter on Xira's Hive.
