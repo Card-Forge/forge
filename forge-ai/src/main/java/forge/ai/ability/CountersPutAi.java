@@ -1221,4 +1221,12 @@ public class CountersPutAi extends CountersAi {
         return false;
     }
 
+    @Override
+    public int chooseNumber(Player player, SpellAbility sa, int min, int max, Map<String, Object> params) {
+        if (sa.hasParam("ReadAhead")) {
+            return 1;
+        }
+        return max;
+    }
+
 }

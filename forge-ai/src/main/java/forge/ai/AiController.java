@@ -355,6 +355,31 @@ public class AiController {
                 return false;
             }
         }
+
+        for (final Trigger tr : card.getTriggers()) {
+            if (!card.hasStartOfKeyword("Saga") && !card.hasStartOfKeyword("Read ahead")) {
+                break;
+            }
+
+            if (tr.getMode() != TriggerType.CounterAdded) {
+                continue;
+            }
+
+            SpellAbility exSA = tr.ensureAbility().copy(activator);
+
+            if (api != null && exSA.getApi() == api) {
+                rightapi = true;
+            }
+
+            if (exSA instanceof AbilitySub && !doTrigger(exSA, false)) {
+                // AI would not run this chapter if given the chance
+                // TODO eventually we'll want to consider playing it anyway, especially if Read ahead would still allow an immediate benefit
+                return false;
+            }
+
+            break;
+        }
+
         if (api != null && !rightapi) {
             return false;
         }
