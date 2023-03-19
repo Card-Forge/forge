@@ -48,6 +48,8 @@ public final class ForgeConstants {
     public static final String IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE = LISTS_DIR + "tournamentpack-images.txt";
     public static final String IMAGE_LIST_ACHIEVEMENTS_FILE          = LISTS_DIR + "achievement-images.txt";
     public static final String IMAGE_LIST_PLANES_IMAGES_FILE         = LISTS_DIR + "planes-images.txt";
+    public static final String MUSIC_LIST_FILE    				      = LISTS_DIR + "music-list.txt";
+    public static final String MUSIC_LIST_ADVENTURE_FILE    	      = LISTS_DIR + "music-adventure-list.txt";
     public static final String NET_DECKS_LIST_FILE                   = LISTS_DIR + "net-decks.txt";
     public static final String NET_DECKS_COMMANDER_LIST_FILE         = LISTS_DIR + "net-decks-commander.txt";
     public static final String NET_DECKS_BRAWL_LIST_FILE             = LISTS_DIR + "net-decks-brawl.txt";

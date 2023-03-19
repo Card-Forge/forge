@@ -7,6 +7,7 @@ import forge.download.GuiDownloader;
 import forge.gui.ImportDialog;
 import forge.gui.UiCommand;
 import forge.gui.download.GuiDownloadAchievementImages;
+import forge.gui.download.GuiDownloadMusic;
 import forge.gui.download.GuiDownloadPicturesHQ;
 import forge.gui.download.GuiDownloadPicturesLQ;
 import forge.gui.download.GuiDownloadPrices;
@@ -73,6 +74,11 @@ public enum CSubmenuDownloaders implements ICDoc {
             new GuiDownloader(new GuiDownloadSkins()).show();
         }
     };
+    private final UiCommand cmdDownloadMusic = new UiCommand() {
+        @Override public void run() {
+            new GuiDownloader(new GuiDownloadMusic()).show();
+        }
+    };
     private final UiCommand cmdHowToPlay = new UiCommand() {
         @Override public void run() {
             VSubmenuDownloaders.SINGLETON_INSTANCE.showHowToPlay();
@@ -116,6 +122,7 @@ public enum CSubmenuDownloaders implements ICDoc {
         view.setHowToPlayCommand(cmdHowToPlay);
         view.setDownloadPricesCommand(cmdDownloadPrices);
         view.setDownloadSkinsCommand(cmdDownloadSkins);
+        view.setDownloadMusicCommand(cmdDownloadMusic);
         view.setLicensingCommand(cmdLicensing);
     }
 

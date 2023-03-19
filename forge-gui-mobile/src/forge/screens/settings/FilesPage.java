@@ -20,6 +20,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.gui.download.GuiDownloadAchievementImages;
+import forge.gui.download.GuiDownloadMusic;
 import forge.gui.download.GuiDownloadPicturesLQ;
 import forge.gui.download.GuiDownloadPrices;
 import forge.gui.download.GuiDownloadQuestImages;
@@ -114,6 +115,13 @@ public class FilesPage extends TabPage<SettingsScreen> {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadAchievementImages();
+            }
+        }, 1);
+        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadMusic"),
+                Forge.getLocalizer().getMessage("lblDownloadMusic")) {
+            @Override
+            protected GuiDownloadService createService() {
+                return new GuiDownloadMusic();
             }
         }, 1);
         lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadPrices"),
