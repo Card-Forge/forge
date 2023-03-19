@@ -231,18 +231,12 @@ public class CardFactory {
             spell.setCastFaceDown(false);
         }
 
-        if (targetSA.usesTargeting()) {
-            // do for SubAbilities too?
-            copySA.setTargets(targetSA.getTargets().clone());
-        }
-
         //remove all costs
         if (!copySA.isTrigger()) {
             copySA.setPayCosts(new Cost("", targetSA.isAbility()));
         }
         copySA.setActivatingPlayer(controller);
 
-        copySA.setPaidHash(targetSA.getPaidHash());
         return copySA;
     }
 
