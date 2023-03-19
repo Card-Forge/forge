@@ -6374,7 +6374,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 continue;
             }
 
-            if (!params.get("Destination").equals(ZoneType.Battlefield.toString())) {
+            if (!ZoneType.Battlefield.toString().equals(params.get("Destination"))) {
                 continue;
             }
 

@@ -2410,7 +2410,6 @@ public class ComputerUtilCombat {
         // (currently looks for the creature with maximum raw power since that's what the AI usually judges by when
         // deciding whether the creature is worth blocking).
         // If the creature doesn't change into anything, returns the original creature.
-        if (attacker == null) { return null; }
         Card attackerAfterTrigs = attacker;
 
         // Test for some special triggers that can change the creature in combat

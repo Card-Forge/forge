@@ -66,6 +66,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
+import forge.game.cost.CostExile;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPayment;
 import forge.game.cost.CostPutCounter;
@@ -641,9 +642,14 @@ public class ComputerUtil {
         return sacList;
     }
 
-    public static CardCollection chooseExileFrom(final Player ai, final ZoneType zone, final String type, final Card activate,
-            final Card target, final int amount, SpellAbility sa) {
-        CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(zone), type.split(";"), activate.getController(), activate, sa);
+    public static CardCollection chooseExileFrom(final Player ai, CostExile cost, final Card activate, final int amount, SpellAbility sa) {
+        CardCollection typeList;
+        if (cost.zoneRestriction != 1) {
+            typeList = new CardCollection(ai.getGame().getCardsIn(cost.from));
+        } else {
+            typeList = new CardCollection(ai.getCardsIn(cost.from));
+        }
+        typeList = CardLists.getValidCards(typeList, cost.getType().split(";"), activate.getController(), activate, sa);
 
         // don't exile the card we're pumping
         typeList = ComputerUtilCost.paymentChoicesWithoutTargets(typeList, sa, ai);

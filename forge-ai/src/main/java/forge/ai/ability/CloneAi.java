@@ -69,7 +69,6 @@ public class CloneAi extends SpellAbilityAi {
                         bFlag = true;
                     }
                 }
-
             }
 
             if (!bFlag) { // All of the defined stuff is cloned, not very useful

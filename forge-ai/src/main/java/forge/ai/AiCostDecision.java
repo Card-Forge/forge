@@ -177,7 +177,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             // TODO Determine exile from same zone for AI
             return null;
         } else {
-            CardCollectionView chosen = ComputerUtil.chooseExileFrom(player, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c, ability);
+            CardCollectionView chosen = ComputerUtil.chooseExileFrom(player, cost, source, c, ability);
             return null == chosen ? null : PaymentDecision.card(chosen);
         }
     }
