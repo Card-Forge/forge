@@ -57,6 +57,11 @@ public class StaticAbilityDisableTriggers {
             return false;
         }
 
+        // Trigger currently has no isValid, take Trigger Ability instead
+        if (!stAb.matchesValidParam("ValidTrigger", regtrig.getOverridingAbility())) {
+            return false;
+        }
+
         if (stAb.hasParam("ValidMode")) {
             if (!ArrayUtils.contains(stAb.getParam("ValidMode").split(","), trigMode.toString())) {
                 return false;

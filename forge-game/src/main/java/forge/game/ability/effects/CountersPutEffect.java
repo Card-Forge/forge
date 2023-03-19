@@ -488,10 +488,6 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         }
                     }
 
-                    if (sa.hasParam("ReadAhead")) {
-                        gameCard.setReadAhead(counterAmount);
-                    }
-
                     if (sa.hasParam("Tribute")) {
                         // make a copy to check if it would be on the battlefield
                         Card noTributeLKI = CardUtil.getLKICopy(gameCard);

@@ -9,6 +9,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardState;
+import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
@@ -236,6 +237,13 @@ public class ForgeScript {
             return sa.hasParam("Nightbound");
         } else if (property.equals("paidPhyrexianMana")) {
             return sa.getSpendPhyrexianMana() > 0;
+        } else if (property.equals("ChapterNotLore")) {
+            if (!sa.isChapter()) {
+                return false;
+            }
+            if (sa.getChapter() == sa.getHostCard().getCounters(CounterEnumType.LORE)) {
+                return false;
+            }
         } else if (property.equals("LastChapter")) {
             return sa.isLastChapter();
         } else if (property.startsWith("ManaSpent")) {

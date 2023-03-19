@@ -347,8 +347,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private ReplacementEffect shieldCounterReplaceDestroy = null;
     private ReplacementEffect stunCounterReplaceUntap = null;
 
-    private Integer readAhead = null;
-
     // Enumeration for CMC request types
     public enum SplitCMCMode {
         CurrentSideCMC,
@@ -7252,13 +7250,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return true;
         }
         return StaticAbilityIgnoreLegendRule.ignoreLegendRule(this);
-    }
-
-    public Integer getReadAhead() {
-        return readAhead;
-    }
-    public void setReadAhead(int value) {
-        readAhead = value;
     }
 
     public boolean attackVigilance() {
