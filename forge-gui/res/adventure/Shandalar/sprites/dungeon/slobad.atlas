@@ -65,7 +65,7 @@ Attack
   size: 80, 50             
 Death 
   xy: 48, 430
-  size: 16, 16      
+  size: 16, 50   
 Death 
   xy: 208, 430
   size: 100,50

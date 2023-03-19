@@ -73,26 +73,26 @@ Attack
   xy: 224, 79
   size: 32, 20
 Death 
-  xy: 0, 143
+  xy: 0, 140
   size: 32, 20      
 Death 
-  xy: 32, 143
+  xy: 32, 140
   size: 32, 20 
 Death 
-  xy: 64, 143
+  xy: 64, 140
   size: 32, 20 
 Death 
-  xy: 96, 143
+  xy: 96, 140
   size: 32, 20
 Death
-  xy: 128, 143
+  xy: 128, 140
   size: 32,20 
 Death 
-  xy: 160, 143
+  xy: 160, 140
   size: 32, 20
 Death 
-  xy: 192, 143
+  xy: 192, 140
   size: 32, 20
 Death
-  xy: 224, 143
+  xy: 224, 140
   size: 32, 20

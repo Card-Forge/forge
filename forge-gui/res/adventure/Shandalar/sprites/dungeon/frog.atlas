@@ -26,13 +26,13 @@ Idle
   size: 20, 20  
 Walk
   xy: 6, 80
-  size: 20, 20      
+  size: 20, 16    
 Walk 
   xy: 38, 80
-  size: 20, 20
+  size: 20, 16
 Walk 
   xy: 70, 80
-  size: 20, 20
+  size: 20, 16
 Walk 
   xy: 102, 80
-  size: 20, 20  
+  size: 20, 16
