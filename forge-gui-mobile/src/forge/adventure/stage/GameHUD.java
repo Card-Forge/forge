@@ -584,6 +584,7 @@ public class GameHUD extends Stage {
             case "town":
                 changeBGM(MusicPlaylist.TOWN);
                 break;
+            case "dungeon":
             case "cave":
                 changeBGM(MusicPlaylist.CAVE);
                 break;

@@ -70,8 +70,8 @@ public class GameScene extends HudScene {
                 if (skipRoads) {
                     location = forHeader ? "Waste Map" : "waste";
                 } else {
-                    //should load while walking on "road"
-                    location = "";
+                    //current workaround to get the POI town name
+                    location = WorldStage.getInstance().getBoundary();
                 }
             else {
                 BiomeData data = biomeData.get(currentBiome);
