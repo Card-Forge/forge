@@ -258,7 +258,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
             game.updateCombatForView();
             game.fireEvent(new GameEventCombatChanged());
         }
-    } // end resolve
+    }
 
     public static Card getProtoType(final SpellAbility sa, final Card original, final Player newOwner) {
         final Card host = sa.getHostCard();

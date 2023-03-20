@@ -20,7 +20,7 @@ import forge.util.collect.FCollection;
 
 public class CharmEffect extends SpellAbilityEffect {
 
-    public static List<AbilitySub> makePossibleOptions(final SpellAbility sa) {
+    public static List<AbilitySub> makePossibleOptions(final SpellAbility sa, boolean forDesc) {
         final Card source = sa.getHostCard();
         List<String> restriction = null;
 
@@ -29,16 +29,19 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         List<AbilitySub> choices = Lists.newArrayList(sa.getAdditionalAbilityList("Choices"));
-        List<AbilitySub> toRemove = Lists.newArrayList();
-        for (AbilitySub ch : choices) {
-            // 603.3c If one of the modes would be illegal, that mode can't be chosen.
-            if ((ch.usesTargeting() && ch.isTrigger() && ch.getMinTargets() > 0 &&
-                    ch.getTargetRestrictions().getNumCandidates(ch, true) == 0) ||
-                    (restriction != null && restriction.contains(ch.getDescription()))) {
-                toRemove.add(ch);
+
+        if (!forDesc) {
+            List<AbilitySub> toRemove = Lists.newArrayList();
+            for (AbilitySub ch : choices) {
+                // 603.3c If one of the modes would be illegal, that mode can't be chosen.
+                if ((ch.usesTargeting() && ch.isTrigger() && ch.getMinTargets() > 0 &&
+                        ch.getTargetRestrictions().getNumCandidates(ch, true) == 0) ||
+                        (restriction != null && restriction.contains(ch.getDescription()))) {
+                    toRemove.add(ch);
+                }
             }
+            choices.removeAll(toRemove);
         }
-        choices.removeAll(toRemove);
 
         int indx = 0;
         // set CharmOrder
@@ -52,7 +55,7 @@ public class CharmEffect extends SpellAbilityEffect {
     public static String makeFormatedDescription(SpellAbility sa) {
         Card source = sa.getHostCard();
 
-        List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
+        List<AbilitySub> list = CharmEffect.makePossibleOptions(sa, true);
         final int num;
         boolean additionalDesc = sa.hasParam("AdditionalDescription");
         boolean optional = sa.hasParam("Optional");
@@ -166,7 +169,7 @@ public class CharmEffect extends SpellAbilityEffect {
         //this resets all previous choices
         sa.setSubAbility(null);
 
-        List<AbilitySub> choices = makePossibleOptions(sa);
+        List<AbilitySub> choices = makePossibleOptions(sa, false);
 
         // Entwine does use all Choices
         if (sa.isEntwine()) {
