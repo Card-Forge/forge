@@ -312,6 +312,8 @@ public class Forge implements ApplicationListener {
         GuiBase.setIsAdventureMode(false);
         openHomeScreen(-1, null); //default for startup
         isMobileAdventureMode = false;
+        MusicPlaylist.invalidateMusicPlaylist();
+        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
         if (isLandscapeMode()) { //open preferred new game screen by default if landscape mode
             NewGameMenu.getPreferredScreen().open();
         }
@@ -338,8 +340,11 @@ public class Forge implements ApplicationListener {
         try {
             Config.instance().loadResources();
             SpellSmithScene.instance().loadEditions();
-            if (startScene)
+            if (startScene) {
+                MusicPlaylist.invalidateMusicPlaylist();
+                SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
                 switchScene(StartScene.instance());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -404,8 +409,6 @@ public class Forge implements ApplicationListener {
                                 clearSplashScreen();
                             }
                         }
-                        //start background music
-                        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
                         safeToClose = true;
                         clearTransitionScreen();
                     }, takeScreenshot(), false, false, true, false));

@@ -6,8 +6,16 @@ import java.io.FilenameFilter;
 import forge.util.MyRandom;
 
 public enum MusicPlaylist {
-    MENUS("menus/"),
-    MATCH("match/");
+    BLACK   ("black/"),
+    BLUE    ("blue/"),
+    RED     ("red/"),
+    GREEN   ("green/"),
+    WHITE   ("white/"),
+    CASTLE  ("castle/"),
+    CAVE    ("cave/"),
+    TOWN    ("town/"),
+    MENUS   ("menus/"),
+    MATCH   ("match/");
 
     private final String subDir;
     private int mostRecentTrackIdx = -1;

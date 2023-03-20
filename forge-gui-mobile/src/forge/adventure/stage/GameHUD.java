@@ -33,6 +33,8 @@ import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.sound.MusicPlaylist;
+import forge.sound.SoundSystem;
 
 /**
  * Stage to handle everything rendered in the HUD
@@ -238,7 +240,6 @@ public class GameHUD extends Stage {
         return super.touchDown(screenX, screenY, pointer, button);
     }
 
-
     @Override
     public void draw() {
         updatelife = false;
@@ -274,6 +275,7 @@ public class GameHUD extends Stage {
             updatelife = false;
             lifePoints.setText("[%95][+Life]" + lifepointsTextColor + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
         }
+        updateMusic();
     }
 
     Texture miniMapTexture;
@@ -299,6 +301,7 @@ public class GameHUD extends Stage {
         } else {
             deckActor.setColor(menuActor.getColor());
         }
+        updateMusic();
     }
 
     private void openDeck() {
@@ -326,7 +329,6 @@ public class GameHUD extends Stage {
         dialog.getContentTable().add(L).width(120f);
         dialog.setKeepWithinStage(true);
         showDialog();
-
     }
 
     private void exitDungeonCallback() {
@@ -475,7 +477,6 @@ public class GameHUD extends Stage {
     }
 
     private void showDialog() {
-
         dialogButtonMap.clear();
         for (int i = 0; i < dialog.getButtonTable().getCells().size; i++) {
             dialogButtonMap.add((TextraButton) dialog.getButtonTable().getCells().get(i).getActor());
@@ -560,7 +561,48 @@ public class GameHUD extends Stage {
             if (count > 1)
                 showButtons();
         }
+    }
 
+    public void updateMusic() {
+        switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
+            case "green":
+                changeBGM(MusicPlaylist.GREEN);
+                break;
+            case "red":
+                changeBGM(MusicPlaylist.RED);
+                break;
+            case "blue":
+                changeBGM(MusicPlaylist.BLUE);
+                break;
+            case "black":
+                changeBGM(MusicPlaylist.BLACK);
+                break;
+            case "white":
+                changeBGM(MusicPlaylist.WHITE);
+                break;
+            case "capital":
+            case "town":
+                changeBGM(MusicPlaylist.TOWN);
+                break;
+            case "dungeon":
+            case "cave":
+                changeBGM(MusicPlaylist.CAVE);
+                break;
+            case "castle":
+                changeBGM(MusicPlaylist.CASTLE);
+                break;
+            case "waste":
+                changeBGM(MusicPlaylist.MENUS);
+                break;
+            default:
+                break;
+        }
+    }
+    float fade = 1f;
 
+    void changeBGM(MusicPlaylist playlist) {
+        if (!playlist.equals(SoundSystem.instance.getCurrentPlaylist())) {
+            SoundSystem.instance.setBackgroundMusic(playlist);
+        }
     }
 }
