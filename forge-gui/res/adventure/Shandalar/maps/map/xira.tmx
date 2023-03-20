@@ -10,7 +10,7 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="11" name="Collision" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJzVlUkOgCAMRdl6Me9/JFcmhkCHP2hswgp++0pbOI8xzh+tlb2lj3SIVbURRyevbtz7LGORPspJ4b+i/ZIv85P1oKK2We9UOJ+aiI+ZlZ3fynxX+Jxs816kc/KtajHzIf5Ud6c2BZ8rN0fvKQydLSbeM+7M4GBD3l12ddm6+VffPwVfplH1DlNf9M9C4nT/N3aeunF2nNFfhDJltXfNDcOInGHjZ+cqewo+5/2z86uu/8p/961w9ucuhnsxDBe0OnBV
+   eJzVl11uwkAMhHnMPsBtegWKckDOgNqehjOgwjHIKrLqjDz+WZUHRhopJNn1F6/3h2Pb7Y5v5NPi7+nPXZX2uq12tq2WfuYpionfg0IO65nV1sqdvh9pTr53a1sjQ+a7Ti3XZoSPSWLflbN8+NviiPgidhy/DB/jxVhz8+tAP2Pv4Liz2hQei81jZHPCm6OePD6PDd+NYjCmbL4rfJU84JhafDh/u9j6lGWTa0vn/WqMgzG99ZGpwhf18XGoxa6yZfis2rweVr+Sy1tTIr5MPN0f67vCZvWB7BHTf9tbVzSflY8Kl9SD5VG+aNwz+cvUqWbFfrJ8LHcsjrBpXabVkTAXbMxG1h3Nqpku6twYcbJ9ITN3qvJq65PUDzLgPTlXjKwrFcYMX/fXkuufactm7ZeZ+Jb6WEv/3p7LWHueZnXNpM+60XpiKbsPsxpj7YULc47nzJHcix7kO3/b9n+AZdZOz03L7DvRjO3V9sYt8hMoNu4z
   </data>
  </layer>
  <layer id="8" name="Background" width="40" height="26">
