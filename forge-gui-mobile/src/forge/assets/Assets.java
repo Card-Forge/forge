@@ -558,7 +558,8 @@ public class Assets implements Disposable {
 
         @Override
         public synchronized void unload(String fileName) {
-            super.unload(fileName);
+            if (isLoaded(fileName))
+                super.unload(fileName);
             if (memoryPerFile.containsKey(fileName)) {
                 memoryPerFile.remove(fileName);
                 cardArtCache().clear();

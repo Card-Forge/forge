@@ -301,7 +301,6 @@ public class GameHUD extends Stage {
         } else {
             deckActor.setColor(menuActor.getColor());
         }
-        updateMusic();
     }
 
     private void openDeck() {

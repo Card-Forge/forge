@@ -67,6 +67,7 @@ public class DuelScene extends ForgeScene {
     Deck playerDeck;
     boolean chaosBattle = false;
     boolean callbackExit = false;
+    boolean arenaBattleChallenge = false;
     private LoadingOverlay matchOverlay;
     List<IPaperCard> playerExtras = new ArrayList<>();
     List<IPaperCard> AIExtras = new ArrayList<>();
@@ -278,6 +279,8 @@ public class DuelScene extends ForgeScene {
                 }
                 this.AIExtras = aiCards;
                 deck = deckProxy.getDeck();
+            } else if (this.arenaBattleChallenge) {
+                deck = Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck();
             } else {
                 deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck() || Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
             }
@@ -376,8 +379,14 @@ public class DuelScene extends ForgeScene {
     }
 
     public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite) {
+        initDuels(playerSprite, enemySprite, false);
+    }
+    public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite, boolean isArena) {
         this.player = playerSprite;
         this.enemy = enemySprite;
+        this.arenaBattleChallenge = isArena
+                && (Current.player().getDifficulty().name.equalsIgnoreCase("Hard")
+                || Current.player().getDifficulty().name.equalsIgnoreCase("Insane"));
         this.playerDeck = (Deck) Current.player().getSelectedDeck().copyTo("PlayerDeckCopy");
         this.chaosBattle = this.enemy.getData().copyPlayerDeck && Current.player().isFantasyMode();
         this.AIExtras.clear();

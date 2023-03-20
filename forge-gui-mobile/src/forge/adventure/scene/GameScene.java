@@ -64,14 +64,13 @@ public class GameScene extends HudScene {
         } else {
             World world = Current.world();
             //this gets the name of the layer... this shoud be based on boundaries...
-            int currentBiome = World.highestBiome(world.getBiome((int) stage.getPlayerSprite().getX() / world.getTileSize(), (int) stage.getPlayerSprite().getY() / world.getTileSize()));
+            int currentBiome = World.highestBiome(world.getBiomeMapXY((int) stage.getPlayerSprite().getX() / world.getTileSize(), (int) stage.getPlayerSprite().getY() / world.getTileSize()));
             List<BiomeData> biomeData = world.getData().GetBiomes();
-            if (biomeData.size() <= currentBiome) //on roads....
+            if (biomeData.size() <= currentBiome) //shouldn't be the case but default to waste
                 if (skipRoads) {
                     location = forHeader ? "Waste Map" : "waste";
                 } else {
-                    //current workaround to get the POI town name
-                    location = WorldStage.getInstance().getBoundary();
+                    location = "";
                 }
             else {
                 BiomeData data = biomeData.get(currentBiome);
