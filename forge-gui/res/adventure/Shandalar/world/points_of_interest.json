@@ -1912,5 +1912,41 @@
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "farm",
 	"map": "maps/map/scarecrow_farm.tmx"
+},
+{
+	"name": "Slobads Factory",
+	"type": "dungeon",
+	"count": 1,
+	"radiusFactor": 0.8,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "Factory",
+	"map": "maps/map/slobad_factory.tmx"
+},
+{
+	"name": "Tibalts Fortress",
+	"type": "dungeon",
+	"count": 1,
+	"radiusFactor": 0.8,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "LavaForge",
+	"map": "maps/map/tibalt.tmx"
+},
+{
+	"name": "Xiras Hive",
+	"type": "dungeon",
+	"count": 1,
+	"radiusFactor": 0.8,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "Cave",
+	"map": "maps/map/xira.tmx"
+},
+{
+	"name": "Grolnoks Bog",
+	"type": "dungeon",
+	"count": 1,
+	"radiusFactor": 0.8,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "EvilGrove",
+	"map": "maps/map/grolnok.tmx"
 }
 ]

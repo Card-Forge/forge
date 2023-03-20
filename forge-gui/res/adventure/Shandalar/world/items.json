@@ -16,6 +16,7 @@
     }
   },
   {
+  
     "name": "Phoenix Charm",
 	"description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
     "equipmentSlot": "Neck",
@@ -203,6 +204,16 @@
   },
   {
     "name": "Strange Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+    {
+    "name": "Torturer's Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+    {
+    "name": "Tibalt's Key",
     "iconName": "StrangeKey",
     "questItem": true
   },
@@ -1090,6 +1101,51 @@
       "lifeModifier": 1,
       "startBattleWithCard": [
         "Chicken Egg"
+      ]
+}
+},
+{
+    "name": "Tibalt's Bag of Tricks",
+    "equipmentSlot": "Left",
+    "iconName": "BurningBook",
+    "effect": {
+      "lifeModifier": 1,
+      "startBattleWithCardInCommandZone": [
+        "Tibalt's Bag of Tricks"
+      ]
+}
+},
+{
+    "name": "Xira's Fancy Hat",
+    "equipmentSlot": "Neck",
+    "iconName": "BrownHat",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Xira's Hive"
+      ]
+}
+},
+{
+    "name": "Grolnok's Skin",
+    "equipmentSlot": "Right",
+    "iconName": "FrogSkin",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCardInCommandZone": [
+        "Grolnok's Skin"
+      ]
+}
+},
+{
+    "name": "Slobad's Iron Boots",
+    "equipmentSlot": "Boots",
+    "iconName": "MetallicBoots",
+    "effect": {
+      "lifeModifier": 1,
+      "moveSpeed": 1.35,
+      "startBattleWithCardInCommandZone": [
+        "Slobad's Iron Boots"
       ]
 }
 }

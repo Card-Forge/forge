@@ -1,0 +1,9 @@
+Name:Grolnok's Boss Effect
+ManaCost:no cost
+Colors:black,green,Blue
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Enchantment.nonAura+Other,Artifact | EffectZone$ Command | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | Description$ Artifacts and Enchantments are Creatures in addition to their other types and has base power and base toughness each equal to its mana value.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonToken+OppCtrl | TriggerZones$ Command | Execute$ TrigDualCopy | TriggerDescription$ Whenever a nontoken creature enters the battlefield under an opponents control,  create a token that's a copy of that creature except it's a 1/1 green Frog.
+SVar:TrigDualCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy |  SetPower$ 1 | SetToughness$ 1 | SetColor$ Green | SetCreatureTypes$ Frog
+SVar:AffectedX:Count$CardManaCost
+Oracle:Artifacts and Enchantments are Creatures in addition to their other types and has base power and base toughness each equal to its mana value.\nWhenever a nontoken creature enters the battlefield under an opponents control,  create a token that's a copy of that creature except it's a 1/1 green Frog.

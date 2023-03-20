@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="55">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="69">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
   <property name="dungeonEffect">{
-  &quot;startBattleWithCard&quot;: [ &quot;Thallid Shell-Dweller&quot;,&quot;Slimefoot, Thallid Transplant&quot;, &quot;Thallid Shell-Dweller&quot; ]
+  &quot;startBattleWithCard&quot;: [ &quot;Thallid Shell-Dweller&quot; ]
 }</property>
  </properties>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJyL5mVg2MWDH0cRoQaEo4lUBzJPFkjTG0jzjNo7au+ovaP2jto7au/gsJeY+hIZIwNS9SJjAAIUL00=
-  </data>
- </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxbwM7AsGAUj+JRPIpH8SgexSMCAwB2ckzC
@@ -47,5 +42,55 @@
     <property name="enemy" value="Slimefoot"/>
    </properties>
   </object>
+  <object id="55" template="../obj/manashards.tx" x="194.986" y="34.0645"/>
+  <object id="56" template="../obj/booster.tx" x="221.398" y="34.5536">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="57" template="../obj/enemy.tx" x="101.074" y="98.2815" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Fungus"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="59,60,61,62,61,60"/>
+   </properties>
+  </object>
+  <object id="58" template="../obj/enemy.tx" x="322.647" y="204.91" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Fungus"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="63,66,64,65,68,65,64,66"/>
+   </properties>
+  </object>
+  <object id="59" template="../obj/waypoint.tx" x="135.802" y="84.4441"/>
+  <object id="60" template="../obj/waypoint.tx" x="117.215" y="148.519"/>
+  <object id="61" template="../obj/waypoint.tx" x="96.6721" y="193.518"/>
+  <object id="62" template="../obj/waypoint.tx" x="36.9992" y="142.65"/>
+  <object id="63" template="../obj/waypoint.tx" x="340.744" y="243.898"/>
+  <object id="64" template="../obj/waypoint.tx" x="376.45" y="163.193"/>
+  <object id="65" template="../obj/waypoint.tx" x="346.614" y="98.6286"/>
+  <object id="66" template="../obj/waypoint.tx" x="363.733" y="201.344"/>
+  <object id="67" template="../obj/waypoint.tx" x="249.278" y="44.3361"/>
+  <object id="68" template="../obj/waypoint.tx" x="333.407" y="37.4884"/>
  </objectgroup>
 </map>

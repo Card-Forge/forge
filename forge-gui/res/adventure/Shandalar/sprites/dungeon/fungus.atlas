@@ -1,0 +1,80 @@
+fungus.png
+size: 256,224
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 11, 172
+  size: 14, 13     
+Idle 
+  xy: 3, 7
+  size: 25, 25   
+Idle 
+  xy: 35, 7
+  size: 25, 25
+Idle 
+  xy: 67, 7
+  size: 25, 25
+Idle 
+  xy: 99, 7
+  size: 25, 25
+Walk
+  xy: 3, 37
+  size: 27, 27      
+Walk
+  xy: 35, 37
+  size: 27, 27  
+Walk
+  xy: 67, 37
+  size: 27, 27      
+Walk
+  xy: 99, 37
+  size: 27, 27
+Walk
+  xy: 131, 37
+  size: 27, 27      
+Walk
+  xy: 163, 37
+  size: 27, 27  
+Walk
+  xy: 195, 37
+  size: 27, 27      
+Walk
+  xy: 227, 37
+  size: 27, 27
+Attack
+  xy: 3, 69
+  size: 29, 27      
+Attack
+  xy: 35, 69
+  size: 29, 27  
+Attack
+  xy: 67, 69
+  size: 29, 27      
+Attack
+  xy: 99, 69
+  size: 29, 27
+Attack
+  xy: 131, 69
+  size: 29, 27      
+Attack
+  xy: 163, 69
+  size: 29, 27  
+Death
+  xy: 3,167
+  size: 25, 25      
+Death
+  xy: 35, 167
+  size: 25, 25  
+Death
+  xy: 67, 167
+  size: 25, 25      
+Death
+  xy: 99, 167
+  size: 25, 25
+Death
+  xy: 131, 167
+  size: 25, 25      
+Death
+  xy: 163, 167
+  size: 25, 25  
