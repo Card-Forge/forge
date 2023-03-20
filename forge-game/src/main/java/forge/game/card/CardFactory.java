@@ -764,7 +764,7 @@ public class CardFactory {
                 state.removeIntrinsicKeyword(kw);
             }
 
-            if (state.getType().isCreature() || state.getType().hasSubtype("Vehicle")) {
+            if (state.getType().isCreature() || state.getBasePowerString() != null) {
                 if (sa.hasParam("SetPower")) {
                     state.setBasePower(AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("SetPower"), sa));
                 }
