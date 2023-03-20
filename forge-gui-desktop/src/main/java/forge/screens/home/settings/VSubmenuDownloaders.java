@@ -70,7 +70,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     private final FLabel btnHowToPlay                 = _makeButton(localizer.getMessage("btnHowToPlay"));
     private final FLabel btnDownloadPrices            = _makeButton(localizer.getMessage("btnDownloadPrices"));
     private final FLabel btnDownloadSkins             = _makeButton(localizer.getMessage("btnDownloadSkins"));
-    private final FLabel btnDownloadMusic             = _makeButton(localizer.getMessage("btnDownloadMusic"));
     private final FLabel btnLicensing                 = _makeButton(localizer.getMessage("btnLicensing"));
 
     /**
@@ -110,9 +109,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
             pnlContent.add(btnDownloadSkins, constraintsBTN);
             pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadSkins")), constraintsLBL);
-            
-            pnlContent.add(btnDownloadMusic, constraintsBTN);
-            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadMusic")), constraintsLBL);
         } else {
             String text = localizer.getMessage("lblYourVersionOfJavaIsTooOld");
             FLabel label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
@@ -185,7 +181,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     public void setDownloadPricesCommand(UiCommand command)            { btnDownloadPrices.setCommand(command);      }
     public void setLicensingCommand(UiCommand command)                 { btnLicensing.setCommand(command);           }
     public void setDownloadSkinsCommand(UiCommand command)             { btnDownloadSkins.setCommand(command);       }
-    public void setDownloadMusicCommand(UiCommand command)             { btnDownloadMusic.setCommand(command);       }
 
     public void focusTopButton() {
         btnDownloadPics.requestFocusInWindow();

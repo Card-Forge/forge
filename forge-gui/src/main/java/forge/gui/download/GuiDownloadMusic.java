@@ -15,7 +15,6 @@ public class GuiDownloadMusic extends GuiDownloadService {
     protected final Map<String, String> getNeededFiles() {
         final Map<String, String> urls = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
-        addMissingItems(urls, ForgeConstants.MUSIC_LIST_FILE,  ForgeConstants.MUSIC_DIR );
         addMissingItems(urls, ForgeConstants.MUSIC_LIST_ADVENTURE_FILE,  ForgeConstants.ADVENTURE_MUSIC_DIR );
         return urls;
     }
