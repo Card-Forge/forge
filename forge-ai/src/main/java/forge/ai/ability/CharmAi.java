@@ -26,7 +26,7 @@ public class CharmAi extends SpellAbilityAi {
     @Override
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
-        List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+        List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa, false);
 
         final int num;
         final int min;
