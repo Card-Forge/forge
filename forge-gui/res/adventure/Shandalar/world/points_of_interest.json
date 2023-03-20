@@ -1844,7 +1844,7 @@
 {
 	"name": "OrthodoxyBasilica",
 	"type": "dungeon",
-	"count": 2
+	"count": 2,
 	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/Phyrexian_Buildings.atlas",
 	"sprite": "BasilicaSmall",
