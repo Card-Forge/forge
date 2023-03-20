@@ -404,10 +404,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean canPlayWithOptionalCost(OptionalCostValue opt) {
-        SpellAbility saOpt = GameActionUtil.addOptionalCosts(this, Lists.newArrayList(opt));
-        boolean result = saOpt.canPlay();
-        saOpt.clearPipsToReduce();
-        return result;
+        return GameActionUtil.addOptionalCosts(this, Lists.newArrayList(opt)).canPlay();
     }
 
     public boolean isPossible() {

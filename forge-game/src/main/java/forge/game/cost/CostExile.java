@@ -17,7 +17,6 @@
  */
 package forge.game.cost;
 
-import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -85,10 +84,7 @@ public class CostExile extends CostPartWithList {
     @Override
     public final String toString() {
         final Integer i = this.convertAmount();
-        String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
-        if (CardType.CoreType.isValidEnum(desc)) {
-            desc = desc.toLowerCase();
-        }
+        String desc = this.getDescriptiveType();
         String origin = this.from.name().toLowerCase();
 
         if (this.payCostFromSource()) {
