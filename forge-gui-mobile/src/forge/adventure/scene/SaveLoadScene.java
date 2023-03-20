@@ -250,7 +250,7 @@ public class SaveLoadScene extends UIScene {
 
 
     public void save() {
-        if (WorldSave.getCurrentSave().save(textInput.getText() + ASCII_179 + GameScene.instance().getAdventurePlayerLocation(true), currentSlot)) {
+        if (WorldSave.getCurrentSave().save(textInput.getText() + ASCII_179 + GameScene.instance().getAdventurePlayerLocation(true, true), currentSlot)) {
             updateFiles();
             //ensure the dialog is hidden before switching
 

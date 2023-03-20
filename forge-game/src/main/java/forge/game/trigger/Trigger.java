@@ -613,4 +613,10 @@ public abstract class Trigger extends TriggerReplacementBase {
     public SpellAbility ensureAbility() {
         return ensureAbility(this);
     }
+
+    @Override
+    public void setOverridingAbility(SpellAbility overridingAbility0) {
+        super.setOverridingAbility(overridingAbility0);
+        overridingAbility0.setTrigger(this);
+    }
 }

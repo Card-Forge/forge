@@ -1,0 +1,56 @@
+wasp.png
+size: 128,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 9, 73
+  size: 14, 10     
+Idle 
+  xy: 9, 8
+  size: 15, 24   
+Idle 
+  xy: 41, 8
+  size: 15, 24
+Idle 
+  xy: 73, 8
+  size: 15, 24
+Idle 
+  xy: 105, 8
+  size: 15, 24 
+Walk 
+  xy: 9, 40
+  size: 15, 24
+Walk 
+  xy: 41, 40
+  size: 15, 24
+Walk 
+  xy: 73, 40
+  size: 15, 24  
+Walk 
+  xy: 105, 40
+  size: 15, 24
+Attack 
+  xy: 9, 72
+  size: 15, 24      
+Attack 
+  xy: 41, 72
+  size: 15, 24 
+Attack 
+  xy: 73, 72
+  size: 15, 24 
+Attack 
+  xy: 105, 72
+  size: 15, 24              
+Death 
+  xy: 9, 126
+  size: 15, 24      
+Death 
+  xy: 32, 126
+  size: 32, 32 
+Death 
+  xy: 64, 126
+  size: 32, 32 
+Death 
+  xy: 96, 126
+  size: 32, 32

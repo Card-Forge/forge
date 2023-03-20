@@ -1,0 +1,12 @@
+Name:Slobad's Boss Effect
+ManaCost:no cost
+Types:Artifact
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Artifact | AddToughness$ 2 | EffectZone$ Command | Description$ Artifact Creatures you control get +0/+2
+T:Mode$ DamageDoneOnce | ValidTarget$ You | TriggerZones$ Command | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ Whenever Slobad is dealt damage, create X scrap tokens, where X is the amount of damage dealt. 
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ scrap 
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Permanent.namedScrap | PresentCompare$ GE5 | TriggerZones$ Command | Execute$ TrigSacrifice | TriggerDescription$ At the beginning of his end step, Slobad creates a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control." if he has five or more scrap tokens. Then sacrifice five scrap tokens
+SVar:TrigSacrifice:DB$ Sacrifice | SacValid$ Permanent.namedScrap | Defined$ You | Amount$ 5 | RememberSacrificed$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | ConditionDefined$ Remembered | ConditionPresent Card | ConditionCompare$ GE5 | TokenScript$ c_0_0_a_construct_total_artifacts | TokenOwner$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggerCount$DamageAmount
+Oracle:Artifact Creatures you control get +0/+2.\nWhenever Slobad is dealt damage, Slobad creates X scrap tokens, where X is the amount of damage dealt. \nAt the beginning of Slobads end step, if Solbad has five or more scrap tokens, Slobad creates a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."Then Slobad sacrifices five scrap tokens

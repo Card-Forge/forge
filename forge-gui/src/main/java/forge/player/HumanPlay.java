@@ -320,7 +320,13 @@ public class HumanPlay {
                     costExile.payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Graveyard)), sourceAbility, hcd.isEffect());
                 } else {
                     from = costExile.getFrom();
-                    CardCollection list = CardLists.getValidCards(p.getCardsIn(from), part.getType().split(";"), p, source, sourceAbility);
+                    CardCollection list;
+                    if (costExile.zoneRestriction != 1) {
+                        list = new CardCollection(p.getGame().getCardsIn(from));
+                    } else {
+                        list = new CardCollection(p.getCardsIn(from));
+                    }
+                    list = CardLists.getValidCards(list, part.getType().split(";"), p, source, sourceAbility);
                     final int nNeeded = getAmountFromPart(part, source, sourceAbility);
                     if (list.size() < nNeeded) {
                         return false;

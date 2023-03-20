@@ -1787,7 +1787,7 @@ public class CardFactoryUtil {
                     sa.setLastChapter(idx == abs.size());
 
                     StringBuilder trigStr = new StringBuilder("Mode$ CounterAdded | ValidCard$ Card.Self | TriggerZones$ Battlefield");
-                    trigStr.append("| Chapter$ True | CounterType$ LORE | CounterAmount$ EQ").append(i);
+                    trigStr.append("| Chapter$ ").append(i).append(" | CounterType$ LORE | CounterAmount$ EQ").append(i);
                     if (i != idx) {
                         trigStr.append(" | Secondary$ True");
                     }
@@ -3829,6 +3829,10 @@ public class CardFactoryUtil {
                 }
             }
             effect += " | Description$ " + desc;
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+        } else if (keyword.startsWith("Read ahead")) {
+            String effect = "Mode$ DisableTriggers | ValidCard$ Card.Self+ThisTurnEntered | ValidTrigger$ Triggered.ChapterNotLore | Secondary$ True" +
+                    " | Description$ Chapter abilities of this Saga can’t trigger the turn it entered the battlefield unless it has exactly the number of lore counters on it specified in the chapter symbol of that ability.";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Shroud")) {
             String effect = "Mode$ CantTarget | Shroud$ True | ValidCard$ Card.Self | Secondary$ True"

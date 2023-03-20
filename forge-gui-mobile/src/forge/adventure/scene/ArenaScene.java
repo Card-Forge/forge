@@ -327,12 +327,12 @@ public class ArenaScene extends UIScene implements IAfterMatch {
             pane.clear();
             arenaTable.clear();
             if (Forge.isLandscapeMode()) {
-                arenaTable.add(Controls.newTextraLabel("[;][%150]" + GameScene.instance().getAdventurePlayerLocation(true) + " Arena")).top();
+                arenaTable.add(Controls.newTextraLabel("[;][%150]" + GameScene.instance().getAdventurePlayerLocation(true, true) + " Arena")).top();
                 arenaTable.row();
                 arenaTable.add(arenaPlane).width(arenaPlane.getWidth()).height(arenaPlane.getHeight());
                 pane.setActor(arenaTable);
             } else {
-                arenaTable.add(Controls.newTextraLabel("[;][%150]" + GameScene.instance().getAdventurePlayerLocation(true) + " Arena")).colspan(3).top();
+                arenaTable.add(Controls.newTextraLabel("[;][%150]" + GameScene.instance().getAdventurePlayerLocation(true, true) + " Arena")).colspan(3).top();
                 arenaTable.row();
                 int size = fighters.size;
                 int pv = 0;

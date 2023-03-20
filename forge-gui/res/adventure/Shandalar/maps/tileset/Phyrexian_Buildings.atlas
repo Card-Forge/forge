@@ -1,0 +1,9 @@
+Phyrexian_Buildings.png
+size: 32, 32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+BasilicaSmall
+  xy: 0, 0
+  size: 32, 32
+

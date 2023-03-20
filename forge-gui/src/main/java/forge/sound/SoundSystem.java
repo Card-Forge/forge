@@ -192,6 +192,10 @@ public class SoundSystem {
         changeBackgroundTrack();
     }
 
+    public MusicPlaylist getCurrentPlaylist() {
+        return currentPlaylist;
+    }
+
     public void changeBackgroundTrack() {
         //ensure old track stopped and disposed of if needed
         if (currentTrack != null) {
@@ -300,6 +304,8 @@ public class SoundSystem {
     }
 
     public String getMusicDirectory() {
+        if (GuiBase.isAdventureMode())
+            return ForgeConstants.ADVENTURE_MUSIC_DIR;
         String profileName = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CURRENT_MUSIC_SET);
         if (profileName.equals("Default")) {
             return ForgeConstants.MUSIC_DIR;
