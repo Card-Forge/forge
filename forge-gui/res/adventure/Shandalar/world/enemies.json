@@ -6517,7 +6517,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
-	"scale": 0.40,
+	"scale": 0.50,
 	"life": 14,
 	"rewards": [
 	{
