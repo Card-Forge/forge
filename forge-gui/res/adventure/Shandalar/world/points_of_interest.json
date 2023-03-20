@@ -1842,6 +1842,15 @@
 	"map": "maps/map/kobold_mine.tmx"
 },
 {
+	"name": "OrthodoxyBasilica",
+	"type": "dungeon",
+	"count": 2
+	"radiusFactor": 0.8,
+	"spriteAtlas": "maps/tileset/Phyrexian_Buildings.atlas",
+	"sprite": "BasilicaSmall",
+	"map": "maps/map/phyrexian_w1.tmx"
+},
+{
 	"name": "Slimefoots Lair",
 	"type": "dungeon",
 	"count": 1,
