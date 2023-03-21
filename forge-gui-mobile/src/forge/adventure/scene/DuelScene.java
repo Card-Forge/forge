@@ -141,11 +141,11 @@ public class DuelScene extends ForgeScene {
 
     void afterGameEnd(String enemyName, boolean winner, boolean showOverlay, boolean alternate) {
         Runnable runnable = () -> Gdx.app.postRunnable(()-> {
-            if (this.isArena) {
+            if (GameScene.instance().isNotInWorldMap()) {
                 SoundSystem.instance.pause();
                 GameHUD.getInstance().playAudio();
             } else {
-                SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
+                SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
                 SoundSystem.instance.resume();
             }
             dungeonEffect = null;
