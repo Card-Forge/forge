@@ -146,6 +146,7 @@ public class DuelScene extends ForgeScene {
                 GameHUD.getInstance().playAudio();
             } else {
                 SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
+                SoundSystem.instance.resume();
             }
             dungeonEffect = null;
             callbackExit = false;
