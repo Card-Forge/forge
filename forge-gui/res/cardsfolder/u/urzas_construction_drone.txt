@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Names$ Urza's Mine,Urza's Tower,Urza's Power Plant | Zone$ Library
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ Whenever CARDNAME attacks or dies, seek an Urza's land card.
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigSeek | Secondary$ True | Execute$ TrigSeek | TriggerDescription$ Whenever CARDNAME attacks or dies, seek an Urza's land card.
-SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Land.Urza's | ChangeNum$ 1
+SVar:TrigSeek:DB$ Seek | Type$ Card.Land+Urza's
 SVar:HasAttackEffect:TRUE
 DeckHas:Type$Urza's
 DeckHints:Type$Urza's

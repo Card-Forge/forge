@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Human Wizard
 PT:2/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigSeek | TriggerDescription$ When CARDNAME enters the battlefield, seek an artifact card from among the top ten cards of your library, then shuffle.
-SVar:TrigSeek:DB$ Dig | Defined$ You | DigNum$ 10 | ChangeNum$ 1 | ChangeValid$ Card.Artifact | DestinationZone$ Hand | Mandatory$ True | NoLooking$ True | DestinationZone2$ Library | LibraryPosition2$ 0 | SkipReorder$ True | RandomChange$ True | SubAbility$ Shuffle
+SVar:TrigSeek:DB$ Seek | DefinedCards$ Top_10_OfLibrary | Type$ Artifact | SubAbility$ Shuffle
 SVar:Shuffle:DB$ Shuffle
 DeckNeeds:Type$Artifact
 Oracle:When Trove Mage enters the battlefield, seek an artifact card from among the top ten cards of your library, then shuffle.

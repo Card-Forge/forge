@@ -1,8 +1,10 @@
 Name:Spawning Pod
 ManaCost:2 G
 Types:Artifact
-A:AB$ ChangeZone | Cost$ 1 T Sac<1/Creature> | Origin$ Library | Destination$ Battlefield | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Creature.cmcEQX | ChangeNum$ 1 | SorcerySpeed$ True | AILogic$ SacAndUpgrade | AnimateSubAbility$ DBAnimate | SpellDescription$ Seek a creature card with mana value equal to 1 plus the sacrificed creature's mana value and put that card onto the battlefield. That creature is a Phyrexian in addition to its other types. Activate only as a sorcery.
+A:AB$ Seek | Cost$ 1 T Sac<1/Creature> | Type$ Creature.cmcEQX | SorcerySpeed$ True | AILogic$ SacAndUpgrade | ImprintFound$ True | SubAbility$ DBPut | SpellDescription$ Seek a creature card with mana value equal to 1 plus the sacrificed creature's mana value and put that card onto the battlefield. That creature is a Phyrexian in addition to its other types. Activate only as a sorcery.
+SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ Imprinted | AnimateSubAbility$ DBAnimate | SubAbility$ DBCleanup
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Phyrexian | Duration$ Permanent
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:X:Sacrificed$CardManaCost/Plus.1
 SVar:AIPreference:SacCost$Creature.nonToken
 DeckHas:Ability$Sacrifice & Type$Phyrexian
