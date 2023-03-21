@@ -27,3 +27,5 @@ ScryfallCode=PWCS
 20224 M The Wandering Emperor @Takayuki Futami
 20225 R Farewell @SOFT_MEN
 20226 U Banishing Slash @Ruiko Nakamura
+20231 M Elspeth Resplendent @Areku Nishiki
+20232 R Giada, Font of Hope @Umiu Geso
