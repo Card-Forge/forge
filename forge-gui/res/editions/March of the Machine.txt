@@ -23,7 +23,7 @@ ScryfallCode=MOM
 270 C Jungle Hollow @Thomas Stoop
 271 C Rugged Highlands @Thomas Stoop
 272 C Scoured Barrens @Robin Olausson
-273 M Swiftwater Cliffs @Julian Kok Joon Wen
+273 C Swiftwater Cliffs @Julian Kok Joon Wen
 274 C Thornwood Falls @Roman Kuteynikov
 275 C Tranquil Cove @Chris Ostrowski
 276 C Wind-Scarred Crag @Roman Kuteynikov
@@ -38,4 +38,4 @@ ScryfallCode=MOM
 352 R Faerie Mastermind @Joshua Raphael
 358 R Breach the Multiverse @Liiga Smilshkalne
 386 R Ghalta and Mavren @Betty Jiang
-387 R Omnath, Locus of All @Jessica Rossier
+387 R Omnath, Locus of All @Helge C. Balzer
