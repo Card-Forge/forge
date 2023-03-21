@@ -15,7 +15,7 @@ import forge.game.card.Card;
 public class GameEventCardStatsChanged extends GameEvent {
 
     public final Collection<Card> cards;
-    boolean transform = false;
+    public boolean transform = false;
     public GameEventCardStatsChanged(Card affected) {
         this(affected, false);
     }
