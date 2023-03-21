@@ -2,6 +2,8 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -35,6 +37,7 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
+import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Stage to handle everything rendered in the HUD
@@ -275,7 +278,10 @@ public class GameHUD extends Stage {
             updatelife = false;
             lifePoints.setText("[%95][+Life]" + lifepointsTextColor + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
         }
-        updateMusic();
+        if (!GameScene.instance().isNotInWorldMap())
+            updateMusic();
+        else
+            SoundSystem.instance.pause();
     }
 
     Texture miniMapTexture;
@@ -301,7 +307,65 @@ public class GameHUD extends Stage {
         } else {
             deckActor.setColor(menuActor.getColor());
         }
-        updateMusic();
+        if (GameScene.instance().isNotInWorldMap()) {
+            SoundSystem.instance.pause();
+            switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
+                case "capital":
+                case "town":
+                    setAudio(MusicPlaylist.TOWN);
+                    break;
+                case "dungeon":
+                case "cave":
+                    setAudio(MusicPlaylist.CAVE);
+                    break;
+                case "castle":
+                    setAudio(MusicPlaylist.CASTLE);
+                    break;
+                default:
+                    break;
+            }
+            playAudio();
+        } else {
+            unloadAudio();
+            SoundSystem.instance.resume(); // resume World BGM
+        }
+    }
+
+    private Pair<FileHandle, Music> audio = null;
+
+    public void playAudio() {
+        if (audio != null) {
+            audio.getRight().setLooping(true);
+            audio.getRight().play();
+        }
+    }
+
+    public void unloadAudio() {
+        if (audio != null) {
+            audio.getRight().setOnCompletionListener(null);
+            audio.getRight().stop();
+            Forge.getAssets().manager().unload(audio.getLeft().path());
+        }
+    }
+
+    private MusicPlaylist currentAudioPlaylist = null;
+
+    private void setAudio(MusicPlaylist playlist) {
+        if (playlist.equals(currentAudioPlaylist))
+            return;
+        unloadAudio();
+        audio = getMusic(playlist);
+    }
+
+    private Pair<FileHandle, Music> getMusic(MusicPlaylist playlist) {
+        FileHandle file = Gdx.files.absolute(playlist.getNewRandomFilename());
+        Music music = Forge.getAssets().getMusic(file);
+        if (music != null) {
+            currentAudioPlaylist = playlist;
+            return Pair.of(file, music);
+        }
+        currentAudioPlaylist = null;
+        return null;
     }
 
     private void openDeck() {
@@ -580,17 +644,6 @@ public class GameHUD extends Stage {
             case "white":
                 changeBGM(MusicPlaylist.WHITE);
                 break;
-            case "capital":
-            case "town":
-                changeBGM(MusicPlaylist.TOWN);
-                break;
-            case "dungeon":
-            case "cave":
-                changeBGM(MusicPlaylist.CAVE);
-                break;
-            case "castle":
-                changeBGM(MusicPlaylist.CASTLE);
-                break;
             case "waste":
                 changeBGM(MusicPlaylist.MENUS);
                 break;
@@ -598,6 +651,7 @@ public class GameHUD extends Stage {
                 break;
         }
     }
+
     float fade = 1f;
 
     void changeBGM(MusicPlaylist playlist) {

@@ -294,12 +294,6 @@ public class WorldStage extends GameStage implements SaveFileContent {
         background.loadChunk(pos.x, pos.y);
         handlePointsOfInterestCollision();
     }
-    public String getBoundary() {
-        if (background == null)
-            return "";
-        GridPoint2 pos = background.translateFromWorldToChunk(player.getX(), player.getY());
-        return MapSprite.getBoundaryName(pos.x, pos.y);
-    }
 
     @Override
     public void leave() {

@@ -63,30 +63,6 @@ public class MapSprite extends Actor {
         return actorGroup;
     }
 
-    public static String getBoundaryName(int chunkX, int chunkY) {
-        String boundary = "";
-        List<PointOfInterest> poi = WorldSave.getCurrentSave().getWorld().getPointsOfInterest(chunkX, chunkY);
-
-        for (PointOfInterest p : poi) {
-            if ("town".equalsIgnoreCase(p.getData().type)) {
-                if (p.getData().name.startsWith("Waste"))
-                    boundary = "waste";
-                else if (p.getData().name.startsWith("Plains"))
-                    boundary = "white";
-                else if (p.getData().name.startsWith("Forest"))
-                    boundary = "green";
-                else if (p.getData().name.startsWith("Island"))
-                    boundary = "blue";
-                else if (p.getData().name.startsWith("Mountain"))
-                    boundary = "red";
-                else if (p.getData().name.startsWith("Swamp"))
-                    boundary = "black";
-                break;
-            }
-        }
-        return boundary;
-    }
-
     //BitmapFont font;
     @Override
     public void draw(Batch batch, float parentAlpha) {
