@@ -69,6 +69,7 @@ public class DuelScene extends ForgeScene {
     boolean chaosBattle = false;
     boolean callbackExit = false;
     boolean arenaBattleChallenge = false;
+    boolean isArena = false;
     private LoadingOverlay matchOverlay;
     List<IPaperCard> playerExtras = new ArrayList<>();
     List<IPaperCard> AIExtras = new ArrayList<>();
@@ -140,7 +141,12 @@ public class DuelScene extends ForgeScene {
 
     void afterGameEnd(String enemyName, boolean winner, boolean showOverlay, boolean alternate) {
         Runnable runnable = () -> Gdx.app.postRunnable(()-> {
-            SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
+            if (this.isArena) {
+                SoundSystem.instance.pause();
+                GameHUD.getInstance().playAudio();
+            } else {
+                SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
+            }
             dungeonEffect = null;
             callbackExit = false;
             Forge.clearTransitionScreen();
@@ -270,6 +276,7 @@ public class DuelScene extends ForgeScene {
         addEffects(humanPlayer, playerEffects);
 
         currentEnemy = enemy.getData();
+        boolean bossBattle = currentEnemy.boss;
         for (int i = 0; i < 8 && currentEnemy != null; i++) {
             Deck deck = null;
 
@@ -337,7 +344,7 @@ public class DuelScene extends ForgeScene {
         rules.setWarnAboutAICards(false);
 
         hostedMatch.setEndGameHook(() -> DuelScene.this.GameEnd());
-        hostedMatch.startMatch(rules, appliedVariants, players, guiMap);
+        hostedMatch.startMatch(rules, appliedVariants, players, guiMap, bossBattle ? MusicPlaylist.BOSS : MusicPlaylist.MATCH);
         MatchController.instance.setGameView(hostedMatch.getGameView());
         boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
         if (chaosBattle || showMessages) {
@@ -386,6 +393,7 @@ public class DuelScene extends ForgeScene {
     public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite, boolean isArena) {
         this.player = playerSprite;
         this.enemy = enemySprite;
+        this.isArena = isArena;
         this.arenaBattleChallenge = isArena
                 && (Current.player().getDifficulty().name.equalsIgnoreCase("Hard")
                 || Current.player().getDifficulty().name.equalsIgnoreCase("Insane"));

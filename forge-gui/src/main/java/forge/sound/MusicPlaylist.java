@@ -14,6 +14,7 @@ public enum MusicPlaylist {
     CASTLE  ("castle/"),
     CAVE    ("cave/"),
     TOWN    ("town/"),
+    BOSS    ("boss/"),
     MENUS   ("menus/"),
     MATCH   ("match/");
 

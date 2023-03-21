@@ -612,7 +612,7 @@ public class QuestUtil {
         FThreads.invokeInEdtNowOrLater(new Runnable(){
             @Override
             public void run() {
-                hostedMatch.startMatch(rules, variant, starter, ImmutableMap.of(humanStart, gui));
+                hostedMatch.startMatch(rules, variant, starter, ImmutableMap.of(humanStart, gui), null);
             }
         });
     }

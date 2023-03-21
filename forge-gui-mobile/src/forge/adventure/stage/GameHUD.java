@@ -324,16 +324,22 @@ public class GameHUD extends Stage {
                 default:
                     break;
             }
-            if (audio != null) {
-                audio.getRight().setLooping(true);
-                audio.getRight().play();
-            }
+            playAudio();
         } else {
             unloadAudio();
             SoundSystem.instance.resume(); // resume World BGM
         }
     }
+
     private Pair<FileHandle, Music> audio = null;
+
+    public void playAudio() {
+        if (audio != null) {
+            audio.getRight().setLooping(true);
+            audio.getRight().play();
+        }
+    }
+
     public void unloadAudio() {
         if (audio != null) {
             audio.getRight().setOnCompletionListener(null);
@@ -341,13 +347,16 @@ public class GameHUD extends Stage {
             Forge.getAssets().manager().unload(audio.getLeft().path());
         }
     }
+
     private MusicPlaylist currentAudioPlaylist = null;
+
     private void setAudio(MusicPlaylist playlist) {
         if (playlist.equals(currentAudioPlaylist))
             return;
         unloadAudio();
         audio = getMusic(playlist);
     }
+
     private Pair<FileHandle, Music> getMusic(MusicPlaylist playlist) {
         FileHandle file = Gdx.files.absolute(playlist.getNewRandomFilename());
         Music music = Forge.getAssets().getMusic(file);
@@ -642,6 +651,7 @@ public class GameHUD extends Stage {
                 break;
         }
     }
+
     float fade = 1f;
 
     void changeBGM(MusicPlaylist playlist) {
