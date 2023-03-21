@@ -15,12 +15,12 @@ import forge.game.card.Card;
 public class GameEventCardStatsChanged extends GameEvent {
 
     public final Collection<Card> cards;
+    boolean transform = false;
     public GameEventCardStatsChanged(Card affected) {
         this(affected, false);
     }
 
     public GameEventCardStatsChanged(Card affected, boolean isTransform) {
-        players = Arrays.asList(affected.getController());
         cards = Arrays.asList(affected);
         transform = isTransform;
     }
