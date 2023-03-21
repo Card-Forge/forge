@@ -1,0 +1,74 @@
+mummy.png
+size: 192,288
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 12, 76
+  size: 11, 10     
+Idle 
+  xy: 8,13
+  size: 16, 19   
+Idle 
+  xy: 40, 13
+  size: 16, 19
+Idle 
+  xy: 72, 13
+  size:16, 19
+Walk
+  xy: 2, 33
+  size: 27, 20 
+Walk 
+  xy: 34, 33
+  size: 27, 20
+Walk 
+  xy: 66, 33
+  size: 27, 20
+Walk 
+  xy: 98, 33
+  size: 27, 20  
+Walk
+  xy: 130, 33
+  size: 27, 20      
+Walk 
+  xy: 162, 33
+  size: 27, 20
+Walk 
+  xy: 194, 33
+  size: 27, 20
+Walk 
+  xy: 226, 33
+  size: 27, 20  
+Attack 
+  xy: 10, 75
+  size: 20, 20      
+Attack 
+  xy: 42, 75
+  size: 20, 20 
+Attack 
+  xy: 74, 75
+  size: 20, 20 
+Attack 
+  xy: 106, 75
+  size: 20, 20  
+Attack 
+  xy: 138, 75
+  size: 20, 20  
+Attack 
+  xy: 170, 75
+  size: 20, 20  
+Death 
+  xy: 10, 142
+  size: 20, 20 
+Death 
+  xy: 42, 142
+  size: 20, 20 
+Death 
+  xy: 74, 142
+  size: 20, 20 
+Death 
+  xy: 106, 142
+  size: 20, 20 
+Death 
+  xy: 138, 142
+  size: 20, 20 

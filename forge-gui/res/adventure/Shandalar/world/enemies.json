@@ -398,7 +398,7 @@
 	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"speed": 20,
+	"speed": 15,
 	"life": 11,
 	"rewards": [
 	{
@@ -6908,6 +6908,54 @@
 	"colors": "BR"
 },
 {
+	"name": "Jackal Warrior",
+	"sprite": "sprites/dungeon/jackalwarrior.atlas",
+	"scale": 0.65,
+	"deck": [
+		"decks/jackal.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 0.3,
+	"difficulty": 0.1,
+	"speed": 20,
+	"life": 11,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		}
+		]
+},
+{
 	"name": "Jace",
 	"sprite": "sprites/dungeon/jace.atlas",
 	"deck": [
@@ -8208,6 +8256,54 @@
 	"colors": "W"
 },
 {
+	"name": "Mummy",
+	"sprite": "sprites/dungeon/mummy.atlas",
+	"scale": 0.8,
+	"deck": [
+		"decks/mummy.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 11,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		}
+		]
+},
+{
 	"name": "Nahiri",
 	"sprite": "sprites/dungeon/nahiri.atlas",
 	"deck": [
@@ -9188,6 +9284,54 @@
 		}
 	],
 	"colors": "WUBRG"
+},
+{
+	"name": "Scorpion",
+	"sprite": "sprites/dungeon/scorpion.atlas",
+	"scale": 0.9,
+	"deck": [
+		"decks/scorpion.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 0.8,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 11,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		}
+		]
 },
 {
 	"name": "Sea Monster",

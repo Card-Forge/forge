@@ -1,0 +1,56 @@
+scorpion.png
+size: 160,192
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 11, 117
+  size: 9, 10     
+Idle 
+  xy: 2, 110
+  size: 19, 17    
+Idle 
+  xy: 34, 110
+  size: 19, 17 
+Idle 
+  xy: 66, 110
+  size: 19, 17 
+Walk 
+  xy: 2, 47
+  size: 18, 17    
+Walk 
+  xy: 34, 47
+  size: 18, 17 
+Walk 
+  xy: 66, 47
+  size: 18, 17 
+Walk 
+  xy: 98, 47
+  size: 18, 17 
+Attack 
+  xy: 2, 78
+  size: 22, 18      
+Attack 
+  xy: 34, 78
+  size: 22, 18 
+Attack 
+  xy: 66, 78
+  size: 22, 18 
+Attack 
+  xy: 98, 78
+  size: 22, 18             
+Death 
+  xy: 2, 143
+  size: 19, 16      
+Death 
+  xy: 34, 143
+  size: 19, 16 
+Death 
+  xy: 66, 143
+  size: 19, 16 
+Death 
+  xy: 98, 143
+  size: 19, 16
+Death 
+  xy: 130, 143
+  size: 19, 16
