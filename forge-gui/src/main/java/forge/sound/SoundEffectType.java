@@ -59,6 +59,7 @@ public enum SoundEffectType {
     Equip("equip.mp3", false),
     Exile("exile.mp3", false),
     FlipCoin("flip_coin.mp3", false),
+    FlipCard("flip_card.mp3", false),
     GreenBlackBlueLand("green_black_blue_land.mp3", false),
     GreenBlackLand("green_black_land.mp3", false),
     GreenBlueLand("green_blue_land.mp3", false),

@@ -15,11 +15,11 @@ import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.DialogData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.MapStage;
 import forge.card.ColorSet;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.sound.SoundSystem;
 import forge.util.Localizer;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -196,7 +196,7 @@ public class MapDialog {
                     fade += 0.1f;
                     if (fade > 1f)
                         fade = 1f;
-                    SoundSystem.instance.fadeModifier(fade);
+                    GameHUD.getInstance().fadeAudio(fade);
                 }
             }, delay);
         }
@@ -211,7 +211,7 @@ public class MapDialog {
                     fade -= 0.1f;
                     if (fade < 0.1f)
                         fade = 0.1f;
-                    SoundSystem.instance.fadeModifier(fade);
+                    GameHUD.getInstance().fadeAudio(fade);
                 }
             }, delay);
         }
