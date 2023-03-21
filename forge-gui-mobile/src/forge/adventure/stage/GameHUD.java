@@ -280,6 +280,8 @@ public class GameHUD extends Stage {
         }
         if (!GameScene.instance().isNotInWorldMap())
             updateMusic();
+        else
+            SoundSystem.instance.pause();
     }
 
     Texture miniMapTexture;
@@ -306,7 +308,7 @@ public class GameHUD extends Stage {
             deckActor.setColor(menuActor.getColor());
         }
         if (GameScene.instance().isNotInWorldMap()) {
-            SoundSystem.instance.pause(); //play another music source
+            SoundSystem.instance.pause();
             switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
                 case "capital":
                 case "town":
@@ -332,22 +334,28 @@ public class GameHUD extends Stage {
         }
     }
     private Pair<FileHandle, Music> audio = null;
-    private void unloadAudio() {
+    public void unloadAudio() {
         if (audio != null) {
             audio.getRight().setOnCompletionListener(null);
             audio.getRight().stop();
             Forge.getAssets().manager().unload(audio.getLeft().path());
         }
     }
+    private MusicPlaylist currentAudioPlaylist = null;
     private void setAudio(MusicPlaylist playlist) {
+        if (playlist.equals(currentAudioPlaylist))
+            return;
         unloadAudio();
         audio = getMusic(playlist);
     }
     private Pair<FileHandle, Music> getMusic(MusicPlaylist playlist) {
         FileHandle file = Gdx.files.absolute(playlist.getNewRandomFilename());
         Music music = Forge.getAssets().getMusic(file);
-        if (music != null)
+        if (music != null) {
+            currentAudioPlaylist = playlist;
             return Pair.of(file, music);
+        }
+        currentAudioPlaylist = null;
         return null;
     }
 

@@ -13,6 +13,7 @@ import forge.adventure.data.EffectData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
@@ -193,6 +194,7 @@ public class DuelScene extends ForgeScene {
 
     @Override
     public void enter() {
+        GameHUD.getInstance().unloadAudio();
         Set<GameType> appliedVariants = new HashSet<>();
         appliedVariants.add(GameType.Constructed);
         AdventurePlayer advPlayer = Current.player();
