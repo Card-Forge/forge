@@ -309,24 +309,9 @@ public class GameHUD extends Stage {
         }
         if (GameScene.instance().isNotInWorldMap()) {
             SoundSystem.instance.pause();
-            switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
-                case "capital":
-                case "town":
-                    setAudio(MusicPlaylist.TOWN);
-                    break;
-                case "dungeon":
-                case "cave":
-                    setAudio(MusicPlaylist.CAVE);
-                    break;
-                case "castle":
-                    setAudio(MusicPlaylist.CASTLE);
-                    break;
-                default:
-                    break;
-            }
             playAudio();
         } else {
-            unloadAudio();
+            stopAudio();
             SoundSystem.instance.resume(); // resume World BGM
         }
     }
@@ -334,17 +319,35 @@ public class GameHUD extends Stage {
     private Pair<FileHandle, Music> audio = null;
 
     public void playAudio() {
+        switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
+            case "capital":
+            case "town":
+                setAudio(MusicPlaylist.TOWN);
+                break;
+            case "dungeon":
+            case "cave":
+                setAudio(MusicPlaylist.CAVE);
+                break;
+            case "castle":
+                setAudio(MusicPlaylist.CASTLE);
+                break;
+            default:
+                break;
+        }
         if (audio != null) {
             audio.getRight().setLooping(true);
             audio.getRight().play();
         }
     }
-
-    public void unloadAudio() {
+    public void fadeAudio(float v) {
         if (audio != null) {
-            audio.getRight().setOnCompletionListener(null);
+            audio.getRight().setVolume(v);
+        }
+    }
+
+    public void stopAudio() {
+        if (audio != null) {
             audio.getRight().stop();
-            Forge.getAssets().manager().unload(audio.getLeft().path());
         }
     }
 
@@ -353,7 +356,7 @@ public class GameHUD extends Stage {
     private void setAudio(MusicPlaylist playlist) {
         if (playlist.equals(currentAudioPlaylist))
             return;
-        unloadAudio();
+        stopAudio();
         audio = getMusic(playlist);
     }
 
@@ -363,9 +366,10 @@ public class GameHUD extends Stage {
         if (music != null) {
             currentAudioPlaylist = playlist;
             return Pair.of(file, music);
+        } else {
+            currentAudioPlaylist = null;
+            return null;
         }
-        currentAudioPlaylist = null;
-        return null;
     }
 
     private void openDeck() {

@@ -41,6 +41,8 @@ import forge.card.CardRenderer;
 import forge.game.card.CardView;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
+import forge.sound.SoundEffectType;
+import forge.sound.SoundSystem;
 import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -593,6 +595,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             return;
         clicked = true;
         flipProcess = 0;
+        SoundSystem.instance.play(SoundEffectType.FlipCard, false);
     }
 
     public void sold() {

@@ -16,6 +16,7 @@ import forge.game.event.GameEventCardDestroyed;
 import forge.game.event.GameEventCardPhased;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.event.GameEventCardSacrificed;
+import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventCardTapped;
 import forge.game.event.GameEventDayTimeChanged;
 import forge.game.event.GameEventFlipCoin;
@@ -77,6 +78,12 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
 
         return to == ZoneType.Exile ? SoundEffectType.Exile : null;
     }
+
+    @Override
+    public SoundEffectType visit(GameEventCardStatsChanged event) {
+        return event.transform ? SoundEffectType.FlipCard : null ;
+    }
+
     @Override
     public SoundEffectType visit(final GameEventCardRegenerated event) { return SoundEffectType.Regen; }
     @Override
