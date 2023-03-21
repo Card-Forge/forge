@@ -72,7 +72,7 @@ public class UntapEffect extends SpellAbilityEffect {
      *            whether the untapping is mandatory.
      */
     private static void untapChoose(final SpellAbility sa, final boolean mandatory) {
-        final int num = Integer.parseInt(sa.getParam("Amount"));
+        final int num = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
         final String valid = sa.getParam("UntapType");
 
         for (final Player p : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa)) {
