@@ -1,0 +1,68 @@
+wildrat.png
+size: 160,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 111, 50
+  size: 9, 11  
+Idle 
+  xy: 8, 16
+  size: 19, 16    
+Idle 
+  xy: 40, 16
+  size: 19, 16  
+Idle 
+  xy: 72, 16
+  size: 19, 16  
+Idle 
+  xy: 104, 16
+  size: 19, 16
+Idle 
+  xy: 136, 16
+  size: 19, 16  
+Walk 
+  xy: 8, 48
+  size: 22, 16   
+Walk 
+  xy: 40, 48
+  size: 22, 16   
+Walk 
+  xy: 72, 48
+  size: 22, 18   
+Walk 
+  xy: 104, 48
+  size: 22, 18   
+Walk 
+  xy: 136, 48
+  size: 22, 18   
+Attack
+  xy: 8, 80
+  size: 20, 18 
+Attack
+  xy: 40, 80
+  size: 20, 18 
+Attack
+  xy: 72, 80
+  size: 20, 18 
+Attack
+  xy: 104, 80
+  size: 20, 18 
+Attack
+  xy: 136, 80
+  size: 20, 18 
+Death
+  xy: 8, 112
+  size: 20, 18 
+Death
+  xy: 40, 112
+  size: 20, 18 
+Death
+  xy: 72, 112
+  size: 20, 18 
+Death
+  xy: 104, 112
+  size: 20, 18 
+Death
+  xy: 136, 112
+  size: 20, 18 

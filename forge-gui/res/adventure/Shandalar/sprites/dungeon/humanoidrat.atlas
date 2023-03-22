@@ -1,0 +1,86 @@
+humanoidrat.png
+size: 256,192
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 75, 80
+  size: 11, 8   
+Idle 
+  xy: 7, 16
+  size: 16, 16    
+Idle 
+  xy: 39, 16
+  size: 16, 16 
+Idle 
+  xy: 71, 16
+  size: 16, 16 
+Idle 
+  xy: 103, 16
+  size: 16, 16 
+Walk 
+  xy: 7, 45
+  size: 20, 20   
+Walk 
+  xy: 39, 45
+  size: 20, 20
+Walk 
+  xy: 71, 45
+  size: 20, 20
+Walk 
+  xy: 103, 45
+  size: 20, 20
+Walk 
+  xy: 135, 50
+  size: 20, 20 
+Walk 
+  xy: 167, 45
+  size: 20, 20
+Walk 
+  xy: 199, 45
+  size: 20, 20
+Walk 
+  xy: 231, 45
+  size: 20, 20 
+Attack 
+  xy: 7, 76
+  size: 20, 20   
+Attack 
+  xy: 39, 76
+  size: 20, 20
+Attack 
+  xy: 71, 76
+  size: 20, 20
+Attack 
+  xy: 103, 76
+  size: 20, 20
+Attack 
+  xy: 135, 76
+  size: 20, 20 
+Attack 
+  xy: 167, 76
+  size: 20, 20
+Attack 
+  xy: 199, 76
+  size: 20, 20
+Attack 
+  xy: 231, 76
+  size: 20, 20 
+Death
+  xy: 7, 140
+  size: 20, 20 
+Death
+  xy: 39, 140
+  size: 20, 20 
+Death
+  xy: 71, 140
+  size: 20, 20 
+Death
+  xy: 103, 140
+  size: 20, 20 
+Death
+  xy: 135, 140
+  size: 20, 20 
+Death
+  xy: 167, 140
+  size: 20, 20 

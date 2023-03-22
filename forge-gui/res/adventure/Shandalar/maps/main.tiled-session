@@ -7,9 +7,9 @@
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
         "map",
+        "tileset",
         "obj",
-        "map/main_story",
-        "tileset"
+        "map/main_story"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -428,8 +428,8 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 135,
-                "y": 119.75
+                "x": 240,
+                "y": 136.25
             }
         },
         "map/cave_20.tmx": {
@@ -1367,15 +1367,15 @@
             "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 145,
-                "y": 151.75
+                "x": 240,
+                "y": 136.25
             }
         },
         "map/cave_5.tmx": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 232,
+                "x": 240,
                 "y": 136.25
             }
         },
@@ -1383,8 +1383,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 337,
-                "y": 152.75
+                "x": 240,
+                "y": 136.25
             }
         },
         "map/cave_6N1.tmx": {
@@ -2068,7 +2068,7 @@
             "scale": 2.177083333333333,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 78.77511961722489,
+                "x": 79.00478468899522,
                 "y": 136.65071770334927
             }
         },
@@ -3073,8 +3073,8 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 59.16666666666667,
-                "y": 182.16666666666663
+                "x": 345,
+                "y": 181.83333333333331
             }
         },
         "map/tibalt.tmx": {
@@ -3276,9 +3276,9 @@
         "map/cave_4.tmx",
         "map/cave_5.tmx",
         "map/cave_6.tmx",
-        "map/cave_1..tmx",
-        "map/main_story/templeofchandra.tmx",
-        "map/tibalt.tmx"
+        "map/teferi.tmx",
+        "map/kiora_island.tmx",
+        "map/main_story/templeofchandra.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true

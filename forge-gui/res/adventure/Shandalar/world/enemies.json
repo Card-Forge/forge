@@ -392,54 +392,6 @@
 		]
 },
 {
-	"name": "Crab",
-	"sprite": "sprites/dungeon/crab.atlas",
-	"scale": 0.9,
-	"deck": [
-		"decks/crab.json"
-	],
-	"ai": "",
-	"flying": false,
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 15,
-	"life": 11,
-	"rewards": [
-	{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 1,
-			"rarity": [
-				"Rare"
-			]
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"uncommon",
-				"common"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 50,
-			"addMaxCount": 100
-		}
-		]
-},
-{
 	"name": "Ashmouth Devil",
 	"sprite": "sprites/devil.atlas",
 	"deck": [
@@ -2829,11 +2781,13 @@
 	"sprite": "sprites/dungeon/crab.atlas",
 	"scale": 0.9,
 	"deck": [
-		"decks/crab.json"
+		"decks/crab.json",
+		"decks/giant_crab"
 	],
 	"ai": "",
 	"flying": false,
 	"spawnRate": 1,
+	"randomizeDeck": true,
 	"difficulty": 0.1,
 	"speed": 20,
 	"life": 11,
@@ -3498,6 +3452,60 @@
 		}
 	],
 	"colors": "RU"
+},
+{
+	"name": "Dog",
+	"sprite": "sprites/dungeon/dog.atlas",
+	"deck": [
+		"decks/dog.json",
+		"decks/dog.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 20,
+	"randomizeDeck": true,
+	"scale": 0.75,
+	"life": 10,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	]
 },
 {
 	"name": "Doppelganger",
@@ -4659,7 +4667,7 @@
 	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"speed": 25,
+	"speed": 15,
 	"scale": 0.75,
 	"life": 10,
 	"rewards": [
@@ -5096,59 +5104,6 @@
 		}
 	],
 	"colors": "B"
-},
-{
-	"name": "Giant Crab",
-	"sprite": "sprites/dungeon/giant_crab.atlas",
-	"scale": 0.4,
-	"deck": [
-		"decks/giant_crab.dck"
-	],
-	"ai": "",
-	"flying": false,
-	"spawnRate": 1,
-	"difficulty": 0.4,
-	"speed": 31,
-	"life": 15,
-	"rewards": [
-	{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 8,
-			"rarity": [
-				"common",
-				"uncommon"
-			]
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 4,
-			"rarity": [
-				"Rare"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 200,
-			"addMaxCount": 500
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"uncommon",
-				"common"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		}
-	],
-	"colors": "U"
 },
 {
 	"name": "Giant Spider",
@@ -6933,7 +6888,7 @@
 {
 	"name": "Jackal Warrior",
 	"sprite": "sprites/dungeon/jackalwarrior.atlas",
-	"scale": 0.65,
+	"scale": 0.5,
 	"deck": [
 		"decks/jackal.dck"
 	],
@@ -7041,6 +6996,58 @@
 		}
 	],
 	"colors": "UW"
+},
+{
+	"name": "Jellyfish",
+	"sprite": "sprites/dungeon/jellyfish.atlas",
+	"deck": [
+		"decks/jellyfish.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.75,
+	"life": 10,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	]
 },
 {
 	"name": "Kavu",
@@ -8442,6 +8449,58 @@
 	"colors": "B"
 },
 {
+	"name": "Octopus",
+	"sprite": "sprites/dungeon/octopus.atlas",
+	"deck": [
+		"decks/octopus.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.75,
+	"life": 10,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	]
+},
+{
 	"name": "Ooze",
 	"sprite": "sprites/dungeon/ooze.atlas",
 	"scale": 0.6,
@@ -8571,6 +8630,58 @@
 	"colors": "GB"
 },
 {
+	"name": "Owl",
+	"sprite": "sprites/dungeon/owl.atlas",
+	"deck": [
+		"decks/owl.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 25,
+	"scale": 0.75,
+	"life": 10,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	]
+},
+{
 	"name": "Pirate",
 	"sprite": "sprites/pirate.atlas",
 	"deck": [
@@ -8637,6 +8748,59 @@
 		 }
 	],
 		"colors": "UR"
+},
+{
+	"name": "Plant",
+	"sprite": "sprites/dungeon/plant.atlas",
+	"deck": [
+		"decks/plant.json",
+		"decks/plant.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 10,
+	"randomizeDeck": true,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	]
 },
 {
 	"name": "Orthodoxy Angel",
@@ -8903,6 +9067,110 @@
 		}
 	],
 	"colors": "BR"
+},
+{
+	"name": "Rat Ninja",
+	"sprite": "sprites/dungeon/humanoidrat.atlas",
+	"deck": [
+		"decks/humanoidrat.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.75,
+	"life": 10,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	]
+},
+{
+	"name": "Raven",
+	"sprite": "sprites/dungeon/raven.atlas",
+	"deck": [
+		"decks/raven.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 20,
+	"scale":0.80,
+	"life": 12,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	]
 },
 {
 	"name": "Red Beast",
@@ -9567,7 +9835,7 @@
 {
 	"name": "Slimefoot",
 	"sprite": "sprites/dungeon/slimefoot.atlas",
-	"scale": 0.50,
+	"scale": 1.25,
 	"deck": [
 		"decks/miniboss/slimefoot.dck"
 	],
@@ -10743,6 +11011,56 @@
 	"colors": "BR"
 },
 {
+	"name": "Walking Brain",
+	"sprite": "sprites/dungeon/walkingbrain.atlas",
+	"deck": [
+		"decks/walkingbrain.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.3,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 16,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	]
+},
+{
 	"name": "Wasp",
 	"sprite": "sprites/dungeon/wasp.atlas",
 	"deck": [
@@ -11059,6 +11377,59 @@
 		}
 	],
 	"colors": "W"
+},
+{
+	"name": "Wild Rat",
+	"sprite": "sprites/dungeon/wildrat.atlas",
+	"deck": [
+		"decks/infectrat.dck",
+		"decks/rat.json"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 10,
+	"randomizeDeck": true,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	]
 },
 {
 	"name": "Wild-Magic Sorcerer",

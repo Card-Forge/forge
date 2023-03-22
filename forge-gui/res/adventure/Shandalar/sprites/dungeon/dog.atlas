@@ -1,0 +1,56 @@
+dog.png
+size: 256,224
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 13, 17
+  size: 12, 11     
+Idle 
+  xy: 6, 17
+  size: 20, 15   
+Idle 
+  xy: 38, 17
+  size: 20, 15   
+Idle 
+  xy: 70, 17
+  size: 20, 15   
+Idle 
+  xy: 102, 17
+  size: 20, 15   
+Idle 
+  xy: 134, 17
+  size: 20, 15   
+Idle 
+  xy: 166, 17
+  size: 20, 15   
+Idle 
+  xy: 198, 17
+  size: 20, 15   
+Idle 
+  xy: 230, 17
+  size: 20, 15   
+Walk 
+  xy: 6, 113
+  size: 20, 15   
+Walk 
+  xy: 38, 113
+  size: 20, 15   
+Walk 
+  xy: 70, 113
+  size: 20, 15   
+Walk 
+  xy: 102, 113
+  size: 20, 15   
+Walk 
+  xy: 134, 113
+  size: 20, 15   
+Walk 
+  xy: 166, 113
+  size: 20, 15   
+Walk 
+  xy: 198, 113
+  size: 20, 15   
+Walk 
+  xy: 230, 113
+  size: 20, 15   

@@ -1,17 +1,20 @@
 slimefoot.png
-size: 216,216
+size: 133,26
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
-  xy: 164,162
-  size: 32, 23
+  xy: 45,6
+  size: 11, 12
 Idle 
-  xy: 0, 0
-  size: 66, 67
+  xy: 5, 1
+  size: 22, 23
 Idle 
-  xy: 76, 1
-  size: 65, 67
+  xy: 37, 1
+  size: 22, 23
 Idle 
-  xy: 150, 1
-  size: 63, 64
+  xy: 69, 1
+  size: 22, 23
+Idle 
+  xy: 101, 1
+  size: 22, 23

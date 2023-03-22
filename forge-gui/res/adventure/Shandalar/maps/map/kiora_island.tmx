@@ -20,7 +20,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYGBgKOdloBuooJNdn1hoZ3YVHj9MYCXOjIXM5NtDSXzZI4VLCdScSizmVdMxTcAANn89YyDNLcSqhakrGQB/4gOv2MnXixx+rESkL3R7saUDUsFiPPZSK6yxhZEjEfmdXmUPDGBzpy4jdcwhRz05diMDNm4ITc/6gtj8jK9MRgeUpENcfoeJP6PATGSzSQljctI1AJToGUk=
+   eJxjYGBgKOdloBuooJNdn1hoZ3YVHj9MYCXOjIXM5NtPSXzZI4VLCdScSizmVdMxTcAANn89YyDNLcSqhakrGQB/4gOv2MnXixx+rCSmL5C92NIBqWAxHnupFdbYwsiRiPxOr7IHBrC5U5eROuaQo54cu5EBGzeEpmd9QWx+xlcmowNK0iEuv8PEn1FgJrLZpIQxOekaADpEGMI=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -70,7 +70,7 @@
   </object>
   <object id="76" template="../obj/enemy.tx" x="19.093" y="127.799">
    <properties>
-    <property name="enemy" value="Giant Crab"/>
+    <property name="enemy" value="Crab"/>
    </properties>
   </object>
   <object id="77" template="../obj/manashards.tx" x="12.2105" y="99.0239"/>
