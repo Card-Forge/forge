@@ -339,16 +339,18 @@ public class GameHUD extends Stage {
         if (audio != null) {
             audio.getRight().setLooping(true);
             audio.getRight().play();
-            audio.getRight().setVolume(FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_MUSIC)/100f);
+            audio.getRight().setVolume(FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_MUSIC) / 100f);
         }
     }
+
     public void fadeAudio(float value) {
         if (audio != null) {
-            audio.getRight().setVolume((FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_MUSIC)*value)/100f);
+            audio.getRight().setVolume((FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_MUSIC) * value) / 100f);
         }
     }
 
     float fade = 1f;
+
     void fadeIn() {
         if (fade >= 1f)
             return;
@@ -365,6 +367,7 @@ public class GameHUD extends Stage {
             }, delay);
         }
     }
+
     void fadeOut() {
         for (int i = 10; i > 1; i--) {
             float delay = i * 0.1f;
@@ -378,6 +381,19 @@ public class GameHUD extends Stage {
                 }
             }, delay);
         }
+    }
+
+    public void stopAudio() {
+        if (audio != null) {
+            audio.getRight().stop();
+        }
+    }
+
+    public void pauseMusic() {
+        if (audio != null) {
+            audio.getRight().pause();
+        }
+        SoundSystem.instance.pause();
     }
 
     public void unloadAudio() {
@@ -438,12 +454,6 @@ public class GameHUD extends Stage {
         showDialog();
     }
 
-    public void pauseMusic() {
-        if (audio != null) {
-            audio.getRight().pause();
-        }
-        SoundSystem.instance.pause();
-    }
     private void exitDungeonCallback() {
         hideDialog(true);
     }
