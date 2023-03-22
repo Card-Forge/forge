@@ -18,6 +18,8 @@ import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.sound.SoundEffectType;
+import forge.sound.SoundSystem;
 import forge.util.ItemPool;
 
 import java.io.Serializable;
@@ -516,6 +518,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public void takeGold(int price) {
         gold -= price;
         onGoldChangeList.emit();
+        //play sfx
+        SoundSystem.instance.play(SoundEffectType.CoinsDrop, false);
     }
     public void addShards(int number) {
         takeShards(-number);
@@ -523,6 +527,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public void takeShards(int number) {
         shards -= number;
         onShardsChangeList.emit();
+        //play sfx
+        SoundSystem.instance.play(SoundEffectType.TakeShard, false);
     }
 
     public void setShards(int number) {

@@ -10,6 +10,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.world.WorldSave;
 import forge.screens.TransitionScreen;
+import forge.sound.SoundSystem;
 
 /**
  * First scene after the splash screen
@@ -81,6 +82,7 @@ public class StartScene extends UIScene {
             try {
                 Forge.setTransitionScreen(new TransitionScreen(() -> {
                     if (WorldSave.load(WorldSave.filenameToSlot(lastActiveSave))) {
+                        SoundSystem.instance.changeBackgroundTrack();
                         Forge.switchScene(GameScene.instance());
                     } else {
                         Forge.clearTransitionScreen();

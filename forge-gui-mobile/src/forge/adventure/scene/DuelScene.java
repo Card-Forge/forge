@@ -201,7 +201,7 @@ public class DuelScene extends ForgeScene {
 
     @Override
     public void enter() {
-        GameHUD.getInstance().stopAudio();
+        GameHUD.getInstance().unloadAudio();
         Set<GameType> appliedVariants = new HashSet<>();
         appliedVariants.add(GameType.Constructed);
         AdventurePlayer advPlayer = Current.player();
