@@ -35,6 +35,8 @@ import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import org.apache.commons.lang3.tuple.Pair;
@@ -311,7 +313,7 @@ public class GameHUD extends Stage {
             SoundSystem.instance.pause();
             playAudio();
         } else {
-            stopAudio();
+            unloadAudio();
             SoundSystem.instance.resume(); // resume World BGM
         }
     }
@@ -337,11 +339,47 @@ public class GameHUD extends Stage {
         if (audio != null) {
             audio.getRight().setLooping(true);
             audio.getRight().play();
+            audio.getRight().setVolume(FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_MUSIC) / 100f);
         }
     }
-    public void fadeAudio(float v) {
+
+    public void fadeAudio(float value) {
         if (audio != null) {
-            audio.getRight().setVolume(v);
+            audio.getRight().setVolume((FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_MUSIC) * value) / 100f);
+        }
+    }
+
+    float fade = 1f;
+
+    void fadeIn() {
+        if (fade >= 1f)
+            return;
+        for (int i = 10; i > 1; i--) {
+            float delay = i * 0.1f;
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    fade += 0.1f;
+                    if (fade > 1f)
+                        fade = 1f;
+                    fadeAudio(fade);
+                }
+            }, delay);
+        }
+    }
+
+    void fadeOut() {
+        for (int i = 10; i > 1; i--) {
+            float delay = i * 0.1f;
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    fade -= 0.1f;
+                    if (fade < 0.1f)
+                        fade = 0.1f;
+                    fadeAudio(fade);
+                }
+            }, delay);
         }
     }
 
@@ -351,12 +389,29 @@ public class GameHUD extends Stage {
         }
     }
 
+    public void pauseMusic() {
+        if (audio != null) {
+            audio.getRight().pause();
+        }
+        SoundSystem.instance.pause();
+    }
+
+    public void unloadAudio() {
+        if (audio != null) {
+            audio.getRight().setOnCompletionListener(null);
+            audio.getRight().stop();
+            Forge.getAssets().manager().unload(audio.getLeft().path());
+        }
+        audio = null;
+        currentAudioPlaylist = null;
+    }
+
     private MusicPlaylist currentAudioPlaylist = null;
 
     private void setAudio(MusicPlaylist playlist) {
         if (playlist.equals(currentAudioPlaylist))
             return;
-        stopAudio();
+        unloadAudio();
         audio = getMusic(playlist);
     }
 
@@ -655,8 +710,6 @@ public class GameHUD extends Stage {
                 break;
         }
     }
-
-    float fade = 1f;
 
     void changeBGM(MusicPlaylist playlist) {
         if (!playlist.equals(SoundSystem.instance.getCurrentPlaylist())) {

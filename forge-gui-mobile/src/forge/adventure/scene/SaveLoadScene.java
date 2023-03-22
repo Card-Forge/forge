@@ -21,6 +21,7 @@ import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
 import forge.adventure.world.WorldSaveHeader;
 import forge.screens.TransitionScreen;
+import forge.sound.SoundSystem;
 import forge.util.TextUtil;
 
 import java.io.File;
@@ -217,6 +218,7 @@ public class SaveLoadScene extends UIScene {
                 try {
                     Forge.setTransitionScreen(new TransitionScreen(() -> {
                         if (WorldSave.load(currentSlot)) {
+                            SoundSystem.instance.changeBackgroundTrack();
                             Forge.switchScene(GameScene.instance());
                         } else {
                             Forge.clearTransitionScreen();
@@ -236,6 +238,7 @@ public class SaveLoadScene extends UIScene {
                                 Current.player().updateDifficulty(Config.instance().getConfigData().difficulties[difficulty.getSelectedIndex()]);
                             Current.player().setWorldPosY((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosY * WorldSave.getCurrentSave().getWorld().getData().height * WorldSave.getCurrentSave().getWorld().getTileSize()));
                             Current.player().setWorldPosX((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosX * WorldSave.getCurrentSave().getWorld().getData().width * WorldSave.getCurrentSave().getWorld().getTileSize()));
+                            SoundSystem.instance.changeBackgroundTrack();
                             Forge.switchScene(GameScene.instance());
                         } else {
                             Forge.clearTransitionScreen();

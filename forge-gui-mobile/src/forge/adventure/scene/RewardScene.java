@@ -146,13 +146,15 @@ public class RewardScene extends UIScene {
             showLootOrDone();
             return true;
         }
-        switch (type) {
-            case Shop:
-                doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
-                break;
-            case Loot:
-                doneButton.setText(Forge.getLocalizer().getMessage("lblDone"));
-                break;
+        if (type != null) {
+            switch (type) {
+                case Shop:
+                    doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
+                    break;
+                case Loot:
+                    doneButton.setText(Forge.getLocalizer().getMessage("lblDone"));
+                    break;
+            }
         }
         shown = false;
         clearGenerated();

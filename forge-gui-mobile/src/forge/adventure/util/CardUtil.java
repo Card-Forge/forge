@@ -648,7 +648,9 @@ public class CardUtil {
         FileHandle handle = Config.instance().getFile(path);
         if (handle.exists())
             return generateDeck(json.fromJson(GeneratedDeckData.class, handle), starterEdition, discourageDuplicates);
-        return null;
+        Deck deck = DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, true, false, true);
+        System.err.println("Error loading JSON: " + handle.path() + "\nGenerating random deck: "+deck.getName());
+        return deck;
 
     }
 

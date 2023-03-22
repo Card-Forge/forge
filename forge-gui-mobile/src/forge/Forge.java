@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
 import forge.adventure.scene.*;
+import forge.adventure.stage.GameHUD;
 import forge.adventure.util.Config;
 import forge.adventure.world.WorldSave;
 import forge.animation.ForgeAnimation;
@@ -340,6 +341,7 @@ public class Forge implements ApplicationListener {
         try {
             Config.instance().loadResources();
             SpellSmithScene.instance().loadEditions();
+            GameHUD.getInstance().stopAudio();
             if (startScene) {
                 MusicPlaylist.invalidateMusicPlaylist();
                 SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
