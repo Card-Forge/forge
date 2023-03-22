@@ -7004,7 +7004,7 @@
 		"decks/jellyfish.dck"
 	],
 	"ai": "",
-	"flying": false,
+	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
@@ -8292,7 +8292,7 @@
 {
 	"name": "Mummy",
 	"sprite": "sprites/dungeon/mummy.atlas",
-	"scale": 0.8,
+	"scale": 0.70,
 	"deck": [
 		"decks/mummy.dck"
 	],
@@ -9131,7 +9131,7 @@
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 20,
-	"scale":0.80,
+	"scale":0.70,
 	"life": 12,
 	"rewards": [
 	{
@@ -11020,6 +11020,7 @@
 	"spawnRate": 0.3,
 	"difficulty": 0.1,
 	"speed": 15,
+	"scale":0.75,
 	"life": 16,
 	"rewards": [
 	{

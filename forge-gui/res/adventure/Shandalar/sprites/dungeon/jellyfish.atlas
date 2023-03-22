@@ -7,35 +7,35 @@ Avatar
   xy: 10, 9
   size: 13, 13     
 Idle 
-  xy: 10, 11
-  size: 13, 18   
+  xy: 10, 9
+  size: 13, 20   
 Idle 
-  xy: 42, 11
-  size: 13, 18   
+  xy: 42, 9
+  size: 13, 20   
 Idle 
-  xy: 74, 11
-  size: 13, 18   
+  xy: 74, 9
+  size: 13, 20   
 Idle 
-  xy: 106, 11
-  size: 13, 18  
+  xy: 106, 9
+  size: 13, 20  
 Idle 
-  xy: 138, 11
-  size: 13, 18    
+  xy: 138, 9
+  size: 13, 20    
 Walk
-  xy: 10, 42
-  size: 15, 18   
+  xy: 10, 40
+  size: 15, 20   
 Walk
-  xy: 42, 42
-  size: 15, 18  
+  xy: 42, 40
+  size: 15, 20  
 Walk
-  xy: 74, 42
-  size: 15, 18       
+  xy: 74, 40
+  size: 15, 20       
 Walk
-  xy: 106, 42
-  size: 15, 18  
+  xy: 106, 40
+  size: 15, 20  
 Walk
-  xy: 138, 42
-  size: 15, 18       
+  xy: 138, 40
+  size: 15, 20       
 Attack
   xy: 10, 74
   size: 15, 18     
