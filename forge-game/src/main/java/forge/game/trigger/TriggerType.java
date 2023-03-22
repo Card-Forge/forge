@@ -104,6 +104,7 @@ public enum TriggerType {
     Sacrificed(TriggerSacrificed.class),
     Scry(TriggerScry.class),
     SearchedLibrary(TriggerSearchedLibrary.class),
+    SeekAll(TriggerSeekAll.class),
     SetInMotion(TriggerSetInMotion.class),
     Shuffled(TriggerShuffled.class),
     Specializes(TriggerSpecializes.class),

@@ -22,7 +22,6 @@ import java.util.Set;
 
 import com.google.common.collect.Sets;
 
-import forge.card.CardType;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -106,11 +105,7 @@ public class CostDiscard extends CostPartWithList {
                 desc.append("card");
             }
             else {
-                if (this.getTypeDescription() == null) {
-                    desc.append(CardType.CoreType.isValidEnum(this.getType()) ? this.getType().toLowerCase() : this.getType());
-                } else {
-                    desc.append(this.getTypeDescription());
-                }
+                desc.append(this.getDescriptiveType());
                 desc.append(" card");
             }
 

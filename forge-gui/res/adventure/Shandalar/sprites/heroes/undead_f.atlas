@@ -130,7 +130,7 @@ WalkDown
   xy: 144, 16
   size: 16, 16        
 WalkDown 
-  xy: 160, 0
+  xy: 160, 16
   size: 16, 16          
 WalkDown 
   xy: 176, 16

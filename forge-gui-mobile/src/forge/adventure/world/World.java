@@ -238,6 +238,14 @@ public class World implements Disposable, SaveFileContent {
         }
     }
 
+    public long getBiomeMapXY(int x, int y) {
+        try {
+            return biomeMap[x][height - y - 1] & (~(0b1<<data.GetBiomes().size()));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return biomeMap[biomeMap.length - 1][biomeMap[biomeMap.length - 1].length - 1];
+        }
+    }
+
     public boolean isStructure(int x, int y) {
         try {
             return (terrainMap[x][height - y - 1] & ~isStructureBit) != 0;

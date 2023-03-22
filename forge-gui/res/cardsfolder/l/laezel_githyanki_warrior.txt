@@ -22,7 +22,7 @@ PT:3/6
 K:Double Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When this creature enters the battlefield or specializes, seek a nonland permanent card with mana value 3 or less.
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigSeek | Secondary$ True | TriggerDescription$ When this creature enters the battlefield or specializes, seek a nonland permanent card with mana value 3 or less.
-SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Permanent.nonLand+cmcLE3
+SVar:TrigSeek:DB$ Seek | Type$ Card.Permanent+nonLand+cmcLE3
 Oracle:Double strike\nWhen this creature enters the battlefield or specializes, seek a nonland permanent card with mana value 3 or less.
 
 SPECIALIZE:BLUE

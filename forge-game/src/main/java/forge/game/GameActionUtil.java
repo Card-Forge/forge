@@ -380,6 +380,8 @@ public final class GameActionUtil {
             return costs;
         }
 
+        sa.clearPipsToReduce();
+
         Card source = sa.getHostCard();
         final Game game = source.getGame();
         boolean lkicheck = false;

@@ -236,6 +236,8 @@ public class CardImageRenderer {
             g.drawOutlinedText(artist, TEXT_FONT, Color.WHITE, Color.DARK_GRAY, x + (TYPE_FONT.getCapHeight() / 2), y + (TYPE_FONT.getCapHeight() / 2), w, h, false, Align.left, false);
     }
     private static void drawOutlineColor(Graphics g, ColorSet colors, float x, float y, float w, float h) {
+        if (colors == null)
+            return;
         switch (colors.countColors()) {
             case 0:
                 g.drawRect(BORDER_THICKNESS*2, Color.valueOf("#A0A6A4"), x, y, w, h);
@@ -264,7 +266,8 @@ public class CardImageRenderer {
         fillColorBackground(g, colors, x, y, w, h);
         g.setAlphaComposite(oldAlpha);
         //draw outline color here
-        drawOutlineColor(g, state.getColors(), x, y, w, h);
+        if (state != null)
+            drawOutlineColor(g, state.getColors(), x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         float padding = h / 8;
@@ -450,7 +453,8 @@ public class CardImageRenderer {
         fillColorBackground(g, colors, x, y, w, h);
         g.setAlphaComposite(oldAlpha);
         //draw outline color here
-        drawOutlineColor(g, state.getColors(), x, y, w, h);
+        if (state != null)
+            drawOutlineColor(g, state.getColors(), x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         float padding = h / 8;
@@ -619,7 +623,8 @@ public class CardImageRenderer {
             }
         }
         //draw outline color here
-        drawOutlineColor(g, state.getColors(), x, y, w, h);
+        if (state != null)
+            drawOutlineColor(g, state.getColors(), x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         if (!onTop) {
@@ -738,7 +743,8 @@ public class CardImageRenderer {
 
         fillColorBackground(g, colors, x, y, w, h);
         //draw outline color here
-        drawOutlineColor(g, state.getColors(), x, y, w, h);
+        if (state != null)
+            drawOutlineColor(g, state.getColors(), x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         if (noText)

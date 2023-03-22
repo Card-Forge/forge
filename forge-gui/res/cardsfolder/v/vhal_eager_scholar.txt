@@ -85,7 +85,7 @@ Types:Legendary Creature Human Wizard
 PT:4/4
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigRemoveCounters | TriggerDescription$ When this creature specializes, remove all study counters from it. Seek two creature cards with mana value less than or equal to the number of study counters removed this way. Put one of them onto the battlefield and shuffle the other into your library.
 SVar:TrigRemoveCounters:DB$ RemoveCounter | CounterType$ STUDY | CounterNum$ All | RememberRemoved$ True | SubAbility$ DBSeek
-SVar:DBSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ 2 | ChangeType$ Creature.cmcLEX | RememberChanged$ True | SubAbility$ DBBattlefield
+SVar:DBSeek:DB$ Seek | Type$ Card.Creature+cmcLEX | Num$ 2 | RememberFound$ True | SubAbility$ DBBattlefield
 SVar:DBBattlefield:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | SelectPrompt$ Select one to put onto the battlefield | ChangeType$ Card.IsRemembered | ForgetChanged$ True | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ ChangeZone | Origin$ Hand | Destination$ Library | Shuffle$ True | Defined$ RememberedCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

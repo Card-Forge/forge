@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "map/cave_6.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "tileset",
-        "map/main_story",
         "map",
-        "obj"
+        "obj",
+        "map/main_story",
+        "tileset"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -110,24 +110,24 @@
             "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 279.5,
-                "y": 217.5
+                "x": 240,
+                "y": 136.16666666666663
             }
         },
         "map/castle_plains_2.tmx": {
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 359.66666666666663,
-                "y": 295.33333333333326
+                "x": 240,
+                "y": 136.33333333333334
             }
         },
         "map/castle_plains_3.tmx": {
             "scale": 2,
-            "selectedLayer": 4,
+            "selectedLayer": 3,
             "viewCenter": {
                 "x": 240,
-                "y": 136
+                "y": 136.25
             }
         },
         "map/catlair_1.tmx": {
@@ -174,8 +174,8 @@
             "scale": 4,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240,
-                "y": 239.875
+                "x": 187.5,
+                "y": 316.625
             }
         },
         "map/cave_1.tmx": {
@@ -428,8 +428,8 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240.25,
-                "y": 136
+                "x": 135,
+                "y": 119.75
             }
         },
         "map/cave_20.tmx": {
@@ -1356,16 +1356,19 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240.25,
-                "y": 136
+                "x": 240,
+                "y": 136.25
             }
         },
         "map/cave_4.tmx": {
-            "scale": 1,
-            "selectedLayer": 2,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 220,
-                "y": 135
+                "x": 145,
+                "y": 151.75
             }
         },
         "map/cave_5.tmx": {
@@ -1373,15 +1376,15 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 232,
-                "y": 136
+                "y": 136.25
             }
         },
         "map/cave_6.tmx": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 232,
-                "y": 136
+                "x": 337,
+                "y": 152.75
             }
         },
         "map/cave_6N1.tmx": {
@@ -3206,10 +3209,10 @@
                 4
             ],
             "scale": 2,
-            "selectedLayer": 4,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 390.5,
-                "y": 221.75
+                "x": 329.5,
+                "y": 204.25
             }
         },
         "map/yule_town.tmx": {
@@ -3251,22 +3254,31 @@
     "map.tileWidth": 16,
     "map.width": 90,
     "openFiles": [
+        "map/xira.tmx",
+        "map/castle_plains_1.tmx",
+        "map/castle_plains_2.tmx",
+        "map/castle_plains_3.tmx",
+        "map/cave_2.tmx",
+        "map/cave_3.tmx",
+        "map/cave_4.tmx",
+        "map/cave_5.tmx",
+        "map/cave_6.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "map/main_story/templeofchandra.tmx",
-        "map/tibalt.tmx",
-        "map/tibalt_f1.tmx",
         "map/xira.tmx",
-        "map/nahiricave.tmx",
-        "map/nahiri.tmx",
-        "map/grolnok.tmx",
-        "map/tibalt_f2.tmx",
-        "map/cursed_swamp.tmx",
-        "map/slobad_factory.tmx",
-        "map/main_story/blue_castle_f1.tmx",
-        "map/kiora_island.tmx"
+        "map/castle_plains_1.tmx",
+        "map/castle_plains_2.tmx",
+        "map/castle_plains_3.tmx",
+        "map/cave_2.tmx",
+        "map/cave_3.tmx",
+        "map/cave_4.tmx",
+        "map/cave_5.tmx",
+        "map/cave_6.tmx",
+        "map/cave_1..tmx",
+        "map/main_story/templeofchandra.tmx",
+        "map/tibalt.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true

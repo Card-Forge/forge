@@ -27,6 +27,8 @@ import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
 import forge.card.ColorSet;
+import forge.sound.SoundEffectType;
+import forge.sound.SoundSystem;
 
 import java.util.function.Function;
 
@@ -52,6 +54,13 @@ public class Controls {
     static class TextButtonFix extends TextraButton {
         public TextButtonFix(@Null String text) {
             super(text == null ? "NULL" : text, Controls.getSkin(), Controls.getTextraFont());
+            addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    super.clicked(event, x, y);
+                    SoundSystem.instance.play(SoundEffectType.ButtonPress, false);
+                }
+            });
         }
 
         @Override
@@ -74,6 +83,7 @@ public class Controls {
             getTextraLabel().setWidth(getTextraLabel().layout.getWidth() + (getTextraLabel().style != null && getTextraLabel().style.background != null ? getTextraLabel().style.background.getLeftWidth() + getTextraLabel().style.background.getRightWidth() : 0.0F));
             layout();
         }
+
     }
 
     static public TextraButton newTextButton(String text) {

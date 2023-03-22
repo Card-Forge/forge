@@ -36,10 +36,10 @@ Types:Legendary Creature Tiefling Cleric
 PT:3/4
 K:Vigilance
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When this creature specializes, seek three nonland permanent cards. Choose one of those cards and shuffle the rest into your library.
-SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ 3 | ChangeType$ Permanent.nonLand | RememberChanged$ True | SubAbility$ DBChooseCard
+SVar:TrigSeek:DB$ Seek | Num$ 3 | ChangeType$ Card.Permanent+nonLand | RememberFound$ True | SubAbility$ DBChooseCard
 SVar:DBChooseCard:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.IsRemembered | ForgetChosen$ True | SubAbility$ DBShuffle
-SVar:DBShuffle:DB$ ChangeZone | Origin$ Hand | Destination$ Library | Defined$ Remembered | Shuffle$ True | SubAbility$ DBClearChosen
-SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True
+SVar:DBShuffle:DB$ ChangeZone | Origin$ Hand | Destination$ Library | Defined$ Remembered | Shuffle$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 Oracle:Vigilance\nWhen this creature specializes, seek three nonland permanent cards. Choose one of those cards and shuffle the rest into your library.
 
 SPECIALIZE:BLACK

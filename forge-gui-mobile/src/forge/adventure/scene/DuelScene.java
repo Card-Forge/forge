@@ -13,6 +13,7 @@ import forge.adventure.data.EffectData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
@@ -67,6 +68,8 @@ public class DuelScene extends ForgeScene {
     Deck playerDeck;
     boolean chaosBattle = false;
     boolean callbackExit = false;
+    boolean arenaBattleChallenge = false;
+    boolean isArena = false;
     private LoadingOverlay matchOverlay;
     List<IPaperCard> playerExtras = new ArrayList<>();
     List<IPaperCard> AIExtras = new ArrayList<>();
@@ -138,7 +141,13 @@ public class DuelScene extends ForgeScene {
 
     void afterGameEnd(String enemyName, boolean winner, boolean showOverlay, boolean alternate) {
         Runnable runnable = () -> Gdx.app.postRunnable(()-> {
-            SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
+            if (GameScene.instance().isNotInWorldMap()) {
+                SoundSystem.instance.pause();
+                GameHUD.getInstance().playAudio();
+            } else {
+                SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
+                SoundSystem.instance.resume();
+            }
             dungeonEffect = null;
             callbackExit = false;
             Forge.clearTransitionScreen();
@@ -192,6 +201,7 @@ public class DuelScene extends ForgeScene {
 
     @Override
     public void enter() {
+        GameHUD.getInstance().unloadAudio();
         Set<GameType> appliedVariants = new HashSet<>();
         appliedVariants.add(GameType.Constructed);
         AdventurePlayer advPlayer = Current.player();
@@ -267,6 +277,7 @@ public class DuelScene extends ForgeScene {
         addEffects(humanPlayer, playerEffects);
 
         currentEnemy = enemy.getData();
+        boolean bossBattle = currentEnemy.boss;
         for (int i = 0; i < 8 && currentEnemy != null; i++) {
             Deck deck = null;
 
@@ -278,6 +289,8 @@ public class DuelScene extends ForgeScene {
                 }
                 this.AIExtras = aiCards;
                 deck = deckProxy.getDeck();
+            } else if (this.arenaBattleChallenge) {
+                deck = Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck();
             } else {
                 deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck() || Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
             }
@@ -332,7 +345,7 @@ public class DuelScene extends ForgeScene {
         rules.setWarnAboutAICards(false);
 
         hostedMatch.setEndGameHook(() -> DuelScene.this.GameEnd());
-        hostedMatch.startMatch(rules, appliedVariants, players, guiMap);
+        hostedMatch.startMatch(rules, appliedVariants, players, guiMap, bossBattle ? MusicPlaylist.BOSS : MusicPlaylist.MATCH);
         MatchController.instance.setGameView(hostedMatch.getGameView());
         boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
         if (chaosBattle || showMessages) {
@@ -376,8 +389,15 @@ public class DuelScene extends ForgeScene {
     }
 
     public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite) {
+        initDuels(playerSprite, enemySprite, false);
+    }
+    public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite, boolean isArena) {
         this.player = playerSprite;
         this.enemy = enemySprite;
+        this.isArena = isArena;
+        this.arenaBattleChallenge = isArena
+                && (Current.player().getDifficulty().name.equalsIgnoreCase("Hard")
+                || Current.player().getDifficulty().name.equalsIgnoreCase("Insane"));
         this.playerDeck = (Deck) Current.player().getSelectedDeck().copyTo("PlayerDeckCopy");
         this.chaosBattle = this.enemy.getData().copyPlayerDeck && Current.player().isFantasyMode();
         this.AIExtras.clear();

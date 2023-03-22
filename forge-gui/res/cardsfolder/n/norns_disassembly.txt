@@ -1,7 +1,7 @@
 Name:Norn's Disassembly
 ManaCost:W
 Types:Enchantment
-A:AB$ ChangeZone | Cost$ 1 W Sac<1/Permanent.Historic/Historic permanent> | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.Historic | ChangeNum$ 1 | SpellDescription$ Seek a historic card.
+A:AB$ Seek | Cost$ 1 W Sac<1/Permanent.Historic/historic permanent> | Type$ Card.Historic | StackDescription$ REP Seek_{p:You} seeks | SpellDescription$ Seek a historic card.
 DeckHas:Ability$Sacrifice
 DeckNeeds:Type$Legendary|Artifact|Planeswalker
 Oracle:{1}{W}, Sacrifice a historic permanent: Seek a historic card.

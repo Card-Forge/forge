@@ -30,7 +30,8 @@ public class AudioMusic implements IAudioMusic {
     public void pause() {
         if (music == null)
             return;
-        music.pause();
+        if (music.isPlaying())
+            music.pause();
     }
 
     public void resume() {
