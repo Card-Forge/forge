@@ -7119,8 +7119,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void resetChosenModeTurn() {
+        boolean updateView = !chosenModesTurn.isEmpty() || !chosenModesTurnStatic.isEmpty();
         chosenModesTurn.clear();
         chosenModesTurnStatic.clear();
+        if (updateView) {
+            updateAbilityTextForView();
+        }
     }
 
     public int getPlaneswalkerAbilityActivated() {
