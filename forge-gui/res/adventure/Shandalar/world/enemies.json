@@ -491,6 +491,57 @@
 	"colors": "RW"
 },
 {
+	"name": "Badger",
+	"sprite": "sprites/dungeon/badger.atlas",
+	"deck": [
+		"decks/badger.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"scale":0.8,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 10,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	]
+},
+{
 	"name": "Bandit",
 	"sprite": "sprites/dwarf_7.atlas",
 	"deck": [
@@ -10152,6 +10203,56 @@
 		}
 	],
 	"colors": "BG"
+},
+{
+	"name": "Stray Cat",
+	"sprite": "sprites/dungeon/cat.atlas",
+	"deck": [
+		"decks/straycat.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 10,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	]
 },
 {
 	"name": "Squirrel",
