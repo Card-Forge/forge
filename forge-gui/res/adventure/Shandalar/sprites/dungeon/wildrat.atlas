@@ -26,16 +26,16 @@ Walk
   size: 22, 16   
 Walk 
   xy: 40, 48
-  size: 22, 16   
+  size: 25, 16   
 Walk 
   xy: 72, 48
-  size: 22, 18   
+  size: 25, 18   
 Walk 
   xy: 104, 48
-  size: 22, 18   
+  size: 25, 18   
 Walk 
   xy: 136, 48
-  size: 22, 18   
+  size: 25, 18   
 Attack
   xy: 8, 80
   size: 20, 18 
