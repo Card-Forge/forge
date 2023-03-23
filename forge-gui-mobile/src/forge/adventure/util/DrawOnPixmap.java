@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Align;
+import com.github.tommyettinger.textra.TextraLabel;
 
 /*
 Class to draw directly on a pixmap
@@ -25,7 +26,6 @@ public abstract class DrawOnPixmap {
         }
         on.drawPixmap(textureData.consumePixmap(), x, y, from.getRegionX(), from.getRegionY(), from.getRegionWidth(), from.getRegionHeight());
     }
-
 
     public static void drawText(Pixmap drawingMap, String itemText, int x, int y, float width, boolean bigText, Color color) {
         //used for big numbers on Gold/Life for reward...
@@ -58,5 +58,38 @@ public abstract class DrawOnPixmap {
         pixmap.dispose();
         if (bigText) //don't know why this is needed to circumvent bug getting default size for the same pixelfont
             Controls.getBitmapFont("default");
+    }
+
+    public static void drawText(Pixmap drawingMap, TextraLabel itemText, int modX, int modY) {
+        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, drawingMap.getWidth(), drawingMap.getHeight(), false);
+        SpriteBatch batch = new SpriteBatch();
+
+        frameBuffer.begin();
+
+        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        Matrix4 matrix = new Matrix4();
+        matrix.setToOrtho2D(0, drawingMap.getHeight(), drawingMap.getWidth(), -drawingMap.getHeight());
+        batch.setProjectionMatrix(matrix);
+
+        batch.begin();
+        //Rendering ends here. Create a new Pixmap to Texture with mipmaps, otherwise will render as full black.
+        Texture texture = new Texture(drawingMap);
+        batch.draw(texture, 0, 0);
+        itemText.setWrap(true);
+        itemText.setAlignment(1);
+        itemText.setWidth(texture.getWidth());
+        itemText.setHeight(texture.getHeight());
+        itemText.setX(itemText.getX()+modX);
+        itemText.setY(itemText.getY()+modY);
+        itemText.draw(batch, 1);
+        batch.end();
+        Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, drawingMap.getWidth(), drawingMap.getHeight());
+        drawingMap.drawPixmap(pixmap, 0, 0);
+        frameBuffer.end();
+        texture.dispose();
+        batch.dispose();
+        pixmap.dispose();
     }
 }

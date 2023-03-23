@@ -305,7 +305,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 DrawOnPixmap.draw(drawingMap, backSprite);
                 Sprite item = atlas.createSprite(reward.type.toString());
                 DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - item.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1f), item);
-                DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f) - 1, backSprite.getWidth(), true, Color.WHITE);
+                //DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f) - 1, backSprite.getWidth(), true, Color.WHITE);
+                DrawOnPixmap.drawText(drawingMap, Controls.newTextraLabel("[%200]"+reward.getCount()), 0, -10);
 
                 setItemTooltips(item, backSprite, atlas);
                 image = new Texture(drawingMap);
