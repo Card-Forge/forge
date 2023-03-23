@@ -5,7 +5,7 @@ filter: Nearest,Nearest
 repeat: none          
 Avatar
   xy: 75, 19
-  size: 13, 8     
+  size: 13, 9
 Idle 
   xy: 8,16
   size: 16, 16   
@@ -31,28 +31,28 @@ Idle
   xy: 104,112
   size: 16, 16     
 Walk
-  xy: 8, 143
+  xy: 7, 143
   size: 16, 16      
 Walk 
-  xy: 40, 143
+  xy: 39, 143
   size: 16, 16 
 Walk 
-  xy: 72, 143
+  xy: 71, 143
   size: 16, 16 
 Walk 
-  xy: 104, 143
+  xy: 103, 143
   size: 16, 16 
 Walk
-  xy: 136, 143
+  xy: 135, 143
   size: 16, 16      
 Walk 
-  xy: 168, 143
+  xy: 167, 143
   size: 16, 16 
 Walk 
-  xy: 200, 143
+  xy: 199, 143
   size: 16, 16 
 Walk 
-  xy: 232, 143
+  xy: 231, 143
   size: 16, 16 
 Attack 
   xy: 8, 268
