@@ -35,7 +35,7 @@ Walk
   size: 25, 18   
 Walk 
   xy: 136, 48
-  size: 25, 18   
+  size: 24, 18   
 Attack
   xy: 8, 80
   size: 20, 18 
@@ -52,17 +52,17 @@ Attack
   xy: 136, 80
   size: 20, 18 
 Death
-  xy: 8, 112
+  xy: 8, 110
   size: 20, 18 
 Death
-  xy: 40, 112
+  xy: 40, 110
   size: 20, 18 
 Death
-  xy: 72, 112
+  xy: 72, 110
   size: 20, 18 
 Death
-  xy: 104, 112
+  xy: 104, 110
   size: 20, 18 
 Death
-  xy: 136, 112
+  xy: 136, 110
   size: 20, 18 
