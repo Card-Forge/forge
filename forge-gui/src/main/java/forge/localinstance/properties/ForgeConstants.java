@@ -32,6 +32,7 @@ public final class ForgeConstants {
 
     public static final String RES_DIR = ASSETS_DIR + "res" + PATH_SEPARATOR;
     public static final String ADVENTURE_DIR = RES_DIR + "adventure" + PATH_SEPARATOR;
+    public static final String ADVENTURE_DEFAULT_PLANE_DIR = ADVENTURE_DIR + "Shandalar" + PATH_SEPARATOR;
     public static final String LISTS_DIR = RES_DIR + "lists" + PATH_SEPARATOR;
     public static final String SETLOOKUP_DIR = RES_DIR + "setlookup" + PATH_SEPARATOR;
     public static final String KEYWORD_LIST_FILE                     = LISTS_DIR + "NonStackingKWList.txt";
@@ -84,7 +85,7 @@ public final class ForgeConstants {
     public static final String AI_PROFILE_DIR      = RES_DIR + "ai" + PATH_SEPARATOR;
     public static final String SOUND_DIR           = RES_DIR + "sound" + PATH_SEPARATOR;
     public static final String MUSIC_DIR           = RES_DIR + "music" + PATH_SEPARATOR;
-    public static final String ADVENTURE_MUSIC_DIR = ADVENTURE_DIR + "music" + PATH_SEPARATOR;
+    public static final String ADVENTURE_MUSIC_DIR = ADVENTURE_DEFAULT_PLANE_DIR + "music" + PATH_SEPARATOR;
     public static final String LANG_DIR            = RES_DIR + "languages" + PATH_SEPARATOR;
     public static final String EFFECTS_DIR         = RES_DIR + "effects" + PATH_SEPARATOR;
     public static final String PUZZLE_DIR          = RES_DIR + "puzzle" + PATH_SEPARATOR;

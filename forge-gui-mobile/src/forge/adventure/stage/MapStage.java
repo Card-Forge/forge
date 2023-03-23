@@ -306,7 +306,7 @@ public class MapStage extends GameStage {
             dialog.getContentTable().add(group).height(100).width(100).center();
             dialog.getContentTable().add().row();
         } else {
-            TypingLabel label = Controls.newTypingLabel("[%125]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)).toUpperCase()+"\n[%]"+deck.getName());
+            TypingLabel label = Controls.newTypingLabel("[%120]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)).toUpperCase()+"\n[%]"+deck.getName());
             label.skipToTheEnd();
             label.setAlignment(Align.center);
             dialog.getContentTable().add(label).align(Align.center);
