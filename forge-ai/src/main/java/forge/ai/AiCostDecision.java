@@ -35,16 +35,11 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
 public class AiCostDecision extends CostDecisionMakerBase {
-    private final SpellAbility ability;
-    private final Card source;
-
     private final CardCollection discarded;
     private final CardCollection tapped;
 
     public AiCostDecision(Player ai0, SpellAbility sa, final boolean effect) {
-        super(ai0, effect);
-        ability = sa;
-        source = ability.getHostCard();
+        super(ai0, effect, sa, sa.getHostCard());
 
         discarded = new CardCollection();
         tapped = new CardCollection();

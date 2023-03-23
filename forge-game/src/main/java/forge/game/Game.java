@@ -943,7 +943,6 @@ public class Game {
     public GameStage getAge() {
         return age;
     }
-
     public void setAge(GameStage value) {
         age = value;
     }
