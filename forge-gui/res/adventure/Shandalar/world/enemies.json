@@ -9886,7 +9886,7 @@
 {
 	"name": "Slimefoot",
 	"sprite": "sprites/dungeon/slimefoot.atlas",
-	"scale": 1.25,
+	"scale": 0.5,
 	"deck": [
 		"decks/miniboss/slimefoot.dck"
 	],

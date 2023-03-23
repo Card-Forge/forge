@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/cave_6.tmx",
+    "activeFile": "map/factory_3.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "map",
         "tileset",
-        "obj",
-        "map/main_story"
+        "map/main_story",
+        "map",
+        "obj"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -1593,10 +1593,10 @@
                 4
             ],
             "scale": 2,
-            "selectedLayer": 6,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 240.5,
-                "y": 136.25
+                "x": 138.5,
+                "y": 152.75
             }
         },
         "map/factory_4.tmx": {
@@ -2068,8 +2068,8 @@
             "scale": 2.177083333333333,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 79.00478468899522,
-                "y": 136.65071770334927
+                "x": 235.86602870813402,
+                "y": 132.05741626794259
             }
         },
         "map/kobold_mine.tmx": {
@@ -3243,7 +3243,7 @@
         },
         "tileset/main.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         }
     },
@@ -3257,21 +3257,18 @@
     "map.tileWidth": 16,
     "map.width": 90,
     "openFiles": [
-        "map/xira.tmx",
-        "map/castle_plains_1.tmx",
-        "map/castle_plains_2.tmx",
-        "map/castle_plains_3.tmx",
-        "map/cave_2.tmx",
-        "map/cave_3.tmx",
-        "map/cave_4.tmx",
-        "map/cave_5.tmx",
-        "map/cave_6.tmx"
+        "map/magetower_3.tmx",
+        "map/kiora_island.tmx",
+        "map/factory_2.tmx",
+        "map/factory_3.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "map/kiora_island.tmx",
         "map/magetower_3.tmx",
+        "map/kiora_island.tmx",
+        "map/factory_2.tmx",
+        "map/factory_3.tmx",
         "map/magetower_2.tmx",
         "map/magetower_14.tmx",
         "map/magetower_13.tmx",
@@ -3279,9 +3276,7 @@
         "map/graveyard_2.tmx",
         "map/fort_10.tmx",
         "map/fort_2.tmx",
-        "map/fort_8.tmx",
-        "map/fort_9.tmx",
-        "map/fort_6.tmx"
+        "map/fort_8.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true
