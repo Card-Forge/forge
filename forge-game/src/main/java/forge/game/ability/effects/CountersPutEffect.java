@@ -176,7 +176,6 @@ public class CountersPutEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
         final PlayerController pc = activator.getController();
         final boolean etbcounter = sa.hasParam("ETB");
-        final int max = sa.hasParam("MaxFromEffect") ? Integer.parseInt(sa.getParam("MaxFromEffect")) : -1;
 
         boolean existingCounter = sa.hasParam("CounterType") && sa.getParam("CounterType").equals("ExistingCounter");
         boolean eachExistingCounter = sa.hasParam("EachExistingCounter");
@@ -453,10 +452,6 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     }
                     counterAmount = sa.usesTargeting() && sa.isDividedAsYouChoose() ? sa.getDividedValue(gameCard)
                             : counterAmount;
-                    if (max != -1) {
-                        counterAmount = Math.max(Math.min(max - gameCard.getCounters(counterType), counterAmount),
-                                0);
-                    }
                     if (sa.hasParam("UpTo")) {
                         int min = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("UpToMin", "0"), sa);
                         Map<String, Object> params = Maps.newHashMap();

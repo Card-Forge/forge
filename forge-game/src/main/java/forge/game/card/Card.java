@@ -1427,6 +1427,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     @Override
     public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
         int addAmount = n;
+        // Rules say it is only a SBA, but is it checked there too?
+        if (counterType.is(CounterEnumType.DREAM) && hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
+            addAmount = Math.min(addAmount, 7 - getCounters(CounterEnumType.DREAM));
+        }
         if (addAmount <= 0 || !canReceiveCounters(counterType)) {
             // As per rule 107.1b
             return;
