@@ -8,16 +8,16 @@ Avatar
   size: 11, 8   
 Idle 
   xy: 7, 16
-  size: 16, 16    
+  size: 20, 20    
 Idle 
   xy: 39, 16
-  size: 16, 16 
+  size: 20, 20 
 Idle 
   xy: 71, 16
-  size: 16, 16 
+  size: 20, 20 
 Idle 
   xy: 103, 16
-  size: 16, 16 
+  size: 20, 20
 Walk 
   xy: 7, 45
   size: 20, 20   

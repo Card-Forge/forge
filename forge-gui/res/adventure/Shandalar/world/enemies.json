@@ -10215,6 +10215,7 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 10,
+	"scale":0.80,
 	"rewards": [
 	{
 			"type": "deckCard",
@@ -11485,7 +11486,8 @@
 	"sprite": "sprites/dungeon/wildrat.atlas",
 	"deck": [
 		"decks/infectrat.dck",
-		"decks/rat.json"
+		"decks/rat.json",
+		"decks/ratswarm.dck"
 	],
 	"ai": "",
 	"flying": false,
