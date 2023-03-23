@@ -165,7 +165,7 @@ public class HumanPlaySpellAbility {
                 && ability.canCastTiming(human)
                 && ability.checkRestrictions(human)
                 && ability.isLegalAfterStack()
-                && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, false, ability.getHostCard())));
+                && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, false)));
 
         game.clearTopLibsCast(ability);
 

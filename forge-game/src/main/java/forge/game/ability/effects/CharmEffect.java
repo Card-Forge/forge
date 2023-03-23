@@ -20,7 +20,7 @@ import forge.util.collect.FCollection;
 
 public class CharmEffect extends SpellAbilityEffect {
 
-    public static List<AbilitySub> makePossibleOptions(final SpellAbility sa, boolean forDesc) {
+    public static List<AbilitySub> makePossibleOptions(final SpellAbility sa) {
         final Card source = sa.getHostCard();
         List<String> restriction = null;
 
@@ -30,7 +30,7 @@ public class CharmEffect extends SpellAbilityEffect {
 
         List<AbilitySub> choices = Lists.newArrayList(sa.getAdditionalAbilityList("Choices"));
 
-        if (!forDesc) {
+        if (source.getZone() != null) {
             List<AbilitySub> toRemove = Lists.newArrayList();
             for (AbilitySub ch : choices) {
                 // 603.3c If one of the modes would be illegal, that mode can't be chosen.
@@ -55,7 +55,7 @@ public class CharmEffect extends SpellAbilityEffect {
     public static String makeFormatedDescription(SpellAbility sa) {
         Card source = sa.getHostCard();
 
-        List<AbilitySub> list = CharmEffect.makePossibleOptions(sa, true);
+        List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
         final int num;
         boolean additionalDesc = sa.hasParam("AdditionalDescription");
         boolean optional = sa.hasParam("Optional");
@@ -169,7 +169,7 @@ public class CharmEffect extends SpellAbilityEffect {
         //this resets all previous choices
         sa.setSubAbility(null);
 
-        List<AbilitySub> choices = makePossibleOptions(sa, false);
+        List<AbilitySub> choices = makePossibleOptions(sa);
 
         // Entwine does use all Choices
         if (sa.isEntwine()) {
