@@ -93,7 +93,7 @@
     <property name="waypoints" value="183,181,182,181"/>
    </properties>
   </object>
-  <object id="161" template="../obj/entry_up.tx" x="464.012" y="105.236">
+  <object id="161" template="../obj/entry_up.tx" x="460.679" y="88.9027" width="31.6667" height="16">
    <properties>
     <property name="teleport" value="maps/map/tibalt_f2.tmx"/>
    </properties>
