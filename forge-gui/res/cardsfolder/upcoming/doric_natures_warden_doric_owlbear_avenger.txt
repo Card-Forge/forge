@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Forest | ChangeNum$ 1
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ Whenever NICKNAME attacks, you may pay {1}{G}. If you do, transform her.
 SVar:TrigTransform:AB$ SetState | Cost$ 1 G | Defined$ Self | Mode$ Transform
-SVar:HasAttackEffect:True
+SVar:HasAttackEffect:TRUE
 AlternateMode:DoubleFaced
 Oracle:Vigilance\nWhen Doric, Nature's Warden enters the battlefield, search your library for a Forest card, put it into the battlefield tapped, then shuffle.\nWhenever Doric attacks, you may pay {1}{G}. If you do, transform her.
 
