@@ -1,0 +1,13 @@
+Name:Forge, Neverwinter Charlatan
+ManaCost:3 B
+Types:Legendary Creature Human Rogue
+PT:2/4
+K:Menace
+K:Ward:Sac<1/Creature>
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +2/+0 for each Treasure you control.
+T:Mode$ Sacrificed | ValidCard$ Creature | Execute$ TrigTreasure | ActivationLimit$ 1 | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more players sacrifice one or more creatures, you create a tapped Treasure token. This ability triggers only once each turn.
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenTapped$ True:
+SVar:X:Count$Valid Treasure.YouCtrl/Twice
+DeckHints:Ability$Sacrifice & Type$Treasure
+DeckHas:Ability$Token & Type$Treasure|Artifact
+Oracle:Menace\nWard—Sacrifice a creature\nForge, Neverwinter Charlatan gets +2/+0 for each Treasure you control.\nWhenever one or more players sacrifice one or more creatures, you create a tapped Treasure token. This ability triggers only once each turn.
