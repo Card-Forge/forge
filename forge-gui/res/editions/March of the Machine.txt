@@ -33,6 +33,7 @@ ScryfallCode=MOM
 313 R Omnath, Locus of All @Jessica Rossier
 316 M Thalia and The Gitrog Monster @Sami Makkonen
 317 R Yargle and Multani @Lisa Heidhoff
+320 M Archangel Elspeth @Denys Tsiperko
 321 M Chandra, Hope's Beacon @Randy Vargas
 339 M Jin-Gitaxias @Julian Kok Joon Wen
 352 R Faerie Mastermind @Joshua Raphael
