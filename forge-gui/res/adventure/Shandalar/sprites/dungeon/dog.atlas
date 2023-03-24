@@ -31,26 +31,44 @@ Idle
   xy: 230, 17
   size: 20, 15   
 Walk 
-  xy: 6, 113
-  size: 20, 15   
+  xy: 6, 108
+  size: 25, 20   
 Walk 
-  xy: 38, 113
-  size: 20, 15   
+  xy: 38, 108
+  size: 25, 20   
 Walk 
-  xy: 70, 113
-  size: 20, 15   
+  xy: 70, 108
+  size: 25, 20    
 Walk 
-  xy: 102, 113
-  size: 20, 15   
+  xy: 102,108
+  size: 25, 20   
 Walk 
-  xy: 134, 113
-  size: 20, 15   
+  xy: 134, 108
+  size: 25, 20    
 Walk 
-  xy: 166, 113
-  size: 20, 15   
+  xy: 166,108
+  size: 25, 20     
 Walk 
-  xy: 198, 113
-  size: 20, 15   
+  xy: 198, 108
+  size: 25, 20    
 Walk 
-  xy: 230, 113
-  size: 20, 15   
+  xy: 230,108
+  size: 25, 20   
+Attack
+  xy: 0, 172
+  size: 32, 20  
+Attack
+  xy: 32, 172
+  size: 32, 20 
+Attack
+  xy: 64, 172
+  size: 32, 20 
+Death
+  xy: 0, 204
+  size: 32, 20  
+Attack
+  xy: 32, 204
+  size: 32, 20 
+Attack
+  xy: 64, 204
+  size: 32, 20 

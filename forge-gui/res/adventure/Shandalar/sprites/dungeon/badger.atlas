@@ -49,38 +49,38 @@ Walk
   xy: 230, 44
   size: 25, 20
 Attack 
-  xy: 6, 76
-  size: 25, 20 
+  xy: 0, 76
+  size: 32, 20 
 Attack 
-  xy: 38, 76
-  size: 25, 20 
+  xy: 32, 76
+  size: 32, 20 
 Attack 
-  xy: 70, 76
-  size: 25, 20 
+  xy: 64, 76
+  size: 32, 20 
 Attack 
-  xy: 102, 76
-  size: 25, 20    
+  xy: 96, 76
+  size: 32, 20    
 Attack 
-  xy: 134, 76
-  size: 25, 20 
+  xy: 128, 76
+  size: 32, 20 
 Death 
-  xy: 6, 142
-  size: 25, 18     
+  xy: 0, 140
+  size: 32, 20     
 Death 
-  xy: 6, 142
-  size: 25, 18 
+  xy: 32, 140
+  size: 32, 20 
 Death 
-  xy: 38, 142
-  size: 25, 18 
+  xy: 64, 140
+  size: 32, 20 
 Death 
-  xy: 70, 142
-  size: 25, 18 
+  xy: 96, 140
+  size: 32, 20 
 Death 
-  xy: 102, 142
-  size: 25, 18 
+  xy: 128, 140
+  size: 32, 20 
 Death 
-  xy: 134, 142
-  size: 25, 18 
+  xy: 160, 140
+  size: 32, 20 
 Death 
-  xy: 166, 142
-  size: 25, 18 
+  xy: 192, 140
+  size: 32, 20 

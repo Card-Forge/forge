@@ -4,8 +4,8 @@ format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
-  xy: 75, 80
-  size: 11, 8   
+  xy: 72, 80
+  size: 16, 10   
 Idle 
   xy: 7, 16
   size: 20, 20    
@@ -67,20 +67,20 @@ Attack
   xy: 231, 76
   size: 20, 20 
 Death
-  xy: 7, 140
-  size: 20, 20 
+  xy: 0, 140
+  size: 32, 20 
 Death
-  xy: 39, 140
-  size: 20, 20 
+  xy: 32, 140
+  size: 32, 20 
 Death
-  xy: 71, 140
-  size: 20, 20 
+  xy: 64, 140
+  size: 32, 20 
 Death
-  xy: 103, 140
-  size: 20, 20 
+  xy: 96, 140
+  size: 32, 20 
 Death
-  xy: 135, 140
-  size: 20, 20 
+  xy: 128, 140
+  size: 32, 20 
 Death
-  xy: 167, 140
-  size: 20, 20 
+  xy: 160, 140
+  size: 32, 20 
