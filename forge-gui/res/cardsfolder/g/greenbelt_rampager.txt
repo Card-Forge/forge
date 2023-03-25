@@ -2,7 +2,7 @@ Name:Greenbelt Rampager
 ManaCost:G
 Types:Creature Elephant
 PT:3/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ PaymentCheck | TriggerDescription$ When CARDNAME enters the battlefield, pay {E}{E} (two energy counters). If you can't, return Greenbelt Rampager to its owner's hand and you get {E}.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ PaymentCheck | TriggerDescription$ When CARDNAME enters the battlefield, pay {E}{E} (two energy counters). If you can't, return CARDNAME to its owner's hand and you get {E}.
 SVar:PaymentCheck:DB$ Pump | UnlessCost$ Mandatory PayEnergy<2> | UnlessPayer$ You | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBReturnToHand
 SVar:DBReturnToHand:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Self | SubAbility$ GetEnergy
 SVar:GetEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1

@@ -5,7 +5,6 @@ import java.util.List;
 
 import forge.ImageKeys;
 import forge.game.cost.*;
-import forge.game.spellability.SpellAbilityStackInstance;
 
 import com.google.common.collect.Iterables;
 
@@ -262,6 +261,7 @@ public class HumanPlay {
                     || part instanceof CostRollDice
                     || part instanceof CostDamage
                     || part instanceof CostEnlist
+                    || part instanceof CostExileFromStack
                     || part instanceof CostPutCounter
                     || part instanceof CostRemoveCounter
                     || part instanceof CostRemoveAnyCounter
@@ -336,53 +336,6 @@ public class HumanPlay {
                         costExile.payAsDecided(p, PaymentDecision.card(newList), sourceAbility, hcd.isEffect());
                     }
                 }
-            }
-            else if (part instanceof CostExileFromStack) {
-                CostExileFromStack costExile = (CostExileFromStack) part;
-
-                final List<SpellAbility> saList = new ArrayList<>();
-                final List<String> descList = new ArrayList<>();
-
-                for (final SpellAbilityStackInstance si : p.getGame().getStack()) {
-                    final Card stC = si.getSourceCard();
-                    final SpellAbility stSA = si.getSpellAbility(true).getRootAbility();
-                    if (stC.isValid(part.getType().split(";"), p, source, sourceAbility) && stSA.isSpell()) {
-                        saList.add(stSA);
-                        if (stC.isCopiedSpell()) {
-                            descList.add(stSA.getStackDescription() + " (Copied Spell)");
-                        } else {
-                            descList.add(stSA.getStackDescription());
-                        }
-                    }
-                }
-
-                List<SpellAbility> payList = new ArrayList<>();
-                if (part.getType().equals("All")) {
-                    payList.addAll(saList);
-                } else {
-                    final int c = part.getAbilityAmount(sourceAbility);
-
-                    if (saList.size() < c) {
-                        return false;
-                    }
-
-                    for (int i = 0; i < c; i++) {
-                        //Have to use the stack descriptions here because some copied spells have no description otherwise
-                        final String o = controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblExileFromStack"), descList);
-
-                        if (o == null) {
-                            return false;
-                        }
-                        final SpellAbility toExile = saList.get(descList.indexOf(o));
-
-                        saList.remove(toExile);
-                        descList.remove(o);
-
-                        payList.add(toExile);
-                    }
-                }
-
-                costExile.payAsDecided(p, PaymentDecision.spellabilities(payList), sourceAbility, hcd.isEffect());
             }
             else if (part instanceof CostPutCardToLib) {
                 int amount = Integer.parseInt(part.getAmount());
