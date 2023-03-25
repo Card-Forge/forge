@@ -2,8 +2,6 @@ package forge.game.ability.effects;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -125,8 +123,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
             return;
         }
 
-        final String numericAmount = sa.getParamOrDefault("Amount", "1");
-        final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) : AbilityUtils.calculateAmount(host, numericAmount, sa);
+        final int validAmount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Amount", "1"), sa);
 
         for (final Player p : tgtPlayers) {
             if (!p.isInGame()) {
