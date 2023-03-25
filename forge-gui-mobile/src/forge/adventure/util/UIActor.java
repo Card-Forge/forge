@@ -289,7 +289,9 @@ public class UIActor extends Group {
         for (ObjectMap.Entry property : entries) {
             switch (property.key.toString()) {
                 case "image":
-                    Texture t = Forge.getAssets().getTexture(Config.instance().getFile(property.value.toString()));
+                    boolean is2D = property.value.toString().startsWith("ui") &&
+                            (property.value.toString().contains("minimap") || property.value.toString().contains("hud"));
+                    Texture t = Forge.getAssets().getTexture(Config.instance().getFile(property.value.toString()), is2D, false);
                     TextureRegion tr = new TextureRegion(t);
                     if (property.value.toString().contains("title_bg")) {
                         ShaderProgram shaderNightDay = Forge.getGraphics().getShaderNightDay();

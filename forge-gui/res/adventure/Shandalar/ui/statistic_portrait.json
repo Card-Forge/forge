@@ -137,39 +137,27 @@
       "fontColor":"black"
     },
     {
-      "type": "Image",
-      "name": "lifeIcon",
-      "image": "ui/life.png",
-      "x": 98,
-      "y": 22,
-      "width": 16,
-      "height": 16
-    },
-    {
-      "type": "Image",
-      "name": "goldIcon",
-      "image": "ui/money.png",
-      "x": 98,
-      "y": 42,
-      "width": 16,
-      "height": 16
-    },
-    {
       "type": "Label",
       "name": "lifePoints",
-      "fontColor":"black",
       "width": 64,
       "height": 16,
-      "x": 118,
+      "x": 98,
       "y": 22
     },
     {
       "type": "Label",
       "name": "money",
-      "fontColor":"black",
       "width": 64,
       "height": 16,
-      "x": 118,
+      "x": 98,
+      "y": 42
+    },
+    {
+      "type": "Label",
+      "name": "shards",
+      "width": 64,
+      "height": 16,
+      "x": 170,
       "y": 42
     },
     {

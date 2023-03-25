@@ -56,6 +56,7 @@ public class AdventureScreen extends LaunchScreen {
 
     @Override
     protected void startMatch() {
+        Forge.isMobileAdventureMode = true; //set early for the transition logo
         Forge.switchToAdventure();
     }
     public static void preload() {
