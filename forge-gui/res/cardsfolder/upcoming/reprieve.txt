@@ -1,0 +1,6 @@
+Name:Reprieve
+ManaCost:1 W
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Card.inZoneStack | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target spell to its owner's hand.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+Oracle:Return target spell to its owner's hand.\nDraw a card.
