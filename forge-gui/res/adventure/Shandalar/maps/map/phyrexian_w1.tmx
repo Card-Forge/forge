@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="76">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="78">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../tileset/phyrexiantiles.tsx"/>
+ <tileset firstgid="12048" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzr0WNg6BnFo3gUj+JRPIpH8YjAAE3lcpw=
@@ -40,7 +41,6 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="65" template="../obj/treasure.tx" x="96.667" y="33"/>
   <object id="67" template="../obj/treasure.tx" x="320" y="32.5"/>
   <object id="68" template="../obj/enemy.tx" x="207" y="94">
    <properties>
@@ -59,6 +59,34 @@
     <property name="enemy" value="Orthodoxy Duelist"/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="waypoints" value="72,73,72"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../../../../../../../../../../Games/MTG Forge/PushTest/res/adventure/Shandalar/maps/obj/booster.tx" x="98" y="33">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ONE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot; ]
+  }
+]
+</property>
    </properties>
   </object>
  </objectgroup>
