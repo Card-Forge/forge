@@ -81,7 +81,7 @@ public class MapSprite extends Actor {
             return;
         batch.draw(texture, getX(), getY());
         if (isCaveDungeon && !isOldorVisited) {
-            leaf.setPosition(getX() - 5, getY() + 5);
+            leaf.setPosition(getX() - 7, getY() + 7);
             leaf.draw(batch, parentAlpha);
         }
         //font.draw(batch,String.valueOf(getZIndex()),getX()-(getWidth()/2),getY());
