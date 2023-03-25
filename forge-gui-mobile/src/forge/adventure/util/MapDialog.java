@@ -64,7 +64,6 @@ public class MapDialog {
     }
 
     Pair<FileHandle, Music> audio = null;
-    float fade = 1f;
 
     void unload() {
         if (audio != null) {
@@ -186,35 +185,11 @@ public class MapDialog {
 
     void fadeIn() {
         disposeAudio(true);
-        if (fade >= 1f)
-            return;
-        for (int i = 10; i > 1; i--) {
-            float delay = i * 0.1f;
-            Timer.schedule(new Timer.Task() {
-                @Override
-                public void run() {
-                    fade += 0.1f;
-                    if (fade > 1f)
-                        fade = 1f;
-                    GameHUD.getInstance().fadeAudio(fade);
-                }
-            }, delay);
-        }
+        GameHUD.getInstance().fadeIn();
     }
 
     void fadeOut() {
-        for (int i = 10; i > 1; i--) {
-            float delay = i * 0.1f;
-            Timer.schedule(new Timer.Task() {
-                @Override
-                public void run() {
-                    fade -= 0.1f;
-                    if (fade < 0.1f)
-                        fade = 0.1f;
-                    GameHUD.getInstance().fadeAudio(fade);
-                }
-            }, delay);
-        }
+        GameHUD.getInstance().fadeOut();
     }
 
     public void activate() { //Method for actors to show their dialogues.
