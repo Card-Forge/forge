@@ -18,4 +18,5 @@ public class SettingData {
     public Float cardTooltipAdj;
     public Float rewardCardAdjLandscape;
     public Float cardTooltipAdjLandscape;
+    public boolean dayNightBG;
 }

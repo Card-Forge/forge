@@ -81,6 +81,10 @@ public class Graphics {
         return shaderUnderwater;
     }
 
+
+    public ShaderProgram getShaderNightDay() {
+        return shaderNightDay;
+    }
     public void begin(float regionWidth0, float regionHeight0) {
         batch.begin();
         bounds = new Rectangle(0, 0, regionWidth0, regionHeight0);

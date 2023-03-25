@@ -22,6 +22,8 @@ import forge.adventure.util.*;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 
+import java.time.LocalTime;
+
 /**
  * Base class for an GUI scene where the elements are loaded from a json file
  */
@@ -268,6 +270,21 @@ public class UIScene extends Scene {
         }
     }
 
+    static float timeOfDay = 8.0f;
+    float targetTime = 8.0f;
+
+    public static float getTimeOfDay() {
+        return timeOfDay;
+    }
+
+    public void setTargetTime(float val) {
+        targetTime = val;
+    }
+
+    public void setTimeOfDay(float val) {
+        timeOfDay = val;
+    }
+
     @Override
     public void dispose() {
         if (stage != null)
@@ -277,6 +294,15 @@ public class UIScene extends Scene {
     @Override
     public void act(float delta) {
         stage.act(delta);
+        if (timeOfDay < targetTime) {
+            timeOfDay += (delta * 1.5f);
+            if (timeOfDay > targetTime)
+                timeOfDay = targetTime;
+        } else if (timeOfDay > targetTime) {
+            timeOfDay -= (delta * 1.5f);
+            if (timeOfDay < targetTime)
+                timeOfDay = targetTime;
+        }
     }
 
     @Override
@@ -306,7 +332,6 @@ public class UIScene extends Scene {
     }
 
     public boolean keyReleased(int keycode) {
-
         ui.pressUp(keycode);
         if (!dialogShowing()) {
             Button pressedButton = ui.buttonPressed(keycode);
@@ -537,7 +562,6 @@ public class UIScene extends Scene {
 
 
     public void selectNextUp() {
-
         if (getSelected() == null) {
             selectFirst();
         } else {
@@ -573,7 +597,6 @@ public class UIScene extends Scene {
     }
 
     private void selectFirst() {
-
         Selectable result = null;
         for (Selectable candidate : getPossibleSelection()) {
             if (result == null || candidate.getY() > result.getY()) {
@@ -594,8 +617,6 @@ public class UIScene extends Scene {
     }
 
     public void selectActor(Selectable actor) {
-
-
         unselectActors();
         if (actor == null) return;
         stage.setKeyboardFocus(actor.actor);
@@ -628,7 +649,66 @@ public class UIScene extends Scene {
             }
         }
         Gdx.input.setInputProcessor(stage);
+        updateBG(false);
         super.enter();
+    }
+
+    void updateBG(boolean animate) {
+        if (Config.instance().getSettingData().dayNightBG) {
+            int hour = LocalTime.now().getHour();
+            if (animate)
+                setTimeOfDay(hour + 3 > 23 ? hour + 3 - 23 : hour + 3);
+            switch (hour) {
+                case 8:
+                case 9:
+                    setTargetTime(6f);
+                    break;
+                case 10:
+                case 11:
+                    setTargetTime(7f);
+                    break;
+                case 12:
+                case 13:
+                    setTargetTime(8f);
+                    break;
+                case 14:
+                case 15:
+                    setTargetTime(11f);
+                    break;
+                case 16:
+                case 17:
+                    setTargetTime(12f);
+                    break;
+                case 18:
+                case 19:
+                    setTargetTime(14f);
+                    break;
+                case 20:
+                case 21:
+                    setTargetTime(15f);
+                    break;
+                case 22:
+                case 23:
+                    setTargetTime(16f);
+                    break;
+                case 0:
+                case 1:
+                    setTargetTime(17f);
+                    break;
+                case 2:
+                case 3:
+                    setTargetTime(20f);
+                    break;
+                case 4:
+                case 5:
+                    setTargetTime(23f);
+                    break;
+                case 6:
+                case 7:
+                    setTargetTime(28f);
+                    break;
+            }
+        }
     }
 
     public TextureRegion getUIBackground() {
