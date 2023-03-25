@@ -51,7 +51,7 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 239.75,
+                "x": 239.5,
                 "y": 136.25
             }
         },
@@ -62,7 +62,7 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 399.75,
+                "x": 399.5,
                 "y": 319.75
             }
         },
@@ -2469,14 +2469,14 @@
         },
         "map/main_story/templeofchandra.tmx": {
             "expandedObjectLayers": [
-                7,
-                2
+                2,
+                7
             ],
-            "scale": 1.5,
+            "scale": 2,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 465.3333333333333,
-                "y": 405.66666666666663
+                "x": 849,
+                "y": 624.75
             }
         },
         "map/main_story/templeofliliana.tmx": {
@@ -3096,7 +3096,7 @@
             "scale": 2,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 353,
+                "x": 225,
                 "y": 192.75
             }
         },
@@ -3107,8 +3107,8 @@
             "scale": 3,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 367.66666666666663,
-                "y": 150.83333333333334
+                "x": 518.6666666666666,
+                "y": 69.16666666666667
             }
         },
         "map/tibalt_f2.tmx": {
@@ -3118,8 +3118,8 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 176,
-                "y": 167.83333333333334
+                "x": 174.33333333333331,
+                "y": 162.5
             }
         },
         "map/tileset/buildings.tsx": {
@@ -3279,18 +3279,18 @@
     "project": "main.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "map/magetower_1.tmx",
-        "map/castle_plains_1.tmx",
-        "map/castle_plains_2.tmx",
+        "map/aerie_1B.tmx",
+        "map/aerie_1C.tmx",
         "map/cave_6.tmx",
         "map/cave_5.tmx",
         "map/cave_4.tmx",
+        "map/cave_3.tmx",
         "map/cave_2.tmx",
         "map/castle_plains_3.tmx",
-        "map/cave_3.tmx",
-        "map/magetower_2.tmx",
-        "map/magetower_14.tmx",
-        "map/magetower_13.tmx"
+        "map/castle_plains_2.tmx",
+        "map/castle_plains_1.tmx",
+        "map/tibalt.tmx",
+        "map/magetower_1.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true

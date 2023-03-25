@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="197">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="200">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -7,7 +7,7 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="17" name="Collision" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJzVlVEOwjAIhhvffFlM1Jt4Bu/hYb3PjmDIJKkEKKwFOxKyWij7JH9ZKePseS7ldNcdciyO9bT4SG4rE+Z7z0Zxv26/zuVway97Bnf9W+OWamZyw3q5bI77lNX6/kxuZAYHOwo3stZrLv+x6B6hE64e1bd2R4FLs39wW2w2bs/5NYDb+y3wzlzgyua2mna2vn8ccy83NU0L2D+pNt2XuDE2itvbc5pr5R7Rb/D31a9lLb5+41H9hvrc3emdRTWbtN/ibvUlktvLQ/OkmhZuWkd6Su8Aq/XS6nUPN+hd4m7t16bN79n7Tec4PkdwU/49+vbMo159lzLuXmZze2MzcLfORjB5uC1sWr/3/vce7j3W6nckcyR3hk6OyP0BqjbOBA==
+   eJzVllEOwjAIhhvffFlM1Jt4Bu/hYb3PjmDIJKkEKKxQOxKyWij7/EPRUuLseS7ldNcdciyO9bR4JLeVCfO9Z7O4X7df53K4tZd9BHf9WeOWao7khvVy2Rz3Kav1/SO5kRkc7CjcyFqvufzHontGn3D1aH9rdxS4NPsHt8Vm4/acXxO4vb8F3pkLXKO5raadre8fx9zLTU3rBdRPqk33JW6MRXF7Nae5Vu4IvcHfV38va/H1G8/SG+pzd6d3FtVs0n6Lu6VLJreXh+ZJNS3ctI70lN4BVvdLS+sebuh3iRv/S1m4tfk9u950juMzgpvy7+lvzzzq7e9S4u7laG5vbAbu1tkMJg+3hU3Te+937+HeYy29M5kzuUf0yRG5P3f9ziI=
   </data>
  </layer>
  <layer id="18" name="Tilelaag 5" width="46" height="28">
@@ -43,10 +43,10 @@
   <object id="117" template="../obj/enemy.tx" x="159.319" y="212.121">
    <properties>
     <property name="enemy" value="Devil "/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="119" template="../obj/enemy.tx" x="348.198" y="185.94">
+  <object id="119" template="../obj/enemy.tx" x="349.865" y="189.94">
    <properties>
     <property name="enemy" value="Torturer"/>
     <property name="reward">[
@@ -59,7 +59,7 @@
 ]
 </property>
     <property name="spawn.Hard" type="bool" value="true"/>
-    <property name="threatRange" type="int" value="60"/>
+    <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
   <object id="136" template="../obj/enemy.tx" x="434.191" y="249.907">
@@ -85,17 +85,12 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="150" template="../obj/enemy.tx" x="372.676" y="109.772">
+  <object id="150" template="../obj/enemy.tx" x="373.676" y="136.772">
    <properties>
     <property name="enemy" value="Necromancer"/>
     <property name="spawn.Hard" type="bool" value="true"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="183,181,182,181"/>
-   </properties>
-  </object>
-  <object id="161" template="../obj/entry_up.tx" x="460.679" y="88.9027" width="31.6667" height="16">
-   <properties>
-    <property name="teleport" value="maps/map/tibalt_f2.tmx"/>
    </properties>
   </object>
   <object id="166" template="../obj/enemy.tx" x="56.8421" y="320.605">
@@ -151,10 +146,10 @@
 </property>
    </properties>
   </object>
-  <object id="181" template="../obj/waypoint.tx" x="423.342" y="49.4386"/>
-  <object id="182" template="../obj/waypoint.tx" x="338.342" y="49.4386"/>
+  <object id="181" template="../obj/waypoint.tx" x="423.009" y="57.1053"/>
+  <object id="182" template="../obj/waypoint.tx" x="347.342" y="45.1053"/>
   <object id="183" template="../obj/waypoint.tx" x="421.008" y="138.105"/>
-  <object id="184" template="../obj/gate.tx" x="574.009" y="280.439" width="15.3333" height="13.3333">
+  <object id="184" template="../obj/gate.tx" x="577.342" y="285.439" width="11.6666" height="22">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This door is locked&quot;,
@@ -182,5 +177,13 @@
   <object id="194" template="../obj/waypoint.tx" x="202.009" y="355.105"/>
   <object id="195" template="../obj/waypoint.tx" x="130.009" y="360.105"/>
   <object id="196" template="../obj/waypoint.tx" x="344.342" y="253.772"/>
+  <object id="197" template="../obj/waypoint.tx" x="470.342" y="121.439"/>
+  <object id="198" template="../obj/door_up.tx" x="460.684" y="69.2103" width="24.0134" height="23.6704" rotation="359.74">
+   <properties>
+    <property name="direction" value="left"/>
+    <property name="teleport" value="maps/map/tibalt_f2.tmx"/>
+    <property name="teleportObjectId" value="114"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
