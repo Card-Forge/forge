@@ -1,0 +1,14 @@
+Name:Wrenn and Realmbreaker
+ManaCost:1 G G
+Types:Legendary Planeswalker Wrenn
+Loyalty:4
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddAbility$ AnyMana | Description$ Lands you control have "{T}: Add one mana of any color."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Land.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target land you control | Power$ 3 | Toughness$ 3 | Types$ Creature,Elemental | Keywords$ Vigilance & Hexproof & Haste | Duration$ UntilYourNextTurn | SpellDescription$ Up to one target land you control becomes a 3/3 Elemental creature with vigilance, hexproof, and haste until your next turn. It's still a land.
+A:AB$ Mill | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | NumCards$ 3 | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill three cards. You may put a permanent card from among the milled cards into your hand.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden$ True | ChangeNum$ 1 | ChangeType$ Card.Permanent+IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Wrenn and Realmbreaker | Image$ emblem_wrenn_and_realmbreaker | StaticAbilities$ PermanentRecycle | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "You may play lands and cast permanent spells from your graveyard."
+SVar:PermanentRecycle:Mode$ Continuous | EffectZone$ Command | Affected$ Card.Permanent+YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands and cast permanent spells from your graveyard.
+DeckHas:Ability$Graveyard
+Oracle:Lands you control have "{T}: Add one mana of any color."\n[+1]: Up to one target land you control becomes a 3/3 Elemental creature with vigilance, hexproof, and haste until your next turn. It’s still a land.\n[−2]: Mill three cards. You may put a permanent card from among the milled cards into your hand.\n[−7]: You get an emblem with "You may play lands and cast permanent spells from your graveyard."
