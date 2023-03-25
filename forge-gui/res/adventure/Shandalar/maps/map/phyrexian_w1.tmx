@@ -61,7 +61,7 @@
     <property name="waypoints" value="72,73,72"/>
    </properties>
   </object>
-  <object id="76" template="../../../../../../../../../../../../../Games/MTG Forge/PushTest/res/adventure/Shandalar/maps/obj/booster.tx" x="98" y="33">
+  <object id="76" template="../obj/booster.tx" x="98" y="33">
    <properties>
     <property name="reward">[
   {

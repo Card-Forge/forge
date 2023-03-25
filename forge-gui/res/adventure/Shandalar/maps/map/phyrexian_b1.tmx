@@ -80,7 +80,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="75" template="../../../../../../../../../../../../../Games/MTG Forge/PushTest/res/adventure/Shandalar/maps/obj/booster.tx" x="254.75" y="33.5">
+  <object id="75" template="../obj/booster.tx" x="254.75" y="33.5">
    <properties>
     <property name="reward">[
   {
