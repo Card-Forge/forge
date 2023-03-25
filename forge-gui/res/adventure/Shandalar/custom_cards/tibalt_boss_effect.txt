@@ -9,8 +9,8 @@ SVar:TrigRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-5:DBConjureSm
 SVar:DBConjureSmall:DB$ MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Chained Brute,Big Spender,Devilish Valet,Gibbering Fiend,Hobblefiend,Footlight Fiend,Forge Devil,Festival Crasher,Hulking Devil,Mayhem Devil,Spiteful Prankster,Vexing Devil,Wildfire Devil | Zone$ Battlefield | SpellDescription$ Conjure a random Devil unto the battlefield.  
 SVar:DBRandomLoot:DB$ Draw | Defined$ Player | NumCards$ 3 | SubAbility$ DBDiscard3 | SpellDescription$ Each player draws three cards, then discards three cards at random.
 SVar:DBDiscard3:DB$ Discard | Defined$ Player | Mode$ Random | NumCards$ 3
-SVar:DBDamage:DB$ DealDamage | NumDmg$ 7 | ValidTgts$ Creature | TargetsAtRandom$ True | SubAbility$ DBChangeZone | SpellDescription$ Tibalt deals seven damage to a creature chosen at random. Then Tibalt returns a random creature card to the battlefield
-SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Creature | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | AtRandom$ True | Destination$ Battlefield
+SVar:DBDamage:DB$ DealDamage | NumDmg$ 7 | ValidTgts$ Creature,Player,Planeswalker | TargetsAtRandom$ True | SubAbility$ DBChangeZone | SpellDescription$ Tibalt deals seven damage to a creature chosen at random. Then Tibalt returns a random creature card to the battlefield
+SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Creature | ChangeNum$ 1 | GainControl$ True | Hidden$ True | Origin$ Graveyard | AtRandom$ True | Destination$ Battlefield
 SVar:DBCast:DB$ Play | AnySupportedCard$ Names:Hellion Eruption,Insurrection,Warp World,Shahrazad,Possibility Storm,Scrambleverse | RandomCopied$ True | CopyCard$ True | WithoutManaCost$ True | SpellDescription$ Cast a copy of one of the following cards chosen at random—Hellion Eruption, Insurrection, Warp World, Shahrazad, Possibility Storm, Scrambleverse.
 SVar:DBWheel:DB$ Discard | Mode$ Hand | Defined$ Player | SubAbility$ DBEachDraw | SpellDescription$ Each player discards their hand, then draws seven cards.
 SVar:DBEachDraw:DB$ Draw | Defined$ Player | NumCards$ 7

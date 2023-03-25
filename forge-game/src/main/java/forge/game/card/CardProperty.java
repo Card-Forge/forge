@@ -984,10 +984,23 @@ public class CardProperty {
             if (card.getTurnInZone() <= sourceController.getLastTurnNr()) {
                 return false;
             }
-        } else if (property.equals("ThisTurnEntered")) {
+        } else if (property.startsWith("ThisTurnEntered")) {
             // only check if it entered the Zone this turn
             if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
                 return false;
+            }
+            if (!property.equals("ThisTurnEntered")) { // to confirm specific zones / player
+                final boolean your = property.contains("Your");
+                final ZoneType where = ZoneType.smartValueOf(property.substring(your ? 19 : 15));
+                final Zone z = sourceController.getZone(where);
+                if (!z.getCardsAddedThisTurn(null).contains(card)) {
+                    return false;
+                }
+                if (your) { // for corner cases of controlling other player
+                    if (!card.getOwner().equals(sourceController)) {
+                        return false;
+                    }
+                }
             }
         } else if (property.equals("NotThisTurnEntered")) {
             // only check if it entered the Zone this turn

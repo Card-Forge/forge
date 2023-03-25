@@ -339,8 +339,10 @@ public class Assets implements Disposable {
             textrafonts = new ObjectMap<>();
         if (!textrafonts.containsKey("textrafont")) {
             Font font = new Font(bitmapFont, 0f, 2f, 0f, 0f);
-            font.addAtlas(item_atlas, 0f, 0f, 0f);
-            font.addAtlas(pixelmana_atlas, 0f, -12f, 0f);
+            font.addAtlas(item_atlas, 0f, 4f, 0f);
+            //problematic atlas since some buttons are small, and this is too big for some buttons, need a way to enable
+            //this via property
+            //font.addAtlas(pixelmana_atlas, -90f, 20f, 0f);
             font.integerPosition = false;
             textrafonts.put("textrafont", font);
         }
@@ -352,7 +354,7 @@ public class Assets implements Disposable {
             textrafonts = new ObjectMap<>();
         if (!textrafonts.containsKey("keysfont")) {
             Font font = new Font(bitmapFont);
-            font.addAtlas(keys_atlas);
+            font.addAtlas(keys_atlas, 0f, 4f, 0f);
             font.integerPosition = false;
             textrafonts.put("keysfont", font);
         }
@@ -364,7 +366,7 @@ public class Assets implements Disposable {
             textrafonts = new ObjectMap<>();
         if (!textrafonts.containsKey(name)) {
             Font font = new Font(bitmapFont);
-            font.addAtlas(items_atlas);
+            font.addAtlas(items_atlas, 0f, 4f, 0f);
             font.integerPosition = false;
             textrafonts.put(name, font);
         }

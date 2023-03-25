@@ -526,7 +526,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 if (state == CardStateName.FaceDown) {
                     view.updateHiddenId(game.nextHiddenCardId());
                 }
-                game.fireEvent(new GameEventCardStatsChanged(this, true)); //ensure stats updated for new characteristics
+                game.fireEvent(new GameEventCardStatsChanged(this)); //ensure stats updated for new characteristics
             }
         }
         return true;
@@ -1427,6 +1427,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     @Override
     public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
         int addAmount = n;
+        // Rules say it is only a SBA, but is it checked there too?
+        if (counterType.is(CounterEnumType.DREAM) && hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
+            addAmount = Math.min(addAmount, 7 - getCounters(CounterEnumType.DREAM));
+        }
         if (addAmount <= 0 || !canReceiveCounters(counterType)) {
             // As per rule 107.1b
             return;
@@ -7115,8 +7119,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void resetChosenModeTurn() {
+        boolean updateView = !chosenModesTurn.isEmpty() || !chosenModesTurnStatic.isEmpty();
         chosenModesTurn.clear();
         chosenModesTurnStatic.clear();
+        if (updateView) {
+            updateAbilityTextForView();
+        }
     }
 
     public int getPlaneswalkerAbilityActivated() {

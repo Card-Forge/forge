@@ -136,7 +136,7 @@
   <object id="194" template="../obj/collision.tx" x="-16.4079" y="346.105" width="527.5" height="16"/>
   <object id="195" template="../obj/collision.tx" x="492.342" y="-22.9362" width="16" height="387.083"/>
   <object id="196" template="../obj/collision.tx" x="-17.6579" y="-19.9362" width="16" height="382.083"/>
-  <object id="197" template="../obj/door_up.tx" x="290.342" y="104.105">
+  <object id="197" template="../obj/door_up.tx" x="284.842" y="71.105">
    <properties>
     <property name="teleport" value="maps/map/tibalt_f1.tmx"/>
     <property name="teleportObjectId" value="114"/>
@@ -144,10 +144,5 @@
   </object>
   <object id="198" template="../obj/waypoint.tx" x="225.342" y="221.105"/>
   <object id="199" template="../obj/waypoint.tx" x="202.342" y="251.605"/>
-  <object id="200" template="../obj/entry_up.tx" x="142.342" y="327.105">
-   <properties>
-    <property name="teleport" value="maps/map/tibalt_f2.tmx"/>
-   </properties>
-  </object>
  </objectgroup>
 </map>

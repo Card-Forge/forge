@@ -22,7 +22,9 @@ public class GameEventCardStatsChanged extends GameEvent {
 
     public GameEventCardStatsChanged(Card affected, boolean isTransform) {
         cards = Arrays.asList(affected);
-        transform = isTransform;
+        //the transform should only fire once so the flip effect sound will trigger once every transformation...
+        // disable for now
+        transform = false;
     }
 
     public GameEventCardStatsChanged(Collection<Card> affected) {
