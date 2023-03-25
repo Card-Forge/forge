@@ -137,5 +137,8 @@ public class PointOfInterestChanges implements SaveFileContent  {
     public void setTownModifier(float mod){
         shopModifiers.put(0, mod);
     }
+    public boolean hasDeletedObjects() {
+        return deletedObjects != null && !deletedObjects.isEmpty();
+    }
 
 }
