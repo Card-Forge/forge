@@ -522,12 +522,13 @@ public enum FSkinImage implements FImage {
 
     public void load(Pixmap preferredIcons) {
         String filename = sourceFile.getFilename();
+        boolean is2D = sourceFile == SourceFile.ADVENTURE;
         FileHandle preferredFile = FSkin.getSkinFile(filename);
-        Texture texture = Forge.getAssets().getTexture(preferredFile, false);
+        Texture texture = Forge.getAssets().getTexture(preferredFile, is2D, false);
         if (texture == null) {
             if (preferredFile.exists()) {
                 try {
-                    texture = Forge.getAssets().getTexture(preferredFile, false);
+                    texture = Forge.getAssets().getTexture(preferredFile, is2D, false);
                 }
                 catch (final Exception e) {
                     System.err.println("Failed to load skin file: " + preferredFile);
@@ -594,11 +595,11 @@ public enum FSkinImage implements FImage {
 
         //use default file if can't use preferred file
         FileHandle defaultFile = FSkin.getDefaultSkinFile(filename);
-        texture = Forge.getAssets().getTexture(defaultFile, false);
+        texture = Forge.getAssets().getTexture(defaultFile, is2D, false);
         if (texture == null) {
             if (defaultFile.exists()) {
                 try {
-                    texture = Forge.getAssets().getTexture(defaultFile, false);
+                    texture = Forge.getAssets().getTexture(defaultFile, is2D, false);
                 }
                 catch (final Exception e) {
                     System.err.println("Failed to load skin file: " + defaultFile);

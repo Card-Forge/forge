@@ -10543,7 +10543,7 @@
 		"decks/torturer.dck"
 	],
 	"ai": "",
-	"flying": false,
+	"flying": true,
 	"spawnRate": 1,
 	"scale":0.5,
 	"difficulty": 0.1,

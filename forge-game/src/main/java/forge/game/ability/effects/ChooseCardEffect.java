@@ -7,7 +7,6 @@ import com.google.common.collect.Sets;
 import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
 import forge.util.CardTranslation;
-import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardType;
 import forge.game.Game;
@@ -86,9 +85,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
 
         final String amountValue = sa.getParamOrDefault("Amount", "1");
         int validAmount;
-        if (StringUtils.isNumeric(amountValue)) {
-            validAmount = Integer.parseInt(amountValue);
-        } else if (amountValue.equals("Random")) {
+        if (amountValue.equals("Random")) {
             validAmount = Aggregates.randomInt(0, choices.size());
         } else {
             validAmount = AbilityUtils.calculateAmount(host, amountValue, sa);

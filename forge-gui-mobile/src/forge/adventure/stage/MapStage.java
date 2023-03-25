@@ -797,7 +797,7 @@ public class MapStage extends GameStage {
     public void setWinner(boolean playerWins) {
         isLoadingMatch = false;
         if (playerWins) {
-
+            currentMob.clearCollisionHeight();
             Current.player().win();
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
             currentMob.playEffect(Paths.EFFECT_BLOOD, 0.5f);
@@ -805,16 +805,18 @@ public class MapStage extends GameStage {
                 @Override
                 public void run() {
                     currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
+                    currentMob.resetCollisionHeight();
                     startPause(0.3f, MapStage.this::getReward);
                 }
             }, 1f);
         } else {
+            currentMob.clearCollisionHeight();
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
-
             startPause(0.3f, () -> {
                 player.setAnimation(CharacterSprite.AnimationTypes.Idle);
                 currentMob.setAnimation(CharacterSprite.AnimationTypes.Idle);
+                currentMob.resetCollisionHeight();
                 player.setPosition(oldPosition4);
                 currentMob.freezeMovement();
                 boolean defeated = Current.player().defeated();

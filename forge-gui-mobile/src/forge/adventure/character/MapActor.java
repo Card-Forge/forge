@@ -223,4 +223,12 @@ public class MapActor extends Actor {
     public float getCollisionHeight() {
         return collisionHeight;
     }
+
+    public void resetCollisionHeight() {
+        collisionHeight = 0.4f;
+    }
+
+    public void clearCollisionHeight() {
+        collisionHeight = 0f;
+    }
 }

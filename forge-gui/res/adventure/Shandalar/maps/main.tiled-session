@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/tibalt.tmx",
+    "activeFile": "map/cave_6.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
         "map",
-        "map/main_story",
+        "tileset",
         "obj",
-        "tileset"
+        "map/main_story"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -2469,14 +2469,14 @@
         },
         "map/main_story/templeofchandra.tmx": {
             "expandedObjectLayers": [
-                7,
-                2
+                2,
+                7
             ],
             "scale": 2,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 480,
-                "y": 487.75
+                "x": 849,
+                "y": 624.75
             }
         },
         "map/main_story/templeofliliana.tmx": {
@@ -3085,7 +3085,7 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 321,
+                "x": 345,
                 "y": 181.83333333333331
             }
         },
@@ -3096,8 +3096,8 @@
             "scale": 2,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 243.5,
-                "y": 171.75
+                "x": 225,
+                "y": 192.75
             }
         },
         "map/tibalt_f1.tmx": {
@@ -3105,10 +3105,10 @@
                 12
             ],
             "scale": 3,
-            "selectedLayer": 0,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 368,
-                "y": 223.83333333333331
+                "x": 518.6666666666666,
+                "y": 69.16666666666667
             }
         },
         "map/tibalt_f2.tmx": {
@@ -3118,8 +3118,8 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 176,
-                "y": 167.83333333333334
+                "x": 174.33333333333331,
+                "y": 162.5
             }
         },
         "map/tileset/buildings.tsx": {
@@ -3267,27 +3267,30 @@
     "map.width": 90,
     "openFiles": [
         "map/xira.tmx",
-        "map/tibalt_f1.tmx",
-        "map/tibalt_f2.tmx",
-        "map/tibalt.tmx",
-        "map/main_story/templeofchandra.tmx",
-        "map/teferi.tmx"
+        "map/castle_plains_1.tmx",
+        "map/castle_plains_2.tmx",
+        "map/castle_plains_3.tmx",
+        "map/cave_2.tmx",
+        "map/cave_3.tmx",
+        "map/cave_4.tmx",
+        "map/cave_5.tmx",
+        "map/cave_6.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "map/xira.tmx",
-        "map/tibalt_f1.tmx",
-        "map/tibalt_f2.tmx",
-        "map/teferi.tmx",
-        "map/main_story/templeofchandra.tmx",
-        "map/tibalt.tmx",
         "map/aerie_1B.tmx",
         "map/aerie_1C.tmx",
         "map/cave_6.tmx",
         "map/cave_5.tmx",
         "map/cave_4.tmx",
-        "map/cave_3.tmx"
+        "map/cave_3.tmx",
+        "map/cave_2.tmx",
+        "map/castle_plains_3.tmx",
+        "map/castle_plains_2.tmx",
+        "map/castle_plains_1.tmx",
+        "map/tibalt.tmx",
+        "map/magetower_1.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true
