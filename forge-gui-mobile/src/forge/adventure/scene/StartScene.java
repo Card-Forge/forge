@@ -10,6 +10,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.world.WorldSave;
 import forge.screens.TransitionScreen;
+import forge.sound.SoundSystem;
 
 /**
  * First scene after the splash screen
@@ -18,7 +19,6 @@ public class StartScene extends UIScene {
 
     private static StartScene object;
     TextraButton saveButton, resumeButton, continueButton;
-
 
 
     public StartScene() {
@@ -31,7 +31,7 @@ public class StartScene extends UIScene {
         ui.onButtonPress("Continue", StartScene.this::Continue);
         ui.onButtonPress("Settings", StartScene.this::settings);
         ui.onButtonPress("Exit", StartScene.this::Exit);
-        ui.onButtonPress("Switch", Forge::switchToClassic);
+        ui.onButtonPress("Switch", StartScene.this::switchToClassic);
 
 
         saveButton = ui.findActor("Save");
@@ -43,8 +43,8 @@ public class StartScene extends UIScene {
     }
 
     public static StartScene instance() {
-        if(object==null)
-            object=new StartScene();
+        if (object == null)
+            object = new StartScene();
         return object;
     }
 
@@ -81,6 +81,7 @@ public class StartScene extends UIScene {
             try {
                 Forge.setTransitionScreen(new TransitionScreen(() -> {
                     if (WorldSave.load(WorldSave.filenameToSlot(lastActiveSave))) {
+                        SoundSystem.instance.changeBackgroundTrack();
                         Forge.switchScene(GameScene.instance());
                     } else {
                         Forge.clearTransitionScreen();
@@ -100,17 +101,22 @@ public class StartScene extends UIScene {
     }
 
     public boolean Exit() {
-        Dialog dialog = prepareDialog(Forge.getLocalizer().getMessage("lblExitForge"), ButtonOk|ButtonAbort,()->Forge.exit(true));
-        dialog.text( Controls.newLabel(Forge.getLocalizer().getMessage("lblAreYouSureYouWishExitForge")));
+        Dialog dialog = prepareDialog(Forge.getLocalizer().getMessage("lblExitForge"), ButtonOk | ButtonAbort, () -> Forge.exit(true));
+        dialog.text(Controls.newLabel(Forge.getLocalizer().getMessage("lblAreYouSureYouWishExitForge")));
         showDialog(dialog);
         return true;
+    }
+
+    public void switchToClassic() {
+        GameHUD.getInstance().stopAudio();
+        Forge.switchToClassic();
     }
 
     @Override
     public void enter() {
         boolean hasSaveButton = WorldSave.getCurrentSave().getWorld().getData() != null;
         if (hasSaveButton) {
-            TileMapScene scene =  TileMapScene.instance();
+            TileMapScene scene = TileMapScene.instance();
             hasSaveButton = !scene.currentMap().isInMap() || scene.isAutoHealLocation();
         }
         saveButton.setVisible(hasSaveButton);
@@ -130,10 +136,9 @@ public class StartScene extends UIScene {
         }
 
 
-        if(Forge.createNewAdventureMap)
-        {
+        if (Forge.createNewAdventureMap) {
             this.NewGame();
-            GameStage.maximumScrollDistance=4f;
+            GameStage.maximumScrollDistance = 4f;
         }
 
         super.enter();

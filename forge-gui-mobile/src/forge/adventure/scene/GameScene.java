@@ -24,6 +24,7 @@ public class GameScene extends HudScene {
     }
 
     private static GameScene object;
+    private String location = "";
 
     public static GameScene instance() {
         if (object == null)
@@ -57,27 +58,30 @@ public class GameScene extends HudScene {
         WorldStage.getInstance().handlePointsOfInterestCollision();
     }
 
-    public String getAdventurePlayerLocation(boolean forHeader) {
-        String location = "";
+    public String getAdventurePlayerLocation(boolean forHeader, boolean skipRoads) {
         if (MapStage.getInstance().isInMap()) {
             location = forHeader ? TileMapScene.instance().rootPoint.getData().name : TileMapScene.instance().rootPoint.getData().type;
         } else {
             World world = Current.world();
-            int currentBiome = World.highestBiome(world.getBiome((int) Current.player().getWorldPosX() / world.getTileSize(), (int) Current.player().getWorldPosY() / world.getTileSize()));
+            //this gets the name of the layer... this shoud be based on boundaries...
+            int currentBiome = World.highestBiome(world.getBiomeMapXY((int) stage.getPlayerSprite().getX() / world.getTileSize(), (int) stage.getPlayerSprite().getY() / world.getTileSize()));
             List<BiomeData> biomeData = world.getData().GetBiomes();
-            try {
+            if (biomeData.size() <= currentBiome) //shouldn't be the case but default to waste
+                if (skipRoads) {
+                    location = forHeader ? "Waste Map" : "waste";
+                } else {
+                    location = "";
+                }
+            else {
                 BiomeData data = biomeData.get(currentBiome);
                 location = forHeader ? TextUtil.capitalize(data.name) + " Map" : data.name;
-            } catch (Exception e) {
-                //e.printStackTrace();
-                location = forHeader ? "Waste Map" : "waste";
             }
         }
         return location;
     }
 
     public boolean isNotInWorldMap() {
-        String location = getAdventurePlayerLocation(false);
+        String location = getAdventurePlayerLocation(false, true);
         Set<String> locationTypes = Sets.newHashSet("capital", "castle", "cave", "dungeon", "town");
         return locationTypes.contains(location);
     }

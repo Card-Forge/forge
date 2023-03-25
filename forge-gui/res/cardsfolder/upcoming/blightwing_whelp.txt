@@ -6,6 +6,6 @@ K:Flying
 K:Toxic:1
 A:AB$ Pump | Cost$ B | KW$ Haste | Defined$ Self | SpellDescription$ CARDNAME gains haste until end of turn.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigSeek | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, seek a card with mana value equal to the number of poison counters that player has.  
-SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.cmcEQX | ChangeNum$ 1
+SVar:TrigSeek:DB$ Seek | Type$ Card.cmcEQX
 SVar:X:TriggeredTarget$PoisonCounters
 Oracle:Flying\nToxic 1\n{B}: Blightwing Whelp gains haste until end of turn.\nWhenever Blightwing Welp deals combat damage to a player, seek a card with mana value equal to the number of poison counters that player has.

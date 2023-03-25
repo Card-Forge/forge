@@ -2,6 +2,7 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -55,6 +56,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     final Sprite edgeM;
     final Sprite edgeWin;
     final Sprite edgeWinM;
+    boolean enable = true;
     boolean arenaStarted = false;
 
     private ArenaScene() {
@@ -76,6 +78,8 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
         goldLabel = ui.findActor("gold");
         ui.onButtonPress("done", () -> {
+            if (!enable)
+                return;
             if (!arenaStarted)
                 ArenaScene.this.done();
             else
@@ -107,6 +111,8 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     }
 
     private void startButton() {
+        if (!enable)
+            return;
         if (roundsWon == 0) {
             Dialog startDialog = prepareDialog(Forge.getLocalizer().getMessage("lblStart"), ButtonYes | ButtonNo, () -> startArena());
             startDialog.text("Do you want to go into the Arena?");
@@ -119,6 +125,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     int roundsWon = 0;
 
     private void startArena() {
+        enable = false;
         goldLabel.setVisible(false);
         arenaStarted = true;
         startButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblContinue"));
@@ -132,6 +139,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
     @Override
     public void setWinner(boolean winner) {
+        enable = false;
         Array<ArenaRecord> winners = new Array<>();
         Array<EnemySprite> winnersEnemies = new Array<>();
         for (int i = 0; i < fighters.size - 2; i += 2) {
@@ -189,7 +197,15 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         }
         if (Forge.isLandscapeMode()) {
             actor.toFront();
-            actor.addAction(Actions.sequence(Actions.moveBy(0f, gridSize * 2f, 1), Actions.moveBy((float) (gridSize * stepsToTheSide * (leftPlayer ? 1 : -1)), 0f, 1)));
+            actor.addAction(Actions.sequence(Actions.moveBy(0f, gridSize * 2f, 1), Actions.moveBy((float) (gridSize * stepsToTheSide * (leftPlayer ? 1 : -1)), 0f, 1), new Action() {
+                @Override
+                public boolean act(float v) {
+                    enable = true;
+                    return true;
+                }
+            }));
+        } else {
+            enable = true;
         }
     }
 
@@ -327,12 +343,12 @@ public class ArenaScene extends UIScene implements IAfterMatch {
             pane.clear();
             arenaTable.clear();
             if (Forge.isLandscapeMode()) {
-                arenaTable.add(Controls.newTextraLabel("[;][%150]" + GameScene.instance().getAdventurePlayerLocation(true) + " Arena")).top();
+                arenaTable.add(Controls.newTextraLabel("[;][%150]" + GameScene.instance().getAdventurePlayerLocation(true, true) + " Arena")).top();
                 arenaTable.row();
                 arenaTable.add(arenaPlane).width(arenaPlane.getWidth()).height(arenaPlane.getHeight());
                 pane.setActor(arenaTable);
             } else {
-                arenaTable.add(Controls.newTextraLabel("[;][%150]" + GameScene.instance().getAdventurePlayerLocation(true) + " Arena")).colspan(3).top();
+                arenaTable.add(Controls.newTextraLabel("[;][%150]" + GameScene.instance().getAdventurePlayerLocation(true, true) + " Arena")).colspan(3).top();
                 arenaTable.row();
                 int size = fighters.size;
                 int pv = 0;

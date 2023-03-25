@@ -1412,7 +1412,7 @@ public class AttachAi extends SpellAbilityAi {
             }
 
             // avoid randomly moving the equipment back and forth between several creatures in one turn
-            if (AiCardMemory.isRememberedCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ATTACHED_THIS_TURN) && !mandatory) {
+            if (AiCardMemory.isRememberedCard(aiPlayer, attachSource, AiCardMemory.MemorySet.ATTACHED_THIS_TURN) && !mandatory) {
                 return null;
             }
 
@@ -1423,7 +1423,7 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
 
-        AiCardMemory.rememberCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ATTACHED_THIS_TURN);
+        AiCardMemory.rememberCard(aiPlayer, attachSource, AiCardMemory.MemorySet.ATTACHED_THIS_TURN);
 
         if (c == null && mandatory) {
             CardLists.shuffle(list);
@@ -1673,12 +1673,6 @@ public class AttachAi extends SpellAbilityAi {
     private static boolean isUsefulAttachAction(Player ai, Card c, SpellAbility sa) {
         if (c == null) {
             return false;
-        }
-        if (sa.getHostCard() == null) {
-            // FIXME: Not sure what should the resolution be if a SpellAbility has no host card. This should
-            // not happen normally. Possibly remove this block altogether? (if it's an impossible condition).
-            System.out.println("AttachAi: isUsefulAttachAction unexpectedly called with SpellAbility with no host card. Assuming it's a determined useful action.");
-            return true;
         }
 
         // useless to equip a creature that can't attack or block.

@@ -1,0 +1,10 @@
+Name:Quicksilver Servitor
+ManaCost:2 U
+Types:Creature Phyrexian Cleric
+PT:3/3
+K:Ward:2
+T:Mode$ SpellCast | ValidCard$ Card.ThisTurnEnteredYourHand | ValidActivatingPlayer$ You | Execute$ TrigProliferate | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell from among cards put into your hand this turn, proliferate.
+SVar:TrigProliferate:DB$ Proliferate
+DeckHas:Ability$Proliferate
+DeckNeeds:Ability$Counters
+Oracle:Ward {2}\nWhenever you cast a spell from among cards put into your hand this turn, proliferate.

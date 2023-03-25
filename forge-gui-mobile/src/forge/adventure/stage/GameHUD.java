@@ -2,19 +2,15 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -33,6 +29,11 @@ import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
+import forge.sound.MusicPlaylist;
+import forge.sound.SoundSystem;
+import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Stage to handle everything rendered in the HUD
@@ -41,20 +42,11 @@ public class GameHUD extends Stage {
 
     static public GameHUD instance;
     private final GameStage gameStage;
-    private final Image avatar;
-    private final Image miniMapPlayer;
-    private final TextraLabel lifePoints;
-    private final TextraLabel money;
-    private final TextraLabel shards;
+    private final Image avatar, miniMapPlayer;
+    private final TextraLabel lifePoints, money, shards, keys;
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
-    private final InputEvent eventTouchDown;
-    private final InputEvent eventTouchUp;
-    private final TextraButton deckActor;
-    private final TextraButton openMapActor;
-    private final TextraButton menuActor;
-    private final TextraButton statsActor;
-    private final TextraButton inventoryActor;
-    private final TextraButton exitToWorldMapActor;
+    private final InputEvent eventTouchDown, eventTouchUp;
+    private final TextraButton deckActor, openMapActor, menuActor, statsActor, inventoryActor, exitToWorldMapActor;
     public final UIActor ui;
     private final Touchpad touchpad;
     private final Console console;
@@ -66,8 +58,10 @@ public class GameHUD extends Stage {
     private final Dialog dialog;
     private boolean dialogOnlyInput;
     private final Array<TextraButton> dialogButtonMap = new Array<>();
+    private final Array<String> questKeys = new Array<>();
     private String lifepointsTextColor = "";
-    TextraButton selectedKey;
+    private TextraButton selectedKey;
+    private final ScrollPane scrollPane;
 
     private GameHUD(GameStage gameStage) {
         super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
@@ -130,6 +124,11 @@ public class GameHUD extends Stage {
         shards.setText("[%95][+Shards] 0");
         money.setText("[%95][+Gold] ");
         lifePoints.setText("[%95][+Life] 20/20");
+        keys = Controls.newTextraLabel("");
+        scrollPane = new ScrollPane(keys);
+        scrollPane.setPosition(2, 2);
+        scrollPane.setStyle(Controls.getSkin().get("transluscent", ScrollPane.ScrollPaneStyle.class));
+        addActor(scrollPane);
         AdventurePlayer.current().onLifeChange(() -> lifePoints.setText("[%95][+Life]" + lifepointsTextColor + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
         AdventurePlayer.current().onShardsChange(() -> shards.setText("[%95][+Shards] " + AdventurePlayer.current().getShards()));
 
@@ -238,7 +237,6 @@ public class GameHUD extends Stage {
         return super.touchDown(screenX, screenY, pointer, button);
     }
 
-
     @Override
     public void draw() {
         updatelife = false;
@@ -274,6 +272,10 @@ public class GameHUD extends Stage {
             updatelife = false;
             lifePoints.setText("[%95][+Life]" + lifepointsTextColor + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
         }
+        if (!GameScene.instance().isNotInWorldMap())
+            updateMusic();
+        else
+            SoundSystem.instance.pause();
     }
 
     Texture miniMapTexture;
@@ -281,6 +283,7 @@ public class GameHUD extends Stage {
     Pixmap miniMapToolTipPixmap;
 
     public void enter() {
+        questKeys.clear();
         if (miniMapTexture != null)
             miniMapTexture.dispose();
         miniMapTexture = new Texture(WorldSave.getCurrentSave().getWorld().getBiomeImage());
@@ -294,10 +297,148 @@ public class GameHUD extends Stage {
         miniMap.setDrawable(new TextureRegionDrawable(miniMapTexture));
         avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
         Deck deck = AdventurePlayer.current().getSelectedDeck();
+        if (AdventurePlayer.current().hasItem("Red Key"))
+            questKeys.add("[+RedKey]");
+        if (AdventurePlayer.current().hasItem("Green Key"))
+            questKeys.add("[+GreenKey]");
+        if (AdventurePlayer.current().hasItem("Blue Key"))
+            questKeys.add("[+BlueKey]");
+        if (AdventurePlayer.current().hasItem("Black Key"))
+            questKeys.add("[+BlackKey]");
+        if (AdventurePlayer.current().hasItem("White Key"))
+            questKeys.add("[+WhiteKey]");
+        if (AdventurePlayer.current().hasItem("Strange Key"))
+            questKeys.add("[+StrangeKey]");
+        if (!questKeys.isEmpty()) {
+            keys.setText(String.join("\n", questKeys));
+            scrollPane.setSize(keys.getWidth() + 8, keys.getHeight() + 5);
+            scrollPane.layout();
+            keys.layout();
+            scrollPane.getColor().a = opacity;
+        } else {
+            keys.setText("");
+            scrollPane.getColor().a = 0;
+        }
         if (deck == null || deck.isEmpty() || deck.getMain().toFlatList().size() < 30) {
             deckActor.setColor(Color.RED);
         } else {
             deckActor.setColor(menuActor.getColor());
+        }
+        if (GameScene.instance().isNotInWorldMap()) {
+            SoundSystem.instance.pause();
+            playAudio();
+        } else {
+            unloadAudio();
+            SoundSystem.instance.resume(); // resume World BGM
+        }
+    }
+
+    private Pair<FileHandle, Music> audio = null;
+
+    public void playAudio() {
+        switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
+            case "capital":
+            case "town":
+                setAudio(MusicPlaylist.TOWN);
+                break;
+            case "dungeon":
+            case "cave":
+                setAudio(MusicPlaylist.CAVE);
+                break;
+            case "castle":
+                setAudio(MusicPlaylist.CASTLE);
+                break;
+            default:
+                break;
+        }
+        if (audio != null) {
+            audio.getRight().setLooping(true);
+            audio.getRight().play();
+            audio.getRight().setVolume(FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_MUSIC) / 100f);
+        }
+    }
+
+    public void fadeAudio(float value) {
+        if (audio != null) {
+            audio.getRight().setVolume((FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_MUSIC) * value) / 100f);
+        }
+    }
+
+    float fade = 1f;
+
+    void fadeIn() {
+        if (fade >= 1f)
+            return;
+        for (int i = 10; i > 1; i--) {
+            float delay = i * 0.1f;
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    fade += 0.1f;
+                    if (fade > 1f)
+                        fade = 1f;
+                    fadeAudio(fade);
+                }
+            }, delay);
+        }
+    }
+
+    void fadeOut() {
+        for (int i = 10; i > 1; i--) {
+            float delay = i * 0.1f;
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    fade -= 0.1f;
+                    if (fade < 0.1f)
+                        fade = 0.1f;
+                    fadeAudio(fade);
+                }
+            }, delay);
+        }
+    }
+
+    public void stopAudio() {
+        if (audio != null) {
+            audio.getRight().stop();
+        }
+    }
+
+    public void pauseMusic() {
+        if (audio != null) {
+            audio.getRight().pause();
+        }
+        SoundSystem.instance.pause();
+    }
+
+    public void unloadAudio() {
+        if (audio != null) {
+            audio.getRight().setOnCompletionListener(null);
+            audio.getRight().stop();
+            Forge.getAssets().manager().unload(audio.getLeft().path());
+        }
+        audio = null;
+        currentAudioPlaylist = null;
+    }
+
+    private MusicPlaylist currentAudioPlaylist = null;
+
+    private void setAudio(MusicPlaylist playlist) {
+        if (playlist.equals(currentAudioPlaylist))
+            return;
+        unloadAudio();
+        audio = getMusic(playlist);
+    }
+
+    private Pair<FileHandle, Music> getMusic(MusicPlaylist playlist) {
+        FileHandle file = Gdx.files.absolute(playlist.getNewRandomFilename());
+        Music music = Forge.getAssets().getMusic(file);
+        if (music != null) {
+            currentAudioPlaylist = playlist;
+            return Pair.of(file, music);
+        } else {
+            currentAudioPlaylist = null;
+            return null;
         }
     }
 
@@ -326,7 +467,6 @@ public class GameHUD extends Stage {
         dialog.getContentTable().add(L).width(120f);
         dialog.setKeepWithinStage(true);
         showDialog();
-
     }
 
     private void exitDungeonCallback() {
@@ -475,7 +615,6 @@ public class GameHUD extends Stage {
     }
 
     private void showDialog() {
-
         dialogButtonMap.clear();
         for (int i = 0; i < dialog.getButtonTable().getCells().size; i++) {
             dialogButtonMap.add((TextraButton) dialog.getButtonTable().getCells().get(i).getActor());
@@ -560,7 +699,36 @@ public class GameHUD extends Stage {
             if (count > 1)
                 showButtons();
         }
+    }
 
+    public void updateMusic() {
+        switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
+            case "green":
+                changeBGM(MusicPlaylist.GREEN);
+                break;
+            case "red":
+                changeBGM(MusicPlaylist.RED);
+                break;
+            case "blue":
+                changeBGM(MusicPlaylist.BLUE);
+                break;
+            case "black":
+                changeBGM(MusicPlaylist.BLACK);
+                break;
+            case "white":
+                changeBGM(MusicPlaylist.WHITE);
+                break;
+            case "waste":
+                changeBGM(MusicPlaylist.MENUS);
+                break;
+            default:
+                break;
+        }
+    }
 
+    void changeBGM(MusicPlaylist playlist) {
+        if (!playlist.equals(SoundSystem.instance.getCurrentPlaylist())) {
+            SoundSystem.instance.setBackgroundMusic(playlist);
+        }
     }
 }

@@ -121,7 +121,7 @@
     {
       "type": "TextButton",
       "name": "toggleAward",
-      "text": "[%125][+AWARD]",
+      "text": "[%120][+AWARD]",
       "width": 30,
       "height": 30,
       "x": 5,

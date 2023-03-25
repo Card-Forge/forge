@@ -62,6 +62,7 @@ public class HostedMatch {
     private Match match;
     private Game game;
     private String title;
+    private MusicPlaylist matchPlaylist = null;
     public HashMap<LobbySlot, IGameController> gameControllers = null;
     private Runnable startGameHook = null;
     private Runnable endGameHook = null;
@@ -97,12 +98,12 @@ public class HostedMatch {
         startMatch(getDefaultRules(gameType), appliedVariants, players, human, gui);
     }
     public void startMatch(final GameType gameType, final Set<GameType> appliedVariants, final List<RegisteredPlayer> players, final Map<RegisteredPlayer, IGuiGame> guis) {
-        startMatch(getDefaultRules(gameType), appliedVariants, players, guis);
+        startMatch(getDefaultRules(gameType), appliedVariants, players, guis, null);
     }
     public void startMatch(final GameRules gameRules, final Set<GameType> appliedVariants, final List<RegisteredPlayer> players, final RegisteredPlayer human, final IGuiGame gui) {
-        startMatch(gameRules, appliedVariants, players, human == null || gui == null ? null : ImmutableMap.of(human, gui));
+        startMatch(gameRules, appliedVariants, players, human == null || gui == null ? null : ImmutableMap.of(human, gui), null);
     }
-    public void startMatch(final GameRules gameRules, final Set<GameType> appliedVariants, final List<RegisteredPlayer> players, final Map<RegisteredPlayer, IGuiGame> guis) {
+    public void startMatch(final GameRules gameRules, final Set<GameType> appliedVariants, final List<RegisteredPlayer> players, final Map<RegisteredPlayer, IGuiGame> guis, final MusicPlaylist playlist) {
         if (gameRules == null || gameRules.getGameType() == null || players == null || players.isEmpty()) {
             throw new IllegalArgumentException();
         }
@@ -135,6 +136,7 @@ public class HostedMatch {
         this.match = new Match(gameRules, sortedPlayers, title);
         this.match.subscribeToEvents(SoundSystem.instance);
         this.match.subscribeToEvents(visitor);
+        this.matchPlaylist = playlist;
         startGame();
     }
 
@@ -145,12 +147,12 @@ public class HostedMatch {
 
     public void restartMatch() {
         endCurrentGame();
-        startMatch(match.getRules(), null, match.getPlayers(), this.guis);
+        startMatch(match.getRules(), null, match.getPlayers(), this.guis, this.matchPlaylist);
     }
 
     public void startGame() {
         nextGameDecisions.clear();
-        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MATCH);
+        SoundSystem.instance.setBackgroundMusic(this.matchPlaylist == null ? MusicPlaylist.MATCH : this.matchPlaylist);
 
         game = match.createGame();
 

@@ -29,16 +29,19 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         List<AbilitySub> choices = Lists.newArrayList(sa.getAdditionalAbilityList("Choices"));
-        List<AbilitySub> toRemove = Lists.newArrayList();
-        for (AbilitySub ch : choices) {
-            // 603.3c If one of the modes would be illegal, that mode can't be chosen.
-            if ((ch.usesTargeting() && ch.isTrigger() && ch.getMinTargets() > 0 &&
-                    ch.getTargetRestrictions().getNumCandidates(ch, true) == 0) ||
-                    (restriction != null && restriction.contains(ch.getDescription()))) {
-                toRemove.add(ch);
+
+        if (source.getZone() != null) {
+            List<AbilitySub> toRemove = Lists.newArrayList();
+            for (AbilitySub ch : choices) {
+                // 603.3c If one of the modes would be illegal, that mode can't be chosen.
+                if ((ch.usesTargeting() && ch.isTrigger() && ch.getMinTargets() > 0 &&
+                        ch.getTargetRestrictions().getNumCandidates(ch, true) == 0) ||
+                        (restriction != null && restriction.contains(ch.getDescription()))) {
+                    toRemove.add(ch);
+                }
             }
+            choices.removeAll(toRemove);
         }
-        choices.removeAll(toRemove);
 
         int indx = 0;
         // set CharmOrder

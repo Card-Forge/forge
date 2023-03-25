@@ -41,6 +41,8 @@ import forge.card.CardRenderer;
 import forge.game.card.CardView;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
+import forge.sound.SoundEffectType;
+import forge.sound.SoundSystem;
 import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -303,7 +305,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 DrawOnPixmap.draw(drawingMap, backSprite);
                 Sprite item = atlas.createSprite(reward.type.toString());
                 DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - item.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1f), item);
-                DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f) - 1, backSprite.getWidth(), true, Color.WHITE);
+                //DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f) - 1, backSprite.getWidth(), true, Color.WHITE);
+                DrawOnPixmap.drawText(drawingMap, Controls.newTextraLabel("[%200]"+reward.getCount()), 0, -10);
 
                 setItemTooltips(item, backSprite, atlas);
                 image = new Texture(drawingMap);
@@ -593,6 +596,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             return;
         clicked = true;
         flipProcess = 0;
+        SoundSystem.instance.play(SoundEffectType.FlipCard, false);
     }
 
     public void sold() {
@@ -608,7 +612,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         super.act(delta);
         if (clicked) {
             if (flipProcess < 1)
-                flipProcess += delta * 1.5;
+                flipProcess += delta * 2.4;
             else
                 flipProcess = 1;
 

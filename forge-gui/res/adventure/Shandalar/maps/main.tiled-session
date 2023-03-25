@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/nest_blue_1.tmx",
+    "activeFile": "map/cave_6.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "tileset",
-        "map/main_story",
         "map",
-        "obj"
+        "tileset",
+        "obj",
+        "map/main_story"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -40,7 +40,7 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 239.83333333333331,
+                "x": 240,
                 "y": 136.16666666666663
             }
         },
@@ -70,7 +70,7 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 265,
+                "x": 265.33333333333326,
                 "y": 79
             }
         },
@@ -110,24 +110,24 @@
             "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 279.5,
-                "y": 217.5
+                "x": 240,
+                "y": 136.16666666666663
             }
         },
         "map/castle_plains_2.tmx": {
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 359.66666666666663,
-                "y": 295.33333333333326
+                "x": 240,
+                "y": 136.33333333333334
             }
         },
         "map/castle_plains_3.tmx": {
             "scale": 2,
-            "selectedLayer": 4,
+            "selectedLayer": 3,
             "viewCenter": {
                 "x": 240,
-                "y": 136
+                "y": 136.25
             }
         },
         "map/catlair_1.tmx": {
@@ -174,8 +174,8 @@
             "scale": 4,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240,
-                "y": 239.875
+                "x": 187.5,
+                "y": 316.625
             }
         },
         "map/cave_1.tmx": {
@@ -193,16 +193,16 @@
             "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 240,
-                "y": 136
+                "x": 344.5,
+                "y": 152.75
             }
         },
         "map/cave_11.tmx": {
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 232.33333333333331,
-                "y": 136
+                "x": 371.3333333333333,
+                "y": 158.33333333333334
             }
         },
         "map/cave_12.tmx": {
@@ -210,31 +210,31 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 233,
-                "y": 136
+                "y": 136.5
             }
         },
         "map/cave_13.tmx": {
             "scale": 4,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 239.875,
-                "y": 135.875
+                "x": 292,
+                "y": 143.875
             }
         },
         "map/cave_14.tmx": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 239.75,
-                "y": 136.25
+                "x": 344,
+                "y": 152.75
             }
         },
         "map/cave_15.tmx": {
             "scale": 3,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 227.33333333333331,
-                "y": 135.66666666666663
+                "x": 297,
+                "y": 146.16666666666663
             }
         },
         "map/cave_16.tmx": {
@@ -369,8 +369,8 @@
             "scale": 1.0548958333333331,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 757.8947368421054,
-                "y": 362.12106250617165
+                "x": 955.544583785919,
+                "y": 393.87775254270764
             }
         },
         "map/cave_18.tmx": {
@@ -417,8 +417,8 @@
             "scale": 1.5,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 479.99999999999994,
-                "y": 320
+                "x": 498,
+                "y": 583
             }
         },
         "map/cave_2.tmx": {
@@ -428,16 +428,16 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240.25,
-                "y": 136
+                "x": 240,
+                "y": 136.25
             }
         },
         "map/cave_20.tmx": {
             "scale": 4,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 232,
-                "y": 136
+                "x": 284.25,
+                "y": 143.875
             }
         },
         "map/cave_21.tmx": {
@@ -476,8 +476,8 @@
             "scale": 0.125,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 1600,
-                "y": 1600
+                "x": 3272,
+                "y": 1868
             }
         },
         "map/cave_23.tmx": {
@@ -1356,32 +1356,35 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240.25,
-                "y": 136
+                "x": 240,
+                "y": 136.25
             }
         },
         "map/cave_4.tmx": {
-            "scale": 1,
-            "selectedLayer": 2,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 220,
-                "y": 135
+                "x": 240,
+                "y": 136.25
             }
         },
         "map/cave_5.tmx": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 232,
-                "y": 136
+                "x": 240,
+                "y": 136.25
             }
         },
         "map/cave_6.tmx": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 232,
-                "y": 136
+                "x": 240,
+                "y": 136.25
             }
         },
         "map/cave_6N1.tmx": {
@@ -1404,24 +1407,24 @@
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 220,
-                "y": 135
+                "x": 429,
+                "y": 168.5
             }
         },
         "map/cave_8.tmx": {
             "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240,
-                "y": 135.83333333333334
+                "x": 309.33333333333337,
+                "y": 146.5
             }
         },
         "map/cave_9.tmx": {
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 223.99999999999997,
-                "y": 135.33333333333334
+                "x": 223.33333333333331,
+                "y": 135.66666666666669
             }
         },
         "map/crypt.tmx": {
@@ -1465,6 +1468,14 @@
             "viewCenter": {
                 "x": 320,
                 "y": 319
+            }
+        },
+        "map/cursed_swamp.tmx": {
+            "scale": 1.7317708333333333,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 240.21654135338346,
+                "y": 136.5654135338346
             }
         },
         "map/debug_map.tmx": {
@@ -1556,35 +1567,47 @@
             }
         },
         "map/factory_1.tmx": {
-            "scale": 1.5,
-            "selectedLayer": 0,
-            "viewCenter": {
-                "x": 240.33333333333337,
-                "y": 136.33333333333334
-            }
-        },
-        "map/factory_2.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 2,
-            "selectedLayer": 0,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 239.75,
+                "x": 163,
                 "y": 136.25
             }
         },
-        "map/factory_3.tmx": {
-            "scale": 4,
+        "map/factory_2.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 239.875,
-                "y": 135.875
+                "x": 295.5,
+                "y": 152.75
+            }
+        },
+        "map/factory_3.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
+            "selectedLayer": 6,
+            "viewCenter": {
+                "x": 240.5,
+                "y": 136.25
             }
         },
         "map/factory_4.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.5,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 456,
-                "y": 318
+                "x": 479.33333333333337,
+                "y": 319.6666666666667
             }
         },
         "map/forest_town.tmx": {
@@ -1618,8 +1641,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 240,
-                "y": 240
+                "x": 449,
+                "y": 273.5
             }
         },
         "map/fort_11.tmx": {
@@ -1682,8 +1705,8 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240,
-                "y": 136.5
+                "x": 344.5,
+                "y": 153.25
             }
         },
         "map/fort_3.tmx": {
@@ -1714,43 +1737,43 @@
             "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 239.75,
-                "y": 136.25
+                "x": 344,
+                "y": 152.75
             }
         },
         "map/fort_7.tmx": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240,
-                "y": 136.5
+                "x": 344.5,
+                "y": 153.25
             }
         },
         "map/fort_8.tmx": {
             "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 240,
-                "y": 136.5
+                "x": 344.5,
+                "y": 153.25
             }
         },
         "map/fort_9.tmx": {
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 239.75,
-                "y": 239.75
+                "x": 344,
+                "y": 255.75
             }
         },
         "map/garruk.tmx": {
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 4,
-            "selectedLayer": 3,
+            "scale": 2,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 271.875,
-                "y": 215.875
+                "x": 499.25,
+                "y": 275.75
             }
         },
         "map/graveyard.tmx": {
@@ -1771,16 +1794,16 @@
             "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 240.5,
-                "y": 136.5
+                "x": 449,
+                "y": 169.5
             }
         },
         "map/graveyard_3.tmx": {
             "scale": 1,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240,
-                "y": 136
+                "x": 449,
+                "y": 169.5
             }
         },
         "map/graveyard_4.tmx": {
@@ -1797,6 +1820,17 @@
             "viewCenter": {
                 "x": 320,
                 "y": 320
+            }
+        },
+        "map/grolnok.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 288,
+                "y": 192.25
             }
         },
         "map/grove_1.tmx": {
@@ -2013,9 +2047,9 @@
                 4
             ],
             "scale": 2,
-            "selectedLayer": 3,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 454.75,
+                "x": 506.25,
                 "y": 123.25
             }
         },
@@ -2032,34 +2066,40 @@
                 4
             ],
             "scale": 2.177083333333333,
-            "selectedLayer": 0,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 155.02392344497608,
+                "x": 79.00478468899522,
                 "y": 136.65071770334927
             }
         },
         "map/kobold_mine.tmx": {
-            "scale": 1.2623540856031128,
-            "selectedLayer": 3,
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 3,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 255.47507127995686,
-                "y": 159.62240887724434
+                "x": 308.8333333333333,
+                "y": 154.83333333333334
             }
         },
         "map/lavaforge_1.tmx": {
             "scale": 1.3517708333333331,
-            "selectedLayer": 0,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 240.05548277722124,
-                "y": 136.48763196424449
+                "x": 240.05548277722127,
+                "y": 137.9671726901441
             }
         },
         "map/lavaforge_2.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 1.3517708333333331,
-            "selectedLayer": 0,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 240.05548277722124,
-                "y": 136.48763196424449
+                "x": 240.05548277722127,
+                "y": 137.9671726901441
             }
         },
         "map/lichsmirror.tmx": {
@@ -2071,11 +2111,14 @@
             }
         },
         "map/magetower_1.tmx": {
-            "scale": 4,
-            "selectedLayer": 2,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 218.75,
-                "y": 153.5
+                "x": 218,
+                "y": 153.25
             }
         },
         "map/magetower_10.tmx": {
@@ -2115,56 +2158,65 @@
             "scale": 2,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 240.5,
-                "y": 369.5
+                "x": 219,
+                "y": 400.75
             }
         },
         "map/magetower_14.tmx": {
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240,
-                "y": 136
+                "x": 344.5,
+                "y": 152.75
             }
         },
         "map/magetower_2.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 2,
-            "selectedLayer": 0,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 239.75,
-                "y": 136
+                "x": 229.5,
+                "y": 152.75
             }
         },
         "map/magetower_3.tmx": {
-            "scale": 2,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 4,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 239.75,
-                "y": 136
+                "x": 224.25,
+                "y": 117.5
             }
         },
         "map/magetower_4.tmx": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 239.75,
-                "y": 136
+                "x": 239,
+                "y": 116.75
             }
         },
         "map/magetower_5.tmx": {
             "scale": 1.3694556451612903,
-            "selectedLayer": 0,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 232.5741626794259,
-                "y": 136.55060728744942
+                "x": 232.9392712550608,
+                "y": 136.91571586308427
             }
         },
         "map/magetower_6.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 239.75,
-                "y": 136
+                "x": 239.5,
+                "y": 136.25
             }
         },
         "map/magetower_7.tmx": {
@@ -2222,8 +2274,8 @@
             "scale": 2,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 383.25,
-                "y": 499.75
+                "x": 384,
+                "y": 383.75
             }
         },
         "map/main_story/black_castle_f1.tmx": {
@@ -2233,7 +2285,7 @@
             "scale": 1.7891666666666666,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240.33535165346996,
+                "x": 240.33535165347,
                 "y": 239.4969725197951
             }
         },
@@ -2255,7 +2307,7 @@
             "scale": 1.7891666666666666,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240.61481136469493,
+                "x": 240.614811364695,
                 "y": 239.4969725197951
             }
         },
@@ -2286,7 +2338,7 @@
             "selectedLayer": 4,
             "viewCenter": {
                 "x": 240,
-                "y": 911.6666666666665
+                "y": 911
             }
         },
         "map/main_story/final_castle_f1.tmx": {
@@ -2413,6 +2465,26 @@
             "viewCenter": {
                 "x": 320,
                 "y": 320
+            }
+        },
+        "map/main_story/templeofchandra.tmx": {
+            "expandedObjectLayers": [
+                7,
+                2
+            ],
+            "scale": 1.5,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 465.3333333333333,
+                "y": 405.66666666666663
+            }
+        },
+        "map/main_story/templeofliliana.tmx": {
+            "scale": 0.8331967213114754,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 480.07870142646334,
+                "y": 489.08017707820954
             }
         },
         "map/main_story/unbenannt.tmx": {
@@ -2613,19 +2685,19 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 106.16666666666669,
-                "y": 253.83333333333331
+                "x": 320,
+                "y": 207.83333333333331
             }
         },
         "map/nahiricave.tmx": {
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 1,
+            "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 368.5,
-                "y": 200.5
+                "x": 368,
+                "y": 200.33333333333334
             }
         },
         "map/nest_blue_1.tmx": {
@@ -2894,8 +2966,8 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 263.8333333333333,
-                "y": 191.83333333333331
+                "x": 377.83333333333326,
+                "y": 73.5
             }
         },
         "map/skullcave_1.tmx": {
@@ -2929,8 +3001,8 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 295.83333333333337,
-                "y": 183.83333333333331
+                "x": 62.16666666666667,
+                "y": 214.83333333333331
             }
         },
         "map/slimefoot_boss.tmx": {
@@ -2938,10 +3010,21 @@
                 4
             ],
             "scale": 2.044479166666666,
-            "selectedLayer": 0,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 239.91440362765582,
+                "x": 228.66459469098695,
                 "y": 136.22051255922963
+            }
+        },
+        "map/slobad_factory.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 478.25,
+                "y": 155.25
             }
         },
         "map/snowabbey_1.tmx": {
@@ -2987,12 +3070,56 @@
                 "y": 320.5
             }
         },
+        "map/swamp_town_generic.tmx": {
+            "scale": 2.4838541666666667,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 240.35227511008597,
+                "y": 136.28014258754453
+            }
+        },
         "map/teferi.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 377.66666666666663,
-                "y": 117.83333333333334
+                "x": 345,
+                "y": 181.83333333333331
+            }
+        },
+        "map/tibalt.tmx": {
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 2,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 353,
+                "y": 192.75
+            }
+        },
+        "map/tibalt_f1.tmx": {
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 3,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 367.66666666666663,
+                "y": 150.83333333333334
+            }
+        },
+        "map/tibalt_f2.tmx": {
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 3,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 176,
+                "y": 167.83333333333334
             }
         },
         "map/tileset/buildings.tsx": {
@@ -3085,8 +3212,19 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240.33333333333331,
+                "x": 240.66666666666669,
                 "y": 136.33333333333334
+            }
+        },
+        "map/xira.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 392.5,
+                "y": 204.25
             }
         },
         "map/yule_town.tmx": {
@@ -3105,13 +3243,16 @@
                 "y": 271.75
             }
         },
+        "tileset/buildings-nocollide.tsx": {
+            "scaleInDock": 1
+        },
         "tileset/buildings.tsx": {
-            "scaleInDock": 2,
+            "scaleInDock": 1.5,
             "scaleInEditor": 1.5
         },
         "tileset/main.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 2,
+            "scaleInDock": 1,
             "scaleInEditor": 1
         }
     },
@@ -3125,31 +3266,31 @@
     "map.tileWidth": 16,
     "map.width": 90,
     "openFiles": [
-        "map/nahiri.tmx",
-        "map/nahiricave.tmx",
-        "map/aerie_1.tmx",
-        "map/aerie_1B.tmx",
-        "map/aerie_1C.tmx",
-        "map/main_story/white_castle_f1.tmx",
-        "map/main_story/white_castle.tmx",
-        "map/scarecrow_farm.tmx",
-        "map/nest_blue_1.tmx"
+        "map/xira.tmx",
+        "map/castle_plains_1.tmx",
+        "map/castle_plains_2.tmx",
+        "map/castle_plains_3.tmx",
+        "map/cave_2.tmx",
+        "map/cave_3.tmx",
+        "map/cave_4.tmx",
+        "map/cave_5.tmx",
+        "map/cave_6.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "map/nahiri.tmx",
-        "map/nahiricave.tmx",
-        "map/aerie_1.tmx",
-        "map/aerie_1B.tmx",
-        "map/aerie_1C.tmx",
-        "map/main_story/white_castle_f1.tmx",
-        "map/main_story/white_castle.tmx",
-        "map/scarecrow_farm.tmx",
-        "map/nest_blue_1.tmx",
-        "map/teferi.tmx",
-        "map/kiora_island.tmx",
-        "map/slime_hive.tmx"
+        "map/magetower_1.tmx",
+        "map/castle_plains_1.tmx",
+        "map/castle_plains_2.tmx",
+        "map/cave_6.tmx",
+        "map/cave_5.tmx",
+        "map/cave_4.tmx",
+        "map/cave_2.tmx",
+        "map/castle_plains_3.tmx",
+        "map/cave_3.tmx",
+        "map/magetower_2.tmx",
+        "map/magetower_14.tmx",
+        "map/magetower_13.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true

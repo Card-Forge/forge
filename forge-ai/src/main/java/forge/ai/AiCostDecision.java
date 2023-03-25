@@ -35,16 +35,11 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
 public class AiCostDecision extends CostDecisionMakerBase {
-    private final SpellAbility ability;
-    private final Card source;
-
     private final CardCollection discarded;
     private final CardCollection tapped;
 
     public AiCostDecision(Player ai0, SpellAbility sa, final boolean effect) {
-        super(ai0, effect);
-        ability = sa;
-        source = ability.getHostCard();
+        super(ai0, effect, sa, sa.getHostCard());
 
         discarded = new CardCollection();
         tapped = new CardCollection();
@@ -177,7 +172,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             // TODO Determine exile from same zone for AI
             return null;
         } else {
-            CardCollectionView chosen = ComputerUtil.chooseExileFrom(player, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c, ability);
+            CardCollectionView chosen = ComputerUtil.chooseExileFrom(player, cost, source, c, ability);
             return null == chosen ? null : PaymentDecision.card(chosen);
         }
     }

@@ -222,11 +222,11 @@
 	  "cardUnion": [
 		{
 		  "count":1,
-		  "cardText": "counter.*on |counter.*distribute|distribute.*counter|proliferate|creature(s)? from",
+		  "cardText": "counter.*on |counter.*distribute|distribute.*counter|proliferate|creature(s)? from"
 		},
 		{
 		  "count":1,
-		  "cardText": "([+-])\\d?/([+-])\\d?",
+		  "cardText": "([+-])\\d?/([+-])\\d?"
 		}
 	  ]
     }]
@@ -525,11 +525,11 @@
 	  "cardUnion": [
 		{
 		  "count":1,
-		  "cardText": "(Vigilance|Lifelink|Protection|First Strike|Double Strike|Flying)",
+		  "cardText": "(Vigilance|Lifelink|Protection|First Strike|Double Strike|Flying)"
 		},
 		{
 		  "count":1,
-		  "cardText": "([+-])\\d?/([+-])\\d?",
+		  "cardText": "([+-])\\d?/([+-])\\d?"
 		}
 	  ]
     }]
@@ -969,7 +969,7 @@
     }]
 },{                                    
 "name":"Creature2Eldrazi",
-"description": "Eldritch Emissaries"
+"description": "Eldritch Emissaries",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"CreatureShop",
 "overlaySprite":"Overlay2Colorless",
@@ -1589,7 +1589,7 @@
 	{
       "count":4,
       "colors": ["red","white","black"],
-      "colorType": "MultiColor",
+      "colorType": "MultiColor"
     }]
 },{
   "name":"RWU",
@@ -1606,7 +1606,7 @@
 	{
       "count":4,
       "colors": ["blue","red","white"],
-      "colorType": "MultiColor",
+      "colorType": "MultiColor"
     }]
 },{
   "name":"RWG",
@@ -4854,7 +4854,7 @@
 		},
 		{
 		  "count":1,
-		  "subTypes": ["Soldier"],
+		  "subTypes": ["Soldier"]
 		},
 		{
 		  "count":1,

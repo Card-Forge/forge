@@ -1,0 +1,10 @@
+Name:Archangel Elspeth
+ManaCost:2 W W
+Types:Legendary Planeswalker Elspeth
+Loyalty:4
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ w_1_1_soldier_lifelink | SpellDescription$ Create a 1/1 white Soldier creature token with lifelink.
+A:AB$ PutCounter | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | CounterType$ P1P1 | CounterNum$ 2 | ValidTgts$ Creature | SubAbility$ DBAnimate | SpellDescription$ Put two +1/+1 counters on target creature.
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Angel | Keywords$ Flying | Duration$ Permanent | StackDescription$ SpellDescription | SpellDescription$ It becomes an Angel in addition to its other types and gains flying.
+A:AB$ ChangeZoneAll | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Permanent.nonLand+YouOwn+cmcLE3 | SpellDescription$ Return all nonland permanent cards with mana value 3 or less from your graveyard to the battlefield.
+DeckHas:Ability$Token|LifeGain|Counters|Graveyard & Type$Soldier|Angel
+Oracle:[+1]: Create a 1/1 white Soldier creature token with lifelink.\n[-2]: Put two +1/+1 counters on target creature. It becomes an Angel in addition to its other types and gains flying.\n[-6]: Return all nonland permanent cards with mana value 3 or less from your graveyard to the battlefield.

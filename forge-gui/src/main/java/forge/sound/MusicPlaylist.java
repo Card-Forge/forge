@@ -6,8 +6,17 @@ import java.io.FilenameFilter;
 import forge.util.MyRandom;
 
 public enum MusicPlaylist {
-    MENUS("menus/"),
-    MATCH("match/");
+    BLACK   ("black/"),
+    BLUE    ("blue/"),
+    RED     ("red/"),
+    GREEN   ("green/"),
+    WHITE   ("white/"),
+    CASTLE  ("castle/"),
+    CAVE    ("cave/"),
+    TOWN    ("town/"),
+    BOSS    ("boss/"),
+    MENUS   ("menus/"),
+    MATCH   ("match/");
 
     private final String subDir;
     private int mostRecentTrackIdx = -1;
@@ -56,5 +65,28 @@ public enum MusicPlaylist {
         }
 
         return SoundSystem.instance.getMusicDirectory() + subDir + filenames[mostRecentTrackIdx];
+    }
+
+    public String getNewRandomFilename() {
+        String[] music;
+        try {
+            FilenameFilter filter = new FilenameFilter(){
+                @Override
+                public boolean accept(File file, String name) {
+                    return name.endsWith(".mp3") || name.endsWith(".wav") || name.endsWith(".m4a");
+                }
+            };
+            music = new File(SoundSystem.instance.getMusicDirectory() + subDir).list(filter);
+            if (music == null)
+                return null;
+        }
+        catch (Exception e) {
+            return null;
+        }
+        if (music.length == 0)
+            return null;
+
+        int index = MyRandom.getRandom().nextInt(music.length);
+        return SoundSystem.instance.getMusicDirectory() + subDir + music[index];
     }
 }

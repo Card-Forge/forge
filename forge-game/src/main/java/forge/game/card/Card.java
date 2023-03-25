@@ -347,8 +347,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private ReplacementEffect shieldCounterReplaceDestroy = null;
     private ReplacementEffect stunCounterReplaceUntap = null;
 
-    private Integer readAhead = null;
-
     // Enumeration for CMC request types
     public enum SplitCMCMode {
         CurrentSideCMC,
@@ -1429,6 +1427,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     @Override
     public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
         int addAmount = n;
+        // Rules say it is only a SBA, but is it checked there too?
+        if (counterType.is(CounterEnumType.DREAM) && hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
+            addAmount = Math.min(addAmount, 7 - getCounters(CounterEnumType.DREAM));
+        }
         if (addAmount <= 0 || !canReceiveCounters(counterType)) {
             // As per rule 107.1b
             return;
@@ -6376,7 +6378,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 continue;
             }
 
-            if (!params.get("Destination").equals(ZoneType.Battlefield.toString())) {
+            if (!ZoneType.Battlefield.toString().equals(params.get("Destination"))) {
                 continue;
             }
 
@@ -7117,8 +7119,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void resetChosenModeTurn() {
+        boolean updateView = !chosenModesTurn.isEmpty() || !chosenModesTurnStatic.isEmpty();
         chosenModesTurn.clear();
         chosenModesTurnStatic.clear();
+        if (updateView) {
+            updateAbilityTextForView();
+        }
     }
 
     public int getPlaneswalkerAbilityActivated() {
@@ -7252,13 +7258,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return true;
         }
         return StaticAbilityIgnoreLegendRule.ignoreLegendRule(this);
-    }
-
-    public Integer getReadAhead() {
-        return readAhead;
-    }
-    public void setReadAhead(int value) {
-        readAhead = value;
     }
 
     public boolean attackVigilance() {

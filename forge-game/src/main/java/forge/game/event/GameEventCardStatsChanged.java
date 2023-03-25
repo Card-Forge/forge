@@ -15,8 +15,16 @@ import forge.game.card.Card;
 public class GameEventCardStatsChanged extends GameEvent {
 
     public final Collection<Card> cards;
+    public boolean transform = false;
     public GameEventCardStatsChanged(Card affected) {
+        this(affected, false);
+    }
+
+    public GameEventCardStatsChanged(Card affected, boolean isTransform) {
         cards = Arrays.asList(affected);
+        //the transform should only fire once so the flip effect sound will trigger once every transformation...
+        // disable for now
+        transform = false;
     }
 
     public GameEventCardStatsChanged(Collection<Card> affected) {

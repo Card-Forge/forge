@@ -218,6 +218,7 @@ public class InventoryScene extends UIScene {
         clearSelectable();
         inventoryButtons.clear();
         inventory.clear();
+        Current.player().getItems().sort();
         for (int i = 0; i < Current.player().getItems().size; i++) {
 
             if (i % columns == 0)

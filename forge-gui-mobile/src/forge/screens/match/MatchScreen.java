@@ -818,7 +818,7 @@ public class MatchScreen extends FScreen {
 
     FSkinTexture getBG() {
         if (Forge.isMobileAdventureMode) {
-            switch (GameScene.instance().getAdventurePlayerLocation(false)) {
+            switch (GameScene.instance().getAdventurePlayerLocation(false, true)) {
                 case "green":
                     return FSkinTexture.ADV_BG_FOREST;
                 case "black":

@@ -30,31 +30,34 @@
 "enemies": [
 	"Aether Channeler",
 	"Bird",
+	"Blue Wiz1",
+	"Blue Wiz2",
+	"Blue Wiz3",
 	"Challenger 20",
 	"Challenger 21",
 	"Challenger 22",
+	"Crab",
 	"Djinn",
+	"Doppelganger",
 	"Elemental",
+	"Frog",
 	"Frost Titan",
+	"Geist",
 	"Horror",
+	"Illusionist",
 	"Merfolk",
 	"Merfolk Avatar",
 	"Merfolk Fighter",
 	"Merfolk Lord",
 	"Merfolk Soldier",
 	"Merfolk warrior",
-	"Blue Wiz1",
-	"Blue Wiz2",
-	"Blue Wiz3",
-	"Geist",
+	"Pirate",
 	"Rogue",
 	"Sea Monster",
 	"Tarkir Djinn",
-	"Doppelganger",
-	"Pirate",
-	"Illusionist",
-	"Water Elemental",
-	"Crab"
+	"Turtle",
+	"Water Elemental"
+
 ],
 "pointsOfInterest": [
 	"Blue Castle",
@@ -90,7 +93,8 @@
 	"GitaxianLab"
 	"Kiora Island",
 	"Teferi Hideout",
-	"Jacehold"
+	"Jacehold",
+	"Grolnoks Bog"
 ],
 "structures": [
 	{

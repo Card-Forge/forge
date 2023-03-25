@@ -47,20 +47,16 @@ import forge.util.collect.FCollectionView;
 
 public class HumanCostDecision extends CostDecisionMakerBase {
     private final PlayerControllerHuman controller;
-    private final SpellAbility ability;
-    private final Card source;
     private String orString = null;
     private boolean mandatory;
 
-    public HumanCostDecision(final PlayerControllerHuman controller, final Player p, final SpellAbility sa, final boolean effect, final Card source) {
-        this(controller, p, sa, effect, source, null);
+    public HumanCostDecision(final PlayerControllerHuman controller, final Player p, final SpellAbility sa, final boolean effect) {
+        this(controller, p, sa, effect, sa.getHostCard(), null);
     }
     public HumanCostDecision(final PlayerControllerHuman controller, final Player p, final SpellAbility sa, final boolean effect, final Card source, final String orString) {
-        super(p, effect);
+        super(p, effect, sa, source);
         this.controller = controller;
-        ability = sa;
         mandatory = sa.getPayCosts().isMandatory();
-        this.source = source;
         this.orString = orString;
     }
 
