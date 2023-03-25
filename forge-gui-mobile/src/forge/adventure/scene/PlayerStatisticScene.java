@@ -49,7 +49,6 @@ public class PlayerStatisticScene extends UIScene {
     ScrollPane scroller;
     Table root;
     boolean toggle = false;
-    AchievementCollection achievements;
 
     private PlayerStatisticScene() {
         super(Forge.isLandscapeMode() ? "ui/statistic.json" : "ui/statistic_portrait.json");
@@ -154,45 +153,8 @@ public class PlayerStatisticScene extends UIScene {
     @Override
     public void enter() {
         super.enter();
-        achievements = FModel.getAchievements(GameType.Constructed);
-        achievementContainer.clear();
-        for (Achievement a : PlaneswalkerAchievements.instance) {
-            if (!a.isActive()) //skip inactive
-                continue;
-            TextureRegion textureRegion = new TextureRegion(((FBufferedImage) a.getImage()).getTexture());
-            textureRegion.flip(true, true);
-            Image image = new Image(textureRegion);
-            float alpha = a.isActive() ? 1f : 0.25f;
-            image.getColor().a = alpha;
-            achievementContainer.add(image).height(50).width(40).center().pad(5);
-            String value = "[%105]" + a.getDisplayName() + "[%98]";
-            String subTitle = a.getSubTitle(true);
-            if (subTitle != null)
-                value += "\n" + subTitle;
-            TextraLabel label = Controls.newTextraLabel(value);
-            label.getColor().a = alpha;
-            achievementContainer.add(label).left().pad(5);
-            achievementContainer.row();
-        }
-        for (Achievement a : achievements) {
-            GameType g = GameType.smartValueOf(a.getKey());
-            if (g != null) //skip variants
-                continue;
-            TextureRegion textureRegion = new TextureRegion(((FBufferedImage) a.getImage()).getTexture());
-            textureRegion.flip(true, true);
-            Image image = new Image(textureRegion);
-            float alpha = a.isActive() ? 1f : 0.25f;
-            image.getColor().a = alpha;
-            achievementContainer.add(image).height(50).width(40).center().pad(5);
-            String value = "[%105]" + a.getDisplayName() + "[%98]";
-            String subTitle = a.getSubTitle(true);
-            if (subTitle != null)
-                value += "\n" + subTitle;
-            TextraLabel label = Controls.newTextraLabel(value);
-            label.getColor().a = alpha;
-            achievementContainer.add(label).left().pad(5);
-            achievementContainer.row();
-        }
+        updateAchievements(PlaneswalkerAchievements.instance, true);
+        updateAchievements(FModel.getAchievements(GameType.Constructed), false);
         scrollContainer.clear();
 
         if (playerName != null) {
@@ -242,5 +204,32 @@ public class PlayerStatisticScene extends UIScene {
             scrollContainer.row();
         }
         performTouch(scrollPaneOfActor(scrollContainer)); //can use mouse wheel if available to scroll
+    }
+    void updateAchievements(AchievementCollection achievementCollection, boolean isPW) {
+        achievementContainer.clear();
+        for (Achievement a : achievementCollection) {
+            if (isPW) {
+                if (!a.isActive()) //skip inactive
+                    continue;
+            } else {
+                GameType g = GameType.smartValueOf(a.getKey());
+                if (g != null) //skip variants
+                    continue;
+            }
+            TextureRegion textureRegion = new TextureRegion(((FBufferedImage) a.getImage()).getTexture());
+            textureRegion.flip(true, true);
+            Image image = new Image(textureRegion);
+            float alpha = a.isActive() ? 1f : 0.25f;
+            image.getColor().a = alpha;
+            achievementContainer.add(image).height(50).width(40).center().pad(5);
+            String value = "[%105]" + a.getDisplayName() + "[%98]";
+            String subTitle = a.getSubTitle(true);
+            if (subTitle != null)
+                value += "\n" + subTitle;
+            TextraLabel label = Controls.newTextraLabel(value);
+            label.getColor().a = alpha;
+            achievementContainer.add(label).left().pad(5);
+            achievementContainer.row();
+        }
     }
 }
