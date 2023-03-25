@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="66">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="68">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Staff of the Sun Magus&quot; ]}"/>
+ </properties>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBjcQJaHgUGaB0KDAIwtzTMy7I3ipY+9u3ggeDfUnp08CLHhCEb9O+rf4QRGmn9HAWUAAAPNGkU=
@@ -30,7 +33,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgF2IC+AAODgQCqmC0/A4MdP23t9Qba6YNmbyTQziga2zvcQRsaX4EHghV5IHx5HoQYPn1DFRDr36EKRuN3eMcvNtDCj58/CnADAKcNCf8=
+   eJxjYBgF2IC0FgODjBaqmKYmA4OWJm3tNQfaaYFmryvQTjca2zvcQRsaX4EHghV5IHx5HoQYPn1DFRDr36EKRuN3eMcvNlCgiZ8/CnADAPEICjs=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -39,11 +42,42 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../obj/enemy.tx" x="206.402" y="70.3086">
+  <object id="50" template="../obj/enemy.tx" x="207.402" y="85.8086">
    <properties>
     <property name="enemy" value="White Wiz1"/>
    </properties>
   </object>
-  <object id="65" template="../obj/treasure.tx" x="207.5" y="49.5"/>
+  <object id="66" template="../obj/treasure.tx" x="206.5" y="55.5">
+   <properties>
+    <property name="reward">[ {&quot;type&quot;: &quot;item&quot;,
+  &quot;count&quot;: 1,
+&quot;itemName&quot;: &quot;Staff of the Sun Magus&quot;}]</property>
+   </properties>
+  </object>
+  <object id="67" template="../obj/booster.tx" x="295.5" y="102.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -1127,6 +1127,87 @@
 }
 },
 {
+    "name": "Staff of the Death Magus",
+    "equipmentSlot": "Left",
+    "iconName": "DeathMagusStaff",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Staff of the Death Magus"
+      ],
+         "opponent": {
+        "startBattleWithCard": [
+          "Phyrexian Arena" 
+		]
+		}
+}
+},
+{
+    "name": "Staff of the Flame Magus",
+    "equipmentSlot": "Left",
+    "iconName": "FireMagusStaff",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Staff of the Flame Magus"
+      ],
+      "opponent": {
+        "startBattleWithCard": [
+          "Fervor"
+        ]
+        }
+}
+},
+{
+    "name": "Staff of the Mind Magus",
+    "equipmentSlot": "Left",
+    "iconName": "MindMagusStaff",
+    "effect": {
+       "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Staff of the Mind Magus"
+      ],
+      "opponent": {
+        "startBattleWithCard": [
+          "Memory Erosion"
+        ]
+        }
+}
+},
+{
+    "name": "Staff of the Wild Magus",
+    "equipmentSlot": "Left",
+    "iconName": "WildMagusStaff",
+    "effect": {
+       "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Staff of the Wild Magus"
+      ],
+      "opponent": {
+        "startBattleWithCard": [
+          "Beastmaster Ascension"
+        ]
+        }
+        
+}
+},
+{
+    "name": "Staff of the Sun Magus",
+    "equipmentSlot": "Left",
+    "iconName": "SunMagusStaff",
+    "effect": {
+       "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Staff of the Sun Magus"
+      ],
+      "opponent": {
+        "startBattleWithCard": [
+          "Luminarch Ascension"
+        ]
+        }
+}
+},
+{
     "name": "Grolnok's Skin",
     "equipmentSlot": "Right",
     "iconName": "FrogSkin",

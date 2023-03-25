@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="70">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="72">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Staff of the Wild Magus&quot; ]}"/>
+ </properties>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBjcQJoHu7gsDvFRewe3vbt4IBidvxsqthONPwqGDqjjxo3ruWlnLywNYcO0zjejAAIGKpwHg711NEzbMIBebuISIxYAAOAZFWo=
@@ -44,18 +47,48 @@
     <property name="enemy" value="Green Wiz1"/>
    </properties>
   </object>
-  <object id="65" template="../obj/treasure.tx" x="207.5" y="49.5"/>
   <object id="66" template="../obj/enemy.tx" x="135.853" y="91.3095">
    <properties>
     <property name="enemy" value="Snake"/>
    </properties>
   </object>
-  <object id="67" template="../obj/enemy.tx" x="177.475" y="198.651">
+  <object id="67" template="../obj/enemy.tx" x="186.238" y="200.842">
    <properties>
     <property name="enemy" value="Cat"/>
    </properties>
   </object>
-  <object id="68" template="../obj/gold.tx" x="97.1513" y="178.936"/>
   <object id="69" template="../obj/gold.tx" x="151.187" y="51.8778"/>
+  <object id="70" template="../obj/treasure.tx" x="208.144" y="52.608">
+   <properties>
+    <property name="reward">[ {&quot;type&quot;: &quot;item&quot;,
+  &quot;count&quot;: 1,
+&quot;itemName&quot;: &quot;Staff of the Wild Magus&quot;}]</property>
+   </properties>
+  </object>
+  <object id="71" template="../obj/booster.tx" x="294.31" y="126.36">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;M20&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M20&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

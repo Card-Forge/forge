@@ -3,12 +3,12 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/magetower_13.tmx",
+    "activeFile": "map/magetower_5.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "tileset",
-        "map/main_story",
         "obj",
+        "map/main_story",
+        "tileset",
         "map"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -2117,7 +2117,7 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 235.75,
+                "x": 235.5,
                 "y": 131.75
             }
         },
@@ -2188,13 +2188,16 @@
             "scale": 4,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 224,
-                "y": 123.125
+                "x": 223.5,
+                "y": 61.625
             }
         },
         "map/magetower_4.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 2,
-            "selectedLayer": 0,
+            "selectedLayer": 5,
             "viewCenter": {
                 "x": 239,
                 "y": 116.75
@@ -2207,7 +2210,7 @@
             "scale": 1.3694556451612903,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 232.9392712550608,
+                "x": 233.66948840633052,
                 "y": 136.91571586308427
             }
         },
@@ -2218,7 +2221,7 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 239.5,
+                "x": 240,
                 "y": 136.25
             }
         },
@@ -3270,7 +3273,6 @@
     "map.width": 90,
     "openFiles": [
         "map/xira.tmx",
-        "map/magetower_13.tmx",
         "map/magetower_1.tmx",
         "map/magetower_2.tmx",
         "map/magetower_3.tmx",
@@ -3282,12 +3284,12 @@
     "property.type": "string",
     "recentFiles": [
         "map/xira.tmx",
+        "map/magetower_1.tmx",
+        "map/magetower_2.tmx",
+        "map/magetower_3.tmx",
+        "map/magetower_4.tmx",
         "map/magetower_6.tmx",
         "map/magetower_5.tmx",
-        "map/magetower_4.tmx",
-        "map/magetower_3.tmx",
-        "map/magetower_2.tmx",
-        "map/magetower_1.tmx",
         "map/magetower_13.tmx",
         "map/tibalt.tmx",
         "map/tibalt_f1.tmx",

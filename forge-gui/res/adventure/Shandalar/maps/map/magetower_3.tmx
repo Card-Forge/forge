@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="76">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="77">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Staff of the Flame Magus&quot; ]}"/>
+ </properties>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
@@ -49,7 +52,7 @@
     <property name="waypoints" value="70,74,71,69"/>
    </properties>
   </object>
-  <object id="66" template="../obj/booster.tx" x="209" y="42.5" width="16.25" height="15.25">
+  <object id="66" template="../obj/booster.tx" x="289.25" y="95" width="16.25" height="15.25">
    <properties>
     <property name="reward">[
   {
@@ -89,5 +92,12 @@
   <object id="73" template="../obj/waypoint.tx" x="159.5" y="78.75"/>
   <object id="74" template="../obj/waypoint.tx" x="208.5" y="45"/>
   <object id="75" template="../obj/waypoint.tx" x="271.25" y="79.75"/>
+  <object id="76" template="../obj/treasure.tx" x="242.25" y="57.75">
+   <properties>
+    <property name="reward">[ {&quot;type&quot;: &quot;item&quot;,
+  &quot;count&quot;: 1,
+&quot;itemName&quot;: &quot;Staff of the Flame Magus&quot;}]</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

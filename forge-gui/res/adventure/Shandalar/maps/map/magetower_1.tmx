@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="64">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="65">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Staff of the Mind Magus&quot; ]}"/>
+ </properties>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="6321" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgF6ECah4FhFx4sy0M7e/EBatuL7E98gNr+JuRPdECpvfjiczfU7J00iG9S/YkOhqK9yGmJ1LCjpn+Hu7113BAMA8SUVzA91MhPxACYPdQsN9D9jQ3s5aGOP7HZX4/D7loa2IdsL8xPMPtroeGwh8zyCQABdykZ
@@ -25,7 +28,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFgwkwM2MX/8BOX3fQGkTJEKcumkh1gxVEkuB+UTYE+w/1nUIUGOrhPRgALG1/wpNnKQ1nZx7K9NMaSEDT8q8BsHs64wBYOsQAAASqB9M=
+   eJxjYBgFgwkwM2MX/8BOX3fQGmhpE6dOm0h1gxVokuB+UTYE+w/1nUIUGOrhPRgALG1/wpNnKQ1nZx7K9NMaSEDT8q8BsHs64wBYOsQAANwYBw0=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -34,7 +37,13 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../obj/treasure.tx" x="207.333" y="58.8333"/>
+  <object id="48" template="../obj/treasure.tx" x="207.333" y="58.8333">
+   <properties>
+    <property name="reward">[ {&quot;type&quot;: &quot;item&quot;,
+  &quot;count&quot;: 1,
+&quot;itemName&quot;: &quot;Staff of the Mind Magus&quot;}]</property>
+   </properties>
+  </object>
   <object id="50" template="../obj/enemy.tx" x="207.902" y="99.5586">
    <properties>
     <property name="enemy" value="Blue Wiz1"/>
@@ -51,6 +60,30 @@
    </properties>
   </object>
   <object id="62" template="../obj/gold.tx" x="283" y="237"/>
-  <object id="63" template="../obj/treasure.tx" x="319" y="166.5"/>
+  <object id="64" template="../obj/booster.tx" x="312.5" y="167.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

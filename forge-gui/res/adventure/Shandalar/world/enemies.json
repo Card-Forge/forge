@@ -8882,6 +8882,31 @@
 	"colors": "R"
 },
 {
+	"name": "Reasembling Skeleton",
+	"sprite": "sprites/skeleton.atlas",
+	"deck": [
+		"decks/reasemblingskeleton.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 10,
+	"life": 11,
+	"rewards": [
+		{
+			"type": "randomCard",
+			"count": 2,
+			"addMaxCount": 8
+		},
+		{
+			"type": "gold",
+			"probability": 0.6,
+			"count": 7,
+			"addMaxCount": 32
+		}
+	],
+	"colors": "B"
+},
+{
 	"name": "Red Wiz1",
 	"sprite": "sprites/enchanter.atlas",
 	"deck": [
