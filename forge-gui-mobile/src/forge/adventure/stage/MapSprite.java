@@ -22,7 +22,7 @@ public class MapSprite extends Actor {
     static public int BackgroundLayer = -1;
     static public int SpriteLayer = 0;
     TextureRegion texture;
-    TextraLabel leaf;
+    TextraLabel searchPost;
     boolean isCaveDungeon, isOldorVisited;
     PointOfInterest poi;
 
@@ -30,7 +30,7 @@ public class MapSprite extends Actor {
         poi = point;
         isCaveDungeon = point != null && (point.getData().type.equalsIgnoreCase("cave") || point.getData().type.equalsIgnoreCase("dungeon"));
         isOldorVisited = poi != null && WorldSave.getCurrentSave().getPointOfInterestChanges(poi.getID() + poi.getData().map).hasDeletedObjects();
-        leaf = Controls.newTextraLabel("[%80][+SearchPost]");
+        searchPost = Controls.newTextraLabel("[%80][+SearchPost]");
         texture = sprite;
         setPosition(pos.x, pos.y);
         setHeight(texture.getRegionHeight());
@@ -81,8 +81,8 @@ public class MapSprite extends Actor {
             return;
         batch.draw(texture, getX(), getY());
         if (isCaveDungeon && !isOldorVisited) {
-            leaf.setPosition(getX() - 7, getY() + 7);
-            leaf.draw(batch, parentAlpha);
+            searchPost.setPosition(getX() - 7, getY() + 7);
+            searchPost.draw(batch, parentAlpha);
         }
         //font.draw(batch,String.valueOf(getZIndex()),getX()-(getWidth()/2),getY());
     }
