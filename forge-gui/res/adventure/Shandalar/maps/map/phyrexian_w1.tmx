@@ -6,7 +6,11 @@
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../tileset/phyrexiantiles.tsx"/>
- <tileset firstgid="12048" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy9lEESgzAIRdl2ES7TaG7gDbXtsWovpIyJjUhsDYzM/IVj4Bn40t0AOqbeAQxRD7d/L6kmh+uOsEaD25qSiMNztNzXXDNkz1K0uD1jwa0Jay7die5P8XTLPS257zlvFOSzfhKT5iqd+1RyST76iTjJP3zOLe795RXM9F/88hOP1AMNV5qxdM5qtvm3X8nNvVXyaynI4xpPJV+dYYfoY62vfKzx7w5p8Juj4R75q8S14J2Zc1DuiiP2KPCDwX6q6bmmtxPwx4tA
+  </data>
+ </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzr0WNg6BnFo3gUj+JRPIpH8YjAAE3lcpw=
@@ -25,12 +29,7 @@
    eJy1lcsOwiAQRfki/hG1vla1rYlata5a165bv83bOCSEgpbXTW6gA8NpYAKMTVVxxhpypbixtOq4jPnoqOSV6LfwAAtL++TTnFDuHf33n3V6jD8ic30Um9vSnur9mNwMXsMbOt8Ofil73tN3R3x1fgg3hw/wjX8Zg+Gc1XhN84tAbk1MF8mcEK4w5C4QW5JXlrVFAu4JsTP5koibUY24SObEqKti5hpZxLq6OnBzmh9SV+O9voP3DjU9/ueW8nzfBRP/l2Lx5vJT8XTp97bvOY76ADiCbCA=
   </data>
  </layer>
- <layer id="6" name="Collision" width="30" height="17" visible="0">
-  <data encoding="base64" compression="zlib">
-   eJxz42RgcBtEGAZAbBM+whhdD7XsxQdoYS85gNr2IssRo45cjCsuYWGLL65pYSdyvNLKXlIAtewlJt6w2T1U7R2ocCbFblqkZ3raiy+ecdlLDfsIpR9kQAv78NlPD/uobS8AQpd0SA==
-  </data>
- </layer>
- <layer id="7" name="Ornamental Walls" width="30" height="17" visible="0">
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
   </data>

@@ -6,10 +6,9 @@
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../tileset/GitaxianTilesheet.tsx"/>
- <tileset firstgid="11977" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYCAM3DgJY1oAQuaO2ks9e9Hjkl7xS8heWriDVHOo5Q5S9cnyUKafUn1D2d5dPAgMAsh89HClVzhjs4fSdEWMPmr5D5vdxNhL7/yLbC81Aci8em788rQoL2lRLwAAv+Eb6A==
+   eJxjYCAMpvIyMEzDg6fzEmEIGcCYD7+8KQH5UXuJAxeB5l6CYjOoHeZIYpdpZC9yupoBTUMz6ZDOCIUzOkB3E7nuINVe9PgmN/5JtZeQO4aCvbt4EBgEkPmyPPjtoZV/0e1FzmPk5jM3TtLtpVY5Qqy95lQuR4i1l9rlJcjeem7c8tT2J7K9sLIHGcDEyPEnAEN5Lbs=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -27,7 +26,7 @@
  </layer>
  <layer id="2" name="Walls" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzbwcPAsIMI3K6HGxOjXwYNE6OnD2g2PjCBCLtH7SUOT9eD4GlQN8zQQ4jRKn6R01Ub1N4OEtMZLcIZHaC7iV72TtDD5NPDXmzuGGr2TkfCIIDMxxau9PAvNnuQ3UXLcgOdT6/yCgRm6OEuR2hpL77ykhb24vMnpfbCyh5kABMjp14AACWX9oA=
+   eJzbwcPAsIMI3K6HGxOjXwYNE6OnD2g2PjCBCLtH7SUOT9eD4GlQN8zQQ4jRKn6R01Ub1N4OEtMZLcIZHaC7iV72TtDD5NPDXmzuGGr2TkfCIIDMxxau9PAvuj3z0NxJy3IDnU+v8goEZujhLkdoaS++8pIW9uLzJ6X2wsoeZAATI6deAABIX/aO
   </data>
  </layer>
  <layer id="8" name="Archway" width="30" height="17">
