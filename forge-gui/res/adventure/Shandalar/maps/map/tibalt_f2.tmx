@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="22" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="169">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="22" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="174">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -7,7 +7,7 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="16" name="Collision" width="22" height="21">
   <data encoding="base64" compression="zlib">
-   eJxjYBhY4MaJwJTqJ4RJNdeEjzAmx1xK/EWpuaTqHWhzsakjZC6yPIyNLkZO+OJSR0k6QzcHn93UNpeQHDnm0jIcCMkNBnOR/U6Nsg2fHdQ2FxufEnPx2UMNcylNZ+h2kJKPAc8THhk=
+   eJxjYBhY4MaJwJTqJ4RJNdeEjzAmx1xK/EWpuaTqHWhzsakjZC6yPIyNLkZO+OJSR0k6QzcHn93UNpeQHDnm0jIcCMkNBnOR/U6Nsg2fHdQ2FxufEnPx2UMNc6mRzsitLwAC3x8G
   </data>
  </layer>
  <layer id="15" name="Tilelaag 3" width="22" height="21">
@@ -63,12 +63,6 @@
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="165" template="../obj/entry_up.tx" x="136.342" y="288.605">
-   <properties>
-    <property name="teleport" value="maps/map/tibalt_f1.tmx"/>
-    <property name="teleportObjectId" value="161"/>
-   </properties>
-  </object>
   <object id="166" template="../obj/manashards.tx" x="275.818" y="86.5449"/>
   <object id="167" template="../obj/booster.tx" x="242.398" y="116.332">
    <properties>
@@ -95,7 +89,7 @@
 </property>
    </properties>
   </object>
-  <object id="168" template="../obj/gate.tx" gid="4125" x="218.842" y="114.772" width="4" height="22.3333" rotation="0">
+  <object id="168" template="../obj/gate.tx" gid="3221229597" x="226.93" y="108.325" width="9.99747" height="21.9971" rotation="90.4687">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This door is locked&quot;,
@@ -109,6 +103,13 @@
     }
     ]
 }]</property>
+   </properties>
+  </object>
+  <object id="170" template="../obj/door_down.tx" x="124.811" y="303.18" width="32.3503" height="30.8105" rotation="0.284412">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="maps/map/tibalt_f1.tmx"/>
+    <property name="teleportObjectId" value="199"/>
    </properties>
   </object>
  </objectgroup>

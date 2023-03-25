@@ -201,7 +201,11 @@ public class DeckHints {
                     Predicate<CardRules> op;
                     if (t.contains(".")) {
                         String[] typeParts = t.split("\\.");
-                        op = Predicates.and(CardRulesPredicates.coreType(true, typeParts[0]), CardRulesPredicates.subType(typeParts[1]));
+                        if (CardType.isASupertype(typeParts[0])) {
+                            op = Predicates.and(CardRulesPredicates.superType(true, typeParts[0]), CardRulesPredicates.coreType(true, typeParts[1]));
+                        } else {
+                            op = Predicates.and(CardRulesPredicates.coreType(true, typeParts[0]), CardRulesPredicates.subType(typeParts[1]));
+                        }
                     } else {
                         op = CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, t);
                     }
