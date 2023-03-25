@@ -34,7 +34,7 @@ public class FSkin {
 
     public static Texture getLogo() {
         if (Forge.isMobileAdventureMode)
-            return Forge.getAssets().getTexture(getDefaultSkinFile("adv_logo.png"));
+            return Forge.getAssets().getTexture(getDefaultSkinFile("adv_logo.png"), true, false);
         return Forge.getAssets().getTexture(getSkinFile("hd_logo.png"), false);
     }
 
@@ -113,7 +113,7 @@ public class FSkin {
 
         //load theme logo while changing skins
         Forge.getAssets().loadTexture(getSkinFile("hd_logo.png"));
-        Forge.getAssets().loadTexture(getDefaultSkinFile("adv_logo.png"));
+        Forge.getAssets().loadTexture(getDefaultSkinFile("adv_logo.png"), new TextureLoader.TextureParameter());
         Forge.getAssets().loadTexture(getDefaultSkinFile("overlay_alpha.png"));
         Forge.getAssets().loadTexture(getDefaultSkinFile("splatter.png"));
 
@@ -157,14 +157,14 @@ public class FSkin {
                 //override splashscreen startup
                 if (Forge.selector.equals("Adventure")) {
                     if (f3.exists()) {
-                        Texture advSplash = Forge.getAssets().getTexture(f3);
+                        Texture advSplash = Forge.getAssets().getTexture(f3, true, false);
                         w = advSplash.getWidth();
                         h = advSplash.getHeight();
                         splashScreen.setSplashTexture(new TextureRegion(advSplash, 0, 0, w, h - 100));
                         pxSplash = new Pixmap(f3);
                     }
                     if (f4.exists()) {
-                        Texture advBG = Forge.getAssets().getTexture(f4);
+                        Texture advBG = Forge.getAssets().getTexture(f4, true, false);
                         advBG.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
                         splashScreen.setSplashBGTexture(advBG);
                     }
