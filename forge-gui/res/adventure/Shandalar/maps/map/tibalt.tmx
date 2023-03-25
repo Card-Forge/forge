@@ -7,7 +7,7 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="15" name="Collision" width="31" height="22">
   <data encoding="base64" compression="zlib">
-   eJxjYMAEbpwQDGMTAqs5EBjGHylgFdCvu3gQ/HhB+tgHwv5iCHEQfw0Nwx1k724eVDE/JPt3EmH/cyLSEgwgpztZoNlPgXxGBgh+zIlp105omNwQRYhxCBBn13Uc7gLZCfIzI5SPbD8hQKzdtAC0spuRsBKcdoPCGIbpDZDtRrafHm5Bt5ecMNgkSlgNIfuxsbHl2Y1odh0VJs9eWpZFxNqPXt4MRNojKhyEBth+GgKY/dwDWB6OgqEPACg9MIk=
+   eJxjYMAEbpwQDGMTAqs5EBjGHylgFdCvu3gQ/HhB+tgHwv5iCHEQfw0Nwx1k724e3PI7ibD/ORFpCQaQ050s0OynQD4jAwTjsh8UBjdEEWIcAsTZdR2Hu0B2gvwMsxOf/eiAWLtpAWhlNzF+x2U3KIxhmN4A2W5k++nhFnR7yQmDTaKE1RCyHxsbBNDz7EY0u44Kk2cvLcsiYu1HL28GIu0RFQ5CA2w/DQHMfu4BLA9HwdAHAHu4LNQ=
   </data>
  </layer>
  <layer id="20" name="Background" width="31" height="22">
@@ -30,7 +30,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJydlrtuE0EUhscTb6zVAmFNbMEbQEGRgksDvEEkEuQyQJAIUCIKBO8QLg3gUIB4gVDBO4TSQTR+AhrboVhgucyvmZ85O9mLxZF+ebM7e775z5mZzShWaitS/yJz19sL1TrQVt+M3vaUeiOEv+WYOl3VRXZVSPYzp+dGl/pKXTZ6Z5ja6ErfjnniVMdGzMOeai/OYSNV6rrTmdhfU4jJf/ie6vJ7TwVTde39m469aX53un78H8efx3fW4H+mLRfMX6llgvXa6Iup97Br+e97Rf6NtNgHCB4Qdw3zU7ueS3aeWi702/kClwJ/JxD4y+bZmrZr5ED7usKvrPvDY7YXVHLc1edENRvP+BsqF2ORa1v4Zt0fGWZvSan+kr23Ens2hDy7Pc9mP2XIGnAukj1qKbXvhNzgoe5n217sweCIUqcSz5Y13QzYLeX9S/ZQrIn7hvfdsH5Glo0YG4+j2F4/Pup7AO/gn0yKc4AQWFdUyGe9GPT8YlGpV4u2/+tG17RnsweIr20rxIekWH9E6B21DdkUPV/sWDb6jjWHNQzv3Gdkc72VsclncL/VseH5pfPNs2omzpJxXPRdxib/dHxYnBfGsM6fW9VsrPnlBTtmHHxfVuJqdp4We07f5IKHWj7QvtdkD7Tfa7c6lo8x4TkL75LNyEW/cc6BzT3E/v4QyiPPnonzhfw9U+d7kZ3Hatt7JxuxQaY4vxEhj6xQki1jS8xD8j8mfsywe/g9eJY9rVOZb7KzgD9vgH3OvHPe6EKn+hr5yZb7vOyM4/Mm4f29mu9SFnlN3DsTt94HJblQh/AbWCWuW+ReC/KE0ZQTuW67+sta3BG1qfI3cTx6mjbMZd5o+j8rc7Uiu0x/AckTJ+A=
+   eJyllr1uE0EUha8n3lirBYJNbMEbQEGRgp8G8gZIBOQyQJAIUCIKBO8QfhqIQ0HEC0AF7xBKg2j8BDS2Q2HA/MzRzGHuTnbXFhzpyBt7dr45987Opp+KbCbyVxN/vbVQ7n3j/NV6ty3yShl/6zFVvmzy7DJp9lPvZ9YXOiIXrV9bprFe7bgxj72r2NA87JEJ5hrWmyLXvE+l4ZqGhv+Qe2SKv3uimNJy39/w7A37udMK4397/v/mhsbGccH82XRMsF5af7b17rUc/207z7/ezPcBRgbojmV/qM/HnjYdF/7lc4FLg78TGfxl+9uacXtk34S6Ym/r7A+OuF7Q2VFfn2PlbPzGz9hTNRZzbancrPtDy2wviXSW3HcraWDDmOdNO7DZTy1dA65Fs/s1kY/emBs81P10PZg96B4SOZEFtq7pRsSuSciv2T21J+5Z3jfL+pE4NjSwGfupu350OPQA2cE/nuXXAEPYV3TMZ70oZn6+KLK96Pp/xfqqCWz2APpSd4beZfn6Q3F21DZm08x8vuHY6Dv2HPYwsvNMJZv7rYhNPsXnrYqNzC98bp5VY3WWDNJ87iI2+SfTg+a6MIZ1/lQrZ2PPLy+4MYPo/bKSlrOnzXzPmZtc8FDL+yb0muyuCc/azYbjY0x81iG7ZlNT1W+cc2DzGWJ/vytPk8Aeq/OF/D1b57uJW8eleshONrROpjq/oZhHVmzN1tpU69D891kY02sdvA+ZdU+rXJSb7EnEn1dgn7H3nLU+1yi/xvxk6+e86Izj77OM+/cq3kuTJHjo7xn6/d4tmAt1iN+BZea+xdxr0TyxZs2JuW75+uta3Fa1Kcs39DxmGs1Yy7ya9f/GxNeK7CL/ATakJuM=
   </data>
  </layer>
  <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
@@ -53,18 +53,18 @@
    <properties>
     <property name="enemy" value="Phoenix"/>
     <property name="spawn.Hard" type="bool" value="true"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="179,180,198,171,176,174,191"/>
    </properties>
   </object>
-  <object id="122" template="../obj/enemy.tx" x="94.542" y="168.271">
+  <object id="122" template="../obj/enemy.tx" x="101.042" y="176.271">
    <properties>
     <property name="enemy" value="Red Wiz1"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value="183,184"/>
    </properties>
   </object>
-  <object id="137" template="../obj/enemy.tx" x="22.763" y="50.2299">
+  <object id="137" template="../obj/enemy.tx" x="42.263" y="48.2299">
    <properties>
     <property name="enemy" value="Bandit"/>
     <property name="threatRange" type="int" value="20"/>
@@ -122,8 +122,8 @@
   </object>
   <object id="179" template="../obj/waypoint.tx" x="180.342" y="117.105"/>
   <object id="180" template="../obj/waypoint.tx" x="199.842" y="162.105"/>
-  <object id="181" template="../obj/waypoint.tx" x="13.3421" y="10.1053"/>
-  <object id="183" template="../obj/waypoint.tx" x="95.8421" y="139.605"/>
+  <object id="181" template="../obj/waypoint.tx" x="32.3421" y="14.1053"/>
+  <object id="183" template="../obj/waypoint.tx" x="105.842" y="139.605"/>
   <object id="184" template="../obj/waypoint.tx" x="105.342" y="221.105"/>
   <object id="185" template="../obj/manashards.tx" x="402.887" y="196.423"/>
   <object id="186" template="../obj/manashards.tx" x="66.2966" y="27.7871"/>
@@ -131,7 +131,7 @@
   <object id="189" template="../obj/waypoint.tx" x="359.842" y="117.605"/>
   <object id="190" template="../obj/waypoint.tx" x="379.342" y="183.605"/>
   <object id="191" template="../obj/waypoint.tx" x="325.842" y="135.105"/>
-  <object id="192" template="../obj/waypoint.tx" x="30.8421" y="89.6053"/>
+  <object id="192" template="../obj/waypoint.tx" x="20.3421" y="77.1053"/>
   <object id="193" template="../obj/collision.tx" x="-14.9079" y="-24.3947" width="524.5" height="16"/>
   <object id="194" template="../obj/collision.tx" x="-16.4079" y="346.105" width="527.5" height="16"/>
   <object id="195" template="../obj/collision.tx" x="492.342" y="-22.9362" width="16" height="387.083"/>
