@@ -457,10 +457,9 @@ public class HumanPlay {
             }
 
             else if (part instanceof CostPayShards) {
-                CounterType counterType = CounterType.get(CounterEnumType.MANASHARDS);
                 int amount = part.getAbilityAmount(sourceAbility);
 
-                if (!mandatory && !p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantSpendNTargetTypeCounter", String.valueOf(amount), counterType.getName()), sourceAbility)) {
+                if (!mandatory && !p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantPay") + " " + amount + " {M}?", sourceAbility)) {
                     return false;
                 }
 

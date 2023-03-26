@@ -297,7 +297,7 @@ public class Game {
             pl.setStartingHandSize(psc.getStartingHand());
 
             if (psc.getManaShards() > 0) {
-                pl.setCounters(CounterEnumType.MANASHARDS, psc.getManaShards(), true);
+                pl.setNumManaShards(psc.getManaShards());
             }
             int teamNum = psc.getTeamNumber();
             if (teamNum == -1) {

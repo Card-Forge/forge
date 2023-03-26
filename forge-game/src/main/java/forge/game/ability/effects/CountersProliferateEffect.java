@@ -65,8 +65,6 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
             GameEntityCounterTable table = new GameEntityCounterTable();
             for (final GameEntity ge : result) {
                 for (final CounterType ct : ge.getCounters().keySet()) {
-                    if (ct.is(CounterEnumType.MANASHARDS))
-                        continue;
                     ge.addCounter(ct, 1, p, table);
                 }
             }

@@ -594,7 +594,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         Integer c = cost.getAbilityAmount(ability);
 
         if (player.canPayShards(c) &&
-                confirmAction(cost, Localizer.getInstance().getMessage("lblPayShardsConfirm", cost.toString(), String.valueOf(player.getCounters(CounterEnumType.MANASHARDS)), "{M} (Mana Shards)"))) {
+                confirmAction(cost, Localizer.getInstance().getMessage("lblPayShardsConfirm", cost.toString(), String.valueOf(player.getNumManaShards()), "{M} (Mana Shards)"))) {
             return PaymentDecision.number(c);
         }
         return null;

@@ -33,6 +33,7 @@ import java.util.NavigableMap;
 import java.util.Set;
 import java.util.SortedSet;
 
+import forge.game.event.*;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -78,18 +79,6 @@ import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
-import forge.game.event.GameEventCardSacrificed;
-import forge.game.event.GameEventLandPlayed;
-import forge.game.event.GameEventManaBurn;
-import forge.game.event.GameEventMulligan;
-import forge.game.event.GameEventPlayerControl;
-import forge.game.event.GameEventPlayerCounters;
-import forge.game.event.GameEventPlayerDamaged;
-import forge.game.event.GameEventPlayerLivesChanged;
-import forge.game.event.GameEventPlayerPoisoned;
-import forge.game.event.GameEventPlayerStatsChanged;
-import forge.game.event.GameEventShuffle;
-import forge.game.event.GameEventSurveil;
 import forge.game.keyword.Companion;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
@@ -162,6 +151,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int lifeGainedThisTurn;
     private int lifeGainedTimesThisTurn;
     private int lifeGainedByTeamThisTurn;
+    private int numManaShards;
     private int numPowerSurgeLands;
     private int numLibrarySearchedOwn; //The number of times this player has searched his library
     private int numDrawnThisTurn;
@@ -662,17 +652,17 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canPayShards(final int shardPayment) {
-        int cnt = getCounters(CounterEnumType.MANASHARDS);
+        int cnt = getNumManaShards();
         return cnt >= shardPayment;
     }
 
     public final int loseShards(int lostShards) {
-        int cnt = getCounters(CounterEnumType.MANASHARDS);
+        int cnt = getNumManaShards();
         if (lostShards > cnt) {
             return -1;
         }
         cnt -= lostShards;
-        this.setCounters(CounterEnumType.MANASHARDS, cnt, true);
+        this.setNumManaShards(cnt);
         return cnt;
     }
 
@@ -2297,6 +2287,16 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void setLifeLostLastTurn(final int n) {
         lifeLostLastTurn = n;
+    }
+
+    public final int getNumManaShards() {
+        return numManaShards;
+    }
+    public final void setNumManaShards(final int n) {
+        int old = numManaShards;
+        numManaShards = n;
+        view.updateNumManaShards(this);
+        game.fireEvent(new GameEventPlayerShardsChanged(this, old, numManaShards));
     }
 
     @Override
