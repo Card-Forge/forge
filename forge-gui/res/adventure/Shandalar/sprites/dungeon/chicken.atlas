@@ -1,77 +1,104 @@
 chicken.png
-size: 239,51
+size: 256,160
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none  
 Avatar        
-  xy: 133, 4
-  size: 9, 7     
+  xy: 107, 82
+  size: 12, 10     
 Idle 
-  xy: 0, 0
-  size: 14, 14  
+  xy: 8, 16
+  size: 16, 16  
 Idle 
-  xy: 32, 0
-  size: 14, 14  
+  xy: 40, 16
+  size: 16, 16  
 Idle 
-  xy: 64, 0
-  size: 14, 14  
+  xy: 72, 16
+  size: 16, 16  
 Idle 
-  xy: 96, 0
-  size: 14, 14  
+  xy: 104, 16
+  size: 16, 16  
+Idle 
+  xy: 8, 48
+  size: 16, 16
+Idle 
+  xy: 40, 48
+  size: 16, 16  
+Idle 
+  xy: 72, 48
+  size: 16, 16    
+Idle 
+  xy: 104, 48
+  size: 16, 16    
+Idle 
+  xy: 136, 48
+  size: 16, 16  
+Idle 
+  xy: 168, 48
+  size: 16, 16   
+Idle 
+  xy: 200, 48
+  size: 16, 16     
+Idle 
+  xy: 232, 48
+  size: 16, 16     
 Walk
-  xy: 0, 21
-  size: 14, 14
+  xy: 8, 80
+  size: 16, 16  
 Walk
-  xy: 32, 20
-  size: 14, 14   
+  xy: 40, 80
+  size: 16, 16  
 Walk
-  xy: 64, 20
-  size: 14, 14   
+  xy: 72, 80
+  size: 16, 16  
 Walk
-  xy: 96, 20
-  size: 14, 14   
+  xy: 104, 80
+  size: 16, 16  
 Walk
-  xy: 128, 20
-  size: 14, 14   
+  xy: 136, 80
+  size: 16, 16  
 Walk 
-  xy: 160, 20
-  size: 14, 14
+  xy: 168, 80
+  size: 16, 16  
 Walk 
-  xy: 192, 20
-  size: 14, 14  
+  xy: 200, 80
+  size: 16, 16  
 Walk 
-  xy: 224, 20
-  size: 14, 14   
+  xy: 232, 80
+  size: 16, 16  
 Attack 
-  xy: 160, 0
-  size: 14, 14 
+  xy: 8,112 
+  size: 16, 16
 Attack 
-  xy: 192, 0
-  size: 14, 14 
+  xy: 40,112 
+  size: 16, 16
 Attack 
-  xy: 224, 0
-  size: 14, 14 
+  xy: 72,112 
+  size: 16, 16
+Attack 
+  xy: 104,112 
+  size: 16, 16
 Death 
-  xy: 0, 32
-  size: 14, 10    
+  xy: 8, 144
+  size: 16, 16    
 Death 
-  xy: 32, 32
-  size: 14, 10
+  xy: 40, 144
+  size: 16, 16    
 Death 
-  xy: 64, 32
-  size: 14, 10
+  xy: 72, 144
+  size: 16, 16    
 Death 
-  xy: 96, 32
-  size: 14, 10
+  xy: 104, 144
+  size: 16, 16    
 Death 
-  xy: 128, 32
-  size: 14, 10      
+  xy: 136, 144
+  size: 16, 16        
 Death 
-  xy: 160, 32
-  size: 14, 10 
+  xy: 168, 144
+  size: 16, 16    
 Death 
-  xy: 192, 32
-  size: 14, 10 
+  xy: 200, 144
+  size: 16, 16    
 Death 
-  xy: 224, 32
-  size: 14, 10
+  xy: 232, 144
+  size: 16, 16    

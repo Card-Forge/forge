@@ -41,6 +41,7 @@
 	"Challenger 22",
 	"ClayGolem",
 	"Construct",
+	"Dog",
 	"Doppelganger",
 	"Eldrazi",
 	"Fox",
@@ -51,8 +52,10 @@
 	"Green Wiz2",
 	"Green Wiz3",
 	"Insect",
+	"Mummy",
 	"Ooze",
 	"Pirate",
+	"Raven",
 	"Red Wiz1",
 	"Red Wiz2",
 	"Red Wiz3",
@@ -60,7 +63,8 @@
 	"Sliver",
 	"White Wiz1",
 	"White Wiz2",
-	"White Wiz3"
+	"White Wiz3",
+	"Wild Rat"
 ],
 "pointsOfInterest": [
 	"Spawn",

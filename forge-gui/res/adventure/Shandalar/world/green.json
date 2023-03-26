@@ -34,6 +34,7 @@
 ],
 "enemies": [
 	"Ape",
+	"Badger",
 	"Bear",
 	"Beastmaster",
 	"Centaur",
@@ -60,6 +61,8 @@
 	"Hydra",
 	"Kavu",
 	"Ooze",
+	"Owl",
+	"Plant",
 	"Satyr",
 	"Snake",
 	"Spider",
