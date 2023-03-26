@@ -170,15 +170,10 @@ public class HumanPlaySpellAbility {
         game.clearTopLibsCast(ability);
 
         if (!prerequisitesMet) {
-            if (!ability.isTrigger()) {
-                GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c);
-                if (ability.getHostCard().isMadness()) {
-                    // if a player failed to play madness cost, move the card to graveyard
-                    Card newCard = game.getAction().moveToGraveyard(c, null);
-                    newCard.setDiscarded(true);
-                }
-            } else {
+            if (ability.isTrigger()) {
                 payment.refundPayment();
+            } else {
+                GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c);
             }
 
             if (manaTypeConversion || manaColorConversion || keywordColor) {

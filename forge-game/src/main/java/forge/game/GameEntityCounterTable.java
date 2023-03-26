@@ -177,7 +177,6 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
                     if (remember && ec.getValue() >= 1) {
                         cause.getHostCard().addRemembered(gm.getKey());
                     }
-
                 }
             }
         }
