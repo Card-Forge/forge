@@ -9,10 +9,7 @@ import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerPredicates;
@@ -68,6 +65,8 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
             GameEntityCounterTable table = new GameEntityCounterTable();
             for (final GameEntity ge : result) {
                 for (final CounterType ct : ge.getCounters().keySet()) {
+                    if (ct.is(CounterEnumType.MANASHARDS))
+                        continue;
                     ge.addCounter(ct, 1, p, table);
                 }
             }
