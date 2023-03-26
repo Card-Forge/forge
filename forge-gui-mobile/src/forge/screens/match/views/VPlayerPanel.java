@@ -260,6 +260,10 @@ public class VPlayerPanel extends FContainer {
         lblLife.update();
     }
 
+    public void updateShards() {
+        lblLife.updateShards();
+    }
+
     public void updateManaPool() {
         tabManaPool.update();
     }
@@ -505,6 +509,9 @@ public class VPlayerPanel extends FContainer {
                 //never vibrate more than two seconds regardless of life lost or poison counters gained
                 Gdx.input.vibrate(Math.min(vibrateDuration, 2000));
             }
+        }
+        private void updateShards() {
+            manaShards = player.getNumManaShards();
         }
 
         @Override

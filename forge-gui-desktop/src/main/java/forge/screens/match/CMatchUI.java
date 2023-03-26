@@ -553,6 +553,11 @@ public final class CMatchUI
     }
 
     @Override
+    public void updateShards(Iterable<PlayerView> shardsUpdate) {
+        //mobile adventure only..
+    }
+
+    @Override
     public void updateCards(final Iterable<CardView> cards) {
         for (final CardView c : cards) {
             final ZoneType zone = c.getZone();

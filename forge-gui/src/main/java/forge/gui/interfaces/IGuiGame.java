@@ -103,6 +103,7 @@ public interface IGuiGame {
     void updateManaPool(Iterable<PlayerView> manaPoolUpdate);
 
     void updateLives(Iterable<PlayerView> livesUpdate);
+    void updateShards(Iterable<PlayerView> shardsUpdate);
 
     void setPanelSelection(CardView hostCard);
 

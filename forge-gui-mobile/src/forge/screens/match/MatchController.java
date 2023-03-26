@@ -471,6 +471,13 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
+    public void updateShards(final Iterable<PlayerView> livesUpdate) {
+        for (final PlayerView p : livesUpdate) {
+            view.getPlayerPanel(p).updateShards();
+        }
+    }
+
+    @Override
     public void updateZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
         view.updateZones(zonesToUpdate);
     }
