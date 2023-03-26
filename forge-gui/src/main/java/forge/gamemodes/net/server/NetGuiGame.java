@@ -180,6 +180,11 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
+    public void updateShards(Iterable<PlayerView> shardsUpdate) {
+        //mobile adventure local game only..
+    }
+
+    @Override
     public void setPanelSelection(final CardView hostCard) {
         updateGameView();
         send(ProtocolMethod.setPanelSelection, hostCard);
