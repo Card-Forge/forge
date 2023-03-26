@@ -1,23 +1,229 @@
 {
-    "activeFile": "map/magetower_14.tmx",
+    "activeFile": "map/cave_19.tmx",
     "expandedProjectPaths": [
-        "map/main_story",
+        "tileset",
         "map",
         "obj",
-        "tileset"
+        "map/main_story"
     ],
+    "fileStates": {
+        "map/cave_1..tmx": {
+            "scale": 1.6941666666666666,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 239.64584358091494,
+                "y": 182.685686178062
+            }
+        },
+        "map/cave_10.tmx": {
+            "scale": 1.7317708333333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 118.95338345864663,
+                "y": 117.50977443609024
+            }
+        },
+        "map/cave_11.tmx": {
+            "scale": 0.9005208333333332,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 239.86119144013884,
+                "y": 136.0323886639676
+            }
+        },
+        "map/cave_12.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.9005208333333332,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 238.7507229612493,
+                "y": 136.0323886639676
+            }
+        },
+        "map/cave_13.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.7317708333333333,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 118.95338345864663,
+                "y": 117.50977443609024
+            }
+        },
+        "map/cave_14.tmx": {
+            "scale": 0.9005208333333332,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 473.0595720069404,
+                "y": 172.67784846732218
+            }
+        },
+        "map/cave_15.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.9005208333333332,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 474.17004048583,
+                "y": 172.67784846732218
+            }
+        },
+        "map/cave_17.tmx": {
+            "scale": 1.7317708333333333,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 240.21654135338346,
+                "y": 136.5654135338346
+            }
+        },
+        "map/cave_19.tmx": {
+            "scale": 0.8658854166666666,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 480.4330827067669,
+                "y": 320.4812030075188
+            }
+        },
+        "map/cave_2.tmx": {
+            "scale": 0.9005208333333332,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 473.0595720069404,
+                "y": 172.67784846732218
+            }
+        },
+        "map/cave_20.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.9005208333333332,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 471.9491035280509,
+                "y": 172.67784846732218
+            }
+        },
+        "map/cave_22.tmx": {
+            "scale": 0.254125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2176.094441711756,
+                "y": 1603.541564190851
+            }
+        },
+        "map/cave_3.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.9005208333333332,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 470.83863504916144,
+                "y": 172.67784846732218
+            }
+        },
+        "map/cave_4.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.9005208333333332,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 473.0595720069404,
+                "y": 172.67784846732218
+            }
+        },
+        "map/cave_5.tmx": {
+            "scale": 0.9005208333333332,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 473.0595720069404,
+                "y": 172.67784846732218
+            }
+        },
+        "map/cave_6.tmx": {
+            "scale": 0.9005208333333332,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 473.0595720069404,
+                "y": 172.67784846732218
+            }
+        },
+        "map/cave_7.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.9005208333333332,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 471.9491035280509,
+                "y": 172.67784846732218
+            }
+        },
+        "map/cave_8.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.7317708333333333,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 118.37593984962406,
+                "y": 117.50977443609024
+            }
+        },
+        "map/cave_9.tmx": {
+            "scale": 0.9005208333333332,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 473.0595720069404,
+                "y": 172.67784846732218
+            }
+        },
+        "tileset/buildings.tsx": {
+            "scaleInDock": 1
+        },
+        "tileset/main.tsx": {
+            "scaleInDock": 1
+        }
+    },
+    "openFiles": [
+        "map/cave_1..tmx",
+        "map/cave_2.tmx",
+        "map/cave_3.tmx",
+        "map/cave_4.tmx",
+        "map/cave_5.tmx",
+        "map/cave_6.tmx",
+        "map/cave_7.tmx",
+        "map/cave_8.tmx",
+        "map/cave_9.tmx",
+        "map/cave_11.tmx",
+        "map/cave_12.tmx",
+        "map/cave_20.tmx",
+        "map/cave_22.tmx",
+        "map/cave_10.tmx",
+        "map/cave_14.tmx",
+        "map/cave_13.tmx",
+        "map/cave_15.tmx",
+        "map/cave_17.tmx",
+        "map/cave_19.tmx"
+    ],
+    "project": "",
     "recentFiles": [
-        "map/xira.tmx",
-        "map/magetower_1.tmx",
-        "map/magetower_2.tmx",
-        "map/magetower_3.tmx",
-        "map/magetower_4.tmx",
-        "map/magetower_5.tmx",
-        "map/magetower_6.tmx",
-        "map/magetower_8.tmx",
-        "map/magetower_13.tmx",
-        "map/magetower_14.tmx",
-        "map/factory_4.tmx",
-        "map/factory_3.tmx"
+        "map/cave_1..tmx",
+        "map/cave_2.tmx",
+        "map/cave_3.tmx",
+        "map/cave_4.tmx",
+        "map/cave_5.tmx",
+        "map/cave_6.tmx",
+        "map/cave_7.tmx",
+        "map/cave_8.tmx",
+        "map/cave_9.tmx",
+        "map/cave_11.tmx",
+        "map/cave_12.tmx",
+        "map/cave_20.tmx"
     ]
 }
