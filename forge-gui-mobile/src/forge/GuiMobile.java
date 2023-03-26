@@ -154,7 +154,7 @@ public class GuiMobile implements IGuiBase {
             FThreads.invokeInEdtNowOrLater(new Runnable() {
                 @Override
                 public void run() {
-                    MapStage.getInstance().showImageDialog("Achievement Earned\n"+message, ((FBufferedImage)image).getTexture());
+                    MapStage.getInstance().showImageDialog("Achievement Earned\n"+message, (FBufferedImage)image);
                 }
             });
             return;
