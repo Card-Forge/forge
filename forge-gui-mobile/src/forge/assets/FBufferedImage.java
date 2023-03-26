@@ -19,6 +19,7 @@ public abstract class FBufferedImage extends FImageComplex {
     public FBufferedImage(float width0, float height0) {
         this(width0, height0, 1);
     }
+
     public FBufferedImage(float width0, float height0, float opacity0) {
         width = width0;
         height = height0;
@@ -73,7 +74,7 @@ public abstract class FBufferedImage extends FImageComplex {
             Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST); //prevent buffered image being clipped
 
             //render texture to frame buffer if needed
-            frameBuffer = new FrameBuffer(Format.RGBA8888, (int)width, (int)height, false);
+            frameBuffer = new FrameBuffer(Format.RGBA8888, (int) width, (int) height, false);
             frameBuffer.begin();
 
             //frame graphics must be given a projection matrix
@@ -93,6 +94,11 @@ public abstract class FBufferedImage extends FImageComplex {
             Gdx.gl.glEnable(GL20.GL_SCISSOR_TEST);
         }
         return frameBuffer;
+    }
+
+    public void dispose() {
+        if (frameBuffer != null)
+            frameBuffer.dispose();
     }
 
     protected abstract void draw(Graphics g, float w, float h);

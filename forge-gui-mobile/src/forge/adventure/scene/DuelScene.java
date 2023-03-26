@@ -105,6 +105,13 @@ public class DuelScene extends ForgeScene {
         boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
         Current.player().clearBlessing();
         if ((chaosBattle || showMessages) && !winner) {
+            final FBufferedImage fb = new FBufferedImage(120, 120) {
+                @Override
+                protected void draw(Graphics g, float w, float h) {
+                    if (FSkin.getAvatars().get(90001) != null)
+                        g.drawImage(FSkin.getAvatars().get(90001), 0, 0, w, h);
+                }
+            };
             callbackExit = true;
             List<String> insult = Lists.newArrayList("I'm sorry...", "... ....", "Learn from your defeat.",
                     "I haven't begun to use my full power.", "No matter how much you try, you still won't beat me.",
@@ -120,18 +127,13 @@ public class DuelScene extends ForgeScene {
                     "From today, you can call me teacher.", "Hmph, predictable!", "I haven't used a fraction of my REAL power!");
             String message = Aggregates.random(insult);
             boolean finalWinner = winner;
-            FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, enemyName, new FBufferedImage(120, 120) {
-                @Override
-                protected void draw(Graphics g, float w, float h) {
-                    if (FSkin.getAvatars().get(90001) != null)
-                        g.drawImage(FSkin.getAvatars().get(90001), 0, 0, w, h);
-                }
-            }, new Callback<Integer>() {
+            FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, enemyName, fb, new Callback<Integer>() {
                 @Override
                 public void run(Integer result) {
                     if (result == 0) {
                         afterGameEnd(enemyName, finalWinner, true, true);
                     }
+                    fb.dispose();
                 }
             }));
         } else {
@@ -349,6 +351,13 @@ public class DuelScene extends ForgeScene {
         MatchController.instance.setGameView(hostedMatch.getGameView());
         boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
         if (chaosBattle || showMessages) {
+            final FBufferedImage fb = new FBufferedImage(120, 120) {
+                @Override
+                protected void draw(Graphics g, float w, float h) {
+                    if (FSkin.getAvatars().get(90001) != null)
+                        g.drawImage(FSkin.getAvatars().get(90001), 0, 0, w, h);
+                }
+            };
             List<String> list = Lists.newArrayList("It all depends on your skill!", "It's showtime!", "Let's party!",
                     "You've proved yourself!", "Are you ready? Go!", "Prepare to strike, now!", "Let's go!", "What's next?",
                     "Yeah, I've been waitin' for this!", "The stage of battle is set!", "And the battle begins!", "Let's get started!",
@@ -359,14 +368,12 @@ public class DuelScene extends ForgeScene {
                     "Don't blink!", "You can't lose here!", "There's no turning back!", "It's all or nothing now!");
             String message = Aggregates.random(list);
             matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, () -> FThreads.invokeInEdtNowOrLater(() ->
-                    FOptionPane.showMessageDialog(message, enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride,
-                            new FBufferedImage(120, 120) {
-                                @Override
-                                protected void draw(Graphics g, float w, float h) {
-                                    if (FSkin.getAvatars().get(90001) != null)
-                                        g.drawImage(FSkin.getAvatars().get(90001), 0, 0, w, h);
-                                }
-                            }))), false, true);
+                    FOptionPane.showMessageDialog(message, enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride, fb, new Callback<Integer>() {
+                        @Override
+                        public void run(Integer result) {
+                            fb.dispose();
+                        }
+                    }))), false, true);
         } else {
             matchOverlay = new LoadingOverlay(null);
         }

@@ -519,6 +519,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         frameBuffer.end();
         batch.dispose();
         pixmap.dispose();
+        frameBuffer.dispose();
     }
 
     private void setItemTooltips(Sprite icon, Sprite backSprite) {

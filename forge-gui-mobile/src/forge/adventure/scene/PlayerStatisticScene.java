@@ -49,9 +49,12 @@ public class PlayerStatisticScene extends UIScene {
     ScrollPane scroller;
     Table root;
     boolean toggle = false;
+    AchievementCollection planeswalkers, achievements;
 
     private PlayerStatisticScene() {
         super(Forge.isLandscapeMode() ? "ui/statistic.json" : "ui/statistic_portrait.json");
+        planeswalkers = PlaneswalkerAchievements.instance;
+        achievements = FModel.getAchievements(GameType.Constructed);
         scrollContainer = new Table(Controls.getSkin());
         scrollContainer.row();
         achievementContainer = new Table(Controls.getSkin());
@@ -110,7 +113,14 @@ public class PlayerStatisticScene extends UIScene {
 
     @Override
     public void dispose() {
-
+        if (achievements != null) {
+            for (Achievement a : achievements)
+                ((FBufferedImage) a.getImage()).dispose();
+        }
+        if (planeswalkers != null) {
+            for (Achievement a : planeswalkers)
+                ((FBufferedImage) a.getImage()).dispose();
+        }
     }
 
     private void toggleScroller() {
@@ -153,8 +163,9 @@ public class PlayerStatisticScene extends UIScene {
     @Override
     public void enter() {
         super.enter();
-        updateAchievements(PlaneswalkerAchievements.instance, true);
-        updateAchievements(FModel.getAchievements(GameType.Constructed), false);
+        achievementContainer.clear();
+        updateAchievements(planeswalkers, true);
+        updateAchievements(achievements, false);
         scrollContainer.clear();
 
         if (playerName != null) {
@@ -205,8 +216,8 @@ public class PlayerStatisticScene extends UIScene {
         }
         performTouch(scrollPaneOfActor(scrollContainer)); //can use mouse wheel if available to scroll
     }
+
     void updateAchievements(AchievementCollection achievementCollection, boolean isPW) {
-        achievementContainer.clear();
         for (Achievement a : achievementCollection) {
             if (isPW) {
                 if (!a.isActive()) //skip inactive
