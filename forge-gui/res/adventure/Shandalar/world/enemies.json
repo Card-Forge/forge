@@ -115,6 +115,42 @@
 	"colors": "WU"
 },
 {
+	"name": "Akroma",
+	"sprite": "sprites/boss/akroma.atlas",
+	"deck": [
+		"decks/boss/akroma.dck"
+	],
+	"ai": "",
+	"boss": true,
+	"flying": true,
+	"speed": 1,
+	"life": 80,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Mox Pearl"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "White Key"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 1000,
+			"addMaxCount": 250
+		}
+	],
+	"equipment": [
+		"Mox Pearl"
+	],
+	"colors": "W"
+},
+{
 	"name": "Amonkhet Minotaur",
 	"sprite": "sprites/warden.atlas",
 	"deck": [
@@ -4211,6 +4247,36 @@
 	"colors": "G"
 },
 {
+	"name": "Emrakul",
+	"sprite": "sprites/boss/emrakul.atlas",
+	"deck": [
+		"decks/boss/emrakul.dck"
+	],
+	"ai": "",
+	"boss": true,
+	"flying": true,
+	"speed": 1,
+	"life": 100,
+	"rewards": [
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Sol Ring"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 5000,
+			"addMaxCount": 2500
+		}
+	],
+	"equipment": [
+		"Sol Ring"
+	],
+	"colors": "C"
+},
+{
 	"name": "Eye",
 	"sprite": "sprites/dungeon/eye.atlas",
 	"deck": [
@@ -4912,6 +4978,40 @@
 	"colors": "W"
 },
 {
+	"name": "Ghalta",
+	"sprite": "sprites/boss/ghalta.atlas",
+	"deck": [
+		"decks/boss/ghalta.dck"
+	],
+	"boss": true,
+	"speed": 1,
+	"life": 80,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Mox Emerald"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Green Key"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 1000,
+			"addMaxCount": 250
+		}
+	],
+	"equipment": [
+		"Mox Emerald"
+	],
+	"colors": "G"
+},
+{
 	"name": "Garruk",
 	"sprite": "sprites/dungeon/garruk.atlas",
 	"deck": [
@@ -5199,7 +5299,7 @@
 			"count": 2,
 			"addMaxCount": 4,
 			"rarity": [
-				"common",
+				"common"
 			]
 		},
 		{
@@ -5271,7 +5371,7 @@
 			"count": 2,
 			"addMaxCount": 4,
 			"rarity": [
-				"common",
+				"common"
 			]
 		},
 		{
@@ -5325,6 +5425,42 @@
 		}
 	],
 	"colors": "U"
+},
+{
+	"name": "Griselbrand",
+	"sprite": "sprites/boss/griselbrand.atlas",
+	"deck": [
+		"decks/boss/griselbrand.dck"
+	],
+	"ai": "",
+	"boss": true,
+	"flying": true,
+	"speed": 1,
+	"life": 80,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Mox Jet"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Black Key"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 1000,
+			"addMaxCount": 250
+		}
+	],
+	"equipment": [
+		"Mox Jet"
+	],
+	"colors": "B"
 },
 {
 	"name": "Grolnok",
@@ -5636,6 +5772,63 @@
 		}
 	],
 	"colors": "BR"
+},
+{
+	"name": "Goblin pack",
+	"sprite": "sprites/goblin_group.atlas",
+	"deck": [
+		"decks/goblin_bad.json"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 27,
+	"life": 8,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Red"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	],
+	"colors": "R",
+	"nextEnemy": {
+		"name": "Goblin",
+		"deck": [
+			"decks/goblin_bad.json"
+		],
+		"ai": "",
+		"life": 8,
+		"nextEnemy": {
+			"name": "Goblin",
+			"deck": [
+				"decks/goblin_bad.json"
+			],
+			"ai": "",
+			"life": 8,
+			"teamNumber": 1
+		},
+		"teamNumber": 1
+	},
+	"teamNumber": 1
 },
 {
 	"name": "Goblin Warrior",
@@ -7683,6 +7876,42 @@
 	"colors": "B"
 },
 {
+	"name": "Lathliss",
+	"sprite": "sprites/boss/lathiss.atlas",
+	"deck": [
+		"decks/boss/lathliss.dck"
+	],
+	"ai": "",
+	"boss": true,
+	"flying": true,
+	"speed": 1,
+	"life": 80,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Mox Ruby"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Red Key"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 1000,
+			"addMaxCount": 250
+		}
+	],
+	"equipment": [
+		"Mox Ruby"
+	],
+	"colors": "R"
+},
+{
 	"name": "Lightning Elemental",
 	"sprite": "sprites/lightningelemental.atlas",
 	"deck": [
@@ -7777,7 +8006,42 @@
 		}
 	],
 	"colors": "R"
-},{
+},
+{
+	"name": "Lorthos",
+	"sprite": "sprites/boss/lorthos.atlas",
+	"deck": [
+		"decks/boss/lorthos.dck"
+	],
+	"boss": true,
+	"speed": 1,
+	"life": 80,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Mox Sapphire"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Blue Key"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 1000,
+			"addMaxCount": 250
+		}
+	],
+	"equipment": [
+		"Mox Sapphire"
+	],
+	"colors": "U"
+},
+{
 	"name": "Magma Elemental",
 	"sprite": "sprites/magmaelemental.atlas",
 	"deck": [
@@ -10230,6 +10494,40 @@
 	"colors": "R"
 },
 {
+	"name": "Sliver Queen",
+	"sprite": "sprites/boss/sliver_queen.atlas",
+	"deck": [
+		"decks/boss/sliver_queen.dck"
+	],
+	"boss": true,
+	"speed": 1,
+	"life": 100,
+	"rewards": [
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Black Lotus"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Strange Key"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 2500,
+			"addMaxCount": 1000
+		}
+	],
+	"equipment": [
+		"Black Lotus"
+	],
+	"colors": "BGRUW"
+},
+{
 	"name": "Snake",
 	"sprite": "sprites/big_snake.atlas",
 	"deck": [
@@ -11820,79 +12118,6 @@
 	"colors": "G"
 },
 {
-	"name": "Yeti",
-	"sprite": "sprites/yeti_2.atlas",
-	"deck": [
-		"decks/yeti.dck"
-	],
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 25,
-	"life": 16,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
-		}
-	],
-	"colors": "GRU"
-},
-{
 	"name": "Vulture",
 	"sprite": "sprites/dungeon/vulture.atlas",
 	"deck": [
@@ -11936,6 +12161,67 @@
 		}
 	],
 	"colors": "B"
+},
+{
+	"name": "Water Elemental",
+	"sprite": "sprites/waterelemental.atlas",
+	"deck": [
+		"decks/water_elemental.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 23,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Blue"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	],
+	"colors": "U"
+},
+{
+	"name": "Wounded Sliver",
+	"sprite": "sprites/boss/wsliver.atlas",
+	"deck": [
+		"decks/miniboss/sliver_shandalar.dck"
+	],
+	"ai": "reckless",
+	"boss": true,
+	"life": 28,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 500,
+			"addMaxCount": 150
+		}
+	],
+	"colors": "GRW"
 },
 {
 	"name": "Xira",
@@ -12021,6 +12307,79 @@
 	"colors": "BGR"
 },
 {
+	"name": "Yeti",
+	"sprite": "sprites/yeti_2.atlas",
+	"deck": [
+		"decks/yeti.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 16,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "GRU"
+},
+{
 	"name": "Zombie",
 	"sprite": "sprites/zombie.atlas",
 	"deck": [
@@ -12093,363 +12452,5 @@
 		}
 	],
 	"colors": "B"
-},
-{
-	"name": "Water Elemental",
-	"sprite": "sprites/waterelemental.atlas",
-	"deck": [
-		"decks/water_elemental.dck"
-	],
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 23,
-	"life": 12,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4
-		},
-		{
-			"type": "gold",
-			"probability": 0.7,
-			"count": 10,
-			"addMaxCount": 90
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 3,
-			"colors": [
-				"Blue"
-			],
-			"rarity": [
-				"Rare"
-			]
-		}
-	],
-	"colors": "U"
-},
-{
-	"name": "Wounded Sliver",
-	"sprite": "sprites/boss/wsliver.atlas",
-	"deck": [
-		"decks/miniboss/sliver_shandalar.dck"
-	],
-	"ai": "reckless",
-	"boss": true,
-	"life": 28,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 500,
-			"addMaxCount": 150
-		}
-	],
-	"colors": "GRW"
-},
-{
-	"name": "Griselbrand",
-	"sprite": "sprites/boss/griselbrand.atlas",
-	"deck": [
-		"decks/boss/griselbrand.dck"
-	],
-	"ai": "",
-	"boss": true,
-	"flying": true,
-	"speed": 1,
-	"life": 80,
-	"rewards": [
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Mox Jet"
-		},
-		{
-			"type": "item",
-			"probability": 1,
-			"count": 1,
-			"itemName": "Black Key"
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 1000,
-			"addMaxCount": 250
-		}
-	],
-	"equipment": [
-		"Mox Jet"
-	],
-	"colors": "B"
-},
-{
-	"name": "Akroma",
-	"sprite": "sprites/boss/akroma.atlas",
-	"deck": [
-		"decks/boss/akroma.dck"
-	],
-	"ai": "",
-	"boss": true,
-	"flying": true,
-	"speed": 1,
-	"life": 80,
-	"rewards": [
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Mox Pearl"
-		},
-		{
-			"type": "item",
-			"probability": 1,
-			"count": 1,
-			"itemName": "White Key"
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 1000,
-			"addMaxCount": 250
-		}
-	],
-	"equipment": [
-		"Mox Pearl"
-	],
-	"colors": "W"
-},
-{
-	"name": "Ghalta",
-	"sprite": "sprites/boss/ghalta.atlas",
-	"deck": [
-		"decks/boss/ghalta.dck"
-	],
-	"boss": true,
-	"speed": 1,
-	"life": 80,
-	"rewards": [
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Mox Emerald"
-		},
-		{
-			"type": "item",
-			"probability": 1,
-			"count": 1,
-			"itemName": "Green Key"
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 1000,
-			"addMaxCount": 250
-		}
-	],
-	"equipment": [
-		"Mox Emerald"
-	],
-	"colors": "G"
-},
-{
-	"name": "Lorthos",
-	"sprite": "sprites/boss/lorthos.atlas",
-	"deck": [
-		"decks/boss/lorthos.dck"
-	],
-	"boss": true,
-	"speed": 1,
-	"life": 80,
-	"rewards": [
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Mox Sapphire"
-		},
-		{
-			"type": "item",
-			"probability": 1,
-			"count": 1,
-			"itemName": "Blue Key"
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 1000,
-			"addMaxCount": 250
-		}
-	],
-	"equipment": [
-		"Mox Sapphire"
-	],
-	"colors": "U"
-},
-{
-	"name": "Lathliss",
-	"sprite": "sprites/boss/lathiss.atlas",
-	"deck": [
-		"decks/boss/lathliss.dck"
-	],
-	"ai": "",
-	"boss": true,
-	"flying": true,
-	"speed": 1,
-	"life": 80,
-	"rewards": [
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"cardName": "Mox Ruby"
-		},
-		{
-			"type": "item",
-			"probability": 1,
-			"count": 1,
-			"itemName": "Red Key"
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 1000,
-			"addMaxCount": 250
-		}
-	],
-	"equipment": [
-		"Mox Ruby"
-	],
-	"colors": "R"
-},
-{
-	"name": "Emrakul",
-	"sprite": "sprites/boss/emrakul.atlas",
-	"deck": [
-		"decks/boss/emrakul.dck"
-	],
-	"ai": "",
-	"boss": true,
-	"flying": true,
-	"speed": 1,
-	"life": 100,
-	"rewards": [
-		{
-			"type": "item",
-			"probability": 1,
-			"count": 1,
-			"itemName": "Sol Ring"
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 5000,
-			"addMaxCount": 2500
-		}
-	],
-	"equipment": [
-		"Sol Ring"
-	],
-	"colors": "C"
-},
-{
-	"name": "Sliver Queen",
-	"sprite": "sprites/boss/sliver_queen.atlas",
-	"deck": [
-		"decks/boss/sliver_queen.dck"
-	],
-	"boss": true,
-	"speed": 1,
-	"life": 100,
-	"rewards": [
-		{
-			"type": "item",
-			"probability": 1,
-			"count": 1,
-			"itemName": "Black Lotus"
-		},
-		{
-			"type": "item",
-			"probability": 1,
-			"count": 1,
-			"itemName": "Strange Key"
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 2500,
-			"addMaxCount": 1000
-		}
-	],
-	"equipment": [
-		"Black Lotus"
-	],
-	"colors": "BGRUW"
-},
-{
-	"name": "Goblin pack",
-	"sprite": "sprites/goblin_group.atlas",
-	"deck": [
-		"decks/goblin_bad.json"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 27,
-	"life": 8,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4
-		},
-		{
-			"type": "gold",
-			"probability": 0.7,
-			"count": 10,
-			"addMaxCount": 90
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 3,
-			"colors": [
-				"Red"
-			],
-			"rarity": [
-				"Rare"
-			]
-		}
-	],
-	"colors": "R",
-	"nextEnemy": {
-		"name": "Goblin",
-		"deck": [
-			"decks/goblin_bad.json"
-		],
-		"ai": "",
-		"life": 8,
-		"nextEnemy": {
-			"name": "Goblin",
-			"deck": [
-				"decks/goblin_bad.json"
-			],
-			"ai": "",
-			"life": 8,
-			"teamNumber": 1
-		},
-		"teamNumber": 1
-	},
-	"teamNumber": 1
 }
 ]

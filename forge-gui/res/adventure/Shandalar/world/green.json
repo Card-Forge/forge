@@ -75,9 +75,9 @@
 	"Wurm"
 ],
 "pointsOfInterest": [
-	"CatLair 1",
-	"CatLair 2",
-	"CatLair 3",
+	"CatLairG",
+	"CatLairG1",
+	"CatLairG2",
 	"CaveG",
 	"CaveG1",
 	"CaveG2",
@@ -105,7 +105,6 @@
 	"Grove7",
 	"Grove8",
 	"Kavu Lair",
-	"MageTower Green",
 	"Scarecrow Farm",
 	"Slime Cave",
 	"WurmPond"

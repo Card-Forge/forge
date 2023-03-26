@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="90">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="92">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -37,10 +37,16 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../obj/treasure.tx" x="208" y="48.4166"/>
+  <object id="48" template="../obj/treasure.tx" x="208" y="48.4166">
+   <properties>
+    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;Black&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Staff of the Death Magus&quot;}]"/>
+   </properties>
+  </object>
   <object id="50" template="../obj/enemy.tx" x="207.902" y="90.5586">
    <properties>
     <property name="enemy" value="Necromancer"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="88,87"/>
    </properties>
   </object>
   <object id="54" template="../obj/enemy.tx" x="128.5" y="145.5">
@@ -97,7 +103,7 @@
    <properties>
     <property name="enemy" value="Reassembling Skeleton"/>
     <property name="threatRange" type="int" value="10"/>
-    <property name="waypoints" value="87,86,73,80,89"/>
+    <property name="waypoints" value="78,81"/>
    </properties>
   </object>
   <object id="71" template="../obj/enemy.tx" x="261.667" y="188.833">
@@ -149,5 +155,19 @@
   <object id="87" template="../obj/waypoint.tx" x="207" y="110.5"/>
   <object id="88" template="../obj/waypoint.tx" x="207" y="71.5"/>
   <object id="89" template="../obj/waypoint.tx" x="161" y="233"/>
+  <object id="90" template="../obj/enemy.tx" x="135.5" y="116">
+   <properties>
+    <property name="enemy" value="Reassembling Skeleton"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value="76,75"/>
+   </properties>
+  </object>
+  <object id="91" template="../obj/enemy.tx" x="323.5" y="108">
+   <properties>
+    <property name="enemy" value="Reassembling Skeleton"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value="81,82"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
