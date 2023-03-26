@@ -23,7 +23,6 @@ import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.game.GameRules;
 import forge.game.GameType;
-import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
@@ -96,7 +95,7 @@ public class DuelScene extends ForgeScene {
             //TODO: Progress towards applicable Adventure quests also needs to be reported here.
             List<PlayerControllerHuman> humans = hostedMatch.getHumanControllers();
             if (humans.size() == 1) {
-                Current.player().setShards(humans.get(0).getPlayer().getCounters(CounterEnumType.MANASHARDS));
+                Current.player().setShards(humans.get(0).getPlayer().getNumManaShards());
             }
         } catch (Exception e) {
             e.printStackTrace();

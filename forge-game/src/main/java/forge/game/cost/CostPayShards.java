@@ -19,7 +19,6 @@ package forge.game.cost;
 
 import com.google.common.base.Strings;
 import forge.game.card.Card;
-import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -47,7 +46,7 @@ public class CostPayShards extends CostPart {
 
     @Override
     public Integer getMaxAmountX(final SpellAbility ability, final Player payer, final boolean effect) {
-        return payer.getCounters(CounterEnumType.MANASHARDS);
+        return payer.getNumManaShards();
     }
 
     /*
@@ -83,7 +82,7 @@ public class CostPayShards extends CostPart {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
-        return payer.getCounters(CounterEnumType.MANASHARDS) >= this.getAbilityAmount(ability);
+        return payer.getNumManaShards() >= this.getAbilityAmount(ability);
     }
 
     @Override

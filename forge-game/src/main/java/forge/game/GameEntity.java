@@ -19,7 +19,6 @@ package forge.game;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -281,10 +280,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
 
     // Counters!
     public boolean hasCounters() {
-        if (counters.isEmpty())
-            return false;
-        int size = counters.entrySet().stream().filter(ct -> !ct.getKey().is(CounterEnumType.MANASHARDS)).collect(Collectors.toList()).size();
-        return size > 0;
+        return !counters.isEmpty();
     }
 
     // get all counters from a card

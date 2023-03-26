@@ -394,7 +394,6 @@ public enum CounterEnumType {
     POISON("POISN"),
 
     TICKET("TICKET"),
-    MANASHARDS("MANASHARDS"), //Adventure-specific mechanic
 
     // Keyword Counters
 /*
