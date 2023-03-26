@@ -78,6 +78,8 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
         goldLabel = ui.findActor("gold");
         ui.onButtonPress("done", () -> {
+            if (!enable)
+                return;
             if (!arenaStarted)
                 ArenaScene.this.done();
             else

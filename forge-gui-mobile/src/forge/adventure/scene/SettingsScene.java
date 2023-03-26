@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalTime;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
 
@@ -38,43 +39,42 @@ public class SettingsScene extends UIScene {
 
     SelectBox selectSourcePlane;
     TextField newPlaneName;
+
     private void copyNewPlane() {
-        String plane=(String) selectSourcePlane.getSelected();
-        Path source= Paths.get(Config.instance().getPlanePath(plane));
-        Path destination= Paths.get(Config.instance().getPlanePath("<user>"+newPlaneName.getText()));
-        AtomicBoolean somethingWentWrong= new AtomicBoolean(false);
-        try (Stream<Path> stream = Files.walk(source))
-        {
+        String plane = (String) selectSourcePlane.getSelected();
+        Path source = Paths.get(Config.instance().getPlanePath(plane));
+        Path destination = Paths.get(Config.instance().getPlanePath("<user>" + newPlaneName.getText()));
+        AtomicBoolean somethingWentWrong = new AtomicBoolean(false);
+        try (Stream<Path> stream = Files.walk(source)) {
             Files.createDirectories(destination);
             stream.forEach(s -> {
-                try { Files.copy(s, destination.resolve(source.relativize(s)), REPLACE_EXISTING); }
-                catch (IOException e) {
+                try {
+                    Files.copy(s, destination.resolve(source.relativize(s)), REPLACE_EXISTING);
+                } catch (IOException e) {
                     somethingWentWrong.set(true);
                 }
             });
         } catch (IOException e) {
             somethingWentWrong.set(true);
         }
-        if(somethingWentWrong.get())
-        {
-            Dialog dialog=prepareDialog("Something went wrong", ButtonOk|ButtonAbort,null);
+        if (somethingWentWrong.get()) {
+            Dialog dialog = prepareDialog("Something went wrong", ButtonOk | ButtonAbort, null);
             dialog.text("Copy was not successful check your access right\n and if the folder is in use");
             showDialog(dialog);
-        }
-        else
-        {
-            Dialog dialog=prepareDialog("Copied plane", ButtonOk|ButtonAbort,null);
-            dialog.text("New plane "+newPlaneName.getText()+" was created\nYou can now start the editor to change the plane\n" +
+        } else {
+            Dialog dialog = prepareDialog("Copied plane", ButtonOk | ButtonAbort, null);
+            dialog.text("New plane " + newPlaneName.getText() + " was created\nYou can now start the editor to change the plane\n" +
                     "or edit it manually from the folder\n" +
-                    Config.instance().getPlanePath("<user>"+newPlaneName.getText()));
-            Config.instance().getSettingData().plane = "<user>"+newPlaneName.getText();
+                    Config.instance().getPlanePath("<user>" + newPlaneName.getText()));
+            Config.instance().getSettingData().plane = "<user>" + newPlaneName.getText();
             Config.instance().saveSettings();
             showDialog(dialog);
         }
 
     }
+
     private void createNewPlane() {
-        Dialog dialog=prepareDialog("Create your own Plane", ButtonOk|ButtonAbort,()->copyNewPlane());
+        Dialog dialog = prepareDialog("Create your own Plane", ButtonOk | ButtonAbort, () -> copyNewPlane());
         dialog.text("Select a plane to copy");
         dialog.getContentTable().row();
         dialog.getContentTable().add(selectSourcePlane);
@@ -82,7 +82,7 @@ public class SettingsScene extends UIScene {
         dialog.text("Set new plane name");
         dialog.getContentTable().row();
         dialog.getContentTable().add(newPlaneName);
-        newPlaneName.setText(selectSourcePlane.getSelected().toString()+"_copy");
+        newPlaneName.setText(selectSourcePlane.getSelected().toString() + "_copy");
         dialog.show(stage);
     }
 
@@ -101,7 +101,7 @@ public class SettingsScene extends UIScene {
             Config.instance().saveSettings();
             return null;
         });
-        newPlane=Controls.newTextButton("Create own plane");
+        newPlane = Controls.newTextButton("Create own plane");
         newPlane.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -110,7 +110,7 @@ public class SettingsScene extends UIScene {
         });
         addLabel(Forge.getLocalizer().getMessage("lblWorld"));
         settingGroup.add(plane).align(Align.right).pad(2);
-        addLabel(Forge.getLocalizer().getMessage("lblCreate")+Forge.getLocalizer().getMessage("lblWorld"));
+        addLabel(Forge.getLocalizer().getMessage("lblCreate") + Forge.getLocalizer().getMessage("lblWorld"));
         settingGroup.add(newPlane).align(Align.right).pad(2);
 
         if (!GuiBase.isAndroid()) {
@@ -145,7 +145,7 @@ public class SettingsScene extends UIScene {
         }
         if (Forge.isLandscapeMode()) {
             //different adjustment to landscape
-            SelectBox rewardCardAdjLandscape = Controls.newComboBox(new Float[]{0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f, 1f, 1.05f, 1.1f, 1.15f, 1.2f, 1.25f, 1.3f, 1.35f, 1.4f, 1.45f, 1.5f, 1.55f, 1.6f}, Config.instance().getSettingData().rewardCardAdjLandscape, o -> {
+            SelectBox rewardCardAdjLandscape = Controls.newComboBox(new Float[]{0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f, 0.95f, 1f, 1.05f, 1.1f, 1.15f, 1.2f, 1.25f, 1.3f, 1.35f, 1.4f, 1.45f, 1.5f, 1.55f, 1.6f}, Config.instance().getSettingData().rewardCardAdjLandscape, o -> {
                 Float val = (Float) o;
                 if (val == null || val == 0f)
                     val = 1f;
@@ -155,7 +155,7 @@ public class SettingsScene extends UIScene {
             });
             addLabel("Reward/Shop Card Display Ratio");
             settingGroup.add(rewardCardAdjLandscape).align(Align.right).pad(2);
-            SelectBox tooltipAdjLandscape = Controls.newComboBox(new Float[]{0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f, 1f, 1.05f, 1.1f, 1.15f, 1.2f, 1.25f, 1.3f, 1.35f, 1.4f, 1.45f, 1.5f, 1.55f, 1.6f}, Config.instance().getSettingData().cardTooltipAdjLandscape, o -> {
+            SelectBox tooltipAdjLandscape = Controls.newComboBox(new Float[]{0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f, 0.95f, 1f, 1.05f, 1.1f, 1.15f, 1.2f, 1.25f, 1.3f, 1.35f, 1.4f, 1.45f, 1.5f, 1.55f, 1.6f}, Config.instance().getSettingData().cardTooltipAdjLandscape, o -> {
                 Float val = (Float) o;
                 if (val == null || val == 0f)
                     val = 1f;
@@ -195,6 +195,7 @@ public class SettingsScene extends UIScene {
                     boolean value = ((CheckBox) actor).isChecked();
                     Config.instance().getSettingData().fullScreen = value;
                     Config.instance().saveSettings();
+                    setTargetTime(LocalTime.now().getHour());
                     //update
                     if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_FULLSCREEN_MODE) != value) {
                         FModel.getPreferences().setPref(ForgePreferences.FPref.UI_LANDSCAPE_MODE, value);
@@ -203,6 +204,17 @@ public class SettingsScene extends UIScene {
                 }
             });
         }
+        addSettingField(Forge.getLocalizer().getMessage("lblDay") + " | " + Forge.getLocalizer().getMessage("lblNight") + " " + Forge.getLocalizer().getMessage("lblBackgroundImage"), Config.instance().getSettingData().dayNightBG, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                boolean value = ((CheckBox) actor).isChecked();
+                Config.instance().getSettingData().dayNightBG = value;
+                Config.instance().saveSettings();
+                if (value) {
+                    updateBG(true);
+                }
+            }
+        });
         addCheckBox(Forge.getLocalizer().getMessage("lblCardName"), ForgePreferences.FPref.UI_OVERLAY_CARD_NAME);
         addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustMusicVolume"), ForgePreferences.FPref.UI_VOL_MUSIC, 0, 100);
         addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustSoundsVolume"), ForgePreferences.FPref.UI_VOL_SOUNDS, 0, 100);
@@ -233,12 +245,10 @@ public class SettingsScene extends UIScene {
         backButton = ui.findActor("return");
         ui.onButtonPress("return", SettingsScene.this::back);
 
-        ScrollPane scrollPane = ui.findActor("settings");
+        scrollPane = ui.findActor("settings");
         scrollPane.setActor(settingGroup);
         addToSelectable(settingGroup);
     }
-
-
 
 
     public boolean back() {
@@ -318,11 +328,10 @@ public class SettingsScene extends UIScene {
     private static SettingsScene object;
 
     public static SettingsScene instance() {
-        if(object==null)
-            object=new SettingsScene();
+        if (object == null)
+            object = new SettingsScene();
         return object;
     }
-
 
 
     @Override

@@ -130,29 +130,11 @@
     {
       "type": "TextButton",
       "name": "toggleAward",
-      "text": "[%125][+AWARD]",
+      "text": "[%120][+AWARD]",
       "width": 30,
       "height": 30,
       "x": 315,
       "y": 224
-    },
-    {
-      "type": "Image",
-      "name": "lifeIcon",
-      "image": "ui/life.png",
-      "x": 392,
-      "y": 40,
-      "width": 16,
-      "height": 16
-    },
-    {
-      "type": "Image",
-      "name": "goldIcon",
-      "image": "ui/money.png",
-      "x": 392,
-      "y": 60,
-      "width": 16,
-      "height": 16
     },
     {
       "type": "Label",
@@ -166,19 +148,25 @@
     {
       "type": "Label",
       "name": "lifePoints",
-      "fontColor":"black",
       "width": 64,
       "height": 16,
-      "x": 410,
+      "x": 394,
       "y": 40
     },
     {
       "type": "Label",
       "name": "money",
-      "fontColor":"black",
       "width": 64,
       "height": 16,
-      "x": 410,
+      "x": 394,
+      "y": 80
+    },
+    {
+      "type": "Label",
+      "name": "shards",
+      "width": 64,
+      "height": 16,
+      "x": 394,
       "y": 60
     },
     {

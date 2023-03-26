@@ -28,6 +28,7 @@ import forge.card.ColorSet;
 import forge.game.GameType;
 import forge.localinstance.achievements.Achievement;
 import forge.localinstance.achievements.AchievementCollection;
+import forge.localinstance.achievements.PlaneswalkerAchievements;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import org.apache.commons.lang3.tuple.Pair;
@@ -35,9 +36,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.Map;
 
 public class PlayerStatisticScene extends UIScene {
-    Image avatar, avatarBorder, lifeIcon, goldIcon;
+    Image avatar, avatarBorder;
     Image colorFrame;
-    TextraLabel money, life;
+    TextraLabel money, life, shards;
     TextraLabel wins, totalWins;
     TextraLabel loss, totalLoss;
     TextraLabel winloss, lossWinRatio;
@@ -48,10 +49,12 @@ public class PlayerStatisticScene extends UIScene {
     ScrollPane scroller;
     Table root;
     boolean toggle = false;
-    AchievementCollection achievements;
+    AchievementCollection planeswalkers, achievements;
 
     private PlayerStatisticScene() {
         super(Forge.isLandscapeMode() ? "ui/statistic.json" : "ui/statistic_portrait.json");
+        planeswalkers = PlaneswalkerAchievements.instance;
+        achievements = FModel.getAchievements(GameType.Constructed);
         scrollContainer = new Table(Controls.getSkin());
         scrollContainer.row();
         achievementContainer = new Table(Controls.getSkin());
@@ -65,8 +68,7 @@ public class PlayerStatisticScene extends UIScene {
         playerName = ui.findActor("playerName");
         life = ui.findActor("lifePoints");
         money = ui.findActor("money");
-        lifeIcon = ui.findActor("lifeIcon");
-        goldIcon = ui.findActor("goldIcon");
+        shards = ui.findActor("shards");
         wins = ui.findActor("wins");
         colorFrame = ui.findActor("colorFrame");
         totalWins = ui.findActor("totalWins");
@@ -111,7 +113,14 @@ public class PlayerStatisticScene extends UIScene {
 
     @Override
     public void dispose() {
-
+        if (achievements != null) {
+            for (Achievement a : achievements)
+                ((FBufferedImage) a.getImage()).dispose();
+        }
+        if (planeswalkers != null) {
+            for (Achievement a : planeswalkers)
+                ((FBufferedImage) a.getImage()).dispose();
+        }
     }
 
     private void toggleScroller() {
@@ -154,27 +163,9 @@ public class PlayerStatisticScene extends UIScene {
     @Override
     public void enter() {
         super.enter();
-        achievements = FModel.getAchievements(GameType.Constructed);
         achievementContainer.clear();
-        for (Achievement a : achievements) {
-            GameType g = GameType.smartValueOf(a.getKey());
-            if (g != null) //skip variants
-                continue;
-            TextureRegion textureRegion = new TextureRegion(((FBufferedImage) a.getImage()).getTexture());
-            textureRegion.flip(true, true);
-            Image image = new Image(textureRegion);
-            float alpha = a.isActive() ? 1f : 0.25f;
-            image.getColor().a = alpha;
-            achievementContainer.add(image).height(50).width(40).center().pad(5);
-            String value = "[%105]" + a.getDisplayName() + "[%98]";
-            String subTitle = a.getSubTitle(true);
-            if (subTitle != null)
-                value += "\n" + subTitle;
-            TextraLabel label = Controls.newTextraLabel(value);
-            label.getColor().a = alpha;
-            achievementContainer.add(label).left().pad(5);
-            achievementContainer.row();
-        }
+        updateAchievements(planeswalkers, true);
+        updateAchievements(achievements, false);
         scrollContainer.clear();
 
         if (playerName != null) {
@@ -184,10 +175,13 @@ public class PlayerStatisticScene extends UIScene {
             avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
         }
         if (life != null) {
-            AdventurePlayer.current().onLifeChange(() -> life.setText(AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
+            AdventurePlayer.current().onLifeChange(() -> life.setText("[+Life] [BLACK]" + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
         }
         if (money != null) {
-            WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText(String.valueOf(AdventurePlayer.current().getGold())));
+            WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("[+Gold] [BLACK]" + AdventurePlayer.current().getGold()));
+        }
+        if (shards != null) {
+            WorldSave.getCurrentSave().getPlayer().onShardsChange(() -> shards.setText("[+Shards] [BLACK]" + AdventurePlayer.current().getShards()));
         }
         if (totalWins != null) {
             totalWins.setText(String.valueOf(Current.player().getStatistic().totalWins()));
@@ -221,5 +215,32 @@ public class PlayerStatisticScene extends UIScene {
             scrollContainer.row();
         }
         performTouch(scrollPaneOfActor(scrollContainer)); //can use mouse wheel if available to scroll
+    }
+
+    void updateAchievements(AchievementCollection achievementCollection, boolean isPW) {
+        for (Achievement a : achievementCollection) {
+            if (isPW) {
+                if (!a.isActive()) //skip inactive
+                    continue;
+            } else {
+                GameType g = GameType.smartValueOf(a.getKey());
+                if (g != null) //skip variants
+                    continue;
+            }
+            TextureRegion textureRegion = new TextureRegion(((FBufferedImage) a.getImage()).getTexture());
+            textureRegion.flip(true, true);
+            Image image = new Image(textureRegion);
+            float alpha = a.isActive() ? 1f : 0.25f;
+            image.getColor().a = alpha;
+            achievementContainer.add(image).height(50).width(40).center().pad(5);
+            String value = "[%105]" + a.getDisplayName() + "[%98]";
+            String subTitle = a.getSubTitle(true);
+            if (subTitle != null)
+                value += "\n" + subTitle;
+            TextraLabel label = Controls.newTextraLabel(value);
+            label.getColor().a = alpha;
+            achievementContainer.add(label).left().pad(5);
+            achievementContainer.row();
+        }
     }
 }

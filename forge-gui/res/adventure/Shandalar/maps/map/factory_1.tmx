@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="89">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="93">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -7,7 +7,7 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJytVcERwyAM44+ZgHSxZBbKo1OlTXcrPHznggBD6zu9giVsy2QjYw5nzJPa2NP3jWr08mQOnyvzbwm98A2tVyfPA/5fdEdnOU6q75d7cDg9V+aIblyjNvxkDbNxt9+ICSHhUurms8wTrU4TeTHrzMxsZb6eat08o1N4fUU32LqPEhfQLfnepOdgXVRPC3L3ZnNbupq3o6wL9QLx7GDneD+1b4e2HhnoDdAGqqXldU0Eq9srxIn6gHRDsfsyt3fPchZorgzk7Z6fR7sg79r6r634ecUz/9gjDR6uxgfEW3Hf
+   eJytVMENwyAM9DMVMAHpYsksNI9uU3WBtOk6VccoPJAoPhwT1dJJkYLvsH1mtESzI3rYNqb4f7QcUl6Zk8/V+ecIKXxD6ynkecDf0v2ciN4n/o049mK1/H6pB7PjXPeB6Dbw78SxuP0ateE7a+iNi/nFEhEiNmWf09nMsxi9Lponmlmrz0fm6y3XTTNaC6/3+DmfDYb3sQSqt+Z7WZljA7qonhZSZG/35rZ0NW9HXdcGeBHPBHYu76f27dDWUwZ6A7SBakHvrtavwej2CnGiPiDdUO1+mSvdU5pFrYu8Lfl5bxfKu+b+It1ePx/xzD/2SIOr4/gCMTp8IA==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -136,5 +136,21 @@
   <object id="86" template="../obj/waypoint.tx" x="411.333" y="70.6667"/>
   <object id="87" template="../obj/waypoint.tx" x="410.667" y="32.6667"/>
   <object id="88" template="../obj/waypoint.tx" x="82.1667" y="211"/>
+  <object id="89" template="../obj/enemy.tx" x="222" y="54.5">
+   <properties>
+    <property name="enemy" value="Construct"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="78,85"/>
+   </properties>
+  </object>
+  <object id="90" template="../obj/enemy.tx" x="79.5" y="133">
+   <properties>
+    <property name="enemy" value="Construct"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="92,91"/>
+   </properties>
+  </object>
+  <object id="91" template="../obj/waypoint.tx" x="128" y="132"/>
+  <object id="92" template="../obj/waypoint.tx" x="28" y="132.5"/>
  </objectgroup>
 </map>

@@ -166,6 +166,26 @@
 		"playMode": 2,
 		"crushMode": 0
 	},
+	"transwindow10Patch": {
+		"region": "transwindow",
+		"horizontalStretchAreas": [ 2, 13 ],
+		"verticalStretchAreas": [ 2, 13 ],
+		"tiling": true,
+		"minWidth": 16,
+		"minHeight": 16,
+		"rightWidth": 4,
+		"leftWidth": 4,
+		"bottomHeight": 4,
+		"topHeight": 4,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
+	},
 	"pressed10Patch": {
 		"region": "pressed",
 		"horizontalStretchAreas": [ 3, 10 ],
@@ -443,6 +463,9 @@
 	"gold": {
 		"background": "9patch4"
 	},
+	"transluscent": {
+		"background": "transwindow10Patch"
+	},
 	"nobg": {
 		"background": "transparent"
 	}
@@ -547,6 +570,11 @@
 	"paper": {
 		"parent": "default",
 		"background": "paper10Patch",
+		"titleFont": "default"
+	},
+	"transluscent": {
+		"parent": "default",
+		"background": "transwindow10Patch",
 		"titleFont": "default"
 	},
 	"gold": {

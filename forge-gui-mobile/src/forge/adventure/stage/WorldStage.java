@@ -154,6 +154,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     @Override
     public void setWinner(boolean playerIsWinner) {
         if (playerIsWinner) {
+            currentMob.clearCollisionHeight();
             Current.player().win();
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
             currentMob.playEffect(Paths.EFFECT_BLOOD, 0.5f);
@@ -161,6 +162,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 @Override
                 public void run() {
                     currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
+                    currentMob.resetCollisionHeight();
                     startPause(0.3f, () -> {
                         RewardScene.instance().loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
                         WorldStage.this.removeEnemy(currentMob);
@@ -170,9 +172,11 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 }
             }, 1f);
         } else {
+            currentMob.clearCollisionHeight();
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
             startPause(0.5f, () -> {
+                currentMob.resetCollisionHeight();
                 Current.player().defeated();
                 WorldStage.this.removeEnemy(currentMob);
                 currentMob = null;

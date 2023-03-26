@@ -1,0 +1,12 @@
+Name:Holga, Relentless Rager
+ManaCost:4 R R
+Types:Legendary Creature Human Barbarian
+PT:4/6
+K:Haste
+K:CARDNAME must be blocked if able.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerZone$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, each creature you control attacking a player gets +1/+0 until end of turn for each creature that player controls.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatCards$ Creature.attacking Player | RepeatSubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Remembered | NumAtt$ X
+SVar:X:Count$Valid Creature.DefenderCtrlForRemembered
+SVar:HasAttackEffect:TRUE
+Oracle:Haste\nHolga, Relentless Rager must be blocked if able.\nWhenever Holga attacks, each creature you control attacking a player gets +1/+0 until end of turn for each creature that player controls.

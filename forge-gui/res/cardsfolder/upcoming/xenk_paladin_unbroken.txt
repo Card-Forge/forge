@@ -1,0 +1,8 @@
+Name:Xenk, Paladin Unbroken
+ManaCost:2 W W
+Types:Legendary Creature Human Knight
+PT:2/4
+K:Double Strike
+S:Mode$ Continuous | Affected$ Aura.YouCtrl | AddKeyword$ Exalted | Description$ Auras you control have exalted. (Whenever a creature you control attacks alone, it gets +1/+1 until end of turn for each instance of exalted among permanents you control.)
+DeckNeeds:Type$Aura
+Oracle:Double strike\nAuras you control have exalted. (Whenever a creature you control attacks alone, it gets +1/+1 until end of turn for each instance of exalted among permanents you control.)

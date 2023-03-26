@@ -411,3 +411,12 @@ FrogSkin
 BurningBook
   xy: 239,815
   size: 18, 18
+GreenLeaf
+  xy: 48, 496
+  size: 16, 16
+GreenLeaf2
+  xy: 112, 608
+  size: 16, 16
+SearchPost
+  xy: 384, 63
+  size: 16, 16

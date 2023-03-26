@@ -5,7 +5,7 @@ PT:3/4
 K:Reach
 T:Mode$ ChangesZoneAll | ValidCards$ Land.YouOwn+nonToken | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigLifegain | TriggerDescription$ Whenever one or more land cards are put into your graveyard from anywhere, you gain 2 life.
 SVar:TrigLifegain:DB$ GainLife | LifeAmount$ 2
-T:Mode$ Phase | Phase$ Upkeep | CheckSVar$ X | SVarCompare$ GE4 | IsPresent$ Card.Self+YouOwn | IsPresent2$ Land.YouCtrl+YouOwn+namedArgoth; Sanctum of Nature | ValidPlayer$ You | Execute$ Meld | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if you both own and control CARDNAME and a land named Argoth, Sanctum of Nature, exile them, then meld them into Titania, Gaea Incarnate.
+T:Mode$ Phase | Phase$ Upkeep | CheckSVar$ X | SVarCompare$ GE4 | IsPresent$ Card.Self+YouOwn | IsPresent2$ Land.YouCtrl+YouOwn+namedArgoth; Sanctum of Nature | ValidPlayer$ You | Execute$ Meld | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if there are four or more land cards in your graveyard and you both own and control CARDNAME and a land named Argoth, Sanctum of Nature, exile them, then meld them into Titania, Gaea Incarnate.
 SVar:Meld:DB$ Meld | Name$ Titania, Gaea Incarnate | Primary$ Titania, Voice of Gaea | Secondary$ Argoth, Sanctum of Nature | SecondaryType$ Land
 DeckHints:Name$Argoth, Sanctum of Nature
 MeldPair:Argoth, Sanctum of Nature

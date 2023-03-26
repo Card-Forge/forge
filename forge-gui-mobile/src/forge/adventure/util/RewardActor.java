@@ -2,14 +2,10 @@ package forge.adventure.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
@@ -276,22 +272,14 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             case Item: {
                 TextureAtlas atlas = Config.instance().getAtlas(ITEMS_ATLAS);
                 Sprite backSprite = atlas.createSprite("CardBack");
-                Pixmap drawingMap = new Pixmap((int) backSprite.getWidth(), (int) backSprite.getHeight(), Pixmap.Format.RGBA8888);
-
-                DrawOnPixmap.draw(drawingMap, backSprite);
                 if (reward.getItem() == null) {
                     needsToBeDisposed = true;
-                    image = new Texture(drawingMap);
+                    processSprite(backSprite, null, null, 0, 0);
                     break;
                 }
                 Sprite item = reward.getItem().sprite();
-
-                DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - item.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1.7f), item);
-                //DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getItem().name), 0, (int) ((backSprite.getHeight() / 8f) * 1f), backSprite.getWidth(), false);
-
-                setItemTooltips(item, backSprite, atlas);
-                image = new Texture(drawingMap);
-                drawingMap.dispose();
+                setItemTooltips(item, backSprite);
+                processSprite(backSprite, item, null, 0, 0);
                 needsToBeDisposed = true;
                 break;
             }
@@ -300,16 +288,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             case Gold: {
                 TextureAtlas atlas = Config.instance().getAtlas(ITEMS_ATLAS);
                 Sprite backSprite = atlas.createSprite("CardBack");
-                Pixmap drawingMap = new Pixmap((int) backSprite.getWidth(), (int) backSprite.getHeight(), Pixmap.Format.RGBA8888);
-
-                DrawOnPixmap.draw(drawingMap, backSprite);
                 Sprite item = atlas.createSprite(reward.type.toString());
-                DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - item.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1f), item);
-                DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f) - 1, backSprite.getWidth(), true, Color.WHITE);
-
-                setItemTooltips(item, backSprite, atlas);
-                image = new Texture(drawingMap);
-                drawingMap.dispose();
+                setItemTooltips(item, backSprite);
+                processSprite(backSprite, item,
+                        Controls.newTextraLabel("[%200]" + reward.getCount()), 0, -10);
                 needsToBeDisposed = true;
                 break;
             }
@@ -505,7 +487,42 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         return result;
     }
 
-    private void setItemTooltips(Sprite icon, Sprite backSprite, TextureAtlas atlas) {
+    private void processSprite(Sprite sprite, Sprite item, TextraLabel itemText, int modX, int modY) {
+        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, (int) sprite.getWidth(), (int) sprite.getHeight(), false);
+        SpriteBatch batch = new SpriteBatch();
+
+        frameBuffer.begin();
+
+        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        Matrix4 matrix = new Matrix4();
+        matrix.setToOrtho2D(0, sprite.getHeight(), sprite.getWidth(), -sprite.getHeight());
+        batch.setProjectionMatrix(matrix);
+
+        batch.begin();
+        batch.draw(sprite, 0, 0);
+        if (item != null)
+            batch.draw(item, sprite.getWidth() / 2 - item.getWidth() / 2, (sprite.getHeight() / 2 - item.getHeight() / 2) - modY);
+        if (itemText != null) {
+            itemText.setWrap(true);
+            itemText.setAlignment(1);
+            itemText.setWidth(sprite.getWidth());
+            itemText.setHeight(sprite.getHeight());
+            itemText.setX(itemText.getX() + modX);
+            itemText.setY(itemText.getY() + modY);
+            itemText.draw(batch, 1);
+        }
+        batch.end();
+        Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, (int) sprite.getWidth(), (int) sprite.getHeight());
+        image = new Texture(pixmap);
+        frameBuffer.end();
+        batch.dispose();
+        pixmap.dispose();
+        frameBuffer.dispose();
+    }
+
+    private void setItemTooltips(Sprite icon, Sprite backSprite) {
         int align = Align.left;
         if (generatedTooltip == null) {
             Matrix4 m = new Matrix4();

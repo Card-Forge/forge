@@ -1,0 +1,12 @@
+Name:Simon, Wild Magic Sorcerer
+ManaCost:2 U
+Types:Legendary Creature Human Elf Shaman
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Instant.cmcGE3,Sorcery.cmcGE3 | ValidActivatingPlayer$ You | Execute$ TrigRollDice | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell with mana value 3 or greater, roll a d20
+SVar:TrigRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:EachDraw,10-19:YouDraw,20:Copy | SpellDescription$ Roll a d20.
+SVar:EachDraw:DB$ Draw | Defined$ Player | SpellDescription$ 1—9 VERT Each player draws a card.
+SVar:YouDraw:DB$ Draw | SpellDescription$ 10—19 VERT You draw a card.
+SVar:Copy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | SpellDescription$ 20 VERT Copy that spell. You may choose new targets for the copy.
+SVar:BuffedBy:Instant.cmcGE3,Sorcery.cmcGE3
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell with mana value 3 or greater, roll a d20.\n1-9 | Each player draws a card.\n10-19 | You draw a card.\n20 | Copy that spell. You may choose new targets for the copy.

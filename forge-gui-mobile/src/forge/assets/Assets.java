@@ -251,11 +251,16 @@ public class Assets implements Disposable {
     public Texture getTexture(FileHandle file) {
         return getTexture(file, true);
     }
+
     public Texture getTexture(FileHandle file, boolean required) {
+        return getTexture(file, false, required);
+    }
+
+    public Texture getTexture(FileHandle file, boolean is2D, boolean required) {
         if (file == null || !file.exists()) {
             if (!required)
                 return null;
-            System.err.println("Failed to load: " + file +"!. Creating dummy texture.");
+            System.err.println("Failed to load: " + file + "!. Creating dummy texture.");
             return getDummy();
         }
         //internal path can be inside apk or jar..
@@ -269,15 +274,19 @@ public class Assets implements Disposable {
         }
         Texture t = manager().get(file.path(), Texture.class, false);
         if (t == null) {
-            manager().load(file.path(), Texture.class, getTextureFilter());
+            if (is2D)
+                manager().load(file.path(), Texture.class, new TextureParameter());
+            else
+                manager().load(file.path(), Texture.class, getTextureFilter());
             manager().finishLoadingAsset(file.path());
             t = manager().get(file.path(), Texture.class);
         }
         return t;
     }
+
     public ParticleEffect getEffect(FileHandle file) {
         if (file == null || !file.exists() || !FileType.Absolute.equals(file.type())) {
-            System.err.println("Failed to load: " + file +"!.");
+            System.err.println("Failed to load: " + file + "!.");
             return null;
         }
         ParticleEffect effect = manager().get(file.path(), ParticleEffect.class, false);
@@ -310,6 +319,7 @@ public class Assets implements Disposable {
     public void loadTexture(FileHandle file) {
         loadTexture(file, getTextureFilter());
     }
+
     public void loadTexture(FileHandle file, TextureParameter parameter) {
         try {
             if (file == null || !file.exists())
@@ -339,8 +349,10 @@ public class Assets implements Disposable {
             textrafonts = new ObjectMap<>();
         if (!textrafonts.containsKey("textrafont")) {
             Font font = new Font(bitmapFont, 0f, 2f, 0f, 0f);
-            font.addAtlas(item_atlas, 0f, 0f, 0f);
-            font.addAtlas(pixelmana_atlas, 0f, -12f, 0f);
+            font.addAtlas(item_atlas, 0f, 6f, 0f);
+            //problematic atlas since some buttons are small, and this is too big for some buttons, need a way to enable
+            //this via property
+            //font.addAtlas(pixelmana_atlas, -90f, 20f, 0f);
             font.integerPosition = false;
             textrafonts.put("textrafont", font);
         }
@@ -352,7 +364,7 @@ public class Assets implements Disposable {
             textrafonts = new ObjectMap<>();
         if (!textrafonts.containsKey("keysfont")) {
             Font font = new Font(bitmapFont);
-            font.addAtlas(keys_atlas);
+            font.addAtlas(keys_atlas, 0f, 6f, 0f);
             font.integerPosition = false;
             textrafonts.put("keysfont", font);
         }
@@ -364,7 +376,7 @@ public class Assets implements Disposable {
             textrafonts = new ObjectMap<>();
         if (!textrafonts.containsKey(name)) {
             Font font = new Font(bitmapFont);
-            font.addAtlas(items_atlas);
+            font.addAtlas(items_atlas, 0f, 6f, 0f);
             font.integerPosition = false;
             textrafonts.put(name, font);
         }
@@ -373,7 +385,7 @@ public class Assets implements Disposable {
 
     public Music getMusic(FileHandle file) {
         if (file == null || !file.exists() || !FileType.Absolute.equals(file.type())) {
-            System.err.println("Failed to load: " + file +"!.");
+            System.err.println("Failed to load: " + file + "!.");
             return null;
         }
         Music music = manager().get(file.path(), Music.class, false);
@@ -387,7 +399,7 @@ public class Assets implements Disposable {
 
     public Sound getSound(FileHandle file) {
         if (file == null || !file.exists() || !FileType.Absolute.equals(file.type())) {
-            System.err.println("Failed to load: " + file +"!.");
+            System.err.println("Failed to load: " + file + "!.");
             return null;
         }
         Sound sound = manager().get(file.path(), Sound.class, false);
