@@ -78,7 +78,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
 
         // support PlayerCollection for affected
         Set<Player> toRemove = Sets.newHashSet();
-        for (Player p : tokenTable.rowKeySet()) {
+        for (Player p : Sets.newHashSet(tokenTable.rowKeySet())) {
             final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(p);
             repParams.put(AbilityKey.Token, tokenTable);
             repParams.put(AbilityKey.EffectOnly, true); // currently only effects can create tokens?
