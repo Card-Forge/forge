@@ -344,7 +344,7 @@
 	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"speed": 20,
+	"speed": 15,
 	"life": 25,
 	"rewards": [
 	{
@@ -8165,11 +8165,13 @@
 	"name": "Monk",
 	"sprite": "sprites/monk.atlas",
 	"deck": [
-		"decks/angel.json"
+		"decks/angel.json",
+		"decks/monk.json"
 	],
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
+	"randomizeDeck": true,
 	"life": 10,
 	"rewards": [
 		{
@@ -8882,7 +8884,7 @@
 	"colors": "R"
 },
 {
-	"name": "Reasembling Skeleton",
+	"name": "Reassembling Skeleton",
 	"sprite": "sprites/skeleton.atlas",
 	"deck": [
 		"decks/reasemblingskeleton.dck"

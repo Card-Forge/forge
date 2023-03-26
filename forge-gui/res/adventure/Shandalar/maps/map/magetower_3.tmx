@@ -28,7 +28,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgaQJYHQkvz0Mc+cTYGhhdY7C3XpI/99PLvTCLUPKeR3Z/ZIRhdDF0OXQ2ldmKzC5vcHSrYN4cBu/tBYsSEPaUA2R50d/RooqoDAXq4iRYAV1oxZ0TlI/uPWukKl925LNjVGzBiF6eGG9DdQ4s8BAOwsEW3x5P6VmEAWvhnJAEAGL8nTg==
+   eJxjYBgaQJYHQkvz0M/OFwNkLwMd7Z1JhJrnNLL7MzsEo4uhy6GrodRObHZhk7tDBfvmMGB3P0iMmLCnFCDbg+6OHk1UdSBADzfRAuBKK+aMqHxk/1ErXeGyO5cFu3oDRuzi1HADuntokYdgABa26PZ4Ut8qDEAL/4wkAAAUQyaR
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -84,19 +84,17 @@
     <property name="waypoints" value="75,70,69,71,72"/>
    </properties>
   </object>
-  <object id="68" template="../obj/manashards.tx" x="191.25" y="175.75"/>
+  <object id="68" template="../obj/manashards.tx" x="257" y="47.75"/>
   <object id="69" template="../obj/waypoint.tx" x="269.5" y="130.75"/>
   <object id="70" template="../obj/waypoint.tx" x="191" y="203.25"/>
   <object id="71" template="../obj/waypoint.tx" x="116.5" y="95"/>
   <object id="72" template="../obj/waypoint.tx" x="207.5" y="80.75"/>
   <object id="73" template="../obj/waypoint.tx" x="159.5" y="78.75"/>
-  <object id="74" template="../obj/waypoint.tx" x="208.5" y="45"/>
+  <object id="74" template="../obj/waypoint.tx" x="208.5" y="46.75"/>
   <object id="75" template="../obj/waypoint.tx" x="271.25" y="79.75"/>
-  <object id="76" template="../obj/treasure.tx" x="242.25" y="57.75">
+  <object id="76" template="../obj/treasure.tx" x="160" y="48.5">
    <properties>
-    <property name="reward">[ {&quot;type&quot;: &quot;item&quot;,
-  &quot;count&quot;: 1,
-&quot;itemName&quot;: &quot;Staff of the Flame Magus&quot;}]</property>
+    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;Red&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Staff of the Flame Magus&quot;}]"/>
    </properties>
   </object>
  </objectgroup>

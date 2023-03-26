@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="76">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="78">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -10,7 +10,7 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgaYBcPAtMTyELtk6azvQPlX3oB5PCM5kX4cyeQjuJFyMlS2f/I9qKbjU9u1N7Bay8o7ewF4npuys0iB4zaTX8AKxupnW6JAdIDYC+2uoCS+gEAlQ0VTg==
+   eJxjYBgaYBcPAtMTyELtk6azvQPlX3oBYsNTlsr+R7YX3Wx8cqP2Dl57QXlkLxDXc1NuFjlg1G76A1jZSO10SwyQHgB7sdUFlNQPANR4EvQ=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -28,7 +28,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgaYII6A8NEIJ6kTl971wDtWwvE6+hs7wmgfSeB+BSd7aUXKNdkYOiBYhCbWDlKQY8mdjYhOUoByB+PgfgJDv/ikqMUgPzxH2SmFnb/4pKjFCD7A5t/ccmRCzS1qWMOOUCbRLt/UtFucTbi1P0A4jpeKloMBFp4/B0Dte8Xda2Eg3ZN7OH+HYhrqOzP4QgAvR0mRg==
+   eJxjYBgaYII6A8NEIJ6kTl971wDtWwvE6+hs7wmgfSeB+BSd7aUXKNdkYOiBYhCbWDlKQY8mdjYhOUoByB+5wgwMecLY/YtLjlIA8ge3CAMDjwh2/+KSoxQg+wObf3HJkQs0taljDjlAm0S7f1LRbnE24tT9AOI6XipaDARaePwdA7XvF3WthIN2Tezh/h2Ia6jsz+EIAEjpIfA=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -40,27 +40,20 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../obj/treasure.tx" x="163.833" y="45.8333">
-   <properties>
-    <property name="reward">[ {&quot;type&quot;: &quot;item&quot;,
-  &quot;count&quot;: 1,
-&quot;itemName&quot;: &quot;Staff of the Death Magus&quot;}]</property>
-   </properties>
-  </object>
   <object id="50" template="../obj/enemy.tx" x="208.402" y="125.559">
    <properties>
     <property name="enemy" value="Black Wiz1"/>
     <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="71,68"/>
+    <property name="waypoints" value="68,71"/>
    </properties>
   </object>
-  <object id="54" template="../obj/enemy.tx" x="154" y="136">
+  <object id="54" template="../obj/enemy.tx" x="153" y="130.5">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="56" template="../obj/enemy.tx" x="263.333" y="138.167">
+  <object id="56" template="../obj/enemy.tx" x="264.833" y="135.167">
    <properties>
     <property name="enemy" value="Devil"/>
     <property name="threatRange" type="int" value="30"/>
@@ -99,7 +92,7 @@
   {
     &quot;editions&quot;: [ &quot;MMQ&quot; ],
     &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
+    &quot;count&quot;: 1,
     &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
   }
 ]
@@ -108,11 +101,17 @@
   </object>
   <object id="68" template="../obj/waypoint.tx" x="209" y="190.5"/>
   <object id="69" template="../obj/waypoint.tx" x="320" y="119"/>
-  <object id="70" template="../obj/waypoint.tx" x="271.5" y="206.5"/>
-  <object id="71" template="../obj/waypoint.tx" x="208" y="87"/>
+  <object id="70" template="../obj/waypoint.tx" x="278" y="212"/>
+  <object id="71" template="../obj/waypoint.tx" x="207.5" y="86.5"/>
   <object id="72" template="../obj/waypoint.tx" x="150" y="160"/>
   <object id="73" template="../obj/waypoint.tx" x="318" y="184.5"/>
   <object id="74" template="../obj/waypoint.tx" x="152.5" y="195.5"/>
   <object id="75" template="../obj/manashards.tx" x="258" y="45"/>
+  <object id="76" template="../obj/treasure.tx" x="161.5" y="48">
+   <properties>
+    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;Black&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Staff of the Death Magus&quot;}]"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
