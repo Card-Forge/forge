@@ -7,12 +7,12 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="15" name="Collision" width="31" height="22">
   <data encoding="base64" compression="zlib">
-   eJxjYMAEbpwQDGMTAqs5EBjGHylgFdCvu3gQ/HhB+tgHwv5iCHEQfw0Nwx1k724e3PI7ibD/ORFpCQaQ050s0OynQD4jAwTjsh8UBjdEEWIcAsTZdR2Hu0B2gvwMsxOf/eiAWLtpAWhlNzF+x2U3KIxhmN4A2W5k++nhFnR7yQmDTaKE1RCyHxsbBNDz7EY0u44Kk2cvLcsiYu1HL28GIu0RFQ5CA2w/DQHMfu4BLA9HwdAHAHu4LNQ=
+   eJxjYMAEbpwQDGMTAqs5EBjGHylgFdCvu3gQ/HhB+tgHwv5iCHEQfw0Nwx1k724e3PI7ibD/ORFpCQaQ050s0OynQD4jAwTjsh8UBjdEEWIcAsTZdR2Hu0B2gvwMsxOf/eiAWLtpAWhlNzF+x2U3KIxhmN4A2W5k++nhFnR7yQmDTaKE1RCyHxsbG9iIZtdRYfLspWVZRKz96OXNQKQ9osJBaIDtpyGA2c89gOXhKBj6AAA1cywg
   </data>
  </layer>
  <layer id="20" name="Background" width="31" height="22">
   <data encoding="base64" compression="zlib">
-   eJzdlk1qwzAQhb0oBMUbl+IeJKvQS/QQWXSdBHKvFAq5R1KcRW7QRU8QqAf54dF4RrJMCKEDj8iKom/e6CfeuaLYKVrNhpLx81QUy3bsdu7bMa3bMZtWb67/PVgNUw6buOfat38rL42NuY8KO+X71PaVVSjqI64ly3+MzXkn17c/XsL68lq9v/o+1COmMWzpm9hg0RyaN8nm+UHrbt0tNjxzERtRzzybPrk0nzSOmF9luF80tvTQdGvNuRZbywF+U2xrjTgbgT01NiSb5o0x5f6QLF6D3NDmzwle51y+xZ6ay39hN244Vsa+7vWZUXd+lqx80J5XYS63Cpobd0jqruJxfQ4lfYwJfn9Z5+zYff/thkxoyj6x2Lwu+A/W/EK550ze2+DiGexDObynNU31reUSWwepRWJsyvemq+2Yd6FH1SWjXvfWH6xsWFw=
+   eJzdlk1qwzAQhb0IGMWbhOIcpKvSS/QQWWRtF3yvFgK9h13cRW+QRU4QiAf54fF4RrZMKaUDj8iKom/e6CeuXJJUio7pVDIumyR56sa+bn07pKIbU3Z6dsPvwWqZYtjE/cp9+7rz0tiYu1bYc76bri/bjUV9xLVk+Q+xOa9xQ/v0MK4vr9XLwfehHiEtYUvfxAaL5tC8STbPDyr6dbfY8MxFbESeejZ9cmk+aRwxz9l4v2hs6aHt15pzLbaWA/zOsa014mwE9tTSkGyaN8SU+0OyeA1iQ5s/JnidY/kWe20u/4XdOr2fx1s+6D2i7vwsWfnwtszlJ4Lmxh1i7XGtPrf9WNLHkuD3l3XO6v77TzdlQmv2icXmnvEfrPmFYs+ZvLfBxTPYH9n0nta01reWS2gdpB5nxs75LvvaLnkX+qv6jqjXb+sOadBWZA==
   </data>
  </layer>
  <layer id="21" name="Ground" width="31" height="22">
