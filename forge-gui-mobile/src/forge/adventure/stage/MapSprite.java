@@ -24,7 +24,6 @@ public class MapSprite extends Actor {
     TextureRegion texture;
     TextraLabel searchPost = Controls.newTextraLabel("[%80][+SearchPost]");
     boolean isCaveDungeon, isOldorVisited;
-    //PointOfInterest poi;
 
     public MapSprite(Vector2 pos, TextureRegion sprite, PointOfInterest point) {
         if (point != null) {
