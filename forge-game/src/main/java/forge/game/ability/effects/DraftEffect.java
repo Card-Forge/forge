@@ -45,7 +45,7 @@ import java.util.*;
          final Player player = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa).get(0);
          final Game game = player.getGame();
          final ZoneType zone = ZoneType.smartValueOf(sa.getParamOrDefault("Zone", "Hand"));
-         List<String> spellbook = Arrays.asList(sa.getParam("Spellbook").split(","));
+         List<String> spellbook = Arrays.asList(sa.getParamOrDefault("Spellbook", "").split(","));
          final int numToDraft = AbilityUtils.calculateAmount(source,
                  sa.getParamOrDefault("DraftNum", "1"), sa);
          CardCollection drafted = new CardCollection();
