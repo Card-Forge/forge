@@ -3,7 +3,7 @@ Name=AI Chandra B 1
 [Main]
 4 Chain Lightning|JMP|1
 4 Chandra's Phoenix|PM12|1
-1 Chandra, Fire of Kaladesh|PS15|1
+1 Chandra, Fire of Kaladesh|ORI|1
 2 Chandra, Pyromaster|AKR|1
 2 Chandra, Torch of Defiance|KLD|1
 4 Grim Lavamancer|G06|1
@@ -13,5 +13,3 @@ Name=AI Chandra B 1
 4 Pyromancer Ascension|ZEN|1
 4 Searing Blaze|WWK|1
 4 Skullcrack|GTC|1
-[Sideboard]
-

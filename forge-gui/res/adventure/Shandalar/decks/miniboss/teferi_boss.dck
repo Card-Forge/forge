@@ -1,7 +1,5 @@
 [metadata]
 Name=teferi_boss
-[Avatar]
-
 [Main]
 1 Back to Basics|UMA|1
 1 Balance|30A|1
@@ -21,26 +19,16 @@ Name=teferi_boss
 1 Teferi's Protege|J22|1
 3 Teferi's Sentinel|DOM|1
 1 Teferi's Tutelage|M21|1
-2 Teferi, Hero of Dominaria|PPRO|1
+2 Teferi, Hero of Dominaria|DOM|1
 1 Teferi, Mage of Zhalfir|IMA|1
-1 Teferi, Master of Time|M21|9
+1 Teferi, Master of Time|M21|1
 1 Teferi, Temporal Archmage|C14|1
 1 Teferi, Temporal Pilgrim|BRO|1
 1 Teferi, Time Raveler|WAR|1
 1 Teferi, Who Slows the Sunset|MID|1
 1 The Tabernacle at Pendrell Vale|OLGC|1
 1 Time Warp|E02|1
-2 Time Wipe|PWAR|1
+2 Time Wipe|WAR|1
 4 Tundra|30A|1
 1 Winter Orb|EMA|1
 1 Zhalfirin Void|PDOM|1
-[Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-
