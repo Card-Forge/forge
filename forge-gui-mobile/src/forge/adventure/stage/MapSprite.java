@@ -22,20 +22,22 @@ public class MapSprite extends Actor {
     static public int BackgroundLayer = -1;
     static public int SpriteLayer = 0;
     TextureRegion texture;
-    TextraLabel searchPost;
+    TextraLabel searchPost = Controls.newTextraLabel("[%80][+SearchPost]");
     boolean isCaveDungeon, isOldorVisited;
-    PointOfInterest poi;
 
     public MapSprite(Vector2 pos, TextureRegion sprite, PointOfInterest point) {
-        poi = point;
-        isCaveDungeon = point != null && (point.getData().type.equalsIgnoreCase("cave") || point.getData().type.equalsIgnoreCase("dungeon"));
-        isOldorVisited = poi != null && WorldSave.getCurrentSave().getPointOfInterestChanges(poi.getID() + poi.getData().map).hasDeletedObjects();
-        searchPost = Controls.newTextraLabel("[%80][+SearchPost]");
+        if (point != null) {
+            isCaveDungeon = "cave".equalsIgnoreCase(point.getData().type) || "dungeon".equalsIgnoreCase(point.getData().type);
+            if (point.getData().map != null && point.getID() != null) {
+                isOldorVisited = WorldSave.getCurrentSave().getPointOfInterestChanges(point.getID() + point.getData().map).hasDeletedObjects();
+            }
+        }
         texture = sprite;
         setPosition(pos.x, pos.y);
         setHeight(texture.getRegionHeight());
-        setWidth(texture.getRegionWidth()); 
+        setWidth(texture.getRegionWidth());
     }
+
     public void checkOut() {
         isOldorVisited = true;
     }

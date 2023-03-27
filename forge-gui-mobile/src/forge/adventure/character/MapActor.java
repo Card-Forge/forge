@@ -191,8 +191,6 @@ public class MapActor extends Actor {
     }
 
     public boolean collideWithPlayer(PlayerSprite other) {
-
-
         boolean newIsColliding = collideWith(other);
         if (newIsColliding) {
             if (!isCollidingWithPlayer)
@@ -205,6 +203,8 @@ public class MapActor extends Actor {
     }
 
     public boolean collideWith(Rectangle other) {
+        if (getCollisionHeight() == 0f)
+            return false;
         return boundingRect().overlaps(other);
     }
 
