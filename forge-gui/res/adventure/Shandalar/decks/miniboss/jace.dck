@@ -1,12 +1,10 @@
 [metadata]
 Name=jace_boss
-[Avatar]
-
 [Main]
 1 Ancestral Recall|30A|1
 1 Arcanis the Omnipotent|C17|1
 2 Azorius Signet|NEC|1
-1 Bruvac the Grandiloquent|PLIST|1
+1 Bruvac the Grandiloquent|JMP|1
 3 Counterspell|SLD|1
 1 Evacuation|C16|1
 4 Island|M10|1
@@ -24,7 +22,7 @@ Name=jace_boss
 1 Jace, Cunning Castaway|XLN|1
 1 Jace, Ingenious Mind-Mage|XLN|1
 1 Jace, Memory Adept|M14|1
-1 Jace, Mirror Mage|ZNR|2
+1 Jace, Mirror Mage|ZNR|1
 1 Jace, the Living Guildpact|M15|1
 1 Jace, the Mind Sculptor|EMA|1
 1 Jace, the Perfected Mind|ONE|1
@@ -42,13 +40,3 @@ Name=jace_boss
 1 Time Warp|E02|1
 1 Timetwister|OVNT|4
 4 Tundra|VMA|1
-[Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

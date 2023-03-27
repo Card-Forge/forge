@@ -1,10 +1,8 @@
 [metadata]
 Name=ratswarm
-[Avatar]
-
 [Main]
 4 Burglar Rat|JMP|1
-4 Drainpipe Vermin|J21|1
+4 Drainpipe Vermin|JMP|1
 4 Muck Rats|PO2|1
 4 Plague Rats|30A|1
 4 Plaguecrafter's Familiar|J21|1
@@ -15,13 +13,3 @@ Name=ratswarm
 4 Typhoid Rats|M15|1
 4 Wave of Rats|NCC|1
 4 Zodiac Rat|PRM|1
-[Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

@@ -1,7 +1,5 @@
 [metadata]
 Name=treefolk
-[Avatar]
-
 [Main]
 1 Awakener Druid|M10|1
 1 Battlewand Oak|LRW|1
@@ -19,8 +17,7 @@ Name=treefolk
 1 Forest|M19|1
 2 Forest|M19|3
 3 Forest|M19|4
-1 Forest|MID|1
-1 Forest|MID|3
+2 Forest|MID|3
 2 Forest|PTK|3
 1 Forest|SHM|1
 1 Forest|SHM|3
@@ -54,13 +51,3 @@ Name=treefolk
 1 Weatherseed Totem|TSP|1
 1 Willow Dryad|POR|1
 1 Willow Geist|MID|1
-[Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

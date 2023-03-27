@@ -1,12 +1,10 @@
 [metadata]
 Name=human_soldier_token
-[Avatar]
-
 [Main]
 1 Adamant Will|VOW|1
 1 Angelic Quartermaster|VOW|1
 1 Captain of the Watch|M10|1
-1 Cemetery Protector|VOW|2
+1 Cemetery Protector|VOW|1
 1 Commanding Presence|THB|1
 1 Darien, King of Kjeldor|CSP|1
 1 Dawn of Hope|GRN|1
@@ -22,7 +20,7 @@ Name=human_soldier_token
 1 Iona's Judgment|CMR|1
 1 Keeper of the Accord|CMR|1
 1 Mobilization|10E|1
-1 Moment of Heroism|J21|1
+1 Moment of Heroism|JMP|1
 2 Perimeter Sergeant|IKO|1
 1 Plains|IKO|1
 3 Plains|IKO|2
@@ -43,13 +41,3 @@ Name=human_soldier_token
 1 Thraben Standard Bearer|EMN|1
 4 Veteran Armorsmith|M10|1
 4 Veteran Swordsmith|M10|1
-[Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

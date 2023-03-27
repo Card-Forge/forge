@@ -1,7 +1,5 @@
 [metadata]
 Name=Yeti
-[Avatar]
-
 [Main]
 1 Blessing of Frost|KHM|1
 1 Drelnoch|CSP|1
@@ -11,7 +9,7 @@ Name=Yeti
 2 Highland Forest|KHM|1
 2 Highland Weald|CSP|1
 1 Hungering Yeti|FRF|1
-1 Ice-Fang Coatl|H1R|1
+1 Ice-Fang Coatl|MH1|1
 1 Icehide Troll|KHM|1
 1 Karplusan Strider|MM2|1
 1 Karplusan Yeti|9ED|1
@@ -40,13 +38,3 @@ Name=Yeti
 4 Volatile Fjord|KHM|1
 1 Wiitigo|ME2|1
 1 Woolly Mammoths|ME2|1
-[Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

@@ -14,7 +14,7 @@ Name=bandit
 1 Dunerider Outlaw|PLC|1
 1 Falkenrath Marauders|ISD|1
 1 Fangblade Brigand|MID|1
-1 Field of Ruin|DBL|1
+1 Field of Ruin|MID|1
 1 Geier Reach Bandit|SOI|1
 1 Godo, Bandit Warlord|CHK|1
 1 Graveblade Marauder|ORI|1
@@ -34,8 +34,8 @@ Name=bandit
 2 Mountain|M14|3
 1 Mountain Bandit|PTK|1
 1 Murder|CN2|1
-1 Pillage|PLIST|1
-1 Rahilda, Wanted Cutthroat|Y22|1
+1 Pillage|MH1|1
+1 Rahilda, Wanted Cutthroat|YMID|1
 2 Raiders' Wake|XLN|1
 1 Robber of the Rich|ELD|1
 1 Skirk Marauder|ARC|1
