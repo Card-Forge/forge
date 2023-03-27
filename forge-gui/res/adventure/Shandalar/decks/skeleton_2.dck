@@ -1,12 +1,10 @@
 [metadata]
 Name=skeleton_2
-[Avatar]
-
 [Main]
 1 Abnormal Endurance|J21|1
 1 Augur of Skulls|FUT|1
 1 Barrier of Bones|GRN|1
-1 Blight Sickle|PLIST|1
+1 Blight Sickle|SHM|1
 1 Bone Dragon|M19|1
 2 Bone Shards|MH2|1
 1 Bone Splinters|ALA|1
@@ -47,13 +45,3 @@ Name=skeleton_2
 1 Unburial Rites|AFC|1
 1 Urborg Skeleton|INV|1
 1 Wall of Bone|M10|1
-[Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

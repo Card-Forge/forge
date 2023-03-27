@@ -52,7 +52,7 @@
   </object>
   <object id="64" template="../obj/enemy.tx" x="437.255" y="107.437" width="15.5419" height="16.9162">
    <properties>
-    <property name="enemy" value="Giant Crab"/>
+    <property name="enemy" value="Crab"/>
    </properties>
   </object>
   <object id="65" template="../obj/enemy.tx" x="315.789" y="236.349">
@@ -124,7 +124,7 @@
   {
     &quot;editions&quot;: [ &quot;ONE&quot; ],
     &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
+    &quot;count&quot;: 1,
     &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
   }
 ]

@@ -1,119 +1,125 @@
 fox.png
-size: 378, 106
+size: 448, 224
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
 Avatar
-  xy: 17, 8
-  size: 16, 16
+  xy: 15, 16
+  size: 12, 11
 Idle
-  xy: 2, 38
-  size: 32, 32
+  xy: 2, 16
+  size: 30, 16
 Idle
-  xy: 2, 4
-  size: 32, 32
+  xy: 34, 16
+  size: 30, 16
 Idle
-  xy: 36, 4
-  size: 32, 32
+  xy: 66, 16
+  size: 30, 16
 Idle
-  xy: 70, 4
-  size: 32, 32
+  xy: 98, 16
+  size: 30, 16
 Idle
-  xy: 206, 4
-  size: 32, 32
+  xy: 2, 16
+  size: 30, 16
 Idle
-  xy: 104, 4
-  size: 32, 32
+  xy: 34, 48
+  size: 30, 16
 Idle
-  xy: 138, 4
-  size: 32, 32
+  xy: 66, 48
+  size: 30, 16
 Idle
-  xy: 172, 4
-  size: 32, 32
+  xy: 98, 48
+  size: 30, 16
 Idle
-  xy: 206, 4
-  size: 32, 32
+  xy: 130, 48
+  size: 30, 16
 Idle
-  xy: 104, 4
-  size: 32, 32
+  xy: 162, 48
+  size: 30, 16
 Idle
-  xy: 240, 4
-  size: 32, 32
+  xy: 194, 48
+  size: 30, 16
 Idle
-  xy: 274, 4
-  size: 32, 32
+  xy: 226, 48
+  size: 30, 16
 Idle
-  xy: 308, 4
-  size: 32, 32
+  xy: 258, 48
+  size: 30, 16
 Idle
-  xy: 342, 4
-  size: 32, 32
+  xy: 290, 48
+  size: 30, 16
+Idle
+  xy: 322, 48
+  size: 30, 16
+Idle
+  xy: 354, 48
+  size: 30, 16
+Idle
+  xy: 386, 48
+  size: 30, 16
+Idle
+  xy: 418, 48
+  size: 30, 16
+Idle
+  xy: 386, 48
+  size: 30, 16
 Walk
-  xy: 2, 38
-  size: 32, 32
+  xy: 2, 78
+  size: 30, 18
 Walk
-  xy: 36, 38
-  size: 32, 32
+  xy: 34, 78
+  size: 30, 18
 Walk
-  xy: 70, 38
-  size: 32, 32
+  xy: 66, 78
+  size: 30, 18
 Walk
-  xy: 104, 38
-  size: 32, 32
+  xy: 98, 78
+  size: 30, 18
 Walk
-  xy: 138, 38
-  size: 32, 32
+  xy: 130, 78
+  size: 30, 18
 Walk
-  xy: 172, 38
-  size: 32, 32
+  xy: 162, 78
+  size: 30, 18
 Walk
-  xy: 206, 38
-  size: 32, 32
+  xy: 194, 78
+  size: 30, 18
 Walk
-  xy: 240, 38
-  size: 32, 32
-Walk
-  xy: 274, 38
-  size: 32, 32
-Walk
-  xy: 308, 38
-  size: 32, 32
-Walk
-  xy: 342, 38
-  size: 32, 32
+  xy: 226, 78
+  size: 30, 18
 Attack
-  xy: 2, 72
-  size: 32, 32
+  xy: 2, 140
+  size: 30, 20
 Attack
-  xy: 138, 72
-  size: 32, 32
+  xy: 34, 140
+  size: 30, 20
 Attack
-  xy: 36, 72
-  size: 32, 32
+  xy: 66, 140
+  size: 30, 20
 Attack
-  xy: 70, 72
-  size: 32, 32
+  xy: 98, 140
+  size: 30, 20
 Attack
-  xy: 104, 72
-  size: 32, 32
+  xy: 130, 140
+  size: 30, 20
 Death
-  xy: 2, 72
-  size: 32, 32
+  xy: 2, 204
+  size: 30, 20
 Death
-  xy: 138, 72
-  size: 32, 32
+  xy: 34, 204
+  size: 30, 20
 Death
-  xy: 36, 72
-  size: 32, 32
+  xy: 66, 204
+  size: 30, 20
 Death
-  xy: 274, 72
-  size: 32, 32
+  xy: 98, 204
+  size: 30, 20
 Death
-  xy: 172, 72
-  size: 32, 32
+  xy: 130, 204
+  size: 30, 20
 Death
-  xy: 206, 72
-  size: 32, 32
+  xy: 162, 204
+  size: 30, 20
 Death
-  xy: 240, 72
-  size: 32, 32
+  xy: 194, 204
+  size: 30, 20

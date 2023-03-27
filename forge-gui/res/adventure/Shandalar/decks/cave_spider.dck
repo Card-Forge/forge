@@ -1,7 +1,5 @@
 [metadata]
 Name=cave_spider
-[Avatar]
-
 [Main]
 1 Aquastrand Spider|MM2|1
 1 Arachnogenesis|C15|1
@@ -20,7 +18,7 @@ Name=cave_spider
 2 Ishkanah, Broodmother|YMID|1
 2 Ishkanah, Grafwidow|EMN|1
 1 Llanowar Greenwidow|DMU|1
-2 Lolth, Spider Queen|PLIST|1
+2 Lolth, Spider Queen|AFR|1
 1 Mountain|MH2|1
 2 Penumbra Spider|MB1|1
 1 Spider Spawning|C15|1
@@ -34,13 +32,3 @@ Name=cave_spider
 4 Verdant Catacombs|MM3|1
 2 Vinesoul Spider|YDMU|1
 4 Ziatora's Proving Ground|SNC|1
-[Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

@@ -8,16 +8,12 @@ Name=Lightning Elemental
 4 Incinerate|10E|1
 4 Lightning Bolt|MED|1
 4 Lightning Elemental|10E|1
-4 Mountain|BRO|1
-2 Mountain|BRO|2
-3 Mountain|BRO|3
-7 Mountain|BRO|4
+9 Mountain|BRO|1
+7 Mountain|BRO|2
 2 Reverberate|M11|1
 4 Shock|10E|1
 4 Spark Elemental|10E|1
-4 Thunderbreak Regent|J21|1
+4 Thunderbreak Regent|DTK|1
 2 Thunderkin Awakener|M20|1
 2 Thundermaw Hellkite|M13|1
 2 Thunderous Wrath|AVR|1
-[Sideboard]
-

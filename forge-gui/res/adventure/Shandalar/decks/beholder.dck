@@ -1,10 +1,7 @@
 [metadata]
 Name=Beholder
-[Avatar]
-
 [Main]
-3 Baleful Beholder|AFR|1
-1 Baleful Beholder|AFR|2
+4 Baleful Beholder|AFR|1
 1 Baleful Strix|AFC|1
 1 Chaos Dragon|AFC|1
 1 Death Tyrant|AFC|1
@@ -34,13 +31,3 @@ Name=Beholder
 1 Wight|AFR|1
 1 Xanathar, Guild Kingpin|AFR|1
 1 Xorn|AFR|1
-[Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

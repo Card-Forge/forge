@@ -1,7 +1,5 @@
 [metadata]
 Name=frost_titan
-[Avatar]
-
 [Main]
 2 Adarkar Wastes|DMU|1
 1 Aerial Responder|KLR|1
@@ -25,19 +23,9 @@ Name=frost_titan
 1 Prowling Felidar|ZNR|1
 2 Savor the Moment|SHM|1
 2 Serra Sphinx|2XM|1
-1 Sleep|PLIST|1
+1 Sleep|M19|1
 1 Tamiyo, the Moon Sage|AVR|1
 3 Tempest Drake|VIS|1
 2 Topan Freeblade|IMA|1
 2 Vulshok Gauntlets|2XM|1
 1 Weathered Sentinels|NCC|1
-[Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

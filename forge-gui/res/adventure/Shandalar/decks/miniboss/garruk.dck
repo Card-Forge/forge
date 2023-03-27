@@ -1,7 +1,5 @@
 [metadata]
 Name=garruk
-[Avatar]
-
 [Main]
 1 Apex Altisaur|C19|1
 1 Argoth, Sanctum of Nature|BRO|1
@@ -9,7 +7,9 @@ Name=garruk
 1 Castle Garenbrig|ELD|1
 1 Elder Gargaroth|M21|1
 4 Elvish Mystic|KHC|1
-28 Forest|J14|1
+9 Forest|J22|1
+11 Forest|J22|2
+8 Forest|J22|3
 1 Garruk Wildspeaker|GVL|1
 2 Garruk's Harbinger|M21|1
 1 Garruk's Horde|M12|1
@@ -20,8 +20,8 @@ Name=garruk
 1 Gate to Manorborn|HBG|1
 1 Gemrazer|IKO|1
 1 Gingerbread Cabin|ELD|1
-1 Goreclaw, Terror of Qal Sisma|J21|1
-1 Kogla, the Titan Ape|IKO|2
+1 Goreclaw, Terror of Qal Sisma|J22|1
+1 Kogla, the Titan Ape|IKO|1
 2 Krosan Warchief|C13|1
 1 Nature's Chosen|ALL|1
 4 Nature's Claim|MB1|1
@@ -37,14 +37,4 @@ Name=garruk
 1 Thragtusk|MM3|1
 2 Wicked Wolf|ELD|1
 1 Wild Endeavor|AFC|1
-1 Yedora, Grave Gardener|C21|2
-[Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-
+1 Yedora, Grave Gardener|C21|1

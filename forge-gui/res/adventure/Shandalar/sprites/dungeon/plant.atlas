@@ -1,0 +1,68 @@
+plant.png
+size: 224,384
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 75, 212
+  size: 14, 9  
+Idle 
+  xy: 7, 18
+  size: 14, 14    
+Idle 
+  xy: 39, 18
+  size: 14, 14       
+Idle 
+  xy: 71, 18
+  size: 14, 14     
+Idle 
+  xy: 103, 18
+  size: 14, 14       
+Idle 
+  xy: 135, 18
+  size: 14, 14          
+Walk 
+  xy: 7, 50
+  size: 14, 14      
+Walk 
+  xy: 39, 50
+  size: 14, 14  
+Walk 
+  xy: 71, 50
+  size: 14, 14  
+Walk 
+  xy: 103, 50
+  size: 14, 14  
+Walk 
+  xy: 135, 50
+  size: 14, 14 
+Attack 
+  xy: 7, 76
+  size: 16, 19
+Attack 
+  xy: 39, 76
+  size: 16, 19
+Attack 
+  xy: 71, 76
+  size: 16, 19
+Attack 
+  xy: 103, 76
+  size: 16, 19
+Attack 
+  xy: 135, 76
+  size: 16, 19
+Death
+  xy: 7, 145
+  size: 16, 16
+Death
+  xy: 39, 145
+  size: 16, 16
+Death
+  xy: 71, 145
+  size: 16, 16
+Death
+  xy: 103, 145
+  size: 16, 16
+Death
+  xy: 135, 145
+  size: 16, 16
