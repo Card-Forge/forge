@@ -48,7 +48,7 @@
     <property name="waypoints" value="68,69,70"/>
    </properties>
   </object>
-  <object id="54" template="../obj/enemy.tx" x="303.907" y="143.112">
+  <object id="54" template="../obj/enemy.tx" x="273" y="145.112">
    <properties>
     <property name="enemy" value="Gitaxian Underling"/>
     <property name="threatRange" value="20"/>
@@ -109,13 +109,13 @@
   </object>
  </objectgroup>
  <objectgroup id="7" name="Waypoints">
-  <object id="64" template="../obj/waypoint.tx" x="272.667" y="143.333"/>
-  <object id="65" template="../obj/waypoint.tx" x="367.667" y="143.667"/>
-  <object id="66" template="../obj/waypoint.tx" x="367.333" y="160.667"/>
-  <object id="67" template="../obj/waypoint.tx" x="272.667" y="159"/>
-  <object id="68" template="../obj/waypoint.tx" x="162" y="62"/>
-  <object id="69" template="../obj/waypoint.tx" x="192" y="62"/>
-  <object id="70" template="../obj/waypoint.tx" x="192" y="33"/>
+  <object id="64" template="../obj/waypoint.tx" x="273" y="145"/>
+  <object id="65" template="../obj/waypoint.tx" x="367.667" y="145"/>
+  <object id="66" template="../obj/waypoint.tx" x="367.333" y="157"/>
+  <object id="67" template="../obj/waypoint.tx" x="272.667" y="157"/>
+  <object id="68" template="../obj/waypoint.tx" x="163" y="61"/>
+  <object id="69" template="../obj/waypoint.tx" x="192" y="61"/>
+  <object id="70" template="../obj/waypoint.tx" x="192" y="34"/>
   <object id="73" template="../obj/gate.tx" x="208.25" y="96.5">
    <properties>
     <property name="dialog">[{
