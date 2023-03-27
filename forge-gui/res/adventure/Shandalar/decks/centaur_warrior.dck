@@ -1,7 +1,5 @@
 [metadata]
 Name=centaur_warrior
-[Avatar]
-
 [Main]
 1 Alive // Well|DGM|1
 1 Avenging Arrow|RTR|1
@@ -12,7 +10,7 @@ Name=centaur_warrior
 1 Conclave Cavalier|GRN|1
 1 Conclave Mentor|M21|1
 1 Courser of Kruphix|BNG|1
-1 Courser of Kruphix|TSR|1
+1 Courser of Kruphix|J22|1
 1 Coursers' Accord|RTR|1
 1 Dowsing Shaman|RAV|1
 1 Fated Intervention|BNG|1
@@ -20,8 +18,7 @@ Name=centaur_warrior
 1 Forest|RTR|3
 1 Forest|RTR|4
 1 Forest|RTR|5
-2 Forest|THB|1
-3 Forest|THB|2
+5 Forest|THB|2
 1 Forest|THB|3
 1 Herald of the Pantheon|ORI|1
 1 Krosan Druid|DOM|1
@@ -52,13 +49,3 @@ Name=centaur_warrior
 1 Trostani's Judgment|RTR|1
 1 Vitu-Ghazi Guildmage|RTR|1
 1 Wildwood Patrol|M21|1
-[Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

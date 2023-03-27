@@ -1,7 +1,5 @@
 [metadata]
 Name=insect_toxic
-[Avatar]
-
 [Main]
 1 Beacon of Creation|5DN|1
 1 Blex, Vexing Pest|STX|1
@@ -31,16 +29,6 @@ Name=insect_toxic
 1 Spring-Leaf Avenger|NEO|1
 2 Swamp|STX|1
 2 Swamp Mosquito|TSB|1
-1 Vishgraz, the Doomhive|ONC|2
+1 Vishgraz, the Doomhive|ONC|1
 4 Woodland Chasm|KHM|1
 2 Zask, Skittering Swarmlord|J22|1
-[Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

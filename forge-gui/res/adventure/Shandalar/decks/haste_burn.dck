@@ -1,7 +1,5 @@
 [metadata]
 Name=haste_burn
-[Avatar]
-
 [Main]
 1 Arclight Phoenix|GRN|1
 1 Arni Brokenbrow|KHM|1
@@ -20,7 +18,7 @@ Name=haste_burn
 1 Hellrider|JMP|1
 1 Impetuous Sunchaser|BNG|1
 4 Lightning Bolt|M10|1
-1 Manaform Hellkite|VOW|2
+1 Manaform Hellkite|VOW|1
 1 Mardu Scout|FRF|1
 11 Mountain|C18|1
 9 Mountain|C18|2
@@ -29,16 +27,6 @@ Name=haste_burn
 1 Phoenix of Ash|THB|1
 1 Raging Minotaur|ME3|1
 1 Skitter of Lizards|CNS|1
-1 Toralf's Disciple|Y22|1
+1 Toralf's Disciple|YMID|1
 1 Volcanic Geyser|M21|1
 1 Wayward Guide-Beast|ZNR|1
-[Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

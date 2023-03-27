@@ -1,7 +1,5 @@
 [metadata]
 Name=harpy_2
-[Avatar]
-
 [Main]
 1 Aphemia, the Cacophony|THB|1
 1 Ashiok, Sculptor of Fears|THB|1
@@ -13,8 +11,7 @@ Name=harpy_2
 1 Fruit of Tizerus|THB|1
 1 Glimpse of Freedom|THB|1
 1 Insatiable Harpy|THS|1
-2 Island|THB|1
-1 Island|THB|2
+3 Island|THB|2
 1 Island|THS|2
 1 Island|THS|4
 1 Mausoleum Harpy|RIX|1
@@ -27,8 +24,7 @@ Name=harpy_2
 1 Screeching Harpy|TPR|1
 1 Shrike Harpy|BNG|1
 1 Sleep of the Dead|THB|1
-2 Swamp|THB|1
-4 Swamp|THB|2
+6 Swamp|THB|2
 3 Swamp|THB|3
 4 Swamp|THS|1
 1 Swamp|THS|3
@@ -36,13 +32,3 @@ Name=harpy_2
 1 Sweet Oblivion|THB|1
 1 Temple of Deceit|THB|1
 1 Unknown Shores|THB|1
-[Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

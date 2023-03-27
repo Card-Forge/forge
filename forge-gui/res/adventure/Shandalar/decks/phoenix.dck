@@ -2,10 +2,10 @@
 Name=Phoenix
 [Main]
 2 Blood Crypt|RNA|1
-1 Cavern of Souls|2X2|3
+1 Cavern of Souls|2X2|1
 4 Chandra's Phoenix|M14|1
 2 Clifftop Retreat|DOM|1
-2 Delayed Blast Fireball|CLB|1
+2 Delayed Blast Fireball|CLB|2
 2 Dragonskull Summit|DMC|1
 2 Fireball|CLB|1
 2 Firestorm|WTH|1
@@ -17,7 +17,7 @@ Name=Phoenix
 2 Molten Echoes|VOC|1
 4 Mountain|DMU|1
 2 Mountain|DMU|2
-3 Mountain|DMU|4
+3 Mountain|DMU|3
 2 Otharri, Suns' Glory|ONC|1
 4 Phoenix Chick|DMU|1
 2 Sacred Foundry|GRN|1
@@ -28,5 +28,3 @@ Name=Phoenix
 2 Syrix, Carrier of the Flame|NCC|1
 4 Tomakul Phoenix|YBRO|1
 2 Wall of Fire|M13|1
-[Sideboard]
-

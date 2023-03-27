@@ -1,7 +1,5 @@
 [metadata]
 Name=fungus
-[Avatar]
-
 [Main]
 2 Deathbonnet Sprout|MID|1
 6 Forest|CLB|1
@@ -10,7 +8,7 @@ Name=fungus
 4 Forest|CLB|4
 4 Fungusaur|30A|1
 1 Mycoloth|C15|1
-4 Spore Swarm|J21|1
+4 Spore Swarm|DOM|1
 4 Sporecrown Thallid|DOM|1
 4 Sporemound|ZNC|1
 1 Sporeweb Weaver|M21|1
@@ -21,13 +19,3 @@ Name=fungus
 4 The Weatherseed Treaty|DMU|1
 2 Undercellar Myconid|CLB|1
 1 Verdeloth the Ancient|ARC|1
-[Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-
