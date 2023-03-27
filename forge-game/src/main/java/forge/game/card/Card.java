@@ -3946,10 +3946,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // values that are printed on card
     public final String getBasePowerString() {
-        return (null == currentState.getBasePowerString()) ? "" + getBasePower() : currentState.getBasePowerString();
+        return (null == currentState.getBasePowerString()) ? String.valueOf(getBasePower()) : currentState.getBasePowerString();
     }
     public final String getBaseToughnessString() {
-        return (null == currentState.getBaseToughnessString()) ? "" + getBaseToughness() : currentState.getBaseToughnessString();
+        return (null == currentState.getBaseToughnessString()) ? String.valueOf(getBaseToughness()) : currentState.getBaseToughnessString();
     }
 
     // values that are printed on card
