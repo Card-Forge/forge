@@ -3613,6 +3613,14 @@
 			"rarity": [
 				"common",
 				"uncommon",
+				"rare"
+			]
+		},
+				{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"rarity": [
 				"rare",
 				"mythicrare",
 				"special"
@@ -4283,9 +4291,9 @@
 		"decks/eye.dck"
 	],
 	"ai": "",
-	"flying": false,
+	"flying": true,
 	"spawnRate": 1,
-	"scale":0.80,
+	"scale":0.85,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 25,
@@ -4294,7 +4302,11 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4
+			"addMaxCount": 4,
+			"rarity": [
+				"uncommon",
+				"common"
+			]
 		},
 		{
 			"type": "card",

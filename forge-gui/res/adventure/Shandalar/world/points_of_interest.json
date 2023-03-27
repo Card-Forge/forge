@@ -1363,15 +1363,6 @@
 	"radiusFactor": 0.8
 },
 {
-	"name": "MageTowerU6",
-	"type": "dungeon",
-	"count": 2,
-	"spriteAtlas": "maps/tileset/buildings.atlas",
-	"sprite": "MageTower",
-	"map": "maps/map/magetower_7.tmx",
-	"radiusFactor": 0.8
-},
-{
 	"name": "MageTowerU7",
 	"type": "dungeon",
 	"count": 2,

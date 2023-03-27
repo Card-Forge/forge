@@ -1,10 +1,10 @@
 {
-    "activeFile": "map/cave_19.tmx",
+    "activeFile": "map/magetower_13.tmx",
     "expandedProjectPaths": [
-        "tileset",
         "map",
         "obj",
-        "map/main_story"
+        "map/main_story",
+        "tileset"
     ],
     "fileStates": {
         "map/cave_1..tmx": {
@@ -195,11 +195,25 @@
             }
         },
         "map/magetower_13.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 1.6941666666666666,
-            "selectedLayer": 0,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 240.2361042793901,
-                "y": 332.02164289227744
+                "x": 240.82636497786527,
+                "y": 331.4313821938023
+            }
+        },
+        "map/magetower_14.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 3,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 240,
+                "y": 136.16666666666663
             }
         },
         "map/magetower_4.tmx": {
@@ -210,7 +224,7 @@
             "selectedLayer": 5,
             "viewCenter": {
                 "x": 240.21654135338346,
-                "y": 136.5654135338346
+                "y": 137.14285714285714
             }
         },
         "map/magetower_5.tmx": {
@@ -221,7 +235,7 @@
             "selectedLayer": 4,
             "viewCenter": {
                 "x": 224.20210526315788,
-                "y": 136.08421052631581
+                "y": 136.62315789473683
             }
         },
         "map/magetower_6.tmx": {
@@ -239,11 +253,33 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 1.7317708333333333,
+            "scale": 3,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 239.63909774436092,
+                "x": 239,
+                "y": 110.5
+            }
+        },
+        "map/phyrexian_w1.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.7317708333333333,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 240.21654135338346,
                 "y": 136.5654135338346
+            }
+        },
+        "map/tibalt_f1.tmx": {
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 1.1294157608695652,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 368.332030075188,
+                "y": 224.45233082706767
             }
         },
         "tileset/buildings.tsx": {
@@ -254,39 +290,26 @@
         }
     },
     "openFiles": [
-        "map/cave_1..tmx",
-        "map/cave_2.tmx",
-        "map/cave_3.tmx",
-        "map/cave_4.tmx",
-        "map/cave_5.tmx",
-        "map/cave_6.tmx",
-        "map/cave_7.tmx",
-        "map/cave_8.tmx",
-        "map/cave_9.tmx",
-        "map/cave_11.tmx",
-        "map/cave_12.tmx",
-        "map/cave_20.tmx",
-        "map/cave_22.tmx",
-        "map/cave_10.tmx",
-        "map/cave_14.tmx",
-        "map/cave_13.tmx",
-        "map/cave_15.tmx",
-        "map/cave_17.tmx",
-        "map/cave_19.tmx"
+        "map/magetower_5.tmx",
+        "map/magetower_4.tmx",
+        "map/magetower_1.tmx",
+        "map/magetower_8.tmx",
+        "map/magetower_6.tmx",
+        "map/magetower_13.tmx"
     ],
     "project": "",
     "recentFiles": [
+        "map/magetower_5.tmx",
+        "map/magetower_4.tmx",
+        "map/magetower_1.tmx",
+        "map/magetower_8.tmx",
+        "map/magetower_6.tmx",
+        "map/magetower_13.tmx",
         "map/cave_19.tmx",
         "map/cave_17.tmx",
         "map/cave_15.tmx",
         "map/cave_13.tmx",
         "map/cave_10.tmx",
-        "map/cave_22.tmx",
-        "map/cave_20.tmx",
-        "map/cave_12.tmx",
-        "map/cave_11.tmx",
-        "map/cave_9.tmx",
-        "map/cave_8.tmx",
-        "map/cave_7.tmx"
+        "map/cave_22.tmx"
     ]
 }

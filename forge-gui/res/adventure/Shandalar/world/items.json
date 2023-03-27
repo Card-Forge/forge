@@ -207,12 +207,17 @@
     "iconName": "StrangeKey",
     "questItem": true
   },
-    {
+  {
     "name": "Torturer's Key",
     "iconName": "StrangeKey",
     "questItem": true
   },
-    {
+  {
+    "name": "Illusionist's Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
     "name": "Tibalt's Key",
     "iconName": "StrangeKey",
     "questItem": true
