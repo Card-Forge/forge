@@ -50,7 +50,7 @@
   </object>
   <object id="66" template="../obj/treasure.tx" x="195.5" y="50.5">
    <properties>
-    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;White&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Staff of the Sun Magus&quot;}]"/>
+    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;White&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Jungle Shield&quot;}]"/>
    </properties>
   </object>
   <object id="67" template="../obj/booster.tx" x="208.5" y="78">

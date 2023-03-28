@@ -39,7 +39,7 @@
   </object>
   <object id="48" template="../obj/treasure.tx" x="208" y="48.4166">
    <properties>
-    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;Black&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Staff of the Death Magus&quot;}]"/>
+    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;Black&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Steel Shield&quot;}]"/>
    </properties>
   </object>
   <object id="50" template="../obj/enemy.tx" x="207.902" y="90.5586">

@@ -53,7 +53,7 @@
   <object id="69" template="../obj/gold.tx" x="306.52" y="83.2111"/>
   <object id="70" template="../obj/treasure.tx" x="54.144" y="139.941">
    <properties>
-    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;Green&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Staff of the Wild Magus&quot;}]"/>
+    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;Green&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Leather Boots&quot;}]"/>
    </properties>
   </object>
   <object id="71" template="../obj/booster.tx" x="374.31" y="126.36">
