@@ -44,9 +44,9 @@ public class DeckHintsTest {
         list.add(readCard("assault_griffin.txt"));
         list.add(readCard("auramancer.txt"));
 
-        List<PaperCard> filtered = hints.filter(list);
-        Assert.assertEquals(1, filtered.size());
-        Assert.assertEquals("Assault Griffin", filtered.get(0).getName());
+        Iterable<PaperCard> filtered = hints.filter(list);
+        Assert.assertEquals(1, Iterables.size(filtered));
+        Assert.assertEquals("Assault Griffin", Iterables.getLast(filtered).getName());
     }
 
     /**
@@ -65,7 +65,7 @@ public class DeckHintsTest {
         list.add(readCard("scepter_of_empires.txt"));
         list.add(readCard("crown_of_empires.txt"));
 
-        Assert.assertEquals(2, hints.filter(list).size());
+        Assert.assertEquals(2, Iterables.size(hints.filter(list)));
     }
 
     /**
@@ -82,7 +82,7 @@ public class DeckHintsTest {
         list.add(readCard("acidic_slime.txt"));
         list.add(readCard("ajanis_sunstriker.txt"));
 
-        Assert.assertEquals(1, hints.filter(list).size());
+        Assert.assertEquals(1, Iterables.size(hints.filter(list)));
     }
 
     /**
@@ -99,7 +99,7 @@ public class DeckHintsTest {
         list.add(readCard("llanowar_elves.txt"));
         list.add(readCard("unsummon.txt"));
 
-        Assert.assertEquals(1, hints.filter(list).size());
+        Assert.assertEquals(1, Iterables.size(hints.filter(list)));
     }
 
     /**
@@ -150,7 +150,7 @@ public class DeckHintsTest {
         list.add(pc);
         list.add(readCard("assault_griffin.txt"));
 
-        Assert.assertEquals(1, hints.filter(list).size());
+        Assert.assertEquals(1, Iterables.size(hints.filter(list)));
     }
 
     /**

@@ -174,7 +174,7 @@ public class Cost implements Serializable {
      */
     public final ManaCost getTotalMana() {
         CostPartMana manapart = getCostMana();
-        return manapart == null ? ManaCost.ZERO : manapart.getManaToPay();
+        return manapart == null ? ManaCost.ZERO : manapart.getMana();
     }
 
     /**
@@ -943,7 +943,8 @@ public class Cost implements Serializable {
             } else if (part instanceof CostPutCounter || (mergeAdditional && // below usually not desired because they're from different causes
                     (part instanceof CostDiscard || part instanceof CostDraw ||
                     part instanceof CostAddMana || part instanceof CostPayLife ||
-                    part instanceof CostSacrifice || part instanceof CostTapType))) {
+                    part instanceof CostSacrifice || part instanceof CostTapType||
+                    part instanceof CostExile))) {
                 boolean alreadyAdded = false;
                 for (final CostPart other : costParts) {
                     if ((other.getClass().equals(part.getClass()) || (part instanceof CostPutCounter && ((CostPutCounter)part).getCounter().is(CounterEnumType.LOYALTY))) &&
@@ -952,6 +953,7 @@ public class Cost implements Serializable {
                             StringUtils.isNumeric(other.getAmount())) {
                         String amount = String.valueOf(part.convertAmount() + other.convertAmount());
                         if (part instanceof CostPutCounter) { // CR 606.5 path for Carth
+                            // TODO support X
                             if (other instanceof CostPutCounter && ((CostPutCounter)other).getCounter().equals(((CostPutCounter) part).getCounter())) {
                                 costParts.add(new CostPutCounter(amount, ((CostPutCounter) part).getCounter(), part.getType(), part.getTypeDescription()));
                             } else if (other instanceof CostRemoveCounter && ((CostRemoveCounter)other).counter.is(CounterEnumType.LOYALTY)) {
@@ -978,6 +980,8 @@ public class Cost implements Serializable {
                             costParts.add(new CostAddMana(amount, part.getType(), part.getTypeDescription()));
                         } else if (part instanceof CostPayLife) {
                             costParts.add(new CostPayLife(amount, part.getTypeDescription()));
+                        } else if (part instanceof CostExile) {
+                            costParts.add(new CostExile(amount, part.getType(), part.getTypeDescription(), ((CostExile) part).getFrom()));
                         }
                         toRemove.add(other);
                         alreadyAdded = true;
