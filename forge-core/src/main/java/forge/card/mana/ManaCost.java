@@ -391,7 +391,7 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
     public Iterator<ManaCostShard> iterator() {
         return this.shards.iterator();
     }
-    
+
     public int getGlyphCount() { // counts all colored shards or 1 for {0} costs 
         int width = shards.size();
         if (genericCost > 0 || (genericCost == 0 && width == 0)) {

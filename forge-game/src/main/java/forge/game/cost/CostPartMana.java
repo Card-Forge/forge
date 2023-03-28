@@ -75,7 +75,6 @@ public class CostPartMana extends CostPart {
      * @return the mana
      */
     public final ManaCost getMana() {
-        // Only used for Human to pay for non-X cost first
         return this.cost;
     }
 
@@ -88,15 +87,6 @@ public class CostPartMana extends CostPart {
      */
     public boolean canXbe0() {
         return !xCantBe0;
-    }
-
-    /**
-     * Gets the mana to pay.
-     *
-     * @return the mana to pay
-     */
-    public final ManaCost getManaToPay() {
-        return cost;
     }
 
     /**
@@ -149,13 +139,13 @@ public class CostPartMana extends CostPart {
             if (timesToPay == 0) {
                 return null;
             }
-            ManaCostBeingPaid totalMana = new ManaCostBeingPaid(getManaToPay());
+            ManaCostBeingPaid totalMana = new ManaCostBeingPaid(getMana());
             for (int i = 1; i < timesToPay; i++) {
-                totalMana.addManaCost(getManaToPay());
+                totalMana.addManaCost(getMana());
             }
             return totalMana.toManaCost();
         }
-        return getManaToPay();
+        return getMana();
     }
 
     @Override
