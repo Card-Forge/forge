@@ -1,10 +1,10 @@
 {
-    "activeFile": "map/tibalt.tmx",
+    "activeFile": "map/scarecrow_farm.tmx",
     "expandedProjectPaths": [
-        "map/main_story",
+        "map",
         "tileset",
-        "obj",
-        "map"
+        "map/main_story",
+        "obj"
     ],
     "fileStates": {
         "C:/Users/simon/Documents/Forge/res/adventure/Shandalar/maps/map/kiora_island.tmx": {
@@ -45,7 +45,7 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 239.5,
+                "x": 240,
                 "y": 136.25
             }
         },
@@ -56,7 +56,7 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 399.5,
+                "x": 400,
                 "y": 319.75
             }
         },
@@ -64,16 +64,16 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 265.33333333333326,
-                "y": 79
+                "x": 240,
+                "y": 136.33333333333334
             }
         },
         "map/barbariancamp_2.tmx": {
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 217.99999999999997,
-                "y": 180.66666666666669
+                "x": 240,
+                "y": 136.33333333333334
             }
         },
         "map/barbariancamp_3.tmx": {
@@ -81,15 +81,15 @@
             "selectedLayer": 4,
             "viewCenter": {
                 "x": 240,
-                "y": 136.5
+                "y": 136.25
             }
         },
         "map/barbariancamp_4.tmx": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 236.25,
-                "y": 363.5
+                "x": 320,
+                "y": 319.75
             }
         },
         "map/castle_plains.tmx": {
@@ -1964,10 +1964,13 @@
             }
         },
         "map/grove_3.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 2,
-            "selectedLayer": 2,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 239.75,
+                "x": 239.5,
                 "y": 136.25
             }
         },
@@ -2152,16 +2155,19 @@
             "scale": 2,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 114,
-                "y": 384.25
+                "x": 240,
+                "y": 239.75
             }
         },
         "map/magetower_14.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 225.5,
-                "y": 169.25
+                "x": 240,
+                "y": 136.25
             }
         },
         "map/magetower_2.tmx": {
@@ -2171,8 +2177,8 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 334,
-                "y": 169.25
+                "x": 240,
+                "y": 136.25
             }
         },
         "map/magetower_3.tmx": {
@@ -2182,24 +2188,30 @@
             "scale": 4,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 276.5,
-                "y": 125.375
+                "x": 240,
+                "y": 135.875
             }
         },
         "map/magetower_4.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 2,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 343.5,
-                "y": 133.25
+                "x": 240,
+                "y": 136.25
             }
         },
         "map/magetower_5.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 1.3694556451612903,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 174.5218991534781,
-                "y": 161.0128818549871
+                "x": 224.1766654398234,
+                "y": 136.1854987118145
             }
         },
         "map/magetower_6.tmx": {
@@ -2209,8 +2221,8 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 344,
-                "y": 152.75
+                "x": 240,
+                "y": 136.25
             }
         },
         "map/magetower_7.tmx": {
@@ -2230,11 +2242,14 @@
             }
         },
         "map/magetower_8.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 1.6011458333333333,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 201.73053152039557,
-                "y": 157.0750113850758
+                "x": 240.45280072864486,
+                "y": 136.46477132262055
             }
         },
         "map/magetower_9.tmx": {
@@ -2960,8 +2975,8 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 377.83333333333326,
-                "y": 73.5
+                "x": 377.66666666666663,
+                "y": 299.5
             }
         },
         "map/skullcave_1.tmx": {
@@ -3251,30 +3266,29 @@
         }
     },
     "openFiles": [
-        "map/xira.tmx",
-        "map/castle_plains_1.tmx",
-        "map/castle_plains_2.tmx",
-        "map/castle_plains_3.tmx",
-        "map/cave_2.tmx",
-        "map/cave_3.tmx",
-        "map/cave_4.tmx",
-        "map/cave_5.tmx",
-        "map/cave_6.tmx",
-        "map/tibalt.tmx"
+        "map/grove_3.tmx",
+        "map/aerie_1.tmx",
+        "map/aerie_1B.tmx",
+        "map/aerie_1C.tmx",
+        "map/barbariancamp_1.tmx",
+        "map/barbariancamp_2.tmx",
+        "map/barbariancamp_4.tmx",
+        "map/barbariancamp_3.tmx",
+        "map/scarecrow_farm.tmx"
     ],
     "project": "",
     "recentFiles": [
-        "map/xira.tmx",
-        "map/castle_plains_1.tmx",
-        "map/tibalt.tmx",
-        "map/cave_6.tmx",
-        "map/cave_5.tmx",
-        "map/cave_4.tmx",
-        "map/cave_3.tmx",
-        "map/cave_2.tmx",
-        "map/castle_plains_3.tmx",
-        "map/castle_plains_2.tmx",
+        "map/grove_3.tmx",
+        "map/aerie_1.tmx",
         "map/aerie_1B.tmx",
-        "map/aerie_1C.tmx"
+        "map/aerie_1C.tmx",
+        "map/barbariancamp_1.tmx",
+        "map/barbariancamp_2.tmx",
+        "map/barbariancamp_4.tmx",
+        "map/barbariancamp_3.tmx",
+        "map/scarecrow_farm.tmx",
+        "map/magetower_13.tmx",
+        "map/magetower_1.tmx",
+        "map/magetower_14.tmx"
     ]
 }

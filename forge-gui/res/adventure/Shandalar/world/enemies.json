@@ -1377,7 +1377,7 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 5,
+			"addMaxCount": 4,
 			"rarity": [
 				"common",
 				"uncommon"
@@ -1386,7 +1386,7 @@
 		{
 			"type": "card",
 			"probability": 0.5,
-			"count": 2,
+			"count": 1,
 			"colors": [
 				"Green"
 			],
