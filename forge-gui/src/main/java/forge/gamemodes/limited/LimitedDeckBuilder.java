@@ -18,7 +18,6 @@ import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
-import forge.card.DeckHints;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -591,12 +590,10 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
             if (ai.getRemRandomDecks()) {
                 final List<PaperCard> comboCards = new ArrayList<>();
                 if (ai.getDeckNeeds() != null && ai.getDeckNeeds().isValid()) {
-                    final DeckHints needs = ai.getDeckNeeds();
-                    comboCards.addAll(needs.filter(deckList));
+                    Iterables.addAll(comboCards, ai.getDeckNeeds().filter(deckList));
                 }
                 if (ai.getDeckHints() != null && ai.getDeckHints().isValid()) {
-                    final DeckHints hints = ai.getDeckHints();
-                    comboCards.addAll(hints.filter(deckList));
+                    Iterables.addAll(comboCards, ai.getDeckHints().filter(deckList));
                 }
                 if (comboCards.isEmpty()) {
                     if (logToConsole) {

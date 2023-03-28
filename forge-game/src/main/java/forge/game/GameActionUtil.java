@@ -529,7 +529,7 @@ public final class GameActionUtil {
             for (KeywordInterface inst : source.getKeywords()) {
                 final String keyword = inst.getOriginal();
                 if (keyword.startsWith("AlternateAdditionalCost")) {
-                    final List<SpellAbility> newAbilities = Lists.newArrayList();
+                    abilities.clear();
 
                     for (String s : keyword.split(":", 2)[1].split(":")) {
                         final SpellAbility newSA = sa.copy();
@@ -539,24 +539,21 @@ public final class GameActionUtil {
                         newSA.setDescription(sa.getDescription() + " (Additional cost: " + cost.toSimpleString() + ")");
                         newSA.setPayCosts(cost.add(sa.getPayCosts()));
                         if (newSA.canPlay()) {
-                            newAbilities.add(newSA);
+                            abilities.add(newSA);
                         }
                     }
-
-                    abilities.clear();
-                    abilities.addAll(newAbilities);
                 }
             }
         } else if (sa.isActivatedAbility() && sa.hasParam("AlternateCost")) {
             // need to be handled there because it needs to rebuilt the description for the original ability
 
-            final List<SpellAbility> newAbilities = Lists.newArrayList();
+            abilities.clear();
 
             SpellAbility newSA = sa.copy();
             newSA.removeParam("AlternateCost");
             newSA.rebuiltDescription();
             if (newSA.canPlay()) {
-                newAbilities.add(newSA);
+                abilities.add(newSA);
             }
 
             // set the cost to this directly to bypass non mana cost
@@ -565,11 +562,8 @@ public final class GameActionUtil {
             newSA2.removeParam("AlternateCost");
             newSA2.rebuiltDescription();
             if (newSA2.canPlay()) {
-                newAbilities.add(newSA2);
+                abilities.add(newSA2);
             }
-
-            abilities.clear();
-            abilities.addAll(newAbilities);
         }
         return abilities;
     }
