@@ -9,4 +9,4 @@ SVar:Transform:DB$ SetState | Defined$ Valid Incubator.token+YouCtrl | Mode$ Tra
 SVar:PumpAll:DB$ PumpAll | ValidCards$ Phyrexian.YouCtrl | KW$ First Strike & Deathtouch | SpellDescription$ Phyrexians you control gain first strike and deathtouch until end of turn.
 DeckHas:Ability$Token|Counters & Type$Artifact
 DeckHints:Type$Phyrexian
-Oracle:At the beginning of combat on your turn, choose one —\n• Incubate 2 twice. (To incubate 2, create an Incubator token with three +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)\n• Transform all Incubator tokens you control.\n• Phyrexians you control gain first strike and deathtouch until end of turn.
+Oracle:At the beginning of combat on your turn, choose one —\n• Incubate 2 twice. (To incubate 2, create an Incubator token with two +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)\n• Transform all Incubator tokens you control.\n• Phyrexians you control gain first strike and deathtouch until end of turn.
