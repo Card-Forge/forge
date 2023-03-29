@@ -101,7 +101,7 @@
   <object id="71" template="../obj/enemy.tx" x="171.481" y="287.219">
    <properties>
     <property name="enemy" value="Bull"/>
-    <property name="threatRange" type="int" value="60"/>
+    <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
   <object id="75" template="../obj/enemy.tx" x="245.5" y="236.5">
@@ -126,7 +126,7 @@
   <object id="78" template="../obj/enemy.tx" x="96.6663" y="275.667">
    <properties>
     <property name="enemy" value="Bull"/>
-    <property name="threatRange" type="int" value="60"/>
+    <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
   <object id="79" template="../obj/gold.tx" x="174.667" y="143.667"/>

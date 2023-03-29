@@ -357,6 +357,24 @@ BlueStaff
 WhiteStaff
   xy: 352,160
   size: 16, 16
+BlueStaff
+  xy: 336,160
+  size: 16, 16
+DeathMagusStaff
+  xy: 176,608
+  size: 16, 16
+SunMagusStaff
+  xy: 304,560
+  size: 16, 16
+WildMagusStaff
+  xy: 192,560
+  size: 16, 16
+FireMagusStaff
+  xy: 240,560
+  size: 16, 16
+MindMagusStaff
+  xy: 208,560
+  size: 16, 16
 GarrukAxe
   xy: 304,272
   size: 16, 16
