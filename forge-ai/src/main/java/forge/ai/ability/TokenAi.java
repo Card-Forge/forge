@@ -145,7 +145,6 @@ public class TokenAi extends SpellAbilityAi {
         /*
          * readParameters() is called in checkPhaseRestrictions
          */
-        final Card source = sa.getHostCard();
         final Game game = ai.getGame();
         final Player opp = ai.getWeakestOpponent();
 
@@ -174,9 +173,7 @@ public class TokenAi extends SpellAbilityAi {
                     sa.getTargets().add(ai);
                 } else {
                     // Flash Foliage
-                    CardCollection list =  ai.getOpponents().getCardsIn(ZoneType.Battlefield);
-                    list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
-                    list = CardLists.getTargetableCards(list, sa);
+                    CardCollection list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
                     CardCollection betterList = CardLists.filter(list, new Predicate<Card>() {
                         @Override
                         public boolean apply(Card c) {

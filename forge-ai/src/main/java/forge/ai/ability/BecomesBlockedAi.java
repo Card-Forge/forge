@@ -29,7 +29,6 @@ public class BecomesBlockedAi extends SpellAbilityAi {
         if (tgt != null) {
         	sa.resetTargets();
 	        CardCollection list = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), aiPlayer.getOpponents());
-	        list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
 	        list = CardLists.getTargetableCards(list, sa);
 	        list = CardLists.getNotKeyword(list, Keyword.TRAMPLE);
 

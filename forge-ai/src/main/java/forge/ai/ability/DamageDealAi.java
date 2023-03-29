@@ -471,8 +471,7 @@ public class DamageDealAi extends DamageAiBase {
         }
         for (final Object o : objects) {
             if (o instanceof Card) {
-                final Card c = (Card) o;
-                hPlay.remove(c);
+                hPlay.remove(o);
             }
         }
         hPlay = CardLists.getTargetableCards(hPlay, sa);
