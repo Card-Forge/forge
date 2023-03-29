@@ -26,6 +26,7 @@ import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.spellability.SpellAbility;
 import forge.gui.GuiBase;
+import forge.item.IPaperCard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
@@ -78,8 +79,12 @@ public class InputConfirm extends InputSyncronizedBase {
                  return controller.getGui().confirm(null, message, defaultIsYes, options);
              if (sa.getTargets() != null && sa.getTargets().isTargetingAnyCard() && sa.getTargets().size() == 1)
                  return controller.getGui().confirm((sa.getTargetCard()==null)?null:CardView.get(sa.getTargetCard()), message, defaultIsYes, options);
-             if (ApiType.Play.equals(sa.getApi()) && sa.getPlayEffectCard() != null)
+             if (ApiType.Play.equals(sa.getApi()) && sa.getPlayEffectCard() != null) {
+                 IPaperCard iPaperCard = sa.getPlayEffectCard().getPaperCard();
+                 if (iPaperCard != null) //getcardforUI regardless of zone if it's hidden or not...
+                     return controller.getGui().confirm(CardView.getCardForUi(iPaperCard), message, defaultIsYes, options);
                  return controller.getGui().confirm(CardView.get(sa.getPlayEffectCard()), message, defaultIsYes, options);
+             }
              return controller.getGui().confirm(CardView.get(sa.getHostCard()), message, defaultIsYes, options);
          } else {
              InputConfirm inp;
