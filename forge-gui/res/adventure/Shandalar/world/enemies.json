@@ -9722,7 +9722,7 @@
 	"name": "Reassembling Skeleton",
 	"sprite": "sprites/skeleton.atlas",
 	"deck": [
-		"decks/reasemblingskeleton.dck"
+		"decks/reassemblingskeleton.dck"
 	],
 	"spawnRate": 1,
 	"difficulty": 0.1,
