@@ -796,6 +796,10 @@ public class ComputerUtilCost {
                 if (toBeCountered.isSpell() && !CardFactoryUtil.isCounterable(toBeCountered.getHostCard())) {
                     return false;
                 }
+                // no reason to pay if we don't plan to confirm
+                if (toBeCountered.isOptionalTrigger() && !SpellApiToAi.Converter.get(toBeCountered.getApi()).doTriggerNoCostWithSubs(payer, toBeCountered, false)) {
+                    return false;
+                }
                 // TODO check hasFizzled
             }
         }
