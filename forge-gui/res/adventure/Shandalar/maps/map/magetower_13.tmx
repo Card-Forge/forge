@@ -86,7 +86,7 @@
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 10,
- &quot;startBattleWithCard&quot;: [ &quot;Hesitation&quot;, &quot;Hesitation&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Hesitation&quot; ]
 }</property>
     <property name="enemy" value="Blue Wiz3"/>
     <property name="threatRange" type="int" value="30"/>

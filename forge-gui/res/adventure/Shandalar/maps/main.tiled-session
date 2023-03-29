@@ -1,10 +1,10 @@
 {
-    "activeFile": "map/scarecrow_farm.tmx",
+    "activeFile": "map/magetower_13.tmx",
     "expandedProjectPaths": [
-        "map",
         "tileset",
-        "map/main_story",
-        "obj"
+        "obj",
+        "map",
+        "map/main_story"
     ],
     "fileStates": {
         "C:/Users/simon/Documents/Forge/res/adventure/Shandalar/maps/map/kiora_island.tmx": {
@@ -1484,7 +1484,7 @@
             "scale": 1.5,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 240,
+                "x": 239.99999999999997,
                 "y": 136.33333333333334
             }
         },
@@ -1492,8 +1492,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 217.25,
-                "y": 143
+                "x": 217,
+                "y": 143.25
             }
         },
         "map/djinnpalace_3.tmx": {
@@ -1777,7 +1777,7 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240.66666666666666,
+                "x": 240.66666666666669,
                 "y": 136.33333333333334
             }
         },
@@ -1804,8 +1804,8 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240,
-                "y": 135.99999999999994
+                "x": 239.99999999999997,
+                "y": 136.33333333333334
             }
         },
         "map/graveyard_5.tmx": {
@@ -1813,7 +1813,7 @@
             "selectedLayer": 4,
             "viewCenter": {
                 "x": 320,
-                "y": 320
+                "y": 320.5
             }
         },
         "map/grolnok.tmx": {
@@ -1831,7 +1831,7 @@
             "scale": 1.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 240.33333333333337,
+                "x": 239.99999999999997,
                 "y": 136.33333333333334
             }
         },
@@ -2005,15 +2005,15 @@
             "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 239.75,
-                "y": 136.25
+                "x": 134,
+                "y": 119.75
             }
         },
         "map/grove_8.tmx": {
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240.33333333333337,
+                "x": 239.99999999999997,
                 "y": 136.33333333333334
             }
         },
@@ -2024,7 +2024,7 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240.99999999999997,
+                "x": 240.66666666666669,
                 "y": 136.33333333333334
             }
         },
@@ -2054,8 +2054,8 @@
             "scale": 1.9712500000000002,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 239.94927076727961,
-                "y": 136.71528218135697
+                "x": 346.48065948002534,
+                "y": 153.45592897907417
             }
         },
         "map/kiora_island.tmx": {
@@ -2084,7 +2084,7 @@
             "scale": 1.3517708333333331,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240.05548277722127,
+                "x": 239.68559759574637,
                 "y": 137.9671726901441
             }
         },
@@ -2095,16 +2095,16 @@
             "scale": 1.3517708333333331,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 240.05548277722127,
-                "y": 137.9671726901441
+                "x": 85.07359173923098,
+                "y": 113.55475071279957
             }
         },
         "map/lichsmirror.tmx": {
             "scale": 1.3517708333333331,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240.4253679586962,
-                "y": 136.48763196424449
+                "x": 240.42536795869623,
+                "y": 137.2274023271943
             }
         },
         "map/magetower_1.tmx": {
@@ -2155,8 +2155,8 @@
             "scale": 2,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 240,
-                "y": 239.75
+                "x": 344.5,
+                "y": 255.75
             }
         },
         "map/magetower_14.tmx": {
@@ -2166,7 +2166,7 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240,
+                "x": 239.5,
                 "y": 136.25
             }
         },
@@ -2713,7 +2713,7 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 400.5,
+                "x": 400,
                 "y": 216.5
             }
         },
@@ -2721,8 +2721,16 @@
             "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 401.3333333333333,
+                "x": 401.33333333333337,
                 "y": 400.6666666666667
+            }
+        },
+        "map/phyrexian_b1.tmx": {
+            "scale": 0.9005208333333332,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 240.97165991902833,
+                "y": 136.0323886639676
             }
         },
         "map/plains_town.tmx": {
@@ -3248,9 +3256,12 @@
             "scale": 2,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 480,
-                "y": 271.75
+                "x": 447.5,
+                "y": 288.25
             }
+        },
+        "tileset/GitaxianTilesheet.tsx": {
+            "scaleInDock": 1
         },
         "tileset/buildings-nocollide.tsx": {
             "scaleInDock": 1
@@ -3266,29 +3277,21 @@
         }
     },
     "openFiles": [
-        "map/grove_3.tmx",
-        "map/aerie_1.tmx",
-        "map/aerie_1B.tmx",
-        "map/aerie_1C.tmx",
-        "map/barbariancamp_1.tmx",
-        "map/barbariancamp_2.tmx",
-        "map/barbariancamp_4.tmx",
-        "map/barbariancamp_3.tmx",
-        "map/scarecrow_farm.tmx"
+        "map/magetower_13.tmx"
     ],
     "project": "",
     "recentFiles": [
-        "map/grove_3.tmx",
-        "map/aerie_1.tmx",
-        "map/aerie_1B.tmx",
-        "map/aerie_1C.tmx",
-        "map/barbariancamp_1.tmx",
-        "map/barbariancamp_2.tmx",
-        "map/barbariancamp_4.tmx",
-        "map/barbariancamp_3.tmx",
-        "map/scarecrow_farm.tmx",
         "map/magetower_13.tmx",
-        "map/magetower_1.tmx",
-        "map/magetower_14.tmx"
+        "map/fort_6.tmx",
+        "map/fort_8.tmx",
+        "map/fort_9.tmx",
+        "map/graveyard_4.tmx",
+        "map/graveyard_5.tmx",
+        "map/graveyard.tmx",
+        "map/grove_1.tmx",
+        "map/grove_9.tmx",
+        "map/grove_8.tmx",
+        "map/zombietown.tmx",
+        "map/nest_blue_1.tmx"
     ]
 }
