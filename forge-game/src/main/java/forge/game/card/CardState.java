@@ -202,10 +202,10 @@ public class CardState extends GameObject implements IHasSVars {
 
     // values that are printed on card
     public final String getBasePowerString() {
-        return (null == basePowerString) ? "" + getBasePower() : basePowerString;
+        return basePowerString;
     }
     public final String getBaseToughnessString() {
-        return (null == baseToughnessString) ? "" + getBaseToughness() : baseToughnessString;
+        return baseToughnessString;
     }
 
     // values that are printed on card

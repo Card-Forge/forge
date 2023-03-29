@@ -3934,38 +3934,32 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         currentState.setBaseLoyalty(Integer.toString(n));
     }
 
-    // values that are printed on card
     public final int getBasePower() {
         return currentState.getBasePower();
     }
-
     public final int getBaseToughness() {
         return currentState.getBaseToughness();
     }
 
-    // values that are printed on card
     public final void setBasePower(final int n) {
         currentState.setBasePower(n);
     }
-
     public final void setBaseToughness(final int n) {
         currentState.setBaseToughness(n);
     }
 
     // values that are printed on card
     public final String getBasePowerString() {
-        return currentState.getBasePowerString();
+        return (null == currentState.getBasePowerString()) ? String.valueOf(getBasePower()) : currentState.getBasePowerString();
     }
-
     public final String getBaseToughnessString() {
-        return currentState.getBaseToughnessString();
+        return (null == currentState.getBaseToughnessString()) ? String.valueOf(getBaseToughness()) : currentState.getBaseToughnessString();
     }
 
     // values that are printed on card
     public final void setBasePowerString(final String s) {
         currentState.setBasePowerString(s);
     }
-
     public final void setBaseToughnessString(final String s) {
         currentState.setBaseToughnessString(s);
     }

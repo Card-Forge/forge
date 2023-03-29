@@ -236,7 +236,7 @@ public class HumanPlay {
         }
         // 0 mana costs were slipping through because CostPart.getAmount returns 1
         else if (costPart instanceof CostPartMana && parts.size() < 2) {
-            if (((CostPartMana) costPart).getManaToPay().isZero()) {
+            if (((CostPartMana) costPart).getMana().isZero()) {
                 return p.getController().confirmPayment(costPart, Localizer.getInstance().getMessage("lblDoYouWantPay") + " {0}?" + orString, sourceAbility);
             }
         }
@@ -438,7 +438,7 @@ public class HumanPlay {
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostPartMana) {
-                if (!((CostPartMana) part).getManaToPay().isZero()) { // non-zero costs require input
+                if (!((CostPartMana) part).getMana().isZero()) { // non-zero costs require input
                     mayRemovePart = false;
                 }
             }

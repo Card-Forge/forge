@@ -6,8 +6,17 @@ Type=Commander
 ScryfallCode=MOC
 
 [cards]
+1 M Bright-Palm, Soul Awakener @Mila Pesic
+2 M Brimaz, Blight of Oreskos @Uriah Voth
+3 M Gimbal, Gremlin Prodigy @Fajareka Setiawan
+4 M Kasla, the Broken Halo @Martina Fackova
+5 M Sidar Jabari of Zhalfir @Simon Dominic
+49 C Esper @Bruce Brenneise
+61 C Nyx @Piotr Dura
 67 C Towashi @Kamila Szutenberg
 147 C Isle of Vesuva @Zoltan Boros & Gabor Szikszai
+148 C Jund @Aleksi Briclot
+153 C Panopticon @John Avon
 158 C Spatial Merging @Gabor Szikszai
 445 M Goro-Goro and Satoru @Johannes Voss
 446 M Katilda and Lier @Justyna Dura

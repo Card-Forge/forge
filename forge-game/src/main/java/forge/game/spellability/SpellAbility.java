@@ -618,7 +618,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         payingMana.clear();
     }
 
-    //getSpendPhyrexianMana
     public final int getSpendPhyrexianMana() {
         return this.spentPhyrexian;
     }

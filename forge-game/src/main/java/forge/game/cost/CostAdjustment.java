@@ -115,7 +115,13 @@ public class CostAdjustment {
         int count = 0;
 
         if (st.hasParam("ForEachShard")) {
-            ManaCost mc = sa.getHostCard().getManaCost();
+            ManaCost mc = ManaCost.ZERO;
+            if (sa.isSpell()) {
+                mc = sa.getHostCard().getManaCost();
+            } else if (sa.isAbility() && sa.getPayCosts().hasManaCost()) {
+                // TODO check for AlternateCost$, it should always be part of the activation cost too
+                mc = sa.getPayCosts().getCostMana().getMana();
+            }
             byte atom = ManaAtom.fromName(st.getParam("ForEachShard").toLowerCase());
             for (ManaCostShard shard : mc) {
                 if ((shard.getColorMask() & atom) != 0) {
