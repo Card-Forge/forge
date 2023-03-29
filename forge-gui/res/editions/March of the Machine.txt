@@ -22,7 +22,7 @@ ScryfallCode=MOM
 217 M Wrenn and Realmbreaker @Cristi Balanescu
 222 R Drana and Linvala @Raluca Marinescu
 225 R Ghalta and Mavren @Zezhou Chen
-227 U Halo Forager @
+227 U Halo Forager @Kevin Sidharta
 233 U Invasion of Ergamon @Manuel Castañón
 239 M Invasion of New Phyrexia @Chris Rallis
 249 R Omnath, Locus of All @Bryan Sola
@@ -50,7 +50,7 @@ ScryfallCode=MOM
 339 M Jin-Gitaxias @Julian Kok Joon Wen
 352 R Faerie Mastermind @Joshua Raphael
 358 R Breach the Multiverse @Liiga Smilshkalne
-381 U Norn's Inquisitor @
+381 U Norn's Inquisitor @Denis Zhbankov
 382 U Scrappy Bruiser @David Auden Nash
 383 U Kami of Whispered Hopes @Filipe Pagliuso
 384 U Botanical Brawler @Jesper Ejsing
