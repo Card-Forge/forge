@@ -1401,6 +1401,21 @@ public class CardFactoryUtil {
             for (final Trigger trigger : triggers) {
                 inst.addTrigger(trigger);
             }
+        } else if (keyword.equals("Incubate")) {
+            final String[] k = keyword.split(":");
+            final String sbIncubate = "DB$ Token | TokenScript$ incubator | TokenOwner$ You | RememberTokens$ True | SpellDescription$ Incubate  + k[1]";
+
+            final SpellAbility saIncubate= AbilityFactory.getAbility(sbIncubate, card);
+
+            final String sbPutCounter = "DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ \" + k[1]";
+            final AbilitySub saPutCounter = (AbilitySub) AbilityFactory.getAbility(sbPutCounter, card);
+            saIncubate.setSubAbility(saPutCounter);
+
+            final String sbClear = "DB$ Cleanup | ClearRemembered$ True";
+            
+            final AbilitySub saClear = (AbilitySub) AbilityFactory.getAbility(sbClear, card);
+            saPutCounter.setSubAbility(saClear);
+            saIncubate.setIntrinsic(intrinsic);
         } else if (keyword.equals("Ingest")) {
             final String trigStr = "Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True"
                     + "| Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Ingest ("

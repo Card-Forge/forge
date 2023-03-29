@@ -109,7 +109,12 @@
   <object id="75" template="../obj/manashards.tx" x="258" y="45"/>
   <object id="76" template="../obj/treasure.tx" x="161.5" y="48">
    <properties>
-    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;Black&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Spell Book&quot;}]"/>
+    <property name="reward">[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;Black&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Spell Book&quot;},
+{
+&quot;type&quot;: &quot;card&quot;,
+&quot;probability&quot;: 1,
+&quot;count&quot;: 1,
+&quot;cardName&quot;: &quot;Staff of the Death Magus&quot;}]</property>
     <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>

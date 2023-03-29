@@ -1,8 +1,8 @@
 {
     "activeFile": "map/magetower_13.tmx",
     "expandedProjectPaths": [
-        "tileset",
         "obj",
+        "tileset",
         "map",
         "map/main_story"
     ],
@@ -2177,8 +2177,8 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240,
-                "y": 136.25
+                "x": 344.5,
+                "y": 152.75
             }
         },
         "map/magetower_3.tmx": {
@@ -2188,8 +2188,8 @@
             "scale": 4,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240,
-                "y": 135.875
+                "x": 239.75,
+                "y": 135.625
             }
         },
         "map/magetower_4.tmx": {
@@ -2199,8 +2199,8 @@
             "scale": 2,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 240,
-                "y": 136.25
+                "x": 344.5,
+                "y": 152.75
             }
         },
         "map/magetower_5.tmx": {
@@ -2210,8 +2210,8 @@
             "scale": 1.3694556451612903,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 224.1766654398234,
-                "y": 136.1854987118145
+                "x": 376.79205005520805,
+                "y": 160.28266470371733
             }
         },
         "map/magetower_6.tmx": {
@@ -3277,21 +3277,27 @@
         }
     },
     "openFiles": [
-        "map/magetower_13.tmx"
+        "map/magetower_13.tmx",
+        "map/magetower_3.tmx",
+        "map/magetower_2.tmx",
+        "map/magetower_4.tmx",
+        "map/magetower_5.tmx",
+        "map/magetower_6.tmx",
+        "map/magetower_1.tmx"
     ],
     "project": "",
     "recentFiles": [
+        "map/magetower_1.tmx",
+        "map/magetower_6.tmx",
+        "map/magetower_5.tmx",
+        "map/magetower_4.tmx",
+        "map/magetower_2.tmx",
+        "map/magetower_3.tmx",
         "map/magetower_13.tmx",
         "map/fort_6.tmx",
         "map/fort_8.tmx",
         "map/fort_9.tmx",
         "map/graveyard_4.tmx",
-        "map/graveyard_5.tmx",
-        "map/graveyard.tmx",
-        "map/grove_1.tmx",
-        "map/grove_9.tmx",
-        "map/grove_8.tmx",
-        "map/zombietown.tmx",
-        "map/nest_blue_1.tmx"
+        "map/graveyard_5.tmx"
     ]
 }
