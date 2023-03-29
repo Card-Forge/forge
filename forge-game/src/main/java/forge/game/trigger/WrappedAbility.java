@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
+import com.google.common.collect.TreeBasedTable;
 
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -108,23 +109,23 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public void setPaidHash(final Map<String, CardCollection> hash) {
+    public void setPaidHash(final TreeBasedTable<String, Boolean, CardCollection> hash) {
         sa.setPaidHash(hash);
     }
 
     @Override
-    public Map<String, CardCollection> getPaidHash() {
+    public TreeBasedTable<String, Boolean, CardCollection> getPaidHash() {
         return sa.getPaidHash();
     }
 
     @Override
-    public CardCollection getPaidList(final String str) {
-        return sa.getPaidList(str);
+    public CardCollection getPaidList(final String str, boolean intrinsic) {
+        return sa.getPaidList(str, intrinsic);
     }
 
     @Override
-    public void addCostToHashList(final Card c, final String str) {
-        sa.addCostToHashList(c, str);
+    public void addCostToHashList(final Card c, final String str, final boolean intrinsic) {
+        sa.addCostToHashList(c, str, intrinsic);
     }
 
     @Override

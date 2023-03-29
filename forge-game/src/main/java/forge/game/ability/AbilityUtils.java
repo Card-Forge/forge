@@ -144,7 +144,7 @@ public class AbilityUtils {
             c = hostCard.getEnchantingCard();
             if (c == null && sa instanceof SpellAbility) {
                 SpellAbility root = ((SpellAbility)sa).getRootAbility();
-                CardCollection sacrificed = root.getPaidList("Sacrificed");
+                CardCollection sacrificed = root.getPaidList("Sacrificed", true);
                 if (sacrificed != null && !sacrificed.isEmpty()) {
                     c = sacrificed.getFirst().getEnchantingCard();
                 }
@@ -742,29 +742,29 @@ public class AbilityUtils {
             } else { // these ones only for handling lists
                 Iterable<Card> list = null;
                 if (calcX[0].startsWith("Sacrificed")) {
-                    list = sa.getRootAbility().getPaidList("Sacrificed");
+                    list = sa.getRootAbility().getPaidList("Sacrificed", true);
                 }
                 else if (calcX[0].startsWith("Discarded")) {
                     final SpellAbility root = sa.getRootAbility();
-                    list = root.getPaidList("Discarded");
+                    list = root.getPaidList("Discarded", true);
                     if (null == list && root.isTrigger()) {
-                        list = root.getHostCard().getSpellPermanent().getPaidList("Discarded");
+                        list = root.getHostCard().getSpellPermanent().getPaidList("Discarded", true);
                     }
                 }
                 else if (calcX[0].startsWith("Exiled")) {
-                    list = sa.getRootAbility().getPaidList("Exiled");
+                    list = sa.getRootAbility().getPaidList("Exiled", true);
                 }
                 else if (calcX[0].startsWith("Milled")) {
-                    list = sa.getRootAbility().getPaidList("Milled");
+                    list = sa.getRootAbility().getPaidList("Milled", true);
                 }
                 else if (calcX[0].startsWith("Tapped")) {
-                    list = sa.getRootAbility().getPaidList("Tapped");
+                    list = sa.getRootAbility().getPaidList("Tapped", true);
                 }
                 else if (calcX[0].startsWith("Revealed")) {
-                    list = sa.getRootAbility().getPaidList("Revealed");
+                    list = sa.getRootAbility().getPaidList("Revealed", true);
                 }
                 else if (calcX[0].startsWith("Returned")) {
-                    list = sa.getRootAbility().getPaidList("Returned");
+                    list = sa.getRootAbility().getPaidList("Returned", true);
                 }
                 else if (calcX[0].startsWith("Targeted")) {
                     list = sa.findTargetedCards();
@@ -1606,40 +1606,40 @@ public class AbilityUtils {
 
         if (sa.hasParam("RememberCostCards") && !sa.getPaidHash().isEmpty()) {
             List <Card> noList = Lists.newArrayList();
-            Map<String, CardCollection> paidLists = sa.getPaidHash();
+            Table<String, Boolean, CardCollection> paidLists = sa.getPaidHash();
             if (sa.hasParam("RememberCostExcept")) {
                 noList.addAll(AbilityUtils.getDefinedCards(host, sa.getParam("RememberCostExcept"), sa));
             }
-            if (paidLists.containsKey("Exiled")) {
-                final CardCollection paidListExiled = sa.getPaidList("Exiled");
+            if (paidLists.contains("Exiled", true)) {
+                final CardCollection paidListExiled = sa.getPaidList("Exiled", true);
                 for (final Card exiledAsCost : paidListExiled) {
                     if (!noList.contains(exiledAsCost)) {
                         host.addRemembered(exiledAsCost);
                     }
                 }
-            } else if (paidLists.containsKey("Sacrificed")) {
-                final CardCollection paidListSacrificed = sa.getPaidList("Sacrificed");
+            } else if (paidLists.contains("Sacrificed", true)) {
+                final CardCollection paidListSacrificed = sa.getPaidList("Sacrificed", true);
                 for (final Card sacrificedAsCost : paidListSacrificed) {
                     if (!noList.contains(sacrificedAsCost)) {
                         host.addRemembered(sacrificedAsCost);
                     }
                 }
-            } else if (paidLists.containsKey("Tapped")) {
-                final CardCollection paidListTapped = sa.getPaidList("Tapped");
+            } else if (paidLists.contains("Tapped", true)) {
+                final CardCollection paidListTapped = sa.getPaidList("Tapped", true);
                 for (final Card tappedAsCost : paidListTapped) {
                     if (!noList.contains(tappedAsCost)) {
                         host.addRemembered(tappedAsCost);
                     }
                 }
-            } else if (paidLists.containsKey("Unattached")) {
-                final CardCollection paidListUnattached = sa.getPaidList("Unattached");
+            } else if (paidLists.contains("Unattached", true)) {
+                final CardCollection paidListUnattached = sa.getPaidList("Unattached", true);
                 for (final Card unattachedAsCost : paidListUnattached) {
                     if (!noList.contains(unattachedAsCost)) {
                         host.addRemembered(unattachedAsCost);
                     }
                 }
-            } else if (paidLists.containsKey("Discarded")) {
-                final CardCollection paidListDiscarded = sa.getPaidList("Discarded");
+            } else if (paidLists.contains("Discarded", true)) {
+                final CardCollection paidListDiscarded = sa.getPaidList("Discarded", true);
                 for (final Card discardedAsCost : paidListDiscarded) {
                     if (!noList.contains(discardedAsCost)) {
                         host.addRemembered(discardedAsCost);
@@ -3860,29 +3860,29 @@ public class AbilityUtils {
             SpellAbility root = ((SpellAbility)sa).getRootAbility();
             // TODO do we really need these checks?
             if (defined.startsWith("SacrificedCards")) {
-                list = root.getPaidList("SacrificedCards");
+                list = root.getPaidList("SacrificedCards", true);
             } else if (defined.startsWith("Sacrificed")) {
-                list = root.getPaidList("Sacrificed");
+                list = root.getPaidList("Sacrificed", true);
             } else if (defined.startsWith("Revealed")) {
-                list = root.getPaidList("Revealed");
+                list = root.getPaidList("Revealed", true);
             } else if (defined.startsWith("DiscardedCards")) {
-                list = root.getPaidList("DiscardedCards");
+                list = root.getPaidList("DiscardedCards", true);
             } else if (defined.startsWith("Discarded")) {
-                list = root.getPaidList("Discarded");
+                list = root.getPaidList("Discarded", true);
             } else if (defined.startsWith("ExiledCards")) {
-                list = root.getPaidList("ExiledCards");
+                list = root.getPaidList("ExiledCards", true);
             } else if (defined.startsWith("Exiled")) {
-                list = root.getPaidList("Exiled");
+                list = root.getPaidList("Exiled", true);
             } else if (defined.startsWith("Milled")) {
-                list = root.getPaidList("Milled");
+                list = root.getPaidList("Milled", true);
             } else if (defined.startsWith("TappedCards")) {
-                list = root.getPaidList("TappedCards");
+                list = root.getPaidList("TappedCards", true);
             } else if (defined.startsWith("Tapped")) {
-                list = root.getPaidList("Tapped");
+                list = root.getPaidList("Tapped", true);
             } else if (defined.startsWith("UntappedCards")) {
-                list = root.getPaidList("UntappedCards");
+                list = root.getPaidList("UntappedCards", true);
             } else if (defined.startsWith("Untapped")) {
-                list = root.getPaidList("Untapped");
+                list = root.getPaidList("Untapped", true);
             }
         }
         return list;
