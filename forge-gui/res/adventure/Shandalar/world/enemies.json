@@ -12093,7 +12093,7 @@
 },
 {
 	"name": "Wurm",
-	"sprite": "sprites/leech.atlas",
+	"sprite": "sprites/wurm.atlas",
 	"deck": [
 		"decks/wurm.json"
 	],
