@@ -222,7 +222,7 @@ public final class CardUtil {
             newCopy.addAlternateState(CardStateName.Cloner, false);
             newCopy.getState(CardStateName.Cloner).copyFrom(in.getState(CardStateName.Cloner), true);
         }
-        //*/
+        */
 
         newCopy.setToken(in.isToken());
         newCopy.setCopiedSpell(in.isCopiedSpell());
@@ -232,6 +232,10 @@ public final class CardUtil {
         // lock in the current P/T
         newCopy.setBasePower(in.getCurrentPower());
         newCopy.setBaseToughness(in.getCurrentToughness());
+
+        // printed P/T
+        newCopy.setBasePowerString(in.getCurrentState().getBasePowerString());
+        newCopy.setBaseToughnessString(in.getCurrentState().getBaseToughnessString());
 
         // extra copy PT boost
         newCopy.setPTBoost(in.getPTBoostTable());

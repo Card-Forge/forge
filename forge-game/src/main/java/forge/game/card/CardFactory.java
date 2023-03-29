@@ -568,7 +568,7 @@ public class CardFactory {
         c.setRules(in.getRules());
 
         return c;
-    } // copyStats()
+    }
 
     /**
      * Copy characteristics of a particular state of one card to those of a
@@ -764,12 +764,14 @@ public class CardFactory {
                 state.removeIntrinsicKeyword(kw);
             }
 
-            if (state.getType().isCreature()) {
+            // CR 208.3 A noncreature object not on the battlefield has power or toughness only if it has a power and toughness printed on it.
+            // currently only LKI can be trusted?
+            if (state.getType().isCreature() || in.getOriginalState(originalState.getStateName()).getBasePowerString() != null) {
                 if (sa.hasParam("SetPower")) {
-                    state.setBasePower(AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("SetPower"), sa));
+                    state.setBasePower(AbilityUtils.calculateAmount(host, sa.getParam("SetPower"), sa));
                 }
                 if (sa.hasParam("SetToughness")) {
-                    state.setBaseToughness(AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("SetToughness"), sa));
+                    state.setBaseToughness(AbilityUtils.calculateAmount(host, sa.getParam("SetToughness"), sa));
                 }
             }
 
