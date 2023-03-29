@@ -6,15 +6,25 @@ Type=Expansion
 ScryfallCode=MOM
 
 [cards]
+9 R Boon-Bringer Valkyrie @Heonhwa Choe
 17 R Heliod, the Radiant Dawn @Victor Adame Minguez
 58 R Faerie Mastermind @Joshua Raphael
 65 M Jin-Gitaxias @Ekaterina Burmak
 67 C Moment of Truth @Rovina Cai
+89 R Archpriest of Shadows @Fariba Khamseh
 94 R Breach the Multiverse @Liiga Smilshkalne
+114 R Invasion of Fiora @Joshua Raphael
+117 U Merciless Repurposing @Artur Nakhodkin
 134 M Chandra, Hope's Beacon @Kieran Yanner
+190 R Invasion of Ikoria @Antonio José Manzanedo
+191 R Invasion of Ixalan @Viktor Titov
+194 U Invasion of Zendikar @Diego Gisbert
 217 M Wrenn and Realmbreaker @Cristi Balanescu
 222 R Drana and Linvala @Raluca Marinescu
 225 R Ghalta and Mavren @Zezhou Chen
+227 U Halo Forager @Kevin Sidharta
+233 U Invasion of Ergamon @Manuel Castañón
+239 M Invasion of New Phyrexia @Chris Rallis
 249 R Omnath, Locus of All @Bryan Sola
 255 M Thalia and The Gitrog Monster @Howard Lyon
 256 R Yargle and Multani @Slawomir Maniak
@@ -40,5 +50,9 @@ ScryfallCode=MOM
 339 M Jin-Gitaxias @Julian Kok Joon Wen
 352 R Faerie Mastermind @Joshua Raphael
 358 R Breach the Multiverse @Liiga Smilshkalne
+381 U Norn's Inquisitor @Denis Zhbankov
+382 U Scrappy Bruiser @David Auden Nash
+383 U Kami of Whispered Hopes @Filipe Pagliuso
+384 U Botanical Brawler @Jesper Ejsing
 386 R Ghalta and Mavren @Betty Jiang
 387 R Omnath, Locus of All @Helge C. Balzer

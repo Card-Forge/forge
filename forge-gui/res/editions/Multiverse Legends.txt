@@ -6,5 +6,16 @@ Type=Collector_Edition
 ScryfallCode=MUL
 
 [cards]
+3 M Elesh Norn, Grand Cenobite @Flavio Girón
+9 R Emry, Lurker of the Loch @Wylie Beckert
+11 M Jin-Gitaxias, Core Augur @Kekai Kotaki
+16 M Sheoldred, Whispering One @Flavio Girón
+17 M Skithiryx, the Blight Dragon @Kekai Kotaki
+19 U Yargle, Glutton of Urborg @Serena Malyon
 21 M Ragavan, Nimble Pilferer @Magali Villeneuve
+23 M Urabrask the Hidden @Flavio Girón
+25 U Zada, Hedron Grinder @Dominik Mayer
+29 M Vorinclex, Voice of Hunger @JungShan
 33 M Atraxa, Praetors' Voice @Justin Hernandez & Alexis Hernandez
+49 M Kroxa, Titan of Death's Hunger @Jason A. Engle
+53 M Niv-Mizzet Reborn @Illustranesia
