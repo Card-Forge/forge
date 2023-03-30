@@ -36,27 +36,27 @@ public class IncubateEffect extends TokenEffectBase {
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
         final Player activator = sa.getActivatingPlayer();
-        final String amtString = sa.getParamOrDefault("Amount", "1");
         final int times = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Times", "1"), sa);
 
-        // create incubator token
-        CardZoneTable triggerList = new CardZoneTable();
-        MutableBoolean combatChanged = new MutableBoolean(false);
-
         sa.putParam("WithCountersType", "P1P1");
-        sa.putParam("WithCountersAmount", amtString);
+        sa.putParam("WithCountersAmount", sa.getParamOrDefault("Amount", "1"));
 
-        makeTokenTable(makeTokenTableInternal(activator, "incubator", times, sa), false,
-                triggerList, combatChanged, sa);
+        for (int i = 0; i < times; i++) {
+            CardZoneTable triggerList = new CardZoneTable();
+            MutableBoolean combatChanged = new MutableBoolean(false);
 
-        triggerList.triggerChangesZoneAll(game, sa);
-        triggerList.clear();
+            makeTokenTable(makeTokenTableInternal(activator, "incubator_c_0_0_a_phyrexian", 1, sa), false,
+                    triggerList, combatChanged, sa);
 
-        game.fireEvent(new GameEventTokenCreated());
+            triggerList.triggerChangesZoneAll(game, sa);
+            triggerList.clear();
 
-        if (combatChanged.isTrue()) {
-            game.updateCombatForView();
-            game.fireEvent(new GameEventCombatChanged());
+            game.fireEvent(new GameEventTokenCreated());
+
+            if (combatChanged.isTrue()) {
+                game.updateCombatForView();
+                game.fireEvent(new GameEventCombatChanged());
+            }
         }
     }
 }
