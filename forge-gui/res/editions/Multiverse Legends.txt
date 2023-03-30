@@ -7,15 +7,33 @@ ScryfallCode=MUL
 
 [cards]
 3 M Elesh Norn, Grand Cenobite @Flavio Girón
+7 R Thalia, Guardian of Thraben @Joshua Alvarado
 9 R Emry, Lurker of the Loch @Wylie Beckert
+10 U Inga Rune-Eyes @rishxxv
 11 M Jin-Gitaxias, Core Augur @Kekai Kotaki
+14 R Horobi, Death's Wail @Rorubei
 16 M Sheoldred, Whispering One @Flavio Girón
 17 M Skithiryx, the Blight Dragon @Kekai Kotaki
 19 U Yargle, Glutton of Urborg @Serena Malyon
+20 R Captain Lannery Storm @Jody Clark
 21 M Ragavan, Nimble Pilferer @Magali Villeneuve
 23 M Urabrask the Hidden @Flavio Girón
 25 U Zada, Hedron Grinder @Dominik Mayer
 29 M Vorinclex, Voice of Hunger @JungShan
+30 R Yedora, Grave Gardener @Matthew G. Lewis
 33 M Atraxa, Praetors' Voice @Justin Hernandez & Alexis Hernandez
+43 U Imoti, Celebrant of Bounty @Bastien L. Deharme
+44 R Jegantha, the Wellspring @Steve Ellis
 49 M Kroxa, Titan of Death's Hunger @Jason A. Engle
 53 M Niv-Mizzet Reborn @Illustranesia
+60 R Taigam, Ojutai Master @Domenico Cava
+68 M Elesh Norn, Grand Cenobite @Igor Kieryluk
+76 M Jin-Gitaxias, Core Augur @Eric Deschamps
+81 M Sheoldred, Whispering One @Jana Schirmer & Johannes Voss
+82 M Skithiryx, the Blight Dragon @Chippy
+84 U Yargle, Glutton of Urborg @Jehan Choo
+88 M Urabrask the Hidden @Brad Rigney
+90 U Zada, Hedron Grinder @Chris Rallis
+94 M Vorinclex, Voice of Hunger @Karl Kopinski
+114 M Kroxa, Titan of Death's Hunger @Vincent Proce
+118 M Niv-Mizzet Reborn @Raymond Swanland
