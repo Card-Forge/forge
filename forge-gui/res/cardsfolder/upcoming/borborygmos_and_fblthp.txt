@@ -5,11 +5,11 @@ PT:6/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDraw | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, draw a card, then you may discard any number of land cards. When you discard one or more cards this way, CARDNAME deals twice that much damage to target creature.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBDraw | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, draw a card, then you may discard any number of land cards. When you discard one or more cards this way, CARDNAME deals twice that much damage to target creature.
 SVar:DBDraw:DB$ Draw | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$ Discard | DiscardValid$ Land | NumCards$ X | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ TrigImmediateTrig
+SVar:DBDiscard:DB$ Discard | DiscardValid$ Land | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ TrigImmediateTrig | SubAbility$ DBCleanup
 SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | Execute$ TrigDoubleDamage
-SVar:TrigDoubleDamage:DB$ DealDamage | NumDmg$ Y | ValidTgts$ Creature
-SVar:X:Count$TypeInYourHand.Land
-SVar:Y:Remembered$Amount/Twice
+SVar:TrigDoubleDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Creature
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount/Twice
 A:AB$ ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 2 | SpellDescription$ Put CARDNAME into its owner's library third from the top.
 DeckHas:Ability$Discard
 SVar:HasAttackEffect:TRUE
