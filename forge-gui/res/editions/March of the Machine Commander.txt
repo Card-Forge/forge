@@ -14,6 +14,16 @@ ScryfallCode=MOC
 49 C Esper @Bruce Brenneise
 61 C Nyx @Piotr Dura
 67 C Towashi @Kamila Szutenberg
+88 M Bright-Palm, Soul Awakener @Mila Pesic
+89 M Brimaz, Blight of Oreskos @Uriah Voth
+91 M Gimbal, Gremlin Prodigy @Fajareka Setiawan
+92 M Kasla, the Broken Halo @Martina Fackova
+97 M Sidar Jabari of Zhalfir @Simon Dominic
+134 M Bright-Palm, Soul Awakener @Mila Pesic
+135 M Brimaz, Blight of Oreskos @Uriah Voth
+136 M Gimbal, Gremlin Prodigy @Fajareka Setiawan
+137 M Kasla, the Broken Halo @Martina Fackova
+138 M Sidar Jabari of Zhalfir @Simon Dominic
 147 C Isle of Vesuva @Zoltan Boros & Gabor Szikszai
 148 C Jund @Aleksi Briclot
 153 C Panopticon @John Avon
