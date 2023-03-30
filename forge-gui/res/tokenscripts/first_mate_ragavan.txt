@@ -1,0 +1,6 @@
+Name:First Mate Ragavan
+ManaCost:no cost
+Types:Legendary Creature Monkey
+Colors:red
+PT:2/1
+Oracle:
