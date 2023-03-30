@@ -2,12 +2,12 @@ Name:Borborygmos and Fblthp
 ManaCost:2 G U R
 Types:Legendary Creature Cyclops Homunculus
 PT:6/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDraw | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, draw a card, then you may discard any number of land cards. When you discard one or more cards this way, Borborygmos and Fblthp deals twice that much damage to target creature.
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBDraw | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, draw a card, then you may discard any number of land cards. When you discard one or more cards this way, Borborygmos and Fblthp deals twice that much damage to target creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDraw | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, draw a card, then you may discard any number of land cards. When you discard one or more cards this way, CARDNAME deals twice that much damage to target creature.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBDraw | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, draw a card, then you may discard any number of land cards. When you discard one or more cards this way, CARDNAME deals twice that much damage to target creature.
 SVar:DBDraw:DB$ Draw | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | DiscardValid$ Land | NumCards$ X | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ TrigImmediateTrig
-SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Discarded | ConditionPresent$ Card | ConditionCompare$ GE1 | RememberObjects$ Discarded | Execute$ TrigDoubleDamage | TriggerDescription$ When you discard a card this way, destroy target nonland permanent an opponent controls with mana value less than or equal to the mana value of the discarded card.
-TrigDoubleDamage:DB$ DealDamage | NumDmg$ Y | ValidTgts$ Creature
+SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | Execute$ TrigDoubleDamage
+SVar:TrigDoubleDamage:DB$ DealDamage | NumDmg$ Y | ValidTgts$ Creature
 SVar:X:Count$TypeInYourHand.Land
 SVar:Y:Remembered$Amount/Twice
 A:AB$ ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 2 | SpellDescription$ Put CARDNAME into its owner's library third from the top.
