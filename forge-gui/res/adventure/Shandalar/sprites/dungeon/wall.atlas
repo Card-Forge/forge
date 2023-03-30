@@ -84,7 +84,7 @@ Idle
 Idle 
   xy: 16, 16
   size: 16, 16 
-Hit 
+Attack 
   xy: 32, 16
   size: 16, 16      
 Death 
