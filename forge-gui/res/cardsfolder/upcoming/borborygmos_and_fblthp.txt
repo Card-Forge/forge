@@ -9,7 +9,7 @@ SVar:DBDiscard:DB$ Discard | DiscardValid$ Land | AnyNumber$ True | Optional$ Tr
 SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | RememberSVarAmount$ X | Execute$ TrigDoubleDamage | SubAbility$ DBCleanup
 SVar:TrigDoubleDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Creature
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount/Twice
+SVar:X:Count$TriggerRememberAmount/Twice
 A:AB$ ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 2 | SpellDescription$ Put CARDNAME into its owner's library third from the top.
 DeckHas:Ability$Discard
 SVar:HasAttackEffect:TRUE
