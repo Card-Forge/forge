@@ -37,11 +37,11 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../obj/enemy.tx" x="105.596" y="132.484">
+  <object id="50" template="../obj/enemy.tx" x="155.981" y="126.642">
    <properties>
     <property name="enemy" value="Green Wiz1"/>
     <property name="threatRange" type="int" value="50"/>
-    <property name="waypoints" value="89,90,86,79,80,79,86"/>
+    <property name="waypoints" value="89,90,86"/>
    </properties>
   </object>
   <object id="66" template="../obj/enemy.tx" x="252.251" y="78.7299">
@@ -53,7 +53,12 @@
   <object id="69" template="../obj/gold.tx" x="306.52" y="83.2111"/>
   <object id="70" template="../obj/treasure.tx" x="54.144" y="139.941">
    <properties>
-    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;Green&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Leather Boots&quot;}]"/>
+    <property name="reward">[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;Green&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Leather Boots&quot;},
+{
+&quot;type&quot;: &quot;card&quot;,
+&quot;probability&quot;: 1,
+&quot;count&quot;: 1,
+&quot;cardName&quot;: &quot;Staff of the Wild Magus&quot;}]</property>
    </properties>
   </object>
   <object id="71" template="../obj/booster.tx" x="374.31" y="126.36">
@@ -105,13 +110,6 @@
     <property name="enemy" value="Turtle"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="83,82,85"/>
-   </properties>
-  </object>
-  <object id="77" template="../obj/enemy.tx" x="254.667" y="127.333">
-   <properties>
-    <property name="enemy" value="Green Wiz1"/>
-    <property name="threatRange" type="int" value="50"/>
-    <property name="waypoints" value="86,79,80,79,86,89"/>
    </properties>
   </object>
   <object id="78" template="../obj/waypoint.tx" x="110.072" y="175.305"/>

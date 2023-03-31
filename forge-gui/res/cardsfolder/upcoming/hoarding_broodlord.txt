@@ -1,0 +1,13 @@
+Name:Hoarding Broodlord
+ManaCost:5 B B B
+Types:Creature Dragon
+PT:7/6
+K:Convoke
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a card, exile it face down, then shuffle. For as long as that card remains exiled, you may play it.
+SVar:TrigSearch:DB$ ChangeZone | ChangeNum$ 1 | ChangeType$ Card | Mandatory$ True | SubAbility$ DBEffect | Origin$ Library | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayLookAt$ You | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ For as long as that card remains exiled, you may play it.
+S:Mode$ Continuous | Affected$ Card.YouCtrl+wasCastFromExile | AffectedZone$ Stack | AddKeyword$ Convoke | Description$ Spells you cast from exile have convoke.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFlying\nWhen Hoarding Broodlord enters the battlefield, search your library for a card, exile it face down, then shuffle. For as long as that card remains exiled, you may play it.\nSpells you cast from exile have convoke.
