@@ -603,17 +603,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             // If it can't Transform, don't change zones.
                             continue;
                         }
-                    } else if (sa.hasParam("FrontFace")){
-                        if (gameCard.isDoubleFaced()) {
-                            // need LKI before Animate does apply
-                            if (!moveParams.containsKey(AbilityKey.CardLKI)) {
-                                moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(gameCard));
-                            }
-                            gameCard.changeCardState("Original", null, sa);
-                        } else {
-                            // if it somehow isn't double-faced, don't change zones.
-                            continue;
-                        }
                     }
                     if (sa.hasParam("WithCountersType")) {
                         CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
