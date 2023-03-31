@@ -7,9 +7,9 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBDraw | TriggerZones$ Battlef
 SVar:DBDraw:DB$ Draw | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | DiscardValid$ Land | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ TrigImmediateTrig
 SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | RememberSVarAmount$ X | Execute$ TrigDoubleDamage | SubAbility$ DBCleanup
-SVar:TrigDoubleDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Creature
+SVar:TrigDoubleDamage:DB$ DealDamage | NumDmg$ Count$TriggerRememberAmount | ValidTgts$ Creature
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$TriggerRememberAmount/Twice
+SVar:X:Count$RememberedSize/Twice
 A:AB$ ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 2 | SpellDescription$ Put CARDNAME into its owner's library third from the top.
 DeckHas:Ability$Discard
 SVar:HasAttackEffect:TRUE
