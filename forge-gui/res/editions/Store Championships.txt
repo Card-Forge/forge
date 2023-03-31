@@ -15,3 +15,6 @@ ScryfallCode=SCH
 7 R Annex Sentry @Sam Guay
 8 R Memory Deluge @Sam Guay
 9 R Koth, Fire of Resistance @Kieran Yanner
+10 R Strangle @Sidharth Chaturvedi
+11 R Aether Channeler @Olivier Bernard
+12 M Thalia and The Gitrog Monster @PINDURSKI

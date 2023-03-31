@@ -33,10 +33,10 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        int num = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa) : 1;
         final Player p = sa.getActivatingPlayer();
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
+        int num = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa) : 1;
 
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(p);
         repParams.put(AbilityKey.Source, sa);
