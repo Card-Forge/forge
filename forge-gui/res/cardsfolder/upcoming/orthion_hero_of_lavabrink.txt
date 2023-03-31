@@ -1,0 +1,8 @@
+Name:Orthion, Hero of Lavabrink
+ManaCost:3 R
+Types:Legendary Creature Human Soldier
+PT:3/3
+A:AB$ CopyPermanent | Cost$ 1 R T | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | PumpKeywords$ Haste | AtEOT$ Sacrifice | SorcerySpeed$ True | SpellDescription$ Create a token that's a copy of another target creature you control. It gains haste. Sacrifice it at the beginning of the next end step. Activate only as a sorcery.
+A:AB$ CopyPermanent | Cost$ 6 R R R T | NumCopies$ 5 | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | PumpKeywords$ Haste | AtEOT$ Sacrifice | SorcerySpeed$ True | SpellDescription$ Create five tokens that are copies of another target creature you control. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.
+DeckHas:Ability$Token|Sacrifice
+Oracle:{1}{R}, {T}: Create a token that's a copy of another target creature you control. It gains haste. Sacrifice it at the beginning of the next end step. Activate only as a sorcery.\n{6}{R}{R}{R}, {T}: Create five tokens that are copies of another target creature you control. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.
