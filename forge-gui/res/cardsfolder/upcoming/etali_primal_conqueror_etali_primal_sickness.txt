@@ -16,7 +16,7 @@ ALTERNATE
 Name:Etali, Primal Sickness
 ManaCost:no cost
 Colors:green,red
-Types:Legendary Creature Elder Dinosaur
+Types:Legendary Creature Phyrexian Elder Dinosaur
 PT:11/11
 K:Trample
 K:Indestructible
