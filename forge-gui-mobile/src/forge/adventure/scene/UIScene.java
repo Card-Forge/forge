@@ -633,6 +633,7 @@ public class UIScene extends Scene {
     @Override
     public boolean leave() {
         stage.cancelTouchFocus();
+        updateInput();
         return super.leave();
     }
 
@@ -724,5 +725,11 @@ public class UIScene extends Scene {
             return null;
         }
         return null;
+    }
+
+    @Override
+    public void updateInput() {
+        super.updateInput();
+        Gdx.input.setInputProcessor(stage);
     }
 }

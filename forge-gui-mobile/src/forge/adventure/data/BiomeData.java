@@ -36,6 +36,7 @@ public class BiomeData implements Serializable {
     private ArrayList<PointOfInterestData> pointOfInterestList;
 
     private final Random rand = MyRandom.getRandom();
+
     public Color GetColor() {
         return Color.valueOf(color);
     }
@@ -46,10 +47,8 @@ public class BiomeData implements Serializable {
             if (enemies == null)
                 return enemyList;
             for (EnemyData data : new Array.ArrayIterator<>(WorldData.getAllEnemies())) {
-                for (String enemyName:enemies)
-                {
-                    if(data.name.equals(enemyName))
-                    {
+                for (String enemyName : enemies) {
+                    if (data.name.equals(enemyName)) {
                         enemyList.add(data);
                         break;
                     }
@@ -62,20 +61,26 @@ public class BiomeData implements Serializable {
     public ArrayList<PointOfInterestData> getPointsOfInterest() {
         if (pointOfInterestList == null) {
             pointOfInterestList = new ArrayList<PointOfInterestData>();
-            if(pointsOfInterest==null)
+            if (pointsOfInterest == null)
                 return pointOfInterestList;
             Array<PointOfInterestData> allTowns = PointOfInterestData.getAllPointOfInterest();
             for (PointOfInterestData data : new Array.ArrayIterator<>(allTowns)) {
-                for (String poiName:pointsOfInterest)
-                {
-                    if(data.name.equals(poiName))
-                    {
+                for (String poiName : pointsOfInterest) {
+                    if (data.name.equals(poiName)) {
                         pointOfInterestList.add(data);
                         break;
                     }
                 }
             }
         }
+        ArrayList<PointOfInterestData> cavesDungeon = new ArrayList<>();
+        for (PointOfInterestData data : pointOfInterestList) {
+            if ("cave".equalsIgnoreCase(data.type) || "dungeon".equalsIgnoreCase(data.type)) {
+                cavesDungeon.add(data);
+            }
+        }
+        pointOfInterestList.removeAll(cavesDungeon);
+        pointOfInterestList.addAll(cavesDungeon); //move to bottom..
         return pointOfInterestList;
     }
 
@@ -83,10 +88,10 @@ public class BiomeData implements Serializable {
         EnemyData bestData = null;
         float biggestNumber = 0.0f;
         for (EnemyData data : enemyList) {
-            float newNumber= ( 1.0f + (data.spawnRate * rand.nextFloat()) ) * difficultyFactor;
+            float newNumber = (1.0f + (data.spawnRate * rand.nextFloat())) * difficultyFactor;
             if (newNumber > biggestNumber) {
-                biggestNumber=newNumber;
-                bestData=data;
+                biggestNumber = newNumber;
+                bestData = data;
             }
         }
         return bestData;

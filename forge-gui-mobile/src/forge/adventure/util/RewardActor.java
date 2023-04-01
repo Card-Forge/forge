@@ -30,6 +30,7 @@ import forge.ImageKeys;
 import forge.adventure.data.ItemData;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
+import forge.adventure.scene.UIScene;
 import forge.assets.FSkin;
 import forge.assets.ImageCache;
 import forge.card.CardImageRenderer;
@@ -156,7 +157,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (alternate && Talt != null)
             Talt.dispose();
         ImageCache.updateSynqCount(imageFile, count);
-        RewardScene.instance().reactivateInputs();
+        if (Forge.getCurrentScene() instanceof RewardScene)
+            RewardScene.instance().reactivateInputs();
+        else if (Forge.getCurrentScene() instanceof UIScene) {
+            (Forge.getCurrentScene()).updateInput();
+        }
         Gdx.graphics.requestRendering();
     }
 
