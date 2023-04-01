@@ -307,12 +307,12 @@ public class PlayEffect extends SpellAbilityEffect {
 
             SpellAbility tgtSA;
 
-            if (!sa.hasParam("CastFaceDown")) {
+            if (sa.hasParam("CastFaceDown")) {
+                // For Illusionary Mask effect
+                tgtSA = CardFactoryUtil.abilityMorphDown(tgtCard.getCurrentState(), false);
+            } else {
                 // only one mode can be used
                 tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(tgtCard, sas);
-            } else {
-                // For Illusionary Mask effect
-                tgtSA = CardFactoryUtil.abilityMorphDown(tgtCard.getCurrentState());
             }
             // in case player canceled from choice dialog
             if (tgtSA == null) {
