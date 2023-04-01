@@ -452,7 +452,7 @@ public class World implements Disposable, SaveFileContent {
                 biomeIndex2++;
                 for (PointOfInterestData poi : biome.getPointsOfInterest()) {
                     for (int i = 0; i < poi.count; i++) {
-                        for (int counter = 0; counter < 1000; counter++)//tries 1000 times to find a free point
+                        for (int counter = 0; counter < 500; counter++)//tries 500 times to find a free point
                         {
                             float radius = (float) Math.sqrt(((random.nextDouble()) / 2 * poi.radiusFactor));
                             float theta = (float) (random.nextDouble() * 2 * Math.PI);
@@ -502,7 +502,7 @@ public class World implements Disposable, SaveFileContent {
                                     }
                                 }
                                 if (!foundSolution) {
-                                    if (counter == 999) {
+                                    if (counter == 499) {
                                         System.err.print("Can not place POI " + poi.name + "...Rerunning..\n");
                                         running = true;
                                     }
@@ -533,7 +533,6 @@ public class World implements Disposable, SaveFileContent {
                             }
                             break;
                         }
-
                     }
                 }
             }

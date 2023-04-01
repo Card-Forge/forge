@@ -213,8 +213,8 @@ public class ConsoleCommandInterpreter {
                 for (PointOfInterestData poi : data.getPointsOfInterest())
                     poiNames.add(poi.name + " - " + poi.type);
             }
-            String poi = "POI Names - Types\n" + String.join("\n", poiNames);
-            return poi;
+            System.out.println("POI Names - Types\n" + String.join("\n", poiNames));
+            return "POI lists dumped to stdout.";
         });
         registerCommand(new String[]{"setColorID"}, s -> {
             if (s.length < 1)
