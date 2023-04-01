@@ -568,7 +568,9 @@ public class AbilityUtils {
             val = c == null ? 0 : xCount(c, calcX[1], ability);
         } else if (calcX[0].startsWith("ExiledWith")) {
             val = handlePaid(card.getExiledCards(), calcX[1], card, ability);
-        }
+	    } else if (calcX[0].startsWith("Convoked")) {
+	        val = handlePaid(card.getConvoked(), calcX[1], card, ability);
+	    }
         else if (calcX[0].startsWith("Remembered")) {
             // Add whole Remembered list to handlePaid
             final CardCollection list = new CardCollection();
