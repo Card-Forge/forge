@@ -10,4 +10,4 @@ T:Mode$ SpellCast | ValidCard$ Card.hasKeywordConvoke+Other | ValidActivatingPla
 SVar:TrigScry:DB$ Scry | ScryNum$ 2 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw
 DeckNeeds:Keyword$Convoke
-Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature’s color.)\nFlying, vigilance, haste\nWhenever you cast another spell that has convoke, scry 2, then draw a card.
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFlying, vigilance, haste\nWhenever you cast another spell that has convoke, scry 2, then draw a card.
