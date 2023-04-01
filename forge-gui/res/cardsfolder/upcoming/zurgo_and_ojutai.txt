@@ -1,0 +1,14 @@
+Name:Zurgo and Ojutai
+ManaCost:2 U R W
+Types:Legendary Creature Orc Dragon
+PT:4/4
+K:Flying
+K:Haste
+S:Mode$ Continuous | Affected$ Card.Self+ThisTurnEntered | AddKeyword$ Hexproof | Description$ CARDNAME has hexproof as long as it entered the battlefield this turn.
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Dragon.YouCtrl | ValidTarget$ Player,Battle | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever one or more Dragons you control deal combat damage to a player or battle, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. You may return one of those Dragons to its owner's hand.
+SVar:TrigDig:DB$ Dig | DigNum$ 3 | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChooseCard | DefinedCards$ TriggeredSources | ChoiceTitle$ You may return one of those Dragons to its owner's hand | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+DeckHints:Type$Dragon
+Oracle:Flying, haste\nZurgo and Ojutai has hexproof as long as it entered the battlefield this turn.\nWhenever one or more Dragons you control deal combat damage to a player or battle, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. You may return one of those Dragons to its owner's hand.

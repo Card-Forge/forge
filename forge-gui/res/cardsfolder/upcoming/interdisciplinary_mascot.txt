@@ -1,0 +1,9 @@
+Name:Interdisciplinary Mascot
+ManaCost:6 U U
+Types:Creature Elemental Fractal
+PT:5/5
+K:Convoke
+K:Ward:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 4 | RestRandomOrder$ True
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nWard {3}\nWhen Interdisciplinary Mascot enters the battlefield, look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in a random order.
