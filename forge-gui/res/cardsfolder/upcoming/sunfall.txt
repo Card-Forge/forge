@@ -1,0 +1,8 @@
+Name:Sunfall
+ManaCost:3 W W
+Types:Sorcery
+A:SP$ ChangeZoneAll | ChangeType$ Creature | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBIncubate | SpellDescription$ Exile all creatures.
+SVar:DBIncubate:DB$ Incubate | Amount$ X | SpellDescription$ Incubate X, where is the number of creatures exiled this way. (Create an Incubator token with X +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+SVar:X:Remembered$Amount
+DeckHas:Ability$Token|Counters & Type$Artifact|Phyrexian
+Oracle:Exile all creatures. Incubate X, where X is the number of creatures exiled this way. (Create an Incubator token with X +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)

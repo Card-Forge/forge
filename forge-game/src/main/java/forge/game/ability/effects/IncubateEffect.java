@@ -9,12 +9,22 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
 public class IncubateEffect extends TokenEffectBase {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
+        if (!StringUtils.isNumeric(sa.getParam("Amount"))) { // non-numeric too easy to miscalc, default to SpellDesc
+            String desc = sa.getParamOrDefault("SpellDescription", "Please add SpellDescription for non-numeric");
+            int idx = desc.indexOf("(");
+            if (idx > 0) { //trim reminder text from StackDesc
+                desc = desc.substring(0, desc.indexOf("(") - 1);
+            }
+            return desc;
+        }
+
         final StringBuilder sb = new StringBuilder("Incubate ");
         final Card card = sa.getHostCard();
         final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Amount", "1"), sa);
