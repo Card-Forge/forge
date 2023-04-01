@@ -15,118 +15,108 @@ public class BiomeStructure {
     private final int biomeHeight;
     private int[][] dataMap;
     private boolean[][] collisionMap;
-    boolean init=false;
+    boolean init = false;
     private TextureAtlas structureAtlas;
     public ColorMap image;
-    private final static int MAXIMUM_WAVEFUNCTIONSIZE=50;
+    private final static int MAXIMUM_WAVEFUNCTIONSIZE = 10;
 
-    public BiomeStructure(BiomeStructureData data,long seed,int width,int height)
-    {
-        this.data=data;
-        this.seed=seed;
+    public BiomeStructure(BiomeStructureData data, long seed, int width, int height) {
+        this.data = data;
+        this.seed = seed;
         this.biomeWidth = width;
         this.biomeHeight = height;
     }
+
     public TextureAtlas atlas() {
-        if(structureAtlas==null)
-        {
-            try
-            {
+        if (structureAtlas == null) {
+            try {
                 structureAtlas = Config.instance().getAtlas(data.structureAtlasPath);
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return structureAtlas;
     }
+
     public int structureObjectCount() {
         return data.mappingInfo.length;
     }
 
     public int objectID(int x, int y) {
 
-        if(!init)
-        {
+        if (!init) {
             initialize();
         }
-        if(x>=dataMap.length||x<0||y<0||y>=dataMap[0].length)
+        if (x >= dataMap.length || x < 0 || y < 0 || y >= dataMap[0].length)
             return -1;
-        return dataMap[x][y]; 
+        return dataMap[x][y];
     }
 
-    public void initialize(ColorMap sourceImage,ColorMap maskImage) {
+    public void initialize(ColorMap sourceImage, ColorMap maskImage) {
         long currentTime = System.currentTimeMillis();
 
-        init=true;
-        int targetWidth=(int) (data.width* biomeWidth);
-        int targetHeight=(int) (data.height* biomeHeight);
-        dataMap=new int[targetWidth][  targetHeight];
-        collisionMap=new boolean[targetWidth][ targetHeight];
-        ColorMap finalImage=new ColorMap(targetWidth, targetHeight);
-        HashMap<Integer,Integer> colorIdMap=new HashMap<>();
-        for(int i=0;i<data.mappingInfo.length;i++)
-        {
-            colorIdMap.put(Integer.parseInt(data.mappingInfo[i].color,16),i);
+        init = true;
+        int targetWidth = (int) (data.width * biomeWidth);
+        int targetHeight = (int) (data.height * biomeHeight);
+        dataMap = new int[targetWidth][targetHeight];
+        collisionMap = new boolean[targetWidth][targetHeight];
+        ColorMap finalImage = new ColorMap(targetWidth, targetHeight);
+        HashMap<Integer, Integer> colorIdMap = new HashMap<>();
+        for (int i = 0; i < data.mappingInfo.length; i++) {
+            colorIdMap.put(Integer.parseInt(data.mappingInfo[i].color, 16), i);
         }
-        for(int mx=0;mx<targetWidth;mx+=Math.min(targetWidth-mx,MAXIMUM_WAVEFUNCTIONSIZE))
-        {
-            for(int my=0;my<targetWidth;my+=Math.min(targetHeight-my,MAXIMUM_WAVEFUNCTIONSIZE))
-            {
-                OverlappingModel model= new OverlappingModel(sourceImage,data.N,Math.min(targetWidth-mx,MAXIMUM_WAVEFUNCTIONSIZE), Math.min(targetHeight-my,MAXIMUM_WAVEFUNCTIONSIZE),data.periodicInput,data.periodicOutput,data.symmetry,data.ground);
+        for (int mx = 0; mx < targetWidth; mx += Math.min(targetWidth - mx, MAXIMUM_WAVEFUNCTIONSIZE)) {
+            for (int my = 0; my < targetWidth; my += Math.min(targetHeight - my, MAXIMUM_WAVEFUNCTIONSIZE)) {
+                OverlappingModel model = new OverlappingModel(sourceImage, data.N, Math.min(targetWidth - mx, MAXIMUM_WAVEFUNCTIONSIZE), Math.min(targetHeight - my, MAXIMUM_WAVEFUNCTIONSIZE), data.periodicInput, data.periodicOutput, data.symmetry, data.ground);
 
-                boolean suc=false;
-                for(int i=0;i<10&&!suc;i++)
-                    suc=model.run((int) seed+(i*5355)+mx*my,0);
-                if(!suc)
-                {
-                    for(int x=0;x<dataMap.length;x++)
-                        for(int y=0;y<dataMap[x].length;y++)
-                            dataMap[mx+x][my+y]=-1;
+                boolean suc = false;
+                for (int i = 0; i < 10 && !suc; i++)
+                    suc = model.run((int) seed + (i * 5355) + mx * my, 0);
+                if (!suc) {
+                    for (int x = 0; x < dataMap.length; x++)
+                        for (int y = 0; y < dataMap[x].length; y++)
+                            dataMap[mx + x][my + y] = -1;
                     return;
                 }
-                image=model.graphics();
-                for(int x=0;x<image.getWidth();x++)
-                {
+                image = model.graphics();
+                for (int x = 0; x < image.getWidth(); x++) {
 
-                    for(int y=0;y<image.getHeight();y++)
-                    {
-                        boolean isWhitePixel=maskImage!=null&&(maskImage.getColor((int) ((mx+x)*maskImage.getWidth()/(float)targetWidth),(int)((my+y)*(maskImage.getHeight()/(float)targetHeight)) )).equals(Color.WHITE);
+                    for (int y = 0; y < image.getHeight(); y++) {
+                        boolean isWhitePixel = maskImage != null && (maskImage.getColor((int) ((mx + x) * maskImage.getWidth() / (float) targetWidth), (int) ((my + y) * (maskImage.getHeight() / (float) targetHeight)))).equals(Color.WHITE);
 
-                        if(isWhitePixel)
-                            finalImage.setColor(mx+x,my+y, Color.WHITE);
+                        if (isWhitePixel)
+                            finalImage.setColor(mx + x, my + y, Color.WHITE);
                         else
-                            finalImage.setColor(mx+x,my+y, image.getColor(x,y));
-                        int rgb=Color.rgb888(image.getColor(x,y))  ;
-                        if(isWhitePixel||!colorIdMap.containsKey(rgb))
-                        {
-                            dataMap[mx+x][my+y]=-1;
-                        }
-                        else
-                        {
-                            dataMap[mx+x][my+y]=colorIdMap.get(rgb);
-                            collisionMap[mx+x][my+y]=data.mappingInfo[colorIdMap.get(rgb)].collision;
+                            finalImage.setColor(mx + x, my + y, image.getColor(x, y));
+                        int rgb = Color.rgb888(image.getColor(x, y));
+                        if (isWhitePixel || !colorIdMap.containsKey(rgb)) {
+                            dataMap[mx + x][my + y] = -1;
+                        } else {
+                            dataMap[mx + x][my + y] = colorIdMap.get(rgb);
+                            collisionMap[mx + x][my + y] = data.mappingInfo[colorIdMap.get(rgb)].collision;
                         }
                     }
                 }
 
             }
-            image=finalImage;
+            image = finalImage;
         }
 
 
     }
+
     public void initialize() {
-       initialize(sourceImage(),maskImage());
+        initialize(sourceImage(), maskImage());
     }
 
     public ColorMap sourceImage() {
-            return new ColorMap(Config.instance().getFile(data.sourcePath));
+        return new ColorMap(Config.instance().getFile(data.sourcePath));
     }
+
     public String sourceImagePath() {
-        return  (Config.instance().getFilePath(data.sourcePath));
+        return (Config.instance().getFilePath(data.sourcePath));
     }
+
     private ColorMap maskImage() {
         return new ColorMap(Config.instance().getFile(data.maskPath));
 
@@ -139,16 +129,15 @@ public class BiomeStructure {
 
 
     public boolean collision(int x, int y) {
-        if(!init)
-        {
+        if (!init) {
             initialize();
         }
-        if(x>=collisionMap.length||x<0||y<0||y>=collisionMap[0].length)
+        if (x >= collisionMap.length || x < 0 || y < 0 || y >= collisionMap[0].length)
             return false;
         return collisionMap[x][y];
     }
 
     public String maskImagePath() {
-        return  (Config.instance().getFilePath(data.maskPath));
+        return (Config.instance().getFilePath(data.maskPath));
     }
 }
