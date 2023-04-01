@@ -835,6 +835,34 @@ public class CardFactoryUtil {
                     sa.setBlessing(true);
                 }
             }
+        } else if (keyword.startsWith("Backup")) {
+            final String[] k = keyword.split(":");
+            final String magnitude = k[1];
+            final String backupVar = card.getSVar("BackupAbility");
+
+            String descStr = "Backup " + magnitude + " (" + inst.getReminderText() + ")";
+            if (backupVar.contains("&") || StringUtils.countMatches(backupVar, "|") >= 1) {
+                descStr = descStr.replace("ability", "abilities");
+            }
+
+            final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | " +
+                    "Secondary$ True | TriggerDescription$ " + descStr;
+
+            final String putCounter = "DB$ PutCounter | ValidTgts$ Creature | CounterNum$ " + magnitude
+                    + " | CounterType$ P1P1";
+
+            final String addAbility = "DB$ Animate | " + backupVar + " | ConditionDefined$ Targeted | " +
+                    "ConditionPresent$ Card.Other | Defined$ Targeted";
+
+            SpellAbility sa = AbilityFactory.getAbility(putCounter, card);
+            AbilitySub backupSub = (AbilitySub) AbilityFactory.getAbility(addAbility, card);
+            sa.setSubAbility(backupSub);
+
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            sa.setIntrinsic(intrinsic);
+            trigger.setOverridingAbility(sa);
+
+            inst.addTrigger(trigger);
         } else if (keyword.equals("Battle cry")) {
             final String trig = "Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Secondary$ True "
                     + " | TriggerDescription$ " + keyword + " (" + inst.getReminderText() + ")";
@@ -1147,7 +1175,7 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Extort")) {
             final String extortTrigger = "Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | "
                     + "TriggerZones$ Battlefield | Secondary$ True"
-                    + " | TriggerDescription$ Extort ("+ inst.getReminderText() +")";
+                    + " | TriggerDescription$ Extort (" + inst.getReminderText() + ")";
 
             final String loseLifeStr = "AB$ LoseLife | Cost$ WB | Defined$ Player.Opponent | LifeAmount$ 1";
             final String gainLifeStr = "DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost";
@@ -2683,7 +2711,7 @@ public class CardFactoryUtil {
         if (keyword.startsWith("Alternative Cost") && !host.isLand()) {
             final String[] kw = keyword.split(":");
             String costStr = kw[1];
-            for (SpellAbility sa: host.getBasicSpells()) {
+            for (SpellAbility sa : host.getBasicSpells()) {
                 if (costStr.equals("ConvertedManaCost")) {
                     costStr = Integer.toString(host.getCMC());
                 }
