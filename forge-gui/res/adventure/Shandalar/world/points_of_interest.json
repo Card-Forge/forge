@@ -679,6 +679,15 @@
 	"radiusFactor": 0.4
 },
 {
+	"name": "CopperhostForest",
+	"type": "dungeon",
+	"count": 2,
+	"radiusFactor": 0.8,
+	"spriteAtlas": "maps/tileset/Phyrexian_Buildings.atlas",
+	"sprite": "CopperhostForest",
+	"map": "maps/map/phyrexian_g1.tmx"
+},
+{
 	"name": "Crawlspace",
 	"type": "dungeon",
 	"count": 1,

@@ -1,0 +1,26 @@
+Name:Etali, Primal Conqueror
+ManaCost:5 R R
+Types:Legendary Creature Elder Dinosaur
+PT:7/7
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, each player exiles cards from the top of their library until they exile a nonland card. You may cast any number of spells from among the nonland cards exiled this way without paying their mana costs.
+SVar:TrigDig:DB$ DigUntil | Defined$ Player | Valid$ Card.nonLand | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Controller$ You | Defined$ Remembered | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | Amount$ All | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ SetState | Cost$ 9 GP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
+AlternateMode:DoubleFaced
+Oracle:Trample\nWhen Etali, Primal Conqueror enters the battlefield, each player exiles cards from the top of their library until they exile a nonland card. You may cast any number of spells from among the nonland cards exiled this way without paying their mana costs.\n{9}{G/P}: Transform Etali. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Etali, Primal Sickness
+ManaCost:no cost
+Colors:green,red
+Types:Legendary Creature Phyrexian Elder Dinosaur
+PT:11/11
+K:Trample
+K:Indestructible
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPoison | SpellDescription$ Whenever CARDNAME deals combat damage to a player, they get that many poison counters. (A player with ten or more poison counters loses the game.)
+SVar:TrigPoison:DB$ Poison | Defined$ TriggeredTarget | Num$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:Trample, indestructible\nWhenever Etali, Primal Sickness deals combat damage to a player, they get that many poison counters. (A player with ten or more poison counters loses the game.)

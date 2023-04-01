@@ -2684,14 +2684,13 @@ public class CardFactoryUtil {
             final String[] kw = keyword.split(":");
             String costStr = kw[1];
             for (SpellAbility sa: host.getBasicSpells()) {
-                final SpellAbility newSA = sa.copy();
-                newSA.setBasicSpell(false);
                 if (costStr.equals("ConvertedManaCost")) {
                     costStr = Integer.toString(host.getCMC());
                 }
                 final Cost cost = new Cost(costStr, false).add(sa.getPayCosts().copyWithNoMana());
+                final SpellAbility newSA = sa.copyWithDefinedCost(cost);
+                newSA.setBasicSpell(false);
                 newSA.putParam("Secondary", "True");
-                newSA.setPayCosts(cost);
                 newSA.setDescription(sa.getDescription() + " (by paying " + cost.toSimpleString() + " instead of its mana cost)");
                 newSA.setIntrinsic(intrinsic);
 
@@ -3879,9 +3878,8 @@ public class CardFactoryUtil {
     private static SpellAbility makeAltCostAbility(final Card card, final String altCost, final SpellAbility sa) {
         final Map<String, String> params = AbilityFactory.getMapParams(altCost);
 
-        final SpellAbility altCostSA = sa.copy();
-        final Cost abCost = new Cost(params.get("Cost"), altCostSA.isAbility());
-        altCostSA.setPayCosts(abCost);
+        final Cost abCost = new Cost(params.get("Cost"), sa.isAbility());
+        final SpellAbility altCostSA = sa.copyWithDefinedCost(abCost);
         altCostSA.setBasicSpell(false);
         altCostSA.addOptionalCost(OptionalCost.AltCost);
 

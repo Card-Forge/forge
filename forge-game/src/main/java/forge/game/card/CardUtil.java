@@ -25,7 +25,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.common.collect.Table;
 
 import forge.ImageKeys;
 import forge.card.CardStateName;
@@ -283,9 +282,7 @@ public final class CardUtil {
             newCopy.setChosenNumber(in.getChosenNumber());
         }
 
-        for (Table.Cell<Player, CounterType, Integer> cl : in.getEtbCounters()) {
-            newCopy.addEtbCounter(cl.getColumnKey(), cl.getValue(), cl.getRowKey());
-        }
+        newCopy.getEtbCounters().putAll(in.getEtbCounters());
 
         newCopy.setUnearthed(in.isUnearthed());
 

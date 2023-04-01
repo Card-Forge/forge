@@ -8,7 +8,7 @@
  <tileset firstgid="11905" source="../tileset/phyrexiantiles.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJy9lEESgzAIRdl2ES7TaG7gDbXtsWovpIyJjUhsDYzM/IVj4Bn40t0AOqbeAQxRD7d/L6kmh+uOsEaD25qSiMNztNzXXDNkz1K0uD1jwa0Jay7die5P8XTLPS257zlvFOSzfhKT5iqd+1RyST76iTjJP3zOLe795RXM9F/88hOP1AMNV5qxdM5qtvm3X8nNvVXyaynI4xpPJV+dYYfoY62vfKzx7w5p8Juj4R75q8S14J2Zc1DuiiP2KPCDwX6q6bmmtxPwx4tA
+   eJy1k10OAiEMhPvqA1xGlBvsDf07luuFtNk2qXVAU3CSeVrot7TTZUe0OJ8S0Vl8SZ/fkSN3vPeZaBUf8ntNZOb4O1Gu6vaqWU1N5GPezqhmcLV2T/7MDK4Vv4nfz7qm7Z1IUe690c9i+slMnis69why2UXyxBzNTzX91Ln6fJUBpu4FyhOaq81XdIf8Llmhc/4/orNVocx8445kymbLs1GGrDjjI5nSXCF2S1VyPJqrIjVau4z6WyZwbb5+5c7g9ebc6vFMrrJXwNf9/gez1/OR3j4BI+CnQA==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -31,7 +31,7 @@
  </layer>
  <layer id="7" name="Ornamental Walls" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+   eJxjYBgFo2AUjDTQrMfA0KJHf3tnAu2cNQD2joJRMAoQAAAO9QLz
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -40,7 +40,7 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="67" template="../obj/treasure.tx" x="320" y="32.5"/>
+  <object id="67" template="../obj/treasure.tx" x="317.667" y="43.1667"/>
   <object id="68" template="../obj/enemy.tx" x="207" y="94">
    <properties>
     <property name="enemy" value="Orthodoxy Angel"/>
@@ -60,7 +60,7 @@
     <property name="waypoints" value="72,73,72"/>
    </properties>
   </object>
-  <object id="76" template="../obj/booster.tx" x="98" y="33">
+  <object id="76" template="../obj/booster.tx" x="98.6667" y="43">
    <properties>
     <property name="reward">[
   {

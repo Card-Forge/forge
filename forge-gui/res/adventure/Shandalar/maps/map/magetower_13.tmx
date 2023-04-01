@@ -47,8 +47,6 @@
   <object id="66" template="../obj/enemy.tx" x="163.605" y="388.194">
    <properties>
     <property name="enemy" value="Doppelganger"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="95,86,96,86"/>
    </properties>
   </object>
   <object id="75" template="../obj/enemy.tx" x="106.034" y="305.243">
@@ -66,8 +64,6 @@
  &quot;startBattleWithCard&quot;: [ &quot;Fellwar Stone&quot; ]
 }</property>
     <property name="enemy" value="Doppelganger"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="88,91,89"/>
    </properties>
   </object>
   <object id="74" template="../obj/enemy.tx" x="231.069" y="255.542">
@@ -78,8 +74,6 @@
  &quot;startBattleWithCard&quot;: [ &quot;Fellwar Stone&quot;, &quot;Frozen Aether&quot; ]
 }</property>
     <property name="enemy" value="Doppelganger"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="94,98"/>
    </properties>
   </object>
   <object id="71" template="../obj/enemy.tx" x="140.117" y="386.888">
@@ -89,8 +83,6 @@
  &quot;startBattleWithCard&quot;: [ &quot;Hesitation&quot; ]
 }</property>
     <property name="enemy" value="Blue Wiz3"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="87,96"/>
    </properties>
   </object>
   <object id="67" template="../obj/enemy.tx" x="247.673" y="379.931">

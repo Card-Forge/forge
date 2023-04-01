@@ -1873,7 +1873,7 @@ public class CardProperty {
             }
             final ZoneType realZone = ZoneType.smartValueOf(strZone);
             if (card.getCastFrom() == null || (zoneOwner != null && !card.getCastFrom().getPlayer().equals(zoneOwner))
-                    || (byYou && !controller.equals(card.getCastSA().getActivatingPlayer()))
+                    || (byYou && !sourceController.equals(card.getCastSA().getActivatingPlayer()))
                     || realZone != card.getCastFrom().getZoneType()) {
                 return false;
             }
@@ -1894,7 +1894,7 @@ public class CardProperty {
             }
             final ZoneType realZone = ZoneType.smartValueOf(strZone);
             if (card.getCastFrom() != null && (zoneOwner == null || card.getCastFrom().getPlayer().equals(zoneOwner))
-                    && (!byYou || controller.equals(card.getCastSA().getActivatingPlayer()))
+                    && (!byYou || sourceController.equals(card.getCastSA().getActivatingPlayer()))
                     && realZone == card.getCastFrom().getZoneType()) {
                 return false;
             }
@@ -1902,7 +1902,7 @@ public class CardProperty {
             if (!card.wasCast()) {
                 return false;
             }
-            if (property.contains("ByYou") && !controller.equals(card.getCastSA().getActivatingPlayer())) {
+            if (property.contains("ByYou") && !sourceController.equals(card.getCastSA().getActivatingPlayer())) {
                 return false;
             }
         } else if (property.equals("wasNotCast")) {
