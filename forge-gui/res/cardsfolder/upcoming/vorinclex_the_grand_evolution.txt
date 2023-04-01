@@ -1,0 +1,7 @@
+Name:Captive Weird
+ManaCost:U
+Types:Creature Weird
+PT:1/3
+K:Defender
+
+Oracle:Defender\n{3}{R/P}: Transform Captive Weird. Activate only as a sorcery. ({R/P} can be paid with {R} or 2 life.)
