@@ -107,7 +107,7 @@ public class CardFactoryUtil {
      *            a {@link forge.game.card.Card} object.
      * @return a {@link forge.game.spellability.SpellAbility} object.
      */
-    public static SpellAbility abilityMorphDown(final CardState cardState) {
+    public static SpellAbility abilityMorphDown(final CardState cardState, final boolean intrinsic) {
         final Spell morphDown = new Spell(cardState.getCard(), new Cost(ManaCost.THREE, false)) {
             private static final long serialVersionUID = -1438810964807867610L;
 
@@ -150,6 +150,8 @@ public class CardFactoryUtil {
         morphDown.setCastFaceDown(true);
         morphDown.setBasicSpell(false);
 
+        morphDown.setIntrinsic(intrinsic);
+
         return morphDown;
     }
 
@@ -162,7 +164,7 @@ public class CardFactoryUtil {
      *            a {@link forge.game.card.Card} object.
      * @return a {@link forge.game.spellability.AbilityActivated} object.
      */
-    public static SpellAbility abilityMorphUp(final CardState cardState, final String costStr, final boolean mega) {
+    public static SpellAbility abilityMorphUp(final CardState cardState, final String costStr, final boolean mega, final boolean intrinsic) {
         Cost cost = new Cost(costStr, true);
         StringBuilder sbCost = new StringBuilder(mega ? "Megamorph" : "Morph");
         sbCost.append(" ");
@@ -190,6 +192,8 @@ public class CardFactoryUtil {
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append(cardState.getName()).append(" - turn this card face up.");
         morphUp.setStackDescription(sbStack.toString());
+
+        morphUp.setIntrinsic(intrinsic);
 
         return morphUp;
     }
@@ -3151,13 +3155,13 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Morph")) {
             final String[] k = keyword.split(":");
 
-            inst.addSpellAbility(abilityMorphDown(card));
-            inst.addSpellAbility(abilityMorphUp(card, k[1], false));
+            inst.addSpellAbility(abilityMorphDown(card, intrinsic));
+            inst.addSpellAbility(abilityMorphUp(card, k[1], false, intrinsic));
         } else if (keyword.startsWith("Megamorph")) {
             final String[] k = keyword.split(":");
 
-            inst.addSpellAbility(abilityMorphDown(card));
-            inst.addSpellAbility(abilityMorphUp(card, k[1], true));
+            inst.addSpellAbility(abilityMorphDown(card, intrinsic));
+            inst.addSpellAbility(abilityMorphUp(card, k[1], true, intrinsic));
         } else if (keyword.startsWith("More Than Meets the Eye")) {
             final String[] n = keyword.split(":");
             final Cost convertCost = new Cost(n[1], false);
