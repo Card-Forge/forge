@@ -1,0 +1,9 @@
+Name:Ruins Recluse
+ManaCost:1 G
+Types:Creature Spider
+PT:1/1
+K:Reach
+K:Deathtouch
+A:AB$ PutCounter | Cost$ 3 G | CounterType$ P1P1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+DeckHas:Ability$Counters
+Oracle:Reach, deathtouch\n{3}{G}: Put a +1/+1 counter on Ruins Recluse.
