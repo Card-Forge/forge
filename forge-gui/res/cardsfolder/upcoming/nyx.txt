@@ -1,0 +1,13 @@
+Name:Nyx
+ManaCost:no cost
+Types:Plane Theros
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.nonToken | AddType$ Enchantment | Description$ Nontoken creatures are enchantments in addition to their other types.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Command | Execute$ TrigGainLife | TriggerDescription$ Constellation — Whenever an enchantment enters the battlefield under your control, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, choose a color. Add an amount of mana of that color equal to your devotion to that color.
+SVar:RolledChaos:DB$ ChooseColor | SubAbility$ DBMana | AILogic$ MostProminentComputerControls | AINoRecursiveCheck$ True 
+SVar:DBMana:DB$ Mana | Produced$ Chosen | Amount$ X
+SVar:X:Count$Devotion.Chosen
+DeckHas:Ability$LifeGain
+DeckHints:Type$Enchantment
+Oracle:Nontoken creatures are enchantments in addition to their other types.\nConstellation — Whenever an enchantment enters the battlefield under your control, you gain 1 life.\nWhenever chaos ensues, choose a color. Add an amount of mana of that color equal to your devotion to that color.

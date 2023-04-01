@@ -1,0 +1,13 @@
+Name:Gimbal, Gremlin Prodigy
+ManaCost:2 G U R
+Types:Legendary Creature Gremlin Artificer
+PT:4/4
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddKeyword$ Trample | Description$ Artifact creatures you control have trample.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a 0/0 red Gremlin artifact creature token. Put X +1/+1 counters on it, where X is the number of differently named artifact tokens you control.
+SVar:TrigToken:DB$ Token | TokenScript$ r_0_0_a_gremlin | RememberTokens$ True | SubAbility$ DBCounters
+SVar:DBCounters:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$DifferentCardNames_Artifact.YouCtrl+inZoneBattlefield+token
+DeckHas:Ability$Token|Counters
+DeckHints:Type$Artifact & Ability$Token
+Oracle:Artifact creatures you control have trample.\nAt the beginning of your end step, create a 0/0 red Gremlin artifact creature token. Put X +1/+1 counters on it, where X is the number of differently named artifact tokens you control.
