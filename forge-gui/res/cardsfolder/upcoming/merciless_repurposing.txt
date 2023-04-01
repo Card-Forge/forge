@@ -1,0 +1,7 @@
+Name:Merciless Repurposing
+ManaCost:4 B B
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBIncubate | SpellDescription$ Exile target creature.
+SVar:DBIncubate:DB$ Incubate | Amount$ 3 | SpellDescription$ Incubate 3. (Create an Incubator token with three +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+DeckHas:Ability$Token|Counters & Type$Artifact|Phyrexian
+Oracle:Exile target creature. Incubate 3. (Create an Incubator token with three +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)

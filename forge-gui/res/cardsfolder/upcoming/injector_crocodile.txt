@@ -1,0 +1,9 @@
+Name:Injector Crocodile
+ManaCost:4 B B
+Types:Creature Phyrexian Crocodile
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigIncubate | TriggerDescription$ When CARDNAME dies, incubate 3. (Create an Incubator token with three +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+SVar:TrigIncubate:DB$ Incubate | Amount$ 3
+K:TypeCycling:Swamp:2
+DeckHas:Ability$Token|Counters & Type$Artifact
+Oracle:When Injector Crocodile dies, incubate 3. (Create an Incubator token with three +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)\nSwampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)

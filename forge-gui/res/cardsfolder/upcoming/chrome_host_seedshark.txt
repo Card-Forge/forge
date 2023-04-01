@@ -1,0 +1,10 @@
+Name:Chrome Host Seedshark
+ManaCost:2 U
+Types:Creature Phyrexian Shark
+PT:2/4
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigIncubate | TriggerDescription$ Whenever you cast a noncreature spell, incubate X, where X is that spell's mana value. (Create an Incubator token with X +1/+1 counters on it and "2: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+SVar:TrigIncubate:DB$ Incubate | Amount$ TriggeredStackInstance$CardManaCostLKI
+DeckHints:Type$Instant|Sorcery
+DeckHas:Ability$Token|Counters & Type$Artifact
+Oracle:Flying\nWhenever you cast a noncreature spell, incubate X, where X is that spell's mana value. (Create an Incubator token with X +1/+ 1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)

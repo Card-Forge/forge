@@ -1,0 +1,8 @@
+Name:Traumatic Revelation
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | Optional$ True | DiscardValid$ Creature,Battle | DiscardValidDesc$ creature or battle | RememberDiscarded$ True | SubAbility$ DBIncubate | StackDescription$ REP Target opponent_{p:Targeted} | SpellDescription$ Target opponent reveals their hand. You may choose a creature or battle card from it. If you do, that player discards that card.
+SVar:DBIncubate:DB$ Incubate | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | Amount$ 3 | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ If you don't, incubate 3. (Create an Incubator token with three +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token|Counters & Type$Artifact|Phyrexian
+Oracle:Target opponent reveals their hand. You may choose a creature or battle card from it. If you do, that player discards that card. If you don't, incubate 3. (Create an Incubator token with three +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)

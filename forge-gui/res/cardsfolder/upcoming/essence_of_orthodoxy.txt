@@ -1,0 +1,10 @@
+Name:Essence of Orthodoxy
+ManaCost:3 W W
+Types:Creature Phyrexian
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Phyrexian.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigIncubate | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another Phyrexian enters the battlefield under your control, incubate 2. (Create an Incubator token with two +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+SVar:TrigIncubate:DB$ Incubate | Amount$ 2
+DeckHints:Type$Phyrexian
+DeckHas:Ability$Token|Counters & Type$Artifact
+Oracle:Flying\nWhenever Essence of Orthodoxy or another Phyrexian enters the battlefield under your control, incubate 2. (Create an Incubator token with two +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
