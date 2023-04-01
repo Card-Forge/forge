@@ -9,7 +9,7 @@ SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 K:Flying
 K:First Strike
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, return target Knight creature card from your graveyard to the battlefield.
-SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeNum$ 1 | ValidTgts$ Creature.YouOwn+Knight
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Select target Knight creature card | ChangeNum$ 1 | ValidTgts$ Creature.YouOwn+Knight
 DeckHas:Ability$Discard|Graveyard
 DeckHints:Type$Knight
 SVar:BuffedBy:Knight
