@@ -169,8 +169,12 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 }
             }
             for (final Player p : repeatPlayers) {
-                if (optional && !p.getController().confirmAction(repeat, null, sa.getParam("RepeatOptionalMessage"), null)) {
-                    continue;
+                if (optional) {
+                    if (!p.getController().confirmAction(repeat, null, sa.getParam("RepeatOptionalMessage"), null)) {
+                        continue;
+                    } else if (sa.hasParam("RememberDeciders")) {
+                        source.addRemembered(p);
+                    }
                 }
                 if (nextTurn) {
                     game.getCleanup().addUntil(p, new GameCommand() {

@@ -37,11 +37,11 @@ public class InvestigateEffect extends TokenEffectBase {
         final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Num", "1"), sa);
 
         // Investigate in Sequence
-        for (final Player p : getTargetPlayers(sa)) {
-            for (int i = 0; i < amount; i++) {
+        for (int i = 0; i < amount; i++) {
+            for (final Player p : getTargetPlayers(sa)) {
                 if (sa.hasParam("Optional") && !p.getController().confirmAction(sa, null,
                         Localizer.getInstance().getMessage("lblWouldYouLikeInvestigate"), null)) {
-                    return;
+                    continue;
                 }
 
                 CardZoneTable triggerList = new CardZoneTable();

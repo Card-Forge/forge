@@ -1,90 +1,80 @@
 ooze.png
-size: 242, 106
+size: 256, 160
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
 Avatar
-  xy: 178, 10
-  size: 19, 19
+  xy: 135, 79
+  size: 18, 15
 Idle
-  xy: 172, 4
-  size: 32, 32
+  xy: 8, 20
+  size: 16, 12
 Idle
-  xy: 2, 4
-  size: 32, 32
-  orig: 32, 32
+  xy: 40, 20
+  size: 16, 12
 Idle
-  xy: 36, 4
-  size: 32, 32
+  xy: 72, 20
+  size: 16, 12
 Idle
-  xy: 172, 4
-  size: 32, 32
-Idle
-  xy: 70, 4
-  size: 32, 32
-Idle
-  xy: 104, 4
-  size: 32, 32
-Idle
-  xy: 138, 4
-  size: 32, 32
+  xy: 104, 20
+  size: 16, 12
 Walk
-  xy: 172, 4
-  size: 32, 32
+  xy: 8, 48
+  size: 16, 16
 Walk
-  xy: 2, 4
-  size: 32, 32
+  xy: 40, 48
+  size: 16, 16
 Walk
-  xy: 206, 4
-  size: 32, 32
+  xy: 72, 48
+  size: 16, 16
 Walk
-  xy: 2, 38
-  size: 32, 32
+  xy: 104, 48
+  size: 16, 16
 Walk
-  xy: 36, 38
-  size: 32, 32
+  xy: 136, 48
+  size: 16, 16
 Walk
-  xy: 70, 38
-  size: 32, 32
+  xy: 168, 48
+  size: 16, 16
 Walk
-  xy: 104, 38
-  size: 32, 32
+  xy: 200, 48
+  size: 16, 16
 Walk
-  xy: 138, 38
-  size: 32, 32
+  xy: 232, 48
+  size: 16, 16
 Attack
-  xy: 172, 4
-  size: 32, 32
+  xy: 0, 74
+  size: 32, 22
 Attack
-  xy: 2, 4
-  size: 32, 32
+  xy: 32, 74
+  size: 32, 22
 Attack
-  xy: 172, 38
-  size: 32, 32
+  xy: 64, 74
+  size: 32, 22
 Attack
-  xy: 206, 38
-  size: 32, 32
+  xy: 96, 74
+  size: 32, 22
 Attack
-  xy: 2, 72
-  size: 32, 32
+  xy: 128, 74
+  size: 32, 22
 Attack
-  xy: 36, 72
-  size: 32, 32
+  xy: 160, 74
+  size: 32, 22
+Attack
+  xy: 192, 74
+  size: 32, 22
 Death
-  xy: 172, 4
-  size: 32, 32
+  xy: 0, 144
+  size: 32, 16
 Death
-  xy: 70, 72
-  size: 32, 32
+  xy: 32, 144
+  size: 32, 16
 Death
-  xy: 104, 72
-  size: 32, 32
+  xy: 64, 144
+  size: 32, 16
 Death
-  xy: 138, 72
-  size: 32, 32
+  xy: 96, 144
+  size: 32, 16
 Death
-  xy: 172, 72
-  size: 32, 32
-Death
-  xy: 206, 72
-  size: 32, 32
+  xy: 128, 144
+  size: 32, 16
