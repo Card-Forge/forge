@@ -19,6 +19,8 @@ import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.MyRandom;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -140,6 +142,11 @@ public class SpellSmithScene extends UIScene {
                 return false;
             if (input.getType() == CardEdition.Type.REPRINT || input.getType() == CardEdition.Type.PROMO || input.getType() == CardEdition.Type.COLLECTOR_EDITION)
                 return false;
+            if (input.getDate() != null) {
+                Instant now = Instant.now(); //this should filter upcoming sets from release date + 1 day..
+                if (input.getDate().after(Date.from(now.minus(1, ChronoUnit.DAYS))))
+                    return false;
+            }
             List<PaperCard> it = StreamSupport.stream(RewardData.getAllCards().spliterator(), false)
                     .filter(input2 -> input2.getEdition().equals(input.getCode())).collect(Collectors.toList());
             if (it.size() == 0)
