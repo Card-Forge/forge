@@ -1,0 +1,9 @@
+Name:Seer of Stolen Sight
+ManaCost:2 B
+Types:Creature Phyrexian Warlock
+PT:2/3
+K:Menace
+T:Mode$ ChangesZoneAll | ValidCards$ Artifact.YouCtrl,Creature.YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ Whenever one or more artifacts and/or creatures you control are put into a graveyard from the battlefield, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil
+DeckHints:Type$Artifact & Ability$Sacrifice
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever one or more artifacts and/or creatures you control are put into a graveyard from the battlefield, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)

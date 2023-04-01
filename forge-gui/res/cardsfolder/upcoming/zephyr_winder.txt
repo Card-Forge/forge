@@ -1,0 +1,8 @@
+Name:Zephyr Winder
+ManaCost:1 U
+Types:Creature Elemental
+PT:2/1
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, untap up to one target creature.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1
+Oracle:Flying\nWhenever Zephyr Winder deals combat damage to a player, untap up to one target creature.
