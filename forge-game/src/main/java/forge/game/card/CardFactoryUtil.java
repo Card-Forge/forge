@@ -838,12 +838,9 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Backup")) {
             final String[] k = keyword.split(":");
             final String magnitude = k[1];
-            final String backupVar = card.getSVar("BackupAbility");
+            final String backupVar = card.getSVar(k[2]);
 
-            String descStr = "Backup " + magnitude + " (" + inst.getReminderText() + ")";
-            if (backupVar.contains("&") || StringUtils.countMatches(backupVar, "|") >= 1) {
-                descStr = descStr.replace("ability", "abilities");
-            }
+            String descStr = "Backup " + magnitude;
 
             final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | " +
                     "Secondary$ True | TriggerDescription$ " + descStr;
@@ -851,7 +848,7 @@ public class CardFactoryUtil {
             final String putCounter = "DB$ PutCounter | ValidTgts$ Creature | CounterNum$ " + magnitude
                     + " | CounterType$ P1P1";
 
-            final String addAbility = "DB$ Animate | " + backupVar + " | ConditionDefined$ Targeted | " +
+            final String addAbility = backupVar + " | ConditionDefined$ Targeted | " +
                     "ConditionPresent$ Card.Other | Defined$ Targeted";
 
             SpellAbility sa = AbilityFactory.getAbility(putCounter, card);

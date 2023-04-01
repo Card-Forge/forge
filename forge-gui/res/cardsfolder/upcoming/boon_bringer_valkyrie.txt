@@ -1,0 +1,11 @@
+Name:Boon-Bringer Valkyrie
+ManaCost:3 W W
+Types:Creature Angel Warrior
+PT:4/4
+K:Backup:1:BackupAbilities
+SVar:BackupAbilities:DB$ Pump | KW$ Flying & First Strike & Lifelink
+K:Flying
+K:First Strike
+K:Lifelink
+DeckHas:Ability$Counters|LifeGain
+Oracle:Backup 1 (When this creature enters the battlefield, put a +1/+1 counter on target creature. If that’s another creature, it gains the following abilities until end of turn.)\nFlying, first strike, lifelink

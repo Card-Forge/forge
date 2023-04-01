@@ -1,0 +1,10 @@
+Name:Streetwise Negotiator
+ManaCost:1 G
+Types:Creature Cat Citizen
+PT:0/2
+K:Backup:1:BackupAbility
+SVar:BackupAbility:DB$ Animate | staticAbilities$ CDT
+SVar:CDT:Mode$ CombatDamageToughness | ValidCard$ Card.Self | Description$ This creature assigns combat damage equal to its toughness rather than its power.
+S:Mode$ CombatDamageToughness | ValidCard$ Card.Self | Description$ This creature assigns combat damage equal to its toughness rather than its power.
+DeckHas:Ability$Counters
+Oracle:Backup 1 (When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)\nThis creature assigns combat damage equal to its toughness rather than its power.

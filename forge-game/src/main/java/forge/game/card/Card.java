@@ -2311,8 +2311,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     final String[] k = keyword.split(":");
                     sb.append(k[0]).append(" ").append(k[1]).append(" (");
                     String remStr = inst.getReminderText();
-                    String backupVar = this.getSVar("BackupAbility");
-                    if (backupVar.contains("&") || StringUtils.countMatches(backupVar, "|") >= 1) {
+                    if (k[2].endsWith("s")) {
                         remStr = remStr.replace("ability", "abilities");
                     }
                     sb.append(remStr).append(")");
