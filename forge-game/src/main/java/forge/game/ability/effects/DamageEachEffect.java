@@ -5,15 +5,12 @@ import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardDamageMap;
 import forge.game.card.CardLists;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.collect.FCollectionView;
-
-import java.util.List;
 
 public class DamageEachEffect extends DamageBaseEffect {
 
@@ -37,13 +34,9 @@ public class DamageEachEffect extends DamageBaseEffect {
             dmg += iDmg + " damage";
         }
 
-        if (sa.hasParam("StackDescription")) {
-            sb.append(sa.getParam("StackDescription"));
-        } else {
-            sb.append("Each ").append(desc).append(" deals ").append(dmg).append(" to ");
-            sb.append(Lang.joinHomogenous(getTargetEntities(sa)));
-        }
-        sb.append(".");
+        sb.append("Each ").append(desc).append(" deals ").append(dmg).append(" to ");
+        sb.append(Lang.joinHomogenous(getTargetEntities(sa))).append(".");
+
         return sb.toString();
     }
 
@@ -57,18 +50,14 @@ public class DamageEachEffect extends DamageBaseEffect {
         final Game game = card.getGame();
         final String num = sa.getParamOrDefault("NumDmg", "X");
 
-        FCollectionView<Card> sources = game.getCardsIn(ZoneType.Battlefield);
-        if (sa.hasParam("ValidCards")) {
-            sources = CardLists.getValidCards(sources, sa.getParam("ValidCards"), sa.getActivatingPlayer(), card, sa);
-        } else if (sa.hasParam("DefinedDamagers")) {
-            List<Card> defined = AbilityUtils.getDefinedCards(card, sa.getParam("DefinedDamagers"), sa);
-            CardCollection sources2 = new CardCollection();
-            for (Card c : defined) {
-                if (sources.contains(c)) {
-                    sources2.add(c);
-                }
+        FCollectionView<Card> sources;
+        if (sa.hasParam("DefinedDamagers")) {
+            sources = AbilityUtils.getDefinedCards(card, sa.getParam("DefinedDamagers"), sa);
+        } else {
+            sources = game.getCardsIn(ZoneType.Battlefield);
+            if (sa.hasParam("ValidCards")) {
+                sources = CardLists.getValidCards(sources, sa.getParam("ValidCards"), sa.getActivatingPlayer(), card, sa);
             }
-            sources = sources2;
         }
 
         boolean usedDamageMap = true;

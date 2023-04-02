@@ -1,10 +1,6 @@
 Name:Combo Attack
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature.YourTeamCtrl | TgtPrompt$ Select two target creatures your team controls | ImprintCards$ ThisTargetedCard | TargetMin$ 2 | TargetMax$ 2 | AILogic$ PowerDmg | SubAbility$ DBPump | StackDescription$ SpellDescription | SpellDescription$ Two target creatures your team controls each deal damage equal to their power to target creature.
-SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to be dealt damage | RememberObjects$ ThisTargetedCard | IsCurse$ True | SubAbility$ DBEachDamage | StackDescription$ None
-SVar:DBEachDamage:DB$ EachDamage | ValidCards$ Creature.IsImprinted | NumDmg$ X | DefinedCards$ Remembered | SubAbility$ DBCleanup | StackDescription$ None
-#NumDmg isn't really used here. It is left for clarity. The AF pulls Damage straight from "X" hardcoded.
-SVar:X:Count$CardPower
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+A:SP$ Pump | ValidTgts$ Creature.YourTeamCtrl | TgtPrompt$ Select two target creatures your team controls | TargetMin$ 2 | TargetMax$ 2 | SubAbility$ DBEachDamage | StackDescription$ {c:ThisTargetedCard} | SpellDescription$ Two target creatures your team controls
+SVar:DBEachDamage:DB$ EachDamage | ValidTgts$ Creature | DefinedDamagers$ ParentTarget | NumDmg$ Count$CardPower | StackDescription$ REP target creature_{c:ThisTargetedCard} | SpellDescription$ each deal damage equal to their power to target creature.
 Oracle:Two target creatures your team controls each deal damage equal to their power to target creature.
