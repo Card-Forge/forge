@@ -257,7 +257,7 @@ public class AiAttackController {
                         continue;
                     }
 
-                    if (sa.getApi() == ApiType.EachDamage && "TriggeredAttacker".equals(sa.getParam("DefinedPlayers"))) {
+                    if (sa.getApi() == ApiType.EachDamage && "TriggeredAttacker".equals(sa.getParam("Defined"))) {
                         List<Card> valid = CardLists.getValidCards(c.getController().getCreaturesInPlay(), sa.getParam("ValidCards"), c.getController(), c, sa);
                         // TODO: this assumes that 1 damage is dealt per creature. Improve this to check the parameter/X to determine
                         // how much damage is dealt by each of the creatures in the valid list.
