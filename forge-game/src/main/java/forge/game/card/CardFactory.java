@@ -39,7 +39,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.WrappedAbility;
 import forge.item.IPaperCard;
-import forge.item.PaperCard;
 import forge.util.CardTranslation;
 import forge.util.TextUtil;
 
@@ -263,7 +262,7 @@ public class CardFactory {
                 c.setState(CardStateName.Flipped, false);
                 c.setImageKey(cp.getImageKey(true));
             }
-            else if (c.hasBackSide() && cp instanceof PaperCard && cardRules != null) {
+            else if (c.hasBackSide() && cardRules != null) {
                 c.setState(cardRules.getSplitType().getChangedStateName(), false);
                 c.setImageKey(cp.getImageKey(true));
             }
