@@ -528,7 +528,7 @@
 },
 {
 	"name": "Badger",
-	"sprite": "sprites/dungeon/badger.atlas",
+	"sprite": "sprites/badger.atlas",
 	"deck": [
 		"decks/badger.dck"
 	],
@@ -1268,7 +1268,7 @@
 },
 {
 	"name": "Boar",
-	"sprite": "sprites/dungeon/boar.atlas",
+	"sprite": "sprites/boar.atlas",
 	"scale": 0.55,
 	"deck": [
 		"decks/boar.json"
@@ -1361,7 +1361,7 @@
 },
 {
 	"name": "Bull",
-	"sprite": "sprites/dungeon/bull.atlas",
+	"sprite": "sprites/bull.atlas",
 	"scale": 0.65,
 	"deck": [
 		"decks/bull.dck"
@@ -3009,7 +3009,7 @@
 },
 {
 	"name": "Crab",
-	"sprite": "sprites/dungeon/crab.atlas",
+	"sprite": "sprites/crab.atlas",
 	"scale": 0.9,
 	"deck": [
 		"decks/crab.json",
@@ -3686,7 +3686,7 @@
 },
 {
 	"name": "Dog",
-	"sprite": "sprites/dungeon/dog.atlas",
+	"sprite": "sprites/dog.atlas",
 	"deck": [
 		"decks/dog.json",
 		"decks/dog.dck"
@@ -4430,7 +4430,7 @@
 },
 {
 	"name": "Eye",
-	"sprite": "sprites/dungeon/eye.atlas",
+	"sprite": "sprites/eye.atlas",
 	"deck": [
 		"decks/eye.dck"
 	],
@@ -4751,8 +4751,56 @@
 	"colors": "R"
 },
 {
+	"name": "Flying Witch",
+	"sprite": "sprites/dungeon/witch.atlas",
+	"deck": [
+		"decks/witch2.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 10,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "BG"
+},
+{
 	"name": "Fox",
-	"sprite": "sprites/dungeon/fox.atlas",
+	"sprite": "sprites/fox.atlas",
 	"deck": [
 		"decks/fox.json"
 	],
@@ -4805,7 +4853,7 @@
 },
 {
 	"name": "Frog",
-	"sprite": "sprites/dungeon/frog.atlas",
+	"sprite": "sprites/frog.atlas",
 	"deck": [
 		"decks/frog.json"
 	],
@@ -4932,7 +4980,7 @@
 },
 {
 	"name": "Fungus",
-	"sprite": "sprites/dungeon/fungus.atlas",
+	"sprite": "sprites/fungus.atlas",
 	"deck": [
 		"decks/fungus.json"
 	],
@@ -5749,57 +5797,6 @@
 		}
 	],
 	"colors": "RG"
-},
-{
-	"name": "Magma Elemental",
-	"sprite": "sprites/dungeon/magmaelemental.atlas",
-	"deck": [
-		"decks/magma_elemental.dck"
-	],
-	"spawnRate": 1,
-	"difficulty": 0.5,
-	"speed": 15,
-	"life": 15,
-	"flying":true,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"uncommon"
-			]
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"uncommon",
-				"common"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 4,
-			"rarity": [
-				"Rare"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.7,
-			"count": 10,
-			"addMaxCount": 90
-		}
-	],
-	"colors": "R"
 },
 {
 	"name": "Goblin",
@@ -7314,7 +7311,7 @@
 },
 {
 	"name": "Insect",
-	"sprite": "sprites/dungeon/dragonfly.atlas",
+	"sprite": "sprites/dragonfly.atlas",
 	"deck": [
 		"decks/insect.dck"
 	],
@@ -7431,7 +7428,7 @@
 },
 {
 	"name": "Jackal Warrior",
-	"sprite": "sprites/dungeon/jackalwarrior.atlas",
+	"sprite": "sprites/jackalwarrior.atlas",
 	"scale": 0.5,
 	"deck": [
 		"decks/jackal.dck"
@@ -7543,7 +7540,7 @@
 },
 {
 	"name": "Jellyfish",
-	"sprite": "sprites/dungeon/jellyfish.atlas",
+	"sprite": "sprites/jellyfish.atlas",
 	"deck": [
 		"decks/jellyfish.dck"
 	],
@@ -7861,7 +7858,7 @@
 },
 {
 	"name": "Kobold",
-	"sprite": "sprites/dungeon/kobold.atlas",
+	"sprite": "sprites/kobold.atlas",
 	"deck": [
 		"decks/kobold.dck"
 	],
@@ -8292,7 +8289,60 @@
 		}
 	],
 	"colors": "R"
-},{
+},
+{
+	"name": "Magma Fire Elemental",
+	"sprite": "sprites/magmafireelemental.atlas",
+	"deck": [
+		"decks/magma_elemental.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.5,
+	"speed": 15,
+	"life": 15,
+	"flying":true,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 4,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+
+	"colors": "R"
+},
+{
 	"name": "Merfolk",
 	"sprite": "sprites/waterelemental.atlas",
 	"deck": [
@@ -8908,7 +8958,7 @@
 },
 {
 	"name": "Mummy",
-	"sprite": "sprites/dungeon/mummy.atlas",
+	"sprite": "sprites/mummy.atlas",
 	"scale": 0.70,
 	"deck": [
 		"decks/mummy.dck"
@@ -8956,7 +9006,7 @@
 },
 {
 	"name": "Nahiri",
-	"sprite": "sprites/dungeon/nahiri.atlas",
+	"sprite": "sprites/boss/nahiri.atlas",
 	"deck": [
 		"decks/miniboss/nahiri.dck"
 	],
@@ -9067,7 +9117,7 @@
 },
 {
 	"name": "Octopus",
-	"sprite": "sprites/dungeon/octopus.atlas",
+	"sprite": "sprites/octopus.atlas",
 	"deck": [
 		"decks/octopus.dck"
 	],
@@ -9119,7 +9169,7 @@
 },
 {
 	"name": "Ooze",
-	"sprite": "sprites/dungeon/ooze.atlas",
+	"sprite": "sprites/ooze.atlas",
 	"scale": 0.6,
 	"deck": [
 		"decks/ooze.json"
@@ -9248,7 +9298,7 @@
 },
 {
 	"name": "Owl",
-	"sprite": "sprites/dungeon/owl.atlas",
+	"sprite": "sprites/owl.atlas",
 	"deck": [
 		"decks/owl.dck"
 	],
@@ -9368,7 +9418,7 @@
 },
 {
 	"name": "Plant",
-	"sprite": "sprites/dungeon/plant.atlas",
+	"sprite": "sprites/plant.atlas",
 	"deck": [
 		"decks/plant.json",
 		"decks/plant.dck"
@@ -9687,7 +9737,7 @@
 },
 {
 	"name": "Rat Ninja",
-	"sprite": "sprites/dungeon/humanoidrat.atlas",
+	"sprite": "sprites/humanoidrat.atlas",
 	"deck": [
 		"decks/humanoidrat.dck"
 	],
@@ -9739,7 +9789,7 @@
 },
 {
 	"name": "Raven",
-	"sprite": "sprites/dungeon/raven.atlas",
+	"sprite": "sprites/raven.atlas",
 	"deck": [
 		"decks/raven.dck"
 	],
@@ -10232,7 +10282,7 @@
 },
 {
 	"name": "Scorpion",
-	"sprite": "sprites/dungeon/scorpion.atlas",
+	"sprite": "sprites/scorpion.atlas",
 	"scale": 0.9,
 	"deck": [
 		"decks/scorpion.dck"
@@ -10831,7 +10881,7 @@
 },
 {
 	"name": "Stray Cat",
-	"sprite": "sprites/dungeon/cat.atlas",
+	"sprite": "sprites/cat.atlas",
 	"deck": [
 		"decks/straycat.dck"
 	],
@@ -10882,7 +10932,7 @@
 },
 {
 	"name": "Squirrel",
-	"sprite": "sprites/dungeon/squirrel.atlas",
+	"sprite": "sprites/squirrel.atlas",
 	"deck": [
 		"decks/squirrel.dck"
 	],
@@ -10984,6 +11034,54 @@
 		}
 	],
 	"colors": "BUG"
+},
+{
+	"name": "Swamp Troll",
+	"sprite": "sprites/dungeon/swamptroll.atlas",
+	"deck": [
+		"decks/swamptroll.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 10,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "BG"
 },
 {
 	"name": "Tarkir Djinn",
@@ -11212,7 +11310,7 @@
 },
 {
 	"name": "Turtle",
-	"sprite": "sprites/dungeon/turtle.atlas",
+	"sprite": "sprites/turtle.atlas",
 	"deck": [
 		"decks/turtle.json"
 	],
@@ -11739,7 +11837,7 @@
 },
 {
 	"name": "Walking Brain",
-	"sprite": "sprites/dungeon/walkingbrain.atlas",
+	"sprite": "sprites/walkingbrain.atlas",
 	"deck": [
 		"decks/walkingbrain.dck"
 	],
@@ -12108,7 +12206,7 @@
 },
 {
 	"name": "Wild Rat",
-	"sprite": "sprites/dungeon/wildrat.atlas",
+	"sprite": "sprites/wildrat.atlas",
 	"deck": [
 		"decks/infectrat.dck",
 		"decks/rat.json",
@@ -12354,6 +12452,54 @@
 		}
 	],
 	"colors": "U"
+},
+{
+	"name": "Witch",
+	"sprite": "sprites/dungeon/witch.atlas",
+	"deck": [
+		"decks/witch.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 10,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "BG"
 },
 {
 	"name": "Wounded Sliver",
