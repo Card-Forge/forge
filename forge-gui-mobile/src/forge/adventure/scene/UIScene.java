@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.stage.GameHUD;
@@ -254,7 +255,7 @@ public class UIScene extends Scene {
         stage.addActor(ui);
     }
 
-    private void removeDialog() {
+    public void removeDialog() {
 
         if (!dialogs.isEmpty()) {
             dialogs.get(dialogs.size - 1).remove();
@@ -268,6 +269,15 @@ public class UIScene extends Scene {
         } else {
             possibleSelectionStack.removeIndex(possibleSelectionStack.size - 1);
         }
+    }
+
+    public Dialog createGenericDialog(String title, String label, Runnable runnableYes, Runnable runnableNo) {
+        Dialog dialog = new Dialog(title, Controls.getSkin());
+        dialog.text(label);
+        TextraButton yes = Controls.newTextButton(Forge.getLocalizer().getMessage("lblYes"), runnableYes);
+        TextraButton no = Controls.newTextButton(Forge.getLocalizer().getMessage("lblNo"), runnableNo);
+        dialog.button(yes).button(no);
+        return dialog;
     }
 
     static float timeOfDay = 8.0f;
