@@ -58,6 +58,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     final Sprite edgeWinM;
     boolean enable = true;
     boolean arenaStarted = false;
+    Dialog startDialog, concedeDialog;
 
     private ArenaScene() {
         super(Forge.isLandscapeMode() ? "ui/arena.json" : "ui/arena_portrait.json");
@@ -98,9 +99,17 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     }
 
     private void showAreYouSure() {
-        Dialog areYouSureDialog = prepareDialog(Forge.getLocalizer().getMessage("lblConcedeTitle"), ButtonYes | ButtonNo, () -> loose());
-        areYouSureDialog.text(Forge.getLocalizer().getMessage("lblConcedeCurrentGame"));
-        showDialog(areYouSureDialog);
+        if (concedeDialog == null) {
+            concedeDialog = new Dialog(Forge.getLocalizer().getMessage("lblConcedeTitle"), Controls.getSkin());
+            concedeDialog.text("\n" + Forge.getLocalizer().getMessage("lblConcedeCurrentGame"));
+            TextraButton yes = Controls.newTextButton(Forge.getLocalizer().getMessage("lblYes"), () -> {
+                loose();
+                removeDialog();
+            });
+            TextraButton no = Controls.newTextButton(Forge.getLocalizer().getMessage("lblNo"), this::removeDialog);
+            concedeDialog.button(yes).button(no);
+        }
+        showDialog(concedeDialog);
     }
 
     private void loose() {
@@ -110,13 +119,25 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         arenaStarted = false;
     }
 
+    private void startDialog() {
+        if (startDialog == null) {
+            startDialog = new Dialog(Forge.getLocalizer().getMessage("lblStart"), Controls.getSkin());
+            startDialog.text(Forge.getLocalizer().getMessage("lblStartArena"));
+            TextraButton yes = Controls.newTextButton(Forge.getLocalizer().getMessage("lblYes"), () -> {
+                startArena();
+                removeDialog();
+            });
+            TextraButton no = Controls.newTextButton(Forge.getLocalizer().getMessage("lblNo"), this::removeDialog);
+            startDialog.button(yes).button(no);
+        }
+        showDialog(startDialog);
+    }
+
     private void startButton() {
         if (!enable)
             return;
         if (roundsWon == 0) {
-            Dialog startDialog = prepareDialog(Forge.getLocalizer().getMessage("lblStart"), ButtonYes | ButtonNo, () -> startArena());
-            startDialog.text("Do you want to go into the Arena?");
-            showDialog(startDialog);
+            startDialog();
         } else {
             startRound();
         }

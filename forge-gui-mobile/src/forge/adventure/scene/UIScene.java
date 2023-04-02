@@ -254,7 +254,7 @@ public class UIScene extends Scene {
         stage.addActor(ui);
     }
 
-    private void removeDialog() {
+    public void removeDialog() {
 
         if (!dialogs.isEmpty()) {
             dialogs.get(dialogs.size - 1).remove();
