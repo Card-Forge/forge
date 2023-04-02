@@ -1,0 +1,9 @@
+Name:Phyrexian Pegasus
+ManaCost:2 W
+Types:Creature Phyrexian Pegasus
+PT:2/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target attacking creature without flying gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+attacking+withoutFlying | TgtPrompt$ Select another target attacking creature without flying | KW$ Flying
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Phyrexian Pegasus attacks, another target attacking creature without flying gains flying until end of turn.
