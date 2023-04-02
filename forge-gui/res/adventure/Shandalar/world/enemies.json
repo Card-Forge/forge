@@ -5169,7 +5169,7 @@
 },
 {
 	"name": "Garruk",
-	"sprite": "sprites/dungeon/garruk.atlas",
+	"sprite": "sprites/boss/garruk.atlas",
 	"deck": [
 		"decks/miniboss/garruk.dck"
 	],
@@ -5620,7 +5620,7 @@
 },
 {
 	"name": "Grolnok",
-	"sprite": "sprites/dungeon/frogboss.atlas",
+	"sprite": "sprites/boss/frogboss.atlas",
 	"scale": 0.50,
 	"deck": [
 		"decks/miniboss/frogboss.dck"
@@ -7479,9 +7479,9 @@
 },
 {
 	"name": "Jace",
-	"sprite": "sprites/dungeon/jace.atlas",
+	"sprite": "sprites/boss/jace.atlas",
 	"deck": [
-		"decks/miniboss/jace.dck"
+		"decks/boss/jace.dck"
 	],
 	"boss": true,
 	"spawnRate": 1,
@@ -7741,7 +7741,7 @@
 },
 {	
 	"name": "Kiora",
-	"sprite": "sprites/dungeon/kiora.atlas",
+	"sprite": "sprites/boss/kiora.atlas",
 	"scale": 0.35,
 	"deck": [
 		"decks/miniboss/kiora.dck"
@@ -9172,7 +9172,7 @@
 },
 {
 	"name": "Ooze Boss",
-	"sprite": "sprites/dungeon/oozeboss.atlas",
+	"sprite": "sprites/boss/oozeboss.atlas",
 	"scale": 0.5,
 	"deck": [
 		"decks/miniboss/ooze_boss.dck"
@@ -10476,7 +10476,7 @@
 },
 {
 	"name": "Slimefoot",
-	"sprite": "sprites/dungeon/slimefoot.atlas",
+	"sprite": "sprites/boss/slimefoot.atlas",
 	"scale": 0.5,
 	"deck": [
 		"decks/miniboss/slimefoot.dck"
@@ -10575,7 +10575,7 @@
 },
 {
 	"name": "Slobad",
-	"sprite": "sprites/dungeon/slobad.atlas",
+	"sprite": "sprites/boss/slobad.atlas",
 	"scale": 0.75,
 	"deck": [
 		"decks/miniboss/slobad.dck"
@@ -11015,7 +11015,7 @@
 },
 {	
 	"name": "Teferi",
-	"sprite": "sprites/dungeon/teferi.atlas",
+	"sprite": "sprites/boss/teferi.atlas",
 	"scale": 0.5,
 	"deck": [
 		"decks/miniboss/teferi_boss.dck"
@@ -11080,7 +11080,7 @@
 },
 {
 	"name": "Tibalt",
-	"sprite": "sprites/dungeon/tibalt.atlas",
+	"sprite": "sprites/boss/tibalt.atlas",
 	"scale": 0.50,
 	"deck": [
 		"decks/miniboss/tibalt.dck"
@@ -12381,7 +12381,7 @@
 },
 {
 	"name": "Xira",
-	"sprite": "sprites/dungeon/xira.atlas",
+	"sprite": "sprites/boss/xira.atlas",
 	"scale": 0.50,
 	"deck": [
 		"decks/miniboss/xira.dck"
