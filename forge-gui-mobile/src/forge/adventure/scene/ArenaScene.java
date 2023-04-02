@@ -100,14 +100,10 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
     private void showAreYouSure() {
         if (concedeDialog == null) {
-            concedeDialog = new Dialog(Forge.getLocalizer().getMessage("lblConcedeTitle"), Controls.getSkin());
-            concedeDialog.text("\n" + Forge.getLocalizer().getMessage("lblConcedeCurrentGame"));
-            TextraButton yes = Controls.newTextButton(Forge.getLocalizer().getMessage("lblYes"), () -> {
+            concedeDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblConcedeTitle"), "\n" + Forge.getLocalizer().getMessage("lblConcedeCurrentGame"), () -> {
                 loose();
                 removeDialog();
-            });
-            TextraButton no = Controls.newTextButton(Forge.getLocalizer().getMessage("lblNo"), this::removeDialog);
-            concedeDialog.button(yes).button(no);
+            }, this::removeDialog);
         }
         showDialog(concedeDialog);
     }
@@ -121,14 +117,10 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
     private void startDialog() {
         if (startDialog == null) {
-            startDialog = new Dialog(Forge.getLocalizer().getMessage("lblStart"), Controls.getSkin());
-            startDialog.text(Forge.getLocalizer().getMessage("lblStartArena"));
-            TextraButton yes = Controls.newTextButton(Forge.getLocalizer().getMessage("lblYes"), () -> {
+            startDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblStart"), Forge.getLocalizer().getMessage("lblStartArena"), () -> {
                 startArena();
                 removeDialog();
-            });
-            TextraButton no = Controls.newTextButton(Forge.getLocalizer().getMessage("lblNo"), this::removeDialog);
-            startDialog.button(yes).button(no);
+            }, this::removeDialog);
         }
         showDialog(startDialog);
     }
