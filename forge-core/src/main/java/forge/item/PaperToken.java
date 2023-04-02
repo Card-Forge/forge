@@ -9,6 +9,7 @@ import forge.ImageKeys;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.card.CardSplitType;
 import forge.card.ColorSet;
 import forge.util.MyRandom;
 
@@ -17,7 +18,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     private String name;
     private CardEdition edition;
     private ArrayList<String> imageFileName = new ArrayList<>();
-    private CardRules card;
+    private CardRules cardRules;
     private int artIndex = 1;
 
     // takes a string of the form "<colors> <power> <toughness> <name>" such as: "B 0 0 Germ"
@@ -108,7 +109,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     }
 
     public PaperToken(final CardRules c, CardEdition edition0, String imageFileName) {
-        this.card = c;
+        this.cardRules = c;
         this.name = c.getName();
         this.edition = edition0;
 
@@ -128,36 +129,79 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
             }
         }
     }
-    
-    @Override public String getName() { return name; }
 
-    @Override public String toString() { return name; }
-    @Override public String getEdition() { return edition != null ? edition.getCode() : "???"; }
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    @Override
+    public String getEdition() {
+        return edition != null ? edition.getCode() : "???";
+    }
 
     @Override
     public String getCollectorNumber() {
         return IPaperCard.NO_COLLECTOR_NUMBER;
     }
 
-    @Override public int getArtIndex() { return artIndex; }
-    @Override public boolean isFoil() { return false; }
-    @Override public CardRules getRules() { return card; }
-
-    @Override public CardRarity getRarity() { return CardRarity.None; }
-    @Override public String getArtist() { /*TODO*/ return ""; }
-
-    // Unfortunately this is a property of token, cannot move it outside of class
-    public String getImageFilename() { return getImageFilename(1); }
-    public String getImageFilename(int idx) { return imageFileName.get(idx-1); }
-
-    @Override public String getItemType() { return "Token"; }
+    @Override
+    public int getArtIndex() {
+        return artIndex;
+    }
 
     @Override
-    public boolean hasBackFace() {
+    public boolean isFoil() {
         return false;
     }
 
-    @Override public boolean isToken() { return true; }
+    @Override
+    public CardRules getRules() {
+        return cardRules;
+    }
+
+    @Override
+    public CardRarity getRarity() {
+        return CardRarity.None;
+    }
+
+    @Override
+    public String getArtist() { /*TODO*/
+        return "";
+    }
+
+    // Unfortunately this is a property of token, cannot move it outside of class
+    public String getImageFilename() {
+        return getImageFilename(1);
+    }
+
+    public String getImageFilename(int idx) {
+        return imageFileName.get(idx - 1);
+    }
+
+    @Override
+    public String getItemType() {
+        return "Token";
+    }
+
+    @Override
+    public boolean hasBackFace() {
+        if (this.cardRules == null)
+            return false;
+        CardSplitType cst = this.cardRules.getSplitType();
+        //expand this on future for other tokens that has other backsides besides transform..
+        return cst == CardSplitType.Transform;
+    }
+
+    @Override
+    public boolean isToken() {
+        return true;
+    }
 
     // IPaperCard
     @Override
@@ -174,18 +218,22 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     public String getCardWSpecImageKey() {
         return getImageKey(false);
     }
+
     @Override
     public String getCardUSpecImageKey() {
         return getImageKey(false);
     }
+
     @Override
     public String getCardBSpecImageKey() {
         return getImageKey(false);
     }
+
     @Override
     public String getCardRSpecImageKey() {
         return getImageKey(false);
     }
+
     @Override
     public String getCardGSpecImageKey() {
         return getImageKey(false);
@@ -194,6 +242,18 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     // InventoryItem
     @Override
     public String getImageKey(boolean altState) {
+        if (hasBackFace()) {
+            String edCode = edition != null ? "_" + edition.getCode().toLowerCase() : "";
+            if (altState) {
+                String name = ImageKeys.TOKEN_PREFIX + cardRules.getOtherPart().getName().toLowerCase().replace(" token", "");
+                name.replace(" ", "_");
+                return name + edCode;
+            } else {
+                String name = ImageKeys.TOKEN_PREFIX + cardRules.getMainPart().getName().toLowerCase().replace(" token", "");
+                name.replace(" ", "_");
+                return name + edCode;
+            }
+        }
         int idx = MyRandom.getRandom().nextInt(artIndex);
         return getImageKey(idx);
     }
@@ -201,6 +261,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     public String getImageKey(int artIndex) {
         return ImageKeys.TOKEN_PREFIX + imageFileName.get(artIndex).replace(" ", "_");
     }
+
     public boolean isRebalanced() {
         return false;
     }
