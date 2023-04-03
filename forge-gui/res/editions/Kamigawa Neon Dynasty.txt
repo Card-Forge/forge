@@ -540,10 +540,20 @@ ScryfallCode=NEO
 A1 C A-Ancestral Katana @Daniel Ljunggren
 A10 C A-Eiganjo Exemplar @Ernanda Souza
 A19 C A-Imperial Subduer @Zara Alfonso
+A53 U A-Futurist Operative @Justine Cruz
+A67 C A-Moon-Circuit Hacker @Tia Masic
+A73 U A-Prosperous Thief @Fajareka Setiawan
+A86 R A-Thousand-Faced Shadow @Ekaterina Burmak
+A95 U A-Dokuchi Silencer @David Rapoza
+A114 M A-Nashi, Moon Sage's Scion @Valera Lutfullina
+A116 U A-Nezumi Prowler @Joseph Weston
 A131 C A-Akki Ronin @Olivier Bernard
 A156 C A-Peerless Samurai @Micah Epstein
 A215 U A-Asari Captain @Donato Giancola
 A232 R A-Raiyuu, Storm's Edge @Heonhwa Choe
+A234 R A-Satoru Umezawa @Anna Pavleeva
+A236 U A-Silver-Fur Master @Carl Critchlow
+A242 U A-Circuit Mender @Hector Ortiz
 
 [lands]
 1 Plains|NEO|1
