@@ -7,4 +7,5 @@ K:Flying
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl+withFlying,Card.TopLibrary+YouCtrl+hasKeywordFlash | MayPlay$ True | AffectedZone$ Library | Description$ You may cast spells with flash or flying from the top of your library.
 SVar:NonStackingEffect:True
+DeckNeeds:Keyword$Flying|Flash
 Oracle:Flash\nFlying\nYou may look at the top card of your library any time.\nYou may cast spells with flash or flying from the top of your library.
