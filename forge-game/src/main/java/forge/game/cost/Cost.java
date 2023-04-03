@@ -210,6 +210,10 @@ public class Cost implements Serializable {
         costParts.add(new CostPartMana(cost, null));
     }
 
+    public Cost(String parse, final boolean bAbility) {
+        this(parse, bAbility, true);
+    }
+
     /**
      * <p>
      * Constructor for Cost.
@@ -219,7 +223,7 @@ public class Cost implements Serializable {
      * @param bAbility
      *            a boolean.
      */
-    public Cost(String parse, final boolean bAbility) {
+    public Cost(String parse, final boolean bAbility, final boolean intrinsic) {
         this.isAbility = bAbility;
         // when adding new costs for cost string, place them here
 
@@ -249,6 +253,9 @@ public class Cost implements Serializable {
                     if (cp instanceof CostPartMana) {
                         parsedMana = (CostPartMana) cp;
                     } else {
+                        if (cp instanceof CostPartWithList) {
+                            ((CostPartWithList)cp).setIntrinsic(intrinsic);
+                        }
                         this.costParts.add(cp);
                     }
                 else

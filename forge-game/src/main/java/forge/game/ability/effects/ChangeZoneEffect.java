@@ -696,7 +696,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     if (sa.isNinjutsu()) {
                         // Ninjutsu need to get the Defender of the Returned Creature
-                        final Card returned = sa.getPaidList("Returned").getFirst();
+                        final Card returned = sa.getPaidList("Returned", true).getFirst();
                         final GameEntity defender = game.getCombat().getDefenderByAttacker(returned);
                         game.getCombat().addAttacker(movedCard, defender);
                         game.getCombat().getBandOfAttacker(movedCard).setBlocked(false);

@@ -371,7 +371,7 @@ public class PlayEffect extends SpellAbilityEffect {
                     abCost = new Cost(cost, false);
                 }
 
-                tgtSA = tgtSA.copyWithDefinedCost(abCost);
+                tgtSA = tgtSA.copyWithManaCostReplaced(tgtSA.getActivatingPlayer(), abCost);
             }
 
             if (!optional) {

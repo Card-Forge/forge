@@ -127,9 +127,9 @@ public class CostPartMana extends CostPart {
     }
 
     public ManaCost getManaCostFor(SpellAbility sa) {
-        if (isExiledCreatureCost() && sa.getPaidList(CostExile.HashLKIListKey)!= null && !sa.getPaidList(CostExile.HashLKIListKey).isEmpty()) {
+        if (isExiledCreatureCost() && sa.getPaidList(CostExile.HashLKIListKey, true)!= null && !sa.getPaidList(CostExile.HashLKIListKey, true).isEmpty()) {
             // back from the brink
-            return sa.getPaidList(CostExile.HashLKIListKey).get(0).getManaCost();
+            return sa.getPaidList(CostExile.HashLKIListKey, true).get(0).getManaCost();
         }
         if (isEnchantedCreatureCost() && sa.getHostCard().isEnchantingCard()) {
             return sa.getHostCard().getEnchantingCard().getManaCost();

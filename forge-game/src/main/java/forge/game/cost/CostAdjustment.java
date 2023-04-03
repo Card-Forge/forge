@@ -161,7 +161,7 @@ public class CostAdjustment {
             count = 1;
         }
         if (count > 0) {
-            Cost part = new Cost(scost, sa.isAbility());
+            Cost part = new Cost(scost, sa.isAbility(), sa.getHostCard().equals(hostCard));
             cost.mergeTo(part, count);
         }
     }

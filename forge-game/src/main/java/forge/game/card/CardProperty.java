@@ -871,9 +871,9 @@ public class CardProperty {
                 } else if (restriction.equals("MovedToGrave")) {
                     if (!(spellAbility instanceof SpellAbility)) {
                         final SpellAbility root = ((SpellAbility) spellAbility).getRootAbility();
-                        if (root != null && (root.getPaidList("MovedToGrave") != null)
-                                && !root.getPaidList("MovedToGrave").isEmpty()) {
-                            final CardCollectionView cards = root.getPaidList("MovedToGrave");
+                        if (root != null && (root.getPaidList("MovedToGrave", true) != null)
+                                && !root.getPaidList("MovedToGrave", true).isEmpty()) {
+                            final CardCollectionView cards = root.getPaidList("MovedToGrave", true);
                             for (final Card c : cards) {
                                 String name = c.getName();
                                 if (StringUtils.isEmpty(name)) {

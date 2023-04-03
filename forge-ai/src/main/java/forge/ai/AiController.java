@@ -738,12 +738,30 @@ public class AiController {
         return false;
     }
 
-    // This is for playing spells regularly (no Cascade/Ripple etc.)
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
         if (!sa.canPlay()) {
             return AiPlayDecision.CantPlaySa;
         }
 
+        final Card host = sa.getHostCard();
+
+        // state needs to be switched here so API checks evaluate the right face
+        CardStateName currentState = sa.getCardState() != null && host.getCurrentStateName() != sa.getCardStateName() && !host.isInPlay() ? host.getCurrentStateName() : null;
+        if (currentState != null) {
+            host.setState(sa.getCardStateName(), false);
+        }
+
+        AiPlayDecision decision = canPlayAndPayForFace(sa);
+
+        if (currentState != null) {
+            host.setState(currentState, false);
+        }
+
+        return decision;
+    }
+    
+    // This is for playing spells regularly (no Cascade/Ripple etc.)
+    private AiPlayDecision canPlayAndPayForFace(final SpellAbility sa) {
         final Card host = sa.getHostCard();
 
         // Check a predefined condition
@@ -783,17 +801,7 @@ public class AiController {
             }
         }
 
-        // state needs to be switched here so API checks evaluate the right face
-        CardStateName currentState = sa.getCardState() != null && host.getCurrentStateName() != sa.getCardStateName() && !host.isInPlay() ? host.getCurrentStateName() : null;
-        if (currentState != null) {
-            host.setState(sa.getCardStateName(), false);
-        }
-
         AiPlayDecision canPlay = canPlaySa(sa); // this is the "heaviest" check, which also sets up targets, defines X, etc.
-
-        if (currentState != null) {
-            host.setState(currentState, false);
-        }
 
         if (canPlay != AiPlayDecision.WillPlay) {
             return canPlay;
