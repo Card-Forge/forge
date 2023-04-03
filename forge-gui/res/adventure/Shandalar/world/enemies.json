@@ -4752,13 +4752,14 @@
 },
 {
 	"name": "Flying Witch",
-	"sprite": "sprites/dungeon/witch.atlas",
+	"sprite": "sprites/dungeon/flyingwitch.atlas",
 	"deck": [
-		"decks/witch2.dck"
+		"decks/curselord.dck"
 	],
 	"ai": "",
 	"flying": true,
 	"spawnRate": 1,
+	"scale":0.65,
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 10,
@@ -9223,7 +9224,7 @@
 {
 	"name": "Ooze Boss",
 	"sprite": "sprites/boss/oozeboss.atlas",
-	"scale": 0.5,
+	"scale": 1.25,
 	"deck": [
 		"decks/miniboss/ooze_boss.dck"
 	],
@@ -11042,9 +11043,9 @@
 		"decks/swamptroll.dck"
 	],
 	"ai": "",
-	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
+	"scale":0.40,
 	"speed": 15,
 	"life": 10,
 	"rewards": [
@@ -12460,8 +12461,8 @@
 		"decks/witch.dck"
 	],
 	"ai": "",
-	"flying": true,
 	"spawnRate": 1,
+	"scale": 0.65,
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 10,
