@@ -165,7 +165,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         Gdx.graphics.requestRendering();
     }
 
-    public RewardActor(Reward reward, boolean flippable) {
+    public RewardActor(Reward reward, boolean flippable, RewardScene.Type type) {
         this.flipOnClick = flippable;
         this.reward = reward;
         if (backTexture == null) {
@@ -284,7 +284,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 }
                 Sprite item = reward.getItem().sprite();
                 setItemTooltips(item, backSprite);
-                processSprite(backSprite, item, null, 0, 0);
+                boolean isQuestItemLoot = RewardScene.Type.Loot.equals(type) && reward.getItem().questItem;
+                processSprite(backSprite, item, isQuestItemLoot ? Controls.newTextraLabel("[%]" + reward.getItem().name) : null, 0, -10);
                 needsToBeDisposed = true;
                 break;
             }
@@ -295,8 +296,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 Sprite backSprite = atlas.createSprite("CardBack");
                 Sprite item = atlas.createSprite(reward.type.toString());
                 setItemTooltips(item, backSprite);
-                processSprite(backSprite, item,
-                        Controls.newTextraLabel("[%200]" + reward.getCount()), 0, -10);
+                boolean isShop = RewardScene.Type.Shop.equals(type);
+                processSprite(backSprite, item, isShop ? null :
+                        Controls.newTextraLabel("[%]" + reward.getCount() + " " + reward.type), 0, isShop ? 0 : -10);
                 needsToBeDisposed = true;
                 break;
             }
@@ -551,8 +553,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     description = item.getDescription();
                     layout.reset();
                 } else {
-                    description = "Adds " + String.valueOf(getReward().getCount()) + " " + getReward().type;
+                    description = "Adds " + getReward().getCount() + " " + getReward().type;
                 }
+                if (description.isEmpty() && item.questItem)
+                    description = "Quest Item";
                 getGraphics().end();
                 getGraphics().endClip();
                 Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h);
