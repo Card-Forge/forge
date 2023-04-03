@@ -1,0 +1,9 @@
+Name:Axgard Artisan
+ManaCost:1 R
+Types:Creature Dwarf Artificer
+PT:2/1
+T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | ActivationLimit$ 1 | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigToken | TriggerDescription$ Whenever one or more +1/+1 counters are put on CARDNAME for the first time each turn, create a Treasure token. (it's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac
+DeckHints:Ability$Counters
+DeckHas:Ability$Token & Type$Artifact|Treasure
+Oracle:Whenever one or more +1/+1 counters are put on Axgard Artisan for the first time each turn, create a Treasure token. (it's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
