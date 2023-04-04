@@ -293,7 +293,9 @@ public final class CardUtil {
         newCopy.setChangedCardNames(in.getChangedCardNames());
         newCopy.setChangedCardTraits(in.getChangedCardTraits());
 
+        // for getReplacementList (run after setChangedCardKeywords for caching)
         newCopy.setStoredKeywords(in.getStoredKeywords(), true);
+        newCopy.setStoredReplacements(in.getStoredReplacements());
 
         newCopy.copyChangedTextFrom(in);
 
