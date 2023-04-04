@@ -17,9 +17,13 @@ ScryfallCode=MOM
 17 R Heliod, the Radiant Dawn @Victor Adame Minguez
 20 U Invasion of Belenon @Antonio José Manzanedo
 21 U Invasion of Dominaria @Denys Tsiperko
+22 R Invasion of Gobakhan @Andreas Zafiratos
+23 R Invasion of Theros @Johan Grenier
 26 R Knight-Errant of Eos @Kevin Sidharta
 28 M Monastery Mentor @Brian Valeza
 29 U Norn's Inquisitor @Denis Zhbankov
+30 U Phyrexian Awakening @Artur Nakhodkin
+31 U Phyrexian Censor @Alexey Kruglov
 35 U Seal from Existence @Anato Finnstark
 36 U Seraph of New Capenna @Aaron J. Riley
 38 U Sun-Blessed Guardian @Brian Valeza
@@ -27,58 +31,80 @@ ScryfallCode=MOM
 41 U Surge of Salvation @Dominik Mayer
 44 U Tiller of Flesh @Nino Vecia
 45 U Zhalfirin Lancer @Nino Vecia
+46 U Artistic Refusal @Olivier Bernard
 48 U Astral Wingspan @Joseph Weston
 49 U Captive Weird @Manuel Castañón
 50 U Change the Equation @Alix Branwyn
 51 R Chrome Host Seedshark @Donato Giancola
+52 R Complete the Circuit @Eelis Kyttanen
+53 U Corruption of Towashi @Artur Nakhodkin
 58 R Faerie Mastermind @Joshua Raphael
 61 R Invasion of Arcavios @Dmitry Burmak
 62 U Invasion of Kamigawa @Kekai Kotaki
 63 R Invasion of Segovia @Edgar Sánchez Hidalgo
+64 U Invasion of Vryn @Leon Tukker
 65 M Jin-Gitaxias @Ekaterina Burmak
 67 C Moment of Truth @Rovina Cai
 68 C Negate @Viko Menezes
 70 U Omen Hawker @Josh Hass
 71 U Oracle of Tragedy @Pavel Kolomeyets
+75 R Rona, Herald of Invasion @Victor Adame Minguez
 77 R See Double @Marc Simonetti
 78 U Skyclave Aerialist @Michal Ivan
 83 R Transcendent Message @Liiga Smilshkalne
 85 U Xerex Strobe-Knight @Pavel Kolomeyets
+86 R Zephyr Singer @Lie Setiawan
 89 R Archpriest of Shadows @Fariba Khamseh
 90 R Ayara, Widow of the Realm @Anna Podedworna
+92 U Blightreaper Thallid @Marta Nael
+93 R Bloated Processor @Brock Grossman
 94 R Breach the Multiverse @Liiga Smilshkalne
+95 U Collective Nightmare @Rovina Cai
 99 C Deadly Derision @Gaboleps
-106 U Gift of Completion @Artur Nakhodkin
+106 U Gift of Compleation @Artur Nakhodkin
 107 U Glistening Deluge @Anastasia Balakchina
 109 R Grafted Butcher @Zack Stella
 110 R Hoarding Broodlord @Filip Burburan
+113 U Invasion of Eldraine @Cristi Balanescu
 114 R Invasion of Fiora @Joshua Raphael
 115 M Invasion of Innistrad @Alexey Kruglov
+116 U Invasion of Ulgrotha @Viko Menezes
 117 U Merciless Repurposing @Artur Nakhodkin
 118 C Mirrodin Avenged @Scott Murphy
 121 U Phyrexian Gargantua @Kevin Sidharta
 122 R Pile On @Javier Charro
 123 U Render Inert @Yigit Koroglu
+125 M Sheoldred @Ryan Pancoast
 127 C Traumatic Revelation @Cristi Balanescu
 131 C Beamtown Beatstick @Konstantin Porubov
 132 R Bloodfeather Phoenix @Rudy Siswanto
 134 M Chandra, Hope's Beacon @Kieran Yanner
 135 R City on Fire @Jake Murray
 137 R Etali, Primal Conqueror @Ryan Pancoast
+138 U Fearless Skald @Slawomir Maniak
+139 U Furnace Gremlin @Tuan Duong Chu
 141 U Furnace Reins @Brian Valeza
 143 U Harried Artisan @Caio Monteiro
 144 R Into the Fire @Grzegorz Rutkowski
 145 R Invasion of Kaldheim @Bryan Sola
 146 R Invasion of Karsus @Zoltan Boros
 147 U Invasion of Mercadia @Cristi Balanescu
-149 M Invasion of Tarkir @Darren Tan
+148 U Invasion of Regatha @Daarken
+149 M Invasion of Tarkir  @Darren Tan
+151 U Khenra Spellspear @Artur Nakhodkin
+152 U Lithomantic Barrage @Viko Menezes
 159 U Ramosian Greatsword @Jason A. Engle
+160 R Rampaging Raptor @Denys Tsiperko
 162 U Scrappy Bruiser @David Auden Nash
+165 U Shivan Branch-Burner @Aaron Miller
 166 U Stoke the Flames @Liiga Smilshkalne
+169 M Urabrask @Campbell White
 171 R Voldaren Thrillseeker @Viko Menezes
 174 R Ancient Imperiosaur @Piotr Foksowicz
 181 U Copper Host Crusher @Nicholas Gregory
 184 R Deeproot Wayfinder @Anna Pavleeva
+185 R Doomskar Warrior @Chris Rallis
+187 R Glistening Dawn @Chris Ostrowski
 188 U Gnottvold Hermit @Artur Nakhodkin
 190 R Invasion of Ikoria @Antonio José Manzanedo
 191 R Invasion of Ixalan @Viktor Titov
@@ -86,6 +112,7 @@ ScryfallCode=MOM
 193 M Invasion of Shandalar @Adam Paquette
 194 U Invasion of Zendikar @Diego Gisbert
 196 U Kami of Whispered Hopes @Filipe Pagliuso
+198 R Ozolith, the Shattered Spire @Daarken
 200 R Polukranos Reborn @David Auden Nash
 202 U Ravenous Sailback @Andrew Mar
 203 U Sandstalker Moloch @Donato Giancola
@@ -98,7 +125,9 @@ ScryfallCode=MOM
 218 R Baral and Kari Zev @Fariba Khamseh
 219 M Borborygmos and Fblthp @Rudy Siswanto
 220 U Botanical Brawler @Jesper Ejsing
+221 R Djeru and Hazoret @Matt Stewart
 222 R Drana and Linvala @Raluca Marinescu
+223 U Elvish Vatkeeper @Nicholas Gregory
 224 R Errant and Giada @Cristi Balanescu
 225 R Ghalta and Mavren @Zezhou Chen
 226 R Glissa, Herald of Predation @Cristi Balanescu
@@ -106,17 +135,26 @@ ScryfallCode=MOM
 228 R Hidetsugu and Kairi @Chris Rahn
 229 R Inga and Esika @Wayne Reynolds
 230 R Invasion of Alara @Mathias Kollros
+231 U Invasion of Amonkhet @Jokubas Uogintas
+232 U Invasion of Azgol @Joshua Raphael
 233 U Invasion of Ergamon @Manuel Castañón
 234 U Invasion of Kaladesh @Leon Tukker
+235 U Invasion of Kylem @Johann Bodin
 236 U Invasion of Lorwyn @Dan Scott
 237 U Invasion of Moag @Filip Burburan
+238 U Invasion of New Capenna @Diego Gisbert
 239 M Invasion of New Phyrexia @Chris Rallis
+240 U Invasion of Pyrulea @Nicholas Gregory
 241 R Invasion of Tolvada @Henry Peters
+242 U Invasion of Xerex @Fajareka Setiawan
 243 U Joyful Stormsculptor @Christina Kraus
 244 R Kogla and Yidaro @Chris Rahn
+245 M Kroxa and Kunoros @Ignatius Budi
+247 U Mirror-Shield Hoplite @Alex Brock
 248 U Mutagen Connoisseur @Alex Brock
 249 R Omnath, Locus of All @Bryan Sola
 250 R Quintorius, Loremaster @Lie Setiawan
+251 U Rampaging Geoderm @Randy Vargas
 252 R Rankle and Torbran @Viko Menezes
 253 U Sculpted Perfection @Chris Seaman
 255 M Thalia and The Gitrog Monster @Howard Lyon
@@ -156,19 +194,24 @@ ScryfallCode=MOM
 296 R Ayara, Widow of the Realm @Josu Hernaiz
 298 R Etali, Primal Conqueror @Yeong-Hao Han
 300 R Polukranos Reborn @Jason A. Engle
+301 M Vorinclex @Flavio Girón
 302 R Baral and Kari Zev @Magali Villeneuve
 303 M Borborygmos and Fblthp @Justin Hernandez & Alexis Hernandez
+304 R Djeru and Hazoret @Igor Kieryluk
 305 R Drana and Linvala @Anato Finnstark
+306 R Errant and Giada @Shawn Pagels
 307 R Ghalta and Mavren @Jody Clark
 308 R Glissa, Herald of Predation @Flavio Girón
 309 R Hidetsugu and Kairi @chiri*
 310 R Inga and Esika @Matt Stikker
 311 R Kogla and Yidaro @Daniel Warren Johnson
+312 M Kroxa and Kunoros @Jason A. Engle
 313 R Omnath, Locus of All @Jessica Rossier
 314 R Quintorius, Loremaster @Justin Hernandez & Alexis Hernandez
 315 R Rankle and Torbran @Omar Rayyan
 316 M Thalia and The Gitrog Monster @Sami Makkonen
 317 R Yargle and Multani @Lisa Heidhoff
+318 M Zimone and Dina @Anato Finnstark
 319 M Zurgo and Ojutai @Adrian Smith
 320 M Archangel Elspeth @Denys Tsiperko
 321 M Chandra, Hope's Beacon @Randy Vargas
@@ -190,18 +233,33 @@ ScryfallCode=MOM
 337 R Surrak and Goreclaw @Lucas Graciano
 339 M Jin-Gitaxias @Julian Kok Joon Wen
 343 R Boon-Bringer Valkyrie @Heonhwa Choe
+344 R Dusk Legion Duelist @Ryan Valle
 345 R Guardian of Ghirapur @Cynthia Sheppard
 346 R Knight-Errant of Eos @Kevin Sidharta
 347 M Monastery Mentor @Brian Valeza
+349 R Sunfall @Kasia 'Kafis' Zielińska
 350 R Chrome Host Seedshark @Donato Giancola
+351 R Complete the Circuit @Eelis Kyttanen
 352 R Faerie Mastermind @Joshua Raphael
+353 R See Double @Marc Simonetti
 354 R Transcendent Message @Liiga Smilshkalne
+355 R Zephyr Singer @Lie Setiawan
+356 R Archpriest of Shadows @Fariba Khamseh
+357 R Bloated Processor @Brock Grossman
 358 R Breach the Multiverse @Liiga Smilshkalne
 359 R Grafted Butcher @Zack Stella
 360 R Hoarding Broodlord @Filip Burburan
+361 R Pile On @Javier Charro
 363 R City on Fire @Jake Murray
 364 R Into the Fire @Grzegorz Rutkowski
+366 R Rampaging Raptor @Denys Tsiperko
 367 R Voldaren Thrillseeker @Viko Menezes
+368 R Ancient Imperiosaur @Piotr Foksowicz
+369 R Deeproot Wayfinder @Anna Pavleeva
+370 R Doomskar Warrior @Chris Rallis
+371 R Glistening Dawn @Chris Ostrowski
+372 R Ozolith, the Shattered Spire @Daarken
+373 R Tribute to the World Tree @Kristina Carroll
 374 R Realmbreaker, the Invasion Tree @Kekai Kotaki
 375 M Sword of Once and Future @Joshua Cairos
 376 R Essence of Orthodoxy @Oriana Menendez
