@@ -846,7 +846,7 @@ public class CardFactoryUtil {
                     "Secondary$ True | TriggerDescription$ " + descStr;
 
             final String putCounter = "DB$ PutCounter | ValidTgts$ Creature | CounterNum$ " + magnitude
-                    + " | CounterType$ P1P1";
+                    + " | CounterType$ P1P1 | Backup$ True";
 
             final String addAbility = backupVar + " | ConditionDefined$ Targeted | " +
                     "ConditionPresent$ Card.Other | Defined$ Targeted";

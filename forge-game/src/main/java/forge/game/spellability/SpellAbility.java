@@ -508,6 +508,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return isAlternativeCost(AlternativeCost.Cycling);
     }
 
+    public boolean isBackup() {
+        return this.hasParam("Backup");
+    }
+
     public boolean isBoast() {
         return this.hasParam("Boast");
     }

@@ -1,0 +1,9 @@
+Name:Mirror-Shield Hoplite
+ManaCost:R W
+Types:Creature Human Soldier
+PT:2/2
+K:Vigilance
+T:Mode$ BecomesTarget | ValidTarget$ Creature.inZoneBattlefield+YouCtrl | ValidSource$ Ability.Backup | TriggerZones$ Battlefield | Execute$ TrigCopy | ActivationLimit$ 1 | TriggerDescription$ Whenever a creature you control becomes the target of a backup ability, copy that ability. You may choose new targets for the copy. This ability triggers only once each turn.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredStackInstance | MayChooseTarget$ True
+DeckNeeds:Keyword$Backup
+Oracle:Vigilance\nWhenever a creature you control becomes the target of a backup ability, copy that ability. You may choose new targets for the copy. This ability triggers only once each turn.
