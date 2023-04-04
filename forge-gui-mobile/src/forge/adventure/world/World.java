@@ -913,7 +913,7 @@ public class World implements Disposable, SaveFileContent {
 
     public Texture getGlobalTexture() {
         if (globalTexture == null) {
-            globalTexture = Forge.getAssets().getTexture(Config.instance().getFile("ui/sprite_markers.png"));
+            globalTexture = Forge.getAssets().getTexture(Config.instance().getFile("ui/sprite_markers.png"), true, true);
             System.out.print("Loading auxiliary sprites.\n");
         }
         return globalTexture;
