@@ -1,6 +1,6 @@
 Name:Sheoldred
 ManaCost:3 B B
-Types:Creature Phyrexian Praetor
+Types:Legendary Creature Phyrexian Praetor
 PT:4/5
 K:Menace
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBSacrifice | TriggerDescription$ When CARDNAME enters the battlefield, each opponent sacrifices a nontoken creature or planeswalker.
