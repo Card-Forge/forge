@@ -289,8 +289,7 @@ public class UIActor extends Group {
         for (ObjectMap.Entry property : entries) {
             switch (property.key.toString()) {
                 case "image":
-                    boolean is2D = property.value.toString().startsWith("ui") &&
-                            (property.value.toString().contains("minimap") || property.value.toString().contains("hud"));
+                    boolean is2D = property.value.toString().startsWith("ui");
                     Texture t = Forge.getAssets().getTexture(Config.instance().getFile(property.value.toString()), is2D, false);
                     TextureRegion tr = new TextureRegion(t);
                     if (property.value.toString().contains("title_bg")) {
