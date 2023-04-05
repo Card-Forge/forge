@@ -3,6 +3,8 @@ package forge.game.ability.effects;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
@@ -298,39 +300,47 @@ public class PumpEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("DefinedKW")) {
             String defined = sa.getParam("DefinedKW");
-            String replaced = "";
-            String name = "";
             if (defined.equals("ChosenType")) {
-                replaced = host.getChosenType();
-            } else if (defined.equals("ActivatorName")) {
-                replaced = activator.getName();
+                if (!host.hasChosenType()) {
+                    return;
+                }
+                String replaced = host.getChosenType();
+                for (int i = 0; i < keywords.size(); i++) {
+                    String s = keywords.get(i);
+                    s = s.replaceAll(defined, replaced);
+                    keywords.set(i, s);
+                }
             } else if (defined.equals("ChosenPlayer")) {
-                replaced = host.getChosenPlayer().getName();
-            } else if (defined.endsWith("Player")) {
+                if (!host.hasChosenPlayer()) {
+                    return;
+                }
+                Player cp = host.getChosenPlayer();
+                for (int i = 0; i < keywords.size(); i++) {
+                    String s = keywords.get(i);
+                    s = s.replaceAll("ChosenPlayerUID", String.valueOf(cp.getId()));
+                    s = s.replaceAll("ChosenPlayerName", cp.getName());
+                    keywords.set(i, s);
+                }
+            } else if (defined.equals("You") || defined.endsWith("Player")) {
                 PlayerCollection players = AbilityUtils.getDefinedPlayers(host, defined, sa);
                 if (players.isEmpty()) return;
-                replaced = "PlayerUID_" + players.get(0).getId();
-                name = players.get(0).getName();
+                String replacedID = String.valueOf(players.get(0).getId());
+                String replacedName = players.get(0).getName();
+                for (int i = 0; i < keywords.size(); i++) {
+                    String s = keywords.get(i);
+                    s = s.replaceAll("ChosenPlayerUID", replacedID);
+                    s = s.replaceAll("ChosenPlayerName", replacedName);
+                    keywords.set(i, s);
+                }
             } else if (defined.equals("ChosenColor")) {
-                String color = host.getChosenColor();
-                replaced = color.substring(0, 1).toUpperCase() + color.substring(1);
-            }
-            for (int i = 0; i < keywords.size(); i++) {
-                keywords.set(i, TextUtil.fastReplace(keywords.get(i), defined, replaced));
-                if (keywords.get(i).startsWith("Protection:") && !name.equals("")) {
-                    List<String> parts = Arrays.asList(keywords.get(i).split(":"));
-                    String desc = parts.get(2);
-                    if (desc.contains("PlayerUID")) {
-                        parts.set(2, TextUtil.fastReplace(desc, replaced, name));
-                        StringBuilder mod = new StringBuilder();
-                        for (int n = 0; n < parts.size(); n++) {
-                            mod.append(parts.get(n));
-                            if (n + 1 < parts.size()) {
-                                mod.append(":");
-                            }
-                        }
-                        keywords.set(i, mod.toString());
-                    }
+                if (!host.hasChosenColor()) {
+                    return;
+                }
+                for (int i = 0; i < keywords.size(); i++) {
+                    String s = keywords.get(i);
+                    s = s.replaceAll("ChosenColor", StringUtils.capitalize(host.getChosenColor()));
+                    s = s.replaceAll("chosenColor", host.getChosenColor().toLowerCase());
+                    keywords.set(i, s);
                 }
             }
         }

@@ -1004,6 +1004,14 @@ public class AbilityUtils {
                 players.addAll(tc.getTargetPlayers());
             }
         }
+        else if (defined.startsWith("PlayerUID_")) {
+            int id = Integer.parseInt(defined.split("PlayerUID_")[1]);
+            for (Player p : game.getRegisteredPlayers()) {
+                if (p.getId() == id) {
+                    players.add(p);
+                }
+            }
+        }
         else if (defined.equals("ParentTarget") && sa instanceof SpellAbility) {
             final SpellAbility parent = ((SpellAbility)sa).getParentTargetingPlayer();
             if (parent != null) {

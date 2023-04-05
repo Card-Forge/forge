@@ -721,9 +721,6 @@ public class CardFactoryUtil {
                 validSource = "nonColorless" + (damage ? "Source" : "");
             } else if (protectType.equals("everything")) {
                 return "";
-            } else if (protectType.startsWith("opponent of ")) {
-                final String playerName = protectType.substring("opponent of ".length());
-                validSource = "ControlledBy Player.OpponentOf PlayerNamed_" + playerName;
             } else {
                 validSource = CardType.getSingularType(protectType);
             }
@@ -2599,7 +2596,7 @@ public class CardFactoryUtil {
             if (isCombat) {
                 rep += "| IsCombat$ True";
             }
-            rep += "| Secondary$ True | TiedToKeyword$ " + keyword + " | Description$ " + keyword;
+            rep += "| Secondary$ True | Description$ " + keyword;
 
             if (from) {
                 String fromRep = rep + " | ValidSource$ Card.Self";
@@ -2621,7 +2618,7 @@ public class CardFactoryUtil {
             if (!validSource.isEmpty()) {
                 rep += " | ValidSource$ " + validSource;
             }
-            rep += " | Secondary$ True | TiedToKeyword$ " + keyword + " | Description$ " + keyword;
+            rep += " | Secondary$ True | Description$ " + keyword;
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(rep, host, intrinsic, card);
             inst.addReplacement(re);
