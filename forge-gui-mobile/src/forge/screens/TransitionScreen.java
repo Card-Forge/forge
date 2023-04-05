@@ -33,6 +33,7 @@ public class TransitionScreen extends FContainer {
     private String message = "";
     boolean matchTransition, isloading, isIntro, isFadeMusic, isArenaScene;
     GlyphLayout layout;
+    BitmapFont font;
     public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading) {
         this(proc, screen, enterMatch, loading, false, false);
     }
@@ -51,6 +52,14 @@ public class TransitionScreen extends FContainer {
         runnable = proc;
         textureRegion = screen;
         matchTransition = enterMatch;
+        if (matchTransition) {
+            float fontScale = GuiBase.isAndroid() ? 14f : 10f;
+            float screenW = Forge.isLandscapeMode() ? Forge.getScreenWidth() : Forge.getScreenHeight();
+            float screenH = Forge.isLandscapeMode() ? Forge.getScreenHeight() : Forge.getScreenWidth();
+            font = Controls.getBitmapFont("default", fontScale/(screenW/screenH));
+        } else {
+            font = Controls.getBitmapFont("default");
+        }
         isloading = loading;
         isIntro = intro;
         isFadeMusic = fadeMusic;
@@ -83,6 +92,7 @@ public class TransitionScreen extends FContainer {
     }
     public void disableMatchTransition() {
         matchTransition = false;
+        Controls.getBitmapFont("default");
     }
 
     private class BGAnimation extends ForgeAnimation {
@@ -145,8 +155,7 @@ public class TransitionScreen extends FContainer {
                 float centerY = screenH/2;
                 TextureRegion enemyAvatar = Config.instance().getAtlas(enemyAtlasPath).createSprite("Avatar");
                 enemyAvatar.flip(true, false);
-                float fontScale = GuiBase.isAndroid() ? 14f : 10f;
-                BitmapFont font = Controls.getBitmapFont("default", fontScale/(screenW/screenH));
+
                 if (textureRegion != null) {
                     if (isArenaScene)
                         g.drawImage(screenUIBackground, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
