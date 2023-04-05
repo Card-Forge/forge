@@ -18,6 +18,7 @@ import forge.sound.SoundSystem;
 public class StartScene extends UIScene {
 
     private static StartScene object;
+    Dialog exitDialog;
     TextraButton saveButton, resumeButton, continueButton;
 
 
