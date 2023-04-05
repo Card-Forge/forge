@@ -11185,7 +11185,7 @@
 		"decks/miniboss/tibalt.dck"
 	],
 	"boss": true,
-	"ai": "",
+	"ai": "reckless",
 	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.8,
