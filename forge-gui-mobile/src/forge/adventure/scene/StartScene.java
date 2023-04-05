@@ -101,9 +101,15 @@ public class StartScene extends UIScene {
     }
 
     public boolean Exit() {
-        Dialog dialog = prepareDialog(Forge.getLocalizer().getMessage("lblExitForge"), ButtonOk | ButtonAbort, () -> Forge.exit(true));
-        dialog.text(Controls.newLabel(Forge.getLocalizer().getMessage("lblAreYouSureYouWishExitForge")));
-        showDialog(dialog);
+        if (exitDialog == null) {
+            exitDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblExitForge"),
+                    Forge.getLocalizer().getMessage("lblAreYouSureYouWishExitForge"), Forge.getLocalizer().getMessage("lblOk"),
+                    Forge.getLocalizer().getMessage("lblAbort"), () -> {
+                        Forge.exit(true);
+                        removeDialog();
+                    }, this::removeDialog);
+        }
+        showDialog(exitDialog);
         return true;
     }
 

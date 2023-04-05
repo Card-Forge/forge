@@ -33,6 +33,7 @@ public class InventoryScene extends UIScene {
     Button selected;
     Button deleteButton;
     Texture equipOverlay;
+    Dialog useDialog, deleteDialog;
     int columns = 0;
 
     public InventoryScene() {
@@ -102,9 +103,15 @@ public class InventoryScene extends UIScene {
     }
 
     private void showConfirm() {
-        Dialog confirm = prepareDialog("", ButtonYes | ButtonNo, () -> delete());
-        confirm.text(Controls.newLabel(Forge.getLocalizer().getMessage("lblDelete")));
-        showDialog(confirm);
+        if (deleteDialog == null) {
+            deleteDialog = createGenericDialog("", Forge.getLocalizer().getMessage("lblDelete"),
+                    Forge.getLocalizer().getMessage("lblYes"),
+                    Forge.getLocalizer().getMessage("lblNo"), () -> {
+                        this.delete();
+                        removeDialog();
+                    }, this::removeDialog);
+        }
+        showDialog(deleteDialog);
     }
 
     private static InventoryScene object;
@@ -122,7 +129,6 @@ public class InventoryScene extends UIScene {
     }
 
     public void delete() {
-
         ItemData data = ItemData.getItem(itemLocation.get(selected));
         if (data != null) {
             Current.player().removeItem(data.name);
@@ -156,9 +162,16 @@ public class InventoryScene extends UIScene {
 
     private void use() {
         ItemData data = ItemData.getItem(itemLocation.get(selected));
-        if (data == null) return;
-        Dialog useDialog = prepareDialog("", ButtonYes | ButtonNo, () -> triggerUse());
-        useDialog.getContentTable().add(Controls.newTextraLabel("Use " + data.name + "?\n" + data.getDescription()));
+        if (data == null)
+            return;
+        if (useDialog == null) {
+            useDialog = createGenericDialog("", null, Forge.getLocalizer().getMessage("lblYes"),
+                    Forge.getLocalizer().getMessage("lblNo"), () -> {
+                        this.triggerUse();
+                        removeDialog();
+                    }, this::removeDialog);
+            useDialog.getContentTable().add(Controls.newTextraLabel("Use " + data.name + "?\n" + data.getDescription()));
+        }
         showDialog(useDialog);
     }
 

@@ -26,6 +26,7 @@ public class DeckSelectScene extends UIScene {
     TextraButton back, edit, rename;
     int currentSlot = 0;
     ScrollPane scrollPane;
+    Dialog renameDialog;
 
     private static DeckSelectScene object;
 
@@ -65,14 +66,20 @@ public class DeckSelectScene extends UIScene {
     }
 
     private void showRenameDialog() {
-
-        Dialog dialog = prepareDialog(Forge.getLocalizer().getMessage("lblRenameDeck"), ButtonOk | ButtonAbort, () -> DeckSelectScene.this.rename());
-        dialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2);
-        dialog.getContentTable().row();
-        dialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName") + ": ")).align(Align.left);
-        dialog.getContentTable().add(textInput).fillX().expandX();
-        dialog.getContentTable().row();
-        showDialog(dialog);
+        if (renameDialog == null) {
+            renameDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblRenameDeck"), null,
+                    Forge.getLocalizer().getMessage("lblOk"),
+                    Forge.getLocalizer().getMessage("lblAbort"), () -> {
+                        this.rename();
+                        removeDialog();
+                    }, this::removeDialog);
+            renameDialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNewNameDeck"))).colspan(2);
+            renameDialog.getContentTable().row();
+            renameDialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName") + ": ")).align(Align.left);
+            renameDialog.getContentTable().add(textInput).fillX().expandX();
+            renameDialog.getContentTable().row();
+        }
+        showDialog(renameDialog);
     }
 
     private TextraButton addDeckSlot(String name, int i) {
