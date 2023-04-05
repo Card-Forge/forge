@@ -63,7 +63,7 @@ public class PlayerSprite extends CharacterSprite {
     public void act(float delta) {
         super.act(delta);
         direction.setLength(playerSpeed * delta * playerSpeedModifier*playerSpeedEquipmentModifier);
-        Vector2 previousDirection = new Vector2(direction);
+        Vector2 previousDirection = getMovementDirection().cpy();
         Scene previousScene = forge.Forge.getCurrentScene();
 
         if(!direction.isZero()) {
@@ -74,7 +74,7 @@ public class PlayerSprite extends CharacterSprite {
             // If the player is blocked by an obstacle, and they haven't changed scenes,
             // they will keep trying to move in that direction
             if (previousScene == forge.Forge.getCurrentScene()) {
-                direction.set(new Vector2(previousDirection));
+                direction.set(previousDirection.cpy());
             }
         }
     }
