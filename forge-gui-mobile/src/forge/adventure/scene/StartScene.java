@@ -7,7 +7,6 @@ import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.GameStage;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
-import forge.adventure.util.Controls;
 import forge.adventure.world.WorldSave;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundSystem;
