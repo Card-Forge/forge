@@ -4401,6 +4401,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return result;
     }
 
+    public void setStoredReplacements(Table<StaticAbility, String, ReplacementEffect> table) {
+        storedReplacementEffect.clear();
+        for (Table.Cell<StaticAbility, String, ReplacementEffect> c : table.cellSet()) {
+            storedReplacementEffect.put(c.getRowKey(), c.getColumnKey(), c.getValue().copy(this, true));
+        }
+    }
+
+    public final Table<StaticAbility, String, ReplacementEffect> getStoredReplacements() {
+        return storedReplacementEffect;
+    }
+
     public final ReplacementEffect getReplacementEffectForStaticAbility(final String str, final StaticAbility stAb) {
         ReplacementEffect result = storedReplacementEffect.get(stAb, str);
         if (result == null) {
@@ -4571,8 +4582,25 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public void setStoredKeywords(Table<Long, String, KeywordInterface> table, boolean lki) {
         storedKeywords.clear();
         for (Table.Cell<Long, String, KeywordInterface> c : table.cellSet()) {
-            storedKeywords.put(c.getRowKey(), c.getColumnKey(), c.getValue().copy(this, lki));
+            storedKeywords.put(c.getRowKey(), c.getColumnKey(), getCopyForStoredKeyword(c, lki));
         }
+    }
+
+    private final KeywordInterface getCopyForStoredKeyword(Table.Cell<Long, String, KeywordInterface> c, boolean lki) {
+        // for performance check if we already copied this
+        if (lki) {
+            for (KeywordsChange kc : changedCardKeywords.column(c.getRowKey()).values()) {
+                // same static id
+                for (KeywordInterface kw : kc.getKeywords()) {
+                    if (kw.getOriginal().equals(c.getValue().getOriginal())) {
+                        // same kw
+                        return kw;
+                    }
+                }
+            }
+        }
+
+        return c.getValue().copy(this, lki);
     }
 
     public final void addChangedCardKeywordsByText(final List<KeywordInterface> keywords, final long timestamp, final long staticId, final boolean updateView) {
@@ -5847,7 +5875,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         timesCrewedThisTurn += 1;
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Vehicle, this);
-        runParams.put(AbilityKey.Crew, sa.getPaidList("TappedCards"));
+        runParams.put(AbilityKey.Crew, sa.getPaidList("TappedCards", true));
         game.getTriggerHandler().runTrigger(TriggerType.BecomesCrewed, runParams, false);
     }
 

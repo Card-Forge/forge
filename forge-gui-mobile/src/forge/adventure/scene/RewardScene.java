@@ -424,7 +424,7 @@ public class RewardScene extends UIScene {
                 if (lastRowCount != 0)
                     lastRowXAdjust = ((numberOfColumns * cardWidth) - (lastRowCount * cardWidth)) / 2;
             }
-            RewardActor actor = new RewardActor(reward, type == Type.Loot);
+            RewardActor actor = new RewardActor(reward, type == Type.Loot, type);
             actor.setBounds(lastRowXAdjust + xOff + cardWidth * (i % numberOfColumns) + spacing, yOff + cardHeight * currentRow + spacing, cardWidth - spacing * 2, cardHeight - spacing * 2);
 
             if (type == Type.Shop) {

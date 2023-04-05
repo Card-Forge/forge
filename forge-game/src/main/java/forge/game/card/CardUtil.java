@@ -34,7 +34,6 @@ import forge.card.MagicColor;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -294,7 +293,9 @@ public final class CardUtil {
         newCopy.setChangedCardNames(in.getChangedCardNames());
         newCopy.setChangedCardTraits(in.getChangedCardTraits());
 
+        // for getReplacementList (run after setChangedCardKeywords for caching)
         newCopy.setStoredKeywords(in.getStoredKeywords(), true);
+        newCopy.setStoredReplacements(in.getStoredReplacements());
 
         newCopy.copyChangedTextFrom(in);
 
@@ -547,9 +548,9 @@ public final class CardUtil {
         final Game game = ability.getActivatingPlayer().getGame();
         final List<ZoneType> zone = tgt.getZone();
 
-        final boolean canTgtStack = zone.contains(ZoneType.Stack);
         List<Card> validCards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), ability.getActivatingPlayer(), activatingCard, ability);
         List<Card> choices = CardLists.getTargetableCards(validCards, ability);
+        final boolean canTgtStack = zone.contains(ZoneType.Stack);
         if (canTgtStack) {
             // Since getTargetableCards doesn't have additional checks if one of the Zones is stack
             // Remove the activating card from targeting itself if its on the Stack
@@ -557,55 +558,10 @@ public final class CardUtil {
                 choices.remove(activatingCard);
             }
         }
-        List<GameObject> targetedObjects = ability.getUniqueTargets();
 
         // Remove cards already targeted
         final List<Card> targeted = Lists.newArrayList(ability.getTargets().getTargetCards());
         choices.removeAll(targeted);
-
-        // Remove cards exceeding total CMC
-        if (ability.hasParam("MaxTotalTargetCMC")) {
-            int totalCMCTargeted = 0;
-            for (final Card c : targeted) {
-                totalCMCTargeted += c.getCMC();
-            }
-
-            final List<Card> choicesCopy = Lists.newArrayList(choices);
-            for (final Card c : choicesCopy) {
-                if (c.getCMC() > tgt.getMaxTotalCMC(activatingCard, ability) - totalCMCTargeted) {
-                    choices.remove(c);
-                }
-            }
-        }
-
-        // Remove cards exceeding total power
-        if (ability.hasParam("MaxTotalTargetPower")) {
-            int totalPowerTargeted = 0;
-            for (final Card c : targeted) {
-                totalPowerTargeted += c.getNetPower();
-            }
-
-            final List<Card> choicesCopy = Lists.newArrayList(choices);
-            for (final Card c : choicesCopy) {
-                if (c.getNetPower() > tgt.getMaxTotalPower(activatingCard, ability) - totalPowerTargeted) {
-                    choices.remove(c);
-                }
-            }
-        }
-
-        // If all cards (including subability targets) must have the same controller
-        if (tgt.isSameController() && !targetedObjects.isEmpty()) {
-            final List<Card> list = Lists.newArrayList();
-            for (final Object o : targetedObjects) {
-                if (o instanceof Card) {
-                    list.add((Card) o);
-                }
-            }
-            if (!list.isEmpty()) {
-                final Card card = list.get(0);
-                choices = CardLists.filter(choices, CardPredicates.sharesControllerWith(card));
-            }
-        }
 
         return choices;
     }

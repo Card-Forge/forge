@@ -172,7 +172,7 @@ public class PlayAi extends SpellAbilityAi {
                             abCost = new Cost(sa.getParam("PlayCost"), false);
                         }
 
-                        spell = (Spell) spell.copyWithDefinedCost(abCost);
+                        spell = (Spell) spell.copyWithManaCostReplaced(spell.getActivatingPlayer(), abCost);
                     }
                     if (AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlayFromEffectAI(spell, !(isOptional || sa.hasParam("Optional")), true)) {
                         // Before accepting, see if the spell has a valid number of targets (it should at this point).

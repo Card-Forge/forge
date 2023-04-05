@@ -58,6 +58,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     final Sprite edgeWinM;
     boolean enable = true;
     boolean arenaStarted = false;
+    Dialog startDialog, concedeDialog;
 
     private ArenaScene() {
         super(Forge.isLandscapeMode() ? "ui/arena.json" : "ui/arena_portrait.json");
@@ -98,9 +99,13 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     }
 
     private void showAreYouSure() {
-        Dialog areYouSureDialog = prepareDialog(Forge.getLocalizer().getMessage("lblConcedeTitle"), ButtonYes | ButtonNo, () -> loose());
-        areYouSureDialog.text(Forge.getLocalizer().getMessage("lblConcedeCurrentGame"));
-        showDialog(areYouSureDialog);
+        if (concedeDialog == null) {
+            concedeDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblConcedeTitle"), "\n" + Forge.getLocalizer().getMessage("lblConcedeCurrentGame"), () -> {
+                loose();
+                removeDialog();
+            }, this::removeDialog);
+        }
+        showDialog(concedeDialog);
     }
 
     private void loose() {
@@ -110,13 +115,21 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         arenaStarted = false;
     }
 
+    private void startDialog() {
+        if (startDialog == null) {
+            startDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblStart"), Forge.getLocalizer().getMessage("lblStartArena"), () -> {
+                startArena();
+                removeDialog();
+            }, this::removeDialog);
+        }
+        showDialog(startDialog);
+    }
+
     private void startButton() {
         if (!enable)
             return;
         if (roundsWon == 0) {
-            Dialog startDialog = prepareDialog(Forge.getLocalizer().getMessage("lblStart"), ButtonYes | ButtonNo, () -> startArena());
-            startDialog.text("Do you want to go into the Arena?");
-            showDialog(startDialog);
+            startDialog();
         } else {
             startRound();
         }

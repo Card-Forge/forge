@@ -26,7 +26,6 @@ public class BidLifeAi extends SpellAbilityAi {
             sa.resetTargets();
             if (tgt.canTgtCreature()) {
                 List<Card> list = CardLists.getTargetableCards(AiAttackController.choosePreferredDefenderPlayer(aiPlayer).getCardsIn(ZoneType.Battlefield), sa);
-                list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
                 if (list.isEmpty()) {
                     return false;
                 }

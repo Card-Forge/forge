@@ -111,10 +111,8 @@ public class PhasesAi extends SpellAbilityAi {
 
     private boolean phasesUnpreferredTargeting(final Game game, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getHostCard();
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
-        list = CardLists.getTargetableCards(CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa), sa);
+        CardCollectionView list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
 
         // in general, if it's our own creature, choose the weakest one, if it's the opponent's creature,
         // choose the strongest one

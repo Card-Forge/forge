@@ -1,0 +1,10 @@
+Name:Tom Bombadil
+ManaCost:W U B R G
+Types:Legendary Creature God Bard
+PT:4/4
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof & Indestructible | CheckSVar$ X | SVarCompare$ GE4 | Description$ As long as there are four or more lore counters among Sagas you control, CARDNAME has hexproof and indestructible.
+SVar:X:Count$Valid Saga.YouCtrl$CardCounters.LORE
+T:Mode$ AbilityResolves | ValidSource$ Saga.YouCtrl | ValidSpellAbility$ Ability.LastChapter | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigDigUntil | TriggerDescription$ Whenever the final chapter ability of a Saga you control resolves, reveal cards from the top of your library until you reveal a Saga card. Put that onto the battlefield and the rest on the bottom of your library in a random order. This ability triggers only once each turn.
+SVar:TrigDigUntil:DB$ DigUntil | Valid$ Saga | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True
+DeckNeeds:Type$Saga
+Oracle:As long as there are four or more lore counters among Sagas you control, Tom Bombadil has hexproof and indestructible.\nWhenever the final chapter ability of a Saga you control resolves, reveal cards from the top of your library until you reveal a Saga card. Put that onto the battlefield and the rest on the bottom of your library in a random order. This ability triggers only once each turn.

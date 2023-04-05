@@ -362,7 +362,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             if (sp.hasParam("Crew")) {
                 // Trigger crews!
                 runParams.put(AbilityKey.Vehicle, sp.getHostCard());
-                runParams.put(AbilityKey.Crew, sp.getPaidList("TappedCards"));
+                runParams.put(AbilityKey.Crew, sp.getPaidList("TappedCards", true));
                 game.getTriggerHandler().runTrigger(TriggerType.Crewed, runParams, false);
             }
         } else {
@@ -526,6 +526,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         } else if (sa.getApi() != null) {
             AbilityUtils.handleRemembering(sa);
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
+            runParams.put(AbilityKey.SpellAbility, sa);
+            game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams, false);
             AbilityUtils.resolve(sa);
         } else {
             sa.resolve();

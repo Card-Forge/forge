@@ -27,6 +27,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.common.collect.TreeBasedTable;
 
 import forge.game.GameObject;
 import forge.game.IIdentifiable;
@@ -85,7 +86,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     private Integer xManaPaid = null;
 
     // Other Paid things
-    private final Map<String, CardCollection> paidHash;
+    private final TreeBasedTable<String, Boolean, CardCollection> paidHash;
 
     // Additional info
     // is Kicked, is Buyback
@@ -108,7 +109,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         activatingPlayer = sa.getActivatingPlayer();
 
         // Payment info
-        paidHash = Maps.newHashMap(ability.getPaidHash());
+        paidHash = TreeBasedTable.create(ability.getPaidHash());
         ability.resetPaidHash();
         splicedCards = sa.getSplicedCards();
 

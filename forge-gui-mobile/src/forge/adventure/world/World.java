@@ -444,6 +444,7 @@ public class World implements Disposable, SaveFileContent {
         clearTerrain((int) (data.width * data.playerStartPosX), (int) (data.height * data.playerStartPosY), 10);
         //otherPoints.add(new Rectangle(((float) data.width * data.playerStartPosX * (float) data.tileSize) - data.tileSize * 3, ((float) data.height * data.playerStartPosY * data.tileSize) - data.tileSize * 3, data.tileSize * 6, data.tileSize * 6));
         boolean running = true;
+        here:
         while (running) {
             mapPoiIds = new PointOfInterestMap(getChunkSize(), data.tileSize, data.width / getChunkSize(), data.height / getChunkSize());
             int biomeIndex2 = -1;
@@ -505,6 +506,11 @@ public class World implements Disposable, SaveFileContent {
                                     if (counter == 499) {
                                         System.err.print("Can not place POI " + poi.name + "...Rerunning..\n");
                                         running = true;
+                                        towns.clear();
+                                        notTowns.clear();
+                                        otherPoints.clear();
+                                        clearTerrain((int) (data.width * data.playerStartPosX), (int) (data.height * data.playerStartPosY), 10);
+                                        continue here;
                                     }
                                     continue;
                                 }
@@ -907,7 +913,7 @@ public class World implements Disposable, SaveFileContent {
 
     public Texture getGlobalTexture() {
         if (globalTexture == null) {
-            globalTexture = Forge.getAssets().getTexture(Config.instance().getFile("ui/sprite_markers.png"));
+            globalTexture = Forge.getAssets().getTexture(Config.instance().getFile("ui/sprite_markers.png"), true, true);
             System.out.print("Loading auxiliary sprites.\n");
         }
         return globalTexture;
