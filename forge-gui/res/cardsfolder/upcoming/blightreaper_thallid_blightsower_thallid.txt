@@ -13,7 +13,7 @@ ManaCost:no cost
 Colors:black,green
 Types:Creature Phyrexian Fungus
 PT:3/3
-T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigDamageAll | Execute$ TrigToken | TriggerDescription$ When this creature transforms into CARDNAME or dies, create a 1/1 green Phyrexian Saproling creature token.
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature transforms into CARDNAME or dies, create a 1/1 green Phyrexian Saproling creature token.
 T:Mode$ ChangesZone | Destination$ Graveyard | Origin$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigToken | TriggerDescription$ When this creature transforms into CARDNAME or dies, create a 1/1 green Phyrexian Saproling creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_phyrexian_saproling
 DeckHas:Ability$Token & Type$Saproling
