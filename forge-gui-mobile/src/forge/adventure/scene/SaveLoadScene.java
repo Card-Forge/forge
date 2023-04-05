@@ -2,7 +2,6 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -45,14 +44,13 @@ public class SaveLoadScene extends UIScene {
     int currentSlot = 0, lastSelectedSlot = 0;
     Image previewImage;
     TextraLabel previewDate, playerLocation;
-    Image previewBorder;
     TextraButton saveLoadButton, back;
     Selectable<TextraButton> quickSave;
     Selectable<TextraButton> autoSave;
-    Actor lastHighlightedSave;
     SelectBox difficulty;
     ScrollPane scrollPane;
     char ASCII_179 = '│';
+    Dialog saveDialog;
 
     private SaveLoadScene() {
         super(Forge.isLandscapeMode() ? "ui/save_load.json" : "ui/save_load_portrait.json");
@@ -94,9 +92,9 @@ public class SaveLoadScene extends UIScene {
 
         saveLoadButton = ui.findActor("save");
         saveLoadButton.setText(Forge.getLocalizer().getMessage("lblSave"));
-        ui.onButtonPress("save", () -> SaveLoadScene.this.loadSave());
+        ui.onButtonPress("save", SaveLoadScene.this::loadSave);
         back = ui.findActor("return");
-        ui.onButtonPress("return", () -> SaveLoadScene.this.back());
+        ui.onButtonPress("return", SaveLoadScene.this::back);
         difficulty.setSelectedIndex(1);
         difficulty.setAlignment(Align.center);
         difficulty.getStyle().fontColor = Color.GOLD;
@@ -201,16 +199,21 @@ public class SaveLoadScene extends UIScene {
             case Save:
                 if (currentSlot > 0) {
                     //prevent NPE, allowed saveslot is 1 to 10..
-                    textInput.setText(buttons.get(currentSlot).actor.getText().toString());
-
-                    Dialog dialog = prepareDialog(Forge.getLocalizer().getMessage("lblSave"), ButtonOk | ButtonAbort, () -> SaveLoadScene.this.save());
-
-                    dialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2).pad(2, 15, 2, 15);
-                    dialog.getContentTable().row();
-                    dialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName") + ": ")).align(Align.left).pad(2, 15, 2, 2);
-                    dialog.getContentTable().add(textInput).fillX().expandX().padRight(15);
-                    dialog.getContentTable().row();
-                    showDialog(dialog);
+                    textInput.setText(buttons.get(currentSlot).actor.getText());
+                    if (saveDialog == null) {
+                        saveDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblSave"), null,
+                                Forge.getLocalizer().getMessage("lblOk"),
+                                Forge.getLocalizer().getMessage("lblAbort"), () -> {
+                                    this.save();
+                                    removeDialog();
+                                }, this::removeDialog);
+                        saveDialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2).pad(2, 15, 2, 15);
+                        saveDialog.getContentTable().row();
+                        saveDialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName") + ": ")).align(Align.left).pad(2, 15, 2, 2);
+                        saveDialog.getContentTable().add(textInput).fillX().expandX().padRight(15);
+                        saveDialog.getContentTable().row();
+                    }
+                    showDialog(saveDialog);
                     stage.setKeyboardFocus(textInput);
                 }
                 break;

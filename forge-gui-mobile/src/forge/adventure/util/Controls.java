@@ -218,7 +218,8 @@ public class Controls {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 try {
-                    func.run();
+                    if (func != null)
+                        func.run();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
