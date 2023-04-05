@@ -4,7 +4,7 @@ Types:Creature Fungus
 PT:2/2
 A:AB$ SetState | Cost$ 3 GP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
 AlternateMode:DoubleFaced
-Oracle:{4}{G/P}: Transform Blightreaper Thallid. Activate only as a sorcery. ({G/P} can be paid with either {G} or 2 life.)
+Oracle:{3}{G/P}: Transform Blightreaper Thallid. Activate only as a sorcery. ({G/P} can be paid with either {G} or 2 life.)
 
 ALTERNATE
 
