@@ -54,8 +54,8 @@ public class TransitionScreen extends FContainer {
         matchTransition = enterMatch;
         if (matchTransition) {
             float fontScale = GuiBase.isAndroid() ? 14f : 10f;
-            float screenW = Forge.isLandscapeMode() ? Forge.getScreenWidth() : Forge.getScreenHeight();
-            float screenH = Forge.isLandscapeMode() ? Forge.getScreenHeight() : Forge.getScreenWidth();
+            float screenW = Forge.isLandscapeMode() ? Config.instance().getConfigData().screenWidth : Config.instance().getConfigData().screenHeight;
+            float screenH = Forge.isLandscapeMode() ? Config.instance().getConfigData().screenHeight : Config.instance().getConfigData().screenWidth;
             font = Controls.getBitmapFont("default", fontScale/(screenW/screenH));
         } else {
             font = Controls.getBitmapFont("default");
