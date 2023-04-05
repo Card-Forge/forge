@@ -164,6 +164,9 @@ public class Forge implements ApplicationListener {
         frameRate = new FrameRate();
         animationBatch = new SpriteBatch();
         inputProcessor = new MainInputProcessor();
+        //screenWidth and screenHeight should be set initially and only change upon restarting the app
+        screenWidth = Gdx.app.getGraphics().getWidth();
+        screenHeight = Gdx.app.getGraphics().getHeight();
 
         Gdx.input.setInputProcessor(inputProcessor);
         /*
@@ -958,15 +961,15 @@ public class Forge implements ApplicationListener {
     @Override
     public void resize(int width, int height) {
         try {
-            screenWidth = width;
-            screenHeight = height;
             if (currentScreen != null) {
                 currentScreen.setSize(width, height);
             } else if (splashScreen != null) {
                 splashScreen.setSize(width, height);
             }
+            if (currentScene != null)
+                currentScene.resize(width, height);
         } catch (Exception ex) {
-            graphics.end();
+            //graphics.end();
             //check if sentry is enabled, if not it will call the gui interface but here we end the graphics so we only send it via sentry..
             if (BugReporter.isSentryEnabled())
                 BugReporter.reportException(ex);

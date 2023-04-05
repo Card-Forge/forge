@@ -192,7 +192,6 @@ public class UIScene extends Scene {
     }
 
     public UIScene(String uiFilePath) {
-
         uiFile = uiFilePath;
         stage = new Stage(new ScalingViewport(Scaling.stretch, getIntendedWidth(), getIntendedHeight())) {
             @Override
@@ -710,5 +709,10 @@ public class UIScene extends Scene {
     public void updateInput() {
         super.updateInput();
         Gdx.input.setInputProcessor(stage);
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
     }
 }

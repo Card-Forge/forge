@@ -93,6 +93,9 @@ public abstract class Scene implements Disposable {
     public void updateInput() {
 
     }
+    public void resize(int width, int height) {
+
+    }
 
 
 }
