@@ -2,7 +2,7 @@ Name:Archpriest of Shadows
 ManaCost:3 B B
 Types:Creature Human Warlock
 PT:4/4
-K:Backup:2:BackupAbilities
+K:Backup:1:BackupAbilities
 SVar:BackupAbilities:DB$ Animate | Keywords$ Deathtouch | Triggers$ DamageTrig
 SVar:DamageTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Battle | Execute$ TrigReturn | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player or battle, return target creature card from your graveyard to the battlefield.
 K:Deathtouch
