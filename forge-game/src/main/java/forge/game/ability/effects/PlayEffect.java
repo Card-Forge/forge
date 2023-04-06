@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import forge.card.CardStateName;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -312,6 +313,10 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtSA = CardFactoryUtil.abilityMorphDown(tgtCard.getCurrentState(), false);
             } else {
                 // only one mode can be used
+                if (sa.hasParam("CastTransformed")) {
+                    tgtCard.changeToState(CardStateName.Transformed);
+                }
+
                 tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(tgtCard, sas);
             }
 

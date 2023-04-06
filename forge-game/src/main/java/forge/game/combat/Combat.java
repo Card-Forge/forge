@@ -303,8 +303,15 @@ public class Combat {
 
         // maybe attack on a controlled planeswalker?
         if (defender instanceof Card) {
-            return ((Card) defender).getController();
+            Card def = (Card)defender;
+            if (def.isBattle()) {
+                return def.getProtectingPlayer();
+            } else {
+                return def.getController();
+            }
+
         }
+
         return null;
     }
 

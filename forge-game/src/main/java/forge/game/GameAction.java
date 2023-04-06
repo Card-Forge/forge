@@ -2412,6 +2412,11 @@ public class GameAction {
                         // CR 120.10
                         lethal = c.isCreature() ? Math.min(lethal, lethalPW) : lethalPW;
                     }
+                    if (c.isBattle()) {
+                        int lethalBattle = c.getCurrentDefense();
+
+                        lethal = c.isCreature() || c.isPlaneswalker() ? Math.min(lethal, lethalBattle) : lethalBattle;
+                    }
                     lethalDamage.put(c, lethal);
                 }
 

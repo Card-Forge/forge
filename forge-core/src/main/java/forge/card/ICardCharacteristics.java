@@ -13,6 +13,7 @@ public interface ICardCharacteristics {
     String getPower();
     String getToughness();
     String getInitialLoyalty();
+    String getDefense();
 
     String getOracleText();
 }

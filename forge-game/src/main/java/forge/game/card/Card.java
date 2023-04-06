@@ -285,6 +285,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private String chosenName2 = "";
     private Integer chosenNumber;
     private Player chosenPlayer;
+    private Player protectingPlayer;
     private EvenOdd chosenEvenOdd = null;
     private Direction chosenDirection = null;
     private String chosenMode = "";
@@ -1578,6 +1579,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         runParams.put(AbilityKey.CounterAmount, delta);
         getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemovedOnce, AbilityKey.newMap(runParams), false);
+
+        if (counterName.is(CounterEnumType.DEFENSE) && newValue == 0) {
+            // Run defeated trigger
+            getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemovedOnce, AbilityKey.newMap(runParams), false);
+        }
     }
 
     @Override
@@ -1725,6 +1731,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setChosenPlayer(final Player p) {
         if (chosenPlayer == p) { return; }
         chosenPlayer = p;
+        view.updateChosenPlayer(this);
+    }
+
+    public final Player getProtectingPlayer() {
+        return protectingPlayer;
+    }
+    public final void setProtectingPlayer(final Player p) {
+        if (protectingPlayer == p) { return; }
+        protectingPlayer = p;
         view.updateChosenPlayer(this);
     }
     public final void setSecretChosenPlayer(final Player p) {
@@ -3985,6 +4000,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         currentState.setBaseLoyalty(Integer.toString(n));
     }
 
+    public final int getCurrentDefense() {
+        return getCounters(CounterEnumType.DEFENSE);
+    }
+    public final void setBaseDefense(final int n) {
+        currentState.setBaseDefense(Integer.toString(n));
+    }
     public final int getBasePower() {
         return currentState.getBasePower();
     }
@@ -5010,6 +5031,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isCreature()   { return getType().isCreature(); }
     public final boolean isArtifact()   { return getType().isArtifact(); }
     public final boolean isPlaneswalker()   { return getType().isPlaneswalker(); }
+    public final boolean isBattle()      { return getType().isBattle(); }
     public final boolean isEnchantment()    { return getType().isEnchantment(); }
 
     public final boolean isEquipment()  { return getType().hasSubtype("Equipment"); }
@@ -5703,8 +5725,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return 0; // 120.8
         }
 
-        // 120.1a Damage can’t be dealt to an object that’s neither a creature nor a planeswalker.
-        if (!isPlaneswalker() && !isCreature()) {
+        // 120.1a Damage can’t be dealt to an object that’s neither a creature nor a planeswalker nor a battle.
+        if (!isPlaneswalker() && !isCreature() && !isBattle()) {
             return 0;
         }
 
@@ -5731,6 +5753,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         DamageType damageType = DamageType.Normal;
         if (isPlaneswalker()) { // 120.3c
             subtractCounter(CounterType.get(CounterEnumType.LOYALTY), damageIn);
+        }
+        if (isBattle()) {
+            subtractCounter(CounterType.get(CounterEnumType.DEFENSE), damageIn);
         }
         if (isCreature()) {
             boolean wither = game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.alwaysWither)

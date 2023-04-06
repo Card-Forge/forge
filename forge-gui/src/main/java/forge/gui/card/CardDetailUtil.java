@@ -176,7 +176,7 @@ public class CardDetailUtil {
         return canShow ? translatedtype : (card.getState() == CardStateName.FaceDown && isInPlay ? "Creature" : "");
     }
 
-    public static String formatPowerToughness(final CardStateView card, final boolean canShow) {
+    public static String formatPrimaryCharacteristic(final CardStateView card, final boolean canShow) {
         if (!canShow && card.getState() != CardStateName.FaceDown) {
             return "";
         }
@@ -204,6 +204,12 @@ public class CardDetailUtil {
 
             ptText.append(card.getLoyalty());
         }
+
+        if (card.isBattle()) {
+            ptText.append(Localizer.getInstance().getMessage("lblDefense")).append(": ");
+            ptText.append(card.getDefense());
+        }
+
         return ptText.toString();
     }
 
