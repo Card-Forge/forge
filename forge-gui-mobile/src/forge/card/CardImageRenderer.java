@@ -1164,7 +1164,7 @@ public class CardImageRenderer {
             idWidth = TYPE_FONT.getBounds(idText).width;
         }
 
-        String ptText = CardDetailUtil.formatPowerToughness(state, canShow);
+        String ptText = CardDetailUtil.formatPrimaryCharacteristic(state, canShow);
         if (StringUtils.isEmpty(ptText)) {
             return;
         }

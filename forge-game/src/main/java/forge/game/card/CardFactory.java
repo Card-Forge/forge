@@ -188,15 +188,6 @@ public class CardFactory {
      * creates a copy of the Spell/ability `sa`, and puts it on the stack.
      * if sa is a spell, that spell's host is also copied.
      * </p>
-     *
-     * @param source
-     *            a {@link forge.game.card.Card} object. The card doing the copying.
-     * @param original
-     *            a {@link forge.game.card.Card} object. The host of the spell or ability being copied.
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object. The spell or ability being copied.
-     * @param bCopyDetails
-     *            a boolean.
      */
     public final static SpellAbility copySpellAbilityAndPossiblyHost(final SpellAbility sourceSA, final SpellAbility targetSA, final Player controller) {
         //it is only necessary to copy the host card if the SpellAbility is a spell, not an ability
@@ -326,7 +317,7 @@ public class CardFactory {
                 original.addIntrinsicKeywords(card.getCurrentState().getIntrinsicKeywords()); // Copy 'Fuse' to original side
                 original.getSVars().putAll(card.getCurrentState().getSVars()); // Unfortunately need to copy these to (Effect looks for sVars on execute)
             } else if (state != CardStateName.Original) {
-            	CardFactoryUtil.setupKeywordedAbilities(card);
+                CardFactoryUtil.setupKeywordedAbilities(card);
             }
             if (state == CardStateName.Adventure) {
                 CardFactoryUtil.setupAdventureAbility(card);
@@ -344,6 +335,7 @@ public class CardFactory {
         if (card.isPlane()) {
             buildPlaneAbilities(card);
         }
+        buildBattleAbilities(card);
         CardFactoryUtil.setupKeywordedAbilities(card); // Should happen AFTER setting left/right split abilities to set Fuse ability to both sides
         card.updateStateForView();
     }
@@ -368,6 +360,37 @@ public class CardFactory {
         planarRoll.setSVar("X", "Count$RolledThisTurn");
 
         card.addSpellAbility(planarRoll);
+    }
+
+    private static void buildBattleAbilities(Card card) {
+        if (!card.isBattle()) {
+            return;
+        }
+        // # The following commands should be pulled out into the codebase
+        //K:etbCounter:DEFENSE:3
+
+        if (card.getType().hasSubtype("Siege")) {
+        StringBuilder triggerSB = new StringBuilder();
+        triggerSB.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Static$ True | ");
+        triggerSB.append("TriggerDescription$ (As a Siege enters the battlefield, choose an opponent to protect it. You and others can attack it. When it’s defeated, exile it, then cast it transformed.)");
+
+        String chooseProtector = "DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | Protect$ True | ChoiceTitle$ Choose an opponent to protect this battle | AILogic$ Curse";
+
+        Trigger protectTrigger = TriggerHandler.parseTrigger(triggerSB.toString(), card, true);
+        protectTrigger.setOverridingAbility(AbilityFactory.getAbility(chooseProtector, card));
+        card.addTrigger(protectTrigger);
+
+
+        StringBuilder triggerDefeated = new StringBuilder();
+        triggerDefeated.append("Mode$ Defeated | ValidCard$ Card.Self | Secondary$ True | ");
+        triggerDefeated.append(" TriggerDescription$ When CARDNAME is defeated, exile it, then cast it transformed.");
+
+        String castDefeatedBattle = "DB$ Play | Defined$ Self | WithoutManaCost$ True | CastTransformed$ True";
+
+        Trigger defeatedTrigger = TriggerHandler.parseTrigger(triggerDefeated.toString(), card, true);
+        defeatedTrigger.setOverridingAbility(AbilityFactory.getAbility(castDefeatedBattle, card));
+        card.addTrigger(defeatedTrigger);
+        }
     }
 
     private static Card readCard(final CardRules rules, final IPaperCard paperCard, int cardId, Game game) {
@@ -463,6 +486,7 @@ public class CardFactory {
         c.setText(face.getNonAbilityText());
 
         c.getCurrentState().setBaseLoyalty(face.getInitialLoyalty());
+        c.getCurrentState().setBaseDefense(face.getDefense());
 
         c.setOracleText(face.getOracleText());
 
@@ -506,26 +530,26 @@ public class CardFactory {
      * @param to the {@link Card} to copy to.
      */
     public static void copyCopiableCharacteristics(final Card from, final Card to) {
-    	final boolean toIsFaceDown = to.isFaceDown();
-    	if (toIsFaceDown) {
-    		// If to is face down, copy to its front side
-    		to.setState(CardStateName.Original, false);
-    		copyCopiableCharacteristics(from, to);
-    		to.setState(CardStateName.FaceDown, false);
-    		return;
-    	}
+        final boolean toIsFaceDown = to.isFaceDown();
+        if (toIsFaceDown) {
+            // If to is face down, copy to its front side
+            to.setState(CardStateName.Original, false);
+            copyCopiableCharacteristics(from, to);
+            to.setState(CardStateName.FaceDown, false);
+            return;
+        }
 
-    	final boolean fromIsFlipCard = from.isFlipCard();
+        final boolean fromIsFlipCard = from.isFlipCard();
         final boolean fromIsTransformedCard = from.getCurrentStateName() == CardStateName.Transformed || from.getCurrentStateName() == CardStateName.Meld;
 
-    	if (fromIsFlipCard) {
-    		if (to.getCurrentStateName().equals(CardStateName.Flipped)) {
-    			copyState(from, CardStateName.Original, to, CardStateName.Original);
-    		} else {
-    			copyState(from, CardStateName.Original, to, to.getCurrentStateName());
-    		}
-    		copyState(from, CardStateName.Flipped, to, CardStateName.Flipped);
-    	} else if (fromIsTransformedCard) {
+        if (fromIsFlipCard) {
+            if (to.getCurrentStateName().equals(CardStateName.Flipped)) {
+                copyState(from, CardStateName.Original, to, CardStateName.Original);
+            } else {
+                copyState(from, CardStateName.Original, to, to.getCurrentStateName());
+            }
+            copyState(from, CardStateName.Flipped, to, CardStateName.Flipped);
+        } else if (fromIsTransformedCard) {
             copyState(from, from.getCurrentStateName(), to, CardStateName.Original);
         } else {
             copyState(from, from.getCurrentStateName(), to, to.getCurrentStateName());

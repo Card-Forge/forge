@@ -49,6 +49,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     public enum CoreType {
         Artifact(true, "artifacts"),
+        Battle(true, "battles"),
         Conspiracy(false, "conspiracies"),
         Enchantment(true, "enchantments"),
         Creature(true, "creatures"),
@@ -401,6 +402,11 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     @Override
     public boolean isPlaneswalker() {
         return coreTypes.contains(CoreType.Planeswalker);
+    }
+
+    @Override
+    public boolean isBattle() {
+        return coreTypes.contains(CoreType.Battle);
     }
 
     @Override
@@ -785,6 +791,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         public static final Set<String> ARTIFACT_TYPES = Sets.newHashSet();
         public static final Set<String> WALKER_TYPES = Sets.newHashSet();
         public static final Set<String> DUNGEON_TYPES = Sets.newHashSet();
+        public static final Set<String> BATTLE_TYPES = Sets.newHashSet();
 
         // singular -> plural
         public static final BiMap<String,String> pluralTypes = HashBiMap.create();
@@ -940,6 +947,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     public static boolean isADungeonType(final String cardType) {
         return (Constant.DUNGEON_TYPES.contains(cardType));
+    }
+    public static boolean isABattleType(final String cardType) {
+        return (Constant.BATTLE_TYPES.contains(cardType));
     }
     /**
      * If the input is a plural type, return the corresponding singular form.
