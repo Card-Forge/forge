@@ -1,0 +1,11 @@
+Name:Seedpod Caretaker
+ManaCost:2 W
+Types:Creature Phyrexian Cleric
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ P1P1,Transform
+SVar:P1P1:DB$ PutCounter | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl | TgtPrompt$ Select target artifact or creature you control | CounterType$ P1P1 | SpellDescription$ Put a +1/+1 counter on target artifact or creature you control.
+SVar:Transform:DB$ SetState | ValidTgts$ Incubator.token+YouCtrl | TgtPrompt$ Select target Incubator token you control | Mode$ Transform | SpellDescription$ Transform target Incubator token you control.
+DeckHas:Ability$Counters
+DeckHints:Ability$Token & Type$Artifact
+Oracle:When Seedpod Caretaker enters the battlefield, choose one —\n• Put a +1/+1 counter on target artifact or creature you control.\n• Transform target Incubator token you control.
