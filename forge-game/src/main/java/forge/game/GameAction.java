@@ -478,12 +478,17 @@ public class GameAction {
                 }
             }
 
-            // 400.7a Effects from static abilities that give a permanent spell on the stack an ability
-            // that allows it to be cast for an alternative cost continue to apply to the permanent that spell becomes.
-            if (zoneFrom.is(ZoneType.Stack) && toBattlefield && c.getCastSA() != null && !c.getCastSA().isIntrinsic() && c.getCastSA().getKeyword() != null) {
-                KeywordInterface ki = c.getCastSA().getKeyword();
-                ki.setHostCard(copied);
-                copied.addChangedCardKeywordsInternal(ImmutableList.of(ki), null, false, copied.getTimestamp(), 0, true);
+            if (zoneFrom.is(ZoneType.Stack) && toBattlefield) {
+                // 400.7a Effects from static abilities that give a permanent spell on the stack an ability
+                // that allows it to be cast for an alternative cost continue to apply to the permanent that spell becomes.
+                if (c.getCastSA() != null && !c.getCastSA().isIntrinsic() && c.getCastSA().getKeyword() != null) {
+                    KeywordInterface ki = c.getCastSA().getKeyword();
+                    ki.setHostCard(copied);
+                    copied.addChangedCardKeywordsInternal(ImmutableList.of(ki), null, false, copied.getTimestamp(), 0, true);
+                }
+
+                // 607.2q linked ability can find cards exiled as cost while it was a spell
+                copied.addExiledCards(c.getExiledCards());
             }
         }
 
@@ -580,12 +585,10 @@ public class GameAction {
 
         // 400.7g try adding keyword back into card if it doesn't already have it
         if (zoneTo.is(ZoneType.Stack) && cause != null && cause.isSpell() && !cause.isIntrinsic() && c.equals(cause.getHostCard())) {
-            if (cause.getKeyword() != null) {
-                if (!copied.getKeywords().contains(cause.getKeyword())) {
-                    copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, game.getNextTimestamp(), 0, false);
-                    // update Keyword Cache
-                    copied.updateKeywords();
-                }
+            if (cause.getKeyword() != null && !copied.getKeywords().contains(cause.getKeyword())) {
+                copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, game.getNextTimestamp(), 0, false);
+                // update Keyword Cache
+                copied.updateKeywords();
             }
         }
 
