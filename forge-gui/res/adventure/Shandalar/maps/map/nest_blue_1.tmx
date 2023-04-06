@@ -120,13 +120,6 @@
     <property name="waypoints" value="84,72,73,74,77,83"/>
    </properties>
   </object>
-  <object id="70" template="../obj/enemy.tx" x="238.364" y="314.723">
-   <properties>
-    <property name="enemy" value="Octopus"/>
-    <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="72,73"/>
-   </properties>
-  </object>
   <object id="71" template="../obj/enemy.tx" x="447.27" y="399.006">
    <properties>
     <property name="enemy" value="Pirate"/>

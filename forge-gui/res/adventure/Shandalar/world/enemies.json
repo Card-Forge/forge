@@ -651,6 +651,61 @@
 	"colors": "BR"
 },
 {
+	"name": "Bat",
+	"sprite": "sprites/dungeon/bat.atlas",
+	"deck": [
+		"decks/bat.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.4,
+	"speed": 31,
+	"life": 13,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		}
+	],
+	"colors": "B"
+},
+{
 	"name": "Bear",
 	"sprite": "sprites/bear.atlas",
 	"deck": [
@@ -3135,6 +3190,61 @@
 		}
 	],
 	"colors": "R"
+},
+{
+	"name": "Dark Enchanter",
+	"sprite": "sprites/Dreamwalker.atlas",
+	"deck": [
+		"decks/darkenchanter.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.4,
+	"speed": 31,
+	"life": 13,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		}
+	],
+	"colors": "GB"
 },
 {
 	"name": "Dark Knight",
@@ -10090,6 +10200,116 @@
 	"colors": "BU"
 },
 {
+	"name": "Sand Golem",
+	"sprite": "sprites/dungeon/sandelemental.atlas",
+	"deck": [
+		"decks/sandgolem.dck"
+	],
+	"ai": "",
+	"flying": false,
+	"spawnRate": 1,
+	"difficulty": 0.4,
+	"speed": 31,
+	"life": 13,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		}
+	],
+	"colors": "RW"
+},
+{
+	"name": "Sandwurm",
+	"sprite": "sprites/dungeon/sandwurm.atlas",
+	"deck": [
+		"decks/sandwurm.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.4,
+	"speed": 31,
+	"life": 13,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		}
+	],
+	"colors": "G"
+},
+{
 	"name": "Satyr",
 	"sprite": "sprites/satyr.atlas",
 	"deck": [
@@ -11045,7 +11265,7 @@
 	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"scale":0.50,
+	"scale":0.75,
 	"speed": 15,
 	"life": 10,
 	"rewards": [

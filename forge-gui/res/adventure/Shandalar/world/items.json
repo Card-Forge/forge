@@ -213,6 +213,16 @@
     "questItem": true
   },
   {
+    "name": "Grolnoks Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Rusty Old Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
     "name": "Illusionist's Key",
     "iconName": "StrangeKey",
     "questItem": true

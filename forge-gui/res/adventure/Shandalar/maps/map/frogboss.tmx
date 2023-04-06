@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="22" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="189">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="17" name="Collision" width="22" height="21">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4B8MI8Tgmll9kABQnYT6zZY+CCHEz696OrR9SKrc0PCMODGiR9PIyCPjpHNxWYHOsAlR6m5uAAutbjsINYccszVlMBUSw1zcanHFabE2EeMucSowyeGzCc2XtHVk5pOSQGUmAsAF1Enxw==
+  </data>
+ </layer>
+ <layer id="13" name="background" width="22" height="21" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJy1kjEOgjAUhhsdgBlLXHTrMdS4eAt08Fga0bh4A0adSLyI8RbKH3ihPEuBWF7yhdK+fm1fG/tCzD0hHo5ROfEAbjWQWzH31pFfGSC/CVpz5lV9CL4Xk9cGrbkrfRT3P70UetuFdz8xe3nt+nrbzkHxCtrzu3pvfsUmsLub6snz3kF9HF7wyes2kgV6m7iyf54zlmZvIqv2QRb3k4X1vSHQfyrz8UUOuFi855LE4kUffOvo10suHbjSaYHuBeSFh6D9kruPV/dwXHqpBuDI7nEVNXsx7xnW5+voQfdkcpm8mcVLY328i/wcSwZ/w13O3YW2sM39AmVIvqc=
+  </data>
+ </layer>
+ <layer id="18" name="Tilelaag 4" width="22" height="21">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgx3EcVDXvHmcCDySzcVlBy3toTVgFEWw/4vQzh5VFQhORrIDxPZWg2BywWEVCEY3l1qAmmYhA00JTHaLOPH6Z4tiF1eWQGXTwv0gM2GYFIDuPzUJCEbn0yrMBxIAAEYKFck=
+  </data>
+ </layer>
+ <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+  <object id="140" template="../obj/treasure.tx" x="244.807" y="243.623">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;addMaxCount&quot;: 2
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="166" template="../obj/manashards.tx" x="264.662" y="243.554"/>
+  <object id="167" template="../obj/booster.tx" x="239.919" y="200.208">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;HBG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;HBG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;HBG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="168" template="../obj/gate.tx" gid="3221229597" x="215.774" y="217.405" width="19.0838" height="21.9971" rotation="90.4687">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This door is locked&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;go away&quot; },
+    {      
+        &quot;name&quot;:&quot;unlock with Grolnoks Key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Grolnoks Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Grolnoks Key&quot;}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="170" template="../obj/door_down.tx" x="51.686" y="261.017" width="20.0022" height="20.8327" rotation="0.284412">
+   <properties>
+    <property name="direction" value="left"/>
+    <property name="teleport" value="maps/map/grolnok.tmx"/>
+   </properties>
+  </object>
+  <object id="174" template="../obj/booster.tx" x="267.327" y="198.96">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="175" template="../obj/booster.tx" x="267.327" y="198.96">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="176" template="../obj/booster.tx" x="267.327" y="198.96">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;CLB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CLB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CLB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="177" template="../obj/booster.tx" x="255.345" y="216.314">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;AFR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AFR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AFR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="181" template="../obj/enemy.tx" x="157.421" y="209.28" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Wild Rat"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="182" template="../obj/enemy.tx" x="149.157" y="99.3733" width="16" height="17.6724">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Grolnok's Boss Effect&quot;]
+}</property>
+    <property name="enemy" value="Grolnok"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Grolnoks Key&quot;
+  }
+]
+</property>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="183" template="../obj/gate.tx" gid="3221229597" x="157.022" y="193.886" width="15.7579" height="22.3749" rotation="359.183">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This door is locked&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;go away&quot; },
+    {      
+        &quot;name&quot;:&quot;unlock with Rusty Old Key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Rusty Old Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Rusty Old Key&quot;}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="187" template="../obj/collision.tx" x="348.724" y="9.37802" width="16" height="321.205"/>
+  <object id="188" template="../obj/collision.tx" x="-19.8347" y="-11.4879" width="16" height="231.544"/>
+ </objectgroup>
+</map>
