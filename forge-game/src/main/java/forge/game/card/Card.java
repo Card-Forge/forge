@@ -2303,10 +2303,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
                         || keyword.equals("For Mirrodin")) {
                     // keyword parsing takes care of adding a proper description
-                } else if(keyword.startsWith("Read ahead")) {
+                } else if (keyword.startsWith("Read ahead")) {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
                     sb.append(" ").append(Localizer.getInstance().getMessage("lblSagaFooter")).append(" ").append(TextUtil.toRoman(getFinalChapterNr())).append(".");
                     sb.append(")").append("\r\n\r\n");
+                } else if (keyword.startsWith("Backup")) {
+                    final String[] k = keyword.split(":");
+                    sb.append(k[0]).append(" ").append(k[1]).append(" (");
+                    String remStr = inst.getReminderText();
+                    if (k[2].endsWith("s")) {
+                        remStr = remStr.replace("ability", "abilities");
+                    }
+                    sb.append(remStr).append(")");
                 } else if (keyword.startsWith("MayEffectFromOpening")) {
                     final String[] k = keyword.split(":");
                     // need to get SpellDescription from Svar
@@ -2325,7 +2333,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbLong.append("\r\n");
                 }
 
-                if (keyword.equals("Flash")) {
+                if (keyword.equals("Flash") || keyword.startsWith("Backup")) {
                     sb.append("\r\n\r\n");
                     i = 0;
                 } else {

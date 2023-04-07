@@ -28,6 +28,7 @@ public enum Keyword {
     ASSIST("Assist", SimpleKeyword.class, true, "Another player can pay up to %s of this spell's cost."),
     AURA_SWAP("Aura swap", KeywordWithCost.class, false, "%s: You may exchange this Aura with an Aura card in your hand."),
     AWAKEN("Awaken", KeywordWithCostAndAmount.class, false, "If you cast this spell for %s, also put {%d:+1/+1 counter} on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land."),
+    BACKUP("Backup", KeywordWithAmount.class, false, "When this creature enters the battlefield, put {%1$d:+1/+1 counter} on target creature. If that's another creature, it gains the following ability until end of turn."),
     BANDING("Banding", SimpleKeyword.class, true, "Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking."),
     BATTLE_CRY("Battle cry", SimpleKeyword.class, false, "Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn."),
     BESTOW("Bestow", KeywordWithCost.class, false, "If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature."),

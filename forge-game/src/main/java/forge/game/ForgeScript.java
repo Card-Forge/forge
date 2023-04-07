@@ -193,6 +193,8 @@ public class ForgeScript {
         } else if (property.equals("hasTapCost")) {
             Cost cost = sa.getPayCosts();
             return cost != null && cost.hasTapCost();
+        } else if (property.equals("Backup")) {
+            return sa.isBackup();
         } else if (property.equals("Blitz")) {
             return sa.isBlitz();
         } else if (property.equals("Buyback")) {
