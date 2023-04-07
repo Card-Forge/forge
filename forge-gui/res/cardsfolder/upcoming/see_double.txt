@@ -1,0 +1,9 @@
+Name:See Double
+ManaCost:2 U U
+Types:Instant
+S:Mode$ CantBeCopied | ValidCard$ Card.Self | EffectZone$ Stack | Description$ This spell can't be copied.
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ X | Choices$ CopySpell,CopyCreature | AdditionalDescription$ . If an opponent has eight or more cards in their graveyard, you may choose both.
+SVar:X:Count$Compare PlayerCountOpponents$HighestCardsInGraveyard GE8.2.1
+SVar:CopySpell:DB$ CopySpellAbility | ValidTgts$ Card | TargetType$ Spell | MayChooseTarget$ True | SpellDescription$ Copy target spell. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)
+SVar:CopyCreature:DB$ CopyPermanent | ValidTgts$ Creature | SpellDescription$ Create a token that's a copy of target creature.
+Oracle:This spell can't be copied.\nChoose one. If an opponent has eight or more cards in their graveyard, you may choose both.\n• Copy target spell. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)\n• Create a token that's a copy of target creature.
