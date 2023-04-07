@@ -43,10 +43,11 @@ public class IncubateEffect extends TokenEffectBase {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getHostCard();
-        final Game game = card.getGame();
-        final Player activator = sa.getActivatingPlayer();
-        final int times = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Times", "1"), sa);
+        final Card host = sa.getHostCard();
+        final Game game = host.getGame();
+        final Player activator = sa.hasParam("Defined") ?
+                AbilityUtils.getDefinedPlayers(host, sa.getParam("Defined"), sa).get(0) : sa.getActivatingPlayer();
+        final int times = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Times", "1"), sa);
 
         sa.putParam("WithCountersType", "P1P1");
         sa.putParam("WithCountersAmount", sa.getParamOrDefault("Amount", "1"));
