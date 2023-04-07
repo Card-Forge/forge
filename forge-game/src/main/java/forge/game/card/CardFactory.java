@@ -370,26 +370,26 @@ public class CardFactory {
         //K:etbCounter:DEFENSE:3
 
         if (card.getType().hasSubtype("Siege")) {
-        StringBuilder triggerSB = new StringBuilder();
-        triggerSB.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Static$ True | ");
-        triggerSB.append("TriggerDescription$ (As a Siege enters the battlefield, choose an opponent to protect it. You and others can attack it. When it’s defeated, exile it, then cast it transformed.)");
+            StringBuilder triggerSB = new StringBuilder();
+            triggerSB.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Static$ True | ");
+            triggerSB.append("TriggerDescription$ (As a Siege enters the battlefield, choose an opponent to protect it. You and others can attack it. When it’s defeated, exile it, then cast it transformed.)");
 
-        String chooseProtector = "DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | Protect$ True | ChoiceTitle$ Choose an opponent to protect this battle | AILogic$ Curse";
+            String chooseProtector = "DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | Protect$ True | ChoiceTitle$ Choose an opponent to protect this battle | AILogic$ Curse";
 
-        Trigger protectTrigger = TriggerHandler.parseTrigger(triggerSB.toString(), card, true);
-        protectTrigger.setOverridingAbility(AbilityFactory.getAbility(chooseProtector, card));
-        card.addTrigger(protectTrigger);
+            Trigger protectTrigger = TriggerHandler.parseTrigger(triggerSB.toString(), card, true);
+            protectTrigger.setOverridingAbility(AbilityFactory.getAbility(chooseProtector, card));
+            card.addTrigger(protectTrigger);
 
 
-        StringBuilder triggerDefeated = new StringBuilder();
-        triggerDefeated.append("Mode$ Defeated | ValidCard$ Card.Self | Secondary$ True | ");
-        triggerDefeated.append(" TriggerDescription$ When CARDNAME is defeated, exile it, then cast it transformed.");
+            StringBuilder triggerDefeated = new StringBuilder();
+            triggerDefeated.append("Mode$ Defeated | ValidCard$ Card.Self | Secondary$ True | ");
+            triggerDefeated.append(" TriggerDescription$ When CARDNAME is defeated, exile it, then cast it transformed.");
 
-        String castDefeatedBattle = "DB$ Play | Defined$ Self | WithoutManaCost$ True | CastTransformed$ True";
+            String castDefeatedBattle = "DB$ Play | Defined$ Self | WithoutManaCost$ True | CastTransformed$ True";
 
-        Trigger defeatedTrigger = TriggerHandler.parseTrigger(triggerDefeated.toString(), card, true);
-        defeatedTrigger.setOverridingAbility(AbilityFactory.getAbility(castDefeatedBattle, card));
-        card.addTrigger(defeatedTrigger);
+            Trigger defeatedTrigger = TriggerHandler.parseTrigger(triggerDefeated.toString(), card, true);
+            defeatedTrigger.setOverridingAbility(AbilityFactory.getAbility(castDefeatedBattle, card));
+            card.addTrigger(defeatedTrigger);
         }
     }
 
