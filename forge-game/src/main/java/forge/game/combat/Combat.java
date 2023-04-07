@@ -74,7 +74,7 @@ public class Combat {
     // Defenders, as they are attacked by hostile forces
     private final FCollection<GameEntity> attackableEntries = new FCollection<>();
 
-    // Keyed by attackable defender (player or planeswalker)
+    // Keyed by attackable defender (player or planeswalker or battle)
     private final Multimap<GameEntity, AttackingBand> attackedByBands = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
     private final Multimap<AttackingBand, Card> blockedBands = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
 
