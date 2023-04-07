@@ -304,7 +304,7 @@ public class Combat {
         // maybe attack on a controlled planeswalker?
         if (defender instanceof Card) {
             Card def = (Card)defender;
-            if (def.isBattle()) {
+            if (def.isBattle() && def.getType().hasSubtype("Siege")) {
                 return def.getProtectingPlayer();
             } else {
                 return def.getController();
