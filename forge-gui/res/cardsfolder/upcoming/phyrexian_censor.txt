@@ -1,6 +1,6 @@
 Name:Phyrexian Censor
 ManaCost:2 W
-Types:Phyrexian Wizard
+Types:Creature Phyrexian Wizard
 PT:3/3
 S:Mode$ CantBeCast | ValidCard$ Card.nonPhyrexian | Caster$ Player | NumLimitEachTurn$ 1 | Description$ Each player can't cast more than one non-Phyrexian spell each turn.
 R:Event$ Moved | ValidCard$ Creature.nonPhyrexian | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Non-Phyrexian creatures enter the battlefield tapped.

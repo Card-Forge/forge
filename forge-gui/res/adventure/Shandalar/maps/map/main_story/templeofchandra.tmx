@@ -1514,7 +1514,7 @@
   <object id="183" template="../../obj/enemy.tx" x="67" y="940.5">
    <properties>
     <property name="effect">{
- &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Chandra, Supreme Pyromancer&quot; ]
+ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Chandra, Bold Pyromancer&quot; ]
 }</property>
     <property name="enemy" value="Chandra"/>
     <property name="ignoreDungeonEffect" type="bool" value="false"/>

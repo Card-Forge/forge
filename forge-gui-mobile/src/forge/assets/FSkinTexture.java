@@ -166,7 +166,33 @@ public enum FSkinTexture implements FImage {
     Interplanar_Tunnel(ForgeConstants.BG_83, false, true),
     Morphic_Tide(ForgeConstants.BG_84, false, true),
     Mutual_Epiphany(ForgeConstants.BG_85, false, true),
-    Time_Distortion(ForgeConstants.BG_86, false, true);
+    Time_Distortion(ForgeConstants.BG_86, false, true),
+    Enigma_Ridges(ForgeConstants.BG_87, false, true),
+    Esper(ForgeConstants.BG_88, false, true),
+    Ghirapur(ForgeConstants.BG_89, false, true),
+    Inys_Haen(ForgeConstants.BG_90, false, true),
+    Ketria(ForgeConstants.BG_91, false, true),
+    Littiara(ForgeConstants.BG_92, false, true),
+    Megaflora_Jungle(ForgeConstants.BG_93, false, true),
+    Naktamun(ForgeConstants.BG_94, false, true),
+    New_Argive(ForgeConstants.BG_95, false, true),
+    Norns_Seedcore(ForgeConstants.BG_96, false, true),
+    Nyx(ForgeConstants.BG_97, false, true),
+    Paliano(ForgeConstants.BG_98, false, true),
+    Riptide_Island(ForgeConstants.BG_99, false, true),
+    Strixhaven(ForgeConstants.BG_100, false, true),
+    Ten_Wizards_Mountain(ForgeConstants.BG_101, false, true),
+    The_Caldaia(ForgeConstants.BG_102, false, true),
+    The_Fertile_Lands_of_Saulvinia(ForgeConstants.BG_103, false, true),
+    The_Golden_City_of_Orazca(ForgeConstants.BG_104, false, true),
+    The_Great_Aerie(ForgeConstants.BG_105, false, true),
+    The_Pit(ForgeConstants.BG_106, false, true),
+    The_Western_Cloud(ForgeConstants.BG_107, false, true),
+    The_Wilds(ForgeConstants.BG_108, false, true),
+    Towashi(ForgeConstants.BG_109, false, true),
+    Unyaro(ForgeConstants.BG_110, false, true),
+    Valors_Reach(ForgeConstants.BG_111, false, true);
+
 
     private final String filename;
     private final boolean repeat;

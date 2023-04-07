@@ -182,7 +182,7 @@ ScryfallCode=PLIST
 174 R Harmonize @Vance Kovacs
 175 R Helix Pinnacle @Dan Scott
 176 R Hua Tuo, Honored Physician @Gao Jianzhang
-177 R Imperious Perfect @Scott M. Fischer
+177 U Imperious Perfect @Scott M. Fischer
 178 M Ishkanah, Grafwidow @Christine Choi
 179 R Jadelight Ranger @Jason Rainville
 180 M Kalonian Hydra @Chris Rahn
@@ -1020,3 +1020,78 @@ F567 R Puresteel Angel @Lukas Litzsinger
 1012 M Sword of War and Peace @Chris Rahn
 1013 C Great Furnace @Rob Alexander
 1014 U Interplanar Beacon @Adam Paquette
+1015 R Austere Command @Wayne England
+1016 C Brago's Representative @Anthony Palumbo
+1017 M Heliod, God of the Sun @Jaime Jones
+1018 U Ixalan's Binding @Chase Stone
+1019 R Linden, the Steadfast Queen @Ryan Pancoast
+1020 R Ravnica at War @Adam Paquette
+1021 C Segovian Angel @Simon Dominic
+1022 U Vryn Wingmare @Seb McKinnon
+1023 R Archmage Emeritus @Caio Monteiro
+1024 R Balance of Power @Adam Rex
+1025 U Invasive Surgery @Steven Belledin
+1026 R Laboratory Maniac @Jason Felix
+1027 R Mass Polymorph @Christopher Moeller
+1028 R Pulse of the Grid @Wayne England
+1029 R Reshape @Jon Foster
+1030 R Rite of Replication @Matt Cavotta
+1031 R Rooftop Storm @John Stanko
+1032 R Shared Fate @Matt Cavotta
+1033 U Stormscape Battlemage @Christopher Moeller
+1034 R Time Stretch @Paolo Parente
+1035 R True-Name Nemesis @Zack Stella
+1036 R Aether Snap @Kev Walker
+1037 R Drinker of Sorrow @Carl Critchlow
+1038 U Endless Obedience @Karl Kopinski
+1039 U Ihsan's Shade @Daarken
+1040 M Nashi, Moon Sage's Scion @Valera Lutfullina
+1041 R Needle Specter @Christopher Moeller
+1042 R Phyrexian Crusader @Eric Deschamps
+1043 R Phyrexian Delver @Igor Kieryluk
+1044 R Phyrexian Etchings @Ron Spears
+1045 R Phyrexian Infiltrator @Darrell Riche
+1046 R Phyrexian Vatmother @Stephan Martiniere
+1047 R Rain of Daggers @Melissa A. Benson
+1048 C Siege Zombie @Johann Bodin
+1049 R Unmask @rk post
+1050 R Eidolon of the Great Revel @Cyril Van Der Haegen
+1051 R Etali, Primal Storm @Raymond Swanland
+1052 R Five-Alarm Fire @Karl Kopinski
+1053 U Mercadia's Downfall @Pete Venters
+1054 R Pia and Kiran Nalaar @Eric Deschamps
+1055 R Planeswalker's Fury @Christopher Moeller
+1056 C Regathan Firecat @Eric Velhagen
+1057 C Ruthless Invasion @Svetlin Velinov
+1058 R Scorched Earth @Nicola Leonard
+1059 R Siege of Towers @Anthony S. Waters
+1060 R Slag Fiend @Mike Bierek
+1061 M Soul of Shandalar @Raymond Swanland
+1062 M Avenger of Zendikar @Zoltan Boros
+1063 C Capenna Express @Viko Menezes
+1064 R Dig Up @Slawomir Maniak
+1065 R Ghalta, Primal Hunger @Chase Stone
+1066 M The Great Aurora @Sam Burley
+1067 R Muraganda Petroglyphs @Scott Altmann
+1068 U Path to the World Tree @Daniel Ljunggren
+1069 M Polukranos, World Eater @Johann Bodin
+1070 C Primal Cocoon @Daniel Ljunggren
+1071 C Sprout Swarm @Chippy
+1072 R Anax and Cymede @Willian Murai
+1073 M Borborygmos Enraged @Aleksi Briclot
+1074 M Dragonlord Ojutai @Chase Stone
+1075 M Gisa and Geralf @Karla Ortiz
+1076 U Incubation // Incongruity @Mike Bierek
+1077 M Kalamax, the Stormsire @Nicholas Gregory
+1078 R Mina and Denn, Wildborn @Izzy
+1079 U Reduce // Rubble @Eric Deschamps
+1080 R Sarulf, Realm Eater @Chris Rahn
+1081 R Dragon Throne of Tarkir @Daarken
+1082 R Hope of Ghirapur @Lius Lasahido
+1083 R Planar Portal @Mark Tedin
+1084 R High Market @Carl Critchlow
+1085 R Ketria Triome @Sam Burley
+1086 R Okina, Temple to the Grandfathers @Keith Garletts
+1087 R Sea of Clouds @Florian de Gesincourt
+1088 R The World Tree @Anastasia Ovchinnikova
+1089 U Zhalfirin Void @Chase Stone
