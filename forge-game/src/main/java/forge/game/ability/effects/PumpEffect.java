@@ -321,17 +321,6 @@ public class PumpEffect extends SpellAbilityEffect {
                     s = s.replaceAll("ChosenPlayerName", cp.getName());
                     keywords.set(i, s);
                 }
-            } else if (defined.equals("You") || defined.endsWith("Player")) {
-                PlayerCollection players = AbilityUtils.getDefinedPlayers(host, defined, sa);
-                if (players.isEmpty()) return;
-                String replacedID = String.valueOf(players.get(0).getId());
-                String replacedName = players.get(0).getName();
-                for (int i = 0; i < keywords.size(); i++) {
-                    String s = keywords.get(i);
-                    s = s.replaceAll("ChosenPlayerUID", replacedID);
-                    s = s.replaceAll("ChosenPlayerName", replacedName);
-                    keywords.set(i, s);
-                }
             } else if (defined.equals("ChosenColor")) {
                 if (!host.hasChosenColor()) {
                     return;
@@ -342,6 +331,29 @@ public class PumpEffect extends SpellAbilityEffect {
                     s = s.replaceAll("chosenColor", host.getChosenColor().toLowerCase());
                     keywords.set(i, s);
                 }
+            } else { // anything else needs to be defined players?
+                PlayerCollection players = AbilityUtils.getDefinedPlayers(host, defined, sa);
+                if (players.isEmpty()) return;
+                List<String> newKeywords = Lists.newArrayList();
+                Iterables.removeIf(keywords, new Predicate<String>() {
+
+                    @Override
+                    public boolean apply(String input) {
+                        if (!input.contains("ChosenPlayerUID") && !input.contains("ChosenPlayerName")) {
+                            return false;
+                        }
+                        for (Player p : players) {
+                            String replacedID = String.valueOf(p.getId());
+                            String replacedName = p.getName();
+
+                            String s = input.replaceAll("ChosenPlayerUID", replacedID);
+                            s = s.replaceAll("ChosenPlayerName", replacedName);
+                            newKeywords.add(s);
+                        }
+                        return true;
+                    }
+                });
+                keywords.addAll(newKeywords);
             }
         }
         if (sa.hasParam("DefinedLandwalk")) {
