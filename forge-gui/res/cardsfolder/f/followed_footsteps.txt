@@ -4,5 +4,5 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | ValidTgts$ Creature | AILogic$ HighestEvaluation
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, create a token that's a copy of enchanted creature.
-SVar:TrigCopy:DB$ CopyPermanent | Defined$ Enchanted | SpellDescription$ At the beginning of your upkeep, create a token that's a copy of enchanted creature.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Enchanted
 Oracle:Enchant creature\nAt the beginning of your upkeep, create a token that's a copy of enchanted creature.
