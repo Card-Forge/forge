@@ -1378,7 +1378,7 @@ public class CardView extends GameEntityView {
                     return;
                 }
             }
-            updateDefense("0"); //alternates don't need loyalty
+            updateDefense("0");
         }
 
         public String getSetCode() {
