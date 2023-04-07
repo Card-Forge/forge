@@ -1,0 +1,10 @@
+Name:Knight-Errant of Eos
+ManaCost:4 W
+Types:Creature Human Knight
+PT:4/4
+K:Convoke
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top six cards of your library. You may reveal up to two creature cards with mana value X or less from among them, where X is the number of creatures that convoked CARDNAME. Put the revealed cards into your hand, then shuffle.
+SVar:TrigDig:DB$ Dig | DigNum$ 6 | ChangeNum$ 2 | Optional$ True | ChangeValid$ Creature.cmcLEX | SkipReorder$ True | SubAbility$ DBShuffle | ForceRevealToController$ True
+SVar:DBShuffle:DB$ Shuffle | Defined$ You
+SVar:X:Convoked$Amount
+Oracle:Convoke\nWhen Knight-Errant of Eos enters the battlefield, look at the top six cards of your library. You may reveal up to two creature cards with mana value X or less from among them, where X is the number of creatures that convoked Knight-Errant of Eos. Put the revealed cards into your hand, then shuffle.
