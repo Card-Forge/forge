@@ -43,29 +43,30 @@ public class IncubateEffect extends TokenEffectBase {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getHostCard();
-        final Game game = card.getGame();
-        final Player activator = sa.getActivatingPlayer();
-        final int times = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Times", "1"), sa);
-
+        final Card host = sa.getHostCard();
+        final Game game = host.getGame();
+        final int times = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Times", "1"), sa);
         sa.putParam("WithCountersType", "P1P1");
         sa.putParam("WithCountersAmount", sa.getParamOrDefault("Amount", "1"));
 
-        for (int i = 0; i < times; i++) {
-            CardZoneTable triggerList = new CardZoneTable();
-            MutableBoolean combatChanged = new MutableBoolean(false);
+        for (final Player p : getTargetPlayers(sa)) {
 
-            makeTokenTable(makeTokenTableInternal(activator, "incubator_c_0_0_a_phyrexian", 1, sa), false,
-                    triggerList, combatChanged, sa);
+            for (int i = 0; i < times; i++) {
+                CardZoneTable triggerList = new CardZoneTable();
+                MutableBoolean combatChanged = new MutableBoolean(false);
 
-            triggerList.triggerChangesZoneAll(game, sa);
-            triggerList.clear();
+                makeTokenTable(makeTokenTableInternal(p, "incubator_c_0_0_a_phyrexian", 1, sa), false,
+                        triggerList, combatChanged, sa);
 
-            game.fireEvent(new GameEventTokenCreated());
+                triggerList.triggerChangesZoneAll(game, sa);
+                triggerList.clear();
 
-            if (combatChanged.isTrue()) {
-                game.updateCombatForView();
-                game.fireEvent(new GameEventCombatChanged());
+                game.fireEvent(new GameEventTokenCreated());
+
+                if (combatChanged.isTrue()) {
+                    game.updateCombatForView();
+                    game.fireEvent(new GameEventCombatChanged());
+                }
             }
         }
     }
