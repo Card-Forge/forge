@@ -5,6 +5,7 @@ import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardDamageMap;
 import forge.game.card.CardLists;
 import forge.game.spellability.SpellAbility;
@@ -79,6 +80,18 @@ public class DamageEachEffect extends DamageBaseEffect {
 
                 final int dmg = AbilityUtils.calculateAmount(source, num, sa);
                 damageMap.put(sourceLKI, source, dmg);
+            }
+        } else if (sa.hasParam("ToEachOther")) {
+            final CardCollection targets = AbilityUtils.getDefinedCards(card, sa.getParam("ToEachOther"), sa);
+            for (final Card damager : targets) {
+                for (final Card c : targets) {
+                    if (!c.equals(damager)) {
+                        final Card sourceLKI = game.getChangeZoneLKIInfo(damager);
+
+                        final int dmg = AbilityUtils.calculateAmount(damager, num, sa);
+                        damageMap.put(sourceLKI, c, dmg);
+                    }
+                }
             }
         } else for (final GameEntity ge : getTargetEntities(sa)) {
             for (final Card source : sources) {

@@ -24,10 +24,6 @@ import forge.util.MyRandom;
 public class FightAi extends SpellAbilityAi {
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        if (sa.hasParam("FightWithToughness")) {
-            // TODO: add ailogic
-            return false;
-        }
         return super.checkAiLogic(ai, sa, aiLogic);
     }
 
