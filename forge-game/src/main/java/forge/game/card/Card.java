@@ -2309,12 +2309,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sb.append(")").append("\r\n\r\n");
                 } else if (keyword.startsWith("Backup")) {
                     final String[] k = keyword.split(":");
-                    sb.append(k[0]).append(" ").append(k[1]).append(" (");
+                    String magnitude = k[1];
+                    boolean multi = k.length >= 4;
+                    int times = multi ? Integer.parseInt(k[3]) : 1;
+
+                    StringBuilder descStr = new StringBuilder("Backup " + magnitude);
+                    for (int t = times; t > 1; t--) {
+                        descStr.append(", backup ").append(magnitude);
+                    }
+                    sb.append(descStr).append(" ").append(" (");
                     String remStr = inst.getReminderText();
                     if (k[2].endsWith("s")) {
                         remStr = remStr.replace("ability", "abilities");
                     }
-                    sb.append(remStr).append(")");
+                    sb.append(remStr).append(multi ? " Each backup ability triggers separately." : "").append(")");
                 } else if (keyword.startsWith("MayEffectFromOpening")) {
                     final String[] k = keyword.split(":");
                     // need to get SpellDescription from Svar
