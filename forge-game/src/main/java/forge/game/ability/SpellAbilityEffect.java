@@ -911,8 +911,8 @@ public abstract class SpellAbilityEffect {
         if (cause.isReplacementAbility() && exilingSource.isLKI()) {
             exilingSource = exilingSource.getGame().getCardState(exilingSource);
         }
-        // only want this on permanents
-        if (exilingSource.isImmutable() || exilingSource.isInPlay()) {
+        // avoid storing this on "inactive" cards
+        if (exilingSource.isImmutable() || exilingSource.isInPlay() || exilingSource.isInZone(ZoneType.Stack)) {
             // make sure it gets updated
             exilingSource.removeExiledCard(movedCard);
             exilingSource.addExiledCard(movedCard);
