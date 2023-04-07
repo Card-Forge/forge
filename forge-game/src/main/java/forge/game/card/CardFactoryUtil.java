@@ -842,31 +842,28 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Backup")) {
             final String[] k = keyword.split(":");
             String magnitude = k[1];
-            int times = k.length >= 4 ? Integer.parseInt(k[3]) : 1;
             final String backupVar = card.getSVar(k[2]);
 
             String descStr = "Backup " + magnitude;
 
-            for (int i = 0; i < times; i++) {
-                final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | " +
-                        "Secondary$ True | TriggerDescription$ " + descStr;
+            final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | " +
+                    "Secondary$ True | TriggerDescription$ " + descStr;
 
-                final String putCounter = "DB$ PutCounter | ValidTgts$ Creature | CounterNum$ " + magnitude
-                        + " | CounterType$ P1P1 | Backup$ True";
+            final String putCounter = "DB$ PutCounter | ValidTgts$ Creature | CounterNum$ " + magnitude
+                    + " | CounterType$ P1P1 | Backup$ True";
 
-                final String addAbility = backupVar + " | ConditionDefined$ Targeted | " +
-                        "ConditionPresent$ Card.Other | Defined$ Targeted";
+            final String addAbility = backupVar + " | ConditionDefined$ Targeted | ConditionPresent$ Card.Other | " +
+                    "Defined$ Targeted";
 
-                SpellAbility sa = AbilityFactory.getAbility(putCounter, card);
-                AbilitySub backupSub = (AbilitySub) AbilityFactory.getAbility(addAbility, card);
-                sa.setSubAbility(backupSub);
+            SpellAbility sa = AbilityFactory.getAbility(putCounter, card);
+            AbilitySub backupSub = (AbilitySub) AbilityFactory.getAbility(addAbility, card);
+            sa.setSubAbility(backupSub);
 
-                final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
-                sa.setIntrinsic(intrinsic);
-                trigger.setOverridingAbility(sa);
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            sa.setIntrinsic(intrinsic);
+            trigger.setOverridingAbility(sa);
 
-                inst.addTrigger(trigger);
-            }
+            inst.addTrigger(trigger);
         } else if (keyword.equals("Battle cry")) {
             final String trig = "Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Secondary$ True "
                     + " | TriggerDescription$ " + keyword + " (" + inst.getReminderText() + ")";
