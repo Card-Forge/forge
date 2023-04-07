@@ -634,7 +634,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             incrementTransformedTimestamp();
 
             return retResult;
-
         } else if (mode.equals("Flip")) {
             // 709.4. Flipping a permanent is a one-way process.
             if (isFlipped()) {
@@ -3246,6 +3245,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final void setFaceDown(boolean value) {
         facedown = value;
+    }
+
+    public final boolean isTransformed() {
+        return getTransformedTimestamp() != 0;
     }
 
     public final boolean isFlipped() {

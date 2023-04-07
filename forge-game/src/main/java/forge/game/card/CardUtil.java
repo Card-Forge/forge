@@ -302,6 +302,9 @@ public final class CardUtil {
         newCopy.setTimestamp(in.getTimestamp());
 
         newCopy.setBestowTimestamp(in.getBestowTimestamp());
+        if (in.isTransformed()) {
+            newCopy.incrementTransformedTimestamp();
+        }
 
         newCopy.setForetold(in.isForetold());
         newCopy.setForetoldThisTurn(in.isForetoldThisTurn());
