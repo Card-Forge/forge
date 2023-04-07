@@ -3,7 +3,7 @@ ManaCost:X 1 R W
 Types:Creature Human Wizard
 PT:3/2
 K:Convoke
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ TriggerDescription$ When CARDNAME enters the battlefield, create X 1/1 red Elemental creature tokens with "Whenever this creature becomes tapped, it deals 1 damage to target player."
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create X 1/1 red Elemental creature tokens with "Whenever this creature becomes tapped, it deals 1 damage to target player."
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ r_1_1_elemental_ping | TokenOwner$ You
 SVar:X:Count$xPaid
 DeckHas:Ability$Token & Type$Elemental
