@@ -78,7 +78,7 @@ public class CombatUtil {
             final CardCollection planeswalkers = defender.getPlaneswalkersInPlay();
             defenders.addAll(planeswalkers);
             for (Card battle : defender.getBattlesInPlay()) {
-                if (!playerWhoAttacks.equals(battle.getProtectingPlayer())) {
+                if (!playerWhoAttacks.equals(battle.getProtectingPlayer()) && battle.getType().hasSubtype("Siege")) {
                     defenders.add(battle);
                 }
             }

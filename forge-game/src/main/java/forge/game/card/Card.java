@@ -1580,7 +1580,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         runParams.put(AbilityKey.CounterAmount, delta);
         getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemovedOnce, AbilityKey.newMap(runParams), false);
 
-        if (counterName.is(CounterEnumType.DEFENSE) && newValue == 0) {
+        if (counterName.is(CounterEnumType.DEFENSE) && newValue == 0 && this.isBattle()) {
             // Run defeated trigger
             getGame().getTriggerHandler().runTrigger(TriggerType.Defeated, AbilityKey.newMap(runParams), false);
         }
