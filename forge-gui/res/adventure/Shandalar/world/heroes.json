@@ -63,7 +63,14 @@
     "male":"sprites/heroes/dwarf_m.atlas",      
     "femaleAvatar":"Dwarf_f",      
     "maleAvatar":"Dwarf_m" 
-  }
+  },
+  {
+    "name":"Werewolf",
+    "female":"sprites/heroes/werewolf_f.atlas",      
+    "male":"sprites/heroes/werewolf_m.atlas",      
+    "femaleAvatar":"Werewolf_f",      
+    "maleAvatar":"Werewolf_m" 
+  }   
   
   
   ]
