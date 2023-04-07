@@ -1,0 +1,13 @@
+Name:Hedron Detonator
+ManaCost:2 R
+Types:Creature Goblin Artificer
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever an artifact enters the battlefield under your control, CARDNAME deals 1 damage to target opponent.
+SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ 1
+A:AB$ Dig | Cost$ T Sac<2/Artifact> | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | Defined$ You | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. You may play that card this turn.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ EffSModeContinuous | ExileOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:EffSModeContinuous:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ You may play that card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Artifact
+Oracle:Whenever an artifact enters the battlefield under your control, Hedron Detonator deals 1 damage to target opponent.\n{T}, Sacrifice two artifacts: Exile the top card of your library. You may play that card this turn
