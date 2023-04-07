@@ -147,7 +147,6 @@ public class FightEffect extends DamageBaseEffect {
     }
 
     private void dealDamage(final SpellAbility sa, Card fighterA, Card fighterB) {
-        boolean fightToughness = sa.hasParam("FightWithToughness");
 
         boolean usedDamageMap = true;
         CardDamageMap damageMap = sa.getDamageMap();
@@ -168,11 +167,11 @@ public class FightEffect extends DamageBaseEffect {
 
         // 701.12c If a creature fights itself, it deals damage to itself equal to twice its power.
 
-        final int dmg1 = fightToughness ? fighterA.getNetToughness() : fighterA.getNetPower();
+        final int dmg1 = fighterA.getNetPower();
         if (fighterA.equals(fighterB)) {
             damageMap.put(fighterA, fighterA, dmg1 * 2);
         } else {
-            final int dmg2 = fightToughness ? fighterB.getNetToughness() : fighterB.getNetPower();
+            final int dmg2 = fighterB.getNetPower();
 
             damageMap.put(fighterA, fighterB, dmg1);
             damageMap.put(fighterB, fighterA, dmg2);

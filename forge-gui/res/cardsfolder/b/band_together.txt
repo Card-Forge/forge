@@ -1,10 +1,6 @@
 Name:Band Together
 ManaCost:2 G
 Types:Instant
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to two target creatures you control | ImprintCards$ ThisTargetedCard | AILogic$ PowerDmg | SubAbility$ DBPump | TargetMin$ 0 | TargetMax$ 2 | StackDescription$ SpellDescription | SpellDescription$ Up to two target creatures you control each deal damage equal to their power to another target creature.
-SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to be dealt damage | RememberObjects$ ThisTargetedCard | IsCurse$ True | SubAbility$ DBEachDamage | StackDescription$ None
-SVar:DBEachDamage:DB$ EachDamage | ValidCards$ Creature.IsImprinted | NumDmg$ X | DamageDesc$ damage equal to its power | DefinedCards$ Remembered | SubAbility$ DBCleanup | StackDescription$ None
-#NumDmg isn't really used here. It is left for clarity. The AF pulls Damage straight from "X" hardcoded.
-SVar:X:Count$CardPower
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to two target creatures you control | AILogic$ PowerDmg | SubAbility$ DBEachDamage | StackDescription$ {c:ThisTargetedCard} | SpellDescription$ Up to two target creatures you control
+SVar:DBEachDamage:DB$ EachDamage | DefinedDamagers$ ParentTarget | ValidTgts$ Creature | TgtPrompt$ Select another target creature | TargetUnique$ True | NumDmg$ Count$CardPower | StackDescription$ REP another target creature_{c:ThisTargetedCard} | SpellDescription$ each deal damage equal to their power to another target creature.
 Oracle:Up to two target creatures you control each deal damage equal to their power to another target creature.

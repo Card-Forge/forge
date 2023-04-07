@@ -52,13 +52,31 @@ ScryfallCode=MOC
 44 R Wildfire Awakener @Andrew Mar
 45 R Bitterthorn, Nissa's Animus @Titus Lunter
 46 R Ichor Elixir @Warren Mahy
+47 C The Caldaia @Julian Kok Joon Wen
+48 C Enigma Ridges @Eytan Zana
 49 C Esper @Bruce Brenneise
+50 C The Fertile Lands of Saulvinia @Lorenzo Lanfranconi
+51 C Ghirapur @David Alvarez
+52 C The Golden City of Orazca @Alayna Danner
+53 C The Great Aerie @Julian Kok Joon Wen
+54 C Inys Haen @Aldo Domínguez
 55 C Ketria @Piotr Dura
+56 C Littiara @Jonas De Ro
 57 C Megaflora Jungle
 58 C Naktamun @Robin Olausson
+59 C New Argive @Leon Tukker
+60 C Norn's Seedcore @Alexander Forssberg
 61 C Nyx @Piotr Dura
+62 C Paliano @Piotr Dura
 63 C The Pit @Dave Kendall
+64 C Riptide Island @Jesper Ejsing
+65 C Strixhaven @Alexander Forssberg
+66 C Ten Wizards Mountain @Iris Compiet
 67 C Towashi @Kamila Szutenberg
+68 C Unyaro @Robin Olausson
+69 C Valor's Reach @Kamila Szutenberg
+70 C The Western Cloud @Titus Lunter
+71 C The Wilds @Chris Seaman
 72 R Elspeth's Talent @Jeremy Wilson
 73 R Firemane Commando @Andrew Mar
 74 R Teferi's Talent @Dominik Mayer
@@ -127,12 +145,29 @@ ScryfallCode=MOC
 137 M Kasla, the Broken Halo @Martina Fackova
 138 M Sidar Jabari of Zhalfir @Simon Dominic
 139 C The Aether Flues @Jason A. Engle
+140 C Bloodhill Bastion @Mark Hyzer
 141 C Chaotic Aether @Dan Scott
+142 C Gavony @Dave Kendall
+143 C Glimmervoid Basin @Lars Grant-West
 144 C The Great Forest @Howard Lyon
+145 C Grove of the Dreampods @Erica Yang
+146 C Hedron Fields of Agadeem @Vincent Proce
 147 C Isle of Vesuva @Zoltan Boros & Gabor Szikszai
 148 C Jund @Aleksi Briclot
+149 C Kharasha Foothills @Trevor Claxton
+150 C Krosa @Steven Belledin
+151 C Mutual Epiphany @Jason Felix
+152 C Orochi Colony @Charles Urbach
 153 C Panopticon @John Avon
+154 C Planewide Disaster @Dave Kendall
+155 C Reality Shaping @Dan Scott
+156 C Selesnya Loft Gardens @Martina Pilcerova
+157 C Sokenzan @Brian Snõddy
 158 C Spatial Merging @Gabor Szikszai
+159 C Stensia @Vincent Proce
+160 C Stronghold Furnace @Jim Pavelec
+161 C Truga Jungle @Jim Nelson
+162 C Turri Island @Raymond Swanland
 163 C Undercity Reaches @Stephan Martiniere
 164 U Abzan Battle Priest @Chris Rahn
 165 U Abzan Falconer @Steven Belledin
@@ -158,13 +193,14 @@ ScryfallCode=MOC
 185 R Fell the Mighty @Raymond Swanland
 186 U Flight of Equenauts @Zezhou Chen
 187 U Generous Gift @Kev Walker
-188 C Hero of Bladehold @Steven Belledin
+188 M Hero of Bladehold @Steven Belledin
 189 R High Sentinels of Arashin @James Ryman
 190 R Hour of Reckoning @Joseph Meehan
 191 R Keeper of the Accord @Denman Rooke
 192 R Knight Exemplar @Jason Chan
 193 R Knight of the White Orchid @Mark Zug
 194 U Master Splicer @Chippy
+195 R Maul of the Skyclaves @Joseph Meehan
 196 U Mentor of the Meek @Jana Schirmer & Johannes Voss
 197 R Mikaeus, the Lunarch @Steven Belledin
 198 U Path to Exile @Todd Lockwood
@@ -393,7 +429,7 @@ ScryfallCode=MOC
 421 U Rogue's Passage @Christine Choi
 422 R Shineshadow Snarl @Sam Burley
 423 C Silverquill Campus @Titus Lunter
-424 U Simic Growth Chamber @John Avon
+424 C Simic Growth Chamber @John Avon
 425 R Skycloud Expanse @Sam Burley
 426 R Spire of Industry @John Avon
 427 R Sungrass Prairie @Ron Spencer
@@ -406,7 +442,7 @@ ScryfallCode=MOC
 434 R Temple of Mystery @Piotr Dura
 435 R Temple of Plenty @Chris Ostrowski
 436 R Temple of Silence @Adam Paquette
-437 R Temple of the False God @Brian Snõddy
+437 U Temple of the False God @Brian Snõddy
 438 R Temple of Triumph @Piotr Dura
 439 C Terramorphic Expanse @Dan Scott
 440 C Thriving Heath @Alayna Danner

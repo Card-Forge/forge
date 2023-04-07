@@ -6,6 +6,7 @@ Type=Collector_Edition
 ScryfallCode=MUL
 
 [cards]
+1 R Anafenza, Kin-Tree Spirit @Domenico Cava
 2 U Daxos, Blessed by the Sun @Jason A. Engle
 3 M Elesh Norn, Grand Cenobite @Flavio Girón
 4 M Kenrith, the Returned King @Aaron Miller

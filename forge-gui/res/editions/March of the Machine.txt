@@ -110,7 +110,7 @@ ScryfallCode=MOM
 102 C Etched Host Doombringer @Helge C. Balzer
 103 C Failed Conversion @Jodie Muir
 104 C Final Flourish @Raluca Marinescu
-105 C Flitting Guerilla @Francisco Miyara
+105 C Flitting Guerrilla @Francisco Miyara
 106 U Gift of Compleation @Artur Nakhodkin
 107 U Glistening Deluge @Anastasia Balakchina
 108 C Gloomfang Mauler @Denis Zhbankov
@@ -297,6 +297,8 @@ ScryfallCode=MOM
 289 L Mountain @Lucas Staniec
 290 L Forest @Grady Frederick
 291 L Forest @Henry Peters
+
+[showcase]
 292 M Elesh Norn @Kekai Kotaki
 293 R Heliod, the Radiant Dawn @Jason A. Engle
 294 M Jin-Gitaxias @Dominik Mayer
@@ -325,9 +327,14 @@ ScryfallCode=MOM
 317 R Yargle and Multani @Lisa Heidhoff
 318 M Zimone and Dina @Anato Finnstark
 319 M Zurgo and Ojutai @Adrian Smith
+
+[borderless]
 320 M Archangel Elspeth @Denys Tsiperko
 321 M Chandra, Hope's Beacon @Randy Vargas
 322 M Wrenn and Realmbreaker @Jehan Choo
+339 M Jin-Gitaxias @Julian Kok Joon Wen
+
+[jumpstart]
 323 R Essence of Orthodoxy @Oriana Menendez
 324 C Phyrexian Pegasus @Carlos Palma Cruchaga
 325 U Seedpod Caretaker @Slawomir Maniak
@@ -343,7 +350,8 @@ ScryfallCode=MOM
 335 C Fairgrounds Trumpeter @Samuel Perin
 336 U Ruins Recluse @Lorenzo Mastroianni
 337 R Surrak and Goreclaw @Lucas Graciano
-339 M Jin-Gitaxias @Julian Kok Joon Wen
+
+[extended art]
 343 R Boon-Bringer Valkyrie @Heonhwa Choe
 344 R Dusk Legion Duelist @Ryan Valle
 345 R Guardian of Ghirapur @Cynthia Sheppard
@@ -382,10 +390,17 @@ ScryfallCode=MOM
 378 R Terror of Towashi @Lius Lasahido
 379 R Orthion, Hero of Lavabrink @Aaron Miller
 380 R Surrak and Goreclaw @Lucas Graciano
+
+[promo]
 381 U Norn's Inquisitor @Denis Zhbankov
 382 U Scrappy Bruiser @David Auden Nash
 383 U Kami of Whispered Hopes @Filipe Pagliuso
 384 U Botanical Brawler @Jesper Ejsing
 385 U Halo Forager @Kevin Sidharta
 386 R Ghalta and Mavren @Betty Jiang
+
+[buy a box]
 387 R Omnath, Locus of All @Helge C. Balzer
+
+[tokens]
+incubator_c_0_0_a_phyrexian
