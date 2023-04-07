@@ -1,0 +1,15 @@
+Name:Guardian Scalelord
+ManaCost:4 W
+Types:Creature Dragon
+PT:3/4
+K:Backup:1:BackupAbilities
+SVar:BackupAbilities:DB$ Animate | Keywords$ Flying | Triggers$ AttackTrig | sVars$ AE
+SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ Whenever this creature attacks, return target nonland permanent card with mana value X or less from your graveyard to the battlefield, where X is this creature's power.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.nonLand+cmcLEX+YouOwn | TgtPrompt$ Select target nonland permanent card with mana value X or less | Origin$ Graveyard | Destination$ Battlefield
+SVar:X:TriggeredAttacker$CardPower
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ Whenever this creature attacks, return target nonland permanent card with mana value X or less from your graveyard to the battlefield, where X is this creature's power.
+SVar:HasAttackEffect:TRUE
+SVar:AE:SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+Oracle:Backup 1 (When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following abilities until end of turn.)\nFlying\nWhenever this creature attacks, return target nonland permanent card with mana value X or less from your graveyard to the battlefield, where X is this creature's power.
