@@ -33,7 +33,7 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
             producedMana.append(ma.produceMana(generated, player, sa));
         }
 
-        ma.tapsForMana(sa, producedMana.toString());
+        ma.tapsForMana(sa.getRootAbility(), producedMana.toString());
     }
 
     // *************** Utility Functions **********************

@@ -1,0 +1,24 @@
+Name:Ayara, Widow of the Realm
+ManaCost:1 B B
+Types:Legendary Creature Elf Noble
+PT:3/3
+A:AB$ DealDamage | Cost$ T Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | ValidTgts$ Opponent,Battle | TgtPrompt$ Select target opponent or battle | SubAbility$ DBGainLife | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target opponent or battle and you gain X life, where X is the sacrificed permanent's mana value.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
+SVar:X:Sacrificed$CardManaCost
+A:AB$ SetState | Cost$ 5 RP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform NICKNAME. Activate only as a sorcery.
+AlternateMode:DoubleFaced
+DeckHas:Ability$Sacrifice|LifeGain
+Oracle:{T}, Sacrifice another creature or artifact: Ayara, Widow of the Realm deals X damage to target opponent or battle and you gain X life, where X is the sacrificed permanent's mana value.\n{5}{R/P}: Transform Ayara. Activate only as a sorcery. ({R/P} can be paid with {R} or 2 life.)
+
+ALTERNATE
+
+Name:Ayara, Furnace Queen
+ManaCost:no cost
+Colors:black,red
+Types:Legendary Creature Phyrexian Elf Noble
+PT:4/4
+T:Mode$ Phase | Phase$ BeginCombat  | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of combat on your turn, return up to one target artifact or creature card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Artifact.YouOwn,Creature.YouOwn | TgtPrompt$ Select up to one target artifact or creature from your graveyard | TargetMin$ 0 | TargetMax$ 1 | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Keywords$ Haste | Defined$ Targeted | Duration$ Permanent | AtEOT$ Exile
+DeckHas:Ability$Sacrifice|Graveyard
+Oracle:At the beginning of combat on your turn, return up to one target artifact or creature card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.

@@ -144,11 +144,10 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     public KeywordInterface getKeyword() {
         return this.keyword;
     }
-    
     public void setKeyword(final KeywordInterface kw) {
         this.keyword = kw;
     }
-    
+
     /**
      * <p>
      * isSecondary.

@@ -245,7 +245,7 @@ public class ManaEffect extends SpellAbilityEffect {
             producedMana.append(abMana.produceMana(mana, p, sa));
         }
 
-        abMana.tapsForMana(sa, producedMana.toString());
+        abMana.tapsForMana(sa.getRootAbility(), producedMana.toString());
 
         // Only clear express choice after mana has been produced
         abMana.clearExpressChoice();

@@ -1074,6 +1074,15 @@ public class ComputerUtil {
             }
         }
 
+        // cast Backup creatures in main 1 to pump attackers
+        if (cardState.hasKeyword(Keyword.BACKUP)) {
+            for (Card potentialAtkr: ai.getCreaturesInPlay()) {
+                if (ComputerUtilCard.doesCreatureAttackAI(ai, potentialAtkr)) {
+                    return true;
+                }
+            }
+        }
+
         // try not to cast Raid creatures in main 1 if an attack is likely
         if ("Count$AttackersDeclared".equals(card.getSVar("RaidTest")) && !cardState.hasKeyword(Keyword.HASTE)) {
             for (Card potentialAtkr: ai.getCreaturesInPlay()) {

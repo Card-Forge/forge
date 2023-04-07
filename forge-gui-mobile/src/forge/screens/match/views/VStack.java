@@ -74,10 +74,13 @@ public class VStack extends FDropDown {
 
         final Set<ZoneType> zones = new HashSet<>();
         playersWithValidTargets = new HashMap<>();
-        for (final CardView c : activeStackInstance.getTargetCards()) {
-            if (c.getZone() != null) {
-                zones.add(c.getZone());
-                playersWithValidTargets.put(c.getController(), c);
+        FCollectionView<CardView> targetCards = activeStackInstance.getTargetCards();
+        if (targetCards != null) {
+            for (final CardView c : targetCards) {
+                if (c.getZone() != null) {
+                    zones.add(c.getZone());
+                    playersWithValidTargets.put(c.getController(), c);
+                }
             }
         }
         if (zones.isEmpty() || playersWithValidTargets.isEmpty()) { return; }

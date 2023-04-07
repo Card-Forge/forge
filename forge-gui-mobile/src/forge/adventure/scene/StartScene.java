@@ -7,7 +7,6 @@ import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.GameStage;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
-import forge.adventure.util.Controls;
 import forge.adventure.world.WorldSave;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundSystem;
@@ -18,6 +17,7 @@ import forge.sound.SoundSystem;
 public class StartScene extends UIScene {
 
     private static StartScene object;
+    Dialog exitDialog;
     TextraButton saveButton, resumeButton, continueButton;
 
 
@@ -101,9 +101,15 @@ public class StartScene extends UIScene {
     }
 
     public boolean Exit() {
-        Dialog dialog = prepareDialog(Forge.getLocalizer().getMessage("lblExitForge"), ButtonOk | ButtonAbort, () -> Forge.exit(true));
-        dialog.text(Controls.newLabel(Forge.getLocalizer().getMessage("lblAreYouSureYouWishExitForge")));
-        showDialog(dialog);
+        if (exitDialog == null) {
+            exitDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblExitForge"),
+                    Forge.getLocalizer().getMessage("lblAreYouSureYouWishExitForge"), Forge.getLocalizer().getMessage("lblOk"),
+                    Forge.getLocalizer().getMessage("lblAbort"), () -> {
+                        Forge.exit(true);
+                        removeDialog();
+                    }, this::removeDialog);
+        }
+        showDialog(exitDialog);
         return true;
     }
 

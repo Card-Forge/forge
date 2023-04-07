@@ -1,28 +1,15 @@
 package forge.game.ability;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.StringTokenizer;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
-
 import forge.GameCommand;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardUtil;
-import forge.game.card.CardZoneTable;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -41,6 +28,9 @@ import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 /**
  * <p>
@@ -192,7 +182,7 @@ public abstract class SpellAbilityEffect {
                     } else {
                         objs = AbilityUtils.getDefinedObjects(sa.getHostCard(), t, sa);
                     }
-                    sb.append(StringUtils.join(objs, ", "));
+                    sb.append(Lang.joinHomogenous(objs));
                 }
             } else {
                 sb.append(t);
@@ -911,8 +901,8 @@ public abstract class SpellAbilityEffect {
         if (cause.isReplacementAbility() && exilingSource.isLKI()) {
             exilingSource = exilingSource.getGame().getCardState(exilingSource);
         }
-        // only want this on permanents
-        if (exilingSource.isImmutable() || exilingSource.isInPlay()) {
+        // avoid storing this on "inactive" cards
+        if (exilingSource.isImmutable() || exilingSource.isInPlay() || exilingSource.isInZone(ZoneType.Stack)) {
             // make sure it gets updated
             exilingSource.removeExiledCard(movedCard);
             exilingSource.addExiledCard(movedCard);

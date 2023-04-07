@@ -1,0 +1,19 @@
+Name:Gnottvold Hermit
+ManaCost:3 G
+Types:Creature Troll
+PT:4/4
+A:AB$ SetState | Cost$ 5 UP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
+AlternateMode:DoubleFaced
+Oracle:{5}{U/P}: Transform Gnottvold Hermit. Activate only as a sorcery. ({U/P} can be paid with either {U} or 2 life.)
+
+ALTERNATE
+
+Name:Chrome Host Hulk
+ManaCost:no cost
+Colors:green,blue
+Types:Creature Phyrexian Troll
+PT:5/5
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ Whenever CARDNAME attacks, up to one other target creature has base power and toughness 5/5 until end of turn.
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Creature.Other | TgtPrompt$ Select up to one other target creature | TargetMin$ 0 | TargetMax$ 1 | Power$ 5 | Toughness$ 5
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Chrome Host Hulk attacks, up to one other target creature has base power and toughness 5/5 until end of turn.

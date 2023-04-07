@@ -1,0 +1,12 @@
+Name:Themberchaud
+ManaCost:4 R R R
+Types:Legendary Creature Dragon
+PT:5/5
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAllNonFlyers | TriggerDescription$ When CARDNAME enters the battlefield, he deals X damage to each creature without flying and each player, where X is the number of Mountains you control.
+SVar:TrigDamageAllNonFlyers:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | ValidDescription$ each creature without flying and each player
+S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Trigger$ TrigPump | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. When you do, he gains flying until end of turn. (An exerted creature won't untap during your next untap step.)
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying | SpellDescription$ When you do, he gains flying until end of turn.
+SVar:X:Count$TypeYouCtrl.Mountain
+DeckHints:Type$Dragon & Keyword$Flying
+Oracle:When Themberchaud enters the battlefield, he deals X damage to each creature without flying and each player, where X is the number of Mountains you control.\nYou may exert Themberchaud as it attacks. When you do, he gains flying until end of turn. (An exerted creature won't untap during your next untap step.)
