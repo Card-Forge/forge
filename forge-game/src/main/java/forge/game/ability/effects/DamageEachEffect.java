@@ -5,6 +5,7 @@ import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardDamageMap;
 import forge.game.card.CardLists;
 import forge.game.spellability.SpellAbility;
@@ -20,10 +21,9 @@ public class DamageEachEffect extends DamageBaseEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final String damage = sa.getParam("NumDmg");
-        final int iDmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
+        final int iDmg = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDmg"), sa);
 
-        String desc = sa.getParam("ValidCards");
+        String desc = sa.getParamOrDefault("ValidCards", "");
         if (sa.hasParam("ValidDescription")) {
             desc = sa.getParam("ValidDescription");
         }
@@ -35,18 +35,9 @@ public class DamageEachEffect extends DamageBaseEffect {
             dmg += iDmg + " damage";
         }
 
-        if (sa.hasParam("StackDescription")) {
-            sb.append(sa.getParam("StackDescription"));
-        } else {
-            sb.append("Each ").append(desc).append(" deals ").append(dmg).append(" to ");
-            Lang.joinHomogenous(getTargetPlayers(sa));
-            if (sa.hasParam("DefinedCards")) {
-                if (sa.getParam("DefinedCards").equals("Self")) {
-                    sb.append(" itself");
-                }
-            }
-        }
-        sb.append(".");
+        sb.append("Each ").append(desc).append(" deals ").append(dmg).append(" to ");
+        sb.append(Lang.joinHomogenous(getTargetEntities(sa))).append(".");
+
         return sb.toString();
     }
 
@@ -58,10 +49,16 @@ public class DamageEachEffect extends DamageBaseEffect {
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
+        final String num = sa.getParamOrDefault("NumDmg", "X");
 
-        FCollectionView<Card> sources = game.getCardsIn(ZoneType.Battlefield);
-        if (sa.hasParam("ValidCards")) {
-            sources = CardLists.getValidCards(sources, sa.getParam("ValidCards"), sa.getActivatingPlayer(), card, sa);
+        FCollectionView<Card> sources;
+        if (sa.hasParam("DefinedDamagers")) {
+            sources = AbilityUtils.getDefinedCards(card, sa.getParam("DefinedDamagers"), sa);
+        } else {
+            sources = game.getCardsIn(ZoneType.Battlefield);
+            if (sa.hasParam("ValidCards")) {
+                sources = CardLists.getValidCards(sources, sa.getParam("ValidCards"), sa.getActivatingPlayer(), card, sa);
+            }
         }
 
         boolean usedDamageMap = true;
@@ -77,12 +74,30 @@ public class DamageEachEffect extends DamageBaseEffect {
             usedDamageMap = false;
         }
 
-        for (final GameEntity ge : getTargetEntities(sa, "DefinedPlayers")) {
+        if (sa.hasParam("EachToItself")) {
             for (final Card source : sources) {
                 final Card sourceLKI = game.getChangeZoneLKIInfo(source);
 
-                // TODO shouldn't that be using Num or something first?
-                final int dmg = AbilityUtils.calculateAmount(source, "X", sa);
+                final int dmg = AbilityUtils.calculateAmount(source, num, sa);
+                damageMap.put(sourceLKI, source, dmg);
+            }
+        } else if (sa.hasParam("ToEachOther")) {
+            final CardCollection targets = AbilityUtils.getDefinedCards(card, sa.getParam("ToEachOther"), sa);
+            for (final Card damager : targets) {
+                for (final Card c : targets) {
+                    if (!c.equals(damager)) {
+                        final Card sourceLKI = game.getChangeZoneLKIInfo(damager);
+
+                        final int dmg = AbilityUtils.calculateAmount(damager, num, sa);
+                        damageMap.put(sourceLKI, c, dmg);
+                    }
+                }
+            }
+        } else for (final GameEntity ge : getTargetEntities(sa)) {
+            for (final Card source : sources) {
+                final Card sourceLKI = game.getChangeZoneLKIInfo(source);
+
+                final int dmg = AbilityUtils.calculateAmount(source, num, sa);
 
                 if (ge instanceof Card) {
                     final Card c = (Card) ge;
@@ -91,30 +106,6 @@ public class DamageEachEffect extends DamageBaseEffect {
                     }
                 } else {
                     damageMap.put(sourceLKI, ge, dmg);
-                }
-            }
-        }
-
-        if (sa.hasParam("DefinedCards")) {
-            if (sa.getParam("DefinedCards").equals("Self")) {
-                for (final Card source : sources) {
-                    final Card sourceLKI = game.getChangeZoneLKIInfo(source);
-
-                    final int dmg = AbilityUtils.calculateAmount(source, "X", sa);
-                    damageMap.put(sourceLKI, source, dmg);
-                }
-            }
-            if (sa.getParam("DefinedCards").equals("Remembered")) {
-                for (final Card source : sources) {
-                    final int dmg = AbilityUtils.calculateAmount(source, "X", sa);
-                    final Card sourceLKI = source.getGame().getChangeZoneLKIInfo(source);
-
-                    for (final Object o : card.getRemembered()) {
-                        if (o instanceof Card) {
-                            Card rememberedcard = (Card) o;
-                            damageMap.put(sourceLKI, rememberedcard, dmg);
-                        }
-                    }
                 }
             }
         }

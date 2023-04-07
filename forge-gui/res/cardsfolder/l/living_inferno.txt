@@ -2,12 +2,8 @@ Name:Living Inferno
 ManaCost:6 R R
 Types:Creature Elemental
 PT:8/5
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ FirePower | TargetMin$ Min | TargetMax$ FirePower | DividedAsYouChoose$ FirePower | SubAbility$ Retribution | RememberTargets$ True | SpellDescription$ CARDNAME deals damage equal to its power divided as you choose among any number of target creatures. Each of those creatures deals damage equal to its power to CARDNAME.
-SVar:Retribution:DB$ EachDamage | ValidCards$ Creature.IsRemembered | ValidDescription$ of those creatures | NumDmg$ X | DamageDesc$ damage equal to its power | DefinedPlayers$ Self | SubAbility$ DBCleanup | StackDescription$ then each of those creatures deals damage equal to its power to CARDNAME
-#NumDmg isn't really used here. It is left for clarity. The AF pulls Damage straight from "X" hardcoded.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$CardPower
-SVar:FirePower:Count$CardPower
-SVar:Min:SVar$FirePower/LimitMax.1
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select any number of target creatures | NumDmg$ Count$CardPower | TargetMin$ Min | TargetMax$ Count$CardPower | DividedAsYouChoose$ Count$CardPower | SubAbility$ Retribution | SpellDescription$ CARDNAME deals damage equal to its power divided as you choose among any number of target creatures.
+SVar:Retribution:DB$ EachDamage | DefinedDamagers$ ParentTarget | NumDmg$ Count$CardPower | Defined$ Self | StackDescription$ SpellDescription | SpellDescription$ Each of those creatures deals damage equal to its power to CARDNAME.
 AI:RemoveDeck:Random
+SVar:Min:Count$CardPower/LimitMax.1
 Oracle:{T}: Living Inferno deals damage equal to its power divided as you choose among any number of target creatures. Each of those creatures deals damage equal to its power to Living Inferno.
