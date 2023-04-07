@@ -1781,6 +1781,11 @@ public class AbilityUtils {
                     return doXMath(Integer.parseInt(kicked ? sq[1] : sq[2]), expr, c, ctb);
                 }
 
+                // Count$Madness.<True>.<False>
+                if (sq[0].startsWith("Madness")) {
+                    return doXMath(calculateAmount(c, sq[sa.isMadness() ? 1 : 2], ctb), expr, c, ctb);
+                }
+
                 //Count$HasNumChosenColors.<DefinedCards related to spellability>
                 if (sq[0].contains("HasNumChosenColors")) {
                     int sum = 0;
@@ -2003,10 +2008,6 @@ public class AbilityUtils {
         if (sq[0].contains("CardMulticolor")) {
             final boolean isMulti = c.getColor().isMulticolor();
             return doXMath(Integer.parseInt(sq[isMulti ? 1 : 2]), expr, c, ctb);
-        }
-        // Count$Madness.<True>.<False>
-        if (sq[0].startsWith("Madness")) {
-            return doXMath(calculateAmount(c, sq[c.isMadness() ? 1 : 2], ctb), expr, c, ctb);
         }
 
         // Count$Foretold.<True>.<False>
