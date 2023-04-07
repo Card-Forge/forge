@@ -213,8 +213,8 @@ public class InputAttack extends InputSyncronizedBase {
             return validAction;
         }
 
-        if (card.getController().isOpponentOf(playerAttacks)) {
-            if (defenders.contains(card)) { // planeswalker?
+        if (card.getController().isOpponentOf(playerAttacks) || playerAttacks.isOpponentOf(card.getProtectingPlayer())) {
+            if (defenders.contains(card)) { // planeswalker or battle?
                 setCurrentDefender(card);
                 updateMessage();
                 return true;
