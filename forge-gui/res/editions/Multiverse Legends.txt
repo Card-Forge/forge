@@ -6,28 +6,75 @@ Type=Collector_Edition
 ScryfallCode=MUL
 
 [cards]
+1 R Anafenza, Kin-Tree Spirit @Domenico Cava
+2 U Daxos, Blessed by the Sun @Jason A. Engle
 3 M Elesh Norn, Grand Cenobite @Flavio Girón
+4 M Kenrith, the Returned King @Aaron Miller
+5 U Kwende, Pride of Femeref
+6 R Sram, Senior Edificer @Adam Paquette
 7 R Thalia, Guardian of Thraben @Joshua Alvarado
+8 R Baral, Chief of Compliance @Yeong-Hao Han
 9 R Emry, Lurker of the Loch @Wylie Beckert
 10 U Inga Rune-Eyes @rishxxv
 11 M Jin-Gitaxias, Core Augur @Kekai Kotaki
+12 U Tetsuko Umezawa, Fugitive @Serena Malyon
+13 R Ayara, First of Locthwain @Omar Rayyan
 14 R Horobi, Death's Wail @Rorubei
+15 R Seizan, Perverter of Truth @Maji
 16 M Sheoldred, Whispering One @Flavio Girón
 17 M Skithiryx, the Blight Dragon @Kekai Kotaki
+18 U Tymaret, Chosen from Death @Jason A. Engle
 19 U Yargle, Glutton of Urborg @Serena Malyon
 20 R Captain Lannery Storm @Jody Clark
 21 M Ragavan, Nimble Pilferer @Magali Villeneuve
+22 R Squee, the Immortal @Eshpur
 23 M Urabrask the Hidden @Flavio Girón
+24 U Valduk, Keeper of the Flame @Tyler Crook
 25 U Zada, Hedron Grinder @Dominik Mayer
+26 U Fynn, the Fangbearer @GodMachine
+27 R Goreclaw, Terror of Qal Sisma @Domenico Cava
+28 U Renata, Called to the Hunt @Jason A. Engle
 29 M Vorinclex, Voice of Hunger @JungShan
 30 R Yedora, Grave Gardener @Matthew G. Lewis
+31 U Aegar, the Freezing Flame @Richard Luong
+32 R Arixmethes, Slumbering Isle @Jason A. Engle
 33 M Atraxa, Praetors' Voice @Justin Hernandez & Alexis Hernandez
+34 R Atris, Oracle of Half-Truths @Jason A. Engle
+35 M Aurelia, the Warleader @Alex Dos Diaz
+36 R Brudiclad, Telchor Engineer @JungShan
+37 U Dina, Soul Steeper @Benjamin Ee
+38 M Ezuri, Claw of Progress @JungShan
+39 R Firesong and Sunspeaker @Daniel Lieske
+40 U Firja, Judge of Valor @WolfSkullJack
+41 M Grimgrin, Corpse-Born @Cabrol
+42 R Gyruda, Doom of Depths @Steve Ellis
 43 U Imoti, Celebrant of Bounty @Bastien L. Deharme
 44 R Jegantha, the Wellspring @Steve Ellis
+45 R Judith, the Scourge Diva @Benjamin Ee
+46 U Juri, Master of the Revue @Julie Dillon
+47 R Kaheera, the Orphanguard @Denis Medri
+48 R Keruga, the Macrosage @Denis Medri
 49 M Kroxa, Titan of Death's Hunger @Jason A. Engle
+50 R Lathiel, the Bounteous Dawn @Shawn Wood
+51 R Lurrus of the Dream-Den @Steve Ellis
+52 R Lutri, the Spellchaser @Justine Mara Andersen
 53 M Niv-Mizzet Reborn @Illustranesia
+54 R Obosh, the Preypiercer @Denis Medri
+55 U Radha, Coalition Warlord @Justin Hernandez & Alexis Hernandez
+56 U Raff, Weatherlight Stalwart @Nino Vecia
+57 U Reyav, Master Smith @Warren Mahy
+58 U Rona, Sheoldred's Faithful @Serena Malyon
+59 U Shanna, Sisay's Legacy @Rhonda Libbey
 60 R Taigam, Ojutai Master @Domenico Cava
+61 R Teysa Karlov @Barbara Rosiak
+62 R Umori, the Collector @Daniel Warren Johnson
+63 M Yarok, the Desecrated
+64 R Yorion, Sky Nomad @Justine Mara Andersen
+65 R Zirda, the Dawnwaker @Justine Mara Andersen
 68 M Elesh Norn, Grand Cenobite @Igor Kieryluk
+69 M Kenrith, the Returned King @Kieran Yanner
+71 R Sram, Senior Edificer @Chris Rahn
+73 R Baral, Chief of Compliance @Wesley Burt
 76 M Jin-Gitaxias, Core Augur @Eric Deschamps
 81 M Sheoldred, Whispering One @Jana Schirmer & Johannes Voss
 82 M Skithiryx, the Blight Dragon @Chippy
@@ -35,5 +82,86 @@ ScryfallCode=MUL
 88 M Urabrask the Hidden @Brad Rigney
 90 U Zada, Hedron Grinder @Chris Rallis
 94 M Vorinclex, Voice of Hunger @Karl Kopinski
+97 R Arixmethes, Slumbering Isle @Dimitar Marinski
+101 R Brudiclad, Telchor Engineer @Daarken
+102 U Dina, Soul Steeper @Chris Rahn
+105 U Firja, Judge of Valor @Livia Prima
+107 R Gyruda, Doom of Depths @Tyler Jacobson
+112 R Kaheera, the Orphanguard @Ryan Pancoast
+113 R Keruga, the Macrosage @Dan Scott
 114 M Kroxa, Titan of Death's Hunger @Vincent Proce
+115 R Lathiel, the Bounteous Dawn @Lucas Graciano
+116 R Lurrus of the Dream-Den @Slawomir Maniak
+117 R Lutri, the Spellchaser @Lie Setiawan
 118 M Niv-Mizzet Reborn @Raymond Swanland
+119 R Obosh, the Preypiercer @Daarken
+121 U Raff, Weatherlight Stalwart @Eelis Kyttanen
+127 R Umori, the Collector @Jehan Choo
+128 M Yarok, the Desecrated @Daarken
+129 R Yorion, Sky Nomad @Steven Belledin
+130 R Zirda, the Dawnwaker @Jesper Ejsing
+131 R Anafenza, Kin-Tree Spirit @Domenico Cava
+132 U Daxos, Blessed by the Sun @Jason A. Engle
+133 M Elesh Norn, Grand Cenobite @Flavio Girón
+134 M Kenrith, the Returned King @Aaron Miller
+135 U Kwende, Pride of Femeref @Jody Clark
+136 R Sram, Senior Edificer @Adam Paquette
+137 R Thalia, Guardian of Thraben @Joshua Alvarado
+138 R Baral, Chief of Compliance @Yeong-Hao Han
+139 R Emry, Lurker of the Loch @Wylie Beckert
+140 U Inga Rune-Eyes @rishxxv
+141 M Jin-Gitaxias, Core Augur @Kekai Kotaki
+142 U Tetsuko Umezawa, Fugitive @Serena Malyon
+143 R Ayara, First of Locthwain @Omar Rayyan
+144 R Horobi, Death's Wail @Rorubei
+145 R Seizan, Perverter of Truth @Maji
+146 M Sheoldred, Whispering One @Flavio Girón
+147 M Skithiryx, the Blight Dragon @Kekai Kotaki
+148 U Tymaret, Chosen from Death @Jason A. Engle
+149 U Yargle, Glutton of Urborg @Serena Malyon
+150 R Captain Lannery Storm @Jody Clark
+151 M Ragavan, Nimble Pilferer @Magali Villeneuve
+152 R Squee, the Immortal @Eshpur
+153 M Urabrask the Hidden @Flavio Girón
+154 U Valduk, Keeper of the Flame @Tyler Crook
+155 U Zada, Hedron Grinder @Dominik Mayer
+156 U Fynn, the Fangbearer @GodMachine
+157 R Goreclaw, Terror of Qal Sisma @Domenico Cava
+158 U Renata, Called to the Hunt @Jason A. Engle
+159 M Vorinclex, Voice of Hunger @JungShan
+160 R Yedora, Grave Gardener @Matthew G. Lewis
+161 U Aegar, the Freezing Flame @Richard Luong
+162 R Arixmethes, Slumbering Isle @Jason A. Engle
+163 M Atraxa, Praetors' Voice @Justin Hernandez & Alexis Hernandez
+164 R Atris, Oracle of Half-Truths @Jason A. Engle
+165 M Aurelia, the Warleader @Alex Dos Diaz
+166 R Brudiclad, Telchor Engineer @JungShan
+167 U Dina, Soul Steeper @Benjamin Ee
+168 M Ezuri, Claw of Progress @JungShan
+169 R Firesong and Sunspeaker @Daniel Lieske
+170 U Firja, Judge of Valor @WolfSkullJack
+171 M Grimgrin, Corpse-Born @Cabrol
+172 R Gyruda, Doom of Depths @Steve Ellis
+173 U Imoti, Celebrant of Bounty @Bastien L. Deharme
+174 R Jegantha, the Wellspring @Steve Ellis
+175 R Judith, the Scourge Diva @Benjamin Ee
+176 U Juri, Master of the Revue @Julie Dillon
+177 R Kaheera, the Orphanguard @Denis Medri
+178 R Keruga, the Macrosage @Denis Medri
+179 M Kroxa, Titan of Death's Hunger @Jason A. Engle
+180 R Lathiel, the Bounteous Dawn @Shawn Wood
+181 R Lurrus of the Dream-Den @Steve Ellis
+182 R Lutri, the Spellchaser @Justine Mara Andersen
+183 M Niv-Mizzet Reborn @Illustranesia
+184 R Obosh, the Preypiercer @Denis Medri
+185 U Radha, Coalition Warlord @Justin Hernandez & Alexis Hernandez
+186 U Raff, Weatherlight Stalwart @Nino Vecia
+187 U Reyav, Master Smith @Warren Mahy
+188 U Rona, Sheoldred's Faithful @Serena Malyon
+189 U Shanna, Sisay's Legacy @Rhonda Libbey
+190 R Taigam, Ojutai Master @Domenico Cava
+191 R Teysa Karlov @Barbara Rosiak
+192 R Umori, the Collector @Daniel Warren Johnson
+193 M Yarok, the Desecrated
+194 R Yorion, Sky Nomad @Justine Mara Andersen
+195 R Zirda, the Dawnwaker @Justine Mara Andersen

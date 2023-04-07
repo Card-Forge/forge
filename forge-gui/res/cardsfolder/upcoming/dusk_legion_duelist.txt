@@ -1,0 +1,9 @@
+Name:Dusk Legion Duelist
+ManaCost:1 W
+Types:Creature Vampire Soldier
+PT:2/2
+K:Vigilance
+T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | ActivationLimit$ 1 | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigDraw | TriggerDescription$ Whenever one or more +1/+1 counters are put on CARDNAME, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+DeckHints:Ability$Counters
+Oracle:Vigilance\nWhenever one or more +1/+1 counters are put on Dusk Legion Duelist, draw a card. This ability triggers only once each turn.

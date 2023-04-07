@@ -2,6 +2,7 @@ Name:Harried Artisan
 ManaCost:2 R
 Types:Creature Human Artificer
 PT:2/3
+K:Haste
 A:AB$ SetState | Cost$ 3 WP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
 AlternateMode:DoubleFaced
 Oracle:Haste\n{3}{W/P}: Transform Harried Artisan. Activate only as a sorcery. ({W/P} can be paid with {W} or 2 life.)

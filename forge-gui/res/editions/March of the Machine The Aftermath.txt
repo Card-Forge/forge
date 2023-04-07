@@ -7,3 +7,4 @@ ScryfallCode=MAT
 
 [cards]
 34 R The Kenriths' Royal Funeral @Manuel Castañón
+230 Jolrael, Voice of Zhalfir @Ernanda Souza

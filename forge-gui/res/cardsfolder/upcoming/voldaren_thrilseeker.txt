@@ -1,0 +1,11 @@
+Name:Voldaren Thrillseeker
+ManaCost:2 R
+Types:Creature Vampire Warrior
+PT:1/1
+K:Backup:2:BackupAbility
+SVar:BackupAbility:DB$ Animate | Abilities$ ABDealDamage
+SVar:ABDealDamage:AB$ DealDamage | Cost$ 1 Sac<1/CARDNAME/this creature> | ValidTgts$ Player,Creature,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ It deals damage equal to its power to any target.
+A:AB$ DealDamage | Cost$ 1 Sac<1/CARDNAME/this creature> | ValidTgts$ Player,Creature,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ It deals damage equal to its power to any target.
+SVar:X:Sacrificed$CardPower
+DeckHas:Ability$Counters|Sacrifice
+Oracle:Backup 2 (When this creature enters the battlefield, put two +1/+1 counters on target creature. If that's another creature, it gains the following ability until end of turn.)\n{1}, Sacrifice this creature: It deals damage equal to its power to any target.

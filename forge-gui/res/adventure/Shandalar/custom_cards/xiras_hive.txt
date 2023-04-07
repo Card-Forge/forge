@@ -5,7 +5,7 @@ Types:Creature Insect
 PT:0/2
 K:Defender
 K:Reach
-S:Mode$ Continuous | Affected$ Insect.YouCtrl+nonToken | EffectZone$ Battlefield | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Double Team | Description$ Nontoken Insects you control have +1/+1 and double team.
+S:Mode$ Continuous | Affected$ Insect.YouCtrl+nonToken | EffectZone$ Battlefield | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Double team | Description$ Nontoken Insects you control have +1/+1 and double team.
 T:Mode$ DamageDone | ActivationLimit$ 1 | ValidSource$ Card.OppCtrl,Emblem.OppCtrl | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ When a source an opponent controls deals damage to you for the first time each turn, put an egg counter on CARDNAME.
 SVar:TrigCounter:DB$ PutCounter | CounterType$ EGG | CounterNum$ 1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create X 1/1 black Insect tokens for each egg counter on CARDNAME.

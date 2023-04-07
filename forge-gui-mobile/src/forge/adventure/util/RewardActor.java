@@ -285,7 +285,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 Sprite item = reward.getItem().sprite();
                 setItemTooltips(item, backSprite);
                 boolean isQuestItemLoot = RewardScene.Type.Loot.equals(type) && reward.getItem().questItem;
-                processSprite(backSprite, item, isQuestItemLoot ? Controls.newTextraLabel("[%]" + reward.getItem().name) : null, 0, -10);
+                processSprite(backSprite, item, isQuestItemLoot ? Controls.newTextraLabel("[%]" + reward.getItem().name) : null, 0, isQuestItemLoot ? -10 : 0);
                 needsToBeDisposed = true;
                 break;
             }

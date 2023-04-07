@@ -1,0 +1,13 @@
+Name:Archpriest of Shadows
+ManaCost:3 B B
+Types:Creature Human Warlock
+PT:4/4
+K:Backup:1:BackupAbilities
+SVar:BackupAbilities:DB$ Animate | Keywords$ Deathtouch | Triggers$ DamageTrig
+SVar:DamageTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Battle | Execute$ TrigReturn | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player or battle, return target creature card from your graveyard to the battlefield.
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Battle | Execute$ TrigReturn | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player or battle, return target creature card from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature from your graveyard | Origin$ Graveyard | Destination$ Battlefield
+DeckHas:Ability$Counters|Graveyard
+DeckHints:Ability$Discard|Sacrifice
+Oracle:Backup 1 (When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following abilities until end of turn.)\nDeathtouch\nWhenever this creature deals combat damage to a player or battle, return target creature card from your graveyard to the battlefield.

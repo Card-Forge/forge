@@ -314,6 +314,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 // only one mode can be used
                 tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(tgtCard, sas);
             }
+
             // in case player canceled from choice dialog
             if (tgtSA == null) {
                 if (wasFaceDown) {

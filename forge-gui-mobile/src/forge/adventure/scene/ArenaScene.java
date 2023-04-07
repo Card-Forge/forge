@@ -100,10 +100,13 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
     private void showAreYouSure() {
         if (concedeDialog == null) {
-            concedeDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblConcedeTitle"), "\n" + Forge.getLocalizer().getMessage("lblConcedeCurrentGame"), () -> {
-                loose();
-                removeDialog();
-            }, this::removeDialog);
+            concedeDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblConcedeTitle"),
+                    "\n" + Forge.getLocalizer().getMessage("lblConcedeCurrentGame"),
+                    Forge.getLocalizer().getMessage("lblYes"),
+                    Forge.getLocalizer().getMessage("lblNo"), () -> {
+                        this.loose();
+                        removeDialog();
+                    }, this::removeDialog);
         }
         showDialog(concedeDialog);
     }
@@ -117,10 +120,12 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
     private void startDialog() {
         if (startDialog == null) {
-            startDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblStart"), Forge.getLocalizer().getMessage("lblStartArena"), () -> {
-                startArena();
-                removeDialog();
-            }, this::removeDialog);
+            startDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblStart"),
+                    Forge.getLocalizer().getMessage("lblStartArena"), Forge.getLocalizer().getMessage("lblYes"),
+                    Forge.getLocalizer().getMessage("lblNo"), () -> {
+                        this.startArena();
+                        removeDialog();
+                    }, this::removeDialog);
         }
         showDialog(startDialog);
     }
@@ -287,14 +292,15 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
 
         for (int i = 0; i < numberOfEnemies; i++) {
-            EnemyData enemyData = WorldData.getEnemy(data.enemyPool[rand.nextInt(data.enemyPool.length)]);
+            EnemyData enemyData = null;
+            while (enemyData == null)
+                enemyData = WorldData.getEnemy(data.enemyPool[rand.nextInt(data.enemyPool.length)]);
             EnemySprite enemy = new EnemySprite(enemyData);
             enemies.add(enemy);
             fighters.add(new ArenaRecord(new Image(enemy.getAvatar()), enemyData.name));
         }
         fighters.add(new ArenaRecord(new Image(Current.player().avatar()), Current.player().getName()));
         player = fighters.get(fighters.size - 1).actor;
-
 
         goldLabel.setText(data.entryFee + " [+Gold]");
         goldLabel.layout();

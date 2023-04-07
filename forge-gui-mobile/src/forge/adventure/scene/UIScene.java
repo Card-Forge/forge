@@ -20,8 +20,6 @@ import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.util.*;
-import forge.sound.SoundEffectType;
-import forge.sound.SoundSystem;
 
 import java.time.LocalTime;
 
@@ -85,36 +83,6 @@ public class UIScene extends Scene {
         public float xDiff(Selectable finalOne) {
             return Math.abs(finalOne.getX() - getX());
         }
-    }
-
-    static final public int ButtonYes = 0x1;
-    static final public int ButtonNo = 0x2;
-    static final public int ButtonOk = 0x4;
-    static final public int ButtonAbort = 0x8;
-
-    public Dialog prepareDialog(String header, int buttons, Runnable onOkOrYes) {
-        Dialog dialog = new Dialog(header, Controls.getSkin()) {
-            protected void result(Object object) {
-                SoundSystem.instance.play(SoundEffectType.ButtonPress, false);
-                if (onOkOrYes != null && object != null && object.equals(true))
-                    onOkOrYes.run();
-                this.hide();
-                removeDialog();
-            }
-        };
-        if ((buttons & ButtonYes) != 0)
-            dialog.button(Forge.getLocalizer().getMessage("lblYes"), true);
-        if ((buttons & ButtonNo) != 0)
-            dialog.button(Forge.getLocalizer().getMessage("lblNo"), false);
-        if ((buttons & ButtonOk) != 0)
-            dialog.button(Forge.getLocalizer().getMessage("lblOk"), true);
-        if ((buttons & ButtonAbort) != 0)
-            dialog.button(Forge.getLocalizer().getMessage("lblAbort"), false);
-
-        dialog.setMovable(false);
-        dialog.setKeepWithinStage(true);
-        dialog.setResizable(false);
-        return dialog;
     }
 
     public void showDialog(Dialog dialog) {
@@ -224,7 +192,6 @@ public class UIScene extends Scene {
     }
 
     public UIScene(String uiFilePath) {
-
         uiFile = uiFilePath;
         stage = new Stage(new ScalingViewport(Scaling.stretch, getIntendedWidth(), getIntendedHeight())) {
             @Override
@@ -271,11 +238,12 @@ public class UIScene extends Scene {
         }
     }
 
-    public Dialog createGenericDialog(String title, String label, Runnable runnableYes, Runnable runnableNo) {
-        Dialog dialog = new Dialog(title, Controls.getSkin());
-        dialog.text(label);
-        TextraButton yes = Controls.newTextButton(Forge.getLocalizer().getMessage("lblYes"), runnableYes);
-        TextraButton no = Controls.newTextButton(Forge.getLocalizer().getMessage("lblNo"), runnableNo);
+    public Dialog createGenericDialog(String title, String label, String stringYes, String stringNo, Runnable runnableYes, Runnable runnableNo) {
+        Dialog dialog = new Dialog(title == null ? "" : title, Controls.getSkin());
+        if (label != null)
+            dialog.text(label);
+        TextraButton yes = Controls.newTextButton(stringYes, runnableYes);
+        TextraButton no = Controls.newTextButton(stringNo, runnableNo);
         dialog.button(yes).button(no);
         return dialog;
     }
@@ -741,5 +709,10 @@ public class UIScene extends Scene {
     public void updateInput() {
         super.updateInput();
         Gdx.input.setInputProcessor(stage);
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
     }
 }
