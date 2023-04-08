@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="22" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="189">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="189">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
- <layer id="17" name="Collision" width="22" height="21">
+ <layer id="17" name="Collision" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4B8MI8Tgmll9kABQnYT6zZY+CCHEz696OrR9SKrc0PCMODGiR9PIyCPjpHNxWYHOsAlR6m5uAAutbjsINYccszVlMBUSw1zcanHFabE2EeMucSowyeGzCc2XtHVk5pOSQGUmAsAF1Enxw==
+   eJxjYEAAN04EJgeQqg/ZPhM+0jCyXmIxue6kBIzaS397QeljIOwdaeE8UPbSE1DL3g8U2DsS4heXG0gBHxgGLpznkVH3UcNeUgHMLkrqeWrYC8PzOFHl0QGx4cooysDABMW46n1sZuOzFxdG9xc57SZCbZhpBNoy6PqJBejpDpd+XHLk+pdYe4nRTwogNZ9h8y817QXFm6YEgg2Tp4e92Nj42snk2kusemqUQfjSKDY+tco9XOUZsX0QagJq2gsA+rk9Fg==
   </data>
  </layer>
- <layer id="13" name="background" width="22" height="21" visible="0">
+ <layer id="13" name="background" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJy1kjEOgjAUhhsdgBlLXHTrMdS4eAt08Fga0bh4A0adSLyI8RbKH3ihPEuBWF7yhdK+fm1fG/tCzD0hHo5ROfEAbjWQWzH31pFfGSC/CVpz5lV9CL4Xk9cGrbkrfRT3P70UetuFdz8xe3nt+nrbzkHxCtrzu3pvfsUmsLub6snz3kF9HF7wyes2kgV6m7iyf54zlmZvIqv2QRb3k4X1vSHQfyrz8UUOuFi855LE4kUffOvo10suHbjSaYHuBeSFh6D9kruPV/dwXHqpBuDI7nEVNXsx7xnW5+voQfdkcpm8mcVLY328i/wcSwZ/w13O3YW2sM39AmVIvqc=
+   eJzF10sOgjAQBuBGF9U1j7jRHcdQ48ZbqAuPpRGNh3DrisTbeAN1AhOGUfuihUn+iND2K5WEKkSzBon/2FYR+UnXXijXtJ9P17SvTYVYQxu3bRsXt4/qw92MhJhJIe6a8NJd11Um7W2TeZm4pvZTlPHpor1V+KFc7vNQdyrr8y71y/0XdMHaOXoubiab/bp093E/rm4dfPmmc7Ot9Vjv4nXVPC+W+xtwIa+43h/RY8yVfedtho5untTHh6R8fvB9Qe8dzp+q9vCJ70fX+4VxzlVyhQvnwFul3y6Ohb+dqXublKEuBF1wMHi/aPt0qcPTpYtrDDmy52yZursw7iNqjk9DC58jarVxC4VL93a+3PlnnRYsqv9AfF1d3dB93wGw61A=
   </data>
  </layer>
- <layer id="18" name="Tilelaag 4" width="22" height="21">
+ <layer id="18" name="Tilelaag 4" width="30" height="30">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFgx3EcVDXvHmcCDySzcVlBy3toTVgFEWw/4vQzh5VFQhORrIDxPZWg2BywWEVCEY3l1qAmmYhA00JTHaLOPH6Z4tiF1eWQGXTwv0gM2GYFIDuPzUJCEbn0yrMBxIAAEYKFck=
+   eJzdlsFKw0AQhkdL2fbiRVtzU7AWvPcqHvQg+AxaxKM+hs/gRan0QawW8UEU9FrfQHcZhozTTTLdDlH84YMJu803u9mSDNYABr/ESgdgtSYandx77+vzjTQ04fPHid6i+5X1ofHetJEtB3DctGHb6b3vfv6TW44ZINN/4D3042ctpC5vcE5cPvfB10eR+aneokyZk3h0OGbhnRV4X/3YVQPgE5BLX7+xPsPvPpp6L++/zEtrJi+t1dIr0Xo5KftMyDMjvbHnSmtexBvOKP1PYgxbufe0ZF5govQumpf1+fMtqfKmJHhDRu2cOryxkF++r7h3vxt/P1uF3/egW/4NMjb0hlR981DumPcrYf9Hom+tV2a3h1ywHkJ90keqkup97iHSq02qN8Vl6d3L5uvrTTvvbcF53sl+1tr1L7tenuAkLL1y//oZIq+tvZb5K95vDh8hYA==
   </data>
  </layer>
  <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
-  <object id="140" template="../obj/treasure.tx" x="244.807" y="243.623">
+  <object id="140" template="../obj/treasure.tx" x="308.807" y="387.623">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -40,8 +40,8 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="166" template="../obj/manashards.tx" x="264.662" y="243.554"/>
-  <object id="167" template="../obj/booster.tx" x="239.919" y="200.208">
+  <object id="166" template="../obj/manashards.tx" x="328.662" y="387.554"/>
+  <object id="167" template="../obj/booster.tx" x="302.266" y="347.927">
    <properties>
     <property name="reward">[
   {
@@ -66,7 +66,7 @@
 </property>
    </properties>
   </object>
-  <object id="168" template="../obj/gate.tx" gid="3221229597" x="215.774" y="217.405" width="19.0838" height="21.9971" rotation="90.4687">
+  <object id="168" template="../obj/gate.tx" gid="3221229597" x="287.624" y="361.405" width="13.6923" height="20.7576" rotation="90.4687" visible="1">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This door is locked&quot;,
@@ -82,88 +82,13 @@
 }]</property>
    </properties>
   </object>
-  <object id="170" template="../obj/door_down.tx" x="51.686" y="261.017" width="20.0022" height="20.8327" rotation="0.284412">
+  <object id="170" template="../obj/door_down.tx" x="115.686" y="405.017" width="20.0022" height="20.8327" rotation="0.284412">
    <properties>
     <property name="direction" value="left"/>
     <property name="teleport" value="maps/map/grolnok.tmx"/>
    </properties>
   </object>
-  <object id="174" template="../obj/booster.tx" x="267.327" y="198.96">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;AVR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;AVR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;AVR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  }
-]
-</property>
-   </properties>
-  </object>
-  <object id="175" template="../obj/booster.tx" x="267.327" y="198.96">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;AVR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;AVR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;AVR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  }
-]
-</property>
-   </properties>
-  </object>
-  <object id="176" template="../obj/booster.tx" x="267.327" y="198.96">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;CLB&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CLB&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CLB&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  }
-]
-</property>
-   </properties>
-  </object>
-  <object id="177" template="../obj/booster.tx" x="255.345" y="216.314">
+  <object id="177" template="../obj/booster.tx" x="326.782" y="347.092">
    <properties>
     <property name="reward">[
   {
@@ -188,13 +113,13 @@
 </property>
    </properties>
   </object>
-  <object id="181" template="../obj/enemy.tx" x="157.421" y="209.28" width="16" height="17.6724">
+  <object id="181" template="../obj/enemy.tx" x="221.421" y="353.28" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Wild Rat"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="182" template="../obj/enemy.tx" x="149.157" y="99.3733" width="16" height="17.6724">
+  <object id="182" template="../obj/enemy.tx" x="247.038" y="149.581" width="16" height="17.6724">
    <properties>
     <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Grolnok's Boss Effect&quot;]
 }</property>
@@ -211,7 +136,7 @@
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="183" template="../obj/gate.tx" gid="3221229597" x="157.022" y="193.886" width="15.7579" height="22.3749" rotation="359.183">
+  <object id="183" template="../obj/gate.tx" gid="3221229597" x="221.022" y="337.886" width="15.7579" height="22.3749" rotation="359.183">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This door is locked&quot;,
@@ -227,7 +152,5 @@
 }]</property>
    </properties>
   </object>
-  <object id="187" template="../obj/collision.tx" x="348.724" y="9.37802" width="16" height="321.205"/>
-  <object id="188" template="../obj/collision.tx" x="-19.8347" y="-11.4879" width="16" height="231.544"/>
  </objectgroup>
 </map>

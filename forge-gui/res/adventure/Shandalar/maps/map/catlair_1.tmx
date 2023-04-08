@@ -5,9 +5,10 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../tileset/Dungeon.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJyrZWFgqB3Fo3gUj+JRPIpH8YjAADIiAQ4=
+   eJyrZWFgqB3Fo3gUj+JRTDPMazjwbhjFoxiGAYY2AMs=
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
