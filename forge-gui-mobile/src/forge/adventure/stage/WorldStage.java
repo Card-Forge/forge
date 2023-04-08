@@ -192,9 +192,15 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     if (point == collidingPoint) {
                         continue;
                     }
-                     TileMapScene.instance().load(point.getPointOfInterest());
-                    stop();
-                    Forge.switchScene(TileMapScene.instance());
+                    try {
+                        TileMapScene.instance().load(point.getPointOfInterest());
+                        stop();
+                        Forge.switchScene(TileMapScene.instance());
+                        point.getMapSprite().checkOut();
+                    } catch (Exception e) {
+                        System.err.println("Error loading map...");
+                        e.printStackTrace();
+                    }
                 } else {
                     if (point == collidingPoint) {
                         collidingPoint = null;
