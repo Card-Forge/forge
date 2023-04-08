@@ -10,7 +10,9 @@ import com.badlogic.gdx.graphics.Texture.TextureWrap;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
+import forge.util.ImageFetcher;
 
 public enum FSkinTexture implements FImage {
     BG_TEXTURE(ForgeConstants.TEXTURE_BG_FILE, true, false),
@@ -198,7 +200,7 @@ public enum FSkinTexture implements FImage {
     private final boolean repeat;
     private Texture texture;
     private final boolean isPlanechaseBG;
-    private static List<String> PlanesValue;
+    private static List<String> planechaseString;
     private boolean isloaded = false;
     private boolean hasError = false;
 
@@ -207,19 +209,18 @@ public enum FSkinTexture implements FImage {
         repeat = repeat0;
         isPlanechaseBG = isPlanechaseBG0;
     }
-
-    static {
-        PlanesValue = new ArrayList<>();
-        for (FSkinTexture PlanesEnum : FSkinTexture.values()) {
-                PlanesValue.add(PlanesEnum.filename
-                        .replace(".jpg", "")
-                        .replace("'", "")
-                        .replace("-", ""));
-        }
-    }
-
     public static List<String> getValues() {
-        return Collections.unmodifiableList(PlanesValue);
+        if (planechaseString == null) {
+            planechaseString = new ArrayList<>();
+            for (FSkinTexture fskinTexture : FSkinTexture.values()) {
+                if (fskinTexture.isPlanechaseBG)
+                    planechaseString.add(fskinTexture.filename
+                            .replace(".jpg", "")
+                            .replace("'", "")
+                            .replace("-", ""));
+            }
+        }
+        return Collections.unmodifiableList(planechaseString);
     }
 
     public void load() {
@@ -243,6 +244,11 @@ public enum FSkinTexture implements FImage {
             //use default file if can't use preferred file
             FileHandle defaultFile = FSkin.getDefaultSkinFile(filename);
             if(isPlanechaseBG) {
+                ImageFetcher fetcher = GuiBase.getInterface().getImageFetcher();
+                fetcher.fetchImage("PLANECHASEBG:" + filename, () -> {
+                    hasError = false;
+                    load();
+                });
                 defaultFile = FSkin.getSkinFile(ForgeConstants.MATCH_BG_FILE);
                 if(!defaultFile.exists())
                     defaultFile = FSkin.getDefaultSkinFile(ForgeConstants.MATCH_BG_FILE);
