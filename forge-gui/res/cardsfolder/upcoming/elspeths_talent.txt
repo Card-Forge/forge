@@ -1,0 +1,12 @@
+Name:Elspeth's Talent
+ManaCost:2 W W
+Types:Enchantment Aura
+K:Enchant planeswalker
+A:SP$ Attach | AILogic$ Pump | ValidTgts$ Planeswalker
+S:Mode$ Continuous | Affected$ Planeswalker.EnchantedBy | AddAbility$ ElspethPlus | Description$ Enchanted planeswalker has "[+1]: Create three 1/1 white Soldier creature tokens."
+SVar:ElspethPlus:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 3 | TokenScript$ w_1_1_soldier | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create three 1/1 white Soldier creature tokens.
+T:Mode$ AbilityCast | ValidCard$ Planeswalker.EnchantedBy+inRealZoneBattlefield | ValidSA$ Activated.Loyalty | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever you activate a loyalty ability of enchanted planeswalker, creatures you control get +2/+2 and gain vigilance until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Vigilance
+SVar:BuffedBy:Creature
+DeckNeeds:Type$Planeswalker
+Oracle:Enchant planeswalker\nEnchanted planeswalker has "[+1]: Create three 1/1 white Soldier creature tokens."\nWhenever you activate a loyalty ability of enchanted planeswalker, creatures you control get +2/+2 and gain vigilance until end of turn.
