@@ -42,20 +42,19 @@ public class MapSprite extends Actor {
         isOldorVisited = true;
     }
 
-    public static Array<Actor> GetMapSprites(int chunkX, int chunkY) {
+    private static Array<Actor> getMapSprites(int chunkX, int chunkY, int layer) {
         Array<Actor> actorGroup = new Array<>();
-        List<PointOfInterest> pointsOfInterest = WorldSave.getCurrentSave().getWorld().getPointsOfInterest(chunkX, chunkY);
-        for (PointOfInterest poi : pointsOfInterest) {
-
-            Actor sprite = new PointOfInterestMapSprite(poi);
-            actorGroup.add(sprite);
-        }
-
         List<Pair<Vector2, Integer>> objects = WorldSave.getCurrentSave().getWorld().GetMapObjects(chunkX, chunkY);
-
+        if (layer == SpriteLayer) {
+            List<PointOfInterest> pointsOfInterest = WorldSave.getCurrentSave().getWorld().getPointsOfInterest(chunkX, chunkY);
+            for (PointOfInterest poi : pointsOfInterest) {
+                Actor sprite = new PointOfInterestMapSprite(poi);
+                actorGroup.add(sprite);
+            }
+        }
         for (Pair<Vector2, Integer> entry : objects) {
             BiomeSpriteData data = WorldSave.getCurrentSave().getWorld().getObject(entry.getValue());
-            if (data.layer != SpriteLayer)
+            if (data.layer != layer)
                 continue;
             Actor sprite = new MapSprite(entry.getKey(), WorldSave.getCurrentSave().getWorld().getData().GetBiomeSprites().getSprite(data.name, (int) entry.getKey().x + (int) entry.getKey().y * 11483), null);
             actorGroup.add(sprite);
@@ -63,17 +62,12 @@ public class MapSprite extends Actor {
         return actorGroup;
     }
 
-    public static Array<Actor> GetMapSpritesBackground(int chunkX, int chunkY) {
-        List<Pair<Vector2, Integer>> objects = WorldSave.getCurrentSave().getWorld().GetMapObjects(chunkX, chunkY);
-        Array<Actor> actorGroup = new Array<>();
-        for (Pair<Vector2, Integer> entry : objects) {
-            BiomeSpriteData data = WorldSave.getCurrentSave().getWorld().getObject(entry.getValue());
-            if (data.layer != BackgroundLayer)
-                continue;
-            Actor sprite = new MapSprite(entry.getKey(), WorldSave.getCurrentSave().getWorld().getData().GetBiomeSprites().getSprite(data.name, (int) entry.getKey().x + (int) entry.getKey().y * 11483), null);
-            actorGroup.add(sprite);
-        }
-        return actorGroup;
+    public static Array<Actor> getSpriteLayer(int chunkX, int chunkY) {
+        return getMapSprites(chunkX, chunkY, SpriteLayer);
+    }
+
+    public static Array<Actor> getBackroundLayer(int chunkX, int chunkY) {
+        return getMapSprites(chunkX, chunkY, BackgroundLayer);
     }
 
     //BitmapFont font;

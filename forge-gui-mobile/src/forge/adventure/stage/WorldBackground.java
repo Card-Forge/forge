@@ -83,13 +83,13 @@ public class WorldBackground extends Actor {
 
     public void loadChunk(int x, int y) {
         if (chunksSprites[x][y] == null)
-            chunksSprites[x][y] =  MapSprite.GetMapSprites(x, y);
+            chunksSprites[x][y] =  MapSprite.getSpriteLayer(x, y);
 
         for (Actor sprite : chunksSprites[x][y]) {
             stage.getSpriteGroup().addActor(sprite);
         }
         if (chunksSpritesBackground[x][y] == null)
-            chunksSpritesBackground[x][y] =  MapSprite.GetMapSpritesBackground(x, y);
+            chunksSpritesBackground[x][y] =  MapSprite.getBackroundLayer(x, y);
         for (Actor sprite : chunksSpritesBackground[x][y]) {
             stage.getBackgroundSprites().addActor(sprite);
         }
