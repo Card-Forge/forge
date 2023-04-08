@@ -576,6 +576,13 @@ public class CardDetailUtil {
             area.append("+");
         }
 
+        if (card.getProtectingPlayer() != null) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("Protected by: ").append(card.getProtectingPlayer());
+        }
+
         // cloned via
         if (card.getCloneOrigin() != null) {
             if (area.length() != 0) {
