@@ -87,6 +87,20 @@ public abstract class ImageFetcher {
         if (imageKey.length() < 2)
             return;
 
+        //planechaseBG file...
+        if (imageKey.startsWith("PLANECHASEBG:")) {
+            final ArrayList<String> downloadUrls = new ArrayList<>();
+            final String filename = imageKey.substring("PLANECHASEBG:".length());
+            downloadUrls.add("https://downloads.cardforge.org/images/planes/" + filename);
+            FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_PLANECHASE_PICS_DIR);
+            File destFile = new File(ForgeConstants.CACHE_PLANECHASE_PICS_DIR, filename);
+            if (destFile.exists())
+                return;
+
+            setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
+            return;
+        }
+
         boolean useArtCrop = "Crop".equals(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_ART_FORMAT));
         final String prefix = imageKey.substring(0, 2);
         final ArrayList<String> downloadUrls = new ArrayList<>();
@@ -234,8 +248,9 @@ public abstract class ImageFetcher {
             return;
         }
 
-        final String destPath = destFile.getAbsolutePath();
-
+        setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
+    }
+    private void setupObserver(final String destPath, final Callback callback, final ArrayList<String> downloadUrls) {
         // Note: No synchronization is needed here because this is executed on
         // EDT thread (see assert on top) and so is the notification of observers.
         HashSet<Callback> observers = currentFetches.get(destPath);
