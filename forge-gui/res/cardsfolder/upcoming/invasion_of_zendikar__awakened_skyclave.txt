@@ -2,11 +2,8 @@ Name:Invasion of Zendikar
 ManaCost:3 G
 Types:Battle Siege
 Defense:3
-# The following commands should be pulled out into the codebase
-K:etbCounter:DEFENSE:3
-# The above commands should be pulled out into the codebase
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
-SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 2 | Shuffle$ True
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 2 | Shuffle$ True
 Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it’s defeated, exile it, then cast it transformed.) When Invasion of Zendikar enters the battlefield, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
 
 AlternateMode:DoubleFaced
