@@ -1,11 +1,12 @@
-Name:Towashi
+Name:Riptide Island
 ManaCost:no cost
-Types:Plane Kamigawa
-S:Mode$ Continuous | Affected$ Creature.modified+YouCtrl | AddKeyword$ Trample | EffectZone$ Command | AddTrigger$ DrawTrig | Description$ Modified creatures you control have trample and "Whenever this creature deals combat damage to a player or planeswalker, draw a card." (Equipment, Auras you control, and counters are modifications.)
-SVar:DrawTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Planeswalker | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player or planeswalker, draw a card.
-SVar:TrigDraw:DB$ Draw
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever Chaos ensues, distribute three +1/+1 counters among one, two, or three target creatures you control.
-SVar:RolledChaos:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3
-DeckHas:Ability$Counters
-DeckHints:Type$Aura|Equipment & Ability$Counters
-Oracle:Modified creatures you control have trample and "Whenever this creature deals combat damage to a player or planeswalker, draw a card."(Equipment, Auras you control, and counters are modifications.)\nWhenever Chaos ensues, distribute three +1/+1 counters among one, two, or three target creatures you control.
+Types:Plane Dominaria
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, create two 1/1 colorless Sliver creature tokens.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, create two 1/1 colorless Sliver creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_sliver | TokenOwner$ You
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, Slivers you control gain haste and get +X/+X until end of turn, where X is the number of Slivers you control.
+SVar:RolledChaos:DB$ PumpAll | ValidCards$ Sliver.YouCtrl | NumAtt$ +X | NumDef$ +X | KW$ Haste
+SVar:X:Count$Valid Sliver.YouCtrl
+DeckHas:Ability$Token & Type$Sliver
+DeckHints:Type$Sliver
+Oracle:When you planeswalk to Riptide Island and at the beginning of your upkeep, create two 1/1 colorless Sliver creature tokens.\nWhenever chaos ensues, Slivers you control gain haste and get +X/+X until end of turn, where X is the number of Slivers you control.

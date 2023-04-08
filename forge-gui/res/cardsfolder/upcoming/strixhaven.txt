@@ -1,11 +1,9 @@
-Name:Towashi
+Name:Strixhaven
 ManaCost:no cost
-Types:Plane Kamigawa
-S:Mode$ Continuous | Affected$ Creature.modified+YouCtrl | AddKeyword$ Trample | EffectZone$ Command | AddTrigger$ DrawTrig | Description$ Modified creatures you control have trample and "Whenever this creature deals combat damage to a player or planeswalker, draw a card." (Equipment, Auras you control, and counters are modifications.)
-SVar:DrawTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Planeswalker | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player or planeswalker, draw a card.
-SVar:TrigDraw:DB$ Draw
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever Chaos ensues, distribute three +1/+1 counters among one, two, or three target creatures you control.
-SVar:RolledChaos:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3
-DeckHas:Ability$Counters
-DeckHints:Type$Aura|Equipment & Ability$Counters
-Oracle:Modified creatures you control have trample and "Whenever this creature deals combat damage to a player or planeswalker, draw a card."(Equipment, Auras you control, and counters are modifications.)\nWhenever Chaos ensues, distribute three +1/+1 counters among one, two, or three target creatures you control.
+Types:Plane Arcavios
+S:Mode$ Continuous | AddKeyword$ Demonstrate | Affected$ Instant,Sorcery | AffectedZone$ Stack | Description$ Instant and sorcery spells players cast have demonstrate. (Whenever a player casts an instant or sorcery spell, they may copy it. If they do, they choose an opponent to also copy it. Players may choose new targets for their copies.)
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, return up to one target instant or sorcery card from a graveyard to its owner's hand
+SVar:RolledChaos:DB$ ChangeZone | Origin$ Graveyard | TargetMin$ 0 | TargetMax$ 1 | Destination$ Hand | ValidTgts$ Creature | TgtPrompt$ Select up to target instant or sorcery spell from any graveyard
+DeckHas:Ability$Graveyard
+DeckHints:Type$Instant|Sorcery
+Oracle:Instant and sorcery spells players cast have demonstrate. (Whenever a player casts an instant or sorcery spell, they may copy it. If they do, they choose an opponent to also copy it. Players may choose new targets for their copies.)\nWhenever chaos ensues, return up to one target instant or sorcery card from a graveyard to its owner's hand
