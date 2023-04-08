@@ -702,12 +702,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         combatChanged = true;
                     }
 
-                    if (movedCard.isInPlay()) {
-                        // need to also update LKI
-                        List<Card> lki = movedCard.getZone().getCardsAddedThisTurn(null);
-                        lki.get(lki.lastIndexOf(movedCard)).setTimestamp(movedCard.getTimestamp());
-                    }
-
                     if (sa.hasParam("AttachAfter") && movedCard.isAttachment()) {
                         CardCollection list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("AttachAfter"), sa);
                         if (list.isEmpty()) {
@@ -1387,12 +1381,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         CardFactoryUtil.setFaceDownState(c, sa);
                     }
                     movedCard = game.getAction().moveToPlay(c, c.getController(), sa, moveParams);
-
-                    if (movedCard.isInPlay()) {
-                        // need to also update LKI
-                        List<Card> lki = movedCard.getZone().getCardsAddedThisTurn(null);
-                        lki.get(lki.lastIndexOf(movedCard)).setTimestamp(movedCard.getTimestamp());
-                    }
 
                     if (sa.hasParam("AttachAfter") && movedCard.isAttachment() && movedCard.isInPlay()) {
                         CardCollection list = AbilityUtils.getDefinedCards(source, sa.getParam("AttachAfter"), sa);
