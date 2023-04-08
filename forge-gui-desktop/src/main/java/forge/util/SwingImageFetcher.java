@@ -30,6 +30,8 @@ public class SwingImageFetcher extends ImageFetcher {
         private void doFetch(String urlToDownload) throws IOException {
             String newdespath = urlToDownload.contains(".fullborder.jpg") ?
                     TextUtil.fastReplace(destPath, ".full.jpg", ".fullborder.jpg") : destPath;
+            if (!newdespath.contains(".full") && urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD))
+                newdespath = newdespath.replace(".jpg", ".fullborder.jpg"); //fix planes/phenomenon for round border options
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
             BufferedImage image = ImageIO.read(url);
