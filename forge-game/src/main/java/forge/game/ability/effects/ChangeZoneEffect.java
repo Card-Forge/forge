@@ -505,7 +505,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         final boolean optional = sa.hasParam("Optional");
         final boolean shuffle = sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle"));
-        final long ts = game.getNextTimestamp();
         boolean combatChanged = false;
 
         Player chooser = player;
@@ -701,13 +700,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         game.getCombat().addAttacker(movedCard, defender);
                         game.getCombat().getBandOfAttacker(movedCard).setBlocked(false);
                         combatChanged = true;
-                    }
-
-                    movedCard.setTimestamp(ts);
-                    if (movedCard.isInPlay()) {
-                        // need to also update LKI
-                        List<Card> lki = movedCard.getZone().getCardsAddedThisTurn(null);
-                        lki.get(lki.lastIndexOf(movedCard)).setTimestamp(ts);
                     }
 
                     if (sa.hasParam("AttachAfter") && movedCard.isAttachment()) {
@@ -1284,7 +1276,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             List<ZoneType> origin = HiddenOriginChoicesMap.get(player).origin;
             ZoneType destination = HiddenOriginChoicesMap.get(player).destination;
             CardCollection movedCards = new CardCollection();
-            long ts = game.getNextTimestamp();
             Player decider = ObjectUtils.firstNonNull(chooser, player);
 
             for (final Card c : chosenCards) {
@@ -1390,13 +1381,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         CardFactoryUtil.setFaceDownState(c, sa);
                     }
                     movedCard = game.getAction().moveToPlay(c, c.getController(), sa, moveParams);
-
-                    movedCard.setTimestamp(ts);
-                    if (movedCard.isInPlay()) {
-                        // need to also update LKI
-                        List<Card> lki = movedCard.getZone().getCardsAddedThisTurn(null);
-                        lki.get(lki.lastIndexOf(movedCard)).setTimestamp(ts);
-                    }
 
                     if (sa.hasParam("AttachAfter") && movedCard.isAttachment() && movedCard.isInPlay()) {
                         CardCollection list = AbilityUtils.getDefinedCards(source, sa.getParam("AttachAfter"), sa);
