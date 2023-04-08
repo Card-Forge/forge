@@ -103,8 +103,6 @@ public class CardFactoryUtil {
      * abilityMorphDown.
      * </p>
      *
-     * @param sourceCard
-     *            a {@link forge.game.card.Card} object.
      * @return a {@link forge.game.spellability.SpellAbility} object.
      */
     public static SpellAbility abilityMorphDown(final CardState cardState, final boolean intrinsic) {
@@ -160,8 +158,6 @@ public class CardFactoryUtil {
      * abilityMorphUp.
      * </p>
      *
-     * @param sourceCard
-     *            a {@link forge.game.card.Card} object.
      * @return a {@link forge.game.spellability.AbilityActivated} object.
      */
     public static SpellAbility abilityMorphUp(final CardState cardState, final String costStr, final boolean mega, final boolean intrinsic) {
@@ -3930,6 +3926,28 @@ public class CardFactoryUtil {
         }
 
         return altCostSA;
+    }
+
+    public static void setupSiegeAbilities(Card card) {
+        StringBuilder chooseSB = new StringBuilder();
+        chooseSB.append("Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated");
+        chooseSB.append(" | Description$ (As a Siege enters the battlefield, choose an opponent to protect it. You and others can attack it. When it’s defeated, exile it, then cast it transformed.)");
+        String chooseProtector = "DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | Protect$ True | ChoiceTitle$ Choose an opponent to protect this battle | AILogic$ Curse";
+
+        ReplacementEffect re = ReplacementHandler.parseReplacement(chooseSB.toString(), card, true);
+        re.setOverridingAbility(AbilityFactory.getAbility(chooseProtector, card));
+        card.addReplacementEffect(re);
+
+        // Defeated trigger
+        StringBuilder triggerDefeated = new StringBuilder();
+        triggerDefeated.append("Mode$ Defeated | ValidCard$ Card.Self | Secondary$ True | ");
+        triggerDefeated.append(" TriggerDescription$ When CARDNAME is defeated, exile it, then cast it transformed.");
+
+        String castDefeatedBattle = "DB$ Play | Defined$ Self | WithoutManaCost$ True | CastTransformed$ True";
+
+        Trigger defeatedTrigger = TriggerHandler.parseTrigger(triggerDefeated.toString(), card, true);
+        defeatedTrigger.setOverridingAbility(AbilityFactory.getAbility(castDefeatedBattle, card));
+        card.addTrigger(defeatedTrigger);
     }
 
     public static void setupAdventureAbility(Card card) {
