@@ -619,6 +619,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (!isDungeon()) {
             Iterables.removeIf(subtypes, Predicates.IS_DUNGEON_TYPE);
         }
+        if (!isBattle()) {
+            Iterables.removeIf(subtypes, Predicates.IS_BATTLE_TYPE);
+        }
     }
 
     @Override
@@ -857,6 +860,12 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 return CardType.isADungeonType(input);
             }
         };
+        public static Predicate<String> IS_BATTLE_TYPE = new Predicate<String>() {
+            @Override
+            public boolean apply(String input) {
+                return CardType.isABattleType(input);
+            }
+        };
     }
 
     ///////// Utility methods
@@ -890,6 +899,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             sortedSubTypes.addAll(Constant.ARTIFACT_TYPES);
             sortedSubTypes.addAll(Constant.WALKER_TYPES);
             sortedSubTypes.addAll(Constant.DUNGEON_TYPES);
+            sortedSubTypes.addAll(Constant.BATTLE_TYPES);
             Collections.sort(sortedSubTypes);
         }
         return sortedSubTypes;
