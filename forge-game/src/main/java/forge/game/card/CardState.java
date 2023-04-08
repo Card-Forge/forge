@@ -454,23 +454,23 @@ public class CardState extends GameObject implements IHasSVars {
 
     public FCollectionView<ReplacementEffect> getReplacementEffects() {
         FCollection<ReplacementEffect> result = new FCollection<>(replacementEffects);
-
-        if (getTypeWithChanges().isPlaneswalker()) {
+        CardTypeView type = getTypeWithChanges();
+        if (type.isPlaneswalker()) {
             if (loyaltyRep == null) {
                 loyaltyRep = CardFactoryUtil.makeEtbCounter("etbCounter:LOYALTY:" + this.baseLoyalty, this, true);
             }
             result.add(loyaltyRep);
         }
-        if (getTypeWithChanges().isBattle()) {
+        if (type.isBattle()) {
             // TODO This is currently breaking for Battle/Defense
             // Going to script the cards to work but ideally it would happen here
             if (defenseRep == null) {
-                //defenseRep = CardFactoryUtil.makeEtbCounter("etbCounter:DEFENSE:" + this.baseDefense, this, true);
+                defenseRep = CardFactoryUtil.makeEtbCounter("etbCounter:DEFENSE:" + this.baseDefense, this, true);
             }
-            //result.add(defenseRep);
+            result.add(defenseRep);
 
             if (battleTypeRep == null) {
-                if(getTypeWithChanges().hasSubtype("Siege")) {
+                if(type.hasSubtype("Siege")) {
                     // battleTypeRep; // - Choose a player to protect it
                 }
             }
@@ -626,6 +626,9 @@ public class CardState extends GameObject implements IHasSVars {
         }
         if (lki && source.loyaltyRep != null) {
             this.loyaltyRep = source.loyaltyRep.copy(card, lki);
+        }
+        if (lki && source.defenseRep != null) {
+            this.defenseRep = source.defenseRep.copy(card, lki);
         }
     }
 
