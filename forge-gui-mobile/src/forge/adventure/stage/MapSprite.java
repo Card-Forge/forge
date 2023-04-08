@@ -42,7 +42,7 @@ public class MapSprite extends Actor {
         isOldorVisited = true;
     }
 
-    private static Array<Actor> getMapSprites(int chunkX, int chunkY, int layer) {
+    public static Array<Actor> getMapSprites(int chunkX, int chunkY, int layer) {
         Array<Actor> actorGroup = new Array<>();
         List<Pair<Vector2, Integer>> objects = WorldSave.getCurrentSave().getWorld().GetMapObjects(chunkX, chunkY);
         if (layer == SpriteLayer) {
@@ -60,14 +60,6 @@ public class MapSprite extends Actor {
             actorGroup.add(sprite);
         }
         return actorGroup;
-    }
-
-    public static Array<Actor> getSpriteLayer(int chunkX, int chunkY) {
-        return getMapSprites(chunkX, chunkY, SpriteLayer);
-    }
-
-    public static Array<Actor> getBackroundLayer(int chunkX, int chunkY) {
-        return getMapSprites(chunkX, chunkY, BackgroundLayer);
     }
 
     //BitmapFont font;
