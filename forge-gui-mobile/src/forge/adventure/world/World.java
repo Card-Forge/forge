@@ -510,6 +510,7 @@ public class World implements Disposable, SaveFileContent {
                                         notTowns.clear();
                                         otherPoints.clear();
                                         clearTerrain((int) (data.width * data.playerStartPosX), (int) (data.height * data.playerStartPosY), 10);
+                                        storedInfo.clear();
                                         continue here;
                                     }
                                     continue;
