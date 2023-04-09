@@ -21,7 +21,6 @@ import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -70,22 +69,16 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             amount = AbilityUtils.calculateAmount(card, sa.getParam("Amount"), sa);
         }
 
-        if (sa.hasParam("Controller")) {
-            controllers = AbilityUtils.getDefinedPlayers(card, sa.getParam("Controller"), sa);
-        }
-
         List<SpellAbility> tgtSpells = getTargetSpells(sa);
-        List<SpellAbility> cantCopy = new ArrayList<>();
 
-        for (final SpellAbility tgtSA : tgtSpells) {
-            if (StaticAbilityCantBeCopied.cantBeCopied(tgtSA.getHostCard())) {
-                cantCopy.add(tgtSA);
-            }
-        }
-        tgtSpells.removeAll(cantCopy);
+        tgtSpells.removeIf(tgtSA -> StaticAbilityCantBeCopied.cantBeCopied(tgtSA.getHostCard()));
 
         if (tgtSpells.isEmpty() || amount == 0) {
             return;
+        }
+
+        if (sa.hasParam("Controller")) {
+            controllers = AbilityUtils.getDefinedPlayers(card, sa.getParam("Controller"), sa);
         }
 
         boolean isOptional = sa.hasParam("Optional");
@@ -100,6 +93,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 continue;
             }
 
+            // CR 707.10d
             if (sa.hasParam("CopyForEachCanTarget")) {
                 // Find subability or rootability that has targets
                 SpellAbility targetedSA = chosenSA;
@@ -118,7 +112,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 all.removeAll(getTargetPlayers(chosenSA));
 
                 if (sa.hasParam("ChooseOnlyOne")) {
-                    GameEntity choice = controller.getController().chooseSingleEntityForEffect(all, sa,Localizer.getInstance().getMessage("lblChooseOne"), null);
+                    GameEntity choice = controller.getController().chooseSingleEntityForEffect(all, sa, Localizer.getInstance().getMessage("lblChooseOne"), null);
                     all.clear();
                     if (choice != null) {
                         all.add(choice);
@@ -167,6 +161,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                         }
                     }
 
+                    // CR 707.10e
                     if (sa.hasParam("DefinedTarget")) {
                         final List<GameEntity> tgts = getDefinedEntitiesOrTargeted(sa, "DefinedTarget");
                         if (tgts.isEmpty()) {
