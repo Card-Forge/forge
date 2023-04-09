@@ -1,0 +1,12 @@
+Name:Halo-Charged Skaab
+ManaCost:4 U
+Types:Creature Zombie
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, each player mills two cards. Then you may put an instant, sorcery, or battle card from your graveyard on top of your library. (To mill two cards, a player puts the top two cards of their library into their graveyard.)
+SVar:TrigMill:DB$ Mill | Defined$ Player | NumCards$ 2 | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Instant.YouOwn,Sorcery.YouOwn,Battle.YouOwn | Origin$ Graveyard | Destination$ Library | Hidden$ True
+DeckNeeds:Type$Artifact
+DeckHas:Ability$Graveyard|Mill
+DeckHints:Type$Instant|Sorcery|Battle
+Oracle:When Halo-Charged Skaab enters the battlefield, each player mills two cards. Then you may put an instant, sorcery, or battle card from your graveyard on top of your library. (To mill two cards, a player puts the top two cards of their library into their graveyard.)
+
