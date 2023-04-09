@@ -59,7 +59,6 @@ public enum TriggerType {
     DamagePrevented(TriggerDamagePrevented.class),
     DamagePreventedOnce(TriggerDamagePreventedOnce.class),
     DayTimeChanges (TriggerDayTimeChanges.class),
-    Defeated(TriggerDestroyed.class),
     Destroyed(TriggerDestroyed.class),
     Devoured(TriggerDevoured.class),
     Discarded(TriggerDiscarded.class),

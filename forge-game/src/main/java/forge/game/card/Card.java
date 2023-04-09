@@ -1578,12 +1578,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, AbilityKey.newMap(runParams), false);
         }
         runParams.put(AbilityKey.CounterAmount, delta);
+        runParams.put(AbilityKey.NewCounterAmount, newValue);
         getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemovedOnce, AbilityKey.newMap(runParams), false);
-
-        if (counterName.is(CounterEnumType.DEFENSE) && newValue == 0 && this.isBattle()) {
-            // Run defeated trigger
-            getGame().getTriggerHandler().runTrigger(TriggerType.Defeated, AbilityKey.newMap(runParams), false);
-        }
     }
 
     @Override
@@ -5567,6 +5563,27 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         }
         return getLethal() - getDamage() - getTotalAssignedDamage();
+    }
+
+    public final int getExcessDamageValue() {
+        ArrayList<Integer> excessCharacteristics = new ArrayList<Integer>();
+
+        // CR 120.10
+        if (this.isCreature()) {
+            excessCharacteristics.add(Math.max(0, this.getLethalDamage()));
+        }
+        if (this.isPlaneswalker()) {
+            excessCharacteristics.add(this.getCurrentLoyalty());
+        }
+        if (this.isBattle()) {
+            excessCharacteristics.add(this.getCurrentDefense());
+        }
+
+        if (excessCharacteristics.size() == 0) {
+            return 0;
+        }
+
+        return Collections.min(excessCharacteristics);
     }
 
     public final int getDamage() {
