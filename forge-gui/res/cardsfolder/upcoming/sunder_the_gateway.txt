@@ -1,0 +1,13 @@
+Name:Sunder the Gateway
+ManaCost:1 W
+Types:Sorcery
+A:SP$ Charm | Choices$ Destroy,Incubate
+
+SVar:Destroy:DB$ Destroy | ValidTgts$ Artifact.OppCtrl+nonToken,Enchantment.OppCtrl+nonToken | TgtPrompt$ Select target nontoken artifact or enchantment an opponent controls | SubAbility$ DBIncubate
+SVar:DBIncubate:DB$ Incubate | Amount$ 2 | StackDescription$ SpellDescription | SpellDescription$ Incubate 2, then transform an Incubator token you control.
+
+SVar:Incubate:DB$ Incubate | Amount$ 2 | StackDescription$ SpellDescription | StackDescription$ SpellDescription | SpellDescription$ Incubate 2, then transform an Incubator token you control.
+SVar:DBTransform:DB$ SetState | Choices$ Incubator.token+YouCtrl | ChoiceTitle$ Choose an Incubator token you control | Mode$ Transform
+
+
+Oracle:Choose one —\n• Destroy target nontoken artifact or enchantment an opponent controls. Incubate 2. (Create an Incubator token with two +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)\n• Incubate 2, then transform an Incubator token you control.
