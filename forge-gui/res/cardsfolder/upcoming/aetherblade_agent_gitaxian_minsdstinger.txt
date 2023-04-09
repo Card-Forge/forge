@@ -1,0 +1,20 @@
+Name:Aetherblade Agent
+ManaCost:1 B
+Types:Creature Human Rogue
+PT:1/1
+A:AB$ SetState | Cost$ 4 UP | Mode$ Transform | SorcerySpeed$ True | SpellDescription$ Transform CARDNAME. Activate only as a sorcery. ({U/P} can be paid with either {U} or 2 life.)
+AlternateMode:DoubleFaced
+DeckHints:Color$Blue
+Oracle:{4}{U/P}: Transform Aetherblade Agent. Activate only as a sorcery. ({U/P} can be paid with either {U} or 2 life.)
+
+ALTERNATE
+
+Name:Gitaxian Mindstinger
+ManaCost:no cost
+Colors:blue,black
+Types:Creature Phyrexian Rogue
+PT:3/3
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Battle | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player or battle, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:Deathtouch\nWhenever Gitaxian Mindstinger deals combat damage to a player or battle, draw a card.
