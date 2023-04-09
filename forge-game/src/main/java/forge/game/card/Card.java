@@ -5565,12 +5565,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getLethal() - getDamage() - getTotalAssignedDamage();
     }
 
-    public final int getExcessDamageValue() {
+    public final int getExcessDamageValue(boolean withDeathtouch) {
         ArrayList<Integer> excessCharacteristics = new ArrayList<Integer>();
 
         // CR 120.10
         if (this.isCreature()) {
-            excessCharacteristics.add(Math.max(0, this.getLethalDamage()));
+            int lethal = this.getLethalDamage();
+            if (withDeathtouch && lethal > 0) {
+                excessCharacteristics.add(1);
+            } else {
+                excessCharacteristics.add(Math.max(0, this.getLethalDamage()));
+            }
         }
         if (this.isPlaneswalker()) {
             excessCharacteristics.add(this.getCurrentLoyalty());
