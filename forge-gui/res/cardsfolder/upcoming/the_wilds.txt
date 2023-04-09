@@ -1,11 +1,13 @@
-Name:Towashi
+Name:The Wilds
 ManaCost:no cost
-Types:Plane Kamigawa
-S:Mode$ Continuous | Affected$ Creature.modified+YouCtrl | AddKeyword$ Trample | EffectZone$ Command | AddTrigger$ DrawTrig | Description$ Modified creatures you control have trample and "Whenever this creature deals combat damage to a player or planeswalker, draw a card." (Equipment, Auras you control, and counters are modifications.)
-SVar:DrawTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Planeswalker | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player or planeswalker, draw a card.
-SVar:TrigDraw:DB$ Draw
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever Chaos ensues, distribute three +1/+1 counters among one, two, or three target creatures you control.
-SVar:RolledChaos:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3
-DeckHas:Ability$Counters
-DeckHints:Type$Aura|Equipment & Ability$Counters
-Oracle:Modified creatures you control have trample and "Whenever this creature deals combat damage to a player or planeswalker, draw a card."(Equipment, Auras you control, and counters are modifications.)\nWhenever Chaos ensues, distribute three +1/+1 counters among one, two, or three target creatures you control.
+Types:Plane Eldraine
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, create a Food token.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, create a Food token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, target player sacrifices a creature. If they do, you create a Food token. You create two Food tokens instead if the sacrificed creature's toughness was 4 or greater.
+SVar:RolledChaos:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_food_sac | TokenAmount$ Z
+SVar:Z:Sacrificed$Valid Creature.powerGE4/Plus.1
+DeckHas:Ability$Token|Sacrifice & Type$Food
+DeckHints:Type$Food
+Oracle:When you planeswalk to The Wilds and at the beginning of your upkeep, create a Food token.\nWhenever chaos ensues, target player sacrifices a creature. If they do, you create a Food token. You create two Food tokens instead if the sacrificed creature’s toughness was 4 or greater.

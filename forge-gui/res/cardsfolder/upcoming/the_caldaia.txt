@@ -1,11 +1,8 @@
-Name:Towashi
+Name:The Caldaia
 ManaCost:no cost
-Types:Plane Kamigawa
-S:Mode$ Continuous | Affected$ Creature.modified+YouCtrl | AddKeyword$ Trample | EffectZone$ Command | AddTrigger$ DrawTrig | Description$ Modified creatures you control have trample and "Whenever this creature deals combat damage to a player or planeswalker, draw a card." (Equipment, Auras you control, and counters are modifications.)
-SVar:DrawTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Planeswalker | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player or planeswalker, draw a card.
-SVar:TrigDraw:DB$ Draw
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever Chaos ensues, distribute three +1/+1 counters among one, two, or three target creatures you control.
-SVar:RolledChaos:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3
-DeckHas:Ability$Counters
-DeckHints:Type$Aura|Equipment & Ability$Counters
-Oracle:Modified creatures you control have trample and "Whenever this creature deals combat damage to a player or planeswalker, draw a card."(Equipment, Auras you control, and counters are modifications.)\nWhenever Chaos ensues, distribute three +1/+1 counters among one, two, or three target creatures you control.
+Types:Plane Capenna
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AffectedZone$ Stack | AddKeyword$ Blitz:CardManaCost:Spell.Creature+wasCastFromYourHand | Description$ Creature spells you cast from your hand have blitz {3}. (If you cast a spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, return target creature card from your graveyard to your hand.
+SVar:RolledChaos:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl
+DeckHas:Ability$Sacrifice & Keyword$Blitz
+Oracle:Creature spells you cast from your hand have blitz {3}. (If you cast a spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)\nWhenever chaos ensues, return target creature card from your graveyard to your hand.
