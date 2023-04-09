@@ -1067,6 +1067,10 @@ public class CardProperty {
             if (!property.startsWith("without") && !card.hasStartOfUnHiddenKeyword(property.substring(4))) {
                 return false;
             }
+        } else if (property.startsWith("activated")) {
+            if (card.getPlaneswalkerAbilityActivated() <= 0) {
+                return false;
+            }
         } else if (property.startsWith("tapped")) {
             if (!card.isTapped()) {
                 return false;
