@@ -148,9 +148,9 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                     Card originalTarget = Iterables.getFirst(getTargetCards(chosenSA), null);
                     valid.remove(originalTarget);
 
+                    FCollection<GameEntity> all = new FCollection<>(valid);
+                    all.addAll(players);
                     if (sa.hasParam("ChooseOnlyOne")) {
-                        FCollection<GameEntity> all = new FCollection<>(valid);
-                        all.addAll(players);
                         GameEntity choice = controller.getController().chooseSingleEntityForEffect(all, sa,
                                 Localizer.getInstance().getMessage("lblChooseOne"), null);
                         if (choice != null) {
@@ -159,14 +159,9 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                             copies.add(copy);
                         }
                     } else {
-                        for (final Card c : valid) {
+                        for (final GameEntity ge : all) {
                             SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
-                            resetFirstTargetOnCopy(copy, c, targetedSA);
-                            copies.add(copy);
-                        }
-                        for (final Player p : players) {
-                            SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
-                            resetFirstTargetOnCopy(copy, p, targetedSA);
+                            resetFirstTargetOnCopy(copy, ge, targetedSA);
                             copies.add(copy);
                         }
                     }

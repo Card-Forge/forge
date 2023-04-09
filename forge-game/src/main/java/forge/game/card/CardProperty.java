@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.StaticData;
 import forge.card.CardDb;
-import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -145,7 +144,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("Transformed")) {
-            if (!card.getCurrentStateName().equals(CardStateName.Transformed)) {
+            if (!card.isTransformed()) {
                 return false;
             }
         } else if (property.equals("Flip")) {
