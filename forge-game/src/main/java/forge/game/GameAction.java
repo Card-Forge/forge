@@ -2422,21 +2422,7 @@ public class GameAction {
 
                 if (e.getKey() instanceof Card && !lethalDamage.containsKey(e.getKey())) {
                     Card c = (Card) e.getKey();
-                    int lethal = 0;
-                    if (c.isCreature()) {
-                        lethal = Math.max(0, c.getLethalDamage());
-                    }
-                    if (c.isPlaneswalker()) {
-                        int lethalPW = c.getCurrentLoyalty();
-                        // CR 120.10
-                        lethal = c.isCreature() ? Math.min(lethal, lethalPW) : lethalPW;
-                    }
-                    if (c.isBattle()) {
-                        int lethalBattle = c.getCurrentDefense();
-
-                        lethal = c.isCreature() || c.isPlaneswalker() ? Math.min(lethal, lethalBattle) : lethalBattle;
-                    }
-                    lethalDamage.put(c, lethal);
+                    lethalDamage.put(c, c.getExcessDamageValue());
                 }
 
                 e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, isCombat, counterTable)));

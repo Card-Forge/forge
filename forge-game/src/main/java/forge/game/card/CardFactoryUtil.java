@@ -3942,7 +3942,7 @@ public class CardFactoryUtil {
 
         // Defeated trigger
         StringBuilder triggerDefeated = new StringBuilder();
-        triggerDefeated.append("Mode$ Defeated | ValidCard$ Card.Self | Secondary$ True | ");
+        triggerDefeated.append("Mode$ CounterRemovedOnce | ValidCard$ Card.Self | Secondary$ True | CounterType$ DEFENSE | Remaining$ 0 | TriggerZones$ Battlefield  | ");
         triggerDefeated.append(" TriggerDescription$ When CARDNAME is defeated, exile it, then cast it transformed.");
 
         String castDefeatedBattle = "DB$ Play | Defined$ Self | WithoutManaCost$ True | CastTransformed$ True";
