@@ -288,7 +288,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         int excess = 0;
         int dmgToTarget = 0;
         if (sa.hasParam("ExcessDamage") || sa.hasParam("ExcessSVar")) {
-            int lethal = c.getExcessDamageValue();
+            int lethal = c.getExcessDamageValue(sourceLKI.hasKeyword(Keyword.DEATHTOUCH));
             dmgToTarget = Math.min(lethal, dmg);
             excess = dmg - dmgToTarget;
         }

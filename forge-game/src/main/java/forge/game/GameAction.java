@@ -2422,7 +2422,7 @@ public class GameAction {
 
                 if (e.getKey() instanceof Card && !lethalDamage.containsKey(e.getKey())) {
                     Card c = (Card) e.getKey();
-                    lethalDamage.put(c, c.getExcessDamageValue());
+                    lethalDamage.put(c, c.getExcessDamageValue(false));
                 }
 
                 e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, isCombat, counterTable)));
