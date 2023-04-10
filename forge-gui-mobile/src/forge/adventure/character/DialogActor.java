@@ -3,14 +3,9 @@ package forge.adventure.character;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import forge.adventure.data.AdventureQuestData;
-import forge.adventure.data.DialogData;
 import forge.adventure.stage.MapStage;
-import forge.adventure.util.AdventureQuestController;
 import forge.adventure.util.Current;
 import forge.adventure.util.MapDialog;
-
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 /**
  * Map actor that will show a text message with optional choices

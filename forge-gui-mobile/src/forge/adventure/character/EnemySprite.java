@@ -25,10 +25,8 @@ import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
-import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**

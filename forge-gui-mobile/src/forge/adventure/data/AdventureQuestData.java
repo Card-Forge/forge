@@ -4,7 +4,6 @@ package forge.adventure.data;
 import com.badlogic.gdx.utils.Array;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterest;
-import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.GameScene;
 import forge.adventure.util.AdventureQuestController;
 import forge.adventure.util.Current;

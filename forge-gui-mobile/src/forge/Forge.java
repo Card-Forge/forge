@@ -901,7 +901,6 @@ public class Forge implements ApplicationListener {
                             currentScene.render();
                             currentScene.act(delta);
                         } catch (IllegalStateException | NullPointerException ie) {
-                            String x = "xyz".substring(2);
                             //silence this..
                         }
                     }
