@@ -1982,8 +1982,6 @@ public class CardProperty {
             final String key = property.substring("NotTriggered".length());
             if (spellAbility instanceof SpellAbility) {
                 SpellAbility sa = (SpellAbility) spellAbility;
-                Object o = sa.getRootAbility().getTriggeringObject(AbilityKey.fromString(key));
-
                 if (card.equals(sa.getRootAbility().getTriggeringObject(AbilityKey.fromString(key)))) {
                     return false;
                 }
