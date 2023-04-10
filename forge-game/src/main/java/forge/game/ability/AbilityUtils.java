@@ -842,6 +842,14 @@ public class AbilityUtils {
         return objects;
     }
 
+    public static FCollection<GameEntity> getDefinedEntities(final Card card, final String[] def, final CardTraitBase sa) {
+        final FCollection<GameEntity> objects = new FCollection<>();
+        for (String d : def) {
+            objects.addAll(AbilityUtils.getDefinedEntities(card, d, sa));
+        }
+        return objects;
+    }
+
     /**
      * Filter list by type.
      *

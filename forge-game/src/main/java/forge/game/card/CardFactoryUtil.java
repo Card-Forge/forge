@@ -2284,12 +2284,10 @@ public class CardFactoryUtil {
             String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
 
             AbilitySub sacrificeSA = (AbilitySub) AbilityFactory.getAbility(sacrificeStr, card);
-            String value = "Count$Valid " + valid + ".YouCtrl+Other";
-            sacrificeSA.setSVar("DevourSacX", value);
+            sacrificeSA.setSVar("DevourSacX", "Count$Valid " + valid + ".YouCtrl+Other");
 
             AbilitySub counterSA = (AbilitySub) AbilityFactory.getAbility(counterStr, card);
-            counterSA.setSVar("DevourX", "SVar$DevourSize/Times." + magnitude);
-            counterSA.setSVar("DevourSize", "Count$RememberedSize");
+            counterSA.setSVar("DevourX", "Count$RememberedSize/Times." + magnitude);
             sacrificeSA.setSubAbility(counterSA);
 
             AbilitySub cleanupSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
