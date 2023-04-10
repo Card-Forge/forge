@@ -1961,7 +1961,8 @@ public class CardProperty {
         } else if (property.startsWith("Triggered")) {
             if (spellAbility instanceof SpellAbility) {
                 final String key = property.substring(9);
-                Object o = ((SpellAbility)spellAbility).getTriggeringObject(AbilityKey.fromString(key));
+                SpellAbility sa = (SpellAbility) spellAbility;
+                Object o = sa.getRootAbility().getTriggeringObject(AbilityKey.fromString(key));
                 boolean found = false;
                 if (o != null) {
                     if (o instanceof CardCollection) {
@@ -1979,7 +1980,8 @@ public class CardProperty {
         } else if (property.startsWith("NotTriggered")) {
             final String key = property.substring("NotTriggered".length());
             if (spellAbility instanceof SpellAbility) {
-                if (card.equals(((SpellAbility)spellAbility).getTriggeringObject(AbilityKey.fromString(key)))) {
+                SpellAbility sa = (SpellAbility) spellAbility;
+                if (card.equals(sa.getRootAbility().getTriggeringObject(AbilityKey.fromString(key)))) {
                     return false;
                 }
             } else {
