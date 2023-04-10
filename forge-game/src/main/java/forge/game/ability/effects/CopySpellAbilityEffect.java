@@ -165,11 +165,17 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
 
                     // CR 707.10e
                     if (sa.hasParam("DefinedTarget")) {
-                        final List<GameEntity> tgts = getDefinedEntitiesOrTargeted(sa, "DefinedTarget");
+                        final List<GameEntity> tgts = AbilityUtils.getDefinedEntities(card, sa.getParam("DefinedTarget").split(" & "), sa);
                         if (tgts.isEmpty()) {
                             continue;
                         }
-                        if (!changeToLegalTarget(copy, tgts.get(0))) {
+                        GameEntity tgt;
+                        if (tgts.size() > 1) {
+                            tgt = controller.getController().chooseSingleEntityForEffect(new FCollection<>(tgts), sa, Localizer.getInstance().getMessage("lblChooseOne"), null);
+                        } else {
+                           tgt = tgts.get(0);
+                        }
+                        if (!changeToLegalTarget(copy, tgt)) {
                             continue;
                         }
                     }
