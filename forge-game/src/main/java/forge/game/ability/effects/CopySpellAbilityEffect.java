@@ -15,6 +15,7 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityCantBeCopied;
+import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.CardTranslation;
 import forge.util.Lang;
@@ -126,6 +127,29 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                         copies.add(copy);
                     }
                 }
+            } else if (sa.hasParam("DefinedTarget")) { // CR 707.10e
+                final List<GameEntity> tgts = AbilityUtils.getDefinedEntities(card, sa.getParam("DefinedTarget"), sa);
+                if (tgts.isEmpty()) {
+                    continue;
+                }
+
+                FCollection<GameEntity>  newTgts = new FCollection<>();
+                for (GameEntity e : tgts) {
+                    if (e instanceof Player) { // Zevlor
+                        FCollection<GameEntity> choices = new FCollection<>(e);
+                        choices.addAll(((Player) e).getCardsIn(ZoneType.Battlefield));
+                        newTgts.add(controller.getController().chooseSingleEntityForEffect(choices, sa, Localizer.getInstance().getMessage("lblChooseOne"), null));
+                    } else { // Ivy
+                        newTgts.add(e);
+                    }
+                }
+
+                for (GameEntity e : newTgts) {
+                    SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
+                    if (changeToLegalTarget(copy, e)) {
+                        copies.add(copy);
+                    }
+                }
             } else {
                 for (int i = 0; i < amount; i++) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
@@ -135,6 +159,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                     if (sa.hasParam("MayChooseTarget")) {
                         copy.setMayChooseNewTargets(true);
                     }
+
                     if (sa.hasParam("RandomTarget")) {
                         List<GameEntity> candidates = copy.getTargetRestrictions().getAllCandidates(chosenSA, true);
                         if (sa.hasParam("RandomTargetRestriction")) {
@@ -160,23 +185,6 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                         }
                         if (sub != null) {
                             sub.getParent().setSubAbility(sub.getSubAbility());
-                        }
-                    }
-
-                    // CR 707.10e
-                    if (sa.hasParam("DefinedTarget")) {
-                        final List<GameEntity> tgts = AbilityUtils.getDefinedEntities(card, sa.getParam("DefinedTarget").split(" & "), sa);
-                        if (tgts.isEmpty()) {
-                            continue;
-                        }
-                        GameEntity tgt;
-                        if (tgts.size() > 1) {
-                            tgt = controller.getController().chooseSingleEntityForEffect(new FCollection<>(tgts), sa, Localizer.getInstance().getMessage("lblChooseOne"), null);
-                        } else {
-                           tgt = tgts.get(0);
-                        }
-                        if (!changeToLegalTarget(copy, tgt)) {
-                            continue;
                         }
                     }
 
