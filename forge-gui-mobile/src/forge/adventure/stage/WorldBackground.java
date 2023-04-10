@@ -91,7 +91,7 @@ public class WorldBackground extends Actor {
         if (chunksSpritesBackground[x][y] == null)
             chunksSpritesBackground[x][y] = MapSprite.getMapSprites(x, y, MapSprite.BackgroundLayer);
         for (Actor sprite : chunksSpritesBackground[x][y]) {
-            stage.getBackgroundSprites().addActor(sprite);
+                stage.getBackgroundSprites().addActor(sprite);
         }
     }
 

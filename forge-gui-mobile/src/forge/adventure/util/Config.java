@@ -94,6 +94,8 @@ public class Config {
         if(settingsData.cardTooltipAdjLandscape == null || settingsData.cardTooltipAdjLandscape == 0f)
             settingsData.cardTooltipAdjLandscape=1f;
 
+
+        //prefix = "forge-gui/res/adventure/Shandalar/";
         prefix = getPlanePath(settingsData.plane);
 
         currentConfig = this;
@@ -115,7 +117,7 @@ public class Config {
 
     private String resPath() {
 
-        return GuiBase.isAndroid() ? ForgeConstants.ASSETS_DIR : Files.exists(Paths.get("./res"))?"./":"../forge-gui/";
+        return GuiBase.isAndroid() ? ForgeConstants.ASSETS_DIR : Files.exists(Paths.get("./res"))?"./":Files.exists(Paths.get("./forge-gui/"))?"./forge-gui/":"../forge-gui";
     }
 
     public String getPlanePath(String plane) {

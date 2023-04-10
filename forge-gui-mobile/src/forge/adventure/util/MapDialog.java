@@ -14,14 +14,22 @@ import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.DialogData;
+import forge.adventure.data.RewardData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.GameHUD;
+import forge.adventure.scene.RewardScene;
 import forge.adventure.stage.MapStage;
+import forge.adventure.world.WorldSave;
 import forge.card.ColorSet;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.Localizer;
 import org.apache.commons.lang3.tuple.Pair;
+
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.EventListenerList;
 
 /**
  * MapDialog
@@ -35,7 +43,7 @@ public class MapDialog {
     private final static float WIDTH = 250f;
     static private final String defaultJSON = "[\n" +
             "  {\n" +
-            "    \"effect\":[],\n" +
+            //"    \"effect\":[],\n" +
             "    \"name\":\"Error\",\n" +
             "    \"text\":\"This is a fallback dialog.\\nPlease check Forge logs for errors.\",\n" +
             "    \"condition\":[],\n" +
@@ -50,7 +58,6 @@ public class MapDialog {
         this.stage = stage;
         this.parentID = parentID;
         try {
-
             if (S.isEmpty()) {
                 System.err.print("Dialog error. Dialog property is empty.\n");
                 this.data = JSONStringLoader.parse(Array.class, DialogData.class, defaultJSON, defaultJSON);
@@ -60,6 +67,25 @@ public class MapDialog {
         } catch (Exception exception) {
             exception.printStackTrace();
 
+        }
+    }
+
+    public MapDialog(DialogData prebuiltDialog, MapStage stage, int parentID) {
+        this.stage = stage;
+        this.parentID = parentID;
+        try
+        {
+            if (prebuiltDialog == null) {
+                System.err.print("Dialog error. Dialog provided is null.\n");
+                this.data = JSONStringLoader.parse(Array.class, DialogData.class, defaultJSON, defaultJSON);
+                return;
+            }
+            this.data = new Array<>();
+            this.data.add(prebuiltDialog);
+        }
+        catch (Exception exception)
+        {
+            exception.printStackTrace();
         }
     }
 
@@ -174,12 +200,43 @@ public class MapDialog {
                     super.clicked(event, x, y);
                 }
             });
-            if (i == 0)
+            if (i == 0) {
                 stage.hideDialog();
+                emitDialogFinished();
+            }
             else
                 stage.showDialog();
         } else {
             stage.hideDialog();
+        }
+    }
+
+    protected EventListenerList dialogCompleteList = new EventListenerList();
+    protected EventListenerList questAcceptedList = new EventListenerList();
+    public void addDialogCompleteListener(ChangeListener listener) {
+        dialogCompleteList.add(ChangeListener.class, listener);
+    }
+    public void addQuestAcceptedListener(ChangeListener listener){
+        questAcceptedList.add(ChangeListener.class, listener);
+    }
+
+    private void emitDialogFinished(){
+        ChangeListener[] listeners = dialogCompleteList.getListeners(ChangeListener.class);
+        if (listeners != null && listeners.length > 0) {
+            ChangeEvent evt = new ChangeEvent(this);
+            for (ChangeListener listener : listeners) {
+                listener.stateChanged(evt);
+            }
+        }
+    }
+
+    private void emitQuestAccepted(){
+        ChangeListener[] listeners = questAcceptedList.getListeners(ChangeListener.class);
+        if (listeners != null && listeners.length > 0) {
+            ChangeEvent evt = new ChangeEvent(this);
+            for (ChangeListener listener : listeners) {
+                listener.stateChanged(evt);
+            }
         }
     }
 
@@ -203,10 +260,13 @@ public class MapDialog {
     void setEffects(DialogData.ActionData[] data) {
         if (data == null) return;
         for (DialogData.ActionData E : data) {
-            if (E.removeItem != null) { //Removes an item from the player's inventory.
+            if (E == null){
+                continue;
+            }
+            if (E.removeItem != null&& (!E.removeItem.isEmpty())) { //Removes an item from the player's inventory.
                 Current.player().removeItem(E.removeItem);
             }
-            if (E.addItem != null) { //Gives an item to the player.
+            if (E.addItem != null&& (!E.addItem.isEmpty())) { //Gives an item to the player.
                 Current.player().addItem(E.addItem);
             }
             if (E.addLife != 0) { //Gives (positive or negative) life to the player. Cannot go over max health.
@@ -215,6 +275,15 @@ public class MapDialog {
             if (E.addGold != 0) { //Gives (positive or negative) gold to the player.
                 if (E.addGold > 0) Current.player().giveGold(E.addGold);
                 else Current.player().takeGold(-E.addGold);
+            }
+            if (E.addMapReputation != 0) {
+                PointOfInterestChanges p;
+                if (E.POIReference.length()>0 && !E.POIReference.contains("$"))
+                    p = WorldSave.getCurrentSave().getPointOfInterestChanges( E.POIReference);
+                else
+                    p = stage.getChanges();
+                if (p != null)
+                    p.addMapReputation(E.addMapReputation);
             }
             if (E.deleteMapObject != 0) { //Removes a dummy object from the map.
                 if (E.deleteMapObject < 0) stage.deleteObject(parentID);
@@ -245,6 +314,17 @@ public class MapDialog {
             if (E.setEffect != null) { //Replace current effects.
                 EnemySprite EN = stage.getEnemyByID(parentID);
                 EN.effect = E.setEffect;
+            }
+            if (E.grantRewards != null && E.grantRewards.length > 0) {
+                Array<Reward> ret = new Array<Reward>();
+                for(RewardData rdata:E.grantRewards) {
+                    ret.addAll(rdata.generate(false, true));
+                }
+                RewardScene.instance().loadRewards(ret, RewardScene.Type.QuestReward, null);
+                Forge.switchScene(RewardScene.instance());
+            }
+            if (E.issueQuest != null && (!E.issueQuest.isEmpty())) {
+                emitQuestAccepted();
             }
         }
     }
@@ -284,10 +364,15 @@ public class MapDialog {
                     if (!condition.not) return false;
                 } else if (condition.not) return false;
             }
-            if (condition.hasBlessing != null && !condition.hasBlessing.isEmpty()) { //Check for a named blessing.
-                if (!player.hasBlessing(condition.hasBlessing)) {
+            if (condition.hasMapReputation != Integer.MIN_VALUE){ //Check for at least X reputation.
+                if ( stage.getChanges().getMapReputation() < condition.hasMapReputation + 1) {
                     if (!condition.not) return false;
-                } else if (condition.not) return false;
+                } else if(condition.not) return false;
+            }
+            if (condition.hasBlessing != null && !condition.hasBlessing.isEmpty()){ //Check for a named blessing.
+                if(!player.hasBlessing(condition.hasBlessing)){
+                   if(!condition.not) return false;
+                } else if(condition.not) return false;
             }
             if (condition.actorID != 0) { //Check for actor ID.
                 if (!stage.lookForID(condition.actorID)) {

@@ -5,10 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.google.common.collect.Lists;
-import forge.adventure.data.DifficultyData;
-import forge.adventure.data.EffectData;
-import forge.adventure.data.HeroListData;
-import forge.adventure.data.ItemData;
+import forge.adventure.data.*;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.card.ColorSet;
@@ -23,10 +20,7 @@ import forge.sound.SoundSystem;
 import forge.util.ItemPool;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Class that represents the player (not the player sprite)
@@ -59,6 +53,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     private final Array<String> inventoryItems=new Array<>();
     private final HashMap<String,String> equippedItems=new HashMap<>();
+    private List<AdventureQuestData> quests= new ArrayList<>();
 
     // Fantasy/Chaos mode settings.
     private boolean fantasyMode     = false;
@@ -99,6 +94,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         inventoryItems.clear();
         equippedItems.clear();
         questFlags.clear();
+        quests.clear();
         cards.clear();
         statistic.clear();
         newCards.clear();
@@ -292,6 +288,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 questFlags.put(keys[i], values[i]);
             }
         }
+        if(data.containsKey("quests")){
+            quests.clear();
+            Object[] q = (Object[]) data.readObject("quests");
+            for (Object itsReallyAQuest: q)
+                quests.add((AdventureQuestData) itsReallyAQuest);
+        }
 
         for(int i=0;i<NUMBER_OF_DECKS;i++) {
             if(!data.containsKey("deck_name_" + i)) {
@@ -372,6 +374,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
         data.storeObject("questFlagsKey", questFlagsKey.toArray(new String[0]));
         data.storeObject("questFlagsValue", questFlagsValue.toArray(new Byte[0]));
+        data.storeObject("quests", quests.toArray());
 
         data.storeObject("deckCards",deck.getMain().toCardList("\n").split("\n"));
         if(deck.get(DeckSection.Sideboard)!=null)
@@ -702,6 +705,37 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         questFlags.clear();
     }
 
+    public void addQuest(String questID){
+        int id = Integer.parseInt(questID);
+        addQuest(id);
+    }
+
+    public void addQuest(int questID){
+        AdventureQuestData toAdd = AdventureQuestController.instance().generateQuest(questID);
+
+        if (toAdd != null){
+            addQuest(toAdd);
+        }
+    }
+
+    public void addQuest(AdventureQuestData q){
+        //TODO: add a config flag for this
+        boolean autoTrack = true;
+        for (AdventureQuestData existing : quests){
+            if (autoTrack && existing.isTracked)
+            {
+                autoTrack = false;
+                break;
+            }
+        }
+        q.isTracked = autoTrack;
+        quests.add(q);
+    }
+
+    public List<AdventureQuestData> getQuests() {
+        return quests;
+    }
+
     public int getEnemyDeckNumber(String enemyName, int maxDecks){
     int deckNumber = 0;
     if (statistic.getWinLossRecord().get(enemyName)!=null)
@@ -721,4 +755,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     return deckNumber;
     }
 
+    public void removeQuest(AdventureQuestData quest) {
+        quests.remove(quest);
+    }
 }

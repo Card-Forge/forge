@@ -122,9 +122,9 @@
       "name": "return",
       "text": "tr(lblBack)",
       "binding": "Back",
-      "width": 100,
+      "width": 80,
       "height": 30,
-      "x": 345,
+      "x": 395,
       "y": 224
     },
     {
@@ -133,7 +133,7 @@
       "text": "[%120][+AWARD]",
       "width": 30,
       "height": 30,
-      "x": 315,
+      "x": 285,
       "y": 224
     },
     {
@@ -169,9 +169,15 @@
       "x": 394,
       "y": 60
     },
-    {
-      "type": "Table",
-      "font": "default"
+	{
+      "type": "TextButton",
+      "name": "quests",
+      "text": "Quests",
+      "binding": "Status",
+      "width": 80,
+      "height": 30,
+      "x": 315,
+      "y": 224
     }
   ]
 }

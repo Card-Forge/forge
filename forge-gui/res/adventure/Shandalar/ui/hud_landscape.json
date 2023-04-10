@@ -104,13 +104,11 @@
       "x": 416,
       "y": 146
     },
-
     {
       "type": "TextButton",
-      "name": "statistic",
+      "name": "logbook",
 	  "style":"menu",
-      "text": "[%120][+Status]",
-      "binding": "Status",
+      "text": "[%120][+Logbook]",
       "width": 64,
       "height": 36,
       "x": 416,
