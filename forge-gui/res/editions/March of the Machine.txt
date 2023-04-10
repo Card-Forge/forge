@@ -332,7 +332,11 @@ ScryfallCode=MOM
 320 M Archangel Elspeth @Denys Tsiperko
 321 M Chandra, Hope's Beacon @Randy Vargas
 322 M Wrenn and Realmbreaker @Jehan Choo
+338 M Elesh Norn @Ryan Pancost
 339 M Jin-Gitaxias @Julian Kok Joon Wen
+340 M Sheoldred @Camille Alquier
+341 M Urabrask @Jose Parodi
+342 M Vorinclex @Joseph Weston
 
 [jumpstart]
 323 R Essence of Orthodoxy @Oriana Menendez
