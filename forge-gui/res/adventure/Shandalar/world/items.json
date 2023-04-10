@@ -183,6 +183,11 @@
     "questItem": true
   },
   {
+    "name": "Nahiri's Key",
+    "iconName": "RedKey",
+    "questItem": true
+  },
+  {
     "name": "White Key",
     "iconName": "WhiteKey",
     "questItem": true
