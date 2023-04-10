@@ -1068,7 +1068,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("activated")) {
-            if (card.getPlaneswalkerAbilityActivated() <= 0) {
+            if (!card.activatedThisTurn()) {
                 return false;
             }
         } else if (property.startsWith("tapped")) {
