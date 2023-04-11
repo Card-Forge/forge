@@ -1,0 +1,11 @@
+Name:Bloated Processor
+ManaCost:2 B
+Types:Creature Phyrexian
+PT:3/2
+A:AB$ PutCounter | Cost$ Sac<1/Phyrexian.Other/another Phyrexian> | CounterType$ P1P1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigIncubate | TriggerDescription$ When CARDNAME dies, incubate X, where X is its power. (Create an Incubator token with X +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+SVar:TrigIncubate:DB$ Incubate | Amount$ X
+SVar:X:TriggeredCard$CardPower
+DeckHas:Ability$Sacrifice|Counters|Token & Type$Incubator|Artifact
+DeckNeeds:Type$Phyrexian
+Oracle:Sacrifice another Phyrexian: Put a +1/+1 counter on Bloated Processor.\nWhen Bloated Processor dies, incubate X, where X is its power. (Create an Incubator token with X +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)

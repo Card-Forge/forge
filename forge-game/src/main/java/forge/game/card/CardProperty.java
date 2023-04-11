@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.StaticData;
 import forge.card.CardDb;
-import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -145,7 +144,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("Transformed")) {
-            if (!card.getCurrentStateName().equals(CardStateName.Transformed)) {
+            if (!card.isTransformed()) {
                 return false;
             }
         } else if (property.equals("Flip")) {
@@ -342,6 +341,10 @@ public class CardProperty {
                 } else if (CardLists.getType(cards, type).isEmpty()) {
                     return false;
                 }
+            }
+        } else if (property.startsWith("StrictlyOther")) {
+            if (card.equalsWithTimestamp(source)) {
+                return false;
             }
         } else if (property.startsWith("Other")) {
             if (card.equals(source)) {
@@ -1962,7 +1965,8 @@ public class CardProperty {
         } else if (property.startsWith("Triggered")) {
             if (spellAbility instanceof SpellAbility) {
                 final String key = property.substring(9);
-                Object o = ((SpellAbility)spellAbility).getTriggeringObject(AbilityKey.fromString(key));
+                SpellAbility sa = (SpellAbility) spellAbility;
+                Object o = sa.getRootAbility().getTriggeringObject(AbilityKey.fromString(key));
                 boolean found = false;
                 if (o != null) {
                     if (o instanceof CardCollection) {
@@ -1980,7 +1984,8 @@ public class CardProperty {
         } else if (property.startsWith("NotTriggered")) {
             final String key = property.substring("NotTriggered".length());
             if (spellAbility instanceof SpellAbility) {
-                if (card.equals(((SpellAbility)spellAbility).getTriggeringObject(AbilityKey.fromString(key)))) {
+                SpellAbility sa = (SpellAbility) spellAbility;
+                if (card.equals(sa.getRootAbility().getTriggeringObject(AbilityKey.fromString(key)))) {
                     return false;
                 }
             } else {

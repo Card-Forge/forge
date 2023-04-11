@@ -1,0 +1,7 @@
+Name:Knight Token
+ManaCost:no cost
+Types:Creature Knight
+Colors:white,blue
+PT:2/2
+K:Vigilance
+Oracle:Vigilance

@@ -144,6 +144,14 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
         return targets;
     }
 
+    @Override
+    public boolean contains(Object o) {
+        if (o instanceof Card) {
+            return Iterables.any(Iterables.filter(targets, Card.class), c -> c.equalsWithTimestamp((Card) o));
+        }
+        return super.contains(o);
+    }
+
     public final void addDividedAllocation(final GameObject tgt, final Integer portionAllocated) {
         this.dividedMap.put(tgt, portionAllocated);
     }

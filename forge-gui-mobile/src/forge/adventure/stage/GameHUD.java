@@ -46,7 +46,7 @@ public class GameHUD extends Stage {
     private final TextraLabel lifePoints, money, shards, keys;
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
     private final InputEvent eventTouchDown, eventTouchUp;
-    private final TextraButton deckActor, openMapActor, menuActor, statsActor, inventoryActor, exitToWorldMapActor;
+    private final TextraButton deckActor, openMapActor, menuActor, logbookActor, inventoryActor, exitToWorldMapActor;
     public final UIActor ui;
     private final Touchpad touchpad;
     private final Console console;
@@ -83,7 +83,7 @@ public class GameHUD extends Stage {
         ui.onButtonPress("openmap", () -> GameHUD.this.openMap());
         menuActor = ui.findActor("menu");
         referenceX = menuActor.getX();
-        statsActor = ui.findActor("statistic");
+        logbookActor = ui.findActor("logbook");
         inventoryActor = ui.findActor("inventory");
         gamehud = ui.findActor("gamehud");
         exitToWorldMapActor = ui.findActor("exittoworldmap");
@@ -115,7 +115,7 @@ public class GameHUD extends Stage {
         avatar = ui.findActor("avatar");
         ui.onButtonPress("menu", () -> menu());
         ui.onButtonPress("inventory", () -> openInventory());
-        ui.onButtonPress("statistic", () -> statistic());
+        ui.onButtonPress("logbook", () -> logbook());
         ui.onButtonPress("deck", () -> openDeck());
         ui.onButtonPress("exittoworldmap", () -> exitToWorldMap());
         lifePoints = ui.findActor("lifePoints");
@@ -157,8 +157,8 @@ public class GameHUD extends Stage {
         Forge.switchScene(MapViewScene.instance());
     }
 
-    private void statistic() {
-        Forge.switchScene(PlayerStatisticScene.instance());
+    private void logbook() {
+        Forge.switchScene(QuestLogScene.instance(Forge.getCurrentScene()));
     }
 
     public static GameHUD getInstance() {
@@ -222,7 +222,7 @@ public class GameHUD extends Stage {
                     && !(Controls.actorContainsVector(menuActor, touch)) //not inside menu button
                     && !(Controls.actorContainsVector(deckActor, touch)) //not inside deck button
                     && !(Controls.actorContainsVector(openMapActor, touch)) //not inside openmap button
-                    && !(Controls.actorContainsVector(statsActor, touch)) //not inside stats button
+                    && !(Controls.actorContainsVector(logbookActor, touch)) //not inside stats button
                     && !(Controls.actorContainsVector(inventoryActor, touch)) //not inside inventory button
                     && !(Controls.actorContainsVector(exitToWorldMapActor, touch)) //not inside exit button
                     && (Controls.actorContainsVector(ui, touch)) //inside display bounds
@@ -503,7 +503,7 @@ public class GameHUD extends Stage {
         setAlpha(avatar, visible);
         setAlpha(deckActor, visible);
         setAlpha(menuActor, visible);
-        setAlpha(statsActor, visible);
+        setAlpha(logbookActor, visible);
         setAlpha(inventoryActor, visible);
         setAlpha(exitToWorldMapActor, visible);
         opacity = visible ? 1f : 0.4f;
@@ -579,7 +579,7 @@ public class GameHUD extends Stage {
         isHiding = true;
         deckActor.addAction(Actions.sequence(Actions.fadeOut(0.10f), Actions.hide(), Actions.moveTo(deckActor.getX() + deckActor.getWidth(), deckActor.getY())));
         inventoryActor.addAction(Actions.sequence(Actions.fadeOut(0.15f), Actions.hide(), Actions.moveTo(inventoryActor.getX() + inventoryActor.getWidth(), inventoryActor.getY())));
-        statsActor.addAction(Actions.sequence(Actions.fadeOut(0.20f), Actions.hide(), Actions.moveTo(statsActor.getX() + statsActor.getWidth(), statsActor.getY())));
+        logbookActor.addAction(Actions.sequence(Actions.fadeOut(0.20f), Actions.hide(), Actions.moveTo(logbookActor.getX() + logbookActor.getWidth(), logbookActor.getY())));
         menuActor.addAction(Actions.sequence(Actions.fadeOut(0.25f), Actions.hide(), Actions.moveTo(menuActor.getX() + menuActor.getWidth(), menuActor.getY())));
         if (GameScene.instance().isNotInWorldMap())
             exitToWorldMapActor.addAction(Actions.sequence(Actions.fadeOut(0.2f), Actions.hide(), Actions.moveTo(exitToWorldMapActor.getX() + exitToWorldMapActor.getWidth(), exitToWorldMapActor.getY())));
@@ -595,7 +595,7 @@ public class GameHUD extends Stage {
             return;
         isShowing = true;
         menuActor.addAction(Actions.sequence(Actions.delay(0.1f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, menuActor.getY(), 0.25f))));
-        statsActor.addAction(Actions.sequence(Actions.delay(0.15f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, statsActor.getY(), 0.25f))));
+        logbookActor.addAction(Actions.sequence(Actions.delay(0.15f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, logbookActor.getY(), 0.25f))));
         inventoryActor.addAction(Actions.sequence(Actions.delay(0.2f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, inventoryActor.getY(), 0.25f))));
         deckActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, deckActor.getY(), 0.25f))));
         if (GameScene.instance().isNotInWorldMap())

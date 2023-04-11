@@ -22,7 +22,7 @@ public class WorldBackground extends Actor {
     int playerY;
 
     Texture[][] chunks;
-    Texture loadingTexture,t;
+    Texture loadingTexture, t;
     Array<Actor>[][] chunksSprites;
     Array<Actor>[][] chunksSpritesBackground;
     int currentChunkX;
@@ -83,15 +83,15 @@ public class WorldBackground extends Actor {
 
     public void loadChunk(int x, int y) {
         if (chunksSprites[x][y] == null)
-            chunksSprites[x][y] =  MapSprite.GetMapSprites(x, y);
+            chunksSprites[x][y] = MapSprite.getMapSprites(x, y, MapSprite.SpriteLayer);
 
         for (Actor sprite : chunksSprites[x][y]) {
             stage.getSpriteGroup().addActor(sprite);
         }
         if (chunksSpritesBackground[x][y] == null)
-            chunksSpritesBackground[x][y] =  MapSprite.GetMapSpritesBackground(x, y);
+            chunksSpritesBackground[x][y] = MapSprite.getMapSprites(x, y, MapSprite.BackgroundLayer);
         for (Actor sprite : chunksSpritesBackground[x][y]) {
-            stage.getBackgroundSprites().addActor(sprite);
+                stage.getBackgroundSprites().addActor(sprite);
         }
     }
 
@@ -127,12 +127,11 @@ public class WorldBackground extends Actor {
     public void initialize() {
         tileSize = WorldSave.getCurrentSave().getWorld().getTileSize();
         chunkSize = WorldSave.getCurrentSave().getWorld().getChunkSize();
-        if(chunks!=null)
-        {
+        if (chunks != null) {
             stage.getSpriteGroup().clear();
-            for(int i=0;i<chunks.length;i++)
-                for(int j=0;j<chunks[i].length;j++)
-                    if(chunks[i][j]!=null)
+            for (int i = 0; i < chunks.length; i++)
+                for (int j = 0; j < chunks[i].length; j++)
+                    if (chunks[i][j] != null)
                         chunks[i][j].dispose();
         }
         chunks = new Texture[WorldSave.getCurrentSave().getWorld().getWidthInTiles()][WorldSave.getCurrentSave().getWorld().getHeightInTiles()];
@@ -142,8 +141,7 @@ public class WorldBackground extends Actor {
         chunksSpritesBackground = createSprites;
 
 
-        if(loadingTexture==null)
-        {
+        if (loadingTexture == null) {
             Pixmap loadPix = new Pixmap(chunkSize * tileSize, chunkSize * tileSize, Pixmap.Format.RGBA8888);
             loadPix.setColor(0.5f, 0.5f, 0.5f, 1);
             loadPix.fill();
@@ -166,6 +164,7 @@ public class WorldBackground extends Actor {
         super.clear();
         initialize();
     }
+
     int transChunkToWorld(int xy) {
         return xy * tileSize * chunkSize;
     }

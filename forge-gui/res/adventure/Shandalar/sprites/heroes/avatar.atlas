@@ -1,5 +1,5 @@
 avatar.png
-size: 160,288
+size: 160,320
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none       
@@ -543,3 +543,63 @@ Phyrexian_f
 Phyrexian_f
   size: 16, 16        
   xy: 144, 272
+Werewolf_m
+  xy: 0, 288
+  size: 16, 16         
+Werewolf_m
+  xy: 16, 288
+  size: 16, 16        
+Werewolf_m
+  xy: 32, 288
+  size: 16, 16        
+Werewolf_m
+  xy: 48, 288
+  size: 16, 16        
+Werewolf_m
+  xy: 64, 288
+  size: 16, 16        
+Werewolf_m
+  xy: 80, 288
+  size: 16, 16        
+Werewolf_m
+  xy: 96, 288
+  size: 16, 16        
+Werewolf_m
+  xy: 112, 288
+  size: 16, 16        
+Werewolf_m
+  xy: 128, 288
+  size: 16, 16        
+Werewolf_m
+  xy: 144, 288
+  size: 16, 16        
+Werewolf_f
+  xy: 0, 304
+  size: 16, 16         
+Werewolf_f
+  xy: 16, 304
+  size: 16, 16        
+Werewolf_f
+  xy: 32, 304
+  size: 16, 16        
+Werewolf_f
+  xy: 48, 304
+  size: 16, 16        
+Werewolf_f
+  xy: 64, 304
+  size: 16, 16        
+Werewolf_f
+  xy: 80, 304
+  size: 16, 16        
+Werewolf_f
+  xy: 96, 304
+  size: 16, 16        
+Werewolf_f
+  xy: 112, 304
+  size: 16, 16        
+Werewolf_f
+  xy: 128, 304
+  size: 16, 16        
+Werewolf_f
+  size: 16, 16        
+  xy: 144, 304

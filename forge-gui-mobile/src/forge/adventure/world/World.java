@@ -47,6 +47,7 @@ public class World implements Disposable, SaveFileContent {
     private final Random random = new Random();
     private boolean worldDataLoaded = false;
     private Texture globalTexture = null;
+    private int nextQuestId;
 
     public Random getRandom() {
         return random;
@@ -114,6 +115,7 @@ public class World implements Disposable, SaveFileContent {
         mapPoiIds = new PointOfInterestMap(getChunkSize(), this.data.tileSize, this.data.width / getChunkSize(), this.data.height / getChunkSize());
         mapPoiIds.load(saveFileData.readSubData("mapPoiIds"));
         seed = saveFileData.readLong("seed");
+        nextQuestId = saveFileData.readInt("nextQuestId");
     }
 
     @Override
@@ -129,6 +131,7 @@ public class World implements Disposable, SaveFileContent {
         data.store("mapObjectIds", mapObjectIds.save());
         data.store("mapPoiIds", mapPoiIds.save());
         data.store("seed", seed);
+        data.store("nextQuestId", nextQuestId);
 
 
         return data;
@@ -510,6 +513,7 @@ public class World implements Disposable, SaveFileContent {
                                         notTowns.clear();
                                         otherPoints.clear();
                                         clearTerrain((int) (data.width * data.playerStartPosX), (int) (data.height * data.playerStartPosY), 10);
+                                        storedInfo.clear();
                                         continue here;
                                     }
                                     continue;
@@ -898,6 +902,10 @@ public class World implements Disposable, SaveFileContent {
         return mapPoiIds.findPointsOfInterest(name);
     }
 
+    public List<PointOfInterest> getAllPointOfInterest(){
+        return mapPoiIds.getAllPointOfInterest();
+    }
+
     public int getChunkSize() {
         return (Scene.getIntendedWidth() > Scene.getIntendedHeight() ? Scene.getIntendedWidth() : Scene.getIntendedHeight()) / data.tileSize;
     }
@@ -917,5 +925,9 @@ public class World implements Disposable, SaveFileContent {
             System.out.print("Loading auxiliary sprites.\n");
         }
         return globalTexture;
+    }
+
+    public int getNextQuestId() {
+        return nextQuestId++;
     }
 }

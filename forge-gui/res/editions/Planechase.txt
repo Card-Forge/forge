@@ -7,220 +7,215 @@ Type=Multiplayer
 ScryfallCode=HOP
 
 [cards]
-1 C Academy at Tolaria West
-3 C Agyrem
-1 R Akroma's Vengeance
-130 C Ancient Den
-46 C Arc Lightning
-105 U Arcbound Crusher
-106 U Arcbound Slith
-96 C Arsenal Thresher
-17 R Ascendant Evincar
-103 U Assault // Battery
-97 R Balefire Liege
-4 C Bant
-98 C Battlegate Mimic
-18 R Beacon of Unrest
-68 C Beast Hunt
-19 U Beseech the Queen
-47 U Blaze
-48 C Bogardan Firefiend
-49 C Bogardan Rager
-131 C Boros Garrison
-99 U Boros Guildmage
-107 C Boros Signet
-82 U Boros Swiftblade
-108 R Bosh, Iron Golem
-83 C Branching Bolt
-69 U Briarhorn
-8 R Broodstar
-50 U Browbeat
-84 U Bull Cerodon
-132 U Cabal Coffers
-20 C Cadaverous Knight
-85 U Captain's Maneuver
-S Celestine Reef
-86 C Cerodon Yearling
-51 U Cinder Elemental
-5 C Cliffside Market
-52 U Cone of Flame
-2 C Congregate
-21 U Consume Spirit
-109 C Copper Myr
-22 U Corpse Harvester
-110 C Cranial Plating
-23 C Cruel Revival
-24 C Dark Ritual
-111 R Darksteel Forge
-25 R Death Baron
-112 R Door to Nothingness
-100 C Double Cleave
-26 C Dregscape Zombie
-101 U Duergar Hedge-Mage
-7 C Eloren Wilds
-113 U Etched Oracle
-70 U Explosive Vegetation
-9 U Fabricate
-9 C Feeding Grounds
-71 C Fertile Ground
-72 C Fertilid
-27 C Festering Goblin
-10 C Fields of Summer
-87 U Fires of Yavimaya
-53 U Flamekin Harbinger
-54 U Flametongue Kavu
-165 L Forest
-165 L Forest
-165 L Forest
-165 L Forest
-165 L Forest
-73 R Forgotten Ancient
-55 R Furnace of Rath
-12 C Glimmervoid Basin
-88 R Glory of Warfare
-56 U Goblin Offensive
-114 C Gold Myr
-13 C Goldmeadow
-28 R Grave Pact
-29 C Gravedigger
-133 C Great Furnace
-15 C Grixis
-134 C Gruul Turf
-102 U Hearthfire Hobgoblin
-30 R Helldozer
-31 C Hideous End
-S Horizon Boughs
-89 C Hull Breach
-17 C Immersturm
-32 U Incremental Blight
-33 C Innocent Blood
-57 R Insurrection
-115 C Iron Myr
-148 L Island
-148 L Island
-148 L Island
-148 L Island
-18 C Isle of Vesuva
-74 R Ivy Elemental
-19 C Izzet Steam Maze
-10 C Keep Watch
-58 U Keldon Champion
-3 C Kor Sanctifiers
-20 C Krosa
-116 C Leaden Myr
-135 U Leechridden Swamp
-21 C Lethe Lake
-90 U Lightning Helix
-75 R Living Hive
-22 C Llanowar
-117 R Lodestone Myr
-118 R Loxodon Warhammer
-91 U Mage Slayer
-119 U Mask of Memory
-11 R Master of Etherium
-59 R Menacing Ogre
-24 C Minamo
-S Mirrored Depths
-159 L Mountain
-159 L Mountain
-159 L Mountain
-159 L Mountain
-159 L Mountain
-159 L Mountain
-159 L Mountain
-159 L Mountain
-159 L Mountain
-25 C Murasa
-120 C Myr Enforcer
-26 C Naar Isle
-27 C Naya
-34 R Nefashu
-35 U Noxious Ghoul
-121 U Nuisance Engine
-4 C Oblivion Ring
-104 U Order // Chaos
-5 C Orim's Thunder
-28 C Otaria
-29 C Panopticon
-122 C Pentad Prism
-123 R Pentavus
-36 R Phyrexian Arena
-37 C Phyrexian Ghoul
-145 L Plains
-145 L Plains
-145 L Plains
-145 L Plains
-145 L Plains
-30 C Pools of Becoming
-6 U Prison Term
-38 R Profane Command
-60 U Pyrotechnics
-12 U Qumulox
-76 C Rampant Growth
-31 C Raven's Run
-92 R Razia, Boros Archangel
-61 C Reckless Charge
-62 R Relentless Assault
-124 C Relic of Progenitus
-63 U Rockslide Elemental
-64 C Rolling Thunder
-65 R Rorix Bladewing
-39 C Rotting Rats
-93 R Rumbling Slum
-32 C Sanctum of Serra
-13 C Sarcomite Myr
-94 U Savage Twister
-33 C Sea of Sand
-77 C Search for Tomorrow
-136 C Seat of the Synod
-125 U Serum Tank
-40 C Shepherd of Rot
-34 C Shiv
-137 U Shivan Oasis
-126 C Silver Myr
-78 C Silverglade Elemental
-127 U Skeleton Shard
-35 C Skybreen
-95 U Sludge Strider
-66 C Smokebraider
-36 C Sokenzan
-7 C Soul Warden
-41 U Soulless One
-37 C Stronghold Furnace
-138 U Sunhome, Fortress of the Legion
-128 C Suntouched Myr
-153 L Swamp
-153 L Swamp
-153 L Swamp
-153 L Swamp
-153 L Swamp
-42 C Syphon Mind
-43 C Syphon Soul
-67 R Taurean Mauler
-41 S Tazeem
-S Tember City
-139 C Terramorphic Expanse
-2 C The Aether Flues
-6 C The Dark Barony
-8 C The Eon Fog
-11 C The Fourth Sphere
-14 C The Great Forest
-16 C The Hippodrome
-23 C The Maelstrom
-14 U Thirst for Knowledge
-79 R Tornado Elemental
-140 C Tree of Tales
-80 U Tribal Unity
-38 C Turri Island
-44 U Undead Warchief
-39 C Undercity Reaches
-141 C Vault of Whispers
-15 C Vedalken Engineer
-40 C Velis Vel
-81 R Verdant Force
-16 C Whiplash Trap
-45 U Withered Wretch
-129 C Wizard Replica
+1 R Akroma's Vengeance @Greg Hildebrandt & Tim Hildebrandt
+2 C Congregate @Mark Zug
+3 C Kor Sanctifiers @Dan Scott
+4 C Oblivion Ring @Franz Vohwinkel
+5 C Orim's Thunder @Carl Critchlow
+6 U Prison Term @Zoltan Boros & Gabor Szikszai
+7 C Soul Warden @Randy Gallegos
+8 R Broodstar @Glen Angus
+9 U Fabricate @Glen Angus
+10 C Keep Watch @Fred Rahmqvist
+11 R Master of Etherium @Matt Cavotta
+12 U Qumulox @Carl Critchlow
+13 C Sarcomite Myr @Michael Bruinsma
+14 U Thirst for Knowledge @Ben Thompson
+15 C Vedalken Engineer @Lars Grant-West
+16 C Whiplash Trap @Zoltan Boros & Gabor Szikszai
+17 R Ascendant Evincar @Mark Zug
+18 R Beacon of Unrest @Alan Pollack
+19 U Beseech the Queen @Jason Chan
+20 C Cadaverous Knight @Dermot Power
+21 U Consume Spirit @Justin Sweet
+22 U Corpse Harvester @Mark Tedin
+23 C Cruel Revival @Greg Staples
+24 C Dark Ritual @Clint Langley
+25 R Death Baron @Nils Hamm
+26 C Dregscape Zombie @Lars Grant-West
+27 C Festering Goblin @Thomas M. Baxa
+28 R Grave Pact @Puddnhead
+29 C Gravedigger @Dermot Power
+30 R Helldozer @Zoltan Boros & Gabor Szikszai
+31 C Hideous End @Zoltan Boros & Gabor Szikszai
+32 U Incremental Blight @Chuck Lukacs
+33 C Innocent Blood @Carl Critchlow
+34 R Nefashu @rk post
+35 U Noxious Ghoul @Luca Zontini
+36 R Phyrexian Arena @Carl Critchlow
+37 C Phyrexian Ghoul @Pete Venters
+38 R Profane Command @Wayne England
+39 C Rotting Rats @Dave Allsop
+40 C Shepherd of Rot @Greg Staples
+41 U Soulless One @Thomas M. Baxa
+42 C Syphon Mind @Jeff Easley
+43 C Syphon Soul @Ron Spears
+44 U Undead Warchief @Greg Hildebrandt
+45 U Withered Wretch @Tim Hildebrandt
+46 C Arc Lightning @Andrew Goldhawk
+47 U Blaze @Alex Horley-Orlandelli
+48 C Bogardan Firefiend @Terese Nielsen
+49 C Bogardan Rager @Clint Langley
+50 U Browbeat @Mark Tedin
+51 U Cinder Elemental @Greg Staples
+52 U Cone of Flame @Chippy
+53 U Flamekin Harbinger @Steve Prescott
+54 U Flametongue Kavu @Pete Venters
+55 R Furnace of Rath @John Matson
+56 U Goblin Offensive @Carl Critchlow
+57 R Insurrection @Mark Zug
+58 U Keldon Champion @Mark Tedin
+59 R Menacing Ogre @Ron Spencer
+60 U Pyrotechnics @John Avon
+61 C Reckless Charge @Scott M. Fischer
+62 R Relentless Assault @Greg Hildebrandt
+63 U Rockslide Elemental @Joshua Hagler
+64 C Rolling Thunder @Richard Thomas
+65 R Rorix Bladewing @Darrell Riche
+66 C Smokebraider @Anthony S. Waters
+67 R Taurean Mauler @Dominick Domingo
+68 C Beast Hunt @Kieran Yanner
+69 U Briarhorn @Nils Hamm
+70 U Explosive Vegetation @John Avon
+71 C Fertile Ground @Mark Tedin
+72 C Fertilid @Wayne Reynolds
+73 R Forgotten Ancient @Mark Tedin
+74 R Ivy Elemental @Ron Spencer
+75 R Living Hive @Anthony S. Waters
+76 C Rampant Growth @Steven Belledin
+77 C Search for Tomorrow @Randy Gallegos
+78 C Silverglade Elemental @Chippy
+79 R Tornado Elemental @Alex Horley-Orlandelli
+80 U Tribal Unity @Ron Spears
+81 R Verdant Force @DiTerlizzi
+82 U Boros Swiftblade @Doug Chaffee
+83 C Branching Bolt @Vance Kovacs
+84 U Bull Cerodon @Jesper Ejsing
+85 U Captain's Maneuver @Ben Thompson
+86 C Cerodon Yearling @Christopher Moeller
+87 U Fires of Yavimaya @Val Mayerik
+88 R Glory of Warfare @Paolo Parente
+89 C Hull Breach @Brian Snõddy
+90 U Lightning Helix @Kev Walker
+91 U Mage Slayer @Lars Grant-West
+92 R Razia, Boros Archangel @Donato Giancola
+93 R Rumbling Slum @Carl Critchlow
+94 U Savage Twister @Bob Eggleton
+95 U Sludge Strider @Franz Vohwinkel
+96 C Arsenal Thresher @Ralph Horsley
+97 R Balefire Liege @Ralph Horsley
+98 C Battlegate Mimic @Franz Vohwinkel
+99 U Boros Guildmage @Paolo Parente
+100 C Double Cleave @rk post
+101 U Duergar Hedge-Mage @Dave Allsop
+102 U Hearthfire Hobgoblin @Steven Belledin
+103 U Assault // Battery @Ben Thompson
+104 U Order // Chaos @Tim Hildebrandt
+105 U Arcbound Crusher @Michael Sutfin
+106 U Arcbound Slith @Vance Kovacs
+107 C Boros Signet @Greg Hildebrandt
+108 R Bosh, Iron Golem @Brom
+109 C Copper Myr @Kev Walker
+110 C Cranial Plating @Adam Rex
+111 R Darksteel Forge @Martina Pilcerova
+112 R Door to Nothingness @Puddnhead
+113 U Etched Oracle @Matt Cavotta
+114 C Gold Myr @Kev Walker
+115 C Iron Myr @Kev Walker
+116 C Leaden Myr @Kev Walker
+117 R Lodestone Myr @Greg Staples
+118 R Loxodon Warhammer @Jeremy Jarvis
+119 U Mask of Memory @Alan Pollack
+120 C Myr Enforcer @Greg Staples
+121 U Nuisance Engine @Stephen Tappin
+122 C Pentad Prism @David Martin
+123 R Pentavus @Greg Staples
+124 C Relic of Progenitus @Jean-Sébastien Rossbach
+125 U Serum Tank @Corey D. Macourek
+126 C Silver Myr @Kev Walker
+127 U Skeleton Shard @Doug Chaffee
+128 C Suntouched Myr @Greg Hildebrandt
+129 C Wizard Replica @Carl Critchlow
+130 C Ancient Den @Rob Alexander
+131 C Boros Garrison @John Avon
+132 U Cabal Coffers @Don Hazeltine
+133 C Great Furnace @Rob Alexander
+134 C Gruul Turf @John Avon
+135 U Leechridden Swamp @Lars Grant-West
+136 C Seat of the Synod @John Avon
+137 U Shivan Oasis @Rob Alexander
+138 U Sunhome, Fortress of the Legion @Martina Pilcerova
+139 C Terramorphic Expanse @Dan Scott
+140 C Tree of Tales @John Avon
+141 C Vault of Whispers @Rob Alexander
+142 L Plains @Martina Pilcerova
+143 L Plains @Larry MacDougall
+144 L Plains @Richard Wright
+145 L Plains @Dave Kendall
+146 L Plains @Stephan Martiniere
+147 L Island @Mark Tedin
+148 L Island @Rob Alexander
+149 L Island @Martina Pilcerova
+150 L Island @John Avon
+151 L Swamp @Martina Pilcerova
+152 L Swamp @Vance Kovacs
+153 L Swamp @Craig Mullins
+154 L Swamp @Mark Tedin
+155 L Swamp @Mark Tedin
+156 L Mountain @Craig Mullins
+157 L Mountain @Aleksi Briclot
+158 L Mountain @Aleksi Briclot
+159 L Mountain @Nils Hamm
+160 L Mountain @Mark Tedin
+161 L Mountain @Stephan Martiniere
+162 L Mountain @Richard Wright
+163 L Mountain @Dave Kendall
+164 L Mountain @Brandon Kitkouski
+165 L Forest @John Avon
+166 L Forest @Craig Mullins
+167 L Forest @Chippy
+168 L Forest @Glen Angus
+169 L Forest @Mark Tedin
+OHOP1 C Academy at Tolaria West @James Paick
+OHOP2 C The Aether Flues @Jason A. Engle
+OHOP3 C Agyrem @Todd Lockwood
+OHOP4 C Bant @Michael Komarck
+OHOP5 C Cliffside Market @Matt Stewart
+OHOP6 C The Dark Barony @Pete Venters
+OHOP7 C Eloren Wilds @Darrell Riche
+OHOP8 C The Eon Fog @Jaime Jones
+OHOP9 C Feeding Grounds @Matt Stewart
+OHOP10 C Fields of Summer @Daniel Ljunggren
+OHOP11 C The Fourth Sphere @Dave Kendall
+OHOP12 C Glimmervoid Basin @Lars Grant-West
+OHOP13 C Goldmeadow @Warren Mahy
+OHOP14 C The Great Forest @Howard Lyon
+OHOP15 C Grixis @Nils Hamm
+OHOP16 C The Hippodrome @Steve Argyle
+OHOP17 C Immersturm @Raymond Swanland
+OHOP18 C Isle of Vesuva @Zoltan Boros & Gabor Szikszai
+OHOP19 C Izzet Steam Maze @Franz Vohwinkel
+OHOP20 C Krosa @Steven Belledin
+OHOP21 C Lethe Lake @Chris J. Anderson
+OHOP22 C Llanowar @Kev Walker
+OHOP23 C The Maelstrom @James Paick
+OHOP24 C Minamo @Charles Urbach
+OHOP25 C Murasa @Jung Park
+OHOP26 C Naar Isle @Mark Zug
+OHOP27 C Naya @Zoltan Boros & Gabor Szikszai
+OHOP28 C Otaria @Charles Urbach
+OHOP29 C Panopticon @John Avon
+OHOP30 C Pools of Becoming @Jason Chan
+OHOP31 C Raven's Run @Omar Rayyan
+OHOP32 C Sanctum of Serra @Rob Alexander
+OHOP33 C Sea of Sand @Jim Nelson
+OHOP34 C Shiv @rk post
+OHOP35 C Skybreen @Wayne England
+OHOP36 C Sokenzan @Brian Snõddy
+OHOP37 C Stronghold Furnace @Jim Pavelec
+OHOP38 C Turri Island @Raymond Swanland
+OHOP39 C Undercity Reaches @Stephan Martiniere
+OHOP40 C Velis Vel @Terese Nielsen
 
 [tokens]
 w_0_1_goat

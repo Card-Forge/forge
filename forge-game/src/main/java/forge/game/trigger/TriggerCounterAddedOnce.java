@@ -55,6 +55,12 @@ public class TriggerCounterAddedOnce extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        if (hasParam("FirstTime")) {
+            if (!(boolean) runParams.get(AbilityKey.FirstTime)) {
+                return false;
+            }
+        }
+
         if (hasParam("CounterType")) {
             final CounterType addedType = (CounterType) runParams.get(AbilityKey.CounterType);
             final String type = getParam("CounterType");

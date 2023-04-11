@@ -1,0 +1,16 @@
+Name:Hidetsugu and Kairi
+ManaCost:2 U U B
+Types:Legendary Creature Ogre Demon Dragon
+PT:5/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw three cards, then put two cards from your hand on top of your library in any order.
+SVar:TrigDraw:DB$ Draw | NumCards$ 3 | SubAbility$ ChangeZoneDB
+SVar:ChangeZoneDB:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeNum$ 2 | Mandatory$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME dies, exile the top card of your library. Target opponent loses life equal to its mana value. If it's an instant or sorcery card, you may cast it without paying its mana cost.
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | ValidTgts$ Opponent | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Remembered | ConditionCheckSVar$ Z | ConditionSVarCompare$ EQ1 | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
+SVar:Z:Remembered$Valid Instant,Sorcery
+Oracle:Flying\nWhen Hidetsugu and Kari enters the battlefield, draw three cards, then put two cards from your hand on top of your library in any order.\nWhen Hidetsugu and Kairi dies, exile the top card of your library. Target opponent loses life equal to its mana value. If it's an instant or sorcery card, you may cast it without paying its mana cost.

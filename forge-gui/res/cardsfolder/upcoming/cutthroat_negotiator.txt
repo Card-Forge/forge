@@ -1,0 +1,12 @@
+Name:Cutthroat Negotiator
+ManaCost:2 U R
+Types:Creature Orc Pirate
+PT:4/3
+T:Mode$ Attacks | ValidCard$ Card.Self | PrecostDesc$ Parley — | Execute$ TrigPeek | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, each player reveals the top card of their library. For each nonland card revealed this way, you create a tapped Treasure token. Then each player draws a card.
+SVar:TrigPeek:DB$ PeekAndReveal | Defined$ Player | RememberRevealed$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenTapped$ True | TokenAmount$ X | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Player | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Card.nonLand
+DeckHas:Ability$Token & Type$Treasure|Artifact
+Oracle:Parley — Whenever Cutthroat Negotiator attacks, each player reveals the top card of their library. For each nonland card revealed this way, you create a tapped Treasure token. Then each player draws a card.

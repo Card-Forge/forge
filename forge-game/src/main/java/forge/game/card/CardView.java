@@ -313,6 +313,7 @@ public class CardView extends GameEntityView {
         state.updatePower(c);
         state.updateToughness(c);
         state.updateLoyalty(c);
+        state.updateDefense(c);
     }
 
     public int getCrackOverlayInt() {
@@ -400,6 +401,12 @@ public class CardView extends GameEntityView {
     }
     void updateChosenPlayer(Card c) {
         set(TrackableProperty.ChosenPlayer, PlayerView.get(c.getChosenPlayer()));
+    }
+    public PlayerView getProtectingPlayer() {
+        return get(TrackableProperty.ProtectingPlayer);
+    }
+    void updateProtectingPlayer(Card c) {
+        set(TrackableProperty.ProtectingPlayer, PlayerView.get(c.getProtectingPlayer()));
     }
 
     public Direction getChosenDirection() {
@@ -977,6 +984,7 @@ public class CardView extends GameEntityView {
             currentStateView.updatePower(c); //ensure power, toughness, and loyalty updated when current state changes
             currentStateView.updateToughness(c);
             currentStateView.updateLoyalty(c);
+            currentStateView.updateDefense(c);
 
             // update the color only while in Game
             if (c.getGame() != null) {
@@ -985,6 +993,7 @@ public class CardView extends GameEntityView {
             }
         } else {
             currentStateView.updateLoyalty(currentState);
+            currentStateView.updateDefense(currentState);
         }
         currentState.getView().updateKeywords(c, currentState); //update keywords even if state doesn't change
         currentState.getView().setOriginalColors(c); //set original Colors
@@ -1009,6 +1018,7 @@ public class CardView extends GameEntityView {
                 alternateStateView.updatePower(c); //ensure power, toughness, and loyalty updated when current state changes
                 alternateStateView.updateToughness(c);
                 alternateStateView.updateLoyalty(c);
+                alternateStateView.updateDefense(c);
 
                 // update the color only while in Game
                 if (c.getGame() != null) {
@@ -1016,6 +1026,7 @@ public class CardView extends GameEntityView {
                 }
             } else {
                 alternateStateView.updateLoyalty(alternateState);
+                alternateStateView.updateDefense(alternateState);
             }
             alternateState.getView().updateKeywords(c, alternateState);
         }
@@ -1340,6 +1351,36 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Loyalty, "0"); //alternates don't need loyalty
         }
 
+
+        public String getDefense() {
+            return get(TrackableProperty.Defense);
+        }
+        void updateDefense(Card c) {
+            if (c.isInZone(ZoneType.Battlefield)) {
+                updateDefense(String.valueOf(c.getCurrentDefense()));
+            } else {
+                updateDefense(c.getCurrentState().getBaseDefense());
+            }
+        }
+        void updateDefense(String defense) {
+            set(TrackableProperty.Defense, defense);
+        }
+        void updateDefense(CardState c) {
+            if (CardView.this.getCurrentState() == this) {
+                Card card = c.getCard();
+                if (card != null) {
+                    if (card.isInZone(ZoneType.Battlefield)) {
+                        updateDefense(card);
+                    } else {
+                        updateDefense(c.getBaseDefense());
+                    }
+
+                    return;
+                }
+            }
+            updateDefense("0");
+        }
+
         public String getSetCode() {
             return get(TrackableProperty.SetCode);
         }
@@ -1587,6 +1628,10 @@ public class CardView extends GameEntityView {
         }
         public boolean isPlaneswalker() {
             return getType().isPlaneswalker();
+        }
+
+        public boolean isBattle() {
+            return getType().isBattle();
         }
         public boolean isMountain() {
             return getType().hasSubtype("Mountain");

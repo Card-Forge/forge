@@ -308,6 +308,7 @@ ScryfallCode=HBG
 
 [rebalanced]
 A85 C A-Blessed Hippogriff @Leanna Crossan
+A87 C A-Dawnbringer Cleric @Lie Setiawan
 A104 C A-Steadfast Unicorn @John Thacker
 A117 C A-Dragonborn Looter @Julio Reyna
 A120 U A-Goggles of Night @Forrest Imel
@@ -332,6 +333,7 @@ A215 U A-Jade Orb of Dragonkind @Olena Richards
 A217 R A-Monster Manual @David Gaillet
 A223 U A-Split the Spoils @Edgar Sánchez Hidalgo
 A232 R A-Baba Lysaga, Night Witch @Slawomir Maniak
+A239 U A-Krydle of Baldur's Gate @Bryan Sola
 A243 M A-Minsc & Boo, Timeless Heroes @Andreas Zafiratos
 A259 C A-Lantern of Revealing @Eytan Zana
 A262 U A-Navigation Orb @Robin Olausson

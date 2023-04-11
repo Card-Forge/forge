@@ -4,7 +4,7 @@ Colors:Blue
 Types:Enchantment
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Command | Execute$ TrigMill | TriggerDescription$ Whenever you draw a card, each opponent mills a card.
 SVar:TrigMill:DB$ Mill | Defined$ Opponent | NumCards$ 1
-A:AB$ ChooseCard | Cost$ PayShards<2> | ActivationZone$ Command | ActiviationChoices$ Creature.OppCtrl | Choices$ Creature.OppOwn | ChoiceZone$ Library | AtRandom$ True | SubAbility$ DBConjure | SpellDescription$ Conjure a duplicate of a random creature card from your opponent's library unto the battlefield under your control. The duplicate perpetually becomes a blue Illusion creature with base power and toughness 2/2. Exile Jace's Signature Hoodie.
+A:AB$ ChooseCard | Cost$ PayShards<2> | ActivationZone$ Command | ActiviationChoices$ Creature.OppCtrl | ActivationLimit$ 1 | Choices$ Creature.OppOwn | ChoiceZone$ Library | AtRandom$ True | SubAbility$ DBConjure | SpellDescription$ Conjure a duplicate of a random creature card from your opponent's library unto the battlefield under your control. The duplicate perpetually becomes a blue Illusion creature with base power and toughness 2/2. Exile Jace's Signature Hoodie.
 SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ ChosenCard | Zone$ Battlefield | RememberMade$ True | SubAbility$ DBClearChosen
 SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Name$ Jace's Signature Hoodie's Perpetual Effect | SubAbility$ Eject

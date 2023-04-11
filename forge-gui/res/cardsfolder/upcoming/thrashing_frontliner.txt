@@ -1,0 +1,9 @@
+Name:Thrashing Frontliner
+ManaCost:1 R
+Types:Creature Phyrexian Viashino
+PT:2/2
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Battle | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks a battle, it gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | NumAtt$ 1 | NumDef$ 1
+AI:RemoveDeck:Random
+Oracle:Trample\nWhenever Thrashing Frontliner attacks a battle, it gets +1/+1 until end of turn.

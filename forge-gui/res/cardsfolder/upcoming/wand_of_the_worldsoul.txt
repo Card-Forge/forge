@@ -1,0 +1,10 @@
+Name:Wand of the Worldsoul
+ManaCost:2 W
+Types:Artifact
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ Effect | Cost$ T | StaticAbilities$ GrandConvoke | Triggers$ ExileEffect | SpellDescription$ The next spell you cast this turn has convoke.
+SVar:GrandConvoke:Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouCtrl | AffectedZone$ Stack | AddKeyword$ Convoke | Description$ The next spell you cast this turn has convoke.
+SVar:ExileEffect:Mode$ SpellCast | EffectZone$ Command | ValidCard$ Card.YouCtrl | Execute$ RemoveEffect | Static$ True
+SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+Oracle:Wand of the Worldsoul enters the battlefield tapped.\n{T}: Add {W}.\n{T}: The next spell you cast this turn has convoke.

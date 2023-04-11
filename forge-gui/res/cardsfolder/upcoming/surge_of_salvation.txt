@@ -1,0 +1,9 @@
+Name:Surge of Salvation
+ManaCost:W
+Types:Instant
+A:SP$ Pump | Defined$ You | KW$ Hexproof | SubAbility$ DBPumpAll | SpellDescription$ You and permanents you control gain hexproof until end of turn. 
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Permanent.YouCtrl | KW$ Hexproof | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ DMPrevent | SpellDescription$ Prevent all damage that black and/or red sources would deal to creatures you control this turn.
+SVar:DMPrevent:Event$ DamageDone | ValidSource$ Card.Red,Card.Black | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature.YouCtrl | Description$ Prevent all damage that black and/or red sources would deal to creatures you control this turn.
+SVar:NonStackingEffect:True
+Oracle:You and permanents you control gain hexproof until end of turn. Prevent all damage that black and/or red sources would deal to creatures you control this turn.

@@ -1,0 +1,22 @@
+Name:Khenra Spellspear
+ManaCost:1 R
+Types:Creature Jackal Warrior
+PT:2/2
+K:Trample
+K:Prowess
+A:AB$ SetState | Cost$ 3 UP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
+AlternateMode:DoubleFaced
+Oracle:Trample\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\n{3}{U/P}: Transform Khenra Spellspear. Activate only as a sorcery. ({U/P} can be paid with either {U} or 2 life.)
+
+ALTERNATE
+
+Name:Gitaxian Spellstalker
+ManaCost:no cost
+Colors:blue,red
+Types:Creature Phyrexian Jackal
+PT:3/3
+K:Trample
+K:Ward:2
+K:Prowess
+K:Prowess
+Oracle:Trample, ward {2}, prowess, prowess (Each instance of prowess triggers separately.)

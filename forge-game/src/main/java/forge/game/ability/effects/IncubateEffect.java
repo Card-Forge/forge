@@ -34,38 +34,36 @@ public class IncubateEffect extends TokenEffectBase {
         if (times > 1) {
             sb.append(" ").append(times == 2 ? "twice" : Lang.nounWithNumeral(amount, "times"));
         }
-        sb.append(".").append(" (Create an Incubator token with ");
-        sb.append(Lang.nounWithNumeral(amount, "+1/+1 counter"));
-        sb.append(" on it and \"{2}: Transform this artifact.\" It transforms into a 0/0 Phyrexian artifact creature.)");
+        sb.append(".");
 
         return sb.toString();
     }
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getHostCard();
-        final Game game = card.getGame();
-        final Player activator = sa.getActivatingPlayer();
-        final int times = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Times", "1"), sa);
-
+        final Card host = sa.getHostCard();
+        final Game game = host.getGame();
+        final int times = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Times", "1"), sa);
         sa.putParam("WithCountersType", "P1P1");
         sa.putParam("WithCountersAmount", sa.getParamOrDefault("Amount", "1"));
 
-        for (int i = 0; i < times; i++) {
-            CardZoneTable triggerList = new CardZoneTable();
-            MutableBoolean combatChanged = new MutableBoolean(false);
+        for (final Player p : getTargetPlayers(sa)) {
+            for (int i = 0; i < times; i++) {
+                CardZoneTable triggerList = new CardZoneTable();
+                MutableBoolean combatChanged = new MutableBoolean(false);
 
-            makeTokenTable(makeTokenTableInternal(activator, "incubator_c_0_0_a_phyrexian", 1, sa), false,
-                    triggerList, combatChanged, sa);
+                makeTokenTable(makeTokenTableInternal(p, "incubator_c_0_0_a_phyrexian", 1, sa), false,
+                        triggerList, combatChanged, sa);
 
-            triggerList.triggerChangesZoneAll(game, sa);
-            triggerList.clear();
+                triggerList.triggerChangesZoneAll(game, sa);
+                triggerList.clear();
 
-            game.fireEvent(new GameEventTokenCreated());
+                game.fireEvent(new GameEventTokenCreated());
 
-            if (combatChanged.isTrue()) {
-                game.updateCombatForView();
-                game.fireEvent(new GameEventCombatChanged());
+                if (combatChanged.isTrue()) {
+                    game.updateCombatForView();
+                    game.fireEvent(new GameEventCombatChanged());
+                }
             }
         }
     }

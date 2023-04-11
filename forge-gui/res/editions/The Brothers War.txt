@@ -406,6 +406,9 @@ ScryfallCode=BRO
 383 U Sardian Cliffstomper @Joseph Weston
 384 U Blanchwood Armor @Manuel Castañón
 
+[rebalanced]
+A199 U A-Haywire Mite @Izzy
+
 [lands]
 2 Plains|BRO|1
 2 Plains|BRO|2

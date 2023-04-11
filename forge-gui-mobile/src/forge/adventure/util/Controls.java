@@ -37,8 +37,8 @@ import java.util.function.Function;
  */
 public class Controls {
     static class LabelFix extends TextraLabel {
-        public LabelFix(String text) {
-            super(text, getSkin(), getTextraFont());
+        public LabelFix(String text, Font font) {
+            super(text, getSkin(), font);
         }
 
         @Override
@@ -356,9 +356,13 @@ public class Controls {
         return Color.BLACK;
     }
 
-    public static TextraLabel newTextraLabel(String name) {
-        TextraLabel ret = new LabelFix(name);
+    public static TextraLabel newTextraLabel(String name, Font font) {
+        TextraLabel ret = new LabelFix(name, font);
         return ret;
+    }
+
+    public static TextraLabel newTextraLabel(String name) {
+        return newTextraLabel(name, getTextraFont());
     }
 
     public static String colorIdToTypingString(ColorSet color) {

@@ -33,6 +33,8 @@ public class LibGDXImageFetcher extends ImageFetcher {
         private void doFetch(String urlToDownload) throws IOException {
             String newdespath = urlToDownload.contains(".fullborder.") || urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD) ?
                     TextUtil.fastReplace(destPath, ".full.", ".fullborder.") : destPath;
+            if (!newdespath.contains(".full") && urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD))
+                newdespath = newdespath.replace(".jpg", ".fullborder.jpg"); //fix planes/phenomenon for round border options
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
             java.net.URLConnection c = url.openConnection();
@@ -75,22 +77,32 @@ public class LibGDXImageFetcher extends ImageFetcher {
 
         public void run() {
             for (String urlToDownload : downloadUrls) {
+                boolean isPlanechaseBG = urlToDownload.startsWith("https://downloads.cardforge.org/images/planes/");
                 try {
-                    doFetch(tofullBorder(urlToDownload));
-                    break;
+                    if (isPlanechaseBG) {
+                        doFetch(urlToDownload);
+                        break;
+                    } else {
+                        doFetch(tofullBorder(urlToDownload));
+                        break;
+                    }
                 } catch (IOException e) {
-                    System.out.println("Failed to download card [" + destPath + "] image: " + e.getMessage());
-                    if (urlToDownload.contains("tokens")) {
-                        int setIndex = urlToDownload.lastIndexOf('_');
-                        int typeIndex = urlToDownload.lastIndexOf('.');
-                        String setlessFilename = urlToDownload.substring(0, setIndex);
-                        String extension = urlToDownload.substring(typeIndex);
-                        urlToDownload = setlessFilename+extension;
-                        try {
-                            doFetch(tofullBorder(urlToDownload));
-                            break;
-                        } catch (IOException t) {
-                            System.out.println("Failed to download setless token [" + destPath + "]: " + e.getMessage());
+                    if (isPlanechaseBG) {
+                        System.out.println("Failed to download planechase background [" + destPath + "] image: " + e.getMessage());
+                    } else {
+                        System.out.println("Failed to download card [" + destPath + "] image: " + e.getMessage());
+                        if (urlToDownload.contains("tokens")) {
+                            int setIndex = urlToDownload.lastIndexOf('_');
+                            int typeIndex = urlToDownload.lastIndexOf('.');
+                            String setlessFilename = urlToDownload.substring(0, setIndex);
+                            String extension = urlToDownload.substring(typeIndex);
+                            urlToDownload = setlessFilename + extension;
+                            try {
+                                doFetch(tofullBorder(urlToDownload));
+                                break;
+                            } catch (IOException t) {
+                                System.out.println("Failed to download setless token [" + destPath + "]: " + e.getMessage());
+                            }
                         }
                     }
                 }
