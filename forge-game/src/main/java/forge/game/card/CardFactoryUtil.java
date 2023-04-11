@@ -819,7 +819,19 @@ public class CardFactoryUtil {
             inst.addTrigger(trigger);
         } else if (keyword.equals("Ascend")) {
             // Ascend trigger only for Permanent
-            if (card.isPermanent()) {
+        	if (card.isPlane()) { // Ascend trigger for The Golden City of Orazca
+                final String trig = "Mode$ Always | TriggerZones$ Command | Secondary$ True"
+                        + " | Static$ True | Blessing$ False | IsPresent$ Permanent.YouCtrl | PresentCompare$ GE10 "
+                        + " | TriggerDescription$ Ascend (" + inst.getReminderText() + ")";
+
+                final String effect = "DB$ Ascend | Defined$ You";
+
+                final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
+                trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+
+                inst.addTrigger(trigger);
+                
+        	 }  else if (card.isPermanent()) {
                 final String trig = "Mode$ Always | TriggerZones$ Battlefield | Secondary$ True"
                         + " | Static$ True | Blessing$ False | IsPresent$ Permanent.YouCtrl | PresentCompare$ GE10 "
                         + " | TriggerDescription$ Ascend (" + inst.getReminderText() + ")";
