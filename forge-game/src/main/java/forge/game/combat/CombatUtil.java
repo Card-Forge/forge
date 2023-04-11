@@ -71,12 +71,20 @@ import forge.util.maps.MapToAmount;
 public class CombatUtil {
 
     public static FCollectionView<GameEntity> getAllPossibleDefenders(final Player playerWhoAttacks) {
+        // Opponents, opposing planeswalkers, and any battle you don't protect
         final FCollection<GameEntity> defenders = new FCollection<>();
         for (final Player defender : playerWhoAttacks.getOpponents()) {
             defenders.add(defender);
             final CardCollection planeswalkers = defender.getPlaneswalkersInPlay();
             defenders.addAll(planeswalkers);
+            for (Card battle : defender.getBattlesInPlay()) {
+                if (!playerWhoAttacks.equals(battle.getProtectingPlayer()) && battle.getType().hasSubtype("Siege")) {
+                    defenders.add(battle);
+                }
+            }
         }
+        defenders.addAll(playerWhoAttacks.getBattlesInPlay());
+
         return defenders;
     }
 

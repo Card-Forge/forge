@@ -174,6 +174,7 @@ public class UIActor extends Group {
                     break;
             }
         }
+        newActor.setMovable(false);
     }
 
     private void readTextFieldProperties(TextField newActor, ObjectMap.Entries<String, String> entries) {

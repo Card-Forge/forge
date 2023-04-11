@@ -842,6 +842,14 @@ public class AbilityUtils {
         return objects;
     }
 
+    public static FCollection<GameEntity> getDefinedEntities(final Card card, final String[] def, final CardTraitBase sa) {
+        final FCollection<GameEntity> objects = new FCollection<>();
+        for (String d : def) {
+            objects.addAll(AbilityUtils.getDefinedEntities(card, d, sa));
+        }
+        return objects;
+    }
+
     /**
      * Filter list by type.
      *
@@ -2921,10 +2929,13 @@ public class AbilityUtils {
     }
 
     public static final List<SpellAbility> getBasicSpellsFromPlayEffect(final Card tgtCard, final Player controller) {
+        return getBasicSpellsFromPlayEffect(tgtCard, controller, CardStateName.Original);
+    }
+    public static final List<SpellAbility> getBasicSpellsFromPlayEffect(final Card tgtCard, final Player controller, CardStateName state) {
         List<SpellAbility> sas = new ArrayList<>();
         List<SpellAbility> list = Lists.newArrayList(tgtCard.getBasicSpells());
+        CardState original = tgtCard.getState(state);
 
-        CardState original = tgtCard.getState(CardStateName.Original);
         if (tgtCard.isFaceDown()) {
             list.addAll(Lists.newArrayList(tgtCard.getBasicSpells(original)));
         } else {

@@ -103,8 +103,6 @@ public class CardFactoryUtil {
      * abilityMorphDown.
      * </p>
      *
-     * @param sourceCard
-     *            a {@link forge.game.card.Card} object.
      * @return a {@link forge.game.spellability.SpellAbility} object.
      */
     public static SpellAbility abilityMorphDown(final CardState cardState, final boolean intrinsic) {
@@ -160,8 +158,6 @@ public class CardFactoryUtil {
      * abilityMorphUp.
      * </p>
      *
-     * @param sourceCard
-     *            a {@link forge.game.card.Card} object.
      * @return a {@link forge.game.spellability.AbilityActivated} object.
      */
     public static SpellAbility abilityMorphUp(final CardState cardState, final String costStr, final boolean mega, final boolean intrinsic) {
@@ -2284,12 +2280,10 @@ public class CardFactoryUtil {
             String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
 
             AbilitySub sacrificeSA = (AbilitySub) AbilityFactory.getAbility(sacrificeStr, card);
-            String value = "Count$Valid " + valid + ".YouCtrl+Other";
-            sacrificeSA.setSVar("DevourSacX", value);
+            sacrificeSA.setSVar("DevourSacX", "Count$Valid " + valid + ".YouCtrl+Other");
 
             AbilitySub counterSA = (AbilitySub) AbilityFactory.getAbility(counterStr, card);
-            counterSA.setSVar("DevourX", "SVar$DevourSize/Times." + magnitude);
-            counterSA.setSVar("DevourSize", "Count$RememberedSize");
+            counterSA.setSVar("DevourX", "Count$RememberedSize/Times." + magnitude);
             sacrificeSA.setSubAbility(counterSA);
 
             AbilitySub cleanupSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
@@ -3932,6 +3926,33 @@ public class CardFactoryUtil {
         }
 
         return altCostSA;
+    }
+
+    public static void setupSiegeAbilities(Card card) {
+        StringBuilder chooseSB = new StringBuilder();
+        chooseSB.append("Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated");
+        chooseSB.append(" | Description$ (As a Siege enters the battlefield, choose an opponent to protect it. You and others can attack it. When it’s defeated, exile it, then cast it transformed.)");
+        String chooseProtector = "DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | Protect$ True | ChoiceTitle$ Choose an opponent to protect this battle | AILogic$ Curse";
+
+        ReplacementEffect re = ReplacementHandler.parseReplacement(chooseSB.toString(), card, true);
+        re.setOverridingAbility(AbilityFactory.getAbility(chooseProtector, card));
+        card.addReplacementEffect(re);
+
+        // Defeated trigger
+        StringBuilder triggerDefeated = new StringBuilder();
+        triggerDefeated.append("Mode$ CounterRemovedOnce | ValidCard$ Card.Self | Secondary$ True | CounterType$ DEFENSE | Remaining$ 0 | TriggerZones$ Battlefield  | ");
+        triggerDefeated.append(" TriggerDescription$ When CARDNAME is defeated, exile it, then cast it transformed.");
+
+        String castExileBattle = "DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True";
+        String castDefeatedBattle = "DB$ Play | Defined$ Remembered | WithoutManaCost$ True | CastTransformed$ True";
+
+        Trigger defeatedTrigger = TriggerHandler.parseTrigger(triggerDefeated.toString(), card, true);
+        SpellAbility exileAbility = AbilityFactory.getAbility(castExileBattle, card);
+        AbilitySub castAbility = (AbilitySub)AbilityFactory.getAbility(castDefeatedBattle, card);
+
+        exileAbility.setSubAbility(castAbility);
+        defeatedTrigger.setOverridingAbility(exileAbility);
+        card.addTrigger(defeatedTrigger);
     }
 
     public static void setupAdventureAbility(Card card) {

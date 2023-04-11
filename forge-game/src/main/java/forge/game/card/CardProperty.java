@@ -342,6 +342,10 @@ public class CardProperty {
                     return false;
                 }
             }
+        } else if (property.startsWith("StrictlyOther")) {
+            if (card.equalsWithTimestamp(source)) {
+                return false;
+            }
         } else if (property.startsWith("Other")) {
             if (card.equals(source)) {
                 return false;

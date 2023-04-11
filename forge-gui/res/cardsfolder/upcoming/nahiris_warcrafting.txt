@@ -1,0 +1,9 @@
+Name:Nahiri's Warcrafting
+ManaCost:1 R R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker,Battle | TgtPrompt$ Select target creature, planeswalker, or battle | NumDmg$ 5 | ExcessSVar$ X | SubAbility$ DBDig | SpellDescription$ CARDNAME deals 5 damage to target creature, planeswalker, or battle.
+SVar:DBDig:DB$ Dig | DigNum$ X | ChangeNum$ 1 | Optional$ True | DestinationZone$ Exile | RestRandomOrder$ True | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Look at the top X cards of your library, where X is the excess damage dealt this way. You may exile one of those cards. Put the rest on the bottom of your library in a random order.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile | SpellDescription$ You may play the exiled card this turn.
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Nahiri's Warcrafting deals 5 damage to target creature, planeswalker, or battle. Look at the top X cards of your library, where X is the excess damage dealt this way. You may exile one of those cards. Put the rest on the bottom of your library in a random order. You may play the exiled card this turn.
