@@ -15,6 +15,7 @@ ManaCost:no cost
 Colors:green
 Types:Creature Elemental
 PT:4/4
+A:SP$ PermanentCreature
 K:Vigilance
 K:Haste
 S:Mode$ Continuous | Affected$ Card.Self | AddType$ Land | Description$ As long as Awakened Skyclave is on the battlefield, it’s a land in addition to its other types.
