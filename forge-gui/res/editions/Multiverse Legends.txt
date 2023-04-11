@@ -10,7 +10,7 @@ ScryfallCode=MUL
 2 U Daxos, Blessed by the Sun @Jason A. Engle
 3 M Elesh Norn, Grand Cenobite @Flavio Girón
 4 M Kenrith, the Returned King @Aaron Miller
-5 U Kwende, Pride of Femeref
+5 U Kwende, Pride of Femeref @Jody Clark
 6 R Sram, Senior Edificer @Adam Paquette
 7 R Thalia, Guardian of Thraben @Joshua Alvarado
 8 R Baral, Chief of Compliance @Yeong-Hao Han
@@ -68,7 +68,7 @@ ScryfallCode=MUL
 60 R Taigam, Ojutai Master @Domenico Cava
 61 R Teysa Karlov @Barbara Rosiak
 62 R Umori, the Collector @Daniel Warren Johnson
-63 M Yarok, the Desecrated
+63 M Yarok, the Desecrated @Jessica Rossier
 64 R Yorion, Sky Nomad @Justine Mara Andersen
 65 R Zirda, the Dawnwaker @Justine Mara Andersen
 68 M Elesh Norn, Grand Cenobite @Igor Kieryluk
@@ -162,6 +162,10 @@ ScryfallCode=MUL
 190 R Taigam, Ojutai Master @Domenico Cava
 191 R Teysa Karlov @Barbara Rosiak
 192 R Umori, the Collector @Daniel Warren Johnson
-193 M Yarok, the Desecrated
+193 M Yarok, the Desecrated @Jessica Rossier
 194 R Yorion, Sky Nomad @Justine Mara Andersen
 195 R Zirda, the Dawnwaker @Justine Mara Andersen
+
+[tokens]
+r_3_1_elemental_trample_haste
+u_2_1_a_phyrexian_myr
