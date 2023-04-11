@@ -625,10 +625,7 @@ public class GameHUD extends Stage {
             @Override
             public boolean act(float v) {
                 if (exitDungeon) {
-                    Forge.switchScene(GameScene.instance());
-                    WorldStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
-                    MapStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
-                    gameStage.getPlayerSprite().stop();
+                    MapStage.getInstance().exitDungeon();
                     exitToWorldMapActor.setVisible(false);
                 }
                 return true;

@@ -68,10 +68,7 @@ public class MapStage extends GameStage {
     MapLayer spriteLayer;
     private PointOfInterestChanges changes;
     private EnemySprite currentMob;
-    private final Vector2 oldPosition = new Vector2();//todo
-    private final Vector2 oldPosition2 = new Vector2();
-    private final Vector2 oldPosition3 = new Vector2();
-    private final Vector2 oldPosition4 = new Vector2();
+    Queue<Vector2> positions = new LinkedList<>();
     private boolean isLoadingMatch = false;
     //private HashMap<String, Byte> mapFlags = new HashMap<>(); //Stores local map flags. These aren't available outside this map.
 
@@ -790,6 +787,7 @@ public class MapStage extends GameStage {
     @Override
     public void setWinner(boolean playerWins) {
         isLoadingMatch = false;
+        matchJustEnded = true;
         if (playerWins) {
             currentMob.clearCollisionHeight();
             Current.player().win();
@@ -814,7 +812,9 @@ public class MapStage extends GameStage {
                 player.setAnimation(CharacterSprite.AnimationTypes.Idle);
                 currentMob.setAnimation(CharacterSprite.AnimationTypes.Idle);
                 currentMob.resetCollisionHeight();
-                player.setPosition(oldPosition4);
+                if (positions.peek() != null) {
+                    player.setPosition(positions.peek());
+                }
                 currentMob.freezeMovement();
                 AdventureQuestController.instance().updateQuestsLose(currentMob);
                 AdventureQuestController.instance().showQuestDialogs(MapStage.this);
@@ -920,6 +920,11 @@ public class MapStage extends GameStage {
             return;
         Iterator<EnemySprite> it = enemies.iterator();
 
+        if (matchJustEnded){
+            if (!positions.contains(player.pos()))
+                matchJustEnded = false;
+        }
+
         if (!matchJustEnded) {
             while (it.hasNext()) {
                 EnemySprite mob = it.next();
@@ -949,10 +954,19 @@ public class MapStage extends GameStage {
 
         float sprintingMod = currentModifications.containsKey(PlayerModification.Sprint) ? 2 : 1;
         player.setMoveModifier(2 * sprintingMod);
-        oldPosition4.set(oldPosition3);
-        oldPosition3.set(oldPosition2);
-        oldPosition2.set(oldPosition);
-        oldPosition.set(player.pos());
+
+//        oldPosition4.set(oldPosition3);
+//        oldPosition3.set(oldPosition2);
+//        oldPosition2.set(oldPosition);
+//        oldPosition.set(player.pos());
+
+        positions.add(player.pos());
+        if (positions.size() > 4)
+            positions.remove();
+
+
+
+
         for (MapActor actor : new Array.ArrayIterator<>(actors)) {
             if (actor.collideWithPlayer(player)) {
                 if (actor instanceof EnemySprite) {
@@ -1052,7 +1066,9 @@ public class MapStage extends GameStage {
     }
 
     public void resetPosition() {
-        player.setPosition(oldPosition4);
+        if (positions.peek() != null){
+            player.setPosition(positions.peek());
+        }
         stop();
     }
 

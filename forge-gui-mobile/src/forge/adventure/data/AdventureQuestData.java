@@ -52,7 +52,7 @@ public class AdventureQuestData implements Serializable {
     Dictionary<String, EnemyData> enemyTokens = new Hashtable<>();
     Dictionary<String, String> otherTokens = new Hashtable<>();
     public boolean storyQuest = false;
-    public transient boolean isTracked = false;
+    public boolean isTracked = false;
     public String sourceID = "";
 
     public String getName() {
@@ -93,6 +93,7 @@ public class AdventureQuestData implements Serializable {
         poiTokens = data.poiTokens;
         enemyTokens = data.enemyTokens;
         otherTokens = data.otherTokens;
+        isTracked = data.isTracked;
     }
 
     public AdventureQuestData()

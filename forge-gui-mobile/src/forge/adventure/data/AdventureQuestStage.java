@@ -95,6 +95,12 @@ public class AdventureQuestStage implements Serializable {
             }
             if (candidates.size() < 1)
             {
+                //no POI matched, fall back to anyPOI valid for the objective that doesn't match all tags
+                candidates = Current.world().getAllPointOfInterest();
+                if (objective == AdventureQuestController.ObjectiveTypes.Clear)
+                    candidates.removeIf(q -> !Arrays.asList(q.getData().questTags).contains("Hostile"));
+                else
+                    candidates.removeIf(q -> Arrays.asList(q.getData().questTags).contains("Hostile"));
                 return;
             }
             count1 = (count1* candidates.size()/ 100);
@@ -239,15 +245,24 @@ public class AdventureQuestStage implements Serializable {
 
         if (status != AdventureQuestController.QuestStatus.Failed && this.objective == AdventureQuestController.ObjectiveTypes.Defeat) {
             {
-                List<String> defeatedByTags = Arrays.stream(defeatedBy.getData().questTags).collect(Collectors.toList());
-                for (String targetTag : enemyTags) {
-                    if (!defeatedByTags.contains(targetTag)) {
-                        //Does not count
-                        return status;
+                if (mixedEnemies){
+                    List<String> defeatedByTags = Arrays.stream(defeatedBy.getData().questTags).collect(Collectors.toList());
+                    for (String targetTag : enemyTags) {
+                        if (!defeatedByTags.contains(targetTag)) {
+                            //Does not count
+                            return status;
+                        }
                     }
                 }
+                else{
+                    if (defeatedBy.getData()!=targetEnemyData)
+                        //Does not count
+                        return status;
+                }
                 //All tags matched
-                if (status == AdventureQuestController.QuestStatus.Active && ++progress2 >= count2){
+                //progress2: number of times defeated by a matching enemy
+                //count2: if > 0, fail once defeated this many times
+                if (status == AdventureQuestController.QuestStatus.Active && ++progress2 >= count2 && count2 > 0){
                     status = AdventureQuestController.QuestStatus.Failed;
                 }
 
