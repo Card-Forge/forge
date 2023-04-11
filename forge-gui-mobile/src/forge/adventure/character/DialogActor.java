@@ -2,6 +2,8 @@ package forge.adventure.character;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import forge.adventure.data.AdventureQuestData;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Current;
@@ -35,7 +37,13 @@ public class DialogActor extends CharacterSprite {
         dialog = new MapDialog(data.offerDialog, stage, id);
         this.textureRegion = null;
         this.questData = data;
-        dialog.addQuestAcceptedListener(e -> acceptQuest());
+        ChangeListener listen = new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                acceptQuest();
+            }
+        };
+        dialog.addQuestAcceptedListener(listen);
     }
 
     public void acceptQuest(){

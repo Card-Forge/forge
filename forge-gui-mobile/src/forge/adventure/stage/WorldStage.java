@@ -11,10 +11,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import forge.Forge;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
-import forge.adventure.data.AdventureQuestData;
-import forge.adventure.data.BiomeData;
-import forge.adventure.data.EnemyData;
-import forge.adventure.data.WorldData;
+import forge.adventure.data.*;
 import forge.adventure.scene.DuelScene;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
@@ -29,10 +26,7 @@ import forge.sound.SoundSystem;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 /**
@@ -236,10 +230,6 @@ public class WorldStage extends GameStage implements SaveFileContent {
     }
 
     private void handleMonsterSpawn(float delta) {
-        for (Actor sprite : foregroundSprites.getChildren()) {
-            if (AdventureQuestController.instance().getQuestSprites().remove(sprite)) {
-            }
-        }
         for (EnemySprite questSprite : AdventureQuestController.instance().getQuestSprites()) {
             if (!foregroundSprites.getChildren().contains(questSprite, true)) {
                 spawnQuestSprite(questSprite,2.5f);
@@ -371,10 +361,14 @@ public class WorldStage extends GameStage implements SaveFileContent {
             List<String> names = (List<String>) data.readObject("names");
             List<Float> x = (List<Float>) data.readObject("x");
             List<Float> y = (List<Float>) data.readObject("y");
+            List<UUID> questStageIDs = (List<UUID>) data.readObject("questStageIDs");
             for (int i = 0; i < timeouts.size(); i++) {
                 EnemySprite sprite = new EnemySprite(WorldData.getEnemy(names.get(i)));
                 sprite.setX(x.get(i));
                 sprite.setY(y.get(i));
+                sprite.questStageID = questStageIDs.get(i);
+                if (sprite.questStageID != null)
+                    AdventureQuestController.instance().rematchQuestSprite(sprite);
                 enemies.add(Pair.of(timeouts.get(i), sprite));
                 foregroundSprites.addActor(sprite);
             }
@@ -399,16 +393,19 @@ public class WorldStage extends GameStage implements SaveFileContent {
         List<String> names = new ArrayList<>();
         List<Float> x = new ArrayList<>();
         List<Float> y = new ArrayList<>();
+        List<UUID> questStageIDs = new ArrayList<>();
         for (Pair<Float, EnemySprite> enemy : enemies) {
             timeouts.add(enemy.getKey());
             names.add(enemy.getValue().getData().name);
             x.add(enemy.getValue().getX());
             y.add(enemy.getValue().getY());
+            questStageIDs.add(enemy.getValue().questStageID);
         }
         data.storeObject("timeouts", timeouts);
         data.storeObject("names", names);
         data.storeObject("x", x);
         data.storeObject("y", y);
+        data.storeObject("questStageIDs", questStageIDs);
         data.store("globalTimer", globalTimer);
         return data;
     }

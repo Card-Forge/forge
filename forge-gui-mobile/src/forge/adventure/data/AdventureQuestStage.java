@@ -45,6 +45,8 @@ public class AdventureQuestStage implements Serializable {
     public String POIToken; //If defined, ignore tags input and use the target POI from a different stage's objective instead.
     private transient boolean inTargetLocation = false;
 
+    public UUID questStageID = UUID.randomUUID();
+
     public void checkPrerequisites() {
         //Todo - implement
     }
@@ -226,7 +228,7 @@ public class AdventureQuestStage implements Serializable {
                 }
             }
         }
-        else if (!targetPOI.equals(entered)){
+        else if (!targetPOI.getPosition().equals(entered.getPosition())){
             inTargetLocation = false;
             return;
         }
@@ -303,5 +305,6 @@ public class AdventureQuestStage implements Serializable {
         this.POITags = other.POITags;
         this.targetEnemyData = other.targetEnemyData;
         this.deliveryItem = other.deliveryItem;
+        this.questStageID = other.questStageID;
     }
 }
