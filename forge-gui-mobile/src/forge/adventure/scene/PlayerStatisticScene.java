@@ -198,9 +198,9 @@ public class PlayerStatisticScene extends UIScene {
         }
         if (blessingScroll != null) {
             if (Current.player().getBlessing() != null) {
-                blessingScroll.setText(Current.player().getBlessing().getDescription());
+                blessingScroll.setText("[BLACK]" + Current.player().getBlessing().getDescription());
             } else {
-                blessingScroll.setText("No blessing.");
+                blessingScroll.setText("[BLACK]No blessing.");
             }
         }
 
