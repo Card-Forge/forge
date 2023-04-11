@@ -72,12 +72,12 @@
   "rewards": [
     {
       "count":6,
-	  "cardText": "deathtouch|fear|intimidate|menace|ninjitsu|regenerate\b",
+	  "cardText": "deathtouch|fear|intimidate|menace|ninjutsu|regenerate\b",
 	  "colors": ["black"]
     },
 	{
       "count":2,
-	  "cardText": "deathtouch|fear|intimidate|menace|ninjitsu|regenerate\b"
+	  "cardText": "deathtouch|fear|intimidate|menace|ninjutsu|regenerate\b"
     }]
 },{                                      
 "name":"Black6",                  
@@ -136,12 +136,12 @@
   "rewards": [
     {
       "count":6,
-	  "cardText": "flying|prowess|unblockable|hexproof|shroud|morph|ninjitsu|phas(ing|(es (in|out)))",
+	  "cardText": "flying|prowess|unblockable|hexproof|shroud|morph|ninjutsu|phas(ing|(es (in|out)))",
 	  "colors": ["blue"]
     },
 	{
       "count":2,
-	  "cardText": "flying|prowess|unblockable|hexproof|shroud|morph|ninjitsu|phas(ing|(es (in|out)))"
+	  "cardText": "flying|prowess|unblockable|hexproof|shroud|morph|ninjutsu|phas(ing|(es (in|out)))"
     }]
 },{
 "name":"Blue4",                  

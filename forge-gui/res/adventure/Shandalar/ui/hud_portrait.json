@@ -106,9 +106,9 @@
     
     {
       "type": "TextButton",
-      "name": "statistic",
+      "name": "logbook",
 	  "style":"menu",
-      "text": "[%120][+Status]",
+      "text": "[%120][+Logbook]",
       "binding": "Status",
       "width": 64,
       "height": 32,

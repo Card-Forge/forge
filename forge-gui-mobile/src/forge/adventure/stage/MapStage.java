@@ -126,8 +126,9 @@ public class MapStage extends GameStage {
     public PointOfInterestChanges getChanges() {
         return changes;
     }
+    private boolean matchJustEnded = false;
 
-    private MapStage() {
+    protected MapStage() {
         dialog = Controls.newDialog("");
         eventTouchDown = new InputEvent();
         eventTouchDown.setPointer(-1);
@@ -550,7 +551,7 @@ public class MapStage extends GameStage {
                                 System.err.printf("Enemy \"%s\" not found.", enemy);
                                 break;
                             }
-                            EnemySprite mob = new EnemySprite(id, EN);
+                            EnemySprite mob = new EnemySprite(id, EN, changes);
                             Object dialogObject = prop.get("dialog"); //Check if the enemy has a dialogue attached to it.
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.dialog = new MapDialog(dialogObject.toString(), this, mob.getId());
@@ -644,28 +645,17 @@ public class MapStage extends GameStage {
                         }
                         break;
                     case "quest":
-                        DialogActor dialog;
+
                         if (prop.containsKey("questtype")) {
                             TiledMapTileMapObject tiledObj = (TiledMapTileMapObject) obj;
-
                             String questOrigin = prop.containsKey("questtype") ? prop.get("questtype").toString() : "";
+                            AdventureQuestData questInfo = AdventureQuestController.instance().getQuestNPCResponse(TileMapScene.instance().rootPoint.getID(), changes,questOrigin);
 
-                            String placeholderText = "[" +
-                                    "  {" +
-                                    "    \"name\":\"Quest Offer\"," +
-                                    "    \"text\":\"Please, help us!\\n((QUEST DESCRIPTION))\"," +
-                                    "    \"condition\":[]," +
-                                    "    \"options\":[" +
-                                    "        { \"name\":\"No, I'm not ready yet.\nMaybe next snapshot.\" }," +
-                                    "    ]" +
-                                    "  }" +
-                                    "]";
-
-                            {
-                                dialog = new DialogActor(this, id, placeholderText, tiledObj.getTextureRegion());
+                            if (questInfo != null) {
+                                DialogActor questActor = new DialogActor(questInfo, this, id);
+                                questActor.setVisible(false);
+                                addMapActor(obj, questActor);
                             }
-                            dialog.setVisible(false);
-                            addMapActor(obj, dialog);
                         }
                         break;
 
@@ -757,7 +747,7 @@ public class MapStage extends GameStage {
                         Array<Reward> ret = new Array<>();
                         WorldSave.getCurrentSave().getWorld().getRandom().setSeed(changes.getShopSeed(id));
                         for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
-                            ret.addAll(rdata.generate(false));
+                            ret.addAll(rdata.generate(false, false));
                         }
                         ShopActor actor = new ShopActor(this, id, ret, data);
                         addMapActor(obj, actor);
@@ -787,6 +777,8 @@ public class MapStage extends GameStage {
     }
 
     public boolean exitDungeon() {
+        AdventureQuestController.instance().updateQuestsLeave();
+        AdventureQuestController.instance().showQuestDialogs(this);
         isLoadingMatch = false;
         effect = null; //Reset dungeon effects.
         clearIsInMap();
@@ -809,6 +801,9 @@ public class MapStage extends GameStage {
                     currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
                     currentMob.resetCollisionHeight();
                     startPause(0.3f, MapStage.this::getReward);
+                    AdventureQuestController.instance().updateQuestsWin(currentMob,enemies);
+                    AdventureQuestController.instance().showQuestDialogs(MapStage.this);
+                    player.setAnimation(CharacterSprite.AnimationTypes.Idle);
                 }
             }, 1f);
         } else {
@@ -821,6 +816,8 @@ public class MapStage extends GameStage {
                 currentMob.resetCollisionHeight();
                 player.setPosition(oldPosition4);
                 currentMob.freezeMovement();
+                AdventureQuestController.instance().updateQuestsLose(currentMob);
+                AdventureQuestController.instance().showQuestDialogs(MapStage.this);
                 boolean defeated = Current.player().defeated();
                 if (canFailDungeon && defeated) {
                     //If hardcore mode is added, check and redirect to game over screen here
@@ -919,40 +916,36 @@ public class MapStage extends GameStage {
 
     @Override
     protected void onActing(float delta) {
+        if (isPaused() || isDialogOnlyInput())
+            return;
         Iterator<EnemySprite> it = enemies.iterator();
-        while (it.hasNext()) {
-            EnemySprite mob = it.next();
-            mob.updatePositon();
-            mob.targetVector = mob.getTargetVector(player, delta);
-            Vector2 currentVector = new Vector2(mob.targetVector);
-            mob.clearActions();
-            if (mob.targetVector.len() == 0.0f) {
-                mob.setAnimation(CharacterSprite.AnimationTypes.Idle);
-                continue;
-            }
 
-            if (!mob.getData().flying)//if direct path is not possible
-            {
-                //Todo: fix below for collision logic
-                float safeLen = lengthWithoutCollision(mob, mob.targetVector);
-                if (safeLen > 0.1f) {
-                    currentVector.setLength(Math.min(safeLen, mob.targetVector.len()));
-                } else {
-                    currentVector = Vector2.Zero;
+        if (!matchJustEnded) {
+            while (it.hasNext()) {
+                EnemySprite mob = it.next();
+                mob.updatePositon();
+                mob.targetVector = mob.getTargetVector(player, delta);
+                Vector2 currentVector = new Vector2(mob.targetVector);
+                mob.clearActions();
+                if (mob.targetVector.len() == 0.0f) {
+                    mob.setAnimation(CharacterSprite.AnimationTypes.Idle);
+                    continue;
                 }
+
+                if (!mob.getData().flying)//if direct path is not possible
+                {
+                    //Todo: fix below for collision logic
+                    float safeLen = lengthWithoutCollision(mob, mob.targetVector);
+                    if (safeLen > 0.1f) {
+                        currentVector.setLength(Math.min(safeLen, mob.targetVector.len()));
+                    } else {
+                        currentVector = Vector2.Zero;
+                    }
+                }
+                currentVector.setLength(Math.min(mob.speed() * delta, mob.targetVector.len()));
+                mob.moveBy(currentVector.x, currentVector.y);
             }
-
-
-            //mob.targetVector.setLength(Math.min(mob.speed() * delta, mob.targetVector.len()));
-//            if (mob.targetVector.len() < 0.3f) {
-//                mob.targetVector = Vector2.Zero;
-//            }
-            currentVector.setLength(Math.min(mob.speed() * delta, mob.targetVector.len()));
-            //if (destination.len() < 0.3f) destination = Vector2.Zero;
-            mob.moveBy(currentVector.x, currentVector.y);
-
         }
-
 
         float sprintingMod = currentModifications.containsKey(PlayerModification.Sprint) ? 2 : 1;
         player.setMoveModifier(2 * sprintingMod);
@@ -965,6 +958,7 @@ public class MapStage extends GameStage {
                 if (actor instanceof EnemySprite) {
                     EnemySprite mob = (EnemySprite) actor;
                     currentMob = mob;
+                    currentMob.clearCollisionHeight();
                     resetPosition();
                     if (mob.dialog != null && mob.dialog.canShow()) { //This enemy has something to say. Display a dialog like if it was a DialogActor but only if dialogue is possible.
                         mob.dialog.activate();
@@ -1032,7 +1026,9 @@ public class MapStage extends GameStage {
     }
 
     public void showDialog() {
-
+        if (dialogStage == null){
+            setDialogStage(GameHUD.getInstance());
+        }
         dialogButtonMap.clear();
         for (int i = 0; i < dialog.getButtonTable().getCells().size; i++) {
             dialogButtonMap.add((TextraButton) dialog.getButtonTable().getCells().get(i).getActor());
@@ -1048,6 +1044,7 @@ public class MapStage extends GameStage {
         dialog.hide(Actions.sequence(Actions.sizeTo(dialog.getOriginX(), dialog.getOriginY(), 0.3f), Actions.hide()));
         dialogOnlyInput = false;
         selectedKey = null;
+        dialog.clearListeners();
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -1061,6 +1058,9 @@ public class MapStage extends GameStage {
 
     public void setQuestFlag(String key, int value) {
         changes.getMapFlags().put(key, (byte) value);
+
+        AdventureQuestController.instance().updateQuestsMapFlag(key,value);
+        AdventureQuestController.instance().showQuestDialogs(this);
     }
 
     public void advanceQuestFlag(String key) {
@@ -1070,6 +1070,9 @@ public class MapStage extends GameStage {
         } else {
             C.put(key, (byte) 1);
         }
+
+        AdventureQuestController.instance().updateQuestsMapFlag(key,changes.getMapFlags().get(key));
+        AdventureQuestController.instance().showQuestDialogs(this);
     }
 
     public boolean checkQuestFlag(String key) {

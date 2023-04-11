@@ -434,9 +434,9 @@
     "equipmentSlot": "Left",
     "iconName": "FlameSword",
     "effect": {
-      "opponent": {
-        "lifeModifier": -5
-      }
+        "startBattleWithCardInCommandZone": [
+          "Flame Sword"
+        ]
     }
   },
   {

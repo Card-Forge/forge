@@ -48,7 +48,8 @@ public class PointOfInterestMapSprite extends MapSprite {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
+        if (pointOfInterest.getActive())
+            super.draw(batch, parentAlpha);
         //batch.draw(getDebugTexture(),getX(),getY());
     }
 }
