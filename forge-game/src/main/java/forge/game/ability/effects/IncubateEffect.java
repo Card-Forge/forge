@@ -48,7 +48,6 @@ public class IncubateEffect extends TokenEffectBase {
         sa.putParam("WithCountersAmount", sa.getParamOrDefault("Amount", "1"));
 
         for (final Player p : getTargetPlayers(sa)) {
-
             for (int i = 0; i < times; i++) {
                 CardZoneTable triggerList = new CardZoneTable();
                 MutableBoolean combatChanged = new MutableBoolean(false);

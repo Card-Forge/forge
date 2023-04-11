@@ -3773,7 +3773,7 @@ public class CardFactoryUtil {
                     "| Trigger$ TrigEnlist | Description$ Enlist ( " + inst.getReminderText() + ")";
             StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
             st.setSVar("TrigEnlist", "DB$ Pump | NumAtt$ TriggerRemembered$CardPower" +
-            " | SpellDescription$ When you do, add its power to this creature’s until end of turn.");
+            " | SpellDescription$ When you do, add its power to this creature's until end of turn.");
             inst.addStaticAbility(st);
         } else if (keyword.equals("Fear")) {
             String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+nonBlack | Secondary$ True" +
@@ -3851,7 +3851,7 @@ public class CardFactoryUtil {
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.startsWith("Read ahead")) {
             String effect = "Mode$ DisableTriggers | ValidCard$ Card.Self+ThisTurnEntered | ValidTrigger$ Triggered.ChapterNotLore | Secondary$ True" +
-                    " | Description$ Chapter abilities of this Saga can’t trigger the turn it entered the battlefield unless it has exactly the number of lore counters on it specified in the chapter symbol of that ability.";
+                    " | Description$ Chapter abilities of this Saga can't trigger the turn it entered the battlefield unless it has exactly the number of lore counters on it specified in the chapter symbol of that ability.";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Shroud")) {
             String effect = "Mode$ CantTarget | Shroud$ True | ValidCard$ Card.Self | Secondary$ True"
@@ -3931,7 +3931,7 @@ public class CardFactoryUtil {
     public static void setupSiegeAbilities(Card card) {
         StringBuilder chooseSB = new StringBuilder();
         chooseSB.append("Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated");
-        chooseSB.append(" | Description$ (As a Siege enters the battlefield, choose an opponent to protect it. You and others can attack it. When it’s defeated, exile it, then cast it transformed.)");
+        chooseSB.append(" | Description$ (As a Siege enters the battlefield, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)");
         String chooseProtector = "DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | Protect$ True | ChoiceTitle$ Choose an opponent to protect this battle | AILogic$ Curse";
 
         ReplacementEffect re = ReplacementHandler.parseReplacement(chooseSB.toString(), card, true);
@@ -3940,7 +3940,7 @@ public class CardFactoryUtil {
 
         // Defeated trigger
         StringBuilder triggerDefeated = new StringBuilder();
-        triggerDefeated.append("Mode$ CounterRemovedOnce | ValidCard$ Card.Self | Secondary$ True | CounterType$ DEFENSE | Remaining$ 0 | TriggerZones$ Battlefield  | ");
+        triggerDefeated.append("Mode$ CounterRemovedOnce | ValidCard$ Card.Self | Secondary$ True | CounterType$ DEFENSE | Remaining$ 0 | TriggerZones$ Battlefield | ");
         triggerDefeated.append(" TriggerDescription$ When CARDNAME is defeated, exile it, then cast it transformed.");
 
         String castExileBattle = "DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True";

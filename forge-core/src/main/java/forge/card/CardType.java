@@ -928,11 +928,11 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     public static boolean isAnArtifactType(final String cardType) {
-        return (Constant.ARTIFACT_TYPES.contains(cardType));
+        return Constant.ARTIFACT_TYPES.contains(cardType);
     }
 
     public static boolean isACreatureType(final String cardType) {
-        return (Constant.CREATURE_TYPES.contains(cardType));
+        return Constant.CREATURE_TYPES.contains(cardType);
     }
 
     public static boolean isALandType(final String cardType) {
@@ -940,26 +940,26 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     public static boolean isAPlaneswalkerType(final String cardType) {
-        return (Constant.WALKER_TYPES.contains(cardType));
+        return Constant.WALKER_TYPES.contains(cardType);
     }
 
     public static boolean isABasicLandType(final String cardType) {
-        return (Constant.BASIC_TYPES.contains(cardType));
+        return Constant.BASIC_TYPES.contains(cardType);
     }
 
     public static boolean isAnEnchantmentType(final String cardType) {
-        return (Constant.ENCHANTMENT_TYPES.contains(cardType));
+        return Constant.ENCHANTMENT_TYPES.contains(cardType);
     }
 
     public static boolean isASpellType(final String cardType) {
-        return (Constant.SPELL_TYPES.contains(cardType));
+        return Constant.SPELL_TYPES.contains(cardType);
     }
 
     public static boolean isADungeonType(final String cardType) {
-        return (Constant.DUNGEON_TYPES.contains(cardType));
+        return Constant.DUNGEON_TYPES.contains(cardType);
     }
     public static boolean isABattleType(final String cardType) {
-        return (Constant.BATTLE_TYPES.contains(cardType));
+        return Constant.BATTLE_TYPES.contains(cardType);
     }
     /**
      * If the input is a plural type, return the corresponding singular form.
