@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Creature Elemental
 PT:0/0
 K:etbCounter:P1P1:1
-A:AB$ PumpAll | Cost$ 1 B SubCounter<1/P1P1> | ValidCards$ Creature.Other | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ All other creatures get -1/-1 until end of turn.
+A:AB$ PumpAll | Cost$ 1 B SubCounter<1/P1P1> | ValidCards$ Creature.StrictlyOther | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ All other creatures get -1/-1 until end of turn.
 AI:RemoveDeck:Random
 Oracle:Festercreep enters the battlefield with a +1/+1 counter on it.\n{1}{B}, Remove a +1/+1 counter from Festercreep: All other creatures get -1/-1 until end of turn.

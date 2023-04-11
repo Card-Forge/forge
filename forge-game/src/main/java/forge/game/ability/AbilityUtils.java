@@ -2937,7 +2937,7 @@ public class AbilityUtils {
         CardState original = tgtCard.getState(state);
 
         if (tgtCard.isFaceDown()) {
-            list.addAll(Lists.newArrayList(tgtCard.getBasicSpells(original)));
+            Iterables.addAll(list, tgtCard.getBasicSpells(original));
         } else {
             if (tgtCard.isLand()) {
                 LandAbility la = new LandAbility(tgtCard, controller, null);
@@ -2946,7 +2946,7 @@ public class AbilityUtils {
             }
             if (tgtCard.isModal()) {
                 CardState modal = tgtCard.getState(CardStateName.Modal);
-                list.addAll(Lists.newArrayList(tgtCard.getBasicSpells(modal)));
+                Iterables.addAll(list, tgtCard.getBasicSpells(modal));
                 if (modal.getType().isLand()) {
                     LandAbility la = new LandAbility(tgtCard, controller, null);
                     la.setCardState(modal);
