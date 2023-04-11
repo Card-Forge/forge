@@ -2929,10 +2929,13 @@ public class AbilityUtils {
     }
 
     public static final List<SpellAbility> getBasicSpellsFromPlayEffect(final Card tgtCard, final Player controller) {
+        return getBasicSpellsFromPlayEffect(tgtCard, controller, CardStateName.Original);
+    }
+    public static final List<SpellAbility> getBasicSpellsFromPlayEffect(final Card tgtCard, final Player controller, CardStateName state) {
         List<SpellAbility> sas = new ArrayList<>();
         List<SpellAbility> list = Lists.newArrayList(tgtCard.getBasicSpells());
+        CardState original = tgtCard.getState(state);
 
-        CardState original = tgtCard.getState(CardStateName.Original);
         if (tgtCard.isFaceDown()) {
             list.addAll(Lists.newArrayList(tgtCard.getBasicSpells(original)));
         } else {

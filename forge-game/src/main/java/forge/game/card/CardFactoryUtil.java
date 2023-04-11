@@ -3943,10 +3943,15 @@ public class CardFactoryUtil {
         triggerDefeated.append("Mode$ CounterRemovedOnce | ValidCard$ Card.Self | Secondary$ True | CounterType$ DEFENSE | Remaining$ 0 | TriggerZones$ Battlefield  | ");
         triggerDefeated.append(" TriggerDescription$ When CARDNAME is defeated, exile it, then cast it transformed.");
 
-        String castDefeatedBattle = "DB$ Play | Defined$ Self | WithoutManaCost$ True | CastTransformed$ True";
+        String castExileBattle = "DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True";
+        String castDefeatedBattle = "DB$ Play | Defined$ Remembered | WithoutManaCost$ True | CastTransformed$ True";
 
         Trigger defeatedTrigger = TriggerHandler.parseTrigger(triggerDefeated.toString(), card, true);
-        defeatedTrigger.setOverridingAbility(AbilityFactory.getAbility(castDefeatedBattle, card));
+        SpellAbility exileAbility = AbilityFactory.getAbility(castExileBattle, card);
+        AbilitySub castAbility = (AbilitySub)AbilityFactory.getAbility(castDefeatedBattle, card);
+
+        exileAbility.setSubAbility(castAbility);
+        defeatedTrigger.setOverridingAbility(exileAbility);
         card.addTrigger(defeatedTrigger);
     }
 

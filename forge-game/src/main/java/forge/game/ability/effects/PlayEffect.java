@@ -286,9 +286,20 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
             }
 
+            CardStateName state = CardStateName.Original;
+
+            if (sa.hasParam("CastTransformed")) {
+                if (!tgtCard.changeToState(CardStateName.Transformed)) {
+                    // Failed to transform. In the future, we might need to just remove this option and continue
+                    amount--;
+                    continue;
+                }
+                state = CardStateName.Transformed;
+            }
+
             // TODO if cost isn't replaced should include alternative ones
             // get basic spells (no flashback, etc.)
-            List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, controller);
+            List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, controller, state);
             if (sa.hasParam("ValidSA")) {
                 final String valid[] = sa.getParam("ValidSA").split(",");
                 sas = Lists.newArrayList(Iterables.filter(sas, SpellAbilityPredicates.isValid(valid, controller , source, sa)));
@@ -312,14 +323,6 @@ public class PlayEffect extends SpellAbilityEffect {
                 // For Illusionary Mask effect
                 tgtSA = CardFactoryUtil.abilityMorphDown(tgtCard.getCurrentState(), false);
             } else {
-                if (sa.hasParam("CastTransformed")) {
-                    if (!tgtCard.changeToState(CardStateName.Transformed)) {
-                        // Failed to transform. In the future, we might need to just remove this option and continue
-                        amount--;
-                        continue;
-                    }
-                }
-
                 tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(tgtCard, sas);
             }
 
