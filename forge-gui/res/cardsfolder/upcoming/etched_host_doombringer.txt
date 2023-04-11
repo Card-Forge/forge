@@ -5,7 +5,7 @@ PT:3/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ Drain,Battle
 SVar:Drain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 2 life and you gain 2 life.
-SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | StackDescription$ None
 SVar:Battle:DB$ Branch | ValidTgts$ Battle | BranchConditionSVar$ X | TrueSubAbility$ RemoveCounter | FalseSubAbility$ PutCounter | SpellDescription$ Choose target battle. If an opponent protects it, remove three defense counters from it. Otherwise, put three defense counters on it.
 SVar:RemoveCounter:DB$ RemoveCounter | Defined$ Targeted | CounterType$ DEFENSE | CounterNum$ 3
 SVar:PutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ DEFENSE | CounterNum$ 3
