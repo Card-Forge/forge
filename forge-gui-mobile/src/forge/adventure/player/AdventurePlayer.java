@@ -291,8 +291,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if(data.containsKey("quests")){
             quests.clear();
             Object[] q = (Object[]) data.readObject("quests");
-            for (Object itsReallyAQuest: q)
-                quests.add((AdventureQuestData) itsReallyAQuest);
+            if (q != null) {
+                for (Object itsReallyAQuest : q)
+                    quests.add((AdventureQuestData) itsReallyAQuest);
+            }
         }
 
         for(int i=0;i<NUMBER_OF_DECKS;i++) {

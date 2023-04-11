@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
@@ -27,9 +28,8 @@ import forge.model.FModel;
 import forge.util.Localizer;
 import org.apache.commons.lang3.tuple.Pair;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.EventListenerList;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * MapDialog
@@ -211,31 +211,29 @@ public class MapDialog {
         }
     }
 
-    protected EventListenerList dialogCompleteList = new EventListenerList();
-    protected EventListenerList questAcceptedList = new EventListenerList();
+    protected List<ChangeListener> dialogCompleteList = new ArrayList<>();
+    protected List<ChangeListener> questAcceptedList = new ArrayList<>();
     public void addDialogCompleteListener(ChangeListener listener) {
-        dialogCompleteList.add(ChangeListener.class, listener);
+        dialogCompleteList.add(listener);
     }
     public void addQuestAcceptedListener(ChangeListener listener){
-        questAcceptedList.add(ChangeListener.class, listener);
+        questAcceptedList.add(listener);
     }
 
     private void emitDialogFinished(){
-        ChangeListener[] listeners = dialogCompleteList.getListeners(ChangeListener.class);
-        if (listeners != null && listeners.length > 0) {
-            ChangeEvent evt = new ChangeEvent(this);
-            for (ChangeListener listener : listeners) {
-                listener.stateChanged(evt);
+        if (dialogCompleteList != null && dialogCompleteList.size() > 0) {
+            ChangeListener.ChangeEvent evt = new ChangeListener.ChangeEvent();
+            for (ChangeListener listener : dialogCompleteList) {
+                listener.changed(evt, null);
             }
         }
     }
 
     private void emitQuestAccepted(){
-        ChangeListener[] listeners = questAcceptedList.getListeners(ChangeListener.class);
-        if (listeners != null && listeners.length > 0) {
-            ChangeEvent evt = new ChangeEvent(this);
-            for (ChangeListener listener : listeners) {
-                listener.stateChanged(evt);
+        if (questAcceptedList != null && questAcceptedList.size() > 0) {
+            ChangeListener.ChangeEvent evt = new ChangeListener.ChangeEvent();
+            for (ChangeListener listener : questAcceptedList) {
+                listener.changed(evt, null);
             }
         }
     }

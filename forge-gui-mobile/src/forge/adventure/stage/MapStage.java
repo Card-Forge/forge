@@ -551,7 +551,7 @@ public class MapStage extends GameStage {
                                 System.err.printf("Enemy \"%s\" not found.", enemy);
                                 break;
                             }
-                            EnemySprite mob = new EnemySprite(id, EN, changes);
+                            EnemySprite mob = new EnemySprite(id, EN);
                             Object dialogObject = prop.get("dialog"); //Check if the enemy has a dialogue attached to it.
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.dialog = new MapDialog(dialogObject.toString(), this, mob.getId());

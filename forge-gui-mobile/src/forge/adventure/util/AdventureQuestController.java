@@ -2,6 +2,8 @@ package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import forge.adventure.character.EnemySprite;
@@ -134,7 +136,13 @@ public class AdventureQuestController implements Serializable {
         MapDialog dialog = new MapDialog(dialogQueue.remove(), stage, -1);
         stage.showDialog();
         dialog.activate();
-        dialog.addDialogCompleteListener(e -> displayNextDialog(stage));
+        ChangeListener listen = new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                displayNextDialog(stage);
+            }
+        };
+        dialog.addDialogCompleteListener(listen);
 
     }
     public static class DistanceSort implements Comparator<PointOfInterest>
@@ -217,6 +225,7 @@ public class AdventureQuestController implements Serializable {
     }
 
     public void updateQuestsWin(EnemySprite defeated, ArrayList<EnemySprite> enemies){
+        enemySpriteList.remove(defeated);
         boolean allEnemiesCleared = true;
         if (enemies != null) {
             //battle was won in a dungeon, check for "clear" objectives
@@ -241,12 +250,14 @@ public class AdventureQuestController implements Serializable {
     }
 
     public void updateQuestsLose(EnemySprite defeatedBy){
+        enemySpriteList.remove(defeatedBy);
         for(AdventureQuestData currentQuest : Current.player().getQuests()) {
             currentQuest.updateLose(defeatedBy);
         }
     }
 
     public void updateDespawn(EnemySprite despawned){
+        enemySpriteList.remove(despawned);
         for(AdventureQuestData currentQuest: Current.player().getQuests()) {
             currentQuest.updateDespawn(despawned);
         }
@@ -273,6 +284,15 @@ public class AdventureQuestController implements Serializable {
         return enemySpriteList;
     }
 
+    public void rematchQuestSprite(EnemySprite sprite){
+        for (AdventureQuestData q : Current.player().getQuests()){
+            for (AdventureQuestStage s : q.stages){
+                if (sprite.questStageID != null && sprite.questStageID.equals(s.questStageID)){
+                    s.setTargetSprite(sprite);
+                }
+            }
+        }
+    }
 
     String randomItemName()
     {  //todo: expand and include in fetch/delivery quests

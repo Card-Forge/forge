@@ -14,11 +14,9 @@ import forge.adventure.data.EffectData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.RewardData;
 import forge.adventure.player.AdventurePlayer;
-import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.util.Current;
 import forge.adventure.util.MapDialog;
 import forge.adventure.util.Reward;
-import forge.adventure.world.WorldSave;
 import forge.card.CardRarity;
 import forge.deck.Deck;
 import forge.item.PaperCard;
@@ -27,6 +25,7 @@ import forge.util.MyRandom;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -56,8 +55,7 @@ public class EnemySprite extends CharacterSprite {
     public float threatRange = 0.0f;
     public float fleeRange = 0.0f;
     public boolean ignoreDungeonEffect = false;
-    private PointOfInterestChanges changes;
-    public float spawnDelay;
+    public UUID questStageID;
 
     public EnemySprite(EnemyData enemyData) {
         this(0,enemyData);
@@ -66,12 +64,6 @@ public class EnemySprite extends CharacterSprite {
     public EnemySprite(int id, EnemyData enemyData) {
         super(id,enemyData.sprite);
         data = enemyData;
-    }
-
-    public EnemySprite(int id, EnemyData enemyData, PointOfInterestChanges changes) {
-        super(id,enemyData.sprite);
-        data = enemyData;
-        this.changes = changes;
     }
 
     public void parseWaypoints(String waypoints){
@@ -238,10 +230,6 @@ public class EnemySprite extends CharacterSprite {
                 Deck enemyDeck = Current.latestDeck();
                 /*// By popular demand, remove basic lands from the reward pool.
                 CardPool deckNoBasicLands = enemyDeck.getMain().getFilteredPool(Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND), PaperCard.FN_GET_RULES));*/
-                if (changes!=null){
-                    long shopSeed = changes.getShopSeed(objectId);
-                    WorldSave.getCurrentSave().getWorld().getRandom().setSeed(shopSeed);
-                }
 
                 for (RewardData rdata : data.rewards) {
                     ret.addAll(rdata.generate(false,  enemyDeck == null ? null : enemyDeck.getMain().toFlatList(),true ));
@@ -250,11 +238,6 @@ public class EnemySprite extends CharacterSprite {
             if(rewards != null) { //Collect additional rewards.
                 for(RewardData rdata:rewards) {
                     //Do not filter in case we want to FORCE basic lands. If it ever becomes a problem just repeat the same as above.
-                    if (changes != null)
-                    {
-                        long shopSeed = changes.getShopSeed(objectId);
-                        WorldSave.getCurrentSave().getWorld().getRandom().setSeed(shopSeed);
-                    }
 
                     ret.addAll(rdata.generate(false,(Current.latestDeck() != null ? Current.latestDeck().getMain().toFlatList() : null), true));
                 }
