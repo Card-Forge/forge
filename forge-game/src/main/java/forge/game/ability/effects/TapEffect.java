@@ -25,19 +25,17 @@ public class TapEffect extends SpellAbilityEffect {
             card.clearRemembered();
         }
 
-        CardCollection toTap = new CardCollection();
+        Iterable<Card> toTap;
 
         if (sa.hasParam("CardChoices")) { // choosing outside Defined/Targeted
             final Player activator = sa.getActivatingPlayer();
-            CardCollection choices = new CardCollection();
-            choices.addAll(CardLists.getValidCards(card.getGame().getCardsIn(ZoneType.Battlefield),
-                    sa.getParam("CardChoices"), activator, card, sa));
+            CardCollection choices = CardLists.getValidCards(card.getGame().getCardsIn(ZoneType.Battlefield), sa.getParam("CardChoices"), activator, card, sa);
             int n = sa.hasParam("ChoiceAmount") ?
                     AbilityUtils.calculateAmount(card, sa.getParam("ChoiceAmount"), sa) : 1;
-            int min = (sa.hasParam("AnyNumber")) ? 0 : n;
+            int min = sa.hasParam("AnyNumber") ? 0 : n;
             final String prompt = sa.hasParam("ChoicePrompt") ? sa.getParam("ChoicePrompt") :
                     Localizer.getInstance().getMessage("lblChoosePermanentstoTap");
-            toTap.addAll(activator.getController().chooseEntitiesForEffect(choices, min, n, null, sa, prompt, null, null));
+            toTap = activator.getController().chooseEntitiesForEffect(choices, min, n, null, sa, prompt, null, null);
         } else {
             toTap = getTargetCards(sa);
         }

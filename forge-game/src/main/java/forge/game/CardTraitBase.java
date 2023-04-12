@@ -450,6 +450,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         }
 
         if (params.containsKey("CheckSVar")) {
+            // TODO this provides only the card controller instead of the stack one
             final int sVar = AbilityUtils.calculateAmount(getHostCard(), params.get("CheckSVar"), this);
             final String comparator = getParamOrDefault("SVarCompare", "GE1");
             final String svarOperator = comparator.substring(0, 2);
@@ -463,7 +464,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
                 final String comparator2 = getParamOrDefault("SecondSVarCompare", "GE1");
                 final String svarOperator2 = comparator2.substring(0, 2);
                 final String svarOperand2 = comparator2.substring(2);
-                final int operandValue2 = AbilityUtils.calculateAmount(this.hostCard, svarOperand2, this);
+                final int operandValue2 = AbilityUtils.calculateAmount(getHostCard(), svarOperand2, this);
                 if (!Expressions.compare(sVar2, svarOperator2, operandValue2)) {
                     return false;
                 }

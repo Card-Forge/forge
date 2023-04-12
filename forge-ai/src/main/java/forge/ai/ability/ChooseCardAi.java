@@ -198,13 +198,6 @@ public class ChooseCardAi extends SpellAbilityAi {
         } else if ("RandomNonLand".equals(logic)) {
             options = CardLists.getValidCards(options, "Card.nonLand", host.getController(), host, sa);
             choice = Aggregates.random(options);
-        } else if (logic.equals("Untap")) {
-            final String filter = "Permanent.YouCtrl,Permanent.tapped";
-            CardCollection newOptions = CardLists.getValidCards(options, filter, ctrl, host, sa);
-            if (!newOptions.isEmpty()) {
-                options = newOptions;
-            }
-            choice = ComputerUtilCard.getBestAI(options);
         } else if (logic.equals("NeedsPrevention")) {
             final Game game = ai.getGame();
             final Combat combat = game.getCombat();

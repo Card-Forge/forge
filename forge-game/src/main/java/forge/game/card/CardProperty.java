@@ -870,7 +870,7 @@ public class CardProperty {
                 } else if (restriction.equals(ZoneType.Battlefield.toString())) {
                     return Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("ThisTurnCast")) {
-                    return Iterables.any(CardUtil.getThisTurnCast("Card", source, spellAbility), CardPredicates.sharesNameWith(card));
+                    return Iterables.any(CardUtil.getThisTurnCast("Card", source, spellAbility, sourceController), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("MovedToGrave")) {
                     if (!(spellAbility instanceof SpellAbility)) {
                         final SpellAbility root = ((SpellAbility) spellAbility).getRootAbility();
@@ -962,7 +962,7 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("SecondSpellCastThisTurn")) {
-            final List<Card> cards = CardUtil.getThisTurnCast("Card", source, spellAbility);
+            final List<Card> cards = CardUtil.getThisTurnCast("Card", source, spellAbility, sourceController);
             if (cards.size() < 2) {
                 return false;
             }
@@ -970,7 +970,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("ThisTurnCast")) {
-            for (final Card c : CardUtil.getThisTurnCast("Card", source, spellAbility)) {
+            for (final Card c : CardUtil.getThisTurnCast("Card", source, spellAbility, sourceController)) {
                 if (card.equals(c)) {
                     return true;
                 }
