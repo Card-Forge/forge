@@ -64,8 +64,7 @@ public class PoisonAi extends SpellAbilityAi {
             return true;
         } else {
             // currently there are no optional Trigger
-            final PlayerCollection players = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"),
-                    sa);
+            final PlayerCollection players = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
             if (players.isEmpty()) {
                 return false;
             }

@@ -71,6 +71,9 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
             } else if (top.getApi() == ApiType.CopySpellAbility) {
                 // Don't try to copy a copy ability, too complex for the AI to handle
                 return false;
+            } else if (top.getApi() == ApiType.Mana) {
+                // would lead to Stack Overflow by trying to play this again
+                return false;
             } else if (top.getApi() == ApiType.DestroyAll || top.getApi() == ApiType.SacrificeAll || top.getApi() == ApiType.ChangeZoneAll || top.getApi() == ApiType.TapAll || top.getApi() == ApiType.UnattachAll) {
                 if (!top.usesTargeting() || top.getActivatingPlayer().equals(aiPlayer)) {
                     // If we activated a mass removal / mass tap / mass bounce / etc. spell, or if the opponent activated it but
