@@ -15,4 +15,4 @@ Colors:red,green
 Types:Creature Phyrexian Beast
 PT:7/5
 K:Menace
-Oracle:Menace (This creature can’t be blocked except by two or more creatures.)
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)
