@@ -3944,7 +3944,11 @@ public class CardFactoryUtil {
         triggerDefeated.append(" TriggerDescription$ When CARDNAME is defeated, exile it, then cast it transformed.");
 
         String castExileBattle = "DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True";
-        String castDefeatedBattle = "DB$ Play | Defined$ Remembered | CastTransformed$ True";
+        // note full rules text:
+        // When the last defense counter is removed from this permanent, exile it, then you may cast it transformed
+        // without paying its mana cost.
+        String castDefeatedBattle = "DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | " +
+                "CastTransformed$ True";
 
         Trigger defeatedTrigger = TriggerHandler.parseTrigger(triggerDefeated.toString(), card, true);
         SpellAbility exileAbility = AbilityFactory.getAbility(castExileBattle, card);
