@@ -1,0 +1,22 @@
+Name:Sun-Blessed Guardian
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:2/2
+A:AB$ SetState | Cost$ 5 RP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
+AlternateMode:DoubleFaced
+Oracle:{5}{R/P}: Transform Sun-Blessed Guardian. Activate only as a sorcery. ({R/P} be paid with either {2} or 2 life.)
+
+ALTERNATE
+
+Name:Furnace-Blessed Conqueror
+ManaCost:no cost
+Colors:red,white
+Types:Creature Phyrexian Cleric
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, create a tapped and attacking token that's a copy of it. Put a +1/+1 counter on that token for each +1/+1 counter on CARDNAME. Sacrifice that token at the beginning of the next end step.
+SVar:TrigCopy:DB$ CopyPermanent | TokenTapped$ True | TokenAttacking$ True | Defined$ Self | NumCopies$ 1 | AtEOT$ Sacrifice | RememberTokens$ True | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Defined$ Remembered  | CounterNum$ X | CounterType$ P1P1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$CardCounters.P1P1
+DeckHas:Ability$Token|Counters
+Oracle:Whenever Furnace-Blessed Conqueror attacks, create a tapped and attacking token that's a copy of it. Put a +1/+1 counter on that token for each +1/+1 counter on Furnace-Blessed Conqueror. Sacrifice that token at the beginning of the next end step.

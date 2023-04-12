@@ -1,7 +1,7 @@
 Name:Kill Switch
 ManaCost:3
 Types:Artifact
-A:AB$ TapAll | Cost$ 2 T | ValidCards$ Artifact.Other | RememberTapped$ True | SpellDescription$ Tap all other artifacts. They don't untap during their controllers' untap steps for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
+A:AB$ TapAll | Cost$ 2 T | ValidCards$ Artifact.StrictlyOther | RememberTapped$ True | SpellDescription$ Tap all other artifacts. They don't untap during their controllers' untap steps for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
 S:Mode$ Continuous | Affected$ Card.IsRemembered | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step.
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
 SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True

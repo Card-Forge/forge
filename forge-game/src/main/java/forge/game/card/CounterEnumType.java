@@ -93,6 +93,8 @@ public enum CounterEnumType {
 
     DEATH("DEATH", 255, 108, 110),
 
+    DEFENSE("DEF", 164, 23, 32),
+
     DELAY("DELAY", 102, 206, 255),
 
     DEPLETION("DPLT", 185, 201, 208),

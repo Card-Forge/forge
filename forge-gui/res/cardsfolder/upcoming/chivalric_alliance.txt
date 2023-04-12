@@ -1,0 +1,8 @@
+Name:Chivalric Alliance
+ManaCost:1 W
+Types:Enchantment
+T:Mode$ AttackersDeclared | Execute$ TrigDraw | IsPresent$ Creature.attacking+YouCtrl | PresentCompare$ GE2 | NoResolvingCheck$ True | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with two or more creatures, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+A:AB$ Token | Cost$ 2 Discard<1/Card> | TokenAmount$ 1 | TokenScript$ wu_2_2_knight_vigilance | TokenOwner$ You | SpellDescription$ Create a 2/2 white and blue Knight creature token with vigilance.
+DeckHas:Ability$Token|Discard & Type$Knight & Color$Blue
+Oracle:Whenever you attack with two or more creatures, draw a card.\n{2}, Discard a card: Create a 2/2 white and blue Knight creature token with vigilance.

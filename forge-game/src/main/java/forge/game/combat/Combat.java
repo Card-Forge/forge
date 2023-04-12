@@ -74,7 +74,7 @@ public class Combat {
     // Defenders, as they are attacked by hostile forces
     private final FCollection<GameEntity> attackableEntries = new FCollection<>();
 
-    // Keyed by attackable defender (player or planeswalker)
+    // Keyed by attackable defender (player or planeswalker or battle)
     private final Multimap<GameEntity, AttackingBand> attackedByBands = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
     private final Multimap<AttackingBand, Card> blockedBands = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
 
@@ -303,8 +303,15 @@ public class Combat {
 
         // maybe attack on a controlled planeswalker?
         if (defender instanceof Card) {
-            return ((Card) defender).getController();
+            Card def = (Card)defender;
+            if (def.isBattle()) {
+                return def.getProtectingPlayer();
+            } else {
+                return def.getController();
+            }
+
         }
+
         return null;
     }
 

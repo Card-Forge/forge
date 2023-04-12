@@ -1,0 +1,12 @@
+Name:Bitterthorn, Nissa's Animus
+ManaCost:3
+Types:Legendary Artifact Equipment
+K:Living Weapon
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
+T:Mode$ Attacks | ValidCard$ Creature.EquippedBy | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ Whenever equipped creature attacks, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True | ShuffleNonMandatory$ True
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ AE
+SVar:AE:SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token & Type$Germ|Phyrexian
+Oracle:Living weapon (When this Equipment enters the battlefield, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +1/+1.\nWhenever equipped creature attacks, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\nEquip {3}

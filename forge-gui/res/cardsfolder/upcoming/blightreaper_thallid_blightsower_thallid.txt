@@ -1,0 +1,20 @@
+Name:Blightreaper Thallid
+ManaCost:1 B
+Types:Creature Fungus
+PT:2/2
+A:AB$ SetState | Cost$ 3 GP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
+AlternateMode:DoubleFaced
+Oracle:{3}{G/P}: Transform Blightreaper Thallid. Activate only as a sorcery. ({G/P} can be paid with either {G} or 2 life.)
+
+ALTERNATE
+
+Name:Blightsower Thallid
+ManaCost:no cost
+Colors:black,green
+Types:Creature Phyrexian Fungus
+PT:3/3
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature transforms into CARDNAME or dies, create a 1/1 green Phyrexian Saproling creature token.
+T:Mode$ ChangesZone | Destination$ Graveyard | Origin$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigToken | TriggerDescription$ When this creature transforms into CARDNAME or dies, create a 1/1 green Phyrexian Saproling creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_phyrexian_saproling
+DeckHas:Ability$Token & Type$Saproling
+Oracle:When this creature transforms into Blightsower Thallid or dies, create a 1/1 green Phyrexian Saproling creature token.

@@ -1132,6 +1132,20 @@ public class Game {
         }
         return result;
     }
+    public int getCounterAddedThisTurn(CounterType cType, Card card) {
+        int result = 0;
+        if (!countersAddedThisTurn.containsRow(cType)) {
+            return result;
+        }
+        for (List<Pair<Card, Integer>> l : countersAddedThisTurn.row(cType).values()) {
+            for (Pair<Card, Integer> p : l) {
+                if (p.getKey().equalsWithTimestamp(card)) {
+                    result += p.getValue();
+                }
+            }
+        }
+        return result;
+    }
 
     public void clearCounterAddedThisTurn() {
         countersAddedThisTurn.clear();

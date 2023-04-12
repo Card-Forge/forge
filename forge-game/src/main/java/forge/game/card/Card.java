@@ -285,6 +285,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private String chosenName2 = "";
     private Integer chosenNumber;
     private Player chosenPlayer;
+    private Player protectingPlayer;
     private EvenOdd chosenEvenOdd = null;
     private Direction chosenDirection = null;
     private String chosenMode = "";
@@ -634,7 +635,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             incrementTransformedTimestamp();
 
             return retResult;
-
         } else if (mode.equals("Flip")) {
             // 709.4. Flipping a permanent is a one-way process.
             if (isFlipped()) {
@@ -1447,6 +1447,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             final int toughnessBonusBefore = getToughnessBonusFromCounters();
             final int loyaltyBefore = getCurrentLoyalty();
 
+            int addedThisTurn = getGame().getCounterAddedThisTurn(counterType, this);
             setCounters(counterType, newValue);
             getGame().addCounterAddedThisTurn(source, counterType, this, addAmount);
             view.updateCounters(this);
@@ -1473,6 +1474,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
             if (addAmount > 0) {
                 runParams.put(AbilityKey.CounterAmount, addAmount);
+                runParams.put(AbilityKey.FirstTime, addedThisTurn == 0);
                 getGame().getTriggerHandler().runTrigger(
                         TriggerType.CounterAddedOnce, AbilityKey.newMap(runParams), false);
             }
@@ -1576,6 +1578,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, AbilityKey.newMap(runParams), false);
         }
         runParams.put(AbilityKey.CounterAmount, delta);
+        runParams.put(AbilityKey.NewCounterAmount, newValue);
         getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemovedOnce, AbilityKey.newMap(runParams), false);
     }
 
@@ -1725,6 +1728,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (chosenPlayer == p) { return; }
         chosenPlayer = p;
         view.updateChosenPlayer(this);
+    }
+
+    public final Player getProtectingPlayer() {
+        return protectingPlayer;
+    }
+    public final void setProtectingPlayer(final Player p) {
+        if (protectingPlayer == p) { return; }
+        protectingPlayer = p;
+        view.updateProtectingPlayer(this);
     }
     public final void setSecretChosenPlayer(final Player p) {
         chosenPlayer = p;
@@ -2022,7 +2034,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         final StringBuilder sb = new StringBuilder();
         final StringBuilder sbLong = new StringBuilder();
 
-        List<String> printedKW = new ArrayList<String>();
+        List<String> printedKW = new ArrayList<>();
 
         int i = 0;
         for (KeywordInterface inst : keywords) {
@@ -2257,7 +2269,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                          || keyword.equals("Exalted") || keyword.equals("Extort")|| keyword.equals("Flanking")
                          || keyword.equals("Horsemanship") || keyword.equals("Infect")|| keyword.equals("Persist")
                          || keyword.equals("Phasing") || keyword.equals("Shadow")|| keyword.equals("Skulk")
-                         || keyword.equals("Undying") || keyword.equals("Wither") || keyword.equals("Cascade")
+                         || keyword.equals("Undying") || keyword.equals("Wither")
                          || keyword.equals("Mentor") || keyword.equals("Training")) {
                     if (sb.length() != 0) {
                         sb.append("\r\n");
@@ -2267,6 +2279,25 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sb.append(" (").append(inst.getReminderText()).append(")");
                         printedKW.add(keyword);
                     }
+                } else if (keyword.equals("Cascade")) { // this could become a list for easy keywords that stack
+                    if (printedKW.contains(keyword)) {
+                        continue;
+                    }
+                    if (sb.length() != 0) {
+                        sb.append("\r\n");
+                    }
+
+                    StringBuilder descStr = new StringBuilder(keyword);
+                    int times = 0;
+                    for (KeywordInterface keyw : keywords) {
+                        String kw = keyw.getOriginal();
+                        if (kw.equals(keyword)) {
+                            descStr.append(times == 0 ? "" : ", " + StringUtils.uncapitalize(keyword));
+                            times++;
+                        }
+                    }
+                    sb.append(descStr).append(" ").append(" (").append(inst.getReminderText()).append(")");
+                    printedKW.add(keyword);
                 } else if (keyword.startsWith("Ward")) {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);
@@ -2308,13 +2339,32 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sb.append(" ").append(Localizer.getInstance().getMessage("lblSagaFooter")).append(" ").append(TextUtil.toRoman(getFinalChapterNr())).append(".");
                     sb.append(")").append("\r\n\r\n");
                 } else if (keyword.startsWith("Backup")) {
-                    final String[] k = keyword.split(":");
-                    sb.append(k[0]).append(" ").append(k[1]).append(" (");
+                    if (printedKW.contains("Backup")) {
+                        continue;
+                    }
+                    boolean plural = false;
+
+                    StringBuilder descStr = new StringBuilder("Backup ");
+                    int times = 0;
+                    for (KeywordInterface keyw : keywords) {
+                        String kw = keyw.getOriginal();
+                        if (kw.startsWith("Backup")) {
+                            final String[] k = keyword.split(":");
+                            String magnitude = k[1];
+                            if (times == 0 && k[2].endsWith("s")) {
+                                plural = true;
+                            }
+                            descStr.append(times == 0 ? magnitude : ", backup " + magnitude);
+                            times++;
+                        }
+                    }
+                    sb.append(descStr).append(" ").append(" (");
                     String remStr = inst.getReminderText();
-                    if (k[2].endsWith("s")) {
+                    if (plural) {
                         remStr = remStr.replace("ability", "abilities");
                     }
-                    sb.append(remStr).append(")");
+                    sb.append(remStr).append(times > 1 ? " Each backup ability triggers separately." : "").append(")");
+                    printedKW.add("Backup");
                 } else if (keyword.startsWith("MayEffectFromOpening")) {
                     final String[] k = keyword.split(":");
                     // need to get SpellDescription from Svar
@@ -3248,6 +3298,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         facedown = value;
     }
 
+    public final boolean isTransformed() {
+        return getTransformedTimestamp() != 0;
+    }
+
     public final boolean isFlipped() {
         return flipped;
     }
@@ -3942,6 +3996,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         currentState.setBaseLoyalty(Integer.toString(n));
     }
 
+    public final int getCurrentDefense() {
+        return getCounters(CounterEnumType.DEFENSE);
+    }
+    public final void setBaseDefense(final int n) {
+        currentState.setBaseDefense(Integer.toString(n));
+    }
     public final int getBasePower() {
         return currentState.getBasePower();
     }
@@ -4967,6 +5027,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isCreature()   { return getType().isCreature(); }
     public final boolean isArtifact()   { return getType().isArtifact(); }
     public final boolean isPlaneswalker()   { return getType().isPlaneswalker(); }
+    public final boolean isBattle()      { return getType().isBattle(); }
     public final boolean isEnchantment()    { return getType().isEnchantment(); }
 
     public final boolean isEquipment()  { return getType().hasSubtype("Equipment"); }
@@ -5504,6 +5565,32 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getLethal() - getDamage() - getTotalAssignedDamage();
     }
 
+    public final int getExcessDamageValue(boolean withDeathtouch) {
+        ArrayList<Integer> excessCharacteristics = new ArrayList<>();
+
+        // CR 120.10
+        if (this.isCreature()) {
+            int lethal = this.getLethalDamage();
+            if (withDeathtouch && lethal > 0) {
+                excessCharacteristics.add(1);
+            } else {
+                excessCharacteristics.add(Math.max(0, lethal));
+            }
+        }
+        if (this.isPlaneswalker()) {
+            excessCharacteristics.add(this.getCurrentLoyalty());
+        }
+        if (this.isBattle()) {
+            excessCharacteristics.add(this.getCurrentDefense());
+        }
+
+        if (excessCharacteristics.isEmpty()) {
+            return 0;
+        }
+
+        return Collections.min(excessCharacteristics);
+    }
+
     public final int getDamage() {
         int sum = 0;
         for (int i : damage.values()) {
@@ -5660,8 +5747,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return 0; // 120.8
         }
 
-        // 120.1a Damage can’t be dealt to an object that’s neither a creature nor a planeswalker.
-        if (!isPlaneswalker() && !isCreature()) {
+        // 120.1a Damage can’t be dealt to an object that’s neither a creature nor a planeswalker nor a battle.
+        if (!isPlaneswalker() && !isCreature() && !isBattle()) {
             return 0;
         }
 
@@ -5688,6 +5775,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         DamageType damageType = DamageType.Normal;
         if (isPlaneswalker()) { // 120.3c
             subtractCounter(CounterType.get(CounterEnumType.LOYALTY), damageIn);
+        }
+        if (isBattle()) {
+            subtractCounter(CounterType.get(CounterEnumType.DEFENSE), damageIn);
         }
         if (isCreature()) {
             boolean wither = game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.alwaysWither)

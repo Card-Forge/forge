@@ -143,15 +143,6 @@ public class ReplacementHandler {
                 }
 
                 for (final ReplacementEffect replacementEffect : c.getReplacementEffects()) {
-                    // Replacement effects that are tied to keywords (e.g. damage prevention effects - if the keyword is removed, the replacement
-                    // effect should be inactive)
-                    if (replacementEffect.hasParam("TiedToKeyword")) {
-                        String kw = replacementEffect.getParam("TiedToKeyword");
-                        if (!c.hasKeyword(kw)) {
-                            continue;
-                        }
-                    }
-
                     if (!replacementEffect.hasRun() && !hasRun.contains(replacementEffect)
                             && (layer == null || replacementEffect.getLayer() == layer)
                             && event.equals(replacementEffect.getMode())

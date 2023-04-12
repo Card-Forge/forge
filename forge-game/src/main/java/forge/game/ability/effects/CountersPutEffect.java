@@ -251,9 +251,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         } else {
             if (sa.hasParam("Defined") && sa.getParam("Defined").contains(" & ")) {
-                for (String def : sa.getParam("Defined").split(" & ")) {
-                    tgtObjects.addAll(AbilityUtils.getDefinedEntities(card, def, sa));
-                }
+                tgtObjects.addAll(AbilityUtils.getDefinedEntities(card, sa.getParam("Defined").split(" & "), sa));
             } else {
                 tgtObjects.addAll(getDefinedEntitiesOrTargeted(sa, "Defined"));
             }

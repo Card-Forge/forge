@@ -724,6 +724,12 @@ public final class CardPredicates {
                 return c.isPlaneswalker();
             }
         };
+        public static final Predicate<Card> BATTLES = new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.isBattle();
+            }
+        };
         public static final Predicate<Card> CAN_BE_DESTROYED = new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {

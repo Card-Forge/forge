@@ -157,6 +157,18 @@ public class ConsoleCommandInterpreter {
             Current.player().giveGold(amount);
             return "Added " + amount + " gold";
         });
+        registerCommand(new String[]{"give", "quest"}, s -> {
+            if (s.length<1) return "Command needs 1 parameter: QuestID";
+            int ID;
+            try{
+                ID =Integer.parseInt(s[0]);
+            }
+            catch (Exception e){
+                return "Can not convert " +s[0]+" to number";
+            }
+            Current.player().addQuest(ID);
+            return "Quest generated";
+        });
         registerCommand(new String[]{"give", "shards"}, s -> {
             if (s.length < 1) return "Command needs 1 parameter: Amount.";
             int amount;
@@ -308,19 +320,7 @@ public class ConsoleCommandInterpreter {
             Current.player().addShards(value);
             return "Player now has " + Current.player().getShards() + " shards";
         });
-//        registerCommand(new String[]{"getMana", "percent"}, s -> {
-//            if(s.length<1) return "Command needs 1 parameter: Amount";
-//            float value = 0;
-//            try { value = Float.parseFloat(s[0]); }
-//            catch (Exception e) { return "Can not convert " + s[0] + " to integer"; }
-//            Current.player().addManaPercent(value);
-//            return "Player healed to " + Current.player().getLife() + "/" + Current.player().getMaxLife();
-//        });
-//        registerCommand(new String[]{"getMana", "full"}, s -> {
-//            Current.player().addManaPercent(1.0f);
-//            return "Player healed to " + Current.player().getLife() + "/" + Current.player().getMaxLife();
-//        });
-        registerCommand(new String[]{"debug", "map"}, s -> {
+        registerCommand(new String[]{"debug","map"}, s -> {
             GameHUD.getInstance().setDebug(true);
             return "Debug map ON";
         });

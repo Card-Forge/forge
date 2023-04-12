@@ -5,6 +5,6 @@ PT:3/3
 K:Flash
 K:Lifelink
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, other Humans you control get +1/+1 and gain lifelink until end of turn.
-SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.Human+Other+YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Lifelink
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.Human+StrictlyOther+YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Lifelink
 DeckHints:Type$Human
 Oracle:Flash\nLifelink\nWhen Heron's Grace Champion enters the battlefield, other Humans you control get +1/+1 and gain lifelink until end of turn.

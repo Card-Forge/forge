@@ -117,7 +117,7 @@ public class UnattachAllEffect extends SpellAbilityEffect {
     protected String getStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Unattach all valid Equipment and Auras from ");
-        sb.append(Lang.joinHomogenous(getTargets(sa)));
+        sb.append(Lang.joinHomogenous(getTargetEntities(sa)));
         return sb.toString();
     }
 

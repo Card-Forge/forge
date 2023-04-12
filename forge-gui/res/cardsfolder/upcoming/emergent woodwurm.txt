@@ -1,0 +1,14 @@
+Name:Emergent Woodwurm
+ManaCost:6 G
+Types:Creature Wurm
+PT:4/4
+K:Backup:3:BackupAbility
+SVar:BackupAbility:DB$ Animate | Triggers$ AttackTrig | sVars$ AE
+SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Whenever this creature attacks, look at the top X cards of your library, where X is its power. You may put a permanent card with mana value X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ X | ChangeNum$ 1 | Optional$ True | ChangeValid$ Permanent.cmcLEX | DestinationZone$ Battlefield | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Whenever this creature attacks, look at the top X cards of your library, where X is its power. You may put a permanent card with mana value X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
+SVar:X:TriggeredAttacker$CardPower
+SVar:HasAttackEffect:TRUE
+SVar:AE:SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+Oracle:Backup 3 (When this creature enters the battlefield, put three +1/+1 counters on target creature. If that's another creature, it gains the following abilities until end of turn.)\nWhenever this creature attacks, look at the top X cards of your library, where X is its power. You may put a permanent card with mana value X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.

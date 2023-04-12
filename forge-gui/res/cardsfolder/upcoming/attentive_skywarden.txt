@@ -1,0 +1,9 @@
+Name:Attentive Skywarden
+ManaCost:2 W
+Types:Creature Phyrexian Kor
+PT:2/2
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Battle | Execute$ TrigTransform | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player or battle, transform up to one target Incubator token you control.
+SVar:TrigTransform:DB$ SetState | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Incubator.token+YouCtrl | TgtPrompt$ Select target Incubator token you control | Mode$ Transform
+DeckNeeds:Type$Incubator
+Oracle:Flying\nWhenever Attentive Skywarden deals combat damage to a player or battle, transform up to one target Incubator token you control.

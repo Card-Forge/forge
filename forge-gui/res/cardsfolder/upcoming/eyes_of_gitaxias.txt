@@ -1,5 +1,5 @@
 Name:Eyes of Gitaxias
-ManaCost:2 u
+ManaCost:2 U
 Types:Sorcery
 A:SP$ Incubate | Amount$ 3 | SubAbility$ DBDraw | SpellDescription$ Incubate 3. (Create an Incubator token with three +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
 SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.

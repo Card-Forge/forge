@@ -1511,26 +1511,6 @@
    </properties>
   </object>
   <object id="181" template="../../obj/treasure.tx" x="535.273" y="131.45"/>
-  <object id="183" template="../../obj/enemy.tx" x="67" y="940.5">
-   <properties>
-    <property name="effect">{
- &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Chandra, Bold Pyromancer&quot; ]
-}</property>
-    <property name="enemy" value="Chandra"/>
-    <property name="ignoreDungeonEffect" type="bool" value="false"/>
-    <property name="reward">[
-  {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.01,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Phoenix Charm&quot;
-  }
-]
-</property>
-    <property name="spawn.Easy" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="true"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup id="7" name="Waypoints">
   <object id="74" template="../../obj/waypoint.tx" x="501.5" y="770.5"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="46" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="93">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="46" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="96">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -12,12 +12,12 @@
  </layer>
  <layer id="9" name="Tilelaag 4" width="46" height="25">
   <data encoding="base64" compression="zlib">
-   eJxjYKAfCJSlo2WjYBSMglEwAOAcy0C7gDTwjBNCg9xNa7cv56CuHSC3w9xNK7fTymzkcKcmoHV4POXEFFvAjso/xkqamfRIe6NgFIyCUTAKRsEoGAUjGQAAmOwSmQ==
+   eJzt0sENABAMQFEHB4YwlCltYwvmEBGJq6Stg/8ubu1Pwzk7ORkuA4AHqn9dcKfH9c5u7fYSZHfM9t2t1a41+7y7JO17tCg/0+LvAQAA/GwApHYRJw==
   </data>
  </layer>
  <layer id="8" name="Tilelaag 3" width="46" height="25">
   <data encoding="base64" compression="zlib">
-   eJztlEEOwjAMBHsAFX7DO3gg5974CUfehKoqwrJMvNs4ViOxkqU2ddaTOOk05WmZtxhNf+5cZXO/T3awOgo3u4ZMboS5NzdbL+JsFBVmyf06f8OrjyqTWXJ7PWX2ukWSuYRmXsdq9eT4/erX3NMjLYtRPpeo7fPzgjOz3LqXMiTfjTwH6zvKizL+6i0yjv6b9p5XtBbKaOWw9RlmdB1ejucfze3Ns3Ie6nttDsPBcrfke+tFvVkG9m60zmfE3r0o3yMyI/5Rnr3Ug9vy7aFI70zuSGnuUTQi9wfig/q9
+   eJztlEEKAjEMRWehqLfxHB7QtTtv4tIzSRmKIcTm/2kapuCHwEwn/Xlt2lmWPD1Oa8ymP3eusrnfBztY7YWbXUMmN8I8mputF3E2qiqz5H4dv+HVR5XJLLm9njJ73SPJXEMzl7FWPTl+u/g1t/RIy2KUzzVa+/w848wst+6lDMl3Jc9BeUd5UcZfvUXG0X/T1vOK1kIZrRy2PsOMrsPL8fyjub15Vs5dfW/NYThY7p58b72oN8vA3o3e+YzYuxflu0dmxD/Kc5RGcFu+IxTpnckdKc09i2bb56IPcu77jw==
   </data>
  </layer>
  <layer id="6" name="Tilelaag 1" width="46" height="25">
@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztl0FuwyAQRamUBUg9TNfZVmot366bXiEKyVlyibS0x2hG8ZeH6RAP1EKK1C+xMDHw+MwMjnP9NATnxtBxwZX0z91Xvbmjd+4g2tHXz9Obe1DWOof6PfTkJq8/L2u9Tc9fIW97f92Dhb2VWztvCzP0rayZpj6w7wtzRv97jrhwXvidGE6bvN1iJu381VeNmYv7Ltmxf8kMT0ZlLyVe8JSUlDmXpMUM+Hg+HBgzcdB+bnlrZYZq43GY1uRjZE5jbTRifrm015Cz8fwh4dmiZIgPKDKv4Dn6njZzk75T+wjzWOnTmjVIy2+evzj7IejnzL3U/Jfc1nq1xFgS+MYwe72b8rTVS8QZzsnCH5U8kf5w7/DOOeQxA/4WL5MYY4kZmvfd5ayleE+MncbIWqCtZ61ZnN2Sb/yMLOeTCv6XuDHGwmJ9j98Lz4/1uSH30JJbVsm7SspaE6USY1/ju1IyI3+0vGtlluyk7cPc/5faXPpWWFtgt+S5RbgfSDV1skU1d/CSODdpjbjoIc59T/9bE+O+B59JP30j6yE=
+   eJztl0FqwzAQRRXIQoIeputsC63x7brpFUKUnCW7niCt2mM0g/3xeDqKR6oRBPphFnYs6enPjOw4105dcK4PDRdcSf/cbdWaO3rnjiJOvnye1tydstYllO+hJTd5/Xld63W8/grzOPhhDxb2Wm4t3xZm6FtZM433wH7IzBn97zniQr7wOzGct/O4xUza+8FXjZmL+y7ZsX/JDE96ZS85XvDklJQ5l6TVDPh4PxwZM3HQfm55a2WGSuuxG9fkY2RPY20EMT9f4yXM2Xj/kHBtUTLUBxSZV/Ac9x63U0jfKT7CNFb6tOYZpPU371/kvgt6nrmXmv+S23peLTHmBL4+TF7vxz6t9RJ1hjxZ+KPSJ9If7h2euYR5zYC/xsskxlhqhuZ9c3PWXL0nxk5j5FmgrWc9szi7pd94jiz5SRn/c9wYY2GxPsffC08P5b0h91DTW1bJd5WU9UyUSox9je9KyYz+0fqullmyk3ab6f5fzubct8LaArulzy3C+4FUck7WqOQdvCTOTVqjLlqIc9/T/1bK3ftmiHvwmfQDD7zr+w==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -74,12 +74,6 @@
     <property name="teleportObjectId" value="79"/>
    </properties>
   </object>
-  <object id="73" template="../obj/door_right.tx" x="43" y="395">
-   <properties>
-    <property name="teleport" value="maps/map/nahiri.tmx"/>
-    <property name="teleportObjectId" value="83"/>
-   </properties>
-  </object>
   <object id="74" template="../obj/manashards.tx" x="520" y="263"/>
   <object id="75" template="../obj/manashards.tx" x="484" y="321"/>
   <object id="76" template="../obj/manashards.tx" x="152" y="298"/>
@@ -120,5 +114,19 @@
   <object id="90" template="../obj/waypoint.tx" x="357.333" y="262.667"/>
   <object id="91" template="../obj/waypoint.tx" x="652.667" y="225.333"/>
   <object id="92" template="../obj/waypoint.tx" x="642" y="146"/>
+  <object id="95" template="../obj/enemy.tx" x="43.2058" y="393.001">
+   <properties>
+    <property name="enemy" value="Mimic"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Nahiri's Key&quot;
+  }
+]
+</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -1,0 +1,10 @@
+Name:Conjurer's Mantle
+ManaCost:1 W
+Types:Artifact Equipment
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | Description$ Equipped creature gets +1/+1 and has vigilance.
+T:Mode$ Attacks | ValidCard$ Creature.EquippedBy | Execute$ TrigDig | TriggerDescription$ Whenever equipped creature attacks, look at the top six cards of your library. You may reveal a card that shares a creature type with that creature from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True | ChangeValid$ Creature.sharesCreatureTypeWith TriggeredAttacker
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ AE
+SVar:AE:SVar:HasAttackEffect:TRUE
+Oracle:Equipped creature gets +1/+1 and has vigilance.\nWhenever equipped creature attacks, look at the top six cards of your library. You may reveal a card that shares a creature type with that creature from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\nEquip {1}

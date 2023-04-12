@@ -1,0 +1,10 @@
+Name:Death-Greeter's Champion
+ManaCost:2 R
+Types:Creature Human Warrior
+PT:2/1
+K:Dash:3 R
+K:Backup:1:BackupAbility
+SVar:BackupAbility:DB$ Pump | KW$ Double Strike
+K:Double Strike
+DeckHas:Ability$Counters
+Oracle:Dash {3}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)\nBackup 1 (When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)\nDouble strike
