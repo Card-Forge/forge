@@ -1,9 +1,15 @@
 package forge.game.ability.effects;
 
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 import forge.util.Lang;
+import forge.util.Localizer;
 
 public class TapEffect extends SpellAbilityEffect {
 
@@ -19,7 +25,24 @@ public class TapEffect extends SpellAbilityEffect {
             card.clearRemembered();
         }
 
-        for (final Card tgtC : getTargetCards(sa)) {
+        CardCollection toTap = new CardCollection();
+
+        if (sa.hasParam("CardChoices")) { // choosing outside Defined/Targeted
+            final Player activator = sa.getActivatingPlayer();
+            CardCollection choices = new CardCollection();
+            choices.addAll(CardLists.getValidCards(card.getGame().getCardsIn(ZoneType.Battlefield),
+                    sa.getParam("CardChoices"), activator, card, sa));
+            int n = sa.hasParam("ChoiceAmount") ?
+                    AbilityUtils.calculateAmount(card, sa.getParam("ChoiceAmount"), sa) : 1;
+            int min = (sa.hasParam("AnyNumber")) ? 0 : n;
+            final String prompt = sa.hasParam("ChoicePrompt") ? sa.getParam("ChoicePrompt") :
+                    Localizer.getInstance().getMessage("lblChoosePermanentstoTap");
+            toTap.addAll(activator.getController().chooseEntitiesForEffect(choices, min, n, null, sa, prompt, null, null));
+        } else {
+            toTap = getTargetCards(sa);
+        }
+
+        for (final Card tgtC : toTap) {
             if (tgtC.isPhasedOut()) {
                 continue;
             }
