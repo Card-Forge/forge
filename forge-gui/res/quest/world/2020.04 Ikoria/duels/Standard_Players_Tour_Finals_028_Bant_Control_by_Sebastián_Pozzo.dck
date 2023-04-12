@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Bant Control by Sebastián Pozzo
+Title=Splinter
+Difficulty=very hard
+Description=Bant Control by Sebastián Pozzo
+Icon=Splinter.jpg
+Deck Type=constructed
+
+[main]
+3 Jolrael, Mwonvuli Recluse
+3 Hydroid Krasis
+4 Uro, Titan of Nature's Wrath
+2 Dovin's Veto
+2 Aether Gust
+3 Opt
+4 Growth Spiral
+2 Shark Typhoon
+3 Elspeth Conquers Death
+3 Nissa, Who Shakes the World
+4 Teferi, Time Raveler
+1 Temple of Enlightenment
+1 Temple of Mystery
+2 Island
+2 Forest
+2 Plains
+3 Ketria Triome
+4 Temple Garden
+4 Fabled Passage
+4 Breeding Pool
+4 Hallowed Fountain
+
+[sideboard]
+1 Dovin's Veto
+1 Aether Gust
+1 Shark Typhoon
+1 Giant Killer
+1 Brazen Borrower
+3 Mystical Dispute
+3 Shatter the Sky
+4 Glass Casket

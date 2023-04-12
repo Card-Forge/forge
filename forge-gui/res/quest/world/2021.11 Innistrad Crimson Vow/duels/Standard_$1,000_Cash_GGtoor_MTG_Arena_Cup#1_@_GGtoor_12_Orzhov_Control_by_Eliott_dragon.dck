@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Orzhov Control by Eliott dragon
+Title=Oceanus
+Difficulty=very hard
+Description=Orzhov Control by Eliott dragon
+Icon=Oceanus.jpg
+Deck Type=constructed
+
+[main]
+2 Vanishing Verse
+2 Rite of Oblivion
+2 Sorin the Mirthless
+3 Blood on the Snow
+3 The Meathook Massacre
+4 Lolth, Spider Queen
+4 Wedding Announcement
+4 Deadly Dispute
+4 Eyetwitch
+4 Edgar, Charmed Groom
+4 Shambling Ghast
+2 Field of Ruin
+3 Hive of the Eye Tyrant
+4 Brightclimb Pathway
+4 Snowfield Sinkhole
+5 Snow-Covered Plains
+6 Snow-Covered Swamp
+
+[sideboard]
+2 Go Blank
+2 Environmental Sciences
+2 Kaya the Inexorable
+1 Soul Shatter
+1 Confront the Past
+1 Mascot Exhibition
+1 Divine Smite
+2 Vanishing Verse
+1 Rite of Oblivion
+1 Sorin the Mirthless
+1 The Meathook Massacre

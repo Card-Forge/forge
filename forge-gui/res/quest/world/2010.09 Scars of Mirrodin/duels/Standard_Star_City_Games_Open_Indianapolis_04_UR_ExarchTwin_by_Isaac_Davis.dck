@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=UR ExarchTwin by Isaac Davis
+Title=Happosai
+Difficulty=very hard
+Description=UR ExarchTwin by Isaac Davis
+Icon=Happosai.jpg
+Deck Type=constructed
+
+[main]
+4 Deceiver Exarch|NPH
+1 Inferno Titan|M11
+4 Sea Gate Oracle|ROE
+1 Sphinx of Jwar Isle|ZEN
+4 Into the Roil|ZEN
+3 Mana Leak|M11
+2 Spell Pierce|ZEN
+1 Flame Slash|ROE
+4 Preordain|M11
+4 Splinter Twin|ROE
+10 Island|NPH
+8 Mountain|NPH
+4 Scalding Tarn|ZEN
+4 Tectonic Edge|WWK
+2 Jace Beleren|M11
+4 Jace, the Mind Sculptor|WWK
+
+[sideboard]
+2 Spell Pierce|ZEN
+3 Spellskite|NPH
+3 Manic Vandal|M11
+2 Dispel|WWK
+2 Twisted Image|SOM
+3 Pyroclasm|M11

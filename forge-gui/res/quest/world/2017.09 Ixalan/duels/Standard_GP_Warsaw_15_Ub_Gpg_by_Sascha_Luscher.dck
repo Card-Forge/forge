@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Ub Gpg by Sascha Luscher
+Title=Vodalia
+Difficulty=very hard
+Description=Ub Gpg by Sascha Luscher
+Icon=Vodalia.jpg
+Deck Type=constructed
+
+[main]
+4 Fetid Pools|AKH
+2 Island|XLN
+3 Ipnu Rivulet|HOU
+4 Drowned Catacomb|XLN
+4 Aether Hub|KLD
+8 Swamp|XLN
+4 Hostage Taker|XLN
+4 Kitesail Freebooter|XLN
+1 Trophy Mage|AER
+4 Minister of Inquiries|KLD
+4 Walking Ballista|AER
+2 The Scarab God|HOU
+4 Gifted Aetherborn|AER
+4 Champion of Wits|HOU
+2 Fatal Push|AER
+4 Gate to the Afterlife|AKH
+2 God-Pharaoh's Gift|HOU
+
+[sideboard]
+2 Negate|AER
+3 Duress|XLN
+3 Vraska's Contempt|XLN
+1 Supreme Will|HOU
+2 River's Rebuke|XLN
+1 Noxious Gearhulk|KLD
+1 Aethersphere Harvester|AER
+2 Fatal Push|AER

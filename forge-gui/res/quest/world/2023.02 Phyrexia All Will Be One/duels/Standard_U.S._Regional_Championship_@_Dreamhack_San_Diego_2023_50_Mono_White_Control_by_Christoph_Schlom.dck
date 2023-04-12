@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Mono White Control by Christoph Schlom
+Title=Carnage
+Difficulty=very hard
+Description=Mono White Control by Christoph Schlom
+Icon=Carnage.jpg
+Deck Type=constructed
+
+[main]
+1 The Restoration of Eiganjo
+1 The Eternal Wanderer
+1 Destroy Evil
+2 Vanquish the Horde
+3 Ossification
+3 The Wandering Emperor
+4 Wedding Announcement
+4 Lay Down Arms
+4 Reckoner Bankbuster
+1 Spirited Companion
+2 Loran of the Third Path
+3 Serra Paragon
+3 Ambitious Farmhand
+4 Steel Seraph
+1 Mirrex
+1 Eiganjo, Seat of the Empire
+2 Roadside Reliquary
+4 Field of Ruin
+4 Raffine's Tower
+12 Plains
+
+[sideboard]
+1 Intrepid Adversary
+3 Adeline, Resplendent Cathar
+1 Mountain
+4 Archangel of Wrath
+1 Unlicensed Hearse
+2 Brutal Cathar
+2 Destroy Evil
+1 Ossification

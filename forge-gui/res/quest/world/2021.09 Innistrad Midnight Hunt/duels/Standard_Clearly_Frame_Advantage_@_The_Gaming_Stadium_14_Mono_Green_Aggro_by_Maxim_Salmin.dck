@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Maxim Salmin
+Title=Dr Watson
+Difficulty=very hard
+Description=Mono Green Aggro by Maxim Salmin
+Icon=Dr Watson.jpg
+Deck Type=constructed
+
+[main]
+2 Gnarled Professor
+2 Briarbridge Tracker
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+4 Jaspera Sentinel
+4 Esika's Chariot
+2 Snakeskin Veil
+2 Inscription of Abundance
+4 Blizzard Brawl
+4 Ranger Class
+2 Tangled Florahedron
+2 Faceless Haven
+4 Kazandu Mammoth
+20 Snow-Covered Forest
+
+[sideboard]
+2 Inscription of Abundance
+1 Introduction to Annihilation
+1 Mascot Exhibition
+1 Containment Breach
+2 Toski, Bearer of Secrets
+2 Wrenn and Seven
+3 Tangletrap
+3 Froghemoth

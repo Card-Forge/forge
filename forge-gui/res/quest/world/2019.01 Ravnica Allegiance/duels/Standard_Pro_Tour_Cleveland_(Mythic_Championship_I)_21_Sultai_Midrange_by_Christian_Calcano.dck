@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Sultai Midrange by Christian Calcano
+Title=Ra
+Difficulty=very hard
+Description=Sultai Midrange by Christian Calcano
+Icon=Ra.jpg
+Deck Type=constructed
+
+[main]
+3 Vivien Reid
+4 Llanowar Elves
+1 Incubation Druid
+4 Wildgrowth Walker|XLN
+4 Merfolk Branchwalker|XLN
+4 Jadelight Ranger
+1 Carnage Tyrant|XLN
+3 Hostage Taker|XLN
+4 Hydroid Krasis
+3 Find // Finality
+3 Cast Down
+2 Vraska's Contempt|XLN
+4 Overgrown Tomb
+4 Breeding Pool
+4 Watery Grave
+4 Woodland Cemetery
+2 Drowned Catacomb|XLN
+1 Hinterland Harbor
+1 Memorial to Folly
+4 Forest
+
+[sideboard]
+1 Carnage Tyrant|XLN
+1 Cast Down
+1 Vraska's Contempt|XLN
+4 Duress
+3 Kraul Harpooner
+2 Assassin's Trophy
+2 Disdainful Stroke
+1 Ritual of Soot

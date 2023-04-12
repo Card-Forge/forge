@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Chord Toolbox by Artur Laskowski
+Title=Isabella
+Difficulty=very hard
+Description=Chord Toolbox by Artur Laskowski
+Icon=Isabella.jpg
+Deck Type=constructed
+
+[main]
+1 Prosperous Innkeeper
+4 Wall of Roots|TSP
+3 Birds of Paradise|M12
+4 Ignoble Hierarch
+1 Blood Artist|AVR
+4 Strangleroot Geist|DKA
+4 Young Wolf|DKA
+2 Endurance
+1 Hapatra, Vizier of Poisons|AKH
+4 Yawgmoth, Thran Physician
+4 Chord of Calling|M15
+3 Eldritch Evolution|EMN
+4 Grist, the Hunger Tide
+1 Dryad Arbor|FUT
+3 Forest
+1 Swamp
+4 Verdant Catacombs|ZEN
+2 Boseiju, Who Endures
+2 Blooming Marsh|KLD
+2 Overgrown Tomb
+2 Nurturing Peatland
+1 Twilight Mire|EVE
+1 Misty Rainforest|ZEN
+1 Yavimaya, Cradle of Growth
+1 Wooded Foothills|KTK
+
+[sideboard]
+2 Endurance
+1 Necromentia
+3 Force of Vigor
+1 Go for the Throat
+1 Sheoldred, the Apocalypse
+3 Thoughtseize|THS
+1 Crime // Punishment|DIS
+1 Outland Liberator
+1 Scavenging Ooze
+1 Veil of Summer

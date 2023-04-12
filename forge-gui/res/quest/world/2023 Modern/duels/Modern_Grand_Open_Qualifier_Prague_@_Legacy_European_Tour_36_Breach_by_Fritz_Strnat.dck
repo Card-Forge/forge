@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Breach by Fritz Strnat
+Title=Bouncy Bouncy
+Difficulty=very hard
+Description=Breach by Fritz Strnat
+Icon=Bouncy Bouncy.jpg
+Deck Type=constructed
+
+[main]
+3 Emry, Lurker of the Loch
+4 Ledger Shredder
+4 Ragavan, Nimble Pilferer
+3 Grinding Station|FD
+1 Aether Spellbomb|MR
+1 Springleaf Drum|BNG
+4 Mishra's Bauble|CS
+2 Mox Amber
+4 Unholy Heat
+2 Lightning Bolt|M11
+1 Grapeshot|TSP
+4 Expressive Iteration
+4 Underworld Breach
+4 Urza's Saga
+2 Teferi, Time Raveler
+1 Hallowed Fountain
+2 Sacred Foundry
+2 Steam Vents
+1 Mountain
+1 Island
+1 Otawara, Soaring City
+4 Scalding Tarn|ZEN
+2 Arid Mesa|ZEN
+3 Flooded Strand|KTK
+
+[sideboard]
+1 Teferi, Time Raveler
+1 Jegantha, the Wellspring
+1 Tormod's Crypt
+2 Aether Gust
+2 Engineered Explosives|FD
+2 Spell Pierce
+1 Shadowspear
+1 Path to Exile|CFX
+1 Pithing Needle
+1 Wear // Tear|DGM
+2 Prismatic Ending

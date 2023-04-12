@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Eli Loveman
+Title=Sen-Sei
+Difficulty=very hard
+Description=Red Deck Wins by Eli Loveman
+Icon=Sen-Sei.jpg
+Deck Type=constructed
+
+[main]
+17 Mountain
+4 Castle Embereth
+3 Light Up the Stage
+3 Shock
+1 Infuriate
+4 Embercleave
+3 Torbran, Thane of Red Fell
+1 Tin Street Dodger
+4 Scorch Spitter
+4 Runaway Steam-Kin
+4 Robber of the Rich
+4 Fervent Champion
+4 Bonecrusher Giant
+4 Anax, Hardened in the Forge
+
+[sideboard]
+3 Unchained Berserker
+1 The Akroan War
+1 Sorcerous Spyglass
+3 Redcap Melee
+3 Lava Coil
+3 Experimental Frenzy
+1 Light Up the Stage

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Gerry Thompson
+Title=Saladin
+Difficulty=very hard
+Description=Caw-Blade by Gerry Thompson
+Icon=Saladin.jpg
+Deck Type=constructed
+
+[main]
+1 Consecrated Sphinx|MBS
+2 Emeria Angel|ZEN
+4 Squadron Hawk|M11
+1 Dismember|NPH
+2 Into the Roil|ZEN
+4 Mana Leak|M12
+3 Spell Pierce|ZEN
+1 Twisted Image|SOM
+2 Day of Judgment|M12
+1 Ponder|M12
+3 Preordain|M11
+2 Timely Reinforcements|M12
+2 Sword of Feast and Famine|MBS
+3 Oblivion Ring|M12
+4 Island|M12
+4 Plains|M12
+1 Arid Mesa|ZEN
+3 Celestial Colonnade|WWK
+4 Glacial Fortress|M12
+2 Scalding Tarn|ZEN
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+1 Gideon Jura|M12
+2 Jace Beleren|M11
+
+[sideboard]
+1 Twisted Image|SOM
+1 Day of Judgment|M12
+2 Timely Reinforcements|M12
+1 Jace Beleren|M11
+1 Deprive|ROE
+3 Flashfreeze|M12
+2 Mental Misstep|NPH
+2 Revoke Existence|SOM
+2 Ratchet Bomb|SOM

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Grixis Energy by Matthew Kling
+Title=WereHyena
+Difficulty=very hard
+Description=Grixis Energy by Matthew Kling
+Icon=WereHyena.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Torch of Defiance|KLD
+2 Dire Fleet Daredevil
+4 Glint-Sleeve Siphoner|AER
+1 Gonti, Lord of Luxury|KLD
+3 The Scarab God|HOU
+1 Torrential Gearhulk|KLD
+4 Whirler Virtuoso|KLD
+2 Confiscation Coup|KLD
+1 Abrade|HOU
+1 Commit // Memory|AKH
+4 Harnessed Lightning|KLD
+3 Magma Spray|AKH
+1 Supreme Will|HOU
+4 Vraska's Contempt|XLN
+1 Search for Azcanta|XLN
+4 Aether Hub|KLD
+4 Canyon Slough|AKH
+4 Dragonskull Summit|XLN
+4 Drowned Catacomb|XLN
+3 Fetid Pools|AKH
+1 Island
+2 Mountain
+3 Spirebluff Canal|KLD
+1 Swamp
+
+[sideboard]
+1 Chandra, Torch of Defiance|KLD
+1 Gonti, Lord of Luxury|KLD
+1 Torrential Gearhulk|KLD
+1 Abrade|HOU
+3 Chandra's Defeat|HOU
+1 Deadeye Tracker|XLN
+2 Duress|XLN
+3 Negate
+2 Sweltering Suns|AKH

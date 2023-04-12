@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Esper Control by Guillaume Matignon
+Title=Nibbler
+Difficulty=very hard
+Description=Esper Control by Guillaume Matignon
+Icon=Nibbler.jpg
+Deck Type=constructed
+
+[main]
+4 Torrential Gearhulk|KLD
+4 Fatal Push|AER
+3 Syncopate
+2 Essence Scatter|AKH
+1 Negate
+1 Forsake the Worldly|AKH
+4 Disallow|AER
+4 Glimmer of Genius|KLD
+4 Vraska's Contempt|XLN
+2 Search for Azcanta|XLN
+4 Drowned Catacomb|XLN
+4 Fetid Pools|AKH
+2 Field of Ruin|XLN
+3 Glacial Fortress|XLN
+4 Irrigated Farmland|AKH
+3 Island
+3 Isolated Chapel
+5 Swamp
+3 Teferi, Hero of Dominaria
+
+[sideboard]
+2 Negate
+1 Forsake the Worldly|AKH
+3 Duress|XLN
+1 Arguel's Blood Fast|XLN
+4 Knight of Malice
+1 Jace's Defeat|HOU
+1 The Scarab God|HOU
+2 Cast Down

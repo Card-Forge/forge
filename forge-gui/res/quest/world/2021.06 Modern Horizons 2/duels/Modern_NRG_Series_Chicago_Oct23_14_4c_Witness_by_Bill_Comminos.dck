@@ -1,0 +1,53 @@
+[duel]
+[metadata]
+Name=4c Witness by Bill Comminos
+Title=Prodigal Sorcerer
+Difficulty=very hard
+Description=4c Witness by Bill Comminos
+Icon=Prodigal Sorcerer.jpg
+Deck Type=constructed
+
+[main]
+2 Abundant Harvest
+3 Ephemerate
+4 Lightning Bolt|M11
+4 Expressive Iteration
+4 Prismatic Ending
+4 Abundant Growth|AVR
+4 Spreading Seas|ZEN
+4 Teferi, Time Raveler
+4 Wrenn and Six
+3 Ice-Fang Coatl
+4 Eternal Witness|FD
+4 Omnath, Locus of Creation
+4 Solitude
+4 Fury
+1 Hallowed Fountain
+1 Breeding Pool
+1 Sacred Foundry
+1 Prismatic Vista
+1 Reflecting Pool|SHM
+1 Snow-Covered Plains
+1 Snow-Covered Mountain
+1 Raugrin Triome
+1 Ketria Triome
+1 Arid Mesa|ZEN
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+1 Snow-Covered Island
+2 Snow-Covered Forest
+2 Wooded Foothills|KTK
+3 Windswept Heath|KTK
+3 Flooded Strand|KTK
+4 Misty Rainforest|ZEN
+
+[sideboard]
+4 Lightning Helix|RAV
+3 Flusterstorm
+2 Dovin's Veto
+2 Endurance
+1 Counterspell|7E
+1 Yorion, Sky Nomad
+1 Emrakul, the Promised End|EMN
+1 Drannith Magistrate

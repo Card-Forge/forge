@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Jund Energy by Martin Juza
+Title=Abassi
+Difficulty=very hard
+Description=Jund Energy by Martin Juza
+Icon=Abassi.jpg
+Deck Type=constructed
+
+[main]
+3 Chandra, Torch of Defiance|KLD
+1 Nissa, Vital Force|KLD
+4 Greenbelt Rampager|AER
+4 Scrapheap Scrounger|KLD
+4 Longtusk Cub|KLD
+4 Voltaic Brawler|KLD
+1 Rishkar, Peema Renegade|AER
+2 Tireless Tracker|SOI
+4 Attune with Aether|KLD
+2 Shock
+2 Harnessed Lightning|KLD
+4 Unlicensed Disintegration|KLD
+3 Heart of Kiran|AER
+2 Fleetwheel Cruiser|KLD
+4 Aether Hub|KLD
+4 Blooming Marsh|KLD
+4 Game Trail|SOI
+1 Cinder Glade|BFZ
+4 Forest|RTR
+2 Mountain|RTR
+1 Swamp|RTR
+
+[sideboard]
+1 Chandra, Torch of Defiance|KLD
+2 Nissa, Vital Force|KLD
+2 Tireless Tracker|SOI
+1 Shock
+4 Fatal Push|AER
+2 Skysovereign, Consul Flagship|KLD
+3 Verdurous Gearhulk|KLD

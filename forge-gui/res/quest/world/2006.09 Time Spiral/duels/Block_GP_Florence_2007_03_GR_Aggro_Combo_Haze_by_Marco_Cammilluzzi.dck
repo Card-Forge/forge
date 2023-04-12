@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=GR Aggro/Combo Haze by Marco Cammilluzzi
+Title=Count Chuckula
+Difficulty=very hard
+Description=GR Aggro/Combo Haze by Marco Cammilluzzi
+Icon=Count Chuckula.jpg
+Deck Type=constructed
+
+[main]
+6 Mountain|RTR
+4 Gaea's Anthem|PLC
+4 Thornweald Archer|C14
+4 Grove of the Burnwillows|FUT
+4 Haze of Rage|FUT
+4 Uktabi Drake|PLC
+4 Forest|RTR
+4 Llanowar Reborn|C15
+4 Mogg War Marshal|TSP
+4 Summoner's Pact|FUT
+4 Kavu Predator|PLC
+4 Tarmogoyf|FUT
+3 Dead // Gone|PLC
+2 Horizon Canopy|FUT
+2 Kher Keep|C13
+2 Terramorphic Expanse|C16
+1 Pendelhaven|TSP
+
+[sideboard]
+1 Dead // Gone|PLC
+4 Heartwood Storyteller|FUT
+4 Greater Gargadon|TSP
+3 Fatal Frenzy|PLC
+3 Stormbind|TSP

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Riccardo Casu
+Title=Iblis
+Difficulty=very hard
+Description=Rakdos Aggro by Riccardo Casu
+Icon=Iblis.jpg
+Deck Type=constructed
+
+[main]
+2 Go for the Throat
+4 Play with Fire
+4 Lightning Strike
+4 Kumano Faces Kakkazan
+1 Furnace Punisher
+1 Shivan Devastator
+2 Squee, Dubious Monarch
+3 Feldon, Ronom Excavator
+4 Thundering Raiju
+4 Monastery Swiftspear
+4 Phoenix Chick
+4 Bloodthirsty Adversary
+1 Sokenzan, Crucible of Defiance
+4 Blackcleave Cliffs
+4 Mishra's Foundry
+4 Sulfurous Springs
+10 Mountain
+
+[sideboard]
+2 Unlicensed Hearse
+2 Brotherhood's End
+2 Obliterating Bolt
+2 Giant Cindermaw
+1 Abrade
+1 Ob Nixilis, the Adversary
+1 Jaya, Fiery Negotiator
+1 Cemetery Gatekeeper
+1 Go for the Throat
+2 Furnace Punisher

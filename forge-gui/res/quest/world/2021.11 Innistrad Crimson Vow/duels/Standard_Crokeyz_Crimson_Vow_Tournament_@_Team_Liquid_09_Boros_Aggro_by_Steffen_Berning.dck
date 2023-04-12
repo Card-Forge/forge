@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Steffen Berning
+Title=Sanctuary
+Difficulty=very hard
+Description=Boros Aggro by Steffen Berning
+Icon=Sanctuary.jpg
+Deck Type=constructed
+
+[main]
+1 Kabira Takedown
+1 Paladin Class
+4 Showdown of the Skalds
+4 Shatterskull Smashing
+1 Sigrid, God-Favored
+1 Moonveil Regent
+2 Brutal Cathar
+2 Skyclave Apparition
+3 Clarion Spirit
+3 Intrepid Adversary
+3 Reckless Stormseeker
+4 Fireblade Charger
+4 Luminarch Aspirant
+4 Elite Spellbinder
+4 Usher of the Fallen
+1 Furycalm Snarl
+3 Den of the Bugbear
+4 Needleverge Pathway
+4 Sundown Pass
+7 Plains
+
+[sideboard]
+4 Thalia, Guardian of Thraben
+2 Guardian of Faith
+2 Curse of Hospitality
+2 Portable Hole
+1 Cemetery Protector
+2 Brutal Cathar
+2 Skyclave Apparition

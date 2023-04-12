@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Rakdos Control by Jamie Archdekin
+Title=Sickly Growth
+Difficulty=very hard
+Description=Rakdos Control by Jamie Archdekin
+Icon=Sickly Growth.jpg
+Deck Type=constructed
+
+[main]
+2 Abrade
+4 Fable of the Mirror-Breaker
+4 Reckoner Bankbuster
+4 Cut Down
+4 Go for the Throat
+4 Invoke Despair
+1 Archfiend of the Dross
+4 Sheoldred, the Apocalypse
+4 Graveyard Trespasser
+4 Bloodtithe Harvester
+1 Sokenzan, Crucible of Defiance
+2 Takenuma, Abandoned Mire
+2 Mountain
+4 Blackcleave Cliffs
+4 Haunted Ridge
+4 Sulfurous Springs
+8 Swamp
+
+[sideboard]
+1 Pilfer
+4 Duress
+4 Razorlash Transmogrant
+1 Vampires' Vengeance
+2 Gix's Command
+2 Soul Transfer
+1 Archfiend of the Dross

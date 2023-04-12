@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Mardu Vehicles by Raphael Levy
+Title=Hazduhr the Abbot
+Difficulty=very hard
+Description=Mardu Vehicles by Raphael Levy
+Icon=Hazduhr the Abbot.jpg
+Deck Type=constructed
+
+[main]
+1 Chandra, Torch of Defiance|KLD
+3 Gideon, Ally of Zendikar|BFZ
+3 Veteran Motorist|KLD
+4 Toolcraft Exemplar|KLD
+4 Scrapheap Scrounger|KLD
+3 Inventor's Apprentice|KLD
+4 Thraben Inspector|SOI
+1 Thalia, Heretic Cathar|EMN
+2 Pia Nalaar|KLD
+4 Unlicensed Disintegration|KLD
+2 Shock
+1 Fatal Push|AER
+4 Heart of Kiran|AER
+2 Cultivator's Caravan|KLD
+3 Plains|RTR
+4 Inspiring Vantage|KLD
+4 Concealed Courtyard|KLD
+4 Aether Hub|KLD
+3 Spire of Industry|AER
+4 Mountain|RTR
+
+[sideboard]
+1 Chandra, Torch of Defiance|KLD
+1 Gideon, Ally of Zendikar|BFZ
+2 Fatal Push|AER
+1 Shambling Vent|BFZ
+1 Kari Zev's Expertise|AER
+1 Anguished Unmaking|SOI
+1 Aethersphere Harvester|AER
+1 Declaration in Stone|SOI
+2 Fumigate|KLD
+1 Fragmentize|KLD
+1 Oath of Liliana|EMN
+1 Key to the City|KLD
+1 Ob Nixilis Reignited|BFZ

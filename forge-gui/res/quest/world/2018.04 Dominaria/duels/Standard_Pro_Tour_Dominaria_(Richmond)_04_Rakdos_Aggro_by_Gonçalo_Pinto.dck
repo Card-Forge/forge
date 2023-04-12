@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Gonçalo Pinto
+Title=Spock
+Difficulty=very hard
+Description=Rakdos Aggro by Gonçalo Pinto
+Icon=Spock.jpg
+Deck Type=constructed
+
+[main]
+2 Kari Zev, Skyship Raider|AER
+4 Bomat Courier|KLD
+4 Rekindling Phoenix
+3 Soul-Scar Mage|AKH
+4 Scrapheap Scrounger|KLD
+2 Pia Nalaar|KLD
+1 Glorybringer|AKH
+4 Goblin Chainwhirler
+2 Chandra, Torch of Defiance|KLD
+4 Canyon Slough|AKH
+1 Spire of Industry|AER
+2 Aether Hub|KLD
+13 Mountain
+4 Dragonskull Summit|XLN
+2 Heart of Kiran|AER
+3 Abrade|HOU
+1 Shock|AER
+3 Unlicensed Disintegration|KLD
+1 Cut // Ribbons|AKH
+
+[sideboard]
+2 Glorybringer|AKH
+1 Aethersphere Harvester|AER
+2 Siege-Gang Commander
+1 Swamp
+2 Duress|XLN
+2 Chandra's Defeat|HOU
+1 Angrath, the Flame-Chained
+2 Doomfall|HOU
+1 Abrade|HOU
+1 Cut // Ribbons|AKH

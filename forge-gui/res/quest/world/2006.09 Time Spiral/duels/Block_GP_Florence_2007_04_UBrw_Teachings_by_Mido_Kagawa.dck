@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=UBrw Teachings by Mido Kagawa
+Title=The Floating Isle
+Difficulty=very hard
+Description=UBrw Teachings by Mido Kagawa
+Icon=The Floating Isle.jpg
+Deck Type=constructed
+
+[main]
+4 Dreadship Reef|C16
+4 Aeon Chronicler|C16
+4 Damnation|PLC
+4 Terramorphic Expanse|C16
+4 Prismatic Lens|TSP
+4 Cancel
+4 Island|RTR
+3 Careful Consideration|TSP
+3 Mystical Teachings|TSP
+2 Swamp|RTR
+2 Tolaria West|FUT
+2 Take Possession|FUT
+2 Coalition Relic|FUT
+2 Delay|FUT
+2 River of Tears|FUT
+2 Teferi, Mage of Zhalfir|TSP
+2 Urborg, Tomb of Yawgmoth|M15
+2 Venser, Shaper Savant|FUT
+1 Pull from Eternity|TSP
+1 Slaughter Pact|FUT
+1 Strangling Soot|TSP
+1 Haunting Hymn|TSP
+1 Plains|RTR
+1 Academy Ruins|TSP
+1 Triskelavus|CMD
+1 Urza's Factory|C13
+
+[sideboard]
+1 Pull from Eternity|TSP
+1 Slaughter Pact|FUT
+1 Strangling Soot|TSP
+3 Vesuvan Shapeshifter|TSP
+3 Void|TSP
+2 Spell Burst|TSP
+1 Ancient Grudge|ISD
+1 Extirpate|PLC
+1 Imp's Mischief|PLC
+1 Mountain|RTR

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Sultai Constrictor by Slater Claudel
+Title=The Great and Powerful Trixie
+Difficulty=very hard
+Description=Sultai Constrictor by Slater Claudel
+Icon=The Great and Powerful Trixie.jpg
+Deck Type=constructed
+
+[main]
+2 Fatal Push|AER
+2 Blossoming Defense|KLD
+3 Vraska's Contempt|XLN
+3 Hadana's Climb
+3 Verdurous Gearhulk|KLD
+3 Rishkar, Peema Renegade|AER
+4 Winding Constrictor|AER
+4 Walking Ballista|AER
+4 Bristling Hydra|KLD
+4 Glint-Sleeve Siphoner|AER
+4 Servant of the Conduit|KLD
+1 Ifnir Deadlands|HOU
+1 Swamp
+2 Foul Orchard
+2 Hashep Oasis|HOU
+3 Fetid Pools|AKH
+3 Forest
+4 Botanical Sanctum|KLD
+4 Blooming Marsh|KLD
+4 Aether Hub|KLD
+
+[sideboard]
+3 Thrashing Brontodon
+1 Negate
+2 Essence Scatter|AKH
+3 Duress|XLN
+2 Cartouche of Ambition|AKH
+1 Arguel's Blood Fast|XLN
+2 Fatal Push|AER
+1 Vraska's Contempt|XLN

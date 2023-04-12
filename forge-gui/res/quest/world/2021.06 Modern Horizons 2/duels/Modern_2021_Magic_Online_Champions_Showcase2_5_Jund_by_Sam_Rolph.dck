@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Jund by Sam Rolph
+Title=Waylon Smithers
+Difficulty=very hard
+Description=Jund by Sam Rolph
+Icon=Waylon Smithers.jpg
+Deck Type=constructed
+
+[main]
+1 Nihil Spellbomb|SOM
+1 Shadowspear
+1 Pyrite Spellbomb|MR
+2 Fatal Push|AER
+2 Abrupt Decay|RTR
+3 Thoughtseize|THS
+3 Inquisition of Kozilek|ROE
+4 Mishra's Bauble|CS
+4 Unholy Heat
+4 Wrenn and Six
+4 Ragavan, Nimble Pilferer
+4 Tarmogoyf|FUT
+4 Dragon's Rage Channeler
+1 Overgrown Tomb
+1 Stomping Ground
+1 Snow-Covered Swamp
+1 Snow-Covered Forest
+1 Blood Crypt
+1 Snow-Covered Mountain
+2 Verdant Catacombs|ZEN
+3 Blackcleave Cliffs|SOM
+4 Wooded Foothills|KTK
+4 Bloodstained Mire|KTK
+4 Urza's Saga
+
+[sideboard]
+3 Engineered Explosives|FD
+3 Torpor Orb|NPH
+2 Alpine Moon
+1 Golgari Charm|RTR
+1 Kroxa, Titan of Death's Hunger
+1 Night's Whisper|FD
+1 Doom Blade|M14
+1 Kolaghan's Command|DTK
+1 Lurrus of the Dream-Den
+1 Thoughtseize|THS

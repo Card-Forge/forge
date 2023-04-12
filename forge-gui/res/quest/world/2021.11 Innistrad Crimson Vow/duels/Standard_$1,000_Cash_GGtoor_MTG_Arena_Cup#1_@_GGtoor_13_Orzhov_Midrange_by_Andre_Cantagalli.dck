@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Orzhov Midrange by Andre Cantagalli
+Title=The Wilds
+Difficulty=very hard
+Description=Orzhov Midrange by Andre Cantagalli
+Icon=The Wilds.jpg
+Deck Type=constructed
+
+[main]
+1 Agadeem's Awakening
+2 Vanishing Verse
+2 Hagra Mauling
+2 Lolth, Spider Queen
+2 Sorin the Mirthless
+3 The Meathook Massacre
+4 Wedding Announcement
+4 Rite of Oblivion
+4 Deadly Dispute
+1 Legion Angel
+2 Edgar, Charmed Groom
+3 Professor of Symbology
+3 Ambitious Farmhand
+4 Welcoming Vampire
+4 Eyetwitch
+3 Swamp
+4 Brightclimb Pathway
+4 Hive of the Eye Tyrant
+4 Plains
+4 Shattered Sanctum
+
+[sideboard]
+3 Go Blank
+2 Infernal Grasp
+2 Doomskar
+1 Environmental Sciences
+1 Confront the Past
+1 Necrotic Fumes
+1 Pest Summoning
+1 Mascot Exhibition
+3 Legion Angel

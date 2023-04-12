@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Golgari Delirium by Paulo Vitor Damo da Rosa
+Title=Wood Ramp
+Difficulty=very hard
+Description=Golgari Delirium by Paulo Vitor Damo da Rosa
+Icon=Wood Ramp.jpg
+Deck Type=constructed
+
+[main]
+4 Liliana, the Last Hope|EMN
+4 Grim Flayer|EMN
+2 Sylvan Advocate|OGW
+2 Ishkanah, Grafwidow|EMN
+3 Tireless Tracker|SOI
+2 Nissa, Vastwood Seer|ORI
+1 Emrakul, the Promised End|EMN
+1 Den Protector|C16
+3 Ruinous Path|BFZ
+4 Traverse the Ulvenwald|SOI
+3 Languish|C16
+4 Grasp of Darkness|OGW
+2 Ultimate Price|DTK
+1 Dead Weight
+4 Forest|RTR
+8 Swamp|RTR
+4 Evolving Wilds
+4 Hissing Quagmire|OGW
+4 Llanowar Wastes|ORI
+
+[sideboard]
+1 Languish|C16
+1 Dead Weight
+2 Transgress the Mind|BFZ
+2 Duress
+2 Kalitas, Traitor of Ghet|OGW
+2 Dark Petition|ORI
+1 Infinite Obliteration|ORI
+1 Gilt-Leaf Winnower|ORI
+1 Seasons Past|SOI
+1 Conclave Naturalists|ORI
+1 Virulent Plague|DTK

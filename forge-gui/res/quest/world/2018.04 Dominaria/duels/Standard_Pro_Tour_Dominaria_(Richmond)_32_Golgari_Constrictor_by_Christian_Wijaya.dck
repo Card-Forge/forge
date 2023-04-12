@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Golgari Constrictor by Christian Wijaya
+Title=Newton
+Difficulty=very hard
+Description=Golgari Constrictor by Christian Wijaya
+Icon=Newton.jpg
+Deck Type=constructed
+
+[main]
+2 Liliana, Death's Majesty|AKH
+4 Glint-Sleeve Siphoner|AER
+4 Jadelight Ranger
+4 Llanowar Elves
+2 Ravenous Chupacabra
+4 Verdurous Gearhulk|KLD
+4 Walking Ballista|AER
+4 Winding Constrictor|AER
+2 Adventurous Impulse
+1 Duress|XLN
+1 Harsh Scrutiny|KLD
+1 Fatal Push|AER
+2 Aethersphere Harvester|AER
+4 Aether Hub|KLD
+4 Blooming Marsh|KLD
+7 Forest
+2 Ifnir Deadlands|HOU
+2 Swamp
+4 Woodland Cemetery
+2 Karn, Scion of Urza
+
+[sideboard]
+3 Duress|XLN
+3 Fatal Push|AER
+1 Arguel's Blood Fast|XLN
+1 Crushing Canopy|XLN
+1 Phyrexian Scriptures
+2 Lifecrafter's Bestiary|AER
+1 Shapers' Sanctuary|XLN
+2 Vraska's Contempt|XLN
+1 Vraska, Relic Seeker|XLN

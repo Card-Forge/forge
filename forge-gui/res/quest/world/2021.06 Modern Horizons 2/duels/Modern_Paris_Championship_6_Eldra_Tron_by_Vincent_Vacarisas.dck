@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Eldra Tron by Vincent Vacarisas
+Title=Shadowstorm Vizier
+Difficulty=very hard
+Description=Eldra Tron by Vincent Vacarisas
+Icon=Shadowstorm Vizier.jpg
+Deck Type=constructed
+
+[main]
+1 All Is Dust|ROE
+1 Basilisk Collar|WWK
+2 Blast Zone
+2 Cavern of Souls|AVR
+4 Chalice of the Void|MR
+3 Dismember|NPH
+4 Eldrazi Temple|ROE
+1 Endbringer|OGW
+4 Expedition Map|ZEN
+4 Karn, the Great Creator
+4 Matter Reshaper|OGW
+4 Reality Smasher|OGW
+1 Relic of Progenitus|ALA
+4 Thought-Knot Seer|OGW
+1 Urborg, Tomb of Yawgmoth|M15
+4 Urza's Mine|9E
+4 Urza's Power Plant|9E
+2 Urza's Saga
+4 Urza's Tower|9E
+3 Walking Ballista|AER
+2 Warping Wail|OGW
+1 Wastes|OGW
+
+[sideboard]
+1 All Is Dust|ROE
+1 Relic of Progenitus|ALA
+1 Walking Ballista|AER
+1 Ensnaring Bridge|8E
+1 Liquimetal Coating|SOM
+1 Pithing Needle
+1 Ratchet Bomb|M14
+1 Skysovereign, Consul Flagship|KLD
+1 Sorcerous Spyglass
+2 Spatial Contortion|OGW
+1 Sundering Titan|DS
+1 Tormod's Crypt
+1 Torpor Orb|NPH
+1 Wurmcoil Engine|SOM

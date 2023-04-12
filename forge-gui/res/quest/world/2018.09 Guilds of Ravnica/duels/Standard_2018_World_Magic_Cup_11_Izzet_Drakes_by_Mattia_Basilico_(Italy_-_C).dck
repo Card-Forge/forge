@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Izzet Drakes by Mattia Basilico (Italy - C)
+Title=Dungeon Crawling Red
+Difficulty=very hard
+Description=Izzet Drakes by Mattia Basilico (Italy - C)
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+
+[main]
+2 Niv-Mizzet, Parun
+4 Crackling Drake
+4 Enigma Drake
+1 Beacon Bolt
+4 Lava Coil
+4 Chart a Course|XLN
+4 Discovery // Dispersal
+3 Dive Down|XLN
+3 Spell Pierce|XLN
+4 Opt
+4 Shock
+2 Search for Azcanta|XLN
+4 Sulfur Falls
+7 Island
+4 Steam Vents
+1 Dragonskull Summit|XLN
+5 Mountain
+
+[sideboard]
+1 Niv-Mizzet, Parun
+1 Beacon Bolt
+4 Raptor Hatchling|XLN
+2 Ral, Izzet Viceroy
+2 Fiery Cannonade|XLN
+1 Negate
+3 Treasure Map|XLN
+1 Disdainful Stroke

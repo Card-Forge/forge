@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=4c Creativity by Caleb Durward
+Title=alalich
+Difficulty=very hard
+Description=4c Creativity by Caleb Durward
+Icon=alalich.jpg
+Deck Type=constructed
+
+[main]
+2 Explore|WWK
+2 Lightning Helix|RAV
+3 Teferi, Time Raveler
+3 Expressive Iteration
+3 Manamorphose|SHM
+4 Hard Evidence
+4 Strike It Rich
+4 Indomitable Creativity|AER
+4 Prismatic Ending
+4 Primeval Titan|M12
+1 Sacred Foundry
+1 Raugrin Triome
+1 Ketria Triome
+1 Scalding Tarn|ZEN
+2 Mountain
+2 Steam Vents
+2 Stomping Ground
+3 Dwarven Mine
+3 Valakut, the Molten Pinnacle|ZEN
+3 Wooded Foothills|KTK
+4 Bloodstained Mire|KTK
+4 Arid Mesa|ZEN
+
+[sideboard]
+4 Blossoming Calm
+2 Flusterstorm
+2 Shattering Spree|GP
+2 Aether Gust
+1 Veil of Summer
+1 Wear // Tear|DGM
+1 Celestial Purge|M12
+1 Path to Exile|CFX
+1 Expressive Iteration

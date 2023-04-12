@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Eric Froehlich
+Title=The Minotaurs
+Difficulty=very hard
+Description=Red Deck Wins by Eric Froehlich
+Icon=The Minotaurs.jpg
+Deck Type=constructed
+
+[main]
+4 Ahn-Crop Crasher|AKH
+4 Bomat Courier|KLD
+4 Earthshaker Khenra|HOU
+2 Harsh Mentor|AKH
+4 Hazoret the Fervent|AKH
+3 Kari Zev, Skyship Raider|AER
+4 Soul-Scar Mage|AKH
+3 Abrade|HOU
+4 Lightning Strike|XLN
+4 Shock|AER
+15 Mountain|XLN
+4 Ramunap Ruins|HOU
+1 Scavenger Grounds|HOU
+4 Sunscorched Desert|AKH
+
+[sideboard]
+3 Aethersphere Harvester|AER
+3 Chandra, Torch of Defiance|KLD
+2 Chandra's Defeat|HOU
+2 Glorybringer|AKH
+2 Pia Nalaar|KLD
+3 Rampaging Ferocidon|XLN

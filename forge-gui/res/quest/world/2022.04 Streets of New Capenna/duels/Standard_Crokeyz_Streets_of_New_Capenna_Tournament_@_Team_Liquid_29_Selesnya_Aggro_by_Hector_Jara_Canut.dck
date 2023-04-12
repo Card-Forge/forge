@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Selesnya Aggro by Hector Jara Canut
+Title=Ras Al Ghul
+Difficulty=very hard
+Description=Selesnya Aggro by Hector Jara Canut
+Icon=Ras Al Ghul.jpg
+Deck Type=constructed
+
+[main]
+2 Mavinda, Students' Advocate
+4 Illuminator Virtuoso
+4 Dragonsguard Elite
+4 Clever Lumimancer
+4 Leonin Lightscribe
+2 Sejiri Shelter
+4 Wild Shape
+4 Snakeskin Veil
+4 Charge Through
+4 Guiding Voice
+4 Homestead Courage
+1 Eiganjo, Seat of the Empire
+1 Boseiju, Who Endures
+4 Branchloft Pathway
+4 Overgrown Farmland
+5 Plains
+5 Forest
+
+[sideboard]
+1 Mavinda, Students' Advocate
+1 Tamiyo's Safekeeping
+1 Inkling Summoning
+1 Mascot Exhibition
+1 Expanded Anatomy
+1 Environmental Sciences
+1 Containment Breach
+1 Reduce to Memory
+1 Academic Probation
+2 Mage Duel
+4 Fateful Absence

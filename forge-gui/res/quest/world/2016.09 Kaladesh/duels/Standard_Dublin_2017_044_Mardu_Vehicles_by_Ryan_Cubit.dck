@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Mardu Vehicles by Ryan Cubit
+Title=Patriarch Control
+Difficulty=very hard
+Description=Mardu Vehicles by Ryan Cubit
+Icon=Patriarch Control.jpg
+Deck Type=constructed
+
+[main]
+2 Gideon, Ally of Zendikar|BFZ
+4 Scrapheap Scrounger|KLD
+4 Inventor's Apprentice|KLD
+4 Thraben Inspector|SOI
+4 Toolcraft Exemplar|KLD
+4 Veteran Motorist|KLD
+2 Depala, Pilot Exemplar|KLD
+2 Aethergeode Miner|AER
+4 Shock
+4 Unlicensed Disintegration|KLD
+4 Heart of Kiran|AER
+1 Aethersphere Harvester|AER
+2 Mountain|RTR
+3 Plains|RTR
+4 Aether Hub|KLD
+4 Concealed Courtyard|KLD
+4 Inspiring Vantage|KLD
+4 Needle Spires|OGW
+
+[sideboard]
+1 Gideon, Ally of Zendikar|BFZ
+1 Aethersphere Harvester|AER
+1 Chandra, Torch of Defiance|KLD
+3 Authority of the Consuls|KLD
+2 Walking Ballista|AER
+1 Skysovereign, Consul Flagship|KLD
+1 Archangel Avacyn|SOI
+2 Declaration in Stone|SOI
+2 Fragmentize|KLD
+1 Selfless Spirit|EMN

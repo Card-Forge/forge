@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=UW Control by Matthew Woolum
+Title=Leeching Gremlins
+Difficulty=very hard
+Description=UW Control by Matthew Woolum
+Icon=Leeching Gremlins.jpg
+Deck Type=constructed
+
+[main]
+1 Consecrated Sphinx|MBS
+4 Wall of Omens|ROE
+2 Into the Roil|ZEN
+4 Mana Leak|M12
+3 Day of Judgment|M12
+4 Preordain|M11
+1 Batterskull|NPH
+1 Contagion Clasp|SOM
+4 Tumble Magnet|SOM
+2 Spreading Seas|ZEN
+6 Island|M12
+3 Plains|M12
+4 Celestial Colonnade|WWK
+4 Glacial Fortress|M12
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+1 Elspeth Tirel|SOM
+2 Gideon Jura|M12
+3 Jace Beleren|M11
+1 Karn Liberated|NPH
+2 Venser, the Sojourner|SOM
+
+[sideboard]
+1 Batterskull|NPH
+1 Elspeth Tirel|SOM
+2 Baneslayer Angel|M11
+2 Hero of Bladehold|MBS
+4 Kor Firewalker|WWK
+3 Condemn|M11
+2 Divine Offering|MBS

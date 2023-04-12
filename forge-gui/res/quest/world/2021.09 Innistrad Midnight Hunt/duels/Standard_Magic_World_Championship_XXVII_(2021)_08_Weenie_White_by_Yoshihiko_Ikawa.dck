@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Weenie White by Yoshihiko Ikawa
+Title=Cleric
+Difficulty=very hard
+Description=Weenie White by Yoshihiko Ikawa
+Icon=Cleric.jpg
+Deck Type=constructed
+
+[main]
+3 Reidane, God of the Worthy
+3 Stonebinder's Familiar
+3 Adeline, Resplendent Cathar
+4 Sungold Sentinel
+4 Intrepid Adversary
+4 Usher of the Fallen
+4 Luminarch Aspirant
+4 Elite Spellbinder
+2 Maul of the Skyclaves
+2 Portable Hole
+3 Fateful Absence
+1 Cave of the Frost Dragon
+4 Faceless Haven
+19 Snow-Covered Plains
+
+[sideboard]
+1 Portable Hole
+1 Fateful Absence
+2 You're Ambushed on the Road
+2 Brutal Cathar
+2 Curse of Silence
+3 Guardian of Faith
+4 Skyclave Apparition

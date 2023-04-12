@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Orzhov Midrange by Patrik Szmatana
+Title=Lair
+Difficulty=very hard
+Description=Orzhov Midrange by Patrik Szmatana
+Icon=Lair.jpg
+Deck Type=constructed
+
+[main]
+1 Agadeem's Awakening
+2 Lolth, Spider Queen
+2 Sorin the Mirthless
+2 Hagra Mauling
+2 Vanishing Verse
+3 The Meathook Massacre
+4 Rite of Oblivion
+4 Wedding Announcement
+4 Deadly Dispute
+1 Valki, God of Lies
+1 Legion Angel
+2 Shambling Ghast
+3 Welcoming Vampire
+3 Ambitious Farmhand
+3 Professor of Symbology
+4 Eyetwitch
+3 Snow-Covered Swamp
+4 Shattered Sanctum
+4 Hive of the Eye Tyrant
+4 Snow-Covered Plains
+4 Brightclimb Pathway
+
+[sideboard]
+3 Go Blank
+3 Doomskar
+2 Pest Summoning
+1 Necrotic Fumes
+1 Confront the Past
+1 Mascot Exhibition
+1 Environmental Sciences
+3 Legion Angel

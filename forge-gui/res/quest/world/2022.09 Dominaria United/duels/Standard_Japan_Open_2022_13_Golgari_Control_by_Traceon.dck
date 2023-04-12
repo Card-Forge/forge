@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Golgari Control by Traceon
+Title=AidoHwedo
+Difficulty=very hard
+Description=Golgari Control by Traceon
+Icon=AidoHwedo.jpg
+Deck Type=constructed
+
+[main]
+1 Infernal Grasp
+1 Cut Down
+1 Bouncer's Beatdown
+1 The Cruelty of Gix
+2 Dig Up
+3 The Meathook Massacre
+3 Storm the Festival
+4 Reckoner Bankbuster
+1 Nemata, Primeval Warden
+3 Titan of Industry
+3 Jewel Thief
+3 Sheoldred, the Apocalypse
+4 Topiary Stomper
+4 Workshop Warchief
+1 Boseiju, Who Endures
+1 Takenuma, Abandoned Mire
+2 Crystal Grotto
+4 Ziatora's Proving Ground
+4 Deathcap Glade
+5 Swamp
+9 Forest
+
+[sideboard]
+3 Graveyard Trespasser
+2 Tear Asunder
+2 Duress
+2 No Way Out
+1 Urborg Repossession
+1 Unlicensed Hearse
+1 Tenacious Underdog
+1 Bouncer's Beatdown
+1 The Cruelty of Gix
+1 The Meathook Massacre

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Izzet Blitz by Michele Bandera
+Title=Obatala
+Difficulty=very hard
+Description=Izzet Blitz by Michele Bandera
+Icon=Obatala.jpg
+Deck Type=constructed
+
+[main]
+1 Serum Visions|FD
+2 Unholy Heat
+2 Mutagenic Growth|NPH
+4 Expressive Iteration
+4 Lightning Bolt|M11
+4 Lava Dart|JU
+4 Mishra's Bauble|CS
+4 Manamorphose|SHM
+2 Sprite Dragon
+3 Soul-Scar Mage|AKH
+3 Stormwing Entity
+4 Monastery Swiftspear|KTK
+4 Dragon's Rage Channeler
+1 Bloodstained Mire|KTK
+2 Steam Vents
+4 Fiery Islet
+4 Mountain
+4 Scalding Tarn|ZEN
+4 Spirebluff Canal|KLD
+
+[sideboard]
+3 Tormod's Crypt
+2 Threads of Disloyalty|BOK
+2 Spell Pierce|XLN
+1 Shattering Spree|GP
+2 Kozilek's Return|OGW
+1 Dispel|BFZ
+2 Blood Moon|9E
+2 Abrade|HOU

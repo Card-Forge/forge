@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Gruul Aggro  by Seth Manfield
+Title=Deep Blue Sea
+Difficulty=very hard
+Description=Gruul Aggro  by Seth Manfield
+Icon=Deep Blue Sea.jpg
+Deck Type=constructed
+
+[main]
+1 Thrashing Brontodon
+2 Ox of Agonas
+2 Scavenging Ooze
+2 Rimrock Knight
+4 Bonecrusher Giant
+4 Lovestruck Beast
+4 Brushfire Elemental
+4 Edgewall Innkeeper
+4 Kazandu Mammoth
+2 The Great Henge
+3 Embercleave
+2 Fire Prophecy
+4 Shatterskull Smashing
+1 The Akroan War
+4 Cragcrown Pathway
+4 Fabled Passage
+5 Mountain
+8 Forest
+
+[sideboard]
+1 Ox of Agonas
+2 Fire Prophecy
+2 The Akroan War
+2 Phoenix of Ash
+2 Vivien, Monsters' Advocate
+3 Wilt
+3 Klothys, God of Destiny

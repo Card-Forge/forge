@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ug Pummeler by Hannes Kerem
+Title=Private Domain
+Difficulty=very hard
+Description=Ug Pummeler by Hannes Kerem
+Icon=Private Domain.jpg
+Deck Type=constructed
+
+[main]
+2 Dive Down|XLN
+4 Blossoming Defense|KLD
+4 Larger Than Life|KLD
+4 Attune with Aether|KLD
+4 Bristling Hydra|KLD
+1 Rhonas the Indomitable|AKH
+4 Electrostatic Pummeler|KLD
+4 Rogue Refiner|AER
+4 Servant of the Conduit|KLD
+4 Longtusk Cub|KLD
+6 Forest|XLN
+2 Island|XLN
+4 Botanical Sanctum|KLD
+4 Aether Hub|KLD
+4 Hashep Oasis|HOU
+1 One With the Wind|XLN
+4 Cartouche of Knowledge|AKH
+
+[sideboard]
+3 Cartouche of Ambition|AKH
+1 Swamp|XLN
+1 Confiscation Coup|KLD
+2 Greenbelt Rampager|AER
+4 Negate|AER
+2 Spell Pierce|XLN
+2 Aethersphere Harvester|AER

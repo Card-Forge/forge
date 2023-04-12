@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Benaya Lie (Australia - A)
+Title=Lazav
+Difficulty=very hard
+Description=Boros Aggro by Benaya Lie (Australia - A)
+Icon=Lazav.jpg
+Deck Type=constructed
+
+[main]
+4 Dauntless Bodyguard
+4 Snubhorn Sentry
+4 Adanto Vanguard|XLN
+4 Boros Challenger
+2 Aurelia, Exemplar of Justice
+2 Venerated Loxodon
+4 Heroic Reinforcements
+2 Lava Coil
+4 Legion's Landing|XLN
+4 History of Benalia
+3 Conclave Tribunal
+4 Sacred Foundry
+4 Clifftop Retreat
+5 Mountain
+10 Plains
+
+[sideboard]
+2 Lava Coil
+1 Demystify|XLN
+2 Lyra Dawnbringer
+4 Tocatli Honor Guard|XLN
+3 Ajani, Adversary of Tyrants
+2 Fiery Cannonade|XLN
+1 Experimental Frenzy

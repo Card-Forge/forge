@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by Matt Dow
+Title=Osiris
+Difficulty=very hard
+Description=Puresteel Paladin by Matt Dow
+Icon=Osiris.jpg
+Deck Type=constructed
+
+[main]
+3 Giver of Runes
+4 Ornithopter|AER
+4 Esper Sentinel
+4 Memnite|SOM
+4 Puresteel Paladin|NPH
+4 Stoneforge Mystic|WWK
+1 Shadowspear
+1 Nihil Spellbomb|SOM
+1 Cranial Plating|FD
+4 Springleaf Drum|BNG
+4 Colossus Hammer
+4 Urza's Saga
+4 Sigarda's Aid|EMN
+1 Arid Mesa|ZEN
+1 Godless Shrine
+1 Flooded Strand|KTK
+3 Inkmoth Nexus|MBS
+4 Concealed Courtyard|KLD
+4 Plains
+4 Silent Clearing
+
+[sideboard]
+1 Hushbringer
+1 Lurrus of the Dream-Den
+1 Cathar Commando
+1 Prismatic Ending
+1 Pithing Needle
+2 Path to Exile|CFX
+2 Knight of Malice
+2 Void Mirror
+4 Thoughtseize|THS

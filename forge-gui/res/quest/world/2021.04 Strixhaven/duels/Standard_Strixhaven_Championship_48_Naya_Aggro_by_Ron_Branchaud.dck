@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Naya Aggro by Ron Branchaud
+Title=Aspect of Death
+Difficulty=very hard
+Description=Naya Aggro by Ron Branchaud
+Icon=Aspect of Death.jpg
+Deck Type=constructed
+
+[main]
+3 Robber of the Rich
+4 Edgewall Innkeeper
+4 Giant Killer
+4 Lovestruck Beast
+4 Clarion Spirit
+4 Bonecrusher Giant
+4 Stonebinder's Familiar
+4 Jaspera Sentinel
+2 Embercleave
+4 Showdown of the Skalds
+2 Plains
+2 Forest
+3 Mountain
+4 Cragcrown Pathway
+4 Needleverge Pathway
+4 Fabled Passage
+4 Branchloft Pathway
+
+[sideboard]
+1 Shadowspear
+2 Ox of Agonas
+2 Klothys, God of Destiny
+2 Glass Casket
+2 Shredded Sails
+3 Redcap Melee
+3 Roiling Vortex

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Omnath Ramp by Luis Scott-vargas
+Title=Angus Mackenzie
+Difficulty=very hard
+Description=Omnath Ramp by Luis Scott-vargas
+Icon=Angus Mackenzie.jpg
+Deck Type=constructed
+
+[main]
+1 Giant Killer
+4 Beanstalk Giant
+4 Edgewall Innkeeper
+4 Brazen Borrower
+4 Fae of Wishes
+4 Bonecrusher Giant
+4 Omnath, Locus of Creation
+4 Lucky Clover
+3 Escape to the Wilds
+1 Plains
+2 Mountain
+3 Raugrin Triome
+3 Ketria Triome
+3 Branchloft Pathway
+3 Cragcrown Pathway
+4 Fabled Passage
+4 Forest
+5 Island
+
+[sideboard]
+1 Escape to the Wilds
+1 Branchloft Pathway
+1 Ugin, the Spirit Dragon
+1 Redcap Melee
+1 Soul-Guide Lantern
+1 Embercleave
+1 Banishing Light
+1 Shatter the Sky
+1 Storm's Wrath
+1 Mystical Dispute
+1 Neutralize
+1 Return to Nature
+1 Negate
+2 Chainweb Aracnir

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Izzet Control by Kobayashi Ryohei
+Title=The Kithkin
+Difficulty=very hard
+Description=Izzet Control by Kobayashi Ryohei
+Icon=The Kithkin.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+1 Prismari Command
+2 Galvanic Iteration
+2 Cathartic Pyre
+2 Disdainful Stroke
+2 Burning Hands
+3 Spikefield Hazard
+3 Fading Hope
+3 Jwari Disruption
+4 Divide by Zero
+4 Memory Deluge
+1 Shatterskull Smashing
+3 Burn Down the House
+4 Expressive Iteration
+4 Alrund's Epiphany
+1 Frostboil Snarl
+2 Field of Ruin
+2 Hall of Storm Giants
+4 Riverglide Pathway
+6 Mountain
+6 Island
+
+[sideboard]
+1 Negate
+1 Burning Hands
+1 Mascot Exhibition
+1 Teachings of the Archaics
+1 Environmental Sciences
+2 Cinderclasm
+2 Smoldering Egg
+2 Unexpected Windfall
+4 Malevolent Hermit

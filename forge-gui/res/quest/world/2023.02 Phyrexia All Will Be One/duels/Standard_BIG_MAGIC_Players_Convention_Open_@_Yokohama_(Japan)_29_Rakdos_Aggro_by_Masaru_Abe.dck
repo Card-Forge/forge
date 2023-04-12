@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Masaru Abe
+Title=Greenie
+Difficulty=very hard
+Description=Rakdos Aggro by Masaru Abe
+Icon=Greenie.jpg
+Deck Type=constructed
+
+[main]
+2 Abrade
+2 Jaya, Fiery Negotiator
+3 Lightning Strike
+3 Play with Fire
+3 Go for the Throat
+4 Kumano Faces Kakkazan
+4 Fable of the Mirror-Breaker
+2 Misery's Shadow
+2 Shivan Devastator
+4 Monastery Swiftspear
+4 Bloodthirsty Adversary
+4 Graveyard Trespasser
+1 Sokenzan, Crucible of Defiance
+1 Mirrex
+4 Sulfurous Springs
+4 Blackcleave Cliffs
+4 Haunted Ridge
+4 Mishra's Foundry
+5 Mountain
+
+[sideboard]
+4 The Elder Dragon War
+3 Reckoner Bankbuster
+2 Sheoldred's Edict
+2 Duress
+1 Unlicensed Hearse
+1 The Filigree Sylex
+1 Abrade
+1 Go for the Throat

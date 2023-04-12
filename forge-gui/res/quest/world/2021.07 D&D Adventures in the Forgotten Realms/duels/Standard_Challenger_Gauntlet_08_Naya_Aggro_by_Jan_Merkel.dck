@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Naya Aggro by Jan Merkel
+Title=Blind Faith
+Difficulty=very hard
+Description=Naya Aggro by Jan Merkel
+Icon=Blind Faith.jpg
+Deck Type=constructed
+
+[main]
+4 Needleverge Pathway
+4 Branchloft Pathway
+4 Cragcrown Pathway
+3 Fabled Passage
+3 Forest
+2 Lair of the Hydra
+2 Mountain
+2 Plains
+3 Showdown of the Skalds
+1 The Akroan War
+4 Fire Prophecy
+3 Esika's Chariot
+4 Lovestruck Beast
+4 Giant Killer
+4 Edgewall Innkeeper
+4 Bonecrusher Giant
+4 Jaspera Sentinel
+3 Elite Spellbinder
+2 Tangled Florahedron
+
+[sideboard]
+4 Redcap Melee
+3 Ox of Agonas
+2 Drannith Magistrate
+2 Burning Hands
+1 Wilt
+1 Reidane, God of the Worthy
+1 Jegantha, the Wellspring
+1 Elite Spellbinder

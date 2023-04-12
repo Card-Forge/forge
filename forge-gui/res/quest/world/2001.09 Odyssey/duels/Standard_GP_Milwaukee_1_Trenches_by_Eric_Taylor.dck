@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Trenches by Eric Taylor
+Title=The Backlash Machine
+Difficulty=very hard
+Description=Trenches by Eric Taylor
+Icon=The Backlash Machine.jpg
+Deck Type=constructed
+
+[main]
+3 Adarkar Wastes|7E
+2 Battlefield Forge|AP
+4 Coastal Tower|IN
+7 Island|OD
+3 Mountain|OD
+4 Shivan Reef|AP
+3 Skycloud Expanse|OD
+4 Absorb|IN
+4 Counterspell|7E
+4 Fact or Fiction|IN
+4 Fire // Ice|AP
+3 Goblin Trenches|AP
+4 Memory Lapse|7E
+3 Prophetic Bolt|AP
+4 Repulse|IN
+2 Syncopate|OD
+2 Wrath of God|7E
+
+[sideboard]
+2 Aura Blast|PS
+4 Flametongue Kavu|PS
+2 Gainsay|PS
+3 Lightning Angel|AP
+4 Meddling Mage|PS

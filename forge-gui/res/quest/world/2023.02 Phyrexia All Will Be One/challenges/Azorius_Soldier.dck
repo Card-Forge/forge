@@ -1,0 +1,52 @@
+[quest]
+id=20230202
+OpponentName=Robert
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Azorius Soldier
+Title=Legolas
+Difficulty=very hard
+Description=Azorius Soldier by Robert Steiner
+Icon=Legolas.jpg
+Deck Type=constructed
+
+[main]
+2 Cemetery Protector
+2 Siege Veteran
+3 Dennick, Pious Apprentice
+3 Skrelv, Defector Mite
+3 Zephyr Sentinel
+3 Harbin, Vanguard Aviator
+4 Recruitment Officer
+4 Valiant Veteran
+4 Skystrike Officer
+4 Resolute Reinforcements
+1 Spell Pierce
+3 Protect the Negotiators
+1 Otawara, Soaring City
+1 Plaza of Heroes
+2 Eiganjo, Seat of the Empire
+2 Plains
+2 Mishra's Foundry
+4 Adarkar Wastes
+4 Fortified Beachhead
+4 Secluded Courtyard
+4 Seachrome Coast
+
+[sideboard]
+2 Spell Pierce
+1 Protect the Negotiators
+1 Tocasia's Welcome
+1 Cathar Commando
+2 Knockout Blow
+2 Extraction Specialist
+3 Lantern Flare
+3 Brutal Cathar

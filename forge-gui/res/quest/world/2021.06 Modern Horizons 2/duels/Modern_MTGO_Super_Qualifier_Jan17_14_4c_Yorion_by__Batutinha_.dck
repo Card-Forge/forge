@@ -1,0 +1,53 @@
+[duel]
+[metadata]
+Name=4c Yorion by  Batutinha 
+Title=Golgari-precon
+Difficulty=very hard
+Description=4c Yorion by  Batutinha 
+Icon=Golgari-precon.jpg
+Deck Type=constructed
+
+[main]
+4 Teferi, Time Raveler
+4 Wrenn and Six
+3 Eternal Witness|FD
+2 Fury
+4 Ice-Fang Coatl
+4 Omnath, Locus of Creation
+4 Solitude
+4 Expressive Iteration
+4 Prismatic Ending
+2 Counterspell|7E
+2 Eladamri's Call|PS
+3 Ephemerate
+3 Lightning Bolt|M11
+4 Abundant Growth|AVR
+4 Spreading Seas|ZEN
+1 Breeding Pool
+4 Flooded Strand|KTK
+1 Hallowed Fountain
+1 Ketria Triome
+4 Misty Rainforest|ZEN
+1 Raugrin Triome
+1 Sacred Foundry
+1 Sheltered Thicket|AKH
+2 Snow-Covered Forest
+2 Snow-Covered Island
+1 Snow-Covered Mountain
+1 Snow-Covered Plains
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+4 Windswept Heath|KTK
+2 Wooded Foothills|KTK
+
+[sideboard]
+1 Aether Gust
+1 Emrakul, the Promised End|EMN
+1 Endurance
+2 Force of Vigor
+2 Lightning Helix|RAV
+1 Mystical Dispute
+2 Relic of Progenitus|ALA
+4 Veil of Summer
+1 Yorion, Sky Nomad

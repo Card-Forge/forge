@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Golgari Delirium by Jiachen Tao
+Title=Elrond
+Difficulty=very hard
+Description=Golgari Delirium by Jiachen Tao
+Icon=Elrond.jpg
+Deck Type=constructed
+
+[main]
+4 Liliana, the Last Hope|EMN
+4 Grim Flayer|EMN
+4 Mindwrack Demon|SOI
+3 Ishkanah, Grafwidow|EMN
+1 Den Protector|C16
+1 Pilgrim's Eye|BFZ
+1 Emrakul, the Promised End|EMN
+1 Nissa, Vastwood Seer|ORI
+2 Languish|C16
+1 Ruinous Path|BFZ
+3 Traverse the Ulvenwald|SOI
+4 Grasp of Darkness|OGW
+2 Murder
+1 Hedron Archive|BFZ
+3 Oath of Nissa|OGW
+2 Dead Weight
+6 Forest|RTR
+7 Swamp|RTR
+4 Llanowar Wastes|ORI
+4 Hissing Quagmire|OGW
+2 Evolving Wilds
+
+[sideboard]
+1 Den Protector|C16
+2 Languish|C16
+1 Dead Weight
+1 Ob Nixilis Reignited|BFZ
+1 Crawling Sensation|SOI
+2 To the Slaughter|SOI
+3 Transgress the Mind|BFZ
+1 Caustic Caterpillar|ORI
+1 Collective Brutality|EMN
+1 Kalitas, Traitor of Ghet|OGW
+1 Pick the Brain|SOI

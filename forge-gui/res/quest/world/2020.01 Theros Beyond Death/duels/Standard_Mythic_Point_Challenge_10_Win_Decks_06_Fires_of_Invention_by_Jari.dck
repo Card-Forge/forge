@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Fires of Invention by Jari
+Title=Vanellope von Schweetz
+Difficulty=very hard
+Description=Fires of Invention by Jari
+Icon=Vanellope von Schweetz.jpg
+Deck Type=constructed
+
+[main]
+2 Castle Vantress
+2 Mountain
+3 Temple of Epiphany
+2 Island
+4 Steam Vents
+4 Sacred Foundry
+4 Hallowed Fountain
+3 Fabled Passage
+2 Kenrith, the Returned King
+2 Cavalier of Gales
+4 Cavalier of Flame
+4 Sphinx of Foresight
+4 Bonecrusher Giant
+3 Aether Gust
+4 Deafening Clarion
+2 Elspeth Conquers Death
+4 Fires of Invention
+4 Teferi, Time Raveler
+1 Plains
+2 Temple of Triumph
+
+[sideboard]
+3 Mystical Dispute
+3 Legion Warboss
+2 Devout Decree
+2 Tithe Taker
+2 Robber of the Rich
+1 Disenchant
+1 Heliod's Intervention
+1 Elspeth Conquers Death

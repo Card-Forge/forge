@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Weenie White  by Andrea Beatrice
+Title=Nissa, Genesis Mage
+Difficulty=very hard
+Description=Weenie White  by Andrea Beatrice
+Icon=Nissa, Genesis Mage.jpg
+Deck Type=constructed
+
+[main]
+1 Legion Angel
+3 Adeline, Resplendent Cathar
+4 Brutal Cathar
+4 Usher of the Fallen
+4 Thalia, Guardian of Thraben
+4 Luminarch Aspirant
+4 Intrepid Adversary
+4 Hopeful Initiate
+4 Elite Spellbinder
+4 The Wandering Emperor
+2 Eiganjo, Seat of the Empire
+3 Crawling Barrens
+3 Cave of the Frost Dragon
+16 Plains
+
+[sideboard]
+3 Legion Angel
+3 Reidane, God of the Worthy
+3 Valorous Stance
+3 Guardian of Faith
+3 Skyclave Apparition

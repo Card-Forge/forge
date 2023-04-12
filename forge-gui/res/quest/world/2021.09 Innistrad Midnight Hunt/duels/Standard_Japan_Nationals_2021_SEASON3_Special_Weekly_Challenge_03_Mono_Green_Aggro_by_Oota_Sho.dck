@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Oota Sho
+Title=Air-Walker
+Difficulty=very hard
+Description=Mono Green Aggro by Oota Sho
+Icon=Air-Walker.jpg
+Deck Type=constructed
+
+[main]
+3 Lotus Cobra
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+4 Esika's Chariot
+2 Inscription of Abundance
+3 Snakeskin Veil
+4 Blizzard Brawl
+1 Unnatural Growth
+4 Ranger Class
+3 Wrenn and Seven
+1 Lair of the Hydra
+4 Kazandu Mammoth
+4 Faceless Haven
+19 Snow-Covered Forest
+
+[sideboard]
+1 Snakeskin Veil
+2 Unnatural Growth
+1 Tangletrap
+2 Devouring Tendrils
+2 Outland Liberator
+2 Froghemoth
+2 Toski, Bearer of Secrets
+3 Tajuru Blightblade

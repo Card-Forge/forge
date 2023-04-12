@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Jeskai Midrange by Olivier Polak-Rottmann
+Title=Black Flame
+Difficulty=very hard
+Description=Jeskai Midrange by Olivier Polak-Rottmann
+Icon=Black Flame.jpg
+Deck Type=constructed
+
+[main]
+2 Soulfire Grand Master|FRF
+4 Jace, Vryn's Prodigy|ORI
+3 Tasigur, the Golden Fang|FRF
+1 Dragonmaster Outcast|BFZ
+1 Dragonlord Silumgar|DTK
+4 Mantis Rider|KTK
+3 Ojutai's Command|DTK
+3 Kolaghan's Command|DTK
+3 Fiery Impulse|ORI
+1 Wild Slash|FRF
+2 Dig Through Time|KTK
+4 Crackling Doom|KTK
+1 Negate|ORI
+1 Dispel|BFZ
+1 Utter End|KTK
+4 Polluted Delta|KTK
+4 Flooded Strand|KTK
+4 Bloodstained Mire|KTK
+4 Mystic Monastery|KTK
+2 Prairie Stream|BFZ
+2 Smoldering Marsh|BFZ
+1 Sunken Hollow|BFZ
+1 Swamp|BFZ
+1 Plains|BFZ
+1 Island|BFZ
+2 Mountain|BFZ
+
+[sideboard]
+1 Mastery of the Unseen|FRF
+1 Surge of Righteousness|DTK
+1 Virulent Plague|DTK
+1 Arashin Cleric|FRF
+1 Felidar Cub|BFZ
+1 Dragonmaster Outcast|BFZ
+1 Dispel|BFZ
+2 Disdainful Stroke|KTK
+2 Exert Influence|BFZ
+2 Duress|DTK
+2 Radiant Flames|BFZ

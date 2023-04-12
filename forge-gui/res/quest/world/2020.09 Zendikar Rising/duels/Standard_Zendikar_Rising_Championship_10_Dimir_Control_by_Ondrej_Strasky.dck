@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Dimir Control by Ondrej Strasky
+Title=Archon Namani
+Difficulty=very hard
+Description=Dimir Control by Ondrej Strasky
+Icon=Archon Namani.jpg
+Deck Type=constructed
+
+[main]
+4 Soaring Thought-Thief
+4 Merfolk Windrobber
+3 Agadeem's Awakening
+1 Eliminate
+1 Heartless Act
+4 Fabled Passage
+4 Clearwater Pathway
+5 Island
+3 Swamp
+4 Temple of Deceit
+4 Thieves' Guild Enforcer
+4 Ruin Crab
+3 Of One Mind
+3 Lullmage's Domination
+2 Bloodchief's Thirst
+4 Into the Story
+1 Essence Scatter
+4 Drown in the Loch
+2 Zagoth Triome
+
+[sideboard]
+2 Bloodchief's Thirst
+3 Mystical Dispute
+3 Negate
+2 Cling to Dust
+4 Skyclave Shade
+1 Lurrus of the Dream-Den

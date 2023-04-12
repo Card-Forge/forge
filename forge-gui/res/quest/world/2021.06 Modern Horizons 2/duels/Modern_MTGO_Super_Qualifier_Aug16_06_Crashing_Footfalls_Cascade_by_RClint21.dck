@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Crashing Footfalls Cascade by RClint21
+Title=Aspect of Chaos
+Difficulty=very hard
+Description=Crashing Footfalls Cascade by RClint21
+Icon=Aspect of Chaos.jpg
+Deck Type=constructed
+
+[main]
+1 Teferi, Time Raveler
+4 Brazen Borrower
+1 Endurance
+2 Fury
+4 Shardless Agent
+4 Crashing Footfalls
+2 Dead // Gone|PLC
+4 Fire // Ice|AP
+4 Force of Negation
+3 Prismari Command
+4 Violent Outburst|ARB
+3 Ardent Plea|ARB
+1 Breeding Pool
+2 Flooded Strand|KTK
+1 Forest
+3 Gemstone Caverns|TSP
+1 Island
+1 Ketria Triome
+4 Misty Rainforest|ZEN
+1 Raugrin Triome
+1 Sacred Foundry
+2 Scalding Tarn|ZEN
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+1 Waterlogged Grove
+3 Wooded Foothills|KTK
+
+[sideboard]
+1 Teferi, Time Raveler
+3 Endurance
+1 Dead // Gone|PLC
+1 Firespout|SHM
+1 Force of Vigor
+1 Magmatic Sinkhole
+3 Mystical Dispute
+1 Subtlety
+3 Wear // Tear|DGM

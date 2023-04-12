@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Selesnya Aggro by Noé Alessandro Rivera Carvallo
+Title=Gleeful Flames
+Difficulty=very hard
+Description=Selesnya Aggro by Noé Alessandro Rivera Carvallo
+Icon=Gleeful Flames.jpg
+Deck Type=constructed
+
+[main]
+1 Storm the Festival
+1 Wrenn and Seven
+2 The Wandering Emperor
+2 Starnheim Unleashed
+2 Careful Cultivation
+3 Borrowed Time
+3 Emeria's Call
+4 Wedding Announcement
+4 Esika's Chariot
+1 Katilda, Dawnhart Prime
+1 Legion Angel
+2 Yasharn, Implacable Earth
+2 Ao, the Dawn Sky
+4 Tangled Florahedron
+4 Prosperous Innkeeper
+4 Skyclave Apparition
+1 Cave of the Frost Dragon
+1 Boseiju, Who Endures
+1 Lair of the Hydra
+2 Eiganjo, Seat of the Empire
+3 Forest
+4 Branchloft Pathway
+4 Overgrown Farmland
+4 Plains
+
+[sideboard]
+3 Valorous Stance
+3 Archon of Emeria
+2 Guardian of Faith
+2 Circle of Confinement
+2 Felidar Retreat
+3 Legion Angel

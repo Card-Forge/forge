@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Amulet Titan by Ivan Jovanovic
+Title=Gleeful Flames
+Difficulty=very hard
+Description=Amulet Titan by Ivan Jovanovic
+Icon=Gleeful Flames.jpg
+Deck Type=constructed
+
+[main]
+1 Gruul Turf|GP
+4 Arboreal Grazer
+2 Azusa, Lost but Seeking
+4 Cultivator Colossus
+4 Dryad of the Ilysian Grove
+4 Primeval Titan|M12
+4 Summoner's Pact|FUT
+4 Amulet of Vigor|WWK
+1 Expedition Map|ZEN
+1 Relic of Progenitus|ALA
+1 Boros Garrison|RAV
+3 Castle Garenbrig
+2 Cavern of Souls|AVR
+1 Crumbling Vestige|OGW
+4 Forest
+1 Misty Rainforest|ZEN
+1 Radiant Fountain
+3 Selesnya Sanctuary|RAV
+4 Simic Growth Chamber|DIS
+1 Slayers' Stronghold|AVR
+1 Sunhome, Fortress of the Legion|RAV
+2 Tolaria West|FUT
+4 Urza's Saga
+2 Valakut, the Molten Pinnacle|ZEN
+1 Vesuva|TSP
+
+[sideboard]
+1 Bojuka Bog|WWK
+2 Dismember|NPH
+3 Endurance
+2 Engineered Explosives|FD
+3 Force of Vigor
+1 Foundation Breaker
+1 Ghost Quarter|ISD
+1 Outland Liberator
+1 Pithing Needle

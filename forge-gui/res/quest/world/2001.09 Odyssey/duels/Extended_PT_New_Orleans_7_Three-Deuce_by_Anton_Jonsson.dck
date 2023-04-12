@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Three-Deuce by Anton Jonsson
+Title=Joker
+Difficulty=very hard
+Description=Three-Deuce by Anton Jonsson
+Icon=Joker.jpg
+Deck Type=constructed
+
+[main]
+2 Wax // Wane|IN
+4 Swords to Plowshares|A
+4 Seal of Cleansing|NE
+4 Rancor|UL
+4 Land Grant|MM
+3 Cursed Scroll|TE
+4 Call of the Herd|OD
+2 Skyshroud Elite|EX
+4 River Boa|VI
+4 Mogg Fanatic|TE
+4 Granger Guildmage|MI
+2 Elvish Lyrist|US
+4 Wasteland|TE
+3 Treetop Village|UL
+4 Taiga|A
+4 Savannah|A
+4 Plateau|A
+
+[sideboard]
+4 Sanctimony|UD
+4 Pyroblast|IA
+3 Powder Keg|UD
+2 Dwarven Miner|MI
+2 Wax // Wane|IN

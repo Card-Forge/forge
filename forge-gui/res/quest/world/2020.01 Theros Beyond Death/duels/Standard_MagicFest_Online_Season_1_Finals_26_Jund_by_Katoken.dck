@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Jund by Katoken
+Title=Thanos
+Difficulty=very hard
+Description=Jund by Katoken
+Icon=Thanos.jpg
+Deck Type=constructed
+
+[main]
+3 Midnight Reaper
+4 Blood Crypt
+4 Fabled Passage
+4 Overgrown Tomb
+4 Stomping Ground
+3 Mountain
+3 Swamp
+2 Forest
+1 Castle Locthwain
+4 Claim the Firstborn
+4 Witch's Oven
+4 Cauldron Familiar
+4 Woe Strider
+4 Priest of Forgotten Gods
+4 Mayhem Devil
+4 Korvold, Fae-Cursed King
+4 Gilded Goose
+
+[sideboard]
+1 Midnight Reaper
+3 Duress
+3 Embereth Shieldbreaker
+2 Act of Treason
+2 Cindervines
+2 Scorching Dragonfire
+1 Klothys, God of Destiny
+1 Noxious Grasp

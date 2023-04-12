@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=UW Control by Piotr Gaogowski (Poland)
+Title=Death by Inches
+Difficulty=very hard
+Description=UW Control by Piotr Gaogowski (Poland)
+Icon=Death by Inches.jpg
+Deck Type=constructed
+
+[main]
+2 Curator of Mysteries|AKH
+3 Fumigate|KLD
+4 Censor|AKH
+4 Countervailing Winds|HOU
+4 Hieroglyphic Illumination|AKH
+4 Renewed Faith|AKH
+4 Settle the Wreckage|XLN
+1 Abandoned Sarcophagus|HOU
+4 Cast Out|AKH
+3 Drake Haven|AKH
+3 Search for Azcanta|XLN
+4 Glacial Fortress|XLN
+4 Irrigated Farmland|AKH
+6 Island|XLN
+1 Shefet Dunes|HOU
+8 Plains|XLN
+1 Ipnu Rivulet|HOU
+
+[sideboard]
+1 Abandoned Sarcophagus|HOU
+1 Drake Haven|AKH
+4 Authority of the Consuls|KLD
+2 Jace's Defeat|HOU
+2 Disallow|AER
+3 Regal Caracal|AKH
+2 Torrential Gearhulk|KLD

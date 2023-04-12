@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Red // Green Ramp by Masashi Oiso
+Title=Leela
+Difficulty=very hard
+Description=Red // Green Ramp by Masashi Oiso
+Icon=Leela.jpg
+Deck Type=constructed
+
+[main]
+11 Forest|RTR
+6 Mountain|RTR
+4 Terramorphic Expanse|C16
+2 Urza's Factory|C13
+2 Avalanche Riders|TSP
+3 Bogardan Hellkite|C14
+4 Spectral Force|TSP
+4 Wall of Roots|TSP
+3 Call of the Herd|TSP
+4 Dead // Gone|PLC
+3 Disintegrate|TSP
+4 Harmonize|C13
+4 Mwonvuli Acid-Moss|TSP
+2 Prismatic Lens|TSP
+4 Search for Tomorrow|TSP
+
+[sideboard]
+2 Avalanche Riders|TSP
+2 Detritivore|PLC
+2 Greater Gargadon|TSP
+2 Serrated Arrows|TSP
+3 Sulfurous Blast|CN2
+4 Utopia Vow|PLC

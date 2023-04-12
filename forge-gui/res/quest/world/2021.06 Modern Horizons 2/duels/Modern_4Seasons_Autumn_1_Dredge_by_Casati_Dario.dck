@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Dredge by Casati Dario
+Title=The Conclave of Mages
+Difficulty=very hard
+Description=Dredge by Casati Dario
+Icon=The Conclave of Mages.jpg
+Deck Type=constructed
+
+[main]
+2 Blood Crypt
+2 Bloodstained Mire|KTK
+1 City of Brass|8E
+1 Dakmor Salvage|FUT
+2 Forgotten Cave|ON
+1 Mountain
+2 Sacred Foundry
+2 Scalding Tarn|ZEN
+2 Stomping Ground
+4 Wooded Foothills|KTK
+4 Cathartic Reunion
+1 Conflagrate|TSP
+4 Creeping Chill
+3 Darkblast|RAV
+2 Golgari Thug|RAV
+2 Life from the Loam|RAV
+4 Narcomoeba
+3 Ox of Agonas
+4 Prized Amalgam|SOI
+4 Shriekhorn|MBS
+2 Silversmote Ghoul
+4 Stinkweed Imp|RAV
+4 Thrilling Discovery
+
+[sideboard]
+1 Conflagrate|TSP
+2 Ancient Grudge|ISD
+2 Bloodghast|ZEN
+3 Lightning Axe|SOI
+3 Nature's Claim|WWK
+2 Prismatic Ending
+2 Surgical Extraction|NPH

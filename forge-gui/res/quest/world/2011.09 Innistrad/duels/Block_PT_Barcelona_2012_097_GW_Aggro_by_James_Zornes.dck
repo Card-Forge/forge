@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=GW Aggro by James Zornes
+Title=Ophelia
+Difficulty=very hard
+Description=GW Aggro by James Zornes
+Icon=Ophelia.jpg
+Deck Type=constructed
+
+[main]
+4 Cavern of Souls|AVR
+8 Forest|RTR
+4 Gavony Township|ISD
+8 Plains|RTR
+4 Avacyn's Pilgrim|ISD
+4 Champion of Lambholt|C16
+4 Champion of the Parish|ISD
+2 Craterhoof Behemoth|AVR
+2 Fiend Hunter|C13
+4 Mayor of Avabruck|ISD
+4 Mentor of the Meek
+2 Sigarda, Host of Herons|AVR
+4 Somberwald Sage|AVR
+2 Thalia, Guardian of Thraben|DKA
+4 Gather the Townsfolk|DKA
+
+[sideboard]
+2 Fiend Hunter|C13
+1 Thalia, Guardian of Thraben|DKA
+2 Angel of Glory's Rise|AVR
+3 Grafdigger's Cage|DKA
+4 Kessig Cagebreakers|C15
+1 Tree of Redemption|ISD
+2 Witchbane Orb|ISD

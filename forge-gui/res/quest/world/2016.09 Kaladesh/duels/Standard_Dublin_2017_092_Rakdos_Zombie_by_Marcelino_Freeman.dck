@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Rakdos Zombie by Marcelino Freeman
+Title=M Bison
+Difficulty=very hard
+Description=Rakdos Zombie by Marcelino Freeman
+Icon=M Bison.jpg
+Deck Type=constructed
+
+[main]
+5 Mountain|RTR
+9 Swamp|RTR
+4 Foreboding Ruins|SOI
+4 Smoldering Marsh|BFZ
+2 Key to the City|KLD
+2 Unlicensed Disintegration|KLD
+4 Fiery Temper|SOI
+4 Lightning Axe|SOI
+3 Cathartic Reunion|KLD
+1 Distended Mindbender|EMN
+4 Cryptbreaker|EMN
+4 Prized Amalgam|SOI
+4 Haunted Dead|EMN
+3 Voldaren Pariah|EMN
+4 Scrapheap Scrounger|KLD
+3 Insolent Neonate|SOI
+
+[sideboard]
+1 Release the Gremlins|AER
+2 Transgress the Mind|BFZ
+1 Fatal Push|AER
+1 Liliana, the Last Hope|EMN
+2 Chandra, Torch of Defiance|KLD
+2 Lost Legacy|KLD
+2 Shock
+2 Kalitas, Traitor of Ghet|OGW
+2 Distended Mindbender|EMN

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Joe Demestrio
+Title=Funerary Rites
+Difficulty=very hard
+Description=Boros Aggro by Joe Demestrio
+Icon=Funerary Rites.jpg
+Deck Type=constructed
+
+[main]
+4 Adanto Vanguard|XLN
+4 Benalish Marshal
+4 Dauntless Bodyguard
+3 Healer's Hawk
+4 Knight of Grace
+4 Skymarcher Aspirant
+4 Heroic Reinforcements
+3 Conclave Tribunal
+4 History of Benalia
+3 Legion's Landing|XLN
+4 Clifftop Retreat
+1 Mountain
+14 Plains
+4 Sacred Foundry
+
+[sideboard]
+3 Baffling End
+2 Banefire
+2 Experimental Frenzy
+2 Make a Stand
+1 Response // Resurgence
+1 Settle the Wreckage|XLN
+4 Tocatli Honor Guard|XLN

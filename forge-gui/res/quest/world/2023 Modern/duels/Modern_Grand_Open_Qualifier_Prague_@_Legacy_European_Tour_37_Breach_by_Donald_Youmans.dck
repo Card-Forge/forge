@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Breach by Donald Youmans
+Title=The Color Red
+Difficulty=very hard
+Description=Breach by Donald Youmans
+Icon=The Color Red.jpg
+Deck Type=constructed
+
+[main]
+1 Haywire Mite
+3 Emry, Lurker of the Loch
+4 Ledger Shredder
+4 Ragavan, Nimble Pilferer
+1 Thassa's Oracle
+1 Springleaf Drum|BNG
+4 Mishra's Bauble|CS
+3 Grinding Station|FD
+2 Mox Amber
+1 Aether Spellbomb|MR
+4 Unholy Heat
+1 Lightning Bolt|M11
+4 Expressive Iteration
+4 Underworld Breach
+4 Urza's Saga
+2 Teferi, Time Raveler
+4 Flooded Strand|KTK
+1 Breeding Pool
+4 Scalding Tarn|ZEN
+1 Arid Mesa|ZEN
+1 Island
+1 Sacred Foundry
+1 Hallowed Fountain
+3 Steam Vents
+1 Mountain
+
+[sideboard]
+1 Teferi, Time Raveler
+2 Path to Exile|CFX
+1 Tormod's Crypt
+2 Spell Pierce
+2 Fury
+2 Engineered Explosives|FD
+1 Shadowspear
+1 Wear // Tear|DGM
+2 Prismatic Ending
+1 Pithing Needle

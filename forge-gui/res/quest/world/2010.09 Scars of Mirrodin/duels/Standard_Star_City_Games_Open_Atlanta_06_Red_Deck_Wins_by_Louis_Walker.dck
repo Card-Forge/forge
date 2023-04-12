@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Louis Walker
+Title=Aga Galneer
+Difficulty=very hard
+Description=Red Deck Wins by Louis Walker
+Icon=Aga Galneer.jpg
+Deck Type=constructed
+
+[main]
+3 Chandra's Phoenix|M12
+3 Ember Hauler|M11
+4 Goblin Guide|ZEN
+3 Grim Lavamancer|M12
+3 Hero of Oxid Ridge|MBS
+1 Inferno Titan|M12
+1 Urabrask the Hidden|NPH
+4 Burst Lightning|ZEN
+3 Incinerate|M12
+4 Lightning Bolt|M11
+2 Shatter|SOM
+2 Tezzeret's Gambit|NPH
+4 Shrine of Burning Rage|NPH
+14 Mountain|M12
+3 Arid Mesa|ZEN
+3 Scalding Tarn|ZEN
+3 Koth of the Hammer|SOM
+
+[sideboard]
+1 Shatter|SOM
+2 Tunnel Ignus|SOM
+3 Vulshok Refugee|NPH
+2 Act of Aggression|NPH
+3 Dismember|NPH
+2 Torpor Orb|NPH
+1 Manabarbs|M12
+1 Chandra, the Firebrand|M12

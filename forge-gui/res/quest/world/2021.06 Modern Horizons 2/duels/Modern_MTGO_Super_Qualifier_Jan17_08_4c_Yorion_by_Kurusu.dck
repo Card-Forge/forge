@@ -1,0 +1,62 @@
+[duel]
+[metadata]
+Name=4c Yorion by Kurusu
+Title=Gruul-precon
+Difficulty=very hard
+Description=4c Yorion by Kurusu
+Icon=Gruul-precon.jpg
+Deck Type=constructed
+
+[main]
+4 Teferi, Time Raveler
+4 Wrenn and Six
+1 Deputy of Detention
+1 Endurance
+2 Eternal Witness|FD
+1 Fury
+2 Ice-Fang Coatl
+1 Obsidian Charmaw
+4 Omnath, Locus of Creation
+3 Seasoned Pyromancer
+1 Skyclave Apparition
+4 Solitude
+4 Wall of Blossoms|SH
+1 Wall of Omens|ROE
+1 Abundant Harvest
+2 Expressive Iteration
+4 Prismatic Ending
+1 Chord of Calling|M15
+1 Eladamri's Call|PS
+4 Ephemerate
+2 Lightning Bolt|M11
+1 Unholy Heat
+4 Utopia Sprawl|DIS
+1 Arid Mesa|ZEN
+1 Breeding Pool
+3 Flooded Strand|KTK
+1 Ketria Triome
+4 Misty Rainforest|ZEN
+1 Prismatic Vista
+1 Raugrin Triome
+1 Sacred Foundry
+2 Snow-Covered Forest
+1 Snow-Covered Mountain
+1 Snow-Covered Plains
+1 Stomping Ground
+1 Temple Garden
+4 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+
+[sideboard]
+1 Endurance
+1 Eternal Witness|FD
+2 Obsidian Charmaw
+1 Detention Sphere|RTR
+1 Emrakul, the Promised End|EMN
+1 Engineered Explosives|FD
+1 Flusterstorm
+2 Force of Vigor
+1 Oath of Nissa|OGW
+1 Spell Pierce|XLN
+2 Veil of Summer
+1 Yorion, Sky Nomad

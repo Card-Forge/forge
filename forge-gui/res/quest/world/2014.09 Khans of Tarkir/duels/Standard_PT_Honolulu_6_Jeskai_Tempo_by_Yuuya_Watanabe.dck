@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Jeskai Tempo by Yuuya Watanabe
+Title=Nekusar the Mindrazer
+Difficulty=very hard
+Description=Jeskai Tempo by Yuuya Watanabe
+Icon=Nekusar the Mindrazer.jpg
+Deck Type=constructed
+
+[main]
+4 Magma Jet|THS
+4 Jeskai Charm|KTK
+4 Stoke the Flames|M15
+3 Battlefield Forge|M15
+3 Flooded Strand|KTK
+2 Island|KTK
+3 Mountain|KTK
+4 Mystic Monastery|KTK
+2 Plains|KTK
+3 Shivan Reef|M15
+4 Temple of Triumph|THS
+3 Sarkhan, the Dragonspeaker|KTK
+4 Seeker of the Way|KTK
+4 Goblin Rabblemaster|M15
+4 Mantis Rider|KTK
+3 Brimaz, King of Oreskos|BNG
+2 Gods Willing|THS
+4 Lightning Strike|M15
+
+[sideboard]
+3 Magma Spray|JOU
+3 Disdainful Stroke|KTK
+4 Suspension Field|KTK
+2 Prognostic Sphinx|THS
+1 Chandra, Pyromaster|M15
+1 Elspeth, Sun's Champion|THS
+1 Gods Willing|THS

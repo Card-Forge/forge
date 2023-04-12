@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Izzet Control by Guillaume Perbet
+Title=Deadpool
+Difficulty=very hard
+Description=Izzet Control by Guillaume Perbet
+Icon=Deadpool.jpg
+Deck Type=constructed
+
+[main]
+1 Mystical Dispute
+1 Negate
+1 Disdainful Stroke
+1 Essence Scatter
+3 Saw It Coming
+4 Mazemind Tome
+4 Frost Bite
+4 Alrund's Epiphany
+3 Galazeth Prismari
+4 Brazen Borrower
+4 Goldspan Dragon
+4 Bonecrusher Giant
+3 Faceless Haven
+4 Volatile Fjord
+4 Riverglide Pathway
+4 Fabled Passage
+5 Snow-Covered Mountain
+6 Snow-Covered Island
+
+[sideboard]
+4 Shark Typhoon
+3 Cinderclasm
+2 Soul Sear
+1 The Akroan War
+2 Mystical Dispute
+1 Negate
+1 Disdainful Stroke
+1 Essence Scatter

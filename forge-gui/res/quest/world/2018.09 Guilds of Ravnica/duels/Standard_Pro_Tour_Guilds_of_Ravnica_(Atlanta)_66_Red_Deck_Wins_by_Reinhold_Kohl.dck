@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Reinhold Kohl
+Title=The Thrull Rebellion
+Difficulty=very hard
+Description=Red Deck Wins by Reinhold Kohl
+Icon=The Thrull Rebellion.jpg
+Deck Type=constructed
+
+[main]
+4 Fanatical Firebrand
+4 Ghitu Lavarunner
+4 Viashino Pyromancer
+4 Runaway Steam-Kin
+4 Goblin Chainwhirler
+2 Rekindling Phoenix
+4 Shock
+4 Lightning Strike
+4 Wizard's Lightning
+4 Experimental Frenzy
+22 Mountain
+
+[sideboard]
+2 Rekindling Phoenix
+1 Dire Fleet Daredevil
+3 Risk Factor
+2 Fiery Cannonade|XLN
+3 Lava Coil
+3 Fight with Fire
+1 Treasure Map|XLN

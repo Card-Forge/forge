@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Germain Caillaba
+Title=White
+Difficulty=very hard
+Description=Mono Green Aggro by Germain Caillaba
+Icon=White.jpg
+Deck Type=constructed
+
+[main]
+1 Briarbridge Tracker
+4 Sculptor of Winter
+4 Old-Growth Troll
+4 Werewolf Pack Leader
+4 Esika's Chariot
+2 Inscription of Abundance
+3 Snakeskin Veil
+4 Blizzard Brawl
+4 Ranger Class
+2 Wrenn and Seven
+4 Faceless Haven
+4 Kazandu Mammoth
+20 Snow-Covered Forest
+
+[sideboard]
+2 Inscription of Abundance
+1 Snakeskin Veil
+1 Toski, Bearer of Secrets
+2 Choose Your Weapon
+2 Devouring Tendrils
+2 Froghemoth
+2 Outland Liberator
+3 Tajuru Blightblade

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=[Rogue] BRu Control/Midrange by Alex Sittner Day 2
+Title=Tombstone
+Difficulty=very hard
+Description=[Rogue] BRu Control/Midrange by Alex Sittner Day 2
+Icon=Tombstone.jpg
+Deck Type=constructed
+
+[main]
+1 Urza's Factory|C13
+1 Island|RTR
+1 Dreadship Reef|C16
+2 Void|TSP
+2 Urborg, Tomb of Yawgmoth|M15
+2 Kher Keep|C13
+2 Damnation|PLC
+2 Aeon Chronicler|C16
+2 Strangling Soot|TSP
+3 Swamp|RTR
+3 Shimian Specter|M13
+3 River of Tears|FUT
+3 Mountain|RTR
+3 Magus of the Abyss|FUT
+3 Disintegrate|TSP
+3 Dead // Gone|PLC
+4 Withered Wretch|TSP
+4 Terramorphic Expanse|C16
+4 Stupor|TSP
+4 Sedge Sliver|TSP
+4 Graven Cairns|SHM
+4 Augur of Skulls|FUT
+
+[sideboard]
+2 Sulfurous Blast|CN2
+3 Willbender|C14
+3 Extirpate|PLC
+3 Detritivore|PLC
+3 Akroma, Angel of Fury|CMD
+1 Strangling Soot|TSP

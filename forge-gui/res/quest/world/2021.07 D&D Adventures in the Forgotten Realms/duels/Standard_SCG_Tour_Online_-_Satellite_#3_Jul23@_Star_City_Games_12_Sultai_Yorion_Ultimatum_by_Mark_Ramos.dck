@@ -1,0 +1,54 @@
+[duel]
+[metadata]
+Name=Sultai Yorion Ultimatum by Mark Ramos
+Title=Nyarvirazi
+Difficulty=very hard
+Description=Sultai Yorion Ultimatum by Mark Ramos
+Icon=Nyarvirazi.jpg
+Deck Type=constructed
+
+[main]
+1 Vorinclex, Monstrous Raider
+1 Valki, God of Lies
+1 Quandrix Cultivator
+2 Polukranos, Unchained
+3 Elder Gargaroth
+1 Eliminate
+1 Baleful Mastery
+1 Heartless Act
+2 Power Word Kill
+2 Jwari Disruption
+3 Mystical Dispute
+1 Pelakka Predation
+2 Extinction Event
+2 Alrund's Epiphany
+2 Shadows' Verdict
+2 Sea Gate Restoration
+4 Emergent Ultimatum
+4 Cultivate
+1 Kiora Bests the Sea God
+4 Binding the Old Gods
+4 Wolfwillow Haven
+4 Omen of the Sea
+1 Professor Onyx
+1 Ketria Triome
+2 Island
+2 Swamp
+3 Forest
+3 Temple of Malady
+4 Zagoth Triome
+4 Clearwater Pathway
+4 Barkchannel Pathway
+4 Darkbore Pathway
+4 Fabled Passage
+
+[sideboard]
+1 Cling to Dust
+1 Test of Talents
+1 Disdainful Stroke
+1 Kaervek, the Spiteful
+1 Yorion, Sky Nomad
+2 Elspeth's Nightmare
+2 Chevill, Bane of Monsters
+2 Koma, Cosmos Serpent
+4 Duress

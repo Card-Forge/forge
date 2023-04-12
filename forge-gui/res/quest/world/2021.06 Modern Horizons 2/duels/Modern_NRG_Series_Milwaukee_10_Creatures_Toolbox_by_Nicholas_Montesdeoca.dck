@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Creatures Toolbox by Nicholas Montesdeoca
+Title=Nagini
+Difficulty=very hard
+Description=Creatures Toolbox by Nicholas Montesdeoca
+Icon=Nagini.jpg
+Deck Type=constructed
+
+[main]
+1 Hapatra, Vizier of Poisons|AKH
+1 Scavenging Ooze
+1 Blood Artist|AVR
+1 Geralf's Messenger|DKA
+1 Endurance
+1 Magus of the Moon|FUT
+3 Wall of Roots|TSP
+3 Birds of Paradise|M12
+4 Ignoble Hierarch
+4 Yawgmoth, Thran Physician
+4 Strangleroot Geist|DKA
+4 Young Wolf|DKA
+4 Chord of Calling|M15
+4 Eldritch Evolution|EMN
+3 Grist, the Hunger Tide
+1 Stomping Ground
+1 Yavimaya, Cradle of Growth
+1 Urborg, Tomb of Yawgmoth|M15
+1 Wooded Foothills|KTK
+1 Swamp
+1 Dryad Arbor|FUT
+2 Forest
+2 Overgrown Tomb
+2 Nurturing Peatland
+2 Twilight Mire|EVE
+3 Blooming Marsh|KLD
+4 Verdant Catacombs|ZEN
+
+[sideboard]
+1 Endurance
+1 Thrun, the Last Troll|MBS
+1 Outland Liberator
+1 Obstinate Baloth|M11
+2 Force of Vigor
+2 Veil of Summer
+2 Necromentia
+2 Crime // Punishment|DIS
+3 Thoughtseize|THS

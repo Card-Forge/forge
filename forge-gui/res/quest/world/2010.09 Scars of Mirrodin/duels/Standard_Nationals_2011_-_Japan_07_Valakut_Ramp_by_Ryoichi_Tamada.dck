@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Valakut Ramp by Ryoichi Tamada
+Title=Radagast
+Difficulty=very hard
+Description=Valakut Ramp by Ryoichi Tamada
+Icon=Radagast.jpg
+Deck Type=constructed
+
+[main]
+2 Evolving Wilds|ROE
+5 Forest|M12
+1 Misty Rainforest|ZEN
+10 Mountain|M12
+4 Raging Ravine|WWK
+1 Terramorphic Expanse|M11
+4 Valakut, the Molten Pinnacle|ZEN
+1 Verdant Catacombs|ZEN
+2 Oracle of Mul Daya|ZEN
+4 Primeval Titan|M12
+4 Solemn Simulacrum|M12
+2 Wurmcoil Engine|SOM
+2 Cultivate|M11
+4 Explore|WWK
+2 Harrow|ZEN
+4 Khalni Heart Expedition|ZEN
+4 Rampant Growth|M12
+4 Summoning Trap|ZEN
+
+[sideboard]
+3 Creeping Corrosion|MBS
+4 Nature's Claim|WWK
+4 Obstinate Baloth|M11
+4 Pyroclasm|M11

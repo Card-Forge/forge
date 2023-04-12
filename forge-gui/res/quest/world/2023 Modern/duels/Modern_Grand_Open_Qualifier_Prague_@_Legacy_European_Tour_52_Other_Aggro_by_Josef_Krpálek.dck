@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Other Aggro by Josef Krpalek
+Title=Spyro
+Difficulty=very hard
+Description=Other Aggro by Josef Krpalek
+Icon=Spyro.jpg
+Deck Type=constructed
+
+[main]
+4 Fury
+4 Solitude
+4 Fervent Champion
+3 Ranger-Captain of Eos
+4 Ragavan, Nimble Pilferer
+1 Seasoned Pyromancer
+4 Stoneforge Mystic|WWK
+1 Kaldra Compleat
+2 Sword of Fire and Ice|DS
+1 Batterskull|NPH
+1 Sword of Forge and Frontier
+3 Ephemerate
+3 Blood Moon|9E
+2 Nahiri, the Unforgiving
+4 Arid Mesa|ZEN
+4 Plains
+1 Mountain
+4 Inspiring Vantage|KLD
+3 Prismatic Vista
+2 Sunbaked Canyon
+1 Eiganjo, Seat of the Empire
+1 Sokenzan, Crucible of Defiance
+1 Rugged Prairie|EVE
+2 Sacred Foundry
+
+[sideboard]
+1 Emrakul, the Aeons Torn|ROE
+2 Rest in Peace|RTR
+2 Lightning Bolt|M11
+2 Engineered Explosives|FD
+2 Sanctifier en-Vec
+1 Burrenton Forge-Tender|LRW
+1 Shadowspear
+1 Lightning Helix|RAV
+2 Wear // Tear|DGM
+1 Sword of Feast and Famine|MBS

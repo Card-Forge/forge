@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=UB Control by Seth Manfield
+Title=Autumn Willow
+Difficulty=very hard
+Description=UB Control by Seth Manfield
+Icon=Autumn Willow.jpg
+Deck Type=constructed
+
+[main]
+1 Anticognition
+1 Lullmage's Domination
+1 Bloodchief's Thirst
+1 Agadeem's Awakening
+1 Cling to Dust
+1 Eliminate
+1 Essence Scatter
+2 Silundi Vision
+3 Didn't Say Please
+4 Heartless Act
+4 Drown in the Loch
+4 Into the Story
+4 Shark Typhoon
+1 Brazen Borrower
+4 Thieves' Guild Enforcer
+4 Soaring Thought-Thief
+1 Castle Vantress
+2 Castle Locthwain
+3 Swamp
+4 Clearwater Pathway
+4 Temple of Deceit
+4 Zagoth Triome
+5 Island
+
+[sideboard]
+3 Skyclave Shade
+1 Lurrus of the Dream-Den
+3 Mystical Dispute
+1 Negate
+3 Lullmage's Domination
+2 Bloodchief's Thirst
+1 Cling to Dust
+1 Brazen Borrower

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Plating Affinity by Arne Steffenhagen
+Title=IdiAmin
+Difficulty=very hard
+Description=Plating Affinity by Arne Steffenhagen
+Icon=IdiAmin.jpg
+Deck Type=constructed
+
+[main]
+4 Ornithopter|AER
+4 Memnite|SOM
+2 Patchwork Automaton
+1 Haywire Mite
+4 Thought Monitor
+4 Sojourner's Companion
+4 Frogmite|MR
+1 Welding Jar|MR
+1 Aether Spellbomb|MR
+4 Springleaf Drum|BNG
+1 Shadowspear
+1 Relic of Progenitus|ALA
+4 Cranial Plating|FD
+1 Nettlecyst
+2 Forging the Anchor
+4 Thoughtcast|MR
+4 Urza's Saga
+1 Island
+4 Darksteel Citadel|M15
+4 Mistvault Bridge
+1 Tanglepool Bridge
+2 Spire of Industry|AER
+2 Treasure Vault
+
+[sideboard]
+2 Haywire Mite
+1 Etched Champion|SOM
+3 Damping Sphere
+2 Dismember|NPH
+1 Tormod's Crypt
+1 Soul-Guide Lantern
+1 Pithing Needle
+4 Metallic Rebuke|AER

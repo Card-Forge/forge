@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Orzhov Aggro by Joe Soh
+Title=Darrin Stephens
+Difficulty=very hard
+Description=Orzhov Aggro by Joe Soh
+Icon=Darrin Stephens.jpg
+Deck Type=constructed
+
+[main]
+2 Gideon, Ally of Zendikar|BFZ
+3 Valorous Stance|FRF
+3 Stasis Snare|BFZ
+4 Silkwrap|DTK
+2 Kytheon, Hero of Akros|ORI
+2 Wasteland Strangler|BFZ
+4 Mardu Strike Leader|FRF
+4 Blood-Chin Rager|DTK
+4 Bloodsoaked Champion|KTK
+4 Chief of the Edge|KTK
+4 Mardu Woe-Reaper|FRF
+1 Prairie Stream|BFZ
+1 Sunken Hollow|BFZ
+1 Windswept Heath|KTK
+2 Shambling Vent|BFZ
+3 Swamp|BFZ
+4 Flooded Strand|KTK
+4 Caves of Koilos|ORI
+4 Plains|BFZ
+4 Polluted Delta|KTK
+
+[sideboard]
+2 Transgress the Mind|BFZ
+2 Mastery of the Unseen|FRF
+3 Disdainful Stroke|KTK
+2 Secure the Wastes|DTK
+2 Ultimate Price|DTK
+1 Negate|ORI
+1 Valorous Stance|FRF
+1 Stasis Snare|BFZ
+1 Wasteland Strangler|BFZ

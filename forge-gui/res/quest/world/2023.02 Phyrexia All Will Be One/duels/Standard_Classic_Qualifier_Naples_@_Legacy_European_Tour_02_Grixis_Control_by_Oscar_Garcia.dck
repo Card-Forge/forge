@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Grixis Control by Oscar Garcia
+Title=Reveka, Wizard Savant
+Difficulty=very hard
+Description=Grixis Control by Oscar Garcia
+Icon=Reveka, Wizard Savant.jpg
+Deck Type=constructed
+
+[main]
+1 Anoint with Affliction
+1 Cut Down
+1 Brotherhood's End
+2 Abrade
+2 Reckoner Bankbuster
+3 Invoke Despair
+3 Make Disappear
+3 Go for the Throat
+4 Fable of the Mirror-Breaker
+1 Bladecoil Serpent
+1 Razorlash Transmogrant
+2 Sheoldred, the Apocalypse
+2 Graveyard Trespasser
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+1 Sulfurous Springs
+1 Shivan Reef
+1 Takenuma, Abandoned Mire
+1 Swamp
+2 Underground River
+2 Stormcarved Coast
+3 Shipwreck Marsh
+3 Darkslick Shores
+4 Blackcleave Cliffs
+4 Xander's Lounge
+4 Haunted Ridge
+
+[sideboard]
+2 Disdainful Stroke
+2 Negate
+2 Unlicensed Hearse
+2 Duress
+1 Gix's Command
+1 Cut Down
+1 Brotherhood's End
+3 Razorlash Transmogrant
+1 Sheoldred, the Apocalypse

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=UR Control by Eduardo Borges
+Title=Master Splinter
+Difficulty=very hard
+Description=UR Control by Eduardo Borges
+Icon=Master Splinter.jpg
+Deck Type=constructed
+
+[main]
+3 Desolate Lighthouse|AVR
+1 Evolving Wilds
+9 Island|RTR
+10 Mountain|RTR
+4 Sulfur Falls
+3 Fettergeist|AVR
+3 Snapcaster Mage|ISD
+3 Bonfire of the Damned|AVR
+3 Brimstone Volley|CNS
+4 Desperate Ravings|C15
+2 Devil's Play|ISD
+2 Dissipate|M15
+3 Geistflame|ISD
+4 Pillar of Flame|AVR
+1 Silent Departure|ISD
+3 Tamiyo, the Moon Sage|AVR
+2 Thought Scour|DKA
+
+[sideboard]
+2 Dissipate|M15
+1 Tamiyo, the Moon Sage|AVR
+1 Blasphemous Act|C16
+4 Claustrophobia
+4 Demolish|XLN
+1 Ghost Quarter|C15
+1 Rolling Temblor|ISD
+1 Think Twice|ISD

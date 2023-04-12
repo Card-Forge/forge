@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=RW Humans by Ari Lax
+Title=alasha
+Difficulty=very hard
+Description=RW Humans by Ari Lax
+Icon=alasha.jpg
+Deck Type=constructed
+
+[main]
+4 Cavern of Souls|AVR
+4 Clifftop Retreat
+2 Mountain|RTR
+13 Plains|RTR
+1 Slayers' Stronghold|AVR
+4 Champion of the Parish|ISD
+4 Elite Inquisitor|ISD
+4 Fiend Hunter|C13
+3 Kessig Malcontents|AVR
+3 Loyal Cathar|DKA
+3 Restoration Angel|AVR
+3 Riders of Gavony|AVR
+4 Silverblade Paladin|C14
+3 Thalia, Guardian of Thraben|DKA
+2 Zealous Conscripts|AVR
+3 Cloudshift|AVR
+
+[sideboard]
+1 Slayers' Stronghold|AVR
+1 Restoration Angel|AVR
+1 Riders of Gavony|AVR
+1 Zealous Conscripts|AVR
+2 Angel of Jubilation|AVR
+2 Divine Deflection|AVR
+2 Geist-Honored Monk|C14
+1 Mikaeus, the Lunarch|ISD
+2 Silverchase Fox
+2 Slayer of the Wicked|ISD

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Replenish by Tom Van de Logt
+Title=Wilhelm Grimm
+Difficulty=very hard
+Description=Replenish by Tom Van de Logt
+Icon=Wilhelm Grimm.jpg
+Deck Type=constructed
+
+[main]
+4 Adarkar Wastes|10E
+4 Rishadan Port|MM
+8 Plains|RTR
+9 Island|RTR
+1 Sky Diamond|C14
+1 Wrath of God|C13
+4 Replenish|UD
+1 Mystical Tutor|6E
+4 Frantic Search|UL
+3 Enlightened Tutor|6E
+3 Counterspell|7E
+1 Seal of Removal|NE
+1 Seal of Cleansing|C15
+4 Parallax Wave|NE
+3 Parallax Tide|NE
+4 Opalescence|UD
+1 Energy Field|US
+4 Attunement|US
+
+[sideboard]
+2 Submerge|NE
+2 Lilting Refrain|US
+3 Erase|KTK
+2 Daze|NE
+1 Cursed Totem|6E
+1 Circle of Protection: Black|9E
+1 Chill|6E
+2 Wrath of God|C13
+1 Seal of Cleansing|C15

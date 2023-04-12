@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Naya Aggro by Lighdar
+Title=Prince Valiant
+Difficulty=very hard
+Description=Naya Aggro by Lighdar
+Icon=Prince Valiant.jpg
+Deck Type=constructed
+
+[main]
+2 Tangled Florahedron
+3 Elite Spellbinder
+4 Bonecrusher Giant
+4 Giant Killer
+4 Edgewall Innkeeper
+4 Jaspera Sentinel
+4 Lovestruck Beast
+3 Esika's Chariot
+4 Fire Prophecy
+1 The Akroan War
+3 Showdown of the Skalds
+2 Plains
+2 Lair of the Hydra
+2 Mountain
+3 Forest
+3 Fabled Passage
+4 Branchloft Pathway
+4 Needleverge Pathway
+4 Cragcrown Pathway
+
+[sideboard]
+1 Jegantha, the Wellspring
+1 Drannith Magistrate
+2 Reidane, God of the Worthy
+2 Ranger Class
+2 Burning Hands
+3 Ox of Agonas
+4 Redcap Melee

@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Grixis Control by Antoine Lagarde
+Title=The Sea
+Difficulty=very hard
+Description=Grixis Control by Antoine Lagarde
+Icon=The Sea.jpg
+Deck Type=constructed
+
+[main]
+1 Gix's Command
+2 Abrade
+2 Make Disappear
+2 Cut Down
+2 Kaito Shizuki
+2 Duress
+3 Go for the Throat
+3 Invoke Despair
+4 Fable of the Mirror-Breaker
+1 Third Path Iconoclast
+3 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Swamp
+1 Takenuma, Abandoned Mire
+1 Otawara, Soaring City
+1 Stormcarved Coast
+1 Sokenzan, Crucible of Defiance
+2 Underground River
+3 Darkslick Shores
+3 Sulfurous Springs
+3 Xander's Lounge
+3 Haunted Ridge
+4 Blackcleave Cliffs
+4 Shipwreck Marsh
+
+[sideboard]
+2 Razorlash Transmogrant
+2 Negate
+2 Disdainful Stroke
+2 Reckoner Bankbuster
+1 Anoint with Affliction
+1 Obliterating Bolt
+1 The Elder Dragon War
+1 Unlicensed Hearse
+1 Gix's Command
+2 Cut Down

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Jund by Richard Moreira Almonacid
+Title=Pebbles Flintstone
+Difficulty=very hard
+Description=Jund by Richard Moreira Almonacid
+Icon=Pebbles Flintstone.jpg
+Deck Type=constructed
+
+[main]
+1 Anoint with Affliction
+2 Cut Down
+2 Abrade
+3 Reckoner Bankbuster
+3 Unleash the Inferno
+3 Go for the Throat
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+2 Glissa Sunslayer
+2 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Graveyard Trespasser
+1 Boseiju, Who Endures
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+2 Sulfurous Springs
+2 Swamp
+3 Llanowar Wastes
+4 Blackcleave Cliffs
+4 Ziatora's Proving Ground
+4 Deathcap Glade
+4 Haunted Ridge
+
+[sideboard]
+1 Unlicensed Hearse
+2 Thrun, Breaker of Silence
+2 Gix's Command
+2 Brotherhood's End
+2 Tear Asunder
+3 Duress
+1 Anoint with Affliction
+2 Cut Down

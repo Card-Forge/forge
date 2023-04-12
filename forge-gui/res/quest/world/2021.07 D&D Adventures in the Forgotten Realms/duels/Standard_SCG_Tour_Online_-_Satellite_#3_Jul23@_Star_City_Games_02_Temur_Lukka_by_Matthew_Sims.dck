@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Temur Lukka by Matthew Sims
+Title=Einstein
+Difficulty=very hard
+Description=Temur Lukka by Matthew Sims
+Icon=Einstein.jpg
+Deck Type=constructed
+
+[main]
+1 Fae of Wishes
+2 Koma, Cosmos Serpent
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Lovestruck Beast
+4 Llanowar Visionary
+4 Brazen Borrower
+2 Disdainful Stroke
+2 Fire Prophecy
+1 Shatterskull Smashing
+2 The Akroan War
+4 Lukka, Coppercoat Outcast
+1 Temple of Epiphany
+1 Forest
+1 Lair of the Hydra
+2 Island
+2 Mountain
+3 Fabled Passage
+4 Riverglide Pathway
+4 Ketria Triome
+4 Barkchannel Pathway
+4 Cragcrown Pathway
+
+[sideboard]
+1 The Akroan War
+1 Cleansing Wildfire
+1 Klothys, God of Destiny
+1 Blazing Volley
+1 Scorching Dragonfire
+1 Ox of Agonas
+2 Redcap Melee
+2 Burning Hands
+2 Negate
+3 Mystical Dispute

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Naya Aggro by Logan Nettles
+Title=Desdemona
+Difficulty=very hard
+Description=Naya Aggro by Logan Nettles
+Icon=Desdemona.jpg
+Deck Type=constructed
+
+[main]
+2 Tangled Florahedron
+3 Elite Spellbinder
+4 Lovestruck Beast
+4 Giant Killer
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Jaspera Sentinel
+3 Esika's Chariot
+4 Fire Prophecy
+1 The Akroan War
+3 Showdown of the Skalds
+2 Lair of the Hydra
+2 Plains
+2 Mountain
+3 Forest
+3 Fabled Passage
+4 Branchloft Pathway
+4 Needleverge Pathway
+4 Cragcrown Pathway
+
+[sideboard]
+1 Elite Spellbinder
+1 Jegantha, the Wellspring
+1 Reidane, God of the Worthy
+1 Wilt
+2 Drannith Magistrate
+2 Burning Hands
+3 Ox of Agonas
+4 Redcap Melee

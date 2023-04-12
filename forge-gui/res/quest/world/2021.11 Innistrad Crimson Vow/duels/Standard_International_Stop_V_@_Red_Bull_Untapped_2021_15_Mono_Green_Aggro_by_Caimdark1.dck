@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Caimdark1
+Title=Olokun
+Difficulty=very hard
+Description=Mono Green Aggro by Caimdark1
+Icon=Olokun.jpg
+Deck Type=constructed
+
+[main]
+1 Outland Liberator
+1 Cemetery Prowler
+3 Sculptor of Winter
+3 Ulvenwald Oddity
+4 Ascendant Packleader
+4 Old-Growth Troll
+4 Werewolf Pack Leader
+4 Esika's Chariot
+1 Snakeskin Veil
+1 Inscription of Abundance
+4 Blizzard Brawl
+1 Unnatural Growth
+2 Ranger Class
+1 Tangled Florahedron
+2 Kazandu Mammoth
+2 Lair of the Hydra
+3 Faceless Haven
+19 Snow-Covered Forest
+
+[sideboard]
+1 Outland Liberator
+1 Ulvenwald Oddity
+2 Snakeskin Veil
+1 Inscription of Abundance
+1 Clear Shot
+2 Devouring Tendrils
+2 Avabruck Caretaker
+2 Choose Your Weapon
+3 Tajuru Blightblade

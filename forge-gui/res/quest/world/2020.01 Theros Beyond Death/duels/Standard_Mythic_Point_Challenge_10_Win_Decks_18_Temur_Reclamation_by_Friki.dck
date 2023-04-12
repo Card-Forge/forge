@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Friki
+Title=Stormy Skies
+Difficulty=very hard
+Description=Temur Reclamation by Friki
+Icon=Stormy Skies.jpg
+Deck Type=constructed
+
+[main]
+4 Steam Vents
+4 Breeding Pool
+4 Stomping Ground
+2 Fabled Passage
+2 Castle Vantress
+2 Island
+2 Temple of Abandon
+2 Temple of Mystery
+2 Forest
+1 Mountain
+1 Blast Zone
+1 Temple of Epiphany
+4 Wilderness Reclamation
+4 Growth Spiral
+4 Mystical Dispute
+4 Expansion // Explosion
+2 Scorching Dragonfire
+2 Aether Gust
+4 Frilled Mystic
+3 Uro, Titan of Nature's Wrath
+2 Brazen Borrower
+2 Spectral Sailor
+2 Nightpack Ambusher
+
+[sideboard]
+3 Flame Sweep
+2 Negate
+2 Sorcerous Spyglass
+1 Chandra's Pyrohelix
+1 Klothys, God of Destiny
+2 Scorching Dragonfire
+2 Aether Gust
+2 Nightpack Ambusher

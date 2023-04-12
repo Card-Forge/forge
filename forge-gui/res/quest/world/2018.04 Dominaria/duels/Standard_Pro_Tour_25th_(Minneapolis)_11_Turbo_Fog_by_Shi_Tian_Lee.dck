@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Turbo Fog by Shi Tian Lee
+Title=Aspect of Civilization
+Difficulty=very hard
+Description=Turbo Fog by Shi Tian Lee
+Icon=Aspect of Civilization.jpg
+Deck Type=constructed
+
+[main]
+1 Oath of Teferi
+2 Beneath the Sands|HOU
+2 Nissa, Steward of Elements|AKH
+2 Karn, Scion of Urza
+3 Search for Azcanta|XLN
+4 Teferi, Hero of Dominaria
+4 Anticipate
+4 Haze of Pollen|AKH
+4 Root Snare
+4 Nexus of Fate
+4 Gift of Paradise
+1 Plains
+2 Glacial Fortress|XLN
+2 Sunpetal Grove|XLN
+4 Forest
+4 Hinterland Harbor
+4 Irrigated Farmland|AKH
+4 Scattered Groves|AKH
+5 Island
+
+[sideboard]
+4 Carnage Tyrant|XLN
+3 Cast Out|AKH
+4 Negate
+4 Jace's Defeat|HOU

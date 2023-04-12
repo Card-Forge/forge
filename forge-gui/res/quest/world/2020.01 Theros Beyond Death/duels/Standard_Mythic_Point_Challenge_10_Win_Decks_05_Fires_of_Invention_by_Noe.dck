@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Fires of Invention by Noe
+Title=alasprout
+Difficulty=very hard
+Description=Fires of Invention by Noe
+Icon=alasprout.jpg
+Deck Type=constructed
+
+[main]
+4 Hallowed Fountain
+4 Steam Vents
+3 Castle Vantress
+3 Fabled Passage
+3 Temple of Epiphany
+3 Temple of Triumph
+2 Sacred Foundry
+2 Island
+2 Mountain
+1 Plains
+4 Teferi, Time Raveler
+4 Fires of Invention
+2 Omen of the Sea
+2 Elspeth Conquers Death
+4 Sphinx of Foresight
+3 Robber of the Rich
+3 Cavalier of Gales
+3 Cavalier of Flame
+3 Bonecrusher Giant
+2 Legion Warboss
+2 Kenrith, the Returned King
+1 Dream Trawler
+
+[sideboard]
+4 Mystical Dispute
+4 Deafening Clarion
+2 Aether Gust
+2 Tithe Taker
+2 Devout Decree
+1 Elspeth Conquers Death

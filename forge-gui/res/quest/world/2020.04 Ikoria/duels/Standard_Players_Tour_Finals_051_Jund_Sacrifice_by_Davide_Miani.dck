@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Jund Sacrifice by Davide Miani
+Title=Seti
+Difficulty=very hard
+Description=Jund Sacrifice by Davide Miani
+Icon=Seti.jpg
+Deck Type=constructed
+
+[main]
+4 Cauldron Familiar
+3 Solemn Simulacrum
+3 Woe Strider
+3 Priest of Forgotten Gods
+2 Korvold, Fae-Cursed King
+1 Scavenging Ooze
+3 Forest
+4 Fabled Passage
+4 Stomping Ground
+4 Blood Crypt
+4 Overgrown Tomb
+3 Swamp
+1 Mountain
+1 Castle Locthwain
+4 Trail of Crumbs
+2 Claim the Firstborn
+4 Witch's Oven
+2 Bolas's Citadel
+4 Mayhem Devil
+4 Gilded Goose
+
+[sideboard]
+1 Cindervines
+1 Duress
+2 Noxious Grasp
+2 Lava Coil
+2 Return to Nature
+4 Agonizing Remorse
+2 Claim the Firstborn
+1 Bolas's Citadel

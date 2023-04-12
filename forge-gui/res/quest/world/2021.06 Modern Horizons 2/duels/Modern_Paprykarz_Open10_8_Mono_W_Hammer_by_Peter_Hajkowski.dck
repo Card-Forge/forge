@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Mono W Hammer by Peter Hajkowski
+Title=Sauron
+Difficulty=very hard
+Description=Mono W Hammer by Peter Hajkowski
+Icon=Sauron.jpg
+Deck Type=constructed
+
+[main]
+4 Sigarda's Aid|EMN
+4 Colossus Hammer
+1 Cranial Plating|FD
+2 Giver of Runes
+4 Inkmoth Nexus|MBS
+4 Memnite|SOM
+4 Ornithopter|AER
+1 Soul-Guide Lantern
+4 Puresteel Paladin|NPH
+1 Shadowspear
+3 Silent Clearing
+1 Sunbaked Canyon
+10 Plains
+4 Springleaf Drum|BNG
+1 Steelshaper's Gift|FD
+4 Stoneforge Mystic|WWK
+4 Urza's Saga
+4 Esper Sentinel
+
+[sideboard]
+1 Manriki-Gusari|SOK
+1 Lurrus of the Dream-Den
+2 Path to Exile|CFX
+2 Drannith Magistrate
+1 Hushbringer
+2 Seal of Cleansing|NE
+1 Pithing Needle|RTR
+1 Void Mirror
+4 Sanctifier en-Vec

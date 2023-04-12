@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Crashing Footfalls Cascade by Connor Mullaly
+Title=Darth Vader
+Difficulty=very hard
+Description=Crashing Footfalls Cascade by Connor Mullaly
+Icon=Darth Vader.jpg
+Deck Type=constructed
+
+[main]
+3 Seasoned Pyromancer
+4 Fury
+4 Shardless Agent
+4 Brazen Borrower
+2 Cryptic Command|LRW
+3 Dead // Gone|PLC
+4 Violent Outburst|ARB
+4 Fire // Ice|AP
+4 Force of Negation
+4 Crashing Footfalls
+1 Stomping Ground
+1 Breeding Pool
+1 Ketria Triome
+1 Forest
+1 Mountain
+2 Steam Vents
+2 Gemstone Caverns|TSP
+2 Fiery Islet
+3 Wooded Foothills|KTK
+3 Scalding Tarn|ZEN
+3 Island
+4 Misty Rainforest|ZEN
+
+[sideboard]
+1 Klothys, God of Destiny
+3 Blood Moon|9E
+3 Endurance
+4 Mystical Dispute
+4 Force of Vigor

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Ojutai Bant by Craig Wescoe
+Title=Darkwon
+Difficulty=very hard
+Description=Ojutai Bant by Craig Wescoe
+Icon=Darkwon.jpg
+Deck Type=constructed
+
+[main]
+4 Elvish Mystic|M15
+4 Sylvan Caryatid|THS
+4 Fleecemane Lion|THS
+4 Deathmist Raptor|DTK
+3 Courser of Kruphix|BNG
+2 Surrak, the Hunt Caller|DTK
+3 Dragonlord Ojutai|DTK
+4 Den Protector|DTK
+3 Dromoka's Command|DTK
+3 Valorous Stance|FRF
+2 Mastery of the Unseen|FRF
+3 Flooded Strand|KTK
+2 Mana Confluence|JOU
+4 Windswept Heath|KTK
+4 Yavimaya Coast|M15
+4 Temple of Plenty|BNG
+1 Island|DTK
+2 Plains|DTK
+4 Forest|DTK
+
+[sideboard]
+1 Dromoka's Command|DTK
+1 Valorous Stance|FRF
+1 Stubborn Denial|KTK
+1 Negate|DTK
+2 Glare of Heresy|THS
+3 Disdainful Stroke|KTK
+1 Plummet|M15
+2 Hornet Nest|M15
+3 Encase in Ice|DTK

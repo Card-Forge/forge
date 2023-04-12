@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Daniel Harborne
+Title=Ekolo
+Difficulty=very hard
+Description=Red Deck Wins by Daniel Harborne
+Icon=Ekolo.jpg
+Deck Type=constructed
+
+[main]
+3 Chandra's Phoenix|M12
+4 Ember Hauler|M11
+4 Goblin Guide|ZEN
+4 Grim Lavamancer|M12
+3 Hero of Oxid Ridge|MBS
+2 Burst Lightning|ZEN
+1 Incinerate|M12
+4 Lightning Bolt|M11
+4 Searing Blaze|WWK
+1 Volt Charge|NPH
+4 Shrine of Burning Rage|NPH
+4 Arid Mesa|ZEN
+12 Mountain|M12
+4 Scalding Tarn|ZEN
+4 Teetering Peaks|ZEN
+2 Koth of the Hammer|SOM
+
+[sideboard]
+2 Koth of the Hammer|SOM
+2 Manic Vandal|M12
+2 Vulshok Refugee|NPH
+2 Act of Aggression|NPH
+3 Combust|M12
+2 Dismember|NPH
+2 Manabarbs|M12

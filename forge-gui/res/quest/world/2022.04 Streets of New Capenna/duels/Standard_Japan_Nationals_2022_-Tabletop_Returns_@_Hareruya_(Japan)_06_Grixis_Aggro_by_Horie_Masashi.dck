@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Grixis Aggro by Horie Masashi
+Title=Taste the Rainbow
+Difficulty=very hard
+Description=Grixis Aggro by Horie Masashi
+Icon=Taste the Rainbow.jpg
+Deck Type=constructed
+
+[main]
+1 Ray of Enfeeblement
+1 Soul Transfer
+1 Duress
+2 Spell Pierce
+2 Infernal Grasp
+2 The Meathook Massacre
+2 Kaito Shizuki
+4 Voltage Surge
+4 Fable of the Mirror-Breaker
+2 Tenacious Underdog
+2 Bloodthirsty Adversary
+3 Evelyn, the Covetous
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Mountain
+1 Shipwreck Marsh
+1 Takenuma, Abandoned Mire
+1 Swamp
+2 Hive of the Eye Tyrant
+2 Xander's Lounge
+3 Clearwater Pathway
+3 Stormcarved Coast
+4 Riverglide Pathway
+4 Blightstep Pathway
+4 Haunted Ridge
+
+[sideboard]
+3 Annul
+3 Go Blank
+1 Mind Flayer
+1 Abrade
+1 Negate
+1 Shadows' Verdict
+3 Ray of Enfeeblement
+1 Soul Transfer
+1 Duress

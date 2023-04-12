@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Infect by Jblaze5996
+Title=Zaevil Hand
+Difficulty=very hard
+Description=Infect by Jblaze5996
+Icon=Zaevil Hand.jpg
+Deck Type=constructed
+
+[main]
+4 Blighted Agent|NPH
+4 Phyrexian Crusader|MBS
+4 Ignoble Hierarch
+4 Noble Hierarch|CFX
+4 Glistener Elf|NPH
+1 Become Immense|KTK
+1 Groundswell|WWK
+2 Blossoming Defense|KLD
+4 Might of Old Krosa|TSP
+4 Vines of Vastwood|ZEN
+4 Mutagenic Growth|NPH
+4 Scale Up
+1 Waterlogged Grove
+1 Breeding Pool
+1 Pendelhaven|TSP
+1 Urborg, Tomb of Yawgmoth|M15
+2 Overgrown Tomb
+2 Forest
+4 Inkmoth Nexus|MBS
+4 Verdant Catacombs|ZEN
+4 Misty Rainforest|ZEN
+
+[sideboard]
+2 Fatal Push|AER
+2 Veil of Summer
+3 Spell Pierce|XLN
+4 Force of Vigor
+4 Endurance

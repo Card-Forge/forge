@@ -1,0 +1,42 @@
+[quest]
+id=20100904
+OpponentName=Harry
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Red Deck Wins
+Title=Lefterel
+Difficulty=very hard
+Description=Red Deck Wins by Harry Corvese
+Icon=Lefterel.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra's Phoenix|M12
+4 Ember Hauler|M11
+4 Goblin Guide|ZEN
+4 Grim Lavamancer|M12
+3 Hero of Oxid Ridge|MBS
+4 Arc Trail|SOM
+4 Forked Bolt|ROE
+4 Lightning Bolt|M11
+4 Searing Blaze|WWK
+4 Shrine of Burning Rage|NPH
+4 Arid Mesa|ZEN
+11 Mountain|M12
+4 Scalding Tarn|ZEN
+4 Teetering Peaks|ZEN
+
+[sideboard]
+1 Hero of Oxid Ridge|MBS
+4 Act of Aggression|NPH
+3 Dismember|NPH
+3 Manic Vandal|M12
+4 Torpor Orb|NPH

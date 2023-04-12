@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Robertthebruce
+Title=BlackTalon
+Difficulty=very hard
+Description=Mono Green Aggro by Robertthebruce
+Icon=BlackTalon.jpg
+Deck Type=constructed
+
+[main]
+2 Briarbridge Tracker
+3 Lotus Cobra
+3 Old-Growth Troll
+4 Werewolf Pack Leader
+4 Esika's Chariot
+2 Snakeskin Veil
+2 Inscription of Abundance
+4 Blizzard Brawl
+4 Ranger Class
+4 Unnatural Growth
+4 Faceless Haven
+4 Kazandu Mammoth
+20 Snow-Covered Forest
+
+[sideboard]
+2 Snakeskin Veil
+2 Inscription of Abundance
+1 Primal Adversary
+2 Tangletrap
+2 Outland Liberator
+2 Toski, Bearer of Secrets
+2 Clear Shot
+2 Pithing Needle

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by Vinícius Karam
+Title=Taste the Rainbow
+Difficulty=very hard
+Description=Golgari Aggro by Vinícius Karam
+Icon=Taste the Rainbow.jpg
+Deck Type=constructed
+
+[main]
+3 Vivien Reid
+2 Vraska, Relic Seeker|XLN
+4 Llanowar Elves
+4 Merfolk Branchwalker|XLN
+2 Seekers' Squire|XLN
+4 Wildgrowth Walker|XLN
+4 Jadelight Ranger
+1 Thrashing Brontodon
+1 Golgari Findbroker
+2 Ravenous Chupacabra
+1 Carnage Tyrant|XLN
+3 Find // Finality
+4 Vraska's Contempt|XLN
+1 Cast Down
+1 Assassin's Trophy
+8 Forest
+5 Swamp
+2 Memorial to Folly
+4 Woodland Cemetery
+4 Overgrown Tomb
+
+[sideboard]
+2 Carnage Tyrant|XLN
+2 Cast Down
+1 Assassin's Trophy
+4 Duress
+2 Midnight Reaper
+2 Deathgorge Scavenger|XLN
+1 Arguel's Blood Fast|XLN
+1 Kraul Harpooner

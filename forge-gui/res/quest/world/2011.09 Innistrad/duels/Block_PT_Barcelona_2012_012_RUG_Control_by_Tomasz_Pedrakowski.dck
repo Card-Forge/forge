@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=RUG Control by Tomasz Pedrakowski
+Title=Gix
+Difficulty=very hard
+Description=RUG Control by Tomasz Pedrakowski
+Icon=Gix.jpg
+Deck Type=constructed
+
+[main]
+3 Forest|RTR
+4 Hinterland Harbor
+3 Island|RTR
+10 Mountain|RTR
+4 Sulfur Falls
+4 Fettergeist|AVR
+4 Huntmaster of the Fells|DKA
+3 Bonfire of the Damned|AVR
+3 Brimstone Volley|CNS
+2 Desperate Ravings|C15
+2 Devil's Play|ISD
+2 Dissipate|M15
+4 Garruk Relentless|ISD
+3 Geistflame|ISD
+1 Heretic's Punishment|ISD
+4 Pillar of Flame|AVR
+4 Think Twice|ISD
+
+[sideboard]
+2 Dissipate|M15
+1 Geistflame|ISD
+1 Heretic's Punishment|ISD
+1 Ancient Grudge|ISD
+1 Lone Revenant|C15
+2 Memory's Journey|ISD
+1 Naturalize
+1 Rolling Temblor|ISD
+2 Tree of Redemption|ISD
+2 Witchbane Orb|ISD
+1 Zealous Conscripts|AVR

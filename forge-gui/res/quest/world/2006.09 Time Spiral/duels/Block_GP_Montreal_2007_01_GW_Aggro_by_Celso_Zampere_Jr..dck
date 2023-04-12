@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=GW Aggro by Celso Zampere Jr.
+Title=Scarecrow
+Difficulty=very hard
+Description=GW Aggro by Celso Zampere Jr.
+Icon=Scarecrow.jpg
+Deck Type=constructed
+
+[main]
+4 Call of the Herd|TSP
+4 Mystic Enforcer|TSP
+4 Horizon Canopy|FUT
+4 Flagstones of Trokair|TSP
+4 Forest|RTR
+4 Griffin Guide|TSP
+4 Temporal Isolation|TSP
+4 Edge of Autumn|FUT
+4 Llanowar Reborn|C15
+4 Riftsweeper|FUT
+4 Plains|RTR
+4 Tarmogoyf|FUT
+4 Serra Avenger|M13
+3 Saffi Eriksdotter|TSP
+2 Thrill of the Hunt|TSP
+2 Terramorphic Expanse|C16
+1 Pendelhaven|TSP
+
+[sideboard]
+4 Whirling Dervish|TSP
+4 Sunlance|PLC
+3 Cloudchaser Kestrel|TSP
+2 Serrated Arrows|TSP
+2 Bound in Silence|FUT

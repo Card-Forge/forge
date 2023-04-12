@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Esperian Perfection
+Title=Esperian Perfection
+Difficulty=hard
+Icon=alamaster.jpg
+Description="Only a mind unfettered with the concerns of the flesh can see the world as it truly is."
+Deck Type=constructed
+[Main]
+4 Arcane Sanctum|ALA
+4 Court Homunculus|CFX
+4 Esper Stormblade|ARB
+4 Ethersworn Canonist|ALA
+1 Ethersworn Shieldmage|ARB
+4 Fieldmist Borderpost|ARB
+4 Glaze Fiend|ALA
+1 Island|ALA|2
+2 Island|ALA|3
+4 Master of Etherium|ALA
+4 Mistvein Borderpost|ARB
+5 Plains|ALA|4
+5 Swamp|ALA|1
+2 Tezzeret the Seeker|ALA
+4 Thopter Foundry|ARB
+4 Tidehollow Sculler|ALA
+4 Vedalken Outlander|CFX

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Burn by romerito1
+Title=Groucho
+Difficulty=very hard
+Description=Burn by romerito1
+Icon=Groucho.jpg
+Deck Type=constructed
+
+[main]
+4 Eidolon of the Great Revel|JOU
+4 Goblin Guide|ZEN
+4 Monastery Swiftspear|KTK
+4 Bump in the Night|ISD
+4 Lava Spike|CHK
+1 Light Up the Stage
+4 Rift Bolt|TSP
+4 Skewer the Critics
+4 Boros Charm|GTC
+4 Lightning Bolt|M11
+3 Searing Blaze|WWK
+4 Arid Mesa|ZEN
+4 Blackcleave Cliffs|SOM
+1 Blood Crypt
+2 Inspiring Vantage|KLD
+2 Mountain
+1 Sacred Foundry
+2 Scalding Tarn|ZEN
+4 Sunbaked Canyon
+
+[sideboard]
+3 Deflecting Palm|KTK
+1 Lurrus of the Dream-Den
+3 Path to Exile|CFX
+1 Prismatic Ending
+3 Roiling Vortex
+1 Skullcrack|GTC
+3 Smash to Smithereens|ORI

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Grixis Control by Ryan Sandrin
+Title=alaviash
+Difficulty=very hard
+Description=Grixis Control by Ryan Sandrin
+Icon=alaviash.jpg
+Deck Type=constructed
+
+[main]
+1 Brotherhood's End
+2 Cut Down
+2 Abrade
+2 Make Disappear
+3 Go for the Throat
+3 Reckoner Bankbuster
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+2 Graveyard Trespasser
+3 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Stormcarved Coast
+2 Shivan Reef
+2 Shipwreck Marsh
+3 Darkslick Shores
+3 Sulfurous Springs
+3 Swamp
+4 Haunted Ridge
+4 Xander's Lounge
+4 Blackcleave Cliffs
+
+[sideboard]
+2 Gix's Command
+1 Soul Transfer
+1 Negate
+2 Disdainful Stroke
+3 Duress
+1 Anoint with Affliction
+3 Razorlash Transmogrant
+1 Brotherhood's End
+1 Cut Down

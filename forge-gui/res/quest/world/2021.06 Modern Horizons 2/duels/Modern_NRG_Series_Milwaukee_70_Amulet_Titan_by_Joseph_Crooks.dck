@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Amulet Titan by Joseph Crooks
+Title=Seth
+Difficulty=very hard
+Description=Amulet Titan by Joseph Crooks
+Icon=Seth.jpg
+Deck Type=constructed
+
+[main]
+2 Azusa, Lost but Seeking
+4 Arboreal Grazer
+4 Primeval Titan|M12
+4 Dryad of the Ilysian Grove
+1 Expedition Map|ZEN
+4 Amulet of Vigor|WWK
+4 Summoner's Pact|FUT
+1 Explore|WWK
+4 Urza's Saga
+4 Karn, the Great Creator
+1 Sunhome, Fortress of the Legion|RAV
+1 Vesuva|TSP
+1 Wooded Foothills|KTK
+1 Slayers' Stronghold|AVR
+1 Breeding Pool
+1 Crumbling Vestige|OGW
+1 Castle Garenbrig
+1 Boros Garrison|RAV
+1 Radiant Fountain
+1 Verdant Catacombs|ZEN
+2 Cavern of Souls|AVR
+2 Selesnya Sanctuary|RAV
+2 Gruul Turf|GP
+2 Valakut, the Molten Pinnacle|ZEN
+2 Tolaria West|FUT
+4 Simic Growth Chamber|DIS
+4 Forest
+
+[sideboard]
+1 Cavern of Souls|AVR
+1 Pithing Needle
+1 Tormod's Crypt
+1 Endurance
+1 Liquimetal Coating|SOM
+1 Outland Liberator
+1 Bojuka Bog|WWK
+1 Walking Ballista|AER
+1 Wurmcoil Engine|SOM
+1 Cultivator Colossus
+1 Ghost Quarter|ISD
+2 Engineered Explosives|FD
+2 Force of Vigor

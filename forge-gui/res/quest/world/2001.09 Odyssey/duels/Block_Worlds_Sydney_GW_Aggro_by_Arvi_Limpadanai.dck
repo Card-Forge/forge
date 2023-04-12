@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=GW Aggro by Arvi Limpadanai
+Title=Invisible Man
+Difficulty=very hard
+Description=GW Aggro by Arvi Limpadanai
+Icon=Invisible Man.jpg
+Deck Type=constructed
+
+[main]
+10 Forest|A
+9 Plains|A
+4 Sungrass Prairie|OD
+4 Anurid Brushhopper|JU
+4 Arrogant Wurm|TO
+4 Basking Rootwalla|TO
+4 Glory|JU
+4 Phantom Centaur|JU
+4 Tireless Tribe|OD
+4 Wild Mongrel|OD
+4 Elephant Guide|JU
+3 Krosan Reclamation|JU
+1 Morningtide|TO
+1 Vengeful Dreams|TO
+
+[sideboard]
+1 Morningtide|TO
+2 Vengeful Dreams|TO
+2 Bearscape|OD
+1 Genesis|JU
+2 Moment's Peace|OD
+2 Ray of Revelation|JU
+2 Spellbane Centaur|OD
+3 Squirrel Nest|OD

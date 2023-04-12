@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Weenie White by Kellen Pastore
+Title=Boromir
+Difficulty=very hard
+Description=Weenie White by Kellen Pastore
+Icon=Boromir.jpg
+Deck Type=constructed
+
+[main]
+2 Ajani, Adversary of Tyrants
+4 Skymarcher Aspirant
+4 Snubhorn Sentry
+3 Dauntless Bodyguard
+4 Adanto Vanguard|XLN
+3 Silverbeak Griffin
+4 Benalish Marshal
+4 Venerated Loxodon
+4 Legion's Landing|XLN
+4 History of Benalia
+2 Conclave Tribunal
+22 Plains
+
+[sideboard]
+2 Ajani, Adversary of Tyrants
+2 Conclave Tribunal
+4 Tocatli Honor Guard|XLN
+3 Baffling End
+2 Bounty Agent
+1 Pride of Conquerors
+1 Sorcerous Spyglass|XLN

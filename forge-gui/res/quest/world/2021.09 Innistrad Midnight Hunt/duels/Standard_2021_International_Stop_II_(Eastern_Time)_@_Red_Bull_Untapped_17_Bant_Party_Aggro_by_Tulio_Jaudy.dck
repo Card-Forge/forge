@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Bant Party Aggro by Tulio Jaudy
+Title=MahamotiGenie
+Difficulty=very hard
+Description=Bant Party Aggro by Tulio Jaudy
+Icon=MahamotiGenie.jpg
+Deck Type=constructed
+
+[main]
+4 The Bears of Littjara
+4 Concerted Defense
+4 Spoils of Adventure
+2 Tazri, Beacon of Unity
+2 Squad Commander
+4 Archpriest of Iona
+4 Linvala, Shield of Sea Gate
+4 Masked Vandal
+4 Jaspera Sentinel
+4 Tajuru Paragon
+2 Lair of the Hydra
+2 Island
+4 Deserted Beach
+4 Overgrown Farmland
+4 Barkchannel Pathway
+4 Hengegate Pathway
+4 Branchloft Pathway
+
+[sideboard]
+4 Elite Spellbinder
+4 Ranger Class
+2 Disdainful Stroke
+2 Vanquish the Horde
+2 Journey to Oblivion
+1 Shipwreck Marsh

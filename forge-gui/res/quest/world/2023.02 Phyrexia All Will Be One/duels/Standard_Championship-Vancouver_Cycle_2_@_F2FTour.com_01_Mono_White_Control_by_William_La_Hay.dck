@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Mono White Control by William La Hay
+Title=Indiana Jones
+Difficulty=very hard
+Description=Mono White Control by William La Hay
+Icon=Indiana Jones.jpg
+Deck Type=constructed
+
+[main]
+1 Elspeth Resplendent
+2 Destroy Evil
+2 Farewell
+2 The Eternal Wanderer
+3 The Restoration of Eiganjo
+4 Wedding Announcement
+4 Lay Down Arms
+4 The Wandering Emperor
+4 Reckoner Bankbuster
+2 Serra Paragon
+2 Cathar Commando
+2 Sanctuary Warden
+2 Loran of the Third Path
+2 Spirited Companion
+1 Eiganjo, Seat of the Empire
+2 Roadside Reliquary
+4 Field of Ruin
+4 Demolition Field
+13 Plains
+
+[sideboard]
+3 Skrelv's Hive
+2 Depopulate
+2 Fateful Absence
+2 Ossification
+2 Sunset Revelry
+2 Unlicensed Hearse
+1 Elspeth Resplendent
+1 Loran of the Third Path

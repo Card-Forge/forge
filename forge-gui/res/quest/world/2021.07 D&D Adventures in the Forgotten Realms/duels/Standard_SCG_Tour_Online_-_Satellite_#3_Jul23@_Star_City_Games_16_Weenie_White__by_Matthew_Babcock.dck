@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Weenie White  by Matthew Babcock
+Title=Gimli
+Difficulty=very hard
+Description=Weenie White  by Matthew Babcock
+Icon=Gimli.jpg
+Deck Type=constructed
+
+[main]
+1 Lurrus of the Dream-Den
+1 Legion Angel
+1 Drannith Magistrate
+4 Skyclave Apparition
+4 Giant Killer
+4 Seasoned Hallowblade
+4 Selfless Savior
+4 Elite Spellbinder
+4 Luminarch Aspirant
+4 Alseid of Life's Bounty
+1 Maul of the Skyclaves
+1 Shadowspear
+2 The Book of Exalted Deeds
+2 Search for Glory
+2 Field of Ruin
+4 Faceless Haven
+17 Snow-Covered Plains
+
+[sideboard]
+3 Legion Angel
+1 Drannith Magistrate
+1 Baneslayer Angel
+1 Glass Casket
+1 Portable Hole
+2 Archon of Emeria
+2 Dawnbringer Cleric
+2 Containment Priest
+2 Reidane, God of the Worthy

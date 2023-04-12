@@ -1,0 +1,51 @@
+[quest]
+id=20180906
+OpponentName=Jean-Emmanuel
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Golgari Aggro
+Title=Tolsimir
+Difficulty=very hard
+Description=Golgari Aggro by Jean-Emmanuel Depraz (France - A)
+Icon=Tolsimir.jpg
+Deck Type=constructed
+
+[main]
+1 Karn, Scion of Urza
+3 Vivien Reid
+3 Llanowar Elves
+3 Wildgrowth Walker|XLN
+2 Seekers' Squire|XLN
+4 Merfolk Branchwalker|XLN
+4 Jadelight Ranger
+2 Midnight Reaper
+2 Ravenous Chupacabra
+3 Carnage Tyrant|XLN
+3 Find // Finality
+2 Cast Down
+4 Vraska's Contempt|XLN
+4 Overgrown Tomb
+4 Woodland Cemetery
+1 Detection Tower
+2 Memorial to Folly
+8 Forest
+5 Swamp
+
+[sideboard]
+1 Karn, Scion of Urza
+1 Wildgrowth Walker|XLN
+1 Midnight Reaper
+2 Cast Down
+2 Plaguecrafter
+1 Doom Whisperer
+1 Assassin's Trophy
+4 Duress
+2 Thrashing Brontodon

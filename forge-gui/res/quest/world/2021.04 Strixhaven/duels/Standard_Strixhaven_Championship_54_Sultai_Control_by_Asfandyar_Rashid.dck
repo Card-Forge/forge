@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Sultai Control by Asfandyar Rashid
+Title=Namor
+Difficulty=very hard
+Description=Sultai Control by Asfandyar Rashid
+Icon=Namor.jpg
+Deck Type=constructed
+
+[main]
+1 Rain of Revelation
+1 Mystical Dispute
+1 Sea Gate Restoration
+1 Shadows' Verdict
+1 Dead Weight
+1 Negate
+2 Professor Onyx
+2 Eliminate
+2 Curate
+2 Extinction Event
+3 Heartless Act
+4 Thirst for Meaning
+4 Strategic Planning
+4 Alrund's Epiphany
+4 Titans' Nest
+4 Shark Typhoon
+1 Darkbore Pathway
+1 Forest
+2 Swamp
+3 Island
+4 Barkchannel Pathway
+4 Zagoth Triome
+4 Fabled Passage
+4 Clearwater Pathway
+
+[sideboard]
+2 Elder Gargaroth
+2 Duress
+2 Elspeth's Nightmare
+1 Test of Talents
+1 Kaheera, the Orphanguard
+3 Mystical Dispute
+2 Shadows' Verdict
+1 Dead Weight
+1 Negate

@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Esper Control by Shotaro Kumasaka
+Title=Flandre Scarlet
+Difficulty=very hard
+Description=Esper Control by Shotaro Kumasaka
+Icon=Flandre Scarlet.jpg
+Deck Type=constructed
+
+[main]
+1 Soul Shatter
+1 Sorin the Mirthless
+2 Hagra Mauling
+2 Behold the Multiverse
+2 Jwari Disruption
+2 Lolth, Spider Queen
+3 The Meathook Massacre
+3 Path of Peril
+3 Infernal Grasp
+3 Wash Away
+4 Divide by Zero
+2 Edgar, Charmed Groom
+2 Iymrith, Desert Doom
+3 Nighthawk Scavenger
+4 Graveyard Trespasser
+1 Plains
+1 Island
+1 Deserted Beach
+2 Swamp
+2 Field of Ruin
+2 Hall of Storm Giants
+3 Shattered Sanctum
+3 Brightclimb Pathway
+4 Clearwater Pathway
+4 Shipwreck Marsh
+
+[sideboard]
+3 Duress
+2 Go Blank
+2 Ray of Enfeeblement
+2 Test of Talents
+1 Vanishing Verse
+1 Environmental Sciences
+1 Mascot Exhibition
+1 Teachings of the Archaics
+1 Soul Shatter
+1 Path of Peril

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Elias Klocker
+Title=Marhault Elsdragon
+Difficulty=very hard
+Description=Rakdos Aggro by Elias Klocker
+Icon=Marhault Elsdragon.jpg
+Deck Type=constructed
+
+[main]
+6 Swamp
+4 Fabled Passage
+4 Blood Crypt
+3 Castle Locthwain
+3 Mountain
+3 Temple of Malice
+4 Claim the Firstborn
+2 Call of the Death-Dweller
+2 Village Rites
+4 Witch's Oven
+4 Dreadhorde Butcher
+4 Gutterbones
+4 Priest of Forgotten Gods
+4 Mayhem Devil
+4 Cauldron Familiar
+3 Woe Strider
+2 Midnight Reaper
+
+[sideboard]
+4 Rotting Regisaur
+3 Agonizing Remorse
+2 Embereth Shieldbreaker
+2 Noxious Grasp
+2 Eliminate
+1 Soul-Guide Lantern
+1 Jegantha, the Wellspring

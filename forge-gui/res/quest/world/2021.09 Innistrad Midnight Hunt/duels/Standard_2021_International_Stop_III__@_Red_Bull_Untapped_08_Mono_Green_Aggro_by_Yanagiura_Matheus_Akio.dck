@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Yanagiura Matheus Akio
+Title=Delgado Gordo
+Difficulty=very hard
+Description=Mono Green Aggro by Yanagiura Matheus Akio
+Icon=Delgado Gordo.jpg
+Deck Type=constructed
+
+[main]
+1 Battle Mammoth
+1 Outland Liberator
+2 Primal Adversary
+2 Lotus Cobra
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+4 Sculptor of Winter
+4 Esika's Chariot
+1 Snakeskin Veil
+2 Inscription of Abundance
+4 Blizzard Brawl
+2 Ranger Class
+1 Wrenn and Seven
+1 Lair of the Hydra
+3 Faceless Haven
+4 Kazandu Mammoth
+20 Snow-Covered Forest
+
+[sideboard]
+2 Outland Liberator
+3 Snakeskin Veil
+1 Inscription of Abundance
+1 Devouring Tendrils
+1 Tovolar's Huntmaster
+3 Tajuru Blightblade
+4 Tangletrap

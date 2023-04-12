@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Izzet Control by Shota Yasooka
+Title=Goblin Lord
+Difficulty=very hard
+Description=Izzet Control by Shota Yasooka
+Icon=Goblin Lord.jpg
+Deck Type=constructed
+
+[main]
+3 Expressive Iteration
+3 Saw It Coming
+4 Frost Bite
+4 Alrund's Epiphany
+3 Galazeth Prismari
+4 Bonecrusher Giant
+4 Brazen Borrower
+4 Goldspan Dragon
+3 Volatile Fjord
+3 Faceless Haven
+4 Fabled Passage
+4 Riverglide Pathway
+5 Snow-Covered Mountain
+6 Snow-Covered Island
+2 Disdainful Stroke
+2 Mazemind Tome
+1 Mystical Dispute
+1 Magma Opus
+
+[sideboard]
+1 Disdainful Stroke
+1 Mystical Dispute
+4 Scorching Dragonfire
+1 Test of Talents
+1 Behold the Multiverse
+2 Shark Typhoon
+2 Redcap Melee
+3 Ox of Agonas

@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Grixis Control by Eben Danielson
+Title=Starfire
+Difficulty=very hard
+Description=Grixis Control by Eben Danielson
+Icon=Starfire.jpg
+Deck Type=constructed
+
+[main]
+1 The Celestus
+1 Demon Bolt
+1 Prismari Command
+1 Thundering Rebuke
+2 Fading Hope
+2 Abrade
+2 Cinderclasm
+2 Galvanic Iteration
+2 Alrund's Epiphany
+3 Jwari Disruption
+4 Spikefield Hazard
+4 Divide by Zero
+4 Unexpected Windfall
+4 Expressive Iteration
+1 Smoldering Egg
+1 Hullbreaker Horror
+2 Goldspan Dragon
+2 Lier, Disciple of the Drowned
+2 Hall of Storm Giants
+2 Field of Ruin
+2 Clearwater Pathway
+2 Island
+2 Mountain
+3 Blightstep Pathway
+4 Stormcarved Coast
+4 Riverglide Pathway
+
+[sideboard]
+2 Flame-Blessed Bolt
+2 Go Blank
+2 Test of Talents
+1 Mascot Exhibition
+1 Environmental Sciences
+1 Teachings of the Archaics
+1 Burning Hands
+1 Cyclone Summoner
+1 Cinderclasm
+1 Alrund's Epiphany
+1 Smoldering Egg
+1 Hullbreaker Horror

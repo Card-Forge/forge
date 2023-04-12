@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=UB Control by Mattia Rizzi (Italy)
+Title=Fat Albert
+Difficulty=very hard
+Description=UB Control by Mattia Rizzi (Italy)
+Icon=Fat Albert.jpg
+Deck Type=constructed
+
+[main]
+2 Field of Ruin|XLN
+7 Swamp|XLN
+6 Island|XLN
+4 Drowned Catacomb|XLN
+4 Fetid Pools|AKH
+2 Search for Azcanta|XLN
+4 Vraska's Contempt|XLN
+2 Hieroglyphic Illumination|AKH
+2 Glimmer of Genius|KLD
+4 Disallow|AER
+4 Fatal Push|AER
+2 Essence Extraction|KLD
+1 Consign // Oblivion|HOU
+4 Censor|AKH
+4 Essence Scatter|AKH
+2 The Scarab God|HOU
+3 Torrential Gearhulk|KLD
+3 Evolving Wilds|AKH
+
+[sideboard]
+3 Duress|XLN
+3 Deadeye Tracker|XLN
+2 Bontu's Last Reckoning|HOU
+2 Jace's Defeat|HOU
+2 Essence Extraction|KLD
+2 Gifted Aetherborn|AER
+1 Arguel's Blood Fast|XLN

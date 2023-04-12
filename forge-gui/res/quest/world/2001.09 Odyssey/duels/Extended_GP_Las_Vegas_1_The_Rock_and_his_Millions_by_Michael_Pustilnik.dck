@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=The Rock and his Millions by Michael Pustilnik
+Title=Saruman
+Difficulty=very hard
+Description=The Rock and his Millions by Michael Pustilnik
+Icon=Saruman.jpg
+Deck Type=constructed
+
+[main]
+2 Vampiric Tutor|VI
+1 Recurring Nightmare|EX
+2 Phyrexian Furnace|WL
+4 Pernicious Deed|AP
+1 Living Death|TE
+4 Duress|US
+1 Choke|TE
+4 Yavimaya Elder|UD
+3 Wall of Roots|MI
+4 Spiritmonger|AP
+2 Spike Weaver|EX
+4 Spike Feeder|SH
+1 Phyrexian Plaguelord|UL
+4 Birds of Paradise|A
+4 Treetop Village|UL
+5 Swamp|A
+8 Forest|A
+2 Dust Bowl|MM
+4 Bayou|A
+
+[sideboard]
+1 Volrath's Stronghold|SH
+2 Uktabi Orangutan|VI
+1 Tsunami|A
+1 Stench of Evil|IA
+1 Rank and File|UL
+1 Massacre|NE
+2 Emerald Charm|VI
+3 Diabolic Edict|TE
+1 Phyrexian Furnace|WL
+1 Choke|TE
+1 Dust Bowl|MM

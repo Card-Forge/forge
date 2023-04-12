@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Bant Megamorph by Valentin Mackl
+Title=Aspect of Earth
+Difficulty=very hard
+Description=Bant Megamorph by Valentin Mackl
+Icon=Aspect of Earth.jpg
+Deck Type=constructed
+
+[main]
+1 Valorous Stance|FRF
+1 Stasis Snare|BFZ
+3 Silkwrap|DTK
+4 Gideon, Ally of Zendikar|BFZ
+4 Dromoka's Command|DTK
+2 Nissa, Vastwood Seer|ORI
+2 Hangarback Walker|ORI
+3 Knight of the White Orchid|ORI
+3 Wingmate Roc|KTK
+4 Warden of the First Tree|FRF
+4 Den Protector|DTK
+4 Deathmist Raptor|DTK
+1 Prairie Stream|BFZ
+3 Canopy Vista|BFZ
+4 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+4 Flooded Strand|KTK
+4 Forest|BFZ
+5 Plains|BFZ
+
+[sideboard]
+4 Disdainful Stroke|KTK
+3 Surge of Righteousness|DTK
+2 Mastery of the Unseen|FRF
+1 Arashin Cleric|FRF
+2 Valorous Stance|FRF
+1 Stasis Snare|BFZ
+1 Silkwrap|DTK
+1 Knight of the White Orchid|ORI

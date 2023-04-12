@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Bart Van Etten
+Title=Tanit
+Difficulty=very hard
+Description=Abzan Midrange by Bart Van Etten
+Icon=Tanit.jpg
+Deck Type=constructed
+
+[main]
+1 Sunken Hollow|BFZ
+1 Smoldering Marsh|BFZ
+2 Canopy Vista|BFZ
+4 Windswept Heath|KTK
+2 Llanowar Wastes|ORI
+4 Flooded Strand|KTK
+4 Wooded Foothills|KTK
+4 Shambling Vent|BFZ
+2 Plains|BFZ
+2 Forest|BFZ
+3 Gideon, Ally of Zendikar|BFZ
+4 Dromoka's Command|DTK
+1 Murderous Cut|KTK
+4 Abzan Charm|KTK
+4 Anafenza, the Foremost|KTK
+4 Siege Rhino|KTK
+4 Heir of the Wilds|KTK
+4 Den Protector|DTK
+4 Warden of the First Tree|FRF
+2 Wingmate Roc|KTK
+
+[sideboard]
+1 Tragic Arrogance|ORI
+3 Transgress the Mind|BFZ
+3 Silkwrap|DTK
+2 Ultimate Price|DTK
+2 Tasigur, the Golden Fang|FRF
+2 Duress|DTK
+2 Self-Inflicted Wound|DTK

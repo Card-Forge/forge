@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Jund by Koutarou Ishibashi
+Title=Aspect of Death
+Difficulty=very hard
+Description=Jund by Koutarou Ishibashi
+Icon=Aspect of Death.jpg
+Deck Type=constructed
+
+[main]
+2 Infernal Grasp
+4 Ranger Class
+4 Shatterskull Smashing
+4 Esika's Chariot
+1 Olivia, Crimson Bride
+3 Florian, Voldaren Scion
+4 Jaspera Sentinel
+4 Prosperous Innkeeper
+4 Goldspan Dragon
+4 Immersturm Predator
+4 Magda, Brazen Outlaw
+2 Lair of the Hydra
+4 Darkbore Pathway
+4 Forest
+4 Cragcrown Pathway
+4 Haunted Ridge
+4 Blightstep Pathway
+
+[sideboard]
+4 Duress
+2 Go Blank
+2 Briarbridge Tracker
+2 Lolth, Spider Queen
+2 Power Word Kill
+2 Ray of Enfeeblement
+1 Soul Shatter

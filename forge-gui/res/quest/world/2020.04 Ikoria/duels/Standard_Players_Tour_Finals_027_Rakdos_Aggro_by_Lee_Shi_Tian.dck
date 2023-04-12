@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Lee Shi Tian
+Title=Nissa, Genesis Mage
+Difficulty=very hard
+Description=Rakdos Aggro by Lee Shi Tian
+Icon=Nissa, Genesis Mage.jpg
+Deck Type=constructed
+
+[main]
+4 Claim the Firstborn
+1 Call of the Death-Dweller
+3 Village Rites
+4 Witch's Oven
+4 Cauldron Familiar
+4 Mayhem Devil
+4 Dreadhorde Butcher
+4 Priest of Forgotten Gods
+3 Gutterbones
+3 Woe Strider
+3 Liliana's Standard Bearer
+7 Swamp
+4 Mountain
+4 Fabled Passage
+4 Blood Crypt
+2 Temple of Malice
+2 Castle Locthwain
+
+[sideboard]
+1 Jegantha, the Wellspring
+2 Noxious Grasp
+2 Eliminate
+2 Embereth Shieldbreaker
+2 Bolas's Citadel
+3 Rotting Regisaur
+3 Agonizing Remorse

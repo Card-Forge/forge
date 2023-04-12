@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Chris Kvartek
+Title=Riptide
+Difficulty=very hard
+Description=Rakdos Aggro by Chris Kvartek
+Icon=Riptide.jpg
+Deck Type=constructed
+
+[main]
+4 Cauldron Familiar
+4 Midnight Reaper
+4 Fabled Passage
+6 Mountain
+8 Swamp
+4 Blood Crypt
+2 Castle Locthwain
+4 Claim the Firstborn
+4 Witch's Oven
+4 Gutterbones
+4 Priest of Forgotten Gods
+4 Woe Strider
+4 Dreadhorde Butcher
+4 Mayhem Devil
+
+[sideboard]
+2 Rankle, Master of Pranks
+4 Redcap Melee
+2 Noxious Grasp
+3 Angrath's Rampage
+4 Agonizing Remorse

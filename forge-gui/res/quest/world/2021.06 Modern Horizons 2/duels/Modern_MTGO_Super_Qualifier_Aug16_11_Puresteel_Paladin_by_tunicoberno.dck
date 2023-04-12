@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by tunicoberno
+Title=Silver Samurai
+Difficulty=very hard
+Description=Puresteel Paladin by tunicoberno
+Icon=Silver Samurai.jpg
+Deck Type=constructed
+
+[main]
+4 Esper Sentinel
+4 Ingenious Smith
+4 Memnite|SOM
+4 Ornithopter|AER
+4 Puresteel Paladin|NPH
+4 Stoneforge Mystic|WWK
+2 Magnetic Theft|FD
+4 Colossus Hammer
+1 Cranial Plating|FD
+1 Shadowspear
+4 Springleaf Drum|BNG
+4 Sigarda's Aid|EMN
+1 Arid Mesa|ZEN
+4 Inkmoth Nexus|MBS
+4 Inspiring Vantage|KLD
+1 Marsh Flats|ZEN
+4 Plains
+2 Sacred Foundry
+4 Urza's Saga
+
+[sideboard]
+1 Defense Grid|9E
+1 Lurrus of the Dream-Den
+2 Path to Exile|CFX
+1 Pithing Needle|RTR
+2 Sanctifier en-Vec
+2 Soul-Guide Lantern
+2 Void Mirror
+4 Wear // Tear|DGM

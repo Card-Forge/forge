@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Andrea Mengucci
+Title=Gix
+Difficulty=very hard
+Description=Red Deck Wins by Andrea Mengucci
+Icon=Gix.jpg
+Deck Type=constructed
+
+[main]
+18 Mountain
+4 Castle Embereth
+4 Bonecrusher Giant
+4 Scorch Spitter
+4 Runaway Steam-Kin
+4 Light Up the Stage
+3 Embercleave
+4 Robber of the Rich
+4 Anax, Hardened in the Forge
+3 Torbran, Thane of Red Fell
+4 Rimrock Knight
+4 Fervent Champion
+
+[sideboard]
+1 Tibalt, Rakish Instigator
+3 Redcap Melee
+4 Unchained Berserker
+2 Chandra, Acolyte of Flame
+4 Lava Coil
+1 Experimental Frenzy

@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Eliott dragon
+Title=Kefnet the Mindful
+Difficulty=very hard
+Description=Jeskai Control by Eliott dragon
+Icon=Kefnet the Mindful.jpg
+Deck Type=constructed
+
+[main]
+1 Ertai's Scorn
+1 Negate
+1 March of Otherworldly Light
+1 Memory Deluge
+1 Light Up the Night
+2 Timeless Lotus
+2 The Celestus
+2 Farewell
+2 Witness the Future
+3 Impulse
+3 Temporary Lockdown
+3 Silver Scrutiny
+4 Teferi, Who Slows the Sunset
+4 The Wandering Emperor
+4 Temporal Firestorm
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+1 Mountain
+1 Island
+2 Plains
+4 Shivan Reef
+4 Adarkar Wastes
+4 Deserted Beach
+4 Stormcarved Coast
+4 Sundown Pass
+
+[sideboard]
+2 Hullbreaker Horror
+1 Unlicensed Hearse
+1 Disdainful Stroke
+1 Fateful Absence
+1 Anointed Peacekeeper
+4 Reckoner Bankbuster
+3 Negate
+1 Farewell
+1 Temporary Lockdown

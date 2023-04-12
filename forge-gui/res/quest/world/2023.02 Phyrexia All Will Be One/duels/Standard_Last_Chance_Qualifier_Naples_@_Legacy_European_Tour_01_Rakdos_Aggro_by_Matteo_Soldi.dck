@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Matteo Soldi
+Title=James T Kirk
+Difficulty=very hard
+Description=Rakdos Aggro by Matteo Soldi
+Icon=James T Kirk.jpg
+Deck Type=constructed
+
+[main]
+2 Ob Nixilis, the Adversary
+3 Lightning Strike
+3 Go for the Throat
+4 Play with Fire
+4 Kumano Faces Kakkazan
+3 Feldon, Ronom Excavator
+3 Squee, Dubious Monarch
+4 Bloodthirsty Adversary
+4 Thundering Raiju
+4 Phoenix Chick
+4 Monastery Swiftspear
+1 Sokenzan, Crucible of Defiance
+2 Haunted Ridge
+3 Mishra's Foundry
+4 Blackcleave Cliffs
+4 Sulfurous Springs
+8 Mountain
+
+[sideboard]
+3 Fable of the Mirror-Breaker
+2 Duress
+2 Obliterating Bolt
+2 Bloody Betrayal
+2 Atsushi, the Blazing Sky
+1 Jaya, Fiery Negotiator
+1 Mirrex
+1 Ob Nixilis, the Adversary
+1 Go for the Throat

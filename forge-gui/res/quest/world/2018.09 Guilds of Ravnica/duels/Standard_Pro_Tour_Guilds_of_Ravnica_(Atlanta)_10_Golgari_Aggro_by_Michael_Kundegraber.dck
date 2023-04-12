@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by Michael Kundegraber
+Title=Jedit Ojanen
+Difficulty=very hard
+Description=Golgari Aggro by Michael Kundegraber
+Icon=Jedit Ojanen.jpg
+Deck Type=constructed
+
+[main]
+2 Vivien Reid
+4 Llanowar Elves
+4 Druid of the Cowl
+4 Merfolk Branchwalker|XLN
+3 Ravenous Chupacabra
+2 Doom Whisperer
+4 Jadelight Ranger
+4 Carnage Tyrant|XLN
+1 Thrashing Brontodon
+4 Find // Finality
+2 Vraska's Contempt|XLN
+1 Cast Down
+2 Assassin's Trophy
+8 Forest
+6 Swamp
+4 Overgrown Tomb
+4 Woodland Cemetery
+1 Memorial to Folly
+
+[sideboard]
+1 Thrashing Brontodon
+1 Cast Down
+4 Duress
+2 Karn, Scion of Urza
+3 Wildgrowth Walker|XLN
+2 Kraul Harpooner
+2 Ritual of Soot

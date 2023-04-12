@@ -1,0 +1,39 @@
+[quest]
+id=44007
+OpponentName=Ajani
+AILife=20
+Repeat=true
+Wins=10
+Card Reward=Ajani Vengeant|DDH;Lightning Helix|DDH;Behemoth Sledge|DDH;1 white rare
+Credit Reward=500
+AIExtras=Kird Ape|Loam Lion
+[metadata]
+Name=quest44007
+Title=Ajani Vengeant
+Icon=alaajani.jpg
+Difficulty=hard
+Description=Deep in the heart of the Nayan jungles you meet a stark white nacatl, his eyes aflame with rage. He faces you in combat, but be warned, for the planeswalker has many allies from across the multiverse at his side.
+Deck Type=constructed
+[Main]
+3 Ajani Vengeant|DDH
+2 Ajani's Mantra|DDH
+3 Ajani's Pridemate|DDH
+3 Ajani's Sunstriker|M13
+2 Behemoth Sledge|DDH
+2 Forest|ALA|2
+2 Forest|ALA|3
+4 Jungle Shrine|ALA
+2 Kird Ape|DDH
+3 Lightning Helix|DDH
+2 Loam Lion|DDH
+2 Marisi's Twinclaws|DDH
+4 Mountain|ALA|4
+4 Naya Panorama|ALA
+8 Plains|ALA|1
+4 Qasali Ambusher|ALA
+1 Soul's Fire|ALA
+2 Soul's Grace|ALA
+1 Soul's Majesty|CFX
+1 Soul's Might|ALA
+1 Titanic Ultimatum|DDH
+4 Wild Nacatl|DDH

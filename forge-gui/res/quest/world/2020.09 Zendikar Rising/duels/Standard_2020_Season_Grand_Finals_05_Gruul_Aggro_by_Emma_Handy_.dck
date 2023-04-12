@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Emma Handy 
+Title=Coranna
+Difficulty=very hard
+Description=Gruul Aggro by Emma Handy 
+Icon=Coranna.jpg
+Deck Type=constructed
+
+[main]
+2 Shatterskull Smashing
+4 Primal Might
+4 Embercleave
+2 Scavenging Ooze
+4 Brushfire Elemental
+4 Edgewall Innkeeper
+2 Evolving Wilds
+4 Mountain
+4 Fabled Passage
+4 Cragcrown Pathway
+6 Forest
+4 Lovestruck Beast
+4 Bonecrusher Giant
+4 Gemrazer
+4 Kazandu Mammoth
+4 Stonecoil Serpent
+
+[sideboard]
+3 Thundering Rebuke
+3 Chainweb Aracnir
+3 Embereth Shieldbreaker
+2 Ranger's Guile
+2 Vivien, Monsters' Advocate
+2 The Great Henge

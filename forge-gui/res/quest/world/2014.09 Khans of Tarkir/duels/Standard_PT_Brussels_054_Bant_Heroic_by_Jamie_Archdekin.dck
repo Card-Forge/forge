@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Bant Heroic by Jamie Archdekin
+Title=Dem Bones
+Difficulty=very hard
+Description=Bant Heroic by Jamie Archdekin
+Icon=Dem Bones.jpg
+Deck Type=constructed
+
+[main]
+1 Treasure Cruise|KTK
+1 Aqueous Form|THS
+2 Ordeal of Heliod|THS
+2 Ajani's Presence|JOU
+4 Defiant Strike|KTK
+4 Dromoka's Command|DTK
+4 Gods Willing|THS
+4 Ordeal of Thassa|THS
+2 Lagonna-Band Trailblazer|JOU
+2 Monastery Mentor|FRF
+4 Seeker of the Way|KTK
+4 Hero of Iroas|BNG
+4 Favored Hoplite|THS
+1 Temple of Plenty|BNG
+1 Island|DTK
+1 Forest|DTK
+3 Temple of Enlightenment|BNG
+4 Plains|DTK
+4 Mana Confluence|JOU
+4 Windswept Heath|KTK
+4 Flooded Strand|KTK
+
+[sideboard]
+2 Glare of Heresy|THS
+3 Stubborn Denial|KTK
+4 Encase in Ice|DTK
+2 Disdainful Stroke|KTK
+1 Treasure Cruise|KTK
+1 Aqueous Form|THS
+1 Ordeal of Heliod|THS
+1 Lagonna-Band Trailblazer|JOU

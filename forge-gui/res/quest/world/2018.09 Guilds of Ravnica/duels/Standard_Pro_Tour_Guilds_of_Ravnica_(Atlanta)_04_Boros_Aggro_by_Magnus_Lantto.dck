@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Magnus Lantto
+Title=Orunmila
+Difficulty=very hard
+Description=Boros Aggro by Magnus Lantto
+Icon=Orunmila.jpg
+Deck Type=constructed
+
+[main]
+3 Healer's Hawk
+4 Hunted Witness
+4 Venerated Loxodon
+4 Rustwing Falcon
+4 Benalish Marshal
+2 Dauntless Bodyguard
+4 Adanto Vanguard|XLN
+4 Heroic Reinforcements
+4 History of Benalia
+3 Legion's Landing|XLN
+2 Conclave Tribunal
+4 Clifftop Retreat
+4 Sacred Foundry
+14 Plains
+
+[sideboard]
+1 Conclave Tribunal
+3 Aurelia, Exemplar of Justice
+1 Justice Strike
+1 Make a Stand
+1 Banefire
+1 Mountain
+2 Experimental Frenzy
+2 Tocatli Honor Guard|XLN
+3 Baffling End

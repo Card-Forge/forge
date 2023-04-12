@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Izzet Control by Lukas Dusek
+Title=Hookah-Smoking Caterpillar
+Difficulty=very hard
+Description=Izzet Control by Lukas Dusek
+Icon=Hookah-Smoking Caterpillar.jpg
+Deck Type=constructed
+
+[main]
+4 Goldspan Dragon
+4 Smoldering Egg
+2 Fading Hope
+3 Saw It Coming
+3 Prismari Command
+3 Memory Deluge
+4 Dragon's Fire
+4 Frost Bite
+2 Burn Down the House
+2 Alrund's Epiphany
+4 Expressive Iteration
+2 Frostboil Snarl
+3 Faceless Haven
+3 Field of Ruin
+4 Volatile Fjord
+4 Riverglide Pathway
+4 Snow-Covered Island
+5 Snow-Covered Mountain
+
+[sideboard]
+1 Fading Hope
+1 Burn Down the House
+2 Crush the Weak
+2 Disdainful Stroke
+3 Test of Talents
+3 Burning Hands
+3 Inferno of the Star Mounts

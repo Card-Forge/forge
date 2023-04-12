@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Mono White Control by Marco Gaete
+Title=The Ebon Hand
+Difficulty=very hard
+Description=Mono White Control by Marco Gaete
+Icon=The Ebon Hand.jpg
+Deck Type=constructed
+
+[main]
+3 Serra Paragon
+2 Spirited Companion
+3 Ambitious Farmhand
+2 The Restoration of Eiganjo
+3 Loran of the Third Path
+2 Steel Seraph
+1 Sanctuary Warden
+3 Reckoner Bankbuster
+1 Fateful Absence
+3 Lay Down Arms
+1 Farewell
+4 Wedding Announcement
+3 Ossification
+2 The Eternal Wanderer
+2 Elspeth Resplendent
+2 The Wandering Emperor
+4 Roadside Reliquary
+1 Eiganjo, Seat of the Empire
+2 Mirrex
+16 Plains
+
+[sideboard]
+1 Sanctuary Warden
+1 Fateful Absence
+1 Farewell
+2 Unlicensed Hearse
+1 Urza's Sylex
+1 Destroy Evil
+2 Depopulate
+1 Sunset Revelry
+3 Phyrexian Vindicator
+1 Elesh Norn, Mother of Machines
+1 The Stone Brain

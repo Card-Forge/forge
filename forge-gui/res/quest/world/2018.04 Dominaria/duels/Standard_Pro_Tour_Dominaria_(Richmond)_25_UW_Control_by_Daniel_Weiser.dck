@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=UW Control by Daniel Weiser
+Title=Princess Celestia
+Difficulty=very hard
+Description=UW Control by Daniel Weiser
+Icon=Princess Celestia.jpg
+Deck Type=constructed
+
+[main]
+1 Torrential Gearhulk|KLD
+2 Fumigate|KLD
+1 Negate
+1 Essence Scatter|AKH
+3 Syncopate
+4 Disallow|AER
+1 Blink of an Eye
+1 Commit // Memory|AKH
+2 Glimmer of Genius|KLD
+2 Hieroglyphic Illumination|AKH
+3 Settle the Wreckage|XLN
+2 Search for Azcanta|XLN
+4 Seal Away
+3 Cast Out|AKH
+5 Island
+6 Plains
+4 Glacial Fortress|XLN
+4 Irrigated Farmland|AKH
+2 Meandering River
+2 Ipnu Rivulet|HOU
+1 Arch of Orazca
+2 Field of Ruin|XLN
+4 Teferi, Hero of Dominaria
+
+[sideboard]
+1 Torrential Gearhulk|KLD
+1 Fumigate|KLD
+2 Negate
+3 History of Benalia
+1 Kefnet the Mindful|AKH
+1 Fragmentize|KLD
+1 Sorcerous Spyglass|XLN
+1 Lyra Dawnbringer
+1 Authority of the Consuls|KLD
+1 Aether Meltdown|KLD
+1 Nezahal, Primal Tide
+1 Forsake the Worldly|AKH

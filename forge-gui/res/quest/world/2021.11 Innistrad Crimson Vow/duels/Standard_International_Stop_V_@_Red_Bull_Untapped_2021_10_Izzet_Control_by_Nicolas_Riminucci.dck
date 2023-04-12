@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Izzet Control by Nicolas Riminucci
+Title=Captain America
+Difficulty=very hard
+Description=Izzet Control by Nicolas Riminucci
+Icon=Captain America.jpg
+Deck Type=constructed
+
+[main]
+1 Hullbreaker Horror
+1 Behold the Multiverse
+1 Disdainful Stroke
+2 Cinderclasm
+3 Jwari Disruption
+3 Galvanic Iteration
+3 Fading Hope
+3 Frost Bite
+4 Divide by Zero
+4 Unexpected Windfall
+4 Spikefield Hazard
+1 Burn Down the House
+3 Alrund's Epiphany
+4 Expressive Iteration
+2 Field of Ruin
+2 Hall of Storm Giants
+4 Stormcarved Coast
+4 Riverglide Pathway
+5 Snow-Covered Island
+6 Snow-Covered Mountain
+
+[sideboard]
+1 Hullbreaker Horror
+1 Disdainful Stroke
+1 Teachings of the Archaics
+1 Mascot Exhibition
+1 Environmental Sciences
+2 Burning Hands
+2 Abrade
+2 Test of Talents
+2 Lier, Disciple of the Drowned
+2 Goldspan Dragon

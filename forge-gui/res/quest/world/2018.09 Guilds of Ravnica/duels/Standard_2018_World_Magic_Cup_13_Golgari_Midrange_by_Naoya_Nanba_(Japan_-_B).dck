@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Golgari Midrange by Naoya Nanba (Japan - B)
+Title=Conan the Barbarian
+Difficulty=very hard
+Description=Golgari Midrange by Naoya Nanba (Japan - B)
+Icon=Conan the Barbarian.jpg
+Deck Type=constructed
+
+[main]
+1 Vraska, Golgari Queen
+2 Vivien Reid
+4 Llanowar Elves
+4 Merfolk Branchwalker|XLN
+3 Wildgrowth Walker|XLN
+1 Seekers' Squire|XLN
+4 Jadelight Ranger
+2 Midnight Reaper
+2 Ravenous Chupacabra
+1 Doom Whisperer
+3 Carnage Tyrant|XLN
+3 Find // Finality
+2 Cast Down
+4 Vraska's Contempt|XLN
+7 Forest
+5 Swamp
+4 Overgrown Tomb
+4 Woodland Cemetery
+2 Memorial to Folly
+1 Detection Tower
+1 Golgari Guildgate
+
+[sideboard]
+1 Wildgrowth Walker|XLN
+1 Midnight Reaper
+1 Doom Whisperer
+1 Cast Down
+2 Thrashing Brontodon
+1 Assassin's Trophy
+3 Duress
+2 Golden Demise
+3 The Eldest Reborn

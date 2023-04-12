@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Mardu Vehicles by Andrew Shain
+Title=Ri
+Difficulty=very hard
+Description=Mardu Vehicles by Andrew Shain
+Icon=Ri.jpg
+Deck Type=constructed
+
+[main]
+1 Swamp
+4 Spire of Industry|AER
+2 Plains
+3 Mountain
+4 Inspiring Vantage|KLD
+3 Dragonskull Summit|XLN
+4 Concealed Courtyard|KLD
+3 Canyon Slough|AKH
+4 Heart of Kiran|AER
+4 Unlicensed Disintegration|KLD
+3 Abrade|HOU
+2 Cut // Ribbons|AKH
+4 Walking Ballista|AER
+4 Toolcraft Exemplar|KLD
+4 Scrapheap Scrounger|KLD
+1 Rekindling Phoenix
+2 Pia Nalaar|KLD
+3 Hazoret the Fervent|AKH
+4 Bomat Courier|KLD
+1 Chandra, Torch of Defiance|KLD
+
+[sideboard]
+2 Authority of the Consuls|KLD
+1 Cast Out|AKH
+1 Chandra's Defeat|HOU
+3 Duress|XLN
+2 Fatal Push|AER
+1 Profane Procession
+2 Settle the Wreckage|XLN
+1 Arguel's Blood Fast|XLN
+1 Angrath, the Flame-Chained
+1 Chandra, Torch of Defiance|KLD

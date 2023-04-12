@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by Shahar Shenhar
+Title=Nether Fiend
+Difficulty=very hard
+Description=Golgari Aggro by Shahar Shenhar
+Icon=Nether Fiend.jpg
+Deck Type=constructed
+
+[main]
+1 Karn, Scion of Urza
+3 Vivien Reid
+4 Llanowar Elves
+2 Druid of the Cowl
+2 Wildgrowth Walker|XLN
+4 Merfolk Branchwalker|XLN
+2 Thrashing Brontodon
+4 Jadelight Ranger
+2 Golgari Findbroker
+3 Ravenous Chupacabra
+3 Carnage Tyrant|XLN
+3 Find // Finality
+2 Cast Down
+2 Vraska's Contempt|XLN
+2 Memorial to Folly
+4 Overgrown Tomb
+4 Woodland Cemetery
+8 Forest
+5 Swamp
+
+[sideboard]
+1 Cast Down
+1 Vraska's Contempt|XLN
+2 Ritual of Soot
+1 Assassin's Trophy
+1 Golgari Raiders
+4 Duress
+2 Deathgorge Scavenger|XLN
+2 Doom Whisperer
+1 Vraska, Relic Seeker|XLN

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Tinker by Bob Maher
+Title=Havenwood
+Difficulty=very hard
+Description=Tinker by Bob Maher
+Icon=Havenwood.jpg
+Deck Type=constructed
+
+[main]
+4 Voltaic Key|M11
+4 Tinker|UL
+4 Thran Dynamo|C14
+4 Tangle Wire|NE
+3 Stroke of Genius|C15
+4 Phyrexian Processor|US
+1 Mishra's Helix|US
+4 Grim Monolith|UL
+1 Crumbling Sanctuary|MM
+1 Phyrexian Colossus|8E
+4 Metalworker|UD
+4 Masticore|UD
+4 Saprazzan Skerry|MM
+4 Rishadan Port|MM
+10 Island|RTR
+4 Crystal Vein|C14
+
+[sideboard]
+2 Rising Waters|NE
+4 Miscalculation|UL
+4 Chill|6E
+4 Annul|THS
+1 Mishra's Helix|US

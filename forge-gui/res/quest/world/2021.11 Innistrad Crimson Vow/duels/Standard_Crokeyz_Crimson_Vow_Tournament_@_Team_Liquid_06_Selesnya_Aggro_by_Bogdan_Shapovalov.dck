@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Selesnya Aggro by Bogdan Shapovalov
+Title=The Great and Powerful Trixie
+Difficulty=very hard
+Description=Selesnya Aggro by Bogdan Shapovalov
+Icon=The Great and Powerful Trixie.jpg
+Deck Type=constructed
+
+[main]
+1 Paladin Class
+2 Snakeskin Veil
+2 Portable Hole
+2 Sigarda, Champion of Light
+3 Codespell Cleric
+3 Katilda, Dawnhart Prime
+3 Hamlet Vanguard
+3 Thalia, Guardian of Thraben
+3 Adeline, Resplendent Cathar
+3 Brutal Cathar
+4 Ollenbock Escort
+4 Intrepid Adversary
+4 Luminarch Aspirant
+2 Cave of the Frost Dragon
+3 Forest
+3 Lair of the Hydra
+4 Overgrown Farmland
+4 Branchloft Pathway
+7 Plains
+
+[sideboard]
+3 Reidane, God of the Worthy
+3 Elite Spellbinder
+2 Guardian of Faith
+2 Valorous Stance
+2 Outland Liberator
+1 Paladin Class
+1 Portable Hole
+1 Brutal Cathar

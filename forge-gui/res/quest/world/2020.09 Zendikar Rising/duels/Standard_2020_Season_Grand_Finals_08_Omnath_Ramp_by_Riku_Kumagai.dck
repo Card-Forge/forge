@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Omnath Ramp by Riku Kumagai
+Title=Zeus
+Difficulty=very hard
+Description=Omnath Ramp by Riku Kumagai
+Icon=Zeus.jpg
+Deck Type=constructed
+
+[main]
+2 Giant Killer
+3 Brazen Borrower
+4 Bonecrusher Giant
+4 Fae of Wishes
+4 Beanstalk Giant
+4 Edgewall Innkeeper
+4 Omnath, Locus of Creation
+4 Lucky Clover
+1 Mystical Dispute
+3 Escape to the Wilds
+1 Plains
+2 Ketria Triome
+2 Cragcrown Pathway
+2 Mountain
+2 Raugrin Triome
+2 Riverglide Pathway
+4 Fabled Passage
+4 Branchloft Pathway
+4 Island
+4 Forest
+
+[sideboard]
+2 Mystical Dispute
+1 Escape to the Wilds
+1 Storm's Wrath
+1 Return to Nature
+1 Soul-Guide Lantern
+1 Stern Dismissal
+1 Once and Future
+1 Redcap Melee
+1 Elspeth Conquers Death
+1 Fling
+1 Primal Might
+1 Wilt
+1 Negate
+1 Ugin, the Spirit Dragon

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Naya Runes Aggro by Kangbreath
+Title=Newton
+Difficulty=very hard
+Description=Naya Runes Aggro by Kangbreath
+Icon=Newton.jpg
+Deck Type=constructed
+
+[main]
+2 Rune of Sustenance
+3 Michiko's Reign of Truth
+4 Wedding Announcement
+4 Rune of Speed
+4 Showdown of the Skalds
+4 Rune of Might
+4 Generous Visitor
+4 Kami of Transience
+4 Jukai Naturalist
+4 Runeforge Champion
+1 Boseiju, Who Endures
+1 Forest
+1 Eiganjo, Seat of the Empire
+2 Plains
+2 Lair of the Hydra
+4 Cragcrown Pathway
+4 Branchloft Pathway
+4 Sundown Pass
+4 Needleverge Pathway
+
+[sideboard]
+4 Hallowed Haunting
+3 Fang of Shigeki
+3 Circle of Confinement
+3 Paladin Class
+2 Borrowed Time

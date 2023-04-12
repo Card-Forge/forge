@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=PT Junk by Kaare Anderson
+Title=Doran
+Difficulty=very hard
+Description=PT Junk by Kaare Anderson
+Icon=Doran.jpg
+Deck Type=constructed
+
+[main]
+4 Vindicate|AP
+4 Tithe|VI
+4 Swords to Plowshares|A
+4 Seal of Cleansing|NE
+2 Gerrard's Verdict|AP
+4 Duress|US
+4 Call of the Herd|OD
+4 Wild Mongrel|OD
+3 Spectral Lynx|AP
+4 River Boa|VI
+3 Phyrexian Negator|UD
+4 Wasteland|TE
+3 Treetop Village|UL
+4 Scrubland|A
+4 Savannah|A
+1 Caves of Koilos|AP
+4 Bayou|A
+
+[sideboard]
+3 Wax // Wane|IN
+4 Phyrexian Furnace|WL
+4 Pernicious Deed|AP
+4 Choke|TE

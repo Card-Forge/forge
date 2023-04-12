@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Golgari Constrictor by Christoffer Larssen
+Title=Jack Sparrow
+Difficulty=very hard
+Description=Golgari Constrictor by Christoffer Larssen
+Icon=Jack Sparrow.jpg
+Deck Type=constructed
+
+[main]
+4 Blooming Marsh|KLD
+4 Hissing Quagmire|OGW
+4 Aether Hub|KLD
+7 Swamp|RTR
+5 Forest|RTR
+3 Aethersphere Harvester|AER
+1 Murder
+3 Grasp of Darkness|OGW
+2 Fatal Push|AER
+4 Glint-Sleeve Siphoner|AER
+3 Tireless Tracker|SOI
+4 Servant of the Conduit|KLD
+4 Verdurous Gearhulk|KLD
+4 Walking Ballista|AER
+2 Gonti, Lord of Luxury|KLD
+2 Rishkar, Peema Renegade|AER
+4 Winding Constrictor|AER
+
+[sideboard]
+3 To the Slaughter|SOI
+1 Ob Nixilis Reignited|BFZ
+3 Transgress the Mind|BFZ
+2 Appetite for the Unnatural|KLD
+3 Lifecrafter's Bestiary|AER
+2 Fatal Push|AER
+1 Gonti, Lord of Luxury|KLD

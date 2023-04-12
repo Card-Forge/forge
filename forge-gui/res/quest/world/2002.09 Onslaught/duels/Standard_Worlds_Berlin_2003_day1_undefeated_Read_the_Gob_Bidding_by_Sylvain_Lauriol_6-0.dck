@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Read the Gob Bidding by Sylvain Lauriol 6-0
+Title=RasAlGhul
+Difficulty=very hard
+Description=Read the Gob Bidding by Sylvain Lauriol 6-0
+Icon=RasAlGhul.jpg
+Deck Type=constructed
+
+[main]
+1 Island|RTR
+4 City of Brass|8E
+4 Bloodstained Mire|KTK
+3 Read the Runes|C16
+3 Patriarch's Bidding|ONS
+1 Lava Dart|JU
+1 Firebolt|OD
+4 Sparksmith|ONS
+4 Skirk Prospector
+3 Siege-Gang Commander
+4 Goblin Warchief
+4 Goblin Sledder|ONS
+3 Goblin Sharpshooter|C13
+4 Goblin Piledriver|ORI
+3 Gempalm Incinerator|LE
+2 Swamp|RTR
+2 Shadowblood Ridge|C16
+2 Polluted Delta|KTK
+8 Mountain|RTR
+
+[sideboard]
+3 Smother|WWK
+2 Slay|9E
+2 Flaring Pain|JU
+1 Ensnaring Bridge|8E
+3 Coffin Purge|OD
+3 Cabal Therapy|JU
+1 Read the Runes|C16

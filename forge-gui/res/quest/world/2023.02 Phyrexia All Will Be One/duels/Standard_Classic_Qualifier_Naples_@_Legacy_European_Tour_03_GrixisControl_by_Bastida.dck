@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=GrixisControl by Bastida
+Title=Land's Edge
+Difficulty=very hard
+Description=GrixisControl by Bastida
+Icon=Land's Edge.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+1 Brotherhood's End
+2 Make Disappear
+2 Cut Down
+3 Go for the Throat
+3 Abrade
+3 Reckoner Bankbuster
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+1 Razorlash Transmogrant
+2 Sheoldred, the Apocalypse
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+1 Sulfurous Springs
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+2 Darkslick Shores
+2 Swamp
+3 Shivan Reef
+4 Shipwreck Marsh
+4 Xander's Lounge
+4 Haunted Ridge
+4 Blackcleave Cliffs
+
+[sideboard]
+2 Duress
+2 Parasitic Grasp
+2 Siphon Insight
+1 Anoint with Affliction
+1 Bladecoil Serpent
+1 Disdainful Stroke
+1 Graveyard Trespasser
+1 Negate
+1 Brotherhood's End
+2 Cut Down

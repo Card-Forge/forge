@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by Edward Vance
+Title=Sphinx
+Difficulty=very hard
+Description=Golgari Aggro by Edward Vance
+Icon=Sphinx.jpg
+Deck Type=constructed
+
+[main]
+1 Vraska, Golgari Queen
+2 Vivien Reid
+2 Vraska, Relic Seeker|XLN
+4 Llanowar Elves
+4 Merfolk Branchwalker|XLN
+2 Druid of the Cowl
+4 Jadelight Ranger
+2 Midnight Reaper
+3 Ravenous Chupacabra
+2 Golgari Findbroker
+2 Doom Whisperer
+2 Carnage Tyrant|XLN
+2 Find // Finality
+1 Cast Down
+1 Assassin's Trophy
+3 Vraska's Contempt|XLN
+4 Overgrown Tomb
+4 Woodland Cemetery
+2 Memorial to Folly
+5 Swamp
+8 Forest
+
+[sideboard]
+1 Find // Finality
+3 Wildgrowth Walker|XLN
+3 Duress
+2 Thrashing Brontodon
+2 Reaver Ambush
+2 Ritual of Soot
+1 Izoni, Thousand-Eyed
+1 Arguel's Blood Fast|XLN

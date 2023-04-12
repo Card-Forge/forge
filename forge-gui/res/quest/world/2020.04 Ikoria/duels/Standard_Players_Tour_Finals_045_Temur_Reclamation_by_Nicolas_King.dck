@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Nicolas King
+Title=Oshun
+Difficulty=very hard
+Description=Temur Reclamation by Nicolas King
+Icon=Oshun.jpg
+Deck Type=constructed
+
+[main]
+4 Steam Vents
+4 Ketria Triome
+4 Breeding Pool
+3 Fabled Passage
+3 Castle Vantress
+3 Stomping Ground
+2 Forest
+2 Island
+2 Blast Zone
+1 Temple of Mystery
+1 Mountain
+4 Wilderness Reclamation
+4 Shark Typhoon
+4 Mystical Dispute
+4 Expansion // Explosion
+4 Growth Spiral
+4 Negate
+2 Aether Gust
+1 Commence the Endgame
+2 Uro, Titan of Nature's Wrath
+2 Brazen Borrower
+
+[sideboard]
+3 Flame Sweep
+2 Spectral Sailor
+2 Bonecrusher Giant
+2 Scorching Dragonfire
+1 Elder Gargaroth
+1 Tale's End
+1 Narset's Reversal
+1 Aether Gust
+1 Commence the Endgame
+1 Uro, Titan of Nature's Wrath

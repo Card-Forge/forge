@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Hardened Scales by Oshima Shimpei
+Title=The Forgotten
+Difficulty=very hard
+Description=Hardened Scales by Oshima Shimpei
+Icon=The Forgotten.jpg
+Deck Type=constructed
+
+[main]
+2 Arcbound Worker|DS
+4 Esper Sentinel
+4 Hangarback Walker|ORI
+4 Walking Ballista|AER
+4 Zabaz, the Glimmerwasp
+4 Arcbound Ravager|DS
+1 Basilisk Collar|WWK
+3 The Ozolith
+4 Welding Jar|MR
+2 Ancient Stirrings|ROE
+4 Hardened Scales|KTK
+4 Urza's Saga
+1 Pendelhaven|TSP
+1 Plains
+1 Forest
+3 Razorverge Thicket|SOM
+3 Branchloft Pathway
+3 Brushland|10E
+4 Inkmoth Nexus|MBS
+4 Spire of Industry|AER
+
+[sideboard]
+1 Chalice of the Void|MR
+1 Pithing Needle
+1 Lurrus of the Dream-Den
+2 Torpor Orb|NPH
+2 Path to Exile|CFX
+2 Nature's Claim|WWK
+3 Relic of Progenitus|ALA
+3 Prismatic Ending

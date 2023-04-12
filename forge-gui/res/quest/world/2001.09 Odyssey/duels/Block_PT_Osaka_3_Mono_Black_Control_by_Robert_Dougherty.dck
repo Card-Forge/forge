@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Mono Black Control by Robert Dougherty
+Title=Room-Grn
+Difficulty=very hard
+Description=Mono Black Control by Robert Dougherty
+Icon=Room-Grn.jpg
+Deck Type=constructed
+
+[main]
+3 Cabal Coffers|TO
+25 Swamp|A
+4 Nantuko Shade|TO
+2 Shambling Swarm|TO
+2 Stalking Bloodsucker|OD
+4 Chainer's Edict|TO
+4 Diabolic Tutor|OD
+1 Haunting Echoes|OD
+3 Innocent Blood|OD
+4 Mind Sludge|TO
+4 Mutilate|TO
+4 Rancid Earth|TO
+1 Skeletal Scrying|OD
+
+[sideboard]
+2 Skeletal Scrying|OD
+4 Braids, Cabal Minion|OD
+4 Faceless Butcher|TO
+2 Ghastly Demise|OD
+3 Mesmeric Fiend|TO

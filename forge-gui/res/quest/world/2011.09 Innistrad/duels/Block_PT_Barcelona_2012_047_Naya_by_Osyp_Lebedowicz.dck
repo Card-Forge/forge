@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Naya by Osyp Lebedowicz
+Title=Preacher
+Difficulty=very hard
+Description=Naya by Osyp Lebedowicz
+Icon=Preacher.jpg
+Deck Type=constructed
+
+[main]
+4 Cavern of Souls|AVR
+4 Clifftop Retreat
+4 Evolving Wilds
+7 Forest|RTR
+2 Gavony Township|ISD
+1 Mountain|RTR
+3 Plains|RTR
+4 Avacyn's Pilgrim|ISD
+2 Borderland Ranger|AVR
+4 Fiend Hunter|C13
+4 Huntmaster of the Fells|DKA
+1 Mikaeus, the Lunarch|ISD
+4 Restoration Angel|AVR
+4 Scorned Villager|DKA
+4 Wolfir Silverheart|AVR
+4 Brimstone Volley|CNS
+4 Garruk Relentless|ISD
+
+[sideboard]
+3 Bonfire of the Damned|AVR
+2 Purify the Grave|ISD
+2 Sigarda, Host of Herons|AVR
+2 Slayer of the Wicked|ISD
+2 Tree of Redemption|ISD
+2 Ulvenwald Tracker|AVR
+2 Zealous Conscripts|AVR

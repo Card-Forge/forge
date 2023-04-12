@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by CharLy
+Title=KilijArslan
+Difficulty=very hard
+Description=Gruul Aggro by CharLy
+Icon=KilijArslan.jpg
+Deck Type=constructed
+
+[main]
+4 Goldspan Dragon
+4 Jaspera Sentinel
+4 Magda, Brazen Outlaw
+3 Moonveil Regent
+4 Prosperous Innkeeper
+2 Reckless Stormseeker
+4 Shatterskull Smashing
+3 Dragon's Fire
+2 Negate
+4 Esika's Chariot
+4 Ranger Class
+4 Barkchannel Pathway
+4 Cragcrown Pathway
+2 Den of the Bugbear
+5 Forest
+2 Lair of the Hydra
+1 Mountain
+4 Riverglide Pathway
+
+[sideboard]
+2 Reckless Stormseeker
+2 Briarbridge Tracker
+4 Burning Hands
+2 Disdainful Stroke
+2 Kessig Naturalist
+3 Tangletrap

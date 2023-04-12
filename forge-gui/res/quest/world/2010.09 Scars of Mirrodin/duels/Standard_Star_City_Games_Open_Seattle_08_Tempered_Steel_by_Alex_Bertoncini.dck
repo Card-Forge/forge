@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Tempered Steel by Alex Bertoncini
+Title=Seabiscuit
+Difficulty=very hard
+Description=Tempered Steel by Alex Bertoncini
+Icon=Seabiscuit.jpg
+Deck Type=constructed
+
+[main]
+4 Memnite|SOM
+1 Phyrexian Revoker|MBS
+4 Signal Pest|MBS
+4 Spellskite|NPH
+4 Steel Overseer|M11
+4 Vault Skirge|NPH
+2 Dismember|NPH
+4 Dispatch|NPH
+4 Glint Hawk Idol|SOM
+2 Shrine of Loyal Legions|NPH
+3 Mox Opal|SOM
+4 Tempered Steel|SOM
+16 Plains|M12
+4 Inkmoth Nexus|MBS
+
+[sideboard]
+2 Phyrexian Revoker|MBS
+2 Shrine of Loyal Legions|NPH
+4 Kor Firewalker|WWK
+2 Leonin Relic-Warder|MBS
+3 Act of Aggression|NPH
+2 Revoke Existence|SOM

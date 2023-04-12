@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Grillo Maggio
+Title=The Forgotten
+Difficulty=very hard
+Description=Jeskai Control by Grillo Maggio
+Icon=The Forgotten.jpg
+Deck Type=constructed
+
+[main]
+1 Saw It Coming
+2 Spikefield Hazard
+2 Galvanic Iteration
+2 Emeria's Call
+3 Memory Deluge
+3 Sea Gate Restoration
+4 Expressive Iteration
+4 Fading Hope
+4 Divide by Zero
+4 Alrund's Epiphany
+4 Doomskar
+4 Sunset Revelry
+1 Lier, Disciple of the Drowned
+2 Hullbreaker Horror
+1 Mountain
+1 Plains
+2 Needleverge Pathway
+2 Sundown Pass
+2 Island
+3 Hengegate Pathway
+3 Riverglide Pathway
+3 Deserted Beach
+3 Stormcarved Coast
+
+[sideboard]
+3 Burning Hands
+3 Test of Talents
+2 Teachings of the Archaics
+2 Mascot Exhibition
+2 Environmental Sciences
+2 Portable Hole
+1 Reduce to Memory

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Azorius Soldier by Radek Kaczmarczyk
+Title=Odysseus
+Difficulty=very hard
+Description=Azorius Soldier by Radek Kaczmarczyk
+Icon=Odysseus.jpg
+Deck Type=constructed
+
+[main]
+2 Dennick, Pious Apprentice
+3 Harbin, Vanguard Aviator
+3 Zephyr Sentinel
+3 Siege Veteran
+3 Skrelv, Defector Mite
+4 Skystrike Officer
+4 Thalia, Guardian of Thraben
+4 Recruitment Officer
+4 Valiant Veteran
+4 Resolute Reinforcements
+1 Destroy Evil
+1 Plains
+1 Otawara, Soaring City
+2 Eiganjo, Seat of the Empire
+2 Mishra's Foundry
+3 Deserted Beach
+4 Fortified Beachhead
+4 Adarkar Wastes
+4 Seachrome Coast
+4 Secluded Courtyard
+
+[sideboard]
+2 Destroy Evil
+2 Circle of Confinement
+2 Dorothea, Vengeful Victim
+2 Spell Pierce
+3 Loran of the Third Path
+4 Wedding Announcement

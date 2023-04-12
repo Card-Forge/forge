@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Kasper Nielsen
+Title=alablood
+Difficulty=very hard
+Description=Boros Aggro by Kasper Nielsen
+Icon=alablood.jpg
+Deck Type=constructed
+
+[main]
+3 Conclave Tribunal
+3 Legion's Landing|XLN
+4 History of Benalia
+4 Heroic Reinforcements
+2 Aurelia, Exemplar of Justice
+2 Skymarcher Aspirant
+2 Healer's Hawk
+4 Dauntless Bodyguard
+4 Benalish Marshal
+4 Knight of Grace
+4 Adanto Vanguard|XLN
+1 Boros Guildgate
+1 Mountain
+4 Clifftop Retreat
+4 Sacred Foundry
+14 Plains
+
+[sideboard]
+1 Tajic, Legion's Edge
+1 Lyra Dawnbringer
+2 Ajani, Adversary of Tyrants
+1 Experimental Frenzy
+1 Banefire
+1 Lava Coil
+2 Baffling End
+2 Citywide Bust
+4 Tocatli Honor Guard|XLN

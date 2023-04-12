@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Joel Larsson
+Title=Lief
+Difficulty=very hard
+Description=Caw-Blade by Joel Larsson
+Icon=Lief.jpg
+Deck Type=constructed
+
+[main]
+1 Emeria Angel|ZEN
+1 Phantasmal Image|M12
+4 Squadron Hawk|M11
+2 Sun Titan|M12
+2 Gideon Jura|M12
+3 Jace Beleren|M11
+2 Day of Judgment|M12
+2 Dismember|NPH
+2 Into the Roil|ZEN
+4 Mana Leak|M12
+2 Mental Misstep|NPH
+2 Oblivion Ring|M12
+4 Preordain|M11
+1 Psychic Barrier|NPH
+1 Sword of Feast and Famine|MBS
+1 Timely Reinforcements|M12
+4 Celestial Colonnade|WWK
+3 Glacial Fortress|M12
+5 Island|M12
+1 Marsh Flats|ZEN
+1 Misty Rainforest|ZEN
+3 Plains|M12
+1 Scalding Tarn|ZEN
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+
+[sideboard]
+1 Day of Judgment|M12
+2 Dismember|NPH
+1 Mental Misstep|NPH
+3 Timely Reinforcements|M12
+2 Azure Mage|M12
+1 Deprive|ROE
+4 Flashfreeze|M12
+1 Jace's Ingenuity|M11

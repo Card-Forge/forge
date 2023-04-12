@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Red Midrange by Benjamin Weitz
+Title=The Tabernacle at Pendrell Vale
+Difficulty=very hard
+Description=Mono Red Midrange by Benjamin Weitz
+Icon=The Tabernacle at Pendrell Vale.jpg
+Deck Type=constructed
+
+[main]
+2 Goblin Cratermaker
+4 Dire Fleet Daredevil
+4 Goblin Chainwhirler
+3 Legion Warboss
+4 Rekindling Phoenix
+4 Siege-Gang Commander
+4 Lava Coil
+3 Banefire
+2 Shock
+2 Shivan Fire
+3 Treasure Map|XLN
+24 Mountain
+1 Arch of Orazca
+
+[sideboard]
+1 Goblin Cratermaker
+1 Legion Warboss
+1 Shivan Fire
+2 Karn, Scion of Urza
+1 Experimental Frenzy
+3 Fight with Fire
+2 Sorcerous Spyglass|XLN
+2 Fiery Cannonade|XLN
+2 Star of Extinction|XLN

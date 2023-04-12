@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Threshold-Geddon by John Balla
+Title=Sorin
+Difficulty=very hard
+Description=Threshold-Geddon by John Balla
+Icon=Sorin.jpg
+Deck Type=constructed
+
+[main]
+4 Land Grant|MM
+3 Incinerate|IA
+4 Call of the Herd|OD
+4 Armageddon|A
+4 Wild Mongrel|OD
+4 Werebear|OD
+4 Mystic Enforcer|OD
+4 Wasteland|TE
+3 Treetop Village|UL
+4 Taiga|A
+4 Savannah|A
+3 Plateau|A
+4 Urza's Bauble|IA
+3 Tithe|VI
+4 Swords to Plowshares|A
+4 Seal of Cleansing|NE
+
+[sideboard]
+3 Wax // Wane|IN
+4 Pyroblast|IA
+4 Phyrexian Furnace|WL
+4 Choke|TE

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=UR Exarch Twin by Lucas Mercader
+Title=Equilibrium
+Difficulty=very hard
+Description=UR Exarch Twin by Lucas Mercader
+Icon=Equilibrium.jpg
+Deck Type=constructed
+
+[main]
+4 Deceiver Exarch|NPH
+4 Dispel|WWK
+4 Into the Roil|ZEN
+3 Mana Leak|M12
+1 Twisted Image|SOM
+4 Gitaxian Probe|NPH
+4 Ponder|M12
+4 Preordain|M11
+2 See Beyond|ROE
+3 Shrine of Piercing Vision|NPH
+4 Splinter Twin|ROE
+1 Arid Mesa|ZEN
+2 Halimar Depths|WWK
+8 Island|M12
+3 Misty Rainforest|ZEN
+5 Mountain|M12
+4 Scalding Tarn|ZEN
+
+[sideboard]
+1 Mana Leak|M12
+2 Azure Mage|M12
+2 Combust|M12
+3 Mental Misstep|NPH
+2 Mutagenic Growth|NPH
+1 Shatter|SOM
+4 Pyroclasm|M11

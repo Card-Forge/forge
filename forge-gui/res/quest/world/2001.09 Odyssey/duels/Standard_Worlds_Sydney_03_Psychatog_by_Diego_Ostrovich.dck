@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Psychatog by Diego Ostrovich
+Title=The Shade
+Difficulty=very hard
+Description=Psychatog by Diego Ostrovich
+Icon=The Shade.jpg
+Deck Type=constructed
+
+[main]
+4 Chainer's Edict|TO
+2 Upheaval|OD
+2 Deep Analysis|TO
+3 Fact or Fiction|IN
+3 Repulse|IN
+3 Cunning Wish|JU
+3 Circular Logic|TO
+4 Counterspell|7E
+4 Force Spike|7E
+4 Nightscape Familiar|PS
+4 Psychatog|OD
+1 Cephalid Coliseum|OD
+2 Darkwater Catacombs|OD
+3 Swamp|OD
+4 Salt Marsh|IN
+4 Underground River|7E
+10 Island|OD
+
+[sideboard]
+3 Duress|7E
+1 Teferi's Response|IN
+1 Slay|PS
+1 Psychotic Haze|TO
+2 Probe|IN
+1 Opportunity|7E
+1 Mana Short|7E
+1 Hibernation|7E
+3 Ghastly Demise|OD
+1 Fact or Fiction|IN

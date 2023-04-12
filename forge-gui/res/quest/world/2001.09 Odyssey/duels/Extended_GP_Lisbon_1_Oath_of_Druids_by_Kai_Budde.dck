@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Oath of Druids by Kai Budde
+Title=Thelon
+Difficulty=very hard
+Description=Oath of Druids by Kai Budde
+Icon=Thelon.jpg
+Deck Type=constructed
+
+[main]
+1 Morphling|US
+1 Spike Weaver|EX
+1 Spike Feeder|SH
+2 Gaea's Blessing|WL
+4 Brainstorm|IA
+4 Impulse|VI
+4 Counterspell|A
+4 Force of Will|AL
+4 Swords to Plowshares|A
+1 Forbid|EX
+3 Powder Keg|UD
+4 Oath of Druids|EX
+4 Tundra|A
+4 Tropical Island|A
+4 Flood Plain|MI
+4 Volcanic Island|B
+1 Adarkar Wastes|IA
+1 Savannah|A
+2 Treetop Village|UL
+4 Wasteland|TE
+3 Fact or Fiction|IN
+
+[sideboard]
+1 Powder Keg|UD
+3 Pyroblast|IA
+3 Hydroblast|IA
+4 Call of the Herd|OD
+2 Aura Blast|PS
+2 Samite Ministration|IN

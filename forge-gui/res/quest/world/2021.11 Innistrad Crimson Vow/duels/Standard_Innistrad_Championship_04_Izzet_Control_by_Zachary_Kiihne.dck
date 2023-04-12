@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Izzet Control by Zachary Kiihne
+Title=Room-Grn
+Difficulty=very hard
+Description=Izzet Control by Zachary Kiihne
+Icon=Room-Grn.jpg
+Deck Type=constructed
+
+[main]
+1 The Celestus
+1 Thirst for Discovery
+2 Behold the Multiverse
+2 Demon Bolt
+2 Cinderclasm
+3 Fading Hope
+3 Jwari Disruption
+4 Spikefield Hazard
+4 Divide by Zero
+4 Unexpected Windfall
+4 Galvanic Iteration
+1 Burn Down the House
+3 Expressive Iteration
+4 Alrund's Epiphany
+1 Field of Ruin
+2 Hall of Storm Giants
+4 Island
+4 Riverglide Pathway
+4 Stormcarved Coast
+7 Mountain
+
+[sideboard]
+1 Cinderclasm
+1 Fading Hope
+1 Malevolent Hermit
+1 Environmental Sciences
+1 Mascot Exhibition
+1 Saw It Coming
+1 Teachings of the Archaics
+1 Burning Hands
+2 Test of Talents
+2 Goldspan Dragon
+3 Smoldering Egg

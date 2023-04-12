@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Sultai Midrange by Joshua Vitullo
+Title=Wolverine
+Difficulty=very hard
+Description=Sultai Midrange by Joshua Vitullo
+Icon=Wolverine.jpg
+Deck Type=constructed
+
+[main]
+2 Liliana, Death's Majesty|AKH
+4 Glint-Sleeve Siphoner|AER
+4 Gifted Aetherborn|AER
+3 Kitesail Freebooter|XLN
+3 Champion of Wits|HOU
+2 Ravenous Chupacabra
+2 The Scarab God|HOU
+2 Muldrotha, the Gravetide
+2 Walking Ballista|AER
+1 Doomfall|HOU
+4 Fatal Push|AER
+1 Cast Down
+4 Vraska's Contempt|XLN
+4 Aether Hub|KLD
+4 Fetid Pools|AKH
+4 Drowned Catacomb|XLN
+4 Woodland Cemetery
+1 Field of Ruin|XLN
+1 Ifnir Deadlands|HOU
+5 Swamp
+1 Island
+1 Forest
+1 Vraska, Relic Seeker|XLN
+
+[sideboard]
+1 Walking Ballista|AER
+3 Knight of Malice
+3 Negate
+2 Duress|XLN
+2 Essence Extraction|KLD
+2 Sorcerous Spyglass|XLN
+1 Hostage Taker|XLN
+1 Deadeye Tracker|XLN

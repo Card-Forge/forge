@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Grixis Control by Shota Yasooka
+Title=Homer Simpson
+Difficulty=very hard
+Description=Grixis Control by Shota Yasooka
+Icon=Homer Simpson.jpg
+Deck Type=constructed
+
+[main]
+3 Doom Whisperer
+3 Nicol Bolas, the Ravager
+3 Thought Erasure
+1 Golden Demise
+2 Ritual of Soot
+1 Beacon Bolt
+2 Sinister Sabotage
+2 Cast Down
+2 Chemister's Insight
+4 Moment of Craving
+2 Vraska's Contempt|XLN
+2 Syncopate
+2 Blink of an Eye
+1 Negate
+1 The Eldest Reborn
+2 Disinformation Campaign
+1 Search for Azcanta|XLN
+1 Island
+4 Sulfur Falls
+4 Steam Vents
+4 Drowned Catacomb|XLN
+4 Watery Grave
+5 Swamp
+4 Dragonskull Summit|XLN
+
+[sideboard]
+1 Thought Erasure
+2 Golden Demise
+1 Cast Down
+1 Vraska's Contempt|XLN
+1 The Eldest Reborn
+1 Disinformation Campaign
+2 Disdainful Stroke
+2 Duress
+3 Thief of Sanity
+1 Ral, Izzet Viceroy

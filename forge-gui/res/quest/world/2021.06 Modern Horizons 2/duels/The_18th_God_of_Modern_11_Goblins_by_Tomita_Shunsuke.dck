@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Goblins by Tomita Shunsuke
+Title=Ninithili
+Difficulty=very hard
+Description=Goblins by Tomita Shunsuke
+Icon=Ninithili.jpg
+Deck Type=constructed
+
+[main]
+1 Krenko, Mob Boss|M13
+1 Goblin Cratermaker
+1 Kiki-Jiki, Mirror Breaker|CHK
+1 Mogg Fanatic|10E
+1 Sling-Gang Lieutenant
+1 Legion Warboss
+2 Mogg War Marshal|TSP
+2 Goblin Chieftain|M12
+3 Goblin Ringleader
+3 Boggart Harbinger|LRW
+3 Goblin Matron|7E
+4 Munitions Expert
+4 Conspicuous Snoop
+4 Ignoble Hierarch
+4 Aether Vial|DS
+1 Tarfire|LRW
+2 Blood Moon|9E
+1 Stomping Ground
+1 Swamp
+2 Blood Crypt
+3 Wooded Foothills|KTK
+3 Castle Embereth
+4 Cavern of Souls|AVR
+4 Bloodstained Mire|KTK
+4 Mountain
+
+[sideboard]
+1 Sling-Gang Lieutenant
+1 Boggart Harbinger|LRW
+1 Chalice of the Void|MR
+1 Alpine Moon
+1 Goblin Trashmaster
+2 Fury
+2 Legion's End
+2 Leyline of the Void
+2 Flame Blitz
+2 Tin Street Hooligan|GP

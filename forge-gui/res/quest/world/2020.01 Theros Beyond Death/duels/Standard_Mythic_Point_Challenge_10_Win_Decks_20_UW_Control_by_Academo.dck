@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=UW Control by Academo
+Title=Kyouko Kasodani
+Difficulty=very hard
+Description=UW Control by Academo
+Icon=Kyouko Kasodani.jpg
+Deck Type=constructed
+
+[main]
+7 Island
+4 Castle Ardenvale
+4 Hallowed Fountain
+4 Temple of Enlightenment
+3 Plains
+1 Field of Ruin
+1 Castle Vantress
+1 Fabled Passage
+4 Teferi, Time Raveler
+1 Glass Casket
+3 Dream Trawler
+2 Narset, Parter of Veils
+2 Mystical Dispute
+2 Dovin's Veto
+3 Absorb
+3 Thirst for Meaning
+4 Aether Gust
+2 Shatter the Sky
+2 The Birth of Meletis
+3 Elspeth Conquers Death
+4 Omen of the Sea
+
+[sideboard]
+3 Deputy of Detention
+2 Cerulean Drake
+2 Archon of Sun's Grace
+2 Devout Decree
+1 Spectral Sailor
+2 Glass Casket
+2 Narset, Parter of Veils
+1 Mystical Dispute

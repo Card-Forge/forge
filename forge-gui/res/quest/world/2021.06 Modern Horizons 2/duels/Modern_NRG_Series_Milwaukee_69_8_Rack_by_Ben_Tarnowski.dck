@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=8 Rack by Ben Tarnowski
+Title=Sanctuary
+Difficulty=very hard
+Description=8 Rack by Ben Tarnowski
+Icon=Sanctuary.jpg
+Deck Type=constructed
+
+[main]
+4 The Rack|TSP
+2 Funeral Charm|TSP
+4 Fatal Push|AER
+2 Bloodchief's Thirst
+4 Smallpox|M12
+4 Raven's Crime|EVE
+4 Thoughtseize|THS
+4 Inquisition of Kozilek|ROE
+4 Delirium Skeins|DIS
+4 Urza's Saga
+4 Liliana of the Veil|ISD
+1 Castle Locthwain
+1 Marsh Flats|ZEN
+3 Polluted Delta|KTK
+4 Mishra's Factory|4E
+4 Urborg, Tomb of Yawgmoth|M15
+7 Swamp
+
+[sideboard]
+1 Soul-Guide Lantern
+3 Tourach, Dread Cantor
+3 Collective Brutality|EMN
+4 Dauthi Voidwalker
+4 Leyline of the Void

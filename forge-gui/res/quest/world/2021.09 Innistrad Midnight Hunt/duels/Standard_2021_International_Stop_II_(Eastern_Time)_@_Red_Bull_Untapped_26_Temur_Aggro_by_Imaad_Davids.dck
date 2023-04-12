@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Temur Aggro by Imaad Davids
+Title=Regigigas
+Difficulty=very hard
+Description=Temur Aggro by Imaad Davids
+Icon=Regigigas.jpg
+Deck Type=constructed
+
+[main]
+1 Disdainful Stroke
+2 Wrenn and Seven
+2 Demon Bolt
+2 Dragon's Fire
+3 Shatterskull Smashing
+4 Esika's Chariot
+4 Alrund's Epiphany
+3 Briarbridge Tracker
+4 Prosperous Innkeeper
+4 Magda, Brazen Outlaw
+4 Goldspan Dragon
+4 Jaspera Sentinel
+1 Island
+1 Forest
+1 Mountain
+2 Den of the Bugbear
+2 Lair of the Hydra
+4 Cragcrown Pathway
+4 Barkchannel Pathway
+4 Riverglide Pathway
+4 Rockfall Vale
+
+[sideboard]
+3 Burning Hands
+2 Ranger Class
+2 Quandrix Command
+2 Test of Talents
+2 Toski, Bearer of Secrets
+2 Negate
+1 Koma, Cosmos Serpent
+1 Disdainful Stroke

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Ub Midrange by Ryo Moriya
+Title=Erebos
+Difficulty=very hard
+Description=Ub Midrange by Ryo Moriya
+Icon=Erebos.jpg
+Deck Type=constructed
+
+[main]
+1 Doomfall|HOU
+2 Walk the Plank|XLN
+2 Essence Scatter|AKH
+2 Liliana, Death's Majesty|AKH
+3 Vraska's Contempt|XLN
+4 Chart a Course|XLN
+4 Fatal Push|AER
+1 Noxious Gearhulk|KLD
+1 Hostage Taker|XLN
+1 Torrential Gearhulk|KLD
+2 The Scarab God|HOU
+2 Gonti, Lord of Luxury|KLD
+3 Glint-Sleeve Siphoner|AER
+3 Champion of Wits|HOU
+4 Gifted Aetherborn|AER
+1 Field of Ruin|XLN
+4 Fetid Pools|AKH
+4 Drowned Catacomb|XLN
+4 Aether Hub|KLD
+4 Island|XLN
+8 Swamp|XLN
+
+[sideboard]
+2 Negate|AER
+1 Lost Legacy|KLD
+3 Essence Extraction|KLD
+4 Duress|XLN
+1 Dispossess|AKH
+1 Demon of Dark Schemes|KLD
+1 Doomfall|HOU
+1 Vraska's Contempt|XLN
+1 Hostage Taker|XLN

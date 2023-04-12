@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Esper Control by Eliott dragon
+Title=Kane
+Difficulty=very hard
+Description=Esper Control by Eliott dragon
+Icon=Kane.jpg
+Deck Type=constructed
+
+[main]
+1 Sunset Revelry
+1 Lolth, Spider Queen
+1 Sorin the Mirthless
+1 Negate
+2 Vanishing Verse
+2 March of Wretched Sorrow
+2 Teferi, Who Slows the Sunset
+2 Niko Aris
+3 Doomskar
+4 March of Otherworldly Light
+4 Farewell
+4 The Wandering Emperor
+4 Kaito Shizuki
+1 Kotose, the Silent Spider
+1 Takenuma, Abandoned Mire
+1 Plains
+2 Eiganjo, Seat of the Empire
+4 Shipwreck Marsh
+4 Clearwater Pathway
+4 Shattered Sanctum
+4 Brightclimb Pathway
+4 Hengegate Pathway
+4 Deserted Beach
+
+[sideboard]
+4 Duress
+2 Life of Toshiro Umezawa
+1 Edgar, Charmed Groom
+1 Disdainful Stroke
+1 Siphon Insight
+1 Sorin the Mirthless
+2 Negate
+1 Doomskar
+2 Kotose, the Silent Spider

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Hammertime by Pinto Antonio
+Title=Gollum
+Difficulty=very hard
+Description=Hammertime by Pinto Antonio
+Icon=Gollum.jpg
+Deck Type=constructed
+
+[main]
+4 Stoneforge Mystic|WWK
+4 Puresteel Paladin|NPH
+4 Ornithopter|AER
+4 Memnite|SOM
+4 Esper Sentinel
+3 Dark Confidant|RAV
+3 Thoughtseize|THS
+4 Sigarda's Aid|EMN
+4 Springleaf Drum|BNG
+4 Colossus Hammer
+1 Shadowspear
+4 Urza's Saga
+4 Silent Clearing
+4 Concealed Courtyard|KLD
+3 Plains
+3 Inkmoth Nexus|MBS
+2 Marsh Flats|ZEN
+1 Godless Shrine
+
+[sideboard]
+1 Thoughtseize|THS
+2 Sanctifier en-Vec
+2 Prismatic Ending
+2 Knight of Malice
+2 Hushbringer
+1 Seal of Cleansing|NE
+1 Pithing Needle
+1 Nihil Spellbomb|SOM
+1 Lurrus of the Dream-Den
+1 Duress
+1 Drannith Magistrate

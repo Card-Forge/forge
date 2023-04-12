@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Rakdos Anvil by Julian Jakobovits
+Title=Big Rock
+Difficulty=very hard
+Description=Rakdos Anvil by Julian Jakobovits
+Icon=Big Rock.jpg
+Deck Type=constructed
+
+[main]
+3 Liliana of the Veil
+3 Ob Nixilis, the Adversary
+3 Invoke Despair
+3 Go for the Throat
+4 Cut Down
+4 Oni-Cult Anvil
+4 Mishra's Research Desk
+4 Fable of the Mirror-Breaker
+3 Razorlash Transmogrant
+4 Bloodtithe Harvester
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+2 Mountain
+4 Sulfurous Springs
+4 Haunted Ridge
+4 Blackcleave Cliffs
+9 Swamp
+
+[sideboard]
+4 Duress
+1 Obliterating Bolt
+2 Soul Transfer
+2 Sorin the Mirthless
+3 Sheoldred, the Apocalypse
+2 Vampires' Vengeance
+1 Invoke Despair

@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Fumiaki Satou
+Title=StAnastacia
+Difficulty=very hard
+Description=Red Deck Wins by Fumiaki Satou
+Icon=StAnastacia.jpg
+Deck Type=constructed
+
+[main]
+3 Feldon, Ronom Excavator
+4 Monastery Swiftspear
+4 Phoenix Chick
+4 Bloodthirsty Adversary
+4 Kumano Faces Kakkazan
+4 Play with Fire
+4 Lightning Strike
+4 End the Festivities
+4 Mechanized Warfare
+3 Chandra, Dressed to Kill
+1 Sokenzan, Crucible of Defiance
+4 Mishra's Foundry
+17 Mountain
+
+[sideboard]
+2 Unlicensed Hearse
+3 Rebel Salvo
+3 Jaya, Fiery Negotiator
+3 Abrade
+4 Obliterating Bolt

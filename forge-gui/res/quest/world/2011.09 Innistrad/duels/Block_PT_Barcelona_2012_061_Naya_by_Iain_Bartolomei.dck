@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Naya by Iain Bartolomei
+Title=Serra's Legacy
+Difficulty=very hard
+Description=Naya by Iain Bartolomei
+Icon=Serra's Legacy.jpg
+Deck Type=constructed
+
+[main]
+3 Cavern of Souls|AVR
+4 Clifftop Retreat
+2 Evolving Wilds
+7 Forest|RTR
+2 Kessig Wolf Run|ISD
+3 Mountain|RTR
+2 Plains|RTR
+4 Avacyn's Pilgrim|ISD
+3 Borderland Ranger|AVR
+3 Daybreak Ranger|ISD
+2 Fiend Hunter|C13
+4 Huntmaster of the Fells|DKA
+3 Restoration Angel|AVR
+4 Scorned Villager|DKA
+3 Sigarda, Host of Herons|AVR
+3 Wolfir Silverheart|AVR
+2 Bonfire of the Damned|AVR
+4 Brimstone Volley|CNS
+1 Burning Oil|DKA
+1 Devil's Play|ISD
+
+[sideboard]
+1 Fiend Hunter|C13
+1 Sigarda, Host of Herons|AVR
+1 Bonfire of the Damned|AVR
+2 Grafdigger's Cage|DKA
+2 Heretic's Punishment|ISD
+2 Purify the Grave|ISD
+2 Slayer of the Wicked|ISD
+4 Tree of Redemption|ISD

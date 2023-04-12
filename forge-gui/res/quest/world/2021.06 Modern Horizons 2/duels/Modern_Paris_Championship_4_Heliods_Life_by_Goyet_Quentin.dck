@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Heliods Life by Goyet Quentin
+Title=Black & Blue Midrange
+Difficulty=very hard
+Description=Heliods Life by Goyet Quentin
+Icon=Black & Blue Midrange.jpg
+Deck Type=constructed
+
+[main]
+3 Eladamri's Call|PS
+4 Collected Company|DTK
+1 Lurrus of the Dream-Den
+1 Caustic Caterpillar|ORI
+1 Walking Ballista|AER
+2 Voice of Resurgence|DGM
+3 Eternal Witness|FD
+3 Giver of Runes
+4 Heliod, Sun-Crowned
+4 Noble Hierarch|CFX
+4 Ranger-Captain of Eos
+4 Spike Feeder|TSP
+4 Charming Prince
+1 Wooded Foothills|KTK
+2 Wooded Bastion|SHM
+2 Horizon Canopy|FUT
+3 Windswept Heath|KTK
+3 Forest
+3 Plains
+4 Field of Ruin
+4 Temple Garden
+
+[sideboard]
+4 Veil of Summer
+1 Phyrexian Revoker|M15
+4 Knight of Autumn
+1 Gaddock Teeg|LRW
+3 Endurance
+1 Collector Ouphe
+1 Archon of Emeria

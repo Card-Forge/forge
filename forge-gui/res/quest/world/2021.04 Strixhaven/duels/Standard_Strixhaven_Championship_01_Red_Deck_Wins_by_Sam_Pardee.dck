@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Sam Pardee
+Title=Lady Orca
+Difficulty=very hard
+Description=Red Deck Wins by Sam Pardee
+Icon=Lady Orca.jpg
+Deck Type=constructed
+
+[main]
+1 Phoenix of Ash
+1 Fireblade Charger
+2 Torbran, Thane of Red Fell
+4 Anax, Hardened in the Forge
+4 Bonecrusher Giant
+4 Rimrock Knight
+4 Robber of the Rich
+4 Hall Monitor
+4 Fervent Champion
+4 Embercleave
+3 Frost Bite
+1 The Akroan War
+1 Castle Embereth
+4 Faceless Haven
+19 Snow-Covered Mountain
+
+[sideboard]
+1 Phoenix of Ash
+1 Frost Bite
+2 The Akroan War
+2 Ox of Agonas
+2 Roiling Vortex
+3 Scorching Dragonfire
+4 Redcap Melee

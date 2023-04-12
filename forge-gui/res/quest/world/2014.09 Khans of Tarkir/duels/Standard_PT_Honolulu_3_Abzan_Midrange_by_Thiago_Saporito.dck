@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Thiago Saporito
+Title=Ajok
+Difficulty=very hard
+Description=Abzan Midrange by Thiago Saporito
+Icon=Ajok.jpg
+Deck Type=constructed
+
+[main]
+2 Sorin, Solemn Visitor|KTK
+4 Sandsteppe Citadel|KTK
+4 Windswept Heath|KTK
+1 Thoughtseize|THS
+4 Hero's Downfall|THS
+2 Bile Blight|BNG
+3 Abzan Charm|KTK
+1 Whip of Erebos|THS
+1 Temple of Malady|JOU
+4 Temple of Silence|THS
+1 Temple of Plenty|BNG
+4 Llanowar Wastes|M15
+1 Drown in Sorrow|BNG
+4 Wingmate Roc|KTK
+4 Siege Rhino|KTK
+1 Anafenza, the Foremost|KTK
+4 Courser of Kruphix|BNG
+4 Sylvan Caryatid|THS
+4 Fleecemane Lion|THS
+2 Plains|KTK
+2 Forest|KTK
+1 Swamp|KTK
+1 Urborg, Tomb of Yawgmoth|M15
+1 Mana Confluence|JOU
+
+[sideboard]
+3 Thoughtseize|THS
+1 Anafenza, the Foremost|KTK
+1 Utter End|KTK
+1 Erase|KTK
+1 Agent of Erebos|JOU
+4 End Hostilities|KTK
+1 Stain the Mind|M15
+2 Elspeth, Sun's Champion|THS
+1 Back to Nature|M15

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Bushwacker Zoo by Peter Rebizant
+Title=Secret Squirrel
+Difficulty=very hard
+Description=Bushwacker Zoo by Peter Rebizant
+Icon=Secret Squirrel.jpg
+Deck Type=constructed
+
+[main]
+4 Reckless Bushwhacker|OGW
+4 Territorial Kavu
+4 Lightning Bolt|M11
+4 Arid Mesa|ZEN
+1 Blood Crypt
+1 Breeding Pool
+1 Forest
+1 Mountain
+1 Sacred Foundry
+1 Stomping Ground
+1 Temple Garden
+4 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+4 Burning-Tree Emissary|GTC
+4 Experiment One|GTC
+4 Goblin Guide|ZEN
+4 Narnam Renegade|AER
+1 Ragavan, Nimble Pilferer
+4 Wild Nacatl|ALA
+4 Atarka's Command|DTK
+4 Tribal Flames|TSP
+
+[sideboard]
+2 Boros Charm|GTC
+2 Collector Ouphe
+1 Gaddock Teeg|LRW
+1 Ghor-Clan Rampager|GTC
+1 Grafdigger's Cage
+2 Path to Exile|CFX
+1 Prismatic Ending
+2 Scavenging Ooze
+1 Void Mirror
+2 Destructive Revelry|THS

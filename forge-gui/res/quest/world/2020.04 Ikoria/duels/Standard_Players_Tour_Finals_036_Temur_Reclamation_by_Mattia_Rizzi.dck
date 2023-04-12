@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Mattia Rizzi
+Title=IsaBere
+Difficulty=very hard
+Description=Temur Reclamation by Mattia Rizzi
+Icon=IsaBere.jpg
+Deck Type=constructed
+
+[main]
+2 Brazen Borrower
+2 Nightpack Ambusher
+2 Uro, Titan of Nature's Wrath
+4 Breeding Pool
+4 Ketria Triome
+4 Fabled Passage
+3 Stomping Ground
+3 Castle Vantress
+3 Steam Vents
+2 Blast Zone
+2 Forest
+2 Island
+1 Temple of Mystery
+1 Mountain
+4 Wilderness Reclamation
+4 Shark Typhoon
+4 Growth Spiral
+4 Expansion // Explosion
+4 Mystical Dispute
+3 Negate
+2 Aether Gust
+
+[sideboard]
+1 Uro, Titan of Nature's Wrath
+1 Storm's Wrath
+1 Commence the Endgame
+1 Narset's Reversal
+1 Flame Sweep
+2 Scorching Dragonfire
+2 Mazemind Tome
+2 Bonecrusher Giant
+3 Elder Gargaroth
+1 Negate

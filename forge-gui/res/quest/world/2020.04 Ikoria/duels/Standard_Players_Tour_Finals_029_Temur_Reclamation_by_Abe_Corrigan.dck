@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Abe Corrigan
+Title=Tusk Guardian
+Difficulty=very hard
+Description=Temur Reclamation by Abe Corrigan
+Icon=Tusk Guardian.jpg
+Deck Type=constructed
+
+[main]
+4 Raugrin Triome
+4 Ketria Triome
+4 Temple Garden
+3 Hallowed Fountain
+3 Breeding Pool
+2 Castle Vantress
+2 Island
+1 Plains
+1 Mountain
+1 Forest
+1 Blast Zone
+4 Teferi, Time Raveler
+4 Wilderness Reclamation
+4 Shark Typhoon
+4 Expansion // Explosion
+4 Growth Spiral
+4 Mystical Dispute
+2 Dovin's Veto
+1 Brazen Borrower
+2 Uro, Titan of Nature's Wrath
+1 Aether Gust
+4 Fabled Passage
+
+[sideboard]
+1 Dovin's Veto
+1 Uro, Titan of Nature's Wrath
+1 Chemister's Insight
+2 Jolrael, Mwonvuli Recluse
+2 Spectral Sailor
+2 Kenrith, the Returned King
+3 Glass Casket
+3 Solar Blaze

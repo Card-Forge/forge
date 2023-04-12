@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Burning Tog by Victor van den Broek
+Title=The Kithkin
+Difficulty=very hard
+Description=Burning Tog by Victor van den Broek
+Icon=The Kithkin.jpg
+Deck Type=constructed
+
+[main]
+2 Darkwater Catacombs|OD
+9 Island|OD
+2 Salt Marsh|IN
+4 Shivan Reef|AP
+2 Sulfurous Springs|7E
+1 Underground River|7E
+4 Urborg Volcano|IN
+4 Flametongue Kavu|PS
+4 Nightscape Familiar|PS
+3 Psychatog|OD
+3 Circular Logic|TO
+2 Counterspell|7E
+3 Cunning Wish|JU
+2 Deep Analysis|TO
+3 Fact or Fiction|IN
+3 Fire // Ice|AP
+4 Memory Lapse|7E
+3 Repulse|IN
+2 Upheaval|OD
+
+[sideboard]
+2 Deep Analysis|TO
+1 Fact or Fiction|IN
+1 Fire // Ice|AP
+1 Aura Graft|OD
+1 Coffin Purge|OD
+1 Divert|OD
+2 Duress|7E
+1 Exclude|IN
+1 Gainsay|PS
+1 Hibernation|7E
+1 Mana Short|7E
+1 Teferi's Response|IN
+1 Terminate|PS

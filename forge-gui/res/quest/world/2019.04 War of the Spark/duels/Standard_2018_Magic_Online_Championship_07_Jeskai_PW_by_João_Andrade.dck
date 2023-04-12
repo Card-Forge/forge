@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jeskai PW by João Andrade
+Title=The Tabernacle at Pendrell Vale
+Difficulty=very hard
+Description=Jeskai PW by João Andrade
+Icon=The Tabernacle at Pendrell Vale.jpg
+Deck Type=constructed
+
+[main]
+2 Mox Amber
+2 Shock
+2 Lava Coil
+2 Dovin, Hand of Control
+2 Gideon Blackblade
+3 Deafening Clarion
+3 Kasmina, Enigmatic Mentor
+3 Spell Pierce|XLN
+4 Sarkhan the Masterless
+4 Narset, Parter of Veils
+4 Teferi, Time Raveler
+4 Fblthp, the Lost
+1 Island
+1 Sulfur Falls
+3 Clifftop Retreat
+4 Steam Vents
+4 Interplanar Beacon
+4 Glacial Fortress|XLN
+4 Sacred Foundry
+4 Hallowed Fountain
+
+[sideboard]
+2 Prison Realm
+2 Search for Azcanta|XLN
+2 Lyra Dawnbringer
+2 Dovin's Veto
+2 Sorcerous Spyglass|XLN
+1 Cleansing Nova
+2 Lava Coil
+1 Deafening Clarion
+1 Spell Pierce|XLN

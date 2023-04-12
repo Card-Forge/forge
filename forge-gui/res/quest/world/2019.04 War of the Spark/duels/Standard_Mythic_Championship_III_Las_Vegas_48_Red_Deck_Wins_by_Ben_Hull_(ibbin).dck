@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Ben Hull (ibbin)
+Title=Hapatra, Vizier of Poisons
+Difficulty=very hard
+Description=Red Deck Wins by Ben Hull (ibbin)
+Icon=Hapatra, Vizier of Poisons.jpg
+Deck Type=constructed
+
+[main]
+20 Mountain
+1 Chandra, Fire Artisan
+4 Experimental Frenzy
+4 Light Up the Stage
+3 Wizard's Lightning
+4 Shock
+4 Lightning Strike
+4 Viashino Pyromancer
+4 Runaway Steam-Kin
+4 Goblin Chainwhirler
+4 Ghitu Lavarunner
+4 Fanatical Firebrand
+
+[sideboard]
+3 Tibalt, Rakish Instigator
+1 Rekindling Phoenix
+2 Legion Warboss
+4 Lava Coil
+2 Fight with Fire
+2 Dire Fleet Daredevil
+1 Chandra, Fire Artisan

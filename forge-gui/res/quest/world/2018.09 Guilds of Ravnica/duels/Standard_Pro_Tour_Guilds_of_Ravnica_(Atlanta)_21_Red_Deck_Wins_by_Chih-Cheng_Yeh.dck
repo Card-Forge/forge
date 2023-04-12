@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Chih-Cheng Yeh
+Title=alabraid
+Difficulty=very hard
+Description=Red Deck Wins by Chih-Cheng Yeh
+Icon=alabraid.jpg
+Deck Type=constructed
+
+[main]
+4 Fanatical Firebrand
+4 Ghitu Lavarunner
+4 Goblin Chainwhirler
+2 Rekindling Phoenix
+4 Runaway Steam-Kin
+4 Viashino Pyromancer
+4 Lightning Strike
+4 Shock
+4 Wizard's Lightning
+4 Experimental Frenzy
+22 Mountain
+
+[sideboard]
+2 Banefire
+3 Fiery Cannonade|XLN
+3 Fight with Fire
+3 Lava Coil
+4 Treasure Map|XLN

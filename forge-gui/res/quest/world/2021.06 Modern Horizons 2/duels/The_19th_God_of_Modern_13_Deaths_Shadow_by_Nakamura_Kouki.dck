@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Deaths Shadow by Nakamura Kouki
+Title=Ian the Digester
+Difficulty=very hard
+Description=Deaths Shadow by Nakamura Kouki
+Icon=Ian the Digester.jpg
+Deck Type=constructed
+
+[main]
+2 Kroxa, Titan of Death's Hunger
+4 Death's Shadow|WWK
+4 Dragon's Rage Channeler
+4 Ragavan, Nimble Pilferer
+4 Mishra's Bauble|CS
+1 Kolaghan's Command|DTK
+2 Terminate|ARB
+2 Fatal Push|AER
+3 Drown in the Loch
+4 Unholy Heat
+2 Inquisition of Kozilek|ROE
+4 Thoughtseize|THS
+4 Expressive Iteration
+2 Dress Down
+1 Mountain
+1 Steam Vents
+1 Swamp
+2 Watery Grave
+3 Polluted Delta|KTK
+3 Blood Crypt
+4 Bloodstained Mire|KTK
+4 Scalding Tarn|ZEN
+
+[sideboard]
+2 Kolaghan's Command|DTK
+1 Lurrus of the Dream-Den
+2 Tourach, Dread Cantor
+2 Alpine Moon
+2 Nihil Spellbomb|SOM
+3 Engineered Explosives|FD
+3 Spell Pierce|XLN

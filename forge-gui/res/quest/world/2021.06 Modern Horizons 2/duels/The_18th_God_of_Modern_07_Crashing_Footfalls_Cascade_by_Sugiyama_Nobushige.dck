@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Crashing Footfalls Cascade by Sugiyama Nobushige
+Title=Ghost Council
+Difficulty=very hard
+Description=Crashing Footfalls Cascade by Sugiyama Nobushige
+Icon=Ghost Council.jpg
+Deck Type=constructed
+
+[main]
+3 Bonecrusher Giant
+3 Fury
+4 Brazen Borrower
+4 Shardless Agent
+3 Dead // Gone|PLC
+3 Prismari Command
+4 Fire // Ice|AP
+4 Violent Outburst|ARB
+4 Force of Negation
+4 Crashing Footfalls
+1 Jace, the Mind Sculptor|WWK
+1 Steam Vents
+1 Hinterland Harbor
+1 Ketria Triome
+1 Stomping Ground
+1 Breeding Pool
+1 Waterlogged Grove
+1 Mountain
+1 Forest
+1 Fiery Islet
+2 Island
+2 Gemstone Caverns|TSP
+2 Wooded Foothills|KTK
+4 Misty Rainforest|ZEN
+4 Scalding Tarn|ZEN
+
+[sideboard]
+3 Blood Moon|9E
+4 Endurance
+4 Mystical Dispute
+4 Force of Vigor

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Mardu Control by Keita Kawasaki
+Title=Kasen Ibaraki
+Difficulty=very hard
+Description=Mardu Control by Keita Kawasaki
+Icon=Kasen Ibaraki.jpg
+Deck Type=constructed
+
+[main]
+4 Gideon, Ally of Zendikar|BFZ
+2 Sarkhan, the Dragonspeaker|KTK
+1 Sorin, Solemn Visitor|KTK
+1 Ob Nixilis Reignited|BFZ
+4 Hangarback Walker|ORI
+3 Pia and Kiran Nalaar|ORI
+2 Soulfire Grand Master|FRF
+2 Despise|KTK
+4 Fiery Impulse|ORI
+4 Crackling Doom|KTK
+3 Mardu Charm|KTK
+2 Utter End|KTK
+2 Murderous Cut|KTK
+4 Nomad Outpost|KTK
+4 Shambling Vent|BFZ
+4 Bloodstained Mire|KTK
+2 Wooded Foothills|KTK
+3 Mountain|BFZ
+2 Plains|BFZ
+1 Swamp|BFZ
+1 Smoldering Marsh|BFZ
+1 Canopy Vista|BFZ
+3 Battlefield Forge|ORI
+1 Caves of Koilos|ORI
+
+[sideboard]
+4 Radiant Flames|BFZ
+2 Outpost Siege|FRF
+2 Read the Bones|ORI
+2 Duress|DTK
+3 End Hostilities|KTK
+2 Surge of Righteousness|DTK

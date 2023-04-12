@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=The Claw by Darwin Kastle
+Title=The Serpents
+Difficulty=very hard
+Description=The Claw by Darwin Kastle
+Icon=The Serpents.jpg
+Deck Type=constructed
+
+[main]
+2 Contested Cliffs|C13
+11 Forest|RTR
+8 Mountain|RTR
+4 Wooded Foothills|KTK
+4 Goblin Clearcutter|LE
+4 Imperial Hellkite|LE
+4 Kilnmouth Dragon|LE
+4 Krosan Tusker|C13
+4 Ravenous Baloth|C13
+3 Rorix Bladewing|ONS
+4 Wirewood Elf|ONS
+4 Explosive Vegetation|CN2
+4 Starstorm|C14
+
+[sideboard]
+2 Insurrection|CMD
+4 Naturalize
+4 Shock
+4 Silklash Spider|C14
+1 Slice and Dice|C13

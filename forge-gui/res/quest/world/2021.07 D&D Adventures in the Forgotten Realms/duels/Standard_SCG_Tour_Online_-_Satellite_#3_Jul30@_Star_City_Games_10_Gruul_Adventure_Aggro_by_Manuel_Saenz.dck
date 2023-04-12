@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Gruul Adventure Aggro by Manuel Saenz
+Title=Remilia Scarlet
+Difficulty=very hard
+Description=Gruul Adventure Aggro by Manuel Saenz
+Icon=Remilia Scarlet.jpg
+Deck Type=constructed
+
+[main]
+3 Rimrock Knight
+3 Magda, Brazen Outlaw
+3 Goldspan Dragon
+4 Jaspera Sentinel
+4 Bonecrusher Giant
+4 Lovestruck Beast
+4 Edgewall Innkeeper
+3 Esika's Chariot
+4 Embercleave
+4 Shatterskull Smashing
+3 Ranger Class
+1 Lair of the Hydra
+1 Den of the Bugbear
+4 Cragcrown Pathway
+5 Mountain
+10 Forest
+
+[sideboard]
+1 Thundering Rebuke
+1 Fire Prophecy
+2 Roiling Vortex
+2 Ox of Agonas
+2 Redcap Melee
+2 Klothys, God of Destiny
+2 The Akroan War
+3 Burning Hands

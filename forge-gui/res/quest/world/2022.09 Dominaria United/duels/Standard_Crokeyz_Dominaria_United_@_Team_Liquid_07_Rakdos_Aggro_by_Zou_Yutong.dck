@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Zou Yutong
+Title=Dungeon Crawling Gold
+Difficulty=very hard
+Description=Rakdos Aggro by Zou Yutong
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+
+[main]
+5 Mountain
+4 Sulfurous Springs
+4 Haunted Ridge
+4 Tramway Station
+4 Swamp
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+2 The Meathook Massacre
+2 Soul Transfer
+4 Voltage Surge
+1 Infernal Grasp
+4 Oni-Cult Anvil
+4 Braids, Arisen Nightmare
+4 Voldaren Epicure
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+3 Fell Stinger
+2 Balduvian Atrocity
+2 Sheoldred, the Apocalypse
+1 Virus Beetle
+
+[sideboard]
+3 Duress
+2 Unlicensed Hearse
+2 Abrade
+2 Cut Down
+2 Graveyard Trespasser
+2 Jaya, Fiery Negotiator
+1 The Meathook Massacre
+1 Soul Transfer

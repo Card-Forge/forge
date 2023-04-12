@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Izzet Drakes by Morgan McLaughlin
+Title=Linc
+Difficulty=very hard
+Description=Izzet Drakes by Morgan McLaughlin
+Icon=Linc.jpg
+Deck Type=constructed
+
+[main]
+4 Arclight Phoenix
+2 Goblin Electromancer
+3 Enigma Drake
+3 Crackling Drake
+2 Tormenting Voice
+2 Warlord's Fury
+4 Chart a Course|XLN
+3 Deafening Clarion
+2 Maximize Velocity
+2 Crash Through
+4 Opt
+4 Shock
+2 Discovery // Dispersal
+2 Radical Idea
+1 Blink of an Eye
+3 Glacial Fortress|XLN
+3 Island
+2 Mountain
+4 Sacred Foundry
+4 Sulfur Falls
+4 Steam Vents
+
+[sideboard]
+1 Shivan Fire
+1 Chemister's Insight
+2 Lava Coil
+2 Sarkhan, Fireblood
+2 Niv-Mizzet, Parun
+2 Beacon Bolt
+2 Disdainful Stroke
+1 Invoke the Divine
+1 Spell Pierce|XLN
+1 Dive Down|XLN

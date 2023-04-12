@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=UW Control by Rob Vaca
+Title=Nicol Bolas, the Deceiver
+Difficulty=very hard
+Description=UW Control by Rob Vaca
+Icon=Nicol Bolas, the Deceiver.jpg
+Deck Type=constructed
+
+[main]
+2 Solemn Simulacrum|M12
+2 Consecrated Sphinx|MBS
+4 Wall of Omens|ROE
+2 Dismember|NPH
+1 Into the Roil|ZEN
+4 Mana Leak|M12
+2 Stoic Rebuttal|SOM
+2 Day of Judgment|M12
+4 Preordain|M11
+3 Oblivion Ring|M12
+4 Spreading Seas|ZEN
+5 Island|M12
+4 Plains|M12
+4 Celestial Colonnade|WWK
+4 Glacial Fortress|M12
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+2 Gideon Jura|M12
+1 Karn Liberated|NPH
+2 Venser, the Sojourner|SOM
+
+[sideboard]
+1 Day of Judgment|M12
+1 Linvala, Keeper of Silence|ROE
+2 Celestial Purge|M12
+3 Flashfreeze|M12
+2 Oust|ROE
+3 Timely Reinforcements|M12
+3 Leyline of Sanctity|M11

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Jeskai Mutate by Sam Rolph
+Title=Aspect of Order
+Difficulty=very hard
+Description=Jeskai Mutate by Sam Rolph
+Icon=Aspect of Order.jpg
+Deck Type=constructed
+
+[main]
+4 Lore Drakkis
+4 Goldspan Dragon
+4 Vadrok, Apex of Thunder
+1 Negate
+1 Mystical Dispute
+2 Fire Prophecy
+2 Disdainful Stroke
+3 Cinderclasm
+3 Prismari Command
+4 Spikefield Hazard
+4 Unsubstantiate
+1 Seize the Spoils
+4 Expressive Iteration
+1 Showdown of the Skalds
+1 Fabled Passage
+2 Mountain
+3 Island
+4 Raugrin Triome
+4 Hengegate Pathway
+4 Riverglide Pathway
+4 Needleverge Pathway
+
+[sideboard]
+1 Negate
+2 Mystical Dispute
+1 Showdown of the Skalds
+1 Midnight Clock
+2 Mazemind Tome
+2 Redcap Melee
+2 Burning Hands
+2 Dragon's Fire
+2 Phoenix of Ash

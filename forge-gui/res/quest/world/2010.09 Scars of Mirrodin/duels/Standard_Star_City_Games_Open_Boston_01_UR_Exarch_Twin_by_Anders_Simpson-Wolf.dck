@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=UR Exarch Twin by Anders Simpson-Wolf
+Title=Arjun
+Difficulty=very hard
+Description=UR Exarch Twin by Anders Simpson-Wolf
+Icon=Arjun.jpg
+Deck Type=constructed
+
+[main]
+4 Deceiver Exarch|NPH
+2 Dismember|NPH
+4 Dispel|WWK
+2 Into the Roil|ZEN
+2 Mana Leak|M12
+2 Mental Misstep|NPH
+1 Twisted Image|SOM
+4 Gitaxian Probe|NPH
+4 Ponder|M12
+4 Preordain|M11
+4 Shrine of Piercing Vision|NPH
+4 Splinter Twin|ROE
+8 Island|M12
+5 Mountain|M12
+2 Arid Mesa|ZEN
+2 Halimar Depths|WWK
+2 Misty Rainforest|ZEN
+4 Scalding Tarn|ZEN
+
+[sideboard]
+1 Mental Misstep|NPH
+2 Spellskite|NPH
+2 Azure Mage|M12
+3 Grim Lavamancer|M12
+2 Mutagenic Growth|NPH
+2 Negate|M12
+1 Shatter|SOM
+2 Pyroclasm|M11

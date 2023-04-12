@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Squirrel Opposition by Ken Krouner
+Title=Galadriel
+Difficulty=very hard
+Description=Squirrel Opposition by Ken Krouner
+Icon=Galadriel.jpg
+Deck Type=constructed
+
+[main]
+7 Forest|OD
+5 Island|OD
+3 Karplusan Forest|7E
+2 Shivan Reef|AP
+4 Yavimaya Coast|AP
+4 Birds of Paradise|7E
+3 Flametongue Kavu|PS
+3 Llanowar Elves|7E
+4 Merfolk Looter|7E
+4 Wild Mongrel|OD
+4 Circular Logic|TO
+3 Deep Analysis|TO
+4 Fire // Ice|AP
+4 Opposition|7E
+2 Quiet Speculation|JU
+2 Roar of the Wurm|OD
+2 Squirrel Nest|OD
+
+[sideboard]
+1 Flametongue Kavu|PS
+3 Gainsay|PS
+2 Krosan Reclamation|JU
+2 Phantom Centaur|JU
+2 Ray of Revelation|JU
+1 Simoon|IN
+2 Static Orb|7E
+2 Unnatural Selection|AP

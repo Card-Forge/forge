@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Mateos Sahakian
+Title=Shrek
+Difficulty=very hard
+Description=Esper Aggro by Mateos Sahakian
+Icon=Shrek.jpg
+Deck Type=constructed
+
+[main]
+1 Legion Angel
+1 Malevolent Hermit
+3 Tenacious Underdog
+3 Obscura Interceptor
+4 Raffine, Scheming Seer
+4 Luminarch Aspirant
+4 Vanishing Verse
+1 Emeria's Call
+2 The Meathook Massacre
+4 Wedding Announcement
+3 Kaito Shizuki
+4 The Wandering Emperor
+1 Hive of the Eye Tyrant
+1 Eiganjo, Seat of the Empire
+1 Plains
+2 Deserted Beach
+2 Shattered Sanctum
+3 Shipwreck Marsh
+4 Clearwater Pathway
+4 Brightclimb Pathway
+4 Raffine's Tower
+4 Hengegate Pathway
+
+[sideboard]
+3 Legion Angel
+1 The Meathook Massacre
+1 Nimble Larcenist
+1 Portable Hole
+2 Duress
+2 Go Blank
+2 Negate
+3 Ray of Enfeeblement

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Adventure by Luis Scott-vargas
+Title=The Forgotten
+Difficulty=very hard
+Description=Adventure by Luis Scott-vargas
+Icon=The Forgotten.jpg
+Deck Type=constructed
+
+[main]
+4 Beanstalk Giant
+4 Bonecrusher Giant
+4 Brazen Borrower
+4 Edgewall Innkeeper
+4 Fae of Wishes
+4 Lovestruck Beast
+1 The Great Henge
+4 Lucky Clover
+1 Incubation // Incongruity
+3 Escape to the Wilds
+1 Temple of Epiphany
+1 Temple of Mystery
+2 Mountain
+2 Temple of Abandon
+4 Island
+6 Forest
+3 Steam Vents
+4 Breeding Pool
+4 Stomping Ground
+
+[sideboard]
+1 Escape to the Wilds
+1 Disdainful Stroke
+1 Domri's Ambush
+1 Expansion // Explosion
+1 Fling
+1 Mystic Repeal
+1 Negate
+1 Once and Future
+1 Return to Nature
+1 Shadowspear
+3 Aether Gust
+1 Sorcerous Spyglass
+1 Storm's Wrath

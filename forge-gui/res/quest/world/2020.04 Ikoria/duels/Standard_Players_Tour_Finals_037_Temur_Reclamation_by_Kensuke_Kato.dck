@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Kensuke Kato
+Title=Aspect of Fire
+Difficulty=very hard
+Description=Temur Reclamation by Kensuke Kato
+Icon=Aspect of Fire.jpg
+Deck Type=constructed
+
+[main]
+3 Negate
+3 Aether Gust
+2 Commence the Endgame
+2 Brazen Borrower
+2 Uro, Titan of Nature's Wrath
+3 Mystical Dispute
+4 Expansion // Explosion
+4 Growth Spiral
+4 Shark Typhoon
+4 Wilderness Reclamation
+1 Temple of Mystery
+1 Mountain
+2 Forest
+2 Blast Zone
+2 Island
+3 Castle Vantress
+3 Stomping Ground
+3 Steam Vents
+4 Ketria Triome
+4 Breeding Pool
+4 Fabled Passage
+
+[sideboard]
+1 Negate
+1 Mystical Dispute
+1 Spectral Sailor
+1 Scavenging Ooze
+1 Scorching Dragonfire
+1 Elder Gargaroth
+1 Narset's Reversal
+2 Flame Sweep
+2 Nightpack Ambusher
+4 Bonecrusher Giant

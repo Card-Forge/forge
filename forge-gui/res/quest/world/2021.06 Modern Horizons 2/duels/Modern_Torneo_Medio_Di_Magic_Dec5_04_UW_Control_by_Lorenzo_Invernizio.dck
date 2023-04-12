@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=UW Control by Lorenzo Invernizio
+Title=Kang
+Difficulty=very hard
+Description=UW Control by Lorenzo Invernizio
+Icon=Kang.jpg
+Deck Type=constructed
+
+[main]
+1 Jace, the Mind Sculptor|WWK
+1 Shark Typhoon
+2 Memory Deluge
+3 Supreme Verdict|RTR
+3 Teferi, Hero of Dominaria
+3 Spreading Seas|ZEN
+3 Chalice of the Void|MR
+4 Teferi, Time Raveler
+4 Prismatic Ending
+4 Counterspell|7E
+4 Archmage's Charm
+3 Solitude
+1 Breeding Pool
+1 Raugrin Triome
+1 Field of Ruin
+1 Hall of Storm Giants
+1 Celestial Colonnade|WWK
+2 Misty Rainforest|ZEN
+2 Scalding Tarn|ZEN
+2 Hallowed Fountain
+2 Castle Vantress
+2 Plains
+3 Mystic Gate|SHM
+3 Island
+4 Flooded Strand|KTK
+
+[sideboard]
+1 Elspeth, Sun's Nemesis
+1 Mystical Dispute
+2 Aether Gust
+2 Dovin's Veto
+1 Blossoming Calm
+1 Engineered Explosives|FD
+2 Rest in Peace|RTR
+1 Kaheera, the Orphanguard
+3 Shark Typhoon
+1 Spreading Seas|ZEN

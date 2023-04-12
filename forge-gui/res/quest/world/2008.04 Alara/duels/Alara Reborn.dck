@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Alara Reborn
+Title=Alara Reborn
+Icon=alaarb.jpg
+Difficulty=very hard
+Description=Alara is broken no more.
+Deck Type=constructed
+[main]
+4 Ancient Ziggurat|CFX
+1 Arcane Sanctum|ALA
+4 Bloodbraid Elf|ARB
+2 Broodmate Dragon|ALA
+4 Exotic Orchard|CFX
+1 Forest|ALA|2
+1 Island|ALA2
+3 Jenara, Asura of War|ARB
+4 Jungle Shrine|ALA
+1 Mountain|ALA|2
+3 Naya Charm|ALA
+4 Noble Hierarch|CFX
+4 Path to Exile|CFX
+1 Plains|ALA|2
+4 Putrid Leech|ARB
+4 Rhox War Monk|ALA
+3 Savage Lands|ALA
+3 Seaside Citadel|ALA
+4 Sedraxis Specter|ALA
+1 Swamp|ALA|2
+4 Woolly Thoctar|ALA
+
+

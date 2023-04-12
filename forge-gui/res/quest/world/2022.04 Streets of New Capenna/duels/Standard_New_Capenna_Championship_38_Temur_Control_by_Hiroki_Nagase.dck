@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Temur Control by Hiroki Nagase
+Title=Geddon
+Difficulty=very hard
+Description=Temur Control by Hiroki Nagase
+Icon=Geddon.jpg
+Deck Type=constructed
+
+[main]
+1 Reckoner Bankbuster
+1 Spikefield Hazard
+1 Flame-Blessed Bolt
+1 Thundering Rebuke
+1 Burn Down the House
+1 Battle of Frost and Fire
+2 Memory Deluge
+2 Fading Hope
+2 Negate
+3 Jwari Disruption
+3 Dragon's Fire
+4 Expressive Iteration
+4 Fable of the Mirror-Breaker
+2 Galazeth Prismari
+3 Goldspan Dragon
+4 Titan of Industry
+1 Mountain
+1 Hall of Storm Giants
+1 Island
+1 Otawara, Soaring City
+2 Stormcarved Coast
+3 Dreamroot Cascade
+4 Rockfall Vale
+4 Barkchannel Pathway
+4 Riverglide Pathway
+4 Cragcrown Pathway
+
+[sideboard]
+3 Disdainful Stroke
+2 Esika's Chariot
+2 Prismari Command
+2 Hullbreaker Horror
+2 Koma, Cosmos Serpent
+1 Test of Talents
+1 Reckoner Bankbuster
+1 Flame-Blessed Bolt
+1 Fading Hope

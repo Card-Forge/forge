@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=UW Control by ArchaeusDota
+Title=The Desert Caravan
+Difficulty=very hard
+Description=UW Control by ArchaeusDota
+Icon=The Desert Caravan.jpg
+Deck Type=constructed
+
+[main]
+1 Force of Negation
+1 Chalice of the Void|MR
+1 Search for Azcanta|XLN
+2 Teferi, Hero of Dominaria
+2 Memory Deluge
+4 Prismatic Ending
+4 Supreme Verdict|RTR
+4 Archmage's Charm
+4 Counterspell|7E
+4 Spreading Seas|ZEN
+4 Teferi, Time Raveler
+4 Solitude
+1 Breeding Pool
+1 Castle Vantress
+1 Hall of Storm Giants
+1 Field of Ruin
+1 Polluted Delta|KTK
+1 Raugrin Triome
+1 Scalding Tarn|ZEN
+2 Hallowed Fountain
+2 Misty Rainforest|ZEN
+2 Celestial Colonnade|WWK
+2 Mystic Gate|SHM
+2 Plains
+4 Flooded Strand|KTK
+4 Island
+
+[sideboard]
+2 Veil of Summer
+4 Shark Typhoon
+3 Rest in Peace|RTR
+1 Kaheera, the Orphanguard
+2 Blossoming Calm
+1 Force of Negation
+2 Chalice of the Void|MR

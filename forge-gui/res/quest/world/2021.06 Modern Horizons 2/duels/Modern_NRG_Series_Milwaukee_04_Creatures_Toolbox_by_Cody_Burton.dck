@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Creatures Toolbox by Cody Burton
+Title=Athena
+Difficulty=very hard
+Description=Creatures Toolbox by Cody Burton
+Icon=Athena.jpg
+Deck Type=constructed
+
+[main]
+1 Zulaport Cutthroat|BFZ
+1 Prosperous Innkeeper
+1 Reclamation Sage
+1 Hapatra, Vizier of Poisons|AKH
+1 Essence Warden|PLC
+2 Geralf's Messenger|DKA
+3 Birds of Paradise|M12
+3 Strangleroot Geist|DKA
+4 Wall of Roots|TSP
+4 Yawgmoth, Thran Physician
+4 Ignoble Hierarch
+4 Young Wolf|DKA
+4 Chord of Calling|M15
+4 Eldritch Evolution|EMN
+2 Grist, the Hunger Tide
+1 Swamp
+1 Urborg, Tomb of Yawgmoth|M15
+1 Yavimaya, Cradle of Growth
+1 Khalni Garden|WWK
+1 Dryad Arbor|FUT
+1 Forest
+2 Overgrown Tomb
+2 Nurturing Peatland
+3 Twilight Mire|EVE
+4 Verdant Catacombs|ZEN
+4 Blooming Marsh|KLD
+
+[sideboard]
+1 Grist, the Hunger Tide
+1 Void Mirror
+1 Fatal Push|AER
+1 Abrupt Decay|RTR
+1 Thoughtseize|THS
+1 Obstinate Baloth|M11
+2 Endurance
+2 Chalice of the Void|MR
+2 Veil of Summer
+3 Force of Vigor

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=4 5c Aggro by Laurits Keller
+Title=Kang
+Difficulty=very hard
+Description=4 5c Aggro by Laurits Keller
+Icon=Kang.jpg
+Deck Type=constructed
+
+[main]
+4 Ragavan, Nimble Pilferer
+4 Territorial Kavu
+4 Scion of Draco
+4 Tarmogoyf|FUT
+1 Migloz, Maze Crusher
+4 Mishra's Bauble|CS
+4 Lightning Bolt|M11
+4 Stubborn Denial|KTK
+4 Tribal Flames|TSP
+3 Expressive Iteration
+4 Leyline Binding
+1 Mountain
+1 Plains
+1 Zagoth Triome
+1 Breeding Pool
+1 Sacred Foundry
+1 Steam Vents
+3 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+3 Scalding Tarn|ZEN
+4 Flooded Strand|KTK
+
+[sideboard]
+2 Unlicensed Hearse
+2 Engineered Explosives|FD
+1 Hushbringer
+1 Elesh Norn, Mother of Machines
+2 Flusterstorm
+2 Remand|RAV
+1 Veil of Summer
+1 Chained to the Rocks|THS
+2 Wear // Tear|DGM
+1 Jegantha, the Wellspring

@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Yuya Hosokawa
+Title=Phenukenes
+Difficulty=very hard
+Description=Red Deck Wins by Yuya Hosokawa
+Icon=Phenukenes.jpg
+Deck Type=constructed
+
+[main]
+3 Feldon, Ronom Excavator
+4 Phoenix Chick
+4 Squee, Dubious Monarch
+4 Monastery Swiftspear
+4 Thundering Raiju
+4 Kumano Faces Kakkazan
+4 Bloodthirsty Adversary
+4 Play with Fire
+4 Lightning Strike
+2 Strangle
+1 Mirrex
+2 Sokenzan, Crucible of Defiance
+4 Mishra's Foundry
+16 Mountain
+
+[sideboard]
+2 Chandra, Dressed to Kill
+2 Obliterating Bolt
+3 Rending Flame
+4 Koth, Fire of Resistance
+4 Fable of the Mirror-Breaker

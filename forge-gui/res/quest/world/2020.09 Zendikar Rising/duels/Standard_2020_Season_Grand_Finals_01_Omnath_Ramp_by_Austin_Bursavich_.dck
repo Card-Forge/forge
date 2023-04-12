@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Omnath Ramp by Austin Bursavich 
+Title=Wheel of Fortune
+Difficulty=very hard
+Description=Omnath Ramp by Austin Bursavich 
+Icon=Wheel of Fortune.jpg
+Deck Type=constructed
+
+[main]
+2 Lotus Cobra
+2 Brazen Borrower
+2 Giant Killer
+4 Beanstalk Giant
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Fae of Wishes
+4 Omnath, Locus of Creation
+4 Lucky Clover
+1 Shatterskull Smashing
+3 Escape to the Wilds
+1 Plains
+2 Raugrin Triome
+2 Cragcrown Pathway
+2 Mountain
+3 Fabled Passage
+4 Ketria Triome
+4 Island
+4 Branchloft Pathway
+4 Forest
+
+[sideboard]
+1 Escape to the Wilds
+1 Fabled Passage
+1 Storm's Wrath
+1 Fling
+1 Soul-Guide Lantern
+1 Once and Future
+1 Return to Nature
+1 Blazing Volley
+1 Neutralize
+1 Ugin, the Spirit Dragon
+1 Redcap Melee
+1 Negate
+1 Primal Might
+2 Mystical Dispute

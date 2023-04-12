@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Grixis Control by Naoya Sakata
+Title=Riddler
+Difficulty=very hard
+Description=Grixis Control by Naoya Sakata
+Icon=Riddler.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+1 Blue Sun's Twilight
+2 Cut Down
+3 Abrade
+3 Go for the Throat
+3 Make Disappear
+3 Reckoner Bankbuster
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+2 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Takenuma, Abandoned Mire
+1 Swamp
+1 Stormcarved Coast
+2 Underground River
+3 Blackcleave Cliffs
+3 Shipwreck Marsh
+3 Darkslick Shores
+4 Xander's Lounge
+4 Sulfurous Springs
+4 Haunted Ridge
+
+[sideboard]
+2 Razorlash Transmogrant
+2 Soul Transfer
+2 Unlicensed Hearse
+2 Brotherhood's End
+2 Disdainful Stroke
+2 Duress
+1 Bladecoil Serpent
+1 Liliana of the Veil
+1 Cut Down

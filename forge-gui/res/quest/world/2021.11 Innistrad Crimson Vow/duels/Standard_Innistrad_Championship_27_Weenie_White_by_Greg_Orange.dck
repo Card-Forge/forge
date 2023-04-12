@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Weenie White by Greg Orange
+Title=Regigigas
+Difficulty=very hard
+Description=Weenie White by Greg Orange
+Icon=Regigigas.jpg
+Deck Type=constructed
+
+[main]
+1 Legion Angel
+3 Thalia, Guardian of Thraben
+3 Reidane, God of the Worthy
+3 Brutal Cathar
+3 Adeline, Resplendent Cathar
+4 Luminarch Aspirant
+4 Hopeful Initiate
+4 Elite Spellbinder
+4 Sungold Sentinel
+4 Usher of the Fallen
+1 Portable Hole
+2 Valorous Stance
+4 Faceless Haven
+20 Snow-Covered Plains
+
+[sideboard]
+3 Legion Angel
+1 Thalia, Guardian of Thraben
+3 Portable Hole
+2 Valorous Stance
+2 Paladin Class
+4 Skyclave Apparition

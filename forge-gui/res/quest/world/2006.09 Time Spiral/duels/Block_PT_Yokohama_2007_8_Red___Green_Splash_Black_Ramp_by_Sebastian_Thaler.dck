@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Red // Green Splash Black Ramp by Sebastian Thaler
+Title=Ratbert
+Difficulty=very hard
+Description=Red // Green Splash Black Ramp by Sebastian Thaler
+Icon=Ratbert.jpg
+Deck Type=constructed
+
+[main]
+1 Strangling Soot|TSP
+1 Weatherseed Totem|TSP
+2 Prismatic Lens|TSP
+3 Void|TSP
+3 Disintegrate|TSP
+4 Harmonize|C13
+4 Mwonvuli Acid-Moss|TSP
+4 Search for Tomorrow|TSP
+3 Spectral Force|TSP
+3 Avalanche Riders|TSP
+4 Bogardan Hellkite|C14
+4 Wall of Roots|TSP
+1 Urza's Factory|C13
+1 Molten Slagheap|C13
+2 Swamp|RTR
+3 Terramorphic Expanse|C16
+6 Mountain|RTR
+11 Forest|RTR
+
+[sideboard]
+2 Spike Feeder|CMD
+1 Serrated Arrows|TSP
+1 Island|RTR
+4 Dead // Gone|PLC
+1 Ancient Grudge|ISD
+4 Aeon Chronicler|C16
+1 Strangling Soot|TSP
+1 Void|TSP

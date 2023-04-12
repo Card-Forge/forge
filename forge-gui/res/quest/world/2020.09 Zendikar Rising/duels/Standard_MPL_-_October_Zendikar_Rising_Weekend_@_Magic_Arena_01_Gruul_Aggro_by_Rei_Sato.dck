@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Rei Sato
+Title=Dr Eggman
+Difficulty=very hard
+Description=Gruul Aggro by Rei Sato
+Icon=Dr Eggman.jpg
+Deck Type=constructed
+
+[main]
+2 Primal Might
+9 Forest
+4 Cragcrown Pathway
+4 Shatterskull Smashing
+2 Scorching Dragonfire
+3 Embercleave
+3 Scavenging Ooze
+3 Mountain
+2 Questing Beast
+4 Fabled Passage
+2 Evolving Wilds
+4 Lovestruck Beast
+2 The Great Henge
+4 Kazandu Mammoth
+4 Edgewall Innkeeper
+4 Brushfire Elemental
+4 Bonecrusher Giant
+
+[sideboard]
+2 Garruk, Unleashed
+3 Ox of Agonas
+2 Embereth Shieldbreaker
+2 The Akroan War
+2 Vivien, Monsters' Advocate
+2 Klothys, God of Destiny
+2 Scorching Dragonfire

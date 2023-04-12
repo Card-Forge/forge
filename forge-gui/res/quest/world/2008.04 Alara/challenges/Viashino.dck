@@ -1,0 +1,37 @@
+[quest]
+id=44006
+OpponentName=Viashino
+AILife=20
+Repeat=true
+Wins=10
+Card Reward=Bloodspore Thrinax|C15;1 red rare;1 green rare
+Credit Reward=1000
+AIExtras=Predatory Advantage
+HumanExtras=Tukatongue Thallid
+[metadata]
+Name=quest44006
+Title=Eat or Be Eaten
+Icon=alapred.jpg
+Difficulty=hard
+Description=Those who forget their past are doomed to be eaten by it.
+Deck Type=constructed
+[Main]
+2 Carrion Thrash|ALA
+2 Firewild Borderpost|ARB
+4 Forest|ALA|1
+3 Hissing Iguanar|ALA
+2 Jund Charm|ALA
+4 Jund Panorama|ALA
+4 Jund Sojourners|ARB
+2 Lavalanche|ARB
+3 Mage Slayer|ARB
+4 Mountain|ALA|2
+4 Mountain|ALA|3
+3 Obelisk of Jund|ALA
+4 Savage Lands|ALA
+3 Scarland Thrinax|CFX
+4 Swamp|ALA|4
+3 Thorn-Thrash Viashino|ALA
+4 Thunder-Thrash Elder|ALA
+4 Viashino Slaughtermaster|CFX
+1 Vicious Shadows|ALA

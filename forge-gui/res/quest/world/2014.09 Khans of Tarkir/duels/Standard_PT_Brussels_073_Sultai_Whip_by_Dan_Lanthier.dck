@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Sultai Whip by Dan Lanthier
+Title=Dr Eggman
+Difficulty=very hard
+Description=Sultai Whip by Dan Lanthier
+Icon=Dr Eggman.jpg
+Deck Type=constructed
+
+[main]
+4 Satyr Wayfinder|M15
+4 Sylvan Caryatid|THS
+4 Courser of Kruphix|BNG
+1 Pharika, God of Affliction|JOU
+1 Reclamation Sage|M15
+4 Sidisi, Brood Tyrant|KTK
+1 Torrent Elemental|FRF
+2 Sidisi, Undead Vizier|DTK
+1 Dragonlord Silumgar|DTK
+1 Tasigur, the Golden Fang|FRF
+1 Silumgar, the Drifting Death|FRF
+1 Soul of Innistrad|M15
+1 Hornet Queen|M15
+3 Thoughtseize|THS
+1 Hero's Downfall|THS
+1 Sultai Charm|KTK
+4 Murderous Cut|KTK
+2 Whip of Erebos|THS
+4 Opulent Palace|KTK
+3 Polluted Delta|KTK
+1 Windswept Heath|KTK
+3 Llanowar Wastes|M15
+2 Yavimaya Coast|M15
+3 Temple of Malady|JOU
+1 Temple of Mystery|THS
+3 Forest|DTK
+1 Island|DTK
+2 Swamp|DTK
+
+[sideboard]
+1 Thoughtseize|THS
+2 Hero's Downfall|THS
+1 Duress|DTK
+2 Ashiok, Nightmare Weaver|THS
+1 Bile Blight|BNG
+1 Kiora, the Crashing Wave|BNG
+1 Disdainful Stroke|KTK
+1 Silence the Believers|JOU
+1 Treasure Cruise|KTK
+1 Negate|DTK
+1 Drown in Sorrow|BNG
+2 Doomwake Giant|JOU

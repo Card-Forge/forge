@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Naya by Joshua Cho
+Title=House Party
+Difficulty=very hard
+Description=Naya by Joshua Cho
+Icon=House Party.jpg
+Deck Type=constructed
+
+[main]
+3 Bonfire of the Damned|AVR
+4 Garruk Relentless|ISD
+1 Ulvenwald Tracker|AVR
+1 Mikaeus, the Lunarch|ISD
+3 Fiend Hunter|C13
+3 Borderland Ranger|AVR
+4 Avacyn's Pilgrim|ISD
+4 Wolfir Silverheart|AVR
+4 Scorned Villager|DKA
+4 Restoration Angel|AVR
+4 Huntmaster of the Fells|DKA
+1 Mountain|RTR
+2 Plains|RTR
+3 Clifftop Retreat
+3 Gavony Township|ISD
+4 Evolving Wilds
+4 Cavern of Souls|AVR
+8 Forest|RTR
+
+[sideboard]
+3 Nevermore|ISD
+1 Grafdigger's Cage|DKA
+2 Brimstone Volley|CNS
+2 Zealous Conscripts|AVR
+2 Tree of Redemption|ISD
+1 Slayer of the Wicked|ISD
+3 Sigarda, Host of Herons|AVR
+1 Ulvenwald Tracker|AVR

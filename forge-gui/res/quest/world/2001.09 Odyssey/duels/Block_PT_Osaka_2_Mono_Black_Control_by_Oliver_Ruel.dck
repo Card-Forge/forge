@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mono Black Control by Oliver Ruel
+Title=Vegeta
+Difficulty=very hard
+Description=Mono Black Control by Oliver Ruel
+Icon=Vegeta.jpg
+Deck Type=constructed
+
+[main]
+4 Cabal Coffers|TO
+23 Swamp|A
+4 Laquatus's Champion|TO
+4 Nantuko Shade|TO
+2 Shambling Swarm|TO
+4 Chainer's Edict|TO
+2 Diabolic Tutor|OD
+1 Haunting Echoes|OD
+4 Innocent Blood|OD
+4 Mind Sludge|TO
+1 Morbid Hunger|OD
+3 Mutilate|TO
+1 Rancid Earth|TO
+3 Skeletal Scrying|OD
+
+[sideboard]
+2 Shambling Swarm|TO
+1 Morbid Hunger|OD
+1 Mutilate|TO
+3 Rancid Earth|TO
+1 Skeletal Scrying|OD
+4 Braids, Cabal Minion|OD
+3 Mesmeric Fiend|TO

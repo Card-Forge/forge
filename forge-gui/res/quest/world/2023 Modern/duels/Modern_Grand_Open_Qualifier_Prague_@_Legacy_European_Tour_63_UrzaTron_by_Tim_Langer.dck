@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=UrzaTron by Tim Langer
+Title=Master Splinter
+Difficulty=very hard
+Description=UrzaTron by Tim Langer
+Icon=Master Splinter.jpg
+Deck Type=constructed
+
+[main]
+2 Cityscape Leveler
+2 Ulamog, the Ceaseless Hunger|BFZ
+2 Wurmcoil Engine|SOM
+4 Chromatic Sphere|MR
+4 Chromatic Star|10E
+4 Expedition Map|ZEN
+3 Oblivion Stone|MR
+3 Relic of Progenitus|ALA
+2 Warping Wail|OGW
+4 Ancient Stirrings|ROE
+4 Sylvan Scrying|BFZ
+3 Karn Liberated|NPH
+4 Karn, the Great Creator
+1 Ugin, the Spirit Dragon
+1 Blast Zone
+1 Boseiju, Who Endures
+3 Forest
+1 Sanctum of Ugin|BFZ
+4 Urza's Mine|9E
+4 Urza's Power Plant|9E
+4 Urza's Tower|9E
+
+[sideboard]
+1 Cityscape Leveler
+1 Wurmcoil Engine|SOM
+1 Chalice of the Void|MR
+1 Engineered Explosives|FD
+1 Ensnaring Bridge|8E
+3 Haywire Mite
+1 Jegantha, the Wellspring
+1 Liquimetal Coating|SOM
+1 Pithing Needle
+1 Sundering Titan|DS
+1 The Stone Brain
+1 Tormod's Crypt
+1 Walking Ballista|AER

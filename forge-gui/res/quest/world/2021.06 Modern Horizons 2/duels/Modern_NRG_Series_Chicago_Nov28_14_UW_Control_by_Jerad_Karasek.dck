@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=UW Control by Jerad Karasek
+Title=Aysen
+Difficulty=very hard
+Description=UW Control by Jerad Karasek
+Icon=Aysen.jpg
+Deck Type=constructed
+
+[main]
+1 Memory Deluge
+1 Cryptic Command|LRW
+1 Jace, the Mind Sculptor|WWK
+2 Chalice of the Void|MR
+2 Teferi, Hero of Dominaria
+2 Shark Typhoon
+3 Supreme Verdict|RTR
+3 Spreading Seas|ZEN
+4 Prismatic Ending
+4 Teferi, Time Raveler
+4 Archmage's Charm
+4 Counterspell|7E
+4 Solitude
+1 Celestial Colonnade|WWK
+1 Breeding Pool
+1 Hall of Storm Giants
+1 Raugrin Triome
+1 Glacial Fortress|XLN
+1 Misty Rainforest|ZEN
+1 Polluted Delta|KTK
+1 Scalding Tarn|ZEN
+2 Plains
+2 Hallowed Fountain
+2 Castle Vantress
+3 Mystic Gate|SHM
+4 Flooded Strand|KTK
+4 Island
+
+[sideboard]
+1 Engineered Explosives|FD
+1 Mystical Dispute
+1 Emrakul, the Aeons Torn|ROE
+1 Force of Negation
+1 Sunset Revelry
+1 Kaheera, the Orphanguard
+1 Aether Gust
+2 Dovin's Veto
+2 Celestial Purge|M12
+2 Rest in Peace|RTR
+1 Chalice of the Void|MR
+1 Shark Typhoon

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jund by Brandon Nelson
+Title=BaronSamedi
+Difficulty=very hard
+Description=Jund by Brandon Nelson
+Icon=BaronSamedi.jpg
+Deck Type=constructed
+
+[main]
+1 Riveteers Charm
+1 Obliterating Bolt
+3 Unleash the Inferno
+3 Reckoner Bankbuster
+3 Go for the Throat
+4 Fable of the Mirror-Breaker
+4 Cut Down
+4 Invoke Despair
+2 Sheoldred, the Apocalypse
+2 Glissa Sunslayer
+4 Graveyard Trespasser
+4 Bloodtithe Harvester
+1 Copperline Gorge
+1 Boseiju, Who Endures
+2 Llanowar Wastes
+2 Swamp
+3 Sulfurous Springs
+4 Haunted Ridge
+4 Blackcleave Cliffs
+4 Ziatora's Proving Ground
+4 Deathcap Glade
+
+[sideboard]
+1 The Cruelty of Gix
+2 Brotherhood's End
+2 Gix's Command
+2 Nissa, Ascended Animist
+1 Anoint with Affliction
+2 Tear Asunder
+4 Duress
+1 Obliterating Bolt

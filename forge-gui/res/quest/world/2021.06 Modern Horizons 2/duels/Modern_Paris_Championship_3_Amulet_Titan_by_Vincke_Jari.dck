@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Amulet Titan by Vincke Jari
+Title=Casper
+Difficulty=very hard
+Description=Amulet Titan by Vincke Jari
+Icon=Casper.jpg
+Deck Type=constructed
+
+[main]
+4 Amulet of Vigor|WWK
+4 Arboreal Grazer
+3 Azusa, Lost but Seeking
+1 Boros Garrison|RAV
+2 Castle Garenbrig
+2 Cavern of Souls|AVR
+1 Crumbling Vestige|OGW
+4 Dryad of the Ilysian Grove
+1 Expedition Map|ZEN
+5 Forest
+1 Gruul Turf|GP
+4 Karn, the Great Creator
+1 Misty Rainforest|ZEN
+4 Primeval Titan|M12
+1 Radiant Fountain
+3 Selesnya Sanctuary|RAV
+4 Simic Growth Chamber|DIS
+1 Slayers' Stronghold|AVR
+4 Summoner's Pact|FUT
+1 Sunhome, Fortress of the Legion|RAV
+2 Tolaria West|FUT
+4 Urza's Saga
+2 Valakut, the Molten Pinnacle|ZEN
+1 Vesuva|TSP
+
+[sideboard]
+2 Cavern of Souls|AVR
+1 Bojuka Bog|WWK
+2 Endurance
+3 Engineered Explosives|FD
+3 Force of Vigor
+1 Foundation Breaker
+1 Liquimetal Coating|SOM
+1 Tormod's Crypt
+1 Walking Ballista|AER

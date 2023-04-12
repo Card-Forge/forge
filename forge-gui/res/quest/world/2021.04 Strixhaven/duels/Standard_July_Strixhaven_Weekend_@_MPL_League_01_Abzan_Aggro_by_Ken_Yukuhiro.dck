@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Abzan Aggro by Ken Yukuhiro
+Title=Poseidon
+Difficulty=very hard
+Description=Abzan Aggro by Ken Yukuhiro
+Icon=Poseidon.jpg
+Deck Type=constructed
+
+[main]
+2 Glass Casket
+2 Elspeth Conquers Death
+2 Binding the Old Gods
+3 Esika's Chariot
+3 Emeria's Call
+4 Trail of Crumbs
+2 Tangled Florahedron
+3 Giant Killer
+3 Yorion, Sky Nomad
+4 Gilded Goose
+4 Wicked Wolf
+4 Charming Prince
+4 Drannith Magistrate
+4 Skyclave Apparition
+4 Elite Spellbinder
+1 Swamp
+3 Plains
+4 Indatha Triome
+4 Branchloft Pathway
+4 Darkbore Pathway
+4 Brightclimb Pathway
+4 Temple of Plenty
+4 Forest
+4 Fabled Passage
+
+[sideboard]
+3 Duress
+3 Reidane, God of the Worthy
+2 Polukranos, Unchained
+2 Run Afoul
+2 Scavenging Ooze
+2 Glass Casket
+1 Yorion, Sky Nomad

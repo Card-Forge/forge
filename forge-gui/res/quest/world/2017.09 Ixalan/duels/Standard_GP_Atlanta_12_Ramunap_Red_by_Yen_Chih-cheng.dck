@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Ramunap Red by Yen Chih-cheng
+Title=Carnage
+Difficulty=very hard
+Description=Ramunap Red by Yen Chih-cheng
+Icon=Carnage.jpg
+Deck Type=constructed
+
+[main]
+1 Chandra, Torch of Defiance|KLD
+4 Bomat Courier|KLD
+4 Earthshaker Khenra|HOU
+4 Hazoret the Fervent|AKH
+2 Kari Zev, Skyship Raider|AER
+3 Rampaging Ferocidon|XLN
+4 Soul-Scar Mage|AKH
+2 Harsh Mentor|AKH
+2 Ahn-Crop Crasher|AKH
+2 Abrade|HOU
+4 Lightning Strike|XLN
+4 Shock|AER
+4 Ramunap Ruins|HOU
+1 Scavenger Grounds|HOU
+4 Sunscorched Desert|AKH
+15 Mountain|XLN
+
+[sideboard]
+1 Chandra, Torch of Defiance|KLD
+1 Rampaging Ferocidon|XLN
+2 Abrade|HOU
+1 Magma Spray|AKH
+2 Chandra's Defeat|HOU
+2 Glorybringer|AKH
+2 Pia Nalaar|KLD
+2 Aethersphere Harvester|AER
+2 Invigorated Rampage|AER

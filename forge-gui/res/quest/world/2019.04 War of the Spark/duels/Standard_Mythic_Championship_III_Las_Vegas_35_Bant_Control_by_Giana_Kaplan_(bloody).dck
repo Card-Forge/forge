@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Bant Control by Giana Kaplan (bloody)
+Title=Dr Strangelove
+Difficulty=very hard
+Description=Bant Control by Giana Kaplan (bloody)
+Icon=Dr Strangelove.jpg
+Deck Type=constructed
+
+[main]
+2 Frilled Mystic
+4 Hydroid Krasis
+4 Incubation Druid
+4 Llanowar Elves
+4 Paradise Druid
+2 Shalai, Voice of Plenty
+2 The Immortal Sun
+2 Entrancing Melody|XLN
+2 Mass Manipulation
+1 Time Wipe
+4 Nissa, Who Shakes the World
+4 Teferi, Time Raveler
+4 Breeding Pool
+2 Forest
+2 Glacial Fortress|XLN
+4 Hallowed Fountain
+4 Hinterland Harbor
+2 Island
+3 Sunpetal Grove|XLN
+4 Temple Garden
+
+[sideboard]
+1 The Immortal Sun
+2 Entrancing Melody|XLN
+3 Ixalan's Binding|XLN
+2 Negate
+2 Ripjaw Raptor|XLN
+1 Thrashing Brontodon
+2 Tolsimir, Friend to Wolves
+2 Trostani Discordant

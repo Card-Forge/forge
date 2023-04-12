@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Grixis Control by Wojciech Kowalczuk
+Title=Odysseus
+Difficulty=very hard
+Description=Grixis Control by Wojciech Kowalczuk
+Icon=Odysseus.jpg
+Deck Type=constructed
+
+[main]
+1 Flame-Blessed Bolt
+2 Reckoner Bankbuster
+2 Abrade
+3 Cut Down
+3 Make Disappear
+4 Invoke Despair
+4 Go for the Throat
+4 Fable of the Mirror-Breaker
+1 Razorlash Transmogrant
+2 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Shivan Reef
+1 Stormcarved Coast
+2 Sulfurous Springs
+3 Shipwreck Marsh
+3 Swamp
+4 Xander's Lounge
+4 Blackcleave Cliffs
+4 Darkslick Shores
+4 Haunted Ridge
+
+[sideboard]
+1 Teferi, Temporal Pilgrim
+1 Gix's Command
+1 Bladecoil Serpent
+1 Unlicensed Hearse
+1 Disdainful Stroke
+1 Night Clubber
+2 Negate
+2 Kaito, Dancing Shadow
+2 Duress
+2 Brotherhood's End
+1 Razorlash Transmogrant

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Sultai Energy by Brad Nelson
+Title=Witch
+Difficulty=very hard
+Description=Sultai Energy by Brad Nelson
+Icon=Witch.jpg
+Deck Type=constructed
+
+[main]
+4 Glint-Sleeve Siphoner|AER
+4 Hostage Taker|XLN
+4 Longtusk Cub|KLD
+2 Rishkar, Peema Renegade|AER
+4 Rogue Refiner|AER
+1 The Scarab God|HOU
+4 Walking Ballista|AER
+4 Winding Constrictor|AER
+4 Attune with Aether|KLD
+4 Blossoming Defense|KLD
+4 Fatal Push|AER
+4 Aether Hub|KLD
+4 Blooming Marsh|KLD
+4 Botanical Sanctum|KLD
+2 Fetid Pools|AKH
+2 Swamp|XLN
+1 Island|XLN
+4 Forest|XLN
+
+[sideboard]
+1 The Scarab God|HOU
+1 Nissa, Steward of Elements|AKH
+3 Duress|XLN
+2 Negate|AER
+1 Spell Pierce|XLN
+1 Essence Scatter|AKH
+2 Vraska's Contempt|XLN
+2 Die Young|KLD
+2 Deathgorge Scavenger|XLN

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Yuta Takahashi
+Title=Warlock
+Difficulty=very hard
+Description=Temur Reclamation by Yuta Takahashi
+Icon=Warlock.jpg
+Deck Type=constructed
+
+[main]
+2 Uro, Titan of Nature's Wrath
+2 Brazen Borrower
+2 Nightpack Ambusher
+3 Aether Gust
+3 Mystical Dispute
+3 Negate
+4 Growth Spiral
+4 Expansion // Explosion
+4 Shark Typhoon
+4 Wilderness Reclamation
+1 Mountain
+1 Temple of Mystery
+2 Forest
+2 Blast Zone
+2 Island
+3 Stomping Ground
+3 Steam Vents
+3 Castle Vantress
+4 Fabled Passage
+4 Ketria Triome
+4 Breeding Pool
+
+[sideboard]
+1 Uro, Titan of Nature's Wrath
+1 Brazen Borrower
+1 Aether Gust
+1 Mystical Dispute
+1 Nissa, Who Shakes the World
+2 Commence the Endgame
+4 Scorching Dragonfire
+4 Flame Sweep

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Temur Lukka by Marin Toromanoff
+Title=Horus
+Difficulty=very hard
+Description=Temur Lukka by Marin Toromanoff
+Icon=Horus.jpg
+Deck Type=constructed
+
+[main]
+2 Koma, Cosmos Serpent
+3 Llanowar Visionary
+4 Edgewall Innkeeper
+4 Lovestruck Beast
+4 Brazen Borrower
+4 Bonecrusher Giant
+1 Miscast
+1 Decisive Denial
+1 Mystical Dispute
+1 Fire Prophecy
+2 Disdainful Stroke
+1 Shatterskull Smashing
+2 The Akroan War
+4 Lukka, Coppercoat Outcast
+2 Mountain
+2 Forest
+2 Island
+4 Fabled Passage
+4 Ketria Triome
+4 Riverglide Pathway
+4 Cragcrown Pathway
+4 Barkchannel Pathway
+
+[sideboard]
+2 Fire Prophecy
+1 Scorching Dragonfire
+1 Cinderclasm
+1 Negate
+1 Test of Talents
+2 Klothys, God of Destiny
+2 Roiling Vortex
+2 Redcap Melee
+3 Ox of Agonas

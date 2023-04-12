@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Rakdos Control by Matthew Duggan
+Title=Akongo
+Difficulty=very hard
+Description=Rakdos Control by Matthew Duggan
+Icon=Akongo.jpg
+Deck Type=constructed
+
+[main]
+1 Infernal Grasp
+1 Gix's Command
+2 Abrade
+3 Reckoner Bankbuster
+3 Go for the Throat
+3 Cut Down
+4 Fable of the Mirror-Breaker
+4 Invoke Despair
+1 Archfiend of the Dross
+1 Phyrexian Fleshgorger
+4 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Graveyard Trespasser
+1 Mountain
+1 Takenuma, Abandoned Mire
+1 Mirrex
+1 Sokenzan, Crucible of Defiance
+4 Blackcleave Cliffs
+4 Haunted Ridge
+4 Sulfurous Springs
+9 Swamp
+
+[sideboard]
+1 Obliterating Bolt
+1 Vraska, Betrayal's Sting
+1 Sorin the Mirthless
+2 Soul Transfer
+2 Razorlash Transmogrant
+2 Vampires' Vengeance
+3 Duress
+1 Gix's Command
+1 Reckoner Bankbuster
+1 Cut Down

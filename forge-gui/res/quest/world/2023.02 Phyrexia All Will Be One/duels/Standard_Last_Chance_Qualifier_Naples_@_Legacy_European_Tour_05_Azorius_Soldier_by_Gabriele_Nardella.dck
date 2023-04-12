@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Azorius Soldier by Gabriele Nardella
+Title=Basal Ramp
+Difficulty=very hard
+Description=Azorius Soldier by Gabriele Nardella
+Icon=Basal Ramp.jpg
+Deck Type=constructed
+
+[main]
+2 Resolute Reinforcements
+2 Myrel, Shield of Argive
+2 Skrelv, Defector Mite
+2 Guardian of New Benalia
+3 Yotian Frontliner
+3 Dennick, Pious Apprentice
+3 Harbin, Vanguard Aviator
+4 Thalia, Guardian of Thraben
+4 Valiant Veteran
+4 Siege Veteran
+4 Skystrike Officer
+4 Recruitment Officer
+1 Plains
+2 Otawara, Soaring City
+2 Plaza of Heroes
+2 Eiganjo, Seat of the Empire
+4 Fortified Beachhead
+4 Secluded Courtyard
+4 Seachrome Coast
+4 Adarkar Wastes
+
+[sideboard]
+2 Destroy Evil
+2 Knockout Blow
+2 Slip Out the Back
+3 Fateful Absence
+3 Make Disappear
+3 Lantern Flare

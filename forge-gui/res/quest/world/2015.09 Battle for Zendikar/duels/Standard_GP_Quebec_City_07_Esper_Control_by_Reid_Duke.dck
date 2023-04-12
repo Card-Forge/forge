@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Esper Control by Reid Duke
+Title=Ri
+Difficulty=very hard
+Description=Esper Control by Reid Duke
+Icon=Ri.jpg
+Deck Type=constructed
+
+[main]
+1 Silumgar's Command|DTK
+1 Scatter to the Winds|BFZ
+1 Negate|ORI
+1 Painful Truths|BFZ
+2 Ugin, the Spirit Dragon|FRF
+2 Planar Outburst|BFZ
+2 Ultimate Price|DTK
+2 Anticipate|BFZ
+2 Utter End|KTK
+2 Murderous Cut|KTK
+4 Dig Through Time|KTK
+4 Ojutai's Command|DTK
+4 Clash of Wills|ORI
+1 Arashin Cleric|FRF
+4 Jace, Vryn's Prodigy|ORI
+1 Swamp|BFZ
+1 Haven of the Spirit Dragon|DTK
+1 Plains|BFZ
+1 Bloodstained Mire|KTK
+1 Windswept Heath|KTK
+2 Shambling Vent|BFZ
+2 Mage-Ring Network|ORI
+3 Prairie Stream|BFZ
+3 Sunken Hollow|BFZ
+4 Flooded Strand|KTK
+4 Polluted Delta|KTK
+4 Island|BFZ
+
+[sideboard]
+2 Dragonlord Silumgar|DTK
+1 Dragonlord Ojutai|DTK
+2 Dispel|BFZ
+1 Foul-Tongue Invocation|DTK
+2 Duress|DTK
+3 Surge of Righteousness|DTK
+1 Negate|ORI
+3 Arashin Cleric|FRF

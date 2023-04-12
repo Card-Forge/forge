@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Nexus Reclamation by Emma Handy (em teegee)
+Title=Hookah-Smoking Caterpillar
+Difficulty=very hard
+Description=Nexus Reclamation by Emma Handy (em teegee)
+Icon=Hookah-Smoking Caterpillar.jpg
+Deck Type=constructed
+
+[main]
+3 Memorial to Genius
+6 Island
+4 Hinterland Harbor
+6 Forest
+4 Breeding Pool
+2 Blast Zone
+4 Tamiyo, Collector of Tales
+1 Nissa, Who Shakes the World
+4 Wilderness Reclamation
+3 Search for Azcanta|XLN
+1 Callous Dismissal
+4 Root Snare
+4 Opt
+4 Nexus of Fate
+4 Growth Spiral
+4 Chemister's Insight
+2 Blink of an Eye
+
+[sideboard]
+3 Biogenic Ooze
+1 Nissa, Who Shakes the World
+3 Narset, Parter of Veils
+2 Negate
+2 Spell Pierce|XLN
+4 Thorn Lieutenant

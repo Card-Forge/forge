@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Zou Yutong
+Title=The Dark Barony
+Difficulty=very hard
+Description=Esper Aggro by Zou Yutong
+Icon=The Dark Barony.jpg
+Deck Type=constructed
+
+[main]
+1 Void Rend
+1 Infernal Grasp
+1 Sorin the Mirthless
+2 Portable Hole
+2 Emeria's Call
+2 The Meathook Massacre
+2 The Wandering Emperor
+3 Kaito Shizuki
+3 Vanishing Verse
+1 Legion Angel
+2 Liesa, Forgotten Archangel
+2 Valki, God of Lies
+3 Nadaar, Selfless Paladin
+3 Raffine, Scheming Seer
+4 Triumphant Adventurer
+4 Luminarch Aspirant
+1 Plains
+1 Otawara, Soaring City
+1 Eiganjo, Seat of the Empire
+1 Swamp
+2 Hive of the Eye Tyrant
+2 Deserted Beach
+2 Shipwreck Marsh
+3 Hengegate Pathway
+3 Clearwater Pathway
+4 Brightclimb Pathway
+4 Raffine's Tower
+
+[sideboard]
+4 Duress
+3 Ray of Enfeeblement
+1 Go Blank
+1 Kotose, the Silent Spider
+1 Disdainful Stroke
+1 Negate
+1 Path of Peril
+3 Legion Angel

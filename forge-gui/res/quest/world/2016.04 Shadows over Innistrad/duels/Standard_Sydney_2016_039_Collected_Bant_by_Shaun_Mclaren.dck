@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Collected Bant by Shaun Mclaren
+Title=No Life
+Difficulty=very hard
+Description=Collected Bant by Shaun Mclaren
+Icon=No Life.jpg
+Deck Type=constructed
+
+[main]
+1 Tamiyo, Field Researcher|EMN
+3 Thalia, Heretic Cathar|EMN
+4 Noose Constrictor|EMN
+4 Spell Queller|EMN
+3 Tireless Tracker|SOI
+4 Duskwatch Recruiter|SOI
+4 Reflector Mage|OGW
+4 Sylvan Advocate|OGW
+4 Collected Company|DTK
+4 Dromoka's Command|DTK
+2 Fortified Village|SOI
+2 Lumbering Falls|BFZ
+3 Forest|RTR
+4 Evolving Wilds
+1 Canopy Vista|BFZ
+3 Prairie Stream|BFZ
+4 Yavimaya Coast|ORI
+5 Plains|RTR
+1 Island|RTR
+
+[sideboard]
+1 Tamiyo, Field Researcher|EMN
+1 Tireless Tracker|SOI
+2 Declaration in Stone|SOI
+1 Nissa, Vastwood Seer|ORI
+2 Tragic Arrogance|ORI
+2 Ojutai's Command|DTK
+2 Negate
+2 Selfless Spirit|EMN
+2 Clash of Wills|ORI

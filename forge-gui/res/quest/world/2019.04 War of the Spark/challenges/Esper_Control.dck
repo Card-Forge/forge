@@ -1,0 +1,54 @@
+[quest]
+id=20190401
+OpponentName=Gregory
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Esper Control
+Title=Apollo
+Difficulty=very hard
+Description=Esper Control by Gregory Orange (citr)
+Icon=Apollo.jpg
+Deck Type=constructed
+
+[main]
+3 Basilica Bell-Haunt
+2 Cast Down
+1 Moment of Craving
+2 Command the Dreadhorde
+1 Cry of the Carnarium
+3 Kaya's Wrath
+2 The Elderspell
+4 Thought Erasure
+3 Oath of Kaya
+1 Search for Azcanta|XLN
+4 Narset, Parter of Veils
+4 Teferi, Hero of Dominaria
+4 Teferi, Time Raveler
+4 Drowned Catacomb|XLN
+4 Glacial Fortress|XLN
+4 Godless Shrine
+4 Hallowed Fountain
+4 Isolated Chapel
+1 Plains
+1 Swamp
+4 Watery Grave
+
+[sideboard]
+1 Moment of Craving
+1 Cry of the Carnarium
+1 The Elderspell
+3 Despark
+2 Dovin's Veto
+2 Duress
+1 Enter the God-Eternals
+2 Hero of Precinct One
+1 Hostage Taker|XLN
+1 Lyra Dawnbringer

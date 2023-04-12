@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Pedro Lechado Artigues
+Title=Swan
+Difficulty=very hard
+Description=Red Deck Wins by Pedro Lechado Artigues
+Icon=Swan.jpg
+Deck Type=constructed
+
+[main]
+4 Experimental Frenzy
+4 Wizard's Lightning
+4 Shock
+4 Lightning Strike
+2 Rekindling Phoenix
+4 Viashino Pyromancer
+4 Runaway Steam-Kin
+4 Goblin Chainwhirler
+4 Ghitu Lavarunner
+4 Fanatical Firebrand
+22 Mountain
+
+[sideboard]
+2 Banefire
+3 Lava Coil
+3 Fight with Fire
+3 Fiery Cannonade|XLN
+3 Treasure Map|XLN
+1 Rekindling Phoenix

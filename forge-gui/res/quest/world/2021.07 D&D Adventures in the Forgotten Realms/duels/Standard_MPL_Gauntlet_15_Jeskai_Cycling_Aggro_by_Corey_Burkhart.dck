@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Jeskai Cycling Aggro by Corey Burkhart
+Title=Nagsnarf
+Difficulty=very hard
+Description=Jeskai Cycling Aggro by Corey Burkhart
+Icon=Nagsnarf.jpg
+Deck Type=constructed
+
+[main]
+4 Drannith Stinger
+4 Irencrag Pyromancer
+4 Flourishing Fox
+4 Valiant Rescuer
+1 Negate
+4 Zenith Flare
+4 Startling Development
+4 Go for Blood
+4 Boon of the Wish-Giver
+3 Footfall Crater
+4 Improbable Alliance
+1 Island
+1 Savai Triome
+1 Plains
+1 Mountain
+4 Riverglide Pathway
+4 Raugrin Triome
+4 Needleverge Pathway
+4 Hengegate Pathway
+
+[sideboard]
+2 Negate
+1 Ox of Agonas
+1 Mystical Dispute
+2 Redcap Melee
+3 Skyclave Apparition
+3 Burning Hands
+3 Disdainful Stroke

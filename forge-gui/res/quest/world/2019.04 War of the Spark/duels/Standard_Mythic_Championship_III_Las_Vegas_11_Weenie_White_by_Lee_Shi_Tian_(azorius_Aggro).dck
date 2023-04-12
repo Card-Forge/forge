@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Weenie White by Lee Shi Tian (azorius Aggro)
+Title=Vanellope von Schweetz
+Difficulty=very hard
+Description=Weenie White by Lee Shi Tian (azorius Aggro)
+Icon=Vanellope von Schweetz.jpg
+Deck Type=constructed
+
+[main]
+2 Adanto Vanguard|XLN
+4 Benalish Marshal
+4 Dauntless Bodyguard
+4 Law-Rune Enforcer
+4 Skymarcher Aspirant
+2 Snubhorn Sentry
+2 Tomik, Distinguished Advokist
+4 Venerated Loxodon
+2 Baffling End
+2 Conclave Tribunal
+4 History of Benalia
+4 Legion's Landing|XLN
+4 Glacial Fortress|XLN
+4 Hallowed Fountain
+14 Plains
+
+[sideboard]
+2 Baffling End
+2 Deputy of Detention
+1 Disdainful Stroke
+2 Finale of Glory
+4 Gideon Blackblade
+1 Teferi, Time Raveler
+3 Tocatli Honor Guard|XLN

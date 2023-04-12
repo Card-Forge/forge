@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Weenie White by ModiSapiras
+Title=Vodalia
+Difficulty=very hard
+Description=Weenie White by ModiSapiras
+Icon=Vodalia.jpg
+Deck Type=constructed
+
+[main]
+3 Adeline, Resplendent Cathar
+4 Battlefield Raptor
+4 Brutal Cathar
+4 Clarion Spirit
+2 Intrepid Adversary
+4 Luminarch Aspirant
+4 Monk of the Open Hand
+3 Reidane, God of the Worthy
+4 Usher of the Fallen
+2 Kabira Takedown
+4 Paladin Class
+4 Faceless Haven
+18 Snow-Covered Plains
+
+[sideboard]
+3 Elite Spellbinder
+2 Fateful Absence
+3 Guardian of Faith
+4 Portable Hole
+3 Skyclave Apparition

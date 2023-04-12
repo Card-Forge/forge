@@ -1,0 +1,52 @@
+[quest]
+id=20200104
+OpponentName=Paulo
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=UW Control
+Title=Tibalt
+Difficulty=very hard
+Description=UW Control by Paulo Vitor Damo Da Rosa
+Icon=Tibalt.jpg
+Deck Type=constructed
+
+[main]
+2 Mystical Dispute
+3 Dovin's Veto
+4 Absorb
+1 Dream Trawler
+1 Archon of Sun's Grace
+4 Temple of Enlightenment
+4 Hallowed Fountain
+1 Field of Ruin
+2 Fabled Passage
+1 Castle Vantress
+3 Castle Ardenvale
+3 Plains
+7 Island
+4 Teferi, Time Raveler
+2 Narset, Parter of Veils
+3 The Birth of Meletis
+4 Omen of the Sea
+3 Elspeth Conquers Death
+2 Banishing Light
+3 Shatter the Sky
+3 Thirst for Meaning
+
+[sideboard]
+2 Mystical Dispute
+1 Dovin's Veto
+2 Archon of Sun's Grace
+2 Commence the Endgame
+4 Aether Gust
+2 Cerulean Drake
+1 Glass Casket
+1 Narset, Parter of Veils

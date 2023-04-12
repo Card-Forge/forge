@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Hideaki Muraoka
+Title=Lumpy
+Difficulty=very hard
+Description=Mono Green Aggro by Hideaki Muraoka
+Icon=Lumpy.jpg
+Deck Type=constructed
+
+[main]
+1 Outland Liberator
+3 Lotus Cobra|ZEN
+4 Old-Growth Troll
+4 Werewolf Pack Leader
+4 Esika's Chariot
+2 Snakeskin Veil
+2 Inscription of Abundance
+4 Blizzard Brawl
+4 Ranger Class
+4 Wrenn and Seven
+2 Lair of the Hydra
+4 Faceless Haven
+4 Kazandu Mammoth
+18 Snow-Covered Forest|IA
+
+[sideboard]
+3 Outland Liberator
+2 Snakeskin Veil
+2 Inscription of Abundance
+1 Clear Shot|EMN
+1 Toski, Bearer of Secrets
+2 Briarbridge Tracker
+2 Unnatural Growth
+2 Tajuru Blightblade

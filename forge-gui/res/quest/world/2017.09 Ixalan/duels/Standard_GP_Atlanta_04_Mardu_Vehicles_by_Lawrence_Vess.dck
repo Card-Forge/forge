@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Mardu Vehicles by Lawrence Vess
+Title=Bubbles
+Difficulty=very hard
+Description=Mardu Vehicles by Lawrence Vess
+Icon=Bubbles.jpg
+Deck Type=constructed
+
+[main]
+3 Chandra, Torch of Defiance|KLD
+4 Glorybringer|AKH
+3 Fatal Push|AER
+4 Unlicensed Disintegration|KLD
+4 Heart of Kiran|AER
+2 Aethersphere Harvester|AER
+3 Aether Hub|KLD
+2 Canyon Slough|AKH
+4 Concealed Courtyard|KLD
+1 Dragonskull Summit|XLN
+4 Inspiring Vantage|KLD
+4 Mountain|XLN
+3 Plains|XLN
+4 Spire of Industry|AER
+1 Hazoret the Fervent|AKH
+3 Pia Nalaar|KLD
+3 Veteran Motorist|KLD
+4 Scrapheap Scrounger|KLD
+4 Toolcraft Exemplar|KLD
+
+[sideboard]
+1 Fatal Push|AER
+3 Rampaging Ferocidon|XLN
+2 Chandra's Defeat|HOU
+2 Duress|XLN
+2 Abrade|HOU
+1 Cartouche of Ambition|AKH
+2 Fumigate|KLD
+1 Skysovereign, Consul Flagship|KLD
+1 Hazoret the Fervent|AKH

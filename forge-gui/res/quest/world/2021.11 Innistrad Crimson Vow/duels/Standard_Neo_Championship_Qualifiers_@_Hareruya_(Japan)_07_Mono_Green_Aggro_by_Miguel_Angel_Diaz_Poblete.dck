@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Miguel Angel Diaz Poblete
+Title=Cipher
+Difficulty=very hard
+Description=Mono Green Aggro by Miguel Angel Diaz Poblete
+Icon=Cipher.jpg
+Deck Type=constructed
+
+[main]
+3 Ulvenwald Oddity
+3 Ascendant Packleader
+4 Old-Growth Troll
+4 Werewolf Pack Leader
+4 Sculptor of Winter
+4 Esika's Chariot
+2 Snakeskin Veil
+4 Blizzard Brawl
+2 Unnatural Growth
+2 Ranger Class
+1 Lair of the Hydra
+2 Tangled Florahedron
+3 Faceless Haven
+3 Kazandu Mammoth
+19 Snow-Covered Forest
+
+[sideboard]
+1 Ulvenwald Oddity
+2 Snakeskin Veil
+2 Inscription of Abundance
+2 Froghemoth
+2 Wrenn and Seven
+3 Tajuru Blightblade
+3 Devouring Tendrils

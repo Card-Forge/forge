@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Atarka Red by Javier Dominguez 
+Title=Hunding Gjornersen
+Difficulty=very hard
+Description=Atarka Red by Javier Dominguez 
+Icon=Hunding Gjornersen.jpg
+Deck Type=constructed
+
+[main]
+1 Fiery Impulse|ORI
+3 Temur Battle Rage|FRF
+4 Atarka's Command|DTK
+4 Become Immense|KTK
+4 Titan's Strength|ORI
+4 Wild Slash|FRF
+1 Yasova Dragonclaw|FRF
+1 Lightning Berserker|DTK
+1 Flamewake Phoenix|FRF
+1 Dragon Whisperer|DTK
+3 Zurgo Bellstriker|DTK
+4 Abbot of Keral Keep|ORI
+4 Monastery Swiftspear|KTK
+4 Makindi Sliderunner|BFZ
+1 Forest|BFZ
+2 Cinder Glade|BFZ
+3 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+4 Bloodstained Mire|KTK
+7 Mountain|BFZ
+
+[sideboard]
+3 Roast|DTK
+2 Hooting Mandrills|KTK
+1 Arc Lightning|KTK
+1 Outpost Siege|FRF
+3 Rending Volley|DTK
+2 Fiery Impulse|ORI
+3 Flamewake Phoenix|FRF

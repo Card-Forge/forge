@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jeskai Mutate by Ivan Floch
+Title=The Millstone
+Difficulty=very hard
+Description=Jeskai Mutate by Ivan Floch
+Icon=The Millstone.jpg
+Deck Type=constructed
+
+[main]
+1 Into the Roil
+1 Redcap Melee
+1 Soul Sear
+1 Seize the Spoils
+2 Disdainful Stroke
+2 Unsubstantiate
+2 See the Truth
+4 Expressive Iteration
+4 Prismari Command
+4 Spikefield Hazard
+4 Cinderclasm
+3 Goldspan Dragon
+4 Lore Drakkis
+4 Vadrok, Apex of Thunder
+3 Mountain
+4 Riverglide Pathway
+4 Needleverge Pathway
+4 Island
+4 Hengegate Pathway
+4 Raugrin Triome
+
+[sideboard]
+4 Cubwarden
+2 Scorching Dragonfire
+2 Phoenix of Ash
+2 Negate
+1 Burning Hands
+1 Mystical Dispute
+1 Test of Talents
+1 Behold the Multiverse
+1 Redcap Melee

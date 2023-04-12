@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Orzhov Control by Jeremy Dezani
+Title=The Court Jester
+Difficulty=very hard
+Description=Orzhov Control by Jeremy Dezani
+Icon=The Court Jester.jpg
+Deck Type=constructed
+
+[main]
+4 Gideon, Ally of Zendikar|BFZ
+2 Ob Nixilis Reignited|BFZ
+2 Sorin, Grim Nemesis|SOI
+3 Languish|C16
+2 Ruinous Path|BFZ
+2 Transgress the Mind|BFZ
+4 Read the Bones|ORI
+1 Planar Outburst|BFZ
+4 Grasp of Darkness|OGW
+1 Anguished Unmaking|SOI
+2 Secure the Wastes|DTK
+2 Ultimate Price|DTK
+2 Hallowed Moonlight|ORI
+3 Oath of Liliana|EMN
+4 Shambling Vent|BFZ
+4 Caves of Koilos|C16
+4 Forsaken Sanctuary
+2 Westvale Abbey|SOI
+1 Blighted Fen|BFZ
+2 Battlefield Forge|ORI
+7 Swamp|RTR
+2 Plains|RTR
+
+[sideboard]
+2 Transgress the Mind|BFZ
+1 Reality Smasher|OGW
+3 Thought-Knot Seer|OGW
+1 Flaying Tendrils|OGW
+2 Dead Weight
+2 Eldrazi Displacer|OGW
+2 Duress
+2 Kalitas, Traitor of Ghet|OGW

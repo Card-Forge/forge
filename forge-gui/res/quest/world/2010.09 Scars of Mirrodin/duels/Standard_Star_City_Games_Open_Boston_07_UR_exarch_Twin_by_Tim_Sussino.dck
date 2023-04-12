@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=UR exarch Twin by Tim Sussino
+Title=Jafar
+Difficulty=very hard
+Description=UR exarch Twin by Tim Sussino
+Icon=Jafar.jpg
+Deck Type=constructed
+
+[main]
+1 Spellskite|NPH
+4 Deceiver Exarch|NPH
+1 Grim Lavamancer|M12
+1 Deprive|ROE
+1 Dismember|NPH
+3 Dispel|WWK
+3 Into the Roil|ZEN
+3 Mana Leak|M12
+2 Spell Pierce|ZEN
+3 Gitaxian Probe|NPH
+4 Ponder|M12
+4 Preordain|M11
+3 Shrine of Piercing Vision|NPH
+4 Splinter Twin|ROE
+6 Island|M12
+4 Mountain|M12
+3 Arid Mesa|ZEN
+4 Halimar Depths|WWK
+2 Misty Rainforest|ZEN
+4 Scalding Tarn|ZEN
+
+[sideboard]
+2 Grim Lavamancer|M12
+2 Manic Vandal|M12
+1 Combust|M12
+3 Mental Misstep|NPH
+1 Mutagenic Growth|NPH
+1 Negate|M12
+3 Ratchet Bomb|SOM
+2 Jace Beleren|M11

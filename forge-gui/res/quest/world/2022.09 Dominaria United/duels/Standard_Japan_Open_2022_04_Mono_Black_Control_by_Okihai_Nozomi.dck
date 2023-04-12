@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mono Black Control by Okihai Nozomi
+Title=BlackPanther
+Difficulty=very hard
+Description=Mono Black Control by Okihai Nozomi
+Icon=BlackPanther.jpg
+Deck Type=constructed
+
+[main]
+2 Concealing Curtains
+4 Sheoldred, the Apocalypse
+4 Tenacious Underdog
+4 Graveyard Trespasser
+1 The Celestus
+3 Reckoner Bankbuster
+2 Cut Down
+3 Infernal Grasp
+4 Invoke Despair
+3 The Meathook Massacre
+2 Sorin the Mirthless
+2 Liliana of the Veil
+1 Takenuma, Abandoned Mire
+2 Roadside Reliquary
+23 Swamp
+
+[sideboard]
+1 Reckoner Bankbuster
+1 Cut Down
+1 Infernal Grasp
+1 The Meathook Massacre
+1 Pilfer
+1 Pithing Needle
+1 Junji, the Midnight Sky
+2 Unlicensed Hearse
+2 Parasitic Grasp
+4 Duress

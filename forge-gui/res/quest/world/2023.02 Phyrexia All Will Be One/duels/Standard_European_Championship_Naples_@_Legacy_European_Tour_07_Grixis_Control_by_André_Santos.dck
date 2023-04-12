@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Grixis Control by André Santos
+Title=Obatala
+Difficulty=very hard
+Description=Grixis Control by André Santos
+Icon=Obatala.jpg
+Deck Type=constructed
+
+[main]
+1 Spell Pierce
+2 Cut Down
+2 Abrade
+2 Make Disappear
+2 Brotherhood's End
+3 Go for the Throat
+3 Reckoner Bankbuster
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+3 Sheoldred, the Apocalypse
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+1 Swamp
+1 Takenuma, Abandoned Mire
+2 Underground River
+2 Sulfurous Springs
+2 Stormcarved Coast
+3 Shipwreck Marsh
+3 Darkslick Shores
+4 Blackcleave Cliffs
+4 Xander's Lounge
+4 Haunted Ridge
+
+[sideboard]
+3 Razorlash Transmogrant
+2 Duress
+2 Unlicensed Hearse
+2 Disdainful Stroke
+1 Negate
+1 Bladecoil Serpent
+2 Cut Down
+1 Brotherhood's End
+1 Reckoner Bankbuster

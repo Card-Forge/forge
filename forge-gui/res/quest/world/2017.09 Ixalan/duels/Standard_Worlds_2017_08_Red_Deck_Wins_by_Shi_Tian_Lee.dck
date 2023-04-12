@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Shi Tian Lee
+Title=The Color Blue
+Difficulty=very hard
+Description=Red Deck Wins by Shi Tian Lee
+Icon=The Color Blue.jpg
+Deck Type=constructed
+
+[main]
+1 Chandra, Torch of Defiance|KLD
+4 Soul-Scar Mage|AKH
+4 Bomat Courier|KLD
+3 Kari Zev, Skyship Raider|AER
+4 Earthshaker Khenra|HOU
+4 Ahn-Crop Crasher|AKH
+4 Hazoret the Fervent|AKH
+4 Shock|AER
+4 Abrade|HOU
+4 Lightning Strike|XLN
+15 Mountain|XLN
+1 Scavenger Grounds|HOU
+4 Ramunap Ruins|HOU
+4 Sunscorched Desert|AKH
+
+[sideboard]
+3 Chandra, Torch of Defiance|KLD
+2 Chandra's Defeat|HOU
+4 Rampaging Ferocidon|XLN
+3 Pia Nalaar|KLD
+2 Glorybringer|AKH
+1 Aethersphere Harvester|AER

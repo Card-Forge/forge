@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=5cc by Francisco Benitez
+Title=Daphne
+Difficulty=very hard
+Description=5cc by Francisco Benitez
+Icon=Daphne.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+1 Ossification
+2 The Eternal Wanderer
+3 The Wandering Emperor
+3 Herd Migration
+3 Depopulate
+3 Make Disappear
+3 Reckoner Bankbuster
+4 Wedding Announcement
+4 Leyline Binding
+4 Lay Down Arms
+2 Contagious Vorrac
+2 Atraxa, Grand Unifier
+1 Swamp
+1 Boseiju, Who Endures
+1 Otawara, Soaring City
+1 Overgrown Farmland
+1 Mountain
+2 Island
+2 Forest
+4 Spara's Headquarters
+4 Plains
+4 Raffine's Tower
+4 Jetmir's Garden
+
+[sideboard]
+1 Memory Deluge
+2 Thrun, Breaker of Silence
+1 Nissa, Ascended Animist
+1 Tear Asunder
+2 Disdainful Stroke
+2 Knockout Blow
+2 Farewell
+2 Negate
+1 Ossification
+1 Reckoner Bankbuster

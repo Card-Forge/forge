@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Gabriel Silva
+Title=Radioactive Man
+Difficulty=very hard
+Description=Mono Green Aggro by Gabriel Silva
+Icon=Radioactive Man.jpg
+Deck Type=constructed
+
+[main]
+4 Werewolf Pack Leader
+4 Sculptor of Winter
+4 Old-Growth Troll
+4 Esika's Chariot
+1 Snakeskin Veil
+3 Inscription of Abundance
+4 Blizzard Brawl
+4 Ranger Class
+3 Wrenn and Seven
+2 Tangled Florahedron
+2 Lair of the Hydra
+4 Faceless Haven
+4 Kazandu Mammoth
+17 Snow-Covered Forest
+
+[sideboard]
+3 Snakeskin Veil
+2 Briarbridge Tracker
+2 Tajuru Blightblade
+2 Clear Shot
+3 Froghemoth
+3 Outland Liberator

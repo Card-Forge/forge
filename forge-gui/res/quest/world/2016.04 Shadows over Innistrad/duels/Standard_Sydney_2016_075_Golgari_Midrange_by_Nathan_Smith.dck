@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Golgari Midrange by Nathan Smith
+Title=Alkiviades
+Difficulty=very hard
+Description=Golgari Midrange by Nathan Smith
+Icon=Alkiviades.jpg
+Deck Type=constructed
+
+[main]
+4 Liliana, the Last Hope|EMN
+4 Sylvan Advocate|OGW
+4 Tireless Tracker|SOI
+2 Nissa, Vastwood Seer|ORI
+1 Den Protector|C16
+1 World Breaker|OGW
+1 Emrakul, the Promised End|EMN
+1 Ishkanah, Grafwidow|EMN
+4 Languish|C16
+3 Ruinous Path|BFZ
+3 Traverse the Ulvenwald|SOI
+4 Grasp of Darkness|OGW
+1 Ultimate Price|DTK
+2 Dead Weight
+4 Hissing Quagmire|OGW
+4 Llanowar Wastes|ORI
+4 Evolving Wilds
+5 Forest|RTR
+8 Swamp|RTR
+
+[sideboard]
+1 Den Protector|C16
+1 Ultimate Price|DTK
+1 Dead Weight
+1 Kalitas, Traitor of Ghet|OGW
+1 Seasons Past|SOI
+2 Dark Petition|ORI
+1 Virulent Plague|DTK
+1 Woodland Bellower|ORI
+1 Duress
+3 Transgress the Mind|BFZ
+1 Caustic Caterpillar|ORI
+1 Ob Nixilis Reignited|BFZ

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=UR Aggro by Jessica Estephan (jessica)
+Title=Asanbosam
+Difficulty=very hard
+Description=UR Aggro by Jessica Estephan (jessica)
+Icon=Asanbosam.jpg
+Deck Type=constructed
+
+[main]
+4 Arclight Phoenix
+1 Augur of Bolas
+4 Crackling Drake
+3 Goblin Electromancer
+1 God-Eternal Kefnet
+2 Lightning Strike
+4 Opt
+1 Radical Idea
+4 Shock
+2 Spell Pierce|XLN
+1 Beacon Bolt
+4 Chart a Course|XLN
+3 Finale of Promise
+2 Lava Coil
+1 Maximize Velocity
+2 Tormenting Voice
+7 Island
+6 Mountain
+4 Steam Vents
+4 Sulfur Falls
+
+[sideboard]
+2 Augur of Bolas
+1 Beacon Bolt
+2 Lava Coil
+1 Disdainful Stroke
+1 Entrancing Melody|XLN
+3 Legion Warboss
+2 Narset, Parter of Veils
+2 Negate
+1 Shivan Fire

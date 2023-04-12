@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Temur Control by Sol Malka
+Title=Yemaya
+Difficulty=very hard
+Description=Temur Control by Sol Malka
+Icon=Yemaya.jpg
+Deck Type=constructed
+
+[main]
+3 Fire Prophecy
+3 Shark Typhoon
+4 Negate
+2 Fae of Wishes
+3 Toski, Bearer of Secrets
+4 Quandrix Apprentice
+4 Lovestruck Beast
+4 Bonecrusher Giant
+4 Brazen Borrower
+4 Edgewall Innkeeper
+1 Hall of Oracles
+1 Mountain
+2 Forest
+2 Island
+3 Ketria Triome
+4 Riverglide Pathway
+4 Cragcrown Pathway
+4 Barkchannel Pathway
+4 Fabled Passage
+
+[sideboard]
+3 Chainweb Aracnir
+2 Klothys, God of Destiny
+2 Ravenform
+2 Redcap Melee
+1 Mystical Dispute
+1 Saw It Coming
+1 Blazing Volley
+1 Storm's Wrath
+1 Soul-Guide Lantern
+1 Shark Typhoon

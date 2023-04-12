@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Blue Aggro by Jacob Wilson
+Title=Heinz Doofenshmirtz
+Difficulty=very hard
+Description=Mono Blue Aggro by Jacob Wilson
+Icon=Heinz Doofenshmirtz.jpg
+Deck Type=constructed
+
+[main]
+2 Mist-Cloaked Herald
+4 Pteramander
+4 Siren Stormtamer|XLN
+4 Merfolk Trickster
+4 Tempest Djinn
+2 Chart a Course|XLN
+1 Entrancing Melody|XLN
+4 Wizard's Retort
+2 Dive Down|XLN
+4 Opt
+3 Spell Pierce|XLN
+1 Essence Capture
+1 Quench
+4 Curious Obsession
+20 Island
+
+[sideboard]
+2 Chart a Course|XLN
+2 Entrancing Melody|XLN
+3 Surge Mare
+2 Deep Freeze
+4 Negate
+1 Exclusion Mage
+1 Faerie Duelist

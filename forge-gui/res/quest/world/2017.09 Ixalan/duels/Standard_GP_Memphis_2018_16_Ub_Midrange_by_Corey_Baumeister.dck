@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Ub Midrange by Corey Baumeister
+Title=Kang
+Difficulty=very hard
+Description=Ub Midrange by Corey Baumeister
+Icon=Kang.jpg
+Deck Type=constructed
+
+[main]
+8 Swamp
+3 Island
+3 Field of Ruin|XLN
+4 Fetid Pools|AKH
+4 Drowned Catacomb|XLN
+4 Aether Hub|KLD
+4 Vraska's Contempt|XLN
+1 Supreme Will|HOU
+4 Fatal Push|AER
+1 Essence Scatter|AKH
+1 Commit // Memory|AKH
+2 Chart a Course|XLN
+2 Walking Ballista|AER
+2 Torrential Gearhulk|KLD
+3 The Scarab God|HOU
+1 Ravenous Chupacabra
+2 Gonti, Lord of Luxury|KLD
+4 Glint-Sleeve Siphoner|AER
+3 Gifted Aetherborn|AER
+3 Champion of Wits|HOU
+1 Liliana, Death's Majesty|AKH
+
+[sideboard]
+1 Sorcerous Spyglass|XLN
+2 Negate
+2 Moment of Craving
+2 Lost Legacy|KLD
+1 Golden Demise
+1 Glimmer of Genius|KLD
+2 Duress|XLN
+1 Confiscation Coup|KLD
+2 Arguel's Blood Fast|XLN
+1 Commit // Memory|AKH

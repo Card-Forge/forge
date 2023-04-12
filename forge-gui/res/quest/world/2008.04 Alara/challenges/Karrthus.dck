@@ -1,0 +1,41 @@
+[quest]
+id=44001
+OpponentName=Karrthus
+AILife=20
+Repeat=true
+Wins=10
+Card Reward=Crucible of Fire|ALA;Sarkhan Vol|ALA;1 red rare
+Credit Reward=1000
+AIExtras=Crucible of Fire|Dragon's Herald
+[metadata]
+Name=quest44001
+Title=Where Dragons Dwell
+Icon=alakar.jpg
+Difficulty=hard
+Description=A deep voice is rising, from the heart of the mountain...
+Deck Type=constructed
+[Main]
+2 Broodmate Dragon|ALA
+1 Crucible of Fire|ALA
+1 Dragon Broodmother|ARB
+3 Dragon Fodder|ALA
+2 Dragon's Herald|ALA
+1 Firewild Borderpost|ARB
+1 Flameblast Dragon|ALA
+4 Forest|ALA|1
+1 Goblin Assault|ALA
+2 Goblin Mountaineer|ALA
+4 Hellkite Hatchling|CFX
+2 Hellkite Overlord|ALA
+4 Jund Panorama|ALA
+2 Karrthus, Tyrant of Jund|ARB
+9 Mountain|ALA|3
+3 Obelisk of Jund|ALA
+1 Predator Dragon|ALA
+2 Sarkhan Vol|ALA
+4 Savage Lands|ALA
+3 Sprouting Thrinax|ALA
+3 Swamp|ALA|4
+2 Tukatongue Thallid|CFX
+1 Veinfire Borderpost|ARB
+2 Voracious Dragon|CFX

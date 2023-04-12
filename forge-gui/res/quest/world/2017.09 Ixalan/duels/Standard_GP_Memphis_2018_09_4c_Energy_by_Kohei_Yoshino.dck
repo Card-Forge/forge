@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=4c Energy by Kohei Yoshino
+Title=Bendidret
+Difficulty=very hard
+Description=4c Energy by Kohei Yoshino
+Icon=Bendidret.jpg
+Deck Type=constructed
+
+[main]
+2 Vraska, Relic Seeker|XLN
+2 Abrade|HOU
+2 Magma Spray|AKH
+2 Moment of Craving
+2 Supreme Will|HOU
+2 Arguel's Blood Fast|XLN
+4 Vraska's Contempt|XLN
+4 Harnessed Lightning|KLD
+1 Gonti, Lord of Luxury|KLD
+2 Torrential Gearhulk|KLD
+3 The Scarab God|HOU
+4 Whirler Virtuoso|KLD
+4 Glint-Sleeve Siphoner|AER
+1 Island
+1 Mountain
+1 Rootbound Crag|XLN
+1 Forest
+2 Swamp
+2 Fetid Pools|AKH
+2 Evolving Wilds
+2 Dragonskull Summit|XLN
+3 Drowned Catacomb|XLN
+3 Canyon Slough|AKH
+4 Spirebluff Canal|KLD
+4 Aether Hub|KLD
+
+[sideboard]
+1 Vizier of Many Faces|AKH
+1 Angrath, the Flame-Chained
+1 Chandra, Torch of Defiance|KLD
+2 Doomfall|HOU
+2 Duress|XLN
+1 Hour of Devastation|HOU
+1 Lost Legacy|KLD
+3 Negate
+1 Nicol Bolas, God-Pharaoh|HOU
+1 Search for Azcanta|XLN
+1 Abrade|HOU

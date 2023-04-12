@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Blue Moon by Koyama Yuutarou
+Title=Magneto
+Difficulty=very hard
+Description=Blue Moon by Koyama Yuutarou
+Icon=Magneto.jpg
+Deck Type=constructed
+
+[main]
+1 Fury
+1 Subtlety
+3 Murktide Regent
+3 Snapcaster Mage|ISD
+1 Spell Snare|DIS
+2 Unholy Heat
+4 Archmage's Charm
+4 Counterspell|7E
+4 Lightning Bolt|M11
+4 Consider
+1 Serum Visions|FD
+3 Expressive Iteration
+1 Shark Typhoon
+2 Blood Moon|9E
+2 Dress Down
+1 Jace, the Mind Sculptor|WWK
+1 Ral, Izzet Viceroy
+1 Hall of Storm Giants
+1 Polluted Delta|KTK
+3 Misty Rainforest|ZEN
+3 Steam Vents
+3 Sulfur Falls
+4 Scalding Tarn|ZEN
+7 Island
+
+[sideboard]
+1 Fury
+1 Subtlety
+1 Aether Gust
+1 Mystical Dispute
+1 Vendilion Clique|MOR
+1 Anger of the Gods|THS
+2 Abrade
+2 Spreading Seas|ZEN
+2 Flusterstorm
+3 Relic of Progenitus|ALA

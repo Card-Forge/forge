@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Orzhov Control by Hisamichi Yoshigoe
+Title=The Alchemist
+Difficulty=very hard
+Description=Orzhov Control by Hisamichi Yoshigoe
+Icon=The Alchemist.jpg
+Deck Type=constructed
+
+[main]
+1 Legion Angel
+4 The Restoration of Eiganjo
+4 Luminarch Aspirant
+4 Silverquill Silencer
+2 Reckoner Bankbuster
+1 March of Otherworldly Light
+2 Hagra Mauling
+3 Vanishing Verse
+2 Emeria's Call
+2 Starnheim Unleashed
+3 Duress
+2 The Meathook Massacre
+4 Wedding Announcement
+2 Lolth, Spider Queen
+3 The Wandering Emperor
+1 Eiganjo, Seat of the Empire
+1 Takenuma, Abandoned Mire
+3 Hive of the Eye Tyrant
+4 Brightclimb Pathway
+4 Shattered Sanctum
+4 Plains
+4 Swamp
+
+[sideboard]
+3 Legion Angel
+1 The Meathook Massacre
+1 Infernal Grasp
+1 Bloodchief's Thirst
+1 Portable Hole
+1 Power Word Kill
+2 Ray of Enfeeblement
+2 Fracture
+3 Go Blank

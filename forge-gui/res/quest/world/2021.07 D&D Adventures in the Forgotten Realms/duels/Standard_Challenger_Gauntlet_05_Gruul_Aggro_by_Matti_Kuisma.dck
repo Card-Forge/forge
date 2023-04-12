@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Matti Kuisma
+Title=Count Musgrave
+Difficulty=very hard
+Description=Gruul Aggro by Matti Kuisma
+Icon=Count Musgrave.jpg
+Deck Type=constructed
+
+[main]
+4 Blightstep Pathway
+4 Darkbore Pathway
+4 Cragcrown Pathway
+3 Forest
+3 Lair of the Hydra
+2 Den of the Bugbear
+1 Mountain
+4 Shatterskull Smashing
+4 Esika's Chariot
+3 Embercleave
+4 Edgewall Innkeeper
+4 Magda, Brazen Outlaw
+4 Bonecrusher Giant
+4 Lovestruck Beast
+4 Jaspera Sentinel
+3 Rimrock Knight
+2 Goldspan Dragon
+2 Valki, God of Lies
+1 Ox of Agonas
+
+[sideboard]
+3 Redcap Melee
+3 Ray of Enfeeblement
+2 The Akroan War
+2 Klothys, God of Destiny
+2 Burning Hands
+1 Scorching Dragonfire
+2 Ox of Agonas

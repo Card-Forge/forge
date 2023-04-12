@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Mason Geyser
+Title=Maze of Ith
+Difficulty=very hard
+Description=Temur Reclamation by Mason Geyser
+Icon=Maze of Ith.jpg
+Deck Type=constructed
+
+[main]
+3 Teferi, Time Raveler
+4 Shark Typhoon
+4 Wilderness Reclamation
+3 Mystical Dispute
+4 Growth Spiral
+4 Expansion // Explosion
+2 Aether Gust
+1 Negate
+1 Commence the Endgame
+1 Dovin's Veto
+2 Uro, Titan of Nature's Wrath
+2 Brazen Borrower
+1 Blast Zone
+1 Plains
+1 Mountain
+1 Forest
+2 Island
+2 Castle Vantress
+2 Breeding Pool
+2 Hallowed Fountain
+2 Stomping Ground
+3 Fabled Passage
+4 Temple Garden
+4 Ketria Triome
+4 Raugrin Triome
+
+[sideboard]
+1 Teferi, Time Raveler
+2 Aether Gust
+3 Dovin's Veto
+1 Uro, Titan of Nature's Wrath
+2 Justice Strike
+2 Kenrith, the Returned King
+2 Flame Sweep
+2 Solar Blaze

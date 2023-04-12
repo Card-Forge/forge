@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Andrew Baeckstrom
+Title=Oketra
+Difficulty=very hard
+Description=Temur Reclamation by Andrew Baeckstrom
+Icon=Oketra.jpg
+Deck Type=constructed
+
+[main]
+1 Mountain
+1 Plains
+2 Island
+2 Castle Vantress
+3 Breeding Pool
+3 Hallowed Fountain
+4 Temple Garden
+4 Ketria Triome
+4 Raugrin Triome
+4 Fabled Passage
+1 Forest
+1 Brazen Borrower
+2 Uro, Titan of Nature's Wrath
+1 Aether Gust
+2 Dovin's Veto
+4 Mystical Dispute
+4 Growth Spiral
+4 Expansion // Explosion
+4 Shark Typhoon
+4 Wilderness Reclamation
+4 Teferi, Time Raveler
+1 Blast Zone
+
+[sideboard]
+3 Solar Blaze
+3 Glass Casket
+2 Jolrael, Mwonvuli Recluse
+1 Chemister's Insight
+2 Spectral Sailor
+2 Kenrith, the Returned King
+1 Uro, Titan of Nature's Wrath
+1 Dovin's Veto

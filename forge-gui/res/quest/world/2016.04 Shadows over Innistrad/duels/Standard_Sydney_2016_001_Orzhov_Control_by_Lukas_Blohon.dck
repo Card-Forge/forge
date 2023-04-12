@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Orzhov Control by Lukas Blohon
+Title=Aspect of Earth
+Difficulty=very hard
+Description=Orzhov Control by Lukas Blohon
+Icon=Aspect of Earth.jpg
+Deck Type=constructed
+
+[main]
+1 Sorin, Grim Nemesis|SOI
+2 Ob Nixilis Reignited|BFZ
+2 Transgress the Mind|BFZ
+2 Ruinous Path|BFZ
+2 Ultimate Price|DTK
+2 Hallowed Moonlight|ORI
+2 Anguished Unmaking|SOI
+3 Liliana, the Last Hope|EMN
+3 Read the Bones|ORI
+4 Languish|C16
+4 Grasp of Darkness|OGW
+1 Linvala, the Preserver|OGW
+3 Kalitas, Traitor of Ghet|OGW
+3 Archangel Avacyn|SOI
+1 Blighted Fen|BFZ
+4 Forsaken Sanctuary
+4 Plains|RTR
+4 Shambling Vent|BFZ
+4 Caves of Koilos|C16
+9 Swamp|RTR
+
+[sideboard]
+4 Gideon, Ally of Zendikar|BFZ
+2 Infinite Obliteration|ORI
+2 Dead Weight
+4 Duress
+1 Transgress the Mind|BFZ
+1 Ultimate Price|DTK
+1 Anguished Unmaking|SOI

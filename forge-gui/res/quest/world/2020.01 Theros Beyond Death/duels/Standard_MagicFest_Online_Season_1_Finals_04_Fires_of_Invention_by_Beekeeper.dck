@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Fires of Invention by Beekeeper
+Title=Samwise Gamgee
+Difficulty=very hard
+Description=Fires of Invention by Beekeeper
+Icon=Samwise Gamgee.jpg
+Deck Type=constructed
+
+[main]
+4 Hallowed Fountain
+4 Steam Vents
+4 Temple of Triumph
+3 Fabled Passage
+3 Sacred Foundry
+2 Mountain
+2 Castle Vantress
+2 Temple of Epiphany
+2 Plains
+1 Island
+4 Teferi, Time Raveler
+4 Fires of Invention
+2 Elspeth Conquers Death
+4 Deafening Clarion
+2 Aether Gust
+4 Bonecrusher Giant
+4 Sphinx of Foresight
+4 Cavalier of Flame
+3 Kenrith, the Returned King
+2 Haktos the Unscarred
+
+[sideboard]
+3 Tithe Taker
+3 Devout Decree
+3 Legion Warboss
+2 Robber of the Rich
+2 Mystical Dispute
+1 Disenchant
+1 Elspeth Conquers Death

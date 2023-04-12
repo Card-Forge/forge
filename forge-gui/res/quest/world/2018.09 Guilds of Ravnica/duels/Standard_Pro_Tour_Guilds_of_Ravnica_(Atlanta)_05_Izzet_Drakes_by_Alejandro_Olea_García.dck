@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Izzet Drakes by Alejandro Olea García
+Title=Lacjs
+Difficulty=very hard
+Description=Izzet Drakes by Alejandro Olea García
+Icon=Lacjs.jpg
+Deck Type=constructed
+
+[main]
+4 Arclight Phoenix
+4 Crackling Drake
+4 Goblin Electromancer
+2 Beacon Bolt
+3 Lava Coil
+3 Tormenting Voice
+4 Chart a Course|XLN
+2 Discovery // Dispersal
+4 Opt
+4 Shock
+4 Radical Idea
+1 Chemister's Insight
+4 Sulfur Falls
+4 Steam Vents
+6 Mountain
+7 Island
+
+[sideboard]
+1 Lava Coil
+2 Murmuring Mystic
+2 Niv-Mizzet, Parun
+2 Disdainful Stroke
+2 Negate
+1 Dive Down|XLN
+2 Fiery Cannonade|XLN
+2 Firemind's Research
+1 Star of Extinction|XLN

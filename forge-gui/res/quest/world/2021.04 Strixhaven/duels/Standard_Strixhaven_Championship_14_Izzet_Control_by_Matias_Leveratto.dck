@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Izzet Control by Matias Leveratto
+Title=Blue Devil
+Difficulty=very hard
+Description=Izzet Control by Matias Leveratto
+Icon=Blue Devil.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+1 Magma Opus
+2 Mystical Dispute
+3 Mazemind Tome
+3 Alrund's Epiphany
+3 Saw It Coming
+4 Frost Bite
+4 Expressive Iteration
+2 Galazeth Prismari
+4 Bonecrusher Giant
+4 Goldspan Dragon
+4 Brazen Borrower
+3 Faceless Haven
+4 Snow-Covered Mountain
+4 Riverglide Pathway
+4 Fabled Passage
+4 Volatile Fjord
+6 Snow-Covered Island
+
+[sideboard]
+2 The Akroan War
+2 Disdainful Stroke
+2 Redcap Melee
+2 Ox of Agonas
+2 Scorching Dragonfire
+2 Cinderclasm
+1 Shadowspear
+1 Test of Talents
+1 Mystical Dispute

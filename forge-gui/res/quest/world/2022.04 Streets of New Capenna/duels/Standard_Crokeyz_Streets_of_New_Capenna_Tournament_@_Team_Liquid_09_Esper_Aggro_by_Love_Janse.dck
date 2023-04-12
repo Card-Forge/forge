@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Love Janse
+Title=King Kong
+Difficulty=very hard
+Description=Esper Aggro by Love Janse
+Icon=King Kong.jpg
+Deck Type=constructed
+
+[main]
+1 Legion Angel
+4 Tenacious Underdog
+4 Skyclave Apparition
+4 Raffine, Scheming Seer
+4 Luminarch Aspirant
+4 Vanishing Verse
+4 Wedding Announcement
+1 Elspeth Resplendent
+1 Lolth, Spider Queen
+2 Sorin the Mirthless
+3 Kaito Shizuki
+3 The Wandering Emperor
+1 Hive of the Eye Tyrant
+1 Cave of the Frost Dragon
+1 Shipwreck Marsh
+1 Swamp
+2 Deserted Beach
+3 Shattered Sanctum
+4 Hengegate Pathway
+4 Raffine's Tower
+4 Clearwater Pathway
+4 Brightclimb Pathway
+
+[sideboard]
+3 Legion Angel
+2 Ray of Enfeeblement
+2 Portable Hole
+2 The Meathook Massacre
+3 Malevolent Hermit
+3 Check for Traps

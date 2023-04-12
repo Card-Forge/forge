@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Weenie White by Alex Hayne
+Title=Storm2
+Difficulty=very hard
+Description=Weenie White by Alex Hayne
+Icon=Storm2.jpg
+Deck Type=constructed
+
+[main]
+1 Drannith Magistrate
+2 Legion Angel
+3 Giant Killer
+3 Reidane, God of the Worthy
+4 Seasoned Hallowblade
+4 Skyclave Apparition
+4 Alseid of Life's Bounty
+4 Elite Spellbinder
+4 Luminarch Aspirant
+4 Selfless Savior
+1 Maul of the Skyclaves
+2 Glass Casket
+4 Faceless Haven
+20 Snow-Covered Plains
+
+[sideboard]
+2 Drannith Magistrate
+2 Legion Angel
+1 Giant Killer
+1 Reidane, God of the Worthy
+2 Glass Casket
+1 Lurrus of the Dream-Den
+1 Shadowspear
+1 Banishing Light
+2 Archon of Absolution
+2 Idol of Endurance

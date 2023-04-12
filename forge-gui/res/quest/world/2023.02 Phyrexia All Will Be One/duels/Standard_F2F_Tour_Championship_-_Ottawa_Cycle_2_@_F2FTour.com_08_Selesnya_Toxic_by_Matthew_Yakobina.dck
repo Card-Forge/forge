@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Selesnya Toxic by Matthew Yakobina
+Title=Wormwood
+Difficulty=very hard
+Description=Selesnya Toxic by Matthew Yakobina
+Icon=Wormwood.jpg
+Deck Type=constructed
+
+[main]
+3 Annex Sentry
+4 Crawling Chorus
+4 Jawbone Duelist
+4 Skrelv, Defector Mite
+4 Venerated Rotpriest
+4 Slaughter Singer
+4 Bloated Contaminator
+4 Tyvar's Stand
+3 Soul Partition
+4 Skrelv's Hive
+4 Brushland
+4 Razorverge Thicket
+3 Overgrown Farmland
+1 Eiganjo, Seat of the Empire
+1 Plains
+4 Mirrex
+4 The Seedcore
+1 Boseiju, Who Endures
+
+[sideboard]
+4 Wedding Announcement
+4 Destroy Evil
+3 Lantern Flare
+3 Melira, the Living Cure
+1 Knockout Blow

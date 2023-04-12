@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Red by Gan Yan
+Title=Hercules
+Difficulty=very hard
+Description=Mono Red by Gan Yan
+Icon=Hercules.jpg
+Deck Type=constructed
+
+[main]
+3 Scavenger Grounds|HOU
+18 Mountain
+3 Grasping Dunes|AKH
+3 Shock|AER
+4 Lightning Strike|XLN
+2 Abrade|HOU
+4 Rekindling Phoenix
+1 Pia Nalaar|KLD
+2 Kari Zev, Skyship Raider|AER
+4 Hazoret the Fervent|AKH
+4 Fanatical Firebrand
+4 Earthshaker Khenra|HOU
+4 Bomat Courier|KLD
+4 Ahn-Crop Crasher|AKH
+
+[sideboard]
+2 Abrade|HOU
+1 Pia Nalaar|KLD
+2 Magma Spray|AKH
+1 Key to the City|KLD
+1 Kari Zev's Expertise|AER
+2 Glorybringer|AKH
+2 Dire Fleet Daredevil
+2 Chandra, Torch of Defiance|KLD
+2 Aethersphere Harvester|AER

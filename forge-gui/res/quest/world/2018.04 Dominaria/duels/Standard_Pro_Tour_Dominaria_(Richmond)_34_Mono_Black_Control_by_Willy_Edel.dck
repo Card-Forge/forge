@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Mono Black Control by Willy Edel
+Title=BabaluAye
+Difficulty=very hard
+Description=Mono Black Control by Willy Edel
+Icon=BabaluAye.jpg
+Deck Type=constructed
+
+[main]
+2 Liliana, Death's Majesty|AKH
+3 Glint-Sleeve Siphoner|AER
+4 Gifted Aetherborn|AER
+3 Gonti, Lord of Luxury|KLD
+2 Noxious Gearhulk|KLD
+4 Dread Shade
+2 Walking Ballista|AER
+2 Knight of Malice
+2 Doomfall|HOU
+4 Fatal Push|AER
+4 Vraska's Contempt|XLN
+1 Cast Down
+1 Aethersphere Harvester|AER
+2 Desert of the Glorified|HOU
+4 Ifnir Deadlands|HOU
+4 Memorial to Folly
+3 Scavenger Grounds|HOU
+13 Swamp
+
+[sideboard]
+1 Glint-Sleeve Siphoner|AER
+1 Gonti, Lord of Luxury|KLD
+1 Cast Down
+2 Arguel's Blood Fast|XLN
+4 Duress|XLN
+2 Essence Extraction|KLD
+1 Hour of Glory|HOU
+1 Bontu's Last Reckoning|HOU
+1 Never // Return|AKH
+1 Fleetwheel Cruiser|KLD

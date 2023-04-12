@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Esper DOOM Yorion by Andrea Mengucci
+Title=Yawgmoth
+Difficulty=very hard
+Description=Esper DOOM Yorion by Andrea Mengucci
+Icon=Yawgmoth.jpg
+Deck Type=constructed
+
+[main]
+1 Temple of Silence
+3 Dance of the Manse
+3 Omen of the Sun
+4 Omen of the Sea
+4 Emeria's Call
+4 Elspeth's Nightmare
+3 Extinction Event
+4 Doom Foretold
+3 Elspeth Conquers Death
+4 Skyclave Apparition
+4 Temple of Deceit
+3 Swamp
+4 Raugrin Triome
+4 Plains
+4 Island
+4 Fabled Passage
+4 Clearwater Pathway
+4 Brightclimb Pathway
+3 Treacherous Blessing
+3 Shark Typhoon
+3 Yorion, Sky Nomad
+2 Heartless Act
+3 Golden Egg
+2 Eliminate
+
+[sideboard]
+2 Negate
+4 Mystical Dispute
+2 Cling to Dust
+2 Archon of Sun's Grace
+1 Extinction Event
+1 Treacherous Blessing
+1 Shark Typhoon
+1 Yorion, Sky Nomad
+1 Heartless Act

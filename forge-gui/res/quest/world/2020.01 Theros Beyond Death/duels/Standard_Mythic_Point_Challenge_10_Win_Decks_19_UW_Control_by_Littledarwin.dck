@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=UW Control by Littledarwin
+Title=Isis
+Difficulty=very hard
+Description=UW Control by Littledarwin
+Icon=Isis.jpg
+Deck Type=constructed
+
+[main]
+7 Island
+4 Temple of Enlightenment
+4 Hallowed Fountain
+4 Castle Ardenvale
+3 Plains
+1 Castle Vantress
+1 Fabled Passage
+1 Field of Ruin
+4 Teferi, Time Raveler
+2 Narset, Parter of Veils
+4 Omen of the Sea
+3 Elspeth Conquers Death
+2 The Birth of Meletis
+2 Shatter the Sky
+4 Aether Gust
+3 Absorb
+3 Dovin's Veto
+3 Thirst for Meaning
+2 Mystical Dispute
+3 Dream Trawler
+
+[sideboard]
+4 Devout Decree
+3 Deputy of Detention
+2 Archon of Sun's Grace
+1 Spectral Sailor
+1 Glass Casket
+1 Field of Ruin
+1 Narset, Parter of Veils
+1 Dovin's Veto
+1 Mystical Dispute

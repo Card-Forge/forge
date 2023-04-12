@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Weenie White by Fukuya Kenji
+Title=The Very Hungry Caterpillar
+Difficulty=very hard
+Description=Weenie White by Fukuya Kenji
+Icon=The Very Hungry Caterpillar.jpg
+Deck Type=constructed
+
+[main]
+1 Legion Angel
+4 Brutal Cathar
+4 Codespell Cleric
+4 Clarion Spirit
+4 Intrepid Adversary
+4 Luminarch Aspirant
+4 Usher of the Fallen
+4 Monk of the Open Hand
+4 Maul of the Skyclaves
+4 Homestead Courage
+1 Cave of the Frost Dragon
+4 Faceless Haven
+18 Snow-Covered Plains
+
+[sideboard]
+3 Legion Angel
+1 Grand Master of Flowers
+2 Guardian of Faith
+2 Sigardian Savior
+2 Reidane, God of the Worthy
+2 Fateful Absence
+3 Portable Hole

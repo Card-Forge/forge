@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Blue Moon by Philips Nguyen
+Title=Dionysus
+Difficulty=very hard
+Description=Blue Moon by Philips Nguyen
+Icon=Dionysus.jpg
+Deck Type=constructed
+
+[main]
+1 Brazen Borrower
+4 Snapcaster Mage|ISD
+4 Murktide Regent
+1 Fire // Ice|AP
+1 Electrolyze|GP
+2 Dead // Gone|PLC
+3 Prismari Command
+4 Thought Scour|DKA
+4 Consider
+4 Counterspell|7E
+4 Archmage's Charm
+4 Lightning Bolt|M11
+2 Blood Moon|9E
+2 Polluted Delta|KTK
+2 Flooded Strand|KTK
+3 Steam Vents
+3 Spirebluff Canal|KLD
+4 Scalding Tarn|ZEN
+8 Island
+
+[sideboard]
+1 Brazen Borrower
+1 Jace, the Mind Sculptor|WWK
+2 Subtlety
+2 Engineered Explosives|FD
+2 Spreading Seas|ZEN
+2 Aether Gust
+2 Abrade|HOU
+3 Relic of Progenitus|ALA

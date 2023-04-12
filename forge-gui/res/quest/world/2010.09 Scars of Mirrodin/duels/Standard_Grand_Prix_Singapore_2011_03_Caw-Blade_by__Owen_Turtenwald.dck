@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Caw-Blade by  Owen Turtenwald
+Title=Tarzan
+Difficulty=very hard
+Description=Caw-Blade by  Owen Turtenwald
+Icon=Tarzan.jpg
+Deck Type=constructed
+
+[main]
+4 Squadron Hawk|M11
+4 Stoneforge Mystic|WWK
+2 Dismember|NPH
+1 Divine Offering|MBS
+3 Into the Roil|ZEN
+4 Mana Leak|M11
+3 Spell Pierce|ZEN
+4 Preordain|M11
+1 Batterskull|NPH
+1 Sword of Feast and Famine|MBS
+1 Sword of War and Peace|NPH
+4 Celestial Colonnade|WWK
+3 Glacial Fortress|M11
+2 Inkmoth Nexus|MBS
+6 Island|NPH
+3 Plains|NPH
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+2 Jace Beleren|M11
+4 Jace, the Mind Sculptor|WWK
+
+[sideboard]
+2 Dismember|NPH
+2 Divine Offering|MBS
+1 Batterskull|NPH
+2 Sun Titan|M11
+1 Celestial Purge|M11
+2 Condemn|M11
+2 Flashfreeze|M11
+1 Day of Judgment|M11
+2 Oust|ROE

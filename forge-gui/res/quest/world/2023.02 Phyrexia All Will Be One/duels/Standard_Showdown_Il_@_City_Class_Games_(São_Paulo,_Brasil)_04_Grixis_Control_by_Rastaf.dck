@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Grixis Control by Rastaf
+Title=Mystique
+Difficulty=very hard
+Description=Grixis Control by Rastaf
+Icon=Mystique.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+1 Brotherhood's End
+1 Gix's Command
+2 Make Disappear
+3 Invoke Despair
+3 Abrade
+3 Go for the Throat
+4 Reckoner Bankbuster
+4 Fable of the Mirror-Breaker
+1 Bladecoil Serpent
+2 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Stormcarved Coast
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+2 Swamp
+2 Shivan Reef
+2 Shipwreck Marsh
+3 Sulfurous Springs
+3 Darkslick Shores
+4 Haunted Ridge
+4 Xander's Lounge
+4 Blackcleave Cliffs
+
+[sideboard]
+4 Cut Down
+2 Disdainful Stroke
+2 Duress
+1 Unlicensed Hearse
+1 Soul Transfer
+1 Razorlash Transmogrant
+1 Negate
+1 Brotherhood's End
+1 Bladecoil Serpent
+1 Sheoldred, the Apocalypse

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Esper Control by Jose Alvarez
+Title=Hulk
+Difficulty=very hard
+Description=Esper Control by Jose Alvarez
+Icon=Hulk.jpg
+Deck Type=constructed
+
+[main]
+4 Teferi, Hero of Dominaria
+3 Thought Erasure
+2 Cry of the Carnarium
+3 Kaya's Wrath
+2 Moment of Craving
+1 Cast Down
+3 Mortify
+3 Vraska's Contempt|XLN
+4 Absorb
+2 Negate
+3 Chemister's Insight
+1 Precognitive Perception
+1 The Eldest Reborn
+2 Search for Azcanta|XLN
+4 Watery Grave
+4 Hallowed Fountain
+4 Godless Shrine
+4 Isolated Chapel
+4 Glacial Fortress|XLN
+4 Drowned Catacomb|XLN
+1 Swamp
+1 Island
+
+[sideboard]
+1 Kaya's Wrath
+2 Cast Down
+1 The Eldest Reborn
+3 Duress
+4 Thief of Sanity
+2 Hostage Taker|XLN
+2 Lyra Dawnbringer

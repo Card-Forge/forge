@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Naya Runes Aggro by Evgenii Medvedev
+Title=Abassi
+Difficulty=very hard
+Description=Naya Runes Aggro by Evgenii Medvedev
+Icon=Abassi.jpg
+Deck Type=constructed
+
+[main]
+1 Legion Angel
+4 Fable of the Mirror-Breaker
+4 Kami of Transience
+4 Generous Visitor
+4 Runeforge Champion
+4 Jukai Naturalist
+1 Tamiyo's Safekeeping
+1 Circle of Confinement
+3 Rune of Sustenance
+3 Rune of Speed
+4 Showdown of the Skalds
+4 Rune of Might
+1 Overgrown Farmland
+1 Forest
+1 Plains
+1 Lair of the Hydra
+1 Boseiju, Who Endures
+2 Sundown Pass
+4 Jetmir's Garden
+4 Branchloft Pathway
+4 Cragcrown Pathway
+4 Needleverge Pathway
+
+[sideboard]
+3 Legion Angel
+1 Tamiyo's Safekeeping
+1 Katilda, Dawnhart Martyr
+1 Reidane, God of the Worthy
+1 Guardian of Faith
+2 Ranger Class
+2 Borrowed Time
+4 Strangle

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Squirrel/Opposition by Michael Turian
+Title=Starfire
+Difficulty=very hard
+Description=Squirrel/Opposition by Michael Turian
+Icon=Starfire.jpg
+Deck Type=constructed
+
+[main]
+7 Forest|OD
+5 Island|OD
+3 Karplusan Forest|7E
+2 Shivan Reef|AP
+4 Yavimaya Coast|AP
+4 Birds of Paradise|7E
+3 Flametongue Kavu|PS
+3 Llanowar Elves|7E
+4 Merfolk Looter|7E
+4 Wild Mongrel|OD
+2 Call of the Herd|OD
+4 Circular Logic|TO
+3 Deep Analysis|TO
+4 Fire // Ice|AP
+4 Opposition|7E
+4 Squirrel Nest|OD
+
+[sideboard]
+1 Flametongue Kavu|PS
+2 Bind|IN
+1 Compost|7E
+3 Gainsay|PS
+4 Jade Leech|IN
+1 Repulse|IN
+2 Static Orb|7E
+1 Upheaval|OD

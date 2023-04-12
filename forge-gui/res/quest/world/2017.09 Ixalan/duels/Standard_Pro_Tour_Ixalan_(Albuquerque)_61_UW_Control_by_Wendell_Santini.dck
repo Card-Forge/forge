@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=UW Control by Wendell Santini
+Title=Hades
+Difficulty=very hard
+Description=UW Control by Wendell Santini
+Icon=Hades.jpg
+Deck Type=constructed
+
+[main]
+3 Fumigate|KLD
+3 Approach of the Second Sun|AKH
+1 Negate|AER
+3 Settle the Wreckage|XLN
+4 Supreme Will|HOU
+4 Opt|XLN
+1 Disallow|AER
+3 Unsummon|HOU
+3 Essence Scatter|AKH
+4 Glimmer of Genius|KLD
+2 Search for Azcanta|XLN
+4 Cast Out|AKH
+1 Field of Ruin|XLN
+4 Irrigated Farmland|AKH
+4 Glacial Fortress|XLN
+8 Plains|XLN
+6 Island|XLN
+2 Ipnu Rivulet|HOU
+
+[sideboard]
+2 Negate|AER
+1 Search for Azcanta|XLN
+4 Slash of Talons|XLN
+3 Regal Caracal|AKH
+2 Jace's Defeat|HOU
+3 Torrential Gearhulk|KLD

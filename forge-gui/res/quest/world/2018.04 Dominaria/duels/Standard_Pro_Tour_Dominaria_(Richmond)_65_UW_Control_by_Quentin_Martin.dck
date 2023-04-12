@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=UW Control by Quentin Martin
+Title=SerendibGenie
+Difficulty=very hard
+Description=UW Control by Quentin Martin
+Icon=SerendibGenie.jpg
+Deck Type=constructed
+
+[main]
+1 Gideon of the Trials|AKH
+2 Essence Scatter|AKH
+2 Negate
+2 Syncopate
+4 Disallow|AER
+2 Settle the Wreckage|XLN
+3 Seal Away
+2 Search for Azcanta|XLN
+4 History of Benalia
+4 Cast Out|AKH
+3 Field of Ruin|XLN
+2 Memorial to Genius
+4 Irrigated Farmland|AKH
+4 Glacial Fortress|XLN
+7 Plains
+6 Island
+4 Karn, Scion of Urza
+4 Teferi, Hero of Dominaria
+
+[sideboard]
+2 Negate
+1 Seal Away
+2 Sorcerous Spyglass|XLN
+3 Fumigate|KLD
+3 Lyra Dawnbringer
+2 Authority of the Consuls|KLD
+2 Forsake the Worldly|AKH

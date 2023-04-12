@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Chester Swords
+Title=Air Assault
+Difficulty=very hard
+Description=Abzan Midrange by Chester Swords
+Icon=Air Assault.jpg
+Deck Type=constructed
+
+[main]
+4 Unknown Card
+1 Murderous Cut|KTK
+1 Garruk, Apex Predator|M15
+1 Utter End|KTK
+1 Ultimate Price|DTK
+2 Bile Blight|BNG
+3 Elspeth, Sun's Champion|THS
+3 Thoughtseize|THS
+4 Hero's Downfall|THS
+4 Abzan Charm|KTK
+3 Tasigur, the Golden Fang|FRF
+4 Courser of Kruphix|BNG
+4 Siege Rhino|KTK
+4 Satyr Wayfinder|M15
+1 Urborg, Tomb of Yawgmoth|M15
+2 Caves of Koilos|M15
+3 Temple of Silence|THS
+3 Llanowar Wastes|M15
+4 Temple of Malady|JOU
+4 Windswept Heath|KTK
+4 Sandsteppe Citadel|KTK
+
+[sideboard]
+1 End Hostilities|KTK
+1 Ugin, the Spirit Dragon|FRF
+2 Duress|DTK
+1 Nissa, Worldwaker|M15
+2 Read the Bones|THS
+3 Fleecemane Lion|THS
+3 Drown in Sorrow|BNG
+1 Ultimate Price|DTK
+1 Thoughtseize|THS

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Blue/Green Threshold by Sylvain Lauriol
+Title=Eldritch Onslaught
+Difficulty=very hard
+Description=Blue/Green Threshold by Sylvain Lauriol
+Icon=Eldritch Onslaught.jpg
+Deck Type=constructed
+
+[main]
+1 Upheaval|OD
+2 Stupefying Touch|TO
+4 Roar of the Wurm|OD
+1 Compulsion|TO
+3 Circular Logic|TO
+4 Careful Study|OD
+4 Breakthrough|TO
+4 Wild Mongrel|OD
+4 Werebear|OD
+2 Thought Eater|OD
+2 Spellbane Centaur|OD
+2 Seton's Scout|TO
+1 Nimble Mongoose|OD
+4 Basking Rootwalla|TO
+11 Island|A
+9 Forest|A
+2 Centaur Garden|OD
+
+[sideboard]
+2 Still Life|OD
+3 Standstill|OD
+2 Moment's Peace|OD
+2 Llawan, Cephalid Empress|TO
+1 Aura Graft|OD
+2 Aboshan, Cephalid Emperor|OD
+1 Upheaval|OD
+1 Stupefying Touch|TO
+1 Spellbane Centaur|OD

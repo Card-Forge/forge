@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Boros Angels by Kon Fai Wu (Hong Kong - A)
+Title=Amadioha
+Difficulty=very hard
+Description=Boros Angels by Kon Fai Wu (Hong Kong - A)
+Icon=Amadioha.jpg
+Deck Type=constructed
+
+[main]
+4 Adanto Vanguard|XLN
+4 Lyra Dawnbringer
+4 Rekindling Phoenix
+4 Resplendent Angel
+3 Aurelia, Exemplar of Justice
+4 Tocatli Honor Guard|XLN
+4 Lava Coil
+2 Justice Strike
+4 History of Benalia
+2 Ixalan's Binding|XLN
+5 Mountain
+3 Boros Guildgate
+4 Clifftop Retreat
+9 Plains
+4 Sacred Foundry
+
+[sideboard]
+1 Ixalan's Binding|XLN
+3 Deafening Clarion
+4 Dire Fleet Daredevil
+2 The Immortal Sun
+1 Conclave Tribunal
+4 Legion Warboss

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Nexus Reclamation by Matias Leveratto (levunga)
+Title=Clone
+Difficulty=very hard
+Description=Nexus Reclamation by Matias Leveratto (levunga)
+Icon=Clone.jpg
+Deck Type=constructed
+
+[main]
+1 Blink of an Eye
+3 Chemister's Insight
+4 Growth Spiral
+4 Nexus of Fate
+4 Opt
+4 Root Snare
+1 Callous Dismissal
+3 Search for Azcanta|XLN
+4 Wilderness Reclamation
+2 Narset, Parter of Veils
+1 Nissa, Who Shakes the World
+3 Tamiyo, Collector of Tales
+3 Blast Zone
+4 Breeding Pool
+5 Forest
+4 Hinterland Harbor
+5 Island
+3 Memorial to Genius
+1 Mobilized District
+1 Simic Guildgate
+
+[sideboard]
+1 Nissa, Who Shakes the World
+3 Biogenic Ooze
+2 Bond of Flourishing
+2 Crushing Canopy
+3 Negate
+4 Paradise Druid

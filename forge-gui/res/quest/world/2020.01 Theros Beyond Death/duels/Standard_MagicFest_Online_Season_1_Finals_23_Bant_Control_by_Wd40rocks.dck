@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Bant Control by Wd40rocks
+Title=Vortex
+Difficulty=very hard
+Description=Bant Control by Wd40rocks
+Icon=Vortex.jpg
+Deck Type=constructed
+
+[main]
+4 Hallowed Fountain
+4 Breeding Pool
+4 Temple Garden
+4 Fabled Passage
+3 Temple of Enlightenment
+2 Forest
+2 Temple of Plenty
+2 Temple of Mystery
+2 Plains
+2 Island
+4 Teferi, Time Raveler
+2 Tamiyo, Collector of Tales
+2 Nissa, Who Shakes the World
+1 Narset, Parter of Veils
+4 Elspeth Conquers Death
+2 Shatter the Sky
+4 Growth Spiral
+2 Mystical Dispute
+2 Aether Gust
+4 Uro, Titan of Nature's Wrath
+2 Hydroid Krasis
+2 Dream Trawler
+
+[sideboard]
+3 Glass Casket
+2 Tolsimir, Friend to Wolves
+2 Devout Decree
+2 Agent of Treachery
+1 Dovin's Veto
+1 Narset, Parter of Veils
+1 Shatter the Sky
+2 Mystical Dispute
+1 Aether Gust

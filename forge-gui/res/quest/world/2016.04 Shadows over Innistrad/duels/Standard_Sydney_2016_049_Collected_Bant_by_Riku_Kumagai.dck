@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Collected Bant by Riku Kumagai
+Title=Luke Skywalker
+Difficulty=very hard
+Description=Collected Bant by Riku Kumagai
+Icon=Luke Skywalker.jpg
+Deck Type=constructed
+
+[main]
+4 Sylvan Advocate|OGW
+2 Duskwatch Recruiter|SOI
+2 Selfless Spirit|EMN
+3 Jace, Vryn's Prodigy|ORI
+4 Tireless Tracker|SOI
+4 Reflector Mage|OGW
+3 Spell Queller|EMN
+2 Eldrazi Displacer|OGW
+2 Nissa, Vastwood Seer|ORI
+4 Dromoka's Command|DTK
+4 Collected Company|DTK
+4 Evolving Wilds
+4 Canopy Vista|BFZ
+4 Prairie Stream|BFZ
+4 Yavimaya Coast|ORI
+3 Forest|RTR
+3 Plains|RTR
+2 Island|RTR
+1 Wastes|OGW
+1 Lumbering Falls|BFZ
+
+[sideboard]
+1 Selfless Spirit|EMN
+1 Nissa, Vastwood Seer|ORI
+3 Declaration in Stone|SOI
+3 Lambholt Pacifist|SOI
+2 Negate
+2 Ojutai's Command|DTK
+1 Archangel Avacyn|SOI
+2 Tragic Arrogance|ORI

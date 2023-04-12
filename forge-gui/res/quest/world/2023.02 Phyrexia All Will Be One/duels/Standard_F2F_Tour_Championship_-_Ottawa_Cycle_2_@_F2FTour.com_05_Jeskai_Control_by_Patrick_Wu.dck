@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Patrick Wu
+Title=Hold the Line
+Difficulty=very hard
+Description=Jeskai Control by Patrick Wu
+Icon=Hold the Line.jpg
+Deck Type=constructed
+
+[main]
+1 Secrets of the Key
+1 Saheeli, Filigree Master
+2 Fires of Victory
+2 Flame-Blessed Bolt
+2 Spell Pierce
+2 Farewell
+3 The Wandering Emperor
+3 Memory Deluge
+3 Abrade
+4 Disruption Protocol
+4 Reckoner Bankbuster
+4 Fable of the Mirror-Breaker
+2 Sanctuary Warden
+1 Otawara, Soaring City
+1 Mountain
+1 Eiganjo, Seat of the Empire
+1 Adarkar Wastes
+1 Battlefield Forge
+2 Shivan Reef
+2 Xander's Lounge
+3 Island
+3 Seachrome Coast
+4 Deserted Beach
+4 Stormcarved Coast
+4 Sundown Pass
+
+[sideboard]
+4 Sunset Revelry
+4 Negate
+1 Hullbreaker Horror
+2 Depopulate
+2 Burn Down the House
+2 Flame-Blessed Bolt

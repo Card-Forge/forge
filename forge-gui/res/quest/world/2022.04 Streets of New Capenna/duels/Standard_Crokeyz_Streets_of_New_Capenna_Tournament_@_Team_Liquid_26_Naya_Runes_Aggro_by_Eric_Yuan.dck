@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Naya Runes Aggro by Eric Yuan
+Title=Wally
+Difficulty=very hard
+Description=Naya Runes Aggro by Eric Yuan
+Icon=Wally.jpg
+Deck Type=constructed
+
+[main]
+3 Fable of the Mirror-Breaker
+3 Kami of Transience
+4 Runeforge Champion
+4 Generous Visitor
+4 Jukai Naturalist
+1 Tamiyo's Safekeeping
+2 Commune with Spirits
+2 Hallowed Haunting
+3 Rune of Speed
+3 Rune of Sustenance
+4 Showdown of the Skalds
+4 Rune of Might
+1 Forest
+1 Eiganjo, Seat of the Empire
+1 Boseiju, Who Endures
+1 Lair of the Hydra
+2 Jetmir's Garden
+2 Overgrown Farmland
+3 Sundown Pass
+4 Needleverge Pathway
+4 Branchloft Pathway
+4 Cragcrown Pathway
+
+[sideboard]
+1 Fable of the Mirror-Breaker
+1 Tamiyo's Safekeeping
+1 Strangle
+1 Guardian of Faith
+1 Pithing Needle
+3 Skyclave Apparition
+3 Circle of Confinement
+4 Legion Angel

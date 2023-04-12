@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Helio Sampaio
+Title=Chandra, Pyromaster
+Difficulty=very hard
+Description=Mono Green Aggro by Helio Sampaio
+Icon=Chandra, Pyromaster.jpg
+Deck Type=constructed
+
+[main]
+4 Sculptor of Winter
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+4 Esika's Chariot
+2 Snakeskin Veil
+3 Inscription of Abundance
+4 Blizzard Brawl
+4 Ranger Class
+3 Wrenn and Seven
+2 Faceless Haven
+2 Tangled Florahedron
+2 Lair of the Hydra
+4 Kazandu Mammoth
+18 Snow-Covered Forest
+
+[sideboard]
+2 Snakeskin Veil
+1 Inscription of Abundance
+1 Devouring Tendrils
+2 Froghemoth
+2 Tangletrap
+2 Outland Liberator
+2 Toski, Bearer of Secrets
+3 Tajuru Blightblade

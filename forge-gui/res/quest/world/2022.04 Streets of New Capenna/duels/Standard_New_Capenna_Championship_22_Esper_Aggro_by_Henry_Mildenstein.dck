@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Henry Mildenstein
+Title=Arjun
+Difficulty=very hard
+Description=Esper Aggro by Henry Mildenstein
+Icon=Arjun.jpg
+Deck Type=constructed
+
+[main]
+2 Obscura Interceptor
+3 Dennick, Pious Apprentice
+3 Tenacious Underdog
+4 Raffine, Scheming Seer
+4 Luminarch Aspirant
+1 Ray of Enfeeblement
+1 Spell Pierce
+1 Infernal Grasp
+3 Vanishing Verse
+1 Emeria's Call
+1 The Meathook Massacre
+3 Wedding Announcement
+3 The Wandering Emperor
+4 Kaito Shizuki
+1 Deserted Beach
+1 Island
+1 Plains
+1 Hive of the Eye Tyrant
+1 Eiganjo, Seat of the Empire
+3 Brightclimb Pathway
+3 Shattered Sanctum
+3 Shipwreck Marsh
+4 Raffine's Tower
+4 Hengegate Pathway
+4 Clearwater Pathway
+
+[sideboard]
+1 Ray of Enfeeblement
+1 The Meathook Massacre
+1 Negate
+1 Skyclave Apparition
+1 Elspeth Resplendent
+2 Divine Smite
+2 Disdainful Stroke
+2 Portable Hole
+4 Archon of Emeria

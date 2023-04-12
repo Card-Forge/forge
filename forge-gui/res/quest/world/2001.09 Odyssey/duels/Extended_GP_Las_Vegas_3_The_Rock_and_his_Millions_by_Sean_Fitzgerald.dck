@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=The Rock and his Millions by Sean Fitzgerald
+Title=Skynet
+Difficulty=very hard
+Description=The Rock and his Millions by Sean Fitzgerald
+Icon=Skynet.jpg
+Deck Type=constructed
+
+[main]
+2 Vampiric Tutor|VI
+2 Phyrexian Furnace|WL
+4 Pernicious Deed|AP
+1 Living Death|TE
+4 Duress|US
+4 Yavimaya Elder|UD
+4 Spiritmonger|AP
+4 Spike Feeder|SH
+4 Phyrexian Negator|UD
+4 Llanowar Elves|A
+4 Birds of Paradise|A
+1 Volrath's Stronghold|SH
+4 Treetop Village|UL
+4 Swamp|A
+2 Llanowar Wastes|AP
+6 Forest|A
+2 Dust Bowl|MM
+4 Bayou|A
+
+[sideboard]
+2 Uktabi Orangutan|VI
+1 Null Rod|WL
+3 Emerald Charm|VI
+3 Diabolic Edict|TE
+3 Choke|TE
+1 Phyrexian Furnace|WL
+1 Living Death|TE
+1 Dust Bowl|MM

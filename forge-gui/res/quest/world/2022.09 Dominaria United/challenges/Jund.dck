@@ -1,0 +1,57 @@
+[quest]
+id=20220904
+OpponentName=Reid
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Jund
+Title=Ga-Gorib
+Difficulty=very hard
+Description=Jund by Reid Duke
+Icon=Ga-Gorib.jpg
+Deck Type=constructed
+
+[main]
+4 Bloodtithe Harvester
+4 Soul of Windgrace
+4 Titan of Industry
+4 Llanowar Loamspeaker
+4 Fable of the Mirror-Breaker
+2 Riveteers Charm
+2 Infernal Grasp
+3 Cut Down
+1 Duress
+1 Burn Down the House
+3 The Cruelty of Gix
+1 Liliana of the Veil
+1 Mountain
+1 Takenuma, Abandoned Mire
+1 Boseiju, Who Endures
+1 Sokenzan, Crucible of Defiance
+2 Karplusan Forest
+2 Rockfall Vale
+2 Forest
+2 Deathcap Glade
+2 Haunted Ridge
+2 Sulfurous Springs
+3 Swamp
+4 Riveteers Overlook
+4 Ziatora's Proving Ground
+
+[sideboard]
+1 Cut Down
+3 Duress
+1 The Cruelty of Gix
+1 Liliana of the Veil
+1 Abrade
+1 Soul Transfer
+1 Tear Asunder
+2 Unleash the Inferno
+4 Reckoner Bankbuster

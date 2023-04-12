@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Jose Cabezas
+Title=The Serpents
+Difficulty=very hard
+Description=Red Deck Wins by Jose Cabezas
+Icon=The Serpents.jpg
+Deck Type=constructed
+
+[main]
+20 Mountain
+3 Experimental Frenzy
+4 Wizard's Lightning
+4 Lightning Strike
+4 Shock
+4 Light Up the Stage
+4 Viashino Pyromancer
+4 Runaway Steam-Kin
+4 Goblin Chainwhirler
+4 Ghitu Lavarunner
+4 Fanatical Firebrand
+1 Chandra, Fire Artisan
+
+[sideboard]
+3 Tibalt, Rakish Instigator
+3 Legion Warboss
+4 Lava Coil
+3 Dire Fleet Daredevil
+1 Experimental Frenzy
+1 Chandra, Fire Artisan

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Azorius Soldier by Tim Xia
+Title=Nissa, Genesis Mage
+Difficulty=very hard
+Description=Azorius Soldier by Tim Xia
+Icon=Nissa, Genesis Mage.jpg
+Deck Type=constructed
+
+[main]
+1 Zephyr Sentinel
+1 Loran of the Third Path
+2 Brutal Cathar
+3 Dennick, Pious Apprentice
+3 Skrelv, Defector Mite
+3 Harbin, Vanguard Aviator
+3 Skystrike Officer
+3 Valiant Veteran
+4 Siege Veteran
+4 Recruitment Officer
+4 Resolute Reinforcements
+4 Thalia, Guardian of Thraben
+1 Slip Out the Back
+1 Otawara, Soaring City
+1 Plaza of Heroes
+2 Plains
+2 Eiganjo, Seat of the Empire
+2 Mishra's Foundry
+4 Adarkar Wastes
+4 Fortified Beachhead
+4 Secluded Courtyard
+4 Seachrome Coast
+
+[sideboard]
+2 Loran of the Third Path
+1 Spell Pierce
+2 Extraction Specialist
+3 Knockout Blow
+3 Protect the Negotiators
+4 Destroy Evil

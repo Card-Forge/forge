@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Temur Energy by Shahar Shenhar
+Title=Princess Selenia
+Difficulty=very hard
+Description=Temur Energy by Shahar Shenhar
+Icon=Princess Selenia.jpg
+Deck Type=constructed
+
+[main]
+1 Chandra, Torch of Defiance|KLD
+4 Longtusk Cub|KLD
+4 Servant of the Conduit|KLD
+3 Whirler Virtuoso|KLD
+4 Rogue Refiner|AER
+4 Bristling Hydra|KLD
+3 Glorybringer|AKH
+4 Attune with Aether|KLD
+2 Confiscation Coup|KLD
+2 Abrade|HOU
+1 Essence Scatter|AKH
+4 Harnessed Lightning|KLD
+1 Magma Spray|AKH
+1 Commit // Memory|AKH
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+3 Spirebluff Canal|KLD
+4 Forest|XLN
+2 Mountain|XLN
+1 Island|XLN
+3 Rootbound Crag|XLN
+1 Sheltered Thicket|AKH
+
+[sideboard]
+1 Chandra, Torch of Defiance|KLD
+1 Confiscation Coup|KLD
+1 Abrade|HOU
+1 Magma Spray|AKH
+1 Nissa, Steward of Elements|AKH
+2 Slice in Twain|XLN
+2 Supreme Will|HOU
+2 Lifecrafter's Bestiary|AER
+2 Negate|AER
+2 Vizier of Many Faces|AKH

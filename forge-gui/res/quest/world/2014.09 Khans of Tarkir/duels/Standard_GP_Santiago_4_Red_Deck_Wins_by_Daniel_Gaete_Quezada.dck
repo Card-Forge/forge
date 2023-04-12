@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Daniel Gaete Quezada
+Title=Black Panther
+Difficulty=very hard
+Description=Red Deck Wins by Daniel Gaete Quezada
+Icon=Black Panther.jpg
+Deck Type=constructed
+
+[main]
+18 Mountain|KTK
+4 Hammerhand|M15
+4 Dragon Mantle|THS
+2 Lightning Strike|M15
+2 Coordinated Assault|THS
+4 Titan's Strength|THS
+4 Stoke the Flames|M15
+2 Hordeling Outburst|KTK
+1 Arena Athlete|THS
+3 Frenzied Goblin|M15
+4 Firedrinker Satyr|THS
+4 Foundry Street Denizen|M15
+4 Monastery Swiftspear|KTK
+4 Akroan Crusader|THS
+
+[sideboard]
+3 Searing Blood|BNG
+2 Harness by Force|JOU
+2 Magma Spray|JOU
+3 Peak Eruption|THS
+2 Lightning Strike|M15
+3 Eidolon of the Great Revel|JOU

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=8  Racks by Kimura Shigeki
+Title=Copper Tablet
+Difficulty=very hard
+Description=8  Racks by Kimura Shigeki
+Icon=Copper Tablet.jpg
+Deck Type=constructed
+
+[main]
+1 Nether Spirit|MM
+1 Pithing Needle
+4 The Rack|TSP
+3 Funeral Charm|TSP
+3 Wrench Mind|MR
+4 Inquisition of Kozilek|ROE
+4 Thoughtseize|THS
+4 Smallpox|M12
+4 Raven's Crime|EVE
+3 Urza's Saga
+3 Shrieking Affliction|RTR
+4 Liliana of the Veil|ISD
+2 Castle Locthwain
+4 Urborg, Tomb of Yawgmoth|M15
+4 Mishra's Factory|4E
+12 Swamp
+
+[sideboard]
+2 Pithing Needle
+1 Fatal Push|AER
+1 Tourach, Dread Cantor
+3 Surgical Extraction|NPH
+4 Dauthi Voidwalker
+4 Ensnaring Bridge|8E

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Radoslaw Kaczmarczyk (Poland)
+Title=Nicol Bolas, Planeswalker
+Difficulty=very hard
+Description=Red Deck Wins by Radoslaw Kaczmarczyk (Poland)
+Icon=Nicol Bolas, Planeswalker.jpg
+Deck Type=constructed
+
+[main]
+4 Hazoret the Fervent|AKH
+4 Bomat Courier|KLD
+4 Earthshaker Khenra|HOU
+3 Kari Zev, Skyship Raider|AER
+4 Soul-Scar Mage|AKH
+3 Rampaging Ferocidon|XLN
+4 Ahn-Crop Crasher|AKH
+2 Cut // Ribbons|AKH
+4 Lightning Strike|XLN
+4 Shock|AER
+15 Mountain|XLN
+4 Ramunap Ruins|HOU
+1 Scavenger Grounds|HOU
+4 Sunscorched Desert|AKH
+
+[sideboard]
+1 Rampaging Ferocidon|XLN
+1 Scavenger Grounds|HOU
+4 Chandra, Torch of Defiance|KLD
+2 Aethersphere Harvester|AER
+3 Pia Nalaar|KLD
+2 Dual Shot|XLN
+2 Glorybringer|AKH

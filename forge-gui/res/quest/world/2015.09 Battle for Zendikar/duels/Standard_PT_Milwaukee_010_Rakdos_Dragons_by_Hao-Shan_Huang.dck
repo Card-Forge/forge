@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Rakdos Dragons by Hao-Shan Huang
+Title=Mines of Kazum Durl
+Difficulty=very hard
+Description=Rakdos Dragons by Hao-Shan Huang
+Icon=Mines of Kazum Durl.jpg
+Deck Type=constructed
+
+[main]
+2 Ob Nixilis Reignited|BFZ
+3 Kolaghan, the Storm's Fury|FRF
+3 Pia and Kiran Nalaar|ORI
+4 Thunderbreak Regent|DTK
+4 Hangarback Walker|ORI
+3 Ruinous Path|BFZ
+2 Despise|KTK
+2 Roast|DTK
+3 Complete Disregard|BFZ
+2 Foul-Tongue Invocation|DTK
+4 Draconic Roar|DTK
+2 Murderous Cut|KTK
+4 Bloodstained Mire|KTK
+2 Blighted Fen|BFZ
+4 Wooded Foothills|KTK
+4 Bloodfell Caves|FRF
+5 Swamp|BFZ
+4 Mountain|BFZ
+1 Cinder Glade|BFZ
+2 Smoldering Marsh|BFZ
+
+[sideboard]
+2 Self-Inflicted Wound|DTK
+3 Duress|DTK
+2 Dragonmaster Outcast|BFZ
+2 Read the Bones|ORI
+2 Crux of Fate|FRF
+1 Outpost Siege|FRF
+3 Radiant Flames|BFZ

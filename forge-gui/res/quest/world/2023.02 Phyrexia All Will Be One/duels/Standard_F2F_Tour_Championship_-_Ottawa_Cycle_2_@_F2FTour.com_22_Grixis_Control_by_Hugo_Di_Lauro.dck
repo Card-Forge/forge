@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Grixis Control by Hugo Di Lauro
+Title=Aurelia
+Difficulty=very hard
+Description=Grixis Control by Hugo Di Lauro
+Icon=Aurelia.jpg
+Deck Type=constructed
+
+[main]
+1 Spell Pierce
+1 Brotherhood's End
+2 Make Disappear
+2 Cut Down
+3 Reckoner Bankbuster
+3 Go for the Throat
+3 Abrade
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+1 Bladecoil Serpent
+2 Sheoldred, the Apocalypse
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+1 Underground River
+2 Shivan Reef
+2 Swamp
+3 Sulfurous Springs
+3 Darkslick Shores
+3 Shipwreck Marsh
+4 Xander's Lounge
+4 Haunted Ridge
+4 Blackcleave Cliffs
+
+[sideboard]
+2 Negate
+3 Razorlash Transmogrant
+2 Siphon Insight
+2 Disdainful Stroke
+1 Parasitic Grasp
+1 Anoint with Affliction
+1 Brotherhood's End
+2 Cut Down
+1 Sheoldred, the Apocalypse

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Eduardo Dos Santos Vieira
+Title=En Sabah Nur
+Difficulty=very hard
+Description=Abzan Midrange by Eduardo Dos Santos Vieira
+Icon=En Sabah Nur.jpg
+Deck Type=constructed
+
+[main]
+4 Windswept Heath|KTK
+1 Urborg, Tomb of Yawgmoth|M15
+3 Temple of Malady|JOU
+4 Sandsteppe Citadel|KTK
+1 Plains|KTK
+4 Llanowar Wastes|M15
+4 Forest|KTK
+2 Caves of Koilos|M15
+2 Banishing Light|JOU
+2 Elvish Mystic|M15
+4 Satyr Wayfinder|M15
+4 Sylvan Caryatid|THS
+4 Courser of Kruphix|BNG
+4 Siege Rhino|KTK
+2 Doomwake Giant|JOU
+3 Soul of Theros|M15
+3 Hornet Queen|M15
+1 Eidolon of Blossoms|JOU
+2 Commune with the Gods|THS
+3 Murderous Cut|KTK
+3 Whip of Erebos|THS
+
+[sideboard]
+1 Utter End|KTK
+1 Reclamation Sage|M15
+4 Fleecemane Lion|THS
+3 Drown in Sorrow|BNG
+3 Thoughtseize|THS
+1 Suspension Field|KTK
+1 Glare of Heresy|THS
+1 Whip of Erebos|THS

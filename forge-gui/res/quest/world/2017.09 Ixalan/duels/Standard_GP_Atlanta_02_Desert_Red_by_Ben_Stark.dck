@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Desert Red by Ben Stark
+Title=Obatala
+Difficulty=very hard
+Description=Desert Red by Ben Stark
+Icon=Obatala.jpg
+Deck Type=constructed
+
+[main]
+2 Magma Spray|AKH
+2 Shock|AER
+3 Abrade|HOU
+4 Lightning Strike|XLN
+3 Chandra, Torch of Defiance|KLD
+3 Sand Strangler|HOU
+1 Hazoret the Fervent|AKH
+3 Glorybringer|AKH
+4 Bomat Courier|KLD
+2 Kari Zev, Skyship Raider|AER
+3 Rampaging Ferocidon|XLN
+3 Soul-Scar Mage|AKH
+13 Mountain|XLN
+3 Sunscorched Desert|AKH
+3 Dunes of the Dead|HOU
+2 Scavenger Grounds|HOU
+4 Ramunap Ruins|HOU
+2 Treasure Map|XLN
+
+[sideboard]
+2 Magma Spray|AKH
+1 Abrade|HOU
+1 Chandra, Torch of Defiance|KLD
+2 Hazoret the Fervent|AKH
+1 Glorybringer|AKH
+1 Rampaging Ferocidon|XLN
+1 Soul-Scar Mage|AKH
+2 Cut // Ribbons|AKH
+2 Release the Gremlins|AER
+2 Chandra's Defeat|HOU

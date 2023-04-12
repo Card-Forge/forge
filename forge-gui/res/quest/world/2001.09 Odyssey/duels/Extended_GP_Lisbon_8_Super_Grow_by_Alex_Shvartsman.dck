@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Super Grow by Alex Shvartsman
+Title=Lord of Atlantis
+Difficulty=very hard
+Description=Super Grow by Alex Shvartsman
+Icon=Lord of Atlantis.jpg
+Deck Type=constructed
+
+[main]
+2 Flood Plain|MI
+1 Savannah|A
+1 Island|A
+4 Tropical Island|A
+4 Tundra|A
+3 Winter Orb|A
+3 Swords to Plowshares|A
+4 Gush|MM
+2 Foil|PY
+4 Force of Will|AL
+4 Daze|NE
+4 Brainstorm|IA
+4 Land Grant|MM
+4 Sleight of Hand|P2
+4 Meddling Mage|PS
+2 Merfolk Looter|EX
+2 Mystic Enforcer|OD
+4 Quirion Dryad|PS
+4 Werebear|OD
+
+[sideboard]
+3 Submerge|NE
+4 Legacy's Allure|TE
+4 Chill|TE
+3 Seal of Cleansing|NE
+1 Swords to Plowshares|A

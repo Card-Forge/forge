@@ -1,0 +1,64 @@
+[quest]
+id=20210704
+OpponentName=Javier
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Sultai Yorion Ultimatum
+Title=Dr Strangelove
+Difficulty=very hard
+Description=Sultai Yorion Ultimatum by Javier Dominguez
+Icon=Dr Strangelove.jpg
+Deck Type=constructed
+
+[main]
+1 Valki, God of Lies
+1 Polukranos, Unchained
+1 Vorinclex, Monstrous Raider
+3 Elder Gargaroth
+2 Disdainful Stroke
+3 Jwari Disruption
+4 Power Word Kill
+4 Heartless Act
+1 Extinction Event
+1 Sea Gate Restoration
+1 Pestilent Haze
+1 Crippling Fear
+1 Shadows' Verdict
+1 Duress
+2 Alrund's Epiphany
+4 Emergent Ultimatum
+4 Cultivate
+1 Kiora Bests the Sea God
+4 Binding the Old Gods
+4 Omen of the Sea
+4 Wolfwillow Haven
+1 Ketria Triome
+2 Island
+3 Swamp
+3 Temple of Malady
+3 Forest
+4 Clearwater Pathway
+4 Fabled Passage
+4 Darkbore Pathway
+4 Barkchannel Pathway
+4 Zagoth Triome
+
+[sideboard]
+1 Disdainful Stroke
+3 Duress
+1 Yorion, Sky Nomad
+1 Koma, Cosmos Serpent
+1 Mystical Dispute
+1 Barrier Breach
+1 Ray of Enfeeblement
+1 Elspeth's Nightmare
+2 Negate
+3 Mazemind Tome

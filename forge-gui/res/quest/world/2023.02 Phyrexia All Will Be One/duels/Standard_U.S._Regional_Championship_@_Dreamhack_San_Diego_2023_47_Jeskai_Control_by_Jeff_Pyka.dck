@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Jeff Pyka
+Title=Ga-Gorib
+Difficulty=very hard
+Description=Jeskai Control by Jeff Pyka
+Icon=Ga-Gorib.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+1 Flame-Blessed Bolt
+1 Strangle
+1 Destroy Evil
+1 Fires of Victory
+2 Make Disappear
+2 Spell Pierce
+2 Farewell
+2 Depopulate
+2 Dissipate
+2 Abrade
+3 Reckoner Bankbuster
+3 Memory Deluge
+3 The Wandering Emperor
+4 Fable of the Mirror-Breaker
+1 Wandering Mind
+2 Sanctuary Warden
+1 Eiganjo, Seat of the Empire
+1 Mountain
+1 Otawara, Soaring City
+2 Island
+2 Plains
+2 Battlefield Forge
+3 Sundown Pass
+3 Seachrome Coast
+4 Shivan Reef
+4 Deserted Beach
+4 Stormcarved Coast
+
+[sideboard]
+1 Saheeli, Filigree Master
+1 Archangel of Wrath
+1 Burn Down the House
+1 The Stone Brain
+2 Disdainful Stroke
+2 Obliterating Bolt
+1 Negate
+2 Flame-Blessed Bolt
+1 Destroy Evil
+1 Farewell
+1 Depopulate
+1 Sanctuary Warden

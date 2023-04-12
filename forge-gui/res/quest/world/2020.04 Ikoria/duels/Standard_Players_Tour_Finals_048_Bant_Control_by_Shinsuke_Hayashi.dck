@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Bant Control by Shinsuke Hayashi
+Title=Arzakon
+Difficulty=very hard
+Description=Bant Control by Shinsuke Hayashi
+Icon=Arzakon.jpg
+Deck Type=constructed
+
+[main]
+2 Hydroid Krasis
+2 Brazen Borrower
+3 Uro, Titan of Nature's Wrath
+2 Aether Gust
+2 Dovin's Veto
+4 Growth Spiral
+2 Shatter the Sky
+3 Elspeth Conquers Death
+4 Shark Typhoon
+4 Teferi, Time Raveler
+4 Nissa, Who Shakes the World
+1 Castle Vantress
+2 Plains
+2 Temple of Plenty
+2 Temple of Enlightenment
+2 Temple of Mystery
+2 Forest
+2 Island
+3 Hallowed Fountain
+4 Fabled Passage
+4 Breeding Pool
+4 Temple Garden
+
+[sideboard]
+1 Brazen Borrower
+1 Aether Gust
+2 Dovin's Veto
+1 Shatter the Sky
+2 Commence the Endgame
+2 Elder Gargaroth
+3 Glass Casket
+3 Nightpack Ambusher

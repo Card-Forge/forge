@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Gruul Control by Tanaka
+Title=Adun Oakenshield
+Difficulty=very hard
+Description=Gruul Control by Tanaka
+Icon=Adun Oakenshield.jpg
+Deck Type=constructed
+
+[main]
+2 Visions of Phyrexia
+3 Abrade
+3 Brotherhood's End
+4 Reckoner Bankbuster
+4 The Mightstone and Weakstone
+4 Fable of the Mirror-Breaker
+2 Rootwire Amalgam
+3 Cityscape Leveler
+4 Topiary Stomper
+4 Skitterbeam Battalion
+1 Boseiju, Who Endures
+1 Roadside Reliquary
+1 Sokenzan, Crucible of Defiance
+3 Field of Ruin
+4 Ziatora's Proving Ground
+4 Rockfall Vale
+4 Karplusan Forest
+4 Mountain
+5 Forest
+
+[sideboard]
+3 Thran Spider
+2 Obstinate Baloth
+2 Cemetery Prowler
+2 Titan of Industry
+2 Unlicensed Hearse
+1 Burn Down the House
+1 Strangle
+1 Workshop Warchief
+1 Liberator, Urza's Battlethopter

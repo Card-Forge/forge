@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Ur Murktide by Micha Aand
+Title=Dr Watson
+Difficulty=very hard
+Description=Ur Murktide by Micha Aand
+Icon=Dr Watson.jpg
+Deck Type=constructed
+
+[main]
+4 Murktide Regent
+4 Dragon's Rage Channeler
+4 Ragavan, Nimble Pilferer
+2 Serum Visions|FD
+4 Thought Scour|DKA
+1 Spell Pierce|XLN
+4 Unholy Heat
+4 Mishra's Bauble|CS
+4 Lightning Bolt|M11
+4 Expressive Iteration
+1 Brazen Borrower
+2 Snapcaster Mage|ISD
+1 Archmage's Charm
+3 Counterspell|7E
+3 Steam Vents
+1 Polluted Delta|KTK
+2 Misty Rainforest|ZEN
+2 Fiery Islet
+4 Spirebluff Canal|KLD
+3 Island
+2 Flooded Strand|KTK
+1 Scalding Tarn|ZEN
+
+[sideboard]
+2 Engineered Explosives|FD
+2 Relic of Progenitus|ALA
+2 Flusterstorm
+1 Aether Gust
+1 Mystical Dispute
+1 Force of Negation
+1 Alpine Moon
+2 Blood Moon|9E
+1 Shattering Spree|GP
+1 Abrade|HOU
+1 Jace, the Mind Sculptor|WWK

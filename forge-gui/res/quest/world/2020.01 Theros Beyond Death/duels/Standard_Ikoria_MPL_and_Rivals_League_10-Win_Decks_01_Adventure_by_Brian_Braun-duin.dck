@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Adventure by Brian Braun-duin
+Title=Carnage
+Difficulty=very hard
+Description=Adventure by Brian Braun-duin
+Icon=Carnage.jpg
+Deck Type=constructed
+
+[main]
+6 Forest
+4 Stomping Ground
+4 Island
+4 Breeding Pool
+3 Steam Vents
+2 Temple of Abandon
+2 Mountain
+1 Temple of Mystery
+1 Temple of Epiphany
+3 Escape to the Wilds
+1 Incubation // Incongruity
+4 Lucky Clover
+1 The Great Henge
+4 Beanstalk Giant
+4 Lovestruck Beast
+4 Fae of Wishes
+4 Edgewall Innkeeper
+4 Brazen Borrower
+4 Bonecrusher Giant
+
+[sideboard]
+1 Fling
+1 Mystic Repeal
+1 Negate
+1 Once and Future
+1 Return to Nature
+1 Shadowspear
+1 Sorcerous Spyglass
+1 Storm's Wrath
+3 Aether Gust
+1 Expansion // Explosion
+1 Domri's Ambush
+1 Disdainful Stroke
+1 Escape to the Wilds

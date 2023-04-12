@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Simic Aggro by Ivan Floch
+Title=Chief_Wiggum
+Difficulty=very hard
+Description=Simic Aggro by Ivan Floch
+Icon=Chief_Wiggum.jpg
+Deck Type=constructed
+
+[main]
+1 Skysovereign, Consul Flagship|KLD
+1 The Antiquities War
+2 Implement of Ferocity|AER
+2 Renegade Map|AER
+2 Sorcerous Spyglass|XLN
+4 Aethersphere Harvester|AER
+4 Karn, Scion of Urza
+1 Servant of the Conduit|KLD
+4 Walking Ballista|AER
+4 Verdurous Gearhulk|KLD
+4 Glint-Nest Crane|KLD
+4 Scrap Trawler|AER
+4 Llanowar Elves
+1 Inventors' Fair|KLD
+2 Hinterland Harbor
+2 Hashep Oasis|HOU
+3 Island
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+7 Forest
+
+[sideboard]
+2 Vizier of Many Faces|AKH
+1 Negate
+3 Baral's Expertise|AER
+2 Metallic Rebuke|AER
+2 Greenbelt Rampager|AER
+2 Thrashing Brontodon
+3 Lifecrafter's Bestiary|AER

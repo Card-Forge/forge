@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Oliver Polak-rottmann (Austria)
+Title=Silver Surfer
+Difficulty=very hard
+Description=Red Deck Wins by Oliver Polak-rottmann (Austria)
+Icon=Silver Surfer.jpg
+Deck Type=constructed
+
+[main]
+15 Mountain|XLN
+4 Ramunap Ruins|HOU
+4 Sunscorched Desert|AKH
+1 Scavenger Grounds|HOU
+3 Abrade|HOU
+4 Lightning Strike|XLN
+4 Shock|AER
+4 Bomat Courier|KLD
+1 Ahn-Crop Crasher|AKH
+4 Earthshaker Khenra|HOU
+4 Hazoret the Fervent|AKH
+3 Kari Zev, Skyship Raider|AER
+4 Rampaging Ferocidon|XLN
+4 Soul-Scar Mage|AKH
+1 Chandra, Torch of Defiance|KLD
+
+[sideboard]
+3 Sand Strangler|HOU
+1 Magma Spray|AKH
+3 Glorybringer|AKH
+4 Pia Nalaar|KLD
+1 Scavenger Grounds|HOU
+1 Abrade|HOU
+2 Chandra, Torch of Defiance|KLD

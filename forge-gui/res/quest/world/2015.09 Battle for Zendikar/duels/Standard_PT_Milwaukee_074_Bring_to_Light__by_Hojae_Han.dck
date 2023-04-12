@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Bring to Light  by Hojae Han
+Title=Radioactive Man
+Difficulty=very hard
+Description=Bring to Light  by Hojae Han
+Icon=Radioactive Man.jpg
+Deck Type=constructed
+
+[main]
+1 Utter End|KTK
+1 Dromoka's Command|DTK
+1 Murderous Cut|KTK
+1 Languish|ORI
+2 Bring to Light|BFZ
+3 Gideon, Ally of Zendikar|BFZ
+3 Abzan Charm|KTK
+4 Silkwrap|DTK
+3 Rattleclaw Mystic|KTK
+3 Wingmate Roc|KTK
+4 Hangarback Walker|ORI
+4 Anafenza, the Foremost|KTK
+4 Siege Rhino|KTK
+1 Polluted Delta|KTK
+1 Canopy Vista|BFZ
+1 Smoldering Marsh|BFZ
+1 Sunken Hollow|BFZ
+1 Swamp|BFZ
+1 Plains|BFZ
+1 Prairie Stream|BFZ
+3 Forest|BFZ
+4 Shambling Vent|BFZ
+4 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+4 Flooded Strand|KTK
+
+[sideboard]
+1 Sarkhan Unbroken|DTK
+4 Duress|DTK
+1 Dispel|BFZ
+1 Arashin Cleric|FRF
+1 Ob Nixilis Reignited|BFZ
+2 Surge of Righteousness|DTK
+2 Disdainful Stroke|KTK
+1 Exert Influence|BFZ
+1 Tragic Arrogance|ORI
+1 Dragonlord Silumgar|DTK

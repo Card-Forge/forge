@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Temur Aggro by Eric English
+Title=Professor X
+Difficulty=very hard
+Description=Temur Aggro by Eric English
+Icon=Professor X.jpg
+Deck Type=constructed
+
+[main]
+1 Smoldering Marsh|BFZ
+1 Sunken Hollow|BFZ
+2 Yavimaya Coast|ORI
+1 Lumbering Falls|BFZ
+4 Opulent Palace|KTK
+1 Silumgar's Command|DTK
+4 Murderous Cut|KTK
+2 Kolaghan's Command|DTK
+1 Treasure Cruise|KTK
+3 Gather the Pack|ORI
+4 Rattleclaw Mystic|KTK
+4 Jace, Vryn's Prodigy|ORI
+1 Stratus Dancer|DTK
+4 Den Protector|DTK
+4 Deathmist Raptor|DTK
+4 Sidisi, Brood Tyrant|KTK
+1 Sidisi, Undead Vizier|DTK
+1 Silumgar, the Drifting Death|FRF
+1 Dragonlord Atarka|DTK
+3 Polluted Delta|KTK
+3 Wooded Foothills|KTK
+4 Bloodstained Mire|KTK
+1 Mountain|BFZ
+1 Island|BFZ
+1 Swamp|BFZ
+2 Forest|BFZ
+1 Cinder Glade|BFZ
+
+[sideboard]
+1 Dragonlord Silumgar|DTK
+1 Evolutionary Leap|ORI
+1 Crux of Fate|FRF
+2 Radiant Flames|BFZ
+1 Sultai Charm|KTK
+2 Self-Inflicted Wound|DTK
+2 Disdainful Stroke|KTK
+2 Dispel|BFZ
+1 Transgress the Mind|BFZ
+2 Duress|DTK

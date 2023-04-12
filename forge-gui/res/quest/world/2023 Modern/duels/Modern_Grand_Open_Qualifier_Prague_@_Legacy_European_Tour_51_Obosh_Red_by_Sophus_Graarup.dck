@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Obosh Red by Sophus Graarup
+Title=King Kong
+Difficulty=very hard
+Description=Obosh Red by Sophus Graarup
+Icon=King Kong.jpg
+Deck Type=constructed
+
+[main]
+3 Flame Slash|ROE
+4 Fable of the Mirror-Breaker
+4 Relic of Progenitus|ALA
+4 Lightning Bolt|M11
+4 Blood Moon|9E
+4 Spikefield Hazard
+1 Magus of the Moon|FUT
+4 Fury
+4 Ragavan, Nimble Pilferer
+4 Seasoned Pyromancer
+4 Bonecrusher Giant
+1 Scavenger Grounds|HOU
+1 Shinka, the Bloodsoaked Keep|CHK
+1 Sokenzan, Crucible of Defiance
+1 Mishra's Factory|4E
+2 Ramunap Ruins|HOU
+3 Den of the Bugbear
+3 Blast Zone
+4 Needleverge Pathway
+4 Snow-Covered Mountain
+
+[sideboard]
+4 The Stone Brain
+2 Shattering Spree|GP
+3 Pyrite Spellbomb|MR
+1 Obosh, the Preypiercer
+1 Flame Blitz
+3 Engineered Explosives|FD
+1 Magus of the Moon|FUT

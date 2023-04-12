@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Hammer Time by Axel Signargout
+Title=Kane Garoú
+Difficulty=very hard
+Description=Hammer Time by Axel Signargout
+Icon=Kane Garoú.jpg
+Deck Type=constructed
+
+[main]
+4 Ornithopter|AER
+2 Giver of Runes
+1 Gingerbrute
+4 Esper Sentinel
+4 Stoneforge Mystic|WWK
+4 Puresteel Paladin|NPH
+1 Kor Outfitter|ZEN
+3 Springleaf Drum|BNG
+1 Shadowspear
+4 Colossus Hammer
+1 Nettlecyst
+1 Kaldra Compleat
+2 Blacksmith's Skill
+2 Spell Pierce
+4 Urza's Saga
+4 Sigarda's Aid|EMN
+3 Plains
+3 Seachrome Coast
+2 Hallowed Fountain
+1 Horizon Canopy|FUT
+1 Windswept Heath|KTK
+1 Flooded Strand|KTK
+2 Marsh Flats|ZEN
+2 Arid Mesa|ZEN
+3 Inkmoth Nexus|MBS
+
+[sideboard]
+2 Path to Exile|CFX
+2 March of Otherworldly Light
+2 Sanctifier en-Vec
+1 Relic of Progenitus|ALA
+1 Pithing Needle
+1 Orvar, the All-Form
+2 Hallowed Moonlight|ORI
+2 Lavinia, Azorius Renegade
+1 Drannith Magistrate
+1 Teferi, Time Raveler

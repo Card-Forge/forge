@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Three-Deuce by Scott Gerhardt
+Title=Tarzan
+Difficulty=very hard
+Description=Three-Deuce by Scott Gerhardt
+Icon=Tarzan.jpg
+Deck Type=constructed
+
+[main]
+3 Cursed Scroll|TE
+3 Call of the Herd|OD
+4 Seal of Cleansing|NE
+4 Rancor|UL
+4 Land Grant|MM
+4 Swords to Plowshares|A
+4 Incinerate|IA
+1 Wax // Wane|IN
+4 Mogg Fanatic|TE
+4 River Boa|VI
+2 Elvish Lyrist|US
+2 Goblin Legionnaire|AP
+3 Granger Guildmage|MI
+4 Plateau|A
+2 Bayou|A
+1 Mountain Valley|MI
+3 Taiga|A
+3 Wasteland|TE
+3 Treetop Village|UL
+3 Savannah|A
+
+[sideboard]
+2 Hunted Wumpus|MM
+2 Worship|US
+2 Perish|TE
+3 Spectral Lynx|AP
+4 Pyroblast|IA
+2 Wax // Wane|IN

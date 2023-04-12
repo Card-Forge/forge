@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Naya Runes Aggro by Frederico Bastos
+Title=Ian the Digester
+Difficulty=very hard
+Description=Naya Runes Aggro by Frederico Bastos
+Icon=Ian the Digester.jpg
+Deck Type=constructed
+
+[main]
+3 Fable of the Mirror-Breaker
+4 Generous Visitor
+4 Kami of Transience
+4 Jukai Naturalist
+4 Runeforge Champion
+2 Tamiyo's Safekeeping
+1 Hallowed Haunting
+3 Rune of Sustenance
+4 Showdown of the Skalds
+4 Rune of Might
+4 Rune of Speed
+1 Lair of the Hydra
+1 Plains
+1 Forest
+1 Eiganjo, Seat of the Empire
+1 Boseiju, Who Endures
+1 Rockfall Vale
+2 Overgrown Farmland
+3 Sundown Pass
+4 Cragcrown Pathway
+4 Needleverge Pathway
+4 Branchloft Pathway
+
+[sideboard]
+1 Katilda, Dawnhart Martyr
+2 Reidane, God of the Worthy
+2 Rip Apart
+2 Valorous Stance
+2 Yasharn, Implacable Earth
+2 Borrowed Time
+4 Strangle

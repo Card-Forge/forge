@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mono White Control by Yusuke Sasao
+Title=Sea Dragon
+Difficulty=very hard
+Description=Mono White Control by Yusuke Sasao
+Icon=Sea Dragon.jpg
+Deck Type=constructed
+
+[main]
+2 The Eternal Wanderer
+2 The Wandering Emperor
+3 Skrelv's Hive
+4 Ossification
+4 Wedding Announcement
+4 Lay Down Arms
+4 Reckoner Bankbuster
+1 Ao, the Dawn Sky
+2 Loran of the Third Path
+2 Cathar Commando
+2 Ambitious Farmhand
+3 Serra Paragon
+3 Steel Seraph
+2 Eiganjo, Seat of the Empire
+4 Roadside Reliquary
+18 Plains
+
+[sideboard]
+2 Destroy Evil
+2 Sunset Revelry
+2 Unlicensed Hearse
+2 Knockout Blow
+2 Farewell
+2 Vanquish the Horde
+1 Elspeth Resplendent
+1 The Eternal Wanderer
+1 The Wandering Emperor

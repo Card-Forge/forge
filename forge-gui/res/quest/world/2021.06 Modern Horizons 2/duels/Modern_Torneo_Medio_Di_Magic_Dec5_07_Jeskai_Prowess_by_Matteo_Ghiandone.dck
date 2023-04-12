@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jeskai Prowess by Matteo Ghiandone
+Title=The Artillery
+Difficulty=very hard
+Description=Jeskai Prowess by Matteo Ghiandone
+Icon=The Artillery.jpg
+Deck Type=constructed
+
+[main]
+2 Path to Exile|CFX
+3 Prismatic Ending
+4 Mishra's Bauble|CS
+4 Light Up the Stage
+4 Expressive Iteration
+4 Lightning Bolt|M11
+4 Lava Dart|JU
+4 Ragavan, Nimble Pilferer
+4 Soul-Scar Mage|AKH
+4 Monastery Swiftspear|KTK
+4 Dragon's Rage Channeler
+1 Wooded Foothills|KTK
+2 Bloodstained Mire|KTK
+2 Scalding Tarn|ZEN
+2 Steam Vents
+2 Sacred Foundry
+2 Fiery Islet
+2 Mountain
+2 Arid Mesa|ZEN
+4 Inspiring Vantage|KLD
+
+[sideboard]
+2 Disdainful Stroke
+1 Soul-Guide Lantern
+1 Kor Firewalker|WWK
+1 Wear // Tear|DGM
+2 Chalice of the Void|MR
+3 Flusterstorm
+2 Alpine Moon
+1 Lurrus of the Dream-Den
+2 Path to Exile|CFX

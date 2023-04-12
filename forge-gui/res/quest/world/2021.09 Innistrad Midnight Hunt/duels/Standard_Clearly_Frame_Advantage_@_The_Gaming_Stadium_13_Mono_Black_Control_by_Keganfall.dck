@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mono Black Control by Keganfall
+Title=Dungeon Crawling Colorless
+Difficulty=very hard
+Description=Mono Black Control by Keganfall
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+
+[main]
+1 Inscription of Ruin
+2 Hunt for Specimens
+2 The Meathook Massacre
+2 Professor Onyx
+4 Lolth, Spider Queen
+4 Blood on the Snow
+4 Infernal Grasp
+4 Deadly Dispute
+1 Valki, God of Lies
+4 Skullport Merchant
+4 Shambling Ghast
+4 Eyetwitch
+2 Field of Ruin
+2 Hive of the Eye Tyrant
+4 Faceless Haven
+16 Snow-Covered Swamp
+
+[sideboard]
+2 Nighthawk Scavenger
+2 Duress
+2 Skyclave Shade
+2 Environmental Sciences
+2 Crippling Fear
+2 Mascot Exhibition
+1 Introduction to Annihilation
+1 Necrotic Fumes
+1 Confront the Past

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Jeskai Cycling Aggro by Tomohiro Nakagawa
+Title=Da Vinci
+Difficulty=very hard
+Description=Jeskai Cycling Aggro by Tomohiro Nakagawa
+Icon=Da Vinci.jpg
+Deck Type=constructed
+
+[main]
+4 Irencrag Pyromancer
+4 Valiant Rescuer
+4 Drannith Stinger
+4 Flourishing Fox
+2 Disdainful Stroke
+4 Startling Development
+4 Zenith Flare
+2 Memory Leak
+4 Boon of the Wish-Giver
+4 Go for Blood
+4 Improbable Alliance
+1 Savai Triome
+1 Island
+1 Mountain
+1 Brightclimb Pathway
+4 Riverglide Pathway
+4 Needleverge Pathway
+4 Raugrin Triome
+4 Hengegate Pathway
+
+[sideboard]
+1 Disdainful Stroke
+1 Rielle, the Everwise
+1 Lurrus of the Dream-Den
+1 Mystical Dispute
+2 Burning Hands
+2 Prismari Command
+2 Shredded Sails
+2 Shatter the Sky
+3 Test of Talents

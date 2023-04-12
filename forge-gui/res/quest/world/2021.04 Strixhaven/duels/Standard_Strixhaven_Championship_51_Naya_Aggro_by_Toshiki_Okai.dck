@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Naya Aggro by Toshiki Okai
+Title=Hellish Contraptions
+Difficulty=very hard
+Description=Naya Aggro by Toshiki Okai
+Icon=Hellish Contraptions.jpg
+Deck Type=constructed
+
+[main]
+2 Toski, Bearer of Secrets
+4 Bonecrusher Giant
+4 Jaspera Sentinel
+4 Giant Killer
+4 Clarion Spirit
+4 Edgewall Innkeeper
+4 Elite Spellbinder
+4 Lovestruck Beast
+3 Kabira Takedown
+4 Showdown of the Skalds
+2 Plains
+2 Mountain
+3 Forest
+4 Needleverge Pathway
+4 Cragcrown Pathway
+4 Branchloft Pathway
+4 Fabled Passage
+
+[sideboard]
+1 Jegantha, the Wellspring
+1 Drannith Magistrate
+2 The Akroan War
+2 Roiling Vortex
+2 Klothys, God of Destiny
+2 Rip Apart
+2 Reidane, God of the Worthy
+3 Redcap Melee

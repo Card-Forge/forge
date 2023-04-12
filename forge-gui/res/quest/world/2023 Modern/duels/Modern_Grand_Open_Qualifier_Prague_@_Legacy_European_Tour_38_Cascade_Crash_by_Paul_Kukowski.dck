@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Cascade Crash by Paul Kukowski
+Title=Dream
+Difficulty=very hard
+Description=Cascade Crash by Paul Kukowski
+Icon=Dream.jpg
+Deck Type=constructed
+
+[main]
+3 Omnath, Locus of Creation
+4 Shardless Agent
+4 Scion of Draco
+3 Solitude
+3 Fury
+4 Fire // Ice|AP
+4 Violent Outburst|ARB
+4 Crashing Footfalls
+4 Leyline Binding
+3 Teferi, Time Raveler
+1 Temple Garden
+1 Breeding Pool
+4 Misty Rainforest|ZEN
+1 Windswept Heath|KTK
+4 Flooded Strand|KTK
+1 Sacred Foundry
+1 Forest
+1 Plains
+1 Steam Vents
+1 Island
+3 Arid Mesa|ZEN
+1 Indatha Triome
+1 Xander's Lounge
+2 Wooded Foothills|KTK
+1 Boseiju, Who Endures
+
+[sideboard]
+4 Endurance
+4 Force of Vigor
+3 Leyline of Sanctity
+4 Force of Negation

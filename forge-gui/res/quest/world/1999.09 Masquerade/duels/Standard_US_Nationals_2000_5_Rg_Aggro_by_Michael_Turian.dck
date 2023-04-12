@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Rg Aggro by Michael Turian
+Title=Agonistes
+Difficulty=very hard
+Description=Rg Aggro by Michael Turian
+Icon=Agonistes.jpg
+Deck Type=constructed
+
+[main]
+4 Avalanche Riders|TSP
+4 Birds of Paradise|CN2
+4 Deranged Hermit|UL
+4 Llanowar Elves
+3 Masticore|UD
+2 Rofellos, Llanowar Emissary|UD
+3 Skyshroud Poacher|NE
+3 Yavimaya Elder|CMD
+4 Arc Lightning|KTK
+4 Plow Under|8E
+11 Forest|RTR
+2 Gaea's Cradle|US
+4 Karplusan Forest|C16
+2 Mountain|RTR
+4 Rishadan Port|MM
+2 Treetop Village|10E
+
+[sideboard]
+1 Masticore|UD
+2 Ancient Hydra|NE
+4 Blastoderm|NE
+2 Boil|8E
+1 Splinter|BOK
+3 Thran Foundry|UD
+2 Uktabi Orangutan|6E

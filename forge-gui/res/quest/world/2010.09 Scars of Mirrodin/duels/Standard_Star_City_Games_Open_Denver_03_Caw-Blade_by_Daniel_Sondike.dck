@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Daniel Sondike
+Title=Repressed Magic
+Difficulty=very hard
+Description=Caw-Blade by Daniel Sondike
+Icon=Repressed Magic.jpg
+Deck Type=constructed
+
+[main]
+1 Consecrated Sphinx|MBS
+2 Emeria Angel|ZEN
+4 Squadron Hawk|M11
+4 Stoneforge Mystic|WWK
+3 Dismember|NPH
+1 Divine Offering|MBS
+3 Mana Leak|M11
+2 Spell Pierce|ZEN
+3 Gitaxian Probe|NPH
+4 Preordain|M11
+2 Batterskull|NPH
+1 Sword of Feast and Famine|MBS
+4 Island|NPH
+3 Plains|NPH
+2 Arid Mesa|ZEN
+3 Celestial Colonnade|WWK
+4 Glacial Fortress|M11
+2 Scalding Tarn|ZEN
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+4 Jace, the Mind Sculptor|WWK
+
+[sideboard]
+1 Dismember|NPH
+2 Divine Offering|MBS
+1 Celestial Purge|M11
+2 Condemn|M11
+4 Flashfreeze|M11
+1 Mental Misstep|NPH
+2 Day of Judgment|M11
+2 Oust|ROE

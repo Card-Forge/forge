@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=4/5C Control by Paolo Magnani
+Title=Doc Holiday
+Difficulty=very hard
+Description=4/5C Control by Paolo Magnani
+Icon=Doc Holiday.jpg
+Deck Type=constructed
+
+[main]
+1 Chandra, Flamecaller|OGW
+4 Siege Rhino|KTK
+2 Kalitas, Traitor of Ghet|OGW
+3 Goblin Dark-Dwellers|OGW
+3 Sylvan Advocate|OGW
+2 Read the Bones|ORI
+1 Painful Truths|BFZ
+2 Ruinous Path|BFZ
+3 Transgress the Mind|BFZ
+2 Roast|DTK
+1 Radiant Flames|BFZ
+2 Murderous Cut|KTK
+1 Abzan Charm|KTK
+4 Crackling Doom|KTK
+3 Fiery Impulse|ORI
+2 Smoldering Marsh|BFZ
+4 Shambling Vent|BFZ
+1 Canopy Vista|BFZ
+2 Cinder Glade|BFZ
+1 Hissing Quagmire|OGW
+1 Nomad Outpost|KTK
+3 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+4 Bloodstained Mire|KTK
+1 Plains|BFZ
+1 Forest|BFZ
+1 Swamp|BFZ
+1 Mountain|BFZ
+
+[sideboard]
+1 Transgress the Mind|BFZ
+2 Radiant Flames|BFZ
+4 Hallowed Moonlight|ORI
+2 Anafenza, the Foremost|KTK
+1 Outpost Siege|FRF
+1 Tasigur, the Golden Fang|FRF
+1 Ob Nixilis Reignited|BFZ
+1 Pulse of Murasa|OGW
+1 Virulent Plague|DTK
+1 Rakshasa's Secret|KTK

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Izzet Control by Andrea Mengucci
+Title=Black Abott
+Difficulty=very hard
+Description=Izzet Control by Andrea Mengucci
+Icon=Black Abott.jpg
+Deck Type=constructed
+
+[main]
+1 Expressive Iteration
+1 Essence Scatter
+1 Disdainful Stroke
+2 Saw It Coming
+3 Alrund's Epiphany
+3 Mystical Dispute
+4 Mazemind Tome
+4 Frost Bite
+3 Galazeth Prismari
+4 Brazen Borrower
+4 Goldspan Dragon
+4 Bonecrusher Giant
+4 Fabled Passage
+4 Faceless Haven
+4 Snow-Covered Mountain
+4 Riverglide Pathway
+4 Volatile Fjord
+6 Snow-Covered Island
+
+[sideboard]
+3 Redcap Melee
+2 Negate
+2 The Akroan War
+2 Fire Prophecy
+2 Ox of Agonas
+1 Shadowspear
+1 Cinderclasm
+1 Disdainful Stroke
+1 Saw It Coming

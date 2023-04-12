@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Winota by Luca Magni
+Title=KingKong
+Difficulty=very hard
+Description=Winota by Luca Magni
+Icon=KingKong.jpg
+Deck Type=constructed
+
+[main]
+2 Blade Historian
+2 Minsc, Beloved Ranger
+2 Kenrith, the Returned King
+4 Elite Spellbinder
+4 Winota, Joiner of Forces
+4 Jaspera Sentinel
+4 Prosperous Innkeeper
+4 Selfless Savior
+4 Lotus Cobra
+4 Esika's Chariot
+2 Shatterskull Smashing
+1 Ranger Class
+1 Mountain
+2 Lair of the Hydra
+2 Plains
+2 Forest
+4 Branchloft Pathway
+4 Cragcrown Pathway
+4 Needleverge Pathway
+4 Fabled Passage
+
+[sideboard]
+1 Ranger Class
+1 Vivien, Monsters' Advocate
+1 The Akroan War
+2 Ox of Agonas
+2 Klothys, God of Destiny
+2 Snakeskin Veil
+3 Redcap Melee
+3 Burning Hands

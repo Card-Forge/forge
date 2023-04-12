@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Jund by Lukas Blohon
+Title=The Aviary
+Difficulty=very hard
+Description=Jund by Lukas Blohon
+Icon=The Aviary.jpg
+Deck Type=constructed
+
+[main]
+4 Evolving Wilds
+10 Forest|RTR
+1 Kessig Wolf Run|ISD
+4 Mountain|RTR
+2 Swamp|RTR
+4 Woodland Cemetery
+4 Borderland Ranger|AVR
+4 Dawntreader Elk|DKA
+4 Huntmaster of the Fells|DKA
+3 Strangleroot Geist|DKA
+3 Wolfir Avenger|AVR
+3 Wolfir Silverheart|AVR
+3 Blasphemous Act|C16
+2 Bonfire of the Damned|AVR
+3 Devil's Play|ISD
+3 Garruk Relentless|ISD
+3 Sever the Bloodline|C15
+
+[sideboard]
+1 Bonfire of the Damned|AVR
+4 Falkenrath Aristocrat|DKA
+1 Grafdigger's Cage|DKA
+2 Human Frailty|AVR
+2 Olivia Voldaren|ISD
+1 Pillar of Flame|AVR
+1 Tree of Redemption|ISD
+1 Victim of Night|ISD
+2 Zealous Conscripts|AVR

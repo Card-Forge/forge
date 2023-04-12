@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jeskai Tokens by Peter Semenov
+Title=Urborg
+Difficulty=very hard
+Description=Jeskai Tokens by Peter Semenov
+Icon=Urborg.jpg
+Deck Type=constructed
+
+[main]
+4 Seeker of the Way|KTK
+4 Hordeling Outburst|KTK
+4 Treasure Cruise|KTK
+3 Lightning Strike|M15
+3 Wild Slash|FRF
+3 Anticipate|DTK
+3 Raise the Alarm|M15
+2 Secure the Wastes|DTK
+2 Valorous Stance|FRF
+4 Stoke the Flames|M15
+4 Jeskai Ascendancy|KTK
+4 Mystic Monastery|KTK
+3 Temple of Epiphany|JOU
+3 Temple of Triumph|THS
+3 Shivan Reef|M15
+3 Battlefield Forge|M15
+3 Flooded Strand|KTK
+1 Island|DTK
+2 Mountain|DTK
+2 Plains|DTK
+
+[sideboard]
+1 Wild Slash|FRF
+1 Valorous Stance|FRF
+2 Anger of the Gods|THS
+2 Glare of Heresy|THS
+2 Dragonlord Ojutai|DTK
+1 End Hostilities|KTK
+1 Elspeth, Sun's Champion|THS
+2 Negate|DTK
+3 Disdainful Stroke|KTK

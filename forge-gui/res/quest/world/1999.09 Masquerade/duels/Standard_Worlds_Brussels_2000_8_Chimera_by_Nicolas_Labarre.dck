@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Chimera by Nicolas Labarre
+Title=Gideon, Martial Paragon
+Difficulty=very hard
+Description=Chimera by Nicolas Labarre
+Icon=Gideon, Martial Paragon.jpg
+Deck Type=constructed
+
+[main]
+4 Academy Rector|UD
+2 Thran Quarry|US
+2 Phyrexian Tower|US
+2 High Market|C15
+8 Forest|RTR
+3 City of Brass|8E
+4 Brushland|10E
+1 Yawgmoth's Will|US
+1 Yawgmoth's Bargain|UD
+4 Saproling Cluster|NE
+1 Pattern of Rebirth|UD
+4 Fecundity|C13
+1 Confiscate|9E
+4 Enlightened Tutor|6E
+1 Whetstone|US
+1 Snake Basket|6E
+4 Ashnod's Altar|6E
+1 Serra Avatar|C14
+4 Priest of Titania|C14
+4 Llanowar Elves
+4 Birds of Paradise|CN2
+
+[sideboard]
+1 Worship|9E
+1 Seal of Cleansing|C15
+1 Phyrexian Processor|US
+1 Parallax Wave|NE
+1 Meekstone|7E
+1 Light of Day|6E
+1 Heart of Ramos|MM
+1 Energy Flux|MM
+1 Defense Grid|9E
+1 Blaze
+1 Aura Fracture|PY
+3 Armageddon|ST
+1 Absolute Law|US

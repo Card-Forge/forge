@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Orzhov Control by Mauricio Hidalgo
+Title=Poinyetta
+Difficulty=very hard
+Description=Orzhov Control by Mauricio Hidalgo
+Icon=Poinyetta.jpg
+Deck Type=constructed
+
+[main]
+1 Kaya the Inexorable
+2 Vanishing Verse
+2 Blood on the Snow
+2 Sorin the Mirthless
+3 Lolth, Spider Queen
+3 The Meathook Massacre
+3 Rite of Oblivion
+4 Wedding Announcement
+4 Deadly Dispute
+2 Fell Stinger
+2 Ambitious Farmhand
+3 Edgar, Charmed Groom
+4 Shambling Ghast
+1 Field of Ruin
+1 Hive of the Eye Tyrant
+2 Shattered Sanctum
+3 Snow-Covered Plains
+4 Snowfield Sinkhole
+4 Faceless Haven
+4 Brightclimb Pathway
+6 Snow-Covered Swamp
+
+[sideboard]
+4 Duress
+4 Go Blank
+2 Ray of Enfeeblement
+2 Doomskar
+2 Vanishing Verse
+1 Blood on the Snow

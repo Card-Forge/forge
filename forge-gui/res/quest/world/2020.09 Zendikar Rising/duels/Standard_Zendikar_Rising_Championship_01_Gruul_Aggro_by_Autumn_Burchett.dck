@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Autumn Burchett
+Title=Ra
+Difficulty=very hard
+Description=Gruul Aggro by Autumn Burchett
+Icon=Ra.jpg
+Deck Type=constructed
+
+[main]
+3 Questing Beast
+1 Primal Might
+4 Embercleave
+4 Shatterskull Smashing
+4 Cragcrown Pathway
+1 The Akroan War
+3 Embereth Shieldbreaker
+4 Kazandu Mammoth
+4 Brushfire Elemental
+8 Forest
+4 Lovestruck Beast
+4 Edgewall Innkeeper
+2 The Great Henge
+4 Mountain
+4 Fabled Passage
+4 Bonecrusher Giant
+2 Scavenging Ooze
+
+[sideboard]
+2 The Akroan War
+2 Soul Sear
+2 Wilt
+2 Phoenix of Ash
+1 Garruk, Unleashed
+2 Ox of Agonas
+2 Vivien, Monsters' Advocate
+2 Fire Prophecy

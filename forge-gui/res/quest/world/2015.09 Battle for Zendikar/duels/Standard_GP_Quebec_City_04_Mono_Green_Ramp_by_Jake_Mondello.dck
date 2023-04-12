@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Green Ramp by Jake Mondello
+Title=Bouncy Bouncy
+Difficulty=very hard
+Description=Mono Green Ramp by Jake Mondello
+Icon=Bouncy Bouncy.jpg
+Deck Type=constructed
+
+[main]
+3 Nissa's Pilgrimage|ORI
+3 Hedron Archive|BFZ
+4 Ugin, the Spirit Dragon|FRF
+4 Explosive Vegetation|DTK
+4 Map the Wastes|FRF
+4 Sylvan Scrying|BFZ
+2 Dragonlord Atarka|DTK
+3 Ulamog, the Ceaseless Hunger|BFZ
+4 Hangarback Walker|ORI
+4 Jaddi Offshoot|BFZ
+1 Haven of the Spirit Dragon|DTK
+1 Mountain|BFZ
+1 Blighted Woodland|BFZ
+4 Shrine of the Forsaken Gods|BFZ
+4 Sanctum of Ugin|BFZ
+14 Forest|BFZ
+
+[sideboard]
+2 Winds of Qal Sisma|FRF
+4 Seismic Rupture|DTK
+3 Rending Volley|DTK
+1 Ruin Processor|BFZ
+2 Whisperwood Elemental|FRF
+2 Nissa, Vastwood Seer|ORI
+1 Ulamog, the Ceaseless Hunger|BFZ

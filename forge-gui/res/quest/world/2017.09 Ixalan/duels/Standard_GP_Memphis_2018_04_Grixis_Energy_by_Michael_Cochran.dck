@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Grixis Energy by Michael Cochran
+Title=Seth
+Difficulty=very hard
+Description=Grixis Energy by Michael Cochran
+Icon=Seth.jpg
+Deck Type=constructed
+
+[main]
+1 Field of Ruin|XLN
+3 Fetid Pools|AKH
+2 Drowned Catacomb|XLN
+4 Dragonskull Summit|XLN
+4 Canyon Slough|AKH
+4 Aether Hub|KLD
+4 Vraska's Contempt|XLN
+4 Magma Spray|AKH
+4 Harnessed Lightning|KLD
+1 Consign // Oblivion|HOU
+1 Abrade|HOU
+1 Confiscation Coup|KLD
+4 Whirler Virtuoso|KLD
+3 The Scarab God|HOU
+1 Rekindling Phoenix
+1 Pia Nalaar|KLD
+4 Glint-Sleeve Siphoner|AER
+2 Champion of Wits|HOU
+1 Swamp
+4 Spirebluff Canal|KLD
+2 Mountain
+1 Island
+1 Liliana, Death's Majesty|AKH
+3 Chandra, Torch of Defiance|KLD
+
+[sideboard]
+1 Abrade|HOU
+1 Sweltering Suns|AKH
+1 Supreme Will|HOU
+1 River's Rebuke|XLN
+2 Negate
+2 Gonti, Lord of Luxury|KLD
+3 Duress|XLN
+2 Chandra's Defeat|HOU
+2 Arguel's Blood Fast|XLN

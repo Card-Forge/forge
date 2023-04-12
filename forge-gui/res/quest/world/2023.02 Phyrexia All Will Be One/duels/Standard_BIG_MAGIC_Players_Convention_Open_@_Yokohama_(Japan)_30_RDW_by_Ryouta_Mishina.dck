@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=RDW by Ryouta Mishina
+Title=Gruul-precon
+Difficulty=very hard
+Description=RDW by Ryouta Mishina
+Icon=Gruul-precon.jpg
+Deck Type=constructed
+
+[main]
+1 The Elder Dragon War
+2 Rending Flame
+2 Chandra, Dressed to Kill
+3 Koth, Fire of Resistance
+4 Play with Fire
+4 Lightning Strike
+4 Kumano Faces Kakkazan
+4 Fable of the Mirror-Breaker
+2 Shivan Devastator
+3 Feldon, Ronom Excavator
+4 Monastery Swiftspear
+4 Bloodthirsty Adversary
+1 Sokenzan, Crucible of Defiance
+2 Mirrex
+4 Mishra's Foundry
+16 Mountain
+
+[sideboard]
+3 Reckoner Bankbuster
+3 Abrade
+3 Obliterating Bolt
+2 Unlicensed Hearse
+2 The Elder Dragon War
+2 Rending Flame

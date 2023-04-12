@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Ben Friedman
+Title=A Wolf in Sheeps Clothing
+Difficulty=very hard
+Description=Caw-Blade by Ben Friedman
+Icon=A Wolf in Sheeps Clothing.jpg
+Deck Type=constructed
+
+[main]
+4 Blade Splicer|NPH
+4 Hero of Bladehold|MBS
+4 Squadron Hawk|M11
+2 Dismember|NPH
+2 Into the Roil|ZEN
+4 Mana Leak|M12
+3 Spell Pierce|ZEN
+4 Preordain|M11
+3 Sword of Feast and Famine|MBS
+2 Oblivion Ring|M12
+4 Island|M12
+4 Plains|M12
+4 Celestial Colonnade|WWK
+4 Glacial Fortress|M12
+2 Inkmoth Nexus|MBS
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+2 Gideon Jura|M12
+
+[sideboard]
+1 Oblivion Ring|M12
+2 Spellskite|NPH
+1 Condemn|M11
+2 Deprive|ROE
+3 Day of Judgment|M12
+4 Timely Reinforcements|M12
+2 Ratchet Bomb|SOM

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Samuel Tharmaratnam
+Title=Carnage
+Difficulty=very hard
+Description=Rakdos Aggro by Samuel Tharmaratnam
+Icon=Carnage.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Torch of Defiance|KLD
+4 Bomat Courier|KLD
+4 Inventor's Apprentice|KLD
+3 Forerunner of Slaughter|BFZ
+4 Scrapheap Scrounger|KLD
+3 Pia Nalaar|KLD
+4 Weldfast Engineer|AER
+4 Incendiary Flow|EMN
+2 Shock
+3 Unlicensed Disintegration|KLD
+4 Heart of Kiran|AER
+5 Swamp|RTR
+10 Mountain|RTR
+4 Foreboding Ruins|SOI
+4 Smoldering Marsh|BFZ
+
+[sideboard]
+2 Chandra, Torch of Defiance|KLD
+2 Collective Brutality|EMN
+3 Fatal Push|AER
+2 Kalitas, Traitor of Ghet|OGW
+2 Key to the City|KLD
+4 Transgress the Mind|BFZ

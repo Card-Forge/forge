@@ -1,0 +1,47 @@
+[quest]
+id=20060901
+OpponentName=Iceman
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=Frozen AEther
+HumanExtras=Frozen AEther
+
+[metadata]
+Name=Frozen
+Title=Frozen
+Difficulty=very hard
+Description=Experience the cold!
+Icon=Iceman.jpg
+Deck Type=constructed
+
+[main]
+4 Edge of Autumn|FUT
+4 Dead // Gone|PLC
+4 Fiery Justice|C13
+4 Stonecloaker|C13
+4 Calciderm|PLC
+4 Serra Avenger|M13
+4 Tarmogoyf|FUT
+4 Kavu Predator|PLC
+4 Riftsweeper|FUT
+1 Mountain|RTR
+1 Forest|RTR
+1 Vesuva|TSP
+2 Llanowar Reborn|C15
+3 Plains|RTR
+4 Horizon Canopy|FUT
+4 Grove of the Burnwillows|FUT
+4 Flagstones of Trokair|TSP
+4 Terramorphic Expanse|C16
+
+[sideboard]
+4 Mystic Enforcer|TSP
+2 Disenchant|CN2
+3 Boom // Bust|PLC
+3 Ancient Grudge|ISD
+2 Temporal Isolation|TSP
+1 Vesuva|TSP

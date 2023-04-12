@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=UR Aggro by Jiri Moravec
+Title=Peregrin Took
+Difficulty=very hard
+Description=UR Aggro by Jiri Moravec
+Icon=Peregrin Took.jpg
+Deck Type=constructed
+
+[main]
+2 Unholy Heat
+2 Light Up the Stage
+2 Underworld Breach
+4 Expressive Iteration
+4 Mutagenic Growth|NPH
+4 Lightning Bolt|M11
+4 Lava Dart|JU
+4 Mishra's Bauble|CS
+4 Dragon's Rage Channeler
+4 Sprite Dragon
+4 Soul-Scar Mage|AKH
+4 Monastery Swiftspear
+1 Fiery Islet
+2 Arid Mesa|ZEN
+2 Wooded Foothills|KTK
+2 Scalding Tarn|ZEN
+2 Bloodstained Mire|KTK
+3 Spirebluff Canal|KLD
+3 Steam Vents
+3 Mountain
+
+[sideboard]
+1 Alpine Moon
+1 Jegantha, the Wellspring
+3 Spell Pierce
+2 Vapor Snag|NPH
+1 Void Mirror
+3 Shattering Spree|GP
+1 Tormod's Crypt
+1 Engineered Explosives|FD
+1 Invasive Surgery|SOI
+1 Unholy Heat

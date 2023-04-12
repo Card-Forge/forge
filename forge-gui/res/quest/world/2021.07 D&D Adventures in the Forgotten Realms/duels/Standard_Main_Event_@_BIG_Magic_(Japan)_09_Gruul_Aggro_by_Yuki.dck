@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Yuki
+Title=Walle
+Difficulty=very hard
+Description=Gruul Aggro by Yuki
+Icon=Walle.jpg
+Deck Type=constructed
+
+[main]
+1 The Akroan War
+3 Embercleave
+3 Esika's Chariot
+4 Ranger Class
+4 Shatterskull Smashing
+3 Goldspan Dragon
+4 Magda, Brazen Outlaw
+4 Lovestruck Beast
+4 Bonecrusher Giant
+4 Jaspera Sentinel
+4 Edgewall Innkeeper
+2 Lair of the Hydra
+3 Mountain
+4 Cragcrown Pathway
+4 Den of the Bugbear
+9 Forest
+
+[sideboard]
+3 Redcap Melee
+2 Roiling Vortex
+2 Burning Hands
+2 Klothys, God of Destiny
+2 Ox of Agonas
+1 Elder Gargaroth
+1 Masked Vandal
+1 Run Afoul
+1 The Akroan War

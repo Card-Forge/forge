@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Creativity by Michael Fromberg
+Title=Shaitan
+Difficulty=very hard
+Description=Creativity by Michael Fromberg
+Icon=Shaitan.jpg
+Deck Type=constructed
+
+[main]
+4 Archon of Cruelty
+4 Fable of the Mirror-Breaker
+4 Lightning Bolt|M11
+1 Prismari Command
+3 Spell Pierce
+1 Destroy Evil
+4 Indomitable Creativity|AER
+2 Prismatic Ending
+1 Transmogrify
+4 Leyline Binding
+3 Teferi, Time Raveler
+4 Wrenn and Six
+1 Blood Crypt
+4 Dwarven Mine
+1 Jetmir's Garden
+1 Sacred Foundry
+4 Arid Mesa|ZEN
+1 Mountain
+1 Steam Vents
+1 Stomping Ground
+1 Xander's Lounge
+4 Scalding Tarn|ZEN
+1 Boseiju, Who Endures
+1 Wooded Foothills|KTK
+4 Bloodstained Mire|KTK
+
+[sideboard]
+1 Destroy Evil
+1 Emrakul, the Aeons Torn|ROE
+2 Hallowed Moonlight|ORI
+3 Veil of Summer
+2 Wear // Tear|DGM
+2 Flusterstorm
+1 Hidetsugu Consumes All
+1 Elesh Norn, Mother of Machines
+2 Strike It Rich

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by Federico Del Basso
+Title=Wilhelm Grimm
+Difficulty=very hard
+Description=Golgari Aggro by Federico Del Basso
+Icon=Wilhelm Grimm.jpg
+Deck Type=constructed
+
+[main]
+3 Glint-Sleeve Siphoner|AER
+4 Longtusk Cub|KLD
+3 Rishkar, Peema Renegade|AER
+4 Verdurous Gearhulk|KLD
+4 Walking Ballista|AER
+4 Winding Constrictor|AER
+3 Bristling Hydra|KLD
+4 Attune with Aether|KLD
+3 Blossoming Defense|KLD
+4 Grasp of Darkness|OGW
+1 Lifecrafter's Bestiary|AER
+2 Aethersphere Harvester|AER
+3 Aether Hub|KLD
+4 Blooming Marsh|KLD
+6 Forest|RTR
+4 Hissing Quagmire|OGW
+4 Swamp|RTR
+
+[sideboard]
+3 Fatal Push|AER
+2 Ob Nixilis Reignited|BFZ
+1 Kalitas, Traitor of Ghet|OGW
+2 Lost Legacy|KLD
+1 Heroic Intervention|AER
+4 Transgress the Mind|BFZ
+2 Natural State|OGW

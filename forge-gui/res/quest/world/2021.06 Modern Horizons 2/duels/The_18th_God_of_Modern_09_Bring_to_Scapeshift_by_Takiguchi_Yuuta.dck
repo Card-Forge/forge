@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Bring to Scapeshift by Takiguchi Yuuta
+Title=Riptide
+Difficulty=very hard
+Description=Bring to Scapeshift by Takiguchi Yuuta
+Icon=Riptide.jpg
+Deck Type=constructed
+
+[main]
+1 Valki, God of Lies
+1 Endurance
+2 Omnath, Locus of Creation
+4 Dryad of the Ilysian Grove
+2 Chalice of the Void|MR
+1 Fire // Ice|AP
+1 Supreme Verdict|RTR
+1 Scapeshift
+1 Culling Ritual
+3 Explore|WWK
+4 Prismatic Ending
+4 Bring to Light|BFZ
+3 Wrenn and Six
+4 Teferi, Time Raveler
+1 Forest
+1 Island
+1 Mountain
+1 Plains
+1 Sacred Foundry
+1 Savai Triome
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+1 Breeding Pool
+2 Raugrin Triome
+2 Ketria Triome
+3 Flooded Strand|KTK
+3 Wooded Foothills|KTK
+4 Windswept Heath|KTK
+4 Valakut, the Molten Pinnacle|ZEN
+
+[sideboard]
+2 Endurance
+1 Ray of Revelation|DKA
+1 Crumble to Dust|BFZ
+2 Force of Vigor
+2 Engineered Explosives|FD
+2 Flusterstorm
+2 Veil of Summer
+3 Malevolent Hermit

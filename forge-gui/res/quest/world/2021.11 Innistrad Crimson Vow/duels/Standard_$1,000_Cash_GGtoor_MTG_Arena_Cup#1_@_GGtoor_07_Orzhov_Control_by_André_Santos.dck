@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Orzhov Control by André Santos
+Title=Centaur Warchief
+Difficulty=very hard
+Description=Orzhov Control by André Santos
+Icon=Centaur Warchief.jpg
+Deck Type=constructed
+
+[main]
+1 Hagra Mauling
+1 Agadeem's Awakening
+2 Vanishing Verse
+2 Sorin the Mirthless
+2 Lolth, Spider Queen
+3 The Meathook Massacre
+4 Wedding Announcement
+4 Rite of Oblivion
+4 Deadly Dispute
+1 Legion Angel
+2 Shambling Ghast
+3 Ambitious Farmhand
+3 Professor of Symbology
+4 Welcoming Vampire
+4 Eyetwitch
+4 Brightclimb Pathway
+4 Hive of the Eye Tyrant
+4 Swamp
+4 Shattered Sanctum
+4 Plains
+
+[sideboard]
+3 Go Blank
+3 Doomskar
+2 Pest Summoning
+1 Necrotic Fumes
+1 Mascot Exhibition
+1 Environmental Sciences
+1 Confront the Past
+3 Legion Angel

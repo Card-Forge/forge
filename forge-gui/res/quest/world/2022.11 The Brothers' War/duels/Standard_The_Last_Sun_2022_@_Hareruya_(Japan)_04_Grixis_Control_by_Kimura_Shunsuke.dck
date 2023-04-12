@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Grixis Control by Kimura Shunsuke
+Title=Einstein
+Difficulty=very hard
+Description=Grixis Control by Kimura Shunsuke
+Icon=Einstein.jpg
+Deck Type=constructed
+
+[main]
+3 Wandering Mind
+4 Fable of the Mirror-Breaker
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+4 Reckoner Bankbuster
+1 Rona's Vortex
+2 Go for the Throat
+4 Make Disappear
+4 Abrade
+4 Invoke Despair
+1 Takenuma, Abandoned Mire
+4 Xander's Lounge
+4 Shipwreck Marsh
+4 Haunted Ridge
+4 Sulfurous Springs
+4 Shivan Reef
+5 Swamp
+
+[sideboard]
+1 Gix's Command
+1 Soul Transfer
+1 Negate
+2 Cut Down
+3 Brotherhood's End
+3 Disdainful Stroke
+4 Siphon Insight

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Golgari Midrange by Amit Etgar (Israel - C)
+Title=Superman
+Difficulty=very hard
+Description=Golgari Midrange by Amit Etgar (Israel - C)
+Icon=Superman.jpg
+Deck Type=constructed
+
+[main]
+2 Karn, Scion of Urza
+3 Vivien Reid
+3 Carnage Tyrant|XLN
+1 Druid of the Cowl
+4 Jadelight Ranger
+4 Llanowar Elves
+4 Merfolk Branchwalker|XLN
+3 Midnight Reaper
+2 Ravenous Chupacabra
+3 Wildgrowth Walker|XLN
+3 Find // Finality
+1 Assassin's Trophy
+1 Cast Down
+3 Vraska's Contempt|XLN
+8 Forest
+6 Swamp
+1 Memorial to Folly
+4 Overgrown Tomb
+4 Woodland Cemetery
+
+[sideboard]
+1 Midnight Reaper
+1 Assassin's Trophy
+2 Cast Down
+2 Plaguecrafter
+2 The Eldest Reborn
+1 Vraska, Relic Seeker|XLN
+4 Duress
+2 Golden Demise

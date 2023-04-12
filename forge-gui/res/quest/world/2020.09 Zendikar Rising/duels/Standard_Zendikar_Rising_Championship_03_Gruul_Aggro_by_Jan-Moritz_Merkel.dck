@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Jan-Moritz Merkel
+Title=The Dwarven Stronghold
+Difficulty=very hard
+Description=Gruul Aggro by Jan-Moritz Merkel
+Icon=The Dwarven Stronghold.jpg
+Deck Type=constructed
+
+[main]
+1 Primal Might
+1 The Akroan War
+2 The Great Henge
+4 Embercleave
+4 Shatterskull Smashing
+1 Rimrock Knight
+1 Embereth Shieldbreaker
+2 Scavenging Ooze
+4 Bonecrusher Giant
+4 Questing Beast
+4 Edgewall Innkeeper
+4 Lovestruck Beast
+4 Kazandu Mammoth
+4 Brushfire Elemental
+4 Fabled Passage
+4 Cragcrown Pathway
+4 Mountain
+8 Forest
+
+[sideboard]
+2 Wilt
+1 Scorching Dragonfire
+2 Fire Prophecy
+2 Soul Sear
+1 Phoenix of Ash
+2 Ox of Agonas
+2 Garruk, Unleashed
+2 Vivien, Monsters' Advocate
+1 The Akroan War

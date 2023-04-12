@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Weenie White by Pbb Badguy
+Title=Astral Visionary
+Difficulty=very hard
+Description=Weenie White by Pbb Badguy
+Icon=Astral Visionary.jpg
+Deck Type=constructed
+
+[main]
+19 Snow-Covered Plains
+4 Faceless Haven
+2 Paladin Class
+2 Valorous Stance
+4 Usher of the Fallen
+4 Intrepid Adversary
+4 Luminarch Aspirant
+4 Hopeful Initiate
+4 Elite Spellbinder
+3 Thalia, Guardian of Thraben
+3 Brutal Cathar
+3 Adeline, Resplendent Cathar
+2 Reidane, God of the Worthy
+2 Fleeting Spirit
+
+[sideboard]
+4 Skyclave Apparition
+2 Portable Hole
+2 Guardian of Faith
+2 Archon of Emeria
+1 Maul of the Skyclaves
+2 Valorous Stance
+2 Fleeting Spirit

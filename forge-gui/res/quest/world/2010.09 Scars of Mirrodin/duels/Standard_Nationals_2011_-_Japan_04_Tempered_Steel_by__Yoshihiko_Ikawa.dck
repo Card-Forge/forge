@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Tempered Steel by  Yoshihiko Ikawa
+Title=Queltosh
+Difficulty=very hard
+Description=Tempered Steel by  Yoshihiko Ikawa
+Icon=Queltosh.jpg
+Deck Type=constructed
+
+[main]
+4 Glacial Fortress|M12
+4 Inkmoth Nexus|MBS
+7 Plains|M12
+4 Seachrome Coast|SOM
+1 Hero of Bladehold|MBS
+4 Memnite|SOM
+4 Signal Pest|MBS
+4 Spellskite|NPH
+4 Steel Overseer|M11
+4 Vault Skirge|NPH
+4 Dispatch|NPH
+4 Glint Hawk Idol|SOM
+3 Mox Opal|SOM
+3 Origin Spellbomb|SOM
+2 Preordain|M11
+4 Tempered Steel|SOM
+
+[sideboard]
+2 Hero of Bladehold|MBS
+3 Celestial Purge|M12
+2 Contested War Zone|MBS
+2 Refraction Trap|WWK
+2 Revoke Existence|SOM
+4 Unified Will|ROE

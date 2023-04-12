@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Bant Control by Andrea Mengucci
+Title=Discord
+Difficulty=very hard
+Description=Bant Control by Andrea Mengucci
+Icon=Discord.jpg
+Deck Type=constructed
+
+[main]
+2 Elspeth Conquers Death
+2 Shark Typhoon
+2 Shatter the Sky
+2 Aether Gust
+2 Mystical Dispute
+2 Plains
+2 Temple of Plenty
+2 Ketria Triome
+3 Island
+4 Temple Garden
+4 Hallowed Fountain
+4 Breeding Pool
+4 Fabled Passage
+2 Nissa, Who Shakes the World
+2 Dovin's Veto
+4 Teferi, Time Raveler
+4 Growth Spiral
+1 Brazen Borrower
+2 Jolrael, Mwonvuli Recluse
+2 Hydroid Krasis
+4 Uro, Titan of Nature's Wrath
+1 Temple of Enlightenment
+1 Blast Zone
+2 Forest
+
+[sideboard]
+2 Shatter the Sky
+2 Aether Gust
+2 Mystical Dispute
+3 Glass Casket
+2 Dovin's Veto
+2 Elder Gargaroth
+1 Swift Response
+1 Discontinuity

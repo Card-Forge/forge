@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by Guilherme Merjam
+Title=Wilhelm Grimm
+Difficulty=very hard
+Description=Golgari Aggro by Guilherme Merjam
+Icon=Wilhelm Grimm.jpg
+Deck Type=constructed
+
+[main]
+1 Vraska, Golgari Queen
+3 Vivien Reid
+1 Golgari Findbroker
+2 Ravenous Chupacabra
+3 Carnage Tyrant|XLN
+2 Midnight Reaper
+2 Thrashing Brontodon
+4 Jadelight Ranger
+2 Seekers' Squire|XLN
+3 Wildgrowth Walker|XLN
+4 Merfolk Branchwalker|XLN
+4 Llanowar Elves
+2 Find // Finality
+2 Vraska's Contempt|XLN
+1 Cast Down
+1 Assassin's Trophy
+4 Woodland Cemetery
+4 Overgrown Tomb
+4 Swamp
+8 Forest
+3 Memorial to Folly
+
+[sideboard]
+1 Ravenous Chupacabra
+1 Wildgrowth Walker|XLN
+1 Find // Finality
+1 Vraska's Contempt|XLN
+2 Cast Down
+1 Assassin's Trophy
+2 Golden Demise
+2 Deathgorge Scavenger|XLN
+4 Duress

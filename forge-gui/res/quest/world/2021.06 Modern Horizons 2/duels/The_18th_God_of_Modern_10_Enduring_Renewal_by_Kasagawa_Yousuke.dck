@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Enduring Renewal by Kasagawa Yousuke
+Title=Superman
+Difficulty=very hard
+Description=Enduring Renewal by Kasagawa Yousuke
+Icon=Superman.jpg
+Deck Type=constructed
+
+[main]
+1 Soul-Guide Lantern
+1 Springleaf Drum|BNG
+1 Basilisk Collar|WWK
+4 Idyllic Tutor
+4 Altar of the Brood|KTK
+4 Portable Hole
+4 Enduring Renewal|TSP
+1 Thraben Inspector|SOI
+3 Ranger-Captain of Eos
+4 Walking Ballista|AER
+4 Ingenious Smith
+4 Stonecoil Serpent
+4 Urza's Saga
+4 Silent Clearing
+4 Darksteel Citadel|M15
+13 Snow-Covered Plains
+
+[sideboard]
+4 Relic of Progenitus|ALA
+2 Seal of Cleansing|NE
+2 Ratchet Bomb|M14
+2 Defense Grid|9E
+1 On Thin Ice
+1 Runed Halo
+1 Heliod, Sun-Crowned
+1 Pithing Needle
+1 Emrakul, the Aeons Torn|ROE

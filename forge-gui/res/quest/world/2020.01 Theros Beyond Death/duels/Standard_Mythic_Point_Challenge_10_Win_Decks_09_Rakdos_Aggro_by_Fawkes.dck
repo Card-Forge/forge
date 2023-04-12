@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Fawkes
+Title=Kane
+Difficulty=very hard
+Description=Rakdos Aggro by Fawkes
+Icon=Kane.jpg
+Deck Type=constructed
+
+[main]
+4 Witch's Oven
+4 Cauldron Familiar
+4 Dreadhorde Butcher
+4 Gutterbones
+4 Mayhem Devil
+4 Priest of Forgotten Gods
+3 Midnight Reaper
+3 Woe Strider
+2 Rankle, Master of Pranks
+7 Swamp
+5 Mountain
+4 Blood Crypt
+4 Fabled Passage
+2 Temple of Malice
+2 Castle Locthwain
+4 Claim the Firstborn
+
+[sideboard]
+2 Scorching Dragonfire
+2 Act of Treason
+2 Agonizing Remorse
+2 Redcap Melee
+2 Pharika's Libation
+2 Noxious Grasp
+2 Embereth Shieldbreaker
+1 Epic Downfall

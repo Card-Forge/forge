@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Legendary Naya by Nick Ball
+Title=King Edward
+Difficulty=very hard
+Description=Legendary Naya by Nick Ball
+Icon=King Edward.jpg
+Deck Type=constructed
+
+[main]
+1 Nahiri, the Harbinger|SOI
+1 Chandra, Flamecaller|OGW
+4 Sylvan Advocate|OGW
+3 Tireless Tracker|SOI
+3 Nissa, Vastwood Seer|ORI
+2 Thalia's Lancers|EMN
+1 Gisela, the Broken Blade|EMN
+1 Bruna, the Fading Light|EMN
+1 Archangel Avacyn|SOI
+1 Sigarda, Heron's Grace|SOI
+1 Dragonlord Dromoka|DTK
+1 Dragonlord Atarka|DTK
+1 Linvala, the Preserver|OGW
+4 Declaration in Stone|SOI
+2 Tragic Arrogance|ORI
+4 Oath of Nissa|OGW
+3 Stasis Snare|BFZ
+4 Evolving Wilds
+5 Plains|RTR
+5 Forest|RTR
+1 Mountain|RTR
+3 Cinder Glade|BFZ
+4 Canopy Vista|BFZ
+1 Fortified Village|SOI
+2 Needle Spires|OGW
+1 Battlefield Forge|ORI
+
+[sideboard]
+2 Nahiri, the Harbinger|SOI
+2 Hallowed Moonlight|ORI
+1 Emrakul, the Promised End|EMN
+2 Gideon, Ally of Zendikar|BFZ
+1 Surrak, the Hunt Caller|DTK
+3 Rending Volley|DTK
+2 Radiant Flames|BFZ
+2 Quarantine Field|BFZ

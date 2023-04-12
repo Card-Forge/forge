@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Weenie White by Connor Flotten
+Title=King Arthur
+Difficulty=very hard
+Description=Weenie White by Connor Flotten
+Icon=King Arthur.jpg
+Deck Type=constructed
+
+[main]
+1 Legion Angel
+2 Reidane, God of the Worthy
+2 Brutal Cathar
+3 Adeline, Resplendent Cathar
+3 Skyclave Apparition
+4 Elite Spellbinder
+4 Stonebinder's Familiar
+4 Intrepid Adversary
+4 Luminarch Aspirant
+4 Usher of the Fallen
+4 Sungold Sentinel
+2 Portable Hole
+4 Faceless Haven
+19 Snow-Covered Plains
+
+[sideboard]
+3 Legion Angel
+2 Brutal Cathar
+1 Skyclave Apparition
+2 Portable Hole
+3 Paladin Class
+4 Guardian of Faith

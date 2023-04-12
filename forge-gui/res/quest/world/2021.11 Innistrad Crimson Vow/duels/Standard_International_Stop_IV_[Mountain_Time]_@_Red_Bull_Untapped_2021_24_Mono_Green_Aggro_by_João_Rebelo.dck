@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by João Rebelo
+Title=Icatia
+Difficulty=very hard
+Description=Mono Green Aggro by João Rebelo
+Icon=Icatia.jpg
+Deck Type=constructed
+
+[main]
+4 Ascendant Packleader
+4 Old-Growth Troll
+4 Sculptor of Winter
+4 Werewolf Pack Leader
+4 Esika's Chariot
+1 Inscription of Abundance
+2 Snakeskin Veil
+4 Blizzard Brawl
+3 Ranger Class
+2 Wrenn and Seven
+4 Kazandu Mammoth
+4 Faceless Haven
+20 Snow-Covered Forest
+
+[sideboard]
+2 Inscription of Abundance
+2 Snakeskin Veil
+1 Wrenn and Seven
+1 Froghemoth
+1 Battle Mammoth
+1 Toski, Bearer of Secrets
+1 Outland Liberator
+2 Tangletrap
+2 Tovolar's Huntmaster
+2 Tajuru Blightblade

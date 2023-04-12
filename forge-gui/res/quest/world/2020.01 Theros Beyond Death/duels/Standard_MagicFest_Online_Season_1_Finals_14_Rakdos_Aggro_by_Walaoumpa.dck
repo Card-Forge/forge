@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Walaoumpa
+Title=Hans
+Difficulty=very hard
+Description=Rakdos Aggro by Walaoumpa
+Icon=Hans.jpg
+Deck Type=constructed
+
+[main]
+7 Swamp
+4 Mountain
+4 Temple of Malice
+4 Blood Crypt
+3 Fabled Passage
+2 Castle Locthwain
+4 Claim the Firstborn
+1 Angrath's Rampage
+4 Witch's Oven
+4 Cauldron Familiar
+4 Woe Strider
+4 Priest of Forgotten Gods
+4 Midnight Reaper
+4 Mayhem Devil
+4 Dreadhorde Butcher
+2 Gutterbones
+1 Rankle, Master of Pranks
+
+[sideboard]
+3 Stonecoil Serpent
+3 Agonizing Remorse
+2 Scorching Dragonfire
+2 Redcap Melee
+2 Noxious Grasp
+1 Embereth Shieldbreaker
+1 Cavalier of Night
+1 Act of Treason

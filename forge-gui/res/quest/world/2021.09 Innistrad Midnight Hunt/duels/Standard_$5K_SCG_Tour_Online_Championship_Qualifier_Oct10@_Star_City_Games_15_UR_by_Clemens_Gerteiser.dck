@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=UR by Clemens Gerteiser
+Title=Grave Power
+Difficulty=very hard
+Description=UR by Clemens Gerteiser
+Icon=Grave Power.jpg
+Deck Type=constructed
+
+[main]
+2 Lier, Disciple of the Drowned
+4 Goldspan Dragon
+4 Smoldering Egg
+2 The Celestus
+2 Prismari Command
+2 Jwari Disruption
+2 Spikefield Hazard
+4 Fading Hope
+4 Divide by Zero
+2 Duress
+2 Bloodchief's Thirst
+3 Alrund's Epiphany
+4 Expressive Iteration
+1 Island
+1 Mountain
+2 Hall of Storm Giants
+3 Shipwreck Marsh
+4 Haunted Ridge
+4 Riverglide Pathway
+4 Blightstep Pathway
+4 Clearwater Pathway
+
+[sideboard]
+2 Duress
+1 Bloodchief's Thirst
+1 Mascot Exhibition
+1 Environmental Sciences
+1 Teachings of the Archaics
+2 Memory Deluge
+2 Power Word Kill
+2 Go Blank
+3 Cinderclasm

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Tim Macsaveny
+Title=Kangee
+Difficulty=very hard
+Description=Mono Green Aggro by Tim Macsaveny
+Icon=Kangee.jpg
+Deck Type=constructed
+
+[main]
+2 Briarbridge Tracker
+3 Ulvenwald Oddity
+4 Sculptor of Winter
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+4 Ascendant Packleader
+4 Esika's Chariot
+2 Snakeskin Veil
+4 Blizzard Brawl
+2 Ranger Class
+3 Unnatural Growth
+2 Faceless Haven
+2 Lair of the Hydra
+20 Snow-Covered Forest
+
+[sideboard]
+1 Ulvenwald Oddity
+2 Snakeskin Veil
+2 Wrenn and Seven
+2 Choose Your Weapon
+2 Tajuru Blightblade
+2 Inscription of Abundance
+4 Devouring Tendrils

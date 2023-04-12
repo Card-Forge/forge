@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Gruul Ramp by Ken Yukuhiro
+Title=Izzet-precon
+Difficulty=very hard
+Description=Gruul Ramp by Ken Yukuhiro
+Icon=Izzet-precon.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Flamecaller|OGW
+3 Kozilek's Return|OGW
+4 Collective Defiance|EMN
+4 Nissa's Pilgrimage|ORI
+4 Tormenting Voice
+4 Traverse the Ulvenwald|SOI
+4 Fiery Impulse|ORI
+1 World Breaker|OGW
+3 Ishkanah, Grafwidow|EMN
+3 Emrakul, the Promised End|EMN
+4 Hangarback Walker|ORI
+2 Cinder Glade|BFZ
+2 Shrine of the Forsaken Gods|BFZ
+4 Evolving Wilds
+4 Game Trail|SOI
+5 Mountain|RTR
+7 Forest|RTR
+
+[sideboard]
+3 Weaver of Lightning|EMN
+3 Tireless Tracker|SOI
+1 Hedron Archive|BFZ
+3 Goblin Dark-Dwellers|OGW
+2 Dragonlord Atarka|DTK
+2 Draconic Roar|DTK
+1 World Breaker|OGW

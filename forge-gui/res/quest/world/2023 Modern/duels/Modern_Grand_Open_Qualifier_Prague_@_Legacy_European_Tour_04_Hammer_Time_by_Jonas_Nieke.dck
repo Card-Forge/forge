@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Hammer Time by Jonas Nieke
+Title=Tolsimir
+Difficulty=very hard
+Description=Hammer Time by Jonas Nieke
+Icon=Tolsimir.jpg
+Deck Type=constructed
+
+[main]
+4 Puresteel Paladin|NPH
+4 Stoneforge Mystic|WWK
+4 Esper Sentinel
+4 Ornithopter|AER
+2 Giver of Runes
+1 Gingerbrute
+4 Colossus Hammer
+3 Springleaf Drum|BNG
+1 Shadowspear
+1 Nettlecyst
+1 Kaldra Compleat
+3 Spell Pierce
+2 Blacksmith's Skill
+4 Sigarda's Aid|EMN
+4 Urza's Saga
+4 Plains
+3 Inkmoth Nexus|MBS
+3 Marsh Flats|ZEN
+3 Arid Mesa|ZEN
+3 Seachrome Coast
+1 Hallowed Fountain
+1 Horizon Canopy|FUT
+
+[sideboard]
+1 Spell Pierce
+1 Blacksmith's Skill
+3 Sanctifier en-Vec
+2 Lavinia, Azorius Renegade
+2 Drannith Magistrate
+2 March of Otherworldly Light
+1 Path to Exile|CFX
+1 Pithing Needle
+1 Relic of Progenitus|ALA
+1 Burrenton Forge-Tender|LRW

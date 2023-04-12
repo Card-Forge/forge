@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Jeskai by Petr Sochurek
+Title=The Seasingers
+Difficulty=very hard
+Description=Jeskai by Petr Sochurek
+Icon=The Seasingers.jpg
+Deck Type=constructed
+
+[main]
+2 Gideon, Ally of Zendikar|BFZ
+4 Mantis Rider|KTK
+4 Jace, Vryn's Prodigy|ORI
+2 Monastery Mentor|FRF
+3 Hangarback Walker|ORI
+2 Soulfire Grand Master|FRF
+1 Roast|DTK
+4 Dig Through Time|KTK
+3 Wild Slash|FRF
+3 Fiery Impulse|ORI
+2 Valorous Stance|FRF
+2 Ojutai's Command|DTK
+1 Dispel|BFZ
+2 Jeskai Charm|KTK
+4 Flooded Strand|KTK
+4 Polluted Delta|KTK
+1 Shivan Reef|ORI
+2 Battlefield Forge|ORI
+2 Prairie Stream|BFZ
+1 Smoldering Marsh|BFZ
+3 Mountain|BFZ
+2 Island|BFZ
+2 Plains|BFZ
+4 Mystic Monastery|KTK
+
+[sideboard]
+2 Roast|DTK
+1 Dispel|BFZ
+2 Dragonlord Ojutai|DTK
+1 Dragonmaster Outcast|BFZ
+3 Disdainful Stroke|KTK
+1 Negate|ORI
+3 Radiant Flames|BFZ
+2 Mastery of the Unseen|FRF

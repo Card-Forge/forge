@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Izzet Control by Rodney Bedell
+Title=Hookah-Smoking Caterpillar
+Difficulty=very hard
+Description=Izzet Control by Rodney Bedell
+Icon=Hookah-Smoking Caterpillar.jpg
+Deck Type=constructed
+
+[main]
+4 Goldspan Dragon
+1 Disdainful Stroke
+2 Fading Hope
+2 Negate
+2 Cinderclasm
+2 Memory Deluge
+2 Galvanic Iteration
+3 Cathartic Pyre
+4 Jwari Disruption
+4 Divide by Zero
+4 Expressive Iteration
+4 Alrund's Epiphany
+1 Battle of Frost and Fire
+1 Frostboil Snarl
+3 Field of Ruin
+3 Hall of Storm Giants
+4 Riverglide Pathway
+7 Island
+7 Mountain
+
+[sideboard]
+2 Disdainful Stroke
+2 Negate
+2 Cinderclasm
+1 Battle of Frost and Fire
+1 Mascot Exhibition
+1 Malevolent Hermit
+2 Environmental Sciences
+4 Burning Hands

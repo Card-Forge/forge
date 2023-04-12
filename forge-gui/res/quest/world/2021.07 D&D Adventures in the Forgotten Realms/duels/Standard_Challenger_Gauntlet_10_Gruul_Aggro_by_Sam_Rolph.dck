@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Sam Rolph
+Title=The World Is Not Enough
+Difficulty=very hard
+Description=Gruul Aggro by Sam Rolph
+Icon=The World Is Not Enough.jpg
+Deck Type=constructed
+
+[main]
+1 Goldspan Dragon
+2 Valki, God of Lies
+2 Ox of Agonas
+3 Rimrock Knight
+4 Jaspera Sentinel
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Magda, Brazen Outlaw
+4 Lovestruck Beast
+3 Embercleave
+4 Esika's Chariot
+4 Shatterskull Smashing
+1 Mountain
+2 Den of the Bugbear
+3 Forest
+3 Lair of the Hydra
+4 Darkbore Pathway
+4 Cragcrown Pathway
+4 Blightstep Pathway
+
+[sideboard]
+1 Run Afoul
+1 Roiling Vortex
+1 Phoenix of Ash
+2 Burning Hands
+2 The Akroan War
+2 Klothys, God of Destiny
+3 Ray of Enfeeblement
+3 Redcap Melee

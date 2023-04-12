@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Atsushi Tanaka
+Title=Dungeon Crawling Colorless
+Difficulty=very hard
+Description=Mono Green Aggro by Atsushi Tanaka
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+
+[main]
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+4 Ulvenwald Oddity
+4 Ascendant Packleader
+4 Esika's Chariot
+1 Khalni Ambush
+2 Snakeskin Veil
+2 Inscription of Abundance
+4 Blizzard Brawl
+4 Ranger Class
+4 Kazandu Mammoth
+4 Faceless Haven
+19 Snow-Covered Forest
+
+[sideboard]
+2 Snakeskin Veil
+2 Inscription of Abundance
+1 Lantern of the Lost
+1 Devouring Tendrils
+1 Tovolar's Huntmaster
+1 Howling Moon
+2 Tajuru Blightblade
+2 Wrenn and Seven
+3 Outland Liberator

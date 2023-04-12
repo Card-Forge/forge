@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Diogo Santos
+Title=Ali Baba
+Difficulty=very hard
+Description=Gruul Aggro by Diogo Santos
+Icon=Ali Baba.jpg
+Deck Type=constructed
+
+[main]
+1 Disdainful Stroke
+2 The Akroan War
+3 Embercleave
+3 Esika's Chariot
+4 Shatterskull Smashing
+3 Goldspan Dragon
+3 Prosperous Innkeeper
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Jaspera Sentinel
+4 Lovestruck Beast
+4 Magda, Brazen Outlaw
+2 Lair of the Hydra
+2 Den of the Bugbear
+4 Riverglide Pathway
+4 Cragcrown Pathway
+4 Barkchannel Pathway
+5 Forest
+
+[sideboard]
+3 Burning Hands
+3 Redcap Melee
+2 Ox of Agonas
+1 Roiling Vortex
+1 Klothys, God of Destiny
+3 Disdainful Stroke
+2 The Akroan War

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Naya Runes Aggro by Saitou Shintarou
+Title=Room-Blu
+Difficulty=very hard
+Description=Naya Runes Aggro by Saitou Shintarou
+Icon=Room-Blu.jpg
+Deck Type=constructed
+
+[main]
+4 Needleverge Pathway
+4 Cragcrown Pathway
+4 Branchloft Pathway
+4 Overgrown Farmland
+2 Sundown Pass
+2 Lair of the Hydra
+1 Eiganjo, Seat of the Empire
+1 Forest
+1 Boseiju, Who Endures
+4 Showdown of the Skalds
+4 Rune of Might
+3 Circle of Confinement
+3 Rune of Speed
+3 Rune of Sustenance
+2 Hallowed Haunting
+4 Generous Visitor
+4 Runeforge Champion
+4 Jukai Naturalist
+3 Kami of Transience
+2 Fable of the Mirror-Breaker
+1 Legion Angel
+
+[sideboard]
+3 Tamiyo's Safekeeping
+2 Katilda, Dawnhart Martyr
+2 Rip Apart
+1 Abrade
+1 Portable Hole
+1 Borrowed Time
+1 Circle of Confinement
+1 Rune of Speed
+3 Legion Angel

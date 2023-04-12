@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=FRites by Ivan Floch
+Title=Aqueduct
+Difficulty=very hard
+Description=FRites by Ivan Floch
+Icon=Aqueduct.jpg
+Deck Type=constructed
+
+[main]
+1 Human Frailty|AVR
+3 Devil's Play|ISD
+3 Sever the Bloodline|C15
+4 Unburial Rites|ISD
+4 Pillar of Flame|AVR
+4 Mulch|C15
+4 Faithless Looting|C15
+1 Sigarda, Host of Herons|AVR
+2 Borderland Ranger|AVR
+2 Gisela, Blade of Goldnight|C15
+2 Griselbrand|AVR
+4 Huntmaster of the Fells|DKA
+1 Swamp|RTR
+1 Plains|RTR
+2 Shimmering Grotto|CN2
+4 Evolving Wilds
+4 Forest|RTR
+4 Woodland Cemetery
+4 Clifftop Retreat
+6 Mountain|RTR
+
+[sideboard]
+2 Restoration Angel|AVR
+2 Purify the Grave|ISD
+2 Olivia Voldaren|ISD
+3 Bonfire of the Damned|AVR
+3 Appetite for Brains|AVR
+1 Ancient Grudge|ISD
+1 Human Frailty|AVR
+1 Sigarda, Host of Herons|AVR

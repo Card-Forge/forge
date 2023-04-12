@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Adventure by Grzegorz Kowalski
+Title=Betty Rubble
+Difficulty=very hard
+Description=Adventure by Grzegorz Kowalski
+Icon=Betty Rubble.jpg
+Deck Type=constructed
+
+[main]
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Brazen Borrower
+4 Lovestruck Beast
+4 Fae of Wishes
+4 Beanstalk Giant
+4 Lucky Clover
+2 Spikefield Hazard
+3 Mystical Dispute
+1 Bala Ged Recovery
+2 Shatterskull Smashing
+3 Escape to the Wilds
+2 Mountain
+3 Riverglide Pathway
+3 Cragcrown Pathway
+4 Ketria Triome
+4 Forest
+5 Island
+
+[sideboard]
+1 Escape to the Wilds
+1 Embercleave
+1 Negate
+1 Storm's Wrath
+1 Redcap Melee
+1 Fabled Passage
+1 Ugin, the Spirit Dragon
+1 Shadowspear
+1 Chainweb Aracnir
+1 Primal Might
+1 Once and Future
+1 Shredded Sails
+1 Stern Dismissal
+1 Fling
+1 Neutralize

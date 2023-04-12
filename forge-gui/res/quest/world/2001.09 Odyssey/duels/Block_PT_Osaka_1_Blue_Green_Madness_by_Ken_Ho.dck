@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Blue/Green Madness by Ken Ho
+Title=The Homarid Invasion
+Difficulty=very hard
+Description=Blue/Green Madness by Ken Ho
+Icon=The Homarid Invasion.jpg
+Deck Type=constructed
+
+[main]
+13 Forest|A
+9 Island|A
+1 Tarnished Citadel|OD
+4 Aquamoeba|TO
+4 Arrogant Wurm|TO
+4 Basking Rootwalla|TO
+3 Werebear|OD
+4 Wild Mongrel|OD
+4 Circular Logic|TO
+4 Roar of the Wurm|OD
+3 Squirrel Nest|OD
+4 Standstill|OD
+3 Upheaval|OD
+
+[sideboard]
+4 Aura Graft|OD
+3 Moment's Peace|OD
+3 Nantuko Blightcutter|TO
+2 Persuasion|OD
+3 Still Life|OD

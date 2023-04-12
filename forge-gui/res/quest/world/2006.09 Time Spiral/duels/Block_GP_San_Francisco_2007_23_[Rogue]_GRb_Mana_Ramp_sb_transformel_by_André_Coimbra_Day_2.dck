@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=[Rogue] GRb Mana Ramp sb transformel by André Coimbra Day 2
+Title=Black & Blue Midrange
+Difficulty=very hard
+Description=[Rogue] GRb Mana Ramp sb transformel by André Coimbra Day 2
+Icon=Black & Blue Midrange.jpg
+Deck Type=constructed
+
+[main]
+4 Bogardan Hellkite|C14
+4 Molten Disaster|C13
+4 Graven Cairns|SHM
+4 Grove of the Burnwillows|FUT
+6 Forest|RTR
+1 Swamp|RTR
+2 Fungal Reaches|CMD
+2 Urza's Factory|C13
+2 Akroma, Angel of Fury|CMD
+2 Void|TSP
+3 Tarmogoyf|FUT
+3 Radha, Heir to Keld|PLC
+3 Mountain|RTR
+4 Coalition Relic|FUT
+4 Wall of Roots|TSP
+4 Mwonvuli Acid-Moss|TSP
+4 Terramorphic Expanse|C16
+4 Harmonize|C13
+
+[sideboard]
+4 Wild Pair|CN2
+4 Avalanche Riders|TSP
+2 Void|TSP
+1 Primal Forcemage|TSP
+2 Grinning Ignus|FUT
+2 Damnation|PLC

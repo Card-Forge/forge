@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Orzhov Control by Luis Romero
+Title=Thelon
+Difficulty=very hard
+Description=Orzhov Control by Luis Romero
+Icon=Thelon.jpg
+Deck Type=constructed
+
+[main]
+2 Village Rites
+2 Hero's Downfall
+2 Blood on the Snow
+2 Kaya the Inexorable
+3 The Meathook Massacre
+3 Deadly Dispute
+3 Infernal Grasp
+4 Sorin the Mirthless
+4 Wedding Announcement
+1 Skullport Merchant
+2 Edgar, Charmed Groom
+4 Shambling Ghast
+4 Eyetwitch
+1 Shattered Sanctum
+1 Roadside Reliquary
+2 Crawling Barrens
+2 Hive of the Eye Tyrant
+4 Snowfield Sinkhole
+4 Shineshadow Snarl
+4 Brightclimb Pathway
+6 Snow-Covered Swamp
+
+[sideboard]
+1 Nashi, Moon Sage's Scion
+1 Mascot Exhibition
+1 Environmental Sciences
+1 Necrotic Fumes
+1 Confront the Past
+1 Faithbound Judge
+2 Path of Peril
+2 Ray of Enfeeblement
+2 Henrika Domnathi
+3 Duress

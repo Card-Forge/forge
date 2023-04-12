@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Jason Pongonis
+Title=James T Kirk
+Difficulty=very hard
+Description=Red Deck Wins by Jason Pongonis
+Icon=James T Kirk.jpg
+Deck Type=constructed
+
+[main]
+4 Ember Hauler|M11
+4 Goblin Guide|ZEN
+2 Manic Vandal|M11
+2 Spikeshot Elder|SOM
+4 Burst Lightning|ZEN
+4 Lightning Bolt|M11
+4 Searing Blaze|WWK
+4 Staggershock|ROE
+4 Shrine of Burning Rage|NPH
+16 Mountain|NPH
+4 Arid Mesa|ZEN
+4 Teetering Peaks|ZEN
+4 Koth of the Hammer|SOM
+
+[sideboard]
+1 Manic Vandal|M11
+3 Vulshok Refugee|NPH
+3 Act of Aggression|NPH
+3 Combust|M11
+2 Crush|MBS
+3 Dismember|NPH

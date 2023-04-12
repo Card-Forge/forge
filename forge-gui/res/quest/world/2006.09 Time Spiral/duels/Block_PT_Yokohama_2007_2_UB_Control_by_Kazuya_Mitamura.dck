@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=UB Control by Kazuya Mitamura
+Title=Humanity's Vengeance
+Difficulty=very hard
+Description=UB Control by Kazuya Mitamura
+Icon=Humanity's Vengeance.jpg
+Deck Type=constructed
+
+[main]
+4 Dreadship Reef|C16
+9 Island|RTR
+5 Swamp|RTR
+4 Terramorphic Expanse|C16
+1 Urborg, Tomb of Yawgmoth|M15
+1 Urza's Factory|C13
+2 Brine Elemental|C14
+2 Draining Whelk|TSP
+4 Shadowmage Infiltrator|TSP
+2 Teferi, Mage of Zhalfir|TSP
+4 Vesuvan Shapeshifter|TSP
+4 Cancel
+4 Careful Consideration|TSP
+4 Damnation|PLC
+2 Phyrexian Totem|TSP
+4 Prismatic Lens|TSP
+2 Snapback|TSP
+2 Strangling Soot|TSP
+
+[sideboard]
+2 Brine Elemental|C14
+1 Strangling Soot|TSP
+2 Ancient Grudge|ISD
+1 Dismal Failure|PLC
+1 Mountain|RTR
+2 Serrated Arrows|TSP
+4 Sulfur Elemental|PLC
+2 Willbender|C14

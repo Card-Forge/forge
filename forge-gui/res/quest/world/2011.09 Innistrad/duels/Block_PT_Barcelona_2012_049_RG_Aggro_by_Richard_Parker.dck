@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=RG Aggro by Richard Parker
+Title=Simic-precon
+Difficulty=very hard
+Description=RG Aggro by Richard Parker
+Icon=Simic-precon.jpg
+Deck Type=constructed
+
+[main]
+4 Evolving Wilds
+12 Forest|RTR
+2 Kessig Wolf Run|ISD
+5 Mountain|RTR
+1 Plains|RTR
+4 Avacyn's Pilgrim|ISD
+4 Borderland Ranger|AVR
+1 Huntmaster of the Fells|DKA
+3 Restoration Angel|AVR
+4 Scorned Villager|DKA
+4 Wolfir Avenger|AVR
+4 Wolfir Silverheart|AVR
+1 Zealous Conscripts|AVR
+3 Bonfire of the Damned|AVR
+4 Garruk Relentless|ISD
+4 Pillar of Flame|AVR
+
+[sideboard]
+3 Huntmaster of the Fells|DKA
+2 Zealous Conscripts|AVR
+1 Bonfire of the Damned|AVR
+2 Banishing Stroke|AVR
+2 Blasphemous Act|C16
+2 Devil's Play|ISD
+2 Purify the Grave|ISD
+1 Tree of Redemption|ISD

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Dani Anderson
+Title=Montgomery Burns
+Difficulty=very hard
+Description=Rakdos Aggro by Dani Anderson
+Icon=Montgomery Burns.jpg
+Deck Type=constructed
+
+[main]
+1 Swamp
+3 Canyon Slough|AKH
+4 Dragonskull Summit|XLN
+2 Aether Hub|KLD
+14 Mountain
+4 Abrade|HOU
+2 Unlicensed Disintegration|KLD
+4 Bomat Courier|KLD
+3 Soul-Scar Mage|AKH
+2 Kari Zev, Skyship Raider|AER
+4 Scrapheap Scrounger|KLD
+2 Earthshaker Khenra|HOU
+1 Pia Nalaar|KLD
+4 Goblin Chainwhirler
+2 Hazoret the Fervent|AKH
+3 Rekindling Phoenix
+2 Glorybringer|AKH
+3 Chandra, Torch of Defiance|KLD
+
+[sideboard]
+2 Chandra's Defeat|HOU
+1 Hour of Glory|HOU
+2 Doomfall|HOU
+3 Duress|XLN
+1 Canyon Slough|AKH
+1 Hazoret the Fervent|AKH
+1 Glorybringer|AKH
+1 Aethersphere Harvester|AER
+1 Cut // Ribbons|AKH
+1 Angrath, the Flame-Chained
+1 Siege-Gang Commander

@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Charles Wong
+Title=The Dwarven Stronghold
+Difficulty=very hard
+Description=Red Deck Wins by Charles Wong
+Icon=The Dwarven Stronghold.jpg
+Deck Type=constructed
+
+[main]
+4 Chandra's Phoenix|M12
+4 Furnace Scamp|NPH
+4 Goblin Guide|ZEN
+4 Grim Lavamancer|M12
+4 Lightning Bolt|M11
+4 Searing Blaze|WWK
+4 Staggershock|ROE
+4 Arc Trail|SOM
+4 Flame Slash|ROE
+4 Shrine of Burning Rage|NPH
+8 Mountain|M12
+4 Arid Mesa|ZEN
+4 Scalding Tarn|ZEN
+4 Teetering Peaks|ZEN
+
+[sideboard]
+4 Manic Vandal|M12
+2 Vulshok Refugee|NPH
+3 Act of Aggression|NPH
+4 Dismember|NPH
+2 Manabarbs|M12

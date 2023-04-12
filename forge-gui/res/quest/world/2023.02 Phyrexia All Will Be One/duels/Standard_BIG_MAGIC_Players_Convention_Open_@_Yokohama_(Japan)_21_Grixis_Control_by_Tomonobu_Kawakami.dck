@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Grixis Control by Tomonobu Kawakami
+Title=Yemaya
+Difficulty=very hard
+Description=Grixis Control by Tomonobu Kawakami
+Icon=Yemaya.jpg
+Deck Type=constructed
+
+[main]
+1 Go for the Throat
+2 Make Disappear
+2 Infernal Grasp
+3 Abrade
+3 Cut Down
+3 Reckoner Bankbuster
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+2 Sheoldred, the Apocalypse
+2 Bladecoil Serpent
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+1 Takenuma, Abandoned Mire
+1 Underground River
+2 Shivan Reef
+2 Darkslick Shores
+2 Swamp
+3 Blackcleave Cliffs
+3 Shipwreck Marsh
+4 Haunted Ridge
+4 Sulfurous Springs
+4 Xander's Lounge
+
+[sideboard]
+2 Saheeli, Filigree Master
+2 Unlicensed Hearse
+2 Brotherhood's End
+2 Negate
+2 Duress
+1 Disdainful Stroke
+1 Siphon Insight
+1 Liliana of the Veil
+1 Cut Down
+1 Sheoldred, the Apocalypse

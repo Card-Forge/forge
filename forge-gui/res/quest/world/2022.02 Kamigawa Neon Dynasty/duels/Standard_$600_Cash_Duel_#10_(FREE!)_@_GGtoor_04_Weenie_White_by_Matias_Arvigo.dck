@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Weenie White by Matias Arvigo
+Title=Elementalist
+Difficulty=very hard
+Description=Weenie White by Matias Arvigo
+Icon=Elementalist.jpg
+Deck Type=constructed
+
+[main]
+1 Ao, the Dawn Sky
+2 Intrepid Adversary
+2 Reidane, God of the Worthy
+2 Legion Angel
+2 Elite Spellbinder
+2 Skyclave Apparition
+3 Adeline, Resplendent Cathar
+4 Usher of the Fallen
+4 Thalia, Guardian of Thraben
+4 Luminarch Aspirant
+4 Hopeful Initiate
+2 Portable Hole
+2 Valorous Stance
+2 The Wandering Emperor
+1 Tyrite Sanctum
+3 Eiganjo, Seat of the Empire
+3 Cave of the Frost Dragon
+17 Plains
+
+[sideboard]
+2 Legion Angel
+1 Elite Spellbinder
+1 Skyclave Apparition
+1 Portable Hole
+1 The Wandering Emperor
+1 Fleeting Spirit
+1 Divine Smite
+1 Guardian of Faith
+1 March of Otherworldly Light
+2 Reckoner Bankbuster
+3 Brutal Cathar

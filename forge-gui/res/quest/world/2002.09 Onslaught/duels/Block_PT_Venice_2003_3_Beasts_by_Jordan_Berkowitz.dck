@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Beasts by Jordan Berkowitz
+Title=Homer Simpson
+Difficulty=very hard
+Description=Beasts by Jordan Berkowitz
+Icon=Homer Simpson.jpg
+Deck Type=constructed
+
+[main]
+4 Shock
+4 Wirewood Elf|ONS
+4 Thoughtbound Primoc|ONS
+4 Tephraderm|ONS
+4 Ravenous Baloth|C13
+4 Krosan Tusker|C13
+4 Canopy Crawler|LE
+2 Barkhide Mauler|ONS
+4 Avarax|ONS
+4 Wooded Foothills|KTK
+4 Tranquil Thicket|C14
+5 Mountain|RTR
+3 Forgotten Cave|C15
+6 Forest|RTR
+4 Contested Cliffs|C13
+
+[sideboard]
+3 Wirewood Savage|ONS
+4 Naturalize
+4 Gempalm Incinerator|LE
+4 Broodhatch Nantuko|ONS

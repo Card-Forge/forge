@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Midrange White by Santiago Roldan
+Title=Advanced Zealotry
+Difficulty=very hard
+Description=Midrange White by Santiago Roldan
+Icon=Advanced Zealotry.jpg
+Deck Type=constructed
+
+[main]
+1 Ondu Inversion
+2 Elspeth Resplendent
+2 Depopulate
+2 March of Otherworldly Light
+2 Fateful Absence
+2 Portable Hole
+4 The Wandering Emperor
+4 Wedding Announcement
+4 Emeria's Call
+4 The Restoration of Eiganjo
+1 Skyclave Apparition
+1 Legion Angel
+3 Ambitious Farmhand
+3 Sanctuary Warden
+4 Luminarch Aspirant
+1 Eiganjo, Seat of the Empire
+2 Cave of the Frost Dragon
+4 Field of Ruin
+14 Plains
+
+[sideboard]
+2 Archon of Emeria
+2 Farewell
+2 Reckoner Bankbuster
+1 Unlicensed Hearse
+1 Reidane, God of the Worthy
+1 Depopulate
+3 Skyclave Apparition
+3 Legion Angel

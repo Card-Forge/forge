@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Temur Aggro by David Sologuren
+Title=BrotherVoodoo
+Difficulty=very hard
+Description=Temur Aggro by David Sologuren
+Icon=BrotherVoodoo.jpg
+Deck Type=constructed
+
+[main]
+4 Heir of the Wilds|KTK
+4 Ashcloud Phoenix|KTK
+1 Sarkhan, the Dragonspeaker|KTK
+1 Shivan Reef|M15
+2 Temple of Epiphany|JOU
+4 Yavimaya Coast|M15
+4 Frontier Bivouac|KTK
+3 Mana Confluence|JOU
+3 Forest|KTK
+2 Mountain|KTK
+4 Wooded Foothills|KTK
+3 Lightning Strike|M15
+2 Temur Charm|KTK
+4 Crater's Claws|KTK
+4 Savage Knuckleblade|KTK
+4 Boon Satyr|THS
+3 Elvish Mystic|M15
+4 Rattleclaw Mystic|KTK
+4 Polukranos, World Eater|THS
+
+[sideboard]
+1 Sarkhan, the Dragonspeaker|KTK
+2 Magma Spray|JOU
+2 Disdainful Stroke|KTK
+2 Back to Nature|M15
+2 Hunt the Hunter|THS
+3 Stubborn Denial|KTK
+2 Anger of the Gods|THS
+1 Hornet Nest|M15

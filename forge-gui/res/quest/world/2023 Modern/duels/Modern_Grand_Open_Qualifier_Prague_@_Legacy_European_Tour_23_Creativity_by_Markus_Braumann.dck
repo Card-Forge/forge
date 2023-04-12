@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Creativity by Markus Braumann
+Title=Black Panther
+Difficulty=very hard
+Description=Creativity by Markus Braumann
+Icon=Black Panther.jpg
+Deck Type=constructed
+
+[main]
+3 Archon of Cruelty
+4 Fable of the Mirror-Breaker
+2 Burst Lightning|ZEN
+4 Fire // Ice|AP
+2 Mana Leak|M12
+4 Prismari Command
+4 Spell Pierce
+4 Lightning Bolt|M11
+4 Indomitable Creativity|AER
+1 Transmogrify
+4 Wrenn and Six
+2 Steam Vents
+3 Bloodstained Mire|KTK
+1 Boseiju, Who Endures
+4 Dwarven Mine
+1 Ketria Triome
+2 Scalding Tarn|ZEN
+1 Mountain
+1 Blood Crypt
+4 Wooded Foothills|KTK
+1 Ziatora's Proving Ground
+1 Stomping Ground
+3 Arid Mesa|ZEN
+
+[sideboard]
+1 Boseiju, Who Endures
+2 Aether Gust
+1 Iona, Shield of Emeria|ZEN
+1 Flusterstorm
+3 Veil of Summer
+2 Turn the Earth
+2 Nature's Claim|WWK
+3 Hidetsugu Consumes All

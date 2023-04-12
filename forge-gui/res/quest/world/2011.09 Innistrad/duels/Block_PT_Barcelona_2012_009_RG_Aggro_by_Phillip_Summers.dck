@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=RG Aggro by Phillip Summers
+Title=The Color Black
+Difficulty=very hard
+Description=RG Aggro by Phillip Summers
+Icon=The Color Black.jpg
+Deck Type=constructed
+
+[main]
+4 Evolving Wilds
+12 Forest|RTR
+2 Kessig Wolf Run|ISD
+6 Mountain|RTR
+3 Borderland Ranger|AVR
+4 Dawntreader Elk|DKA
+4 Huntmaster of the Fells|DKA
+4 Strangleroot Geist|DKA
+4 Wolfir Silverheart|AVR
+3 Bonfire of the Damned|AVR
+4 Brimstone Volley|CNS
+4 Devil's Play|ISD
+2 Garruk Relentless|ISD
+4 Pillar of Flame|AVR
+
+[sideboard]
+1 Bonfire of the Damned|AVR
+1 Garruk Relentless|ISD
+2 Archwing Dragon|AVR
+2 Blasphemous Act|C16
+3 Hellrider|DKA
+2 Naturalize
+2 Tree of Redemption|ISD
+1 Witchbane Orb|ISD
+1 Zealous Conscripts|AVR

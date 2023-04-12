@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=UW Control by Lukas Dusek
+Title=Dungeon Crawling Green
+Difficulty=very hard
+Description=UW Control by Lukas Dusek
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+
+[main]
+1 Starnheim Unleashed
+2 Teferi, Who Slows the Sunset
+2 The Restoration of Eiganjo
+2 Farewell
+2 Emeria's Call
+2 Reckoner Bankbuster
+2 Disdainful Stroke
+2 Negate
+2 Memory Deluge
+3 The Wandering Emperor
+3 Fateful Absence
+4 Jwari Disruption
+4 Doomskar
+4 March of Otherworldly Light
+1 Legion Angel
+1 Hullbreaker Horror
+2 Iymrith, Desert Doom
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+2 Cave of the Frost Dragon
+2 Island
+2 Hall of Storm Giants
+4 Deserted Beach
+4 Hengegate Pathway
+5 Plains
+
+[sideboard]
+4 Sunset Revelry
+3 Malevolent Hermit
+2 Lier, Disciple of the Drowned
+2 Test of Talents
+3 Legion Angel
+1 Hullbreaker Horror

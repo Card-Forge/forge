@@ -1,0 +1,34 @@
+[quest]
+id=44005
+OpponentName=Sen Triplets
+AILife=20
+Repeat=true
+Wins=10
+Card Reward=Sen Triplets;Breya, Etherium Shaper|C16;1 blue rares
+Credit Reward=1000
+AIExtras=Scepter of Insight
+[metadata]
+Name=quest44005
+Title=Sen Triplets
+Icon=alasen.jpg
+Difficulty=hard
+Description=They are the masters of your mind
+Deck Type=constructed
+[Main]
+4 Arcane Sanctum|ALA
+3 Architects of Will|ARB
+3 Courier's Capsule|ALA
+3 Esper Panorama|ALA
+4 Etherium Sculptor|ALA
+4 Ethersworn Canonist|ALA
+3 Executioner's Capsule|ALA
+4 Exotic Orchard|CFX
+3 Fieldmist Borderpost|ARB
+6 Island|ALA|2
+4 Master of Etherium|ALA
+3 Mistvein Borderpost|ARB
+3 Plains|ALA|4
+4 Sen Triplets|ARB
+2 Spell Snip|ALA
+4 Swamp|ALA|1
+3 Time Sieve|ARB

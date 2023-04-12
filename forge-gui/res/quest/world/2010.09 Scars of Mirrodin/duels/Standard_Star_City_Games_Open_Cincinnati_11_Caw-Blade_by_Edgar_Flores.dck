@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Edgar Flores
+Title=Greater Lich
+Difficulty=very hard
+Description=Caw-Blade by Edgar Flores
+Icon=Greater Lich.jpg
+Deck Type=constructed
+
+[main]
+2 Spellskite|NPH
+2 Consecrated Sphinx|MBS
+4 Squadron Hawk|M11
+3 Dismember|NPH
+3 Into the Roil|ZEN
+4 Mana Leak|M12
+3 Spell Pierce|ZEN
+4 Preordain|M11
+2 Timely Reinforcements|M12
+3 Sword of Feast and Famine|MBS
+4 Island|M12
+3 Plains|M12
+4 Celestial Colonnade|WWK
+4 Glacial Fortress|M12
+3 Inkmoth Nexus|MBS
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+2 Gideon Jura|M12
+2 Jace Beleren|M11
+
+[sideboard]
+1 Dismember|NPH
+1 Timely Reinforcements|M12
+3 Mental Misstep|NPH
+2 Negate|M12
+2 Day of Judgment|M12
+2 Batterskull|NPH
+2 Ratchet Bomb|SOM
+2 Oblivion Ring|M12

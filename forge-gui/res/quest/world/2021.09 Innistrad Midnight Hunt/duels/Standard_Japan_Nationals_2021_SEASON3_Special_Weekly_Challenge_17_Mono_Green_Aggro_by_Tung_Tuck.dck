@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Tung Tuck
+Title=Yawgmoth
+Difficulty=very hard
+Description=Mono Green Aggro by Tung Tuck
+Icon=Yawgmoth.jpg
+Deck Type=constructed
+
+[main]
+2 Swarm Shambler
+4 Werewolf Pack Leader
+4 Jaspera Sentinel
+4 Old-Growth Troll
+4 Esika's Chariot
+2 Inscription of Abundance
+2 Devouring Tendrils
+4 Blizzard Brawl
+2 Unnatural Growth
+4 Ranger Class
+1 Lair of the Hydra
+3 Kazandu Mammoth
+4 Faceless Haven
+20 Snow-Covered Forest
+
+[sideboard]
+2 Devouring Tendrils
+1 Outland Liberator
+2 Blessing of Frost
+2 Tajuru Blightblade
+2 Snakeskin Veil
+2 Duel for Dominance
+2 Toski, Bearer of Secrets
+2 Tangletrap

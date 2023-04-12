@@ -1,0 +1,52 @@
+[quest]
+id=20230104
+OpponentName=Marco
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Cascade Crash
+Title=Lady Musgrave
+Difficulty=very hard
+Description=Cascade Crash by Marco Cammilluzzi
+Icon=Lady Musgrave.jpg
+Deck Type=constructed
+
+[main]
+3 Fury
+3 Brazen Borrower
+3 Murktide Regent
+4 Shardless Agent
+4 Dead // Gone|PLC
+4 Violent Outburst|ARB
+4 Fire // Ice|AP
+4 Force of Negation
+3 Mystical Dispute
+4 Crashing Footfalls
+1 Steam Vents
+1 Breeding Pool
+1 Stomping Ground
+1 Ketria Triome
+1 Otawara, Soaring City
+2 Fiery Islet
+2 Gemstone Caverns|TSP
+2 Island
+1 Forest
+1 Mountain
+4 Wooded Foothills|KTK
+4 Misty Rainforest|ZEN
+3 Scalding Tarn|ZEN
+
+[sideboard]
+1 Fury
+1 Gemstone Caverns|TSP
+3 Blood Moon|9E
+4 Endurance
+4 Force of Vigor
+2 Subtlety

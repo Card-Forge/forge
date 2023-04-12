@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=RUG Twin Pod by Dan Musser
+Title=Carnage
+Difficulty=very hard
+Description=RUG Twin Pod by Dan Musser
+Icon=Carnage.jpg
+Deck Type=constructed
+
+[main]
+1 Phyrexian Metamorph|NPH
+1 Solemn Simulacrum|M12
+1 Spellskite|NPH
+1 Wurmcoil Engine|SOM
+1 Acidic Slime|M12
+4 Birds of Paradise|M12
+4 Deceiver Exarch|NPH
+4 Fauna Shaman|M11
+1 Frost Titan|M12
+1 Hero of Oxid Ridge|MBS
+1 Inferno Titan|M12
+3 Lotus Cobra|ZEN
+1 Mitotic Slime|M11
+1 Obstinate Baloth|M11
+1 Sea Gate Oracle|ROE
+3 Vengevine|ROE
+3 Birthing Pod|NPH
+4 Splinter Twin|ROE
+5 Forest|M12
+3 Island|M12
+2 Mountain|M12
+4 Copperline Gorge|SOM
+4 Misty Rainforest|ZEN
+2 Raging Ravine|WWK
+4 Scalding Tarn|ZEN
+
+[sideboard]
+2 Spellskite|NPH
+1 Acidic Slime|M12
+2 Obstinate Baloth|M11
+1 Vengevine|ROE
+1 Consecrated Sphinx|MBS
+2 Act of Aggression|NPH
+2 Nature's Claim|WWK
+4 Leyline of Sanctity|M11

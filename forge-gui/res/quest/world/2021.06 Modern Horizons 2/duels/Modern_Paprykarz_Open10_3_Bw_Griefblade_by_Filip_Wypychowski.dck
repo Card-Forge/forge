@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Bw Griefblade by Filip Wypychowski
+Title=Leela
+Difficulty=very hard
+Description=Bw Griefblade by Filip Wypychowski
+Icon=Leela.jpg
+Deck Type=constructed
+
+[main]
+1 Kaya, Orzhov Usurper
+1 Sword of Fire and Ice|DS
+1 Batterskull|NPH
+1 Kaldra Compleat
+2 Malakir Rebirth
+2 Vindicate|AP
+3 Thoughtseize|THS
+3 Inquisition of Kozilek|ROE
+4 Fatal Push|AER
+4 Ephemerate
+2 Skyclave Apparition
+3 Solitude
+4 Grief
+4 Stoneforge Mystic|WWK
+4 Dauthi Voidwalker
+1 Urborg, Tomb of Yawgmoth|M15
+1 Castle Locthwain
+2 Silent Clearing
+2 Plains
+2 Godless Shrine
+2 Swamp
+3 Brightclimb Pathway
+4 Concealed Courtyard|KLD
+4 Marsh Flats|ZEN
+
+[sideboard]
+2 Kataki, War's Wage|SOK
+1 Kaya's Guile
+1 Engineered Explosives|FD
+2 Damn
+2 Chalice of the Void|MR
+1 Ashiok, Dream Render
+2 Kor Firewalker|WWK
+2 Sanctifier en-Vec
+1 Kaya, Orzhov Usurper
+1 Vindicate|AP

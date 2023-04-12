@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Merfolk by Forrest Winstead
+Title=The Desert Caravan
+Difficulty=very hard
+Description=Merfolk by Forrest Winstead
+Icon=The Desert Caravan.jpg
+Deck Type=constructed
+
+[main]
+2 Merrow Reejerey|LRW
+4 Tide Shaper
+4 Rishadan Dockhand
+4 Merfolk Trickster
+4 Silvergill Adept
+4 Lord of Atlantis|TSP
+4 Master of the Pearl Trident|M13
+4 Svyelun of Sea and Sky
+4 Aether Vial|DS
+2 Vapor Snag|NPH
+4 Force of Negation
+1 Minamo, School at Water's Edge|CHK
+1 Oboro, Palace in the Clouds|SOK
+4 Waterlogged Grove
+4 Mutavault|M14
+10 Island
+
+[sideboard]
+2 Brazen Borrower
+2 Tidebinder Mage|M14
+2 Thieving Skydiver
+3 Subtlety
+3 Relic of Progenitus|ALA
+3 Counterspell|7E

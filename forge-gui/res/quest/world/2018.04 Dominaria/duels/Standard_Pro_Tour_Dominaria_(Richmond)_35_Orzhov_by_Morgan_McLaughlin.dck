@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Orzhov by Morgan McLaughlin
+Title=Inspector Gadget
+Difficulty=very hard
+Description=Orzhov by Morgan McLaughlin
+Icon=Inspector Gadget.jpg
+Deck Type=constructed
+
+[main]
+1 Gideon of the Trials|AKH
+2 Angel of Sanctions|AKH
+4 Knight of Malice
+1 Knight of Grace
+3 Walking Ballista|AER
+2 Scrapheap Scrounger|KLD
+1 Doomfall|HOU
+2 Cast Down
+4 Fatal Push|AER
+2 Vraska's Contempt|XLN
+1 Invoke the Divine
+2 Heart of Kiran|AER
+4 History of Benalia
+2 Ixalan's Binding|XLN
+4 Concealed Courtyard|KLD
+3 Ifnir Deadlands|HOU
+6 Plains
+2 Swamp
+4 Isolated Chapel
+3 Forsaken Sanctuary
+2 Aether Hub|KLD
+1 Field of Ruin|XLN
+4 Karn, Scion of Urza
+
+[sideboard]
+1 Cast Down
+2 Vraska's Contempt|XLN
+4 Duress|XLN
+2 Treasure Map|XLN
+1 The Eldest Reborn
+2 Fumigate|KLD
+2 Glint-Sleeve Siphoner|AER
+1 Profane Procession

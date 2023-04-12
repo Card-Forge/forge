@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Rakdos Agro by Vidianto Wijaya
+Title=Carnival of Blood
+Difficulty=very hard
+Description=Rakdos Agro by Vidianto Wijaya
+Icon=Carnival of Blood.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Torch of Defiance|KLD
+4 Bomat Courier|KLD
+3 Soul-Scar Mage|AKH
+2 Earthshaker Khenra|HOU
+2 Kari Zev, Skyship Raider|AER
+4 Scrapheap Scrounger|KLD
+4 Goblin Chainwhirler
+1 Pia Nalaar|KLD
+2 Hazoret the Fervent|AKH
+4 Rekindling Phoenix
+2 Glorybringer|AKH
+4 Abrade|HOU
+2 Unlicensed Disintegration|KLD
+3 Canyon Slough|AKH
+2 Aether Hub|KLD
+4 Dragonskull Summit|XLN
+14 Mountain
+1 Swamp
+
+[sideboard]
+1 Chandra, Torch of Defiance|KLD
+1 Glorybringer|AKH
+1 Canyon Slough|AKH
+1 Chandra's Defeat|HOU
+3 Duress|XLN
+2 Magma Spray|AKH
+2 Doomfall|HOU
+2 Hour of Glory|HOU
+1 Angrath, the Flame-Chained
+1 The Eldest Reborn

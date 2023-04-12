@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Izzet Control by Thierry Ramboa
+Title=Spyro
+Difficulty=very hard
+Description=Izzet Control by Thierry Ramboa
+Icon=Spyro.jpg
+Deck Type=constructed
+
+[main]
+4 Goldspan Dragon
+4 Smoldering Egg
+1 Prismari Command
+1 Fading Hope
+1 Negate
+1 Spikefield Hazard
+2 Saw It Coming
+2 Divide by Zero
+3 Jwari Disruption
+4 Dragon's Fire
+4 Memory Deluge
+1 Thundering Rebuke
+4 Alrund's Epiphany
+4 Shatterskull Smashing
+4 Expressive Iteration
+2 Hall of Storm Giants
+3 Frostboil Snarl
+4 Riverglide Pathway
+4 Mountain
+7 Island
+
+[sideboard]
+1 Burn Down the House
+1 Heated Debate
+1 Mascot Exhibition
+1 Environmental Sciences
+2 Test of Talents
+2 Cinderclasm
+3 Burning Hands
+4 Malevolent Hermit

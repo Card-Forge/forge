@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Izzet Control by Kodama Hiroshi
+Title=Olokun
+Difficulty=very hard
+Description=Izzet Control by Kodama Hiroshi
+Icon=Olokun.jpg
+Deck Type=constructed
+
+[main]
+1 Dragon's Fire
+1 Burn Down the House
+2 Shatterskull Smashing
+2 Abrade
+2 Make Disappear
+2 Negate
+2 Fading Hope
+3 Voltage Surge
+4 Expressive Iteration
+4 Jwari Disruption
+4 Reckoner Bankbuster
+4 Fable of the Mirror-Breaker
+2 Aegar, the Freezing Flame
+2 Reservoir Kraken
+4 Goldspan Dragon
+1 Sokenzan, Crucible of Defiance
+1 Otawara, Soaring City
+1 Field of Ruin
+2 Mountain
+2 Hall of Storm Giants
+2 Den of the Bugbear
+4 Stormcarved Coast
+4 Riverglide Pathway
+4 Island
+
+[sideboard]
+2 Inventive Iteration
+2 Disdainful Stroke
+2 Spell Pierce
+2 Mind Flayer
+1 Annul
+1 Dragon's Fire
+1 Burn Down the House
+1 Abrade
+2 Fading Hope
+1 Voltage Surge

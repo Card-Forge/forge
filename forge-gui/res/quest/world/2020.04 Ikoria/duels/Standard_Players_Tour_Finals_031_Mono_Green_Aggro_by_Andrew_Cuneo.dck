@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Andrew Cuneo
+Title=Jacob Grimm
+Difficulty=very hard
+Description=Mono Green Aggro by Andrew Cuneo
+Icon=Jacob Grimm.jpg
+Deck Type=constructed
+
+[main]
+1 Gemrazer
+1 Yorvo, Lord of Garenbrig
+3 Barkhide Troll
+3 Paradise Druid
+4 Questing Beast
+4 Scavenging Ooze
+4 Pelt Collector
+4 Stonecoil Serpent
+4 Lovestruck Beast
+4 Primal Might
+1 Nissa, Who Shakes the World
+3 Vivien, Arkbow Ranger
+1 Bonders' Enclave
+2 Castle Garenbrig
+21 Forest
+
+[sideboard]
+2 Gemrazer
+1 Ranger's Guile
+1 Garruk's Harbinger
+2 The Great Henge
+2 Ram Through
+3 Shifting Ceratops
+4 Oakhame Adversary

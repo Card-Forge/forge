@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Esper Raffine by Simon Nielsen
+Title=alaviash
+Difficulty=very hard
+Description=Esper Raffine by Simon Nielsen
+Icon=alaviash.jpg
+Deck Type=constructed
+
+[main]
+1 Sheoldred, the Apocalypse
+2 Ao, the Dawn Sky
+3 Dennick, Pious Apprentice
+4 Raffine, Scheming Seer
+4 Tenacious Underdog
+1 Cut Down
+1 Void Rend
+2 Infernal Grasp
+2 Siphon Insight
+3 Destroy Evil
+4 Make Disappear
+4 Wedding Announcement
+3 The Wandering Emperor
+1 Takenuma, Abandoned Mire
+1 Otawara, Soaring City
+1 Swamp
+1 Eiganjo, Seat of the Empire
+2 Deserted Beach
+2 Island
+2 Adarkar Wastes
+2 Plaza of Heroes
+3 Shattered Sanctum
+3 Shipwreck Marsh
+4 Caves of Koilos
+4 Raffine's Tower
+
+[sideboard]
+1 Sheoldred, the Apocalypse
+1 Cut Down
+1 Void Rend
+2 Siphon Insight
+1 The Wandering Emperor
+1 Disdainful Stroke
+1 Sorin the Mirthless
+1 Farewell
+2 Negate
+2 Rona's Vortex
+2 Kaito Shizuki

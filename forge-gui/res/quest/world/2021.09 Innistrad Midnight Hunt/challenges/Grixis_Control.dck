@@ -1,0 +1,57 @@
+[quest]
+id=20210901
+OpponentName=Jan
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Grixis Control
+Title=Angelic Might
+Difficulty=very hard
+Description=Grixis Control by Jan Merkel
+Icon=Angelic Might.jpg
+Deck Type=constructed
+
+[main]
+1 Bloodchief's Thirst
+1 Burn Down the House
+1 Demon Bolt
+1 Cathartic Pyre
+1 Prismari Command
+1 Cinderclasm
+1 Power Word Kill
+2 Spikefield Hazard
+2 Duress
+2 Galvanic Iteration
+2 Jwari Disruption
+3 The Celestus
+3 Memory Deluge
+4 Fading Hope
+4 Expressive Iteration
+4 Alrund's Epiphany
+1 Smoldering Egg
+3 Lier, Disciple of the Drowned
+1 Island
+2 Hall of Storm Giants
+2 Mountain
+3 Clearwater Pathway
+3 Shipwreck Marsh
+4 Riverglide Pathway
+4 Blightstep Pathway
+4 Haunted Ridge
+
+[sideboard]
+4 Malevolent Hermit
+1 Unexpected Windfall
+1 Soul Shatter
+2 Mind Flayer
+2 Go Blank
+3 Cyclone Summoner
+1 Power Word Kill
+1 Duress

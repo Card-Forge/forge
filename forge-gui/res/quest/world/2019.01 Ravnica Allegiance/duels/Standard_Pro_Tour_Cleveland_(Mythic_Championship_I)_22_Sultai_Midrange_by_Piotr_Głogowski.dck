@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Sultai Midrange by Piotr Głogowski
+Title=Kang
+Difficulty=very hard
+Description=Sultai Midrange by Piotr Głogowski
+Icon=Kang.jpg
+Deck Type=constructed
+
+[main]
+1 Vraska, Relic Seeker|XLN
+3 Vivien Reid
+4 Thief of Sanity
+4 Llanowar Elves
+3 Hostage Taker|XLN
+4 Incubation Druid
+4 Hydroid Krasis
+1 Frilled Mystic
+1 Jadelight Ranger
+2 Find // Finality
+3 Thought Erasure
+2 Vraska's Contempt|XLN
+2 Cast Down
+1 Assassin's Trophy
+4 Overgrown Tomb
+4 Watery Grave
+2 Hinterland Harbor
+2 Forest
+4 Drowned Catacomb|XLN
+4 Woodland Cemetery
+1 Island
+4 Breeding Pool
+
+[sideboard]
+1 Vraska, Relic Seeker|XLN
+1 Frilled Mystic
+2 Kraul Harpooner
+2 Negate
+1 Disdainful Stroke
+1 Cry of the Carnarium
+2 Thrashing Brontodon
+2 Moment of Craving
+2 Duress
+1 Plaguecrafter

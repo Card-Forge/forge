@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Oath of Druids by Jelger Wiegersma
+Title=Deadpool
+Difficulty=very hard
+Description=Oath of Druids by Jelger Wiegersma
+Icon=Deadpool.jpg
+Deck Type=constructed
+
+[main]
+4 Flood Plain|MI
+2 Savannah|A
+3 Treetop Village|UL
+4 Tropical Island|A
+4 Tundra|A
+1 Underground Sea|A
+3 Volcanic Island|B
+3 Wasteland|TE
+1 Morphling|US
+1 Spike Feeder|SH
+1 Spike Weaver|EX
+4 Accumulated Knowledge|NE
+4 Brainstorm|IA
+4 Counterspell|A
+4 Enlightened Tutor|MI
+4 Force of Will|AL
+2 Gaea's Blessing|WL
+2 Oath of Druids|EX
+1 Overgrown Estate|AP
+1 Powder Keg|UD
+2 Seal of Cleansing|NE
+3 Swords to Plowshares|A
+1 Sylvan Library|LG
+1 Wild Research|AP
+
+[sideboard]
+2 Morphling|US
+1 Seal of Cleansing|NE
+1 Swords to Plowshares|A
+1 Circle of Protection: Red|A
+1 Crater Hellion|US
+1 Pernicious Deed|AP
+4 Pyroblast|IA
+4 Wrath of God|A

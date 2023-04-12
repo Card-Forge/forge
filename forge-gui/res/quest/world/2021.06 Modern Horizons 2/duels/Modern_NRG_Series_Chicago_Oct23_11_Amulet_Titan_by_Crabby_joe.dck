@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Amulet Titan by Crabby joe
+Title=The Clock
+Difficulty=very hard
+Description=Amulet Titan by Crabby joe
+Icon=The Clock.jpg
+Deck Type=constructed
+
+[main]
+2 Azusa, Lost but Seeking
+4 Primeval Titan|M12
+4 Arboreal Grazer
+4 Dryad of the Ilysian Grove
+1 Expedition Map|ZEN
+4 Amulet of Vigor|WWK
+4 Summoner's Pact|FUT
+2 Explore|WWK
+4 Urza's Saga
+3 Karn, the Great Creator
+1 Sunhome, Fortress of the Legion|RAV
+1 Vesuva|TSP
+1 Verdant Catacombs|ZEN
+1 Wooded Foothills|KTK
+1 Slayers' Stronghold|AVR
+1 Breeding Pool
+1 Radiant Fountain
+1 Boros Garrison|RAV
+1 Castle Garenbrig
+1 Crumbling Vestige|OGW
+2 Selesnya Sanctuary|RAV
+2 Cavern of Souls|AVR
+2 Gruul Turf|GP
+2 Valakut, the Molten Pinnacle|ZEN
+2 Tolaria West|FUT
+4 Forest
+4 Simic Growth Chamber|DIS
+
+[sideboard]
+1 Cavern of Souls|AVR
+1 Foundation Breaker
+1 Tormod's Crypt
+1 Relic of Progenitus|ALA
+1 Liquimetal Coating|SOM
+1 Pithing Needle
+1 Bojuka Bog|WWK
+1 Walking Ballista|AER
+1 Wurmcoil Engine|SOM
+2 Force of Vigor
+2 Engineered Explosives|FD
+2 Dismember|NPH

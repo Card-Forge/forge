@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Astral Slide by Osyp Lebedowicz
+Title=Thelon
+Difficulty=very hard
+Description=Astral Slide by Osyp Lebedowicz
+Icon=Thelon.jpg
+Deck Type=constructed
+
+[main]
+3 Renewed Faith|AKH
+4 Akroma's Blessing|ONS
+4 Akroma's Vengeance|CMD
+4 Astral Slide|ONS
+4 Lightning Rift|ONS
+4 Starstorm|C14
+2 Gempalm Incinerator|LE
+2 Daru Sanctifier|LE
+2 Jareth, Leonine Titan|C15
+4 Exalted Angel|ONS
+4 Secluded Steppe|C15
+4 Forgotten Cave|C15
+9 Mountain|RTR
+10 Plains|RTR
+
+[sideboard]
+1 Oblation|C16
+3 Disciple of Grace|ONS
+3 Demystify|XLN
+4 Avarax|ONS
+2 Akroma, Angel of Wrath|TSP
+2 Gempalm Incinerator|LE

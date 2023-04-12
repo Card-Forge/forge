@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Blue Aggro by Autumn Burchett
+Title=Totoro
+Difficulty=very hard
+Description=Mono Blue Aggro by Autumn Burchett
+Icon=Totoro.jpg
+Deck Type=constructed
+
+[main]
+4 Siren Stormtamer|XLN
+4 Pteramander
+1 Mist-Cloaked Herald
+4 Merfolk Trickster
+4 Tempest Djinn
+1 Chart a Course|XLN
+1 Entrancing Melody|XLN
+4 Opt
+4 Dive Down|XLN
+3 Spell Pierce|XLN
+2 Essence Capture
+1 Negate
+4 Wizard's Retort
+4 Curious Obsession
+19 Island
+
+[sideboard]
+3 Entrancing Melody|XLN
+1 Essence Capture
+3 Negate
+1 Island
+1 Disdainful Stroke
+3 Surge Mare
+2 Deep Freeze
+1 Jace, Cunning Castaway|XLN

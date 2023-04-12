@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Temur Lukka by Antonio Mancilla
+Title=Nagsnarf
+Difficulty=very hard
+Description=Temur Lukka by Antonio Mancilla
+Icon=Nagsnarf.jpg
+Deck Type=constructed
+
+[main]
+2 Koma, Cosmos Serpent
+3 Llanowar Visionary
+4 Lovestruck Beast
+4 Edgewall Innkeeper
+4 Bonecrusher Giant
+4 Brazen Borrower
+1 Esika's Chariot
+2 Disdainful Stroke
+2 Fire Prophecy
+1 Shatterskull Smashing
+1 Wolfwillow Haven
+2 The Akroan War
+4 Lukka, Coppercoat Outcast
+1 Forest
+1 Temple of Epiphany
+1 Lair of the Hydra
+2 Island
+2 Mountain
+3 Fabled Passage
+4 Riverglide Pathway
+4 Ketria Triome
+4 Cragcrown Pathway
+4 Barkchannel Pathway
+
+[sideboard]
+1 Negate
+1 Wilt
+1 Klothys, God of Destiny
+1 Test of Talents
+2 Burning Hands
+2 Mystical Dispute
+3 Redcap Melee
+4 Goldspan Dragon

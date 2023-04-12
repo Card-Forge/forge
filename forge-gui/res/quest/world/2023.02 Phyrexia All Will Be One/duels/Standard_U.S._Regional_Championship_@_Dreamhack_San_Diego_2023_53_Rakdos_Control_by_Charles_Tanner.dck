@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Rakdos Control by Charles Tanner
+Title=Chilliphon
+Difficulty=very hard
+Description=Rakdos Control by Charles Tanner
+Icon=Chilliphon.jpg
+Deck Type=constructed
+
+[main]
+2 Abrade
+3 Go for the Throat
+4 Ob Nixilis, the Adversary
+4 Liliana of the Veil
+4 Invoke Despair
+4 Cut Down
+4 Fable of the Mirror-Breaker
+3 Tenacious Underdog
+3 Razorlash Transmogrant
+4 Bloodtithe Harvester
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+2 Mountain
+4 Sulfurous Springs
+4 Haunted Ridge
+4 Blackcleave Cliffs
+9 Swamp
+
+[sideboard]
+2 Brotherhood's End
+3 Sheoldred, the Apocalypse
+1 Gix's Command
+1 Soul Transfer
+2 Reckoner Bankbuster
+3 Graveyard Trespasser
+3 Duress

@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Grixis Midrange by David Reitbauer
+Title=Jengu
+Difficulty=very hard
+Description=Grixis Midrange by David Reitbauer
+Icon=Jengu.jpg
+Deck Type=constructed
+
+[main]
+2 Liliana, Death's Majesty|AKH
+2 Whirler Virtuoso|KLD
+3 The Scarab God|HOU
+4 Glint-Sleeve Siphoner|AER
+1 Torrential Gearhulk|KLD
+2 Nicol Bolas, the Ravager
+2 Champion of Wits|HOU
+1 Cut // Ribbons|AKH
+1 Never // Return|AKH
+1 Magma Spray|AKH
+4 Vraska's Contempt|XLN
+3 Fatal Push|AER
+2 Harnessed Lightning|KLD
+2 Essence Scatter
+2 Abrade|HOU
+2 Arguel's Blood Fast|XLN
+1 Field of Ruin|XLN
+3 Drowned Catacomb|XLN
+1 Island
+4 Fetid Pools|AKH
+3 Swamp
+4 Aether Hub|KLD
+4 Canyon Slough|AKH
+4 Dragonskull Summit|XLN
+2 Sulfur Falls
+
+[sideboard]
+1 Torrential Gearhulk|KLD
+2 Abrade|HOU
+1 Jace's Defeat|HOU
+2 Duress
+2 Cast Down
+3 Negate
+1 Search for Azcanta|XLN
+1 Chandra's Defeat|HOU
+2 Hour of Devastation|HOU

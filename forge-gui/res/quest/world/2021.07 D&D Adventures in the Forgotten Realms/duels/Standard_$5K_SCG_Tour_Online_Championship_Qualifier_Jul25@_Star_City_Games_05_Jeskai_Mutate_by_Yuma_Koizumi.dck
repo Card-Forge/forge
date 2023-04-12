@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Jeskai Mutate by Yuma Koizumi
+Title=Traiton
+Difficulty=very hard
+Description=Jeskai Mutate by Yuma Koizumi
+Icon=Traiton.jpg
+Deck Type=constructed
+
+[main]
+4 Vadrok, Apex of Thunder
+4 Lore Drakkis
+4 Goldspan Dragon
+1 Negate
+1 Burning Hands
+1 Sejiri Shelter
+2 Mystical Dispute
+2 Fire Prophecy
+3 Prismari Command
+4 Unsubstantiate
+4 Spikefield Hazard
+4 Seize the Spoils
+4 Expressive Iteration
+2 Mountain
+4 Raugrin Triome
+4 Needleverge Pathway
+4 Riverglide Pathway
+4 Hengegate Pathway
+4 Island
+
+[sideboard]
+2 Burning Hands
+2 Redcap Melee
+2 Disdainful Stroke
+2 Phoenix of Ash
+2 Scorching Dragonfire
+2 Cinderclasm
+3 Mazemind Tome

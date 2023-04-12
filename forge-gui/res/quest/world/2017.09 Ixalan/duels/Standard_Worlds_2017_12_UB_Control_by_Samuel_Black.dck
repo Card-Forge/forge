@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=UB Control by Samuel Black
+Title=Secret Squirrel
+Difficulty=very hard
+Description=UB Control by Samuel Black
+Icon=Secret Squirrel.jpg
+Deck Type=constructed
+
+[main]
+3 Torrential Gearhulk|KLD
+2 The Scarab God|HOU
+1 Harsh Scrutiny|KLD
+4 Censor|AKH
+4 Fatal Push|AER
+4 Essence Scatter|AKH
+4 Disallow|AER
+4 Vraska's Contempt|XLN
+4 Hieroglyphic Illumination|AKH
+1 Supreme Will|HOU
+3 Search for Azcanta|XLN
+5 Swamp|XLN
+3 Field of Ruin|XLN
+4 Fetid Pools|AKH
+6 Island|XLN
+4 Evolving Wilds|AKH
+4 Drowned Catacomb|XLN
+
+[sideboard]
+1 Torrential Gearhulk|KLD
+2 Vizier of Many Faces|AKH
+2 Negate|AER
+1 Arguel's Blood Fast|XLN
+4 Duress|XLN
+1 Gonti, Lord of Luxury|KLD
+4 Essence Extraction|KLD

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Selesnya Aggro by Vitor Warzynski
+Title=King Arthur
+Difficulty=very hard
+Description=Selesnya Aggro by Vitor Warzynski
+Icon=King Arthur.jpg
+Deck Type=constructed
+
+[main]
+2 Valorous Stance
+3 Audacity
+4 Skrelv's Hive
+4 Tyvar's Stand
+4 Bloated Contaminator
+4 Crawling Chorus
+4 Jawbone Duelist
+4 Skrelv, Defector Mite
+4 Venerated Rotpriest
+4 Slaughter Singer
+1 Plains
+1 Boseiju, Who Endures
+2 Eiganjo, Seat of the Empire
+3 Overgrown Farmland
+4 Brushland
+4 The Seedcore
+4 Mirrex
+4 Razorverge Thicket
+
+[sideboard]
+4 Annex Sentry
+4 Wedding Announcement
+3 Knockout Blow
+2 Melira, the Living Cure
+1 Destroy Evil
+1 Touch the Spirit Realm

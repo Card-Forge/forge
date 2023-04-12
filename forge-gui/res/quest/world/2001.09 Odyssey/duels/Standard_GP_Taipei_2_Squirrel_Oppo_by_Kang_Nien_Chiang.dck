@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Squirrel Oppo by Kang Nien Chiang
+Title=Happosai
+Difficulty=very hard
+Description=Squirrel Oppo by Kang Nien Chiang
+Icon=Happosai.jpg
+Deck Type=constructed
+
+[main]
+4 City of Brass|7E
+5 Forest|OD
+5 Island|OD
+2 Karplusan Forest|7E
+2 Mossfire Valley|OD
+4 Yavimaya Coast|AP
+4 Birds of Paradise|7E
+4 Flametongue Kavu|PS
+4 Llanowar Elves|7E
+4 Phantom Centaur|JU
+4 Call of the Herd|OD
+4 Counterspell|7E
+2 Cunning Wish|JU
+4 Fire // Ice|AP
+4 Opposition|7E
+2 Squirrel Nest|OD
+2 Worship|7E
+
+[sideboard]
+1 Alter Reality|TO
+2 Compost|7E
+2 Disenchant|7E
+1 Krosan Reclamation|JU
+1 Ray of Revelation|JU
+1 Rushing River|PS
+4 Seedtime|JU
+3 Shivan Wurm|PS

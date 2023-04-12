@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Grixis Control by Shaheen Soorani
+Title=Brother Voodoo
+Difficulty=very hard
+Description=Grixis Control by Shaheen Soorani
+Icon=Brother Voodoo.jpg
+Deck Type=constructed
+
+[main]
+4 Torrential Gearhulk|KLD
+2 The Scarab God|HOU
+2 Hour of Devastation|HOU
+2 Abrade|HOU
+4 Censor|AKH
+1 Fatal Push|AER
+2 Disallow|AER
+1 Essence Scatter|AKH
+4 Glimmer of Genius|KLD
+4 Harnessed Lightning|KLD
+2 Opt|XLN
+3 Supreme Will|HOU
+1 Vraska's Contempt|XLN
+2 Search for Azcanta|XLN
+6 Island|XLN
+1 Field of Ruin|XLN
+4 Mountain|XLN
+4 Aether Hub|KLD
+3 Canyon Slough|AKH
+2 Drowned Catacomb|XLN
+2 Fetid Pools|AKH
+4 Spirebluff Canal|KLD
+
+[sideboard]
+1 Search for Azcanta|XLN
+3 Multiform Wonder|KLD
+3 Whirler Virtuoso|KLD
+2 Chandra's Defeat|HOU
+1 Magma Spray|AKH
+3 Negate|AER
+1 Dark Intimations|AER
+1 Doomfall|HOU

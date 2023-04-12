@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Dimir Rogue  by Carlos Romão
+Title=Merfolk Shaman
+Difficulty=very hard
+Description=Dimir Rogue  by Carlos Romão
+Icon=Merfolk Shaman.jpg
+Deck Type=constructed
+
+[main]
+2 Zareth San, the Trickster
+2 Brazen Borrower
+4 Soaring Thought-Thief
+4 Thieves' Guild Enforcer
+4 Ruin Crab
+1 Cling to Dust
+2 Mystical Dispute
+3 Heartless Act
+4 Drown in the Loch
+4 Into the Story
+1 Lullmage's Domination
+1 Sea Gate Restoration
+3 Bloodchief's Thirst
+3 Agadeem's Awakening
+1 Castle Locthwain
+2 Zagoth Triome
+3 Swamp
+4 Temple of Deceit
+4 Clearwater Pathway
+4 Island
+4 Fabled Passage
+
+[sideboard]
+2 Cling to Dust
+2 Lullmage's Domination
+2 Mazemind Tome
+2 Eliminate
+3 Negate
+4 Skyclave Shade

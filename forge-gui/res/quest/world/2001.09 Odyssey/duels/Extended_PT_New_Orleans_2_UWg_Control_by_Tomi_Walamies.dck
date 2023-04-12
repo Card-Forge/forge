@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=UWg Control by Tomi Walamies
+Title=Ninithili
+Difficulty=very hard
+Description=UWg Control by Tomi Walamies
+Icon=Ninithili.jpg
+Deck Type=constructed
+
+[main]
+3 Adarkar Wastes|IA
+3 Flood Plain|MI
+1 Plains|A
+4 Savannah|A
+4 Tropical Island|A
+4 Tundra|A
+2 Wasteland|TE
+1 Morphling|US
+3 Brainstorm|IA
+3 Call of the Herd|OD
+4 Counterspell|A
+4 Fact or Fiction|IN
+1 Forbid|EX
+4 Force of Will|AL
+2 Gaea's Blessing|WL
+4 Impulse|VI
+1 Intuition|TE
+3 Seal of Cleansing|NE
+3 Swords to Plowshares|A
+3 Tithe|VI
+3 Wrath of God|A
+
+[sideboard]
+1 Call of the Herd|OD
+1 Intuition|TE
+1 Seal of Cleansing|NE
+1 Swords to Plowshares|A
+3 Circle of Protection: Red|A
+2 Devout Witness|MM
+2 Hydroblast|IA
+2 Powder Keg|UD
+2 Rootwater Thief|NE

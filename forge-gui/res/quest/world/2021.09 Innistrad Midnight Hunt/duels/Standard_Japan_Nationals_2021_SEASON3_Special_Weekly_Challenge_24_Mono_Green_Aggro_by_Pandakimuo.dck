@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Pandakimuo
+Title=BlackTalon
+Difficulty=very hard
+Description=Mono Green Aggro by Pandakimuo
+Icon=BlackTalon.jpg
+Deck Type=constructed
+
+[main]
+2 Outland Liberator
+4 Lotus Cobra
+4 Old-Growth Troll
+4 Werewolf Pack Leader
+4 Esika's Chariot
+1 Inscription of Abundance
+4 Blizzard Brawl
+4 Unnatural Growth
+4 Ranger Class
+1 Lair of the Hydra
+4 Kazandu Mammoth
+4 Faceless Haven
+20 Snow-Covered Forest
+
+[sideboard]
+2 Outland Liberator
+1 Inscription of Abundance
+1 Toski, Bearer of Secrets
+3 Wrenn and Seven
+4 Tangletrap
+4 Snakeskin Veil

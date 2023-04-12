@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Guilherme José Paiano
+Title=George of the Jungle
+Difficulty=very hard
+Description=Mono Green Aggro by Guilherme José Paiano
+Icon=George of the Jungle.jpg
+Deck Type=constructed
+
+[main]
+2 Lotus Cobra
+4 Old-Growth Troll
+4 Briarbridge Tracker
+4 Werewolf Pack Leader
+4 Jaspera Sentinel
+4 Esika's Chariot
+2 Inscription of Abundance
+4 Blizzard Brawl
+4 Ranger Class
+4 Faceless Haven
+4 Kazandu Mammoth
+20 Snow-Covered Forest
+
+[sideboard]
+2 Inscription of Abundance
+2 Froghemoth
+2 Toski, Bearer of Secrets
+3 Tangletrap
+3 Snakeskin Veil
+3 Wrenn and Seven

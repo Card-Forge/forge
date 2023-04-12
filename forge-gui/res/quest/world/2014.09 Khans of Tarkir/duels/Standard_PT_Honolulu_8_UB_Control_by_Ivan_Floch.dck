@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=UB Control by Ivan Floch
+Title=Witch
+Difficulty=very hard
+Description=UB Control by Ivan Floch
+Icon=Witch.jpg
+Deck Type=constructed
+
+[main]
+4 Prognostic Sphinx|THS
+4 Despise|KTK
+2 Drown in Sorrow|BNG
+2 Thoughtseize|THS
+4 Dig Through Time|KTK
+4 Dissolve|THS
+4 Disdainful Stroke|KTK
+4 Hero's Downfall|THS
+3 Bile Blight|BNG
+2 Silence the Believers|JOU
+4 Dismal Backwater|KTK
+4 Temple of Deceit|THS
+4 Polluted Delta|KTK
+4 Island|KTK
+4 Swamp|KTK
+2 Bloodstained Mire|KTK
+1 Urborg, Tomb of Yawgmoth|M15
+1 Temple of Malady|JOU
+1 Temple of Mystery|THS
+2 Flooded Strand|KTK
+
+[sideboard]
+1 Set Adrift|KTK
+1 Pearl Lake Ancient|KTK
+1 Pharika's Cure|THS
+2 Returned Phalanx|THS
+2 Negate|M15
+3 Clever Impersonator|KTK
+2 Drown in Sorrow|BNG
+1 Thoughtseize|THS
+1 Bile Blight|BNG
+1 Silence the Believers|JOU

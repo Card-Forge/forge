@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=4c Emerge by Maciej Janik
+Title=Funerary Rites
+Difficulty=very hard
+Description=4c Emerge by Maciej Janik
+Icon=Funerary Rites.jpg
+Deck Type=constructed
+
+[main]
+4 Jace, Vryn's Prodigy|ORI
+3 Noose Constrictor|EMN
+1 Nissa, Vastwood Seer|ORI
+4 Prized Amalgam|SOI
+4 Haunted Dead|EMN
+4 Elder Deep-Fiend|EMN
+1 Ishkanah, Grafwidow|EMN
+4 Gather the Pack|ORI
+4 Traverse the Ulvenwald|SOI
+4 Grapple with the Past|EMN
+4 Kozilek's Return|OGW
+1 Just the Wind|SOI
+4 Evolving Wilds
+3 Forest|RTR
+2 Island|RTR
+1 Swamp|RTR
+2 Sunken Hollow|BFZ
+3 Yavimaya Coast|ORI
+4 Llanowar Wastes|ORI
+2 Lumbering Falls|BFZ
+1 Mountain|RTR
+
+[sideboard]
+1 Noose Constrictor|EMN
+1 Ishkanah, Grafwidow|EMN
+1 Decimator of the Provinces|EMN
+1 Gnarlwood Dryad|EMN
+2 Aerial Volley|ORI
+2 Infinite Obliteration|ORI
+1 Dragonlord Silumgar|DTK
+2 To the Slaughter|SOI
+2 Ultimate Price|DTK
+2 Painful Truths|BFZ

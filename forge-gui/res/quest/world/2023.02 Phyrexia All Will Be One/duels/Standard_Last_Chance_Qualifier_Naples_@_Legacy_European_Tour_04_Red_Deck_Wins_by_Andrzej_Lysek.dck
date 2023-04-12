@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Andrzej Lysek
+Title=Fat Albert
+Difficulty=very hard
+Description=Red Deck Wins by Andrzej Lysek
+Icon=Fat Albert.jpg
+Deck Type=constructed
+
+[main]
+3 Squee, Dubious Monarch
+3 Feldon, Ronom Excavator
+4 Furnace Punisher
+4 Thundering Raiju
+4 Bloodthirsty Adversary
+4 Monastery Swiftspear
+4 Phoenix Chick
+4 Kumano Faces Kakkazan
+4 Lightning Strike
+4 Play with Fire
+2 Sokenzan, Crucible of Defiance
+3 Mishra's Foundry
+17 Mountain
+
+[sideboard]
+1 Brotherhood's End
+1 Obliterating Bolt
+1 Mirrex
+2 Bloody Betrayal
+2 Rending Flame
+2 Call In a Professional
+2 The Elder Dragon War
+2 Strangle
+2 Koth, Fire of Resistance

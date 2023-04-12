@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Sultai Midrange by Patrick Chapin
+Title=Ian the Digester
+Difficulty=very hard
+Description=Sultai Midrange by Patrick Chapin
+Icon=Ian the Digester.jpg
+Deck Type=constructed
+
+[main]
+3 Vivien Reid
+4 Llanowar Elves
+2 Kraul Harpooner
+4 Wildgrowth Walker|XLN
+4 Merfolk Branchwalker|XLN
+4 Jadelight Ranger
+2 Thief of Sanity
+2 Hostage Taker|XLN
+1 Ravenous Chupacabra
+4 Hydroid Krasis
+2 Find // Finality
+1 Assassin's Trophy
+2 Vraska's Contempt|XLN
+1 Memorial to Folly
+4 Breeding Pool
+4 Overgrown Tomb
+4 Watery Grave
+4 Woodland Cemetery
+3 Drowned Catacomb|XLN
+1 Hinterland Harbor
+4 Forest
+
+[sideboard]
+1 Kraul Harpooner
+2 Thief of Sanity
+1 Hostage Taker|XLN
+4 Duress
+3 Cast Down
+1 Thrashing Brontodon
+1 Vraska, Relic Seeker|XLN
+1 Negate
+1 Disdainful Stroke

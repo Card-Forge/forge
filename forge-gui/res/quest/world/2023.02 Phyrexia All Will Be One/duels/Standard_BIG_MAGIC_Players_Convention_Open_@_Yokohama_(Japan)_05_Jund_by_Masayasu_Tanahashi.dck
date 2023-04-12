@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jund by Masayasu Tanahashi
+Title=Sorcerer
+Difficulty=very hard
+Description=Jund by Masayasu Tanahashi
+Icon=Sorcerer.jpg
+Deck Type=constructed
+
+[main]
+1 Duress
+2 Jaya, Fiery Negotiator
+2 Unleash the Inferno
+3 Reckoner Bankbuster
+3 Abrade
+3 Go for the Throat
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+2 Sheoldred, the Apocalypse
+2 Capricious Hellraiser
+3 Graveyard Trespasser
+4 Bloodtithe Harvester
+1 Mountain
+1 Boseiju, Who Endures
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+2 Deathcap Glade
+2 Llanowar Wastes
+3 Swamp
+4 Sulfurous Springs
+4 Haunted Ridge
+4 Blackcleave Cliffs
+4 Ziatora's Proving Ground
+
+[sideboard]
+4 Razorlash Transmogrant
+3 Cut Down
+2 Brotherhood's End
+2 The Cruelty of Gix
+2 Unlicensed Hearse
+2 Duress

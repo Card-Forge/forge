@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Raphael Lévy
+Title=MamanBrigitte
+Difficulty=very hard
+Description=Gruul Aggro by Raphael Lévy
+Icon=MamanBrigitte.jpg
+Deck Type=constructed
+
+[main]
+1 Kazuul's Fury
+1 Snakeskin Veil
+1 Song-Mad Treachery
+1 Garruk, Unleashed
+3 Esika's Chariot
+3 Embercleave
+4 Shatterskull Smashing
+3 Goldspan Dragon
+4 Lovestruck Beast
+4 Magda, Brazen Outlaw
+4 Edgewall Innkeeper
+4 Rimrock Knight
+4 Bonecrusher Giant
+4 Jaspera Sentinel
+1 Hall of Oracles
+4 Cragcrown Pathway
+4 Riverglide Pathway
+4 Barkchannel Pathway
+6 Forest
+
+[sideboard]
+3 Masked Vandal
+3 Ox of Agonas
+3 Elder Gargaroth
+2 Redcap Melee
+2 Disdainful Stroke
+1 The Akroan War
+1 Mythos of Vadrok

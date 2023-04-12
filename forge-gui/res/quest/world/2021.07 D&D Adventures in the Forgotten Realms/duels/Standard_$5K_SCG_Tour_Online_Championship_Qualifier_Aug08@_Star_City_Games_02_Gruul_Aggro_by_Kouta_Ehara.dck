@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Kouta Ehara
+Title=Genghis Khan
+Difficulty=very hard
+Description=Gruul Aggro by Kouta Ehara
+Icon=Genghis Khan.jpg
+Deck Type=constructed
+
+[main]
+1 Gemrazer
+2 Embereth Shieldbreaker
+2 Valki, God of Lies
+3 Goldspan Dragon
+4 Jaspera Sentinel
+4 Lovestruck Beast
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Magda, Brazen Outlaw
+3 Embercleave
+4 Esika's Chariot
+4 Shatterskull Smashing
+1 Mountain
+2 Den of the Bugbear
+3 Forest
+3 Lair of the Hydra
+4 Blightstep Pathway
+4 Darkbore Pathway
+4 Cragcrown Pathway
+
+[sideboard]
+1 Gemrazer
+2 Burning Hands
+2 Klothys, God of Destiny
+2 The Akroan War
+2 Redcap Melee
+3 Ray of Enfeeblement
+3 Ox of Agonas

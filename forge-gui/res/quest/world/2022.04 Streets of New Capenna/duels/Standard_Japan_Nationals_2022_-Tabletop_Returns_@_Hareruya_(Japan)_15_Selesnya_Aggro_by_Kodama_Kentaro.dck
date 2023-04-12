@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Selesnya Aggro by Kodama Kentaro
+Title=Falstark
+Difficulty=very hard
+Description=Selesnya Aggro by Kodama Kentaro
+Icon=Falstark.jpg
+Deck Type=constructed
+
+[main]
+2 Elspeth Resplendent
+2 Snakeskin Veil
+3 The Wandering Emperor
+3 Esika's Chariot
+4 Reckoner Bankbuster
+4 Emeria's Call
+1 Legion Angel
+4 Intrepid Adversary
+4 Kodama of the West Tree
+4 Extraction Specialist
+4 Briarbridge Tracker
+4 Luminarch Aspirant
+1 Boseiju, Who Endures
+1 Eiganjo, Seat of the Empire
+1 Cave of the Frost Dragon
+2 Lair of the Hydra
+4 Branchloft Pathway
+4 Overgrown Farmland
+4 Plains
+4 Forest
+
+[sideboard]
+3 Archon of Emeria
+3 Circle of Confinement
+2 Skyclave Apparition
+2 Workshop Warchief
+2 Unlicensed Hearse
+3 Legion Angel

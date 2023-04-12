@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Azorius Soldier by Boston Schatteman
+Title=Ice King
+Difficulty=very hard
+Description=Azorius Soldier by Boston Schatteman
+Icon=Ice King.jpg
+Deck Type=constructed
+
+[main]
+1 Cathar Commando
+2 Brutal Cathar
+3 Harbin, Vanguard Aviator
+3 Dennick, Pious Apprentice
+3 Skrelv, Defector Mite
+4 Skystrike Officer
+4 Siege Veteran
+4 Valiant Veteran
+4 Resolute Reinforcements
+4 Thalia, Guardian of Thraben
+4 Recruitment Officer
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+1 Plaza of Heroes
+2 Mishra's Foundry
+3 Plains
+4 Seachrome Coast
+4 Secluded Courtyard
+4 Fortified Beachhead
+4 Adarkar Wastes
+
+[sideboard]
+2 Brutal Cathar
+2 Extraction Specialist
+2 Destroy Evil
+2 Protect the Negotiators
+2 Spell Pierce
+2 Tocasia's Welcome
+3 Lantern Flare

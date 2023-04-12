@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Sultai Yorion Ultimatum by Franche Tan
+Title=Whim
+Difficulty=very hard
+Description=Sultai Yorion Ultimatum by Franche Tan
+Icon=Whim.jpg
+Deck Type=constructed
+
+[main]
+1 Valki, God of Lies
+2 Elder Gargaroth
+2 Polukranos, Unchained
+1 Disdainful Stroke
+2 Mystical Dispute
+2 Eliminate
+2 Jwari Disruption
+4 Heartless Act
+2 Shadows' Verdict
+2 Extinction Event
+2 Alrund's Epiphany
+2 Sea Gate Restoration
+4 Emergent Ultimatum
+4 Cultivate
+1 Kiora Bests the Sea God
+2 Elspeth's Nightmare
+4 Omen of the Sea
+4 Wolfwillow Haven
+4 Binding the Old Gods
+1 Professor Onyx
+1 Ketria Triome
+2 Swamp
+3 Island
+3 Forest
+3 Temple of Malady
+4 Clearwater Pathway
+4 Zagoth Triome
+4 Darkbore Pathway
+4 Fabled Passage
+4 Barkchannel Pathway
+
+[sideboard]
+1 Elder Gargaroth
+2 Disdainful Stroke
+1 Mystical Dispute
+2 Eliminate
+1 Yorion, Sky Nomad
+2 Koma, Cosmos Serpent
+2 Pestilent Haze
+2 Chevill, Bane of Monsters
+2 Duress

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Eric Pei
+Title=Octavian Muerto
+Difficulty=very hard
+Description=Mono Green Aggro by Eric Pei
+Icon=Octavian Muerto.jpg
+Deck Type=constructed
+
+[main]
+2 Scavenging Ooze
+2 Tangled Florahedron
+2 Vorinclex, Monstrous Raider
+3 Swarm Shambler
+3 Stonecoil Serpent
+3 Questing Beast
+4 Kazandu Mammoth
+4 Gemrazer
+4 Lovestruck Beast
+3 The Great Henge
+2 Snakeskin Veil
+4 Primal Might
+1 Vivien, Monsters' Advocate
+1 Garruk, Unleashed
+3 Castle Garenbrig
+3 Faceless Haven
+16 Snow-Covered Forest
+
+[sideboard]
+1 Scavenging Ooze
+1 Snakeskin Veil
+1 Vivien, Monsters' Advocate
+2 Garruk, Unleashed
+1 Shadowspear
+1 Blizzard Brawl
+2 Chainweb Aracnir
+2 Ram Through
+2 Kogla, the Titan Ape
+2 Garruk's Harbinger

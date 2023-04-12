@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Tay Jun Hao
+Title=Sentinel
+Difficulty=very hard
+Description=Boros Aggro by Tay Jun Hao
+Icon=Sentinel.jpg
+Deck Type=constructed
+
+[main]
+4 Rustwing Falcon
+4 Skymarcher Aspirant
+2 Healer's Hawk
+4 Dauntless Bodyguard
+4 Adanto Vanguard|XLN
+4 Benalish Marshal
+3 Venerated Loxodon
+3 Heroic Reinforcements
+4 Legion's Landing|XLN
+3 Conclave Tribunal
+4 History of Benalia
+13 Plains
+4 Clifftop Retreat
+4 Sacred Foundry
+
+[sideboard]
+3 Baffling End
+2 Make a Stand
+2 Shield Mare
+1 Settle the Wreckage|XLN
+1 Lyra Dawnbringer
+2 Experimental Frenzy
+2 Banefire
+1 Response // Resurgence
+1 Mountain

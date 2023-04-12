@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Rakdos Control by Marcelo Rodrigues Cavalcante
+Title=Zaevil Hand
+Difficulty=very hard
+Description=Rakdos Control by Marcelo Rodrigues Cavalcante
+Icon=Zaevil Hand.jpg
+Deck Type=constructed
+
+[main]
+2 Sheoldred's Edict
+2 Duress
+2 Abrade
+3 Reckoner Bankbuster
+3 The Elder Dragon War
+3 Go for the Throat
+3 Cut Down
+4 Fable of the Mirror-Breaker
+4 Invoke Despair
+1 Sheoldred, the Apocalypse
+4 Graveyard Trespasser
+4 Capricious Hellraiser
+1 Ziatora's Proving Ground
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+2 Xander's Lounge
+2 Mountain
+4 Blackcleave Cliffs
+4 Haunted Ridge
+4 Sulfurous Springs
+6 Swamp
+
+[sideboard]
+3 Parasitic Grasp
+2 Brotherhood's End
+2 Razorlash Transmogrant
+1 Pilfer
+1 Unlicensed Hearse
+1 Soul Transfer
+1 Bladecoil Serpent
+2 Duress
+1 Cut Down
+1 Sheoldred, the Apocalypse

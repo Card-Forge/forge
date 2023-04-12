@@ -1,0 +1,35 @@
+[quest]
+id=20010901
+OpponentName=King Edward
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Arrogant Wurm
+Title=Arrogant Wurm
+Difficulty=very hard
+Description=Overcome King Edward's Arrogant Wurm
+Icon=King Edward.jpg
+Deck Type=constructed
+
+[main]
+2 Aquamoeba
+4 Arrogant Wurm
+4 Basking Rootwalla
+4 Wild Mongrel
+4 Wonder
+4 Circular Logic
+2 Quiet Speculation
+4 Careful Study
+4 Deep Analysis
+4 Roar of the Wurm
+2 Compulsion
+11 Forest
+9 Island
+2 Cephalid Coliseum

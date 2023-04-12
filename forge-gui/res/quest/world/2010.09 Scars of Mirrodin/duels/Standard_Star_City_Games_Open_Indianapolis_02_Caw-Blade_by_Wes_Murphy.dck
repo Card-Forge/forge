@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Wes Murphy
+Title=InuYasha
+Difficulty=very hard
+Description=Caw-Blade by Wes Murphy
+Icon=InuYasha.jpg
+Deck Type=constructed
+
+[main]
+4 Squadron Hawk|M11
+4 Stoneforge Mystic|WWK
+1 Sun Titan|M11
+2 Dismember|NPH
+1 Divine Offering|MBS
+1 Into the Roil|ZEN
+3 Mana Leak|M11
+3 Spell Pierce|ZEN
+1 Day of Judgment|M11
+4 Preordain|M11
+2 Batterskull|NPH
+1 Sword of Feast and Famine|MBS
+1 Sword of War and Peace|NPH
+4 Island|NPH
+4 Plains|NPH
+4 Celestial Colonnade|WWK
+3 Glacial Fortress|M11
+2 Inkmoth Nexus|MBS
+1 Marsh Flats|ZEN
+1 Scalding Tarn|ZEN
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+1 Jace Beleren|M11
+4 Jace, the Mind Sculptor|WWK
+
+[sideboard]
+1 Dismember|NPH
+2 Divine Offering|MBS
+1 Into the Roil|ZEN
+1 Day of Judgment|M11
+2 Spellskite|NPH
+2 Celestial Purge|M11
+2 Condemn|M11
+2 Mental Misstep|NPH
+2 Gideon Jura|ROE

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Stompy by Phimus Pan
+Title=The Pitdown Bog
+Difficulty=very hard
+Description=Stompy by Phimus Pan
+Icon=The Pitdown Bog.jpg
+Deck Type=constructed
+
+[main]
+1 Carnage Tyrant|XLN
+2 Ghalta, Primal Hunger
+3 Jadelight Ranger
+4 Llanowar Elves
+4 Merfolk Branchwalker|XLN
+2 Rhonas the Indomitable|AKH
+4 Steel Leaf Champion
+3 Thrashing Brontodon
+2 Verdurous Gearhulk|KLD
+3 Walking Ballista|AER
+4 Blossoming Defense|KLD
+1 Aethersphere Harvester|AER
+3 Heart of Kiran|AER
+1 Skysovereign, Consul Flagship|KLD
+4 Hashep Oasis|HOU
+19 Forest
+
+[sideboard]
+1 Thrashing Brontodon
+2 Crushing Canopy|XLN
+3 Deathgorge Scavenger|XLN
+2 Heroic Intervention|AER
+1 Lifecrafter's Bestiary|AER
+1 Naturalize
+3 Nature's Way|KLD
+2 Nissa, Vital Force|KLD

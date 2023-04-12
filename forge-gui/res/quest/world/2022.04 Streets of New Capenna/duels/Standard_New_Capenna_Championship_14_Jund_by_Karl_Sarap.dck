@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Jund by Karl Sarap
+Title=Aga Galneer
+Difficulty=very hard
+Description=Jund by Karl Sarap
+Icon=Aga Galneer.jpg
+Deck Type=constructed
+
+[main]
+1 Duress
+1 Wrenn and Seven
+1 Lolth, Spider Queen
+2 The Meathook Massacre
+2 Infernal Grasp
+2 Unleash the Inferno
+3 Riveteers Charm
+4 Fable of the Mirror-Breaker
+4 Esika's Chariot
+4 Voltage Surge
+1 Valki, God of Lies
+1 Tenacious Underdog
+4 Bloodtithe Harvester
+4 Briarbridge Tracker
+1 Swamp
+1 Takenuma, Abandoned Mire
+1 Boseiju, Who Endures
+1 Den of the Bugbear
+1 Mountain
+1 Rockfall Vale
+1 Hive of the Eye Tyrant
+2 Haunted Ridge
+2 Deathcap Glade
+3 Cragcrown Pathway
+4 Ziatora's Proving Ground
+4 Blightstep Pathway
+4 Darkbore Pathway
+
+[sideboard]
+3 Ray of Enfeeblement
+2 Unlicensed Hearse
+2 Reckoner Bankbuster
+1 Check for Traps
+1 Sarulf, Realm Eater
+1 Duress
+1 Wrenn and Seven
+1 Lolth, Spider Queen
+1 The Meathook Massacre
+1 Unleash the Inferno
+1 Riveteers Charm

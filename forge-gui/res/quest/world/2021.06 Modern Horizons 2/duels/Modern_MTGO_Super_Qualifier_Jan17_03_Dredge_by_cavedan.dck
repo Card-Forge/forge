@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Dredge by cavedan
+Title=AidoHwedo
+Difficulty=very hard
+Description=Dredge by cavedan
+Icon=AidoHwedo.jpg
+Deck Type=constructed
+
+[main]
+3 Gravecrawler|DKA
+4 Hedron Crab|ZEN
+4 Merfolk Secretkeeper
+3 Narcomoeba
+4 Prized Amalgam|SOI
+3 Rotting Rats|CFX
+4 Stitcher's Supplier
+4 Vengevine|ROE
+1 Wonder|JU
+4 Creeping Chill
+2 Glimpse the Unthinkable|RAV
+4 Otherworldly Gaze
+1 Breeding Pool
+2 Island
+4 Misty Rainforest|ZEN
+1 Overgrown Tomb
+4 Polluted Delta|KTK
+1 Swamp
+4 Verdant Catacombs|ZEN
+3 Watery Grave
+
+[sideboard]
+2 Assassin's Trophy
+1 Darkblast|RAV
+4 Force of Negation
+2 Leyline of the Void
+2 Natural State|OGW
+2 Subtlety
+2 Tarmogoyf|FUT

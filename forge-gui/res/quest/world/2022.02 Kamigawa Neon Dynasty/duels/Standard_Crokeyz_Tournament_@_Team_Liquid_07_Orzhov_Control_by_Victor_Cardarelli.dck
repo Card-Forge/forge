@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Orzhov Control by Victor Cardarelli
+Title=Nekusar the Mindrazer
+Difficulty=very hard
+Description=Orzhov Control by Victor Cardarelli
+Icon=Nekusar the Mindrazer.jpg
+Deck Type=constructed
+
+[main]
+1 Ao, the Dawn Sky
+2 Edgar, Charmed Groom
+2 Valki, God of Lies
+4 Professor of Symbology
+4 Shambling Ghast
+2 Reckoner Bankbuster
+1 Hagra Mauling
+4 Vanishing Verse
+2 Rite of Oblivion
+4 The Meathook Massacre
+4 Wedding Announcement
+1 The Wandering Emperor
+2 Sorin the Mirthless
+3 Lolth, Spider Queen
+1 Blightstep Pathway
+1 Needleverge Pathway
+1 Takenuma, Abandoned Mire
+2 Eiganjo, Seat of the Empire
+2 Field of Ruin
+3 Plains
+3 Swamp
+3 Hive of the Eye Tyrant
+4 Brightclimb Pathway
+4 Shattered Sanctum
+
+[sideboard]
+2 The Wandering Emperor
+1 Necrotic Fumes
+1 Mascot Exhibition
+1 Environmental Sciences
+1 Confront the Past
+1 Pest Summoning
+2 Duress
+2 Soul Transfer
+2 Doomskar
+2 Go Blank

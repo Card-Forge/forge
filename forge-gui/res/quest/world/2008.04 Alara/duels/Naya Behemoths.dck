@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Naya Behemoths
+Title=Naya Behemoths
+Icon=alapaleo.jpg
+Difficulty=easy
+Description=The plane of Naya is a paradise of lush growth where elvish and leonin celebrants worship the gargantuan beasts that roam the world.
+Deck Type=constructed
+[Main]
+1 Beacon Behemoth|CFX
+1 Bull Cerodon|ALA
+1 Cavern Thoctar|ALA
+1 Cylian Elf|ALA
+2 Druid of the Anima|ALA
+1 Ember Weaver|CFX
+4 Forest|ALA|1
+5 Forest|ALA|2
+2 Gift of the Gargantuan|ALA
+4 Jungle Shrine|ALA
+1 Kranioceros|CFX
+2 Matca Rioters|CFX
+1 Meglonoth|CFX
+1 Might of Alara|CFX
+1 Mosstodon|ALA
+3 Mountain|ALA|3
+1 Mountain|ALA|4
+1 Naturalize|ALA
+1 Naya Battlemage|ALA
+2 Naya Charm|ALA
+4 Naya Panorama|ALA
+1 Obelisk of Naya|ALA
+1 Paleoloth+|CFX
+4 Plains|ALA|1
+2 Rakeclaw Gargantuan|ALA
+1 Shard Convergence|CFX
+1 Spearbreaker Behemoth+|ALA
+1 Spore Burst|CFX
+2 Sylvan Bounty|CFX
+1 Titanic Ultimatum|ALA
+1 Vagrant Plowbeasts|CFX
+1 Wandering Goblins|CFX
+2 Wild Nacatl|ALA
+2 Woolly Thoctar|ALA

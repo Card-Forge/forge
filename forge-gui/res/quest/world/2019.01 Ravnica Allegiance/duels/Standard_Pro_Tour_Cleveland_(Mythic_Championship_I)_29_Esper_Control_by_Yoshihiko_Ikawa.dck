@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Esper Control by Yoshihiko Ikawa
+Title=Poseidon
+Difficulty=very hard
+Description=Esper Control by Yoshihiko Ikawa
+Icon=Poseidon.jpg
+Deck Type=constructed
+
+[main]
+4 Teferi, Hero of Dominaria
+1 Karn, Scion of Urza
+4 Thought Erasure
+3 Kaya's Wrath
+2 Cry of the Carnarium
+1 Moment of Craving
+3 Cast Down
+3 Vraska's Contempt|XLN
+1 Negate
+3 Chemister's Insight
+3 Mortify
+3 Absorb
+2 Search for Azcanta|XLN
+1 The Eldest Reborn
+4 Isolated Chapel
+1 Island
+4 Hallowed Fountain
+4 Godless Shrine
+4 Glacial Fortress|XLN
+4 Drowned Catacomb|XLN
+4 Watery Grave
+1 Swamp
+
+[sideboard]
+1 Moment of Craving
+1 Negate
+1 The Eldest Reborn
+4 Thief of Sanity
+3 Hostage Taker|XLN
+2 Lyra Dawnbringer
+2 Duress
+1 Kaya, Orzhov Usurper

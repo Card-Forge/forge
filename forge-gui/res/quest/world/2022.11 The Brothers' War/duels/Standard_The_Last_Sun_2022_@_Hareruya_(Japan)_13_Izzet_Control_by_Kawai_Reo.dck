@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Izzet Control by Kawai Reo
+Title=Priestess
+Difficulty=very hard
+Description=Izzet Control by Kawai Reo
+Icon=Priestess.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+1 Essence Scatter
+2 Make Disappear
+3 Brotherhood's End
+3 Abrade
+4 Reckoner Bankbuster
+4 The Mightstone and Weakstone
+4 Fable of the Mirror-Breaker
+4 Stern Lesson
+3 Cityscape Leveler
+4 Skitterbeam Battalion
+1 Sokenzan, Crucible of Defiance
+1 Otawara, Soaring City
+4 Xander's Lounge
+4 Stormcarved Coast
+4 Shivan Reef
+4 Field of Ruin
+4 Island
+5 Mountain
+
+[sideboard]
+4 Thran Spider
+2 Saheeli, Filigree Master
+2 Disdainful Stroke
+2 Strangle
+2 Unlicensed Hearse
+1 Voltage Surge
+1 Spell Pierce
+1 Brotherhood's End

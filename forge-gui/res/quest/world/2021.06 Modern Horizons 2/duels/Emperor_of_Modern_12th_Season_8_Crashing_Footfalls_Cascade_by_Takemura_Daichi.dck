@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Crashing Footfalls Cascade by Takemura Daichi
+Title=Boromir
+Difficulty=very hard
+Description=Crashing Footfalls Cascade by Takemura Daichi
+Icon=Boromir.jpg
+Deck Type=constructed
+
+[main]
+1 Endurance
+4 Brazen Borrower
+4 Fury
+4 Shardless Agent
+1 Prismari Command
+3 Dead // Gone|PLC
+4 Force of Negation
+4 Violent Outburst|ARB
+4 Fire // Ice|AP
+4 Crashing Footfalls
+3 Blood Moon|9E
+1 Ketria Triome
+1 Steam Vents
+1 Breeding Pool
+1 Stomping Ground
+1 Fiery Islet
+1 Waterlogged Grove
+1 Mountain
+2 Island
+2 Forest
+2 Gemstone Caverns|TSP
+3 Wooded Foothills|KTK
+4 Scalding Tarn|ZEN
+4 Misty Rainforest|ZEN
+
+[sideboard]
+2 Endurance
+1 Shatterstorm|10E
+1 Thrun, the Last Troll|MBS
+3 Force of Vigor
+4 Mystical Dispute
+4 Leyline of Sanctity

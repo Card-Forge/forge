@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Grixis Control by Matt Sperling
+Title=Lefterel
+Difficulty=very hard
+Description=Grixis Control by Matt Sperling
+Icon=Lefterel.jpg
+Deck Type=constructed
+
+[main]
+1 Abrade
+1 Gix's Command
+3 Invoke Despair
+3 Reckoner Bankbuster
+3 Make Disappear
+4 Cut Down
+4 Go for the Throat
+4 Fable of the Mirror-Breaker
+1 Bladecoil Serpent
+2 Sheoldred, the Apocalypse
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+1 Sulfurous Springs
+1 Island
+1 Underground River
+1 Takenuma, Abandoned Mire
+2 Darkslick Shores
+2 Swamp
+3 Shivan Reef
+3 Shipwreck Marsh
+4 Haunted Ridge
+4 Xander's Lounge
+4 Blackcleave Cliffs
+
+[sideboard]
+1 Kotose, the Silent Spider
+1 Vraska, Betrayal's Sting
+2 Negate
+2 Disdainful Stroke
+1 Obliterating Bolt
+1 Brotherhood's End
+1 Soul Transfer
+1 Anoint with Affliction
+2 Duress
+1 Abrade
+1 Invoke Despair
+1 Bladecoil Serpent

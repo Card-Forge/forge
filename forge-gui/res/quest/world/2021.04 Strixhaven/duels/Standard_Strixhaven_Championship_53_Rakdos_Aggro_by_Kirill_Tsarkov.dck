@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Kirill Tsarkov
+Title=Aspect of Earth
+Difficulty=very hard
+Description=Rakdos Aggro by Kirill Tsarkov
+Icon=Aspect of Earth.jpg
+Deck Type=constructed
+
+[main]
+2 Immersturm Predator
+2 Rankle, Master of Pranks
+4 Bonecrusher Giant
+4 Mire Triton
+4 Kroxa, Titan of Death's Hunger
+4 Woe Strider
+2 Shredded Sails
+4 Village Rites
+2 Shatterskull Smashing
+4 Claim the Firstborn
+3 The Akroan War
+3 Tymaret Calls the Dead
+2 Temple of Malice
+3 Castle Locthwain
+3 Mountain
+4 Fabled Passage
+4 Blightstep Pathway
+6 Swamp
+
+[sideboard]
+1 The Akroan War
+1 Shadowspear
+2 Heartless Act
+3 Roiling Vortex
+4 Duress
+4 Redcap Melee

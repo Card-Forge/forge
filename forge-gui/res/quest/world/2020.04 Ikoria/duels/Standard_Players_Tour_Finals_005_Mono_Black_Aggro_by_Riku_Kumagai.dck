@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Mono Black Aggro by Riku Kumagai
+Title=Ian the Digester
+Difficulty=very hard
+Description=Mono Black Aggro by Riku Kumagai
+Icon=Ian the Digester.jpg
+Deck Type=constructed
+
+[main]
+19 Swamp
+1 Murderous Rider
+2 Blacklance Paragon
+2 Tymaret, Chosen from Death
+3 Rankle, Master of Pranks
+4 Kitesail Freebooter
+4 Hunted Nightmare
+4 Knight of the Ebon Legion
+4 Gutterbones
+4 Spawn of Mayhem
+4 Heartless Act
+3 Duress
+2 Mobilized District
+4 Castle Locthwain
+
+[sideboard]
+4 Cry of the Carnarium
+3 Agonizing Remorse
+3 Noxious Grasp
+3 Grasp of Darkness
+1 Kaervek, the Spiteful
+1 Murderous Rider

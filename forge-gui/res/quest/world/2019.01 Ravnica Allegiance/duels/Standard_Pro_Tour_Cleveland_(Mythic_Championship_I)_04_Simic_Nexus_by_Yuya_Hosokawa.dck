@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Simic Nexus by Yuya Hosokawa
+Title=alasha
+Difficulty=very hard
+Description=Simic Nexus by Yuya Hosokawa
+Icon=alasha.jpg
+Deck Type=constructed
+
+[main]
+3 Hydroid Krasis
+4 Opt
+4 Growth Spiral
+4 Root Snare
+2 Blink of an Eye
+4 Sinister Sabotage
+4 Chemister's Insight
+4 Nexus of Fate
+3 Search for Azcanta|XLN
+4 Wilderness Reclamation
+6 Forest
+4 Breeding Pool
+4 Hinterland Harbor
+4 Island
+4 Memorial to Genius
+2 Simic Guildgate
+
+[sideboard]
+2 Druid of the Cowl
+3 Atzocan Archer|XLN
+3 Biogenic Ooze
+2 Negate
+3 Crushing Canopy
+2 Primal Amulet|XLN

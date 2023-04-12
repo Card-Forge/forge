@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Dimir Mill by Kouta Ehara
+Title=Crusader
+Difficulty=very hard
+Description=Dimir Mill by Kouta Ehara
+Icon=Crusader.jpg
+Deck Type=constructed
+
+[main]
+4 Ruin Crab
+4 Merfolk Windrobber
+4 Thieves' Guild Enforcer
+4 Soaring Thought-Thief
+1 Ray of Enfeeblement
+2 Power Word Kill
+2 Disdainful Stroke
+2 Heartless Act
+4 Drown in the Loch
+4 Into the Story
+1 Of One Mind
+2 Crippling Fear
+2 Agadeem's Awakening
+1 Hall of Storm Giants
+1 Hive of the Eye Tyrant
+2 Zagoth Triome
+3 Temple of Deceit
+4 Fabled Passage
+4 Swamp
+4 Clearwater Pathway
+5 Island
+
+[sideboard]
+1 Ray of Enfeeblement
+1 Dead Weight
+1 Test of Talents
+1 Negate
+1 Lurrus of the Dream-Den
+1 Lullmage's Domination
+1 Soul-Guide Lantern
+1 Soul Shatter
+2 Mystical Dispute
+2 Cling to Dust
+3 Skyclave Shade

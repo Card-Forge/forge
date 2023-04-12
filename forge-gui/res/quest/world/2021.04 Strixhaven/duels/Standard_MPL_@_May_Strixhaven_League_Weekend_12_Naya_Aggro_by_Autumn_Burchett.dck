@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Naya Aggro by Autumn Burchett
+Title=Carnage
+Difficulty=very hard
+Description=Naya Aggro by Autumn Burchett
+Icon=Carnage.jpg
+Deck Type=constructed
+
+[main]
+2 Drannith Magistrate
+2 Toski, Bearer of Secrets
+3 Clarion Spirit
+3 Elite Spellbinder
+4 Giant Killer
+4 Bonecrusher Giant
+4 Lovestruck Beast
+4 Edgewall Innkeeper
+4 Jaspera Sentinel
+3 Kabira Takedown
+4 Showdown of the Skalds
+1 Mountain
+2 Plains
+3 Fabled Passage
+4 Branchloft Pathway
+4 Needleverge Pathway
+4 Cragcrown Pathway
+5 Forest
+
+[sideboard]
+1 Drannith Magistrate
+1 Jegantha, the Wellspring
+1 Klothys, God of Destiny
+1 Redcap Melee
+2 Reidane, God of the Worthy
+3 Chainweb Aracnir
+3 Glass Casket
+3 Rip Apart

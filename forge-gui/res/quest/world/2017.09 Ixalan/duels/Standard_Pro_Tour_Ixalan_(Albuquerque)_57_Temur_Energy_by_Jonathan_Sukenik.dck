@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Temur Energy by Jonathan Sukenik
+Title=Discord
+Difficulty=very hard
+Description=Temur Energy by Jonathan Sukenik
+Icon=Discord.jpg
+Deck Type=constructed
+
+[main]
+3 Bristling Hydra|KLD
+4 Glorybringer|AKH
+4 Longtusk Cub|KLD
+4 Rogue Refiner|AER
+4 Servant of the Conduit|KLD
+4 Whirler Virtuoso|KLD
+4 Attune with Aether|KLD
+1 Confiscation Coup|KLD
+1 Abrade|HOU
+4 Harnessed Lightning|KLD
+2 Magma Spray|AKH
+1 Supreme Will|HOU
+1 Commit // Memory|AKH
+1 Essence Scatter|AKH
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+4 Rootbound Crag|XLN
+1 Island|XLN
+3 Spirebluff Canal|KLD
+4 Forest|XLN
+2 Mountain|XLN
+
+[sideboard]
+1 Confiscation Coup|KLD
+2 Abrade|HOU
+1 Chandra's Defeat|HOU
+1 Slice in Twain|XLN
+1 Glimmer of Genius|KLD
+4 Negate|AER
+2 Torrential Gearhulk|KLD
+2 Vizier of Many Faces|AKH
+1 Appetite for the Unnatural|KLD

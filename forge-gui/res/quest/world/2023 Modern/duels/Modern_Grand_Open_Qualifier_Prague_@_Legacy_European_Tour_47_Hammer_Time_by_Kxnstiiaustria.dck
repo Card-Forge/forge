@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Hammer Time by Kxnstiiaustria
+Title=Yemaya
+Difficulty=very hard
+Description=Hammer Time by Kxnstiiaustria
+Icon=Yemaya.jpg
+Deck Type=constructed
+
+[main]
+1 Shadowspear
+1 Kaldra Compleat
+1 Nettlecyst
+2 Blacksmith's Skill
+2 Spell Pierce
+3 Springleaf Drum|BNG
+4 Colossus Hammer
+4 Sigarda's Aid|EMN
+1 Gingerbrute
+1 Haywire Mite
+1 Kor Outfitter|ZEN
+2 Giver of Runes
+3 Ornithopter|AER
+4 Puresteel Paladin|NPH
+4 Stoneforge Mystic|WWK
+4 Esper Sentinel
+1 Arid Mesa|ZEN
+1 Temple Garden
+1 Horizon Canopy|FUT
+2 Flooded Strand|KTK
+2 Hallowed Fountain
+2 Marsh Flats|ZEN
+3 Inkmoth Nexus|MBS
+3 Plains
+3 Seachrome Coast
+4 Urza's Saga
+
+[sideboard]
+1 Pithing Needle
+1 Relic of Progenitus|ALA
+2 Lavinia, Azorius Renegade
+1 Orvar, the All-Form
+1 Drannith Magistrate
+1 Hallowed Moonlight|ORI
+2 March of Otherworldly Light
+1 Blacksmith's Skill
+1 Spell Pierce
+4 Sanctifier en-Vec

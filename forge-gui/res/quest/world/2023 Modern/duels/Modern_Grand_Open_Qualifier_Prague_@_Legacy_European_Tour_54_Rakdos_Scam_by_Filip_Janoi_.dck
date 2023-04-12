@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Rakdos Scam by Filip Janoi 
+Title=Dungeon Crawling Blue
+Difficulty=very hard
+Description=Rakdos Scam by Filip Janoi 
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+
+[main]
+4 Ragavan, Nimble Pilferer
+4 Seasoned Pyromancer
+2 Fable of the Mirror-Breaker
+1 Kroxa, Titan of Death's Hunger
+4 Grief
+4 Dauthi Voidwalker
+4 Fury
+3 Lightning Bolt|M11
+2 Terminate|ARB
+4 Feign Death
+3 Undying Malice
+3 Thoughtseize|THS
+2 Blood Moon|9E
+2 Polluted Delta|KTK
+2 Marsh Flats|ZEN
+2 Verdant Catacombs|ZEN
+4 Blackcleave Cliffs
+3 Bloodstained Mire|KTK
+2 Blood Crypt
+3 Swamp
+1 Mountain
+1 Nurturing Peatland
+
+[sideboard]
+2 Hidetsugu Consumes All
+2 Tourach, Dread Cantor
+2 Ob Nixilis, the Adversary
+2 Engineered Explosives|FD
+1 Unlicensed Hearse
+1 Nihil Spellbomb|SOM
+1 Surgical Extraction|NPH
+1 Fatal Push|AER
+2 Ingot Chewer|LRW
+1 Magus of the Moon|FUT

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Abzan Aggro  by Brad Nelson
+Title=Tron
+Difficulty=very hard
+Description=Abzan Aggro  by Brad Nelson
+Icon=Tron.jpg
+Deck Type=constructed
+
+[main]
+4 Fleecemane Lion|THS
+4 Rakshasa Deathdealer|KTK
+2 Warden of the First Tree|FRF
+4 Anafenza, the Foremost|KTK
+4 Siege Rhino|KTK
+3 Surrak, the Hunt Caller|DTK
+3 Dromoka's Command|DTK
+2 Ultimate Price|DTK
+3 Abzan Charm|KTK
+4 Hero's Downfall|THS
+1 Valorous Stance|FRF
+4 Windswept Heath|KTK
+1 Mana Confluence|JOU
+4 Sandsteppe Citadel|KTK
+2 Urborg, Tomb of Yawgmoth|M15
+2 Temple of Malady|JOU
+2 Temple of Silence|THS
+1 Temple of Plenty|BNG
+3 Caves of Koilos|M15
+3 Llanowar Wastes|M15
+2 Plains|DTK
+2 Forest|DTK
+
+[sideboard]
+2 Ultimate Price|DTK
+3 Thoughtseize|THS
+3 Drown in Sorrow|BNG
+2 Glare of Heresy|THS
+2 Elspeth, Sun's Champion|THS
+2 Wingmate Roc|KTK
+1 Sorin, Solemn Visitor|KTK

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Kawamura Yusaku
+Title=The Ebon Hand
+Difficulty=very hard
+Description=Mono Green Aggro by Kawamura Yusaku
+Icon=The Ebon Hand.jpg
+Deck Type=constructed
+
+[main]
+4 Old-Growth Troll
+4 Werewolf Pack Leader
+3 Lotus Cobra
+4 Esika's Chariot
+2 Snakeskin Veil
+3 Inscription of Abundance
+4 Blizzard Brawl
+1 Unnatural Growth
+4 Ranger Class
+3 Wrenn and Seven
+4 Lair of the Hydra
+4 Kazandu Mammoth
+4 Faceless Haven
+16 Snow-Covered Forest
+
+[sideboard]
+2 Snakeskin Veil
+1 Inscription of Abundance
+2 Unnatural Growth
+1 Wrenn and Seven
+1 Outland Liberator
+2 Primal Adversary
+2 Clear Shot
+2 Toski, Bearer of Secrets
+2 Tangletrap

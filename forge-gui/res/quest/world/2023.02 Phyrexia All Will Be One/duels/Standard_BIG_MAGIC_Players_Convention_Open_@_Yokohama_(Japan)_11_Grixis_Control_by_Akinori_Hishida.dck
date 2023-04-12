@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Grixis Control by Akinori Hishida
+Title=Doran
+Difficulty=very hard
+Description=Grixis Control by Akinori Hishida
+Icon=Doran.jpg
+Deck Type=constructed
+
+[main]
+2 Reckoner Bankbuster
+2 Negate
+3 Make Disappear
+3 Abrade
+3 Go for the Throat
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+1 Bladecoil Serpent
+2 Razorlash Transmogrant
+3 Sheoldred, the Apocalypse
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+1 Stormcarved Coast
+1 Takenuma, Abandoned Mire
+1 Shivan Reef
+2 Sulfurous Springs
+2 Swamp
+3 Darkslick Shores
+3 Blackcleave Cliffs
+4 Xander's Lounge
+4 Shipwreck Marsh
+4 Haunted Ridge
+
+[sideboard]
+3 Cut Down
+2 Siphon Insight
+2 Brotherhood's End
+2 Soul Transfer
+2 Duress
+2 Disdainful Stroke
+2 Razorlash Transmogrant

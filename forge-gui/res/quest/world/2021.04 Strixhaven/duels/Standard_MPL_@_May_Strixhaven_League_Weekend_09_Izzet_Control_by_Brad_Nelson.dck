@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Izzet Control by Brad Nelson
+Title=Gideon, Martial Paragon
+Difficulty=very hard
+Description=Izzet Control by Brad Nelson
+Icon=Gideon, Martial Paragon.jpg
+Deck Type=constructed
+
+[main]
+1 Magma Opus
+2 Mazemind Tome
+3 Mystical Dispute
+3 Saw It Coming
+3 Alrund's Epiphany
+4 Frost Bite
+4 Expressive Iteration
+3 Galazeth Prismari
+4 Goldspan Dragon
+4 Brazen Borrower
+4 Bonecrusher Giant
+3 Faceless Haven
+4 Fabled Passage
+4 Volatile Fjord
+4 Snow-Covered Mountain
+4 Riverglide Pathway
+6 Snow-Covered Island
+
+[sideboard]
+1 Soul Sear
+1 Shark Typhoon
+1 Negate
+2 Ox of Agonas
+2 The Akroan War
+2 Redcap Melee
+2 Cinderclasm
+2 Disdainful Stroke
+2 Fire Prophecy

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Naya by Ferenc Nagy
+Title=alarafiq
+Difficulty=very hard
+Description=Naya by Ferenc Nagy
+Icon=alarafiq.jpg
+Deck Type=constructed
+
+[main]
+3 Cavern of Souls|AVR
+4 Clifftop Retreat
+3 Evolving Wilds
+6 Forest|RTR
+4 Mountain|RTR
+3 Plains|RTR
+1 Slayers' Stronghold|AVR
+4 Avacyn's Pilgrim|ISD
+3 Borderland Ranger|AVR
+3 Fiend Hunter|C13
+4 Huntmaster of the Fells|DKA
+2 Mayor of Avabruck|ISD
+4 Restoration Angel|AVR
+3 Sigarda, Host of Herons|AVR
+2 Zealous Conscripts|AVR
+3 Bonfire of the Damned|AVR
+2 Brimstone Volley|CNS
+2 Garruk Relentless|ISD
+4 Pillar of Flame|AVR
+
+[sideboard]
+1 Slayers' Stronghold|AVR
+1 Bonfire of the Damned|AVR
+1 Garruk Relentless|ISD
+2 Bonds of Faith|ISD
+2 Faith's Shield|DKA
+2 Grafdigger's Cage|DKA
+2 Nevermore|ISD
+2 Tree of Redemption|ISD
+2 Witchbane Orb|ISD

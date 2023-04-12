@@ -1,0 +1,53 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Adam Stejskal
+Title=Nagini
+Difficulty=very hard
+Description=Esper Aggro by Adam Stejskal
+Icon=Nagini.jpg
+Deck Type=constructed
+
+[main]
+1 Emeria's Call
+1 The Meathook Massacre
+1 The Wandering Emperor
+1 Sorin the Mirthless
+1 Lolth, Spider Queen
+1 Elspeth Resplendent
+2 March of Otherworldly Light
+2 Vanishing Verse
+2 Bloodchief's Thirst
+2 Wedding Announcement
+2 Kaito Shizuki
+2 Niko Aris
+1 Obscura Interceptor
+2 Spirited Companion
+3 Raffine, Scheming Seer
+3 Welcoming Vampire
+4 Faerie Vandal
+4 Luminarch Aspirant
+1 Otawara, Soaring City
+1 Eiganjo, Seat of the Empire
+1 Shattered Sanctum
+1 Deserted Beach
+1 Island
+2 Hive of the Eye Tyrant
+2 Shipwreck Marsh
+4 Brightclimb Pathway
+4 Clearwater Pathway
+4 Hengegate Pathway
+4 Raffine's Tower
+
+[sideboard]
+1 Test of Talents
+1 Depopulate
+1 Farewell
+1 Orvar, the All-Form
+1 Negate
+1 Disdainful Stroke
+1 Dawnbringer Cleric
+1 Duress
+2 Ray of Enfeeblement
+2 Go Blank
+2 Portable Hole
+1 Bloodchief's Thirst

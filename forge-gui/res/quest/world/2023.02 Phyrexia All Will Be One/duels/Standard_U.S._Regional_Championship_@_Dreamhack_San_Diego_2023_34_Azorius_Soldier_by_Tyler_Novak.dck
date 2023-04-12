@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Azorius Soldier by Tyler Novak
+Title=Aurora
+Difficulty=very hard
+Description=Azorius Soldier by Tyler Novak
+Icon=Aurora.jpg
+Deck Type=constructed
+
+[main]
+4 Recruitment Officer
+1 Skrelv, Defector Mite
+3 Dennick, Pious Apprentice
+4 Harbin, Vanguard Aviator
+4 Resolute Reinforcements
+4 Valiant Veteran
+4 Skystrike Officer
+3 Zephyr Sentinel
+4 Protect the Negotiators
+2 Destroy Evil
+1 Make Disappear
+2 The Wandering Emperor
+4 Adarkar Wastes
+3 Deserted Beach
+1 Eiganjo, Seat of the Empire
+4 Fortified Beachhead
+3 Plains
+2 Mirrex
+3 Seachrome Coast
+2 Otawara, Soaring City
+2 Secluded Courtyard
+
+[sideboard]
+2 Destroy Evil
+3 Tocasia's Welcome
+1 Negate
+3 Lantern Flare
+4 Brutal Cathar
+1 Spell Pierce
+1 Loran of the Third Path

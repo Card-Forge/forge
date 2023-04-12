@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Azorius Soldier by Victor Pons
+Title=Shango
+Difficulty=very hard
+Description=Azorius Soldier by Victor Pons
+Icon=Shango.jpg
+Deck Type=constructed
+
+[main]
+3 Brutal Cathar
+3 Skystrike Officer
+3 Skrelv, Defector Mite
+3 Harbin, Vanguard Aviator
+3 Dennick, Pious Apprentice
+4 Thalia, Guardian of Thraben
+4 Valiant Veteran
+4 Siege Veteran
+4 Recruitment Officer
+4 Kayla's Reconstruction
+1 Eiganjo, Seat of the Empire
+1 Mishra's Foundry
+1 Otawara, Soaring City
+2 Deserted Beach
+4 Seachrome Coast
+4 Fortified Beachhead
+4 Adarkar Wastes
+8 Plains
+
+[sideboard]
+1 Brutal Cathar
+1 Zephyr Sentinel
+1 Negate
+1 Disdainful Stroke
+2 Unlicensed Hearse
+2 Loran of the Third Path
+2 Knockout Blow
+2 Extraction Specialist
+3 Destroy Evil

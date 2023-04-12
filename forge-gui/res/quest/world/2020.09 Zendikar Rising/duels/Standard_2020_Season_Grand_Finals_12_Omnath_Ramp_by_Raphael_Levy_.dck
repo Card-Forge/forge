@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Omnath Ramp by Raphael Levy 
+Title=Ogun
+Difficulty=very hard
+Description=Omnath Ramp by Raphael Levy 
+Icon=Ogun.jpg
+Deck Type=constructed
+
+[main]
+1 Giant Killer
+1 Kenrith, the Returned King
+3 Brazen Borrower
+4 Omnath, Locus of Creation
+4 Beanstalk Giant
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Fae of Wishes
+4 Lucky Clover
+3 Escape to the Wilds
+1 Plains
+2 Mountain
+3 Raugrin Triome
+3 Cragcrown Pathway
+3 Branchloft Pathway
+3 Ketria Triome
+4 Fabled Passage
+4 Forest
+5 Island
+
+[sideboard]
+1 Escape to the Wilds
+1 Branchloft Pathway
+1 Soul-Guide Lantern
+1 Redcap Melee
+1 Embercleave
+1 Shatter the Sky
+1 Banishing Light
+1 Negate
+1 Ugin, the Spirit Dragon
+1 Thundering Rebuke
+1 Return to Nature
+1 Mystical Dispute
+1 Neutralize
+2 Chainweb Aracnir

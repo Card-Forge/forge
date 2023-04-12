@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Jeskai Token by Martin Muller
+Title=Big Rock
+Difficulty=very hard
+Description=Jeskai Token by Martin Muller
+Icon=Big Rock.jpg
+Deck Type=constructed
+
+[main]
+1 Fiery Impulse|ORI
+1 Secure the Wastes|DTK
+2 Jeskai Charm|KTK
+3 Wild Slash|FRF
+4 Dragon Fodder|ORI
+4 Hordeling Outburst|KTK
+4 Treasure Cruise|KTK
+4 Jeskai Ascendancy|KTK
+4 Silkwrap|DTK
+4 Gideon, Ally of Zendikar|BFZ
+4 Jace, Vryn's Prodigy|ORI
+2 Mountain|BFZ
+1 Island|BFZ
+1 Smoldering Marsh|BFZ
+1 Sunken Hollow|BFZ
+1 Prairie Stream|BFZ
+2 Flooded Strand|KTK
+2 Plains|BFZ
+3 Bloodstained Mire|KTK
+4 Battlefield Forge|ORI
+4 Mystic Monastery|KTK
+4 Polluted Delta|KTK
+
+[sideboard]
+1 Narset Transcendent|DTK
+2 Wingmate Roc|KTK
+3 Disdainful Stroke|KTK
+1 Dispel|BFZ
+1 Exert Influence|BFZ
+1 Negate|ORI
+3 Surge of Righteousness|DTK
+1 Fiery Impulse|ORI
+2 Crackling Doom|KTK

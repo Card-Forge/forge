@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Winota by Martin Del Güercio
+Title=Dr No
+Difficulty=very hard
+Description=Winota by Martin Del Güercio
+Icon=Dr No.jpg
+Deck Type=constructed
+
+[main]
+1 Ranger Class
+3 Shatterskull Smashing
+4 Esika's Chariot
+2 Kenrith, the Returned King
+2 Blade Historian
+3 Lotus Cobra
+3 Minsc, Beloved Ranger
+4 Prosperous Innkeeper
+4 Jaspera Sentinel
+4 Selfless Savior
+4 Winota, Joiner of Forces
+4 Elite Spellbinder
+1 Mountain
+2 Plains
+2 Lair of the Hydra
+2 Forest
+3 Fabled Passage
+4 Branchloft Pathway
+4 Needleverge Pathway
+4 Cragcrown Pathway
+
+[sideboard]
+3 Burning Hands
+2 Bonecrusher Giant
+2 Ox of Agonas
+2 Redcap Melee
+2 Reidane, God of the Worthy
+2 Drannith Magistrate
+1 The Akroan War
+1 Klothys, God of Destiny

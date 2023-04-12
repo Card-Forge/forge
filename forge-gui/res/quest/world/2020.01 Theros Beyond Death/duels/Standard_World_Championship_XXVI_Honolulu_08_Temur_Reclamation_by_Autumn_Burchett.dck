@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Autumn Burchett
+Title=Green
+Difficulty=very hard
+Description=Temur Reclamation by Autumn Burchett
+Icon=Green.jpg
+Deck Type=constructed
+
+[main]
+2 Temple of Mystery
+3 Temple of Epiphany
+1 Temple of Abandon
+4 Stomping Ground
+4 Steam Vents
+4 Breeding Pool
+2 Castle Vantress
+2 Fabled Passage
+1 Mountain
+2 Island
+2 Forest
+4 Wilderness Reclamation
+4 Brazen Borrower
+2 Hydroid Krasis
+3 Uro, Titan of Nature's Wrath
+4 Expansion // Explosion
+4 Growth Spiral
+2 Opt
+1 Scorching Dragonfire
+4 Thassa's Intervention
+3 Storm's Wrath
+2 Omen of the Sea
+
+[sideboard]
+2 Fry
+3 Mystical Dispute
+2 Negate
+3 Aether Gust
+2 Nightpack Ambusher
+3 Scorching Dragonfire

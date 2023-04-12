@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Weenie White by Matti Kuisma
+Title=NanaBuruku
+Difficulty=very hard
+Description=Weenie White by Matti Kuisma
+Icon=NanaBuruku.jpg
+Deck Type=constructed
+
+[main]
+4 Tithe Taker
+1 Healer's Hawk
+4 Snubhorn Sentry
+4 Benalish Marshal
+4 Venerated Loxodon
+4 Dauntless Bodyguard
+4 Skymarcher Aspirant
+3 Unbreakable Formation
+4 Legion's Landing|XLN
+4 Conclave Tribunal
+4 History of Benalia
+20 Plains
+
+[sideboard]
+4 Baffling End
+4 Tocatli Honor Guard|XLN
+2 Demystify|XLN
+3 Ajani, Adversary of Tyrants
+2 Adanto Vanguard|XLN

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Winota by Martin Forrester
+Title=alasunsinger
+Difficulty=very hard
+Description=Winota by Martin Forrester
+Icon=alasunsinger.jpg
+Deck Type=constructed
+
+[main]
+1 Minsc, Beloved Ranger
+1 Drizzt Do'Urden
+1 Tangled Florahedron
+2 Lotus Cobra
+2 Bonecrusher Giant
+2 Kenrith, the Returned King
+3 Blade Historian
+4 Winota, Joiner of Forces
+4 Elite Spellbinder
+4 Jaspera Sentinel
+4 Prosperous Innkeeper
+4 Esika's Chariot
+1 Turntimber Symbiosis
+1 Shatterskull Smashing
+1 Ranger Class
+2 Vivien, Monsters' Advocate
+1 Den of the Bugbear
+1 Lair of the Hydra
+1 Mountain
+2 Forest
+2 Plains
+4 Needleverge Pathway
+4 Fabled Passage
+4 Branchloft Pathway
+4 Cragcrown Pathway
+
+[sideboard]
+1 Klothys, God of Destiny
+1 Ox of Agonas
+1 Fire Prophecy
+2 Reidane, God of the Worthy
+2 The Akroan War
+2 Roiling Vortex
+3 Redcap Melee
+3 Burning Hands

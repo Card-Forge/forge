@@ -1,0 +1,51 @@
+[quest]
+id=20180903
+OpponentName=Pascal
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Izzet Drakes
+Title=Green Skies
+Difficulty=very hard
+Description=Izzet Drakes by Pascal Vieren
+Icon=Green Skies.jpg
+Deck Type=constructed
+
+[main]
+1 Blink of an Eye
+4 Radical Idea
+4 Shock
+4 Opt
+2 Beacon Bolt
+4 Chart a Course|XLN
+4 Tormenting Voice
+4 Lava Coil
+1 Murmuring Mystic
+3 Crackling Drake
+4 Arclight Phoenix
+3 Goblin Electromancer
+1 The Mirari Conjecture
+4 Steam Vents
+4 Sulfur Falls
+1 Izzet Guildgate
+6 Island
+6 Mountain
+
+[sideboard]
+1 Murmuring Mystic
+1 Crackling Drake
+1 The Mirari Conjecture
+2 Niv-Mizzet, Parun
+2 Shivan Fire
+3 Entrancing Melody|XLN
+1 Negate
+2 Star of Extinction|XLN
+1 Sorcerous Spyglass|XLN
+1 Banefire

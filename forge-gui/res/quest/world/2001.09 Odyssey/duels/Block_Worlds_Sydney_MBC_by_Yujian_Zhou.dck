@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=MBC by Yujian Zhou
+Title=MamanBrigitte
+Difficulty=very hard
+Description=MBC by Yujian Zhou
+Icon=MamanBrigitte.jpg
+Deck Type=constructed
+
+[main]
+3 Cabal Coffers|TO
+23 Swamp|A
+3 Faceless Butcher|TO
+4 Nantuko Shade|TO
+1 Stalking Bloodsucker|OD
+4 Chainer's Edict|TO
+3 Diabolic Tutor|OD
+1 Haunting Echoes|OD
+3 Innocent Blood|OD
+2 Mind Sludge|TO
+4 Mutilate|TO
+3 Rancid Earth|TO
+2 Skeletal Scrying|OD
+4 Tainted Pact|OD
+
+[sideboard]
+1 Faceless Butcher|TO
+1 Rancid Earth|TO
+4 Braids, Cabal Minion|OD
+2 Grotesque Hybrid|TO
+1 Guiltfeeder|JU
+3 Mesmeric Fiend|TO
+3 Slithery Stalker|TO

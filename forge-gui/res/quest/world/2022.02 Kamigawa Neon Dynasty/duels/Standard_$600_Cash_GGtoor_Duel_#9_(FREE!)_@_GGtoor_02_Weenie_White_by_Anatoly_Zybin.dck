@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Weenie White by Anatoly Zybin
+Title=JuzamGenie
+Difficulty=very hard
+Description=Weenie White by Anatoly Zybin
+Icon=JuzamGenie.jpg
+Deck Type=constructed
+
+[main]
+1 Legion Angel
+2 Adeline, Resplendent Cathar
+2 Brutal Cathar
+2 Usher of the Fallen
+2 Elite Spellbinder
+2 Archon of Emeria
+4 Skyclave Apparition
+4 Luminarch Aspirant
+4 Hopeful Initiate
+4 Thalia, Guardian of Thraben
+4 Intrepid Adversary
+4 The Wandering Emperor
+3 Cave of the Frost Dragon
+3 Crawling Barrens
+3 Eiganjo, Seat of the Empire
+16 Plains
+
+[sideboard]
+3 Legion Angel
+2 Brutal Cathar
+2 Elite Spellbinder
+2 Archon of Emeria
+2 Reidane, God of the Worthy
+2 Portable Hole
+2 Valorous Stance

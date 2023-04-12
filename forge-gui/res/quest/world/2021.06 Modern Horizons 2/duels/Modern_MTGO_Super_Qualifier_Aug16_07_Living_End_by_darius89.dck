@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Living End by darius89
+Title=Zaevil Hand
+Difficulty=very hard
+Description=Living End by darius89
+Icon=Zaevil Hand.jpg
+Deck Type=constructed
+
+[main]
+4 Architects of Will|ARB
+4 Curator of Mysteries|AKH
+4 Grief
+1 Monstrous Carabid|ARB
+4 Shardless Agent
+4 Street Wraith|FUT
+4 Striped Riverwinder|HOU
+4 Waker of Waves
+3 Living End|TSP
+4 Force of Negation
+4 Violent Outburst|ARB
+4 Botanical Sanctum|KLD
+2 Breeding Pool
+1 Forest
+1 Island
+4 Misty Rainforest|ZEN
+2 Scalding Tarn|ZEN
+3 Spirebluff Canal|KLD
+2 Steam Vents
+1 Sunken Ruins|SHM
+
+[sideboard]
+2 Brazen Borrower
+4 Endurance
+2 Force of Vigor
+3 Foundation Breaker
+2 Mystical Dispute
+2 Subtlety

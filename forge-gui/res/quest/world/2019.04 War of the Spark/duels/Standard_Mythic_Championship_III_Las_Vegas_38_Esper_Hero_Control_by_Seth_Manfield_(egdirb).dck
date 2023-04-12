@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Esper Hero Control by Seth Manfield (egdirb)
+Title=The Torpor Orb
+Difficulty=very hard
+Description=Esper Hero Control by Seth Manfield (egdirb)
+Icon=The Torpor Orb.jpg
+Deck Type=constructed
+
+[main]
+3 Elite Guardmage
+4 Hero of Precinct One
+2 Hostage Taker|XLN
+2 Despark
+1 Mortify
+3 Tyrant's Scorn
+1 Command the Dreadhorde
+4 Thought Erasure
+3 Oath of Kaya
+3 Narset, Parter of Veils
+4 Teferi, Hero of Dominaria
+4 Teferi, Time Raveler
+4 Drowned Catacomb|XLN
+4 Glacial Fortress|XLN
+4 Godless Shrine
+4 Hallowed Fountain
+1 Island
+4 Isolated Chapel
+1 Swamp
+4 Watery Grave
+
+[sideboard]
+1 Despark
+1 Command the Dreadhorde
+1 Arguel's Blood Fast|XLN
+2 Cry of the Carnarium
+2 Dovin's Veto
+2 Duress
+2 Enter the God-Eternals
+2 Kaya's Wrath
+2 The Elderspell

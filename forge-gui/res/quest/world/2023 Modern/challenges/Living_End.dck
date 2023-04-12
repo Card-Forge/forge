@@ -1,0 +1,51 @@
+[quest]
+id=20230109
+OpponentName=Atte
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Living End
+Title=Edna Krabappel
+Difficulty=very hard
+Description=Living End by Atte Vartiainen
+Icon=Edna Krabappel.jpg
+Deck Type=constructed
+
+[main]
+4 Architects of Will|ARB
+4 Curator of Mysteries|AKH
+4 Shardless Agent
+4 Striped Riverwinder|HOU
+4 Waker of Waves
+4 Street Wraith|FUT
+4 Grief
+2 Brazen Borrower
+4 Force of Negation
+4 Violent Outburst|ARB
+3 Living End|TSP
+1 Sunken Ruins|SHM
+3 Botanical Sanctum|KLD
+2 Breeding Pool
+4 Misty Rainforest|ZEN
+1 Otawara, Soaring City
+2 Spirebluff Canal|KLD
+2 Steam Vents
+1 Scalding Tarn|ZEN
+1 Forest
+1 Island
+1 Boseiju, Who Endures
+
+[sideboard]
+3 Endurance
+2 Foundation Breaker
+3 Leyline of Sanctity
+2 Mystical Dispute
+3 Subtlety
+2 Force of Vigor

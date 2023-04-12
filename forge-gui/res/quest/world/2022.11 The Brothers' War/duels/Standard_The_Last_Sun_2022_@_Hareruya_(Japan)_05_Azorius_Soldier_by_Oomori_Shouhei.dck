@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Azorius Soldier by Oomori Shouhei
+Title=Prince Valiant
+Difficulty=very hard
+Description=Azorius Soldier by Oomori Shouhei
+Icon=Prince Valiant.jpg
+Deck Type=constructed
+
+[main]
+2 Brutal Cathar
+2 Cathar Commando
+2 The Restoration of Eiganjo
+3 Dennick, Pious Apprentice
+3 Harbin, Vanguard Aviator
+4 Recruitment Officer
+4 Skystrike Officer
+4 Valiant Veteran
+4 Resolute Reinforcements
+4 Soul Partition
+4 Wedding Announcement
+1 Eiganjo, Seat of the Empire
+4 Fortified Beachhead
+4 Secluded Courtyard
+4 Deserted Beach
+4 Adarkar Wastes
+7 Plains
+
+[sideboard]
+2 Cathar Commando
+1 Otawara, Soaring City
+2 Teferi, Temporal Pilgrim
+2 Temporary Lockdown
+2 Destroy Evil
+2 Reckoner Bankbuster
+2 The Wandering Emperor
+2 Fateful Absence

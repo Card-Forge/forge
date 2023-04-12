@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=UG Madness by Morris Song
+Title=Gideon Jura
+Difficulty=very hard
+Description=UG Madness by Morris Song
+Icon=Gideon Jura.jpg
+Deck Type=constructed
+
+[main]
+4 Forest|OD
+8 Island|OD
+3 Karplusan Forest|7E
+1 Mossfire Valley|OD
+2 Shivan Reef|AP
+4 Yavimaya Coast|AP
+2 Aquamoeba|TO
+2 Arrogant Wurm|TO
+3 Basking Rootwalla|TO
+3 Flametongue Kavu|PS
+4 Merfolk Looter|7E
+4 Wild Mongrel|OD
+2 Wonder|JU
+4 Circular Logic|TO
+3 Deep Analysis|TO
+3 Fire // Ice|AP
+2 Opposition|7E
+3 Quiet Speculation|JU
+3 Roar of the Wurm|OD
+
+[sideboard]
+1 Alter Reality|TO
+3 Compost|7E
+2 Krosan Reclamation|JU
+2 Ray of Revelation|JU
+3 Seedtime|JU
+2 Squirrel Nest|OD
+2 Unnatural Selection|AP

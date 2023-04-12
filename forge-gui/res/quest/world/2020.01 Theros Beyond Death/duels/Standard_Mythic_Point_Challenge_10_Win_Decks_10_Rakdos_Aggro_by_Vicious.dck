@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Vicious
+Title=Samantha Stephens
+Difficulty=very hard
+Description=Rakdos Aggro by Vicious
+Icon=Samantha Stephens.jpg
+Deck Type=constructed
+
+[main]
+4 Mire Triton
+4 Mayhem Devil
+4 Witch's Oven
+4 Claim the Firstborn
+3 Tymaret Calls the Dead
+2 Temple of Malice
+2 Castle Locthwain
+4 Fabled Passage
+4 Blood Crypt
+5 Mountain
+7 Swamp
+2 Woe Strider
+3 Midnight Reaper
+4 Cauldron Familiar
+4 Kroxa, Titan of Death's Hunger
+4 Priest of Forgotten Gods
+
+[sideboard]
+2 Noxious Grasp
+2 Pharika's Libation
+2 Redcap Melee
+2 Scorching Dragonfire
+3 Embereth Shieldbreaker
+4 Agonizing Remorse

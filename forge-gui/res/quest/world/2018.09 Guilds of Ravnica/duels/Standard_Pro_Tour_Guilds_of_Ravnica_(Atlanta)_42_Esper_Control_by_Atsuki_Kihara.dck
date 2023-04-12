@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Esper Control by Atsuki Kihara
+Title=Aspect of Fire
+Difficulty=very hard
+Description=Esper Control by Atsuki Kihara
+Icon=Aspect of Fire.jpg
+Deck Type=constructed
+
+[main]
+4 Teferi, Hero of Dominaria
+3 Karn, Scion of Urza
+1 Chromium, the Mutable
+4 Golden Demise
+4 Syncopate
+4 Sinister Sabotage
+2 Settle the Wreckage|XLN
+2 Vraska's Contempt|XLN
+1 Blink of an Eye
+1 Cast Down
+4 Seal Away
+3 The Eldest Reborn
+4 Glacial Fortress|XLN
+4 Isolated Chapel
+4 Drowned Catacomb|XLN
+4 Watery Grave
+3 Evolving Wilds
+3 Island
+3 Plains
+2 Swamp
+
+[sideboard]
+1 Chromium, the Mutable
+1 The Eldest Reborn
+4 Thought Erasure
+3 Spell Pierce|XLN
+2 Negate
+2 Ixalan's Binding|XLN
+2 Cleansing Nova

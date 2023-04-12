@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Torpor Tezz by Shouta Yasooka
+Title=Lair
+Difficulty=very hard
+Description=Torpor Tezz by Shouta Yasooka
+Icon=Lair.jpg
+Deck Type=constructed
+
+[main]
+1 Stoic Rebuttal|SOM
+1 Sorin's Vengeance|M12
+1 Batterskull|NPH
+1 Black Sun's Zenith|MBS
+1 Consume the Meek|ROE
+2 Disfigure|ZEN
+2 Tumble Magnet|SOM
+2 Doom Blade|M12
+2 Torpor Orb|NPH
+2 Jace Beleren|M11
+2 Mana Leak|M12
+3 Ratchet Bomb|SOM
+3 Preordain|M11
+3 Inquisition of Kozilek|ROE
+4 Everflowing Chalice|WWK
+4 Tezzeret, Agent of Bolas|MBS
+1 Wurmcoil Engine|SOM
+1 Consecrated Sphinx|MBS
+1 Inkmoth Nexus|MBS
+3 Swamp|M12
+4 Darkslick Shores|SOM
+4 Drowned Catacomb|M12
+4 Island|M12
+4 Tectonic Edge|WWK
+4 Creeping Tar Pit|WWK
+
+[sideboard]
+2 Disfigure|ZEN
+1 Doom Blade|M12
+1 Torpor Orb|NPH
+1 Jace Beleren|M11
+1 Consecrated Sphinx|MBS
+3 Calcite Snapper|WWK
+2 Duress|M11
+4 Flashfreeze|M12

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Esper Control by Jacopo Di Napoli
+Title=The Very Hungry Caterpillar
+Difficulty=very hard
+Description=Esper Control by Jacopo Di Napoli
+Icon=The Very Hungry Caterpillar.jpg
+Deck Type=constructed
+
+[main]
+2 Portable Hole
+3 Reckoner Bankbuster
+1 Soul Shatter
+1 Infernal Grasp
+2 Disdainful Stroke
+3 March of Otherworldly Light
+4 Vanishing Verse
+2 Emeria's Call
+3 Doomskar
+2 The Meathook Massacre
+1 Sorin the Mirthless
+3 Lolth, Spider Queen
+4 Kaito Shizuki
+4 The Wandering Emperor
+1 Swamp
+1 Takenuma, Abandoned Mire
+1 Eiganjo, Seat of the Empire
+1 Plains
+2 Hive of the Eye Tyrant
+3 Hengegate Pathway
+3 Brightclimb Pathway
+3 Clearwater Pathway
+3 Shipwreck Marsh
+3 Deserted Beach
+4 Shattered Sanctum
+
+[sideboard]
+1 Reckoner Bankbuster
+2 Disdainful Stroke
+1 Doomskar
+2 Farewell
+2 Graveyard Trespasser
+3 Ray of Enfeeblement
+4 Duress

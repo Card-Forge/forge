@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jeskai Mutate by Karl Sarap
+Title=Owlman
+Difficulty=very hard
+Description=Jeskai Mutate by Karl Sarap
+Icon=Owlman.jpg
+Deck Type=constructed
+
+[main]
+1 Scorching Dragonfire
+1 Sejiri Shelter
+1 Mystical Dispute
+1 Essence Scatter
+2 Fire Prophecy
+2 Negate
+3 Prismari Command
+3 Seize the Spoils
+4 Unsubstantiate
+4 Spikefield Hazard
+4 Expressive Iteration
+4 Goldspan Dragon
+4 Lore Drakkis
+4 Vadrok, Apex of Thunder
+3 Mountain
+3 Island
+4 Riverglide Pathway
+4 Needleverge Pathway
+4 Raugrin Triome
+4 Hengegate Pathway
+
+[sideboard]
+2 Mazemind Tome
+2 Cinderclasm
+2 Phoenix of Ash
+1 Glass Casket
+1 Baneslayer Angel
+1 Light of Hope
+3 Redcap Melee
+2 Mystical Dispute
+1 Essence Scatter

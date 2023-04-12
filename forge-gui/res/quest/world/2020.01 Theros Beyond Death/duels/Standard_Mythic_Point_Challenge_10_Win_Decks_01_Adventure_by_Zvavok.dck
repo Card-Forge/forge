@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Adventure by Zvavok
+Title=Merfolk Shaman
+Difficulty=very hard
+Description=Adventure by Zvavok
+Icon=Merfolk Shaman.jpg
+Deck Type=constructed
+
+[main]
+1 Temple of Abandon
+2 Nissa, Who Shakes the World
+3 Escape to the Wilds
+4 Lucky Clover
+4 Beanstalk Giant
+4 Lovestruck Beast
+4 Fae of Wishes
+4 Edgewall Innkeeper
+4 Brazen Borrower
+4 Bonecrusher Giant
+2 Temple of Epiphany
+2 Mountain
+2 Temple of Mystery
+3 Island
+3 Steam Vents
+4 Breeding Pool
+4 Stomping Ground
+6 Forest
+
+[sideboard]
+1 Escape to the Wilds
+1 Storm's Wrath
+1 Disdainful Stroke
+1 Grafdigger's Cage
+1 Fling
+1 Mystic Repeal
+1 Expansion // Explosion
+2 Aether Gust
+1 Redcap Melee
+1 Return to Nature
+1 Unsummon
+1 Shadowspear
+1 Domri's Ambush
+1 Once and Future

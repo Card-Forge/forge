@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by Oda Masao
+Title=Aspect of Corruption
+Difficulty=very hard
+Description=Puresteel Paladin by Oda Masao
+Icon=Aspect of Corruption.jpg
+Deck Type=constructed
+
+[main]
+4 Ingenious Smith
+4 Memnite|SOM
+4 Ornithopter|AER
+4 Puresteel Paladin|NPH
+4 Stoneforge Mystic|WWK
+4 Esper Sentinel
+1 Pithing Needle
+1 Shadowspear
+1 Soul-Guide Lantern
+4 Colossus Hammer
+4 Springleaf Drum|BNG
+4 Urza's Saga
+4 Sigarda's Aid|EMN
+4 Silent Clearing
+4 Inkmoth Nexus|MBS
+4 Concealed Courtyard|KLD
+5 Plains
+
+[sideboard]
+1 Lurrus of the Dream-Den
+1 Path to Exile|CFX
+3 Void Mirror
+3 Prismatic Ending
+3 Sanctifier en-Vec
+4 Thoughtseize|THS

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Sultai Control by Timur Antonenko
+Title=Momir
+Difficulty=very hard
+Description=Sultai Control by Timur Antonenko
+Icon=Momir.jpg
+Deck Type=constructed
+
+[main]
+1 The Meathook Massacre
+2 Lolth, Spider Queen
+3 Storm the Festival
+3 Infernal Grasp
+3 Esika's Chariot
+4 Wrenn and Seven
+4 Binding the Old Gods
+2 Skullport Merchant
+3 Tangled Florahedron
+3 Iymrith, Desert Doom
+4 Rootcoil Creeper
+4 Prosperous Innkeeper
+1 Hall of Storm Giants
+1 Hive of the Eye Tyrant
+2 Woodland Chasm
+2 Rimewood Falls
+3 Shipwreck Marsh
+3 Forest
+4 Darkbore Pathway
+4 Barkchannel Pathway
+4 Clearwater Pathway
+
+[sideboard]
+3 Disdainful Stroke
+3 Malevolent Hermit
+2 Koma, Cosmos Serpent
+2 Shadows' Verdict
+2 Test of Talents
+2 The Meathook Massacre
+1 Infernal Grasp

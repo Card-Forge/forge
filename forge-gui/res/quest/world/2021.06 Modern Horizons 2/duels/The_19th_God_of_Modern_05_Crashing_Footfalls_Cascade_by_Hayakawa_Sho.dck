@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Crashing Footfalls Cascade by Hayakawa Sho
+Title=Oya
+Difficulty=very hard
+Description=Crashing Footfalls Cascade by Hayakawa Sho
+Icon=Oya.jpg
+Deck Type=constructed
+
+[main]
+2 Endurance
+3 Bonecrusher Giant
+3 Fury
+4 Shardless Agent
+4 Brazen Borrower
+2 Prismari Command
+2 Dead // Gone|PLC
+4 Violent Outburst|ARB
+4 Fire // Ice|AP
+4 Force of Negation
+4 Crashing Footfalls
+1 Mountain
+1 Gemstone Caverns|TSP
+1 Waterlogged Grove
+1 Fiery Islet
+1 Ketria Triome
+1 Stomping Ground
+1 Breeding Pool
+1 Steam Vents
+2 Island
+2 Forest
+4 Wooded Foothills|KTK
+4 Scalding Tarn|ZEN
+4 Misty Rainforest|ZEN
+
+[sideboard]
+2 Endurance
+1 Fury
+2 Foundation Breaker
+3 Blood Moon|9E
+3 Force of Vigor
+4 Mystical Dispute

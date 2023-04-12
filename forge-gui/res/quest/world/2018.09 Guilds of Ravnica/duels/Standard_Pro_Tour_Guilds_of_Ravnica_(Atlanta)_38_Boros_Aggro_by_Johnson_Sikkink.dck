@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Johnson Sikkink
+Title=Casper
+Difficulty=very hard
+Description=Boros Aggro by Johnson Sikkink
+Icon=Casper.jpg
+Deck Type=constructed
+
+[main]
+4 Adanto Vanguard|XLN
+4 Benalish Marshal
+4 Dauntless Bodyguard
+4 Snubhorn Sentry
+4 Skymarcher Aspirant
+4 Venerated Loxodon
+2 Healer's Hawk
+2 Pride of Conquerors
+4 Conclave Tribunal
+4 History of Benalia
+4 Legion's Landing|XLN
+2 Clifftop Retreat
+4 Sacred Foundry
+14 Plains
+
+[sideboard]
+2 Clifftop Retreat
+4 Tocatli Honor Guard|XLN
+3 Experimental Frenzy
+3 Ajani, Adversary of Tyrants
+1 Banefire
+2 Response // Resurgence

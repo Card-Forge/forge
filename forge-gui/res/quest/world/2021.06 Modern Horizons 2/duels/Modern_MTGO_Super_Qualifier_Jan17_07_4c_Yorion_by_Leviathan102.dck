@@ -1,0 +1,55 @@
+[duel]
+[metadata]
+Name=4c Yorion by Leviathan102
+Title=Wally
+Difficulty=very hard
+Description=4c Yorion by Leviathan102
+Icon=Wally.jpg
+Deck Type=constructed
+
+[main]
+4 Teferi, Time Raveler
+4 Wrenn and Six
+3 Eternal Witness|FD
+2 Fury
+4 Ice-Fang Coatl
+4 Omnath, Locus of Creation
+4 Solitude
+4 Expressive Iteration
+4 Prismatic Ending
+3 Counterspell|7E
+2 Ephemerate
+4 Lightning Bolt|M11
+4 Abundant Growth|AVR
+4 Spreading Seas|ZEN
+1 Arid Mesa|ZEN
+1 Breeding Pool
+2 Flooded Strand|KTK
+1 Hallowed Fountain
+1 Ketria Triome
+4 Misty Rainforest|ZEN
+1 Raugrin Triome
+1 Sacred Foundry
+1 Scalding Tarn|ZEN
+1 Sheltered Thicket|AKH
+2 Snow-Covered Forest
+1 Snow-Covered Island
+1 Snow-Covered Mountain
+1 Snow-Covered Plains
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+4 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+
+[sideboard]
+1 Fury
+1 Counterspell|7E
+1 Ephemerate
+1 Celestial Purge|M12
+1 Eladamri's Call|PS
+1 Emrakul, the Promised End|EMN
+2 Force of Vigor
+2 Relic of Progenitus|ALA
+4 Veil of Summer
+1 Yorion, Sky Nomad

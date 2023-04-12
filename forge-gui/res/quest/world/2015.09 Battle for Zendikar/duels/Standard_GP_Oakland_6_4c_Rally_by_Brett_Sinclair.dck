@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=4c Rally by Brett Sinclair
+Title=Jacob Grimm
+Difficulty=very hard
+Description=4c Rally by Brett Sinclair
+Icon=Jacob Grimm.jpg
+Deck Type=constructed
+
+[main]
+4 Sidisi's Faithful|DTK
+4 Nantuko Husk|ORI
+4 Jace, Vryn's Prodigy|ORI
+4 Grim Haruspex|KTK
+4 Elvish Visionary|ORI
+4 Catacomb Sifter|BFZ
+4 Windswept Heath|KTK
+1 Swamp|BFZ
+2 Sunken Hollow|BFZ
+1 Prairie Stream|BFZ
+4 Polluted Delta|KTK
+1 Plains|BFZ
+1 Island|BFZ
+1 Forest|BFZ
+4 Flooded Strand|KTK
+3 Evolving Wilds|BFZ
+2 Canopy Vista|BFZ
+4 Rally the Ancestors|FRF
+4 Collected Company|DTK
+4 Zulaport Cutthroat|BFZ
+
+[sideboard]
+1 Valorous Stance|FRF
+3 Murderous Cut|KTK
+1 Merciless Executioner|FRF
+1 Fleshbag Marauder|ORI
+2 Dispel|BFZ
+4 Arashin Cleric|FRF
+3 Anafenza, the Foremost|KTK

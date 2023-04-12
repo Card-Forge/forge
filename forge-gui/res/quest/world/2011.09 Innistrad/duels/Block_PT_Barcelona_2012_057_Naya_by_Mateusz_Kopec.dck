@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Naya by Mateusz Kopec
+Title=Orcish Mine
+Difficulty=very hard
+Description=Naya by Mateusz Kopec
+Icon=Orcish Mine.jpg
+Deck Type=constructed
+
+[main]
+3 Cavern of Souls|AVR
+4 Clifftop Retreat
+2 Evolving Wilds
+8 Forest|RTR
+4 Mountain|RTR
+3 Plains|RTR
+4 Avacyn's Pilgrim|ISD
+4 Borderland Ranger|AVR
+3 Fiend Hunter|C13
+1 Gisela, Blade of Goldnight|C15
+4 Huntmaster of the Fells|DKA
+4 Restoration Angel|AVR
+3 Sigarda, Host of Herons|AVR
+1 Zealous Conscripts|AVR
+3 Bonfire of the Damned|AVR
+2 Brimstone Volley|CNS
+3 Garruk Relentless|ISD
+4 Pillar of Flame|AVR
+
+[sideboard]
+2 Zealous Conscripts|AVR
+1 Bonfire of the Damned|AVR
+2 Bonds of Faith|ISD
+1 Divine Deflection|AVR
+2 Faith's Shield|DKA
+1 Naturalize
+2 Purify the Grave|ISD
+2 Ray of Revelation|DKA
+2 Slayer of the Wicked|ISD

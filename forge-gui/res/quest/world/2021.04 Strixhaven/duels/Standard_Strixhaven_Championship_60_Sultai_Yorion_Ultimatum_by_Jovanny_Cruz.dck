@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Sultai Yorion Ultimatum by Jovanny Cruz
+Title=Spiderman
+Difficulty=very hard
+Description=Sultai Yorion Ultimatum by Jovanny Cruz
+Icon=Spiderman.jpg
+Deck Type=constructed
+
+[main]
+1 Vorinclex, Monstrous Raider
+1 Valki, God of Lies
+1 Elder Gargaroth
+2 Polukranos, Unchained
+1 Esika's Chariot
+1 Disdainful Stroke
+1 Behold the Multiverse
+1 Negate
+3 Mystical Dispute
+4 Heartless Act
+2 Extinction Event
+2 Shadows' Verdict
+2 Alrund's Epiphany
+3 Sea Gate Restoration
+4 Emergent Ultimatum
+4 Cultivate
+4 Wolfwillow Haven
+4 Omen of the Sea
+4 Binding the Old Gods
+1 Professor Onyx
+1 Ketria Triome
+1 Cragcrown Pathway
+2 Swamp
+3 Island
+3 Forest
+4 Barkchannel Pathway
+4 Temple of Malady
+4 Fabled Passage
+4 Zagoth Triome
+4 Clearwater Pathway
+4 Darkbore Pathway
+
+[sideboard]
+2 Elder Gargaroth
+2 Disdainful Stroke
+1 Yorion, Sky Nomad
+1 Shark Typhoon
+1 Koma, Cosmos Serpent
+4 Duress
+4 Eliminate

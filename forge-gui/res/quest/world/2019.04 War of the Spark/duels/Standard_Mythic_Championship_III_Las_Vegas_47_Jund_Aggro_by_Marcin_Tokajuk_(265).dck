@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Jund Aggro by Marcin Tokajuk (265)
+Title=Captain America
+Difficulty=very hard
+Description=Jund Aggro by Marcin Tokajuk (265)
+Icon=Captain America.jpg
+Deck Type=constructed
+
+[main]
+2 Dire Fleet Daredevil
+4 Goblin Chainwhirler
+4 Growth-Chamber Guardian
+4 Gruul Spellbreaker
+2 Kraul Harpooner
+4 Rekindling Phoenix
+3 Skarrgan Hellkite
+2 Thorn Lieutenant
+2 Shock
+3 Status // Statue
+2 Lava Coil
+2 Domri, Anarch of Bolas
+2 Domri, Chaos Bringer
+4 Blood Crypt
+2 Gruul Guildgate
+5 Mountain
+1 Overgrown Tomb
+4 Rootbound Crag|XLN
+4 Stomping Ground
+4 Unclaimed Territory|XLN
+
+[sideboard]
+1 Lava Coil
+1 Chandra, Fire Artisan
+2 Cindervines
+2 Fight with Fire
+3 Legion Warboss
+2 Sorcerous Spyglass|XLN
+3 Thrashing Brontodon
+1 Vivien Reid

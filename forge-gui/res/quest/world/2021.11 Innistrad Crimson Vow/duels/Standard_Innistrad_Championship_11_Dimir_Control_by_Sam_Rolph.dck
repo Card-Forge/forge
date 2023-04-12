@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Dimir Control by Sam Rolph
+Title=Isis
+Difficulty=very hard
+Description=Dimir Control by Sam Rolph
+Icon=Isis.jpg
+Deck Type=constructed
+
+[main]
+3 Lier, Disciple of the Drowned
+4 Sedgemoor Witch
+1 Infernal Grasp
+1 Siphon Insight
+2 Jwari Disruption
+2 Test of Talents
+2 Power Word Kill
+3 Fading Hope
+3 Thirst for Discovery
+4 Divide by Zero
+4 Consider
+3 Bloodchief's Thirst
+4 Duress
+1 Sorin the Mirthless
+1 Hive of the Eye Tyrant
+2 Hall of Storm Giants
+2 Field of Ruin
+4 Clearwater Pathway
+4 Shipwreck Marsh
+5 Island
+5 Swamp
+
+[sideboard]
+1 Test of Talents
+1 Mascot Exhibition
+1 Environmental Sciences
+1 Soul Shatter
+1 Disdainful Stroke
+1 The Meathook Massacre
+1 Teachings of the Archaics
+1 Iymrith, Desert Doom
+2 Ray of Enfeeblement
+2 Malevolent Hermit
+3 Go Blank

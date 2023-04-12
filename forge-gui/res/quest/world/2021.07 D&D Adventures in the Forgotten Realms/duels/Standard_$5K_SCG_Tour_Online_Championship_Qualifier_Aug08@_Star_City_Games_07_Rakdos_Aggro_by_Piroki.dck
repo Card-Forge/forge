@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Piroki
+Title=Dr Strangelove
+Difficulty=very hard
+Description=Rakdos Aggro by Piroki
+Icon=Dr Strangelove.jpg
+Deck Type=constructed
+
+[main]
+1 Rankle, Master of Pranks
+2 Shambling Ghast
+3 Mire Triton
+4 Woe Strider
+4 Kroxa, Titan of Death's Hunger
+4 Bonecrusher Giant
+1 Deadly Dispute
+4 Village Rites
+1 Agadeem's Awakening
+4 Shatterskull Smashing
+4 Claim the Firstborn
+4 Tymaret Calls the Dead
+4 The Akroan War
+1 Castle Locthwain
+2 Temple of Malice
+2 Hive of the Eye Tyrant
+3 Mountain
+4 Fabled Passage
+4 Blightstep Pathway
+4 Swamp
+
+[sideboard]
+2 Rankle, Master of Pranks
+1 Kaervek, the Spiteful
+1 Necromentia
+2 Ray of Enfeeblement
+2 Shredded Sails
+3 Heartless Act
+4 Duress

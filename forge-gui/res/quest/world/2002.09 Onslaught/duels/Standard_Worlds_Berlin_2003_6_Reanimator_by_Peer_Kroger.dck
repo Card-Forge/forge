@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Reanimator by Peer Kroger
+Title=Green Skies
+Difficulty=very hard
+Description=Reanimator by Peer Kroger
+Icon=Green Skies.jpg
+Deck Type=constructed
+
+[main]
+4 Zombify|9E
+3 Stitch Together|CMD
+2 Smother|WWK
+1 Recoup|OD
+3 Innocent Blood|OD
+3 Entomb|OD
+1 Chainer's Edict|TO
+1 Cabal Therapy|JU
+4 Burning Wish|CN2
+3 Buried Alive|CMD
+1 Visara the Dreadful|ONS
+1 Undead Gladiator|ONS
+1 Symbiotic Wurm|CMD
+1 Phantom Nishoba|JU
+4 Doomed Necromancer|10E
+1 Arcanis the Omnipotent|10E
+1 Anger|CMD
+9 Swamp|RTR
+2 Shadowblood Ridge|C16
+6 Mountain|RTR
+4 Bloodstained Mire|KTK
+4 Barren Moor|C15
+
+[sideboard]
+1 Soul Feast|10E
+1 Sickening Dreams|TO
+1 Pyroclasm|M11
+1 Patriarch's Bidding|ONS
+1 Last Rites|OD
+1 Haunting Echoes|M11
+1 Guiltfeeder|C16
+1 Demolish|XLN
+1 Decompose|OD
+1 Stitch Together|CMD
+1 Recoup|OD
+3 Cabal Therapy|JU
+1 Buried Alive|CMD

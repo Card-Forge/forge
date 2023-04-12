@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Gruul Werewolves by Taras Kohut
+Title=Amphibian
+Difficulty=very hard
+Description=Gruul Werewolves by Taras Kohut
+Icon=Amphibian.jpg
+Deck Type=constructed
+
+[main]
+3 Tovolar, Dire Overlord
+4 Kessig Naturalist
+4 Reckless Stormseeker
+4 Werewolf Pack Leader
+4 Esika's Chariot
+2 Thundering Rebuke
+4 Shatterskull Smashing
+4 Ranger Class
+3 Arlinn, the Pack's Hope
+4 Wrenn and Seven
+2 Lair of the Hydra
+2 Forest
+4 Riverglide Pathway
+4 Kazandu Mammoth
+4 Barkchannel Pathway
+4 Rockfall Vale
+4 Cragcrown Pathway
+
+[sideboard]
+1 Thundering Rebuke
+1 Cinderclasm
+1 Dire-Strain Rampage
+2 Froghemoth
+2 Toski, Bearer of Secrets
+2 Masked Vandal
+3 Burning Hands
+3 Disdainful Stroke

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Mardu Aggro by Will Race
+Title=alathrax
+Difficulty=very hard
+Description=Mardu Aggro by Will Race
+Icon=alathrax.jpg
+Deck Type=constructed
+
+[main]
+1 The Celestus
+1 Humiliate
+2 The Wandering Emperor
+2 Elspeth Resplendent
+2 Hagra Mauling
+3 Vanishing Verse
+4 Fable of the Mirror-Breaker
+4 The Meathook Massacre
+1 Legion Angel
+1 Liesa, Forgotten Archangel
+2 Valki, God of Lies
+2 Skyclave Apparition
+3 Tenacious Underdog
+3 Luminarch Aspirant
+4 Graveyard Trespasser
+1 Eiganjo, Seat of the Empire
+2 Plains
+2 Hive of the Eye Tyrant
+2 Haunted Ridge
+2 Needleverge Pathway
+4 Shattered Sanctum
+4 Blightstep Pathway
+4 Sundown Pass
+4 Brightclimb Pathway
+
+[sideboard]
+2 Archon of Emeria
+2 Duress
+2 Brutal Cathar
+2 Ray of Enfeeblement
+1 Portable Hole
+1 Doomskar
+2 Humiliate
+3 Legion Angel

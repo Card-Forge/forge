@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Uw Gpg by Connor Peruchi
+Title=Emperor Palpatine
+Difficulty=very hard
+Description=Uw Gpg by Connor Peruchi
+Icon=Emperor Palpatine.jpg
+Deck Type=constructed
+
+[main]
+2 Ipnu Rivulet|HOU
+4 Angel of Invention|KLD
+4 Champion of Wits|HOU
+1 Fairgrounds Warden|KLD
+4 Sacred Cat|AKH
+4 Minister of Inquiries|KLD
+4 Chart a Course|XLN
+4 Strategic Planning|HOU
+4 Refurbish|KLD
+1 Fumigate|KLD
+1 Opt|XLN
+4 God-Pharaoh's Gift|HOU
+2 Search for Azcanta|XLN
+1 Cast Out|AKH
+7 Island|XLN
+6 Plains|XLN
+4 Glacial Fortress|XLN
+3 Irrigated Farmland|AKH
+
+[sideboard]
+2 Angel of Sanctions|AKH
+1 Skysovereign, Consul Flagship|KLD
+1 Hostile Desert|HOU
+2 Negate|AER
+2 Jace's Defeat|HOU
+2 Authority of the Consuls|KLD
+3 Fairgrounds Warden|KLD
+2 Fumigate|KLD

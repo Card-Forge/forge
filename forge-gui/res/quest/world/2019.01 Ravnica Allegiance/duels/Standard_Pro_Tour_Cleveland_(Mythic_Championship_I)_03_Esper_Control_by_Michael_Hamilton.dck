@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Esper Control by Michael Hamilton
+Title=Arney Swalritz
+Difficulty=very hard
+Description=Esper Control by Michael Hamilton
+Icon=Arney Swalritz.jpg
+Deck Type=constructed
+
+[main]
+1 Moment of Craving
+1 Ixalan's Binding|XLN
+1 Karn, Scion of Urza
+2 Cry of the Carnarium
+2 Vraska's Contempt|XLN
+2 Precognitive Perception
+2 Cast Down
+2 Negate
+2 Chemister's Insight
+3 Kaya's Wrath
+3 Thought Erasure
+3 Mortify
+3 Search for Azcanta|XLN
+3 Teferi, Hero of Dominaria
+4 Absorb
+1 Swamp
+1 Island
+4 Hallowed Fountain
+4 Watery Grave
+4 Godless Shrine
+4 Isolated Chapel
+4 Glacial Fortress|XLN
+4 Drowned Catacomb|XLN
+
+[sideboard]
+2 Duress
+2 Basilica Bell-Haunt
+3 Hostage Taker|XLN
+2 Lyra Dawnbringer
+4 Thief of Sanity
+1 Moment of Craving
+1 Thought Erasure

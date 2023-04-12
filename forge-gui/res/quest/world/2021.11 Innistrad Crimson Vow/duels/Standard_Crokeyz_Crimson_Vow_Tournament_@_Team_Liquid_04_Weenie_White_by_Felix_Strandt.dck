@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Weenie White by Felix Strandt
+Title=Soldiers
+Difficulty=very hard
+Description=Weenie White by Felix Strandt
+Icon=Soldiers.jpg
+Deck Type=constructed
+
+[main]
+1 Intrepid Adversary
+2 Chaplain of Alms
+2 Brutal Cathar
+2 Skyclave Apparition
+2 Elite Spellbinder
+3 Thalia, Guardian of Thraben
+3 Adeline, Resplendent Cathar
+4 Hopeful Initiate
+4 Clarion Spirit
+4 Luminarch Aspirant
+4 Usher of the Fallen
+4 Monk of the Open Hand
+1 Maul of the Skyclaves
+1 Kabira Takedown
+1 Grand Master of Flowers
+2 Cave of the Frost Dragon
+2 Faceless Haven
+18 Snow-Covered Plains
+
+[sideboard]
+1 Brutal Cathar
+2 Skyclave Apparition
+1 Thalia, Guardian of Thraben
+1 Circle of Confinement
+1 Loyal Warhound
+2 Valorous Stance
+2 Reidane, God of the Worthy
+2 Portable Hole
+3 Guardian of Faith

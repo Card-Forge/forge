@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=The Teferi Project by Matignon, Guillaume
+Title=Eomer
+Difficulty=very hard
+Description=The Teferi Project by Matignon, Guillaume
+Icon=Eomer.jpg
+Deck Type=constructed
+
+[main]
+4 Torrential Gearhulk|KLD
+4 Fatal Push|AER
+4 Vraska's Contempt|XLN
+4 Disallow|AER
+2 Hieroglyphic Illumination|AKH
+4 Glimmer of Genius|KLD
+3 Essence Scatter
+1 Negate
+3 Syncopate
+1 Search for Azcanta|XLN
+3 Irrigated Farmland|AKH
+4 Drowned Catacomb|XLN
+4 Fetid Pools|AKH
+3 Isolated Chapel
+1 Field of Ruin|XLN
+4 Island
+4 Swamp
+3 Glacial Fortress|XLN
+1 Arch of Orazca
+3 Teferi, Hero of Dominaria
+
+[sideboard]
+1 Essence Scatter
+2 Negate
+1 Detection Tower
+2 Infernal Reckoning
+1 Duress
+2 Walking Ballista|AER
+1 Glint-Sleeve Siphoner|AER
+1 The Scarab God|HOU
+1 Mystic Archaeologist
+1 Forsake the Worldly|AKH
+1 Cast Down
+1 Jace's Defeat|HOU

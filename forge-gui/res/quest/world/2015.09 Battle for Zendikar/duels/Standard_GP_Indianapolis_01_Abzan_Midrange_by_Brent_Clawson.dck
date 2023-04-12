@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Brent Clawson
+Title=BlackPanther
+Difficulty=very hard
+Description=Abzan Midrange by Brent Clawson
+Icon=BlackPanther.jpg
+Deck Type=constructed
+
+[main]
+3 Hangarback Walker|ORI
+2 Wingmate Roc|KTK
+4 Warden of the First Tree|FRF
+4 Den Protector|DTK
+4 Siege Rhino|KTK
+4 Anafenza, the Foremost|KTK
+4 Dromoka's Command|DTK
+1 Murderous Cut|KTK
+4 Abzan Charm|KTK
+4 Gideon, Ally of Zendikar|BFZ
+2 Forest|BFZ
+2 Plains|BFZ
+2 Llanowar Wastes|ORI
+4 Wooded Foothills|KTK
+4 Shambling Vent|BFZ
+4 Windswept Heath|KTK
+4 Flooded Strand|KTK
+2 Canopy Vista|BFZ
+1 Sunken Hollow|BFZ
+1 Smoldering Marsh|BFZ
+
+[sideboard]
+1 Wingmate Roc|KTK
+3 Silkwrap|DTK
+2 Ultimate Price|DTK
+2 Tasigur, the Golden Fang|FRF
+2 Duress|DTK
+2 Transgress the Mind|BFZ
+2 Self-Inflicted Wound|DTK
+1 Sorin, Solemn Visitor|KTK

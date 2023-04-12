@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=4c Energy by Grzegorz Kowalski
+Title=Copper Tablet
+Difficulty=very hard
+Description=4c Energy by Grzegorz Kowalski
+Icon=Copper Tablet.jpg
+Deck Type=constructed
+
+[main]
+2 Vraska, Relic Seeker|XLN
+3 Forest|XLN
+1 Swamp|XLN
+1 Island|XLN
+2 Mountain|XLN
+3 Spirebluff Canal|KLD
+4 Botanical Sanctum|KLD
+4 Aether Hub|KLD
+1 Sheltered Thicket|AKH
+3 Rootbound Crag|XLN
+2 Skysovereign, Consul Flagship|KLD
+2 Abrade|HOU
+4 Harnessed Lightning|KLD
+1 Confiscation Coup|KLD
+4 Attune with Aether|KLD
+2 The Scarab God|HOU
+2 Bristling Hydra|KLD
+4 Whirler Virtuoso|KLD
+4 Rogue Refiner|AER
+3 Chandra, Torch of Defiance|KLD
+4 Longtusk Cub|KLD
+4 Servant of the Conduit|KLD
+
+[sideboard]
+2 Negate|AER
+2 Nissa, Steward of Elements|AKH
+2 Cartouche of Ambition|AKH
+1 Deathgorge Scavenger|XLN
+1 Appetite for the Unnatural|KLD
+1 Vizier of Many Faces|AKH
+2 River's Rebuke|XLN
+1 Spell Pierce|XLN
+2 Chandra's Defeat|HOU
+1 Bristling Hydra|KLD

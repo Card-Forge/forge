@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Dimir Mill by Carlos Romão
+Title=Isis
+Difficulty=very hard
+Description=Dimir Mill by Carlos Romão
+Icon=Isis.jpg
+Deck Type=constructed
+
+[main]
+4 Thieves' Guild Enforcer
+4 Merfolk Windrobber
+4 Soaring Thought-Thief
+4 Ruin Crab
+1 Mystical Dispute
+1 Disdainful Stroke
+1 Eliminate
+1 Didn't Say Please
+3 Heartless Act
+4 Into the Story
+4 Drown in the Loch
+2 Agadeem's Awakening
+3 Of One Mind
+1 Castle Locthwain
+3 Swamp
+3 Temple of Deceit
+3 Zagoth Triome
+4 Clearwater Pathway
+4 Fabled Passage
+6 Island
+
+[sideboard]
+1 Mystical Dispute
+1 Disdainful Stroke
+1 Eliminate
+1 Lurrus of the Dream-Den
+1 Test of Talents
+1 Dead Weight
+1 Epic Downfall
+2 Cling to Dust
+3 Skyclave Shade
+3 Crippling Fear

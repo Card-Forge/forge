@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Fiona Wei
+Title=Death's Encroach
+Difficulty=very hard
+Description=Rakdos Aggro by Fiona Wei
+Icon=Death's Encroach.jpg
+Deck Type=constructed
+
+[main]
+2 Kolaghan's Command|DTK
+3 Unholy Heat
+3 Thoughtseize|THS
+4 Inquisition of Kozilek|ROE
+4 Lightning Bolt|M11
+4 Mishra's Bauble|CS
+2 Tourach, Dread Cantor
+2 Magmatic Channeler
+4 Dauthi Voidwalker
+4 Ragavan, Nimble Pilferer
+4 Dragon's Rage Channeler
+4 Kroxa, Titan of Death's Hunger
+1 Graven Cairns|SHM
+1 Urborg, Tomb of Yawgmoth|M15
+1 Arid Mesa|ZEN
+2 Mountain
+3 Swamp
+3 Blood Crypt
+3 Marsh Flats|ZEN
+4 Blackcleave Cliffs|SOM
+4 Bloodstained Mire|KTK
+
+[sideboard]
+3 Shattering Spree|GP
+2 Collective Brutality|EMN
+2 Nihil Spellbomb|SOM
+2 Engineered Explosives|FD
+2 Dark Confidant|RAV
+1 Fatal Push|AER
+1 Lurrus of the Dream-Den
+1 Kolaghan's Command|DTK
+1 Thoughtseize|THS

@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Yanase Kaname
+Title=IdiAmin
+Difficulty=very hard
+Description=Mono Green Aggro by Yanase Kaname
+Icon=IdiAmin.jpg
+Deck Type=constructed
+
+[main]
+2 Outland Liberator
+2 Briarbridge Tracker
+4 Werewolf Pack Leader
+4 Lotus Cobra
+4 Old-Growth Troll
+4 Esika's Chariot
+4 Blizzard Brawl
+3 Unnatural Growth
+4 Ranger Class
+4 Kazandu Mammoth
+4 Faceless Haven
+21 Snow-Covered Forest
+
+[sideboard]
+1 Tovolar's Huntmaster
+2 Devouring Tendrils
+2 Wrenn and Seven
+2 Toski, Bearer of Secrets
+2 Tangletrap
+2 Inscription of Abundance
+4 Snakeskin Veil

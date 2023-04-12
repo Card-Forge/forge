@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by Nakamoto Takahiro
+Title=The Wilds
+Difficulty=very hard
+Description=Puresteel Paladin by Nakamoto Takahiro
+Icon=The Wilds.jpg
+Deck Type=constructed
+
+[main]
+3 Ornithopter|AER
+4 Ingenious Smith
+4 Memnite|SOM
+4 Puresteel Paladin|NPH
+4 Esper Sentinel
+4 Stoneforge Mystic|WWK
+1 Shadowspear
+1 Cranial Plating|FD
+4 Colossus Hammer
+4 Springleaf Drum|BNG
+1 Thoughtseize|THS
+4 Sigarda's Aid|EMN
+4 Urza's Saga
+1 Marsh Flats|ZEN
+1 Godless Shrine
+1 Flooded Strand|KTK
+3 Silent Clearing
+4 Concealed Courtyard|KLD
+4 Inkmoth Nexus|MBS
+4 Plains
+
+[sideboard]
+2 Thoughtseize|THS
+1 Pithing Needle
+1 Lurrus of the Dream-Den
+1 Duress
+1 Path to Exile|CFX
+1 Void Mirror
+2 Sanctifier en-Vec
+2 Cathar Commando
+2 Portable Hole
+2 Dark Confidant|RAV

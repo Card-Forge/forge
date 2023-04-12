@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Atarka Abzan by Seth Manfield
+Title=Hagrid
+Difficulty=very hard
+Description=Atarka Abzan by Seth Manfield
+Icon=Hagrid.jpg
+Deck Type=constructed
+
+[main]
+2 Plains|DTK
+2 Forest|DTK
+1 Whip of Erebos|THS
+1 Utter End|KTK
+2 Ultimate Price|DTK
+2 Thoughtseize|THS
+2 Murderous Cut|KTK
+3 Abzan Charm|KTK
+3 Hero's Downfall|THS
+3 Elspeth, Sun's Champion|THS
+1 Tasigur, the Golden Fang|FRF
+1 Sidisi, Undead Vizier|DTK
+2 Dragonlord Atarka|DTK
+3 Satyr Wayfinder|M15
+4 Courser of Kruphix|BNG
+4 Sylvan Caryatid|THS
+4 Siege Rhino|KTK
+1 Haven of the Spirit Dragon|DTK
+1 Urborg, Tomb of Yawgmoth|M15
+1 Caves of Koilos|M15
+2 Nomad Outpost|KTK
+3 Llanowar Wastes|M15
+4 Temple of Malady|JOU
+4 Windswept Heath|KTK
+4 Sandsteppe Citadel|KTK
+
+[sideboard]
+1 Archfiend of Depravity|FRF
+2 Fleecemane Lion|THS
+1 Arbor Colossus|THS
+1 Ugin, the Spirit Dragon|FRF
+1 Merciless Executioner|FRF
+1 Risen Executioner|DTK
+1 Self-Inflicted Wound|DTK
+2 Glare of Heresy|THS
+2 Drown in Sorrow|BNG
+1 Crux of Fate|FRF
+1 Thoughtseize|THS
+1 Erase|KTK

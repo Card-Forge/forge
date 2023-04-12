@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=UB Control by Shahar Shenhar
+Title=Winston Churchill
+Difficulty=very hard
+Description=UB Control by Shahar Shenhar
+Icon=Winston Churchill.jpg
+Deck Type=constructed
+
+[main]
+1 Rewind
+1 Didn't Say Please
+1 Eliminate
+1 Agadeem's Awakening
+1 Negate
+2 Essence Scatter
+2 Cling to Dust
+2 Silundi Vision
+2 Bloodchief's Thirst
+3 Heartless Act
+4 Into the Story
+4 Shark Typhoon
+4 Drown in the Loch
+4 Thieves' Guild Enforcer
+4 Soaring Thought-Thief
+2 Castle Locthwain
+4 Zagoth Triome
+4 Temple of Deceit
+4 Swamp
+4 Clearwater Pathway
+6 Island
+
+[sideboard]
+2 Extinction Event
+3 Lullmage's Domination
+1 Mystical Dispute
+3 Duress
+1 Brazen Borrower
+1 Negate
+2 Cling to Dust
+2 Bloodchief's Thirst

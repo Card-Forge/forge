@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Pablo Gatica
+Title=Jabba the Hutt
+Difficulty=very hard
+Description=Esper Aggro by Pablo Gatica
+Icon=Jabba the Hutt.jpg
+Deck Type=constructed
+
+[main]
+2 Obscura Interceptor
+3 Raffine, Scheming Seer
+4 Tenacious Underdog
+4 Luminarch Aspirant
+2 Obscura Charm
+4 Vanishing Verse
+1 Emeria's Call
+2 The Meathook Massacre
+4 Wedding Announcement
+1 Lolth, Spider Queen
+1 Elspeth Resplendent
+3 The Wandering Emperor
+4 Kaito Shizuki
+1 Deserted Beach
+1 Plains
+1 Eiganjo, Seat of the Empire
+1 Takenuma, Abandoned Mire
+1 Swamp
+2 Shipwreck Marsh
+2 Hive of the Eye Tyrant
+2 Shattered Sanctum
+3 Clearwater Pathway
+3 Brightclimb Pathway
+4 Hengegate Pathway
+4 Raffine's Tower
+
+[sideboard]
+1 Farewell
+2 Disdainful Stroke
+2 Graveyard Trespasser
+2 Ray of Enfeeblement
+2 Duress
+2 Portable Hole
+2 Sorin the Mirthless
+2 Archon of Emeria

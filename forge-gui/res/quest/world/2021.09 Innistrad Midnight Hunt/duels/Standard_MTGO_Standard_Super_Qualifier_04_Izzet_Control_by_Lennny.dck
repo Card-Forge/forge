@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Izzet Control by Lennny
+Title=Greenie
+Difficulty=very hard
+Description=Izzet Control by Lennny
+Icon=Greenie.jpg
+Deck Type=constructed
+
+[main]
+4 Goldspan Dragon
+4 Smoldering Egg
+3 Alrund's Epiphany
+4 Expressive Iteration
+4 Shatterskull Smashing
+2 Thundering Rebuke
+1 Dissipate
+2 Divide by Zero
+4 Dragon's Fire
+1 Fading Hope
+3 Jwari Disruption
+4 Memory Deluge
+1 Negate
+1 Prismari Command
+1 Saw It Coming
+1 Spikefield Hazard
+3 Frostboil Snarl
+2 Hall of Storm Giants
+7 Island
+4 Mountain
+4 Riverglide Pathway
+
+[sideboard]
+1 Fading Hope
+1 Prismari Command
+3 Burning Hands
+2 Cinderclasm
+1 Environmental Sciences
+1 Heated Debate
+4 Malevolent Hermit
+1 Mascot Exhibition
+1 Test of Talents

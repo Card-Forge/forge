@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Oath of Druids by Patrick Mello
+Title=Aspect of Water
+Difficulty=very hard
+Description=Oath of Druids by Patrick Mello
+Icon=Aspect of Water.jpg
+Deck Type=constructed
+
+[main]
+1 Savannah|A
+2 Treetop Village|UL
+4 Wasteland|TE
+4 Flood Plain|MI
+4 Volcanic Island|B
+4 Tropical Island|A
+4 Tundra|A
+4 Oath of Druids|EX
+3 Powder Keg|UD
+4 Swords to Plowshares|A
+1 Disrupt|WL
+3 Fact or Fiction|IN
+4 Brainstorm|IA
+4 Impulse|VI
+4 Force of Will|AL
+4 Counterspell|A
+2 Gaea's Blessing|WL
+1 Spike Feeder|SH
+1 Spike Weaver|EX
+1 Morphling|US
+1 Unknown Card
+
+[sideboard]
+2 Serrated Arrows|HL
+2 Aura Blast|PS
+4 Call of the Herd|OD
+2 Hydroblast|IA
+3 Pyroblast|IA
+2 Samite Ministration|IN

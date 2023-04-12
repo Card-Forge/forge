@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Naya Runes Aggro by Mertcan Hekimoglu
+Title=Chewbacca
+Difficulty=very hard
+Description=Naya Runes Aggro by Mertcan Hekimoglu
+Icon=Chewbacca.jpg
+Deck Type=constructed
+
+[main]
+3 Kami of Transience
+4 Jukai Naturalist
+4 Runeforge Champion
+4 Generous Visitor
+4 Commune with Spirits
+2 Hallowed Haunting
+4 Rune of Might
+4 Rune of Speed
+4 Rune of Sustenance
+4 Showdown of the Skalds
+1 Plains
+1 Mountain
+1 Forest
+2 Boseiju, Who Endures
+2 Eiganjo, Seat of the Empire
+2 Needleverge Pathway
+2 Sundown Pass
+4 Overgrown Farmland
+4 Cragcrown Pathway
+4 Branchloft Pathway
+
+[sideboard]
+1 Borrowed Time
+1 Candletrap
+2 Katilda, Dawnhart Martyr
+2 Yasharn, Implacable Earth
+2 Tamiyo's Safekeeping
+2 Valorous Stance
+2 Rip Apart
+3 Circle of Confinement

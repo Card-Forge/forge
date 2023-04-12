@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=UW Control by Thomas Enevoldsen
+Title=Magneto
+Difficulty=very hard
+Description=UW Control by Thomas Enevoldsen
+Icon=Magneto.jpg
+Deck Type=constructed
+
+[main]
+1 Censor|AKH
+1 Forsake the Worldly|AKH
+1 Fumigate|KLD
+1 Supreme Will|HOU
+4 Settle the Wreckage|XLN
+2 Pull from Tomorrow|AKH
+3 Essence Scatter|AKH
+1 Negate
+4 Disallow|AER
+1 Commit // Memory|AKH
+2 Blink of an Eye
+2 Search for Azcanta|XLN
+4 Seal Away
+3 Cast Out|AKH
+7 Plains
+1 Memorial to Genius
+1 Field of Ruin|XLN
+2 Ipnu Rivulet|HOU
+6 Island
+4 Irrigated Farmland|AKH
+4 Glacial Fortress|XLN
+1 Arch of Orazca
+4 Teferi, Hero of Dominaria
+
+[sideboard]
+2 Negate
+1 Aether Meltdown|KLD
+1 Gideon of the Trials|AKH
+1 Sorcerous Spyglass|XLN
+1 Invoke the Divine
+4 History of Benalia
+3 Walking Ballista|AER
+2 Lyra Dawnbringer

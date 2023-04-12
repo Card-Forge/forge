@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Nathaniel Smith
+Title=Anubis
+Difficulty=very hard
+Description=Abzan Midrange by Nathaniel Smith
+Icon=Anubis.jpg
+Deck Type=constructed
+
+[main]
+4 Abzan Charm|KTK
+2 Wingmate Roc|KTK
+4 Warden of the First Tree|FRF
+4 Siege Rhino|KTK
+4 Den Protector|DTK
+4 Anafenza, the Foremost|KTK
+4 Wooded Foothills|KTK
+4 Windswept Heath|KTK
+2 Swamp|BFZ
+1 Smoldering Marsh|BFZ
+4 Shambling Vent|BFZ
+3 Plains|BFZ
+4 Llanowar Wastes|ORI
+2 Forest|BFZ
+2 Canopy Vista|BFZ
+4 Gideon, Ally of Zendikar|BFZ
+4 Silkwrap|DTK
+2 Ultimate Price|DTK
+2 Murderous Cut|KTK
+
+[sideboard]
+1 Tasigur, the Golden Fang|FRF
+3 Self-Inflicted Wound|DTK
+1 Painful Truths|BFZ
+1 Ob Nixilis Reignited|BFZ
+3 Hallowed Moonlight|ORI
+4 Duress|DTK
+2 Arashin Cleric|FRF

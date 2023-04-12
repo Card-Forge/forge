@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Weenie White by Benjamin Nikolich
+Title=Anubis
+Difficulty=very hard
+Description=Weenie White by Benjamin Nikolich
+Icon=Anubis.jpg
+Deck Type=constructed
+
+[main]
+4 Thraben Inspector|SOI
+4 Thalia's Lieutenant|SOI
+2 Hanweir Militia Captain|SOI
+4 Town Gossipmonger|SOI
+3 Expedition Envoy|BFZ
+3 Kytheon, Hero of Akros|ORI
+3 Anointer of Champions|ORI
+4 Dragon Hunter|DTK
+4 Knight of the White Orchid|ORI
+4 Declaration in Stone|SOI
+3 Gryff's Boon|SOI
+4 Always Watching|SOI
+14 Plains|RTR
+4 Battlefield Forge|ORI
+
+[sideboard]
+2 Hanweir Militia Captain|SOI
+2 Repel the Abominable|EMN
+4 Needle Spires|OGW
+4 Reckless Bushwhacker|OGW
+2 Stasis Snare|BFZ
+1 Silkwrap|DTK

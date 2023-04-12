@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Jazolaboum
+Title=James T Kirk
+Difficulty=very hard
+Description=Rakdos Aggro by Jazolaboum
+Icon=James T Kirk.jpg
+Deck Type=constructed
+
+[main]
+9 Swamp
+5 Mountain
+4 Blood Crypt
+4 Fabled Passage
+2 Castle Locthwain
+4 Claim the Firstborn
+4 Witch's Oven
+4 Cauldron Familiar
+4 Woe Strider
+4 Midnight Reaper
+4 Mayhem Devil
+4 Gutterbones
+4 Dreadhorde Butcher
+4 Priest of Forgotten Gods
+
+[sideboard]
+1 Redcap Melee
+1 Epic Downfall
+1 Embereth Shieldbreaker
+2 Noxious Grasp
+3 Act of Treason
+3 Scorching Dragonfire
+4 Agonizing Remorse

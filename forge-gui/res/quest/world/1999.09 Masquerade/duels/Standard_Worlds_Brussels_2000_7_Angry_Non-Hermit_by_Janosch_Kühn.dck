@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Angry Non-Hermit by Janosch Kühn
+Title=Robin Hood
+Difficulty=very hard
+Description=Angry Non-Hermit by Janosch Kühn
+Icon=Robin Hood.jpg
+Deck Type=constructed
+
+[main]
+4 Karplusan Forest|C16
+10 Forest|RTR
+2 Dust Bowl|MM
+1 Phyrexian Processor|US
+2 Saproling Burst|NE
+4 Stone Rain|9E
+4 Plow Under|8E
+1 Creeping Mold|KLD
+4 Arc Lightning|KTK
+2 Priest of Titania|C14
+2 Masticore|UD
+4 Llanowar Elves
+4 Blastoderm|NE
+4 Birds of Paradise|CN2
+4 Avalanche Riders|TSP
+4 Rishadan Port|MM
+4 Mountain|RTR
+
+[sideboard]
+1 Phyrexian Processor|US
+1 Creeping Mold|KLD
+1 Masticore|UD
+3 Uktabi Orangutan|6E
+1 Splinter|BOK
+2 Rack and Ruin|UL
+2 Flameshot|PY
+4 Boil|8E

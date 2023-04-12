@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Elementals by Matheus Daniel Da Silveira
+Title=Autumn Willow
+Difficulty=very hard
+Description=Elementals by Matheus Daniel Da Silveira
+Icon=Autumn Willow.jpg
+Deck Type=constructed
+
+[main]
+1 Ephemerate
+2 Abundant Growth|AVR
+2 Prismatic Ending
+3 Eladamri's Call|PS
+4 Leyline Binding
+4 Wrenn and Six
+4 Teferi, Time Raveler
+1 Endurance
+1 Elesh Norn, Mother of Machines
+2 Fury
+4 Solitude
+4 Risen Reef
+4 Omnath, Locus of Creation
+1 Jetmir's Garden
+1 Temple Garden
+1 Stomping Ground
+1 Sacred Foundry
+1 Breeding Pool
+1 Steam Vents
+1 Hallowed Fountain
+1 Snow-Covered Forest
+1 Zagoth Triome
+1 Snow-Covered Plains
+1 Boseiju, Who Endures
+1 Snow-Covered Island
+2 Cavern of Souls|AVR
+3 Flooded Strand|KTK
+3 Misty Rainforest|ZEN
+4 Windswept Heath|KTK
+
+[sideboard]
+3 Force of Vigor
+2 Orvar, the All-Form
+2 Dovin's Veto
+2 Hallowed Moonlight|ORI
+2 Engineered Explosives|FD
+1 Chalice of the Void|MR
+2 Endurance
+1 Boseiju, Who Endures

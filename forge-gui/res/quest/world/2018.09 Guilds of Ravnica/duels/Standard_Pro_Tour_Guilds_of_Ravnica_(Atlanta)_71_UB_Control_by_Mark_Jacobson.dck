@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=UB Control by Mark Jacobson
+Title=Witch
+Difficulty=very hard
+Description=UB Control by Mark Jacobson
+Icon=Witch.jpg
+Deck Type=constructed
+
+[main]
+4 Thief of Sanity
+4 Hostage Taker|XLN
+4 Doom Whisperer
+1 Blood Operative
+1 Duress
+4 Thought Erasure
+2 Ritual of Soot
+1 Golden Demise
+2 Dive Down|XLN
+1 Fungal Infection
+2 Cast Down
+3 Vraska's Contempt|XLN
+4 Discovery // Dispersal
+1 Disinformation Campaign
+1 The Eldest Reborn
+4 Watery Grave
+4 Drowned Catacomb|XLN
+9 Swamp
+6 Island
+1 Dimir Guildgate
+1 Detection Tower
+
+[sideboard]
+2 Duress
+1 Golden Demise
+1 Fungal Infection
+1 Vraska's Contempt|XLN
+2 Disinformation Campaign
+2 The Eldest Reborn
+2 Negate
+2 Moment of Craving
+2 Disdainful Stroke

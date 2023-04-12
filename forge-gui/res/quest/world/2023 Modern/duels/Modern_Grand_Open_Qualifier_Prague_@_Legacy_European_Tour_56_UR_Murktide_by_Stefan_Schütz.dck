@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=UR Murktide by Stefan Schütz
+Title=Amphibian
+Difficulty=very hard
+Description=UR Murktide by Stefan Schütz
+Icon=Amphibian.jpg
+Deck Type=constructed
+
+[main]
+4 Ragavan, Nimble Pilferer
+4 Dragon's Rage Channeler
+4 Murktide Regent
+2 Ledger Shredder
+4 Mishra's Bauble|CS
+4 Consider
+4 Counterspell|7E
+4 Lightning Bolt|M11
+4 Unholy Heat
+2 Spell Pierce
+1 Spell Snare|DIS
+4 Expressive Iteration
+4 Spirebluff Canal|KLD
+3 Steam Vents
+3 Snow-Covered Island
+2 Misty Rainforest|ZEN
+2 Flooded Strand|KTK
+1 Scalding Tarn|ZEN
+2 Polluted Delta|KTK
+1 Otawara, Soaring City
+1 Fiery Islet
+
+[sideboard]
+2 Unlicensed Hearse
+2 Engineered Explosives|FD
+2 Blood Moon|9E
+2 Flusterstorm
+2 Dress Down
+1 Fury
+1 Mystical Dispute
+1 Brotherhood's End
+1 Seasoned Pyromancer
+1 Abrade

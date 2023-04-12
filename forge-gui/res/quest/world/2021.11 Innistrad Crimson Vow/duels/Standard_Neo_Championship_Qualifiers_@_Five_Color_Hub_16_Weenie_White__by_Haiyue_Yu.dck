@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Weenie White  by Haiyue Yu
+Title=Data
+Difficulty=very hard
+Description=Weenie White  by Haiyue Yu
+Icon=Data.jpg
+Deck Type=constructed
+
+[main]
+1 Legion Angel
+2 Reidane, God of the Worthy
+3 Thalia, Guardian of Thraben
+3 Adeline, Resplendent Cathar
+4 Usher of the Fallen
+4 Sungold Sentinel
+4 Luminarch Aspirant
+4 Hopeful Initiate
+4 Elite Spellbinder
+4 Brutal Cathar
+3 Valorous Stance
+4 Faceless Haven
+20 Snow-Covered Plains
+
+[sideboard]
+3 Legion Angel
+1 Valorous Stance
+2 Welcoming Vampire
+2 Guardian of Faith
+3 Portable Hole
+4 Skyclave Apparition

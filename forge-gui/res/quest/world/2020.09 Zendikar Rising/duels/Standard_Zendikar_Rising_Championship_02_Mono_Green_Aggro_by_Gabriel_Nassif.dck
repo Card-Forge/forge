@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Gabriel Nassif
+Title=Castle Sengir
+Difficulty=very hard
+Description=Mono Green Aggro by Gabriel Nassif
+Icon=Castle Sengir.jpg
+Deck Type=constructed
+
+[main]
+2 Bonders' Enclave
+1 Vivien, Monsters' Advocate
+2 Witch's Oven
+2 Kogla, the Titan Ape
+4 Kazandu Mammoth
+4 Tangled Florahedron
+2 Crawling Barrens
+15 Forest
+4 Lovestruck Beast
+3 Trail of Crumbs
+4 Gilded Goose
+4 Castle Garenbrig
+4 Feasting Troll King
+3 The Great Henge
+4 Wicked Wolf
+1 Ilysian Caryatid
+1 Thrashing Brontodon
+
+[sideboard]
+1 Vivien, Monsters' Advocate
+1 Thrashing Brontodon
+3 Questing Beast
+1 Primal Might
+1 Ugin, the Spirit Dragon
+1 Ram Through
+1 Wilt
+2 Scavenging Ooze
+2 Chainweb Aracnir
+2 Sorcerous Spyglass

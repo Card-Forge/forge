@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Crashing Footfalls Cascade by Marcela Almeida
+Title=Aspect of Peace
+Difficulty=very hard
+Description=Crashing Footfalls Cascade by Marcela Almeida
+Icon=Aspect of Peace.jpg
+Deck Type=constructed
+
+[main]
+3 Seasoned Pyromancer
+4 Shardless Agent
+4 Brazen Borrower
+4 Fury
+1 Prismari Command
+2 Cryptic Command|LRW
+2 Dead // Gone|PLC
+4 Violent Outburst|ARB
+4 Fire // Ice|AP
+4 Force of Negation
+4 Crashing Footfalls
+1 Mountain
+1 Stomping Ground
+1 Ketria Triome
+1 Breeding Pool
+1 Forest
+1 Gemstone Caverns|TSP
+1 Waterlogged Grove
+2 Steam Vents
+2 Fiery Islet
+3 Island
+3 Wooded Foothills|KTK
+3 Scalding Tarn|ZEN
+4 Misty Rainforest|ZEN
+
+[sideboard]
+1 Jace, the Mind Sculptor|WWK
+3 Endurance
+3 Blood Moon|9E
+4 Force of Vigor
+4 Mystical Dispute

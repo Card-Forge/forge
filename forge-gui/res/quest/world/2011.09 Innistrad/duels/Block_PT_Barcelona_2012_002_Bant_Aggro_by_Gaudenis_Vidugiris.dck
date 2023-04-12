@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Bant Aggro by Gaudenis Vidugiris
+Title=Alt-A-Kesh
+Difficulty=very hard
+Description=Bant Aggro by Gaudenis Vidugiris
+Icon=Alt-A-Kesh.jpg
+Deck Type=constructed
+
+[main]
+3 Abundant Growth|AVR
+3 Silent Departure|ISD
+4 Increasing Savagery|DKA
+4 Spectral Flight|ISD
+3 Dungeon Geists|C13
+3 Strangleroot Geist|DKA
+4 Avacyn's Pilgrim|ISD
+4 Wolfir Silverheart|AVR
+4 Invisible Stalker|ISD
+4 Geist of Saint Traft|ISD
+1 Plains|RTR
+2 Island|RTR
+4 Hinterland Harbor
+4 Evolving Wilds
+4 Cavern of Souls|AVR
+9 Forest|RTR
+
+[sideboard]
+2 Garruk Relentless|ISD
+1 Witchbane Orb|ISD
+3 Dissipate|M15
+3 Wolfir Avenger|AVR
+4 Tree of Redemption|ISD
+2 Undead Alchemist|ISD

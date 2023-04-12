@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Marcelino Freeman
+Title=Northern Paladin
+Difficulty=very hard
+Description=Rakdos Aggro by Marcelino Freeman
+Icon=Northern Paladin.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Torch of Defiance|KLD
+2 Karn, Scion of Urza
+3 Heart of Kiran|AER
+4 Abrade|HOU
+4 Unlicensed Disintegration|KLD
+2 Pia Nalaar|KLD
+3 Soul-Scar Mage|AKH
+4 Bomat Courier|KLD
+4 Goblin Chainwhirler
+4 Scrapheap Scrounger|KLD
+4 Ahn-Crop Crasher|AKH
+1 Aether Hub|KLD
+1 Swamp
+3 Spire of Industry|AER
+4 Canyon Slough|AKH
+4 Dragonskull Summit|XLN
+11 Mountain
+
+[sideboard]
+2 Lost Legacy|KLD
+1 Aethersphere Harvester|AER
+2 Chandra's Defeat|HOU
+2 Doomfall|HOU
+3 Duress|XLN
+2 Glorybringer|AKH
+1 The Eldest Reborn
+1 Angrath, the Flame-Chained
+1 Chandra, Torch of Defiance|KLD

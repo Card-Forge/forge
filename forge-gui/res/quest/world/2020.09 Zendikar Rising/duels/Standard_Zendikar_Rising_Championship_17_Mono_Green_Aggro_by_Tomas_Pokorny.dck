@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Tomas Pokorny
+Title=Thanos
+Difficulty=very hard
+Description=Mono Green Aggro by Tomas Pokorny
+Icon=Thanos.jpg
+Deck Type=constructed
+
+[main]
+4 Wicked Wolf
+4 Castle Garenbrig
+4 Tangled Florahedron
+4 Gilded Goose
+2 Kogla, the Titan Ape
+2 Crawling Barrens
+4 Kazandu Mammoth
+2 Bonders' Enclave
+2 Witch's Oven
+3 Trail of Crumbs
+15 Forest
+4 Lovestruck Beast
+4 Feasting Troll King
+4 The Great Henge
+2 Ilysian Caryatid
+
+[sideboard]
+1 Witch's Oven
+2 Scavenging Ooze
+2 Ram Through
+3 Wilt
+1 Garruk, Unleashed
+2 Chainweb Aracnir
+2 Vivien, Monsters' Advocate
+2 Sorcerous Spyglass

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Michael Jacob
+Title=Waldo
+Difficulty=very hard
+Description=Rakdos Aggro by Michael Jacob
+Icon=Waldo.jpg
+Deck Type=constructed
+
+[main]
+1 Mire Triton
+2 Murderous Rider
+3 Rankle, Master of Pranks
+4 Magmatic Channeler
+4 Bonecrusher Giant
+4 Kroxa, Titan of Death's Hunger
+2 Heartless Act
+2 Spikefield Hazard
+2 Hagra Mauling
+1 Bloodchief's Thirst
+1 Inscription of Ruin
+3 Shatterskull Smashing
+4 Agonizing Remorse
+1 Elspeth's Nightmare
+4 Tymaret Calls the Dead
+2 Liliana, Waker of the Dead
+1 Savai Triome
+2 Castle Locthwain
+3 Mountain
+4 Fabled Passage
+4 Temple of Malice
+6 Swamp
+
+[sideboard]
+1 Extinction Event
+1 Embereth Shieldbreaker
+1 Feed the Swarm
+2 Skyclave Shade
+2 Soul-Guide Lantern
+2 Shredded Sails
+2 Sorcerous Spyglass
+2 Ox of Agonas
+2 Scorching Dragonfire

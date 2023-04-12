@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=UW Control by Greg Orange
+Title=Hazduhr the Abbot
+Difficulty=very hard
+Description=UW Control by Greg Orange
+Icon=Hazduhr the Abbot.jpg
+Deck Type=constructed
+
+[main]
+1 Fateful Absence
+2 Farewell
+2 Essence Scatter
+2 Destroy Evil
+3 Negate
+3 March of Otherworldly Light
+3 Syncopate
+4 The Wandering Emperor
+4 Silver Scrutiny
+4 Dissipate
+4 Memory Deluge
+1 Hullbreaker Horror
+1 Otawara, Soaring City
+1 Eiganjo, Seat of the Empire
+4 Adarkar Wastes
+4 Raffine's Tower
+4 Deserted Beach
+5 Plains
+8 Island
+
+[sideboard]
+3 Haughty Djinn
+2 Depopulate
+2 Dennick, Pious Apprentice
+2 Disdainful Stroke
+1 Reckoner Bankbuster
+1 Temporary Lockdown
+1 Archangel of Wrath
+2 Destroy Evil
+1 Negate

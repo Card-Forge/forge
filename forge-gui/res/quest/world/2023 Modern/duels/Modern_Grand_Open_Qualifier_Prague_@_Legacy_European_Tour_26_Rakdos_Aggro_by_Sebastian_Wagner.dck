@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Sebastian Wagner
+Title=NanaBuruku
+Difficulty=very hard
+Description=Rakdos Aggro by Sebastian Wagner
+Icon=NanaBuruku.jpg
+Deck Type=constructed
+
+[main]
+4 Dauthi Voidwalker
+1 Fable of the Mirror-Breaker
+4 Fury
+4 Grief
+4 Ragavan, Nimble Pilferer
+4 Seasoned Pyromancer
+2 Fatal Push|AER
+2 Feign Death
+2 Lightning Bolt|M11
+2 Malakir Rebirth
+3 Terminate|ARB
+3 Undying Malice
+3 Thoughtseize|THS
+3 Blood Moon|9E
+4 Blackcleave Cliffs
+2 Blood Crypt
+4 Bloodstained Mire|KTK
+2 Marsh Flats|ZEN
+1 Mountain
+3 Swamp
+1 Takenuma, Abandoned Mire
+1 Verdant Catacombs|ZEN
+1 Graven Cairns|SHM
+
+[sideboard]
+2 Fable of the Mirror-Breaker
+2 Engineered Explosives|FD
+1 Hidetsugu Consumes All
+1 Kolaghan's Command|DTK
+2 Unlicensed Hearse
+2 Tourach, Dread Cantor
+2 Path of Peril
+1 Magus of the Moon|FUT
+2 Necromentia

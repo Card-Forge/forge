@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Mono Blue Fish by Mike Bregoli
+Title=Room-Red
+Difficulty=very hard
+Description=Mono Blue Fish by Mike Bregoli
+Icon=Room-Red.jpg
+Deck Type=constructed
+
+[main]
+4 Drake Hatchling|MM
+3 Stinging Barrier|MM
+4 Waterfront Bouncer|MM
+4 Accumulated Knowledge|NE
+4 Counterspell|7E
+4 Eye of Ramos|MM
+4 Gush|MM
+4 Rising Waters|NE
+3 Seal of Removal|NE
+4 Thwart|MM
+19 Island|RTR
+3 Rishadan Port|MM
+
+[sideboard]
+1 Stinging Barrier|MM
+1 Seal of Removal|NE
+2 Flowstone Armor|NE
+3 Misdirection|CNS
+4 Rishadan Airship|MM
+2 Saprazzan Legate|MM
+1 Stronghold Zeppelin|NE
+1 Trade Routes|9E

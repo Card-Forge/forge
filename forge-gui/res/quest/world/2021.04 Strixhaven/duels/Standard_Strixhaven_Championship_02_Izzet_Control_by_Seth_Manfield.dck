@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Izzet Control by Seth Manfield
+Title=Aspect of Decay
+Difficulty=very hard
+Description=Izzet Control by Seth Manfield
+Icon=Aspect of Decay.jpg
+Deck Type=constructed
+
+[main]
+1 Disdainful Stroke
+3 Frost Bite
+3 Alrund's Epiphany
+3 Saw It Coming
+3 Mazemind Tome
+3 Mystical Dispute
+4 Expressive Iteration
+3 Galazeth Prismari
+4 Brazen Borrower
+4 Goldspan Dragon
+4 Bonecrusher Giant
+3 Faceless Haven
+4 Snow-Covered Mountain
+4 Volatile Fjord
+4 Fabled Passage
+4 Riverglide Pathway
+6 Snow-Covered Island
+
+[sideboard]
+3 Fire Prophecy
+2 Ox of Agonas
+2 Redcap Melee
+2 The Akroan War
+1 Cinderclasm
+1 Shark Typhoon
+1 Negate
+1 Soul Sear
+1 Disdainful Stroke
+1 Frost Bite

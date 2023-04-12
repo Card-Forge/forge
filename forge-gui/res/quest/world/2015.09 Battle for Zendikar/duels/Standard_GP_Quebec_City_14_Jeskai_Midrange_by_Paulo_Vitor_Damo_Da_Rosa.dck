@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Jeskai Midrange by Paulo Vitor Damo Da Rosa
+Title=Green
+Difficulty=very hard
+Description=Jeskai Midrange by Paulo Vitor Damo Da Rosa
+Icon=Green.jpg
+Deck Type=constructed
+
+[main]
+1 Island|BFZ
+2 Sunken Hollow|BFZ
+1 Smoldering Marsh|BFZ
+1 Prairie Stream|BFZ
+4 Polluted Delta|KTK
+2 Mountain|BFZ
+4 Mystic Monastery|KTK
+2 Plains|BFZ
+1 Swamp|BFZ
+4 Flooded Strand|KTK
+4 Bloodstained Mire|KTK
+1 Jeskai Charm|KTK
+3 Ojutai's Command|DTK
+3 Kolaghan's Command|DTK
+1 Wild Slash|FRF
+3 Fiery Impulse|ORI
+1 Dispel|BFZ
+2 Dig Through Time|KTK
+3 Crackling Doom|KTK
+1 Roast|DTK
+1 Duress|DTK
+1 Dragonlord Silumgar|DTK
+3 Tasigur, the Golden Fang|FRF
+2 Soulfire Grand Master|FRF
+4 Mantis Rider|KTK
+4 Jace, Vryn's Prodigy|ORI
+1 Dragonmaster Outcast|BFZ
+
+[sideboard]
+2 Arashin Cleric|FRF
+1 Virulent Plague|DTK
+2 Disdainful Stroke|KTK
+1 Ultimate Price|DTK
+1 Felidar Cub|BFZ
+2 Radiant Flames|BFZ
+1 Mastery of the Unseen|FRF
+2 Exert Influence|BFZ
+1 Dispel|BFZ
+2 Duress|DTK

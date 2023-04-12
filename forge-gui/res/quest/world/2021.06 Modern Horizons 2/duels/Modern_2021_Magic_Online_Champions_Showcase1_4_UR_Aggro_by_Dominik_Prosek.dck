@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=UR Aggro by Dominik Prosek
+Title=Aspect of Decay
+Difficulty=very hard
+Description=UR Aggro by Dominik Prosek
+Icon=Aspect of Decay.jpg
+Deck Type=constructed
+
+[main]
+3 Serum Visions|FD
+3 Mutagenic Growth|NPH
+4 Mishra's Bauble|CS
+4 Lava Dart|JU
+4 Lightning Bolt|M11
+4 Manamorphose|SHM
+4 Expressive Iteration
+4 Soul-Scar Mage|AKH
+4 Stormwing Entity
+4 Monastery Swiftspear|KTK
+4 Dragon's Rage Channeler
+1 Bloodstained Mire|KTK
+1 Wooded Foothills|KTK
+1 Arid Mesa|ZEN
+2 Scalding Tarn|ZEN
+3 Steam Vents
+3 Fiery Islet
+3 Mountain
+4 Spirebluff Canal|KLD
+
+[sideboard]
+3 Spell Pierce|XLN
+3 Soul-Guide Lantern
+2 Shattering Spree|GP
+2 Abrade|HOU
+2 Bedlam Reveler|EMN
+2 Unholy Heat
+1 Tormod's Crypt

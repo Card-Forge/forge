@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Rakdos Control by Sebastodon [team Dominus]
+Title=Orunmila
+Difficulty=very hard
+Description=Rakdos Control by Sebastodon [team Dominus]
+Icon=Orunmila.jpg
+Deck Type=constructed
+
+[main]
+1 Gix's Command
+2 Abrade
+3 Reckoner Bankbuster
+3 Invoke Despair
+3 Duress
+4 Fable of the Mirror-Breaker
+4 Cut Down
+4 Go for the Throat
+3 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Graveyard Trespasser
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+2 Mountain
+2 Xander's Lounge
+4 Blackcleave Cliffs
+4 Sulfurous Springs
+4 Haunted Ridge
+7 Swamp
+
+[sideboard]
+2 Ob Nixilis, the Adversary
+2 Archfiend of the Dross
+2 Vampires' Vengeance
+2 Soul Transfer
+2 Razorlash Transmogrant
+1 Obliterating Bolt
+1 Gix's Command
+1 Reckoner Bankbuster
+1 Invoke Despair
+1 Duress

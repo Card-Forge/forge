@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Goblins by Tomi Walamies
+Title=Djinns & Efreets
+Difficulty=very hard
+Description=Goblins by Tomi Walamies
+Icon=Djinns & Efreets.jpg
+Deck Type=constructed
+
+[main]
+4 Forgotten Cave|C15
+4 Goblin Burrows|ONS
+18 Mountain|RTR
+4 Clickslither|LE
+4 Gempalm Incinerator|LE
+4 Goblin Goon|LE
+4 Goblin Piledriver|ORI
+4 Goblin Sledder|ONS
+2 Menacing Ogre|ONS
+4 Skirk Prospector
+4 Sparksmith|ONS
+4 Shock
+
+[sideboard]
+1 Menacing Ogre|ONS
+2 Rorix Bladewing|ONS
+4 Skirk Fire Marshal|ONS
+4 Starstorm|C14
+4 Thoughtbound Primoc|ONS

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Napster by Jon Finkel
+Title=Luke Skywalker
+Difficulty=very hard
+Description=Napster by Jon Finkel
+Icon=Luke Skywalker.jpg
+Deck Type=constructed
+
+[main]
+2 Phyrexian Negator|UD
+3 Skittering Skirge|US
+1 Thrashing Wumpus|MM
+2 Skittering Horror|UD
+1 Stromgald Cabal|6E
+4 Dark Ritual|CST
+4 Duress
+1 Engineered Plague|7E
+1 Eradicate|BOK
+1 Massacre|NE
+1 Perish|6E
+1 Persecute|9E
+1 Stupor|TSP
+2 Unmask|MM
+4 Vampiric Tutor|6E
+4 Vicious Hunger|8E
+4 Yawgmoth's Will|US
+4 Rishadan Port|MM
+2 Dust Bowl|MM
+2 Spawning Pool|10E
+15 Swamp|RTR
+
+[sideboard]
+2 Phyrexian Negator|UD
+1 Stromgald Cabal|6E
+2 Engineered Plague|7E
+1 Eradicate|BOK
+1 Massacre|NE
+1 Perish|6E
+1 Stupor|TSP
+1 Unmask|MM
+1 Phyrexian Processor|US
+1 Powder Keg|UD
+2 Rapid Decay|UD
+1 Thran Lens|UL

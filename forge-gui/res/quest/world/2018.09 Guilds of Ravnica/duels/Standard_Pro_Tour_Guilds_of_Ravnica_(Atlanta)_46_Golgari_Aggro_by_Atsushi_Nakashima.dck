@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by Atsushi Nakashima
+Title=Tombstone
+Difficulty=very hard
+Description=Golgari Aggro by Atsushi Nakashima
+Icon=Tombstone.jpg
+Deck Type=constructed
+
+[main]
+3 Vivien Reid
+1 Vraska, Golgari Queen
+1 Vraska, Relic Seeker|XLN
+4 Llanowar Elves
+1 Multani, Yavimaya's Avatar
+2 Carnage Tyrant|XLN
+4 Jadelight Ranger
+2 Ravenous Chupacabra
+2 Glowspore Shaman
+4 Merfolk Branchwalker|XLN
+1 Golgari Findbroker
+2 Midnight Reaper
+2 Druid of the Cowl
+3 Find // Finality
+2 Cast Down
+3 Vraska's Contempt|XLN
+4 Overgrown Tomb
+4 Woodland Cemetery
+7 Forest
+2 Memorial to Folly
+1 Detection Tower
+4 Swamp
+1 Golgari Guildgate
+
+[sideboard]
+1 Vraska's Contempt|XLN
+2 Golden Demise
+4 Duress
+3 Wildgrowth Walker|XLN
+2 Kraul Harpooner
+2 Deathgorge Scavenger|XLN
+1 Thrashing Brontodon

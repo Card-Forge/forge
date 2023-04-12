@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=UW Yorion by Jean-Emmanuel Depraz
+Title=Black Flame
+Difficulty=very hard
+Description=UW Yorion by Jean-Emmanuel Depraz
+Icon=Black Flame.jpg
+Deck Type=constructed
+
+[main]
+11 Island
+1 Tranquil Cove
+2 Dream Trawler
+4 Raugrin Triome
+2 Castle Vantress
+8 Plains
+4 Temple of Enlightenment
+3 Thirst for Meaning
+4 The Birth of Meletis
+3 Shatter the Sky
+4 Skyclave Apparition
+1 Castle Ardenvale
+3 Omen of the Sun
+4 Omen of the Sea
+3 Yorion, Sky Nomad
+3 Negate
+2 Mystical Dispute
+4 Mazemind Tome
+4 Glass Casket
+3 Essence Scatter
+3 Emeria's Call
+4 Elspeth Conquers Death
+
+[sideboard]
+3 Mystic Subdual
+2 Glimpse of Freedom
+1 Shatter the Sky
+1 Yorion, Sky Nomad
+1 Negate
+2 Mystical Dispute
+1 Sublime Epiphany
+4 Shark Typhoon

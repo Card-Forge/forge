@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Wild Pair by Guillaume Wafo-Tapa
+Title=Brother Voodoo
+Difficulty=very hard
+Description=Wild Pair by Guillaume Wafo-Tapa
+Icon=Brother Voodoo.jpg
+Deck Type=constructed
+
+[main]
+6 Island|RTR
+4 Grove of the Burnwillows|FUT
+4 Forest|RTR
+4 Terramorphic Expanse|C16
+4 Wall of Roots|TSP
+4 Wild Pair|CN2
+4 Foresee|M11
+4 Coalition Relic|FUT
+4 Dormant Sliver|PLC
+4 Gemhide Sliver|TSP
+3 Frenetic Sliver|PLC
+3 Telekinetic Sliver|TSP
+2 Take Possession|FUT
+1 Whitemane Lion|C14
+1 Mystic Snake|C15
+1 Mountain|RTR
+1 Pendelhaven|TSP
+1 Plains|RTR
+1 Darkheart Sliver|PLC
+1 Might Sliver|TSP
+1 Reflex Sliver|PLC
+1 Urza's Factory|C13
+1 Venser, Shaper Savant|FUT
+
+[sideboard]
+1 Frenetic Sliver|PLC
+1 Telekinetic Sliver|TSP
+1 Whitemane Lion|C14
+1 Mystic Snake|C15
+3 Detritivore|PLC
+3 Riftsweeper|FUT
+2 Extirpate|PLC
+1 Sliver Legion|FUT
+1 Teneb, the Harvester|CMD
+1 Vesuva|TSP

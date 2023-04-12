@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Naya by Olle Rade
+Title=Big Rock
+Difficulty=very hard
+Description=Naya by Olle Rade
+Icon=Big Rock.jpg
+Deck Type=constructed
+
+[main]
+4 Cavern of Souls|AVR
+4 Clifftop Retreat
+4 Evolving Wilds
+6 Forest|RTR
+2 Gavony Township|ISD
+4 Mountain|RTR
+1 Plains|RTR
+4 Avacyn's Pilgrim|ISD
+4 Borderland Ranger|AVR
+2 Gisela, Blade of Goldnight|C15
+4 Huntmaster of the Fells|DKA
+4 Restoration Angel|AVR
+3 Sigarda, Host of Herons|AVR
+2 Wolfir Avenger|AVR
+4 Bonfire of the Damned|AVR
+4 Devil's Play|ISD
+4 Pillar of Flame|AVR
+
+[sideboard]
+3 Crushing Vines|DKA
+2 Divine Deflection|AVR
+2 Grafdigger's Cage|DKA
+3 Nevermore|ISD
+2 Ray of Revelation|DKA
+3 Thalia, Guardian of Thraben|DKA

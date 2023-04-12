@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Weenie White by Randall Newell
+Title=Quest for Ulas Temple
+Difficulty=very hard
+Description=Weenie White by Randall Newell
+Icon=Quest for Ulas Temple.jpg
+Deck Type=constructed
+
+[main]
+2 Reidane, God of the Worthy
+2 Adeline, Resplendent Cathar
+2 Fleeting Spirit
+2 Sungold Sentinel
+3 Skyclave Apparition
+3 Thalia, Guardian of Thraben
+3 Intrepid Adversary
+3 Elite Spellbinder
+3 Brutal Cathar
+4 Usher of the Fallen
+4 Luminarch Aspirant
+2 Portable Hole
+2 Maul of the Skyclaves
+2 Paladin Class
+3 Faceless Haven
+20 Snow-Covered Plains
+
+[sideboard]
+2 Fleeting Spirit
+2 Sungold Sentinel
+2 Portable Hole
+2 Paladin Class
+2 Divine Gambit
+2 Fateful Absence
+3 Cathar Commando

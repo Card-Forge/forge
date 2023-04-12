@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Bant Aggro by Derek Lansch
+Title=Chewbacca
+Difficulty=very hard
+Description=Bant Aggro by Derek Lansch
+Icon=Chewbacca.jpg
+Deck Type=constructed
+
+[main]
+1 Stasis Snare|BFZ
+2 Silkwrap|DTK
+4 Dromoka's Command|DTK
+4 Gideon, Ally of Zendikar|BFZ
+1 Archangel of Tithes|ORI
+1 Stratus Dancer|DTK
+1 Hidden Dragonslayer|DTK
+2 Wingmate Roc|KTK
+3 Nissa, Vastwood Seer|ORI
+4 Hangarback Walker|ORI
+4 Deathmist Raptor|DTK
+4 Den Protector|DTK
+4 Warden of the First Tree|FRF
+2 Prairie Stream|BFZ
+2 Canopy Vista|BFZ
+3 Wooded Foothills|KTK
+4 Flooded Strand|KTK
+4 Windswept Heath|KTK
+5 Forest|BFZ
+5 Plains|BFZ
+
+[sideboard]
+1 Valorous Stance|FRF
+2 Evolutionary Leap|ORI
+2 Dispel|BFZ
+2 Disdainful Stroke|KTK
+2 Tragic Arrogance|ORI
+1 Whisperwood Elemental|FRF
+3 Surge of Righteousness|DTK
+2 Archangel of Tithes|ORI

@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Ian Richter
+Title=Abraham Lincoln
+Difficulty=very hard
+Description=Red Deck Wins by Ian Richter
+Icon=Abraham Lincoln.jpg
+Deck Type=constructed
+
+[main]
+4 Ember Hauler|M11
+4 Goblin Guide|ZEN
+2 Kiln Fiend|ROE
+4 Spikeshot Elder|SOM
+4 Burst Lightning|ZEN
+4 Lightning Bolt|M11
+4 Searing Blaze|WWK
+4 Staggershock|ROE
+4 Shrine of Burning Rage|NPH
+20 Mountain|NPH
+3 Teetering Peaks|ZEN
+3 Koth of the Hammer|SOM
+
+[sideboard]
+2 Manic Vandal|M11
+3 Act of Aggression|NPH
+2 Combust|M11
+1 Crush|MBS
+4 Dismember|NPH
+3 Arc Trail|SOM

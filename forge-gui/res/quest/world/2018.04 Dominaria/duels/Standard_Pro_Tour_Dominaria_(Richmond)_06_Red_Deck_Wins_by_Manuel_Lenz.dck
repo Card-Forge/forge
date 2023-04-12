@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Manuel Lenz
+Title=The Jester
+Difficulty=very hard
+Description=Red Deck Wins by Manuel Lenz
+Icon=The Jester.jpg
+Deck Type=constructed
+
+[main]
+2 Kari Zev, Skyship Raider|AER
+4 Scrapheap Scrounger|KLD
+3 Soul-Scar Mage|AKH
+4 Bomat Courier|KLD
+3 Earthshaker Khenra|HOU
+2 Chandra, Torch of Defiance|KLD
+3 Aether Hub|KLD
+3 Canyon Slough|AKH
+4 Dragonskull Summit|XLN
+14 Mountain
+4 Lightning Strike|XLN
+2 Abrade|HOU
+1 Glorybringer|AKH
+3 Rekindling Phoenix
+2 Hazoret the Fervent|AKH
+4 Goblin Chainwhirler
+2 Ahn-Crop Crasher|AKH
+
+[sideboard]
+1 Release the Gremlins|AER
+1 Angrath, the Flame-Chained
+1 Squee, the Immortal
+3 Fight with Fire
+1 Doomfall|HOU
+2 Magma Spray|AKH
+2 Chandra's Defeat|HOU
+1 Scavenger Grounds|HOU
+2 Abrade|HOU
+1 Glorybringer|AKH

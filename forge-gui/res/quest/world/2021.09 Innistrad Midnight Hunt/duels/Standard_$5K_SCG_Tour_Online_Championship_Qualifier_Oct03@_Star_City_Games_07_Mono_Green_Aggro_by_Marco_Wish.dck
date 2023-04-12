@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Marco Wish
+Title=Iroh
+Difficulty=very hard
+Description=Mono Green Aggro by Marco Wish
+Icon=Iroh.jpg
+Deck Type=constructed
+
+[main]
+2 Primal Adversary
+4 Sculptor of Winter
+4 Old-Growth Troll
+4 Werewolf Pack Leader
+4 Esika's Chariot
+2 Inscription of Abundance
+4 Blizzard Brawl
+4 Unnatural Growth
+4 Ranger Class
+4 Kazandu Mammoth
+4 Faceless Haven
+20 Snow-Covered Forest|IA
+
+[sideboard]
+2 Inscription of Abundance
+2 Wild Shape
+2 Froghemoth
+2 Wrenn and Seven
+3 Tangletrap
+4 Snakeskin Veil

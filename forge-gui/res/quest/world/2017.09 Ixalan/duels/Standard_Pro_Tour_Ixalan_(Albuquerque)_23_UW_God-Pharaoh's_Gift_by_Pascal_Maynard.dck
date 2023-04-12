@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=UW God-Pharaoh's Gift by Pascal Maynard
+Title=Dr Doom
+Difficulty=very hard
+Description=UW God-Pharaoh's Gift by Pascal Maynard
+Icon=Dr Doom.jpg
+Deck Type=constructed
+
+[main]
+4 Minister of Inquiries|KLD
+4 Sacred Cat|AKH
+4 Angel of Invention|KLD
+4 Champion of Wits|HOU
+4 Chart a Course|XLN
+4 Refurbish|KLD
+4 Strategic Planning|HOU
+2 Opt|XLN
+4 God-Pharaoh's Gift|HOU
+2 Cast Out|AKH
+2 Search for Azcanta|XLN
+4 Glacial Fortress|XLN
+3 Irrigated Farmland|AKH
+2 Ipnu Rivulet|HOU
+7 Island|XLN
+6 Plains|XLN
+
+[sideboard]
+4 Fairgrounds Warden|KLD
+3 Angel of Sanctions|AKH
+2 Negate|AER
+2 Jace's Defeat|HOU
+1 Fumigate|KLD
+1 Hostile Desert|HOU
+1 Skysovereign, Consul Flagship|KLD
+1 Authority of the Consuls|KLD

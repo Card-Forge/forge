@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Sam Rolph
+Title=Discord
+Difficulty=very hard
+Description=Jeskai Control by Sam Rolph
+Icon=Discord.jpg
+Deck Type=constructed
+
+[main]
+1 Smoldering Egg
+3 Lier, Disciple of the Drowned
+4 Goldspan Dragon
+1 Kazuul's Fury
+1 Prismari Command
+2 Sejiri Shelter
+2 Show of Confidence
+2 Galvanic Iteration
+3 Fading Hope
+3 Voltage Surge
+3 Unexpected Windfall
+4 Spikefield Hazard
+4 Jwari Disruption
+4 Big Score
+2 Strangle
+4 Expressive Iteration
+1 Sokenzan, Crucible of Defiance
+1 Hall of Storm Giants
+2 Otawara, Soaring City
+2 Island
+3 Mountain
+4 Riverglide Pathway
+4 Stormcarved Coast
+
+[sideboard]
+3 Smoldering Egg
+1 Cinderclasm
+1 Test of Talents
+2 Hullbreaker Horror
+2 Torch Breath
+3 Disdainful Stroke
+3 Fable of the Mirror-Breaker

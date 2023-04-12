@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Orzhov Control by Regis Farias
+Title=Darkseid
+Difficulty=very hard
+Description=Orzhov Control by Regis Farias
+Icon=Darkseid.jpg
+Deck Type=constructed
+
+[main]
+1 Legion Angel
+3 Concealing Curtains
+4 Luminarch Aspirant
+4 Silverquill Silencer
+4 The Restoration of Eiganjo
+1 Infernal Grasp
+2 Hagra Mauling
+2 Vanishing Verse
+2 Emeria's Call
+2 Humiliate
+3 Duress
+2 The Meathook Massacre
+4 Wedding Announcement
+2 The Wandering Emperor
+3 Lolth, Spider Queen
+1 Takenuma, Abandoned Mire
+1 Eiganjo, Seat of the Empire
+3 Swamp
+3 Hive of the Eye Tyrant
+4 Brightclimb Pathway
+4 Shattered Sanctum
+5 Plains
+
+[sideboard]
+3 Legion Angel
+1 Infernal Grasp
+1 Vanishing Verse
+1 Sorin the Mirthless
+2 Go Blank
+2 Dawnbringer Cleric
+2 Bloodchief's Thirst
+3 Farewell

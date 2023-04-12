@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Reid Duke
+Title=Hammerheim
+Difficulty=very hard
+Description=Rakdos Aggro by Reid Duke
+Icon=Hammerheim.jpg
+Deck Type=constructed
+
+[main]
+2 Aether Hub|KLD
+4 Dragonskull Summit|XLN
+4 Canyon Slough|AKH
+1 Swamp
+14 Mountain
+2 Heart of Kiran|AER
+2 Unlicensed Disintegration|KLD
+2 Abrade|HOU
+2 Cut // Ribbons|AKH
+2 Glorybringer|AKH
+2 Rekindling Phoenix
+2 Hazoret the Fervent|AKH
+2 Pia Nalaar|KLD
+4 Goblin Chainwhirler
+2 Kari Zev, Skyship Raider|AER
+4 Scrapheap Scrounger|KLD
+2 Soul-Scar Mage|AKH
+4 Bomat Courier|KLD
+3 Chandra, Torch of Defiance|KLD
+
+[sideboard]
+2 Karn, Scion of Urza
+1 Insult // Injury|AKH
+2 Doomfall|HOU
+4 Duress
+2 Magma Spray|AKH
+3 Chandra's Defeat|HOU
+1 Abrade|HOU

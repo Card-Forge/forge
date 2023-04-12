@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Omnath Ramp by Brad Nelson
+Title=Room-Red
+Difficulty=very hard
+Description=Omnath Ramp by Brad Nelson
+Icon=Room-Red.jpg
+Deck Type=constructed
+
+[main]
+1 Brazen Borrower
+2 Giant Killer
+3 Lotus Cobra
+4 Bonecrusher Giant
+4 Fae of Wishes
+4 Omnath, Locus of Creation
+4 Beanstalk Giant
+4 Edgewall Innkeeper
+4 Lucky Clover
+3 Escape to the Wilds
+1 Plains
+2 Ketria Triome
+2 Cragcrown Pathway
+2 Riverglide Pathway
+2 Raugrin Triome
+2 Mountain
+4 Island
+4 Fabled Passage
+4 Branchloft Pathway
+4 Forest
+
+[sideboard]
+1 Escape to the Wilds
+1 Redcap Melee
+1 Once and Future
+1 Chainweb Aracnir
+1 Ugin, the Spirit Dragon
+1 Elspeth Conquers Death
+1 Return to Nature
+1 Storm's Wrath
+1 Kazuul's Fury
+1 Neutralize
+1 Negate
+2 Embereth Shieldbreaker
+2 Mystical Dispute

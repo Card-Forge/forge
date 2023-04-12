@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Br Vampires by Aadil Qadir
+Title=King Arthur
+Difficulty=very hard
+Description=Br Vampires by Aadil Qadir
+Icon=King Arthur.jpg
+Deck Type=constructed
+
+[main]
+4 Bloodghast|ZEN
+4 Gatekeeper of Malakir|ZEN
+2 Hero of Oxid Ridge|MBS
+4 Kalastria Highborn|WWK
+4 Pulse Tracker|WWK
+2 Vampire Hexmage|ZEN
+4 Vampire Lacerator|ZEN
+2 Viscera Seer|M11
+1 Burst Lightning|ZEN
+1 Doom Blade|M11
+2 Go for the Throat|MBS
+4 Lightning Bolt|M11
+2 Arc Trail|SOM
+1 Dark Tutelage|M11
+6 Swamp|NPH
+4 Blackcleave Cliffs|SOM
+4 Dragonskull Summit|M11
+4 Lavaclaw Reaches|WWK
+3 Marsh Flats|ZEN
+2 Verdant Catacombs|ZEN
+
+[sideboard]
+1 Vampire Hexmage|ZEN
+1 Doom Blade|M11
+2 Arc Trail|SOM
+1 Dark Tutelage|M11
+3 Demon of Death's Gate|M11
+2 Manic Vandal|M11
+2 Skinrender|SOM
+3 Mark of Mutiny|ZEN

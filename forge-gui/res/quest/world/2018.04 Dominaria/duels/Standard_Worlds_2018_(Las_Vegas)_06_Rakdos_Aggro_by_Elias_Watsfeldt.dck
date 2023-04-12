@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Elias Watsfeldt
+Title=Repel the Dark
+Difficulty=very hard
+Description=Rakdos Aggro by Elias Watsfeldt
+Icon=Repel the Dark.jpg
+Deck Type=constructed
+
+[main]
+1 Chandra, Torch of Defiance|KLD
+1 Magma Spray|AKH
+2 The Flame of Keld
+2 Lightning Strike
+2 Abrade|HOU
+3 Shock
+2 Ahn-Crop Crasher|AKH
+4 Earthshaker Khenra|HOU
+4 Hazoret the Fervent|AKH
+4 Scrapheap Scrounger|KLD
+4 Soul-Scar Mage|AKH
+4 Bomat Courier|KLD
+4 Goblin Chainwhirler
+2 Aether Hub|KLD
+4 Dragonskull Summit|XLN
+17 Mountain
+
+[sideboard]
+2 Karn, Scion of Urza
+1 Swamp
+2 Duress
+1 Angrath, the Flame-Chained
+2 Chandra's Defeat|HOU
+2 Fight with Fire
+1 Glorybringer|AKH
+1 Siege-Gang Commander
+2 Chandra, Torch of Defiance|KLD
+1 Magma Spray|AKH

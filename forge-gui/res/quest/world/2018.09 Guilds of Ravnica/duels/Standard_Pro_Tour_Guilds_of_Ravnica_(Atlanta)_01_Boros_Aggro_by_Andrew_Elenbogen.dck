@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Andrew Elenbogen
+Title=Two Feathers
+Difficulty=very hard
+Description=Boros Aggro by Andrew Elenbogen
+Icon=Two Feathers.jpg
+Deck Type=constructed
+
+[main]
+2 Pride of Conquerors
+4 Legion's Landing|XLN
+4 History of Benalia
+4 Conclave Tribunal
+2 Healer's Hawk
+4 Benalish Marshal
+4 Venerated Loxodon
+4 Adanto Vanguard|XLN
+4 Skymarcher Aspirant
+4 Dauntless Bodyguard
+4 Snubhorn Sentry
+2 Clifftop Retreat
+4 Sacred Foundry
+14 Plains
+
+[sideboard]
+3 Ajani, Adversary of Tyrants
+2 Response // Resurgence
+3 Experimental Frenzy
+4 Tocatli Honor Guard|XLN
+1 Banefire
+2 Clifftop Retreat

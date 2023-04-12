@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Squirrel/Opposition by Patrick Chapin
+Title=Wally
+Difficulty=very hard
+Description=Squirrel/Opposition by Patrick Chapin
+Icon=Wally.jpg
+Deck Type=constructed
+
+[main]
+9 Forest|OD
+9 Island|OD
+4 Yavimaya Coast|AP
+2 Arrogant Wurm|TO
+3 Basking Rootwalla|TO
+4 Birds of Paradise|7E
+4 Merfolk Looter|7E
+4 Wild Mongrel|OD
+3 Circular Logic|TO
+2 Compulsion|TO
+4 Counterspell|7E
+4 Fact or Fiction|IN
+4 Opposition|7E
+4 Squirrel Nest|OD
+
+[sideboard]
+2 Bearscape|OD
+2 Call of the Herd|OD
+3 Gainsay|PS
+4 Jungle Barrier|AP
+2 Static Orb|7E
+2 Upheaval|OD

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Dimir Rogue  by Paulo Vitor Damo Da Rosa
+Title=Dragon Lord
+Difficulty=very hard
+Description=Dimir Rogue  by Paulo Vitor Damo Da Rosa
+Icon=Dragon Lord.jpg
+Deck Type=constructed
+
+[main]
+3 Zareth San, the Trickster
+3 Brazen Borrower
+4 Soaring Thought-Thief
+4 Thieves' Guild Enforcer
+1 Cling to Dust
+1 Silundi Vision
+2 Didn't Say Please
+2 Eliminate
+3 Into the Story
+3 Heartless Act
+4 Drown in the Loch
+2 Bloodchief's Thirst
+3 Agadeem's Awakening
+2 Shark Typhoon
+1 Castle Vantress
+4 Zagoth Triome
+4 Clearwater Pathway
+4 Swamp
+4 Temple of Deceit
+6 Island
+
+[sideboard]
+2 Cling to Dust
+1 Bloodchief's Thirst
+2 Shark Typhoon
+3 Mystical Dispute
+3 Lullmage's Domination
+4 Skyclave Shade

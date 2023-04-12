@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Rakdos Control by Max Dore
+Title=Houngan
+Difficulty=very hard
+Description=Rakdos Control by Max Dore
+Icon=Houngan.jpg
+Deck Type=constructed
+
+[main]
+1 Duress
+2 Abrade
+3 Go for the Throat
+3 Reckoner Bankbuster
+3 Cut Down
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+2 Bloodthirsty Adversary
+2 Archfiend of the Dross
+3 Sheoldred, the Apocalypse
+4 Graveyard Trespasser
+4 Bloodtithe Harvester
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+3 Mountain
+4 Blackcleave Cliffs
+4 Haunted Ridge
+4 Sulfurous Springs
+8 Swamp
+
+[sideboard]
+1 Infernal Grasp
+1 Gix's Command
+2 Jaya, Fiery Negotiator
+2 Vampires' Vengeance
+1 Soul Transfer
+3 Razorlash Transmogrant
+1 Pilfer
+3 Duress
+1 Cut Down

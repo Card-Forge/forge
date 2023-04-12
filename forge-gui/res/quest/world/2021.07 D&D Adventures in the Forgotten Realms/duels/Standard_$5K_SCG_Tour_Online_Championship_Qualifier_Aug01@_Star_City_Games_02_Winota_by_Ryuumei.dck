@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Winota by Ryuumei
+Title=Nailah
+Difficulty=very hard
+Description=Winota by Ryuumei
+Icon=Nailah.jpg
+Deck Type=constructed
+
+[main]
+1 Magda, Brazen Outlaw
+1 Tangled Florahedron
+2 Minsc, Beloved Ranger
+2 Lotus Cobra
+2 Blade Historian
+2 Kenrith, the Returned King
+3 Jaspera Sentinel
+4 Prosperous Innkeeper
+4 Winota, Joiner of Forces
+4 Elite Spellbinder
+4 Selfless Savior
+4 Esika's Chariot
+1 Shatterskull Smashing
+2 Ranger Class
+1 Forest
+2 Mountain
+2 Plains
+3 Lair of the Hydra
+4 Fabled Passage
+4 Branchloft Pathway
+4 Cragcrown Pathway
+4 Needleverge Pathway
+
+[sideboard]
+1 Ranger Class
+1 The Akroan War
+2 Klothys, God of Destiny
+2 Bonecrusher Giant
+3 Ox of Agonas
+3 Burning Hands
+3 Redcap Melee

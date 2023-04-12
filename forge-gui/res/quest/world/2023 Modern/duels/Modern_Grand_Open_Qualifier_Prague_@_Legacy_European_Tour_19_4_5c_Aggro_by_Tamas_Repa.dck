@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=4 5c Aggro by Tamas Repa
+Title=Aspect of Chaos
+Difficulty=very hard
+Description=4 5c Aggro by Tamas Repa
+Icon=Aspect of Chaos.jpg
+Deck Type=constructed
+
+[main]
+4 Wild Nacatl|ALA
+4 Ragavan, Nimble Pilferer
+4 Territorial Kavu
+4 Scion of Draco
+3 Nishoba Brawler
+2 Tarmogoyf|FUT
+1 Migloz, Maze Crusher
+4 Lightning Bolt|M11
+4 Stubborn Denial|KTK
+1 Dromoka's Command|DTK
+4 Tribal Flames|TSP
+4 Leyline Binding
+4 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+4 Flooded Strand|KTK
+1 Zagoth Triome
+1 Forest
+1 Plains
+1 Overgrown Tomb
+1 Temple Garden
+1 Sacred Foundry
+1 Steam Vents
+1 Breeding Pool
+1 Savai Triome
+
+[sideboard]
+1 Jegantha, the Wellspring
+2 Rest in Peace|RTR
+2 Flusterstorm
+2 Hidetsugu Consumes All
+2 Hushbringer
+2 Wear // Tear|DGM
+2 Teferi, Time Raveler
+2 Veil of Summer

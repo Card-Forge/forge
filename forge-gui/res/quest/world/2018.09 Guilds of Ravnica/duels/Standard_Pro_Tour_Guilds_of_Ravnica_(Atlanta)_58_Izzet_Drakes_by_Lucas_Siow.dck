@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Izzet Drakes by Lucas Siow
+Title=Sideshow Bob
+Difficulty=very hard
+Description=Izzet Drakes by Lucas Siow
+Icon=Sideshow Bob.jpg
+Deck Type=constructed
+
+[main]
+3 Goblin Electromancer
+4 Arclight Phoenix
+3 Crackling Drake
+3 Enigma Drake
+2 Tormenting Voice
+1 Banefire
+3 Lava Coil
+4 Chart a Course|XLN
+1 Dive Down|XLN
+4 Opt
+3 Shock
+3 Radical Idea
+1 Spell Pierce|XLN
+3 Discovery // Dispersal
+1 Fiery Cannonade|XLN
+4 Steam Vents
+4 Sulfur Falls
+7 Island
+6 Mountain
+
+[sideboard]
+2 Fiery Cannonade|XLN
+1 Negate
+2 Entrancing Melody|XLN
+2 Disdainful Stroke
+2 Star of Extinction|XLN
+2 Search for Azcanta|XLN
+2 Niv-Mizzet, Parun
+1 Beacon Bolt
+1 Ral, Izzet Viceroy

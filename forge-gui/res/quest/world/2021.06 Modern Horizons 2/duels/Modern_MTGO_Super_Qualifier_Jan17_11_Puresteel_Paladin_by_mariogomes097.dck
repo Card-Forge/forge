@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by mariogomes097
+Title=The Great Wood
+Difficulty=very hard
+Description=Puresteel Paladin by mariogomes097
+Icon=The Great Wood.jpg
+Deck Type=constructed
+
+[main]
+3 Burrenton Forge-Tender|LRW
+4 Esper Sentinel
+3 Giver of Runes
+4 Ornithopter|AER
+4 Puresteel Paladin|NPH
+4 Stoneforge Mystic|WWK
+1 Steelshaper's Gift|FD
+4 Colossus Hammer
+1 Kaldra Compleat
+1 Nettlecyst
+1 Shadowspear
+3 Springleaf Drum|BNG
+1 Sword of Fire and Ice|DS
+4 Sigarda's Aid|EMN
+2 Flooded Strand|KTK
+1 Hallowed Fountain
+3 Inkmoth Nexus|MBS
+4 Seachrome Coast|SOM
+4 Snow-Covered Plains
+4 Urza's Saga
+4 Windswept Heath|KTK
+
+[sideboard]
+2 Blacksmith's Skill
+2 Cathar Commando
+3 Mana Leak|M12
+1 Manriki-Gusari|SOK
+3 Meddling Mage|ARB
+1 Pithing Needle
+3 Sanctifier en-Vec

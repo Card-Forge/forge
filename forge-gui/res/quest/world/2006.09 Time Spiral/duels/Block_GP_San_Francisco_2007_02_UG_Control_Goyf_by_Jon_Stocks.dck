@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=UG Control Goyf by Jon Stocks
+Title=Prince Bolbuss
+Difficulty=very hard
+Description=UG Control Goyf by Jon Stocks
+Icon=Prince Bolbuss.jpg
+Deck Type=constructed
+
+[main]
+2 Serrated Arrows|TSP
+4 Ancestral Vision|TSP
+4 Cancel
+2 Venser, Shaper Savant|FUT
+2 Aeon Chronicler|C16
+3 Wall of Roots|TSP
+3 Fathom Seer|C14
+4 Riftwing Cloudskate|TSP
+4 Tarmogoyf|FUT
+4 Mystic Snake|C15
+4 Vesuvan Shapeshifter|TSP
+1 Horizon Canopy|FUT
+1 Urza's Factory|C13
+2 Forest|RTR
+4 Terramorphic Expanse|C16
+4 Llanowar Reborn|C15
+12 Island|RTR
+
+[sideboard]
+4 Riftsweeper|FUT
+1 Draining Whelk|TSP
+3 Thornweald Archer|C14
+3 Seal of Primordium|PLC
+2 Spell Burst|TSP
+2 Serrated Arrows|TSP

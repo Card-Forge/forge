@@ -1,0 +1,57 @@
+[quest]
+id=20230105
+OpponentName=Wojciech
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Chord Toolbox
+Title=Sir Shandlar of Eberyn
+Difficulty=very hard
+Description=Chord Toolbox by Wojciech Kowalczuk
+Icon=Sir Shandlar of Eberyn.jpg
+Deck Type=constructed
+
+[main]
+4 Wall of Roots|TSP
+4 Young Wolf|DKA
+4 Strangleroot Geist|DKA
+1 Hapatra, Vizier of Poisons|AKH
+4 Ignoble Hierarch
+2 Endurance
+1 Prosperous Innkeeper
+3 Birds of Paradise|M12
+4 Yawgmoth, Thran Physician
+1 Blood Artist|AVR
+4 Chord of Calling|M15
+3 Eldritch Evolution|EMN
+4 Grist, the Hunger Tide
+3 Forest
+1 Swamp
+2 Overgrown Tomb
+1 Dryad Arbor|FUT
+2 Twilight Mire|EVE
+2 Blooming Marsh|KLD
+2 Nurturing Peatland
+1 Misty Rainforest|ZEN
+4 Verdant Catacombs|ZEN
+2 Boseiju, Who Endures
+1 Wooded Foothills|KTK
+
+[sideboard]
+2 Endurance
+3 Thoughtseize|THS
+1 Fatal Push|AER
+1 Go for the Throat
+3 Force of Vigor
+1 Haywire Mite
+1 Veil of Summer
+1 The Filigree Sylex
+1 Sheoldred, the Apocalypse
+1 Murderous Cut|KTK

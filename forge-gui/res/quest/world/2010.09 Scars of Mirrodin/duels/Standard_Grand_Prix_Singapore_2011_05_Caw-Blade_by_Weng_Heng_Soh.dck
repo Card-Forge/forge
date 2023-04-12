@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Weng Heng Soh
+Title=The Pied Piper
+Difficulty=very hard
+Description=Caw-Blade by Weng Heng Soh
+Icon=The Pied Piper.jpg
+Deck Type=constructed
+
+[main]
+4 Mirran Crusader|MBS
+4 Squadron Hawk|M11
+4 Stoneforge Mystic|WWK
+2 Dismember|NPH
+3 Mana Leak|M11
+3 Spell Pierce|ZEN
+1 Day of Judgment|M11
+4 Preordain|M11
+1 Batterskull|NPH
+1 Sword of Feast and Famine|MBS
+1 Sword of War and Peace|NPH
+1 Arid Mesa|ZEN
+4 Celestial Colonnade|WWK
+4 Glacial Fortress|M11
+2 Inkmoth Nexus|MBS
+4 Island|NPH
+2 Plains|NPH
+1 Scalding Tarn|ZEN
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+2 Gideon Jura|ROE
+4 Jace, the Mind Sculptor|WWK
+
+[sideboard]
+2 Day of Judgment|M11
+1 Batterskull|NPH
+1 Phyrexian Metamorph|NPH
+2 Spellskite|NPH
+1 Sun Titan|M11
+2 Condemn|M11
+3 Divine Offering|MBS
+2 Flashfreeze|M11
+1 Jace Beleren|M11

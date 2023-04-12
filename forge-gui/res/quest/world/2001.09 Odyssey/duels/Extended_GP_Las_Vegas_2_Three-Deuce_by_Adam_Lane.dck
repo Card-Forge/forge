@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Three-Deuce by Adam Lane
+Title=Lacjs
+Difficulty=very hard
+Description=Three-Deuce by Adam Lane
+Icon=Lacjs.jpg
+Deck Type=constructed
+
+[main]
+4 Rancor|UL
+4 Land Grant|MM
+3 Cursed Scroll|TE
+4 Call of the Herd|OD
+2 Skyshroud Elite|EX
+4 River Boa|VI
+4 Mogg Fanatic|TE
+4 Granger Guildmage|MI
+2 Druid Lyrist|OD
+4 Wasteland|TE
+3 Treetop Village|UL
+4 Taiga|A
+4 Savannah|A
+4 Plateau|A
+4 Seal of Cleansing|NE
+4 Swords to Plowshares|A
+2 Wax // Wane|IN
+
+[sideboard]
+2 Wax // Wane|IN
+4 Phyrexian Furnace|WL
+4 Pyroblast|IA
+4 Sanctimony|UD
+1 Spike Feeder|SH

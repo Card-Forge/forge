@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Esper DOOM Yorion  by Jean-emmanuel Depraz
+Title=M Bison
+Difficulty=very hard
+Description=Esper DOOM Yorion  by Jean-emmanuel Depraz
+Icon=M Bison.jpg
+Deck Type=constructed
+
+[main]
+2 Yorion, Sky Nomad
+4 Skyclave Apparition
+3 Golden Egg
+3 Glass Casket
+1 Eliminate
+2 Heartless Act
+3 Negate
+1 Bloodchief's Thirst
+2 Dance of the Manse
+2 Extinction Event
+2 Emeria's Call
+2 Shatter the Sky
+2 The Birth of Meletis
+2 Treacherous Blessing
+2 Omen of the Sun
+3 Elspeth's Nightmare
+4 Doom Foretold
+4 Elspeth Conquers Death
+4 Omen of the Sea
+2 Swamp
+3 Temple of Silence
+3 Temple of Deceit
+4 Plains
+4 Island
+4 Temple of Enlightenment
+4 Fabled Passage
+4 Clearwater Pathway
+4 Brightclimb Pathway
+
+[sideboard]
+1 Yorion, Sky Nomad
+1 Negate
+1 Extinction Event
+1 Heliod's Intervention
+2 Essence Scatter
+2 Skyclave Shade
+3 Mystical Dispute
+4 Shark Typhoon

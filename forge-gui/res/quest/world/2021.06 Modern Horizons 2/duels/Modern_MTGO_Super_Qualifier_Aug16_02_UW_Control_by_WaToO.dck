@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=UW Control by WaToO
+Title=Dungeon Crawling Gold
+Difficulty=very hard
+Description=UW Control by WaToO
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+
+[main]
+1 Solitude
+1 Snapcaster Mage|ISD
+4 Teferi, Time Raveler
+2 Teferi, Hero of Dominaria
+4 Prismatic Ending
+3 Supreme Verdict|RTR
+4 Archmage's Charm
+4 Counterspell|7E
+2 Cryptic Command|LRW
+2 Fact or Fiction|IN
+2 Chalice of the Void|MR
+4 Shark Typhoon
+2 Spreading Seas|ZEN
+1 Castle Ardenvale
+3 Castle Vantress
+1 Celestial Colonnade|WWK
+4 Flooded Strand|KTK
+2 Glacial Fortress|XLN
+2 Hallowed Fountain
+4 Island
+2 Misty Rainforest|ZEN
+2 Mystic Gate|SHM
+1 Plains
+1 Polluted Delta|KTK
+1 Raugrin Triome
+1 Scalding Tarn|ZEN
+
+[sideboard]
+1 Celestial Purge|M12
+3 Dovin's Veto
+2 Engineered Explosives|FD
+3 Flusterstorm
+1 Fracturing Gust|SHM
+2 Sanctifier en-Vec
+2 Summary Dismissal|EMN
+1 Tempted by the Oriq

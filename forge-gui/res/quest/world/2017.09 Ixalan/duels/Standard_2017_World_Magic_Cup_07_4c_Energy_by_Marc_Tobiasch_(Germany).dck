@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=4c Energy by Marc Tobiasch (Germany)
+Title=The Wilds
+Difficulty=very hard
+Description=4c Energy by Marc Tobiasch (Germany)
+Icon=The Wilds.jpg
+Deck Type=constructed
+
+[main]
+2 Glimmer of Genius|KLD
+2 Supreme Will|HOU
+3 Harnessed Lightning|KLD
+3 Vraska's Contempt|XLN
+3 Essence Scatter|AKH
+4 Fatal Push|AER
+4 Attune with Aether|KLD
+1 Gonti, Lord of Luxury|KLD
+2 The Scarab God|HOU
+3 Whirler Virtuoso|KLD
+3 Torrential Gearhulk|KLD
+4 Glint-Sleeve Siphoner|AER
+4 Rogue Refiner|AER
+1 Swamp|XLN
+1 Drowned Catacomb|XLN
+1 Mountain|XLN
+1 Forest|XLN
+2 Dragonskull Summit|XLN
+2 Island|XLN
+2 Fetid Pools|AKH
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+4 Blooming Marsh|KLD
+
+[sideboard]
+4 Negate|AER
+3 Deathgorge Scavenger|XLN
+2 Chandra's Defeat|HOU
+2 Appetite for the Unnatural|KLD
+1 Vraska, Relic Seeker|XLN
+1 Supreme Will|HOU
+1 Harnessed Lightning|KLD
+1 Gonti, Lord of Luxury|KLD

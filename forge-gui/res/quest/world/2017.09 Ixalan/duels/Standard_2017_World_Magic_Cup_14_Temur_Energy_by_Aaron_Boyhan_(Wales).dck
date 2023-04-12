@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Temur Energy by Aaron Boyhan (Wales)
+Title=Bontu the Glorified
+Difficulty=very hard
+Description=Temur Energy by Aaron Boyhan (Wales)
+Icon=Bontu the Glorified.jpg
+Deck Type=constructed
+
+[main]
+4 Forest|XLN
+2 Island|XLN
+1 Mountain|XLN
+4 Botanical Sanctum|KLD
+4 Aether Hub|KLD
+3 Rootbound Crag|XLN
+3 Spirebluff Canal|KLD
+1 Sheltered Thicket|AKH
+1 Aethersphere Harvester|AER
+2 Skysovereign, Consul Flagship|KLD
+1 Blossoming Defense|KLD
+4 Harnessed Lightning|KLD
+2 Revolutionary Rebuff|KLD
+2 Magma Spray|AKH
+2 Confiscation Coup|KLD
+4 Attune with Aether|KLD
+4 Bristling Hydra|KLD
+4 Rogue Refiner|AER
+4 Whirler Virtuoso|KLD
+4 Servant of the Conduit|KLD
+4 Longtusk Cub|KLD
+
+[sideboard]
+1 Nissa, Steward of Elements|AKH
+1 River's Rebuke|XLN
+2 Appetite for the Unnatural|KLD
+2 Vizier of Many Faces|AKH
+4 Negate|AER
+2 Aethersphere Harvester|AER
+2 Magma Spray|AKH
+1 Confiscation Coup|KLD

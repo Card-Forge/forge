@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by Will Krueger
+Title=James T Kirk
+Difficulty=very hard
+Description=Puresteel Paladin by Will Krueger
+Icon=James T Kirk.jpg
+Deck Type=constructed
+
+[main]
+1 Gingerbrute
+2 Kor Outfitter|ZEN
+4 Memnite|SOM
+4 Ornithopter|AER
+4 Puresteel Paladin|NPH
+4 Stoneforge Mystic|WWK
+4 Esper Sentinel
+1 Shadowspear
+1 Cranial Plating|FD
+4 Colossus Hammer
+4 Springleaf Drum|BNG
+4 Urza's Saga
+4 Sigarda's Aid|EMN
+1 Horizon Canopy|FUT
+1 Godless Shrine
+2 Windswept Heath|KTK
+2 Concealed Courtyard|KLD
+2 Flooded Strand|KTK
+3 Inkmoth Nexus|MBS
+4 Plains
+4 Silent Clearing
+
+[sideboard]
+1 Pithing Needle
+1 Lurrus of the Dream-Den
+1 Nihil Spellbomb|SOM
+2 Hushbringer
+2 Prismatic Ending
+2 Sanctifier en-Vec
+2 Seal of Cleansing|NE
+4 Thoughtseize|THS

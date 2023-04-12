@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Yuchen Liu (China)
+Title=Ri
+Difficulty=very hard
+Description=Red Deck Wins by Yuchen Liu (China)
+Icon=Ri.jpg
+Deck Type=constructed
+
+[main]
+1 Scavenger Grounds|HOU
+4 Sunscorched Desert|AKH
+4 Ramunap Ruins|HOU
+15 Mountain|XLN
+4 Shock|AER
+4 Lightning Strike|XLN
+2 Abrade|HOU
+2 Ahn-Crop Crasher|AKH
+4 Rampaging Ferocidon|XLN
+4 Soul-Scar Mage|AKH
+3 Kari Zev, Skyship Raider|AER
+4 Hazoret the Fervent|AKH
+4 Earthshaker Khenra|HOU
+4 Bomat Courier|KLD
+1 Chandra, Torch of Defiance|KLD
+
+[sideboard]
+2 Aethersphere Harvester|AER
+2 Harsh Mentor|AKH
+2 Chandra's Defeat|HOU
+3 Pia Nalaar|KLD
+2 Glorybringer|AKH
+1 Scavenger Grounds|HOU
+1 Abrade|HOU
+2 Chandra, Torch of Defiance|KLD

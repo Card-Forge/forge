@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Benjamin Stark
+Title=Caprio
+Difficulty=very hard
+Description=Red Deck Wins by Benjamin Stark
+Icon=Caprio.jpg
+Deck Type=constructed
+
+[main]
+2 Shock
+2 Magma Spray|AKH
+3 Wizard's Lightning
+4 Lightning Strike
+2 Earthshaker Khenra|HOU
+2 Kari Zev, Skyship Raider|AER
+3 Rigging Runner|XLN
+4 Ghitu Lavarunner
+4 Hazoret the Fervent|AKH
+4 Soul-Scar Mage|AKH
+4 Bomat Courier|KLD
+4 Goblin Chainwhirler
+22 Mountain
+
+[sideboard]
+2 Ahn-Crop Crasher|AKH
+4 Chandra's Defeat|HOU
+2 Abrade|HOU
+2 Cut // Ribbons|AKH
+3 Banefire
+2 Vance's Blasting Cannons|XLN

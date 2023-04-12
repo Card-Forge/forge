@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Weenie White by Timo Uusitalo
+Title=Jubilee
+Difficulty=very hard
+Description=Weenie White by Timo Uusitalo
+Icon=Jubilee.jpg
+Deck Type=constructed
+
+[main]
+1 Legion Angel
+1 Adeline, Resplendent Cathar
+2 Skyclave Apparition
+2 Intrepid Adversary
+2 Reidane, God of the Worthy
+2 Codespell Cleric
+3 Thalia, Guardian of Thraben
+4 Usher of the Fallen
+4 Luminarch Aspirant
+4 Elite Spellbinder
+4 Brutal Cathar
+4 Hopeful Initiate
+2 Portable Hole
+1 Kabira Takedown
+2 Cave of the Frost Dragon
+3 Faceless Haven
+19 Snow-Covered Plains
+
+[sideboard]
+3 Legion Angel
+2 Skyclave Apparition
+1 Semester's End
+1 Wedding Announcement
+1 Circle of Confinement
+2 Cathar Commando
+2 Valorous Stance
+3 Guardian of Faith

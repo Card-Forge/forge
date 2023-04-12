@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Christoffer Larsen
+Title=Pride & Prejudice
+Difficulty=very hard
+Description=Rakdos Aggro by Christoffer Larsen
+Icon=Pride & Prejudice.jpg
+Deck Type=constructed
+
+[main]
+1 Ox of Agonas
+3 Rankle, Master of Pranks
+3 Murderous Rider
+4 Bonecrusher Giant
+4 Magmatic Channeler
+4 Mire Triton
+4 Kroxa, Titan of Death's Hunger
+1 Shredded Sails
+2 Hagra Mauling
+3 Heartless Act
+4 Spikefield Hazard
+1 Agadeem's Awakening
+2 Shatterskull Smashing
+4 Tymaret Calls the Dead
+2 Castle Locthwain
+4 Temple of Malice
+4 Fabled Passage
+5 Mountain
+5 Swamp
+
+[sideboard]
+1 Shredded Sails
+1 Agonizing Remorse
+2 Duress
+2 Cling to Dust
+2 Embereth Shieldbreaker
+3 Skyclave Shade
+4 Nighthawk Scavenger

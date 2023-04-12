@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Gruul Adventure Aggro by Gabriel Nassif
+Title=The Serpents
+Difficulty=very hard
+Description=Gruul Adventure Aggro by Gabriel Nassif
+Icon=The Serpents.jpg
+Deck Type=constructed
+
+[main]
+3 Goldspan Dragon
+4 Lovestruck Beast
+4 Bonecrusher Giant
+4 Magda, Brazen Outlaw
+4 Edgewall Innkeeper
+4 Jaspera Sentinel
+4 Rimrock Knight
+1 The Great Henge
+3 Embercleave
+4 Esika's Chariot
+1 Song-Mad Treachery
+4 Shatterskull Smashing
+1 Hall of Oracles
+4 Cragcrown Pathway
+5 Mountain
+10 Forest
+
+[sideboard]
+1 Redcap Melee
+1 Klothys, God of Destiny
+1 Roiling Vortex
+1 Blazing Volley
+2 Elder Gargaroth
+2 Masked Vandal
+2 The Akroan War
+2 Purphoros's Intervention
+3 Ox of Agonas

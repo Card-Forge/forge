@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Mid Range Red/MRA by Pedro Motta 9-0
+Title=Fin Fang Foom
+Difficulty=very hard
+Description=Mid Range Red/MRA by Pedro Motta 9-0
+Icon=Fin Fang Foom.jpg
+Deck Type=constructed
+
+[main]
+4 Fiery Temper|SOI
+4 Tarox Bladewing|FUT
+4 Gathan Raiders|FUT
+4 Dead // Gone|PLC
+4 Mogg War Marshal|TSP
+4 Keldon Marauders|PLC
+4 Greater Gargadon|TSP
+17 Mountain|RTR
+1 Pendelhaven|TSP
+2 Keldon Megaliths|FUT
+2 Zoetic Cavern|C15
+3 Fungal Reaches|CMD
+3 Disintegrate|TSP
+4 Rift Bolt|TSP
+
+[sideboard]
+2 Vesuva|TSP
+2 Ancient Grudge|ISD
+2 Akroma, Angel of Fury|CMD
+3 Magus of the Moon|FUT
+3 Jaya Ballard, Task Mage|TSP
+3 Molten Disaster|C13

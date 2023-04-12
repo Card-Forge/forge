@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Hara Kouki
+Title=Ratbert
+Difficulty=very hard
+Description=Rakdos Aggro by Hara Kouki
+Icon=Ratbert.jpg
+Deck Type=constructed
+
+[main]
+2 Dauthi Voidwalker
+3 Tourach, Dread Cantor
+3 Kroxa, Titan of Death's Hunger
+4 Dragon's Rage Channeler
+4 Ragavan, Nimble Pilferer
+4 Mishra's Bauble|CS
+2 Lightning Bolt|M11
+2 Terminate|ARB
+3 Kolaghan's Command|DTK
+4 Unholy Heat
+3 Thoughtseize|THS
+4 Inquisition of Kozilek|ROE
+1 Mountain
+1 Den of the Bugbear
+2 Polluted Delta|KTK
+2 Verdant Catacombs|ZEN
+3 Blackcleave Cliffs|SOM
+3 Blood Crypt
+3 Swamp
+3 Graven Cairns|SHM
+4 Bloodstained Mire|KTK
+
+[sideboard]
+2 Dauthi Voidwalker
+1 Dragon's Claw|M12
+1 Fatal Push|AER
+1 Pyrite Spellbomb|MR
+1 Nihil Spellbomb|SOM
+1 Lurrus of the Dream-Den
+1 Chalice of the Void|MR
+2 Torpor Orb|NPH
+2 Engineered Explosives|FD
+3 Blood Moon|9E

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Devotion to Gruul by Chris Andersen
+Title=The Serpents
+Difficulty=very hard
+Description=Devotion to Gruul by Chris Andersen
+Icon=The Serpents.jpg
+Deck Type=constructed
+
+[main]
+10 Forest|DTK
+1 Mountain|DTK
+1 Ugin, the Spirit Dragon|FRF
+2 Xenagos, the Reveler|THS
+2 Arbor Colossus|THS
+2 Genesis Hydra|M15
+3 Dragonlord Atarka|DTK
+3 Polukranos, World Eater|THS
+3 Rattleclaw Mystic|KTK
+4 Elvish Mystic|M15
+4 Sylvan Caryatid|THS
+4 Deathmist Raptor|DTK
+4 Courser of Kruphix|BNG
+4 Whisperwood Elemental|FRF
+1 Rugged Highlands|FRF
+4 Wooded Foothills|KTK
+4 Nykthos, Shrine to Nyx|THS
+4 Temple of Abandon|THS
+
+[sideboard]
+2 Hornet Nest|M15
+1 Reclamation Sage|M15
+1 Windstorm|KTK
+2 Nissa, Worldwaker|M15
+2 Plummet|M15
+2 Nylea's Disciple|THS
+1 Outpost Siege|FRF
+1 Ugin, the Spirit Dragon|FRF
+1 Genesis Hydra|M15
+2 Arc Lightning|KTK

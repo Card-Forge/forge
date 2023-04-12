@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Mono White Control by Gaston Comtesse
+Title=Boromir
+Difficulty=very hard
+Description=Mono White Control by Gaston Comtesse
+Icon=Boromir.jpg
+Deck Type=constructed
+
+[main]
+1 Farewell
+1 Depopulate
+1 The Eternal Wanderer
+1 Elspeth Resplendent
+1 The Restoration of Eiganjo
+4 The Wandering Emperor
+4 Ossification
+4 Wedding Announcement
+4 Lay Down Arms
+4 Reckoner Bankbuster
+1 Spirited Companion
+2 Steel Seraph
+3 Ambitious Farmhand
+3 Loran of the Third Path
+3 Serra Paragon
+1 Eiganjo, Seat of the Empire
+1 Mirrex
+2 Demolition Field
+2 Field of Ruin
+3 Roadside Reliquary
+14 Plains
+
+[sideboard]
+2 The Stone Brain
+2 Destroy Evil
+2 Fateful Absence
+2 Knockout Blow
+2 Urza's Sylex
+2 Sanctuary Warden
+1 Farewell
+1 Depopulate
+1 Elspeth Resplendent

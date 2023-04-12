@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Izzet Control by Seth Manfield
+Title=Captain America
+Difficulty=very hard
+Description=Izzet Control by Seth Manfield
+Icon=Captain America.jpg
+Deck Type=constructed
+
+[main]
+1 Magma Opus
+2 Mazemind Tome
+3 Saw It Coming
+3 Mystical Dispute
+3 Alrund's Epiphany
+4 Frost Bite
+4 Expressive Iteration
+3 Galazeth Prismari
+4 Brazen Borrower
+4 Goldspan Dragon
+4 Bonecrusher Giant
+3 Faceless Haven
+4 Volatile Fjord
+4 Riverglide Pathway
+4 Snow-Covered Mountain
+4 Fabled Passage
+6 Snow-Covered Island
+
+[sideboard]
+1 Negate
+1 Soul Sear
+1 Shark Typhoon
+2 Redcap Melee
+2 Ox of Agonas
+2 The Akroan War
+2 Cinderclasm
+2 Disdainful Stroke
+2 Fire Prophecy

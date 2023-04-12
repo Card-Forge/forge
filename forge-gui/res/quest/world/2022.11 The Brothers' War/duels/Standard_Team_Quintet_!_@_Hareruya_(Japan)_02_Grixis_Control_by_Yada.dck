@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Grixis Control by Yada
+Title=Treebeard
+Difficulty=very hard
+Description=Grixis Control by Yada
+Icon=Treebeard.jpg
+Deck Type=constructed
+
+[main]
+3 Sheoldred, the Apocalypse
+4 Fable of the Mirror-Breaker
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+3 Reckoner Bankbuster
+2 Make Disappear
+2 Negate
+3 Go for the Throat
+4 Abrade
+4 Invoke Despair
+1 Takenuma, Abandoned Mire
+2 Stormcarved Coast
+3 Shivan Reef
+4 Xander's Lounge
+4 Shipwreck Marsh
+4 Haunted Ridge
+4 Sulfurous Springs
+5 Swamp
+
+[sideboard]
+1 Reckoner Bankbuster
+1 Negate
+1 Bladecoil Serpent
+1 Kaito Shizuki
+1 Disdainful Stroke
+2 Brotherhood's End
+2 Razorlash Transmogrant
+2 Cut Down
+2 Siphon Insight
+2 Duress

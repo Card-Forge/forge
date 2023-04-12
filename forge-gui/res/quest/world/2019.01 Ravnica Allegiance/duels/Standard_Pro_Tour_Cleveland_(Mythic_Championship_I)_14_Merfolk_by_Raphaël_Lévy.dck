@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Merfolk by Raphaël Lévy
+Title=Room-Blu
+Difficulty=very hard
+Description=Merfolk by Raphaël Lévy
+Icon=Room-Blu.jpg
+Deck Type=constructed
+
+[main]
+4 Incubation // Incongruity
+4 Breeding Pool
+4 Hinterland Harbor
+4 Unclaimed Territory|XLN
+5 Island
+5 Forest
+4 Deeproot Waters|XLN
+4 Deeproot Elite
+4 Silvergill Adept
+4 Kumena, Tyrant of Orazca
+4 Merfolk Mistbinder
+4 Kumena's Speaker|XLN
+4 Jade Bearer
+2 Merfolk Trickster
+4 Benthic Biomancer
+
+[sideboard]
+1 Crushing Canopy
+1 Spell Pierce|XLN
+4 Negate
+4 Kraul Harpooner
+2 Disdainful Stroke
+2 Tempest Caller|XLN
+1 Merfolk Trickster

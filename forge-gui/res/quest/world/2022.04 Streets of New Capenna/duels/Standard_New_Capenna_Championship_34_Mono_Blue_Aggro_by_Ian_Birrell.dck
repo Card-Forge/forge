@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Blue Aggro by Ian Birrell
+Title=IdiAmin
+Difficulty=very hard
+Description=Mono Blue Aggro by Ian Birrell
+Icon=IdiAmin.jpg
+Deck Type=constructed
+
+[main]
+4 Delver of Secrets
+4 Dreamshackle Geist
+4 Spectral Adversary
+4 Ascendant Spirit
+2 Geistlight Snare
+3 Thirst for Discovery
+3 Spell Pierce
+4 Essence Capture
+4 Jwari Disruption
+4 Slip Out the Back
+4 Fading Hope
+1 Otawara, Soaring City
+19 Snow-Covered Island
+
+[sideboard]
+1 Thirst for Discovery
+1 Unlicensed Hearse
+1 Pithing Needle
+1 Disdainful Stroke
+1 Negate
+2 Out of the Way
+2 Test of Talents
+3 Malevolent Hermit
+3 Tempted by the Oriq

@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Rodrigo Soto
+Title=Lat-Nam
+Difficulty=very hard
+Description=Abzan Midrange by Rodrigo Soto
+Icon=Lat-Nam.jpg
+Deck Type=constructed
+
+[main]
+4 Sandsteppe Citadel|KTK
+3 Temple of Malady|JOU
+3 Llanowar Wastes|M15
+1 Temple of Silence|THS
+4 Caves of Koilos|M15
+1 Urborg, Tomb of Yawgmoth|M15
+1 Swamp|KTK
+1 Plains|KTK
+2 Forest|KTK
+4 Windswept Heath|KTK
+2 Bile Blight|BNG
+4 Abzan Charm|KTK
+4 Hero's Downfall|THS
+3 Thoughtseize|THS
+2 Heir of the Wilds|KTK
+3 Rakshasa Deathdealer|KTK
+3 Anafenza, the Foremost|KTK
+4 Siege Rhino|KTK
+3 Courser of Kruphix|BNG
+4 Fleecemane Lion|THS
+1 Ajani, Mentor of Heroes|JOU
+3 Sorin, Solemn Visitor|KTK
+
+[sideboard]
+1 Wingmate Roc|KTK
+1 Empty the Pits|KTK
+1 Setessan Tactics|JOU
+1 Silence the Believers|JOU
+1 Murderous Cut|KTK
+1 Liliana Vess|M15
+2 Despise|KTK
+1 Bow of Nylea|THS
+1 Utter End|KTK
+2 Drown in Sorrow|BNG
+1 End Hostilities|KTK
+2 Erase|KTK

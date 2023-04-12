@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Kaname Yanase
+Title=Dark Souls
+Difficulty=very hard
+Description=Mono Green Aggro by Kaname Yanase
+Icon=Dark Souls.jpg
+Deck Type=constructed
+
+[main]
+2 Questing Beast
+4 Swarm Shambler
+4 Gemrazer
+4 Kazandu Mammoth
+4 Lovestruck Beast
+4 Werewolf Pack Leader
+4 Stonecoil Serpent
+2 Snakeskin Veil
+4 Primal Might
+4 Ranger Class
+4 Faceless Haven
+20 Snow-Covered Forest
+
+[sideboard]
+1 Questing Beast
+1 Snakeskin Veil
+1 Run Afoul
+2 Garruk, Unleashed
+2 Scavenging Ooze
+2 Ram Through
+2 Blizzard Brawl
+4 Garruk's Harbinger

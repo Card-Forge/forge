@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Living End by Oscar Franco
+Title=High Priest
+Difficulty=very hard
+Description=Living End by Oscar Franco
+Icon=High Priest.jpg
+Deck Type=constructed
+
+[main]
+1 Sunken Ruins|SHM
+2 Steam Vents
+3 Spirebluff Canal|KLD
+2 Scalding Tarn|ZEN
+4 Misty Rainforest|ZEN
+1 Island
+1 Forest
+2 Breeding Pool
+3 Botanical Sanctum|KLD
+4 Violent Outburst|ARB
+4 Force of Negation
+3 Living End|TSP
+4 Waker of Waves
+4 Striped Riverwinder|HOU
+4 Street Wraith|FUT
+4 Shardless Agent
+4 Grief
+4 Curator of Mysteries|AKH
+2 Brazen Borrower
+4 Architects of Will|ARB
+
+[sideboard]
+2 Subtlety
+2 Mystical Dispute
+1 Gemstone Caverns|TSP
+4 Foundation Breaker
+2 Force of Vigor
+4 Endurance

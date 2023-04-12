@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by Brad Nelson
+Title=Basal Ramp
+Difficulty=very hard
+Description=Golgari Aggro by Brad Nelson
+Icon=Basal Ramp.jpg
+Deck Type=constructed
+
+[main]
+4 Winding Constrictor|AER
+2 Rishkar, Peema Renegade|AER
+2 Gonti, Lord of Luxury|KLD
+4 Walking Ballista|AER
+4 Verdurous Gearhulk|KLD
+4 Servant of the Conduit|KLD
+3 Tireless Tracker|SOI
+4 Glint-Sleeve Siphoner|AER
+2 Fatal Push|AER
+3 Grasp of Darkness|OGW
+1 Murder
+3 Aethersphere Harvester|AER
+5 Forest|RTR
+7 Swamp|RTR
+4 Aether Hub|KLD
+4 Hissing Quagmire|OGW
+4 Blooming Marsh|KLD
+
+[sideboard]
+1 Gonti, Lord of Luxury|KLD
+2 Fatal Push|AER
+3 Lifecrafter's Bestiary|AER
+2 Appetite for the Unnatural|KLD
+3 Transgress the Mind|BFZ
+1 Ob Nixilis Reignited|BFZ
+3 To the Slaughter|SOI

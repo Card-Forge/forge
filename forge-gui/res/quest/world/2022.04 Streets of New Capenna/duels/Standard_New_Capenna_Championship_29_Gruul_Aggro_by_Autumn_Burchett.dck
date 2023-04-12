@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Autumn Burchett
+Title=Wormwood
+Difficulty=very hard
+Description=Gruul Aggro by Autumn Burchett
+Icon=Wormwood.jpg
+Deck Type=constructed
+
+[main]
+2 Goldhound
+2 Halana and Alena, Partners
+2 Prosperous Innkeeper
+2 Ziatora, the Incinerator
+4 Jaspera Sentinel
+4 Goldspan Dragon
+4 Professional Face-Breaker
+4 Magda, Brazen Outlaw
+4 Esika's Chariot
+1 Dragon's Fire
+2 Riveteers Charm
+3 Voltage Surge
+2 Shatterskull Smashing
+2 Ranger Class
+1 Boseiju, Who Endures
+1 Forest
+1 Mountain
+1 Den of the Bugbear
+1 Riverglide Pathway
+1 Sokenzan, Crucible of Defiance
+2 Lair of the Hydra
+3 Barkchannel Pathway
+3 Blightstep Pathway
+4 Cragcrown Pathway
+4 Darkbore Pathway
+
+[sideboard]
+2 Riveteers Charm
+1 Voltage Surge
+1 Unleash the Inferno
+2 Negate
+2 Infernal Grasp
+2 Snakeskin Veil
+2 Masked Vandal
+3 Disdainful Stroke

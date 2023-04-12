@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by Joao Andrade
+Title=Silver Samurai
+Difficulty=very hard
+Description=Puresteel Paladin by Joao Andrade
+Icon=Silver Samurai.jpg
+Deck Type=constructed
+
+[main]
+4 Esper Sentinel
+3 Memnite|SOM
+4 Ornithopter|AER
+4 Puresteel Paladin|NPH
+1 Sanctifier en-Vec
+4 Stoneforge Mystic|WWK
+1 Path to Exile|CFX
+4 Colossus Hammer
+1 Cranial Plating|FD
+1 Expedition Map|ZEN
+1 Pithing Needle|RTR
+1 Shadowspear
+1 Soul-Guide Lantern
+4 Springleaf Drum|BNG
+4 Sigarda's Aid|EMN
+1 Eiganjo Castle|CHK
+4 Inkmoth Nexus|MBS
+9 Plains
+4 Silent Clearing
+4 Urza's Saga
+
+[sideboard]
+2 Sanctifier en-Vec
+2 Path to Exile|CFX
+2 Drannith Magistrate
+3 Hushbringer
+1 Lurrus of the Dream-Den
+1 Manriki-Gusari|SOK
+2 Seal of Cleansing|NE
+2 Void Mirror

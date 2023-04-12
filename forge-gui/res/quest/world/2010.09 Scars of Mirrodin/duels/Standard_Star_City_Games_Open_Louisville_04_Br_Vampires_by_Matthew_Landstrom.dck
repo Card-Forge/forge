@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Br Vampires by Matthew Landstrom
+Title=Owlman
+Difficulty=very hard
+Description=Br Vampires by Matthew Landstrom
+Icon=Owlman.jpg
+Deck Type=constructed
+
+[main]
+4 Bloodghast|ZEN
+4 Gatekeeper of Malakir|ZEN
+4 Kalastria Highborn|WWK
+1 Manic Vandal|M11
+4 Pulse Tracker|WWK
+4 Vampire Lacerator|ZEN
+3 Viscera Seer|M11
+1 Dismember|NPH
+4 Go for the Throat|MBS
+4 Lightning Bolt|M11
+4 Duress|M11
+6 Swamp|NPH
+4 Blackcleave Cliffs|SOM
+4 Dragonskull Summit|M11
+4 Lavaclaw Reaches|WWK
+3 Marsh Flats|ZEN
+2 Verdant Catacombs|ZEN
+
+[sideboard]
+2 Manic Vandal|M11
+1 Dismember|NPH
+1 Skinrender|SOM
+2 Act of Aggression|NPH
+2 Crush|MBS
+3 Arc Trail|SOM
+2 Batterskull|NPH
+2 Dark Tutelage|M11

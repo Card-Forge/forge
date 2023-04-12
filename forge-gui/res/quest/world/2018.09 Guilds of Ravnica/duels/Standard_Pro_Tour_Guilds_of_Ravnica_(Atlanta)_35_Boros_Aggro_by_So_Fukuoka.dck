@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Boros Aggro by So Fukuoka
+Title=Teysa
+Difficulty=very hard
+Description=Boros Aggro by So Fukuoka
+Icon=Teysa.jpg
+Deck Type=constructed
+
+[main]
+4 Adanto Vanguard|XLN
+4 Benalish Marshal
+4 Dauntless Bodyguard
+4 Skymarcher Aspirant
+3 Duskborne Skymarcher|XLN
+3 Knight of Grace
+1 Tocatli Honor Guard|XLN
+4 Heroic Reinforcements
+1 Make a Stand
+4 History of Benalia
+3 Legion's Landing|XLN
+2 Ixalan's Binding|XLN
+14 Plains
+4 Clifftop Retreat
+4 Sacred Foundry
+1 Mountain
+
+[sideboard]
+2 Tocatli Honor Guard|XLN
+1 Make a Stand
+2 Banefire
+2 Experimental Frenzy
+2 Justice Strike
+1 Ajani, Adversary of Tyrants
+1 Baffling End
+1 Citywide Bust
+1 Lyra Dawnbringer
+1 Settle the Wreckage|XLN
+1 Stone Quarry

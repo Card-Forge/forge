@@ -1,0 +1,44 @@
+[quest]
+id=20220905
+OpponentName=Jean-emmanuel
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Mono Blue Tempo
+Title=Centaur Warchief
+Difficulty=very hard
+Description=Mono Blue Tempo by Jean-emmanuel Depraz
+Icon=Centaur Warchief.jpg
+Deck Type=constructed
+
+[main]
+2 Make Disappear
+2 Spell Pierce
+3 Slip Out the Back
+3 Negate
+4 Consider
+4 Essence Scatter
+4 Impulse
+4 Fading Hope
+4 Thirst for Discovery
+4 Haughty Djinn
+4 Tolarian Terror
+1 Otawara, Soaring City
+21 Island
+
+[sideboard]
+3 Invoke the Winds
+3 Suspicious Stowaway
+2 Reckoner Bankbuster
+2 Pithing Needle
+2 Witness Protection
+1 Scattered Thoughts
+1 Negate
+1 Otawara, Soaring City

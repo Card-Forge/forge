@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Jeskai Tempo by Shaun McLaren
+Title=Equilibrium
+Difficulty=very hard
+Description=Jeskai Tempo by Shaun McLaren
+Icon=Equilibrium.jpg
+Deck Type=constructed
+
+[main]
+2 Banishing Light|JOU
+4 Dig Through Time|KTK
+4 Stoke the Flames|M15
+4 Jeskai Charm|KTK
+4 Magma Jet|THS
+4 Lightning Strike|M15
+2 Anger of the Gods|THS
+4 Mantis Rider|KTK
+4 Goblin Rabblemaster|M15
+1 Seeker of the Way|KTK
+2 Sarkhan, the Dragonspeaker|KTK
+4 Temple of Epiphany|JOU
+4 Mystic Monastery|KTK
+4 Temple of Triumph|THS
+2 Shivan Reef|M15
+1 Battlefield Forge|M15
+4 Flooded Strand|KTK
+2 Island|KTK
+1 Plains|KTK
+3 Mountain|KTK
+
+[sideboard]
+2 Anger of the Gods|THS
+2 End Hostilities|KTK
+2 Keranos, God of Storms|JOU
+3 Dissolve|THS
+1 Disdainful Stroke|KTK
+2 Negate|M15
+1 Phyrexian Revoker|M15
+2 Erase|KTK

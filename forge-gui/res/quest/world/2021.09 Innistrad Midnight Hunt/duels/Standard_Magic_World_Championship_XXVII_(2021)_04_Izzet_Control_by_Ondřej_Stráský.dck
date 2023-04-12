@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Izzet Control by Ondřej Stráský
+Title=Pavel Maliki
+Difficulty=very hard
+Description=Izzet Control by Ondřej Stráský
+Icon=Pavel Maliki.jpg
+Deck Type=constructed
+
+[main]
+1 Spikefield Hazard
+2 Memory Deluge
+2 Demon Bolt
+2 Test of Talents
+3 Fading Hope
+3 Jwari Disruption
+4 Unexpected Windfall
+4 Galvanic Iteration
+4 Divide by Zero
+2 Shatterskull Smashing
+3 Burn Down the House
+3 Expressive Iteration
+4 Alrund's Epiphany
+2 Hall of Storm Giants
+2 Field of Ruin
+3 Frostboil Snarl
+4 Riverglide Pathway
+5 Island
+7 Mountain
+
+[sideboard]
+1 Spikefield Hazard
+1 Test of Talents
+1 Environmental Sciences
+1 Teachings of the Archaics
+1 Mascot Exhibition
+2 Malevolent Hermit
+2 Goldspan Dragon
+3 Smoldering Egg
+3 Burning Hands

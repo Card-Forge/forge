@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Shota Yasooka
+Title=King Arthur
+Difficulty=very hard
+Description=Gruul Aggro by Shota Yasooka
+Icon=King Arthur.jpg
+Deck Type=constructed
+
+[main]
+1 Ranger Class
+2 Embercleave
+2 Spikefield Hazard
+2 Showdown of the Skalds
+3 Esika's Chariot
+3 Shatterskull Smashing
+3 Goldspan Dragon
+3 Magda, Brazen Outlaw
+4 Edgewall Innkeeper
+4 Lovestruck Beast
+4 Bonecrusher Giant
+4 Jaspera Sentinel
+4 Giant Killer
+3 Lair of the Hydra
+3 Forest
+3 Den of the Bugbear
+4 Cragcrown Pathway
+4 Branchloft Pathway
+4 Needleverge Pathway
+
+[sideboard]
+2 Redcap Melee
+2 Ox of Agonas
+2 Roiling Vortex
+2 Burning Hands
+1 Wilt
+1 Fire Prophecy
+1 Masked Vandal
+1 Klothys, God of Destiny
+1 Drannith Magistrate
+1 Ranger Class
+1 Showdown of the Skalds

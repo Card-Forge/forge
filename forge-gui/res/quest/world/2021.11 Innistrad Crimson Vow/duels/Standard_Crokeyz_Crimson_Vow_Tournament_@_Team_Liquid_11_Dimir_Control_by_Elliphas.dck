@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Dimir Control by Elliphas
+Title=Elrond
+Difficulty=very hard
+Description=Dimir Control by Elliphas
+Icon=Elrond.jpg
+Deck Type=constructed
+
+[main]
+1 The Meathook Massacre
+1 Village Rites
+1 Soul Shatter
+2 Consider
+2 Infernal Grasp
+2 Agadeem's Awakening
+3 Syncopate
+4 Deadly Dispute
+2 Sedgemoor Witch
+2 Fell Stinger
+3 Hullbreaker Horror
+3 Jadar, Ghoulcaller of Nephalia
+3 Overcharged Amalgam
+4 Eyetwitch
+4 Shambling Ghast
+2 Field of Ruin
+2 Hive of the Eye Tyrant
+4 Clearwater Pathway
+4 Shipwreck Marsh
+5 Island
+6 Swamp
+
+[sideboard]
+1 Teachings of the Archaics
+1 Environmental Sciences
+1 Wash Away
+1 Disdainful Stroke
+1 Lash of Malice
+1 Test of Talents
+1 Pest Summoning
+1 Mascot Exhibition
+2 Crippling Fear
+2 Duress
+2 Malevolent Hermit
+1 Soul Shatter

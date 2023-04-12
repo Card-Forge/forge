@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Weenie White by Takeshi Oshimi
+Title=Arzakon
+Difficulty=very hard
+Description=Weenie White by Takeshi Oshimi
+Icon=Arzakon.jpg
+Deck Type=constructed
+
+[main]
+2 Strict Proctor
+3 Adeline, Resplendent Cathar
+4 Usher of the Fallen
+4 Chaplain of Alms
+4 Luminarch Aspirant
+4 Fleeting Spirit
+4 Sungold Sentinel
+4 Thalia, Guardian of Thraben
+4 Reidane, God of the Worthy
+3 Paladin Class
+1 Cave of the Frost Dragon
+4 Faceless Haven
+19 Snow-Covered Plains
+
+[sideboard]
+2 Strict Proctor
+1 Paladin Class
+2 Cathar Commando
+3 Skyclave Apparition
+3 Portable Hole
+4 Valorous Stance

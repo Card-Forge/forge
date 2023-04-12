@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mono White Control  by Massimiliano Foderaro
+Title=Ala
+Difficulty=very hard
+Description=Mono White Control  by Massimiliano Foderaro
+Icon=Ala.jpg
+Deck Type=constructed
+
+[main]
+2 The Restoration of Eiganjo
+2 Sanctuary Warden
+2 Steel Seraph
+2 Serra Paragon
+3 Ambitious Farmhand
+3 Loran of the Third Path
+3 Spirited Companion
+4 Reckoner Bankbuster
+1 Fateful Absence
+4 Lay Down Arms
+3 Ossification
+4 Wedding Announcement
+1 The Eternal Wanderer
+3 The Wandering Emperor
+1 Mirrex
+1 Eiganjo, Seat of the Empire
+4 Roadside Reliquary
+17 Plains
+
+[sideboard]
+1 Farewell
+2 Depopulate
+2 Knockout Blow
+2 Sunset Revelry
+2 Temporary Lockdown
+3 Unlicensed Hearse
+3 Skrelv's Hive

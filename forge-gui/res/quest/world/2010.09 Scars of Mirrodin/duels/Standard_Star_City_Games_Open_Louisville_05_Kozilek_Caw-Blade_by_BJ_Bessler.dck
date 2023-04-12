@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Kozilek Caw-Blade by BJ Bessler
+Title=Feldon
+Difficulty=very hard
+Description=Kozilek Caw-Blade by BJ Bessler
+Icon=Feldon.jpg
+Deck Type=constructed
+
+[main]
+3 Spellskite|NPH
+4 Mirran Crusader|MBS
+4 Stoneforge Mystic|WWK
+1 Dismember|NPH
+2 Go for the Throat|MBS
+2 Into the Roil|ZEN
+2 Duress|M11
+4 Inquisition of Kozilek|ROE
+4 Preordain|M11
+1 Batterskull|NPH
+1 Sword of Feast and Famine|MBS
+1 Sword of War and Peace|NPH
+4 Plains|NPH
+2 Swamp|NPH
+1 Arid Mesa|ZEN
+4 Creeping Tar Pit|WWK
+4 Darkslick Shores|SOM
+4 Glacial Fortress|M11
+4 Marsh Flats|ZEN
+4 Seachrome Coast|SOM
+4 Jace, the Mind Sculptor|WWK
+
+[sideboard]
+2 Go for the Throat|MBS
+2 Batterskull|NPH
+3 Divine Offering|MBS
+4 Flashfreeze|M11
+2 Despise|NPH
+2 Oust|ROE

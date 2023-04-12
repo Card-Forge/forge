@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Golgari Control by Takamori Yuya
+Title=Thanos
+Difficulty=very hard
+Description=Golgari Control by Takamori Yuya
+Icon=Thanos.jpg
+Deck Type=constructed
+
+[main]
+1 The Celestus
+1 Harness Infinity
+1 Culling Ritual
+1 Shadows' Verdict
+1 Professor Onyx
+2 Sorin the Mirthless
+2 Lolth, Spider Queen
+2 Binding the Old Gods
+2 Blood on the Snow
+2 Dig Up
+2 Bloodchief's Thirst
+2 Soul Transfer
+2 Infernal Grasp
+2 Baleful Mastery
+2 The Meathook Massacre
+3 Invoke Despair
+3 March of Wretched Sorrow
+2 Graveyard Trespasser
+3 Shigeki, Jukai Visionary
+1 Snow-Covered Forest
+1 Lair of the Hydra
+1 Hive of the Eye Tyrant
+1 Field of Ruin
+4 Darkbore Pathway
+4 Deathcap Glade
+4 Woodland Chasm
+8 Snow-Covered Swamp
+
+[sideboard]
+3 Duress
+3 Ray of Enfeeblement
+4 Rotten Reunion
+1 Culling Ritual
+2 Shadows' Verdict
+1 Binding the Old Gods
+1 Blood on the Snow

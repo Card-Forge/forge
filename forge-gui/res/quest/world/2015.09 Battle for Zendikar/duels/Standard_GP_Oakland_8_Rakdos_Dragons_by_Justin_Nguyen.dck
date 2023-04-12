@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Rakdos Dragons by Justin Nguyen
+Title=Green
+Difficulty=very hard
+Description=Rakdos Dragons by Justin Nguyen
+Icon=Green.jpg
+Deck Type=constructed
+
+[main]
+2 Roast|DTK
+3 Murderous Cut|KTK
+4 Fiery Impulse|ORI
+4 Draconic Roar|DTK
+4 Hordeling Outburst|KTK
+1 Ashcloud Phoenix|KTK
+1 Pia and Kiran Nalaar|ORI
+4 Kolaghan, the Storm's Fury|FRF
+4 Hangarback Walker|ORI
+4 Flamewake Phoenix|FRF
+4 Thunderbreak Regent|DTK
+1 Swamp|BFZ
+2 Haven of the Spirit Dragon|DTK
+3 Polluted Delta|KTK
+3 Smoldering Marsh|BFZ
+4 Wooded Foothills|KTK
+4 Bloodstained Mire|KTK
+8 Mountain|BFZ
+
+[sideboard]
+4 Transgress the Mind|BFZ
+4 Self-Inflicted Wound|DTK
+2 Outpost Siege|FRF
+1 Ob Nixilis Reignited|BFZ
+2 Duress|DTK
+2 Radiant Flames|BFZ

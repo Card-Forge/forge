@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Wilson Mok
+Title=alapro
+Difficulty=very hard
+Description=Jeskai Control by Wilson Mok
+Icon=alapro.jpg
+Deck Type=constructed
+
+[main]
+1 Ionize
+1 Search for Azcanta|XLN
+1 Negate
+2 Revitalize
+2 Justice Strike
+2 Expansion // Explosion
+2 Essence Scatter
+2 Cleansing Nova
+2 Syncopate
+4 Sinister Sabotage
+4 Chemister's Insight
+4 Deafening Clarion
+4 Teferi, Hero of Dominaria
+3 Crackling Drake
+2 Mountain
+4 Clifftop Retreat
+4 Glacial Fortress|XLN
+4 Island
+4 Sacred Foundry
+4 Steam Vents
+4 Sulfur Falls
+
+[sideboard]
+1 Ral, Izzet Viceroy
+1 Lyra Dawnbringer
+2 Lava Coil
+1 Shivan Fire
+2 Seal Away
+1 Ixalan's Binding|XLN
+1 Invoke the Divine
+2 Niv-Mizzet, Parun
+2 Disdainful Stroke
+2 Negate

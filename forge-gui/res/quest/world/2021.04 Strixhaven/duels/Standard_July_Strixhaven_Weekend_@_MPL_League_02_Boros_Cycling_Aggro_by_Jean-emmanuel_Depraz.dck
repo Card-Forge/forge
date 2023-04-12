@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Boros Cycling Aggro by Jean-emmanuel Depraz
+Title=Ikenga
+Difficulty=very hard
+Description=Boros Cycling Aggro by Jean-emmanuel Depraz
+Icon=Ikenga.jpg
+Deck Type=constructed
+
+[main]
+2 Drannith Healer
+3 Valiant Rescuer
+4 Drannith Stinger
+4 Irencrag Pyromancer
+4 Flourishing Fox
+1 Disdainful Stroke
+1 Shredded Sails
+4 Startling Development
+4 Zenith Flare
+2 Memory Leak
+3 Go for Blood
+4 Boon of the Wish-Giver
+4 Improbable Alliance
+1 Blightstep Pathway
+1 Clearwater Pathway
+1 Savai Triome
+1 Brightclimb Pathway
+4 Hengegate Pathway
+4 Needleverge Pathway
+4 Riverglide Pathway
+4 Raugrin Triome
+
+[sideboard]
+2 Disdainful Stroke
+1 Shredded Sails
+2 Negate
+2 Rielle, the Everwise
+2 Glass Casket
+3 Redcap Melee
+3 Mystical Dispute

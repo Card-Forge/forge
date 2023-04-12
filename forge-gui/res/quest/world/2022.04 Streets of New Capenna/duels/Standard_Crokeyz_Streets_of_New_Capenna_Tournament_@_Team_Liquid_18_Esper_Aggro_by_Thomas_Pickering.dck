@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Thomas Pickering
+Title=C3PO
+Difficulty=very hard
+Description=Esper Aggro by Thomas Pickering
+Icon=C3PO.jpg
+Deck Type=constructed
+
+[main]
+2 Malevolent Hermit
+2 Obscura Interceptor
+2 Tenacious Underdog
+3 Raffine, Scheming Seer
+4 Luminarch Aspirant
+1 Infernal Grasp
+1 Hagra Mauling
+3 Vanishing Verse
+1 Emeria's Call
+4 The Meathook Massacre
+4 Wedding Announcement
+1 Lolth, Spider Queen
+1 Elspeth Resplendent
+3 Kaito Shizuki
+4 The Wandering Emperor
+1 Plains
+1 Takenuma, Abandoned Mire
+1 Hive of the Eye Tyrant
+2 Brightclimb Pathway
+2 Shipwreck Marsh
+3 Clearwater Pathway
+3 Deserted Beach
+3 Shattered Sanctum
+4 Hengegate Pathway
+4 Raffine's Tower
+
+[sideboard]
+1 Go Blank
+1 Reckoner Bankbuster
+2 Ray of Enfeeblement
+2 Orvar, the All-Form
+2 Portable Hole
+2 Graveyard Trespasser
+2 Disdainful Stroke
+3 Duress

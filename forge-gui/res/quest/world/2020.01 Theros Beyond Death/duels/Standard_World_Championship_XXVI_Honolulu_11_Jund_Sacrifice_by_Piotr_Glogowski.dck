@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jund Sacrifice by Piotr Glogowski
+Title=Ajok
+Difficulty=very hard
+Description=Jund Sacrifice by Piotr Glogowski
+Icon=Ajok.jpg
+Deck Type=constructed
+
+[main]
+4 Forest
+1 Liliana, Dreadhorde General
+4 Trail of Crumbs
+4 Agonizing Remorse
+4 Witch's Oven
+2 Massacre Girl
+3 Korvold, Fae-Cursed King
+4 Stomping Ground
+4 Overgrown Tomb
+4 Fabled Passage
+1 Castle Locthwain
+1 God-Eternal Bontu
+3 Thrashing Brontodon
+1 Murderous Rider
+4 Mayhem Devil
+4 Gilded Goose
+4 Cauldron Familiar
+1 Mountain
+3 Swamp
+4 Blood Crypt
+
+[sideboard]
+1 Liliana, Dreadhorde General
+2 Epic Downfall
+2 Duress
+1 Casualties of War
+1 Kroxa, Titan of Death's Hunger
+2 Noxious Grasp
+2 Disfigure
+2 Shifting Ceratops
+2 Lovestruck Beast

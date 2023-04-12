@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Rémi Fortier
+Title=NanaBuruku
+Difficulty=very hard
+Description=Gruul Aggro by Rémi Fortier
+Icon=NanaBuruku.jpg
+Deck Type=constructed
+
+[main]
+2 Scavenging Ooze
+2 Ox of Agonas
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Jaspera Sentinel
+4 Lovestruck Beast
+4 Magda, Brazen Outlaw
+1 The Great Henge
+2 Embercleave
+4 Esika's Chariot
+3 Shatterskull Smashing
+2 The Akroan War
+2 Ranger Class
+1 Mountain
+2 Lair of the Hydra
+2 Den of the Bugbear
+4 Darkbore Pathway
+4 Cragcrown Pathway
+4 Blightstep Pathway
+5 Forest
+
+[sideboard]
+1 The Akroan War
+1 Ranger Class
+1 Thrashing Brontodon
+2 Redcap Melee
+2 Phoenix of Ash
+2 Klothys, God of Destiny
+3 Burning Hands
+3 Ray of Enfeeblement

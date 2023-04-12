@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Sultaï Dreadhorde by Jason Chan (amaz)
+Title=Odin
+Difficulty=very hard
+Description=Sultaï Dreadhorde by Jason Chan (amaz)
+Icon=Odin.jpg
+Deck Type=constructed
+
+[main]
+4 Hydroid Krasis
+4 Jadelight Ranger
+4 Llanowar Elves
+4 Merfolk Branchwalker|XLN
+4 Wildgrowth Walker|XLN
+2 Assassin's Trophy
+1 Cast Down
+1 Spell Pierce|XLN
+3 Command the Dreadhorde
+3 Nissa, Who Shakes the World
+4 Tamiyo, Collector of Tales
+1 Vraska, Golgari Queen
+4 Breeding Pool
+4 Forest
+4 Hinterland Harbor
+4 Overgrown Tomb
+4 Watery Grave
+4 Woodland Cemetery
+1 Hostage Taker|XLN
+
+[sideboard]
+1 Cast Down
+3 Duress
+1 Finale of Eternity
+2 Massacre Girl
+1 Negate
+1 Ob Nixilis's Cruelty
+1 Ripjaw Raptor|XLN
+2 The Elderspell
+1 Thrashing Brontodon
+1 Vicious Offering
+1 Hostage Taker|XLN

@@ -1,0 +1,23 @@
+[quest]
+id=44002
+OpponentName=Sunsinger
+AILife=20
+Repeat=true
+Wins=10
+Card Reward=Cylian Sunsinger;Naya Soulbeast|C13;1 green rare
+Credit Reward=500
+AIExtras=Cylian Sunsinger
+[metadata]
+Name=quest44002
+Title=Sunsinger
+Icon=alasunsinger.jpg
+Difficulty=hard
+Description=The sun shines bright upon the strong.
+Deck Type=constructed
+[Main]
+30 Cylian Sunsinger|CFX
+4 Jungle Shrine|ALA
+4 Naya Panorama|ALA
+9 Forest|ALA|2
+7 Plains|ALA|1
+6 Mountain|ALA|4

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Abzan by Kazuyuki Takimura
+Title=Barney Rubble
+Difficulty=very hard
+Description=Abzan by Kazuyuki Takimura
+Icon=Barney Rubble.jpg
+Deck Type=constructed
+
+[main]
+1 Murderous Cut|KTK
+4 Abzan Charm|KTK
+4 Dromoka's Command|DTK
+4 Gideon, Ally of Zendikar|BFZ
+2 Wingmate Roc|KTK
+3 Hangarback Walker|ORI
+4 Anafenza, the Foremost|KTK
+4 Den Protector|DTK
+4 Siege Rhino|KTK
+4 Warden of the First Tree|FRF
+1 Smoldering Marsh|BFZ
+1 Sunken Hollow|BFZ
+2 Canopy Vista|BFZ
+2 Forest|BFZ
+2 Llanowar Wastes|ORI
+2 Plains|BFZ
+4 Wooded Foothills|KTK
+4 Windswept Heath|KTK
+4 Flooded Strand|KTK
+4 Shambling Vent|BFZ
+
+[sideboard]
+2 Ultimate Price|DTK
+1 Sorin, Solemn Visitor|KTK
+2 Tasigur, the Golden Fang|FRF
+2 Duress|DTK
+1 Self-Inflicted Wound|DTK
+3 Silkwrap|DTK
+3 Transgress the Mind|BFZ
+1 Wingmate Roc|KTK

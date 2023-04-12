@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Dark Jeskai by Yin Yu
+Title=Spike Spiegel
+Difficulty=very hard
+Description=Dark Jeskai by Yin Yu
+Icon=Spike Spiegel.jpg
+Deck Type=constructed
+
+[main]
+4 Jace, Vryn's Prodigy|ORI
+1 Dragonmaster Outcast|BFZ
+2 Kolaghan, the Storm's Fury|FRF
+4 Thunderbreak Regent|DTK
+1 Silumgar, the Drifting Death|FRF
+4 Mantis Rider|KTK
+2 Dig Through Time|KTK
+2 Ojutai's Command|DTK
+4 Draconic Roar|DTK
+4 Crackling Doom|KTK
+3 Wild Slash|FRF
+1 Murderous Cut|KTK
+2 Kolaghan's Command|DTK
+4 Mystic Monastery|KTK
+3 Flooded Strand|KTK
+4 Bloodstained Mire|KTK
+4 Polluted Delta|KTK
+2 Smoldering Marsh|BFZ
+1 Prairie Stream|BFZ
+1 Sunken Hollow|BFZ
+1 Swamp|BFZ
+1 Island|BFZ
+2 Plains|BFZ
+3 Mountain|BFZ
+
+[sideboard]
+1 Crux of Fate|FRF
+2 Surge of Righteousness|DTK
+3 Disdainful Stroke|KTK
+1 Mastery of the Unseen|FRF
+2 Exert Influence|BFZ
+3 Radiant Flames|BFZ
+1 Fiery Impulse|ORI
+2 Arashin Cleric|FRF

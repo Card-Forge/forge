@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Blue Aggro by Steven Rubin
+Title=Dungeon Crawling Blue
+Difficulty=very hard
+Description=Mono Blue Aggro by Steven Rubin
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+
+[main]
+4 Merfolk Trickster
+2 Mist-Cloaked Herald
+4 Pteramander
+4 Siren Stormtamer|XLN
+4 Tempest Djinn
+1 Chart a Course|XLN
+2 Entrancing Melody|XLN
+3 Dive Down|XLN
+1 Essence Capture
+4 Opt
+2 Spell Pierce|XLN
+4 Wizard's Retort
+1 Negate
+4 Curious Obsession
+20 Island
+
+[sideboard]
+2 Entrancing Melody|XLN
+3 Negate
+3 Deep Freeze
+1 Exclusion Mage
+1 Sorcerous Spyglass|XLN
+3 Surge Mare
+1 Unwind
+1 Disdainful Stroke

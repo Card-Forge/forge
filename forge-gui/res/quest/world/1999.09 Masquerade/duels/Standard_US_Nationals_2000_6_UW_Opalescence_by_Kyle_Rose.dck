@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=UW Opalescence by Kyle Rose
+Title=Ian the Digester
+Difficulty=very hard
+Description=UW Opalescence by Kyle Rose
+Icon=Ian the Digester.jpg
+Deck Type=constructed
+
+[main]
+4 Attunement|US
+1 Energy Field|US
+4 Enlightened Tutor|6E
+3 Frantic Search|UL
+1 Grim Monolith|UL
+2 Lilting Refrain|US
+1 Mystical Tutor|6E
+4 Opalescence|UD
+3 Parallax Tide|NE
+4 Parallax Wave|NE
+4 Replenish|UD
+3 Seal of Cleansing|C15
+1 Seal of Removal|NE
+1 Wrath of God|C13
+4 Adarkar Wastes|10E
+10 Island|RTR
+10 Plains|RTR
+
+[sideboard]
+2 Wrath of God|C13
+1 Chill|6E
+1 Circle of Protection: Green|8E
+1 Circle of Protection: Black|9E
+1 Circle of Protection: Red|9E
+2 Counterspell|7E
+1 Defense Grid|9E
+2 Erase|KTK
+2 Mana Short|7E
+1 Ring of Gix|UL
+1 Meekstone|7E

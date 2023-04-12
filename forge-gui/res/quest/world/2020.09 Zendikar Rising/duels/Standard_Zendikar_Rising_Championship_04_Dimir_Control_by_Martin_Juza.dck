@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Dimir Control by Martin Juza
+Title=Queltosh
+Difficulty=very hard
+Description=Dimir Control by Martin Juza
+Icon=Queltosh.jpg
+Deck Type=constructed
+
+[main]
+3 Agadeem's Awakening
+4 Soaring Thought-Thief
+3 Merfolk Windrobber
+4 Temple of Deceit
+4 Clearwater Pathway
+3 Swamp
+5 Island
+4 Fabled Passage
+1 Didn't Say Please
+2 Heartless Act
+3 Of One Mind
+4 Ruin Crab
+4 Thieves' Guild Enforcer
+4 Drown in the Loch
+2 Zagoth Triome
+2 Bloodchief's Thirst
+4 Into the Story
+1 Essence Scatter
+3 Lullmage's Domination
+
+[sideboard]
+2 Bloodchief's Thirst
+3 Mystical Dispute
+3 Negate
+2 Cling to Dust
+4 Skyclave Shade
+1 Lurrus of the Dream-Den

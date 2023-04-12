@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Jeskai Mutate by Rei Sato
+Title=Warlord of Kell
+Difficulty=very hard
+Description=Jeskai Mutate by Rei Sato
+Icon=Warlord of Kell.jpg
+Deck Type=constructed
+
+[main]
+1 Defiant Strike
+1 See the Truth
+2 Fire Prophecy
+2 Sejiri Shelter
+2 Mystical Dispute
+3 Spikefield Hazard
+3 Prismari Command
+4 Expressive Iteration
+4 Seize the Spoils
+4 Unsubstantiate
+4 Vadrok, Apex of Thunder
+4 Goldspan Dragon
+4 Lore Drakkis
+3 Island
+3 Mountain
+4 Needleverge Pathway
+4 Raugrin Triome
+4 Hengegate Pathway
+4 Riverglide Pathway
+
+[sideboard]
+2 Shark Typhoon
+2 Redcap Melee
+2 Rip Apart
+2 Mazemind Tome
+2 Disdainful Stroke
+1 Negate
+1 Cinderclasm
+3 Archon of Absolution

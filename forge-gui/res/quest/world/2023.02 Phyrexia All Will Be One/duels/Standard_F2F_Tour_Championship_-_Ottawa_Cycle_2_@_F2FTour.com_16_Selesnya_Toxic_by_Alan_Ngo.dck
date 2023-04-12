@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Selesnya Toxic by Alan Ngo
+Title=Caprio
+Difficulty=very hard
+Description=Selesnya Toxic by Alan Ngo
+Icon=Caprio.jpg
+Deck Type=constructed
+
+[main]
+4 Crawling Chorus
+4 Slaughter Singer
+4 Venerated Rotpriest
+4 Bloated Contaminator
+4 Skrelv, Defector Mite
+4 Jawbone Duelist
+3 Annex Sentry
+4 Tyvar's Stand
+3 Destroy Evil
+4 Skrelv's Hive
+4 Brushland
+4 The Seedcore
+4 Razorverge Thicket
+3 Mirrex
+1 Eiganjo, Seat of the Empire
+1 Boseiju, Who Endures
+4 Overgrown Farmland
+1 Plains
+
+[sideboard]
+1 Annex Sentry
+1 Destroy Evil
+3 Lantern Flare
+4 Knockout Blow
+4 Carnivorous Canopy
+2 Unlicensed Hearse

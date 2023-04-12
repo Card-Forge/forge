@@ -1,0 +1,53 @@
+[duel]
+[metadata]
+Name=Jund by va el tercero
+Title=The Great Wood
+Difficulty=very hard
+Description=Jund by va el tercero
+Icon=The Great Wood.jpg
+Deck Type=constructed
+
+[main]
+4 Liliana of the Veil|ISD
+4 Wrenn and Six
+2 Bonecrusher Giant
+1 Kroxa, Titan of Death's Hunger
+4 Ragavan, Nimble Pilferer
+1 Seasoned Pyromancer
+4 Tarmogoyf|FUT
+2 Tourach, Dread Cantor
+4 Inquisition of Kozilek|ROE
+2 Thoughtseize|THS
+1 Abrupt Decay|RTR
+1 Assassin's Trophy
+2 Fatal Push|AER
+2 Kolaghan's Command|DTK
+4 Lightning Bolt|M11
+1 Barren Moor|ON
+1 Blackcleave Cliffs|SOM
+2 Blood Crypt
+3 Bloodstained Mire|KTK
+1 Blooming Marsh|KLD
+1 Den of the Bugbear
+1 Forest
+1 Mountain
+1 Nurturing Peatland
+2 Overgrown Tomb
+1 Stomping Ground
+2 Swamp
+4 Verdant Catacombs|ZEN
+1 Wooded Foothills|KTK
+
+[sideboard]
+1 Fatal Push|AER
+2 Ancient Grudge|ISD
+1 Ashiok, Dream Render
+2 Collective Brutality|EMN
+1 Crime // Punishment|DIS
+1 Endurance
+1 Engineered Explosives|FD
+1 Force of Vigor
+1 Ghost Quarter|ISD
+1 Necromentia
+2 Nihil Spellbomb|SOM
+1 Terminate|ARB

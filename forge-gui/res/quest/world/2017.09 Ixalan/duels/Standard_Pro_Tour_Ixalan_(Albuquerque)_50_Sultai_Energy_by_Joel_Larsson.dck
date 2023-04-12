@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Sultai Energy by Joel Larsson
+Title=Deep Blue Sea
+Difficulty=very hard
+Description=Sultai Energy by Joel Larsson
+Icon=Deep Blue Sea.jpg
+Deck Type=constructed
+
+[main]
+4 Glint-Sleeve Siphoner|AER
+4 Longtusk Cub|KLD
+4 Winding Constrictor|AER
+4 Walking Ballista|AER
+2 Rishkar, Peema Renegade|AER
+4 Rogue Refiner|AER
+3 Hostage Taker|XLN
+1 The Scarab God|HOU
+4 Attune with Aether|KLD
+4 Fatal Push|AER
+4 Blossoming Defense|KLD
+1 Vraska's Contempt|XLN
+4 Botanical Sanctum|KLD
+4 Blooming Marsh|KLD
+2 Fetid Pools|AKH
+4 Aether Hub|KLD
+4 Forest|XLN
+2 Swamp|XLN
+1 Island|XLN
+
+[sideboard]
+1 The Scarab God|HOU
+1 Vraska's Contempt|XLN
+2 Die Young|KLD
+2 Deathgorge Scavenger|XLN
+2 Negate|AER
+1 Spell Pierce|XLN
+3 Duress|XLN
+2 Nissa, Steward of Elements|AKH
+1 Essence Scatter|AKH

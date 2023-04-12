@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Esper Control by Atsuki Kihara
+Title=Feldon
+Difficulty=very hard
+Description=Esper Control by Atsuki Kihara
+Icon=Feldon.jpg
+Deck Type=constructed
+
+[main]
+4 Torrential Gearhulk|KLD
+3 The Scarab God|HOU
+4 Fatal Push|AER
+4 Cast Down
+4 Vraska's Contempt|XLN
+4 Syncopate
+4 Disallow|AER
+2 Blink of an Eye
+1 Search for Azcanta|XLN
+4 Island
+4 Swamp
+4 Drowned Catacomb|XLN
+4 Fetid Pools|AKH
+3 Glacial Fortress|XLN
+3 Isolated Chapel
+2 Field of Ruin|XLN
+2 Evolving Wilds
+1 Plains
+3 Teferi, Hero of Dominaria
+
+[sideboard]
+1 Search for Azcanta|XLN
+4 Negate
+4 Glint-Sleeve Siphoner|AER
+3 Forsake the Worldly|AKH
+2 Essence Extraction|KLD
+1 The Eldest Reborn

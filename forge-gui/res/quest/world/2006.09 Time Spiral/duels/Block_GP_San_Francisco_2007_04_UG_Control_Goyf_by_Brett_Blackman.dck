@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=UG Control Goyf by Brett Blackman
+Title=Diablo
+Difficulty=very hard
+Description=UG Control Goyf by Brett Blackman
+Icon=Diablo.jpg
+Deck Type=constructed
+
+[main]
+1 Pendelhaven|TSP
+2 Venser, Shaper Savant|FUT
+2 Mystic Snake|C15
+2 Forest|RTR
+2 Horizon Canopy|FUT
+2 Snapback|TSP
+3 Vesuvan Shapeshifter|TSP
+4 Tarmogoyf|FUT
+4 Psionic Blast|TSP
+4 Delay|FUT
+4 Pongify|C14
+4 Riftwing Cloudskate|TSP
+4 Riftsweeper|FUT
+4 Llanowar Reborn|C15
+4 Terramorphic Expanse|C16
+4 Looter il-Kor|TSP
+10 Island|RTR
+
+[sideboard]
+3 Cancel
+3 Stonewood Invocation|TSP
+3 Serrated Arrows|TSP
+4 Thornweald Archer|C14
+2 Snapback|TSP

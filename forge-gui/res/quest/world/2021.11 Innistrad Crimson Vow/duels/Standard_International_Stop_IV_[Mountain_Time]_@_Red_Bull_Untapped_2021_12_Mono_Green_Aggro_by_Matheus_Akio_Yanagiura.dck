@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Matheus Akio Yanagiura
+Title=Princess Celestia
+Difficulty=very hard
+Description=Mono Green Aggro by Matheus Akio Yanagiura
+Icon=Princess Celestia.jpg
+Deck Type=constructed
+
+[main]
+2 Lotus Cobra
+3 Ulvenwald Oddity
+4 Werewolf Pack Leader
+4 Ascendant Packleader
+4 Sculptor of Winter
+4 Old-Growth Troll
+4 Esika's Chariot
+1 Snakeskin Veil
+1 Inscription of Abundance
+4 Blizzard Brawl
+2 Ranger Class
+3 Faceless Haven
+4 Kazandu Mammoth
+20 Snow-Covered Forest
+
+[sideboard]
+3 Snakeskin Veil
+2 Inscription of Abundance
+2 Tangletrap
+2 Avabruck Caretaker
+2 Cemetery Prowler
+2 Outland Liberator
+2 Tajuru Blightblade

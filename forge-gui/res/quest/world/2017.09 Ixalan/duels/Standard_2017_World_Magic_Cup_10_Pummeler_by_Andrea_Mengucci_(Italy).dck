@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Pummeler by Andrea Mengucci (Italy)
+Title=Tempo
+Difficulty=very hard
+Description=Pummeler by Andrea Mengucci (Italy)
+Icon=Tempo.jpg
+Deck Type=constructed
+
+[main]
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+2 Island|XLN
+5 Forest|XLN
+4 Cartouche of Knowledge|AKH
+2 Dive Down|XLN
+4 Blossoming Defense|KLD
+4 Larger Than Life|KLD
+4 Attune with Aether|KLD
+3 Bristling Hydra|KLD
+4 Rogue Refiner|AER
+4 Electrostatic Pummeler|KLD
+1 Rhonas the Indomitable|AKH
+4 Servant of the Conduit|KLD
+4 Longtusk Cub|KLD
+2 Greenbelt Rampager|AER
+4 Hashep Oasis|HOU
+1 Blooming Marsh|KLD
+
+[sideboard]
+2 Greenbelt Rampager|AER
+1 Swamp|XLN
+2 Unsummon|HOU
+4 Cartouche of Ambition|AKH
+2 Spell Pierce|XLN
+4 Negate|AER

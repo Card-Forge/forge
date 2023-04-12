@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Hardened Scales by Mark Jacobsn
+Title=The Color Blue
+Difficulty=very hard
+Description=Hardened Scales by Mark Jacobsn
+Icon=The Color Blue.jpg
+Deck Type=constructed
+
+[main]
+4 Nissa, Voice of Zendikar|OGW
+4 Servant of the Scale|DTK
+4 Avatar of the Resolute|DTK
+4 Hangarback Walker|ORI
+4 Endless One|BFZ
+4 Abzan Falconer|KTK
+4 Managorger Hydra|ORI
+4 Dromoka's Command|DTK
+1 Valorous Stance|FRF
+4 Hardened Scales|KTK
+4 Wooded Foothills|KTK
+4 Windswept Heath|KTK
+2 Flooded Strand|KTK
+2 Canopy Vista|BFZ
+1 Plains|BFZ
+10 Forest|BFZ
+
+[sideboard]
+2 Valorous Stance|FRF
+4 Silkwrap|DTK
+2 Evolutionary Leap|ORI
+1 Secure the Wastes|DTK
+3 Hallowed Moonlight|ORI
+1 Gideon, Ally of Zendikar|BFZ
+2 Abzan Battle Priest|KTK

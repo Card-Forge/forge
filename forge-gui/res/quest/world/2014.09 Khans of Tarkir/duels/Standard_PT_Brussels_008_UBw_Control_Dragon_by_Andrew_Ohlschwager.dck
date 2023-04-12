@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=UBw Control Dragon by Andrew Ohlschwager
+Title=Blind Faith
+Difficulty=very hard
+Description=UBw Control Dragon by Andrew Ohlschwager
+Icon=Blind Faith.jpg
+Deck Type=constructed
+
+[main]
+1 Ugin, the Spirit Dragon|FRF
+2 Dragonlord Ojutai|DTK
+2 Dragonlord Silumgar|DTK
+2 Icefall Regent|DTK
+2 Silumgar, the Drifting Death|FRF
+2 Crux of Fate|FRF
+1 Sign in Blood|M15
+3 Thoughtseize|THS
+4 Anticipate|DTK
+2 Dig Through Time|KTK
+1 Dragonlord's Prerogative|DTK
+3 Foul-Tongue Invocation|DTK
+3 Hero's Downfall|THS
+4 Silumgar's Scorn|DTK
+2 Ultimate Price|DTK
+4 Dismal Backwater|FRF
+2 Haven of the Spirit Dragon|DTK
+4 Polluted Delta|KTK
+4 Temple of Deceit|THS
+3 Temple of Enlightenment|BNG
+2 Temple of Silence|THS
+1 Urborg, Tomb of Yawgmoth|M15
+3 Island|DTK
+3 Swamp|DTK
+
+[sideboard]
+1 Thoughtseize|THS
+1 Foul-Tongue Invocation|DTK
+1 Hero's Downfall|THS
+1 Ashiok, Nightmare Weaver|THS
+2 Jorubai Murk Lurker|M15
+1 Stratus Dancer|DTK
+1 Bile Blight|BNG
+3 Drown in Sorrow|BNG
+2 Negate|DTK
+1 Perilous Vault|M15
+1 Virulent Plague|DTK

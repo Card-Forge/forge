@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Bant Aggro by David Phelps
+Title=Nissa, Worldwaker
+Difficulty=very hard
+Description=Bant Aggro by David Phelps
+Icon=Nissa, Worldwaker.jpg
+Deck Type=constructed
+
+[main]
+2 Feat of Resistance|KTK
+2 Valorous Stance|FRF
+4 Dromoka's Command|DTK
+4 Stubborn Denial|KTK
+4 Hardened Scales|KTK
+2 Abzan Falconer|KTK
+4 Avatar of the Resolute|DTK
+4 Servant of the Scale|DTK
+4 Den Protector|DTK
+4 Managorger Hydra|ORI
+4 Hangarback Walker|ORI
+1 Plains|BFZ
+1 Prairie Stream|BFZ
+2 Canopy Vista|BFZ
+4 Flooded Strand|KTK
+4 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+6 Forest|BFZ
+
+[sideboard]
+1 Display of Dominance|DTK
+4 Surge of Righteousness|DTK
+1 Winds of Qal Sisma|FRF
+1 Erase|KTK
+1 Inspiring Call|DTK
+2 Evolutionary Leap|ORI
+2 Hidden Dragonslayer|DTK
+2 Arashin Cleric|FRF
+1 Feat of Resistance|KTK

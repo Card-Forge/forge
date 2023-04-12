@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Naya Runes Aggro by Carlo De Gaetano
+Title=Zapp Brannigan
+Difficulty=very hard
+Description=Naya Runes Aggro by Carlo De Gaetano
+Icon=Zapp Brannigan.jpg
+Deck Type=constructed
+
+[main]
+3 Kami of Transience
+4 Runeforge Champion
+4 Jukai Naturalist
+4 Generous Visitor
+1 Valorous Stance
+4 Commune with Spirits
+1 Circle of Confinement
+2 Touch the Spirit Realm
+3 Rune of Speed
+3 Rune of Sustenance
+4 Rune of Might
+4 Showdown of the Skalds
+1 Plains
+1 Eiganjo, Seat of the Empire
+1 Boseiju, Who Endures
+1 Overgrown Farmland
+1 Lair of the Hydra
+2 Forest
+2 Rockfall Vale
+2 Sundown Pass
+4 Branchloft Pathway
+4 Cragcrown Pathway
+4 Needleverge Pathway
+
+[sideboard]
+1 Valorous Stance
+2 Circle of Confinement
+1 Yasharn, Implacable Earth
+1 Katilda, Dawnhart Martyr
+1 Hallowed Haunting
+1 Paladin Class
+2 Reidane, God of the Worthy
+2 Elite Spellbinder
+2 Portable Hole
+2 Tamiyo's Safekeeping

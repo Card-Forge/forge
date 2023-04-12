@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Humans by Shota Yasooka
+Title=The Conclave of Mages
+Difficulty=very hard
+Description=Humans by Shota Yasooka
+Icon=The Conclave of Mages.jpg
+Deck Type=constructed
+
+[main]
+1 Bonfire of the Damned|AVR
+4 Faithless Looting|C15
+4 Pillar of Flame|AVR
+2 Scorned Villager|DKA
+2 Restoration Angel|AVR
+3 Angel of Glory's Rise|AVR
+4 Avacyn's Pilgrim|ISD
+4 Borderland Ranger|AVR
+4 Falkenrath Aristocrat|DKA
+4 Fiend Hunter|C13
+4 Huntmaster of the Fells|DKA
+1 Swamp|RTR
+1 Mountain|RTR
+2 Plains|RTR
+3 Isolated Chapel
+4 Clifftop Retreat
+4 Evolving Wilds
+4 Cavern of Souls|AVR
+5 Forest|RTR
+
+[sideboard]
+2 Zealous Conscripts|AVR
+2 Garruk Relentless|ISD
+2 Purify the Grave|ISD
+1 Sigarda, Host of Herons|AVR
+3 Thraben Heretic|DKA
+2 Tree of Redemption|ISD
+2 Wolfir Silverheart|AVR
+1 Restoration Angel|AVR

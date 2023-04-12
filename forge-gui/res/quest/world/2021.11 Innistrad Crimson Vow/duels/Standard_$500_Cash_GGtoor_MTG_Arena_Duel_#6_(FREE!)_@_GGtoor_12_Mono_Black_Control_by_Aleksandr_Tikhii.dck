@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Black Control by Aleksandr Tikhii
+Title=The Lady of the Mountain
+Difficulty=very hard
+Description=Mono Black Control by Aleksandr Tikhii
+Icon=The Lady of the Mountain.jpg
+Deck Type=constructed
+
+[main]
+1 Inscription of Ruin
+2 Dread Fugue
+2 The Meathook Massacre
+2 Sorin the Mirthless
+2 Professor Onyx
+3 Lolth, Spider Queen
+4 Blood on the Snow
+4 Deadly Dispute
+4 Infernal Grasp
+4 Skullport Merchant
+4 Eyetwitch
+4 Shambling Ghast
+2 Hive of the Eye Tyrant
+4 Faceless Haven
+4 Field of Ruin
+14 Snow-Covered Swamp
+
+[sideboard]
+4 Go Blank
+4 Duress
+2 Mascot Exhibition
+1 Environmental Sciences
+1 Confront the Past
+1 Necrotic Fumes
+2 The Meathook Massacre

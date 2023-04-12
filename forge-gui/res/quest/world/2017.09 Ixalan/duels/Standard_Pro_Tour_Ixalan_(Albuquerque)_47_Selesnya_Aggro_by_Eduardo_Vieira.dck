@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Selesnya Aggro by Eduardo Vieira
+Title=Jafar
+Difficulty=very hard
+Description=Selesnya Aggro by Eduardo Vieira
+Icon=Jafar.jpg
+Deck Type=constructed
+
+[main]
+3 Sacred Cat|AKH
+4 Adorned Pouncer|HOU
+4 Resilient Khenra|HOU
+2 Kinjalli's Sunwing|XLN
+4 Adanto Vanguard|XLN
+1 Rishkar, Peema Renegade|AER
+4 Merfolk Branchwalker|XLN
+2 Oviya Pashiri, Sage Lifecrafter|KLD
+2 Oketra the True|AKH
+4 Appeal // Authority|HOU
+3 Blossoming Defense|KLD
+2 Aethersphere Harvester|AER
+2 Legion's Landing|XLN
+3 Shefet Dunes|HOU
+4 Sunpetal Grove|XLN
+1 Scattered Groves|AKH
+3 Hashep Oasis|HOU
+7 Plains|XLN
+5 Forest|XLN
+
+[sideboard]
+3 Heroic Intervention|AER
+2 Sunscourge Champion|HOU
+2 Hour of Revelation|HOU
+3 Fumigate|KLD
+2 Cast Out|AKH
+1 Skywhaler's Shot|KLD
+2 Gideon of the Trials|AKH

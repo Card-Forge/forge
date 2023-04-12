@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Ur Gift by Corey Crowfoot
+Title=King Kong
+Difficulty=very hard
+Description=Ur Gift by Corey Crowfoot
+Icon=King Kong.jpg
+Deck Type=constructed
+
+[main]
+4 Spirebluff Canal|KLD
+6 Mountain
+4 Island
+4 Ipnu Rivulet|HOU
+4 Aether Hub|KLD
+4 Warkite Marauder
+4 Gate to the Afterlife|AKH
+2 God-Pharaoh's Gift|HOU
+4 Walking Ballista|AER
+2 Trophy Mage|AER
+4 Minister of Inquiries|KLD
+2 Glint-Nest Crane|KLD
+4 Fanatical Firebrand
+4 Combat Celebrant|AKH
+4 Champion of Wits|HOU
+4 Bomat Courier|KLD
+
+[sideboard]
+3 Whirler Virtuoso|KLD
+1 Spell Pierce|XLN
+2 Silent Gravestone
+2 Negate
+3 Hazoret the Fervent|AKH
+2 Fiery Cannonade|XLN
+2 Chandra, Torch of Defiance|KLD

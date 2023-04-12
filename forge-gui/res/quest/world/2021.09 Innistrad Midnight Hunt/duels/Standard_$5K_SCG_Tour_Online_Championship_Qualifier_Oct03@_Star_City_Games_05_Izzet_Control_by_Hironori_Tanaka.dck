@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Izzet Control by Hironori Tanaka
+Title=Sol'kanar the Swamp King
+Difficulty=very hard
+Description=Izzet Control by Hironori Tanaka
+Icon=Sol'kanar the Swamp King.jpg
+Deck Type=constructed
+
+[main]
+4 Smoldering Egg
+1 Cathartic Pyre
+1 Negate
+2 Demon Bolt
+2 Disdainful Stroke
+2 Fading Hope
+2 Galvanic Iteration
+3 Divide by Zero
+3 Memory Deluge
+3 Burning Hands
+4 Jwari Disruption
+4 Spikefield Hazard
+1 Burn Down the House
+3 Expressive Iteration
+4 Alrund's Epiphany
+1 Frostboil Snarl
+3 Hall of Storm Giants
+4 Riverglide Pathway
+6 Mountain
+7 Island
+
+[sideboard]
+1 Memory Deluge
+1 Burning Hands
+1 Expressive Iteration
+1 Prismari Command
+1 Cinderclasm
+1 Environmental Sciences
+1 Mascot Exhibition
+1 Test of Talents
+1 Unexpected Windfall
+1 Teachings of the Archaics
+1 Dissipate
+4 Malevolent Hermit

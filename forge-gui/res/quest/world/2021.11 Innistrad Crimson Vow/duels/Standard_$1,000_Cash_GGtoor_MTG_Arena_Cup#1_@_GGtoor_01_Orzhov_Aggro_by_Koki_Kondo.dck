@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Orzhov Aggro by Koki Kondo
+Title=Gold Finger
+Difficulty=very hard
+Description=Orzhov Aggro by Koki Kondo
+Icon=Gold Finger.jpg
+Deck Type=constructed
+
+[main]
+1 Hagra Mauling
+1 Soul Shatter
+2 Lolth, Spider Queen
+2 Sorin the Mirthless
+2 Emeria's Call
+3 The Meathook Massacre
+4 Wedding Announcement
+4 Vanishing Verse
+2 Valki, God of Lies
+2 Tainted Adversary
+2 Henrika Domnathi
+2 Edgar, Charmed Groom
+2 Elite Spellbinder
+2 Adeline, Resplendent Cathar
+4 Luminarch Aspirant
+1 Cave of the Frost Dragon
+2 Swamp
+3 Hive of the Eye Tyrant
+3 Plains
+4 Brightclimb Pathway
+4 Shattered Sanctum
+4 Needleverge Pathway
+4 Blightstep Pathway
+
+[sideboard]
+4 Duress
+2 By Invitation Only
+1 Baleful Mastery
+1 Bloodchief's Thirst
+1 Doomskar
+1 Kaya the Inexorable
+1 Power Word Kill
+1 Soul Shatter
+1 Lolth, Spider Queen
+2 Elite Spellbinder

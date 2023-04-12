@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=UR Murktide by Michael Kundegraber
+Title=Dungeon Crawling Black
+Difficulty=very hard
+Description=UR Murktide by Michael Kundegraber
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+
+[main]
+4 Ragavan, Nimble Pilferer
+3 Dragon's Rage Channeler
+4 Ledger Shredder
+3 Murktide Regent
+4 Mishra's Bauble|CS
+2 Spell Pierce
+1 Spell Snare|DIS
+4 Counterspell|7E
+4 Consider
+4 Lightning Bolt|M11
+4 Unholy Heat
+4 Expressive Iteration
+3 Flooded Strand|KTK
+2 Polluted Delta|KTK
+2 Scalding Tarn|ZEN
+3 Steam Vents
+1 Fiery Islet
+4 Spirebluff Canal|KLD
+3 Island
+1 Otawara, Soaring City
+
+[sideboard]
+2 Flusterstorm
+1 Seasoned Pyromancer
+2 Blood Moon|9E
+3 Engineered Explosives|FD
+1 Mystical Dispute
+2 Dress Down
+1 Fury
+1 Subtlety
+2 Unlicensed Hearse

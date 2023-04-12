@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Gruul Aggro  by Gabriel Nassif
+Title=Lizzy
+Difficulty=very hard
+Description=Gruul Aggro  by Gabriel Nassif
+Icon=Lizzy.jpg
+Deck Type=constructed
+
+[main]
+1 Questing Beast
+3 Scavenging Ooze
+4 Edgewall Innkeeper
+4 Lovestruck Beast
+4 Kazandu Mammoth
+4 Brushfire Elemental
+4 Bonecrusher Giant
+2 Embercleave
+3 The Great Henge
+2 Fire Prophecy
+1 Primal Might
+4 Shatterskull Smashing
+2 The Akroan War
+2 Evolving Wilds
+3 Mountain
+4 Fabled Passage
+4 Cragcrown Pathway
+9 Forest
+
+[sideboard]
+2 Fire Prophecy
+1 Scorching Dragonfire
+1 Klothys, God of Destiny
+1 Soul Sear
+2 Vivien, Monsters' Advocate
+2 Phoenix of Ash
+3 Ox of Agonas
+3 Thrashing Brontodon

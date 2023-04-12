@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Abzan Yorion by Henip
+Title=alablood
+Difficulty=very hard
+Description=Abzan Yorion by Henip
+Icon=alablood.jpg
+Deck Type=constructed
+
+[main]
+2 The Great Henge
+2 Vivien, Monsters' Advocate
+2 Lolth, Spider Queen
+3 Kaya the Inexorable
+3 Elspeth Conquers Death
+4 Heartless Act
+4 Binding the Old Gods
+2 Charming Prince
+2 Yasharn, Implacable Earth
+2 Yorion, Sky Nomad
+2 Polukranos, Unchained
+4 Skyclave Apparition
+4 Elite Spellbinder
+4 Lovestruck Beast
+4 Prosperous Innkeeper
+4 Acquisitions Expert
+1 Castle Locthwain
+3 Swamp
+4 Forest
+4 Darkbore Pathway
+4 Branchloft Pathway
+4 Plains
+4 Indatha Triome
+4 Fabled Passage
+4 Brightclimb Pathway
+
+[sideboard]
+4 Garruk's Harbinger
+2 Vanishing Verse
+2 Ray of Enfeeblement
+2 Elspeth's Nightmare
+2 Callous Bloodmage
+1 Ugin, the Spirit Dragon
+1 Yasharn, Implacable Earth
+1 Yorion, Sky Nomad

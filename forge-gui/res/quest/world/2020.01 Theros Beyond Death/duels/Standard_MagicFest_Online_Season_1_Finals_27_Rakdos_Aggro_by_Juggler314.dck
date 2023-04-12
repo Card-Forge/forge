@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Juggler314
+Title=Gruul-precon
+Difficulty=very hard
+Description=Rakdos Aggro by Juggler314
+Icon=Gruul-precon.jpg
+Deck Type=constructed
+
+[main]
+4 Claim the Firstborn
+4 Witch's Oven
+4 Cauldron Familiar
+4 Woe Strider
+4 Priest of Forgotten Gods
+4 Mire Triton
+4 Mayhem Devil
+4 Kroxa, Titan of Death's Hunger
+7 Swamp
+5 Mountain
+4 Blood Crypt
+4 Fabled Passage
+2 Temple of Malice
+2 Castle Locthwain
+4 Tymaret Calls the Dead
+
+[sideboard]
+3 Scorching Dragonfire
+3 Act of Treason
+3 Embereth Shieldbreaker
+2 Noxious Grasp
+2 Agonizing Remorse
+1 Pharika's Libation
+1 Redcap Melee

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=UB Mill by Danielmtg
+Title=Pointy Haired Boss
+Difficulty=very hard
+Description=UB Mill by Danielmtg
+Icon=Pointy Haired Boss.jpg
+Deck Type=constructed
+
+[main]
+4 Ruin Crab
+4 Hedron Crab|ZEN
+1 Murderous Cut|KTK
+1 Into the Story
+2 Crypt Incursion|DGM
+3 Surgical Extraction|NPH
+3 Visions of Beyond|M12
+4 Archive Trap|ZEN
+4 Drown in the Loch
+4 Fatal Push|AER
+4 Fractured Sanity
+4 Tasha's Hideous Laughter
+1 Mikokoro, Center of the Sea|SOK
+1 Oboro, Palace in the Clouds|SOK
+1 Darkslick Shores|SOM
+1 Misty Rainforest|ZEN
+2 Shelldock Isle|LRW
+2 Swamp
+2 Watery Grave
+4 Polluted Delta|KTK
+4 Field of Ruin
+4 Island
+
+[sideboard]
+1 Spell Pierce|XLN
+1 Engineered Explosives|FD
+1 Lurrus of the Dream-Den
+2 Echoing Truth|DS
+2 Extirpate|PLC
+2 Ghost Quarter|ISD
+3 Mystical Dispute
+3 Nihil Spellbomb|SOM

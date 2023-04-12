@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Izzet Phoenix by Luis Scott-Vargas
+Title=Land's Edge
+Difficulty=very hard
+Description=Izzet Phoenix by Luis Scott-Vargas
+Icon=Land's Edge.jpg
+Deck Type=constructed
+
+[main]
+1 Beacon Bolt
+1 Entrancing Melody|XLN
+1 Ral, Izzet Viceroy
+2 Tormenting Voice
+2 Discovery // Dispersal
+4 Shock
+4 Opt
+4 Radical Idea
+4 Lava Coil
+4 Chart a Course|XLN
+4 Crackling Drake
+4 Goblin Electromancer
+4 Arclight Phoenix
+1 Blood Crypt
+4 Steam Vents
+4 Sulfur Falls
+4 Mountain
+8 Island
+
+[sideboard]
+1 Disdainful Stroke
+3 Negate
+1 Shivan Fire
+1 Murmuring Mystic
+1 Spell Pierce|XLN
+2 Niv-Mizzet, Parun
+2 Sorcerous Spyglass|XLN
+1 Beacon Bolt
+2 Entrancing Melody|XLN
+1 Ral, Izzet Viceroy

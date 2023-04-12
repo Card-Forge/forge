@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Syou
+Title=Agent K
+Difficulty=very hard
+Description=Mono Green Aggro by Syou
+Icon=Agent K.jpg
+Deck Type=constructed
+
+[main]
+2 Questing Beast
+2 Scavenging Ooze
+4 Werewolf Pack Leader
+4 Lovestruck Beast
+4 Swarm Shambler
+4 Stonecoil Serpent
+4 Gemrazer
+4 Kazandu Mammoth
+1 The Great Henge
+1 Snakeskin Veil
+4 Blizzard Brawl
+3 Ranger Class
+4 Faceless Haven
+19 Snow-Covered Forest
+
+[sideboard]
+1 Questing Beast
+1 Esika's Chariot
+2 Run Afoul
+2 Ram Through
+2 Garruk, Unleashed
+3 Garruk's Harbinger
+4 Oakhame Adversary

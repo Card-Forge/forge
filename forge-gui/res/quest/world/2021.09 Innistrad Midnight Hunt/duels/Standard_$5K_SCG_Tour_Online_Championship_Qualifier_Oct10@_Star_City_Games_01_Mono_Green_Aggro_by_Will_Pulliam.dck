@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Will Pulliam
+Title=Homer Simpson
+Difficulty=very hard
+Description=Mono Green Aggro by Will Pulliam
+Icon=Homer Simpson.jpg
+Deck Type=constructed
+
+[main]
+2 Primal Adversary
+4 Sculptor of Winter
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+4 Esika's Chariot
+1 Snakeskin Veil
+2 Inscription of Abundance
+4 Blizzard Brawl
+1 Unnatural Growth
+4 Ranger Class
+2 Wrenn and Seven
+2 Lair of the Hydra
+4 Faceless Haven
+4 Kazandu Mammoth
+18 Snow-Covered Forest
+
+[sideboard]
+3 Snakeskin Veil
+1 Froghemoth
+2 Devouring Tendrils
+2 Tangletrap
+2 Ashaya, Soul of the Wild
+2 Tajuru Blightblade
+3 Outland Liberator

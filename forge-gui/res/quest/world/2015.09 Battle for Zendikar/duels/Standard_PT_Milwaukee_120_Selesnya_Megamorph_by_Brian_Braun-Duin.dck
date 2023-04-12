@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Selesnya Megamorph by Brian Braun-Duin
+Title=Dr Fate
+Difficulty=very hard
+Description=Selesnya Megamorph by Brian Braun-Duin
+Icon=Dr Fate.jpg
+Deck Type=constructed
+
+[main]
+1 Valorous Stance|FRF
+1 Stasis Snare|BFZ
+2 Silkwrap|DTK
+4 Dromoka's Command|DTK
+4 Gideon, Ally of Zendikar|BFZ
+2 Wingmate Roc|KTK
+2 Warden of the First Tree|FRF
+3 Nissa, Vastwood Seer|ORI
+4 Hangarback Walker|ORI
+4 Avatar of the Resolute|DTK
+4 Den Protector|DTK
+4 Deathmist Raptor|DTK
+3 Plains|BFZ
+3 Canopy Vista|BFZ
+4 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+4 Flooded Strand|KTK
+7 Forest|BFZ
+
+[sideboard]
+3 Tragic Arrogance|ORI
+1 Mastery of the Unseen|FRF
+2 Evolutionary Leap|ORI
+1 Quarantine Field|BFZ
+3 Surge of Righteousness|DTK
+3 Arashin Cleric|FRF
+2 Valorous Stance|FRF

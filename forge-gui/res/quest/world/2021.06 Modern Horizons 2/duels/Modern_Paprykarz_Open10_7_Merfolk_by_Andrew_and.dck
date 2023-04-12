@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Merfolk by Andrew and
+Title=Ninithili
+Difficulty=very hard
+Description=Merfolk by Andrew and
+Icon=Ninithili.jpg
+Deck Type=constructed
+
+[main]
+3 Svyelun of Sea and Sky
+8 Island
+4 Mutavault|M14
+3 Waterlogged Grove
+1 Fiery Islet
+2 Wanderwine Hub|LRW
+1 Cavern of Souls|AVR
+1 Castle Vantress
+4 Aether Vial|DS
+4 Spreading Seas|ZEN
+3 Force of Negation
+4 Tide Shaper
+4 Silvergill Adept
+4 Merfolk Trickster
+4 Lord of Atlantis|TSP
+4 Master of the Pearl Trident|M13
+3 Harbinger of the Tides|ORI
+3 Merrow Reejerey|LRW
+
+[sideboard]
+1 Shadow of Doubt|RAV
+1 Trickbind|TSP
+1 Flashfreeze|M12
+1 Spell Pierce|XLN
+2 Tidebinder Mage|M14
+2 Relic of Progenitus|ALA
+1 Grafdigger's Cage
+1 Steel Sabotage|MBS
+3 Hurkyl's Recall|10E
+2 Void Mirror

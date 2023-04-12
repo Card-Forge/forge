@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Maximilian Hess
+Title=Mister Fantastic
+Difficulty=very hard
+Description=Rakdos Aggro by Maximilian Hess
+Icon=Mister Fantastic.jpg
+Deck Type=constructed
+
+[main]
+2 Graveyard Trespasser
+2 Voldaren Bloodcaster
+2 Tenacious Underdog
+4 Sheoldred, the Apocalypse
+4 Kumano Faces Kakkazan
+4 Braids, Arisen Nightmare
+4 Fable of the Mirror-Breaker
+4 Voldaren Epicure
+4 Bloodtithe Harvester
+2 Lightning Strike
+4 Voltage Surge
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+2 Haunted Ridge
+3 Thran Portal
+4 Sulfurous Springs
+5 Mountain
+8 Swamp
+
+[sideboard]
+2 Graveyard Trespasser
+1 Graf Reaver
+1 Liliana of the Veil
+2 Cut Down
+2 Infernal Grasp
+2 Knight of Dusk's Shadow
+2 Abrade
+3 The Meathook Massacre

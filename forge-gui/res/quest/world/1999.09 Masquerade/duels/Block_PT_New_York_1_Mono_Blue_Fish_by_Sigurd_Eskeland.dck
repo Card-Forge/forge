@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mono Blue Fish by Sigurd Eskeland
+Title=Riven Turnbull
+Difficulty=very hard
+Description=Mono Blue Fish by Sigurd Eskeland
+Icon=Riven Turnbull.jpg
+Deck Type=constructed
+
+[main]
+4 Drake Hatchling|MM
+4 Stinging Barrier|MM
+4 Waterfront Bouncer|MM
+4 Eye of Ramos|MM
+3 Seal of Removal|NE
+4 Gush|MM
+4 Rising Waters|NE
+1 Brainstorm|C15
+3 Counterspell|7E
+4 Thwart|MM
+3 Daze|NE
+18 Island|RTR
+4 Rishadan Port|MM
+
+[sideboard]
+1 Seal of Removal|NE
+1 Counterspell|7E
+2 Island|RTR
+2 Bribery|8E
+1 Hoodwink|MM
+3 Misdirection|CNS
+1 Rath's Edge|NE
+4 Stronghold Zeppelin|NE

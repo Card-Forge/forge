@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=UWR Patriot Control by Reid Duke
+Title=Bep
+Difficulty=very hard
+Description=UWR Patriot Control by Reid Duke
+Icon=Bep.jpg
+Deck Type=constructed
+
+[main]
+4 Clifftop Retreat
+1 Desolate Lighthouse|AVR
+4 Evolving Wilds
+5 Island|RTR
+5 Mountain|RTR
+3 Plains|RTR
+4 Sulfur Falls
+3 Fettergeist|AVR
+2 Gisela, Blade of Goldnight|C15
+1 Lone Revenant|C15
+3 Amass the Components|AVR
+1 Bonfire of the Damned|AVR
+1 Brimstone Volley|CNS
+1 Burning Oil|DKA
+4 Desperate Ravings|C15
+2 Devil's Play|ISD
+1 Dissipate|M15
+1 Harvest Pyre|ISD
+4 Pillar of Flame|AVR
+3 Tamiyo, the Moon Sage|AVR
+4 Terminus|AVR
+1 Think Twice|ISD
+2 Vessel of Endless Rest|AVR
+
+[sideboard]
+1 Burning Oil|DKA
+3 Dissipate|M15
+1 Archangel's Light|DKA
+1 Banishing Stroke|AVR
+1 Curse of Echoes|DKA
+1 Faith's Shield|DKA
+1 Geist of Saint Traft|ISD
+1 Helvault|DKA
+2 Purify the Grave|ISD
+1 Rebuke
+1 Witchbane Orb|ISD
+1 Zealous Conscripts|AVR

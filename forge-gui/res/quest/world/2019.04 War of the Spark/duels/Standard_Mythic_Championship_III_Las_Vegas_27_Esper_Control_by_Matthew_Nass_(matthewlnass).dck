@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Esper Control by Matthew Nass (matthewlnass)
+Title=Dem Bones
+Difficulty=very hard
+Description=Esper Control by Matthew Nass (matthewlnass)
+Icon=Dem Bones.jpg
+Deck Type=constructed
+
+[main]
+4 Watery Grave
+1 Swamp
+1 Plains
+4 Isolated Chapel
+4 Hallowed Fountain
+4 Godless Shrine
+4 Glacial Fortress|XLN
+4 Drowned Catacomb|XLN
+4 Teferi, Time Raveler
+4 Teferi, Hero of Dominaria
+3 Narset, Parter of Veils
+2 Search for Azcanta|XLN
+3 Oath of Kaya
+4 Thought Erasure
+1 The Elderspell
+3 Kaya's Wrath
+1 Cry of the Carnarium
+2 Command the Dreadhorde
+1 Dovin's Veto
+1 Despark
+3 Cast Down
+2 Basilica Bell-Haunt
+
+[sideboard]
+2 Nightveil Predator
+3 Lyra Dawnbringer
+1 Ixalan's Binding|XLN
+2 Duress
+2 The Elderspell
+1 Cry of the Carnarium
+2 Dovin's Veto
+2 Despark

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by John Rolf
+Title=Prince Valiant
+Difficulty=very hard
+Description=Red Deck Wins by John Rolf
+Icon=Prince Valiant.jpg
+Deck Type=constructed
+
+[main]
+4 Bomat Courier|KLD
+4 Soul-Scar Mage|AKH
+4 Scrapheap Scrounger|KLD
+3 Kari Zev, Skyship Raider|AER
+4 Goblin Chainwhirler
+2 Ahn-Crop Crasher|AKH
+4 Hazoret the Fervent|AKH
+2 Rekindling Phoenix
+3 Shock|AER
+3 Abrade|HOU
+3 Lightning Strike|XLN
+4 Dragonskull Summit|XLN
+1 Canyon Slough|AKH
+19 Mountain
+
+[sideboard]
+2 Rekindling Phoenix
+1 Abrade|HOU
+3 Chandra, Torch of Defiance|KLD
+3 Fight with Fire
+2 Glorybringer|AKH
+2 Aethersphere Harvester|AER
+2 Chandra's Defeat|HOU

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=UG Mill by Alejandro Dupuy
+Title=Princess Selenia
+Difficulty=very hard
+Description=UG Mill by Alejandro Dupuy
+Icon=Princess Selenia.jpg
+Deck Type=constructed
+
+[main]
+4 Hedron Crab|ZEN
+4 Lotus Cobra|ZEN
+4 Archive Trap|ZEN
+3 Into the Roil|ZEN
+2 Surgical Extraction|NPH
+4 Visions of Beyond|M12
+4 Explore|WWK
+4 Ponder|M12
+4 Preordain|M11
+2 Evolving Wilds|ROE
+4 Forest|M12
+9 Island|M12
+4 Misty Rainforest|ZEN
+3 Scalding Tarn|ZEN
+2 Terramorphic Expanse|M11
+1 Verdant Catacombs|ZEN
+2 Jace, Memory Adept|M12
+
+[sideboard]
+1 Surgical Extraction|NPH
+2 Avenger of Zendikar|WWK
+4 Obstinate Baloth|M11
+3 Wurmcoil Engine|SOM
+3 Nature's Claim|WWK
+2 Creeping Corrosion|MBS

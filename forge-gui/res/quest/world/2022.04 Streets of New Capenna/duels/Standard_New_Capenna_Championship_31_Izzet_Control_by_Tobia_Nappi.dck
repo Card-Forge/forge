@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Izzet Control by Tobia Nappi
+Title=Nchuah
+Difficulty=very hard
+Description=Izzet Control by Tobia Nappi
+Icon=Nchuah.jpg
+Deck Type=constructed
+
+[main]
+1 The Celestus
+2 Invoke Calamity
+2 Spikefield Hazard
+2 Silundi Vision
+2 Flame-Blessed Bolt
+2 Abrade
+3 Tasha's Hideous Laughter
+3 Fading Hope
+4 Burn Down the House
+4 Jwari Disruption
+4 Unexpected Windfall
+4 Galvanic Iteration
+4 Big Score
+4 Expressive Iteration
+1 Otawara, Soaring City
+1 Sokenzan, Crucible of Defiance
+2 Island
+4 Riverglide Pathway
+4 Stormcarved Coast
+7 Mountain
+
+[sideboard]
+4 Smoldering Egg
+3 Disdainful Stroke
+2 Fable of the Mirror-Breaker
+2 Hullbreaker Horror
+1 Test of Talents
+1 Lier, Disciple of the Drowned
+1 Flame-Blessed Bolt
+1 Fading Hope

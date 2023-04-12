@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Temur Aggro by Lorenzo Anasetti
+Title=SerendibGenie
+Difficulty=very hard
+Description=Temur Aggro by Lorenzo Anasetti
+Icon=SerendibGenie.jpg
+Deck Type=constructed
+
+[main]
+2 Ranger Class
+3 Dragon's Fire
+3 Shatterskull Smashing
+4 Esika's Chariot
+2 Prosperous Innkeeper
+3 Moonveil Regent
+4 Reckless Stormseeker
+4 Werewolf Pack Leader
+4 Goldspan Dragon
+4 Jaspera Sentinel
+4 Magda, Brazen Outlaw
+2 Lair of the Hydra
+4 Riverglide Pathway
+4 Cragcrown Pathway
+4 Barkchannel Pathway
+4 Rockfall Vale
+5 Forest
+
+[sideboard]
+4 Burning Hands
+3 Negate
+2 Disdainful Stroke
+2 Abrade
+2 Tangletrap
+1 Burn Down the House
+1 Snakeskin Veil

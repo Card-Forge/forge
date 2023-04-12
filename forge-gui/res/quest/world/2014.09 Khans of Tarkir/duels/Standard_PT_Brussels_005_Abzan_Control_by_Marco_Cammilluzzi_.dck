@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Abzan Control by Marco Cammilluzzi 
+Title=Ajok
+Difficulty=very hard
+Description=Abzan Control by Marco Cammilluzzi 
+Icon=Ajok.jpg
+Deck Type=constructed
+
+[main]
+3 Elspeth, Sun's Champion|THS
+1 Liliana Vess|M15
+1 Ugin, the Spirit Dragon|FRF
+4 Courser of Kruphix|BNG
+4 Siege Rhino|KTK
+2 Tasigur, the Golden Fang|FRF
+1 End Hostilities|KTK
+4 Thoughtseize|THS
+4 Abzan Charm|KTK
+2 Bile Blight|BNG
+4 Hero's Downfall|THS
+2 Ultimate Price|DTK
+2 Utter End|KTK
+2 Caves of Koilos|M15
+3 Llanowar Wastes|M15
+4 Sandsteppe Citadel|KTK
+4 Temple of Malady|JOU
+4 Temple of Silence|THS
+1 Urborg, Tomb of Yawgmoth|M15
+4 Windswept Heath|KTK
+2 Forest|DTK
+2 Plains|DTK
+
+[sideboard]
+1 End Hostilities|KTK
+1 Bile Blight|BNG
+2 Nissa, Worldwaker|M15
+3 Fleecemane Lion|THS
+3 Drown in Sorrow|BNG
+2 Duress|DTK
+1 Erase|KTK
+2 Read the Bones|THS

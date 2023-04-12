@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=UR Murktide by Tomá D brava
+Title=Nicol Bolas, Planeswalker
+Difficulty=very hard
+Description=UR Murktide by Tomá D brava
+Icon=Nicol Bolas, Planeswalker.jpg
+Deck Type=constructed
+
+[main]
+4 Dragon's Rage Channeler
+2 Ledger Shredder
+4 Murktide Regent
+4 Ragavan, Nimble Pilferer
+4 Mishra's Bauble|CS
+2 Archmage's Charm
+4 Counterspell|7E
+4 Lightning Bolt|M11
+2 Spell Pierce
+4 Thought Scour|DKA
+4 Unholy Heat
+4 Expressive Iteration
+1 Fiery Islet
+4 Flooded Strand|KTK
+3 Island
+1 Misty Rainforest|ZEN
+1 Otawara, Soaring City
+2 Scalding Tarn|ZEN
+4 Spirebluff Canal|KLD
+2 Steam Vents
+
+[sideboard]
+1 Abrade
+2 Blood Moon|9E
+2 Dress Down
+2 Engineered Explosives|FD
+1 Flusterstorm
+2 Fury
+2 Mystical Dispute
+2 Seasoned Pyromancer
+1 Unlicensed Hearse

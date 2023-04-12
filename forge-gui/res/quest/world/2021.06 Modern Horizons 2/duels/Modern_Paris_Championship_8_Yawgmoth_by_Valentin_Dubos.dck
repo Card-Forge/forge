@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Yawgmoth by Valentin Dubos
+Title=Beast2
+Difficulty=very hard
+Description=Yawgmoth by Valentin Dubos
+Icon=Beast2.jpg
+Deck Type=constructed
+
+[main]
+4 Birds of Paradise|M12
+1 Blood Artist|AVR
+3 Blooming Marsh|KLD
+4 Chord of Calling|M15
+1 Dryad Arbor|FUT
+4 Eldritch Evolution|EMN
+2 Forest
+1 Geralf's Messenger|DKA
+3 Grist, the Hunger Tide
+4 Ignoble Hierarch
+2 Misty Rainforest|ZEN
+2 Nurturing Peatland
+1 Outland Liberator
+2 Overgrown Tomb
+1 Scavenging Ooze
+4 Strangleroot Geist|DKA
+1 Swamp
+2 Twilight Mire|EVE
+1 Urborg, Tomb of Yawgmoth|M15
+4 Verdant Catacombs|ZEN
+4 Wall of Roots|TSP
+1 Yavimaya, Cradle of Growth
+4 Yawgmoth, Thran Physician
+4 Young Wolf|DKA
+
+[sideboard]
+1 Outland Liberator
+1 Scavenging Ooze
+3 Endurance
+2 Force of Vigor
+2 Necromentia
+1 Obstinate Baloth|M11
+2 Thoughtseize|THS
+2 Veil of Summer
+1 Crime // Punishment|DIS

@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Jund by Henry Mildenstein
+Title=Gix
+Difficulty=very hard
+Description=Jund by Henry Mildenstein
+Icon=Gix.jpg
+Deck Type=constructed
+
+[main]
+1 Pyrite Spellbomb|MR
+1 Nihil Spellbomb|SOM
+1 Shadowspear
+2 Thoughtseize|THS
+2 Fatal Push|AER
+2 Abrupt Decay|RTR
+4 Mishra's Bauble|CS
+4 Unholy Heat
+4 Inquisition of Kozilek|ROE
+4 Wrenn and Six
+4 Tarmogoyf|FUT
+4 Ragavan, Nimble Pilferer
+4 Dragon's Rage Channeler
+1 Snow-Covered Forest
+1 Snow-Covered Swamp
+1 Blood Crypt
+1 Snow-Covered Mountain
+1 Overgrown Tomb
+1 Stomping Ground
+2 Verdant Catacombs|ZEN
+3 Blackcleave Cliffs|SOM
+4 Wooded Foothills|KTK
+4 Bloodstained Mire|KTK
+4 Urza's Saga
+
+[sideboard]
+3 Engineered Explosives|FD
+2 Alpine Moon
+1 Lurrus of the Dream-Den
+1 Kolaghan's Command|DTK
+1 Shattering Spree|GP
+1 Doom Blade|M14
+1 Torpor Orb|NPH
+1 Pithing Needle
+1 Chalice of the Void|MR
+2 Nihil Spellbomb|SOM
+1 Thoughtseize|THS

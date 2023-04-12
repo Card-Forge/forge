@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Mario Suarez
+Title=Delgado Gordo
+Difficulty=very hard
+Description=Mono Green Aggro by Mario Suarez
+Icon=Delgado Gordo.jpg
+Deck Type=constructed
+
+[main]
+2 Questing Beast
+4 Kazandu Mammoth
+4 Gemrazer
+4 Lovestruck Beast
+4 Werewolf Pack Leader
+4 Swarm Shambler
+4 Stonecoil Serpent
+2 Snakeskin Veil
+4 Primal Might
+4 Ranger Class
+2 Lair of the Hydra
+3 Faceless Haven
+19 Snow-Covered Forest
+
+[sideboard]
+1 Questing Beast
+1 Snakeskin Veil
+2 Ram Through
+2 Garruk, Unleashed
+2 Scavenging Ooze
+3 Run Afoul
+4 Garruk's Harbinger

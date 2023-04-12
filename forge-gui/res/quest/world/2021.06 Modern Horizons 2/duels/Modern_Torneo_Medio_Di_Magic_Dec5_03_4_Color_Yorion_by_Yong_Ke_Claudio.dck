@@ -1,0 +1,59 @@
+[duel]
+[metadata]
+Name=4 Color Yorion by Yong Ke Claudio
+Title=Spawn of Pogo
+Difficulty=very hard
+Description=4 Color Yorion by Yong Ke Claudio
+Icon=Spawn of Pogo.jpg
+Deck Type=constructed
+
+[main]
+4 Abundant Growth|AVR
+1 Supreme Verdict|RTR
+1 Time Warp|M10
+1 Unholy Heat
+1 Lightning Bolt|M11
+1 Path to Exile|CFX
+2 Abundant Harvest
+3 Ephemerate
+4 Wrenn and Six
+4 Teferi, Time Raveler
+4 Prismatic Ending
+4 Expressive Iteration
+4 Spreading Seas|ZEN
+1 Wandering Mind
+1 Subtlety
+2 Fury
+3 Ice-Fang Coatl
+3 Eternal Witness|FD
+4 Omnath, Locus of Creation
+4 Solitude
+1 Steam Vents
+1 Prismatic Vista
+1 Reflecting Pool|SHM
+1 Breeding Pool
+1 Temple Garden
+1 Stomping Ground
+1 Sacred Foundry
+1 Raugrin Triome
+1 Ketria Triome
+1 Snow-Covered Forest
+1 Snow-Covered Mountain
+1 Snow-Covered Island
+1 Arid Mesa|ZEN
+1 Hallowed Fountain
+2 Snow-Covered Plains
+2 Wooded Foothills|KTK
+3 Windswept Heath|KTK
+3 Flooded Strand|KTK
+4 Misty Rainforest|ZEN
+
+[sideboard]
+1 Aether Gust
+2 Force of Negation
+2 Flusterstorm
+3 Endurance
+2 Veil of Summer
+3 Dress Down
+1 Yorion, Sky Nomad
+1 Emrakul, the Promised End|EMN

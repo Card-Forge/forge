@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Azorius Soldier by Takeshi Kokubun
+Title=Green Arrow
+Difficulty=very hard
+Description=Azorius Soldier by Takeshi Kokubun
+Icon=Green Arrow.jpg
+Deck Type=constructed
+
+[main]
+2 Skrelv, Defector Mite
+2 Dennick, Pious Apprentice
+3 Harbin, Vanguard Aviator
+4 Skystrike Officer
+4 Siege Veteran
+4 Zephyr Sentinel
+4 Recruitment Officer
+4 Valiant Veteran
+4 Resolute Reinforcements
+4 Thalia, Guardian of Thraben
+1 Eiganjo, Seat of the Empire
+1 Plaza of Heroes
+2 Otawara, Soaring City
+2 Mishra's Foundry
+3 Plains
+4 Adarkar Wastes
+4 Fortified Beachhead
+4 Secluded Courtyard
+4 Seachrome Coast
+
+[sideboard]
+2 Steel Seraph
+2 Slip Out the Back
+2 Tocasia's Welcome
+2 Destroy Evil
+3 Brutal Cathar
+4 Protect the Negotiators

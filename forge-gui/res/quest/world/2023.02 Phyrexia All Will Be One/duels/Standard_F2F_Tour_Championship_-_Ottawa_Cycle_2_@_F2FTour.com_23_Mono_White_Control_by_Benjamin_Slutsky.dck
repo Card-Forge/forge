@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mono White Control by Benjamin Slutsky
+Title=The Serpents
+Difficulty=very hard
+Description=Mono White Control by Benjamin Slutsky
+Icon=The Serpents.jpg
+Deck Type=constructed
+
+[main]
+3 The Wandering Emperor
+3 The Eternal Wanderer
+4 Lay Down Arms
+4 Reckoner Bankbuster
+4 Ossification
+4 Wedding Announcement
+1 Spirited Companion
+2 Ao, the Dawn Sky
+2 Steel Seraph
+2 Cathar Commando
+2 Serra Paragon
+3 Ambitious Farmhand
+3 Loran of the Third Path
+1 Eiganjo, Seat of the Empire
+4 Roadside Reliquary
+18 Plains
+
+[sideboard]
+1 Unlicensed Hearse
+2 Brutal Cathar
+2 Vanquish the Horde
+2 Farewell
+1 Destroy Evil
+3 Temporary Lockdown
+1 The Wandering Emperor
+2 Serra Paragon
+1 Loran of the Third Path

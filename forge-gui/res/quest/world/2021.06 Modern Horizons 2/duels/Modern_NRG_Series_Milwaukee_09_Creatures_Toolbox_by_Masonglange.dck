@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Creatures Toolbox by Masonglange
+Title=Medusa
+Difficulty=very hard
+Description=Creatures Toolbox by Masonglange
+Icon=Medusa.jpg
+Deck Type=constructed
+
+[main]
+1 Geralf's Messenger|DKA
+1 Kitchen Finks|SHM
+1 Blood Artist|AVR
+1 Endurance
+4 Birds of Paradise|M12
+4 Young Wolf|DKA
+4 Strangleroot Geist|DKA
+4 Wall of Roots|TSP
+4 Yawgmoth, Thran Physician
+4 Ignoble Hierarch
+4 Chord of Calling|M15
+4 Eldritch Evolution|EMN
+3 Grist, the Hunger Tide
+1 Swamp
+1 Temple Garden
+1 Twilight Mire|EVE
+1 Urborg, Tomb of Yawgmoth|M15
+1 Yavimaya, Cradle of Growth
+1 Dryad Arbor|FUT
+2 Wooded Foothills|KTK
+2 Overgrown Tomb
+2 Nurturing Peatland
+2 Forest
+3 Blooming Marsh|KLD
+4 Verdant Catacombs|ZEN
+
+[sideboard]
+3 Endurance
+1 Obstinate Baloth|M11
+1 Thrun, the Last Troll|MBS
+1 Outland Liberator
+1 Scavenging Ooze
+2 Thoughtseize|THS
+2 Force of Vigor
+2 Necromentia
+2 Crime // Punishment|DIS

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Temur Emerge by Andrew Brown
+Title=BabaluAye
+Difficulty=very hard
+Description=Temur Emerge by Andrew Brown
+Icon=BabaluAye.jpg
+Deck Type=constructed
+
+[main]
+4 Jace, Vryn's Prodigy|ORI
+4 Primal Druid|EMN
+4 Matter Reshaper|OGW
+3 Shaman of Forgotten Ways|DTK
+1 Nissa, Vastwood Seer|ORI
+4 Wretched Gryff|EMN
+1 Lashweed Lurker|EMN
+3 Elder Deep-Fiend|EMN
+4 Gather the Pack|ORI
+4 Grapple with the Past|EMN
+4 Kozilek's Return|OGW
+4 Yavimaya Coast|ORI
+4 Shivan Reef|ORI
+4 Sanctum of Ugin|BFZ
+4 Lumbering Falls|BFZ
+1 Woodland Stream
+4 Forest|RTR
+2 Island|RTR
+1 Mountain|RTR
+
+[sideboard]
+4 Traverse the Ulvenwald|SOI
+2 Noose Constrictor|EMN
+2 Radiant Flames|BFZ
+2 Kiora, Master of the Depths|BFZ
+1 World Breaker|OGW
+1 Emrakul, the Promised End|EMN
+1 Eldrazi Obligator|OGW
+1 Ishkanah, Grafwidow|EMN
+1 Thought-Knot Seer|OGW

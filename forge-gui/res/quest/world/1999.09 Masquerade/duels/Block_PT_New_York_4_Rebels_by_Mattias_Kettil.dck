@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Rebels by Mattias Kettil
+Title=The Faeries
+Difficulty=very hard
+Description=Rebels by Mattias Kettil
+Icon=The Faeries.jpg
+Deck Type=constructed
+
+[main]
+1 Defiant Vanguard|TSP
+1 Jhovall Queen|MM
+1 Lightbringer|NE
+4 Lin Sivvi, Defiant Hero|NE
+4 Ramosian Lieutenant|MM
+4 Ramosian Sergeant|MM
+1 Ramosian Sky Marshal|MM
+3 Steadfast Guard|10E
+1 Thermal Glider|MM
+4 Disenchant|CN2
+4 Parallax Wave|NE
+4 Ramosian Rally|MM
+4 Reverent Mantra|MM
+20 Plains|RTR
+4 Rishadan Port|MM
+
+[sideboard]
+1 Defiant Vanguard|TSP
+2 Predator, Flagship|C14
+3 Seal of Cleansing|C15
+3 Topple|NE
+4 Voice of Truth|NE
+2 Wave of Reckoning|C16

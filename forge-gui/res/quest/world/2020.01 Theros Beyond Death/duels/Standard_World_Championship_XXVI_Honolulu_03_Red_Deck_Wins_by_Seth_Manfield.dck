@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Seth Manfield
+Title=The Desert Caravan
+Difficulty=very hard
+Description=Red Deck Wins by Seth Manfield
+Icon=The Desert Caravan.jpg
+Deck Type=constructed
+
+[main]
+4 Castle Embereth
+18 Mountain
+4 Anax, Hardened in the Forge
+4 Light Up the Stage
+3 Embercleave
+3 Torbran, Thane of Red Fell
+4 Scorch Spitter
+4 Robber of the Rich
+4 Runaway Steam-Kin
+4 Bonecrusher Giant
+4 Fervent Champion
+4 Rimrock Knight
+
+[sideboard]
+2 Chandra, Acolyte of Flame
+1 Experimental Frenzy
+4 Lava Coil
+3 Redcap Melee
+1 Tibalt, Rakish Instigator
+4 Unchained Berserker

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Selesnya Toxic by Guiyote
+Title=The Minotaurs
+Difficulty=very hard
+Description=Selesnya Toxic by Guiyote
+Icon=The Minotaurs.jpg
+Deck Type=constructed
+
+[main]
+2 Annex Sentry
+4 Bloated Contaminator
+4 Crawling Chorus
+4 Jawbone Duelist
+4 Skrelv, Defector Mite
+4 Slaughter Singer
+4 Venerated Rotpriest
+1 Soul Partition
+4 Tyvar's Stand
+2 Destroy Evil
+4 Skrelv's Hive
+1 Boseiju, Who Endures
+4 Razorverge Thicket
+2 Eiganjo, Seat of the Empire
+4 Mirrex
+1 Overgrown Farmland
+4 The Seedcore
+4 Brushland
+1 Forest
+2 Plains
+
+[sideboard]
+2 Destroy Evil
+4 Wedding Announcement
+3 Knockout Blow
+1 Circle of Confinement
+3 Ajani, Sleeper Agent
+2 Lantern Flare

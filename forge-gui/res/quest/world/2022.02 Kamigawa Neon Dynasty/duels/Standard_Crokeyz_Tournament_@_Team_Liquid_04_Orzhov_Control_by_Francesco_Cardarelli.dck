@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Orzhov Control by Francesco Cardarelli
+Title=Kefnet the Mindful
+Difficulty=very hard
+Description=Orzhov Control by Francesco Cardarelli
+Icon=Kefnet the Mindful.jpg
+Deck Type=constructed
+
+[main]
+1 Edgar, Charmed Groom
+2 Dockside Chef
+3 The Restoration of Eiganjo
+4 Shambling Ghast
+4 Professor of Symbology
+1 Hagra Mauling
+4 Deadly Dispute
+4 Vanishing Verse
+3 Rite of Oblivion
+4 The Meathook Massacre
+4 Wedding Announcement
+1 Lolth, Spider Queen
+1 Sorin the Mirthless
+1 The Wandering Emperor
+1 Eiganjo, Seat of the Empire
+1 Roadside Reliquary
+1 Takenuma, Abandoned Mire
+4 Hive of the Eye Tyrant
+4 Brightclimb Pathway
+4 Shattered Sanctum
+4 Swamp
+4 Plains
+
+[sideboard]
+1 Lolth, Spider Queen
+1 Mascot Exhibition
+1 Farewell
+1 Confront the Past
+1 Containment Breach
+1 Environmental Sciences
+2 Doomskar
+2 Go Blank
+2 Power Word Kill
+3 Duress

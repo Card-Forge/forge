@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Naya Aggro by Omar Lopez Cabrera
+Title=Magneto
+Difficulty=very hard
+Description=Naya Aggro by Omar Lopez Cabrera
+Icon=Magneto.jpg
+Deck Type=constructed
+
+[main]
+3 Prosperous Innkeeper
+4 Edgewall Innkeeper
+4 Jaspera Sentinel
+4 Magda, Brazen Outlaw
+4 Giant Killer
+4 Lovestruck Beast
+4 Bonecrusher Giant
+3 Esika's Chariot
+3 Embercleave
+2 Shatterskull Smashing
+3 Showdown of the Skalds
+1 Mountain
+1 Plains
+2 Den of the Bugbear
+3 Forest
+3 Lair of the Hydra
+4 Cragcrown Pathway
+4 Branchloft Pathway
+4 Needleverge Pathway
+
+[sideboard]
+1 Gemrazer
+2 Klothys, God of Destiny
+2 Ox of Agonas
+2 The Akroan War
+2 Ranger Class
+3 Burning Hands
+3 Redcap Melee

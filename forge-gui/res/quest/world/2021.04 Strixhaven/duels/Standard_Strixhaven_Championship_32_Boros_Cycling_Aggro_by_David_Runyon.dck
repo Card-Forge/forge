@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Boros Cycling Aggro by David Runyon
+Title=Artemis
+Difficulty=very hard
+Description=Boros Cycling Aggro by David Runyon
+Icon=Artemis.jpg
+Deck Type=constructed
+
+[main]
+1 Rielle, the Everwise
+4 Drannith Stinger
+4 Valiant Rescuer
+4 Flourishing Fox
+4 Irencrag Pyromancer
+3 Startling Development
+4 Zenith Flare
+4 Memory Leak
+4 Boon of the Wish-Giver
+4 Go for Blood
+4 Improbable Alliance
+1 Blightstep Pathway
+1 Savai Triome
+1 Brightclimb Pathway
+1 Clearwater Pathway
+4 Raugrin Triome
+4 Needleverge Pathway
+4 Riverglide Pathway
+4 Hengegate Pathway
+
+[sideboard]
+1 Rielle, the Everwise
+1 Soul-Guide Lantern
+2 Glass Casket
+2 Disdainful Stroke
+2 Mystical Dispute
+2 Negate
+2 Shredded Sails
+3 Redcap Melee

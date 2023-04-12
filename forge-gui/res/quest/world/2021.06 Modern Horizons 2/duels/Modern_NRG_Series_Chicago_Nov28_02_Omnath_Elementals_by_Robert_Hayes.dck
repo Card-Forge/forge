@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Omnath Elementals by Robert Hayes
+Title=King Kong
+Difficulty=very hard
+Description=Omnath Elementals by Robert Hayes
+Icon=King Kong.jpg
+Deck Type=constructed
+
+[main]
+1 Omnath, Locus of the Roil
+1 Endurance
+2 Flamekin Harbinger|LRW
+2 Mulldrifter|LRW
+4 Fury
+4 Solitude
+4 Risen Reef
+4 Omnath, Locus of Creation
+2 Lightning Bolt|M11
+4 Ephemerate
+2 Prismatic Ending
+3 Utopia Sprawl|DIS
+3 Teferi, Time Raveler
+1 Breeding Pool
+1 Plains
+1 Raugrin Triome
+1 Sacred Foundry
+1 Steam Vents
+1 Stomping Ground
+1 Wooded Foothills|KTK
+1 Island
+1 Hallowed Fountain
+2 Forest
+2 Temple Garden
+2 Flooded Strand|KTK
+2 Misty Rainforest|ZEN
+3 Cavern of Souls|AVR
+4 Windswept Heath|KTK
+
+[sideboard]
+1 Endurance
+1 Chandra, Awakened Inferno
+1 Dress Down
+1 Engineered Explosives|FD
+1 Foundation Breaker
+1 Kaheera, the Orphanguard
+2 Subtlety
+2 Lightning Helix|RAV
+2 Force of Vigor
+3 Force of Negation

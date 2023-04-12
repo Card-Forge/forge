@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Black Aggro by Maciej Szmidt
+Title=Lief
+Difficulty=very hard
+Description=Mono Black Aggro by Maciej Szmidt
+Icon=Lief.jpg
+Deck Type=constructed
+
+[main]
+2 Agadeem's Awakening
+2 Infernal Grasp
+3 Eaten Alive
+3 The Meathook Massacre
+3 Archghoul of Thraben
+3 Shambling Ghast
+3 Jadar, Ghoulcaller of Nephalia
+3 Ebondeath, Dracolich
+3 Fell Stinger
+4 Champion of the Perished
+4 Headless Rider
+4 Tainted Adversary
+2 Hive of the Eye Tyrant
+4 Faceless Haven
+17 Snow-Covered Swamp
+
+[sideboard]
+4 Go Blank
+2 Ray of Enfeeblement
+2 Blood on the Snow
+2 Soul Shatter
+2 Duress
+2 Infernal Grasp
+1 Eaten Alive

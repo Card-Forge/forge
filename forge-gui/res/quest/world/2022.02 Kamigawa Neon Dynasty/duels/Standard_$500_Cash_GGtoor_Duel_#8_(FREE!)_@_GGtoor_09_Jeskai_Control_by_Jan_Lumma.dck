@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Jan Lumma
+Title=Hera
+Difficulty=very hard
+Description=Jeskai Control by Jan Lumma
+Icon=Hera.jpg
+Deck Type=constructed
+
+[main]
+1 Valorous Stance
+2 Fading Hope
+2 Spikefield Hazard
+2 Negate
+2 Alchemist's Gambit
+2 The Celestus
+3 Galvanic Iteration
+4 Expressive Iteration
+4 Unexpected Windfall
+4 Magma Opus
+4 Jwari Disruption
+4 Abrade
+4 Hinata, Dawn-Crowned
+1 Sundown Pass
+1 Mountain
+1 Otawara, Soaring City
+1 Deserted Beach
+1 Island
+1 Hall of Storm Giants
+1 Eiganjo, Seat of the Empire
+3 Stormcarved Coast
+4 Needleverge Pathway
+4 Hengegate Pathway
+4 Riverglide Pathway
+
+[sideboard]
+4 Behold the Multiverse
+4 Smoldering Egg
+2 Lier, Disciple of the Drowned
+2 Disdainful Stroke
+1 Thundering Rebuke
+1 Test of Talents
+1 Valorous Stance

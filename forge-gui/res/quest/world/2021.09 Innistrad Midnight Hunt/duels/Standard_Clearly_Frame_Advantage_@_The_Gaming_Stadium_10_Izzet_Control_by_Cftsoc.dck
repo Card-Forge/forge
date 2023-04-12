@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Izzet Control by Cftsoc
+Title=Wallolol
+Difficulty=very hard
+Description=Izzet Control by Cftsoc
+Icon=Wallolol.jpg
+Deck Type=constructed
+
+[main]
+3 Goldspan Dragon
+4 Smoldering Egg
+1 Negate
+1 Consider
+2 Disdainful Stroke
+2 Burning Hands
+2 Galvanic Iteration
+3 Fading Hope
+4 Memory Deluge
+4 Divide by Zero
+4 Shatterskull Smashing
+4 Expressive Iteration
+4 Alrund's Epiphany
+3 Frostboil Snarl
+3 Hall of Storm Giants
+4 Riverglide Pathway
+5 Mountain
+7 Island
+
+[sideboard]
+2 Negate
+2 Burning Hands
+1 Demon Bolt
+1 Teachings of the Archaics
+1 Inferno of the Star Mounts
+1 Environmental Sciences
+2 Mascot Exhibition
+2 Cinderclasm
+3 Malevolent Hermit

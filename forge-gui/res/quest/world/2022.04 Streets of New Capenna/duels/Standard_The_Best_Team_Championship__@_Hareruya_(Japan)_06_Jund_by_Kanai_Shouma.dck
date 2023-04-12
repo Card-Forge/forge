@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jund by Kanai Shouma
+Title=alathrax
+Difficulty=very hard
+Description=Jund by Kanai Shouma
+Icon=alathrax.jpg
+Deck Type=constructed
+
+[main]
+1 The Meathook Massacre
+2 Fable of the Mirror-Breaker
+2 Infernal Grasp
+2 Shatterskull Smashing
+3 Riveteers Charm
+3 Ob Nixilis, the Adversary
+4 Esika's Chariot
+2 Moonveil Regent
+2 Prosperous Innkeeper
+4 Ziatora's Envoy
+4 Kalain, Reclusive Painter
+4 Reckless Stormseeker
+4 Black Market Tycoon
+2 Deathcap Glade
+2 Rockfall Vale
+3 Haunted Ridge
+4 Cragcrown Pathway
+4 Ziatora's Proving Ground
+4 Blightstep Pathway
+4 Darkbore Pathway
+
+[sideboard]
+2 Voltage Surge
+2 Workshop Warchief
+2 Graveyard Trespasser
+2 Tamiyo's Safekeeping
+1 Ray of Enfeeblement
+1 Valki, God of Lies
+1 Burn Down the House
+1 Wrenn and Seven
+3 Duress

@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Bant Control by Jason Fleurant
+Title=Dr Strangelove
+Difficulty=very hard
+Description=Bant Control by Jason Fleurant
+Icon=Dr Strangelove.jpg
+Deck Type=constructed
+
+[main]
+4 Teferi, Time Raveler
+1 Hydroid Krasis
+1 Brazen Borrower
+3 Jolrael, Mwonvuli Recluse
+4 Uro, Titan of Nature's Wrath
+1 Temple of Mystery
+2 Dovin's Veto
+4 Growth Spiral
+1 Castle Vantress
+1 Temple of Enlightenment
+1 Temple of Plenty
+2 Elspeth Conquers Death
+2 Shatter the Sky
+2 Boon of the Wish-Giver
+2 Sublime Epiphany
+1 Zagoth Triome
+2 Forest
+2 Plains
+1 Aether Gust
+2 Nissa, Who Shakes the World
+2 Shark Typhoon
+3 Island
+4 Hallowed Fountain
+4 Breeding Pool
+4 Fabled Passage
+4 Temple Garden
+
+[sideboard]
+1 Dovin's Veto
+1 Elspeth Conquers Death
+2 Shatter the Sky
+1 Ugin, the Spirit Dragon
+1 Elder Gargaroth
+1 Aether Gust
+3 Mystical Dispute
+2 Glass Casket
+2 Narset, Parter of Veils
+1 Devout Decree

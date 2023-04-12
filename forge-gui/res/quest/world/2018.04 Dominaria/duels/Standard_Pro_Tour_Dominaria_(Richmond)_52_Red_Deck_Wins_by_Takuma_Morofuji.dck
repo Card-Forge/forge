@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Takuma Morofuji
+Title=Sorceress
+Difficulty=very hard
+Description=Red Deck Wins by Takuma Morofuji
+Icon=Sorceress.jpg
+Deck Type=constructed
+
+[main]
+1 Chandra, Torch of Defiance|KLD
+3 Ahn-Crop Crasher|AKH
+4 Bomat Courier|KLD
+4 Earthshaker Khenra|HOU
+4 Goblin Chainwhirler
+4 Hazoret the Fervent|AKH
+2 Kari Zev, Skyship Raider|AER
+4 Soul-Scar Mage|AKH
+3 Abrade|HOU
+4 Lightning Strike|XLN
+4 Shock|AER
+23 Mountain
+
+[sideboard]
+2 Chandra, Torch of Defiance|KLD
+1 Abrade|HOU
+1 Scavenger Grounds|HOU
+3 Glorybringer|AKH
+2 Chandra's Defeat|HOU
+2 Magma Spray|AKH
+3 Fight with Fire
+1 Aethersphere Harvester|AER

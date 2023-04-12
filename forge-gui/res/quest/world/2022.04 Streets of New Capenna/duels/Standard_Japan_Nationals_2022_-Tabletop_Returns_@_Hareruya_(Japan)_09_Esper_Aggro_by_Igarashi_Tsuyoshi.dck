@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Igarashi Tsuyoshi
+Title=The World Is Not Enough
+Difficulty=very hard
+Description=Esper Aggro by Igarashi Tsuyoshi
+Icon=The World Is Not Enough.jpg
+Deck Type=constructed
+
+[main]
+2 Obscura Interceptor
+2 Tenacious Underdog
+3 Spectral Adversary
+4 Luminarch Aspirant
+4 Raffine, Scheming Seer
+1 Memory Deluge
+1 Negate
+1 Infernal Grasp
+1 Spell Pierce
+1 Disdainful Stroke
+2 Make Disappear
+2 Vanishing Verse
+3 Exotic Pets
+2 The Meathook Massacre
+3 The Wandering Emperor
+4 Kaito Shizuki
+1 Shattered Sanctum
+1 Cave of the Frost Dragon
+1 Hive of the Eye Tyrant
+2 Shipwreck Marsh
+3 Deserted Beach
+4 Clearwater Pathway
+4 Brightclimb Pathway
+4 Hengegate Pathway
+4 Raffine's Tower
+
+[sideboard]
+1 Negate
+1 Disdainful Stroke
+1 Farewell
+1 Shadows' Verdict
+1 Path of Peril
+2 Unlicensed Hearse
+2 Portable Hole
+3 Duress
+3 Ray of Enfeeblement

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro  by Chris Kvartek
+Title=Centaur Warchief
+Difficulty=very hard
+Description=Mono Green Aggro  by Chris Kvartek
+Icon=Centaur Warchief.jpg
+Deck Type=constructed
+
+[main]
+2 Thrashing Brontodon
+3 Scavenging Ooze
+4 Lovestruck Beast
+4 Feasting Troll King
+4 Kazandu Mammoth
+4 Tangled Florahedron
+4 Gilded Goose
+4 Wicked Wolf
+3 The Great Henge
+4 Trail of Crumbs
+2 Vivien, Monsters' Advocate
+3 Bonders' Enclave
+4 Castle Garenbrig
+15 Forest
+
+[sideboard]
+2 Thrashing Brontodon
+1 Scavenging Ooze
+1 Vivien, Monsters' Advocate
+1 Wilt
+2 Chainweb Aracnir
+2 Elder Gargaroth
+2 Ranger's Guile
+4 Questing Beast

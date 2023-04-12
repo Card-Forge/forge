@@ -1,0 +1,41 @@
+[quest]
+id=20110901
+OpponentName=Alexander Hayne
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=10
+Card Reward=5 random rares
+Credit Reward=10000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Miracle!
+Title=Miracle!
+Difficulty=very hard
+Description=Miracle ! by Alexander Hayne
+Icon=Amphibian.jpg
+Deck Type=constructed
+
+[main]
+1 Dissipate|M15
+4 Tamiyo, the Moon Sage|AVR
+4 Feeling of Dread|ISD
+4 Think Twice|ISD
+4 Thought Scour|DKA
+4 Devastation Tide|C16
+4 Entreat the Angels|AVR
+4 Temporal Mastery|AVR
+4 Terminus|AVR
+4 Evolving Wilds
+10 Plains|RTR
+13 Island|RTR
+
+[sideboard]
+2 Midnight Haunting|C14
+1 Angel's Mercy|M13
+2 Snapcaster Mage|ISD
+3 Geist of Saint Traft|ISD
+4 Cathedral Sanctifier|AVR
+3 Dissipate|M15

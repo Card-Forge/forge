@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Mono White Control  by Yoshimoto Ryuya
+Title=Odin
+Difficulty=very hard
+Description=Mono White Control  by Yoshimoto Ryuya
+Icon=Odin.jpg
+Deck Type=constructed
+
+[main]
+1 Cathar Commando
+1 Loran of the Third Path
+2 Serra Paragon
+2 Steel Seraph
+2 Anointed Peacekeeper
+2 Sanctuary Warden
+2 The Restoration of Eiganjo
+2 Ao, the Dawn Sky
+3 Spirited Companion
+3 Ambitious Farmhand
+4 Reckoner Bankbuster
+2 Destroy Evil
+4 Lay Down Arms
+4 Wedding Announcement
+4 The Wandering Emperor
+3 Roadside Reliquary
+4 Mishra's Foundry
+15 Plains
+
+[sideboard]
+2 Loran of the Third Path
+1 Anointed Peacekeeper
+1 Extraction Specialist
+1 Fateful Absence
+2 Temporary Lockdown
+2 Unlicensed Hearse
+2 Elspeth Resplendent
+2 Farewell
+2 Brutal Cathar

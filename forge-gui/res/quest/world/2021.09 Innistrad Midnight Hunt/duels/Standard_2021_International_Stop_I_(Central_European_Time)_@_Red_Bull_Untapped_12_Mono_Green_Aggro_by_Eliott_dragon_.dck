@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Eliott dragon 
+Title=Beast2
+Difficulty=very hard
+Description=Mono Green Aggro by Eliott dragon 
+Icon=Beast2.jpg
+Deck Type=constructed
+
+[main]
+2 Primal Adversary
+1 Inscription of Abundance
+2 Unnatural Growth
+3 Snakeskin Veil
+4 Ranger Class
+4 Blizzard Brawl
+4 Esika's Chariot
+4 Kazandu Mammoth
+4 Werewolf Pack Leader
+4 Sculptor of Winter
+4 Old-Growth Troll
+2 Lair of the Hydra
+4 Faceless Haven
+18 Snow-Covered Forest
+
+[sideboard]
+3 Devouring Tendrils
+3 Tangletrap
+3 Tajuru Blightblade
+2 Froghemoth
+1 Wrenn and Seven
+2 Inscription of Abundance
+1 Snakeskin Veil

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Martin Jůza
+Title=Phenukenes
+Difficulty=very hard
+Description=Gruul Aggro by Martin Jůza
+Icon=Phenukenes.jpg
+Deck Type=constructed
+
+[main]
+4 Fabled Passage
+4 Cragcrown Pathway
+4 Mountain
+8 Forest
+4 Questing Beast
+4 Kazandu Mammoth
+4 Edgewall Innkeeper
+4 Brushfire Elemental
+4 Bonecrusher Giant
+2 Robber of the Rich
+4 Rimrock Knight
+4 Shatterskull Smashing
+4 Embercleave
+2 Scavenging Ooze
+4 Lovestruck Beast
+
+[sideboard]
+3 Vivien, Monsters' Advocate
+4 Scorching Dragonfire
+4 Phoenix of Ash
+2 Garruk's Harbinger
+2 Scavenging Ooze

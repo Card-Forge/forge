@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Dimir Control by Andrew Baeckstrom
+Title=Rocky
+Difficulty=very hard
+Description=Dimir Control by Andrew Baeckstrom
+Icon=Rocky.jpg
+Deck Type=constructed
+
+[main]
+1 Essence Scatter
+2 Bloodchief's Thirst
+2 Heartless Act
+2 Lullmage's Domination
+3 Agadeem's Awakening
+3 Of One Mind
+4 Drown in the Loch
+4 Into the Story
+4 Soaring Thought-Thief
+4 Ruin Crab
+4 Thieves' Guild Enforcer
+4 Merfolk Windrobber
+3 Zagoth Triome
+3 Swamp
+4 Temple of Deceit
+4 Clearwater Pathway
+4 Fabled Passage
+5 Island
+
+[sideboard]
+1 Lurrus of the Dream-Den
+4 Skyclave Shade
+2 Cling to Dust
+3 Negate
+3 Mystical Dispute
+2 Bloodchief's Thirst

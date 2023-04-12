@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=UG Control Goyf by Zack Smith
+Title=Falstark
+Difficulty=very hard
+Description=UG Control Goyf by Zack Smith
+Icon=Falstark.jpg
+Deck Type=constructed
+
+[main]
+4 Delay|FUT
+4 Riftwing Cloudskate|TSP
+4 Riftsweeper|FUT
+1 Pendelhaven|TSP
+2 Venser, Shaper Savant|FUT
+2 Mystic Snake|C15
+3 Snapback|TSP
+3 Llanowar Reborn|C15
+3 Vesuvan Shapeshifter|TSP
+4 Terramorphic Expanse|C16
+4 Looter il-Kor|TSP
+5 Forest|RTR
+3 Call of the Herd|TSP
+4 Tarmogoyf|FUT
+10 Island|RTR
+4 Psionic Blast|TSP
+
+[sideboard]
+3 Might of Old Krosa|TSP
+3 Serrated Arrows|TSP
+3 Aeon Chronicler|C16
+4 Pongify|C14
+2 Cancel

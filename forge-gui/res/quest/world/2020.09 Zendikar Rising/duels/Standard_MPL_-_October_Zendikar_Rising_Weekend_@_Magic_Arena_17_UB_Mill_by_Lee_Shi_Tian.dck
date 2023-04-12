@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=UB Mill by Lee Shi Tian
+Title=Robin
+Difficulty=very hard
+Description=UB Mill by Lee Shi Tian
+Icon=Robin.jpg
+Deck Type=constructed
+
+[main]
+1 Hagra Mauling
+2 Heartless Act
+2 Cling to Dust
+3 Mystical Dispute
+3 Bloodchief's Thirst
+3 Agadeem's Awakening
+4 Drown in the Loch
+4 Into the Story
+4 Thieves' Guild Enforcer
+4 Ruin Crab
+4 Merfolk Windrobber
+4 Soaring Thought-Thief
+2 Zagoth Triome
+2 Swamp
+2 Dismal Backwater
+4 Clearwater Pathway
+4 Temple of Deceit
+4 Island
+4 Fabled Passage
+
+[sideboard]
+2 Lullmage's Domination
+2 Extinction Event
+2 Skyclave Shade
+2 Deny the Divine
+1 Lurrus of the Dream-Den
+2 Negate
+3 Mazemind Tome
+1 Cling to Dust

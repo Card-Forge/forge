@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Fires of Invention by Zapgaze
+Title=No Life
+Difficulty=very hard
+Description=Fires of Invention by Zapgaze
+Icon=No Life.jpg
+Deck Type=constructed
+
+[main]
+4 Fabled Passage
+4 Hallowed Fountain
+4 Steam Vents
+3 Temple of Epiphany
+2 Temple of Triumph
+2 Sacred Foundry
+2 Plains
+2 Mountain
+2 Castle Vantress
+2 Island
+4 Teferi, Time Raveler
+4 Fires of Invention
+2 Elspeth Conquers Death
+2 Aether Gust
+4 Cavalier of Flame
+4 Sphinx of Foresight
+4 Bonecrusher Giant
+3 Stonecoil Serpent
+2 Brazen Borrower
+2 Kenrith, the Returned King
+1 God-Eternal Oketra
+1 Cavalier of Gales
+
+[sideboard]
+4 Robber of the Rich
+3 Mystical Dispute
+3 Deafening Clarion
+2 Dovin's Veto
+2 Devout Decree
+1 Disdainful Stroke

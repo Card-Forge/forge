@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Scapeshift by Marchitti Andrea
+Title=Morpheus
+Difficulty=very hard
+Description=Scapeshift by Marchitti Andrea
+Icon=Morpheus.jpg
+Deck Type=constructed
+
+[main]
+2 Castle Garenbrig
+1 Cavern of Souls|AVR
+2 Cinder Glade|BFZ
+2 Forest
+7 Mountain
+4 Stomping Ground
+4 Valakut, the Molten Pinnacle|ZEN
+2 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+4 Dryad of the Ilysian Grove
+4 Farseek|M13
+3 Lightning Bolt|M11
+2 Mwonvuli Acid-Moss|TSP
+4 Primeval Titan|M12
+4 Sakura-Tribe Elder|CHK
+4 Search for Tomorrow|TSP
+2 Summoner's Pact|FUT
+1 Titania, Protector of Argoth
+4 Wish
+
+[sideboard]
+1 Alpine Moon
+1 Anger of the Gods|THS
+1 Chandra, Awakened Inferno
+1 Emrakul, the Aeons Torn|ROE
+1 Flame Blitz
+1 Force of Vigor
+1 Foundation Breaker
+1 Scapeshift
+1 Sylvan Scrying|BFZ
+1 Tormod's Crypt
+4 Veil of Summer
+1 Weather the Storm

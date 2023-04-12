@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=UW Control by Florian Trotte
+Title=Rhonas the Indomitable
+Difficulty=very hard
+Description=UW Control by Florian Trotte
+Icon=Rhonas the Indomitable.jpg
+Deck Type=constructed
+
+[main]
+1 Emeria's Call
+1 Saw It Coming
+2 Dissipate
+2 Witness the Future
+3 Jwari Disruption
+3 Devastating Mastery
+3 Disdainful Stroke
+3 Fateful Absence
+4 Revitalize
+4 Behold the Multiverse
+4 Memory Deluge
+4 Doomskar
+4 Professor of Symbology
+1 Glacial Floodplain
+2 Gates of Istfell
+2 Hall of Storm Giants
+3 Plains
+3 Island
+4 Hengegate Pathway
+4 Deserted Beach
+4 Field of Ruin
+
+[sideboard]
+3 Candletrap
+2 Malevolent Hermit
+2 Mascot Exhibition
+1 Hullbreaker Horror
+1 Environmental Sciences
+1 Test of Talents
+1 Teachings of the Archaics
+1 Reduce to Memory
+1 Faithbound Judge
+1 Disdainful Stroke
+1 Fateful Absence

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Temur Rhinos by Renzo Verkooren
+Title=Seabiscuit
+Difficulty=very hard
+Description=Temur Rhinos by Renzo Verkooren
+Icon=Seabiscuit.jpg
+Deck Type=constructed
+
+[main]
+2 Bonecrusher Giant
+4 Brazen Borrower
+1 Breeding Pool
+4 Crashing Footfalls
+1 Fiery Islet
+4 Force of Negation
+1 Forest
+4 Fury
+2 Gemstone Caverns|TSP
+2 Island
+1 Ketria Triome
+4 Misty Rainforest|ZEN
+1 Mountain
+1 Murktide Regent
+2 Prismari Command
+4 Scalding Tarn|ZEN
+4 Shardless Agent
+1 Steam Vents
+1 Stomping Ground
+1 Sulfur Falls
+4 Violent Outburst|ARB
+2 Waterlogged Grove
+2 Wooded Foothills|KTK
+3 Dead // Gone|PLC
+4 Fire // Ice|AP
+
+[sideboard]
+1 Arlinn, the Pack's Hope
+3 Blood Moon|9E
+3 Endurance
+4 Force of Vigor
+4 Mystical Dispute

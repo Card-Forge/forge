@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Esper Raffine by Andre Judd
+Title=Swift Justice
+Difficulty=very hard
+Description=Esper Raffine by Andre Judd
+Icon=Swift Justice.jpg
+Deck Type=constructed
+
+[main]
+4 Skrelv, Defector Mite
+4 Thalia, Guardian of Thraben
+4 Dennick, Pious Apprentice
+2 Ludevic, Necrogenius
+4 Raffine, Scheming Seer
+3 Adeline, Resplendent Cathar
+4 Sheoldred, the Apocalypse
+1 Ertai Resurrected
+2 Go for the Throat
+4 Wedding Announcement
+3 Otawara, Soaring City
+3 Eiganjo, Seat of the Empire
+1 Takenuma, Abandoned Mire
+1 Adarkar Wastes
+4 Seachrome Coast
+2 Darkslick Shores
+4 Caves of Koilos
+3 Shattered Sanctum
+1 Plains
+4 Plaza of Heroes
+1 Shipwreck Marsh
+1 Underground River
+
+[sideboard]
+1 Go for the Throat
+1 Infernal Grasp
+1 Temporary Lockdown
+1 Ao, the Dawn Sky
+2 Loran of the Third Path
+2 Destroy Evil
+4 Cut Down
+2 Negate
+1 Kaito, Dancing Shadow

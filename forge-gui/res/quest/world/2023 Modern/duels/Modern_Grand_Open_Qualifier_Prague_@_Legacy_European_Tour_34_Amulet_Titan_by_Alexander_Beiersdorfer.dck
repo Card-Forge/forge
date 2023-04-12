@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Amulet Titan by Alexander Beiersdorfer
+Title=Walle
+Difficulty=very hard
+Description=Amulet Titan by Alexander Beiersdorfer
+Icon=Walle.jpg
+Deck Type=constructed
+
+[main]
+4 Primeval Titan|M12
+4 Dryad of the Ilysian Grove
+2 Azusa, Lost but Seeking
+4 Arboreal Grazer
+1 Cultivator Colossus
+4 Amulet of Vigor|WWK
+1 Expedition Map|ZEN
+4 Summoner's Pact|FUT
+3 Explore|WWK
+4 Urza's Saga
+2 Boseiju, Who Endures
+1 Slayers' Stronghold|AVR
+1 Sunhome, Fortress of the Legion|RAV
+1 Boros Garrison|RAV
+2 Tolaria West|FUT
+2 Valakut, the Molten Pinnacle|ZEN
+3 The Mycosynth Gardens
+4 Forest
+4 Simic Growth Chamber|DIS
+2 Selesnya Sanctuary|RAV
+3 Gruul Turf|GP
+1 Vesuva|TSP
+2 Cavern of Souls|AVR
+1 Golgari Rot Farm|RAV
+
+[sideboard]
+2 Boseiju, Who Endures
+1 Engineered Explosives|FD
+2 Dismember|NPH
+1 Relic of Progenitus|ALA
+2 Endurance
+1 Ulamog, the Infinite Gyre|ROE
+2 Tireless Tracker|SOI
+1 Radiant Fountain
+1 Bojuka Bog|WWK
+1 Slaughter Pact|FUT
+1 Dragonlord Atarka|DTK

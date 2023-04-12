@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ramunap Red by Michael Bernat
+Title=Nissa, Worldwaker
+Difficulty=very hard
+Description=Ramunap Red by Michael Bernat
+Icon=Nissa, Worldwaker.jpg
+Deck Type=constructed
+
+[main]
+4 Rampaging Ferocidon|XLN
+1 Ahn-Crop Crasher|AKH
+4 Earthshaker Khenra|HOU
+3 Kari Zev, Skyship Raider|AER
+4 Soul-Scar Mage|AKH
+4 Bomat Courier|KLD
+2 Abrade|HOU
+4 Shock|AER
+4 Lightning Strike|XLN
+15 Mountain|XLN
+4 Ramunap Ruins|HOU
+4 Sunscorched Desert|AKH
+1 Scavenger Grounds|HOU
+4 Hazoret the Fervent|AKH
+2 Chandra, Torch of Defiance|KLD
+
+[sideboard]
+2 Abrade|HOU
+2 Glorybringer|AKH
+2 Harsh Mentor|AKH
+2 Chandra's Defeat|HOU
+3 Pia Nalaar|KLD
+2 Aethersphere Harvester|AER
+2 Chandra, Torch of Defiance|KLD

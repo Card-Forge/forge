@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by Petros Tziotis
+Title=Pogo
+Difficulty=very hard
+Description=Golgari Aggro by Petros Tziotis
+Icon=Pogo.jpg
+Deck Type=constructed
+
+[main]
+3 Vivien Reid
+3 Wildgrowth Walker|XLN
+4 Llanowar Elves
+4 Merfolk Branchwalker|XLN
+4 Jadelight Ranger
+1 Golgari Findbroker
+3 Carnage Tyrant|XLN
+2 Ravenous Chupacabra
+2 Midnight Reaper
+2 Seekers' Squire|XLN
+3 Find // Finality
+3 Vraska's Contempt|XLN
+2 Cast Down
+1 Assassin's Trophy
+4 Woodland Cemetery
+2 Memorial to Folly
+8 Forest
+5 Swamp
+4 Overgrown Tomb
+
+[sideboard]
+1 Midnight Reaper
+2 Golden Demise
+1 Reaver Ambush
+4 Duress
+1 Reclamation Sage
+2 Deathgorge Scavenger|XLN
+1 Kraul Harpooner
+1 Thrashing Brontodon
+2 Doom Whisperer

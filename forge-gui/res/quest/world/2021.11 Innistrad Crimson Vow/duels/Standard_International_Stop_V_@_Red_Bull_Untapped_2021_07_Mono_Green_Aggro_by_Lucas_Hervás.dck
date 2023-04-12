@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Lucas Hervás
+Title=Havenwood
+Difficulty=very hard
+Description=Mono Green Aggro by Lucas Hervás
+Icon=Havenwood.jpg
+Deck Type=constructed
+
+[main]
+2 Ulvenwald Oddity
+3 Ascendant Packleader
+4 Sculptor of Winter
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+4 Esika's Chariot
+2 Snakeskin Veil
+2 Inscription of Abundance
+4 Blizzard Brawl
+3 Ranger Class
+1 Lair of the Hydra
+3 Faceless Haven
+4 Kazandu Mammoth
+20 Snow-Covered Forest
+
+[sideboard]
+1 Ulvenwald Oddity
+2 Snakeskin Veil
+1 Inscription of Abundance
+2 Briarbridge Tracker
+2 Tajuru Blightblade
+2 Outland Liberator
+2 Wrenn and Seven
+3 Devouring Tendrils

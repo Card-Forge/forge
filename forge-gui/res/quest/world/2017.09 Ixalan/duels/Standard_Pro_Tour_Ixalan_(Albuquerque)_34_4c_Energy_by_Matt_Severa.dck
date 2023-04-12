@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=4c Energy by Matt Severa
+Title=Krypto
+Difficulty=very hard
+Description=4c Energy by Matt Severa
+Icon=Krypto.jpg
+Deck Type=constructed
+
+[main]
+3 Chandra, Torch of Defiance|KLD
+4 Longtusk Cub|KLD
+4 Servant of the Conduit|KLD
+4 Whirler Virtuoso|KLD
+4 Rogue Refiner|AER
+1 Bristling Hydra|KLD
+2 Glorybringer|AKH
+2 The Scarab God|HOU
+4 Attune with Aether|KLD
+1 Confiscation Coup|KLD
+2 Magma Spray|AKH
+1 Abrade|HOU
+4 Harnessed Lightning|KLD
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+3 Spirebluff Canal|KLD
+3 Rootbound Crag|XLN
+1 Sheltered Thicket|AKH
+2 Mountain|XLN
+3 Forest|XLN
+1 Island|XLN
+1 Swamp|XLN
+2 Vraska, Relic Seeker|XLN
+
+[sideboard]
+1 Confiscation Coup|KLD
+2 Magma Spray|AKH
+1 Abrade|HOU
+4 Negate|AER
+2 Appetite for the Unnatural|KLD
+2 Chandra's Defeat|HOU
+2 Nissa, Steward of Elements|AKH
+1 Vizier of Many Faces|AKH

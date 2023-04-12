@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=UB Control by Shouta Takao
+Title=Obatala
+Difficulty=very hard
+Description=UB Control by Shouta Takao
+Icon=Obatala.jpg
+Deck Type=constructed
+
+[main]
+4 Creeping Tar Pit|WWK
+4 Darkslick Shores|SOM
+4 Drowned Catacomb|M12
+6 Island|M12
+4 Swamp|M12
+4 Tectonic Edge|WWK
+3 Grave Titan|M12
+3 Solemn Simulacrum|M12
+1 Wurmcoil Engine|SOM
+2 Black Sun's Zenith|MBS
+2 Doom Blade|M12
+1 Duress|M11
+1 Go for the Throat|MBS
+4 Inquisition of Kozilek|ROE
+4 Jace Beleren|M11
+4 Mana Leak|M12
+4 Preordain|M11
+3 Ratchet Bomb|SOM
+2 Stoic Rebuttal|SOM
+
+[sideboard]
+1 Duress|M11
+3 Disfigure|ZEN
+2 Flashfreeze|M12
+2 Liliana Vess|M11
+2 Memoricide|SOM
+2 Spellskite|NPH
+3 Spreading Seas|ZEN

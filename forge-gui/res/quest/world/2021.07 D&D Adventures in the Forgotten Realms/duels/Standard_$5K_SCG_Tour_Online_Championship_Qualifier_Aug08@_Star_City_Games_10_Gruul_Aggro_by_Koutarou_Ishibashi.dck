@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Koutarou Ishibashi
+Title=Crows in the Field
+Difficulty=very hard
+Description=Gruul Aggro by Koutarou Ishibashi
+Icon=Crows in the Field.jpg
+Deck Type=constructed
+
+[main]
+2 Goldspan Dragon
+4 Magda, Brazen Outlaw
+4 Bonecrusher Giant
+4 Jaspera Sentinel
+4 Lovestruck Beast
+4 Edgewall Innkeeper
+2 Embercleave
+4 Esika's Chariot
+1 Redcap Melee
+1 Ray of Enfeeblement
+4 Shatterskull Smashing
+2 The Akroan War
+2 Ranger Class
+1 Mountain
+3 Den of the Bugbear
+3 Lair of the Hydra
+3 Forest
+4 Cragcrown Pathway
+4 Blightstep Pathway
+4 Darkbore Pathway
+
+[sideboard]
+3 Redcap Melee
+1 Ray of Enfeeblement
+1 Garruk, Unleashed
+2 Burning Hands
+2 Wilt
+2 Klothys, God of Destiny
+2 Ox of Agonas
+2 Vivien, Monsters' Advocate

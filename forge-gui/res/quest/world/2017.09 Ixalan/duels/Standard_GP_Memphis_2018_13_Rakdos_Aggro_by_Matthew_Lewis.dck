@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Matthew Lewis
+Title=Burn
+Difficulty=very hard
+Description=Rakdos Aggro by Matthew Lewis
+Icon=Burn.jpg
+Deck Type=constructed
+
+[main]
+1 Key to the City|KLD
+2 Chandra, Torch of Defiance|KLD
+2 Aethersphere Harvester|AER
+2 Abrade|HOU
+4 Lightning Strike|XLN
+4 Unlicensed Disintegration|KLD
+2 Glorybringer|AKH
+2 Rekindling Phoenix
+3 Lathnu Hellion|KLD
+3 Hazoret the Fervent|AKH
+4 Scrapheap Scrounger|KLD
+4 Glint-Sleeve Siphoner|AER
+4 Bomat Courier|KLD
+2 Swamp
+2 Scavenger Grounds|HOU
+2 Ifnir Deadlands|HOU
+3 Canyon Slough|AKH
+4 Dragonskull Summit|XLN
+10 Mountain
+
+[sideboard]
+2 Angrath, the Flame-Chained
+2 Duress|XLN
+1 Fatal Push|AER
+2 Magma Spray|AKH
+1 Arguel's Blood Fast|XLN
+1 Dire Fleet Daredevil
+2 Moment of Craving
+2 Pia Nalaar|KLD
+2 Vraska's Contempt|XLN

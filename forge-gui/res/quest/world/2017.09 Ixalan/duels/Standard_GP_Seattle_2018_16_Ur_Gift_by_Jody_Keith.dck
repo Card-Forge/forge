@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ur Gift by Jody Keith
+Title=Colossus
+Difficulty=very hard
+Description=Ur Gift by Jody Keith
+Icon=Colossus.jpg
+Deck Type=constructed
+
+[main]
+4 Spirebluff Canal|KLD
+6 Mountain
+4 Island
+4 Ipnu Rivulet|HOU
+4 Aether Hub|KLD
+2 God-Pharaoh's Gift|HOU
+4 Gate to the Afterlife|AKH
+4 Warkite Marauder
+4 Walking Ballista|AER
+2 Vizier of Many Faces|AKH
+2 Trophy Mage|AER
+4 Minister of Inquiries|KLD
+4 Fanatical Firebrand
+4 Combat Celebrant|AKH
+4 Champion of Wits|HOU
+4 Bomat Courier|KLD
+
+[sideboard]
+2 Whirler Virtuoso|KLD
+2 Sweltering Suns|AKH
+2 Spell Pierce|XLN
+2 Silent Gravestone
+2 Padeem, Consul of Innovation|KLD
+2 Negate
+1 Jace's Defeat|HOU
+2 Abrade|HOU

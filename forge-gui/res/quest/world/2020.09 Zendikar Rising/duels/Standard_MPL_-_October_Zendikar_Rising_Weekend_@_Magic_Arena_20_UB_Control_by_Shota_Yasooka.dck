@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=UB Control by Shota Yasooka
+Title=The Rock
+Difficulty=very hard
+Description=UB Control by Shota Yasooka
+Icon=The Rock.jpg
+Deck Type=constructed
+
+[main]
+1 Shadows' Verdict
+1 Cling to Dust
+1 Eliminate
+1 Hagra Mauling
+1 Ugin, the Spirit Dragon
+2 Negate
+2 Drown in the Loch
+2 Neutralize
+2 Shark Typhoon
+2 Rain of Revelation
+3 Rewind
+3 Essence Scatter
+3 Mazemind Tome
+3 Heartless Act
+4 Bloodchief's Thirst
+1 Lochmere Serpent
+1 Zareth San, the Trickster
+2 Brazen Borrower
+1 Castle Vantress
+2 Dismal Backwater
+2 Crawling Barrens
+4 Clearwater Pathway
+4 Temple of Deceit
+6 Island
+6 Swamp
+
+[sideboard]
+1 Ashiok, Nightmare Muse
+1 Glimpse of Freedom
+2 Elspeth's Nightmare
+3 Duress
+2 Mystical Dispute
+1 Shadows' Verdict
+1 Cling to Dust
+2 Negate
+1 Shark Typhoon
+1 Mazemind Tome

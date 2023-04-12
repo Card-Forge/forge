@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Temur Aggro by Shorak123
+Title=The Champions
+Difficulty=very hard
+Description=Temur Aggro by Shorak123
+Icon=The Champions.jpg
+Deck Type=constructed
+
+[main]
+1 Aether Spellbomb|MR
+1 Shadowspear
+1 Soul-Guide Lantern
+1 Springleaf Drum|BNG
+3 Wrenn and Six
+4 Lightning Bolt|M11
+4 Expressive Iteration
+4 Fire // Ice|AP
+4 Unholy Heat
+4 Mishra's Bauble|CS
+4 Tarmogoyf|FUT
+4 Ragavan, Nimble Pilferer
+4 Dragon's Rage Channeler
+1 Breeding Pool
+1 Spirebluff Canal|KLD
+1 Forest
+1 Copperline Gorge|SOM
+2 Steam Vents
+3 Stomping Ground
+4 Misty Rainforest|ZEN
+4 Urza's Saga
+4 Wooded Foothills|KTK
+
+[sideboard]
+2 Alpine Moon
+1 Emrakul, the Aeons Torn|ROE
+1 Engineered Explosives|FD
+3 Flusterstorm
+1 Force of Vigor
+2 Fury
+1 Pithing Needle|RTR
+1 Prismari Command
+1 Relic of Progenitus|ALA
+2 Shattering Spree|GP

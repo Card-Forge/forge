@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Masahide Moriyama
+Title=Jedit Ojanen
+Difficulty=very hard
+Description=Esper Aggro by Masahide Moriyama
+Icon=Jedit Ojanen.jpg
+Deck Type=constructed
+
+[main]
+1 Dennick, Pious Apprentice
+2 Legion Angel
+3 Tenacious Underdog
+4 Raffine, Scheming Seer
+4 Luminarch Aspirant
+2 Make Disappear
+2 Infernal Grasp
+3 Vanishing Verse
+1 Emeria's Call
+2 The Meathook Massacre
+4 Wedding Announcement
+2 Kaito Shizuki
+2 Lolth, Spider Queen
+3 The Wandering Emperor
+1 Swamp
+1 Plains
+1 Hive of the Eye Tyrant
+1 Shattered Sanctum
+2 Shipwreck Marsh
+3 Deserted Beach
+4 Clearwater Pathway
+4 Brightclimb Pathway
+4 Hengegate Pathway
+4 Raffine's Tower
+
+[sideboard]
+2 Legion Angel
+1 The Meathook Massacre
+1 Disdainful Stroke
+2 Sanctuary Warden
+2 Negate
+3 Ray of Enfeeblement
+4 Archon of Emeria

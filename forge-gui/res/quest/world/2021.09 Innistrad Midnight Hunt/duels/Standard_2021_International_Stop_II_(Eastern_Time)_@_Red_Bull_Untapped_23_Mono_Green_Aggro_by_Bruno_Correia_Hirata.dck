@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Bruno Correia Hirata
+Title=The Very Hungry Caterpillar
+Difficulty=very hard
+Description=Mono Green Aggro by Bruno Correia Hirata
+Icon=The Very Hungry Caterpillar.jpg
+Deck Type=constructed
+
+[main]
+2 Primal Adversary
+4 Old-Growth Troll
+4 Werewolf Pack Leader
+4 Sculptor of Winter
+4 Esika's Chariot
+1 Snakeskin Veil
+2 Inscription of Abundance
+4 Blizzard Brawl
+1 Unnatural Growth
+4 Ranger Class
+2 Wrenn and Seven
+1 Tangled Florahedron
+3 Faceless Haven
+4 Kazandu Mammoth
+20 Snow-Covered Forest
+
+[sideboard]
+2 Snakeskin Veil
+1 Inscription of Abundance
+1 Tovolar's Huntmaster
+1 Froghemoth
+2 Tangletrap
+2 Devouring Tendrils
+3 Tajuru Blightblade
+3 Outland Liberator

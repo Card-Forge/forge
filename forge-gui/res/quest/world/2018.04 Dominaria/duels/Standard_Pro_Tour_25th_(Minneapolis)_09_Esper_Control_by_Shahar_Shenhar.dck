@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Esper Control by Shahar Shenhar
+Title=Hermione Granger
+Difficulty=very hard
+Description=Esper Control by Shahar Shenhar
+Icon=Hermione Granger.jpg
+Deck Type=constructed
+
+[main]
+4 Torrential Gearhulk|KLD
+1 The Scarab God|HOU
+1 Cast Down
+4 Disallow|AER
+4 Essence Scatter
+4 Fatal Push|AER
+4 Glimmer of Genius|KLD
+1 Syncopate
+4 Vraska's Contempt|XLN
+1 Negate
+2 Search for Azcanta|XLN
+4 Drowned Catacomb|XLN
+4 Fetid Pools|AKH
+1 Field of Ruin|XLN
+3 Glacial Fortress|XLN
+4 Isolated Chapel
+3 Island
+4 Swamp
+4 Irrigated Farmland|AKH
+3 Teferi, Hero of Dominaria
+
+[sideboard]
+1 Negate
+2 Glint-Sleeve Siphoner|AER
+1 Sorcerous Spyglass|XLN
+2 Jace's Defeat|HOU
+2 Aether Meltdown|KLD
+2 Duress
+1 Essence Extraction|KLD
+2 Yahenni's Expertise|AER
+1 Vizier of Many Faces|AKH
+1 Chromium, the Mutable

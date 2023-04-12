@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Jeskai Midrange by Edgar Magalhaes
+Title=Vanellope von Schweetz
+Difficulty=very hard
+Description=Jeskai Midrange by Edgar Magalhaes
+Icon=Vanellope von Schweetz.jpg
+Deck Type=constructed
+
+[main]
+1 Fiery Impulse|ORI
+1 Sorin, Solemn Visitor|KTK
+1 Dragonmaster Outcast|BFZ
+4 Jace, Vryn's Prodigy|ORI
+4 Hangarback Walker|ORI
+4 Mantis Rider|KTK
+3 Pia and Kiran Nalaar|ORI
+2 Treasure Cruise|KTK
+1 Dispel|BFZ
+1 Swamp|BFZ
+1 Sunken Hollow|BFZ
+1 Smoldering Marsh|BFZ
+2 Prairie Stream|BFZ
+2 Mountain|BFZ
+1 Plains|BFZ
+1 Island|BFZ
+4 Polluted Delta|KTK
+4 Bloodstained Mire|KTK
+4 Flooded Strand|KTK
+4 Mystic Monastery|KTK
+3 Ojutai's Command|DTK
+4 Crackling Doom|KTK
+2 Jeskai Charm|KTK
+2 Draconic Roar|DTK
+3 Wild Slash|FRF
+
+[sideboard]
+1 Dragonmaster Outcast|BFZ
+4 Radiant Flames|BFZ
+2 Surge of Righteousness|DTK
+2 Arashin Cleric|FRF
+2 Negate|ORI
+1 Tasigur, the Golden Fang|FRF
+1 Utter End|KTK
+2 Kolaghan's Command|DTK

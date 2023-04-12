@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=UB God Pharaoh's Gifts by Travis Woo
+Title=Assassin
+Difficulty=very hard
+Description=UB God Pharaoh's Gifts by Travis Woo
+Icon=Assassin.jpg
+Deck Type=constructed
+
+[main]
+3 Minister of Inquiries|KLD
+4 Kitesail Freebooter|XLN
+4 Gifted Aetherborn|AER
+4 Champion of Wits|HOU
+1 Trophy Mage|AER
+4 Hostage Taker|XLN
+3 The Scarab God|HOU
+4 Walking Ballista|AER
+2 Fatal Push|AER
+4 Gate to the Afterlife|AKH
+2 God-Pharaoh's Gift|HOU
+4 Fetid Pools|AKH
+4 Drowned Catacomb|XLN
+4 Aether Hub|KLD
+3 Ipnu Rivulet|HOU
+2 Island|XLN
+8 Swamp|XLN
+
+[sideboard]
+2 Fatal Push|AER
+3 Duress|XLN
+2 Negate|AER
+1 Supreme Will|HOU
+4 Vraska's Contempt|XLN
+1 Noxious Gearhulk|KLD
+2 River's Rebuke|XLN

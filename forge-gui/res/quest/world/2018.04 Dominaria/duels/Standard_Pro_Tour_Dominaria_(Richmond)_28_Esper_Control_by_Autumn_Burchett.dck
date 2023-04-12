@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Esper Control by Autumn Burchett
+Title=Baron Leckba
+Difficulty=very hard
+Description=Esper Control by Autumn Burchett
+Icon=Baron Leckba.jpg
+Deck Type=constructed
+
+[main]
+3 Torrential Gearhulk|KLD
+1 The Scarab God|HOU
+2 Duress|XLN
+4 Fatal Push|AER
+4 Vraska's Contempt|XLN
+2 Cast Down
+2 Glimmer of Genius|KLD
+2 Hieroglyphic Illumination|AKH
+1 Negate
+2 Syncopate
+1 Censor|AKH
+3 Disallow|AER
+2 Blink of an Eye
+2 Search for Azcanta|XLN
+3 Island
+4 Swamp
+1 Plains
+4 Fetid Pools|AKH
+4 Drowned Catacomb|XLN
+1 Submerged Boneyard|AKH
+2 Irrigated Farmland|AKH
+2 Glacial Fortress|XLN
+1 Isolated Chapel
+2 Aether Hub|KLD
+2 Field of Ruin|XLN
+3 Teferi, Hero of Dominaria
+
+[sideboard]
+1 Duress|XLN
+2 Negate
+1 Sorcerous Spyglass|XLN
+1 Aether Meltdown|KLD
+1 Gonti, Lord of Luxury|KLD
+1 Arguel's Blood Fast|XLN
+4 Knight of Malice
+1 Jace's Defeat|HOU
+2 Forsake the Worldly|AKH
+1 Moment of Craving

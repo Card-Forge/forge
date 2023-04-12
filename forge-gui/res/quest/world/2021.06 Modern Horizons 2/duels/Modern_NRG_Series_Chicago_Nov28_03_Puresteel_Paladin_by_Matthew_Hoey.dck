@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by Matthew Hoey
+Title=The Ooze
+Difficulty=very hard
+Description=Puresteel Paladin by Matthew Hoey
+Icon=The Ooze.jpg
+Deck Type=constructed
+
+[main]
+1 Gingerbrute
+2 Kor Outfitter|ZEN
+4 Memnite|SOM
+4 Ornithopter|AER
+4 Stoneforge Mystic|WWK
+4 Esper Sentinel
+4 Puresteel Paladin|NPH
+1 Shadowspear
+1 Cranial Plating|FD
+4 Springleaf Drum|BNG
+4 Colossus Hammer
+4 Urza's Saga
+4 Sigarda's Aid|EMN
+1 Horizon Canopy|FUT
+1 Godless Shrine
+2 Concealed Courtyard|KLD
+3 Inkmoth Nexus|MBS
+4 Silent Clearing
+4 Plains
+4 Marsh Flats|ZEN
+
+[sideboard]
+1 Lurrus of the Dream-Den
+1 Nihil Spellbomb|SOM
+1 Pithing Needle
+2 Seal of Cleansing|NE
+2 Hushbringer
+2 Prismatic Ending
+2 Sanctifier en-Vec
+4 Thoughtseize|THS

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Krowz
+Title=Hermione Granger
+Difficulty=very hard
+Description=Boros Aggro by Krowz
+Icon=Hermione Granger.jpg
+Deck Type=constructed
+
+[main]
+1 Valorous Stance
+1 Shatterskull Smashing
+2 Angelfire Ignition
+3 Emeria's Call
+4 Showdown of the Skalds
+4 Sejiri Shelter
+2 Sungold Sentinel
+3 Reidane, God of the Worthy
+4 Brutal Cathar
+4 Elite Spellbinder
+4 Luminarch Aspirant
+4 Goldspan Dragon
+4 Thalia, Guardian of Thraben
+2 Den of the Bugbear
+3 Cave of the Frost Dragon
+3 Mountain
+4 Plains
+4 Needleverge Pathway
+4 Sundown Pass
+
+[sideboard]
+4 Skyclave Apparition
+2 Intrepid Adversary
+2 Paladin Class
+2 Reckless Stormseeker
+1 Guardian of Faith
+1 Volatile Arsonist
+3 Valorous Stance

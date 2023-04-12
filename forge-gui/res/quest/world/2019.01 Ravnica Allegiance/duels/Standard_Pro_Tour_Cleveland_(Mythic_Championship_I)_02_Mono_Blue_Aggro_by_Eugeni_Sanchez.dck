@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Mono Blue Aggro by Eugeni Sanchez
+Title=Flandre Scarlet
+Difficulty=very hard
+Description=Mono Blue Aggro by Eugeni Sanchez
+Icon=Flandre Scarlet.jpg
+Deck Type=constructed
+
+[main]
+4 Merfolk Trickster
+2 Mist-Cloaked Herald
+4 Pteramander
+4 Siren Stormtamer|XLN
+4 Tempest Djinn
+2 Chart a Course|XLN
+1 Entrancing Melody|XLN
+3 Dive Down|XLN
+1 Essence Capture
+4 Opt
+3 Spell Pierce|XLN
+4 Wizard's Retort
+4 Curious Obsession
+20 Island
+
+[sideboard]
+3 Entrancing Melody|XLN
+3 Deep Freeze
+2 Exclusion Mage
+4 Negate
+3 Surge Mare

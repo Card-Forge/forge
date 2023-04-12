@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Esper Midrange by Ken Yukuhiro
+Title=Dungeon Crawling Blue
+Difficulty=very hard
+Description=Esper Midrange by Ken Yukuhiro
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+
+[main]
+4 Sphinx of Foresight
+4 Seasoned Hallowblade
+4 Rotting Regisaur
+1 Swamp
+1 Temple of Deceit
+1 Temple of Silence
+2 Kunoros, Hound of Athreos
+4 Tithe Taker
+4 Brazen Borrower
+2 Temple of Enlightenment
+2 Plains
+2 Island
+2 Aether Gust
+2 Dovin's Veto
+4 Mystical Dispute
+4 Teferi, Time Raveler
+4 Godless Shrine
+4 Watery Grave
+4 Fabled Passage
+1 Dire Tactics
+4 Hallowed Fountain
+
+[sideboard]
+1 Aether Gust
+1 Dovin's Veto
+2 Legion's End
+2 Giant Killer
+2 Kaya, Orzhov Usurper
+1 Dire Tactics
+1 Noxious Grasp
+2 Extinction Event
+3 Archon of Absolution

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Izzet Phoenix by Jan-Moritz Merkel
+Title=Sanctuary
+Difficulty=very hard
+Description=Izzet Phoenix by Jan-Moritz Merkel
+Icon=Sanctuary.jpg
+Deck Type=constructed
+
+[main]
+4 Chart a Course|XLN
+2 Lava Coil
+3 Augur of Bolas
+3 Goblin Electromancer
+3 Crackling Drake
+4 Arclight Phoenix
+6 Mountain
+7 Island
+4 Sulfur Falls
+4 Steam Vents
+1 Spell Pierce|XLN
+1 Lightning Strike
+3 Radical Idea
+1 Discovery // Dispersal
+4 Shock
+4 Opt
+1 Beacon Bolt
+2 Tormenting Voice
+3 Finale of Promise
+
+[sideboard]
+2 Lava Coil
+1 Augur of Bolas
+3 Legion Warboss
+1 Shivan Fire
+1 Negate
+3 Fiery Cannonade|XLN
+2 Niv-Mizzet, Parun
+2 Spell Pierce|XLN

@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Esper Dragons by Paul Cheon
+Title=The Ooze
+Difficulty=very hard
+Description=Esper Dragons by Paul Cheon
+Icon=The Ooze.jpg
+Deck Type=constructed
+
+[main]
+1 Dragonlord's Prerogative|DTK
+1 Ugin, the Spirit Dragon|FRF
+2 Thoughtseize|THS
+2 Dissolve|THS
+2 Ultimate Price|DTK
+2 Bile Blight|BNG
+2 Crux of Fate|FRF
+2 Foul-Tongue Invocation|DTK
+3 Hero's Downfall|THS
+3 Anticipate|DTK
+4 Silumgar's Scorn|DTK
+4 Dig Through Time|KTK
+2 Silumgar, the Drifting Death|FRF
+3 Dragonlord Ojutai|DTK
+1 Urborg, Tomb of Yawgmoth|M15
+1 Flooded Strand|KTK
+2 Caves of Koilos|M15
+2 Swamp|DTK
+2 Haven of the Spirit Dragon|DTK
+3 Island|DTK
+4 Temple of Deceit|THS
+4 Temple of Enlightenment|BNG
+4 Polluted Delta|KTK
+4 Dismal Backwater|FRF
+
+[sideboard]
+2 Negate|DTK
+2 Dragonlord Silumgar|DTK
+2 Tasigur, the Golden Fang|FRF
+2 Drown in Sorrow|BNG
+1 Disdainful Stroke|KTK
+1 Dragonlord's Prerogative|DTK
+1 Thoughtseize|THS
+1 Ultimate Price|DTK
+2 Bile Blight|BNG
+1 Foul-Tongue Invocation|DTK

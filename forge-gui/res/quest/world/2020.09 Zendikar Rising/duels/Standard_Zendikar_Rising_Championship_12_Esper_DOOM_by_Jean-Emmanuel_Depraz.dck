@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Esper DOOM by Jean-Emmanuel Depraz
+Title=The Conclave of Mages
+Difficulty=very hard
+Description=Esper DOOM by Jean-Emmanuel Depraz
+Icon=The Conclave of Mages.jpg
+Deck Type=constructed
+
+[main]
+2 Eliminate
+4 Brightclimb Pathway
+4 Clearwater Pathway
+3 Temple of Deceit
+4 Elspeth Conquers Death
+3 Heartless Act
+3 Temple of Silence
+2 Glass Casket
+4 Omen of the Sea
+1 Essence Scatter
+2 Swamp
+4 Skyclave Apparition
+3 Negate
+3 Elspeth's Nightmare
+1 Mystical Dispute
+2 Yorion, Sky Nomad
+4 Temple of Enlightenment
+2 Dance of the Manse
+2 Treacherous Blessing
+4 Plains
+4 Island
+4 Fabled Passage
+4 Extinction Event
+2 Emeria's Call
+2 The Birth of Meletis
+1 Mazemind Tome
+2 Golden Egg
+4 Doom Foretold
+
+[sideboard]
+1 Glass Casket
+1 Negate
+2 Mystical Dispute
+1 Yorion, Sky Nomad
+1 Mazemind Tome
+2 Heliod's Intervention
+4 Shark Typhoon
+3 Skyclave Shade

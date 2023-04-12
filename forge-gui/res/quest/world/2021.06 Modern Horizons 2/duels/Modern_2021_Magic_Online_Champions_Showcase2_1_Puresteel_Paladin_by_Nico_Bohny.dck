@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by Nico Bohny
+Title=Lefterel
+Difficulty=very hard
+Description=Puresteel Paladin by Nico Bohny
+Icon=Lefterel.jpg
+Deck Type=constructed
+
+[main]
+3 Dark Confidant|RAV
+4 Ornithopter|AER
+4 Memnite|SOM
+4 Stoneforge Mystic|WWK
+4 Esper Sentinel
+4 Puresteel Paladin|NPH
+1 Shadowspear
+4 Springleaf Drum|BNG
+4 Colossus Hammer
+3 Thoughtseize|THS
+4 Sigarda's Aid|EMN
+4 Urza's Saga
+1 Godless Shrine
+1 Flooded Strand|KTK
+1 Marsh Flats|ZEN
+3 Plains
+3 Inkmoth Nexus|MBS
+4 Concealed Courtyard|KLD
+4 Silent Clearing
+
+[sideboard]
+1 Thoughtseize|THS
+1 Nihil Spellbomb|SOM
+1 Seal of Cleansing|NE
+1 Pithing Needle
+1 Duress
+1 Drannith Magistrate
+1 Lurrus of the Dream-Den
+2 Prismatic Ending
+2 Sanctifier en-Vec
+2 Hushbringer
+2 Knight of Malice

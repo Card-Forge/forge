@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Sylvain Boissieux
+Title=Skynet
+Difficulty=very hard
+Description=Boros Aggro by Sylvain Boissieux
+Icon=Skynet.jpg
+Deck Type=constructed
+
+[main]
+2 The Wandering Emperor
+2 Portable Hole
+3 Angelfire Ignition
+3 Emeria's Call
+4 Fable of the Mirror-Breaker
+4 Showdown of the Skalds
+4 Hopeful Initiate
+4 Luminarch Aspirant
+4 Intrepid Adversary
+4 Skyclave Apparition
+4 Flamescroll Celebrant
+1 Eiganjo, Seat of the Empire
+1 Sokenzan, Crucible of Defiance
+2 Mountain
+3 Cave of the Frost Dragon
+4 Sundown Pass
+4 Needleverge Pathway
+7 Plains
+
+[sideboard]
+4 Elite Spellbinder
+3 Reckless Stormseeker
+3 Brutal Cathar
+2 Valorous Stance
+2 Seismic Wave
+1 Portable Hole

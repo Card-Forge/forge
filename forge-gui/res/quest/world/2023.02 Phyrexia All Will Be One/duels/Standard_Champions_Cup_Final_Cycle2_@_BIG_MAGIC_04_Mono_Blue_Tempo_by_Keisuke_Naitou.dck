@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Mono Blue Tempo by Keisuke Naitou
+Title=JuzamGenie
+Difficulty=very hard
+Description=Mono Blue Tempo by Keisuke Naitou
+Icon=JuzamGenie.jpg
+Deck Type=constructed
+
+[main]
+1 Tolarian Terror
+4 Haughty Djinn
+4 Delver of Secrets
+2 March of Swirling Mist
+2 Scatter Ray
+3 Impulse
+3 Thirst for Discovery
+3 Negate
+3 Make Disappear
+4 Flow of Knowledge
+4 Fading Hope
+4 Consider
+1 Blue Sun's Twilight
+22 Island
+
+[sideboard]
+1 Tolarian Terror
+1 Blue Sun's Twilight
+1 Consuming Tide
+1 Unlicensed Hearse
+1 Pithing Needle
+1 Essence Scatter
+1 Shore Up
+2 Spell Pierce
+2 Invoke the Winds
+4 Witness Protection

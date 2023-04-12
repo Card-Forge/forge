@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Izzet Control by Michael Hautzer
+Title=Inspector Gadget
+Difficulty=very hard
+Description=Izzet Control by Michael Hautzer
+Icon=Inspector Gadget.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+1 Sublime Epiphany
+2 Saw It Coming
+2 Mystical Dispute
+2 Lofty Denial
+3 Alrund's Epiphany
+4 Frost Bite
+4 Mazemind Tome
+3 Galazeth Prismari
+4 Brazen Borrower
+4 Goldspan Dragon
+4 Bonecrusher Giant
+3 Faceless Haven
+4 Riverglide Pathway
+4 Volatile Fjord
+4 Fabled Passage
+5 Snow-Covered Mountain
+6 Snow-Covered Island
+
+[sideboard]
+3 Redcap Melee
+2 Disdainful Stroke
+2 Cinderclasm
+2 Scorching Dragonfire
+2 Phoenix of Ash
+1 The Akroan War
+1 Shark Typhoon
+1 Negate
+1 Mystical Dispute

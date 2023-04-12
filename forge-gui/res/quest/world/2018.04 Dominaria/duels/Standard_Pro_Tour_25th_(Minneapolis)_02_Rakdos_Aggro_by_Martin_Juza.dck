@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Martin Juza
+Title=Preacher
+Difficulty=very hard
+Description=Rakdos Aggro by Martin Juza
+Icon=Preacher.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Torch of Defiance|KLD
+2 Glorybringer|AKH
+1 Pia Nalaar|KLD
+4 Bomat Courier|KLD
+4 Scrapheap Scrounger|KLD
+2 Ahn-Crop Crasher|AKH
+2 Rekindling Phoenix
+2 Hazoret the Fervent|AKH
+4 Goblin Chainwhirler
+2 Kari Zev, Skyship Raider|AER
+1 Soul-Scar Mage|AKH
+1 Cut // Ribbons|AKH
+3 Abrade|HOU
+3 Unlicensed Disintegration|KLD
+2 Heart of Kiran|AER
+1 Swamp
+4 Canyon Slough|AKH
+4 Dragonskull Summit|XLN
+15 Mountain
+1 Aether Hub|KLD
+
+[sideboard]
+2 Chandra, Torch of Defiance|KLD
+1 Glorybringer|AKH
+1 Rekindling Phoenix
+1 Abrade|HOU
+1 Unlicensed Disintegration|KLD
+3 Duress
+2 Magma Spray|AKH
+3 Chandra's Defeat|HOU
+1 By Force|AKH

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Dimir Midrange by Kenji Tsumura
+Title=Tarzan
+Difficulty=very hard
+Description=Dimir Midrange by Kenji Tsumura
+Icon=Tarzan.jpg
+Deck Type=constructed
+
+[main]
+4 Glint-Sleeve Siphoner|AER
+4 Gifted Aetherborn|AER
+2 Walking Ballista|AER
+4 Champion of Wits|HOU
+2 Ravenous Chupacabra
+4 The Scarab God|HOU
+1 Torrential Gearhulk|KLD
+4 Fatal Push|AER
+2 Cast Down
+1 Essence Scatter|AKH
+2 Supreme Will|HOU
+3 Vraska's Contempt|XLN
+1 Commit // Memory|AKH
+8 Swamp
+3 Island
+4 Fetid Pools|AKH
+4 Drowned Catacomb|XLN
+1 Submerged Boneyard|AKH
+4 Aether Hub|KLD
+2 Field of Ruin|XLN
+
+[sideboard]
+1 Torrential Gearhulk|KLD
+2 Cast Down
+2 Deadeye Tracker|XLN
+3 Duress|XLN
+3 Negate
+2 Arguel's Blood Fast|XLN
+1 Essence Extraction|KLD
+1 Glimmer of Genius|KLD

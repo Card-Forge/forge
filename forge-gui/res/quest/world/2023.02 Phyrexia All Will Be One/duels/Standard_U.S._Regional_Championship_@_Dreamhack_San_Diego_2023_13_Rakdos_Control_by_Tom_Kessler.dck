@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Rakdos Control by Tom Kessler
+Title=The Marines
+Difficulty=very hard
+Description=Rakdos Control by Tom Kessler
+Icon=The Marines.jpg
+Deck Type=constructed
+
+[main]
+1 Gix's Command
+2 Abrade
+3 Reckoner Bankbuster
+4 Invoke Despair
+4 Go for the Throat
+4 Cut Down
+4 Fable of the Mirror-Breaker
+2 Tenacious Underdog
+3 Sheoldred, the Apocalypse
+4 Graveyard Trespasser
+4 Bloodtithe Harvester
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+2 Mountain
+4 Blackcleave Cliffs
+4 Sulfurous Springs
+4 Haunted Ridge
+9 Swamp
+
+[sideboard]
+2 Vampires' Vengeance
+1 Obliterating Bolt
+2 Ob Nixilis, the Adversary
+4 Duress
+2 Archfiend of the Dross
+2 Soul Transfer
+1 Gix's Command
+1 Reckoner Bankbuster

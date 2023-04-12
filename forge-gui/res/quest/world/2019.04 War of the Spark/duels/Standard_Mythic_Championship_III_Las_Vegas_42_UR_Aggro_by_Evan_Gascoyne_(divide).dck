@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=UR Aggro by Evan Gascoyne (divide)
+Title=Ras Al Ghul
+Difficulty=very hard
+Description=UR Aggro by Evan Gascoyne (divide)
+Icon=Ras Al Ghul.jpg
+Deck Type=constructed
+
+[main]
+4 Arclight Phoenix
+4 Crackling Drake
+4 Goblin Electromancer
+2 Lightning Strike
+4 Opt
+2 Radical Idea
+4 Shock
+1 Beacon Bolt
+4 Chart a Course|XLN
+1 Discovery // Dispersal
+2 Finale of Promise
+3 Lava Coil
+3 Tormenting Voice
+1 Saheeli, Sublime Artificer
+7 Island
+6 Mountain
+4 Steam Vents
+4 Sulfur Falls
+
+[sideboard]
+1 Beacon Bolt
+1 Saheeli, Sublime Artificer
+1 Augur of Bolas
+1 Entrancing Melody|XLN
+2 God-Eternal Kefnet
+3 Legion Warboss
+2 Narset, Parter of Veils
+1 Ral, Izzet Viceroy
+2 Shivan Fire
+1 Spell Pierce|XLN

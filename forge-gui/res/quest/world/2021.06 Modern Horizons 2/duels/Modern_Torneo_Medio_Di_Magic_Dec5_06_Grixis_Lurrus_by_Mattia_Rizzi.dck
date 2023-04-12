@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Grixis Lurrus by Mattia Rizzi
+Title=Neith
+Difficulty=very hard
+Description=Grixis Lurrus by Mattia Rizzi
+Icon=Neith.jpg
+Deck Type=constructed
+
+[main]
+2 Terminate|ARB
+2 Thoughtseize|THS
+3 Kolaghan's Command|DTK
+3 Unholy Heat
+3 Inquisition of Kozilek|ROE
+4 Mishra's Bauble|CS
+4 Expressive Iteration
+4 Lightning Bolt|M11
+4 Drown in the Loch
+3 Snapcaster Mage|ISD
+4 Ragavan, Nimble Pilferer
+4 Dragon's Rage Channeler
+1 Island
+1 Mountain
+1 Swamp
+1 Watery Grave
+1 Blood Crypt
+1 Spirebluff Canal|KLD
+2 Steam Vents
+3 Scalding Tarn|ZEN
+3 Polluted Delta|KTK
+3 Bloodstained Mire|KTK
+3 Blackcleave Cliffs|SOM
+
+[sideboard]
+2 Nihil Spellbomb|SOM
+2 Engineered Explosives|FD
+2 Dress Down
+2 Alpine Moon
+2 Mystical Dispute
+1 Flusterstorm
+1 Spell Pierce|XLN
+1 Aether Gust
+1 Lurrus of the Dream-Den
+1 Thoughtseize|THS

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Kentaro Yamamoto (ucad)
+Title=Scarab God
+Difficulty=very hard
+Description=Boros Aggro by Kentaro Yamamoto (ucad)
+Icon=Scarab God.jpg
+Deck Type=constructed
+
+[main]
+4 Sacred Foundry
+12 Plains
+4 Clifftop Retreat
+2 Gideon Blackblade
+4 Legion's Landing|XLN
+4 History of Benalia
+2 Conclave Tribunal
+4 Venerated Loxodon
+4 Snubhorn Sentry
+4 Skymarcher Aspirant
+4 Law-Rune Enforcer
+4 Dauntless Bodyguard
+4 Benalish Marshal
+4 Adanto Vanguard|XLN
+
+[sideboard]
+2 Tomik, Distinguished Advokist
+1 Mobilized District
+3 Experimental Frenzy
+1 Demystify|XLN
+4 Baffling End
+2 Gideon Blackblade
+2 Conclave Tribunal

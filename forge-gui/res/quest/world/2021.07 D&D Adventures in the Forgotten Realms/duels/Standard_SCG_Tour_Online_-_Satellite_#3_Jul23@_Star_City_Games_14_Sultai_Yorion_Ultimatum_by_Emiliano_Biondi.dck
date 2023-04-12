@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Sultai Yorion Ultimatum by Emiliano Biondi
+Title=Oceanus
+Difficulty=very hard
+Description=Sultai Yorion Ultimatum by Emiliano Biondi
+Icon=Oceanus.jpg
+Deck Type=constructed
+
+[main]
+1 Vorinclex, Monstrous Raider
+1 Valki, God of Lies
+2 Elder Gargaroth
+2 Polukranos, Unchained
+2 Jwari Disruption
+3 Eliminate
+4 Heartless Act
+1 Sea Gate Restoration
+1 Pelakka Predation
+2 Extinction Event
+2 Alrund's Epiphany
+3 Shadows' Verdict
+4 Emergent Ultimatum
+4 Cultivate
+1 Kiora Bests the Sea God
+2 Elspeth's Nightmare
+4 Binding the Old Gods
+4 Wolfwillow Haven
+4 Omen of the Sea
+1 Ketria Triome
+2 Swamp
+3 Forest
+3 Island
+4 Zagoth Triome
+4 Temple of Malady
+4 Fabled Passage
+4 Darkbore Pathway
+4 Clearwater Pathway
+4 Barkchannel Pathway
+
+[sideboard]
+1 Eliminate
+1 Yorion, Sky Nomad
+1 Cling to Dust
+1 Disdainful Stroke
+1 Test of Talents
+2 Koma, Cosmos Serpent
+2 Mazemind Tome
+3 Duress
+3 Mystical Dispute

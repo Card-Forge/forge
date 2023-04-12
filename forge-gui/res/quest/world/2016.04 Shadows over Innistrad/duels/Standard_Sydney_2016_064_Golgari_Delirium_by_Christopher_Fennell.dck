@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Golgari Delirium by Christopher Fennell
+Title=Humanity's Vengeance
+Difficulty=very hard
+Description=Golgari Delirium by Christopher Fennell
+Icon=Humanity's Vengeance.jpg
+Deck Type=constructed
+
+[main]
+1 Ob Nixilis Reignited|BFZ
+3 Liliana, the Last Hope|EMN
+4 Grim Flayer|EMN
+4 Sylvan Advocate|OGW
+3 Tireless Tracker|SOI
+2 Mindwrack Demon|SOI
+1 Ishkanah, Grafwidow|EMN
+1 Woodland Bellower|ORI
+1 Emrakul, the Promised End|EMN
+4 Traverse the Ulvenwald|SOI
+2 Ruinous Path|BFZ
+4 Grasp of Darkness|OGW
+1 Ultimate Price|DTK
+2 Murder
+4 Oath of Nissa|OGW
+5 Forest|RTR
+6 Swamp|RTR
+4 Evolving Wilds
+4 Hissing Quagmire|OGW
+4 Llanowar Wastes|ORI
+
+[sideboard]
+1 Ishkanah, Grafwidow|EMN
+1 Ruinous Path|BFZ
+3 Transgress the Mind|BFZ
+1 Duress
+4 Languish|C16
+2 Kalitas, Traitor of Ghet|OGW
+1 Dead Weight
+1 Gilt-Leaf Winnower|ORI
+1 Den Protector|C16

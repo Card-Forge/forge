@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Stompy by Julien Stihle
+Title=Jubilee
+Difficulty=very hard
+Description=Stompy by Julien Stihle
+Icon=Jubilee.jpg
+Deck Type=constructed
+
+[main]
+4 Llanowar Elves
+4 Greenbelt Rampager|AER
+3 Merfolk Branchwalker|XLN
+4 Resilient Khenra|HOU
+4 Steel Leaf Champion
+3 Thrashing Brontodon
+2 Rhonas the Indomitable|AKH
+3 Ghalta, Primal Hunger
+3 Blossoming Defense|KLD
+4 Heart of Kiran|AER
+3 Skysovereign, Consul Flagship|KLD
+4 Hashep Oasis|HOU
+19 Forest
+
+[sideboard]
+1 Thrashing Brontodon
+1 Skysovereign, Consul Flagship|KLD
+4 Prey Upon|AER
+1 Nature's Way|KLD
+3 Deathgorge Scavenger|XLN
+1 Crushing Canopy|XLN
+1 Lifecrafter's Bestiary|AER
+3 Nissa, Vital Force|KLD

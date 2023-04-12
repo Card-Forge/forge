@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Fiver777
+Title=Lilith
+Difficulty=very hard
+Description=Rakdos Aggro by Fiver777
+Icon=Lilith.jpg
+Deck Type=constructed
+
+[main]
+1 Castle Locthwain
+3 Tymaret Calls the Dead
+4 Claim the Firstborn
+4 Witch's Oven
+4 Cauldron Familiar
+4 Kroxa, Titan of Death's Hunger
+4 Woe Strider
+4 Mire Triton
+4 Mayhem Devil
+3 Priest of Forgotten Gods
+2 Midnight Reaper
+8 Swamp
+5 Mountain
+4 Fabled Passage
+4 Blood Crypt
+2 Temple of Malice
+
+[sideboard]
+1 Midnight Reaper
+3 Scorching Dragonfire
+2 Embereth Shieldbreaker
+2 Pharika's Libation
+2 Act of Treason
+2 Agonizing Remorse
+2 Epic Downfall
+1 Noxious Grasp

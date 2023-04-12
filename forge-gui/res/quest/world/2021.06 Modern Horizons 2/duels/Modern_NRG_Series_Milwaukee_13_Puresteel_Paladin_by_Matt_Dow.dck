@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by Matt Dow
+Title=PresterJohn
+Difficulty=very hard
+Description=Puresteel Paladin by Matt Dow
+Icon=PresterJohn.jpg
+Deck Type=constructed
+
+[main]
+1 Gingerbrute
+2 Kor Outfitter|ZEN
+4 Memnite|SOM
+4 Ornithopter|AER
+4 Esper Sentinel
+4 Stoneforge Mystic|WWK
+4 Puresteel Paladin|NPH
+1 Cranial Plating|FD
+1 Shadowspear
+4 Colossus Hammer
+4 Springleaf Drum|BNG
+4 Sigarda's Aid|EMN
+4 Urza's Saga
+1 Flooded Strand|KTK
+1 Arid Mesa|ZEN
+1 Horizon Canopy|FUT
+1 Godless Shrine
+2 Concealed Courtyard|KLD
+2 Marsh Flats|ZEN
+3 Inkmoth Nexus|MBS
+4 Silent Clearing
+4 Plains
+
+[sideboard]
+1 Lurrus of the Dream-Den
+1 Nihil Spellbomb|SOM
+1 Pithing Needle
+2 Seal of Cleansing|NE
+2 Path to Exile|CFX
+4 Thoughtseize|THS
+4 Sanctifier en-Vec

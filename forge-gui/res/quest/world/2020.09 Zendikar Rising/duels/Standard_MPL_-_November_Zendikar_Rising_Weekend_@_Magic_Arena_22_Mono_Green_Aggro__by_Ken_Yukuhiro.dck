@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro  by Ken Yukuhiro
+Title=Arney Swalritz
+Difficulty=very hard
+Description=Mono Green Aggro  by Ken Yukuhiro
+Icon=Arney Swalritz.jpg
+Deck Type=constructed
+
+[main]
+1 Scavenging Ooze
+1 Kogla, the Titan Ape
+2 Thrashing Brontodon
+4 Feasting Troll King
+4 Wicked Wolf
+4 Gilded Goose
+4 Lovestruck Beast
+4 Tangled Florahedron
+4 Kazandu Mammoth
+3 The Great Henge
+3 Witch's Oven
+3 Trail of Crumbs
+3 Bonders' Enclave
+4 Castle Garenbrig
+16 Forest
+
+[sideboard]
+3 Scavenging Ooze
+1 Kogla, the Titan Ape
+2 Thrashing Brontodon
+1 Ugin, the Spirit Dragon
+2 Chainweb Aracnir
+2 Vivien, Monsters' Advocate
+2 Primal Might
+2 Ram Through

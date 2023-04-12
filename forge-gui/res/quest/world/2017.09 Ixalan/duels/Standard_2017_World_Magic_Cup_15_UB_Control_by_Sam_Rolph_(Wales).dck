@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=UB Control by Sam Rolph (Wales)
+Title=Emrakul
+Difficulty=very hard
+Description=UB Control by Sam Rolph (Wales)
+Icon=Emrakul.jpg
+Deck Type=constructed
+
+[main]
+6 Island|XLN
+7 Swamp|XLN
+1 Evolving Wilds|AKH
+4 Fetid Pools|AKH
+2 Field of Ruin|XLN
+1 Submerged Boneyard|AKH
+4 Drowned Catacomb|XLN
+2 Search for Azcanta|XLN
+3 Disallow|AER
+2 Consign // Oblivion|HOU
+3 Vraska's Contempt|XLN
+2 Liliana, Death's Majesty|AKH
+4 Essence Extraction|KLD
+4 Hieroglyphic Illumination|AKH
+2 Essence Scatter|AKH
+4 Censor|AKH
+4 Fatal Push|AER
+3 Torrential Gearhulk|KLD
+2 The Scarab God|HOU
+
+[sideboard]
+2 Sorcerous Spyglass|XLN
+2 Gonti, Lord of Luxury|KLD
+2 Jace's Defeat|HOU
+3 Deadeye Tracker|XLN
+2 Bontu's Last Reckoning|HOU
+3 Duress|XLN
+1 Essence Scatter|AKH

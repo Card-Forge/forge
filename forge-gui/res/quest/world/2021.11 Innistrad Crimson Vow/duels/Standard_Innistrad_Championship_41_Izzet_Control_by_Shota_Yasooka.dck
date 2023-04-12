@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Izzet Control by Shota Yasooka
+Title=Shelob
+Difficulty=very hard
+Description=Izzet Control by Shota Yasooka
+Icon=Shelob.jpg
+Deck Type=constructed
+
+[main]
+1 Lier, Disciple of the Drowned
+1 The Celestus
+1 Cinderclasm
+1 Test of Talents
+1 Demon Bolt
+1 Prismari Command
+2 Jwari Disruption
+2 Abrade
+3 Fading Hope
+3 Galvanic Iteration
+4 Spikefield Hazard
+4 Divide by Zero
+4 Unexpected Windfall
+1 Burn Down the House
+2 Thundering Rebuke
+3 Alrund's Epiphany
+4 Expressive Iteration
+2 Hall of Storm Giants
+2 Field of Ruin
+4 Stormcarved Coast
+4 Island
+4 Riverglide Pathway
+6 Mountain
+
+[sideboard]
+1 Lier, Disciple of the Drowned
+1 Cinderclasm
+2 Test of Talents
+1 Burn Down the House
+1 Environmental Sciences
+1 Wash Away
+1 Teachings of the Archaics
+1 Mascot Exhibition
+1 Memory Deluge
+2 Goldspan Dragon
+3 Smoldering Egg

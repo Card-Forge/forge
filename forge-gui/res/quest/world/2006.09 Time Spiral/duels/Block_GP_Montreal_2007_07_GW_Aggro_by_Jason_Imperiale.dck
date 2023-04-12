@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=GW Aggro by Jason Imperiale
+Title=Hulk
+Difficulty=very hard
+Description=GW Aggro by Jason Imperiale
+Icon=Hulk.jpg
+Deck Type=constructed
+
+[main]
+4 Mystic Enforcer|TSP
+4 Mire Boa|PLC
+4 Horizon Canopy|FUT
+4 Flagstones of Trokair|TSP
+4 Forest|RTR
+4 Griffin Guide|TSP
+4 Terramorphic Expanse|C16
+4 Edge of Autumn|FUT
+4 Tarmogoyf|FUT
+3 Call of the Herd|TSP
+3 Riftsweeper|FUT
+3 Plains|RTR
+3 Saffi Eriksdotter|TSP
+3 Serra Avenger|M13
+3 Chromatic Star|10E
+2 Thrill of the Hunt|TSP
+2 Llanowar Reborn|C15
+1 Vesuva|TSP
+1 Stonewood Invocation|TSP
+
+[sideboard]
+1 Vesuva|TSP
+4 Temporal Isolation|TSP
+3 Thornweald Archer|C14
+3 Cloudchaser Kestrel|TSP
+3 Whirling Dervish|TSP
+1 Crovax, Ascendant Hero|PLC

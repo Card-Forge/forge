@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Rg Pummeler by James Stevenson
+Title=Castle Sengir
+Difficulty=very hard
+Description=Rg Pummeler by James Stevenson
+Icon=Castle Sengir.jpg
+Deck Type=constructed
+
+[main]
+1 Sheltered Thicket|AKH
+4 Rootbound Crag|XLN
+2 Mountain|XLN
+4 Hashep Oasis|HOU
+6 Forest|XLN
+4 Aether Hub|KLD
+4 Invigorated Rampage|AER
+2 Harnessed Lightning|KLD
+4 Blossoming Defense|KLD
+1 Larger Than Life|KLD
+4 Attune with Aether|KLD
+4 Voltaic Brawler|KLD
+4 Servant of the Conduit|KLD
+2 Samut, Voice of Dissent|AKH
+4 Longtusk Cub|KLD
+4 Electrostatic Pummeler|KLD
+4 Bristling Hydra|KLD
+2 Samut, the Tested|HOU
+
+[sideboard]
+2 Chandra, Torch of Defiance|KLD
+3 Cartouche of Ambition|AKH
+1 Abrade|HOU
+2 Harnessed Lightning|KLD
+1 Swamp|XLN
+1 Struggle // Survive|HOU
+2 Glorybringer|AKH
+3 Duress|XLN

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Ryan Hall
+Title=Finn the Human
+Difficulty=very hard
+Description=Mono Green Aggro by Ryan Hall
+Icon=Finn the Human.jpg
+Deck Type=constructed
+
+[main]
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+4 Sculptor of Winter
+4 Esika's Chariot
+2 Snakeskin Veil
+2 Inscription of Abundance
+4 Blizzard Brawl
+1 Unnatural Growth
+4 Ranger Class
+3 Wrenn and Seven
+2 Lair of the Hydra
+3 Faceless Haven
+4 Kazandu Mammoth
+19 Snow-Covered Forest
+
+[sideboard]
+2 Snakeskin Veil
+1 Unnatural Growth
+1 Devouring Tendrils
+1 Outland Liberator
+2 Battle Mammoth
+4 Tangletrap
+4 Tajuru Blightblade

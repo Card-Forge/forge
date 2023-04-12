@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Grixis Thopters by Okada Naoya
+Title=Storgard
+Difficulty=very hard
+Description=Grixis Thopters by Okada Naoya
+Icon=Storgard.jpg
+Deck Type=constructed
+
+[main]
+1 Aethersphere Harvester|AER
+1 Skysovereign, Consul Flagship|KLD
+1 Chandra, Torch of Defiance|KLD
+2 Magma Spray|AKH
+2 Reverse Engineer|AER
+3 Metallic Rebuke|AER
+3 Harnessed Lightning|KLD
+4 Inventor's Goggles|KLD
+4 Decoction Module|KLD
+1 Pia Nalaar|KLD
+1 The Scarab God|HOU
+4 Maverick Thopterist|AER
+4 Whirler Virtuoso|KLD
+4 Aether Swooper|AER
+1 Field of Ruin|XLN
+2 Inventors' Fair|KLD
+2 Fetid Pools|AKH
+3 Mountain|XLN
+4 Spire of Industry|AER
+4 Spirebluff Canal|KLD
+4 Aether Hub|KLD
+5 Island|XLN
+
+[sideboard]
+1 River's Rebuke|XLN
+3 Abrade|HOU
+1 Battle at the Bridge|AER
+2 Crook of Condemnation|HOU
+4 Duress|XLN
+2 Scrapheap Scrounger|KLD
+1 Metallic Rebuke|AER
+1 Field of Ruin|XLN

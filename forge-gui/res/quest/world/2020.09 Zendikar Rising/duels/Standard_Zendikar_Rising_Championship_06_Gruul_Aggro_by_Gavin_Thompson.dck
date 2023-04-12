@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Gavin Thompson
+Title=Tolsimir
+Difficulty=very hard
+Description=Gruul Aggro by Gavin Thompson
+Icon=Tolsimir.jpg
+Deck Type=constructed
+
+[main]
+3 Questing Beast
+4 Lovestruck Beast
+4 Bonecrusher Giant
+4 Kazandu Mammoth
+4 Brushfire Elemental
+2 Scavenging Ooze
+4 Edgewall Innkeeper
+4 Shatterskull Smashing
+2 Fire Prophecy
+3 The Great Henge
+3 Embercleave
+1 The Akroan War
+4 Fabled Passage
+1 Evolving Wilds
+4 Cragcrown Pathway
+4 Mountain
+9 Forest
+
+[sideboard]
+1 Fire Prophecy
+1 The Akroan War
+2 Vivien, Monsters' Advocate
+1 Garruk, Unleashed
+3 Ox of Agonas
+1 Phoenix of Ash
+1 Thundering Rebuke
+2 Soul Sear
+3 Wilt

@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Justin Plocher
+Title=The Alchemist
+Difficulty=very hard
+Description=Mono Green Aggro by Justin Plocher
+Icon=The Alchemist.jpg
+Deck Type=constructed
+
+[main]
+25 Forest|RTR
+4 Mayor of Avabruck|ISD
+4 Predator Ooze|DKA
+4 Strangleroot Geist|DKA
+4 Ulvenwald Tracker|AVR
+4 Wolfir Avenger|AVR
+1 Wolfir Silverheart|AVR
+4 Young Wolf|DKA
+2 Blazing Torch|ISD
+4 Garruk Relentless|ISD
+4 Prey Upon
+
+[sideboard]
+2 Blazing Torch|ISD
+4 Bramblecrush|M14
+3 Gloomwidow|SOI
+4 Grafdigger's Cage|DKA
+2 Nightshade Peddler|AVR

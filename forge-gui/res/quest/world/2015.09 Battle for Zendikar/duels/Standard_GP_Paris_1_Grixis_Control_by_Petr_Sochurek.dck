@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Grixis Control by Petr Sochurek
+Title=Agent K
+Difficulty=very hard
+Description=Grixis Control by Petr Sochurek
+Icon=Agent K.jpg
+Deck Type=constructed
+
+[main]
+1 Ob Nixilis Reignited|BFZ
+1 Languish|ORI
+2 Grasp of Darkness|OGW
+2 Transgress the Mind|BFZ
+2 Duress|DTK
+2 Painful Truths|BFZ
+2 Roast|DTK
+2 Ruinous Path|BFZ
+2 Murderous Cut|KTK
+2 Disdainful Stroke|KTK
+2 Chandra, Flamecaller|OGW
+3 Fiery Impulse|ORI
+4 Dig Through Time|KTK
+3 Kalitas, Traitor of Ghet|OGW
+4 Jace, Vryn's Prodigy|ORI
+1 Flooded Strand|KTK
+2 Smoldering Marsh|BFZ
+2 Sunken Hollow|BFZ
+2 Mountain|BFZ
+2 Island|BFZ
+2 Wooded Foothills|KTK
+3 Swamp|BFZ
+4 Polluted Delta|KTK
+4 Wandering Fumarole|OGW
+4 Bloodstained Mire|KTK
+
+[sideboard]
+1 Infinite Obliteration|ORI
+3 Radiant Flames|BFZ
+1 Negate|OGW
+3 Dispel|BFZ
+1 Dragonlord Silumgar|DTK
+1 Dragonmaster Outcast|BFZ
+1 Languish|ORI
+1 Transgress the Mind|BFZ
+1 Painful Truths|BFZ
+1 Roast|DTK
+1 Disdainful Stroke|KTK

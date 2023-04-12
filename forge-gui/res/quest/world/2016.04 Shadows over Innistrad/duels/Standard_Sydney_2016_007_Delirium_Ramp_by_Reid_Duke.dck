@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Delirium Ramp by Reid Duke
+Title=Swan
+Difficulty=very hard
+Description=Delirium Ramp by Reid Duke
+Icon=Swan.jpg
+Deck Type=constructed
+
+[main]
+2 Hedron Crawler|OGW
+1 Sylvan Advocate|OGW
+1 Nissa, Vastwood Seer|ORI
+2 Ishkanah, Grafwidow|EMN
+1 Ulvenwald Hydra|SOI
+2 World Breaker|OGW
+2 Dragonlord Atarka|DTK
+2 Emrakul, the Promised End|EMN
+4 Traverse the Ulvenwald|SOI
+2 Gather the Pack|ORI
+4 Nissa's Pilgrimage|ORI
+4 Grapple with the Past|EMN
+3 Kozilek's Return|OGW
+2 Fiery Impulse|ORI
+2 Hedron Archive|BFZ
+4 Vessel of Nascency|SOI
+4 Game Trail|SOI
+1 Cinder Glade|BFZ
+1 Evolving Wilds
+2 Mountain|RTR
+10 Forest|RTR
+2 Drownyard Temple|SOI
+2 Shrine of the Forsaken Gods|BFZ
+
+[sideboard]
+1 Nissa, Vastwood Seer|ORI
+1 Kozilek's Return|OGW
+1 Fiery Impulse|ORI
+1 Ulamog, the Ceaseless Hunger|BFZ
+1 Roast|DTK
+3 Rending Volley|DTK
+2 Greenwarden of Murasa|BFZ
+2 Gnarlwood Dryad|EMN
+2 Tireless Tracker|SOI
+1 Shaman of Forgotten Ways|DTK

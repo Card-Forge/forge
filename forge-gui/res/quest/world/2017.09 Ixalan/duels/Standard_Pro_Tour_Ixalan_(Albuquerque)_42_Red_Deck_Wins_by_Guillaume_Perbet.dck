@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Guillaume Perbet
+Title=Summoner
+Difficulty=very hard
+Description=Red Deck Wins by Guillaume Perbet
+Icon=Summoner.jpg
+Deck Type=constructed
+
+[main]
+4 Bomat Courier|KLD
+3 Soul-Scar Mage|AKH
+4 Earthshaker Khenra|HOU
+3 Kari Zev, Skyship Raider|AER
+3 Harsh Mentor|AKH
+4 Rampaging Ferocidon|XLN
+4 Hazoret the Fervent|AKH
+4 Shock|AER
+1 Magma Spray|AKH
+4 Lightning Strike|XLN
+2 Abrade|HOU
+15 Mountain|XLN
+1 Scavenger Grounds|HOU
+4 Ramunap Ruins|HOU
+4 Sunscorched Desert|AKH
+
+[sideboard]
+2 Abrade|HOU
+1 Scavenger Grounds|HOU
+4 Pia Nalaar|KLD
+2 Aethersphere Harvester|AER
+3 Glorybringer|AKH
+3 Chandra, Torch of Defiance|KLD

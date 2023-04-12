@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Esper Midrange by Shota Takao
+Title=BaronCimitiere
+Difficulty=very hard
+Description=Esper Midrange by Shota Takao
+Icon=BaronCimitiere.jpg
+Deck Type=constructed
+
+[main]
+1 Ultimate Price|DTK
+1 Silkwrap|DTK
+1 Sorin, Solemn Visitor|KTK
+2 Ruinous Path|BFZ
+2 Valorous Stance|FRF
+2 Murderous Cut|KTK
+2 Treasure Cruise|KTK
+2 Despise|KTK
+4 Gideon, Ally of Zendikar|BFZ
+4 Duress|DTK
+2 Dragonlord Ojutai|DTK
+4 Seeker of the Way|KTK
+4 Jace, Vryn's Prodigy|ORI
+4 Monastery Mentor|FRF
+1 Sunken Hollow|BFZ
+1 Evolving Wilds|BFZ
+1 Island|BFZ
+2 Prairie Stream|BFZ
+2 Plains|BFZ
+2 Swamp|BFZ
+4 Caves of Koilos|ORI
+4 Flooded Strand|KTK
+4 Shambling Vent|BFZ
+4 Polluted Delta|KTK
+
+[sideboard]
+1 Planar Outburst|BFZ
+2 Self-Inflicted Wound|DTK
+1 Dispel|BFZ
+2 Surge of Righteousness|DTK
+2 Disdainful Stroke|KTK
+1 Mastery of the Unseen|FRF
+2 Stratus Dancer|DTK
+2 Knight of the White Orchid|ORI
+1 Ultimate Price|DTK
+1 Silkwrap|DTK

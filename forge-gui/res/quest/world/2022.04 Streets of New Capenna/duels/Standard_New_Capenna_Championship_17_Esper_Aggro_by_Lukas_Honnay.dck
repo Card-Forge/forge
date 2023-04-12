@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Lukas Honnay
+Title=Ninithili
+Difficulty=very hard
+Description=Esper Aggro by Lukas Honnay
+Icon=Ninithili.jpg
+Deck Type=constructed
+
+[main]
+2 Dennick, Pious Apprentice
+2 Obscura Interceptor
+3 Tenacious Underdog
+4 Luminarch Aspirant
+4 Raffine, Scheming Seer
+1 Portable Hole
+1 Ray of Enfeeblement
+1 Infernal Grasp
+1 Spell Pierce
+3 Vanishing Verse
+1 Emeria's Call
+1 The Meathook Massacre
+4 Wedding Announcement
+3 The Wandering Emperor
+4 Kaito Shizuki
+1 Island
+1 Hive of the Eye Tyrant
+1 Plains
+1 Deserted Beach
+1 Eiganjo, Seat of the Empire
+2 Shattered Sanctum
+3 Clearwater Pathway
+3 Brightclimb Pathway
+4 Raffine's Tower
+4 Hengegate Pathway
+4 Shipwreck Marsh
+
+[sideboard]
+1 Portable Hole
+1 Ray of Enfeeblement
+1 The Meathook Massacre
+1 Divine Smite
+1 Go Blank
+2 Elspeth Resplendent
+2 Disdainful Stroke
+2 Negate
+4 Archon of Emeria

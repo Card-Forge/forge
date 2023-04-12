@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Izzet Control by Junya Iyanaga
+Title=Abiku
+Difficulty=very hard
+Description=Izzet Control by Junya Iyanaga
+Icon=Abiku.jpg
+Deck Type=constructed
+
+[main]
+1 The Celestus
+1 Prismari Command
+1 Test of Talents
+1 Disdainful Stroke
+1 Cinderclasm
+1 Saw It Coming
+1 Negate
+2 Memory Deluge
+2 Fading Hope
+4 Dragon's Fire
+4 Jwari Disruption
+4 Spikefield Hazard
+4 Unexpected Windfall
+4 Expressive Iteration
+2 Hullbreaker Horror
+3 Smoldering Egg
+4 Goldspan Dragon
+1 Field of Ruin
+2 Hall of Storm Giants
+4 Riverglide Pathway
+4 Stormcarved Coast
+4 Island
+5 Mountain
+
+[sideboard]
+3 Burning Hands
+2 Lier, Disciple of the Drowned
+2 Behold the Multiverse
+1 Burn Down the House
+1 Prismari Command
+2 Test of Talents
+1 Disdainful Stroke
+1 Cinderclasm
+1 Saw It Coming
+1 Fading Hope

@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Dark Jeskai by Jon Finkel
+Title=Flandre Scarlet
+Difficulty=very hard
+Description=Dark Jeskai by Jon Finkel
+Icon=Flandre Scarlet.jpg
+Deck Type=constructed
+
+[main]
+1 Sarkhan, the Dragonspeaker|KTK
+1 Dragonmaster Outcast|BFZ
+4 Jace, Vryn's Prodigy|ORI
+4 Mantis Rider|KTK
+2 Soulfire Grand Master|FRF
+3 Tasigur, the Golden Fang|FRF
+4 Crackling Doom|KTK
+2 Dig Through Time|KTK
+2 Dispel|BFZ
+2 Fiery Impulse|ORI
+3 Kolaghan's Command|DTK
+3 Ojutai's Command|DTK
+1 Utter End|KTK
+2 Wild Slash|FRF
+4 Bloodstained Mire|KTK
+4 Flooded Strand|KTK
+1 Island|BFZ
+2 Mountain|BFZ
+4 Mystic Monastery|KTK
+1 Nomad Outpost|KTK
+1 Plains|BFZ
+4 Polluted Delta|KTK
+2 Prairie Stream|BFZ
+1 Smoldering Marsh|BFZ
+1 Sunken Hollow|BFZ
+1 Swamp|BFZ
+
+[sideboard]
+1 Dragonmaster Outcast|BFZ
+3 Arashin Cleric|FRF
+1 Felidar Cub|BFZ
+3 Disdainful Stroke|KTK
+2 Duress|DTK
+2 Exert Influence|BFZ
+2 Radiant Flames|BFZ
+1 Roast|DTK

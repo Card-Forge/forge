@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Burning Tog by Tuomas Kotiranta
+Title=White Knight
+Difficulty=very hard
+Description=Burning Tog by Tuomas Kotiranta
+Icon=White Knight.jpg
+Deck Type=constructed
+
+[main]
+2 Darkwater Catacombs|OD
+7 Island|OD
+1 Mountain|OD
+4 Salt Marsh|IN
+4 Shivan Reef|AP
+2 Sulfurous Springs|7E
+2 Underground River|7E
+2 Urborg Volcano|IN
+3 Flametongue Kavu|PS
+4 Nightscape Familiar|PS
+4 Psychatog|OD
+4 Burning Wish|JU
+4 Circular Logic|TO
+4 Counterspell|7E
+2 Deep Analysis|TO
+2 Engineered Plague|7E
+4 Fact or Fiction|IN
+3 Fire // Ice|AP
+2 Repulse|IN
+
+[sideboard]
+1 Flametongue Kavu|PS
+1 Deep Analysis|TO
+1 Repulse|IN
+1 Chainer's Edict|TO
+4 Duress|7E
+1 Haunting Echoes|OD
+1 Persecute|7E
+1 Pyroclasm|7E
+1 Rancid Earth|TO
+1 Upheaval|OD
+1 Void|IN
+1 Wash Out|IN

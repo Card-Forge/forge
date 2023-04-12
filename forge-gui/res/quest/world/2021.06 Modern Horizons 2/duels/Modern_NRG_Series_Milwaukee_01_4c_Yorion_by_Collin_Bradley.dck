@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=4c Yorion by Collin Bradley
+Title=Spiraling Doom
+Difficulty=very hard
+Description=4c Yorion by Collin Bradley
+Icon=Spiraling Doom.jpg
+Deck Type=constructed
+
+[main]
+1 Time Warp|M10
+2 Force of Negation
+4 Ephemerate
+4 Expressive Iteration
+4 Prismatic Ending
+4 Spreading Seas|ZEN
+4 Abundant Growth|AVR
+4 Wrenn and Six
+4 Teferi, Time Raveler
+4 Fury
+4 Omnath, Locus of Creation
+4 Solitude
+4 Ice-Fang Coatl
+4 Eternal Witness|FD
+1 Breeding Pool
+1 Stomping Ground
+1 Snow-Covered Plains
+1 Snow-Covered Mountain
+1 Snow-Covered Island
+1 Sacred Foundry
+1 Raugrin Triome
+1 Temple Garden
+1 Ketria Triome
+1 Hallowed Fountain
+1 Steam Vents
+2 Wooded Foothills|KTK
+2 Snow-Covered Forest
+3 Flooded Strand|KTK
+3 Scalding Tarn|ZEN
+4 Misty Rainforest|ZEN
+4 Windswept Heath|KTK
+
+[sideboard]
+3 Lightning Helix|RAV
+2 Alpine Moon
+2 Engineered Explosives|FD
+2 Flusterstorm
+2 Veil of Summer
+2 Endurance
+1 Emrakul, the Promised End|EMN
+1 Yorion, Sky Nomad

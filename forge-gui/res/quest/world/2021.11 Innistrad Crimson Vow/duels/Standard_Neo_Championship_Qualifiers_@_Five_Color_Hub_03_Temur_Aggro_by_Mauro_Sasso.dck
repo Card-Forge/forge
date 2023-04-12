@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Temur Aggro by Mauro Sasso
+Title=Impundulu
+Difficulty=very hard
+Description=Temur Aggro by Mauro Sasso
+Icon=Impundulu.jpg
+Deck Type=constructed
+
+[main]
+1 Disdainful Stroke
+1 Negate
+2 Ranger Class
+2 Wrenn and Seven
+4 Shatterskull Smashing
+4 Esika's Chariot
+4 Dragon's Fire
+2 Moonveil Regent
+3 Reckless Stormseeker
+3 Prosperous Innkeeper
+4 Goldspan Dragon
+4 Jaspera Sentinel
+4 Magda, Brazen Outlaw
+1 Mountain
+2 Den of the Bugbear
+2 Lair of the Hydra
+4 Riverglide Pathway
+4 Cragcrown Pathway
+4 Barkchannel Pathway
+5 Forest
+
+[sideboard]
+4 Burning Hands
+4 Play with Fire
+2 Tangletrap
+2 Thundering Rebuke
+1 Test of Talents
+1 Disdainful Stroke
+1 Negate

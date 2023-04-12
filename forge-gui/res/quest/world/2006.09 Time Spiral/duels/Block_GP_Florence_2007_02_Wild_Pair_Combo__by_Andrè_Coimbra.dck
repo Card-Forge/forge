@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Wild Pair Combo  by Andrè Coimbra
+Title=Crusader
+Difficulty=very hard
+Description=Wild Pair Combo  by Andrè Coimbra
+Icon=Crusader.jpg
+Deck Type=constructed
+
+[main]
+7 Forest|RTR
+7 Mountain|RTR
+4 Grove of the Burnwillows|FUT
+4 Avalanche Riders|TSP
+4 Bogardan Hellkite|C14
+4 Grinning Ignus|FUT
+4 Mwonvuli Acid-Moss|TSP
+4 Wall of Roots|TSP
+4 Wild Pair|CN2
+4 Coalition Relic|FUT
+4 Search for Tomorrow|TSP
+3 Radha, Heir to Keld|PLC
+2 Terramorphic Expanse|C16
+2 Dragonstorm|TSP
+1 Primal Forcemage|TSP
+1 Pendelhaven|TSP
+1 Fungal Reaches|CMD
+
+[sideboard]
+4 Spectral Force|TSP
+4 Jaya Ballard, Task Mage|TSP
+4 Scryb Ranger|TSP
+3 Molten Disaster|C13

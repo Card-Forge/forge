@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Ori Horev
+Title=The Ooze
+Difficulty=very hard
+Description=Abzan Midrange by Ori Horev
+Icon=The Ooze.jpg
+Deck Type=constructed
+
+[main]
+1 Sorin, Solemn Visitor|KTK
+1 Ajani, Mentor of Heroes|JOU
+1 Wingmate Roc|KTK
+1 Herald of Torment|BNG
+1 Tasigur, the Golden Fang|FRF
+4 Siege Rhino|KTK
+4 Fleecemane Lion|THS
+4 Rakshasa Deathdealer|KTK
+4 Anafenza, the Foremost|KTK
+3 Thoughtseize|THS
+2 Bile Blight|BNG
+1 Ultimate Price|DTK
+2 Valorous Stance|FRF
+3 Dromoka's Command|DTK
+3 Hero's Downfall|THS
+2 Urborg, Tomb of Yawgmoth|M15
+2 Mana Confluence|JOU
+3 Windswept Heath|KTK
+3 Llanowar Wastes|M15
+4 Caves of Koilos|M15
+2 Temple of Silence|THS
+2 Temple of Malady|JOU
+4 Sandsteppe Citadel|KTK
+2 Forest|DTK
+1 Plains|DTK
+
+[sideboard]
+1 Thoughtseize|THS
+2 Bile Blight|BNG
+1 Ultimate Price|DTK
+1 Dromoka's Command|DTK
+1 Hero's Downfall|THS
+2 Elspeth, Sun's Champion|THS
+1 Duress|DTK
+2 Glare of Heresy|THS
+1 Nissa, Worldwaker|M15
+3 Drown in Sorrow|BNG

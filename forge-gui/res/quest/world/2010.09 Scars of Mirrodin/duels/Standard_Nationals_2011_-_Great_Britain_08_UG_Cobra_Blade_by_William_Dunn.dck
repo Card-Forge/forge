@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=UG Cobra Blade by William Dunn
+Title=Abiku
+Difficulty=very hard
+Description=UG Cobra Blade by William Dunn
+Icon=Abiku.jpg
+Deck Type=constructed
+
+[main]
+4 Birds of Paradise|M12
+1 Consecrated Sphinx|MBS
+4 Lotus Cobra|ZEN
+3 Skinshifter|M12
+2 Thrun, the Last Troll|MBS
+4 Beast Within|NPH
+4 Mana Leak|M12
+1 Nature's Claim|WWK
+2 Spell Pierce|ZEN
+3 Preordain|M11
+2 Sword of Feast and Famine|MBS
+1 Sword of War and Peace|NPH
+2 Tumble Magnet|SOM
+8 Forest|M12
+3 Island|M12
+4 Misty Rainforest|ZEN
+2 Scalding Tarn|ZEN
+4 Tectonic Edge|WWK
+3 Verdant Catacombs|ZEN
+3 Garruk, Primal Hunter|M12
+
+[sideboard]
+2 Nature's Claim|WWK
+3 Obstinate Baloth|M11
+2 Flashfreeze|M12
+3 Creeping Corrosion|MBS
+2 Batterskull|NPH
+3 Torpor Orb|NPH

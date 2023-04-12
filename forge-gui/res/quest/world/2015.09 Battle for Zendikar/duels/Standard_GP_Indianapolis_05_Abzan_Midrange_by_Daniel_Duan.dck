@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Daniel Duan
+Title=Iblis
+Difficulty=very hard
+Description=Abzan Midrange by Daniel Duan
+Icon=Iblis.jpg
+Deck Type=constructed
+
+[main]
+4 Hangarback Walker|ORI
+2 Wingmate Roc|KTK
+4 Warden of the First Tree|FRF
+2 Den Protector|DTK
+4 Siege Rhino|KTK
+4 Anafenza, the Foremost|KTK
+1 Murderous Cut|KTK
+3 Dromoka's Command|DTK
+1 Ultimate Price|DTK
+4 Abzan Charm|KTK
+1 Silkwrap|DTK
+4 Gideon, Ally of Zendikar|BFZ
+2 Forest|BFZ
+2 Plains|BFZ
+4 Windswept Heath|KTK
+4 Shambling Vent|BFZ
+2 Llanowar Wastes|ORI
+4 Wooded Foothills|KTK
+4 Flooded Strand|KTK
+2 Canopy Vista|BFZ
+1 Sunken Hollow|BFZ
+1 Smoldering Marsh|BFZ
+
+[sideboard]
+2 Den Protector|DTK
+1 Ultimate Price|DTK
+1 Silkwrap|DTK
+1 Mastery of the Unseen|FRF
+1 Surge of Righteousness|DTK
+1 Tasigur, the Golden Fang|FRF
+1 Sorin, Solemn Visitor|KTK
+2 Duress|DTK
+1 Ruinous Path|BFZ
+2 Transgress the Mind|BFZ
+2 Tragic Arrogance|ORI

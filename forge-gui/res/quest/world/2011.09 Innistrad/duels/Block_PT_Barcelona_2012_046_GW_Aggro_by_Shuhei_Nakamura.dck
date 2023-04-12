@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=GW Aggro by Shuhei Nakamura
+Title=King Edward
+Difficulty=very hard
+Description=GW Aggro by Shuhei Nakamura
+Icon=King Edward.jpg
+Deck Type=constructed
+
+[main]
+4 Cavern of Souls|AVR
+9 Forest|RTR
+3 Gavony Township|ISD
+8 Plains|RTR
+4 Avacyn's Pilgrim|ISD
+3 Borderland Ranger|AVR
+4 Champion of the Parish|ISD
+4 Fiend Hunter|C13
+4 Mayor of Avabruck|ISD
+3 Restoration Angel|AVR
+1 Riders of Gavony|AVR
+4 Silverblade Paladin|C14
+3 Thalia, Guardian of Thraben|DKA
+4 Wolfir Silverheart|AVR
+2 Faith's Shield|DKA
+
+[sideboard]
+2 Riders of Gavony|AVR
+3 Garruk Relentless|ISD
+2 Grafdigger's Cage|DKA
+3 Nearheath Pilgrim|AVR
+3 Sigarda, Host of Herons|AVR
+2 Slayer of the Wicked|ISD

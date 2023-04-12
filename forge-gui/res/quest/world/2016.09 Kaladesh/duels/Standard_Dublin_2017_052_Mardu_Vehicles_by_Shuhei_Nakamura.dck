@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mardu Vehicles by Shuhei Nakamura
+Title=Gruul-precon
+Difficulty=very hard
+Description=Mardu Vehicles by Shuhei Nakamura
+Icon=Gruul-precon.jpg
+Deck Type=constructed
+
+[main]
+4 Gideon, Ally of Zendikar|BFZ
+4 Thraben Inspector|SOI
+4 Toolcraft Exemplar|KLD
+4 Veteran Motorist|KLD
+4 Scrapheap Scrounger|KLD
+2 Depala, Pilot Exemplar|KLD
+2 Thalia, Heretic Cathar|EMN
+2 Fatal Push|AER
+4 Unlicensed Disintegration|KLD
+4 Heart of Kiran|AER
+3 Cultivator's Caravan|KLD
+2 Aether Hub|KLD
+4 Concealed Courtyard|KLD
+4 Inspiring Vantage|KLD
+4 Plains|RTR
+1 Shambling Vent|BFZ
+4 Spire of Industry|AER
+4 Spirebluff Canal|KLD
+
+[sideboard]
+2 Fatal Push|AER
+2 Archangel Avacyn|SOI
+2 Fragmentize|KLD
+3 Metallic Rebuke|AER
+2 Chandra, Torch of Defiance|KLD
+2 Skysovereign, Consul Flagship|KLD
+2 Release the Gremlins|AER

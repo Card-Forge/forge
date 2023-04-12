@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Sultai Constrictor by Chao Lu (China)
+Title=Phyrexia
+Difficulty=very hard
+Description=Sultai Constrictor by Chao Lu (China)
+Icon=Phyrexia.jpg
+Deck Type=constructed
+
+[main]
+4 Winding Constrictor|AER
+4 Walking Ballista|AER
+4 Glint-Sleeve Siphoner|AER
+3 Hostage Taker|XLN
+4 Longtusk Cub|KLD
+2 Rishkar, Peema Renegade|AER
+4 Rogue Refiner|AER
+1 The Scarab God|HOU
+2 Swamp|XLN
+1 Island|XLN
+4 Forest|XLN
+4 Botanical Sanctum|KLD
+2 Fetid Pools|AKH
+3 Blossoming Defense|KLD
+4 Fatal Push|AER
+1 Vraska's Contempt|XLN
+4 Aether Hub|KLD
+4 Blooming Marsh|KLD
+1 Die Young|KLD
+4 Attune with Aether|KLD
+
+[sideboard]
+1 The Scarab God|HOU
+2 Greenbelt Rampager|AER
+2 Spell Pierce|XLN
+1 Nissa, Steward of Elements|AKH
+1 Essence Scatter|AKH
+3 Duress|XLN
+3 Deathgorge Scavenger|XLN
+1 Vraska's Contempt|XLN
+1 Die Young|KLD

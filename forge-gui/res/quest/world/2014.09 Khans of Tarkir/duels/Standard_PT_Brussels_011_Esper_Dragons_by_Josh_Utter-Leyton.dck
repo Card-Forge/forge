@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Esper Dragons by Josh Utter-Leyton
+Title=The Wilds
+Difficulty=very hard
+Description=Esper Dragons by Josh Utter-Leyton
+Icon=The Wilds.jpg
+Deck Type=constructed
+
+[main]
+1 Ugin, the Spirit Dragon|FRF
+1 Disdainful Stroke|KTK
+2 Foul-Tongue Invocation|DTK
+2 Dissolve|THS
+2 Crux of Fate|FRF
+2 Bile Blight|BNG
+2 Ultimate Price|DTK
+2 Thoughtseize|THS
+3 Hero's Downfall|THS
+3 Anticipate|DTK
+4 Silumgar's Scorn|DTK
+4 Dig Through Time|KTK
+2 Silumgar, the Drifting Death|FRF
+3 Dragonlord Ojutai|DTK
+1 Flooded Strand|KTK
+1 Urborg, Tomb of Yawgmoth|M15
+2 Haven of the Spirit Dragon|DTK
+2 Caves of Koilos|M15
+4 Polluted Delta|KTK
+4 Dismal Backwater|FRF
+4 Temple of Deceit|THS
+4 Temple of Enlightenment|BNG
+2 Swamp|DTK
+3 Island|DTK
+
+[sideboard]
+2 Dragonlord Silumgar|DTK
+2 Drown in Sorrow|BNG
+2 Dragonlord's Prerogative|DTK
+1 Negate|DTK
+1 Foul-Tongue Invocation|DTK
+2 Bile Blight|BNG
+1 Ultimate Price|DTK
+2 Thoughtseize|THS
+2 Tasigur, the Golden Fang|FRF

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Selesnya Aggro by Pascal Maynard
+Title=Lyzolda
+Difficulty=very hard
+Description=Selesnya Aggro by Pascal Maynard
+Icon=Lyzolda.jpg
+Deck Type=constructed
+
+[main]
+4 Jukai Naturalist
+4 Teachings of the Kirin
+2 Shigeki, Jukai Visionary
+4 Generous Visitor
+4 Spirited Companion
+4 The Restoration of Eiganjo
+4 Katilda, Dawnhart Martyr
+4 Commune with Spirits
+4 Ossification
+1 Touch the Spirit Realm
+2 Wedding Announcement
+2 Hallowed Haunting
+5 Plains
+1 Boseiju, Who Endures
+4 Razorverge Thicket
+2 Overgrown Farmland
+4 Brushland
+5 Forest
+
+[sideboard]
+2 Touch the Spirit Realm
+2 Hallowed Haunting
+1 Boseiju, Who Endures
+3 Borrowed Time
+2 Curse of Silence
+2 Rite of Harmony
+3 Circle of Confinement

@@ -1,0 +1,54 @@
+[quest]
+id=20220401
+OpponentName=Simon
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Esper Raffine
+Title=Mana
+Difficulty=very hard
+Description=Esper Raffine by Simon Nielsen
+Icon=Mana.jpg
+Deck Type=constructed
+
+[main]
+1 Spell Pierce
+1 Emeria's Call
+1 Lolth, Spider Queen
+1 Kaito Shizuki
+1 Sorin the Mirthless
+2 The Meathook Massacre
+3 Infernal Grasp
+4 Vanishing Verse
+4 Wedding Announcement
+4 The Wandering Emperor
+4 Raffine, Scheming Seer
+4 Tenacious Underdog
+4 Luminarch Aspirant
+1 Plains
+1 Eiganjo, Seat of the Empire
+2 Hive of the Eye Tyrant
+2 Shipwreck Marsh
+2 Shattered Sanctum
+3 Deserted Beach
+3 Hengegate Pathway
+4 Brightclimb Pathway
+4 Raffine's Tower
+4 Clearwater Pathway
+
+[sideboard]
+3 Ray of Enfeeblement
+3 Negate
+3 Archon of Emeria
+2 Disdainful Stroke
+1 Liesa, Forgotten Archangel
+1 Reckoner Bankbuster
+1 Lolth, Spider Queen
+1 The Meathook Massacre

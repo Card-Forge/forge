@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Izzet Drakes by Bram Snepvangers
+Title=The Messenger
+Difficulty=very hard
+Description=Izzet Drakes by Bram Snepvangers
+Icon=The Messenger.jpg
+Deck Type=constructed
+
+[main]
+1 Dive Down|XLN
+2 Maximize Velocity
+2 Lava Coil
+4 Chart a Course|XLN
+4 Tormenting Voice
+4 Opt
+4 Shock
+4 Radical Idea
+3 Goblin Electromancer
+3 Crackling Drake
+4 Arclight Phoenix
+4 Enigma Drake
+4 Steam Vents
+4 Sulfur Falls
+6 Mountain
+7 Island
+
+[sideboard]
+2 Fiery Cannonade|XLN
+1 Search for Azcanta|XLN
+2 Negate
+3 Beacon Bolt
+3 Niv-Mizzet, Parun
+1 Dive Down|XLN
+1 Maximize Velocity
+2 Lava Coil

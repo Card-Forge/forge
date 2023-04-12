@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Orzhov Control by Juan Guillenea
+Title=Winged Stallion
+Difficulty=very hard
+Description=Orzhov Control by Juan Guillenea
+Icon=Winged Stallion.jpg
+Deck Type=constructed
+
+[main]
+4 Gideon, Ally of Zendikar|BFZ
+2 Ob Nixilis Reignited|BFZ
+2 Sorin, Grim Nemesis|SOI
+2 Kalitas, Traitor of Ghet|OGW
+3 Transgress the Mind|BFZ
+4 Read the Bones|ORI
+3 Ruinous Path|BFZ
+4 Languish|C16
+4 Grasp of Darkness|OGW
+2 Murder
+1 Anguished Unmaking|SOI
+1 Ultimate Price|DTK
+2 Secure the Wastes|DTK
+4 Shambling Vent|BFZ
+4 Caves of Koilos|C16
+4 Forsaken Sanctuary
+2 Westvale Abbey|SOI
+1 Blighted Fen|BFZ
+2 Battlefield Forge|ORI
+7 Swamp|RTR
+2 Plains|RTR
+
+[sideboard]
+1 Anguished Unmaking|SOI
+1 Ultimate Price|DTK
+2 Duress
+2 Thought-Knot Seer|OGW
+2 Reality Smasher|OGW
+2 Liliana, the Last Hope|EMN
+2 Hallowed Moonlight|ORI
+1 Linvala, the Preserver|OGW
+2 Unknown Card

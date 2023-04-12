@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Rebels by John Larkin
+Title=Seer
+Difficulty=very hard
+Description=Rebels by John Larkin
+Icon=Seer.jpg
+Deck Type=constructed
+
+[main]
+1 Jhovall Queen|MM
+4 Lin Sivvi, Defiant Hero|NE
+2 Ramosian Lieutenant|MM
+4 Ramosian Sergeant|MM
+1 Ramosian Sky Marshal|MM
+4 Steadfast Guard|10E
+4 Voice of Truth|NE
+3 Disenchant|CN2
+4 Parallax Wave|NE
+4 Ramosian Rally|MM
+4 Reverent Mantra|MM
+20 Plains|RTR
+1 Rath's Edge|NE
+4 Rishadan Port|MM
+
+[sideboard]
+1 Disenchant|CN2
+4 Afterlife|C14
+4 Defender en-Vec|NE
+2 Seal of Cleansing|C15
+4 Topple|NE

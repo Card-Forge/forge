@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Isaak Krut
+Title=Crusader
+Difficulty=very hard
+Description=Rakdos Aggro by Isaak Krut
+Icon=Crusader.jpg
+Deck Type=constructed
+
+[main]
+9 Swamp
+7 Mountain
+4 Tournament Grounds
+4 Blood Crypt
+2 Drill Bit
+2 Heartless Act
+4 Embercleave
+4 Fervent Champion
+4 Stormfist Crusader
+4 Knight of the Ebon Legion
+4 Gutterbones
+4 Rotting Regisaur
+2 Kitesail Freebooter
+3 Blacklance Paragon
+3 Oathsworn Knight
+
+[sideboard]
+2 Lava Coil
+2 Embereth Shieldbreaker
+1 Redcap Melee
+3 Noxious Grasp
+3 Bonecrusher Giant
+4 Agonizing Remorse

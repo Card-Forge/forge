@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Temur Flash by  theshark 
+Title=Vermix
+Difficulty=very hard
+Description=Temur Flash by  theshark 
+Icon=Vermix.jpg
+Deck Type=constructed
+
+[main]
+2 Nissa, Who Shakes the World
+2 Negate
+2 Mystical Dispute
+3 Quench
+3 Growth Spiral
+3 Ionize
+4 Bonecrusher Giant
+4 Nightpack Ambusher
+4 Frilled Mystic
+4 Brineborn Cutthroat
+4 Brazen Borrower
+1 Temple of Epiphany
+1 Temple of Abandon
+1 Mountain
+2 Forest
+2 Island
+3 Fabled Passage
+3 Temple of Mystery
+4 Breeding Pool
+4 Steam Vents
+4 Stomping Ground
+
+[sideboard]
+3 Uro, Titan of Nature's Wrath
+4 Scorching Dragonfire
+2 Redcap Melee
+2 Disdainful Stroke
+2 Aether Gust
+2 Mystical Dispute

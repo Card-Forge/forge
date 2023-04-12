@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Selesnya Toxic by Diego Celis
+Title=MamiWata
+Difficulty=very hard
+Description=Selesnya Toxic by Diego Celis
+Icon=MamiWata.jpg
+Deck Type=constructed
+
+[main]
+2 Annex Sentry
+4 Bloated Contaminator
+4 Crawling Chorus
+3 Jawbone Duelist
+4 Skrelv, Defector Mite
+4 Slaughter Singer
+4 Venerated Rotpriest
+2 Charge of the Mites
+1 Loran's Escape
+4 Tyvar's Stand
+1 Viral Spawning
+4 Skrelv's Hive
+1 Boseiju, Who Endures
+4 Brushland
+2 Eiganjo, Seat of the Empire
+1 Forest
+3 Mirrex
+2 Overgrown Farmland
+2 Plains
+4 Razorverge Thicket
+4 The Seedcore
+
+[sideboard]
+2 Annex Sentry
+1 Ajani, Sleeper Agent
+2 Carnivorous Canopy
+1 Circle of Confinement
+3 Destroy Evil
+2 Knockout Blow
+1 Lantern Flare
+1 Melira, the Living Cure
+2 Unlicensed Hearse

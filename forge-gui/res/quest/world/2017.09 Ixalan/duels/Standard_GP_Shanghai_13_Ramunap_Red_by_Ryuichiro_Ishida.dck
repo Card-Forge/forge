@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ramunap Red by Ryuichiro Ishida
+Title=Yma
+Difficulty=very hard
+Description=Ramunap Red by Ryuichiro Ishida
+Icon=Yma.jpg
+Deck Type=constructed
+
+[main]
+4 Sunscorched Desert|AKH
+2 Scavenger Grounds|HOU
+4 Ramunap Ruins|HOU
+15 Mountain|XLN
+4 Lightning Strike|XLN
+3 Abrade|HOU
+4 Shock|AER
+1 Glorybringer|AKH
+4 Hazoret the Fervent|AKH
+3 Rampaging Ferocidon|XLN
+3 Kari Zev, Skyship Raider|AER
+3 Earthshaker Khenra|HOU
+4 Soul-Scar Mage|AKH
+4 Bomat Courier|KLD
+2 Chandra, Torch of Defiance|KLD
+
+[sideboard]
+1 Aethersphere Harvester|AER
+2 Chandra's Defeat|HOU
+3 Pia Nalaar|KLD
+4 Harsh Mentor|AKH
+2 Glorybringer|AKH
+1 Rampaging Ferocidon|XLN
+2 Chandra, Torch of Defiance|KLD

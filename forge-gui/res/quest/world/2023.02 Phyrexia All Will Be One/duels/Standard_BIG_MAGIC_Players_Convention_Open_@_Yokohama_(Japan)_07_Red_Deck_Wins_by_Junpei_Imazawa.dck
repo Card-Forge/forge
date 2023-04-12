@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Junpei Imazawa
+Title=Count Musgrave
+Difficulty=very hard
+Description=Red Deck Wins by Junpei Imazawa
+Icon=Count Musgrave.jpg
+Deck Type=constructed
+
+[main]
+3 Feldon, Ronom Excavator
+4 Monastery Swiftspear
+4 Bloodthirsty Adversary
+4 Fable of the Mirror-Breaker
+4 Phoenix Chick
+4 Thundering Raiju
+4 Kumano Faces Kakkazan
+1 Rending Flame
+4 Lightning Strike
+4 Play with Fire
+1 Strangle
+1 Mirrex
+2 Sokenzan, Crucible of Defiance
+4 Mishra's Foundry
+16 Mountain
+
+[sideboard]
+3 Rending Flame
+1 Abrade
+2 Furnace Punisher
+2 The Elder Dragon War
+2 Koth, Fire of Resistance
+2 Unlicensed Hearse
+3 Obliterating Bolt

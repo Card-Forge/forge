@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Nakamura Kouki
+Title=Ned Flanders
+Difficulty=very hard
+Description=Esper Aggro by Nakamura Kouki
+Icon=Ned Flanders.jpg
+Deck Type=constructed
+
+[main]
+4 Brightclimb Pathway
+4 Shattered Sanctum
+4 Raffine's Tower
+4 Hengegate Pathway
+2 Hive of the Eye Tyrant
+2 Deserted Beach
+2 Clearwater Pathway
+2 Shipwreck Marsh
+1 Swamp
+3 The Wandering Emperor
+3 Kaito Shizuki
+1 Lolth, Spider Queen
+4 Wedding Announcement
+2 The Meathook Massacre
+2 Vanishing Verse
+2 Ray of Enfeeblement
+4 Tenacious Underdog
+4 Aven Heartstabber
+4 Luminarch Aspirant
+4 Raffine, Scheming Seer
+1 Legion Angel
+1 Liesa, Forgotten Archangel
+
+[sideboard]
+4 Negate
+2 Duress
+1 The Meathook Massacre
+2 Vanishing Verse
+2 Ray of Enfeeblement
+3 Legion Angel
+1 Liesa, Forgotten Archangel

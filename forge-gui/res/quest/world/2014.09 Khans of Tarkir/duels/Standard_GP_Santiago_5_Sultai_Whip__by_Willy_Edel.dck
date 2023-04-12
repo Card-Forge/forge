@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Sultai Whip  by Willy Edel
+Title=Aspect of Corruption
+Difficulty=very hard
+Description=Sultai Whip  by Willy Edel
+Icon=Aspect of Corruption.jpg
+Deck Type=constructed
+
+[main]
+2 Sagu Mauler|KTK
+3 Hornet Queen|M15
+1 Soul of Innistrad|M15
+3 Thoughtseize|THS
+3 Hero's Downfall|THS
+4 Murderous Cut|KTK
+3 Whip of Erebos|THS
+2 Temple of Malady|JOU
+1 Temple of Mystery|THS
+4 Opulent Palace|KTK
+2 Yavimaya Coast|M15
+4 Llanowar Wastes|M15
+1 Mana Confluence|JOU
+3 Polluted Delta|KTK
+1 Island|KTK
+2 Swamp|KTK
+3 Forest|KTK
+2 Doomwake Giant|JOU
+4 Sidisi, Brood Tyrant|KTK
+4 Courser of Kruphix|BNG
+4 Satyr Wayfinder|M15
+4 Sylvan Caryatid|THS
+
+[sideboard]
+1 Whip of Erebos|THS
+1 Nylea's Disciple|THS
+2 Drown in Sorrow|BNG
+2 Bile Blight|BNG
+3 Ashiok, Nightmare Weaver|THS
+1 Reclamation Sage|M15
+2 Sultai Charm|KTK
+3 Disdainful Stroke|KTK

@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Chromanticore by Zvi Mowshowitz
+Title=Wyatt Earp
+Difficulty=very hard
+Description=Chromanticore by Zvi Mowshowitz
+Icon=Wyatt Earp.jpg
+Deck Type=constructed
+
+[main]
+4 Chromanticore|BNG
+4 Soulflayer|FRF
+4 Sylvan Caryatid|THS
+4 Satyr Wayfinder|M15
+3 Sidisi, Brood Tyrant|KTK
+2 Silumgar, the Drifting Death|FRF
+2 Pharika, God of Affliction|JOU
+3 Den Protector|DTK
+4 Deathmist Raptor|DTK
+4 Commune with the Gods|THS
+3 Murderous Cut|KTK
+3 Polluted Delta|KTK
+2 Urborg, Tomb of Yawgmoth|M15
+1 Frontier Bivouac|KTK
+1 Sandsteppe Citadel|KTK
+4 Mana Confluence|JOU
+2 Temple of Mystery|THS
+1 Temple of Plenty|BNG
+1 Temple of Abandon|THS
+3 Temple of Malady|JOU
+1 Llanowar Wastes|M15
+1 Yavimaya Coast|M15
+1 Island|DTK
+2 Swamp|DTK
+
+[sideboard]
+1 Murderous Cut|KTK
+1 Hero's Downfall|THS
+3 Drown in Sorrow|BNG
+1 Sultai Charm|KTK
+1 Erebos, God of the Dead|THS
+3 Thoughtseize|THS
+1 Hornet Queen|M15
+1 Torrent Elemental|FRF
+1 Negate|DTK
+1 Dragonlord Silumgar|DTK
+1 Sidisi, Undead Vizier|DTK

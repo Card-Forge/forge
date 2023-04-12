@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Orzhov Aggro by Chaoyuan Zuo
+Title=Orcish Mine
+Difficulty=very hard
+Description=Orzhov Aggro by Chaoyuan Zuo
+Icon=Orcish Mine.jpg
+Deck Type=constructed
+
+[main]
+1 Elite Spellbinder
+1 Legion Angel
+2 Intrepid Adversary
+2 Edgar, Charmed Groom
+3 Henrika Domnathi
+4 Luminarch Aspirant
+4 Silverquill Silencer
+4 Graveyard Trespasser
+4 Vanishing Verse
+3 Crippling Fear
+4 Wedding Announcement
+3 Lolth, Spider Queen
+1 Field of Ruin
+1 Shineshadow Snarl
+4 Swamp
+4 Brightclimb Pathway
+4 Hive of the Eye Tyrant
+4 Shattered Sanctum
+7 Plains
+
+[sideboard]
+1 Elite Spellbinder
+3 Legion Angel
+1 Crippling Fear
+2 Kaya the Inexorable
+4 Duress
+4 Brutal Cathar

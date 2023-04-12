@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Dan Milechman
+Title=Tibalt
+Difficulty=very hard
+Description=Gruul Aggro by Dan Milechman
+Icon=Tibalt.jpg
+Deck Type=constructed
+
+[main]
+1 Reckoner Bankbuster
+4 Kumano Faces Kakkazan
+4 Strangle
+2 Hajar, Loyal Bodyguard
+2 Bloated Contaminator
+3 Feldon, Ronom Excavator
+4 Reckless Stormseeker
+4 Quirion Beastcaller
+4 Migloz, Maze Crusher
+4 Thundering Raiju
+4 Evolving Adaptive
+1 Rockfall Vale
+1 Sokenzan, Crucible of Defiance
+1 Boseiju, Who Endures
+4 Karplusan Forest
+4 Copperline Gorge
+6 Forest
+7 Mountain
+
+[sideboard]
+1 Obliterating Bolt
+2 Cankerbloom
+2 Furnace Punisher
+1 Unlicensed Hearse
+2 Thrun, Breaker of Silence
+3 Rebel Salvo
+4 Brotherhood's End

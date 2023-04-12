@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=UG Control Goyf by Andrew Walden
+Title=Radioactive Man
+Difficulty=very hard
+Description=UG Control Goyf by Andrew Walden
+Icon=Radioactive Man.jpg
+Deck Type=constructed
+
+[main]
+1 Pendelhaven|TSP
+2 Venser, Shaper Savant|FUT
+3 Mystic Snake|C15
+3 Vesuvan Shapeshifter|TSP
+4 Tarmogoyf|FUT
+4 Psionic Blast|TSP
+4 Delay|FUT
+4 Pongify|C14
+4 Riftwing Cloudskate|TSP
+4 Riftsweeper|FUT
+4 Llanowar Reborn|C15
+4 Terramorphic Expanse|C16
+4 Forest|RTR
+4 Looter il-Kor|TSP
+11 Island|RTR
+
+[sideboard]
+3 Stonewood Invocation|TSP
+4 Cancel
+4 Serrated Arrows|TSP
+4 Thornweald Archer|C14

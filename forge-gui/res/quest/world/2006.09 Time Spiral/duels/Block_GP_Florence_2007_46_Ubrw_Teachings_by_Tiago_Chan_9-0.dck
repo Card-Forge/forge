@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Ubrw Teachings by Tiago Chan 9-0
+Title=King Arthur
+Difficulty=very hard
+Description=Ubrw Teachings by Tiago Chan 9-0
+Icon=King Arthur.jpg
+Deck Type=constructed
+
+[main]
+4 Damnation|PLC
+4 Terramorphic Expanse|C16
+4 Shadowmage Infiltrator|TSP
+4 Prismatic Lens|TSP
+4 River of Tears|FUT
+4 Island|RTR
+3 Careful Consideration|TSP
+3 Tolaria West|FUT
+3 Coalition Relic|FUT
+3 Urborg, Tomb of Yawgmoth|M15
+3 Tendrils of Corruption|C14
+2 Aeon Chronicler|C16
+2 Detritivore|PLC
+2 Mystical Teachings|TSP
+2 Academy Ruins|TSP
+2 Urza's Factory|C13
+2 Void|TSP
+1 Pull from Eternity|TSP
+1 Pact of Negation|FUT
+1 Slaughter Pact|FUT
+1 Molten Slagheap|C13
+1 Haunting Hymn|TSP
+1 Swamp|RTR
+1 Mountain|RTR
+1 Plains|RTR
+1 Triskelavus|CMD
+
+[sideboard]
+1 Pull from Eternity|TSP
+1 Pact of Negation|FUT
+1 Slaughter Pact|FUT
+3 Shimian Specter|M13
+2 Vesuvan Shapeshifter|TSP
+2 Spell Burst|TSP
+2 Imp's Mischief|PLC
+2 Strangling Soot|TSP
+1 Ancient Grudge|ISD

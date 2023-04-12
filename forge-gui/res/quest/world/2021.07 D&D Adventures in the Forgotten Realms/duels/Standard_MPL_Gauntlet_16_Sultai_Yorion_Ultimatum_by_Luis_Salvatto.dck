@@ -1,0 +1,53 @@
+[duel]
+[metadata]
+Name=Sultai Yorion Ultimatum by Luis Salvatto
+Title=Elvish Magi
+Difficulty=very hard
+Description=Sultai Yorion Ultimatum by Luis Salvatto
+Icon=Elvish Magi.jpg
+Deck Type=constructed
+
+[main]
+1 Valki, God of Lies
+1 Vorinclex, Monstrous Raider
+1 Polukranos, Unchained
+3 Elder Gargaroth
+2 Disdainful Stroke
+3 Jwari Disruption
+4 Heartless Act
+4 Power Word Kill
+1 Shadows' Verdict
+1 Sea Gate Restoration
+1 Pestilent Haze
+1 Crippling Fear
+1 Extinction Event
+1 Duress
+2 Alrund's Epiphany
+4 Cultivate
+4 Emergent Ultimatum
+1 Kiora Bests the Sea God
+4 Wolfwillow Haven
+4 Omen of the Sea
+4 Binding the Old Gods
+1 Ketria Triome
+2 Island
+3 Temple of Malady
+3 Forest
+3 Swamp
+4 Clearwater Pathway
+4 Barkchannel Pathway
+4 Zagoth Triome
+4 Darkbore Pathway
+4 Fabled Passage
+
+[sideboard]
+1 Disdainful Stroke
+3 Duress
+1 Yorion, Sky Nomad
+1 Mystical Dispute
+1 Ray of Enfeeblement
+1 Koma, Cosmos Serpent
+1 Barrier Breach
+1 Elspeth's Nightmare
+2 Negate
+3 Mazemind Tome

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=UR Murktide by Nikolin Lasku
+Title=alasunsinger
+Difficulty=very hard
+Description=UR Murktide by Nikolin Lasku
+Icon=alasunsinger.jpg
+Deck Type=constructed
+
+[main]
+1 Archmage's Charm
+1 Engineered Explosives|FD
+2 Serum Visions|FD
+2 Spell Pierce|XLN
+3 Counterspell|7E
+4 Consider
+4 Lightning Bolt|M11
+4 Unholy Heat
+4 Expressive Iteration
+4 Mishra's Bauble|CS
+1 Brazen Borrower
+4 Murktide Regent
+4 Ragavan, Nimble Pilferer
+4 Dragon's Rage Channeler
+2 Fiery Islet
+2 Flooded Strand|KTK
+3 Steam Vents
+3 Island
+4 Spirebluff Canal|KLD
+4 Scalding Tarn|ZEN
+
+[sideboard]
+2 Force of Negation
+2 Relic of Progenitus|ALA
+3 Dress Down
+2 Blood Moon|9E
+2 Flusterstorm
+2 Jace, the Mind Sculptor|WWK
+2 Engineered Explosives|FD

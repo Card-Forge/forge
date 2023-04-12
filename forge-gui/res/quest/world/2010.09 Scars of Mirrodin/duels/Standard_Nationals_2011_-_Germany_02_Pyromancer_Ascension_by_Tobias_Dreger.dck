@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Pyromancer Ascension by Tobias Dreger
+Title=Paladin
+Difficulty=very hard
+Description=Pyromancer Ascension by Tobias Dreger
+Icon=Paladin.jpg
+Deck Type=constructed
+
+[main]
+4 Burst Lightning|ZEN
+4 Into the Roil|ZEN
+4 Lightning Bolt|M11
+4 Mana Leak|M12
+1 Foresee|M11
+4 Gitaxian Probe|NPH
+4 Ponder|M12
+4 Preordain|M11
+1 Red Sun's Zenith|MBS
+4 See Beyond|ROE
+4 Pyromancer Ascension|ZEN
+1 Arid Mesa|ZEN
+3 Halimar Depths|WWK
+7 Island|M12
+2 Misty Rainforest|ZEN
+5 Mountain|M12
+4 Scalding Tarn|ZEN
+
+[sideboard]
+1 Consecrated Sphinx|MBS
+4 Flashfreeze|M12
+3 Mental Misstep|NPH
+1 Twisted Image|SOM
+4 Pyroclasm|M11
+2 Batterskull|NPH

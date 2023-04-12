@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Burn by Traboco Manuel
+Title=Neith
+Difficulty=very hard
+Description=Burn by Traboco Manuel
+Icon=Neith.jpg
+Deck Type=constructed
+
+[main]
+4 Monastery Swiftspear|KTK
+4 Eidolon of the Great Revel|JOU
+4 Goblin Guide|ZEN
+2 Skullcrack|GTC
+3 Lightning Helix|RAV
+4 Lightning Bolt|M11
+4 Searing Blaze|WWK
+4 Boros Charm|GTC
+4 Rift Bolt|TSP
+4 Lava Spike|CHK
+4 Skewer the Critics
+1 Arid Mesa|ZEN
+2 Mountain
+2 Sacred Foundry
+2 Wooded Foothills|KTK
+2 Bloodstained Mire|KTK
+2 Scalding Tarn|ZEN
+4 Sunbaked Canyon
+4 Inspiring Vantage|KLD
+
+[sideboard]
+1 Skullcrack|GTC
+1 Kor Firewalker|WWK
+1 Lurrus of the Dream-Den
+1 Wear // Tear|DGM
+1 Deflecting Palm|KTK
+2 Roiling Vortex
+2 Path to Exile|CFX
+3 Sanctifier en-Vec
+3 Smash to Smithereens|ORI

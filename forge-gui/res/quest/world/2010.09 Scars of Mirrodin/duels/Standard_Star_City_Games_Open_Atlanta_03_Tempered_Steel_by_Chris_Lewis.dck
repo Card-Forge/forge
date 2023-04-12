@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Tempered Steel by Chris Lewis
+Title=Blue
+Difficulty=very hard
+Description=Tempered Steel by Chris Lewis
+Icon=Blue.jpg
+Deck Type=constructed
+
+[main]
+4 Memnite|SOM
+4 Ornithopter|M11
+3 Porcelain Legionnaire|NPH
+4 Signal Pest|MBS
+4 Steel Overseer|M11
+4 Vault Skirge|NPH
+4 Glint Hawk|SOM
+4 Dispatch|NPH
+3 Glint Hawk Idol|SOM
+4 Mox Opal|SOM
+4 Tempered Steel|SOM
+11 Plains|M12
+3 Contested War Zone|MBS
+4 Inkmoth Nexus|MBS
+
+[sideboard]
+2 Plains|M12
+3 Spellskite|NPH
+4 Kor Firewalker|WWK
+2 Refraction Trap|WWK
+4 Shrine of Loyal Legions|NPH

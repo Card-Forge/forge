@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Dimir Control by Fogo Norabo
+Title=Halfdane
+Difficulty=very hard
+Description=Dimir Control by Fogo Norabo
+Icon=Halfdane.jpg
+Deck Type=constructed
+
+[main]
+3 Lier, Disciple of the Drowned
+4 Sedgemoor Witch
+2 Memory Deluge
+2 Power Word Kill
+2 Jwari Disruption
+2 Infernal Grasp
+4 Consider
+4 Fading Hope
+4 Divide by Zero
+1 Blood on the Snow
+3 Duress|US
+4 Bloodchief's Thirst
+2 Field of Ruin|XLN
+3 Faceless Haven
+4 Shipwreck Marsh
+4 Ice Tunnel
+5 Snow-Covered Island|IA
+7 Snow-Covered Swamp|IA
+
+[sideboard]
+1 Blood on the Snow
+1 Mascot Exhibition
+1 Teachings of the Archaics
+1 Environmental Sciences
+2 Soul Shatter
+3 Ray of Enfeeblement
+3 Go Blank
+3 Malevolent Hermit

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Alexander Hayne
+Title=Jacob Grimm
+Difficulty=very hard
+Description=Boros Aggro by Alexander Hayne
+Icon=Jacob Grimm.jpg
+Deck Type=constructed
+
+[main]
+4 Dauntless Bodyguard
+4 Benalish Marshal
+4 Adanto Vanguard|XLN
+4 Healer's Hawk
+4 Leonin Vanguard
+3 Skymarcher Aspirant
+4 Ajani's Pridemate
+3 Pride of Conquerors
+2 Conclave Tribunal
+4 History of Benalia
+4 Legion's Landing|XLN
+4 Clifftop Retreat
+12 Plains
+4 Sacred Foundry
+
+[sideboard]
+2 Conclave Tribunal
+4 Experimental Frenzy
+2 Banefire
+4 Baffling End
+1 Mountain
+2 Aurelia, Exemplar of Justice

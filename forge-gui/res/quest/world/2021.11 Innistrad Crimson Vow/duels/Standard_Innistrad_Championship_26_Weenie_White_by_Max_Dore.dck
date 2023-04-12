@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Weenie White by Max Dore
+Title=Octavian Muerto
+Difficulty=very hard
+Description=Weenie White by Max Dore
+Icon=Octavian Muerto.jpg
+Deck Type=constructed
+
+[main]
+2 Skyclave Apparition
+2 Reidane, God of the Worthy
+3 Adeline, Resplendent Cathar
+4 Thalia, Guardian of Thraben
+4 Hopeful Initiate
+4 Intrepid Adversary
+4 Fleeting Spirit
+4 Luminarch Aspirant
+4 Usher of the Fallen
+4 Elite Spellbinder
+2 Valorous Stance
+4 Faceless Haven
+19 Snow-Covered Plains
+
+[sideboard]
+2 Skyclave Apparition
+1 Valorous Stance
+2 Paladin Class
+2 Curse of Silence
+2 Portable Hole
+2 Guardian of Faith
+4 Brutal Cathar

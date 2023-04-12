@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Ub Control by Heath Vance
+Title=Sun Quan
+Difficulty=very hard
+Description=Ub Control by Heath Vance
+Icon=Sun Quan.jpg
+Deck Type=constructed
+
+[main]
+4 Glimmer of Genius|KLD
+4 Essence Scatter|AKH
+2 Commit // Memory|AKH
+3 Moment of Craving
+4 Fatal Push|AER
+2 The Scarab God|HOU
+4 Torrential Gearhulk|KLD
+2 Submerged Boneyard|AKH
+3 Field of Ruin|XLN
+6 Swamp
+7 Island
+4 Drowned Catacomb|XLN
+4 Fetid Pools|AKH
+2 Search for Azcanta|XLN
+4 Disallow|AER
+4 Vraska's Contempt|XLN
+1 Hieroglyphic Illumination|AKH
+
+[sideboard]
+1 Moment of Craving
+1 Nezahal, Primal Tide
+3 Contraband Kingpin|KLD
+1 Golden Demise
+2 Negate
+1 River's Rebuke|XLN
+3 Glint-Sleeve Siphoner|AER
+2 Duress|XLN
+1 Metallurgic Summonings|KLD

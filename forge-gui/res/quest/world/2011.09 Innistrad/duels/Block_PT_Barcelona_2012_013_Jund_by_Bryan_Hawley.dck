@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Jund by Bryan Hawley
+Title=Severus Snape
+Difficulty=very hard
+Description=Jund by Bryan Hawley
+Icon=Severus Snape.jpg
+Deck Type=constructed
+
+[main]
+4 Evolving Wilds
+9 Forest|RTR
+2 Kessig Wolf Run|ISD
+4 Mountain|RTR
+1 Swamp|RTR
+4 Woodland Cemetery
+4 Dawntreader Elk|DKA
+4 Huntmaster of the Fells|DKA
+4 Strangleroot Geist|DKA
+1 Vorapede|DKA
+4 Wolfir Avenger|AVR
+4 Wolfir Silverheart|AVR
+4 Bonfire of the Damned|AVR
+3 Garruk Relentless|ISD
+1 Geistflame|ISD
+4 Pillar of Flame|AVR
+3 Sever the Bloodline|C15
+
+[sideboard]
+2 Geistflame|ISD
+1 Sever the Bloodline|C15
+3 Appetite for Brains|AVR
+3 Blasphemous Act|C16
+2 Bramblecrush|M14
+2 Grafdigger's Cage|DKA
+2 Zealous Conscripts|AVR

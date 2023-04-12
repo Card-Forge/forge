@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Grixis Control by Hideyuki Ichikawa
+Title=Cable
+Difficulty=very hard
+Description=Grixis Control by Hideyuki Ichikawa
+Icon=Cable.jpg
+Deck Type=constructed
+
+[main]
+1 Cut Down
+1 Negate
+1 Blue Sun's Twilight
+3 Make Disappear
+3 Go for the Throat
+3 Reckoner Bankbuster
+4 Invoke Despair
+4 Abrade
+4 Fable of the Mirror-Breaker
+1 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Swamp
+1 Sulfurous Springs
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+2 Darkslick Shores
+2 Underground River
+3 Shivan Reef
+4 Xander's Lounge
+4 Haunted Ridge
+4 Shipwreck Marsh
+4 Blackcleave Cliffs
+
+[sideboard]
+3 Razorlash Transmogrant
+1 Graveyard Trespasser
+1 Brotherhood's End
+1 Disdainful Stroke
+1 Siphon Insight
+3 Cut Down
+1 Negate
+2 Blue Sun's Twilight
+2 Sheoldred, the Apocalypse

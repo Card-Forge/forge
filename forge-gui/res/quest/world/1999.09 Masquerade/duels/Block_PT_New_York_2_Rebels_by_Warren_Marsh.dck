@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Rebels by Warren Marsh
+Title=Sly Cooper
+Difficulty=very hard
+Description=Rebels by Warren Marsh
+Icon=Sly Cooper.jpg
+Deck Type=constructed
+
+[main]
+1 Jhovall Queen|MM
+4 Lin Sivvi, Defiant Hero|NE
+2 Ramosian Lieutenant|MM
+3 Ramosian Sergeant|MM
+1 Ramosian Sky Marshal|MM
+4 Steadfast Guard|10E
+3 Voice of Truth|NE
+2 Disenchant|CN2
+4 Parallax Wave|NE
+4 Reverent Mantra|MM
+2 Seal of Cleansing|C15
+4 Story Circle|10E
+22 Plains|RTR
+4 Rishadan Port|MM
+
+[sideboard]
+1 Voice of Truth|NE
+2 Disenchant|CN2
+1 Seal of Cleansing|C15
+4 Defender en-Vec|NE
+1 Distorting Lens|8E
+1 Lightbringer|NE
+1 Nightwind Glider|MM
+4 Topple|NE

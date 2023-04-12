@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Mardu Vehicles by Tomoya Tsubouchi
+Title=Uncle Owen
+Difficulty=very hard
+Description=Mardu Vehicles by Tomoya Tsubouchi
+Icon=Uncle Owen.jpg
+Deck Type=constructed
+
+[main]
+4 Bomat Courier|KLD
+4 Toolcraft Exemplar|KLD
+4 Glory-Bound Initiate|AKH
+4 Scrapheap Scrounger|KLD
+2 Veteran Motorist|KLD
+2 Pia Nalaar|KLD
+3 Hazoret the Fervent|AKH
+4 Lightning Strike|XLN
+4 Unlicensed Disintegration|KLD
+4 Heart of Kiran|AER
+2 Aethersphere Harvester|AER
+2 Aether Hub|KLD
+4 Concealed Courtyard|KLD
+2 Dragonskull Summit|XLN
+4 Inspiring Vantage|KLD
+3 Mountain|XLN
+3 Plains|XLN
+1 Ramunap Ruins|HOU
+4 Spire of Industry|AER
+
+[sideboard]
+2 Rampaging Ferocidon|XLN
+2 Duress|XLN
+2 Magma Spray|AKH
+2 Abrade|HOU
+3 Solemnity|HOU
+2 Chandra, Torch of Defiance|KLD
+2 Ixalan's Binding|XLN

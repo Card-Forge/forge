@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Mani Davoudi
+Title=Jack Sparrow
+Difficulty=very hard
+Description=Caw-Blade by Mani Davoudi
+Icon=Jack Sparrow.jpg
+Deck Type=constructed
+
+[main]
+3 Emeria Angel|ZEN
+4 Squadron Hawk|M11
+1 Deprive|ROE
+3 Dismember|NPH
+2 Into the Roil|ZEN
+4 Mana Leak|M12
+3 Spell Pierce|ZEN
+4 Preordain|M11
+2 Sword of Feast and Famine|MBS
+2 Gravitational Shift|ROE
+3 Oblivion Ring|M12
+3 Island|M12
+3 Plains|M12
+2 Arid Mesa|ZEN
+4 Celestial Colonnade|WWK
+4 Glacial Fortress|M12
+4 Inkmoth Nexus|MBS
+2 Scalding Tarn|ZEN
+4 Seachrome Coast|SOM
+1 Tectonic Edge|WWK
+2 Gideon Jura|M12
+
+[sideboard]
+3 Spellskite|NPH
+1 Celestial Purge|M12
+3 Flashfreeze|M12
+3 Day of Judgment|M12
+2 Revoke Existence|SOM
+3 Timely Reinforcements|M12

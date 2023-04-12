@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Marcela Almeida
+Title=Tolaria
+Difficulty=very hard
+Description=Rakdos Aggro by Marcela Almeida
+Icon=Tolaria.jpg
+Deck Type=constructed
+
+[main]
+2 Callous Bloodmage
+2 Kroxa, Titan of Death's Hunger
+4 Woe Strider
+4 Extus, Oriq Overlord
+4 Serrated Scorpion
+4 Eyetwitch
+4 Village Rites
+2 Hunt for Specimens
+4 Claim the Firstborn
+3 The Akroan War
+4 Bastion of Remembrance
+2 Castle Locthwain
+2 Needleverge Pathway
+2 Fabled Passage
+3 Mountain
+4 Savai Triome
+4 Blightstep Pathway
+6 Swamp
+
+[sideboard]
+1 Pest Summoning
+1 Ox of Agonas
+1 Start from Scratch
+1 Environmental Sciences
+1 Necrotic Fumes
+3 Necromentia
+3 Heartless Act
+4 Duress

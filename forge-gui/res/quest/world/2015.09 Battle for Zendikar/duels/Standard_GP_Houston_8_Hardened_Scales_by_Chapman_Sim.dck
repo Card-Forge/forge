@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Hardened Scales by Chapman Sim
+Title=Bumba
+Difficulty=very hard
+Description=Hardened Scales by Chapman Sim
+Icon=Bumba.jpg
+Deck Type=constructed
+
+[main]
+4 Dromoka's Command|DTK
+4 Hardened Scales|KTK
+4 Nissa, Voice of Zendikar|OGW
+4 Servant of the Scale|DTK
+4 Hangarback Walker|ORI
+4 Avatar of the Resolute|DTK
+4 Abzan Falconer|KTK
+4 Endless One|BFZ
+4 Managorger Hydra|ORI
+2 Flooded Strand|KTK
+2 Canopy Vista|BFZ
+2 Plains|BFZ
+4 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+10 Forest|BFZ
+
+[sideboard]
+3 Hallowed Moonlight|ORI
+2 Abzan Battle Priest|KTK
+2 Evolutionary Leap|ORI
+2 Valorous Stance|FRF
+2 Silkwrap|DTK
+2 High Sentinels of Arashin|KTK
+2 Gideon, Ally of Zendikar|BFZ

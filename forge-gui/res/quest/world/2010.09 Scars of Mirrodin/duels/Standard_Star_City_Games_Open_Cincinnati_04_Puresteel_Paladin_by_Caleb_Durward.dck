@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by Caleb Durward
+Title=The Shielded Sea
+Difficulty=very hard
+Description=Puresteel Paladin by Caleb Durward
+Icon=The Shielded Sea.jpg
+Deck Type=constructed
+
+[main]
+1 Sword of Body and Mind|SOM
+1 Basilisk Collar|WWK
+1 Accorder's Shield|SOM
+1 Sylvok Lifestaff|SOM
+2 Sword of Feast and Famine|MBS
+2 Sword of War and Peace|NPH
+2 Mox Opal|SOM
+3 Flayer Husk|MBS
+4 Dispatch|NPH
+4 Mortarpod|MBS
+4 Preordain|M11
+1 Glint Hawk|SOM
+2 Kor Firewalker|WWK
+2 Etched Champion|SOM
+3 Trinket Mage|SOM
+4 Puresteel Paladin|NPH
+1 Island|M12
+2 Celestial Colonnade|WWK
+4 Seachrome Coast|SOM
+4 Inkmoth Nexus|MBS
+4 Glacial Fortress|M12
+8 Plains|M12
+
+[sideboard]
+2 Negate|M12
+4 Flashfreeze|M12
+3 Dismember|NPH
+1 Spellskite|NPH
+2 Sword of Feast and Famine|MBS
+1 Sword of War and Peace|NPH
+2 Kor Firewalker|WWK

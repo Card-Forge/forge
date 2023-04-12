@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Simic Nexus by Michael Bonde
+Title=Beta Mono White
+Difficulty=very hard
+Description=Simic Nexus by Michael Bonde
+Icon=Beta Mono White.jpg
+Deck Type=constructed
+
+[main]
+2 Hydroid Krasis
+3 Blink of an Eye
+4 Chemister's Insight
+4 Growth Spiral
+4 Nexus of Fate
+4 Opt
+1 Precognitive Perception
+4 Root Snare
+3 Sinister Sabotage
+3 Search for Azcanta|XLN
+4 Wilderness Reclamation
+4 Breeding Pool
+6 Forest
+4 Hinterland Harbor
+4 Island
+4 Memorial to Genius
+2 Simic Guildgate
+
+[sideboard]
+1 Hydroid Krasis
+3 Atzocan Archer|XLN
+2 Biogenic Ooze
+2 Crushing Canopy
+1 Druid of the Cowl
+3 Incubation Druid
+2 Negate
+1 Nezahal, Primal Tide

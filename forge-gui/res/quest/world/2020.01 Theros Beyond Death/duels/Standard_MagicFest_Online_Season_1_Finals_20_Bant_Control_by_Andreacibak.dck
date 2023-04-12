@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Bant Control by Andreacibak
+Title=The Ogres
+Difficulty=very hard
+Description=Bant Control by Andreacibak
+Icon=The Ogres.jpg
+Deck Type=constructed
+
+[main]
+2 Agent of Treachery
+2 Dream Trawler
+2 Hydroid Krasis
+4 Uro, Titan of Nature's Wrath
+4 Growth Spiral
+3 Shatter the Sky
+4 Elspeth Conquers Death
+2 Tamiyo, Collector of Tales
+2 Narset, Parter of Veils
+2 Nissa, Who Shakes the World
+4 Teferi, Time Raveler
+2 Island
+2 Plains
+2 Temple of Mystery
+2 Temple of Plenty
+2 Forest
+3 Temple of Enlightenment
+4 Fabled Passage
+4 Temple Garden
+4 Breeding Pool
+4 Hallowed Fountain
+
+[sideboard]
+1 Heliod's Intervention
+2 Tolsimir, Friend to Wolves
+2 Aether Gust
+2 Devout Decree
+2 Glass Casket
+2 Stonecoil Serpent
+4 Mystical Dispute

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Temur Energy by Yuuya Watanabe
+Title=Lizzy
+Difficulty=very hard
+Description=Temur Energy by Yuuya Watanabe
+Icon=Lizzy.jpg
+Deck Type=constructed
+
+[main]
+1 Chandra, Torch of Defiance|KLD
+4 Longtusk Cub|KLD
+4 Servant of the Conduit|KLD
+4 Rogue Refiner|AER
+3 Whirler Virtuoso|KLD
+4 Bristling Hydra|KLD
+4 Glorybringer|AKH
+4 Attune with Aether|KLD
+1 Confiscation Coup|KLD
+3 Abrade|HOU
+4 Harnessed Lightning|KLD
+2 Aethersphere Harvester|AER
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+4 Forest|XLN
+1 Island|XLN
+2 Mountain|XLN
+2 Rootbound Crag|XLN
+2 Sheltered Thicket|AKH
+3 Spirebluff Canal|KLD
+
+[sideboard]
+2 Chandra, Torch of Defiance|KLD
+2 Confiscation Coup|KLD
+1 Vizier of Many Faces|AKH
+3 Chandra's Defeat|HOU
+2 Spell Pierce|XLN
+1 Jace's Defeat|HOU
+2 Negate|AER
+2 Nissa, Vital Force|KLD

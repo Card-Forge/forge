@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Yamaguchi Koutarou
+Title=Forest Dragon
+Difficulty=very hard
+Description=Esper Aggro by Yamaguchi Koutarou
+Icon=Forest Dragon.jpg
+Deck Type=constructed
+
+[main]
+1 Spell Pierce
+1 Infernal Grasp
+1 Emeria's Call
+2 Make Disappear
+2 Vanishing Verse
+4 The Wandering Emperor
+4 Wedding Announcement
+4 Exotic Pets
+2 Obscura Interceptor
+2 Tenacious Underdog
+4 Luminarch Aspirant
+4 Spectral Adversary
+4 Raffine, Scheming Seer
+1 Plains
+1 Hive of the Eye Tyrant
+1 Island
+1 Cave of the Frost Dragon
+1 Swamp
+2 Deserted Beach
+2 Shipwreck Marsh
+4 Raffine's Tower
+4 Hengegate Pathway
+4 Brightclimb Pathway
+4 Clearwater Pathway
+
+[sideboard]
+4 Ray of Enfeeblement
+3 Disdainful Stroke
+2 Farewell
+2 Unlicensed Hearse
+1 Duress
+1 Annul
+1 Power Word Kill
+1 Reckoner Bankbuster

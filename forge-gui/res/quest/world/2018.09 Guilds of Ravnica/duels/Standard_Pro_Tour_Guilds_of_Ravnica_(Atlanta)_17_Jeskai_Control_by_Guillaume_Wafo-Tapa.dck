@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Guillaume Wafo-Tapa
+Title=Priestess
+Difficulty=very hard
+Description=Jeskai Control by Guillaume Wafo-Tapa
+Icon=Priestess.jpg
+Deck Type=constructed
+
+[main]
+3 Teferi, Hero of Dominaria
+3 Crackling Drake
+2 Niv-Mizzet, Parun
+4 Deafening Clarion
+1 Cleansing Nova
+4 Opt
+3 Syncopate
+2 Essence Scatter
+1 Negate
+4 Sinister Sabotage
+1 Justice Strike
+4 Chemister's Insight
+2 Expansion // Explosion
+4 Steam Vents
+4 Sacred Foundry
+4 Sulfur Falls
+4 Glacial Fortress|XLN
+4 Clifftop Retreat
+6 Island
+
+[sideboard]
+1 Niv-Mizzet, Parun
+2 Negate
+2 Justice Strike
+3 Seal Away
+2 Star of Extinction|XLN
+1 Invoke the Divine
+1 Spell Pierce|XLN
+3 Legion Warboss

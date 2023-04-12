@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=UG Pummeler by Patrick Dickmann
+Title=Chain Lightning
+Difficulty=very hard
+Description=UG Pummeler by Patrick Dickmann
+Icon=Chain Lightning.jpg
+Deck Type=constructed
+
+[main]
+1 One With the Wind|XLN
+2 Dive Down|XLN
+4 Attune with Aether|KLD
+4 Larger Than Life|KLD
+4 Blossoming Defense|KLD
+4 Cartouche of Knowledge|AKH
+1 Rhonas the Indomitable|AKH
+4 Servant of the Conduit|KLD
+4 Rogue Refiner|AER
+4 Electrostatic Pummeler|KLD
+4 Bristling Hydra|KLD
+4 Longtusk Cub|KLD
+2 Island|XLN
+4 Hashep Oasis|HOU
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+6 Forest|XLN
+
+[sideboard]
+1 Swamp|XLN
+2 Spell Pierce|XLN
+4 Negate|AER
+3 Cartouche of Ambition|AKH
+2 Greenbelt Rampager|AER
+3 Aethersphere Harvester|AER

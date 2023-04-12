@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Esper Control by Matthew Costa
+Title=Jandor
+Difficulty=very hard
+Description=Esper Control by Matthew Costa
+Icon=Jandor.jpg
+Deck Type=constructed
+
+[main]
+4 Teferi, Hero of Dominaria
+1 Kaya, Orzhov Usurper
+2 Kaya's Wrath
+4 Thought Erasure
+3 Cry of the Carnarium
+4 Absorb
+2 Vraska's Contempt|XLN
+2 Negate
+3 Mortify
+4 Chemister's Insight
+3 Cast Down
+2 Search for Azcanta|XLN
+1 Island
+4 Godless Shrine
+4 Isolated Chapel
+4 Glacial Fortress|XLN
+4 Hallowed Fountain
+4 Watery Grave
+4 Drowned Catacomb|XLN
+1 Swamp
+
+[sideboard]
+1 Vraska's Contempt|XLN
+4 Thief of Sanity
+3 Hostage Taker|XLN
+2 Duress
+1 Lyra Dawnbringer
+1 Cleansing Nova
+1 Unmoored Ego
+2 Moment of Craving

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Bant Control by Koh
+Title=Bridge Troll
+Difficulty=very hard
+Description=Bant Control by Koh
+Icon=Bridge Troll.jpg
+Deck Type=constructed
+
+[main]
+1 Blast Zone
+2 Island
+2 Plains
+2 Temple of Enlightenment
+2 Temple of Mystery
+2 Temple of Plenty
+2 Forest
+4 Temple Garden
+4 Breeding Pool
+4 Hallowed Fountain
+4 Fabled Passage
+4 Teferi, Time Raveler
+2 Tamiyo, Collector of Tales
+2 Nissa, Who Shakes the World
+4 Elspeth Conquers Death
+2 Shatter the Sky
+4 Growth Spiral
+2 Aether Gust
+1 Mystical Dispute
+4 Uro, Titan of Nature's Wrath
+2 Hydroid Krasis
+2 Dream Trawler
+1 Tolsimir, Friend to Wolves
+1 Agent of Treachery
+
+[sideboard]
+1 Narset, Parter of Veils
+2 Dovin's Veto
+4 Devout Decree
+1 Shatter the Sky
+2 Aether Gust
+2 Mystical Dispute
+2 Tolsimir, Friend to Wolves
+1 Agent of Treachery

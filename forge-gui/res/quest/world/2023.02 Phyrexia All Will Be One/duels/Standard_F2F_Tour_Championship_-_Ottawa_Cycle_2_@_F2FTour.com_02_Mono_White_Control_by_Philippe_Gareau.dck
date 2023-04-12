@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono White Control by Philippe Gareau
+Title=Sanctuary
+Difficulty=very hard
+Description=Mono White Control by Philippe Gareau
+Icon=Sanctuary.jpg
+Deck Type=constructed
+
+[main]
+2 Farewell
+2 Elspeth Resplendent
+2 The Eternal Wanderer
+4 The Wandering Emperor
+4 Wedding Announcement
+4 Ossification
+4 Lay Down Arms
+4 Reckoner Bankbuster
+4 The Restoration of Eiganjo
+2 Loran of the Third Path
+2 Mondrak, Glory Dominus
+4 Ambitious Farmhand
+1 Eiganjo, Seat of the Empire
+2 Mirrex
+4 Roadside Reliquary
+15 Plains
+
+[sideboard]
+2 Sanctuary Warden
+3 Depopulate
+2 Intrepid Adversary
+3 Steel Seraph
+2 Fateful Absence
+2 Destroy Evil
+1 Loran of the Third Path

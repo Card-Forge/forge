@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Sebastian Pozzo
+Title=Joker
+Difficulty=very hard
+Description=Rakdos Aggro by Sebastian Pozzo
+Icon=Joker.jpg
+Deck Type=constructed
+
+[main]
+3 Chandra, Torch of Defiance|KLD
+4 Inventor's Apprentice|KLD
+4 Bomat Courier|KLD
+4 Forerunner of Slaughter|BFZ
+4 Scrapheap Scrounger|KLD
+3 Pia Nalaar|KLD
+3 Incendiary Flow|EMN
+3 Shock
+1 Lightning Axe|SOI
+4 Unlicensed Disintegration|KLD
+2 Implement of Combustion|AER
+2 Heart of Kiran|AER
+4 Foreboding Ruins|SOI
+3 Smoldering Marsh|BFZ
+10 Mountain|RTR
+6 Swamp|RTR
+
+[sideboard]
+1 Smoldering Marsh|BFZ
+3 Kalitas, Traitor of Ghet|OGW
+2 Ob Nixilis Reignited|BFZ
+4 Fatal Push|AER
+2 Release the Gremlins|AER
+3 Transgress the Mind|BFZ

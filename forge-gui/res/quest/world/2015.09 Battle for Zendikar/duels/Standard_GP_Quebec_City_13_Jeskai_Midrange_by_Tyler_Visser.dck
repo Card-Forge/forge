@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Jeskai Midrange by Tyler Visser
+Title=Swan
+Difficulty=very hard
+Description=Jeskai Midrange by Tyler Visser
+Icon=Swan.jpg
+Deck Type=constructed
+
+[main]
+1 Wild Slash|FRF
+2 Murderous Cut|KTK
+2 Jeskai Charm|KTK
+2 Ojutai's Command|DTK
+2 Dispel|BFZ
+3 Fiery Impulse|ORI
+4 Treasure Cruise|KTK
+4 Magmatic Insight|ORI
+1 Dragonmaster Outcast|BFZ
+1 Dragonlord Silumgar|DTK
+4 Seeker of the Way|KTK
+4 Jace, Vryn's Prodigy|ORI
+4 Monastery Mentor|FRF
+1 Sunken Hollow|BFZ
+2 Island|BFZ
+2 Mountain|BFZ
+2 Prairie Stream|BFZ
+2 Smoldering Marsh|BFZ
+2 Plains|BFZ
+3 Evolving Wilds|BFZ
+4 Polluted Delta|KTK
+4 Bloodstained Mire|KTK
+4 Flooded Strand|KTK
+
+[sideboard]
+3 Disdainful Stroke|KTK
+1 Felidar Cub|BFZ
+1 Rending Volley|DTK
+1 Exert Influence|BFZ
+2 Surge of Righteousness|DTK
+3 Radiant Flames|BFZ
+2 Mastery of the Unseen|FRF
+1 Dispel|BFZ
+1 Dragonlord Silumgar|DTK

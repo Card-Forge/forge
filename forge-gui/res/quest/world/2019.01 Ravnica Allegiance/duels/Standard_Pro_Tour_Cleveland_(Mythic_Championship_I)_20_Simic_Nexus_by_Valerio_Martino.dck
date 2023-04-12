@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Simic Nexus by Valerio Martino
+Title=The Marines
+Difficulty=very hard
+Description=Simic Nexus by Valerio Martino
+Icon=The Marines.jpg
+Deck Type=constructed
+
+[main]
+2 Hydroid Krasis
+4 Nexus of Fate
+1 Precognitive Perception
+4 Chemister's Insight
+3 Sinister Sabotage
+4 Root Snare
+4 Growth Spiral
+3 Blink of an Eye
+4 Opt
+4 Wilderness Reclamation
+3 Search for Azcanta|XLN
+6 Forest
+4 Island
+4 Hinterland Harbor
+4 Breeding Pool
+4 Memorial to Genius
+2 Simic Guildgate
+
+[sideboard]
+2 Hydroid Krasis
+2 Incubation Druid
+2 Druid of the Cowl
+2 Negate
+2 Crushing Canopy
+2 Biogenic Ooze
+3 Atzocan Archer|XLN

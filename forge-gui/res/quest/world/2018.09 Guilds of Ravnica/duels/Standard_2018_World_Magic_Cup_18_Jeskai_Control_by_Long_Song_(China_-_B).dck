@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Long Song (China - B)
+Title=Darth Vader
+Difficulty=very hard
+Description=Jeskai Control by Long Song (China - B)
+Icon=Darth Vader.jpg
+Deck Type=constructed
+
+[main]
+3 Teferi, Hero of Dominaria
+3 Crackling Drake
+2 Niv-Mizzet, Parun
+4 Deafening Clarion
+4 Chemister's Insight
+2 Expansion // Explosion
+4 Sinister Sabotage
+1 Justice Strike
+4 Opt
+1 Settle the Wreckage|XLN
+3 Syncopate
+1 Negate
+3 Seal Away
+4 Clifftop Retreat
+4 Glacial Fortress|XLN
+5 Island
+4 Sacred Foundry
+4 Steam Vents
+4 Sulfur Falls
+
+[sideboard]
+2 Niv-Mizzet, Parun
+2 Settle the Wreckage|XLN
+1 Negate
+2 Spell Pierce|XLN
+2 Cleansing Nova
+1 Lyra Dawnbringer
+2 Ixalan's Binding|XLN
+2 Invoke the Divine
+1 Mountain

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Orzhov Aggro by Tlacaelel Campos
+Title=Leprechaun
+Difficulty=very hard
+Description=Orzhov Aggro by Tlacaelel Campos
+Icon=Leprechaun.jpg
+Deck Type=constructed
+
+[main]
+1 Crippling Fear
+2 Paladin Class
+2 The Meathook Massacre
+2 Path of Peril
+2 Reckoner Bankbuster
+3 Lolth, Spider Queen
+4 Vanishing Verse
+4 Wedding Announcement
+1 Legion Angel
+1 Edgar, Charmed Groom
+2 Elite Spellbinder
+2 Henrika Domnathi
+2 Reidane, God of the Worthy
+3 Graveyard Trespasser
+4 Luminarch Aspirant
+1 Eiganjo, Seat of the Empire
+1 Field of Ruin
+2 Cave of the Frost Dragon
+3 Hive of the Eye Tyrant
+4 Shattered Sanctum
+4 Brightclimb Pathway
+4 Plains
+6 Swamp
+
+[sideboard]
+4 Duress
+4 Brutal Cathar
+2 Go Blank
+2 Fracture
+1 Farewell
+2 Legion Angel

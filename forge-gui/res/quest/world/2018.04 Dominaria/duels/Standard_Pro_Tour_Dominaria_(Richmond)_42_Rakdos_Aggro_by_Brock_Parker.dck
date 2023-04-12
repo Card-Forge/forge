@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Brock Parker
+Title=Classic Control
+Difficulty=very hard
+Description=Rakdos Aggro by Brock Parker
+Icon=Classic Control.jpg
+Deck Type=constructed
+
+[main]
+3 Chandra, Torch of Defiance|KLD
+4 Bomat Courier|KLD
+2 Soul-Scar Mage|AKH
+4 Scrapheap Scrounger|KLD
+2 Kari Zev, Skyship Raider|AER
+4 Goblin Chainwhirler
+2 Pia Nalaar|KLD
+3 Hazoret the Fervent|AKH
+2 Glorybringer|AKH
+2 Lightning Strike|XLN
+2 Abrade|HOU
+2 Unlicensed Disintegration|KLD
+3 Heart of Kiran|AER
+14 Mountain
+1 Swamp
+4 Canyon Slough|AKH
+4 Dragonskull Summit|XLN
+2 Aether Hub|KLD
+
+[sideboard]
+1 Glorybringer|AKH
+1 Abrade|HOU
+1 Unlicensed Disintegration|KLD
+3 Magma Spray|AKH
+2 Chandra's Defeat|HOU
+2 Rekindling Phoenix
+4 Duress|XLN
+1 Doomfall|HOU

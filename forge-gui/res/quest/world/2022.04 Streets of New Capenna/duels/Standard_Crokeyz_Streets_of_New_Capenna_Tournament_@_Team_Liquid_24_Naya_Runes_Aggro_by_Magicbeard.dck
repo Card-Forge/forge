@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Naya Runes Aggro by Magicbeard
+Title=Doran
+Difficulty=very hard
+Description=Naya Runes Aggro by Magicbeard
+Icon=Doran.jpg
+Deck Type=constructed
+
+[main]
+1 Fight Rigging
+2 Commune with Spirits
+2 Rune of Sustenance
+2 Circle of Confinement
+3 Rune of Speed
+4 Rune of Might
+4 Showdown of the Skalds
+4 Fable of the Mirror-Breaker
+2 Kami of Transience
+4 Generous Visitor
+4 Jukai Naturalist
+4 Runeforge Champion
+1 Boseiju, Who Endures
+1 Overgrown Farmland
+1 Forest
+1 Eiganjo, Seat of the Empire
+2 Sundown Pass
+2 Lair of the Hydra
+4 Cragcrown Pathway
+4 Jetmir's Garden
+4 Branchloft Pathway
+4 Needleverge Pathway
+
+[sideboard]
+2 Tamiyo's Safekeeping
+2 Skyclave Apparition
+2 Strangle
+2 Ranger Class
+1 Portable Hole
+1 Guardian of Faith
+1 Elspeth Resplendent
+1 Elite Spellbinder
+1 Valorous Stance
+2 Circle of Confinement

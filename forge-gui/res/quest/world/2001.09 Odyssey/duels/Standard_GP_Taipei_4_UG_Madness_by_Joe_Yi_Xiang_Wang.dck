@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=UG Madness by Joe Yi Xiang Wang
+Title=Argive
+Difficulty=very hard
+Description=UG Madness by Joe Yi Xiang Wang
+Icon=Argive.jpg
+Deck Type=constructed
+
+[main]
+2 Cephalid Coliseum|OD
+9 Forest|OD
+8 Island|OD
+4 Yavimaya Coast|AP
+4 Arrogant Wurm|TO
+4 Basking Rootwalla|TO
+4 Merfolk Looter|7E
+4 Wild Mongrel|OD
+2 Wonder|JU
+4 Aether Burst|OD
+4 Careful Study|OD
+4 Circular Logic|TO
+2 Counterspell|7E
+3 Deep Analysis|TO
+3 Roar of the Wurm|OD
+
+[sideboard]
+1 Roar of the Wurm|OD
+3 Compost|7E
+3 Disrupt|IN
+4 Gainsay|PS
+2 Krosan Reclamation|JU
+2 Rushing River|PS

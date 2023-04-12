@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=UW Control by Dohi Koutarou
+Title=Dracur
+Difficulty=very hard
+Description=UW Control by Dohi Koutarou
+Icon=Dracur.jpg
+Deck Type=constructed
+
+[main]
+1 Solitude
+2 Snapcaster Mage|ISD
+2 Chalice of the Void|MR
+1 Memory Deluge
+1 Force of Negation
+2 Fire // Ice|AP
+2 Cryptic Command|LRW
+4 Counterspell|7E
+4 Archmage's Charm
+3 Supreme Verdict|RTR
+4 Prismatic Ending
+2 Spreading Seas|ZEN
+2 Shark Typhoon
+2 Teferi, Hero of Dominaria
+4 Teferi, Time Raveler
+1 Raugrin Triome
+1 Castle Ardenvale
+1 Celestial Colonnade|WWK
+1 Plains
+1 Hall of Storm Giants
+1 Steam Vents
+1 Castle Vantress
+2 Hallowed Fountain
+2 Polluted Delta|KTK
+4 Flooded Strand|KTK
+4 Mystic Gate|SHM
+5 Island
+
+[sideboard]
+2 Spreading Seas|ZEN
+1 Celestial Purge|M12
+1 Aether Gust
+1 Mystical Dispute
+2 Rest in Peace|RTR
+2 Engineered Explosives|FD
+2 Sunset Revelry
+2 Wear // Tear|DGM
+2 Dovin's Veto

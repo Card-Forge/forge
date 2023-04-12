@@ -1,0 +1,52 @@
+[quest]
+id=20100902
+OpponentName=Yuuya
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Caw-Blade
+Title=Shapeshifter
+Difficulty=very hard
+Description=Caw-Blade by Yuuya Watanabe
+Icon=Shapeshifter.jpg
+Deck Type=constructed
+
+[main]
+2 Oblivion Ring|M12
+2 Gideon Jura|M12
+2 Dismember|NPH
+2 Into the Roil|ZEN
+3 Spell Pierce|ZEN
+3 Sword of Feast and Famine|MBS
+4 Mana Leak|M12
+4 Preordain|M11
+1 Sun Titan|M12
+2 Emeria Angel|ZEN
+2 Phantasmal Image|M12
+3 Blade Splicer|NPH
+4 Squadron Hawk|M11
+1 Arid Mesa|ZEN
+1 Scalding Tarn|ZEN
+2 Inkmoth Nexus|MBS
+3 Plains|M12
+3 Island|M12
+4 Glacial Fortress|M12
+4 Tectonic Edge|WWK
+4 Celestial Colonnade|WWK
+4 Seachrome Coast|SOM
+
+[sideboard]
+4 Timely Reinforcements|M12
+2 Mental Misstep|NPH
+1 Jace Beleren|M11
+4 Flashfreeze|M12
+2 Condemn|M11
+1 Sun Titan|M12
+1 Phantasmal Image|M12

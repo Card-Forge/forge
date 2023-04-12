@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Grixis Control by Yamagata Hiroki
+Title=Deathly Dominion
+Difficulty=very hard
+Description=Grixis Control by Yamagata Hiroki
+Icon=Deathly Dominion.jpg
+Deck Type=constructed
+
+[main]
+1 Jwari Disruption
+2 Negate|MOR
+2 Disdainful Stroke|KTK
+2 Professor Onyx
+2 Infernal Grasp
+2 Burning Hands
+2 Shatterskull Smashing
+3 The Meathook Massacre
+3 Memory Deluge
+4 Duress|US
+4 Alrund's Epiphany
+4 Expressive Iteration
+1 Valki, God of Lies
+4 Smoldering Egg
+1 Swamp|A
+1 Island|A
+2 Hall of Storm Giants
+4 Clearwater Pathway
+4 Haunted Ridge
+4 Blightstep Pathway
+4 Riverglide Pathway
+4 Shipwreck Marsh
+
+[sideboard]
+4 Bloodchief's Thirst
+3 Skyclave Shade
+2 Malevolent Hermit
+2 Test of Talents
+1 Go Blank
+1 Burn Down the House
+2 Burning Hands

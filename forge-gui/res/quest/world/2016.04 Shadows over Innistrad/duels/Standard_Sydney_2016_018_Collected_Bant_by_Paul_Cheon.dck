@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Collected Bant by Paul Cheon
+Title=Equilibrium
+Difficulty=very hard
+Description=Collected Bant by Paul Cheon
+Icon=Equilibrium.jpg
+Deck Type=constructed
+
+[main]
+4 Selfless Spirit|EMN
+4 Duskwatch Recruiter|SOI
+4 Sylvan Advocate|OGW
+4 Spell Queller|EMN
+4 Reflector Mage|OGW
+3 Tireless Tracker|SOI
+2 Eldrazi Displacer|OGW
+1 Archangel Avacyn|SOI
+4 Collected Company|DTK
+4 Dromoka's Command|DTK
+2 Lumbering Falls|BFZ
+3 Prairie Stream|BFZ
+3 Fortified Village|SOI
+4 Yavimaya Coast|ORI
+4 Evolving Wilds
+5 Plains|RTR
+3 Forest|RTR
+1 Island|RTR
+1 Wastes|OGW
+
+[sideboard]
+1 Tireless Tracker|SOI
+1 Negate
+2 Clash of Wills|ORI
+2 Ojutai's Command|DTK
+1 Jace, Vryn's Prodigy|ORI
+2 Nissa, Vastwood Seer|ORI
+3 Gnarlwood Dryad|EMN
+1 Subjugator Angel|EMN
+2 Tamiyo, Field Researcher|EMN

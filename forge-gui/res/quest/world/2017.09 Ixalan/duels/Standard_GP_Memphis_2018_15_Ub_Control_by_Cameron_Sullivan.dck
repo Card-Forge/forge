@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Ub Control by Cameron Sullivan
+Title=Isperia
+Difficulty=very hard
+Description=Ub Control by Cameron Sullivan
+Icon=Isperia.jpg
+Deck Type=constructed
+
+[main]
+6 Swamp
+2 Submerged Boneyard|AKH
+7 Island
+3 Field of Ruin|XLN
+4 Fetid Pools|AKH
+4 Drowned Catacomb|XLN
+2 Search for Azcanta|XLN
+1 Treasure Map|XLN
+4 Vraska's Contempt|XLN
+3 Moment of Craving
+1 Hieroglyphic Illumination|AKH
+4 Glimmer of Genius|KLD
+4 Fatal Push|AER
+3 Essence Scatter|AKH
+4 Disallow|AER
+1 Commit // Memory|AKH
+1 Censor|AKH
+4 Torrential Gearhulk|KLD
+2 The Scarab God|HOU
+
+[sideboard]
+1 Nezahal, Primal Tide
+2 Negate
+2 Golden Demise
+3 Duress|XLN
+1 Deadeye Tracker|XLN
+3 Contraband Kingpin|KLD
+1 Arguel's Blood Fast|XLN
+1 Moment of Craving
+1 Commit // Memory|AKH

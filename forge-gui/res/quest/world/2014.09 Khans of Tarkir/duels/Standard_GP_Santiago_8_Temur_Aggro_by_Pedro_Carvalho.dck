@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Temur Aggro by Pedro Carvalho
+Title=Saruman
+Difficulty=very hard
+Description=Temur Aggro by Pedro Carvalho
+Icon=Saruman.jpg
+Deck Type=constructed
+
+[main]
+1 Shivan Reef|M15
+4 Yavimaya Coast|M15
+2 Mountain|KTK
+3 Forest|KTK
+1 Temple of Mystery|THS
+1 Sarkhan, the Dragonspeaker|KTK
+3 Elvish Mystic|M15
+4 Heir of the Wilds|KTK
+4 Rattleclaw Mystic|KTK
+4 Boon Satyr|THS
+4 Savage Knuckleblade|KTK
+4 Ashcloud Phoenix|KTK
+3 Polukranos, World Eater|THS
+4 Crater's Claws|KTK
+3 Lightning Strike|M15
+2 Temur Charm|KTK
+4 Frontier Bivouac|KTK
+3 Mana Confluence|JOU
+4 Wooded Foothills|KTK
+2 Temple of Epiphany|JOU
+
+[sideboard]
+1 Back to Nature|M15
+1 Barrage of Boulders|KTK
+1 Arc Lightning|KTK
+2 Magma Spray|JOU
+3 Hunt the Hunter|THS
+3 Stubborn Denial|KTK
+2 Disdainful Stroke|KTK
+1 Lightning Strike|M15
+1 Temur Charm|KTK

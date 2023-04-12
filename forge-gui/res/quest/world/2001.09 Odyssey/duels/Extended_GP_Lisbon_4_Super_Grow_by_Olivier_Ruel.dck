@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Super Grow by Olivier Ruel
+Title=Simic-precon
+Difficulty=very hard
+Description=Super Grow by Olivier Ruel
+Icon=Simic-precon.jpg
+Deck Type=constructed
+
+[main]
+4 Flood Plain|MI
+1 Savannah|A
+1 Island|A
+4 Tropical Island|A
+4 Tundra|A
+2 Winter Orb|A
+2 Foil|PY
+4 Force of Will|AL
+4 Gush|MM
+4 Brainstorm|IA
+4 Swords to Plowshares|A
+3 Sleight of Hand|P2
+4 Land Grant|MM
+3 Mystic Enforcer|OD
+4 Meddling Mage|PS
+4 Merfolk Looter|EX
+4 Werebear|OD
+4 Quirion Dryad|PS
+
+[sideboard]
+2 Submerge|NE
+2 Wax // Wane|IN
+4 Legacy's Allure|TE
+3 Interdict|TE
+2 Mind Harness|MI
+2 Winter Orb|A

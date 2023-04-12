@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=UB Control by Enrico Santinelli
+Title=Severus Snape
+Difficulty=very hard
+Description=UB Control by Enrico Santinelli
+Icon=Severus Snape.jpg
+Deck Type=constructed
+
+[main]
+2 Consecrated Sphinx|MBS
+2 Grave Titan|M12
+4 Solemn Simulacrum|M12
+4 Vampire Nighthawk|ZEN
+1 Consume the Meek|ROE
+4 Doom Blade|M12
+1 Into the Roil|ZEN
+4 Mana Leak|M12
+1 Stoic Rebuttal|SOM
+1 Black Sun's Zenith|MBS
+4 Inquisition of Kozilek|ROE
+4 Preordain|M11
+4 Creeping Tar Pit|WWK
+4 Darkslick Shores|SOM
+4 Drowned Catacomb|M12
+5 Island|M12
+5 Swamp|M12
+4 Tectonic Edge|WWK
+2 Jace Beleren|M11
+
+[sideboard]
+1 Black Sun's Zenith|MBS
+2 Spellskite|NPH
+3 Disfigure|ZEN
+3 Flashfreeze|M12
+3 Memoricide|SOM
+2 Ratchet Bomb|SOM
+1 Liliana Vess|M11

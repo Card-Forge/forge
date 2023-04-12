@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Jeskai Midrange by Ryoichi Tamada
+Title=Ri
+Difficulty=very hard
+Description=Jeskai Midrange by Ryoichi Tamada
+Icon=Ri.jpg
+Deck Type=constructed
+
+[main]
+1 Silkwrap|DTK
+3 Treasure Cruise|KTK
+4 Fiery Impulse|ORI
+4 Jeskai Charm|KTK
+4 Valorous Stance|FRF
+4 Gideon, Ally of Zendikar|BFZ
+4 Hangarback Walker|ORI
+4 Jace, Vryn's Prodigy|ORI
+4 Mantis Rider|KTK
+4 Seeker of the Way|KTK
+1 Island|BFZ
+1 Shivan Reef|ORI
+1 Cinder Glade|BFZ
+1 Canopy Vista|BFZ
+2 Mountain|BFZ
+2 Mystic Monastery|KTK
+2 Plains|BFZ
+2 Prairie Stream|BFZ
+4 Wooded Foothills|KTK
+4 Windswept Heath|KTK
+4 Flooded Strand|KTK
+
+[sideboard]
+2 Surge of Righteousness|DTK
+1 Sarkhan, the Dragonspeaker|KTK
+2 Arashin Cleric|FRF
+1 Wingmate Roc|KTK
+2 Disdainful Stroke|KTK
+1 Dispel|BFZ
+2 Mastery of the Unseen|FRF
+2 Rending Volley|DTK
+1 Roast|DTK
+1 Silkwrap|DTK

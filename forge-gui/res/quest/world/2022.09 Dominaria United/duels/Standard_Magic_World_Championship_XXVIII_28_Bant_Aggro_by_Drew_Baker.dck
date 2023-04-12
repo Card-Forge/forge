@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Bant Aggro by Drew Baker
+Title=Tusk Guardian
+Difficulty=very hard
+Description=Bant Aggro by Drew Baker
+Icon=Tusk Guardian.jpg
+Deck Type=constructed
+
+[main]
+1 Elspeth Resplendent
+2 Make Disappear
+3 Brokers Ascendancy
+4 The Wandering Emperor
+4 Wedding Announcement
+4 Join the Dance
+4 Destroy Evil
+1 Ao, the Dawn Sky
+2 King Darien XLVIII
+3 Adeline, Resplendent Cathar
+4 Resolute Reinforcements
+4 Gala Greeters
+1 Plains
+1 Eiganjo, Seat of the Empire
+1 Boseiju, Who Endures
+1 Island
+4 Adarkar Wastes
+4 Deserted Beach
+4 Yavimaya Coast
+4 Spara's Headquarters
+4 Overgrown Farmland
+
+[sideboard]
+3 Park Heights Pegasus
+3 Anointed Peacekeeper
+2 Dennick, Pious Apprentice
+2 Protect the Negotiators
+1 Brutal Cathar
+1 Spell Pierce
+1 Welcoming Vampire
+2 Make Disappear

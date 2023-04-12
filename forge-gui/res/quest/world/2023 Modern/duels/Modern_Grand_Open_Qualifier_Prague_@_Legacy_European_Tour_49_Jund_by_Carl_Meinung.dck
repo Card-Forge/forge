@@ -1,0 +1,53 @@
+[duel]
+[metadata]
+Name=Jund by Carl Meinung
+Title=Momir
+Difficulty=very hard
+Description=Jund by Carl Meinung
+Icon=Momir.jpg
+Deck Type=constructed
+
+[main]
+2 Fable of the Mirror-Breaker
+1 Haywire Mite
+4 Ragavan, Nimble Pilferer
+4 Tarmogoyf|FUT
+1 Tireless Tracker|SOI
+1 Mishra's Bauble|CS
+2 Nihil Spellbomb|SOM
+1 Shadowspear
+3 Fatal Push|AER
+1 Kolaghan's Command|DTK
+3 Lightning Bolt|M11
+1 Terminate|ARB
+1 Unholy Heat
+4 Inquisition of Kozilek|ROE
+1 Maelstrom Pulse|ARB
+2 Thoughtseize|THS
+4 Urza's Saga
+4 Wrenn and Six
+2 Blood Crypt
+3 Bloodstained Mire|KTK
+2 Boseiju, Who Endures
+1 Forest
+1 Mountain
+1 Overgrown Tomb
+1 Sokenzan, Crucible of Defiance
+1 Stomping Ground
+1 Swamp
+3 Verdant Catacombs|ZEN
+3 Wooded Foothills|KTK
+1 Ziatora's Proving Ground
+
+[sideboard]
+1 Maelstrom Pulse|ARB
+2 Alpine Moon
+1 Collective Brutality|EMN
+1 The Stone Brain
+2 Engineered Explosives|FD
+1 Jegantha, the Wellspring
+1 Mishra's Research Desk
+2 Orvar, the All-Form
+1 Pithing Needle
+2 Tourach, Dread Cantor
+1 Unlicensed Hearse

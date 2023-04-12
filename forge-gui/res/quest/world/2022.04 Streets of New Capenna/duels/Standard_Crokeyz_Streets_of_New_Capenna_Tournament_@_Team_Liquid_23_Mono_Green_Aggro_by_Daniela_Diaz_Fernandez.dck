@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Daniela Diaz Fernandez
+Title=Titania
+Difficulty=very hard
+Description=Mono Green Aggro by Daniela Diaz Fernandez
+Icon=Titania.jpg
+Deck Type=constructed
+
+[main]
+2 Ulvenwald Oddity
+2 Workshop Warchief
+4 Old-Growth Troll
+4 Gala Greeters
+4 Jugan Defends the Temple
+4 Werewolf Pack Leader
+4 Esika's Chariot
+1 Tamiyo's Safekeeping
+4 Blizzard Brawl
+1 Vivien on the Hunt
+1 Boseiju, Who Endures
+1 Lair of the Hydra
+4 Tangled Florahedron
+4 Kazandu Mammoth
+20 Snow-Covered Forest
+
+[sideboard]
+2 Ulvenwald Oddity
+2 Tamiyo's Safekeeping
+1 Vivien on the Hunt
+2 Outland Liberator
+2 Tangletrap
+3 Bouncer's Beatdown
+3 Invoke the Ancients

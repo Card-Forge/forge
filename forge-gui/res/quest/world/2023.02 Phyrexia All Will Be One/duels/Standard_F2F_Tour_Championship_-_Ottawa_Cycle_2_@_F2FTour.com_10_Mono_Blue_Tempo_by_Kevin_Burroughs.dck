@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Mono Blue Tempo by Kevin Burroughs
+Title=Lupin the Third
+Difficulty=very hard
+Description=Mono Blue Tempo by Kevin Burroughs
+Icon=Lupin the Third.jpg
+Deck Type=constructed
+
+[main]
+4 Haughty Djinn
+4 Tolarian Terror
+4 Consider
+4 Impulse
+4 Essence Scatter
+4 Thirst for Discovery
+3 Make Disappear
+3 Spell Pierce
+2 Flow of Knowledge
+4 Fading Hope
+3 Negate
+20 Island
+1 Otawara, Soaring City
+
+[sideboard]
+1 Negate
+3 Pithing Needle
+2 Disdainful Stroke
+3 March of Swirling Mist
+4 Blast Zone
+2 Consuming Tide

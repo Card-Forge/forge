@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Gruul Aggro  by Martin Jůza
+Title=Ala
+Difficulty=very hard
+Description=Gruul Aggro  by Martin Jůza
+Icon=Ala.jpg
+Deck Type=constructed
+
+[main]
+3 Scavenging Ooze
+4 Lovestruck Beast
+4 Bonecrusher Giant
+4 Brushfire Elemental
+4 Kazandu Mammoth
+4 Edgewall Innkeeper
+3 Embercleave
+3 The Great Henge
+3 Scorching Dragonfire
+4 Shatterskull Smashing
+1 The Akroan War
+1 Vivien, Monsters' Advocate
+2 Evolving Wilds
+3 Mountain
+4 Cragcrown Pathway
+4 Fabled Passage
+9 Forest
+
+[sideboard]
+1 Scorching Dragonfire
+2 The Akroan War
+2 Vivien, Monsters' Advocate
+2 Questing Beast
+2 Klothys, God of Destiny
+2 Wilt
+4 Ox of Agonas

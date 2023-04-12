@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Jeskai Mutate by Toru Kono
+Title=Conan the Barbarian
+Difficulty=very hard
+Description=Jeskai Mutate by Toru Kono
+Icon=Conan the Barbarian.jpg
+Deck Type=constructed
+
+[main]
+4 Vadrok, Apex of Thunder
+4 Goldspan Dragon
+4 Lore Drakkis
+1 Negate
+1 Burning Hands
+1 Sejiri Shelter
+2 Mystical Dispute
+2 Fire Prophecy
+3 Prismari Command
+4 Spikefield Hazard
+4 Unsubstantiate
+4 Seize the Spoils
+4 Expressive Iteration
+2 Mountain
+4 Island
+4 Hengegate Pathway
+4 Needleverge Pathway
+4 Raugrin Triome
+4 Riverglide Pathway
+
+[sideboard]
+1 Burning Hands
+1 Cinderclasm
+2 Redcap Melee
+2 Disdainful Stroke
+2 Archon of Absolution
+2 Phoenix of Ash
+2 Scorching Dragonfire
+3 Mazemind Tome

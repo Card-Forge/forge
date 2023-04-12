@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ur Gift by Grayson Roberts
+Title=Morpheus
+Difficulty=very hard
+Description=Ur Gift by Grayson Roberts
+Icon=Morpheus.jpg
+Deck Type=constructed
+
+[main]
+2 Field of Ruin|XLN
+5 Mountain
+3 Island
+4 Aether Hub|KLD
+4 Ipnu Rivulet|HOU
+4 Spirebluff Canal|KLD
+2 God-Pharaoh's Gift|HOU
+4 Gate to the Afterlife|AKH
+2 Vizier of Many Faces|AKH
+2 Trophy Mage|AER
+4 Combat Celebrant|AKH
+4 Champion of Wits|HOU
+4 Walking Ballista|AER
+4 Warkite Marauder
+4 Fanatical Firebrand
+4 Minister of Inquiries|KLD
+4 Bomat Courier|KLD
+
+[sideboard]
+1 Jace's Defeat|HOU
+2 Negate
+2 Sweltering Suns|AKH
+2 Spell Pierce|XLN
+2 Padeem, Consul of Innovation|KLD
+3 Silent Gravestone
+3 Abrade|HOU

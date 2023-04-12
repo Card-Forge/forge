@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Agentbatz
+Title=Kangee
+Difficulty=very hard
+Description=Jeskai Control by Agentbatz
+Icon=Kangee.jpg
+Deck Type=constructed
+
+[main]
+1 Lorehold Command
+1 Prismari Command
+1 Disdainful Stroke
+2 Dragon's Fire
+2 Fading Hope
+2 Valorous Stance
+2 Memory Deluge
+2 Negate
+2 Abrade
+3 Jwari Disruption
+4 Magma Opus
+4 Shatterskull Smashing
+4 Expressive Iteration
+1 Smoldering Egg
+3 Hinata, Dawn-Crowned
+4 Goldspan Dragon
+1 Island
+1 Hall of Storm Giants
+2 Deserted Beach
+3 Stormcarved Coast
+3 Sundown Pass
+4 Hengegate Pathway
+4 Needleverge Pathway
+4 Riverglide Pathway
+
+[sideboard]
+2 Malevolent Hermit
+2 Burning Hands
+2 Cinderclasm
+2 Hullbreaker Horror
+1 Doomskar
+1 Sunset Revelry
+1 Test of Talents
+1 Behold the Multiverse
+1 Farewell
+1 Disdainful Stroke
+1 Abrade

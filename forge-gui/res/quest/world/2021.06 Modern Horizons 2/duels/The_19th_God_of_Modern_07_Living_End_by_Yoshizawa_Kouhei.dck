@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Living End by Yoshizawa Kouhei
+Title=alasha
+Difficulty=very hard
+Description=Living End by Yoshizawa Kouhei
+Icon=alasha.jpg
+Deck Type=constructed
+
+[main]
+2 Brazen Borrower
+4 Waker of Waves
+4 Grief
+4 Striped Riverwinder|HOU
+4 Street Wraith|FUT
+4 Curator of Mysteries|AKH
+4 Shardless Agent
+4 Architects of Will|ARB
+4 Violent Outburst|ARB
+4 Force of Negation
+3 Living End|TSP
+1 Sunken Ruins|SHM
+1 Island
+1 Forest
+2 Wooded Foothills|KTK
+2 Steam Vents
+2 Breeding Pool
+3 Botanical Sanctum|KLD
+3 Spirebluff Canal|KLD
+4 Misty Rainforest|ZEN
+
+[sideboard]
+1 Damping Matrix|MR
+2 Force of Vigor
+3 Endurance
+3 Foundation Breaker
+3 Mystical Dispute
+3 Subtlety

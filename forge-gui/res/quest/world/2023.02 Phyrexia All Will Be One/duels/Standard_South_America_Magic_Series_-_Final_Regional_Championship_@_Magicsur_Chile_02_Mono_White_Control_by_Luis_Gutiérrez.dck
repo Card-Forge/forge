@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mono White Control by Luis Gutiérrez
+Title=Pitiless Vizier
+Difficulty=very hard
+Description=Mono White Control by Luis Gutiérrez
+Icon=Pitiless Vizier.jpg
+Deck Type=constructed
+
+[main]
+1 The Mightstone and Weakstone
+2 Elspeth Resplendent
+3 The Eternal Wanderer
+3 Ossification
+3 Depopulate
+3 The Restoration of Eiganjo
+4 The Wandering Emperor
+4 Wedding Announcement
+4 Lay Down Arms
+4 Reckoner Bankbuster
+2 Loran of the Third Path
+4 Ambitious Farmhand
+1 Eiganjo, Seat of the Empire
+2 Mirrex
+4 Roadside Reliquary
+16 Plains
+
+[sideboard]
+2 The Stone Brain
+2 Steel Seraph
+3 Skrelv's Hive
+1 Destroy Evil
+2 Farewell
+2 Knockout Blow
+1 Ossification
+1 Depopulate
+1 Loran of the Third Path

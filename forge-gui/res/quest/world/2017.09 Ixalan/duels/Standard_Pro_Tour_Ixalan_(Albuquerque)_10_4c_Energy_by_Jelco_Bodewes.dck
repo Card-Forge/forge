@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=4c Energy by Jelco Bodewes
+Title=Anansi
+Difficulty=very hard
+Description=4c Energy by Jelco Bodewes
+Icon=Anansi.jpg
+Deck Type=constructed
+
+[main]
+1 Magma Spray|AKH
+1 Confiscation Coup|KLD
+1 Chandra, Torch of Defiance|KLD
+2 Abrade|HOU
+4 Harnessed Lightning|KLD
+4 Attune with Aether|KLD
+1 Rhonas the Indomitable|AKH
+2 The Scarab God|HOU
+2 Glorybringer|AKH
+3 Whirler Virtuoso|KLD
+4 Bristling Hydra|KLD
+4 Rogue Refiner|AER
+4 Longtusk Cub|KLD
+4 Servant of the Conduit|KLD
+1 Island|XLN
+1 Swamp|XLN
+1 Blooming Marsh|KLD
+2 Mountain|XLN
+2 Sheltered Thicket|AKH
+2 Spirebluff Canal|KLD
+3 Forest|XLN
+3 Rootbound Crag|XLN
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+
+[sideboard]
+1 Essence Scatter|AKH
+1 Bounty of the Luxa|AKH
+1 Nicol Bolas, God-Pharaoh|HOU
+2 Negate|AER
+2 Spell Pierce|XLN
+1 Chandra's Defeat|HOU
+1 Supreme Will|HOU
+2 Deathgorge Scavenger|XLN
+1 Nissa, Steward of Elements|AKH
+1 Magma Spray|AKH
+1 Confiscation Coup|KLD
+1 Whirler Virtuoso|KLD

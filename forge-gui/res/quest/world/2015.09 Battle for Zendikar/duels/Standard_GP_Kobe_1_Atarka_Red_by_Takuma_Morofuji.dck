@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Atarka Red by Takuma Morofuji
+Title=Big Rock
+Difficulty=very hard
+Description=Atarka Red by Takuma Morofuji
+Icon=Big Rock.jpg
+Deck Type=constructed
+
+[main]
+2 Lightning Berserker|DTK
+4 Abbot of Keral Keep|ORI
+4 Monastery Swiftspear|KTK
+3 Zurgo Bellstriker|DTK
+3 Temur Battle Rage|FRF
+2 Fiery Impulse|ORI
+4 Titan's Strength|ORI
+3 Become Immense|KTK
+4 Atarka's Command|DTK
+3 Wild Slash|FRF
+3 Hordeling Outburst|KTK
+4 Dragon Fodder|ORI
+1 Forest|BFZ
+8 Mountain|BFZ
+2 Windswept Heath|KTK
+4 Bloodstained Mire|KTK
+4 Wooded Foothills|KTK
+2 Cinder Glade|BFZ
+
+[sideboard]
+1 Fiery Impulse|ORI
+1 Hordeling Outburst|KTK
+1 Outpost Siege|FRF
+4 Rending Volley|DTK
+2 Chandra, Fire of Kaladesh|ORI
+4 Roast|DTK
+2 Act of Treason|ORI

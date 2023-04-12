@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Maxim Salmin
+Title=Gunnery Sergeant Hartman
+Difficulty=very hard
+Description=Mono Green Aggro by Maxim Salmin
+Icon=Gunnery Sergeant Hartman.jpg
+Deck Type=constructed
+
+[main]
+2 Kazandu Mammoth
+3 Questing Beast
+4 Werewolf Pack Leader
+4 Swarm Shambler
+4 Stonecoil Serpent
+4 Lovestruck Beast
+4 Gemrazer
+1 The Great Henge
+2 Ram Through
+1 Turntimber Symbiosis
+4 Primal Might
+4 Ranger Class
+1 Garruk, Unleashed
+4 Lair of the Hydra
+18 Forest
+
+[sideboard]
+1 The Great Henge
+1 Ram Through
+2 Garruk, Unleashed
+1 Shadowspear
+2 Snakeskin Veil
+2 Wilt
+3 Weathered Runestone
+3 Scavenging Ooze

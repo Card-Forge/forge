@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Jeskai Mutate by Yoshihiko Ikawa
+Title=alathrax
+Difficulty=very hard
+Description=Jeskai Mutate by Yoshihiko Ikawa
+Icon=alathrax.jpg
+Deck Type=constructed
+
+[main]
+4 Goldspan Dragon
+4 Lore Drakkis
+4 Vadrok, Apex of Thunder
+1 Negate
+1 Mystical Dispute
+1 Into the Roil
+1 Valakut Awakening
+1 Sejiri Shelter
+1 Essence Scatter
+2 Cinderclasm
+2 Fire Prophecy
+3 Unsubstantiate
+3 Prismari Command
+4 Spikefield Hazard
+3 Seize the Spoils
+4 Expressive Iteration
+2 Mountain
+3 Island
+4 Needleverge Pathway
+4 Riverglide Pathway
+4 Raugrin Triome
+4 Hengegate Pathway
+
+[sideboard]
+1 Cinderclasm
+1 Burning Hands
+1 Test of Talents
+1 Redcap Melee
+2 Saw It Coming
+2 Phoenix of Ash
+3 Cubwarden
+4 Mazemind Tome

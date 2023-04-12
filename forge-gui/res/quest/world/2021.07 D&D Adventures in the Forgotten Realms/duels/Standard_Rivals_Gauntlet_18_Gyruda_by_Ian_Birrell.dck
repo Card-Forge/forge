@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Gyruda by Ian Birrell
+Title=Sindbad
+Difficulty=very hard
+Description=Gyruda by Ian Birrell
+Icon=Sindbad.jpg
+Deck Type=constructed
+
+[main]
+1 Flunk
+1 Crippling Fear
+2 Heartless Act
+4 Wolfwillow Haven
+4 Binding the Old Gods
+2 Thassa, Deep-Dwelling
+2 Polukranos, Unchained
+3 Gyruda, Doom of Depths
+4 Solemn Simulacrum
+4 Tangled Florahedron
+4 Massacre Wurm
+4 Prosperous Innkeeper
+1 Island
+2 Barkchannel Pathway
+3 Forest
+3 Clearwater Pathway
+4 Swamp
+4 Port of Karfell
+4 Darkbore Pathway
+4 Zagoth Triome
+
+[sideboard]
+3 Lochmere Serpent
+3 Elderfang Disciple
+2 Atris, Oracle of Half-Truths
+2 Disdainful Stroke
+2 Scavenging Ooze
+1 Flunk
+1 Crippling Fear
+1 Gyruda, Doom of Depths

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Sultai Energy by Daniel Diamant
+Title=Nekusar the Mindrazer
+Difficulty=very hard
+Description=Sultai Energy by Daniel Diamant
+Icon=Nekusar the Mindrazer.jpg
+Deck Type=constructed
+
+[main]
+4 Botanical Sanctum|KLD
+4 Blooming Marsh|KLD
+1 Island|XLN
+2 Swamp|XLN
+2 Forest|XLN
+3 Hashep Oasis|HOU
+4 Winding Constrictor|AER
+4 Glint-Sleeve Siphoner|AER
+4 Longtusk Cub|KLD
+2 Greenbelt Rampager|AER
+4 Bristling Hydra|KLD
+4 Rogue Refiner|AER
+4 Attune with Aether|KLD
+4 Blossoming Defense|KLD
+4 Fatal Push|AER
+2 Skysovereign, Consul Flagship|KLD
+4 Cartouche of Knowledge|AKH
+4 Aether Hub|KLD
+
+[sideboard]
+2 Greenbelt Rampager|AER
+1 Skysovereign, Consul Flagship|KLD
+2 Appetite for the Unnatural|KLD
+2 Rishkar, Peema Renegade|AER
+4 Negate|AER
+4 Cartouche of Ambition|AKH

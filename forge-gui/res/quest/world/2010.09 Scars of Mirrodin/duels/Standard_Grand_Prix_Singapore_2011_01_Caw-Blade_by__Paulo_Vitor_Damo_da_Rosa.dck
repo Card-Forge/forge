@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Caw-Blade by  Paulo Vitor Damo da Rosa
+Title=The Floating Isle
+Difficulty=very hard
+Description=Caw-Blade by  Paulo Vitor Damo da Rosa
+Icon=The Floating Isle.jpg
+Deck Type=constructed
+
+[main]
+1 Consecrated Sphinx|MBS
+4 Squadron Hawk|M11
+4 Stoneforge Mystic|WWK
+3 Dismember|NPH
+1 Divine Offering|MBS
+2 Into the Roil|ZEN
+4 Mana Leak|M11
+3 Spell Pierce|ZEN
+4 Preordain|M11
+1 Batterskull|NPH
+1 Sword of Feast and Famine|MBS
+1 Sword of War and Peace|NPH
+4 Celestial Colonnade|WWK
+3 Glacial Fortress|M11
+2 Inkmoth Nexus|MBS
+5 Island|NPH
+4 Plains|NPH
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+1 Jace Beleren|M11
+4 Jace, the Mind Sculptor|WWK
+
+[sideboard]
+1 Dismember|NPH
+2 Divine Offering|MBS
+1 Batterskull|NPH
+1 Sun Titan|M11
+1 Celestial Purge|M11
+2 Condemn|M11
+1 Deprive|ROE
+2 Flashfreeze|M11
+1 Day of Judgment|M11
+3 Oust|ROE

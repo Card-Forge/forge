@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Grixis Control by Saito
+Title=Lief
+Difficulty=very hard
+Description=Grixis Control by Saito
+Icon=Lief.jpg
+Deck Type=constructed
+
+[main]
+1 Wandering Mind
+4 Corpse Appraiser
+4 Fable of the Mirror-Breaker
+4 Bloodtithe Harvester
+3 Reckoner Bankbuster
+2 Siphon Insight
+3 Abrade
+3 Go for the Throat
+4 Make Disappear
+2 Brotherhood's End
+4 Invoke Despair
+1 Takenuma, Abandoned Mire
+4 Xander's Lounge
+4 Shivan Reef
+4 Sulfurous Springs
+4 Haunted Ridge
+4 Shipwreck Marsh
+5 Swamp
+
+[sideboard]
+1 Reckoner Bankbuster
+1 Brotherhood's End
+1 Disdainful Stroke
+1 Negate
+2 Razorlash Transmogrant
+2 Sheoldred, the Apocalypse
+2 Soul Transfer
+2 Duress
+3 Cut Down

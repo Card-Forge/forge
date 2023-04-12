@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Omnath Scapeshift  by Dorazio Pietro 
+Title=Druid
+Difficulty=very hard
+Description=Omnath Scapeshift  by Dorazio Pietro 
+Icon=Druid.jpg
+Deck Type=constructed
+
+[main]
+3 Arboreal Grazer
+1 Valki, God of Lies
+4 Dryad of the Ilysian Grove
+3 Omnath, Locus of Creation
+1 Fury
+1 Breeding Pool
+2 Flooded Strand|KTK
+3 Ketria Triome
+4 Misty Rainforest|ZEN
+2 Raugrin Triome
+1 Sacred Foundry
+1 Savai Triome
+1 Forest
+1 Island
+1 Plains
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+4 Valakut, the Molten Pinnacle|ZEN
+4 Windswept Heath|KTK
+3 Wrenn and Six
+4 Teferi, Time Raveler
+1 Supreme Verdict|RTR
+4 Prismatic Ending
+4 Expressive Iteration
+1 Scapeshift
+4 Bring to Light|BFZ
+
+[sideboard]
+2 Chalice of the Void|MR
+1 Engineered Explosives|FD
+2 Endurance
+2 Force of Vigor
+2 Negate
+3 Mystical Dispute
+1 Anger of the Gods|THS
+1 Crumble to Dust|BFZ
+1 Unmoored Ego

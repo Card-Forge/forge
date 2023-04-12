@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Jund by Imose Yoneshige
+Title=Dungeon Crawling Blue
+Difficulty=very hard
+Description=Jund by Imose Yoneshige
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+
+[main]
+4 Ragavan, Nimble Pilferer
+4 Dragon's Rage Channeler
+4 Tarmogoyf|FUT
+1 Nihil Spellbomb|SOM
+1 Pyrite Spellbomb|MR
+1 Shadowspear
+4 Mishra's Bauble|CS
+1 Abrupt Decay|RTR
+1 Kolaghan's Command|DTK
+2 Lightning Bolt|M11
+4 Unholy Heat
+1 Witherbloom Command
+2 Thoughtseize|THS
+3 Inquisition of Kozilek|ROE
+4 Urza's Saga
+4 Wrenn and Six
+1 Swamp
+1 Mountain
+1 Forest
+1 Stomping Ground
+1 Nurturing Peatland
+1 Overgrown Tomb
+1 Blood Crypt
+2 Verdant Catacombs|ZEN
+3 Wooded Foothills|KTK
+3 Blackcleave Cliffs|SOM
+4 Bloodstained Mire|KTK
+
+[sideboard]
+1 Nihil Spellbomb|SOM
+1 Thoughtseize|THS
+1 Ghost Quarter|ISD
+1 Lurrus of the Dream-Den
+1 Terminate|ARB
+1 Assassin's Trophy
+1 Pithing Needle
+1 Torpor Orb|NPH
+1 Chalice of the Void|MR
+2 Engineered Explosives|FD
+2 Alpine Moon
+2 Dauthi Voidwalker

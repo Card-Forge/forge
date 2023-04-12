@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Arnaud Hocquemiller (France - B)
+Title=Regigigas
+Difficulty=very hard
+Description=Jeskai Control by Arnaud Hocquemiller (France - B)
+Icon=Regigigas.jpg
+Deck Type=constructed
+
+[main]
+3 Teferi, Hero of Dominaria
+1 Ral, Izzet Viceroy
+1 Lava Coil
+4 Deafening Clarion
+2 Fight with Fire
+4 Revitalize
+1 Blink of an Eye
+1 Syncopate
+1 Negate
+3 Ionize
+4 Chemister's Insight
+2 Settle the Wreckage|XLN
+3 Expansion // Explosion
+2 Seal Away
+1 Ixalan's Binding|XLN
+1 The Mirari Conjecture
+4 Steam Vents
+4 Sacred Foundry
+4 Glacial Fortress|XLN
+4 Sulfur Falls
+4 Clifftop Retreat
+3 Island
+3 Plains
+
+[sideboard]
+2 Lava Coil
+1 Negate
+1 Seal Away
+1 Ixalan's Binding|XLN
+1 Cleansing Nova
+2 Star of Extinction|XLN
+1 Niv-Mizzet, Parun
+3 Legion Warboss
+2 Lyra Dawnbringer
+1 Invoke the Divine

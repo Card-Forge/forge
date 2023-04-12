@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Winota by Ryan Mcdonough
+Title=Prismat
+Difficulty=very hard
+Description=Winota by Ryan Mcdonough
+Icon=Prismat.jpg
+Deck Type=constructed
+
+[main]
+1 Kenrith, the Returned King
+1 Lotus Cobra
+2 Blade Historian
+3 Magda, Brazen Outlaw
+3 Minsc, Beloved Ranger
+4 Selfless Savior
+4 Elite Spellbinder
+4 Winota, Joiner of Forces
+4 Prosperous Innkeeper
+4 Jaspera Sentinel
+4 Esika's Chariot
+3 Shatterskull Smashing
+1 Ranger Class
+1 Mountain
+2 Plains
+2 Lair of the Hydra
+2 Forest
+3 Fabled Passage
+4 Cragcrown Pathway
+4 Branchloft Pathway
+4 Needleverge Pathway
+
+[sideboard]
+2 Redcap Melee
+2 The Akroan War
+2 Klothys, God of Destiny
+2 Ox of Agonas
+3 Reidane, God of the Worthy
+4 Burning Hands

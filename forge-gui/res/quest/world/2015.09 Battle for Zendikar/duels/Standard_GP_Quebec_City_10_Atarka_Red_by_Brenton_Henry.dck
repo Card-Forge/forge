@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Atarka Red by Brenton Henry
+Title=Waylon Smithers
+Difficulty=very hard
+Description=Atarka Red by Brenton Henry
+Icon=Waylon Smithers.jpg
+Deck Type=constructed
+
+[main]
+2 Fiery Impulse|ORI
+2 Hordeling Outburst|KTK
+4 Dragon Fodder|ORI
+4 Zurgo Bellstriker|DTK
+4 Monastery Swiftspear|KTK
+2 Lightning Berserker|DTK
+4 Abbot of Keral Keep|ORI
+1 Forest|BFZ
+8 Mountain|BFZ
+2 Cinder Glade|BFZ
+4 Wooded Foothills|KTK
+2 Windswept Heath|KTK
+4 Bloodstained Mire|KTK
+4 Atarka's Command|DTK
+3 Become Immense|KTK
+3 Temur Battle Rage|FRF
+4 Titan's Strength|ORI
+3 Wild Slash|FRF
+
+[sideboard]
+2 Fiery Impulse|ORI
+2 Hordeling Outburst|KTK
+1 Lightning Berserker|DTK
+3 Roast|DTK
+3 Rending Volley|DTK
+3 Chandra, Fire of Kaladesh|ORI
+1 Boiling Earth|BFZ

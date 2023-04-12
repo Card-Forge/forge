@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Temur Energy by Ivan Floch (Slovakia)
+Title=Genghis Khan
+Difficulty=very hard
+Description=Temur Energy by Ivan Floch (Slovakia)
+Icon=Genghis Khan.jpg
+Deck Type=constructed
+
+[main]
+2 Confiscation Coup|KLD
+1 Abrade|HOU
+4 Harnessed Lightning|KLD
+1 Magma Spray|AKH
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+1 Island|XLN
+3 Rootbound Crag|XLN
+3 Spirebluff Canal|KLD
+3 Forest|XLN
+2 Mountain|XLN
+2 Sheltered Thicket|AKH
+4 Attune with Aether|KLD
+4 Whirler Virtuoso|KLD
+4 Servant of the Conduit|KLD
+4 Rogue Refiner|AER
+4 Longtusk Cub|KLD
+4 Glorybringer|AKH
+3 Bristling Hydra|KLD
+3 Chandra, Torch of Defiance|KLD
+
+[sideboard]
+2 Abrade|HOU
+1 Magma Spray|AKH
+4 Negate|AER
+2 Chandra's Defeat|HOU
+2 Vizier of Many Faces|AKH
+2 River's Rebuke|XLN
+1 Nissa, Steward of Elements|AKH
+1 Supreme Will|HOU

@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=UW Control by Raphael Levy
+Title=Iron Man
+Difficulty=very hard
+Description=UW Control by Raphael Levy
+Icon=Iron Man.jpg
+Deck Type=constructed
+
+[main]
+9 Island
+7 Plains
+4 Fabled Passage
+4 Temple of Enlightenment
+4 Hallowed Fountain
+2 Castle Vantress
+2 Raugrin Triome
+2 Field of Ruin
+1 Castle Ardenvale
+4 Narset, Parter of Veils
+4 Teferi, Time Raveler
+4 Omen of the Sea
+4 Shark Typhoon
+4 Elspeth Conquers Death
+3 The Birth of Meletis
+2 Omen of the Sun
+3 Shatter the Sky
+4 Dovin's Veto
+2 Mystical Dispute
+2 Thirst for Meaning
+2 Aether Gust
+3 Glass Casket
+2 Yorion, Sky Nomad
+2 Archon of Sun's Grace
+
+[sideboard]
+2 Sky Tether
+1 Disdainful Stroke
+1 Heliod's Intervention
+1 Giant Killer
+1 Spectral Sailor
+1 Brazen Borrower
+1 Narset's Reversal
+1 Commence the Endgame
+1 Shatter the Sky
+2 Aether Gust
+1 Glass Casket
+1 Yorion, Sky Nomad
+1 Archon of Sun's Grace

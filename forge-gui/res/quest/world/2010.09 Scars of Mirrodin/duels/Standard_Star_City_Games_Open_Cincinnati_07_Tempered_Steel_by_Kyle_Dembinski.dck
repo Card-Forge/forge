@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Tempered Steel by Kyle Dembinski
+Title=Mr Slate
+Difficulty=very hard
+Description=Tempered Steel by Kyle Dembinski
+Icon=Mr Slate.jpg
+Deck Type=constructed
+
+[main]
+4 Memnite|SOM
+3 Porcelain Legionnaire|NPH
+4 Signal Pest|MBS
+4 Spellskite|NPH
+4 Steel Overseer|M11
+4 Vault Skirge|NPH
+2 Dismember|NPH
+4 Dispatch|NPH
+4 Glint Hawk Idol|SOM
+2 Mox Opal|SOM
+4 Tempered Steel|SOM
+17 Plains|M12
+4 Inkmoth Nexus|MBS
+
+[sideboard]
+1 Dismember|NPH
+4 Kor Firewalker|WWK
+3 Act of Aggression|NPH
+3 Celestial Purge|M12
+3 Shrine of Loyal Legions|NPH
+1 Elspeth Tirel|SOM

@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Mono Red by Marcio Carvalho
+Title=Ali Baba
+Difficulty=very hard
+Description=Mono Red by Marcio Carvalho
+Icon=Ali Baba.jpg
+Deck Type=constructed
+
+[main]
+4 Jackal Pup|TE
+4 Mogg Fanatic|TE
+3 Goblin Patrol|US
+4 Ball Lightning|DK
+4 Firebolt|OD
+4 Incinerate|IA
+2 Urza's Rage|IN
+3 Fireblast|VI
+3 Price of Progress|EX
+3 Cursed Scroll|TE
+4 Seal of Fire|NE
+4 Wasteland|TE
+4 Barbarian Ring|OD
+15 Mountain|A
+
+[sideboard]
+4 Pyroblast|IA
+3 Scald|US
+3 Anarchy|IA
+2 Pyrokinesis|AL
+3 Phyrexian Furnace|WL

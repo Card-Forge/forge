@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Grixis Control by Yuki Matsuda (rooney56)
+Title=Dionysus
+Difficulty=very hard
+Description=Grixis Control by Yuki Matsuda (rooney56)
+Icon=Dionysus.jpg
+Deck Type=constructed
+
+[main]
+4 Nicol Bolas, the Ravager
+1 Bedeck // Bedazzle
+3 Bedevil
+2 Spell Pierce|XLN
+2 Discovery // Dispersal
+3 Enter the God-Eternals
+3 Lava Coil
+4 Thought Erasure
+3 Widespread Brutality
+3 Dreadhorde Invasion
+1 Search for Azcanta|XLN
+4 Narset, Parter of Veils
+2 Nicol Bolas, Dragon-God
+4 Blood Crypt
+4 Dragonskull Summit|XLN
+4 Drowned Catacomb|XLN
+4 Steam Vents
+4 Sulfur Falls
+1 Swamp
+4 Watery Grave
+
+[sideboard]
+3 Dreadhorde Butcher
+2 Duress
+1 Liliana, Dreadhorde General
+2 Moment of Craving
+2 Negate
+1 Ob Nixilis's Cruelty
+2 Sinister Sabotage
+2 The Elderspell

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Twinblade by Nathaniel Chafe
+Title=The Ooze
+Difficulty=very hard
+Description=Twinblade by Nathaniel Chafe
+Icon=The Ooze.jpg
+Deck Type=constructed
+
+[main]
+2 Spellskite|NPH
+4 Deceiver Exarch|NPH
+4 Stoneforge Mystic|WWK
+2 Dismember|NPH
+3 Mana Leak|M11
+2 Spell Pierce|ZEN
+3 Gitaxian Probe|NPH
+4 Preordain|M11
+2 Batterskull|NPH
+1 Sword of Feast and Famine|MBS
+3 Splinter Twin|ROE
+3 Island|NPH
+3 Mountain|NPH
+2 Plains|NPH
+4 Arid Mesa|ZEN
+1 Evolving Wilds|ROE
+4 Glacial Fortress|M11
+1 Halimar Depths|WWK
+4 Scalding Tarn|ZEN
+4 Seachrome Coast|SOM
+4 Jace, the Mind Sculptor|WWK
+
+[sideboard]
+1 Spellskite|NPH
+2 Emeria Angel|ZEN
+2 Combust|M11
+2 Dispel|WWK
+2 Divine Offering|MBS
+2 Mental Misstep|NPH
+3 Pyroclasm|M11
+1 Sword of War and Peace|NPH

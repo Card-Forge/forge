@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Ub Control by Eric Froehlich
+Title=Mahatma Gandhi
+Difficulty=very hard
+Description=Ub Control by Eric Froehlich
+Icon=Mahatma Gandhi.jpg
+Deck Type=constructed
+
+[main]
+4 Torrential Gearhulk|KLD
+2 Commit // Memory|AKH
+4 Disallow|AER
+3 Essence Scatter|AKH
+4 Fatal Push|AER
+3 Glimmer of Genius|KLD
+2 Hieroglyphic Illumination|AKH
+3 Moment of Craving
+4 Vraska's Contempt|XLN
+3 Search for Azcanta|XLN
+4 Drowned Catacomb|XLN
+4 Fetid Pools|AKH
+4 Field of Ruin|XLN
+7 Island
+1 Submerged Boneyard|AKH
+6 Swamp
+2 The Scarab God|HOU
+
+[sideboard]
+1 Moment of Craving
+2 Arguel's Blood Fast|XLN
+1 Bontu's Last Reckoning|HOU
+3 Contraband Kingpin|KLD
+1 Deadeye Tracker|XLN
+2 Duress|XLN
+1 Golden Demise
+3 Negate
+1 Nezahal, Primal Tide

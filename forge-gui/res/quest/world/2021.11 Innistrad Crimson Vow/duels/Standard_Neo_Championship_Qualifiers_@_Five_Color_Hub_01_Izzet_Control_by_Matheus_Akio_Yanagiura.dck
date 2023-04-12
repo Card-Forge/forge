@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Izzet Control by Matheus Akio Yanagiura
+Title=Simic-precon
+Difficulty=very hard
+Description=Izzet Control by Matheus Akio Yanagiura
+Icon=Simic-precon.jpg
+Deck Type=constructed
+
+[main]
+1 Burn Down the House
+1 Test of Talents
+1 Behold the Multiverse
+1 Memory Deluge
+2 Cinderclasm
+2 Demon Bolt
+2 Expressive Iteration
+2 Thirst for Discovery
+2 Jwari Disruption
+3 Fading Hope
+4 Alrund's Epiphany
+4 Unexpected Windfall
+4 Spikefield Hazard
+4 Galvanic Iteration
+4 Divide by Zero
+1 Field of Ruin|XLN
+2 Hall of Storm Giants
+4 Stormcarved Coast
+4 Riverglide Pathway
+5 Island|A
+7 Mountain|A
+
+[sideboard]
+3 Goldspan Dragon
+2 Smoldering Egg
+2 Burning Hands
+1 Teachings of the Archaics
+1 Mascot Exhibition
+1 Environmental Sciences
+1 Disdainful Stroke|KTK
+2 Test of Talents
+1 Cinderclasm
+1 Fading Hope

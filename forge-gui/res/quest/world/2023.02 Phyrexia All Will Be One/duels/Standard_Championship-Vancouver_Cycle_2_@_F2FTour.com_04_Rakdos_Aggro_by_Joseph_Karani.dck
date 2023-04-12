@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Joseph Karani
+Title=Chilliphon
+Difficulty=very hard
+Description=Rakdos Aggro by Joseph Karani
+Icon=Chilliphon.jpg
+Deck Type=constructed
+
+[main]
+1 Abrade
+2 Cut Down
+3 Go for the Throat
+3 Play with Fire
+4 Kumano Faces Kakkazan
+4 Fable of the Mirror-Breaker
+3 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Graveyard Trespasser
+4 Monastery Swiftspear
+4 Bloodthirsty Adversary
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+4 Blackcleave Cliffs
+4 Sulfurous Springs
+4 Haunted Ridge
+4 Swamp
+6 Mountain
+
+[sideboard]
+4 Razorlash Transmogrant
+3 Duress
+3 Vampires' Vengeance
+2 Reckoner Bankbuster
+1 Soul Transfer
+1 Abrade
+1 Go for the Throat

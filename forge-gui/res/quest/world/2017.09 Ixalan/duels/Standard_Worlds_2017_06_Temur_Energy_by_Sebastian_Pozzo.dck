@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Temur Energy by Sebastian Pozzo
+Title=Spyro
+Difficulty=very hard
+Description=Temur Energy by Sebastian Pozzo
+Icon=Spyro.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Torch of Defiance|KLD
+4 Bristling Hydra|KLD
+4 Glorybringer|AKH
+4 Longtusk Cub|KLD
+4 Rogue Refiner|AER
+4 Servant of the Conduit|KLD
+4 Whirler Virtuoso|KLD
+4 Attune with Aether|KLD
+1 Confiscation Coup|KLD
+2 Magma Spray|AKH
+4 Harnessed Lightning|KLD
+1 Abrade|HOU
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+4 Forest|XLN
+1 Island|XLN
+2 Mountain|XLN
+2 Sheltered Thicket|AKH
+2 Rootbound Crag|XLN
+3 Spirebluff Canal|KLD
+
+[sideboard]
+1 Chandra, Torch of Defiance|KLD
+1 Magma Spray|AKH
+1 Abrade|HOU
+1 Nissa, Vital Force|KLD
+3 Negate|AER
+3 Spell Pierce|XLN
+2 Jace's Defeat|HOU
+2 Struggle // Survive|HOU
+1 Vizier of Many Faces|AKH

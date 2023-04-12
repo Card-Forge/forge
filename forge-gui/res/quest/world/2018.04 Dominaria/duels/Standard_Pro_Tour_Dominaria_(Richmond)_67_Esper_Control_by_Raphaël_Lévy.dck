@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Esper Control by Raphaël Lévy
+Title=Minerva McGonagall
+Difficulty=very hard
+Description=Esper Control by Raphaël Lévy
+Icon=Minerva McGonagall.jpg
+Deck Type=constructed
+
+[main]
+2 Liliana, Death's Majesty|AKH
+3 Torrential Gearhulk|KLD
+2 The Scarab God|HOU
+3 Cast Down
+4 Vraska's Contempt|XLN
+3 Supreme Will|HOU
+1 Negate
+3 Essence Scatter|AKH
+4 Fatal Push|AER
+2 Disallow|AER
+3 Syncopate
+1 Aether Meltdown|KLD
+4 Drowned Catacomb|XLN
+4 Fetid Pools|AKH
+7 Island
+8 Swamp
+1 Evolving Wilds
+2 Field of Ruin|XLN
+3 Karn, Scion of Urza
+
+[sideboard]
+1 The Scarab God|HOU
+1 Cast Down
+1 Negate
+3 Glint-Sleeve Siphoner|AER
+3 Knight of Malice
+2 Gifted Aetherborn|AER
+3 Duress|XLN
+1 Arguel's Blood Fast|XLN

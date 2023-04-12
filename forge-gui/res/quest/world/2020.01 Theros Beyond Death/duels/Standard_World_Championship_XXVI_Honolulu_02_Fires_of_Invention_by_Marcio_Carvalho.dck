@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Fires of Invention by Marcio Carvalho
+Title=Gadget Hackwrench
+Difficulty=very hard
+Description=Fires of Invention by Marcio Carvalho
+Icon=Gadget Hackwrench.jpg
+Deck Type=constructed
+
+[main]
+1 Plains
+2 Mountain
+3 Temple of Triumph
+3 Sacred Foundry
+4 Steam Vents
+3 Temple of Epiphany
+4 Hallowed Fountain
+3 Fabled Passage
+2 Castle Vantress
+2 Island
+4 Teferi, Time Raveler
+4 Fires of Invention
+1 Shimmer of Possibility
+3 Deafening Clarion
+2 Aether Gust
+3 Kenrith, the Returned King
+4 Sphinx of Foresight
+2 Dream Trawler
+2 Cavalier of Gales
+4 Cavalier of Flame
+4 Bonecrusher Giant
+
+[sideboard]
+1 Shatter the Sky
+1 Devout Decree
+4 Mystical Dispute
+1 Justice Strike
+1 Disenchant
+1 Elspeth Conquers Death
+1 Tithe Taker
+3 Legion Warboss
+1 Deafening Clarion
+1 Aether Gust

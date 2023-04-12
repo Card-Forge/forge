@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Grixis Control by Leo Lahonen
+Title=Kobolds
+Difficulty=very hard
+Description=Grixis Control by Leo Lahonen
+Icon=Kobolds.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+2 Cut Down
+3 Make Disappear
+3 Go for the Throat
+3 Abrade
+3 Reckoner Bankbuster
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+1 Razorlash Transmogrant
+2 Sheoldred, the Apocalypse
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+1 Underground River
+1 Sulfurous Springs
+1 Takenuma, Abandoned Mire
+1 Darkslick Shores
+1 Otawara, Soaring City
+2 Swamp
+3 Shivan Reef
+4 Shipwreck Marsh
+4 Haunted Ridge
+4 Xander's Lounge
+4 Blackcleave Cliffs
+
+[sideboard]
+2 Disdainful Stroke
+2 Siphon Insight
+2 Parasitic Grasp
+1 Unlicensed Hearse
+1 Brotherhood's End
+1 Anoint with Affliction
+1 Duress
+1 Negate
+2 Cut Down
+2 Razorlash Transmogrant

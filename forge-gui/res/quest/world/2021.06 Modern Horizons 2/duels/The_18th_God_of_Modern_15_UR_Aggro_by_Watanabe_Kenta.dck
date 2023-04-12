@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=UR Aggro by Watanabe Kenta
+Title=Lazav
+Difficulty=very hard
+Description=UR Aggro by Watanabe Kenta
+Icon=Lazav.jpg
+Deck Type=constructed
+
+[main]
+1 Shadowspear
+1 Vapor Snag|NPH
+1 Gut Shot|NPH
+2 Opt
+2 Mutagenic Growth|NPH
+4 Lightning Bolt|M11
+4 Manamorphose|SHM
+4 Lava Dart|JU
+4 Expressive Iteration
+2 Brazen Borrower
+2 Murktide Regent
+3 Ragavan, Nimble Pilferer
+4 Monastery Swiftspear|KTK
+4 Stormwing Entity
+4 Soul-Scar Mage|AKH
+1 Island
+1 Arid Mesa|ZEN
+1 Wooded Foothills|KTK
+2 Fiery Islet
+2 Mountain
+3 Steam Vents
+4 Scalding Tarn|ZEN
+4 Spirebluff Canal|KLD
+
+[sideboard]
+1 Abrade
+1 Shattering Spree|GP
+1 Alpine Moon
+1 Relic of Progenitus|ALA
+1 Surgical Extraction|NPH
+1 Mystical Dispute
+1 Spell Pierce|XLN
+1 Hurkyl's Recall|10E
+1 Kozilek's Return|OGW
+1 Spell Snare|DIS
+1 Jace, the Mind Sculptor|WWK
+2 Void Mirror
+2 Cleansing Wildfire

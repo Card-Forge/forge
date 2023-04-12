@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Izzet Control by Yo Akaike
+Title=Guybrush Threepwood
+Difficulty=very hard
+Description=Izzet Control by Yo Akaike
+Icon=Guybrush Threepwood.jpg
+Deck Type=constructed
+
+[main]
+3 Wandering Mind
+2 Fading Hope
+2 Abrade
+3 Jwari Disruption
+3 Frost Bite
+3 Galvanic Iteration
+4 Unexpected Windfall
+4 Divide by Zero
+4 Spikefield Hazard
+1 Thundering Rebuke
+2 Burn Down the House
+4 Expressive Iteration
+4 Alrund's Epiphany
+1 Volatile Fjord
+2 Faceless Haven
+4 Riverglide Pathway
+4 Stormcarved Coast
+5 Snow-Covered Island
+5 Snow-Covered Mountain
+
+[sideboard]
+1 Fading Hope
+1 Frost Bite
+1 Burn Down the House
+1 Mascot Exhibition
+1 Test of Talents
+1 Environmental Sciences
+1 Teachings of the Archaics
+2 Goldspan Dragon
+2 Lier, Disciple of the Drowned
+2 Disdainful Stroke
+2 Hullbreaker Horror

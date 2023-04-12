@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mono White Control by Fabrizio Campanino
+Title=Deadpool
+Difficulty=very hard
+Description=Mono White Control by Fabrizio Campanino
+Icon=Deadpool.jpg
+Deck Type=constructed
+
+[main]
+2 Fateful Absence
+2 The Eternal Wanderer
+3 The Wandering Emperor
+3 Ossification
+3 Reckoner Bankbuster
+4 Wedding Announcement
+4 Lay Down Arms
+1 Cathar Commando
+2 Loran of the Third Path
+2 Ao, the Dawn Sky
+3 Serra Paragon
+4 Ambitious Farmhand
+4 Steel Seraph
+1 Eiganjo, Seat of the Empire
+2 Roadside Reliquary
+3 Demolition Field
+4 Field of Ruin
+13 Plains
+
+[sideboard]
+3 Skrelv's Hive
+3 Vanquish the Horde
+3 Sunset Revelry
+2 Farewell
+2 The Stone Brain
+1 Unlicensed Hearse
+1 Loran of the Third Path

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Twinblade by Jonathan Suarez
+Title=Cletus Heap
+Difficulty=very hard
+Description=Twinblade by Jonathan Suarez
+Icon=Cletus Heap.jpg
+Deck Type=constructed
+
+[main]
+4 Deceiver Exarch|NPH
+2 Emeria Angel|ZEN
+4 Stoneforge Mystic|WWK
+2 Dismember|NPH
+1 Into the Roil|ZEN
+2 Mana Leak|M11
+2 Spell Pierce|ZEN
+2 Gitaxian Probe|NPH
+4 Preordain|M11
+1 Batterskull|NPH
+1 Sword of Feast and Famine|MBS
+1 Sword of War and Peace|NPH
+3 Splinter Twin|ROE
+3 Island|NPH
+3 Mountain|NPH
+2 Plains|NPH
+4 Arid Mesa|ZEN
+3 Celestial Colonnade|WWK
+1 Evolving Wilds|ROE
+3 Glacial Fortress|M11
+4 Scalding Tarn|ZEN
+4 Seachrome Coast|SOM
+4 Jace, the Mind Sculptor|WWK
+
+[sideboard]
+2 Inferno Titan|M11
+2 Celestial Purge|M11
+2 Combust|M11
+1 Crush|MBS
+3 Dispel|WWK
+1 Divine Offering|MBS
+1 Arc Trail|SOM
+3 Pyroclasm|M11

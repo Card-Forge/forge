@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Jund by William Hartanto
+Title=Archon Namani
+Difficulty=very hard
+Description=Jund by William Hartanto
+Icon=Archon Namani.jpg
+Deck Type=constructed
+
+[main]
+1 Unleash the Inferno
+2 Riveteers Charm
+2 Strangle
+2 Bloodchief's Thirst
+2 The Meathook Massacre
+2 Wrenn and Seven
+3 Lolth, Spider Queen
+4 Esika's Chariot
+4 Fable of the Mirror-Breaker
+3 Tangled Florahedron
+3 Titan of Industry
+3 Tenacious Underdog
+4 Bloodtithe Harvester
+1 Rockfall Vale
+1 Den of the Bugbear
+1 Sokenzan, Crucible of Defiance
+1 Boseiju, Who Endures
+1 Forest
+2 Lair of the Hydra
+3 Deathcap Glade
+3 Haunted Ridge
+4 Darkbore Pathway
+4 Ziatora's Proving Ground
+4 Cragcrown Pathway
+
+[sideboard]
+4 Ray of Enfeeblement
+4 Duress
+2 Go Blank
+1 Culling Ritual
+1 Shadows' Verdict
+1 Thundering Rebuke
+1 Riveteers Charm
+1 The Meathook Massacre

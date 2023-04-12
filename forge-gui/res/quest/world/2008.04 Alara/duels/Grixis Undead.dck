@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Grixis Undead
+Title=Grixis Undead
+Icon=alablood.jpg
+Difficulty=easy
+Description=The plane of Grixis is a decaying hellscape overrun with demons and the undead.
+Deck Type=constructed
+[Main]
+2 Absorb Vis|CFX
+2 Agony Warp|ALA
+2 Blightning|ALA
+1 Blood Cultist|ALA
+1 Blood Tyrant+|CFX
+1 Bone Saw|CFX
+1 Bone Splinters|ALA
+1 Brackwater Elemental|CFX
+1 Cruel Ultimatum|ALA
+4 Crumbling Necropolis|ALA
+1 Dreg Reaver|ALA
+3 Dregscape Zombie|ALA
+1 Elder Mastery|CFX
+1 Extractor Demon|CFX
+2 Fire-Field Ogre|ALA
+1 Fleshbag Marauder|ALA
+1 Grixis Battlemage|ALA
+2 Grixis Charm|ALA
+4 Grixis Panorama|ALA
+1 Grixis Slavedriver|CFX
+1 Infest|ALA
+4 Island|ALA|4
+2 Kathari Screecher|ALA
+2 Kederekt Creeper|ALA
+4 Mountain|ALA|1
+1 Obelisk of Grixis|ALA
+1 Sedraxis Alchemist|CFX
+7 Swamp|ALA|2
+1 Swamp|ALA|3
+1 Vein Drinker+|ALA
+1 Vithian Stinger|ALA
+2 Zombie Outlander|CFX

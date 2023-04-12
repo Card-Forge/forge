@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Grixis Control by Ishihara Kouji
+Title=Lumpy
+Difficulty=very hard
+Description=Grixis Control by Ishihara Kouji
+Icon=Lumpy.jpg
+Deck Type=constructed
+
+[main]
+2 Bladecoil Serpent
+4 Corpse Appraiser
+4 Fable of the Mirror-Breaker
+4 Bloodtithe Harvester
+4 Reckoner Bankbuster
+3 Go for the Throat
+4 Make Disappear
+4 Abrade
+1 Brotherhood's End
+4 Invoke Despair
+1 Stormcarved Coast
+1 Takenuma, Abandoned Mire
+3 Shivan Reef
+4 Xander's Lounge
+4 Shipwreck Marsh
+4 Haunted Ridge
+4 Sulfurous Springs
+5 Swamp
+
+[sideboard]
+1 Brotherhood's End
+1 Rona's Vortex
+1 Soul Transfer
+1 Negate
+2 Razorlash Transmogrant
+2 Sheoldred, the Apocalypse
+2 Cut Down
+2 Disdainful Stroke
+3 Siphon Insight

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Selesnya Tokens by Richard Hornansky (Slovakia  - A)
+Title=C3PO
+Difficulty=very hard
+Description=Selesnya Tokens by Richard Hornansky (Slovakia  - A)
+Icon=C3PO.jpg
+Deck Type=constructed
+
+[main]
+2 Ajani, Adversary of Tyrants
+1 Trostani Discordant
+4 Benalish Marshal
+3 Emmara, Soul of the Accord
+3 Venerated Loxodon
+4 Adanto Vanguard|XLN
+4 Flower // Flourish
+4 Saproling Migration
+4 March of the Multitudes
+4 History of Benalia
+3 Legion's Landing|XLN
+3 Conclave Tribunal
+4 Sunpetal Grove|XLN
+4 Temple Garden
+1 Forest
+12 Plains
+
+[sideboard]
+2 Trostani Discordant
+1 Conclave Tribunal
+1 Arch of Orazca
+3 Tocatli Honor Guard|XLN
+3 Kraul Harpooner
+3 Baffling End
+2 The Immortal Sun

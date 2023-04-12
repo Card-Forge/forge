@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Carlos Stark Schofield
+Title=Boros-precon
+Difficulty=very hard
+Description=Mono Green Aggro by Carlos Stark Schofield
+Icon=Boros-precon.jpg
+Deck Type=constructed
+
+[main]
+2 Cemetery Prowler
+3 Sculptor of Winter
+4 Old-Growth Troll
+4 Ulvenwald Oddity
+4 Ascendant Packleader
+4 Werewolf Pack Leader
+3 Esika's Chariot
+2 Snakeskin Veil
+2 Inscription of Abundance
+4 Blizzard Brawl
+1 Unnatural Growth
+3 Ranger Class
+2 Kazandu Mammoth
+2 Faceless Haven
+20 Snow-Covered Forest
+
+[sideboard]
+2 Snakeskin Veil
+1 Inscription of Abundance
+1 Unnatural Growth
+1 Froghemoth
+1 Toski, Bearer of Secrets
+2 Outland Liberator
+2 Tangletrap
+2 Devouring Tendrils
+3 Tajuru Blightblade

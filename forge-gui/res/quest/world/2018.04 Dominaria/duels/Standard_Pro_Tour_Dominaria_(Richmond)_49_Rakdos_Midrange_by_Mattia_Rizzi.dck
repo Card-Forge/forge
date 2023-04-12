@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Rakdos Midrange by Mattia Rizzi
+Title=Firestorm
+Difficulty=very hard
+Description=Rakdos Midrange by Mattia Rizzi
+Icon=Firestorm.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Torch of Defiance|KLD
+4 Soul-Scar Mage|AKH
+2 Glorybringer|AKH
+4 Goblin Chainwhirler
+4 Rekindling Phoenix
+4 Scrapheap Scrounger|KLD
+2 Walking Ballista|AER
+2 Hazoret the Fervent|AKH
+2 Kari Zev, Skyship Raider|AER
+4 Abrade|HOU
+2 Magma Spray|AKH
+2 Unlicensed Disintegration|KLD
+2 Aethersphere Harvester|AER
+4 Canyon Slough|AKH
+4 Dragonskull Summit|XLN
+13 Mountain
+1 Swamp
+2 Aether Hub|KLD
+
+[sideboard]
+1 Chandra, Torch of Defiance|KLD
+1 Glorybringer|AKH
+1 Karn, Scion of Urza
+1 The Eldest Reborn
+2 Chandra's Defeat|HOU
+2 Doomfall|HOU
+4 Duress|XLN
+2 Hour of Glory|HOU
+1 Cinder Barrens

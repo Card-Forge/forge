@@ -1,0 +1,70 @@
+[duel]
+[metadata]
+Name=Battle of Wits by William Baby Huey Jensen
+Title=Oshun
+Difficulty=very hard
+Description=Battle of Wits by William Baby Huey Jensen
+Icon=Oshun.jpg
+Deck Type=constructed
+
+[main]
+4 Adarkar Wastes|7E
+4 Battlefield Forge|AP
+4 Caves of Koilos|AP
+4 City of Brass|7E
+4 Coastal Tower|IN
+4 Darkwater Catacombs|OD
+20 Island|OD
+10 Mountain|OD
+4 Salt Marsh|IN
+4 Shadowblood Ridge|OD
+4 Shivan Reef|AP
+4 Skycloud Expanse|OD
+4 Sulfurous Springs|7E
+10 Swamp|OD
+4 Underground River|7E
+4 Urborg Volcano|IN
+4 Flametongue Kavu|PS
+4 Absorb|IN
+4 Addle|IN
+4 Battle of Wits|OD
+4 Chainer's Edict|TO
+4 Charcoal Diamond|7E
+4 Chromatic Sphere|IN
+4 Compulsion|TO
+4 Concentrate|OD
+4 Counterspell|7E
+4 Diabolic Tutor|OD
+4 Disrupt|IN
+4 Dromar's Charm|PS
+4 Duress|7E
+4 Exclude|IN
+4 Fact or Fiction|IN
+4 Fire // Ice|AP
+4 Hobble|PS
+4 Innocent Blood|OD
+4 Insidious Dreams|TO
+4 Marble Diamond|7E
+4 Memory Lapse|7E
+4 Opt|IN
+4 Peek|OD
+4 Probe|IN
+4 Prophetic Bolt|AP
+4 Recoil|IN
+4 Repulse|IN
+4 Sky Diamond|7E
+4 Sleight of Hand|7E
+4 Spite // Malice|IN
+4 Syncopate|OD
+4 Tainted Pact|OD
+4 Terminate|PS
+4 Urza's Rage|IN
+4 Void|IN
+4 Wild Research|AP
+4 Yawgmoth's Agenda|IN
+
+[sideboard]
+3 Circle of Protection: Black|7E
+4 Hibernation|7E
+4 Shadowmage Infiltrator|OD
+4 Slay|PS

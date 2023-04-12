@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Weenie White  by Frederick Natividad
+Title=King Arthur
+Difficulty=very hard
+Description=Weenie White  by Frederick Natividad
+Icon=King Arthur.jpg
+Deck Type=constructed
+
+[main]
+1 Legion Angel
+2 Skyclave Apparition
+2 Reidane, God of the Worthy
+2 Brutal Cathar
+2 Adeline, Resplendent Cathar
+3 Thalia, Guardian of Thraben
+4 Usher of the Fallen
+4 Intrepid Adversary
+4 Hopeful Initiate
+4 Elite Spellbinder
+4 Luminarch Aspirant
+2 Portable Hole
+2 The Wandering Emperor
+2 Eiganjo, Seat of the Empire
+3 Crawling Barrens
+3 Cave of the Frost Dragon
+16 Plains
+
+[sideboard]
+3 Legion Angel
+2 Skyclave Apparition
+2 Brutal Cathar
+1 Thalia, Guardian of Thraben
+1 The Wandering Emperor
+1 Cathar Commando
+2 Welcoming Vampire
+3 Guardian of Faith

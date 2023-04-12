@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Jeskai Approach by Hong Lingsheng
+Title=Ariel
+Difficulty=very hard
+Description=Jeskai Approach by Hong Lingsheng
+Icon=Ariel.jpg
+Deck Type=constructed
+
+[main]
+1 Supreme Will|HOU
+1 Pull from Tomorrow|AKH
+1 Fumigate|KLD
+1 Essence Scatter|AKH
+2 Commit // Memory|AKH
+2 Abrade|HOU
+2 Approach of the Second Sun|AKH
+2 Search for Azcanta|XLN
+3 Settle the Wreckage|XLN
+3 Harnessed Lightning|KLD
+3 Disallow|AER
+3 Opt|XLN
+4 Glimmer of Genius|KLD
+4 Censor|AKH
+2 Torrential Gearhulk|KLD
+1 Plains|XLN
+4 Aether Hub|KLD
+4 Irrigated Farmland|AKH
+4 Glacial Fortress|XLN
+4 Spirebluff Canal|KLD
+4 Inspiring Vantage|KLD
+5 Island|XLN
+
+[sideboard]
+3 Fiery Cannonade|XLN
+3 Negate|AER
+1 The Locust God|HOU
+2 Cast Out|AKH
+3 Baral, Chief of Compliance|AER
+1 Pull from Tomorrow|AKH
+1 Essence Scatter|AKH
+1 Torrential Gearhulk|KLD

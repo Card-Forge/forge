@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Hunting Grounds by Sheng Hsun Hsia
+Title=Neo
+Difficulty=very hard
+Description=Hunting Grounds by Sheng Hsun Hsia
+Icon=Neo.jpg
+Deck Type=constructed
+
+[main]
+2 Adarkar Wastes|7E
+2 Brushland|7E
+3 Coastal Tower|IN
+1 Forest|OD
+5 Island|OD
+2 Nantuko Monastery|JU
+1 Plains|OD
+2 Skycloud Expanse|OD
+3 Sungrass Prairie|OD
+3 Yavimaya Coast|AP
+1 Genesis|JU
+1 Mystic Enforcer|OD
+3 Mystic Snake|AP
+4 Absorb|IN
+4 Counterspell|7E
+3 Deep Analysis|TO
+2 Exclude|IN
+4 Fact or Fiction|IN
+2 Hunting Grounds|JU
+2 Living Wish|JU
+3 Memory Lapse|7E
+4 Repulse|IN
+3 Wrath of God|7E
+
+[sideboard]
+1 Mystic Snake|AP
+1 Aven Cloudchaser|OD
+1 Circle of Protection: Green|7E
+3 Meddling Mage|PS
+1 Nantuko Tracer|JU
+1 Phantom Nishoba|JU
+3 Seedtime|JU
+3 Tangle|IN
+1 Thornscape Battlemage|PS

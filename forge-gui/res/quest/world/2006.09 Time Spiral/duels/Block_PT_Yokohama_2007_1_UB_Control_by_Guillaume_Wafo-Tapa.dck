@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=UB Control by Guillaume Wafo-Tapa
+Title=Gruul-precon
+Difficulty=very hard
+Description=UB Control by Guillaume Wafo-Tapa
+Icon=Gruul-precon.jpg
+Deck Type=constructed
+
+[main]
+1 Academy Ruins|TSP
+4 Dreadship Reef|C16
+10 Island|RTR
+1 Molten Slagheap|C13
+1 Swamp|RTR
+4 Terramorphic Expanse|C16
+4 Urborg, Tomb of Yawgmoth|M15
+1 Urza's Factory|C13
+2 Aeon Chronicler|C16
+2 Draining Whelk|TSP
+2 Teferi, Mage of Zhalfir|TSP
+1 Triskelavus|CMD
+4 Cancel
+4 Careful Consideration|TSP
+4 Damnation|PLC
+1 Haunting Hymn|TSP
+3 Mystical Teachings|TSP
+4 Prismatic Lens|TSP
+1 Snapback|TSP
+2 Sudden Death|TSP
+2 Tendrils of Corruption|C14
+2 Think Twice|ISD
+
+[sideboard]
+1 Sudden Death|TSP
+3 Detritivore|PLC
+1 Disenchant|CN2
+1 Extirpate|PLC
+1 Fortune Thief|TSP
+1 Mountain|RTR
+1 Plains|RTR
+3 Premature Burial|TSP
+2 Pull from Eternity|TSP
+1 Temporal Isolation|TSP

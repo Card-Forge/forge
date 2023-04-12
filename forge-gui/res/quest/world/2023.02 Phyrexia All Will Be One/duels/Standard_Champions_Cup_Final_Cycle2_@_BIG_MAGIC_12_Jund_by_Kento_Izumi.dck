@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Jund by Kento Izumi
+Title=Relentless Dead
+Difficulty=very hard
+Description=Jund by Kento Izumi
+Icon=Relentless Dead.jpg
+Deck Type=constructed
+
+[main]
+1 Sheoldred's Edict
+2 Reckoner Bankbuster
+2 Cut Down
+3 Go for the Throat
+3 Unleash the Inferno
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+1 Bladecoil Serpent
+1 Sheoldred, the Apocalypse
+2 Migloz, Maze Crusher
+3 Razorlash Transmogrant
+4 Bloodtithe Harvester
+4 Graveyard Trespasser
+1 Copperline Gorge
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+2 Swamp
+2 Sulfurous Springs
+3 Llanowar Wastes
+4 Deathcap Glade
+4 Blackcleave Cliffs
+4 Haunted Ridge
+4 Ziatora's Proving Ground
+
+[sideboard]
+4 Duress
+2 Brotherhood's End
+2 Tear Asunder
+1 Liliana of the Veil
+1 Riveteers Charm
+1 Gix's Command
+1 Dreams of Steel and Oil
+2 Cut Down
+1 Razorlash Transmogrant

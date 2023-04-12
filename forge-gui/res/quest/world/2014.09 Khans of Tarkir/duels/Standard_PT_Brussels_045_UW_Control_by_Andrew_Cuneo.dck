@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=UW Control by Andrew Cuneo
+Title=Professor X
+Difficulty=very hard
+Description=UW Control by Andrew Cuneo
+Icon=Professor X.jpg
+Deck Type=constructed
+
+[main]
+1 Nullify|BNG
+1 Devouring Light|M15
+2 Last Breath|THS
+2 Valorous Stance|FRF
+2 Disdainful Stroke|KTK
+2 Negate|DTK
+2 End Hostilities|KTK
+2 Secure the Wastes|DTK
+2 Perilous Vault|M15
+3 Elspeth, Sun's Champion|THS
+4 Anticipate|DTK
+4 Dissolve|THS
+4 Dig Through Time|KTK
+2 Dragonlord Ojutai|DTK
+1 Haven of the Spirit Dragon|DTK
+3 Radiant Fountain|M15
+4 Plains|DTK
+4 Temple of Enlightenment|BNG
+4 Flooded Strand|KTK
+4 Tranquil Cove|FRF
+7 Island|DTK
+
+[sideboard]
+1 Glare of Heresy|THS
+1 Ugin, the Spirit Dragon|FRF
+2 Radiant Purge|DTK
+1 Treasure Cruise|KTK
+2 Surge of Righteousness|DTK
+2 Raise the Alarm|M15
+1 Valorous Stance|FRF
+2 Disdainful Stroke|KTK
+2 Negate|DTK
+1 End Hostilities|KTK

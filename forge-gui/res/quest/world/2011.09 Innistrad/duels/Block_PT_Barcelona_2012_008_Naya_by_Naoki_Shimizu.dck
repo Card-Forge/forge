@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Naya by Naoki Shimizu
+Title=The Outpost of Montford
+Difficulty=very hard
+Description=Naya by Naoki Shimizu
+Icon=The Outpost of Montford.jpg
+Deck Type=constructed
+
+[main]
+3 Pillar of Flame|AVR
+3 Bonfire of the Damned|AVR
+4 Brimstone Volley|CNS
+3 Wolfir Avenger|AVR
+3 Scorned Villager|DKA
+4 Borderland Ranger|AVR
+4 Huntmaster of the Fells|DKA
+4 Restoration Angel|AVR
+4 Wolfir Silverheart|AVR
+4 Avacyn's Pilgrim|ISD
+1 Plains|RTR
+1 Gavony Township|ISD
+2 Kessig Wolf Run|ISD
+2 Mountain|RTR
+4 Clifftop Retreat
+4 Evolving Wilds
+10 Forest|RTR
+
+[sideboard]
+2 Garruk Relentless|ISD
+2 Zealous Conscripts|AVR
+1 Faith's Shield|DKA
+1 Smite the Monstrous|BFZ
+3 Devil's Play|ISD
+1 Increasing Savagery|DKA
+3 Grafdigger's Cage|DKA
+1 Pillar of Flame|AVR
+1 Bonfire of the Damned|AVR

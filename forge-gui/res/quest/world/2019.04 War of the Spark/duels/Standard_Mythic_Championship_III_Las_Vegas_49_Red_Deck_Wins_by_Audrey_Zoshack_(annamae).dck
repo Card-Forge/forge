@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Audrey Zoshack (annamae)
+Title=Lex Luthor
+Difficulty=very hard
+Description=Red Deck Wins by Audrey Zoshack (annamae)
+Icon=Lex Luthor.jpg
+Deck Type=constructed
+
+[main]
+20 Mountain
+2 Chandra, Fire Artisan
+3 Experimental Frenzy
+4 Light Up the Stage
+3 Wizard's Lightning
+4 Shock
+4 Lightning Strike
+4 Viashino Pyromancer
+4 Runaway Steam-Kin
+4 Goblin Chainwhirler
+4 Ghitu Lavarunner
+4 Fanatical Firebrand
+
+[sideboard]
+3 Tibalt, Rakish Instigator
+2 Rekindling Phoenix
+3 Legion Warboss
+4 Lava Coil
+2 Dire Fleet Daredevil
+1 Experimental Frenzy

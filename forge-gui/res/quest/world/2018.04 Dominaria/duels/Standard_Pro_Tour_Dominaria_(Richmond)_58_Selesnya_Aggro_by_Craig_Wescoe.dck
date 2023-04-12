@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Selesnya Aggro by Craig Wescoe
+Title=Lex Luthor
+Difficulty=very hard
+Description=Selesnya Aggro by Craig Wescoe
+Icon=Lex Luthor.jpg
+Deck Type=constructed
+
+[main]
+2 Ajani Unyielding|AER
+4 Llanowar Elves
+4 Servant of the Conduit|KLD
+4 Walking Ballista|AER
+3 Rishkar, Peema Renegade|AER
+1 Thrashing Brontodon
+1 Jadelight Ranger
+3 Shalai, Voice of Plenty
+3 Lyra Dawnbringer
+4 Blossoming Defense|KLD
+2 Aethersphere Harvester|AER
+2 Skysovereign, Consul Flagship|KLD
+3 Cast Out|AKH
+1 Aether Hub|KLD
+1 Hashep Oasis|HOU
+4 Sunpetal Grove|XLN
+4 Scattered Groves|AKH
+4 Plains
+10 Forest
+
+[sideboard]
+1 Thrashing Brontodon
+3 Baffling End
+2 Thopter Arrest|AER
+1 Skywhaler's Shot|KLD
+2 Heroic Intervention|AER
+1 Naturalize
+3 Prowling Serpopard|AKH
+2 Nissa, Vital Force|KLD

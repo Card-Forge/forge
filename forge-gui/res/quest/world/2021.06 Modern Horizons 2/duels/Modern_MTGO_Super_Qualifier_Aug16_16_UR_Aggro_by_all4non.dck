@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=UR Aggro by all4non
+Title=Aspect of Air
+Difficulty=very hard
+Description=UR Aggro by all4non
+Icon=Aspect of Air.jpg
+Deck Type=constructed
+
+[main]
+1 Archmage's Charm
+1 Spell Pierce|XLN
+4 Mishra's Bauble|CS
+4 Unholy Heat
+4 Thought Scour|DKA
+4 Lightning Bolt|M11
+4 Counterspell|7E
+4 Sleight of Hand|9E
+4 Expressive Iteration
+2 Ragavan, Nimble Pilferer
+2 Brazen Borrower
+4 Murktide Regent
+4 Dragon's Rage Channeler
+1 Spirebluff Canal|KLD
+2 Fiery Islet
+2 Misty Rainforest|ZEN
+2 Scalding Tarn|ZEN
+2 Flooded Strand|KTK
+3 Island
+3 Polluted Delta|KTK
+3 Steam Vents
+
+[sideboard]
+3 Mystical Dispute
+2 Kozilek's Return|OGW
+2 Hurkyl's Recall|10E
+3 Engineered Explosives|FD
+1 Dispel|BFZ
+3 Blood Moon|9E
+1 Abrade|HOU

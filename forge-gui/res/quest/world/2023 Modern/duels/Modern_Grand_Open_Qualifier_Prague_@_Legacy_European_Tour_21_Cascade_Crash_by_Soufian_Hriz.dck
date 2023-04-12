@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Cascade Crash by Soufian Hriz
+Title=Waldo
+Difficulty=very hard
+Description=Cascade Crash by Soufian Hriz
+Icon=Waldo.jpg
+Deck Type=constructed
+
+[main]
+1 Arcane Proxy
+1 Brazen Borrower
+4 Fury
+4 Shardless Agent
+3 Dead // Gone|PLC
+4 Fire // Ice|AP
+4 Force of Negation
+4 Violent Outburst|ARB
+4 Crashing Footfalls
+3 Ardent Plea|ARB
+4 Leyline Binding
+1 Boseiju, Who Endures
+1 Breeding Pool
+4 Flooded Strand|KTK
+1 Forest
+2 Gemstone Caverns|TSP
+1 Indatha Triome
+1 Island
+4 Misty Rainforest|ZEN
+1 Otawara, Soaring City
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+4 Wooded Foothills|KTK
+1 Xander's Lounge
+
+[sideboard]
+1 Gemstone Caverns|TSP
+4 Endurance
+4 Force of Vigor
+4 Mystical Dispute
+2 Subtlety

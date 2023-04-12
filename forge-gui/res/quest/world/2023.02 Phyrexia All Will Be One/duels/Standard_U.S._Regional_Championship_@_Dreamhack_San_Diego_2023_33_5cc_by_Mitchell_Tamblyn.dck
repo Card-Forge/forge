@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=5cc by Mitchell Tamblyn
+Title=Bep
+Difficulty=very hard
+Description=5cc by Mitchell Tamblyn
+Icon=Bep.jpg
+Deck Type=constructed
+
+[main]
+1 Cut Down
+1 Farewell
+1 The Cruelty of Gix
+2 Unleash the Inferno
+2 Reckoner Bankbuster
+3 Courier's Briefcase
+3 Go for the Throat
+4 Herd Migration
+4 Drag to the Bottom
+4 Leyline Binding
+4 Fable of the Mirror-Breaker
+2 Contagious Vorrac
+3 Atraxa, Grand Unifier
+1 Brushland
+1 Shattered Sanctum
+1 Forest
+1 Island
+1 Plains
+1 Mountain
+1 Deathcap Glade
+1 Sundown Pass
+2 Swamp
+2 Haunted Ridge
+2 Xander's Lounge
+2 Raffine's Tower
+2 Ziatora's Proving Ground
+2 Spara's Headquarters
+3 Jetmir's Garden
+3 Llanowar Wastes
+
+[sideboard]
+1 Vampires' Vengeance
+1 Kaya, Intangible Slayer
+1 The Stone Brain
+1 Sheoldred, the Apocalypse
+3 Disdainful Stroke
+2 Archangel of Wrath
+4 Duress
+2 Cut Down

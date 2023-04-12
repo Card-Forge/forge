@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Márcio Carvalho
+Title=Elrond
+Difficulty=very hard
+Description=Red Deck Wins by Márcio Carvalho
+Icon=Elrond.jpg
+Deck Type=constructed
+
+[main]
+1 Phoenix of Ash
+1 Hall Monitor
+2 Rimrock Knight
+3 Torbran, Thane of Red Fell
+4 Robber of the Rich
+4 Anax, Hardened in the Forge
+4 Fireblade Charger
+4 Fervent Champion
+4 Bonecrusher Giant
+4 Embercleave
+4 Frost Bite
+2 Castle Embereth
+4 Faceless Haven
+19 Snow-Covered Mountain
+
+[sideboard]
+2 Phoenix of Ash
+2 Soul Sear
+2 Roiling Vortex
+2 Redcap Melee
+2 Ox of Agonas
+2 Scorching Dragonfire
+3 The Akroan War

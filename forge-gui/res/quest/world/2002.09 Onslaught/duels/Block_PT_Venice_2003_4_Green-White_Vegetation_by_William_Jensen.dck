@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Green-White Vegetation by William Jensen
+Title=Mind Stealer
+Difficulty=very hard
+Description=Green-White Vegetation by William Jensen
+Icon=Mind Stealer.jpg
+Deck Type=constructed
+
+[main]
+7 Forest|RTR
+7 Plains|RTR
+4 Secluded Steppe|C15
+4 Tranquil Thicket|C14
+4 Windswept Heath|KTK
+2 Akroma, Angel of Wrath|TSP
+2 Daru Sanctifier|LE
+4 Exalted Angel|ONS
+4 Ravenous Baloth|C13
+3 Silvos, Rogue Elemental|ONS
+4 Wall of Mulch|M15
+3 Windborn Muse|C16
+4 Wirewood Elf|ONS
+4 Akroma's Vengeance|CMD
+4 Explosive Vegetation|CN2
+
+[sideboard]
+1 Akroma, Angel of Wrath|TSP
+4 Broodhatch Nantuko|ONS
+3 Demystify|XLN
+2 Gigapede|ONS
+2 Oblation|C16
+3 Pacifism

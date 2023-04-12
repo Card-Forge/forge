@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=UW Control by Gregory Orange
+Title=Aspect of Order
+Difficulty=very hard
+Description=UW Control by Gregory Orange
+Icon=Aspect of Order.jpg
+Deck Type=constructed
+
+[main]
+1 Torrential Gearhulk|KLD
+2 Fumigate|KLD
+2 Glimmer of Genius|KLD
+1 Negate
+3 Settle the Wreckage|XLN
+2 Essence Scatter
+4 Disallow|AER
+2 Syncopate
+1 Blink of an Eye
+1 Commit // Memory|AKH
+2 Hieroglyphic Illumination|AKH
+2 Search for Azcanta|XLN
+3 Cast Out|AKH
+4 Seal Away
+7 Island
+6 Plains
+4 Glacial Fortress|XLN
+4 Irrigated Farmland|AKH
+2 Meandering River
+2 Field of Ruin|XLN
+1 Arch of Orazca
+4 Teferi, Hero of Dominaria
+
+[sideboard]
+2 Torrential Gearhulk|KLD
+1 Fumigate|KLD
+2 Negate
+1 Kefnet the Mindful|AKH
+1 Nezahal, Primal Tide
+3 Lyra Dawnbringer
+2 Forsake the Worldly|AKH
+1 Jace's Defeat|HOU
+1 Sorcerous Spyglass|XLN
+1 Aether Meltdown|KLD

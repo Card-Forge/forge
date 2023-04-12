@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=UW Control by Jesse Robkin
+Title=King Arthur
+Difficulty=very hard
+Description=UW Control by Jesse Robkin
+Icon=King Arthur.jpg
+Deck Type=constructed
+
+[main]
+1 Shark Typhoon
+1 Jace, the Mind Sculptor|WWK
+2 Chalice of the Void|MR
+2 Memory Deluge
+2 Teferi, Hero of Dominaria
+3 Supreme Verdict|RTR
+4 Archmage's Charm
+4 Counterspell|7E
+4 Prismatic Ending
+4 Teferi, Time Raveler
+4 Spreading Seas|ZEN
+4 Solitude
+1 Glacial Fortress|XLN
+1 Breeding Pool
+1 Hall of Storm Giants
+1 Plains
+1 Celestial Colonnade|WWK
+1 Raugrin Triome
+2 Castle Vantress
+2 Hallowed Fountain
+3 Mystic Gate|SHM
+4 Misty Rainforest|ZEN
+4 Island
+4 Flooded Strand|KTK
+
+[sideboard]
+2 Dovin's Veto
+2 Celestial Purge|M12
+2 Rest in Peace|RTR
+2 Dress Down
+1 Emrakul, the Aeons Torn|ROE
+1 Fracturing Gust|SHM
+1 Kaheera, the Orphanguard
+1 Force of Negation
+2 Shark Typhoon
+1 Chalice of the Void|MR

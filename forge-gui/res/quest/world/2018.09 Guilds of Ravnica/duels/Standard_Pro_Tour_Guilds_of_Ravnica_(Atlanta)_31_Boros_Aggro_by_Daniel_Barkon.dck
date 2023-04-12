@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Daniel Barkon
+Title=Dr Fate
+Difficulty=very hard
+Description=Boros Aggro by Daniel Barkon
+Icon=Dr Fate.jpg
+Deck Type=constructed
+
+[main]
+4 Snubhorn Sentry
+4 Skymarcher Aspirant
+3 Dauntless Bodyguard
+4 Adanto Vanguard|XLN
+3 Silverbeak Griffin
+1 Knight of Grace
+4 Benalish Marshal
+4 Heroic Reinforcements
+4 Legion's Landing|XLN
+4 History of Benalia
+3 Conclave Tribunal
+4 Clifftop Retreat
+4 Sacred Foundry
+1 Mountain
+13 Plains
+
+[sideboard]
+3 Baffling End
+1 Bounty Agent
+2 Banefire
+1 Settle the Wreckage|XLN
+3 Tocatli Honor Guard|XLN
+1 Make a Stand
+1 Pride of Conquerors
+2 Ajani, Adversary of Tyrants
+1 Response // Resurgence

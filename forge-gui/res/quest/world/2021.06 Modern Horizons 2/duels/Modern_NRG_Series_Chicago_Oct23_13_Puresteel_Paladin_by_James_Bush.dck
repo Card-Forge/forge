@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by James Bush
+Title=The Rock
+Difficulty=very hard
+Description=Puresteel Paladin by James Bush
+Icon=The Rock.jpg
+Deck Type=constructed
+
+[main]
+3 Ingenious Smith
+4 Stoneforge Mystic|WWK
+4 Puresteel Paladin|NPH
+4 Memnite|SOM
+4 Ornithopter|AER
+4 Esper Sentinel
+1 Cranial Plating|FD
+1 Shadowspear
+3 Mishra's Bauble|CS
+4 Colossus Hammer
+4 Springleaf Drum|BNG
+4 Sigarda's Aid|EMN
+4 Urza's Saga
+3 Inkmoth Nexus|MBS
+4 Silent Clearing
+4 Concealed Courtyard|KLD
+5 Snow-Covered Plains
+
+[sideboard]
+1 Lurrus of the Dream-Den
+1 Nihil Spellbomb|SOM
+1 Pithing Needle
+2 Void Mirror
+3 Prismatic Ending
+3 Sanctifier en-Vec
+4 Thoughtseize|THS

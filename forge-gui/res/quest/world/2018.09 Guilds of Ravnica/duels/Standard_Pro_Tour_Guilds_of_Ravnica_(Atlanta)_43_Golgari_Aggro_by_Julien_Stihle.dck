@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by Julien Stihle
+Title=Ramses Overdark
+Difficulty=very hard
+Description=Golgari Aggro by Julien Stihle
+Icon=Ramses Overdark.jpg
+Deck Type=constructed
+
+[main]
+2 Vivien Reid
+2 Vraska, Golgari Queen
+4 Jadelight Ranger
+4 Merfolk Branchwalker|XLN
+4 Wildgrowth Walker|XLN
+1 Doom Whisperer
+2 Carnage Tyrant|XLN
+1 Seekers' Squire|XLN
+2 Ravenous Chupacabra
+2 Midnight Reaper
+4 Llanowar Elves
+3 Find // Finality
+2 Vraska's Contempt|XLN
+2 Cast Down
+1 Assassin's Trophy
+1 Detection Tower
+8 Forest
+6 Swamp
+4 Woodland Cemetery
+4 Overgrown Tomb
+1 Memorial to Folly
+
+[sideboard]
+1 Vivien Reid
+2 Doom Whisperer
+1 Carnage Tyrant|XLN
+1 Midnight Reaper
+1 Vraska's Contempt|XLN
+1 Cast Down
+1 Assassin's Trophy
+3 Duress
+2 Kraul Harpooner
+1 Thrashing Brontodon
+1 Plaguecrafter

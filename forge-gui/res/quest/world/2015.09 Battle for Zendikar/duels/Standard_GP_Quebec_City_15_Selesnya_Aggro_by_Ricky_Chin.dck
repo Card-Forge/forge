@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Selesnya Aggro by Ricky Chin
+Title=IdiAmin
+Difficulty=very hard
+Description=Selesnya Aggro by Ricky Chin
+Icon=IdiAmin.jpg
+Deck Type=constructed
+
+[main]
+2 Silkwrap|DTK
+1 Valorous Stance|FRF
+4 Dromoka's Command|DTK
+3 Wingmate Roc|KTK
+4 Warden of the First Tree|FRF
+3 Nissa, Vastwood Seer|ORI
+2 Hidden Dragonslayer|DTK
+2 Knight of the White Orchid|ORI
+2 Hangarback Walker|ORI
+4 Den Protector|DTK
+4 Deathmist Raptor|DTK
+4 Gideon, Ally of Zendikar|BFZ
+3 Flooded Strand|KTK
+6 Forest|BFZ
+5 Plains|BFZ
+4 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+3 Canopy Vista|BFZ
+
+[sideboard]
+2 Valorous Stance|FRF
+2 Hangarback Walker|ORI
+1 Whisperwood Elemental|FRF
+2 Evolutionary Leap|ORI
+1 Gideon's Reproach|BFZ
+1 Mastery of the Unseen|FRF
+1 Radiant Purge|DTK
+2 Surge of Righteousness|DTK
+2 Tragic Arrogance|ORI
+1 Quarantine Field|BFZ

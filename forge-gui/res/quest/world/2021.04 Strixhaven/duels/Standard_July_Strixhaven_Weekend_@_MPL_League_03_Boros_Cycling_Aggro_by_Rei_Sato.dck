@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Boros Cycling Aggro by Rei Sato
+Title=Titania
+Difficulty=very hard
+Description=Boros Cycling Aggro by Rei Sato
+Icon=Titania.jpg
+Deck Type=constructed
+
+[main]
+3 Drannith Stinger
+4 Valiant Rescuer
+4 Flourishing Fox
+4 Irencrag Pyromancer
+2 Disdainful Stroke
+2 Shredded Sails
+3 Startling Development
+4 Zenith Flare
+2 Go for Blood
+4 Memory Leak
+4 Boon of the Wish-Giver
+4 Improbable Alliance
+1 Clearwater Pathway
+1 Blightstep Pathway
+1 Savai Triome
+1 Brightclimb Pathway
+4 Raugrin Triome
+4 Riverglide Pathway
+4 Needleverge Pathway
+4 Hengegate Pathway
+
+[sideboard]
+2 Disdainful Stroke
+1 Lurrus of the Dream-Den
+1 Banishing Light
+1 Glass Casket
+1 Soul-Guide Lantern
+1 Giant Killer
+2 Redcap Melee
+2 Fire Prophecy
+2 Negate
+2 Mystical Dispute

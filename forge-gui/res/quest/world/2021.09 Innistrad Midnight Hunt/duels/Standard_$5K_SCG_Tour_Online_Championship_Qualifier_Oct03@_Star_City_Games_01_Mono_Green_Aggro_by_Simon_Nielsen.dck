@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Simon Nielsen
+Title=Room-Blk
+Difficulty=very hard
+Description=Mono Green Aggro by Simon Nielsen
+Icon=Room-Blk.jpg
+Deck Type=constructed
+
+[main]
+2 Briarbridge Tracker
+4 Sculptor of Winter
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+4 Esika's Chariot
+1 Inscription of Abundance
+1 Snakeskin Veil
+4 Blizzard Brawl
+3 Unnatural Growth
+4 Ranger Class
+2 Lair of the Hydra
+4 Kazandu Mammoth
+4 Faceless Haven
+19 Snow-Covered Forest
+
+[sideboard]
+2 Briarbridge Tracker
+1 Snakeskin Veil
+2 Tajuru Blightblade
+2 Devouring Tendrils
+2 Outland Liberator
+3 Tangletrap
+3 Wrenn and Seven

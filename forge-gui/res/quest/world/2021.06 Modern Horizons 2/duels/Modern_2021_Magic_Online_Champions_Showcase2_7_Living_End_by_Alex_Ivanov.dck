@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Living End by Alex Ivanov
+Title=The Kings Contest
+Difficulty=very hard
+Description=Living End by Alex Ivanov
+Icon=The Kings Contest.jpg
+Deck Type=constructed
+
+[main]
+2 Brazen Borrower
+4 Striped Riverwinder|HOU
+4 Shardless Agent
+4 Waker of Waves
+4 Curator of Mysteries|AKH
+4 Architects of Will|ARB
+4 Grief
+4 Street Wraith|FUT
+4 Force of Negation
+4 Violent Outburst|ARB
+3 Living End|TSP
+1 Island
+1 Sunken Ruins|SHM
+1 Steam Vents
+1 Watery Grave
+1 Forest
+2 Misty Rainforest|ZEN
+2 Breeding Pool
+3 Spirebluff Canal|KLD
+3 Botanical Sanctum|KLD
+4 Flooded Strand|KTK
+
+[sideboard]
+2 Force of Vigor
+2 Endurance
+2 Subtlety
+2 Faerie Macabre|SHM
+3 Dead // Gone|PLC
+4 Foundation Breaker

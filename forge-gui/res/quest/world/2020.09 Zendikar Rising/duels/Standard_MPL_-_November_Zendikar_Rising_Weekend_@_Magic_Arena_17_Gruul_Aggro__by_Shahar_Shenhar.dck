@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Gruul Aggro  by Shahar Shenhar
+Title=Albert Einstein
+Difficulty=very hard
+Description=Gruul Aggro  by Shahar Shenhar
+Icon=Albert Einstein.jpg
+Deck Type=constructed
+
+[main]
+1 Questing Beast
+3 Scavenging Ooze
+4 Brushfire Elemental
+4 Lovestruck Beast
+4 Kazandu Mammoth
+4 Edgewall Innkeeper
+4 Bonecrusher Giant
+2 Embercleave
+3 The Great Henge
+2 Fire Prophecy
+1 Primal Might
+4 Shatterskull Smashing
+2 The Akroan War
+2 Evolving Wilds
+3 Mountain
+4 Cragcrown Pathway
+4 Fabled Passage
+9 Forest
+
+[sideboard]
+2 Fire Prophecy
+1 Soul Sear
+2 Phoenix of Ash
+2 Klothys, God of Destiny
+2 Vivien, Monsters' Advocate
+3 Ox of Agonas
+3 Thrashing Brontodon

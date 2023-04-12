@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Izzet Control by Logan Nettles
+Title=Gideon, Martial Paragon
+Difficulty=very hard
+Description=Izzet Control by Logan Nettles
+Icon=Gideon, Martial Paragon.jpg
+Deck Type=constructed
+
+[main]
+2 Smoldering Egg
+4 Goldspan Dragon
+2 Memory Deluge
+2 Fading Hope
+3 Galvanic Iteration
+3 Jwari Disruption
+4 Divide by Zero
+4 Dragon's Fire
+4 Unexpected Windfall
+4 Spikefield Hazard
+3 Alrund's Epiphany
+4 Expressive Iteration
+2 Hall of Storm Giants
+2 Field of Ruin
+4 Riverglide Pathway
+4 Stormcarved Coast
+4 Island
+5 Mountain
+
+[sideboard]
+1 Smoldering Egg
+1 Environmental Sciences
+1 Demon Bolt
+1 Mascot Exhibition
+1 Burn Down the House
+1 Teachings of the Archaics
+1 Hullbreaker Horror
+2 Test of Talents
+2 Burning Hands
+2 Malevolent Hermit
+2 Cinderclasm

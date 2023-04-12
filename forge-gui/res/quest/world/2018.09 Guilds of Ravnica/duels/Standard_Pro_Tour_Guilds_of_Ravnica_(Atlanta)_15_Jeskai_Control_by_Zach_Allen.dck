@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Zach Allen
+Title=Aspect of Evil
+Difficulty=very hard
+Description=Jeskai Control by Zach Allen
+Icon=Aspect of Evil.jpg
+Deck Type=constructed
+
+[main]
+3 Teferi, Hero of Dominaria
+4 Crackling Drake
+3 Niv-Mizzet, Parun
+2 Lava Coil
+4 Deafening Clarion
+1 Dive Down|XLN
+4 Opt
+1 Expansion // Explosion
+2 Justice Strike
+2 Negate
+4 Ionize
+2 Chemister's Insight
+1 Seal Away
+2 Search for Azcanta|XLN
+4 Clifftop Retreat
+4 Glacial Fortress|XLN
+4 Island
+1 Mountain
+4 Sacred Foundry
+4 Steam Vents
+4 Sulfur Falls
+
+[sideboard]
+1 Expansion // Explosion
+2 Seal Away
+1 Spell Pierce|XLN
+1 Disdainful Stroke
+1 Sinister Sabotage
+2 Ixalan's Binding|XLN
+1 Rekindling Phoenix
+1 Shalai, Voice of Plenty
+1 Lyra Dawnbringer
+2 Cleansing Nova
+2 Star of Extinction|XLN

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Mono White Control by Hirotaka Kawasaki
+Title=Emperor Palpatine
+Difficulty=very hard
+Description=Mono White Control by Hirotaka Kawasaki
+Icon=Emperor Palpatine.jpg
+Deck Type=constructed
+
+[main]
+1 Invoke Justice
+2 The Mightstone and Weakstone
+2 Reckoner Bankbuster
+2 Ossification
+2 The Eternal Wanderer
+2 Elspeth Resplendent
+2 The Restoration of Eiganjo
+4 Lay Down Arms
+4 Wedding Announcement
+4 The Wandering Emperor
+2 Recruitment Officer
+2 Loran of the Third Path
+2 Intrepid Adversary
+3 Serra Paragon
+4 Ambitious Farmhand
+1 Eiganjo, Seat of the Empire
+4 Roadside Reliquary
+17 Plains
+
+[sideboard]
+2 Thalia, Guardian of Thraben
+2 The Stone Brain
+2 Brutal Cathar
+2 Farewell
+1 Skrelv's Hive
+1 Temporary Lockdown
+1 Vanquish the Horde
+1 Cityscape Leveler
+1 Reckoner Bankbuster
+1 The Eternal Wanderer
+1 Loran of the Third Path

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Hardened Scales by Jin Liu
+Title=The Floating Isle
+Difficulty=very hard
+Description=Hardened Scales by Jin Liu
+Icon=The Floating Isle.jpg
+Deck Type=constructed
+
+[main]
+4 Arcbound Ravager|DS
+4 Arcbound Worker|DS
+4 Hangarback Walker|ORI
+3 Patchwork Automaton
+4 Walking Ballista|AER
+4 Zabaz, the Glimmerwasp
+1 Springleaf Drum|BNG
+3 The Ozolith
+2 Welding Jar|MR
+3 Ancient Stirrings|ROE
+4 Hardened Scales|KTK
+4 Urza's Saga
+2 Boseiju, Who Endures
+4 Cragcrown Pathway
+3 Forest
+1 Gemstone Caverns|TSP
+1 Horizon Canopy|FUT
+4 Inkmoth Nexus|MBS
+2 Mirrex
+1 Pendelhaven|TSP
+2 Power Depot
+
+[sideboard]
+3 Dismember|NPH
+1 Emrakul, the Aeons Torn|ROE
+1 Haywire Mite
+1 Natural State|OGW
+1 Nature's Claim|WWK
+2 Orvar, the All-Form
+1 Pithing Needle
+1 Relic of Progenitus|ALA
+2 Soulless Jailer
+2 Tamiyo's Safekeeping

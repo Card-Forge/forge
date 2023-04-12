@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Joel Calafell
+Title=Angelic Might
+Difficulty=very hard
+Description=Temur Reclamation by Joel Calafell
+Icon=Angelic Might.jpg
+Deck Type=constructed
+
+[main]
+4 Temple Garden
+4 Fabled Passage
+4 Ketria Triome
+4 Raugrin Triome
+3 Breeding Pool
+2 Castle Vantress
+2 Island
+2 Forest
+1 Mountain
+1 Hallowed Fountain
+1 Plains
+1 Stomping Ground
+4 Wilderness Reclamation
+4 Shark Typhoon
+4 Expansion // Explosion
+4 Growth Spiral
+4 Dovin's Veto
+3 Mystical Dispute
+4 Nightpack Ambusher
+2 Brazen Borrower
+2 Uro, Titan of Nature's Wrath
+
+[sideboard]
+4 Scorching Dragonfire
+4 Deafening Clarion
+3 Elder Gargaroth
+2 Giant Killer
+2 Commence the Endgame

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Temur Ultimatum by Ken Yukuhiro
+Title=Marhault Elsdragon
+Difficulty=very hard
+Description=Temur Ultimatum by Ken Yukuhiro
+Icon=Marhault Elsdragon.jpg
+Deck Type=constructed
+
+[main]
+4 Ketria Triome
+4 Wolfwillow Haven
+1 Spikefield Hazard
+1 Sea Gate Restoration
+2 Bala Ged Recovery
+4 Cultivate
+2 Solemn Simulacrum
+4 Riverglide Pathway
+2 Mountain
+4 Island
+4 Forest
+4 Fabled Passage
+3 Cragcrown Pathway
+3 Shark Typhoon
+2 Scorching Dragonfire
+4 Genesis Ultimatum
+4 Ugin, the Spirit Dragon
+4 Bonecrusher Giant
+4 Beanstalk Giant
+
+[sideboard]
+4 Cinderclasm
+2 Chainweb Aracnir
+2 Phoenix of Ash
+1 Negate
+4 Mystical Dispute
+1 Shark Typhoon
+1 Scorching Dragonfire

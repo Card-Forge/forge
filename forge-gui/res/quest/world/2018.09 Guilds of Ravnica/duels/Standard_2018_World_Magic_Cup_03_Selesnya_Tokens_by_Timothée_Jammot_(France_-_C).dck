@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Selesnya Tokens by Timothée Jammot (France - C)
+Title=Tron
+Difficulty=very hard
+Description=Selesnya Tokens by Timothée Jammot (France - C)
+Icon=Tron.jpg
+Deck Type=constructed
+
+[main]
+2 Ajani, Adversary of Tyrants
+3 Emmara, Soul of the Accord
+4 Adanto Vanguard|XLN
+3 Trostani Discordant
+4 Venerated Loxodon
+4 Flower // Flourish
+4 Saproling Migration
+4 March of the Multitudes
+3 Legion's Landing|XLN
+4 History of Benalia
+4 Conclave Tribunal
+7 Plains
+5 Forest
+4 Sunpetal Grove|XLN
+4 Temple Garden
+1 Arch of Orazca
+
+[sideboard]
+1 Ajani, Adversary of Tyrants
+4 Nullhide Ferox
+1 Thorn Lieutenant
+2 Kraul Harpooner
+1 The Immortal Sun
+3 Knight of Autumn
+3 Baffling End

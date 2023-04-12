@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Mono Black Aggro by Samuel Leduc Gauthier
+Title=Secret Squirrel
+Difficulty=very hard
+Description=Mono Black Aggro by Samuel Leduc Gauthier
+Icon=Secret Squirrel.jpg
+Deck Type=constructed
+
+[main]
+2 Gix, Yawgmoth Praetor
+3 Graveyard Trespasser
+4 Phyrexian Fleshgorger
+4 Tenacious Underdog
+4 Evolved Sleeper
+4 Razorlash Transmogrant
+3 Sheoldred, the Apocalypse
+4 Cut Down
+3 Go for the Throat
+1 Sheoldred's Edict
+3 Invoke Despair
+2 Mirrex
+1 Takenuma, Abandoned Mire
+22 Swamp
+
+[sideboard]
+1 Graveyard Trespasser
+3 Sheoldred's Edict
+3 Path of Peril
+4 Duress
+3 Reckoner Bankbuster
+1 Gix's Command

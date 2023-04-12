@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Gruul Aggro  by Márcio Carvalho
+Title=Milling Martyrs
+Difficulty=very hard
+Description=Gruul Aggro  by Márcio Carvalho
+Icon=Milling Martyrs.jpg
+Deck Type=constructed
+
+[main]
+1 Questing Beast
+2 Embereth Shieldbreaker
+3 Scavenging Ooze
+4 Kazandu Mammoth
+4 Lovestruck Beast
+4 Brushfire Elemental
+4 Edgewall Innkeeper
+4 Bonecrusher Giant
+2 The Great Henge
+3 Embercleave
+2 Fire Prophecy
+4 Shatterskull Smashing
+2 Vivien, Monsters' Advocate
+4 Cragcrown Pathway
+4 Fabled Passage
+4 Mountain
+9 Forest
+
+[sideboard]
+1 Scavenging Ooze
+1 Vivien, Monsters' Advocate
+1 Phoenix of Ash
+1 Scorching Dragonfire
+2 Wilt
+2 The Akroan War
+2 Ox of Agonas
+2 Soul Sear
+3 Klothys, God of Destiny

@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Grixis Food by Andrea Marra
+Title=Bouncy Bouncy
+Difficulty=very hard
+Description=Grixis Food by Andrea Marra
+Icon=Bouncy Bouncy.jpg
+Deck Type=constructed
+
+[main]
+3 Emry, Lurker of the Loch
+4 Asmoranomardicadaistinaculdacar
+3 Urza, Lord High Artificer
+4 Street Wraith|FUT
+4 Ragavan, Nimble Pilferer
+4 Ovalchase Daredevil|KLD
+1 Thought Monitor
+2 Metallic Rebuke|AER
+1 Galvanic Blast|SOM
+1 Bone Shards
+1 Springleaf Drum|BNG
+1 Pithing Needle|RTR
+1 Shadowspear
+2 Mox Amber
+4 Mishra's Bauble|CS
+4 The Underworld Cookbook
+4 Urza's Saga
+1 Flooded Strand|KTK
+2 Steam Vents
+3 Scalding Tarn|ZEN
+4 Spirebluff Canal|KLD
+1 Polluted Delta|KTK
+2 Watery Grave
+1 Island
+1 Mountain
+1 Misty Rainforest|ZEN
+
+[sideboard]
+2 Galvanic Blast|SOM
+2 Ghirapur Aether Grid|ORI
+2 Thoughtseize|THS
+2 Aether Gust
+2 Ashiok, Dream Render
+1 Kozilek, Butcher of Truth|ROE
+2 Abrade|HOU
+1 Tezzeret, Agent of Bolas|MBS
+1 Engineered Explosives|FD

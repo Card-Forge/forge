@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Goilgari Aggro by Shaun McLaren
+Title=M Bison
+Difficulty=very hard
+Description=Goilgari Aggro by Shaun McLaren
+Icon=M Bison.jpg
+Deck Type=constructed
+
+[main]
+3 Nissa, Voice of Zendikar|OGW
+1 Ob Nixilis Reignited|BFZ
+4 Grim Flayer|EMN
+2 Mindwrack Demon|SOI
+1 Kalitas, Traitor of Ghet|OGW
+2 Rishkar, Peema Renegade|AER
+2 Verdurous Gearhulk|KLD
+4 Walking Ballista|AER
+4 Winding Constrictor|AER
+4 Tireless Tracker|SOI
+4 Traverse the Ulvenwald|SOI
+2 Ruinous Path|BFZ
+1 To the Slaughter|SOI
+4 Fatal Push|AER
+3 Evolving Wilds
+4 Blooming Marsh|KLD
+7 Forest|RTR
+4 Hissing Quagmire|OGW
+4 Swamp|RTR
+
+[sideboard]
+1 Ob Nixilis Reignited|BFZ
+1 Kalitas, Traitor of Ghet|OGW
+1 To the Slaughter|SOI
+1 Appetite for the Unnatural|KLD
+1 Natural State|OGW
+4 Transgress the Mind|BFZ
+2 Pick the Brain|SOI
+1 Yahenni's Expertise|AER
+1 Liliana, the Last Hope|EMN
+1 Ishkanah, Grafwidow|EMN
+1 Grasp of Darkness|OGW

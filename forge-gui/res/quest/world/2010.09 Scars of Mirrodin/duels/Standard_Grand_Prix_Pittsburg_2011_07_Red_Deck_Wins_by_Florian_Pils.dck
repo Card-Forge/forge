@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Florian Pils
+Title=High Priest
+Difficulty=very hard
+Description=Red Deck Wins by Florian Pils
+Icon=High Priest.jpg
+Deck Type=constructed
+
+[main]
+3 Chandra's Phoenix|M12
+4 Ember Hauler|M11
+4 Goblin Guide|ZEN
+4 Grim Lavamancer|M12
+4 Hero of Oxid Ridge|MBS
+1 Burst Lightning|ZEN
+1 Forked Bolt|ROE
+4 Lightning Bolt|M11
+4 Searing Blaze|WWK
+4 Shrine of Burning Rage|NPH
+4 Staggershock|ROE
+4 Arid Mesa|ZEN
+11 Mountain|M12
+4 Scalding Tarn|ZEN
+4 Teetering Peaks|ZEN
+
+[sideboard]
+2 Forked Bolt|ROE
+2 Act of Aggression|NPH
+1 Arc Trail|SOM
+3 Dismember|NPH
+3 Manic Vandal|M12
+1 Mark of Mutiny|ZEN
+1 Sword of War and Peace|NPH
+2 Vulshok Refugee|NPH

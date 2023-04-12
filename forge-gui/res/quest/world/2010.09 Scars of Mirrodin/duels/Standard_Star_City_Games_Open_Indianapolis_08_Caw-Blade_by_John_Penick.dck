@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Caw-Blade by John Penick
+Title=The Pitdown Bog
+Difficulty=very hard
+Description=Caw-Blade by John Penick
+Icon=The Pitdown Bog.jpg
+Deck Type=constructed
+
+[main]
+2 Phyrexian Metamorph|NPH
+2 Spellskite|NPH
+4 Squadron Hawk|M11
+4 Stoneforge Mystic|WWK
+2 Dismember|NPH
+3 Mana Leak|M11
+2 Mental Misstep|NPH
+3 Spell Pierce|ZEN
+4 Preordain|M11
+1 Batterskull|NPH
+1 Sword of Feast and Famine|MBS
+1 Sword of War and Peace|NPH
+4 Island|NPH
+4 Plains|NPH
+4 Celestial Colonnade|WWK
+4 Glacial Fortress|M11
+3 Inkmoth Nexus|MBS
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+4 Jace, the Mind Sculptor|WWK
+
+[sideboard]
+2 Spellskite|NPH
+1 Dismember|NPH
+2 Mental Misstep|NPH
+1 Batterskull|NPH
+1 Sun Titan|M11
+3 Divine Offering|MBS
+2 Flashfreeze|M11
+3 Day of Judgment|M11

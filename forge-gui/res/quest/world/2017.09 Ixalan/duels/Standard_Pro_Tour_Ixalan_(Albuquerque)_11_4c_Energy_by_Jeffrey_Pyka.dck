@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=4c Energy by Jeffrey Pyka
+Title=Dungeon Crawling Blue
+Difficulty=very hard
+Description=4c Energy by Jeffrey Pyka
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Torch of Defiance|KLD
+4 Servant of the Conduit|KLD
+4 Longtusk Cub|KLD
+4 Rogue Refiner|AER
+4 Whirler Virtuoso|KLD
+3 Bristling Hydra|KLD
+3 Glorybringer|AKH
+2 The Scarab God|HOU
+4 Attune with Aether|KLD
+1 Magma Spray|AKH
+2 Abrade|HOU
+4 Harnessed Lightning|KLD
+3 Forest|XLN
+2 Mountain|XLN
+1 Island|XLN
+1 Swamp|XLN
+4 Botanical Sanctum|KLD
+4 Aether Hub|KLD
+3 Rootbound Crag|XLN
+1 Sheltered Thicket|AKH
+3 Spirebluff Canal|KLD
+1 Blooming Marsh|KLD
+
+[sideboard]
+1 Chandra, Torch of Defiance|KLD
+2 Magma Spray|AKH
+1 Abrade|HOU
+3 Spell Pierce|XLN
+2 Negate|AER
+1 Supreme Will|HOU
+1 Vizier of Many Faces|AKH
+2 Confiscation Coup|KLD
+2 Vraska, Relic Seeker|XLN

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Thibaud Leclerc
+Title=Nissa, Steward of Elements
+Difficulty=very hard
+Description=Rakdos Aggro by Thibaud Leclerc
+Icon=Nissa, Steward of Elements.jpg
+Deck Type=constructed
+
+[main]
+1 Shatterskull Smashing
+1 Lolth, Spider Queen
+2 Infernal Grasp
+3 Ob Nixilis, the Adversary
+3 The Meathook Massacre
+4 Voltage Surge
+4 Deadly Dispute
+4 Experimental Synthesizer
+4 Oni-Cult Anvil
+4 Fable of the Mirror-Breaker
+4 Voldaren Epicure
+4 Bloodtithe Harvester
+1 Sokenzan, Crucible of Defiance
+1 Den of the Bugbear
+1 Takenuma, Abandoned Mire
+2 Hive of the Eye Tyrant
+4 Haunted Ridge
+4 Blightstep Pathway
+4 Mountain
+5 Swamp
+
+[sideboard]
+4 Ray of Enfeeblement
+3 Duress
+2 Graveyard Trespasser
+2 Sorin the Mirthless
+1 Abrade
+1 Lolth, Spider Queen
+1 Infernal Grasp
+1 Ob Nixilis, the Adversary

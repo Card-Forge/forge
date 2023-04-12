@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Walaoumpa
+Title=Gaea
+Difficulty=very hard
+Description=Rakdos Aggro by Walaoumpa
+Icon=Gaea.jpg
+Deck Type=constructed
+
+[main]
+1 Gutterbones
+1 Cavalier of Night
+2 Rankle, Master of Pranks
+4 Dreadhorde Butcher
+4 Mayhem Devil
+4 Midnight Reaper
+4 Priest of Forgotten Gods
+4 Woe Strider
+4 Cauldron Familiar
+4 Witch's Oven
+4 Claim the Firstborn
+2 Castle Locthwain
+3 Fabled Passage
+4 Temple of Malice
+4 Mountain
+4 Blood Crypt
+7 Swamp
+
+[sideboard]
+2 Angrath's Rampage
+2 Treacherous Blessing
+2 Chandra, Acolyte of Flame
+3 Duress
+1 Cavalier of Night
+1 Epic Downfall
+1 Embereth Shieldbreaker
+1 Scorching Dragonfire
+1 Act of Treason
+1 Agonizing Remorse

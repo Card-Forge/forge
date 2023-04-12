@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Mono White Control by Lucas Cattoni
+Title=Squeezed
+Difficulty=very hard
+Description=Mono White Control by Lucas Cattoni
+Icon=Squeezed.jpg
+Deck Type=constructed
+
+[main]
+1 Fateful Absence
+1 Destroy Evil
+2 Ossification
+2 The Eternal Wanderer
+2 The Restoration of Eiganjo
+4 Wedding Announcement
+4 Lay Down Arms
+4 Reckoner Bankbuster
+4 The Wandering Emperor
+1 Cathar Commando
+2 Loran of the Third Path
+2 Ao, the Dawn Sky
+2 Spirited Companion
+2 Ambitious Farmhand
+3 Serra Paragon
+1 Eiganjo, Seat of the Empire
+2 Roadside Reliquary
+3 Demolition Field
+4 Field of Ruin
+14 Plains
+
+[sideboard]
+1 Farewell
+2 The Stone Brain
+3 Depopulate
+2 Unlicensed Hearse
+4 Skrelv's Hive
+1 Fateful Absence
+1 Ossification
+1 Loran of the Third Path

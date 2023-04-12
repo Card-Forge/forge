@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Sultai Control by Nagul
+Title=alaemp
+Difficulty=very hard
+Description=Sultai Control by Nagul
+Icon=alaemp.jpg
+Deck Type=constructed
+
+[main]
+3 Nissa, Who Shakes the World
+3 Casualties of War
+3 Aether Gust
+4 Thought Erasure
+4 Growth Spiral
+2 Polukranos, Unchained
+4 Cavalier of Thorns
+4 Uro, Titan of Nature's Wrath
+4 Hydroid Krasis
+2 Swamp
+2 Island
+3 Forest
+3 Temple of Mystery
+3 Temple of Malady
+4 Breeding Pool
+4 Fabled Passage
+4 Overgrown Tomb
+4 Watery Grave
+
+[sideboard]
+1 Disdainful Stroke
+1 Thought Distortion
+1 Negate
+2 Disfigure
+1 Cry of the Carnarium
+2 Epic Downfall
+2 Ritual of Soot
+2 Vraska, Golgari Queen
+2 Mystical Dispute
+1 Aether Gust

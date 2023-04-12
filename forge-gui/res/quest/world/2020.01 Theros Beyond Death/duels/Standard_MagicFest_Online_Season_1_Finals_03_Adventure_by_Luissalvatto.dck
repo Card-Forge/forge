@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Adventure by Luissalvatto
+Title=SerendibGenie
+Difficulty=very hard
+Description=Adventure by Luissalvatto
+Icon=SerendibGenie.jpg
+Deck Type=constructed
+
+[main]
+6 Forest
+4 Island
+4 Breeding Pool
+4 Stomping Ground
+3 Steam Vents
+2 Temple of Abandon
+2 Mountain
+1 Temple of Mystery
+1 Temple of Epiphany
+1 Tamiyo, Collector of Tales
+3 Escape to the Wilds
+1 Aether Gust
+4 Lucky Clover
+4 Beanstalk Giant
+4 Lovestruck Beast
+4 Fae of Wishes
+4 Edgewall Innkeeper
+4 Bonecrusher Giant
+3 Brazen Borrower
+1 Robber of the Rich
+
+[sideboard]
+3 Scorching Dragonfire
+1 Redcap Melee
+1 Shadowspear
+1 Planewide Celebration
+1 Cindervines
+1 Grafdigger's Cage
+1 Mystic Repeal
+1 Negate
+1 Once and Future
+1 Storm's Wrath
+1 Escape to the Wilds
+1 Aether Gust
+1 Robber of the Rich

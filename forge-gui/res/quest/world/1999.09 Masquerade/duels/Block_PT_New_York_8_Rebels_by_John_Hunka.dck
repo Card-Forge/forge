@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Rebels by John Hunka
+Title=Quest for Ulas Temple
+Difficulty=very hard
+Description=Rebels by John Hunka
+Icon=Quest for Ulas Temple.jpg
+Deck Type=constructed
+
+[main]
+1 Defiant Falcon|NE
+1 Defiant Vanguard|TSP
+2 Fresh Volunteers|MM
+1 Jhovall Queen|MM
+1 Lightbringer|NE
+4 Lin Sivvi, Defiant Hero|NE
+1 Ramosian Lieutenant|MM
+4 Ramosian Sergeant|MM
+1 Ramosian Sky Marshal|MM
+4 Steadfast Guard|10E
+4 Disenchant|CN2
+4 Parallax Wave|NE
+4 Ramosian Rally|MM
+4 Reverent Mantra|MM
+4 Rishadan Port|MM
+20 Plains|RTR
+
+[sideboard]
+1 Defiant Falcon|NE
+2 Fresh Volunteers|MM
+1 Ramosian Captain|MM
+4 Seal of Cleansing|C15
+3 Story Circle|10E
+4 Topple|NE

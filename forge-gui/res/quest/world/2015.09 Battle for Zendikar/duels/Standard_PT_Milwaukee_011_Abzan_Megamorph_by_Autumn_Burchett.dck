@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Abzan Megamorph by Autumn Burchett
+Title=Radiant
+Difficulty=very hard
+Description=Abzan Megamorph by Autumn Burchett
+Icon=Radiant.jpg
+Deck Type=constructed
+
+[main]
+1 Stasis Snare|BFZ
+1 Valorous Stance|FRF
+2 Silkwrap|DTK
+4 Dromoka's Command|DTK
+1 Nissa, Vastwood Seer|ORI
+1 Whisperwood Elemental|FRF
+2 Hangarback Walker|ORI
+2 Hidden Dragonslayer|DTK
+3 Wingmate Roc|KTK
+3 Archangel of Tithes|ORI
+3 Knight of the White Orchid|ORI
+4 Den Protector|DTK
+4 Deathmist Raptor|DTK
+4 Warden of the First Tree|FRF
+3 Canopy Vista|BFZ
+4 Forest|BFZ
+4 Wooded Foothills|KTK
+4 Flooded Strand|KTK
+4 Windswept Heath|KTK
+6 Plains|BFZ
+
+[sideboard]
+1 Celestial Flare|ORI
+3 Evolutionary Leap|ORI
+1 Gideon's Reproach|BFZ
+2 Surge of Righteousness|DTK
+2 Lantern Scout|BFZ
+1 Stasis Snare|BFZ
+1 Valorous Stance|FRF
+2 Silkwrap|DTK
+1 Nissa, Vastwood Seer|ORI
+1 Whisperwood Elemental|FRF

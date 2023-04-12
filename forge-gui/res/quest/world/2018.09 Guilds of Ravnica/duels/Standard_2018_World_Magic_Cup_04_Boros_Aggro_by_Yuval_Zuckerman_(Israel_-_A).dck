@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Yuval Zuckerman (Israel - A)
+Title=The Shattered Isles
+Difficulty=very hard
+Description=Boros Aggro by Yuval Zuckerman (Israel - A)
+Icon=The Shattered Isles.jpg
+Deck Type=constructed
+
+[main]
+4 Adanto Vanguard|XLN
+4 Benalish Marshal
+4 Dauntless Bodyguard
+4 Skymarcher Aspirant
+3 Venerated Loxodon
+4 Hunted Witness
+4 Heroic Reinforcements
+4 Conclave Tribunal
+4 History of Benalia
+4 Legion's Landing|XLN
+12 Plains
+4 Clifftop Retreat
+4 Sacred Foundry
+1 Stone Quarry
+
+[sideboard]
+4 Tocatli Honor Guard|XLN
+3 Experimental Frenzy
+2 Ajani, Adversary of Tyrants
+2 Banefire
+1 Mountain
+3 Baffling End

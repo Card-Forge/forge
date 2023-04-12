@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=UB Control  by Ondřej Stráský
+Title=Room-Wht
+Difficulty=very hard
+Description=UB Control  by Ondřej Stráský
+Icon=Room-Wht.jpg
+Deck Type=constructed
+
+[main]
+1 Cling to Dust
+1 Essence Scatter
+2 Heartless Act
+3 Agadeem's Awakening
+4 Drown in the Loch
+4 Into the Story
+4 Bloodchief's Thirst
+4 Lullmage's Domination
+3 Ruin Crab
+4 Soaring Thought-Thief
+4 Thieves' Guild Enforcer
+4 Merfolk Windrobber
+2 Zagoth Triome
+3 Swamp
+4 Clearwater Pathway
+4 Temple of Deceit
+4 Fabled Passage
+5 Island
+
+[sideboard]
+4 Skyclave Shade
+4 Mystical Dispute
+2 Negate
+1 Lurrus of the Dream-Den
+3 Cling to Dust
+1 Essence Scatter

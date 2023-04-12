@@ -1,0 +1,58 @@
+[duel]
+[metadata]
+Name=4c Yorion by Sakata Naoya
+Title=Boris Karloff
+Difficulty=very hard
+Description=4c Yorion by Sakata Naoya
+Icon=Boris Karloff.jpg
+Deck Type=constructed
+
+[main]
+1 Endurance
+2 Eternal Witness|FD
+2 Fury
+3 Ice-Fang Coatl
+4 Solitude
+4 Omnath, Locus of Creation
+2 Ephemerate
+2 Force of Negation
+2 Lightning Bolt|M11
+2 Eladamri's Call|PS
+3 Counterspell|7E
+1 Time Warp|M10
+4 Expressive Iteration
+4 Prismatic Ending
+3 Spreading Seas|ZEN
+4 Abundant Growth|AVR
+4 Teferi, Time Raveler
+4 Wrenn and Six
+1 Scalding Tarn|ZEN
+1 Ketria Triome
+1 Raugrin Triome
+1 Breeding Pool
+1 Steam Vents
+1 Stomping Ground
+1 Hallowed Fountain
+1 Temple Garden
+1 Snow-Covered Plains
+1 Snow-Covered Mountain
+1 Sacred Foundry
+2 Snow-Covered Forest
+2 Snow-Covered Island
+3 Flooded Strand|KTK
+3 Wooded Foothills|KTK
+4 Windswept Heath|KTK
+4 Misty Rainforest|ZEN
+
+[sideboard]
+1 Engineered Explosives|FD
+1 Yorion, Sky Nomad
+1 Subtlety
+1 Knight of Autumn
+1 Emrakul, the Promised End|EMN
+1 Alpine Moon
+1 Obsidian Charmaw
+2 Veil of Summer
+2 Force of Vigor
+2 Lightning Helix|RAV
+2 Relic of Progenitus|ALA

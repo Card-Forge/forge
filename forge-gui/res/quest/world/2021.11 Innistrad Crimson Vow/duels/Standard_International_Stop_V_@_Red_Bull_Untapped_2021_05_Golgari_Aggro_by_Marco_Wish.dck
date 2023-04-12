@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by Marco Wish
+Title=Samantha Stephens
+Difficulty=very hard
+Description=Golgari Aggro by Marco Wish
+Icon=Samantha Stephens.jpg
+Deck Type=constructed
+
+[main]
+2 Power Word Kill
+2 Path of Peril
+4 Infernal Grasp
+4 Esika's Chariot
+1 Primal Adversary
+3 Tangled Florahedron
+4 Tainted Adversary
+4 Graveyard Trespasser
+4 Briarbridge Tracker
+4 Ulvenwald Oddity
+4 Prosperous Innkeeper
+1 Forest
+2 Branchloft Pathway
+2 Hive of the Eye Tyrant
+2 Lair of the Hydra
+4 Brightclimb Pathway
+4 Darkbore Pathway
+4 Deathcap Glade
+5 Swamp
+
+[sideboard]
+4 Duress
+4 Check for Traps
+2 The Meathook Massacre
+2 Bloodchief's Thirst
+1 Sorin the Mirthless
+2 Path of Peril

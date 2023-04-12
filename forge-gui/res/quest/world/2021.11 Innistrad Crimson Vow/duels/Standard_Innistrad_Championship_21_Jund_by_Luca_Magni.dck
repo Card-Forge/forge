@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Jund by Luca Magni
+Title=Pogo
+Difficulty=very hard
+Description=Jund by Luca Magni
+Icon=Pogo.jpg
+Deck Type=constructed
+
+[main]
+2 Infernal Grasp
+2 Snakeskin Veil
+2 Shatterskull Smashing
+3 Ranger Class
+4 Esika's Chariot
+2 Briarbridge Tracker
+2 Goldspan Dragon
+2 Immersturm Predator
+2 Graveyard Trespasser
+4 Jaspera Sentinel
+4 Reckless Stormseeker
+4 Werewolf Pack Leader
+4 Magda, Brazen Outlaw
+2 Forest
+2 Lair of the Hydra
+3 Deathcap Glade
+4 Darkbore Pathway
+4 Blightstep Pathway
+4 Rockfall Vale
+4 Cragcrown Pathway
+
+[sideboard]
+3 Ray of Enfeeblement
+3 Crush the Weak
+2 Kessig Naturalist
+2 Go Blank
+1 Thundering Rebuke
+2 Snakeskin Veil
+1 Immersturm Predator
+1 Graveyard Trespasser

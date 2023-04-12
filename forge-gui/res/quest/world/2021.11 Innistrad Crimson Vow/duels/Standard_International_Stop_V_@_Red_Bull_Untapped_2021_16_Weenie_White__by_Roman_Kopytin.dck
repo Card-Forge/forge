@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Weenie White  by Roman Kopytin
+Title=Swift Justice
+Difficulty=very hard
+Description=Weenie White  by Roman Kopytin
+Icon=Swift Justice.jpg
+Deck Type=constructed
+
+[main]
+2 Skyclave Apparition
+2 Intrepid Adversary
+2 Brutal Cathar
+3 Adeline, Resplendent Cathar
+3 Thalia, Guardian of Thraben
+4 Clarion Spirit
+4 Monk of the Open Hand
+4 Hopeful Initiate
+4 Usher of the Fallen
+4 Luminarch Aspirant
+2 Maul of the Skyclaves
+3 Paladin Class
+4 Faceless Haven
+19 Snow-Covered Plains
+
+[sideboard]
+2 Skyclave Apparition
+1 Thalia, Guardian of Thraben
+1 Elite Spellbinder
+2 Circle of Confinement
+2 Valorous Stance
+2 Guardian of Faith
+2 Reidane, God of the Worthy
+3 Portable Hole

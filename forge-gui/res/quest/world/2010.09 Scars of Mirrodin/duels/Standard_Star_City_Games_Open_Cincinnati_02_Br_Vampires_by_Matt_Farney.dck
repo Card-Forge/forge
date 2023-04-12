@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Br Vampires by Matt Farney
+Title=The Spectre
+Difficulty=very hard
+Description=Br Vampires by Matt Farney
+Icon=The Spectre.jpg
+Deck Type=constructed
+
+[main]
+4 Bloodghast|ZEN
+4 Gatekeeper of Malakir|ZEN
+4 Kalastria Highborn|WWK
+4 Vampire Hexmage|ZEN
+4 Vampire Lacerator|ZEN
+3 Viscera Seer|M11
+4 Dismember|NPH
+3 Go for the Throat|MBS
+4 Lightning Bolt|M11
+3 Arc Trail|SOM
+8 Swamp|M12
+4 Blackcleave Cliffs|SOM
+4 Dragonskull Summit|M12
+3 Lavaclaw Reaches|WWK
+4 Marsh Flats|ZEN
+
+[sideboard]
+1 Go for the Throat|MBS
+3 Shatter|SOM
+3 Sorin's Thirst|M12
+3 Surgical Extraction|NPH
+1 Mimic Vat|SOM
+3 Ratchet Bomb|SOM
+1 Tectonic Edge|WWK

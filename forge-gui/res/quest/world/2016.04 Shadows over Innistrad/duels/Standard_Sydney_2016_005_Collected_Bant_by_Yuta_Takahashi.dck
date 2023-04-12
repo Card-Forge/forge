@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Collected Bant by Yuta Takahashi
+Title=Ikenga
+Difficulty=very hard
+Description=Collected Bant by Yuta Takahashi
+Icon=Ikenga.jpg
+Deck Type=constructed
+
+[main]
+4 Duskwatch Recruiter|SOI
+4 Reflector Mage|OGW
+4 Spell Queller|EMN
+4 Sylvan Advocate|OGW
+4 Tireless Tracker|SOI
+4 Jace, Vryn's Prodigy|ORI
+2 Nissa, Vastwood Seer|ORI
+4 Collected Company|DTK
+4 Dromoka's Command|DTK
+1 Ojutai's Command|DTK
+4 Forest|RTR
+1 Island|RTR
+4 Plains|RTR
+3 Canopy Vista|BFZ
+4 Evolving Wilds
+2 Lumbering Falls|BFZ
+3 Prairie Stream|BFZ
+4 Yavimaya Coast|ORI
+
+[sideboard]
+3 Lambholt Pacifist|SOI
+4 Negate
+2 Declaration in Stone|SOI
+2 Hallowed Moonlight|ORI
+1 Summary Dismissal|EMN
+2 Lantern Scout|BFZ
+1 Caustic Caterpillar|ORI

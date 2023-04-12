@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mono Black Midrange by Naoya Okada
+Title=Two Feathers
+Difficulty=very hard
+Description=Mono Black Midrange by Naoya Okada
+Icon=Two Feathers.jpg
+Deck Type=constructed
+
+[main]
+2 Cut Down
+3 Reckoner Bankbuster
+3 Duress
+3 Invoke Despair
+4 Go for the Throat
+4 Tribute to Horobi
+2 Graveyard Trespasser
+3 Evolved Sleeper
+3 Tenacious Underdog
+3 Sheoldred, the Apocalypse
+4 Phyrexian Fleshgorger
+1 Takenuma, Abandoned Mire
+4 Mishra's Foundry
+21 Swamp
+
+[sideboard]
+2 Infernal Grasp
+2 Anoint with Affliction
+2 Karn's Sylex
+2 Gix's Command
+1 Sheoldred's Edict
+1 Unlicensed Hearse
+1 Path of Peril
+1 Cut Down
+1 Reckoner Bankbuster
+1 Duress
+1 Sheoldred, the Apocalypse

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Kyle Palmer
+Title=alaajani
+Difficulty=very hard
+Description=Gruul Aggro by Kyle Palmer
+Icon=alaajani.jpg
+Deck Type=constructed
+
+[main]
+2 The Akroan War
+2 Kazuul's Fury
+3 Embercleave
+3 Esika's Chariot
+4 Shatterskull Smashing
+3 Goldspan Dragon
+4 Edgewall Innkeeper
+4 Jaspera Sentinel
+4 Lovestruck Beast
+4 Magda, Brazen Outlaw
+4 Bonecrusher Giant
+4 Rimrock Knight
+1 Hall of Oracles
+2 Lair of the Hydra
+4 Cragcrown Pathway
+4 Barkchannel Pathway
+4 Forest
+4 Riverglide Pathway
+
+[sideboard]
+4 Redcap Melee
+3 Ox of Agonas
+3 Disdainful Stroke
+2 Burning Hands
+2 Masked Vandal
+1 Mythos of Vadrok

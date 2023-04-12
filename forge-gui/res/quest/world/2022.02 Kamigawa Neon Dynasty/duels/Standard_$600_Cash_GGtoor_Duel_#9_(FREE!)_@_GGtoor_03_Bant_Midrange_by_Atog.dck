@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Bant Midrange by Atog
+Title=Bushwhacked
+Difficulty=very hard
+Description=Bant Midrange by Atog
+Icon=Bushwhacked.jpg
+Deck Type=constructed
+
+[main]
+1 Valorous Stance
+2 March of Otherworldly Light
+2 Farewell
+2 Storm the Festival
+2 Starnheim Unleashed
+4 Emeria's Call
+4 Wedding Announcement
+4 The Wandering Emperor
+4 Wrenn and Seven
+4 Esika's Chariot
+3 Tangled Florahedron
+3 Prosperous Innkeeper
+1 Hall of Storm Giants
+1 Boseiju, Who Endures
+1 Otawara, Soaring City
+1 Plains
+1 Lair of the Hydra
+2 Deserted Beach
+3 Eiganjo, Seat of the Empire
+3 Branchloft Pathway
+4 Barkchannel Pathway
+4 Hengegate Pathway
+4 Overgrown Farmland
+
+[sideboard]
+4 Skyclave Apparition
+3 Archon of Emeria
+3 Pithing Needle
+3 Test of Talents
+1 Fateful Absence
+1 Negate

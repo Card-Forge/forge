@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Temur Energy by Piotr Szyinski
+Title=Boris Karloff
+Difficulty=very hard
+Description=Temur Energy by Piotr Szyinski
+Icon=Boris Karloff.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Torch of Defiance|KLD
+3 Bristling Hydra|KLD
+4 Servant of the Conduit|KLD
+4 Longtusk Cub|KLD
+4 Rogue Refiner|AER
+3 Glorybringer|AKH
+4 Whirler Virtuoso|KLD
+1 Rhonas the Indomitable|AKH
+4 Attune with Aether|KLD
+2 Confiscation Coup|KLD
+4 Harnessed Lightning|KLD
+1 Abrade|HOU
+2 Magma Spray|AKH
+3 Rootbound Crag|XLN
+2 Sheltered Thicket|AKH
+4 Botanical Sanctum|KLD
+3 Forest|XLN
+3 Spirebluff Canal|KLD
+2 Mountain|XLN
+1 Island|XLN
+4 Aether Hub|KLD
+
+[sideboard]
+2 Chandra's Defeat|HOU
+1 Spell Pierce|XLN
+3 Negate|AER
+2 Nissa, Steward of Elements|AKH
+1 Deathgorge Scavenger|XLN
+2 Slice in Twain|XLN
+2 Vizier of Many Faces|AKH
+1 Nissa, Vital Force|KLD
+1 River's Rebuke|XLN

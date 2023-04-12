@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Atarka Red by Alexander Hayne
+Title=Newton
+Difficulty=very hard
+Description=Atarka Red by Alexander Hayne
+Icon=Newton.jpg
+Deck Type=constructed
+
+[main]
+4 Monastery Swiftspear|KTK
+4 Zurgo Bellstriker|DTK
+2 Lightning Berserker|DTK
+4 Abbot of Keral Keep|ORI
+4 Dragon Fodder|ORI
+2 Hordeling Outburst|KTK
+3 Wild Slash|FRF
+2 Fiery Impulse|ORI
+3 Become Immense|KTK
+3 Temur Battle Rage|FRF
+4 Titan's Strength|ORI
+4 Atarka's Command|DTK
+4 Wooded Foothills|KTK
+4 Bloodstained Mire|KTK
+2 Windswept Heath|KTK
+2 Cinder Glade|BFZ
+1 Forest|BFZ
+8 Mountain|BFZ
+
+[sideboard]
+2 Hordeling Outburst|KTK
+2 Fiery Impulse|ORI
+3 Roast|DTK
+2 Rending Volley|DTK
+3 Chandra, Fire of Kaladesh|ORI
+2 Den Protector|DTK
+1 Arc Lightning|KTK

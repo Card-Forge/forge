@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Esper Angels by Nick Daimanolis
+Title=Chunk
+Difficulty=very hard
+Description=Esper Angels by Nick Daimanolis
+Icon=Chunk.jpg
+Deck Type=constructed
+
+[main]
+2 Negate
+2 Elspeth Resplendent
+2 Emeria's Call
+4 Vanishing Verse
+4 Firja's Retribution
+1 Legion Angel
+2 Liesa, Forgotten Archangel
+3 Linvala, Shield of Sea Gate
+4 Youthful Valkyrie
+4 Giada, Font of Hope
+4 Righteous Valkyrie
+4 Inspiring Overseer
+1 Secluded Courtyard
+1 Swamp
+1 Eiganjo, Seat of the Empire
+2 Shineshadow Snarl
+3 Plains
+4 Deserted Beach
+4 Hengegate Pathway
+4 Shattered Sanctum
+4 Brightclimb Pathway
+
+[sideboard]
+2 Doomskar
+2 Archon of Emeria
+2 Nimble Larcenist
+1 Test of Talents
+1 Shadows' Verdict
+2 The Meathook Massacre
+2 Negate
+3 Legion Angel

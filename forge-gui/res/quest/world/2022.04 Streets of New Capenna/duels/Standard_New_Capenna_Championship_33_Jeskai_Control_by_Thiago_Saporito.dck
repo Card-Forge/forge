@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Thiago Saporito
+Title=Tusk Guardian
+Difficulty=very hard
+Description=Jeskai Control by Thiago Saporito
+Icon=Tusk Guardian.jpg
+Deck Type=constructed
+
+[main]
+1 Smoldering Egg
+3 Lier, Disciple of the Drowned
+4 Goldspan Dragon
+1 Prismari Command
+1 Kazuul's Fury
+2 Sejiri Shelter
+2 Show of Confidence
+2 Galvanic Iteration
+3 Fading Hope
+3 Unexpected Windfall
+3 Voltage Surge
+4 Spikefield Hazard
+4 Big Score
+4 Jwari Disruption
+2 Strangle
+4 Expressive Iteration
+1 Sokenzan, Crucible of Defiance
+1 Hall of Storm Giants
+2 Island
+2 Otawara, Soaring City
+3 Mountain
+4 Riverglide Pathway
+4 Stormcarved Coast
+
+[sideboard]
+3 Smoldering Egg
+1 Negate
+1 Test of Talents
+2 Torch Breath
+2 Behold the Multiverse
+2 Hullbreaker Horror
+2 Disdainful Stroke
+2 Fable of the Mirror-Breaker

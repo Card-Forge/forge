@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Jayakrishnan A
+Title=Centaur Warchief
+Difficulty=very hard
+Description=Mono Green Aggro by Jayakrishnan A
+Icon=Centaur Warchief.jpg
+Deck Type=constructed
+
+[main]
+1 Outland Liberator
+4 Old-Growth Troll
+4 Sculptor of Winter
+4 Werewolf Pack Leader
+4 Esika's Chariot
+2 Inscription of Abundance
+2 Snakeskin Veil
+4 Blizzard Brawl
+1 Unnatural Growth
+4 Ranger Class
+2 Wrenn and Seven
+1 Tangled Florahedron
+3 Faceless Haven
+4 Kazandu Mammoth
+20 Snow-Covered Forest
+
+[sideboard]
+1 Outland Liberator
+1 Inscription of Abundance
+2 Snakeskin Veil
+1 Wrenn and Seven
+1 Briarbridge Tracker
+1 Choose Your Weapon
+1 Toski, Bearer of Secrets
+2 Tangletrap
+2 Devouring Tendrils
+3 Tajuru Blightblade

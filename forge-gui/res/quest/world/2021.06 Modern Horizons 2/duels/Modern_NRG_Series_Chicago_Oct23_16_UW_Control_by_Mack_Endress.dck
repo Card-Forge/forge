@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=UW Control by Mack Endress
+Title=Demeter
+Difficulty=very hard
+Description=UW Control by Mack Endress
+Icon=Demeter.jpg
+Deck Type=constructed
+
+[main]
+1 Jace, the Mind Sculptor|WWK
+2 Chalice of the Void|MR
+2 Memory Deluge
+2 Shark Typhoon
+2 Teferi, Hero of Dominaria
+3 Spreading Seas|ZEN
+3 Supreme Verdict|RTR
+4 Teferi, Time Raveler
+4 Prismatic Ending
+4 Archmage's Charm
+4 Counterspell|7E
+4 Solitude
+1 Raugrin Triome
+1 Breeding Pool
+1 Plains
+1 Misty Rainforest|ZEN
+1 Celestial Colonnade|WWK
+1 Hall of Storm Giants
+2 Polluted Delta|KTK
+2 Hallowed Fountain
+3 Castle Vantress
+4 Island
+4 Flooded Strand|KTK
+4 Mystic Gate|SHM
+
+[sideboard]
+2 Rest in Peace|RTR
+2 Sunset Revelry
+2 Dovin's Veto
+1 Emrakul, the Aeons Torn|ROE
+1 Mystical Dispute
+1 Kaheera, the Orphanguard
+1 Force of Negation
+1 Celestial Purge|M12
+1 Chalice of the Void|MR
+2 Shark Typhoon
+1 Spreading Seas|ZEN

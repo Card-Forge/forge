@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Weenie White  by Lexterchander
+Title=Jack Sparrow
+Difficulty=very hard
+Description=Weenie White  by Lexterchander
+Icon=Jack Sparrow.jpg
+Deck Type=constructed
+
+[main]
+1 Legion Angel
+2 Adeline, Resplendent Cathar
+2 Reidane, God of the Worthy
+3 Brutal Cathar
+4 Intrepid Adversary
+4 Thalia, Guardian of Thraben
+4 Usher of the Fallen
+4 Hopeful Initiate
+4 Luminarch Aspirant
+4 Elite Spellbinder
+1 Elspeth Resplendent
+4 The Wandering Emperor
+2 Crawling Barrens
+3 Cave of the Frost Dragon
+18 Plains
+
+[sideboard]
+3 Legion Angel
+1 Reidane, God of the Worthy
+1 Brutal Cathar
+1 Valorous Stance
+2 Portable Hole
+3 Guardian of Faith
+4 Skyclave Apparition

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Okumura Takaaki
+Title=Treebeard
+Difficulty=very hard
+Description=Red Deck Wins by Okumura Takaaki
+Icon=Treebeard.jpg
+Deck Type=constructed
+
+[main]
+2 Rending Flame
+2 Reckless Impulse
+3 Chandra, Dressed to Kill
+3 Jaya, Fiery Negotiator
+4 Play with Fire
+4 Lightning Strike
+4 Fable of the Mirror-Breaker
+4 Kumano Faces Kakkazan
+3 Feldon, Ronom Excavator
+4 Bloodthirsty Adversary
+4 Monastery Swiftspear
+1 Sokenzan, Crucible of Defiance
+4 Mishra's Foundry
+18 Mountain
+
+[sideboard]
+3 Abrade
+3 Giant Cindermaw
+3 Obliterating Bolt
+2 Unlicensed Hearse
+2 Brotherhood's End
+1 Visions of Phyrexia
+1 Rending Flame

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=UR Twin Exarch by Joel Calafell
+Title=Rogue
+Difficulty=very hard
+Description=UR Twin Exarch by Joel Calafell
+Icon=Rogue.jpg
+Deck Type=constructed
+
+[main]
+4 Deceiver Exarch|NPH
+1 Inferno Titan|M12
+4 Spellskite|NPH
+3 Dispel|WWK
+3 Into the Roil|ZEN
+3 Mana Leak|M12
+3 Gitaxian Probe|NPH
+4 Ponder|M12
+4 Preordain|M11
+4 Shrine of Piercing Vision|NPH
+4 Splinter Twin|ROE
+2 Arid Mesa|ZEN
+2 Halimar Depths|WWK
+9 Island|M12
+6 Mountain|M12
+4 Scalding Tarn|ZEN
+
+[sideboard]
+1 Consecrated Sphinx|MBS
+2 Dragonmaster Outcast|WWK
+1 Wurmcoil Engine|SOM
+2 Mental Misstep|NPH
+2 Negate|M12
+4 Pyroclasm|M11
+3 Jace Beleren|M11

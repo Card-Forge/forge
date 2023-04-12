@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Collected Bant by Rodrigo Lopez
+Title=Osiris
+Difficulty=very hard
+Description=Collected Bant by Rodrigo Lopez
+Icon=Osiris.jpg
+Deck Type=constructed
+
+[main]
+4 Spell Queller|EMN
+3 Selfless Spirit|EMN
+3 Duskwatch Recruiter|SOI
+1 Archangel Avacyn|SOI
+3 Tireless Tracker|SOI
+3 Eldrazi Displacer|OGW
+4 Sylvan Advocate|OGW
+4 Reflector Mage|OGW
+2 Nissa, Vastwood Seer|ORI
+4 Collected Company|DTK
+4 Dromoka's Command|DTK
+1 Wastes|OGW
+3 Forest|RTR
+2 Lumbering Falls|BFZ
+4 Evolving Wilds
+1 Island|RTR
+3 Prairie Stream|BFZ
+3 Canopy Vista|BFZ
+4 Plains|RTR
+4 Yavimaya Coast|ORI
+
+[sideboard]
+1 Archangel Avacyn|SOI
+1 Tireless Tracker|SOI
+1 Nissa, Vastwood Seer|ORI
+1 Tamiyo, Field Researcher|EMN
+3 Lambholt Pacifist|SOI
+2 Declaration in Stone|SOI
+3 Tragic Arrogance|ORI
+1 Ojutai's Command|DTK
+2 Negate

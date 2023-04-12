@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Living End by Casey Ryback
+Title=Taste the Rainbow
+Difficulty=very hard
+Description=Living End by Casey Ryback
+Icon=Taste the Rainbow.jpg
+Deck Type=constructed
+
+[main]
+2 Brazen Borrower
+4 Curator of Mysteries|AKH
+4 Grief
+4 Shardless Agent
+4 Street Wraith|FUT
+4 Striped Riverwinder|HOU
+4 Waker of Waves
+4 Architects of Will|ARB
+4 Force of Negation
+4 Violent Outburst|ARB
+3 Living End|TSP
+1 Island
+1 Forest
+1 Sunken Ruins|SHM
+2 Breeding Pool
+2 Scalding Tarn|ZEN
+2 Steam Vents
+3 Spirebluff Canal|KLD
+3 Botanical Sanctum|KLD
+4 Misty Rainforest|ZEN
+
+[sideboard]
+1 Brazen Borrower
+1 Force of Vigor
+2 Leyline of Sanctity
+2 Mystical Dispute
+3 Subtlety
+3 Endurance
+3 Foundation Breaker

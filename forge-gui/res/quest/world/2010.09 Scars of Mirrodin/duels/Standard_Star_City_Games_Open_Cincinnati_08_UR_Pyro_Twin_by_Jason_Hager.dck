@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=UR Pyro Twin by Jason Hager
+Title=Sus Antigoon
+Difficulty=very hard
+Description=UR Pyro Twin by Jason Hager
+Icon=Sus Antigoon.jpg
+Deck Type=constructed
+
+[main]
+4 Deceiver Exarch|NPH
+4 Burst Lightning|ZEN
+4 Into the Roil|ZEN
+4 Mana Leak|M12
+4 Gitaxian Probe|NPH
+4 Ponder|M12
+4 Preordain|M11
+4 Pyromancer Ascension|ZEN
+4 Splinter Twin|ROE
+8 Island|M12
+8 Mountain|M12
+4 Halimar Depths|WWK
+4 Scalding Tarn|ZEN
+
+[sideboard]
+1 Spellskite|NPH
+4 Dismember|NPH
+2 Spell Pierce|ZEN
+1 Twisted Image|SOM
+4 Pyroclasm|M11
+3 Jace Beleren|M11

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Naya by Guido Sondag
+Title=Dr No
+Difficulty=very hard
+Description=Naya by Guido Sondag
+Icon=Dr No.jpg
+Deck Type=constructed
+
+[main]
+2 Cavern of Souls|AVR
+4 Clifftop Retreat
+4 Evolving Wilds
+9 Forest|RTR
+2 Kessig Wolf Run|ISD
+3 Mountain|RTR
+1 Plains|RTR
+1 Ambush Viper|ISD
+4 Avacyn's Pilgrim|ISD
+3 Borderland Ranger|AVR
+3 Daybreak Ranger|ISD
+4 Huntmaster of the Fells|DKA
+4 Restoration Angel|AVR
+2 Scorned Villager|DKA
+2 Wolfir Avenger|AVR
+4 Wolfir Silverheart|AVR
+2 Bonfire of the Damned|AVR
+3 Brimstone Volley|CNS
+3 Pillar of Flame|AVR
+
+[sideboard]
+1 Plains|RTR
+1 Bonfire of the Damned|AVR
+1 Pillar of Flame|AVR
+1 Burning Oil|DKA
+1 Divine Deflection|AVR
+1 Garruk Relentless|ISD
+2 Grafdigger's Cage|DKA
+1 Revenge of the Hunted|AVR
+2 Sigarda, Host of Herons|AVR
+1 Slayer of the Wicked|ISD
+1 Tree of Redemption|ISD
+2 Zealous Conscripts|AVR

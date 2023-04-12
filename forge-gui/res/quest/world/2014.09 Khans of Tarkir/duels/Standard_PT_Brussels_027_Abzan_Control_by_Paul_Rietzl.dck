@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Abzan Control by Paul Rietzl
+Title=Tibalt
+Difficulty=very hard
+Description=Abzan Control by Paul Rietzl
+Icon=Tibalt.jpg
+Deck Type=constructed
+
+[main]
+2 Plains|DTK
+2 Forest|DTK
+1 Ugin, the Spirit Dragon|FRF
+1 Garruk, Apex Predator|M15
+1 Murderous Cut|KTK
+1 Read the Bones|THS
+2 Ultimate Price|DTK
+2 End Hostilities|KTK
+2 Bile Blight|BNG
+3 Elspeth, Sun's Champion|THS
+4 Hero's Downfall|THS
+4 Thoughtseize|THS
+4 Abzan Charm|KTK
+1 Tasigur, the Golden Fang|FRF
+4 Courser of Kruphix|BNG
+4 Siege Rhino|KTK
+1 Urborg, Tomb of Yawgmoth|M15
+2 Caves of Koilos|M15
+3 Llanowar Wastes|M15
+4 Windswept Heath|KTK
+4 Temple of Silence|THS
+4 Temple of Malady|JOU
+4 Sandsteppe Citadel|KTK
+
+[sideboard]
+1 Virulent Plague|DTK
+1 Dromoka's Command|DTK
+1 Utter End|KTK
+1 Liliana Vess|M15
+1 Nissa, Worldwaker|M15
+2 Drown in Sorrow|BNG
+2 Duress|DTK
+1 Glare of Heresy|THS
+2 Read the Bones|THS
+1 Bile Blight|BNG
+1 Tasigur, the Golden Fang|FRF
+1 Hornet Queen|M15

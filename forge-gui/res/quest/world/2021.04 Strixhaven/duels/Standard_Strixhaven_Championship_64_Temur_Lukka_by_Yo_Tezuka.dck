@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Temur Lukka by Yo Tezuka
+Title=The Minotaurs
+Difficulty=very hard
+Description=Temur Lukka by Yo Tezuka
+Icon=The Minotaurs.jpg
+Deck Type=constructed
+
+[main]
+2 Llanowar Visionary
+2 Koma, Cosmos Serpent
+4 Edgewall Innkeeper
+4 Bonecrusher Giant
+4 Brazen Borrower
+4 Lovestruck Beast
+2 Esika's Chariot
+1 Mystical Dispute
+2 Decisive Denial
+3 Fire Prophecy
+2 The Akroan War
+4 Lukka, Coppercoat Outcast
+2 Forest
+2 Island
+2 Mountain
+2 Temple of Epiphany
+2 Fabled Passage
+4 Barkchannel Pathway
+4 Cragcrown Pathway
+4 Ketria Triome
+4 Riverglide Pathway
+
+[sideboard]
+3 Mystical Dispute
+1 The Akroan War
+1 Ox of Agonas
+1 Miscast
+2 Embercleave
+2 Scorching Dragonfire
+2 Redcap Melee
+3 Disdainful Stroke

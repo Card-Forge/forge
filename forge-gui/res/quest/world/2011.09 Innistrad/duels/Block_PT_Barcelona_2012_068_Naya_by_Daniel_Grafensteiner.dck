@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Naya by Daniel Grafensteiner
+Title=MamanBrigitte
+Difficulty=very hard
+Description=Naya by Daniel Grafensteiner
+Icon=MamanBrigitte.jpg
+Deck Type=constructed
+
+[main]
+2 Garruk Relentless|ISD
+4 Pillar of Flame|AVR
+4 Brimstone Volley|CNS
+4 Bonfire of the Damned|AVR
+1 Borderland Ranger|AVR
+3 Restoration Angel|AVR
+3 Scorned Villager|DKA
+3 Wolfir Avenger|AVR
+4 Avacyn's Pilgrim|ISD
+4 Wolfir Silverheart|AVR
+4 Huntmaster of the Fells|DKA
+1 Gavony Township|ISD
+1 Plains|RTR
+3 Mountain|RTR
+4 Evolving Wilds
+4 Clifftop Retreat
+11 Forest|RTR
+
+[sideboard]
+2 Zealous Conscripts|AVR
+2 Heretic's Punishment|ISD
+1 Increasing Savagery|DKA
+2 Ranger's Guile|M15
+2 Tree of Redemption|ISD
+3 Wrack with Madness|DKA
+2 Garruk Relentless|ISD
+1 Restoration Angel|AVR

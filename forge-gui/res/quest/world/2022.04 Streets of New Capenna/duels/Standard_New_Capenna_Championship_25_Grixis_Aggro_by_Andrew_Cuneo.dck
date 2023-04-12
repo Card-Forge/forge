@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Grixis Aggro by Andrew Cuneo
+Title=Ancient Battlefield
+Difficulty=very hard
+Description=Grixis Aggro by Andrew Cuneo
+Icon=Ancient Battlefield.jpg
+Deck Type=constructed
+
+[main]
+1 Spell Pierce
+1 Ray of Enfeeblement
+1 Duress
+1 Soul Transfer
+2 The Meathook Massacre
+2 Kaito Shizuki
+2 Infernal Grasp
+4 Voltage Surge
+4 Fable of the Mirror-Breaker
+1 Anje, Maid of Dishonor
+2 Bloodthirsty Adversary
+2 Tenacious Underdog
+2 Evelyn, the Covetous
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+1 Takenuma, Abandoned Mire
+1 Mountain
+1 Shipwreck Marsh
+1 Swamp
+2 Haunted Ridge
+2 Hive of the Eye Tyrant
+3 Stormcarved Coast
+4 Riverglide Pathway
+4 Blightstep Pathway
+4 Clearwater Pathway
+4 Xander's Lounge
+
+[sideboard]
+4 Annul
+2 Go Blank
+2 Make Disappear
+1 Abrade
+1 Disdainful Stroke
+2 Ray of Enfeeblement
+1 Duress
+1 The Meathook Massacre
+1 Evelyn, the Covetous

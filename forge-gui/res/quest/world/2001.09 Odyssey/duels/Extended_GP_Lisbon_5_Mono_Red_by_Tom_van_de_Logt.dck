@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Mono Red by Tom van de Logt
+Title=IdiAmin
+Difficulty=very hard
+Description=Mono Red by Tom van de Logt
+Icon=IdiAmin.jpg
+Deck Type=constructed
+
+[main]
+4 Jackal Pup|TE
+4 Ball Lightning|DK
+4 Mogg Fanatic|TE
+4 Firebolt|OD
+2 Volcanic Hammer|PT
+4 Price of Progress|EX
+4 Incinerate|IA
+4 Fireblast|VI
+3 Chimeric Idol|PY
+3 Seal of Fire|NE
+16 Mountain|A
+4 Barbarian Ring|OD
+4 Wasteland|TE
+
+[sideboard]
+1 Chimeric Idol|PY
+4 Powder Keg|UD
+4 Pyroblast|IA
+2 Pyrokinesis|AL
+4 Cursed Scroll|TE

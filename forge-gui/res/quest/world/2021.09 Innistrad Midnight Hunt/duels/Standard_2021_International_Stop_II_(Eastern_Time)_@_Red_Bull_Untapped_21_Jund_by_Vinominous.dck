@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Jund by Vinominous
+Title=Gold Finger
+Difficulty=very hard
+Description=Jund by Vinominous
+Icon=Gold Finger.jpg
+Deck Type=constructed
+
+[main]
+1 Light Up the Night
+1 Bloodchief's Thirst
+1 Lolth, Spider Queen
+2 Check for Traps
+2 Dragon's Fire
+3 Shatterskull Smashing
+3 Infernal Grasp
+4 Esika's Chariot
+1 Florian, Voldaren Scion
+2 Sedgemoor Witch
+2 Reckless Stormseeker
+2 Valki, God of Lies
+3 Goldspan Dragon
+3 Immersturm Predator
+4 Magda, Brazen Outlaw
+4 Kalain, Reclusive Painter
+1 Mountain
+1 Swamp
+2 Hive of the Eye Tyrant
+2 Den of the Bugbear
+4 Blightstep Pathway
+4 Darkbore Pathway
+4 Cragcrown Pathway
+4 Haunted Ridge
+
+[sideboard]
+2 Go Blank
+2 Duress
+2 Power Word Kill
+2 Ray of Enfeeblement
+1 Burning Hands
+1 The Meathook Massacre
+1 Tangletrap
+1 Burn Down the House
+1 Lolth, Spider Queen
+2 Reckless Stormseeker

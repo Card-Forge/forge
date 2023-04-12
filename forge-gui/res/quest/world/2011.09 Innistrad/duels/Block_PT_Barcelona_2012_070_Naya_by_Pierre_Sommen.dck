@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Naya by Pierre Sommen
+Title=Splinter
+Difficulty=very hard
+Description=Naya by Pierre Sommen
+Icon=Splinter.jpg
+Deck Type=constructed
+
+[main]
+1 Cavern of Souls|AVR
+1 Clifftop Retreat
+4 Evolving Wilds
+11 Forest|RTR
+2 Kessig Wolf Run|ISD
+4 Mountain|RTR
+1 Plains|RTR
+4 Avacyn's Pilgrim|ISD
+3 Borderland Ranger|AVR
+2 Daybreak Ranger|ISD
+4 Huntmaster of the Fells|DKA
+2 Mayor of Avabruck|ISD
+4 Restoration Angel|AVR
+4 Wolfir Avenger|AVR
+3 Wolfir Silverheart|AVR
+3 Bonfire of the Damned|AVR
+4 Brimstone Volley|CNS
+2 Devil's Play|ISD
+1 Divine Deflection|AVR
+
+[sideboard]
+1 Bonfire of the Damned|AVR
+1 Divine Deflection|AVR
+1 Ancient Grudge|ISD
+2 Burning Oil|DKA
+1 Garruk Relentless|ISD
+2 Grafdigger's Cage|DKA
+2 Slayer of the Wicked|ISD
+2 Tree of Redemption|ISD
+1 Witchbane Orb|ISD
+2 Zealous Conscripts|AVR

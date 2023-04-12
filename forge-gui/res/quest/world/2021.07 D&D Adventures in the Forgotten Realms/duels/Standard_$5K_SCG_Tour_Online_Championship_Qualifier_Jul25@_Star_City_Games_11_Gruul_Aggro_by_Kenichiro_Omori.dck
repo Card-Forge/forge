@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Kenichiro Omori
+Title=The Third Path
+Difficulty=very hard
+Description=Gruul Aggro by Kenichiro Omori
+Icon=The Third Path.jpg
+Deck Type=constructed
+
+[main]
+3 Esika's Chariot
+3 Embercleave
+4 Ranger Class
+4 Shatterskull Smashing
+2 Rimrock Knight
+3 Goldspan Dragon
+4 Lovestruck Beast
+4 Magda, Brazen Outlaw
+4 Edgewall Innkeeper
+4 Bonecrusher Giant
+4 Jaspera Sentinel
+2 Lair of the Hydra
+3 Den of the Bugbear
+4 Mountain
+4 Cragcrown Pathway
+8 Forest
+
+[sideboard]
+3 Ox of Agonas
+3 Burning Hands
+3 Redcap Melee
+2 Klothys, God of Destiny
+2 Roiling Vortex
+2 Scorching Dragonfire

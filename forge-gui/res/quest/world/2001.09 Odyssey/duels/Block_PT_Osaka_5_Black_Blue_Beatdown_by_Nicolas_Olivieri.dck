@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Black/Blue Beatdown by Nicolas Olivieri
+Title=Raven
+Difficulty=very hard
+Description=Black/Blue Beatdown by Nicolas Olivieri
+Icon=Raven.jpg
+Deck Type=constructed
+
+[main]
+4 Darkwater Catacombs|OD
+1 Island|A
+16 Swamp|A
+4 Tainted Isle|TO
+4 Braids, Cabal Minion|OD
+2 Ichorid|TO
+4 Mesmeric Fiend|TO
+2 Mindslicer|OD
+4 Nantuko Shade|TO
+4 Shadowmage Infiltrator|OD
+4 Shambling Swarm|TO
+4 Chainer's Edict|TO
+3 Innocent Blood|OD
+4 Rancid Earth|TO
+
+[sideboard]
+1 Mindslicer|OD
+2 Aura Graft|OD
+4 Faceless Butcher|TO
+1 Haunting Echoes|OD
+1 Persuasion|OD
+3 Skeletal Scrying|OD
+2 Slithery Stalker|TO
+1 Unknown Card

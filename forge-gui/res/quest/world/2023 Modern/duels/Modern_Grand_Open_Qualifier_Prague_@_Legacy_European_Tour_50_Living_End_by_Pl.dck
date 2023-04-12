@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Living End by Pl
+Title=alasedris
+Difficulty=very hard
+Description=Living End by Pl
+Icon=alasedris.jpg
+Deck Type=constructed
+
+[main]
+4 Curator of Mysteries|AKH
+4 Grief
+4 Shardless Agent
+4 Architects of Will|ARB
+4 Striped Riverwinder|HOU
+3 Waker of Waves
+4 Street Wraith|FUT
+2 Colossal Skyturtle
+1 Subtlety
+4 Force of Negation
+4 Violent Outburst|ARB
+3 Living End|TSP
+1 Island
+4 Misty Rainforest|ZEN
+2 Steam Vents
+2 Breeding Pool
+2 Botanical Sanctum|KLD
+2 Otawara, Soaring City
+2 Spirebluff Canal|KLD
+1 Forest
+3 Scalding Tarn|ZEN
+
+[sideboard]
+2 Subtlety
+3 Endurance
+1 Brazen Borrower
+1 Leyline of Sanctity
+2 Foundation Breaker
+2 Dead // Gone|PLC
+2 Force of Vigor
+2 Mystical Dispute

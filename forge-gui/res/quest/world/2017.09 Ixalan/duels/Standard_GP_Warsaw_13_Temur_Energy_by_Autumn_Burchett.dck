@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Temur Energy by Autumn Burchett
+Title=Chilliphon
+Difficulty=very hard
+Description=Temur Energy by Autumn Burchett
+Icon=Chilliphon.jpg
+Deck Type=constructed
+
+[main]
+3 Spirebluff Canal|KLD
+2 Sheltered Thicket|AKH
+3 Rootbound Crag|XLN
+2 Mountain|XLN
+1 Island|XLN
+3 Forest|XLN
+4 Botanical Sanctum|KLD
+4 Aether Hub|KLD
+1 Essence Scatter|AKH
+4 Harnessed Lightning|KLD
+3 Abrade|HOU
+4 Attune with Aether|KLD
+2 Confiscation Coup|KLD
+4 Glorybringer|AKH
+3 Bristling Hydra|KLD
+4 Whirler Virtuoso|KLD
+2 Chandra, Torch of Defiance|KLD
+4 Longtusk Cub|KLD
+3 Servant of the Conduit|KLD
+4 Rogue Refiner|AER
+
+[sideboard]
+1 Lifecrafter's Bestiary|AER
+1 Nissa, Steward of Elements|AKH
+2 Deathgorge Scavenger|XLN
+2 Chandra's Defeat|HOU
+1 Magma Spray|AKH
+1 River's Rebuke|XLN
+2 Vizier of Many Faces|AKH
+3 Negate|AER
+1 Spell Pierce|XLN
+1 Essence Scatter|AKH

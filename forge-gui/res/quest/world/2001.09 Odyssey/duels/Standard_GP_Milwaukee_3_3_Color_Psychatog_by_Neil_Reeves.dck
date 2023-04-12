@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=3 Color Psychatog by Neil Reeves
+Title=Galacticus
+Difficulty=very hard
+Description=3 Color Psychatog by Neil Reeves
+Icon=Galacticus.jpg
+Deck Type=constructed
+
+[main]
+2 Cephalid Coliseum|OD
+1 Crosis's Catacombs|PS
+1 Darkwater Catacombs|OD
+5 Island|OD
+4 Salt Marsh|IN
+1 Shadowblood Ridge|OD
+4 Shivan Reef|AP
+2 Sulfurous Springs|7E
+1 Swamp|OD
+4 Underground River|7E
+2 Flametongue Kavu|PS
+4 Nightscape Familiar|PS
+4 Psychatog|OD
+3 Circular Logic|TO
+4 Counterspell|7E
+4 Fact or Fiction|IN
+3 Fire // Ice|AP
+2 Force Spike|7E
+3 Probe|IN
+4 Repulse|IN
+2 Upheaval|OD
+
+[sideboard]
+2 Flametongue Kavu|PS
+2 Chainer's Edict|TO
+2 Duress|7E
+1 Engineered Plague|7E
+4 Gainsay|PS
+2 Mana Short|7E
+2 Terminate|PS

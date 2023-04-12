@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Esper Control by David Schnayer
+Title=Ri
+Difficulty=very hard
+Description=Esper Control by David Schnayer
+Icon=Ri.jpg
+Deck Type=constructed
+
+[main]
+2 Gideon, Ally of Zendikar|BFZ
+2 Sorin, Grim Nemesis|SOI
+1 Ob Nixilis Reignited|BFZ
+4 Jace, Vryn's Prodigy|ORI
+3 Declaration in Stone|SOI
+2 Painful Truths|BFZ
+3 Transgress the Mind|BFZ
+2 Languish|C16
+2 Descend upon the Sinful|SOI
+3 Secure the Wastes|DTK
+1 Anguished Unmaking|SOI
+1 Silumgar's Command|DTK
+3 Clash of Wills|ORI
+2 Ojutai's Command|DTK
+3 Fortune's Favor|EMN
+3 Westvale Abbey|SOI
+1 Mage-Ring Network|ORI
+4 Shambling Vent|BFZ
+4 Prairie Stream|BFZ
+3 Sunken Hollow|BFZ
+4 Evolving Wilds
+2 Plains|RTR
+3 Swamp|RTR
+3 Island|RTR
+
+[sideboard]
+1 Gideon, Ally of Zendikar|BFZ
+1 Declaration in Stone|SOI
+1 Languish|C16
+1 Descend upon the Sinful|SOI
+1 Anguished Unmaking|SOI
+1 Dragonlord Silumgar|DTK
+2 Negate
+1 Pick the Brain|SOI
+1 Ultimate Price|DTK
+2 Dispel|BFZ
+2 Emrakul, the Promised End|EMN
+1 Summary Dismissal|EMN

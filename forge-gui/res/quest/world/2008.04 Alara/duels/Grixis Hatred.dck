@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Grixis Hatred
+Title=Grixis Hatred
+Icon=alathrax.jpg
+Difficulty=hard
+Description=As Grixis collided with the rest of Alara, the worlds began to hear the hateful whispers of the forgotten dead.
+Deck Type=constructed
+[Main]
+4 Blightning|ALA
+2 Courier's Capsule|ALA
+2 Cruel Ultimatum|ALA
+4 Crumbling Necropolis|ALA
+3 Double Negative|ARB
+4 Grixis Charm|ALA
+4 Grixis Panorama|ALA
+5 Island|ALA|4
+1 Mistvein Borderpost|ARB
+5 Mountain|ALA|1
+1 Nicol Bolas, Planeswalker|CFX
+4 Sedraxis Specter|ALA
+1 Slave of Bolas|ARB
+2 Spellbound Dragon|ARB
+4 Swamp|ALA|2
+1 Swamp|ALA|3
+4 Terminate|ARB
+1 Thraximundar|ARB
+4 Viscera Dragger|ALA
+4 Wretched Banquet|CFX

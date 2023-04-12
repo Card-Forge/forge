@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Squirrel Oppo by Sim Han How
+Title=Tibalt
+Difficulty=very hard
+Description=Squirrel Oppo by Sim Han How
+Icon=Tibalt.jpg
+Deck Type=constructed
+
+[main]
+8 Forest|OD
+5 Island|OD
+3 Karplusan Forest|7E
+2 Shivan Reef|AP
+4 Yavimaya Coast|AP
+4 Birds of Paradise|7E
+3 Flametongue Kavu|PS
+3 Llanowar Elves|7E
+4 Merfolk Looter|7E
+3 Phantom Centaur|JU
+4 Wild Mongrel|OD
+4 Circular Logic|TO
+3 Deep Analysis|TO
+3 Fire // Ice|AP
+4 Opposition|7E
+3 Squirrel Nest|OD
+
+[sideboard]
+1 Flametongue Kavu|PS
+3 Gainsay|PS
+3 Quiet Speculation|JU
+2 Ray of Revelation|JU
+4 Roar of the Wurm|OD
+2 Simoon|IN

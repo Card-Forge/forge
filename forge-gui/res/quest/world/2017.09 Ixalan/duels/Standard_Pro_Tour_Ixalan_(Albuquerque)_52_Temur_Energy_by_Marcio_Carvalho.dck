@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Temur Energy by Marcio Carvalho
+Title=Brother Voodoo
+Difficulty=very hard
+Description=Temur Energy by Marcio Carvalho
+Icon=Brother Voodoo.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Torch of Defiance|KLD
+1 Vizier of Many Faces|AKH
+3 Bristling Hydra|KLD
+4 Glorybringer|AKH
+4 Longtusk Cub|KLD
+4 Rogue Refiner|AER
+4 Servant of the Conduit|KLD
+4 Whirler Virtuoso|KLD
+4 Attune with Aether|KLD
+1 Confiscation Coup|KLD
+1 Abrade|HOU
+4 Harnessed Lightning|KLD
+2 Magma Spray|AKH
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+4 Forest|XLN
+1 Island|XLN
+2 Mountain|XLN
+3 Rootbound Crag|XLN
+1 Sheltered Thicket|AKH
+3 Spirebluff Canal|KLD
+
+[sideboard]
+1 Confiscation Coup|KLD
+1 Magma Spray|AKH
+1 Chandra's Defeat|HOU
+1 Deathgorge Scavenger|XLN
+1 Jace's Defeat|HOU
+3 Negate|AER
+2 Spell Pierce|XLN
+3 Nissa, Steward of Elements|AKH
+2 Appetite for the Unnatural|KLD

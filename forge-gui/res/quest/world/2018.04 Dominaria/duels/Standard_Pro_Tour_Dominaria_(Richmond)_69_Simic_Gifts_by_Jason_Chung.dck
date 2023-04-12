@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Simic Gifts by Jason Chung
+Title=Homer Simpson
+Difficulty=very hard
+Description=Simic Gifts by Jason Chung
+Icon=Homer Simpson.jpg
+Deck Type=constructed
+
+[main]
+2 God-Pharaoh's Gift|HOU
+4 Gate to the Afterlife|AKH
+1 Vizier of Many Faces|AKH
+2 Glint-Nest Crane|KLD
+2 Multani, Yavimaya's Avatar
+3 Minister of Inquiries|KLD
+4 Llanowar Elves
+4 Verdurous Gearhulk|KLD
+4 Jadelight Ranger
+4 Walking Ballista|AER
+4 Champion of Wits|HOU
+4 Merfolk Branchwalker|XLN
+1 Island
+2 Hinterland Harbor
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+4 Ipnu Rivulet|HOU
+7 Forest
+
+[sideboard]
+2 Nissa, Steward of Elements|AKH
+3 Thrashing Brontodon
+1 Plummet
+1 Lifecrafter's Bestiary|AER
+3 Wildgrowth Walker|XLN
+4 Negate
+1 Vizier of Many Faces|AKH

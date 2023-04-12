@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Gw Heliod by Alessandro Pensotti
+Title=Havenwood
+Difficulty=very hard
+Description=Gw Heliod by Alessandro Pensotti
+Icon=Havenwood.jpg
+Deck Type=constructed
+
+[main]
+4 Heliod, Sun-Crowned
+4 Arbor Elf|M13
+4 Conclave Mentor
+4 Auriok Champion|FD
+4 Skyclave Apparition
+4 Spike Feeder|TSP
+4 Ranger-Captain of Eos
+2 Walking Ballista|AER
+4 Utopia Sprawl|DIS
+4 Collected Company|DTK
+4 Windswept Heath|KTK
+4 Horizon Canopy|FUT
+4 Temple Garden
+2 Wooded Foothills|KTK
+4 Forest
+2 Plains
+1 Gavony Township|ISD
+1 Prismatic Vista
+
+[sideboard]
+3 Veil of Summer
+3 Rest in Peace|RTR
+3 Damping Sphere
+4 Path to Exile|CFX
+2 Kataki, War's Wage|SOK

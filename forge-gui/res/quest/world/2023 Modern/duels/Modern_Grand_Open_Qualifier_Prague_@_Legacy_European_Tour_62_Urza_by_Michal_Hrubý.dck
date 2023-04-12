@@ -1,0 +1,55 @@
+[duel]
+[metadata]
+Name=Urza by Michal Hrubý
+Title=InuYasha
+Difficulty=very hard
+Description=Urza by Michal Hrubý
+Icon=InuYasha.jpg
+Deck Type=constructed
+
+[main]
+4 Stoneforge Mystic|WWK
+4 Urza, Lord High Artificer
+4 Esper Sentinel
+2 Ingenious Smith
+1 The Reality Chip
+1 Talisman of Progress|MR
+1 Relic of Progenitus|ALA
+1 Chromatic Star|10E
+3 Thopter Foundry|ARB
+1 Sword of the Meek|FUT
+1 Springleaf Drum|BNG
+1 Kaldra Compleat
+1 Shadowspear
+4 Portable Hole
+1 Pithing Needle
+1 Aether Spellbomb|MR
+1 Nettlecyst
+4 Metallic Rebuke|AER
+4 Urza's Saga
+1 Teferi, Time Raveler
+1 Cavern of Souls|AVR
+1 Raugrin Triome
+4 Seachrome Coast
+2 Hallowed Fountain
+1 Snow-Covered Island
+2 Plains
+4 Flooded Strand|KTK
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+2 Razortide Bridge
+
+[sideboard]
+1 March of Otherworldly Light
+1 Spell Pierce
+1 Wear // Tear|DGM
+1 Flusterstorm
+1 Dovin's Veto
+2 Sanctifier en-Vec
+1 Path to Exile|CFX
+1 Lion Sash
+1 Supreme Verdict|RTR
+1 Containment Priest
+1 Manriki-Gusari|SOK
+1 Lavinia, Azorius Renegade
+2 Damping Sphere

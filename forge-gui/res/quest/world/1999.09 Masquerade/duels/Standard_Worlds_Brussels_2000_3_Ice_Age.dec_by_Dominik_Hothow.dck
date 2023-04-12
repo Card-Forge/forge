@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ice Age.dec by Dominik Hothow
+Title=Baron Leckba
+Difficulty=very hard
+Description=Ice Age.dec by Dominik Hothow
+Icon=Baron Leckba.jpg
+Deck Type=constructed
+
+[main]
+2 Dust Bowl|MM
+4 Karplusan Forest|C16
+4 Rishadan Port|MM
+3 Mountain|RTR
+11 Forest|RTR
+3 Earthquake|C15
+4 Plow Under|8E
+4 Arc Lightning|KTK
+3 Masticore|UD
+4 Blastoderm|NE
+4 Avalanche Riders|TSP
+4 Yavimaya Elder|CMD
+2 Rofellos, Llanowar Emissary|UD
+4 Llanowar Elves
+4 Birds of Paradise|CN2
+
+[sideboard]
+1 Splinter|BOK
+2 Reverent Silence|NE
+3 Tectonic Break|MM
+2 Rack and Ruin|UL
+3 Uktabi Orangutan|6E
+3 Boil|8E
+1 Earthquake|C15

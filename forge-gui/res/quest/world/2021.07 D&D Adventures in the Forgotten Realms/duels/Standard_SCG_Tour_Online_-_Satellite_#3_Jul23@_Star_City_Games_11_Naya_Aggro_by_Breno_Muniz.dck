@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Naya Aggro by Breno Muniz
+Title=The Rock
+Difficulty=very hard
+Description=Naya Aggro by Breno Muniz
+Icon=The Rock.jpg
+Deck Type=constructed
+
+[main]
+2 Tangled Florahedron
+2 Drannith Magistrate
+2 Monk of the Open Hand
+4 Giant Killer
+4 Jaspera Sentinel
+4 Clarion Spirit
+4 Bonecrusher Giant
+4 Elite Spellbinder
+4 Lovestruck Beast
+4 Edgewall Innkeeper
+3 Showdown of the Skalds
+1 Mountain
+3 Plains
+3 Forest
+4 Cragcrown Pathway
+4 Branchloft Pathway
+4 Fabled Passage
+4 Needleverge Pathway
+
+[sideboard]
+1 Reidane, God of the Worthy
+1 Ox of Agonas
+1 Jegantha, the Wellspring
+1 Rip Apart
+2 Chainweb Aracnir
+2 Redcap Melee
+2 Klothys, God of Destiny
+2 The Akroan War
+3 Skyclave Apparition

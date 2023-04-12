@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Gregory Orange
+Title=Luke Skywalker
+Difficulty=very hard
+Description=Jeskai Control by Gregory Orange
+Icon=Luke Skywalker.jpg
+Deck Type=constructed
+
+[main]
+1 Essence Scatter
+1 Blink of an Eye
+1 Disdainful Stroke
+1 Expansion // Explosion
+1 Settle the Wreckage|XLN
+2 Chemister's Insight
+2 Search for Azcanta|XLN
+3 Seal Away
+3 Syncopate
+3 Sinister Sabotage
+4 Teferi, Hero of Dominaria
+4 Opt
+4 Deafening Clarion
+1 Niv-Mizzet, Parun
+4 Crackling Drake
+4 Glacial Fortress|XLN
+4 Sacred Foundry
+4 Steam Vents
+4 Sulfur Falls
+4 Clifftop Retreat
+5 Island
+
+[sideboard]
+2 Legion Warboss
+2 Lyra Dawnbringer
+2 Invoke the Divine
+1 Cleansing Nova
+1 Nezahal, Primal Tide
+1 Star of Extinction|XLN
+2 Negate
+2 Disdainful Stroke
+1 Expansion // Explosion
+1 Seal Away

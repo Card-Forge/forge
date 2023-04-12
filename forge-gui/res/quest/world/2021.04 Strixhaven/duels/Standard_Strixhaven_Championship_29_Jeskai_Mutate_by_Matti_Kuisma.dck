@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Jeskai Mutate by Matti Kuisma
+Title=Shelob
+Difficulty=very hard
+Description=Jeskai Mutate by Matti Kuisma
+Icon=Shelob.jpg
+Deck Type=constructed
+
+[main]
+1 Scorching Dragonfire
+1 Sejiri Shelter
+1 Mystical Dispute
+1 Essence Scatter
+2 Negate
+2 Fire Prophecy
+3 Prismari Command
+3 Seize the Spoils
+4 Unsubstantiate
+4 Spikefield Hazard
+4 Expressive Iteration
+4 Vadrok, Apex of Thunder
+4 Lore Drakkis
+4 Goldspan Dragon
+2 Mountain
+4 Hengegate Pathway
+4 Island
+4 Raugrin Triome
+4 Riverglide Pathway
+4 Needleverge Pathway
+
+[sideboard]
+3 Mazemind Tome
+2 Phoenix of Ash
+2 Cinderclasm
+1 Disdainful Stroke
+1 Light of Hope
+1 Glass Casket
+3 Redcap Melee
+2 Mystical Dispute

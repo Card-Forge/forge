@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by André Santos (mclovin)
+Title=Green Stuff
+Difficulty=very hard
+Description=Red Deck Wins by André Santos (mclovin)
+Icon=Green Stuff.jpg
+Deck Type=constructed
+
+[main]
+4 Fanatical Firebrand
+4 Ghitu Lavarunner
+4 Goblin Chainwhirler
+4 Runaway Steam-Kin
+4 Viashino Pyromancer
+4 Lightning Strike
+4 Shock
+3 Wizard's Lightning
+4 Light Up the Stage
+4 Experimental Frenzy
+1 Chandra, Fire Artisan
+20 Mountain
+
+[sideboard]
+1 Chandra, Fire Artisan
+2 Dire Fleet Daredevil
+3 Fight with Fire
+3 Lava Coil
+2 Legion Warboss
+2 Rekindling Phoenix
+2 Tibalt, Rakish Instigator

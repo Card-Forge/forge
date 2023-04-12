@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=UW God-Pharaoh's Gift by Thomas Van Der Paelt
+Title=Poseidon
+Difficulty=very hard
+Description=UW God-Pharaoh's Gift by Thomas Van Der Paelt
+Icon=Poseidon.jpg
+Deck Type=constructed
+
+[main]
+4 Minister of Inquiries|KLD
+4 Champion of Wits|HOU
+2 Sunscourge Champion|HOU
+4 Angel of Invention|KLD
+4 Strategic Planning|HOU
+4 Chart a Course|XLN
+2 Fumigate|KLD
+4 Refurbish|KLD
+1 Negate
+4 God-Pharaoh's Gift|HOU
+1 Search for Azcanta|XLN
+1 Cast Out|AKH
+1 Thopter Arrest|AER
+4 Glacial Fortress|XLN
+4 Irrigated Farmland|AKH
+1 Field of Ruin|XLN
+2 Ipnu Rivulet|HOU
+6 Plains
+7 Island
+
+[sideboard]
+1 Fumigate|KLD
+2 Negate
+1 Thopter Arrest|AER
+3 Jace's Defeat|HOU
+2 Fragmentize|KLD
+2 Baffling End
+1 Cataclysmic Gearhulk|KLD
+1 Remorseful Cleric
+2 Lyra Dawnbringer

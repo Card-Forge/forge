@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Mono White Control  by Christian Trudel
+Title=Riven Turnbull
+Difficulty=very hard
+Description=Mono White Control  by Christian Trudel
+Icon=Riven Turnbull.jpg
+Deck Type=constructed
+
+[main]
+4 Spirited Companion
+3 Loran of the Third Path
+3 Serra Paragon
+2 Ao, the Dawn Sky
+2 Sanctuary Warden
+1 Cathar Commando
+4 Reckoner Bankbuster
+2 Destroy Evil
+4 Lay Down Arms
+1 Farewell
+4 Wedding Announcement
+2 The Eternal Wanderer
+4 The Wandering Emperor
+15 Plains
+4 Field of Ruin
+2 Demolition Field
+2 Roadside Reliquary
+1 Eiganjo, Seat of the Empire
+
+[sideboard]
+2 Sunset Revelry
+2 Fateful Absence
+2 Depopulate
+3 The Stone Brain
+1 Elspeth Resplendent
+2 Myrel, Shield of Argive
+2 Ossification
+1 Knockout Blow

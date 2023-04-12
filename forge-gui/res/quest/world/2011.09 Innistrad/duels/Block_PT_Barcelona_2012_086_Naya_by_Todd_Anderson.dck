@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Naya by Todd Anderson
+Title=Scarab God
+Difficulty=very hard
+Description=Naya by Todd Anderson
+Icon=Scarab God.jpg
+Deck Type=constructed
+
+[main]
+4 Cavern of Souls|AVR
+3 Clifftop Retreat
+4 Evolving Wilds
+8 Forest|RTR
+3 Gavony Township|ISD
+1 Mountain|RTR
+2 Plains|RTR
+4 Avacyn's Pilgrim|ISD
+3 Borderland Ranger|AVR
+3 Fiend Hunter|C13
+4 Huntmaster of the Fells|DKA
+1 Mikaeus, the Lunarch|ISD
+4 Restoration Angel|AVR
+4 Scorned Villager|DKA
+1 Ulvenwald Tracker|AVR
+4 Wolfir Silverheart|AVR
+3 Bonfire of the Damned|AVR
+4 Garruk Relentless|ISD
+
+[sideboard]
+1 Ulvenwald Tracker|AVR
+1 Divine Deflection|AVR
+3 Nevermore|ISD
+3 Sigarda, Host of Herons|AVR
+2 Slayer of the Wicked|ISD
+3 Tree of Redemption|ISD
+2 Zealous Conscripts|AVR

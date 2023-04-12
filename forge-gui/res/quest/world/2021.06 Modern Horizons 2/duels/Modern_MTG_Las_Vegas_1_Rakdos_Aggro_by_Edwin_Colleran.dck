@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Edwin Colleran
+Title=Silver Surfer
+Difficulty=very hard
+Description=Rakdos Aggro by Edwin Colleran
+Icon=Silver Surfer.jpg
+Deck Type=constructed
+
+[main]
+2 Dauthi Voidwalker
+3 Tourach, Dread Cantor
+3 Kroxa, Titan of Death's Hunger
+4 Dragon's Rage Channeler
+4 Ragavan, Nimble Pilferer
+4 Mishra's Bauble|CS
+2 Terminate|ARB
+2 Lightning Bolt|M11
+3 Kolaghan's Command|DTK
+4 Unholy Heat
+3 Thoughtseize|THS
+4 Inquisition of Kozilek|ROE
+1 Swamp
+1 Shizo, Death's Storehouse|CHK
+1 Urborg, Tomb of Yawgmoth|M15
+1 Shinka, the Bloodsoaked Keep|CHK
+3 Graven Cairns|SHM
+3 Den of the Bugbear
+4 Blood Crypt
+4 Bloodstained Mire|KTK
+4 Blackcleave Cliffs|SOM
+
+[sideboard]
+2 Dauthi Voidwalker
+1 Terminate|ARB
+1 Thoughtseize|THS
+1 Chalice of the Void|MR
+1 Lurrus of the Dream-Den
+2 Shattering Spree|GP
+2 Pyrite Spellbomb|MR
+2 Alpine Moon
+3 Engineered Explosives|FD

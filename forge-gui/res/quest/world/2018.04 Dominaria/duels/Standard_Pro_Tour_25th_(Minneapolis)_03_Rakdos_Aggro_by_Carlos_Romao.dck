@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Carlos Romao
+Title=The Torpor Orb
+Difficulty=very hard
+Description=Rakdos Aggro by Carlos Romao
+Icon=The Torpor Orb.jpg
+Deck Type=constructed
+
+[main]
+3 Chandra, Torch of Defiance|KLD
+4 Bomat Courier|KLD
+3 Soul-Scar Mage|AKH
+2 Kari Zev, Skyship Raider|AER
+4 Scrapheap Scrounger|KLD
+4 Goblin Chainwhirler
+2 Pia Nalaar|KLD
+4 Rekindling Phoenix
+1 Glorybringer|AKH
+2 Cut // Ribbons|AKH
+2 Abrade|HOU
+2 Unlicensed Disintegration|KLD
+2 Heart of Kiran|AER
+1 Swamp
+4 Canyon Slough|AKH
+2 Aether Hub|KLD
+4 Dragonskull Summit|XLN
+14 Mountain
+
+[sideboard]
+2 Glorybringer|AKH
+2 Abrade|HOU
+3 Duress
+2 Magma Spray|AKH
+2 Chandra's Defeat|HOU
+2 Doomfall|HOU
+2 Hour of Glory|HOU

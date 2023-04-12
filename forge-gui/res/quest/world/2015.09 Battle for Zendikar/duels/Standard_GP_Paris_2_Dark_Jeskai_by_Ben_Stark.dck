@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Dark Jeskai by Ben Stark
+Title=alasedris
+Difficulty=very hard
+Description=Dark Jeskai by Ben Stark
+Icon=alasedris.jpg
+Deck Type=constructed
+
+[main]
+1 Chandra, Flamecaller|OGW
+4 Jace, Vryn's Prodigy|ORI
+3 Soulfire Grand Master|FRF
+4 Mantis Rider|KTK
+2 Kalitas, Traitor of Ghet|OGW
+2 Duress|DTK
+2 Roast|DTK
+4 Painful Truths|BFZ
+4 Crackling Doom|KTK
+3 Fiery Impulse|ORI
+2 Disdainful Stroke|KTK
+2 Dig Through Time|KTK
+1 Murderous Cut|KTK
+4 Bloodstained Mire|KTK
+4 Flooded Strand|KTK
+4 Polluted Delta|KTK
+2 Needle Spires|OGW
+2 Shambling Vent|BFZ
+2 Smoldering Marsh|BFZ
+2 Prairie Stream|BFZ
+2 Sunken Hollow|BFZ
+1 Plains|BFZ
+1 Mountain|BFZ
+1 Island|BFZ
+1 Swamp|BFZ
+
+[sideboard]
+1 Duress|DTK
+1 Roast|DTK
+1 Fiery Impulse|ORI
+1 Disdainful Stroke|KTK
+1 Exert Influence|BFZ
+2 Transgress the Mind|BFZ
+1 Ob Nixilis Reignited|BFZ
+2 Arashin Cleric|FRF
+3 Radiant Flames|BFZ
+1 Ojutai's Command|DTK
+1 Dragonlord Silumgar|DTK

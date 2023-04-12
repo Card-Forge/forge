@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Allen Wu
+Title=The Torpor Orb
+Difficulty=very hard
+Description=Gruul Aggro by Allen Wu
+Icon=The Torpor Orb.jpg
+Deck Type=constructed
+
+[main]
+4 Bonecrusher Giant
+4 Shatterskull Smashing
+2 Questing Beast
+4 Lovestruck Beast
+4 Kazandu Mammoth
+4 Brushfire Elemental
+4 Edgewall Innkeeper
+2 Fire Prophecy
+3 Embercleave
+1 The Akroan War
+4 Fabled Passage
+4 Cragcrown Pathway
+9 Forest
+4 Mountain
+3 Scavenging Ooze
+3 The Great Henge
+1 Temple of Abandon
+
+[sideboard]
+1 Questing Beast
+1 Fire Prophecy
+1 The Akroan War
+2 Vivien, Monsters' Advocate
+3 Ox of Agonas
+2 Soul Sear
+3 Wilt
+1 Thundering Rebuke
+1 Garruk, Unleashed

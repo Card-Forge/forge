@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Paskardi
+Title=Denethor
+Difficulty=very hard
+Description=Gruul Aggro by Paskardi
+Icon=Denethor.jpg
+Deck Type=constructed
+
+[main]
+2 Briarbridge Tracker
+4 Goldspan Dragon
+4 Jaspera Sentinel
+4 Magda, Brazen Outlaw
+3 Prosperous Innkeeper
+4 Reckless Stormseeker
+4 Shatterskull Smashing
+3 Dragon's Fire
+2 Negate
+4 Esika's Chariot
+4 Ranger Class
+4 Barkchannel Pathway
+4 Cragcrown Pathway
+2 Den of the Bugbear
+4 Forest
+2 Lair of the Hydra
+1 Mountain
+4 Riverglide Pathway
+1 Rockfall Vale
+
+[sideboard]
+4 Burning Hands
+2 Disdainful Stroke
+2 Kessig Naturalist
+3 Play with Fire
+3 Tangletrap
+1 Test of Talents

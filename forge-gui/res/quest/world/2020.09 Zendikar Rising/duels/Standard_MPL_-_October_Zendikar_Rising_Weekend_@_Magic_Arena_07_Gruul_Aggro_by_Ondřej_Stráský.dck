@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Ondřej Stráský
+Title=Astral Visionary
+Difficulty=very hard
+Description=Gruul Aggro by Ondřej Stráský
+Icon=Astral Visionary.jpg
+Deck Type=constructed
+
+[main]
+4 Cragcrown Pathway
+7 Forest
+4 Shatterskull Smashing
+3 Mountain
+2 Evolving Wilds
+4 Fabled Passage
+4 Embercleave
+4 Stonecoil Serpent
+2 Scavenging Ooze
+2 Questing Beast
+4 Lovestruck Beast
+4 Kazandu Mammoth
+4 Gemrazer
+4 Edgewall Innkeeper
+4 Brushfire Elemental
+4 Bonecrusher Giant
+
+[sideboard]
+2 Phoenix of Ash
+1 Ox of Agonas
+3 Vivien, Monsters' Advocate
+2 The Great Henge
+4 Scorching Dragonfire
+2 Garruk's Harbinger
+1 Scavenging Ooze

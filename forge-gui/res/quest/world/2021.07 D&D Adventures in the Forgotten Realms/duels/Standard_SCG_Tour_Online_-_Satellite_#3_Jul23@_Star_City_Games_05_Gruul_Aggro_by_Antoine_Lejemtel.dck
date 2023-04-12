@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Antoine Lejemtel
+Title=Carnage
+Difficulty=very hard
+Description=Gruul Aggro by Antoine Lejemtel
+Icon=Carnage.jpg
+Deck Type=constructed
+
+[main]
+1 Snakeskin Veil
+1 Garruk, Unleashed
+2 Kazuul's Fury
+3 Esika's Chariot
+3 Embercleave
+4 Shatterskull Smashing
+3 Goldspan Dragon
+4 Magda, Brazen Outlaw
+4 Rimrock Knight
+4 Bonecrusher Giant
+4 Lovestruck Beast
+4 Edgewall Innkeeper
+4 Jaspera Sentinel
+1 Hall of Oracles
+2 Lair of the Hydra
+4 Barkchannel Pathway
+4 Cragcrown Pathway
+4 Forest
+4 Riverglide Pathway
+
+[sideboard]
+4 Redcap Melee
+3 Ox of Agonas
+2 Burning Hands
+2 Disdainful Stroke
+2 Masked Vandal
+1 Mythos of Vadrok
+1 The Akroan War

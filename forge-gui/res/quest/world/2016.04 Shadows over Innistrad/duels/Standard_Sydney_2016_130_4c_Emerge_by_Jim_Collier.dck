@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=4c Emerge by Jim Collier
+Title=Sedge Beast
+Difficulty=very hard
+Description=4c Emerge by Jim Collier
+Icon=Sedge Beast.jpg
+Deck Type=constructed
+
+[main]
+4 Jace, Vryn's Prodigy|ORI
+2 Noose Constrictor|EMN
+4 Prized Amalgam|SOI
+2 Nissa, Vastwood Seer|ORI
+4 Haunted Dead|EMN
+4 Elder Deep-Fiend|EMN
+1 Ishkanah, Grafwidow|EMN
+4 Traverse the Ulvenwald|SOI
+4 Gather the Pack|ORI
+1 Collective Brutality|EMN
+4 Grapple with the Past|EMN
+4 Kozilek's Return|OGW
+4 Yavimaya Coast|ORI
+4 Llanowar Wastes|ORI
+4 Evolving Wilds
+2 Lumbering Falls|BFZ
+1 Sunken Hollow|BFZ
+3 Forest|RTR
+2 Island|RTR
+1 Swamp|RTR
+1 Mountain|RTR
+
+[sideboard]
+1 Ishkanah, Grafwidow|EMN
+1 Swamp|RTR
+3 Transgress the Mind|BFZ
+2 Negate
+1 Ultimate Price|DTK
+2 Gnarlwood Dryad|EMN
+1 Kalitas, Traitor of Ghet|OGW
+1 Gilt-Leaf Winnower|ORI
+1 Dragonlord Silumgar|DTK
+1 Decimator of the Provinces|EMN
+1 Summary Dismissal|EMN

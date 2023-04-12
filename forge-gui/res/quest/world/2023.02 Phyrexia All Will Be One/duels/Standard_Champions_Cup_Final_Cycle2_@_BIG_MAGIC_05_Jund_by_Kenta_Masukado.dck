@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Jund by Kenta Masukado
+Title=R2-D2
+Difficulty=very hard
+Description=Jund by Kenta Masukado
+Icon=R2-D2.jpg
+Deck Type=constructed
+
+[main]
+1 Cut Down
+1 Duress
+2 Abrade
+2 Unleash the Inferno
+2 Jaya, Fiery Negotiator
+3 Go for the Throat
+3 Reckoner Bankbuster
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+2 Capricious Hellraiser
+2 Sheoldred, the Apocalypse
+3 Graveyard Trespasser
+4 Bloodtithe Harvester
+1 Boseiju, Who Endures
+1 Mountain
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+2 Llanowar Wastes
+2 Deathcap Glade
+3 Swamp
+4 Ziatora's Proving Ground
+4 Blackcleave Cliffs
+4 Sulfurous Springs
+4 Haunted Ridge
+
+[sideboard]
+3 Razorlash Transmogrant
+2 The Cruelty of Gix
+2 Unlicensed Hearse
+2 Brotherhood's End
+1 Liliana of the Veil
+2 Cut Down
+3 Duress

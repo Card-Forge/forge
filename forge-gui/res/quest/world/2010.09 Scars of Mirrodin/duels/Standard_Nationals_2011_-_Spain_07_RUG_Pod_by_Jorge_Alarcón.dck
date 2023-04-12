@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=RUG Pod by Jorge Alarcón
+Title=Pendelhaven
+Difficulty=very hard
+Description=RUG Pod by Jorge Alarcón
+Icon=Pendelhaven.jpg
+Deck Type=constructed
+
+[main]
+2 Acidic Slime|M12
+4 Birds of Paradise|M12
+1 Cunning Sparkmage|WWK
+1 Hero of Oxid Ridge|MBS
+1 Inferno Titan|M12
+1 Llanowar Elves|M12
+3 Lotus Cobra|ZEN
+1 Obstinate Baloth|M11
+1 Phantasmal Image|M12
+1 Phyrexian Metamorph|NPH
+3 Sea Gate Oracle|ROE
+1 Sylvan Ranger|M11
+1 Sylvok Replica|SOM
+1 Tuktuk Scrapper|WWK
+1 Urabrask the Hidden|NPH
+1 Vengevine|ROE
+1 Wurmcoil Engine|SOM
+3 Nature's Claim|WWK
+4 Ponder|M12
+2 Preordain|M11
+4 Birthing Pod|NPH
+4 Copperline Gorge|SOM
+4 Rootbound Crag|M12
+5 Forest|M12
+2 Island|M12
+4 Misty Rainforest|ZEN
+2 Mountain|M12
+1 Verdant Catacombs|ZEN
+
+[sideboard]
+1 Inferno Titan|M12
+2 Obstinate Baloth|M11
+1 Vengevine|ROE
+1 Spellskite|NPH
+3 Act of Aggression|NPH
+3 Combust|M12
+1 Flame Slash|ROE
+3 Pyroclasm|M11

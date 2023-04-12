@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=UWR Patriot Control by Constantine Vernikos
+Title=Black
+Difficulty=very hard
+Description=UWR Patriot Control by Constantine Vernikos
+Icon=Black.jpg
+Deck Type=constructed
+
+[main]
+4 Clifftop Retreat
+2 Desolate Lighthouse|AVR
+4 Evolving Wilds
+7 Island|RTR
+2 Mountain|RTR
+3 Plains|RTR
+4 Sulfur Falls
+2 Lone Revenant|C15
+4 Snapcaster Mage|ISD
+3 Bonfire of the Damned|AVR
+3 Brimstone Volley|CNS
+4 Desperate Ravings|C15
+2 Devil's Play|ISD
+3 Dissipate|M15
+4 Pillar of Flame|AVR
+3 Tamiyo, the Moon Sage|AVR
+4 Terminus|AVR
+2 Vessel of Endless Rest|AVR
+
+[sideboard]
+1 Dissipate|M15
+2 Archwing Dragon|AVR
+2 Banishing Stroke|AVR
+2 Blasphemous Act|C16
+1 Cavern of Souls|AVR
+3 Fettergeist|AVR
+2 Purify the Grave|ISD
+2 Witchbane Orb|ISD

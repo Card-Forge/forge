@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=4c Yorion by Kihara Atsuki
+Title=Kasen Ibaraki
+Difficulty=very hard
+Description=4c Yorion by Kihara Atsuki
+Icon=Kasen Ibaraki.jpg
+Deck Type=constructed
+
+[main]
+1 Valki, God of Lies
+1 Eternal Witness|FD
+1 Endurance
+3 Fury
+4 Omnath, Locus of Creation
+4 Ice-Fang Coatl
+4 Solitude
+4 Renegade Rallier|AER
+4 Ephemerate
+4 Expressive Iteration
+4 Prismatic Ending
+4 Bring to Light|BFZ
+4 Utopia Sprawl|DIS
+4 Teferi, Time Raveler
+4 Wrenn and Six
+1 Raugrin Triome
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+1 Snow-Covered Island
+1 Ketria Triome
+1 Snow-Covered Mountain
+1 Snow-Covered Plains
+1 Sacred Foundry
+1 Hallowed Fountain
+1 Breeding Pool
+1 Savai Triome
+1 Indatha Triome
+2 Snow-Covered Forest
+3 Wooded Foothills|KTK
+4 Misty Rainforest|ZEN
+4 Flooded Strand|KTK
+4 Windswept Heath|KTK
+
+[sideboard]
+1 Force of Vigor
+1 Yorion, Sky Nomad
+1 Fracturing Gust|SHM
+4 Veil of Summer
+4 Aether Gust
+4 Sanctifier en-Vec

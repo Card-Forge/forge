@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Ryuji Murae
+Title=Deadpool
+Difficulty=very hard
+Description=Rakdos Aggro by Ryuji Murae
+Icon=Deadpool.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Torch of Defiance|KLD
+4 Bomat Courier|KLD
+3 Soul-Scar Mage|AKH
+4 Scrapheap Scrounger|KLD
+4 Hazoret the Fervent|AKH
+4 Goblin Chainwhirler
+2 Kari Zev, Skyship Raider|AER
+1 Rekindling Phoenix
+3 Ahn-Crop Crasher|AKH
+1 Earthshaker Khenra|HOU
+2 Magma Spray|AKH
+4 Abrade|HOU
+2 Unlicensed Disintegration|KLD
+13 Mountain
+4 Canyon Slough|AKH
+4 Dragonskull Summit|XLN
+2 Aether Hub|KLD
+1 Cinder Barrens
+
+[sideboard]
+1 Chandra, Torch of Defiance|KLD
+1 Rekindling Phoenix
+3 Doomfall|HOU
+1 The Eldest Reborn
+2 Chandra's Defeat|HOU
+1 Hour of Glory|HOU
+2 Glorybringer|AKH
+1 Skysovereign, Consul Flagship|KLD
+1 Scavenger Grounds|HOU
+1 Karn, Scion of Urza
+1 Cut // Ribbons|AKH

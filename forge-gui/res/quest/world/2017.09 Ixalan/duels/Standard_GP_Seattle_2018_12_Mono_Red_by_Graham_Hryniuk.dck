@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Red by Graham Hryniuk
+Title=Nagini
+Difficulty=very hard
+Description=Mono Red by Graham Hryniuk
+Icon=Nagini.jpg
+Deck Type=constructed
+
+[main]
+4 Bomat Courier|KLD
+4 Earthshaker Khenra|HOU
+4 Fanatical Firebrand
+4 Hazoret the Fervent|AKH
+3 Kari Zev, Skyship Raider|AER
+1 Pia Nalaar|KLD
+3 Rekindling Phoenix
+1 Abrade|HOU
+4 Lightning Strike|XLN
+1 Magma Spray|AKH
+3 Shock|AER
+3 Grasping Dunes|AKH
+18 Mountain
+3 Scavenger Grounds|HOU
+4 Ahn-Crop Crasher|AKH
+
+[sideboard]
+2 Pia Nalaar|KLD
+2 Abrade|HOU
+1 Magma Spray|AKH
+2 Aethersphere Harvester|AER
+3 Chandra, Torch of Defiance|KLD
+2 Dire Fleet Daredevil
+2 Fiery Cannonade|XLN
+1 Glorybringer|AKH

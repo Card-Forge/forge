@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=UG Aggro by Masami Kaneko
+Title=The Color White
+Difficulty=very hard
+Description=UG Aggro by Masami Kaneko
+Icon=The Color White.jpg
+Deck Type=constructed
+
+[main]
+11 Island|RTR
+4 Looter il-Kor|TSP
+4 Terramorphic Expanse|C16
+4 Llanowar Reborn|C15
+4 Riftsweeper|FUT
+4 Riftwing Cloudskate|TSP
+4 Pongify|C14
+4 Delay|FUT
+4 Mystic Snake|C15
+4 Tarmogoyf|FUT
+3 Vesuvan Shapeshifter|TSP
+3 Psionic Blast|TSP
+2 Horizon Canopy|FUT
+2 Forest|RTR
+2 Venser, Shaper Savant|FUT
+1 Pendelhaven|TSP
+
+[sideboard]
+1 Vesuvan Shapeshifter|TSP
+4 Serrated Arrows|TSP
+3 Thornweald Archer|C14
+3 Teferi, Mage of Zhalfir|TSP
+3 Brine Elemental|C14
+1 Urza's Factory|C13

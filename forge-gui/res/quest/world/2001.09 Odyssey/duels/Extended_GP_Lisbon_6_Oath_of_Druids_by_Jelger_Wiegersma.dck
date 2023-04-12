@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Oath of Druids by Jelger Wiegersma
+Title=Repel the Dark
+Difficulty=very hard
+Description=Oath of Druids by Jelger Wiegersma
+Icon=Repel the Dark.jpg
+Deck Type=constructed
+
+[main]
+1 Spike Weaver|EX
+1 Morphling|US
+1 Spike Feeder|SH
+2 Gaea's Blessing|WL
+4 Impulse|VI
+4 Accumulated Knowledge|NE
+4 Fact or Fiction|IN
+4 Counterspell|A
+4 Force of Will|AL
+2 Intuition|TE
+2 Thwart|MM
+4 Powder Keg|UD
+4 Oath of Druids|EX
+4 Tropical Island|A
+1 Treetop Village|UL
+5 Forest|A
+13 Island|A
+
+[sideboard]
+1 Spike Weaver|EX
+1 Intuition|TE
+3 Thawing Glaciers|AL
+3 Roar of the Wurm|OD
+4 Propaganda|TE
+3 Back to Basics|US

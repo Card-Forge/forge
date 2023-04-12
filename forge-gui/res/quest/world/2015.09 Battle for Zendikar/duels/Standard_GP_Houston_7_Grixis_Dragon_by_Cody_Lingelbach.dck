@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Grixis Dragon by Cody Lingelbach
+Title=Shango
+Difficulty=very hard
+Description=Grixis Dragon by Cody Lingelbach
+Icon=Shango.jpg
+Deck Type=constructed
+
+[main]
+4 Thopter Engineer|ORI
+4 Thunderbreak Regent|DTK
+4 Kolaghan, the Storm's Fury|FRF
+4 Hangarback Walker|ORI
+4 Bearer of Silence|OGW
+4 Eldrazi Skyspawner|BFZ
+1 Dispel|BFZ
+3 Murderous Cut|KTK
+4 Draconic Roar|DTK
+2 Ghostfire Blade|KTK
+4 Bloodstained Mire|KTK
+2 Haven of the Spirit Dragon|DTK
+3 Mountain|BFZ
+4 Polluted Delta|KTK
+4 Shivan Reef|ORI
+3 Smoldering Marsh|BFZ
+2 Sunken Hollow|BFZ
+1 Swamp|BFZ
+3 Wooded Foothills|KTK
+
+[sideboard]
+3 Dispel|BFZ
+1 Murderous Cut|KTK
+1 Disdainful Stroke|KTK
+3 Self-Inflicted Wound|DTK
+2 Silumgar, the Drifting Death|FRF
+4 Transgress the Mind|BFZ
+1 Seismic Rupture|DTK

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Esper Control by Shota Yasooka (yaya3)
+Title=Ben Djinn
+Difficulty=very hard
+Description=Esper Control by Shota Yasooka (yaya3)
+Icon=Ben Djinn.jpg
+Deck Type=constructed
+
+[main]
+3 Basilica Bell-Haunt
+2 Bolas's Citadel
+2 Cast Down
+2 Revitalize
+2 Command the Dreadhorde
+2 Discovery // Dispersal
+3 Kaya's Wrath
+1 The Elderspell
+4 Thought Erasure
+3 Oath of Kaya
+4 Narset, Parter of Veils
+3 Teferi, Hero of Dominaria
+3 Teferi, Time Raveler
+4 Drowned Catacomb|XLN
+4 Glacial Fortress|XLN
+4 Godless Shrine
+4 Hallowed Fountain
+4 Isolated Chapel
+1 Plains
+1 Swamp
+4 Watery Grave
+
+[sideboard]
+1 Basilica Bell-Haunt
+1 The Elderspell
+3 Cry of the Carnarium
+1 Despark
+3 Duress
+2 Enter the God-Eternals
+2 Ixalan's Binding|XLN
+2 Search for Azcanta|XLN

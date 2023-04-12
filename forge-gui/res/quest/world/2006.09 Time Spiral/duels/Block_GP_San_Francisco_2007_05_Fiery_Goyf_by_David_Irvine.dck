@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Fiery Goyf by David Irvine
+Title=Jesse James
+Difficulty=very hard
+Description=Fiery Goyf by David Irvine
+Icon=Jesse James.jpg
+Deck Type=constructed
+
+[main]
+4 Edge of Autumn|FUT
+4 Dead // Gone|PLC
+4 Fiery Justice|C13
+4 Stonecloaker|C13
+4 Calciderm|PLC
+4 Serra Avenger|M13
+4 Tarmogoyf|FUT
+4 Kavu Predator|PLC
+4 Riftsweeper|FUT
+1 Mountain|RTR
+1 Forest|RTR
+1 Vesuva|TSP
+2 Llanowar Reborn|C15
+3 Plains|RTR
+4 Horizon Canopy|FUT
+4 Grove of the Burnwillows|FUT
+4 Flagstones of Trokair|TSP
+4 Terramorphic Expanse|C16
+
+[sideboard]
+4 Mystic Enforcer|TSP
+2 Disenchant|CN2
+3 Boom // Bust|PLC
+3 Ancient Grudge|ISD
+2 Temporal Isolation|TSP
+1 Vesuva|TSP

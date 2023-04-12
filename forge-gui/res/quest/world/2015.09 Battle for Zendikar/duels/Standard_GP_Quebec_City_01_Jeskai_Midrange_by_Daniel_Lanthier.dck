@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Jeskai Midrange by Daniel Lanthier
+Title=Nibbler
+Difficulty=very hard
+Description=Jeskai Midrange by Daniel Lanthier
+Icon=Nibbler.jpg
+Deck Type=constructed
+
+[main]
+1 Swamp|BFZ
+2 Mountain|BFZ
+1 Island|BFZ
+1 Plains|BFZ
+1 Smoldering Marsh|BFZ
+1 Sunken Hollow|BFZ
+2 Prairie Stream|BFZ
+4 Bloodstained Mire|KTK
+4 Polluted Delta|KTK
+4 Flooded Strand|KTK
+1 Nomad Outpost|KTK
+4 Mystic Monastery|KTK
+1 Utter End|KTK
+2 Kolaghan's Command|DTK
+2 Wild Slash|FRF
+3 Ojutai's Command|DTK
+2 Dispel|BFZ
+3 Fiery Impulse|ORI
+4 Crackling Doom|KTK
+2 Dig Through Time|KTK
+1 Sarkhan, the Dragonspeaker|KTK
+4 Jace, Vryn's Prodigy|ORI
+2 Soulfire Grand Master|FRF
+1 Dragonmaster Outcast|BFZ
+4 Mantis Rider|KTK
+3 Tasigur, the Golden Fang|FRF
+
+[sideboard]
+2 Arashin Cleric|FRF
+1 Negate|ORI
+2 Radiant Flames|BFZ
+1 Painful Truths|BFZ
+1 Virulent Plague|DTK
+2 Roast|DTK
+2 Exert Influence|BFZ
+1 Felidar Cub|BFZ
+2 Duress|DTK
+1 Dragonmaster Outcast|BFZ

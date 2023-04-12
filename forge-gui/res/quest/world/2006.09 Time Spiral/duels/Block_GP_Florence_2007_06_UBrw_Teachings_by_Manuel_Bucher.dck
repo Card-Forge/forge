@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=UBrw Teachings by Manuel Bucher
+Title=Dr Doom
+Difficulty=very hard
+Description=UBrw Teachings by Manuel Bucher
+Icon=Dr Doom.jpg
+Deck Type=constructed
+
+[main]
+4 Damnation|PLC
+4 Terramorphic Expanse|C16
+4 Shadowmage Infiltrator|TSP
+4 Tolaria West|FUT
+4 River of Tears|FUT
+3 Careful Consideration|TSP
+3 Prismatic Lens|TSP
+3 Coalition Relic|FUT
+3 Urborg, Tomb of Yawgmoth|M15
+3 Island|RTR
+2 Void|TSP
+2 Aeon Chronicler|C16
+2 Molten Slagheap|C13
+2 Mystical Teachings|TSP
+2 Academy Ruins|TSP
+2 Triskelavus|CMD
+2 Tendrils of Corruption|C14
+1 Detritivore|PLC
+1 Slaughter Pact|FUT
+1 Pull from Eternity|TSP
+1 Pact of Negation|FUT
+1 Strangling Soot|TSP
+1 Haunting Hymn|TSP
+1 Swamp|RTR
+1 Mountain|RTR
+1 Plains|RTR
+1 Teferi, Mage of Zhalfir|TSP
+1 Urza's Factory|C13
+
+[sideboard]
+2 Void|TSP
+2 Detritivore|PLC
+2 Slaughter Pact|FUT
+1 Pull from Eternity|TSP
+1 Pact of Negation|FUT
+1 Strangling Soot|TSP
+2 Ancient Grudge|ISD
+2 Spell Burst|TSP
+2 Imp's Mischief|PLC

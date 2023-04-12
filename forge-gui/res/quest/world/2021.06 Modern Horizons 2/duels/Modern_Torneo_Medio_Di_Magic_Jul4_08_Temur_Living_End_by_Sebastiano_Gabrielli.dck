@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Temur Living End by Sebastiano Gabrielli
+Title=Wonder Woman
+Difficulty=very hard
+Description=Temur Living End by Sebastiano Gabrielli
+Icon=Wonder Woman.jpg
+Deck Type=constructed
+
+[main]
+2 Subtlety
+2 Windcaller Aven
+2 Waker of Waves
+4 Striped Riverwinder|HOU
+4 Street Wraith|FUT
+4 Shardless Agent
+4 Desert Cerodon|AKH
+4 Curator of Mysteries|AKH
+3 Brazen Borrower
+4 Force of Negation
+4 Violent Outburst|ARB
+3 Living End|TSP
+1 Flooded Strand|KTK
+1 Polluted Delta|KTK
+2 Scalding Tarn|ZEN
+1 Misty Rainforest|ZEN
+4 Botanical Sanctum|KLD
+4 Spirebluff Canal|KLD
+2 Breeding Pool
+2 Steam Vents
+2 Island
+1 Sunken Ruins|SHM
+
+[sideboard]
+4 Mystical Dispute
+4 Leyline of the Void
+2 Foundation Breaker
+1 Force of Vigor
+2 Dead // Gone|PLC
+2 Anger of the Gods|THS

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Golgari Explore by Reid Duke
+Title=The Pied Piper
+Difficulty=very hard
+Description=Golgari Explore by Reid Duke
+Icon=The Pied Piper.jpg
+Deck Type=constructed
+
+[main]
+3 Vivien Reid
+4 Llanowar Elves
+4 Merfolk Branchwalker|XLN
+1 Seekers' Squire|XLN
+3 Wildgrowth Walker|XLN
+4 Jadelight Ranger
+2 Thrashing Brontodon
+3 Ravenous Chupacabra
+2 Golgari Findbroker
+3 Carnage Tyrant|XLN
+3 Find // Finality
+1 Assassin's Trophy
+1 Cast Down
+3 Vraska's Contempt|XLN
+4 Overgrown Tomb
+4 Woodland Cemetery
+2 Memorial to Folly
+5 Swamp
+8 Forest
+
+[sideboard]
+3 Cast Down
+4 Duress
+1 Moment of Craving
+2 Deathgorge Scavenger|XLN
+1 Ritual of Soot
+1 Midnight Reaper
+2 Doom Whisperer
+1 Vraska, Relic Seeker|XLN

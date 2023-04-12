@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Witch
+Title=Doc Holiday
+Difficulty=very hard
+Description=Rakdos Aggro by Witch
+Icon=Doc Holiday.jpg
+Deck Type=constructed
+
+[main]
+8 Swamp
+5 Mountain
+4 Blood Crypt
+4 Fabled Passage
+2 Temple of Malice
+1 Castle Locthwain
+4 Tymaret Calls the Dead
+4 Claim the Firstborn
+4 Witch's Oven
+4 Cauldron Familiar
+4 Priest of Forgotten Gods
+4 Mire Triton
+4 Mayhem Devil
+4 Kroxa, Titan of Death's Hunger
+3 Gutterbones
+1 Woe Strider
+
+[sideboard]
+3 Scorching Dragonfire
+3 Agonizing Remorse
+3 Embereth Shieldbreaker
+2 Act of Treason
+2 Noxious Grasp
+2 Redcap Melee

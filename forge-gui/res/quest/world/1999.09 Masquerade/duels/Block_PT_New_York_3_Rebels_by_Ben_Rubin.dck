@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Rebels by Ben Rubin
+Title=Nagsnarf
+Difficulty=very hard
+Description=Rebels by Ben Rubin
+Icon=Nagsnarf.jpg
+Deck Type=constructed
+
+[main]
+1 Rishadan Port|MM
+13 Plains|RTR
+12 Forest|RTR
+3 Seal of Cleansing|C15
+4 Reverent Mantra|MM
+4 Saproling Burst|NE
+4 Parallax Wave|NE
+4 Voice of Truth|NE
+1 Ramosian Sky Marshal|MM
+4 Ramosian Sergeant|MM
+1 Ramosian Lieutenant|MM
+1 Lin Sivvi, Defiant Hero|NE
+4 Fresh Volunteers|MM
+4 Blastoderm|NE
+
+[sideboard]
+3 Jhovall Queen|MM
+3 Invigorate|CMD
+2 Disenchant|CN2
+1 Defiant Vanguard|TSP
+1 Defiant Falcon|NE
+2 Arrest|RTR
+1 Seal of Cleansing|C15
+3 Lin Sivvi, Defiant Hero|NE

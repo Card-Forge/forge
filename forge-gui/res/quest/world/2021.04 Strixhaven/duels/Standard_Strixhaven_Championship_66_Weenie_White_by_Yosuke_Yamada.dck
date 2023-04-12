@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Weenie White by Yosuke Yamada
+Title=Iroh
+Difficulty=very hard
+Description=Weenie White by Yosuke Yamada
+Icon=Iroh.jpg
+Deck Type=constructed
+
+[main]
+2 Legion Angel
+2 Drannith Magistrate
+4 Seasoned Hallowblade
+4 Skyclave Apparition
+4 Reidane, God of the Worthy
+4 Alseid of Life's Bounty
+4 Selfless Savior
+4 Giant Killer
+4 Elite Spellbinder
+4 Luminarch Aspirant
+4 Faceless Haven
+20 Snow-Covered Plains
+
+[sideboard]
+2 Legion Angel
+2 Drannith Magistrate
+1 Lurrus of the Dream-Den
+1 Disenchant
+2 Shadowspear
+2 Tormod's Crypt
+2 Banishing Light
+3 Glass Casket

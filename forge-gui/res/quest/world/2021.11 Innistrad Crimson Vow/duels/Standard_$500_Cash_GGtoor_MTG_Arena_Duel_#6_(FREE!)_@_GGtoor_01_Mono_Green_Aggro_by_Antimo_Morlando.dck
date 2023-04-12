@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Antimo Morlando
+Title=Silver Samurai
+Difficulty=very hard
+Description=Mono Green Aggro by Antimo Morlando
+Icon=Silver Samurai.jpg
+Deck Type=constructed
+
+[main]
+4 Ascendant Packleader
+4 Ulvenwald Oddity
+4 Old-Growth Troll
+4 Sculptor of Winter
+4 Werewolf Pack Leader
+4 Esika's Chariot
+1 Snakeskin Veil
+4 Blizzard Brawl
+2 Unnatural Growth
+2 Ranger Class
+2 Lair of the Hydra
+3 Faceless Haven
+4 Tangled Florahedron
+18 Snow-Covered Forest
+
+[sideboard]
+3 Snakeskin Veil
+2 Wrenn and Seven
+3 Inscription of Abundance
+3 Tajuru Blightblade
+4 Devouring Tendrils

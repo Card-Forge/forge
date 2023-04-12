@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Reanimator by Kevin Mittertreiner
+Title=Tolsimir
+Difficulty=very hard
+Description=Reanimator by Kevin Mittertreiner
+Icon=Tolsimir.jpg
+Deck Type=constructed
+
+[main]
+1 Unexpected Windfall
+1 The Wandering Emperor
+2 Flame-Blessed Bolt
+2 Seize the Spoils
+2 Burn Down the House
+2 Doomskar
+3 Dragon's Fire
+4 Invoke Justice
+4 Emeria's Call
+4 Big Score
+4 Fable of the Mirror-Breaker
+4 Titan of Industry
+4 Velomachus Lorehold
+1 Eiganjo, Seat of the Empire
+1 Mountain
+2 Cragcrown Pathway
+2 Plains
+2 Overgrown Farmland
+3 Branchloft Pathway
+4 Sundown Pass
+4 Jetmir's Garden
+4 Needleverge Pathway
+
+[sideboard]
+3 Elite Spellbinder
+3 Archon of Emeria
+2 Fleetfoot Dancer
+2 Portable Hole
+2 Valorous Stance
+2 Arlinn, the Pack's Hope
+1 The Wandering Emperor

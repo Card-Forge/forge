@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Black Aggro by Andrejs Prost
+Title=Repressed Magic
+Difficulty=very hard
+Description=Mono Black Aggro by Andrejs Prost
+Icon=Repressed Magic.jpg
+Deck Type=constructed
+
+[main]
+4 Bone Picker|AKH
+4 Glint-Sleeve Siphoner|AER
+4 Scrapheap Scrounger|KLD
+4 Dread Wanderer|AKH
+4 Night Market Lookout|KLD
+2 Vicious Conquistador|XLN
+1 Bontu the Glorified|AKH
+3 Yahenni, Undying Partisan|AER
+3 Bontu's Last Reckoning|HOU
+2 Walk the Plank|XLN
+4 Fatal Push|AER
+1 Vraska's Contempt|XLN
+3 Aethersphere Harvester|AER
+1 Heart of Kiran|AER
+17 Swamp|XLN
+3 Ifnir Deadlands|HOU
+
+[sideboard]
+1 Vraska's Contempt|XLN
+1 Scavenger Grounds|HOU
+4 Gifted Aetherborn|AER
+2 Arguel's Blood Fast|XLN
+1 Doomfall|HOU
+2 Raiders' Wake|XLN
+4 Duress|XLN

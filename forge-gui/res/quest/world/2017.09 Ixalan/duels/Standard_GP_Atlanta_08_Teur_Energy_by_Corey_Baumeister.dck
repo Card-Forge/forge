@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Teur Energy by Corey Baumeister
+Title=Immortus
+Difficulty=very hard
+Description=Teur Energy by Corey Baumeister
+Icon=Immortus.jpg
+Deck Type=constructed
+
+[main]
+3 Glorybringer|AKH
+4 Forest|XLN
+2 Mountain|XLN
+3 Spirebluff Canal|KLD
+1 Sheltered Thicket|AKH
+1 Island|XLN
+3 Rootbound Crag|XLN
+4 Botanical Sanctum|KLD
+4 Aether Hub|KLD
+3 Abrade|HOU
+4 Harnessed Lightning|KLD
+2 Confiscation Coup|KLD
+4 Attune with Aether|KLD
+4 Whirler Virtuoso|KLD
+4 Longtusk Cub|KLD
+4 Servant of the Conduit|KLD
+4 Rogue Refiner|AER
+4 Bristling Hydra|KLD
+2 Chandra, Torch of Defiance|KLD
+
+[sideboard]
+1 Vizier of Many Faces|AKH
+2 Chandra's Defeat|HOU
+3 Negate|AER
+2 River's Rebuke|XLN
+1 Nissa, Steward of Elements|AKH
+1 Essence Scatter|AKH
+1 Supreme Will|HOU
+2 Magma Spray|AKH
+1 Confiscation Coup|KLD
+1 Chandra, Torch of Defiance|KLD

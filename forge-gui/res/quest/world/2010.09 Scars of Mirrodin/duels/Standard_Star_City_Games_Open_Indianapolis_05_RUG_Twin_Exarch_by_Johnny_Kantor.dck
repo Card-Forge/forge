@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=RUG Twin Exarch by Johnny Kantor
+Title=Gruul-precon
+Difficulty=very hard
+Description=RUG Twin Exarch by Johnny Kantor
+Icon=Gruul-precon.jpg
+Deck Type=constructed
+
+[main]
+2 Precursor Golem|SOM
+1 Consecrated Sphinx|MBS
+4 Deceiver Exarch|NPH
+4 Inferno Titan|M11
+4 Lotus Cobra|ZEN
+2 Mana Leak|M11
+2 Nature's Claim|WWK
+2 Explore|WWK
+4 Preordain|M11
+4 Splinter Twin|ROE
+2 Forest|NPH
+4 Island|NPH
+3 Mountain|NPH
+4 Copperline Gorge|SOM
+2 Halimar Depths|WWK
+4 Misty Rainforest|ZEN
+4 Raging Ravine|WWK
+4 Scalding Tarn|ZEN
+4 Jace, the Mind Sculptor|WWK
+
+[sideboard]
+1 Consecrated Sphinx|MBS
+2 Spellskite|NPH
+2 Acidic Slime|M11
+2 Obstinate Baloth|M11
+3 Flashfreeze|M11
+1 Lightning Bolt|M11
+2 Twisted Image|SOM
+2 Slagstorm|MBS

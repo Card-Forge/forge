@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Psychatog by Dave Humpherys
+Title=Varys
+Difficulty=very hard
+Description=Psychatog by Dave Humpherys
+Icon=Varys.jpg
+Deck Type=constructed
+
+[main]
+2 Cephalid Coliseum|OD
+4 Darkwater Catacombs|OD
+9 Island|OD
+4 Salt Marsh|IN
+2 Sulfur Vent|IN
+4 Underground River|7E
+4 Nightscape Familiar|PS
+4 Psychatog|OD
+1 Wonder|JU
+4 Chainer's Edict|TO
+1 Circular Logic|TO
+4 Counterspell|7E
+4 Cunning Wish|JU
+4 Deep Analysis|TO
+3 Fact or Fiction|IN
+4 Memory Lapse|7E
+2 Upheaval|OD
+
+[sideboard]
+1 Fact or Fiction|IN
+1 Coffin Purge|OD
+1 Disrupt|IN
+1 Divert|OD
+4 Engineered Plague|7E
+1 Ghastly Demise|OD
+1 Mana Short|7E
+1 Opt|IN
+1 Psychotic Haze|TO
+1 Recoil|IN
+1 Repulse|IN
+1 Slay|PS

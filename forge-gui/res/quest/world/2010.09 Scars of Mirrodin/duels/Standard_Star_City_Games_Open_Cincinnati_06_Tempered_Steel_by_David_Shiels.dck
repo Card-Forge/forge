@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Tempered Steel by David Shiels
+Title=Basal Ramp
+Difficulty=very hard
+Description=Tempered Steel by David Shiels
+Icon=Basal Ramp.jpg
+Deck Type=constructed
+
+[main]
+4 Memnite|SOM
+4 Signal Pest|MBS
+4 Spellskite|NPH
+4 Steel Overseer|M11
+4 Vault Skirge|NPH
+4 Dispatch|NPH
+3 Preordain|M11
+4 Glint Hawk Idol|SOM
+3 Origin Spellbomb|SOM
+3 Mox Opal|SOM
+4 Tempered Steel|SOM
+7 Plains|M12
+4 Glacial Fortress|M12
+4 Inkmoth Nexus|MBS
+4 Seachrome Coast|SOM
+
+[sideboard]
+2 Kor Firewalker|WWK
+2 Celestial Purge|M12
+3 Mana Leak|M12
+1 Revoke Existence|SOM
+1 Timely Reinforcements|M12
+2 Shrine of Loyal Legions|NPH
+2 Oblivion Ring|M12
+2 Contested War Zone|MBS

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Paolo Nicosanti
+Title=Prometheus
+Difficulty=very hard
+Description=Mono Green Aggro by Paolo Nicosanti
+Icon=Prometheus.jpg
+Deck Type=constructed
+
+[main]
+2 Ulvenwald Oddity
+4 Ascendant Packleader
+4 Werewolf Pack Leader
+4 Sculptor of Winter
+4 Old-Growth Troll
+4 Esika's Chariot
+2 Snakeskin Veil
+2 Inscription of Abundance
+4 Blizzard Brawl
+2 Ranger Class
+1 Wrenn and Seven
+1 Lair of the Hydra
+3 Faceless Haven
+4 Kazandu Mammoth
+19 Snow-Covered Forest
+
+[sideboard]
+2 Snakeskin Veil
+1 Inscription of Abundance
+1 Briarbridge Tracker
+1 Avabruck Caretaker
+2 Outland Liberator
+2 Tangletrap
+3 Devouring Tendrils
+3 Tajuru Blightblade

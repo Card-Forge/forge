@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Jund by Yo Tezuka
+Title=Corelius
+Difficulty=very hard
+Description=Jund by Yo Tezuka
+Icon=Corelius.jpg
+Deck Type=constructed
+
+[main]
+1 Riveteers Charm
+1 The Meathook Massacre
+3 The Cruelty of Gix
+3 Voltage Surge
+3 Infernal Grasp
+3 Reckoner Bankbuster
+4 Fable of the Mirror-Breaker
+1 Sheoldred, the Apocalypse
+2 Riveteers Requisitioner
+3 Soul of Windgrace
+3 Briarbridge Tracker
+3 Titan of Industry
+4 Bloodtithe Harvester
+1 Boseiju, Who Endures
+1 Sokenzan, Crucible of Defiance
+1 Forest
+1 Takenuma, Abandoned Mire
+2 Ziatora's Proving Ground
+3 Mountain
+3 Swamp
+3 Deathcap Glade
+3 Rockfall Vale
+4 Riveteers Overlook
+4 Sulfurous Springs
+
+[sideboard]
+2 Duress
+2 Unlicensed Hearse
+2 Unleash the Inferno
+2 Pilfer
+2 Cut Down
+1 Soul Transfer
+2 The Meathook Massacre
+1 Infernal Grasp
+1 Briarbridge Tracker

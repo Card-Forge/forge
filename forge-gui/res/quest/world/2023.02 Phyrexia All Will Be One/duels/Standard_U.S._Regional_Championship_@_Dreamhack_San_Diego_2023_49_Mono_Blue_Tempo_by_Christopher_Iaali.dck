@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mono Blue Tempo by Christopher Iaali
+Title=alabraid
+Difficulty=very hard
+Description=Mono Blue Tempo by Christopher Iaali
+Icon=alabraid.jpg
+Deck Type=constructed
+
+[main]
+4 Haughty Djinn
+4 Tolarian Terror
+4 Consider
+4 Fading Hope
+1 Spell Pierce
+4 Impulse
+3 Make Disappear
+2 Negate
+3 Scatter Ray
+4 Thirst for Discovery
+3 Flow of Knowledge
+2 Blue Sun's Twilight
+22 Island
+
+[sideboard]
+1 Spell Pierce
+2 Negate
+4 Ledger Shredder
+1 Pithing Needle
+2 Witness Protection
+2 Consuming Tide
+2 Invoke the Winds
+1 Teferi, Temporal Pilgrim

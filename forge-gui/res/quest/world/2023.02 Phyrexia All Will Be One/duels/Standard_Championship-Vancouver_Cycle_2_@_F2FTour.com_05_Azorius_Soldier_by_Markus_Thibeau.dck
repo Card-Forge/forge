@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Azorius Soldier by Markus Thibeau
+Title=Winston Churchill
+Difficulty=very hard
+Description=Azorius Soldier by Markus Thibeau
+Icon=Winston Churchill.jpg
+Deck Type=constructed
+
+[main]
+2 Cemetery Protector
+2 Siege Veteran
+3 Dennick, Pious Apprentice
+3 Harbin, Vanguard Aviator
+3 Skrelv, Defector Mite
+3 Zephyr Sentinel
+4 Valiant Veteran
+4 Skystrike Officer
+4 Resolute Reinforcements
+4 Recruitment Officer
+4 Protect the Negotiators
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+3 Plains
+3 Mishra's Foundry
+4 Adarkar Wastes
+4 Fortified Beachhead
+4 Secluded Courtyard
+4 Seachrome Coast
+
+[sideboard]
+1 Negate
+2 Loran of the Third Path
+2 Destroy Evil
+3 Tocasia's Welcome
+3 Lantern Flare
+4 Brutal Cathar

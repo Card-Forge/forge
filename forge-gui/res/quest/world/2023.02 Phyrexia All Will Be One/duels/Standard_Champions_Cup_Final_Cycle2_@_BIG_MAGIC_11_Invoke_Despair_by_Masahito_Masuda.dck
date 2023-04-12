@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Invoke Despair by Masahito Masuda
+Title=Spectre
+Difficulty=very hard
+Description=Invoke Despair by Masahito Masuda
+Icon=Spectre.jpg
+Deck Type=constructed
+
+[main]
+1 Spell Pierce
+1 Scatter Ray
+1 Brotherhood's End
+2 Blue Sun's Twilight
+2 Negate
+2 Make Disappear
+2 Siphon Insight
+2 Abrade
+3 Reckoner Bankbuster
+3 Go for the Throat
+4 Fable of the Mirror-Breaker
+4 Invoke Despair
+3 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Swamp
+1 Takenuma, Abandoned Mire
+2 Sulfurous Springs
+2 Haunted Ridge
+4 Xander's Lounge
+4 Darkslick Shores
+4 Blackcleave Cliffs
+4 Stormcarved Coast
+4 Underground River
+
+[sideboard]
+4 Cut Down
+4 Duress
+2 Sheoldred, the Apocalypse
+2 Disdainful Stroke
+1 Galvanic Iteration
+1 Reckoner Bankbuster
+1 Bloodtithe Harvester

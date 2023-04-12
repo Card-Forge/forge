@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Savages of Jund
+Title=Savages of Jund
+Icon=alabraid.jpg
+Difficulty=very hard
+Description=Jund feasts on the unprepared.
+Deck Type=constructed
+[Main]
+3 Bituminous Blast|ARB
+3 Blightning|ALA
+4 Bloodbraid Elf|ARB
+3 Bloodhall Ooze|CFX
+2 Broodmate Dragon|ALA
+5 Forest|ALA|1
+4 Maelstrom Pulse|ARB
+3 Mountain|ALA|2
+4 Mountain|ALA|3
+1 Necrogenesis|ALA
+3 Obelisk of Jund|ALA
+4 Putrid Leech|ARB
+2 Sarkhan Vol|ALA
+4 Savage Lands|ALA
+4 Sprouting Thrinax|ALA
+7 Swamp|ALA|4
+4 Terminate|ARB

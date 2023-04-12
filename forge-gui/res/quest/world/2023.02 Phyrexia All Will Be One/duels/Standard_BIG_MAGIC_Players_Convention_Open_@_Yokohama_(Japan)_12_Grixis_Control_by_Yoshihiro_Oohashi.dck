@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Grixis Control by Yoshihiro Oohashi
+Title=Hans
+Difficulty=very hard
+Description=Grixis Control by Yoshihiro Oohashi
+Icon=Hans.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+2 Cut Down
+2 Go for the Throat
+2 Siphon Insight
+3 Invoke Despair
+3 Make Disappear
+3 Reckoner Bankbuster
+4 Abrade
+4 Fable of the Mirror-Breaker
+1 Sheoldred, the Apocalypse
+1 Ertai Resurrected
+3 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Otawara, Soaring City
+1 Darkslick Shores
+1 Stormcarved Coast
+1 Underground River
+1 Takenuma, Abandoned Mire
+2 Sulfurous Springs
+2 Swamp
+3 Blackcleave Cliffs
+3 Shivan Reef
+4 Xander's Lounge
+4 Haunted Ridge
+4 Shipwreck Marsh
+
+[sideboard]
+2 Disdainful Stroke
+2 Duress
+2 Brotherhood's End
+2 Razorlash Transmogrant
+1 Soul Transfer
+1 Sheoldred's Edict
+1 Whack
+1 Negate
+2 Cut Down
+1 Sheoldred, the Apocalypse

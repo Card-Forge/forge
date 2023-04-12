@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Jund by Lucas Betarello
+Title=Aspect of Instinct
+Difficulty=very hard
+Description=Jund by Lucas Betarello
+Icon=Aspect of Instinct.jpg
+Deck Type=constructed
+
+[main]
+1 Shatterskull Smashing
+1 Ranger Class
+1 Arlinn, the Pack's Hope
+2 Inscription of Abundance
+2 Cinderclasm
+3 Malakir Rebirth
+4 Infernal Grasp
+2 Howlpack Piper
+2 Ascendant Packleader
+2 Graveyard Trespasser
+2 Bloodthirsty Adversary
+3 Volatile Arsonist
+3 Tovolar, Dire Overlord
+4 Reckless Stormseeker
+4 Werewolf Pack Leader
+1 Den of the Bugbear
+1 Haunted Ridge
+1 Forest
+2 Deathcap Glade
+3 Lair of the Hydra
+4 Rockfall Vale
+4 Darkbore Pathway
+4 Cragcrown Pathway
+4 Blightstep Pathway
+
+[sideboard]
+3 Burning Hands
+3 Duress
+3 Go Blank
+2 Crippling Fear
+2 Bloodchief's Thirst
+2 Culling Ritual

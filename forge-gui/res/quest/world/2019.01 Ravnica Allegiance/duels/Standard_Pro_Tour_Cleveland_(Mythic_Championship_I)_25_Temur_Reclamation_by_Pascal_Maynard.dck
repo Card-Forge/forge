@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Pascal Maynard
+Title=A Wolf in Sheeps Clothing
+Difficulty=very hard
+Description=Temur Reclamation by Pascal Maynard
+Icon=A Wolf in Sheeps Clothing.jpg
+Deck Type=constructed
+
+[main]
+2 Niv-Mizzet, Parun
+4 Growth Spiral
+4 Sinister Sabotage
+4 Shivan Fire
+4 Chemister's Insight
+4 Expansion // Explosion
+2 Opt
+2 Syncopate
+2 Fiery Cannonade|XLN
+4 Wilderness Reclamation
+2 Search for Azcanta|XLN
+4 Steam Vents
+4 Breeding Pool
+4 Stomping Ground
+4 Hinterland Harbor
+4 Sulfur Falls
+3 Rootbound Crag|XLN
+2 Island
+1 Mountain
+
+[sideboard]
+1 Niv-Mizzet, Parun
+2 Fiery Cannonade|XLN
+3 Crushing Canopy
+2 Biogenic Ooze
+2 Negate
+2 Rekindling Phoenix
+2 Entrancing Melody|XLN
+1 Gift of Paradise

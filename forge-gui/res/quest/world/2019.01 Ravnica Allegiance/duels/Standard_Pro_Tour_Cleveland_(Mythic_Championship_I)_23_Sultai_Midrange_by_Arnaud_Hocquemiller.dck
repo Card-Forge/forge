@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Sultai Midrange by Arnaud Hocquemiller
+Title=MamiWata
+Difficulty=very hard
+Description=Sultai Midrange by Arnaud Hocquemiller
+Icon=MamiWata.jpg
+Deck Type=constructed
+
+[main]
+1 Vraska, Relic Seeker|XLN
+3 Vivien Reid
+2 Wildgrowth Walker|XLN
+2 Incubation Druid
+3 Hostage Taker|XLN
+4 Hydroid Krasis
+4 Jadelight Ranger
+4 Llanowar Elves
+4 Merfolk Branchwalker|XLN
+3 Find // Finality
+2 Assassin's Trophy
+2 Cast Down
+2 Vraska's Contempt|XLN
+4 Overgrown Tomb
+4 Breeding Pool
+3 Drowned Catacomb|XLN
+5 Forest
+4 Watery Grave
+4 Woodland Cemetery
+
+[sideboard]
+1 Cast Down
+4 Duress
+3 Kraul Harpooner
+2 Negate
+2 Disdainful Stroke
+1 Frilled Mystic
+2 Thrashing Brontodon

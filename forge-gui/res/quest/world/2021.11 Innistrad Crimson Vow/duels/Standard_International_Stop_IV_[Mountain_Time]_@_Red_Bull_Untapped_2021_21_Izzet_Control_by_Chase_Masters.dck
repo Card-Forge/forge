@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Izzet Control by Chase Masters
+Title=The Pitdown Bog
+Difficulty=very hard
+Description=Izzet Control by Chase Masters
+Icon=The Pitdown Bog.jpg
+Deck Type=constructed
+
+[main]
+1 Wash Away
+1 Thirst for Discovery
+1 Thundering Rebuke
+2 Abrade
+2 Jwari Disruption
+2 Fading Hope
+2 Alrund's Epiphany
+2 Unexpected Windfall
+2 Memory Deluge
+3 Spikefield Hazard
+4 Frost Bite
+4 Divide by Zero
+4 Expressive Iteration
+3 Hullbreaker Horror
+4 Smoldering Egg
+1 Hall of Storm Giants
+2 Volatile Fjord
+2 Faceless Haven
+2 Riverglide Pathway
+4 Stormcarved Coast
+5 Snow-Covered Island
+7 Snow-Covered Mountain
+
+[sideboard]
+4 Burning Hands
+3 Lier, Disciple of the Drowned
+1 Prismari Command
+1 Mascot Exhibition
+1 Teachings of the Archaics
+1 Environmental Sciences
+1 Cinderclasm
+1 Wash Away
+2 Fading Hope

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Orzhov Hammer by Marco Caputo
+Title=Lair
+Difficulty=very hard
+Description=Orzhov Hammer by Marco Caputo
+Icon=Lair.jpg
+Deck Type=constructed
+
+[main]
+1 Shadowspear
+1 Paradise Mantle|FD
+2 Portable Hole
+4 Sigarda's Aid|EMN
+4 Springleaf Drum|BNG
+4 Colossus Hammer
+2 Ornithopter|AER
+2 Giver of Runes
+4 Ingenious Smith
+4 Memnite|SOM
+4 Puresteel Paladin|NPH
+4 Esper Sentinel
+4 Stoneforge Mystic|WWK
+1 Godless Shrine
+1 Arid Mesa|ZEN
+1 Concealed Courtyard|KLD
+3 Snow-Covered Plains
+3 Marsh Flats|ZEN
+3 Silent Clearing
+4 Inkmoth Nexus|MBS
+4 Urza's Saga
+
+[sideboard]
+1 Soul-Guide Lantern
+2 Dark Confidant|RAV
+2 Path to Exile|CFX
+2 Prismatic Ending
+2 Hushbringer
+2 Void Mirror
+3 Sanctifier en-Vec
+1 Lurrus of the Dream-Den

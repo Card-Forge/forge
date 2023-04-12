@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mono Red Eldrazi Control by Antonio Del Moral Leon
+Title=Dream
+Difficulty=very hard
+Description=Mono Red Eldrazi Control by Antonio Del Moral Leon
+Icon=Dream.jpg
+Deck Type=constructed
+
+[main]
+4 Hedron Crawler|OGW
+4 Matter Reshaper|OGW
+4 Oblivion Sower|BFZ
+4 Ulamog, the Ceaseless Hunger|BFZ
+2 Ruin Processor|BFZ
+2 Warping Wail|OGW
+3 Spatial Contortion|OGW
+3 Kozilek's Return|OGW
+2 Titan's Presence|BFZ
+4 Hedron Archive|BFZ
+4 Mountain|RTR
+4 Spawning Bed|BFZ
+4 Sanctum of Ugin|BFZ
+4 Shrine of the Forsaken Gods|BFZ
+4 Battlefield Forge|ORI
+4 Shivan Reef|ORI
+4 Mage-Ring Network|ORI
+
+[sideboard]
+2 Warping Wail|OGW
+1 Spatial Contortion|OGW
+1 Kozilek's Return|OGW
+1 Nahiri's Wrath|EMN
+1 Kozilek, the Great Distortion|OGW
+1 Emrakul, the Promised End|EMN
+4 Reality Smasher|OGW
+4 Thought-Knot Seer|OGW

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Wake by Carlos Barrado 6-0
+Title=Barney Rubble
+Difficulty=very hard
+Description=Wake by Carlos Barrado 6-0
+Icon=Barney Rubble.jpg
+Deck Type=constructed
+
+[main]
+8 Island|RTR
+1 Mirari|C13
+2 Decree of Justice|C14
+2 Circular Logic|TO
+3 Deep Analysis|C13
+3 Compulsion|TO
+3 Cunning Wish|JU
+3 Moment's Peace|OD
+3 Mirari's Wake|CNS
+4 Wrath of God|C13
+4 Renewed Faith|AKH
+4 Mana Leak|M11
+1 Elfhame Palace|8E
+2 Lonely Sandbar|C14
+2 Flooded Strand|KTK
+2 Skycloud Expanse|OD
+2 Sungrass Prairie|C16
+3 Forest|RTR
+4 Plains|RTR
+4 Krosan Verge|C16
+
+[sideboard]
+1 Stifle|CNS
+1 Wing Shards|C14
+1 Unsummon|HOU
+3 Exalted Angel|ONS
+1 Flash of Insight|JU
+1 Krosan Reclamation|JU
+1 Ray of Distortion|OD
+1 Ray of Revelation|DKA
+1 Seedtime|JU
+1 Circular Logic|TO
+1 Deep Analysis|C13
+1 Cunning Wish|JU
+1 Moment's Peace|OD

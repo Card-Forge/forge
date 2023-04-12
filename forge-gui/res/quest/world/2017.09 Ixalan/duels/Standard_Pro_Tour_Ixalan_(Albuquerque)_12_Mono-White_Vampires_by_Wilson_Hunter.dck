@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono-White Vampires by Wilson Hunter
+Title=alabraid
+Difficulty=very hard
+Description=Mono-White Vampires by Wilson Hunter
+Icon=alabraid.jpg
+Deck Type=constructed
+
+[main]
+2 Duskborne Skymarcher|XLN
+4 Aviary Mechanic|KLD
+4 Adanto Vanguard|XLN
+4 Metallic Mimic|AER
+4 Legion Conquistador|XLN
+3 Mavren Fein, Dusk Apostle|XLN
+3 Angel of Invention|KLD
+4 Oketra's Monument|AKH
+4 Legion's Landing|XLN
+1 Thopter Arrest|AER
+2 Cast Out|AKH
+3 Ixalan's Binding|XLN
+4 Shefet Dunes|HOU
+3 Scavenger Grounds|HOU
+15 Plains|XLN
+
+[sideboard]
+2 Thopter Arrest|AER
+2 Fragmentize|KLD
+4 Glory-Bound Initiate|AKH
+1 Aethersphere Harvester|AER
+4 Dusk // Dawn|AKH
+1 Gideon's Intervention|AKH
+1 Angel of Sanctions|AKH

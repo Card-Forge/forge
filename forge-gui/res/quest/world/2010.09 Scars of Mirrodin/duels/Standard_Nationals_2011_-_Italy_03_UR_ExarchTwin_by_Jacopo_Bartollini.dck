@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=UR ExarchTwin by Jacopo Bartollini
+Title=Snow White
+Difficulty=very hard
+Description=UR ExarchTwin by Jacopo Bartollini
+Icon=Snow White.jpg
+Deck Type=constructed
+
+[main]
+4 Deceiver Exarch|NPH
+2 Spellskite|NPH
+4 Dispel|WWK
+2 Into the Roil|ZEN
+3 Spell Pierce|ZEN
+3 Twisted Image|SOM
+4 Gitaxian Probe|NPH
+4 Ponder|M12
+4 Preordain|M11
+4 Shrine of Piercing Vision|NPH
+4 Splinter Twin|ROE
+10 Island|M12
+8 Mountain|M12
+4 Scalding Tarn|ZEN
+
+[sideboard]
+2 Manic Vandal|M12
+2 Combust|M12
+2 Mental Misstep|NPH
+1 Mindbreak Trap|ZEN
+3 Mutagenic Growth|NPH
+1 Steel Sabotage|MBS
+4 Pyroclasm|M11

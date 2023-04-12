@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Hardened Scales by Joel Lapray
+Title=Seer
+Difficulty=very hard
+Description=Hardened Scales by Joel Lapray
+Icon=Seer.jpg
+Deck Type=constructed
+
+[main]
+2 Arcbound Worker|DS
+3 Ingenious Smith
+4 Arcbound Ravager|DS
+4 Hangarback Walker|ORI
+4 Zabaz, the Glimmerwasp
+4 Walking Ballista|AER
+1 Witch's Oven
+1 Basilisk Collar|WWK
+3 Welding Jar|MR
+3 The Ozolith
+2 Ancient Stirrings|ROE
+4 Hardened Scales|KTK
+4 Urza's Saga
+1 Power Depot
+1 Forest
+1 Plains
+2 Darksteel Citadel|M15
+2 Grove of the Burnwillows|FUT
+3 Branchloft Pathway
+3 Spire of Industry|AER
+4 Brushland|10E
+4 Inkmoth Nexus|MBS
+
+[sideboard]
+1 Void Mirror
+1 Lurrus of the Dream-Den
+1 Path to Exile|CFX
+1 Pithing Needle
+2 Nature's Claim|WWK
+2 Chalice of the Void|MR
+2 Relic of Progenitus|ALA
+2 Torpor Orb|NPH
+3 Prismatic Ending

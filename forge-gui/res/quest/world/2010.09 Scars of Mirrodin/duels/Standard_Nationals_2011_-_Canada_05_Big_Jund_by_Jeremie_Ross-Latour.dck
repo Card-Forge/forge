@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Big Jund by Jeremie Ross-Latour
+Title=Peregrin Took
+Difficulty=very hard
+Description=Big Jund by Jeremie Ross-Latour
+Icon=Peregrin Took.jpg
+Deck Type=constructed
+
+[main]
+4 Acidic Slime|M12
+4 Grave Titan|M12
+1 Inferno Titan|M12
+4 Primeval Titan|M12
+4 Solemn Simulacrum|M12
+1 Beast Within|NPH
+3 Dismember|NPH
+3 Pyroclasm|M11
+2 Rampant Growth|M12
+1 Batterskull|NPH
+4 Everflowing Chalice|WWK
+4 Sphere of the Suns|MBS
+4 Dragonskull Summit|M12
+3 Forest|M12
+2 Mountain|M12
+4 Raging Ravine|WWK
+2 Rootbound Crag|M12
+3 Swamp|M12
+3 Tectonic Edge|WWK
+4 Verdant Catacombs|ZEN
+
+[sideboard]
+3 Beast Within|NPH
+1 Pyroclasm|M11
+2 Wurmcoil Engine|SOM
+4 Combust|M12
+2 Go for the Throat|MBS
+3 Nature's Claim|WWK

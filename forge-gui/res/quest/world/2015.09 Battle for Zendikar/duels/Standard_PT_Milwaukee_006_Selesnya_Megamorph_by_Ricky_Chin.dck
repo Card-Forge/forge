@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Selesnya Megamorph by Ricky Chin
+Title=Mr Smith
+Difficulty=very hard
+Description=Selesnya Megamorph by Ricky Chin
+Icon=Mr Smith.jpg
+Deck Type=constructed
+
+[main]
+4 Gideon, Ally of Zendikar|BFZ
+4 Deathmist Raptor|DTK
+4 Den Protector|DTK
+4 Hangarback Walker|ORI
+2 Hidden Dragonslayer|DTK
+3 Nissa, Vastwood Seer|ORI
+4 Warden of the First Tree|FRF
+3 Wingmate Roc|KTK
+4 Dromoka's Command|DTK
+1 Valorous Stance|FRF
+2 Silkwrap|DTK
+3 Canopy Vista|BFZ
+3 Flooded Strand|KTK
+6 Forest|BFZ
+5 Plains|BFZ
+4 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+
+[sideboard]
+2 Valorous Stance|FRF
+1 Arashin Cleric|FRF
+2 Whisperwood Elemental|FRF
+2 Evolutionary Leap|ORI
+1 Gideon's Reproach|BFZ
+1 Mastery of the Unseen|FRF
+1 Radiant Purge|DTK
+3 Surge of Righteousness|DTK
+2 Tragic Arrogance|ORI

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=4c CoCo by Amir Radmard
+Title=Vodalia
+Difficulty=very hard
+Description=4c CoCo by Amir Radmard
+Icon=Vodalia.jpg
+Deck Type=constructed
+
+[main]
+4 Sylvan Advocate|OGW
+4 Mantis Rider|KTK
+4 Savage Knuckleblade|KTK
+4 Jace, Vryn's Prodigy|ORI
+2 Stratus Dancer|DTK
+4 Reflector Mage|OGW
+3 Bounding Krasis|ORI
+4 Collected Company|DTK
+4 Dromoka's Command|DTK
+2 Ojutai's Command|DTK
+4 Flooded Strand|KTK
+4 Wooded Foothills|KTK
+4 Windswept Heath|KTK
+1 Needle Spires|OGW
+2 Lumbering Falls|BFZ
+2 Cinder Glade|BFZ
+2 Prairie Stream|BFZ
+2 Canopy Vista|BFZ
+1 Island|BFZ
+1 Forest|BFZ
+1 Mountain|BFZ
+1 Plains|BFZ
+
+[sideboard]
+3 Disdainful Stroke|KTK
+3 Dispel|BFZ
+2 Dragonmaster Outcast|BFZ
+1 Chandra, Flamecaller|OGW
+2 Void Grafter|OGW
+4 Arashin Cleric|FRF

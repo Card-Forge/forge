@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Weenie White  by Seb Rohan
+Title=Golgari-precon
+Difficulty=very hard
+Description=Weenie White  by Seb Rohan
+Icon=Golgari-precon.jpg
+Deck Type=constructed
+
+[main]
+3 Hopeful Initiate
+4 Sungold Sentinel
+4 Thalia, Guardian of Thraben
+4 Adeline, Resplendent Cathar
+4 Skrelv, Defector Mite
+4 Recruitment Officer
+4 Intrepid Adversary
+4 Anointed Peacekeeper
+4 Ossification
+1 The Wandering Emperor
+2 Eiganjo, Seat of the Empire
+4 Mishra's Foundry
+18 Plains
+
+[sideboard]
+2 The Wandering Emperor
+1 Lantern Flare
+2 Tocasia's Welcome
+2 Sword of Forge and Frontier
+2 Brutal Cathar
+3 Destroy Evil
+3 Ao, the Dawn Sky

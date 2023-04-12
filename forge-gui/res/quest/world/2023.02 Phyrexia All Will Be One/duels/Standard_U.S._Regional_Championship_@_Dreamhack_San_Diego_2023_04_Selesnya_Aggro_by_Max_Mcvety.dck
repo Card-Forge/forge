@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Selesnya Aggro by Max Mcvety
+Title=Mystique
+Difficulty=very hard
+Description=Selesnya Aggro by Max Mcvety
+Icon=Mystique.jpg
+Deck Type=constructed
+
+[main]
+2 Destroy Evil
+4 Tyvar's Stand
+4 Audacity
+4 Skrelv's Hive
+3 Jawbone Duelist
+4 Venerated Rotpriest
+4 Crawling Chorus
+4 Slaughter Singer
+4 Bloated Contaminator
+4 Skrelv, Defector Mite
+1 Plains
+1 Forest
+2 Boseiju, Who Endures
+2 Eiganjo, Seat of the Empire
+2 Overgrown Farmland
+3 Mirrex
+4 Brushland
+4 Razorverge Thicket
+4 The Seedcore
+
+[sideboard]
+2 Ajani, Sleeper Agent
+4 Wedding Announcement
+4 Annex Sentry
+3 Melira, the Living Cure
+2 Destroy Evil

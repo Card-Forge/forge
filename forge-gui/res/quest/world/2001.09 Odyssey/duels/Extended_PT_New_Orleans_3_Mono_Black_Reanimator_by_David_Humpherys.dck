@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Mono Black Reanimator by David Humpherys
+Title=Rhonas the Indomitable
+Difficulty=very hard
+Description=Mono Black Reanimator by David Humpherys
+Icon=Rhonas the Indomitable.jpg
+Deck Type=constructed
+
+[main]
+3 Rishadan Port|MM
+19 Swamp|A
+1 Avatar of Woe|PY
+2 Krovikan Horror|AL
+1 Multani, Maro-Sorcerer|UL
+1 Nether Spirit|MM
+1 Squee, Goblin Nabob|MM
+1 Verdant Force|TE
+2 Animate Dead|A
+3 Buried Alive|WL
+1 Contamination|US
+4 Duress|US
+4 Entomb|OD
+4 Exhume|US
+1 Massacre|NE
+4 Reanimate|TE
+4 Vampiric Tutor|VI
+4 Zombie Infestation|OD
+
+[sideboard]
+1 Avatar of Woe|PY
+2 Contamination|US
+2 Massacre|NE
+1 Ascendant Evincar|NE
+1 Bone Shredder|UL
+3 Coffin Purge|OD
+1 Null Rod|WL
+1 Perish|TE
+2 Phyrexian Negator|UD
+1 Terror|A

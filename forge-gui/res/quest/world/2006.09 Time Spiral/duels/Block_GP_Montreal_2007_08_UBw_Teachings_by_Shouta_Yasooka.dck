@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=UBw Teachings by Shouta Yasooka
+Title=Dr No
+Difficulty=very hard
+Description=UBw Teachings by Shouta Yasooka
+Icon=Dr No.jpg
+Deck Type=constructed
+
+[main]
+7 Island|RTR
+4 Dreadship Reef|C16
+4 Damnation|PLC
+4 Terramorphic Expanse|C16
+4 Prismatic Lens|TSP
+4 River of Tears|FUT
+4 Cancel
+3 Careful Consideration|TSP
+3 Aeon Chronicler|C16
+2 Take Possession|FUT
+2 Mystical Teachings|TSP
+2 Swamp|RTR
+2 Tombstalker|FUT
+2 Coalition Relic|FUT
+2 Delay|FUT
+2 Teferi, Mage of Zhalfir|TSP
+2 Urborg, Tomb of Yawgmoth|M15
+2 Venser, Shaper Savant|FUT
+1 Pull from Eternity|TSP
+1 Slaughter Pact|FUT
+1 Strangling Soot|TSP
+1 Plains|RTR
+1 Urza's Factory|C13
+
+[sideboard]
+1 Take Possession|FUT
+1 Pull from Eternity|TSP
+1 Slaughter Pact|FUT
+1 Strangling Soot|TSP
+3 Vesuvan Shapeshifter|TSP
+2 Spell Burst|TSP
+2 Willbender|C14
+2 Brine Elemental|C14
+1 Draining Whelk|TSP
+1 Extirpate|PLC

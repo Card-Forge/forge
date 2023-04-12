@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Creativity by Nicolai Andreassen Bye
+Title=Oshun
+Difficulty=very hard
+Description=Creativity by Nicolai Andreassen Bye
+Icon=Oshun.jpg
+Deck Type=constructed
+
+[main]
+3 Archon of Cruelty
+4 Fable of the Mirror-Breaker
+4 Lightning Bolt|M11
+2 Prismari Command
+4 Spell Pierce
+1 Expressive Iteration
+4 Indomitable Creativity|AER
+2 Prismatic Ending
+1 Transmogrify
+4 Leyline Binding
+3 Teferi, Time Raveler
+4 Wrenn and Six
+4 Arid Mesa|ZEN
+1 Blood Crypt
+4 Bloodstained Mire|KTK
+4 Dwarven Mine
+1 Ketria Triome
+1 Mountain
+1 Raugrin Triome
+1 Sacred Foundry
+1 Savai Triome
+4 Scalding Tarn|ZEN
+1 Steam Vents
+1 Stomping Ground
+
+[sideboard]
+2 Aether Gust
+2 Boseiju, Who Endures
+2 Hallowed Moonlight|ORI
+2 Hidetsugu Consumes All
+1 Iona, Shield of Emeria|ZEN
+2 Turn the Earth
+3 Veil of Summer
+1 Weather the Storm

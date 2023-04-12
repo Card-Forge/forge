@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Creativity by Gerschi
+Title=Aspect of Good
+Difficulty=very hard
+Description=Creativity by Gerschi
+Icon=Aspect of Good.jpg
+Deck Type=constructed
+
+[main]
+4 Archon of Cruelty
+4 Fable of the Mirror-Breaker
+3 Prismari Command
+4 Spell Pierce
+4 Lightning Bolt|M11
+3 Unholy Heat
+1 Unsubstantiate
+4 Indomitable Creativity|AER
+1 Persist
+1 Expressive Iteration
+1 Strike It Rich
+1 Bitter Reunion
+4 Wrenn and Six
+4 Dwarven Mine
+1 Mountain
+4 Scalding Tarn|ZEN
+1 Boseiju, Who Endures
+4 Bloodstained Mire|KTK
+2 Arid Mesa|ZEN
+1 Ketria Triome
+2 Steam Vents
+1 Stomping Ground
+1 Blood Crypt
+3 Wooded Foothills|KTK
+1 Ziatora's Proving Ground
+
+[sideboard]
+1 Strike It Rich
+1 Boseiju, Who Endures
+1 Emrakul, the Aeons Torn|ROE
+2 Thoughtseize|THS
+3 Veil of Summer
+2 Nature's Claim|WWK
+1 Invasive Surgery|SOI
+2 Aether Gust
+1 Hidetsugu Consumes All
+1 Unmoored Ego

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Shieldmaiden
+Title=Barney Rubble
+Difficulty=very hard
+Description=Rakdos Aggro by Shieldmaiden
+Icon=Barney Rubble.jpg
+Deck Type=constructed
+
+[main]
+7 Swamp
+4 Mountain
+4 Temple of Malice
+4 Blood Crypt
+2 Castle Locthwain
+2 Fabled Passage
+4 Claim the Firstborn
+4 Witch's Oven
+4 Cauldron Familiar
+4 Woe Strider
+4 Priest of Forgotten Gods
+4 Midnight Reaper
+4 Mayhem Devil
+4 Dreadhorde Butcher
+3 Gutterbones
+2 Robber of the Rich
+
+[sideboard]
+2 Pharika's Libation
+2 Noxious Grasp
+2 Embereth Shieldbreaker
+2 Angrath's Rampage
+2 Agonizing Remorse
+2 Act of Treason
+2 Scorching Dragonfire
+1 Epic Downfall

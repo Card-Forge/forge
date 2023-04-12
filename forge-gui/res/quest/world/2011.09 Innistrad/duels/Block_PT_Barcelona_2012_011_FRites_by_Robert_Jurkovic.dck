@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=FRites by Robert Jurkovic
+Title=Air-Walker
+Difficulty=very hard
+Description=FRites by Robert Jurkovic
+Icon=Air-Walker.jpg
+Deck Type=constructed
+
+[main]
+1 Burning Oil|DKA
+3 Devil's Play|ISD
+3 Sever the Bloodline|C15
+4 Unburial Rites|ISD
+4 Faithless Looting|C15
+4 Pillar of Flame|AVR
+4 Mulch|C15
+1 Sigarda, Host of Herons|AVR
+2 Griselbrand|AVR
+2 Gisela, Blade of Goldnight|C15
+3 Borderland Ranger|AVR
+4 Huntmaster of the Fells|DKA
+1 Plains|RTR
+1 Swamp|RTR
+2 Shimmering Grotto|CN2
+3 Woodland Cemetery
+4 Evolving Wilds
+4 Clifftop Retreat
+5 Mountain|RTR
+5 Forest|RTR
+
+[sideboard]
+1 Zealous Conscripts|AVR
+3 Appetite for Brains|AVR
+2 Bonfire of the Damned|AVR
+2 Human Frailty|AVR
+2 Olivia Voldaren|ISD
+2 Restoration Angel|AVR
+1 Sever the Bloodline|C15
+2 Sigarda, Host of Herons|AVR

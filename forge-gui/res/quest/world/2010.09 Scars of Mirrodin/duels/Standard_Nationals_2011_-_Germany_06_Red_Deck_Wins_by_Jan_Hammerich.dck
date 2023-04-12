@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Jan Hammerich
+Title=Hermione Granger
+Difficulty=very hard
+Description=Red Deck Wins by Jan Hammerich
+Icon=Hermione Granger.jpg
+Deck Type=constructed
+
+[main]
+1 Chandra's Phoenix|M12
+3 Ember Hauler|M11
+3 Furnace Scamp|NPH
+4 Goblin Guide|ZEN
+4 Grim Lavamancer|M12
+2 Hero of Oxid Ridge|MBS
+3 Stormblood Berserker|M12
+3 Burst Lightning|ZEN
+3 Incinerate|M12
+4 Lightning Bolt|M11
+3 Searing Blaze|WWK
+3 Shrine of Burning Rage|NPH
+4 Arid Mesa|ZEN
+10 Mountain|M12
+4 Scalding Tarn|ZEN
+4 Teetering Peaks|ZEN
+2 Koth of the Hammer|SOM
+
+[sideboard]
+3 Manic Vandal|M12
+2 Vulshok Refugee|NPH
+2 Act of Aggression|NPH
+2 Combust|M12
+3 Dismember|NPH
+3 Leyline of Punishment|M11

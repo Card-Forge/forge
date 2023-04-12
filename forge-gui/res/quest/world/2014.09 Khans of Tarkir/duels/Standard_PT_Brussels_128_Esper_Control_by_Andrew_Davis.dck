@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Esper Control by Andrew Davis
+Title=Bamm Bamm Rubble
+Difficulty=very hard
+Description=Esper Control by Andrew Davis
+Icon=Bamm Bamm Rubble.jpg
+Deck Type=constructed
+
+[main]
+1 Ugin, the Spirit Dragon|FRF
+2 Elspeth, Sun's Champion|THS
+2 Narset Transcendent|DTK
+2 Dragonlord Ojutai|DTK
+2 Crux of Fate|FRF
+4 Dig Through Time|KTK
+2 Ultimate Price|DTK
+3 Bile Blight|BNG
+4 Hero's Downfall|THS
+2 Utter End|KTK
+4 Anticipate|DTK
+2 Disdainful Stroke|KTK
+4 Dissolve|THS
+1 Caves of Koilos|M15
+3 Temple of Silence|THS
+1 Urborg, Tomb of Yawgmoth|M15
+4 Polluted Delta|KTK
+3 Flooded Strand|KTK
+3 Temple of Enlightenment|BNG
+4 Temple of Deceit|THS
+1 Plains|DTK
+3 Swamp|DTK
+3 Island|DTK
+
+[sideboard]
+1 Disdainful Stroke|KTK
+1 Glare of Heresy|THS
+2 Nyx-Fleece Ram|JOU
+3 Thoughtseize|THS
+2 Negate|DTK
+2 Ashiok, Nightmare Weaver|THS
+1 Virulent Plague|DTK
+3 Drown in Sorrow|BNG

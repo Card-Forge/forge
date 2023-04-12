@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Collected Bant by Katsuhiro Mori
+Title=Link
+Difficulty=very hard
+Description=Collected Bant by Katsuhiro Mori
+Icon=Link.jpg
+Deck Type=constructed
+
+[main]
+1 Ojutai's Command|DTK
+3 Dromoka's Command|DTK
+4 Collected Company|DTK
+1 Archangel Avacyn|SOI
+2 Jace, Vryn's Prodigy|ORI
+2 Nissa, Vastwood Seer|ORI
+3 Duskwatch Recruiter|SOI
+3 Selfless Spirit|EMN
+4 Reflector Mage|OGW
+4 Spell Queller|EMN
+4 Sylvan Advocate|OGW
+4 Tireless Tracker|SOI
+1 Island|RTR
+2 Lumbering Falls|BFZ
+3 Yavimaya Coast|ORI
+3 Canopy Vista|BFZ
+4 Evolving Wilds
+4 Plains|RTR
+4 Forest|RTR
+4 Prairie Stream|BFZ
+
+[sideboard]
+1 Dragonlord Dromoka|DTK
+3 Negate
+2 Declaration in Stone|SOI
+2 Tragic Arrogance|ORI
+2 Elder Deep-Fiend|EMN
+1 Aerial Volley|ORI
+2 Gideon, Ally of Zendikar|BFZ
+1 Ojutai's Command|DTK
+1 Jace, Vryn's Prodigy|ORI

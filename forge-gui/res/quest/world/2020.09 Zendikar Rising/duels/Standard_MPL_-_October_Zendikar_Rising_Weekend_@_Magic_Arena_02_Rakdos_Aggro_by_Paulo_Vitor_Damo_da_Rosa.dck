@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Paulo Vitor Damo da Rosa
+Title=Goblins
+Difficulty=very hard
+Description=Rakdos Aggro by Paulo Vitor Damo da Rosa
+Icon=Goblins.jpg
+Deck Type=constructed
+
+[main]
+2 Liliana, Waker of the Dead
+2 Hagra Mauling
+3 Pelakka Predation
+4 Shatterskull Smashing
+4 Tymaret Calls the Dead
+4 Bloodchief's Thirst
+2 Murderous Rider
+2 Ox of Agonas
+2 Rankle, Master of Pranks
+4 Mire Triton
+4 Kroxa, Titan of Death's Hunger
+4 Robber of the Rich
+4 Bonecrusher Giant
+1 Castle Locthwain
+4 Temple of Malice
+4 Mountain
+4 Fabled Passage
+6 Swamp
+
+[sideboard]
+2 Shredded Sails
+1 Soul Shatter
+2 Elspeth's Nightmare
+2 Duress
+2 Skyclave Shade
+1 Eliminate
+1 Cling to Dust
+2 Agonizing Remorse
+1 Liliana, Waker of the Dead
+1 Ox of Agonas

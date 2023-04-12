@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=UrzaTron by duanceyao
+Title=Necromancer
+Difficulty=very hard
+Description=UrzaTron by duanceyao
+Icon=Necromancer.jpg
+Deck Type=constructed
+
+[main]
+4 Karn Liberated|NPH
+4 Karn, the Great Creator
+2 Ugin, the Spirit Dragon
+1 Emrakul, the Promised End|EMN
+1 Sundering Titan|DS
+2 Ulamog, the Ceaseless Hunger|BFZ
+1 Walking Ballista|AER
+2 Wurmcoil Engine|SOM
+1 All Is Dust|ROE
+4 Ancient Stirrings|ROE
+4 Sylvan Scrying|BFZ
+4 Chromatic Sphere|MR
+4 Chromatic Star|10E
+4 Expedition Map|ZEN
+2 Oblivion Stone|MR
+2 Relic of Progenitus|ALA
+1 Blast Zone
+3 Forest
+1 Sanctum of Ugin|BFZ
+4 Urza's Mine|9E
+4 Urza's Power Plant|9E
+4 Urza's Tower|9E
+1 Yavimaya, Cradle of Growth
+
+[sideboard]
+1 Sundering Titan|DS
+1 Walking Ballista|AER
+1 Chalice of the Void|MR
+1 Ensnaring Bridge|8E
+2 Force of Vigor
+1 Grafdigger's Cage
+1 Kozilek, Butcher of Truth|ROE
+1 Liquimetal Coating|SOM
+3 Nature's Claim|WWK
+1 Pithing Needle
+1 Thragtusk|M13
+1 Torpor Orb|NPH

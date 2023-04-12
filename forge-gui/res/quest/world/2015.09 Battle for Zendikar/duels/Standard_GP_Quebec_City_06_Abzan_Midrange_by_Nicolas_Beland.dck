@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Nicolas Beland
+Title=Wilma Flintstone
+Difficulty=very hard
+Description=Abzan Midrange by Nicolas Beland
+Icon=Wilma Flintstone.jpg
+Deck Type=constructed
+
+[main]
+1 Tasigur, the Golden Fang|FRF
+2 Wingmate Roc|KTK
+4 Siege Rhino|KTK
+4 Anafenza, the Foremost|KTK
+2 Den Protector|DTK
+4 Hangarback Walker|ORI
+4 Warden of the First Tree|FRF
+1 Sorin, Solemn Visitor|KTK
+3 Gideon, Ally of Zendikar|BFZ
+1 Smoldering Marsh|BFZ
+1 Sunken Hollow|BFZ
+2 Canopy Vista|BFZ
+4 Shambling Vent|BFZ
+2 Llanowar Wastes|ORI
+4 Wooded Foothills|KTK
+4 Flooded Strand|KTK
+4 Windswept Heath|KTK
+2 Forest|BFZ
+2 Plains|BFZ
+3 Dromoka's Command|DTK
+4 Abzan Charm|KTK
+2 Murderous Cut|KTK
+
+[sideboard]
+1 Wingmate Roc|KTK
+2 Arashin Cleric|FRF
+2 Duress|DTK
+2 Transgress the Mind|BFZ
+2 Utter End|KTK
+2 Evolutionary Leap|ORI
+1 Complete Disregard|BFZ
+1 Valorous Stance|FRF
+2 Self-Inflicted Wound|DTK

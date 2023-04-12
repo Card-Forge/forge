@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=The Cruelty of Gix by Collins Mullen
+Title=Da Vinci
+Difficulty=very hard
+Description=The Cruelty of Gix by Collins Mullen
+Icon=Da Vinci.jpg
+Deck Type=constructed
+
+[main]
+4 Atraxa, Grand Unifier
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+2 Atsushi, the Blazing Sky
+2 Sheoldred, the Apocalypse
+4 Go for the Throat
+4 Cut Down
+2 Brotherhood's End
+4 The Cruelty of Gix
+2 Bitter Reunion
+2 Liliana of the Veil
+1 Swamp
+3 Plaza of Heroes
+1 Caves of Koilos
+4 Haunted Ridge
+3 Sulfurous Springs
+2 Mountain
+1 Darkslick Shores
+4 Blackcleave Cliffs
+1 Takenuma, Abandoned Mire
+2 Ziatora's Proving Ground
+2 Sundown Pass
+2 Xander's Lounge
+
+[sideboard]
+1 Brotherhood's End
+1 Burn Down the House
+2 Flame-Blessed Bolt
+3 Graveyard Trespasser
+2 Unlicensed Hearse
+4 Duress
+2 Reckoner Bankbuster

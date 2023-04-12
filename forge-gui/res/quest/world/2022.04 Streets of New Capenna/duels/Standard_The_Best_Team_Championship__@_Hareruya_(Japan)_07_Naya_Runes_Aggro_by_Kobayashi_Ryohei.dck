@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Naya Runes Aggro by Kobayashi Ryohei
+Title=Abiku
+Difficulty=very hard
+Description=Naya Runes Aggro by Kobayashi Ryohei
+Icon=Abiku.jpg
+Deck Type=constructed
+
+[main]
+1 Circle of Confinement
+1 Tamiyo's Safekeeping
+2 Rune of Sustenance
+3 Rune of Speed
+4 Rune of Might
+4 Fable of the Mirror-Breaker
+4 Showdown of the Skalds
+1 Legion Angel
+4 Jukai Naturalist
+4 Runeforge Champion
+4 Generous Visitor
+4 Kami of Transience
+1 Boseiju, Who Endures
+1 Plains
+1 Lair of the Hydra
+1 Forest
+2 Rockfall Vale
+2 Sundown Pass
+4 Jetmir's Garden
+4 Branchloft Pathway
+4 Cragcrown Pathway
+4 Needleverge Pathway
+
+[sideboard]
+2 Reidane, God of the Worthy
+1 Yasharn, Implacable Earth
+1 Skyclave Apparition
+1 Guardian of Faith
+1 Arlinn, the Pack's Hope
+2 Valorous Stance
+3 Circle of Confinement
+1 Tamiyo's Safekeeping
+3 Legion Angel

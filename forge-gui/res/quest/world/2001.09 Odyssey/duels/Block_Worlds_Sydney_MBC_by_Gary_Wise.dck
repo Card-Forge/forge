@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=MBC by Gary Wise
+Title=Hazduhr the Abbot
+Difficulty=very hard
+Description=MBC by Gary Wise
+Icon=Hazduhr the Abbot.jpg
+Deck Type=constructed
+
+[main]
+3 Cabal Coffers|TO
+23 Swamp|A
+4 Nantuko Shade|TO
+4 Chainer's Edict|TO
+4 Diabolic Tutor|OD
+1 Haunting Echoes|OD
+4 Innocent Blood|OD
+3 Mind Sludge|TO
+4 Mutilate|TO
+4 Rancid Earth|TO
+3 Skeletal Scrying|OD
+3 Tainted Pact|OD
+
+[sideboard]
+4 Braids, Cabal Minion|OD
+3 Coffin Purge|OD
+4 Faceless Butcher|TO
+3 Mesmeric Fiend|TO
+1 Stalking Bloodsucker|OD

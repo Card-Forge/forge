@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Goblin Deck Wins by Michael Diezel
+Title=Fungus Master
+Difficulty=very hard
+Description=Goblin Deck Wins by Michael Diezel
+Icon=Fungus Master.jpg
+Deck Type=constructed
+
+[main]
+4 Ember Hauler|M11
+2 Goblin Bushwhacker|ZEN
+4 Goblin Fireslinger|M12
+4 Goblin Guide|ZEN
+4 Grim Lavamancer|M12
+4 Spikeshot Elder|SOM
+4 Lightning Bolt|M11
+4 Searing Blaze|WWK
+2 Forked Bolt|ROE
+4 Goblin Grenade|M12
+3 Shrine of Burning Rage|NPH
+4 Arid Mesa|ZEN
+10 Mountain|M12
+4 Scalding Tarn|ZEN
+3 Teetering Peaks|ZEN
+
+[sideboard]
+4 Immolating Souleater|NPH
+2 Manic Vandal|M12
+2 Act of Aggression|NPH
+3 Dismember|NPH
+2 Arc Trail|SOM
+2 Koth of the Hammer|SOM

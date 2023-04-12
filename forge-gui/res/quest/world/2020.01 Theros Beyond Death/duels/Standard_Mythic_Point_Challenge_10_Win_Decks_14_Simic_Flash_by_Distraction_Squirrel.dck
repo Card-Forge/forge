@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Simic Flash by Distraction Squirrel
+Title=Room-Grn
+Difficulty=very hard
+Description=Simic Flash by Distraction Squirrel
+Icon=Room-Grn.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+2 Whirlwind Denial
+3 Quench
+3 Aether Gust
+3 Nissa, Who Shakes the World
+4 Growth Spiral
+4 Mystical Dispute
+1 Spectral Sailor
+2 Brazen Borrower
+2 Hydroid Krasis
+2 Uro, Titan of Nature's Wrath
+3 Frilled Mystic
+4 Nightpack Ambusher
+2 Castle Vantress
+4 Breeding Pool
+4 Fabled Passage
+4 Temple of Mystery
+6 Forest
+6 Island
+
+[sideboard]
+2 Shifting Ceratops
+2 Grafdigger's Cage
+3 Lovestruck Beast
+1 Mass Manipulation
+2 Threnody Singer
+1 Questing Beast
+1 Chemister's Insight
+1 Commence the Endgame
+1 Negate
+1 Aether Gust

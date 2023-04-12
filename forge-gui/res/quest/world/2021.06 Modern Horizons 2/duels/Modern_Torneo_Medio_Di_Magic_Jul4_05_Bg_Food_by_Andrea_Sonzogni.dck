@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Bg Food by Andrea Sonzogni
+Title=Thought Invoker
+Difficulty=very hard
+Description=Bg Food by Andrea Sonzogni
+Icon=Thought Invoker.jpg
+Deck Type=constructed
+
+[main]
+4 Asmoranomardicadaistinaculdacar
+4 Cauldron Familiar
+4 Gilded Goose
+3 Dauthi Voidwalker
+3 Ovalchase Daredevil|KLD
+4 Street Wraith|FUT
+4 Feasting Troll King
+2 Smuggler's Copter|KLD
+1 Shadowspear
+4 The Underworld Cookbook
+2 Witch's Oven
+3 Finale of Devastation
+1 Trail of Crumbs
+4 Blooming Marsh|KLD
+1 Forest
+2 Nurturing Peatland
+4 Overgrown Tomb
+1 Swamp
+4 Urza's Saga
+4 Verdant Catacombs|ZEN
+2 Woodland Cemetery
+
+[sideboard]
+1 Trail of Crumbs
+1 Altar of the Brood|KTK
+2 Bone Shards
+2 Fatal Push|AER
+3 Nature's Claim|WWK
+2 Nihil Spellbomb|SOM
+1 Pithing Needle|RTR
+3 Veil of Summer

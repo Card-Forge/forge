@@ -1,0 +1,57 @@
+[duel]
+[metadata]
+Name=4 Color Yorion by Del Pivo Marco
+Title=Pinky and the Brain
+Difficulty=very hard
+Description=4 Color Yorion by Del Pivo Marco
+Icon=Pinky and the Brain.jpg
+Deck Type=constructed
+
+[main]
+1 Time Warp|M10
+1 Lightning Bolt|M11
+1 Path to Exile|CFX
+1 Supreme Verdict|RTR
+1 Unholy Heat
+2 Dovin's Veto
+2 Force of Negation
+2 Abundant Harvest
+3 Ephemerate
+4 Abundant Growth|AVR
+4 Spreading Seas|ZEN
+4 Teferi, Time Raveler
+4 Prismatic Ending
+4 Expressive Iteration
+4 Wrenn and Six
+2 Fury
+4 Solitude
+4 Omnath, Locus of Creation
+4 Eternal Witness|FD
+1 Mountain
+1 Ketria Triome
+1 Island
+1 Hallowed Fountain
+1 Breeding Pool
+1 Arid Mesa|ZEN
+1 Plains
+1 Prismatic Vista
+1 Raugrin Triome
+1 Reflecting Pool|SHM
+1 Sacred Foundry
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+2 Wooded Foothills|KTK
+2 Forest
+3 Flooded Strand|KTK
+3 Windswept Heath|KTK
+4 Misty Rainforest|ZEN
+
+[sideboard]
+1 Yorion, Sky Nomad
+3 Veil of Summer
+3 Lightning Helix|RAV
+3 Flusterstorm
+2 Endurance
+1 Emrakul, the Promised End|EMN
+2 Alpine Moon

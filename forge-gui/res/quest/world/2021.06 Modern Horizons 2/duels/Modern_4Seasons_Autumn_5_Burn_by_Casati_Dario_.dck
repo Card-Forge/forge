@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Burn by Casati Dario 
+Title=Greed
+Difficulty=very hard
+Description=Burn by Casati Dario 
+Icon=Greed.jpg
+Deck Type=constructed
+
+[main]
+3 Arid Mesa|ZEN
+2 Bloodstained Mire|KTK
+4 Inspiring Vantage|KLD
+3 Mountain
+2 Sacred Foundry
+4 Sunbaked Canyon
+1 Wooded Foothills|KTK
+4 Boros Charm|GTC
+4 Eidolon of the Great Revel|JOU
+4 Goblin Guide|ZEN
+4 Lava Spike|CHK
+4 Lightning Bolt|M11
+2 Lightning Helix|RAV
+4 Monastery Swiftspear|KTK
+4 Rift Bolt|TSP
+4 Searing Blaze|WWK
+1 Shard Volley|MOR
+4 Skewer the Critics
+2 Skullcrack|GTC
+
+[sideboard]
+1 Skullcrack|GTC
+2 Deflecting Palm|KTK
+1 Lurrus of the Dream-Den
+2 Path to Exile|CFX
+3 Roiling Vortex
+3 Sanctifier en-Vec
+3 Smash to Smithereens|ORI

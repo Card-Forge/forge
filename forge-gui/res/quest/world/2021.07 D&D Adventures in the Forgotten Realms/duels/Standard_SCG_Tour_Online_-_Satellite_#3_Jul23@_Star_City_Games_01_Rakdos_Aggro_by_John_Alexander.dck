@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by John Alexander
+Title=Prince Valiant
+Difficulty=very hard
+Description=Rakdos Aggro by John Alexander
+Icon=Prince Valiant.jpg
+Deck Type=constructed
+
+[main]
+2 Valki, God of Lies
+2 Kroxa, Titan of Death's Hunger
+4 Bonecrusher Giant
+4 Immersturm Predator
+4 Mire Triton
+4 Woe Strider
+4 Heartless Act
+4 Village Rites
+4 Claim the Firstborn
+3 The Akroan War
+1 Castle Locthwain
+1 Hive of the Eye Tyrant
+1 Den of the Bugbear
+4 Temple of Malice
+4 Blightstep Pathway
+4 Fabled Passage
+5 Mountain
+5 Swamp
+
+[sideboard]
+1 Shadowspear
+1 Jegantha, the Wellspring
+2 Kaervek, the Spiteful
+2 Nighthawk Scavenger
+2 Elspeth's Nightmare
+3 Duress
+4 Skyclave Shade

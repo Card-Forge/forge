@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Grixis Aggro by Masahide Moriyama
+Title=Count Chuckula
+Difficulty=very hard
+Description=Grixis Aggro by Masahide Moriyama
+Icon=Count Chuckula.jpg
+Deck Type=constructed
+
+[main]
+1 Spell Pierce
+1 Negate
+2 Reckoner Bankbuster
+2 Make Disappear
+2 Infernal Grasp
+2 The Meathook Massacre
+3 Voltage Surge
+4 Fable of the Mirror-Breaker
+1 Sheoldred, the Apocalypse
+2 Ertai Resurrected
+2 Tenacious Underdog
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+4 Sol'Kanar the Tainted
+1 Takenuma, Abandoned Mire
+1 Raffine's Tower
+1 Sokenzan, Crucible of Defiance
+1 Otawara, Soaring City
+1 Mountain
+2 Haunted Ridge
+2 Swamp
+3 Sulfurous Springs
+3 Shivan Reef
+3 Stormcarved Coast
+4 Shipwreck Marsh
+4 Xander's Lounge
+
+[sideboard]
+3 Duress
+2 Abrade
+1 Sorin the Mirthless
+1 Unlicensed Hearse
+1 Disdainful Stroke
+1 Cut Down
+1 Soul Transfer
+1 Negate
+1 Reckoner Bankbuster
+1 The Meathook Massacre
+2 Sheoldred, the Apocalypse

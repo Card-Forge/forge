@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mono White Control by David Olsen
+Title=Aspect of Nature
+Difficulty=very hard
+Description=Mono White Control by David Olsen
+Icon=Aspect of Nature.jpg
+Deck Type=constructed
+
+[main]
+4 Intrepid Adversary
+2 Spirited Companion
+2 Loran of the Third Path
+2 The Restoration of Eiganjo
+3 Serra Paragon
+4 Reckoner Bankbuster
+2 March of Otherworldly Light
+1 Destroy Evil
+4 Lay Down Arms
+2 Farewell
+4 Wedding Announcement
+4 The Wandering Emperor
+2 The Eternal Wanderer
+15 Plains
+4 Field of Ruin
+4 Demolition Field
+1 Eiganjo, Seat of the Empire
+
+[sideboard]
+1 Loran of the Third Path
+1 Destroy Evil
+4 Sunset Revelry
+2 Depopulate
+2 Ossification
+2 Fateful Absence
+2 Unlicensed Hearse
+1 White Sun's Twilight

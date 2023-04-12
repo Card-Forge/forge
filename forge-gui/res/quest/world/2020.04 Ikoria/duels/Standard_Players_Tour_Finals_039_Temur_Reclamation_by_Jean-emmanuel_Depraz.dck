@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Jean-emmanuel Depraz
+Title=Phyrexia
+Difficulty=very hard
+Description=Temur Reclamation by Jean-emmanuel Depraz
+Icon=Phyrexia.jpg
+Deck Type=constructed
+
+[main]
+4 Temple Garden
+4 Fabled Passage
+4 Raugrin Triome
+4 Ketria Triome
+2 Breeding Pool
+2 Hallowed Fountain
+2 Castle Vantress
+2 Forest
+2 Island
+1 Blast Zone
+1 Plains
+1 Mountain
+3 Teferi, Time Raveler
+4 Shark Typhoon
+4 Wilderness Reclamation
+4 Growth Spiral
+4 Mystical Dispute
+2 Uro, Titan of Nature's Wrath
+2 Brazen Borrower
+1 Dovin's Veto
+1 Aether Gust
+2 Negate
+4 Expansion // Explosion
+
+[sideboard]
+3 Glass Casket
+2 Kenrith, the Returned King
+2 Solar Blaze
+1 Spectral Sailor
+1 Bonecrusher Giant
+1 Teferi, Time Raveler
+2 Dovin's Veto
+3 Aether Gust

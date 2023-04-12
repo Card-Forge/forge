@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Jund by Fedi Alessio
+Title=Room-Wht
+Difficulty=very hard
+Description=Jund by Fedi Alessio
+Icon=Room-Wht.jpg
+Deck Type=constructed
+
+[main]
+1 Nihil Spellbomb|SOM
+1 Shadowspear
+1 Pyrite Spellbomb|MR
+2 Thoughtseize|THS
+2 Fatal Push|AER
+2 Abrupt Decay|RTR
+4 Mishra's Bauble|CS
+4 Wrenn and Six
+4 Unholy Heat
+4 Inquisition of Kozilek|ROE
+4 Tarmogoyf|FUT
+4 Dragon's Rage Channeler
+4 Ragavan, Nimble Pilferer
+1 Swamp
+1 Stomping Ground
+1 Overgrown Tomb
+1 Mountain
+1 Forest
+1 Blood Crypt
+3 Verdant Catacombs|ZEN
+3 Blackcleave Cliffs|SOM
+3 Bloodstained Mire|KTK
+4 Wooded Foothills|KTK
+4 Urza's Saga
+
+[sideboard]
+1 Chalice of the Void|MR
+1 Kolaghan's Command|DTK
+1 Lurrus of the Dream-Den
+1 Void Mirror
+2 Alpine Moon
+2 Terminate|ARB
+2 Torpor Orb|NPH
+3 Engineered Explosives|FD
+2 Nihil Spellbomb|SOM

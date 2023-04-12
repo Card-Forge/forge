@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=PT Junk by Shannon Krumick
+Title=Oketra
+Difficulty=very hard
+Description=PT Junk by Shannon Krumick
+Icon=Oketra.jpg
+Deck Type=constructed
+
+[main]
+2 Wax // Wane|IN
+2 Vindicate|AP
+4 Tithe|VI
+4 Swords to Plowshares|A
+4 Pernicious Deed|AP
+4 Gerrard's Verdict|AP
+4 Duress|US
+4 Call of the Herd|OD
+2 Spiritmonger|AP
+4 Spectral Lynx|AP
+4 River Boa|VI
+4 Wasteland|TE
+4 Treetop Village|UL
+4 Scrubland|A
+4 Savannah|A
+2 Grasslands|MI
+4 Bayou|A
+
+[sideboard]
+1 Overgrown Estate|AP
+1 Honorable Passage|VI
+2 Ground Seal|OD
+3 Erase|UL
+3 Diabolic Edict|TE
+4 Choke|TE
+1 Aegis of Honor|OD

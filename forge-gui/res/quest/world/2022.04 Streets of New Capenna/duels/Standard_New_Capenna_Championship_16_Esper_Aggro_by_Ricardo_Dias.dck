@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Ricardo Dias
+Title=Autumn Willow
+Difficulty=very hard
+Description=Esper Aggro by Ricardo Dias
+Icon=Autumn Willow.jpg
+Deck Type=constructed
+
+[main]
+1 Emeria's Call
+2 Make Disappear
+2 The Meathook Massacre
+2 Vanishing Verse
+3 Kaito Shizuki
+3 Infernal Grasp
+4 Wedding Announcement
+4 The Wandering Emperor
+1 Legion Angel
+1 Obscura Interceptor
+4 Tenacious Underdog
+4 Tainted Adversary
+4 Raffine, Scheming Seer
+1 Deserted Beach
+1 Swamp
+1 Hive of the Eye Tyrant
+2 Plains
+4 Raffine's Tower
+4 Hengegate Pathway
+4 Clearwater Pathway
+4 Brightclimb Pathway
+4 Shipwreck Marsh
+
+[sideboard]
+3 Disdainful Stroke
+3 Ray of Enfeeblement
+1 Lolth, Spider Queen
+1 Bloodchief's Thirst
+2 Make Disappear
+1 The Meathook Massacre
+1 Infernal Grasp
+2 Legion Angel
+1 Obscura Interceptor

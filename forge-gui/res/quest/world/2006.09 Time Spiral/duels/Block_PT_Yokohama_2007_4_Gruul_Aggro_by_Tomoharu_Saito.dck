@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Tomoharu Saito
+Title=KilijArslan
+Difficulty=very hard
+Description=Gruul Aggro by Tomoharu Saito
+Icon=KilijArslan.jpg
+Deck Type=constructed
+
+[main]
+4 Forest|RTR
+15 Mountain|RTR
+2 Pendelhaven|TSP
+4 Terramorphic Expanse|C16
+4 Blood Knight|PLC
+4 Magus of the Scroll|TSP
+4 Mogg War Marshal|TSP
+4 Sulfur Elemental|PLC
+4 Timbermare|PLC
+3 Assault // Battery|TSP
+4 Fiery Temper|SOI
+4 Rift Bolt|TSP
+4 Stormbind|TSP
+
+[sideboard]
+4 Browbeat|TSP
+4 Dead // Gone|PLC
+3 Utopia Vow|PLC
+4 Wildfire Emissary|TSP

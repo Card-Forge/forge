@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=RG Wolves by Rob Dougherty
+Title=The Pied Piper
+Difficulty=very hard
+Description=RG Wolves by Rob Dougherty
+Icon=The Pied Piper.jpg
+Deck Type=constructed
+
+[main]
+1 Moonmist|ISD
+1 Garruk Relentless|ISD
+2 Bonfire of the Damned|AVR
+2 Revenge of the Hunted|AVR
+4 Brimstone Volley|CNS
+1 Daybreak Ranger|ISD
+2 Wolfir Avenger|AVR
+3 Wolfir Silverheart|AVR
+4 Wolfbitten Captive|DKA
+4 Huntmaster of the Fells|DKA
+4 Immerwolf|DKA
+4 Mayor of Avabruck|ISD
+4 Reckless Waif|ISD
+2 Kessig Wolf Run|ISD
+4 Cavern of Souls|AVR
+8 Mountain|RTR
+10 Forest|RTR
+
+[sideboard]
+3 Zealous Conscripts|AVR
+2 Geistflame|ISD
+3 Grafdigger's Cage|DKA
+1 Naturalize
+1 Tree of Redemption|ISD
+1 Witchbane Orb|ISD
+1 Moonmist|ISD
+1 Bonfire of the Damned|AVR
+1 Revenge of the Hunted|AVR
+1 Wolfir Avenger|AVR

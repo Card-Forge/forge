@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Br Aggro by Gerry Thompson
+Title=alapro
+Difficulty=very hard
+Description=Br Aggro by Gerry Thompson
+Icon=alapro.jpg
+Deck Type=constructed
+
+[main]
+3 Swamp
+4 Spire of Industry|AER
+1 Scavenger Grounds|HOU
+9 Mountain
+1 Ifnir Deadlands|HOU
+2 Canyon Slough|AKH
+3 Aethersphere Harvester|AER
+3 Unlicensed Disintegration|KLD
+4 Abrade|HOU
+4 Walking Ballista|AER
+4 Scrapheap Scrounger|KLD
+1 Rekindling Phoenix
+3 Pia Nalaar|KLD
+4 Inventor's Apprentice|KLD
+2 Hazoret the Fervent|AKH
+1 Glorybringer|AKH
+4 Dragonskull Summit|XLN
+4 Bomat Courier|KLD
+3 Chandra, Torch of Defiance|KLD
+
+[sideboard]
+3 Sweltering Suns|AKH
+2 Fatal Push|AER
+4 Doomfall|HOU
+2 Arguel's Blood Fast|XLN
+1 Canyon Slough|AKH
+1 Rekindling Phoenix
+1 Glorybringer|AKH
+1 Chandra, Torch of Defiance|KLD

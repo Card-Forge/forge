@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Santiago Siskindovich
+Title=Titania
+Difficulty=very hard
+Description=Rakdos Aggro by Santiago Siskindovich
+Icon=Titania.jpg
+Deck Type=constructed
+
+[main]
+2 Kroxa, Titan of Death's Hunger
+2 Valki, God of Lies
+4 Mire Triton
+4 Woe Strider
+4 Immersturm Predator
+4 Bonecrusher Giant
+1 Soul Shatter
+4 Heartless Act
+4 Village Rites
+4 Claim the Firstborn
+3 The Akroan War
+1 Den of the Bugbear
+1 Castle Locthwain
+2 Hive of the Eye Tyrant
+4 Fabled Passage
+4 Mountain
+4 Swamp
+4 Blightstep Pathway
+4 Temple of Malice
+
+[sideboard]
+1 Jegantha, the Wellspring
+1 Shadowspear
+1 Nighthawk Scavenger
+1 Redcap Melee
+2 Elspeth's Nightmare
+2 Kaervek, the Spiteful
+3 Skyclave Shade
+4 Duress

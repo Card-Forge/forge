@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Blue Aggro by Shintaro Ishimura
+Title=alaarb
+Difficulty=very hard
+Description=Mono Blue Aggro by Shintaro Ishimura
+Icon=alaarb.jpg
+Deck Type=constructed
+
+[main]
+2 Malevolent Hermit
+2 Suspicious Stowaway
+2 Dreamshackle Geist
+4 Ascendant Spirit
+4 Spectral Adversary
+4 Dragon Turtle
+4 Delver of Secrets|ISD
+2 Concerted Defense
+2 Geistlight Snare
+2 Divide by Zero
+4 Fading Hope
+4 Jwari Disruption
+4 Consider
+4 Faceless Haven
+16 Snow-Covered Island|IA
+
+[sideboard]
+2 Dreamshackle Geist
+2 Concerted Defense
+1 Teachings of the Archaics
+1 Mascot Exhibition
+1 Environmental Sciences
+2 Disdainful Stroke|KTK
+2 Ray of Frost
+4 Tempted by the Oriq

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Akashi Higuchi
+Title=Darrin Stephens
+Difficulty=very hard
+Description=Boros Aggro by Akashi Higuchi
+Icon=Darrin Stephens.jpg
+Deck Type=constructed
+
+[main]
+1 Abrade
+2 Reckoner Bankbuster
+2 Elspeth Resplendent
+3 Lightning Strike
+3 The Wandering Emperor
+4 Fable of the Mirror-Breaker
+1 Intrepid Adversary
+2 Shivan Devastator
+2 Ao, the Dawn Sky
+3 Atsushi, the Blazing Sky
+4 Anointed Peacekeeper
+4 Sanctuary Warden
+4 Riveteers Requisitioner
+1 Sokenzan, Crucible of Defiance
+1 Eiganjo, Seat of the Empire
+4 Sundown Pass
+9 Mountain
+10 Plains
+
+[sideboard]
+2 Farewell
+2 Destroy Evil
+2 Unlicensed Hearse
+1 Angelfire Ignition
+1 Valorous Stance
+2 Abrade
+2 Reckoner Bankbuster
+3 Intrepid Adversary

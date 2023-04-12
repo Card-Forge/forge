@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Ponza by Chris Benafel
+Title=Equilibrium
+Difficulty=very hard
+Description=Ponza by Chris Benafel
+Icon=Equilibrium.jpg
+Deck Type=constructed
+
+[main]
+4 Avalanche Riders|TSP
+3 Masticore|UD
+3 Cave-In|MM
+3 Earthquake|C15
+3 Fire Diamond|C14
+3 Hammer of Bogardan|8E
+4 Pillage|7E
+4 Seal of Fire|DIS
+2 Shock
+4 Stone Rain|9E
+2 Tectonic Break|MM
+4 Rishadan Port|MM
+3 Dust Bowl|MM
+4 Ghitu Encampment|10E
+14 Mountain|RTR
+
+[sideboard]
+1 Earthquake|C15
+2 Tectonic Break|MM
+4 Boil|8E
+4 Cursed Totem|6E
+4 Thran Foundry|UD

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Izzet Control by Pedro Silva
+Title=Bound by Strength
+Difficulty=very hard
+Description=Izzet Control by Pedro Silva
+Icon=Bound by Strength.jpg
+Deck Type=constructed
+
+[main]
+1 Iymrith, Desert Doom
+3 Goldspan Dragon
+4 Smoldering Egg
+1 Spikefield Hazard
+2 Jwari Disruption
+2 Negate
+2 Fading Hope
+2 Saw It Coming
+2 Divide by Zero
+4 Dragon's Fire
+4 Memory Deluge
+2 Thundering Rebuke
+3 Alrund's Epiphany
+4 Expressive Iteration
+4 Shatterskull Smashing
+2 Hall of Storm Giants
+3 Frostboil Snarl
+4 Riverglide Pathway
+4 Mountain
+7 Island
+
+[sideboard]
+1 Mascot Exhibition
+1 Battle of Frost and Fire
+1 Environmental Sciences
+2 Test of Talents
+3 Cinderclasm
+3 Burning Hands
+4 Malevolent Hermit

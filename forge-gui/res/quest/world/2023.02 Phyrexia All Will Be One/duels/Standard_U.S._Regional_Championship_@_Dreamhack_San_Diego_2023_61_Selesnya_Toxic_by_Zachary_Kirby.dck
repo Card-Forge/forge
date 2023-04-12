@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Selesnya Toxic by Zachary Kirby
+Title=Crusader
+Difficulty=very hard
+Description=Selesnya Toxic by Zachary Kirby
+Icon=Crusader.jpg
+Deck Type=constructed
+
+[main]
+3 Annex Sentry
+3 Bloated Contaminator
+4 Crawling Chorus
+4 Jawbone Duelist
+4 Skrelv, Defector Mite
+4 Slaughter Singer
+4 Venerated Rotpriest
+2 Charge of the Mites
+4 Tyvar's Stand
+1 Valorous Stance
+4 Skrelv's Hive
+1 Boseiju, Who Endures
+4 Brushland
+1 Eiganjo, Seat of the Empire
+4 Mirrex
+3 Overgrown Farmland
+2 Plains
+4 Razorverge Thicket
+4 The Seedcore
+
+[sideboard]
+2 Valorous Stance
+3 Ajani, Sleeper Agent
+2 Serra Paragon
+3 Tamiyo's Safekeeping
+3 Knockout Blow
+2 Melira, the Living Cure

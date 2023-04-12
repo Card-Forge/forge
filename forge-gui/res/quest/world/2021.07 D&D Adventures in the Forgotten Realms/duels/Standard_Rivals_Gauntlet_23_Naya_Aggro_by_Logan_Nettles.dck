@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Naya Aggro by Logan Nettles
+Title=Gruul-precon
+Difficulty=very hard
+Description=Naya Aggro by Logan Nettles
+Icon=Gruul-precon.jpg
+Deck Type=constructed
+
+[main]
+2 Tangled Florahedron
+4 Bonecrusher Giant
+4 Elite Spellbinder
+4 Giant Killer
+4 Edgewall Innkeeper
+4 Jaspera Sentinel
+4 Lovestruck Beast
+2 Esika's Chariot
+4 Fire Prophecy
+4 Showdown of the Skalds
+2 Lair of the Hydra
+2 Plains
+2 Mountain
+3 Forest
+3 Fabled Passage
+4 Cragcrown Pathway
+4 Needleverge Pathway
+4 Branchloft Pathway
+
+[sideboard]
+1 Jegantha, the Wellspring
+1 The Akroan War
+1 Wilt
+2 Drannith Magistrate
+2 Burning Hands
+2 Toski, Bearer of Secrets
+3 Ox of Agonas
+3 Redcap Melee

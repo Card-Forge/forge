@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Pyromancer Ascension by James McLeod
+Title=Sedge Beast
+Difficulty=very hard
+Description=Pyromancer Ascension by James McLeod
+Icon=Sedge Beast.jpg
+Deck Type=constructed
+
+[main]
+4 Burst Lightning|ZEN
+4 Into the Roil|ZEN
+4 Lightning Bolt|M11
+4 Mana Leak|M12
+2 Foresee|M11
+4 Gitaxian Probe|NPH
+4 Ponder|M12
+4 Preordain|M11
+4 See Beyond|ROE
+4 Pyromancer Ascension|ZEN
+1 Arid Mesa|ZEN
+3 Halimar Depths|WWK
+7 Island|M12
+2 Misty Rainforest|ZEN
+5 Mountain|M12
+4 Scalding Tarn|ZEN
+
+[sideboard]
+2 Consecrated Sphinx|MBS
+2 Spellskite|NPH
+3 Flashfreeze|M12
+3 Mental Misstep|NPH
+1 Twisted Image|SOM
+4 Pyroclasm|M11

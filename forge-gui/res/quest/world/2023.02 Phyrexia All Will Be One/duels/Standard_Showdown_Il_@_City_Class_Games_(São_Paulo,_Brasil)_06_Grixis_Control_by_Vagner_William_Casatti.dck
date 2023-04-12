@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Grixis Control by Vagner William Casatti
+Title=Aspect of Nature
+Difficulty=very hard
+Description=Grixis Control by Vagner William Casatti
+Icon=Aspect of Nature.jpg
+Deck Type=constructed
+
+[main]
+2 Negate
+3 Abrade
+3 Go for the Throat
+3 Make Disappear
+3 Reckoner Bankbuster
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+1 Bladecoil Serpent
+2 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+1 Swamp
+2 Underground River
+2 Sulfurous Springs
+2 Shivan Reef
+3 Darkslick Shores
+3 Shipwreck Marsh
+4 Xander's Lounge
+4 Haunted Ridge
+4 Blackcleave Cliffs
+
+[sideboard]
+3 Razorlash Transmogrant
+2 Cut Down
+2 Brotherhood's End
+2 Anoint with Affliction
+2 Duress
+2 Siphon Insight
+1 Disdainful Stroke
+1 Go for the Throat

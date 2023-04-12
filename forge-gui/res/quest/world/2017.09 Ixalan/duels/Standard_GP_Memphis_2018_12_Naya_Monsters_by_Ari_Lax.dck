@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Naya Monsters by Ari Lax
+Title=Wyatt Earp
+Difficulty=very hard
+Description=Naya Monsters by Ari Lax
+Icon=Wyatt Earp.jpg
+Deck Type=constructed
+
+[main]
+2 Ajani Unyielding|AER
+2 Thopter Arrest|AER
+2 Cast Out|AKH
+3 Chandra, Torch of Defiance|KLD
+3 Abrade|HOU
+4 Magma Spray|AKH
+3 Rekindling Phoenix
+4 Glorybringer|AKH
+4 Jadelight Ranger
+4 Merfolk Branchwalker|XLN
+4 Servant of the Conduit|KLD
+2 Scattered Groves|AKH
+3 Sunpetal Grove|XLN
+3 Inspiring Vantage|KLD
+4 Mountain
+4 Sheltered Thicket|AKH
+4 Rootbound Crag|XLN
+5 Forest
+
+[sideboard]
+3 Sweltering Suns|AKH
+2 Carnage Tyrant|XLN
+2 Chandra's Defeat|HOU
+2 Dire Fleet Daredevil
+2 Ixalan's Binding|XLN
+2 Lifecrafter's Bestiary|AER
+2 Naturalize

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Deaths Shadow by FerMTG
+Title=Shahryar
+Difficulty=very hard
+Description=Deaths Shadow by FerMTG
+Icon=Shahryar.jpg
+Deck Type=constructed
+
+[main]
+4 Death's Shadow|WWK
+4 Dragon's Rage Channeler
+2 Kroxa, Titan of Death's Hunger
+4 Ragavan, Nimble Pilferer
+4 Expressive Iteration
+2 Inquisition of Kozilek|ROE
+4 Thoughtseize|THS
+4 Drown in the Loch
+1 Kolaghan's Command|DTK
+2 Lightning Bolt|M11
+4 Unholy Heat
+4 Mishra's Bauble|CS
+2 Dress Down
+2 Blood Crypt
+4 Bloodstained Mire|KTK
+4 Polluted Delta|KTK
+3 Scalding Tarn|ZEN
+1 Snow-Covered Mountain
+1 Snow-Covered Swamp
+2 Steam Vents
+2 Watery Grave
+
+[sideboard]
+2 Kolaghan's Command|DTK
+2 Alpine Moon
+1 Engineered Explosives|FD
+1 Lurrus of the Dream-Den
+2 Nihil Spellbomb|SOM
+1 Snapcaster Mage|ISD
+2 Spell Pierce|XLN
+2 Terminate|ARB
+2 Tourach, Dread Cantor

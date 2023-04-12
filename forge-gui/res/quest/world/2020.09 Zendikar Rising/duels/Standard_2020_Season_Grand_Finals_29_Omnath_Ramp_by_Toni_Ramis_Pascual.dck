@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Omnath Ramp by Toni Ramis Pascual
+Title=Isperia
+Difficulty=very hard
+Description=Omnath Ramp by Toni Ramis Pascual
+Icon=Isperia.jpg
+Deck Type=constructed
+
+[main]
+1 Kenrith, the Returned King
+2 Bonecrusher Giant
+4 Lotus Cobra
+4 Omnath, Locus of Creation
+3 Mystical Dispute
+4 Spikefield Hazard
+4 Cultivate
+4 Escape to the Wilds
+4 Genesis Ultimatum
+3 Felidar Retreat
+1 Ketria Triome
+1 Plains
+2 Mountain
+2 Evolving Wilds
+4 Cragcrown Pathway
+4 Island
+4 Fabled Passage
+4 Raugrin Triome
+5 Forest
+
+[sideboard]
+1 Mystical Dispute
+1 Redcap Melee
+2 Elder Gargaroth
+2 Negate
+2 Shredded Sails
+2 Chainweb Aracnir
+2 Mazemind Tome
+3 Scorching Dragonfire

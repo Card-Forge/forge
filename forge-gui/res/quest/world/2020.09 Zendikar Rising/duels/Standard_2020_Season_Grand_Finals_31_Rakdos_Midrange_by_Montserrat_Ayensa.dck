@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Rakdos Midrange by Montserrat Ayensa
+Title=Land's Edge
+Difficulty=very hard
+Description=Rakdos Midrange by Montserrat Ayensa
+Icon=Land's Edge.jpg
+Deck Type=constructed
+
+[main]
+4 Fabled Passage
+5 Mountain
+8 Swamp
+2 Shatterskull Smashing
+2 Agonizing Remorse
+2 Bloodchief's Thirst
+3 Spikefield Hazard
+4 Duress
+4 Tymaret Calls the Dead
+4 Heartless Act
+2 Ox of Agonas
+1 Shredded Sails
+2 Hagra Mauling
+2 Liliana, Waker of the Dead
+3 Bonecrusher Giant
+4 Mire Triton
+4 Kroxa, Titan of Death's Hunger
+4 Temple of Malice
+
+[sideboard]
+2 Embereth Shieldbreaker
+2 Extinction Event
+2 Soul-Guide Lantern
+1 Blacklance Paragon
+1 Agonizing Remorse
+1 Bloodchief's Thirst
+2 Ox of Agonas
+1 Cling to Dust
+1 Storm's Wrath
+1 Shredded Sails
+1 Liliana, Waker of the Dead

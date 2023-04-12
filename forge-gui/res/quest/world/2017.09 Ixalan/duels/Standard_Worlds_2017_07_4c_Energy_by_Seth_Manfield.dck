@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=4c Energy by Seth Manfield
+Title=Anubis
+Difficulty=very hard
+Description=4c Energy by Seth Manfield
+Icon=Anubis.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Torch of Defiance|KLD
+3 Bristling Hydra|KLD
+3 Glorybringer|AKH
+4 Rogue Refiner|AER
+4 Servant of the Conduit|KLD
+4 Longtusk Cub|KLD
+3 Whirler Virtuoso|KLD
+2 The Scarab God|HOU
+4 Attune with Aether|KLD
+2 Abrade|HOU
+2 Magma Spray|AKH
+4 Harnessed Lightning|KLD
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+2 Mountain|XLN
+1 Island|XLN
+4 Forest|XLN
+2 Spirebluff Canal|KLD
+2 Sheltered Thicket|AKH
+3 Rootbound Crag|XLN
+1 Swamp|XLN
+
+[sideboard]
+1 Chandra, Torch of Defiance|KLD
+1 Abrade|HOU
+3 Negate|AER
+2 Deathgorge Scavenger|XLN
+2 Spell Pierce|XLN
+1 Struggle // Survive|HOU
+2 Chandra's Defeat|HOU
+1 Vizier of Many Faces|AKH
+2 Nissa, Vital Force|KLD

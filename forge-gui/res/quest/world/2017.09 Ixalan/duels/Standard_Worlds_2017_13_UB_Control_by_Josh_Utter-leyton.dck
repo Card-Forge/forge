@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=UB Control by Josh Utter-leyton
+Title=Vance Elder
+Difficulty=very hard
+Description=UB Control by Josh Utter-leyton
+Icon=Vance Elder.jpg
+Deck Type=constructed
+
+[main]
+2 The Scarab God|HOU
+3 Torrential Gearhulk|KLD
+4 Censor|AKH
+4 Disallow|AER
+2 Essence Extraction|KLD
+4 Essence Scatter|AKH
+4 Fatal Push|AER
+1 Glimmer of Genius|KLD
+4 Hieroglyphic Illumination|AKH
+3 Vraska's Contempt|XLN
+3 Search for Azcanta|XLN
+4 Drowned Catacomb|XLN
+4 Evolving Wilds|AKH
+4 Fetid Pools|AKH
+3 Field of Ruin|XLN
+6 Island|XLN
+5 Swamp|XLN
+
+[sideboard]
+2 Vizier of Many Faces|AKH
+1 Essence Extraction|KLD
+1 Field of Ruin|XLN
+1 Arguel's Blood Fast|XLN
+3 Contraband Kingpin|KLD
+4 Duress|XLN
+2 Negate|AER
+1 Treasure Map|XLN

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Orzhov Aggro by Brendon Johnson
+Title=Dogbert
+Difficulty=very hard
+Description=Orzhov Aggro by Brendon Johnson
+Icon=Dogbert.jpg
+Deck Type=constructed
+
+[main]
+2 Gideon of the Trials|AKH
+4 Toolcraft Exemplar|KLD
+4 Scrapheap Scrounger|KLD
+4 Benalish Marshal
+4 Servo Exhibition|KLD
+3 Sram's Expertise|AER
+2 Fatal Push|AER
+3 Heart of Kiran|AER
+2 Legion's Landing|XLN
+4 History of Benalia
+2 Ixalan's Binding|XLN
+4 Concealed Courtyard|KLD
+4 Isolated Chapel
+8 Plains
+1 Scavenger Grounds|HOU
+4 Shefet Dunes|HOU
+2 Spire of Industry|AER
+3 Karn, Scion of Urza
+
+[sideboard]
+1 Fatal Push|AER
+1 Scavenger Grounds|HOU
+2 Forsake the Worldly|AKH
+2 Thopter Arrest|AER
+2 Settle the Wreckage|XLN
+2 Lyra Dawnbringer
+1 Doomfall|HOU
+2 Duress|XLN
+1 Skysovereign, Consul Flagship|KLD
+1 Sorcerous Spyglass|XLN

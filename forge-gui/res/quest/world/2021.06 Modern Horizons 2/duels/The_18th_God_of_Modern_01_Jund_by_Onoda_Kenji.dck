@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Jund by Onoda Kenji
+Title=Troll Shaman
+Difficulty=very hard
+Description=Jund by Onoda Kenji
+Icon=Troll Shaman.jpg
+Deck Type=constructed
+
+[main]
+1 Tourach, Dread Cantor
+4 Dragon's Rage Channeler
+4 Ragavan, Nimble Pilferer
+4 Tarmogoyf|FUT
+1 Nihil Spellbomb|SOM
+1 Shadowspear
+1 Pithing Needle
+4 Mishra's Bauble|CS
+1 Assassin's Trophy
+1 Abrupt Decay|RTR
+2 Lightning Bolt|M11
+4 Unholy Heat
+3 Thoughtseize|THS
+3 Inquisition of Kozilek|ROE
+4 Urza's Saga
+4 Wrenn and Six
+1 Forest
+1 Mountain
+1 Swamp
+1 Stomping Ground
+1 Overgrown Tomb
+2 Blood Crypt
+2 Wooded Foothills|KTK
+2 Blackcleave Cliffs|SOM
+3 Bloodstained Mire|KTK
+4 Verdant Catacombs|ZEN
+
+[sideboard]
+1 Nihil Spellbomb|SOM
+1 Abrupt Decay|RTR
+1 Chalice of the Void|MR
+1 Doom Blade|M14
+1 Kolaghan's Command|DTK
+1 Lurrus of the Dream-Den
+1 Pyrite Spellbomb|MR
+2 Alpine Moon
+2 Engineered Explosives|FD
+2 Torpor Orb|NPH
+2 Dauthi Voidwalker

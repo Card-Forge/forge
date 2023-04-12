@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Eli Kassis
+Title=Ala
+Difficulty=very hard
+Description=Esper Aggro by Eli Kassis
+Icon=Ala.jpg
+Deck Type=constructed
+
+[main]
+1 Obscura Interceptor
+2 Malevolent Hermit
+2 Tenacious Underdog
+4 Raffine, Scheming Seer
+4 Luminarch Aspirant
+1 Vanishing Verse
+1 Annul
+1 Ray of Enfeeblement
+1 Spell Pierce
+2 Infernal Grasp
+1 Bloodchief's Thirst
+2 Emeria's Call
+2 The Meathook Massacre
+4 Wedding Announcement
+2 Lolth, Spider Queen
+3 Kaito Shizuki
+3 The Wandering Emperor
+2 Hengegate Pathway
+2 Plains
+2 Brightclimb Pathway
+2 Shipwreck Marsh
+2 Hive of the Eye Tyrant
+3 Raffine's Tower
+3 Deserted Beach
+4 Shattered Sanctum
+4 Clearwater Pathway
+
+[sideboard]
+1 Vanishing Verse
+2 Annul
+3 Ray of Enfeeblement
+1 Duress
+1 Negate
+1 Invoke Justice
+2 Archon of Emeria
+2 Unlicensed Hearse
+2 Disdainful Stroke

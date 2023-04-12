@@ -1,0 +1,54 @@
+[duel]
+[metadata]
+Name=Bring to Light by Scott Lipp
+Title=Lefterel
+Difficulty=very hard
+Description=Bring to Light by Scott Lipp
+Icon=Lefterel.jpg
+Deck Type=constructed
+
+[main]
+4 Siege Rhino|KTK
+2 Nissa, Vastwood Seer|ORI
+4 Jace, Vryn's Prodigy|ORI
+1 Tasigur, the Golden Fang|FRF
+1 Dragonlord Ojutai|DTK
+1 Whisperwood Elemental|FRF
+4 Bring to Light|BFZ
+1 Languish|ORI
+1 Crux of Fate|FRF
+4 Abzan Charm|KTK
+2 Complete Disregard|BFZ
+2 Murderous Cut|KTK
+1 Foul Renewal|DTK
+1 Silumgar's Command|DTK
+1 Dispel|BFZ
+1 Utter End|KTK
+2 Silkwrap|DTK
+1 Plains|BFZ
+3 Forest|BFZ
+1 Swamp|BFZ
+4 Polluted Delta|KTK
+4 Flooded Strand|KTK
+1 Island|BFZ
+3 Bloodstained Mire|KTK
+2 Windswept Heath|KTK
+1 Wooded Foothills|KTK
+1 Sunken Hollow|BFZ
+1 Shambling Vent|BFZ
+1 Cinder Glade|BFZ
+1 Lumbering Falls|BFZ
+1 Smoldering Marsh|BFZ
+1 Canopy Vista|BFZ
+1 Prairie Stream|BFZ
+
+[sideboard]
+1 Whisperwood Elemental|FRF
+1 Dispel|BFZ
+1 Feed the Clan|KTK
+4 Radiant Flames|BFZ
+2 Duress|DTK
+2 Disdainful Stroke|KTK
+2 Surge of Righteousness|DTK
+1 Infinite Obliteration|ORI
+1 Ugin, the Spirit Dragon|FRF

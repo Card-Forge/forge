@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Goblin-Bidding by Wolfgang Eder
+Title=Diablo
+Difficulty=very hard
+Description=Goblin-Bidding by Wolfgang Eder
+Icon=Diablo.jpg
+Deck Type=constructed
+
+[main]
+4 Bloodstained Mire|KTK
+1 City of Brass|8E
+10 Mountain|RTR
+3 Shadowblood Ridge|C16
+4 Swamp|RTR
+3 Gempalm Incinerator|LE
+1 Goblin Grappler|LE
+4 Goblin Piledriver|ORI
+2 Goblin Sharpshooter|C13
+4 Goblin Sledder|ONS
+3 Goblin Taskmaster|ONS
+4 Goblin Warchief
+4 Siege-Gang Commander
+3 Skirk Prospector
+4 Sparksmith|ONS
+3 Patriarch's Bidding|ONS
+3 Smother|WWK
+
+[sideboard]
+1 Smother|WWK
+2 Cabal Therapy|JU
+2 Dark Banishing|CST
+2 Flaring Pain|JU
+4 Starstorm|C14
+4 Sulfuric Vortex|CNS

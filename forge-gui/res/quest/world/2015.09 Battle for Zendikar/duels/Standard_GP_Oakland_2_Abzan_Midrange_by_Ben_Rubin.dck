@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Ben Rubin
+Title=Predator
+Difficulty=very hard
+Description=Abzan Midrange by Ben Rubin
+Icon=Predator.jpg
+Deck Type=constructed
+
+[main]
+1 Plains|BFZ
+1 Llanowar Wastes|ORI
+2 Forest|BFZ
+3 Gideon, Ally of Zendikar|BFZ
+1 Canopy Vista|BFZ
+4 Flooded Strand|KTK
+1 Duress|DTK
+3 Ultimate Price|DTK
+4 Stubborn Denial|KTK
+2 Murderous Cut|KTK
+2 Dromoka's Command|DTK
+4 Warden of the First Tree|FRF
+3 Tasigur, the Golden Fang|FRF
+4 Siege Rhino|KTK
+2 Hangarback Walker|ORI
+3 Den Protector|DTK
+4 Anafenza, the Foremost|KTK
+4 Wooded Foothills|KTK
+4 Windswept Heath|KTK
+1 Swamp|BFZ
+2 Sunken Hollow|BFZ
+1 Smoldering Marsh|BFZ
+2 Shambling Vent|BFZ
+2 Prairie Stream|BFZ
+4 Polluted Delta|KTK
+
+[sideboard]
+2 Self-Inflicted Wound|DTK
+2 Rising Miasma|BFZ
+2 Painful Truths|BFZ
+2 Ojutai's Command|DTK
+2 Jace, Vryn's Prodigy|ORI
+2 Disdainful Stroke|KTK
+1 Dragonlord Silumgar|DTK
+2 Exert Influence|BFZ

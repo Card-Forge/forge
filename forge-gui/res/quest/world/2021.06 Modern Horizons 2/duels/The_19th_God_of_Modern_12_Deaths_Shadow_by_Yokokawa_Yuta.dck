@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Deaths Shadow by Yokokawa Yuta
+Title=Vance Elder
+Difficulty=very hard
+Description=Deaths Shadow by Yokokawa Yuta
+Icon=Vance Elder.jpg
+Deck Type=constructed
+
+[main]
+2 Kroxa, Titan of Death's Hunger
+4 Dragon's Rage Channeler
+4 Ragavan, Nimble Pilferer
+4 Death's Shadow|WWK
+4 Mishra's Bauble|CS
+1 Kolaghan's Command|DTK
+2 Fatal Push|AER
+4 Drown in the Loch
+4 Unholy Heat
+2 Inquisition of Kozilek|ROE
+4 Expressive Iteration
+4 Thoughtseize|THS
+2 Dress Down
+1 Snow-Covered Swamp
+1 Snow-Covered Mountain
+2 Watery Grave
+2 Steam Vents
+2 Blood Crypt
+3 Scalding Tarn|ZEN
+4 Polluted Delta|KTK
+4 Bloodstained Mire|KTK
+
+[sideboard]
+1 Kroxa, Titan of Death's Hunger
+2 Kolaghan's Command|DTK
+1 Engineered Explosives|FD
+1 Lurrus of the Dream-Den
+1 Snapcaster Mage|ISD
+1 Terminate|ARB
+2 Tourach, Dread Cantor
+2 Alpine Moon
+2 Spell Pierce|XLN
+2 Nihil Spellbomb|SOM

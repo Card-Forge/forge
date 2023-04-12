@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Jeskai Tokens by Eric Froehlich
+Title=Aspect of Death
+Difficulty=very hard
+Description=Jeskai Tokens by Eric Froehlich
+Icon=Aspect of Death.jpg
+Deck Type=constructed
+
+[main]
+4 Goblin Rabblemaster|M15
+3 Dragon Fodder|DTK
+4 Treasure Cruise|KTK
+4 Raise the Alarm|M15
+2 Secure the Wastes|DTK
+3 Wild Slash|FRF
+3 Anticipate|DTK
+4 Stoke the Flames|M15
+2 Valorous Stance|FRF
+3 Disdainful Stroke|KTK
+4 Jeskai Ascendancy|KTK
+3 Temple of Triumph|THS
+3 Temple of Epiphany|JOU
+4 Mystic Monastery|KTK
+4 Flooded Strand|KTK
+3 Shivan Reef|M15
+2 Battlefield Forge|M15
+2 Island|DTK
+2 Plains|DTK
+1 Mountain|DTK
+
+[sideboard]
+1 Valorous Stance|FRF
+1 Disdainful Stroke|KTK
+3 Anger of the Gods|THS
+2 Narset Transcendent|DTK
+1 Glare of Heresy|THS
+3 Dragonlord Ojutai|DTK
+1 Temple of Enlightenment|BNG
+1 Elspeth, Sun's Champion|THS
+1 End Hostilities|KTK
+1 Negate|DTK

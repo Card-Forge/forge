@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Max Tietze
+Title=Seabiscuit
+Difficulty=very hard
+Description=Caw-Blade by Max Tietze
+Icon=Seabiscuit.jpg
+Deck Type=constructed
+
+[main]
+4 Hero of Bladehold|MBS
+3 Mirran Crusader|MBS
+3 Spellskite|NPH
+4 Squadron Hawk|M11
+1 Gideon Jura|M12
+3 Dismember|NPH
+2 Into the Roil|ZEN
+4 Mana Leak|M12
+4 Preordain|M11
+2 Spell Pierce|ZEN
+2 Sword of Feast and Famine|MBS
+1 Sword of War and Peace|NPH
+4 Celestial Colonnade|WWK
+4 Glacial Fortress|M12
+2 Inkmoth Nexus|MBS
+3 Island|M12
+1 Marsh Flats|ZEN
+5 Plains|M12
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+
+[sideboard]
+1 Gideon Jura|M12
+2 Day of Judgment|M12
+3 Flashfreeze|M12
+3 Mental Misstep|NPH
+2 Ratchet Bomb|SOM
+4 Timely Reinforcements|M12

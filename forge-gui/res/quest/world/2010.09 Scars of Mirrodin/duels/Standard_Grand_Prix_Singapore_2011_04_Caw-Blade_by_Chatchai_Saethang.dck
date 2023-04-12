@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Chatchai Saethang
+Title=Sisters of Stone Death
+Difficulty=very hard
+Description=Caw-Blade by Chatchai Saethang
+Icon=Sisters of Stone Death.jpg
+Deck Type=constructed
+
+[main]
+1 Emeria Angel|ZEN
+3 Mirran Crusader|MBS
+2 Spellskite|NPH
+4 Stoneforge Mystic|WWK
+1 Sun Titan|M11
+2 Dismember|NPH
+1 Divine Offering|MBS
+2 Into the Roil|ZEN
+3 Mana Leak|M11
+3 Spell Pierce|ZEN
+4 Preordain|M11
+1 Batterskull|NPH
+1 Sword of Feast and Famine|MBS
+1 Sword of War and Peace|NPH
+3 Celestial Colonnade|WWK
+4 Glacial Fortress|M11
+2 Inkmoth Nexus|MBS
+4 Island|NPH
+1 Marsh Flats|ZEN
+1 Misty Rainforest|ZEN
+3 Plains|NPH
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+1 Jace Beleren|M11
+4 Jace, the Mind Sculptor|WWK
+
+[sideboard]
+1 Spellskite|NPH
+2 Divine Offering|MBS
+1 Batterskull|NPH
+2 Celestial Purge|M11
+3 Flashfreeze|M11
+1 Mental Misstep|NPH
+3 Day of Judgment|M11
+2 Oust|ROE

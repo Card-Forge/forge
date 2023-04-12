@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Mono White Control by Baozhong
+Title=Shapeshifter
+Difficulty=very hard
+Description=Mono White Control by Baozhong
+Icon=Shapeshifter.jpg
+Deck Type=constructed
+
+[main]
+2 Steel Seraph
+2 Serra Paragon
+2 Sanctuary Warden
+3 Ambitious Farmhand
+3 Spirited Companion
+4 Loran of the Third Path
+4 Reckoner Bankbuster
+2 Destroy Evil
+1 Farewell
+4 Lay Down Arms
+1 Touch the Spirit Realm
+4 Wedding Announcement
+4 The Wandering Emperor
+2 Eiganjo, Seat of the Empire
+4 Roadside Reliquary
+18 Plains
+
+[sideboard]
+1 Serra Paragon
+1 Sanctuary Warden
+1 Farewell
+1 Touch the Spirit Realm
+1 Depopulate
+2 Elspeth Resplendent
+2 Fateful Absence
+2 Unlicensed Hearse
+2 Temporary Lockdown
+2 Urza's Sylex

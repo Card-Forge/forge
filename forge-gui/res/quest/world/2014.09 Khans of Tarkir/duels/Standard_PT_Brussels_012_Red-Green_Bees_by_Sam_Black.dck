@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Red-Green Bees by Sam Black
+Title=alanacatl
+Difficulty=very hard
+Description=Red-Green Bees by Sam Black
+Icon=alanacatl.jpg
+Deck Type=constructed
+
+[main]
+3 Xenagos, the Reveler|THS
+2 Chandra, Pyromaster|M15
+4 Elvish Mystic|M15
+4 Sylvan Caryatid|THS
+4 Courser of Kruphix|BNG
+4 Hornet Nest|M15
+1 Polukranos, World Eater|THS
+1 Ashcloud Phoenix|KTK
+1 Stormbreath Dragon|THS
+2 Whisperwood Elemental|FRF
+1 Dragonlord Atarka|DTK
+3 Roast|DTK
+3 Setessan Tactics|JOU
+4 Chord of Calling|M15
+4 Temple of Abandon|THS
+4 Wooded Foothills|KTK
+1 Rugged Highlands|FRF
+1 Mana Confluence|JOU
+4 Mountain|DTK
+9 Forest|DTK
+
+[sideboard]
+1 Xenagos, the Reveler|THS
+1 Chandra, Pyromaster|M15
+1 Ashcloud Phoenix|KTK
+1 Stormbreath Dragon|THS
+1 Whisperwood Elemental|FRF
+2 Rending Volley|DTK
+3 Magma Spray|JOU
+1 Arbor Colossus|THS
+2 Reclamation Sage|M15
+1 Scuttling Doom Engine|M15
+1 Boon Satyr|THS

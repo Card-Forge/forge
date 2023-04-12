@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Ur Gift by Charles Wong
+Title=Sherlock Holmes
+Difficulty=very hard
+Description=Ur Gift by Charles Wong
+Icon=Sherlock Holmes.jpg
+Deck Type=constructed
+
+[main]
+4 Bomat Courier|KLD
+4 Champion of Wits|HOU
+4 Combat Celebrant|AKH
+4 Fanatical Firebrand
+4 Minister of Inquiries|KLD
+2 Trophy Mage|AER
+2 Vizier of Many Faces|AKH
+4 Walking Ballista|AER
+4 Warkite Marauder
+4 Gate to the Afterlife|AKH
+2 God-Pharaoh's Gift|HOU
+4 Aether Hub|KLD
+2 Field of Ruin|XLN
+4 Ipnu Rivulet|HOU
+2 Island
+6 Mountain
+4 Spirebluff Canal|KLD
+
+[sideboard]
+3 Abrade|HOU
+2 Glorybringer|AKH
+2 Jace's Defeat|HOU
+3 Silent Gravestone
+3 Spell Pierce|XLN
+2 Sweltering Suns|AKH

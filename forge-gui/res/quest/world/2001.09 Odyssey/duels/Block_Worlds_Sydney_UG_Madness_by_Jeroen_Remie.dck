@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=UG Madness by Jeroen Remie
+Title=Shrek
+Difficulty=very hard
+Description=UG Madness by Jeroen Remie
+Icon=Shrek.jpg
+Deck Type=constructed
+
+[main]
+1 Cephalid Coliseum|OD
+11 Forest|A
+11 Island|A
+4 Aquamoeba|TO
+4 Arrogant Wurm|TO
+4 Basking Rootwalla|TO
+4 Wild Mongrel|OD
+4 Wonder|JU
+4 Aether Burst|OD
+4 Careful Study|OD
+4 Circular Logic|TO
+4 Elephant Guide|JU
+1 Roar of the Wurm|OD
+
+[sideboard]
+2 Roar of the Wurm|OD
+2 Deep Analysis|TO
+3 Envelop|JU
+3 Krosan Reclamation|JU
+3 Moment's Peace|OD
+2 Ray of Revelation|JU

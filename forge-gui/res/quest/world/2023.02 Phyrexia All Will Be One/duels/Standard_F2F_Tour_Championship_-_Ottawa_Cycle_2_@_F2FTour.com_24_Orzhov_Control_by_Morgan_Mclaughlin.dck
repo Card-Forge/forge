@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Orzhov Control by Morgan Mclaughlin
+Title=Shango
+Difficulty=very hard
+Description=Orzhov Control by Morgan Mclaughlin
+Icon=Shango.jpg
+Deck Type=constructed
+
+[main]
+1 Go for the Throat
+1 The Restoration of Eiganjo
+1 Vraska, Betrayal's Sting
+1 Farewell
+2 The Eternal Wanderer
+2 Ossification
+3 The Wandering Emperor
+4 Lay Down Arms
+4 Reckoner Bankbuster
+4 Wedding Announcement
+1 Archangel of Wrath
+1 Spirited Companion
+2 Ambitious Farmhand
+2 Steel Seraph
+3 Serra Paragon
+3 Loran of the Third Path
+1 Swamp
+1 Mirrex
+1 Takenuma, Abandoned Mire
+1 Obscura Storefront
+2 Shattered Sanctum
+3 Roadside Reliquary
+3 Field of Ruin
+4 Raffine's Tower
+9 Plains
+
+[sideboard]
+1 Phyrexian Missionary
+2 Vanquish the Horde
+3 Temporary Lockdown
+1 Pilfer
+2 Cut Down
+2 Duress
+1 Destroy Evil
+1 Go for the Throat
+2 Archangel of Wrath

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Christian Hauck
+Title=Mortal Wombat
+Difficulty=very hard
+Description=Mono Green Aggro by Christian Hauck
+Icon=Mortal Wombat.jpg
+Deck Type=constructed
+
+[main]
+2 Ulvenwald Oddity
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+4 Sculptor of Winter
+4 Esika's Chariot
+2 Inscription of Abundance
+2 Snakeskin Veil
+4 Blizzard Brawl
+4 Ranger Class
+1 Wrenn and Seven
+1 Lair of the Hydra
+2 Tangled Florahedron
+4 Kazandu Mammoth
+4 Faceless Haven
+18 Snow-Covered Forest
+
+[sideboard]
+1 Inscription of Abundance
+2 Snakeskin Veil
+1 Wrenn and Seven
+1 Avabruck Caretaker
+2 Outland Liberator
+2 Tangletrap
+3 Devouring Tendrils
+3 Tajuru Blightblade

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Sultai Constrictor by Aaron Barich
+Title=Riptide
+Difficulty=very hard
+Description=Sultai Constrictor by Aaron Barich
+Icon=Riptide.jpg
+Deck Type=constructed
+
+[main]
+2 Vraska's Contempt|XLN
+2 Fatal Push|AER
+3 Hadana's Climb
+3 Blossoming Defense|KLD
+2 Verdurous Gearhulk|KLD
+4 Walking Ballista|AER
+4 Winding Constrictor|AER
+4 Jadelight Ranger
+4 Glint-Sleeve Siphoner|AER
+4 Bristling Hydra|KLD
+4 Servant of the Conduit|KLD
+1 Swamp
+1 Ifnir Deadlands|HOU
+2 Foul Orchard
+2 Hashep Oasis|HOU
+3 Forest
+3 Fetid Pools|AKH
+4 Botanical Sanctum|KLD
+4 Blooming Marsh|KLD
+4 Aether Hub|KLD
+
+[sideboard]
+2 Cartouche of Ambition|AKH
+3 Negate
+3 Thrashing Brontodon
+3 Duress|XLN
+2 Vraska's Contempt|XLN
+2 Fatal Push|AER

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Benjamin Weitz
+Title=Archon Namani
+Difficulty=very hard
+Description=Red Deck Wins by Benjamin Weitz
+Icon=Archon Namani.jpg
+Deck Type=constructed
+
+[main]
+4 Bomat Courier|KLD
+4 Soul-Scar Mage|AKH
+4 Earthshaker Khenra|HOU
+3 Kari Zev, Skyship Raider|AER
+4 Goblin Chainwhirler
+3 Ahn-Crop Crasher|AKH
+4 Hazoret the Fervent|AKH
+1 Glorybringer|AKH
+3 Shock|AER
+3 Abrade|HOU
+3 Lightning Strike|XLN
+24 Mountain
+
+[sideboard]
+2 Glorybringer|AKH
+1 Abrade|HOU
+1 Grasping Dunes|AKH
+2 Fight with Fire
+2 Walking Ballista|AER
+1 Release the Gremlins|AER
+3 Chandra, Torch of Defiance|KLD
+2 Chandra's Defeat|HOU
+1 Magma Spray|AKH

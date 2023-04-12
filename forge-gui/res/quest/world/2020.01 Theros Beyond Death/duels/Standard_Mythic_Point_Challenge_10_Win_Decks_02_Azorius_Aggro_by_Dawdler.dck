@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Azorius Aggro by Dawdler
+Title=Wood Ramp
+Difficulty=very hard
+Description=Azorius Aggro by Dawdler
+Icon=Wood Ramp.jpg
+Deck Type=constructed
+
+[main]
+2 Brazen Borrower
+1 Cavalier of Dawn
+7 Island
+6 Plains
+4 Hallowed Fountain
+4 Temple of Enlightenment
+2 Castle Vantress
+2 Fabled Passage
+1 Castle Ardenvale
+4 Teferi, Time Raveler
+3 Elspeth Conquers Death
+2 Omen of the Sea
+2 Time Wipe
+2 Mystical Dispute
+4 Thassa, Deep-Dwelling
+4 Elite Guardmage
+4 Charming Prince
+3 Fblthp, the Lost
+3 Agent of Treachery
+
+[sideboard]
+4 Aether Gust
+4 Devout Decree
+3 Dovin's Veto
+1 Apostle of Purifying Light
+1 Lavinia, Azorius Renegade
+1 Planar Cleansing
+1 Mystical Dispute

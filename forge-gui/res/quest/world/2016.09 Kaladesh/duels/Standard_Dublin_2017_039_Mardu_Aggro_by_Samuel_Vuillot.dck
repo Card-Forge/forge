@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Mardu Aggro by Samuel Vuillot
+Title=The Spectre
+Difficulty=very hard
+Description=Mardu Aggro by Samuel Vuillot
+Icon=The Spectre.jpg
+Deck Type=constructed
+
+[main]
+3 Gideon, Ally of Zendikar|BFZ
+1 Chandra, Torch of Defiance|KLD
+4 Thraben Inspector|SOI
+4 Toolcraft Exemplar|KLD
+3 Inventor's Apprentice|KLD
+4 Scrapheap Scrounger|KLD
+3 Veteran Motorist|KLD
+2 Pia Nalaar|KLD
+1 Thalia, Heretic Cathar|EMN
+2 Shock
+1 Fatal Push|AER
+4 Unlicensed Disintegration|KLD
+4 Heart of Kiran|AER
+2 Cultivator's Caravan|KLD
+4 Inspiring Vantage|KLD
+4 Concealed Courtyard|KLD
+4 Aether Hub|KLD
+4 Mountain|RTR
+3 Plains|RTR
+3 Spire of Industry|AER
+
+[sideboard]
+1 Gideon, Ally of Zendikar|BFZ
+1 Chandra, Torch of Defiance|KLD
+2 Fatal Push|AER
+1 Shambling Vent|BFZ
+1 Fragmentize|KLD
+1 Declaration in Stone|SOI
+1 Key to the City|KLD
+2 Oath of Liliana|EMN
+1 Anguished Unmaking|SOI
+1 Ob Nixilis Reignited|BFZ
+1 Skysovereign, Consul Flagship|KLD
+2 Fumigate|KLD

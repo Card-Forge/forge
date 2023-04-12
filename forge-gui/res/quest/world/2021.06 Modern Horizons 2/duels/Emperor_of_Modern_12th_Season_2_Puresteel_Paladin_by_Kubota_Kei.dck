@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by Kubota Kei
+Title=The Rock
+Difficulty=very hard
+Description=Puresteel Paladin by Kubota Kei
+Icon=The Rock.jpg
+Deck Type=constructed
+
+[main]
+4 Ingenious Smith
+4 Memnite|SOM
+4 Ornithopter|AER
+4 Puresteel Paladin|NPH
+4 Stoneforge Mystic|WWK
+4 Esper Sentinel
+1 Shadowspear
+1 Cranial Plating|FD
+4 Springleaf Drum|BNG
+4 Colossus Hammer
+4 Urza's Saga
+4 Sigarda's Aid|EMN
+1 Arid Mesa|ZEN
+1 Windswept Heath|KTK
+1 Marsh Flats|ZEN
+1 Godless Shrine
+3 Inkmoth Nexus|MBS
+3 Concealed Courtyard|KLD
+4 Silent Clearing
+4 Plains
+
+[sideboard]
+1 Void Mirror
+1 Pithing Needle
+1 Path to Exile|CFX
+1 Nihil Spellbomb|SOM
+1 Lurrus of the Dream-Den
+2 Cathar Commando
+2 Portable Hole
+2 Sanctifier en-Vec
+4 Thoughtseize|THS

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Gruul Ramp by Toru Inoue
+Title=Aspect of Water
+Difficulty=very hard
+Description=Gruul Ramp by Toru Inoue
+Icon=Aspect of Water.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Flamecaller|OGW
+4 Hangarback Walker|ORI
+3 Ishkanah, Grafwidow|EMN
+1 World Breaker|OGW
+3 Emrakul, the Promised End|EMN
+4 Traverse the Ulvenwald|SOI
+4 Tormenting Voice
+4 Collective Defiance|EMN
+4 Nissa's Pilgrimage|ORI
+4 Fiery Impulse|ORI
+3 Kozilek's Return|OGW
+2 Cinder Glade|BFZ
+4 Evolving Wilds
+7 Forest|RTR
+4 Game Trail|SOI
+5 Mountain|RTR
+2 Shrine of the Forsaken Gods|BFZ
+
+[sideboard]
+1 World Breaker|OGW
+2 Draconic Roar|DTK
+3 Tireless Tracker|SOI
+3 Weaver of Lightning|EMN
+1 Hedron Archive|BFZ
+3 Goblin Dark-Dwellers|OGW
+2 Dragonlord Atarka|DTK

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=UB Mill by Danielmtg
+Title=Vermix
+Difficulty=very hard
+Description=UB Mill by Danielmtg
+Icon=Vermix.jpg
+Deck Type=constructed
+
+[main]
+4 Hedron Crab|ZEN
+4 Ruin Crab
+1 Remand|RAV
+2 Crypt Incursion|DGM
+3 Surgical Extraction|NPH
+4 Archive Trap|ZEN
+4 Drown in the Loch
+4 Fatal Push|AER
+4 Visions of Beyond|M12
+4 Fractured Sanity
+4 Tasha's Hideous Laughter
+1 Swamp
+1 Oboro, Palace in the Clouds|SOK
+1 Flooded Strand|KTK
+1 Misty Rainforest|ZEN
+1 Darkslick Shores|SOM
+2 Shelldock Isle|LRW
+2 Watery Grave
+4 Field of Ruin
+4 Polluted Delta|KTK
+5 Island
+
+[sideboard]
+1 Remand|RAV
+1 Surgical Extraction|NPH
+1 Engineered Explosives|FD
+1 Lurrus of the Dream-Den
+1 Force of Negation
+2 Spell Pierce|XLN
+2 Ghost Quarter|ISD
+3 Mystical Dispute
+3 Nihil Spellbomb|SOM

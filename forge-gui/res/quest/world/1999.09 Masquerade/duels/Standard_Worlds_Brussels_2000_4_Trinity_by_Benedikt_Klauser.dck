@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Trinity by Benedikt Klauser
+Title=Boromir
+Difficulty=very hard
+Description=Trinity by Benedikt Klauser
+Icon=Boromir.jpg
+Deck Type=constructed
+
+[main]
+4 Llanowar Elves
+4 Birds of Paradise|CN2
+4 Priest of Titania|C14
+3 Rofellos, Llanowar Emissary|UD
+4 Skyshroud Poacher|NE
+4 Deranged Hermit|UL
+4 Tangle Wire|NE
+4 Plow Under|8E
+4 Masticore|UD
+1 Elvish Lyrist|8E
+1 Phyrexian Processor|US
+4 Rishadan Port|MM
+3 Gaea's Cradle|US
+2 Treetop Village|10E
+14 Forest|RTR
+
+[sideboard]
+2 Phyrexian Processor|US
+1 Forest|RTR
+2 Splinter|BOK
+2 Uktabi Orangutan|6E
+1 Lumbering Satyr|MM
+1 Worldly Tutor|6E
+4 Thran Foundry|UD
+2 Reverent Silence|NE

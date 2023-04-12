@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=UW Control by Martin Hrycej
+Title=Pinky and the Brain
+Difficulty=very hard
+Description=UW Control by Martin Hrycej
+Icon=Pinky and the Brain.jpg
+Deck Type=constructed
+
+[main]
+6 Island
+4 Temple of Enlightenment
+4 Plains
+4 Hallowed Fountain
+3 Fabled Passage
+2 Castle Vantress
+1 Blast Zone
+1 Castle Ardenvale
+1 Raugrin Triome
+4 Narset, Parter of Veils
+4 Teferi, Time Raveler
+4 Omen of the Sea
+3 Shark Typhoon
+3 Elspeth Conquers Death
+1 Banishing Light
+1 The Birth of Meletis
+3 Shatter the Sky
+3 Mystical Dispute
+2 Dovin's Veto
+1 Whirlwind Denial
+1 Aether Gust
+1 Glass Casket
+2 Archon of Sun's Grace
+1 Brazen Borrower
+
+[sideboard]
+2 Commence the Endgame
+1 Giant Killer
+1 Essence Scatter
+1 Narset's Reversal
+2 The Birth of Meletis
+1 Shatter the Sky
+1 Mystical Dispute
+1 Dovin's Veto
+1 Aether Gust
+2 Glass Casket
+1 Archon of Sun's Grace
+1 Brazen Borrower

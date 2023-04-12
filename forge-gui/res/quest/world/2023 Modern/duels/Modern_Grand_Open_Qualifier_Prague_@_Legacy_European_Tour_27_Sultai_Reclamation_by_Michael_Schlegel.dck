@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Sultai Reclamation by Michael Schlegel
+Title=Sorcerer
+Difficulty=very hard
+Description=Sultai Reclamation by Michael Schlegel
+Icon=Sorcerer.jpg
+Deck Type=constructed
+
+[main]
+1 Murderous Cut|KTK
+1 Drown in the Loch
+1 Bloodchief's Thirst
+2 Abrupt Decay|RTR
+4 Memory Deluge
+4 Archmage's Charm
+4 Wilderness Reclamation
+4 Counterspell|7E
+4 Fatal Push|AER
+1 Hullbreaker Horror
+2 Endurance
+3 Snapcaster Mage|ISD
+4 Ice-Fang Coatl
+1 Boseiju, Who Endures
+1 Castle Vantress
+1 Drowned Catacomb|XLN
+1 Otawara, Soaring City
+1 Rimewood Falls
+1 Snow-Covered Forest
+1 Zagoth Triome
+2 Scalding Tarn|ZEN
+2 Breeding Pool
+2 Watery Grave
+4 Misty Rainforest|ZEN
+4 Polluted Delta|KTK
+4 Snow-Covered Island
+
+[sideboard]
+1 Unmoored Ego
+1 Mystical Dispute
+1 Dress Down
+1 Aether Gust
+2 Veil of Summer
+2 Spell Pierce
+3 Nature's Claim|WWK
+2 Engineered Explosives|FD
+2 Endurance

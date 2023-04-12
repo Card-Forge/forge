@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Noah Koessel
+Title=Ratbert
+Difficulty=very hard
+Description=Caw-Blade by Noah Koessel
+Icon=Ratbert.jpg
+Deck Type=constructed
+
+[main]
+1 Consecrated Sphinx|MBS
+2 Spellskite|NPH
+4 Squadron Hawk|M11
+3 Dismember|NPH
+2 Into the Roil|ZEN
+4 Mana Leak|M12
+2 Spell Pierce|ZEN
+2 Day of Judgment|M12
+4 Preordain|M11
+1 Timely Reinforcements|M12
+3 Sword of Feast and Famine|MBS
+2 Oblivion Ring|M12
+4 Celestial Colonnade|WWK
+4 Glacial Fortress|M12
+3 Inkmoth Nexus|MBS
+4 Island|M12
+3 Plains|M12
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+2 Gideon Jura|M12
+2 Jace Beleren|M11
+
+[sideboard]
+1 Consecrated Sphinx|MBS
+1 Spellskite|NPH
+1 Dismember|NPH
+1 Day of Judgment|M12
+3 Timely Reinforcements|M12
+1 Jace Beleren|M11
+1 Deprive|ROE
+2 Flashfreeze|M12
+2 Revoke Existence|SOM
+2 Ratchet Bomb|SOM

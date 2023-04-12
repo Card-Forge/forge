@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Omnath Ramp by Kristof Prinz
+Title=Aspect of Evil
+Difficulty=very hard
+Description=Omnath Ramp by Kristof Prinz
+Icon=Aspect of Evil.jpg
+Deck Type=constructed
+
+[main]
+2 Giant Killer
+3 Brazen Borrower
+4 Edgewall Innkeeper
+4 Omnath, Locus of Creation
+4 Beanstalk Giant
+4 Fae of Wishes
+4 Bonecrusher Giant
+4 Lucky Clover
+1 Negate
+3 Escape to the Wilds
+1 Plains
+1 Riverglide Pathway
+2 Raugrin Triome
+2 Mountain
+2 Ketria Triome
+3 Cragcrown Pathway
+3 Forest
+4 Fabled Passage
+4 Branchloft Pathway
+5 Island
+
+[sideboard]
+1 Negate
+1 Escape to the Wilds
+1 Mystical Dispute
+1 Embercleave
+1 Soul-Guide Lantern
+1 Primal Might
+1 Ugin, the Spirit Dragon
+1 Redcap Melee
+1 Elspeth Conquers Death
+1 Kazuul's Fury
+1 Return to Nature
+2 Storm's Wrath
+2 Embereth Shieldbreaker

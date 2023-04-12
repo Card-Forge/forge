@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Mardu Aggro by Ryan Cubit
+Title=Batman
+Difficulty=very hard
+Description=Mardu Aggro by Ryan Cubit
+Icon=Batman.jpg
+Deck Type=constructed
+
+[main]
+1 Carnival // Carnage
+1 Angrath, the Flame-Chained
+2 Cast Down
+2 Mortify
+4 Heroic Reinforcements
+2 Priest of Forgotten Gods
+3 Tajic, Legion's Edge
+4 Fireblade Artist
+4 Gutterbones
+4 Hero of Precinct One
+4 Judith, the Scourge Diva
+4 Footlight Fiend
+4 Adanto Vanguard|XLN
+2 Isolated Chapel
+2 Clifftop Retreat
+2 Dragonskull Summit|XLN
+3 Swamp
+4 Blood Crypt
+4 Sacred Foundry
+4 Godless Shrine
+
+[sideboard]
+1 Experimental Frenzy
+1 Kaya, Orzhov Usurper
+1 Deafening Clarion
+2 Plaguecrafter
+1 Unbreakable Formation
+2 Drill Bit
+3 Lava Coil
+2 Duress
+1 Angrath, the Flame-Chained
+1 Mortify

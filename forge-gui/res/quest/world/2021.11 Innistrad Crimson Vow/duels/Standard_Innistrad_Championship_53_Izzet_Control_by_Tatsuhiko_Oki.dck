@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Izzet Control by Tatsuhiko Oki
+Title=Eomer
+Difficulty=very hard
+Description=Izzet Control by Tatsuhiko Oki
+Icon=Eomer.jpg
+Deck Type=constructed
+
+[main]
+1 Hullbreaker Horror
+1 Smoldering Egg
+2 Lier, Disciple of the Drowned
+2 Goldspan Dragon
+1 The Celestus
+1 Demon Bolt
+2 Abrade|HOU
+2 Cinderclasm
+2 Fading Hope
+2 Galvanic Iteration
+3 Jwari Disruption
+4 Divide by Zero
+4 Spikefield Hazard
+4 Unexpected Windfall
+1 Thundering Rebuke
+3 Alrund's Epiphany
+4 Expressive Iteration
+2 Field of Ruin|XLN
+2 Hall of Storm Giants
+4 Riverglide Pathway
+4 Stormcarved Coast
+4 Island|A
+5 Mountain|A
+
+[sideboard]
+1 Hullbreaker Horror
+1 Smoldering Egg
+1 Cinderclasm
+1 Cyclone Summoner
+1 Teachings of the Archaics
+1 Environmental Sciences
+1 Mascot Exhibition
+1 Memory Deluge
+1 Disdainful Stroke|KTK
+2 Burning Hands
+2 Test of Talents
+2 Flame-Blessed Bolt

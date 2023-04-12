@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Ub Midrange by Brad Nelson
+Title=Trostani
+Difficulty=very hard
+Description=Ub Midrange by Brad Nelson
+Icon=Trostani.jpg
+Deck Type=constructed
+
+[main]
+1 Supreme Will|HOU
+4 Vraska's Contempt|XLN
+4 Aether Hub|KLD
+4 Drowned Catacomb|XLN
+4 Fetid Pools|AKH
+3 Field of Ruin|XLN
+4 Island
+7 Swamp
+2 Liliana, Death's Majesty|AKH
+4 Champion of Wits|HOU
+4 Glint-Sleeve Siphoner|AER
+2 Gonti, Lord of Luxury|KLD
+3 The Scarab God|HOU
+2 Torrential Gearhulk|KLD
+2 Walking Ballista|AER
+2 Censor|AKH
+2 Commit // Memory|AKH
+2 Essence Scatter|AKH
+4 Fatal Push|AER
+
+[sideboard]
+2 Arguel's Blood Fast|XLN
+2 Doomfall|HOU
+1 Duress|XLN
+4 Gifted Aetherborn|AER
+1 Glimmer of Genius|KLD
+2 Golden Demise
+1 Jace's Defeat|HOU
+2 Negate

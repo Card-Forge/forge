@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=[Rogue] Giant Lightning by Brent Cash Day 2
+Title=Totoro
+Difficulty=very hard
+Description=[Rogue] Giant Lightning by Brent Cash Day 2
+Icon=Totoro.jpg
+Deck Type=constructed
+
+[main]
+1 Sacred Mesa|C14
+2 Aeon Chronicler|C16
+2 Bogardan Hellkite|C14
+3 Foresee|M11
+3 Magus of the Tabernacle|PLC
+3 Temporal Isolation|TSP
+4 Coalition Relic|FUT
+4 Plains|RTR
+4 Prismatic Lens|TSP
+4 Terramorphic Expanse|C16
+4 Desolation Giant|C15
+4 Flagstones of Trokair|TSP
+4 Boom // Bust|PLC
+4 Lightning Angel|TSP
+5 Island|RTR
+5 Mountain|RTR
+1 Urza's Factory|C13
+1 Dead // Gone|PLC
+1 Sunlance|PLC
+1 Take Possession|FUT
+
+[sideboard]
+2 Sacred Mesa|C14
+1 Bogardan Hellkite|C14
+1 Temporal Isolation|TSP
+3 Spell Burst|TSP
+3 Stonecloaker|C13
+3 Molten Disaster|C13
+2 Take Possession|FUT

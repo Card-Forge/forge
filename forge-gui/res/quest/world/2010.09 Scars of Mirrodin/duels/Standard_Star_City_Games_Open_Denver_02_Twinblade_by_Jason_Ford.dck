@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Twinblade by Jason Ford
+Title=Chandra, Pyromaster
+Difficulty=very hard
+Description=Twinblade by Jason Ford
+Icon=Chandra, Pyromaster.jpg
+Deck Type=constructed
+
+[main]
+4 Deceiver Exarch|NPH
+2 Emeria Angel|ZEN
+4 Stoneforge Mystic|WWK
+3 Dismember|NPH
+2 Dispel|WWK
+2 Into the Roil|ZEN
+2 Spell Pierce|ZEN
+4 Preordain|M11
+1 Batterskull|NPH
+1 Sword of Feast and Famine|MBS
+1 Sword of War and Peace|NPH
+3 Splinter Twin|ROE
+3 Island|NPH
+3 Mountain|NPH
+3 Plains|NPH
+4 Arid Mesa|ZEN
+3 Celestial Colonnade|WWK
+2 Glacial Fortress|M11
+4 Scalding Tarn|ZEN
+4 Seachrome Coast|SOM
+1 Terramorphic Expanse|M11
+4 Jace, the Mind Sculptor|WWK
+
+[sideboard]
+1 Batterskull|NPH
+2 Consecrated Sphinx|MBS
+2 Celestial Purge|M11
+3 Divine Offering|MBS
+2 Lightning Bolt|M11
+4 Pyroclasm|M11
+1 Jace Beleren|M11

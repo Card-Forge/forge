@@ -1,0 +1,50 @@
+[quest]
+id=20211107
+OpponentName=Matthieu
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Naya Aggro
+Title=The Ruins of Alsoor
+Difficulty=very hard
+Description=Naya Aggro by Matthieu Avignon
+Icon=The Ruins of Alsoor.jpg
+Deck Type=constructed
+
+[main]
+1 Sejiri Shelter
+1 Showdown of the Skalds
+2 Valorous Stance
+4 Snakeskin Veil
+2 Adeline, Resplendent Cathar
+2 Sungold Sentinel
+2 Chaplain of Alms
+2 Intrepid Adversary
+4 Brutal Cathar
+4 Halana and Alena, Partners
+4 Reidane, God of the Worthy
+4 Luminarch Aspirant
+4 Thalia, Guardian of Thraben
+1 Rockfall Vale
+1 Sundown Pass
+2 Plains
+4 Branchloft Pathway
+4 Cragcrown Pathway
+4 Needleverge Pathway
+4 Cave of the Frost Dragon
+4 Overgrown Farmland
+
+[sideboard]
+4 Skyclave Apparition
+4 Portable Hole
+2 Circle of Confinement
+2 Fleeting Spirit
+1 Showdown of the Skalds
+2 Valorous Stance

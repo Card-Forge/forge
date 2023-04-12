@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Matias Nissen
+Title=Pointy Haired Boss
+Difficulty=very hard
+Description=Rakdos Aggro by Matias Nissen
+Icon=Pointy Haired Boss.jpg
+Deck Type=constructed
+
+[main]
+1 Reinforced Ronin
+2 Reckless Stormseeker
+2 Immersturm Predator
+4 Shambling Ghast
+4 Graveyard Trespasser
+4 Voldaren Epicure
+2 Reckoner Bankbuster
+4 Oni-Cult Anvil
+2 Infernal Grasp
+4 Deadly Dispute
+4 Voltage Surge
+3 The Meathook Massacre
+1 Sorin the Mirthless
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+2 Den of the Bugbear
+2 Hive of the Eye Tyrant
+4 Mountain
+4 Haunted Ridge
+4 Blightstep Pathway
+5 Swamp
+
+[sideboard]
+1 Infernal Grasp
+1 The Meathook Massacre
+1 Roiling Vortex
+1 Go Blank
+2 Feed the Swarm
+2 Abrade
+2 Skyclave Shade
+2 Burning Hands
+3 Duress

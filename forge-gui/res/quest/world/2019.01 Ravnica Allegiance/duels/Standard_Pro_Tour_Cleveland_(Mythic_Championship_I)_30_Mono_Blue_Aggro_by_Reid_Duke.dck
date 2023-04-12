@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Mono Blue Aggro by Reid Duke
+Title=Starfire
+Difficulty=very hard
+Description=Mono Blue Aggro by Reid Duke
+Icon=Starfire.jpg
+Deck Type=constructed
+
+[main]
+4 Merfolk Trickster
+4 Pteramander
+4 Siren Stormtamer|XLN
+4 Tempest Djinn
+3 Mist-Cloaked Herald
+1 Chart a Course|XLN
+3 Dive Down|XLN
+2 Essence Capture
+4 Opt
+3 Spell Pierce|XLN
+4 Wizard's Retort
+4 Curious Obsession
+20 Island
+
+[sideboard]
+2 Essence Capture
+3 Entrancing Melody|XLN
+2 Exclusion Mage
+2 Negate
+4 Surge Mare
+1 Disdainful Stroke
+1 Transmogrifying Wand

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Korlash Control by Paul Cheon
+Title=Harry Potter
+Difficulty=very hard
+Description=Korlash Control by Paul Cheon
+Icon=Harry Potter.jpg
+Deck Type=constructed
+
+[main]
+1 Teferi, Mage of Zhalfir|TSP
+1 Triskelavus|CMD
+1 Academy Ruins|TSP
+1 Plains|RTR
+1 Slaughter Pact|FUT
+1 Temporal Isolation|TSP
+1 Haunting Hymn|TSP
+1 Pull from Eternity|TSP
+2 Island|RTR
+3 Psychotic Episode|TSP
+3 Urborg, Tomb of Yawgmoth|M15
+3 Shadowmage Infiltrator|TSP
+3 Mystical Teachings|TSP
+3 Careful Consideration|TSP
+3 Tendrils of Corruption|C14
+4 River of Tears|FUT
+4 Tolaria West|FUT
+4 Prismatic Lens|TSP
+4 Korlash, Heir to Blackblade|FUT
+4 Terramorphic Expanse|C16
+4 Damnation|PLC
+7 Swamp|RTR
+1 Urza's Factory|C13
+
+[sideboard]
+1 Pull from Eternity|TSP
+1 Tendrils of Corruption|C14
+4 Aven Riftwatcher|PLC
+2 Draining Whelk|TSP
+2 Take Possession|FUT
+1 Disenchant|CN2
+1 Extirpate|PLC
+1 Snapback|TSP
+1 Momentary Blink|TSP
+1 Venser, Shaper Savant|FUT

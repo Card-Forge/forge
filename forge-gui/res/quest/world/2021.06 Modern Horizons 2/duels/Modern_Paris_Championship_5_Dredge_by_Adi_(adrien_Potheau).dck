@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Dredge by Adi (adrien Potheau)
+Title=Birdy the Mighty
+Difficulty=very hard
+Description=Dredge by Adi (adrien Potheau)
+Icon=Birdy the Mighty.jpg
+Deck Type=constructed
+
+[main]
+2 Arid Mesa|ZEN
+2 Blood Crypt
+3 Bloodghast|ZEN
+2 Bloodstained Mire|KTK
+4 Cathartic Reunion
+1 Conflagrate|TSP
+4 Creeping Chill
+1 Dakmor Salvage|FUT
+3 Darkblast|RAV
+2 Forgotten Cave|ON
+2 Golgari Thug|RAV
+2 Life from the Loam|RAV
+1 Mana Confluence|JOU
+1 Mountain
+4 Narcomoeba
+2 Ox of Agonas
+4 Prized Amalgam|SOI
+2 Sacred Foundry
+4 Shriekhorn|MBS
+4 Stinkweed Imp|RAV
+2 Stomping Ground
+4 Thrilling Discovery
+4 Wooded Foothills|KTK
+
+[sideboard]
+1 Conflagrate|TSP
+2 Ancient Grudge|ISD
+1 Blast Zone
+1 Ghost Quarter|ISD
+3 Lightning Axe|SOI
+3 Nature's Claim|WWK
+2 Surgical Extraction|NPH
+2 Thoughtseize|THS

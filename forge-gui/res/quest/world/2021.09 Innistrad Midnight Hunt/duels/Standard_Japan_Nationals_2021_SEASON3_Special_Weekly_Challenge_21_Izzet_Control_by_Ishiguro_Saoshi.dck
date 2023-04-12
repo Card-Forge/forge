@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Izzet Control by Ishiguro Saoshi
+Title=Two Feathers
+Difficulty=very hard
+Description=Izzet Control by Ishiguro Saoshi
+Icon=Two Feathers.jpg
+Deck Type=constructed
+
+[main]
+4 Smoldering Egg
+4 Goldspan Dragon
+1 Negate
+2 Cathartic Pyre
+2 Fading Hope
+2 Disdainful Stroke
+2 Prismari Command
+4 Dragon's Fire
+4 Silundi Vision
+4 Memory Deluge
+2 Shatterskull Smashing
+4 Alrund's Epiphany
+4 Expressive Iteration
+1 Hall of Storm Giants
+2 Frostboil Snarl
+2 Den of the Bugbear
+4 Riverglide Pathway
+6 Island
+6 Mountain
+
+[sideboard]
+1 Negate
+1 Fading Hope
+1 Disdainful Stroke
+2 Suspicious Stowaway
+2 Test of Talents
+4 Burning Hands
+4 Malevolent Hermit

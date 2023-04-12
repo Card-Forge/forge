@@ -1,0 +1,49 @@
+[quest]
+id=20220207
+OpponentName=Gabriel
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Rakdos Aggro
+Title=Sorceress
+Difficulty=very hard
+Description=Rakdos Aggro by Gabriel Farriol
+Icon=Sorceress.jpg
+Deck Type=constructed
+
+[main]
+2 Lolth, Spider Queen
+2 Infernal Grasp
+3 The Meathook Massacre
+4 Fable of the Mirror-Breaker
+4 Experimental Synthesizer
+4 Oni-Cult Anvil
+4 Voltage Surge
+4 Deadly Dispute
+2 Sokenzan Smelter
+4 Bloodtithe Harvester
+4 Voldaren Epicure
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+1 Den of the Bugbear
+2 Hive of the Eye Tyrant
+4 Haunted Ridge
+4 Blightstep Pathway
+5 Mountain
+5 Swamp
+
+[sideboard]
+4 Duress
+4 Ray of Enfeeblement
+2 Go Blank
+2 Sorin the Mirthless
+1 Cemetery Gatekeeper
+1 Check for Traps
+1 Infernal Grasp

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Ben Hull
+Title=Ancient Battlefield
+Difficulty=very hard
+Description=Rakdos Aggro by Ben Hull
+Icon=Ancient Battlefield.jpg
+Deck Type=constructed
+
+[main]
+1 Swamp
+14 Mountain
+4 Dragonskull Summit|XLN
+4 Canyon Slough|AKH
+2 Aether Hub|KLD
+2 Heart of Kiran|AER
+1 Magma Spray|AKH
+2 Unlicensed Disintegration|KLD
+3 Abrade|HOU
+1 Cut // Ribbons|AKH
+4 Scrapheap Scrounger|KLD
+3 Rekindling Phoenix
+2 Pia Nalaar|KLD
+2 Kari Zev, Skyship Raider|AER
+2 Hazoret the Fervent|AKH
+4 Goblin Chainwhirler
+2 Glorybringer|AKH
+4 Bomat Courier|KLD
+3 Chandra, Torch of Defiance|KLD
+
+[sideboard]
+1 The Eldest Reborn
+2 Karn, Scion of Urza
+4 Duress
+3 Doomfall|HOU
+3 Chandra's Defeat|HOU
+2 Magma Spray|AKH

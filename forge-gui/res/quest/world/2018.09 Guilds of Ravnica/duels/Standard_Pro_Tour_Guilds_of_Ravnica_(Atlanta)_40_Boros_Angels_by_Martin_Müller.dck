@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Boros Angels by Martin Müller
+Title=Isabella
+Difficulty=very hard
+Description=Boros Angels by Martin Müller
+Icon=Isabella.jpg
+Deck Type=constructed
+
+[main]
+4 Adanto Vanguard|XLN
+3 Aurelia, Exemplar of Justice
+4 Lyra Dawnbringer
+4 Rekindling Phoenix
+4 Resplendent Angel
+3 Tocatli Honor Guard|XLN
+4 Lava Coil
+1 Deafening Clarion
+1 Shock
+4 History of Benalia
+2 Ixalan's Binding|XLN
+3 Boros Guildgate
+4 Clifftop Retreat
+6 Mountain
+4 Sacred Foundry
+9 Plains
+
+[sideboard]
+1 Tocatli Honor Guard|XLN
+2 Deafening Clarion
+1 Ixalan's Binding|XLN
+2 Fight with Fire
+2 The Immortal Sun
+3 Dire Fleet Daredevil
+1 Settle the Wreckage|XLN
+1 Sorcerous Spyglass|XLN
+2 Banefire

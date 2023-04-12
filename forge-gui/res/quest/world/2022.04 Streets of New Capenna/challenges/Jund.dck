@@ -1,0 +1,55 @@
+[quest]
+id=20220404
+OpponentName=Shota
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Jund
+Title=Chain Lightning
+Difficulty=very hard
+Description=Jund by Shota Yasooka
+Icon=Chain Lightning.jpg
+Deck Type=constructed
+
+[main]
+1 Ray of Enfeeblement
+1 Infernal Grasp
+1 Duress
+1 Shatterskull Smashing
+2 The Meathook Massacre
+2 Riveteers Charm
+3 Voltage Surge
+4 Fable of the Mirror-Breaker
+4 Esika's Chariot
+1 Halana and Alena, Partners
+1 Workshop Warchief
+2 Tenacious Underdog
+2 Gala Greeters
+2 Valki, God of Lies
+2 Ziatora, the Incinerator
+3 Jinnie Fay, Jetmir's Second
+4 Black Market Tycoon
+1 Forest
+1 Boseiju, Who Endures
+2 Haunted Ridge
+2 Cragcrown Pathway
+3 Den of the Bugbear
+3 Rockfall Vale
+4 Ziatora's Proving Ground
+4 Darkbore Pathway
+4 Blightstep Pathway
+
+[sideboard]
+2 Unleash the Inferno
+2 Binding the Old Gods
+2 Unlicensed Hearse
+3 Ray of Enfeeblement
+3 Duress
+3 Workshop Warchief

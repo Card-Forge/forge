@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=UB Mill by Zach dubin
+Title=Er-Miral
+Difficulty=very hard
+Description=UB Mill by Zach dubin
+Icon=Er-Miral.jpg
+Deck Type=constructed
+
+[main]
+4 Ruin Crab
+4 Hedron Crab|ZEN
+1 Mesmeric Orb|MR
+3 Surgical Extraction|NPH
+4 Fatal Push|AER
+4 Counterspell|7E
+4 Visions of Beyond|M12
+4 Drown in the Loch
+4 Archive Trap|ZEN
+4 Tasha's Hideous Laughter
+4 Fractured Sanity
+1 Swamp
+2 Watery Grave
+2 Polluted Delta|KTK
+3 Misty Rainforest|ZEN
+4 Darkslick Shores|SOM
+4 Field of Ruin
+4 Island
+
+[sideboard]
+2 Mesmeric Orb|MR
+1 Nihil Spellbomb|SOM
+1 Bloodchief's Thirst
+1 Murderous Cut|KTK
+1 Lurrus of the Dream-Den
+2 Crypt Incursion|DGM
+2 Extirpate|PLC
+2 Engineered Explosives|FD
+3 Soul-Guide Lantern

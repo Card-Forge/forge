@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by Makihito Mihara
+Title=Blue Skies
+Difficulty=very hard
+Description=Golgari Aggro by Makihito Mihara
+Icon=Blue Skies.jpg
+Deck Type=constructed
+
+[main]
+2 Karn, Scion of Urza
+1 Vraska, Golgari Queen
+2 Vivien Reid
+4 Llanowar Elves
+4 Druid of the Cowl
+4 Merfolk Branchwalker|XLN
+4 Jadelight Ranger
+1 Golgari Findbroker
+3 Ravenous Chupacabra
+4 Carnage Tyrant|XLN
+3 Find // Finality
+1 Assassin's Trophy
+1 Cast Down
+2 Vraska's Contempt|XLN
+1 The Eldest Reborn
+1 Evolving Wilds
+8 Forest
+1 Memorial to Folly
+4 Overgrown Tomb
+5 Swamp
+4 Woodland Cemetery
+
+[sideboard]
+1 Vraska, Golgari Queen
+1 The Eldest Reborn
+3 Wildgrowth Walker|XLN
+2 Deathgorge Scavenger|XLN
+1 Thrashing Brontodon
+4 Duress
+1 Arguel's Blood Fast|XLN
+2 Golden Demise

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Ari Lax
+Title=Sea Dragon
+Difficulty=very hard
+Description=Abzan Midrange by Ari Lax
+Icon=Sea Dragon.jpg
+Deck Type=constructed
+
+[main]
+1 Temple of Silence|THS
+1 Urborg, Tomb of Yawgmoth|M15
+1 Mana Confluence|JOU
+2 Caves of Koilos|M15
+2 Llanowar Wastes|M15
+4 Sandsteppe Citadel|KTK
+4 Temple of Malady|JOU
+4 Windswept Heath|KTK
+2 Sorin, Solemn Visitor|KTK
+2 Ajani, Mentor of Heroes|JOU
+3 Elspeth, Sun's Champion|THS
+2 Elvish Mystic|M15
+4 Sylvan Caryatid|THS
+4 Courser of Kruphix|BNG
+2 Wingmate Roc|KTK
+4 Siege Rhino|KTK
+4 Thoughtseize|THS
+4 Abzan Charm|KTK
+3 Hero's Downfall|THS
+2 Utter End|KTK
+3 Forest|KTK
+2 Plains|KTK
+
+[sideboard]
+2 Nissa, Worldwaker|M15
+1 Liliana Vess|M15
+1 Unravel the Aether|BNG
+2 Murderous Cut|KTK
+3 Bile Blight|BNG
+3 Drown in Sorrow|BNG
+1 Mass Calcify|M15
+1 Duneblast|KTK
+1 End Hostilities|KTK

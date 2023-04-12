@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Naya by Gerard Fabiano
+Title=Leela
+Difficulty=very hard
+Description=Naya by Gerard Fabiano
+Icon=Leela.jpg
+Deck Type=constructed
+
+[main]
+4 Cavern of Souls|AVR
+4 Clifftop Retreat
+4 Evolving Wilds
+7 Forest|RTR
+1 Kessig Wolf Run|ISD
+2 Mountain|RTR
+2 Plains|RTR
+4 Avacyn's Pilgrim|ISD
+3 Borderland Ranger|AVR
+1 Fiend Hunter|C13
+1 Gisela, Blade of Goldnight|C15
+4 Huntmaster of the Fells|DKA
+3 Restoration Angel|AVR
+4 Scorned Villager|DKA
+1 Sigarda, Host of Herons|AVR
+3 Wolfir Silverheart|AVR
+2 Zealous Conscripts|AVR
+3 Bonfire of the Damned|AVR
+3 Brimstone Volley|CNS
+4 Garruk Relentless|ISD
+
+[sideboard]
+2 Fiend Hunter|C13
+2 Sigarda, Host of Herons|AVR
+2 Blasphemous Act|C16
+2 Grafdigger's Cage|DKA
+1 Nevermore|ISD
+3 Smite the Monstrous|BFZ
+1 Tree of Redemption|ISD
+2 Triumph of Ferocity|AVR

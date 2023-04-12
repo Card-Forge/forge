@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Rakdos Scam by Jonymagic
+Title=Gruul-precon
+Difficulty=very hard
+Description=Rakdos Scam by Jonymagic
+Icon=Gruul-precon.jpg
+Deck Type=constructed
+
+[main]
+4 Dauthi Voidwalker
+2 Fable of the Mirror-Breaker
+4 Fury
+4 Grief
+4 Ragavan, Nimble Pilferer
+4 Seasoned Pyromancer
+1 Fatal Push|AER
+3 Feign Death
+1 Kolaghan's Command|DTK
+3 Lightning Bolt|M11
+2 Terminate|ARB
+3 Undying Malice
+1 Agadeem's Awakening
+3 Thoughtseize|THS
+2 Blood Moon|9E
+3 Blackcleave Cliffs
+3 Blood Crypt
+4 Bloodstained Mire|KTK
+1 Castle Locthwain
+2 Marsh Flats|ZEN
+2 Polluted Delta|KTK
+1 Snow-Covered Mountain
+3 Snow-Covered Swamp
+
+[sideboard]
+1 Fatal Push|AER
+2 Engineered Explosives|FD
+2 Hidetsugu Consumes All
+1 Magus of the Moon|FUT
+1 Necromentia
+2 Ob Nixilis, the Adversary
+1 Path of Peril
+1 Sheoldred, the Apocalypse
+2 Tourach, Dread Cantor
+2 Unlicensed Hearse

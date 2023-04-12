@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by  Matthew Nass
+Title=Equilibrium
+Difficulty=very hard
+Description=Golgari Aggro by  Matthew Nass
+Icon=Equilibrium.jpg
+Deck Type=constructed
+
+[main]
+2 Vivien Reid
+4 Merfolk Branchwalker|XLN
+4 Jadelight Ranger
+2 Ravenous Chupacabra
+3 Doom Whisperer
+2 Seekers' Squire|XLN
+4 Llanowar Elves
+4 Wildgrowth Walker|XLN
+1 Carnage Tyrant|XLN
+3 Find // Finality
+4 Vraska's Contempt|XLN
+3 Cast Down
+5 Swamp
+8 Forest
+3 Memorial to Folly
+4 Overgrown Tomb
+4 Woodland Cemetery
+
+[sideboard]
+2 Carnage Tyrant|XLN
+2 Blood Operative
+3 Golden Demise
+4 Duress
+2 Assassin's Trophy
+2 Thrashing Brontodon

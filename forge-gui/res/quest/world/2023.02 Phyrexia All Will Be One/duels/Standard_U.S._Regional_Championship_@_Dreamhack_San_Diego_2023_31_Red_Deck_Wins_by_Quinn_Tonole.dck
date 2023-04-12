@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Quinn Tonole
+Title=Thievery
+Difficulty=very hard
+Description=Red Deck Wins by Quinn Tonole
+Icon=Thievery.jpg
+Deck Type=constructed
+
+[main]
+4 Monastery Swiftspear
+4 Kumano Faces Kakkazan
+1 Phoenix Chick
+1 Shivan Devastator
+4 Bloodthirsty Adversary
+3 Feldon, Ronom Excavator
+4 Furnace Punisher
+4 Thundering Raiju
+4 Play with Fire
+4 Lightning Strike
+1 Strangle
+3 Reckless Impulse
+4 Mishra's Foundry
+17 Mountain
+2 Sokenzan, Crucible of Defiance
+
+[sideboard]
+2 Shivan Devastator
+2 Hexgold Slash
+2 Obliterating Bolt
+1 Chandra, Dressed to Kill
+4 Rending Flame
+2 Koth, Fire of Resistance
+2 The Elder Dragon War

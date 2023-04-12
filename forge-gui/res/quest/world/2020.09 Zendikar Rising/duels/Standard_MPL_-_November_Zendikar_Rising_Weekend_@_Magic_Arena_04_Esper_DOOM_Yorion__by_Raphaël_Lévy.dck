@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Esper DOOM Yorion  by Raphaël Lévy
+Title=Reactor Meltdown
+Difficulty=very hard
+Description=Esper DOOM Yorion  by Raphaël Lévy
+Icon=Reactor Meltdown.jpg
+Deck Type=constructed
+
+[main]
+3 Yorion, Sky Nomad
+4 Archon of Sun's Grace
+4 Skyclave Apparition
+2 Mazemind Tome
+4 Glass Casket
+4 Extinction Event
+4 Emeria's Call
+1 Elspeth's Nightmare
+3 Omen of the Sun
+4 Elspeth Conquers Death
+4 Treacherous Blessing
+4 Lithoform Blight
+4 Omen of the Forge
+4 Doom Foretold
+1 Mountain
+4 Needleverge Pathway
+4 Fabled Passage
+4 Brightclimb Pathway
+4 Savai Triome
+4 Temple of Silence
+5 Plains
+5 Swamp
+
+[sideboard]
+1 Yorion, Sky Nomad
+2 Mazemind Tome
+1 Soul Shatter
+2 Tormod's Crypt
+2 Cling to Dust
+3 Heartless Act
+4 Duress

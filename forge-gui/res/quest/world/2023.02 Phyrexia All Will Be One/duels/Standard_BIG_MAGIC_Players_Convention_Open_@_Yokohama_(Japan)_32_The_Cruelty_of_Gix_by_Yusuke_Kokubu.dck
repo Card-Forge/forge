@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=The Cruelty of Gix by Yusuke Kokubu
+Title=The Aviary
+Difficulty=very hard
+Description=The Cruelty of Gix by Yusuke Kokubu
+Icon=The Aviary.jpg
+Deck Type=constructed
+
+[main]
+1 Brotherhood's End
+2 Reckoner Bankbuster
+2 Sheoldred's Edict
+2 Unleash the Inferno
+2 Go for the Throat
+2 Duress
+3 Diregraf Rebirth
+3 The Cruelty of Gix
+3 Liliana of the Veil
+4 Fable of the Mirror-Breaker
+3 Atraxa, Grand Unifier
+3 Titan of Industry
+4 Bloodtithe Harvester
+1 Mountain
+1 Takenuma, Abandoned Mire
+1 Blackcleave Cliffs
+1 Swamp
+2 Rockfall Vale
+4 Ziatora's Proving Ground
+4 Haunted Ridge
+4 Sulfurous Springs
+4 Llanowar Wastes
+4 Deathcap Glade
+
+[sideboard]
+2 Cut Down
+2 Tear Asunder
+2 Razorlash Transmogrant
+2 Thrun, Breaker of Silence
+2 Unlicensed Hearse
+2 Brotherhood's End
+1 Unleash the Inferno
+2 Duress

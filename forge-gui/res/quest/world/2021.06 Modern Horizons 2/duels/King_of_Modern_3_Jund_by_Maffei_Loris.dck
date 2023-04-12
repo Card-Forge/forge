@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Jund by Maffei Loris
+Title=Cromer
+Difficulty=very hard
+Description=Jund by Maffei Loris
+Icon=Cromer.jpg
+Deck Type=constructed
+
+[main]
+4 Tarmogoyf|FUT
+4 Ragavan, Nimble Pilferer
+4 Dragon's Rage Channeler
+4 Inquisition of Kozilek|ROE
+2 Thoughtseize|THS
+4 Unholy Heat
+2 Lightning Bolt|M11
+1 Kolaghan's Command|DTK
+1 Abrupt Decay|RTR
+4 Wrenn and Six
+4 Mishra's Bauble|CS
+1 Shadowspear
+1 Nihil Spellbomb|SOM
+1 Expedition Map|ZEN
+4 Wooded Foothills|KTK
+4 Urza's Saga
+4 Bloodstained Mire|KTK
+2 Verdant Catacombs|ZEN
+2 Blackcleave Cliffs|SOM
+1 Stomping Ground
+1 Snow-Covered Swamp
+1 Snow-Covered Mountain
+1 Overgrown Tomb
+1 Nurturing Peatland
+1 Forest
+1 Blood Crypt
+
+[sideboard]
+1 Kolaghan's Command|DTK
+1 Nihil Spellbomb|SOM
+3 Necromentia
+2 Engineered Explosives|FD
+2 Alpine Moon
+1 Torpor Orb|NPH
+1 Terminate|ARB
+1 Pyrite Spellbomb|MR
+1 Pithing Needle
+1 Lurrus of the Dream-Den
+1 Ghost Quarter|ISD

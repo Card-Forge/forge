@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Mardu Vehicles by Kentaro Yamamoto
+Title=Beastmaster
+Difficulty=very hard
+Description=Mardu Vehicles by Kentaro Yamamoto
+Icon=Beastmaster.jpg
+Deck Type=constructed
+
+[main]
+4 Gideon, Ally of Zendikar|BFZ
+4 Toolcraft Exemplar|KLD
+4 Thraben Inspector|SOI
+4 Scrapheap Scrounger|KLD
+2 Walking Ballista|AER
+3 Pia Nalaar|KLD
+3 Thalia, Heretic Cathar|EMN
+4 Fatal Push|AER
+4 Unlicensed Disintegration|KLD
+4 Heart of Kiran|AER
+4 Concealed Courtyard|KLD
+4 Inspiring Vantage|KLD
+4 Spirebluff Canal|KLD
+4 Aether Hub|KLD
+4 Spire of Industry|AER
+3 Plains|RTR
+1 Swamp|RTR
+
+[sideboard]
+4 Metallic Rebuke|AER
+4 Fevered Visions|SOI
+2 Chandra, Torch of Defiance|KLD
+1 Fragmentize|KLD
+2 Skywhaler's Shot|KLD
+1 Shock
+1 Harnessed Lightning|KLD

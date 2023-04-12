@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=UR Murktide by Ampollini Davide 
+Title=The Lady of the Mountain
+Difficulty=very hard
+Description=UR Murktide by Ampollini Davide 
+Icon=The Lady of the Mountain.jpg
+Deck Type=constructed
+
+[main]
+1 Archmage's Charm
+1 Force of Negation
+1 Engineered Explosives|FD
+2 Serum Visions|FD
+2 Spell Snare|DIS
+4 Counterspell|7E
+4 Unholy Heat
+4 Expressive Iteration
+4 Lightning Bolt|M11
+4 Mishra's Bauble|CS
+4 Consider
+3 Ragavan, Nimble Pilferer
+4 Murktide Regent
+4 Dragon's Rage Channeler
+2 Flooded Strand|KTK
+2 Fiery Islet
+2 Scalding Tarn|ZEN
+2 Polluted Delta|KTK
+3 Steam Vents
+3 Island
+4 Spirebluff Canal|KLD
+
+[sideboard]
+2 Mystical Dispute
+2 Relic of Progenitus|ALA
+2 Engineered Plague|7E
+2 Dress Down
+3 Blood Moon|9E
+2 Flusterstorm
+2 Force of Negation

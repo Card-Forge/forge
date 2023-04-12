@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Temur Emerge by William Jensen
+Title=Tenga
+Difficulty=very hard
+Description=Temur Emerge by William Jensen
+Icon=Tenga.jpg
+Deck Type=constructed
+
+[main]
+1 Chandra, Flamecaller|OGW
+3 Emrakul, the Promised End|EMN
+3 Elder Deep-Fiend|EMN
+1 Wretched Gryff|EMN
+4 Gnarlwood Dryad|EMN
+3 Pilgrim's Eye|BFZ
+2 Ishkanah, Grafwidow|EMN
+4 Gather the Pack|ORI
+4 Nissa's Pilgrimage|ORI
+4 Kozilek's Return|OGW
+4 Grapple with the Past|EMN
+2 Corrupted Grafstone|SOI
+4 Vessel of Nascency|SOI
+3 Shivan Reef|ORI
+4 Yavimaya Coast|ORI
+1 Mountain|RTR
+3 Island|RTR
+7 Forest|RTR
+3 Game Trail|SOI
+
+[sideboard]
+2 Dispel|BFZ
+1 Coax from the Blind Eternities|EMN
+2 Jace, Vryn's Prodigy|ORI
+1 Den Protector|C16
+2 Fiery Impulse|ORI
+2 Invasive Surgery|SOI
+1 Summary Dismissal|EMN
+1 Clip Wings|SOI
+1 Negate
+2 Shaman of Forgotten Ways|DTK

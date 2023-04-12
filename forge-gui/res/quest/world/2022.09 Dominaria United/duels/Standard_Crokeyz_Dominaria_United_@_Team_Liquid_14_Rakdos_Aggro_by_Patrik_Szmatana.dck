@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Patrik Szmatana
+Title=Luke Skywalker
+Difficulty=very hard
+Description=Rakdos Aggro by Patrik Szmatana
+Icon=Luke Skywalker.jpg
+Deck Type=constructed
+
+[main]
+1 Weatherlight Compleated
+2 Ob Nixilis, the Adversary
+2 Reckoner's Bargain
+3 Liliana of the Veil
+4 Voltage Surge
+4 Experimental Synthesizer
+4 Oni-Cult Anvil
+4 Fable of the Mirror-Breaker
+2 Braids, Arisen Nightmare
+2 The Raven Man
+2 Tenacious Underdog
+4 Voldaren Epicure
+4 Bloodtithe Harvester
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+4 Haunted Ridge
+4 Sulfurous Springs
+5 Mountain
+7 Swamp
+
+[sideboard]
+4 Duress
+3 The Meathook Massacre
+2 Reckoner Bankbuster
+2 Graveyard Trespasser
+2 Unlicensed Hearse
+2 Cut Down

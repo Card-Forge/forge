@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Utopia Gruul by Oda Koichi
+Title=Swift Justice
+Difficulty=very hard
+Description=Utopia Gruul by Oda Koichi
+Icon=Swift Justice.jpg
+Deck Type=constructed
+
+[main]
+2 Wrenn and Six
+4 Lightning Bolt|M11
+4 Pillage|7E
+4 Blood Moon|9E
+4 Utopia Sprawl|DIS
+2 Fury
+2 Klothys, God of Destiny
+2 Ragavan, Nimble Pilferer
+4 Arbor Elf|M13
+4 Seasoned Pyromancer
+4 Moonveil Regent
+4 Bonecrusher Giant
+1 Mountain
+2 Windswept Heath|KTK
+3 Verdant Catacombs|ZEN
+4 Stomping Ground
+4 Wooded Foothills|KTK
+6 Forest
+
+[sideboard]
+3 Veil of Summer
+3 Relic of Progenitus|ALA
+2 Plummet
+2 Chandra, Awakened Inferno
+2 Ancient Grudge|ISD
+2 Force of Vigor
+1 Boil|8E

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Shuhei Nakamura
+Title=Aga Galneer
+Difficulty=very hard
+Description=Mono Green Aggro by Shuhei Nakamura
+Icon=Aga Galneer.jpg
+Deck Type=constructed
+
+[main]
+1 Scavenging Ooze
+2 Questing Beast
+3 Swarm Shambler
+4 Werewolf Pack Leader
+4 Stonecoil Serpent
+4 Lovestruck Beast
+4 Kazandu Mammoth
+4 Gemrazer
+1 The Great Henge
+1 Primal Might
+4 Blizzard Brawl
+4 Ranger Class
+4 Faceless Haven
+20 Snow-Covered Forest
+
+[sideboard]
+2 Scavenging Ooze
+1 Questing Beast
+2 Primal Might
+2 Snakeskin Veil
+2 Garruk, Unleashed
+2 Chainweb Aracnir
+4 Garruk's Harbinger

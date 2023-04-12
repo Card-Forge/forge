@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Boros Angels by Taiji Urasawa
+Title=Grampa Simpson
+Difficulty=very hard
+Description=Boros Angels by Taiji Urasawa
+Icon=Grampa Simpson.jpg
+Deck Type=constructed
+
+[main]
+4 Adanto Vanguard|XLN
+2 Aurelia, Exemplar of Justice
+3 Remorseful Cleric
+3 Lyra Dawnbringer
+4 Rekindling Phoenix
+3 Tocatli Honor Guard|XLN
+4 Resplendent Angel
+3 Lava Coil
+3 Lightning Strike
+2 Ixalan's Binding|XLN
+4 History of Benalia
+1 Boros Guildgate
+4 Clifftop Retreat
+6 Mountain
+4 Sacred Foundry
+10 Plains
+
+[sideboard]
+2 Banefire
+3 Deafening Clarion
+2 Fight with Fire
+2 Sorcerous Spyglass|XLN
+3 Dawn of Hope
+1 Settle the Wreckage|XLN
+2 The Immortal Sun

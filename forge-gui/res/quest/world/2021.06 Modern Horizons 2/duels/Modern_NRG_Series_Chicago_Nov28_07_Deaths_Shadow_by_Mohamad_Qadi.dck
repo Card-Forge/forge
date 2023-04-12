@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Deaths Shadow by Mohamad Qadi
+Title=Picard
+Difficulty=very hard
+Description=Deaths Shadow by Mohamad Qadi
+Icon=Picard.jpg
+Deck Type=constructed
+
+[main]
+1 Tourach, Dread Cantor
+1 Kroxa, Titan of Death's Hunger
+4 Dragon's Rage Channeler
+4 Ragavan, Nimble Pilferer
+4 Death's Shadow|WWK
+4 Mishra's Bauble|CS
+1 Lightning Bolt|M11
+1 Kolaghan's Command|DTK
+1 Fatal Push|AER
+4 Drown in the Loch
+4 Unholy Heat
+2 Inquisition of Kozilek|ROE
+4 Expressive Iteration
+4 Thoughtseize|THS
+2 Dress Down
+1 Mountain
+1 Swamp
+2 Steam Vents
+2 Blood Crypt
+2 Watery Grave
+3 Scalding Tarn|ZEN
+4 Polluted Delta|KTK
+4 Bloodstained Mire|KTK
+
+[sideboard]
+1 Tourach, Dread Cantor
+2 Kolaghan's Command|DTK
+1 Dress Down
+1 Lurrus of the Dream-Den
+1 Mystical Dispute
+1 Nihil Spellbomb|SOM
+2 Alpine Moon
+2 Terminate|ARB
+2 Engineered Explosives|FD
+2 Spell Pierce|XLN

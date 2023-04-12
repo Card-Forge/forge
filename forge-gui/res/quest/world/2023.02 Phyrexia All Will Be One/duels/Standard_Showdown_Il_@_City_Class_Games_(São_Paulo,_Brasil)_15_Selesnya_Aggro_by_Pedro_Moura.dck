@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Selesnya Aggro by Pedro Moura
+Title=Sanctuary
+Difficulty=very hard
+Description=Selesnya Aggro by Pedro Moura
+Icon=Sanctuary.jpg
+Deck Type=constructed
+
+[main]
+2 Charge of the Mites
+4 Skrelv's Hive
+4 Tyvar's Stand
+4 Bloated Contaminator
+4 Annex Sentry
+4 Crawling Chorus
+4 Jawbone Duelist
+4 Skrelv, Defector Mite
+4 Venerated Rotpriest
+4 Slaughter Singer
+1 Eiganjo, Seat of the Empire
+1 Boseiju, Who Endures
+1 Plains
+3 Overgrown Farmland
+4 Mirrex
+4 The Seedcore
+4 Brushland
+4 Razorverge Thicket
+
+[sideboard]
+4 Lantern Flare
+4 Wedding Announcement
+3 Carnivorous Canopy
+2 Destroy Evil
+2 Unlicensed Hearse

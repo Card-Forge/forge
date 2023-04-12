@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Esper Dragons by Guillaume Wafo-Tapa
+Title=Aqueduct
+Difficulty=very hard
+Description=Esper Dragons by Guillaume Wafo-Tapa
+Icon=Aqueduct.jpg
+Deck Type=constructed
+
+[main]
+1 Ugin, the Spirit Dragon|FRF
+2 Dragonlord Ojutai|DTK
+2 Silumgar, the Drifting Death|FRF
+1 Thoughtseize|THS
+3 Crux of Fate|FRF
+4 Anticipate|DTK
+2 Ultimate Price|DTK
+4 Silumgar's Scorn|DTK
+4 Dissolve|THS
+4 Hero's Downfall|THS
+4 Dig Through Time|KTK
+2 Jace's Ingenuity|M15
+1 Foul-Tongue Invocation|DTK
+4 Temple of Deceit|THS
+4 Dismal Backwater|FRF
+4 Temple of Enlightenment|BNG
+4 Polluted Delta|KTK
+1 Flooded Strand|KTK
+1 Urborg, Tomb of Yawgmoth|M15
+2 Haven of the Spirit Dragon|DTK
+3 Island|DTK
+3 Swamp|DTK
+
+[sideboard]
+2 Thoughtseize|THS
+2 Foul-Tongue Invocation|DTK
+1 Negate|DTK
+1 Bile Blight|BNG
+3 Drown in Sorrow|BNG
+2 Dragonlord Silumgar|DTK
+2 Tasigur, the Golden Fang|FRF
+2 Dragonlord's Prerogative|DTK

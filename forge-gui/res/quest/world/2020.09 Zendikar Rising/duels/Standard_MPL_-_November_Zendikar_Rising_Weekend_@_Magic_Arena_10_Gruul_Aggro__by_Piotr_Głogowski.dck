@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Gruul Aggro  by Piotr Głogowski
+Title=Selesnya-precon
+Difficulty=very hard
+Description=Gruul Aggro  by Piotr Głogowski
+Icon=Selesnya-precon.jpg
+Deck Type=constructed
+
+[main]
+2 Stonecoil Serpent
+2 Scavenging Ooze
+2 Rimrock Knight
+3 Gemrazer
+4 Edgewall Innkeeper
+4 Lovestruck Beast
+4 Kazandu Mammoth
+4 Brushfire Elemental
+4 Bonecrusher Giant
+3 The Great Henge
+3 Embercleave
+4 Shatterskull Smashing
+4 Mountain
+4 Cragcrown Pathway
+4 Fabled Passage
+9 Forest
+
+[sideboard]
+1 Vivien, Monsters' Advocate
+2 The Akroan War
+3 Fire Prophecy
+3 Ox of Agonas
+3 Klothys, God of Destiny
+3 Questing Beast

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Ascendancy Combo by Piotr Glogowski
+Title=Orunmila
+Difficulty=very hard
+Description=Ascendancy Combo by Piotr Glogowski
+Icon=Orunmila.jpg
+Deck Type=constructed
+
+[main]
+4 Sylvan Caryatid|THS
+3 Nyx-Fleece Ram|JOU
+3 Commune with the Gods|THS
+2 Treasure Cruise|KTK
+4 Taigam's Scheming|KTK
+4 Dig Through Time|KTK
+4 Anticipate|DTK
+4 Retraction Helix|BNG
+2 Swan Song|THS
+4 Briber's Purse|KTK
+2 Altar of the Brood|KTK
+4 Jeskai Ascendancy|KTK
+4 Mana Confluence|JOU
+2 Mystic Monastery|KTK
+2 Frontier Bivouac|KTK
+1 Temple of Abandon|THS
+2 Temple of Enlightenment|BNG
+2 Temple of Plenty|BNG
+4 Yavimaya Coast|M15
+2 Shivan Reef|M15
+1 Battlefield Forge|M15
+
+[sideboard]
+2 Swan Song|THS
+4 Seismic Rupture|DTK
+3 Hornet Nest|M15
+1 Negate|DTK
+1 Sarkhan Unbroken|DTK
+1 Prognostic Sphinx|THS
+2 Reviving Melody|JOU
+1 Magma Spray|JOU

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=GW Aggro by Denniz Rachid
+Title=Mines of Kazum Durl
+Difficulty=very hard
+Description=GW Aggro by Denniz Rachid
+Icon=Mines of Kazum Durl.jpg
+Deck Type=constructed
+
+[main]
+1 Faith's Shield|DKA
+3 Divine Deflection|AVR
+4 Gather the Townsfolk|DKA
+2 Druid's Familiar|AVR
+2 Restoration Angel|AVR
+3 Mayor of Avabruck|ISD
+3 Sigarda, Host of Herons|AVR
+3 Thalia, Guardian of Thraben|DKA
+3 Fiend Hunter|C13
+3 Avacyn's Pilgrim|ISD
+4 Silverblade Paladin|C14
+4 Champion of the Parish|ISD
+3 Gavony Township|ISD
+4 Cavern of Souls|AVR
+7 Forest|RTR
+11 Plains|RTR
+
+[sideboard]
+1 Garruk Relentless|ISD
+1 Riders of Gavony|AVR
+1 Seraph of Dawn|AVR
+1 Tree of Redemption|ISD
+2 Wolfir Silverheart|AVR
+2 Crushing Vines|DKA
+1 Purify the Grave|ISD
+2 Ray of Revelation|DKA
+1 Grafdigger's Cage|DKA
+1 Witchbane Orb|ISD
+1 Faith's Shield|DKA
+1 Thalia, Guardian of Thraben|DKA

@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Grixis Aggro by Crimson B
+Title=KingKong
+Difficulty=very hard
+Description=Grixis Aggro by Crimson B
+Icon=KingKong.jpg
+Deck Type=constructed
+
+[main]
+1 Infernal Grasp
+1 The Meathook Massacre
+1 Reckoner Bankbuster
+1 Make Disappear
+1 Torch Breath
+1 Cut Down
+2 Spell Pierce
+2 Siphon Insight
+3 March of Wretched Sorrow
+4 Voltage Surge
+4 Fable of the Mirror-Breaker
+1 Tenacious Underdog
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+4 Evelyn, the Covetous
+1 Mountain
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+1 Swamp
+1 Otawara, Soaring City
+2 Stormcarved Coast
+3 Shivan Reef
+4 Sulfurous Springs
+4 Xander's Lounge
+4 Shipwreck Marsh
+4 Haunted Ridge
+
+[sideboard]
+2 Negate
+2 Parasitic Grasp
+1 Sorin the Mirthless
+2 Disdainful Stroke
+2 Infernal Grasp
+1 The Meathook Massacre
+2 Torch Breath
+2 Siphon Insight
+1 March of Wretched Sorrow

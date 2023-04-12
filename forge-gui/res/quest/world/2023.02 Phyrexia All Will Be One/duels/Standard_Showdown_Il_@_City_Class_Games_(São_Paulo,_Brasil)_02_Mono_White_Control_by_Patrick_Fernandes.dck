@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono White Control by Patrick Fernandes
+Title=Havok
+Difficulty=very hard
+Description=Mono White Control by Patrick Fernandes
+Icon=Havok.jpg
+Deck Type=constructed
+
+[main]
+2 Cathar Commando
+3 Steel Seraph
+3 Serra Paragon
+3 Loran of the Third Path
+3 Spirited Companion
+4 Reckoner Bankbuster
+4 Lay Down Arms
+3 Ossification
+4 Wedding Announcement
+3 The Eternal Wanderer
+3 The Wandering Emperor
+1 Mirrex
+1 Eiganjo, Seat of the Empire
+4 Roadside Reliquary
+19 Plains
+
+[sideboard]
+1 Cathar Commando
+1 Ossification
+1 March of Otherworldly Light
+2 Destroy Evil
+3 Depopulate
+3 Unlicensed Hearse
+4 Anointed Peacekeeper

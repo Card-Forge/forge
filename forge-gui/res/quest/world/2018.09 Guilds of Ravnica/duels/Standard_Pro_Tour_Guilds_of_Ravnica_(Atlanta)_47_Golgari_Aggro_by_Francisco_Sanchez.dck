@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by Francisco Sanchez
+Title=Geddon
+Difficulty=very hard
+Description=Golgari Aggro by Francisco Sanchez
+Icon=Geddon.jpg
+Deck Type=constructed
+
+[main]
+3 Vivien Reid
+1 Vraska, Golgari Queen
+2 Carnage Tyrant|XLN
+2 Golgari Findbroker
+4 Jadelight Ranger
+4 Llanowar Elves
+4 Merfolk Branchwalker|XLN
+2 Midnight Reaper
+3 Ravenous Chupacabra
+3 Seekers' Squire|XLN
+3 Wildgrowth Walker|XLN
+3 Find // Finality
+1 Assassin's Trophy
+1 Cast Down
+1 Vraska's Contempt|XLN
+8 Forest
+2 Memorial to Folly
+4 Overgrown Tomb
+5 Swamp
+4 Woodland Cemetery
+
+[sideboard]
+1 Wildgrowth Walker|XLN
+1 Assassin's Trophy
+2 Cast Down
+2 Vraska's Contempt|XLN
+2 Deathgorge Scavenger|XLN
+4 Duress
+2 Golden Demise
+1 Plaguecrafter

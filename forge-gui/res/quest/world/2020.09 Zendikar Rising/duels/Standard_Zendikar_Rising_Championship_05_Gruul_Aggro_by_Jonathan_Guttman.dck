@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Jonathan Guttman
+Title=The Great and Powerful Trixie
+Difficulty=very hard
+Description=Gruul Aggro by Jonathan Guttman
+Icon=The Great and Powerful Trixie.jpg
+Deck Type=constructed
+
+[main]
+4 Shatterskull Smashing
+9 Forest
+4 Fabled Passage
+2 Fire Prophecy
+4 Kazandu Mammoth
+4 Mountain
+2 The Akroan War
+4 Brushfire Elemental
+4 Bonecrusher Giant
+4 Lovestruck Beast
+3 The Great Henge
+4 Cragcrown Pathway
+4 Edgewall Innkeeper
+3 Embercleave
+2 Scavenging Ooze
+2 Questing Beast
+1 Temple of Abandon
+
+[sideboard]
+1 Fire Prophecy
+1 The Akroan War
+1 Questing Beast
+3 Wilt
+1 Garruk, Unleashed
+2 Vivien, Monsters' Advocate
+2 Soul Sear
+3 Ox of Agonas
+1 Thundering Rebuke

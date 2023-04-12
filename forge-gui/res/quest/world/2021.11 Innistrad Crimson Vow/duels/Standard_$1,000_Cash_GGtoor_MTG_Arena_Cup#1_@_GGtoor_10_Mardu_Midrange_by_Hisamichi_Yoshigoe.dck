@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Mardu Midrange by Hisamichi Yoshigoe
+Title=Boros-precon
+Difficulty=very hard
+Description=Mardu Midrange by Hisamichi Yoshigoe
+Icon=Boros-precon.jpg
+Deck Type=constructed
+
+[main]
+2 Infernal Grasp
+2 Vanishing Verse
+2 Agadeem's Awakening
+2 Rite of Oblivion
+2 The Meathook Massacre
+3 Lolth, Spider Queen
+4 Wedding Announcement
+2 Florian, Voldaren Scion
+2 Valki, God of Lies
+2 Edgar, Charmed Groom
+4 Luminarch Aspirant
+4 Immersturm Predator
+4 Eyetwitch
+1 Plains
+1 Swamp
+1 Mountain
+2 Hive of the Eye Tyrant
+2 Haunted Ridge
+3 Shattered Sanctum
+3 Sundown Pass
+4 Blightstep Pathway
+4 Brightclimb Pathway
+4 Needleverge Pathway
+
+[sideboard]
+3 Duress
+2 Sorin the Mirthless
+2 By Invitation Only
+2 Go Blank
+1 Reduce to Memory
+1 Environmental Sciences
+1 Mascot Exhibition
+1 Baleful Mastery
+1 Pest Summoning
+1 Vanishing Verse

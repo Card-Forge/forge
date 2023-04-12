@@ -1,0 +1,59 @@
+[quest]
+id=20100908
+OpponentName=Patrick
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=UGR Pod
+Title=Agonistes
+Difficulty=very hard
+Description=UGR Pod by Patrick Chapin
+Icon=Agonistes.jpg
+Deck Type=constructed
+
+[main]
+1 Act of Treason|M12
+1 Forked Bolt|ROE
+2 Preordain|M11
+4 Ponder|M12
+4 Birthing Pod|NPH
+1 Urabrask the Hidden|NPH
+1 Sylvok Replica|SOM
+1 Sylvan Ranger|M11
+1 Phyrexian Metamorph|NPH
+1 Phantasmal Image|M12
+1 Obstinate Baloth|M11
+1 Llanowar Elves|M12
+1 Hero of Oxid Ridge|MBS
+1 Cunning Sparkmage|WWK
+2 Acidic Slime|M12
+2 Inferno Titan|M12
+2 Vengevine|ROE
+3 Sea Gate Oracle|ROE
+4 Lotus Cobra|ZEN
+4 Birds of Paradise|M12
+1 Verdant Catacombs|ZEN
+2 Mountain|M12
+2 Island|M12
+4 Misty Rainforest|ZEN
+4 Copperline Gorge|SOM
+4 Scalding Tarn|ZEN
+5 Forest|M12
+
+[sideboard]
+1 Wurmcoil Engine|SOM
+2 Act of Aggression|NPH
+3 Combust|M12
+1 Flame Slash|ROE
+1 Grim Lavamancer|M12
+1 Nature's Claim|WWK
+3 Pyroclasm|M11
+1 Tuktuk Scrapper|WWK
+2 Obstinate Baloth|M11

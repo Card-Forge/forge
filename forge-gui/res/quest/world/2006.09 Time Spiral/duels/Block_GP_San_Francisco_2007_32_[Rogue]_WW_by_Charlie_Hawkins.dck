@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=[Rogue] WW by Charlie Hawkins
+Title=Leprechaun
+Difficulty=very hard
+Description=[Rogue] WW by Charlie Hawkins
+Icon=Leprechaun.jpg
+Deck Type=constructed
+
+[main]
+3 Bound in Silence|FUT
+4 Mana Tithe|PLC
+1 Aven Riftwatcher|PLC
+2 Icatian Javelineers|TSP
+2 Celestial Crusader|C14
+3 Amrou Scout|TSP
+3 Stonecloaker|C13
+3 Calciderm|PLC
+4 Serra Avenger|M13
+4 Soltari Priest|TSP
+4 Knight of Sursi|FUT
+4 Knight of the Holy Nimbus|TSP
+3 Horizon Canopy|FUT
+20 Plains|RTR
+
+[sideboard]
+2 Sacred Mesa|C14
+4 Rebuff the Wicked|PLC
+4 Sunlance|PLC
+4 Pull from Eternity|TSP
+1 Calciderm|PLC

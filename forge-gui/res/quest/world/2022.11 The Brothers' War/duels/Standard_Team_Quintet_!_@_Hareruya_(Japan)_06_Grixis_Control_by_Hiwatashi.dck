@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Grixis Control by Hiwatashi
+Title=Elashub
+Difficulty=very hard
+Description=Grixis Control by Hiwatashi
+Icon=Elashub.jpg
+Deck Type=constructed
+
+[main]
+4 Fable of the Mirror-Breaker
+4 Corpse Appraiser
+4 Bloodtithe Collector
+4 Reckoner Bankbuster
+2 Siphon Insight
+3 Abrade
+3 Make Disappear
+3 Go for the Throat
+2 Soul Transfer
+4 Invoke Despair
+1 Takenuma, Abandoned Mire
+2 Stormcarved Coast
+3 Shivan Reef
+4 Shipwreck Marsh
+4 Xander's Lounge
+4 Haunted Ridge
+4 Sulfurous Springs
+5 Swamp
+
+[sideboard]
+1 Negate
+2 Brotherhood's End
+3 Sheoldred, the Apocalypse
+3 Cut Down
+3 Disdainful Stroke
+3 Duress

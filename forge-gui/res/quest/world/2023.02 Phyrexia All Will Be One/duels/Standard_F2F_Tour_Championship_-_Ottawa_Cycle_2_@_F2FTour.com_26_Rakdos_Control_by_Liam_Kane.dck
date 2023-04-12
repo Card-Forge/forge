@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Rakdos Control by Liam Kane
+Title=George of the Jungle
+Difficulty=very hard
+Description=Rakdos Control by Liam Kane
+Icon=George of the Jungle.jpg
+Deck Type=constructed
+
+[main]
+2 Abrade
+3 Duress
+3 Invoke Despair
+3 Cut Down
+3 Go for the Throat
+4 Reckoner Bankbuster
+4 Fable of the Mirror-Breaker
+2 Archfiend of the Dross
+3 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Graveyard Trespasser
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+2 Mountain
+4 Blackcleave Cliffs
+4 Sulfurous Springs
+4 Haunted Ridge
+9 Swamp
+
+[sideboard]
+1 Extract the Truth
+4 Razorlash Transmogrant
+1 Vampires' Vengeance
+1 Gix's Command
+1 Soul Transfer
+2 Liliana of the Veil
+2 Obliterating Bolt
+1 Duress
+1 Invoke Despair
+1 Cut Down

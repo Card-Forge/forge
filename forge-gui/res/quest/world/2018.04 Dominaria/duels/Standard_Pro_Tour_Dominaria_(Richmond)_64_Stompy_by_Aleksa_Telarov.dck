@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Stompy by Aleksa Telarov
+Title=Dr Fate
+Difficulty=very hard
+Description=Stompy by Aleksa Telarov
+Icon=Dr Fate.jpg
+Deck Type=constructed
+
+[main]
+4 Llanowar Elves
+4 Servant of the Conduit|KLD
+4 Resilient Khenra|HOU
+4 Steel Leaf Champion
+3 Thrashing Brontodon
+2 Rhonas the Indomitable|AKH
+3 Territorial Allosaurus
+1 Verdurous Gearhulk|KLD
+2 Ghalta, Primal Hunger
+2 Adventurous Impulse
+2 Commit // Memory|AKH
+3 Blossoming Defense|KLD
+1 Skysovereign, Consul Flagship|KLD
+3 Heart of Kiran|AER
+4 Botanical Sanctum|KLD
+4 Hinterland Harbor
+2 Aether Hub|KLD
+3 Hashep Oasis|HOU
+9 Forest
+
+[sideboard]
+1 Ghalta, Primal Hunger
+1 Blossoming Defense|KLD
+1 Skysovereign, Consul Flagship|KLD
+1 Crushing Canopy|XLN
+1 River's Rebuke|XLN
+2 Negate
+2 Lifecrafter's Bestiary|AER
+2 Aethersphere Harvester|AER
+2 Nature's Way|KLD
+2 Nissa, Vital Force|KLD

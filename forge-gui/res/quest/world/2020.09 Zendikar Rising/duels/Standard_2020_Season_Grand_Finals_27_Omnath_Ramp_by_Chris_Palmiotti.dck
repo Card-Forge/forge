@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Omnath Ramp by Chris Palmiotti
+Title=Classic Control
+Difficulty=very hard
+Description=Omnath Ramp by Chris Palmiotti
+Icon=Classic Control.jpg
+Deck Type=constructed
+
+[main]
+1 Dryad of the Ilysian Grove
+1 Chainweb Aracnir
+2 Kenrith, the Returned King
+3 Bonecrusher Giant
+4 Lotus Cobra
+4 Omnath, Locus of Creation
+1 Soul-Guide Lantern
+1 Wilt
+3 Spikefield Hazard
+2 Cultivate
+3 Genesis Ultimatum
+4 Escape to the Wilds
+3 Felidar Retreat
+1 Ugin, the Spirit Dragon
+1 Plains
+2 Ketria Triome
+2 Riverglide Pathway
+2 Forest
+2 Mountain
+2 Evolving Wilds
+2 Raugrin Triome
+3 Cragcrown Pathway
+3 Branchloft Pathway
+4 Island
+4 Fabled Passage
+
+[sideboard]
+2 Chainweb Aracnir
+1 Soul-Guide Lantern
+1 Wilt
+2 Negate
+2 Embereth Shieldbreaker
+3 Redcap Melee
+4 Mystical Dispute

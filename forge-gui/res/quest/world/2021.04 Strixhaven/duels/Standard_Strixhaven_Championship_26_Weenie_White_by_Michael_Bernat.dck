@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Weenie White by Michael Bernat
+Title=Edward Scissorhands
+Difficulty=very hard
+Description=Weenie White by Michael Bernat
+Icon=Edward Scissorhands.jpg
+Deck Type=constructed
+
+[main]
+2 Legion Angel
+2 Reidane, God of the Worthy
+2 Drannith Magistrate
+4 Elite Spellbinder
+4 Luminarch Aspirant
+4 Selfless Savior
+4 Skyclave Apparition
+4 Seasoned Hallowblade
+4 Giant Killer
+4 Alseid of Life's Bounty
+2 Sparring Regimen
+4 Faceless Haven
+20 Snow-Covered Plains
+
+[sideboard]
+2 Legion Angel
+1 Reidane, God of the Worthy
+2 Drannith Magistrate
+1 Shadowspear
+1 Reduce to Memory
+1 Inkling Summoning
+1 Environmental Sciences
+2 Archon of Absolution
+4 Glass Casket

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Mardu Vehicles by Nathaniel Smith
+Title=BabaluAye
+Difficulty=very hard
+Description=Mardu Vehicles by Nathaniel Smith
+Icon=BabaluAye.jpg
+Deck Type=constructed
+
+[main]
+2 Gideon, Ally of Zendikar|BFZ
+4 Thraben Inspector|SOI
+4 Toolcraft Exemplar|KLD
+4 Scrapheap Scrounger|KLD
+4 Veteran Motorist|KLD
+3 Depala, Pilot Exemplar|KLD
+4 Harnessed Lightning|KLD
+4 Unlicensed Disintegration|KLD
+4 Heart of Kiran|AER
+3 Aethersphere Harvester|AER
+4 Concealed Courtyard|KLD
+4 Inspiring Vantage|KLD
+4 Aether Hub|KLD
+4 Spire of Industry|AER
+2 Needle Spires|OGW
+4 Spirebluff Canal|KLD
+2 Plains|RTR
+
+[sideboard]
+2 Gideon, Ally of Zendikar|BFZ
+2 Declaration in Stone|SOI
+2 Fatal Push|AER
+1 Skysovereign, Consul Flagship|KLD
+1 Chandra, Torch of Defiance|KLD
+2 Thalia, Heretic Cathar|EMN
+2 Negate
+2 Dispel|BFZ
+1 Ceremonious Rejection|KLD

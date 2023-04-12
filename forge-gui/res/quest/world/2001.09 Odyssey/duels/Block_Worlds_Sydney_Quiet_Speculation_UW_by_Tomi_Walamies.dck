@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Quiet Speculation UW by Tomi Walamies
+Title=Link
+Difficulty=very hard
+Description=Quiet Speculation UW by Tomi Walamies
+Icon=Link.jpg
+Deck Type=constructed
+
+[main]
+6 Island|A
+13 Plains|A
+4 Skycloud Expanse|OD
+4 Beloved Chaplain|OD
+3 Glory|JU
+3 Patrol Hound|OD
+4 Spurnmage Advocate|JU
+2 Suntail Hawk|JU
+4 Tireless Tribe|OD
+4 Battle Screech|JU
+2 Deep Analysis|TO
+4 Divine Sacrament|OD
+2 Envelop|JU
+1 Prismatic Strands|JU
+4 Quiet Speculation|JU
+
+[sideboard]
+2 Deep Analysis|TO
+2 Envelop|JU
+2 Prismatic Strands|JU
+1 Commander Eesha|JU
+1 Frantic Purification|TO
+2 Kirtar's Desire|OD
+1 Ray of Distortion|OD
+2 Sphere of Truth|OD
+2 Stern Judge|TO

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Abzan Rally by Magnus Lantto
+Title=Sen-Sei
+Difficulty=very hard
+Description=Abzan Rally by Magnus Lantto
+Icon=Sen-Sei.jpg
+Deck Type=constructed
+
+[main]
+4 Collected Company|DTK
+4 Rally the Ancestors|FRF
+4 Nantuko Husk|ORI
+4 Catacomb Sifter|BFZ
+4 Zulaport Cutthroat|BFZ
+4 Grim Haruspex|KTK
+4 Sidisi's Faithful|DTK
+4 Jace, Vryn's Prodigy|ORI
+4 Elvish Visionary|ORI
+1 Island|BFZ
+1 Prairie Stream|BFZ
+1 Forest|BFZ
+1 Plains|BFZ
+1 Swamp|BFZ
+2 Sunken Hollow|BFZ
+2 Canopy Vista|BFZ
+3 Evolving Wilds|BFZ
+4 Flooded Strand|KTK
+4 Windswept Heath|KTK
+4 Polluted Delta|KTK
+
+[sideboard]
+2 Duress|DTK
+4 Arashin Cleric|FRF
+2 Abzan Ascendancy|KTK
+4 Murderous Cut|KTK
+2 Dispel|BFZ
+1 Valorous Stance|FRF

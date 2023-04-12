@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Kristof Prinz
+Title=Eldritch Onslaught
+Difficulty=very hard
+Description=Temur Reclamation by Kristof Prinz
+Icon=Eldritch Onslaught.jpg
+Deck Type=constructed
+
+[main]
+1 Kenrith, the Returned King
+2 Brazen Borrower
+3 Uro, Titan of Nature's Wrath
+1 Scorching Dragonfire
+1 Aether Gust
+1 Negate
+1 Dovin's Veto
+3 Expansion // Explosion
+3 Mystical Dispute
+4 Growth Spiral
+4 Shark Typhoon
+4 Wilderness Reclamation
+3 Teferi, Time Raveler
+1 Mountain
+1 Plains
+1 Forest
+2 Stomping Ground
+2 Island
+2 Breeding Pool
+2 Castle Vantress
+2 Hallowed Fountain
+4 Fabled Passage
+4 Ketria Triome
+4 Raugrin Triome
+4 Temple Garden
+
+[sideboard]
+2 Kenrith, the Returned King
+1 Uro, Titan of Nature's Wrath
+1 Aether Gust
+2 Dovin's Veto
+1 Deafening Clarion
+2 Solar Blaze
+2 Glass Casket
+2 Justice Strike
+2 Spectral Sailor

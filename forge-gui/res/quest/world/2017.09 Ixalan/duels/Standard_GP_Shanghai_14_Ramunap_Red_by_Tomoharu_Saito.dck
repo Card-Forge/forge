@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Ramunap Red by Tomoharu Saito
+Title=The Conclave of Mages
+Difficulty=very hard
+Description=Ramunap Red by Tomoharu Saito
+Icon=The Conclave of Mages.jpg
+Deck Type=constructed
+
+[main]
+4 Sunscorched Desert|AKH
+4 Ramunap Ruins|HOU
+16 Mountain|XLN
+4 Lightning Strike|XLN
+4 Abrade|HOU
+4 Shock|AER
+4 Soul-Scar Mage|AKH
+3 Kari Zev, Skyship Raider|AER
+4 Hazoret the Fervent|AKH
+4 Earthshaker Khenra|HOU
+4 Bomat Courier|KLD
+4 Ahn-Crop Crasher|AKH
+1 Chandra, Torch of Defiance|KLD
+
+[sideboard]
+2 Chandra, Torch of Defiance|KLD
+3 Invigorated Rampage|AER
+3 Dual Shot|XLN
+4 Rampaging Ferocidon|XLN
+3 Pia Nalaar|KLD

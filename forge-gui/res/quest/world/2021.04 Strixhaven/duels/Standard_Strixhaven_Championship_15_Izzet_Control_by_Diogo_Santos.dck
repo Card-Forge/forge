@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Izzet Control by Diogo Santos
+Title=Big Rock
+Difficulty=very hard
+Description=Izzet Control by Diogo Santos
+Icon=Big Rock.jpg
+Deck Type=constructed
+
+[main]
+1 Disdainful Stroke
+2 Expressive Iteration
+3 Mystical Dispute
+3 Alrund's Epiphany
+3 Saw It Coming
+4 Mazemind Tome
+4 Frost Bite
+2 Galazeth Prismari
+4 Bonecrusher Giant
+4 Goldspan Dragon
+4 Brazen Borrower
+3 Faceless Haven
+4 Riverglide Pathway
+4 Volatile Fjord
+4 Fabled Passage
+5 Snow-Covered Mountain
+6 Snow-Covered Island
+
+[sideboard]
+3 Scorching Dragonfire
+2 Redcap Melee
+2 The Akroan War
+2 Ox of Agonas
+2 Cinderclasm
+1 Phoenix of Ash
+1 Negate
+2 Disdainful Stroke

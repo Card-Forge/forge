@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Malseman
+Title=Riddler
+Difficulty=very hard
+Description=Boros Aggro by Malseman
+Icon=Riddler.jpg
+Deck Type=constructed
+
+[main]
+2 Spikefield Hazard
+2 Wedding Announcement
+4 Showdown of the Skalds
+4 Abrade
+4 Play with Fire
+4 Fable of the Mirror-Breaker
+4 Kumano Faces Kakkazan
+2 Reidane, God of the Worthy
+2 Spirited Companion
+4 Dawnbringer Cleric
+4 Bloodthirsty Adversary
+2 Furycalm Snarl
+4 Needleverge Pathway
+4 Sundown Pass
+4 Plains
+4 Den of the Bugbear
+6 Mountain
+
+[sideboard]
+2 Burn Down the House
+2 The Wandering Emperor
+2 Archon of Emeria
+2 Angelfire Ignition
+2 Valorous Stance
+2 Light the Way
+2 Elite Spellbinder
+1 Blade Historian

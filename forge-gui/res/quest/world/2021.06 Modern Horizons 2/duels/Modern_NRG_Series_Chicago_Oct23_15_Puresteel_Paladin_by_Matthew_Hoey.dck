@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by Matthew Hoey
+Title=Demonic Archaeology
+Difficulty=very hard
+Description=Puresteel Paladin by Matthew Hoey
+Icon=Demonic Archaeology.jpg
+Deck Type=constructed
+
+[main]
+3 Ingenious Smith
+4 Memnite|SOM
+4 Ornithopter|AER
+4 Esper Sentinel
+4 Puresteel Paladin|NPH
+4 Stoneforge Mystic|WWK
+1 Shadowspear
+1 Cranial Plating|FD
+1 Mishra's Bauble|CS
+4 Colossus Hammer
+4 Springleaf Drum|BNG
+1 Prismatic Ending
+4 Sigarda's Aid|EMN
+4 Urza's Saga
+2 Godless Shrine
+3 Silent Clearing
+3 Inkmoth Nexus|MBS
+4 Marsh Flats|ZEN
+5 Plains
+
+[sideboard]
+2 Prismatic Ending
+1 Cathar Commando
+1 Pithing Needle
+1 Lurrus of the Dream-Den
+2 Path to Exile|CFX
+2 Void Mirror
+2 Sanctifier en-Vec
+4 Thoughtseize|THS

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Golgari Control by Scottynada
+Title=Samwise Gamgee
+Difficulty=very hard
+Description=Golgari Control by Scottynada
+Icon=Samwise Gamgee.jpg
+Deck Type=constructed
+
+[main]
+1 Infernal Grasp
+1 Hagra Mauling
+1 Inscription of Ruin
+2 The Celestus
+2 March of Wretched Sorrow
+2 Ray of Enfeeblement
+3 Dig Up
+3 Binding the Old Gods
+3 The Meathook Massacre
+3 Lolth, Spider Queen
+4 Invoke Despair
+4 Esika's Chariot
+2 Shigeki, Jukai Visionary
+3 Prosperous Innkeeper
+4 Tangled Florahedron
+1 Lair of the Hydra
+1 Takenuma, Abandoned Mire
+1 Forest
+2 Boseiju, Who Endures
+2 Hive of the Eye Tyrant
+3 Woodland Chasm
+4 Deathcap Glade
+4 Swamp
+4 Darkbore Pathway
+
+[sideboard]
+4 Duress
+2 Cragplate Baloth
+2 Soul Shatter
+2 Go Blank
+1 Parasitic Grasp
+1 Witherbloom Command
+1 Shadows' Verdict
+2 Ray of Enfeeblement

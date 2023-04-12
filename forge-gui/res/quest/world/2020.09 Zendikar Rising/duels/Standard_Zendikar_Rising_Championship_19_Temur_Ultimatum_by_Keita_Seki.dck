@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Temur Ultimatum by Keita Seki
+Title=Sir Shandlar of Eberyn
+Difficulty=very hard
+Description=Temur Ultimatum by Keita Seki
+Icon=Sir Shandlar of Eberyn.jpg
+Deck Type=constructed
+
+[main]
+3 Kazandu Mammoth
+4 Ketria Triome
+4 Lovestruck Beast
+4 Cragcrown Pathway
+4 Fabled Passage
+2 Mountain
+4 Brazen Borrower
+4 Terror of the Peaks
+4 Island
+2 The Great Henge
+4 Genesis Ultimatum
+4 Beanstalk Giant
+2 Riverglide Pathway
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+3 Cultivate
+4 Forest
+
+[sideboard]
+2 The Akroan War
+3 Mystical Dispute
+4 Scorching Dragonfire
+2 Ox of Agonas
+3 Confounding Conundrum
+1 Obosh, the Preypiercer

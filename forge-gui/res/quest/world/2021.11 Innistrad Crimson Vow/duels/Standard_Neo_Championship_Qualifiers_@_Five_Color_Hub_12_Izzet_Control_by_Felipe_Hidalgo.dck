@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Izzet Control by Felipe Hidalgo
+Title=Sedge Midrange
+Difficulty=very hard
+Description=Izzet Control by Felipe Hidalgo
+Icon=Sedge Midrange.jpg
+Deck Type=constructed
+
+[main]
+2 Goldspan Dragon
+2 Smoldering Egg
+1 Test of Talents
+1 Memory Deluge
+2 Abrade
+2 Demon Bolt
+2 Fading Hope
+3 Divide by Zero
+3 Galvanic Iteration
+3 Jwari Disruption
+4 Spikefield Hazard
+4 Unexpected Windfall
+2 Burn Down the House
+3 Alrund's Epiphany
+4 Expressive Iteration
+1 Field of Ruin
+2 Hall of Storm Giants
+4 Stormcarved Coast
+4 Riverglide Pathway
+5 Island
+6 Mountain
+
+[sideboard]
+1 Smoldering Egg
+2 Test of Talents
+1 Lier, Disciple of the Drowned
+1 Environmental Sciences
+1 Hullbreaker Horror
+1 Mascot Exhibition
+1 Teachings of the Archaics
+2 Cinderclasm
+2 Flame-Blessed Bolt
+3 Burning Hands

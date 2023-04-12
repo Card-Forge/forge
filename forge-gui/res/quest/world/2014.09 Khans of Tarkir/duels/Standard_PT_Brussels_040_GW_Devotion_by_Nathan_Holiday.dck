@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=GW Devotion by Nathan Holiday
+Title=Eureka
+Difficulty=very hard
+Description=GW Devotion by Nathan Holiday
+Icon=Eureka.jpg
+Deck Type=constructed
+
+[main]
+4 Elvish Mystic|M15
+4 Sylvan Caryatid|THS
+4 Voyaging Satyr|THS
+4 Courser of Kruphix|BNG
+4 Polukranos, World Eater|THS
+4 Whisperwood Elemental|FRF
+3 Genesis Hydra|M15
+2 Arbor Colossus|THS
+1 Den Protector|DTK
+2 Dromoka's Command|DTK
+4 Mastery of the Unseen|FRF
+4 Nykthos, Shrine to Nyx|THS
+4 Temple of Plenty|BNG
+1 Blossoming Sands|FRF
+4 Windswept Heath|KTK
+2 Plains|DTK
+9 Forest|DTK
+
+[sideboard]
+1 Arbor Colossus|THS
+2 Den Protector|DTK
+1 Dromoka's Command|DTK
+4 Deathmist Raptor|DTK
+1 Ainok Survivalist|DTK
+4 Fleecemane Lion|THS
+2 Valorous Stance|FRF

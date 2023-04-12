@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=WW by Joshua Murphy
+Title=Count Musgrave
+Difficulty=very hard
+Description=WW by Joshua Murphy
+Icon=Count Musgrave.jpg
+Deck Type=constructed
+
+[main]
+20 Plains|RTR
+4 Calciderm|PLC
+4 Knight of the Holy Nimbus|TSP
+4 Stonecloaker|C13
+4 Griffin Guide|TSP
+4 Temporal Isolation|TSP
+4 Shade of Trokair|PLC
+4 Soltari Priest|TSP
+4 Serra Avenger|M13
+3 Duskrider Peregrine|TSP
+2 Flagstones of Trokair|TSP
+2 Fortify|M14
+1 Sacred Mesa|C14
+
+[sideboard]
+1 Duskrider Peregrine|TSP
+2 Sacred Mesa|C14
+4 Honorable Passage|TSP
+2 Spirit Loop|TSP
+2 Sunlance|PLC
+2 Seht's Tiger|FUT
+2 Opal Guardian|TSP

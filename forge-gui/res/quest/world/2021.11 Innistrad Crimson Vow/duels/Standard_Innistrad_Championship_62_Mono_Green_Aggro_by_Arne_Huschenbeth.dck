@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Arne Huschenbeth
+Title=Shanna
+Difficulty=very hard
+Description=Mono Green Aggro by Arne Huschenbeth
+Icon=Shanna.jpg
+Deck Type=constructed
+
+[main]
+4 Old-Growth Troll
+4 Ascendant Packleader
+4 Werewolf Pack Leader
+4 Ulvenwald Oddity
+4 Sculptor of Winter
+4 Esika's Chariot
+2 Snakeskin Veil
+4 Blizzard Brawl
+2 Ranger Class
+1 Lair of the Hydra
+4 Faceless Haven
+4 Kazandu Mammoth
+19 Snow-Covered Forest
+
+[sideboard]
+2 Snakeskin Veil
+1 Wrenn and Seven
+2 Inscription of Abundance
+2 Unnatural Growth
+2 Briarbridge Tracker
+3 Tajuru Blightblade
+3 Devouring Tendrils

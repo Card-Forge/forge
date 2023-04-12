@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=BErites Obv by Vincent Lemoine
+Title=The Marines
+Difficulty=very hard
+Description=BErites Obv by Vincent Lemoine
+Icon=The Marines.jpg
+Deck Type=constructed
+
+[main]
+2 Faithless Looting|C15
+3 Mulch|C15
+3 Unburial Rites|ISD
+3 Blasphemous Act|C16
+1 Champion of the Parish|ISD
+1 Disciple of Griselbrand|C13
+3 Angel of Glory's Rise|AVR
+3 Borderland Ranger|AVR
+3 Cathedral Sanctifier|AVR
+3 Fiend Hunter|C13
+4 Geist-Honored Monk|C14
+4 Avacyn's Pilgrim|ISD
+4 Huntmaster of the Fells|DKA
+1 Mountain|RTR
+1 Swamp|RTR
+1 Vault of the Archangel|DKA
+3 Woodland Cemetery
+3 Plains|RTR
+3 Forest|RTR
+3 Clifftop Retreat
+4 Evolving Wilds
+4 Cavern of Souls|AVR
+
+[sideboard]
+2 Witchbane Orb|ISD
+2 Banishing Stroke|AVR
+1 Purify the Grave|ISD
+3 Restoration Angel|AVR
+4 Slayer of the Wicked|ISD
+1 Blasphemous Act|C16
+1 Cathedral Sanctifier|AVR
+1 Vault of the Archangel|DKA

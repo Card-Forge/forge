@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Naya Aggro by Logan Nettles
+Title=The Conclave of Mages
+Difficulty=very hard
+Description=Naya Aggro by Logan Nettles
+Icon=The Conclave of Mages.jpg
+Deck Type=constructed
+
+[main]
+2 Drannith Magistrate
+2 Clarion Spirit
+3 Tangled Florahedron
+4 Giant Killer
+4 Elite Spellbinder
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Jaspera Sentinel
+4 Lovestruck Beast
+2 The Akroan War
+4 Showdown of the Skalds
+1 Mountain
+3 Forest
+3 Plains
+4 Branchloft Pathway
+4 Cragcrown Pathway
+4 Needleverge Pathway
+4 Fabled Passage
+
+[sideboard]
+1 Jegantha, the Wellspring
+1 Run Afoul
+1 Redcap Melee
+2 Klothys, God of Destiny
+2 Reidane, God of the Worthy
+2 Fire Prophecy
+3 Ox of Agonas
+3 Glass Casket

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Tomasz Sodomirski
+Title=Phoebe
+Difficulty=very hard
+Description=Red Deck Wins by Tomasz Sodomirski
+Icon=Phoebe.jpg
+Deck Type=constructed
+
+[main]
+2 Falkenrath Pit Fighter
+2 Phoenix Chick
+3 Feldon, Ronom Excavator
+4 Bloodthirsty Adversary
+4 Monastery Swiftspear
+4 Furnace Punisher
+4 Thundering Raiju
+4 Kumano Faces Kakkazan
+4 Lightning Strike
+4 Play with Fire
+3 Strangle
+2 Sokenzan, Crucible of Defiance
+4 Mishra's Foundry
+16 Mountain
+
+[sideboard]
+1 Strangle
+2 Unlicensed Hearse
+3 Chandra, Dressed to Kill
+3 Koth, Fire of Resistance
+3 Obliterating Bolt
+3 Rebel Salvo

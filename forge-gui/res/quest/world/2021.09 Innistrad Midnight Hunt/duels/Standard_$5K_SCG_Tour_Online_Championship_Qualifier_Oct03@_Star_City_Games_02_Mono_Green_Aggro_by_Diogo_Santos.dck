@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Diogo Santos
+Title=Galahad
+Difficulty=very hard
+Description=Mono Green Aggro by Diogo Santos
+Icon=Galahad.jpg
+Deck Type=constructed
+
+[main]
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+4 Sculptor of Winter
+4 Esika's Chariot
+2 Inscription of Abundance
+2 Snakeskin Veil
+4 Blizzard Brawl
+4 Ranger Class
+4 Wrenn and Seven
+1 Lair of the Hydra
+4 Faceless Haven
+4 Kazandu Mammoth
+19 Snow-Covered Forest
+
+[sideboard]
+1 Inscription of Abundance
+2 Snakeskin Veil
+1 Tangletrap
+2 Unnatural Growth
+2 Tajuru Blightblade
+2 Toski, Bearer of Secrets
+2 Devouring Tendrils
+3 Outland Liberator

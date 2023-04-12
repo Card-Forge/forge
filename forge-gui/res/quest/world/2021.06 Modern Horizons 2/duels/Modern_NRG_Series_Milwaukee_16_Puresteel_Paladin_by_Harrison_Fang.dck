@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by Harrison Fang
+Title=Morpheus
+Difficulty=very hard
+Description=Puresteel Paladin by Harrison Fang
+Icon=Morpheus.jpg
+Deck Type=constructed
+
+[main]
+2 Thraben Inspector|SOI
+2 Gingerbrute
+4 Esper Sentinel
+4 Memnite|SOM
+4 Ornithopter|AER
+4 Puresteel Paladin|NPH
+4 Stoneforge Mystic|WWK
+1 Cranial Plating|FD
+1 Shadowspear
+4 Colossus Hammer
+4 Springleaf Drum|BNG
+4 Sigarda's Aid|EMN
+4 Urza's Saga
+1 Godless Shrine
+1 Concealed Courtyard|KLD
+2 Arid Mesa|ZEN
+3 Inkmoth Nexus|MBS
+3 Marsh Flats|ZEN
+4 Snow-Covered Plains
+4 Silent Clearing
+
+[sideboard]
+1 Pithing Needle
+1 Path to Exile|CFX
+1 Lurrus of the Dream-Den
+1 Nihil Spellbomb|SOM
+1 Prismatic Ending
+2 Sanctifier en-Vec
+2 Seal of Cleansing|NE
+2 Knight of Malice
+4 Thoughtseize|THS

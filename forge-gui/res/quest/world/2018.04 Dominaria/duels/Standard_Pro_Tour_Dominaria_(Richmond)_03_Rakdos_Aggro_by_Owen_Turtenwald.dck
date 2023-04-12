@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Owen Turtenwald
+Title=alasen
+Difficulty=very hard
+Description=Rakdos Aggro by Owen Turtenwald
+Icon=alasen.jpg
+Deck Type=constructed
+
+[main]
+2 Aether Hub|KLD
+4 Dragonskull Summit|XLN
+4 Canyon Slough|AKH
+1 Swamp
+14 Mountain
+3 Heart of Kiran|AER
+2 Unlicensed Disintegration|KLD
+2 Abrade|HOU
+2 Lightning Strike|XLN
+2 Glorybringer|AKH
+3 Hazoret the Fervent|AKH
+2 Pia Nalaar|KLD
+4 Goblin Chainwhirler
+2 Kari Zev, Skyship Raider|AER
+4 Scrapheap Scrounger|KLD
+2 Soul-Scar Mage|AKH
+4 Bomat Courier|KLD
+3 Chandra, Torch of Defiance|KLD
+
+[sideboard]
+4 Duress|XLN
+2 Rekindling Phoenix
+2 Chandra's Defeat|HOU
+3 Magma Spray|AKH
+1 Unlicensed Disintegration|KLD
+1 Abrade|HOU
+1 Glorybringer|AKH
+1 Doomfall|HOU

@@ -1,0 +1,54 @@
+[duel]
+[metadata]
+Name=UrzaTron by Ajani89
+Title=Iblis
+Difficulty=very hard
+Description=UrzaTron by Ajani89
+Icon=Iblis.jpg
+Deck Type=constructed
+
+[main]
+4 Karn, the Great Creator
+2 Ugin, the Spirit Dragon
+1 Emrakul, the Promised End|EMN
+1 Urza, Lord High Artificer
+1 Walking Ballista|AER
+4 Condescend|FD
+1 Cyclonic Rift|RTR
+3 Remand|RAV
+3 Repeal|GP
+1 Spatial Contortion|OGW
+4 Thirst for Knowledge|MR
+1 Engineered Explosives|FD
+4 Expedition Map|ZEN
+1 Soul-Guide Lantern
+1 Talisman of Curiosity
+1 Talisman of Dominance|MR
+1 Talisman of Progress|MR
+2 Trinisphere|DS
+1 Academy Ruins|TSP
+1 Blast Zone
+1 Gemstone Caverns|TSP
+6 Island
+1 Tolaria West|FUT
+4 Urza's Mine|9E
+4 Urza's Power Plant|9E
+2 Urza's Saga
+4 Urza's Tower|9E
+
+[sideboard]
+1 Walking Ballista|AER
+1 Spatial Contortion|OGW
+1 Engineered Explosives|FD
+1 Trinisphere|DS
+1 Crucible of Worlds
+1 Elixir of Immortality|M14
+1 Ensnaring Bridge|8E
+1 Liquimetal Coating|SOM
+1 Mindslaver|SOM
+1 Pithing Needle|RTR
+1 Relic of Progenitus|ALA
+1 Spellskite|NPH
+1 Sundering Titan|DS
+1 Torpor Orb|NPH
+1 Wurmcoil Engine|SOM

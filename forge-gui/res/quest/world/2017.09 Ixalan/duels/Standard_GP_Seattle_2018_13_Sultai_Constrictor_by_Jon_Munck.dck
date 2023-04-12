@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Sultai Constrictor by Jon Munck
+Title=MahamotiGenie
+Difficulty=very hard
+Description=Sultai Constrictor by Jon Munck
+Icon=MahamotiGenie.jpg
+Deck Type=constructed
+
+[main]
+4 Bristling Hydra|KLD
+4 Glint-Sleeve Siphoner|AER
+3 Jadelight Ranger
+1 Rishkar, Peema Renegade|AER
+4 Servant of the Conduit|KLD
+1 Verdurous Gearhulk|KLD
+4 Walking Ballista|AER
+4 Winding Constrictor|AER
+1 Doomfall|HOU
+2 Blossoming Defense|KLD
+2 Fatal Push|AER
+3 Vraska's Contempt|XLN
+3 Hadana's Climb
+4 Aether Hub|KLD
+4 Blooming Marsh|KLD
+4 Botanical Sanctum|KLD
+4 Fetid Pools|AKH
+3 Forest
+2 Hashep Oasis|HOU
+1 Ifnir Deadlands|HOU
+2 Swamp
+
+[sideboard]
+1 Fatal Push|AER
+1 Vraska's Contempt|XLN
+2 Cartouche of Ambition|AKH
+1 Deathgorge Scavenger|XLN
+3 Duress|XLN
+1 Lifecrafter's Bestiary|AER
+2 Negate
+1 Supreme Will|HOU
+1 The Scarab God|HOU
+2 Thrashing Brontodon

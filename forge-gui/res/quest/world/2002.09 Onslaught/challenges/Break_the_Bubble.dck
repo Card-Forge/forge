@@ -1,0 +1,42 @@
+[quest]
+id=20020901
+OpponentName=Beastmaster
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=10
+Card Reward=5 random rares
+Credit Reward=10000
+AIExtras=Force Bubble|Overwhelming Instinct
+HumanExtras=Overwhelming Instinct
+
+[metadata]
+Name=Break the Bubble
+Title=Break the Bubble
+Difficulty=very hard
+Description=Break the bubble to win!
+Icon=Homer Simpson.jpg
+Deck Type=constructed
+
+[main]
+4 Shock
+4 Wirewood Elf|ONS
+4 Thoughtbound Primoc|ONS
+4 Tephraderm|ONS
+4 Ravenous Baloth|C13
+4 Krosan Tusker|C13
+4 Canopy Crawler|LE
+2 Barkhide Mauler|ONS
+4 Avarax|ONS
+4 Wooded Foothills|KTK
+4 Tranquil Thicket|C14
+5 Mountain|RTR
+3 Forgotten Cave|C15
+6 Forest|RTR
+4 Contested Cliffs|C13
+
+[sideboard]
+3 Wirewood Savage|ON
+4 Naturalize
+4 Gempalm Incinerator|LE
+4 Broodhatch Nantuko|ON

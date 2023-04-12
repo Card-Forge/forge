@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Crashing Footfalls by Max Mick
+Title=Tolaria
+Difficulty=very hard
+Description=Crashing Footfalls by Max Mick
+Icon=Tolaria.jpg
+Deck Type=constructed
+
+[main]
+1 Teferi, Time Raveler
+2 Failure // Comply|AKH
+2 Sea Gate Restoration
+4 Force of Negation
+4 Fire // Ice|AP
+4 Violent Outburst|ARB
+4 Crashing Footfalls
+4 Ardent Plea|ARB
+4 Shardless Agent
+4 Brazen Borrower
+4 Subtlety
+1 Steam Vents
+1 Stomping Ground
+1 Breeding Pool
+1 Temple Garden
+1 Raugrin Triome
+1 Forest
+1 Island
+1 Hallowed Fountain
+1 Ketria Triome
+2 Wooded Foothills|KTK
+2 Gemstone Caverns|TSP
+2 Flooded Strand|KTK
+4 Misty Rainforest|ZEN
+4 Scalding Tarn|ZEN
+
+[sideboard]
+4 Wear // Tear|DGM
+3 Dead // Gone|PLC
+3 Force of Vigor
+2 Endurance
+2 Mystical Dispute
+1 Magmatic Sinkhole

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Izzet Machinegun by Pedro Carvalho
+Title=Grave Power
+Difficulty=very hard
+Description=Izzet Machinegun by Pedro Carvalho
+Icon=Grave Power.jpg
+Deck Type=constructed
+
+[main]
+4 Thermo-Alchemist|EMN
+3 Thing in the Ice|SOI
+2 Jace, Vryn's Prodigy|ORI
+2 Tormenting Voice
+4 Incendiary Flow|EMN
+4 Collective Defiance|EMN
+2 Dispel|BFZ
+2 Unsubstantiate|EMN
+3 Fiery Impulse|ORI
+2 Lightning Axe|SOI
+4 Fiery Temper|SOI
+4 Fevered Visions|SOI
+4 Wandering Fumarole|OGW
+4 Shivan Reef|ORI
+3 Highland Lake
+9 Mountain|RTR
+3 Island|RTR
+1 Geier Reach Sanitarium|EMN
+
+[sideboard]
+1 Dispel|BFZ
+1 Fiery Impulse|ORI
+3 Goldnight Castigator|SOI
+2 Weaver of Lightning|EMN
+1 Rending Volley|DTK
+2 Negate
+1 Spell Shrivel|BFZ
+2 Bedlam Reveler|EMN
+2 Nahiri's Wrath|EMN

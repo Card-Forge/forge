@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=UR Storm by Heshiki Tatsuki
+Title=Cletus Heap
+Difficulty=very hard
+Description=UR Storm by Heshiki Tatsuki
+Icon=Cletus Heap.jpg
+Deck Type=constructed
+
+[main]
+3 Goblin Electromancer
+4 Baral, Chief of Compliance|AER
+1 Repeal|GP
+2 Silundi Vision
+3 Opt
+4 Desperate Ritual|CHK
+4 Gifts Ungiven|CHK
+4 Manamorphose|SHM
+4 Pyretic Ritual|M11
+4 Remand|RAV
+1 Galvanic Relay
+1 Past in Flames|ISD
+1 Grapeshot|TSP
+2 Wish
+4 Serum Visions|FD
+1 Mountain
+1 Riverglide Pathway
+1 Fiery Islet
+3 Shivan Reef|ORI
+4 Steam Vents
+4 Island
+4 Spirebluff Canal|KLD
+
+[sideboard]
+2 Galvanic Relay
+1 Past in Flames|ISD
+1 Grapeshot|TSP
+1 Abrade
+1 Empty the Warrens|TSP
+1 Shattering Spree|GP
+2 Flusterstorm
+3 Lightning Bolt|M11
+3 Pieces of the Puzzle|SOI

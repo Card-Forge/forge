@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Selesnya Toxic by Alan Ngo
+Title=Pebbles Flintstone
+Difficulty=very hard
+Description=Selesnya Toxic by Alan Ngo
+Icon=Pebbles Flintstone.jpg
+Deck Type=constructed
+
+[main]
+3 Annex Sentry
+4 Skrelv, Defector Mite
+4 Jawbone Duelist
+4 Bloated Contaminator
+4 Venerated Rotpriest
+4 Crawling Chorus
+4 Slaughter Singer
+3 Soul Partition
+4 Tyvar's Stand
+4 Skrelv's Hive
+1 Plains
+1 Boseiju, Who Endures
+1 Eiganjo, Seat of the Empire
+3 Mirrex
+4 Brushland
+4 Overgrown Farmland
+4 Razorverge Thicket
+4 The Seedcore
+
+[sideboard]
+2 Unlicensed Hearse
+3 Carnivorous Canopy
+3 Destroy Evil
+3 Knockout Blow
+4 Lantern Flare

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Grixis Control by Sff
+Title=Hammerheim
+Difficulty=very hard
+Description=Grixis Control by Sff
+Icon=Hammerheim.jpg
+Deck Type=constructed
+
+[main]
+1 Behold the Multiverse
+1 Cinderclasm
+2 Abrade
+2 Jwari Disruption
+2 Thundering Rebuke
+2 Demon Bolt
+3 Alrund's Epiphany
+3 Galvanic Iteration
+3 Fading Hope
+4 Spikefield Hazard
+4 Divide by Zero
+4 Expressive Iteration
+4 Unexpected Windfall
+3 Lier, Disciple of the Drowned
+2 Island
+2 Hall of Storm Giants
+2 Mountain
+4 Stormcarved Coast
+4 Riverglide Pathway
+4 Clearwater Pathway
+4 Blightstep Pathway
+
+[sideboard]
+4 Smoldering Egg
+2 Malevolent Hermit
+2 Go Blank
+2 Flame-Blessed Bolt
+1 Burning Hands
+1 Memory Deluge
+1 Mascot Exhibition
+1 Environmental Sciences
+1 Teachings of the Archaics

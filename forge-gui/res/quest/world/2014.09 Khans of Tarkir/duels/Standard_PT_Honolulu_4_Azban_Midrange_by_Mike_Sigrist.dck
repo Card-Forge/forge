@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Azban Midrange by Mike Sigrist
+Title=Bouncy Bouncy
+Difficulty=very hard
+Description=Azban Midrange by Mike Sigrist
+Icon=Bouncy Bouncy.jpg
+Deck Type=constructed
+
+[main]
+3 Sorin, Solemn Visitor|KTK
+4 Fleecemane Lion|THS
+4 Rakshasa Deathdealer|KTK
+2 Heir of the Wilds|KTK
+3 Anafenza, the Foremost|KTK
+4 Herald of Torment|BNG
+4 Siege Rhino|KTK
+4 Thoughtseize|THS
+1 Ulcerate|M15
+3 Abzan Charm|KTK
+4 Hero's Downfall|THS
+1 Plains|KTK
+2 Forest|KTK
+4 Windswept Heath|KTK
+2 Llanowar Wastes|M15
+2 Urborg, Tomb of Yawgmoth|M15
+4 Caves of Koilos|M15
+4 Temple of Malady|JOU
+1 Temple of Silence|THS
+4 Sandsteppe Citadel|KTK
+
+[sideboard]
+2 Erase|KTK
+3 Bile Blight|BNG
+3 Drown in Sorrow|BNG
+2 Despise|KTK
+1 Whip of Erebos|THS
+2 Wingmate Roc|KTK
+1 Ajani, Mentor of Heroes|JOU
+1 Silence the Believers|JOU

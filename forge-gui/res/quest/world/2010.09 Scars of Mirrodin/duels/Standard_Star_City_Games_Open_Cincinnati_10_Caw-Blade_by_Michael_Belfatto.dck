@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Michael Belfatto
+Title=Sienetta
+Difficulty=very hard
+Description=Caw-Blade by Michael Belfatto
+Icon=Sienetta.jpg
+Deck Type=constructed
+
+[main]
+2 Spellskite|NPH
+4 Squadron Hawk|M11
+2 Sun Titan|M12
+1 Deprive|ROE
+3 Dismember|NPH
+4 Mana Leak|M12
+2 Spell Pierce|ZEN
+1 Stoic Rebuttal|SOM
+3 Day of Judgment|M12
+3 Preordain|M11
+2 Sword of Feast and Famine|MBS
+1 Oblivion Ring|M12
+4 Island|M12
+3 Plains|M12
+1 Arid Mesa|ZEN
+4 Celestial Colonnade|WWK
+4 Glacial Fortress|M12
+2 Inkmoth Nexus|MBS
+1 Misty Rainforest|ZEN
+4 Seachrome Coast|SOM
+3 Tectonic Edge|WWK
+2 Gideon Jura|M12
+4 Jace Beleren|M11
+
+[sideboard]
+2 Grand Abolisher|M12
+1 Celestial Purge|M12
+3 Condemn|M11
+4 Flashfreeze|M12
+2 Negate|M12
+3 Revoke Existence|SOM

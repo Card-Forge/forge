@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Dimir God-Pharaoh's Gift by Alex Sittner
+Title=The Minotaurs
+Difficulty=very hard
+Description=Dimir God-Pharaoh's Gift by Alex Sittner
+Icon=The Minotaurs.jpg
+Deck Type=constructed
+
+[main]
+2 Kitesail Freebooter|XLN
+2 Hostage Taker|XLN
+2 Ravenous Chupacabra
+3 The Scarab God|HOU
+4 Minister of Inquiries|KLD
+1 Trophy Mage|AER
+4 Gifted Aetherborn|AER
+3 Glint-Sleeve Siphoner|AER
+4 Walking Ballista|AER
+4 Champion of Wits|HOU
+2 God-Pharaoh's Gift|HOU
+4 Gate to the Afterlife|AKH
+4 Drowned Catacomb|XLN
+3 Ipnu Rivulet|HOU
+4 Aether Hub|KLD
+4 Fetid Pools|AKH
+7 Swamp
+3 Island
+
+[sideboard]
+1 Kitesail Freebooter|XLN
+1 Ravenous Chupacabra
+1 Glint-Sleeve Siphoner|AER
+2 Negate
+1 Jace's Defeat|HOU
+2 Confiscation Coup|KLD
+2 Vraska's Contempt|XLN
+3 Knight of Malice
+1 Sorcerous Spyglass|XLN
+1 Arguel's Blood Fast|XLN

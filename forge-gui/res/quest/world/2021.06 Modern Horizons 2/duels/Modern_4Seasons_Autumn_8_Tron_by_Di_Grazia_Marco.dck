@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Tron by Di Grazia Marco
+Title=Leeching Gremlins
+Difficulty=very hard
+Description=Tron by Di Grazia Marco
+Icon=Leeching Gremlins.jpg
+Deck Type=constructed
+
+[main]
+1 Blast Zone
+4 Forest
+1 Sanctum of Ugin|BFZ
+4 Urza's Mine|9E
+4 Urza's Power Plant|9E
+4 Urza's Tower|9E
+4 Ancient Stirrings|ROE
+4 Chromatic Sphere|MR
+4 Chromatic Star|10E
+1 Emrakul, the Promised End|EMN
+4 Expedition Map|ZEN
+4 Karn Liberated|NPH
+4 Karn, the Great Creator
+3 Oblivion Stone|MR
+4 Sylvan Scrying|BFZ
+2 Ugin, the Spirit Dragon
+2 Ulamog, the Ceaseless Hunger|BFZ
+2 Walking Ballista|AER
+1 World Breaker|OGW
+3 Wurmcoil Engine|SOM
+
+[sideboard]
+1 Oblivion Stone|MR
+1 Walking Ballista|AER
+1 Wurmcoil Engine|SOM
+1 Liquimetal Coating|SOM
+2 Nature's Claim|WWK
+2 Relic of Progenitus|ALA
+1 Sundering Titan|DS
+2 Veil of Summer
+2 Warping Wail|OGW
+2 Weather the Storm

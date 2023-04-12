@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Mono Blue Aggro by Luis Salvatto
+Title=Anansi
+Difficulty=very hard
+Description=Mono Blue Aggro by Luis Salvatto
+Icon=Anansi.jpg
+Deck Type=constructed
+
+[main]
+4 Merfolk Trickster
+4 Siren Stormtamer|XLN
+4 Tempest Djinn
+2 Warkite Marauder
+4 Mist-Cloaked Herald
+2 Chart a Course|XLN
+2 Sleep
+4 Dive Down|XLN
+2 Spell Pierce|XLN
+4 Wizard's Retort
+4 Opt
+4 Curious Obsession
+20 Island

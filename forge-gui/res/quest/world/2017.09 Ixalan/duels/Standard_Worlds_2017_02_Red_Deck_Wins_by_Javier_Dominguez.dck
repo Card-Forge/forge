@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Javier Dominguez
+Title=Remilia Scarlet
+Difficulty=very hard
+Description=Red Deck Wins by Javier Dominguez
+Icon=Remilia Scarlet.jpg
+Deck Type=constructed
+
+[main]
+4 Ahn-Crop Crasher|AKH
+4 Bomat Courier|KLD
+4 Earthshaker Khenra|HOU
+4 Hazoret the Fervent|AKH
+3 Kari Zev, Skyship Raider|AER
+4 Soul-Scar Mage|AKH
+4 Abrade|HOU
+4 Lightning Strike|XLN
+4 Shock|AER
+1 Chandra, Torch of Defiance|KLD
+15 Mountain|XLN
+4 Ramunap Ruins|HOU
+1 Scavenger Grounds|HOU
+4 Sunscorched Desert|AKH
+
+[sideboard]
+2 Glorybringer|AKH
+3 Pia Nalaar|KLD
+4 Rampaging Ferocidon|XLN
+3 Chandra, Torch of Defiance|KLD
+1 Aethersphere Harvester|AER
+2 Chandra's Defeat|HOU

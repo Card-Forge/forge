@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Azorius Aggro by Noriyuki Mori
+Title=Archon Namani
+Difficulty=very hard
+Description=Azorius Aggro by Noriyuki Mori
+Icon=Archon Namani.jpg
+Deck Type=constructed
+
+[main]
+1 Brutal Cathar
+1 Loyal Warhound
+2 Legion Angel
+2 Malevolent Hermit
+3 Reidane, God of the Worthy
+4 Luminarch Aspirant
+4 Elite Spellbinder
+4 Spectral Adversary
+4 Intrepid Adversary
+1 Fateful Absence
+2 Jwari Disruption
+3 Concerted Defense
+4 Fading Hope
+1 Alrund's Epiphany
+1 Hall of Storm Giants
+2 Deserted Beach
+3 Cave of the Frost Dragon
+4 Hengegate Pathway
+5 Plains
+9 Island
+
+[sideboard]
+3 Brutal Cathar
+2 Loyal Warhound
+2 Legion Angel
+2 Malevolent Hermit
+2 Fateful Absence
+1 Concerted Defense
+1 Alrund's Epiphany
+1 Ray of Frost
+1 Portable Hole

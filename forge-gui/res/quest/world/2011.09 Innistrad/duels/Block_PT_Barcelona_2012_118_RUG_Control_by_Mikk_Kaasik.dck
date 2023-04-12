@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=RUG Control by Mikk Kaasik
+Title=Professor X
+Difficulty=very hard
+Description=RUG Control by Mikk Kaasik
+Icon=Professor X.jpg
+Deck Type=constructed
+
+[main]
+4 Evolving Wilds
+3 Forest|RTR
+4 Hinterland Harbor
+3 Island|RTR
+2 Kessig Wolf Run|ISD
+6 Mountain|RTR
+4 Sulfur Falls
+2 Briarpack Alpha|M14
+4 Huntmaster of the Fells|DKA
+4 Snapcaster Mage|ISD
+3 Bonfire of the Damned|AVR
+4 Brimstone Volley|CNS
+3 Desperate Ravings|C15
+3 Garruk Relentless|ISD
+4 Geistflame|ISD
+2 Pillar of Flame|AVR
+2 Tamiyo, the Moon Sage|AVR
+3 Thought Scour|DKA
+
+[sideboard]
+2 Blasphemous Act|C16
+2 Daybreak Ranger|ISD
+2 Devil's Play|ISD
+4 Dissipate|M15
+2 Memory's Journey|ISD
+1 Tree of Redemption|ISD
+2 Zealous Conscripts|AVR

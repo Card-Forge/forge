@@ -1,0 +1,56 @@
+[duel]
+[metadata]
+Name=Omnath Witness by Logan Nettles
+Title=StAnastacia
+Difficulty=very hard
+Description=Omnath Witness by Logan Nettles
+Icon=StAnastacia.jpg
+Deck Type=constructed
+
+[main]
+1 Time Warp|M10
+1 Path to Exile|CFX
+2 Abundant Harvest
+2 Counterspell|7E
+3 Lightning Bolt|M11
+4 Ephemerate
+4 Prismatic Ending
+4 Expressive Iteration
+4 Abundant Growth|AVR
+4 Wrenn and Six
+4 Teferi, Time Raveler
+3 Fury
+4 Solitude
+4 Eternal Witness|FD
+4 Ice-Fang Coatl
+4 Omnath, Locus of Creation
+1 Temple Garden
+1 Snow-Covered Mountain
+1 Hallowed Fountain
+1 Stomping Ground
+1 Sacred Foundry
+1 Snow-Covered Island
+1 Prismatic Vista
+1 Snow-Covered Plains
+1 Breeding Pool
+1 Ketria Triome
+1 Raugrin Triome
+1 Steam Vents
+1 Arid Mesa|ZEN
+1 Reflecting Pool|SHM
+2 Wooded Foothills|KTK
+2 Snow-Covered Forest
+3 Flooded Strand|KTK
+3 Windswept Heath|KTK
+4 Misty Rainforest|ZEN
+
+[sideboard]
+3 Engineered Explosives|FD
+2 Flusterstorm
+2 Endurance
+2 Force of Vigor
+2 Mystical Dispute
+1 Lightning Helix|RAV
+1 Emrakul, the Promised End|EMN
+1 Yorion, Sky Nomad
+1 Counterspell|7E

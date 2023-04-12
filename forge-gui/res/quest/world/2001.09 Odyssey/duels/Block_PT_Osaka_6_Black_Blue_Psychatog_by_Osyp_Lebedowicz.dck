@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Black/Blue Psychatog by Osyp Lebedowicz
+Title=Brother Voodoo
+Difficulty=very hard
+Description=Black/Blue Psychatog by Osyp Lebedowicz
+Icon=Brother Voodoo.jpg
+Deck Type=constructed
+
+[main]
+4 Darkwater Catacombs|OD
+12 Island|A
+7 Swamp|A
+4 Psychatog|OD
+2 Shadowmage Infiltrator|OD
+4 Aether Burst|OD
+4 Chainer's Edict|TO
+4 Circular Logic|TO
+4 Concentrate|OD
+2 Obsessive Search|TO
+4 Peek|OD
+4 Predict|OD
+3 Syncopate|OD
+2 Upheaval|OD
+
+[sideboard]
+1 Upheaval|OD
+3 Ghastly Demise|OD
+2 Gloomdrifter|TO
+2 Innocent Blood|OD
+3 Skeletal Scrying|OD
+4 Zombie Infestation|OD

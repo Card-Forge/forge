@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Jeskai Midrange by Samuel Poncher
+Title=Terminator
+Difficulty=very hard
+Description=Jeskai Midrange by Samuel Poncher
+Icon=Terminator.jpg
+Deck Type=constructed
+
+[main]
+2 Teferi, Hero of Dominaria
+4 Adanto Vanguard|XLN
+3 Knight of Grace
+2 Aurelia, Exemplar of Justice
+4 Rekindling Phoenix
+3 Lyra Dawnbringer
+3 Resplendent Angel
+1 Raff Capashen, Ship's Mage
+2 Lava Coil
+2 Lightning Strike
+2 Disdainful Stroke
+1 Justice Strike
+4 History of Benalia
+2 Ixalan's Binding|XLN
+4 Sacred Foundry
+4 Steam Vents
+4 Glacial Fortress|XLN
+4 Clifftop Retreat
+2 Evolving Wilds
+1 Island
+1 Mountain
+5 Plains
+
+[sideboard]
+1 Teferi, Hero of Dominaria
+1 Lyra Dawnbringer
+1 Raff Capashen, Ship's Mage
+1 Lava Coil
+1 Disdainful Stroke
+1 Ixalan's Binding|XLN
+1 Deafening Clarion
+3 Negate
+2 Settle the Wreckage|XLN
+3 Seal Away

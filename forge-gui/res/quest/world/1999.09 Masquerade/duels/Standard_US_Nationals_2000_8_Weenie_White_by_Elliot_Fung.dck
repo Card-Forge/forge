@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Weenie White by Elliot Fung
+Title=The Dwarven Stronghold
+Difficulty=very hard
+Description=Weenie White by Elliot Fung
+Icon=The Dwarven Stronghold.jpg
+Deck Type=constructed
+
+[main]
+4 Rishadan Port|MM
+19 Plains|RTR
+2 Reverent Mantra|MM
+4 Parallax Wave|NE
+1 Glorious Anthem|10E
+3 Disenchant|CN2
+4 Crusade|6E
+3 Armageddon|ST
+4 Steadfast Guard|10E
+4 Ramosian Sergeant|MM
+4 Longbow Archer|7E
+4 Mother of Runes|CMD
+4 Fresh Volunteers|MM
+
+[sideboard]
+4 Wrath of God|C13
+2 Light of Day|6E
+1 Erase|KTK
+3 Defender en-Vec|NE
+1 Circle of Protection: Red|9E
+1 Absolute Law|US
+1 Glorious Anthem|10E
+1 Disenchant|CN2
+1 Armageddon|ST

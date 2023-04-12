@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Boros Midrange Ephemerate by Nicolasb
+Title=Iceman
+Difficulty=very hard
+Description=Boros Midrange Ephemerate by Nicolasb
+Icon=Iceman.jpg
+Deck Type=constructed
+
+[main]
+2 Emeria's Call
+3 Prismatic Ending
+3 Mana Tithe|PLC
+3 Lightning Bolt|M11
+3 Fable of the Mirror-Breaker
+4 Blood Moon|9E
+4 Ephemerate
+2 Timeless Dragon
+4 Solitude
+4 Fury
+4 Seasoned Pyromancer
+4 Ragavan, Nimble Pilferer
+1 Eiganjo, Seat of the Empire
+1 Flooded Strand|KTK
+1 Hallowed Fountain
+1 Sokenzan, Crucible of Defiance
+2 Sunbaked Canyon
+2 Den of the Bugbear
+2 Mountain
+2 Plains
+4 Sacred Foundry
+4 Arid Mesa|ZEN
+
+[sideboard]
+3 Relic of Progenitus|ALA
+2 Orvar, the All-Form
+4 The Stone Brain
+3 Teferi, Time Raveler
+2 Engineered Explosives|FD
+1 Obosh, the Preypiercer

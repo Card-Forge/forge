@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Luan Sakita
+Title=Tempo
+Difficulty=very hard
+Description=Rakdos Aggro by Luan Sakita
+Icon=Tempo.jpg
+Deck Type=constructed
+
+[main]
+1 Razorlash Transmogrant
+2 Squee, Dubious Monarch
+3 Archfiend of the Dross
+4 Monastery Swiftspear
+4 Kumano Faces Kakkazan
+4 Fable of the Mirror-Breaker
+4 Bloodtithe Harvester
+4 Bloodthirsty Adversary
+2 Play with Fire
+2 Cut Down
+3 Lightning Strike
+4 Go for the Throat
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+3 Swamp
+4 Haunted Ridge
+4 Sulfurous Springs
+4 Blackcleave Cliffs
+6 Mountain
+
+[sideboard]
+1 Cut Down
+2 The Elder Dragon War
+2 Jaya, Fiery Negotiator
+2 Brotherhood's End
+2 Reckoner Bankbuster
+3 Ob Nixilis, the Adversary
+3 Duress

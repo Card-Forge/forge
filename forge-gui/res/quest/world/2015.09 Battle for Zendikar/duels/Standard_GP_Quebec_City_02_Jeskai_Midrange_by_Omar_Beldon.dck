@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Jeskai Midrange by Omar Beldon
+Title=Shrek
+Difficulty=very hard
+Description=Jeskai Midrange by Omar Beldon
+Icon=Shrek.jpg
+Deck Type=constructed
+
+[main]
+1 Island|BFZ
+1 Swamp|BFZ
+1 Plains|BFZ
+2 Mountain|BFZ
+4 Flooded Strand|KTK
+4 Bloodstained Mire|KTK
+4 Polluted Delta|KTK
+1 Smoldering Marsh|BFZ
+1 Sunken Hollow|BFZ
+2 Prairie Stream|BFZ
+1 Nomad Outpost|KTK
+4 Mystic Monastery|KTK
+2 Fiery Impulse|ORI
+1 Dispel|BFZ
+1 Jeskai Charm|KTK
+3 Kolaghan's Command|DTK
+3 Ojutai's Command|DTK
+2 Utter End|KTK
+3 Crackling Doom|KTK
+2 Wild Slash|FRF
+1 Negate|ORI
+2 Dig Through Time|KTK
+1 Duress|DTK
+1 Dragonmaster Outcast|BFZ
+4 Mantis Rider|KTK
+2 Tasigur, the Golden Fang|FRF
+2 Soulfire Grand Master|FRF
+4 Jace, Vryn's Prodigy|ORI
+
+[sideboard]
+1 Radiant Flames|BFZ
+1 Virulent Plague|DTK
+1 Dispel|BFZ
+1 Arashin Cleric|FRF
+1 Ugin, the Spirit Dragon|FRF
+1 Planar Outburst|BFZ
+2 Mastery of the Unseen|FRF
+1 Painful Truths|BFZ
+2 Disdainful Stroke|KTK
+1 Felidar Cub|BFZ
+2 Ultimate Price|DTK
+1 Duress|DTK

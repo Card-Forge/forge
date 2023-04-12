@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Kevin Slapnik
+Title=He-Man
+Difficulty=very hard
+Description=Caw-Blade by Kevin Slapnik
+Icon=He-Man.jpg
+Deck Type=constructed
+
+[main]
+2 Spellskite|NPH
+4 Blade Splicer|NPH
+1 Consecrated Sphinx|MBS
+4 Hero of Bladehold|MBS
+4 Squadron Hawk|M11
+2 Dismember|NPH
+2 Mana Leak|M12
+4 Spell Pierce|ZEN
+4 Preordain|M11
+3 Sword of Feast and Famine|MBS
+2 Oblivion Ring|M12
+3 Island|M12
+5 Plains|M12
+4 Celestial Colonnade|WWK
+4 Glacial Fortress|M12
+2 Inkmoth Nexus|MBS
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+2 Gideon Jura|M12
+
+[sideboard]
+1 Dismember|NPH
+3 Celestial Purge|M12
+3 Flashfreeze|M12
+2 Day of Judgment|M12
+3 Revoke Existence|SOM
+3 Timely Reinforcements|M12

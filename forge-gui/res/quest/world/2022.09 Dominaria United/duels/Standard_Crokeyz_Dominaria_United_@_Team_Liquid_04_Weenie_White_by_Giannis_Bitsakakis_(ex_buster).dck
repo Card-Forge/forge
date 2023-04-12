@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Weenie White by Giannis Bitsakakis (ex buster)
+Title=The Marines
+Difficulty=very hard
+Description=Weenie White by Giannis Bitsakakis (ex buster)
+Icon=The Marines.jpg
+Deck Type=constructed
+
+[main]
+23 Plains
+1 Eiganjo, Seat of the Empire
+2 The Wandering Emperor
+4 Wedding Announcement
+4 Intrepid Adversary
+4 Guardian of New Benalia
+4 Spirited Companion
+4 Hopeful Initiate
+3 Lunarch Veteran
+3 Adeline, Resplendent Cathar
+2 Anointed Peacekeeper
+2 The Restoration of Eiganjo
+2 Serra Paragon
+2 Resolute Reinforcements
+
+[sideboard]
+4 Thalia, Guardian of Thraben
+2 Lantern Flare
+2 Extraction Specialist
+2 Cemetery Protector
+2 Brutal Cathar
+1 Curse of Silence
+2 Anointed Peacekeeper

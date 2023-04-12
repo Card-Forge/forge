@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mono Blue Control by Mike Long
+Title=DonkeyKong
+Difficulty=very hard
+Description=Mono Blue Control by Mike Long
+Icon=DonkeyKong.jpg
+Deck Type=constructed
+
+[main]
+4 Masticore|UD
+2 Morphling|US
+1 Palinchron|UL
+4 Brainstorm|C15
+4 Counterspell|7E
+4 Grim Monolith|UL
+4 Miscalculation|UL
+1 Opportunity
+4 Powder Keg|UD
+1 Rewind|M13
+2 Stroke of Genius|C15
+1 Thwart|MM
+4 Treachery|UD
+20 Island|RTR
+4 Rishadan Port|MM
+
+[sideboard]
+2 Rewind|M13
+1 Thwart|MM
+3 Annul|THS
+4 Hibernation|8E
+2 Scrying Glass|UD
+3 Seal of Removal|NE

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Izzet Control by Arne Huschenbeth
+Title=Hobbes
+Difficulty=very hard
+Description=Izzet Control by Arne Huschenbeth
+Icon=Hobbes.jpg
+Deck Type=constructed
+
+[main]
+1 Demon Bolt
+2 Burning Hands
+2 Spikefield Hazard
+2 Test of Talents
+3 Jwari Disruption
+3 Fading Hope
+3 Unexpected Windfall
+3 Galvanic Iteration
+3 Memory Deluge
+4 Divide by Zero
+1 Shatterskull Smashing
+3 Expressive Iteration
+3 Burn Down the House
+4 Alrund's Epiphany
+2 Hall of Storm Giants
+2 Field of Ruin
+3 Frostboil Snarl
+4 Riverglide Pathway
+6 Mountain
+6 Island
+
+[sideboard]
+1 Demon Bolt
+1 Burning Hands
+1 Test of Talents
+1 Environmental Sciences
+1 Teachings of the Archaics
+1 Mascot Exhibition
+1 Cinderclasm
+1 Thundering Rebuke
+2 Goldspan Dragon
+2 Malevolent Hermit
+3 Smoldering Egg

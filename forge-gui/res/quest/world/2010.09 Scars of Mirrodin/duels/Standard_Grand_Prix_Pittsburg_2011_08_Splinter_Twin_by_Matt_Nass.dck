@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Splinter Twin by Matt Nass
+Title=LeChuck
+Difficulty=very hard
+Description=Splinter Twin by Matt Nass
+Icon=LeChuck.jpg
+Deck Type=constructed
+
+[main]
+4 Deceiver Exarch|NPH
+3 Grim Lavamancer|M12
+4 Dispel|WWK
+2 Gitaxian Probe|NPH
+2 Into the Roil|ZEN
+4 Ponder|M12
+4 Preordain|M11
+4 Shrine of Piercing Vision|NPH
+2 Spell Pierce|ZEN
+4 Splinter Twin|ROE
+3 Twisted Image|SOM
+3 Arid Mesa|ZEN
+4 Halimar Depths|WWK
+5 Island|M12
+3 Misty Rainforest|ZEN
+5 Mountain|M12
+4 Scalding Tarn|ZEN
+
+[sideboard]
+1 Grim Lavamancer|M12
+3 Dragonmaster Outcast|WWK
+3 Forked Bolt|ROE
+1 Into the Core|MBS
+2 Mental Misstep|NPH
+3 Mutagenic Growth|NPH
+2 Negate|M12

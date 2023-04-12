@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=UW Control by Christophe Hostettler
+Title=Patriot Control
+Difficulty=very hard
+Description=UW Control by Christophe Hostettler
+Icon=Patriot Control.jpg
+Deck Type=constructed
+
+[main]
+4 Solitude
+2 Chalice of the Void|MR
+4 Counterspell|7E
+4 Archmage's Charm
+2 Memory Deluge
+4 Prismatic Ending
+2 Supreme Verdict|RTR
+4 Leyline Binding
+2 Dress Down
+1 Shark Typhoon
+2 Jace, the Mind Sculptor|WWK
+3 Teferi, Time Raveler
+2 Teferi, Hero of Dominaria
+3 Island
+1 Plains
+1 Otawara, Soaring City
+4 Flooded Strand|KTK
+2 Hallowed Fountain
+1 Breeding Pool
+3 Polluted Delta|KTK
+1 Misty Rainforest|ZEN
+2 Castle Vantress
+1 Hall of Storm Giants
+1 Celestial Colonnade|WWK
+2 Mystic Gate|SHM
+1 Raffine's Tower
+1 Ketria Triome
+
+[sideboard]
+1 Chalice of the Void|MR
+1 Dress Down
+1 Kaheera, the Orphanguard
+3 Hallowed Moonlight|ORI
+1 Rest in Peace|RTR
+2 Mystical Dispute
+2 Dovin's Veto
+2 Force of Negation
+2 Engineered Explosives|FD

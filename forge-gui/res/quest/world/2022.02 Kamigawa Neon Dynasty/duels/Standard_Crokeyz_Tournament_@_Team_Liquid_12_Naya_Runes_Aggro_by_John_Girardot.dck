@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Naya Runes Aggro by John Girardot
+Title=Summoner
+Difficulty=very hard
+Description=Naya Runes Aggro by John Girardot
+Icon=Summoner.jpg
+Deck Type=constructed
+
+[main]
+2 Michiko's Reign of Truth
+3 Rune of Speed
+3 Rune of Sustenance
+3 The Restoration of Eiganjo
+4 Showdown of the Skalds
+4 Rune of Might
+4 Wedding Announcement
+2 Kami of Transience
+4 Jukai Naturalist
+4 Generous Visitor
+4 Runeforge Champion
+1 Boseiju, Who Endures
+1 Lair of the Hydra
+1 Eiganjo, Seat of the Empire
+2 Plains
+2 Forest
+4 Branchloft Pathway
+4 Cragcrown Pathway
+4 Sundown Pass
+4 Needleverge Pathway
+
+[sideboard]
+4 Circle of Confinement
+2 Portable Hole
+2 Yasharn, Implacable Earth
+2 Curse of Silence
+2 Valorous Stance
+1 Brilliant Restoration
+1 Tamiyo's Safekeeping
+1 Waking the Trolls

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=UR Trix by Kai Budde
+Title=Mister Fantastic
+Difficulty=very hard
+Description=UR Trix by Kai Budde
+Icon=Mister Fantastic.jpg
+Deck Type=constructed
+
+[main]
+4 Sapphire Medallion|TE
+4 Merchant Scroll|HL
+3 Intuition|TE
+1 Impulse|VI
+4 Illusions of Grandeur|IA
+4 Force of Will|AL
+3 Fire // Ice|AP
+4 Donate|UD
+4 Counterspell|A
+1 Capsize|TE
+2 Brainstorm|IA
+4 Accumulated Knowledge|NE
+4 Volcanic Island|B
+4 Shivan Reef|AP
+14 Island|A
+
+[sideboard]
+2 Stroke of Genius|US
+3 Pyroclasm|IA
+4 Pyroblast|IA
+3 Morphling|US
+2 Hydroblast|IA
+1 Hibernation|US

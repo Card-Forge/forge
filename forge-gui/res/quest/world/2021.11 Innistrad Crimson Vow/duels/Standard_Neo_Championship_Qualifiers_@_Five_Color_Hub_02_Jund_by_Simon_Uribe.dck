@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jund by Simon Uribe
+Title=Traiton
+Difficulty=very hard
+Description=Jund by Simon Uribe
+Icon=Traiton.jpg
+Deck Type=constructed
+
+[main]
+2 Path of Peril
+2 Abrade
+3 Shatterskull Smashing
+3 Infernal Grasp
+4 Esika's Chariot
+1 Magda, Brazen Outlaw
+2 Valki, God of Lies
+2 Reckless Stormseeker
+2 Halana and Alena, Partners
+2 Immersturm Predator
+3 Graveyard Trespasser
+3 Florian, Voldaren Scion
+4 Goldspan Dragon
+4 Kalain, Reclusive Painter
+1 Rockfall Vale
+1 Den of the Bugbear
+2 Hive of the Eye Tyrant
+2 Swamp
+2 Mountain
+3 Haunted Ridge
+4 Blightstep Pathway
+4 Darkbore Pathway
+4 Cragcrown Pathway
+
+[sideboard]
+3 Duress
+3 Ray of Enfeeblement
+3 Go Blank
+1 Shadows' Verdict
+1 Check for Traps
+4 Power Word Kill

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Izzet Control by Arne Huschenbeth
+Title=The Clock
+Difficulty=very hard
+Description=Izzet Control by Arne Huschenbeth
+Icon=The Clock.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+2 Essence Scatter
+2 Mystical Dispute
+3 Mazemind Tome
+3 Saw It Coming
+3 Expressive Iteration
+3 Alrund's Epiphany
+4 Frost Bite
+2 Phoenix of Ash
+4 Bonecrusher Giant
+4 Brazen Borrower
+4 Goldspan Dragon
+3 Faceless Haven
+4 Riverglide Pathway
+4 Volatile Fjord
+4 Fabled Passage
+5 Snow-Covered Mountain
+5 Snow-Covered Island
+
+[sideboard]
+3 Redcap Melee
+2 Scorching Dragonfire
+2 The Akroan War
+2 Cinderclasm
+2 Disdainful Stroke
+1 Shark Typhoon
+1 Shadowspear
+1 Negate
+1 Mazemind Tome

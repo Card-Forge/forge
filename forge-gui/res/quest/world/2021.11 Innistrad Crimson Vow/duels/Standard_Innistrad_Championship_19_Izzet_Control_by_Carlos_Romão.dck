@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Izzet Control by Carlos Romão
+Title=Octavian Muerto
+Difficulty=very hard
+Description=Izzet Control by Carlos Romão
+Icon=Octavian Muerto.jpg
+Deck Type=constructed
+
+[main]
+1 Demon Bolt
+1 Behold the Multiverse
+1 The Celestus
+1 Thundering Rebuke
+2 Frost Bite
+2 Galvanic Iteration
+2 Cinderclasm
+2 Alrund's Epiphany
+3 Fading Hope
+3 Jwari Disruption
+4 Divide by Zero
+4 Spikefield Hazard
+4 Unexpected Windfall
+4 Expressive Iteration
+1 Hullbreaker Horror
+2 Lier, Disciple of the Drowned
+2 Goldspan Dragon
+1 Field of Ruin|XLN
+2 Hall of Storm Giants
+4 Snow-Covered Island|IA
+4 Stormcarved Coast
+4 Riverglide Pathway
+6 Snow-Covered Mountain|IA
+
+[sideboard]
+2 Burning Hands
+2 Test of Talents
+2 Cyclone Summoner
+2 Disdainful Stroke|KTK
+1 Mascot Exhibition
+1 Teachings of the Archaics
+1 Environmental Sciences
+1 Behold the Multiverse
+2 Frost Bite
+1 Hullbreaker Horror

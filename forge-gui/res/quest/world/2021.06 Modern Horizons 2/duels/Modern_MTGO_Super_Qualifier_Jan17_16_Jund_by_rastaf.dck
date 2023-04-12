@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Jund by rastaf
+Title=Sainted One
+Difficulty=very hard
+Description=Jund by rastaf
+Icon=Sainted One.jpg
+Deck Type=constructed
+
+[main]
+4 Wrenn and Six
+4 Dragon's Rage Channeler
+4 Ragavan, Nimble Pilferer
+4 Tarmogoyf|FUT
+4 Inquisition of Kozilek|ROE
+2 Thoughtseize|THS
+2 Abrupt Decay|RTR
+1 Fatal Push|AER
+2 Lightning Bolt|M11
+3 Unholy Heat
+4 Mishra's Bauble|CS
+1 Nihil Spellbomb|SOM
+1 Pyrite Spellbomb|MR
+1 Shadowspear
+2 Blackcleave Cliffs|SOM
+2 Blood Crypt
+4 Bloodstained Mire|KTK
+1 Forest
+1 Mountain
+1 Overgrown Tomb
+1 Stomping Ground
+1 Swamp
+4 Urza's Saga
+2 Verdant Catacombs|ZEN
+4 Wooded Foothills|KTK
+
+[sideboard]
+1 Thoughtseize|THS
+2 Nihil Spellbomb|SOM
+2 Alpine Moon
+1 Chalice of the Void|MR
+3 Engineered Explosives|FD
+1 Kolaghan's Command|DTK
+1 Lurrus of the Dream-Den
+1 Terminate|ARB
+3 Torpor Orb|NPH

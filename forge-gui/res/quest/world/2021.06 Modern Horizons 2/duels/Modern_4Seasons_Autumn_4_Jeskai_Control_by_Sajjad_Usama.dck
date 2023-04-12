@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Sajjad Usama
+Title=alaarb
+Difficulty=very hard
+Description=Jeskai Control by Sajjad Usama
+Icon=alaarb.jpg
+Deck Type=constructed
+
+[main]
+1 Shark Typhoon
+1 Jace, the Mind Sculptor|WWK
+2 Memory Deluge
+2 Teferi, Hero of Dominaria
+3 Chalice of the Void|MR
+3 Spreading Seas|ZEN
+3 Supreme Verdict|RTR
+4 Archmage's Charm
+4 Counterspell|7E
+4 Prismatic Ending
+4 Teferi, Time Raveler
+4 Solitude
+1 Steam Vents
+1 Castle Ardenvale
+1 Celestial Colonnade|WWK
+1 Misty Rainforest|ZEN
+1 Plains
+1 Raugrin Triome
+2 Glacial Fortress|XLN
+2 Hallowed Fountain
+2 Mystic Gate|SHM
+2 Castle Vantress
+3 Scalding Tarn|ZEN
+4 Island
+4 Flooded Strand|KTK
+
+[sideboard]
+1 Celestial Purge|M12
+2 Dovin's Veto
+1 Engineered Explosives|FD
+1 Flusterstorm
+1 Kaheera, the Orphanguard
+1 Monastery Mentor|FRF
+1 Mystical Dispute
+2 Rest in Peace|RTR
+2 Sunset Revelry
+1 Torpor Orb|NPH
+2 Wear // Tear|DGM

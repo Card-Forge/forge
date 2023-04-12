@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Mikołaj Drzewiecki
+Title=Peregrin Took
+Difficulty=very hard
+Description=Esper Aggro by Mikołaj Drzewiecki
+Icon=Peregrin Took.jpg
+Deck Type=constructed
+
+[main]
+1 Bloodchief's Thirst
+2 Lolth, Spider Queen
+2 Emeria's Call
+2 Duress
+2 Vanishing Verse
+3 The Wandering Emperor
+4 The Meathook Massacre
+4 Kaito Shizuki
+1 All-Seeing Arbiter
+1 Sanctuary Warden
+2 Nullpriest of Oblivion
+2 Faerie Vandal
+2 Obscura Interceptor
+4 Raffine, Scheming Seer
+4 Tenacious Underdog
+1 Otawara, Soaring City
+1 Swamp
+2 Brightclimb Pathway
+2 Hengegate Pathway
+2 Shipwreck Marsh
+2 Hive of the Eye Tyrant
+3 Deserted Beach
+3 Shattered Sanctum
+4 Raffine's Tower
+4 Clearwater Pathway
+
+[sideboard]
+4 Ray of Enfeeblement
+1 Negate
+1 Elspeth Resplendent
+2 Bloodchief's Thirst
+1 Lolth, Spider Queen
+1 Duress
+1 The Wandering Emperor
+1 All-Seeing Arbiter
+1 Sanctuary Warden
+2 Obscura Interceptor

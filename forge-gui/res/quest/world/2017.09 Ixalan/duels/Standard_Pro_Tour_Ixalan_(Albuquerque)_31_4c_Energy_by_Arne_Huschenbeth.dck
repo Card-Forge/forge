@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=4c Energy by Arne Huschenbeth
+Title=Dungeon Crawling Green
+Difficulty=very hard
+Description=4c Energy by Arne Huschenbeth
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Torch of Defiance|KLD
+3 Bristling Hydra|KLD
+3 Glorybringer|AKH
+4 Longtusk Cub|KLD
+4 Rogue Refiner|AER
+4 Servant of the Conduit|KLD
+4 Whirler Virtuoso|KLD
+3 The Scarab God|HOU
+4 Attune with Aether|KLD
+2 Magma Spray|AKH
+1 Abrade|HOU
+4 Harnessed Lightning|KLD
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+3 Forest|XLN
+2 Mountain|XLN
+3 Rootbound Crag|XLN
+2 Spirebluff Canal|KLD
+1 Island|XLN
+1 Sheltered Thicket|AKH
+1 Blooming Marsh|KLD
+1 Swamp|XLN
+
+[sideboard]
+2 Abrade|HOU
+2 Chandra's Defeat|HOU
+1 Appetite for the Unnatural|KLD
+1 Lifecrafter's Bestiary|AER
+3 Negate|AER
+2 Vizier of Many Faces|AKH
+2 Jace's Defeat|HOU
+1 Cartouche of Ambition|AKH
+1 Confiscation Coup|KLD

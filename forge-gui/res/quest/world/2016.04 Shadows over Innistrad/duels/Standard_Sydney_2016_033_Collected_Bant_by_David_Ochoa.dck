@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Collected Bant by David Ochoa
+Title=Bilbo Baggins
+Difficulty=very hard
+Description=Collected Bant by David Ochoa
+Icon=Bilbo Baggins.jpg
+Deck Type=constructed
+
+[main]
+4 Sylvan Advocate|OGW
+4 Duskwatch Recruiter|SOI
+4 Selfless Spirit|EMN
+1 Jace, Vryn's Prodigy|ORI
+4 Spell Queller|EMN
+4 Reflector Mage|OGW
+3 Tireless Tracker|SOI
+2 Archangel Avacyn|SOI
+4 Collected Company|DTK
+4 Dromoka's Command|DTK
+4 Evolving Wilds
+3 Fortified Village|SOI
+3 Prairie Stream|BFZ
+6 Plains|RTR
+1 Island|RTR
+3 Forest|RTR
+4 Yavimaya Coast|ORI
+2 Lumbering Falls|BFZ
+
+[sideboard]
+1 Jace, Vryn's Prodigy|ORI
+1 Tireless Tracker|SOI
+2 Clash of Wills|ORI
+1 Negate
+1 Subjugator Angel|EMN
+2 Ojutai's Command|DTK
+2 Tamiyo, Field Researcher|EMN
+2 Nissa, Vastwood Seer|ORI
+3 Gnarlwood Dryad|EMN

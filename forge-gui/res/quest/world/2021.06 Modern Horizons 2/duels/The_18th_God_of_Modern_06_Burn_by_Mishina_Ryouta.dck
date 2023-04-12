@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Burn by Mishina Ryouta
+Title=A Thunderstorm
+Difficulty=very hard
+Description=Burn by Mishina Ryouta
+Icon=A Thunderstorm.jpg
+Deck Type=constructed
+
+[main]
+4 Goblin Guide|ZEN
+4 Eidolon of the Great Revel|JOU
+4 Monastery Swiftspear|KTK
+2 Skullcrack|GTC
+2 Lightning Helix|RAV
+4 Boros Charm|GTC
+4 Lightning Bolt|M11
+4 Searing Blaze|WWK
+4 Lava Spike|CHK
+4 Skewer the Critics
+4 Rift Bolt|TSP
+1 Fiery Islet
+2 Sacred Foundry
+2 Bloodstained Mire|KTK
+3 Mountain
+4 Sunbaked Canyon
+4 Inspiring Vantage|KLD
+4 Wooded Foothills|KTK
+
+[sideboard]
+1 Lurrus of the Dream-Den
+2 Deflecting Palm|KTK
+3 Roiling Vortex
+3 Smash to Smithereens|ORI
+3 Sanctifier en-Vec
+3 Path to Exile|CFX

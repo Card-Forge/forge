@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Juan Jose Rodriguez Lopez
+Title=Vodalia
+Difficulty=very hard
+Description=Mono Green Aggro by Juan Jose Rodriguez Lopez
+Icon=Vodalia.jpg
+Deck Type=constructed
+
+[main]
+19 Forest
+4 Castle Garenbrig
+3 Giant Growth
+4 Lovestruck Beast
+4 Questing Beast
+4 Scavenging Ooze
+4 Stonecoil Serpent
+4 Pelt Collector
+4 Barkhide Troll
+3 Gemrazer
+1 Shifting Ceratops
+2 Yorvo, Lord of Garenbrig
+2 Syr Faren, the Hengehammer
+2 Gingerbrute
+
+[sideboard]
+4 Oakhame Adversary
+3 Primal Might
+3 Vivien, Champion of the Wilds
+2 Ram Through
+1 Ranger's Guile
+2 Shifting Ceratops

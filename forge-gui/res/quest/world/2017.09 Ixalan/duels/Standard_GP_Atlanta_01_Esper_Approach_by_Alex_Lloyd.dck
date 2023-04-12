@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Esper Approach by Alex Lloyd
+Title=Shaitan
+Difficulty=very hard
+Description=Esper Approach by Alex Lloyd
+Icon=Shaitan.jpg
+Deck Type=constructed
+
+[main]
+2 Fumigate|KLD
+2 Cast Out|AKH
+2 Search for Azcanta|XLN
+3 Approach of the Second Sun|AKH
+4 Opt|XLN
+4 Censor|AKH
+4 Disallow|AER
+4 Fatal Push|AER
+4 Glimmer of Genius|KLD
+4 Settle the Wreckage|XLN
+1 Torrential Gearhulk|KLD
+1 Island|XLN
+2 Aether Hub|KLD
+3 Plains|XLN
+4 Drowned Catacomb|XLN
+4 Concealed Courtyard|KLD
+4 Irrigated Farmland|AKH
+4 Fetid Pools|AKH
+4 Glacial Fortress|XLN
+
+[sideboard]
+2 The Scarab God|HOU
+4 Regal Caracal|AKH
+1 Jace's Defeat|HOU
+2 Negate|AER
+1 Pull from Tomorrow|AKH
+2 Vraska's Contempt|XLN
+1 Search for Azcanta|XLN
+2 Torrential Gearhulk|KLD

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Temur Energy by Marc Oswald
+Title=Blood Oath
+Difficulty=very hard
+Description=Temur Energy by Marc Oswald
+Icon=Blood Oath.jpg
+Deck Type=constructed
+
+[main]
+1 Island|XLN
+2 Mountain|XLN
+3 Forest|XLN
+2 Sheltered Thicket|AKH
+3 Rootbound Crag|XLN
+3 Spirebluff Canal|KLD
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+3 Abrade|HOU
+4 Harnessed Lightning|KLD
+2 Confiscation Coup|KLD
+4 Attune with Aether|KLD
+4 Glorybringer|AKH
+2 Bristling Hydra|KLD
+4 Whirler Virtuoso|KLD
+4 Rogue Refiner|AER
+4 Longtusk Cub|KLD
+4 Servant of the Conduit|KLD
+3 Chandra, Torch of Defiance|KLD
+
+[sideboard]
+2 Vizier of Many Faces|AKH
+2 Nissa, Steward of Elements|AKH
+2 Appetite for the Unnatural|KLD
+2 Magma Spray|AKH
+4 Negate|AER
+2 Chandra's Defeat|HOU
+1 River's Rebuke|XLN

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Amulet Titan by Emilio Casas
+Title=Kefnet the Mindful
+Difficulty=very hard
+Description=Amulet Titan by Emilio Casas
+Icon=Kefnet the Mindful.jpg
+Deck Type=constructed
+
+[main]
+2 Azusa, Lost but Seeking
+4 Primeval Titan|M12
+4 Dryad of the Ilysian Grove
+4 Arboreal Grazer
+2 Cultivator Colossus
+4 Amulet of Vigor|WWK
+1 Expedition Map|ZEN
+4 Summoner's Pact|FUT
+2 Explore|WWK
+4 Urza's Saga
+1 Sunhome, Fortress of the Legion|RAV
+1 Vesuva|TSP
+4 Simic Growth Chamber|DIS
+4 The Mycosynth Gardens
+2 Tolaria West|FUT
+1 Golgari Rot Farm|RAV
+2 Selesnya Sanctuary|RAV
+2 Gruul Turf|GP
+4 Forest
+1 Slayers' Stronghold|AVR
+2 Valakut, the Molten Pinnacle|ZEN
+1 Boros Garrison|RAV
+2 Boseiju, Who Endures
+2 Cavern of Souls|AVR
+
+[sideboard]
+1 Boseiju, Who Endures
+3 Endurance
+2 Force of Vigor
+2 Engineered Explosives|FD
+2 Oblivion Stone|MR
+2 Tireless Tracker|SOI
+1 Tyrranax Rex
+2 Dismember|NPH

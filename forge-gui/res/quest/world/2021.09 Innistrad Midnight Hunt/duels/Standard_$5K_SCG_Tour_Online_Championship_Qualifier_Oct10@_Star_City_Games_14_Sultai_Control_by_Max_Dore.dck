@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Sultai Control by Max Dore
+Title=Fungus Master
+Difficulty=very hard
+Description=Sultai Control by Max Dore
+Icon=Fungus Master.jpg
+Deck Type=constructed
+
+[main]
+1 Disdainful Stroke
+1 Jwari Disruption
+1 Negate
+2 Lolth, Spider Queen
+2 Infernal Grasp
+2 The Meathook Massacre
+3 Esika's Chariot
+3 Binding the Old Gods
+4 Wrenn and Seven
+4 Storm the Festival
+4 Briarbridge Tracker
+4 Tangled Florahedron
+4 Rootcoil Creeper
+1 Forest
+1 Hall of Storm Giants
+2 Rimewood Falls
+2 Lair of the Hydra
+3 Woodland Chasm
+4 Darkbore Pathway
+4 Barkchannel Pathway
+4 Clearwater Pathway
+4 Shipwreck Marsh
+
+[sideboard]
+1 Culling Ritual
+1 Toski, Bearer of Secrets
+1 Shadows' Verdict
+1 Iymrith, Desert Doom
+1 Intrepid Outlander
+1 Koma, Cosmos Serpent
+2 Power Word Kill
+2 Test of Talents
+2 Duress
+3 Malevolent Hermit

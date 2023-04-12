@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=[Rogue] Rites of the Aeons by Steve Sadin
+Title=zatanna
+Difficulty=very hard
+Description=[Rogue] Rites of the Aeons by Steve Sadin
+Icon=zatanna.jpg
+Deck Type=constructed
+
+[main]
+2 Foresee|M11
+2 Gaea's Blessing
+2 Stormbind|TSP
+3 Delay|FUT
+4 Search for Tomorrow|TSP
+4 Rites of Flourishing|C16
+4 Walk the Aeons|TSP
+2 Brine Elemental|C14
+2 Venser, Shaper Savant|FUT
+2 Fathom Seer|C14
+4 Vesuvan Shapeshifter|TSP
+4 Wall of Roots|TSP
+1 Urza's Factory|C13
+1 Mountain|RTR
+1 Pendelhaven|TSP
+4 Llanowar Reborn|C15
+4 Terramorphic Expanse|C16
+5 Forest|RTR
+9 Island|RTR
+
+[sideboard]
+4 Scryb Ranger|TSP
+1 Thelonite Hermit|C16
+2 Riftsweeper|FUT
+3 Spell Burst|TSP
+4 Snapback|TSP
+1 Stormbind|TSP

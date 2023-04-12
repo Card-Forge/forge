@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Omnath Ramp by Ken Yukuhiro
+Title=IdiAmin
+Difficulty=very hard
+Description=Omnath Ramp by Ken Yukuhiro
+Icon=IdiAmin.jpg
+Deck Type=constructed
+
+[main]
+2 Giant Killer
+2 Brazen Borrower
+2 Lovestruck Beast
+4 Fae of Wishes
+4 Omnath, Locus of Creation
+4 Beanstalk Giant
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Lucky Clover
+1 Spikefield Hazard
+3 Escape to the Wilds
+1 Riverglide Pathway
+1 Plains
+2 Raugrin Triome
+2 Ketria Triome
+2 Mountain
+2 Cragcrown Pathway
+4 Forest
+4 Branchloft Pathway
+4 Island
+4 Fabled Passage
+
+[sideboard]
+1 Escape to the Wilds
+1 Ugin, the Spirit Dragon
+1 Redcap Melee
+1 Primal Might
+1 Kazuul's Fury
+1 Once and Future
+1 Negate
+1 Mystical Dispute
+2 Phoenix of Ash
+2 Drannith Magistrate
+3 Shredded Sails

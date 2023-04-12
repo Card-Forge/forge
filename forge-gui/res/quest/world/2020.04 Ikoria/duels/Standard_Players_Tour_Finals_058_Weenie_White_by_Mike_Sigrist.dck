@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Weenie White by Mike Sigrist
+Title=Neo
+Difficulty=very hard
+Description=Weenie White by Mike Sigrist
+Icon=Neo.jpg
+Deck Type=constructed
+
+[main]
+2 Tithe Taker
+2 Selfless Savior
+4 Stonecoil Serpent
+4 Venerated Loxodon
+4 Seasoned Hallowblade
+4 Giant Killer
+4 Garrison Cat
+4 Hunted Witness
+3 Unbreakable Formation
+4 Raise the Alarm
+4 Glorious Anthem
+4 Castle Ardenvale
+17 Plains
+
+[sideboard]
+2 Tithe Taker
+1 Unbreakable Formation
+2 Glass Casket
+3 Fight as One
+3 Devout Decree
+4 Gideon Blackblade

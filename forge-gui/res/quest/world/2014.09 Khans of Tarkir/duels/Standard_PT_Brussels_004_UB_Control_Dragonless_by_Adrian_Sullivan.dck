@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=UB Control Dragonless by Adrian Sullivan
+Title=Fin Fang Foom
+Difficulty=very hard
+Description=UB Control Dragonless by Adrian Sullivan
+Icon=Fin Fang Foom.jpg
+Deck Type=constructed
+
+[main]
+2 Ashiok, Nightmare Weaver|THS
+1 Liliana Vess|M15
+2 Ugin, the Spirit Dragon|FRF
+1 Crux of Fate|FRF
+1 Drown in Sorrow|BNG
+4 Bile Blight|BNG
+3 Dig Through Time|KTK
+1 Dissipate|M15
+4 Dissolve|THS
+1 Dragonlord's Prerogative|DTK
+4 Hero's Downfall|THS
+2 Jace's Ingenuity|M15
+2 Silence the Believers|JOU
+1 Ultimate Price|DTK
+1 Aetherspouts|M15
+3 Perilous Vault|M15
+4 Dismal Backwater|FRF
+2 Opulent Palace|KTK
+4 Polluted Delta|KTK
+3 Radiant Fountain|M15
+4 Temple of Deceit|THS
+1 Temple of Enlightenment|BNG
+1 Temple of Malady|JOU
+1 Urborg, Tomb of Yawgmoth|M15
+3 Island|DTK
+4 Swamp|DTK
+
+[sideboard]
+1 Ashiok, Nightmare Weaver|THS
+2 Drown in Sorrow|BNG
+1 Aetherspouts|M15
+1 Pearl Lake Ancient|KTK
+1 Tasigur, the Golden Fang|FRF
+1 Cranial Archive|KTK
+2 Disdainful Stroke|KTK
+1 Interpret the Signs|JOU
+2 Negate|DTK
+1 Pharika's Cure|THS
+2 Thoughtseize|THS

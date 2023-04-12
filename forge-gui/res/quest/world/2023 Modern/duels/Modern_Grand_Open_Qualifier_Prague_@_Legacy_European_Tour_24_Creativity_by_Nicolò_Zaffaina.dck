@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Creativity by Nicolò Zaffaina
+Title=alasunsinger
+Difficulty=very hard
+Description=Creativity by Nicolò Zaffaina
+Icon=alasunsinger.jpg
+Deck Type=constructed
+
+[main]
+4 Fable of the Mirror-Breaker
+4 Archon of Cruelty
+4 Lightning Bolt|M11
+3 Spell Pierce
+3 Prismari Command
+4 Indomitable Creativity|AER
+2 Prismatic Ending
+1 Persist
+1 Transmogrify
+4 Leyline Binding
+4 Wrenn and Six
+2 Teferi, Time Raveler
+4 Bloodstained Mire|KTK
+4 Wooded Foothills|KTK
+4 Scalding Tarn|ZEN
+1 Ziatora's Proving Ground
+1 Raugrin Triome
+1 Ketria Triome
+1 Sacred Foundry
+1 Steam Vents
+1 Blood Crypt
+1 Stomping Ground
+4 Dwarven Mine
+1 Mountain
+
+[sideboard]
+2 Boseiju, Who Endures
+2 Flusterstorm
+2 Veil of Summer
+2 Hallowed Moonlight|ORI
+2 Wear // Tear|DGM
+2 Leyline of the Void
+3 Serra's Emissary

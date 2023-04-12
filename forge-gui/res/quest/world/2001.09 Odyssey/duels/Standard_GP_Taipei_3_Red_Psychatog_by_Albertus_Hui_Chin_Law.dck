@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Red Psychatog by Albertus Hui Chin Law
+Title=Solaire
+Difficulty=very hard
+Description=Red Psychatog by Albertus Hui Chin Law
+Icon=Solaire.jpg
+Deck Type=constructed
+
+[main]
+2 Darkwater Catacombs|OD
+9 Island|OD
+2 Salt Marsh|IN
+1 Shadowblood Ridge|OD
+4 Shivan Reef|AP
+2 Sulfurous Springs|7E
+4 Urborg Volcano|IN
+4 Flametongue Kavu|PS
+3 Merfolk Looter|7E
+4 Nightscape Familiar|PS
+3 Psychatog|OD
+3 Burning Wish|JU
+4 Circular Logic|TO
+2 Cremate|IN
+2 Deep Analysis|TO
+4 Fact or Fiction|IN
+4 Fire // Ice|AP
+3 Memory Lapse|7E
+
+[sideboard]
+1 Deep Analysis|TO
+3 Chainer's Edict|TO
+1 Delusions of Mediocrity|7E
+3 Duress|7E
+2 Engineered Plague|7E
+2 Gainsay|PS
+1 Haunting Echoes|OD
+1 Obliterate|IN
+1 Upheaval|OD

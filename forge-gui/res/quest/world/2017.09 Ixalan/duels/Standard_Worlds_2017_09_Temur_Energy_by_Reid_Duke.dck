@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Temur Energy by Reid Duke
+Title=Nagini
+Difficulty=very hard
+Description=Temur Energy by Reid Duke
+Icon=Nagini.jpg
+Deck Type=constructed
+
+[main]
+4 Servant of the Conduit|KLD
+4 Longtusk Cub|KLD
+4 Rogue Refiner|AER
+4 Whirler Virtuoso|KLD
+3 Bristling Hydra|KLD
+3 Glorybringer|AKH
+4 Attune with Aether|KLD
+2 Confiscation Coup|KLD
+1 Commit // Memory|AKH
+4 Harnessed Lightning|KLD
+1 Abrade|HOU
+2 Magma Spray|AKH
+2 Essence Scatter|AKH
+4 Forest|XLN
+1 Island|XLN
+2 Mountain|XLN
+4 Botanical Sanctum|KLD
+4 Aether Hub|KLD
+3 Rootbound Crag|XLN
+3 Spirebluff Canal|KLD
+1 Sheltered Thicket|AKH
+
+[sideboard]
+1 Confiscation Coup|KLD
+1 Abrade|HOU
+4 Negate|AER
+1 Supreme Will|HOU
+2 Appetite for the Unnatural|KLD
+2 Torrential Gearhulk|KLD
+1 Glimmer of Genius|KLD
+1 Chandra, Torch of Defiance|KLD
+1 Chandra's Defeat|HOU
+1 Aethersphere Harvester|AER

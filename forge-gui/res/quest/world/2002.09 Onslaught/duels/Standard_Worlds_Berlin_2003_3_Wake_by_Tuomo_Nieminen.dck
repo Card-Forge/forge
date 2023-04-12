@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Wake by Tuomo Nieminen
+Title=Traiton
+Difficulty=very hard
+Description=Wake by Tuomo Nieminen
+Icon=Traiton.jpg
+Deck Type=constructed
+
+[main]
+4 Flooded Strand|KTK
+3 Forest|RTR
+8 Island|RTR
+4 Krosan Verge|C16
+4 Plains|RTR
+3 Sungrass Prairie|C16
+2 Circular Logic|TO
+4 Compulsion|TO
+2 Concentrate|C14
+3 Cunning Wish|JU
+1 Decree of Justice|C14
+3 Deep Analysis|C13
+4 Mana Leak|M11
+3 Mirari's Wake|CNS
+4 Moment's Peace|OD
+2 Renewed Faith|AKH
+2 Star Compass|8E
+4 Wrath of God|C13
+
+[sideboard]
+1 Circular Logic|TO
+1 Decree of Justice|C14
+1 Renewed Faith|AKH
+2 Circle of Protection: Red|9E
+3 Exalted Angel|ONS
+1 Hunting Pack|CMD
+1 Krosan Reclamation|JU
+2 Ray of Revelation|DKA
+1 Read the Runes|C16
+1 Stifle|CNS
+1 Wing Shards|C14

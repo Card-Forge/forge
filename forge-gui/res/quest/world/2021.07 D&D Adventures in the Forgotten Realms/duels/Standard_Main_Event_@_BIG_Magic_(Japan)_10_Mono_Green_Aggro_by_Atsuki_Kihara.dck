@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Atsuki Kihara
+Title=Eshu
+Difficulty=very hard
+Description=Mono Green Aggro by Atsuki Kihara
+Icon=Eshu.jpg
+Deck Type=constructed
+
+[main]
+2 Stonecoil Serpent
+2 Oakhame Adversary
+3 Questing Beast
+4 Gemrazer
+4 Kazandu Mammoth
+4 Lovestruck Beast
+4 Werewolf Pack Leader
+4 Swarm Shambler
+2 Ram Through
+4 Blizzard Brawl
+4 Ranger Class
+4 Faceless Haven
+19 Snow-Covered Forest
+
+[sideboard]
+2 Oakhame Adversary
+2 Ram Through
+1 Garruk, Unleashed
+2 Scavenging Ooze
+4 Snakeskin Veil
+4 Run Afoul

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Hammer Time by Dirk Kleinemeier
+Title=Jafar
+Difficulty=very hard
+Description=Hammer Time by Dirk Kleinemeier
+Icon=Jafar.jpg
+Deck Type=constructed
+
+[main]
+4 Esper Sentinel
+1 Gingerbrute
+4 Puresteel Paladin|NPH
+2 Ornithopter|AER
+2 Giver of Runes
+4 Stoneforge Mystic|WWK
+2 Memnite|SOM
+1 Kor Outfitter|ZEN
+1 Kaldra Compleat
+1 Shadowspear
+4 Colossus Hammer
+3 Springleaf Drum|BNG
+2 Blacksmith's Skill
+2 Spell Pierce
+1 Steelshaper's Gift|FD
+4 Urza's Saga
+4 Sigarda's Aid|EMN
+4 Plains
+1 Silent Clearing
+1 Hallowed Fountain
+3 Inkmoth Nexus|MBS
+1 Flooded Strand|KTK
+1 Windswept Heath|KTK
+3 Seachrome Coast
+4 Marsh Flats|ZEN
+
+[sideboard]
+2 Spell Pierce
+1 Pithing Needle
+1 Lavinia, Azorius Renegade
+4 Sanctifier en-Vec
+4 March of Otherworldly Light
+2 Drannith Magistrate
+1 Orvar, the All-Form

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Pickles by Kenji Tsumura
+Title=Jafar
+Difficulty=very hard
+Description=Pickles by Kenji Tsumura
+Icon=Jafar.jpg
+Deck Type=constructed
+
+[main]
+18 Island|RTR
+4 Dreadship Reef|C16
+4 Vesuvan Shapeshifter|TSP
+4 Desert|TSP
+4 Riftwing Cloudskate|TSP
+4 Delay|FUT
+4 Ancestral Vision|TSP
+3 Cancel
+3 Brine Elemental|C14
+3 Teferi, Mage of Zhalfir|TSP
+2 Serrated Arrows|TSP
+2 Willbender|C14
+2 Venser, Shaper Savant|FUT
+2 Urza's Factory|C13
+1 Fathom Seer|C14
+
+[sideboard]
+1 Cancel
+1 Brine Elemental|C14
+2 Serrated Arrows|TSP
+2 Willbender|C14
+1 Venser, Shaper Savant|FUT
+1 Fathom Seer|C14
+3 Aeon Chronicler|C16
+2 Take Possession|FUT
+2 Snapback|TSP

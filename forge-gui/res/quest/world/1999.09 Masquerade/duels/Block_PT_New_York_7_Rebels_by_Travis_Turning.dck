@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Rebels by Travis Turning
+Title=Prince Bolbuss
+Difficulty=very hard
+Description=Rebels by Travis Turning
+Icon=Prince Bolbuss.jpg
+Deck Type=constructed
+
+[main]
+1 Arrest|RTR
+2 Ramosian Rally|MM
+2 Seal of Cleansing|C15
+3 Parallax Wave|NE
+3 Reverent Mantra|MM
+3 Last Breath|THS
+1 Defiant Falcon|NE
+1 Lightbringer|NE
+1 Ramosian Lieutenant|MM
+1 Thermal Glider|MM
+1 Cho-Manno, Revolutionary|10E
+2 Nightwind Glider|MM
+2 Rappelling Scouts|MM
+3 Fresh Volunteers|MM
+4 Steadfast Guard|10E
+4 Lin Sivvi, Defiant Hero|NE
+4 Ramosian Sergeant|MM
+1 Kor Haven|NE
+4 Rishadan Port|MM
+17 Plains|RTR
+
+[sideboard]
+1 Wishmonger|MM
+2 Blinding Angel|9E
+1 Devout Witness|MM
+1 Lawbringer|NE
+4 Story Circle|10E
+2 Voice of Truth|NE
+1 Seal of Cleansing|C15
+1 Reverent Mantra|MM
+1 Last Breath|THS
+1 Thermal Glider|MM

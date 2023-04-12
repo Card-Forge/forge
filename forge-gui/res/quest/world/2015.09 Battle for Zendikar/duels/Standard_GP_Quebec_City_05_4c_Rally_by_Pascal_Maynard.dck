@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=4c Rally by Pascal Maynard
+Title=Titania
+Difficulty=very hard
+Description=4c Rally by Pascal Maynard
+Icon=Titania.jpg
+Deck Type=constructed
+
+[main]
+4 Rally the Ancestors|FRF
+4 Collected Company|DTK
+3 Sidisi's Faithful|DTK
+4 Elvish Visionary|ORI
+4 Grim Haruspex|KTK
+4 Catacomb Sifter|BFZ
+4 Zulaport Cutthroat|BFZ
+4 Jace, Vryn's Prodigy|ORI
+4 Nantuko Husk|ORI
+1 Plains|BFZ
+1 Prairie Stream|BFZ
+1 Forest|BFZ
+1 Swamp|BFZ
+1 Island|BFZ
+2 Canopy Vista|BFZ
+2 Sunken Hollow|BFZ
+4 Evolving Wilds|BFZ
+4 Flooded Strand|KTK
+4 Windswept Heath|KTK
+4 Polluted Delta|KTK
+
+[sideboard]
+1 Merciless Executioner|FRF
+1 Fleshbag Marauder|ORI
+2 Arashin Cleric|FRF
+3 Dispel|BFZ
+4 Jaddi Offshoot|BFZ
+4 Murderous Cut|KTK

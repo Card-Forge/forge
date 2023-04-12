@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Sultai Energy by Jeffrey Chan
+Title=Friar Twitchel
+Difficulty=very hard
+Description=Sultai Energy by Jeffrey Chan
+Icon=Friar Twitchel.jpg
+Deck Type=constructed
+
+[main]
+4 Longtusk Cub|KLD
+4 Glint-Sleeve Siphoner|AER
+4 Winding Constrictor|AER
+4 Walking Ballista|AER
+2 Rishkar, Peema Renegade|AER
+4 Rogue Refiner|AER
+4 Hostage Taker|XLN
+1 The Scarab God|HOU
+4 Attune with Aether|KLD
+4 Fatal Push|AER
+4 Blossoming Defense|KLD
+4 Blooming Marsh|KLD
+4 Botanical Sanctum|KLD
+4 Aether Hub|KLD
+2 Fetid Pools|AKH
+4 Forest|XLN
+2 Swamp|XLN
+1 Island|XLN
+
+[sideboard]
+1 The Scarab God|HOU
+3 Deathgorge Scavenger|XLN
+3 Duress|XLN
+2 Negate|AER
+1 Spell Pierce|XLN
+1 Essence Scatter|AKH
+1 Vizier of Many Faces|AKH
+1 Gonti, Lord of Luxury|KLD
+2 Vraska's Contempt|XLN

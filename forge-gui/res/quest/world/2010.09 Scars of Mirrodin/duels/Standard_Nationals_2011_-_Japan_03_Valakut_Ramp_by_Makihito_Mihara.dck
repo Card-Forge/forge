@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Valakut Ramp by Makihito Mihara
+Title=Alouroua
+Difficulty=very hard
+Description=Valakut Ramp by Makihito Mihara
+Icon=Alouroua.jpg
+Deck Type=constructed
+
+[main]
+4 Evolving Wilds|ROE
+5 Forest|M12
+10 Mountain|M12
+1 Raging Ravine|WWK
+2 Terramorphic Expanse|M11
+4 Valakut, the Molten Pinnacle|ZEN
+2 Verdant Catacombs|ZEN
+2 Avenger of Zendikar|WWK
+1 Birds of Paradise|M12
+4 Oracle of Mul Daya|ZEN
+3 Overgrown Battlement|ROE
+4 Primeval Titan|M12
+4 Cultivate|M11
+2 Explore|WWK
+4 Green Sun's Zenith|MBS
+2 Lightning Bolt|M11
+4 Rampant Growth|M12
+1 Summoning Trap|ZEN
+1 Tumble Magnet|SOM
+
+[sideboard]
+1 Tumble Magnet|SOM
+1 Back to Nature|M11
+2 Creeping Corrosion|MBS
+1 Gaea's Revenge|M11
+3 Memoricide|SOM
+1 Obstinate Baloth|M11
+4 Pyroclasm|M11
+1 Swamp|M12
+1 Thrun, the Last Troll|MBS

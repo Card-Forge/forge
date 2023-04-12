@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Golgari Control by Yojiro Futamata
+Title=The Birds
+Difficulty=very hard
+Description=Golgari Control by Yojiro Futamata
+Icon=The Birds.jpg
+Deck Type=constructed
+
+[main]
+1 Dreadfeast Demon
+1 Old Rutstein
+3 Tainted Adversary
+3 Concealing Curtains
+4 Briarbridge Tracker
+4 Esika's Chariot
+2 Infernal Grasp
+1 Bloodchief's Thirst
+2 Soul Transfer
+2 Dig Up
+3 Crippling Fear
+4 Emergent Sequence
+2 Binding the Old Gods
+4 Wrenn and Seven
+1 Boseiju, Who Endures
+1 Takenuma, Abandoned Mire
+2 Deathcap Glade
+2 Lair of the Hydra
+2 Hive of the Eye Tyrant
+4 Darkbore Pathway
+6 Swamp
+6 Forest
+
+[sideboard]
+1 Infernal Grasp
+1 Bloodchief's Thirst
+1 Shadows' Verdict
+1 Culling Ritual
+1 Baleful Mastery
+2 Duress
+2 Malicious Malfunction
+3 Skyclave Shade
+3 Go Blank

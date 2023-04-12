@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Stefano Vinci
+Title=Aspect of Death
+Difficulty=very hard
+Description=Red Deck Wins by Stefano Vinci
+Icon=Aspect of Death.jpg
+Deck Type=constructed
+
+[main]
+1 Chandra, Torch of Defiance|KLD
+4 Bomat Courier|KLD
+4 Soul-Scar Mage|AKH
+4 Earthshaker Khenra|HOU
+2 Kari Zev, Skyship Raider|AER
+3 Ahn-Crop Crasher|AKH
+4 Goblin Chainwhirler
+4 Hazoret the Fervent|AKH
+4 Shock|AER
+3 Abrade|HOU
+4 Lightning Strike|XLN
+23 Mountain
+
+[sideboard]
+2 Chandra, Torch of Defiance|KLD
+1 Abrade|HOU
+1 Scavenger Grounds|HOU
+2 Chandra's Defeat|HOU
+2 Magma Spray|AKH
+3 Fight with Fire
+3 Glorybringer|AKH
+1 Aethersphere Harvester|AER

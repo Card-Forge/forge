@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Utopia Gruul by Andrew Wolbers
+Title=The Forgotten
+Difficulty=very hard
+Description=Utopia Gruul by Andrew Wolbers
+Icon=The Forgotten.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Torch of Defiance|KLD
+2 Wrenn and Six
+4 Lightning Bolt|M11
+4 Utopia Sprawl|DIS
+4 Blood Moon|9E
+2 Bonecrusher Giant
+3 Ragavan, Nimble Pilferer
+3 Klothys, God of Destiny
+4 Seasoned Pyromancer
+4 Fury
+4 Bloodbraid Elf|ARB
+4 Arbor Elf|M13
+1 Mountain
+1 Kessig Wolf Run|ISD
+2 Misty Rainforest|ZEN
+3 Stomping Ground
+4 Wooded Foothills|KTK
+4 Windswept Heath|KTK
+5 Forest
+
+[sideboard]
+3 Chalice of the Void|MR
+2 Obstinate Baloth|M11
+2 Force of Vigor
+2 Ensnaring Bridge|8E
+2 Endurance
+2 Ancient Grudge|ISD
+1 Thrun, the Last Troll|MBS
+1 Choke|8E

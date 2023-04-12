@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by Panagiotis Papadopoulos
+Title=The Thallids 2
+Difficulty=very hard
+Description=Golgari Aggro by Panagiotis Papadopoulos
+Icon=The Thallids 2.jpg
+Deck Type=constructed
+
+[main]
+3 Nissa, Voice of Zendikar|OGW
+2 Tireless Tracker|SOI
+3 Catacomb Sifter|BFZ
+4 Rishkar, Peema Renegade|AER
+4 Walking Ballista|AER
+4 Sylvan Advocate|OGW
+4 Verdurous Gearhulk|KLD
+4 Winding Constrictor|AER
+2 Distended Mindbender|EMN
+1 Ruinous Path|BFZ
+2 Fatal Push|AER
+3 Grasp of Darkness|OGW
+1 Murder
+3 Evolving Wilds
+6 Swamp|RTR
+6 Forest|RTR
+4 Blooming Marsh|KLD
+4 Hissing Quagmire|OGW
+
+[sideboard]
+1 Ruinous Path|BFZ
+1 Fatal Push|AER
+1 Murder
+2 Kalitas, Traitor of Ghet|OGW
+1 Ob Nixilis Reignited|BFZ
+1 Appetite for the Unnatural|KLD
+1 Natural State|OGW
+1 Natural Obsolescence|AER
+2 Lifecrafter's Bestiary|AER
+4 Transgress the Mind|BFZ

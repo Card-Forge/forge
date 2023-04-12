@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Carl Chase
+Title=Nissa, Genesis Mage
+Difficulty=very hard
+Description=Mono Green Aggro by Carl Chase
+Icon=Nissa, Genesis Mage.jpg
+Deck Type=constructed
+
+[main]
+1 Briarbridge Tracker
+3 Ulvenwald Oddity
+4 Ascendant Packleader
+4 Sculptor of Winter
+4 Old-Growth Troll
+4 Werewolf Pack Leader
+4 Esika's Chariot
+2 Snakeskin Veil
+4 Blizzard Brawl
+2 Ranger Class
+2 Unnatural Growth
+1 Kazandu Mammoth
+2 Lair of the Hydra
+2 Faceless Haven
+21 Snow-Covered Forest
+
+[sideboard]
+2 Snakeskin Veil
+1 Tovolar's Huntmaster
+2 Choose Your Weapon
+2 Inscription of Abundance
+2 Tajuru Blightblade
+2 Clear Shot
+2 Outland Liberator
+2 Devouring Tendrils

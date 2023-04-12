@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Grixis Control by Nakamichi Daisuke
+Title=Kane
+Difficulty=very hard
+Description=Grixis Control by Nakamichi Daisuke
+Icon=Kane.jpg
+Deck Type=constructed
+
+[main]
+2 Wandering Mind
+3 Sheoldred, the Apocalypse
+4 Corpse Appraiser
+4 Fable of the Mirror-Breaker
+4 Reckoner Bankbuster
+3 Make Disappear
+3 Abrade
+3 Go for the Throat
+1 Gix's Command
+3 Duress
+4 Invoke Despair
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+1 Otawara, Soaring City
+1 Stormcarved Coast
+2 Shivan Reef
+2 Underground River
+3 Swamp
+3 Sulfurous Springs
+4 Shipwreck Marsh
+4 Haunted Ridge
+4 Xander's Lounge
+
+[sideboard]
+1 Duress
+1 Bladecoil Serpent
+1 Ertai Resurrected
+1 Soul Transfer
+1 Siphon Insight
+1 Burn Down the House
+1 Negate
+2 Brotherhood's End
+3 Cut Down
+3 Disdainful Stroke

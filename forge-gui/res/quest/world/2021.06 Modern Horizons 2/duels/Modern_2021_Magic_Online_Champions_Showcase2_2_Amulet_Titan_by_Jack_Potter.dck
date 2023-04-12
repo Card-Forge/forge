@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Amulet Titan by Jack Potter
+Title=LeChuck
+Difficulty=very hard
+Description=Amulet Titan by Jack Potter
+Icon=LeChuck.jpg
+Deck Type=constructed
+
+[main]
+1 Azusa, Lost but Seeking
+4 Dryad of the Ilysian Grove
+4 Primeval Titan|M12
+4 Arboreal Grazer
+1 Expedition Map|ZEN
+4 Amulet of Vigor|WWK
+4 Summoner's Pact|FUT
+3 Explore|WWK
+4 Urza's Saga
+3 Karn, the Great Creator
+1 Breeding Pool
+1 Vesuva|TSP
+1 Valakut, the Molten Pinnacle|ZEN
+1 Slayers' Stronghold|AVR
+1 Radiant Fountain
+1 Gruul Turf|GP
+1 Golgari Rot Farm|RAV
+1 Crumbling Vestige|OGW
+1 Misty Rainforest|ZEN
+1 Sunhome, Fortress of the Legion|RAV
+1 Boros Garrison|RAV
+2 Castle Garenbrig
+2 Tolaria West|FUT
+2 Selesnya Sanctuary|RAV
+3 Cavern of Souls|AVR
+4 Forest
+4 Simic Growth Chamber|DIS
+
+[sideboard]
+1 Endurance
+1 Pithing Needle
+1 Engineered Explosives|FD
+1 Outland Liberator
+1 Relic of Progenitus|ALA
+1 Liquimetal Coating|SOM
+1 Tormod's Crypt
+1 Bojuka Bog|WWK
+1 Golos, Tireless Pilgrim
+1 Wurmcoil Engine|SOM
+2 Force of Vigor
+3 Veil of Summer

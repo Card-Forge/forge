@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Chris Botelho
+Title=Chandra, Pyromaster
+Difficulty=very hard
+Description=Gruul Aggro by Chris Botelho
+Icon=Chandra, Pyromaster.jpg
+Deck Type=constructed
+
+[main]
+2 Goldspan Dragon
+2 Rimrock Knight
+4 Magda, Brazen Outlaw
+4 Lovestruck Beast
+4 Edgewall Innkeeper
+4 Jaspera Sentinel
+4 Bonecrusher Giant
+2 Esika's Chariot
+3 Embercleave
+1 Disdainful Stroke
+4 Shatterskull Smashing
+2 The Akroan War
+3 Ranger Class
+2 Mountain
+3 Lair of the Hydra
+4 Cragcrown Pathway
+4 Barkchannel Pathway
+4 Forest
+4 Riverglide Pathway
+
+[sideboard]
+2 Disdainful Stroke
+2 The Akroan War
+2 Burning Hands
+2 Ox of Agonas
+2 Roiling Vortex
+2 Klothys, God of Destiny
+3 Redcap Melee

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Shota Yasooka (Japan)
+Title=Solitary Fiends
+Difficulty=very hard
+Description=Red Deck Wins by Shota Yasooka (Japan)
+Icon=Solitary Fiends.jpg
+Deck Type=constructed
+
+[main]
+4 Hazoret the Fervent|AKH
+4 Bomat Courier|KLD
+4 Soul-Scar Mage|AKH
+4 Earthshaker Khenra|HOU
+4 Ahn-Crop Crasher|AKH
+2 Harsh Mentor|AKH
+2 Kari Zev, Skyship Raider|AER
+2 Rampaging Ferocidon|XLN
+4 Shock|AER
+3 Lightning Strike|XLN
+3 Abrade|HOU
+14 Mountain|XLN
+4 Ramunap Ruins|HOU
+4 Sunscorched Desert|AKH
+2 Scavenger Grounds|HOU
+
+[sideboard]
+2 Rampaging Ferocidon|XLN
+1 Abrade|HOU
+1 Mountain|XLN
+3 Pia Nalaar|KLD
+3 Glorybringer|AKH
+4 Aethersphere Harvester|AER
+1 Sand Strangler|HOU

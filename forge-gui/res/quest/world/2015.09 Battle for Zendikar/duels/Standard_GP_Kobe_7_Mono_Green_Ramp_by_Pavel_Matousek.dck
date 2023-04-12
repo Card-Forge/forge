@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Green Ramp by Pavel Matousek
+Title=Storm
+Difficulty=very hard
+Description=Mono Green Ramp by Pavel Matousek
+Icon=Storm.jpg
+Deck Type=constructed
+
+[main]
+4 Leaf Gilder|ORI
+4 Rattleclaw Mystic|KTK
+4 Ulamog, the Ceaseless Hunger|BFZ
+2 Nissa, Vastwood Seer|ORI
+2 Dig Through Time|KTK
+4 Part the Waterveil|BFZ
+4 Nissa's Renewal|BFZ
+4 Explosive Vegetation|DTK
+3 Nissa's Pilgrimage|ORI
+2 Kiora, Master of the Depths|BFZ
+4 Ugin, the Spirit Dragon|FRF
+3 Island|BFZ
+8 Forest|BFZ
+3 Windswept Heath|KTK
+4 Lumbering Falls|BFZ
+4 Shrine of the Forsaken Gods|BFZ
+1 Prairie Stream|BFZ
+
+[sideboard]
+2 Conduit of Ruin|BFZ
+1 Void Winnower|BFZ
+4 Jaddi Offshoot|BFZ
+4 Winds of Qal Sisma|FRF
+3 Dispel|BFZ
+1 Sanctum of Ugin|BFZ

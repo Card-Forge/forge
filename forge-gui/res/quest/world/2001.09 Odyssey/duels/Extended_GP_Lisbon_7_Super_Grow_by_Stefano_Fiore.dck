@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Super Grow by Stefano Fiore
+Title=Troll Shaman
+Difficulty=very hard
+Description=Super Grow by Stefano Fiore
+Icon=Troll Shaman.jpg
+Deck Type=constructed
+
+[main]
+1 Grasslands|MI
+4 Flood Plain|MI
+4 Tropical Island|A
+4 Tundra|A
+1 Savannah|A
+1 Island|A
+3 Legacy's Allure|TE
+3 Winter Orb|A
+4 Gush|MM
+4 Brainstorm|IA
+4 Force of Will|AL
+3 Swords to Plowshares|A
+3 Daze|NE
+2 Foil|PY
+4 Land Grant|MM
+2 Sleight of Hand|P2
+4 Werebear|OD
+3 Quirion Dryad|PS
+2 Mystic Enforcer|OD
+4 Meddling Mage|PS
+
+[sideboard]
+4 Submerge|NE
+1 Armageddon|A
+3 Disenchant|A
+2 Hydroblast|IA
+3 Wax // Wane|IN
+1 Legacy's Allure|TE
+1 Swords to Plowshares|A

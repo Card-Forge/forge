@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Esper Control by Lukas Blohon
+Title=Summoner
+Difficulty=very hard
+Description=Esper Control by Lukas Blohon
+Icon=Summoner.jpg
+Deck Type=constructed
+
+[main]
+3 Jace, Vryn's Prodigy|ORI
+2 Ultimate Price|DTK
+1 Murderous Cut|KTK
+2 Utter End|KTK
+1 Complete Disregard|BFZ
+3 Foul-Tongue Invocation|DTK
+1 Clash of Wills|ORI
+1 Ojutai's Command|DTK
+4 Silumgar's Scorn|DTK
+2 Scatter to the Winds|BFZ
+4 Dig Through Time|KTK
+1 Crux of Fate|FRF
+2 Duress|DTK
+6 Island|BFZ
+2 Prairie Stream|BFZ
+4 Sunken Hollow|BFZ
+4 Flooded Strand|KTK
+2 Bloodstained Mire|KTK
+1 Shambling Vent|BFZ
+2 Haven of the Spirit Dragon|DTK
+4 Polluted Delta|KTK
+2 Dragonlord Silumgar|DTK
+4 Dragonlord Ojutai|DTK
+2 Swamp|BFZ
+
+[sideboard]
+1 Ultimate Price|DTK
+1 Duress|DTK
+1 Infinite Obliteration|ORI
+2 Tasigur, the Golden Fang|FRF
+2 Negate|ORI
+1 Surge of Righteousness|DTK
+2 Dragonlord's Prerogative|DTK
+1 Horribly Awry|BFZ
+1 Virulent Plague|DTK
+3 Arashin Cleric|FRF

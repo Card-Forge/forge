@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Grixis Control by Reid Duke (reiderrabbit)
+Title=Adun Oakenshield
+Difficulty=very hard
+Description=Grixis Control by Reid Duke (reiderrabbit)
+Icon=Adun Oakenshield.jpg
+Deck Type=constructed
+
+[main]
+1 God-Eternal Kefnet
+4 Nicol Bolas, the Ravager
+4 Bedevil
+1 Cast Down
+3 Negate
+1 Angrath's Rampage
+3 Cry of the Carnarium
+4 Discovery // Dispersal
+2 Lava Coil
+4 Thought Erasure
+3 Narset, Parter of Veils
+4 Nicol Bolas, Dragon-God
+4 Blood Crypt
+4 Dragonskull Summit|XLN
+4 Drowned Catacomb|XLN
+1 Island
+4 Steam Vents
+2 Sulfur Falls
+3 Swamp
+4 Watery Grave
+
+[sideboard]
+2 Duress
+2 Enter the God-Eternals
+2 Hostage Taker|XLN
+1 Legion Warboss
+3 Moment of Craving
+2 Ritual of Soot
+2 The Elderspell
+1 Ugin, the Ineffable

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Selesnya Aggro by Noé Alessandro Rivera Carvallo
+Title=Nelson Muntz
+Difficulty=very hard
+Description=Selesnya Aggro by Noé Alessandro Rivera Carvallo
+Icon=Nelson Muntz.jpg
+Deck Type=constructed
+
+[main]
+1 Storm the Festival
+2 Felidar Retreat
+2 Wrenn and Seven
+2 Circle of Confinement
+3 Emeria's Call
+4 Wedding Announcement
+4 Starnheim Unleashed
+4 Esika's Chariot
+2 Skyclave Apparition
+2 Yasharn, Implacable Earth
+2 Katilda, Dawnhart Prime
+4 Brutal Cathar
+4 Prosperous Innkeeper
+4 Tangled Florahedron
+1 Cave of the Frost Dragon
+2 Field of Ruin
+2 Lair of the Hydra
+3 Plains
+4 Forest
+4 Branchloft Pathway
+4 Overgrown Farmland
+
+[sideboard]
+2 Toski, Bearer of Secrets
+2 Elite Spellbinder
+2 Portable Hole
+2 Reidane, God of the Worthy
+2 Valorous Stance
+2 Felidar Retreat
+2 Skyclave Apparition
+1 Yasharn, Implacable Earth

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Winota by Takanori Watanabe
+Title=Thought Invoker
+Difficulty=very hard
+Description=Winota by Takanori Watanabe
+Icon=Thought Invoker.jpg
+Deck Type=constructed
+
+[main]
+1 Magda, Brazen Outlaw
+1 Minsc, Beloved Ranger
+1 Bonecrusher Giant
+2 Kenrith, the Returned King
+3 Blade Historian
+3 Selfless Savior
+3 Lotus Cobra
+4 Elite Spellbinder
+4 Winota, Joiner of Forces
+4 Jaspera Sentinel
+4 Prosperous Innkeeper
+4 Esika's Chariot
+1 Shatterskull Smashing
+1 Turntimber Symbiosis
+1 Ranger Class
+1 Lair of the Hydra
+1 Mountain
+1 Den of the Bugbear
+2 Plains
+2 Forest
+4 Branchloft Pathway
+4 Cragcrown Pathway
+4 Needleverge Pathway
+4 Fabled Passage
+
+[sideboard]
+1 Klothys, God of Destiny
+2 Glass Casket
+2 Reidane, God of the Worthy
+2 Roiling Vortex
+2 The Akroan War
+3 Redcap Melee
+3 Burning Hands

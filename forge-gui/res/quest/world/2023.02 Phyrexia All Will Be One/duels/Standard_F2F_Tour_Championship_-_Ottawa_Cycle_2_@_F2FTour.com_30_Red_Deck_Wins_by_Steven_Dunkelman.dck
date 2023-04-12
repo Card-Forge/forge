@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Steven Dunkelman
+Title=Luna Lovegood
+Difficulty=very hard
+Description=Red Deck Wins by Steven Dunkelman
+Icon=Luna Lovegood.jpg
+Deck Type=constructed
+
+[main]
+4 Phoenix Chick
+4 Kumano Faces Kakkazan
+4 Monastery Swiftspear
+4 Bloodthirsty Adversary
+2 Feldon, Ronom Excavator
+3 Squee, Dubious Monarch
+3 Thundering Raiju
+1 Shivan Devastator
+4 Play with Fire
+4 Lightning Strike
+2 Abrade
+2 Strangle
+1 Chandra, Dressed to Kill
+4 Mishra's Foundry
+1 Sokenzan, Crucible of Defiance
+17 Mountain
+
+[sideboard]
+2 Rending Flame
+3 Furnace Punisher
+1 Giant Cindermaw
+2 End the Festivities
+1 Brotherhood's End
+2 Bloody Betrayal
+1 Jaya, Fiery Negotiator
+3 Obliterating Bolt

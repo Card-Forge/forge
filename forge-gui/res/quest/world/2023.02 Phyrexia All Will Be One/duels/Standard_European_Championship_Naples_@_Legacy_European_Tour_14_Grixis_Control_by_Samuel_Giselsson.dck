@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Grixis Control by Samuel Giselsson
+Title=StAnastacia
+Difficulty=very hard
+Description=Grixis Control by Samuel Giselsson
+Icon=StAnastacia.jpg
+Deck Type=constructed
+
+[main]
+1 Cut Down
+1 Negate
+1 Soul Transfer
+1 Brotherhood's End
+1 Obliterating Bolt
+2 Abrade
+2 Make Disappear
+3 Go for the Throat
+3 Reckoner Bankbuster
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+1 Bladecoil Serpent
+2 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Takenuma, Abandoned Mire
+1 Swamp
+1 Stormcarved Coast
+2 Underground River
+3 Shipwreck Marsh
+3 Darkslick Shores
+3 Blackcleave Cliffs
+4 Sulfurous Springs
+4 Xander's Lounge
+4 Haunted Ridge
+
+[sideboard]
+2 Siphon Insight
+2 Razorlash Transmogrant
+2 Disdainful Stroke
+3 Cut Down
+2 Negate
+2 Brotherhood's End
+1 Bladecoil Serpent
+1 Sheoldred, the Apocalypse

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Matias Saldias
+Title=Guybrush Threepwood
+Difficulty=very hard
+Description=Rakdos Aggro by Matias Saldias
+Icon=Guybrush Threepwood.jpg
+Deck Type=constructed
+
+[main]
+2 Ob Nixilis, the Adversary
+3 Go for the Throat
+4 Play with Fire
+4 Lightning Strike
+4 Kumano Faces Kakkazan
+3 Squee, Dubious Monarch
+3 Thundering Raiju
+3 Feldon, Ronom Excavator
+4 Phoenix Chick
+4 Monastery Swiftspear
+4 Bloodthirsty Adversary
+1 Sokenzan, Crucible of Defiance
+2 Haunted Ridge
+3 Mishra's Foundry
+4 Blackcleave Cliffs
+4 Sulfurous Springs
+8 Mountain
+
+[sideboard]
+2 Unlicensed Hearse
+2 Strangle
+3 Giant Cindermaw
+2 Chandra, Dressed to Kill
+1 Cemetery Gatekeeper
+3 Bloody Betrayal
+1 Ob Nixilis, the Adversary
+1 Go for the Throat

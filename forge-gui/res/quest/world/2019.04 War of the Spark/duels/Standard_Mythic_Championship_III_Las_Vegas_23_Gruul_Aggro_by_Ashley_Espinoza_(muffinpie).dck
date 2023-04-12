@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Ashley Espinoza (muffinpie)
+Title=Wood Ramp
+Difficulty=very hard
+Description=Gruul Aggro by Ashley Espinoza (muffinpie)
+Icon=Wood Ramp.jpg
+Deck Type=constructed
+
+[main]
+4 Growth-Chamber Guardian
+4 Gruul Spellbreaker
+3 Legion Warboss
+4 Llanowar Elves
+3 Rekindling Phoenix
+4 Skarrgan Hellkite
+2 The Immortal Sun
+3 Shock
+1 Fight with Fire
+2 Lava Coil
+3 Domri, Anarch of Bolas
+3 Nissa, Who Shakes the World
+9 Forest
+7 Mountain
+4 Rootbound Crag|XLN
+4 Stomping Ground
+
+[sideboard]
+1 Legion Warboss
+1 The Immortal Sun
+1 Fight with Fire
+2 Lava Coil
+2 Collision // Colossus
+2 Dire Fleet Daredevil
+2 Nullhide Ferox
+2 Ripjaw Raptor|XLN
+2 Thrashing Brontodon

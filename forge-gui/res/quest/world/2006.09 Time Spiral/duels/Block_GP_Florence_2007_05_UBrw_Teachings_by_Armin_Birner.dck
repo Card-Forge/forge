@@ -1,0 +1,56 @@
+[duel]
+[metadata]
+Name=UBrw Teachings by Armin Birner
+Title=Great Druid
+Difficulty=very hard
+Description=UBrw Teachings by Armin Birner
+Icon=Great Druid.jpg
+Deck Type=constructed
+
+[main]
+4 Damnation|PLC
+4 Terramorphic Expanse|C16
+4 Prismatic Lens|TSP
+4 River of Tears|FUT
+3 Mystical Teachings|TSP
+3 Shadowmage Infiltrator|TSP
+3 Tolaria West|FUT
+3 Coalition Relic|FUT
+3 Urborg, Tomb of Yawgmoth|M15
+3 Island|RTR
+2 Careful Consideration|TSP
+2 Gaea's Blessing
+2 Foresee|M11
+2 Urza's Factory|C13
+2 Void|TSP
+1 Detritivore|PLC
+1 Pull from Eternity|TSP
+1 Pact of Negation|FUT
+1 Slaughter Pact|FUT
+1 Strangling Soot|TSP
+1 Tendrils of Corruption|C14
+1 Dreadship Reef|C16
+1 Graven Cairns|SHM
+1 Bogardan Hellkite|C14
+1 Forest|RTR
+1 Haunting Hymn|TSP
+1 Swamp|RTR
+1 Mountain|RTR
+1 Plains|RTR
+1 Academy Ruins|TSP
+1 Triskelavus|CMD
+
+[sideboard]
+1 Detritivore|PLC
+1 Pull from Eternity|TSP
+1 Pact of Negation|FUT
+1 Slaughter Pact|FUT
+1 Strangling Soot|TSP
+1 Tendrils of Corruption|C14
+2 Ancient Grudge|ISD
+2 Aeon Chronicler|C16
+1 Disenchant|CN2
+1 Spell Burst|TSP
+1 Extirpate|PLC
+1 Sudden Death|TSP
+1 Dismal Failure|PLC

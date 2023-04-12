@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Abzan by Paul Dean
+Title=Plague Rats
+Difficulty=very hard
+Description=Abzan by Paul Dean
+Icon=Plague Rats.jpg
+Deck Type=constructed
+
+[main]
+1 Silkwrap|DTK
+3 Murderous Cut|KTK
+3 Dromoka's Command|DTK
+3 Abzan Charm|KTK
+4 Gideon, Ally of Zendikar|BFZ
+2 Wingmate Roc|KTK
+2 Den Protector|DTK
+4 Hangarback Walker|ORI
+4 Anafenza, the Foremost|KTK
+4 Siege Rhino|KTK
+4 Warden of the First Tree|FRF
+3 Windswept Heath|KTK
+1 Swamp|BFZ
+1 Smoldering Marsh|BFZ
+1 Sunken Hollow|BFZ
+1 Prairie Stream|BFZ
+1 Plains|BFZ
+2 Canopy Vista|BFZ
+2 Llanowar Wastes|ORI
+3 Forest|BFZ
+3 Polluted Delta|KTK
+4 Flooded Strand|KTK
+4 Wooded Foothills|KTK
+
+[sideboard]
+2 Ultimate Price|DTK
+2 Transgress the Mind|BFZ
+2 Tragic Arrogance|ORI
+1 Surge of Righteousness|DTK
+1 Ruinous Path|BFZ
+1 Ob Nixilis Reignited|BFZ
+1 Abzan Charm|KTK
+2 Den Protector|DTK
+3 Duress|DTK

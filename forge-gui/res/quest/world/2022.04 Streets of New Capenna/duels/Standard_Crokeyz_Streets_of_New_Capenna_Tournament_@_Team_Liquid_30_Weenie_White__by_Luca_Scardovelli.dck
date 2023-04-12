@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Weenie White  by Luca Scardovelli
+Title=alathrax
+Difficulty=very hard
+Description=Weenie White  by Luca Scardovelli
+Icon=alathrax.jpg
+Deck Type=constructed
+
+[main]
+1 Skyclave Apparition
+1 Legion Angel
+2 Adeline, Resplendent Cathar
+3 Intrepid Adversary
+4 Luminarch Aspirant
+4 Brutal Cathar
+4 Usher of the Fallen
+4 Elite Spellbinder
+4 Hopeful Initiate
+4 Thalia, Guardian of Thraben
+1 Portable Hole
+1 Elspeth Resplendent
+4 The Wandering Emperor
+2 Eiganjo, Seat of the Empire
+2 Crawling Barrens
+3 Cave of the Frost Dragon
+16 Plains
+
+[sideboard]
+3 Skyclave Apparition
+3 Legion Angel
+1 Portable Hole
+1 Elspeth Resplendent
+1 Lion Sash
+2 Archon of Emeria
+2 Guardian of Faith
+2 Pithing Needle

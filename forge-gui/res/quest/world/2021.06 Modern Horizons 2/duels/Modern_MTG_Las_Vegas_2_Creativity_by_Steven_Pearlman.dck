@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Creativity by Steven Pearlman
+Title=Aspect of Instinct
+Difficulty=very hard
+Description=Creativity by Steven Pearlman
+Icon=Aspect of Instinct.jpg
+Deck Type=constructed
+
+[main]
+1 Emrakul, the Aeons Torn|ROE
+1 Serra's Emissary
+1 Faithful Mending
+2 Lightning Bolt|M11
+3 Remand|RAV
+3 Fire // Ice|AP
+3 Prismari Command
+3 Hard Evidence
+4 Indomitable Creativity|AER
+4 Prismatic Ending
+1 Nahiri, the Harbinger|SOI
+2 Jace, the Mind Sculptor|WWK
+4 Wrenn and Six
+4 Teferi, Time Raveler
+1 Island
+1 Stomping Ground
+1 Raugrin Triome
+1 Steam Vents
+1 Plains
+1 Ketria Triome
+2 Sacred Foundry
+4 Scalding Tarn|ZEN
+4 Arid Mesa|ZEN
+4 Wooded Foothills|KTK
+4 Dwarven Mine
+
+[sideboard]
+1 Alpine Moon
+1 Rest in Peace|RTR
+1 Wear // Tear|DGM
+2 Flusterstorm
+2 Veil of Summer
+2 Dovin's Veto
+2 Blossoming Calm
+2 Lightning Helix|RAV
+2 Supreme Verdict|RTR

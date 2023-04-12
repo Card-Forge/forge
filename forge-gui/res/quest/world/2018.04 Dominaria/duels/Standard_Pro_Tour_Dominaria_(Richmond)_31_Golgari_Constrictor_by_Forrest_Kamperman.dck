@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Golgari Constrictor by Forrest Kamperman
+Title=Shadowstorm Vizier
+Difficulty=very hard
+Description=Golgari Constrictor by Forrest Kamperman
+Icon=Shadowstorm Vizier.jpg
+Deck Type=constructed
+
+[main]
+4 Glint-Sleeve Siphoner|AER
+4 Jadelight Ranger
+4 Llanowar Elves
+3 Ravenous Chupacabra
+1 Rishkar, Peema Renegade|AER
+3 Verdurous Gearhulk|KLD
+4 Walking Ballista|AER
+4 Winding Constrictor|AER
+2 Bristling Hydra|KLD
+3 Adventurous Impulse
+2 Blossoming Defense|KLD
+2 Aethersphere Harvester|AER
+4 Aether Hub|KLD
+4 Blooming Marsh|KLD
+7 Forest
+2 Ifnir Deadlands|HOU
+2 Swamp
+4 Woodland Cemetery
+1 Vraska, Relic Seeker|XLN
+
+[sideboard]
+1 Cast Down
+3 Duress|XLN
+2 Fatal Push|AER
+2 Lifecrafter's Bestiary|AER
+1 Nissa, Vital Force|KLD
+2 Thrashing Brontodon
+1 Karn, Scion of Urza
+2 Vraska's Contempt|XLN
+1 Doomfall|HOU

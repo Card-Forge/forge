@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Azorius Soldier by Nakashima Atsushi
+Title=Ali Baba
+Difficulty=very hard
+Description=Azorius Soldier by Nakashima Atsushi
+Icon=Ali Baba.jpg
+Deck Type=constructed
+
+[main]
+3 Harbin, Vanguard Aviator
+3 Dennick, Pious Apprentice
+4 Skystrike Officer
+4 Siege Veteran
+4 Recruitment Officer
+4 Valiant Veteran
+4 Guardian of New Benalia
+4 Mindlink Mech
+1 Slip Out the Back
+2 Destroy Evil
+2 Kayla's Reconstruction
+1 The Wandering Emperor
+1 Island
+1 Mishra's Foundry
+1 Otawara, Soaring City
+1 Eiganjo, Seat of the Empire
+3 Secluded Courtyard
+3 Deserted Beach
+4 Adarkar Wastes
+4 Fortified Beachhead
+6 Plains
+
+[sideboard]
+1 Kayla's Reconstruction
+1 The Wandering Emperor
+1 Spell Pierce
+2 Loran of the Third Path
+2 Extraction Specialist
+2 Malevolent Hermit
+2 Disdainful Stroke
+4 Brutal Cathar

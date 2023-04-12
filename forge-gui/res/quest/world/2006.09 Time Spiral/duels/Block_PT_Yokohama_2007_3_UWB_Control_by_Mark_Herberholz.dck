@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=UWB Control by Mark Herberholz
+Title=Magnum
+Difficulty=very hard
+Description=UWB Control by Mark Herberholz
+Icon=Magnum.jpg
+Deck Type=constructed
+
+[main]
+2 Calciform Pools|TSP
+4 Dreadship Reef|C16
+8 Island|RTR
+1 Plains|RTR
+3 Swamp|RTR
+4 Terramorphic Expanse|C16
+3 Urborg, Tomb of Yawgmoth|M15
+2 Urza's Factory|C13
+2 Aeon Chronicler|C16
+2 Draining Whelk|TSP
+1 Teferi, Mage of Zhalfir|TSP
+4 Cancel
+3 Careful Consideration|TSP
+4 Damnation|PLC
+1 Disenchant|CN2
+1 Extirpate|PLC
+1 Haunting Hymn|TSP
+3 Mystical Teachings|TSP
+4 Prismatic Lens|TSP
+1 Pull from Eternity|TSP
+2 Sudden Death|TSP
+1 Teferi's Moat|TSP
+1 Temporal Isolation|TSP
+2 Tendrils of Corruption|C14
+
+[sideboard]
+1 Urborg, Tomb of Yawgmoth|M15
+1 Careful Consideration|TSP
+2 Extirpate|PLC
+1 Mystical Teachings|TSP
+1 Pull from Eternity|TSP
+1 Teferi's Moat|TSP
+2 Tendrils of Corruption|C14
+2 Detritivore|PLC
+1 Dismal Failure|PLC
+2 Magus of the Tabernacle|PLC
+1 Mountain|RTR

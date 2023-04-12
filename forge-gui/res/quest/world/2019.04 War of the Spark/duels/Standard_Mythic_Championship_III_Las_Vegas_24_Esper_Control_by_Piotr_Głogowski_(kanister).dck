@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Esper Control by Piotr Głogowski (kanister)
+Title=Nicol Bolas, the Deceiver
+Difficulty=very hard
+Description=Esper Control by Piotr Głogowski (kanister)
+Icon=Nicol Bolas, the Deceiver.jpg
+Deck Type=constructed
+
+[main]
+2 Basilica Bell-Haunt
+3 Hero of Precinct One
+1 Dovin's Veto
+3 Tyrant's Scorn
+1 Command the Dreadhorde
+1 Duress
+1 Kaya's Wrath
+1 The Elderspell
+4 Thought Erasure
+2 Ixalan's Binding|XLN
+2 Oath of Kaya
+4 Narset, Parter of Veils
+3 Teferi, Hero of Dominaria
+4 Teferi, Time Raveler
+1 Ugin, the Ineffable
+4 Drowned Catacomb|XLN
+4 Glacial Fortress|XLN
+4 Godless Shrine
+4 Hallowed Fountain
+1 Island
+4 Isolated Chapel
+1 Plains
+1 Swamp
+4 Watery Grave
+
+[sideboard]
+1 Basilica Bell-Haunt
+1 Command the Dreadhorde
+2 Duress
+2 Kaya's Wrath
+1 The Elderspell
+1 Ixalan's Binding|XLN
+1 Cast Down
+1 Cry of the Carnarium
+1 Despark
+2 Lyra Dawnbringer
+2 Nightveil Predator

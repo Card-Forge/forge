@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=WU God-Pharaoh's Gift by Adrian Schrenk (Austria)
+Title=Milling Martyrs
+Difficulty=very hard
+Description=WU God-Pharaoh's Gift by Adrian Schrenk (Austria)
+Icon=Milling Martyrs.jpg
+Deck Type=constructed
+
+[main]
+1 Search for Azcanta|XLN
+3 Fumigate|KLD
+3 Cast Out|AKH
+4 Refurbish|KLD
+4 Strategic Planning|HOU
+4 Chart a Course|XLN
+4 God-Pharaoh's Gift|HOU
+3 Sacred Cat|AKH
+3 Minister of Inquiries|KLD
+4 Angel of Invention|KLD
+4 Champion of Wits|HOU
+1 Hostile Desert|HOU
+1 Irrigated Farmland|AKH
+4 Glacial Fortress|XLN
+4 Ipnu Rivulet|HOU
+6 Island|XLN
+7 Plains|XLN
+
+[sideboard]
+1 Spell Pierce|XLN
+2 Angel of Sanctions|AKH
+1 Skysovereign, Consul Flagship|KLD
+2 Settle the Wreckage|XLN
+1 Jace's Defeat|HOU
+1 Fragmentize|KLD
+3 Disallow|AER
+1 Aethersphere Harvester|AER
+3 Thopter Arrest|AER

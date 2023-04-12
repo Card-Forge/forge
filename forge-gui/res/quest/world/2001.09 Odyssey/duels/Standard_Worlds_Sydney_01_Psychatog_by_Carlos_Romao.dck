@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Psychatog by Carlos Romao
+Title=The Thallids 2
+Difficulty=very hard
+Description=Psychatog by Carlos Romao
+Icon=The Thallids 2.jpg
+Deck Type=constructed
+
+[main]
+2 Cephalid Coliseum|OD
+1 Darkwater Catacombs|OD
+10 Island|OD
+4 Salt Marsh|IN
+3 Swamp|OD
+4 Underground River|7E
+4 Nightscape Familiar|PS
+4 Psychatog|OD
+3 Chainer's Edict|TO
+3 Circular Logic|TO
+4 Counterspell|7E
+3 Cunning Wish|JU
+3 Deep Analysis|TO
+3 Fact or Fiction|IN
+3 Memory Lapse|7E
+4 Repulse|IN
+2 Upheaval|OD
+
+[sideboard]
+1 Fact or Fiction|IN
+1 Coffin Purge|OD
+4 Duress|7E
+1 Gainsay|PS
+3 Ghastly Demise|OD
+1 Hibernation|7E
+1 Mana Short|7E
+1 Recoil|IN
+1 Slay|PS
+1 Teferi's Response|IN

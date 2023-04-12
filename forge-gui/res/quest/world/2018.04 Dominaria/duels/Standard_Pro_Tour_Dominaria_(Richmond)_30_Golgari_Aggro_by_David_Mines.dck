@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by David Mines
+Title=Dungeon Crawling Green
+Difficulty=very hard
+Description=Golgari Aggro by David Mines
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+
+[main]
+2 Nissa, Vital Force|KLD
+4 Llanowar Elves
+4 Glint-Sleeve Siphoner|AER
+4 Servant of the Conduit|KLD
+2 Jadelight Ranger
+4 Thrashing Brontodon
+1 Gonti, Lord of Luxury|KLD
+2 Walking Ballista|AER
+3 Fatal Push|AER
+1 Cast Down
+2 Vraska's Contempt|XLN
+2 The Eldest Reborn
+2 Ifnir Deadlands|HOU
+4 Blooming Marsh|KLD
+4 Woodland Cemetery
+4 Aether Hub|KLD
+7 Forest
+2 Swamp
+4 Karn, Scion of Urza
+2 Vraska, Relic Seeker|XLN
+
+[sideboard]
+1 Nissa, Vital Force|KLD
+1 Gonti, Lord of Luxury|KLD
+1 Fatal Push|AER
+2 Cast Down
+1 Vraska's Contempt|XLN
+4 Duress|XLN
+1 Naturalize
+1 Aethersphere Harvester|AER
+2 Doomfall|HOU
+1 Deathgorge Scavenger|XLN

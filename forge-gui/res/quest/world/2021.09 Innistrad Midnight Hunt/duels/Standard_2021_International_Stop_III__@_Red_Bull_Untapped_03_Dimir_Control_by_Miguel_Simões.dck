@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Dimir Control by Miguel Simões
+Title=SantaMuerte
+Difficulty=very hard
+Description=Dimir Control by Miguel Simões
+Icon=SantaMuerte.jpg
+Deck Type=constructed
+
+[main]
+1 The Celestus
+1 Shadows' Verdict
+2 Jwari Disruption
+2 Fading Hope
+2 Bloodchief's Thirst
+4 Duress
+4 Vanishing Verse
+4 Behold the Multiverse
+4 Consider
+4 Divide by Zero
+3 Lier, Disciple of the Drowned
+4 Sedgemoor Witch
+1 Hive of the Eye Tyrant
+2 Swamp
+2 Deserted Beach
+2 Field of Ruin
+3 Island
+3 Shipwreck Marsh
+4 Hengegate Pathway
+4 Clearwater Pathway
+4 Brightclimb Pathway
+
+[sideboard]
+3 Go Blank
+3 Malevolent Hermit
+2 Soul Shatter
+2 Ray of Enfeeblement
+1 Mascot Exhibition
+1 Environmental Sciences
+1 Teachings of the Archaics
+2 Shadows' Verdict

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Ronald Be
+Title=Crows in the Field
+Difficulty=very hard
+Description=Red Deck Wins by Ronald Be
+Icon=Crows in the Field.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra's Phoenix|M12
+4 Goblin Guide|ZEN
+4 Grim Lavamancer|M12
+2 Hero of Oxid Ridge|MBS
+2 Immolating Souleater|NPH
+1 Kargan Dragonlord|ROE
+2 Plated Geopede|ZEN
+2 Burst Lightning|ZEN
+4 Lightning Bolt|M11
+4 Searing Blaze|WWK
+4 Staggershock|ROE
+4 Shrine of Burning Rage|NPH
+1 Sword of War and Peace|NPH
+4 Arid Mesa|ZEN
+11 Mountain|M12
+4 Scalding Tarn|ZEN
+4 Teetering Peaks|ZEN
+1 Koth of the Hammer|SOM
+
+[sideboard]
+2 Chandra's Phoenix|M12
+3 Manic Vandal|M12
+2 Act of Aggression|NPH
+2 Combust|M12
+2 Dismember|NPH
+2 Arc Trail|SOM
+2 Manabarbs|M12

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Valakut ramp by Alexander Mitteness
+Title=Yemaya
+Difficulty=very hard
+Description=Valakut ramp by Alexander Mitteness
+Icon=Yemaya.jpg
+Deck Type=constructed
+
+[main]
+1 Solemn Simulacrum|M12
+1 Avenger of Zendikar|WWK
+2 Inferno Titan|M12
+1 Obstinate Baloth|M11
+3 Oracle of Mul Daya|ZEN
+4 Overgrown Battlement|ROE
+4 Primeval Titan|M12
+2 Naturalize|M12
+2 Cultivate|M11
+4 Explore|WWK
+4 Green Sun's Zenith|MBS
+3 Rampant Growth|M12
+2 Khalni Heart Expedition|ZEN
+5 Forest|M12
+12 Mountain|M12
+2 Evolving Wilds|ROE
+1 Raging Ravine|WWK
+3 Terramorphic Expanse|M11
+4 Valakut, the Molten Pinnacle|ZEN
+
+[sideboard]
+3 Obstinate Baloth|M11
+1 Naturalize|M12
+1 Gaea's Revenge|M11
+3 Combust|M12
+1 Summoning Trap|ZEN
+3 Creeping Corrosion|MBS
+3 Pyroclasm|M11

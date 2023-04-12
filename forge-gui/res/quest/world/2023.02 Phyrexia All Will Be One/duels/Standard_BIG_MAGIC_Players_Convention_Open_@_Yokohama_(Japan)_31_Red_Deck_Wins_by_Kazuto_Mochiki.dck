@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Kazuto Mochiki
+Title=Aspect of Decay
+Difficulty=very hard
+Description=Red Deck Wins by Kazuto Mochiki
+Icon=Aspect of Decay.jpg
+Deck Type=constructed
+
+[main]
+4 Squee, Dubious Monarch
+4 Feldon, Ronom Excavator
+4 Monastery Swiftspear
+4 Phoenix Chick
+4 Thundering Raiju
+4 Kumano Faces Kakkazan
+4 Bloodthirsty Adversary
+4 Lightning Strike
+4 Play with Fire
+2 Strangle
+1 Sokenzan, Crucible of Defiance
+3 Mishra's Foundry
+18 Mountain
+
+[sideboard]
+2 Strangle
+1 Bloody Betrayal
+2 Unlicensed Hearse
+2 Rebel Salvo
+2 Abrade
+3 Chandra, Dressed to Kill
+3 The Elder Dragon War

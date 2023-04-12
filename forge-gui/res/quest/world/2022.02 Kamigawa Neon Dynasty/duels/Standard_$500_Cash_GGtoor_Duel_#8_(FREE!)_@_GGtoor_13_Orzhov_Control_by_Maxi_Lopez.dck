@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Orzhov Control by Maxi Lopez
+Title=Beastmaster
+Difficulty=very hard
+Description=Orzhov Control by Maxi Lopez
+Icon=Beastmaster.jpg
+Deck Type=constructed
+
+[main]
+1 Hagra Mauling
+1 Rite of Oblivion
+1 Sorin the Mirthless
+2 Emeria's Call
+3 Lolth, Spider Queen
+3 The Wandering Emperor
+3 The Meathook Massacre
+3 Vanishing Verse
+4 Wedding Announcement
+1 Legion Angel
+1 Welcoming Vampire
+2 Valki, God of Lies
+3 Edgar, Charmed Groom
+3 Professor of Symbology
+4 Eyetwitch
+1 Cave of the Frost Dragon
+1 Eiganjo, Seat of the Empire
+1 Takenuma, Abandoned Mire
+2 Shattered Sanctum
+2 Plains
+3 Hive of the Eye Tyrant
+3 Swamp
+4 Blightstep Pathway
+4 Needleverge Pathway
+4 Brightclimb Pathway
+
+[sideboard]
+1 Doomskar
+1 Confront the Past
+1 Necrotic Fumes
+1 Pest Summoning
+1 Mascot Exhibition
+1 Duress
+1 Power Word Kill
+1 Path of Peril
+1 Environmental Sciences
+3 Go Blank
+3 Legion Angel

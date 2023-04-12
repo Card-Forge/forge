@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Sultai Yorion Ultimatum by Martin Jůza
+Title=Room-Blk
+Difficulty=very hard
+Description=Sultai Yorion Ultimatum by Martin Jůza
+Icon=Room-Blk.jpg
+Deck Type=constructed
+
+[main]
+1 Valki, God of Lies
+1 Quandrix Cultivator
+2 Polukranos, Unchained
+3 Elder Gargaroth
+2 Mystical Dispute
+2 Eliminate
+3 Jwari Disruption
+4 Heartless Act
+1 Pelakka Predation
+2 Shadows' Verdict
+2 Sea Gate Restoration
+2 Extinction Event
+2 Alrund's Epiphany
+4 Cultivate
+4 Emergent Ultimatum
+1 Kiora Bests the Sea God
+1 Elspeth's Nightmare
+4 Wolfwillow Haven
+4 Omen of the Sea
+4 Binding the Old Gods
+1 Temple of Malady
+1 Ketria Triome
+3 Forest
+3 Island
+3 Swamp
+4 Barkchannel Pathway
+4 Fabled Passage
+4 Zagoth Triome
+4 Clearwater Pathway
+4 Darkbore Pathway
+
+[sideboard]
+1 Mystical Dispute
+2 Eliminate
+1 Elspeth's Nightmare
+1 Yorion, Sky Nomad
+1 Negate
+1 Mazemind Tome
+1 Disdainful Stroke
+1 Kaervek, the Spiteful
+3 Duress
+3 Koma, Cosmos Serpent

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Anthony Cuello
+Title=Hellboy
+Difficulty=very hard
+Description=Mono Green Aggro by Anthony Cuello
+Icon=Hellboy.jpg
+Deck Type=constructed
+
+[main]
+2 Primal Adversary
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+4 Lotus Cobra
+4 Esika's Chariot
+1 Snakeskin Veil
+2 Inscription of Abundance
+4 Blizzard Brawl
+1 Unnatural Growth
+4 Ranger Class
+2 Wrenn and Seven
+2 Lair of the Hydra
+4 Kazandu Mammoth
+4 Faceless Haven
+18 Snow-Covered Forest
+
+[sideboard]
+3 Snakeskin Veil
+2 Inscription of Abundance
+2 Toski, Bearer of Secrets
+2 Outland Liberator
+2 Tangletrap
+2 Devouring Tendrils
+2 Froghemoth

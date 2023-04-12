@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=God-Pharaoh's Gift by Tan Gao (China)
+Title=Green Lantern
+Difficulty=very hard
+Description=God-Pharaoh's Gift by Tan Gao (China)
+Icon=Green Lantern.jpg
+Deck Type=constructed
+
+[main]
+7 Island|XLN
+6 Plains|XLN
+4 Glacial Fortress|XLN
+3 Irrigated Farmland|AKH
+2 Ipnu Rivulet|HOU
+1 Hostile Desert|HOU
+2 Cast Out|AKH
+2 Search for Azcanta|XLN
+4 God-Pharaoh's Gift|HOU
+4 Refurbish|KLD
+4 Strategic Planning|HOU
+4 Chart a Course|XLN
+4 Angel of Invention|KLD
+4 Champion of Wits|HOU
+4 Minister of Inquiries|KLD
+3 Sacred Cat|AKH
+2 Fairgrounds Warden|KLD
+
+[sideboard]
+3 Angel of Sanctions|AKH
+2 Fumigate|KLD
+2 Negate|AER
+2 Jace's Defeat|HOU
+1 Settle the Wreckage|XLN
+1 Supreme Will|HOU
+1 Authority of the Consuls|KLD
+1 Sacred Cat|AKH
+2 Fairgrounds Warden|KLD

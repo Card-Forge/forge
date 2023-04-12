@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=5cc by Jordan Berkowitz
+Title=King Arthur
+Difficulty=very hard
+Description=5cc by Jordan Berkowitz
+Icon=King Arthur.jpg
+Deck Type=constructed
+
+[main]
+1 The Cruelty of Gix
+1 Farewell
+2 Unleash the Inferno
+3 Go for the Throat
+3 Reckoner Bankbuster
+3 Courier's Briefcase
+4 Fable of the Mirror-Breaker
+4 Leyline Binding
+4 Herd Migration
+4 Drag to the Bottom
+3 Contagious Vorrac
+3 Atraxa, Grand Unifier
+1 Mountain
+1 Island
+1 Plains
+1 Xander's Lounge
+1 Haunted Ridge
+1 Battlefield Forge
+1 Forest
+2 Swamp
+2 Raffine's Tower
+2 Spara's Headquarters
+2 Shattered Sanctum
+3 Llanowar Wastes
+3 Jetmir's Garden
+4 Ziatora's Proving Ground
+
+[sideboard]
+3 Duress
+1 Vampires' Vengeance
+1 Kaya, Intangible Slayer
+2 The Stone Brain
+2 Disdainful Stroke
+1 Sheoldred, the Apocalypse
+2 Archangel of Wrath
+3 Cut Down

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Boros Cycling Aggro by Rei Sato
+Title=Alouroua
+Difficulty=very hard
+Description=Boros Cycling Aggro by Rei Sato
+Icon=Alouroua.jpg
+Deck Type=constructed
+
+[main]
+4 Flourishing Fox
+4 Valiant Rescuer
+4 Drannith Stinger
+4 Irencrag Pyromancer
+2 Disdainful Stroke
+4 Startling Development
+4 Zenith Flare
+2 Go for Blood
+4 Boon of the Wish-Giver
+4 Memory Leak
+4 Improbable Alliance
+1 Clearwater Pathway
+1 Blightstep Pathway
+1 Brightclimb Pathway
+1 Savai Triome
+4 Needleverge Pathway
+4 Raugrin Triome
+4 Hengegate Pathway
+4 Riverglide Pathway
+
+[sideboard]
+2 Disdainful Stroke
+2 Negate
+2 Glass Casket
+2 Rielle, the Everwise
+2 Mystical Dispute
+2 Shredded Sails
+3 Redcap Melee

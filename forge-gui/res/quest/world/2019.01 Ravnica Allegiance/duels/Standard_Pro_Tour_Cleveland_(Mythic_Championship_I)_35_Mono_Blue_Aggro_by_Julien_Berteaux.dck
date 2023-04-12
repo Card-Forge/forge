@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Mono Blue Aggro by Julien Berteaux
+Title=Magnum
+Difficulty=very hard
+Description=Mono Blue Aggro by Julien Berteaux
+Icon=Magnum.jpg
+Deck Type=constructed
+
+[main]
+4 Pteramander
+4 Siren Stormtamer|XLN
+4 Merfolk Trickster
+3 Mist-Cloaked Herald
+4 Tempest Djinn
+2 Chart a Course|XLN
+1 Entrancing Melody|XLN
+3 Dive Down|XLN
+3 Spell Pierce|XLN
+1 Essence Capture
+4 Wizard's Retort
+4 Opt
+4 Curious Obsession
+19 Island
+
+[sideboard]
+1 Entrancing Melody|XLN
+1 Essence Capture
+2 Deep Freeze
+3 Negate
+1 Disdainful Stroke
+2 Exclusion Mage
+1 Surge Mare
+2 Diamond Mare
+1 Faerie Duelist
+1 Sleep

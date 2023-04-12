@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Izzet Control by Andres Monsalve
+Title=Ariel
+Difficulty=very hard
+Description=Izzet Control by Andres Monsalve
+Icon=Ariel.jpg
+Deck Type=constructed
+
+[main]
+1 The Celestus
+1 Thirst for Discovery
+2 Demon Bolt
+2 Behold the Multiverse
+2 Cinderclasm
+3 Jwari Disruption
+3 Fading Hope
+4 Divide by Zero
+4 Spikefield Hazard
+4 Unexpected Windfall
+4 Galvanic Iteration
+1 Burn Down the House
+3 Expressive Iteration
+4 Alrund's Epiphany
+1 Field of Ruin
+2 Hall of Storm Giants
+4 Island
+4 Stormcarved Coast
+4 Riverglide Pathway
+7 Mountain
+
+[sideboard]
+1 Cinderclasm
+1 Fading Hope
+1 Lier, Disciple of the Drowned
+1 Burning Hands
+1 Environmental Sciences
+1 Test of Talents
+1 Mascot Exhibition
+1 Hullbreaker Horror
+1 Malevolent Hermit
+1 Cyclone Summoner
+1 Teachings of the Archaics
+1 Saw It Coming
+3 Smoldering Egg

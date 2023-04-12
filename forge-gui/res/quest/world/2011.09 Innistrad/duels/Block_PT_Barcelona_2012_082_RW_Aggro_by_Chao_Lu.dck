@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=RW Aggro by Chao Lu
+Title=Damping Gremlins
+Difficulty=very hard
+Description=RW Aggro by Chao Lu
+Icon=Damping Gremlins.jpg
+Deck Type=constructed
+
+[main]
+4 Clifftop Retreat
+17 Plains|RTR
+2 Slayers' Stronghold|AVR
+3 Angel of Jubilation|AVR
+4 Champion of the Parish|ISD
+4 Doomed Traveler
+4 Elite Inquisitor|ISD
+4 Fiend Hunter|C13
+4 Riders of Gavony|AVR
+4 Silverblade Paladin|C14
+1 Thalia, Guardian of Thraben|DKA
+1 Divine Deflection|AVR
+4 Faith's Shield|DKA
+4 Gather the Townsfolk|DKA
+
+[sideboard]
+1 Plains|RTR
+2 Thalia, Guardian of Thraben|DKA
+1 Divine Deflection|AVR
+2 Geist-Honored Monk|C14
+1 Grafdigger's Cage|DKA
+2 Nevermore|ISD
+2 Purify the Grave|ISD
+3 Slayer of the Wicked|ISD
+1 Witchbane Orb|ISD

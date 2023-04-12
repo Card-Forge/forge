@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Bernd Brendemühl
+Title=Tisiphone
+Difficulty=very hard
+Description=Red Deck Wins by Bernd Brendemühl
+Icon=Tisiphone.jpg
+Deck Type=constructed
+
+[main]
+4 Ember Hauler|M11
+4 Goblin Guide|ZEN
+4 Grim Lavamancer|M12
+2 Hero of Oxid Ridge|MBS
+4 Kargan Dragonlord|ROE
+4 Plated Geopede|ZEN
+2 Burst Lightning|ZEN
+3 Incinerate|M12
+4 Lightning Bolt|M11
+3 Searing Blaze|WWK
+4 Arid Mesa|ZEN
+12 Mountain|M12
+4 Scalding Tarn|ZEN
+4 Teetering Peaks|ZEN
+2 Koth of the Hammer|SOM
+
+[sideboard]
+1 Searing Blaze|WWK
+1 Koth of the Hammer|SOM
+2 Manic Vandal|M12
+2 Vulshok Refugee|NPH
+3 Dismember|NPH
+3 Mark of Mutiny|ZEN
+3 Shrine of Burning Rage|NPH

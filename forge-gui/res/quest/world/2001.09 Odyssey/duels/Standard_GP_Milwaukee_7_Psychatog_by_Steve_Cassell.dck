@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Psychatog by Steve Cassell
+Title=Finn the Human
+Difficulty=very hard
+Description=Psychatog by Steve Cassell
+Icon=Finn the Human.jpg
+Deck Type=constructed
+
+[main]
+1 Cabal Pit|OD
+12 Island|OD
+4 Salt Marsh|IN
+4 Swamp|OD
+4 Underground River|7E
+4 Nightscape Familiar|PS
+4 Psychatog|OD
+4 Aether Burst|OD
+4 Circular Logic|TO
+4 Counterspell|7E
+4 Fact or Fiction|IN
+4 Repulse|IN
+4 Standstill|OD
+3 Upheaval|OD
+
+[sideboard]
+4 Duress|7E
+2 Mana Short|7E
+3 Possessed Aven|TO
+2 Sickening Dreams|TO
+4 Slay|PS

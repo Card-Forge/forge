@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Mono White Control  by Takashi Narita
+Title=Plague Rats
+Difficulty=very hard
+Description=Mono White Control  by Takashi Narita
+Icon=Plague Rats.jpg
+Deck Type=constructed
+
+[main]
+1 The Restoration of Eiganjo
+2 Ambitious Farmhand
+2 Ao, the Dawn Sky
+2 Spirited Companion
+3 Steel Seraph
+3 Loran of the Third Path
+4 Serra Paragon
+4 Reckoner Bankbuster
+4 Lay Down Arms
+4 Wedding Announcement
+4 Ossification
+1 The Eternal Wanderer
+3 The Wandering Emperor
+1 Eiganjo, Seat of the Empire
+4 Roadside Reliquary
+18 Plains
+
+[sideboard]
+1 The Eternal Wanderer
+1 Farewell
+1 Destroy Evil
+2 Unlicensed Hearse
+2 Urza's Sylex
+2 Vanquish the Horde
+2 The Stone Brain
+4 Knockout Blow

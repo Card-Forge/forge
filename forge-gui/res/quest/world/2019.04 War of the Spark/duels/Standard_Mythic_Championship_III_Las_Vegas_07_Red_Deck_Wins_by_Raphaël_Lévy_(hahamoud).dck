@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Raphaël Lévy (hahamoud)
+Title=Picard
+Difficulty=very hard
+Description=Red Deck Wins by Raphaël Lévy (hahamoud)
+Icon=Picard.jpg
+Deck Type=constructed
+
+[main]
+20 Mountain
+1 Chandra, Fire Artisan
+4 Experimental Frenzy
+4 Light Up the Stage
+3 Wizard's Lightning
+4 Shock
+4 Lightning Strike
+4 Viashino Pyromancer
+4 Runaway Steam-Kin
+4 Goblin Chainwhirler
+4 Ghitu Lavarunner
+4 Fanatical Firebrand
+
+[sideboard]
+3 Treasure Map|XLN
+2 Legion Warboss
+4 Lava Coil
+2 Fight with Fire
+4 Dire Fleet Daredevil

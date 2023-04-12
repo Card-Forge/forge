@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jeskai Mutate by Jakub Tóth
+Title=Skull Dance
+Difficulty=very hard
+Description=Jeskai Mutate by Jakub Tóth
+Icon=Skull Dance.jpg
+Deck Type=constructed
+
+[main]
+1 Redcap Melee
+1 Into the Roil
+1 Soul Sear
+1 Seize the Spoils
+2 Unsubstantiate
+2 Disdainful Stroke
+2 See the Truth
+4 Expressive Iteration
+4 Prismari Command
+4 Cinderclasm
+4 Spikefield Hazard
+3 Goldspan Dragon
+4 Lore Drakkis
+4 Vadrok, Apex of Thunder
+3 Mountain
+4 Needleverge Pathway
+4 Riverglide Pathway
+4 Raugrin Triome
+4 Island
+4 Hengegate Pathway
+
+[sideboard]
+4 Cubwarden
+2 Phoenix of Ash
+2 Scorching Dragonfire
+2 Negate
+1 Behold the Multiverse
+1 Mystical Dispute
+1 Test of Talents
+1 Burning Hands
+1 Redcap Melee

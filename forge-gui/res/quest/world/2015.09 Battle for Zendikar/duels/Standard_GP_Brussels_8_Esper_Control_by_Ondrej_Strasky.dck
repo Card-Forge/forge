@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Esper Control by Ondrej Strasky
+Title=Soldiers
+Difficulty=very hard
+Description=Esper Control by Ondrej Strasky
+Icon=Soldiers.jpg
+Deck Type=constructed
+
+[main]
+3 Ultimate Price|DTK
+4 Foul-Tongue Invocation|DTK
+4 Silumgar's Scorn|DTK
+2 Utter End|KTK
+4 Jace, Vryn's Prodigy|ORI
+4 Dragonlord Ojutai|DTK
+2 Dragonlord Silumgar|DTK
+1 Scatter to the Winds|BFZ
+4 Dig Through Time|KTK
+2 Crux of Fate|FRF
+3 Duress|DTK
+6 Island|BFZ
+2 Swamp|BFZ
+4 Polluted Delta|KTK
+4 Flooded Strand|KTK
+1 Bloodstained Mire|KTK
+2 Haven of the Spirit Dragon|DTK
+2 Shambling Vent|BFZ
+3 Sunken Hollow|BFZ
+3 Prairie Stream|BFZ
+
+[sideboard]
+1 Ultimate Price|DTK
+4 Arashin Cleric|FRF
+1 Virulent Plague|DTK
+1 Dispel|BFZ
+2 Dragonlord's Prerogative|DTK
+2 Negate|ORI
+2 Tasigur, the Golden Fang|FRF
+2 Infinite Obliteration|ORI

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Martin Juza
+Title=The Rogues
+Difficulty=very hard
+Description=Abzan Midrange by Martin Juza
+Icon=The Rogues.jpg
+Deck Type=constructed
+
+[main]
+4 Flooded Strand|KTK
+2 Llanowar Wastes|ORI
+2 Canopy Vista|BFZ
+1 Sunken Hollow|BFZ
+1 Smoldering Marsh|BFZ
+2 Forest|BFZ
+2 Plains|BFZ
+4 Wooded Foothills|KTK
+4 Windswept Heath|KTK
+4 Shambling Vent|BFZ
+2 Silkwrap|DTK
+2 Murderous Cut|KTK
+4 Abzan Charm|KTK
+4 Dromoka's Command|DTK
+2 Wingmate Roc|KTK
+3 Den Protector|DTK
+4 Siege Rhino|KTK
+1 Gideon, Ally of Zendikar|BFZ
+4 Warden of the First Tree|FRF
+4 Sylvan Advocate|OGW
+4 Anafenza, the Foremost|KTK
+
+[sideboard]
+3 Duress|DTK
+3 Transgress the Mind|BFZ
+3 Self-Inflicted Wound|DTK
+2 Hallowed Moonlight|ORI
+1 Arashin Cleric|FRF
+1 Den Protector|DTK
+2 Gideon, Ally of Zendikar|BFZ

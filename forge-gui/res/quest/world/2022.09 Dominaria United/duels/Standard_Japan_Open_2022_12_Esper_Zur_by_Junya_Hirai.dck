@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Esper Zur by Junya Hirai
+Title=Enchantress
+Difficulty=very hard
+Description=Esper Zur by Junya Hirai
+Icon=Enchantress.jpg
+Deck Type=constructed
+
+[main]
+1 Rona's Vortex
+1 Cut Down
+1 Liliana of the Veil
+2 Make Disappear
+2 Touch the Spirit Realm
+2 The Meathook Massacre
+3 The Wandering Emperor
+4 Wedding Announcement
+4 Leyline Binding
+1 Evolved Sleeper
+2 Spectral Adversary
+4 Tenacious Underdog
+4 Spirited Companion
+4 Zur, Eternal Schemer
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+1 Plains
+2 Adarkar Wastes
+2 Xander's Lounge
+2 Spara's Headquarters
+4 Shipwreck Marsh
+4 Shattered Sanctum
+4 Raffine's Tower
+4 Caves of Koilos
+
+[sideboard]
+3 Negate
+3 Disdainful Stroke
+2 Obscura Charm
+2 Temporary Lockdown
+2 Reckoner Bankbuster
+3 Cut Down

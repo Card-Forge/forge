@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Jund by Sirhamilton1
+Title=Predator
+Difficulty=very hard
+Description=Jund by Sirhamilton1
+Icon=Predator.jpg
+Deck Type=constructed
+
+[main]
+1 Riveteers Charm
+1 Strangle
+1 Bloodchief's Thirst
+1 Sorin the Mirthless
+2 Lolth, Spider Queen
+2 Duress
+2 Infernal Grasp
+3 The Meathook Massacre
+4 Fable of the Mirror-Breaker
+4 Esika's Chariot
+4 Ob Nixilis, the Adversary
+1 Workshop Warchief
+1 Titan of Industry
+4 Tenacious Underdog
+4 Bloodtithe Harvester
+1 Swamp
+1 Takenuma, Abandoned Mire
+1 Boseiju, Who Endures
+1 Deathcap Glade
+1 Rockfall Vale
+2 Haunted Ridge
+2 Hive of the Eye Tyrant
+4 Blightstep Pathway
+4 Darkbore Pathway
+4 Ziatora's Proving Ground
+4 Cragcrown Pathway
+
+[sideboard]
+2 Shadows' Verdict
+2 Unleash the Inferno
+2 Graveyard Trespasser
+2 Abrade
+1 Reckoner Bankbuster
+1 Riveteers Charm
+2 Strangle
+2 Duress
+1 The Meathook Massacre

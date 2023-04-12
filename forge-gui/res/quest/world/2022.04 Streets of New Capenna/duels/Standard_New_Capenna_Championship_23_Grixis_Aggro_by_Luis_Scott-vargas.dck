@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Grixis Aggro by Luis Scott-vargas
+Title=The World Is Not Enough
+Difficulty=very hard
+Description=Grixis Aggro by Luis Scott-vargas
+Icon=The World Is Not Enough.jpg
+Deck Type=constructed
+
+[main]
+1 Spell Pierce
+1 Hagra Mauling
+1 Ray of Enfeeblement
+1 Duress
+1 Soul Transfer
+2 The Meathook Massacre
+2 Infernal Grasp
+3 Kaito Shizuki
+4 Voltage Surge
+4 Fable of the Mirror-Breaker
+2 Bloodthirsty Adversary
+2 Evelyn, the Covetous
+2 Tenacious Underdog
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+1 Swamp
+1 Shipwreck Marsh
+1 Mountain
+1 Takenuma, Abandoned Mire
+2 Hive of the Eye Tyrant
+2 Haunted Ridge
+3 Stormcarved Coast
+3 Clearwater Pathway
+4 Blightstep Pathway
+4 Xander's Lounge
+4 Riverglide Pathway
+
+[sideboard]
+3 Annul
+2 Go Blank
+1 Disdainful Stroke
+1 Mind Flayer
+1 Negate
+1 Make Disappear
+1 Abrade
+2 Ray of Enfeeblement
+1 Duress
+1 The Meathook Massacre
+1 Evelyn, the Covetous

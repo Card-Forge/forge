@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Jund by Elesh Norn
+Title=Vortex
+Difficulty=very hard
+Description=Jund by Elesh Norn
+Icon=Vortex.jpg
+Deck Type=constructed
+
+[main]
+4 Deathcap Glade
+4 Ziatora's Proving Ground
+4 Haunted Ridge
+3 Rockfall Vale
+2 Sulfurous Springs
+2 Riveteers Overlook
+2 Mountain
+2 Swamp
+1 Forest
+1 Takenuma, Abandoned Mire
+1 Boseiju, Who Endures
+2 Jaya, Fiery Negotiator
+2 The Elder Dragon War
+2 The Cruelty of Gix
+1 The Meathook Massacre
+1 Soul Transfer
+3 Voltage Surge
+1 Infernal Grasp
+1 Cut Down
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+3 Soul of Windgrace
+3 Teachings of the Kirin
+2 Old Rutstein
+2 Workshop Warchief
+2 Titan of Industry
+1 Graveyard Trespasser
+
+[sideboard]
+3 Duress
+2 Tear Asunder
+1 Unlicensed Hearse
+1 Abrade
+1 Unleash the Inferno
+1 Hidetsugu Consumes All
+2 The Meathook Massacre
+1 Soul Transfer
+1 Cut Down
+2 Graveyard Trespasser

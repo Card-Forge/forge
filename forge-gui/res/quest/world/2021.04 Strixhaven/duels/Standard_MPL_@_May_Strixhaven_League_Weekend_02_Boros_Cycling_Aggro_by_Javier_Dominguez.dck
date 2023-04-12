@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Boros Cycling Aggro by Javier Dominguez
+Title=MahamotiGenie
+Difficulty=very hard
+Description=Boros Cycling Aggro by Javier Dominguez
+Icon=MahamotiGenie.jpg
+Deck Type=constructed
+
+[main]
+2 Drannith Stinger
+2 Drannith Healer
+4 Flourishing Fox
+4 Valiant Rescuer
+4 Irencrag Pyromancer
+1 Negate
+4 Startling Development
+4 Zenith Flare
+4 Go for Blood
+4 Boon of the Wish-Giver
+4 Memory Leak
+4 Improbable Alliance
+1 Blightstep Pathway
+1 Clearwater Pathway
+1 Brightclimb Pathway
+4 Raugrin Triome
+4 Needleverge Pathway
+4 Hengegate Pathway
+4 Riverglide Pathway
+
+[sideboard]
+2 Negate
+1 Soul-Guide Lantern
+2 Mystical Dispute
+2 Fire Prophecy
+2 Banishing Light
+3 Disdainful Stroke
+3 Redcap Melee

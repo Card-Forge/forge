@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Izzet Control by Brian Braun-duin
+Title=Bubbles
+Difficulty=very hard
+Description=Izzet Control by Brian Braun-duin
+Icon=Bubbles.jpg
+Deck Type=constructed
+
+[main]
+1 Magma Opus
+2 Mazemind Tome
+3 Saw It Coming
+3 Mystical Dispute
+3 Alrund's Epiphany
+4 Frost Bite
+4 Expressive Iteration
+3 Galazeth Prismari
+4 Goldspan Dragon
+4 Bonecrusher Giant
+4 Brazen Borrower
+3 Faceless Haven
+4 Riverglide Pathway
+4 Fabled Passage
+4 Volatile Fjord
+4 Snow-Covered Mountain
+6 Snow-Covered Island
+
+[sideboard]
+1 Soul Sear
+1 Cinderclasm
+1 Negate
+1 Shark Typhoon
+2 The Akroan War
+2 Disdainful Stroke
+2 Redcap Melee
+2 Fire Prophecy
+3 Ox of Agonas

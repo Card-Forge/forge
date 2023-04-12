@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Robert Smith
+Title=Jesse James
+Difficulty=very hard
+Description=Boros Aggro by Robert Smith
+Icon=Jesse James.jpg
+Deck Type=constructed
+
+[main]
+4 Adanto Vanguard|XLN
+4 Benalish Marshal
+4 Dauntless Bodyguard
+3 Hunted Witness
+4 Knight of Grace
+1 Snubhorn Sentry
+4 Skymarcher Aspirant
+4 Heroic Reinforcements
+3 Conclave Tribunal
+4 History of Benalia
+3 Legion's Landing|XLN
+1 Unclaimed Territory|XLN
+4 Clifftop Retreat
+13 Plains
+4 Sacred Foundry
+
+[sideboard]
+1 Unclaimed Territory|XLN
+1 Ajani, Adversary of Tyrants
+2 Baffling End
+2 Aurelia, Exemplar of Justice
+3 Tajic, Legion's Edge
+1 Integrity // Intervention
+1 Response // Resurgence
+1 Settle the Wreckage|XLN
+3 Tocatli Honor Guard|XLN

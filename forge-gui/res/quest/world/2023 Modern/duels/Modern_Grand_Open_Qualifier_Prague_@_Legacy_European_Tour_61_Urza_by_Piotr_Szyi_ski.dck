@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Urza by Piotr Szyi ski
+Title=The Minotaurs
+Difficulty=very hard
+Description=Urza by Piotr Szyi ski
+Icon=The Minotaurs.jpg
+Deck Type=constructed
+
+[main]
+4 Esper Sentinel
+3 Ingenious Smith
+4 Urza, Lord High Artificer
+4 Stoneforge Mystic|WWK
+1 Haywire Mite
+1 The Reality Chip
+4 Portable Hole
+3 Thopter Foundry|ARB
+1 Sword of the Meek|FUT
+1 Nettlecyst
+1 Kaldra Compleat
+1 Aether Spellbomb|MR
+1 Springleaf Drum|BNG
+1 Relic of Progenitus|ALA
+1 Shadowspear
+1 Pithing Needle
+3 Metallic Rebuke|AER
+4 Urza's Saga
+3 Teferi, Time Raveler
+4 Flooded Strand|KTK
+4 Seachrome Coast
+3 Hallowed Fountain
+1 Cavern of Souls|AVR
+1 Otawara, Soaring City
+1 Spara's Headquarters
+1 Razortide Bridge
+1 Plains
+2 Island
+
+[sideboard]
+2 Engineered Explosives|FD
+2 March of Otherworldly Light
+2 Flusterstorm
+1 Damping Sphere
+1 Containment Priest
+2 Orvar, the All-Form
+2 Supreme Verdict|RTR
+1 Solitude
+2 Sanctifier en-Vec

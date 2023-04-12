@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=4 5c Aggro by Stefan Kogler
+Title=Sainted One
+Difficulty=very hard
+Description=4 5c Aggro by Stefan Kogler
+Icon=Sainted One.jpg
+Deck Type=constructed
+
+[main]
+4 Ragavan, Nimble Pilferer
+1 Migloz, Maze Crusher
+3 Nishoba Brawler
+4 Scion of Draco
+4 Territorial Kavu
+4 Wild Nacatl|ALA
+2 Minor Misstep
+1 Dromoka's Command|DTK
+4 Lightning Bolt|M11
+4 Stubborn Denial|KTK
+4 Tribal Flames|TSP
+4 Leyline Binding
+1 Temple Garden
+1 Zagoth Triome
+1 Savai Triome
+1 Snow-Covered Forest
+1 Snow-Covered Plains
+1 Sacred Foundry
+1 Steam Vents
+1 Breeding Pool
+4 Flooded Strand|KTK
+4 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+1 Overgrown Tomb
+
+[sideboard]
+1 Jegantha, the Wellspring
+2 Rest in Peace|RTR
+2 Chalice of the Void|MR
+2 Wear // Tear|DGM
+2 Path to Exile|CFX
+2 Tear Asunder
+2 Unmoored Ego
+2 Hidetsugu Consumes All

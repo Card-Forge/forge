@@ -1,0 +1,60 @@
+[quest]
+id=20220402
+OpponentName=Mike
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Grixis Aggro
+Title=Bumba
+Difficulty=very hard
+Description=Grixis Aggro by Mike Sigrist
+Icon=Bumba.jpg
+Deck Type=constructed
+
+[main]
+1 Ray of Enfeeblement
+1 Spell Pierce
+1 Duress
+1 Soul Transfer
+1 Sorin the Mirthless
+2 Infernal Grasp
+2 The Meathook Massacre
+3 Kaito Shizuki
+4 Voltage Surge
+4 Fable of the Mirror-Breaker
+2 Evelyn, the Covetous
+2 Bloodthirsty Adversary
+2 Tenacious Underdog
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Mountain
+1 Takenuma, Abandoned Mire
+1 Swamp
+1 Shipwreck Marsh
+2 Haunted Ridge
+2 Hive of the Eye Tyrant
+3 Clearwater Pathway
+3 Stormcarved Coast
+4 Riverglide Pathway
+4 Blightstep Pathway
+4 Xander's Lounge
+
+[sideboard]
+3 Annul
+1 Go Blank
+1 Mind Flayer
+1 Negate
+1 Abrade
+1 Disdainful Stroke
+3 Ray of Enfeeblement
+1 Duress
+1 Soul Transfer
+1 The Meathook Massacre
+1 Evelyn, the Covetous

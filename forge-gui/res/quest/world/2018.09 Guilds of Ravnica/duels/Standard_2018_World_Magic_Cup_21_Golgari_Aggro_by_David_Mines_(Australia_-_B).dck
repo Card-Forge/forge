@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by David Mines (Australia - B)
+Title=Ajok
+Difficulty=very hard
+Description=Golgari Aggro by David Mines (Australia - B)
+Icon=Ajok.jpg
+Deck Type=constructed
+
+[main]
+3 Vivien Reid
+4 Llanowar Elves
+1 Druid of the Cowl
+4 Merfolk Branchwalker|XLN
+4 Wildgrowth Walker|XLN
+3 Midnight Reaper
+4 Jadelight Ranger
+2 Ravenous Chupacabra
+3 Carnage Tyrant|XLN
+3 Find // Finality
+1 Cast Down
+1 Assassin's Trophy
+3 Vraska's Contempt|XLN
+1 Detection Tower
+8 Forest
+1 Memorial to Folly
+4 Overgrown Tomb
+6 Swamp
+4 Woodland Cemetery
+
+[sideboard]
+1 Midnight Reaper
+2 Cast Down
+2 Assassin's Trophy
+4 Duress
+1 Vraska, Relic Seeker|XLN
+2 Golden Demise
+2 Plaguecrafter
+1 The Eldest Reborn

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Jund by Roberto Vincenzo Evola
+Title=Vodalia
+Difficulty=very hard
+Description=Jund by Roberto Vincenzo Evola
+Icon=Vodalia.jpg
+Deck Type=constructed
+
+[main]
+2 Abrade
+2 Infernal Grasp
+2 Lolth, Spider Queen
+2 The Meathook Massacre
+2 Bloodchief's Thirst
+2 Shatterskull Smashing
+4 Esika's Chariot
+4 Ob Nixilis, the Adversary
+4 Fable of the Mirror-Breaker
+4 Bloodtithe Harvester
+4 Tenacious Underdog
+4 Graveyard Trespasser
+1 Takenuma, Abandoned Mire
+2 Haunted Ridge
+2 Rockfall Vale
+3 Hive of the Eye Tyrant
+4 Ziatora's Proving Ground
+4 Darkbore Pathway
+4 Blightstep Pathway
+4 Cragcrown Pathway
+
+[sideboard]
+4 Duress
+4 Ray of Enfeeblement
+3 Shadows' Verdict
+2 Immersturm Predator
+2 Sorin the Mirthless

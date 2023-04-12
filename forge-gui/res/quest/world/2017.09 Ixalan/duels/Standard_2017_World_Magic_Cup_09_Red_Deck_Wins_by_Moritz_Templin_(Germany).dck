@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Moritz Templin (Germany)
+Title=Dogbert
+Difficulty=very hard
+Description=Red Deck Wins by Moritz Templin (Germany)
+Icon=Dogbert.jpg
+Deck Type=constructed
+
+[main]
+1 Sand Strangler|HOU
+1 Ahn-Crop Crasher|AKH
+4 Soul-Scar Mage|AKH
+4 Bomat Courier|KLD
+4 Earthshaker Khenra|HOU
+4 Rampaging Ferocidon|XLN
+4 Hazoret the Fervent|AKH
+15 Mountain|XLN
+1 Scavenger Grounds|HOU
+4 Sunscorched Desert|AKH
+4 Ramunap Ruins|HOU
+4 Shock|AER
+3 Abrade|HOU
+4 Lightning Strike|XLN
+3 Kari Zev, Skyship Raider|AER
+
+[sideboard]
+3 Sand Strangler|HOU
+1 Ahn-Crop Crasher|AKH
+4 Pia Nalaar|KLD
+4 Glorybringer|AKH
+2 Scavenger Grounds|HOU
+1 Abrade|HOU

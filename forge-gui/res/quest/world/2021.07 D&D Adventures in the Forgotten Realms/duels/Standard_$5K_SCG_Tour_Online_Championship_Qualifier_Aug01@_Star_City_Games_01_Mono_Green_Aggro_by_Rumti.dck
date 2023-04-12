@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Rumti
+Title=Whim
+Difficulty=very hard
+Description=Mono Green Aggro by Rumti
+Icon=Whim.jpg
+Deck Type=constructed
+
+[main]
+2 Werewolf Pack Leader
+2 Scavenging Ooze
+3 Questing Beast
+4 Stonecoil Serpent
+4 Swarm Shambler
+4 Lovestruck Beast
+4 Gemrazer
+4 Kazandu Mammoth
+2 The Great Henge
+2 Ram Through
+2 Blizzard Brawl
+2 Primal Might
+2 Ranger Class
+3 Faceless Haven
+20 Snow-Covered Forest
+
+[sideboard]
+1 Ram Through
+1 Vivien, Monsters' Advocate
+1 Chainweb Aracnir
+1 Thrashing Brontodon
+2 Garruk's Harbinger
+2 Snakeskin Veil
+2 Weathered Runestone
+2 Shadowspear
+3 Garruk, Unleashed

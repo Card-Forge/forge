@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by Connor Mullaly
+Title=Sisters of Stone Death
+Difficulty=very hard
+Description=Puresteel Paladin by Connor Mullaly
+Icon=Sisters of Stone Death.jpg
+Deck Type=constructed
+
+[main]
+1 Gingerbrute
+2 Kor Outfitter|ZEN
+4 Ornithopter|AER
+4 Puresteel Paladin|NPH
+4 Stoneforge Mystic|WWK
+4 Esper Sentinel
+4 Memnite|SOM
+1 Cranial Plating|FD
+1 Shadowspear
+4 Springleaf Drum|BNG
+4 Colossus Hammer
+4 Urza's Saga
+4 Sigarda's Aid|EMN
+1 Horizon Canopy|FUT
+1 Godless Shrine
+2 Concealed Courtyard|KLD
+3 Inkmoth Nexus|MBS
+4 Silent Clearing
+4 Marsh Flats|ZEN
+4 Plains
+
+[sideboard]
+1 Prismatic Ending
+1 Pithing Needle
+1 Nihil Spellbomb|SOM
+1 Lurrus of the Dream-Den
+2 Path to Exile|CFX
+2 Seal of Cleansing|NE
+3 Sanctifier en-Vec
+4 Thoughtseize|THS

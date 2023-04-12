@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Rick Lee
+Title=Winged Stallion
+Difficulty=very hard
+Description=Abzan Midrange by Rick Lee
+Icon=Winged Stallion.jpg
+Deck Type=constructed
+
+[main]
+1 Sorin, Solemn Visitor|KTK
+2 Ultimate Price|DTK
+2 Abzan Charm|KTK
+3 Dromoka's Command|DTK
+4 Hero's Downfall|THS
+2 Whisperwood Elemental|FRF
+2 Surrak, the Hunt Caller|DTK
+2 Rakshasa Deathdealer|KTK
+2 Warden of the First Tree|FRF
+3 Anafenza, the Foremost|KTK
+4 Siege Rhino|KTK
+4 Deathmist Raptor|DTK
+4 Fleecemane Lion|THS
+1 Urborg, Tomb of Yawgmoth|M15
+1 Mana Confluence|JOU
+1 Plains|DTK
+2 Caves of Koilos|M15
+3 Forest|DTK
+3 Temple of Silence|THS
+3 Temple of Malady|JOU
+3 Llanowar Wastes|M15
+4 Windswept Heath|KTK
+4 Sandsteppe Citadel|KTK
+
+[sideboard]
+2 Drown in Sorrow|BNG
+2 Nissa, Worldwaker|M15
+1 Elspeth, Sun's Champion|THS
+3 Thoughtseize|THS
+2 Duress|DTK
+2 Virulent Plague|DTK
+2 Bile Blight|BNG
+1 Sorin, Solemn Visitor|KTK

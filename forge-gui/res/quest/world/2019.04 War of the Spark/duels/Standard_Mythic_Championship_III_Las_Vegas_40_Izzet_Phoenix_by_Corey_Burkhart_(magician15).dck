@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Izzet Phoenix by Corey Burkhart (magician15)
+Title=The Dwarven Stronghold
+Difficulty=very hard
+Description=Izzet Phoenix by Corey Burkhart (magician15)
+Icon=The Dwarven Stronghold.jpg
+Deck Type=constructed
+
+[main]
+4 Arclight Phoenix
+3 Augur of Bolas
+3 Crackling Drake
+2 God-Eternal Kefnet
+4 Lightning Strike
+4 Opt
+4 Shock
+4 Chart a Course|XLN
+4 Finale of Promise
+3 Lava Coil
+4 Tormenting Voice
+7 Island
+6 Mountain
+4 Steam Vents
+4 Sulfur Falls
+
+[sideboard]
+1 God-Eternal Kefnet
+1 Lava Coil
+1 Beacon Bolt
+1 Entrancing Melody|XLN
+3 Legion Warboss
+2 Narset, Parter of Veils
+2 Negate
+2 Ral, Izzet Viceroy
+2 Spell Pierce|XLN

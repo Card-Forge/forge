@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Mardu Midrange by Cody Lingelbach
+Title=Princess Celestia
+Difficulty=very hard
+Description=Mardu Midrange by Cody Lingelbach
+Icon=Princess Celestia.jpg
+Deck Type=constructed
+
+[main]
+3 Gideon, Ally of Zendikar|BFZ
+1 Silkwrap|DTK
+3 Wild Slash|FRF
+2 Secure the Wastes|DTK
+2 Murderous Cut|KTK
+2 Fiery Impulse|ORI
+4 Crackling Doom|KTK
+4 Thopter Engineer|ORI
+3 Pia and Kiran Nalaar|ORI
+2 Kolaghan, the Storm's Fury|FRF
+4 Hangarback Walker|ORI
+4 Abbot of Keral Keep|ORI
+4 Wooded Foothills|KTK
+2 Windswept Heath|KTK
+1 Swamp|BFZ
+1 Smoldering Marsh|BFZ
+4 Shambling Vent|BFZ
+1 Plains|BFZ
+2 Nomad Outpost|KTK
+2 Canopy Vista|BFZ
+1 Cinder Glade|BFZ
+2 Mountain|BFZ
+3 Bloodstained Mire|KTK
+2 Battlefield Forge|ORI
+1 Sorin, Solemn Visitor|KTK
+
+[sideboard]
+1 Utter End|KTK
+2 Transgress the Mind|BFZ
+2 Self-Inflicted Wound|DTK
+2 Roast|DTK
+2 Outpost Siege|FRF
+2 Infinite Obliteration|ORI
+2 Duress|DTK
+2 Arc Lightning|KTK

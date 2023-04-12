@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Fabian Friedrich
+Title=Plague Rats
+Difficulty=very hard
+Description=Abzan Midrange by Fabian Friedrich
+Icon=Plague Rats.jpg
+Deck Type=constructed
+
+[main]
+3 Gideon, Ally of Zendikar|BFZ
+4 Warden of the First Tree|FRF
+1 Sylvan Advocate|OGW
+2 Den Protector|DTK
+3 Reflector Mage|OGW
+4 Anafenza, the Foremost|KTK
+4 Siege Rhino|KTK
+2 Wingmate Roc|KTK
+2 Tasigur, the Golden Fang|FRF
+2 Murderous Cut|KTK
+2 Abzan Charm|KTK
+2 Dromoka's Command|DTK
+3 Stubborn Denial|KTK
+4 Wooded Foothills|KTK
+4 Windswept Heath|KTK
+4 Flooded Strand|KTK
+2 Polluted Delta|KTK
+1 Plains|BFZ
+1 Swamp|BFZ
+2 Forest|BFZ
+2 Canopy Vista|BFZ
+1 Smoldering Marsh|BFZ
+1 Prairie Stream|BFZ
+1 Sunken Hollow|BFZ
+3 Shambling Vent|BFZ
+
+[sideboard]
+1 Den Protector|DTK
+2 Disdainful Stroke|KTK
+1 Infinite Obliteration|ORI
+2 Hallowed Moonlight|ORI
+1 Flaying Tendrils|OGW
+1 Self-Inflicted Wound|DTK
+1 Sorin, Solemn Visitor|KTK
+1 Dragonlord Silumgar|DTK
+1 Mastery of the Unseen|FRF
+1 Ob Nixilis Reignited|BFZ
+2 Transgress the Mind|BFZ
+1 Ultimate Price|DTK

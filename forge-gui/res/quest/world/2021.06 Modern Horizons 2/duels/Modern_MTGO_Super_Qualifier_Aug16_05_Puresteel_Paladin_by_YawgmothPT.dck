@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by YawgmothPT
+Title=Mandurang
+Difficulty=very hard
+Description=Puresteel Paladin by YawgmothPT
+Icon=Mandurang.jpg
+Deck Type=constructed
+
+[main]
+4 Esper Sentinel
+1 Giver of Runes
+2 Ingenious Smith
+4 Memnite|SOM
+4 Ornithopter|AER
+4 Puresteel Paladin|NPH
+4 Stoneforge Mystic|WWK
+4 Colossus Hammer
+1 Mishra's Bauble|CS
+1 Shadowspear
+1 Soul-Guide Lantern
+4 Springleaf Drum|BNG
+4 Sigarda's Aid|EMN
+1 Eiganjo Castle|CHK
+1 Horizon Canopy|FUT
+4 Inkmoth Nexus|MBS
+10 Plains
+1 Silent Clearing
+1 Sunbaked Canyon
+4 Urza's Saga
+
+[sideboard]
+1 Chalice of the Void|MR
+1 Drannith Magistrate
+1 Lurrus of the Dream-Den
+2 Path to Exile|CFX
+1 Pithing Needle|RTR
+1 Prismatic Ending
+3 Sanctifier en-Vec
+2 Seal of Cleansing|NE
+2 Tocatli Honor Guard|XLN
+1 Void Mirror

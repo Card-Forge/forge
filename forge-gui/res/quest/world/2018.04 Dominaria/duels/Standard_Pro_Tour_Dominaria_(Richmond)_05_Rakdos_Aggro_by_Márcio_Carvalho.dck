@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Márcio Carvalho
+Title=Fiery Dawn
+Difficulty=very hard
+Description=Rakdos Aggro by Márcio Carvalho
+Icon=Fiery Dawn.jpg
+Deck Type=constructed
+
+[main]
+1 Spire of Industry|AER
+2 Aether Hub|KLD
+13 Mountain
+4 Dragonskull Summit|XLN
+4 Canyon Slough|AKH
+2 Heart of Kiran|AER
+1 Shock|AER
+3 Unlicensed Disintegration|KLD
+3 Abrade|HOU
+1 Cut // Ribbons|AKH
+4 Rekindling Phoenix
+3 Soul-Scar Mage|AKH
+4 Scrapheap Scrounger|KLD
+2 Pia Nalaar|KLD
+1 Glorybringer|AKH
+4 Goblin Chainwhirler
+2 Kari Zev, Skyship Raider|AER
+4 Bomat Courier|KLD
+2 Chandra, Torch of Defiance|KLD
+
+[sideboard]
+1 Aethersphere Harvester|AER
+2 Siege-Gang Commander
+1 Swamp
+2 Duress|XLN
+2 Chandra's Defeat|HOU
+1 Angrath, the Flame-Chained
+2 Doomfall|HOU
+1 Abrade|HOU
+1 Cut // Ribbons|AKH
+2 Glorybringer|AKH

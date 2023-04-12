@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Dread Muffin
+Title=Elashub
+Difficulty=very hard
+Description=Jeskai Control by Dread Muffin
+Icon=Elashub.jpg
+Deck Type=constructed
+
+[main]
+2 The Celestus
+2 Valorous Stance
+2 Fading Hope
+2 Negate
+2 Alchemist's Gambit
+3 Abrade
+3 Galvanic Iteration
+4 Expressive Iteration
+4 Unexpected Windfall
+4 Magma Opus
+4 Jwari Disruption
+4 Hinata, Dawn-Crowned
+1 Plains
+1 Island
+1 Hall of Storm Giants
+1 Mountain
+3 Needleverge Pathway
+3 Deserted Beach
+3 Hengegate Pathway
+3 Sundown Pass
+4 Stormcarved Coast
+4 Riverglide Pathway
+
+[sideboard]
+4 Behold the Multiverse
+3 Disdainful Stroke
+2 Lier, Disciple of the Drowned
+2 Seismic Wave
+1 Thundering Rebuke
+1 Fading Hope
+1 Negate
+1 Abrade

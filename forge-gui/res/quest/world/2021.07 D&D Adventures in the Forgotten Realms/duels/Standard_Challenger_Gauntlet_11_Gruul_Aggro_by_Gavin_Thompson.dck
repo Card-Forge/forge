@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Gavin Thompson
+Title=InuYasha
+Difficulty=very hard
+Description=Gruul Aggro by Gavin Thompson
+Icon=InuYasha.jpg
+Deck Type=constructed
+
+[main]
+2 Goldspan Dragon
+3 Magda, Brazen Outlaw
+4 Jaspera Sentinel
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Lovestruck Beast
+3 Embercleave
+4 Esika's Chariot
+1 Snakeskin Veil
+2 Fire Prophecy
+4 Shatterskull Smashing
+1 The Akroan War
+3 Ranger Class
+2 Lair of the Hydra
+3 Den of the Bugbear
+4 Cragcrown Pathway
+4 Mountain
+8 Forest
+
+[sideboard]
+1 Phoenix of Ash
+1 Wilt
+2 Klothys, God of Destiny
+2 Magic Missile
+2 Ox of Agonas
+3 Burning Hands
+4 Redcap Melee

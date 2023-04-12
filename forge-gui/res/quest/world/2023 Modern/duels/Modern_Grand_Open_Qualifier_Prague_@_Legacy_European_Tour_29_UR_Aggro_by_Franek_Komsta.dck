@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=UR Aggro by Franek Komsta
+Title=Bouncy Bouncy
+Difficulty=very hard
+Description=UR Aggro by Franek Komsta
+Icon=Bouncy Bouncy.jpg
+Deck Type=constructed
+
+[main]
+2 Unholy Heat
+2 Prismatic Ending
+3 Underworld Breach
+4 Expressive Iteration
+4 Mutagenic Growth|NPH
+4 Lightning Bolt|M11
+4 Lava Dart|JU
+4 Mishra's Bauble|CS
+3 Sprite Dragon
+4 Dragon's Rage Channeler
+4 Soul-Scar Mage|AKH
+4 Monastery Swiftspear
+2 Sacred Foundry
+2 Wooded Foothills|KTK
+2 Arid Mesa|ZEN
+3 Scalding Tarn|ZEN
+3 Mountain
+3 Bloodstained Mire|KTK
+3 Steam Vents
+
+[sideboard]
+2 Wear // Tear|DGM
+2 Spell Pierce
+3 Path to Exile|CFX
+1 Jegantha, the Wellspring
+4 Flusterstorm
+1 Alpine Moon
+2 Prismatic Ending

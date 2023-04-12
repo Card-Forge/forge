@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Dark Jeskai by Owen Turtenwald
+Title=Gideon, Martial Paragon
+Difficulty=very hard
+Description=Dark Jeskai by Owen Turtenwald
+Icon=Gideon, Martial Paragon.jpg
+Deck Type=constructed
+
+[main]
+1 Utter End|KTK
+1 Sarkhan, the Dragonspeaker|KTK
+2 Dispel|BFZ
+2 Dig Through Time|KTK
+2 Wild Slash|FRF
+2 Fiery Impulse|ORI
+3 Kolaghan's Command|DTK
+3 Ojutai's Command|DTK
+4 Crackling Doom|KTK
+1 Dragonmaster Outcast|BFZ
+2 Soulfire Grand Master|FRF
+3 Tasigur, the Golden Fang|FRF
+4 Mantis Rider|KTK
+4 Jace, Vryn's Prodigy|ORI
+1 Island|BFZ
+1 Nomad Outpost|KTK
+1 Plains|BFZ
+1 Swamp|BFZ
+1 Smoldering Marsh|BFZ
+1 Sunken Hollow|BFZ
+2 Mountain|BFZ
+2 Prairie Stream|BFZ
+4 Bloodstained Mire|KTK
+4 Flooded Strand|KTK
+4 Mystic Monastery|KTK
+4 Polluted Delta|KTK
+
+[sideboard]
+1 Roast|DTK
+3 Arashin Cleric|FRF
+1 Felidar Cub|BFZ
+3 Disdainful Stroke|KTK
+2 Duress|DTK
+2 Exert Influence|BFZ
+2 Radiant Flames|BFZ
+1 Dragonmaster Outcast|BFZ

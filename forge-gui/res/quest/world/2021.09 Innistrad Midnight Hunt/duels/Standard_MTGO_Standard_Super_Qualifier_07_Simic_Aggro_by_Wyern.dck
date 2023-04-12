@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Simic Aggro by Wyern
+Title=Sol'kanar the Swamp King
+Difficulty=very hard
+Description=Simic Aggro by Wyern
+Icon=Sol'kanar the Swamp King.jpg
+Deck Type=constructed
+
+[main]
+4 Wrenn and Seven
+4 Blizzard Brawl
+4 Decisive Denial
+4 Esika's Chariot
+4 Malevolent Hermit
+4 Old-Growth Troll
+4 Rootcoil Creeper
+4 Werewolf Pack Leader
+4 Kazandu Mammoth
+1 Snow-Covered Island
+1 Lair of the Hydra
+3 Vineglimmer Snarl
+4 Barkchannel Pathway
+4 Rimewood Falls
+11 Snow-Covered Forest
+
+[sideboard]
+3 Test of Talents
+2 Tajuru Blightblade
+1 Snakeskin Veil
+2 Primal Adversary
+3 Outland Liberator
+1 Iymrith, Desert Doom
+3 Inscription of Abundance

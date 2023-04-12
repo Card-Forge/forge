@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Jacob Wilson
+Title=Gill Mann
+Difficulty=very hard
+Description=Gruul Aggro by Jacob Wilson
+Icon=Gill Mann.jpg
+Deck Type=constructed
+
+[main]
+1 Ox of Agonas
+2 Rimrock Knight
+2 Goldspan Dragon
+4 Edgewall Innkeeper
+4 Magda, Brazen Outlaw
+4 Jaspera Sentinel
+4 Lovestruck Beast
+4 Bonecrusher Giant
+3 Embercleave
+4 Esika's Chariot
+4 Shatterskull Smashing
+3 Ranger Class
+1 Mountain
+2 Lair of the Hydra
+2 Den of the Bugbear
+4 Forest
+4 Riverglide Pathway
+4 Cragcrown Pathway
+4 Barkchannel Pathway
+
+[sideboard]
+1 Ox of Agonas
+1 Burning Hands
+2 Klothys, God of Destiny
+2 Magic Missile
+2 The Akroan War
+3 Disdainful Stroke
+4 Redcap Melee

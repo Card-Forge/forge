@@ -1,0 +1,38 @@
+[quest]
+id=44008
+OpponentName=Nicol Bolas
+AILife=20
+Repeat=true
+Wins=10
+Card Reward=Nicol Bolas, Planeswalker|DDH;Countersquall|DDH;Deep Analysis|DDH;1 black rare
+Credit Reward=500
+AIExtras=Nightscape Familiar
+[metadata]
+Name=quest44008
+Title=Nicol Bolas
+Icon=alanicol.jpg
+Difficulty=hard
+Description=A hideous dragon towers above a mountain of writhing corpses before you, his dark magic already seeping into your mind and threatening eternal enslavement and destruction. Act quickly before the draconic planeswalker can defeat you with the help of his empowering pawns.
+Deck Type=constructed
+[Main]
+2 Blazing Specter|DDH
+4 Blightning|ALA
+3 Countersquall|DDH
+1 Cruel Ultimatum|DDH
+4 Crumbling Necropolis|ALA
+2 Deep Analysis|DDH
+2 Fire-Field Ogre|DDH
+4 Grixis Panorama|ALA
+4 Island|ALA|4
+5 Mountain|ALA|1
+2 Nicol Bolas, Planeswalker|DDH
+2 Nightscape Familiar|DDH
+3 Obelisk of Grixis|ALA
+2 Recoil|DDH
+2 Sanity Gnawers|ARB
+3 Sedraxis Specter|ALA
+2 Shambling Remains|CFX
+2 Slavering Nulls|DDH
+3 Soul Manipulation|ARB
+4 Swamp|ALA|2
+4 Swamp|ALA|3

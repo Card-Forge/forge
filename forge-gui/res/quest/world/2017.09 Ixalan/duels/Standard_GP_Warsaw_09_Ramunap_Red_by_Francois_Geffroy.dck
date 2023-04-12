@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Ramunap Red by Francois Geffroy
+Title=Therza Dorc
+Difficulty=very hard
+Description=Ramunap Red by Francois Geffroy
+Icon=Therza Dorc.jpg
+Deck Type=constructed
+
+[main]
+4 Sunscorched Desert|AKH
+4 Ramunap Ruins|HOU
+16 Mountain|XLN
+3 Abrade|HOU
+4 Lightning Strike|XLN
+3 Shock|AER
+3 Rampaging Ferocidon|XLN
+4 Ahn-Crop Crasher|AKH
+4 Hazoret the Fervent|AKH
+3 Kari Zev, Skyship Raider|AER
+4 Earthshaker Khenra|HOU
+4 Bomat Courier|KLD
+4 Soul-Scar Mage|AKH
+
+[sideboard]
+2 Magma Spray|AKH
+2 Pia Nalaar|KLD
+1 Scavenger Grounds|HOU
+3 Aethersphere Harvester|AER
+2 Glorybringer|AKH
+3 Chandra, Torch of Defiance|KLD
+1 Chandra's Defeat|HOU
+1 Harsh Mentor|AKH

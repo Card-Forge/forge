@@ -1,0 +1,53 @@
+[duel]
+[metadata]
+Name=Mardu Midrange by Yimin Zhi
+Title=Pavel Maliki
+Difficulty=very hard
+Description=Mardu Midrange by Yimin Zhi
+Icon=Pavel Maliki.jpg
+Deck Type=constructed
+
+[main]
+1 Destroy Evil
+1 Voltage Surge
+1 Soul Transfer
+1 The Wandering Emperor
+2 Cut Down
+2 Infernal Grasp
+2 Reckoner Bankbuster
+3 Rite of Oblivion
+3 Wedding Announcement
+4 Fable of the Mirror-Breaker
+1 Serra Paragon
+1 Archangel of Wrath
+1 Ao, the Dawn Sky
+1 Sanctuary Warden
+2 Graveyard Trespasser
+3 Tainted Adversary
+4 Bloodtithe Harvester
+1 Plains
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+1 Mountain
+1 Eiganjo, Seat of the Empire
+2 Raffine's Tower
+2 Jetmir's Garden
+3 Sulfurous Springs
+3 Caves of Koilos
+4 Sundown Pass
+4 Haunted Ridge
+4 Shattered Sanctum
+
+[sideboard]
+1 Abrade
+1 Pilfer
+1 The Cruelty of Gix
+1 Unlicensed Hearse
+1 Ob Nixilis, the Adversary
+1 Banishing Slash
+1 Junji, the Midnight Sky
+1 Farewell
+1 Liliana of the Veil
+2 Duress
+2 Cut Down
+2 Reckoner Bankbuster

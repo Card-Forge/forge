@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Ensoul Artifact by Iannello Andrea
+Title=Kangee
+Difficulty=very hard
+Description=Ensoul Artifact by Iannello Andrea
+Icon=Kangee.jpg
+Deck Type=constructed
+
+[main]
+1 Shadowspear
+1 The Blackstaff of Waterdeep
+2 Rise and Shine
+2 Cranial Plating|FD
+3 Mishra's Bauble|CS
+3 All That Glitters
+4 Chalice of the Void|MR
+4 Darksteel Relic|NPH
+4 Ensoul Artifact|M15
+4 Springleaf Drum|BNG
+1 Gingerbrute
+4 Memnite|SOM
+4 Ornithopter|AER
+4 Vault Skirge|NPH
+1 Island
+2 Plains
+4 Spire of Industry|AER
+4 Darksteel Citadel|M15
+4 Urza's Saga
+4 Glimmervoid|MR
+
+[sideboard]
+2 Wear // Tear|DGM
+2 Torpor Orb|NPH
+2 Spellskite|NPH
+2 Relic of Progenitus|ALA
+1 Pithing Needle
+4 Metallic Rebuke|AER
+1 Lurrus of the Dream-Den
+1 Grafdigger's Cage

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Esper Control by Luis Scott-vargas (lsv)
+Title=Ratbert
+Difficulty=very hard
+Description=Esper Control by Luis Scott-vargas (lsv)
+Icon=Ratbert.jpg
+Deck Type=constructed
+
+[main]
+4 Watery Grave
+1 Swamp
+1 Plains
+4 Isolated Chapel
+4 Hallowed Fountain
+4 Godless Shrine
+4 Glacial Fortress|XLN
+2 Basilica Bell-Haunt
+3 Cast Down
+1 Despark
+1 Dovin's Veto
+2 Command the Dreadhorde
+1 Cry of the Carnarium
+3 Kaya's Wrath
+1 The Elderspell
+4 Thought Erasure
+3 Oath of Kaya
+2 Search for Azcanta|XLN
+3 Narset, Parter of Veils
+4 Teferi, Hero of Dominaria
+4 Teferi, Time Raveler
+4 Drowned Catacomb|XLN
+
+[sideboard]
+2 Nightveil Predator
+3 Lyra Dawnbringer
+1 Ixalan's Binding|XLN
+2 Duress
+2 Despark
+2 Dovin's Veto
+1 Cry of the Carnarium
+2 The Elderspell

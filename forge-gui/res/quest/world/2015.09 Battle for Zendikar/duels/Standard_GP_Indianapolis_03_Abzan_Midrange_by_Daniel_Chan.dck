@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Daniel Chan
+Title=alawind
+Difficulty=very hard
+Description=Abzan Midrange by Daniel Chan
+Icon=alawind.jpg
+Deck Type=constructed
+
+[main]
+2 Wingmate Roc|KTK
+4 Warden of the First Tree|FRF
+3 Den Protector|DTK
+3 Heir of the Wilds|KTK
+1 Pitiless Horde|DTK
+4 Siege Rhino|KTK
+3 Anafenza, the Foremost|KTK
+1 Murderous Cut|KTK
+3 Abzan Charm|KTK
+1 Ultimate Price|DTK
+1 Dispel|BFZ
+3 Dromoka's Command|DTK
+1 Planar Outburst|BFZ
+2 Silkwrap|DTK
+3 Gideon, Ally of Zendikar|BFZ
+2 Forest|BFZ
+2 Plains|BFZ
+4 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+2 Llanowar Wastes|ORI
+4 Flooded Strand|KTK
+2 Shambling Vent|BFZ
+2 Canopy Vista|BFZ
+1 Sunken Hollow|BFZ
+1 Prairie Stream|BFZ
+1 Smoldering Marsh|BFZ
+
+[sideboard]
+1 Wingmate Roc|KTK
+1 Ultimate Price|DTK
+2 Virulent Plague|DTK
+2 Surge of Righteousness|DTK
+2 Negate|ORI
+1 Hixus, Prison Warden|ORI
+2 Transgress the Mind|BFZ
+2 Duress|DTK
+2 Infinite Obliteration|ORI

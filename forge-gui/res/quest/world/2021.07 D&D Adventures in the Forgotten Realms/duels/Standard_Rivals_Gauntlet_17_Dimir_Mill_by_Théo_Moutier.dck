@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Dimir Mill by Théo Moutier
+Title=Odin
+Difficulty=very hard
+Description=Dimir Mill by Théo Moutier
+Icon=Odin.jpg
+Deck Type=constructed
+
+[main]
+4 Thieves' Guild Enforcer
+4 Merfolk Windrobber
+4 Ruin Crab
+4 Soaring Thought-Thief
+2 Heartless Act
+3 Power Word Kill
+3 Disdainful Stroke
+4 Drown in the Loch
+4 Into the Story
+1 Of One Mind
+2 Agadeem's Awakening
+1 Zagoth Triome
+3 Hive of the Eye Tyrant
+3 Swamp
+4 Clearwater Pathway
+4 Fabled Passage
+4 Temple of Deceit
+6 Island
+
+[sideboard]
+1 Lurrus of the Dream-Den
+1 Mystical Dispute
+1 Annul
+1 Tymaret, Chosen from Death
+1 Extinction Event
+2 Cling to Dust
+2 Ray of Enfeeblement
+2 Crippling Fear
+4 Skyclave Shade

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Azorius Aggro by teruteru8140
+Title=Piper
+Difficulty=very hard
+Description=Azorius Aggro by teruteru8140
+Icon=Piper.jpg
+Deck Type=constructed
+
+[main]
+4 Elite Spellbinder
+4 Intrepid Adversary
+2 Legion Angel
+4 Luminarch Aspirant
+3 Malevolent Hermit
+2 Reidane, God of the Worthy
+2 Skyclave Apparition
+4 Spectral Adversary
+2 Alrund's Epiphany
+2 Concerted Defense
+3 Fading Hope
+1 Fateful Absence
+2 Jwari Disruption
+3 Cave of the Frost Dragon
+4 Deserted Beach
+1 Hall of Storm Giants
+4 Hengegate Pathway
+7 Island
+6 Plains
+
+[sideboard]
+2 Legion Angel
+1 Malevolent Hermit
+2 Skyclave Apparition
+1 Concerted Defense
+1 Fading Hope
+2 Fateful Absence
+4 Brutal Cathar
+2 Portable Hole

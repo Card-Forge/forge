@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by Jan Ksandr
+Title=Eggs and Honey
+Difficulty=very hard
+Description=Golgari Aggro by Jan Ksandr
+Icon=Eggs and Honey.jpg
+Deck Type=constructed
+
+[main]
+2 Nissa, Voice of Zendikar|OGW
+4 Walking Ballista|AER
+4 Winding Constrictor|AER
+3 Scrapheap Scrounger|KLD
+2 Grim Flayer|EMN
+3 Tireless Tracker|SOI
+3 Rishkar, Peema Renegade|AER
+4 Mindwrack Demon|SOI
+4 Verdurous Gearhulk|KLD
+3 Traverse the Ulvenwald|SOI
+1 Fatal Push|AER
+4 Grasp of Darkness|OGW
+2 Evolving Wilds
+6 Forest|RTR
+7 Swamp|RTR
+4 Hissing Quagmire|OGW
+4 Blooming Marsh|KLD
+
+[sideboard]
+1 Nissa, Voice of Zendikar|OGW
+1 Tireless Tracker|SOI
+3 Fatal Push|AER
+3 Transgress the Mind|BFZ
+1 Ob Nixilis Reignited|BFZ
+1 Noxious Gearhulk|KLD
+2 Kalitas, Traitor of Ghet|OGW
+1 Nissa, Vital Force|KLD
+1 Appetite for the Unnatural|KLD
+1 Lifecrafter's Bestiary|AER

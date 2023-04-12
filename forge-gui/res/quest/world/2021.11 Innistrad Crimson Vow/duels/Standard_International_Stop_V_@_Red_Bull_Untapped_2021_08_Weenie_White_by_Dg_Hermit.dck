@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Weenie White by Dg Hermit
+Title=Icatia
+Difficulty=very hard
+Description=Weenie White by Dg Hermit
+Icon=Icatia.jpg
+Deck Type=constructed
+
+[main]
+1 Reidane, God of the Worthy
+1 Legion Angel
+3 Adeline, Resplendent Cathar
+4 Hopeful Initiate
+4 Luminarch Aspirant
+4 Thalia, Guardian of Thraben
+4 Brutal Cathar
+4 Elite Spellbinder
+4 Usher of the Fallen
+4 Sungold Sentinel
+1 Portable Hole
+2 Valorous Stance
+4 Faceless Haven
+20 Snow-Covered Plains
+
+[sideboard]
+1 Reidane, God of the Worthy
+3 Legion Angel
+2 Portable Hole
+2 Valorous Stance
+1 Circle of Confinement
+2 Paladin Class
+4 Skyclave Apparition

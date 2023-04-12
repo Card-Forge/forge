@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Three-Color Vegetation by Akihiro Kashima
+Title=Lazav
+Difficulty=very hard
+Description=Three-Color Vegetation by Akihiro Kashima
+Icon=Lazav.jpg
+Deck Type=constructed
+
+[main]
+4 Explosive Vegetation|CN2
+3 Cruel Revival|ORI
+4 Akroma's Vengeance|CMD
+3 Withered Wretch|TSP
+3 Undead Gladiator|ONS
+2 Starlight Invoker|10E
+1 Skinthinner|LE
+1 Silvos, Rogue Elemental|ONS
+4 Krosan Tusker|C13
+4 Exalted Angel|ONS
+3 Daru Sanctifier|LE
+2 Akroma, Angel of Wrath|TSP
+4 Windswept Heath|KTK
+3 Tranquil Thicket|C14
+6 Swamp|RTR
+3 Plains|RTR
+4 Grand Coliseum|C16
+4 Forest|RTR
+2 Barren Moor|C15
+
+[sideboard]
+1 Unholy Grotto|ONS
+4 Smother|WWK
+3 Ravenous Baloth|C13
+2 Infest|CN2
+3 Demystify|XLN
+1 Withered Wretch|TSP
+1 Skinthinner|LE

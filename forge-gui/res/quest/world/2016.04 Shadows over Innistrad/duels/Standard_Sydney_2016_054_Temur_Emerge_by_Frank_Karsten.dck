@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Temur Emerge by Frank Karsten
+Title=Aurora
+Difficulty=very hard
+Description=Temur Emerge by Frank Karsten
+Icon=Aurora.jpg
+Deck Type=constructed
+
+[main]
+2 Traverse the Ulvenwald|SOI
+4 Gather the Pack|ORI
+4 Grapple with the Past|EMN
+4 Kozilek's Return|OGW
+1 Wretched Gryff|EMN
+1 Emrakul, the Promised End|EMN
+1 Lashweed Lurker|EMN
+3 Ishkanah, Grafwidow|EMN
+4 Elder Deep-Fiend|EMN
+4 Pilgrim's Eye|BFZ
+4 Jace, Vryn's Prodigy|ORI
+4 Primal Druid|EMN
+1 Sanctum of Ugin|BFZ
+1 Mountain|RTR
+2 Evolving Wilds
+3 Lumbering Falls|BFZ
+3 Island|RTR
+4 Yavimaya Coast|ORI
+4 Shivan Reef|ORI
+6 Forest|RTR
+
+[sideboard]
+3 Radiant Flames|BFZ
+1 Eldrazi Obligator|OGW
+2 Titan's Presence|BFZ
+2 Negate
+2 Reality Smasher|OGW
+2 Tireless Tracker|SOI
+1 Emrakul, the Promised End|EMN
+1 Lashweed Lurker|EMN
+1 Sanctum of Ugin|BFZ

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Dimir Control by Philip Mahr
+Title=Osiris
+Difficulty=very hard
+Description=Dimir Control by Philip Mahr
+Icon=Osiris.jpg
+Deck Type=constructed
+
+[main]
+3 Lier, Disciple of the Drowned
+4 Sedgemoor Witch
+1 Power Word Kill
+1 Infernal Grasp
+2 Thirst for Discovery
+2 Jwari Disruption
+2 Flunk
+3 Fading Hope
+3 Behold the Multiverse
+4 Consider
+4 Divide by Zero
+3 Bloodchief's Thirst
+4 Duress
+1 Hive of the Eye Tyrant
+2 Port of Karfell
+3 Field of Ruin
+4 Shipwreck Marsh
+4 Clearwater Pathway
+5 Island
+5 Swamp
+
+[sideboard]
+1 Power Word Kill
+1 Environmental Sciences
+1 Parasitic Grasp
+1 Teachings of the Archaics
+1 Mascot Exhibition
+2 Hullbreaker Horror
+2 Ray of Enfeeblement
+2 Soul Shatter
+4 Go Blank

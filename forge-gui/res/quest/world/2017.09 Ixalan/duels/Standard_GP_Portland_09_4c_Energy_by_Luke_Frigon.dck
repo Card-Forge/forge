@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=4c Energy by Luke Frigon
+Title=Centaur Warchief
+Difficulty=very hard
+Description=4c Energy by Luke Frigon
+Icon=Centaur Warchief.jpg
+Deck Type=constructed
+
+[main]
+3 Chandra, Torch of Defiance|KLD
+2 Bristling Hydra|KLD
+2 Glorybringer|AKH
+4 Longtusk Cub|KLD
+4 Rogue Refiner|AER
+4 Servant of the Conduit|KLD
+2 The Scarab God|HOU
+4 Whirler Virtuoso|KLD
+4 Attune with Aether|KLD
+1 Abrade|HOU
+4 Harnessed Lightning|KLD
+2 Magma Spray|AKH
+1 Skysovereign, Consul Flagship|KLD
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+3 Forest|XLN
+1 Island|XLN
+2 Mountain|XLN
+3 Rootbound Crag|XLN
+1 Sheltered Thicket|AKH
+3 Spirebluff Canal|KLD
+1 Swamp|XLN
+1 Vraska, Relic Seeker|XLN
+
+[sideboard]
+2 Abrade|HOU
+1 Appetite for the Unnatural|KLD
+1 Chandra's Defeat|HOU
+2 Confiscation Coup|KLD
+3 Negate|AER
+1 Nicol Bolas, God-Pharaoh|HOU
+1 Nissa, Steward of Elements|AKH
+1 River's Rebuke|XLN
+1 Spell Pierce|XLN
+2 Supreme Will|HOU

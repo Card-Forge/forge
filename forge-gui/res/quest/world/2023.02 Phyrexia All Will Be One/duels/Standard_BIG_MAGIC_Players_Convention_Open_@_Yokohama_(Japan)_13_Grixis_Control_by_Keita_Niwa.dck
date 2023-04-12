@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Grixis Control by Keita Niwa
+Title=Nailah
+Difficulty=very hard
+Description=Grixis Control by Keita Niwa
+Icon=Nailah.jpg
+Deck Type=constructed
+
+[main]
+1 Liliana of the Veil
+2 Negate
+2 Brotherhood's End
+3 Abrade
+3 Make Disappear
+3 Go for the Throat
+3 Reckoner Bankbuster
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+1 Bladecoil Serpent
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Takenuma, Abandoned Mire
+1 Swamp
+2 Shivan Reef
+2 Underground River
+2 Darkslick Shores
+2 Blackcleave Cliffs
+4 Sulfurous Springs
+4 Xander's Lounge
+4 Haunted Ridge
+4 Shipwreck Marsh
+
+[sideboard]
+4 Cut Down
+3 Sheoldred, the Apocalypse
+2 Duress
+2 Disdainful Stroke
+2 Razorlash Transmogrant
+2 Siphon Insight

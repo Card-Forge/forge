@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mono Black Control by Nathan Laumann
+Title=Marhault Elsdragon
+Difficulty=very hard
+Description=Mono Black Control by Nathan Laumann
+Icon=Marhault Elsdragon.jpg
+Deck Type=constructed
+
+[main]
+2 Deadly Dispute
+2 Duress
+2 Sorin the Mirthless
+3 The Meathook Massacre
+4 Blood on the Snow
+4 Lolth, Spider Queen
+4 Infernal Grasp
+2 Valki, God of Lies
+3 Skullport Merchant
+4 Concealing Curtains
+4 Shambling Ghast
+2 Field of Ruin
+2 Hive of the Eye Tyrant
+4 Faceless Haven
+18 Snow-Covered Swamp
+
+[sideboard]
+4 Skyclave Shade
+3 Graveyard Trespasser
+3 Go Blank
+2 Power Word Kill
+1 Soul Shatter
+2 Duress

@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Deaths Shadow by Sky Bauerschmidt Sweeney
+Title=Bendidret
+Difficulty=very hard
+Description=Deaths Shadow by Sky Bauerschmidt Sweeney
+Icon=Bendidret.jpg
+Deck Type=constructed
+
+[main]
+2 Kroxa, Titan of Death's Hunger
+4 Dragon's Rage Channeler
+4 Ragavan, Nimble Pilferer
+4 Death's Shadow|WWK
+4 Mishra's Bauble|CS
+1 Lightning Bolt|M11
+1 Kolaghan's Command|DTK
+1 Spell Pierce|XLN
+1 Fatal Push|AER
+3 Drown in the Loch
+4 Unholy Heat
+2 Inquisition of Kozilek|ROE
+4 Expressive Iteration
+4 Thoughtseize|THS
+2 Dress Down
+1 Mountain
+1 Swamp
+2 Blood Crypt
+2 Steam Vents
+2 Watery Grave
+3 Scalding Tarn|ZEN
+4 Polluted Delta|KTK
+4 Bloodstained Mire|KTK
+
+[sideboard]
+2 Kolaghan's Command|DTK
+1 Spell Pierce|XLN
+1 Dress Down
+1 Aether Gust
+1 Engineered Explosives|FD
+1 Terminate|ARB
+1 Alpine Moon
+1 Lurrus of the Dream-Den
+2 Tourach, Dread Cantor
+2 Nihil Spellbomb|SOM
+2 Collective Brutality|EMN

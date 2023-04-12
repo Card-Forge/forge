@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Paul MacKinnon
+Title=Yawgmoth
+Difficulty=very hard
+Description=Red Deck Wins by Paul MacKinnon
+Icon=Yawgmoth.jpg
+Deck Type=constructed
+
+[main]
+4 Ember Hauler|M11
+4 Goblin Guide|ZEN
+4 Grim Lavamancer|M12
+1 Hero of Oxid Ridge|MBS
+4 Kargan Dragonlord|ROE
+4 Spikeshot Elder|SOM
+4 Incinerate|M12
+4 Lightning Bolt|M11
+4 Searing Blaze|WWK
+4 Shrine of Burning Rage|NPH
+4 Arid Mesa|ZEN
+11 Mountain|M12
+4 Scalding Tarn|ZEN
+4 Teetering Peaks|ZEN
+
+[sideboard]
+3 Manic Vandal|M12
+1 Act of Aggression|NPH
+4 Combust|M12
+3 Dismember|NPH
+4 Mark of Mutiny|ZEN

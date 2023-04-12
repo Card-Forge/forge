@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Goblins by Mattias Jorstedt
+Title=Blue Devil
+Difficulty=very hard
+Description=Goblins by Mattias Jorstedt
+Icon=Blue Devil.jpg
+Deck Type=constructed
+
+[main]
+4 Shock
+3 Thoughtbound Primoc|ONS
+4 Sparksmith|ONS
+4 Goblin Sledder|ONS
+4 Goblin Piledriver|ORI
+4 Goblin Grappler|LE
+4 Goblin Goon|LE
+4 Gempalm Incinerator|LE
+4 Clickslither|LE
+18 Mountain|RTR
+4 Goblin Burrows|ONS
+3 Forgotten Cave|C15
+
+[sideboard]
+4 Starstorm|C14
+4 Skirk Fire Marshal|ONS
+2 Rorix Bladewing|ONS
+3 Avarax|ONS
+1 Thoughtbound Primoc|ONS
+1 Forgotten Cave|C15

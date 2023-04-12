@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=4c Energy by Trevor Coulombe
+Title=Enchantress
+Difficulty=very hard
+Description=4c Energy by Trevor Coulombe
+Icon=Enchantress.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Torch of Defiance|KLD
+3 Glorybringer|AKH
+3 Bristling Hydra|KLD
+4 Servant of the Conduit|KLD
+4 Longtusk Cub|KLD
+4 Whirler Virtuoso|KLD
+4 Rogue Refiner|AER
+2 The Scarab God|HOU
+4 Attune with Aether|KLD
+1 Magma Spray|AKH
+4 Harnessed Lightning|KLD
+2 Abrade|HOU
+3 Forest|XLN
+1 Swamp|XLN
+1 Island|XLN
+2 Mountain|XLN
+4 Aether Hub|KLD
+3 Rootbound Crag|XLN
+1 Sheltered Thicket|AKH
+4 Botanical Sanctum|KLD
+3 Spirebluff Canal|KLD
+1 Vraska, Relic Seeker|XLN
+
+[sideboard]
+1 Magma Spray|AKH
+1 Abrade|HOU
+1 Chandra's Defeat|HOU
+2 Cartouche of Ambition|AKH
+2 Appetite for the Unnatural|KLD
+3 Negate|AER
+1 Spell Pierce|XLN
+1 River's Rebuke|XLN
+1 Vizier of Many Faces|AKH
+2 Confiscation Coup|KLD

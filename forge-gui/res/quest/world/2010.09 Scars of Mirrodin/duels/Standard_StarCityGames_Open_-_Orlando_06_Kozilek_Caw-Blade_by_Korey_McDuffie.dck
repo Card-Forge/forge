@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Kozilek Caw-Blade by Korey McDuffie
+Title=Blind Faith
+Difficulty=very hard
+Description=Kozilek Caw-Blade by Korey McDuffie
+Icon=Blind Faith.jpg
+Deck Type=constructed
+
+[main]
+4 Squadron Hawk|M11
+4 Stoneforge Mystic|WWK
+1 Dismember|NPH
+2 Doom Blade|M11
+1 Go for the Throat|MBS
+2 Into the Roil|ZEN
+2 Day of Judgment|M11
+3 Despise|NPH
+3 Inquisition of Kozilek|ROE
+4 Preordain|M11
+1 Batterskull|NPH
+1 Sword of Feast and Famine|MBS
+1 Sword of War and Peace|NPH
+2 Island|NPH
+4 Plains|NPH
+2 Swamp|NPH
+4 Creeping Tar Pit|WWK
+4 Darkslick Shores|SOM
+2 Glacial Fortress|M11
+4 Marsh Flats|ZEN
+4 Seachrome Coast|SOM
+1 Jace Beleren|M11
+4 Jace, the Mind Sculptor|WWK
+
+[sideboard]
+1 Dismember|NPH
+2 Go for the Throat|MBS
+1 Batterskull|NPH
+1 Jace Beleren|M11
+1 Grave Titan|M11
+1 Sun Titan|M11
+2 Divine Offering|MBS
+2 Flashfreeze|M11
+1 Duress|M11
+2 Memoricide|SOM
+1 Gideon Jura|ROE

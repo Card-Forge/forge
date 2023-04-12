@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by Ken Yukuhiro
+Title=Havenwood
+Difficulty=very hard
+Description=Golgari Aggro by Ken Yukuhiro
+Icon=Havenwood.jpg
+Deck Type=constructed
+
+[main]
+4 Walking Ballista|AER
+4 Greenbelt Rampager|AER
+4 Glint-Sleeve Siphoner|AER
+4 Longtusk Cub|KLD
+4 Winding Constrictor|AER
+4 Rishkar, Peema Renegade|AER
+4 Verdurous Gearhulk|KLD
+4 Attune with Aether|KLD
+3 Fatal Push|AER
+2 Grasp of Darkness|OGW
+2 Aethersphere Harvester|AER
+4 Aether Hub|KLD
+4 Blooming Marsh|KLD
+6 Forest|RTR
+3 Hissing Quagmire|OGW
+4 Swamp|RTR
+
+[sideboard]
+1 Fatal Push|AER
+1 Noxious Gearhulk|KLD
+3 Transgress the Mind|BFZ
+1 Appetite for the Unnatural|KLD
+3 Lifecrafter's Bestiary|AER
+2 Murder
+1 Nissa, Vital Force|KLD
+2 Ob Nixilis Reignited|BFZ
+1 Skysovereign, Consul Flagship|KLD

@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Elduderino17
+Title=The Shielded Sea
+Difficulty=very hard
+Description=Red Deck Wins by Elduderino17
+Icon=The Shielded Sea.jpg
+Deck Type=constructed
+
+[main]
+18 Mountain
+4 Castle Embereth
+4 Light Up the Stage
+1 Infuriate
+4 Embercleave
+4 Anax, Hardened in the Forge
+4 Scorch Spitter
+4 Runaway Steam-Kin
+4 Robber of the Rich
+4 Fervent Champion
+4 Tin Street Dodger
+3 Bonecrusher Giant
+2 Rimrock Knight
+
+[sideboard]
+4 Unchained Berserker
+4 Redcap Melee
+3 Embereth Shieldbreaker
+2 Chandra's Pyrohelix
+2 Chandra, Acolyte of Flame

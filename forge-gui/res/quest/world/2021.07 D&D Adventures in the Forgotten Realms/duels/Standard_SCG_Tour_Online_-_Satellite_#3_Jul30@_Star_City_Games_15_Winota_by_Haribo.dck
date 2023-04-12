@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Winota by Haribo
+Title=Warlock
+Difficulty=very hard
+Description=Winota by Haribo
+Icon=Warlock.jpg
+Deck Type=constructed
+
+[main]
+2 Kenrith, the Returned King
+2 Minsc, Beloved Ranger
+3 Lotus Cobra
+3 Blade Historian
+4 Selfless Savior
+4 Elite Spellbinder
+4 Winota, Joiner of Forces
+4 Jaspera Sentinel
+4 Prosperous Innkeeper
+4 Esika's Chariot
+3 Shatterskull Smashing
+1 Ranger Class
+1 Mountain
+2 Plains
+2 Lair of the Hydra
+2 Forest
+3 Fabled Passage
+4 Branchloft Pathway
+4 Cragcrown Pathway
+4 Needleverge Pathway
+
+[sideboard]
+1 Klothys, God of Destiny
+1 The Akroan War
+2 Bonecrusher Giant
+2 Reidane, God of the Worthy
+2 Ox of Agonas
+2 Drannith Magistrate
+2 Burning Hands
+3 Redcap Melee

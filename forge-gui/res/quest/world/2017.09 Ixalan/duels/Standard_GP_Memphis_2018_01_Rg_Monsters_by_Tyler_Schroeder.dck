@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Rg Monsters by Tyler Schroeder
+Title=alakar
+Difficulty=very hard
+Description=Rg Monsters by Tyler Schroeder
+Icon=alakar.jpg
+Deck Type=constructed
+
+[main]
+4 Glorybringer|AKH
+4 Jadelight Ranger
+4 Merfolk Branchwalker|XLN
+1 Pia Nalaar|KLD
+4 Rekindling Phoenix
+3 Resilient Khenra|HOU
+2 Rhonas the Indomitable|AKH
+2 Struggle // Survive|HOU
+4 Abrade|HOU
+3 Magma Spray|AKH
+7 Forest
+2 Hashep Oasis|HOU
+8 Mountain
+4 Rootbound Crag|XLN
+4 Sheltered Thicket|AKH
+4 Earthshaker Khenra|HOU
+
+[sideboard]
+1 Struggle // Survive|HOU
+1 Magma Spray|AKH
+2 Atzocan Archer|XLN
+1 Blossoming Defense|KLD
+2 Carnage Tyrant|XLN
+1 Chandra's Defeat|HOU
+2 Chandra, Torch of Defiance|KLD
+2 Deathgorge Scavenger|XLN
+1 Naturalize
+2 Thrashing Brontodon

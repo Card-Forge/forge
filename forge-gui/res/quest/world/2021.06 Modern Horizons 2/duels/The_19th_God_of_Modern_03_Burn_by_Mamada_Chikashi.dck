@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Burn by Mamada Chikashi
+Title=Northern Paladin
+Difficulty=very hard
+Description=Burn by Mamada Chikashi
+Icon=Northern Paladin.jpg
+Deck Type=constructed
+
+[main]
+4 Goblin Guide|ZEN
+4 Monastery Swiftspear|KTK
+4 Eidolon of the Great Revel|JOU
+2 Lightning Helix|RAV
+2 Skullcrack|GTC
+4 Boros Charm|GTC
+4 Searing Blaze|WWK
+4 Lightning Bolt|M11
+4 Lava Spike|CHK
+4 Rift Bolt|TSP
+4 Skewer the Critics
+1 Scalding Tarn|ZEN
+1 Bloodstained Mire|KTK
+1 Fiery Islet
+2 Sacred Foundry
+3 Mountain
+4 Arid Mesa|ZEN
+4 Inspiring Vantage|KLD
+4 Sunbaked Canyon
+
+[sideboard]
+2 Skullcrack|GTC
+1 Roiling Vortex
+1 Kor Firewalker|WWK
+2 Path to Exile|CFX
+2 Deflecting Palm|KTK
+3 Sanctifier en-Vec
+4 Smash to Smithereens|ORI

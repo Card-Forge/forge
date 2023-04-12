@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Jund by Kobayashi Ryousuke
+Title=Brother Voodoo
+Difficulty=very hard
+Description=Jund by Kobayashi Ryousuke
+Icon=Brother Voodoo.jpg
+Deck Type=constructed
+
+[main]
+1 Unleash the Inferno
+1 Ray of Enfeeblement
+1 Duress
+2 Riveteers Charm
+2 The Meathook Massacre
+2 Wrenn and Seven
+3 Voltage Surge
+4 Esika's Chariot
+4 Fable of the Mirror-Breaker
+2 Valki, God of Lies
+2 Vorinclex, Monstrous Raider
+3 Briarbridge Tracker
+3 Tenacious Underdog
+4 Bloodtithe Harvester
+1 Swamp
+1 Takenuma, Abandoned Mire
+1 Boseiju, Who Endures
+1 Mountain
+2 Darkbore Pathway
+2 Hive of the Eye Tyrant
+2 Rockfall Vale
+3 Cragcrown Pathway
+3 Haunted Ridge
+3 Deathcap Glade
+3 Blightstep Pathway
+4 Ziatora's Proving Ground
+
+[sideboard]
+3 Check for Traps
+2 Unlicensed Hearse
+2 Ob Nixilis, the Adversary
+3 Unleash the Inferno
+3 Ray of Enfeeblement
+1 Duress
+1 Riveteers Charm

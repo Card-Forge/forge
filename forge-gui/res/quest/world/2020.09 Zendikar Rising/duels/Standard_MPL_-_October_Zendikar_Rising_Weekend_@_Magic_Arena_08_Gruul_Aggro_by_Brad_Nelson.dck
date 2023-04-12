@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Brad Nelson
+Title=Lefterel
+Difficulty=very hard
+Description=Gruul Aggro by Brad Nelson
+Icon=Lefterel.jpg
+Deck Type=constructed
+
+[main]
+4 Gemrazer
+3 Mountain
+7 Forest
+4 Fabled Passage
+2 Evolving Wilds
+4 Cragcrown Pathway
+4 Shatterskull Smashing
+2 Scavenging Ooze
+2 Questing Beast
+4 Lovestruck Beast
+4 Kazandu Mammoth
+4 Edgewall Innkeeper
+4 Brushfire Elemental
+4 Bonecrusher Giant
+4 Embercleave
+4 Stonecoil Serpent
+
+[sideboard]
+1 Scavenging Ooze
+2 Garruk's Harbinger
+2 The Great Henge
+2 Phoenix of Ash
+1 Ox of Agonas
+3 Vivien, Monsters' Advocate
+4 Scorching Dragonfire

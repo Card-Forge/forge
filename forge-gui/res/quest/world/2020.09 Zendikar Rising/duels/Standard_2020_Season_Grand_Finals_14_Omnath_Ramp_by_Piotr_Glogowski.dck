@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Omnath Ramp by Piotr Glogowski
+Title=The Great Gatsby
+Difficulty=very hard
+Description=Omnath Ramp by Piotr Glogowski
+Icon=The Great Gatsby.jpg
+Deck Type=constructed
+
+[main]
+2 Kenrith, the Returned King
+2 Terror of the Peaks
+4 Beanstalk Giant
+4 Lotus Cobra
+4 Omnath, Locus of Creation
+2 Mystical Dispute
+3 Spikefield Hazard
+1 Shatterskull Smashing
+2 Thundering Rebuke
+4 Genesis Ultimatum
+4 Escape to the Wilds
+2 Confounding Conundrum
+1 Plains
+2 Cragcrown Pathway
+2 Evolving Wilds
+2 Ketria Triome
+2 Mountain
+4 Island
+4 Fabled Passage
+4 Raugrin Triome
+5 Forest
+
+[sideboard]
+1 Mystical Dispute
+1 Swift Response
+1 Chainweb Aracnir
+1 Ugin, the Spirit Dragon
+1 Ox of Agonas
+2 Felidar Retreat
+2 Bonecrusher Giant
+2 Wilt
+2 Mazemind Tome
+2 Negate

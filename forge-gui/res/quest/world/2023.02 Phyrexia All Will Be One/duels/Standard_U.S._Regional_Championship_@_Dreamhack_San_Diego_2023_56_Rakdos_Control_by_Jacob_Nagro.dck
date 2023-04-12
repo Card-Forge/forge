@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Rakdos Control by Jacob Nagro
+Title=Prince Valiant
+Difficulty=very hard
+Description=Rakdos Control by Jacob Nagro
+Icon=Prince Valiant.jpg
+Deck Type=constructed
+
+[main]
+1 Infernal Grasp
+1 Gix's Command
+1 Abrade
+3 Reckoner Bankbuster
+3 Go for the Throat
+4 Fable of the Mirror-Breaker
+4 Cut Down
+4 Invoke Despair
+1 Archfiend of the Dross
+4 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Graveyard Trespasser
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+1 Mirrex
+1 Mountain
+4 Sulfurous Springs
+4 Haunted Ridge
+4 Blackcleave Cliffs
+10 Swamp
+
+[sideboard]
+2 Vampires' Vengeance
+3 Duress
+1 Obliterating Bolt
+1 Sheoldred's Edict
+2 Razorlash Transmogrant
+1 Vraska, Betrayal's Sting
+1 Soul Transfer
+1 Gix's Command
+1 Abrade
+1 Reckoner Bankbuster
+1 Archfiend of the Dross

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Astral Slide by Gabe Walls
+Title=Saltrem Tor
+Difficulty=very hard
+Description=Astral Slide by Gabe Walls
+Icon=Saltrem Tor.jpg
+Deck Type=constructed
+
+[main]
+3 Wrath of God|C13
+4 Spark Spray|SC
+2 Slice and Dice|C13
+4 Renewed Faith|AKH
+4 Lightning Rift|ONS
+3 Decree of Justice|C14
+4 Burning Wish|CN2
+3 Astral Slide|ONS
+3 Exalted Angel|ONS
+3 Eternal Dragon|C13
+3 Temple of the False God|C16
+4 Secluded Steppe|C15
+8 Plains|RTR
+8 Mountain|RTR
+4 Forgotten Cave|C15
+
+[sideboard]
+1 Overmaster|TO
+2 Obliterate|8E
+2 Morningtide|TO
+1 Demolish|XLN
+1 Decree of Annihilation|SC
+2 Cleansing Meditation|TO
+1 Ancestral Tribute|OD
+1 Wrath of God|C13
+1 Slice and Dice|C13
+1 Decree of Justice|C14
+1 Exalted Angel|ONS
+1 Eternal Dragon|C13

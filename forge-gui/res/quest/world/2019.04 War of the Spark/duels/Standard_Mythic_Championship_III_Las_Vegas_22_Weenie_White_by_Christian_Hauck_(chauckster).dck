@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Weenie White by Christian Hauck (chauckster)
+Title=Arzakon
+Difficulty=very hard
+Description=Weenie White by Christian Hauck (chauckster)
+Icon=Arzakon.jpg
+Deck Type=constructed
+
+[main]
+20 Plains
+2 Gideon Blackblade
+4 Legion's Landing|XLN
+4 History of Benalia
+3 Conclave Tribunal
+4 Venerated Loxodon
+1 Tomik, Distinguished Advokist
+3 Snubhorn Sentry
+4 Skymarcher Aspirant
+4 Law-Rune Enforcer
+4 Dauntless Bodyguard
+4 Benalish Marshal
+3 Adanto Vanguard|XLN
+
+[sideboard]
+4 Tocatli Honor Guard|XLN
+1 Prison Realm
+1 Lyra Dawnbringer
+4 Baffling End
+2 Ajani, Adversary of Tyrants
+1 Gideon Blackblade
+1 Conclave Tribunal
+1 Tomik, Distinguished Advokist

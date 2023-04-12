@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Orzhov Aggro by Remi Fortier
+Title=alathrax
+Difficulty=very hard
+Description=Orzhov Aggro by Remi Fortier
+Icon=alathrax.jpg
+Deck Type=constructed
+
+[main]
+3 Gideon of the Trials|AKH
+4 Scrapheap Scrounger|KLD
+4 Knight of Malice
+3 Walking Ballista|AER
+3 Fatal Push|AER
+4 Heart of Kiran|AER
+2 Skysovereign, Consul Flagship|KLD
+4 History of Benalia
+4 Cast Out|AKH
+10 Plains
+1 Shefet Dunes|HOU
+3 Ifnir Deadlands|HOU
+4 Concealed Courtyard|KLD
+1 Forsaken Sanctuary
+4 Isolated Chapel
+2 Swamp
+4 Karn, Scion of Urza
+
+[sideboard]
+1 Profane Procession
+1 Fragmentize|KLD
+2 Cast Down
+4 Duress|XLN
+1 Doomfall|HOU
+2 Arguel's Blood Fast|XLN
+2 Angel of Sanctions|AKH
+1 Ixalan's Binding|XLN
+1 Aethersphere Harvester|AER

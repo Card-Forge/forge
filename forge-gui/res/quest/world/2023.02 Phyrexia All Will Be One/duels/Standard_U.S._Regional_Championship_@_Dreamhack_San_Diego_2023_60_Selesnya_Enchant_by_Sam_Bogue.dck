@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Selesnya Enchant by Sam Bogue
+Title=Sisters of Stone Death
+Difficulty=very hard
+Description=Selesnya Enchant by Sam Bogue
+Icon=Sisters of Stone Death.jpg
+Deck Type=constructed
+
+[main]
+1 Wedding Announcement
+2 Rite of Harmony
+4 The Restoration of Eiganjo
+4 Teachings of the Kirin
+4 Commune with Spirits
+4 Hallowed Haunting
+4 Ossification
+1 Weaver of Harmony
+4 Katilda, Dawnhart Martyr
+4 Jukai Naturalist
+4 Generous Visitor
+4 Spirited Companion
+1 Overgrown Farmland
+1 Boseiju, Who Endures
+4 Brushland
+4 Razorverge Thicket
+4 Forest
+6 Plains
+
+[sideboard]
+1 The Stone Brain
+3 Nissa, Ascended Animist
+1 Destroy Evil
+3 Circle of Confinement
+1 Vanquish the Horde
+3 Borrowed Time
+2 Wedding Announcement
+1 Rite of Harmony

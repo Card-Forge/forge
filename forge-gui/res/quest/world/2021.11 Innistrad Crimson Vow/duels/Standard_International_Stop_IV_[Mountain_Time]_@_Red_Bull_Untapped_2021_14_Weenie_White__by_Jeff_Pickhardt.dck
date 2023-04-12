@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Weenie White  by Jeff Pickhardt
+Title=Nibbler
+Difficulty=very hard
+Description=Weenie White  by Jeff Pickhardt
+Icon=Nibbler.jpg
+Deck Type=constructed
+
+[main]
+1 Usher of the Fallen
+1 Sungold Sentinel
+2 Legion Angel
+3 Thalia, Guardian of Thraben
+3 Brutal Cathar
+4 Hopeful Initiate
+4 Elite Spellbinder
+4 Intrepid Adversary
+4 Luminarch Aspirant
+4 Stonebinder's Familiar
+4 Adeline, Resplendent Cathar
+3 Valorous Stance
+4 Faceless Haven
+19 Snow-Covered Plains
+
+[sideboard]
+1 Sungold Sentinel
+2 Legion Angel
+1 Brutal Cathar
+1 Gavony Dawnguard
+1 Paladin Class
+1 Skyclave Apparition
+2 Reidane, God of the Worthy
+2 Portable Hole
+2 Guardian of Faith
+2 Fateful Absence

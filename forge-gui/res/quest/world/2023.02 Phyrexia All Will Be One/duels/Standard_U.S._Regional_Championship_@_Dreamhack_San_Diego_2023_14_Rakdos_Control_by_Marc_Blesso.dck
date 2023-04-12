@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Rakdos Control by Marc Blesso
+Title=James T Kirk
+Difficulty=very hard
+Description=Rakdos Control by Marc Blesso
+Icon=James T Kirk.jpg
+Deck Type=constructed
+
+[main]
+2 Gix's Command
+2 Reckoner Bankbuster
+4 Go for the Throat
+4 Fable of the Mirror-Breaker
+4 Cut Down
+4 Invoke Despair
+2 Sheoldred, the Apocalypse
+4 Graveyard Trespasser
+4 Archfiend of the Dross
+4 Bloodtithe Harvester
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+1 Mirrex
+1 Mountain
+4 Sulfurous Springs
+4 Blackcleave Cliffs
+4 Haunted Ridge
+10 Swamp
+
+[sideboard]
+2 Ob Nixilis, the Adversary
+1 Soul Transfer
+2 Vampires' Vengeance
+1 Unlicensed Hearse
+3 Tribute to Horobi
+4 Duress
+1 Gix's Command
+1 Reckoner Bankbuster

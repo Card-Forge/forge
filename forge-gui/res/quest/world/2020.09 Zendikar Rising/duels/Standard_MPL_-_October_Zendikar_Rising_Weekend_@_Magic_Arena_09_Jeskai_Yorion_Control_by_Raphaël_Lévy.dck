@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Jeskai Yorion Control by Raphaël Lévy
+Title=Harry Potter
+Difficulty=very hard
+Description=Jeskai Yorion Control by Raphaël Lévy
+Icon=Harry Potter.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+2 Glimpse of Freedom
+3 Omen of the Sun
+3 Essence Scatter
+3 Golden Egg
+4 Glass Casket
+4 Omen of the Forge
+4 Shark Typhoon
+4 Omen of the Sea
+4 Elspeth Conquers Death
+1 Giant Killer
+1 Barrin, Tolarian Archmage
+1 Alirios, Enraptured
+3 Yorion, Sky Nomad
+4 Skyclave Apparition
+4 Charming Prince
+1 Castle Ardenvale
+1 Castle Vantress
+1 Mountain
+4 Needleverge Pathway
+4 Fabled Passage
+4 Temple of Enlightenment
+4 Riverglide Pathway
+4 Raugrin Triome
+5 Island
+6 Plains
+
+[sideboard]
+1 Soul-Guide Lantern
+3 Scorching Dragonfire
+4 Mystical Dispute
+2 Negate
+2 Glimpse of Freedom
+2 Giant Killer
+1 Yorion, Sky Nomad

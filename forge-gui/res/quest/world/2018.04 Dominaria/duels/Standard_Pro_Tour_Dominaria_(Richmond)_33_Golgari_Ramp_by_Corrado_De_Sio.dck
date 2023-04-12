@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Golgari Ramp by Corrado De Sio
+Title=Elegua
+Difficulty=very hard
+Description=Golgari Ramp by Corrado De Sio
+Icon=Elegua.jpg
+Deck Type=constructed
+
+[main]
+4 Llanowar Elves
+4 Servant of the Conduit|KLD
+4 Thrashing Brontodon
+2 Ravenous Chupacabra
+2 Josu Vess, Lich Knight
+4 Hour of Promise|HOU
+2 Fatal Push|AER
+2 Cast Down
+4 Vraska's Contempt|XLN
+2 Aethersphere Harvester|AER
+1 Skysovereign, Consul Flagship|KLD
+1 Arguel's Blood Fast|XLN
+1 Arch of Orazca
+4 Blooming Marsh|KLD
+2 Evolving Wilds
+1 Field of Ruin|XLN
+3 Forest
+3 Hashep Oasis|HOU
+3 Ifnir Deadlands|HOU
+1 Scavenger Grounds|HOU
+3 Swamp
+4 Woodland Cemetery
+3 Vraska, Relic Seeker|XLN
+
+[sideboard]
+1 Cast Down
+1 Arguel's Blood Fast|XLN
+4 Duress|XLN
+2 Lost Legacy|KLD
+2 Deathgorge Scavenger|XLN
+2 Sandwurm Convergence|AKH
+2 Golden Demise
+1 Hour of Glory|HOU

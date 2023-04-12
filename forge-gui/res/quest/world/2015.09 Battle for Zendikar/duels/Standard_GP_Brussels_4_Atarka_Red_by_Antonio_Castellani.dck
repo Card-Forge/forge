@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Atarka Red by Antonio Castellani
+Title=Lex Luthor
+Difficulty=very hard
+Description=Atarka Red by Antonio Castellani
+Icon=Lex Luthor.jpg
+Deck Type=constructed
+
+[main]
+3 Temur Battle Rage|FRF
+3 Wild Slash|FRF
+4 Zurgo Bellstriker|DTK
+4 Titan's Strength|ORI
+2 Fiery Impulse|ORI
+3 Become Immense|KTK
+4 Atarka's Command|DTK
+4 Dragon Fodder|ORI
+2 Hordeling Outburst|KTK
+1 Forest|BFZ
+8 Mountain|BFZ
+2 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+4 Bloodstained Mire|KTK
+2 Cinder Glade|BFZ
+2 Lightning Berserker|DTK
+4 Abbot of Keral Keep|ORI
+4 Monastery Swiftspear|KTK
+
+[sideboard]
+2 Fiery Impulse|ORI
+2 Hordeling Outburst|KTK
+2 Den Protector|DTK
+2 Rending Volley|DTK
+3 Chandra, Fire of Kaladesh|ORI
+3 Roast|DTK
+1 Arc Lightning|KTK

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Naya Aggro by James Damore
+Title=Tenga
+Difficulty=very hard
+Description=Naya Aggro by James Damore
+Icon=Tenga.jpg
+Deck Type=constructed
+
+[main]
+1 Toski, Bearer of Secrets
+2 Drannith Magistrate
+3 Clarion Spirit
+4 Jaspera Sentinel
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Elite Spellbinder
+4 Giant Killer
+4 Lovestruck Beast
+2 Kabira Takedown
+4 Showdown of the Skalds
+1 Mountain
+3 Fabled Passage
+3 Plains
+4 Cragcrown Pathway
+4 Branchloft Pathway
+4 Needleverge Pathway
+5 Forest
+
+[sideboard]
+1 Drannith Magistrate
+1 Jegantha, the Wellspring
+1 Klothys, God of Destiny
+1 Roiling Vortex
+2 Glass Casket
+2 Redcap Melee
+2 Reidane, God of the Worthy
+2 Rip Apart
+3 Chainweb Aracnir

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Izzet Phoenix by Shi Tian Lee (Hong Kong - B)
+Title=Argive
+Difficulty=very hard
+Description=Izzet Phoenix by Shi Tian Lee (Hong Kong - B)
+Icon=Argive.jpg
+Deck Type=constructed
+
+[main]
+4 Crackling Drake
+4 Enigma Drake
+4 Arclight Phoenix
+4 Crash Through
+3 Warlord's Fury
+4 Chart a Course|XLN
+3 Tormenting Voice
+2 Beacon Bolt
+2 Maximize Velocity
+1 Entrancing Melody|XLN
+1 Fight with Fire
+4 Opt
+4 Shock
+6 Island
+4 Steam Vents
+4 Sulfur Falls
+6 Mountain
+
+[sideboard]
+1 Entrancing Melody|XLN
+2 Fight with Fire
+1 Search for Azcanta|XLN
+2 Niv-Mizzet, Parun
+2 Dive Down|XLN
+2 Negate
+2 Disdainful Stroke
+3 Shivan Fire

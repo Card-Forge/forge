@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Winota by Hideaki Muraoka
+Title=Thelon
+Difficulty=very hard
+Description=Winota by Hideaki Muraoka
+Icon=Thelon.jpg
+Deck Type=constructed
+
+[main]
+2 Kenrith, the Returned King
+2 Blade Historian
+4 Elite Spellbinder
+4 Winota, Joiner of Forces
+4 Selfless Savior
+4 Lotus Cobra
+4 Jaspera Sentinel
+4 Prosperous Innkeeper
+4 Esika's Chariot
+3 Shatterskull Smashing
+2 The Akroan War
+1 Mountain
+2 Plains
+2 Forest
+2 Lair of the Hydra
+4 Cragcrown Pathway
+4 Branchloft Pathway
+4 Fabled Passage
+4 Needleverge Pathway
+
+[sideboard]
+1 The Akroan War
+1 Bonecrusher Giant
+2 Redcap Melee
+2 Roiling Vortex
+2 Reidane, God of the Worthy
+3 Burning Hands
+4 Ox of Agonas

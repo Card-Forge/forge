@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Wake by Jeroen Remie
+Title=Niv Mizzet
+Difficulty=very hard
+Description=Wake by Jeroen Remie
+Icon=Niv Mizzet.jpg
+Deck Type=constructed
+
+[main]
+2 Coastal Tower|8E
+1 Elfhame Palace|8E
+4 Forest|RTR
+8 Island|RTR
+4 Krosan Verge|C16
+4 Plains|RTR
+2 Skycloud Expanse|OD
+2 Sungrass Prairie|C16
+4 Compulsion|TO
+3 Cunning Wish|JU
+4 Decree of Justice|C14
+3 Deep Analysis|C13
+3 Mana Leak|M11
+3 Mirari's Wake|CNS
+3 Moment's Peace|OD
+3 Renewed Faith|AKH
+2 Rewind|M13
+1 Stifle|CNS
+4 Wrath of God|C13
+
+[sideboard]
+1 Moment's Peace|OD
+1 Rewind|M13
+1 Stifle|CNS
+3 Call of the Herd|TSP
+1 Chastise|9E
+1 Flash of Insight|JU
+1 Krosan Reclamation|JU
+3 Ray of Revelation|DKA
+2 Transcendence|TO
+1 Wing Shards|C14

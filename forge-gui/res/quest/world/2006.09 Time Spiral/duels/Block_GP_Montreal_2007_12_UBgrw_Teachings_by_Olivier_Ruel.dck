@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=UBgrw Teachings by Olivier Ruel
+Title=Gold Finger
+Difficulty=very hard
+Description=UBgrw Teachings by Olivier Ruel
+Icon=Gold Finger.jpg
+Deck Type=constructed
+
+[main]
+8 Island|RTR
+4 Careful Consideration|TSP
+4 Damnation|PLC
+4 Terramorphic Expanse|C16
+4 Prismatic Lens|TSP
+4 Coalition Relic|FUT
+3 Molten Slagheap|C13
+3 Slaughter Pact|FUT
+3 Take Possession|FUT
+3 Tarmogoyf|FUT
+3 Urborg, Tomb of Yawgmoth|M15
+2 Mystical Teachings|TSP
+2 Foresee|M11
+2 Urza's Factory|C13
+2 Tendrils of Corruption|C14
+1 Imp's Mischief|PLC
+1 Calciform Pools|TSP
+1 Graven Cairns|SHM
+1 Bogardan Hellkite|C14
+1 Forest|RTR
+1 Haunting Hymn|TSP
+1 Swamp|RTR
+1 Mountain|RTR
+1 Plains|RTR
+
+[sideboard]
+2 Imp's Mischief|PLC
+3 Aven Riftwatcher|PLC
+3 Dodecapod|TSP
+2 Boom // Bust|PLC
+2 Fortune Thief|TSP
+1 Heroes Remembered|PLC
+1 Extirpate|PLC
+1 Pull from Eternity|TSP

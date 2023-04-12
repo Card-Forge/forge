@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Sultai Yorion Ultimatum by Bradley Jones
+Title=Count Musgrave
+Difficulty=very hard
+Description=Sultai Yorion Ultimatum by Bradley Jones
+Icon=Count Musgrave.jpg
+Deck Type=constructed
+
+[main]
+1 Vorinclex, Monstrous Raider
+1 Valki, God of Lies
+1 Quandrix Cultivator
+2 Polukranos, Unchained
+3 Elder Gargaroth
+1 Eliminate
+1 Disdainful Stroke
+2 Jwari Disruption
+3 Mystical Dispute
+4 Heartless Act
+1 Pelakka Predation
+2 Sea Gate Restoration
+2 Shadows' Verdict
+2 Alrund's Epiphany
+2 Extinction Event
+4 Cultivate
+4 Emergent Ultimatum
+1 Kiora Bests the Sea God
+4 Omen of the Sea
+4 Wolfwillow Haven
+4 Binding the Old Gods
+1 Ketria Triome
+2 Island
+2 Swamp
+3 Forest
+3 Temple of Malady
+4 Fabled Passage
+4 Darkbore Pathway
+4 Barkchannel Pathway
+4 Zagoth Triome
+4 Clearwater Pathway
+
+[sideboard]
+1 Elder Gargaroth
+2 Eliminate
+1 Test of Talents
+1 Kaervek, the Spiteful
+1 Yorion, Sky Nomad
+2 Elspeth's Nightmare
+3 Koma, Cosmos Serpent
+4 Duress

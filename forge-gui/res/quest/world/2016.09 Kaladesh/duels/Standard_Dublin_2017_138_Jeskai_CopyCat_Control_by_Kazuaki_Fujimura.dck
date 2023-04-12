@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Jeskai CopyCat Control by Kazuaki Fujimura
+Title=Einstein
+Difficulty=very hard
+Description=Jeskai CopyCat Control by Kazuaki Fujimura
+Icon=Einstein.jpg
+Deck Type=constructed
+
+[main]
+4 Saheeli Rai|KLD
+4 Felidar Guardian|AER
+3 Torrential Gearhulk|KLD
+2 Fumigate|KLD
+2 Shock
+4 Anticipate
+2 Negate
+4 Harnessed Lightning|KLD
+3 Disallow|AER
+4 Glimmer of Genius|KLD
+2 Oath of Jace|OGW
+4 Plains|RTR
+4 Island|RTR
+4 Aether Hub|KLD
+4 Port Town|SOI
+4 Inspiring Vantage|KLD
+4 Spirebluff Canal|KLD
+2 Wandering Fumarole|OGW
+
+[sideboard]
+2 Negate
+3 Gideon, Ally of Zendikar|BFZ
+2 Dispel|BFZ
+2 Oath of Chandra|OGW
+2 Radiant Flames|BFZ
+2 Fragmentize|KLD
+2 Authority of the Consuls|KLD

@@ -1,0 +1,53 @@
+[duel]
+[metadata]
+Name=Mardu Green by Brock Mosley
+Title=Barroom Brawl
+Difficulty=very hard
+Description=Mardu Green by Brock Mosley
+Icon=Barroom Brawl.jpg
+Deck Type=constructed
+
+[main]
+1 Pulse of Murasa|OGW
+1 Murderous Cut|KTK
+1 Kolaghan's Command|DTK
+1 Radiant Flames|BFZ
+1 Languish|ORI
+1 Ruinous Path|BFZ
+1 Chandra, Flamecaller|OGW
+2 Transgress the Mind|BFZ
+2 Read the Bones|ORI
+2 Roast|DTK
+2 Abzan Charm|KTK
+3 Fiery Impulse|ORI
+4 Crackling Doom|KTK
+1 Kalitas, Traitor of Ghet|OGW
+1 Den Protector|DTK
+3 Sylvan Advocate|OGW
+3 Goblin Dark-Dwellers|OGW
+4 Siege Rhino|KTK
+1 Nomad Outpost|KTK
+1 Forest|BFZ
+1 Plains|BFZ
+1 Mountain|BFZ
+1 Canopy Vista|BFZ
+2 Cinder Glade|BFZ
+2 Smoldering Marsh|BFZ
+2 Swamp|BFZ
+3 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+4 Shambling Vent|BFZ
+4 Bloodstained Mire|KTK
+
+[sideboard]
+2 Duress|DTK
+2 Anafenza, the Foremost|KTK
+1 Infinite Obliteration|ORI
+1 Virulent Plague|DTK
+1 Pia and Kiran Nalaar|ORI
+1 Tainted Remedy|ORI
+3 Hallowed Moonlight|ORI
+1 Kolaghan's Command|DTK
+1 Radiant Flames|BFZ
+1 Chandra, Flamecaller|OGW
+1 Transgress the Mind|BFZ

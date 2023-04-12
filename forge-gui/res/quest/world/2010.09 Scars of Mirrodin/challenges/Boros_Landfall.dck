@@ -1,0 +1,47 @@
+[quest]
+id=20100901
+OpponentName=Chikara
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Boros Landfall
+Title=Vampire Lord
+Difficulty=very hard
+Description=Boros Landfall by  Chikara Nakajima
+Icon=Vampire Lord.jpg
+Deck Type=constructed
+
+[main]
+4 Goblin Guide|ZEN
+1 Hero of Oxid Ridge|MBS
+4 Mirran Crusader|MBS
+4 Squadron Hawk|M11
+4 Steppe Lynx|ZEN
+4 Stoneforge Mystic|WWK
+3 Dismember|NPH
+4 Lightning Bolt|M11
+1 Batterskull|NPH
+2 Sword of War and Peace|NPH
+4 Arid Mesa|ZEN
+4 Marsh Flats|ZEN
+6 Mountain|NPH
+6 Plains|NPH
+4 Scalding Tarn|ZEN
+2 Terramorphic Expanse|M11
+3 Koth of the Hammer|SOM
+
+[sideboard]
+4 Kor Firewalker|WWK
+3 Spellskite|NPH
+3 Divine Offering|MBS
+2 Arc Trail|SOM
+1 Sword of Body and Mind|SOM
+1 Sword of Feast and Famine|MBS
+1 Gideon Jura|ROE

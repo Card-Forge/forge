@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Selesnya Aggro by Renzo Arana
+Title=The Shattered Isles
+Difficulty=very hard
+Description=Selesnya Aggro by Renzo Arana
+Icon=The Shattered Isles.jpg
+Deck Type=constructed
+
+[main]
+1 Wrenn and Seven
+2 Valorous Stance
+2 Starnheim Unleashed
+2 Ranger Class
+4 Wedding Announcement
+4 Emeria's Call
+4 The Wandering Emperor
+4 Esika's Chariot
+1 Legion Angel
+2 Yasharn, Implacable Earth
+3 Archon of Emeria
+4 Skyclave Apparition
+4 Prosperous Innkeeper
+4 Tangled Florahedron
+1 Boseiju, Who Endures
+1 Eiganjo, Seat of the Empire
+1 Lair of the Hydra
+1 Cave of the Frost Dragon
+3 Forest
+4 Plains
+4 Branchloft Pathway
+4 Overgrown Farmland
+
+[sideboard]
+4 Elite Spellbinder
+3 Guardian of Faith
+2 Circle of Confinement
+1 Farewell
+2 Valorous Stance
+3 Legion Angel

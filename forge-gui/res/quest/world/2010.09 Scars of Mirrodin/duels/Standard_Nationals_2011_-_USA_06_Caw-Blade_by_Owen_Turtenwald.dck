@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Owen Turtenwald
+Title=Atomic Robo
+Difficulty=very hard
+Description=Caw-Blade by Owen Turtenwald
+Icon=Atomic Robo.jpg
+Deck Type=constructed
+
+[main]
+2 Consecrated Sphinx|MBS
+2 Emeria Angel|ZEN
+4 Squadron Hawk|M11
+3 Dismember|NPH
+3 Into the Roil|ZEN
+3 Mana Leak|M12
+3 Spell Pierce|ZEN
+2 Day of Judgment|M12
+4 Preordain|M11
+2 Timely Reinforcements|M12
+2 Sword of Feast and Famine|MBS
+1 Arid Mesa|ZEN
+4 Celestial Colonnade|WWK
+3 Glacial Fortress|M12
+2 Inkmoth Nexus|MBS
+4 Island|M12
+3 Plains|M12
+1 Scalding Tarn|ZEN
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+3 Gideon Jura|M12
+1 Jace Beleren|M11
+
+[sideboard]
+1 Day of Judgment|M12
+2 Timely Reinforcements|M12
+1 Jace Beleren|M11
+2 Azure Mage|M12
+4 Flashfreeze|M12
+3 Mental Misstep|NPH
+2 Ratchet Bomb|SOM

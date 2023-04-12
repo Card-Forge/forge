@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Omnath Ramp by Alvaro Fernandez Torres
+Title=Apu Nahasapeemapetilon
+Difficulty=very hard
+Description=Omnath Ramp by Alvaro Fernandez Torres
+Icon=Apu Nahasapeemapetilon.jpg
+Deck Type=constructed
+
+[main]
+1 Kenrith, the Returned King
+3 Bonecrusher Giant
+4 Omnath, Locus of Creation
+4 Lotus Cobra
+3 Spikefield Hazard
+3 Mystical Dispute
+3 Cultivate
+3 Genesis Ultimatum
+4 Escape to the Wilds
+3 Felidar Retreat
+1 Ugin, the Spirit Dragon
+1 Plains
+2 Evolving Wilds
+2 Ketria Triome
+2 Mountain
+4 Fabled Passage
+4 Raugrin Triome
+4 Cragcrown Pathway
+4 Island
+5 Forest
+
+[sideboard]
+1 Mystical Dispute
+1 Klothys, God of Destiny
+2 Negate
+2 Thundering Rebuke
+2 Shredded Sails
+2 Mazemind Tome
+2 Phoenix of Ash
+3 Elder Gargaroth

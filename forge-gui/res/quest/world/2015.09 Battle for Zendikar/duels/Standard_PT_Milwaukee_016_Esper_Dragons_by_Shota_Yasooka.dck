@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Esper Dragons by Shota Yasooka
+Title=alathrax
+Difficulty=very hard
+Description=Esper Dragons by Shota Yasooka
+Icon=alathrax.jpg
+Deck Type=constructed
+
+[main]
+1 Scatter to the Winds|BFZ
+1 Ob Nixilis Reignited|BFZ
+1 Disdainful Stroke|KTK
+2 Ruinous Path|BFZ
+2 Crux of Fate|FRF
+2 Foul-Tongue Invocation|DTK
+2 Clash of Wills|ORI
+2 Utter End|KTK
+3 Silkwrap|DTK
+4 Silumgar's Scorn|DTK
+4 Dig Through Time|KTK
+2 Dragonlord Silumgar|DTK
+4 Dragonlord Ojutai|DTK
+4 Jace, Vryn's Prodigy|ORI
+1 Haven of the Spirit Dragon|DTK
+1 Plains|BFZ
+1 Windswept Heath|KTK
+2 Swamp|BFZ
+2 Prairie Stream|BFZ
+3 Shambling Vent|BFZ
+3 Sunken Hollow|BFZ
+4 Flooded Strand|KTK
+4 Polluted Delta|KTK
+5 Island|BFZ
+
+[sideboard]
+1 Languish|ORI
+2 Monastery Mentor|FRF
+1 Ultimate Price|DTK
+2 Tasigur, the Golden Fang|FRF
+3 Duress|DTK
+3 Arashin Cleric|FRF
+2 Surge of Righteousness|DTK
+1 Disdainful Stroke|KTK

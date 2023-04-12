@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Izzet Control by Berk Elçi
+Title=Aspect of Death
+Difficulty=very hard
+Description=Izzet Control by Berk Elçi
+Icon=Aspect of Death.jpg
+Deck Type=constructed
+
+[main]
+1 Manaform Hellkite
+4 Goldspan Dragon
+4 Smoldering Egg
+1 Test of Talents
+1 Demon Bolt
+1 Negate
+1 Spikefield Hazard
+1 Prismari Command
+2 Divide by Zero
+2 Jwari Disruption
+2 Fading Hope
+3 Memory Deluge
+3 Saw It Coming
+4 Dragon's Fire
+1 Thundering Rebuke
+3 Shatterskull Smashing
+3 Alrund's Epiphany
+4 Expressive Iteration
+1 Stormcarved Coast
+1 Hall of Storm Giants
+3 Frostboil Snarl
+4 Mountain
+4 Riverglide Pathway
+6 Island
+
+[sideboard]
+1 Test of Talents
+1 Burn Down the House
+1 Environmental Sciences
+1 Mascot Exhibition
+3 Cinderclasm
+4 Burning Hands
+4 Malevolent Hermit

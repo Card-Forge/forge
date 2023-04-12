@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Patrick Fernandes
+Title=Genghis Khan
+Difficulty=very hard
+Description=Temur Reclamation by Patrick Fernandes
+Icon=Genghis Khan.jpg
+Deck Type=constructed
+
+[main]
+2 Uro, Titan of Nature's Wrath
+2 Brazen Borrower
+1 Commence the Endgame
+2 Aether Gust
+2 Opt
+3 Negate
+4 Expansion // Explosion
+4 Growth Spiral
+4 Mystical Dispute
+4 Wilderness Reclamation
+4 Shark Typhoon
+1 Mountain
+2 Blast Zone
+2 Island
+2 Forest
+3 Castle Vantress
+3 Steam Vents
+3 Stomping Ground
+4 Breeding Pool
+4 Fabled Passage
+4 Ketria Triome
+
+[sideboard]
+4 Bonecrusher Giant
+2 Nightpack Ambusher
+2 Spectral Sailor
+2 Scorching Dragonfire
+1 Narset's Reversal
+1 Brazen Borrower
+1 Commence the Endgame
+1 Negate
+1 Storm's Wrath

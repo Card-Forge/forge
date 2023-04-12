@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Grixis Control by Toyota Hiroki
+Title=Bartel Runeaxe
+Difficulty=very hard
+Description=Grixis Control by Toyota Hiroki
+Icon=Bartel Runeaxe.jpg
+Deck Type=constructed
+
+[main]
+1 Voltage Surge
+2 Siphon Insight
+2 Gix's Command
+3 Reckoner Bankbuster
+3 Abrade
+3 Go for the Throat
+4 Make Disappear
+4 Fable of the Mirror-Breaker
+1 Bladecoil Serpent
+1 Ertai Resurrected
+2 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Mountain
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+1 Otawara, Soaring City
+2 Swamp
+2 Stormcarved Coast
+3 Shivan Reef
+3 Sulfurous Springs
+4 Xander's Lounge
+4 Haunted Ridge
+4 Shipwreck Marsh
+
+[sideboard]
+3 Razorlash Transmogrant
+2 Negate
+2 Graveyard Trespasser
+2 Phyrexian Fleshgorger
+2 Brotherhood's End
+1 Duress
+1 Liliana of the Veil
+1 Disdainful Stroke
+1 Ertai Resurrected

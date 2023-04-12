@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=UW Control by Brad Nelson
+Title=Agonistes
+Difficulty=very hard
+Description=UW Control by Brad Nelson
+Icon=Agonistes.jpg
+Deck Type=constructed
+
+[main]
+2 Fumigate|KLD
+2 Approach of the Second Sun|AKH
+2 Essence Scatter|AKH
+2 Blink of an Eye
+2 Syncopate
+1 Negate
+4 Disallow|AER
+2 Glimmer of Genius|KLD
+3 Settle the Wreckage|XLN
+4 Seal Away
+2 Search for Azcanta|XLN
+3 Cast Out|AKH
+2 Memorial to Genius
+2 Field of Ruin|XLN
+4 Glacial Fortress|XLN
+2 Ipnu Rivulet|HOU
+4 Irrigated Farmland|AKH
+5 Island
+8 Plains
+4 Teferi, Hero of Dominaria
+
+[sideboard]
+2 Negate
+1 Glimmer of Genius|KLD
+1 Settle the Wreckage|XLN
+3 History of Benalia
+1 Lyra Dawnbringer
+2 Walking Ballista|AER
+3 Torrential Gearhulk|KLD
+1 Invoke the Divine
+1 Sorcerous Spyglass|XLN

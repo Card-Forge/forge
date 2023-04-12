@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Deaths Shadow by Francisco Sanchez
+Title=Mana
+Difficulty=very hard
+Description=Deaths Shadow by Francisco Sanchez
+Icon=Mana.jpg
+Deck Type=constructed
+
+[main]
+2 Kroxa, Titan of Death's Hunger
+3 Ragavan, Nimble Pilferer
+4 Dragon's Rage Channeler
+4 Death's Shadow|WWK
+4 Scourge of the Skyclaves
+4 Mishra's Bauble|CS
+2 Temur Battle Rage|FRF
+4 Lightning Bolt|M11
+1 Unearth|UL
+4 Inquisition of Kozilek|ROE
+4 Thoughtseize|THS
+4 Prismatic Ending
+1 Seal of Fire|DIS
+1 Swamp
+1 Sunbaked Canyon
+1 Sacred Foundry
+1 Mountain
+1 Godless Shrine
+2 Silent Clearing
+2 Arid Mesa|ZEN
+3 Blood Crypt
+4 Bloodstained Mire|KTK
+4 Marsh Flats|ZEN
+
+[sideboard]
+1 Lurrus of the Dream-Den
+2 Kaya's Guile
+2 Shatterstorm|10E
+2 Wear // Tear|DGM
+2 Damping Sphere
+3 Terminate|ARB
+3 Dauthi Voidwalker

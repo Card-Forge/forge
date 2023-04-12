@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Ur Murktide by Mattia Rizzi
+Title=Ri
+Difficulty=very hard
+Description=Ur Murktide by Mattia Rizzi
+Icon=Ri.jpg
+Deck Type=constructed
+
+[main]
+2 Force of Negation
+4 Mishra's Bauble|CS
+4 Expressive Iteration
+4 Serum Visions|FD
+4 Counterspell|7E
+4 Unholy Heat
+4 Thought Scour|DKA
+4 Lightning Bolt|M11
+4 Dragon's Rage Channeler
+4 Murktide Regent
+4 Ragavan, Nimble Pilferer
+1 Flooded Strand|KTK
+2 Island
+2 Scalding Tarn|ZEN
+3 Polluted Delta|KTK
+3 Steam Vents
+3 Fiery Islet
+4 Spirebluff Canal|KLD
+
+[sideboard]
+2 Abrade|HOU
+2 Soul-Guide Lantern
+1 Dispel|BFZ
+3 Spell Pierce|XLN
+2 Aether Gust
+2 Alpine Moon
+3 Engineered Explosives|FD

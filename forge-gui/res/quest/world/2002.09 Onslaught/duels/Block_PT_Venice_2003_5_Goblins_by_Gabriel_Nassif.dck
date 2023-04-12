@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Goblins by Gabriel Nassif
+Title=The Raiders
+Difficulty=very hard
+Description=Goblins by Gabriel Nassif
+Icon=The Raiders.jpg
+Deck Type=constructed
+
+[main]
+3 Threaten|10E
+4 Sparksmith|ONS
+2 Rorix Bladewing|ONS
+2 Menacing Ogre|ONS
+4 Goblin Sledder|ONS
+4 Skirk Prospector
+4 Goblin Piledriver|ORI
+3 Goblin Grappler|LE
+4 Goblin Goon|LE
+3 Gempalm Incinerator|LE
+3 Clickslither|LE
+4 Wooded Foothills|KTK
+18 Mountain|RTR
+2 Forest|RTR
+
+[sideboard]
+3 Shock
+1 Nantuko Vigilante|LE
+2 Gratuitous Violence|CN2
+4 Broodhatch Nantuko|ONS
+1 Blistering Firecat|ONS
+3 Avarax|ONS
+1 Gempalm Incinerator|LE

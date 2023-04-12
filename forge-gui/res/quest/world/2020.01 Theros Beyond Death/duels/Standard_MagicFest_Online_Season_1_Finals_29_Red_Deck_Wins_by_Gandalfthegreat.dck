@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Gandalfthegreat
+Title=Lair
+Difficulty=very hard
+Description=Red Deck Wins by Gandalfthegreat
+Icon=Lair.jpg
+Deck Type=constructed
+
+[main]
+18 Mountain
+4 Castle Embereth
+4 Light Up the Stage
+4 Embercleave
+4 Anax, Hardened in the Forge
+4 Bonecrusher Giant
+4 Fervent Champion
+4 Rimrock Knight
+4 Robber of the Rich
+4 Scorch Spitter
+2 Torbran, Thane of Red Fell
+2 Tin Street Dodger
+2 Runaway Steam-Kin
+
+[sideboard]
+3 Unchained Berserker
+2 Embereth Shieldbreaker
+2 Chandra, Acolyte of Flame
+2 Lava Coil
+2 Redcap Melee
+2 Scorching Dragonfire
+2 Tibalt, Rakish Instigator

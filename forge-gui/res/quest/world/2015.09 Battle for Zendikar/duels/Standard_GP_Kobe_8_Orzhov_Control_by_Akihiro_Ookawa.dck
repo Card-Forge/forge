@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Orzhov Control by Akihiro Ookawa
+Title=Green Lantern
+Difficulty=very hard
+Description=Orzhov Control by Akihiro Ookawa
+Icon=Green Lantern.jpg
+Deck Type=constructed
+
+[main]
+4 Hangarback Walker|ORI
+4 Knight of the White Orchid|ORI
+3 Wingmate Roc|KTK
+1 Ultimate Price|DTK
+3 Murderous Cut|KTK
+2 Utter End|KTK
+3 Secure the Wastes|DTK
+2 Painful Truths|BFZ
+1 Ruinous Path|BFZ
+4 Silkwrap|DTK
+4 Gideon, Ally of Zendikar|BFZ
+1 Ob Nixilis Reignited|BFZ
+2 Sorin, Solemn Visitor|KTK
+4 Plains|BFZ
+3 Swamp|BFZ
+1 Scoured Barrens|FRF
+4 Polluted Delta|KTK
+4 Flooded Strand|KTK
+4 Shambling Vent|BFZ
+3 Caves of Koilos|ORI
+1 Sunken Hollow|BFZ
+2 Prairie Stream|BFZ
+
+[sideboard]
+1 Ultimate Price|DTK
+3 Arashin Cleric|FRF
+2 Dispel|BFZ
+1 Negate|ORI
+2 Disdainful Stroke|KTK
+1 Dragonlord Silumgar|DTK
+1 Languish|ORI
+3 Duress|DTK
+1 End Hostilities|KTK

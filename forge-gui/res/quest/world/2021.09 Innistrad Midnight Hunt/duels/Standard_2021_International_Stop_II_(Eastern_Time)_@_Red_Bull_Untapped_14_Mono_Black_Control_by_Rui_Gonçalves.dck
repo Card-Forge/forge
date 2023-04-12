@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Mono Black Control by Rui Gonçalves
+Title=Poseidon
+Difficulty=very hard
+Description=Mono Black Control by Rui Gonçalves
+Icon=Poseidon.jpg
+Deck Type=constructed
+
+[main]
+1 Soul Shatter
+1 Hagra Mauling
+2 The Meathook Massacre
+2 Infernal Grasp
+2 Hunt for Specimens
+2 Professor Onyx
+4 Blood on the Snow
+4 Duress
+4 Lolth, Spider Queen
+4 Deadly Dispute
+1 Valki, God of Lies
+2 Skullport Merchant
+4 Shambling Ghast
+4 Eyetwitch
+2 Hive of the Eye Tyrant
+2 Field of Ruin
+4 Faceless Haven
+15 Snow-Covered Swamp
+
+[sideboard]
+1 Ebondeath, Dracolich
+1 Nighthawk Scavenger
+1 Environmental Sciences
+1 Flunk
+1 Necrotic Fumes
+1 Containment Breach
+1 Pest Summoning
+1 Mascot Exhibition
+1 Confront the Past
+2 Check for Traps
+4 Go Blank

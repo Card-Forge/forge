@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Rakdos Control by Sho Ogasawara
+Title=Barney Rubble
+Difficulty=very hard
+Description=Rakdos Control by Sho Ogasawara
+Icon=Barney Rubble.jpg
+Deck Type=constructed
+
+[main]
+2 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+4 Graveyard Trespasser
+4 Tenacious Underdog
+2 The Celestus
+3 Reckoner Bankbuster
+4 Invoke Despair
+3 The Meathook Massacre
+2 Sorin the Mirthless
+3 Liliana of the Veil
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+4 Haunted Ridge
+4 Sulfurous Springs
+4 Mountain
+11 Swamp
+
+[sideboard]
+1 Reckoner Bankbuster
+1 Jaya, Fiery Negotiator
+1 Soul Transfer
+2 Ob Nixilis, the Adversary
+2 Dread Fugue
+2 Abrade
+3 Lantern of the Lost
+3 Flame-Blessed Bolt

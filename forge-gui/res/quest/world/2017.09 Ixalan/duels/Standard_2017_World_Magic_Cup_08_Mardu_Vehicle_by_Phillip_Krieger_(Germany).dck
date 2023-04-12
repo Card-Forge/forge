@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mardu Vehicle by Phillip Krieger (Germany)
+Title=Aspect of Earth
+Difficulty=very hard
+Description=Mardu Vehicle by Phillip Krieger (Germany)
+Icon=Aspect of Earth.jpg
+Deck Type=constructed
+
+[main]
+6 Plains|XLN
+4 Mountain|XLN
+4 Concealed Courtyard|KLD
+4 Inspiring Vantage|KLD
+4 Spire of Industry|AER
+3 Canyon Slough|AKH
+2 Aethersphere Harvester|AER
+4 Heart of Kiran|AER
+4 Unlicensed Disintegration|KLD
+2 Cut // Ribbons|AKH
+2 Depala, Pilot Exemplar|KLD
+4 Walking Ballista|AER
+4 Veteran Motorist|KLD
+4 Scrapheap Scrounger|KLD
+4 Toolcraft Exemplar|KLD
+3 Gideon of the Trials|AKH
+2 Chandra, Torch of Defiance|KLD
+
+[sideboard]
+4 Duress|XLN
+3 Fumigate|KLD
+1 Skysovereign, Consul Flagship|KLD
+2 Ixalan's Binding|XLN
+2 Magma Spray|AKH
+1 Aethersphere Harvester|AER
+1 Cut // Ribbons|AKH
+1 Chandra, Torch of Defiance|KLD

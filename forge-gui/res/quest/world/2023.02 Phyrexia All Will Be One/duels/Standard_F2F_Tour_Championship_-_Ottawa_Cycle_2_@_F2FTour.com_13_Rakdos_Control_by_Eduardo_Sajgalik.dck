@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Rakdos Control by Eduardo Sajgalik
+Title=Nailah
+Difficulty=very hard
+Description=Rakdos Control by Eduardo Sajgalik
+Icon=Nailah.jpg
+Deck Type=constructed
+
+[main]
+1 Gix's Command
+1 Duress
+2 Abrade
+3 Invoke Despair
+3 Reckoner Bankbuster
+4 Go for the Throat
+4 Cut Down
+4 Fable of the Mirror-Breaker
+2 Razorlash Transmogrant
+3 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Graveyard Trespasser
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+2 Mountain
+4 Haunted Ridge
+4 Sulfurous Springs
+4 Blackcleave Cliffs
+9 Swamp
+
+[sideboard]
+1 The Cruelty of Gix
+2 Vampires' Vengeance
+1 Obliterating Bolt
+2 Soul Transfer
+2 Archfiend of the Dross
+1 Gix's Command
+3 Duress
+1 Reckoner Bankbuster
+2 Razorlash Transmogrant

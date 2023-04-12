@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Esper Control by S0ulmusic
+Title=Chewbacca
+Difficulty=very hard
+Description=Esper Control by S0ulmusic
+Icon=Chewbacca.jpg
+Deck Type=constructed
+
+[main]
+2 Vanishing Verse
+2 The Wandering Emperor
+3 Deadly Dispute
+3 Kaito Shizuki
+3 The Meathook Massacre
+4 Wedding Announcement
+4 Rite of Oblivion
+1 Legion Angel
+2 Shambling Ghast
+4 Spirited Companion
+4 Malevolent Hermit
+4 Eyetwitch
+1 Plains
+1 Takenuma, Abandoned Mire
+1 Otawara, Soaring City
+1 Island
+1 Swamp
+3 Hive of the Eye Tyrant
+4 Clearwater Pathway
+4 Brightclimb Pathway
+4 Shattered Sanctum
+4 Deserted Beach
+
+[sideboard]
+3 Check for Traps
+2 Doomskar
+2 Go Blank
+1 Test of Talents
+1 Environmental Sciences
+1 Mascot Exhibition
+1 Teachings of the Archaics
+1 Necrotic Fumes
+3 Legion Angel

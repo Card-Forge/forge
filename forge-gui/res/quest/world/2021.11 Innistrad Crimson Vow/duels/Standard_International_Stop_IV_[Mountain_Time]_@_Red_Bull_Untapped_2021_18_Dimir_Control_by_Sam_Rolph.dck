@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Dimir Control by Sam Rolph
+Title=Blind Faith
+Difficulty=very hard
+Description=Dimir Control by Sam Rolph
+Icon=Blind Faith.jpg
+Deck Type=constructed
+
+[main]
+1 Shadows' Verdict
+2 Infernal Grasp
+2 Memory Deluge
+2 Syncopate
+2 Bloodchief's Thirst
+2 Soul Shatter
+3 Jwari Disruption
+3 The Meathook Massacre
+3 The Celestus
+4 Vanishing Verse
+4 Wash Away
+4 Siphon Insight
+2 Hullbreaker Horror
+1 Hall of Storm Giants
+1 Shattered Sanctum
+1 Deserted Beach
+1 Island
+2 Hive of the Eye Tyrant
+2 Swamp
+2 Field of Ruin
+4 Shipwreck Marsh
+4 Clearwater Pathway
+4 Brightclimb Pathway
+4 Hengegate Pathway
+
+[sideboard]
+4 Duress
+4 Parasitic Grasp
+3 Malevolent Hermit
+2 Test of Talents
+1 Go Blank
+1 Negate

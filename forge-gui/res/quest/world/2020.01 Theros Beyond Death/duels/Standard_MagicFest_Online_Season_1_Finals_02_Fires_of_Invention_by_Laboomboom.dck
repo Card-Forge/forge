@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Fires of Invention by Laboomboom
+Title=Forest Dragon
+Difficulty=very hard
+Description=Fires of Invention by Laboomboom
+Icon=Forest Dragon.jpg
+Deck Type=constructed
+
+[main]
+4 Hallowed Fountain
+4 Steam Vents
+4 Temple of Triumph
+3 Sacred Foundry
+3 Fabled Passage
+2 Castle Vantress
+2 Mountain
+2 Plains
+2 Temple of Epiphany
+1 Island
+4 Teferi, Time Raveler
+4 Fires of Invention
+1 Elspeth Conquers Death
+4 Deafening Clarion
+3 Aether Gust
+4 Bonecrusher Giant
+4 Sphinx of Foresight
+4 Cavalier of Flame
+3 Kenrith, the Returned King
+2 Haktos the Unscarred
+
+[sideboard]
+4 Robber of the Rich
+4 Devout Decree
+3 Mystical Dispute
+2 Tithe Taker
+1 Elspeth Conquers Death
+1 Aether Gust

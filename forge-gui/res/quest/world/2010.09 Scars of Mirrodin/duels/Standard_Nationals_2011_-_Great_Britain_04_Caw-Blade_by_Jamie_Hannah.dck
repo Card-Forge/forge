@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Jamie Hannah
+Title=Robot Santa
+Difficulty=very hard
+Description=Caw-Blade by Jamie Hannah
+Icon=Robot Santa.jpg
+Deck Type=constructed
+
+[main]
+2 Emeria Angel|ZEN
+4 Mirran Crusader|MBS
+4 Squadron Hawk|M11
+1 Deprive|ROE
+2 Dismember|NPH
+3 Into the Roil|ZEN
+4 Mana Leak|M12
+3 Spell Pierce|ZEN
+4 Preordain|M11
+2 Sword of Feast and Famine|MBS
+1 Sword of War and Peace|NPH
+1 Oblivion Ring|M12
+1 Arid Mesa|ZEN
+4 Celestial Colonnade|WWK
+3 Glacial Fortress|M12
+2 Inkmoth Nexus|MBS
+3 Island|M12
+3 Plains|M12
+2 Scalding Tarn|ZEN
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+2 Gideon Jura|M12
+1 Jace Beleren|M11
+
+[sideboard]
+1 Inkmoth Nexus|MBS
+1 Azure Mage|M12
+4 Kor Firewalker|WWK
+1 Phantasmal Image|M12
+4 Spellskite|NPH
+1 Flashfreeze|M12
+2 Solemn Offering|M11
+1 Batterskull|NPH

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Stompy by Frank Hernandez
+Title=The Seasingers
+Difficulty=very hard
+Description=Stompy by Frank Hernandez
+Icon=The Seasingers.jpg
+Deck Type=constructed
+
+[main]
+3 Albino Troll|US
+3 Elvish Lyrist|8E
+3 Llanowar Elves
+3 Pouncing Jaguar|US
+4 River Boa|ZEN
+3 Uktabi Orangutan|6E
+4 Vine Dryad|MM
+4 Wild Dogs|US
+4 Giant Growth
+2 Hurricane|10E
+3 Land Grant|MM
+4 Rancor|M13
+3 Tangle Wire|NE
+11 Forest|RTR
+3 Gaea's Cradle|US
+3 Treetop Village|10E
+
+[sideboard]
+1 Harmonic Convergence|UL
+3 Meekstone|7E
+4 Rushwood Dryad|10E
+4 Rushwood Legate|MM
+3 Thran Foundry|UD

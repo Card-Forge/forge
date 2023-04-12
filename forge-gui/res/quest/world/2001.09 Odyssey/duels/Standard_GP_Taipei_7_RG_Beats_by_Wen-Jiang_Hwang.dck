@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=RG Beats by Wen-Jiang Hwang
+Title=The Color Black
+Difficulty=very hard
+Description=RG Beats by Wen-Jiang Hwang
+Icon=The Color Black.jpg
+Deck Type=constructed
+
+[main]
+4 Volcanic Hammer|7E
+3 Violent Eruption|TO
+4 Firebolt|OD
+3 Fiery Temper|TO
+3 Ensnaring Bridge|7E
+3 Call of the Herd|OD
+4 Browbeat|JU
+3 Yavimaya Barbarian|IN
+4 Wild Mongrel|OD
+3 Grim Lavamancer|TO
+4 Flametongue Kavu|PS
+9 Mountain|OD
+3 Mossfire Valley|OD
+4 Karplusan Forest|7E
+5 Forest|OD
+1 Barbarian Ring|OD
+
+[sideboard]
+1 Tranquility|7E
+1 Savage Firecat|OD
+3 Phantom Centaur|JU
+1 Obliterate|IN
+1 Meteor Storm|IN
+1 Magnivore|OD
+3 Hull Breach|PS
+2 Engulfing Flames|OD
+1 Earthquake|7E
+1 Ensnaring Bridge|7E

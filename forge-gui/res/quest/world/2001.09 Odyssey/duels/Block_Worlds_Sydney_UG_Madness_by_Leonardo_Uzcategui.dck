@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=UG Madness by Leonardo Uzcategui
+Title=The Tabernacle at Pendrell Vale
+Difficulty=very hard
+Description=UG Madness by Leonardo Uzcategui
+Icon=The Tabernacle at Pendrell Vale.jpg
+Deck Type=constructed
+
+[main]
+11 Forest|A
+10 Island|A
+4 Aquamoeba|TO
+3 Arrogant Wurm|TO
+4 Basking Rootwalla|TO
+3 Phantom Centaur|JU
+4 Wild Mongrel|OD
+3 Wonder|JU
+4 Aether Burst|OD
+4 Careful Study|OD
+2 Deep Analysis|TO
+4 Elephant Guide|JU
+3 Living Wish|JU
+1 Unknown Card
+
+[sideboard]
+1 Phantom Centaur|JU
+1 Wonder|JU
+3 Envelop|JU
+1 Genesis|JU
+3 Krosan Reclamation|JU
+1 Nantuko Tracer|JU
+1 Spellbane Centaur|OD
+3 Still Life|OD
+1 Sylvan Safekeeper|JU

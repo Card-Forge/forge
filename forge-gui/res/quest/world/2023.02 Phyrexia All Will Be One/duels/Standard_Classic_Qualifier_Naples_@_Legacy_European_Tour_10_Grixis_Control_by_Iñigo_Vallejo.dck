@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Grixis Control by Iñigo Vallejo
+Title=Ares
+Difficulty=very hard
+Description=Grixis Control by Iñigo Vallejo
+Icon=Ares.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+1 Cut Down
+1 Anoint with Affliction
+1 Brotherhood's End
+1 Gix's Command
+2 Abrade
+2 Make Disappear
+3 Invoke Despair
+3 Go for the Throat
+3 Reckoner Bankbuster
+4 Fable of the Mirror-Breaker
+2 Sheoldred, the Apocalypse
+2 Bladecoil Serpent
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Takenuma, Abandoned Mire
+1 Stormcarved Coast
+1 Underground River
+2 Swamp
+2 Sulfurous Springs
+2 Shivan Reef
+2 Shipwreck Marsh
+3 Darkslick Shores
+4 Xander's Lounge
+4 Blackcleave Cliffs
+4 Haunted Ridge
+
+[sideboard]
+3 Razorlash Transmogrant
+2 Duress
+2 Disdainful Stroke
+2 Siphon Insight
+1 Negate
+2 Cut Down
+1 Anoint with Affliction
+1 Brotherhood's End
+1 Sheoldred, the Apocalypse

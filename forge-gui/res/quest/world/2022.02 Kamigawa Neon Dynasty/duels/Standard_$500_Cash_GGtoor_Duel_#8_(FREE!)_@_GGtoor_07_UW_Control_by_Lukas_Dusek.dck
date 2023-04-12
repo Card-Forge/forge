@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=UW Control by Lukas Dusek
+Title=Aspect of Decay
+Difficulty=very hard
+Description=UW Control by Lukas Dusek
+Icon=Aspect of Decay.jpg
+Deck Type=constructed
+
+[main]
+1 Teferi, Who Slows the Sunset
+1 Starnheim Unleashed
+2 Negate
+2 Memory Deluge
+2 Disdainful Stroke
+2 Reckoner Bankbuster
+2 The Restoration of Eiganjo
+2 Valorous Stance
+2 Fateful Absence
+2 Farewell
+2 Emeria's Call
+3 Doomskar
+3 March of Otherworldly Light
+3 Wedding Announcement
+3 The Wandering Emperor
+4 Jwari Disruption
+1 Legion Angel
+2 Iymrith, Desert Doom
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+2 Island
+2 Cave of the Frost Dragon
+2 Hall of Storm Giants
+4 Deserted Beach
+4 Hengegate Pathway
+5 Plains
+
+[sideboard]
+3 Sunset Revelry
+2 Lier, Disciple of the Drowned
+2 Test of Talents
+2 Hullbreaker Horror
+2 Malevolent Hermit
+1 March of Otherworldly Light
+3 Legion Angel

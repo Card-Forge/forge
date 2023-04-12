@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Jund Goblins by Igor Zanotti
+Title=Albert Einstein
+Difficulty=very hard
+Description=Jund Goblins by Igor Zanotti
+Icon=Albert Einstein.jpg
+Deck Type=constructed
+
+[main]
+1 Pashalik Mons
+1 Goblin Trashmaster
+1 Goblin Warchief
+1 Skirk Prospector
+1 Goblin Cratermaker
+1 Goblin Chieftain|M12
+2 Kiki-Jiki, Mirror Breaker|CHK
+2 Sling-Gang Lieutenant
+2 Mogg War Marshal|TSP
+4 Munitions Expert
+3 Goblin Ringleader
+4 Conspicuous Snoop
+3 Boggart Harbinger|LRW
+4 Ignoble Hierarch
+4 Goblin Matron|7E
+1 Tarfire|LRW
+4 Aether Vial|DS
+1 Swamp
+2 Arid Mesa|ZEN
+2 Stomping Ground
+2 Blood Crypt
+2 Mountain
+4 Bloodstained Mire|KTK
+4 Cavern of Souls|AVR
+4 Auntie's Hovel|LRW
+
+[sideboard]
+1 Goblin Cratermaker
+4 Chalice of the Void|MR
+3 Blood Moon|9E
+3 Leyline of the Void
+2 Plague Engineer
+2 Masked Vandal

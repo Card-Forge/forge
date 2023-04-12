@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Andrew Cuneo
+Title=Aqueduct
+Difficulty=very hard
+Description=Rakdos Aggro by Andrew Cuneo
+Icon=Aqueduct.jpg
+Deck Type=constructed
+
+[main]
+2 Shatterskull Smashing
+3 Village Rites
+3 Plumb the Forbidden
+4 Bastion of Remembrance
+4 Claim the Firstborn
+4 Forbidden Friendship
+1 Rankle, Master of Pranks
+2 Woe Strider
+3 Extus, Oriq Overlord
+4 Serrated Scorpion
+4 Eyetwitch
+3 Kroxa, Titan of Death's Hunger
+1 Temple of Malice
+2 Castle Locthwain
+2 Mountain
+2 Fabled Passage
+3 Savai Triome
+4 Needleverge Pathway
+4 Blightstep Pathway
+5 Swamp
+
+[sideboard]
+3 Duress
+3 The Akroan War
+2 Redcap Melee
+2 Roiling Vortex
+1 Necrotic Fumes
+1 Pest Summoning
+1 Heartless Act
+1 Start from Scratch
+1 Expanded Anatomy

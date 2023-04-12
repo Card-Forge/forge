@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Kazuhiro Noine
+Title=Osiris
+Difficulty=very hard
+Description=Temur Reclamation by Kazuhiro Noine
+Icon=Osiris.jpg
+Deck Type=constructed
+
+[main]
+1 Kenrith, the Returned King
+2 Brazen Borrower
+3 Uro, Titan of Nature's Wrath
+1 Aether Gust
+2 Dovin's Veto
+4 Expansion // Explosion
+4 Mystical Dispute
+4 Growth Spiral
+3 Shark Typhoon
+4 Wilderness Reclamation
+3 Teferi, Time Raveler
+1 Mountain
+1 Forest
+1 Plains
+2 Castle Vantress
+2 Breeding Pool
+2 Island
+2 Stomping Ground
+3 Fabled Passage
+3 Hallowed Fountain
+4 Ketria Triome
+4 Raugrin Triome
+4 Temple Garden
+
+[sideboard]
+1 Kenrith, the Returned King
+1 Aether Gust
+2 Dovin's Veto
+1 Shark Typhoon
+1 Narset's Reversal
+1 Deafening Clarion
+1 Spectral Sailor
+1 Commence the Endgame
+1 Bonecrusher Giant
+2 Justice Strike
+3 Solar Blaze

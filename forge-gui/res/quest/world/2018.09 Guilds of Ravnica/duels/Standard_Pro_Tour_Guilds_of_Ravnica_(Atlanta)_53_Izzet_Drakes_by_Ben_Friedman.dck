@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Izzet Drakes by Ben Friedman
+Title=Cleric
+Difficulty=very hard
+Description=Izzet Drakes by Ben Friedman
+Icon=Cleric.jpg
+Deck Type=constructed
+
+[main]
+4 Arclight Phoenix
+3 Crackling Drake
+4 Enigma Drake
+1 Beacon Bolt
+4 Chart a Course|XLN
+4 Crash Through
+4 Lava Coil
+4 Warlord's Fury
+3 Tormenting Voice
+4 Opt
+4 Shock
+3 Dive Down|XLN
+5 Island
+5 Mountain
+4 Steam Vents
+4 Sulfur Falls
+
+[sideboard]
+2 Deep Freeze
+2 Disdainful Stroke
+2 Negate
+2 Sailor of Means
+3 Fiery Cannonade|XLN
+2 Niv-Mizzet, Parun
+2 Search for Azcanta|XLN

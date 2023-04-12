@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Scott Kirkwood
+Title=The Champions
+Difficulty=very hard
+Description=Gruul Aggro by Scott Kirkwood
+Icon=The Champions.jpg
+Deck Type=constructed
+
+[main]
+4 Titan's Strength|ORI
+4 Become Immense|KTK
+4 Atarka's Command|DTK
+4 Temur Battle Rage|FRF
+1 Zurgo Bellstriker|DTK
+3 Snapping Gnarlid|BFZ
+4 Scythe Leopard|BFZ
+4 Monastery Swiftspear|KTK
+4 Abbot of Keral Keep|ORI
+4 Den Protector|DTK
+1 Evolving Wilds|BFZ
+2 Cinder Glade|BFZ
+4 Wooded Foothills|KTK
+4 Windswept Heath|KTK
+4 Forest|BFZ
+4 Bloodstained Mire|KTK
+5 Mountain|BFZ
+
+[sideboard]
+2 Roast|DTK
+3 Outpost Siege|FRF
+2 Wild Slash|FRF
+3 Rending Volley|DTK
+1 Yasova Dragonclaw|FRF
+1 Sarkhan, the Dragonspeaker|KTK
+3 Arc Lightning|KTK

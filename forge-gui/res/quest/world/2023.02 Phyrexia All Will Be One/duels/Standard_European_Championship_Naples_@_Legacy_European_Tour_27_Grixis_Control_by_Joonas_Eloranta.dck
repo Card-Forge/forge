@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Grixis Control by Joonas Eloranta
+Title=Ezio
+Difficulty=very hard
+Description=Grixis Control by Joonas Eloranta
+Icon=Ezio.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+1 Brotherhood's End
+2 Cut Down
+3 Reckoner Bankbuster
+3 Make Disappear
+3 Go for the Throat
+3 Abrade
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+2 Razorlash Transmogrant
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Darkslick Shores
+1 Sulfurous Springs
+1 Takenuma, Abandoned Mire
+1 Otawara, Soaring City
+1 Underground River
+2 Swamp
+3 Shivan Reef
+4 Shipwreck Marsh
+4 Haunted Ridge
+4 Blackcleave Cliffs
+4 Xander's Lounge
+
+[sideboard]
+2 Siphon Insight
+2 Disdainful Stroke
+2 Parasitic Grasp
+1 Duress
+1 Anoint with Affliction
+1 Sheoldred, the Apocalypse
+1 Unlicensed Hearse
+1 Negate
+1 Brotherhood's End
+2 Cut Down
+1 Razorlash Transmogrant

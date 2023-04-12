@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Blue Aggro by Chih-Cheng Yeh
+Title=Agent K
+Difficulty=very hard
+Description=Mono Blue Aggro by Chih-Cheng Yeh
+Icon=Agent K.jpg
+Deck Type=constructed
+
+[main]
+4 Pteramander
+4 Siren Stormtamer|XLN
+4 Tempest Djinn
+4 Merfolk Trickster
+3 Mist-Cloaked Herald
+2 Chart a Course|XLN
+1 Entrancing Melody|XLN
+4 Wizard's Retort
+3 Spell Pierce|XLN
+4 Opt
+2 Dive Down|XLN
+1 Essence Capture
+4 Curious Obsession
+20 Island
+
+[sideboard]
+2 Entrancing Melody|XLN
+2 Essence Capture
+1 Faerie Duelist
+3 Negate
+1 Search for Azcanta|XLN
+3 Surge Mare
+1 Deep Freeze
+1 Exclusion Mage
+1 Sleep

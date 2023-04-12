@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Sandydogmtg
+Title=The Court Jester
+Difficulty=very hard
+Description=Mono Green Aggro by Sandydogmtg
+Icon=The Court Jester.jpg
+Deck Type=constructed
+
+[main]
+1 Primal Adversary
+4 Werewolf Pack Leader
+4 Sculptor of Winter
+4 Old-Growth Troll
+4 Esika's Chariot
+1 Snakeskin Veil
+3 Inscription of Abundance
+4 Blizzard Brawl
+4 Ranger Class
+2 Wrenn and Seven
+2 Tangled Florahedron
+4 Kazandu Mammoth
+4 Faceless Haven
+19 Snow-Covered Forest
+
+[sideboard]
+3 Snakeskin Veil
+1 Inscription of Abundance
+1 Wrenn and Seven
+1 Devouring Tendrils
+1 Choose Your Weapon
+1 Tangletrap
+2 Tajuru Blightblade
+2 Outland Liberator
+3 Froghemoth

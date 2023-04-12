@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Temur Aggro by Fernando Barros
+Title=Darth Vader
+Difficulty=very hard
+Description=Temur Aggro by Fernando Barros
+Icon=Darth Vader.jpg
+Deck Type=constructed
+
+[main]
+4 Goblin Rabblemaster|M15
+4 Savage Knuckleblade|KTK
+1 Sylvan Caryatid|THS
+4 Elvish Mystic|M15
+4 Rattleclaw Mystic|KTK
+2 Chandra, Pyromaster|M15
+2 Sarkhan, the Dragonspeaker|KTK
+2 Temple of Mystery|THS
+2 Temple of Abandon|THS
+4 Yavimaya Coast|M15
+3 Shivan Reef|M15
+2 Mountain|KTK
+3 Forest|KTK
+3 Frontier Bivouac|KTK
+4 Wooded Foothills|KTK
+2 Temur Charm|KTK
+3 Lightning Strike|M15
+2 Crater's Claws|KTK
+2 Boon Satyr|THS
+3 Polukranos, World Eater|THS
+4 Stormbreath Dragon|THS
+
+[sideboard]
+2 Stubborn Denial|KTK
+2 Disdainful Stroke|KTK
+2 Back to Nature|M15
+2 Destructive Revelry|THS
+1 Surrak Dragonclaw|KTK
+2 Magma Spray|JOU
+2 Hornet Nest|M15
+2 Anger of the Gods|THS

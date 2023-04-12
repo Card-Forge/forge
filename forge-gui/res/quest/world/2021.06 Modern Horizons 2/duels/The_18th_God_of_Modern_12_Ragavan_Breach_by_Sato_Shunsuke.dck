@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Ragavan Breach by Sato Shunsuke
+Title=Aspect of Growth
+Difficulty=very hard
+Description=Ragavan Breach by Sato Shunsuke
+Icon=Aspect of Growth.jpg
+Deck Type=constructed
+
+[main]
+1 Springleaf Drum|BNG
+1 Expedition Map|ZEN
+1 Shadowspear
+1 Aether Spellbomb|MR
+2 Prismatic Ending
+2 Unholy Heat
+4 Mishra's Bauble|CS
+4 Mox Amber
+4 Grinding Station|FD
+4 Expressive Iteration
+4 Underworld Breach
+1 Thassa's Oracle
+4 Ragavan, Nimble Pilferer
+4 Dragon's Rage Channeler
+4 Emry, Lurker of the Loch
+1 Sacred Foundry
+1 Spirebluff Canal|KLD
+1 Mountain
+1 Island
+1 Hallowed Fountain
+2 Arid Mesa|ZEN
+2 Flooded Strand|KTK
+2 Steam Vents
+4 Scalding Tarn|ZEN
+4 Urza's Saga
+
+[sideboard]
+3 Dragon's Claw|M12
+3 Teferi, Time Raveler
+2 Wear // Tear|DGM
+2 Engineered Explosives|FD
+1 Lightning Helix|RAV
+1 Pithing Needle
+1 Tormod's Crypt
+1 Flusterstorm
+1 Unholy Heat

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Jeskai Dragons by Patrick Dickmann
+Title=The Rats
+Difficulty=very hard
+Description=Jeskai Dragons by Patrick Dickmann
+Icon=The Rats.jpg
+Deck Type=constructed
+
+[main]
+4 Thunderbreak Regent|DTK
+3 Dragonlord Ojutai|DTK
+2 Icefall Regent|DTK
+1 Stormbreath Dragon|THS
+2 Anger of the Gods|THS
+4 Anticipate|DTK
+3 Dig Through Time|KTK
+3 Wild Slash|FRF
+3 Draconic Roar|DTK
+3 Valorous Stance|FRF
+1 Aetherspouts|M15
+2 Stubborn Denial|KTK
+4 Silumgar's Scorn|DTK
+3 Flooded Strand|KTK
+1 Bloodstained Mire|KTK
+4 Mystic Monastery|KTK
+4 Temple of Epiphany|JOU
+1 Temple of Triumph|THS
+4 Shivan Reef|M15
+1 Swiftwater Cliffs|FRF
+1 Haven of the Spirit Dragon|DTK
+3 Island|DTK
+1 Plains|DTK
+2 Mountain|DTK
+
+[sideboard]
+1 Anger of the Gods|THS
+4 Goblin Rabblemaster|M15
+3 Disdainful Stroke|KTK
+1 Banishing Light|JOU
+2 Encase in Ice|DTK
+1 Dragonlord's Prerogative|DTK
+1 Keranos, God of Storms|JOU
+2 Twin Bolt|DTK

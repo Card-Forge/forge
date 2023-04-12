@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Sultai Emerge by Yuki Matsumoto
+Title=MahamotiGenie
+Difficulty=very hard
+Description=Sultai Emerge by Yuki Matsumoto
+Icon=MahamotiGenie.jpg
+Deck Type=constructed
+
+[main]
+4 Jace, Vryn's Prodigy|ORI
+3 Noose Constrictor|EMN
+4 Prized Amalgam|SOI
+1 Nissa, Vastwood Seer|ORI
+4 Haunted Dead|EMN
+1 Stitchwing Skaab|SOI
+4 Elder Deep-Fiend|EMN
+4 Traverse the Ulvenwald|SOI
+4 Gather the Pack|ORI
+4 Grapple with the Past|EMN
+4 Kozilek's Return|OGW
+3 Forest|RTR
+2 Lumbering Falls|BFZ
+4 Evolving Wilds
+2 Island|RTR
+2 Swamp|RTR
+3 Yavimaya Coast|ORI
+4 Llanowar Wastes|ORI
+3 Sunken Hollow|BFZ
+
+[sideboard]
+1 Nissa, Vastwood Seer|ORI
+3 Distended Mindbender|EMN
+2 Dragonlord Silumgar|DTK
+2 Languish|C16
+3 Duress
+1 Mountain|RTR
+3 Ultimate Price|DTK

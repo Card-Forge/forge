@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Weenie White by Ken Yukuhiro
+Title=The Clock
+Difficulty=very hard
+Description=Weenie White by Ken Yukuhiro
+Icon=The Clock.jpg
+Deck Type=constructed
+
+[main]
+2 Legion Angel
+2 Drannith Magistrate
+3 Reidane, God of the Worthy
+4 Luminarch Aspirant
+4 Seasoned Hallowblade
+4 Selfless Savior
+4 Skyclave Apparition
+4 Alseid of Life's Bounty
+4 Giant Killer
+4 Elite Spellbinder
+1 Maul of the Skyclaves
+4 Faceless Haven
+20 Snow-Covered Plains
+
+[sideboard]
+2 Legion Angel
+2 Drannith Magistrate
+1 Semester's End
+1 Lurrus of the Dream-Den
+1 Shadowspear
+1 Banishing Light
+2 Idol of Endurance
+2 Glorious Protector
+3 Glass Casket

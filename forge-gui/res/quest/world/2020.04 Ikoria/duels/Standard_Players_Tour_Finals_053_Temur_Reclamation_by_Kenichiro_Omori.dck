@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Kenichiro Omori
+Title=Athena
+Difficulty=very hard
+Description=Temur Reclamation by Kenichiro Omori
+Icon=Athena.jpg
+Deck Type=constructed
+
+[main]
+1 Nightpack Ambusher
+2 Uro, Titan of Nature's Wrath
+2 Brazen Borrower
+2 Aether Gust
+2 Dovin's Veto
+3 Mystical Dispute
+4 Expansion // Explosion
+4 Growth Spiral
+4 Shark Typhoon
+4 Wilderness Reclamation
+3 Teferi, Time Raveler
+1 Forest
+1 Mountain
+1 Plains
+2 Stomping Ground
+2 Island
+2 Hallowed Fountain
+2 Castle Vantress
+2 Breeding Pool
+4 Temple Garden
+4 Fabled Passage
+4 Ketria Triome
+4 Raugrin Triome
+
+[sideboard]
+1 Aether Gust
+2 Dovin's Veto
+1 Justice Strike
+1 Commence the Endgame
+1 Narset's Reversal
+2 Kenrith, the Returned King
+2 Solar Blaze
+2 Bonecrusher Giant
+3 Glass Casket

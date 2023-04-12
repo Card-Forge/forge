@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Gruul Cookbook by Igarashi Ritsu
+Title=Shelob
+Difficulty=very hard
+Description=Gruul Cookbook by Igarashi Ritsu
+Icon=Shelob.jpg
+Deck Type=constructed
+
+[main]
+3 The Underworld Cookbook
+4 Goblin Lore|10E
+4 Burning Inquiry|M10
+1 Fury
+3 Ox of Agonas
+4 Asmoranomardicadaistinaculdacar
+4 Street Wraith|FUT
+4 Hollow One|HOU
+4 Vengevine|ROE
+4 Flameblade Adept|AKH
+4 Insolent Neonate|SOI
+4 Blazing Rootwalla
+1 Scalding Tarn|ZEN
+1 Shinka, the Bloodsoaked Keep|CHK
+1 Arid Mesa|ZEN
+2 Bloodstained Mire|KTK
+3 Stomping Ground
+4 Copperline Gorge|SOM
+5 Mountain
+
+[sideboard]
+4 Soul-Guide Lantern
+3 Ancient Grudge|ISD
+2 Blood Moon|9E
+2 Void Mirror
+1 Foundation Breaker
+1 Alpine Moon
+1 Lightning Bolt|M11
+1 Fury

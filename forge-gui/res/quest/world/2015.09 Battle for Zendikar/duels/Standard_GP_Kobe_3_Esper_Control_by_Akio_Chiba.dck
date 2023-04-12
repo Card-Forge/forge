@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Esper Control by Akio Chiba
+Title=Deadpool
+Difficulty=very hard
+Description=Esper Control by Akio Chiba
+Icon=Deadpool.jpg
+Deck Type=constructed
+
+[main]
+2 Silumgar, the Drifting Death|FRF
+4 Dragonlord Ojutai|DTK
+4 Jace, Vryn's Prodigy|ORI
+2 Ultimate Price|DTK
+3 Dig Through Time|KTK
+4 Silumgar's Scorn|DTK
+4 Foul-Tongue Invocation|DTK
+2 Clash of Wills|ORI
+3 Utter End|KTK
+3 Scatter to the Winds|BFZ
+2 Painful Truths|BFZ
+4 Island|BFZ
+1 Plains|BFZ
+2 Swamp|BFZ
+4 Shambling Vent|BFZ
+4 Polluted Delta|KTK
+1 Haven of the Spirit Dragon|DTK
+1 Bloodstained Mire|KTK
+4 Flooded Strand|KTK
+4 Sunken Hollow|BFZ
+2 Prairie Stream|BFZ
+
+[sideboard]
+1 Ultimate Price|DTK
+3 Arashin Cleric|FRF
+1 Virulent Plague|DTK
+1 Silkwrap|DTK
+2 Dispel|BFZ
+2 Surge of Righteousness|DTK
+3 Duress|DTK
+2 Crux of Fate|FRF

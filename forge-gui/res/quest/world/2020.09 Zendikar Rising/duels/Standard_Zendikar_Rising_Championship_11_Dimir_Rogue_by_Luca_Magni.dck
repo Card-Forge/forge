@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Dimir Rogue by Luca Magni
+Title=Electro
+Difficulty=very hard
+Description=Dimir Rogue by Luca Magni
+Icon=Electro.jpg
+Deck Type=constructed
+
+[main]
+4 Island
+4 Clearwater Pathway
+4 Fabled Passage
+4 Brazen Borrower
+4 Drown in the Loch
+4 Zagoth Triome
+4 Temple of Deceit
+4 Heartless Act
+1 Bloodchief's Thirst
+4 Swamp
+1 Castle Vantress
+4 Thieves' Guild Enforcer
+1 Gadwick, the Wizened
+2 Zareth San, the Trickster
+4 Ruin Crab
+1 Didn't Say Please
+2 Sea Gate Restoration
+4 Into the Story
+4 Soaring Thought-Thief
+
+[sideboard]
+1 Gadwick, the Wizened
+1 Cling to Dust
+2 Shark Typhoon
+3 Mystical Dispute
+2 Extinction Event
+2 Lullmage's Domination
+4 Skyclave Shade

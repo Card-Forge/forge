@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Weenie White by Thiago Saporito
+Title=Nelson Muntz
+Difficulty=very hard
+Description=Weenie White by Thiago Saporito
+Icon=Nelson Muntz.jpg
+Deck Type=constructed
+
+[main]
+2 Stonecoil Serpent
+2 Garrison Cat
+4 Venerated Loxodon
+4 Seasoned Hallowblade
+4 Hunted Witness
+4 Selfless Savior
+4 Giant Killer
+3 Unbreakable Formation
+4 Raise the Alarm
+4 Basri's Solidarity
+1 Conclave Tribunal
+4 Glorious Anthem
+3 Castle Ardenvale
+17 Plains
+
+[sideboard]
+3 Devout Decree
+1 Unbreakable Formation
+2 Conclave Tribunal
+3 Gideon Blackblade
+3 Glass Casket
+3 Bounty Agent

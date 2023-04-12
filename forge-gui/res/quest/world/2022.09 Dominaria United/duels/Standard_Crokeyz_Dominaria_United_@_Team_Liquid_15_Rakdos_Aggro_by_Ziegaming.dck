@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Ziegaming
+Title=The Marines
+Difficulty=very hard
+Description=Rakdos Aggro by Ziegaming
+Icon=The Marines.jpg
+Deck Type=constructed
+
+[main]
+2 Sorin the Mirthless
+2 Ob Nixilis, the Adversary
+2 The Meathook Massacre
+2 Invoke Despair
+4 Fable of the Mirror-Breaker
+4 Lightning Strike
+4 Voltage Surge
+4 Infernal Grasp
+1 Sheoldred, the Apocalypse
+1 Junji, the Midnight Sky
+2 Tenacious Underdog
+4 Graveyard Trespasser
+4 Bloodtithe Harvester
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+2 Sulfurous Springs
+3 Mountain
+4 Ziatora's Proving Ground
+4 Haunted Ridge
+9 Swamp
+
+[sideboard]
+3 Duress
+2 Abrade
+2 Unlicensed Hearse
+2 Burn Down the House
+2 Debt to the Kami
+2 Malicious Malfunction
+1 Pilfer
+1 Soul Transfer

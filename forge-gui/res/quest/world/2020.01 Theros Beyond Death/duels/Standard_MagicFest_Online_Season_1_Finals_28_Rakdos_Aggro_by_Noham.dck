@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Noham
+Title=Bridge Troll
+Difficulty=very hard
+Description=Rakdos Aggro by Noham
+Icon=Bridge Troll.jpg
+Deck Type=constructed
+
+[main]
+7 Swamp
+6 Mountain
+4 Fabled Passage
+4 Blood Crypt
+2 Castle Locthwain
+2 Robber of the Rich
+3 Gutterbones
+4 Dreadhorde Butcher
+4 Mayhem Devil
+4 Midnight Reaper
+4 Priest of Forgotten Gods
+4 Woe Strider
+4 Cauldron Familiar
+4 Witch's Oven
+4 Claim the Firstborn
+
+[sideboard]
+1 Pharika's Libation
+1 Epic Downfall
+2 Act of Treason
+2 Embereth Shieldbreaker
+2 Noxious Grasp
+3 Agonizing Remorse
+3 Scorching Dragonfire
+1 Angrath's Rampage

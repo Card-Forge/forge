@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Devotion to Red by Raphael Levy
+Title=Shanna
+Difficulty=very hard
+Description=Devotion to Red by Raphael Levy
+Icon=Shanna.jpg
+Deck Type=constructed
+
+[main]
+3 Roast|DTK
+3 Wild Slash|FRF
+3 Lightning Berserker|DTK
+3 Zurgo Bellstriker|DTK
+4 Goblin Rabblemaster|M15
+4 Dragon Whisperer|DTK
+4 Thunderbreak Regent|DTK
+4 Flamewake Phoenix|FRF
+4 Eidolon of the Great Revel|JOU
+4 Ashcloud Phoenix|KTK
+3 Nykthos, Shrine to Nyx|THS
+4 Temple of Malice|BNG
+4 Bloodstained Mire|KTK
+13 Mountain|DTK
+
+[sideboard]
+2 Seismic Rupture|DTK
+1 Swamp|DTK
+3 Self-Inflicted Wound|DTK
+3 Ultimate Price|DTK
+1 Harness by Force|JOU
+2 Virulent Plague|DTK
+3 Monastery Swiftspear|KTK

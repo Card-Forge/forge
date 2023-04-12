@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Golgari Midrange by Yuchen Liu (China - A)
+Title=Seabiscuit
+Difficulty=very hard
+Description=Golgari Midrange by Yuchen Liu (China - A)
+Icon=Seabiscuit.jpg
+Deck Type=constructed
+
+[main]
+3 Vivien Reid
+4 Jadelight Ranger
+4 Merfolk Branchwalker|XLN
+3 Ravenous Chupacabra
+1 Thrashing Brontodon
+3 Wildgrowth Walker|XLN
+3 Carnage Tyrant|XLN
+4 Llanowar Elves
+3 Midnight Reaper
+1 Seekers' Squire|XLN
+3 Find // Finality
+2 Cast Down
+3 Vraska's Contempt|XLN
+4 Overgrown Tomb
+4 Woodland Cemetery
+2 Memorial to Folly
+5 Swamp
+8 Forest
+
+[sideboard]
+1 Thrashing Brontodon
+2 Cast Down
+1 Vraska's Contempt|XLN
+4 Duress
+2 Deathgorge Scavenger|XLN
+2 Golden Demise
+1 Ritual of Soot
+1 Vraska, Relic Seeker|XLN
+1 The Eldest Reborn

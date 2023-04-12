@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Tempered Steel by Gorka Fernández
+Title=Aspect of Growth
+Difficulty=very hard
+Description=Tempered Steel by Gorka Fernández
+Icon=Aspect of Growth.jpg
+Deck Type=constructed
+
+[main]
+4 Glint Hawk|SOM
+4 Memnite|SOM
+4 Ornithopter|M11
+4 Signal Pest|MBS
+2 Spellskite|NPH
+4 Steel Overseer|M11
+4 Vault Skirge|NPH
+4 Dispatch|NPH
+4 Glint Hawk Idol|SOM
+4 Mox Opal|SOM
+4 Tempered Steel|SOM
+2 Contested War Zone|MBS
+4 Inkmoth Nexus|MBS
+12 Plains|M12
+
+[sideboard]
+3 Spellskite|NPH
+4 Kor Firewalker|WWK
+3 Act of Aggression|NPH
+2 Refraction Trap|WWK
+1 Timely Reinforcements|M12
+3 Shrine of Loyal Legions|NPH

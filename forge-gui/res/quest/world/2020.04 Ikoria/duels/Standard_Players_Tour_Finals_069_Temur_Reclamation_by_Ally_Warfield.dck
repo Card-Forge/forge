@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Ally Warfield
+Title=Waldo
+Difficulty=very hard
+Description=Temur Reclamation by Ally Warfield
+Icon=Waldo.jpg
+Deck Type=constructed
+
+[main]
+3 Stomping Ground
+3 Steam Vents
+2 Island
+2 Blast Zone
+2 Forest
+1 Temple of Mystery
+1 Mountain
+4 Wilderness Reclamation
+4 Shark Typhoon
+4 Expansion // Explosion
+4 Growth Spiral
+4 Mystical Dispute
+3 Aether Gust
+2 Negate
+2 Uro, Titan of Nature's Wrath
+2 Brazen Borrower
+2 Nightpack Ambusher
+3 Castle Vantress
+4 Ketria Triome
+4 Fabled Passage
+4 Breeding Pool
+
+[sideboard]
+1 Negate
+1 Narset's Reversal
+2 Scorching Dragonfire
+2 Commence the Endgame
+2 Elder Gargaroth
+2 Spectral Sailor
+2 Storm's Wrath
+3 Bonecrusher Giant

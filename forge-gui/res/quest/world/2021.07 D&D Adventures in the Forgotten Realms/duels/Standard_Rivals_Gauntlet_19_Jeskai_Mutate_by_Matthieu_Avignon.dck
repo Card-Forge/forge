@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jeskai Mutate by Matthieu Avignon
+Title=Hellish Contraptions
+Difficulty=very hard
+Description=Jeskai Mutate by Matthieu Avignon
+Icon=Hellish Contraptions.jpg
+Deck Type=constructed
+
+[main]
+4 Lore Drakkis
+4 Goldspan Dragon
+4 Vadrok, Apex of Thunder
+1 Sejiri Shelter
+1 Into the Roil
+2 Cinderclasm
+2 Negate
+3 Dragon's Fire
+4 Spikefield Hazard
+4 Prismari Command
+4 Unsubstantiate
+1 See the Truth
+1 Seize the Spoils
+2 Expressive Iteration
+1 Showdown of the Skalds
+3 Island
+3 Mountain
+4 Riverglide Pathway
+4 Raugrin Triome
+4 Needleverge Pathway
+4 Hengegate Pathway
+
+[sideboard]
+1 Cinderclasm
+1 Burning Hands
+1 Redcap Melee
+2 Mazemind Tome
+2 Mystical Dispute
+2 Test of Talents
+2 Cubwarden
+4 Phoenix of Ash

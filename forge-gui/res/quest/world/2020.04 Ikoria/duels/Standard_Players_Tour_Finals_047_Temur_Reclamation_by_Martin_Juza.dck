@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Martin Juza
+Title=alaviash
+Difficulty=very hard
+Description=Temur Reclamation by Martin Juza
+Icon=alaviash.jpg
+Deck Type=constructed
+
+[main]
+4 Wilderness Reclamation
+4 Opt
+4 Mystical Dispute
+4 Growth Spiral
+4 Expansion // Explosion
+3 Negate
+1 Aether Gust
+3 Uro, Titan of Nature's Wrath
+1 Jolrael, Mwonvuli Recluse
+4 Ketria Triome
+4 Steam Vents
+4 Fabled Passage
+4 Breeding Pool
+3 Castle Vantress
+2 Forest
+2 Stomping Ground
+2 Island
+1 Temple of Mystery
+1 Mountain
+1 Blast Zone
+4 Shark Typhoon
+
+[sideboard]
+3 Nightpack Ambusher
+3 Scorching Dragonfire
+3 Flame Sweep
+1 Negate
+1 Jolrael, Mwonvuli Recluse
+2 Commence the Endgame
+1 Bonecrusher Giant
+1 Brazen Borrower

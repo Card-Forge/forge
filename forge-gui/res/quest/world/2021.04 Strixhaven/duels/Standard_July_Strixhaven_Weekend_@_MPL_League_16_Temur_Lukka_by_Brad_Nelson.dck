@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Temur Lukka by Brad Nelson
+Title=Lacjs
+Difficulty=very hard
+Description=Temur Lukka by Brad Nelson
+Icon=Lacjs.jpg
+Deck Type=constructed
+
+[main]
+2 Koma, Cosmos Serpent
+3 Llanowar Visionary
+4 Edgewall Innkeeper
+4 Lovestruck Beast
+4 Bonecrusher Giant
+4 Brazen Borrower
+1 Miscast
+1 Mystical Dispute
+2 Fire Prophecy
+2 Disdainful Stroke
+1 Shatterskull Smashing
+2 The Akroan War
+4 Lukka, Coppercoat Outcast
+2 Forest
+2 Mountain
+2 Island
+4 Fabled Passage
+4 Riverglide Pathway
+4 Ketria Triome
+4 Barkchannel Pathway
+4 Cragcrown Pathway
+
+[sideboard]
+1 Mystical Dispute
+1 The Akroan War
+1 Test of Talents
+1 Negate
+2 Elder Gargaroth
+2 Klothys, God of Destiny
+2 Ox of Agonas
+2 Scorching Dragonfire
+3 Redcap Melee

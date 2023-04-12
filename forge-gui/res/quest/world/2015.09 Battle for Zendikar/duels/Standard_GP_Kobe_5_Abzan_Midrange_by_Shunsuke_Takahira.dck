@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Shunsuke Takahira
+Title=Storm
+Difficulty=very hard
+Description=Abzan Midrange by Shunsuke Takahira
+Icon=Storm.jpg
+Deck Type=constructed
+
+[main]
+3 Hangarback Walker|ORI
+2 Wingmate Roc|KTK
+4 Warden of the First Tree|FRF
+3 Den Protector|DTK
+4 Siege Rhino|KTK
+4 Anafenza, the Foremost|KTK
+1 Ultimate Price|DTK
+4 Abzan Charm|KTK
+2 Murderous Cut|KTK
+3 Dromoka's Command|DTK
+4 Gideon, Ally of Zendikar|BFZ
+2 Forest|BFZ
+2 Plains|BFZ
+2 Llanowar Wastes|ORI
+4 Flooded Strand|KTK
+4 Shambling Vent|BFZ
+4 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+2 Canopy Vista|BFZ
+1 Sunken Hollow|BFZ
+1 Smoldering Marsh|BFZ
+
+[sideboard]
+1 Ultimate Price|DTK
+3 Silkwrap|DTK
+1 Tasigur, the Golden Fang|FRF
+2 Duress|DTK
+3 Self-Inflicted Wound|DTK
+1 Infinite Obliteration|ORI
+1 Painful Truths|BFZ
+3 Transgress the Mind|BFZ

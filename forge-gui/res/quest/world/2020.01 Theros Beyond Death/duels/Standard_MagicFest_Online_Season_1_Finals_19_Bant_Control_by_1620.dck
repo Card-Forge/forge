@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Bant Control by 1620
+Title=Denethor
+Difficulty=very hard
+Description=Bant Control by 1620
+Icon=Denethor.jpg
+Deck Type=constructed
+
+[main]
+2 Nissa, Who Shakes the World
+2 Tamiyo, Collector of Tales
+1 Narset, Parter of Veils
+4 Elspeth Conquers Death
+2 Shatter the Sky
+4 Growth Spiral
+2 Mystical Dispute
+2 Aether Gust
+4 Uro, Titan of Nature's Wrath
+2 Hydroid Krasis
+2 Dream Trawler
+4 Teferi, Time Raveler
+2 Island
+2 Plains
+2 Temple of Mystery
+2 Temple of Plenty
+2 Forest
+3 Temple of Enlightenment
+4 Temple Garden
+4 Hallowed Fountain
+4 Fabled Passage
+4 Breeding Pool
+
+[sideboard]
+1 Shatter the Sky
+2 Mystical Dispute
+2 Aether Gust
+1 Dovin's Veto
+2 Agent of Treachery
+3 Tolsimir, Friend to Wolves
+4 Devout Decree

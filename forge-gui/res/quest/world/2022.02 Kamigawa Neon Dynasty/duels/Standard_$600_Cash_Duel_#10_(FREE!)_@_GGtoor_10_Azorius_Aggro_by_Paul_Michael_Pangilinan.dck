@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Azorius Aggro by Paul Michael Pangilinan
+Title=Akongo
+Difficulty=very hard
+Description=Azorius Aggro by Paul Michael Pangilinan
+Icon=Akongo.jpg
+Deck Type=constructed
+
+[main]
+2 Sigrid, God-Favored
+3 Overcharged Amalgam
+4 Luminarch Aspirant
+4 Spectral Adversary
+4 Usher of the Fallen
+4 Elite Spellbinder
+2 Fading Hope
+2 Spell Pierce
+3 Jwari Disruption
+4 Wedding Announcement
+4 The Wandering Emperor
+1 Hall of Storm Giants
+1 Otawara, Soaring City
+2 Cave of the Frost Dragon
+2 Eiganjo, Seat of the Empire
+4 Island
+4 Deserted Beach
+4 Hengegate Pathway
+6 Plains
+
+[sideboard]
+1 Negate
+1 Test of Talents
+1 Disdainful Stroke
+2 Valorous Stance
+3 Portable Hole
+3 Malevolent Hermit
+4 Skyclave Apparition

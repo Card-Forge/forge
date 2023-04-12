@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Mardu Vehicles by Blake Miller
+Title=Hold the Line
+Difficulty=very hard
+Description=Mardu Vehicles by Blake Miller
+Icon=Hold the Line.jpg
+Deck Type=constructed
+
+[main]
+4 Spire of Industry|AER
+3 Canyon Slough|AKH
+4 Heart of Kiran|AER
+4 Unlicensed Disintegration|KLD
+3 Abrade|HOU
+2 Cut // Ribbons|AKH
+4 Walking Ballista|AER
+2 Hazoret the Fervent|AKH
+2 Rekindling Phoenix
+2 Pia Nalaar|KLD
+4 Scrapheap Scrounger|KLD
+4 Bomat Courier|KLD
+4 Toolcraft Exemplar|KLD
+1 Chandra, Torch of Defiance|KLD
+3 Dragonskull Summit|XLN
+4 Concealed Courtyard|KLD
+4 Inspiring Vantage|KLD
+3 Mountain
+1 Swamp
+2 Plains
+
+[sideboard]
+1 Chandra, Torch of Defiance|KLD
+1 Battle at the Bridge|AER
+2 Authority of the Consuls|KLD
+3 Duress|XLN
+1 Angrath, the Flame-Chained
+1 Arguel's Blood Fast|XLN
+2 Cast Out|AKH
+1 Profane Procession
+1 Chandra's Defeat|HOU
+2 Settle the Wreckage|XLN

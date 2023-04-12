@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Jeskai mutate by Stefan Schütz
+Title=Albus Dumbledore
+Difficulty=very hard
+Description=Jeskai mutate by Stefan Schütz
+Icon=Albus Dumbledore.jpg
+Deck Type=constructed
+
+[main]
+1 Mystical Dispute
+1 Sejiri Shelter
+1 Scorching Dragonfire
+1 Essence Scatter
+2 Fire Prophecy
+2 Negate
+3 Prismari Command
+3 Seize the Spoils
+4 Spikefield Hazard
+4 Unsubstantiate
+4 Expressive Iteration
+4 Vadrok, Apex of Thunder
+4 Lore Drakkis
+4 Goldspan Dragon
+2 Mountain
+4 Needleverge Pathway
+4 Island
+4 Hengegate Pathway
+4 Riverglide Pathway
+4 Raugrin Triome
+
+[sideboard]
+3 Redcap Melee
+2 Cinderclasm
+2 Phoenix of Ash
+1 Light of Hope
+1 Disdainful Stroke
+1 Glass Casket
+3 Mazemind Tome
+2 Mystical Dispute

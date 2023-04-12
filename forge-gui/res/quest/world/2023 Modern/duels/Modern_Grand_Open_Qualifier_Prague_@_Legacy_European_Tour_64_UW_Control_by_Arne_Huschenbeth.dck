@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=UW Control by Arne Huschenbeth
+Title=Bruce Lee
+Difficulty=very hard
+Description=UW Control by Arne Huschenbeth
+Icon=Bruce Lee.jpg
+Deck Type=constructed
+
+[main]
+4 Solitude
+2 Subtlety
+2 Chalice of the Void|MR
+4 Counterspell|7E
+4 Archmage's Charm
+2 Memory Deluge
+2 Supreme Verdict|RTR
+4 Prismatic Ending
+2 Shark Typhoon
+1 Dress Down
+4 Leyline Binding
+4 Teferi, Time Raveler
+1 Teferi, Hero of Dominaria
+4 Island
+1 Plains
+2 Misty Rainforest|ZEN
+1 Polluted Delta|KTK
+4 Flooded Strand|KTK
+2 Scalding Tarn|ZEN
+2 Hallowed Fountain
+1 Castle Vantress
+1 Ketria Triome
+2 Mystic Gate|SHM
+1 Hall of Storm Giants
+1 Otawara, Soaring City
+1 Raffine's Tower
+1 Steam Vents
+
+[sideboard]
+1 Chalice of the Void|MR
+1 Memory Deluge
+1 Dress Down
+2 Engineered Explosives|FD
+1 Rest in Peace|RTR
+2 Dovin's Veto
+1 Kaheera, the Orphanguard
+1 Alpine Moon
+3 Spell Pierce
+1 Wear // Tear|DGM
+1 Celestial Purge|M12

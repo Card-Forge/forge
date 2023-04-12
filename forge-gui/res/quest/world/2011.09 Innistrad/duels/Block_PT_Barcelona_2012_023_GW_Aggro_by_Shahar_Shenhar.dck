@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=GW Aggro by Shahar Shenhar
+Title=Seti
+Difficulty=very hard
+Description=GW Aggro by Shahar Shenhar
+Icon=Seti.jpg
+Deck Type=constructed
+
+[main]
+1 Evolving Wilds
+13 Forest|RTR
+3 Kessig Wolf Run|ISD
+7 Mountain|RTR
+4 Avacyn's Pilgrim|ISD
+4 Huntmaster of the Fells|DKA
+4 Scorned Villager|DKA
+4 Strangleroot Geist|DKA
+1 Wolfir Avenger|AVR
+4 Wolfir Silverheart|AVR
+4 Abundant Growth|AVR
+4 Bonfire of the Damned|AVR
+2 Brimstone Volley|CNS
+3 Garruk Relentless|ISD
+2 Pillar of Flame|AVR
+
+[sideboard]
+2 Devil's Play|ISD
+3 Increasing Savagery|DKA
+4 Tree of Redemption|ISD
+3 Triumph of Ferocity|AVR
+3 Zealous Conscripts|AVR

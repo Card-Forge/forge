@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Izzet Drakes by Masahide Moriyama (Japan - C)
+Title=M Bison
+Difficulty=very hard
+Description=Izzet Drakes by Masahide Moriyama (Japan - C)
+Icon=M Bison.jpg
+Deck Type=constructed
+
+[main]
+4 Enigma Drake
+4 Crackling Drake
+2 Niv-Mizzet, Parun
+4 Chart a Course|XLN
+4 Lava Coil
+1 Beacon Bolt
+3 Dive Down|XLN
+4 Opt
+4 Shock
+3 Spell Pierce|XLN
+4 Discovery // Dispersal
+2 Search for Azcanta|XLN
+1 Dragonskull Summit|XLN
+7 Island
+5 Mountain
+4 Steam Vents
+4 Sulfur Falls
+
+[sideboard]
+1 Niv-Mizzet, Parun
+1 Beacon Bolt
+2 Disdainful Stroke
+4 Raptor Hatchling|XLN
+2 Sarkhan, Fireblood
+2 Fiery Cannonade|XLN
+2 Ral, Izzet Viceroy
+1 Entrancing Melody|XLN

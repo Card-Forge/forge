@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Carlos Stark Schofield
+Title=Sisters of Stone Death
+Difficulty=very hard
+Description=Mono Green Aggro by Carlos Stark Schofield
+Icon=Sisters of Stone Death.jpg
+Deck Type=constructed
+
+[main]
+1 Froghemoth
+2 Sculptor of Winter
+3 Ascendant Packleader
+3 Cemetery Prowler
+4 Ulvenwald Oddity
+4 Old-Growth Troll
+4 Werewolf Pack Leader
+3 Esika's Chariot
+2 Inscription of Abundance
+2 Snakeskin Veil
+4 Blizzard Brawl
+1 Glorious Sunrise
+3 Ranger Class
+2 Kazandu Mammoth
+2 Lair of the Hydra
+20 Snow-Covered Forest
+
+[sideboard]
+2 Froghemoth
+2 Snakeskin Veil
+1 Howlpack Piper
+1 Unnatural Growth
+2 Outland Liberator
+2 Toski, Bearer of Secrets
+2 Tajuru Blightblade
+3 Tangletrap

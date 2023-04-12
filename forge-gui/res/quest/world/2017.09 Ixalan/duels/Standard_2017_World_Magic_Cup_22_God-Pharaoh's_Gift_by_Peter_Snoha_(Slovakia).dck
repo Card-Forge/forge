@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=God-Pharaoh's Gift by Peter Snoha (Slovakia)
+Title=Invisible Man
+Difficulty=very hard
+Description=God-Pharaoh's Gift by Peter Snoha (Slovakia)
+Icon=Invisible Man.jpg
+Deck Type=constructed
+
+[main]
+4 Angel of Invention|KLD
+4 Champion of Wits|HOU
+4 Minister of Inquiries|KLD
+4 Sacred Cat|AKH
+4 Chart a Course|XLN
+4 Refurbish|KLD
+4 Strategic Planning|HOU
+2 Fumigate|KLD
+4 God-Pharaoh's Gift|HOU
+1 Cast Out|AKH
+2 Search for Azcanta|XLN
+4 Glacial Fortress|XLN
+1 Hostile Desert|HOU
+2 Ipnu Rivulet|HOU
+3 Irrigated Farmland|AKH
+7 Island|XLN
+6 Plains|XLN
+
+[sideboard]
+1 Cast Out|AKH
+3 Angel of Sanctions|AKH
+3 Thopter Arrest|AER
+2 Disallow|AER
+2 Jace's Defeat|HOU
+2 Settle the Wreckage|XLN
+2 Spell Pierce|XLN

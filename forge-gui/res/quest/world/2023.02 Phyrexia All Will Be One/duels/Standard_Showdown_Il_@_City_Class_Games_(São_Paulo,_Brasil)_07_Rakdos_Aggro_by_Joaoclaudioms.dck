@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Joaoclaudioms
+Title=Spike Spiegel
+Difficulty=very hard
+Description=Rakdos Aggro by Joaoclaudioms
+Icon=Spike Spiegel.jpg
+Deck Type=constructed
+
+[main]
+1 Strangle
+2 Go for the Throat
+4 Lightning Strike
+4 Play with Fire
+4 Kumano Faces Kakkazan
+1 Graveyard Trespasser
+2 Bloodthirsty Adversary
+2 Tenacious Underdog
+3 Feldon, Ronom Excavator
+3 Monastery Swiftspear
+3 Squee, Dubious Monarch
+4 Phoenix Chick
+4 Thundering Raiju
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+1 Mirrex
+2 Swamp
+2 Mishra's Foundry
+3 Haunted Ridge
+4 Sulfurous Springs
+4 Blackcleave Cliffs
+5 Mountain
+
+[sideboard]
+3 Brotherhood's End
+3 Ob Nixilis, the Adversary
+2 Sheoldred, the Apocalypse
+1 Infernal Grasp
+1 Life of Toshiro Umezawa
+2 Go for the Throat
+3 Graveyard Trespasser

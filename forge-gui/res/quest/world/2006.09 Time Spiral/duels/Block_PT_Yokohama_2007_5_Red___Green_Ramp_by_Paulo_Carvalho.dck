@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Red // Green Ramp by Paulo Carvalho
+Title=Obatala
+Difficulty=very hard
+Description=Red // Green Ramp by Paulo Carvalho
+Icon=Obatala.jpg
+Deck Type=constructed
+
+[main]
+3 Harmonize|C13
+3 Stormbind|TSP
+4 Lotus Bloom|TSP
+4 Mwonvuli Acid-Moss|TSP
+4 Search for Tomorrow|TSP
+2 Akroma, Angel of Fury|CMD
+3 Scryb Ranger|TSP
+3 Radha, Heir to Keld|PLC
+4 Bogardan Hellkite|C14
+4 Spectral Force|TSP
+4 Wall of Roots|TSP
+1 Pendelhaven|TSP
+2 Terramorphic Expanse|C16
+2 Fungal Reaches|CMD
+8 Mountain|RTR
+9 Forest|RTR
+
+[sideboard]
+4 Sulfur Elemental|PLC
+4 Serrated Arrows|TSP
+2 Krosan Grip|C15
+3 Fortune Thief|TSP
+2 Ancient Grudge|ISD

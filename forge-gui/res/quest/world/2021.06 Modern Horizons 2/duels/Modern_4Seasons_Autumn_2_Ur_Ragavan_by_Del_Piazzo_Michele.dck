@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Ur Ragavan by Del Piazzo Michele
+Title=The Seasingers
+Difficulty=very hard
+Description=Ur Ragavan by Del Piazzo Michele
+Icon=The Seasingers.jpg
+Deck Type=constructed
+
+[main]
+1 Engineered Explosives|FD
+1 Spell Pierce|XLN
+1 Force of Negation
+2 Archmage's Charm
+2 Consider
+3 Counterspell|7E
+4 Expressive Iteration
+4 Lightning Bolt|M11
+4 Mishra's Bauble|CS
+4 Thought Scour|DKA
+4 Unholy Heat
+4 Dragon's Rage Channeler
+4 Murktide Regent
+4 Ragavan, Nimble Pilferer
+2 Fiery Islet
+2 Scalding Tarn|ZEN
+3 Steam Vents
+3 Island
+4 Spirebluff Canal|KLD
+4 Polluted Delta|KTK
+
+[sideboard]
+1 Alpine Moon
+2 Blood Moon|9E
+1 Dress Down
+2 Flusterstorm
+1 Jace, the Mind Sculptor|WWK
+1 Mystical Dispute
+1 Relic of Progenitus|ALA
+1 Soul-Guide Lantern
+1 Torpor Orb|NPH
+2 Engineered Explosives|FD
+1 Force of Negation
+1 Brazen Borrower

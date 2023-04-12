@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Izzet Control by Joel Burke
+Title=The Rock
+Difficulty=very hard
+Description=Izzet Control by Joel Burke
+Icon=The Rock.jpg
+Deck Type=constructed
+
+[main]
+2 Shark Typhoon
+2 Mazemind Tome
+3 Mystical Dispute
+3 Expressive Iteration
+3 Saw It Coming
+3 Alrund's Epiphany
+4 Frost Bite
+3 Galazeth Prismari
+4 Bonecrusher Giant
+4 Brazen Borrower
+4 Goldspan Dragon
+3 Faceless Haven
+4 Volatile Fjord
+4 Riverglide Pathway
+4 Snow-Covered Mountain
+4 Fabled Passage
+6 Snow-Covered Island
+
+[sideboard]
+2 Ox of Agonas
+2 Negate
+2 Redcap Melee
+2 Disdainful Stroke
+2 Crush the Weak
+1 Scorching Dragonfire
+1 Bind the Monster
+1 Soul Sear
+1 The Akroan War
+1 Shark Typhoon

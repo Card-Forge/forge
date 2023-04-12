@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Oblivion Bant by Samuel Black
+Title=Elashub
+Difficulty=very hard
+Description=Oblivion Bant by Samuel Black
+Icon=Elashub.jpg
+Deck Type=constructed
+
+[main]
+2 Lumbering Falls|BFZ
+1 Blighted Woodland|BFZ
+2 Prairie Stream|BFZ
+4 Forest|BFZ
+4 Plains|BFZ
+2 Canopy Vista|BFZ
+2 Wooded Foothills|KTK
+4 Flooded Strand|KTK
+4 Windswept Heath|KTK
+1 Quarantine Field|BFZ
+4 Retreat to Emeria|BFZ
+2 Stasis Snare|BFZ
+4 Silkwrap|DTK
+3 Secure the Wastes|DTK
+2 Dispel|BFZ
+1 Planar Outburst|BFZ
+3 Wingmate Roc|KTK
+4 Nissa, Vastwood Seer|ORI
+3 Elvish Visionary|ORI
+4 Hangarback Walker|ORI
+4 Gideon, Ally of Zendikar|BFZ
+
+[sideboard]
+4 Surge of Righteousness|DTK
+1 Negate|ORI
+2 Valorous Stance|FRF
+1 Oblivion Sower|BFZ
+2 Erase|KTK
+3 Den Protector|DTK
+2 Evolutionary Leap|ORI

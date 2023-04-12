@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Creativity by Jan ír
+Title=Alouroua
+Difficulty=very hard
+Description=Creativity by Jan ír
+Icon=Alouroua.jpg
+Deck Type=constructed
+
+[main]
+3 Archon of Cruelty
+4 Fable of the Mirror-Breaker
+4 Lightning Bolt|M11
+2 Prismari Command
+4 Spell Pierce
+2 Prismatic Ending
+1 Expressive Iteration
+4 Indomitable Creativity|AER
+1 Transmogrify
+4 Leyline Binding
+4 Wrenn and Six
+3 Teferi, Time Raveler
+4 Scalding Tarn|ZEN
+4 Arid Mesa|ZEN
+4 Bloodstained Mire|KTK
+1 Wooded Foothills|KTK
+4 Dwarven Mine
+1 Mountain
+1 Steam Vents
+1 Stomping Ground
+1 Sacred Foundry
+1 Blood Crypt
+1 Jetmir's Garden
+1 Xander's Lounge
+
+[sideboard]
+1 Teferi, Time Raveler
+2 Aether Gust
+2 Flusterstorm
+3 Veil of Summer
+1 Boseiju, Who Endures
+2 Hidetsugu Consumes All
+1 Nature's Claim|WWK
+1 Emrakul, the Aeons Torn|ROE
+2 Turn the Earth

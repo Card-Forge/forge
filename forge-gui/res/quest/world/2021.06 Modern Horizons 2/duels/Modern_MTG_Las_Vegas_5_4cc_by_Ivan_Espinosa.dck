@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=4cc by Ivan Espinosa
+Title=Sanctuary
+Difficulty=very hard
+Description=4cc by Ivan Espinosa
+Icon=Sanctuary.jpg
+Deck Type=constructed
+
+[main]
+2 Force of Negation
+2 Jace, the Mind Sculptor|WWK
+2 Supreme Verdict|RTR
+4 Counterspell|7E
+4 Expressive Iteration
+4 Prismatic Ending
+4 Teferi, Time Raveler
+4 Wrenn and Six
+2 Fury
+4 Solitude
+4 Omnath, Locus of Creation
+1 Breeding Pool
+1 Stomping Ground
+1 Sacred Foundry
+1 Raugrin Triome
+1 Temple Garden
+1 Plains
+1 Ketria Triome
+1 Island
+1 Forest
+1 Hallowed Fountain
+1 Steam Vents
+1 Lonely Sandbar|ON
+2 Windswept Heath|KTK
+2 Scalding Tarn|ZEN
+4 Misty Rainforest|ZEN
+4 Flooded Strand|KTK
+
+[sideboard]
+3 Endurance
+2 Sunset Revelry
+2 Chalice of the Void|MR
+2 Force of Vigor
+2 Alpine Moon
+1 Kaheera, the Orphanguard
+1 Mystical Dispute
+1 Celestial Purge|M12
+1 Force of Negation

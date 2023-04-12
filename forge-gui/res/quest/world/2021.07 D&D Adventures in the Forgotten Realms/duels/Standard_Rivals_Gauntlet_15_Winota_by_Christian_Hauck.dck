@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Winota by Christian Hauck
+Title=alathrax
+Difficulty=very hard
+Description=Winota by Christian Hauck
+Icon=alathrax.jpg
+Deck Type=constructed
+
+[main]
+2 Blade Historian
+2 Lotus Cobra
+2 Kenrith, the Returned King
+2 Magda, Brazen Outlaw
+2 Minsc, Beloved Ranger
+4 Winota, Joiner of Forces
+4 Jaspera Sentinel
+4 Elite Spellbinder
+4 Prosperous Innkeeper
+4 Selfless Savior
+4 Esika's Chariot
+2 Shatterskull Smashing
+1 Ranger Class
+1 Forest
+2 Plains
+2 Mountain
+2 Lair of the Hydra
+4 Needleverge Pathway
+4 Fabled Passage
+4 Cragcrown Pathway
+4 Branchloft Pathway
+
+[sideboard]
+2 Ranger Class
+1 Snakeskin Veil
+1 Bonecrusher Giant
+2 Klothys, God of Destiny
+2 Ox of Agonas
+2 The Akroan War
+2 Burning Hands
+3 Redcap Melee

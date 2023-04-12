@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Sultai Midrange by Noah Walker
+Title=Prince Bolbuss
+Difficulty=very hard
+Description=Sultai Midrange by Noah Walker
+Icon=Prince Bolbuss.jpg
+Deck Type=constructed
+
+[main]
+1 Vraska, Relic Seeker|XLN
+1 Liliana, Death's Majesty|AKH
+1 Supreme Will|HOU
+1 Moment of Craving
+2 Treasure Map|XLN
+2 Essence Scatter|AKH
+2 Doomfall|HOU
+4 Vraska's Contempt|XLN
+4 Fatal Push|AER
+1 Torrential Gearhulk|KLD
+2 Gonti, Lord of Luxury|KLD
+2 Ravenous Chupacabra
+2 Walking Ballista|AER
+3 Champion of Wits|HOU
+3 The Scarab God|HOU
+4 Glint-Sleeve Siphoner|AER
+2 Field of Ruin|XLN
+3 Island
+4 Aether Hub|KLD
+4 Swamp
+4 Fetid Pools|AKH
+4 Drowned Catacomb|XLN
+4 Blooming Marsh|KLD
+
+[sideboard]
+1 Vizier of Many Faces|AKH
+2 Contraband Kingpin|KLD
+2 Duress|XLN
+1 Golden Demise
+1 Hour of Glory|HOU
+3 Negate
+1 Vraska, Relic Seeker|XLN
+1 Supreme Will|HOU
+1 Treasure Map|XLN
+1 Torrential Gearhulk|KLD
+1 Walking Ballista|AER

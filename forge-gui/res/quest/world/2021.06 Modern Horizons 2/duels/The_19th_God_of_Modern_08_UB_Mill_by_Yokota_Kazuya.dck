@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=UB Mill by Yokota Kazuya
+Title=The Cavalry
+Difficulty=very hard
+Description=UB Mill by Yokota Kazuya
+Icon=The Cavalry.jpg
+Deck Type=constructed
+
+[main]
+4 Ruin Crab
+4 Hedron Crab|ZEN
+1 Into the Story
+1 Crypt Incursion|DGM
+3 Remand|RAV
+4 Visions of Beyond|M12
+4 Archive Trap|ZEN
+4 Drown in the Loch
+2 Maddening Cacophony
+3 Prismatic Ending
+4 Tasha's Hideous Laughter
+4 Fractured Sanity
+1 Swamp
+1 Zagoth Triome
+1 Plains
+1 Watery Grave
+1 Hallowed Fountain
+1 Mikokoro, Center of the Sea|SOK
+4 Island
+4 Flooded Strand|KTK
+4 Field of Ruin
+4 Polluted Delta|KTK
+
+[sideboard]
+1 Crypt Incursion|DGM
+1 Prismatic Ending
+1 Path to Exile|CFX
+1 Lurrus of the Dream-Den
+2 Baleful Mastery
+3 Engineered Explosives|FD
+3 Soul-Guide Lantern
+3 Extirpate|PLC

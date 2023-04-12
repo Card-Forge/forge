@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Bant Aggro by Grzegorz Kowalski (urlich)
+Title=Aspect of War
+Difficulty=very hard
+Description=Bant Aggro by Grzegorz Kowalski (urlich)
+Icon=Aspect of War.jpg
+Deck Type=constructed
+
+[main]
+4 Hydroid Krasis
+4 Incubation Druid
+3 Jadelight Ranger
+4 Llanowar Elves
+4 Paradise Druid
+2 Ripjaw Raptor|XLN
+2 Shalai, Voice of Plenty
+2 Trostani Discordant
+2 The Immortal Sun
+2 Finale of Glory
+2 Prison Realm
+4 Nissa, Who Shakes the World
+4 Breeding Pool
+6 Forest
+2 Glacial Fortress|XLN
+4 Hallowed Fountain
+1 Plains
+4 Sunpetal Grove|XLN
+4 Temple Garden
+
+[sideboard]
+1 Ripjaw Raptor|XLN
+3 Baffling End
+2 Deputy of Detention
+1 Gideon Blackblade
+2 Ixalan's Binding|XLN
+2 Lyra Dawnbringer
+4 Negate

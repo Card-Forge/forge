@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Selesnya Tokens by Kenta Harane
+Title=Spike Spiegel
+Difficulty=very hard
+Description=Selesnya Tokens by Kenta Harane
+Icon=Spike Spiegel.jpg
+Deck Type=constructed
+
+[main]
+2 Ajani, Adversary of Tyrants
+4 Adanto Vanguard|XLN
+3 Emmara, Soul of the Accord
+4 Venerated Loxodon
+3 Trostani Discordant
+4 Saproling Migration
+4 Flower // Flourish
+4 March of the Multitudes
+3 Legion's Landing|XLN
+4 History of Benalia
+4 Conclave Tribunal
+1 Arch of Orazca
+4 Forest
+8 Plains
+4 Sunpetal Grove|XLN
+4 Temple Garden
+
+[sideboard]
+2 Kraul Harpooner
+3 Baffling End
+4 Nullhide Ferox
+3 Knight of Autumn
+2 Vivien Reid
+1 The Immortal Sun

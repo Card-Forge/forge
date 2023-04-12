@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Mono Black Control by Jens Thoren
+Title=Castle Sengir
+Difficulty=very hard
+Description=Mono Black Control by Jens Thoren
+Icon=Castle Sengir.jpg
+Deck Type=constructed
+
+[main]
+2 Cabal Coffers|TO
+24 Swamp|A
+4 Nantuko Shade|TO
+4 Shambling Swarm|TO
+4 Chainer's Edict|TO
+4 Diabolic Tutor|OD
+1 Haunting Echoes|OD
+4 Innocent Blood|OD
+4 Mind Sludge|TO
+4 Mutilate|TO
+4 Rancid Earth|TO
+1 Skeletal Scrying|OD
+
+[sideboard]
+2 Haunting Echoes|OD
+2 Skeletal Scrying|OD
+3 Ghastly Demise|OD
+2 Laquatus's Champion|TO
+2 Last Rites|OD
+4 Mesmeric Fiend|TO

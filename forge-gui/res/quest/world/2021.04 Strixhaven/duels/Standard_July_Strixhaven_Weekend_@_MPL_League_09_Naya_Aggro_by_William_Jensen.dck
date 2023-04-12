@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Naya Aggro by William Jensen
+Title=Olokun
+Difficulty=very hard
+Description=Naya Aggro by William Jensen
+Icon=Olokun.jpg
+Deck Type=constructed
+
+[main]
+2 Reidane, God of the Worthy
+2 Tangled Florahedron
+2 Drannith Magistrate
+2 Clarion Spirit
+4 Bonecrusher Giant
+4 Jaspera Sentinel
+4 Edgewall Innkeeper
+4 Giant Killer
+4 Lovestruck Beast
+4 Elite Spellbinder
+4 Showdown of the Skalds
+1 Mountain
+1 Temple of Abandon
+3 Plains
+3 Forest
+4 Cragcrown Pathway
+4 Fabled Passage
+4 Branchloft Pathway
+4 Needleverge Pathway
+
+[sideboard]
+2 Drannith Magistrate
+1 Jegantha, the Wellspring
+1 The Akroan War
+1 Soul-Guide Lantern
+2 Glass Casket
+2 Chainweb Aracnir
+3 Redcap Melee
+3 Fire Prophecy

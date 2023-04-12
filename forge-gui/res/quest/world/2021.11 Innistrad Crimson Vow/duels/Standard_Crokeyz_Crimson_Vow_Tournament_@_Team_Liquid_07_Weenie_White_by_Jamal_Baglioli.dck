@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Weenie White by Jamal Baglioli
+Title=Scotty
+Difficulty=very hard
+Description=Weenie White by Jamal Baglioli
+Icon=Scotty.jpg
+Deck Type=constructed
+
+[main]
+2 Legion Angel
+2 Stonebinder's Familiar
+3 Reidane, God of the Worthy
+3 Adeline, Resplendent Cathar
+3 Sungold Sentinel
+3 Thalia, Guardian of Thraben
+4 Intrepid Adversary
+4 Elite Spellbinder
+4 Usher of the Fallen
+4 Luminarch Aspirant
+1 Maul of the Skyclaves
+2 Portable Hole
+1 Fateful Absence
+1 Cave of the Frost Dragon
+4 Faceless Haven
+19 Snow-Covered Plains
+
+[sideboard]
+2 Legion Angel
+1 Portable Hole
+1 Wings of the Cosmos
+1 Skyclave Apparition
+2 Curse of Silence
+2 Welcoming Vampire
+3 Brutal Cathar
+3 Guardian of Faith

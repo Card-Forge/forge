@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Bant United
+Title=Bant United
+Icon=alarafiq.jpg
+Difficulty=hard
+Description=Many sigils, one purpose.
+Deck Type=constructed
+[Main]
+3 Ancient Ziggurat|CFX
+3 Ardent Plea|ARB
+2 Aven Squire|M13
+2 Battlegrace Angel|ALA
+2 Elspeth, Knight-Errant|ALA
+1 Finest Hour|ARB
+5 Forest|ALA|4
+2 Giltspire Avenger|CFX
+4 Island|ALA|1
+2 Jenara, Asura of War|ARB
+2 Jhessian Infiltrator|ALA
+2 Knight of New Alara|ARB
+2 Knotvine Paladin|ARB
+2 Noble Hierarch|CFX
+3 Path to Exile|CFX
+8 Plains|ALA|2
+3 Rafiq of the Many|ALA
+2 Rhox War Monk|ALA
+4 Seaside Citadel|ALA
+2 Sigiled Paladin|ALA
+2 Steward of Valeron|ALA
+2 Stoic Angel|ALA

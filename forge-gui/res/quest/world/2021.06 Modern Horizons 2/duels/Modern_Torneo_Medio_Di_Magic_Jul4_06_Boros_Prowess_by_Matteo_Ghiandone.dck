@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Boros Prowess by Matteo Ghiandone
+Title=Preacher
+Difficulty=very hard
+Description=Boros Prowess by Matteo Ghiandone
+Icon=Preacher.jpg
+Deck Type=constructed
+
+[main]
+4 Clever Lumimancer
+4 Monastery Swiftspear|KTK
+4 Soul-Scar Mage|AKH
+4 Dragon's Rage Channeler
+4 Mishra's Bauble|CS
+4 Manamorphose|SHM
+4 Lightning Bolt|M11
+4 Lava Dart|JU
+3 Mutagenic Growth|NPH
+2 Boros Charm|GTC
+4 Crash Through
+3 Sunbaked Canyon
+3 Sacred Foundry
+3 Mountain
+4 Inspiring Vantage|KLD
+4 Bloodstained Mire|KTK
+2 Arid Mesa|ZEN
+
+[sideboard]
+1 Lurrus of the Dream-Den
+2 Young Pyromancer|M14
+2 Abrade|HOU
+3 Unholy Heat
+3 Prismatic Ending
+3 Soul-Guide Lantern
+1 Shattering Spree|GP

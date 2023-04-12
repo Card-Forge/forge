@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Rakdos Control by Dorian Gillis
+Title=IdiAmin
+Difficulty=very hard
+Description=Rakdos Control by Dorian Gillis
+Icon=IdiAmin.jpg
+Deck Type=constructed
+
+[main]
+1 Duress
+1 Gix's Command
+2 Abrade
+3 Invoke Despair
+3 Reckoner Bankbuster
+4 Go for the Throat
+4 Cut Down
+4 Fable of the Mirror-Breaker
+2 Razorlash Transmogrant
+3 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Graveyard Trespasser
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+2 Mountain
+4 Haunted Ridge
+4 Sulfurous Springs
+4 Blackcleave Cliffs
+9 Swamp
+
+[sideboard]
+2 Archfiend of the Dross
+2 Vampires' Vengeance
+2 Soul Transfer
+1 Obliterating Bolt
+3 Duress
+1 Gix's Command
+1 Invoke Despair
+1 Reckoner Bankbuster
+2 Razorlash Transmogrant

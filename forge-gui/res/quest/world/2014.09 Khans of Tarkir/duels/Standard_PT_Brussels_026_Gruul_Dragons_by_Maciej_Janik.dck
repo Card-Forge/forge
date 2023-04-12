@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Gruul Dragons by Maciej Janik
+Title=Tibalt
+Difficulty=very hard
+Description=Gruul Dragons by Maciej Janik
+Icon=Tibalt.jpg
+Deck Type=constructed
+
+[main]
+3 Xenagos, the Reveler|THS
+4 Stormbreath Dragon|THS
+4 Thunderbreak Regent|DTK
+4 Elvish Mystic|M15
+1 Arbor Colossus|THS
+2 Ashcloud Phoenix|KTK
+4 Sylvan Caryatid|THS
+4 Courser of Kruphix|BNG
+2 Dragonlord Atarka|DTK
+3 Crater's Claws|KTK
+2 Roast|DTK
+4 Draconic Roar|DTK
+3 Haven of the Spirit Dragon|DTK
+4 Wooded Foothills|KTK
+4 Temple of Abandon|THS
+2 Rugged Highlands|FRF
+2 Mana Confluence|JOU
+6 Forest|DTK
+3 Mountain|DTK
+
+[sideboard]
+1 Arbor Colossus|THS
+2 Hornet Nest|M15
+2 Destructive Revelry|THS
+2 Wild Slash|FRF
+1 Chandra, Pyromaster|M15
+1 Mob Rule|FRF
+3 Goblin Rabblemaster|M15
+2 Seismic Rupture|DTK
+1 Setessan Tactics|JOU

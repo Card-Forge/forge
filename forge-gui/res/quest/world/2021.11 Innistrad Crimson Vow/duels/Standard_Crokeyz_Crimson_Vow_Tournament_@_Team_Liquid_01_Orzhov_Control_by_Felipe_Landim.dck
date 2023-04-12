@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Orzhov Control by Felipe Landim
+Title=Bushwhacked
+Difficulty=very hard
+Description=Orzhov Control by Felipe Landim
+Icon=Bushwhacked.jpg
+Deck Type=constructed
+
+[main]
+1 Infernal Grasp
+3 Vanishing Verse
+3 The Meathook Massacre
+3 Blood on the Snow
+4 Deadly Dispute
+4 Lolth, Spider Queen
+2 Fell Stinger
+4 Professor of Symbology
+4 Shambling Ghast
+4 Eyetwitch
+4 Edgar, Charmed Groom
+1 Field of Ruin
+4 Snowfield Sinkhole
+4 Brightclimb Pathway
+4 Faceless Haven
+5 Snow-Covered Plains
+6 Snow-Covered Swamp
+
+[sideboard]
+3 Duress
+3 Go Blank
+2 Crippling Fear
+2 Mascot Exhibition
+1 Necrotic Fumes
+1 Hero's Downfall
+1 Environmental Sciences
+1 Confront the Past
+1 Soul Shatter

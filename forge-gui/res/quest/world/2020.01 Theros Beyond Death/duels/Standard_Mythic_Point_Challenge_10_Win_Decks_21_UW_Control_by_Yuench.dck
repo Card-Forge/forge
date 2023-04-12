@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=UW Control by Yuench
+Title=Dungeon Crawling White
+Difficulty=very hard
+Description=UW Control by Yuench
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+
+[main]
+7 Island
+4 Hallowed Fountain
+4 Plains
+4 Temple of Enlightenment
+3 Castle Ardenvale
+1 Blast Zone
+1 Castle Vantress
+1 Fabled Passage
+4 Teferi, Time Raveler
+3 Narset, Parter of Veils
+4 Omen of the Sea
+3 Elspeth Conquers Death
+2 The Birth of Meletis
+1 Banishing Light
+2 Shatter the Sky
+3 Aether Gust
+3 Absorb
+3 Dovin's Veto
+2 Mystical Dispute
+2 Thirst for Meaning
+3 Dream Trawler
+
+[sideboard]
+3 Glass Casket
+2 Deputy of Detention
+2 Archon of Sun's Grace
+2 Apostle of Purifying Light
+1 Devout Decree
+1 Spectral Sailor
+1 Shatter the Sky
+1 Aether Gust
+1 Dovin's Veto
+1 Mystical Dispute

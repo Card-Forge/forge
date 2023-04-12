@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Naya by Jorg Unfried
+Title=Fiery Dawn
+Difficulty=very hard
+Description=Naya by Jorg Unfried
+Icon=Fiery Dawn.jpg
+Deck Type=constructed
+
+[main]
+2 Clifftop Retreat
+4 Evolving Wilds
+11 Forest|RTR
+2 Gavony Township|ISD
+4 Mountain|RTR
+1 Plains|RTR
+4 Avacyn's Pilgrim|ISD
+2 Borderland Ranger|AVR
+4 Huntmaster of the Fells|DKA
+3 Restoration Angel|AVR
+4 Scorned Villager|DKA
+3 Wolfir Avenger|AVR
+4 Wolfir Silverheart|AVR
+3 Bonfire of the Damned|AVR
+2 Brimstone Volley|CNS
+3 Garruk Relentless|ISD
+4 Pillar of Flame|AVR
+
+[sideboard]
+1 Brimstone Volley|CNS
+1 Garruk Relentless|ISD
+1 Divine Deflection|AVR
+2 Grafdigger's Cage|DKA
+1 Increasing Savagery|DKA
+1 Naturalize
+1 Revenge of the Hunted|AVR
+1 Smite the Monstrous|BFZ
+1 Tree of Redemption|ISD
+2 Triumph of Ferocity|AVR
+2 Witchbane Orb|ISD
+1 Zealous Conscripts|AVR

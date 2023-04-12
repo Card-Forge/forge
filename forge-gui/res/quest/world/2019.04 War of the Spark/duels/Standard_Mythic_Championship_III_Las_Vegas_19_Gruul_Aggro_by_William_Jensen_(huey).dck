@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by William Jensen (huey)
+Title=Deep Blue Sea
+Difficulty=very hard
+Description=Gruul Aggro by William Jensen (huey)
+Icon=Deep Blue Sea.jpg
+Deck Type=constructed
+
+[main]
+4 Growth-Chamber Guardian
+4 Gruul Spellbreaker
+3 Legion Warboss
+4 Llanowar Elves
+4 Rekindling Phoenix
+3 Skarrgan Hellkite
+4 Thorn Lieutenant
+4 Shock
+3 Domri's Ambush
+3 Domri, Anarch of Bolas
+9 Forest
+7 Mountain
+4 Rootbound Crag|XLN
+4 Stomping Ground
+
+[sideboard]
+2 Collision // Colossus
+2 Dire Fleet Daredevil
+2 Domri, Chaos Bringer
+4 Lava Coil
+1 Sentinel Totem|XLN
+1 Thrashing Brontodon
+3 Vivien Reid

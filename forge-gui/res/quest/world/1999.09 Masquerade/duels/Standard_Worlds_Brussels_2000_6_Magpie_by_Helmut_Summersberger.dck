@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Magpie by Helmut Summersberger
+Title=MamiWata
+Difficulty=very hard
+Description=Magpie by Helmut Summersberger
+Icon=MamiWata.jpg
+Deck Type=constructed
+
+[main]
+4 Daze|NE
+4 Miscalculation|UL
+4 Counterspell|7E
+3 Thwart|MM
+3 Foil|PY
+4 Powder Keg|UD
+2 Masticore|UD
+2 Morphling|US
+4 Thieving Magpie|10E
+1 Temporal Adept|9E
+2 Treachery|UD
+2 Faerie Conclave|C13
+19 Island|RTR
+2 Dust Bowl|MM
+4 Rishadan Port|MM
+
+[sideboard]
+1 Temporal Adept|9E
+4 Annul|THS
+4 Seal of Removal|NE
+2 Chill|6E
+4 Submerge|NE

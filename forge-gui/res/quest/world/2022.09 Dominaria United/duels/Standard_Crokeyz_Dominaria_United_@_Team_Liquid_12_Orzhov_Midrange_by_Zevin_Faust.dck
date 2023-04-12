@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Orzhov Midrange by Zevin Faust
+Title=Sindbad
+Difficulty=very hard
+Description=Orzhov Midrange by Zevin Faust
+Icon=Sindbad.jpg
+Deck Type=constructed
+
+[main]
+2 The Meathook Massacre
+2 Elspeth Resplendent
+2 Sorin the Mirthless
+4 The Wandering Emperor
+4 Liliana of the Veil
+4 Wedding Announcement
+4 Infernal Grasp
+2 Cathar Commando
+2 Edgar, Charmed Groom
+4 Graveyard Trespasser
+4 Tenacious Underdog
+1 Takenuma, Abandoned Mire
+3 Eiganjo, Seat of the Empire
+4 Caves of Koilos
+4 Shattered Sanctum
+5 Plains
+9 Swamp
+
+[sideboard]
+4 Duress
+2 Extract the Truth
+2 Temporary Lockdown
+2 Knockout Blow
+1 Parasitic Grasp
+1 Cut Down
+1 Liesa, Forgotten Archangel
+1 Farewell
+1 Edgar, Charmed Groom

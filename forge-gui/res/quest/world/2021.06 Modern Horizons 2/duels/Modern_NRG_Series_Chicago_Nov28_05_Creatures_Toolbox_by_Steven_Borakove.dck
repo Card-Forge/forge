@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Creatures Toolbox by Steven Borakove
+Title=The Cavalry
+Difficulty=very hard
+Description=Creatures Toolbox by Steven Borakove
+Icon=The Cavalry.jpg
+Deck Type=constructed
+
+[main]
+1 Endurance
+1 Geralf's Messenger|DKA
+1 Blood Artist|AVR
+1 Scavenging Ooze
+1 Hapatra, Vizier of Poisons|AKH
+3 Birds of Paradise|M12
+4 Wall of Roots|TSP
+4 Young Wolf|DKA
+4 Strangleroot Geist|DKA
+4 Yawgmoth, Thran Physician
+4 Ignoble Hierarch
+4 Chord of Calling|M15
+4 Eldritch Evolution|EMN
+3 Grist, the Hunger Tide
+1 Yavimaya, Cradle of Growth
+1 Windswept Heath|KTK
+1 Swamp
+1 Dryad Arbor|FUT
+1 Urborg, Tomb of Yawgmoth|M15
+2 Forest
+2 Nurturing Peatland
+2 Overgrown Tomb
+3 Blooming Marsh|KLD
+3 Twilight Mire|EVE
+4 Verdant Catacombs|ZEN
+
+[sideboard]
+2 Endurance
+1 Obstinate Baloth|M11
+1 Thrun, the Last Troll|MBS
+1 Necromentia
+1 Outland Liberator
+2 Force of Vigor
+2 Veil of Summer
+2 Crime // Punishment|DIS
+3 Thoughtseize|THS

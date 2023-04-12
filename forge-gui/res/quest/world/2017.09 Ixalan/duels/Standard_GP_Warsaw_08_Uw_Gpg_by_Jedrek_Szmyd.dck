@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Uw Gpg by Jedrek Szmyd
+Title=Gambit
+Difficulty=very hard
+Description=Uw Gpg by Jedrek Szmyd
+Icon=Gambit.jpg
+Deck Type=constructed
+
+[main]
+4 Glacial Fortress|XLN
+6 Plains|XLN
+7 Island|XLN
+2 Cast Out|AKH
+2 Search for Azcanta|XLN
+4 God-Pharaoh's Gift|HOU
+1 Fumigate|KLD
+4 Refurbish|KLD
+4 Strategic Planning|HOU
+4 Chart a Course|XLN
+4 Angel of Invention|KLD
+1 Fairgrounds Warden|KLD
+4 Champion of Wits|HOU
+3 Sacred Cat|AKH
+4 Minister of Inquiries|KLD
+1 Hostile Desert|HOU
+2 Ipnu Rivulet|HOU
+3 Irrigated Farmland|AKH
+
+[sideboard]
+1 Fumigate|KLD
+3 Fairgrounds Warden|KLD
+1 Sacred Cat|AKH
+1 Fragmentize|KLD
+1 River's Rebuke|XLN
+1 Authority of the Consuls|KLD
+2 Negate|AER
+2 Jace's Defeat|HOU
+3 Angel of Sanctions|AKH

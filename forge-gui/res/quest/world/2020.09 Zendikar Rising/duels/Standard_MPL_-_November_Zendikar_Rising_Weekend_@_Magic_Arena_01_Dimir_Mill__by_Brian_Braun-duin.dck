@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Dimir Mill  by Brian Braun-duin
+Title=Odysseus
+Difficulty=very hard
+Description=Dimir Mill  by Brian Braun-duin
+Icon=Odysseus.jpg
+Deck Type=constructed
+
+[main]
+4 Merfolk Windrobber
+4 Soaring Thought-Thief
+4 Thieves' Guild Enforcer
+4 Ruin Crab
+2 Cling to Dust
+4 Eliminate
+4 Into the Story
+4 Drown in the Loch
+1 Sea Gate Restoration
+2 Lullmage's Domination
+2 Bloodchief's Thirst
+3 Agadeem's Awakening
+3 Swamp
+3 Zagoth Triome
+4 Fabled Passage
+4 Temple of Deceit
+4 Island
+4 Clearwater Pathway
+
+[sideboard]
+2 Lullmage's Domination
+1 Lurrus of the Dream-Den
+1 Thassa's Intervention
+2 Duress
+2 Vantress Gargoyle
+2 Call of the Death-Dweller
+2 Negate
+3 Mystical Dispute

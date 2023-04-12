@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Esper Control by Jeffrey Brusi (sjow)
+Title=Zapp Brannigan
+Difficulty=very hard
+Description=Esper Control by Jeffrey Brusi (sjow)
+Icon=Zapp Brannigan.jpg
+Deck Type=constructed
+
+[main]
+3 Basilica Bell-Haunt
+3 Cast Down
+1 Despark
+1 Command the Dreadhorde
+4 Kaya's Wrath
+1 The Elderspell
+4 Thought Erasure
+3 Oath of Kaya
+2 Search for Azcanta|XLN
+4 Narset, Parter of Veils
+4 Teferi, Hero of Dominaria
+4 Teferi, Time Raveler
+4 Drowned Catacomb|XLN
+4 Glacial Fortress|XLN
+4 Godless Shrine
+4 Hallowed Fountain
+4 Isolated Chapel
+1 Plains
+1 Swamp
+4 Watery Grave
+
+[sideboard]
+2 Despark
+1 Command the Dreadhorde
+2 The Elderspell
+4 Cry of the Carnarium
+2 Duress
+2 Hostage Taker|XLN
+2 Lyra Dawnbringer

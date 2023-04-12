@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Rakdos Dragons by Levi Basham
+Title=Nick Fury
+Difficulty=very hard
+Description=Rakdos Dragons by Levi Basham
+Icon=Nick Fury.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Pyromaster|M15
+4 Thunderbreak Regent|DTK
+4 Stormbreath Dragon|THS
+2 Kolaghan, the Storm's Fury|FRF
+3 Read the Bones|THS
+4 Thoughtseize|THS
+1 Crux of Fate|FRF
+4 Hero's Downfall|THS
+3 Draconic Roar|DTK
+3 Bile Blight|BNG
+3 Foul-Tongue Invocation|DTK
+2 Kolaghan's Command|DTK
+4 Temple of Malice|BNG
+4 Bloodstained Mire|KTK
+1 Urborg, Tomb of Yawgmoth|M15
+2 Haven of the Spirit Dragon|DTK
+4 Bloodfell Caves|FRF
+1 Radiant Fountain|M15
+5 Mountain|DTK
+4 Swamp|DTK
+
+[sideboard]
+1 Crux of Fate|FRF
+1 Foul-Tongue Invocation|DTK
+1 Kolaghan's Command|DTK
+3 Anger of the Gods|THS
+3 Duress|DTK
+1 Virulent Plague|DTK
+1 Ugin, the Spirit Dragon|FRF
+4 Goblin Rabblemaster|M15

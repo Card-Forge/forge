@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Valeya
+Title=Aspect of Order
+Difficulty=very hard
+Description=Temur Reclamation by Valeya
+Icon=Aspect of Order.jpg
+Deck Type=constructed
+
+[main]
+4 Fabled Passage
+4 Breeding Pool
+4 Steam Vents
+3 Nightpack Ambusher
+1 Negate
+3 Expansion // Explosion
+3 Aether Gust
+3 Thassa's Intervention
+4 Growth Spiral
+4 Mystical Dispute
+4 Wilderness Reclamation
+1 Temple of Abandon
+1 Temple of Epiphany
+1 Mountain
+2 Island
+2 Forest
+3 Temple of Mystery
+3 Stomping Ground
+3 Castle Vantress
+3 Uro, Titan of Nature's Wrath
+2 Frilled Mystic
+2 Brazen Borrower
+
+[sideboard]
+4 Scorching Dragonfire
+3 Flame Sweep
+2 Stonecoil Serpent
+1 Spectral Sailor
+1 Fry
+1 Disdainful Stroke
+1 Nightpack Ambusher
+1 Negate
+1 Aether Gust

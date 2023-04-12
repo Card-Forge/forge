@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Esper Control by Janne Mikkonen (savjz)
+Title=Negoogunogumbar
+Difficulty=very hard
+Description=Esper Control by Janne Mikkonen (savjz)
+Icon=Negoogunogumbar.jpg
+Deck Type=constructed
+
+[main]
+4 Basilica Bell-Haunt
+4 Hero of Precinct One
+1 Cast Down
+1 Despark
+2 Tyrant's Scorn
+1 Command the Dreadhorde
+1 The Elderspell
+4 Thought Erasure
+3 Oath of Kaya
+1 Search for Azcanta|XLN
+1 Liliana, Dreadhorde General
+3 Narset, Parter of Veils
+4 Teferi, Hero of Dominaria
+4 Teferi, Time Raveler
+4 Drowned Catacomb|XLN
+4 Glacial Fortress|XLN
+4 Godless Shrine
+4 Hallowed Fountain
+4 Isolated Chapel
+1 Plains
+1 Swamp
+4 Watery Grave
+
+[sideboard]
+1 Despark
+1 Command the Dreadhorde
+2 The Elderspell
+4 Deputy of Detention
+2 Duress
+3 Ixalan's Binding|XLN
+2 Lyra Dawnbringer

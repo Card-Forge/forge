@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Mono Blue Tempo by Fumihiro Kamimura
+Title=Kasen Ibaraki
+Difficulty=very hard
+Description=Mono Blue Tempo by Fumihiro Kamimura
+Icon=Kasen Ibaraki.jpg
+Deck Type=constructed
+
+[main]
+3 Tolarian Terror
+4 Delver of Secrets
+4 Haughty Djinn
+1 Ertai's Scorn
+1 Flow of Knowledge
+1 Essence Capture
+1 Essence Scatter
+2 Spell Pierce
+2 Make Disappear
+3 Thirst for Discovery
+3 Slip Out the Back
+3 Negate
+3 Impulse
+4 Fading Hope
+4 Consider
+1 Otawara, Soaring City
+20 Island
+
+[sideboard]
+1 Essence Scatter
+1 Slip Out the Back
+1 Mercurial Spelldancer
+1 Spectral Adversary
+1 Invoke the Winds
+1 March of Swirling Mist
+2 Out of the Way
+2 Disdainful Stroke
+2 Suspicious Stowaway
+3 Blue Sun's Twilight

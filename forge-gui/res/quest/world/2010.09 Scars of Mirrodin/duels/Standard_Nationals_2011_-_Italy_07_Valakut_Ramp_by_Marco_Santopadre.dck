@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Valakut Ramp by Marco Santopadre
+Title=Clone
+Difficulty=very hard
+Description=Valakut Ramp by Marco Santopadre
+Icon=Clone.jpg
+Deck Type=constructed
+
+[main]
+2 Avenger of Zendikar|WWK
+2 Oracle of Mul Daya|ZEN
+4 Overgrown Battlement|ROE
+4 Primeval Titan|M12
+3 Solemn Simulacrum|M12
+4 Explore|WWK
+4 Green Sun's Zenith|MBS
+3 Pyroclasm|M11
+4 Rampant Growth|M12
+2 Tumble Magnet|SOM
+2 Evolving Wilds|ROE
+5 Forest|M12
+11 Mountain|M12
+1 Raging Ravine|WWK
+4 Terramorphic Expanse|M11
+4 Valakut, the Molten Pinnacle|ZEN
+1 Verdant Catacombs|ZEN
+
+[sideboard]
+1 Pyroclasm|M11
+2 Thrun, the Last Troll|MBS
+4 Nature's Claim|WWK
+1 Creeping Corrosion|MBS
+4 Memoricide|SOM
+1 Swamp|M12
+2 Koth of the Hammer|SOM

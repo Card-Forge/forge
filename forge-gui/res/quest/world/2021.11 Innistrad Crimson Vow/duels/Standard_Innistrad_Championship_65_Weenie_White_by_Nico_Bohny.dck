@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Weenie White by Nico Bohny
+Title=Joker
+Difficulty=very hard
+Description=Weenie White by Nico Bohny
+Icon=Joker.jpg
+Deck Type=constructed
+
+[main]
+2 Sungold Sentinel
+3 Thalia, Guardian of Thraben
+3 Adeline, Resplendent Cathar
+4 Hopeful Initiate
+4 Luminarch Aspirant
+4 Brutal Cathar
+4 Usher of the Fallen
+4 Elite Spellbinder
+4 Intrepid Adversary
+2 Portable Hole
+2 Valorous Stance
+1 Paladin Class
+4 Faceless Haven
+19 Snow-Covered Plains
+
+[sideboard]
+1 Thalia, Guardian of Thraben
+2 Portable Hole
+1 Valorous Stance
+2 Paladin Class
+1 Maul of the Skyclaves
+1 Circle of Confinement
+1 Guardian of Faith
+2 Reidane, God of the Worthy
+4 Skyclave Apparition

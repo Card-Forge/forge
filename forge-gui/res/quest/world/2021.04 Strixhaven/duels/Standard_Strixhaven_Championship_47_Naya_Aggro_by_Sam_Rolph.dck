@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Naya Aggro by Sam Rolph
+Title=Zegana
+Difficulty=very hard
+Description=Naya Aggro by Sam Rolph
+Icon=Zegana.jpg
+Deck Type=constructed
+
+[main]
+1 Drannith Magistrate
+2 Toski, Bearer of Secrets
+3 Bonecrusher Giant
+4 Giant Killer
+4 Elite Spellbinder
+4 Jaspera Sentinel
+4 Clarion Spirit
+4 Edgewall Innkeeper
+4 Lovestruck Beast
+3 Kabira Takedown
+4 Showdown of the Skalds
+1 Mountain
+2 Plains
+3 Fabled Passage
+4 Cragcrown Pathway
+4 Branchloft Pathway
+4 Needleverge Pathway
+5 Forest
+
+[sideboard]
+1 Drannith Magistrate
+1 Bonecrusher Giant
+1 Jegantha, the Wellspring
+1 Tormod's Crypt
+1 Banishing Light
+1 Shadowspear
+1 Thundering Rebuke
+1 Rip Apart
+1 Glass Casket
+2 Reidane, God of the Worthy
+2 Klothys, God of Destiny
+2 Redcap Melee

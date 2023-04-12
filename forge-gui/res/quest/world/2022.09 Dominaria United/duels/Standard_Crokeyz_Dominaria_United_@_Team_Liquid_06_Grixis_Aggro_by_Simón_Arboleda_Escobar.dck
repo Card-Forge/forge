@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Grixis Aggro by Simón Arboleda Escobar
+Title=Mystique
+Difficulty=very hard
+Description=Grixis Aggro by Simón Arboleda Escobar
+Icon=Mystique.jpg
+Deck Type=constructed
+
+[main]
+1 Cut Down
+1 Infernal Grasp
+2 The Meathook Massacre
+2 Kaito Shizuki
+2 Make Disappear
+4 Fable of the Mirror-Breaker
+4 Liliana of the Veil
+4 Voltage Surge
+2 Evelyn, the Covetous
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+4 Tenacious Underdog
+1 Swamp
+1 Takenuma, Abandoned Mire
+1 Otawara, Soaring City
+1 Sokenzan, Crucible of Defiance
+2 Stormcarved Coast
+4 Sulfurous Springs
+4 Shivan Reef
+4 Shipwreck Marsh
+4 Xander's Lounge
+4 Haunted Ridge
+
+[sideboard]
+2 Ertai Resurrected
+2 Reckoner Bankbuster
+1 Negate
+1 The Elder Dragon War
+3 Duress
+3 Cut Down
+1 Infernal Grasp
+1 The Meathook Massacre
+1 Evelyn, the Covetous

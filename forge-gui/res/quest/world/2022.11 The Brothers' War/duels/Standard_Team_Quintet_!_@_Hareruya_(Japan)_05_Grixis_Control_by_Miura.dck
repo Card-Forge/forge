@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Grixis Control by Miura
+Title=Quest for Ulas Temple
+Difficulty=very hard
+Description=Grixis Control by Miura
+Icon=Quest for Ulas Temple.jpg
+Deck Type=constructed
+
+[main]
+1 Sorin the Mirthless
+1 Kaito Shizuki
+1 Soul Transfer
+1 Voltage Surge
+2 Make Disappear
+2 Abrade
+2 Invoke Despair
+2 Reckoner Bankbuster
+4 Go for the Throat
+4 Fable of the Mirror-Breaker
+1 Bladecoil Serpent
+2 Tenacious Underdog
+3 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Stormcarved Coast
+2 Takenuma, Abandoned Mire
+2 Swamp
+3 Underground River
+3 Sulfurous Springs
+3 Shivan Reef
+4 Xander's Lounge
+4 Shipwreck Marsh
+4 Haunted Ridge
+
+[sideboard]
+2 Duress
+2 Brotherhood's End
+2 Cut Down
+2 Disdainful Stroke
+1 Rona's Vortex
+1 Path of Peril
+1 Bloodthirsty Adversary
+1 Liliana of the Veil
+1 Soul Transfer
+1 Reckoner Bankbuster
+1 Bladecoil Serpent

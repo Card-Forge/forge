@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Selesnya Aggro by António Abreu
+Title=Radagast
+Difficulty=very hard
+Description=Selesnya Aggro by António Abreu
+Icon=Radagast.jpg
+Deck Type=constructed
+
+[main]
+1 Maul of the Skyclaves
+1 Emeria's Call
+2 Join the Dance
+3 Kabira Takedown
+2 Toski, Bearer of Secrets
+3 Thalia, Guardian of Thraben
+3 Katilda, Dawnhart Prime
+3 Intrepid Adversary
+3 Brutal Cathar
+3 Adeline, Resplendent Cathar
+4 Hamlet Vanguard
+4 Hopeful Initiate
+4 Lunarch Veteran
+4 Luminarch Aspirant
+2 Cave of the Frost Dragon
+4 Overgrown Farmland
+4 Branchloft Pathway
+4 Forest
+6 Plains
+
+[sideboard]
+4 Portable Hole
+4 Valorous Stance
+4 Elite Spellbinder
+2 Sigrid, God-Favored
+1 Fateful Absence

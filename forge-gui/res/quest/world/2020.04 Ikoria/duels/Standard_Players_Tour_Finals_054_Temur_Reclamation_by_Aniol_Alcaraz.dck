@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Aniol Alcaraz
+Title=Oketra
+Difficulty=very hard
+Description=Temur Reclamation by Aniol Alcaraz
+Icon=Oketra.jpg
+Deck Type=constructed
+
+[main]
+2 Castle Vantress
+2 Island
+2 Forest
+1 Plains
+1 Hallowed Fountain
+2 Uro, Titan of Nature's Wrath
+2 Brazen Borrower
+4 Nightpack Ambusher
+3 Mystical Dispute
+4 Dovin's Veto
+4 Growth Spiral
+4 Expansion // Explosion
+4 Shark Typhoon
+4 Wilderness Reclamation
+1 Mountain
+1 Stomping Ground
+3 Breeding Pool
+4 Ketria Triome
+4 Fabled Passage
+4 Raugrin Triome
+4 Temple Garden
+
+[sideboard]
+2 Giant Killer
+2 Commence the Endgame
+3 Elder Gargaroth
+4 Deafening Clarion
+4 Scorching Dragonfire

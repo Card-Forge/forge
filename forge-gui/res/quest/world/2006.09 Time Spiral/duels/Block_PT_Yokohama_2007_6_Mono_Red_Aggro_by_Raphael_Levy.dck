@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Mono Red Aggro by Raphael Levy
+Title=Dr Watson
+Difficulty=very hard
+Description=Mono Red Aggro by Raphael Levy
+Icon=Dr Watson.jpg
+Deck Type=constructed
+
+[main]
+2 Fungal Reaches|CMD
+1 Molten Slagheap|C13
+21 Mountain|RTR
+4 Blood Knight|PLC
+4 Keldon Marauders|PLC
+4 Magus of the Scroll|TSP
+4 Sulfur Elemental|PLC
+2 Wildfire Emissary|TSP
+4 Browbeat|TSP
+4 Disintegrate|TSP
+4 Fiery Temper|SOI
+4 Rift Bolt|TSP
+2 Sudden Shock|TSP
+
+[sideboard]
+2 Wildfire Emissary|TSP
+3 Avalanche Riders|TSP
+1 Eron the Relentless|TSP
+3 Greater Gargadon|TSP
+4 Serrated Arrows|TSP
+2 Word of Seizing|C15

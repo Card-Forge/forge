@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Izzet Control by Franco Cicchini
+Title=Jarad
+Difficulty=very hard
+Description=Izzet Control by Franco Cicchini
+Icon=Jarad.jpg
+Deck Type=constructed
+
+[main]
+1 Hullbreaker Horror
+1 Lier, Disciple of the Drowned
+1 Abrade
+1 Prismari Command
+2 Demon Bolt
+2 Cinderclasm
+2 Behold the Multiverse
+2 Jwari Disruption
+2 Galvanic Iteration
+2 Frost Bite
+3 Fading Hope
+4 Divide by Zero
+4 Unexpected Windfall
+4 Spikefield Hazard
+3 Alrund's Epiphany
+4 Expressive Iteration
+1 Hall of Storm Giants
+2 Volatile Fjord
+2 Field of Ruin
+3 Riverglide Pathway
+4 Stormcarved Coast
+4 Snow-Covered Island
+6 Snow-Covered Mountain
+
+[sideboard]
+2 Hullbreaker Horror
+1 Lier, Disciple of the Drowned
+2 Frost Bite
+1 Negate
+1 Mascot Exhibition
+1 Teachings of the Archaics
+1 Environmental Sciences
+1 Test of Talents
+1 Disdainful Stroke
+2 Goldspan Dragon
+2 Burning Hands

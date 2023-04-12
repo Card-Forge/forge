@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Winota by Ken Yukuhiro
+Title=Ga-Gorib
+Difficulty=very hard
+Description=Winota by Ken Yukuhiro
+Icon=Ga-Gorib.jpg
+Deck Type=constructed
+
+[main]
+2 Jaspera Sentinel
+2 Blade Historian
+2 Minsc, Beloved Ranger
+2 Kenrith, the Returned King
+4 Winota, Joiner of Forces
+4 Elite Spellbinder
+4 Gilded Goose
+4 Selfless Savior
+4 Prosperous Innkeeper
+4 Esika's Chariot
+1 Shatterskull Smashing
+3 Ranger Class
+1 Forest
+1 Mountain
+3 Lair of the Hydra
+3 Plains
+4 Needleverge Pathway
+4 Branchloft Pathway
+4 Fabled Passage
+4 Cragcrown Pathway
+
+[sideboard]
+1 Ranger Class
+1 The Akroan War
+2 Burning Hands
+2 Showdown of the Skalds
+2 Mythos of Vadrok
+2 Guardian of Faith
+2 Paladin Class
+3 Bonecrusher Giant

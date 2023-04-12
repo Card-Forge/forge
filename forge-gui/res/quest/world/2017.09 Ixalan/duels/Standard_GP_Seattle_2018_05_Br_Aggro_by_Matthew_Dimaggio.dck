@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Br Aggro by Matthew Dimaggio
+Title=The Tabernacle at Pendrell Vale
+Difficulty=very hard
+Description=Br Aggro by Matthew Dimaggio
+Icon=The Tabernacle at Pendrell Vale.jpg
+Deck Type=constructed
+
+[main]
+3 Hazoret the Fervent|AKH
+3 Pia Nalaar|KLD
+3 Rekindling Phoenix
+4 Scrapheap Scrounger|KLD
+1 Doomfall|HOU
+4 Abrade|HOU
+2 Magma Spray|AKH
+2 Unlicensed Disintegration|KLD
+2 Aethersphere Harvester|AER
+2 Aether Hub|KLD
+1 Canyon Slough|AKH
+4 Dragonskull Summit|XLN
+2 Ifnir Deadlands|HOU
+12 Mountain
+3 Swamp
+4 Fanatical Firebrand
+4 Earthshaker Khenra|HOU
+4 Bomat Courier|KLD
+
+[sideboard]
+2 Sweltering Suns|AKH
+1 Scavenger Grounds|HOU
+1 Scarab Feast|AKH
+2 Doomfall|HOU
+1 Angrath, the Flame-Chained
+2 Chandra, Torch of Defiance|KLD
+1 Fiery Cannonade|XLN
+2 Glorybringer|AKH
+2 Heartless Pillage|XLN
+1 Hour of Glory|HOU

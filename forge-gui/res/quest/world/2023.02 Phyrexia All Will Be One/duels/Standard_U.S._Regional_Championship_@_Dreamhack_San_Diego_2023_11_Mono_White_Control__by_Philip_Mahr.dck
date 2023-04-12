@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mono White Control  by Philip Mahr
+Title=Verduranti
+Difficulty=very hard
+Description=Mono White Control  by Philip Mahr
+Icon=Verduranti.jpg
+Deck Type=constructed
+
+[main]
+3 Ambitious Farmhand
+4 The Restoration of Eiganjo
+4 Reckoner Bankbuster
+2 March of Otherworldly Light
+2 Destroy Evil
+4 Lay Down Arms
+4 Wedding Announcement
+4 Ossification
+4 The Wandering Emperor
+2 Elspeth Resplendent
+3 The Eternal Wanderer
+16 Plains
+1 Eiganjo, Seat of the Empire
+4 Roadside Reliquary
+3 Mirrex
+
+[sideboard]
+2 Fateful Absence
+3 Farewell
+3 Loran of the Third Path
+2 Sunset Revelry
+3 Depopulate
+2 Knockout Blow

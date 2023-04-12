@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Mono Black Control by Luca Boldrini
+Title=Suika Ibuki
+Difficulty=very hard
+Description=Mono Black Control by Luca Boldrini
+Icon=Suika Ibuki.jpg
+Deck Type=constructed
+
+[main]
+2 Infernal Grasp
+3 The Meathook Massacre
+3 Deadly Dispute
+4 Lolth, Spider Queen
+4 Eaten Alive
+2 Jadar, Ghoulcaller of Nephalia
+2 Forsworn Paladin
+4 Eyetwitch
+4 Shambling Ghast
+4 Skyclave Shade
+4 Sedgemoor Witch
+2 Field of Ruin
+3 Hive of the Eye Tyrant
+4 Faceless Haven
+15 Snow-Covered Swamp
+
+[sideboard]
+4 Go Blank
+2 Blood on the Snow
+2 Duress
+2 Flunk
+1 Mascot Exhibition
+1 Pest Summoning
+1 Containment Breach
+1 Environmental Sciences
+1 The Meathook Massacre

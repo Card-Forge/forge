@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Yuma Koizumi (yumajpn)
+Title=Izzet-precon
+Difficulty=very hard
+Description=Boros Aggro by Yuma Koizumi (yumajpn)
+Icon=Izzet-precon.jpg
+Deck Type=constructed
+
+[main]
+4 Adanto Vanguard|XLN
+4 Benalish Marshal
+4 Dauntless Bodyguard
+4 Law-Rune Enforcer
+4 Skymarcher Aspirant
+2 Snubhorn Sentry
+4 Venerated Loxodon
+3 Conclave Tribunal
+4 History of Benalia
+4 Legion's Landing|XLN
+2 Gideon Blackblade
+4 Clifftop Retreat
+13 Plains
+4 Sacred Foundry
+
+[sideboard]
+1 Conclave Tribunal
+2 Gideon Blackblade
+4 Baffling End
+3 Experimental Frenzy
+2 Heroic Reinforcements
+1 Mountain
+2 Tibalt, Rakish Instigator

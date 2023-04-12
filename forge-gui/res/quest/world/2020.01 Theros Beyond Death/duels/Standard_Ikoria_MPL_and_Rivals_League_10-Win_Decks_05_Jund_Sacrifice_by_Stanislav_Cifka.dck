@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Jund Sacrifice by Stanislav Cifka
+Title=Skull Dance
+Difficulty=very hard
+Description=Jund Sacrifice by Stanislav Cifka
+Icon=Skull Dance.jpg
+Deck Type=constructed
+
+[main]
+1 Temple of Abandon
+4 Stomping Ground
+4 Overgrown Tomb
+4 Forest
+4 Fabled Passage
+4 Blood Crypt
+3 Swamp
+1 Mountain
+1 Castle Locthwain
+4 Trail of Crumbs
+2 Wolfwillow Haven
+2 Casualties of War
+2 Agonizing Remorse
+4 Witch's Oven
+1 Midnight Reaper
+1 Polukranos, Unchained
+1 Wicked Wolf
+2 Murderous Rider
+3 Korvold, Fae-Cursed King
+4 Cauldron Familiar
+4 Gilded Goose
+4 Mayhem Devil
+
+[sideboard]
+3 Redcap Melee
+2 Shifting Ceratops
+2 Scorching Dragonfire
+2 Duress
+2 Angrath's Rampage
+1 The Akroan War
+1 Return to Nature
+1 Noxious Grasp
+1 Wicked Wolf

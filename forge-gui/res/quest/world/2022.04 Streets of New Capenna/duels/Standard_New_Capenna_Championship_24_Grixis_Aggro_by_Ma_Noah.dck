@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Grixis Aggro by Ma Noah
+Title=The Color Green
+Difficulty=very hard
+Description=Grixis Aggro by Ma Noah
+Icon=The Color Green.jpg
+Deck Type=constructed
+
+[main]
+1 Spell Pierce
+1 Ray of Enfeeblement
+1 Hagra Mauling
+1 Duress
+1 Expressive Iteration
+1 Soul Transfer
+2 Infernal Grasp
+2 The Meathook Massacre
+2 Kaito Shizuki
+4 Voltage Surge
+4 Fable of the Mirror-Breaker
+2 Evelyn, the Covetous
+2 Tenacious Underdog
+2 Bloodthirsty Adversary
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Mountain
+1 Takenuma, Abandoned Mire
+1 Shipwreck Marsh
+1 Swamp
+2 Hive of the Eye Tyrant
+2 Haunted Ridge
+3 Clearwater Pathway
+3 Stormcarved Coast
+4 Blightstep Pathway
+4 Xander's Lounge
+4 Riverglide Pathway
+
+[sideboard]
+3 Annul
+2 Make Disappear
+2 Go Blank
+1 Abrade
+1 Mind Flayer
+1 Negate
+2 Ray of Enfeeblement
+1 Duress
+1 The Meathook Massacre
+1 Evelyn, the Covetous

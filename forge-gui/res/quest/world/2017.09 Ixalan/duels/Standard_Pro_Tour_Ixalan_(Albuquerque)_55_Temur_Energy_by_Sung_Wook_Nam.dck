@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Temur Energy by Sung Wook Nam
+Title=Phenukenes
+Difficulty=very hard
+Description=Temur Energy by Sung Wook Nam
+Icon=Phenukenes.jpg
+Deck Type=constructed
+
+[main]
+1 Chandra, Torch of Defiance|KLD
+4 Bristling Hydra|KLD
+4 Glorybringer|AKH
+4 Longtusk Cub|KLD
+4 Rogue Refiner|AER
+4 Servant of the Conduit|KLD
+4 Whirler Virtuoso|KLD
+4 Attune with Aether|KLD
+1 Confiscation Coup|KLD
+1 Essence Scatter|AKH
+4 Harnessed Lightning|KLD
+2 Magma Spray|AKH
+1 Abrade|HOU
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+3 Forest|XLN
+1 Island|XLN
+2 Mountain|XLN
+3 Rootbound Crag|XLN
+2 Sheltered Thicket|AKH
+3 Spirebluff Canal|KLD
+
+[sideboard]
+1 Chandra, Torch of Defiance|KLD
+1 Abrade|HOU
+2 Chandra's Defeat|HOU
+4 Negate|AER
+4 Vizier of Many Faces|AKH
+1 Appetite for the Unnatural|KLD
+1 River's Rebuke|XLN
+1 Jace's Defeat|HOU

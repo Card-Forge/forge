@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Grixis Control by Rei Zhang
+Title=Moon Shadow
+Difficulty=very hard
+Description=Grixis Control by Rei Zhang
+Icon=Moon Shadow.jpg
+Deck Type=constructed
+
+[main]
+1 Galvanic Iteration
+1 Behold the Multiverse
+1 Fading Hope
+1 Light Up the Night
+2 March of Swirling Mist
+2 Alchemist's Gambit
+2 Expressive Iteration
+2 Sejiri Shelter
+2 Show of Confidence
+2 Unexpected Windfall
+2 Silundi Vision
+3 Jwari Disruption
+3 Dual Strike
+4 Spikefield Hazard
+4 Big Score
+4 Seize the Spoils
+3 Lier, Disciple of the Drowned
+4 Goldspan Dragon
+1 Mountain
+1 Island
+3 Haunted Ridge
+4 Clearwater Pathway
+4 Blightstep Pathway
+4 Riverglide Pathway
+
+[sideboard]
+3 Duress
+3 Ray of Enfeeblement
+3 Disdainful Stroke
+2 Soul Shatter
+1 Cinderclasm
+3 Behold the Multiverse

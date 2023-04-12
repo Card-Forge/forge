@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono White Control by Wojciech Radosz
+Title=Hazoret the Fervent
+Difficulty=very hard
+Description=Mono White Control by Wojciech Radosz
+Icon=Hazoret the Fervent.jpg
+Deck Type=constructed
+
+[main]
+1 Ambitious Farmhand
+2 Ao, the Dawn Sky
+3 The Restoration of Eiganjo
+3 Loran of the Third Path
+3 Serra Paragon
+4 Spirited Companion
+4 Reckoner Bankbuster
+4 Lay Down Arms
+4 Wedding Announcement
+4 Ossification
+4 The Wandering Emperor
+18 Plains
+2 Eiganjo, Seat of the Empire
+4 Roadside Reliquary
+
+[sideboard]
+1 Farewell
+1 The Eternal Wanderer
+1 Fateful Absence
+2 Depopulate
+2 Destroy Evil
+2 Steel Seraph
+3 The Stone Brain
+3 Sunset Revelry

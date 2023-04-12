@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Valakut Ramp by Fabian Görzgen
+Title=Summoner
+Difficulty=very hard
+Description=Valakut Ramp by Fabian Görzgen
+Icon=Summoner.jpg
+Deck Type=constructed
+
+[main]
+2 Avenger of Zendikar|WWK
+1 Birds of Paradise|M12
+2 Oracle of Mul Daya|ZEN
+4 Overgrown Battlement|ROE
+4 Primeval Titan|M12
+3 Solemn Simulacrum|M12
+1 Wurmcoil Engine|SOM
+1 Dismember|NPH
+2 Harrow|ZEN
+1 Nature's Claim|WWK
+1 Summoning Trap|ZEN
+3 Explore|WWK
+3 Green Sun's Zenith|MBS
+4 Rampant Growth|M12
+3 Evolving Wilds|ROE
+4 Forest|M12
+11 Mountain|M12
+1 Raging Ravine|WWK
+3 Terramorphic Expanse|M11
+4 Valakut, the Molten Pinnacle|ZEN
+2 Verdant Catacombs|ZEN
+
+[sideboard]
+3 Nature's Claim|WWK
+2 Summoning Trap|ZEN
+1 Gaea's Revenge|M11
+1 Obstinate Baloth|M11
+3 Memoricide|SOM
+3 Pyroclasm|M11
+1 Slagstorm|MBS
+1 Swamp|M12

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Azorius Soldier by Jonathan Danz
+Title=Captain America
+Difficulty=very hard
+Description=Azorius Soldier by Jonathan Danz
+Icon=Captain America.jpg
+Deck Type=constructed
+
+[main]
+2 Brutal Cathar
+2 Skrelv, Defector Mite
+2 Zephyr Sentinel
+2 Dennick, Pious Apprentice
+2 Yotian Frontliner
+3 Resolute Reinforcements
+3 Harbin, Vanguard Aviator
+3 Thalia, Guardian of Thraben
+4 Valiant Veteran
+4 Skystrike Officer
+4 Recruitment Officer
+4 Siege Veteran
+2 Destroy Evil
+1 Eiganjo, Seat of the Empire
+1 Plaza of Heroes
+1 Otawara, Soaring City
+2 Mishra's Foundry
+2 Plains
+4 Adarkar Wastes
+4 Secluded Courtyard
+4 Fortified Beachhead
+4 Seachrome Coast
+
+[sideboard]
+1 Brutal Cathar
+1 Destroy Evil
+2 Spell Pierce
+2 March of Swirling Mist
+3 Lantern Flare
+3 Loran of the Third Path
+3 Protect the Negotiators

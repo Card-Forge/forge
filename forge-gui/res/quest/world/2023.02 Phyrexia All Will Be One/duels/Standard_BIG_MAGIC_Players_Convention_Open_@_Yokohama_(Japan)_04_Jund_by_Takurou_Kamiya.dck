@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Jund by Takurou Kamiya
+Title=Gus
+Difficulty=very hard
+Description=Jund by Takurou Kamiya
+Icon=Gus.jpg
+Deck Type=constructed
+
+[main]
+1 Soul Transfer
+1 Invoke Despair
+1 Nissa, Ascended Animist
+1 Vraska, Betrayal's Sting
+1 Sorin the Mirthless
+2 Abrade
+2 Cut Down
+3 Sheoldred's Edict
+3 Tyvar, Jubilant Brawler
+4 Fable of the Mirror-Breaker
+1 Atraxa, Grand Unifier
+2 Sheoldred, the Apocalypse
+2 Cankerbloom
+2 Llanowar Loamspeaker
+4 Armored Scrapgorger
+4 Bloodtithe Harvester
+1 Forest
+1 Sokenzan, Crucible of Defiance
+1 Boseiju, Who Endures
+1 Takenuma, Abandoned Mire
+2 Copperline Gorge
+2 Llanowar Wastes
+3 Blackcleave Cliffs
+3 Sulfurous Springs
+4 Haunted Ridge
+4 Ziatora's Proving Ground
+4 Deathcap Glade
+
+[sideboard]
+4 Life of Toshiro Umezawa
+3 Malicious Malfunction
+2 Tear Asunder
+2 Obliterating Bolt
+2 Unleash the Inferno
+2 Abrade

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Red Psychatog by Chang Ming Tung
+Title=Optimus Prime
+Difficulty=very hard
+Description=Red Psychatog by Chang Ming Tung
+Icon=Optimus Prime.jpg
+Deck Type=constructed
+
+[main]
+1 Upheaval|OD
+2 Terminate|PS
+3 Repulse|IN
+3 Force Spike|7E
+3 Fire // Ice|AP
+4 Fact or Fiction|IN
+2 Deep Analysis|TO
+2 Cunning Wish|JU
+4 Counterspell|7E
+3 Circular Logic|TO
+1 Burning Wish|JU
+4 Psychatog|OD
+4 Flametongue Kavu|PS
+3 Sulfurous Springs|7E
+4 Shivan Reef|AP
+2 Shadowblood Ridge|OD
+4 Salt Marsh|IN
+1 Mountain|OD
+7 Island|OD
+2 Darkwater Catacombs|OD
+2 Cephalid Coliseum|OD
+
+[sideboard]
+1 Rushing River|PS
+2 Pyroclasm|7E
+1 Mana Short|7E
+1 Lobotomy|IN
+1 Hibernation|7E
+2 Engineered Plague|7E
+3 Duress|7E
+1 Coffin Purge|OD
+1 Chainer's Edict|TO
+1 Upheaval|OD
+1 Terminate|PS

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Atarka Red by Woodrow Engle
+Title=Ra
+Difficulty=very hard
+Description=Atarka Red by Woodrow Engle
+Icon=Ra.jpg
+Deck Type=constructed
+
+[main]
+2 Cinder Glade|BFZ
+4 Bloodstained Mire|KTK
+8 Mountain|BFZ
+1 Forest|BFZ
+4 Wooded Foothills|KTK
+3 Windswept Heath|KTK
+3 Hordeling Outburst|KTK
+3 Dragon Fodder|ORI
+3 Wild Slash|FRF
+4 Titan's Strength|ORI
+4 Temur Battle Rage|FRF
+1 Fiery Impulse|ORI
+4 Become Immense|KTK
+4 Atarka's Command|DTK
+3 Zurgo Bellstriker|DTK
+4 Monastery Swiftspear|KTK
+1 Lightning Berserker|DTK
+4 Abbot of Keral Keep|ORI
+
+[sideboard]
+2 Thunderbreak Regent|DTK
+2 Roast|DTK
+3 Rending Volley|DTK
+2 Hooting Mandrills|KTK
+2 Goblin Heelcutter|FRF
+2 Boiling Earth|BFZ
+2 Act of Treason|ORI

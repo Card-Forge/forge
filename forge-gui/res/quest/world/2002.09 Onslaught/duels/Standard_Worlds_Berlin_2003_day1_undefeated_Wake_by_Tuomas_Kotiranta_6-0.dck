@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Wake by Tuomas Kotiranta 6-0
+Title=Agrus
+Difficulty=very hard
+Description=Wake by Tuomas Kotiranta 6-0
+Icon=Agrus.jpg
+Deck Type=constructed
+
+[main]
+4 Wrath of God|C13
+2 Syncopate
+3 Renewed Faith|AKH
+4 Moment's Peace|OD
+3 Mirari's Wake|CNS
+4 Mana Leak|M11
+4 Deep Analysis|C13
+3 Decree of Justice|C14
+3 Cunning Wish|JU
+3 Compulsion|TO
+2 Sungrass Prairie|C16
+3 Skycloud Expanse|OD
+4 Plains|RTR
+4 Krosan Verge|C16
+8 Island|RTR
+3 Forest|RTR
+3 Flooded Strand|KTK
+
+[sideboard]
+1 Unsummon|HOU
+2 Ray of Revelation|DKA
+1 Krosan Reclamation|JU
+1 Flash of Insight|JU
+3 Exalted Angel|ONS
+1 Circular Logic|TO
+2 Circle of Protection: Red|9E
+2 Chastise|9E
+1 Renewed Faith|AKH
+1 Compulsion|TO

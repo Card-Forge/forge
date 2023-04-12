@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Tomoharu Saito
+Title=Arjun
+Difficulty=very hard
+Description=Red Deck Wins by Tomoharu Saito
+Icon=Arjun.jpg
+Deck Type=constructed
+
+[main]
+1 Chandra, Torch of Defiance|KLD
+4 Ahn-Crop Crasher|AKH
+4 Bomat Courier|KLD
+4 Earthshaker Khenra|HOU
+4 Hazoret the Fervent|AKH
+3 Kari Zev, Skyship Raider|AER
+4 Soul-Scar Mage|AKH
+4 Shock|AER
+4 Lightning Strike|XLN
+4 Abrade|HOU
+16 Mountain|XLN
+4 Ramunap Ruins|HOU
+4 Sunscorched Desert|AKH
+
+[sideboard]
+2 Chandra, Torch of Defiance|KLD
+3 Pia Nalaar|KLD
+2 Aethersphere Harvester|AER
+4 Rampaging Ferocidon|XLN
+2 Dual Shot|XLN
+2 Invigorated Rampage|AER

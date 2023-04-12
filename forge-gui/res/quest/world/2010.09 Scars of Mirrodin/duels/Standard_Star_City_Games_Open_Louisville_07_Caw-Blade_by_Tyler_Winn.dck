@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Tyler Winn
+Title=Uncle Owen
+Difficulty=very hard
+Description=Caw-Blade by Tyler Winn
+Icon=Uncle Owen.jpg
+Deck Type=constructed
+
+[main]
+3 Spellskite|NPH
+3 Deceiver Exarch|NPH
+1 Frost Titan|M11
+4 Stoneforge Mystic|WWK
+2 Dismember|NPH
+2 Into the Roil|ZEN
+4 Mana Leak|M11
+3 Spell Pierce|ZEN
+4 Preordain|M11
+1 Batterskull|NPH
+1 Sword of Feast and Famine|MBS
+1 Sword of War and Peace|NPH
+4 Island|NPH
+4 Plains|NPH
+1 Arid Mesa|ZEN
+4 Celestial Colonnade|WWK
+4 Glacial Fortress|M11
+1 Inkmoth Nexus|MBS
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+1 Gideon Jura|ROE
+3 Jace, the Mind Sculptor|WWK
+1 Venser, the Sojourner|SOM
+
+[sideboard]
+1 Dismember|NPH
+1 Gideon Jura|ROE
+2 Celestial Purge|M11
+3 Condemn|M11
+1 Deprive|ROE
+2 Divine Offering|MBS
+3 Flashfreeze|M11
+1 Mortarpod|MBS
+1 Jace Beleren|M11

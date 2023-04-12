@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Weenie White by Parmenion Uy
+Title=Bruce Lee
+Difficulty=very hard
+Description=Weenie White by Parmenion Uy
+Icon=Bruce Lee.jpg
+Deck Type=constructed
+
+[main]
+1 Legion Angel
+1 Sungold Sentinel
+1 Reidane, God of the Worthy
+2 Archon of Emeria
+2 Skyclave Apparition
+2 Brutal Cathar
+3 Adeline, Resplendent Cathar
+3 Thalia, Guardian of Thraben
+4 Hopeful Initiate
+4 Usher of the Fallen
+4 Luminarch Aspirant
+4 Intrepid Adversary
+4 Elite Spellbinder
+2 The Wandering Emperor
+1 Eiganjo, Seat of the Empire
+2 Cave of the Frost Dragon
+2 Crawling Barrens
+18 Plains
+
+[sideboard]
+2 Legion Angel
+1 Reidane, God of the Worthy
+2 Archon of Emeria
+1 Skyclave Apparition
+2 Brutal Cathar
+2 The Wandering Emperor
+2 Circle of Confinement
+3 Guardian of Faith

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Creativity by Rooney56
+Title=Sedge Midrange
+Difficulty=very hard
+Description=Creativity by Rooney56
+Icon=Sedge Midrange.jpg
+Deck Type=constructed
+
+[main]
+1 Path to Exile|CFX
+2 Nahiri, the Harbinger|SOI
+2 Transmogrify
+2 Remand|RAV
+3 Prismari Command
+4 Wrenn and Six
+4 Hard Evidence
+4 Indomitable Creativity|AER
+4 Lightning Bolt|M11
+4 Teferi, Time Raveler
+4 Prismatic Ending
+2 Emrakul, the Aeons Torn|ROE
+1 Raugrin Triome
+1 Island
+1 Stomping Ground
+1 Ketria Triome
+2 Sacred Foundry
+2 Steam Vents
+2 Arid Mesa|ZEN
+3 Bloodstained Mire|KTK
+3 Wooded Foothills|KTK
+4 Dwarven Mine
+4 Scalding Tarn|ZEN
+
+[sideboard]
+1 Veil of Summer
+2 Spell Pierce|XLN
+2 Aether Gust
+2 Alpine Moon
+1 Wear // Tear|DGM
+4 Mystical Dispute
+2 Rest in Peace|RTR
+1 Path to Exile|CFX

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Dimir Mill by Takumi Utsunomiya
+Title=Owlman
+Difficulty=very hard
+Description=Dimir Mill by Takumi Utsunomiya
+Icon=Owlman.jpg
+Deck Type=constructed
+
+[main]
+4 Soaring Thought-Thief
+4 Ruin Crab
+4 Thieves' Guild Enforcer
+4 Merfolk Windrobber
+2 Power Word Kill
+2 Heartless Act
+2 Disdainful Stroke
+4 Drown in the Loch
+4 Into the Story
+2 Agadeem's Awakening
+2 Crippling Fear
+2 Of One Mind
+2 Hive of the Eye Tyrant
+2 Temple of Deceit
+3 Zagoth Triome
+3 Swamp
+4 Fabled Passage
+4 Clearwater Pathway
+6 Island
+
+[sideboard]
+1 Soul-Guide Lantern
+1 Lurrus of the Dream-Den
+1 Test of Talents
+1 Soul Shatter
+1 Negate
+1 Dead Weight
+2 Cling to Dust
+2 Mystical Dispute
+2 Lullmage's Domination
+3 Skyclave Shade

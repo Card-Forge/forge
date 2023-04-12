@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Ben Friedman
+Title=Angelic Might
+Difficulty=very hard
+Description=Caw-Blade by Ben Friedman
+Icon=Angelic Might.jpg
+Deck Type=constructed
+
+[main]
+3 Blade Splicer|NPH
+4 Hero of Bladehold|MBS
+2 Mirran Crusader|MBS
+4 Squadron Hawk|M11
+2 Dismember|NPH
+4 Mana Leak|M12
+3 Spell Pierce|ZEN
+4 Preordain|M11
+3 Sword of Feast and Famine|MBS
+2 Oblivion Ring|M12
+4 Island|M12
+4 Plains|M12
+4 Celestial Colonnade|WWK
+4 Glacial Fortress|M12
+2 Inkmoth Nexus|MBS
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+3 Gideon Jura|M12
+
+[sideboard]
+1 Oblivion Ring|M12
+2 Spellskite|NPH
+3 Flashfreeze|M12
+3 Mental Misstep|NPH
+3 Day of Judgment|M12
+3 Timely Reinforcements|M12

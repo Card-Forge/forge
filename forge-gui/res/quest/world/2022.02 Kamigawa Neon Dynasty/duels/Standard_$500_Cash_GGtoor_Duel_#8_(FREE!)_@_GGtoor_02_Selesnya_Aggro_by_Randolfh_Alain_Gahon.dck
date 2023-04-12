@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Selesnya Aggro by Randolfh Alain Gahon
+Title=Demeter
+Difficulty=very hard
+Description=Selesnya Aggro by Randolfh Alain Gahon
+Icon=Demeter.jpg
+Deck Type=constructed
+
+[main]
+1 Outland Liberator
+1 Legion Angel
+1 Guardian of Faith
+2 Yasharn, Implacable Earth
+2 Katilda, Dawnhart Prime
+3 Brutal Cathar
+4 Prosperous Innkeeper
+2 Portable Hole
+4 Esika's Chariot
+1 Storm the Festival
+2 Starnheim Unleashed
+2 Invoke the Ancients
+3 Emeria's Call
+1 Felidar Retreat
+3 Wedding Announcement
+2 The Wandering Emperor
+2 Wrenn and Seven
+2 Lair of the Hydra
+4 Tangled Florahedron
+4 Plains
+4 Branchloft Pathway
+4 Overgrown Farmland
+6 Forest
+
+[sideboard]
+1 Outland Liberator
+3 Legion Angel
+1 Guardian of Faith
+2 Circle of Confinement
+2 Invoke the Divine
+3 Elite Spellbinder
+3 Snakeskin Veil

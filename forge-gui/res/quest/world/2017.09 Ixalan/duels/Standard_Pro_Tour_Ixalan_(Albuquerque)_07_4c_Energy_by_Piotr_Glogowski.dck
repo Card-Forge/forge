@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=4c Energy by Piotr Glogowski
+Title=Hunding Gjornersen
+Difficulty=very hard
+Description=4c Energy by Piotr Glogowski
+Icon=Hunding Gjornersen.jpg
+Deck Type=constructed
+
+[main]
+4 Servant of the Conduit|KLD
+4 Longtusk Cub|KLD
+4 Whirler Virtuoso|KLD
+4 Rogue Refiner|AER
+3 Bristling Hydra|KLD
+2 The Scarab God|HOU
+4 Attune with Aether|KLD
+1 Blossoming Defense|KLD
+3 Abrade|HOU
+4 Harnessed Lightning|KLD
+1 Supreme Will|HOU
+2 Skysovereign, Consul Flagship|KLD
+4 Botanical Sanctum|KLD
+3 Spirebluff Canal|KLD
+4 Aether Hub|KLD
+1 Blooming Marsh|KLD
+2 Rootbound Crag|XLN
+1 Sheltered Thicket|AKH
+4 Forest|XLN
+1 Island|XLN
+1 Mountain|XLN
+1 Swamp|XLN
+2 Vraska, Relic Seeker|XLN
+
+[sideboard]
+1 Chandra's Defeat|HOU
+1 Jace's Defeat|HOU
+1 Appetite for the Unnatural|KLD
+1 Confiscation Coup|KLD
+3 Negate|AER
+2 Deathgorge Scavenger|XLN
+2 Nissa, Steward of Elements|AKH
+2 River's Rebuke|XLN
+2 Cartouche of Ambition|AKH

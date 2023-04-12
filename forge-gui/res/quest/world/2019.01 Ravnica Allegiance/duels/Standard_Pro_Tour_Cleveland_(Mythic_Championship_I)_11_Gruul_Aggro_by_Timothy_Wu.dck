@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Gruul Aggro by Timothy Wu
+Title=Slaughterhouse
+Difficulty=very hard
+Description=Gruul Aggro by Timothy Wu
+Icon=Slaughterhouse.jpg
+Deck Type=constructed
+
+[main]
+3 Dire Fleet Daredevil
+4 Goblin Chainwhirler
+4 Growth-Chamber Guardian
+4 Gruul Spellbreaker
+4 Rekindling Phoenix
+3 Skarrgan Hellkite
+4 Kraul Harpooner
+2 Lava Coil
+2 Collision // Colossus
+4 Lightning Strike
+2 Shock
+2 Gruul Guildgate
+4 Rootbound Crag|XLN
+4 Stomping Ground
+3 Forest
+11 Mountain
+
+[sideboard]
+2 Lava Coil
+4 Cindervines
+2 Status // Statue
+2 Vivien Reid
+2 Legion Warboss
+1 Karn, Scion of Urza
+2 Shivan Fire

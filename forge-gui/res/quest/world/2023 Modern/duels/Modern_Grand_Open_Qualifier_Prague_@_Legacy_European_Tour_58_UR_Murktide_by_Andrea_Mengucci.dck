@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=UR Murktide by Andrea Mengucci
+Title=Hercules
+Difficulty=very hard
+Description=UR Murktide by Andrea Mengucci
+Icon=Hercules.jpg
+Deck Type=constructed
+
+[main]
+4 Ragavan, Nimble Pilferer
+4 Ledger Shredder
+1 Brazen Borrower
+2 Murktide Regent
+2 Dragon's Rage Channeler
+1 Seasoned Pyromancer
+4 Mishra's Bauble|CS
+2 Spell Snare|DIS
+3 Lightning Bolt|M11
+1 Spell Pierce
+4 Unholy Heat
+4 Consider
+3 Counterspell|7E
+4 Expressive Iteration
+2 Blood Moon|9E
+1 Scalding Tarn|ZEN
+1 Otawara, Soaring City
+4 Spirebluff Canal|KLD
+2 Flooded Strand|KTK
+1 Fiery Islet
+3 Steam Vents
+2 Polluted Delta|KTK
+2 Misty Rainforest|ZEN
+3 Snow-Covered Island
+
+[sideboard]
+1 Seasoned Pyromancer
+3 Engineered Explosives|FD
+1 Magus of the Moon|FUT
+1 Force of Negation
+2 Dress Down
+2 Flusterstorm
+1 Fury
+1 Unlicensed Hearse
+1 Orvar, the All-Form
+1 Subtlety
+1 Tormod's Crypt

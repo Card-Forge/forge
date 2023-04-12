@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by David Escher
+Title=Death by Inches
+Difficulty=very hard
+Description=Rakdos Aggro by David Escher
+Icon=Death by Inches.jpg
+Deck Type=constructed
+
+[main]
+8 Swamp
+7 Mountain
+4 Blood Crypt
+4 Temple of Malice
+1 Castle Locthwain
+4 Drill Bit
+4 Embercleave
+4 Stormfist Crusader
+4 Rotting Regisaur
+4 Robber of the Rich
+4 Knight of the Ebon Legion
+4 Gutterbones
+4 Fervent Champion
+4 Dreadhorde Butcher
+
+[sideboard]
+4 Embereth Shieldbreaker
+2 Epic Downfall
+2 Bonecrusher Giant
+2 Noxious Grasp
+2 Redcap Melee
+2 Scorching Dragonfire
+1 Spawn of Mayhem

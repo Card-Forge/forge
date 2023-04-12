@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Matias Leveratto
+Title=The Jester
+Difficulty=very hard
+Description=Temur Reclamation by Matias Leveratto
+Icon=The Jester.jpg
+Deck Type=constructed
+
+[main]
+2 Temple of Mystery
+3 Temple of Epiphany
+1 Temple of Abandon
+4 Stomping Ground
+4 Brazen Borrower
+1 Gadwick, the Wizened
+1 Niv-Mizzet, Parun
+3 Uro, Titan of Nature's Wrath
+4 Expansion // Explosion
+4 Growth Spiral
+2 Opt
+3 Thassa's Intervention
+4 Storm's Wrath
+3 Omen of the Sea
+4 Wilderness Reclamation
+1 Forest
+2 Island
+2 Mountain
+4 Breeding Pool
+2 Castle Vantress
+2 Fabled Passage
+4 Steam Vents
+
+[sideboard]
+3 Scorching Dragonfire
+2 Negate
+3 Mystical Dispute
+2 Fry
+3 Aether Gust
+2 Shifting Ceratops

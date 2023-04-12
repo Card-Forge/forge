@@ -1,0 +1,53 @@
+[quest]
+id=20220208
+OpponentName=Keganfall
+AILife=40
+HumanLife=22
+Repeat=true
+Wins=5
+Card Reward=5 random rares
+Credit Reward=100000
+AIExtras=
+HumanExtras=
+
+[metadata]
+Name=Selesnya Aggro
+Title=Eldritch Onslaught
+Difficulty=very hard
+Description=Selesnya Aggro by Keganfall
+Icon=Eldritch Onslaught.jpg
+Deck Type=constructed
+
+[main]
+1 Valorous Stance
+1 Wrenn and Seven
+2 Portable Hole
+2 Starnheim Unleashed
+3 Emeria's Call
+4 The Wandering Emperor
+4 Wedding Announcement
+4 Esika's Chariot
+2 Yasharn, Implacable Earth
+2 Tangled Florahedron
+2 Reidane, God of the Worthy
+4 Luminarch Aspirant
+4 Prosperous Innkeeper
+4 Skyclave Apparition
+1 Lair of the Hydra
+1 Eiganjo, Seat of the Empire
+1 Cave of the Frost Dragon
+1 Boseiju, Who Endures
+3 Forest
+4 Overgrown Farmland
+4 Branchloft Pathway
+6 Plains
+
+[sideboard]
+4 Circle of Confinement
+2 Guardian of Faith
+2 Archon of Emeria
+3 Valorous Stance
+1 Wrenn and Seven
+1 Portable Hole
+1 Yasharn, Implacable Earth
+1 Reidane, God of the Worthy

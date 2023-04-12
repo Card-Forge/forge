@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Boros Cycling Aggro by Ryuzo Fujie
+Title=Data
+Difficulty=very hard
+Description=Boros Cycling Aggro by Ryuzo Fujie
+Icon=Data.jpg
+Deck Type=constructed
+
+[main]
+1 Rielle, the Everwise
+4 Valiant Rescuer
+4 Flourishing Fox
+4 Drannith Stinger
+4 Irencrag Pyromancer
+1 Neutralize
+4 Zenith Flare
+4 Startling Development
+3 Go for Blood
+4 Boon of the Wish-Giver
+4 Memory Leak
+4 Improbable Alliance
+1 Blightstep Pathway
+1 Brightclimb Pathway
+1 Clearwater Pathway
+4 Needleverge Pathway
+4 Hengegate Pathway
+4 Riverglide Pathway
+4 Raugrin Triome
+
+[sideboard]
+1 Rielle, the Everwise
+1 Mystical Dispute
+1 Lurrus of the Dream-Den
+1 Test of Talents
+1 Negate
+2 Disdainful Stroke
+2 Glass Casket
+3 Prismari Command
+3 Redcap Melee

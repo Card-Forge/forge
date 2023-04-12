@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Szymon Oleksy
+Title=Horus
+Difficulty=very hard
+Description=Mono Green Aggro by Szymon Oleksy
+Icon=Horus.jpg
+Deck Type=constructed
+
+[main]
+3 Ulvenwald Oddity
+4 Old-Growth Troll
+4 Sculptor of Winter
+4 Werewolf Pack Leader
+4 Esika's Chariot
+1 Snakeskin Veil
+1 Master's Rebuke
+1 Tamiyo's Safekeeping
+1 Inscription of Abundance
+3 Invoke the Ancients
+4 Blizzard Brawl
+3 Ranger Class
+1 Boseiju, Who Endures
+3 Lair of the Hydra
+3 Kazandu Mammoth
+20 Snow-Covered Forest
+
+[sideboard]
+2 Snakeskin Veil
+2 Master's Rebuke
+2 Avabruck Caretaker
+2 Kura, the Boundless Sky
+2 Outland Liberator
+2 Froghemoth
+3 Tajuru Blightblade

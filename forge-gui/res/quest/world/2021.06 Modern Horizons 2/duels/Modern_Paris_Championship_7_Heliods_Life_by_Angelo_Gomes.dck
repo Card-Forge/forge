@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Heliods Life by Angelo Gomes
+Title=The Church of Tal
+Difficulty=very hard
+Description=Heliods Life by Angelo Gomes
+Icon=The Church of Tal.jpg
+Deck Type=constructed
+
+[main]
+4 Arbor Elf|M13
+3 Auriok Champion|FD
+4 Collected Company|DTK
+4 Conclave Mentor
+2 Eladamri's Call|PS
+3 Forest
+1 Gavony Township|ISD
+4 Heliod, Sun-Crowned
+3 Horizon Canopy|FUT
+3 Plains
+2 Prismatic Vista
+4 Ranger-Captain of Eos
+3 Skyclave Apparition
+4 Spike Feeder|TSP
+4 Temple Garden
+4 Utopia Sprawl|DIS
+2 Walking Ballista|AER
+4 Windswept Heath|KTK
+1 Wooded Foothills|KTK
+1 Yavimaya, Cradle of Growth
+
+[sideboard]
+1 Skyclave Apparition
+1 Archangel of Thune|M14
+2 Endurance
+2 Force of Vigor
+1 Gaddock Teeg|LRW
+2 Path to Exile|CFX
+3 Sanctifier en-Vec
+1 Solitude
+2 Veil of Summer

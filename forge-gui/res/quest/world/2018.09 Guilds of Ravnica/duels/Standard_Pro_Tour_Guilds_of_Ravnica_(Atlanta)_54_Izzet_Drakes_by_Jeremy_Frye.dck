@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Izzet Drakes by Jeremy Frye
+Title=Minerva McGonagall
+Difficulty=very hard
+Description=Izzet Drakes by Jeremy Frye
+Icon=Minerva McGonagall.jpg
+Deck Type=constructed
+
+[main]
+4 Arclight Phoenix
+4 Crackling Drake
+4 Enigma Drake
+4 Chart a Course|XLN
+4 Warlord's Fury
+4 Crash Through
+1 Deafening Clarion
+2 Lava Coil
+3 Tormenting Voice
+1 Beacon Bolt
+2 Maximize Velocity
+4 Opt
+3 Shock
+4 Steam Vents
+4 Sacred Foundry
+4 Glacial Fortress|XLN
+4 Sulfur Falls
+2 Island
+2 Mountain
+
+[sideboard]
+3 Deafening Clarion
+1 Lava Coil
+1 Beacon Bolt
+2 Spell Pierce|XLN
+1 Disdainful Stroke
+2 Sarkhan, Fireblood
+1 Deep Freeze
+2 Niv-Mizzet, Parun
+2 Dive Down|XLN

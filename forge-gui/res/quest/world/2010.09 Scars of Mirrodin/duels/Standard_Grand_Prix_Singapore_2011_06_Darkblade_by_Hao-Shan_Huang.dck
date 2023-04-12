@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Darkblade by Hao-Shan Huang
+Title=PresterJohn
+Difficulty=very hard
+Description=Darkblade by Hao-Shan Huang
+Icon=PresterJohn.jpg
+Deck Type=constructed
+
+[main]
+2 Emeria Angel|ZEN
+4 Squadron Hawk|M11
+4 Stoneforge Mystic|WWK
+3 Go for the Throat|MBS
+1 Into the Roil|ZEN
+2 Mana Leak|M11
+1 Despise|NPH
+1 Duress|M11
+4 Inquisition of Kozilek|ROE
+4 Preordain|M11
+1 Batterskull|NPH
+1 Sword of Feast and Famine|MBS
+1 Sword of War and Peace|NPH
+2 Arid Mesa|ZEN
+4 Creeping Tar Pit|WWK
+4 Darkslick Shores|SOM
+3 Glacial Fortress|M11
+4 Marsh Flats|ZEN
+4 Plains|NPH
+4 Seachrome Coast|SOM
+2 Swamp|NPH
+4 Jace, the Mind Sculptor|WWK
+
+[sideboard]
+1 Emeria Angel|ZEN
+1 Duress|M11
+1 Batterskull|NPH
+3 Spellskite|NPH
+1 Vampire Nighthawk|ZEN
+1 Dismember|NPH
+3 Divine Offering|MBS
+2 Flashfreeze|M11
+2 Surgical Extraction|NPH

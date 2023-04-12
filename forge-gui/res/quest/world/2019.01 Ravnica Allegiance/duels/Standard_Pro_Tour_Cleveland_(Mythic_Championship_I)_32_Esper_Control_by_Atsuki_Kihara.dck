@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Esper Control by Atsuki Kihara
+Title=Merfolk Shaman
+Difficulty=very hard
+Description=Esper Control by Atsuki Kihara
+Icon=Merfolk Shaman.jpg
+Deck Type=constructed
+
+[main]
+4 Teferi, Hero of Dominaria
+2 Karn, Scion of Urza
+1 Kaya, Orzhov Usurper
+4 Thought Erasure
+3 Cry of the Carnarium
+3 Kaya's Wrath
+4 Absorb
+3 Cast Down
+3 Mortify
+3 Vraska's Contempt|XLN
+1 Moment of Craving
+2 Search for Azcanta|XLN
+1 The Eldest Reborn
+4 Watery Grave
+4 Hallowed Fountain
+4 Godless Shrine
+4 Drowned Catacomb|XLN
+4 Isolated Chapel
+4 Glacial Fortress|XLN
+1 Dimir Guildgate
+1 Swamp
+
+[sideboard]
+1 The Eldest Reborn
+4 Thief of Sanity
+3 Hostage Taker|XLN
+3 Duress
+2 Unmoored Ego
+2 Lyra Dawnbringer

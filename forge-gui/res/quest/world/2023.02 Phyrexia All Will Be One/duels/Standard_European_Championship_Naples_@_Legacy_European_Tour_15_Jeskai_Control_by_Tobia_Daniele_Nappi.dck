@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Tobia Daniele Nappi
+Title=Eureka
+Difficulty=very hard
+Description=Jeskai Control by Tobia Daniele Nappi
+Icon=Eureka.jpg
+Deck Type=constructed
+
+[main]
+1 March of Otherworldly Light
+1 Fateful Absence
+1 Strangle
+2 Reckoner Bankbuster
+2 Make Disappear
+2 Dissipate
+2 Farewell
+2 Depopulate
+3 The Wandering Emperor
+3 Abrade
+3 Negate
+4 Memory Deluge
+4 Fable of the Mirror-Breaker
+1 Wandering Mind
+2 Sanctuary Warden
+1 Eiganjo, Seat of the Empire
+1 Plains
+1 Island
+1 Sokenzan, Crucible of Defiance
+1 Mirrex
+1 Otawara, Soaring City
+2 Battlefield Forge
+2 Shivan Reef
+2 Jetmir's Garden
+2 Xander's Lounge
+2 Adarkar Wastes
+2 Sundown Pass
+2 Seachrome Coast
+3 Stormcarved Coast
+4 Deserted Beach
+
+[sideboard]
+4 Sunset Revelry
+2 Brotherhood's End
+1 Disdainful Stroke
+1 Knockout Blow
+1 Destroy Evil
+1 Fires of Victory
+1 Strangle
+2 Reckoner Bankbuster
+1 The Wandering Emperor
+1 Wandering Mind

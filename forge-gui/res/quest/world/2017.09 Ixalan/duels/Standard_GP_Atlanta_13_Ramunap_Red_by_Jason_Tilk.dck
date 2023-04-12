@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ramunap Red by Jason Tilk
+Title=Milhouse_van_Houten
+Difficulty=very hard
+Description=Ramunap Red by Jason Tilk
+Icon=Milhouse_van_Houten.jpg
+Deck Type=constructed
+
+[main]
+4 Soul-Scar Mage|AKH
+4 Bomat Courier|KLD
+4 Earthshaker Khenra|HOU
+3 Kari Zev, Skyship Raider|AER
+3 Ahn-Crop Crasher|AKH
+3 Rampaging Ferocidon|XLN
+4 Hazoret the Fervent|AKH
+4 Shock|AER
+4 Lightning Strike|XLN
+3 Abrade|HOU
+4 Ramunap Ruins|HOU
+4 Sunscorched Desert|AKH
+1 Scavenger Grounds|HOU
+15 Mountain|XLN
+
+[sideboard]
+1 Rampaging Ferocidon|XLN
+1 Abrade|HOU
+2 Chandra, Torch of Defiance|KLD
+2 Glorybringer|AKH
+2 Magma Spray|AKH
+3 Pia Nalaar|KLD
+2 Aethersphere Harvester|AER
+2 Invigorated Rampage|AER

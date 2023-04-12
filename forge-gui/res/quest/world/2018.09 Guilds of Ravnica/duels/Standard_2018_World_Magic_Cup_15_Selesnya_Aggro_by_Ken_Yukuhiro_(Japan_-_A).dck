@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Selesnya Aggro by Ken Yukuhiro (Japan - A)
+Title=Razaketh, the Foulblooded
+Difficulty=very hard
+Description=Selesnya Aggro by Ken Yukuhiro (Japan - A)
+Icon=Razaketh, the Foulblooded.jpg
+Deck Type=constructed
+
+[main]
+3 Ajani, Adversary of Tyrants
+4 Adanto Vanguard|XLN
+4 Thorn Lieutenant
+4 Nullhide Ferox
+4 Emmara, Soul of the Accord
+3 Dauntless Bodyguard
+3 Venerated Loxodon
+3 Flower // Flourish
+4 Conclave Tribunal
+2 Legion's Landing|XLN
+4 History of Benalia
+4 Temple Garden
+4 Sunpetal Grove|XLN
+6 Forest
+8 Plains
+
+[sideboard]
+1 Ajani, Adversary of Tyrants
+3 Knight of Autumn
+1 Savage Stomp|XLN
+2 Trostani Discordant
+3 Baffling End
+1 Crushing Canopy
+2 Ixalan's Binding|XLN
+2 Ghalta, Primal Hunger

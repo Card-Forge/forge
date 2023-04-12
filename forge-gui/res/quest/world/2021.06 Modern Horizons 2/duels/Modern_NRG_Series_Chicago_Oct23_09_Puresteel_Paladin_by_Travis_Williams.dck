@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Puresteel Paladin by Travis Williams
+Title=Zeus
+Difficulty=very hard
+Description=Puresteel Paladin by Travis Williams
+Icon=Zeus.jpg
+Deck Type=constructed
+
+[main]
+2 Ingenious Smith
+2 Giver of Runes
+4 Memnite|SOM
+4 Stoneforge Mystic|WWK
+4 Puresteel Paladin|NPH
+4 Esper Sentinel
+4 Ornithopter|AER
+1 Cranial Plating|FD
+1 Shadowspear
+4 Colossus Hammer
+4 Springleaf Drum|BNG
+4 Sigarda's Aid|EMN
+4 Urza's Saga
+1 Marsh Flats|ZEN
+1 Windswept Heath|KTK
+1 Godless Shrine
+3 Inkmoth Nexus|MBS
+4 Silent Clearing
+4 Plains
+4 Concealed Courtyard|KLD
+
+[sideboard]
+1 Void Mirror
+1 Hushbringer
+1 Lurrus of the Dream-Den
+1 Drannith Magistrate
+1 Seal of Cleansing|NE
+1 Sanctifier en-Vec
+1 Nihil Spellbomb|SOM
+2 Prismatic Ending
+2 Knight of Malice
+4 Thoughtseize|THS

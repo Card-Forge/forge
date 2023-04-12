@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=4c Energy by Kosuke Gondo
+Title=Sedge Midrange
+Difficulty=very hard
+Description=4c Energy by Kosuke Gondo
+Icon=Sedge Midrange.jpg
+Deck Type=constructed
+
+[main]
+4 Harnessed Lightning|KLD
+4 Abrade|HOU
+4 Attune with Aether|KLD
+1 Torrential Gearhulk|KLD
+1 The Scarab God|HOU
+2 Glorybringer|AKH
+2 Chandra, Torch of Defiance|KLD
+4 Longtusk Cub|KLD
+4 Servant of the Conduit|KLD
+4 Rogue Refiner|AER
+3 Whirler Virtuoso|KLD
+1 Rhonas the Indomitable|AKH
+3 Bristling Hydra|KLD
+1 Vizier of Many Faces|AKH
+1 Island|XLN
+1 Swamp|XLN
+2 Mountain|XLN
+4 Forest|XLN
+3 Spirebluff Canal|KLD
+4 Botanical Sanctum|KLD
+1 Sheltered Thicket|AKH
+2 Rootbound Crag|XLN
+4 Aether Hub|KLD
+
+[sideboard]
+1 Torrential Gearhulk|KLD
+4 Negate|AER
+2 Confiscation Coup|KLD
+1 River's Rebuke|XLN
+1 Hour of Glory|HOU
+3 Deathgorge Scavenger|XLN
+2 Appetite for the Unnatural|KLD
+1 Vraska, Relic Seeker|XLN

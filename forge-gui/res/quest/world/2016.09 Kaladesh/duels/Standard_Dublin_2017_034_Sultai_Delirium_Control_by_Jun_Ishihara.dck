@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Sultai Delirium Control by Jun Ishihara
+Title=Ice King
+Difficulty=very hard
+Description=Sultai Delirium Control by Jun Ishihara
+Icon=Ice King.jpg
+Deck Type=constructed
+
+[main]
+2 Liliana, the Last Hope|EMN
+2 Ishkanah, Grafwidow|EMN
+1 Noxious Gearhulk|KLD
+2 Tireless Tracker|SOI
+3 Torrential Gearhulk|KLD
+2 Pick the Brain|SOI
+4 Traverse the Ulvenwald|SOI
+1 Negate
+2 Fatal Push|AER
+3 Glimmer of Genius|KLD
+3 Grapple with the Past|EMN
+3 Grasp of Darkness|OGW
+2 To the Slaughter|SOI
+2 Disallow|AER
+1 Overwhelming Denial|OGW
+3 Vessel of Nascency|SOI
+2 Aether Hub|KLD
+4 Blooming Marsh|KLD
+2 Botanical Sanctum|KLD
+4 Evolving Wilds
+3 Swamp|RTR
+2 Lumbering Falls|BFZ
+4 Sunken Hollow|BFZ
+2 Island|RTR
+1 Forest|RTR
+
+[sideboard]
+1 Ishkanah, Grafwidow|EMN
+1 Pick the Brain|SOI
+1 Negate
+2 Fatal Push|AER
+1 To the Slaughter|SOI
+1 Overwhelming Denial|OGW
+1 Kalitas, Traitor of Ghet|OGW
+1 Appetite for the Unnatural|KLD
+4 Grim Flayer|EMN
+1 Yahenni's Expertise|AER
+1 Transgress the Mind|BFZ

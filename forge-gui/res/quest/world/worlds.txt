@@ -1,40 +1,82 @@
+
+Name:1993-1995 Shandalar|Dir:1993-1995 Shandalar|Sets:2ED, ARN, ATQ, 3ED, LEG, DRK, FEM, 4ED|Banned:Chaos Orb; Falling Star
+Name:1993-1997 Jamuraa|Dir:1993-1997 Jamuraa|Sets:5ED, ARN, MIR, VIS, WTH|Banned:Chaos Orb; Falling Star
+Name:1993.10 Alpha, Beta|Dir:1993.10 Alpha, Beta|Sets:LEA, LEB|Banned:Chaos Orb
+Name:1993.12 Arabian Nights|Dir:1993.12 Arabian Nights|Sets:ARN|Banned:City in a Bottle
+Name:1994.03 Antiquities|Dir:1994.03 Antiquities|Sets:ATQ|Banned:Golgothian Sylex
+Name:1994.06 Legends|Dir:1994.06 Legends|Sets:LEG|Banned:Arena of the Ancients; Falling Star; Karakas
+Name:1994.08 The Dark|Dir:1994.08 The Dark|Sets:DRK|Banned:Maze of Ith
+Name:1994.11 Fallen Empires|Dir:1994.11 Fallen Empires|Sets:FEM
+Name:1995.06 Ice Age ICE,ALL,CSP|Dir:1995.06 Ice Age, Alliances, Coldsnap|Sets:ICE, ALL, CSP
+Name:1995.10 Homelands|Dir:1995.10 Homelands|Sets:HML|Banned:Apocalypse Chime
+Name:1996.10 Mirage, Visions|Dir:1996.10 Mirage, Visions|Sets:MIR, VIS
+Name:1997-2000 Starter Sets|Dir:1997-2000 Starter Sets|Sets:POR, PO2, PTK, S99, S00
+Name:1997.05 Portal|Dir:1997.05 Portal|Sets:POR
+Name:1997.10 Tempest|Dir:1997.10 Tempest|Sets:TMP, STH, EXO
+Name:1998.06 Portal Second Age|Dir:1998.06 Portal Second Age|Sets:PO2
+Name:1998.10 Urza|Dir:1998.10 Urza|Sets:USG, ULG, UDS|Banned:Gaea's Cradle;Memory Jar;Serra's Sanctum;Time Spiral;Tolarian Academy;Voltaic Key;Windfall
+Name:1999.05 Portal Three Kingdoms|Dir:1999.05 Portal Three Kingdoms|Sets:PTK
+Name:1999.09 Masquerade|Dir:1999.09 Masquerade|Sets:MMQ, NEM, PCY
+Name:2000.09 Invasion|Dir:2000.09 Invasion|Sets:INV, PLS, APC
+Name:2001.09 Odyssey|Dir:2001.09 Odyssey|Sets:ODY, TOR, JUD
+Name:2002.09 Onslaught|Dir:2002.09 Onslaught|Sets:ONS, LGN, SCG
+
+# Todo: Mirrodin needs a separation of old from new
+Name:2003.09 Mirrodin|Dir:2003.09 Mirrodin|Sets:MRD, DST, 5DN, SOM, MBS, NPH|Banned:Chaos Orb; Falling Star
+Name:2004.09 Kamigawa|Dir:2004.09 Kamigawa|Sets:CHK, BOK, SOK
+
+# Note: for now, contains things from much later Ravnica sets
+Name:2005.09 Ravnica|Dir:2005.09 Ravnica|Sets:RAV, GPT, DIS, RTR, GTC, DGM, GRN, GK1, RNA, GK2|Banned:Chaos Orb; Falling Star
+Name:2006.09 Time Spiral|Dir:2006.09 Time Spiral|Sets:TSP, TSB, PLC, FUT
+Name:2007.09 Lorwyn, Shadowmoor|Dir:2007.09 Lorwyn, Shadowmoor|Sets:LRW, MOR, SHM, EVE, 10E|Banned:Chaos Orb; Falling Star
+Name:2008.04 Alara|Dir:2008.04 Alara|Sets:ALA, CFX, ARB
+Name:2009.09 Zendikar|Dir:2009.09 Zendikar|Sets:ZEN, WWK, ROE, M10, M11|Banned:Chaos Orb; Falling Star
+Name:2010.09 Scars of Mirrodin|Dir:2010.09 Scars of Mirrodin|Sets:SOM, MBS, NPH, M11, M12, CMD
+Name:2011.09 Innistrad|Dir:2011.09 Innistrad|Sets:ISD, DKA, AVR, C18, M12, M13
+  # 2012.09 Return to Ravnica Block, RTR GTC DGM, should be here
+Name:2013.09 Theros|Dir:2013.09 Theros|Sets:THS, BNG, JOU
+Name:2014.09 Khans of Tarkir|Dir:2014.09 Khans of Tarkir|Sets:KTK, FRF, DTK
+Name:2015.09 Battle for Zendikar|Dir:2015.09 Battle for Zendikar|Sets:BFZ, OGW
+Name:2016.04 Shadows over Innistrad|Dir:2016.04 Shadows over Innistrad|Sets:SOI, EMN
+Name:2016.09 Kaladesh|Dir:2016.09 Kaladesh|Sets:KLD, AER, MPS, KLR
+Name:2017.04 Amonkhet|Dir:2017.04 Amonkhet|Sets:AKH, HOU, AKR
+Name:2017.09 Ixalan|Dir:2017.09 Ixalan|Sets:XLN, RIX
+
+# Post-block sets start
+Name:2018.04 Dominaria|Dir:2018.04 Dominaria|Sets:DOM, M19, CM2, C18
+Name:2018.09 Guilds of Ravnica|Dir:2018.09 Guilds of Ravnica|Sets:GRN, M19, CM2, C18
+Name:2019.01 Ravnica Allegiance|Dir:2019.01 Ravnica Allegiance|Sets:RNA, M19, CM2, C18
+Name:2019.04 War of the Spark|Dir:2019.04 War of the Spark|Sets:WAR, M20, C19
+Name:2019.09 Throne of Eldraine|Dir:2019.09 Throne of Eldraine|Sets:ELD, M20
+Name:2020.01 Theros Beyond Death|Dir:2020.01 Theros Beyond Death|Sets:THB, M20
+Name:2020.04 Ikoria: Lair of Behemoths|Dir:2020.04 Ikoria|Sets:IKO, C20, M21
+Name:2020.09 Zendikar Rising|Dir:2020.09 Zendikar Rising|Sets:ZNR, ZNC, CMR, M21
+Name:2021.01 Kaldheim: The Battle for Kaldheim|Dir:2021.01 Kaldheim|Sets:KHM, KHC, CMR, M21
+Name:2021.04 Strixhaven: School of Mages|Dir:2021.04 Strixhaven|Sets:STX, C21, M21
+
+# Modern major tourneys for about eight months following release
+Name:2021.06 Modern Horizons 2|Dir:2021.06 Modern Horizons 2|Sets:MH1, MH2
+
+Name:2021.07 D&D Adventures in the Forgotten Realms|Dir:2021.07 D&D Adventures in the Forgotten Realms|Sets:AFR, AFC
+Name:2021.09 Innistrad: Midnight Hunt|Dir:2021.09 Innistrad Midnight Hunt|Sets:MID, MIC
+Name:2021.11 Innistrad: Crimson Vow|Dir:2021.11 Innistrad Crimson Vow|Sets:VOW, VOC
+Name:2022.02 Kamigawa: Neon Dynasty|Dir:2022.02 Kamigawa Neon Dynasty|Sets:NEO, NEC
+Name:2022.04 Streets of New Capenna|Dir:2022.04 Streets of New Capenna|Sets:SNC, NCC
+Name:2022.09 Dominaria United|Dir:2022.09 Dominaria United|Sets:DMU, DMC
+Name:2022.11 The Brothers' War|Dir:2022.11 The Brothers' War|Sets:BRO, BRC
+Name:2023.02 Phyrexia: All Will Be One|Dir:2023.02 Phyrexia All Will Be One|Sets:ONE
+
+# Features current strong Modern decks, while also a home for Baldur's Gate and 40k cards in spell shop
+Name:2023 Modern|Dir:2023 Modern|Sets:CLB, 40K, SLD, VMA, 2XM, 2X2, MH2
+
+# For fun art like Secret Lair in the spell shop, add these to end of a world   , SLD, UMA, VMA, 2XM, 2X2
+
+Name:Post-Block Sets|Sets:DOM, GRN, RNA, WAR, ELD, THB, IKO, ZNR, KHM, JMP, CNS, CN2, BBD, MB1, MMA, MM2, EMA, MM3, IMA, A25, UMA, 2XM, CMR
 Name:Main world
 Name:Random Standard
 Name:Random Pioneer
 Name:Random Modern
 Name:Random Commander
 Name:Evolving Wilds
-Name:Amonkhet|Dir:Amonkhet|Sets:AKH, HOU, AKR
-Name:Jamuraa|Dir:jamuraa|Sets:5ED, ARN, MIR, VIS, WTH
-Name:Kamigawa|Dir:2004 Kamigawa|Sets:CHK, BOK, SOK
-Name:Lorwyn|Dir:lorwyn|Sets:SHM, EVE, LRW, MOR, 10E
-Name:Mirrodin|Dir:mirrodin|Sets:MRD, DST, 5DN, SOM, MBS, NPH
-Name:Ravnica|Dir:ravnica|Sets:RAV, GPT, DIS, RTR, GTC, DGM
-Name:Shandalar|Dir:shandalar|Sets:2ED, ARN, ATQ, 3ED, LEG, DRK, 4ED|Banned:Chaos Orb; Falling Star
-Name:Zendikar|Dir:zendikar|Sets:ZEN, WWK, ROE
-Name:The Domains: The Golden Age of Magic|Dir:1993-10 Limited Edition Beta|Sets:LEB|Banned:Chaos Orb
-Name:Rabiah|Dir:1993-12 Arabian Nights|Sets:ARN|Banned:City in a Bottle
-Name:Terisiare: The Brothers' War|Dir:1994-03 Antiquities|Sets:ATQ|Banned:Golgothian Sylex
-Name:Dominaria: Legends|Dir:1994-06 Legends|Sets:LEG|Banned:Arena of the Ancients; Falling Star; Karakas
-Name:Terisiare: The Dark|Dir:1994-08 The Dark|Sets:DRK|Banned:Maze of Ith
-Name:Sarpadia|Dir:1994-11 Fallen Empires|Sets:FEM
-Name:Homelands|Dir:1995-10 Homelands|Sets:HML|Banned:Apocalypse Chime
-Name:Terisiare: Ice Age|Dir:1996-05 Ice Age|Sets:ICE, ALL
-Name:Jamuraa: The Mirage Wars|Dir:1997-01 Mirage|Sets:MIR, VIS
-Name:Portal|Dir:1997-05 Portal|Sets:POR
-Name:Caliman|Dir:1998-06 Portal Second Age|Sets:PO2
-Name:The Three Kingdoms|Dir:1999-05 Portal Three Kingdoms|Sets:PTK
-Name:Theros: The Hero's Path|Dir:2014-05 Theros|Sets:THS, BNG, JOU
-Name:Eldraine: Throne of Eldraine|Dir:2019-09 Throne of Eldraine|Sets:ELD
-Name:Urza's Block|Dir:Urza|Sets:USG, ULG, UDS|Banned:Gaea's Cradle;Memory Jar;Serra's Sanctum;Time Spiral;Tolarian Academy;Voltaic Key;Windfall
-Name:The Gates of Magic|Dir:Starter|Sets:POR, PO2, S99, S00, PTK
-Name:Invasion|Dir:Invasion|Sets:INV, PLS, APC
-Name:Tempest|Dir:Tempest|Sets:TMP, STH, EXO
 Name:Random Core Set|Sets:LEA, LEB, 2ED, 3ED, 4ED, 5ED, 6ED, 7ED, 8ED, 9ED, 10E, M10, M11, M12, M13, M14, M15, ORI, M19, M20, M21
-Name:Ixalan|Sets:XLN, RIX
-Name:Innistrad|Sets:ISD, DKA, AVR, SOI, EMN
-Name:Kaladesh|Sets:AER, KLD, MPS, KLR
 Name:Non-Block Sets|Sets:IKO, THB, ELD, WAR, RNA, GRN, DOM, HML, FEM, DRK, LEG, ATQ, ARN, JMP, CNS, CN2, BBD, MB1, MMA, MM2, EMA, MM3, IMA, A25, UMA, 2XM, ZNR, CMR, KHM
-Name:Tarkir|Sets:KTK, FRF, DTK
-Name:Alara|Sets:ALA, CFX, ARB
-Name:Kaldheim: The Battle for Kaldheim|Dir:2021-01 Kaldheim|Sets:KHM

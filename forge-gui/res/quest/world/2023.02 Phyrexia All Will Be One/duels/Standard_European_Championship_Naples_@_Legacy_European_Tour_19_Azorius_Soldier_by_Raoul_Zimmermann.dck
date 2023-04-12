@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Azorius Soldier by Raoul Zimmermann
+Title=Tempo
+Difficulty=very hard
+Description=Azorius Soldier by Raoul Zimmermann
+Icon=Tempo.jpg
+Deck Type=constructed
+
+[main]
+2 Skrelv, Defector Mite
+3 Zephyr Sentinel
+3 Dennick, Pious Apprentice
+3 Brutal Cathar
+3 Adeline, Resplendent Cathar
+3 Harbin, Vanguard Aviator
+4 Recruitment Officer
+4 Resolute Reinforcements
+4 Skystrike Officer
+4 Valiant Veteran
+4 Protect the Negotiators
+1 Otawara, Soaring City
+1 Eiganjo, Seat of the Empire
+1 Mishra's Foundry
+4 Adarkar Wastes
+4 Secluded Courtyard
+4 Plains
+4 Seachrome Coast
+4 Fortified Beachhead
+
+[sideboard]
+1 Brutal Cathar
+1 Knockout Blow
+1 Loran of the Third Path
+2 Negate
+3 Destroy Evil
+3 Lantern Flare
+4 Wedding Announcement

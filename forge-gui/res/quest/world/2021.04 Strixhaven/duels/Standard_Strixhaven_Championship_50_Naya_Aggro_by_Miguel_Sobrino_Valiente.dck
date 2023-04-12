@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Naya Aggro by Miguel Sobrino Valiente
+Title=The Farrelite Cult
+Difficulty=very hard
+Description=Naya Aggro by Miguel Sobrino Valiente
+Icon=The Farrelite Cult.jpg
+Deck Type=constructed
+
+[main]
+2 Toski, Bearer of Secrets
+2 Drannith Magistrate
+4 Lovestruck Beast
+4 Bonecrusher Giant
+4 Clarion Spirit
+4 Jaspera Sentinel
+4 Giant Killer
+4 Elite Spellbinder
+4 Edgewall Innkeeper
+2 Kabira Takedown
+4 Showdown of the Skalds
+2 Mountain
+2 Plains
+2 Forest
+4 Needleverge Pathway
+4 Fabled Passage
+4 Branchloft Pathway
+4 Cragcrown Pathway
+
+[sideboard]
+1 Jegantha, the Wellspring
+1 Redcap Melee
+1 Archon of Absolution
+2 Klothys, God of Destiny
+2 Rip Apart
+2 Glass Casket
+2 Ox of Agonas
+2 Roiling Vortex
+2 Reidane, God of the Worthy

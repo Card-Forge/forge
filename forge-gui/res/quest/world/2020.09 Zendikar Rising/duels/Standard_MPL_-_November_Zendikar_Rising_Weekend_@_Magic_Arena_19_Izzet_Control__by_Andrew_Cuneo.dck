@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Izzet Control  by Andrew Cuneo
+Title=Albert Einstein
+Difficulty=very hard
+Description=Izzet Control  by Andrew Cuneo
+Icon=Albert Einstein.jpg
+Deck Type=constructed
+
+[main]
+1 Kiora Bests the Sea God
+2 Soul-Guide Lantern
+2 Mazemind Tome
+2 Negate
+3 Midnight Clock
+3 Scorching Dragonfire
+3 Essence Scatter
+3 Storm's Wrath
+4 Neutralize
+4 Shatterskull Smashing
+4 Shark Typhoon
+2 Bonecrusher Giant
+3 Brazen Borrower
+1 Field of Ruin
+1 Crawling Barrens
+2 Castle Vantress
+3 Mountain
+4 Riverglide Pathway
+4 Temple of Epiphany
+9 Island
+
+[sideboard]
+3 Mystical Dispute
+2 Lullmage's Domination
+1 Soul Sear
+1 Kiora Bests the Sea God
+2 Soul-Guide Lantern
+1 Mazemind Tome
+2 Negate
+1 Midnight Clock
+1 Essence Scatter
+1 Storm's Wrath

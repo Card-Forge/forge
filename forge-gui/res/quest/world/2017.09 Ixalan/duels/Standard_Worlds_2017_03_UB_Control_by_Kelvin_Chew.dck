@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=UB Control by Kelvin Chew
+Title=Minerva McGonagall
+Difficulty=very hard
+Description=UB Control by Kelvin Chew
+Icon=Minerva McGonagall.jpg
+Deck Type=constructed
+
+[main]
+4 Fatal Push|AER
+4 Essence Scatter|AKH
+2 Essence Extraction|KLD
+3 Disallow|AER
+3 Censor|AKH
+4 Glimmer of Genius|KLD
+2 Supreme Will|HOU
+3 Vraska's Contempt|XLN
+2 Aether Meltdown|KLD
+2 Search for Azcanta|XLN
+4 Drowned Catacomb|XLN
+1 Evolving Wilds|AKH
+4 Fetid Pools|AKH
+1 Field of Ruin|XLN
+7 Island|XLN
+1 Submerged Boneyard|AKH
+8 Swamp|XLN
+3 The Scarab God|HOU
+2 Torrential Gearhulk|KLD
+
+[sideboard]
+2 Essence Extraction|KLD
+1 Arguel's Blood Fast|XLN
+1 Bontu's Last Reckoning|HOU
+1 Doomfall|HOU
+4 Duress|XLN
+3 Gifted Aetherborn|AER
+1 Gonti, Lord of Luxury|KLD
+2 Negate|AER

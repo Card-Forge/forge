@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Fires of Invention by Matthew Nass
+Title=Galadriel
+Difficulty=very hard
+Description=Fires of Invention by Matthew Nass
+Icon=Galadriel.jpg
+Deck Type=constructed
+
+[main]
+4 Steam Vents
+3 Temple of Epiphany
+3 Fabled Passage
+4 Hallowed Fountain
+2 Mountain
+2 Island
+2 Castle Vantress
+1 Plains
+4 Teferi, Time Raveler
+4 Fires of Invention
+4 Deafening Clarion
+3 Kenrith, the Returned King
+4 Sphinx of Foresight
+4 Cavalier of Flame
+2 Cavalier of Gales
+4 Bonecrusher Giant
+4 Brazen Borrower
+3 Temple of Triumph
+3 Sacred Foundry
+
+[sideboard]
+4 Robber of the Rich
+1 Devout Decree
+3 Aether Gust
+1 Shatter the Sky
+2 Elspeth Conquers Death
+4 Mystical Dispute

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Ivan Floch (Slovakia  - B)
+Title=Gunnery Sergeant Hartman
+Difficulty=very hard
+Description=Jeskai Control by Ivan Floch (Slovakia  - B)
+Icon=Gunnery Sergeant Hartman.jpg
+Deck Type=constructed
+
+[main]
+4 Teferi, Hero of Dominaria
+2 Crackling Drake
+2 Niv-Mizzet, Parun
+4 Deafening Clarion
+2 Chemister's Insight
+1 Essence Scatter
+2 Negate
+1 Justice Strike
+4 Opt
+2 Settle the Wreckage|XLN
+4 Sinister Sabotage
+1 Expansion // Explosion
+2 Treasure Map|XLN
+3 Seal Away
+4 Clifftop Retreat
+4 Glacial Fortress|XLN
+6 Island
+4 Sacred Foundry
+4 Steam Vents
+4 Sulfur Falls
+
+[sideboard]
+1 Negate
+1 Justice Strike
+1 Expansion // Explosion
+2 Spell Pierce|XLN
+1 Invoke the Divine
+3 Ixalan's Binding|XLN
+3 Legion Warboss
+1 Lyra Dawnbringer
+2 Star of Extinction|XLN

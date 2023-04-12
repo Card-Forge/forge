@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Mardu Aggro by Steve Hatto
+Title=Blue
+Difficulty=very hard
+Description=Mardu Aggro by Steve Hatto
+Icon=Blue.jpg
+Deck Type=constructed
+
+[main]
+3 Gideon, Ally of Zendikar|BFZ
+4 Thraben Inspector|SOI
+4 Inventor's Apprentice|KLD
+4 Toolcraft Exemplar|KLD
+4 Scrapheap Scrounger|KLD
+4 Veteran Motorist|KLD
+3 Pia Nalaar|KLD
+3 Shock
+4 Unlicensed Disintegration|KLD
+4 Heart of Kiran|AER
+1 Cultivator's Caravan|KLD
+4 Spire of Industry|AER
+3 Aether Hub|KLD
+4 Inspiring Vantage|KLD
+4 Concealed Courtyard|KLD
+3 Mountain|RTR
+3 Plains|RTR
+1 Needle Spires|OGW
+
+[sideboard]
+1 Gideon, Ally of Zendikar|BFZ
+1 Shock
+2 Cultivator's Caravan|KLD
+1 Skysovereign, Consul Flagship|KLD
+1 Fragmentize|KLD
+2 Archangel Avacyn|SOI
+3 Fumigate|KLD
+2 Fatal Push|AER
+2 Shambling Vent|BFZ

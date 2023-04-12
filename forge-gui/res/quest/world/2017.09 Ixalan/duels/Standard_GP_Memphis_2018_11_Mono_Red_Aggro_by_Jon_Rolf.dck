@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Red Aggro by Jon Rolf
+Title=alaarb
+Difficulty=very hard
+Description=Mono Red Aggro by Jon Rolf
+Icon=alaarb.jpg
+Deck Type=constructed
+
+[main]
+3 Scavenger Grounds|HOU
+18 Mountain
+3 Grasping Dunes|AKH
+3 Shock|AER
+1 Magma Spray|AKH
+4 Lightning Strike|XLN
+1 Abrade|HOU
+3 Rekindling Phoenix
+1 Pia Nalaar|KLD
+3 Kari Zev, Skyship Raider|AER
+4 Hazoret the Fervent|AKH
+4 Fanatical Firebrand
+4 Earthshaker Khenra|HOU
+4 Bomat Courier|KLD
+4 Ahn-Crop Crasher|AKH
+
+[sideboard]
+1 Vance's Blasting Cannons|XLN
+2 Dire Fleet Daredevil
+3 Chandra, Torch of Defiance|KLD
+2 Aethersphere Harvester|AER
+2 Magma Spray|AKH
+2 Abrade|HOU
+1 Rekindling Phoenix
+2 Pia Nalaar|KLD

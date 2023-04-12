@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Omnath Ramp by Eetu Perttula
+Title=A Wolf in Sheeps Clothing
+Difficulty=very hard
+Description=Omnath Ramp by Eetu Perttula
+Icon=A Wolf in Sheeps Clothing.jpg
+Deck Type=constructed
+
+[main]
+1 Giant Killer
+2 Lotus Cobra
+2 Brazen Borrower
+3 Edgewall Innkeeper
+4 Omnath, Locus of Creation
+4 Beanstalk Giant
+4 Bonecrusher Giant
+4 Fae of Wishes
+4 Lucky Clover
+3 Escape to the Wilds
+2 Felidar Retreat
+1 Plains
+2 Ketria Triome
+2 Raugrin Triome
+2 Mountain
+3 Forest
+4 Fabled Passage
+4 Branchloft Pathway
+4 Cragcrown Pathway
+5 Island
+
+[sideboard]
+1 Escape to the Wilds
+1 Primal Might
+1 Mystical Dispute
+1 Once and Future
+1 Ugin, the Spirit Dragon
+1 Kazuul's Fury
+1 Shredded Sails
+1 Storm's Wrath
+1 Redcap Melee
+1 Soul-Guide Lantern
+2 Embereth Shieldbreaker
+3 Negate

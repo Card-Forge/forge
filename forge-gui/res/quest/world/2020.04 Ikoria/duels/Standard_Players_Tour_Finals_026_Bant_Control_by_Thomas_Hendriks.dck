@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Bant Control by Thomas Hendriks
+Title=Niv Mizzet
+Difficulty=very hard
+Description=Bant Control by Thomas Hendriks
+Icon=Niv Mizzet.jpg
+Deck Type=constructed
+
+[main]
+3 Uro, Titan of Nature's Wrath
+3 Hydroid Krasis
+1 Dovin's Veto
+2 Aether Gust
+3 Mystical Dispute
+4 Growth Spiral
+3 Shatter the Sky
+3 Elspeth Conquers Death
+2 Narset, Parter of Veils
+3 Nissa, Who Shakes the World
+4 Teferi, Time Raveler
+1 Zagoth Triome
+1 Castle Vantress
+1 Temple of Plenty
+2 Plains
+2 Ketria Triome
+2 Island
+2 Forest
+2 Temple of Enlightenment
+4 Temple Garden
+4 Hallowed Fountain
+4 Fabled Passage
+4 Breeding Pool
+
+[sideboard]
+3 Glass Casket
+2 Dovin's Veto
+1 Aether Gust
+1 Mystical Dispute
+1 Shatter the Sky
+1 Elspeth Conquers Death
+1 Narset, Parter of Veils
+1 Shark Typhoon
+2 Elder Gargaroth
+2 Brazen Borrower

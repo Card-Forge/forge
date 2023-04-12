@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Rakdos Midrange by Robert Stanley
+Title=Sus Antigoon
+Difficulty=very hard
+Description=Rakdos Midrange by Robert Stanley
+Icon=Sus Antigoon.jpg
+Deck Type=constructed
+
+[main]
+3 Chandra, Torch of Defiance|KLD
+1 Liliana, Death's Majesty|AKH
+4 Scrapheap Scrounger|KLD
+2 Walking Ballista|AER
+2 Pia Nalaar|KLD
+4 Goblin Chainwhirler
+2 Rekindling Phoenix
+2 Glorybringer|AKH
+1 Cut // Ribbons|AKH
+2 Magma Spray|AKH
+3 Abrade|HOU
+3 Unlicensed Disintegration|KLD
+3 Heart of Kiran|AER
+2 Aether Hub|KLD
+4 Canyon Slough|AKH
+2 Spire of Industry|AER
+4 Dragonskull Summit|XLN
+2 Cinder Barrens
+10 Mountain
+1 Swamp
+3 Karn, Scion of Urza
+
+[sideboard]
+1 Cut // Ribbons|AKH
+1 Abrade|HOU
+2 Treasure Map|XLN
+1 The Eldest Reborn
+4 Vraska's Contempt|XLN
+2 Doomfall|HOU
+4 Duress|XLN

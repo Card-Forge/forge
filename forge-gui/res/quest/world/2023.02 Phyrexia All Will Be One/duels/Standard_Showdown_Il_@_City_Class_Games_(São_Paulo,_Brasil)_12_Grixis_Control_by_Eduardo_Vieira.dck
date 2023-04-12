@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Grixis Control by Eduardo Vieira
+Title=Elrond
+Difficulty=very hard
+Description=Grixis Control by Eduardo Vieira
+Icon=Elrond.jpg
+Deck Type=constructed
+
+[main]
+1 Cut Down
+1 Negate
+1 Brotherhood's End
+2 Abrade
+3 Reckoner Bankbuster
+3 Make Disappear
+3 Go for the Throat
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+1 Bladecoil Serpent
+3 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Swamp
+1 Takenuma, Abandoned Mire
+2 Underground River
+2 Sulfurous Springs
+2 Stormcarved Coast
+2 Shipwreck Marsh
+4 Haunted Ridge
+4 Darkslick Shores
+4 Blackcleave Cliffs
+4 Xander's Lounge
+
+[sideboard]
+3 Razorlash Transmogrant
+2 Disdainful Stroke
+2 Duress
+2 Anoint with Affliction
+1 Siphon Insight
+1 Sorin the Mirthless
+2 Cut Down
+1 Negate
+1 Brotherhood's End

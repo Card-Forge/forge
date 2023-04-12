@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Esper Precinct One by Márcio Carvalho
+Title=Vodalia
+Difficulty=very hard
+Description=Esper Precinct One by Márcio Carvalho
+Icon=Vodalia.jpg
+Deck Type=constructed
+
+[main]
+3 Mortify
+3 Tyrant's Scorn
+1 Vraska's Contempt|XLN
+1 Enter the God-Eternals
+2 Duress
+4 Thought Erasure
+4 Basilica Bell-Haunt
+4 Thief of Sanity
+4 Hero of Precinct One
+3 Teferi, Time Raveler
+1 Ugin, the Ineffable
+3 Teferi, Hero of Dominaria
+1 Swamp
+1 Plains
+3 Glacial Fortress|XLN
+4 Hallowed Fountain
+4 Drowned Catacomb|XLN
+4 Watery Grave
+4 Godless Shrine
+4 Isolated Chapel
+2 Oath of Kaya
+
+[sideboard]
+1 Vraska's Contempt|XLN
+2 Enter the God-Eternals
+1 Duress
+2 The Elderspell
+1 Liliana, Dreadhorde General
+2 Hostage Taker|XLN
+2 Narset, Parter of Veils
+2 Despark
+2 Dovin's Veto

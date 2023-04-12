@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mono White Control by Marei Okamura
+Title=Dragon Lord
+Difficulty=very hard
+Description=Mono White Control by Marei Okamura
+Icon=Dragon Lord.jpg
+Deck Type=constructed
+
+[main]
+2 Steel Seraph
+2 Sanctuary Warden
+2 Ambitious Farmhand
+3 Loran of the Third Path
+3 Serra Paragon
+3 Spirited Companion
+4 Reckoner Bankbuster
+4 Lay Down Arms
+4 Ossification
+4 Wedding Announcement
+1 The Eternal Wanderer
+4 The Wandering Emperor
+1 Eiganjo, Seat of the Empire
+1 Mirrex
+4 Roadside Reliquary
+18 Plains
+
+[sideboard]
+2 Steel Seraph
+1 The Eternal Wanderer
+1 Fateful Absence
+1 Ao, the Dawn Sky
+1 Farewell
+2 Urza's Sylex
+2 Unlicensed Hearse
+2 The Stone Brain
+3 Vanquish the Horde

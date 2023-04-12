@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Fiery Goyf by Gabriel Schwartz
+Title=Aspect of Purity
+Difficulty=very hard
+Description=Fiery Goyf by Gabriel Schwartz
+Icon=Aspect of Purity.jpg
+Deck Type=constructed
+
+[main]
+7 Forest|RTR
+4 Grove of the Burnwillows|FUT
+4 Terramorphic Expanse|C16
+4 Fiery Justice|C13
+4 Edge of Autumn|FUT
+4 Dead // Gone|PLC
+4 Kavu Predator|PLC
+4 Tarmogoyf|FUT
+3 Mystic Enforcer|TSP
+3 Temporal Isolation|TSP
+3 Riftsweeper|FUT
+3 Call of the Herd|TSP
+3 Gemstone Mine|TSP
+3 Saffi Eriksdotter|TSP
+2 Griffin Guide|TSP
+2 Flagstones of Trokair|TSP
+2 Plains|RTR
+1 Mountain|RTR
+
+[sideboard]
+1 Mystic Enforcer|TSP
+1 Temporal Isolation|TSP
+1 Riftsweeper|FUT
+1 Griffin Guide|TSP
+4 Dodecapod|TSP
+3 Extirpate|PLC
+3 Rebuff the Wicked|PLC
+1 Swamp|RTR

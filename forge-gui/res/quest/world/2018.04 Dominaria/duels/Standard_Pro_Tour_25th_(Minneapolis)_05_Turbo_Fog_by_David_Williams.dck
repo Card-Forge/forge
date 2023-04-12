@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Turbo Fog by David Williams
+Title=Swift Justice
+Difficulty=very hard
+Description=Turbo Fog by David Williams
+Icon=Swift Justice.jpg
+Deck Type=constructed
+
+[main]
+1 The Mirari Conjecture
+1 Karn's Temporal Sundering
+2 Search for Azcanta|XLN
+2 Secrets of the Golden City
+2 Karn, Scion of Urza
+2 Glimmer of Genius|KLD
+4 Chart a Course|XLN
+4 Haze of Pollen|AKH
+4 Root Snare
+4 Nexus of Fate
+4 Gift of Paradise
+4 Teferi, Hero of Dominaria
+1 Botanical Sanctum|KLD
+2 Sunpetal Grove|XLN
+3 Glacial Fortress|XLN
+4 Irrigated Farmland|AKH
+4 Scattered Groves|AKH
+4 Forest
+4 Hinterland Harbor
+4 Island
+
+[sideboard]
+1 Nezahal, Primal Tide
+2 Cleansing Nova
+2 Baral, Chief of Compliance|AER
+2 Jace's Defeat|HOU
+4 Negate
+4 Manglehorn|AKH

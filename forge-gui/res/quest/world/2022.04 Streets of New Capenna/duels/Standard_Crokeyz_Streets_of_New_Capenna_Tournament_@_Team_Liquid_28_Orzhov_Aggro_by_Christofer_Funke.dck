@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Orzhov Aggro by Christofer Funke
+Title=Odysseus
+Difficulty=very hard
+Description=Orzhov Aggro by Christofer Funke
+Icon=Odysseus.jpg
+Deck Type=constructed
+
+[main]
+1 Hagra Mauling
+1 Sorin the Mirthless
+2 Lolth, Spider Queen
+2 Elspeth Resplendent
+2 The Meathook Massacre
+2 Emeria's Call
+2 Infernal Grasp
+3 The Wandering Emperor
+4 Wedding Announcement
+4 Vanishing Verse
+1 Legion Angel
+1 Henrika Domnathi
+1 Edgar, Charmed Groom
+2 Tenacious Underdog
+2 Welcoming Vampire
+3 Reidane, God of the Worthy
+4 Luminarch Aspirant
+1 Field of Ruin
+1 Takenuma, Abandoned Mire
+1 Eiganjo, Seat of the Empire
+2 Hive of the Eye Tyrant
+4 Shattered Sanctum
+4 Brightclimb Pathway
+4 Swamp
+6 Plains
+
+[sideboard]
+3 Duress
+2 Ray of Enfeeblement
+2 Rite of Oblivion
+2 Skyclave Apparition
+1 Bloodchief's Thirst
+2 The Meathook Massacre
+3 Legion Angel

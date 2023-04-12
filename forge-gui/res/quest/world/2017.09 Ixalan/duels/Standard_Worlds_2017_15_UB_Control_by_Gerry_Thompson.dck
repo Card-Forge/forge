@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=UB Control by Gerry Thompson
+Title=Nissa, Steward of Elements
+Difficulty=very hard
+Description=UB Control by Gerry Thompson
+Icon=Nissa, Steward of Elements.jpg
+Deck Type=constructed
+
+[main]
+3 The Scarab God|HOU
+2 Torrential Gearhulk|KLD
+4 Censor|AKH
+4 Essence Scatter|AKH
+4 Disallow|AER
+4 Fatal Push|AER
+2 Essence Extraction|KLD
+3 Vraska's Contempt|XLN
+4 Hieroglyphic Illumination|AKH
+1 Glimmer of Genius|KLD
+3 Search for Azcanta|XLN
+4 Fetid Pools|AKH
+4 Drowned Catacomb|XLN
+2 Submerged Boneyard|AKH
+8 Island|XLN
+6 Swamp|XLN
+2 Field of Ruin|XLN
+
+[sideboard]
+2 Essence Extraction|KLD
+1 Search for Azcanta|XLN
+1 Field of Ruin|XLN
+2 Negate|AER
+4 Duress|XLN
+2 Vizier of Many Faces|AKH
+2 Contraband Kingpin|KLD
+1 Liliana's Defeat|HOU

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Bant Control by Antonio Del Moral Leon
+Title=Chunk
+Difficulty=very hard
+Description=Bant Control by Antonio Del Moral Leon
+Icon=Chunk.jpg
+Deck Type=constructed
+
+[main]
+2 Island
+2 Forest
+4 Temple Garden
+4 Breeding Pool
+4 Fabled Passage
+4 Hallowed Fountain
+2 Ketria Triome
+2 Plains
+2 Temple of Enlightenment
+2 Temple of Plenty
+4 Teferi, Time Raveler
+3 Nissa, Who Shakes the World
+2 Teferi, Master of Time
+3 Elspeth Conquers Death
+2 Shark Typhoon
+1 Shatter the Sky
+4 Growth Spiral
+2 Dovin's Veto
+1 Wilt
+1 Aether Gust
+4 Uro, Titan of Nature's Wrath
+3 Jolrael, Mwonvuli Recluse
+2 Hydroid Krasis
+
+[sideboard]
+1 Heliod's Intervention
+1 Brazen Borrower
+2 Elder Gargaroth
+3 Mystical Dispute
+4 Glass Casket
+3 Shatter the Sky
+1 Dovin's Veto

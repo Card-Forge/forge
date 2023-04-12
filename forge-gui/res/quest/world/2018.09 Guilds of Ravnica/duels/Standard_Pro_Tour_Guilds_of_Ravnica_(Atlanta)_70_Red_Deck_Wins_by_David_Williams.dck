@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by David Williams
+Title=Teysa
+Difficulty=very hard
+Description=Red Deck Wins by David Williams
+Icon=Teysa.jpg
+Deck Type=constructed
+
+[main]
+4 Ghitu Lavarunner
+4 Fanatical Firebrand
+4 Viashino Pyromancer
+4 Runaway Steam-Kin
+4 Goblin Chainwhirler
+4 Lava Coil
+4 Shock
+4 Lightning Strike
+1 Wizard's Lightning
+1 Risk Factor
+4 Experimental Frenzy
+22 Mountain
+
+[sideboard]
+2 Risk Factor
+2 Banefire
+2 Fight with Fire
+3 Treasure Map|XLN
+3 Dire Fleet Daredevil
+3 Fiery Cannonade|XLN

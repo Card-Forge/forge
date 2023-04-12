@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=UW God-Pharaoh's Gift by Shahar Shenhar
+Title=Dark Sacrifice
+Difficulty=very hard
+Description=UW God-Pharaoh's Gift by Shahar Shenhar
+Icon=Dark Sacrifice.jpg
+Deck Type=constructed
+
+[main]
+1 Fumigate|KLD
+2 Cast Out|AKH
+4 Chart a Course|XLN
+4 Strategic Planning|HOU
+4 Refurbish|KLD
+4 God-Pharaoh's Gift|HOU
+2 Sunscourge Champion|HOU
+2 Lyra Dawnbringer
+4 Champion of Wits|HOU
+4 Angel of Invention|KLD
+4 Minister of Inquiries|KLD
+1 Ipnu Rivulet|HOU
+1 Field of Ruin|XLN
+2 Aether Hub|KLD
+4 Irrigated Farmland|AKH
+4 Glacial Fortress|XLN
+5 Plains
+8 Island
+
+[sideboard]
+2 Teferi, Hero of Dominaria
+1 Search for Azcanta|XLN
+4 History of Benalia
+2 Thopter Arrest|AER
+2 Baffling End
+2 Negate
+2 Disallow|AER

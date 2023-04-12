@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Izzet Drakes by Mongkol Techarattanaprasert
+Title=Hugo Drax
+Difficulty=very hard
+Description=Izzet Drakes by Mongkol Techarattanaprasert
+Icon=Hugo Drax.jpg
+Deck Type=constructed
+
+[main]
+4 Arclight Phoenix
+3 Goblin Electromancer
+3 Crackling Drake
+3 Enigma Drake
+3 Tormenting Voice
+4 Chart a Course|XLN
+1 Beacon Bolt
+1 Lava Coil
+2 Maximize Velocity
+4 Opt
+4 Shock
+2 Discovery // Dispersal
+4 Radical Idea
+1 Dive Down|XLN
+4 Sulfur Falls
+4 Steam Vents
+7 Island
+6 Mountain
+
+[sideboard]
+1 Beacon Bolt
+3 Lava Coil
+2 Niv-Mizzet, Parun
+3 Fiery Cannonade|XLN
+1 Spell Pierce|XLN
+1 Search for Azcanta|XLN
+2 Disdainful Stroke
+1 Negate
+1 Firemind's Research

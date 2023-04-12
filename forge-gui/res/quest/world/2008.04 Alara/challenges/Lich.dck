@@ -1,0 +1,33 @@
+[quest]
+id=44003
+OpponentName=Lich
+AILife=20
+Repeat=true
+Wins=10
+Card Reward=Lich's Mirror;Death Baron|ALA;Diabolic Revelation|M13;1 black rare
+Credit Reward=1000
+AIExtras=Lich's Mirror
+[metadata]
+Name=quest44003
+Title=Lich's Mirror
+Icon=alalich.jpg
+Difficulty=hard
+Description=It shows not what you are but what you were.
+Deck Type=constructed
+[Main]
+4 Blightning|ALA
+4 Crumbling Necropolis|ALA
+4 Death Baron|ALA
+4 Dreadwing|CFX
+4 Dregscape Zombie|ALA
+4 Grixis Panorama|ALA
+2 Island|ALA|4
+4 Lich Lord of Unx|ARB
+3 Mind Funeral|ARB
+5 Mountain|ALA|1
+4 Rotting Rats|CFX
+3 Shambling Remains|CFX
+5 Swamp|ALA|2
+4 Swamp|ALA|3
+4 Terminate|ARB
+2 Unscythe, Killer of Kings|ARB

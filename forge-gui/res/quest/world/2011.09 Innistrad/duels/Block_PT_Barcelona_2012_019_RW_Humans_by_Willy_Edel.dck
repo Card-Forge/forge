@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=RW Humans by Willy Edel
+Title=Houngan
+Difficulty=very hard
+Description=RW Humans by Willy Edel
+Icon=Houngan.jpg
+Deck Type=constructed
+
+[main]
+4 Cavern of Souls|AVR
+4 Clifftop Retreat
+5 Mountain|RTR
+10 Plains|RTR
+2 Slayers' Stronghold|AVR
+4 Champion of the Parish|ISD
+2 Doomed Traveler
+3 Fiend Hunter|C13
+1 Kessig Malcontents|AVR
+3 Lightning Mauler|AVR
+3 Loyal Cathar|DKA
+4 Riders of Gavony|AVR
+4 Silverblade Paladin|C14
+2 Thalia, Guardian of Thraben|DKA
+2 Zealous Conscripts|AVR
+3 Bonfire of the Damned|AVR
+4 Brimstone Volley|CNS
+
+[sideboard]
+1 Fiend Hunter|C13
+1 Zealous Conscripts|AVR
+1 Banishing Stroke|AVR
+1 Demolish|XLN
+2 Devil's Play|ISD
+1 Divine Deflection|AVR
+1 Faith's Shield|DKA
+1 Hellrider|DKA
+1 Purify the Grave|ISD
+3 Restoration Angel|AVR
+1 Urgent Exorcism|ISD
+1 Witchbane Orb|ISD

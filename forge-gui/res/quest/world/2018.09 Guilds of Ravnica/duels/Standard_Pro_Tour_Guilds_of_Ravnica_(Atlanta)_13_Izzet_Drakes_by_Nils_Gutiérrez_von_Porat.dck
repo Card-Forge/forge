@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Izzet Drakes by Nils Gutiérrez von Porat
+Title=Sainted One
+Difficulty=very hard
+Description=Izzet Drakes by Nils Gutiérrez von Porat
+Icon=Sainted One.jpg
+Deck Type=constructed
+
+[main]
+4 Goblin Electromancer
+4 Arclight Phoenix
+4 Crackling Drake
+4 Chart a Course|XLN
+3 Tormenting Voice
+2 Lava Coil
+2 Beacon Bolt
+4 Opt
+4 Radical Idea
+2 Discovery // Dispersal
+2 Ionize
+4 Shock
+7 Island
+5 Mountain
+1 Izzet Guildgate
+4 Sulfur Falls
+4 Steam Vents
+
+[sideboard]
+1 Lava Coil
+1 Beacon Bolt
+2 Negate
+2 Disdainful Stroke
+1 Dive Down|XLN
+1 Fight with Fire
+2 Niv-Mizzet, Parun
+2 Chemister's Insight
+3 Fiery Cannonade|XLN

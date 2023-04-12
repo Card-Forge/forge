@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Fog by Matthew Garnham (Australia - C)
+Title=The Color Black
+Difficulty=very hard
+Description=Fog by Matthew Garnham (Australia - C)
+Icon=The Color Black.jpg
+Deck Type=constructed
+
+[main]
+4 Teferi, Hero of Dominaria
+2 Karn, Scion of Urza
+4 Chart a Course|XLN
+1 Cleansing Nova
+4 Root Snare
+4 Nexus of Fate
+1 Settle the Wreckage|XLN
+2 Pause for Reflection
+2 Uncomfortable Chill
+2 Chemister's Insight
+2 Discovery // Dispersal
+4 Gift of Paradise
+3 Search for Azcanta|XLN
+1 Arch of Orazca
+4 Glacial Fortress|XLN
+4 Hinterland Harbor
+3 Sunpetal Grove|XLN
+4 Temple Garden
+5 Island
+3 Forest
+1 Plains
+
+[sideboard]
+2 Uncomfortable Chill
+3 Spell Pierce|XLN
+2 Negate
+4 Knight of Autumn
+2 Emmara, Soul of the Accord
+1 Vine Mare
+1 Ixalan's Binding|XLN

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Jeskai Mutate by Kenta Harane
+Title=Angus Mackenzie
+Difficulty=very hard
+Description=Jeskai Mutate by Kenta Harane
+Icon=Angus Mackenzie.jpg
+Deck Type=constructed
+
+[main]
+1 Defiant Strike
+1 See the Truth
+2 Mystical Dispute
+2 Fire Prophecy
+2 Sejiri Shelter
+3 Spikefield Hazard
+3 Prismari Command
+4 Expressive Iteration
+4 Seize the Spoils
+4 Unsubstantiate
+4 Vadrok, Apex of Thunder
+4 Lore Drakkis
+4 Goldspan Dragon
+3 Island
+3 Mountain
+4 Riverglide Pathway
+4 Needleverge Pathway
+4 Raugrin Triome
+4 Hengegate Pathway
+
+[sideboard]
+2 Disdainful Stroke
+2 Redcap Melee
+2 Rip Apart
+2 Mazemind Tome
+2 Shark Typhoon
+1 Cinderclasm
+1 Negate
+3 Archon of Absolution

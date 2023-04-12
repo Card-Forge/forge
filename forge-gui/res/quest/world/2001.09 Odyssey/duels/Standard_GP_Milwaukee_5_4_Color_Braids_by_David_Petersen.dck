@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=4 Color Braids by David Petersen
+Title=Moon Shadow
+Difficulty=very hard
+Description=4 Color Braids by David Petersen
+Icon=Moon Shadow.jpg
+Deck Type=constructed
+
+[main]
+4 City of Brass|7E
+2 Forest|OD
+4 Karplusan Forest|7E
+4 Llanowar Wastes|AP
+2 Mossfire Valley|OD
+4 Shadowblood Ridge|OD
+4 Birds of Paradise|7E
+3 Blazing Specter|IN
+4 Braids, Cabal Minion|OD
+4 Flametongue Kavu|PS
+2 Grim Lavamancer|TO
+2 Kavu Titan|IN
+4 Llanowar Elves|7E
+4 Mesmeric Fiend|TO
+1 Mystic Enforcer|OD
+1 Spiritmonger|AP
+4 Call of the Herd|OD
+4 Firebolt|OD
+3 Violent Eruption|TO
+
+[sideboard]
+3 Compost|7E
+3 Pernicious Deed|AP
+3 Slay|PS
+3 Terminate|PS
+3 Thunderscape Battlemage|PS

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Cascade Crash by Nicolai Bilek
+Title=Abiku
+Difficulty=very hard
+Description=Cascade Crash by Nicolai Bilek
+Icon=Abiku.jpg
+Deck Type=constructed
+
+[main]
+4 Brazen Borrower
+4 Fury
+2 Seasoned Pyromancer
+4 Shardless Agent
+4 Dead // Gone|PLC
+4 Fire // Ice|AP
+4 Force of Negation
+2 Prismari Command
+4 Violent Outburst|ARB
+4 Crashing Footfalls
+1 Boseiju, Who Endures
+1 Breeding Pool
+2 Fiery Islet
+1 Forest
+2 Gemstone Caverns|TSP
+2 Island
+1 Ketria Triome
+4 Misty Rainforest|ZEN
+1 Otawara, Soaring City
+3 Scalding Tarn|ZEN
+1 Steam Vents
+1 Stomping Ground
+4 Wooded Foothills|KTK
+
+[sideboard]
+3 Blood Moon|9E
+4 Endurance
+4 Force of Vigor
+4 Mystical Dispute

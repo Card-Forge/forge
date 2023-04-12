@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Hammer Time by Suzuki Yuuta
+Title=Ares
+Difficulty=very hard
+Description=Hammer Time by Suzuki Yuuta
+Icon=Ares.jpg
+Deck Type=constructed
+
+[main]
+1 Thassa's Oracle
+1 Cathar Commando
+3 Memnite|SOM
+4 Puresight Merrow|SHM
+4 Puresteel Paladin|NPH
+4 Stoneforge Mystic|WWK
+4 Ornithopter|AER
+1 Shadowspear
+1 Swiftfoot Boots|M12
+2 Paradise Mantle|FD
+4 Aether Vial|DS
+4 Colossus Hammer
+2 Steelshaper's Gift|FD
+4 Sigarda's Aid|EMN
+4 Urza's Saga
+1 Cavern of Souls|AVR
+1 Hallowed Fountain
+2 Marsh Flats|ZEN
+2 Windswept Heath|KTK
+3 Flooded Strand|KTK
+4 Silent Clearing
+4 Plains
+
+[sideboard]
+1 Grand Abolisher|M12
+1 Pithing Needle
+1 Lurrus of the Dream-Den
+2 Seal of Cleansing|NE
+3 Sanctifier en-Vec
+3 Path to Exile|CFX
+4 Lavinia, Azorius Renegade

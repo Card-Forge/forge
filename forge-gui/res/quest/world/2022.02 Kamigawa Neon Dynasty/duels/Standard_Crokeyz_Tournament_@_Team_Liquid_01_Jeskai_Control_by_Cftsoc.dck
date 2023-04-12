@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Cftsoc
+Title=Hameln
+Difficulty=very hard
+Description=Jeskai Control by Cftsoc
+Icon=Hameln.jpg
+Deck Type=constructed
+
+[main]
+1 Disdainful Stroke
+1 Kazuul's Fury
+2 Jwari Disruption
+2 Valorous Stance
+2 Alchemist's Gambit
+2 Show of Confidence
+2 Silundi Vision
+3 Galvanic Iteration
+3 Spikefield Hazard
+3 Fading Hope
+3 Prismari Command
+3 Sejiri Shelter
+4 Unexpected Windfall
+4 Expressive Iteration
+4 Goldspan Dragon
+4 Lier, Disciple of the Drowned
+1 Island
+1 Hall of Storm Giants
+1 Mountain
+2 Hengegate Pathway
+4 Needleverge Pathway
+4 Riverglide Pathway
+4 Stormcarved Coast
+
+[sideboard]
+4 Behold the Multiverse
+3 Smoldering Egg
+2 Cinderclasm
+1 Test of Talents
+3 Disdainful Stroke
+1 Valorous Stance
+1 Fading Hope

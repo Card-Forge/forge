@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Alex Majlaton
+Title=Pebbles Flintstone
+Difficulty=very hard
+Description=Red Deck Wins by Alex Majlaton
+Icon=Pebbles Flintstone.jpg
+Deck Type=constructed
+
+[main]
+4 Fanatical Firebrand
+4 Ghitu Lavarunner
+4 Runaway Steam-Kin
+4 Viashino Pyromancer
+3 Goblin Chainwhirler
+4 Light Up the Stage
+4 Shock
+4 Lightning Strike
+4 Wizard's Lightning
+4 Experimental Frenzy
+13 Mountain
+4 Stomping Ground
+4 Rootbound Crag|XLN
+
+[sideboard]
+1 Goblin Chainwhirler
+4 Lava Coil
+4 Cindervines
+3 Collision // Colossus
+2 Treasure Map|XLN
+1 Dire Fleet Daredevil

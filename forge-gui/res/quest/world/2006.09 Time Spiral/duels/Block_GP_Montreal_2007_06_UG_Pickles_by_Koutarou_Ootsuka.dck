@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=UG Pickles by Koutarou Ootsuka
+Title=Elvish Magi
+Difficulty=very hard
+Description=UG Pickles by Koutarou Ootsuka
+Icon=Elvish Magi.jpg
+Deck Type=constructed
+
+[main]
+9 Forest|RTR
+9 Island|RTR
+4 Vesuvan Shapeshifter|TSP
+4 Terramorphic Expanse|C16
+4 Wall of Roots|TSP
+4 Riftwing Cloudskate|TSP
+4 Search for Tomorrow|TSP
+3 Aeon Chronicler|C16
+3 Foresee|M11
+3 Mystic Snake|C15
+3 Venser, Shaper Savant|FUT
+2 Riftsweeper|FUT
+2 Brine Elemental|C14
+2 Thelonite Hermit|C16
+2 Take Possession|FUT
+1 Edge of Autumn|FUT
+1 Pendelhaven|TSP
+
+[sideboard]
+1 Riftsweeper|FUT
+1 Brine Elemental|C14
+4 Dodecapod|TSP
+3 Serrated Arrows|TSP
+3 Delay|FUT
+2 Penumbra Spider|CMD
+1 Spell Burst|TSP

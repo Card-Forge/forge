@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=UW Yorion by Javier Dominguez
+Title=Bartel Runeaxe
+Difficulty=very hard
+Description=UW Yorion by Javier Dominguez
+Icon=Bartel Runeaxe.jpg
+Deck Type=constructed
+
+[main]
+1 Ondu Inversion
+1 Sublime Epiphany
+1 Sea Gate Restoration
+2 Mystical Dispute
+2 Glimpse of Freedom
+2 Glass Casket
+2 The Birth of Meletis
+3 Negate
+4 Shatter the Sky
+4 Mazemind Tome
+4 Omen of the Sea
+4 Elspeth Conquers Death
+4 Emeria's Call
+4 Essence Scatter
+2 Dream Trawler
+2 Glasspool Mimic
+3 Yorion, Sky Nomad
+4 Skyclave Apparition
+4 Solemn Simulacrum
+1 Crawling Barrens
+4 Temple of Enlightenment
+4 Fabled Passage
+9 Island
+9 Plains
+
+[sideboard]
+2 Giant Killer
+4 Shark Typhoon
+1 Soul-Guide Lantern
+2 Mystic Subdual
+1 Sublime Epiphany
+2 Mystical Dispute
+2 Glass Casket
+1 Yorion, Sky Nomad

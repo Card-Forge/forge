@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=5c Elemental Value by Eric Kraft
+Title=Aqueduct
+Difficulty=very hard
+Description=5c Elemental Value by Eric Kraft
+Icon=Aqueduct.jpg
+Deck Type=constructed
+
+[main]
+4 Thunderkin Awakener
+4 Risen Reef
+4 Flamekin Harbinger|LRW
+3 Voice of Resurgence|DGM
+2 Fury
+3 Omnath, Locus of Creation
+4 Solitude
+3 Fulminator Mage|SHM
+1 Omnath, Locus of the Roil
+1 Endurance
+4 Ephemerate
+3 Recommission
+1 Temple Garden
+3 Cavern of Souls|AVR
+3 Flooded Strand|KTK
+1 Stomping Ground
+1 Hallowed Fountain
+1 Sacred Foundry
+1 Snow-Covered Plains
+1 Steam Vents
+1 Snow-Covered Island
+1 Breeding Pool
+1 Ketria Triome
+3 Windswept Heath|KTK
+1 Raugrin Triome
+1 Tangled Florahedron
+2 Misty Rainforest|ZEN
+1 Indatha Triome
+1 Snow-Covered Forest
+
+[sideboard]
+2 Endurance
+1 Kaheera, the Orphanguard
+3 Chalice of the Void|MR
+2 Foundation Breaker
+1 Engineered Explosives|FD
+3 Prismatic Ending
+3 Test of Talents

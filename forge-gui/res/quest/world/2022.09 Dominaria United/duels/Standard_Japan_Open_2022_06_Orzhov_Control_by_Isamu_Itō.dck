@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Orzhov Control by Isamu Itō
+Title=Rhonas the Indomitable
+Difficulty=very hard
+Description=Orzhov Control by Isamu Itō
+Icon=Rhonas the Indomitable.jpg
+Deck Type=constructed
+
+[main]
+1 Fateful Absence
+1 Hero's Downfall
+1 The Wandering Emperor
+2 The Restoration of Eiganjo
+2 Cut Down
+3 The Meathook Massacre
+3 Infernal Grasp
+3 Reckoner Bankbuster
+4 Invoke Despair
+1 Ao, the Dawn Sky
+2 Edgar, Charmed Groom
+4 Graveyard Trespasser
+4 Tenacious Underdog
+4 Anointed Peacekeeper
+1 Takenuma, Abandoned Mire
+2 Plains
+4 Caves of Koilos
+4 Shipwreck Marsh
+4 Raffine's Tower
+4 Shattered Sanctum
+6 Swamp
+
+[sideboard]
+4 Disdainful Stroke
+2 Farewell
+2 Liliana of the Veil
+2 Unlicensed Hearse
+1 Sorin the Mirthless
+1 The Wandering Emperor
+1 The Meathook Massacre
+1 Reckoner Bankbuster
+1 Ao, the Dawn Sky

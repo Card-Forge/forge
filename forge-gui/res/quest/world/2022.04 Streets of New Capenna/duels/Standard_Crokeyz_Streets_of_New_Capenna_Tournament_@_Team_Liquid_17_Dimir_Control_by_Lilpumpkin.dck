@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Dimir Control by Lilpumpkin
+Title=Fred Flintstone
+Difficulty=very hard
+Description=Dimir Control by Lilpumpkin
+Icon=Fred Flintstone.jpg
+Deck Type=constructed
+
+[main]
+2 Hagra Mauling
+2 Infernal Grasp
+2 Sorin the Mirthless
+3 The Celestus
+3 March of Wretched Sorrow
+3 Shadows' Verdict
+4 Tainted Indulgence
+4 Jwari Disruption
+4 Fading Hope
+4 Invoke Despair
+4 Dread Fugue
+3 Lier, Disciple of the Drowned
+1 Takenuma, Abandoned Mire
+1 Otawara, Soaring City
+1 Island
+2 Hall of Storm Giants
+2 Hive of the Eye Tyrant
+4 Clearwater Pathway
+4 Shipwreck Marsh
+7 Swamp
+
+[sideboard]
+4 Duress
+2 Disdainful Stroke
+2 The Meathook Massacre
+2 Out of the Way
+2 Soul Shatter
+1 Go Blank
+1 Kotose, the Silent Spider
+1 Hullbreaker Horror

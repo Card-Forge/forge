@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Mono White Control  by Branden Tanner
+Title=Hazduhr the Abbot
+Difficulty=very hard
+Description=Mono White Control  by Branden Tanner
+Icon=Hazduhr the Abbot.jpg
+Deck Type=constructed
+
+[main]
+2 Cathar Commando
+2 Loran of the Third Path
+2 Sanctuary Warden
+2 Serra Paragon
+2 Spirited Companion
+3 The Restoration of Eiganjo
+4 Reckoner Bankbuster
+2 Destroy Evil
+2 Farewell
+4 Lay Down Arms
+4 Wedding Announcement
+1 Elspeth Resplendent
+2 The Eternal Wanderer
+4 The Wandering Emperor
+4 Demolition Field
+1 Eiganjo, Seat of the Empire
+4 Field of Ruin
+13 Plains
+2 Roadside Reliquary
+
+[sideboard]
+1 Loran of the Third Path
+1 Elspeth Resplendent
+2 Depopulate
+2 Fateful Absence
+2 Ossification
+3 Sunset Revelry
+2 Unlicensed Hearse
+2 Temporary Lockdown

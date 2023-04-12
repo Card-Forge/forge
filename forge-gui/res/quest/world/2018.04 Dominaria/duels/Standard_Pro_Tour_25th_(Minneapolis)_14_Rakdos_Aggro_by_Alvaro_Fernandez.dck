@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Alvaro Fernandez
+Title=Bilbo Baggins
+Difficulty=very hard
+Description=Rakdos Aggro by Alvaro Fernandez
+Icon=Bilbo Baggins.jpg
+Deck Type=constructed
+
+[main]
+3 Chandra, Torch of Defiance|KLD
+4 Bomat Courier|KLD
+2 Soul-Scar Mage|AKH
+2 Kari Zev, Skyship Raider|AER
+4 Scrapheap Scrounger|KLD
+2 Pia Nalaar|KLD
+4 Goblin Chainwhirler
+2 Hazoret the Fervent|AKH
+1 Rekindling Phoenix
+2 Glorybringer|AKH
+2 Cut // Ribbons|AKH
+2 Abrade|HOU
+3 Unlicensed Disintegration|KLD
+2 Heart of Kiran|AER
+15 Mountain
+2 Aether Hub|KLD
+4 Dragonskull Summit|XLN
+4 Canyon Slough|AKH
+
+[sideboard]
+3 Rekindling Phoenix
+1 Glorybringer|AKH
+1 Cut // Ribbons|AKH
+1 Abrade|HOU
+2 Magma Spray|AKH
+2 Chandra's Defeat|HOU
+3 Duress
+1 Doomfall|HOU
+1 Hour of Glory|HOU

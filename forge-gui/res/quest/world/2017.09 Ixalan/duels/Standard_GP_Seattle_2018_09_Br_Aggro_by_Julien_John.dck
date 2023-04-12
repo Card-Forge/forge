@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Br Aggro by Julien John
+Title=James T Kirk
+Difficulty=very hard
+Description=Br Aggro by Julien John
+Icon=James T Kirk.jpg
+Deck Type=constructed
+
+[main]
+1 Heart of Kiran|AER
+1 Magma Spray|AKH
+2 Chandra, Torch of Defiance|KLD
+2 Aethersphere Harvester|AER
+2 Unlicensed Disintegration|KLD
+3 Abrade|HOU
+2 Pia Nalaar|KLD
+3 Walking Ballista|AER
+4 Bomat Courier|KLD
+4 Earthshaker Khenra|HOU
+4 Hazoret the Fervent|AKH
+4 Inventor's Apprentice|KLD
+4 Scrapheap Scrounger|KLD
+2 Aether Hub|KLD
+2 Canyon Slough|AKH
+2 Swamp
+4 Dragonskull Summit|XLN
+4 Spire of Industry|AER
+10 Mountain
+
+[sideboard]
+1 Glorybringer|AKH
+1 Scavenger Grounds|HOU
+1 Dire Fleet Daredevil
+3 Doomfall|HOU
+2 Hour of Glory|HOU
+2 Sweltering Suns|AKH
+2 Rekindling Phoenix
+1 Magma Spray|AKH
+1 Chandra, Torch of Defiance|KLD
+1 Abrade|HOU

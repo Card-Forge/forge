@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Liam Kane
+Title=Vanellope von Schweetz
+Difficulty=very hard
+Description=Rakdos Aggro by Liam Kane
+Icon=Vanellope von Schweetz.jpg
+Deck Type=constructed
+
+[main]
+2 Gix, Yawgmoth Praetor
+3 Sheoldred, the Apocalypse
+4 Voltaic Visionary
+4 Bloodtithe Harvester
+4 Graveyard Trespasser
+4 Fable of the Mirror-Breaker
+4 Reckoner Bankbuster
+2 Abrade
+2 Cut Down
+3 Go for the Throat
+4 Duress
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+3 Mountain
+4 Blackcleave Cliffs
+4 Sulfurous Springs
+4 Haunted Ridge
+7 Swamp
+
+[sideboard]
+1 Cut Down
+1 Parasitic Grasp
+1 Brotherhood's End
+2 Sheoldred's Edict
+2 Pilfer
+2 Liliana of the Veil
+2 Gix's Command
+4 Razorlash Transmogrant

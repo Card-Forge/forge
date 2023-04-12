@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Orzhov Control by Raymond Perez Jr.
+Title=Shaitan
+Difficulty=very hard
+Description=Orzhov Control by Raymond Perez Jr.
+Icon=Shaitan.jpg
+Deck Type=constructed
+
+[main]
+1 Ultimate Price|DTK
+1 Ruinous Path|BFZ
+1 Ob Nixilis Reignited|BFZ
+2 Sorin, Solemn Visitor|KTK
+2 Painful Truths|BFZ
+2 Utter End|KTK
+3 Secure the Wastes|DTK
+3 Murderous Cut|KTK
+4 Gideon, Ally of Zendikar|BFZ
+4 Silkwrap|DTK
+3 Wingmate Roc|KTK
+4 Knight of the White Orchid|ORI
+4 Hangarback Walker|ORI
+1 Scoured Barrens|FRF
+1 Sunken Hollow|BFZ
+2 Prairie Stream|BFZ
+3 Swamp|BFZ
+3 Caves of Koilos|ORI
+4 Shambling Vent|BFZ
+4 Flooded Strand|KTK
+4 Polluted Delta|KTK
+4 Plains|BFZ
+
+[sideboard]
+2 Disdainful Stroke|KTK
+1 End Hostilities|KTK
+2 Dispel|BFZ
+3 Duress|DTK
+1 Languish|ORI
+1 Negate|ORI
+3 Surge of Righteousness|DTK
+1 Dragonlord Silumgar|DTK
+1 Ultimate Price|DTK

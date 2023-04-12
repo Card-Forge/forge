@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Esper Control by Andrew Cuneo
+Title=Goblin Lord
+Difficulty=very hard
+Description=Esper Control by Andrew Cuneo
+Icon=Goblin Lord.jpg
+Deck Type=constructed
+
+[main]
+1 Utter End|KTK
+1 Silumgar's Command|DTK
+1 Murderous Cut|KTK
+1 Duress|DTK
+1 Scatter to the Winds|BFZ
+2 Anticipate|BFZ
+2 Clash of Wills|ORI
+2 Narset Transcendent|DTK
+2 Negate|ORI
+2 Planar Outburst|BFZ
+2 Quarantine Field|BFZ
+2 Ob Nixilis Reignited|BFZ
+3 Ojutai's Command|DTK
+4 Dig Through Time|KTK
+4 Stasis Snare|BFZ
+4 Silkwrap|DTK
+1 Windswept Heath|KTK
+1 Bloodstained Mire|KTK
+1 Blighted Fen|BFZ
+2 Island|BFZ
+2 Sunken Hollow|BFZ
+2 Swamp|BFZ
+2 Plains|BFZ
+3 Prairie Stream|BFZ
+4 Polluted Delta|KTK
+4 Shambling Vent|BFZ
+4 Flooded Strand|KTK
+
+[sideboard]
+2 Dispel|BFZ
+1 Languish|ORI
+2 Surge of Righteousness|DTK
+2 Infinite Obliteration|ORI
+1 Felidar Sovereign|BFZ
+1 Virulent Plague|DTK
+4 Arashin Cleric|FRF
+1 Pearl Lake Ancient|KTK
+1 Negate|ORI

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Temur Ultimatum by Chris Palmiotti
+Title=Asanbosam
+Difficulty=very hard
+Description=Temur Ultimatum by Chris Palmiotti
+Icon=Asanbosam.jpg
+Deck Type=constructed
+
+[main]
+4 Genesis Ultimatum
+1 Kazuul's Fury
+4 Beanstalk Giant
+4 Ketria Triome
+2 Cultivate
+2 Riverglide Pathway
+4 Bonecrusher Giant
+4 Kazandu Mammoth
+4 Lovestruck Beast
+4 Edgewall Innkeeper
+2 The Great Henge
+3 Forest
+4 Fabled Passage
+4 Island
+4 Cragcrown Pathway
+4 Terror of the Peaks
+2 Mountain
+4 Brazen Borrower
+
+[sideboard]
+2 Thrashing Brontodon
+2 Stern Dismissal
+1 Vivien, Monsters' Advocate
+1 Ox of Agonas
+2 Klothys, God of Destiny
+2 Chainweb Aracnir
+4 Mystical Dispute
+1 Obosh, the Preypiercer

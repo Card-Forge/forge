@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Esper Control by Patrick Chapin
+Title=Iroh
+Difficulty=very hard
+Description=Esper Control by Patrick Chapin
+Icon=Iroh.jpg
+Deck Type=constructed
+
+[main]
+1 Languish|ORI
+1 Horribly Awry|BFZ
+1 Surge of Righteousness|DTK
+1 Hallowed Moonlight|ORI
+1 Murderous Cut|KTK
+1 Scatter to the Winds|BFZ
+1 Silumgar's Command|DTK
+2 Negate|ORI
+2 Anticipate|BFZ
+2 Utter End|KTK
+2 Ultimate Price|DTK
+2 Planar Outburst|BFZ
+2 Ugin, the Spirit Dragon|FRF
+2 Clash of Wills|ORI
+3 Ojutai's Command|DTK
+4 Dig Through Time|KTK
+1 Dragonlord Silumgar|DTK
+4 Jace, Vryn's Prodigy|ORI
+1 Plains|BFZ
+1 Swamp|BFZ
+1 Bloodstained Mire|KTK
+1 Windswept Heath|KTK
+1 Haven of the Spirit Dragon|DTK
+2 Mage-Ring Network|ORI
+3 Sunken Hollow|BFZ
+3 Prairie Stream|BFZ
+3 Shambling Vent|BFZ
+3 Island|BFZ
+4 Polluted Delta|KTK
+4 Flooded Strand|KTK
+
+[sideboard]
+3 Duress|DTK
+2 Arashin Cleric|FRF
+2 Monastery Mentor|FRF
+2 Dispel|BFZ
+1 Dragonlord Ojutai|DTK
+1 Tasigur, the Golden Fang|FRF
+1 Painful Truths|BFZ
+1 Infinite Obliteration|ORI
+1 Surge of Righteousness|DTK
+1 Dragonlord Silumgar|DTK

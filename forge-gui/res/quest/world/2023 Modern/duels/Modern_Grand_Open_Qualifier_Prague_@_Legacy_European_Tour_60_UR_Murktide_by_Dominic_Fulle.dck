@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=UR Murktide by Dominic Fulle
+Title=Cable
+Difficulty=very hard
+Description=UR Murktide by Dominic Fulle
+Icon=Cable.jpg
+Deck Type=constructed
+
+[main]
+4 Dragon's Rage Channeler
+3 Ledger Shredder
+3 Murktide Regent
+4 Ragavan, Nimble Pilferer
+4 Mishra's Bauble|CS
+4 Consider
+4 Counterspell|7E
+4 Lightning Bolt|M11
+2 Spell Pierce
+1 Spell Snare|DIS
+3 Unholy Heat
+4 Expressive Iteration
+1 Dress Down
+1 Fiery Islet
+2 Flooded Strand|KTK
+2 Misty Rainforest|ZEN
+1 Otawara, Soaring City
+2 Polluted Delta|KTK
+1 Scalding Tarn|ZEN
+3 Snow-Covered Island
+4 Spirebluff Canal|KLD
+3 Steam Vents
+
+[sideboard]
+1 Dress Down
+1 Abrade
+2 Blood Moon|9E
+3 Engineered Explosives|FD
+2 Flusterstorm
+1 Fury
+1 Mystical Dispute
+1 Relic of Progenitus|ALA
+1 Seasoned Pyromancer
+1 Subtlety
+1 Unlicensed Hearse

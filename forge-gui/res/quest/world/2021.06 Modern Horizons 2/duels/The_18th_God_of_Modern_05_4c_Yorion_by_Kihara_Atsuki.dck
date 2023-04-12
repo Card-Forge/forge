@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=4c Yorion by Kihara Atsuki
+Title=Erebos
+Difficulty=very hard
+Description=4c Yorion by Kihara Atsuki
+Icon=Erebos.jpg
+Deck Type=constructed
+
+[main]
+2 Teferi, Hero of Dominaria
+3 Lightning Bolt|M11
+4 Ephemerate
+4 Eladamri's Call|PS
+4 Expressive Iteration
+4 Prismatic Ending
+4 Teferi, Time Raveler
+4 Wrenn and Six
+1 Endurance
+4 Omnath, Locus of Creation
+4 Fury
+4 Renegade Rallier|AER
+4 Solitude
+4 Ragavan, Nimble Pilferer
+1 Mountain
+1 Temple Garden
+1 Steam Vents
+1 Sacred Foundry
+1 Breeding Pool
+1 Hallowed Fountain
+1 Raugrin Triome
+1 Ketria Triome
+1 Island
+1 Stomping Ground
+2 Flooded Strand|KTK
+2 Forest
+2 Misty Rainforest|ZEN
+2 Plains
+4 Wooded Foothills|KTK
+4 Windswept Heath|KTK
+4 Arid Mesa|ZEN
+
+[sideboard]
+4 Aether Gust
+3 Veil of Summer
+2 Force of Negation
+2 Engineered Explosives|FD
+1 Meddling Mage|ARB
+1 Knight of Autumn
+1 Yorion, Sky Nomad
+1 Collector Ouphe

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Gruul Deck Wins by Martin Dang
+Title=Peregrin Took
+Difficulty=very hard
+Description=Gruul Deck Wins by Martin Dang
+Icon=Peregrin Took.jpg
+Deck Type=constructed
+
+[main]
+1 Become Immense|KTK
+4 Dragon Fodder|DTK
+4 Hordeling Outburst|KTK
+4 Atarka's Command|DTK
+4 Lightning Strike|M15
+4 Stoke the Flames|M15
+4 Wild Slash|FRF
+1 Lightning Berserker|DTK
+1 Frenzied Goblin|M15
+2 Goblin Rabblemaster|M15
+3 Zurgo Bellstriker|DTK
+4 Monastery Swiftspear|KTK
+4 Foundry Street Denizen|M15
+1 Forest|DTK
+1 Temple of Abandon|THS
+4 Wooded Foothills|KTK
+4 Mana Confluence|JOU
+10 Mountain|DTK
+
+[sideboard]
+1 Scouring Sands|BNG
+2 Hall of Triumph|JOU
+1 Destructive Revelry|THS
+1 Goblin Heelcutter|FRF
+4 Roast|DTK
+4 Eidolon of the Great Revel|JOU
+2 Goblin Rabblemaster|M15

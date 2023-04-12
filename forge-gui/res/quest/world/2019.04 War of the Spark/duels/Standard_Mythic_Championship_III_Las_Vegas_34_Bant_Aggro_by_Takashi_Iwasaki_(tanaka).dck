@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Bant Aggro by Takashi Iwasaki (tanaka)
+Title=Room-Wht
+Difficulty=very hard
+Description=Bant Aggro by Takashi Iwasaki (tanaka)
+Icon=Room-Wht.jpg
+Deck Type=constructed
+
+[main]
+2 Negate
+2 Ixalan's Binding|XLN
+2 Prison Realm
+3 Teferi, Time Raveler
+3 Nissa, Who Shakes the World
+3 Vivien, Champion of the Wilds
+1 Shalai, Voice of Plenty
+1 Trostani Discordant
+2 Frilled Mystic
+2 Deputy of Detention
+3 Jadelight Ranger
+4 Merfolk Branchwalker|XLN
+4 Llanowar Elves
+4 Hydroid Krasis
+2 Glacial Fortress|XLN
+3 Sunpetal Grove|XLN
+3 Forest
+4 Breeding Pool
+4 Hallowed Fountain
+4 Hinterland Harbor
+4 Temple Garden
+
+[sideboard]
+1 Settle the Wreckage|XLN
+2 Lyra Dawnbringer
+1 God-Eternal Oketra
+1 Disdainful Stroke
+3 Baffling End
+2 Time Wipe
+2 Negate
+1 Ixalan's Binding|XLN
+1 Trostani Discordant
+1 Frilled Mystic

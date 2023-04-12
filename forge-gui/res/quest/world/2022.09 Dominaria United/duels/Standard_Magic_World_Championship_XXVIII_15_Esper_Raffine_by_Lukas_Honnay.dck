@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Esper Raffine by Lukas Honnay
+Title=Bridge Troll
+Difficulty=very hard
+Description=Esper Raffine by Lukas Honnay
+Icon=Bridge Troll.jpg
+Deck Type=constructed
+
+[main]
+1 Phyrexian Missionary
+1 Raff, Weatherlight Stalwart
+1 Ertai Resurrected
+2 Ao, the Dawn Sky
+3 Dennick, Pious Apprentice
+4 Raffine, Scheming Seer
+4 Tenacious Underdog
+4 Sheoldred, the Apocalypse
+1 Void Rend
+1 Shore Up
+2 Infernal Grasp
+2 Destroy Evil
+4 Wedding Announcement
+1 The Wandering Emperor
+2 Kaito Shizuki
+1 Island
+1 Eiganjo, Seat of the Empire
+1 Plains
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+2 Deserted Beach
+2 Plaza of Heroes
+3 Caves of Koilos
+3 Adarkar Wastes
+4 Raffine's Tower
+4 Shattered Sanctum
+4 Shipwreck Marsh
+
+[sideboard]
+1 Destroy Evil
+1 The Wandering Emperor
+1 Farewell
+1 Spell Pierce
+1 Obscura Interceptor
+1 Elspeth Resplendent
+1 Make Disappear
+2 Reckoner Bankbuster
+2 Cut Down
+2 Disdainful Stroke
+2 Negate

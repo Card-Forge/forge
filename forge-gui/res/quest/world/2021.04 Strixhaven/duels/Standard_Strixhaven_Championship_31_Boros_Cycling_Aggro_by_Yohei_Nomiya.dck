@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Boros Cycling Aggro by Yohei Nomiya
+Title=alasha
+Difficulty=very hard
+Description=Boros Cycling Aggro by Yohei Nomiya
+Icon=alasha.jpg
+Deck Type=constructed
+
+[main]
+4 Valiant Rescuer
+4 Flourishing Fox
+4 Irencrag Pyromancer
+4 Drannith Stinger
+2 Disdainful Stroke
+4 Startling Development
+4 Zenith Flare
+3 Go for Blood
+4 Boon of the Wish-Giver
+4 Memory Leak
+4 Improbable Alliance
+1 Brightclimb Pathway
+1 Clearwater Pathway
+1 Blightstep Pathway
+4 Riverglide Pathway
+4 Hengegate Pathway
+4 Raugrin Triome
+4 Needleverge Pathway
+
+[sideboard]
+1 Disdainful Stroke
+1 Mystical Dispute
+1 Soul-Guide Lantern
+1 Rip Apart
+2 Negate
+2 Glass Casket
+2 Prismari Command
+2 Rielle, the Everwise
+3 Redcap Melee

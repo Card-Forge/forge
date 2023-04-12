@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Akshat Chugh
+Title=Wilhelm Grimm
+Difficulty=very hard
+Description=Esper Aggro by Akshat Chugh
+Icon=Wilhelm Grimm.jpg
+Deck Type=constructed
+
+[main]
+1 Legion Angel
+2 Faerie Vandal
+3 Tenacious Underdog
+3 Skyclave Apparition
+4 Raffine, Scheming Seer
+4 Luminarch Aspirant
+4 Vanishing Verse
+4 Wedding Announcement
+1 Lolth, Spider Queen
+1 Sorin the Mirthless
+2 Elspeth Resplendent
+3 Kaito Shizuki
+3 The Wandering Emperor
+1 Shipwreck Marsh
+1 Hive of the Eye Tyrant
+1 Swamp
+1 Cave of the Frost Dragon
+2 Deserted Beach
+3 Shattered Sanctum
+4 Raffine's Tower
+4 Hengegate Pathway
+4 Clearwater Pathway
+4 Brightclimb Pathway
+
+[sideboard]
+3 Legion Angel
+1 Ray of Enfeeblement
+2 Portable Hole
+2 Archon of Emeria
+2 Duress
+2 The Meathook Massacre
+3 Malevolent Hermit

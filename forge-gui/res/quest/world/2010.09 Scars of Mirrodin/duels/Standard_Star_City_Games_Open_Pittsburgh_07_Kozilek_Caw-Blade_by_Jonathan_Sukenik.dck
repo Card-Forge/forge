@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Kozilek Caw-Blade by Jonathan Sukenik
+Title=Starfire
+Difficulty=very hard
+Description=Kozilek Caw-Blade by Jonathan Sukenik
+Icon=Starfire.jpg
+Deck Type=constructed
+
+[main]
+1 Phyrexian Metamorph|NPH
+1 Abyssal Persecutor|WWK
+1 Consecrated Sphinx|MBS
+3 Emeria Angel|ZEN
+4 Squadron Hawk|M11
+2 Go for the Throat|MBS
+2 Into the Roil|ZEN
+2 Mana Leak|M12
+2 Despise|NPH
+1 Duress|M11
+3 Inquisition of Kozilek|ROE
+4 Preordain|M11
+1 Sword of War and Peace|NPH
+2 Gravitational Shift|ROE
+2 Oblivion Ring|M12
+3 Plains|M12
+3 Swamp|M12
+4 Celestial Colonnade|WWK
+4 Creeping Tar Pit|WWK
+4 Darkslick Shores|SOM
+3 Glacial Fortress|M12
+4 Marsh Flats|ZEN
+1 Seachrome Coast|SOM
+2 Gideon Jura|M12
+1 Jace Beleren|M11
+
+[sideboard]
+1 Duress|M11
+1 Jace Beleren|M11
+3 Celestial Purge|M12
+3 Disfigure|ZEN
+3 Flashfreeze|M12
+1 Day of Judgment|M12
+1 Revoke Existence|SOM
+1 Ratchet Bomb|SOM
+1 Sword of Feast and Famine|MBS

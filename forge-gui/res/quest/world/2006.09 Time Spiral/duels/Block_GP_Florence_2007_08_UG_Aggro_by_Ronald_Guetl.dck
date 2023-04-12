@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=UG Aggro by Ronald Guetl
+Title=James Bond
+Difficulty=very hard
+Description=UG Aggro by Ronald Guetl
+Icon=James Bond.jpg
+Deck Type=constructed
+
+[main]
+10 Island|RTR
+4 Call of the Herd|TSP
+4 Vesuvan Shapeshifter|TSP
+4 Looter il-Kor|TSP
+4 Forest|RTR
+4 Terramorphic Expanse|C16
+4 Llanowar Reborn|C15
+4 Riftwing Cloudskate|TSP
+4 Delay|FUT
+4 Psionic Blast|TSP
+4 Tarmogoyf|FUT
+3 Riftsweeper|FUT
+2 Mystic Snake|C15
+2 Venser, Shaper Savant|FUT
+2 Snapback|TSP
+1 Pendelhaven|TSP
+
+[sideboard]
+1 Mystic Snake|C15
+1 Venser, Shaper Savant|FUT
+4 Serrated Arrows|TSP
+3 Thornweald Archer|C14
+3 Stonewood Invocation|TSP
+3 Cancel

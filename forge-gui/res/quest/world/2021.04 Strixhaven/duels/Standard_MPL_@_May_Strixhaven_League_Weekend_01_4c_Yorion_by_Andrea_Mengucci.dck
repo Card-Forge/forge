@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=4c Yorion by Andrea Mengucci
+Title=Demeter
+Difficulty=very hard
+Description=4c Yorion by Andrea Mengucci
+Icon=Demeter.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+2 Golden Egg
+2 Test of Talents
+2 Eliminate
+2 Vanishing Verse
+2 Emeria's Call
+2 Treacherous Blessing
+3 Elspeth's Nightmare
+4 Extinction Event
+4 Omen of the Sea
+4 Binding the Old Gods
+4 Doom Foretold
+4 Omen of the Sun
+4 Heartless Act
+1 Polukranos, Unchained
+2 Archon of Sun's Grace
+3 Yorion, Sky Nomad
+1 Forest
+1 Darkbore Pathway
+2 Swamp
+2 Barkchannel Pathway
+2 Island
+2 Plains
+4 Brightclimb Pathway
+4 Clearwater Pathway
+4 Hengegate Pathway
+4 Fabled Passage
+4 Zagoth Triome
+4 Indatha Triome
+
+[sideboard]
+2 Duress
+2 Mystical Dispute
+2 Cling to Dust
+2 Disdainful Stroke
+1 Negate
+1 Eliminate
+1 Vanishing Verse
+1 Treacherous Blessing
+1 Elspeth's Nightmare
+1 Archon of Sun's Grace
+1 Yorion, Sky Nomad

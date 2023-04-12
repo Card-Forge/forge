@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Boros Cycling Aggro by Andrew Jessup
+Title=Emperor Palpatine
+Difficulty=very hard
+Description=Boros Cycling Aggro by Andrew Jessup
+Icon=Emperor Palpatine.jpg
+Deck Type=constructed
+
+[main]
+1 Rielle, the Everwise
+4 Flourishing Fox
+4 Irencrag Pyromancer
+4 Valiant Rescuer
+4 Drannith Stinger
+4 Zenith Flare
+4 Startling Development
+4 Go for Blood
+4 Memory Leak
+4 Boon of the Wish-Giver
+4 Improbable Alliance
+1 Clearwater Pathway
+1 Blightstep Pathway
+1 Brightclimb Pathway
+4 Riverglide Pathway
+4 Raugrin Triome
+4 Needleverge Pathway
+4 Hengegate Pathway
+
+[sideboard]
+1 Lurrus of the Dream-Den
+1 Test of Talents
+2 Negate
+2 Mystical Dispute
+2 Redcap Melee
+3 Disdainful Stroke
+4 Glass Casket

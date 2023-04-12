@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Valakut Ramp by Miguel Rondon
+Title=Eggs and Honey
+Difficulty=very hard
+Description=Valakut Ramp by Miguel Rondon
+Icon=Eggs and Honey.jpg
+Deck Type=constructed
+
+[main]
+2 Avenger of Zendikar|WWK
+2 Inferno Titan|M11
+4 Overgrown Battlement|ROE
+4 Primeval Titan|M11
+4 Nature's Claim|WWK
+4 Summoning Trap|ZEN
+4 Cultivate|M11
+4 Explore|WWK
+4 Growth Spasm|ROE
+5 Forest|NPH
+11 Mountain|NPH
+2 Evolving Wilds|ROE
+2 Raging Ravine|WWK
+4 Terramorphic Expanse|M11
+4 Valakut, the Molten Pinnacle|ZEN
+
+[sideboard]
+3 Obstinate Baloth|M11
+1 Terastodon|WWK
+2 Combust|M11
+3 Ricochet Trap|WWK
+1 Green Sun's Zenith|MBS
+3 Pyroclasm|M11
+2 Slagstorm|MBS

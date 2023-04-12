@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Naya by Florian Pils
+Title=Linc
+Difficulty=very hard
+Description=Naya by Florian Pils
+Icon=Linc.jpg
+Deck Type=constructed
+
+[main]
+4 Evolving Wilds
+11 Forest|RTR
+2 Kessig Wolf Run|ISD
+7 Mountain|RTR
+4 Avacyn's Pilgrim|ISD
+2 Borderland Ranger|AVR
+4 Huntmaster of the Fells|DKA
+2 Scorned Villager|DKA
+3 Wolfir Avenger|AVR
+4 Wolfir Silverheart|AVR
+4 Bonfire of the Damned|AVR
+4 Brimstone Volley|CNS
+4 Garruk Relentless|ISD
+1 Geistflame|ISD
+4 Pillar of Flame|AVR
+
+[sideboard]
+1 Geistflame|ISD
+1 Devil's Play|ISD
+1 Heretic's Punishment|ISD
+1 Increasing Savagery|DKA
+2 Naturalize
+2 Ranger's Guile|M15
+2 Tree of Redemption|ISD
+3 Wrack with Madness|DKA
+2 Zealous Conscripts|AVR

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Jund by Pedro Martinho
+Title=Rough Weather
+Difficulty=very hard
+Description=Jund by Pedro Martinho
+Icon=Rough Weather.jpg
+Deck Type=constructed
+
+[main]
+4 Evolving Wilds
+10 Forest|RTR
+2 Kessig Wolf Run|ISD
+4 Mountain|RTR
+1 Shimmering Grotto|CN2
+1 Swamp|RTR
+4 Woodland Cemetery
+4 Borderland Ranger|AVR
+4 Huntmaster of the Fells|DKA
+1 Olivia Voldaren|ISD
+3 Predator Ooze|DKA
+3 Strangleroot Geist|DKA
+3 Vorapede|DKA
+2 Blasphemous Act|C16
+3 Bonfire of the Damned|AVR
+1 Dead Weight
+3 Devil's Play|ISD
+3 Garruk Relentless|ISD
+4 Sever the Bloodline|C15
+
+[sideboard]
+1 Olivia Voldaren|ISD
+1 Predator Ooze|DKA
+1 Blasphemous Act|C16
+1 Ancient Grudge|ISD
+2 Bramblecrush|M14
+2 Grafdigger's Cage|DKA
+1 Heretic's Punishment|ISD
+2 Naturalize
+4 Pillar of Flame|AVR

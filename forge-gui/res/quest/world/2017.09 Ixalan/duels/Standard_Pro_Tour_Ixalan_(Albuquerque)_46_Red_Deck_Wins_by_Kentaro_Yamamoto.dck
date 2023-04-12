@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Kentaro Yamamoto
+Title=Princess Celestia
+Difficulty=very hard
+Description=Red Deck Wins by Kentaro Yamamoto
+Icon=Princess Celestia.jpg
+Deck Type=constructed
+
+[main]
+2 Chandra, Torch of Defiance|KLD
+4 Ahn-Crop Crasher|AKH
+4 Bomat Courier|KLD
+4 Earthshaker Khenra|HOU
+4 Hazoret the Fervent|AKH
+2 Harsh Mentor|AKH
+4 Soul-Scar Mage|AKH
+2 Kari Zev, Skyship Raider|AER
+4 Lightning Strike|XLN
+2 Abrade|HOU
+4 Shock|AER
+4 Ramunap Ruins|HOU
+1 Scavenger Grounds|HOU
+4 Sunscorched Desert|AKH
+15 Mountain|XLN
+
+[sideboard]
+2 Chandra, Torch of Defiance|KLD
+2 Harsh Mentor|AKH
+1 Abrade|HOU
+2 Aethersphere Harvester|AER
+2 Glorybringer|AKH
+2 Pia Nalaar|KLD
+4 Rampaging Ferocidon|XLN

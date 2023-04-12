@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Esper Control by Ernest Lim Pei Jin
+Title=The Spectre
+Difficulty=very hard
+Description=Esper Control by Ernest Lim Pei Jin
+Icon=The Spectre.jpg
+Deck Type=constructed
+
+[main]
+2 Teferi, Hero of Dominaria
+4 Drowned Catacomb|XLN
+4 Fetid Pools|AKH
+1 Isolated Chapel
+1 Glacial Fortress|XLN
+1 Field of Ruin|XLN
+4 Aether Hub|KLD
+2 Evolving Wilds
+1 Plains
+4 Swamp
+4 Island
+1 Arguel's Blood Fast|XLN
+4 Vraska's Contempt|XLN
+4 Glimmer of Genius|KLD
+4 Disallow|AER
+2 Censor|AKH
+3 Cast Down
+4 Fatal Push|AER
+3 Syncopate
+1 Commit // Memory|AKH
+3 The Scarab God|HOU
+3 Torrential Gearhulk|KLD
+
+[sideboard]
+1 Forsake the Worldly|AKH
+1 Settle the Wreckage|XLN
+1 Essence Scatter|AKH
+3 Duress|XLN
+4 Glint-Sleeve Siphoner|AER
+4 Negate
+1 Cast Down

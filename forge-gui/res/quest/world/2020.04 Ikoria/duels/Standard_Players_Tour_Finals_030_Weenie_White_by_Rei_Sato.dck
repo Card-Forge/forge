@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Weenie White by Rei Sato
+Title=War Mage
+Difficulty=very hard
+Description=Weenie White by Rei Sato
+Icon=War Mage.jpg
+Deck Type=constructed
+
+[main]
+18 Plains
+3 Castle Ardenvale
+3 Glorious Anthem
+3 Basri's Solidarity
+4 Raise the Alarm
+3 Unbreakable Formation
+4 Venerated Loxodon
+4 Seasoned Hallowblade
+4 Garrison Cat
+4 Hunted Witness
+4 Selfless Savior
+4 Giant Killer
+2 Law-Rune Enforcer
+
+[sideboard]
+3 Gideon Blackblade
+3 Devout Decree
+4 Healer's Hawk
+2 Glass Casket
+2 Fight as One
+1 Unbreakable Formation

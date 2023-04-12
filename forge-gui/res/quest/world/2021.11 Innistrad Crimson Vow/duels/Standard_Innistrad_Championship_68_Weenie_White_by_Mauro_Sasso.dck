@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Weenie White by Mauro Sasso
+Title=Room-Wht
+Difficulty=very hard
+Description=Weenie White by Mauro Sasso
+Icon=Room-Wht.jpg
+Deck Type=constructed
+
+[main]
+2 Intrepid Adversary
+2 Reidane, God of the Worthy
+3 Adeline, Resplendent Cathar
+3 Thalia, Guardian of Thraben
+3 Brutal Cathar
+4 Clarion Spirit
+4 Monk of the Open Hand
+4 Hopeful Initiate
+4 Luminarch Aspirant
+4 Usher of the Fallen
+1 Kabira Takedown
+3 Paladin Class
+4 Faceless Haven
+19 Snow-Covered Plains
+
+[sideboard]
+1 Reidane, God of the Worthy
+1 Thalia, Guardian of Thraben
+1 Brutal Cathar
+3 Valorous Stance
+3 Skyclave Apparition
+3 Portable Hole
+3 Elite Spellbinder

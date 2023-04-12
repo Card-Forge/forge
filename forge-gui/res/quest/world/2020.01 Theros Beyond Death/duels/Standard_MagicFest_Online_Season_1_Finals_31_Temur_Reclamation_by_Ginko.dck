@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Ginko
+Title=Fog
+Difficulty=very hard
+Description=Temur Reclamation by Ginko
+Icon=Fog.jpg
+Deck Type=constructed
+
+[main]
+2 Brazen Borrower
+2 Island
+2 Mountain
+1 Temple of Epiphany
+4 Wilderness Reclamation
+4 Growth Spiral
+4 Expansion // Explosion
+3 Thassa's Intervention
+3 Mystical Dispute
+2 Scorching Dragonfire
+1 Chemister's Insight
+3 Nightpack Ambusher
+3 Uro, Titan of Nature's Wrath
+2 Spectral Sailor
+4 Fabled Passage
+4 Stomping Ground
+4 Breeding Pool
+3 Steam Vents
+3 Temple of Mystery
+2 Blast Zone
+2 Castle Vantress
+2 Forest
+
+[sideboard]
+2 Scorching Dragonfire
+1 Spectral Sailor
+3 Aether Gust
+3 Flame Sweep
+2 Fry
+2 Negate
+2 Legion Warboss

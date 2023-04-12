@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Esper Midrange by Gaetan Bossy
+Title=Eshu
+Difficulty=very hard
+Description=Esper Midrange by Gaetan Bossy
+Icon=Eshu.jpg
+Deck Type=constructed
+
+[main]
+4 Glint-Sleeve Siphoner|AER
+4 Knight of Malice
+3 The Scarab God|HOU
+1 Ravenous Chupacabra
+2 Walking Ballista|AER
+1 Banewhip Punisher|HOU
+4 Fatal Push|AER
+2 Cast Down
+2 Vraska's Contempt|XLN
+2 Syncopate
+3 Cast Out|AKH
+4 History of Benalia
+4 Concealed Courtyard|KLD
+4 Aether Hub|KLD
+2 Fetid Pools|AKH
+3 Irrigated Farmland|AKH
+4 Isolated Chapel
+3 Plains
+1 Drowned Catacomb|XLN
+2 Glacial Fortress|XLN
+1 Island
+2 Swamp
+2 Teferi, Hero of Dominaria
+
+[sideboard]
+2 Duress|XLN
+2 Forsake the Worldly|AKH
+3 Negate
+3 Seal Away
+2 Fumigate|KLD
+1 Sorcerous Spyglass|XLN
+1 Doomfall|HOU
+1 Arguel's Blood Fast|XLN

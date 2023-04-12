@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=RUG Twin Exarch by Greg Peloquin
+Title=Squeezed
+Difficulty=very hard
+Description=RUG Twin Exarch by Greg Peloquin
+Icon=Squeezed.jpg
+Deck Type=constructed
+
+[main]
+2 Spellskite|NPH
+1 Wurmcoil Engine|SOM
+1 Acidic Slime|M12
+4 Deceiver Exarch|NPH
+3 Inferno Titan|M12
+4 Lotus Cobra|ZEN
+1 Oracle of Mul Daya|ZEN
+2 Dismember|NPH
+3 Mana Leak|M12
+4 Explore|WWK
+2 Ponder|M12
+4 Preordain|M11
+3 Splinter Twin|ROE
+4 Forest|M12
+3 Island|M12
+2 Mountain|M12
+3 Copperline Gorge|SOM
+2 Halimar Depths|WWK
+4 Misty Rainforest|ZEN
+4 Raging Ravine|WWK
+4 Scalding Tarn|ZEN
+
+[sideboard]
+1 Spellskite|NPH
+3 Obstinate Baloth|M11
+3 Flashfreeze|M12
+2 Mutagenic Growth|NPH
+3 Nature's Claim|WWK
+3 Pyroclasm|M11

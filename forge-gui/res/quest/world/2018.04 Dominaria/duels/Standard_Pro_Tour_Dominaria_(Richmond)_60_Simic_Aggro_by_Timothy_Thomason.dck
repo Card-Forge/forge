@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Simic Aggro by Timothy Thomason
+Title=The Clock
+Difficulty=very hard
+Description=Simic Aggro by Timothy Thomason
+Icon=The Clock.jpg
+Deck Type=constructed
+
+[main]
+1 Blossoming Defense|KLD
+1 Commit // Memory|AKH
+1 Spell Pierce|XLN
+1 Skysovereign, Consul Flagship|KLD
+4 Hadana's Climb
+4 Adventurous Impulse
+1 Rishkar, Peema Renegade|AER
+2 Merfolk Branchwalker|XLN
+3 Verdurous Gearhulk|KLD
+3 Jadelight Ranger
+4 Servant of the Conduit|KLD
+4 Bristling Hydra|KLD
+4 Walking Ballista|AER
+4 Llanowar Elves
+2 Island
+2 Hashep Oasis|HOU
+4 Botanical Sanctum|KLD
+4 Aether Hub|KLD
+4 Hinterland Harbor
+7 Forest
+
+[sideboard]
+1 Kefnet's Last Word|HOU
+2 Carnage Tyrant|XLN
+4 Negate
+4 Thrashing Brontodon
+1 Blossoming Defense|KLD
+1 Commit // Memory|AKH
+1 Spell Pierce|XLN
+1 Skysovereign, Consul Flagship|KLD

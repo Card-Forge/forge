@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Wild Zombies by Rob Dougherty
+Title=Dem Bones
+Difficulty=very hard
+Description=Wild Zombies by Rob Dougherty
+Icon=Dem Bones.jpg
+Deck Type=constructed
+
+[main]
+4 Zombie Infestation|OD
+4 Vampiric Tutor|VI
+1 Phyrexian Furnace|WL
+1 Firestorm|WL
+1 Emerald Charm|VI
+4 Duress|US
+1 Buried Alive|WL
+4 Wild Mongrel|OD
+4 Squee, Goblin Nabob|MM
+4 Krovikan Horror|AL
+4 Hermit Druid|SH
+4 Elvish Spirit Guide|AL
+4 Ashen Ghoul|IA
+4 Taiga|A
+3 Swamp|A
+4 Llanowar Wastes|AP
+1 City of Brass|AN
+4 Bayou|A
+4 Badlands|A
+
+[sideboard]
+4 Pyroblast|IA
+1 Null Rod|WL
+1 Mountain|A
+1 Ground Seal|OD
+4 Call of the Herd|OD
+1 Phyrexian Furnace|WL
+1 Firestorm|WL
+2 Emerald Charm|VI

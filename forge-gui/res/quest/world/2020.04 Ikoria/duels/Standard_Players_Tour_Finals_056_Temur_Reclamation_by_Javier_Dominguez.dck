@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Javier Dominguez
+Title=Er-Miral
+Difficulty=very hard
+Description=Temur Reclamation by Javier Dominguez
+Icon=Er-Miral.jpg
+Deck Type=constructed
+
+[main]
+4 Shark Typhoon
+4 Wilderness Reclamation
+4 Expansion // Explosion
+4 Mystical Dispute
+4 Growth Spiral
+3 Negate
+3 Aether Gust
+1 Commence the Endgame
+2 Uro, Titan of Nature's Wrath
+1 Brazen Borrower
+1 Nightpack Ambusher
+1 Mountain
+2 Forest
+2 Island
+2 Blast Zone
+3 Stomping Ground
+3 Castle Vantress
+4 Steam Vents
+4 Fabled Passage
+4 Breeding Pool
+4 Ketria Triome
+
+[sideboard]
+1 Commence the Endgame
+1 Brazen Borrower
+1 Spectral Sailor
+1 Narset's Reversal
+1 Soul Sear
+2 Elder Gargaroth
+2 Storm's Wrath
+2 Scorching Dragonfire
+4 Bonecrusher Giant

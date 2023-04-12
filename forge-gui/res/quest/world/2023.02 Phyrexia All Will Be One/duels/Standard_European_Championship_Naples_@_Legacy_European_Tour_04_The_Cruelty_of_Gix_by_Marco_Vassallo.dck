@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=The Cruelty of Gix by Marco Vassallo
+Title=Bamm Bamm Rubble
+Difficulty=very hard
+Description=The Cruelty of Gix by Marco Vassallo
+Icon=Bamm Bamm Rubble.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+1 Duress
+2 Brotherhood's End
+3 Go for the Throat
+3 Abrade
+3 Reckoner Bankbuster
+4 The Cruelty of Gix
+4 Fable of the Mirror-Breaker
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+4 Atraxa, Grand Unifier
+1 Rockfall Vale
+1 Swamp
+1 Otawara, Soaring City
+1 Shattered Sanctum
+2 Darkslick Shores
+2 Sulfurous Springs
+2 Raffine's Tower
+2 Ziatora's Proving Ground
+2 Shipwreck Marsh
+2 Stormcarved Coast
+3 Shivan Reef
+4 Blackcleave Cliffs
+4 Haunted Ridge
+
+[sideboard]
+3 Cut Down
+2 Sheoldred, the Apocalypse
+2 Graveyard Trespasser
+1 Disdainful Stroke
+1 Negate
+3 Duress
+1 Go for the Throat
+1 Abrade
+1 Reckoner Bankbuster

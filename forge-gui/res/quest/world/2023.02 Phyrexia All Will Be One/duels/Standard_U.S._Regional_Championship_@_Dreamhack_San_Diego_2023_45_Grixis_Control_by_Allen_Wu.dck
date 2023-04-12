@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Grixis Control by Allen Wu
+Title=Serra's Legacy
+Difficulty=very hard
+Description=Grixis Control by Allen Wu
+Icon=Serra's Legacy.jpg
+Deck Type=constructed
+
+[main]
+1 Abrade
+1 Gix's Command
+3 Reckoner Bankbuster
+3 Make Disappear
+3 Invoke Despair
+4 Go for the Throat
+4 Cut Down
+4 Fable of the Mirror-Breaker
+1 Bladecoil Serpent
+2 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Underground River
+1 Takenuma, Abandoned Mire
+1 Otawara, Soaring City
+1 Sulfurous Springs
+2 Swamp
+2 Darkslick Shores
+3 Shivan Reef
+3 Shipwreck Marsh
+4 Xander's Lounge
+4 Blackcleave Cliffs
+4 Haunted Ridge
+
+[sideboard]
+1 Vraska, Betrayal's Sting
+1 Brotherhood's End
+1 Soul Transfer
+2 Anoint with Affliction
+2 Disdainful Stroke
+2 Negate
+2 Duress
+1 Abrade
+1 Reckoner Bankbuster
+1 Invoke Despair
+1 Bladecoil Serpent

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Sultai Midrange by Noah Ma
+Title=Jasmine Boreal
+Difficulty=very hard
+Description=Sultai Midrange by Noah Ma
+Icon=Jasmine Boreal.jpg
+Deck Type=constructed
+
+[main]
+3 Vivien Reid
+1 Carnage Tyrant|XLN
+3 Hostage Taker|XLN
+4 Hydroid Krasis
+4 Jadelight Ranger
+4 Llanowar Elves
+4 Merfolk Branchwalker|XLN
+4 Wildgrowth Walker|XLN
+1 Incubation Druid
+3 Find // Finality
+3 Cast Down
+2 Vraska's Contempt|XLN
+4 Breeding Pool
+2 Drowned Catacomb|XLN
+1 Memorial to Folly
+4 Overgrown Tomb
+4 Watery Grave
+4 Woodland Cemetery
+4 Forest
+1 Hinterland Harbor
+
+[sideboard]
+1 Carnage Tyrant|XLN
+1 Cast Down
+1 Vraska's Contempt|XLN
+2 Disdainful Stroke
+2 Assassin's Trophy
+1 Ritual of Soot
+4 Duress
+3 Kraul Harpooner

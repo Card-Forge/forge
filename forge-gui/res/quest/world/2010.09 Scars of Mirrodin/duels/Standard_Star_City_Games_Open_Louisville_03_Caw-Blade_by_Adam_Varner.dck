@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Caw-Blade by Adam Varner
+Title=Waterlord
+Difficulty=very hard
+Description=Caw-Blade by Adam Varner
+Icon=Waterlord.jpg
+Deck Type=constructed
+
+[main]
+3 Spellskite|NPH
+2 Mirran Crusader|MBS
+4 Squadron Hawk|M11
+4 Stoneforge Mystic|WWK
+2 Condemn|M11
+2 Into the Roil|ZEN
+3 Mana Leak|M11
+2 Spell Pierce|ZEN
+4 Preordain|M11
+1 Batterskull|NPH
+1 Sword of Feast and Famine|MBS
+1 Sword of War and Peace|NPH
+4 Island|NPH
+4 Plains|NPH
+4 Celestial Colonnade|WWK
+3 Glacial Fortress|M11
+2 Inkmoth Nexus|MBS
+1 Misty Rainforest|ZEN
+4 Seachrome Coast|SOM
+4 Tectonic Edge|WWK
+1 Jace Beleren|M11
+4 Jace, the Mind Sculptor|WWK
+
+[sideboard]
+1 Spellskite|NPH
+1 Batterskull|NPH
+1 Jace Beleren|M11
+1 Baneslayer Angel|M11
+2 Sun Titan|M11
+3 Divine Offering|MBS
+2 Day of Judgment|M11
+3 Oust|ROE
+1 Mortarpod|MBS

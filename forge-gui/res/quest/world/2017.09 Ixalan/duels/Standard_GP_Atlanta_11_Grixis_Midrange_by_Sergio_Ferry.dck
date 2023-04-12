@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Grixis Midrange by Sergio Ferry
+Title=Air Assault
+Difficulty=very hard
+Description=Grixis Midrange by Sergio Ferry
+Icon=Air Assault.jpg
+Deck Type=constructed
+
+[main]
+1 Abrade|HOU
+2 Vraska's Contempt|XLN
+2 Chandra, Torch of Defiance|KLD
+2 Doomfall|HOU
+4 Harnessed Lightning|KLD
+4 Fatal Push|AER
+1 Vizier of Many Faces|AKH
+1 The Scarab God|HOU
+2 Champion of Wits|HOU
+2 Hostage Taker|XLN
+2 Gifted Aetherborn|AER
+3 Whirler Virtuoso|KLD
+4 Glint-Sleeve Siphoner|AER
+4 Glorybringer|AKH
+1 Swamp|XLN
+1 Island|XLN
+2 Mountain|XLN
+3 Fetid Pools|AKH
+3 Canyon Slough|AKH
+4 Spirebluff Canal|KLD
+4 Drowned Catacomb|XLN
+4 Dragonskull Summit|XLN
+4 Aether Hub|KLD
+
+[sideboard]
+2 Negate|AER
+1 Gonti, Lord of Luxury|KLD
+2 Chandra's Defeat|HOU
+1 Nicol Bolas, God-Pharaoh|HOU
+1 River's Rebuke|XLN
+1 Never // Return|AKH
+1 Supreme Will|HOU
+4 Duress|XLN
+1 Abrade|HOU
+1 Vizier of Many Faces|AKH

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jeskai Ascendancy by Lee Shi Tian
+Title=Olokun
+Difficulty=very hard
+Description=Jeskai Ascendancy by Lee Shi Tian
+Icon=Olokun.jpg
+Deck Type=constructed
+
+[main]
+2 Temple of Mystery|THS
+2 Temple of Plenty|BNG
+2 Yavimaya Coast|M15
+2 Wooded Foothills|KTK
+2 Flooded Strand|KTK
+1 Mountain|KTK
+1 Forest|KTK
+1 Island|KTK
+1 Plains|KTK
+1 Nissa, Worldwaker|M15
+3 Kiora's Follower|BNG
+4 Rattleclaw Mystic|KTK
+4 Sylvan Caryatid|THS
+4 Commune with the Gods|THS
+3 Tormenting Voice|KTK
+2 Twinflame|JOU
+4 Retraction Helix|BNG
+3 Dig Through Time|KTK
+2 Briber's Purse|KTK
+4 Dragon Mantle|THS
+4 Jeskai Ascendancy|KTK
+4 Mana Confluence|JOU
+2 Frontier Bivouac|KTK
+2 Temple of Abandon|THS
+
+[sideboard]
+4 Savage Knuckleblade|KTK
+2 Polukranos, World Eater|THS
+3 Arc Lightning|KTK
+3 Lightning Strike|M15
+3 Swan Song|THS

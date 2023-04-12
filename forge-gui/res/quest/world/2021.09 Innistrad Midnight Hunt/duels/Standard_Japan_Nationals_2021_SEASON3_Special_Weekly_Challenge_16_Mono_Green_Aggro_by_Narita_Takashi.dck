@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Narita Takashi
+Title=Lex Luthor
+Difficulty=very hard
+Description=Mono Green Aggro by Narita Takashi
+Icon=Lex Luthor.jpg
+Deck Type=constructed
+
+[main]
+1 Outland Liberator
+2 Lotus Cobra
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+4 Sculptor of Winter
+4 Esika's Chariot
+1 Snakeskin Veil
+4 Blizzard Brawl
+1 Unnatural Growth
+2 Ranger Class
+4 Wrenn and Seven
+1 Lair of the Hydra
+4 Kazandu Mammoth
+4 Faceless Haven
+20 Snow-Covered Forest
+
+[sideboard]
+1 Outland Liberator
+3 Snakeskin Veil
+1 Unnatural Growth
+2 Ranger Class
+1 Primal Adversary
+1 Toski, Bearer of Secrets
+2 Tangletrap
+4 Inscription of Abundance

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Sultai Energy by Michael Hinderaker
+Title=Greenie
+Difficulty=very hard
+Description=Sultai Energy by Michael Hinderaker
+Icon=Greenie.jpg
+Deck Type=constructed
+
+[main]
+4 Glint-Sleeve Siphoner|AER
+2 Hostage Taker|XLN
+4 Rogue Refiner|AER
+4 Servant of the Conduit|KLD
+3 The Scarab God|HOU
+4 Whirler Virtuoso|KLD
+4 Attune with Aether|KLD
+1 Abrade|HOU
+1 Essence Scatter|AKH
+4 Fatal Push|AER
+3 Harnessed Lightning|KLD
+3 Vraska's Contempt|XLN
+4 Aether Hub|KLD
+4 Blooming Marsh|KLD
+4 Botanical Sanctum|KLD
+2 Canyon Slough|AKH
+2 Dragonskull Summit|XLN
+2 Forest|XLN
+1 Island|XLN
+1 Mountain|XLN
+2 Swamp|XLN
+1 Vraska, Relic Seeker|XLN
+
+[sideboard]
+1 Appetite for the Unnatural|KLD
+2 Chandra's Defeat|HOU
+3 Deathgorge Scavenger|XLN
+3 Duress|XLN
+3 Negate|AER
+2 Nissa, Steward of Elements|AKH
+1 River's Rebuke|XLN

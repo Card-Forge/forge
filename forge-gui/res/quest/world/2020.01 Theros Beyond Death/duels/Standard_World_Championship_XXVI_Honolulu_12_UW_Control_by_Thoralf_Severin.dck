@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=UW Control by Thoralf Severin
+Title=Kang
+Difficulty=very hard
+Description=UW Control by Thoralf Severin
+Icon=Kang.jpg
+Deck Type=constructed
+
+[main]
+1 Field of Ruin
+2 Castle Vantress
+4 Temple of Enlightenment
+6 Plains
+6 Island
+4 Hallowed Fountain
+2 Castle Ardenvale
+4 Narset, Parter of Veils
+4 Teferi, Time Raveler
+4 Omen of the Sea
+4 The Birth of Meletis
+4 Elspeth Conquers Death
+4 Shatter the Sky
+3 Dovin's Veto
+1 Mystical Dispute
+3 Absorb
+4 Dream Trawler
+
+[sideboard]
+1 Heliod's Intervention
+1 Emergency Powers
+3 Mystical Dispute
+1 The Wanderer
+1 Archon of Sun's Grace
+2 Devout Decree
+1 Sorcerous Spyglass
+2 Spectral Sailor
+3 Aether Gust

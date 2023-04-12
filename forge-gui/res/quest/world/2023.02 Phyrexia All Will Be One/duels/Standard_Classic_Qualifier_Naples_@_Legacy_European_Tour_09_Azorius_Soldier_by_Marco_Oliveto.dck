@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Azorius Soldier by Marco Oliveto
+Title=The Shattered Isles
+Difficulty=very hard
+Description=Azorius Soldier by Marco Oliveto
+Icon=The Shattered Isles.jpg
+Deck Type=constructed
+
+[main]
+2 Brutal Cathar
+2 Zephyr Sentinel
+2 Yotian Frontliner
+2 Skrelv, Defector Mite
+2 Dennick, Pious Apprentice
+3 Resolute Reinforcements
+3 Harbin, Vanguard Aviator
+4 Valiant Veteran
+4 Thalia, Guardian of Thraben
+4 Skystrike Officer
+4 Recruitment Officer
+4 Siege Veteran
+1 Plains
+1 Plaza of Heroes
+2 Eiganjo, Seat of the Empire
+2 Otawara, Soaring City
+2 Mishra's Foundry
+4 Adarkar Wastes
+4 Fortified Beachhead
+4 Secluded Courtyard
+4 Seachrome Coast
+
+[sideboard]
+1 Brutal Cathar
+2 Spell Pierce
+2 Fateful Absence
+2 Extraction Specialist
+2 Cathar Commando
+3 Protect the Negotiators
+3 Destroy Evil

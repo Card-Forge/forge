@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Naya Runes Aggro by Witold Kordos
+Title=Gunnery Sergeant Hartman
+Difficulty=very hard
+Description=Naya Runes Aggro by Witold Kordos
+Icon=Gunnery Sergeant Hartman.jpg
+Deck Type=constructed
+
+[main]
+1 Legion Angel
+4 Generous Visitor
+4 Fable of the Mirror-Breaker
+4 Runeforge Champion
+4 Jukai Naturalist
+4 Kami of Transience
+1 Tamiyo's Safekeeping
+1 Circle of Confinement
+3 Rune of Sustenance
+3 Rune of Speed
+4 Showdown of the Skalds
+4 Rune of Might
+1 Boseiju, Who Endures
+1 Eiganjo, Seat of the Empire
+1 Overgrown Farmland
+1 Lair of the Hydra
+1 Forest
+2 Sundown Pass
+4 Branchloft Pathway
+4 Jetmir's Garden
+4 Cragcrown Pathway
+4 Needleverge Pathway
+
+[sideboard]
+3 Legion Angel
+1 Tamiyo's Safekeeping
+1 Rip Apart
+1 Skyclave Apparition
+1 Reidane, God of the Worthy
+1 Fang of Shigeki
+1 Unlicensed Hearse
+2 Ranger Class
+4 Strangle

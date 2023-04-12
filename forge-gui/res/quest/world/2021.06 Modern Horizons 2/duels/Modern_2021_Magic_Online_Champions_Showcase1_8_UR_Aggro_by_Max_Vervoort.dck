@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=UR Aggro by Max Vervoort
+Title=Alpha Mono Black
+Difficulty=very hard
+Description=UR Aggro by Max Vervoort
+Icon=Alpha Mono Black.jpg
+Deck Type=constructed
+
+[main]
+1 Gut Shot|NPH
+2 Mutagenic Growth|NPH
+3 Serum Visions|FD
+4 Expressive Iteration
+4 Lava Dart|JU
+4 Lightning Bolt|M11
+4 Manamorphose|SHM
+4 Mishra's Bauble|CS
+4 Monastery Swiftspear|KTK
+4 Dragon's Rage Channeler
+4 Soul-Scar Mage|AKH
+4 Stormwing Entity
+2 Bloodstained Mire|KTK
+2 Steam Vents
+3 Scalding Tarn|ZEN
+3 Fiery Islet
+4 Mountain
+4 Spirebluff Canal|KLD
+
+[sideboard]
+3 Soul-Guide Lantern
+3 Chalice of the Void|MR
+3 Unholy Heat
+3 Spell Pierce|XLN
+2 Abrade|HOU
+1 Bedlam Reveler|EMN

@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Elementals by Derrick Davis
+Title=Enchantress
+Difficulty=very hard
+Description=Elementals by Derrick Davis
+Icon=Enchantress.jpg
+Deck Type=constructed
+
+[main]
+1 Endurance
+1 Lightning Skelemental
+1 Omnath, Locus of the Roil
+2 Voice of Resurgence|DGM
+2 Vesperlark
+4 Flamekin Harbinger|LRW
+4 Omnath, Locus of Creation
+4 Fury
+4 Thunderkin Awakener
+4 Solitude
+4 Risen Reef
+4 Ephemerate
+1 Ketria Triome
+1 Tangled Florahedron
+1 Raugrin Triome
+1 Stomping Ground
+1 Indatha Triome
+1 Sunbaked Canyon
+1 Plains
+1 Forest
+1 Steam Vents
+2 Sacred Foundry
+2 Arid Mesa|ZEN
+4 Cavern of Souls|AVR
+4 Windswept Heath|KTK
+4 Wooded Foothills|KTK
+
+[sideboard]
+3 Endurance
+1 Kaheera, the Orphanguard
+1 Foundation Breaker
+1 Force of Vigor
+1 Rest in Peace|RTR
+2 Fulminator Mage|SHM
+2 Chalice of the Void|MR
+2 Wear // Tear|DGM
+2 Engineered Explosives|FD

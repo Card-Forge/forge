@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Sultaï Dreadhorde by Nick Carlson (flesheatingnome)
+Title=Prometheus
+Difficulty=very hard
+Description=Sultaï Dreadhorde by Nick Carlson (flesheatingnome)
+Icon=Prometheus.jpg
+Deck Type=constructed
+
+[main]
+4 Hydroid Krasis
+4 Jadelight Ranger
+4 Llanowar Elves
+4 Merfolk Branchwalker|XLN
+4 Wildgrowth Walker|XLN
+2 Assassin's Trophy
+2 Cast Down
+3 Command the Dreadhorde
+4 Nissa, Who Shakes the World
+3 Tamiyo, Collector of Tales
+2 Vraska, Golgari Queen
+4 Breeding Pool
+2 Drowned Catacomb|XLN
+3 Forest
+3 Hinterland Harbor
+4 Overgrown Tomb
+4 Watery Grave
+4 Woodland Cemetery
+
+[sideboard]
+1 Cast Down
+3 Duress
+2 Negate
+2 Ob Nixilis's Cruelty
+2 Ripjaw Raptor|XLN
+2 The Elderspell
+3 Thrashing Brontodon

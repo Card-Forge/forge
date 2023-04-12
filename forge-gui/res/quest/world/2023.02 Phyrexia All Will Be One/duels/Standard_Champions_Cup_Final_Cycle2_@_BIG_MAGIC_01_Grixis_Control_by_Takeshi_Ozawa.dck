@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Grixis Control by Takeshi Ozawa
+Title=Minerva McGonagall
+Difficulty=very hard
+Description=Grixis Control by Takeshi Ozawa
+Icon=Minerva McGonagall.jpg
+Deck Type=constructed
+
+[main]
+1 Brotherhood's End
+2 Negate
+3 Reckoner Bankbuster
+3 Abrade
+3 Go for the Throat
+3 Make Disappear
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+1 Bladecoil Serpent
+2 Sheoldred, the Apocalypse
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+1 Swamp
+1 Takenuma, Abandoned Mire
+3 Darkslick Shores
+3 Haunted Ridge
+3 Blackcleave Cliffs
+3 Shivan Reef
+4 Xander's Lounge
+4 Sulfurous Springs
+4 Shipwreck Marsh
+
+[sideboard]
+3 Razorlash Transmogrant
+3 Cut Down
+2 Parasitic Grasp
+2 Disdainful Stroke
+2 Duress
+2 Siphon Insight
+1 Brotherhood's End

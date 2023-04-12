@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=4c PW by Bolun Zhang
+Title=BrotherVoodoo
+Difficulty=very hard
+Description=4c PW by Bolun Zhang
+Icon=BrotherVoodoo.jpg
+Deck Type=constructed
+
+[main]
+4 Nicol Bolas, Dragon-God
+4 Narset, Parter of Veils
+4 Atris, Oracle of Half-Truths
+1 Blood Crypt
+1 Raugrin Triome
+2 Savai Triome
+2 Temple of Silence
+4 Elspeth Conquers Death
+4 Teferi, Time Raveler
+4 Watery Grave
+4 Temple of Deceit
+4 Godless Shrine
+2 Ritual of Soot
+2 Cry of the Carnarium
+2 Duress
+3 Thought Erasure
+4 Hallowed Fountain
+4 Interplanar Beacon
+1 Eliminate
+1 Extinction Event
+1 The Elderspell
+1 Liliana, Dreadhorde General
+1 Heartless Act
+
+[sideboard]
+2 Cry of the Carnarium
+2 Duress
+2 Eliminate
+2 Extinction Event
+1 Heartless Act
+2 Baneslayer Angel
+2 Noxious Grasp
+1 Aether Gust
+1 Agonizing Remorse

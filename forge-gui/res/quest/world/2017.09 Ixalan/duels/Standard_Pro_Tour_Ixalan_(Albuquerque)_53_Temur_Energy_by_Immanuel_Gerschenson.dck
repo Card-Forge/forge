@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Temur Energy by Immanuel Gerschenson
+Title=Count Chuckula
+Difficulty=very hard
+Description=Temur Energy by Immanuel Gerschenson
+Icon=Count Chuckula.jpg
+Deck Type=constructed
+
+[main]
+1 Chandra, Torch of Defiance|KLD
+4 Servant of the Conduit|KLD
+4 Longtusk Cub|KLD
+4 Rogue Refiner|AER
+4 Whirler Virtuoso|KLD
+3 Bristling Hydra|KLD
+1 Vizier of Many Faces|AKH
+4 Glorybringer|AKH
+4 Attune with Aether|KLD
+1 Confiscation Coup|KLD
+3 Abrade|HOU
+1 Essence Scatter|AKH
+4 Harnessed Lightning|KLD
+4 Botanical Sanctum|KLD
+3 Spirebluff Canal|KLD
+1 Sheltered Thicket|AKH
+3 Rootbound Crag|XLN
+1 Island|XLN
+2 Mountain|XLN
+4 Forest|XLN
+4 Aether Hub|KLD
+
+[sideboard]
+1 Chandra, Torch of Defiance|KLD
+1 Vizier of Many Faces|AKH
+1 Confiscation Coup|KLD
+2 Negate|AER
+2 Spell Pierce|XLN
+1 Nissa, Steward of Elements|AKH
+1 River's Rebuke|XLN
+2 Chandra's Defeat|HOU
+3 Deathgorge Scavenger|XLN
+1 Supreme Will|HOU

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Esper Control by Gabriel Kotlinsky Roeck
+Title=Apu Nahasapeemapetilon
+Difficulty=very hard
+Description=Esper Control by Gabriel Kotlinsky Roeck
+Icon=Apu Nahasapeemapetilon.jpg
+Deck Type=constructed
+
+[main]
+2 Portable Hole
+3 Reckoner Bankbuster
+1 Soul Shatter
+2 Infernal Grasp
+2 March of Otherworldly Light
+4 Vanishing Verse
+2 Emeria's Call
+2 Check for Traps
+3 Doomskar
+2 The Meathook Massacre
+1 Sorin the Mirthless
+3 Lolth, Spider Queen
+4 The Wandering Emperor
+4 Kaito Shizuki
+1 Plains
+1 Swamp
+1 Takenuma, Abandoned Mire
+1 Eiganjo, Seat of the Empire
+2 Hive of the Eye Tyrant
+3 Shipwreck Marsh
+3 Deserted Beach
+3 Hengegate Pathway
+3 Clearwater Pathway
+3 Brightclimb Pathway
+4 Shattered Sanctum
+
+[sideboard]
+1 March of Otherworldly Light
+1 Doomskar
+1 Farewell
+1 Henrika Domnathi
+2 Ray of Enfeeblement
+2 Disdainful Stroke
+3 Graveyard Trespasser
+4 Duress

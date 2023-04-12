@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Winota by Sebastián Pozzo
+Title=Beast
+Difficulty=very hard
+Description=Winota by Sebastián Pozzo
+Icon=Beast.jpg
+Deck Type=constructed
+
+[main]
+1 Lotus Cobra
+2 Minsc, Beloved Ranger
+2 Kenrith, the Returned King
+2 Tangled Florahedron
+2 Blade Historian
+3 Selfless Savior
+3 Bonecrusher Giant
+4 Winota, Joiner of Forces
+4 Jaspera Sentinel
+4 Elite Spellbinder
+4 Prosperous Innkeeper
+4 Esika's Chariot
+2 Shatterskull Smashing
+1 Ranger Class
+1 Mountain
+2 Forest
+2 Lair of the Hydra
+2 Plains
+3 Fabled Passage
+4 Needleverge Pathway
+4 Branchloft Pathway
+4 Cragcrown Pathway
+
+[sideboard]
+1 Selfless Savior
+1 Ranger Class
+1 The Akroan War
+1 Reidane, God of the Worthy
+1 Klothys, God of Destiny
+1 Rip Apart
+2 Ox of Agonas
+3 Redcap Melee
+4 Burning Hands

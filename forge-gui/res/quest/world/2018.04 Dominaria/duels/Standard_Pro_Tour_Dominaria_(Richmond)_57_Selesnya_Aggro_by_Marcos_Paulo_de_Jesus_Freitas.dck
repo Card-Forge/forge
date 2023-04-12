@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Selesnya Aggro by Marcos Paulo de Jesus Freitas
+Title=Paladin
+Difficulty=very hard
+Description=Selesnya Aggro by Marcos Paulo de Jesus Freitas
+Icon=Paladin.jpg
+Deck Type=constructed
+
+[main]
+2 Ajani Unyielding|AER
+2 Gideon of the Trials|AKH
+2 Walking Ballista|AER
+4 Knight of Grace
+4 Merfolk Branchwalker|XLN
+4 Thrashing Brontodon
+2 Angel of Sanctions|AKH
+2 Fumigate|KLD
+2 Settle the Wreckage|XLN
+4 History of Benalia
+4 Cast Out|AKH
+2 Seal Away
+4 Sunpetal Grove|XLN
+4 Scattered Groves|AKH
+4 Forest
+8 Plains
+2 Desert of the Indomitable|HOU
+1 Hashep Oasis|HOU
+1 Tranquil Expanse|AKH
+2 Scavenger Grounds|HOU
+
+[sideboard]
+2 Fleetwheel Cruiser|KLD
+1 Lyra Dawnbringer
+1 Sorcerous Spyglass|XLN
+2 Authority of the Consuls|KLD
+2 Baffling End
+2 Sunscourge Champion|HOU
+2 Nissa, Vital Force|KLD
+1 Crook of Condemnation|HOU
+2 Ixalan's Binding|XLN

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Nezumi Jerry
+Title=Black Flame
+Difficulty=very hard
+Description=Rakdos Aggro by Nezumi Jerry
+Icon=Black Flame.jpg
+Deck Type=constructed
+
+[main]
+1 Sorin the Mirthless
+2 The Meathook Massacre
+2 Infernal Grasp
+2 Voltage Surge
+2 Cut Down
+4 Liliana of the Veil
+4 Invoke Despair
+4 Fable of the Mirror-Breaker
+2 Sheoldred, the Apocalypse
+3 Tenacious Underdog
+4 Graveyard Trespasser
+4 Bloodtithe Harvester
+1 Sokenzan, Crucible of Defiance
+1 Mountain
+1 Takenuma, Abandoned Mire
+2 Tramway Station
+4 Sulfurous Springs
+4 Haunted Ridge
+13 Swamp
+
+[sideboard]
+3 Duress
+2 Reckoner Bankbuster
+1 Unlicensed Hearse
+1 Burn Down the House
+1 Junji, the Midnight Sky
+1 Abrade
+1 Pithing Needle
+1 Soul Transfer
+2 The Meathook Massacre
+2 Voltage Surge

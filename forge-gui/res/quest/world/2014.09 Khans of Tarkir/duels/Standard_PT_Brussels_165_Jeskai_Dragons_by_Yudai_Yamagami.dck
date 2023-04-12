@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Jeskai Dragons by Yudai Yamagami
+Title=The Mac Nac Feegle
+Difficulty=very hard
+Description=Jeskai Dragons by Yudai Yamagami
+Icon=The Mac Nac Feegle.jpg
+Deck Type=constructed
+
+[main]
+4 Soulfire Grand Master|FRF
+4 Goblin Rabblemaster|M15
+4 Mantis Rider|KTK
+2 Dragonlord Ojutai|DTK
+4 Thunderbreak Regent|DTK
+1 Seeker of the Way|KTK
+1 Roast|DTK
+2 Ojutai's Command|DTK
+3 Wild Slash|FRF
+2 Valorous Stance|FRF
+4 Stoke the Flames|M15
+4 Draconic Roar|DTK
+4 Mystic Monastery|KTK
+3 Battlefield Forge|M15
+3 Shivan Reef|M15
+3 Temple of Epiphany|JOU
+4 Temple of Triumph|THS
+3 Flooded Strand|KTK
+2 Plains|DTK
+2 Mountain|DTK
+1 Island|DTK
+
+[sideboard]
+1 Roast|DTK
+2 Icefall Regent|DTK
+4 Disdainful Stroke|KTK
+2 Anger of the Gods|THS
+1 Seismic Rupture|DTK
+2 Stratus Dancer|DTK
+1 Negate|DTK
+1 Erase|KTK
+1 Glare of Heresy|THS

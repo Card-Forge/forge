@@ -1,0 +1,40 @@
+[quest]
+id=44004
+OpponentName=Progenitus
+AILife=20
+Repeat=true
+Wins=10
+Card Reward=Progenitus|FVL;Ancient Ziggurat|CFX;Maelstrom Wanderer|PC2;1 multicolor rare
+Credit Reward=1000
+AIExtras=Mayael the Anima|Ancient Ziggurat
+[metadata]
+Name=quest44004
+Title=Progenitus
+Icon=alapro.jpg
+Difficulty=hard
+Description=The Soul of the World has returned.
+Deck Type=constructed
+[Main]
+4 Ancient Ziggurat|CFX
+4 Bloodbraid Elf|ARB
+2 Forest|ALA|2
+1 Island|ALA|2
+1 Keeper of Progenitus|ALA
+3 Maelstrom Archangel|CFX
+2 Maelstrom Nexus|ARB
+4 Mayael the Anima|ALA
+3 Mountain|ALA|4
+4 Noble Hierarch|CFX
+2 Obelisk of Esper|ALA
+2 Obelisk of Grixis|ALA
+2 Obelisk of Naya|ALA
+2 Gift of the Gargantuan|ALA
+2 Plains|ALA|1
+4 Progenitus|CFX
+4 Spellbreaker Behemoth|ARB
+1 Swamp|ALA|2
+1 Arcane Sanctum|ALA
+4 Jungle Shrine|ALA
+3 Savage Lands|ALA
+3 Seaside Citadel|ALA
+2 Kaleidostone|CFX

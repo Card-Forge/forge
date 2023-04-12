@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Sultai Energy by Pierre Dagen
+Title=Tinkerbell
+Difficulty=very hard
+Description=Sultai Energy by Pierre Dagen
+Icon=Tinkerbell.jpg
+Deck Type=constructed
+
+[main]
+4 Winding Constrictor|AER
+4 Longtusk Cub|KLD
+4 Glint-Sleeve Siphoner|AER
+2 Walking Ballista|AER
+4 Rogue Refiner|AER
+2 The Scarab God|HOU
+3 Bristling Hydra|KLD
+2 Hostage Taker|XLN
+4 Attune with Aether|KLD
+1 Confiscation Coup|KLD
+3 Blossoming Defense|KLD
+4 Fatal Push|AER
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+4 Blooming Marsh|KLD
+2 Fetid Pools|AKH
+4 Forest|XLN
+1 Island|XLN
+2 Swamp|XLN
+1 Drowned Catacomb|XLN
+1 Vraska, Relic Seeker|XLN
+
+[sideboard]
+1 Vraska, Relic Seeker|XLN
+3 Duress|XLN
+2 Appetite for the Unnatural|KLD
+2 Deathgorge Scavenger|XLN
+2 Negate|AER
+1 Supreme Will|HOU
+2 Nissa, Steward of Elements|AKH
+2 Vraska's Contempt|XLN

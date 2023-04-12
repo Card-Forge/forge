@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Boros Control by Luis Allende
+Title=Balance
+Difficulty=very hard
+Description=Boros Control by Luis Allende
+Icon=Balance.jpg
+Deck Type=constructed
+
+[main]
+1 The Wandering Emperor
+1 Elspeth Resplendent
+2 Depopulate
+4 Ossification
+4 Wedding Announcement
+4 Lay Down Arms
+4 Reckoner Bankbuster
+4 Fable of the Mirror-Breaker
+2 Ao, the Dawn Sky
+2 Serra Paragon
+2 Sanctuary Warden
+2 Loran of the Third Path
+4 Ambitious Farmhand
+1 Battlefield Forge
+1 Sacred Peaks
+3 Roadside Reliquary
+4 Jetmir's Garden
+4 Sundown Pass
+11 Plains
+
+[sideboard]
+2 The Eternal Wanderer
+2 Farewell
+4 Fateful Absence
+2 The Wandering Emperor
+1 Elspeth Resplendent
+1 Depopulate
+1 Ao, the Dawn Sky
+1 Serra Paragon
+1 Loran of the Third Path

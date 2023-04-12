@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Golgari Delirium by Jacob Wilson
+Title=Joker
+Difficulty=very hard
+Description=Golgari Delirium by Jacob Wilson
+Icon=Joker.jpg
+Deck Type=constructed
+
+[main]
+4 Liliana, the Last Hope|EMN
+2 Sylvan Advocate|OGW
+1 Den Protector|C16
+4 Grim Flayer|EMN
+2 Nissa, Vastwood Seer|ORI
+2 Tireless Tracker|SOI
+1 Emrakul, the Promised End|EMN
+2 Ishkanah, Grafwidow|EMN
+4 Traverse the Ulvenwald|SOI
+3 Ruinous Path|BFZ
+3 Languish|C16
+2 Ultimate Price|DTK
+4 Grasp of Darkness|OGW
+1 Terrarion|EMN
+1 Dead Weight
+4 Llanowar Wastes|ORI
+4 Hissing Quagmire|OGW
+4 Evolving Wilds
+7 Swamp|RTR
+5 Forest|RTR
+
+[sideboard]
+1 Tireless Tracker|SOI
+1 Languish|C16
+1 Dead Weight
+2 Transgress the Mind|BFZ
+2 Duress
+1 Infinite Obliteration|ORI
+2 Dark Petition|ORI
+1 Gilt-Leaf Winnower|ORI
+2 Kalitas, Traitor of Ghet|OGW
+1 Caustic Caterpillar|ORI
+1 Seasons Past|SOI

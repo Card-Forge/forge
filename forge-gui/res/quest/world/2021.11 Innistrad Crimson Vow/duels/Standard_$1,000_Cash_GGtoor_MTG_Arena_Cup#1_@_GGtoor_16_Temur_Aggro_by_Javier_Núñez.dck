@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Temur Aggro by Javier Núñez
+Title=Desdemona
+Difficulty=very hard
+Description=Temur Aggro by Javier Núñez
+Icon=Desdemona.jpg
+Deck Type=constructed
+
+[main]
+1 Demon Bolt
+2 Negate
+2 Thundering Rebuke
+2 Wrenn and Seven
+4 Ranger Class
+4 Shatterskull Smashing
+4 Esika's Chariot
+1 Briarbridge Tracker
+2 Reckless Stormseeker
+4 Jaspera Sentinel
+4 Magda, Brazen Outlaw
+4 Goldspan Dragon
+4 Prosperous Innkeeper
+1 Stormcarved Coast
+2 Riverglide Pathway
+2 Lair of the Hydra
+2 Den of the Bugbear
+3 Forest
+4 Rockfall Vale
+4 Barkchannel Pathway
+4 Cragcrown Pathway
+
+[sideboard]
+4 Burning Hands
+2 Toski, Bearer of Secrets
+2 Snakeskin Veil
+1 Tangletrap
+1 Disdainful Stroke
+1 Choose Your Weapon
+1 Outland Liberator
+1 Negate
+2 Briarbridge Tracker

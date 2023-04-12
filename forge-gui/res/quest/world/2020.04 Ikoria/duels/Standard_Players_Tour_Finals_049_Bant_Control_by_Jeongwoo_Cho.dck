@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Bant Control by Jeongwoo Cho
+Title=Whim
+Difficulty=very hard
+Description=Bant Control by Jeongwoo Cho
+Icon=Whim.jpg
+Deck Type=constructed
+
+[main]
+4 Temple Garden
+4 Breeding Pool
+4 Hallowed Fountain
+4 Fabled Passage
+3 Temple of Enlightenment
+3 Ketria Triome
+2 Plains
+2 Island
+2 Cryptic Caves
+2 Forest
+4 Teferi, Time Raveler
+2 Nissa, Who Shakes the World
+2 Narset, Parter of Veils
+3 Elspeth Conquers Death
+2 Shark Typhoon
+4 Growth Spiral
+3 Dovin's Veto
+3 Mystical Dispute
+2 Tale's End
+3 Uro, Titan of Nature's Wrath
+2 Jolrael, Mwonvuli Recluse
+2 Hydroid Krasis
+
+[sideboard]
+2 Aether Gust
+2 Elder Gargaroth
+3 Glass Casket
+3 Shatter the Sky
+2 Brazen Borrower
+1 Discontinuity
+1 Kenrith, the Returned King
+1 Mangara, the Diplomat

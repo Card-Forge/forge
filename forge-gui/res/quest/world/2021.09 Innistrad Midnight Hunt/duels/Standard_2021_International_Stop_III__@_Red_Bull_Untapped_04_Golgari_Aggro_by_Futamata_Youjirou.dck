@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Golgari Aggro by Futamata Youjirou
+Title=Princess Selenia
+Difficulty=very hard
+Description=Golgari Aggro by Futamata Youjirou
+Icon=Princess Selenia.jpg
+Deck Type=constructed
+
+[main]
+1 Negate|MOR
+1 Disdainful Stroke|KTK
+1 Culling Ritual
+2 Power Word Kill
+2 Infernal Grasp
+2 Crippling Fear
+3 Binding the Old Gods
+4 Emergent Sequence
+4 Wrenn and Seven
+4 Esika's Chariot
+1 Primal Adversary
+2 Tovolar's Huntmaster
+3 Tainted Adversary
+4 Briarbridge Tracker
+1 Island|A
+1 Swamp|A
+1 Woodland Chasm
+1 Rimewood Falls
+2 Lair of the Hydra
+2 Hive of the Eye Tyrant
+2 Shipwreck Marsh
+4 Forest|A
+4 Darkbore Pathway
+4 Barkchannel Pathway
+4 Clearwater Pathway
+
+[sideboard]
+4 Go Blank
+3 Skyclave Shade
+2 Ray of Enfeeblement
+2 Malevolent Hermit
+1 Bloodchief's Thirst
+1 Disdainful Stroke|KTK
+1 Culling Ritual
+1 Infernal Grasp

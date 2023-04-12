@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Mardu Control by Nagisa Miyasaka
+Title=Verduranti
+Difficulty=very hard
+Description=Mardu Control by Nagisa Miyasaka
+Icon=Verduranti.jpg
+Deck Type=constructed
+
+[main]
+1 Farewell
+2 Go for the Throat
+2 Duress
+2 Kaya, Intangible Slayer
+2 The Wandering Emperor
+2 Rite of Oblivion
+3 Reckoner Bankbuster
+3 Wedding Announcement
+4 Fable of the Mirror-Breaker
+2 Serra Paragon
+3 Loran of the Third Path
+3 Archangel of Wrath
+4 Bloodtithe Harvester
+1 Mirrex
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+1 Eiganjo, Seat of the Empire
+1 Sulfurous Springs
+1 Plains
+3 Battlefield Forge
+3 Caves of Koilos
+3 Haunted Ridge
+4 Shattered Sanctum
+4 Sundown Pass
+4 Blackcleave Cliffs
+
+[sideboard]
+4 Cut Down
+2 The Stone Brain
+2 Unlicensed Hearse
+2 Sheoldred's Edict
+1 The Eternal Wanderer
+2 Duress
+2 Serra Paragon

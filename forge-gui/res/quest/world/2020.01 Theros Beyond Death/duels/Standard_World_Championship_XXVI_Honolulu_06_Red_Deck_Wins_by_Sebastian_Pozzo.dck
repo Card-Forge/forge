@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Sebastian Pozzo
+Title=Samwise Gamgee
+Difficulty=very hard
+Description=Red Deck Wins by Sebastian Pozzo
+Icon=Samwise Gamgee.jpg
+Deck Type=constructed
+
+[main]
+4 Anax, Hardened in the Forge
+4 Fervent Champion
+2 Grim Initiate
+4 Rimrock Knight
+4 Robber of the Rich
+4 Runaway Steam-Kin
+4 Scorch Spitter
+2 Torbran, Thane of Red Fell
+4 Embercleave
+2 Infuriate
+4 Light Up the Stage
+4 Castle Embereth
+18 Mountain
+
+[sideboard]
+2 Bonecrusher Giant
+2 Claim the Firstborn
+1 Phoenix of Ash
+4 Redcap Melee
+1 Scorching Dragonfire
+1 Sorcerous Spyglass
+4 Unchained Berserker

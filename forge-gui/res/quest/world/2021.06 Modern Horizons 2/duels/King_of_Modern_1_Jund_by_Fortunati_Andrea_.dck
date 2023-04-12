@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Jund by Fortunati Andrea 
+Title=WereHyena
+Difficulty=very hard
+Description=Jund by Fortunati Andrea 
+Icon=WereHyena.jpg
+Deck Type=constructed
+
+[main]
+1 Terminate|ARB
+1 Abrupt Decay|RTR
+1 Lightning Bolt|M11
+1 Shadowspear
+1 Pyrite Spellbomb|MR
+1 Nihil Spellbomb|SOM
+1 Aether Spellbomb|MR
+1 Kolaghan's Command|DTK
+3 Thoughtseize|THS
+3 Inquisition of Kozilek|ROE
+4 Wrenn and Six
+4 Mishra's Bauble|CS
+4 Unholy Heat
+3 Dragon's Rage Channeler
+4 Tarmogoyf|FUT
+4 Ragavan, Nimble Pilferer
+1 Verdant Catacombs|ZEN
+1 Swamp
+1 Stomping Ground
+1 Steam Vents
+1 Overgrown Tomb
+1 Mountain
+1 Forest
+2 Blood Crypt
+3 Wooded Foothills|KTK
+3 Blackcleave Cliffs|SOM
+4 Urza's Saga
+4 Bloodstained Mire|KTK
+
+[sideboard]
+2 Engineered Explosives|FD
+2 Chalice of the Void|MR
+2 Alpine Moon
+1 Torpor Orb|NPH
+1 Seal of Primordium|PLC
+1 Pithing Needle
+1 Negate
+1 Lurrus of the Dream-Den
+1 Kroxa, Titan of Death's Hunger
+1 Dreadbore|RTR
+1 Nihil Spellbomb|SOM
+1 Kolaghan's Command|DTK

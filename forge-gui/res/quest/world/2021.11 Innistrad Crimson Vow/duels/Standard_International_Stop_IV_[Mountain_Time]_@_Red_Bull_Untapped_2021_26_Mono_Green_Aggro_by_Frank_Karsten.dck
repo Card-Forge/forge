@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Frank Karsten
+Title=White
+Difficulty=very hard
+Description=Mono Green Aggro by Frank Karsten
+Icon=White.jpg
+Deck Type=constructed
+
+[main]
+1 Sculptor of Winter
+2 Ulvenwald Oddity
+3 Lotus Cobra
+4 Werewolf Pack Leader
+4 Ascendant Packleader
+4 Old-Growth Troll
+4 Esika's Chariot
+4 Blizzard Brawl
+2 Unnatural Growth
+3 Ranger Class
+2 Lair of the Hydra
+3 Faceless Haven
+4 Kazandu Mammoth
+20 Snow-Covered Forest
+
+[sideboard]
+1 Ulvenwald Oddity
+1 Tangletrap
+1 Devouring Tendrils
+1 Tajuru Blightblade
+1 Choose Your Weapon
+1 Outland Liberator
+3 Wrenn and Seven
+3 Snakeskin Veil
+3 Inscription of Abundance

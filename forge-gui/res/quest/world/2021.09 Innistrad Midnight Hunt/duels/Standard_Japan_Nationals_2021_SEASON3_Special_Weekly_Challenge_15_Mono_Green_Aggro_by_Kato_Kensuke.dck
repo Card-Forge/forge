@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Kato Kensuke
+Title=Reverend Lovejoy
+Difficulty=very hard
+Description=Mono Green Aggro by Kato Kensuke
+Icon=Reverend Lovejoy.jpg
+Deck Type=constructed
+
+[main]
+1 Outland Liberator
+1 Briarbridge Tracker
+2 Lotus Cobra
+3 Old-Growth Troll
+4 Werewolf Pack Leader
+4 Esika's Chariot
+2 Snakeskin Veil
+3 Inscription of Abundance
+4 Blizzard Brawl
+4 Ranger Class
+4 Wrenn and Seven
+4 Faceless Haven
+4 Kazandu Mammoth
+4 Lair of the Hydra
+16 Snow-Covered Forest
+
+[sideboard]
+2 Snakeskin Veil
+1 Inscription of Abundance
+1 Toski, Bearer of Secrets
+2 Primal Adversary
+2 Clear Shot
+2 Battle Mammoth
+2 Unnatural Growth
+3 Tangletrap

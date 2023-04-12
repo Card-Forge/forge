@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Izzet Control by Hirayama Rei
+Title=Sherlock Holmes
+Difficulty=very hard
+Description=Izzet Control by Hirayama Rei
+Icon=Sherlock Holmes.jpg
+Deck Type=constructed
+
+[main]
+1 Silundi Vision
+2 Galvanic Iteration
+2 Memory Deluge
+2 Disdainful Stroke
+3 Unexpected Windfall
+3 Burning Hands
+3 Cathartic Pyre
+4 Spikefield Hazard
+4 Divide by Zero
+1 Thundering Rebuke
+4 Burn Down the House
+4 Expressive Iteration
+4 Alrund's Epiphany
+3 Hall of Storm Giants
+3 Frostboil Snarl
+4 Riverglide Pathway
+6 Island
+7 Mountain
+
+[sideboard]
+1 Memory Deluge
+1 Disdainful Stroke
+1 Thundering Rebuke
+1 Environmental Sciences
+1 Teachings of the Archaics
+1 Mascot Exhibition
+1 Negate
+4 Smoldering Egg
+4 Malevolent Hermit

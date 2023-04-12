@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Omnath Ramp by Patrick Fernandes 
+Title=Assassin
+Difficulty=very hard
+Description=Omnath Ramp by Patrick Fernandes 
+Icon=Assassin.jpg
+Deck Type=constructed
+
+[main]
+2 Giant Killer
+3 Brazen Borrower
+4 Bonecrusher Giant
+4 Omnath, Locus of Creation
+4 Beanstalk Giant
+4 Fae of Wishes
+4 Edgewall Innkeeper
+4 Lucky Clover
+1 Shatterskull Smashing
+3 Escape to the Wilds
+1 Plains
+2 Riverglide Pathway
+2 Ketria Triome
+2 Raugrin Triome
+2 Branchloft Pathway
+2 Mountain
+3 Forest
+4 Cragcrown Pathway
+4 Fabled Passage
+5 Island
+
+[sideboard]
+1 Escape to the Wilds
+1 Primal Might
+1 Fling
+1 Once and Future
+1 Redcap Melee
+1 Soul-Guide Lantern
+1 Negate
+1 Return to Nature
+1 Stern Dismissal
+1 Storm's Wrath
+1 Ugin, the Spirit Dragon
+1 Neutralize
+3 Mystical Dispute

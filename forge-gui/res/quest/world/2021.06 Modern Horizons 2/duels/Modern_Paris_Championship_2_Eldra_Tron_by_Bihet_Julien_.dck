@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Eldra Tron by Bihet Julien 
+Title=Legolas
+Difficulty=very hard
+Description=Eldra Tron by Bihet Julien 
+Icon=Legolas.jpg
+Deck Type=constructed
+
+[main]
+1 All Is Dust|ROE
+1 Basilisk Collar|WWK
+2 Blast Zone
+1 Cavern of Souls|AVR
+4 Chalice of the Void|MR
+3 Dismember|NPH
+4 Eldrazi Temple|ROE
+1 Endbringer|OGW
+4 Expedition Map|ZEN
+4 Karn, the Great Creator
+4 Matter Reshaper|OGW
+1 Mind Stone|10E
+4 Reality Smasher|OGW
+1 Spatial Contortion|OGW
+4 Thought-Knot Seer|OGW
+1 Urborg, Tomb of Yawgmoth|M15
+4 Urza's Mine|9E
+4 Urza's Power Plant|9E
+2 Urza's Saga
+4 Urza's Tower|9E
+3 Walking Ballista|AER
+1 Warping Wail|OGW
+2 Wastes|OGW
+
+[sideboard]
+1 All Is Dust|ROE
+1 Walking Ballista|AER
+1 Ensnaring Bridge|8E
+1 Grafdigger's Cage
+1 Liquimetal Coating|SOM
+1 Mystic Forge
+1 Pithing Needle
+1 Relic of Progenitus|ALA
+1 Skysovereign, Consul Flagship|KLD
+1 Sorcerous Spyglass
+1 Sundering Titan|DS
+1 Tormod's Crypt
+1 Torpor Orb|NPH
+1 Trinisphere|DS
+1 Wurmcoil Engine|SOM

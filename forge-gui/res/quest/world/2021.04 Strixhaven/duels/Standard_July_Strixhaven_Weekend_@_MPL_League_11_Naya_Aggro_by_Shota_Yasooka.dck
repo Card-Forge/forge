@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Naya Aggro by Shota Yasooka
+Title=Sauron
+Difficulty=very hard
+Description=Naya Aggro by Shota Yasooka
+Icon=Sauron.jpg
+Deck Type=constructed
+
+[main]
+1 Toski, Bearer of Secrets
+1 Drannith Magistrate
+2 Goldspan Dragon
+3 Clarion Spirit
+4 Giant Killer
+4 Lovestruck Beast
+4 Jaspera Sentinel
+4 Edgewall Innkeeper
+4 Elite Spellbinder
+4 Bonecrusher Giant
+1 Spikefield Hazard
+2 Kabira Takedown
+4 Showdown of the Skalds
+2 Plains
+2 Mountain
+3 Fabled Passage
+3 Forest
+4 Needleverge Pathway
+4 Branchloft Pathway
+4 Cragcrown Pathway
+
+[sideboard]
+1 Drannith Magistrate
+1 Ox of Agonas
+1 The Akroan War
+2 Archon of Absolution
+2 Roiling Vortex
+2 Glass Casket
+2 Redcap Melee
+2 Klothys, God of Destiny
+2 Run Afoul

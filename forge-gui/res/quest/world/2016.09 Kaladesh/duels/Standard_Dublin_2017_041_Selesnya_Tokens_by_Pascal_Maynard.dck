@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Selesnya Tokens by Pascal Maynard
+Title=Tusk Guardian
+Difficulty=very hard
+Description=Selesnya Tokens by Pascal Maynard
+Icon=Tusk Guardian.jpg
+Deck Type=constructed
+
+[main]
+4 Gideon, Ally of Zendikar|BFZ
+3 Nissa, Voice of Zendikar|OGW
+4 Toolcraft Exemplar|KLD
+4 Walking Ballista|AER
+4 Thraben Inspector|SOI
+4 Lambholt Pacifist|SOI
+3 Rishkar, Peema Renegade|AER
+3 Archangel Avacyn|SOI
+4 Heart of Kiran|AER
+3 Stasis Snare|BFZ
+4 Canopy Vista|BFZ
+4 Fortified Village|SOI
+9 Plains|RTR
+7 Forest|RTR
+
+[sideboard]
+3 Declaration in Stone|SOI
+2 Fumigate|KLD
+2 Fragmentize|KLD
+2 Tireless Tracker|SOI
+2 Ajani Unyielding|AER
+2 Quarantine Field|BFZ
+1 Westvale Abbey|SOI
+1 Authority of the Consuls|KLD

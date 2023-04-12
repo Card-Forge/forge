@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Daniel Carletti
+Title=Death of a Thousand Cuts
+Difficulty=very hard
+Description=Mono Green Aggro by Daniel Carletti
+Icon=Death of a Thousand Cuts.jpg
+Deck Type=constructed
+
+[main]
+2 Questing Beast
+4 Kazandu Mammoth
+4 Lovestruck Beast
+4 Stonecoil Serpent
+4 Swarm Shambler
+4 Werewolf Pack Leader
+4 Gemrazer
+2 Snakeskin Veil
+4 Primal Might
+4 Ranger Class
+2 Lair of the Hydra
+3 Faceless Haven
+19 Snow-Covered Forest
+
+[sideboard]
+1 Questing Beast
+1 Snakeskin Veil
+2 Scavenging Ooze
+2 Garruk, Unleashed
+2 Ram Through
+3 Run Afoul
+4 Garruk's Harbinger

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Izzet Control by Lighdar
+Title=alaviash
+Difficulty=very hard
+Description=Izzet Control by Lighdar
+Icon=alaviash.jpg
+Deck Type=constructed
+
+[main]
+1 Syncopate|OD
+1 Memory Deluge
+2 Demon Bolt
+2 Battle of Frost and Fire
+2 Jwari Disruption
+3 Abrade|HOU
+3 Fading Hope
+3 Galvanic Iteration
+4 Divide by Zero
+4 Unexpected Windfall
+4 Spikefield Hazard
+4 Expressive Iteration
+4 Alrund's Epiphany
+2 Island|A
+2 Field of Ruin|XLN
+2 Hall of Storm Giants
+2 Mountain|A
+3 Clearwater Pathway
+4 Riverglide Pathway
+4 Blightstep Pathway
+4 Stormcarved Coast
+
+[sideboard]
+3 Burning Hands
+2 Lier, Disciple of the Drowned
+2 Hullbreaker Horror
+2 Soul Shatter
+1 Teachings of the Archaics
+1 Vampires' Vengeance
+1 Environmental Sciences
+1 Test of Talents
+1 Mascot Exhibition
+1 Smoldering Egg

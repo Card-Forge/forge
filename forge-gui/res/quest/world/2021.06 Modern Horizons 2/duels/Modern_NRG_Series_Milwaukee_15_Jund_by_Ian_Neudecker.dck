@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Jund by Ian Neudecker
+Title=Reveka, Wizard Savant
+Difficulty=very hard
+Description=Jund by Ian Neudecker
+Icon=Reveka, Wizard Savant.jpg
+Deck Type=constructed
+
+[main]
+4 Ragavan, Nimble Pilferer
+4 Dragon's Rage Channeler
+4 Tarmogoyf|FUT
+1 Nihil Spellbomb|SOM
+1 Shadowspear
+1 Pyrite Spellbomb|MR
+4 Mishra's Bauble|CS
+1 Kolaghan's Command|DTK
+1 Abrupt Decay|RTR
+2 Lightning Bolt|M11
+4 Unholy Heat
+2 Thoughtseize|THS
+4 Inquisition of Kozilek|ROE
+4 Urza's Saga
+4 Wrenn and Six
+1 Stomping Ground
+1 Overgrown Tomb
+1 Nurturing Peatland
+1 Forest
+1 Swamp
+1 Mountain
+1 Blood Crypt
+2 Blackcleave Cliffs|SOM
+2 Verdant Catacombs|ZEN
+4 Wooded Foothills|KTK
+4 Bloodstained Mire|KTK
+
+[sideboard]
+2 Nihil Spellbomb|SOM
+1 Thoughtseize|THS
+1 Void Mirror
+1 Lurrus of the Dream-Den
+1 Chalice of the Void|MR
+1 Pithing Needle
+1 Alpine Moon
+2 Assassin's Trophy
+2 Torpor Orb|NPH
+3 Engineered Explosives|FD

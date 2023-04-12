@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Mono Blue Tempo by Francisco Sanchez
+Title=AidoHwedo
+Difficulty=very hard
+Description=Mono Blue Tempo by Francisco Sanchez
+Icon=AidoHwedo.jpg
+Deck Type=constructed
+
+[main]
+4 Tolarian Terror
+4 Haughty Djinn
+2 Scatter Ray
+2 Negate
+2 March of Swirling Mist
+2 Make Disappear
+3 Spell Pierce
+3 Flow of Knowledge
+4 Thirst for Discovery
+4 Impulse
+4 Fading Hope
+4 Consider
+22 Island
+
+[sideboard]
+2 Negate
+1 Disdainful Stroke
+2 Invoke the Winds
+2 Pithing Needle
+2 Unlicensed Hearse
+2 Consuming Tide
+4 Ledger Shredder

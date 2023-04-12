@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Boros Cycling Aggro by Lars Luckhaupt
+Title=Big Rock
+Difficulty=very hard
+Description=Boros Cycling Aggro by Lars Luckhaupt
+Icon=Big Rock.jpg
+Deck Type=constructed
+
+[main]
+4 Valiant Rescuer
+4 Drannith Stinger
+4 Irencrag Pyromancer
+4 Flourishing Fox
+1 Disdainful Stroke
+1 Shredded Sails
+1 Mystical Dispute
+4 Zenith Flare
+4 Startling Development
+2 Go for Blood
+3 Boon of the Wish-Giver
+4 Memory Leak
+4 Improbable Alliance
+1 Brightclimb Pathway
+1 Blightstep Pathway
+1 Clearwater Pathway
+1 Savai Triome
+4 Raugrin Triome
+4 Riverglide Pathway
+4 Needleverge Pathway
+4 Hengegate Pathway
+
+[sideboard]
+2 Disdainful Stroke
+1 Shredded Sails
+1 Mystical Dispute
+1 Soul-Guide Lantern
+1 Prismari Command
+1 Rielle, the Everwise
+2 Glass Casket
+3 Redcap Melee
+3 Negate

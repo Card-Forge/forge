@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Naya Aggro by Gabriel Nassif
+Title=Piper
+Difficulty=very hard
+Description=Naya Aggro by Gabriel Nassif
+Icon=Piper.jpg
+Deck Type=constructed
+
+[main]
+2 Tangled Florahedron
+2 Clarion Spirit
+2 Drannith Magistrate
+2 Reidane, God of the Worthy
+4 Edgewall Innkeeper
+4 Lovestruck Beast
+4 Elite Spellbinder
+4 Bonecrusher Giant
+4 Jaspera Sentinel
+4 Giant Killer
+4 Showdown of the Skalds
+1 Mountain
+1 Temple of Abandon
+3 Forest
+3 Plains
+4 Needleverge Pathway
+4 Fabled Passage
+4 Cragcrown Pathway
+4 Branchloft Pathway
+
+[sideboard]
+2 Drannith Magistrate
+1 Jegantha, the Wellspring
+1 Soul-Guide Lantern
+1 The Akroan War
+2 Chainweb Aracnir
+2 Glass Casket
+3 Fire Prophecy
+3 Redcap Melee

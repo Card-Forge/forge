@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Dimir Control by Paweł Kardyś
+Title=Tusk Guardian
+Difficulty=very hard
+Description=Dimir Control by Paweł Kardyś
+Icon=Tusk Guardian.jpg
+Deck Type=constructed
+
+[main]
+1 Xanathar, Guild Kingpin
+2 Dragon Turtle
+3 Iymrith, Desert Doom
+1 Negate
+2 Jwari Disruption
+2 Disdainful Stroke
+3 Saw It Coming
+4 Memory Deluge
+4 Siphon Insight
+4 Infernal Grasp
+2 Bloodchief's Thirst
+2 Shadows' Verdict
+4 The Meathook Massacre
+1 Ice Tunnel
+2 Hall of Storm Giants
+4 Shipwreck Marsh
+4 Clearwater Pathway
+4 Field of Ruin
+5 Snow-Covered Island
+6 Snow-Covered Swamp
+
+[sideboard]
+1 Disdainful Stroke
+1 Shadows' Verdict
+1 Flunk
+2 Lash of Malice
+2 Malevolent Hermit
+2 Test of Talents
+2 Skyclave Shade
+4 Duress

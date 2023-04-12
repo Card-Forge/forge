@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Esper Control by Lucas Esper Berthoud (bertu)
+Title=Galahad
+Difficulty=very hard
+Description=Esper Control by Lucas Esper Berthoud (bertu)
+Icon=Galahad.jpg
+Deck Type=constructed
+
+[main]
+1 Moment of Craving
+1 Despark
+3 Cast Down
+2 Basilica Bell-Haunt
+1 Command the Dreadhorde
+3 Kaya's Wrath
+1 The Elderspell
+4 Thought Erasure
+3 Oath of Kaya
+2 Search for Azcanta|XLN
+1 Liliana, Dreadhorde General
+4 Narset, Parter of Veils
+4 Teferi, Hero of Dominaria
+4 Teferi, Time Raveler
+4 Drowned Catacomb|XLN
+4 Glacial Fortress|XLN
+4 Godless Shrine
+4 Hallowed Fountain
+4 Isolated Chapel
+1 Plains
+1 Swamp
+4 Watery Grave
+
+[sideboard]
+2 Despark
+1 Command the Dreadhorde
+1 The Elderspell
+3 Cry of the Carnarium
+1 Dovin's Veto
+3 Duress
+2 Lyra Dawnbringer
+2 Nightveil Predator

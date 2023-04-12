@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Nathaniel Knox
+Title=Defense
+Difficulty=very hard
+Description=Temur Reclamation by Nathaniel Knox
+Icon=Defense.jpg
+Deck Type=constructed
+
+[main]
+4 Ketria Triome
+4 Breeding Pool
+4 Fabled Passage
+3 Steam Vents
+3 Stomping Ground
+3 Castle Vantress
+2 Forest
+2 Blast Zone
+2 Island
+1 Mountain
+1 Temple of Mystery
+4 Shark Typhoon
+4 Wilderness Reclamation
+4 Growth Spiral
+4 Expansion // Explosion
+1 Brazen Borrower
+2 Uro, Titan of Nature's Wrath
+2 Nightpack Ambusher
+1 Mazemind Tome
+2 Aether Gust
+3 Negate
+4 Mystical Dispute
+
+[sideboard]
+1 Flame Sweep
+1 Storm's Wrath
+1 Narset's Reversal
+2 Lovestruck Beast
+2 Elder Gargaroth
+3 Scorching Dragonfire
+1 Bonecrusher Giant
+1 Commence the Endgame
+1 Brazen Borrower
+1 Mazemind Tome
+1 Negate

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Rakdos Aggro by Christopher Leonard
+Title=Linc
+Difficulty=very hard
+Description=Rakdos Aggro by Christopher Leonard
+Icon=Linc.jpg
+Deck Type=constructed
+
+[main]
+1 Ox of Agonas
+2 Rankle, Master of Pranks
+2 Murderous Rider
+2 Terror of the Peaks
+4 Kroxa, Titan of Death's Hunger
+4 Bonecrusher Giant
+4 Mire Triton
+2 Heartless Act
+2 Hagra Mauling
+3 Shredded Sails
+3 Spikefield Hazard
+1 Shatterskull Smashing
+2 Agadeem's Awakening
+4 Agonizing Remorse
+4 Tymaret Calls the Dead
+4 Mountain
+4 Fabled Passage
+4 Temple of Malice
+8 Swamp
+
+[sideboard]
+2 Murderous Rider
+1 Heartless Act
+1 Shredded Sails
+1 Embereth Shieldbreaker
+2 Tormod's Crypt
+2 Bloodchief's Thirst
+2 Blacklance Paragon
+4 Skyclave Shade

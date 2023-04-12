@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Ales Seidler
+Title=Bruce Lee
+Difficulty=very hard
+Description=Esper Aggro by Ales Seidler
+Icon=Bruce Lee.jpg
+Deck Type=constructed
+
+[main]
+1 Malevolent Hermit
+1 Legion Angel
+3 Obscura Interceptor
+3 Tenacious Underdog
+4 Luminarch Aspirant
+4 Raffine, Scheming Seer
+4 Vanishing Verse
+1 Emeria's Call
+2 The Meathook Massacre
+4 Wedding Announcement
+1 Lolth, Spider Queen
+3 Kaito Shizuki
+3 The Wandering Emperor
+1 Plains
+1 Hive of the Eye Tyrant
+1 Eiganjo, Seat of the Empire
+2 Deserted Beach
+2 Shattered Sanctum
+3 Shipwreck Marsh
+4 Clearwater Pathway
+4 Raffine's Tower
+4 Brightclimb Pathway
+4 Hengegate Pathway
+
+[sideboard]
+3 Legion Angel
+1 The Meathook Massacre
+1 Nimble Larcenist
+1 Portable Hole
+2 Duress
+2 Go Blank
+2 Negate
+3 Ray of Enfeeblement

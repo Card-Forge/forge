@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Todd Judy
+Title=Autumn Willow
+Difficulty=very hard
+Description=Red Deck Wins by Todd Judy
+Icon=Autumn Willow.jpg
+Deck Type=constructed
+
+[main]
+4 Chandra's Phoenix|M12
+3 Ember Hauler|M11
+4 Goblin Guide|ZEN
+4 Grim Lavamancer|M12
+3 Hero of Oxid Ridge|MBS
+2 Burst Lightning|ZEN
+4 Lightning Bolt|M11
+4 Searing Blaze|WWK
+4 Staggershock|ROE
+4 Shrine of Burning Rage|NPH
+13 Mountain|M12
+4 Arid Mesa|ZEN
+4 Scalding Tarn|ZEN
+3 Teetering Peaks|ZEN
+
+[sideboard]
+3 Manic Vandal|M12
+2 Vulshok Refugee|NPH
+3 Act of Aggression|NPH
+2 Dragon's Claw|M12
+3 Torpor Orb|NPH
+2 Koth of the Hammer|SOM

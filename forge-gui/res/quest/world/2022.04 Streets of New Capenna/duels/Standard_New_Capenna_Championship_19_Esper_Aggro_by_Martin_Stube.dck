@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Martin Stube
+Title=Sabertooth
+Difficulty=very hard
+Description=Esper Aggro by Martin Stube
+Icon=Sabertooth.jpg
+Deck Type=constructed
+
+[main]
+1 Duress
+1 Bloodchief's Thirst
+2 Lolth, Spider Queen
+2 Vanishing Verse
+2 Emeria's Call
+3 Ray of Enfeeblement
+3 The Meathook Massacre
+3 The Wandering Emperor
+3 Kaito Shizuki
+1 All-Seeing Arbiter
+1 Sanctuary Warden
+2 Faerie Vandal
+2 Nullpriest of Oblivion
+2 Obscura Interceptor
+4 Tenacious Underdog
+4 Raffine, Scheming Seer
+1 Otawara, Soaring City
+1 Swamp
+2 Brightclimb Pathway
+2 Hengegate Pathway
+2 Shipwreck Marsh
+2 Hive of the Eye Tyrant
+3 Shattered Sanctum
+3 Deserted Beach
+4 Raffine's Tower
+4 Clearwater Pathway
+
+[sideboard]
+2 Negate
+1 Elspeth Resplendent
+2 Duress
+2 Bloodchief's Thirst
+1 Lolth, Spider Queen
+1 Vanishing Verse
+1 Ray of Enfeeblement
+1 The Meathook Massacre
+1 The Wandering Emperor
+1 Sanctuary Warden
+2 Obscura Interceptor

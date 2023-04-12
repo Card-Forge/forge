@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Temur Energy by Elias Klocker (Austria)
+Title=Green Hornet
+Difficulty=very hard
+Description=Temur Energy by Elias Klocker (Austria)
+Icon=Green Hornet.jpg
+Deck Type=constructed
+
+[main]
+1 Drowned Catacomb|XLN
+1 Swamp|XLN
+1 Mountain|XLN
+2 Island|XLN
+1 Forest|XLN
+2 Dragonskull Summit|XLN
+1 Fetid Pools|AKH
+1 Canyon Slough|AKH
+4 Botanical Sanctum|KLD
+4 Blooming Marsh|KLD
+4 Aether Hub|KLD
+1 Supreme Will|HOU
+3 Essence Scatter|AKH
+3 Vraska's Contempt|XLN
+3 Harnessed Lightning|KLD
+4 Fatal Push|AER
+2 Glimmer of Genius|KLD
+4 Attune with Aether|KLD
+4 Whirler Virtuoso|KLD
+2 The Scarab God|HOU
+4 Rogue Refiner|AER
+1 Gonti, Lord of Luxury|KLD
+4 Glint-Sleeve Siphoner|AER
+3 Torrential Gearhulk|KLD
+
+[sideboard]
+3 Deathgorge Scavenger|XLN
+2 Chandra's Defeat|HOU
+2 Appetite for the Unnatural|KLD
+1 Harnessed Lightning|KLD
+1 Gonti, Lord of Luxury|KLD
+1 Vraska, Relic Seeker|XLN
+3 Negate|AER
+2 Duress|XLN

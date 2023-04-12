@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Grixis Twin Exarch by Jay Kendrick
+Title=Seabiscuit
+Difficulty=very hard
+Description=Grixis Twin Exarch by Jay Kendrick
+Icon=Seabiscuit.jpg
+Deck Type=constructed
+
+[main]
+1 Consecrated Sphinx|MBS
+4 Deceiver Exarch|NPH
+1 Inferno Titan|M12
+2 Dismember|NPH
+2 Go for the Throat|MBS
+2 Into the Roil|ZEN
+4 Mana Leak|M12
+2 Duress|M11
+4 Inquisition of Kozilek|ROE
+4 Ponder|M12
+4 Preordain|M11
+4 Splinter Twin|ROE
+4 Island|M12
+3 Mountain|M12
+4 Blackcleave Cliffs|SOM
+4 Creeping Tar Pit|WWK
+4 Darkslick Shores|SOM
+1 Halimar Depths|WWK
+4 Scalding Tarn|ZEN
+2 Jace Beleren|M11
+
+[sideboard]
+1 Inferno Titan|M12
+3 Spellskite|NPH
+2 Combust|M12
+2 Shatter|SOM
+2 Spell Pierce|ZEN
+2 Twisted Image|SOM
+3 Pyroclasm|M11

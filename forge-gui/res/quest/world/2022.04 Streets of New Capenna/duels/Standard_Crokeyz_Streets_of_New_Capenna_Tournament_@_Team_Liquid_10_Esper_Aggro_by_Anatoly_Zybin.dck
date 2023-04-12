@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Esper Aggro by Anatoly Zybin
+Title=Hydra
+Difficulty=very hard
+Description=Esper Aggro by Anatoly Zybin
+Icon=Hydra.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+1 Sorin the Mirthless
+1 Elspeth Resplendent
+1 Lolth, Spider Queen
+2 Vanishing Verse
+2 Bloodchief's Thirst
+2 Emeria's Call
+2 The Wandering Emperor
+3 Wedding Announcement
+1 Henrika Domnathi
+4 Spirited Companion
+4 Raffine, Scheming Seer
+4 Faerie Vandal
+4 Luminarch Aspirant
+4 Welcoming Vampire
+1 Island
+1 Otawara, Soaring City
+1 Eiganjo, Seat of the Empire
+2 Hive of the Eye Tyrant
+2 Shattered Sanctum
+2 Raffine's Tower
+3 Shipwreck Marsh
+4 Clearwater Pathway
+4 Hengegate Pathway
+4 Brightclimb Pathway
+
+[sideboard]
+1 Ray of Enfeeblement
+1 The Meathook Massacre
+1 Path of Peril
+1 Kaya the Inexorable
+1 Pithing Needle
+2 Dawnbringer Cleric
+2 Portable Hole
+2 Go Blank
+2 Duress
+2 Orvar, the All-Form

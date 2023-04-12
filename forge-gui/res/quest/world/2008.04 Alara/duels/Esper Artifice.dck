@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Esper Artifice
+Title=Esper Artifice
+Icon=alawind.jpg
+Difficulty=easy
+Description=The plane of Esper is dominated by brilliant wizards, artificers, and sphinxes who seek to control the very forces of nature through a magical alloy called etherium.
+Deck Type=constructed
+[main]
+4 Arcane Sanctum|ALA
+2 Courier's Capsule|ALA
+1 Court Homunculus|CFX
+1 Esper Battlemage|ALA
+2 Esper Charm|ALA
+1 Esper Cormorants|CFX
+4 Esper Panorama|ALA
+1 Esperzoa|CFX
+2 Etherium Sculptor|ALA
+3 Executioner's Capsule|ALA
+1 Faerie Mechanist|CFX
+8 Island|ALA|2
+1 Island|ALA|3
+1 Magister Sphinx+|CFX
+1 Marble Chalice|ALA
+1 Master of Etherium+|ALA
+1 Obelisk of Esper|ALA
+2 Oblivion Ring|ALA
+1 Onyx Goblet|ALA
+4 Plains|ALA|4
+1 Salvage Slasher|CFX
+1 Sanctum Gargoyle|ALA
+1 Scornful Aether-Lich|CFX
+1 Sharding Sphinx|ALA
+1 Sludge Strider|CFX
+4 Swamp|ALA|1
+1 Tidehollow Sculler|ALA
+1 Tower Gargoyle|ALA
+2 Traumatic Visions|CFX
+1 Vectis Agents|CFX
+2 Vedalken Outlander|CFX
+2 Windwright Mage|ALA

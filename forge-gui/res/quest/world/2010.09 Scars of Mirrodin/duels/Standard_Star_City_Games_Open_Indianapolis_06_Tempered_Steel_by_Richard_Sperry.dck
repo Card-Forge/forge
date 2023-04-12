@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Tempered Steel by Richard Sperry
+Title=Doran
+Difficulty=very hard
+Description=Tempered Steel by Richard Sperry
+Icon=Doran.jpg
+Deck Type=constructed
+
+[main]
+3 Hex Parasite|NPH
+4 Memnite|SOM
+2 Ornithopter|M11
+4 Phyrexian Revoker|MBS
+3 Porcelain Legionnaire|NPH
+4 Signal Pest|MBS
+4 Steel Overseer|M11
+4 Vault Skirge|NPH
+4 Dispatch|NPH
+4 Glint Hawk Idol|SOM
+3 Mox Opal|SOM
+4 Tempered Steel|SOM
+9 Plains|NPH
+2 Contested War Zone|MBS
+1 Glacial Fortress|M11
+1 Inkmoth Nexus|MBS
+4 Seachrome Coast|SOM
+
+[sideboard]
+4 Spellskite|NPH
+2 Divine Offering|MBS
+2 Refraction Trap|WWK
+4 Spell Pierce|ZEN
+3 Torpor Orb|NPH

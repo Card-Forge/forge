@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Izzet Control by Joao Lucas Caparroz
+Title=Edward Scissorhands
+Difficulty=very hard
+Description=Izzet Control by Joao Lucas Caparroz
+Icon=Edward Scissorhands.jpg
+Deck Type=constructed
+
+[main]
+1 Test of Talents
+2 Fading Hope
+2 Demon Bolt
+2 Memory Deluge
+3 Jwari Disruption
+3 Spikefield Hazard
+4 Unexpected Windfall
+4 Divide by Zero
+4 Galvanic Iteration
+2 Thundering Rebuke
+2 Burn Down the House
+4 Expressive Iteration
+4 Alrund's Epiphany
+2 Hall of Storm Giants
+2 Field of Ruin
+3 Frostboil Snarl
+4 Riverglide Pathway
+5 Island
+7 Mountain
+
+[sideboard]
+1 Test of Talents
+1 Environmental Sciences
+1 Mascot Exhibition
+1 Teachings of the Archaics
+1 Cinderclasm
+2 Goldspan Dragon
+2 Cyclone Summoner
+3 Malevolent Hermit
+3 Burning Hands

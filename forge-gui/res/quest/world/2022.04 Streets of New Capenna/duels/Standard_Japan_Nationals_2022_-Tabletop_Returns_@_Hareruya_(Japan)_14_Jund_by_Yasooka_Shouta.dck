@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Jund by Yasooka Shouta
+Title=Dem Bones
+Difficulty=very hard
+Description=Jund by Yasooka Shouta
+Icon=Dem Bones.jpg
+Deck Type=constructed
+
+[main]
+1 Unleash the Inferno
+2 The Meathook Massacre
+2 Duress
+2 Infernal Grasp
+3 Riveteers Charm
+3 Voltage Surge
+4 Esika's Chariot
+4 Fable of the Mirror-Breaker
+1 Valki, God of Lies
+1 Ziatora, the Incinerator
+2 Jinnie Fay, Jetmir's Second
+2 Tenacious Underdog
+2 Gala Greeters
+2 Workshop Warchief
+4 Black Market Tycoon
+1 Forest
+1 Boseiju, Who Endures
+2 Deathcap Glade
+3 Haunted Ridge
+3 Den of the Bugbear
+3 Darkbore Pathway
+4 Cragcrown Pathway
+4 Blightstep Pathway
+4 Ziatora's Proving Ground
+
+[sideboard]
+3 Ray of Enfeeblement
+2 Go Blank
+2 Reckoner Bankbuster
+2 Unlicensed Hearse
+2 Unleash the Inferno
+2 Duress
+2 Workshop Warchief

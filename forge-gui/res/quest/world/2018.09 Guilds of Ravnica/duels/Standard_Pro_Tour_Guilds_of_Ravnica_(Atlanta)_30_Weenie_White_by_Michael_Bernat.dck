@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Weenie White by Michael Bernat
+Title=Defense
+Difficulty=very hard
+Description=Weenie White by Michael Bernat
+Icon=Defense.jpg
+Deck Type=constructed
+
+[main]
+4 Dauntless Bodyguard
+2 Healer's Hawk
+4 Skymarcher Aspirant
+4 Snubhorn Sentry
+4 Adanto Vanguard|XLN
+4 Benalish Marshal
+4 Venerated Loxodon
+2 Pride of Conquerors
+4 Legion's Landing|XLN
+4 History of Benalia
+4 Conclave Tribunal
+2 Clifftop Retreat
+14 Plains
+4 Sacred Foundry
+
+[sideboard]
+2 Clifftop Retreat
+2 Baffling End
+4 Tocatli Honor Guard|XLN
+2 Ajani, Adversary of Tyrants
+1 Make a Stand
+3 Experimental Frenzy
+1 Tajic, Legion's Edge

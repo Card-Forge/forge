@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mono Green Aggro by Eli Loveman
+Title=alapro
+Difficulty=very hard
+Description=Mono Green Aggro by Eli Loveman
+Icon=alapro.jpg
+Deck Type=constructed
+
+[main]
+4 Pelt Collector
+4 Barkhide Troll
+3 Yorvo, Lord of Garenbrig
+2 Gemrazer
+2 Wildborn Preserver
+21 Forest
+2 Mobilized District
+2 Castle Garenbrig
+3 Vivien, Arkbow Ranger
+2 Nissa, Who Shakes the World
+3 Ram Through
+4 Stonecoil Serpent
+4 Scavenging Ooze
+4 Questing Beast
+
+[sideboard]
+4 Shifting Ceratops
+4 Oakhame Adversary
+3 Primal Might
+1 Gemrazer
+1 Ranger's Guile
+1 Elder Gargaroth
+1 Ram Through

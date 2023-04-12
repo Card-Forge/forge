@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Jund by Qiulaohan
+Title=Seth
+Difficulty=very hard
+Description=Jund by Qiulaohan
+Icon=Seth.jpg
+Deck Type=constructed
+
+[main]
+1 Lolth, Spider Queen
+2 Infernal Grasp
+4 Shatterskull Smashing
+4 Esika's Chariot
+3 Reckless Stormseeker
+3 Valki, God of Lies
+4 Jaspera Sentinel
+4 Prosperous Innkeeper
+4 Magda, Brazen Outlaw
+4 Immersturm Predator
+4 Goldspan Dragon
+2 Lair of the Hydra
+2 Rockfall Vale
+3 Forest
+4 Cragcrown Pathway
+4 Darkbore Pathway
+4 Haunted Ridge
+4 Blightstep Pathway
+
+[sideboard]
+4 Duress
+3 Ray of Enfeeblement
+3 Power Word Kill
+2 Check for Traps
+2 Go Blank
+1 Inscription of Ruin

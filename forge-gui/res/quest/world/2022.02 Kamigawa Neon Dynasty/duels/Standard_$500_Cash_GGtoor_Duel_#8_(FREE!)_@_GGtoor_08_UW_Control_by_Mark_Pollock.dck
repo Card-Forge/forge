@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=UW Control by Mark Pollock
+Title=Wally
+Difficulty=very hard
+Description=UW Control by Mark Pollock
+Icon=Wally.jpg
+Deck Type=constructed
+
+[main]
+2 Negate
+2 Starnheim Unleashed
+3 Memory Deluge
+4 The Wandering Emperor
+4 Teferi, Who Slows the Sunset
+4 Doomskar
+4 Farewell
+4 Behold the Multiverse
+4 Fateful Absence
+2 Hullbreaker Horror
+2 Iymrith, Desert Doom
+2 Cave of the Frost Dragon
+4 Hengegate Pathway
+4 Hall of Storm Giants
+4 Deserted Beach
+5 Island
+6 Plains
+
+[sideboard]
+2 March of Otherworldly Light
+2 Fading Hope
+2 Disdainful Stroke
+2 Annul
+2 Thraben Exorcism
+2 Test of Talents
+2 Divine Smite
+1 Negate

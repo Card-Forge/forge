@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=FRites by Ken Yukuhiro
+Title=Bubbles
+Difficulty=very hard
+Description=FRites by Ken Yukuhiro
+Icon=Bubbles.jpg
+Deck Type=constructed
+
+[main]
+4 Faithless Looting|C15
+4 Mulch|C15
+4 Unburial Rites|ISD
+3 Angel of Glory's Rise|AVR
+3 Falkenrath Aristocrat|DKA
+3 Huntmaster of the Fells|DKA
+4 Borderland Ranger|AVR
+4 Cathedral Sanctifier|AVR
+4 Fiend Hunter|C13
+4 Griselbrand|AVR
+1 Cavern of Souls|AVR
+1 Swamp|RTR
+2 Mountain|RTR
+3 Forest|RTR
+4 Woodland Cemetery
+4 Plains|RTR
+4 Clifftop Retreat
+4 Evolving Wilds
+
+[sideboard]
+2 Witchbane Orb|ISD
+3 Blasphemous Act|C16
+3 Purify the Grave|ISD
+3 Restoration Angel|AVR
+3 Geist-Honored Monk|C14
+1 Falkenrath Aristocrat|DKA

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mono Blue Aggro by Felix Grezes
+Title=JuzamGenie
+Difficulty=very hard
+Description=Mono Blue Aggro by Felix Grezes
+Icon=JuzamGenie.jpg
+Deck Type=constructed
+
+[main]
+2 Mist-Cloaked Herald
+4 Siren Stormtamer|XLN
+4 Tempest Djinn
+4 Pteramander
+4 Merfolk Trickster
+2 Chart a Course|XLN
+1 Entrancing Melody|XLN
+1 Essence Capture
+4 Wizard's Retort
+4 Opt
+3 Spell Pierce|XLN
+3 Dive Down|XLN
+4 Curious Obsession
+20 Island
+
+[sideboard]
+2 Entrancing Melody|XLN
+1 Essence Capture
+3 Surge Mare
+2 Deep Freeze
+1 Sorcerous Spyglass|XLN
+4 Negate
+1 Exclusion Mage
+1 Faerie Duelist

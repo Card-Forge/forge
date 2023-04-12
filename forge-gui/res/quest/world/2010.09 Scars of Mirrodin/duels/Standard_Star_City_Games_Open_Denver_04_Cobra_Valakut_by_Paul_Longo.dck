@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Cobra Valakut by Paul Longo
+Title=Nagsnarf
+Difficulty=very hard
+Description=Cobra Valakut by Paul Longo
+Icon=Nagsnarf.jpg
+Deck Type=constructed
+
+[main]
+2 Inferno Titan|M11
+4 Lotus Cobra|ZEN
+1 Obstinate Baloth|M11
+2 Oracle of Mul Daya|ZEN
+4 Overgrown Battlement|ROE
+4 Primeval Titan|M11
+4 Nature's Claim|WWK
+4 Explore|WWK
+4 Green Sun's Zenith|MBS
+3 Khalni Heart Expedition|ZEN
+4 Forest|NPH
+11 Mountain|NPH
+1 Arid Mesa|ZEN
+4 Terramorphic Expanse|M11
+4 Valakut, the Molten Pinnacle|ZEN
+4 Verdant Catacombs|ZEN
+
+[sideboard]
+2 Obstinate Baloth|M11
+1 Oracle of Mul Daya|ZEN
+2 Acidic Slime|M11
+3 Lightning Bolt|M11
+3 Summoning Trap|ZEN
+4 Slagstorm|MBS

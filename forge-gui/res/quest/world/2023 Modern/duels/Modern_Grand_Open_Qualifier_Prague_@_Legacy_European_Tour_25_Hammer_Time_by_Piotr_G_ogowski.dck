@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Hammer Time by Piotr G ogowski
+Title=Sentinel
+Difficulty=very hard
+Description=Hammer Time by Piotr G ogowski
+Icon=Sentinel.jpg
+Deck Type=constructed
+
+[main]
+4 Esper Sentinel
+4 Puresteel Paladin|NPH
+4 Stoneforge Mystic|WWK
+2 Ornithopter|AER
+2 Giver of Runes
+3 Memnite|SOM
+1 Gingerbrute
+1 Kor Outfitter|ZEN
+4 Colossus Hammer
+1 Kaldra Compleat
+1 Shadowspear
+4 Springleaf Drum|BNG
+3 Blacksmith's Skill
+4 Sigarda's Aid|EMN
+4 Urza's Saga
+3 Inkmoth Nexus|MBS
+9 Plains
+1 Eiganjo, Seat of the Empire
+2 Silent Clearing
+2 Horizon Canopy|FUT
+1 Sunbaked Canyon
+
+[sideboard]
+3 Drannith Magistrate
+4 March of Otherworldly Light
+4 Sanctifier en-Vec
+1 Pithing Needle
+2 Orvar, the All-Form
+1 Sword of Fire and Ice|DS

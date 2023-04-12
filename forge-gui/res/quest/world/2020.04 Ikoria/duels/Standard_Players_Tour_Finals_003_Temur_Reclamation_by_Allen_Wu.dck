@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Temur Reclamation by Allen Wu
+Title=Waylon Smithers
+Difficulty=very hard
+Description=Temur Reclamation by Allen Wu
+Icon=Waylon Smithers.jpg
+Deck Type=constructed
+
+[main]
+1 Brazen Borrower
+2 Uro, Titan of Nature's Wrath
+2 Nightpack Ambusher
+3 Aether Gust
+3 Negate
+4 Expansion // Explosion
+4 Mystical Dispute
+4 Growth Spiral
+4 Shark Typhoon
+4 Wilderness Reclamation
+1 Temple of Mystery
+1 Mountain
+2 Forest
+2 Island
+2 Blast Zone
+3 Castle Vantress
+3 Stomping Ground
+3 Steam Vents
+4 Ketria Triome
+4 Breeding Pool
+4 Fabled Passage
+
+[sideboard]
+1 Brazen Borrower
+1 Uro, Titan of Nature's Wrath
+1 Negate
+1 Flame Sweep
+1 Narset's Reversal
+1 Storm's Wrath
+1 Commence the Endgame
+2 Elder Gargaroth
+2 Mazemind Tome
+4 Scorching Dragonfire

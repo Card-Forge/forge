@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Legendary Naya by Pak Yin Lai
+Title=Sickly Growth
+Difficulty=very hard
+Description=Legendary Naya by Pak Yin Lai
+Icon=Sickly Growth.jpg
+Deck Type=constructed
+
+[main]
+4 Sylvan Advocate|OGW
+4 Tireless Tracker|SOI
+3 Archangel Avacyn|SOI
+2 Thalia's Lancers|EMN
+2 Dragonlord Atarka|DTK
+1 Dragonlord Dromoka|DTK
+1 Linvala, the Preserver|OGW
+2 Hangarback Walker|ORI
+3 Nissa, Vastwood Seer|ORI
+2 Declaration in Stone|SOI
+3 Tragic Arrogance|ORI
+4 Oath of Nissa|OGW
+3 Stasis Snare|BFZ
+6 Forest|RTR
+6 Plains|RTR
+1 Mountain|RTR
+3 Needle Spires|OGW
+4 Canopy Vista|BFZ
+4 Evolving Wilds
+2 Cinder Glade|BFZ
+
+[sideboard]
+1 Hangarback Walker|ORI
+1 Declaration in Stone|SOI
+3 Gideon, Ally of Zendikar|BFZ
+1 Quarantine Field|BFZ
+2 Evolutionary Leap|ORI
+1 Emrakul, the Promised End|EMN
+1 Sigarda, Heron's Grace|SOI
+3 Radiant Flames|BFZ
+2 Rending Volley|DTK

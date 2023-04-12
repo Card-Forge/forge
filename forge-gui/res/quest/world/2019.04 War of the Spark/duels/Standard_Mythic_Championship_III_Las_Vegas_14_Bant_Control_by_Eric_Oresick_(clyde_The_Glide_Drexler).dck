@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Bant Control by Eric Oresick (clyde The Glide Drexler)
+Title=Archangel
+Difficulty=very hard
+Description=Bant Control by Eric Oresick (clyde The Glide Drexler)
+Icon=Archangel.jpg
+Deck Type=constructed
+
+[main]
+2 Frilled Mystic
+4 Hydroid Krasis
+4 Incubation Druid
+4 Llanowar Elves
+4 Paradise Druid
+2 Shalai, Voice of Plenty
+2 Entrancing Melody|XLN
+1 Finale of Glory
+3 Mass Manipulation
+4 Nissa, Who Shakes the World
+4 Teferi, Time Raveler
+4 Breeding Pool
+5 Forest
+4 Glacial Fortress|XLN
+4 Hallowed Fountain
+4 Hinterland Harbor
+1 Island
+4 Temple Garden
+
+[sideboard]
+2 Baffling End
+2 Deputy of Detention
+2 Ixalan's Binding|XLN
+1 Lyra Dawnbringer
+4 Negate
+1 The Immortal Sun
+2 Thrashing Brontodon
+1 Tolsimir, Friend to Wolves

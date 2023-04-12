@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Grixis Monki by Lukasz Pioro
+Title=Eureka
+Difficulty=very hard
+Description=Grixis Monki by Lukasz Pioro
+Icon=Eureka.jpg
+Deck Type=constructed
+
+[main]
+1 Spirebluff Canal|KLD
+4 Ragavan, Nimble Pilferer
+4 Snapcaster Mage|ISD
+2 Spreading Seas|ZEN
+1 Thoughtseize|THS
+3 Unholy Heat
+4 Mishra's Bauble|CS
+3 Lightning Bolt|M11
+3 Inquisition of Kozilek|ROE
+1 Engineered Explosives|FD
+1 Cling to Dust
+2 Terminate|ARB
+3 Kolaghan's Command|DTK
+4 Expressive Iteration
+4 Drown in the Loch
+1 Blackcleave Cliffs|SOM
+1 Blood Crypt
+1 Bloodstained Mire|KTK
+2 Darkslick Shores|SOM
+2 Island
+1 Mountain
+4 Polluted Delta|KTK
+3 Scalding Tarn|ZEN
+2 Steam Vents
+2 Swamp
+1 Watery Grave
+
+[sideboard]
+2 Engineered Explosives|FD
+3 Alpine Moon
+3 Counterspell|7E
+2 Dress Down
+2 Flusterstorm
+2 Nihil Spellbomb|SOM
+1 Lurrus of the Dream-Den

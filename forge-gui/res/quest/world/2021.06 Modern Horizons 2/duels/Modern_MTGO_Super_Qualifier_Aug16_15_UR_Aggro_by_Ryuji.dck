@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=UR Aggro by Ryuji
+Title=Sharee
+Difficulty=very hard
+Description=UR Aggro by Ryuji
+Icon=Sharee.jpg
+Deck Type=constructed
+
+[main]
+1 Spell Pierce|XLN
+1 Archmage's Charm
+1 Blood Moon|9E
+2 Serum Visions|FD
+3 Counterspell|7E
+4 Unholy Heat
+4 Thought Scour|DKA
+4 Mishra's Bauble|CS
+4 Lightning Bolt|M11
+4 Expressive Iteration
+2 Snapcaster Mage|ISD
+4 Dragon's Rage Channeler
+4 Ragavan, Nimble Pilferer
+4 Murktide Regent
+1 Misty Rainforest|ZEN
+1 Flooded Strand|KTK
+2 Fiery Islet
+3 Steam Vents
+3 Island
+4 Scalding Tarn|ZEN
+4 Spirebluff Canal|KLD
+
+[sideboard]
+1 Abrade|HOU
+1 Aether Gust
+1 Brazen Borrower
+1 Chalice of the Void|MR
+2 Engineered Explosives|FD
+2 Flusterstorm
+1 Force of Negation
+1 Jace, the Mind Sculptor|WWK
+1 Kozilek's Return|OGW
+1 Mystical Dispute
+1 Prismari Command
+1 Relic of Progenitus|ALA
+1 Blood Moon|9E

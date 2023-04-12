@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Grixis Twin Exarch by Michael Strunk
+Title=Tolsimir
+Difficulty=very hard
+Description=Grixis Twin Exarch by Michael Strunk
+Icon=Tolsimir.jpg
+Deck Type=constructed
+
+[main]
+3 Spellskite|NPH
+1 Consecrated Sphinx|MBS
+4 Deceiver Exarch|NPH
+2 Dismember|NPH
+2 Go for the Throat|MBS
+2 Into the Roil|ZEN
+4 Mana Leak|M11
+3 Duress|M11
+4 Inquisition of Kozilek|ROE
+4 Preordain|M11
+4 Splinter Twin|ROE
+4 Island|NPH
+2 Mountain|NPH
+4 Blackcleave Cliffs|SOM
+4 Creeping Tar Pit|WWK
+4 Darkslick Shores|SOM
+2 Halimar Depths|WWK
+4 Scalding Tarn|ZEN
+3 Jace, the Mind Sculptor|WWK
+
+[sideboard]
+1 Consecrated Sphinx|MBS
+4 Calcite Snapper|WWK
+2 Combust|M11
+2 Shatter|SOM
+3 Twisted Image|SOM
+3 Pyroclasm|M11

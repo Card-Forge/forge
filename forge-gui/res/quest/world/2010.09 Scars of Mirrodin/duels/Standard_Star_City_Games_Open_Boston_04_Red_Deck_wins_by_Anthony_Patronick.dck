@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Red Deck wins by Anthony Patronick
+Title=alanicol
+Difficulty=very hard
+Description=Red Deck wins by Anthony Patronick
+Icon=alanicol.jpg
+Deck Type=constructed
+
+[main]
+4 Chandra's Phoenix|M12
+4 Goblin Guide|ZEN
+4 Grim Lavamancer|M12
+2 Hero of Oxid Ridge|MBS
+4 Kargan Dragonlord|ROE
+3 Kiln Fiend|ROE
+4 Burst Lightning|ZEN
+4 Galvanic Blast|SOM
+4 Lightning Bolt|M11
+4 Forked Bolt|ROE
+19 Mountain|M12
+4 Teetering Peaks|ZEN
+
+[sideboard]
+1 Hero of Oxid Ridge|MBS
+2 Manic Vandal|M12
+2 Vulshok Refugee|NPH
+2 Act of Aggression|NPH
+4 Combust|M12
+4 Dismember|NPH

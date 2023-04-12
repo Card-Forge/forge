@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Joao Choca
+Title=Data
+Difficulty=very hard
+Description=Jeskai Control by Joao Choca
+Icon=Data.jpg
+Deck Type=constructed
+
+[main]
+1 Lava Coil
+1 Blink of an Eye
+1 Lightning Strike
+1 Search for Azcanta|XLN
+1 Fight with Fire
+2 Syncopate
+2 Seal Away
+2 Cleansing Nova
+2 Expansion // Explosion
+4 Deafening Clarion
+4 Teferi, Hero of Dominaria
+4 Chemister's Insight
+4 Ionize
+4 Rekindling Phoenix
+1 Plains
+1 Field of Ruin|XLN
+2 Mountain
+3 Island
+4 Clifftop Retreat
+4 Glacial Fortress|XLN
+4 Sacred Foundry
+4 Steam Vents
+4 Sulfur Falls
+
+[sideboard]
+2 Disdainful Stroke
+2 Lyra Dawnbringer
+2 Negate
+2 Niv-Mizzet, Parun
+1 Shalai, Voice of Plenty
+1 Justice Strike
+1 Invoke the Divine
+1 River's Rebuke|XLN
+1 Settle the Wreckage|XLN
+1 Ral, Izzet Viceroy
+1 Lava Coil

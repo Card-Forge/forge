@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Grixis Control by Shingo Takada
+Title=Swan
+Difficulty=very hard
+Description=Grixis Control by Shingo Takada
+Icon=Swan.jpg
+Deck Type=constructed
+
+[main]
+2 Sheoldred, the Apocalypse
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+3 Reckoner Bankbuster
+1 Negate
+2 Cut Down
+3 Make Disappear
+3 Go for the Throat
+3 Abrade
+1 Blue Sun's Twilight
+4 Invoke Despair
+1 Blackcleave Cliffs
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+2 Sulfurous Springs
+3 Darkslick Shores
+3 Swamp
+3 Shipwreck Marsh
+4 Shivan Reef
+4 Xander's Lounge
+4 Haunted Ridge
+
+[sideboard]
+1 Cut Down
+1 Blue Sun's Twilight
+1 Galvanic Iteration
+1 Bladecoil Serpent
+1 Gix's Command
+2 Unlicensed Hearse
+2 Razorlash Transmogrant
+2 Duress
+2 Brotherhood's End
+2 Disdainful Stroke

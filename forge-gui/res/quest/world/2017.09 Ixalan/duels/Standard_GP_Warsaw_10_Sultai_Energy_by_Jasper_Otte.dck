@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Sultai Energy by Jasper Otte
+Title=Emrakul
+Difficulty=very hard
+Description=Sultai Energy by Jasper Otte
+Icon=Emrakul.jpg
+Deck Type=constructed
+
+[main]
+2 Vraska's Contempt|XLN
+3 Blossoming Defense|KLD
+4 Fatal Push|AER
+4 Attune with Aether|KLD
+1 The Scarab God|HOU
+2 Fetid Pools|AKH
+4 Blooming Marsh|KLD
+4 Aether Hub|KLD
+4 Botanical Sanctum|KLD
+4 Forest|XLN
+2 Swamp|XLN
+1 Island|XLN
+4 Glint-Sleeve Siphoner|AER
+4 Winding Constrictor|AER
+4 Longtusk Cub|KLD
+3 Hostage Taker|XLN
+2 Rishkar, Peema Renegade|AER
+4 Rogue Refiner|AER
+1 Bristling Hydra|KLD
+3 Walking Ballista|AER
+
+[sideboard]
+1 The Scarab God|HOU
+3 Duress|XLN
+1 Skysovereign, Consul Flagship|KLD
+3 Deathgorge Scavenger|XLN
+2 Die Young|KLD
+1 Rhonas the Indomitable|AKH
+1 Appetite for the Unnatural|KLD
+2 Negate|AER
+1 Bristling Hydra|KLD

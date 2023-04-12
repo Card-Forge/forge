@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Red Deck Wins by Christiano Christo
+Title=Piper
+Difficulty=very hard
+Description=Red Deck Wins by Christiano Christo
+Icon=Piper.jpg
+Deck Type=constructed
+
+[main]
+21 Mountain|DTK
+4 Wild Slash|FRF
+4 Stoke the Flames|M15
+4 Searing Blood|BNG
+4 Lightning Strike|M15
+4 Dragon Fodder|DTK
+2 Zurgo Bellstriker|DTK
+3 Lightning Berserker|DTK
+4 Monastery Swiftspear|KTK
+4 Goblin Rabblemaster|M15
+2 Goblin Heelcutter|FRF
+4 Foundry Street Denizen|M15
+
+[sideboard]
+2 Eidolon of the Great Revel|JOU
+3 Arc Lightning|KTK
+4 Roast|DTK
+4 Thunderbreak Regent|DTK
+2 Goblin Heelcutter|FRF

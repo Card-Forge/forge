@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Gruul Dragons by Jason Chung
+Title=Waterlord
+Difficulty=very hard
+Description=Gruul Dragons by Jason Chung
+Icon=Waterlord.jpg
+Deck Type=constructed
+
+[main]
+1 Roast|DTK
+2 Draconic Roar|DTK
+4 Crater's Claws|KTK
+3 Surrak, the Hunt Caller|DTK
+3 Heir of the Wilds|KTK
+4 Elvish Mystic|M15
+4 Goblin Rabblemaster|M15
+4 Rattleclaw Mystic|KTK
+4 Stormbreath Dragon|THS
+4 Thunderbreak Regent|DTK
+4 Boon Satyr|THS
+1 Haven of the Spirit Dragon|DTK
+1 Rugged Highlands|FRF
+2 Mana Confluence|JOU
+4 Temple of Abandon|THS
+4 Wooded Foothills|KTK
+5 Mountain|DTK
+6 Forest|DTK
+
+[sideboard]
+3 Wild Slash|FRF
+3 Xenagos, the Reveler|THS
+3 Hornet Nest|M15
+2 Arc Lightning|KTK
+2 Destructive Revelry|THS
+1 Plummet|M15
+1 Roast|DTK

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=The Cruelty of Gix by Michele Carretta
+Title=Hulk
+Difficulty=very hard
+Description=The Cruelty of Gix by Michele Carretta
+Icon=Hulk.jpg
+Deck Type=constructed
+
+[main]
+1 Negate
+1 Abrade
+1 Duress
+2 Cut Down
+2 Brotherhood's End
+3 Reckoner Bankbuster
+3 Go for the Throat
+4 The Cruelty of Gix
+4 Fable of the Mirror-Breaker
+4 Corpse Appraiser
+4 Atraxa, Grand Unifier
+4 Bloodtithe Harvester
+1 Rockfall Vale
+1 Otawara, Soaring City
+1 Shattered Sanctum
+1 Swamp
+2 Shipwreck Marsh
+2 Ziatora's Proving Ground
+2 Raffine's Tower
+2 Stormcarved Coast
+2 Sulfurous Springs
+2 Darkslick Shores
+3 Shivan Reef
+4 Blackcleave Cliffs
+4 Haunted Ridge
+
+[sideboard]
+3 Sheoldred, the Apocalypse
+2 Graveyard Trespasser
+1 Abrade
+3 Duress
+2 Cut Down
+1 Reckoner Bankbuster
+1 Go for the Throat

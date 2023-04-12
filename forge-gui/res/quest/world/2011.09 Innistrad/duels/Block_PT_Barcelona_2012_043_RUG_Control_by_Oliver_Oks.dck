@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=RUG Control by Oliver Oks
+Title=The Ooze
+Difficulty=very hard
+Description=RUG Control by Oliver Oks
+Icon=The Ooze.jpg
+Deck Type=constructed
+
+[main]
+2 Desolate Lighthouse|AVR
+4 Evolving Wilds
+1 Forest|RTR
+4 Hinterland Harbor
+3 Island|RTR
+7 Mountain|RTR
+4 Sulfur Falls
+4 Fettergeist|AVR
+4 Huntmaster of the Fells|DKA
+3 Bonfire of the Damned|AVR
+4 Brimstone Volley|CNS
+3 Desperate Ravings|C15
+3 Devil's Play|ISD
+2 Dissipate|M15
+4 Pillar of Flame|AVR
+2 Rolling Temblor|ISD
+2 Tamiyo, the Moon Sage|AVR
+4 Think Twice|ISD
+
+[sideboard]
+1 Desolate Lighthouse|AVR
+2 Dissipate|M15
+1 Rolling Temblor|ISD
+1 Tamiyo, the Moon Sage|AVR
+1 Ancient Grudge|ISD
+2 Blasphemous Act|C16
+3 Memory's Journey|ISD
+2 Sensory Deprivation|M14
+1 Snapcaster Mage|ISD
+1 Tree of Redemption|ISD

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Mono White Control by Noah Rabin
+Title=Mines of Kazum Durl
+Difficulty=very hard
+Description=Mono White Control by Noah Rabin
+Icon=Mines of Kazum Durl.jpg
+Deck Type=constructed
+
+[main]
+1 Ambitious Farmhand
+2 Spirited Companion
+1 Steel Seraph
+3 The Restoration of Eiganjo
+2 Serra Paragon
+2 Loran of the Third Path
+4 Reckoner Bankbuster
+2 Farewell
+4 Lay Down Arms
+4 Wedding Announcement
+4 Ossification
+4 The Wandering Emperor
+1 Elspeth Resplendent
+2 The Eternal Wanderer
+3 Field of Ruin
+15 Plains
+1 Eiganjo, Seat of the Empire
+4 Roadside Reliquary
+1 Mirrex
+
+[sideboard]
+2 Loran of the Third Path
+2 The Stone Brain
+3 Depopulate
+2 Fateful Absence
+2 Sunset Revelry
+2 Destroy Evil
+2 Sanctuary Warden

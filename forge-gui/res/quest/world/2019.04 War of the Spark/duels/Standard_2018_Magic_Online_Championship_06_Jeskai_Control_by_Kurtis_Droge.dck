@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Jeskai Control by Kurtis Droge
+Title=Desdemona
+Difficulty=very hard
+Description=Jeskai Control by Kurtis Droge
+Icon=Desdemona.jpg
+Deck Type=constructed
+
+[main]
+4 Opt
+3 Chemister's Insight
+4 Sinister Sabotage
+2 Shivan Fire
+3 Commence the Endgame
+2 Solar Blaze
+4 Augur of Bolas
+3 Teferi, Hero of Dominaria
+2 Teferi, Time Raveler
+1 Blast Zone
+2 Sacred Foundry
+2 Clifftop Retreat
+1 Field of Ruin|XLN
+4 Hallowed Fountain
+3 Island
+4 Glacial Fortress|XLN
+4 Sulfur Falls
+4 Steam Vents
+1 Justice Strike
+2 Ral's Outburst
+2 Dovin's Veto
+3 Syncopate
+
+[sideboard]
+1 Solar Blaze
+1 Entrancing Melody|XLN
+1 Demystify|XLN
+1 Revitalize
+2 Legion Warboss
+1 Spell Pierce|XLN
+2 Seal Away
+1 Invoke the Divine
+2 Deafening Clarion
+1 Sorcerous Spyglass|XLN
+2 Dovin's Veto

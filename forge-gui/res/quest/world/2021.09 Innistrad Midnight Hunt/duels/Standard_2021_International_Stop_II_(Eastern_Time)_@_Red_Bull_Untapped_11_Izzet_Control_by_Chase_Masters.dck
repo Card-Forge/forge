@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Izzet Control by Chase Masters
+Title=Yma
+Difficulty=very hard
+Description=Izzet Control by Chase Masters
+Icon=Yma.jpg
+Deck Type=constructed
+
+[main]
+2 Lier, Disciple of the Drowned
+1 Burning Hands
+1 Prismari Command
+2 Memory Deluge
+2 Demon Bolt
+3 Galvanic Iteration
+3 Divide by Zero
+3 Unexpected Windfall
+3 Fading Hope
+3 Jwari Disruption
+3 Spikefield Hazard
+1 Shatterskull Smashing
+2 Thundering Rebuke
+3 Expressive Iteration
+4 Alrund's Epiphany
+2 Battle of Frost and Fire
+2 Field of Ruin
+2 Hall of Storm Giants
+2 Frostboil Snarl
+4 Riverglide Pathway
+6 Mountain
+6 Island
+
+[sideboard]
+2 Burning Hands
+1 Battle of Frost and Fire
+1 Environmental Sciences
+1 Cinderclasm
+1 Mascot Exhibition
+2 Smoldering Egg
+2 Test of Talents
+2 Cyclone Summoner
+3 Malevolent Hermit

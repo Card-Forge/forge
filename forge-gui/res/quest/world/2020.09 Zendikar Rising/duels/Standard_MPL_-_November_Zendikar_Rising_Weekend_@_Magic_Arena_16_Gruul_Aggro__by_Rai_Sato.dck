@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Gruul Aggro  by Rai Sato
+Title=Big Rock
+Difficulty=very hard
+Description=Gruul Aggro  by Rai Sato
+Icon=Big Rock.jpg
+Deck Type=constructed
+
+[main]
+1 Questing Beast
+3 Scavenging Ooze
+4 Kazandu Mammoth
+4 Bonecrusher Giant
+4 Lovestruck Beast
+4 Brushfire Elemental
+4 Edgewall Innkeeper
+3 Embercleave
+3 The Great Henge
+2 Fire Prophecy
+1 Primal Might
+4 Shatterskull Smashing
+1 Vivien, Monsters' Advocate
+1 Temple of Abandon
+4 Fabled Passage
+4 Cragcrown Pathway
+4 Mountain
+9 Forest
+
+[sideboard]
+1 Questing Beast
+1 Vivien, Monsters' Advocate
+2 Garruk, Unleashed
+2 Scorching Dragonfire
+2 The Akroan War
+2 Ox of Agonas
+2 Wilt
+3 Klothys, God of Destiny

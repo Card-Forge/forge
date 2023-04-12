@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Bant Control by Fozefy
+Title=Marge Simpson
+Difficulty=very hard
+Description=Bant Control by Fozefy
+Icon=Marge Simpson.jpg
+Deck Type=constructed
+
+[main]
+1 Mystical Dispute
+1 Tamiyo, Collector of Tales
+2 Aether Gust
+2 Shatter the Sky
+4 Teferi, Time Raveler
+4 Nissa, Who Shakes the World
+4 Elspeth Conquers Death
+4 Growth Spiral
+2 Dream Trawler
+3 Hydroid Krasis
+4 Uro, Titan of Nature's Wrath
+2 Temple of Plenty
+2 Temple of Enlightenment
+2 Island
+2 Plains
+2 Forest
+3 Temple of Mystery
+4 Hallowed Fountain
+4 Fabled Passage
+4 Breeding Pool
+4 Temple Garden
+
+[sideboard]
+4 Devout Decree
+2 Knight of Autumn
+1 Tolsimir, Friend to Wolves
+1 Dovin's Veto
+1 Agent of Treachery
+3 Mystical Dispute
+2 Aether Gust
+1 Shatter the Sky

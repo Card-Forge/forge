@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Mono Blue Aggro by Guillaume Gauthier
+Title=White Weenie
+Difficulty=very hard
+Description=Mono Blue Aggro by Guillaume Gauthier
+Icon=White Weenie.jpg
+Deck Type=constructed
+
+[main]
+20 Island
+4 Curious Obsession
+4 Wizard's Retort
+1 Spell Pierce|XLN
+4 Opt
+4 Dive Down|XLN
+1 Sleep
+2 Chart a Course|XLN
+4 Tempest Djinn
+1 Exclusion Mage
+4 Merfolk Trickster
+3 Warkite Marauder
+4 Siren Stormtamer|XLN
+4 Mist-Cloaked Herald
+
+[sideboard]
+1 Karn, Scion of Urza
+1 Jace, Cunning Castaway|XLN
+1 Syncopate
+2 Surge Mare
+1 Selective Snare
+1 Negate
+2 Essence Scatter
+1 Island
+1 Spell Pierce|XLN
+1 Sleep
+2 Exclusion Mage
+1 Warkite Marauder

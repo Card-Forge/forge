@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Nayan Cats
+Title=Nayan Cats
+Icon=alanacatl.jpg
+Difficulty=medium
+Description="The Cloud Nacatl sit and think, a bunch of soft paws. We are the Claws of Marisi, stalking, pouncing, drawing blood."
+Deck Type=constructed
+[Main]
+1 Ajani Vengeant|ALA
+4 Colossal Might|ARB
+3 Forest|ALA|2
+3 Forest|ALA|3
+4 Jungle Shrine|ALA
+3 Leonin Armorguard|ARB
+4 Marisi's Twinclaws|ARB
+4 Mountain|ALA|4
+2 Nacatl Outlander|CFX
+2 Nacatl Savage|CFX
+3 Naya Charm|ALA
+4 Naya Panorama|ALA
+6 Plains|ALA|1
+4 Qasali Ambusher|ALA
+2 Qasali Pridemage|ARB
+2 Sigil of the Nayan Gods|ARB
+2 Soul's Fire|ALA
+2 Soul's Might|ALA
+1 Titanic Ultimatum|ALA
+4 Wild Nacatl|ALA

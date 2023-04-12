@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Grixis Control by Daniel Weiser
+Title=Doctor John Zoidberg
+Difficulty=very hard
+Description=Grixis Control by Daniel Weiser
+Icon=Doctor John Zoidberg.jpg
+Deck Type=constructed
+
+[main]
+4 Fable of the Mirror-Breaker
+4 Bloodtithe Harvester
+4 Corpse Appraiser
+2 Sheoldred, the Apocalypse
+3 Reckoner Bankbuster
+4 Cut Down
+3 Abrade
+4 Go for the Throat
+1 Make Disappear
+1 Negate
+4 Invoke Despair
+4 Xander's Lounge
+3 Darkslick Shores
+4 Blackcleave Cliffs
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+3 Swamp
+1 Sulfurous Springs
+2 Shivan Reef
+3 Shipwreck Marsh
+4 Haunted Ridge
+
+[sideboard]
+1 Reckoner Bankbuster
+1 Negate
+1 Swamp
+1 Disdainful Stroke
+2 Duress
+2 Flame-Blessed Bolt
+1 Razorlash Transmogrant
+1 Soul Transfer
+1 Gix's Command
+2 Bladecoil Serpent
+1 Vraska, Betrayal's Sting
+1 Siphon Insight

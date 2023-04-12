@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Infect by Jeff Jao
+Title=Copper Tablet
+Difficulty=very hard
+Description=Infect by Jeff Jao
+Icon=Copper Tablet.jpg
+Deck Type=constructed
+
+[main]
+4 Noble Hierarch|CFX
+4 Blighted Agent|NPH
+4 Glistener Elf|NPH
+4 Ignoble Hierarch
+4 Phyrexian Crusader|MBS
+2 Become Immense|KTK
+2 Blossoming Defense|KLD
+4 Vines of Vastwood|ZEN
+4 Might of Old Krosa|TSP
+4 Mutagenic Growth|NPH
+4 Scale Up
+1 Breeding Pool
+1 Yavimaya, Cradle of Growth
+1 Pendelhaven|TSP
+1 Urborg, Tomb of Yawgmoth|M15
+2 Verdant Catacombs|ZEN
+2 Windswept Heath|KTK
+2 Wooded Foothills|KTK
+2 Overgrown Tomb
+2 Misty Rainforest|ZEN
+2 Forest
+4 Inkmoth Nexus|MBS
+
+[sideboard]
+1 Nissa, Voice of Zendikar|OGW
+1 Ashiok, Dream Render
+2 Surgical Extraction|NPH
+3 Gemrazer
+4 Force of Vigor
+4 Endurance

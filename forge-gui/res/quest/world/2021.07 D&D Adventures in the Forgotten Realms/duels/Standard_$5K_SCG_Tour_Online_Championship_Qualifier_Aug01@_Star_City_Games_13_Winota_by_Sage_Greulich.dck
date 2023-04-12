@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Winota by Sage Greulich
+Title=Zeus
+Difficulty=very hard
+Description=Winota by Sage Greulich
+Icon=Zeus.jpg
+Deck Type=constructed
+
+[main]
+1 Tangled Florahedron
+2 Minsc, Beloved Ranger
+2 Blade Historian
+2 Bonecrusher Giant
+2 Kenrith, the Returned King
+3 Lotus Cobra
+3 Selfless Savior
+4 Prosperous Innkeeper
+4 Elite Spellbinder
+4 Jaspera Sentinel
+4 Winota, Joiner of Forces
+4 Esika's Chariot
+2 Shatterskull Smashing
+2 Forest
+2 Lair of the Hydra
+2 Plains
+2 Mountain
+3 Fabled Passage
+4 Needleverge Pathway
+4 Branchloft Pathway
+4 Cragcrown Pathway
+
+[sideboard]
+2 Reidane, God of the Worthy
+2 Drannith Magistrate
+2 The Akroan War
+3 Redcap Melee
+3 Ox of Agonas
+3 Burning Hands

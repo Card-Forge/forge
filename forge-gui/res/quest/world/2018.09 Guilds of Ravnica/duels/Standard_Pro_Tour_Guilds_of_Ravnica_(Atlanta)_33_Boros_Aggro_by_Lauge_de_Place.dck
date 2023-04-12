@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Boros Aggro by Lauge de Place
+Title=The Color Green
+Difficulty=very hard
+Description=Boros Aggro by Lauge de Place
+Icon=The Color Green.jpg
+Deck Type=constructed
+
+[main]
+1 Baffling End
+2 Conclave Tribunal
+2 Ajani, Adversary of Tyrants
+4 Heroic Reinforcements
+4 Legion's Landing|XLN
+4 History of Benalia
+4 Adanto Vanguard|XLN
+4 Skymarcher Aspirant
+4 Knight of Grace
+4 Benalish Marshal
+4 Dauntless Bodyguard
+1 Mountain
+4 Sacred Foundry
+4 Clifftop Retreat
+14 Plains
+
+[sideboard]
+1 Deafening Clarion
+2 Aurelia, Exemplar of Justice
+1 Make a Stand
+1 Banefire
+1 Response // Resurgence
+2 Experimental Frenzy
+2 Tajic, Legion's Edge
+3 Tocatli Honor Guard|XLN
+2 Baffling End

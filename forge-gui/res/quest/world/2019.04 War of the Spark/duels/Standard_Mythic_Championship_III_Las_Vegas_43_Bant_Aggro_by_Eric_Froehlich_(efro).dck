@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Bant Aggro by Eric Froehlich (efro)
+Title=Hunding Gjornersen
+Difficulty=very hard
+Description=Bant Aggro by Eric Froehlich (efro)
+Icon=Hunding Gjornersen.jpg
+Deck Type=constructed
+
+[main]
+3 Arboreal Grazer
+4 Hydroid Krasis
+3 Incubation Druid
+3 Jadelight Ranger
+4 Llanowar Elves
+4 Paradise Druid
+2 Shalai, Voice of Plenty
+1 Trostani Discordant
+3 Finale of Glory
+2 Prison Realm
+4 Nissa, Who Shakes the World
+4 Breeding Pool
+8 Forest
+2 Glacial Fortress|XLN
+4 Hallowed Fountain
+1 Plains
+4 Sunpetal Grove|XLN
+4 Temple Garden
+
+[sideboard]
+1 Ajani, Adversary of Tyrants
+4 Baffling End
+1 Deputy of Detention
+1 Ixalan's Binding|XLN
+2 Lyra Dawnbringer
+3 Negate
+1 Tamiyo, Collector of Tales
+1 Teferi, Time Raveler
+1 The Immortal Sun

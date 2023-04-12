@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=UBrw Teachings by Rasmus Sibast
+Title=Leela
+Difficulty=very hard
+Description=UBrw Teachings by Rasmus Sibast
+Icon=Leela.jpg
+Deck Type=constructed
+
+[main]
+5 Island|RTR
+4 Damnation|PLC
+4 Terramorphic Expanse|C16
+4 Prismatic Lens|TSP
+4 River of Tears|FUT
+3 Careful Consideration|TSP
+3 Mystical Teachings|TSP
+3 Shadowmage Infiltrator|TSP
+3 Tolaria West|FUT
+3 Coalition Relic|FUT
+3 Urborg, Tomb of Yawgmoth|M15
+2 Void|TSP
+2 Tendrils of Corruption|C14
+2 Molten Slagheap|C13
+2 Foresee|M11
+2 Academy Ruins|TSP
+2 Triskelavus|CMD
+1 Pull from Eternity|TSP
+1 Pact of Negation|FUT
+1 Slaughter Pact|FUT
+1 Strangling Soot|TSP
+1 Haunting Hymn|TSP
+1 Swamp|RTR
+1 Mountain|RTR
+1 Plains|RTR
+1 Urza's Factory|C13
+
+[sideboard]
+1 Void|TSP
+1 Tendrils of Corruption|C14
+2 Pull from Eternity|TSP
+1 Pact of Negation|FUT
+1 Slaughter Pact|FUT
+1 Strangling Soot|TSP
+4 Detritivore|PLC
+2 Ancient Grudge|ISD
+1 Spell Burst|TSP
+1 Imp's Mischief|PLC

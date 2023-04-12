@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jund by Simon Uribe
+Title=Gwendlyn Di Corci
+Difficulty=very hard
+Description=Jund by Simon Uribe
+Icon=Gwendlyn Di Corci.jpg
+Deck Type=constructed
+
+[main]
+2 Path of Peril
+2 Abrade
+3 Shatterskull Smashing
+3 Infernal Grasp
+4 Esika's Chariot
+1 Magda, Brazen Outlaw
+2 Valki, God of Lies
+2 Reckless Stormseeker
+2 Halana and Alena, Partners
+2 Immersturm Predator
+3 Florian, Voldaren Scion
+3 Graveyard Trespasser
+4 Goldspan Dragon
+4 Kalain, Reclusive Painter
+1 Rockfall Vale
+1 Den of the Bugbear
+2 Swamp
+2 Mountain
+2 Hive of the Eye Tyrant
+3 Haunted Ridge
+4 Cragcrown Pathway
+4 Darkbore Pathway
+4 Blightstep Pathway
+
+[sideboard]
+4 Power Word Kill
+3 Duress
+3 Ray of Enfeeblement
+3 Go Blank
+1 Shadows' Verdict
+1 Check for Traps

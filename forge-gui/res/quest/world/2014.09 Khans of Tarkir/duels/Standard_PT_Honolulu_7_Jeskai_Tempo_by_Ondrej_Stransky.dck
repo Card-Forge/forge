@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Jeskai Tempo by Ondrej Stransky
+Title=alasprout
+Difficulty=very hard
+Description=Jeskai Tempo by Ondrej Stransky
+Icon=alasprout.jpg
+Deck Type=constructed
+
+[main]
+3 Temple of Triumph|THS
+3 Battlefield Forge|M15
+3 Shivan Reef|M15
+2 Temple of Epiphany|JOU
+4 Mystic Monastery|KTK
+3 Flooded Strand|KTK
+1 Plains|KTK
+3 Banishing Light|JOU
+3 Mountain|KTK
+2 Island|KTK
+4 Stoke the Flames|M15
+4 Jeskai Charm|KTK
+4 Lightning Strike|M15
+4 Magma Jet|THS
+2 Stormbreath Dragon|THS
+3 Ashcloud Phoenix|KTK
+4 Hushwing Gryff|M15
+4 Mantis Rider|KTK
+4 Seeker of the Way|KTK
+
+[sideboard]
+3 Suspension Field|KTK
+3 Prognostic Sphinx|THS
+1 Gainsay|THS
+3 Magma Spray|JOU
+2 Anger of the Gods|THS
+3 Disdainful Stroke|KTK

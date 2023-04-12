@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Abzan Midrange by Grzegorz Kowalski
+Title=Animar
+Difficulty=very hard
+Description=Abzan Midrange by Grzegorz Kowalski
+Icon=Animar.jpg
+Deck Type=constructed
+
+[main]
+4 Abzan Charm|KTK
+4 Anafenza, the Foremost|KTK
+4 Siege Rhino|KTK
+3 Den Protector|DTK
+3 Rattleclaw Mystic|KTK
+4 Warden of the First Tree|FRF
+2 Wingmate Roc|KTK
+2 Hangarback Walker|ORI
+1 Prairie Stream|BFZ
+1 Smoldering Marsh|BFZ
+1 Sunken Hollow|BFZ
+2 Canopy Vista|BFZ
+2 Llanowar Wastes|ORI
+4 Wooded Foothills|KTK
+3 Shambling Vent|BFZ
+4 Windswept Heath|KTK
+4 Flooded Strand|KTK
+2 Plains|BFZ
+2 Forest|BFZ
+4 Gideon, Ally of Zendikar|BFZ
+1 Exert Influence|BFZ
+1 Murderous Cut|KTK
+3 Dromoka's Command|DTK
+
+[sideboard]
+2 Hangarback Walker|ORI
+1 Infinite Obliteration|ORI
+2 Duress|DTK
+1 Tasigur, the Golden Fang|FRF
+1 Dragonlord Silumgar|DTK
+2 Valorous Stance|FRF
+1 Dispel|BFZ
+1 Mastery of the Unseen|FRF
+1 Virulent Plague|DTK
+2 Silkwrap|DTK
+1 Exert Influence|BFZ

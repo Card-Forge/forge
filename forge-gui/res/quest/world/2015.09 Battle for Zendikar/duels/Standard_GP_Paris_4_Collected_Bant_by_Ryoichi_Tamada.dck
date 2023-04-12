@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Collected Bant by Ryoichi Tamada
+Title=Ododua
+Difficulty=very hard
+Description=Collected Bant by Ryoichi Tamada
+Icon=Ododua.jpg
+Deck Type=constructed
+
+[main]
+3 Forest|BFZ
+2 Plains|BFZ
+1 Island|BFZ
+2 Prairie Stream|BFZ
+2 Canopy Vista|BFZ
+1 Polluted Delta|KTK
+2 Wooded Foothills|KTK
+4 Windswept Heath|KTK
+4 Flooded Strand|KTK
+4 Lumbering Falls|BFZ
+1 Valorous Stance|FRF
+2 Dromoka's Command|DTK
+4 Collected Company|DTK
+4 Wingmate Roc|KTK
+4 Reflector Mage|OGW
+4 Deathmist Raptor|DTK
+4 Eldrazi Skyspawner|BFZ
+4 Jace, Vryn's Prodigy|ORI
+4 Sylvan Advocate|OGW
+3 Den Protector|DTK
+1 Nissa, Vastwood Seer|ORI
+
+[sideboard]
+1 Dispel|BFZ
+1 Negate|OGW
+4 Arashin Cleric|FRF
+2 Gideon, Ally of Zendikar|BFZ
+2 Displacement Wave|ORI
+4 Disdainful Stroke|KTK
+1 Valorous Stance|FRF

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=WeenieWhite by Bernardo Santos
+Title=The Spirit Crafters
+Difficulty=very hard
+Description=WeenieWhite by Bernardo Santos
+Icon=The Spirit Crafters.jpg
+Deck Type=constructed
+
+[main]
+1 Ajani, Adversary of Tyrants
+4 Benalish Marshal
+4 Dauntless Bodyguard
+4 Skymarcher Aspirant
+4 Snubhorn Sentry
+4 Tithe Taker
+4 Venerated Loxodon
+2 Adanto Vanguard|XLN
+2 Baffling End
+3 Conclave Tribunal
+4 History of Benalia
+4 Legion's Landing|XLN
+4 Glacial Fortress|XLN
+4 Hallowed Fountain
+12 Plains
+
+[sideboard]
+2 Ajani, Adversary of Tyrants
+2 Baffling End
+2 Disdainful Stroke
+4 Tocatli Honor Guard|XLN
+1 Island
+1 Spell Pierce|XLN
+2 Negate
+1 Unbreakable Formation
