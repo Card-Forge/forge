@@ -33,7 +33,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -190,7 +189,7 @@ public class TriggerChangesZone extends Trigger {
         /* this trigger only activates for the nth spell you cast this turn */
         if (hasParam("ConditionYouCastThisTurn")) {
             final String compare = getParam("ConditionYouCastThisTurn");
-            List<Card> thisTurnCast = CardUtil.getThisTurnCast("Card", getHostCard(), this);
+            List<Card> thisTurnCast = getHostCard().getGame().getStack().getSpellsCastThisTurn();
             thisTurnCast = CardLists.filterControlledByAsList(thisTurnCast, getHostCard().getController());
 
             // checks which card this spell was the castSA

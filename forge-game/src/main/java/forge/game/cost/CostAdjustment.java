@@ -468,7 +468,7 @@ public class CostAdjustment {
                     }
                     List<Card> list;
                     if (st.hasParam("ValidCard")) {
-                        list = CardUtil.getThisTurnCast(st.getParam("ValidCard"), hostCard, st);
+                        list = CardUtil.getThisTurnCast(st.getParam("ValidCard"), hostCard, st, controller);
                     } else {
                         list = game.getStack().getSpellsCastThisTurn();
                     }

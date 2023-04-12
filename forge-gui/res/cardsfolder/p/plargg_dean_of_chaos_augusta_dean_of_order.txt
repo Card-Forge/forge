@@ -20,9 +20,6 @@ S:Mode$ Continuous | Affected$ Creature.tapped+YouCtrl+Other | AddPower$ 1 | Des
 S:Mode$ Continuous | Affected$ Creature.untapped+YouCtrl+Other | AddToughness$ 1 | Description$ Other untapped creatures you control get +0/+1.
 T:Mode$ AttackersDeclared | Execute$ DBUnTapAll | CheckSVar$ OverwhelmInstinct | SVarCompare$ GE1 | NoResolvingCheck$ True | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack, untap each creature you control, then tap any number of creatures you control.
 SVar:OverwhelmInstinct:Count$Valid Creature.attacking
-SVar:DBUnTapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SubAbility$ DBChoose
-SVar:DBChoose:DB$ ChooseCard | Defined$ You | MinAmount$ 0 | Amount$ X | Choices$ Creature.untapped+YouCtrl | ChoiceTitle$ Choose any number of untapped creatures you control | ChoiceZone$ Battlefield | SubAbility$ DBTap | SpellDescription$ Tap any number of creatures you control.
-SVar:DBTap:DB$ Tap | Defined$ ChosenCard | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-SVar:X:Count$Valid Creature.untapped+YouCtrl
+SVar:DBUnTapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | Defined$ CardChoices$ Creature.YouCtrl+untapped | AnyNumber$ True | ChoiceAmount$ Count$Valid Creature.YouCtrl+untapped
 Oracle:Other tapped creatures you control get +1/+0.\nOther untapped creatures you control get +0/+1.\nWhenever you attack, untap each creature you control, then tap any number of creatures you control.
