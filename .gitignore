@@ -82,3 +82,4 @@ forge-gui/tools/EditionTrackingResults
 forge-gui/tools/PerSetTrackingResults
 
 *.tiled-session
+/forge-gui-desktop/META-INF
