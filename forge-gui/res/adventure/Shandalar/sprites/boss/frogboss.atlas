@@ -21,18 +21,6 @@ Idle
 Idle 
   xy: 402,14
   size: 65, 50   
-Idle 
-  xy: 18,334
-  size: 65, 50   
-Idle 
-  xy: 114,334
-  size: 65, 50   
-Idle 
-  xy: 210,334
-  size: 65, 50   
-Idle 
-  xy: 306,334
-  size: 65, 50   
 Walk 
   xy: 18, 68
   size: 70, 60  
@@ -72,39 +60,39 @@ Walk
 Attack 
   xy: 18, 200
   size: 78, 57
-Walk 
+Attack 
   xy: 114, 200
   size: 78, 57  
-Walk 
+Attack 
   xy: 210, 200
   size: 78, 57  
-Walk 
+Attack 
   xy: 306, 200
   size: 78, 57 
 Death 
   xy: 18,462
-  size: 65, 50   
+  size: 70, 50   
 Death 
   xy: 114,462
-  size: 65, 50   
+  size: 70, 50   
 Death 
   xy: 210,462
-  size: 65, 50   
+  size: 70, 50   
 Death 
   xy: 306,462
-  size: 65, 50   
+  size: 70, 50   
 Death 
   xy: 402,462
-  size: 65, 50   
+  size: 70, 50   
 Death 
   xy: 498,462
-  size: 65, 50   
+  size: 70, 50   
 Death 
   xy: 594,462
-  size: 65, 50   
+  size: 70, 50   
 Death 
   xy: 690,462
-  size: 65, 50   
+  size: 70, 50   
 Death 
   xy: 786,462
-  size: 65, 50 
+  size: 70, 50 

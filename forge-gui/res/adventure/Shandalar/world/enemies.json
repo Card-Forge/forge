@@ -5586,7 +5586,7 @@
 	"difficulty": 0.1,
 	"speed": 12,
 	"flying": true,
-	"scale": 0.8,
+	"scale": 0.75,
 	"life": 13,
 	"rewards": [
 	{
@@ -5648,7 +5648,7 @@
 	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"speed": 15,
+	"speed": 20,
 	"scale": 0.7,
 	"life": 10,
 	"rewards": [
@@ -14726,8 +14726,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 12,
-	"flying": true,
-	"scale": 0.8,
+	"scale": 0.75,
 	"life": 13,
 	"rewards": [
 	{

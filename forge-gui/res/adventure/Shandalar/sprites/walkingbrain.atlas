@@ -43,8 +43,8 @@ Walk
   xy: 224, 44
   size: 32, 20    
 Attack
-  xy: 0, 64
-  size: 32, 32
+  xy: 0, 72
+  size: 32, 24
 Attack
   xy: 32, 72
   size: 32, 24

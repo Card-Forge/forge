@@ -8,133 +8,100 @@ Avatar
   size: 20, 20
 Idle
   xy: 10, 29
-  size: 35, 35
+  size: 40, 35
 Idle
   xy: 74, 29
-  size: 35, 35
+  size: 40, 35
 Idle
   xy: 138, 29
-  size: 35, 35
+  size: 40, 35
 Idle
   xy: 202, 29
-  size: 35, 35
-Idle
-  xy: 10, 216
-  size: 35, 40
-Idle
-  xy: 74, 216
-  size: 35, 40
-Idle
-  xy: 138, 216
-  size: 35, 40
-Idle
-  xy: 202, 216
-  size: 35, 40
-Idle
-  xy: 266, 216
-  size: 35, 40
-Idle
-  xy: 330, 216
-  size: 35, 40
-Idle
-  xy: 10, 29
-  size: 35, 35
-Idle
-  xy: 74, 29
-  size: 35, 35
-Idle
-  xy: 138, 29
-  size: 35, 35
-Idle
-  xy: 202, 29
-  size: 35, 35
+  size: 40, 35
 Idle
   xy: 10, 285
-  size: 35, 35
+  size: 40, 35
 Idle
   xy: 74, 285
-  size: 35, 35
+  size: 40, 35
 Idle
   xy: 138, 285
-  size: 35, 35
+  size: 40, 35
 Idle
   xy: 202, 285
-  size: 35, 35
+  size: 40, 35
 Idle
   xy: 10, 477
-  size: 35, 35
+  size: 40, 35
 Idle
   xy: 74, 477
-  size: 35, 35
+  size: 40, 35
 Idle
   xy: 138, 477
-  size: 35, 35
+  size: 40, 35
 Idle
   xy: 202, 477
-  size: 35, 35
+  size: 40, 35
 Idle
   xy: 266, 477
-  size: 35, 35
+  size: 40, 35
 Idle
   xy: 330, 477
-  size: 35, 35
+  size: 40, 35
 Idle
   xy: 394, 477
-  size: 35, 35
+  size: 40, 35
 Idle
   xy: 458, 477
-  size: 35, 35
-Walk
-  xy: 10, 88
-  size: 35, 40
-Walk
-  xy: 74, 88
-  size: 35, 40
-Walk
-  xy: 138, 88
-  size: 35, 40
-Walk
-  xy: 202, 88
-  size: 35, 40
-Walk
-  xy: 266, 88
-  size: 35, 40
-Walk
-  xy: 330, 88
-  size: 35, 40
-Walk
-  xy: 394, 88
-  size: 35, 40
-Walk
-  xy: 458, 88
-  size: 35, 40
-Attack
-  xy: 10, 157
   size: 40, 35
+Walk
+  xy: 5, 88
+  size: 40, 40
+Walk
+  xy: 69, 88
+  size: 40, 40
+Walk
+  xy: 133, 88
+  size: 40, 40
+Walk
+  xy: 197, 88
+  size: 40, 40
+Walk
+  xy: 261, 88
+  size: 40, 40
+Walk
+  xy: 325, 88
+  size: 40, 40
+Walk
+  xy: 389, 88
+  size: 40, 40
+Walk
+  xy: 453, 88
+  size: 40, 40
 Attack
-  xy: 74, 157
-  size: 40, 35
+  xy: 0, 157
+  size: 55, 35
 Attack
-  xy: 138, 157
-  size: 40, 35
+  xy: 64, 157
+  size: 55, 35
 Attack
-  xy: 202, 157
-  size: 40, 35
+  xy: 128, 157
+  size: 55, 35
 Attack
-  xy: 266, 157
-  size: 40, 35
+  xy: 192, 157
+  size: 55, 35
+Attack
+  xy: 256, 157
+  size: 55, 35
 Death
-  xy: 10, 350
-  size: 35, 35
+  xy: 0, 350
+  size: 55, 35
 Death
-  xy: 74, 350
-  size: 35, 35
+  xy: 64, 350
+  size: 55, 35
 Death
-  xy: 138, 350
-  size: 35, 35
+  xy: 128, 350
+  size: 55, 35
 Death
-  xy: 138, 350
-  size: 35, 35
-Death
-  xy: 202, 350
-  size: 35, 35
+  xy: 192, 350
+  size: 55, 35
