@@ -623,7 +623,7 @@
 			"IdentityGreen",
 			"BiomeGreen"
 		],
-	"sprite": "sprites/dungeon/badger.atlas",
+	"sprite": "sprites/badger.atlas",
 	"deck": [
 		"decks/badger.dck"
 	],
@@ -754,6 +754,59 @@
 		}
 	],
 	"colors": "BR"
+},
+{
+	"name": "Bat",
+		"questTags": [
+			"Animal",
+			"Wild",
+			"Nesting",
+			"Flying",
+			"Tiny",
+			"IdentityBlack",
+			"BiomeBlack"
+		],
+	"sprite": "sprites/dungeon/bat.atlas",
+	"deck": [
+		"decks/bat.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"flying": true,
+	"scale": 0.8,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "B"
 },
 {
 	"name": "Bear",
@@ -1487,7 +1540,7 @@
 			"BiomeRed",
 			"BiomeColorless"
 		],
-	"sprite": "sprites/dungeon/boar.atlas",
+	"sprite": "sprites/boar.atlas",
 	"scale": 0.55,
 	"deck": [
 		"decks/boar.json"
@@ -1597,7 +1650,7 @@
 			"IdentityGreen",
 			"BiomeRed"
 		],
-	"sprite": "sprites/dungeon/bull.atlas",
+	"sprite": "sprites/bull.atlas",
 	"scale": 0.65,
 	"deck": [
 		"decks/bull.dck"
@@ -3444,7 +3497,7 @@
 			"IdentityDimir",
 			"BiomeBlue"
 		],
-	"sprite": "sprites/dungeon/crab.atlas",
+	"sprite": "sprites/crab.atlas",
 	"scale": 0.9,
 	"deck": [
 		"decks/crab.json",
@@ -3588,6 +3641,82 @@
 		}
 	],
 	"colors": "R"
+},
+{
+	"name": "Dark Enchanter",
+		"questTags": [
+			"Humanoid",
+			"IdentityGreen",
+			"IdentityBlack",
+			"BiomeBlack",
+			"Leader"
+		],
+	"sprite": "sprites/dreamwalker.atlas",
+	"deck": [
+		"decks/darkenchanter.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 35,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "GB"
 },
 {
 	"name": "Dark Knight",
@@ -4239,7 +4368,7 @@
 			"BiomeColorless",
 			"BiomeWhite"
 		],
-	"sprite": "sprites/dungeon/dog.atlas",
+	"sprite": "sprites/dog.atlas",
 	"deck": [
 		"decks/dog.json",
 		"decks/dog.dck"
@@ -5089,7 +5218,7 @@
 			"IdentityBlack",
 			"BiomeBlack"
 		],
-	"sprite": "sprites/dungeon/eye.atlas",
+	"sprite": "sprites/eye.atlas",
 	"deck": [
 		"decks/eye.dck"
 	],
@@ -5441,6 +5570,65 @@
 	"colors": "R"
 },
 {
+	"name": "Flying Witch",
+		"questTags": [
+			"Mystic",
+			"Unholy",
+			"Wizard",
+			"Human",
+			"IdentityBlack"
+		],
+	"sprite": "sprites/dungeon/flyingwitch.atlas",
+	"deck": [
+		"decks/witch.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 12,
+	"flying": true,
+	"scale": 0.8,
+	"life": 13,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "B"
+},
+{
 	"name": "Fox",
 		"questTags": [
 			"Animal",
@@ -5452,7 +5640,7 @@
 			"BiomeColorless",
 			"BiomeWhite"
 		],
-	"sprite": "sprites/dungeon/fox.atlas",
+	"sprite": "sprites/fox.atlas",
 	"deck": [
 		"decks/fox.json"
 	],
@@ -5517,7 +5705,7 @@
 			"BiomeBlue",
 			"BiomeBlack"
 		],
-	"sprite": "sprites/dungeon/frog.atlas",
+	"sprite": "sprites/frog.atlas",
 	"deck": [
 		"decks/frog.json"
 	],
@@ -5664,7 +5852,7 @@
 			"IdentityGreen",
 			"BiomeBlack"
 		],
-	"sprite": "sprites/dungeon/fungus.atlas",
+	"sprite": "sprites/fungus.atlas",
 	"deck": [
 		"decks/fungus.json"
 	],
@@ -5945,7 +6133,7 @@
 			"IdentityBlack",
 			"IdentityGolgari"
 		],
-	"sprite": "sprites/dungeon/garruk.atlas",
+	"sprite": "sprites/boss/garruk.atlas",
 	"deck": [
 		"decks/miniboss/garruk.dck"
 	],
@@ -6462,7 +6650,7 @@
 			"Giant",
 			"IdentitySultai"
 		],
-	"sprite": "sprites/dungeon/frogboss.atlas",
+	"sprite": "sprites/boss/frogboss.atlas",
 	"scale": 0.50,
 	"deck": [
 		"decks/miniboss/frogboss.dck"
@@ -6603,8 +6791,8 @@
 	"colors": "RG"
 },
 {
-	"name": "Magma Elemental",
-	"sprite": "sprites/dungeon/magmaelemental.atlas",
+	"name": "Magma Fire Elemental",
+	"sprite": "sprites/magmafireelemental.atlas",
 	"deck": [
 		"decks/magma_elemental.dck"
 	],
@@ -8437,7 +8625,7 @@
 			"BiomeWhite",
 			"BiomeBlack"
 		],
-	"sprite": "sprites/dungeon/dragonfly.atlas",
+	"sprite": "sprites/dragonfly.atlas",
 	"deck": [
 		"decks/insect.dck"
 	],
@@ -8573,7 +8761,7 @@
 			"IdentityGruul",
 			"BiomeRed"
 		],
-	"sprite": "sprites/dungeon/jackalwarrior.atlas",
+	"sprite": "sprites/jackalwarrior.atlas",
 	"scale": 0.5,
 	"deck": [
 		"decks/jackal.dck"
@@ -8630,7 +8818,7 @@
 			"IdentityWhite",
 			"IdentityAzorius"
 		],
-	"sprite": "sprites/dungeon/jace.atlas",
+	"sprite": "sprites/boss/jace.atlas",
 	"deck": [
 		"decks/miniboss/jace.dck"
 	],
@@ -8702,7 +8890,7 @@
 			"IdentityBlue",
 			"BiomeBlue"
 		],
-	"sprite": "sprites/dungeon/jellyfish.atlas",
+	"sprite": "sprites/jellyfish.atlas",
 	"deck": [
 		"decks/jellyfish.dck"
 	],
@@ -8939,7 +9127,7 @@
 			"IdentityBlue",
 			"IdentitySimic"
 		],
-	"sprite": "sprites/dungeon/kiora.atlas",
+	"sprite": "sprites/boss/kiora.atlas",
 	"scale": 0.35,
 	"deck": [
 		"decks/miniboss/kiora.dck"
@@ -9078,7 +9266,7 @@
 			"IdentityRakdos",
 			"BiomeRed"
 		],
-	"sprite": "sprites/dungeon/kobold.atlas",
+	"sprite": "sprites/kobold.atlas",
 	"deck": [
 		"decks/kobold.dck"
 	],
@@ -10298,7 +10486,7 @@
 			"BiomeColorless",
 			"BiomeBlack"
 		],
-	"sprite": "sprites/dungeon/mummy.atlas",
+	"sprite": "sprites/mummy.atlas",
 	"scale": 0.70,
 	"deck": [
 		"decks/mummy.dck"
@@ -10355,7 +10543,7 @@
 			"IdentityWhite",
 			"IdentityBoros"
 		],
-	"sprite": "sprites/dungeon/nahiri.atlas",
+	"sprite": "sprites/boss/nahiri.atlas",
 	"deck": [
 		"decks/miniboss/nahiri.dck"
 	],
@@ -10484,7 +10672,7 @@
 			"IdentityBlue",
 			"BiomeBlue"
 		],
-	"sprite": "sprites/dungeon/octopus.atlas",
+	"sprite": "sprites/octopus.atlas",
 	"deck": [
 		"decks/octopus.dck"
 	],
@@ -10550,7 +10738,7 @@
 			"BiomeGreen",
 			"BiomeColorless"
 		],
-	"sprite": "sprites/dungeon/ooze.atlas",
+	"sprite": "sprites/ooze.atlas",
 	"scale": 0.6,
 	"deck": [
 		"decks/ooze.json"
@@ -10615,7 +10803,7 @@
 			"IdentityBlack",
 			"IdentityGolgari"
 		],
-	"sprite": "sprites/dungeon/oozeboss.atlas",
+	"sprite": "sprites/boss/oozeboss.atlas",
 	"scale": 0.5,
 	"deck": [
 		"decks/miniboss/ooze_boss.dck"
@@ -10708,7 +10896,7 @@
 			"BiomeWhite",
 			"BiomeBlue"
 		],
-	"sprite": "sprites/dungeon/owl.atlas",
+	"sprite": "sprites/owl.atlas",
 	"deck": [
 		"decks/owl.dck"
 	],
@@ -10848,7 +11036,7 @@
 			"IdentityGreen",
 			"BiomeGreen"
 		],
-	"sprite": "sprites/dungeon/plant.atlas",
+	"sprite": "sprites/plant.atlas",
 	"deck": [
 		"decks/plant.json",
 		"decks/plant.dck"
@@ -11215,7 +11403,7 @@
 			"IdentityBlack",
 			"BiomeBlack"
 		],
-	"sprite": "sprites/dungeon/humanoidrat.atlas",
+	"sprite": "sprites/humanoidrat.atlas",
 	"deck": [
 		"decks/humanoidrat.dck"
 	],
@@ -11280,7 +11468,7 @@
 			"BiomeColorless",
 			"BiomeWhite"
 		],
-	"sprite": "sprites/dungeon/raven.atlas",
+	"sprite": "sprites/raven.atlas",
 	"deck": [
 		"decks/raven.dck"
 	],
@@ -11630,6 +11818,95 @@
 	"colors": "BU"
 },
 {
+	"name": "Sand Golem",
+		"questTags": [
+			"Golem",
+			"Elemental",
+			"Humanoid",
+			"IdentityWhite",
+			"IdentityRed",
+			"BiomeWhite",
+			"BiomeRed"
+		],
+	"sprite": "sprites/dungeon/sandelemental.atlas",
+	"deck": [
+		"decks/sandgolem.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 23,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	],
+	"colors": "W"
+},
+{
+	"name": "Sandwurm",
+		"questTags": [
+			"Wurm",
+			"Nature",
+			"Subterranean",
+			"IdentityGreen"
+		],
+	"sprite": "sprites/dungeon/sandwurm.atlas",
+	"deck": [
+		"decks/sandwurm.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 13,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	],
+	"colors": "W"
+},
+{
 	"name": "Satyr",
 		"questTags": [
 			"Humanoid",
@@ -11861,7 +12138,7 @@
 			"BiomeWhite",
 			"BiomeBlue"
 		],
-	"sprite": "sprites/dungeon/scorpion.atlas",
+	"sprite": "sprites/scorpion.atlas",
 	"scale": 0.9,
 	"deck": [
 		"decks/scorpion.dck"
@@ -12146,7 +12423,7 @@
 			"IdentityGreen",
 			"IdentityGolgari"
 		],
-	"sprite": "sprites/dungeon/slimefoot.atlas",
+	"sprite": "sprites/boss/slimefoot.atlas",
 	"scale": 0.5,
 	"deck": [
 		"decks/miniboss/slimefoot.dck"
@@ -12266,7 +12543,7 @@
 			"Loner",
 			"IdentityRed"
 		],
-	"sprite": "sprites/dungeon/slobad.atlas",
+	"sprite": "sprites/boss/slobad.atlas",
 	"scale": 0.75,
 	"deck": [
 		"decks/miniboss/slobad.dck"
@@ -12560,7 +12837,7 @@
 			"Small",
 			"IdentityWhite"
 		],
-	"sprite": "sprites/dungeon/cat.atlas",
+	"sprite": "sprites/cat.atlas",
 	"deck": [
 		"decks/straycat.dck"
 	],
@@ -12624,7 +12901,7 @@
 			"IdentityGolgari",
 			"BiomeGreen"
 		],
-	"sprite": "sprites/dungeon/squirrel.atlas",
+	"sprite": "sprites/squirrel.atlas",
 	"deck": [
 		"decks/squirrel.dck"
 	],
@@ -12652,6 +12929,86 @@
 		}
 	],
 	"colors": "BG"
+},
+{
+	"name": "Swamp Troll",
+		"questTags": [
+			"Giant",
+			"Humanoid",
+			"Regenerating",
+			"Subterranean",
+			"IdentityGreen",
+			"IdentityBlack",
+			"BiomeBlack",
+			"Leader"
+		],
+	"sprite": "sprites/dungeon/swamptroll.atlas",
+	"deck": [
+		"decks/swamptroll.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"scale": 0.8,
+	"life": 35,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "GB"
 },
 {
 	"name": "Symbiote",
@@ -12789,7 +13146,7 @@
 			"IdentityWhite",
 			"IdentityAzorius"
 		],
-	"sprite": "sprites/dungeon/teferi.atlas",
+	"sprite": "sprites/boss/teferi.atlas",
 	"scale": 0.5,
 	"deck": [
 		"decks/miniboss/teferi_boss.dck"
@@ -12861,7 +13218,7 @@
 			"Planeswalker",
 			"IdentityRed"
 		],
-	"sprite": "sprites/dungeon/tibalt.atlas",
+	"sprite": "sprites/boss/tibalt.atlas",
 	"scale": 0.50,
 	"deck": [
 		"decks/miniboss/tibalt.dck"
@@ -13012,7 +13369,7 @@
 			"IdentityBlue",
 			"BiomeBlue"
 		],
-	"sprite": "sprites/dungeon/turtle.atlas",
+	"sprite": "sprites/turtle.atlas",
 	"deck": [
 		"decks/turtle.json"
 	],
@@ -13631,7 +13988,7 @@
 			"BiomeBlue",
 			"BiomeBlack"
 		],
-	"sprite": "sprites/dungeon/walkingbrain.atlas",
+	"sprite": "sprites/walkingbrain.atlas",
 	"deck": [
 		"decks/walkingbrain.dck"
 	],
@@ -14074,7 +14431,7 @@
 			"BiomeColorless",
 			"BiomeBlack"
 		],
-	"sprite": "sprites/dungeon/wildrat.atlas",
+	"sprite": "sprites/wildrat.atlas",
 	"deck": [
 		"decks/infectrat.dck",
 		"decks/rat.json",
@@ -14354,6 +14711,66 @@
 	"colors": "U"
 },
 {
+	"name": "Witch",
+		"questTags": [
+			"Mystic",
+			"Unholy",
+			"Wizard",
+			"Human",
+			"IdentityBlack"
+		],
+	"sprite": "sprites/dungeon/witch.atlas",
+	"deck": [
+		"decks/witch.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 12,
+	"flying": true,
+	"scale": 0.8,
+	"life": 13,
+	"rewards": [
+	{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "B"
+},
+{
+
 	"name": "Wounded Sliver",
 		"questTags": [
 			"Sliver",
@@ -14399,7 +14816,7 @@
 			"IdentityRed",
 			"IdentityJund"
 		],
-	"sprite": "sprites/dungeon/xira.atlas",
+	"sprite": "sprites/boss/xira.atlas",
 	"scale": 0.50,
 	"deck": [
 		"decks/miniboss/xira.dck"

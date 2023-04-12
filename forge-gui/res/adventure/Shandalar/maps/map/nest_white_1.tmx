@@ -172,7 +172,7 @@
    </properties>
   </object>
   <object id="103" template="../obj/gold.tx" x="75" y="571.5"/>
-  <object id="104" template="../obj/booster.tx" x="448.5" y="399.5">
+  <object id="104" template="../obj/booster.tx" x="428.5" y="404.167">
    <properties>
     <property name="reward">[
   {
