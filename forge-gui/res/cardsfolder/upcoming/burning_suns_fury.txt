@@ -1,0 +1,6 @@
+Name:Burning Sun's Fury
+ManaCost:1 R
+Types:Instant
+K:Convoke
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +2 | KW$ Haste | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | SpellDescription$ Up to two target creatures each get +2/+0 and gain haste until end of turn.
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for 1 or one mana of that creature's color.)\nUp to two target creatures each get +2/+0 and gain haste until end of turn.
