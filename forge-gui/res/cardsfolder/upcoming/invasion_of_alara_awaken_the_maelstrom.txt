@@ -4,7 +4,8 @@ Types:Battle Siege
 Defense:7
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, exile cards from the top of your library until you exile two nonland cards with mana value 4 or less. You may cast one of those two cards without paying its mana cost. Put one of them into your hand. Then put the other cards exiled this way on the bottom of your library in a random order.
 SVar:TrigDig:DB$ DigUntil | Defined$ You | Valid$ Card.nonLand+cmcLE4 | Amount$ 2 | FoundDestination$ Exile | RevealedDestination$ Exile | RememberRevealed$ True | ImprintFound$ True | SkipReorder$ True | SubAbility$ DBPlay
-SVar:DBPlay:DB$ Play | Valid$ Card.IsImprinted | ValidSA$ Spell | ValidZone$ Exile | WithoutManaCost$ True | Controller$ You | Optional$ True | Amount$ 1 | SubAbility$ DBRestRandomOrder
+SVar:DBPlay:DB$ Play | Valid$ Card.IsImprinted | ValidSA$ Spell | ValidZone$ Exile | WithoutManaCost$ True | Controller$ You | Optional$ True | Amount$ 1 | SubAbility$ DBPutHand
+SVar:DBPutHand:DB$ ChangeZoneAll | ChangeType$ Card.IsImprinted | Origin$ Exile | Destination$ Hand | SubAbility$ DBRestRandomOrder
 SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 AlternateMode:DoubleFaced
@@ -14,8 +15,8 @@ ALTERNATE
 
 Name:Awaken the Maelstrom
 ManaCost:no cost
-Colors:all
 Types:Sorcery
+S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | SetColor$ All | Description$ CARDNAME is all colors.
 A:SP$ Draw | NumCards$ 2 | ValidTgts$ Player | SubAbility$ DBChangeZone | TgtPrompt$ Select target player | SpellDescription$ Target player draws two cards.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | SubAbility$ DBCopy | ChangeType$ Artifact | ChangeNum$ 1 | SpellDescription$ You may put an artifact card from your hand onto the battlefield.
 SVar:DBCopy:DB$ CopyPermanent | Choices$ Permanent.YouCtrl | TgtPrompt$ Choose a permanent you control to copy | SubAbility$ DBCounter | SpellDescription$ Create a token that's a copy of a permanent you control
