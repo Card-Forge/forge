@@ -25,7 +25,6 @@ import forge.util.MyRandom;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -55,7 +54,7 @@ public class EnemySprite extends CharacterSprite {
     public float threatRange = 0.0f;
     public float fleeRange = 0.0f;
     public boolean ignoreDungeonEffect = false;
-    public UUID questStageID;
+    public String questStageID;
 
     public EnemySprite(EnemyData enemyData) {
         this(0,enemyData);
