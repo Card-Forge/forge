@@ -90,7 +90,7 @@
       "width": 45,
       "height": 25,
       "x": 175,
-      "y": 0
+      "y": 240
     },
     {
       "type": "TextButton",
@@ -100,7 +100,7 @@
       "width": 45,
       "height": 25,
       "x": 220,
-      "y": 0
+      "y": 240
     },
     {
       "type": "TextButton",
@@ -110,7 +110,7 @@
       "width": 45,
       "height": 25,
       "x": 265,
-      "y": 0
+      "y": 240
     },
     {
       "type": "TextButton",
@@ -120,7 +120,7 @@
       "width": 45,
       "height": 25,
       "x": 130,
-      "y": 0
+      "y": 240
     },
     {
       "type": "TextButton",
@@ -140,7 +140,7 @@
       "width": 45,
       "height": 25,
       "x": 310,
-      "y": 0
+      "y": 240
     }
   ]
 }

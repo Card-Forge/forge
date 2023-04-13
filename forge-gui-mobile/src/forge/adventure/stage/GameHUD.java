@@ -67,7 +67,9 @@ public class GameHUD extends Stage {
         instance = this;
         this.gameStage = gameStage;
 
-        ui = new UIActor(Config.instance().getFile(Forge.isLandscapeMode() ? "ui/hud_landscape.json" : "ui/hud_portrait.json"));
+        ui = new UIActor(Config.instance().getFile(GuiBase.isAndroid()
+                ? Forge.isLandscapeMode() ? "ui/hud_landscape.json" : "ui/hud_portrait.json"
+                : Forge.isLandscapeMode() ? "ui/hud.json" : "ui/hud_portrait.json"));
 
 
         blank = ui.findActor("blank");
@@ -156,6 +158,8 @@ public class GameHUD extends Stage {
     }
 
     private void logbook() {
+        if (console.isVisible())
+            console.toggle();
         Forge.switchScene(QuestLogScene.instance(Forge.getCurrentScene()));
     }
 
@@ -468,15 +472,21 @@ public class GameHUD extends Stage {
     }
 
     private void openDeck() {
+        if (console.isVisible())
+            console.toggle();
         Forge.switchScene(DeckSelectScene.instance());
     }
 
     private void openInventory() {
+        if (console.isVisible())
+            console.toggle();
         WorldSave.getCurrentSave().header.createPreview();
         Forge.switchScene(InventoryScene.instance());
     }
 
     private void exitToWorldMap() {
+        if (console.isVisible())
+            console.toggle();
         if (!GameScene.instance().isNotInWorldMap()) //prevent showing this dialog to WorldMap
             return;
         dialog.getButtonTable().clear();
@@ -503,6 +513,8 @@ public class GameHUD extends Stage {
     }
 
     private void menu() {
+        if (console.isVisible())
+            console.toggle();
         gameStage.openMenu();
     }
 
