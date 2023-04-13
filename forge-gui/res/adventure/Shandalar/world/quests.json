@@ -2167,9 +2167,11 @@
 									},
 									{
 										"name": "You decide that the invasive thoughts, if you can call them that, are unwelcomed, and you take a step back.",
-										"text": "The thoughts urgently follow you for a moment. '{COLOR=red}KKKKiiiiill...{ENDCOLOR}' But as you take another step back, the words vanish from your mind."
+										"text": "The thoughts urgently follow you for a moment. '{COLOR=red}KKKKiiiiill...{ENDCOLOR}' But as you take another step back, the words vanish from your mind.",
 										"options": [
-										{"name": "With no delay at all, you walk away. Far away. (Decline Quest)"}
+											{
+												"name": "With no delay at all, you walk away. Far away. (Decline Quest)"
+											}
 										]
 									}
 								]
@@ -3690,7 +3692,7 @@
 								]
 							},
 							{
-								"name": "\"A fight with a dragon? No thanks. I'll be leaving now.\" (Decline Quest)",
+								"name": "\"A fight with a dragon? No thanks. I'll be leaving now.\" (Decline Quest)"
 							}
 						]
 					},
@@ -4470,9 +4472,11 @@
 					},
 					{
 						"name": "A short note is written in red ink.",
-						"text": "\"{COLOR=red}Have fangs, will travel{ENDCOLOR}\"."
+						"text": "\"{COLOR=red}Have fangs, will travel{ENDCOLOR}\".",
 						"options": [
-						{"name": "You suddenly realize that isn't ink, and step away. (Decline Quest)"}
+							{
+								"name": "You suddenly realize that isn't ink, and step away. (Decline Quest)"
+							}
 						]
 					}
 				]
@@ -4741,7 +4745,6 @@
 		"options": [
 			{
 				"action": [
-
 					{
 						"grantRewards": [
 							{
@@ -4855,7 +4858,6 @@
 			"failureDialog": {},
 			"POIToken": ""
 		}
-		
 	]
 },
 {
@@ -4969,7 +4971,6 @@
 							{
 								"name": "You don't especially feel like volunteering to take on a $(enemy_1) today. (Decline Quest)"
 							}
-							
 						]
 					},
 					{

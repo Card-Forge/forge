@@ -169,7 +169,6 @@ public class QuestStageEdit extends FormPanel {
         switch(objectiveType.getSelectedItem().toString()){
             case "Arena":
                 arenaLabel.setVisible(true);
-                nyi.setVisible(true);
                 poiPane.setVisible(true);
                 anyPOI.setVisible(true);
                 here.setVisible(true);

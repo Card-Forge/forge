@@ -84,9 +84,9 @@ public class AdventureQuestController implements Serializable {
                         questStage.epilogueDisplayed = true;
                         dialogQueue.add(questStage.epilogue);
                     }
-//                    if (questStage.getStatus() != QuestStatus.Complete){
-//                        break;
-//                    }
+                    if (questStage.getStatus() != QuestStatus.Complete){
+                        break;
+                    }
                 }
 
                 if (quest.failed){
@@ -263,6 +263,12 @@ public class AdventureQuestController implements Serializable {
         }
     }
 
+    public void updateArenaComplete(boolean winner){
+        for(AdventureQuestData currentQuest: Current.player().getQuests()) {
+            currentQuest.updateArenaComplete(winner);
+        }
+    }
+
     public AdventureQuestData generateQuest(int id){
         AdventureQuestData generated = null;
         for (AdventureQuestData template: allQuests) {
@@ -287,7 +293,7 @@ public class AdventureQuestController implements Serializable {
     public void rematchQuestSprite(EnemySprite sprite){
         for (AdventureQuestData q : Current.player().getQuests()){
             for (AdventureQuestStage s : q.stages){
-                if (sprite.questStageID != null && sprite.questStageID.equals(s.questStageID)){
+                if (sprite.questStageID != null && sprite.questStageID.equals(s.stageID)){
                     s.setTargetSprite(sprite);
                 }
             }
