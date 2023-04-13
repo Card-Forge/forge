@@ -485,9 +485,6 @@ g_1_1_phyrexian_saproling
 g_x_x_dinosaur
 gw_3_3_phyrexian_hydra_lifelink
 gw_3_3_phyrexian_hydra_reach
-incubator_c_0_0_a_phyrexian
-incubator_c_0_0_a_phyrexian
-incubator_c_0_0_a_phyrexian
 rw_3_2_spirit
 rw_3_2_warrior_symbiotic_attack
 u_1_1_kraken_trample
