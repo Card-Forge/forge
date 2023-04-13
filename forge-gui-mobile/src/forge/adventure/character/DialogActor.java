@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import forge.adventure.data.AdventureQuestData;
-import forge.adventure.data.DialogData;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Current;
 import forge.adventure.util.MapDialog;
