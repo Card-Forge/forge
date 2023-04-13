@@ -213,6 +213,11 @@ public class CardProperty {
                     return false;
                 }
             }
+        } else if (property.startsWith("OppProtect")) {
+            if (card.getProtectingPlayer() == null
+                    || !sourceController.getOpponents().contains(card.getProtectingPlayer())) {
+                return false;
+            }
         } else if (property.startsWith("DefendingPlayer")) {
             Player p = property.endsWith("Ctrl") ? controller : card.getOwner();
             if (!game.getPhaseHandler().inCombat()) {
@@ -870,7 +875,7 @@ public class CardProperty {
                 } else if (restriction.equals(ZoneType.Battlefield.toString())) {
                     return Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("ThisTurnCast")) {
-                    return Iterables.any(CardUtil.getThisTurnCast("Card", source, spellAbility), CardPredicates.sharesNameWith(card));
+                    return Iterables.any(CardUtil.getThisTurnCast("Card", source, spellAbility, sourceController), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("MovedToGrave")) {
                     if (!(spellAbility instanceof SpellAbility)) {
                         final SpellAbility root = ((SpellAbility) spellAbility).getRootAbility();
@@ -962,7 +967,7 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("SecondSpellCastThisTurn")) {
-            final List<Card> cards = CardUtil.getThisTurnCast("Card", source, spellAbility);
+            final List<Card> cards = CardUtil.getThisTurnCast("Card", source, spellAbility, sourceController);
             if (cards.size() < 2) {
                 return false;
             }
@@ -970,7 +975,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("ThisTurnCast")) {
-            for (final Card c : CardUtil.getThisTurnCast("Card", source, spellAbility)) {
+            for (final Card c : CardUtil.getThisTurnCast("Card", source, spellAbility, sourceController)) {
                 if (card.equals(c)) {
                     return true;
                 }
@@ -1546,6 +1551,15 @@ public class CardProperty {
             if (property.equals("attackingSame")) {
                 final GameEntity attacked = combat.getDefenderByAttacker(source);
                 if (!combat.isAttacking(card, attacked)) {
+                    return false;
+                }
+            }
+            if (property.equals("attackingBattle")) {
+                final GameEntity attacked = combat.getDefenderByAttacker(source);
+                if (!(attacked instanceof Card)) {
+                    return false;
+                }
+                if (!((Card) attacked).isBattle()) {
                     return false;
                 }
             }

@@ -2746,7 +2746,7 @@
 			"POITags": [
 				"BiomeGreen",
 				"Hostile",
-				"SideQuest"
+				"Sidequest"
 			],
 			"objective": "Clear",
 			"prologue": {},
@@ -2948,7 +2948,7 @@
 			"count2": 25,
 			"POITags": [
 				"Hostile",
-				"SideQuest"
+				"Sidequest"
 			],
 			"objective": "Clear",
 			"prologue": {},
@@ -2964,7 +2964,7 @@
 			"objective": "Leave",
 			"prologue": {},
 			"epilogue": {},
-			"POIToken": ""
+			"POIToken": "$(poi_1)"
 		}
 	]
 },
@@ -3168,7 +3168,7 @@
 			"POITags": [
 				"BiomeWhite",
 				"Hostile",
-				"SideQuest"
+				"Sidequest"
 			],
 			"objective": "Clear",
 			"prologue": {},
@@ -3596,7 +3596,7 @@
 			"POITags": [
 				"BiomeBlack",
 				"Hostile",
-				"SideQuest"
+				"Sidequest"
 			],
 			"objective": "Clear",
 			"prologue": {},
@@ -3907,7 +3907,7 @@
 			"POITags": [
 				"BiomeRed",
 				"Hostile",
-				"SideQuest"
+				"Sidequest"
 			],
 			"objective": "Clear",
 			"prologue": {},
@@ -4143,7 +4143,7 @@
 			"POITags": [
 				"BiomeBlue",
 				"Hostile",
-				"SideQuest"
+				"Sidequest"
 			],
 			"objective": "Clear",
 			"prologue": {},
@@ -4376,7 +4376,7 @@
 			"POITags": [
 				"BiomeColorless",
 				"Hostile",
-				"SideQuest"
+				"Sidequest"
 			],
 			"objective": "Clear",
 			"prologue": {},
@@ -4607,7 +4607,7 @@
 				"POIReference": "$(poi_2)"
 			}
 		],
-		"text": "3 $(enemy1)s are proving to be too much trouble to be worth your time, whether your mysterious client knows your name or not. (-2 Local Reputation)",
+		"text": "3 $(enemy_1)s are proving to be too much trouble to be worth your time, whether your mysterious client knows your name or not. (-2 Local Reputation)",
 		"options": [
 			{
 				"name": "(Quest Failed)"

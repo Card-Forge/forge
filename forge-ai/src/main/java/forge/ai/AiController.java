@@ -969,21 +969,16 @@ public class AiController {
     }
 
     private boolean canPlaySpellWithoutBuyback(Card card, SpellAbility sa) {
-        boolean wasteBuybackAllowed = false;
-
-        // About to lose game : allow
-        if (ComputerUtil.aiLifeInDanger(player, true, 0)) {
-            wasteBuybackAllowed = true;
-        }
-
         int copies = CardLists.count(player.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(card.getName()));
         // Have two copies : allow
         if (copies >= 2) {
-            wasteBuybackAllowed = true;
+            return true;
         }
 
-        int neededMana = 0;
-        boolean dangerousRecurringCost = false;
+        // About to lose game : allow
+        if (ComputerUtil.aiLifeInDanger(player, true, 0)) {
+            return true;
+        }
 
         Cost costWithBuyback = sa.getPayCosts().copy();
         for (OptionalCostValue opt : GameActionUtil.getOptionalCostValues(sa)) {
@@ -991,22 +986,19 @@ public class AiController {
                 costWithBuyback.add(opt.getCost());
             }
         }
-        CostAdjustment.adjust(costWithBuyback, sa);
-        if (costWithBuyback.getCostMana() != null) {
-            neededMana = costWithBuyback.getCostMana().getMana().getCMC();
-        }
+        costWithBuyback = CostAdjustment.adjust(costWithBuyback, sa);
         if (costWithBuyback.hasSpecificCostType(CostPayLife.class)
                 || costWithBuyback.hasSpecificCostType(CostDiscard.class)
                 || costWithBuyback.hasSpecificCostType(CostSacrifice.class)) {
-            dangerousRecurringCost = true;
+            // won't be able to afford buyback any time soon
+            // if Buyback cost includes sacrifice, life, discard
+            return true;
         }
 
-        // won't be able to afford buyback any time soon
-        // if Buyback cost includes sacrifice, life, discard
-        if (dangerousRecurringCost) {
-            wasteBuybackAllowed = true;
+        int neededMana = 0;
+        if (costWithBuyback.getCostMana() != null) {
+            neededMana = costWithBuyback.getCostMana().getMana().getCMC();
         }
-
         // Memory Crystal-like effects need special handling
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             for (StaticAbility s : c.getStaticAbilities()) {
@@ -1022,10 +1014,10 @@ public class AiController {
 
         int hasMana = ComputerUtilMana.getAvailableManaEstimate(player, false);
         if (hasMana < neededMana - 1) {
-            wasteBuybackAllowed = true;
+            return true;
         }
 
-        return wasteBuybackAllowed;
+        return false;
     }
 
     // not sure "playing biggest spell" matters?

@@ -290,6 +290,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 if (!tgtCard.changeToState(CardStateName.Transformed)) {
                     // Failed to transform. In the future, we might need to just remove this option and continue
                     amount--;
+                    System.err.println("CastTransformed failed for '" + tgtCard + "'.");
                     continue;
                 }
                 state = CardStateName.Transformed;

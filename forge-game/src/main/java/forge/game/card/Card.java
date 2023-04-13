@@ -1738,6 +1738,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         protectingPlayer = p;
         view.updateProtectingPlayer(this);
     }
+
     public final void setSecretChosenPlayer(final Player p) {
         chosenPlayer = p;
     }

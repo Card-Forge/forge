@@ -173,7 +173,7 @@ public class DamageDealEffect extends DamageBaseEffect {
             } else { // only for Comet, Stellar Pup
                 final String prompt = sa.hasParam("ChoicePrompt") ? sa.getParam("ChoicePrompt") :
                         Localizer.getInstance().getMessage("lblChooseEntityDmg");
-                tgts.addAll(sa.getActivatingPlayer().getController().chooseEntitiesForEffect(choices, n, n, null, sa,
+                tgts.addAll(activator.getController().chooseEntitiesForEffect(choices, n, n, null, sa,
                         prompt, null, null));
             }
         } else {

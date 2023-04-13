@@ -1,0 +1,12 @@
+Name:Disturbing Conversion
+ManaCost:1 U
+Types:Enchantment Aura
+K:Flash
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -X | Description$ Enchanted creature gets -X/-0, where X is the number of cards in its controller's graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, each player mills two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ Player
+SVar:X:Count$ValidGraveyard Card.EnchantedControllerCtrl
+DeckHints:Ability$Graveyard|Mill
+Oracle:Flash\nEnchant creature\nWhen Disturbing Conversion enters the battlefield, each player mills two cards.\nEnchanted creature gets -X/-0, where X is the number of cards in its controller's graveyard.

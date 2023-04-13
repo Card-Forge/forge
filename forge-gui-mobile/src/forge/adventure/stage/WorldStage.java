@@ -52,7 +52,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         background.setZIndex(0);
         navArrow = new NavArrowActor();
         addActor(navArrow);
-        navArrow.setZIndex(1);
+        navArrow.toFront();
     }
 
     public static WorldStage getInstance() {

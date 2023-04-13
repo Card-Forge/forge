@@ -139,7 +139,7 @@ public class StaticAbilityCantBeCast {
         if (stAb.hasParam("NumLimitEachTurn") && activator != null) {
             int limit = Integer.parseInt(stAb.getParam("NumLimitEachTurn"));
             String valid = stAb.getParamOrDefault("ValidCard", "Card");
-            List<Card> thisTurnCast = CardUtil.getThisTurnCast(valid, card, stAb);
+            List<Card> thisTurnCast = CardUtil.getThisTurnCast(valid, card, stAb, activator);
             if (CardLists.filterControlledByAsList(thisTurnCast, activator).size() < limit) {
                 return false;
             }

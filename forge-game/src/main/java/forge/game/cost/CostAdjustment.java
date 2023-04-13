@@ -468,7 +468,7 @@ public class CostAdjustment {
                     }
                     List<Card> list;
                     if (st.hasParam("ValidCard")) {
-                        list = CardUtil.getThisTurnCast(st.getParam("ValidCard"), hostCard, st);
+                        list = CardUtil.getThisTurnCast(st.getParam("ValidCard"), hostCard, st, controller);
                     } else {
                         list = game.getStack().getSpellsCastThisTurn();
                     }
@@ -552,25 +552,6 @@ public class CostAdjustment {
             } else if (!targetValid) {
                 return false;
             }
-        }
-        if (st.hasParam("ValidSpellTarget")) {
-            SpellAbility curSa = sa;
-            boolean targetValid = false;
-            outer: while (curSa != null) {
-                if (!curSa.usesTargeting()) {
-                    curSa = curSa.getSubAbility();
-                    continue;
-                }
-                for (SpellAbility target : curSa.getTargets().getTargetSpells()) {
-                    Card targetCard = target.getHostCard();
-                    if (targetCard.isValid(st.getParam("ValidSpellTarget").split(","), controller, hostCard, curSa)) {
-                        targetValid = true;
-                        break outer;
-                    }
-                }
-                curSa = curSa.getSubAbility();
-            }
-            return targetValid;
         }
         return true;
     }
