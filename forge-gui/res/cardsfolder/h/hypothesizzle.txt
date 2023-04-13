@@ -1,8 +1,8 @@
 Name:Hypothesizzle
 ManaCost:3 U R
 Types:Instant
-A:SP$ Draw | NumCards$ 2 | SubAbility$ DBImmediateTrigger | SpellDescription$ Draw two cards. Then you may discard a nonland card. When you do, CARDNAME deals 4 damage to target creature.
-SVar:DBImmediateTrigger:DB$ ImmediateTrigger | UnlessCost$ Discard<1/Card.nonLand/nonland card> | UnlessPayer$ You | UnlessSwitched$ True | Execute$ TrigDealDmg | StackDescription$ None | TriggerDescription$ When you do, CARDNAME deals 4 damage to target creature.
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBImmediateTrigger | SpellDescription$ Draw two cards. Then you may discard a nonland card.
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | UnlessCost$ Discard<1/Card.nonLand/nonland card> | UnlessPayer$ You | UnlessSwitched$ True | Execute$ TrigDealDmg | StackDescription$ None | SpellDescription$ When you do, CARDNAME deals 4 damage to target creature.
 SVar:TrigDealDmg:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4
 DeckHas:Ability$Discard
 Oracle:Draw two cards. Then you may discard a nonland card. When you do, Hypothesizzle deals 4 damage to target creature.
