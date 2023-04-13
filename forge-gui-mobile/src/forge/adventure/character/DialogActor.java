@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import forge.adventure.data.AdventureQuestData;
+import forge.adventure.data.DialogData;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Current;
 import forge.adventure.util.MapDialog;
@@ -44,17 +45,29 @@ public class DialogActor extends CharacterSprite {
             }
         };
         dialog.addQuestAcceptedListener(listen);
+
+        ChangeListener finished = new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                removeFromMap();
+            }
+        };
+        dialog.addDialogCompleteListener(finished);
     }
 
     public void acceptQuest(){
         Current.player().addQuest(questData);
     }
 
+    public void removeFromMap() { dialog = null; }
+
     @Override
     public void onPlayerCollide() {
-        stage.resetPosition();
-        stage.showDialog();
-        dialog.activate();
+        if (dialog != null) {
+            stage.resetPosition();
+            stage.showDialog();
+            dialog.activate();
+        }
     }
 
     @Override

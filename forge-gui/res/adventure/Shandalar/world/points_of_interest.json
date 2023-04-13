@@ -261,9 +261,7 @@
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Cave",
-		"Hostile",
-		"BiomeBlack",
-		"Sidequest"
+		"BiomeBlack"
 	]
 },
 {
@@ -395,10 +393,8 @@
 	"map": "maps/map/cave_2.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
-		"Hostile",
 		"Cave",
-		"BiomeColorless",
-		"Sidequest"
+		"BiomeColorless"
 	]
 },
 {
@@ -591,9 +587,7 @@
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Cave",
-		"Hostile",
-		"BiomeGreen",
-		"Sidequest"
+		"BiomeGreen"
 	]
 },
 {
@@ -710,10 +704,8 @@
 	"map": "maps/map/cave_2.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
-		"Hostile",
 		"Cave",
-		"BiomeBlue",
-		"Sidequest"
+		"BiomeBlue"
 	]
 },
 {
@@ -800,10 +792,8 @@
 	"map": "maps/map/cave_2.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
-		"Hostile",
 		"Cave",
-		"BiomeRed",
-		"Sidequest"
+		"BiomeRed"
 	]
 },
 {
@@ -1040,10 +1030,8 @@
 	"map": "maps/map/cave_2.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
-		"Hostile",
 		"Cave",
-		"BiomeWhite",
-		"Sidequest"
+		"BiomeWhite"
 	]
 },
 {
