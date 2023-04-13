@@ -23,6 +23,8 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         if (sa.hasParam("TriggerDescription")) {
             return sa.getParam("TriggerDescription");
+        } else if (sa.hasParam("SpellDescription")) {
+            return sa.getParam("SpellDescription");
         }
 
         return "";
