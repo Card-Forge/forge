@@ -48,11 +48,11 @@ public class AdventureQuestStage implements Serializable {
     public String POIToken; //If defined, ignore tags input and use the target POI from a different stage's objective instead.
     private transient boolean inTargetLocation = false;
 
-    public String stageID;
+    public UUID stageID;
 
     public void initialize(){
-        if (stageID == null || stageID.isEmpty()){
-            stageID = UUID.randomUUID().toString();
+        if (stageID == null){
+            stageID = UUID.randomUUID();
         }
     }
 

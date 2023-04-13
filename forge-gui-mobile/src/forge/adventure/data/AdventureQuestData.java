@@ -313,7 +313,7 @@ public class AdventureQuestData implements Serializable {
             EnemyData toUse = generateTargetEnemyData(stage);
             toUse.lifetime = stage.count1;
             EnemySprite toReturn =  new EnemySprite(toUse);
-            toReturn.questStageID = stage.stageID;
+            toReturn.questStageID = stage.stageID.toString();
             return toReturn;
         }
         return null;
