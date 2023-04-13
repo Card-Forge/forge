@@ -17,7 +17,6 @@ ManaCost:no cost
 Colors:blue,black
 Types:Creature Zombie
 PT:4/4
-A:SP$ PermanentCreature
 K:ETBReplacement:Copy:DBCopy:Optional
 SVar:DBCopy:DB$ Clone | Choices$ Creature | ChoiceZone$ Graveyard | SetPower$ 4 | SetToughness$ 4 | AddColors$ Black | AddTypes$ Zombie | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature card in a graveyard, except it's a 4/4 black Zombie in addition to its other types.
 Oracle:You may have Lazotep Convert enter the battlefield as a copy of any creature card in a graveyard, except it's a 4/4 black Zombie in addition to its other types.
