@@ -1,6 +1,6 @@
-Name:Vampire Knight Token
+Name:Vampire Token
 ManaCost:no cost
-Types:Creature Knight Vampire
+Types:Creature Vampire
 Colors:white
 PT:1/1
 K:Lifelink
