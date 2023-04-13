@@ -767,7 +767,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
      */
     public void deleteDeck() {
         decks[selectedDeckIndex] = new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck"));
-        selectedDeckIndex = 0;
     }
 
     /**
