@@ -254,18 +254,26 @@ public class ForgeScript {
             int y = AbilityUtils.calculateAmount(source, k[1].substring(2), spellAbility);
             return Expressions.compare(sa.getTotalManaSpent(), comparator, y);
         } else if (property.startsWith("ManaFrom")) {
-            final String fromWhat = property.substring(8);
-            boolean found = false;
+            String fromWhat = property.substring(8);
+            String[] parts = null;
+            if (fromWhat.contains("_")) {
+                parts = fromWhat.split("_");
+                fromWhat = parts[0];
+            }
+            int toFind = parts != null ? AbilityUtils.calculateAmount(source, parts[1], spellAbility) : 1;
+            int found = 0;
             for (Mana m : sa.getPayingMana()) {
                 final Card manaSource = m.getSourceCard();
                 if (manaSource != null) {
                     if (manaSource.isValid(fromWhat, sourceController, source, spellAbility)) {
-                        found = true;
-                        break;
+                        found++;
+                        if (found == toFind) {
+                            break;
+                        }
                     }
                 }
             }
-            return found;
+            return (found == toFind);
         } else if (property.equals("MayPlaySource")) {
             StaticAbility m = sa.getMayPlay();
             if (m == null) {
