@@ -16,7 +16,6 @@ ManaCost:no cost
 Colors:blue
 Types:Creature Moonfolk Ninja
 PT:2/3
-A:SP$ PermanentCreature
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Battle | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player or battle, draw a card.
 SVar:TrigDraw:DB$ Draw

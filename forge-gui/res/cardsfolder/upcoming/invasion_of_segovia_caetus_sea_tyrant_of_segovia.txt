@@ -15,8 +15,7 @@ ManaCost:no cost
 Colors:blue
 Types:Legendary Creature Serpent
 PT:3/3
-A:SP$ PermanentCreature
 S:Mode$ Continuous | Affected$ Card.nonCreature+YouCtrl | AffectedZone$ Stack | AddKeyword$ Convoke | Description$ Noncreature spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a noncreature spell pays for 1 or one mana of that creature's color.)
-T:Mode$ Phase | Phase$ End of Turn | Execute$ TrigUntap | TriggerDescription$ At the beginning of your end step, untap up to four target creatures.
-SVar:TrigUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Creature | Amount$ 4 | Defined$ You
+T:Mode$ Phase | Phase$ End of Turn | Execute$ TrigUntap | ValidPlayer$ You | TriggerDescription$ At the beginning of your end step, untap up to four target creatures.
+SVar:TrigUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Creature | ValidTgts Creature.YouCtrl | Amount$ 4 | Defined$ You
 Oracle:Noncreature spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a noncreature spell pays for 1 or one mana of that creature's color.)\nAt the beginning of your end step, untap up to four target creatures.
