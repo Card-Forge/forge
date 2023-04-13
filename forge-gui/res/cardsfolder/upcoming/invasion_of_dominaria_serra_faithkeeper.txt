@@ -16,7 +16,6 @@ ManaCost:no cost
 Colors:white
 Types:Creature Angel
 PT:4/4
-A:SP$ PermanentCreature
 K:Flying
 K:Vigilance
 Oracle:Flying, vigilance

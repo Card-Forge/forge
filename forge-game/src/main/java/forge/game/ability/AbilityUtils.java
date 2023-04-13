@@ -2939,6 +2939,12 @@ public class AbilityUtils {
                 la.setCardState(original);
                 list.add(la);
             }
+            if (state == CardStateName.Transformed && tgtCard.isPermanent() && !tgtCard.isAura()) {
+                // casting defeated battle
+                Spell sp = new SpellPermanent(tgtCard, original);
+                sp.setCardState(original);
+                list.add(sp);
+            }
             if (tgtCard.isModal()) {
                 CardState modal = tgtCard.getState(CardStateName.Modal);
                 Iterables.addAll(list, tgtCard.getBasicSpells(modal));
