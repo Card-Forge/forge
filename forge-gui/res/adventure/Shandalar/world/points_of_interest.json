@@ -1197,6 +1197,15 @@
 	]
 },
 {
+	"name": "DrossOutpost",
+	"type": "dungeon",
+	"count": 2,
+	"radiusFactor": 0.8,
+	"spriteAtlas": "maps/tileset/Phyrexian_Buildings.atlas",
+	"sprite": "DrossOutpost",
+	"map": "maps/map/phyrexian_black1.tmx"
+},
+{
 	"name": "ElfTown",
 	"type": "dungeon",
 	"count": 2,
