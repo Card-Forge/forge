@@ -1075,6 +1075,10 @@ public class CardProperty {
             if (!property.startsWith("without") && !card.hasStartOfUnHiddenKeyword(property.substring(4))) {
                 return false;
             }
+        } else if (property.startsWith("activated")) {
+            if (!card.activatedThisTurn()) {
+                return false;
+            }
         } else if (property.startsWith("tapped")) {
             if (!card.isTapped()) {
                 return false;

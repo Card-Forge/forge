@@ -7118,6 +7118,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getOwner().canDiscardBy(sa, effect);
     }
 
+    public boolean activatedThisTurn() {
+        return !numberTurnActivations.isEmpty();
+    }
+
     public void addAbilityActivated(SpellAbility ability) {
         numberTurnActivations.add(ability);
         numberGameActivations.add(ability);
