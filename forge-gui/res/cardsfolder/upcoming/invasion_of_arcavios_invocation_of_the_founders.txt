@@ -17,5 +17,5 @@ Colors:blue
 Types:Enchantment
 A:SP$ PermanentCreature
 T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Instant.wasCastFromYourHand,Sorcery.wasCastFromYourHand | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerDescription$ Whenever you cast an instant or sorcery spell from your hand, you may copy that spell. You may choose new targets for the copy.
-SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Optional$ True | MayChooseTarget$ True
 Oracle:Whenever you cast an instant or sorcery spell from your hand, you may copy that spell. You may choose new targets for the copy.
