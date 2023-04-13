@@ -17,7 +17,6 @@ import forge.util.Aggregates;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.List;
 
 public class AdventureQuestController implements Serializable {
 
