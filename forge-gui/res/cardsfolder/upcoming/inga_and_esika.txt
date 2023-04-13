@@ -1,9 +1,0 @@
-Name:Inga and Esika
-ManaCost:2 G U
-Types:Legendary Creature Human God
-PT:4/4
-T:Mode$ SpellCast | ValidCard$ Creature | ValidSA$ Spell.ManaFromCreature GE3 | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, if three or more mana from creatures was spent to cast it, draw a card.
-SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddAbility$ AnyMana | AddKeyword$ Vigilance | Description$ Creatures you control have vigilance and "{T}: Add one mana of any color. Spend this mana only to cast a creature spell."
-SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Creature | Amount$ 1 | SpellDescription$ Add one mana of any color. Spend this mana only to cast a creature spell.
-Oracle:Creatures you control have vigilance and "{T}: Add one mana of any color. Spend this mana only to cast a creature spell."\nWhenever you cast a creature spell, if three or more mana from creatures was spent to cast it, draw a card.
