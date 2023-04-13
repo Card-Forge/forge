@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.google.common.collect.Lists;
+import forge.Forge;
 import forge.adventure.data.*;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
@@ -74,7 +75,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public PlayerStatistic getStatistic(){ return statistic; }
 
     private void clearDecks() {
-        for(int i=0; i < NUMBER_OF_DECKS; i++) decks[i] = new Deck("Empty Deck");
+        for(int i=0; i < NUMBER_OF_DECKS; i++) decks[i] = new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck"));
         deck              = decks[0];
         selectedDeckIndex = 0;
     }
@@ -300,7 +301,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         for(int i=0;i<NUMBER_OF_DECKS;i++) {
             if(!data.containsKey("deck_name_" + i)) {
                 if(i==0) decks[i] = deck;
-                else     decks[i] = new Deck("Empty Deck");
+                else     decks[i] = new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck"));
                 continue;
             }
             decks[i] = new Deck(data.readString("deck_name_"+i));
@@ -759,5 +760,33 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public void removeQuest(AdventureQuestData quest) {
         quests.remove(quest);
+    }
+
+    /**
+     * Deletes a deck by replacing the current selected deck with a new deck
+     */
+    public void deleteDeck() {
+        decks[selectedDeckIndex] = new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck"));
+        selectedDeckIndex = 0;
+    }
+
+    /**
+     * Attempts to copy a deck to an empty slot.
+     *
+     * @return int - index of new copy slot, or -1 if no slot was available
+     */
+    public int copyDeck() {
+        for (int i = 0; i < decks.length; i++ ){
+            if (isEmptyDeck(i)) {
+                decks[i] = (Deck)deck.copyTo(deck.getName() + " (" + Forge.getLocalizer().getMessage("lblCopy") + ")");
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public boolean isEmptyDeck(int deckIndex) {
+        return decks[deckIndex].isEmpty() && decks[deckIndex].getName().equals(Forge.getLocalizer().getMessage("lblEmptyDeck"));
     }
 }
