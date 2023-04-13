@@ -17,6 +17,7 @@ import forge.game.player.PlayerController;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
 import forge.util.CardTranslation;
+import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.Localizer;
 
@@ -27,6 +28,9 @@ import forge.util.Localizer;
 public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
+        if (sa.hasParam("AddConditionSVar")) {
+            return "Add StackDescription for AddOrRemoveCounter line with condition!";
+        }
         final StringBuilder sb = new StringBuilder();
         final Player pl = sa.hasParam("DefinedPlayer") ?
                 AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa).getFirst()
@@ -50,7 +54,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        final int counterAmount = AbilityUtils.calculateAmount(source, sa.getParam("CounterNum"), sa);
+        final int counterAmount = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CounterNum", "1"), sa);
 
         if (counterAmount <= 0) {
             return;
@@ -112,7 +116,19 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
 
         params.put("CounterType", chosenType);
         prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter",  chosenType.getName()) + " ";
-        boolean putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
+        boolean putCounter;
+        if (sa.hasParam("RemoveConditionSVar")) {
+            final Card host = sa.getHostCard();
+            final int value = AbilityUtils.calculateAmount(host, sa.getParam("RemoveConditionSVar"), sa);
+            final String compare = sa.getParamOrDefault("RemoveConditionSVarCompare", "GE1");
+            final String operator = compare.substring(0, 2);
+            final String operand = compare.substring(2);
+            final int operandValue = AbilityUtils.calculateAmount(host, operand, sa);
+
+            putCounter = !Expressions.compare(value, operator, operandValue);
+        } else {
+            putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
+        }
 
         if (putCounter) {
             tgtCard.addCounter(chosenType, counterAmount, pl, table);

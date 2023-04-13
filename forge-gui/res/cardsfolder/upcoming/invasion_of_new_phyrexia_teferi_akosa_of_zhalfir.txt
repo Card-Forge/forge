@@ -16,7 +16,6 @@ ManaCost:no cost
 Colors:white,blue
 Types:Legendary Planeswalker Teferi
 Loyalty:4
-A:SP$ PermanentNoncreature
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards.
 SVar:DBDiscard:DB$ Discard | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Creature | StackDescription$ SpellDescription | SpellDescription$ Then discard two cards unless you discard a creature card.
 A:AB$ Effect | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Name$ Emblem - Teferi Akosa of Zhalfir | Image$ emblem_teferi_akosa_of_zhalfir | StaticAbilities$ STPump | Duration$ Permanent | SpellDescription$ You get an emblem with "Knights you control get +1/+0 and have ward {1}."

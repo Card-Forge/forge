@@ -213,6 +213,11 @@ public class CardProperty {
                     return false;
                 }
             }
+        } else if (property.startsWith("OppProtect")) {
+            if (card.getProtectingPlayer() == null
+                    || !sourceController.getOpponents().contains(card.getProtectingPlayer())) {
+                return false;
+            }
         } else if (property.startsWith("DefendingPlayer")) {
             Player p = property.endsWith("Ctrl") ? controller : card.getOwner();
             if (!game.getPhaseHandler().inCombat()) {
@@ -1070,6 +1075,10 @@ public class CardProperty {
             if (!property.startsWith("without") && !card.hasStartOfUnHiddenKeyword(property.substring(4))) {
                 return false;
             }
+        } else if (property.startsWith("activated")) {
+            if (!card.activatedThisTurn()) {
+                return false;
+            }
         } else if (property.startsWith("tapped")) {
             if (!card.isTapped()) {
                 return false;
@@ -1546,6 +1555,15 @@ public class CardProperty {
             if (property.equals("attackingSame")) {
                 final GameEntity attacked = combat.getDefenderByAttacker(source);
                 if (!combat.isAttacking(card, attacked)) {
+                    return false;
+                }
+            }
+            if (property.equals("attackingBattle")) {
+                final GameEntity attacked = combat.getDefenderByAttacker(source);
+                if (!(attacked instanceof Card)) {
+                    return false;
+                }
+                if (!((Card) attacked).isBattle()) {
                     return false;
                 }
             }
