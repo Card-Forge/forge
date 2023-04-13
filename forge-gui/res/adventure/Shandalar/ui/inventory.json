@@ -19,6 +19,24 @@
     },
     {
       "type": "ImageButton",
+      "name": "Equipment_Ability1",
+      "style": "item_frame",
+      "width": 20,
+      "height": 20,
+      "x": 17,
+      "y": 20
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Ability2",
+      "style": "item_frame",
+      "width": 20,
+      "height": 20,
+      "x": 107,
+      "y": 20
+    },
+    {
+      "type": "ImageButton",
       "name": "Equipment_Neck",
       "style": "item_frame",
       "width": 20,
