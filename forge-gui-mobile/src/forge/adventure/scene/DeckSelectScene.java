@@ -77,6 +77,8 @@ public class DeckSelectScene extends UIScene {
         }
         else {
             updateDeckButton(index);
+            select(index);
+            scrollPane.scrollTo(buttons.get(index).getX(), buttons.get(index).getY(), 0, 0);
         }
     }
 
@@ -84,10 +86,7 @@ public class DeckSelectScene extends UIScene {
         if (Current.player().isEmptyDeck(currentSlot)) return;
         Dialog deleteDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblAreYouSureProceedDelete"),
             Forge.getLocalizer().getMessage("lblOk"),
-            Forge.getLocalizer().getMessage("lblAbort"), () -> {
-                this.delete();
-                removeDialog();
-            }, this::removeDialog);
+            Forge.getLocalizer().getMessage("lblAbort"), this::delete, this::removeDialog);
 
         showDialog(deleteDialog);
     }
@@ -95,6 +94,7 @@ public class DeckSelectScene extends UIScene {
     private void delete() {
         Current.player().deleteDeck();
         updateDeckButton(currentSlot);
+        removeDialog();
     }
 
     private void updateDeckButton(int index) {
