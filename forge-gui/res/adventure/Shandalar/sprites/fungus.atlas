@@ -57,9 +57,6 @@ Attack
 Attack
   xy: 128, 69
   size: 32, 27      
-Attack
-  xy: 160, 69
-  size: 22, 27  
 Death
   xy: 0, 164
   size: 32, 28      

@@ -31,7 +31,7 @@ Walk
   xy: 103, 45
   size: 20, 20
 Walk 
-  xy: 135, 50
+  xy: 135,45 
   size: 20, 20 
 Walk 
   xy: 167, 45

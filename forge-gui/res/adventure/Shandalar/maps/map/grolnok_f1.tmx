@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="189">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="17" name="Collision" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYEAAN04EJgeQqg/ZPhM+0jCyXmIxue6kBIzaS397QeljIOwdSuFMrv7B4F96AmrZ+4ECe4dSuqK2G0gBHxgGLpznkVH3UcNeUgHMLkrqeWrYC8PzOFHl0QGx4cooysDABMW46n1sZuOzFxdG9xc57SZCbZhpBNoy6PqJBejpDpd+XHLk+pdYe4nRTwogNZ9h8y817QXFm6YEgg2Tp4e92Nj42snk2kusemqUQfjSKDY+tco9XOUZsX0QagJq2gsAMiw9tA==
+  </data>
+ </layer>
+ <layer id="13" name="background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzF10sOgjAQBuBGF9U1j7jRHcdQ48ZbqAuPpRGNh3DrisTbeAN1AhOGUfuihUn+iND2K5WEKkSzBon/2FYR+UnXXijXtJ9P17SvTYVYQxu3bRsXt4/qw92MhJhJIe6a8NJd11Um7W2TeZm4pvZTlPHpor1V+KFc7vNQdyrr8y71y/0XdMHaOXoubiab/bp093E/rm4dfPmmc7Ot9Vjv4nXVPC+W+xtwIa+43h/RY8yVfedtho5untTHh6R8fvB9Qe8dzp+q9vCJ70fX+4VxzlVyhQvnwFul3y6Ohb+dqXublKEuBF1wMHi/aPt0qcPTpYtrDDmy52yZursw7iNqjk9DC58jarVxC4VL93a+3PlnnRYsqv9AfF1d3dB93wGw61A=
+  </data>
+ </layer>
+ <layer id="18" name="Tilelaag 4" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzdlsFKw0AQhkdL2fbiRVtzU7AWvPcqHvQg+AxaxKM+hs/gRan0QawW8UEU9FrfQHcZhozTTTLdDlH84YMJu803u9mSDNYABr/ESgdgtSYandx77+vzjTQ04fPHid6i+5X1ofHetJEtB3DctGHb6b3vfv6TW44ZINN/4D3042ctpC5vcE5cPvfB10eR+aneokyZk3h0OGbhnRV4X/3YVQPgE5BLX7+xPsPvPpp6L++/zEtrJi+t1dIr0Xo5KftMyDMjvbHnSmtexBvOKP1PYgxbufe0ZF5govQumpf1+fMtqfKmJHhDRu2cOryxkF++r7h3vxt/P1uF3/egW/4NMjb0hlR981DumPcrYf9Hom+tV2a3h1ywHkJ90keqkup97iHSq02qN8Vl6d3L5uvrTTvvbcF53sl+1tr1L7tenuAkLL1y//oZIq+tvZb5K95vDh8hYA==
+  </data>
+ </layer>
+ <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+  <object id="140" template="../obj/treasure.tx" x="308.807" y="387.623">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;addMaxCount&quot;: 2
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="166" template="../obj/manashards.tx" x="328.662" y="387.554"/>
+  <object id="167" template="../obj/booster.tx" x="302.266" y="347.927">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;HBG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;HBG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;HBG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="168" template="../obj/gate.tx" gid="3221229597" x="287.624" y="361.405" width="13.6923" height="20.7576" rotation="90.4687" visible="1">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This door is locked&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;go away&quot; },
+    {      
+        &quot;name&quot;:&quot;unlock with Grolnoks Key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Grolnoks Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Grolnoks Key&quot;}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="170" template="../obj/door_down.tx" x="115.686" y="405.017" width="20.0022" height="20.8327" rotation="0.284412">
+   <properties>
+    <property name="direction" value="left"/>
+    <property name="teleport" value="maps/map/grolnok.tmx"/>
+   </properties>
+  </object>
+  <object id="177" template="../obj/booster.tx" x="326.782" y="347.092">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;AFR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AFR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AFR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="181" template="../obj/enemy.tx" x="221.421" y="353.28" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Wild Rat"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="182" template="../obj/enemy.tx" x="247.038" y="149.581" width="16" height="17.6724">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Grolnok's Boss Effect&quot;]
+}</property>
+    <property name="enemy" value="Grolnok"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Grolnoks Key&quot;
+  }
+]
+</property>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="183" template="../obj/gate.tx" gid="3221229597" x="221.022" y="337.886" width="15.7579" height="22.3749" rotation="359.183">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This door is locked&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;go away&quot; },
+    {      
+        &quot;name&quot;:&quot;unlock with Rusty Old Key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Rusty Old Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Rusty Old Key&quot;}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

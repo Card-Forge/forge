@@ -55,16 +55,16 @@
 		}
 	],
 	"colors": "UW",
-		"questTags": [
-			"Human",
-			"Soldier",
-			"Wandering",
-			"IdentityAzorius",
-			"IdentityWhite",
-			"IdentityBlue",
-			"BiomeWhite",
-			"Loner"
-		]
+	"questTags": [
+		"Human",
+		"Soldier",
+		"Wandering",
+		"IdentityAzorius",
+		"IdentityWhite",
+		"IdentityBlue",
+		"BiomeWhite",
+		"Loner"
+	]
 },
 {
 	"name": "Aether Channeler",
@@ -123,16 +123,16 @@
 		}
 	],
 	"colors": "WU",
-		"questTags": [
-			"Human",
-			"Wizard",
-			"BiomeWhite",
-			"BiomeBlue",
-			"IdentityWhite",
-			"IdentityBlue",
-			"IdentityAzorius",
-			"Mystic"
-		]
+	"questTags": [
+		"Human",
+		"Wizard",
+		"BiomeWhite",
+		"BiomeBlue",
+		"IdentityWhite",
+		"IdentityBlue",
+		"IdentityAzorius",
+		"Mystic"
+	]
 },
 {
 	"name": "Akroma",
@@ -169,15 +169,15 @@
 		"Mox Pearl"
 	],
 	"colors": "W",
-		"questTags": [
-			"Angel",
-			"Holy",
-			"Humanoid",
-			"Boss",
-			"Flying",
-			"IdentityWhite",
-			"Akroma"
-		]
+	"questTags": [
+		"Angel",
+		"Holy",
+		"Humanoid",
+		"Boss",
+		"Flying",
+		"IdentityWhite",
+		"Akroma"
+	]
 },
 {
 	"name": "Amonkhet Minotaur",
@@ -252,17 +252,17 @@
 		}
 	],
 	"colors": "BR",
-		"questTags": [
-			"Humanoid",
-			"Aggressive",
-			"Minotaur",
-			"Tribal",
-			"IdentityRed",
-			"BiomeRed",
-			"IdentityBlack",
-			"IdentityRakdos",
-			"BiomeRed"
-		]
+	"questTags": [
+		"Humanoid",
+		"Aggressive",
+		"Minotaur",
+		"Tribal",
+		"IdentityRed",
+		"BiomeRed",
+		"IdentityBlack",
+		"IdentityRakdos",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Ape",
@@ -336,16 +336,16 @@
 		}
 	],
 	"colors": "GR",
-		"questTags": [
-			"Humanoid",
-			"Territorial",
-			"Animal",
-			"Wild",
-			"IdentityRed",
-			"IdentityGreen",
-			"IdentityGruul",
-			"BiomeGreen"
-		]
+	"questTags": [
+		"Humanoid",
+		"Territorial",
+		"Animal",
+		"Wild",
+		"IdentityRed",
+		"IdentityGreen",
+		"IdentityGruul",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Archer",
@@ -353,6 +353,7 @@
 	"deck": [
 		"decks/human_archer.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -419,29 +420,28 @@
 		}
 	],
 	"colors": "GW",
-		"questTags": [
-			"Human",
-			"Soldier",
-			"IdentityWhite",
-			"IdentityGreen",
-			"IdentitySelesnya",
-			"BiomeWhite"
-		]
+	"questTags": [
+		"Human",
+		"Soldier",
+		"IdentityWhite",
+		"IdentityGreen",
+		"IdentitySelesnya",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "Armored Knight",
 	"sprite": "sprites/knight.atlas",
 	"deck": [
-	"decks/armored_knight.dck"
+		"decks/armored_knight.dck"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 25,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -483,16 +483,16 @@
 			"count": 50,
 			"addMaxCount": 100
 		}
-		],
-		"questTags": [
-			"Human",
-			"Soldier",
-			"Leader",
-			"IdentityWhite",
-			"IdentityRed",
-			"IdentityBoros",
-			"BiomeWhite"
-		]
+	],
+	"questTags": [
+		"Human",
+		"Soldier",
+		"Leader",
+		"IdentityWhite",
+		"IdentityRed",
+		"IdentityBoros",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "Ashmouth Devil",
@@ -520,32 +520,21 @@
 	],
 	"colors": "BR",
 	"questTags": [
-			"Humanoid",
-			"Devil",
-			"IdentityRed",
-			"IdentityBlack",
-			"IdentityRakdos",
-			"BiomeRed"
-		]
+		"Humanoid",
+		"Devil",
+		"IdentityRed",
+		"IdentityBlack",
+		"IdentityRakdos",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Axgard Dwarf",
-		"questTags": [
-			"Dwarf",
-			"Soldier",
-			"Territorial",
-			"Tribal",
-			"Warrior",
-			"Subterranean",
-			"IdentityRed",
-			"IdentityWhite",
-			"IdentityBoros",
-			"BiomeRed"
-		],
 	"sprite": "sprites/dwarf_8.atlas",
 	"deck": [
 		"decks/axgard_dwarf.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 22,
@@ -611,30 +600,34 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "RW"
+	"colors": "RW",
+	"questTags": [
+		"Dwarf",
+		"Soldier",
+		"Territorial",
+		"Tribal",
+		"Warrior",
+		"Subterranean",
+		"IdentityRed",
+		"IdentityWhite",
+		"IdentityBoros",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Badger",
-		"questTags": [
-			"Animal",
-			"Territorial",
-			"Wild",
-			"Small",
-			"IdentityGreen",
-			"BiomeGreen"
-		],
-	"sprite": "sprites/dungeon/badger.atlas",
+	"sprite": "sprites/badger.atlas",
 	"deck": [
 		"decks/badger.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
-	"scale":0.8,
 	"difficulty": 0.1,
 	"speed": 15,
+	"scale": 0.8,
 	"life": 10,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -670,24 +663,23 @@
 				"Land"
 			]
 		}
+	],
+	"questTags": [
+		"Animal",
+		"Territorial",
+		"Wild",
+		"Small",
+		"IdentityGreen",
+		"BiomeGreen"
 	]
 },
 {
 	"name": "Bandit",
-		"questTags": [
-			"Dwarf",
-			"Wandering",
-			"Warrior",
-			"Bandit",
-			"IdentityBlack",
-			"IdentityRed",
-			"IdentityRakdos",
-			"BiomeColorless"
-		],
 	"sprite": "sprites/dwarf_7.atlas",
 	"deck": [
 		"decks/bandit.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -753,22 +745,82 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BR"
+	"colors": "BR",
+	"questTags": [
+		"Dwarf",
+		"Wandering",
+		"Warrior",
+		"Bandit",
+		"IdentityBlack",
+		"IdentityRed",
+		"IdentityRakdos",
+		"BiomeColorless"
+	]
+},
+{
+	"name": "Bat",
+	"sprite": "sprites/dungeon/bat.atlas",
+	"deck": [
+		"decks/bat.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"scale": 0.8,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Animal",
+		"Wild",
+		"Nesting",
+		"Flying",
+		"Tiny",
+		"IdentityBlack",
+		"BiomeBlack",
+		"Aggressive",
+		"Bat",
+		"Nocturnal"
+	]
 },
 {
 	"name": "Bear",
-		"questTags": [
-			"Territorial",
-			"Animal",
-			"Wild",
-			"Domesticated",
-			"IdentityGreen",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/bear.atlas",
 	"deck": [
 		"decks/bear.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -834,20 +886,18 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "G"
+	"colors": "G",
+	"questTags": [
+		"Territorial",
+		"Animal",
+		"Wild",
+		"Domesticated",
+		"IdentityGreen",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Beastmaster",
-		"questTags": [
-			"Human",
-			"Loner",
-			"Nature",
-			"IdentityGreen",
-			"IdentityWhite",
-			"IdentitySelesnya",
-			"BiomeGreen",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/calibou_elite.atlas",
 	"deck": [
 		"decks/beastmaster.dck"
@@ -920,20 +970,20 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "GW"
+	"colors": "GW",
+	"questTags": [
+		"Human",
+		"Loner",
+		"Nature",
+		"IdentityGreen",
+		"IdentityWhite",
+		"IdentitySelesnya",
+		"BiomeGreen",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "Beholder",
-		"questTags": [
-			"Aberration",
-			"Floating",
-			"Flying",
-			"IdentityBlack",
-			"IdentityBlue",
-			"IdentityRed",
-			"IdentityGrixis",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/beholder.atlas",
 	"deck": [
 		"decks/beholder.dck"
@@ -1005,22 +1055,20 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BRU"
+	"colors": "BRU",
+	"questTags": [
+		"Aberration",
+		"Floating",
+		"Flying",
+		"IdentityBlack",
+		"IdentityBlue",
+		"IdentityRed",
+		"IdentityGrixis",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Berserker",
-		"questTags": [
-			"Dwarf",
-			"Aggressive",
-			"Loner",
-			"Barbarian",
-			"Warrior",
-			"IdentityRed",
-			"IdentityBlack",
-			"IdentityGreen",
-			"IdentityJund",
-			"BiomeRed"
-		],
 	"sprite": "sprites/dwarf_5.atlas",
 	"deck": [
 		"decks/berserker.json"
@@ -1043,17 +1091,22 @@
 			"addMaxCount": 95
 		}
 	],
-	"colors": "BGR"
+	"colors": "BGR",
+	"questTags": [
+		"Dwarf",
+		"Aggressive",
+		"Loner",
+		"Barbarian",
+		"Warrior",
+		"IdentityRed",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityJund",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Big Zombie",
-		"questTags": [
-			"Undead",
-			"Zombie",
-			"Humanoid",
-			"IdentityBlack",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/zombie_2.atlas",
 	"deck": [
 		"decks/zombie_bad.json"
@@ -1087,22 +1140,17 @@
 			]
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Undead",
+		"Zombie",
+		"Humanoid",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Bird",
-		"questTags": [
-			"Animal",
-			"Flying",
-			"Territorial",
-			"Bird",
-			"Predator",
-			"Nesting",
-			"Wild",
-			"Domesticated",
-			"IdentityBlue",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/griffin_2.atlas",
 	"deck": [
 		"decks/bird_blue.json"
@@ -1174,21 +1222,27 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "U"
+	"colors": "U",
+	"questTags": [
+		"Animal",
+		"Flying",
+		"Territorial",
+		"Bird",
+		"Predator",
+		"Nesting",
+		"Wild",
+		"Domesticated",
+		"IdentityBlue",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Black Wiz1",
-		"questTags": [
-			"Wizard",
-			"Necromancer",
-			"IdentityBlack",
-			"BiomeColorless",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/black_wizard.atlas",
 	"deck": [
 		"decks/black_bad.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -1254,21 +1308,22 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Wizard",
+		"Necromancer",
+		"IdentityBlack",
+		"BiomeColorless",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Black Wiz2",
-		"questTags": [
-			"Wizard",
-			"Necromancer",
-			"IdentityBlack",
-			"BiomeColorless",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/black_wiz2.atlas",
 	"deck": [
 		"decks/fear.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -1287,21 +1342,22 @@
 			"addMaxCount": 80
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Wizard",
+		"Necromancer",
+		"IdentityBlack",
+		"BiomeColorless",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Black Wiz3",
-		"questTags": [
-			"Wizard",
-			"Necromancer",
-			"IdentityBlack",
-			"BiomeColorless",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/black_wiz3.atlas",
 	"deck": [
 		"decks/black_wiz3.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -1320,19 +1376,17 @@
 			"addMaxCount": 80
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Wizard",
+		"Necromancer",
+		"IdentityBlack",
+		"BiomeColorless",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Blue Wiz1",
-		"questTags": [
-			"Wizard",
-			"Illusionist",
-			"Flying",
-			"Human",
-			"IdentityBlue",
-			"BiomeColorless",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/mage.atlas",
 	"deck": [
 		"decks/blue_bad.json"
@@ -1404,22 +1458,24 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "U"
+	"colors": "U",
+	"questTags": [
+		"Wizard",
+		"Illusionist",
+		"Flying",
+		"Human",
+		"IdentityBlue",
+		"BiomeColorless",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Blue Wiz2",
-		"questTags": [
-			"Illusionist",
-			"Wizard",
-			"Human",
-			"IdentityBlue",
-			"BiomeColorless",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/blue_wiz2.atlas",
 	"deck": [
 		"decks/mill.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -1438,18 +1494,18 @@
 			"addMaxCount": 40
 		}
 	],
-	"colors": "U"
+	"colors": "U",
+	"questTags": [
+		"Illusionist",
+		"Wizard",
+		"Human",
+		"IdentityBlue",
+		"BiomeColorless",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Blue Wiz3",
-		"questTags": [
-			"Human",
-			"Wizard",
-			"Illusionist",
-			"IdentityBlue",
-			"BiomeColorless",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/mage_2.atlas",
 	"deck": [
 		"decks/counter.dck"
@@ -1473,33 +1529,30 @@
 			"addMaxCount": 300
 		}
 	],
-	"colors": "U"
-	
+	"colors": "U",
+	"questTags": [
+		"Human",
+		"Wizard",
+		"Illusionist",
+		"IdentityBlue",
+		"BiomeColorless",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Boar",
-		"questTags": [
-			"Animal",
-			"Territorial",
-			"Prey",
-			"Wild",
-			"IdentityGreen",
-			"BiomeRed",
-			"BiomeColorless"
-		],
-	"sprite": "sprites/dungeon/boar.atlas",
-	"scale": 0.55,
+	"sprite": "sprites/boar.atlas",
 	"deck": [
 		"decks/boar.json"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.4,
 	"speed": 31,
+	"scale": 0.55,
 	"life": 13,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -1539,24 +1592,24 @@
 			"addMaxCount": 100
 		}
 	],
-	"colors": "G"
+	"colors": "G",
+	"questTags": [
+		"Animal",
+		"Territorial",
+		"Prey",
+		"Wild",
+		"IdentityGreen",
+		"BiomeRed",
+		"BiomeColorless"
+	]
 },
 {
 	"name": "Boggart",
-		"questTags": [
-			"Goblin",
-			"Humanoid",
-			"Coward",
-			"Tribal",
-			"IdentityRed",
-			"IdentityGreen",
-			"IdentityGruul",
-			"BiomeRed"
-		],
 	"sprite": "sprites/goblin_2.atlas",
 	"deck": [
 		"decks/eyeblight.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 27,
@@ -1586,30 +1639,32 @@
 			]
 		}
 	],
-	"colors": "GR"
+	"colors": "GR",
+	"questTags": [
+		"Goblin",
+		"Humanoid",
+		"Coward",
+		"Tribal",
+		"IdentityRed",
+		"IdentityGreen",
+		"IdentityGruul",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Bull",
-		"questTags": [
-			"Farm",
-			"Animal",
-			"Domesticated",
-			"IdentityGreen",
-			"BiomeRed"
-		],
-	"sprite": "sprites/dungeon/bull.atlas",
-	"scale": 0.65,
+	"sprite": "sprites/bull.atlas",
 	"deck": [
 		"decks/bull.dck"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
+	"scale": 0.65,
 	"life": 13,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -1649,23 +1704,22 @@
 			"addMaxCount": 100
 		}
 	],
-	"colors": "G"
+	"colors": "G",
+	"questTags": [
+		"Farm",
+		"Animal",
+		"Domesticated",
+		"IdentityGreen",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Cat",
-		"questTags": [
-			"Cat",
-			"Humanoid",
-			"Soldier",
-			"IdentityGreen",
-			"IdentityWhite",
-			"IdentitySelesnya",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/lion.atlas",
 	"deck": [
 		"decks/cat.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 27,
@@ -1731,24 +1785,24 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "GW"
+	"colors": "GW",
+	"questTags": [
+		"Cat",
+		"Humanoid",
+		"Soldier",
+		"IdentityGreen",
+		"IdentityWhite",
+		"IdentitySelesnya",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "Cathar",
-		"questTags": [
-			"Soldier",
-			"Human",
-			"Religious",
-			"Holy",
-			"IdentityGreen",
-			"IdentityWhite",
-			"IdentitySelesnya",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/cathar.atlas",
 	"deck": [
 		"decks/cathar.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -1814,32 +1868,31 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "GW"
+	"colors": "GW",
+	"questTags": [
+		"Soldier",
+		"Human",
+		"Religious",
+		"Holy",
+		"IdentityGreen",
+		"IdentityWhite",
+		"IdentitySelesnya",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "Cave Spider",
-		"questTags": [
-			"Territorial",
-			"Animal",
-			"Ambush",
-			"Predator",
-			"Wild",
-			"Subterranean",
-			"IdentityRed",
-			"IdentityGreen",
-			"IdentityBlack",
-			"IdentityJund"
-		],
 	"sprite": "sprites/spider_2.atlas",
 	"deck": [
 		"decks/cave_spider.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
 	"life": 18,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 4,
@@ -1866,23 +1919,27 @@
 			]
 		}
 	],
-	"colors": "RGB"
+	"colors": "RGB",
+	"questTags": [
+		"Territorial",
+		"Animal",
+		"Ambush",
+		"Predator",
+		"Wild",
+		"Subterranean",
+		"IdentityRed",
+		"IdentityGreen",
+		"IdentityBlack",
+		"IdentityJund"
+	]
 },
 {
 	"name": "Centaur",
-
-		"questTags": [
-			"Humanoid",
-			"Tribal",
-			"IdentityGreen",
-			"IdentityWhite",
-			"IdentitySelesnya",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/centaur.atlas",
 	"deck": [
 		"decks/centaur.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -1901,23 +1958,23 @@
 			"addMaxCount": 85
 		}
 	],
-	"colors": "GW"
+	"colors": "GW",
+	"questTags": [
+		"Humanoid",
+		"Tribal",
+		"IdentityGreen",
+		"IdentityWhite",
+		"IdentitySelesnya",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Centaur Warrior",
-		"questTags": [
-			"Humanoid",
-			"Soldier",
-			"Tribal",
-			"IdentityGreen",
-			"IdentityWhite",
-			"IdentitySelesnya",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/centaur_2.atlas",
 	"deck": [
 		"decks/centaur_warrior.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -1936,20 +1993,19 @@
 			"addMaxCount": 85
 		}
 	],
-	"colors": "GW"
+	"colors": "GW",
+	"questTags": [
+		"Humanoid",
+		"Soldier",
+		"Tribal",
+		"IdentityGreen",
+		"IdentityWhite",
+		"IdentitySelesnya",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Challenger 20",
-		"questTags": [
-			"Challenger",
-			"IdentityUnknown",
-			"BiomeGreen",
-			"BiomeRed",
-			"BiomeColorless",
-			"BiomeWhite",
-			"BiomeBlue",
-			"BiomeBlack"
-		],
 	"nameOverride": "Challenger",
 	"sprite": "sprites/doppelganger.atlas",
 	"deck": [
@@ -1958,6 +2014,7 @@
 		"decks/challenger_20_final_adventure.dck",
 		"decks/challenger_20_flash_of_ferocity.dck"
 	],
+	"ai": "",
 	"randomizeDeck": true,
 	"spawnRate": 0.25,
 	"difficulty": 0.25,
@@ -2029,20 +2086,20 @@
 			"itemName": "Challenge Coin"
 		}
 	],
-	"colors": "UBRWG"
+	"colors": "UBRWG",
+	"questTags": [
+		"Challenger",
+		"IdentityUnknown",
+		"BiomeGreen",
+		"BiomeRed",
+		"BiomeColorless",
+		"BiomeWhite",
+		"BiomeBlue",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Challenger 21",
-		"questTags": [
-			"Challenger",
-			"IdentityUnknown",
-			"BiomeGreen",
-			"BiomeRed",
-			"BiomeColorless",
-			"BiomeWhite",
-			"BiomeBlue",
-			"BiomeBlack"
-		],
 	"nameOverride": "Challenger",
 	"sprite": "sprites/doppelganger.atlas",
 	"deck": [
@@ -2051,6 +2108,7 @@
 		"decks/challenger_21_mono-green_stompy.dck",
 		"decks/challenger_21_mono-red_aggro.dck"
 	],
+	"ai": "",
 	"randomizeDeck": true,
 	"spawnRate": 0.25,
 	"difficulty": 0.25,
@@ -2122,20 +2180,20 @@
 			"itemName": "Challenge Coin"
 		}
 	],
-	"colors": "UBRWG"
+	"colors": "UBRWG",
+	"questTags": [
+		"Challenger",
+		"IdentityUnknown",
+		"BiomeGreen",
+		"BiomeRed",
+		"BiomeColorless",
+		"BiomeWhite",
+		"BiomeBlue",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Challenger 22",
-		"questTags": [
-			"Challenger",
-			"IdentityUnknown",
-			"BiomeGreen",
-			"BiomeRed",
-			"BiomeColorless",
-			"BiomeWhite",
-			"BiomeBlue",
-			"BiomeBlack"
-		],
 	"nameOverride": "Challenger",
 	"sprite": "sprites/doppelganger.atlas",
 	"deck": [
@@ -2144,6 +2202,7 @@
 		"decks/challenger_22_mono_white_aggro.dck",
 		"decks/challenger_22_rakdos_vampires.dck"
 	],
+	"ai": "",
 	"randomizeDeck": true,
 	"spawnRate": 0.25,
 	"difficulty": 0.25,
@@ -2215,24 +2274,25 @@
 			"itemName": "Challenge Coin"
 		}
 	],
-	"colors": "UBRWG"
+	"colors": "UBRWG",
+	"questTags": [
+		"Challenger",
+		"IdentityUnknown",
+		"BiomeGreen",
+		"BiomeRed",
+		"BiomeColorless",
+		"BiomeWhite",
+		"BiomeBlue",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Chandra",
-		"questTags": [
-			"Human",
-			"Wizard",
-			"Pyromancer",
-			"Planeswalker",
-			"Boss",
-			"Chandra",
-			"Fire",
-			"IdentityRed"
-		],
 	"sprite": "sprites/boss/chandra.atlas",
 	"deck": [
 		"decks/miniboss/Fire of Kaladesh.dck"
 	],
+	"ai": "",
 	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -2246,41 +2306,47 @@
 			"cardName": "Chandra, Fire Of Kaladesh"
 		},
 		{
-			"count":4,
-			"type":"Union",
+			"type": "Union",
 			"probability": 1,
+			"count": 4,
 			"cardUnion": [
 				{
-					"count":1,
-					"subTypes": ["Chandra"]
+					"count": 1,
+					"subTypes": [
+						"Chandra"
+					]
 				},
 				{
-					"count":1,
-					"superTypes": ["Legend","Legendary"],
-					"colors": ["red"],
+					"count": 1,
+					"colors": [
+						"red"
+					],
+					"superTypes": [
+						"Legend",
+						"Legendary"
+					],
 					"cardText": "Chandra"
 				},
 				{
-					"count":1,
+					"count": 1,
 					"cardName": "Oath of Chandra"
 				},
 				{
-					"count":1,
+					"count": 1,
 					"cardName": "Pyromancer's Goggles"
 				},
 				{
-					"count":1,
+					"count": 1,
 					"cardName": "Pyromancer's Gauntlet"
 				},
 				{
-					"count":1,
+					"count": 1,
 					"cardName": "Chandra's Regulator"
 				}
-				
 			]
 		},
 		{
-		"count": 1,
+			"count": 1,
 			"cardName": "Chandra's Defeat"
 		},
 		{
@@ -2312,21 +2378,23 @@
 			"itemName": "Chandra's Stone"
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Human",
+		"Wizard",
+		"Pyromancer",
+		"Planeswalker",
+		"Boss",
+		"Chandra",
+		"Fire",
+		"IdentityRed"
+	]
 },
 {
 	"name": "Chandra's Acolyte",
-		"questTags": [
-			"Pyromancer",
-			"Human",
-			"Wizard",
-			"Chandra",
-			"Fire",
-			"IdentityRed"
-		],
 	"sprite": "sprites/red_wiz2.atlas",
 	"deck": [
-		"decks/chandra1.dck"		
+		"decks/chandra1.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -2402,7 +2470,8 @@
 			"probability": 0.3,
 			"count": 1,
 			"rarity": [
-				"uncommon","rare"
+				"uncommon",
+				"rare"
 			],
 			"cardTypes": [
 				"Land"
@@ -2416,21 +2485,21 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Pyromancer",
+		"Human",
+		"Wizard",
+		"Chandra",
+		"Fire",
+		"IdentityRed"
+	]
 },
 {
 	"name": "Chandra's Firestarter",
-		"questTags": [
-			"Pyromancer",
-			"Wizard",
-			"Human",
-			"Chandra",
-			"Fire",
-			"IdentityRed"
-		],
 	"sprite": "sprites/red_wiz3.atlas",
 	"deck": [
-		"decks/chandra2.dck"		
+		"decks/chandra2.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -2506,7 +2575,8 @@
 			"probability": 0.3,
 			"count": 1,
 			"rarity": [
-				"uncommon","rare"
+				"uncommon",
+				"rare"
 			],
 			"cardTypes": [
 				"Land"
@@ -2520,21 +2590,23 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Pyromancer",
+		"Wizard",
+		"Human",
+		"Chandra",
+		"Fire",
+		"IdentityRed"
+	]
 },
 {
 	"name": "Chandra's Hellhound",
-		"questTags": [
-			"Aberration",
-			"Animal",
-			"Chandra",
-			"FIre",
-			"IdentityRed"
-		],
 	"sprite": "sprites/hellhound_2.atlas",
 	"deck": [
 		"decks/hellhound2.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -2608,7 +2680,8 @@
 			"probability": 0.3,
 			"count": 1,
 			"rarity": [
-				"uncommon","rare"
+				"uncommon",
+				"rare"
 			],
 			"cardTypes": [
 				"Land"
@@ -2622,21 +2695,20 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Aberration",
+		"Animal",
+		"Chandra",
+		"FIre",
+		"IdentityRed"
+	]
 },
 {
 	"name": "Chandra's Immolator",
-		"questTags": [
-			"Chandra",
-			"Human",
-			"Pyromancer",
-			"Wizard",
-			"FIre",
-			"IdentityRed"
-		],
 	"sprite": "sprites/red_wiz2.atlas",
 	"deck": [
-		"decks/chandra3.dck"		
+		"decks/chandra3.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -2712,7 +2784,8 @@
 			"probability": 0.3,
 			"count": 1,
 			"rarity": [
-				"uncommon","rare"
+				"uncommon",
+				"rare"
 			],
 			"cardTypes": [
 				"Land"
@@ -2726,21 +2799,21 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Chandra",
+		"Human",
+		"Pyromancer",
+		"Wizard",
+		"FIre",
+		"IdentityRed"
+	]
 },
 {
 	"name": "Chandra's Lavamancer",
-		"questTags": [
-			"Chandra",
-			"Pyromancer",
-			"Human",
-			"Wizard",
-			"FIre",
-			"IdentityRed"
-		],
 	"sprite": "sprites/red_wiz3.atlas",
 	"deck": [
-		"decks/chandra4.dck"		
+		"decks/chandra4.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -2816,7 +2889,8 @@
 			"probability": 0.3,
 			"count": 1,
 			"rarity": [
-				"uncommon","rare"
+				"uncommon",
+				"rare"
 			],
 			"cardTypes": [
 				"Land"
@@ -2830,21 +2904,21 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Chandra",
+		"Pyromancer",
+		"Human",
+		"Wizard",
+		"FIre",
+		"IdentityRed"
+	]
 },
 {
 	"name": "Chandra's Pyromancer",
-		"questTags": [
-			"Pyromancer",
-			"Wizard",
-			"Chandra",
-			"Human",
-			"FIre",
-			"IdentityRed"
-		],
 	"sprite": "sprites/red_wiz2.atlas",
 	"deck": [
-		"decks/chandra5.dck"		
+		"decks/chandra5.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -2920,7 +2994,8 @@
 			"probability": 0.3,
 			"count": 1,
 			"rarity": [
-				"uncommon","rare"
+				"uncommon",
+				"rare"
 			],
 			"cardTypes": [
 				"Land"
@@ -2934,21 +3009,21 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Pyromancer",
+		"Wizard",
+		"Chandra",
+		"Human",
+		"FIre",
+		"IdentityRed"
+	]
 },
 {
 	"name": "Chandra's Scorcher",
-		"questTags": [
-			"Human",
-			"Pyromancer",
-			"Chandra",
-			"Wizard",
-			"Fire",
-			"IdentityRed"
-		],
 	"sprite": "sprites/red_wiz2.atlas",
 	"deck": [
-		"decks/chandra6.dck"		
+		"decks/chandra6.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -3024,7 +3099,8 @@
 			"probability": 0.3,
 			"count": 1,
 			"rarity": [
-				"uncommon","rare"
+				"uncommon",
+				"rare"
 			],
 			"cardTypes": [
 				"Land"
@@ -3038,31 +3114,27 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Human",
+		"Pyromancer",
+		"Chandra",
+		"Wizard",
+		"Fire",
+		"IdentityRed"
+	]
 },
 {
 	"name": "Chicken",
-		"questTags": [
-			"Farm",
-			"Animal",
-			"Bird",
-			"Prey",
-			"Domesticated",
-			"Small",
-			"IdentityWhite",
-			"IdentityGreen",
-			"IdentitySelesnya"
-		],
 	"sprite": "sprites/dungeon/chicken.atlas",
-	"scale": 0.75,
 	"deck": [
 		"decks/chicken.dck"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
+	"scale": 0.75,
 	"life": 8,
 	"rewards": [
 		{
@@ -3083,21 +3155,27 @@
 			"count": 1,
 			"itemName": "Chicken Egg"
 		}
-	    ],
-	"colors": "WG"
+	],
+	"colors": "WG",
+	"questTags": [
+		"Farm",
+		"Animal",
+		"Bird",
+		"Prey",
+		"Domesticated",
+		"Small",
+		"IdentityWhite",
+		"IdentityGreen",
+		"IdentitySelesnya"
+	]
 },
 {
 	"name": "ClayGolem",
-		"questTags": [
-			"Golem",
-			"Construct",
-			"IdentityWhite",
-			"BiomeColorless"
-		],
 	"sprite": "sprites/golem_2.atlas",
 	"deck": [
 		"decks/golem_good.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 19,
@@ -3125,22 +3203,21 @@
 			"colorType": "Colorless"
 		}
 	],
-	"colors": "W"
+	"colors": "W",
+	"questTags": [
+		"Golem",
+		"Construct",
+		"IdentityWhite",
+		"BiomeColorless"
+	]
 },
 {
 	"name": "Cleric",
-		"questTags": [
-			"Human",
-			"Religious",
-			"Wizard",
-			"Holy",
-			"IdentityWhite",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/cleric.atlas",
 	"deck": [
 		"decks/cleric.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -3206,23 +3283,24 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "W"
+	"colors": "W",
+	"questTags": [
+		"Human",
+		"Religious",
+		"Wizard",
+		"Holy",
+		"IdentityWhite",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "Construct",
-		"questTags": [
-			"Construct",
-			"Mechanical",
-			"IdentityRed",
-			"IdentityBlue",
-			"IdentityIzzet",
-			"BiomeColorless"
-		],
 	"sprite": "sprites/golem_3.atlas",
 	"deck": [
 		"decks/artificer.dck",
 		"decks/construct.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 21,
@@ -3248,11 +3326,11 @@
 			"type": "card",
 			"probability": 0.5,
 			"count": 3,
-			"cardTypes": [
-				"Artifact"
-			],
 			"rarity": [
 				"Rare"
+			],
+			"cardTypes": [
+				"Artifact"
 			]
 		},
 		{
@@ -3274,19 +3352,23 @@
 			"addMaxCount": 100
 		}
 	],
-	"colors": "RU"
+	"colors": "RU",
+	"questTags": [
+		"Construct",
+		"Mechanical",
+		"IdentityRed",
+		"IdentityBlue",
+		"IdentityIzzet",
+		"BiomeColorless"
+	]
 },
 {
 	"name": "Copper Host Brutalizer",
-		"questTags": [
-			"Phyrexian",
-			"Copper Host",
-			"Humanoid"
-		],
 	"sprite": "sprites/copperhostbrutalizer.atlas",
 	"deck": [
 		"deckscopperhostbrutalizer.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -3319,7 +3401,7 @@
 		},
 		{
 			"type": "deckCard",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"addMaxCount": 2,
 			"rarity": [
@@ -3351,19 +3433,20 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "GB"
+	"colors": "GB",
+	"questTags": [
+		"Phyrexian",
+		"Copper Host",
+		"Humanoid"
+	]
 },
 {
 	"name": "Copper Host Infector",
-		"questTags": [
-			"Phyrexian",
-			"Copper Host",
-			"Humanoid"
-		],
 	"sprite": "sprites/copperhostinfector.atlas",
 	"deck": [
 		"decks/copperhostinfector.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -3428,37 +3511,29 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "G"
+	"colors": "G",
+	"questTags": [
+		"Phyrexian",
+		"Copper Host",
+		"Humanoid"
+	]
 },
 {
 	"name": "Crab",
-		"questTags": [
-			"Animal",
-			"Prey",
-			"Swimming",
-			"Wild",
-			"Water",
-			"Tiny",
-			"IdentityBlue",
-			"IdentityBlack",
-			"IdentityDimir",
-			"BiomeBlue"
-		],
-	"sprite": "sprites/dungeon/crab.atlas",
-	"scale": 0.9,
+	"sprite": "sprites/crab.atlas",
 	"deck": [
 		"decks/crab.json",
 		"decks/giant_crab"
 	],
 	"ai": "",
-	"flying": false,
-	"spawnRate": 1,
 	"randomizeDeck": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 20,
+	"scale": 0.9,
 	"life": 11,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -3495,31 +3570,33 @@
 			]
 		}
 	],
-	"colors": "UB"
+	"colors": "UB",
+	"questTags": [
+		"Animal",
+		"Prey",
+		"Swimming",
+		"Wild",
+		"Water",
+		"Tiny",
+		"IdentityBlue",
+		"IdentityBlack",
+		"IdentityDimir",
+		"BiomeBlue"
+	]
 },
-{ 
+{
 	"name": "Curselord",
-		"questTags": [
-			"Human",
-			"Wizard",
-			"IdentityRed",
-			"IdentityBlue",
-			"IdentityBlack",
-			"IdentityGrixis",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/black_wiz2.atlas",
 	"deck": [
 		"decks/curselord.dck"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 20,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 3,
@@ -3552,23 +3629,24 @@
 			"addMaxCount": 100
 		}
 	],
-	"colors": "RBU"
+	"colors": "RBU",
+	"questTags": [
+		"Human",
+		"Wizard",
+		"IdentityRed",
+		"IdentityBlue",
+		"IdentityBlack",
+		"IdentityGrixis",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Cyclops",
-		"questTags": [
-			"Humanoid",
-			"Giant",
-			"Barbarian",
-			"Loner",
-			"Mythical",
-			"IdentityRed",
-			"BiomeRed"
-		],
 	"sprite": "sprites/cyclops.atlas",
 	"deck": [
 		"decks/cyclops.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 16,
@@ -3587,23 +3665,104 @@
 			"addMaxCount": 85
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Humanoid",
+		"Giant",
+		"Barbarian",
+		"Loner",
+		"Mythical",
+		"IdentityRed",
+		"BiomeRed"
+	]
+},
+{
+	"name": "Dark Enchanter",
+	"sprite": "sprites/dreamwalker.atlas",
+	"deck": [
+		"decks/darkenchanter.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 35,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "GB",
+	"questTags": [
+		"Humanoid",
+		"IdentityGreen",
+		"IdentityBlack",
+		"BiomeBlack",
+		"Leader",
+		"Mystic",
+		"Enchanter",
+		"Unholy"
+	]
 },
 {
 	"name": "Dark Knight",
-		"questTags": [
-			"Undead",
-			"Soldier",
-			"Knight",
-			"Unholy",
-			"Mounted",
-			"IdentityBlack",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/death_knight.atlas",
 	"deck": [
 		"decks/death_knight.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -3669,22 +3828,24 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Undead",
+		"Soldier",
+		"Knight",
+		"Unholy",
+		"Mounted",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Dawnhart Witch",
-		"questTags": [
-			"Human",
-			"Mystic",
-			"IdentityGreen",
-			"IdentityWhite",
-			"IdentitySelesnya",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/dawnhart_witch.atlas",
 	"deck": [
 		"decks/dawnhart_witch.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -3750,23 +3911,23 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "GW"
+	"colors": "GW",
+	"questTags": [
+		"Human",
+		"Mystic",
+		"IdentityGreen",
+		"IdentityWhite",
+		"IdentitySelesnya",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "Death Knight",
-		"questTags": [
-			"Undead",
-			"Soldier",
-			"Knight",
-			"Unholy",
-			"Mounted",
-			"IdentityBlack",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/death_knight_2.atlas",
 	"deck": [
 		"decks/death_knight.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -3832,21 +3993,24 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Undead",
+		"Soldier",
+		"Knight",
+		"Unholy",
+		"Mounted",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Demon",
-		"questTags": [
-			"Demon",
-			"Humanoid",
-			"Unholy",
-			"IdentityBlack",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/demon_3.atlas",
 	"deck": [
 		"decks/demon.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
@@ -3912,28 +4076,28 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Demon",
+		"Humanoid",
+		"Unholy",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Devil",
-		"questTags": [
-			"Devil",
-			"Humanoid",
-			"Small",
-			"Thief",
-			"IdentityRed",
-			"BiomeRed"
-		],
 	"sprite": "sprites/imp.atlas",
 	"deck": [
 		"decks/devil.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 11,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -3966,28 +4130,23 @@
 			]
 		}
 	],
-	"colors": "R"
-},	
+	"colors": "R",
+	"questTags": [
+		"Devil",
+		"Humanoid",
+		"Small",
+		"Thief",
+		"IdentityRed",
+		"BiomeRed"
+	]
+},
 {
 	"name": "Dino",
-		"questTags": [
-			"Animal",
-			"Territorial",
-			"Aggressive",
-			"Dinosaur",
-			"Nesting",
-			"Predator",
-			"Wild",
-			"IdentityGreen",
-			"IdentityRed",
-			"IdentityWhite",
-			"IdentityNaya",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/ancient.atlas",
 	"deck": [
 		"decks/dinosaurs.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
@@ -4019,27 +4178,29 @@
 			]
 		}
 	],
-	"colors": "GRW"
+	"colors": "GRW",
+	"questTags": [
+		"Animal",
+		"Territorial",
+		"Aggressive",
+		"Dinosaur",
+		"Nesting",
+		"Predator",
+		"Wild",
+		"IdentityGreen",
+		"IdentityRed",
+		"IdentityWhite",
+		"IdentityNaya",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Dinosaur",
-		"questTags": [
-			"Dinosaur",
-			"Animal",
-			"Territorial",
-			"Aggressive",
-			"Nesting",
-			"Predator",
-			"Wild",
-			"IdentityRed",
-			"IdentityWhite",
-			"IdentityBoros",
-			"BiomeRed"
-		],
 	"sprite": "sprites/ancient_2.atlas",
 	"deck": [
 		"decks/dinosaur_w_r.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
@@ -4071,30 +4232,34 @@
 			]
 		}
 	],
-	"colors": "RW"
+	"colors": "RW",
+	"questTags": [
+		"Dinosaur",
+		"Animal",
+		"Territorial",
+		"Aggressive",
+		"Nesting",
+		"Predator",
+		"Wild",
+		"IdentityRed",
+		"IdentityWhite",
+		"IdentityBoros",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Disciple of Teferi",
-		"questTags": [
-			"Human",
-			"Wizard",
-			"Illusionist",
-			"Teferi",
-			"IdentityBlue",
-			"IdentityRed",
-			"IdentityWhite",
-			"Identity Jeskai"
-		],
 	"sprite": "sprites/monk.atlas",
 	"deck": [
 		"decks/disciple_of_teferi.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
 	"life": 12,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -4138,19 +4303,20 @@
 			]
 		}
 	],
-	"colors": "WUR"
+	"colors": "WUR",
+	"questTags": [
+		"Human",
+		"Wizard",
+		"Illusionist",
+		"Teferi",
+		"IdentityBlue",
+		"IdentityRed",
+		"IdentityWhite",
+		"Identity Jeskai"
+	]
 },
 {
 	"name": "Djinn",
-		"questTags": [
-			"Elemental",
-			"Flying",
-			"Humanoid",
-			"IdentityRed",
-			"IdentityBlue",
-			"IdentityIzzet",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/djinn.atlas",
 	"deck": [
 		"decks/djinn.json"
@@ -4222,38 +4388,33 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "RU"
+	"colors": "RU",
+	"questTags": [
+		"Elemental",
+		"Flying",
+		"Humanoid",
+		"IdentityRed",
+		"IdentityBlue",
+		"IdentityIzzet",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Dog",
-		"questTags": [
-			"Predator",
-			"Prey",
-			"Animal",
-			"Domesticated",
-			"Wild",
-			"Scavenger",
-			"IdentityWhite",
-			"IdentityGreen",
-			"IdentitySelesnya",
-			"BiomeColorless",
-			"BiomeWhite"
-		],
-	"sprite": "sprites/dungeon/dog.atlas",
+	"sprite": "sprites/dog.atlas",
 	"deck": [
 		"decks/dog.json",
 		"decks/dog.dck"
 	],
 	"ai": "",
-	"flying": false,
+	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 20,
-	"randomizeDeck": true,
 	"scale": 0.75,
 	"life": 10,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -4289,22 +4450,29 @@
 				"Land"
 			]
 		}
+	],
+	"questTags": [
+		"Predator",
+		"Prey",
+		"Animal",
+		"Domesticated",
+		"Wild",
+		"Scavenger",
+		"IdentityWhite",
+		"IdentityGreen",
+		"IdentitySelesnya",
+		"BiomeColorless",
+		"BiomeWhite"
 	]
 },
 {
 	"name": "Doppelganger",
-		"questTags": [
-			"Aberration",
-			"Challenger",
-			"IdentityUnknown",
-			"BiomeColorless",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/doppelganger.atlas",
 	"deck": [
 		"decks/mimic.dck"
 	],
 	"copyPlayerDeck": true,
+	"ai": "",
 	"spawnRate": 0.95,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -4320,7 +4488,7 @@
 				"rare"
 			]
 		},
-				{
+		{
 			"type": "deckCard",
 			"probability": 0.25,
 			"count": 1,
@@ -4337,19 +4505,17 @@
 			"addMaxCount": 150
 		}
 	],
-	"colors": "C"
+	"colors": "C",
+	"questTags": [
+		"Aberration",
+		"Challenger",
+		"IdentityUnknown",
+		"BiomeColorless",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Dragon",
-		"questTags": [
-			"Dragon",
-			"Flying",
-			"Territorial",
-			"Loner",
-			"Large",
-			"IdentityRed",
-			"BiomeRed"
-		],
 	"sprite": "sprites/dragon.atlas",
 	"deck": [
 		"decks/dragon.dck"
@@ -4421,25 +4587,24 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Dragon",
+		"Flying",
+		"Territorial",
+		"Loner",
+		"Large",
+		"IdentityRed",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Dwarf",
-		"questTags": [
-			"Dwarf",
-			"Territorial",
-			"Humanoid",
-			"Warrior",
-			"Subterranean",
-			"IdentityRed",
-			"IdentityWhite",
-			"IdentityBoros",
-			"BiomeRed"
-		],
 	"sprite": "sprites/dwarf_2.atlas",
 	"deck": [
 		"decks/dwarf.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 22,
@@ -4505,19 +4670,21 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "RW"
+	"colors": "RW",
+	"questTags": [
+		"Dwarf",
+		"Territorial",
+		"Humanoid",
+		"Warrior",
+		"Subterranean",
+		"IdentityRed",
+		"IdentityWhite",
+		"IdentityBoros",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Efreet",
-		"questTags": [
-			"Elemental",
-			"Flying",
-			"Humanoid",
-			"IdentityRed",
-			"IdentityBlue",
-			"IdentityIzzet",
-			"BiomeRed"
-		],
 	"sprite": "sprites/efreet_2.atlas",
 	"deck": [
 		"decks/efreet.dck"
@@ -4542,20 +4709,19 @@
 			"addMaxCount": 95
 		}
 	],
-	"colors": "RU"
+	"colors": "RU",
+	"questTags": [
+		"Elemental",
+		"Flying",
+		"Humanoid",
+		"IdentityRed",
+		"IdentityBlue",
+		"IdentityIzzet",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Eldraine Faerie",
-		"questTags": [
-			"Mythical",
-			"Flying",
-			"Faerie",
-			"Eldraine",
-			"IdentityGreen",
-			"IdentityBlue",
-			"IdentitySimic",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/pixie.atlas",
 	"deck": [
 		"decks/eldraine_faerie.dck"
@@ -4627,24 +4793,25 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "GU"
+	"colors": "GU",
+	"questTags": [
+		"Mythical",
+		"Flying",
+		"Faerie",
+		"Eldraine",
+		"IdentityGreen",
+		"IdentityBlue",
+		"IdentitySimic",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Eldraine Knight",
-		"questTags": [
-			"Soldier",
-			"Human",
-			"Knight",
-			"Eldraine",
-			"IdentityRed",
-			"IdentityWhite",
-			"IdentityBoros",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/paladin_2.atlas",
 	"deck": [
 		"decks/eldraine_knight.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -4710,21 +4877,20 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "RW"
+	"colors": "RW",
+	"questTags": [
+		"Soldier",
+		"Human",
+		"Knight",
+		"Eldraine",
+		"IdentityRed",
+		"IdentityWhite",
+		"IdentityBoros",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "Eldrazi",
-		"questTags": [
-			"Aberration",
-			"Eldrazi",
-			"Wandering",
-			"Huge",
-			"IdentityBlack",
-			"IdentityGreen",
-			"IdentityBlue",
-			"IdentitySultai",
-			"BiomeColorless"
-		],
 	"sprite": "sprites/mindelemental.atlas",
 	"deck": [
 		"decks/eldrazi.json"
@@ -4796,20 +4962,26 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BGU"
+	"colors": "BGU",
+	"questTags": [
+		"Aberration",
+		"Eldrazi",
+		"Wandering",
+		"Huge",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityBlue",
+		"IdentitySultai",
+		"BiomeColorless"
+	]
 },
 {
 	"name": "Elemental",
-		"questTags": [
-			"Elemental",
-			"Humanoid",
-			"IdentityBlue",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/crystalelemental.atlas",
 	"deck": [
 		"decks/elemental_blue.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
@@ -4875,21 +5047,21 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "U"
+	"colors": "U",
+	"questTags": [
+		"Elemental",
+		"Humanoid",
+		"IdentityBlue",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Elf",
-		"questTags": [
-			"Elf",
-			"Humanoid",
-			"Tribal",
-			"IdentityGreen",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/druid.atlas",
 	"deck": [
 		"decks/elf_bad.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -4919,21 +5091,22 @@
 			]
 		}
 	],
-	"colors": "G"
+	"colors": "G",
+	"questTags": [
+		"Elf",
+		"Humanoid",
+		"Tribal",
+		"IdentityGreen",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Elf warrior",
-		"questTags": [
-			"Elf",
-			"Humanoid",
-			"Tribal",
-			"IdentityGreen",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/hunter.atlas",
 	"deck": [
 		"decks/elf_mid.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -4963,21 +5136,22 @@
 			]
 		}
 	],
-	"colors": "G"
+	"colors": "G",
+	"questTags": [
+		"Elf",
+		"Humanoid",
+		"Tribal",
+		"IdentityGreen",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Elk",
-		"questTags": [
-			"Animal",
-			"Wild",
-			"Prey",
-			"IdentityGreen",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/deer_2.atlas",
 	"deck": [
 		"decks/elk.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 29,
@@ -5043,16 +5217,17 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "G"
+	"colors": "G",
+	"questTags": [
+		"Animal",
+		"Wild",
+		"Prey",
+		"IdentityGreen",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Emrakul",
-		"questTags": [
-			"Huge",
-			"Eldrazi",
-			"Boss",
-			"IdentityColorless"
-		],
 	"sprite": "sprites/boss/emrakul.atlas",
 	"deck": [
 		"decks/boss/emrakul.dck"
@@ -5079,29 +5254,29 @@
 	"equipment": [
 		"Sol Ring"
 	],
-	"colors": "C"
+	"colors": "C",
+	"questTags": [
+		"Huge",
+		"Eldrazi",
+		"Boss",
+		"IdentityColorless"
+	]
 },
 {
 	"name": "Eye",
-		"questTags": [
-			"Aberration",
-			"Floating",
-			"IdentityBlack",
-			"BiomeBlack"
-		],
-	"sprite": "sprites/dungeon/eye.atlas",
+	"sprite": "sprites/eye.atlas",
 	"deck": [
 		"decks/eye.dck"
 	],
 	"ai": "",
 	"flying": true,
 	"spawnRate": 1,
-	"scale":0.85,
 	"difficulty": 0.1,
 	"speed": 25,
+	"scale": 0.85,
 	"life": 25,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -5138,19 +5313,16 @@
 			]
 		}
 	],
-	"colors": "B" 
+	"colors": "B",
+	"questTags": [
+		"Aberration",
+		"Floating",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Faerie",
-		"questTags": [
-			"Faerie",
-			"Mythical",
-			"IdentityBlack",
-			"IdentityGreen",
-			"IdentityBlue",
-			"IdentitySultai",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/pixie_2.atlas",
 	"deck": [
 		"decks/faerie.json"
@@ -5222,18 +5394,19 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BGU"
+	"colors": "BGU",
+	"questTags": [
+		"Faerie",
+		"Mythical",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityBlue",
+		"IdentitySultai",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Fire Elemental",
-		"questTags": [
-			"FIre",
-			"Elemental",
-			"Humanoid",
-			"Flying",
-			"IdentityRed",
-			"BiomeRed"
-		],
 	"sprite": "sprites/fireelemental.atlas",
 	"deck": [
 		"decks/fire_elemental.dck"
@@ -5305,27 +5478,29 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"FIre",
+		"Elemental",
+		"Humanoid",
+		"Flying",
+		"IdentityRed",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Fire Giant",
-		"questTags": [
-			"Fire",
-			"Giant",
-			"Warrior",
-			"Territorial",
-			"IdentityRed"
-		],
 	"sprite": "sprites/dungeon/firegiant.atlas",
 	"deck": [
 		"decks/firegiant.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
 	"life": 15,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -5358,21 +5533,22 @@
 			]
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Fire",
+		"Giant",
+		"Warrior",
+		"Territorial",
+		"IdentityRed"
+	]
 },
 {
 	"name": "Flame Elemental",
-		"questTags": [
-			"Fire",
-			"Elemental",
-			"Humanoid",
-			"IdentityRed",
-			"BiomeRed"
-		],
 	"sprite": "sprites/magmaelemental.atlas",
 	"deck": [
 		"decks/flame_elemental.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
@@ -5438,33 +5614,89 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Fire",
+		"Elemental",
+		"Humanoid",
+		"IdentityRed",
+		"BiomeRed"
+	]
+},
+{
+	"name": "Flying Witch",
+	"sprite": "sprites/dungeon/flyingwitch.atlas",
+	"deck": [
+		"decks/witch.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 12,
+	"scale": 0.75,
+	"life": 13,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Mystic",
+		"Unholy",
+		"Wizard",
+		"Human",
+		"IdentityBlack"
+	]
 },
 {
 	"name": "Fox",
-		"questTags": [
-			"Animal",
-			"Wild",
-			"Prey",
-			"Thief",
-			"IdentityWhite",
-			"BiomeGreen",
-			"BiomeColorless",
-			"BiomeWhite"
-		],
-	"sprite": "sprites/dungeon/fox.atlas",
+	"sprite": "sprites/fox.atlas",
 	"deck": [
 		"decks/fox.json"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"speed": 15,
+	"speed": 20,
 	"scale": 0.7,
 	"life": 10,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -5501,34 +5733,31 @@
 			]
 		}
 	],
-	"colors": "W"
+	"colors": "W",
+	"questTags": [
+		"Animal",
+		"Wild",
+		"Prey",
+		"Thief",
+		"IdentityWhite",
+		"BiomeGreen",
+		"BiomeColorless",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "Frog",
-		"questTags": [
-			"Animal",
-			"Swimming",
-			"Prey",
-			"IdentityBlue",
-			"IdentityGreen",
-			"IdentityBlack",
-			"IdentitySultai",
-			"BiomeGreen",
-			"BiomeBlue",
-			"BiomeBlack"
-		],
-	"sprite": "sprites/dungeon/frog.atlas",
+	"sprite": "sprites/frog.atlas",
 	"deck": [
 		"decks/frog.json"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 10,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -5565,25 +5794,27 @@
 			]
 		}
 	],
-	"colors": "BGU" 
+	"colors": "BGU",
+	"questTags": [
+		"Animal",
+		"Swimming",
+		"Prey",
+		"IdentityBlue",
+		"IdentityGreen",
+		"IdentityBlack",
+		"IdentitySultai",
+		"BiomeGreen",
+		"BiomeBlue",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Frost Titan",
-		"questTags": [
-			"Ice",
-			"Giant",
-			"Warrior",
-			"Territorial",
-			"IdentityWhite",
-			"IdentityBlue",
-			"IdentityAzorius",
-			"BiomeWhite",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/titan.atlas",
 	"deck": [
 		"decks/frost_titan.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
@@ -5651,32 +5882,33 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "WU"
+	"colors": "WU",
+	"questTags": [
+		"Ice",
+		"Giant",
+		"Warrior",
+		"Territorial",
+		"IdentityWhite",
+		"IdentityBlue",
+		"IdentityAzorius",
+		"BiomeWhite",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Fungus",
-		"questTags": [
-			"Fungus",
-			"Inhuman",
-			"Nature",
-			"Wild",
-			"Subterranean",
-			"IdentityGreen",
-			"BiomeBlack"
-		],
-	"sprite": "sprites/dungeon/fungus.atlas",
+	"sprite": "sprites/fungus.atlas",
 	"deck": [
 		"decks/fungus.json"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
 	"scale": 0.75,
 	"life": 10,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -5713,25 +5945,19 @@
 			]
 		}
 	],
-	"colors": "G" 
+	"colors": "G",
+	"questTags": [
+		"Fungus",
+		"Inhuman",
+		"Nature",
+		"Wild",
+		"Subterranean",
+		"IdentityGreen",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Gargoyle",
-		"questTags": [
-			"Stone",
-			"Flying",
-			"Humanoid",
-			"Construct",
-			"Gargoyle",
-			"Passive",
-			"Territorial",
-			"Stone",
-			"IdentityRed",
-			"IdentityWhite",
-			"IdentityBlue",
-			"IdentityJeskai",
-			"BiomeColorless"
-		],
 	"sprite": "sprites/gargoyle.atlas",
 	"deck": [
 		"decks/gargoyle.json"
@@ -5803,22 +6029,25 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "RUW"
+	"colors": "RUW",
+	"questTags": [
+		"Stone",
+		"Flying",
+		"Humanoid",
+		"Construct",
+		"Gargoyle",
+		"Passive",
+		"Territorial",
+		"Stone",
+		"IdentityRed",
+		"IdentityWhite",
+		"IdentityBlue",
+		"IdentityJeskai",
+		"BiomeColorless"
+	]
 },
 {
 	"name": "Gargoyle 2",
-		"questTags": [
-			"Stone",
-			"Flying",
-			"Humanoid",
-			"Construct",
-			"Gargoyle",
-			"Passive",
-			"Territorial",
-			"Stone",
-			"IdentityWhite",
-			"BiomeColorless"
-		],
 	"sprite": "sprites/gargoyle_2.atlas",
 	"deck": [
 		"decks/gargoyle.dck"
@@ -5890,23 +6119,27 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "W"
+	"colors": "W",
+	"questTags": [
+		"Stone",
+		"Flying",
+		"Humanoid",
+		"Construct",
+		"Gargoyle",
+		"Passive",
+		"Territorial",
+		"Stone",
+		"IdentityWhite",
+		"BiomeColorless"
+	]
 },
 {
 	"name": "Ghalta",
-		"questTags": [
-			"Dinosaur",
-			"Huge",
-			"Boss",
-			"Nature",
-			"Territorial",
-			"IdentityGreen",
-			"Ghalta"
-		],
 	"sprite": "sprites/boss/ghalta.atlas",
 	"deck": [
 		"decks/boss/ghalta.dck"
 	],
+	"ai": "",
 	"boss": true,
 	"speed": 1,
 	"life": 80,
@@ -5933,26 +6166,28 @@
 	"equipment": [
 		"Mox Emerald"
 	],
-	"colors": "G"
+	"colors": "G",
+	"questTags": [
+		"Dinosaur",
+		"Huge",
+		"Boss",
+		"Nature",
+		"Territorial",
+		"IdentityGreen",
+		"Ghalta"
+	]
 },
 {
 	"name": "Garruk",
-		"questTags": [
-			"Planeswalker",
-			"Garruk",
-			"Boss",
-			"IdentityGreen",
-			"IdentityBlack",
-			"IdentityGolgari"
-		],
-	"sprite": "sprites/dungeon/garruk.atlas",
+	"sprite": "sprites/boss/garruk.atlas",
 	"deck": [
 		"decks/miniboss/garruk.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
-	"scale": 0.5,
 	"difficulty": 1,
 	"speed": 30,
+	"scale": 0.5,
 	"life": 25,
 	"rewards": [
 		{
@@ -6010,17 +6245,18 @@
 			"itemName": "Garruk's Mighty Axe"
 		}
 	],
-	"colors": "GB"
+	"colors": "GB",
+	"questTags": [
+		"Planeswalker",
+		"Garruk",
+		"Boss",
+		"IdentityGreen",
+		"IdentityBlack",
+		"IdentityGolgari"
+	]
 },
 {
 	"name": "Geist",
-		"questTags": [
-			"Undead",
-			"Ghost",
-			"Flying",
-			"IdentityBlue",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/ghost.atlas",
 	"deck": [
 		"decks/ghost_blue.dck"
@@ -6092,22 +6328,22 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "U"
+	"colors": "U",
+	"questTags": [
+		"Undead",
+		"Ghost",
+		"Flying",
+		"IdentityBlue",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Ghoul",
-		"questTags": [
-			"Undead",
-			"Humanoid",
-			"IdentityBlack",
-			"IdentityBlue",
-			"IdentityDimir",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/ghoul.atlas",
 	"deck": [
 		"decks/ghoul.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
@@ -6126,18 +6362,18 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BU"
+	"colors": "BU",
+	"questTags": [
+		"Undead",
+		"Humanoid",
+		"IdentityBlack",
+		"IdentityBlue",
+		"IdentityDimir",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Ghost",
-		"questTags": [
-			"Undead",
-			"Spirit",
-			"Flying",
-			"Ghost",
-			"IdentityBlack",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/ghost_2.atlas",
 	"deck": [
 		"decks/ghost.json"
@@ -6209,24 +6445,23 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Undead",
+		"Spirit",
+		"Flying",
+		"Ghost",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Giant Spider",
-		"questTags": [
-			"Spider",
-			"Territorial",
-			"Predator",
-			"Ambush",
-			"Wild",
-			"Subterranean",
-			"IdentityGreen",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/spider_2.atlas",
 	"deck": [
 		"decks/spider_token.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
@@ -6245,23 +6480,25 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "G"
+	"colors": "G",
+	"questTags": [
+		"Spider",
+		"Territorial",
+		"Predator",
+		"Ambush",
+		"Wild",
+		"Subterranean",
+		"IdentityGreen",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Gitaxian Scientist",
-		"questTags": [
-			"Phyrexian",
-			"Gitaxian",
-			"Humanoid",
-			"Scientist",
-			"IdentityBlue",
-			"IdentityGreen",
-			"IdentitySimic"
-		],
 	"sprite": "sprites/gitaxianscientist.atlas",
 	"deck": [
 		"decks/gitaxianscientist.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -6294,7 +6531,7 @@
 		},
 		{
 			"type": "deckCard",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"addMaxCount": 2,
 			"rarity": [
@@ -6326,20 +6563,24 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "UG"
+	"colors": "UG",
+	"questTags": [
+		"Phyrexian",
+		"Gitaxian",
+		"Humanoid",
+		"Scientist",
+		"IdentityBlue",
+		"IdentityGreen",
+		"IdentitySimic"
+	]
 },
 {
 	"name": "Gitaxian Underling",
-		"questTags": [
-			"Gitaxian",
-			"Phyrexian",
-			"Humanoid",
-			"IdentityBlue"
-		],
 	"sprite": "sprites/gitaxianunderling.atlas",
 	"deck": [
 		"decks/gitaxianunderling.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -6404,19 +6645,16 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "U"
+	"colors": "U",
+	"questTags": [
+		"Gitaxian",
+		"Phyrexian",
+		"Humanoid",
+		"IdentityBlue"
+	]
 },
 {
 	"name": "Griselbrand",
-		"questTags": [
-			"Demon",
-			"Huge",
-			"Flying",
-			"Unholy",
-			"Boss",
-			"IdentityBlack",
-			"Griselbrand"
-		],
 	"sprite": "sprites/boss/griselbrand.atlas",
 	"deck": [
 		"decks/boss/griselbrand.dck"
@@ -6449,33 +6687,32 @@
 	"equipment": [
 		"Mox Jet"
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Demon",
+		"Huge",
+		"Flying",
+		"Unholy",
+		"Boss",
+		"IdentityBlack",
+		"Griselbrand"
+	]
 },
 {
 	"name": "Grolnok",
-		"questTags": [
-			"Boss",
-			"Animal",
-			"IdentityBlack",
-			"IdentityBlue",
-			"IdentityGreen",
-			"Giant",
-			"IdentitySultai"
-		],
-	"sprite": "sprites/dungeon/frogboss.atlas",
-	"scale": 0.50,
+	"sprite": "sprites/boss/frogboss.atlas",
 	"deck": [
 		"decks/miniboss/frogboss.dck"
 	],
-	"boss": true,
 	"ai": "",
-	"flying": false,
+	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 15,
+	"scale": 0.5,
 	"life": 50,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 4,
@@ -6500,37 +6737,37 @@
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "The Gitrog Monster"
 		},
-				{
+		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Thalia and The Gitrog Monster"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Damnation"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Gitrog, Horror of Zhava"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Froghemoth"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Yargle and Multani"
 		},
@@ -6541,33 +6778,31 @@
 			"itemName": "Grolnok's Skin"
 		}
 	],
-	"colors": "BGU"
+	"colors": "BGU",
+	"questTags": [
+		"Boss",
+		"Animal",
+		"IdentityBlack",
+		"IdentityBlue",
+		"IdentityGreen",
+		"Giant",
+		"IdentitySultai"
+	]
 },
 {
 	"name": "Gorilla",
-		"questTags": [
-			"Humanoid",
-			"Simian",
-			"Territorial",
-			"Animal",
-			"Wild",
-			"IdentityGreen",
-			"IdentityRed",
-			"IdentityGruul"
-		],
 	"sprite": "sprites/dungeon/gorilla.atlas",
-	"scale": 0.55,
 	"deck": [
 		"decks/gorilla.dck"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
+	"scale": 0.55,
 	"life": 30,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -6600,19 +6835,30 @@
 			]
 		}
 	],
-	"colors": "RG"
+	"colors": "RG",
+	"questTags": [
+		"Humanoid",
+		"Simian",
+		"Territorial",
+		"Animal",
+		"Wild",
+		"IdentityGreen",
+		"IdentityRed",
+		"IdentityGruul"
+	]
 },
 {
-	"name": "Magma Elemental",
-	"sprite": "sprites/dungeon/magmaelemental.atlas",
+	"name": "Magma Fire Elemental",
+	"sprite": "sprites/magmafireelemental.atlas",
 	"deck": [
 		"decks/magma_elemental.dck"
 	],
+	"ai": "",
+	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.5,
 	"speed": 15,
 	"life": 15,
-	"flying":true,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -6651,23 +6897,17 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Aggressive",
+		"BiomeRed",
+		"Elemental",
+		"Golem",
+		"Inhuman"
+	]
 },
 {
 	"name": "Goblin",
-		"questTags": [
-			"Goblin",
-			"Coward",
-			"Humanoid",
-			"Territorial",
-			"Aggressive",
-			"Tribal",
-			"Small",
-			"Thief",
-			"Scavenger",
-			"IdentityRed",
-			"BiomeRed"
-		],
 	"sprite": "sprites/goblin.atlas",
 	"deck": [
 		"decks/goblin_bad.json"
@@ -6696,31 +6936,32 @@
 		{
 			"type": "card",
 			"count": 1,
-			"cardTypes": [
-				"land"
-			],
 			"rarity": [
 				"common",
 				"uncommon"
+			],
+			"cardTypes": [
+				"land"
 			]
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Goblin",
+		"Coward",
+		"Humanoid",
+		"Territorial",
+		"Aggressive",
+		"Tribal",
+		"Small",
+		"Thief",
+		"Scavenger",
+		"IdentityRed",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Goblin Artificer",
-		"questTags": [
-			"Goblin",
-			"Coward",
-			"Humanoid",
-			"Tribal",
-			"Territorial",
-			"Scientist",
-			"Small",
-			"Artificer",
-			"Scavenger",
-			"IdentityRed"
-		],
 	"sprite": "sprites/goblin.atlas",
 	"deck": [
 		"decks/goblin_artificer.dck"
@@ -6748,43 +6989,41 @@
 		},
 		{
 			"type": "card",
-			"count": 1,
 			"probability": 0.5,
+			"count": 1,
 			"rarity": [
 				"rare"
 			]
 		},
 		{
 			"type": "card",
-			"count": 1,
 			"probability": 1,
-			"cardTypes": [
-				"land"
-			],
+			"count": 1,
 			"rarity": [
 				"common",
 				"uncommon"
+			],
+			"cardTypes": [
+				"land"
 			]
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Goblin",
+		"Coward",
+		"Humanoid",
+		"Tribal",
+		"Territorial",
+		"Scientist",
+		"Small",
+		"Artificer",
+		"Scavenger",
+		"IdentityRed"
+	]
 },
 {
 	"name": "Goblin Chief",
-		"questTags": [
-			"Goblin",
-			"Leader",
-			"Warrior",
-			"Humanoid",
-			"Territorial",
-			"Aggressive",
-			"Tribal",
-			"Small",
-			"IdentityRed",
-			"IdentityBlack",
-			"IdentityRakdos",
-			"BiomeRed"
-		],
 	"sprite": "sprites/wolf_rider_2.atlas",
 	"deck": [
 		"decks/goblin_good.json"
@@ -6818,16 +7057,24 @@
 			]
 		}
 	],
-	"colors": "BR"
+	"colors": "BR",
+	"questTags": [
+		"Goblin",
+		"Leader",
+		"Warrior",
+		"Humanoid",
+		"Territorial",
+		"Aggressive",
+		"Tribal",
+		"Small",
+		"IdentityRed",
+		"IdentityBlack",
+		"IdentityRakdos",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Goblin pack",
-		"questTags": [
-			"Goblin",
-			"Horde",
-			"Aggressive",
-			"IdentityRed"
-		],
 	"sprite": "sprites/goblin_group.atlas",
 	"deck": [
 		"decks/goblin_bad.json"
@@ -6881,21 +7128,16 @@
 		},
 		"teamNumber": 1
 	},
-	"teamNumber": 1
+	"teamNumber": 1,
+	"questTags": [
+		"Goblin",
+		"Horde",
+		"Aggressive",
+		"IdentityRed"
+	]
 },
 {
 	"name": "Goblin Warrior",
-		"questTags": [
-			"Goblin",
-			"Warrior",
-			"Humanoid",
-			"Territorial",
-			"Aggressive",
-			"Tribal",
-			"Small",
-			"IdentityRed",
-			"BiomeRed"
-		],
 	"sprite": "sprites/wolf_rider.atlas",
 	"deck": [
 		"decks/goblin_mid.json"
@@ -6929,18 +7171,21 @@
 			]
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Goblin",
+		"Warrior",
+		"Humanoid",
+		"Territorial",
+		"Aggressive",
+		"Tribal",
+		"Small",
+		"IdentityRed",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Golem",
-		"questTags": [
-			"Golem",
-			"Construct",
-			"IdentityGreen",
-			"IdentityWhite",
-			"IdentitySelesnya",
-			"BiomeColorless"
-		],
 	"sprite": "sprites/golem.atlas",
 	"deck": [
 		"decks/golem.json"
@@ -6978,17 +7223,18 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "GW"
+	"colors": "GW",
+	"questTags": [
+		"Golem",
+		"Construct",
+		"IdentityGreen",
+		"IdentityWhite",
+		"IdentitySelesnya",
+		"BiomeColorless"
+	]
 },
 {
 	"name": "Golem that is Generous",
-		"questTags": [
-			"Golem",
-			"Construct",
-			"IdentityGreen",
-			"IdentityWhite",
-			"IdentitySelesnya"
-		],
 	"sprite": "sprites/golem.atlas",
 	"deck": [
 		"decks/golem.json"
@@ -7038,20 +7284,17 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "GW"
+	"colors": "GW",
+	"questTags": [
+		"Golem",
+		"Construct",
+		"IdentityGreen",
+		"IdentityWhite",
+		"IdentitySelesnya"
+	]
 },
 {
 	"name": "Gorgon",
-		"questTags": [
-			"Humanoid",
-			"Mythical",
-			"Loner",
-			"Stone",
-			"IdentityBlack",
-			"IdentityGreen",
-			"IdentityGolgari",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/gorgone.atlas",
 	"deck": [
 		"decks/gorgon.dck"
@@ -7121,20 +7364,20 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BG"
+	"colors": "BG",
+	"questTags": [
+		"Humanoid",
+		"Mythical",
+		"Loner",
+		"Stone",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityGolgari",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Gorgon 2",
-		"questTags": [
-			"Humanoid",
-			"Mythical",
-			"Loner",
-			"Stone",
-			"IdentityBlack",
-			"IdentityGreen",
-			"IdentityGolgari",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/gorgonen.atlas",
 	"deck": [
 		"decks/gorgon_2.dck"
@@ -7204,19 +7447,20 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BG"
+	"colors": "BG",
+	"questTags": [
+		"Humanoid",
+		"Mythical",
+		"Loner",
+		"Stone",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityGolgari",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Green Beast",
-			"questTags": [
-			"Beast",
-			"Animal",
-			"Wild",
-			"Territorial",
-			"Nesting",
-			"IdentityGreen",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/basilisk.atlas",
 	"deck": [
 		"decks/beast_green.json"
@@ -7286,18 +7530,19 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "G"
+	"colors": "G",
+	"questTags": [
+		"Beast",
+		"Animal",
+		"Wild",
+		"Territorial",
+		"Nesting",
+		"IdentityGreen",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Green Wiz1",
-		"questTags": [
-			"Nature",
-			"Wizard",
-			"Human",
-			"IdentityGreen",
-			"BiomeGreen",
-			"BiomeColorless"
-		],
 	"sprite": "sprites/green_wiz1.atlas",
 	"deck": [
 		"decks/green_bad.json"
@@ -7367,18 +7612,18 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "G"
+	"colors": "G",
+	"questTags": [
+		"Nature",
+		"Wizard",
+		"Human",
+		"IdentityGreen",
+		"BiomeGreen",
+		"BiomeColorless"
+	]
 },
 {
 	"name": "Green Wiz2",
-		"questTags": [
-			"Nature",
-			"Wizard",
-			"Human",
-			"IdentityGreen",
-			"BiomeGreen",
-			"BiomeColorless"
-		],
 	"sprite": "sprites/green_wiz2.atlas",
 	"deck": [
 		"decks/trample.dck"
@@ -7448,18 +7693,18 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "G"
+	"colors": "G",
+	"questTags": [
+		"Nature",
+		"Wizard",
+		"Human",
+		"IdentityGreen",
+		"BiomeGreen",
+		"BiomeColorless"
+	]
 },
 {
 	"name": "Green Wiz3",
-		"questTags": [
-			"Nature",
-			"Wizard",
-			"Human",
-			"IdentityGreen",
-			"BiomeGreen",
-			"BiomeColorless"
-		],
 	"sprite": "sprites/green_wiz3.atlas",
 	"deck": [
 		"decks/ramp.dck"
@@ -7529,21 +7774,18 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "G"
+	"colors": "G",
+	"questTags": [
+		"Nature",
+		"Wizard",
+		"Human",
+		"IdentityGreen",
+		"BiomeGreen",
+		"BiomeColorless"
+	]
 },
 {
 	"name": "Griffin",
-		"questTags": [
-			"Bird",
-			"Predator",
-			"Wild",
-			"Nesting",
-			"Animal",
-			"Mythical",
-			"Flying",
-			"IdentityWhite",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/griffin.atlas",
 	"deck": [
 		"decks/griffin.json"
@@ -7615,18 +7857,21 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "W"
+	"colors": "W",
+	"questTags": [
+		"Bird",
+		"Predator",
+		"Wild",
+		"Nesting",
+		"Animal",
+		"Mythical",
+		"Flying",
+		"IdentityWhite",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "Harpy",
-		"questTags": [
-			"Flying",
-			"Humanoid",
-			"Nesting",
-			"Thief",
-			"IdentityBlack",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/harpy.atlas",
 	"deck": [
 		"decks/harpy.dck"
@@ -7698,20 +7943,18 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Flying",
+		"Humanoid",
+		"Nesting",
+		"Thief",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Harpy 2",
-		"questTags": [
-			"Flying",
-			"Humanoid",
-			"Nesting",
-			"Thief",
-			"IdentityBlack",
-			"IdentityBlue",
-			"IdentityDimir",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/harpy_2.atlas",
 	"deck": [
 		"decks/harpy_2.dck"
@@ -7783,22 +8026,20 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BU"
+	"colors": "BU",
+	"questTags": [
+		"Flying",
+		"Humanoid",
+		"Nesting",
+		"Thief",
+		"IdentityBlack",
+		"IdentityBlue",
+		"IdentityDimir",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Hellhound",
-		"questTags": [
-			"Aberration",
-			"Animal",
-			"Predator",
-			"Unholy",
-			"Beast",
-			"Subterranean",
-			"IdentityBlack",
-			"IdentityRed",
-			"IdentityRakdos",
-			"BiomeRed"
-		],
 	"sprite": "sprites/hellhound_2.atlas",
 	"deck": [
 		"decks/hellhound.dck"
@@ -7868,20 +8109,22 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BR"
+	"colors": "BR",
+	"questTags": [
+		"Aberration",
+		"Animal",
+		"Predator",
+		"Unholy",
+		"Beast",
+		"Subterranean",
+		"IdentityBlack",
+		"IdentityRed",
+		"IdentityRakdos",
+		"BiomeRed"
+	]
 },
 {
 	"name": "High Elf",
-		"questTags": [
-			"Elf",
-			"Nature",
-			"Wizard",
-			"Territorial",
-			"Mystic",
-			"IdentityGreen",
-			"IdentityBlack",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/druid_2.atlas",
 	"deck": [
 		"decks/elf_good.json"
@@ -7915,21 +8158,20 @@
 			]
 		}
 	],
-	"colors": "BG"
+	"colors": "BG",
+	"questTags": [
+		"Elf",
+		"Nature",
+		"Wizard",
+		"Territorial",
+		"Mystic",
+		"IdentityGreen",
+		"IdentityBlack",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "High Vampire",
-		"questTags": [
-			"Undead",
-			"Vampire",
-			"Unholy",
-			"Necromancer",
-			"Flying",
-			"Leader",
-			"Nocturnal",
-			"IdentityBlack",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/vampire_2.atlas",
 	"deck": [
 		"decks/vampire.json"
@@ -8001,19 +8243,21 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Undead",
+		"Vampire",
+		"Unholy",
+		"Necromancer",
+		"Flying",
+		"Leader",
+		"Nocturnal",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Horror",
-		"questTags": [
-			"Aberration",
-			"Inhuman",
-			"IdentityBlue",
-			"IdentityBlack",
-			"IdentityDimir",
-			"BiomeBlue",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/leech_2.atlas",
 	"deck": [
 		"decks/horror.dck"
@@ -8084,19 +8328,19 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BU"
+	"colors": "BU",
+	"questTags": [
+		"Aberration",
+		"Inhuman",
+		"IdentityBlue",
+		"IdentityBlack",
+		"IdentityDimir",
+		"BiomeBlue",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Horse",
-		"questTags": [
-			"Animal",
-			"Domesticated",
-			"Farm",
-			"Prey",
-			"IdentityGreen",
-			"IdentityWhite",
-			"IdentitySelesnya"
-		],
 	"sprite": "sprites/dungeon/horse.atlas",
 	"deck": [
 		"decks/horse.dck"
@@ -8107,7 +8351,7 @@
 	"scale": 0.5,
 	"life": 14,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -8140,19 +8384,19 @@
 			]
 		}
 	],
-	"colors": "GW"
+	"colors": "GW",
+	"questTags": [
+		"Animal",
+		"Domesticated",
+		"Farm",
+		"Prey",
+		"IdentityGreen",
+		"IdentityWhite",
+		"IdentitySelesnya"
+	]
 },
 {
 	"name": "Horseman",
-		"questTags": [
-			"Human",
-			"Soldier",
-			"Mounted",
-			"IdentityBlue",
-			"IdentityWhite",
-			"IdentityAzorius",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/cavalier_2.atlas",
 	"deck": [
 		"decks/horsemanship.dck"
@@ -8186,19 +8430,19 @@
 			]
 		}
 	],
-	"colors": "UW"
+	"colors": "UW",
+	"questTags": [
+		"Human",
+		"Soldier",
+		"Mounted",
+		"IdentityBlue",
+		"IdentityWhite",
+		"IdentityAzorius",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "Human",
-		"questTags": [
-			"Human",
-			"Warrior",
-			"IdentityWhite",
-			"IdentityBlack",
-			"IdentityRed",
-			"IdentityMardu",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/pikeman.atlas",
 	"deck": [
 		"decks/human_bad.json"
@@ -8232,18 +8476,19 @@
 			]
 		}
 	],
-	"colors": "BRW"
+	"colors": "BRW",
+	"questTags": [
+		"Human",
+		"Warrior",
+		"IdentityWhite",
+		"IdentityBlack",
+		"IdentityRed",
+		"IdentityMardu",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "Human elite",
-		"questTags": [
-			"Human",
-			"Soldier",
-			"Wandering",
-			"Leader",
-			"IdentityWhite",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/legionite.atlas",
 	"deck": [
 		"decks/human_good.json"
@@ -8277,19 +8522,18 @@
 			]
 		}
 	],
-	"colors": "W"
+	"colors": "W",
+	"questTags": [
+		"Human",
+		"Soldier",
+		"Wandering",
+		"Leader",
+		"IdentityWhite",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "Human guard",
-		"questTags": [
-			"Human",
-			"Territorial",
-			"Warrior",
-			"IdentityWhite",
-			"IdentityBlack",
-			"IdentityOrzhov",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/swordsman.atlas",
 	"deck": [
 		"decks/human_mid.json"
@@ -8323,18 +8567,19 @@
 			]
 		}
 	],
-	"colors": "BW"
+	"colors": "BW",
+	"questTags": [
+		"Human",
+		"Territorial",
+		"Warrior",
+		"IdentityWhite",
+		"IdentityBlack",
+		"IdentityOrzhov",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "Hydra",
-		"questTags": [
-			"Wurm",
-			"Mythical",
-			"Giant",
-			"Aberration",
-			"IdentityGreen",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/hydra.atlas",
 	"deck": [
 		"decks/hydra.json"
@@ -8368,18 +8613,18 @@
 			]
 		}
 	],
-	"colors": "G"
+	"colors": "G",
+	"questTags": [
+		"Wurm",
+		"Mythical",
+		"Giant",
+		"Aberration",
+		"IdentityGreen",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Illusionist",
-		"questTags": [
-			"Human",
-			"Wizard",
-			"Illusionist",
-			"Scientist",
-			"IdentityBlue",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/blue_wiz2.atlas",
 	"deck": [
 		"decks/illusion.dck"
@@ -8417,34 +8662,26 @@
 			]
 		}
 	],
-	"colors": "U"
+	"colors": "U",
+	"questTags": [
+		"Human",
+		"Wizard",
+		"Illusionist",
+		"Scientist",
+		"IdentityBlue",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Insect",
-		"questTags": [
-			"Insect",
-			"Animal",
-			"Wild",
-			"Nesting",
-			"Swarming",
-			"Flying",
-			"Tiny",
-			"IdentityWhite",
-			"IdentityBlack",
-			"IdentityGreen",
-			"IdentityAbzan",
-			"BiomeColorless",
-			"BiomeWhite",
-			"BiomeBlack"
-		],
-	"sprite": "sprites/dungeon/dragonfly.atlas",
+	"sprite": "sprites/dragonfly.atlas",
 	"deck": [
 		"decks/insect.dck"
 	],
+	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
-	"flying": true,
 	"scale": 0.5,
 	"life": 14,
 	"rewards": [
@@ -8477,20 +8714,26 @@
 			]
 		}
 	],
-	"colors": "WBG"
+	"colors": "WBG",
+	"questTags": [
+		"Insect",
+		"Animal",
+		"Wild",
+		"Nesting",
+		"Swarming",
+		"Flying",
+		"Tiny",
+		"IdentityWhite",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityAbzan",
+		"BiomeColorless",
+		"BiomeWhite",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Immersturm Demon",
-		"questTags": [
-			"Demon",
-			"Humanoid",
-			"Unholy",
-			"Fire",
-			"IdentityBlack",
-			"IdentityRed",
-			"IdentityRakdos",
-			"BiomeRed"
-		],
 	"sprite": "sprites/devil_2.atlas",
 	"deck": [
 		"decks/immersturm_demon.dck"
@@ -8560,32 +8803,32 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BR"
+	"colors": "BR",
+	"questTags": [
+		"Demon",
+		"Humanoid",
+		"Unholy",
+		"Fire",
+		"IdentityBlack",
+		"IdentityRed",
+		"IdentityRakdos",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Jackal Warrior",
-		"questTags": [
-			"Humanoid",
-			"Warrior",
-			"Aggressive",
-			"IdentityRed",
-			"IdentityGreen",
-			"IdentityGruul",
-			"BiomeRed"
-		],
-	"sprite": "sprites/dungeon/jackalwarrior.atlas",
-	"scale": 0.5,
+	"sprite": "sprites/jackalwarrior.atlas",
 	"deck": [
 		"decks/jackal.dck"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 0.3,
 	"difficulty": 0.1,
 	"speed": 20,
+	"scale": 0.5,
 	"life": 11,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -8617,63 +8860,63 @@
 			"count": 50,
 			"addMaxCount": 100
 		}
-		]
+	],
+	"questTags": [
+		"Humanoid",
+		"Warrior",
+		"Aggressive",
+		"IdentityRed",
+		"IdentityGreen",
+		"IdentityGruul",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Jace",
-		"questTags": [
-			"Boss",
-			"Jace",
-			"Planeswalker",
-			"Illusionist",
-			"IdentityBlue",
-			"IdentityWhite",
-			"IdentityAzorius"
-		],
-	"sprite": "sprites/dungeon/jace.atlas",
+	"sprite": "sprites/boss/jace.atlas",
 	"deck": [
 		"decks/miniboss/jace.dck"
 	],
 	"boss": true,
 	"spawnRate": 1,
-	"scale": 0.5,
 	"difficulty": 0.1,
 	"speed": 30,
+	"scale": 0.5,
 	"life": 40,
 	"rewards": [
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Jace, the Mind Sculptor"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Jace, the Perfected Mind"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Jace's Defeat"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Treasure Cruise"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Castaway's Despair"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Counterspell"
 		},
@@ -8690,19 +8933,20 @@
 			"itemName": "Jace's Signature Hoodie"
 		}
 	],
-	"colors": "UW"
+	"colors": "UW",
+	"questTags": [
+		"Boss",
+		"Jace",
+		"Planeswalker",
+		"Illusionist",
+		"IdentityBlue",
+		"IdentityWhite",
+		"IdentityAzorius"
+	]
 },
 {
 	"name": "Jellyfish",
-		"questTags": [
-			"Swimming",
-			"Animal",
-			"Territorial",
-			"Water",
-			"IdentityBlue",
-			"BiomeBlue"
-		],
-	"sprite": "sprites/dungeon/jellyfish.atlas",
+	"sprite": "sprites/jellyfish.atlas",
 	"deck": [
 		"decks/jellyfish.dck"
 	],
@@ -8714,7 +8958,7 @@
 	"scale": 0.75,
 	"life": 10,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -8750,26 +8994,18 @@
 				"Land"
 			]
 		}
+	],
+	"questTags": [
+		"Swimming",
+		"Animal",
+		"Territorial",
+		"Water",
+		"IdentityBlue",
+		"BiomeBlue"
 	]
 },
 {
 	"name": "Kavu",
-		"questTags": [
-			"Kavu",
-			"Animal",
-			"Beast",
-			"Wild",
-			"Nature",
-			"Nesting",
-			"Territorial",
-			"Tribal",
-			"IdentityGreen",
-			"IdentityWhite",
-			"IdentityRed",
-			"IdentityNaya",
-			"BiomeGreen",
-			"BiomeRed"
-		],
 	"sprite": "sprites/kavu.atlas",
 	"deck": [
 		"decks/kavu.dck"
@@ -8839,21 +9075,26 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "RGW"
+	"colors": "RGW",
+	"questTags": [
+		"Kavu",
+		"Animal",
+		"Beast",
+		"Wild",
+		"Nature",
+		"Nesting",
+		"Territorial",
+		"Tribal",
+		"IdentityGreen",
+		"IdentityWhite",
+		"IdentityRed",
+		"IdentityNaya",
+		"BiomeGreen",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Khan",
-		"questTags": [
-			"Mounted",
-			"Human",
-			"Warrior",
-			"Aggressive",
-			"IdentityBlack",
-			"IdentityRed",
-			"IdentityWhite",
-			"IdentityMardu",
-			"BiomeRed"
-		],
 	"sprite": "sprites/cavalier.atlas",
 	"deck": [
 		"decks/mardu.dck"
@@ -8923,33 +9164,31 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BRW"
+	"colors": "BRW",
+	"questTags": [
+		"Mounted",
+		"Human",
+		"Warrior",
+		"Aggressive",
+		"IdentityBlack",
+		"IdentityRed",
+		"IdentityWhite",
+		"IdentityMardu",
+		"BiomeRed"
+	]
 },
-{	
+{
 	"name": "Kiora",
-		"questTags": [
-			"Planeswalker",
-			"Kiora",
-			"Boss",
-			"Merfolk",
-			"Wizard",
-			"Swimming",
-			"Water",
-			"IdentityGreen",
-			"IdentityBlue",
-			"IdentitySimic"
-		],
-	"sprite": "sprites/dungeon/kiora.atlas",
-	"scale": 0.35,
+	"sprite": "sprites/boss/kiora.atlas",
 	"deck": [
 		"decks/miniboss/kiora.dck"
 	],
-	"boss": true,
 	"ai": "",
-	"flying": false,
+	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
+	"scale": 0.35,
 	"life": 40,
 	"rewards": [
 		{
@@ -8971,43 +9210,43 @@
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Bident of Thassa"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Kiora, the Tide's Fury"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Kiora, the Crashing Wave"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Kiora Bests the Sea God"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Kiora, Behemoth Beckoner"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Kiora, Master of the Depths"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 4,
 			"cardName": "Kiora's Follower"
 		},
@@ -9018,17 +9257,22 @@
 			"itemName": "Kiora's Bident"
 		}
 	],
-	"colors": "UG"
+	"colors": "UG",
+	"questTags": [
+		"Planeswalker",
+		"Kiora",
+		"Boss",
+		"Merfolk",
+		"Wizard",
+		"Swimming",
+		"Water",
+		"IdentityGreen",
+		"IdentityBlue",
+		"IdentitySimic"
+	]
 },
 {
 	"name": "Knight",
-		"questTags": [
-			"Human",
-			"Knight",
-			"Warrior",
-			"IdentityWhite",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/paladin.atlas",
 	"deck": [
 		"decks/knight.json"
@@ -9062,35 +9306,29 @@
 			]
 		}
 	],
-	"colors": "W"
+	"colors": "W",
+	"questTags": [
+		"Human",
+		"Knight",
+		"Warrior",
+		"IdentityWhite",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "Kobold",
-		"questTags": [
-			"Kobold",
-			"Coward",
-			"Sneaky",
-			"Small",
-			"Humanoid",
-			"Thief",
-			"IdentityRed",
-			"IdentityBlack",
-			"IdentityRakdos",
-			"BiomeRed"
-		],
-	"sprite": "sprites/dungeon/kobold.atlas",
+	"sprite": "sprites/kobold.atlas",
 	"deck": [
 		"decks/kobold.dck"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"scale": 0.75,
 	"life": 12,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -9127,20 +9365,22 @@
 			]
 		}
 	],
-	"colors": "RB"
+	"colors": "RB",
+	"questTags": [
+		"Kobold",
+		"Coward",
+		"Sneaky",
+		"Small",
+		"Humanoid",
+		"Thief",
+		"IdentityRed",
+		"IdentityBlack",
+		"IdentityRakdos",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Kor Warrior",
-		"questTags": [
-			"Humanoid",
-			"Warrior",
-			"Kor",
-			"Tribal",
-			"IdentityRed",
-			"IdentityWhite",
-			"IdentityBoros",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/mineguard.atlas",
 	"deck": [
 		"decks/kor_warrior.dck"
@@ -9149,8 +9389,8 @@
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 15,
-	"rewards":[
-	{
+	"rewards": [
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -9183,18 +9423,20 @@
 			]
 		}
 	],
-	"colors": "RW"
+	"colors": "RW",
+	"questTags": [
+		"Humanoid",
+		"Warrior",
+		"Kor",
+		"Tribal",
+		"IdentityRed",
+		"IdentityWhite",
+		"IdentityBoros",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "Lich",
-		"questTags": [
-			"Lich",
-			"Undead",
-			"Necromancer",
-			"Unholy",
-			"IdentityBlack",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/lich_2.atlas",
 	"deck": [
 		"decks/lich.dck"
@@ -9264,18 +9506,18 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Lich",
+		"Undead",
+		"Necromancer",
+		"Unholy",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Lathliss",
-		"questTags": [
-			"IdentityRed",
-			"Flying",
-			"Dragon",
-			"Huge",
-			"Boss",
-			"Lathliss"
-		],
 	"sprite": "sprites/boss/lathiss.atlas",
 	"deck": [
 		"decks/boss/lathliss.dck"
@@ -9308,23 +9550,25 @@
 	"equipment": [
 		"Mox Ruby"
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"IdentityRed",
+		"Flying",
+		"Dragon",
+		"Huge",
+		"Boss",
+		"Lathliss"
+	]
 },
 {
 	"name": "Lightning Elemental",
-		"questTags": [
-			"Elemental",
-			"Lightning",
-			"Inhuman",
-			"IdentityRed"
-		],
 	"sprite": "sprites/lightningelemental.atlas",
 	"deck": [
 		"decks/lightning_elemental.dck"
 	],
+	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"flying": true,
 	"speed": 32,
 	"life": 20,
 	"rewards": [
@@ -9396,7 +9640,8 @@
 			"probability": 0.3,
 			"count": 1,
 			"rarity": [
-				"uncommon","rare"
+				"uncommon",
+				"rare"
 			],
 			"cardTypes": [
 				"Land"
@@ -9410,17 +9655,16 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Elemental",
+		"Lightning",
+		"Inhuman",
+		"IdentityRed"
+	]
 },
 {
 	"name": "Lorthos",
-		"questTags": [
-			"Boss",
-			"Water",
-			"Octopus",
-			"IdentityBlue",
-			"Lorthos"
-		],
 	"sprite": "sprites/boss/lorthos.atlas",
 	"deck": [
 		"decks/boss/lorthos.dck"
@@ -9451,26 +9695,26 @@
 	"equipment": [
 		"Mox Sapphire"
 	],
-	"colors": "U"
+	"colors": "U",
+	"questTags": [
+		"Boss",
+		"Water",
+		"Octopus",
+		"IdentityBlue",
+		"Lorthos"
+	]
 },
 {
 	"name": "Magma Elemental",
-		"questTags": [
-			"Humanoid",
-			"Fire",
-			"Elemental",
-			"Subterranean",
-			"IdentityRed"
-		],
 	"sprite": "sprites/magmaelemental.atlas",
 	"deck": [
 		"decks/magma_elemental.dck"
 	],
+	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 25,
-	"flying": true,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -9540,7 +9784,8 @@
 			"probability": 0.3,
 			"count": 1,
 			"rarity": [
-				"uncommon","rare"
+				"uncommon",
+				"rare"
 			],
 			"cardTypes": [
 				"Land"
@@ -9554,19 +9799,17 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "R"
-},{
+	"colors": "R",
+	"questTags": [
+		"Humanoid",
+		"Fire",
+		"Elemental",
+		"Subterranean",
+		"IdentityRed"
+	]
+},
+{
 	"name": "Merfolk",
-		"questTags": [
-			"Merfolk",
-			"Humanoid",
-			"Swimming",
-			"Tribal",
-			"Territorial",
-			"Water",
-			"IdentityBlue",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/waterelemental.atlas",
 	"deck": [
 		"decks/merfolk_bad.json"
@@ -9600,21 +9843,20 @@
 			]
 		}
 	],
-	"colors": "U"
+	"colors": "U",
+	"questTags": [
+		"Merfolk",
+		"Humanoid",
+		"Swimming",
+		"Tribal",
+		"Territorial",
+		"Water",
+		"IdentityBlue",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Merfolk Avatar",
-		"questTags": [
-			"Elemental",
-			"Merfolk",
-			"Tribal",
-			"Water",
-			"Humanoid",
-			"IdentityGreen",
-			"IdentityBlue",
-			"IdentitySimic",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/iceelemental.atlas",
 	"deck": [
 		"decks/merfolk_good.json"
@@ -9650,20 +9892,21 @@
 			]
 		}
 	],
-	"colors": "GU"
+	"colors": "GU",
+	"questTags": [
+		"Elemental",
+		"Merfolk",
+		"Tribal",
+		"Water",
+		"Humanoid",
+		"IdentityGreen",
+		"IdentityBlue",
+		"IdentitySimic",
+		"BiomeBlue"
+	]
 },
 {
-	"name": "Merfolk Fighter",		"questTags": [
-			"Merfolk",
-			"Humanoid",
-			"Swimming",
-			"Territorial",
-			"Tribal",
-			"IdentityGreen",
-			"IdentityBlue",
-			"IdentitySimic",
-			"BiomeBlue"
-		],
+	"name": "Merfolk Fighter",
 	"sprite": "sprites/merfolk.atlas",
 	"deck": [
 		"decks/merfolk_lords.dck"
@@ -9707,23 +9950,21 @@
 			]
 		}
 	],
-	"colors": "GU"
+	"colors": "GU",
+	"questTags": [
+		"Merfolk",
+		"Humanoid",
+		"Swimming",
+		"Territorial",
+		"Tribal",
+		"IdentityGreen",
+		"IdentityBlue",
+		"IdentitySimic",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Merfolk Lord",
-		"questTags": [
-			"Merfolk",
-			"Humanoid",
-			"Tribal",
-			"Territorial",
-			"Water",
-			"Swimming",
-			"Leader",
-			"IdentityGreen",
-			"IdentityBlue",
-			"IdentitySimic",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/merfolk_lord.atlas",
 	"deck": [
 		"decks/merfolk_lord2.dck"
@@ -9767,21 +10008,23 @@
 			]
 		}
 	],
-	"colors": "GU"
+	"colors": "GU",
+	"questTags": [
+		"Merfolk",
+		"Humanoid",
+		"Tribal",
+		"Territorial",
+		"Water",
+		"Swimming",
+		"Leader",
+		"IdentityGreen",
+		"IdentityBlue",
+		"IdentitySimic",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Merfolk Soldier",
-		"questTags": [
-			"Merfolk",
-			"Humanoid",
-			"Tribal",
-			"Water",
-			"Swimming",
-			"Soldier",
-			"Territorial",
-			"IdentityBlue",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/mermaid.atlas",
 	"deck": [
 		"decks/merfolk_v_goblins.dck"
@@ -9815,21 +10058,21 @@
 			]
 		}
 	],
-	"colors": "U"
+	"colors": "U",
+	"questTags": [
+		"Merfolk",
+		"Humanoid",
+		"Tribal",
+		"Water",
+		"Swimming",
+		"Soldier",
+		"Territorial",
+		"IdentityBlue",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Merfolk warrior",
-		"questTags": [
-			"Merfolk",
-			"Humanoid",
-			"Water",
-			"Swimming",
-			"Territorial",
-			"Tribal",
-			"Warrior",
-			"IdentityBlue",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/airelemental.atlas",
 	"deck": [
 		"decks/merfolk_mid.json"
@@ -9865,20 +10108,21 @@
 			]
 		}
 	],
-	"colors": "U"
+	"colors": "U",
+	"questTags": [
+		"Merfolk",
+		"Humanoid",
+		"Water",
+		"Swimming",
+		"Territorial",
+		"Tribal",
+		"Warrior",
+		"IdentityBlue",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Mimic",
-		"questTags": [
-			"Mimic",
-			"Sneaky",
-			"Ambush",
-			"Predator",
-			"Inhuman",
-			"IdentityBlack",
-			"IdentityBlue",
-			"IdentityDimir"
-		],
 	"sprite": "sprites/mimic.atlas",
 	"deck": [
 		"decks/mimic.dck"
@@ -9948,23 +10192,20 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BU"
+	"colors": "BU",
+	"questTags": [
+		"Mimic",
+		"Sneaky",
+		"Ambush",
+		"Predator",
+		"Inhuman",
+		"IdentityBlack",
+		"IdentityBlue",
+		"IdentityDimir"
+	]
 },
 {
 	"name": "Mindclaw Shaman",
-		"questTags": [
-			"Viashino",
-			"Humanoid",
-			"Shaman",
-			"Tribal",
-			"Wizard",
-			"Leader",
-			"IdentityRed",
-			"IdentityBlack",
-			"IdentityRakdos",
-			"BiomeRed",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/dreamwalker.atlas",
 	"deck": [
 		"decks/mindclaw_shaman.dck"
@@ -10035,19 +10276,23 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BR"
+	"colors": "BR",
+	"questTags": [
+		"Viashino",
+		"Humanoid",
+		"Shaman",
+		"Tribal",
+		"Wizard",
+		"Leader",
+		"IdentityRed",
+		"IdentityBlack",
+		"IdentityRakdos",
+		"BiomeRed",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Minotaur",
-		"questTags": [
-			"Minotaur",
-			"Humanoid",
-			"Aggressive",
-			"Tribal",
-			"Territorial",
-			"IdentityRed",
-			"BiomeRed"
-		],
 	"sprite": "sprites/minotaur.atlas",
 	"deck": [
 		"decks/minotaur.json"
@@ -10117,22 +10362,19 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Minotaur",
+		"Humanoid",
+		"Aggressive",
+		"Tribal",
+		"Territorial",
+		"IdentityRed",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Minotaur Flayer",
-		"questTags": [
-			"Territorial",
-			"Tribal",
-			"Minotaur",
-			"Warrior",
-			"Aggressive",
-			"Humanoid",
-			"IdentityBlack",
-			"IdentityRed",
-			"IdentityRakdos",
-			"BiomeRed"
-		],
 	"sprite": "sprites/warden_2.atlas",
 	"deck": [
 		"decks/minotaur.dck"
@@ -10202,26 +10444,31 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BR"
+	"colors": "BR",
+	"questTags": [
+		"Territorial",
+		"Tribal",
+		"Minotaur",
+		"Warrior",
+		"Aggressive",
+		"Humanoid",
+		"IdentityBlack",
+		"IdentityRed",
+		"IdentityRakdos",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Monk",
-		"questTags": [
-			"Human",
-			"Mystic",
-			"Passive",
-			"IdentityWhite",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/monk.atlas",
 	"deck": [
 		"decks/angel.json",
 		"decks/monk.json"
 	],
+	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
-	"randomizeDeck": true,
 	"life": 10,
 	"rewards": [
 		{
@@ -10284,33 +10531,29 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "W"
+	"colors": "W",
+	"questTags": [
+		"Human",
+		"Mystic",
+		"Passive",
+		"IdentityWhite",
+		"BiomeWhite"
+	]
 },
 {
-	"name": "Mummy","questTags": [
-			"Undead",
-			"Humanoid",
-			"Loner",
-			"Territorial",
-			"IdentityWhite",
-			"IdentityBlack",
-			"IdentityOrzhov",
-			"BiomeColorless",
-			"BiomeBlack"
-		],
-	"sprite": "sprites/dungeon/mummy.atlas",
-	"scale": 0.70,
+	"name": "Mummy",
+	"sprite": "sprites/mummy.atlas",
 	"deck": [
 		"decks/mummy.dck"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 15,
+	"scale": 0.7,
 	"life": 11,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -10342,62 +10585,64 @@
 			"count": 50,
 			"addMaxCount": 100
 		}
-		]
+	],
+	"questTags": [
+		"Undead",
+		"Humanoid",
+		"Loner",
+		"Territorial",
+		"IdentityWhite",
+		"IdentityBlack",
+		"IdentityOrzhov",
+		"BiomeColorless",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Nahiri",
-		"questTags": [
-			"Planeswalker",
-			"Kor",
-			"Stone",
-			"Boss",
-			"IdentityRed",
-			"IdentityWhite",
-			"IdentityBoros"
-		],
-	"sprite": "sprites/dungeon/nahiri.atlas",
+	"sprite": "sprites/boss/nahiri.atlas",
 	"deck": [
 		"decks/miniboss/nahiri.dck"
 	],
 	"spawnRate": 1,
-	"scale": 0.5,
 	"difficulty": 0.1,
 	"speed": 30,
+	"scale": 0.5,
 	"life": 40,
 	"rewards": [
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Nahiri, Heir of the Ancients"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Embercleave"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Skullclamp"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Lightning Bolt"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Wheel of Fortune"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Sword of Fire and Ice"
 		},
@@ -10414,29 +10659,30 @@
 			"itemName": "Nahiri's Armory"
 		}
 	],
-	"colors": "RW"
+	"colors": "RW",
+	"questTags": [
+		"Planeswalker",
+		"Kor",
+		"Stone",
+		"Boss",
+		"IdentityRed",
+		"IdentityWhite",
+		"IdentityBoros"
+	]
 },
-{ 
+{
 	"name": "Necromancer",
-		"questTags": [
-			"Necromancer",
-			"Unholy",
-			"Wizard",
-			"Human",
-			"IdentityBlack"
-		],
 	"sprite": "sprites/black_wiz2.atlas",
 	"deck": [
 		"decks/reanimator.dck"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 20,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 3,
@@ -10469,34 +10715,29 @@
 			"addMaxCount": 100
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Necromancer",
+		"Unholy",
+		"Wizard",
+		"Human",
+		"IdentityBlack"
+	]
 },
 {
 	"name": "Octopus",
-		"questTags": [
-			"Water",
-			"Swimming",
-			"Predator",
-			"Ambush",
-			"Beast",
-			"Wild",
-			"Octopus",
-			"IdentityBlue",
-			"BiomeBlue"
-		],
-	"sprite": "sprites/dungeon/octopus.atlas",
+	"sprite": "sprites/octopus.atlas",
 	"deck": [
 		"decks/octopus.dck"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
 	"scale": 0.75,
 	"life": 10,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -10532,37 +10773,33 @@
 				"Land"
 			]
 		}
+	],
+	"questTags": [
+		"Water",
+		"Swimming",
+		"Predator",
+		"Ambush",
+		"Beast",
+		"Wild",
+		"Octopus",
+		"IdentityBlue",
+		"BiomeBlue"
 	]
 },
 {
 	"name": "Ooze",
-		"questTags": [
-			"Aberration",
-			"Ambush",
-			"Nature",
-			"Nesting",
-			"Predator",
-			"Ooze",
-			"Subterranean",
-			"IdentityBlue",
-			"IdentityGreen",
-			"IdentitySimic",
-			"BiomeGreen",
-			"BiomeColorless"
-		],
-	"sprite": "sprites/dungeon/ooze.atlas",
-	"scale": 0.6,
+	"sprite": "sprites/ooze.atlas",
 	"deck": [
 		"decks/ooze.json"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
+	"scale": 0.6,
 	"life": 12,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -10599,24 +10836,25 @@
 			]
 		}
 	],
-	"colors": "UG"
+	"colors": "UG",
+	"questTags": [
+		"Aberration",
+		"Ambush",
+		"Nature",
+		"Nesting",
+		"Predator",
+		"Ooze",
+		"Subterranean",
+		"IdentityBlue",
+		"IdentityGreen",
+		"IdentitySimic",
+		"BiomeGreen",
+		"BiomeColorless"
+	]
 },
 {
 	"name": "Ooze Boss",
-		"questTags": [
-			"Leader",
-			"Ooze",
-			"Aberration",
-			"Ambush",
-			"Nature",
-			"Nesting",
-			"Subterranean",
-			"IdentityGreen",
-			"IdentityBlack",
-			"IdentityGolgari"
-		],
-	"sprite": "sprites/dungeon/oozeboss.atlas",
-	"scale": 0.5,
+	"sprite": "sprites/boss/oozeboss.atlas",
 	"deck": [
 		"decks/miniboss/ooze_boss.dck"
 	],
@@ -10624,6 +10862,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
+	"scale": 0.5,
 	"life": 30,
 	"rewards": [
 		{
@@ -10644,7 +10883,7 @@
 			"count": 1,
 			"cardName": "Experiment Kraj"
 		},
-				{
+		{
 			"type": "card",
 			"probability": 0.5,
 			"count": 1,
@@ -10678,37 +10917,32 @@
 			"type": "card",
 			"probability": 0.5,
 			"count": 1,
-			"cardName": "Rampant Growth"	
+			"cardName": "Rampant Growth"
 		},
 		{
 			"type": "card",
 			"probability": 0.5,
 			"count": 1,
 			"cardName": "Cultivate"
-		}	
+		}
 	],
-	"colors": "GB"
+	"colors": "GB",
+	"questTags": [
+		"Leader",
+		"Ooze",
+		"Aberration",
+		"Ambush",
+		"Nature",
+		"Nesting",
+		"Subterranean",
+		"IdentityGreen",
+		"IdentityBlack",
+		"IdentityGolgari"
+	]
 },
 {
 	"name": "Owl",
-		"questTags": [
-			"Bird",
-			"Animal",
-			"Domesticated",
-			"Flying",
-			"Nature",
-			"Wild",
-			"Nocturnal",
-			"Small",
-			"Predator",
-			"IdentityBlack",
-			"IdentityBlue",
-			"IdentityDimir",
-			"BiomeGreen",
-			"BiomeWhite",
-			"BiomeBlue"
-		],
-	"sprite": "sprites/dungeon/owl.atlas",
+	"sprite": "sprites/owl.atlas",
 	"deck": [
 		"decks/owl.dck"
 	],
@@ -10720,7 +10954,7 @@
 	"scale": 0.75,
 	"life": 10,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -10756,28 +10990,32 @@
 				"Land"
 			]
 		}
+	],
+	"questTags": [
+		"Bird",
+		"Animal",
+		"Domesticated",
+		"Flying",
+		"Nature",
+		"Wild",
+		"Nocturnal",
+		"Small",
+		"Predator",
+		"IdentityBlack",
+		"IdentityBlue",
+		"IdentityDimir",
+		"BiomeGreen",
+		"BiomeWhite",
+		"BiomeBlue"
 	]
 },
 {
-	"name": "Pirate",		"questTags": [
-			"Aggressive",
-			"Human",
-			"Warrior",
-			"Water",
-			"Bandit",
-			"Thief",
-			"IdentityBlue",
-			"IdentityRed",
-			"IdentityIzzet",
-			"BiomeColorless",
-			"BiomeBlue"
-		],
+	"name": "Pirate",
 	"sprite": "sprites/pirate.atlas",
 	"deck": [
 		"decks/pirate.dck"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -10819,7 +11057,7 @@
 			"count": 30,
 			"addMaxCount": 100
 		},
-   		{
+		{
 			"type": "card",
 			"probability": 0.5,
 			"count": 2,
@@ -10827,41 +11065,45 @@
 				"Red"
 			]
 		},
-    	{
+		{
 			"type": "card",
 			"probability": 0.5,
 			"count": 1,
 			"colors": [
 				"Blue"
 			]
-		 }
+		}
 	],
-		"colors": "UR"
+	"colors": "UR",
+	"questTags": [
+		"Aggressive",
+		"Human",
+		"Warrior",
+		"Water",
+		"Bandit",
+		"Thief",
+		"IdentityBlue",
+		"IdentityRed",
+		"IdentityIzzet",
+		"BiomeColorless",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Plant",
-		"questTags": [
-			"Nature",
-			"Territorial",
-			"Inhuman",
-			"Prey",
-			"IdentityGreen",
-			"BiomeGreen"
-		],
-	"sprite": "sprites/dungeon/plant.atlas",
+	"sprite": "sprites/plant.atlas",
 	"deck": [
 		"decks/plant.json",
 		"decks/plant.dck"
 	],
 	"ai": "",
-	"flying": false,
+	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 10,
-	"randomizeDeck": true,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -10897,17 +11139,18 @@
 				"Land"
 			]
 		}
+	],
+	"questTags": [
+		"Nature",
+		"Territorial",
+		"Inhuman",
+		"Prey",
+		"IdentityGreen",
+		"BiomeGreen"
 	]
 },
 {
 	"name": "Orthodoxy Angel",
-		"questTags": [
-			"Phyrexian",
-			"Angel",
-			"IdentityWhite",
-			"IdentityGreen",
-			"IdentitySelesnya"
-		],
 	"sprite": "sprites/phyrexianangel.atlas",
 	"deck": [
 		"decks/phyrexianangel.json"
@@ -10944,7 +11187,7 @@
 		},
 		{
 			"type": "deckCard",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"addMaxCount": 2,
 			"rarity": [
@@ -10976,17 +11219,17 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "WG"
+	"colors": "WG",
+	"questTags": [
+		"Phyrexian",
+		"Angel",
+		"IdentityWhite",
+		"IdentityGreen",
+		"IdentitySelesnya"
+	]
 },
 {
 	"name": "Orthodoxy Duelist",
-		"questTags": [
-			"Phyrexian",
-			"Warrior",
-			"IdentityWhite",
-			"IdentityBlack",
-			"IdentityOrzhov"
-		],
 	"sprite": "sprites/phyrexianduelist.atlas",
 	"deck": [
 		"decks/phyrexianduelist.json"
@@ -11055,26 +11298,24 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "WB"
+	"colors": "WB",
+	"questTags": [
+		"Phyrexian",
+		"Warrior",
+		"IdentityWhite",
+		"IdentityBlack",
+		"IdentityOrzhov"
+	]
 },
 {
 	"name": "Phoenix",
-		"questTags": [
-			"Mythical",
-			"Fire",
-			"Bird",
-			"Flying",
-			"Nesting",
-			"Loner",
-			"IdentityRed"
-		],
 	"sprite": "sprites/phoenix.atlas",
 	"deck": [
 		"decks/phoenix.dck"
 	],
+	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"flying": true,
 	"speed": 28,
 	"life": 20,
 	"rewards": [
@@ -11146,7 +11387,8 @@
 			"probability": 0.3,
 			"count": 1,
 			"rarity": [
-				"uncommon","rare"
+				"uncommon",
+				"rare"
 			],
 			"cardTypes": [
 				"Land"
@@ -11160,23 +11402,19 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Mythical",
+		"Fire",
+		"Bird",
+		"Flying",
+		"Nesting",
+		"Loner",
+		"IdentityRed"
+	]
 },
 {
 	"name": "Rakdos Devil",
-		"questTags": [
-			"Devil",
-			"Fire",
-			"Unholy",
-			"Sneaky",
-			"Humanoid",
-			"Thief",
-			"Subterranean",
-			"IdentityRed",
-			"IdentityBlack",
-			"IdentityRakdos",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/juggler.atlas",
 	"deck": [
 		"decks/rakdos_devil.dck"
@@ -11199,35 +11437,35 @@
 			"addMaxCount": 95
 		}
 	],
-	"colors": "BR"
+	"colors": "BR",
+	"questTags": [
+		"Devil",
+		"Fire",
+		"Unholy",
+		"Sneaky",
+		"Humanoid",
+		"Thief",
+		"Subterranean",
+		"IdentityRed",
+		"IdentityBlack",
+		"IdentityRakdos",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Rat Ninja",
-		"questTags": [
-			"Humanoid",
-			"Ninja",
-			"Bandit",
-			"Rat",
-			"Sneaky",
-			"Thief",
-			"Subterranean",
-			"Scavenger",
-			"IdentityBlack",
-			"BiomeBlack"
-		],
-	"sprite": "sprites/dungeon/humanoidrat.atlas",
+	"sprite": "sprites/humanoidrat.atlas",
 	"deck": [
 		"decks/humanoidrat.dck"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
 	"scale": 0.75,
 	"life": 10,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -11263,24 +11501,23 @@
 				"Land"
 			]
 		}
+	],
+	"questTags": [
+		"Humanoid",
+		"Ninja",
+		"Bandit",
+		"Rat",
+		"Sneaky",
+		"Thief",
+		"Subterranean",
+		"Scavenger",
+		"IdentityBlack",
+		"BiomeBlack"
 	]
 },
 {
 	"name": "Raven",
-		"questTags": [
-			"Bird",
-			"Flying",
-			"Animal",
-			"Wild",
-			"Domesticated",
-			"Scavenger",
-			"IdentityBlack",
-			"IdentityBlue",
-			"IdentityDimir",
-			"BiomeColorless",
-			"BiomeWhite"
-		],
-	"sprite": "sprites/dungeon/raven.atlas",
+	"sprite": "sprites/raven.atlas",
 	"deck": [
 		"decks/raven.dck"
 	],
@@ -11289,10 +11526,10 @@
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 20,
-	"scale":0.70,
+	"scale": 0.7,
 	"life": 12,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -11328,19 +11565,23 @@
 				"Land"
 			]
 		}
+	],
+	"questTags": [
+		"Bird",
+		"Flying",
+		"Animal",
+		"Wild",
+		"Domesticated",
+		"Scavenger",
+		"IdentityBlack",
+		"IdentityBlue",
+		"IdentityDimir",
+		"BiomeColorless",
+		"BiomeWhite"
 	]
 },
 {
 	"name": "Red Beast",
-		"questTags": [
-			"Beast",
-			"Animal",
-			"Wild",
-			"Territorial",
-			"Nesting",
-			"IdentityRed",
-			"BiomeRed"
-		],
 	"sprite": "sprites/basilisk_2.atlas",
 	"deck": [
 		"decks/beast_red.json"
@@ -11410,17 +11651,19 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Beast",
+		"Animal",
+		"Wild",
+		"Territorial",
+		"Nesting",
+		"IdentityRed",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Reassembling Skeleton",
-		"questTags": [
-			"Undead",
-			"Skeleton",
-			"Regenerating",
-			"IdentityBlack",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/skeleton.atlas",
 	"deck": [
 		"decks/reassemblingskeleton.dck"
@@ -11442,19 +11685,17 @@
 			"addMaxCount": 32
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Undead",
+		"Skeleton",
+		"Regenerating",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Red Wiz1",
-		"questTags": [
-			"Wizard",
-			"Human",
-			"Fire",
-			"Pyromancer",
-			"IdentityRed",
-			"BiomeRed",
-			"BiomeColorless"
-		],
 	"sprite": "sprites/enchanter.atlas",
 	"deck": [
 		"decks/red_bad.json"
@@ -11524,19 +11765,19 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Wizard",
+		"Human",
+		"Fire",
+		"Pyromancer",
+		"IdentityRed",
+		"BiomeRed",
+		"BiomeColorless"
+	]
 },
 {
 	"name": "Red Wiz2",
-		"questTags": [
-			"Wizard",
-			"Human",
-			"Fire",
-			"Pyromancer",
-			"IdentityRed",
-			"BiomeRed",
-			"BiomeColorless"
-		],
 	"sprite": "sprites/red_wiz2.atlas",
 	"deck": [
 		"decks/haste_burn.dck"
@@ -11558,22 +11799,22 @@
 			"addMaxCount": 200
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Wizard",
+		"Human",
+		"Fire",
+		"Pyromancer",
+		"IdentityRed",
+		"BiomeRed",
+		"BiomeColorless"
+	]
 },
 {
 	"name": "Red Wiz3",
-		"questTags": [
-			"Wizard",
-			"Human",
-			"Fire",
-			"Pyromancer",
-			"IdentityRed",
-			"BiomeRed",
-			"BiomeColorless"
-		],
 	"sprite": "sprites/red_wiz3.atlas",
 	"deck": [
-		"decks/lava_axe.dck"		
+		"decks/lava_axe.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -11593,21 +11834,19 @@
 			"addMaxCount": 300
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Wizard",
+		"Human",
+		"Fire",
+		"Pyromancer",
+		"IdentityRed",
+		"BiomeRed",
+		"BiomeColorless"
+	]
 },
 {
 	"name": "Rogue",
-		"questTags": [
-			"Bandit",
-			"Human",
-			"Sneaky",
-			"Wandering",
-			"Thief",
-			"IdentityBlack",
-			"IdentityBlue",
-			"IdentityDimir",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/rogue.atlas",
 	"deck": [
 		"decks/rogue.json"
@@ -11627,20 +11866,110 @@
 			"addMaxCount": 250
 		}
 	],
-	"colors": "BU"
+	"colors": "BU",
+	"questTags": [
+		"Bandit",
+		"Human",
+		"Sneaky",
+		"Wandering",
+		"Thief",
+		"IdentityBlack",
+		"IdentityBlue",
+		"IdentityDimir",
+		"BiomeBlue"
+	]
+},
+{
+	"name": "Sand Golem",
+	"sprite": "sprites/dungeon/sandelemental.atlas",
+	"deck": [
+		"decks/sandgolem.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 23,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Golem",
+		"Elemental",
+		"Humanoid",
+		"IdentityWhite",
+		"IdentityRed",
+		"BiomeWhite",
+		"BiomeRed"
+	]
+},
+{
+	"name": "Sandwurm",
+	"sprite": "sprites/dungeon/sandwurm.atlas",
+	"deck": [
+		"decks/sandwurm.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 13,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Wurm",
+		"Nature",
+		"Subterranean",
+		"IdentityGreen"
+	]
 },
 {
 	"name": "Satyr",
-		"questTags": [
-			"Humanoid",
-			"Mythical",
-			"Sneaky",
-			"Thief",
-			"IdentityGreen",
-			"IdentityRed",
-			"IdentityGruul",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/satyr.atlas",
 	"deck": [
 		"decks/satyr.dck"
@@ -11710,29 +12039,32 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "GR"
+	"colors": "GR",
+	"questTags": [
+		"Humanoid",
+		"Mythical",
+		"Sneaky",
+		"Thief",
+		"IdentityGreen",
+		"IdentityRed",
+		"IdentityGruul",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Scarecrow",
-		"questTags": [
-			"Construct",
-			"Nature",
-			"Territorial",
-			"IdentityBlue",
-			"BiomeColorless"
-		],
 	"sprite": "sprites/dungeon/scarecrow.atlas",
 	"deck": [
 		"decks/scarecrow.dck"
 	],
+	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
-	"flying": true,
 	"scale": 0.35,
 	"life": 13,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -11769,26 +12101,26 @@
 			]
 		}
 	],
-	"colors": "U"
+	"colors": "U",
+	"questTags": [
+		"Construct",
+		"Nature",
+		"Territorial",
+		"IdentityBlue",
+		"BiomeColorless"
+	]
 },
 {
 	"name": "Scarecrow Captain",
-		"questTags": [
-			"Construct",
-			"Nature",
-			"Territorial",
-			"Leader",
-			"IdentityAll"
-		],
 	"sprite": "sprites/dungeon/scarecrowcaptain.atlas",
 	"deck": [
 		"decks/scarecrowcaptain.dck"
 	],
+	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
-	"flying": true,
-	"scale": 0.40,
+	"scale": 0.4,
 	"life": 40,
 	"rewards": [
 		{
@@ -11820,7 +12152,7 @@
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Wickerwing Effigy"
 		},
@@ -11843,37 +12175,29 @@
 			"itemName": "Giant Scythe"
 		}
 	],
-	"colors": "WUBRG"
+	"colors": "WUBRG",
+	"questTags": [
+		"Construct",
+		"Nature",
+		"Territorial",
+		"Leader",
+		"IdentityAll"
+	]
 },
 {
 	"name": "Scorpion",
-		"questTags": [
-			"Tiny",
-			"Insect",
-			"Nature",
-			"Territorial",
-			"Predator",
-			"Ambush",
-			"IdentityBlack",
-			"IdentityGreen",
-			"IdentityGolgari",
-			"BiomeRed",
-			"BiomeWhite",
-			"BiomeBlue"
-		],
-	"sprite": "sprites/dungeon/scorpion.atlas",
-	"scale": 0.9,
+	"sprite": "sprites/scorpion.atlas",
 	"deck": [
 		"decks/scorpion.dck"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 0.8,
 	"difficulty": 0.1,
 	"speed": 15,
+	"scale": 0.9,
 	"life": 11,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -11905,17 +12229,24 @@
 			"count": 50,
 			"addMaxCount": 100
 		}
-		]
+	],
+	"questTags": [
+		"Tiny",
+		"Insect",
+		"Nature",
+		"Territorial",
+		"Predator",
+		"Ambush",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityGolgari",
+		"BiomeRed",
+		"BiomeWhite",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Sea Monster",
-		"questTags": [
-			"Water",
-			"Swimming",
-			"Inhuman",
-			"IdentityBlue",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/leech_2.atlas",
 	"deck": [
 		"decks/sea_monster.dck"
@@ -11985,20 +12316,17 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "U"
+	"colors": "U",
+	"questTags": [
+		"Water",
+		"Swimming",
+		"Inhuman",
+		"IdentityBlue",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Shaman",
-		"questTags": [
-			"Shaman",
-			"Nature",
-			"Wizard",
-			"Mystic",
-			"IdentityGreen",
-			"IdentityRed",
-			"IdentityGruul",
-			"BiomeRed"
-		],
 	"sprite": "sprites/shaman_2.atlas",
 	"deck": [
 		"decks/shaman.json"
@@ -12068,17 +12396,20 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "GR"
+	"colors": "GR",
+	"questTags": [
+		"Shaman",
+		"Nature",
+		"Wizard",
+		"Mystic",
+		"IdentityGreen",
+		"IdentityRed",
+		"IdentityGruul",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Skeleton",
-		"questTags": [
-			"Undead",
-			"Skeleton",
-			"Regenerating",
-			"IdentityBlack",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/skeleton.atlas",
 	"deck": [
 		"decks/skeleton.dck"
@@ -12100,18 +12431,17 @@
 			"addMaxCount": 32
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Undead",
+		"Skeleton",
+		"Regenerating",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Skeleton Soldier",
-		"questTags": [
-			"Undead",
-			"Skeleton",
-			"Soldier",
-			"Regenerating",
-			"IdentityBlack",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/skeleton_2.atlas",
 	"deck": [
 		"decks/skeleton_2.dck"
@@ -12133,33 +12463,31 @@
 			"addMaxCount": 32
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Undead",
+		"Skeleton",
+		"Soldier",
+		"Regenerating",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Slimefoot",
-		"questTags": [
-			"Fungus",
-			"Nature",
-			"Boss",
-			"Inhuman",
-			"IdentityBlack",
-			"IdentityGreen",
-			"IdentityGolgari"
-		],
-	"sprite": "sprites/dungeon/slimefoot.atlas",
-	"scale": 0.5,
+	"sprite": "sprites/boss/slimefoot.atlas",
 	"deck": [
 		"decks/miniboss/slimefoot.dck"
 	],
-	"boss": true,
 	"ai": "",
-	"flying": false,
+	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
+	"scale": 0.5,
 	"life": 40,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 1,
@@ -12188,7 +12516,7 @@
 			"count": 1,
 			"cardName": "Slimefoot, Thallid Transplant"
 		},
-				{
+		{
 			"type": "card",
 			"probability": 0.5,
 			"count": 1,
@@ -12219,22 +12547,19 @@
 			"itemName": "Slimefoot's Slimy Staff"
 		}
 	],
-	"colors": "BG"
+	"colors": "BG",
+	"questTags": [
+		"Fungus",
+		"Nature",
+		"Boss",
+		"Inhuman",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityGolgari"
+	]
 },
 {
 	"name": "Sliver",
-		"questTags": [
-			"Tribal",
-			"Inhuman",
-			"Territorial",
-			"Subterranean",
-			"Nesting",
-			"Swarm",
-			"IdentityGreen",
-			"IdentityRed",
-			"IdentityWhite",
-			"BiomeColorless"
-		],
 	"sprite": "sprites/sliver.atlas",
 	"deck": [
 		"decks/sliver.json"
@@ -12253,32 +12578,34 @@
 			"count": 150
 		}
 	],
-	"colors": "GRW"
+	"colors": "GRW",
+	"questTags": [
+		"Tribal",
+		"Inhuman",
+		"Territorial",
+		"Subterranean",
+		"Nesting",
+		"Swarm",
+		"IdentityGreen",
+		"IdentityRed",
+		"IdentityWhite",
+		"BiomeColorless"
+	]
 },
 {
 	"name": "Slobad",
-		"questTags": [
-			"Goblin",
-			"Artificer",
-			"Wandering",
-			"Tribal",
-			"Boss",
-			"Loner",
-			"IdentityRed"
-		],
-	"sprite": "sprites/dungeon/slobad.atlas",
-	"scale": 0.75,
+	"sprite": "sprites/boss/slobad.atlas",
 	"deck": [
 		"decks/miniboss/slobad.dck"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 15,
+	"scale": 0.75,
 	"life": 40,
 	"rewards": [
-	{
+		{
 			"type": "Card",
 			"probability": 1,
 			"count": 1,
@@ -12307,7 +12634,7 @@
 			"count": 1,
 			"cardName": "Slobad, Goblin Tinkerer"
 		},
-				{
+		{
 			"type": "card",
 			"probability": 0.5,
 			"count": 1,
@@ -12338,19 +12665,19 @@
 			"itemName": "Slobad's Iron Boots"
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Goblin",
+		"Artificer",
+		"Wandering",
+		"Tribal",
+		"Boss",
+		"Loner",
+		"IdentityRed"
+	]
 },
 {
 	"name": "Sliver Queen",
-		"questTags": [
-			"Sliver",
-			"Boss",
-			"Leader",
-			"Inhuman",
-			"Territorial",
-			"Nesting",
-			"IdentityAll"
-		],
 	"sprite": "sprites/boss/sliver_queen.atlas",
 	"deck": [
 		"decks/boss/sliver_queen.dck"
@@ -12381,20 +12708,19 @@
 	"equipment": [
 		"Black Lotus"
 	],
-	"colors": "BGRUW"
+	"colors": "BGRUW",
+	"questTags": [
+		"Sliver",
+		"Boss",
+		"Leader",
+		"Inhuman",
+		"Territorial",
+		"Nesting",
+		"IdentityAll"
+	]
 },
 {
 	"name": "Snake",
-		"questTags": [
-			"Animal",
-			"Wild",
-			"Nature",
-			"Territorial",
-			"Predator",
-			"IdentityGreen",
-			"IdentityBlue",
-			"IdentitySimic"
-		],
 	"sprite": "sprites/big_snake.atlas",
 	"deck": [
 		"decks/snake.json"
@@ -12464,21 +12790,20 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "GU"
+	"colors": "GU",
+	"questTags": [
+		"Animal",
+		"Wild",
+		"Nature",
+		"Territorial",
+		"Predator",
+		"IdentityGreen",
+		"IdentityBlue",
+		"IdentitySimic"
+	]
 },
 {
 	"name": "Spider",
-		"questTags": [
-			"Spider",
-			"Predator",
-			"Ambush",
-			"Territorial",
-			"Wild",
-			"IdentityBlack",
-			"IdentityGreen",
-			"IdentityGolgari",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/spider.atlas",
 	"deck": [
 		"decks/spider.json"
@@ -12548,19 +12873,22 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BG"
+	"colors": "BG",
+	"questTags": [
+		"Spider",
+		"Predator",
+		"Ambush",
+		"Territorial",
+		"Wild",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityGolgari",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Stray Cat",
-		"questTags": [
-			"Cat",
-			"Animal",
-			"Domesticated",
-			"Prey",
-			"Small",
-			"IdentityWhite"
-		],
-	"sprite": "sprites/dungeon/cat.atlas",
+	"sprite": "sprites/cat.atlas",
 	"deck": [
 		"decks/straycat.dck"
 	],
@@ -12568,10 +12896,10 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
+	"scale": 0.8,
 	"life": 10,
-	"scale":0.80,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -12607,24 +12935,19 @@
 				"Land"
 			]
 		}
+	],
+	"questTags": [
+		"Cat",
+		"Animal",
+		"Domesticated",
+		"Prey",
+		"Small",
+		"IdentityWhite"
 	]
 },
 {
 	"name": "Squirrel",
-		"questTags": [
-			"Animal",
-			"Sneaky",
-			"Tiny",
-			"Prey",
-			"Nature",
-			"Territorial",
-			"Nesting",
-			"IdentityGreen",
-			"IdentityBlack",
-			"IdentityGolgari",
-			"BiomeGreen"
-		],
-	"sprite": "sprites/dungeon/squirrel.atlas",
+	"sprite": "sprites/squirrel.atlas",
 	"deck": [
 		"decks/squirrel.dck"
 	],
@@ -12651,21 +12974,121 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BG"
+	"colors": "BG",
+	"questTags": [
+		"Animal",
+		"Sneaky",
+		"Tiny",
+		"Prey",
+		"Nature",
+		"Territorial",
+		"Nesting",
+		"IdentityGreen",
+		"IdentityBlack",
+		"IdentityGolgari",
+		"BiomeGreen"
+	]
+},
+{
+	"name": "Swamp Troll",
+	"sprite": "sprites/dungeon/swamptroll.atlas",
+	"deck": [
+		"decks/swamptroll.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"scale": 0.8,
+	"life": 35,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Asceticism"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Golgari Grave-Troll"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Gyome, Master Chef"
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "GB",
+	"questTags": [
+		"Giant",
+		"Humanoid",
+		"Regenerating",
+		"Subterranean",
+		"IdentityGreen",
+		"IdentityBlack",
+		"BiomeBlack",
+		"Leader"
+	]
 },
 {
 	"name": "Symbiote",
-		"questTags": [
-			"Inhuman",
-			"Nature",
-			"Wild",
-			"Predator",
-			"Beast",
-			"IdentityBlack",
-			"IdentityBlue",
-			"IdentityGreen",
-			"IdentitySultai"
-		],
 	"sprite": "sprites/basilisk_3.atlas",
 	"deck": [
 		"decks/symbiote.dck"
@@ -12736,20 +13159,21 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BUG"
+	"colors": "BUG",
+	"questTags": [
+		"Inhuman",
+		"Nature",
+		"Wild",
+		"Predator",
+		"Beast",
+		"IdentityBlack",
+		"IdentityBlue",
+		"IdentityGreen",
+		"IdentitySultai"
+	]
 },
 {
 	"name": "Tarkir Djinn",
-		"questTags": [
-			"Flying",
-			"Humanoid",
-			"Elemental",
-			"Wind",
-			"IdentityBlue",
-			"IdentityRed",
-			"IdentityIzzet",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/djinn_2.atlas",
 	"deck": [
 		"decks/djinn_tarkir.dck"
@@ -12774,31 +13198,29 @@
 			"addMaxCount": 95
 		}
 	],
-	"colors": "RU"
+	"colors": "RU",
+	"questTags": [
+		"Flying",
+		"Humanoid",
+		"Elemental",
+		"Wind",
+		"IdentityBlue",
+		"IdentityRed",
+		"IdentityIzzet",
+		"BiomeBlue"
+	]
 },
-{	
+{
 	"name": "Teferi",
-		"questTags": [
-			"Boss",
-			"Illusionist",
-			"Human",
-			"Wizard",
-			"Territorial",
-			"Planeswalker",
-			"IdentityBlue",
-			"IdentityWhite",
-			"IdentityAzorius"
-		],
-	"sprite": "sprites/dungeon/teferi.atlas",
-	"scale": 0.5,
+	"sprite": "sprites/boss/teferi.atlas",
 	"deck": [
 		"decks/miniboss/teferi_boss.dck"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
+	"scale": 0.5,
 	"life": 25,
 	"rewards": [
 		{
@@ -12813,7 +13235,7 @@
 			"count": 1,
 			"cardName": "Swords to Plowshares"
 		},
-				{
+		{
 			"type": "card",
 			"probability": 1,
 			"count": 1,
@@ -12850,31 +13272,34 @@
 			"itemName": "Teferi's Staff"
 		}
 	],
-	"colors": "WU"
+	"colors": "WU",
+	"questTags": [
+		"Boss",
+		"Illusionist",
+		"Human",
+		"Wizard",
+		"Territorial",
+		"Planeswalker",
+		"IdentityBlue",
+		"IdentityWhite",
+		"IdentityAzorius"
+	]
 },
 {
 	"name": "Tibalt",
-		"questTags": [
-			"Sneaky",
-			"Devil",
-			"Boss",
-			"Planeswalker",
-			"IdentityRed"
-		],
-	"sprite": "sprites/dungeon/tibalt.atlas",
-	"scale": 0.50,
+	"sprite": "sprites/boss/tibalt.atlas",
 	"deck": [
 		"decks/miniboss/tibalt.dck"
 	],
-	"boss": true,
 	"ai": "",
-	"flying": false,
+	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
+	"scale": 0.5,
 	"life": 40,
 	"rewards": [
-	{
+		{
 			"type": "card",
 			"probability": 1,
 			"count": 1,
@@ -12893,43 +13318,43 @@
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Valki, God of Lies"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Tibalt, Wicked Tormentor"
 		},
-				{
+		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Mayhem Devil"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Fiendish Duo"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Hellrider"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Badlands"
 		},
-				{
+		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Wheel of Fortune"
 		},
@@ -12940,17 +13365,17 @@
 			"itemName": "Tibalt's Bag of Tricks"
 		}
 	],
-	"colors": "R"
+	"colors": "R",
+	"questTags": [
+		"Sneaky",
+		"Devil",
+		"Boss",
+		"Planeswalker",
+		"IdentityRed"
+	]
 },
 {
 	"name": "Torturer",
-		"questTags": [
-			"Inhuman",
-			"Devil",
-			"Flying",
-			"Aggressive",
-			"IdentityBlack"
-		],
 	"sprite": "sprites/dungeon/torturer.atlas",
 	"deck": [
 		"decks/torturer.dck"
@@ -12958,12 +13383,12 @@
 	"ai": "",
 	"flying": true,
 	"spawnRate": 1,
-	"scale":0.5,
 	"difficulty": 0.1,
 	"speed": 20,
+	"scale": 0.5,
 	"life": 30,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -12996,35 +13421,29 @@
 			]
 		}
 	],
-	"colors": "B" 
+	"colors": "B",
+	"questTags": [
+		"Inhuman",
+		"Devil",
+		"Flying",
+		"Aggressive",
+		"IdentityBlack"
+	]
 },
 {
 	"name": "Turtle",
-		"questTags": [
-			"Passive",
-			"Territorial",
-			"Nature",
-			"Animal",
-			"Wild",
-			"Swimming",
-			"Water",
-			"Prey",
-			"IdentityBlue",
-			"BiomeBlue"
-		],
-	"sprite": "sprites/dungeon/turtle.atlas",
+	"sprite": "sprites/turtle.atlas",
 	"deck": [
 		"decks/turtle.json"
 	],
 	"ai": "",
-	"flying": false,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 5,
-	"scale":0.80,
+	"scale": 0.8,
 	"life": 10,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -13061,19 +13480,22 @@
 			]
 		}
 	],
-	"colors": "U" 
+	"colors": "U",
+	"questTags": [
+		"Passive",
+		"Territorial",
+		"Nature",
+		"Animal",
+		"Wild",
+		"Swimming",
+		"Water",
+		"Prey",
+		"IdentityBlue",
+		"BiomeBlue"
+	]
 },
 {
 	"name": "Treefolk",
-		"questTags": [
-			"Humanoid",
-			"Territorial",
-			"Nature",
-			"Passive",
-			"Giant",
-			"IdentityGreen",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/treant.atlas",
 	"deck": [
 		"decks/treefolk.json"
@@ -13116,19 +13538,19 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "G"
+	"colors": "G",
+	"questTags": [
+		"Humanoid",
+		"Territorial",
+		"Nature",
+		"Passive",
+		"Giant",
+		"IdentityGreen",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Treefolk Guardian",
-		"questTags": [
-			"Humanoid",
-			"Nature",
-			"Giant",
-			"Warrior",
-			"Territorial",
-			"IdentityGreen",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/treant_2.atlas",
 	"deck": [
 		"decks/treefolk.dck"
@@ -13198,19 +13620,19 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "G"
+	"colors": "G",
+	"questTags": [
+		"Humanoid",
+		"Nature",
+		"Giant",
+		"Warrior",
+		"Territorial",
+		"IdentityGreen",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Troll",
-		"questTags": [
-			"Giant",
-			"Humanoid",
-			"Regenerating",
-			"Subterranean",
-			"IdentityGreen",
-			"IdentityRed",
-			"BiomeRed"
-		],
 	"sprite": "sprites/troll.atlas",
 	"deck": [
 		"decks/troll.json"
@@ -13280,21 +13702,19 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "GR"
+	"colors": "GR",
+	"questTags": [
+		"Giant",
+		"Humanoid",
+		"Regenerating",
+		"Subterranean",
+		"IdentityGreen",
+		"IdentityRed",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Vampire",
-		"questTags": [
-			"Vampire",
-			"Undead",
-			"Unholy",
-			"Flying",
-			"Humanoid",
-			"Predator",
-			"Nocturnal",
-			"IdentityBlack",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/vampire.atlas",
 	"deck": [
 		"decks/vampire.dck"
@@ -13312,22 +13732,21 @@
 			"addMaxCount": 8
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Vampire",
+		"Undead",
+		"Unholy",
+		"Flying",
+		"Humanoid",
+		"Predator",
+		"Nocturnal",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Vampire Lord",
-		"questTags": [
-			"Vampire",
-			"Unholy",
-			"Undead",
-			"Flying",
-			"Predator",
-			"Leader",
-			"Nocturnal",
-			"IdentityBlack",
-			"IdentityRed",
-			"BiomeRed"
-		],
 	"sprite": "sprites/vampire_3.atlas",
 	"deck": [
 		"decks/vampire_blood_token_fly.dck"
@@ -13345,20 +13764,22 @@
 			"addMaxCount": 8
 		}
 	],
-	"colors": "BR"
+	"colors": "BR",
+	"questTags": [
+		"Vampire",
+		"Unholy",
+		"Undead",
+		"Flying",
+		"Predator",
+		"Leader",
+		"Nocturnal",
+		"IdentityBlack",
+		"IdentityRed",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Viashino",
-		"questTags": [
-			"Viashino",
-			"Tribal",
-			"Humanoid",
-			"IdentityBlack",
-			"IdentityGreen",
-			"IdentityRed",
-			"IdentityJund",
-			"BiomeRed"
-		],
 	"sprite": "sprites/battler.atlas",
 	"deck": [
 		"decks/viashino.dck"
@@ -13428,23 +13849,20 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BGR"
+	"colors": "BGR",
+	"questTags": [
+		"Viashino",
+		"Tribal",
+		"Humanoid",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityRed",
+		"IdentityJund",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Viper",
-		"questTags": [
-			"Animal",
-			"Snake",
-			"Wild",
-			"Territorial",
-			"Ambush",
-			"Predator",
-			"Small",
-			"IdentityBlack",
-			"IdentityGreen",
-			"IdentityGolgari",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/big_snake_2.atlas",
 	"deck": [
 		"decks/snake.dck"
@@ -13514,18 +13932,23 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BG"
-},{
+	"colors": "BG",
+	"questTags": [
+		"Animal",
+		"Snake",
+		"Wild",
+		"Territorial",
+		"Ambush",
+		"Predator",
+		"Small",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityGolgari",
+		"BiomeGreen"
+	]
+},
+{
 	"name": "Volcano Elemental",
-		"questTags": [
-			"Fire",
-			"Elemental",
-			"Inhuman",
-			"Subterranean",
-			"IdentityRed",
-			"IdentityBlack",
-			"IdentityRakdos"
-		],
 	"sprite": "sprites/volcanoelemental.atlas",
 	"deck": [
 		"decks/br_elemental.dck"
@@ -13603,7 +14026,8 @@
 			"probability": 0.3,
 			"count": 1,
 			"rarity": [
-				"uncommon","rare"
+				"uncommon",
+				"rare"
 			],
 			"cardTypes": [
 				"Land"
@@ -13617,21 +14041,20 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BR"
+	"colors": "BR",
+	"questTags": [
+		"Fire",
+		"Elemental",
+		"Inhuman",
+		"Subterranean",
+		"IdentityRed",
+		"IdentityBlack",
+		"IdentityRakdos"
+	]
 },
 {
 	"name": "Walking Brain",
-		"questTags": [
-			"Aberration",
-			"Sneaky",
-			"Construct",
-			"Leader",
-			"Small",
-			"IdentityBlue",
-			"BiomeBlue",
-			"BiomeBlack"
-		],
-	"sprite": "sprites/dungeon/walkingbrain.atlas",
+	"sprite": "sprites/walkingbrain.atlas",
 	"deck": [
 		"decks/walkingbrain.dck"
 	],
@@ -13639,10 +14062,10 @@
 	"spawnRate": 0.3,
 	"difficulty": 0.1,
 	"speed": 15,
-	"scale":0.75,
+	"scale": 0.75,
 	"life": 16,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -13678,22 +14101,20 @@
 				"Land"
 			]
 		}
+	],
+	"questTags": [
+		"Aberration",
+		"Sneaky",
+		"Construct",
+		"Leader",
+		"Small",
+		"IdentityBlue",
+		"BiomeBlue",
+		"BiomeBlack"
 	]
 },
 {
 	"name": "Wasp",
-		"questTags": [
-			"Tiny",
-			"Flying",
-			"Insect",
-			"Territorial",
-			"Aggressive",
-			"Swarm",
-			"IdentityGreen",
-			"IdentityRed",
-			"IdentityBlack",
-			"IdentityJund"
-		],
 	"sprite": "sprites/dungeon/wasp.atlas",
 	"deck": [
 		"decks/insect.dck"
@@ -13705,7 +14126,7 @@
 	"speed": 15,
 	"life": 10,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -13738,25 +14159,22 @@
 			]
 		}
 	],
-	"colors": "GRB"
+	"colors": "GRB",
+	"questTags": [
+		"Tiny",
+		"Flying",
+		"Insect",
+		"Territorial",
+		"Aggressive",
+		"Swarm",
+		"IdentityGreen",
+		"IdentityRed",
+		"IdentityBlack",
+		"IdentityJund"
+	]
 },
 {
 	"name": "Werewolf",
-		"questTags": [
-			"Nocturnal",
-			"Animal",
-			"Humanoid",
-			"Human",
-			"Beast",
-			"Wild",
-			"Loner",
-			"Aggressive",
-			"Territorial",
-			"IdentityGreen",
-			"IdentityRed",
-			"IdentityGruul",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/hellhound.atlas",
 	"deck": [
 		"decks/werewolf.dck"
@@ -13778,18 +14196,25 @@
 			"addMaxCount": 32
 		}
 	],
-	"colors": "GR"
+	"colors": "GR",
+	"questTags": [
+		"Nocturnal",
+		"Animal",
+		"Humanoid",
+		"Human",
+		"Beast",
+		"Wild",
+		"Loner",
+		"Aggressive",
+		"Territorial",
+		"IdentityGreen",
+		"IdentityRed",
+		"IdentityGruul",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "White Dwarf",
-		"questTags": [
-			"Dwarf",
-			"Warrior",
-			"Humanoid",
-			"Subterranean",
-			"IdentityWhite",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/dwarf_6.atlas",
 	"deck": [
 		"decks/white_dwarf.dck"
@@ -13812,19 +14237,18 @@
 			"addMaxCount": 80
 		}
 	],
-	"colors": "W"
+	"colors": "W",
+	"questTags": [
+		"Dwarf",
+		"Warrior",
+		"Humanoid",
+		"Subterranean",
+		"IdentityWhite",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "White Wiz1",
-		"questTags": [
-			"Holy",
-			"Wizard",
-			"Human",
-			"Religious",
-			"IdentityWhite",
-			"BiomeColorless",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/priest.atlas",
 	"deck": [
 		"decks/white_bad.json"
@@ -13894,20 +14318,19 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "W"
+	"colors": "W",
+	"questTags": [
+		"Holy",
+		"Wizard",
+		"Human",
+		"Religious",
+		"IdentityWhite",
+		"BiomeColorless",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "White Wiz2",
-		"questTags": [
-			"Holy",
-			"Wizard",
-			"Human",
-			"Religious",
-			"Passive",
-			"IdentityWhite",
-			"BiomeColorless",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/white_wiz2.atlas",
 	"deck": [
 		"decks/basri.dck"
@@ -13977,18 +14400,20 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "W"
+	"colors": "W",
+	"questTags": [
+		"Holy",
+		"Wizard",
+		"Human",
+		"Religious",
+		"Passive",
+		"IdentityWhite",
+		"BiomeColorless",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "White Wiz3",
-		"questTags": [
-			"Holy",
-			"Wizard",
-			"Human",
-			"IdentityWhite",
-			"BiomeColorless",
-			"BiomeWhite"
-		],
 	"sprite": "sprites/white_wiz3.atlas",
 	"deck": [
 		"decks/human_soldier_token.dck"
@@ -14058,38 +14483,33 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "W"
+	"colors": "W",
+	"questTags": [
+		"Holy",
+		"Wizard",
+		"Human",
+		"IdentityWhite",
+		"BiomeColorless",
+		"BiomeWhite"
+	]
 },
 {
 	"name": "Wild Rat",
-		"questTags": [
-			"Subterranean",
-			"Animal",
-			"Wild",
-			"Sneaky",
-			"Small",
-			"Scavenger",
-			"Swarm",
-			"IdentityBlack",
-			"BiomeColorless",
-			"BiomeBlack"
-		],
-	"sprite": "sprites/dungeon/wildrat.atlas",
+	"sprite": "sprites/wildrat.atlas",
 	"deck": [
 		"decks/infectrat.dck",
 		"decks/rat.json",
 		"decks/ratswarm.dck"
 	],
 	"ai": "",
-	"flying": false,
+	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
-	"scale":0.8,
+	"scale": 0.8,
 	"life": 10,
-	"randomizeDeck": true,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -14125,21 +14545,22 @@
 				"Land"
 			]
 		}
+	],
+	"questTags": [
+		"Subterranean",
+		"Animal",
+		"Wild",
+		"Sneaky",
+		"Small",
+		"Scavenger",
+		"Swarm",
+		"IdentityBlack",
+		"BiomeColorless",
+		"BiomeBlack"
 	]
 },
 {
 	"name": "Wild-Magic Sorcerer",
-		"questTags": [
-			"Viashino",
-			"Leader",
-			"Wizard",
-			"Humanoid",
-			"IdentityRed",
-			"IdentityGreen",
-			"IdentityGruul",
-			"BiomeGreen",
-			"BiomeRed"
-		],
 	"sprite": "sprites/dreamwalker_2.atlas",
 	"deck": [
 		"decks/wild-magic_sorcerer.dck"
@@ -14210,17 +14631,21 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "RG"
+	"colors": "RG",
+	"questTags": [
+		"Viashino",
+		"Leader",
+		"Wizard",
+		"Humanoid",
+		"IdentityRed",
+		"IdentityGreen",
+		"IdentityGruul",
+		"BiomeGreen",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Wurm",
-		"questTags": [
-			"Wurm",
-			"Nature",
-			"Subterranean",
-			"IdentityGreen",
-			"BiomeGreen"
-		],
 	"sprite": "sprites/wurm.atlas",
 	"deck": [
 		"decks/wurm.json"
@@ -14255,27 +14680,27 @@
 			]
 		}
 	],
-	"colors": "G"
+	"colors": "G",
+	"questTags": [
+		"Wurm",
+		"Nature",
+		"Subterranean",
+		"IdentityGreen",
+		"BiomeGreen"
+	]
 },
 {
 	"name": "Vulture",
-		"questTags": [
-			"Scavenger",
-			"Bird",
-			"Wild",
-			"Flying",
-			"IdentityBlack"
-		],
 	"sprite": "sprites/dungeon/vulture.atlas",
 	"deck": [
 		"decks/vulture.dck"
 	],
 	"ai": "",
 	"flying": true,
-	"scale": 0.60,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
+	"scale": 0.6,
 	"life": 11,
 	"rewards": [
 		{
@@ -14307,17 +14732,17 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Scavenger",
+		"Bird",
+		"Wild",
+		"Flying",
+		"IdentityBlack"
+	]
 },
 {
 	"name": "Water Elemental",
-		"questTags": [
-			"Water",
-			"Elemental",
-			"Humanoid",
-			"IdentityBlue",
-			"BiomeBlue"
-		],
 	"sprite": "sprites/waterelemental.atlas",
 	"deck": [
 		"decks/water_elemental.dck"
@@ -14351,21 +14776,75 @@
 			]
 		}
 	],
-	"colors": "U"
+	"colors": "U",
+	"questTags": [
+		"Water",
+		"Elemental",
+		"Humanoid",
+		"IdentityBlue",
+		"BiomeBlue"
+	]
+},
+{
+	"name": "Witch",
+	"sprite": "sprites/dungeon/witch.atlas",
+	"deck": [
+		"decks/witch.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 12,
+	"scale": 0.75,
+	"life": 13,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Mystic",
+		"Unholy",
+		"Wizard",
+		"Human",
+		"IdentityBlack"
+	]
 },
 {
 	"name": "Wounded Sliver",
-		"questTags": [
-			"Sliver",
-			"Boss",
-			"Inhuman",
-			"Territorial",
-			"Nesting",
-			"IdentityGreen",
-			"IdentityRed",
-			"IdentityWhite",
-			"IdentityNaya"
-		],
 	"sprite": "sprites/boss/wsliver.atlas",
 	"deck": [
 		"decks/miniboss/sliver_shandalar.dck"
@@ -14386,33 +14865,34 @@
 			"addMaxCount": 150
 		}
 	],
-	"colors": "GRW"
+	"colors": "GRW",
+	"questTags": [
+		"Sliver",
+		"Boss",
+		"Inhuman",
+		"Territorial",
+		"Nesting",
+		"IdentityGreen",
+		"IdentityRed",
+		"IdentityWhite",
+		"IdentityNaya"
+	]
 },
 {
 	"name": "Xira",
-		"questTags": [
-			"Insect",
-			"Boss",
-			"Flying",
-			"IdentityBlack",
-			"IdentityGreen",
-			"IdentityRed",
-			"IdentityJund"
-		],
-	"sprite": "sprites/dungeon/xira.atlas",
-	"scale": 0.50,
+	"sprite": "sprites/boss/xira.atlas",
 	"deck": [
 		"decks/miniboss/xira.dck"
 	],
-	"boss": true,
 	"ai": "",
-	"flying": false,
+	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
+	"scale": 0.5,
 	"life": 50,
 	"rewards": [
-	{
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 4,
@@ -14437,37 +14917,37 @@
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Zask, Skittering Swarmlord"
 		},
-				{
+		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Mazirek, Kraul Death Priest"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Scute Swarm"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Fatal Push"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Grist, the Hunger Tide"
 		},
 		{
 			"type": "card",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"cardName": "Doom Blade"
 		},
@@ -14478,20 +14958,19 @@
 			"itemName": "Xira's Fancy Hat"
 		}
 	],
-	"colors": "BGR"
+	"colors": "BGR",
+	"questTags": [
+		"Insect",
+		"Boss",
+		"Flying",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityRed",
+		"IdentityJund"
+	]
 },
 {
 	"name": "Yeti",
-		"questTags": [
-			"Loner",
-			"Giant",
-			"Humanoid",
-			"IdentityRed",
-			"IdentityGreen",
-			"IdentityBlue",
-			"IdentityTemur",
-			"BiomeRed"
-		],
 	"sprite": "sprites/yeti_2.atlas",
 	"deck": [
 		"decks/yeti.dck"
@@ -14561,17 +15040,20 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "GRU"
+	"colors": "GRU",
+	"questTags": [
+		"Loner",
+		"Giant",
+		"Humanoid",
+		"IdentityRed",
+		"IdentityGreen",
+		"IdentityBlue",
+		"IdentityTemur",
+		"BiomeRed"
+	]
 },
 {
 	"name": "Zombie",
-		"questTags": [
-			"Undead",
-			"Zombie",
-			"Humanoid",
-			"IdentityBlack",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/zombie.atlas",
 	"deck": [
 		"decks/zombie_bad.json"
@@ -14605,18 +15087,17 @@
 			]
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Undead",
+		"Zombie",
+		"Humanoid",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
 },
 {
 	"name": "Zombie Lord",
-		"questTags": [
-			"Undead",
-			"Zombie",
-			"Humanoid",
-			"Leader",
-			"IdentityBlack",
-			"BiomeBlack"
-		],
 	"sprite": "sprites/lich.atlas",
 	"deck": [
 		"decks/zombie_good.json"
@@ -14650,6 +15131,14 @@
 			]
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Undead",
+		"Zombie",
+		"Humanoid",
+		"Leader",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
 }
 ]

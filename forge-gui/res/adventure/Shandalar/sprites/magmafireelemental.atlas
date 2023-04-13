@@ -1,4 +1,4 @@
-magmaelemental.png
+magmafireelemental.png
 size: 256,160
 format: RGBA8888
 filter: Nearest,Nearest
@@ -22,32 +22,32 @@ Idle
   xy: 134, 45
   size: 20, 20 
 Idle 
-  xy: 168, 45
+  xy: 166, 45
   size: 20, 20      
 Walk 
-  xy: 6, 17
-  size: 20,20
+  xy: 4, 17
+  size: 24,20
 Walk 
-  xy: 38, 17
-  size: 20, 20
+  xy: 36, 17
+  size: 24, 20
 Walk 
-  xy: 70, 17
-  size: 20, 20
+  xy: 68, 17
+  size: 24, 20
 Walk 
-  xy: 102, 17
-  size: 20, 20
+  xy: 100, 17
+  size: 24, 20
 Walk 
-  xy: 134, 17
-  size: 20,20
+  xy: 132, 17
+  size: 24,20
 Walk 
-  xy: 166, 17
-  size: 20, 20
+  xy: 164, 17
+  size: 24, 20
 Walk 
-  xy: 198, 17
-  size: 20, 20
+  xy: 196, 17
+  size: 24, 20
 Walk 
-  xy: 230, 17
-  size: 20, 20
+  xy: 228, 17
+  size: 24, 20
 Attack 
   xy: 0, 79
   size: 32,20

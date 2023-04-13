@@ -42,30 +42,30 @@ Walk
 Walk 
   xy: 1168, 140
   size: 80, 50 
-Attack
-  xy: 48, 230
-  size: 80, 50      
 Attack 
-  xy: 208, 230
-  size: 80, 50 
-Attack
-  xy: 368, 230
-  size: 80, 50      
+  xy: 40, 208
+  size: 130, 80
 Attack 
-  xy: 528, 230
-  size: 80, 50 
-Attack
-  xy: 688, 230
-  size: 80, 50      
+  xy: 200, 208
+  size: 130, 80  
 Attack 
-  xy: 848, 230
-  size: 80, 50 
-Attack
-  xy: 1008, 230
-  size: 80, 50             
+  xy: 360, 208
+  size: 130, 80
+Attack 
+  xy: 520, 208
+  size: 130, 80  
+Attack 
+  xy: 680, 208
+  size: 130, 80  
+Attack 
+  xy: 840, 208
+  size: 130, 80      
+Attack 
+  xy: 1000, 208
+  size: 130, 80         
 Death 
   xy: 48, 430
-  size: 16, 50   
+  size: 100, 50   
 Death 
   xy: 208, 430
   size: 100,50
