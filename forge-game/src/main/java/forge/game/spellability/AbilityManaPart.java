@@ -226,6 +226,10 @@ public class AbilityManaPart implements java.io.Serializable {
         return source.isValid(cannotCounterSpell, sourceCard.getController(), sourceCard, null);
     }
 
+    public boolean isCannotCounterPaidWith() {
+        return null != cannotCounterSpell;
+    }
+
     public void addNoCounterEffect(SpellAbility saBeingPaid) {
         final Game game = sourceCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);

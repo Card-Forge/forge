@@ -8,7 +8,7 @@
  <tileset firstgid="11905" source="../tileset/Copperhost_Tiles.tsx"/>
  <layer id="6" name="Collision" width="29" height="34">
   <data encoding="base64" compression="zlib">
-   eJztllsKxSAMRN1A3Uwfd6W3XVfbDRU/hBBMjDoVCg7ky9bD5IXODQX9p/7M2Tt3GWP1OKZVKObJvGzk3h87u0FMLuob5SvXM28wLT0Theop6iN43gvjIHmqYZb0bIqDYs6Z3LUy+ZzQmdDOWphSPUPNtLMWppRb7c436nkKeUQxpZppUVtPy+xZZGUuXo7UHdr3S4FPS96ixu77/u6L6rn7osbuq2f23H0oWZkpb1vmX/7ORbx3c95Rb87BbGc+/yCvUQ==
+   eJztlksOgzAMRLPpsrkMlJ60cC7gQlUWkSw3dhw8gCplJK8CeRr/lBC6kj7P65lDDGEzxivimFahmCvzMpF73+xsBzG5qG+Ur1rPnMG09EwWqqeoj+R5boyF5OkIs6VnSxwUc6jkzsvkc0JnQjvzMKV6ppppZx6mlFvtzjPquQp5RDGlmmlxtJ6W2bPIyhyjHKU7tO/HBp+WvGX13ff/uy/ryt2Xdcfumx+/0XefjemVlVnyNlX+5e9cxHu35h315uxMP/MLiOKyFQ==
   </data>
  </layer>
  <layer id="1" name="Background" width="29" height="34">

@@ -218,6 +218,14 @@ public class CardProperty {
                     || !sourceController.getOpponents().contains(card.getProtectingPlayer())) {
                 return false;
             }
+        } else if (property.startsWith("ProtectedBy")) {
+            if (card.getProtectingPlayer() == null) {
+                return false;
+            }
+            final List<Player> lp = AbilityUtils.getDefinedPlayers(source, property.substring(12), spellAbility);
+            if (!lp.contains(card.getProtectingPlayer())) {
+                return false;
+            }
         } else if (property.startsWith("DefendingPlayer")) {
             Player p = property.endsWith("Ctrl") ? controller : card.getOwner();
             if (!game.getPhaseHandler().inCombat()) {
@@ -1240,6 +1248,10 @@ public class CardProperty {
             return card.getDamageHistory().getHasdealtDamagetoAny();
         } else if (property.startsWith("attackedThisTurn")) {
             if (card.getDamageHistory().getCreatureAttacksThisTurn() == 0) {
+                return false;
+            }
+        } else if (property.startsWith("attackedBattleThisTurn")) {
+            if (!card.getDamageHistory().hasAttackedBattleThisTurn()) {
                 return false;
             }
         } else if (property.startsWith("attackedYouThisTurn")) {

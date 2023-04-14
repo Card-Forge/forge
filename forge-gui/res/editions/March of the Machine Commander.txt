@@ -201,7 +201,7 @@ ScryfallCode=MOC
 193 R Knight of the White Orchid @Mark Zug
 194 U Master Splicer @Chippy
 195 R Maul of the Skyclaves @Joseph Meehan
-196 U Mentor of the Meek @Jana Schirmer & Johannes Voss
+196 R Mentor of the Meek @Jana Schirmer & Johannes Voss
 197 M Mikaeus, the Lunarch @Steven Belledin
 198 U Path to Exile @Todd Lockwood
 199 R Phyrexian Rebirth @Scott Chou

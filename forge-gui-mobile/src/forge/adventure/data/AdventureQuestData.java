@@ -175,6 +175,8 @@ public class AdventureQuestData implements Serializable {
     public void initializeStage(AdventureQuestStage stage){
         if (stage == null || stage.objective == null) return;
 
+        stage.initialize();
+
         switch  (stage.objective){
             case Clear:
                 stage.setTargetPOI(poiTokens);
@@ -311,7 +313,7 @@ public class AdventureQuestData implements Serializable {
             EnemyData toUse = generateTargetEnemyData(stage);
             toUse.lifetime = stage.count1;
             EnemySprite toReturn =  new EnemySprite(toUse);
-            toReturn.questStageID = stage.questStageID;
+            toReturn.questStageID = stage.stageID.toString();
             return toReturn;
         }
         return null;
@@ -392,6 +394,34 @@ public class AdventureQuestData implements Serializable {
         for (AdventureQuestStage stage: stages) {
             failed = stage.updateDespawn(despawned)== AdventureQuestController.QuestStatus.Failed || failed;
         }
+    }
+
+    public void updateArenaComplete(boolean winner){
+        for (AdventureQuestStage stage: stages) {
+            if(failed)
+                break;
+            stage.updateArenaComplete(winner);
+            failed = failed || stage.getStatus() == AdventureQuestController.QuestStatus.Failed;
+        }
+        if (!failed)
+            updateStatus();
+    }
+
+    public void updateStatus(){
+        for (AdventureQuestStage stage: stages) {
+            switch (stage.getStatus()) {
+                case Complete:
+                    continue;
+                case Failed:
+                    failed = true;
+                    break;
+                case None:
+                case Inactive:
+                case Active:
+                    return;
+            }
+        }
+        completed = true;
     }
 
     public DialogData getPrologue() {

@@ -39,7 +39,6 @@
       "type": "TextButton",
       "name": "rename",
       "text": "tr(lblRename)",
-      "binding": "Equip",
       "width": 86,
       "height": 30,
       "x": 180,

@@ -154,16 +154,6 @@
     &quot;entryFee&quot;:100,
      &quot;rewards&quot;: [[
 		{
-			&quot;type&quot;: &quot;card&quot;,
-			&quot;probability&quot;: 1, 
-      			&quot;count&quot;:2,
-			&quot;rarity&quot;: [
-				&quot;Mythic Rare&quot;
-			],
-      			&quot;colors&quot;: [&quot;white&quot;] 
-		}
-		],[
-		{
 			&quot;type&quot;: &quot;gold&quot;,
 			&quot;probability&quot;: 1,
 			&quot;count&quot;: 500,
@@ -174,6 +164,17 @@
 			&quot;probability&quot;: 1,
 			&quot;count&quot;: 1,
 			&quot;itemNames&quot;: [&quot;Gold Armor&quot;,&quot;Gold Shield&quot;,&quot;Gold Boots&quot;,&quot;Bronze Sword&quot;]
+		}
+		],
+[
+		{
+			&quot;type&quot;: &quot;card&quot;,
+			&quot;probability&quot;: 1, 
+      			&quot;count&quot;:2,
+			&quot;rarity&quot;: [
+				&quot;Rare&quot;,&quot;Mythic Rare&quot;
+			],
+      			&quot;colors&quot;: [&quot;white&quot;] 
 		}
 		]
 		] 
