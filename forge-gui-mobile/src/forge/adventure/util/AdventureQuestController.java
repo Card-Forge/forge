@@ -351,9 +351,24 @@ public class AdventureQuestController implements Serializable {
             ret.offerDialog = response;
             return ret;
         }
-        //todo - Make use of questOrigin in selecting appropriate quests
+        //todo - Should quest availability be weighted instead of uniform?
         nextQuestDate.put(pointID, LocalDate.now().toEpochDay());
-        ret = new AdventureQuestData(Aggregates.random(allSideQuests));
+
+        Array<AdventureQuestData> validSideQuests = new Array<>();
+        for (AdventureQuestData option : allSideQuests){
+            if (option.questSourceTags.length == 0)
+                validSideQuests.add(option);
+            for (int i = 0; i < option.questSourceTags.length; i++){
+                if (option.questSourceTags[i] != null && option.questSourceTags[i].equals(questOrigin)){
+                    validSideQuests.add(option);
+                    break;
+                }
+            }
+        }
+        if (validSideQuests.size > 0)
+            ret = new AdventureQuestData(Aggregates.random(validSideQuests));
+        else
+            ret = new AdventureQuestData(Aggregates.random(allSideQuests));
         ret.sourceID = pointID;
         ret.initialize();
         return ret;

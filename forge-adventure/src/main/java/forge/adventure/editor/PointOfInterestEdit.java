@@ -90,7 +90,7 @@ public class PointOfInterestEdit extends JComponent {
 
 
 
-        existingModel = QuestController.getInstance().getPOITags(true);
+        existingModel = QuestController.getInstance().getPOITags();
         existingTags.setModel(existingModel);
 
 
@@ -231,7 +231,7 @@ public class PointOfInterestEdit extends JComponent {
 
     private void filterExisting(DefaultListModel<String> filter){
         DefaultListModel<String> toReturn = new DefaultListModel<>();
-        for (Enumeration<String> e = QuestController.getInstance().getPOITags(true).elements(); e.hasMoreElements();){
+        for (Enumeration<String> e = QuestController.getInstance().getPOITags().elements(); e.hasMoreElements();){
             String toTest = e.nextElement();
             if (toTest != null & !filter.contains(toTest)){
                 toReturn.addElement(toTest);

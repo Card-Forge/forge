@@ -31,7 +31,7 @@
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUUALMNRgYLIDYUmOgXTIKsIHr2gwMN7QH2hWooENzoF0wCmgBBLUYGIS0BtoVIxsYAvOWEY78JQ+MGwWk+JEGsmVwxJe4DgODhA5+Nja1hIAvnrxvDXSLDZp7LEbT04gEtEp/17Sxs3GJYVMzCkbBSAF1/AwM9UDcwD/QLsEEi5jx84caKDDAzx8swHKQtt+HSviNglEwUGAwl+ejYBSMAvoBAFbjF4A=
+   eJzt1kEKwjAQBdAPHqDoRkFBl7XJQu3CFr2Cd/EE6s6eQz2TehxnqbaNiKST4n8QSEIWn0ymFCCiXyxjIJORx9pJ/DumQJFqp/jOzQB3o53iVTHVTkA+dBOgl2inKDtb4GK1UzRjLr21qOmvsdRm8lSfocxHNfXqy30NrHtedfaTjaP3V5Jl/ZYnC/A9kX++3t/VVM/r9qrOEP2LXQTsZRwi7SRlp4573TbbmXsdijzQ//e23B+RlpC/50TUnAdcVxqU
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

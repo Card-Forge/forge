@@ -24,6 +24,7 @@ public class QuestController {
     public final DefaultListModel<String> questPOITags = new DefaultListModel<>();
     private final DefaultListModel<PointOfInterestData> allPOI = new DefaultListModel<>();
     private final DefaultListModel<EnemyData> allEnemies = new DefaultListModel<>();
+    private final DefaultListModel<String> questSourceTags = new DefaultListModel<>();
 
     private final DefaultListModel<AdventureQuestData> allQuests = new DefaultListModel<>();
 
@@ -43,19 +44,11 @@ public class QuestController {
         load();
     }
 
-    public DefaultListModel<String> getEnemyTags(boolean includeQuest){
+    public DefaultListModel<String> getEnemyTags(){
         DefaultListModel<String> toReturn = new DefaultListModel<>();
         for (int i = 0; i < enemyTags.size(); i++){
             toReturn.removeElement(enemyTags.get(i));
             toReturn.addElement(enemyTags.get(i));
-        }
-
-        if (includeQuest){
-            for (int i = 0; i < questEnemyTags.size(); i++)
-            {
-                toReturn.removeElement(questEnemyTags.get(i));
-                toReturn.addElement(questEnemyTags.get(i));
-            }
         }
 
         List<Object> sortedObjects = Arrays.stream(toReturn.toArray()).sorted().collect(Collectors.toList());
@@ -69,19 +62,31 @@ public class QuestController {
         return toReturn;
     }
 
-    public DefaultListModel<String> getPOITags(boolean includeQuest){
+    public DefaultListModel<String> getPOITags(){
         DefaultListModel<String> toReturn = new DefaultListModel<>();
         for (int i = 0; i < POITags.size(); i++){
             toReturn.removeElement(POITags.get(i));
             toReturn.addElement(POITags.get(i));
         }
 
-        if (includeQuest){
-            for (int i = 0; i < questEnemyTags.size(); i++)
-            {
-                toReturn.removeElement(questEnemyTags.get(i));
-                toReturn.addElement(questEnemyTags.get(i));
-            }
+        List<Object> sortedObjects = Arrays.stream(toReturn.toArray()).sorted().collect(Collectors.toList());
+
+        toReturn.clear();
+
+        for (Object sortedObject : sortedObjects) {
+            toReturn.addElement((String) sortedObject);
+        }
+
+        return toReturn;
+    }
+
+    public DefaultListModel<String> getSourceTags(){
+        DefaultListModel<String> toReturn = new DefaultListModel<>();
+
+        for (int i = 0; i < questSourceTags.size(); i++)
+        {
+            toReturn.removeElement(questSourceTags.get(i));
+            toReturn.addElement(questSourceTags.get(i));
         }
 
         List<Object> sortedObjects = Arrays.stream(toReturn.toArray()).sorted().collect(Collectors.toList());
@@ -101,6 +106,7 @@ public class QuestController {
         questPOITags.clear();
         questEnemyTags.clear();
         questTags.clear();
+        questSourceTags.clear();
 
         for (int i=0;i<allEnemies.size();i++) {
             for (String tag : allEnemies.get(i).questTags)
@@ -122,12 +128,6 @@ public class QuestController {
 
         for (int i=0;i<allQuests.size();i++) {
 
-            for (String tag : allQuests.get(i).questTags)
-            {
-                questTags.removeElement(tag); //Ensure uniqueness
-                if (tag!= null)
-                    questTags.addElement(tag);
-            }
             for (String tag : allQuests.get(i).questEnemyTags)
             {
                 questEnemyTags.removeElement(tag); //Ensure uniqueness
@@ -140,6 +140,14 @@ public class QuestController {
                 if (tag!= null)
                     questPOITags.addElement(tag);
             }
+
+            for (String tag : allQuests.get(i).questSourceTags)
+            {
+                questSourceTags.removeElement(tag); //Ensure uniqueness
+                if (tag!= null)
+                    questSourceTags.addElement(tag);
+            }
+
         }
     }
 
@@ -195,12 +203,6 @@ public class QuestController {
 
             allQuests.add(i,template);
 
-            for (String tag : template.questTags)
-            {
-                questTags.removeElement(tag); //Ensure uniqueness
-                if (tag!= null)
-                    questTags.addElement(tag);
-            }
             for (String tag : template.questEnemyTags)
             {
                 questEnemyTags.removeElement(tag); //Ensure uniqueness
@@ -212,6 +214,12 @@ public class QuestController {
                 questPOITags.removeElement(tag); //Ensure uniqueness
                 if (tag!= null)
                     questPOITags.addElement(tag);
+            }
+            for (String tag : template.questSourceTags)
+            {
+                questSourceTags.removeElement(tag); //Ensure uniqueness
+                if (tag!= null)
+                    questSourceTags.addElement(tag);
             }
         }
     }

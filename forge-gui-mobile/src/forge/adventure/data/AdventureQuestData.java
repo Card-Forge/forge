@@ -43,7 +43,7 @@ public class AdventureQuestData implements Serializable {
     public String rewardDescription = "";
 
     public AdventureQuestStage[] stages = new AdventureQuestStage[0];
-    public String[] questTags = new String[0];
+    public String[] questSourceTags = new String[0];
     public String[] questEnemyTags = new String[0];
     public String[] questPOITags = new String[0];
     private transient EnemySprite targetEnemySprite = null;
@@ -83,7 +83,7 @@ public class AdventureQuestData implements Serializable {
         for (int i = 0; i < stages.length; i++){
             stages[i] = new AdventureQuestStage(data.stages[i]);
         }
-        questTags = data.questTags.clone();
+        questSourceTags = data.questSourceTags.clone();
         questPOITags = data.questPOITags.clone();
         questEnemyTags = data.questEnemyTags.clone();
         targetPoI = data.targetPoI;
