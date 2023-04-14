@@ -79,7 +79,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     private void clearDecks() {
-        for (int i = 0; i < NUMBER_OF_DECKS; i++) decks[i] = new Deck("Empty Deck");
+        for (int i = 0; i < NUMBER_OF_DECKS; i++) decks[i] = new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck"));
         deck = decks[0];
         selectedDeckIndex = 0;
     }
@@ -348,7 +348,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         for (int i = 0; i < NUMBER_OF_DECKS; i++) {
             if (!data.containsKey("deck_name_" + i)) {
                 if (i == 0) decks[i] = deck;
-                else decks[i] = new Deck("Empty Deck");
+                else decks[i] = new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck"));
                 continue;
             }
             decks[i] = new Deck(data.readString("deck_name_" + i));
