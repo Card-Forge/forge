@@ -1,0 +1,27 @@
+Name:Invasion of Alara
+ManaCost:W U B R G
+Types:Battle Siege
+Defense:7
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, exile cards from the top of your library until you exile two nonland cards with mana value 4 or less. You may cast one of those two cards without paying its mana cost. Put one of them into your hand. Then put the other cards exiled this way on the bottom of your library in a random order.
+SVar:TrigDig:DB$ DigUntil | Defined$ You | Valid$ Card.nonLand+cmcLE4 | Amount$ 2 | FoundDestination$ Exile | RevealedDestination$ Exile | RememberRevealed$ True | ImprintFound$ True | SkipReorder$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Valid$ Card.IsImprinted | ValidSA$ Spell | ValidZone$ Exile | WithoutManaCost$ True | Controller$ You | Optional$ True | Amount$ 1 | SubAbility$ DBPutHand
+SVar:DBPutHand:DB$ ChangeZone | ChangeType$ Card.IsImprinted | Mandatory$ True | Hidden$ True | Chooser$ You | ChangeNum$ 1 | Origin$ Exile | Destination$ Hand | SubAbility$ DBRestRandomOrder
+SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+AlternateMode:DoubleFaced
+Oracle:When Invasion of Alara enters the battlefield, exile cards from the top of your library until you exile two nonland cards with mana value 4 or less. You may cast one of those two cards without paying its mana cost. Put one of them into your hand. Then put the other cards exiled this way on the bottom of your library in a random order.
+
+ALTERNATE
+
+Name:Awaken the Maelstrom
+ManaCost:no cost
+Types:Sorcery
+S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | SetColor$ All | Description$ CARDNAME is all colors.
+A:SP$ Draw | NumCards$ 2 | ValidTgts$ Player | SubAbility$ DBChangeZone | TgtPrompt$ Select target player | SpellDescription$ Target player draws two cards.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | SubAbility$ DBCopy | ChangeType$ Artifact | ChangeNum$ 1 | SpellDescription$ You may put an artifact card from your hand onto the battlefield.
+SVar:DBCopy:DB$ CopyPermanent | Choices$ Permanent.YouCtrl | ChoiceTitle$ Choose a permanent you control to copy | SubAbility$ DBCounter | SpellDescription$ Create a token that's a copy of a permanent you control.
+SVar:DBCounter:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose one, two, or three creatures you control to distribute counters to | CounterType$ P1P1 | CounterNum$ 3 | ChoiceAmount$ 3 | MinChoiceAmount$ 1 | DividedAsYouChoose$ 3 | SubAbility$ DBDestroy | SpellDescription$ Distribute three +1/+1 counters among one, two, or three creatures you control.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Select target permanent an opponent controls to destroy | SpellDescription$ Destroy target permanent an opponent controls.
+DeckHas:Ability$Counters|Token
+DeckHints:Type$Artifact
+Oracle:Awaken the Maelstrom is all colors.\nTarget player draws two cards. You may put an artifact card from your hand onto the battlefield. Create a token that's a copy of a permanent you control. Distribute three +1/+1 counters among one, two, or three creatures you control. Destroy target permanent an opponent controls.
