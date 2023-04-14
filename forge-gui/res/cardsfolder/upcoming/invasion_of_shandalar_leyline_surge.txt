@@ -7,6 +7,7 @@ SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetM
 DeckHas:Ability$Graveyard
 AlternateMode:DoubleFaced
 Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Shandalar enters the battlefield, return up to three target permanent cards from your graveyard to your hand.
+
 ALTERNATE
 
 Name:Leyline Surge
