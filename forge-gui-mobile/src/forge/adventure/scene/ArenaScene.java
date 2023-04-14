@@ -164,7 +164,8 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         Array<ArenaRecord> winners = new Array<>();
         Array<EnemySprite> winnersEnemies = new Array<>();
         for (int i = 0; i < fighters.size - 2; i += 2) {
-            boolean leftWon = rand.nextBoolean();
+            int matchHP = enemies.get(i).getData().life + enemies.get(i+1).getData().life;
+            boolean leftWon = rand.nextInt(matchHP) < enemies.get(i).getData().life;
             if (leftWon) {
                 winners.add(fighters.get(i));
                 winnersEnemies.add(enemies.get(i));

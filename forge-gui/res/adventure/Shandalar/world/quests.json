@@ -215,6 +215,11 @@
 			},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_tribal",
+		"waste_town_identity"
 	]
 },
 {
@@ -697,6 +702,11 @@
 			},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
 	]
 },
 {
@@ -934,6 +944,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"forest_town_generic",
+		"forest_town_identity",
+		"forest_town_tribal",
+		"forest_capital"
 	]
 },
 {
@@ -1181,6 +1197,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"swamp_town_generic",
+		"swamp_town_identity",
+		"swamp_town_tribal",
+		"swamp_capital"
 	]
 },
 {
@@ -1577,6 +1599,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"plains_town_generic",
+		"plains_town_identity",
+		"plains_town_tribal",
+		"plains_capital"
 	]
 },
 {
@@ -1588,9 +1616,6 @@
 		"text": "Stepping out of the cool shade of the local tavern, you find yourself face to face with a Viashino adorned in tribal garb.",
 		"options": [
 			{
-				"action": [
-					null
-				],
 				"name": "\"...Can I help you?\"",
 				"text": "\"Shaman Izka hunts defilers of sacred sands. You will help.\"",
 				"options": [
@@ -1788,6 +1813,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"mountain_town_generic",
+		"mountain_town_identity",
+		"mountain_town_tribal",
+		"mountain_capital"
 	]
 },
 {
@@ -2090,6 +2121,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal",
+		"island_capital"
 	]
 },
 {
@@ -2364,6 +2401,11 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_tribal",
+		"waste_town_identity"
 	]
 },
 {
@@ -2767,6 +2809,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"forest_town_generic",
+		"forest_town_identity",
+		"forest_town_tribal",
+		"forest_capital"
 	]
 },
 {
@@ -3189,6 +3237,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"plains_town_generic",
+		"plains_town_identity",
+		"plains_town_tribal",
+		"plains_capital"
 	]
 },
 {
@@ -3620,6 +3674,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"swamp_town_generic",
+		"swamp_town_identity",
+		"swamp_town_tribal",
+		"swamp_capital"
 	]
 },
 {
@@ -3936,6 +3996,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"mountain_town_generic",
+		"mountain_town_identity",
+		"mountain_town_tribal",
+		"mountain_capital"
 	]
 },
 {
@@ -4165,6 +4231,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal",
+		"island_capital"
 	]
 },
 {
@@ -4398,6 +4470,11 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
 	]
 },
 {
@@ -4662,6 +4739,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"swamp_town_generic",
+		"swamp_town_identity",
+		"swamp_town_tribal",
+		"swamp_capital"
 	]
 },
 {
@@ -4858,6 +4941,12 @@
 			"failureDialog": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal",
+		"island_capital"
 	]
 },
 {
@@ -5112,6 +5201,12 @@
 			"failureDialog": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"forest_capital",
+		"forest_town_generic",
+		"forest_town_identity",
+		"forest_town_tribal"
 	]
 },
 {
@@ -5369,6 +5464,12 @@
 			"failureDialog": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"plains_capital",
+		"plains_town_generic",
+		"plains_town_identity",
+		"plains_town_tribal"
 	]
 },
 {
@@ -5509,6 +5610,11 @@
 			"failureDialog": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
 	]
 },
 {
@@ -5665,6 +5771,12 @@
 			"failureDialog": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"mountain_town_generic",
+		"mountain_town_identity",
+		"mountain_town_tribal",
+		"mountain_capital"
 	]
 }
 ]
