@@ -61,6 +61,24 @@ public class Mana {
             return false;
         }
 
+        if (!sourceCard.equals(m2.sourceCard)) {
+            if (addsKeywords(null) != m2.addsKeywords(null)) {
+                return false;
+            }
+            if (addsCounters(null) != m2.addsCounters(null)) {
+                return false;
+            }
+            if (mp.isCannotCounterPaidWith() != mp2.isCannotCounterPaidWith()) {
+                return false;
+            }
+            if (mp.getTriggersWhenSpent() != mp2.getTriggersWhenSpent()) {
+                return false;
+            }
+            if (mp.isPersistentMana() != mp2.isPersistentMana()) {
+                return false;
+            }
+        }
+
         return mp == mp2 || (mp.getManaRestrictions().equals(mp2.getManaRestrictions()) && mp.getExtraManaRestriction().equals(mp2.getExtraManaRestriction()));
     }
 

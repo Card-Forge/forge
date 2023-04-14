@@ -47,7 +47,7 @@
   <object id="62" template="../obj/gold.tx" x="144.5" y="64.25"/>
   <object id="65" template="../obj/enemy.tx" x="128.25" y="192.75">
    <properties>
-    <property name="enemy" value="Magma Elemental"/>
+    <property name="enemy" value="Magma Fire Elemental"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="70,74,71,69"/>
    </properties>
@@ -79,7 +79,7 @@
   </object>
   <object id="67" template="../obj/enemy.tx" x="251.75" y="65.75">
    <properties>
-    <property name="enemy" value="Magma Elemental"/>
+    <property name="enemy" value="Magma Fire Elemental"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="75,70,69,71,72"/>
    </properties>

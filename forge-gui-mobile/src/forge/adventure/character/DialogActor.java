@@ -44,17 +44,29 @@ public class DialogActor extends CharacterSprite {
             }
         };
         dialog.addQuestAcceptedListener(listen);
+
+        ChangeListener finished = new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                removeFromMap();
+            }
+        };
+        dialog.addDialogCompleteListener(finished);
     }
 
     public void acceptQuest(){
         Current.player().addQuest(questData);
     }
 
+    public void removeFromMap() { dialog = null; }
+
     @Override
     public void onPlayerCollide() {
-        stage.resetPosition();
-        stage.showDialog();
-        dialog.activate();
+        if (dialog != null) {
+            stage.resetPosition();
+            stage.showDialog();
+            dialog.activate();
+        }
     }
 
     @Override

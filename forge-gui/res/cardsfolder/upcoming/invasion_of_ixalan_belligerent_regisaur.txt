@@ -1,0 +1,20 @@
+Name:Invasion of Ixalan
+ManaCost:1 G
+Types:Battle Siege
+Defense:4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top five cards of your library. You may reveal a permanent card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Permanent | ForceRevealToController$ True | RestRandomOrder$ True
+AlternateMode:DoubleFaced
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Ixalan enters the battlefield, look at the top five cards of your library. You may reveal a permanent card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+
+ALTERNATE
+
+Name:Belligerent Regisaur
+ManaCost:no cost
+Colors:green
+Types:Creature Dinosaur
+PT:4/3
+K:Trample
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a spell, CARDNAME gains indestructible until end of turn.
+SVar:TrigPump:DB$ Pump | KW$ Indestructible
+Oracle:Trample\nWhenever you cast a spell, Belligerent Regisaur gains indestructible until end of turn.

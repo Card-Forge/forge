@@ -17,6 +17,7 @@ import forge.adventure.data.EnemyData;
 import forge.adventure.data.WorldData;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
+import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.gui.FThreads;
@@ -116,6 +117,8 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         doneButton.layout();
         startButton.setDisabled(true);
         arenaStarted = false;
+        AdventureQuestController.instance().updateArenaComplete(false);
+        AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
     }
 
     private void startDialog() {
@@ -193,6 +196,8 @@ public class ArenaScene extends UIScene implements IAfterMatch {
             startButton.setDisabled(true);
             doneButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblDone"));
             doneButton.layout();
+            AdventureQuestController.instance().updateArenaComplete(true);
+            AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
         }
         if (!Forge.isLandscapeMode())
             drawArena();//update

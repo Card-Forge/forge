@@ -11,6 +11,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class AdventureQuestStage implements Serializable {
+
+    private static final long serialVersionUID = 12042023L;
+
     public int id;
     private AdventureQuestController.QuestStatus status = AdventureQuestController.QuestStatus.Inactive;
     public String name = "";
@@ -45,7 +48,13 @@ public class AdventureQuestStage implements Serializable {
     public String POIToken; //If defined, ignore tags input and use the target POI from a different stage's objective instead.
     private transient boolean inTargetLocation = false;
 
-    public UUID questStageID = UUID.randomUUID();
+    public UUID stageID;
+
+    public void initialize(){
+        if (stageID == null){
+            stageID = UUID.randomUUID();
+        }
+    }
 
     public void checkPrerequisites() {
         //Todo - implement
@@ -287,7 +296,20 @@ public class AdventureQuestStage implements Serializable {
         return status;
     }
 
-    public AdventureQuestStage(){}
+    public void updateArenaComplete(boolean winner){
+        if (this.objective == AdventureQuestController.ObjectiveTypes.Arena)
+        {
+            if (inTargetLocation){
+                if (winner){
+                    status = AdventureQuestController.QuestStatus.Complete;
+                }
+            }
+        }
+    }
+
+    public AdventureQuestStage(){
+
+    }
     public AdventureQuestStage(AdventureQuestStage other){
         this.status = other.status;
         this.prologueDisplayed = other.prologueDisplayed;
@@ -320,6 +342,7 @@ public class AdventureQuestStage implements Serializable {
         this.POITags = other.POITags;
         this.targetEnemyData = other.targetEnemyData;
         this.deliveryItem = other.deliveryItem;
-        this.questStageID = other.questStageID;
+//        if (this.stageID == null)
+//            this.stageID = other.stageID;
     }
 }
