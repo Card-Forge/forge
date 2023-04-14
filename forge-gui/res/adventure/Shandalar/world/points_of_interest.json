@@ -1204,6 +1204,12 @@
 	"spriteAtlas": "maps/tileset/Phyrexian_Buildings.atlas",
 	"sprite": "DrossOutpost",
 	"map": "maps/map/phyrexian_black1.tmx"
+	"questTags": [
+		"Hostile",
+		"Phyrexian",
+		"Dungeon",
+		"Sidequest"
+	]
 },
 {
 	"name": "ElfTown",
@@ -1585,6 +1591,21 @@
 		"Hostile",
 		"Dungeon",
 		"Fort",
+		"Sidequest"
+	]
+},
+{
+	"name": "FurnaceBase",
+	"type": "dungeon",
+	"count": 2,
+	"radiusFactor": 0.8,
+	"spriteAtlas": "maps/tileset/Phyrexian_Buildings.atlas",
+	"sprite": "FurnaceBase",
+	"map": "maps/map/phyrexian_r1.tmx",
+	"questTags": [
+		"Hostile",
+		"Phyrexian",
+		"Dungeon",
 		"Sidequest"
 	]
 },
