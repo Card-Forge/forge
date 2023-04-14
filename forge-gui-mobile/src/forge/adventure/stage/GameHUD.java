@@ -154,12 +154,14 @@ public class GameHUD extends Stage {
     }
 
     private void openMap() {
+        if (console.isVisible())
+            return;
         Forge.switchScene(MapViewScene.instance());
     }
 
     private void logbook() {
         if (console.isVisible())
-            console.toggle();
+            return;
         Forge.switchScene(QuestLogScene.instance(Forge.getCurrentScene()));
     }
 
@@ -227,6 +229,7 @@ public class GameHUD extends Stage {
                     && !(Controls.actorContainsVector(logbookActor, touch)) //not inside stats button
                     && !(Controls.actorContainsVector(inventoryActor, touch)) //not inside inventory button
                     && !(Controls.actorContainsVector(exitToWorldMapActor, touch)) //not inside exit button
+                    && !(Controls.actorContainsVector(abilityButtonMap, touch)) //not inside abilityButtonMap
                     && (Controls.actorContainsVector(ui, touch)) //inside display bounds
                     && pointer < 1) { //not more than 1 pointer
                 touchpad.setBounds(touch.x - TOUCHPAD_SCALE / 2, touch.y - TOUCHPAD_SCALE / 2, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
@@ -349,14 +352,16 @@ public class GameHUD extends Stage {
             button.getColor().a = opacity;
             button.setSize(w, h);
             button.setPosition(x, y);
-            y += h + 10f;
+            y += h + 15f;
             addActor(button);
         }
     }
 
     void setAbilityButton(ItemData data) {
         if (data != null) {
-            TextraButton button = Controls.newTextButton("[%120][+" + data.iconName + "][+Shards]" + data.shardsNeeded, () -> {
+            TextraButton button = Controls.newTextButton("[%90][+" + data.iconName + "][+Shards][BLACK]" + data.shardsNeeded, () -> {
+                if (console.isVisible())
+                    return;
                 boolean isInPoi = MapStage.getInstance().isInMap();
                 if (!(isInPoi && data.usableInPoi || !isInPoi && data.usableOnWorldMap))
                     return;
@@ -365,6 +370,7 @@ public class GameHUD extends Stage {
                 Current.player().addShards(-data.shardsNeeded);
                 ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
             });
+            button.setStyle(Controls.getSkin().get("menu", TextButton.TextButtonStyle.class));
             abilityButtonMap.add(button);
         }
     }
@@ -473,20 +479,20 @@ public class GameHUD extends Stage {
 
     private void openDeck() {
         if (console.isVisible())
-            console.toggle();
+            return;
         Forge.switchScene(DeckSelectScene.instance());
     }
 
     private void openInventory() {
         if (console.isVisible())
-            console.toggle();
+            return;
         WorldSave.getCurrentSave().header.createPreview();
         Forge.switchScene(InventoryScene.instance());
     }
 
     private void exitToWorldMap() {
         if (console.isVisible())
-            console.toggle();
+            return;
         if (!GameScene.instance().isNotInWorldMap()) //prevent showing this dialog to WorldMap
             return;
         dialog.getButtonTable().clear();
@@ -514,7 +520,7 @@ public class GameHUD extends Stage {
 
     private void menu() {
         if (console.isVisible())
-            console.toggle();
+            return;
         gameStage.openMenu();
     }
 
@@ -523,9 +529,11 @@ public class GameHUD extends Stage {
             actor.setVisible(visible);
     }
 
-    private void setDisabled(Actor actor, boolean enable) {
-        if (actor != null && actor instanceof Button)
-            ((Button) actor).setDisabled(enable);
+    private void setDisabled(Actor actor, boolean enable, String enabled, String disabled) {
+        if (actor instanceof TextraButton) {
+            ((TextraButton) actor).setDisabled(enable);
+            ((TextraButton) actor).setText(((TextraButton) actor).isDisabled() ? disabled : enabled);
+        }
     }
 
     private void setAlpha(Actor actor, boolean visible) {
@@ -547,7 +555,7 @@ public class GameHUD extends Stage {
         setVisibility(shards, visible);
         setVisibility(money, visible);
         setVisibility(blank, visible);
-        setDisabled(exitToWorldMapActor, !GameScene.instance().isNotInWorldMap());
+        setDisabled(exitToWorldMapActor, !GameScene.instance().isNotInWorldMap(), "[%120][+ExitToWorldMap]", "---");
         setAlpha(avatarborder, visible);
         setAlpha(avatar, visible);
         setAlpha(deckActor, visible);
@@ -641,7 +649,7 @@ public class GameHUD extends Stage {
             public boolean act(float v) {
                 if (exitDungeon) {
                     MapStage.getInstance().exitDungeon();
-                    setDisabled(exitToWorldMapActor, true);
+                    setDisabled(exitToWorldMapActor, true, "[%120][+ExitToWorldMap]", "---");
                 }
                 return true;
             }
