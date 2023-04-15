@@ -61,9 +61,9 @@ public class RewardScene extends UIScene {
         playerGold = Controls.newAccountingLabel(ui.findActor("playerGold"), false);
         playerShards = Controls.newAccountingLabel(ui.findActor("playerShards"),true);
         shopNameLabel = ui.findActor("shopName");
-        ui.onButtonPress("done", () -> RewardScene.this.done());
-        ui.onButtonPress("detail",()->RewardScene.this.toggleToolTip());
-        ui.onButtonPress("restock",()-> RewardScene.this.restockShop());
+        ui.onButtonPress("done", this::done);
+        ui.onButtonPress("detail", this::toggleToolTip);
+        ui.onButtonPress("restock", this::restockShop);
         detailButton = ui.findActor("detail");
         detailButton.setVisible(false);
         doneButton = ui.findActor("done");
@@ -143,18 +143,18 @@ public class RewardScene extends UIScene {
     boolean done(boolean skipShowLoot) {
         GameHUD.getInstance().getTouchpad().setVisible(false);
         if (!skipShowLoot) {
-            doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
+            doneButton.setText("[+Exit]");
             showLootOrDone();
             return true;
         }
 		if (type != null) {
 			switch (type) {
 				case Shop:
-					doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
+					doneButton.setText("[+Exit]");
 					break;
 				case QuestReward:
 				case Loot:
-					doneButton.setText(Forge.getLocalizer().getMessage("lblDone"));
+					doneButton.setText("[+Exit]");
 					break;
 			}
         }
@@ -198,6 +198,7 @@ public class RewardScene extends UIScene {
 
     @Override
     public void enter() {
+        doneButton.setText("[+Exit]");
         updateDetailButton();
         super.enter();
     }
@@ -244,7 +245,7 @@ public class RewardScene extends UIScene {
         if (!shopActor.canRestock())
             return;
         int price = shopActor.getRestockPrice();
-        restockButton.setText("Refresh\n " + price + "[+shards]");
+        restockButton.setText("[+Refresh][+shards]" + price);
         restockButton.setDisabled(WorldSave.getCurrentSave().getPlayer().getShards() < price);
     }
 
@@ -332,7 +333,7 @@ public class RewardScene extends UIScene {
 
         switch (type) {
             case Shop:
-                doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
+                doneButton.setText("[+Exit]");
                 String shopName = shopActor.getDescription();
                 if ((shopName != null && !shopName.isEmpty())) {
                     shopNameLabel.setVisible(true);
@@ -352,7 +353,7 @@ public class RewardScene extends UIScene {
                 shopNameLabel.setVisible(false);
                 shopNameLabel.setText("");
                 restockButton.setVisible(false);
-                doneButton.setText(Forge.getLocalizer().getMessage("lblDone"));
+                doneButton.setText("[+Exit]");
                 break;
         }
         for (int h = 1; h < targetHeight; h++) {

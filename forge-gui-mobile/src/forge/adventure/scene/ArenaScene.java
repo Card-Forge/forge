@@ -87,7 +87,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
             else
                 showAreYouSure();
         });
-        ui.onButtonPress("start", () -> startButton());
+        ui.onButtonPress("start", this::startButton);
         doneButton = ui.findActor("done");
         ScrollPane pane = ui.findActor("arena");
         arenaPlane = new Table();
@@ -113,7 +113,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     }
 
     private void loose() {
-        doneButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblLeave"));
+        doneButton.setText("[%80][+Exit]");
         doneButton.layout();
         startButton.setDisabled(true);
         arenaStarted = false;
@@ -149,9 +149,9 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         enable = false;
         goldLabel.setVisible(false);
         arenaStarted = true;
-        startButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblContinue"));
+        startButton.setText("[%80][+OK]");
         startButton.layout();
-        doneButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblConcede"));
+        doneButton.setText("[%80][+Exit]");
         doneButton.layout();
         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
         Current.player().takeGold(arenaData.entryFee);
@@ -195,7 +195,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         if (roundsWon >= arenaData.rounds) {
             arenaStarted = false;
             startButton.setDisabled(true);
-            doneButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblDone"));
+            doneButton.setText("[%80][+Exit]");
             doneButton.layout();
             AdventureQuestController.instance().updateArenaComplete(true);
             AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
@@ -283,9 +283,9 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     Actor player;
 
     public void loadArenaData(ArenaData data, long seed) {
-        startButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblStart"));
+        startButton.setText("[%80][+OK]");
         startButton.layout();
-        doneButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblDone"));
+        doneButton.setText("[%80][+Exit]");
         doneButton.layout();
         arenaData = data;
         //rand.setSeed(seed); allow to reshuffle arena enemies for now
