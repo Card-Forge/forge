@@ -250,7 +250,11 @@ public class CardDamageHistory {
         damagedThisGame.add(target);
         hasdealtDamagetoAny = true;
         if (isCombat && target instanceof Player) {
-            damagedThisCombat.add((Player) target);
+            final Player pTgt = (Player) target;
+            damagedThisCombat.add(pTgt);
+            if (pTgt.getLastTurnNr() > 0 && !pTgt.getGame().getPhaseHandler().isPlayerTurn(pTgt)) {
+                pTgt.setBeenDealtCombatDamageSinceLastTurn(true);
+            }
         }
         Pair<Integer, Boolean> dmg = Pair.of(damage, isCombat);
         damageDoneThisTurn.add(dmg);

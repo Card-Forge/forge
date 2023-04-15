@@ -3542,6 +3542,10 @@ public class AbilityUtils {
             return doXMath(amount, m, source, ctb);
         }
 
+        if (value.equals("BeenDealtCombatDamageSinceLastTurn")) {
+            return doXMath(player.hasBeenDealtCombatDamageSinceLastTurn() ? 1 : 0, m, source, ctb);
+        }
+
         if (value.equals("DungeonsCompleted")) {
             return doXMath(player.getCompletedDungeons().size(), m, source, ctb);
         }
