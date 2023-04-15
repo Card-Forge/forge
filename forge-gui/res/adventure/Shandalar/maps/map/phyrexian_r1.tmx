@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="29" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="89">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="29" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="91">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -52,14 +52,14 @@
   <object id="78" template="../obj/enemy.tx" x="136.333" y="219.333">
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
-    <property name="threatRange" value="0"/>
+    <property name="threatRange" value="30"/>
     <property name="waypoints" value="75,76,74,62"/>
    </properties>
   </object>
   <object id="79" template="../obj/enemy.tx" x="277.667" y="200">
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
-    <property name="threatRange" value="0"/>
+    <property name="threatRange" value="30"/>
     <property name="waypoints" value="76,74,62,75"/>
    </properties>
   </object>
@@ -67,21 +67,21 @@
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
     <property name="spawn.Easy" type="bool" value="false"/>
-    <property name="threatRange" value="0"/>
+    <property name="threatRange" value="30"/>
     <property name="waypoints" value="74,62,75,76"/>
    </properties>
   </object>
   <object id="81" template="../obj/enemy.tx" x="296" y="629.667">
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
-    <property name="threatRange" value="0"/>
+    <property name="threatRange" value="30"/>
     <property name="waypoints" value="74,62,75,76"/>
    </properties>
   </object>
   <object id="82" template="../obj/enemy.tx" x="154" y="648">
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
-    <property name="threatRange" value="0"/>
+    <property name="threatRange" value="30"/>
     <property name="waypoints" value="62,75,76,74"/>
    </properties>
   </object>
@@ -89,7 +89,7 @@
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
     <property name="spawn.Easy" type="bool" value="false"/>
-    <property name="threatRange" value="0"/>
+    <property name="threatRange" value="30"/>
     <property name="waypoints" value="75,76,74,62"/>
    </properties>
   </object>
@@ -128,7 +128,7 @@
     <property name="enemy" value="Furnace Goblin"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="false"/>
-    <property name="threatRange" value="0"/>
+    <property name="threatRange" value="30"/>
     <property name="waypoints" value="75,76,74,62"/>
    </properties>
   </object>
@@ -137,10 +137,12 @@
     <property name="enemy" value="Furnace Goblin"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="false"/>
-    <property name="threatRange" value="0"/>
+    <property name="threatRange" value="30"/>
     <property name="waypoints" value="74,62,75,76"/>
    </properties>
   </object>
+  <object id="89" template="../obj/gold.tx" x="102.5" y="591.75"/>
+  <object id="90" template="../obj/gold.tx" x="332.333" y="314.333"/>
  </objectgroup>
  <objectgroup id="7" name="Waypoints">
   <object id="62" template="../obj/waypoint.tx" x="136.061" y="647.864"/>

@@ -3,7 +3,7 @@
   "template":
   {
    "count":60,
-   "colors":["Red, Green"],
+   "colors":["Red", "Green"],
    "tribe":"Phyrexian",        
    "tribeCards":1.0,
    "tribeSynergyCards":0.35,
