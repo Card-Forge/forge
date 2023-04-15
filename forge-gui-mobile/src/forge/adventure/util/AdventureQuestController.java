@@ -58,6 +58,7 @@ public class AdventureQuestController implements Serializable {
     private Map<String,Date> questAvailability = new HashMap<>();
     public PointOfInterest mostRecentPOI;
     private List<EnemySprite> enemySpriteList= new ArrayList<>();
+    private int nextQuestID = 0;
     public void showQuestDialogs(GameStage stage) {
         List<AdventureQuestData> finishedQuests = new ArrayList<>();
 
@@ -201,6 +202,17 @@ public class AdventureQuestController implements Serializable {
             if (q.storyQuest) continue;
             allSideQuests.add(q);
         }
+    }
+
+    public int getNextQuestID(){
+        if (nextQuestID == 0 && allQuests.size > 0) {
+            for (int i = 0; i < allQuests.size; i++) {
+                if (allQuests.get(i).getID() >= nextQuestID){
+                    nextQuestID = allQuests.get(i).getID() + 1;
+                }
+            }
+        }
+        return nextQuestID++;
     }
 
     public void updateEnteredPOI(PointOfInterest arrivedAt)

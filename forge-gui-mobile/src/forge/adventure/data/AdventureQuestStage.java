@@ -303,6 +303,9 @@ public class AdventureQuestStage implements Serializable {
                 if (winner){
                     status = AdventureQuestController.QuestStatus.Complete;
                 }
+                else {
+                    status = AdventureQuestController.QuestStatus.Failed;
+                }
             }
         }
     }
