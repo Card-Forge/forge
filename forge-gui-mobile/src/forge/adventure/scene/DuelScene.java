@@ -247,7 +247,7 @@ public class DuelScene extends ForgeScene {
         //Collect and add items effects first.
         for (String playerItem : advPlayer.getEquippedItems()) {
             ItemData item = ItemData.getItem(playerItem);
-            if (item != null) {
+            if (item != null && item.effect != null) {
                 playerEffects.add(item.effect);
                 if (item.effect.opponent != null) oppEffects.add(item.effect.opponent);
             } else {
