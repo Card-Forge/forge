@@ -304,7 +304,7 @@ public class AdventureQuestController implements Serializable {
     public void rematchQuestSprite(EnemySprite sprite){
         for (AdventureQuestData q : Current.player().getQuests()){
             for (AdventureQuestStage s : q.stages){
-                if (sprite.questStageID != null && sprite.questStageID.equals(s.stageID.toString())){
+                if (sprite.questStageID != null && s.stageID != null && sprite.questStageID.equals(s.stageID.toString())) {
                     s.setTargetSprite(sprite);
                 }
             }
