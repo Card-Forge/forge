@@ -10,11 +10,10 @@ import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DialogTree extends JPanel {
-
-//    private DefaultMutableTreeNode rootNode;
     private JTree dialogTree;
     private JScrollPane scrollPane;
 
@@ -91,7 +90,8 @@ public class DialogTree extends JPanel {
         DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) dialogTree.getLastSelectedPathComponent();
 
         DialogData parentData = (DialogData) ((DefaultMutableTreeNode)selectedNode.getParent()).getUserObject();
-        ((DefaultTreeModel) dialogTree.getModel()).removeNodeFromParent(selectedNode);
+        parentData.options = Arrays.stream(parentData.options).filter(q -> q != selectedNode.getUserObject()).toArray(DialogData[]::new);
+       ((DefaultTreeModel) dialogTree.getModel()).removeNodeFromParent(selectedNode);
         ((DefaultTreeModel) dialogTree.getModel()).reload();
 
         setSelectedData(parentData);

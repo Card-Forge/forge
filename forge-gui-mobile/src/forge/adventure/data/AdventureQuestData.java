@@ -19,8 +19,9 @@ public class AdventureQuestData implements Serializable {
     private int id;
 
     public int getID(){
-        if (isTemplate && id < 1)
-            id = Current.world().getNextQuestId();
+        if (isTemplate && id < 1) {
+            id = AdventureQuestController.instance().getNextQuestID();
+        }
         return id;
     }
     public boolean isTemplate = false;
