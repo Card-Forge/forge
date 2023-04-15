@@ -7,7 +7,7 @@ SVar:TrigReveal:DB$ Reveal | RevealValid$ Card.Dragon+YouOwn | AnyNumber$ True |
 SVar:DBImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigDamageBis | RememberObjects$ Remembered | TriggerDescription$ When you do, CARDNAME deals X plus 2 damage to any other target, where X is the number of cards revealed this way. (X can be 0.)
 SVar:TrigDamageBis:DB$ DealDamage | ValidTgts$ Creature.Other,Player,Planeswalker.Other,Battle.Other | SubAbility$ DBCleanup | TgtPrompt$ Select any other target | NumDmg$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount/Plus.2
+SVar:X:TriggerRemembered$Amount/Plus.2
 DeckHints:Type$Dragon
 AlternateMode:DoubleFaced
 Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Tarkir enters the battlefield, reveal any number of Dragon cards from your hand. When you do, Invasion of Tarkir deals X plus 2 damage to any other target, where X is the number of cards revealed this way. (X can be 0.)
