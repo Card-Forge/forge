@@ -3,16 +3,21 @@ package forge.adventure.util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.RewardData;
@@ -133,9 +138,15 @@ public class MapDialog {
         setEffects(dialog.action);
         Dialog D = stage.getDialog();
         Localizer L = Forge.getLocalizer();
+        D.getTitleTable().clear();
         D.getContentTable().clear();
         D.getButtonTable().clear(); //Clear tables to start fresh.
         D.clearListeners();
+        Sprite sprite = null;
+
+        Actor actor = stage.getByID(parentID);
+        if (actor instanceof CharacterSprite)
+            sprite = ((CharacterSprite) actor).getAvatar();
         String text; //Check for localized string (locname), otherwise print text.
         if (dialog.loctext != null && !dialog.loctext.isEmpty()) text = L.getMessage(dialog.loctext);
         else text = dialog.text;
@@ -175,7 +186,24 @@ public class MapDialog {
                 }
             }
         });
-        D.getContentTable().add(A).width(WIDTH); //Add() returns a Cell, which is what the width is being applied to.
+        float width;
+        if (sprite != null) {
+            if (actor instanceof EnemySprite) {
+                String name = ((EnemySprite) actor).nameOverride;
+                if (name.isEmpty())
+                    name = ((EnemySprite) actor).getData().name;
+                TextraLabel label = Controls.newTextraLabel("[%?black outline][ORANGE]" + name);
+                D.getTitleTable().add(label).left().expand();
+            }
+            D.getContentTable().add(new Image(sprite)).width(30).height(30).top();
+            width = WIDTH - 30;
+        } else {
+            //D.getContentTable().add(Controls.newTextraLabel("[%200][+Agent]")).width(30).height(30).top();
+            /*TextraLabel label = Controls.newTextraLabel("[%?black outline][WHITE] ???");
+            D.getTitleTable().add(label).left().expand();*/
+            width = WIDTH;
+        }
+        D.getContentTable().add(A).width(width); //Add() returns a Cell, which is what the width is being applied to.
         if (dialog.options != null) {
             int i = 0;
             for (DialogData option : dialog.options) {
