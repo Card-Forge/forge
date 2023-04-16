@@ -50,8 +50,8 @@ public class AdventureQuestStage implements Serializable {
 
     public UUID stageID;
 
-    public void initialize(){
-        if (stageID == null){
+    public void initialize() {
+        if (stageID == null) {
             stageID = UUID.randomUUID();
         }
     }
@@ -60,12 +60,12 @@ public class AdventureQuestStage implements Serializable {
         //Todo - implement
     }
 
-    public AdventureQuestController.QuestStatus getStatus(){
+    public AdventureQuestController.QuestStatus getStatus() {
         return status;
     }
 
-    public void setStatus(AdventureQuestController.QuestStatus newStatus){
-        if (!status.equals(newStatus) && newStatus.equals(AdventureQuestController.QuestStatus.Active)){
+    public void setStatus(AdventureQuestController.QuestStatus newStatus) {
+        if (!status.equals(newStatus) && newStatus.equals(AdventureQuestController.QuestStatus.Active)) {
             AdventureQuestController.instance().addQuestSprites(this);
         }
         status = newStatus;
@@ -80,30 +80,26 @@ public class AdventureQuestStage implements Serializable {
             targetPOI = target;
     }
 
-    public void setTargetPOI(Dictionary<String, PointOfInterest> poiTokens){
-
-        if (POIToken != null && POIToken.length() > 0){
+    public void setTargetPOI(Dictionary<String, PointOfInterest> poiTokens) {
+        if (POIToken != null && POIToken.length() > 0) {
             PointOfInterest tokenTarget = poiTokens.get(POIToken);
-            if (tokenTarget != null){
+            if (tokenTarget != null) {
                 setTargetPOI(tokenTarget);
                 return;
-            }
-            else{
-                System.out.println("Quest Stage '" + this.name+ "' failed to generate POI from token reference: '" + POIToken +"'");
+            } else {
+                System.out.println("Quest Stage '" + this.name + "' failed to generate POI from token reference: '" + POIToken + "'");
             }
         }
-        if (here){
+        if (here) {
             setTargetPOI(AdventureQuestController.instance().mostRecentPOI);
             return;
         }
         if (!anyPOI) {
             List<PointOfInterest> candidates = Current.world().getAllPointOfInterest();
-            for (String tag : POITags)
-            {
+            for (String tag : POITags) {
                 candidates.removeIf(q -> Arrays.stream(q.getData().questTags).noneMatch(tag::equals));
             }
-            if (candidates.size() < 1)
-            {
+            if (candidates.size() < 1) {
                 //no POI matched, fall back to anyPOI valid for the objective that doesn't match all tags
                 candidates = Current.world().getAllPointOfInterest();
                 if (objective == AdventureQuestController.ObjectiveTypes.Clear)
@@ -112,16 +108,15 @@ public class AdventureQuestStage implements Serializable {
                     candidates.removeIf(q -> Arrays.asList(q.getData().questTags).contains("Hostile"));
                 return;
             }
-            count1 = (count1* candidates.size()/ 100);
-            count2 = (count2* candidates.size()) /100;
-            int targetIndex = Math.max(0,(int) (count1 - count2 + (new Random().nextFloat() * count2 * 2)));
+            count1 = (count1 * candidates.size() / 100);
+            count2 = (count2 * candidates.size()) / 100;
+            int targetIndex = Math.max(0, (int) (count1 - count2 + (new Random().nextFloat() * count2 * 2)));
 
             if (targetIndex < candidates.size() && targetIndex > 0 && count1 > 0) {
                 candidates.sort(new AdventureQuestController.DistanceSort());
                 setTargetPOI(candidates.get(targetIndex));
-            }
-            else{
-                if (count1 !=0 || count2 != 0) {
+            } else {
+                if (count1 != 0 || count2 != 0) {
                     System.out.println("Quest Stage '" + this.name + "' has invalid count1 ('" + count1 + "') and/or count2 ('" + count2 + "') value");
                 }
                 setTargetPOI(Aggregates.random(candidates));
@@ -133,11 +128,13 @@ public class AdventureQuestStage implements Serializable {
     public EnemySprite getTargetSprite() {
         return targetSprite;
     }
+
     public void setTargetEnemyData(EnemyData target) {
         targetEnemyData = target;
     }
+
     public EnemyData getTargetEnemyData() {
-        if (targetEnemyData == null & targetSprite!=null)
+        if (targetEnemyData == null & targetSprite != null)
             return targetSprite.getData();
         return targetEnemyData;
     }
@@ -147,13 +144,11 @@ public class AdventureQuestStage implements Serializable {
     }
 
     public AdventureQuestController.QuestStatus updateEnterPOI(PointOfInterest entered) {
-        if (getStatus() == AdventureQuestController.QuestStatus.Complete){
+        if (getStatus() == AdventureQuestController.QuestStatus.Complete) {
             return status;
-        }
-        else if (getStatus() == AdventureQuestController.QuestStatus.Failed){
+        } else if (getStatus() == AdventureQuestController.QuestStatus.Failed) {
             return status;
-        }
-        else{
+        } else {
             checkIfInTargetLocation(entered);
             if (inTargetLocation &&
                     (this.objective == AdventureQuestController.ObjectiveTypes.Delivery ||
@@ -164,14 +159,12 @@ public class AdventureQuestStage implements Serializable {
         return status;
     }
 
-    public AdventureQuestController.QuestStatus updateMapFlag(String mapFlag, int mapFlagValue){
-        if (getStatus() == AdventureQuestController.QuestStatus.Complete){
+    public AdventureQuestController.QuestStatus updateMapFlag(String mapFlag, int mapFlagValue) {
+        if (getStatus() == AdventureQuestController.QuestStatus.Complete) {
             return status;
-        }
-        else if (getStatus() == AdventureQuestController.QuestStatus.Failed){
+        } else if (getStatus() == AdventureQuestController.QuestStatus.Failed) {
             return status;
-        }
-        else {
+        } else {
             if (this.objective == AdventureQuestController.ObjectiveTypes.MapFlag) {
                 if (mapFlag.equals(this.mapFlag) && mapFlagValue >= this.mapFlagValue)
                     status = AdventureQuestController.QuestStatus.Complete;
@@ -179,38 +172,36 @@ public class AdventureQuestStage implements Serializable {
             return status;
         }
     }
-    public AdventureQuestController.QuestStatus updateLeave(){
-        if (status == AdventureQuestController.QuestStatus.Complete){
+
+    public AdventureQuestController.QuestStatus updateLeave() {
+        if (status == AdventureQuestController.QuestStatus.Complete) {
             return status;
         }
-        if (status == AdventureQuestController.QuestStatus.Failed){
+        if (status == AdventureQuestController.QuestStatus.Failed) {
             return status;
         }
         inTargetLocation = false; //todo: handle case when called between multi-map PoIs (if necessary)
-        if (this.objective == AdventureQuestController.ObjectiveTypes.Leave){
+        if (this.objective == AdventureQuestController.ObjectiveTypes.Leave) {
             status = AdventureQuestController.QuestStatus.Complete;
         }
         return status;
     }
 
-    public AdventureQuestController.QuestStatus updateWin(EnemySprite defeated, boolean mapCleared){
+    public AdventureQuestController.QuestStatus updateWin(EnemySprite defeated, boolean mapCleared) {
         //todo - Does this need to also be called for alternate mob removal types?
-        if (status == AdventureQuestController.QuestStatus.Complete){
+        if (status == AdventureQuestController.QuestStatus.Complete) {
             return status;
         }
-        if (status == AdventureQuestController.QuestStatus.Failed){
+        if (status == AdventureQuestController.QuestStatus.Failed) {
             return status;
         }
-        if (this.objective == AdventureQuestController.ObjectiveTypes.Clear)
-        {
-            if (mapCleared && inTargetLocation)
-            {
+        if (this.objective == AdventureQuestController.ObjectiveTypes.Clear) {
+            if (mapCleared && inTargetLocation) {
                 status = AdventureQuestController.QuestStatus.Complete;
             }
-        }
-        else if (this.objective == AdventureQuestController.ObjectiveTypes.Defeat) {
+        } else if (this.objective == AdventureQuestController.ObjectiveTypes.Defeat) {
             {
-                if (mixedEnemies){
+                if (mixedEnemies) {
                     List<String> defeatedTags = Arrays.stream(defeated.getData().questTags).collect(Collectors.toList());
                     for (String targetTag : enemyTags) {
                         if (!defeatedTags.contains(targetTag)) {
@@ -218,50 +209,45 @@ public class AdventureQuestStage implements Serializable {
                             return status;
                         }
                     }
-                }
-                else{
-                    if (defeated.getData()!=targetEnemyData)
+                } else {
+                    if (defeated.getData() != targetEnemyData)
                         //Does not count
                         return status;
                 }
                 //All tags matched, kill confirmed
-                if (++progress1 >= count1){
+                if (++progress1 >= count1) {
                     status = AdventureQuestController.QuestStatus.Complete;
                 }
             }
-        }
-        else if (this.objective == AdventureQuestController.ObjectiveTypes.Hunt)
-        {
-            if (defeated.equals(targetSprite)){
+        } else if (this.objective == AdventureQuestController.ObjectiveTypes.Hunt) {
+            if (defeated.equals(targetSprite)) {
                 status = AdventureQuestController.QuestStatus.Complete;
-                }
+            }
         }
 
         return status;
     }
 
-    public void checkIfInTargetLocation(PointOfInterest entered){
-        if (targetPOI == null){
+    public void checkIfInTargetLocation(PointOfInterest entered) {
+        if (targetPOI == null) {
             List<String> enteredTags = Arrays.stream(entered.getData().questTags).collect(Collectors.toList());
-            for (String tag : POITags){
+            for (String tag : POITags) {
                 if (!enteredTags.contains(tag)) {
                     inTargetLocation = false;
                     return;
                 }
             }
-        }
-        else if (!targetPOI.getPosition().equals(entered.getPosition())){
+        } else if (!targetPOI.getPosition().equals(entered.getPosition())) {
             inTargetLocation = false;
             return;
         }
         inTargetLocation = true;
     }
 
-    public AdventureQuestController.QuestStatus updateLose(EnemySprite defeatedBy){
-
+    public AdventureQuestController.QuestStatus updateLose(EnemySprite defeatedBy) {
         if (status != AdventureQuestController.QuestStatus.Failed && this.objective == AdventureQuestController.ObjectiveTypes.Defeat) {
             {
-                if (mixedEnemies){
+                if (mixedEnemies) {
                     List<String> defeatedByTags = Arrays.stream(defeatedBy.getData().questTags).collect(Collectors.toList());
                     for (String targetTag : enemyTags) {
                         if (!defeatedByTags.contains(targetTag)) {
@@ -269,58 +255,53 @@ public class AdventureQuestStage implements Serializable {
                             return status;
                         }
                     }
-                }
-                else{
-                    if (defeatedBy.getData()!=targetEnemyData)
+                } else {
+                    if (defeatedBy.getData() != targetEnemyData)
                         //Does not count
                         return status;
                 }
                 //All tags matched
                 //progress2: number of times defeated by a matching enemy
                 //count2: if > 0, fail once defeated this many times
-                if (status == AdventureQuestController.QuestStatus.Active && ++progress2 >= count2 && count2 > 0){
+                if (status == AdventureQuestController.QuestStatus.Active && ++progress2 >= count2 && count2 > 0) {
                     status = AdventureQuestController.QuestStatus.Failed;
                 }
 
             }
-        }
-        else if (status == AdventureQuestController.QuestStatus.Active && this.objective == AdventureQuestController.ObjectiveTypes.Hunt)
-        {
-            if (defeatedBy.equals(targetSprite)){
+        } else if (status == AdventureQuestController.QuestStatus.Active && this.objective == AdventureQuestController.ObjectiveTypes.Hunt) {
+            if (defeatedBy.equals(targetSprite)) {
                 status = AdventureQuestController.QuestStatus.Failed;
             }
         }
         return status;
     }
 
-    public AdventureQuestController.QuestStatus updateDespawn(EnemySprite despawned){
-        if (status == AdventureQuestController.QuestStatus.Active && this.objective == AdventureQuestController.ObjectiveTypes.Hunt)
-        {
-            if (despawned.equals(targetSprite)){
+    public AdventureQuestController.QuestStatus updateDespawn(EnemySprite despawned) {
+        if (status == AdventureQuestController.QuestStatus.Active && this.objective == AdventureQuestController.ObjectiveTypes.Hunt) {
+            if (despawned.equals(targetSprite)) {
                 status = AdventureQuestController.QuestStatus.Failed;
             }
         }
         return status;
     }
 
-    public void updateArenaComplete(boolean winner){
-        if (this.objective == AdventureQuestController.ObjectiveTypes.Arena)
-        {
-            if (inTargetLocation){
-                if (winner){
+    public void updateArenaComplete(boolean winner) {
+        if (this.objective == AdventureQuestController.ObjectiveTypes.Arena) {
+            if (inTargetLocation) {
+                if (winner) {
                     status = AdventureQuestController.QuestStatus.Complete;
-                }
-                else {
+                } else {
                     status = AdventureQuestController.QuestStatus.Failed;
                 }
             }
         }
     }
 
-    public AdventureQuestStage(){
+    public AdventureQuestStage() {
 
     }
-    public AdventureQuestStage(AdventureQuestStage other){
+
+    public AdventureQuestStage(AdventureQuestStage other) {
         this.status = other.status;
         this.prologueDisplayed = other.prologueDisplayed;
         this.prologue = new DialogData(other.prologue);
