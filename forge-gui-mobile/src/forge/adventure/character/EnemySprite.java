@@ -95,7 +95,7 @@ public class EnemySprite extends CharacterSprite {
         Vector2 diff = new Vector2(other.getX(), other.getY()).sub(pos());
 
         diff.setLength(data.speed*delta);
-        moveBy(diff.x, diff.y);
+        moveBy(diff.x, diff.y,delta);
     }
 
     public void freezeMovement(){
