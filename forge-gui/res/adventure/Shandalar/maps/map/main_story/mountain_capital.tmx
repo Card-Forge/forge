@@ -26,12 +26,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztzgENADAIA7B5QuSRjQxO0ipoAgDAL14lXdsLAAAAuG8Ag6wBdg==
+   eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
   </data>
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1EsKwjAUheGzgy7BztoUZ92fugsfU91E3YT1AboB3UKnXqiitJMqXGrx/yDkJoRwQkgkAACAz1TjvhN0U6TSNq3rnWUuG7mXNl69ze2DdAiP9daXwSfXOpc2uc/egLdjIp2S1/hq7+Tm9FZ+ydnOeAnd66dRJsVZXc/tv1kM5P/8N9/eL4C2SSRNrc2ivpPAA/cLYGju2YIlhA==
+   eJzt1EsKwjAUheGzgy5BZ22Ks+6vOtMd+JjqJuwmrA/QDegWnHqhiqItVCG0xf+DkJvH4ISQSAAAAN+5DppOUM86krKoqDeWOX/LPbfx4mVu66Sdu++3Pnd+ci0TaZWUr41tflKxBrTBPpQO4XN8tndy8fRW2uRoZzy5+vVDL5b6cVFP7b+ZdeT//De/3i+AT2kgDa2NgqaTwAfuF0DX3ABEPSb5
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

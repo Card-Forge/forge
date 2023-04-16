@@ -210,12 +210,19 @@ public class AdventureQuestStage implements Serializable {
         }
         else if (this.objective == AdventureQuestController.ObjectiveTypes.Defeat) {
             {
-                List<String> defeatedTags = Arrays.stream(defeated.getData().questTags).collect(Collectors.toList());
-                for (String targetTag : enemyTags) {
-                    if (!defeatedTags.contains(targetTag)) {
-                        //Does not count toward objective
-                        return status;
+                if (mixedEnemies){
+                    List<String> defeatedTags = Arrays.stream(defeated.getData().questTags).collect(Collectors.toList());
+                    for (String targetTag : enemyTags) {
+                        if (!defeatedTags.contains(targetTag)) {
+                            //Does not count toward objective
+                            return status;
+                        }
                     }
+                }
+                else{
+                    if (defeated.getData()!=targetEnemyData)
+                        //Does not count
+                        return status;
                 }
                 //All tags matched, kill confirmed
                 if (++progress1 >= count1){
