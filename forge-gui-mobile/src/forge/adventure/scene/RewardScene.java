@@ -143,18 +143,18 @@ public class RewardScene extends UIScene {
     boolean done(boolean skipShowLoot) {
         GameHUD.getInstance().getTouchpad().setVisible(false);
         if (!skipShowLoot) {
-            doneButton.setText("[+Exit]");
+            doneButton.setText("[+OK]");
             showLootOrDone();
             return true;
         }
 		if (type != null) {
 			switch (type) {
 				case Shop:
-					doneButton.setText("[+Exit]");
+					doneButton.setText("[+OK]");
 					break;
 				case QuestReward:
 				case Loot:
-					doneButton.setText("[+Exit]");
+					doneButton.setText("[+OK]");
 					break;
 			}
         }
@@ -198,7 +198,7 @@ public class RewardScene extends UIScene {
 
     @Override
     public void enter() {
-        doneButton.setText("[+Exit]");
+        doneButton.setText("[+OK]");
         updateDetailButton();
         super.enter();
     }
@@ -333,7 +333,7 @@ public class RewardScene extends UIScene {
 
         switch (type) {
             case Shop:
-                doneButton.setText("[+Exit]");
+                doneButton.setText("[+OK]");
                 String shopName = shopActor.getDescription();
                 if ((shopName != null && !shopName.isEmpty())) {
                     shopNameLabel.setVisible(true);
@@ -353,7 +353,7 @@ public class RewardScene extends UIScene {
                 shopNameLabel.setVisible(false);
                 shopNameLabel.setText("");
                 restockButton.setVisible(false);
-                doneButton.setText("[+Exit]");
+                doneButton.setText("[+OK]");
                 break;
         }
         for (int h = 1; h < targetHeight; h++) {
