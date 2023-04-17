@@ -6,6 +6,33 @@ repeat: none
 Avatar
   xy: 0, 0
   size: 16, 16      
+Hidden
+  xy: 16, 0
+  size: 16, 16   
+Wake
+  xy: 0, 96
+  size: 16, 16
+Wake
+  xy: 0, 96
+  size: 16, 16 
+Wake
+  xy: 16, 96
+  size: 16, 16   
+Wake
+  xy: 16, 96
+  size: 16, 16   
+Wake
+  xy: 32, 96
+  size: 16, 16   
+Wake
+  xy: 32, 96
+  size: 16, 16   
+Wake
+  xy: 48, 96
+  size: 16, 16   
+Wake
+  xy: 48, 96
+  size: 16, 16   
 Idle 
   xy: 0, 16
   size: 16, 16      
