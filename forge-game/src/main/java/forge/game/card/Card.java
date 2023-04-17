@@ -596,7 +596,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // and then any effect have it turn upface again and demand its former flip state to be restored
         // Proof: Morph cards never have ability that makes them flip, Ixidron does not suppose cards to be turned face up again,
         // Illusionary Mask affects cards in hand.
-        if (mode.equals("Transform") && (isDoubleFaced() || hasMergedCard())) {
+        if (mode.equals("Transform") && (isTransformable() || hasMergedCard())) {
             if (!canTransform(cause)) {
                 return false;
             }
@@ -608,7 +608,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             CardCollectionView cards = hasMergedCard() ? getMergedCards() : new CardCollection(this);
             boolean retResult = false;
             for (final Card c : cards) {
-                if (!c.isDoubleFaced()) {
+                if (!c.isTransformable()) {
                     continue;
                 }
                 c.backside = !c.backside;
@@ -726,7 +726,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         CardCollectionView cards = hasMergedCard() ? getMergedCards() : new CardCollection(this);
         boolean retResult = false;
         for (final Card c : cards) {
-            if (override || !c.hasBackSide()) {
+            if (override || !c.isDoubleFaced()) {
                 c.facedown = true;
                 if (c.setState(CardStateName.FaceDown, true)) {
                     c.runFacedownCommands();
@@ -810,7 +810,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (hasMergedCard()) {
             boolean hasTransformCard = false;
             for (final Card c : getMergedCards()) {
-                if (c.isDoubleFaced()) {
+                if (c.isTransformable()) {
                     hasTransformCard = true;
                     transformCard = c;
                     break;
@@ -819,7 +819,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (!hasTransformCard) {
                 return false;
             }
-        } else if (!isDoubleFaced()) {
+        } else if (!isTransformable()) {
             return false;
         }
 
@@ -931,7 +931,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return numStates > threshold;
     }
 
-    public final boolean isDoubleFaced() {
+    public final boolean isTransformable() {
         return getRules() != null && getRules().getSplitType() == CardSplitType.Transform;
     }
 
@@ -943,8 +943,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getRules() != null && getRules().getSplitType() == CardSplitType.Modal;
     }
 
-    public final boolean hasBackSide() {
-        return isDoubleFaced() || isMeldable() || isModal();
+    public final boolean isDoubleFaced() {
+        return isTransformable() || isMeldable() || isModal();
     }
 
     public final boolean isFlipCard() {
@@ -2467,7 +2467,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // Check if the saga card does not have the keyword Read ahead
         if (type.hasSubtype("Saga") && !this.hasStartOfKeyword("Read ahead")) {
             sb.append("(").append(Localizer.getInstance().getMessage("lblSagaHeader"));
-            if (!state.getCard().isDoubleFaced()) {
+            if (!state.getCard().isTransformable()) {
                 sb.append(" ").append(Localizer.getInstance().getMessage("lblSagaFooter")).append(" ").append(TextUtil.toRoman(getFinalChapterNr())).append(".");
             }
             sb.append(")").append(linebreak);
@@ -4106,7 +4106,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return CardStateName.Flipped;
         } else if (isSpecialized()) {
             return getCurrentStateName();
-        } else if (backside && hasBackSide()) {
+        } else if (backside && isDoubleFaced()) {
             CardStateName stateName = getRules().getSplitType().getChangedStateName();
             if (hasState(stateName)) {
                 return stateName;
@@ -6667,7 +6667,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (stateName != null && hasState(stateName) && this.getCurrentStateName() != stateName) {
             setState(stateName, true);
             // need to set backSide value according to the SplitType
-            if (hasBackSide()) {
+            if (isDoubleFaced()) {
                 setBackSide(getRules().getSplitType().getChangedStateName().equals(stateName));
             }
         }

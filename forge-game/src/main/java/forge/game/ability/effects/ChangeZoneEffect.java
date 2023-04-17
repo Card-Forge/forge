@@ -592,7 +592,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         gameCard.setTapped(false);
                     }
                     if (sa.hasParam("Transformed")) {
-                        if (gameCard.isDoubleFaced()) {
+                        if (gameCard.isTransformable()) {
                             // need LKI before Animate does apply
                             if (!moveParams.containsKey(AbilityKey.CardLKI)) {
                                 moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(gameCard));
@@ -1320,7 +1320,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         c.addEtbCounter(cType, cAmount, player);
                     }
                     if (sa.hasParam("Transformed")) {
-                        if (c.isDoubleFaced()) {
+                        if (c.isTransformable()) {
                             // need LKI before Animate does apply
                             if (!moveParams.containsKey(AbilityKey.CardLKI)) {
                                 moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));

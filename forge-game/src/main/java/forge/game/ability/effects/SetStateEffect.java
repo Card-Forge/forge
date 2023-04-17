@@ -129,7 +129,7 @@ public class SetStateEffect extends SpellAbilityEffect {
                     && gameCard.hasMergedCard()) {
                 boolean hasBackSide = false;
                 for (final Card c : gameCard.getMergedCards()) {
-                    if (c.hasBackSide()) {
+                    if (c.isDoubleFaced()) {
                         hasBackSide = true;
                         break;
                     }
@@ -200,7 +200,7 @@ public class SetStateEffect extends SpellAbilityEffect {
                 if (remChanged) {
                     host.addRemembered(gameCard);
                 }
-                if (!gameCard.isDoubleFaced())
+                if (!gameCard.isTransformable())
                     transformedCards.add(gameCard);
                 if ("Specialize".equals(mode)) {
                     gameCard.setSpecialized(true);

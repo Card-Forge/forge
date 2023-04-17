@@ -2316,7 +2316,7 @@ public class ComputerUtilCombat {
      * @return transform creature if possible, original creature otherwise
      */
     private final static Card canTransform(Card original) {
-        if (original.isDoubleFaced() && !original.isInAlternateState()) {
+        if (original.isTransformable() && !original.isInAlternateState()) {
             for (SpellAbility sa : original.getSpellAbilities()) {
                 if (sa.getApi() == ApiType.SetState && ComputerUtilCost.canPayCost(sa, original.getController(), false)) {
                     Card transformed = CardUtil.getLKICopy(original);
