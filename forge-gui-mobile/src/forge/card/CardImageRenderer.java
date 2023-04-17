@@ -802,7 +802,7 @@ public class CardImageRenderer {
                 croppedArea = 0.975f;
                 minusxy = 0.135f * radius;
             }
-            if (rotatePlane && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane())) {
+            if (rotatePlane && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane() || (card.getCurrentState().isBattle() && !altState) || (card.getAlternateState() != null && card.getAlternateState().isBattle() && altState))) {
                 if (Forge.enableUIMask.equals("Full")) {
                     if (image.toString().contains(".fullborder."))
                         g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
