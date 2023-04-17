@@ -66,6 +66,8 @@ public class CardZoom extends FOverlay {
     }
 
     public static void show(final List<?> items0, int currentIndex0, ActivateHandler activateHandler0) {
+        if (items == null) { return; }
+        if (currentIndex0 < 0 || items.size() <= currentIndex0) { return; }
         items = items0;
         activateHandler = activateHandler0;
         currentIndex = currentIndex0;

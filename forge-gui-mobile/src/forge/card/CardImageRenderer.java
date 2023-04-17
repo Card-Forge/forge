@@ -150,7 +150,7 @@ public class CardImageRenderer {
         float ptBoxHeight = 0;
         float textBoxHeight = h - headerHeight - artHeight - typeBoxHeight - outerBorderThickness - artInset;
 
-        if (state.isCreature() || state.isPlaneswalker() || state.getType().hasSubtype("Vehicle")) {
+        if (state.isCreature() || state.isPlaneswalker() || state.getType().hasSubtype("Vehicle") || state.isBattle()) {
             ptBoxHeight = 2 * PT_FONT.getCapHeight();
         }
         //space for artist
@@ -721,6 +721,8 @@ public class CardImageRenderer {
             pieces.add("/");
             pieces.add(String.valueOf(state.getToughness()));
             pieces.add("]");
+        } else if (state.isBattle()) {
+          pieces.add(String.valueOf(state.getDefense()));
         } else {
             return;
         }

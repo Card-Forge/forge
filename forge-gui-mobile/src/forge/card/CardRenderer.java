@@ -533,6 +533,8 @@ public class CardRenderer {
             type += " (" + loyalty + ")";
         } else if (card.getCurrentState().getType().hasSubtype("Vehicle")) {
             type += String.format(" [%s / %s]", power, toughness);
+        } else if (card.getCurrentState().isBattle()) {
+            type += " (" + card.getCurrentState().getDefense() + ")";
         }
         g.drawText(type, typeFont, foreColor, x, y, availableTypeWidth, lineHeight, false, Align.left, true);
     }
