@@ -441,3 +441,6 @@ Flip
 LogBook
   xy: 240, 912
   size: 16, 16
+BloodMoon
+  xy: 320, 176
+  size: 16, 16

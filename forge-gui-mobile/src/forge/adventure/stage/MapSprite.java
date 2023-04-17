@@ -42,6 +42,10 @@ public class MapSprite extends Actor {
         isOldorVisited = true;
     }
 
+    public void setIsOldorVisited(boolean value) {
+        isOldorVisited = value;
+    }
+
     public static Array<Actor> getMapSprites(int chunkX, int chunkY, int layer) {
         Array<Actor> actorGroup = new Array<>();
         List<Pair<Vector2, Integer>> objects = WorldSave.getCurrentSave().getWorld().GetMapObjects(chunkX, chunkY);

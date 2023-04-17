@@ -12,6 +12,7 @@ import forge.Forge;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.*;
+import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.DuelScene;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
@@ -430,6 +431,31 @@ public class WorldStage extends GameStage implements SaveFileContent {
             enemy.playEffect(Paths.EFFECT_KILL);
             removeEnemy(enemy);
             player.playEffect(Paths.TRIGGER_KILL);
+        }
+    }
+
+    public void resetNearestCaveOrDungeon(){
+        float shortestDist = Float.MAX_VALUE;
+        PointOfInterest nearestPoi = null;
+        Actor nearestActor = null;
+        for (Actor actor : foregroundSprites.getChildren()) {
+            if (actor.getClass() == PointOfInterestMapSprite.class) {
+                PointOfInterest candidatePoi = ((PointOfInterestMapSprite) actor).pointOfInterest;
+                if ("dungeon".equalsIgnoreCase(candidatePoi.getData().type)
+                        || "cave".equalsIgnoreCase(candidatePoi.getData().type)) {
+                    float dist = candidatePoi.getPosition().cpy().sub(player.pos()).len();
+                    if (dist < shortestDist) {
+                        shortestDist = dist;
+                        nearestPoi = candidatePoi;
+                        nearestActor = actor;
+                    }
+                }
+            }
+        }
+        if (nearestPoi != null) {
+            WorldSave.getCurrentSave().getPointOfInterestChanges(nearestPoi.getID() + nearestPoi.getData().map).clearDeletedObjects();
+            ((MapSprite) nearestActor).setIsOldorVisited(false);
+            player.playEffect(Paths.EFFECT_HEAL);
         }
     }
 

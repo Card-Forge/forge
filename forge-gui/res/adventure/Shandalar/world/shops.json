@@ -659,6 +659,7 @@
 	{ "type": "item","count":1, "itemName": "Farmer's Tools"  },
 	{ "type": "item","count":1, "itemName": "Piper's Charm"  },
 	{ "type": "item","count":1, "itemName": "Sleep Wand"  },
+  { "type": "item","count":1, "itemName": "Blood Moon"  },
 	{ "type": "item","count":1, "itemName": "Hill Giant Club"  },
     { "type": "life","count":1    }
     

@@ -1179,5 +1179,20 @@
         "Slobad's Iron Boots"
       ]
 }
+},
+
+{
+    "name": "Blood Moon",
+    "equipmentSlot": "Ability1",
+    "usableOnWorldMap":true,
+    "effect": {
+      "name": ""
+    },
+    "description": "Returns to life all that perished in the nearest dungeon",
+    "commandOnUse": "reset_nearest_cave_or_dungeon",
+    "iconName": "BloodMoon",
+    "questItem": true,
+    "shardsNeeded": 15,
+    "cost": 1000
 }
 ]

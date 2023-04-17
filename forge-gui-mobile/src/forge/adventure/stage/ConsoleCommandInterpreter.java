@@ -389,5 +389,9 @@ public class ConsoleCommandInterpreter {
             MapStage.getInstance().deleteObject(id);
             return "Removed enemy " + s[0];
         });
+        registerCommand(new String[]{"reset_nearest_cave_or_dungeon"}, s -> {
+            WorldStage.getInstance().resetNearestCaveOrDungeon();
+            return "reset the nearest POI";
+        });
     }
 }
