@@ -524,7 +524,7 @@ public enum FSkinImage implements FImage {
     public void load(Pixmap preferredIcons) {
         String filename = sourceFile.getFilename();
         boolean is2D = sourceFile == SourceFile.ADVENTURE;
-        FileHandle preferredFile = FSkin.getSkinFile(filename);
+        FileHandle preferredFile = sourceFile == SourceFile.MANAICONS ? FSkin.getDefaultSkinFile(filename) : FSkin.getSkinFile(filename);
         Texture texture = Forge.getAssets().getTexture(preferredFile, is2D, false);
         if (texture == null) {
             if (preferredFile.exists()) {
