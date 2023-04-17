@@ -326,6 +326,7 @@ public enum FSkinImage implements FImage {
     PLANESWALKER    (FSkinProp.IMG_PLANESWALKER, SourceFile.MANAICONS),
     PACK            (FSkinProp.IMG_PACK, SourceFile.ICONS),
     SORCERY         (FSkinProp.IMG_SORCERY, SourceFile.MANAICONS),
+    BATTLE          (FSkinProp.IMG_BATTLE, SourceFile.MANAICONS),
     COMMANDER       (FSkinProp.IMG_COMMANDER, SourceFile.ICONS),
 
     //Buttons
