@@ -102,7 +102,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             if (hasParam("ActivatorThisTurnCast")) {
                 final String compare = getParam("ActivatorThisTurnCast");
                 final String valid = getParamOrDefault("ValidCard", "Card");
-                List<Card> thisTurnCast = CardUtil.getThisTurnCast(valid, getHostCard(), this);
+                List<Card> thisTurnCast = CardUtil.getThisTurnCast(valid, getHostCard(), this, getHostCard().getController());
                 thisTurnCast = CardLists.filterControlledByAsList(thisTurnCast, activator);
                 int left = thisTurnCast.size();
                 int right = Integer.parseInt(compare.substring(2));

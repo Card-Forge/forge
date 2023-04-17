@@ -101,9 +101,6 @@ public final class CardUtil {
      * @param src   a Card object
      * @return a CardCollection that matches the given criteria
      */
-    public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb) {
-        return getThisTurnEntered(to, from, valid, src, ctb, src.getController());
-    }
     public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
         List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
@@ -126,7 +123,7 @@ public final class CardUtil {
      * @param src   a Card object
      * @return a CardCollection that matches the given criteria
      */
-    public static List<Card> getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb) {
+    public static List<Card> getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
         List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
         if (to != ZoneType.Stack) {
@@ -136,15 +133,15 @@ public final class CardUtil {
         } else {
             res.addAll(game.getStackZone().getCardsAddedLastTurn(from));
         }
-        return CardLists.getValidCardsAsList(res, valid, src.getController(), src, ctb);
+        return CardLists.getValidCardsAsList(res, valid, controller, src, ctb);
     }
 
-    public static List<Card> getThisTurnCast(final String valid, final Card src, final CardTraitBase ctb) {
-        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, src.getController(), src, ctb);
+    public static List<Card> getThisTurnCast(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, controller, src, ctb);
     }
 
-    public static List<Card> getLastTurnCast(final String valid, final Card src, final CardTraitBase ctb) {
-        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, src.getController(), src, ctb);
+    public static List<Card> getLastTurnCast(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, controller, src, ctb);
     }
 
     public static List<Card> getLKICopyList(final Iterable<Card> in, Map<Integer, Card> cachedMap) {

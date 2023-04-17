@@ -150,7 +150,7 @@ public class CardImageRenderer {
         float ptBoxHeight = 0;
         float textBoxHeight = h - headerHeight - artHeight - typeBoxHeight - outerBorderThickness - artInset;
 
-        if (state.isCreature() || state.isPlaneswalker() || state.getType().hasSubtype("Vehicle")) {
+        if (state.isCreature() || state.isPlaneswalker() || state.getType().hasSubtype("Vehicle") || state.isBattle()) {
             ptBoxHeight = 2 * PT_FONT.getCapHeight();
         }
         //space for artist
@@ -721,6 +721,8 @@ public class CardImageRenderer {
             pieces.add("/");
             pieces.add(String.valueOf(state.getToughness()));
             pieces.add("]");
+        } else if (state.isBattle()) {
+          pieces.add(String.valueOf(state.getDefense()));
         } else {
             return;
         }
@@ -800,7 +802,7 @@ public class CardImageRenderer {
                 croppedArea = 0.975f;
                 minusxy = 0.135f * radius;
             }
-            if (rotatePlane && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane())) {
+            if (rotatePlane && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane() || (card.getCurrentState().isBattle() && !altState) || (card.getAlternateState() != null && card.getAlternateState().isBattle() && altState))) {
                 if (Forge.enableUIMask.equals("Full")) {
                     if (image.toString().contains(".fullborder."))
                         g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);

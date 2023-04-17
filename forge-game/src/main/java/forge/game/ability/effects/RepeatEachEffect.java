@@ -127,7 +127,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             if (def.startsWith("ThisTurnCast")) {
                 final String[] workingCopy = def.split("_");
                 final String validFilter = workingCopy[1];
-                res = CardUtil.getThisTurnCast(validFilter, source, sa);
+                res = CardUtil.getThisTurnCast(validFilter, source, sa, player);
             } else if (def.startsWith("Defined ")) {
                 res = AbilityUtils.getDefinedCards(source, def.substring(8), sa);
             } else {

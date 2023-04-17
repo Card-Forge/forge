@@ -19,7 +19,7 @@ public class NavArrowActor extends Actor {
         if (textureAtlas.isEmpty()) {
             System.out.print("NavArrow sprite not found");
         }
-        currentAnimation = new Animation<>(0.6f, textureAtlas);
+        currentAnimation = new Animation<>(0.4f, textureAtlas);
     }
 
     @Override

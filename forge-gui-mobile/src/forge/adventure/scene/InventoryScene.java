@@ -39,11 +39,11 @@ public class InventoryScene extends UIScene {
     public InventoryScene() {
         super(Forge.isLandscapeMode() ? "ui/inventory.json" : "ui/inventory_portrait.json");
         equipOverlay = Forge.getAssets().getTexture(Config.instance().getFile(Paths.ITEMS_EQUIP));
-        ui.onButtonPress("return", () -> done());
+        ui.onButtonPress("return", this::done);
         leave = ui.findActor("return");
-        ui.onButtonPress("delete", () -> showConfirm());
-        ui.onButtonPress("equip", () -> equip());
-        ui.onButtonPress("use", () -> use());
+        ui.onButtonPress("delete", this::showConfirm);
+        ui.onButtonPress("equip", this::equip);
+        ui.onButtonPress("use", this::use);
         equipButton = ui.findActor("equip");
         useButton = ui.findActor("use");
         useButton.setDisabled(true);
@@ -299,7 +299,6 @@ public class InventoryScene extends UIScene {
     }
 
     public Button createInventorySlot() {
-        ImageButton button = new ImageButton(Controls.getSkin(), "item_frame");
-        return button;
+        return new ImageButton(Controls.getSkin(), "item_frame");
     }
 }

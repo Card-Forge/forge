@@ -54,11 +54,26 @@ AWARD
 Item 
   xy: 0, 64
   size: 16, 16  
+Refresh 
+  xy: 0, 80
+  size: 16, 16  
 Status 
   xy: 16, 64
   size: 16, 16  
+Exit 
+  xy: 16, 80
+  size: 16, 16  
 Menu 
   xy: 32, 64
+  size: 16, 16  
+OK 
+  xy: 32, 80
+  size: 16, 16  
+Agent
+  xy: 368, 64
+  size: 16, 16  
+Pull
+  xy: 384, 129
   size: 16, 16  
 CursedTreasure
   xy: 336, 64
@@ -419,6 +434,9 @@ GreenLeaf2
   size: 16, 16
 SearchPost
   xy: 384, 63
+  size: 16, 16
+Flip
+  xy: 400, 63
   size: 16, 16
 LogBook
   xy: 240, 912

@@ -241,6 +241,7 @@ public class SaveLoadScene extends UIScene {
                                 Current.player().updateDifficulty(Config.instance().getConfigData().difficulties[difficulty.getSelectedIndex()]);
                             Current.player().setWorldPosY((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosY * WorldSave.getCurrentSave().getWorld().getData().height * WorldSave.getCurrentSave().getWorld().getTileSize()));
                             Current.player().setWorldPosX((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosX * WorldSave.getCurrentSave().getWorld().getData().width * WorldSave.getCurrentSave().getWorld().getTileSize()));
+                            Current.player().getQuests().clear();
                             SoundSystem.instance.changeBackgroundTrack();
                             Forge.switchScene(GameScene.instance());
                         } else {

@@ -77,10 +77,10 @@ public class QuestTagSelector extends JComponent  {
         selectedItems.clear();
 
         if (useEnemyTags){
-            allItems =  QuestController.getInstance().getEnemyTags(true);
+            allItems =  QuestController.getInstance().getEnemyTags();
         }
         else if (usePOITags) {
-            allItems = QuestController.getInstance().getPOITags(true);
+            allItems = QuestController.getInstance().getPOITags();
         }
         unselectedList.setModel(allItems);
         for (int i=0;i<allItems.size();i++){

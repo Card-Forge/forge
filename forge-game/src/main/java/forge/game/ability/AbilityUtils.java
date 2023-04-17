@@ -333,7 +333,7 @@ public class AbilityUtils {
                 origin = null;
                 validFilter = workingCopy[2];
             }
-            for (final Card cl : CardUtil.getThisTurnEntered(destination, origin, validFilter, hostCard, sa)) {
+            for (final Card cl : CardUtil.getThisTurnEntered(destination, origin, validFilter, hostCard, sa, player)) {
                 Card gameState = game.getCardState(cl, null);
                 // cards that use this should only care about if it is still in that zone
                 // TODO if all LKI needs to be returned, need to change CardCollection return from this function
@@ -1846,11 +1846,6 @@ public class AbilityUtils {
                     }
                     return count;
                 }
-                // Count$TriggeredManaSpent
-                if (sq[0].equals("TriggeredManaSpent")) {
-                    final SpellAbility root = (SpellAbility) sa.getRootAbility().getTriggeringObject(AbilityKey.SpellAbility);
-                    return root == null ? 0 : root.getTotalManaSpent();
-                }
 
                 // Count$ManaColorsPaid
                 if (sq[0].equals("ManaColorsPaid")) {
@@ -2624,7 +2619,7 @@ public class AbilityUtils {
         //game info
         // Count$Morbid.<True>.<False>
         if (sq[0].startsWith("Morbid")) {
-            final List<Card> res = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Battlefield, "Creature", c, ctb);
+            final List<Card> res = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Battlefield, "Creature", c, ctb, player);
             return doXMath(calculateAmount(c, sq[res.size() > 0 ? 1 : 2], ctb), expr, c, ctb);
         }
 
@@ -2736,9 +2731,9 @@ public class AbilityUtils {
 
             List<Card> res = Lists.newArrayList();
             if (workingCopy[0].contains("This")) {
-                res = CardUtil.getThisTurnCast(validFilter, c, ctb);
+                res = CardUtil.getThisTurnCast(validFilter, c, ctb, player);
             } else {
-                res = CardUtil.getLastTurnCast(validFilter, c, ctb);
+                res = CardUtil.getLastTurnCast(validFilter, c, ctb, player);
             }
 
             return doXMath(res.size(), expr, c, ctb);
@@ -2753,7 +2748,7 @@ public class AbilityUtils {
             ZoneType origin = hasFrom ? ZoneType.smartValueOf(workingCopy[3]) : null;
             String validFilter = workingCopy[hasFrom ? 4 : 2];
 
-            final List<Card> res = CardUtil.getThisTurnEntered(destination, origin, validFilter, c, ctb);
+            final List<Card> res = CardUtil.getThisTurnEntered(destination, origin, validFilter, c, ctb, player);
             return doXMath(res.size(), expr, c, ctb);
         }
 
@@ -2766,7 +2761,7 @@ public class AbilityUtils {
             ZoneType origin = hasFrom ? ZoneType.smartValueOf(workingCopy[3]) : null;
             String validFilter = workingCopy[hasFrom ? 4 : 2];
 
-            final List<Card> res = CardUtil.getLastTurnEntered(destination, origin, validFilter, c, ctb);
+            final List<Card> res = CardUtil.getLastTurnEntered(destination, origin, validFilter, c, ctb, player);
             return doXMath(res.size(), expr, c, ctb);
         }
 
@@ -2943,6 +2938,12 @@ public class AbilityUtils {
                 LandAbility la = new LandAbility(tgtCard, controller, null);
                 la.setCardState(original);
                 list.add(la);
+            }
+            if (state == CardStateName.Transformed && tgtCard.isPermanent() && !tgtCard.isAura()) {
+                // casting defeated battle
+                Spell sp = new SpellPermanent(tgtCard, original);
+                sp.setCardState(original);
+                list.add(sp);
             }
             if (tgtCard.isModal()) {
                 CardState modal = tgtCard.getState(CardStateName.Modal);

@@ -97,7 +97,7 @@ public class EnemyEdit extends FormPanel {
 
 
 
-        existingModel = QuestController.getInstance().getEnemyTags(true);
+        existingModel = QuestController.getInstance().getEnemyTags();
         existingTags.setModel(existingModel);
 
 
@@ -243,7 +243,7 @@ public class EnemyEdit extends FormPanel {
 
     private void filterExisting(DefaultListModel<String> filter){
         DefaultListModel<String> toReturn = new DefaultListModel<>();
-        for (Enumeration<String> e = QuestController.getInstance().getEnemyTags(true).elements(); e.hasMoreElements();){
+        for (Enumeration<String> e = QuestController.getInstance().getEnemyTags().elements(); e.hasMoreElements();){
             String toTest = e.nextElement();
             if (toTest != null & !filter.contains(toTest)){
                 toReturn.addElement(toTest);

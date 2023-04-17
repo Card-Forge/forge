@@ -215,6 +215,11 @@
 			},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_tribal",
+		"waste_town_identity"
 	]
 },
 {
@@ -529,7 +534,7 @@
 		{
 			"id": 2,
 			"name": "Travel",
-			"description": "Go to the destination town",
+			"description": "Go to the $(poi_2) to pick up the vendor's merchandise",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count1": 50,
@@ -553,7 +558,7 @@
 		{
 			"id": 3,
 			"name": "Leave",
-			"description": "Leave town",
+			"description": "Leave $(poi_2) and take the merchant's supplies back to him",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count1": 50,
@@ -660,7 +665,7 @@
 		{
 			"id": 4,
 			"name": "Travel",
-			"description": "Return to the vendor",
+			"description": "Return to $(poi_1)",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"here": true,
@@ -697,6 +702,11 @@
 			},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
 	]
 },
 {
@@ -934,6 +944,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"forest_town_generic",
+		"forest_town_identity",
+		"forest_town_tribal",
+		"forest_capital"
 	]
 },
 {
@@ -1181,6 +1197,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"swamp_town_generic",
+		"swamp_town_identity",
+		"swamp_town_tribal",
+		"swamp_capital"
 	]
 },
 {
@@ -1577,6 +1599,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"plains_town_generic",
+		"plains_town_identity",
+		"plains_town_tribal",
+		"plains_capital"
 	]
 },
 {
@@ -1588,9 +1616,6 @@
 		"text": "Stepping out of the cool shade of the local tavern, you find yourself face to face with a Viashino adorned in tribal garb.",
 		"options": [
 			{
-				"action": [
-					null
-				],
 				"name": "\"...Can I help you?\"",
 				"text": "\"Shaman Izka hunts defilers of sacred sands. You will help.\"",
 				"options": [
@@ -1788,6 +1813,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"mountain_town_generic",
+		"mountain_town_identity",
+		"mountain_town_tribal",
+		"mountain_capital"
 	]
 },
 {
@@ -2090,6 +2121,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal",
+		"island_capital"
 	]
 },
 {
@@ -2167,9 +2204,11 @@
 									},
 									{
 										"name": "You decide that the invasive thoughts, if you can call them that, are unwelcomed, and you take a step back.",
-										"text": "The thoughts urgently follow you for a moment. '{COLOR=red}KKKKiiiiill...{ENDCOLOR}' But as you take another step back, the words vanish from your mind."
+										"text": "The thoughts urgently follow you for a moment. '{COLOR=red}KKKKiiiiill...{ENDCOLOR}' But as you take another step back, the words vanish from your mind.",
 										"options": [
-										{"name": "With no delay at all, you walk away. Far away. (Decline Quest)"}
+											{
+												"name": "With no delay at all, you walk away. Far away. (Decline Quest)"
+											}
 										]
 									}
 								]
@@ -2362,6 +2401,11 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_tribal",
+		"waste_town_identity"
 	]
 },
 {
@@ -2765,6 +2809,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"forest_town_generic",
+		"forest_town_identity",
+		"forest_town_tribal",
+		"forest_capital"
 	]
 },
 {
@@ -3187,6 +3237,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"plains_town_generic",
+		"plains_town_identity",
+		"plains_town_tribal",
+		"plains_capital"
 	]
 },
 {
@@ -3618,6 +3674,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"swamp_town_generic",
+		"swamp_town_identity",
+		"swamp_town_tribal",
+		"swamp_capital"
 	]
 },
 {
@@ -3641,22 +3703,6 @@
 								"text": "He shakes his head. \"It is a fight that you would win. But in the process, our village would be lost. We MUST prevent the beast from arriving.\"",
 								"options": [
 									{
-										"action": [
-											{
-												"removeItem": "",
-												"setColorIdentity": "",
-												"advanceQuestFlag": "",
-												"advanceMapFlag": "",
-												"setQuestFlag": {
-													"key": ""
-												},
-												"setMapFlag": {
-													"key": ""
-												},
-												"issueQuest": "1",
-												"POIReference": ""
-											}
-										],
 										"name": "\"How do we do that?\"",
 										"text": "\"Before it comes here, the dragon will attempt to make a home at a $(poi_1) nearby. It will find several unfriendly occupants already there. But if you were to remove them in advance, I believe the creature will nest there and spare our village.\"",
 										"options": [
@@ -3690,7 +3736,7 @@
 								]
 							},
 							{
-								"name": "\"A fight with a dragon? No thanks. I'll be leaving now.\" (Decline Quest)",
+								"name": "\"A fight with a dragon? No thanks. I'll be leaving now.\" (Decline Quest)"
 							}
 						]
 					},
@@ -3934,6 +3980,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"mountain_town_generic",
+		"mountain_town_identity",
+		"mountain_town_tribal",
+		"mountain_capital"
 	]
 },
 {
@@ -4163,6 +4215,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal",
+		"island_capital"
 	]
 },
 {
@@ -4396,6 +4454,11 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
 	]
 },
 {
@@ -4470,9 +4533,11 @@
 					},
 					{
 						"name": "A short note is written in red ink.",
-						"text": "\"{COLOR=red}Have fangs, will travel{ENDCOLOR}\"."
+						"text": "\"{COLOR=red}Have fangs, will travel{ENDCOLOR}\".",
 						"options": [
-						{"name": "You suddenly realize that isn't ink, and step away. (Decline Quest)"}
+							{
+								"name": "You suddenly realize that isn't ink, and step away. (Decline Quest)"
+							}
 						]
 					}
 				]
@@ -4658,6 +4723,12 @@
 			"epilogue": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"swamp_town_generic",
+		"swamp_town_identity",
+		"swamp_town_tribal",
+		"swamp_capital"
 	]
 },
 {
@@ -4741,7 +4812,6 @@
 		"options": [
 			{
 				"action": [
-
 					{
 						"grantRewards": [
 							{
@@ -4855,7 +4925,12 @@
 			"failureDialog": {},
 			"POIToken": ""
 		}
-		
+	],
+	"questSourceTags": [
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal",
+		"island_capital"
 	]
 },
 {
@@ -4969,7 +5044,6 @@
 							{
 								"name": "You don't especially feel like volunteering to take on a $(enemy_1) today. (Decline Quest)"
 							}
-							
 						]
 					},
 					{
@@ -5111,10 +5185,16 @@
 			"failureDialog": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"forest_capital",
+		"forest_town_generic",
+		"forest_town_identity",
+		"forest_town_tribal"
 	]
 },
 {
-	"id": 201,
+	"id": 20,
 	"isTemplate": true,
 	"name": "Proving Yourself Worthy",
 	"description": "Defeat 3 $(enemy_1)s",
@@ -5368,6 +5448,12 @@
 			"failureDialog": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"plains_capital",
+		"plains_town_generic",
+		"plains_town_identity",
+		"plains_town_tribal"
 	]
 },
 {
@@ -5508,6 +5594,11 @@
 			"failureDialog": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
 	]
 },
 {
@@ -5664,6 +5755,241 @@
 			"failureDialog": {},
 			"POIToken": ""
 		}
+	],
+	"questSourceTags": [
+		"mountain_town_generic",
+		"mountain_town_identity",
+		"mountain_town_tribal",
+		"mountain_capital"
+	]
+},
+{
+	"id": 23,
+	"isTemplate": true,
+	"name": "Heart of a Champion",
+	"description": "Enter and win an upcoming arena event",
+	"offerDialog": {
+		"text": "\"DO YOU HAVE WHAT IT TAKES? ARE YOU THE BEST IN SHANDALAR???\" A young girl yells at the top of her lungs at each passer by in the town. Most people come in to view already covering their ears, having heard this plenty of times before.",
+		"options": [
+			{
+				"name": "You walk over to her. \"Okay, kid, settle down, I heard you. What's this about?\"",
+				"text": "She looks surprised, and falls silent for a moment as she tries to remember what to do next. \"I uhhh... ummm...\" She pulls a piece of paper out of her pocket and prepares to read.",
+				"options": [
+					{
+						"action": [
+							{
+								"removeItem": "",
+								"setColorIdentity": "",
+								"advanceQuestFlag": "",
+								"advanceMapFlag": "",
+								"setQuestFlag": {
+									"key": ""
+								},
+								"setMapFlag": {
+									"key": ""
+								},
+								"issueQuest": "1",
+								"addMapReputation": -1,
+								"POIReference": ""
+							}
+						],
+						"name": "Take the paper from her.",
+						"text": "\"HEY THAT'S MINE!!!\" She finds her full ear-piercing volume again before pulling it away and reading. \"PROVE YOU'RE THE BEST IN THE ARENA! THE TOURNAMENT BEGINS SOON\"",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "1",
+										"POIReference": ""
+									}
+								],
+								"name": "\"Okay, sure, going somewhere far away seems good right now.\" (Accept Quest)"
+							},
+							{
+								"name": "\"No thanks, I think I'll go find somewhere quiet for a while.\" (Decline Quest)"
+							}
+						]
+					},
+					{
+						"name": "Wait for her to continue.",
+						"text": "She reads over the paper as if seeing this part of it for the first time. \"It says here... 'Go to... $(poi_1)... and compete for prizes.' Do you know how to get there?\"",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "1",
+										"POIReference": ""
+									}
+								],
+								"name": "\"Okay, sure, going somewhere far away seems good right now.\" (Accept Quest)"
+							},
+							{
+								"name": "\"That's a little further than I'm looking to travel right now. But thanks all the same.\" (Decline Quest)",
+								"text": "She looks at you blankly for a moment, then resumes shouting into the air. \"DO YOU HAVE WHAT IT TAKES? ARE YOU THE BEST IN SHANDALAR???\"",
+								"options": [
+									{
+										"name": "Cover your ears and move away quickly."
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "Cover your own ears and keep walking (Decline Quest)"
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "The crowd goes wild as you finish your last opponent. You won't be paying for drinks in the $(poi_1) for quite some time. (+3 reputation in $(poi_1))",
+		"options": [
+			{
+				"action": [
+					{
+						"grantRewards": [
+							{
+								"type": "shards",
+								"count": 20
+							},
+							{
+								"type": "card",
+								"count": 2,
+								"addMaxCount": 2,
+								"rarity": [
+									"Rare",
+									"Mythic Rare"
+								]
+							},
+							{
+								"type": "gold",
+								"count": 250
+							}
+						]
+					}
+				],
+				"name": "(Complete Quest)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_1)"
+			}
+		],
+		"text": "The $(poi_1) arena is too much for you at the moment, but there's always another day. (-2 reputation in $(poi_1))",
+		"options": [
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": ""
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"addMapReputation": -2,
+						"POIReference": "$(poi_1)"
+					}
+				],
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"rewardDescription": "Eternal Glory",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Travel",
+			"description": "Make your way to the $(poi_1)",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"count1": 60,
+			"count2": 30,
+			"POITags": [
+				"Capital"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {
+				"text": "As you walk through the $(poi_1) gates, you can feel the excitement building, eminating, radiating from the city's arena. Most of the populace is already there or on their way. ",
+				"options": [
+					{
+						"name": "(continue)",
+						"text": "The presence of so many powerful spellcasters has the air filled with traces of mana.",
+						"options": [
+							{
+								"name": "It would be a shame to keep the crowd waiting for their new champion."
+							}
+						]
+					}
+				]
+			},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Arena",
+			"description": "Prove yourself to be the champion of the $(poi_1) arena",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"objective": "Arena",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": "$(poi_1)"
+		}
+	],
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
 	]
 }
 ]

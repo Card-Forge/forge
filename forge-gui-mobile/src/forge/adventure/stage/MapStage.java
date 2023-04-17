@@ -887,6 +887,14 @@ public class MapStage extends GameStage {
         return null;
     }
 
+    public Actor getByID(int id) { //Search actor by ID.
+        for (MapActor A : new Array.ArrayIterator<>(actors)) {
+            if (A.getId() == id)
+                return A;
+        }
+        return null;
+    }
+
     protected void getReward() {
         isLoadingMatch = false;
         RewardScene.instance().loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);

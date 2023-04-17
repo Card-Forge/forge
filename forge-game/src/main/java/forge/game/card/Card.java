@@ -1738,6 +1738,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         protectingPlayer = p;
         view.updateProtectingPlayer(this);
     }
+
     public final void setSecretChosenPlayer(final Player p) {
         chosenPlayer = p;
     }
@@ -7115,6 +7116,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         return getOwner().canDiscardBy(sa, effect);
+    }
+
+    public boolean activatedThisTurn() {
+        return !numberTurnActivations.isEmpty();
     }
 
     public void addAbilityActivated(SpellAbility ability) {

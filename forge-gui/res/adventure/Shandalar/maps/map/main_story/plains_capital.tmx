@@ -31,7 +31,7 @@
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUUALMNRgYLIDYUmOgXTIKsIHr2gwMN7QH2hWooENzoF0wCmgBBLUYGIS0BtoVIxsYAvOWEY78JQ+MGwWk+JEGsmVwxJe4DgODhA5+Nja1hIAvnrxvDXSLDZp7LEbT04gEtEp/17Sxs3GJYVMzCkbBSAF1/AwM9UDcwD/QLsEEi5jx84caKDDAzx8swHKQtt+HSviNglEwUGAwl+ejYBSMAvoBAFbjF4A=
+   eJzt1kEKwjAQBdAPHqDoRkFBl7XJQu3CFr2Cd/EE6s6eQz2TehxnqbaNiKST4n8QSEIWn0ymFCCiXyxjIJORx9pJ/DumQJFqp/jOzQB3o53iVTHVTkA+dBOgl2inKDtb4GK1UzRjLr21qOmvsdRm8lSfocxHNfXqy30NrHtedfaTjaP3V5Jl/ZYnC/A9kX++3t/VVM/r9qrOEP2LXQTsZRwi7SRlp4573TbbmXsdijzQ//e23B+RlpC/50TUnAdcVxqU
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -154,16 +154,6 @@
     &quot;entryFee&quot;:100,
      &quot;rewards&quot;: [[
 		{
-			&quot;type&quot;: &quot;card&quot;,
-			&quot;probability&quot;: 1, 
-      			&quot;count&quot;:2,
-			&quot;rarity&quot;: [
-				&quot;Mythic Rare&quot;
-			],
-      			&quot;colors&quot;: [&quot;white&quot;] 
-		}
-		],[
-		{
 			&quot;type&quot;: &quot;gold&quot;,
 			&quot;probability&quot;: 1,
 			&quot;count&quot;: 500,
@@ -174,6 +164,17 @@
 			&quot;probability&quot;: 1,
 			&quot;count&quot;: 1,
 			&quot;itemNames&quot;: [&quot;Gold Armor&quot;,&quot;Gold Shield&quot;,&quot;Gold Boots&quot;,&quot;Bronze Sword&quot;]
+		}
+		],
+[
+		{
+			&quot;type&quot;: &quot;card&quot;,
+			&quot;probability&quot;: 1, 
+      			&quot;count&quot;:2,
+			&quot;rarity&quot;: [
+				&quot;Rare&quot;,&quot;Mythic Rare&quot;
+			],
+      			&quot;colors&quot;: [&quot;white&quot;] 
 		}
 		]
 		] 

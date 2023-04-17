@@ -604,6 +604,7 @@ public final class CardRulesPredicates {
         };
 
         public static final Predicate<CardRules> IS_PLANESWALKER = CardRulesPredicates.coreType(true, CardType.CoreType.Planeswalker);
+        public static final Predicate<CardRules> IS_BATTLE = CardRulesPredicates.coreType(true, CardType.CoreType.Battle);
         public static final Predicate<CardRules> IS_INSTANT = CardRulesPredicates.coreType(true, CardType.CoreType.Instant);
         public static final Predicate<CardRules> IS_SORCERY = CardRulesPredicates.coreType(true, CardType.CoreType.Sorcery);
         public static final Predicate<CardRules> IS_ENCHANTMENT = CardRulesPredicates.coreType(true, CardType.CoreType.Enchantment);

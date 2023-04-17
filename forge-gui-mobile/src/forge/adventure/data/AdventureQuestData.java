@@ -19,8 +19,9 @@ public class AdventureQuestData implements Serializable {
     private int id;
 
     public int getID(){
-        if (isTemplate && id < 1)
-            id = Current.world().getNextQuestId();
+        if (isTemplate && id < 1) {
+            id = AdventureQuestController.instance().getNextQuestID();
+        }
         return id;
     }
     public boolean isTemplate = false;
@@ -43,7 +44,7 @@ public class AdventureQuestData implements Serializable {
     public String rewardDescription = "";
 
     public AdventureQuestStage[] stages = new AdventureQuestStage[0];
-    public String[] questTags = new String[0];
+    public String[] questSourceTags = new String[0];
     public String[] questEnemyTags = new String[0];
     public String[] questPOITags = new String[0];
     private transient EnemySprite targetEnemySprite = null;
@@ -83,7 +84,7 @@ public class AdventureQuestData implements Serializable {
         for (int i = 0; i < stages.length; i++){
             stages[i] = new AdventureQuestStage(data.stages[i]);
         }
-        questTags = data.questTags.clone();
+        questSourceTags = data.questSourceTags.clone();
         questPOITags = data.questPOITags.clone();
         questEnemyTags = data.questEnemyTags.clone();
         targetPoI = data.targetPoI;
@@ -174,6 +175,8 @@ public class AdventureQuestData implements Serializable {
 
     public void initializeStage(AdventureQuestStage stage){
         if (stage == null || stage.objective == null) return;
+
+        stage.initialize();
 
         switch  (stage.objective){
             case Clear:
@@ -311,7 +314,7 @@ public class AdventureQuestData implements Serializable {
             EnemyData toUse = generateTargetEnemyData(stage);
             toUse.lifetime = stage.count1;
             EnemySprite toReturn =  new EnemySprite(toUse);
-            toReturn.questStageID = stage.questStageID;
+            toReturn.questStageID = stage.stageID.toString();
             return toReturn;
         }
         return null;
@@ -392,6 +395,34 @@ public class AdventureQuestData implements Serializable {
         for (AdventureQuestStage stage: stages) {
             failed = stage.updateDespawn(despawned)== AdventureQuestController.QuestStatus.Failed || failed;
         }
+    }
+
+    public void updateArenaComplete(boolean winner){
+        for (AdventureQuestStage stage: stages) {
+            if(failed)
+                break;
+            stage.updateArenaComplete(winner);
+            failed = failed || stage.getStatus() == AdventureQuestController.QuestStatus.Failed;
+        }
+        if (!failed)
+            updateStatus();
+    }
+
+    public void updateStatus(){
+        for (AdventureQuestStage stage: stages) {
+            switch (stage.getStatus()) {
+                case Complete:
+                    continue;
+                case Failed:
+                    failed = true;
+                    break;
+                case None:
+                case Inactive:
+                case Active:
+                    return;
+            }
+        }
+        completed = true;
     }
 
     public DialogData getPrologue() {

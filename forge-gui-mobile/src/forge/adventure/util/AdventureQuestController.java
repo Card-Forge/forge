@@ -17,7 +17,6 @@ import forge.util.Aggregates;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.List;
 
 public class AdventureQuestController implements Serializable {
 
@@ -59,6 +58,7 @@ public class AdventureQuestController implements Serializable {
     private Map<String,Date> questAvailability = new HashMap<>();
     public PointOfInterest mostRecentPOI;
     private List<EnemySprite> enemySpriteList= new ArrayList<>();
+    private int nextQuestID = 0;
     public void showQuestDialogs(GameStage stage) {
         List<AdventureQuestData> finishedQuests = new ArrayList<>();
 
@@ -84,9 +84,9 @@ public class AdventureQuestController implements Serializable {
                         questStage.epilogueDisplayed = true;
                         dialogQueue.add(questStage.epilogue);
                     }
-//                    if (questStage.getStatus() != QuestStatus.Complete){
-//                        break;
-//                    }
+                    if (questStage.getStatus() != QuestStatus.Complete){
+                        break;
+                    }
                 }
 
                 if (quest.failed){
@@ -204,6 +204,17 @@ public class AdventureQuestController implements Serializable {
         }
     }
 
+    public int getNextQuestID(){
+        if (nextQuestID == 0 && allQuests.size > 0) {
+            for (int i = 0; i < allQuests.size; i++) {
+                if (allQuests.get(i).getID() >= nextQuestID){
+                    nextQuestID = allQuests.get(i).getID() + 1;
+                }
+            }
+        }
+        return nextQuestID++;
+    }
+
     public void updateEnteredPOI(PointOfInterest arrivedAt)
     {
         for(AdventureQuestData currentQuest : Current.player().getQuests()) {
@@ -263,6 +274,12 @@ public class AdventureQuestController implements Serializable {
         }
     }
 
+    public void updateArenaComplete(boolean winner){
+        for(AdventureQuestData currentQuest: Current.player().getQuests()) {
+            currentQuest.updateArenaComplete(winner);
+        }
+    }
+
     public AdventureQuestData generateQuest(int id){
         AdventureQuestData generated = null;
         for (AdventureQuestData template: allQuests) {
@@ -287,7 +304,7 @@ public class AdventureQuestController implements Serializable {
     public void rematchQuestSprite(EnemySprite sprite){
         for (AdventureQuestData q : Current.player().getQuests()){
             for (AdventureQuestStage s : q.stages){
-                if (sprite.questStageID != null && sprite.questStageID.equals(s.questStageID)){
+                if (sprite.questStageID != null && s.stageID != null && sprite.questStageID.equals(s.stageID.toString())) {
                     s.setTargetSprite(sprite);
                 }
             }
@@ -346,9 +363,24 @@ public class AdventureQuestController implements Serializable {
             ret.offerDialog = response;
             return ret;
         }
-        //todo - Make use of questOrigin in selecting appropriate quests
+        //todo - Should quest availability be weighted instead of uniform?
         nextQuestDate.put(pointID, LocalDate.now().toEpochDay());
-        ret = new AdventureQuestData(Aggregates.random(allSideQuests));
+
+        Array<AdventureQuestData> validSideQuests = new Array<>();
+        for (AdventureQuestData option : allSideQuests){
+            if (option.questSourceTags.length == 0)
+                validSideQuests.add(option);
+            for (int i = 0; i < option.questSourceTags.length; i++){
+                if (option.questSourceTags[i] != null && option.questSourceTags[i].equals(questOrigin)){
+                    validSideQuests.add(option);
+                    break;
+                }
+            }
+        }
+        if (validSideQuests.size > 0)
+            ret = new AdventureQuestData(Aggregates.random(validSideQuests));
+        else
+            ret = new AdventureQuestData(Aggregates.random(allSideQuests));
         ret.sourceID = pointID;
         ret.initialize();
         return ret;

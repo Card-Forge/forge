@@ -7,5 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigImprint:DB$ Pump | ImprintCards$ Remembered | SubAbility$ DBCopy
 SVar:DBCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | Controller$ You | AddTypes$ Artifact | RememberTokens$ True | SubAbility$ DBChangeZoneAll
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Card.IsImprinted
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClean | Static$ True
+SVar:TrigClean:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 DeckHas:Ability$Token
 Oracle:Flying\nWhenever a nontoken creature enters the battlefield under an opponent's control, create a token that's a copy of that creature except it's an artifact in addition to its other types. Then exile all other tokens created with Faerie Artisans.

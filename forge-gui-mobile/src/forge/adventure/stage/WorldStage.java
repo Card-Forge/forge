@@ -361,7 +361,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
             List<String> names = (List<String>) data.readObject("names");
             List<Float> x = (List<Float>) data.readObject("x");
             List<Float> y = (List<Float>) data.readObject("y");
-            List<UUID> questStageIDs = (List<UUID>) data.readObject("questStageIDs");
+            List<String> questStageIDs = (List<String>) data.readObject("questStageIDs");
             for (int i = 0; i < timeouts.size(); i++) {
                 EnemySprite sprite = new EnemySprite(WorldData.getEnemy(names.get(i)));
                 sprite.setX(x.get(i));
@@ -393,7 +393,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         List<String> names = new ArrayList<>();
         List<Float> x = new ArrayList<>();
         List<Float> y = new ArrayList<>();
-        List<UUID> questStageIDs = new ArrayList<>();
+        List<String> questStageIDs = new ArrayList<>();
         for (Pair<Float, EnemySprite> enemy : enemies) {
             timeouts.add(enemy.getKey());
             names.add(enemy.getValue().getData().name);

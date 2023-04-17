@@ -256,9 +256,10 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("ShowCardToActivator")) {
                 game.getAction().revealTo(tgtCard, controller);
             }
+            String prompt = sa.hasParam("CastTransformed") ? "lblDoYouWantPlayCardTransformed" : "lblDoYouWantPlayCard";
             if (singleOption && sa.getTargetCard() == null)
                 sa.setPlayEffectCard(tgtCard);// show card to play rather than showing the source card
-            if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())), null)) {
+            if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage(prompt, CardTranslation.getTranslatedName(tgtCard.getName())), null)) {
                 if (wasFaceDown) {
                     tgtCard.turnFaceDownNoUpdate();
                     tgtCard.updateStateForView();
@@ -290,6 +291,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 if (!tgtCard.changeToState(CardStateName.Transformed)) {
                     // Failed to transform. In the future, we might need to just remove this option and continue
                     amount--;
+                    System.err.println("CastTransformed failed for '" + tgtCard + "'.");
                     continue;
                 }
                 state = CardStateName.Transformed;
