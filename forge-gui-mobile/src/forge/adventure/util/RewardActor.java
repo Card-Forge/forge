@@ -863,7 +863,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
         public HoldTooltip(ComplexTooltip complexTooltip) {
             tooltip_actor = complexTooltip;
-            switchButton = Controls.newTextButton("Flip");
+            switchButton = Controls.newTextButton("[+Flip]");
             switchButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
