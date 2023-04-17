@@ -637,7 +637,7 @@ public class CardRenderer {
                     g.drawCardImage(image, crack_overlay, x, y, w, h, card.wasDestroyed(), magnify ? false : card.getDamage() > 0);
             } else {
                 if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
-                        && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()) && rotate) {
+                        && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane() || (card.getCurrentState().isBattle() && !showAltState) || (card.getAlternateState() != null && card.getAlternateState().isBattle() && showAltState)) && rotate) {
                     if (Forge.enableUIMask.equals("Full")) {
                         if (image.toString().contains(".fullborder."))
                             g.drawCardRoundRect(image, x, y, w, h, x + w / 2, y + h / 2, -90);
