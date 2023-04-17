@@ -63,7 +63,7 @@
       "type": "TextButton",
       "selectable": true,
       "name": "done",
-      "text": "[+Exit]",
+      "text": "[+OK]",
       "x": 180,
       "y": 150,
       "width": 90,

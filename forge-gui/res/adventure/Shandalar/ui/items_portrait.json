@@ -36,7 +36,7 @@
     {
       "type": "TextButton",
       "name": "done",
-      "text": "tr(lblLeave)",
+      "text": "[+OK]",
       "width": 128,
       "height": 32,
       "x": 140,
