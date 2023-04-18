@@ -8,7 +8,7 @@ SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn/Plus.Y
 SVar:Y:Count$ValidExile Instant.YouOwn,Sorcery.YouOwn
 A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Ral | Image$ emblem_ral | Triggers$ TrigSpellCast | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast an instant or sorcery spell, this emblem deals 4 damage to any target and you draw two cards."
 SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast an instant or sorcery spell, this emblem deals 4 damage to any target and you draw two cards.
-SVar:EffSpellCast:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4 | SubAbility$ EffDraw
+SVar:EffSpellCast:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ EffDraw
 SVar:EffDraw:DB$ Draw | Defined$ You | NumCards$ 2
 SVar:BuffedBy:Instant,Sorcery
 DeckHints:Type$Instant|Sorcery

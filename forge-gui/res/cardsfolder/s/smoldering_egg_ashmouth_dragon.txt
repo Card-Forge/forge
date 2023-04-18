@@ -24,6 +24,6 @@ Types:Creature Dragon
 PT:4/4
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME deals 2 damage to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
 DeckHints:Type$Instant|Sorcery
 Oracle:Flying\nWhenever you cast an instant or sorcery spell, Ashmouth Dragon deals 2 damage to any target.
