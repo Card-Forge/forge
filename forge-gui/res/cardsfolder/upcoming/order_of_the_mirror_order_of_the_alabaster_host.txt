@@ -13,6 +13,6 @@ ManaCost:no cost
 Colors:white,blue
 Types:Creature Phyrexian Knight
 PT:3/3
-T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, it deals 2 damage to that creature.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, that creature gets -1/-1 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredBlockerLKICopy | NumAtt$ -1 | NumDef$ -1
 Oracle:Whenever Order of the Alabaster Host becomes blocked by a creature, that creature gets -1/-1 until end of turn.
