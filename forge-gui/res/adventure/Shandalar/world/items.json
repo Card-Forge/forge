@@ -1,12 +1,12 @@
-[ 
+[
   {
     "name": "Challenge Coin",
-	"description": "A heavy coin made of unknown material.",
+    "description": "A heavy coin made of unknown material.",
     "iconName": "ChallengeCoin"
   },
   {
     "name": "Chandra's Tome",
-	"description": "Draft a Chandra themed card that can be cast with mana of any color.",
+    "description": "Draft a Chandra themed card that can be cast with mana of any color.",
     "equipmentSlot": "Left",
     "iconName": "ChandrasTome",
     "effect": {
@@ -16,9 +16,8 @@
     }
   },
   {
-  
     "name": "Phoenix Charm",
-	"description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
+    "description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
     "equipmentSlot": "Neck",
     "iconName": "PhoenixCharm",
     "effect": {
@@ -29,12 +28,12 @@
   },
   {
     "name": "Chandra's Stone",
-	"description": "A small red gemstone recovered after your battle with Chandra.",
+    "description": "A small red gemstone recovered after your battle with Chandra.",
     "iconName": "r"
   },
   {
     "name": "Phoenix",
-	"description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
+    "description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
     "equipmentSlot": "Neck",
     "iconName": "PhoenixCharm",
     "effect": {
@@ -52,7 +51,8 @@
         "Piper's Charm"
       ]
     }
-  },{
+  },
+  {
     "name": "Sleep Wand",
     "equipmentSlot": "Left",
     "iconName": "SleepWand",
@@ -61,7 +61,8 @@
         "Sleep Wand"
       ]
     }
-  },{
+  },
+  {
     "name": "Hill Giant Club",
     "equipmentSlot": "Right",
     "iconName": "HillGiantClub",
@@ -70,7 +71,8 @@
         "Hill Giant Club"
       ]
     }
-  },{
+  },
+  {
     "name": "Cursed Treasure",
     "equipmentSlot": "Right",
     "iconName": "CursedTreasure",
@@ -79,7 +81,8 @@
         "Cursed Treasure"
       ]
     }
-  },{
+  },
+  {
     "name": "Farmer's Tools",
     "equipmentSlot": "Left",
     "iconName": "FarmersTools",
@@ -88,7 +91,8 @@
         "Farmer's Tools"
       ]
     }
-  },{
+  },
+  {
     "name": "Sol Ring",
     "equipmentSlot": "Left",
     "iconName": "SolRing",
@@ -262,7 +266,7 @@
     "equipmentSlot": "Boots",
     "iconName": "IronBoots",
     "cost": 400,
-    "effect": { 
+    "effect": {
       "moveSpeed": 1.2
     }
   },
@@ -414,7 +418,6 @@
         "c_0_4_a_wall_defender"
       ]
     }
-
   },
   {
     "name": "Mithril Armor",
@@ -444,9 +447,9 @@
     "equipmentSlot": "Left",
     "iconName": "FlameSword",
     "effect": {
-        "startBattleWithCardInCommandZone": [
-          "Flame Sword"
-        ]
+      "startBattleWithCardInCommandZone": [
+        "Flame Sword"
+      ]
     }
   },
   {
@@ -494,7 +497,9 @@
     "equipmentSlot": "Left",
     "iconName": "WoodBow",
     "effect": {
-      "startBattleWithCard": [ "Fyndhorn Bow" ]
+      "startBattleWithCard": [
+        "Fyndhorn Bow"
+      ]
     }
   },
   {
@@ -856,193 +861,192 @@
     },
     "iconName": "ShellWand"
   },
-
-{
-	"name": "Manasight Amulet",
-	"equipmentSlot": "Neck",
-	"effect": {
-		"colorView": true
-	},
-	"description": "Grants Manasight, letting you know the colors used by your adversaries.",
-	"iconName": "RelicAmulet"
-},
-{
-	"name": "Fortune Coin",
-	"equipmentSlot": "Left",
-	"effect": {
-		"name": "",
-		"goldModifier": 0.85,
-		"cardRewardBonus": 1
-	},
-	"description": "",
-	"iconName": "FortuneCoin"
-},
-{
-	"name": "Colorless rune",
-	"usableOnWorldMap":true,
+  {
+    "name": "Manasight Amulet",
+    "equipmentSlot": "Neck",
+    "effect": {
+      "colorView": true
+    },
+    "description": "Grants Manasight, letting you know the colors used by your adversaries.",
+    "iconName": "RelicAmulet"
+  },
+  {
+    "name": "Fortune Coin",
+    "equipmentSlot": "Left",
+    "effect": {
+      "name": "",
+      "goldModifier": 0.85,
+      "cardRewardBonus": 1
+    },
+    "description": "",
+    "iconName": "FortuneCoin"
+  },
+  {
+    "name": "Colorless rune",
+    "usableOnWorldMap": true,
     "equipmentSlot": "Ability2",
-	"description": "Teleports you to the center",
-	"commandOnUse": "teleport to poi Spawn",
-	"iconName": "ColorlessRune",
-	"questItem": true,
-	"shardsNeeded": 1,
-	"cost": 100
-},
-{
-	"name": "White rune",
-	"usableOnWorldMap":true,
+    "description": "Teleports you to the center",
+    "commandOnUse": "teleport to poi Spawn",
+    "iconName": "ColorlessRune",
+    "questItem": true,
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "White rune",
+    "usableOnWorldMap": true,
     "equipmentSlot": "Ability2",
-	"effect": {
-		"name": ""
-	},
-	"description": "Teleports you to the plains",
-	"commandOnUse": "teleport to poi \"Plains Capital\"",
-	"iconName": "WhiteRune",
-	"questItem": true,
-	"shardsNeeded": 1,
-	"cost": 100
-},
-{
-	"name": "Black rune",
-	"usableOnWorldMap":true,
+    "effect": {
+      "name": ""
+    },
+    "description": "Teleports you to the plains",
+    "commandOnUse": "teleport to poi \"Plains Capital\"",
+    "iconName": "WhiteRune",
+    "questItem": true,
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "Black rune",
+    "usableOnWorldMap": true,
     "equipmentSlot": "Ability2",
-	"effect": {
-		"name": ""
-	},
-	"description": "Teleports you to the swamp",
-	"commandOnUse": "teleport to poi \"Swamp Capital\"",
-	"iconName": "BlackRune",
-	"questItem": true,
-	"shardsNeeded": 1,
-	"cost": 100
-},
-{
-	"name": "Blue rune",
-	"usableOnWorldMap":true,
+    "effect": {
+      "name": ""
+    },
+    "description": "Teleports you to the swamp",
+    "commandOnUse": "teleport to poi \"Swamp Capital\"",
+    "iconName": "BlackRune",
+    "questItem": true,
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "Blue rune",
+    "usableOnWorldMap": true,
     "equipmentSlot": "Ability2",
-	"effect": {
-		"name": ""
-	},
-	"description": "Teleports you to the island",
-	"commandOnUse": "teleport to poi \"Island Capital\"",
-	"iconName": "BlueRune",
-	"questItem": true,
-	"shardsNeeded": 1,
-	"cost": 100
-},
-{
-	"name": "Red rune",
-	"usableOnWorldMap":true,
+    "effect": {
+      "name": ""
+    },
+    "description": "Teleports you to the island",
+    "commandOnUse": "teleport to poi \"Island Capital\"",
+    "iconName": "BlueRune",
+    "questItem": true,
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "Red rune",
+    "usableOnWorldMap": true,
     "equipmentSlot": "Ability2",
-	"effect": {
-		"name": ""
-	},
-	"description": "Teleports you to the mountain",
-	"commandOnUse": "teleport to poi \"Mountain Capital\"",
-	"iconName": "RedRune",
-	"questItem": true,
-	"shardsNeeded": 1,
-	"cost": 100
-},
-{
-	"name": "Green rune",
-	"usableOnWorldMap":true,
+    "effect": {
+      "name": ""
+    },
+    "description": "Teleports you to the mountain",
+    "commandOnUse": "teleport to poi \"Mountain Capital\"",
+    "iconName": "RedRune",
+    "questItem": true,
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "Green rune",
+    "usableOnWorldMap": true,
     "equipmentSlot": "Ability2",
-	"effect": {
-		"name": ""
-	},
-	"description": "Teleports you to the forest",
-	"commandOnUse": "teleport to poi \"Forest Capital\"",
-	"iconName": "GreenRune",
-	"questItem": true,
-	"shardsNeeded": 1,
-	"cost": 100
-},
-{
-	"name": "White Staff",
+    "effect": {
+      "name": ""
+    },
+    "description": "Teleports you to the forest",
+    "commandOnUse": "teleport to poi \"Forest Capital\"",
+    "iconName": "GreenRune",
+    "questItem": true,
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "White Staff",
     "equipmentSlot": "Ability1",
-	"usableOnWorldMap":true,
-	"usableInPoi":true,
-	"effect": {
-		"name": ""
-	},
-	"description": "Heals you half of your life",
-	"commandOnUse": "heal percent 0.5",
-	"iconName": "WhiteStaff",
-	"questItem": true,
-	"shardsNeeded": 5,
-	"cost": 1000
-},
-{
-	"name": "Black Staff",
+    "usableOnWorldMap": true,
+    "usableInPoi": true,
+    "effect": {
+      "name": ""
+    },
+    "description": "Heals you half of your life",
+    "commandOnUse": "heal percent 0.5",
+    "iconName": "WhiteStaff",
+    "questItem": true,
+    "shardsNeeded": 5,
+    "cost": 1000
+  },
+  {
+    "name": "Black Staff",
     "equipmentSlot": "Ability1",
-	"usableOnWorldMap":true,
-	"usableInPoi":false,
-	"effect": {
-		"name": ""
-	},
-	"description": "Hide from enemies for some time",
-	"commandOnUse": "hide 10",
-	"iconName": "BlackStaff",
-	"questItem": true,
-	"shardsNeeded": 5,
-	"cost": 1000
-},
-{
-	"name": "Blue Staff",
-	"usableOnWorldMap":true,
+    "usableOnWorldMap": true,
+    "usableInPoi": false,
+    "effect": {
+      "name": ""
+    },
+    "description": "Hide from enemies for some time",
+    "commandOnUse": "hide 10",
+    "iconName": "BlackStaff",
+    "questItem": true,
+    "shardsNeeded": 5,
+    "cost": 1000
+  },
+  {
+    "name": "Blue Staff",
+    "usableOnWorldMap": true,
     "equipmentSlot": "Ability1",
-	"effect": {
-		"name": ""
-	},
-	"description": "Lets you fly for some time",
-	"commandOnUse": "fly 10",
+    "effect": {
+      "name": ""
+    },
+    "description": "Lets you fly for some time",
+    "commandOnUse": "fly 10",
     "iconName": "BlueStaff",
-	"questItem": true,
-	"shardsNeeded": 5,
-	"cost": 1000
-},
-{
-	"name": "Red Staff",
-	"usableOnWorldMap":true,
+    "questItem": true,
+    "shardsNeeded": 5,
+    "cost": 1000
+  },
+  {
+    "name": "Red Staff",
+    "usableOnWorldMap": true,
     "equipmentSlot": "Ability1",
-	"effect": {
-		"name": ""
-	},
-	"description": "Kills the closest enemy on the Overworld",
-	"commandOnUse": "remove enemy nearest",
-	"iconName": "RedStaff",
-	"questItem": true,
-	"shardsNeeded": 5,
-	"cost": 1000
-},
-{
-	"name": "Green Staff",
+    "effect": {
+      "name": ""
+    },
+    "description": "Kills the closest enemy on the Overworld",
+    "commandOnUse": "remove enemy nearest",
+    "iconName": "RedStaff",
+    "questItem": true,
+    "shardsNeeded": 5,
+    "cost": 1000
+  },
+  {
+    "name": "Green Staff",
     "equipmentSlot": "Ability1",
-	"usableOnWorldMap":true,
-	"usableInPoi":true,
-	"effect": {
-		"name": ""
-	},
-	"description": "Doubles your speed for some time",
-	"commandOnUse": "sprint 10",
-	"iconName": "GreenStaff",
-	"questItem": true,
-	"shardsNeeded": 5,
-	"cost": 1000
-},
-{
+    "usableOnWorldMap": true,
+    "usableInPoi": true,
+    "effect": {
+      "name": ""
+    },
+    "description": "Doubles your speed for some time",
+    "commandOnUse": "sprint 10",
+    "iconName": "GreenStaff",
+    "questItem": true,
+    "shardsNeeded": 5,
+    "cost": 1000
+  },
+  {
     "name": "Slimefoot's Slimy Staff",
     "equipmentSlot": "Left",
     "iconName": "GreenStaff",
     "effect": {
       "lifeModifier": 2,
-      "startBattleWithCardInCommandZone":[
+      "startBattleWithCardInCommandZone": [
         "Slimefoot's Slimy Staff"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Kiora's Bident",
     "equipmentSlot": "Left",
     "iconName": "SleepWand",
@@ -1051,12 +1055,12 @@
       "startBattleWithCard": [
         "Kraken Hatchling"
       ],
-      "startBattleWithCardInCommandZone":[
+      "startBattleWithCardInCommandZone": [
         "Kiora's Bident"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Slime-Covered Boots",
     "equipmentSlot": "Boots",
     "iconName": "SteelBoots",
@@ -1065,9 +1069,9 @@
       "startBattleWithCard": [
         "Ooze Flux"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Jace's Signature Hoodie",
     "equipmentSlot": "Body",
     "iconName": "BlueRobes",
@@ -1077,9 +1081,9 @@
       "startBattleWithCardInCommandZone": [
         "Jace's Signature Hoodie"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Teferi's Staff",
     "equipmentSlot": "Left",
     "iconName": "MadStaff",
@@ -1089,9 +1093,9 @@
       "startBattleWithCardInCommandZone": [
         "Teferi's Staff"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Garruk's Mighty Axe",
     "equipmentSlot": "Left",
     "iconName": "GarrukAxe",
@@ -1100,9 +1104,9 @@
       "startBattleWithCardInCommandZone": [
         "Garruk's Mighty Axe"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Nahiri's Armory",
     "equipmentSlot": "Right",
     "iconName": "Armory",
@@ -1111,9 +1115,9 @@
       "startBattleWithCardInCommandZone": [
         "Nahiri's Armory"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Giant Scythe",
     "equipmentSlot": "Left",
     "iconName": "Scythe",
@@ -1122,9 +1126,9 @@
       "startBattleWithCardInCommandZone": [
         "Giant Scythe"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Chicken Egg",
     "equipmentSlot": "Right",
     "iconName": "ChickenEgg",
@@ -1133,9 +1137,9 @@
       "startBattleWithCard": [
         "Chicken Egg"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Tibalt's Bag of Tricks",
     "equipmentSlot": "Left",
     "iconName": "BurningBook",
@@ -1144,9 +1148,9 @@
       "startBattleWithCardInCommandZone": [
         "Tibalt's Bag of Tricks"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Xira's Fancy Hat",
     "equipmentSlot": "Neck",
     "iconName": "BrownHat",
@@ -1155,9 +1159,9 @@
       "startBattleWithCard": [
         "Xira's Hive"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Grolnok's Skin",
     "equipmentSlot": "Right",
     "iconName": "FrogSkin",
@@ -1166,9 +1170,9 @@
       "startBattleWithCardInCommandZone": [
         "Grolnok's Skin"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Slobad's Iron Boots",
     "equipmentSlot": "Boots",
     "iconName": "MetallicBoots",
@@ -1178,13 +1182,12 @@
       "startBattleWithCardInCommandZone": [
         "Slobad's Iron Boots"
       ]
-}
-},
-
-{
+    }
+  },
+  {
     "name": "Blood Moon",
     "equipmentSlot": "Ability1",
-    "usableOnWorldMap":true,
+    "usableOnWorldMap": true,
     "effect": {
       "name": ""
     },
@@ -1194,5 +1197,5 @@
     "questItem": true,
     "shardsNeeded": 15,
     "cost": 1000
-}
+  }
 ]
