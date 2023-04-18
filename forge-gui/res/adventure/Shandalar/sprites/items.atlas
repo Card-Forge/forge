@@ -435,6 +435,9 @@ GreenLeaf2
 SearchPost
   xy: 384, 63
   size: 16, 16
+Flip
+  xy: 400, 63
+  size: 16, 16
 LogBook
   xy: 240, 912
   size: 16, 16

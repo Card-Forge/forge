@@ -217,7 +217,7 @@ public class FSkin {
         final FileHandle f4 = getDefaultSkinFile(ForgeConstants.SPRITE_AVATARS_FILE);
         final FileHandle f5 = getSkinFile(ForgeConstants.SPRITE_AVATARS_FILE);
         final FileHandle f6 = getDefaultSkinFile(SourceFile.OLD_FOILS.getFilename());
-        final FileHandle f7 = getSkinFile(ForgeConstants.SPRITE_MANAICONS_FILE);
+        final FileHandle f7 = getDefaultSkinFile(ForgeConstants.SPRITE_MANAICONS_FILE);
         final FileHandle f8 = getDefaultSkinFile(ForgeConstants.SPRITE_SLEEVES_FILE);
         final FileHandle f9 = getDefaultSkinFile(ForgeConstants.SPRITE_SLEEVES2_FILE);
         final FileHandle f10 = getDefaultSkinFile(ForgeConstants.SPRITE_BORDER_FILE);
