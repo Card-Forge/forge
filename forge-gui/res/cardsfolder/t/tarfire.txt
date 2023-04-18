@@ -1,5 +1,5 @@
 Name:Tarfire
 ManaCost:R
 Types:Tribal Instant Goblin
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:SP$ DealDamage | Cost$ R | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 Oracle:Tarfire deals 2 damage to any target.

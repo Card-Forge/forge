@@ -4,7 +4,7 @@ Types:Creature Elf Wizard
 PT:2/2
 K:Kicker:R:W
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked 1 | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked with its {R} kicker, it deals 2 damage to any target.
-SVar:TrigKicker:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2
+SVar:TrigKicker:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked 2 | Execute$ TrigKicker2 | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked with its {W} kicker, destroy target artifact.
 SVar:TrigKicker2:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact
 SVar:PlayMain1:TRUE
