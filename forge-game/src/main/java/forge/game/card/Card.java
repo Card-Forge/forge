@@ -400,6 +400,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public long getTransformedTimestamp() { return transformedTimestamp; }
     public void incrementTransformedTimestamp() { this.transformedTimestamp++; }
+    public void undoIncrementTransformedTimestamp() { this.transformedTimestamp--; }
 
     public CardState getCurrentState() {
         return currentState;
