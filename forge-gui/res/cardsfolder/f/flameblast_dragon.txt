@@ -4,6 +4,6 @@ Types:Creature Dragon
 PT:5/5
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks, you may pay {X}{R}. If you do, Flameblast Dragon deals X damage to any target.
-SVar:TrigDamage:AB$ DealDamage | Cost$ X R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
+SVar:TrigDamage:AB$ DealDamage | Cost$ X R | ValidTgts$ Any | NumDmg$ X
 SVar:X:Count$xPaid
 Oracle:Flying\nWhenever Flameblast Dragon attacks, you may pay {X}{R}. If you do, Flameblast Dragon deals X damage to any target.

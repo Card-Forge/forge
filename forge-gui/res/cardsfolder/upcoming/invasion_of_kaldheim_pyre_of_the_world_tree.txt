@@ -18,7 +18,7 @@ Name:Pyre of the World Tree
 ManaCost:no cost
 Colors:red
 Types:Enchantment
-A:AB$ DealDamage | Cost$ Discard<1/Land> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:AB$ DealDamage | Cost$ Discard<1/Land> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 T:Mode$ Discarded | ValidCard$ Land.YouOwn | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever you discard a land card, exile the top card of your library. You may play that card this turn.
 SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | AILogic$ ExileAndPlayUntilEOT
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | ExileOnMoved$ Exile | SubAbility$ DBCleanup
