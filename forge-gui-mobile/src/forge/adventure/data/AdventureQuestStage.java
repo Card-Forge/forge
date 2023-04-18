@@ -210,7 +210,7 @@ public class AdventureQuestStage implements Serializable {
                         }
                     }
                 } else {
-                    if (defeated.getData() != targetEnemyData)
+                    if (!defeated.getData().getName().equals(targetEnemyData.getName()))
                         //Does not count
                         return status;
                 }

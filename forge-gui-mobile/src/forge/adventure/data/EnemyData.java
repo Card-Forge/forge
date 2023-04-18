@@ -81,7 +81,7 @@ public class EnemyData implements Serializable {
 
     public String getName(){
         //todo: make this the default accessor for anything seen in UI
-        if (!nameOverride.isEmpty())
+        if (nameOverride != null && !nameOverride.isEmpty())
             return nameOverride;
         return name;
     }
