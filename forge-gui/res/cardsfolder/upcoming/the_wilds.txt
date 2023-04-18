@@ -11,4 +11,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Z:Remembered$Valid Creature.powerGE4/Plus.1
 DeckHas:Ability$Token|Sacrifice & Type$Food
 DeckHints:Type$Food
-Oracle:When you planeswalk to The Wilds and at the beginning of your upkeep, create a Food token.\nWhenever chaos ensues, target player sacrifices a creature. If they do, you create a Food token. You create two Food tokens instead if the sacrificed creature’s toughness was 4 or greater.
+Oracle:When you planeswalk to The Wilds and at the beginning of your upkeep, create a Food token.\nWhenever chaos ensues, target player sacrifices a creature. If they do, you create a Food token. You create two Food tokens instead if the sacrificed creature's toughness was 4 or greater.
