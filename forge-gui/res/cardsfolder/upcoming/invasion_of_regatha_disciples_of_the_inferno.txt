@@ -1,0 +1,23 @@
+Name:Invasion of Regatha
+ManaCost:2 R
+Types:Battle Siege
+Defense:5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 4 damage to another target battle or opponent and 1 damage to up to one target creature.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Battle.Other,Opponent | TgtPrompt$ Select another target battle or opponent | NumDmg$ 4 | SubAbility$ DBDealDamage
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1  | NumDmg$ 1
+AlternateMode:DoubleFaced
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Regatha enters the battlefield, it deals 4 damage to another target battle or opponent and 1 damage to up to one target creature.
+
+ALTERNATE
+
+Name:Disciples of the Inferno
+ManaCost:no cost
+Colors:red
+Types:Creature Human Monk
+PT:4/4
+K:Prowess
+R:Event$ DamageDone | ValidSource$ Card.YouCtrl+nonCreature,Emblem.YouCtrl | ValidTarget$ Creature,Battle,Opponent | ReplaceWith$ DmgPlus2 | Description$ If a noncreature source you control would deal damage to a creature, battle, or opponent, it deals that much damage plus 2 instead.
+SVar:DmgPlus2:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Plus.2
+SVar:BuffedBy:Card.nonCreature
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nIf a noncreature source you control would deal damage to a creature, battle, or opponent, it deals that much damage plus 2 instead.
