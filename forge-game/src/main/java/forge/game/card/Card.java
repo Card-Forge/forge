@@ -6658,6 +6658,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (sa.isBestow()) {
             animateBestow();
         }
+        if (sa.isDisturb() || sa.hasParam("CastTransformed")) {
+            incrementTransformedTimestamp();
+        }
         if (sa.hasParam("Prototype")) {
             Long next = game.getNextTimestamp();
             addCloneState(CardFactory.getCloneStates(this, this, sa), next);
