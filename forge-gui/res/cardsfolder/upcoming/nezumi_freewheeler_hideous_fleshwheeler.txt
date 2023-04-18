@@ -1,0 +1,25 @@
+Name:Nezumi Freewheeler
+ManaCost:3 B
+Types:Creature Rat Samurai
+PT:3/3
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, each player mills three cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ Player
+A:AB$ SetState | Cost$ 5 WP | Mode$ Transform | SorcerySpeed$ True | SpellDescription$ Transform CARDNAME. Activate only as a sorcery. ({W/P} can be paid with either {W} or 2 life.)
+AlternateMode:DoubleFaced
+DeckHas:Ability$Mill
+DeckHints:Color$White
+Oracle:Menace\nWhen Nezumi Freewheeler enters the battlefield, each player mills three cards. (To mill a card, put the top card of your library into your graveyard.)\n{5}{W/P}: Transform Nezumi Freewheeler. Activate only as a sorcery. ({W/P} can be paid with either {W} or 2 life.)
+
+ALTERNATE
+
+Name:Hideous Fleshwheeler
+ManaCost:no cost
+Colors:white,black
+Types:Creature Phyrexian Rat
+PT:4/5
+K:Menace
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When this creature transforms into CARDNAME, put target permanent card with mana value 2 or less from a graveyard onto the battlefield under your control.
+SVar:TrigPut:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Select target permanent card with mana value 2 or less from a graveyard | ValidTgts$ Permanent.cmcLE2 | GainControl$ True
+DeckHas:Ability$Graveyard
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen this creature transforms into Hideous Fleshwheeler, put target permanent card with mana value 2 or less from a graveyard onto the battlefield under your control.
