@@ -5344,11 +5344,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (!(isCreature() || isPlaneswalker() || isBattle())) {
                 return false;
             }
-            if (spellAbility == null)
+            //todo further check for Effect API and other replacement Effect
+            /*if (spellAbility == null)
                 return false;
             ApiType apiType = ((SpellAbility) spellAbility).getApi();
             if (!(ApiType.DealDamage.equals(apiType) || ApiType.PreventDamage.equals(apiType)))
-                return false;
+                return false;*/
         } else if (!getType().hasStringType(incR[0])) {
             return testFailed; // Check for wrong type
         }
