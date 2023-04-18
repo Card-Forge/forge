@@ -2125,7 +2125,11 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return false;
             }
         } else if (incR[0].equals("Any")) {
-            // Check if SpellAbility is a damage API type
+            if (spellAbility == null)
+                return false;
+            ApiType apiType = ((SpellAbility) spellAbility).getApi();
+            if (!(ApiType.DealDamage.equals(apiType) || ApiType.PreventDamage.equals(apiType)))
+                return false;
         } else if (!incR[0].equals("Player")) {
             return false;
         }
