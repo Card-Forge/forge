@@ -6,7 +6,7 @@ T:Mode$ Phase | PreCombatMain$ True | ValidPlayer$ You | TriggerZones$ Command |
 SVar:PutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | SubAbility$ DBMana
 SVar:DBMana:DB$ Mana | Produced$ R | Amount$ Y
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, you may pay {X}. If you do, CARDNAME deals X damage to any target.
-SVar:RolledChaos:AB$ DealDamage | Cost$ X | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
+SVar:RolledChaos:AB$ DealDamage | Cost$ X | ValidTgts$ Any | NumDmg$ X
 SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.CHARGE
 SVar:AIRollPlanarDieParams:Mode$ Always
