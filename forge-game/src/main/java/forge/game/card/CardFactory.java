@@ -353,7 +353,7 @@ public class CardFactory {
         card.addTrigger(planesWalkTrigger);
 
         StringBuilder saSB = new StringBuilder();
-        saSB.append("AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | Activator$ Player | ActivationZone$ Command | ");
+        saSB.append("ST$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | Activator$ Player | ActivationZone$ Command | ");
         saSB.append("SpellDescription$ Roll the planar dice. X is equal to the amount of times the planar die has been rolled this turn.");
 
         SpellAbility planarRoll = AbilityFactory.getAbility(saSB.toString(), card);

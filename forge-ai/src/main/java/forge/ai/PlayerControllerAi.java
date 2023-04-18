@@ -1,20 +1,11 @@
 package forge.ai;
 
-import java.security.InvalidParameterException;
-import java.util.*;
-
-import forge.game.keyword.Keyword;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-
 import forge.LobbyPlayer;
 import forge.ai.ability.ProtectAi;
 import forge.card.CardStateName;
@@ -25,48 +16,26 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameObject;
-import forge.game.GameType;
+import forge.game.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardUtil;
-import forge.game.card.CardView;
-import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostEnlist;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.player.DelayedReveal;
-import forge.game.player.Player;
-import forge.game.player.PlayerActionConfirmMode;
-import forge.game.player.PlayerController;
-import forge.game.player.PlayerView;
+import forge.game.player.*;
 import forge.game.replacement.ReplacementEffect;
-import forge.game.spellability.Ability;
-import forge.game.spellability.AbilityStatic;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.LandAbility;
-import forge.game.spellability.OptionalCost;
-import forge.game.spellability.OptionalCostValue;
-import forge.game.spellability.Spell;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.TargetChoices;
+import forge.game.spellability.*;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
@@ -75,6 +44,12 @@ import forge.util.ITriggerEvent;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.security.InvalidParameterException;
+import java.util.*;
 
 
 /**
@@ -604,6 +579,12 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public String chooseSector(Card assignee, String ai, List<String> sectors) {
         return Aggregates.random(sectors);
+    }
+
+    @Override
+    public PlanarDice choosePDRollToIgnore(List<PlanarDice> rolls) {
+        //TODO create AI logic for this
+        return Aggregates.random(rolls);
     }
 
     @Override
