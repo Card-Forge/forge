@@ -11,5 +11,5 @@ SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Car
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Dragons:DB$ Animate | Defined$ Self | Triggers$ DragonsTrigger | Duration$ Permanent | SpellDescription$ Dragons
 SVar:DragonsTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ SmallBurnination | TriggerDescription$ Whenever a creature you control leaves the battlefield, CARDNAME deals 1 damage to any target.
-SVar:SmallBurnination:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
+SVar:SmallBurnination:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
 Oracle:As Outpost Siege enters the battlefield, choose Khans or Dragons.\n• Khans — At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.\n• Dragons — Whenever a creature you control leaves the battlefield, Outpost Siege deals 1 damage to any target.

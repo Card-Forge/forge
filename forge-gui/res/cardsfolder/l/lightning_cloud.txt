@@ -2,5 +2,5 @@ Name:Lightning Cloud
 ManaCost:3 R
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card.Red | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever a player casts a red spell, you may pay {R}. If you do, CARDNAME deals 1 damage to any target.
-SVar:TrigDealDamage:AB$DealDamage | Cost$ R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
+SVar:TrigDealDamage:AB$DealDamage | Cost$ R | ValidTgts$ Any | NumDmg$ 1
 Oracle:Whenever a player casts a red spell, you may pay {R}. If you do, Lightning Cloud deals 1 damage to any target.

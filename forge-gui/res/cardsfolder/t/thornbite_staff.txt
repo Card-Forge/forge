@@ -4,7 +4,7 @@ Types:Tribal Artifact Shaman Equipment
 K:Equip:4
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ Damage | AddTrigger$ TrigChangeZone | AddSVar$ ThornbiteTrigUntap | Description$ Equipped creature has "{2}, {T}: This creature deals 1 damage to any target" and "Whenever a creature dies, untap this creature."
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Shaman | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever a Shaman creature enters the battlefield, you may attach CARDNAME to it.
-SVar:Damage:AB$DealDamage | Cost$ 2 T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+SVar:Damage:AB$DealDamage | Cost$ 2 T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:TrigChangeZone:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ ThornbiteTrigUntap | TriggerDescription$ Whenever a creature dies, untap equipped creature.
 SVar:ThornbiteTrigUntap:DB$ Untap
 SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCard

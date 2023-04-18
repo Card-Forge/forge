@@ -6,7 +6,7 @@ A:AB$ ChangeZone | Cost$ AddCounter<2/LOYALTY> | Origin$ Library | Destination$ 
 A:AB$ DealDamage | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the number of Mountains you control.
 A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Koth, Fire of Resistance | Triggers$ STDamage | Duration$ Permanent | SpellDescription$ You get an emblem with "Whenever a Mountain enters the battlefield under your control, this emblem deals 4 damage to any target."
 SVar:STDamage:Mode$ ChangesZone | ValidCard$ Mountain.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Mountain enters the battlefield under your control, this emblem deals 4 damage to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4
 SVar:X:Count$Valid Mountain.YouCtrl
 DeckNeeds:Type$Mountain
 SVar:BuffedBy:Mountain

@@ -1,6 +1,6 @@
 Name:Flame Sword
 Types:Artifact
-A:AB$ DealDamage | ActivationLimit$ 1 | Cost$ PayShards<3> | ActivationZone$ Command | ValidTgts$ Creature,Player,Planeswalker | NumDmg$ Z | SubAbility$ Eject | SpellDescription$ Deal 3 damage to any target. If the target is a tapped creature, deal 5 damage to it instead.
+A:AB$ DealDamage | ActivationLimit$ 1 | Cost$ PayShards<3> | ActivationZone$ Command | ValidTgts$ Any | NumDmg$ Z | SubAbility$ Eject | SpellDescription$ Deal 3 damage to any target. If the target is a tapped creature, deal 5 damage to it instead.
 SVar:X:3
 SVar:Y:Targeted$Valid Creature.tapped/Times.2
 SVar:Z:SVar$X/Plus.Y

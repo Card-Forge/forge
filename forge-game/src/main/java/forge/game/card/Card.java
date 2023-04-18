@@ -5340,6 +5340,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (isImmutable()) {
                 return testFailed;
             }
+        } else if (incR[0].equals("Any")) {
+            if (!(isCreature() || isPlaneswalker() || isBattle())) {
+                return false;
+            }
+            // Check if SpellAbility API is Deal or Prevent Damage type
         } else if (!getType().hasStringType(incR[0])) {
             return testFailed; // Check for wrong type
         }

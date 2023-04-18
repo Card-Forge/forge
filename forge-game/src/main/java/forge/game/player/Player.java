@@ -2124,10 +2124,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (!equals(sourceController)) {
                 return false;
             }
-        } else {
-            if (!incR[0].equals("Player")) {
-                return false;
-            }
+        } else if (incR[0].equals("Any")) {
+            // Check if SpellAbility is a damage API type
+        } else if (!incR[0].equals("Player")) {
+            return false;
         }
 
         if (incR.length > 1) {
