@@ -21,7 +21,7 @@ K:Saga:3:Incubate,PumpAll,DestroyAll
 SVar:Incubate:DB$ Incubate | Amount$ 2 | Times$ 5 | SubAbility$ DBTransform | SpellDescription$ Incubate 2 five times, then transform all Incubator tokens you control.
 SVar:DBTransform:DB$ SetState | Defined$ Valid Incubator.token+YouCtrl | Mode$ Transform
 SVar:PumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Double Strike | SpellDescription$ Creatures you control get +1/+1 and gain double strike until end of turn.
-SVar:DestroyAll:DB$ DestroyAll | Cost$ SubCounter<5/LOYALTY> | ValidCards$ Permanent.nonArtifact+nonLand+nonPhyrexian+StrictlyOther | SubAbility$ DBExile | SpellDescription$ Destroy all other permanents except for artifacts, lands, and Phyrexians. Exile CARDNAME, then return it to the battlefield (front face up).
+SVar:DestroyAll:DB$ DestroyAll | Cost$ SubCounter<5/LOYALTY> | ValidCards$ Permanent.nonArtifact+nonLand+nonPhyrexian+StrictlyOther | SubAbility$ DBExile | Ultimate$ True | SpellDescription$ Destroy all other permanents except for artifacts, lands, and Phyrexians. Exile CARDNAME, then return it to the battlefield (front face up).
 SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

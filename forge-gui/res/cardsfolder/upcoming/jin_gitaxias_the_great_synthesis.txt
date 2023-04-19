@@ -26,7 +26,7 @@ SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBEffect | SpellDescription$ Dr
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STHandSize | Duration$ UntilLoseControlOfHost
 SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 SVar:DBBounceAll:DB$ ChangeZoneAll | ChangeType$ Creature.nonPhyrexian | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all non-Phyrexian creatures to their owners' hands.
-SVar:DBCastAll:DB$ Play | Valid$ Card.nonLand+YouOwn | ValidSA$ Spell | ValidZone$ Hand | WithoutManaCost$ True | Amount$ All | Controller$ You | Optional$ True | SubAbility$ DBExileSelf | SpellDescription$ You may cast any number of spells from your hand without paying their mana costs. Exile CARDNAME, then return it to the battlefield.
+SVar:DBCastAll:DB$ Play | Valid$ Card.nonLand+YouOwn | ValidSA$ Spell | ValidZone$ Hand | WithoutManaCost$ True | Amount$ All | Controller$ You | Optional$ True | SubAbility$ DBExileSelf | Ultimate$ True | SpellDescription$ You may cast any number of spells from your hand without paying their mana costs. Exile CARDNAME, then return it to the battlefield.
 SVar:DBExileSelf:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBReturnSelf | RememberChanged$ True
 SVar:DBReturnSelf:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
