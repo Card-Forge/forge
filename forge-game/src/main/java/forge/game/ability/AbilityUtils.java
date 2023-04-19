@@ -2690,8 +2690,8 @@ public class AbilityUtils {
             return doXMath(game.getStack().getSpellsCastThisTurn().size() - 1, expr, c, ctb);
         }
 
-        if (sq[0].startsWith("RolledThisTurn")) {
-            return game.getPhaseHandler().getPlanarDiceRolledthisTurn();
+        if (sq[0].startsWith("PlanarDiceSpecialActionThisTurn")) {
+            return game.getPhaseHandler().getPlanarDiceSpecialActionThisTurn();
         }
 
         if (sq[0].contains("CardTypes")) {

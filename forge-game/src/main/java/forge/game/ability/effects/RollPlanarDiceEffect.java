@@ -25,8 +25,8 @@ public class RollPlanarDiceEffect extends SpellAbilityEffect {
         if (game.getActivePlanes() == null) { // not a planechase game, nothing happens
             return;
         }
-        if (!sa.hasParam("NotCountedForPDCost")) {
-            game.getPhaseHandler().incPlanarDiceRolledthisTurn();
+        if (sa.hasParam("SpecialAction")) {
+            game.getPhaseHandler().incPlanarDiceSpecialActionThisTurn();
         }
         // Play the die roll sound
         game.fireEvent(new GameEventRollDie());

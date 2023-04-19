@@ -341,23 +341,21 @@ public class CardFactory {
     }
 
     private static void buildPlaneAbilities(Card card) {
-        StringBuilder triggerSB = new StringBuilder();
-        triggerSB.append("Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Secondary$ True | ");
-        triggerSB.append("TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, ");
-        triggerSB.append("then move the top card of your planar deck off that planar deck and turn it face up");
+        String trigger = "Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Secondary$ True | " +
+                "TriggerDescription$ Whenever you roll the Planeswalker symbol on the planar die, planeswalk.";
 
         String rolledWalk = "DB$ Planeswalk";
 
-        Trigger planesWalkTrigger = TriggerHandler.parseTrigger(triggerSB.toString(), card, true);
+        Trigger planesWalkTrigger = TriggerHandler.parseTrigger(trigger, card, true);
         planesWalkTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledWalk, card));
         card.addTrigger(planesWalkTrigger);
 
-        StringBuilder saSB = new StringBuilder();
-        saSB.append("ST$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | Activator$ Player | ActivationZone$ Command | ");
-        saSB.append("SpellDescription$ Roll the planar dice. X is equal to the amount of times the planar die has been rolled this turn.");
+        String specialA = "ST$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | Activator$ Player | SpecialAction$ True" +
+                "ActivationZone$ Command | SpellDescription$ Roll the planar dice. X is equal to the number of times " +
+                "you have previously taken this action this turn.";
 
-        SpellAbility planarRoll = AbilityFactory.getAbility(saSB.toString(), card);
-        planarRoll.setSVar("X", "Count$RolledThisTurn");
+        SpellAbility planarRoll = AbilityFactory.getAbility(specialA, card);
+        planarRoll.setSVar("X", "Count$PlanarDiceSpecialActionThisTurn");
 
         card.addSpellAbility(planarRoll);
     }
