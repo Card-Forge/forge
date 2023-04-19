@@ -3012,6 +3012,7 @@
 },
 {
 	"name": "Swamp Town2",
+	"type": "town",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "SwampTown",
