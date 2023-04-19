@@ -44,9 +44,6 @@ import forge.util.TextUtil;
 public class TargetRestrictions {
     // Target has two things happening:
     // Targeting restrictions (Creature, Min/Maxm etc) which are true for this
-
-    // Target Choices (which is specific for the StackInstance)
-
     // What this Object is restricted to targeting
     private String[] originalValidTgts,
         validTgts;
@@ -133,25 +130,9 @@ public class TargetRestrictions {
         this.maxTargets = max;
     }
 
-    /**
-     * <p>
-     * getMandatory.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean getMandatory() {
         return this.bMandatory;
     }
-
-    /**
-     * <p>
-     * setMandatory.
-     * </p>
-     * 
-     * @param m
-     *            a boolean.
-     */
     public final void setMandatory(final boolean m) {
         this.bMandatory = m;
     }
@@ -386,29 +367,14 @@ public class TargetRestrictions {
         return opponent && !player;
     }
 
-    /**
-     * <p>
-     * canTgtPlayer.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean canTgtPlayer() {
         for (final String s : this.validTgts) {
-            if (s.startsWith("Player") || s.startsWith("Opponent")) {
+            if (s.startsWith("Player") || s.startsWith("Opponent") || s.startsWith("Any")) {
                 return true;
             }
         }
         return false;
     }
-
-    /**
-     * <p>
-     * canTgtCreature.
-     * </p>
-     * 
-     * @return a boolean.
-     */
 
     public final boolean canTgtPermanent() {
         for (final String s : this.validTgts) {
@@ -419,15 +385,10 @@ public class TargetRestrictions {
         return false;
     }
 
-    /**
-     * Can tgt creature.
-     * 
-     * @return true, if successful
-     */
     public final boolean canTgtCreature() {
         for (final String s : this.validTgts) {
             // TODO check IsCommander when in that variant
-            if ((s.contains("Creature") || s.startsWith("Permanent"))
+            if ((s.contains("Creature") || s.startsWith("Permanent") || s.startsWith("Any"))
                     && !s.contains("nonCreature")) {
                 return true;
             }
@@ -440,15 +401,10 @@ public class TargetRestrictions {
         }
         return false;
     }
-    
-    /**
-     * Can tgt planeswalker.
-     * 
-     * @return true, if successful
-     */
+
     public final boolean canTgtPlaneswalker() {
         for (final String s : this.validTgts) {
-            if (s.startsWith("Planeswalker")) {
+            if (s.startsWith("Planeswalker") || s.startsWith("Any")) {
                 return true;
             }
         }
@@ -539,34 +495,10 @@ public class TargetRestrictions {
         return num + getAllCandidates(sa, isTargeted).size();
     }
 
-    /**
-     * <p>
-     * getAllCandidates.
-     * </p>
-     * 
-     * @param sa
-     *            the sa
-     * @param isTargeted
-     *            Check Valid Candidates and Targeting
-     * @return a List<Object>.
-     */
     public final List<GameEntity> getAllCandidates(final SpellAbility sa, final boolean isTargeted) {
         return getAllCandidates(sa, isTargeted, false);
     }
 
-    /**
-     * <p>
-     * getAllCandidates.
-     * </p>
-     * 
-     * @param sa
-     *            the sa
-     * @param isTargeted
-     *            Check Valid Candidates and Targeting
-     * @param onlyNonCard
-     *            Only return non-card (e.g. player) Candidates
-     * @return a List<Object>.
-     */
     public final List<GameEntity> getAllCandidates(final SpellAbility sa, final boolean isTargeted, final boolean onlyNonCard) {
         final Game game = sa.getActivatingPlayer().getGame();
         final List<GameEntity> candidates = Lists.newArrayList();
@@ -595,82 +527,33 @@ public class TargetRestrictions {
         return candidates;
     }
 
-    /**
-     * Checks if is unique targets.
-     * 
-     * @return true, if is unique targets
-     */
     public final boolean isUniqueTargets() {
         return this.uniqueTargets;
     }
-
-    /**
-     * Sets the unique targets.
-     * 
-     * @param unique
-     *            the new unique targets
-     */
     public final void setUniqueTargets(final boolean unique) {
         this.uniqueTargets = unique;
     }
-
-    /**
-     * Checks if targets must be from a single zone.
-     * 
-     * @return true, if singleZone
-     */
     public final boolean isSingleZone() {
         return this.singleZone;
     }
-
-    /**
-     * Sets if targets must be from a single zone.
-     * 
-     * @param single
-     *            the new singleZone
-     */
     public final void setSingleZone(final boolean single) {
         this.singleZone = single;
     }
-
-    /**
-     * @return the withoutSameCreatureType
-     */
     public boolean isWithoutSameCreatureType() {
         return withoutSameCreatureType;
     }
-
-    /**
-     * @param b the withoutSameCreatureType to set
-     */
     public void setWithoutSameCreatureType(boolean b) {
         this.withoutSameCreatureType = b;
     }
-
-    /**
-     * @return the withoutSameCreatureType
-     */
     public boolean isWithSameCreatureType() {
         return withSameCreatureType;
     }
-
-    /**
-     * @param b the withoutSameCreatureType to set
-     */
     public void setWithSameCreatureType(boolean b) {
         this.withSameCreatureType = b;
     }
-
-    /**
-     * @return the withSameCardType
-     */
     public boolean isWithSameCardType() {
         return withSameCardType;
     }
-
-    /**
-     * @param b the withSameCardType to set
-     */
     public void setWithSameCardType(boolean b) {
         this.withSameCardType = b;
     }
