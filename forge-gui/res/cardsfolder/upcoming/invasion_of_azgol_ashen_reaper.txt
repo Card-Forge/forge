@@ -19,5 +19,5 @@ PT:2/1
 K:Menace
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a +1/+1 counter on CARDNAME if a permanent was put into a graveyard from the battlefield this turn.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ Morbid | ConditionSVarCompare$ GE1
-SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Permanent
 Oracle:Menace\nAt the beginning of your end step, put a +1/+1 counter on Ashen Reaper if a permanent was put into a graveyard from the battlefield this turn.
