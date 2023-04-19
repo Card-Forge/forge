@@ -2139,25 +2139,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sbLong.append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                     }
                 } else if (keyword.startsWith("Kicker")) {
-                    final StringBuilder sbx = new StringBuilder();
-                    final String[] n = keyword.split(":");
-                    final Cost cost = new Cost(n[1], false);
-                    if (!keyword.endsWith("Generic")) {
-                        sbx.append("Kicker ");
-                        sbx.append(cost.toSimpleString());
-                        if (Lists.newArrayList(n).size() > 2) {
-                            sbx.append(" and/or ");
-                            final Cost cost2 = new Cost(n[2], false);
-                            sbx.append(cost2.toSimpleString());
-                        }
-                        sbx.append(" (").append(inst.getReminderText()).append(")");
-                    } else {
-                        sbx.append("As an additional cost to cast this spell, you may ");
-                        String costS = StringUtils.uncapitalize(cost.toSimpleString());
-                        sbx.append(cost.hasManaCost() ? "pay " + costS : costS);
-                        sbx.append(".");
-                    }
-                    sbLong.append(sbx).append("\r\n");
+                    sbLong.append(kickerDesc(keyword, inst.getReminderText())).append("\r\n");
                 } else if (keyword.startsWith("Trample:")) {
                     sbLong.append("Trample over planeswalkers").append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                 } else if (keyword.startsWith("Hexproof:")) {
@@ -2412,6 +2394,50 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         sb.append(sbLong);
         return CardTranslation.translateMultipleDescriptionText(sb.toString(), getName());
+    }
+
+    private String kickerDesc (String keyword, String remText) {
+        final StringBuilder sbx = new StringBuilder();
+        final String[] n = keyword.split(":");
+        final Cost cost = new Cost(n[1], false);
+        final String costStr = cost.toSimpleString();
+        final boolean manaOnly = cost.isOnlyManaCost();
+        if (!keyword.endsWith("Generic")) {
+            sbx.append("Kicker").append(manaOnly ? " " + costStr : "—" + costStr + ".");
+            if (Lists.newArrayList(n).size() > 2) {
+                sbx.append(" and/or ");
+                final Cost cost2 = new Cost(n[2], false);
+                sbx.append(cost2.toSimpleString());
+            }
+            if (!manaOnly) {
+                if (cost.hasNoManaCost()) {
+                    remText = remText.replaceFirst(" pay an additional", "");
+                    remText = remText.replace(remText.charAt(8), Character.toLowerCase(remText.charAt(8)));
+                } else {
+                    remText = remText.replaceFirst(" an additional", "");
+                    char c = remText.charAt(remText.indexOf(",") + 2);
+                    remText = remText.replace(c, Character.toLowerCase(c));
+                    remText = remText.replaceFirst(", ", " and ");
+                }
+                remText = remText.replaceFirst("as", "in addition to any other costs as");
+                if (remText.contains(" tap ")) {
+                    if (remText.contains("tap a")) {
+                        String noun = remText.substring(remText.indexOf("untapped") + 9, remText.indexOf(" in "));
+                        remText = remText.replace(remText.substring(12, remText.indexOf(" in ")),
+                                Lang.nounWithNumeralExceptOne(1, noun) + " ");
+                    } else {
+                        remText = remText.replaceFirst(" untapped ", "");
+                    }
+                }
+            }
+            sbx.append(" (").append(remText).append(")\r\n");
+        } else {
+            sbx.append("As an additional cost to cast this spell, you may ");
+            String costS = StringUtils.uncapitalize(costStr);
+            sbx.append(cost.hasManaCost() ? "pay " + costS : costS);
+            sbx.append(".").append("\r\n");
+        }
+        return sbx.toString();
     }
 
     // get the text of the abilities of a card
@@ -2792,25 +2818,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sbBefore.append("Multikicker ").append(cost.toSimpleString()).append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                     }
                 } else if (keyword.startsWith("Kicker")) {
-                    final StringBuilder sbx = new StringBuilder();
-                    final String[] n = keyword.split(":");
-                    final Cost cost = new Cost(n[1], false);
-                    if (!keyword.endsWith("Generic")) {
-                        sbx.append("Kicker ");
-                        sbx.append(cost.toSimpleString());
-                        if (Lists.newArrayList(n).size() > 2) {
-                            sbx.append(" and/or ");
-                            final Cost cost2 = new Cost(n[2], false);
-                            sbx.append(cost2.toSimpleString());
-                        }
-                        sbx.append(" (").append(inst.getReminderText()).append(")\r\n");
-                    } else {
-                        sbx.append("As an additional cost to cast this spell, you may ");
-                        String costS = StringUtils.uncapitalize(cost.toSimpleString());
-                        sbx.append(cost.hasManaCost() ? "pay " + costS : costS);
-                        sbx.append(".\r\n");
-                    }
-                    sbBefore.append(sbx).append("\r\n");
+                    sbBefore.append(kickerDesc(keyword, inst.getReminderText())).append("\r\n");
                 } else if (keyword.startsWith("AlternateAdditionalCost")) {
                     final String[] costs = keyword.split(":", 2)[1].split(":");
                     sbBefore.append("As an additional cost to cast this spell, ");
