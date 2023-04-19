@@ -32,6 +32,7 @@ import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 
 /**
  * The Class CostSacrifice.
@@ -97,7 +98,9 @@ public class CostSacrifice extends CostPartWithList {
             } else {
                 desc = this.getTypeDescription();
             }
-            sb.append(Cost.convertAmountTypeToWords(convertAmount(), getAmount(), desc));
+
+            sb.append(convertAmount() == null ? Lang.nounWithNumeralExceptOne(getAmount(), desc)
+                    : Lang.nounWithNumeralExceptOne(convertAmount(), desc));
         }
         return sb.toString();
     }
