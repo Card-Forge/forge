@@ -1360,6 +1360,11 @@ public class CardRenderer {
     }
 
     public static void drawFoilEffect(Graphics g, CardView card, float x, float y, float w, float h, boolean inZoomer) {
+        if (card.getCurrentState().isBattle())
+            return;
+        if (card.getAlternateState() != null && card.getCurrentState().isBattle())
+            return;
+        //todo add support for battle, better to move the render inside the draw method for card in the future or a general foil effect shader..
         float new_x = x;
         float new_y = y;
         float new_w = w;
