@@ -351,8 +351,8 @@ public class CardFactory {
         card.addTrigger(planesWalkTrigger);
 
         String specialA = "ST$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | Activator$ Player | SpecialAction$ True" +
-                "ActivationZone$ Command | SpellDescription$ Roll the planar dice. X is equal to the number of times " +
-                "you have previously taken this action this turn.";
+                " | ActivationZone$ Command | SpellDescription$ Roll the planar dice. X is equal to the number of " +
+                "times you have previously taken this action this turn.";
 
         SpellAbility planarRoll = AbilityFactory.getAbility(specialA, card);
         planarRoll.setSVar("X", "Count$PlanarDiceSpecialActionThisTurn");
