@@ -6,9 +6,9 @@ T:Mode$ DamageDone | ValidSource$ Wolf.YouCtrl,Werewolf.YouCtrl | ValidTarget$ P
 SVar:TrigDrawD:DB$ Draw | Defined$ You | NumCards$ 1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigNight | TriggerDescription$ At the beginning of your upkeep, if you control three or more Wolves and/or Werewolves, it becomes night. Then transform any number of Human Werewolves you control.
 SVar:TrigNight:DB$ DayTime | Value$ Night | SubAbility$ DBTransform
-SVar:DBTransform:DB$ SetState | MinAmount$ 0 | Amount$ NumHumanWerewolves | Choices$ Human.Werewolf+YouCtrl+DoubleFaced | ChoiceTitle$ Choose any number of Human Werewolves you control | Mode$ Transform
+SVar:DBTransform:DB$ SetState | MinAmount$ 0 | Amount$ NumHumanWerewolves | Choices$ Human.Werewolf+YouCtrl+CanTransform | ChoiceTitle$ Choose any number of Human Werewolves you control | Mode$ Transform
 K:Daybound
-SVar:NumHumanWerewolves:Count$Valid Human.Werewolf+YouCtrl+DoubleFaced
+SVar:NumHumanWerewolves:Count$Valid Human.Werewolf+YouCtrl+CanTransform
 SVar:X:Count$Valid Wolf.YouCtrl,Werewolf.YouCtrl
 DeckHints:Type$Wolf|Werewolf
 AlternateMode:DoubleFaced

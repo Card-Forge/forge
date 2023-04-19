@@ -46,7 +46,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value += addValue(toughness * 10, "toughness: " + toughness);
 
             // because backside is always stronger the potential makes it better than a single faced card
-            if (c.hasKeyword(Keyword.DAYBOUND) && c.hasBackSide()) {
+            if (c.hasKeyword(Keyword.DAYBOUND) && c.isDoubleFaced()) {
                 value += addValue(power * 10, "transforming");
             }
         }

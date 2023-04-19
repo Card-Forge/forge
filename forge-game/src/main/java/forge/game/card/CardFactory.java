@@ -253,7 +253,7 @@ public class CardFactory {
                 c.setState(CardStateName.Flipped, false);
                 c.setImageKey(cp.getImageKey(true));
             }
-            else if (c.hasBackSide() && cardRules != null) {
+            else if (c.isDoubleFaced() && cardRules != null) {
                 c.setState(cardRules.getSplitType().getChangedStateName(), false);
                 c.setImageKey(cp.getImageKey(true));
             }
@@ -300,7 +300,7 @@ public class CardFactory {
 
     private static void buildAbilities(final Card card) {
         for (final CardStateName state : card.getStates()) {
-            if (card.hasBackSide() && state == CardStateName.FaceDown) {
+            if (card.isDoubleFaced() && state == CardStateName.FaceDown) {
                 continue; // Ignore FaceDown for DFC since they have none.
             }
             card.setState(state, false);
