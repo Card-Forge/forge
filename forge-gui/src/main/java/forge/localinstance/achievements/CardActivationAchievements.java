@@ -29,7 +29,7 @@ public class CardActivationAchievements extends AchievementCollection {
     }
 
     protected void add(String cardName0, String displayName0, String flavorText0) {
-        add(new NonPWUltimate(cardName0, displayName0, flavorText0));
+        add(new CardAbilityUltimate(cardName0, displayName0, flavorText0));
     }
 
     @Override
@@ -50,14 +50,14 @@ public class CardActivationAchievements extends AchievementCollection {
         }
     }
 
-    private class NonPWUltimate extends ProgressiveAchievement {
-        private NonPWUltimate(String cardName0, String displayName0, String flavorText0) {
+    private class CardAbilityUltimate extends ProgressiveAchievement {
+        private CardAbilityUltimate(String cardName0, String displayName0, String flavorText0) {
             super(cardName0, displayName0, Localizer.getInstance().getMessage("lblWinGameAfterActivatingCardUltimate", CardTranslation.getTranslatedName(cardName0)), flavorText0);
         }
 
         @Override
         protected boolean eval(Player player, Game game) {
-            return true; //if this reaches this point, it can be presumed that alternate win condition achieved
+            return true; //if this reaches this point, it can be presumed that winning the game after activating the ultimate card ability is accomplished
         }
 
         @Override
