@@ -197,6 +197,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private List<Player> attackedPlayersLastTurn = new ArrayList<>();
     private List<Player> attackedPlayersThisCombat = new ArrayList<>();
 
+    private boolean beenDealtCombatDamageSinceLastTurn = false;
+
     private boolean activateLoyaltyAbilityThisTurn = false;
     private boolean tappedLandForManaThisTurn = false;
     private List<Card> completedDungeons = new ArrayList<>();
@@ -1845,6 +1847,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         this.tappedLandForManaThisTurn = tappedLandForManaThisTurn;
     }
 
+    public final boolean hasBeenDealtCombatDamageSinceLastTurn() {
+        return beenDealtCombatDamageSinceLastTurn;
+    }
+    public final void setBeenDealtCombatDamageSinceLastTurn(final boolean b) {
+        beenDealtCombatDamageSinceLastTurn = b;
+    }
+
     public final boolean getActivateLoyaltyAbilityThisTurn() {
         return activateLoyaltyAbilityThisTurn;
     }
@@ -2452,6 +2461,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // set last turn nr
         if (game.getPhaseHandler().isPlayerTurn(this)) {
+            setBeenDealtCombatDamageSinceLastTurn(false);
             setAttackedPlayersMyLastTurn(getAttackedPlayersMyTurn());
             clearAttackedMyTurn();
             this.lastTurnNr = game.getPhaseHandler().getTurn();
