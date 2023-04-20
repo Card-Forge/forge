@@ -28,7 +28,7 @@ public enum GlobalRuleChange {
     noNight ("It can't become night."),
     onlyOneBlocker ("No more than one creature can block each combat."),
     onlyOneBlockerPerOpponent ("Each opponent can't block with more than one creature."),
-    onlyTwoBlockers ("No more than two creatures can block each combat."),
+    onlyTwoBlockers ("No more than two creatures can block each combat.");
 
     private final String ruleText;
 
