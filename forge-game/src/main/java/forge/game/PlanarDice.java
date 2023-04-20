@@ -60,9 +60,16 @@ public enum PlanarDice {
 
         PlanarDice trigRes = res;
 
-        if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.blankIsChaos)
-                && res == Blank) {
-            trigRes = Chaos;
+        final Map<AbilityKey, Object> resRepParams = AbilityKey.mapFromAffected(roller);
+        resRepParams.put(AbilityKey.Result, res);
+
+        switch (game.getReplacementHandler().run(ReplacementType.PlanarDiceResult, resRepParams)) {
+            case NotReplaced:
+                break;
+            case Updated: {
+                trigRes = (PlanarDice) resRepParams.get(AbilityKey.Result);
+                break;
+            }
         }
 
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(roller);

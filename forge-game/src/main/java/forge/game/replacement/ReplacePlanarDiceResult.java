@@ -23,7 +23,7 @@ import forge.game.spellability.SpellAbility;
 
 import java.util.Map;
 
-public class ReplaceRollPlanarDice extends ReplacementEffect {
+public class ReplacePlanarDiceResult extends ReplacementEffect {
 
     /**
      * Instantiates a new replace roll planar dice.
@@ -31,7 +31,7 @@ public class ReplaceRollPlanarDice extends ReplacementEffect {
      * @param params the params
      * @param host   the host
      */
-    public ReplaceRollPlanarDice(final Map<String, String> params, final Card host, final boolean intrinsic) {
+    public ReplacePlanarDiceResult(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -40,7 +40,7 @@ public class ReplaceRollPlanarDice extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
+        if (!matchesValidParam("ValidRoll", runParams.get(AbilityKey.Result))) {
             return false;
         }
         return true;
@@ -51,7 +51,6 @@ public class ReplaceRollPlanarDice extends ReplacementEffect {
      */
     @Override
     public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
-        sa.setReplacingObject(AbilityKey.Number, runParams.get(AbilityKey.Number));
-        sa.setReplacingObject(AbilityKey.Ignore, runParams.get(AbilityKey.Ignore));
+        sa.setReplacingObject(AbilityKey.Result, runParams.get(AbilityKey.Result));
     }
 }
