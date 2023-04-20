@@ -88,6 +88,7 @@ public enum CSubmenuDuels implements ICDoc {
 		view.getCbPlant().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent arg0) {
+				// This can't be translated. As the English string "Plant" is used to find the Plant pet.
 				quest.selectPet(0, view.getCbPlant().isSelected() ? "Plant" : null);
 				quest.save();
 			}
