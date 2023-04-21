@@ -885,7 +885,7 @@
 	"commandOnUse": "teleport to poi Spawn",
 	"iconName": "ColorlessRune",
 	"questItem": true,
-  "unique": true,
+	"unique": true,
 	"shardsNeeded": 1,
 	"cost": 100
 },
