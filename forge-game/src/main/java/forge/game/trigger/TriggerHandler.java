@@ -180,7 +180,7 @@ public class TriggerHandler {
         return FileSection.parseToMap(trigParse, FileSection.DOLLAR_SIGN_KV_SEPARATOR);
     }
 
-    private void collectTriggerForWaiting() {
+    public void collectTriggerForWaiting() {
         for (final TriggerWaiting wt : waitingTriggers) {
             if (wt.getTriggers() != null)
                 continue;

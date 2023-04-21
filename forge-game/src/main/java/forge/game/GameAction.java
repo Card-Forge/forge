@@ -1439,6 +1439,8 @@ public class GameAction {
             }
             setHoldCheckingStaticAbilities(false);
 
+            // important to collect first otherwise if a static fires it will mess up registered ones from LKI
+            game.getTriggerHandler().collectTriggerForWaiting();
             if (game.getTriggerHandler().runWaitingTriggers()) {
                 checkAgain = true;
             }
