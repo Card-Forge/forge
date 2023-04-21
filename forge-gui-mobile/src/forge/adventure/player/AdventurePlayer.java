@@ -764,7 +764,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public boolean addItem(String name) {
         ItemData item = ItemData.getItem(name);
-        if (item.unique && inventoryItems.contains(name, false)) return false;
+        if (item.unique && inventoryItems.contains(name, false))
+            return false;
         if (item == null)
             return false;
         inventoryItems.add(name);
