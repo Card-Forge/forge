@@ -22,5 +22,5 @@ PT:4/4
 K:Trample
 K:Flying
 T:Mode$ Attacks | ValidCard$ Dragon.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a Dragon you control attacks, it deals 2 damage to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any target | NumDmg$ 2
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
 Oracle:Flying, trample\nWhenever a Dragon you control attacks, it deals 2 damage to any target.
