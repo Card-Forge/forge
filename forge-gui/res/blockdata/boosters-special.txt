@@ -310,3 +310,15 @@ ONE Rebellious 1: 1 wholeSheet("ONE Rebellious 1"), 1 RareMythic:fromSheet("ONE 
 ONE Rebellious 2: 1 wholeSheet("ONE Rebellious 2"), 1 RareMythic:fromSheet("ONE Red Inserts")
 ONE Toxic 1: 1 wholeSheet("ONE Toxic 1"), 1 RareMythic:fromSheet("ONE Green Inserts")
 ONE Toxic 2: 1 wholeSheet("ONE Toxic 2"), 1 RareMythic:fromSheet("ONE Green Inserts")
+
+# MOM Jumpstart
+MOM Mite-y 1: 1 wholeSheet("MOM Mite-y 1"), 1 RareMythic:fromSheet("MOM White Inserts")
+MOM Mite-y 2: 1 wholeSheet("MOM Mite-y 2"), 1 RareMythic:fromSheet("MOM White Inserts")
+MOM Progress 1: 1 wholeSheet("MOM Progress 1"), 1 RareMythic:fromSheet("MOM Blue Inserts")
+MOM Progress 2: 1 wholeSheet("MOM Progress 2"), 1 RareMythic:fromSheet("MOM Blue Inserts")
+MOM Corruption 1: 1 wholeSheet("MOM Corruption 1"), 1 RareMythic:fromSheet("MOM Black Inserts")
+MOM Corruption 2: 1 wholeSheet("MOM Corruption 2"), 1 RareMythic:fromSheet("MOM Black Inserts")
+MOM Rebellious 1: 1 wholeSheet("MOM Rebellious 1"), 1 RareMythic:fromSheet("MOM Red Inserts")
+MOM Rebellious 2: 1 wholeSheet("MOM Rebellious 2"), 1 RareMythic:fromSheet("MOM Red Inserts")
+MOM Toxic 1: 1 wholeSheet("MOM Toxic 1"), 1 RareMythic:fromSheet("MOM Green Inserts")
+MOM Toxic 2: 1 wholeSheet("MOM Toxic 2"), 1 RareMythic:fromSheet("MOM Green Inserts")
