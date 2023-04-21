@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Plane Lorwyn
 S:Mode$ Continuous | Affected$ Creature | AddPower$ AffectedX | AddToughness$ AffectedX | EffectZone$ Command | Description$ Each creature gets +1/+1 for each other creature on the battlefield that shares at least one creature type with it. (For example, if two Elemental Shamans and an Elemental Spirit are on the battlefield, each gets +2/+2.)
 SVar:AffectedX:Count$Valid Creature.sharesCreatureTypeWith+Other
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, target creature gains all creature types until end of turn.
-SVar:RolledChaos:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | AddAllCreatureTypes$ True
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, target creature gains all creature types until end of turn.
+SVar:RolledChaos:DB$ Animate | ValidTgts$ Creature | AddAllCreatureTypes$ True
 SVar:AIRollPlanarDieParams:Mode$ Always | HasCreatureInPlay$ True
-Oracle:Each creature gets +1/+1 for each other creature on the battlefield that shares at least one creature type with it. (For example, if two Elemental Shamans and an Elemental Spirit are on the battlefield, each gets +2/+2.)\nWhenever you roll {CHAOS}, target creature gains all creature types until end of turn.
+Oracle:Each creature gets +1/+1 for each other creature on the battlefield that shares at least one creature type with it. (For example, if two Elemental Shamans and an Elemental Spirit are on the battlefield, each gets +2/+2.)\nWhenever chaos ensues, target creature gains all creature types until end of turn.

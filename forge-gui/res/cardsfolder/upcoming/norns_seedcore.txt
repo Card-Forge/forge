@@ -1,0 +1,9 @@
+Name:Norn's Seedcore
+ManaCost:no cost
+Types:Plane New Phyrexia
+T:Mode$ PlaneswalkedTo | ValidCard$ Plane.Self | Execute$ TrigChaos | TriggerDescription$ When you planeswalk to CARDNAME, chaos ensues.
+SVar:TrigChaos:DB$ ChaosEnsues
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigDigUntil | TriggerDescription$ Whenever chaos ensues, reveal cards from the top of your planar deck until you reveal a plane card. Planeswalk to it, except don't planeswalk away from any plane. Put the rest of the revealed cards on the bottom of your planar deck in any order.
+SVar:TrigDigUntil:DB$ DigUntil | Valid$ Plane | DigZone$ PlanarDeck | RememberFound$ True | FoundDestination$ PlanarDeck | RevealedDestination$ PlanarDeck | RevealedLibraryPosition$ -1 | SubAbility$ DBPlaneswalk
+SVar:DBPlaneswalk:DB$ Planeswalk | Defined$ Remembered | DontPlaneswalkAway$ True
+Oracle:When you planeswalk to Norn's Seedcore, chaos ensues.\nWhenever chaos ensues, reveal cards from the top of your planar deck until you reveal a plane card. Planeswalk to it, except don't planeswalk away from any plane. Put the rest of the revealed cards on the bottom of your planar deck in any order.

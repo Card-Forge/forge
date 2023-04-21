@@ -20,13 +20,11 @@ public class RunChaosEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        Map<AbilityKey, Object> map = AbilityKey.mapFromPlayer(sa.getActivatingPlayer());
-        map.put(AbilityKey.Result, PlanarDice.Chaos);
 
         List<SpellAbility> validSA = Lists.newArrayList();
         for (final Card c : getTargetCards(sa)) {
             for (Trigger t : c.getTriggers()) {
-                if (TriggerType.PlanarDice.equals(t.getMode()) && t.performTest(map)) {
+                if (t.getMode() == TriggerType.ChaosEnsues) {
                     SpellAbility triggerSA = t.ensureAbility().copy(sa.getActivatingPlayer());
 
                     Player decider = sa.getActivatingPlayer();
@@ -44,5 +42,4 @@ public class RunChaosEffect extends SpellAbilityEffect {
         }
         sa.getActivatingPlayer().getController().orderAndPlaySimultaneousSa(validSA);
     }
-
 }
