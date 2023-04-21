@@ -3366,7 +3366,7 @@
 	"name": "Copper Host Brutalizer",
 	"sprite": "sprites/copperhostbrutalizer.atlas",
 	"deck": [
-		"decks/copperhostbrutalizer.dck"
+		"decks/copperhostbrutalizer.dck" 
 	],
 	"ai": "",
 	"spawnRate": 1,
