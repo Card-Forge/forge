@@ -332,15 +332,21 @@ public final class AbilityFactory {
 
         // TgtPrompt should only be needed for more complicated ValidTgts
         String tgtWhat = mapParams.get("ValidTgts");
-        final String[] commonStuff = new String[] {
-                //list of common one word non-core type ValidTgts that should be lowercase in the target prompt
-                "Player", "Opponent", "Card", "Spell", "Permanent"
-        };
-        if (Arrays.asList(commonStuff).contains(tgtWhat) || CardType.CoreType.isValidEnum(tgtWhat)) {
-            tgtWhat = tgtWhat.toLowerCase();
+        final String prompt;
+        if (mapParams.containsKey("TgtPrompt")) {
+            prompt = mapParams.get("TgtPrompt");
+        } else if (tgtWhat.equals("Any")) {
+            prompt = "Select any target";
+        } else {
+            final String[] commonStuff = new String[] {
+                    //list of common one word non-core type ValidTgts that should be lowercase in the target prompt
+                    "Player", "Opponent", "Card", "Spell", "Permanent"
+            };
+            if (Arrays.asList(commonStuff).contains(tgtWhat) || CardType.CoreType.isValidEnum(tgtWhat)) {
+                tgtWhat = tgtWhat.toLowerCase();
+            }
+            prompt = "Select target " + tgtWhat;
         }
-        final String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt") :
-                "Select target " + tgtWhat;
 
         TargetRestrictions abTgt = new TargetRestrictions(prompt, mapParams.get("ValidTgts").split(","), min, max);
 

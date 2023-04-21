@@ -4,7 +4,7 @@ Types:Creature Minotaur Warrior
 PT:3/3
 K:Cumulative upkeep:FlipCoin<1>:Flip a coin.
 T:Mode$ FlippedCoin | ValidPlayer$ You | ValidResult$ Win | TriggerZones$ Battlefield | Execute$ TrigYouDmg | TriggerDescription$ Whenever you win a coin flip, CARDNAME deals 1 damage to any target.
-SVar:TrigYouDmg:DB$ DealDamage | NumDmg$ 1 | ValidTgts$ Any | TgtPrompt$ Select any target
+SVar:TrigYouDmg:DB$ DealDamage | NumDmg$ 1 | ValidTgts$ Any
 T:Mode$ FlippedCoin | ValidPlayer$ You | ValidResult$ Lose | TriggerZones$ Battlefield | Execute$ TrigOppDmg | TriggerDescription$ Whenever you lose a coin flip, CARDNAME deals 1 damage to any target of an opponent's choice.
 SVar:TrigOppDmg:DB$ DealDamage | NumDmg$ 1 | ValidTgts$ Any | TargetingPlayer$ Opponent
 AI:RemoveDeck:All
