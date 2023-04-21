@@ -1,0 +1,11 @@
+Name:Campus Renovation
+ManaCost:3 R W
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Card.Artifact+YouOwn,Card.Enchantment+YouOwn | TgtPrompt$ Select up to one target artifact or enchantment card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ ExileTwo | SpellDescription$ Return up to one target artifact or enchantment card from your graveyard to the battlefield. 
+SVar:ExileTwo:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top two cards of your library. Until the end of your next turn, you may play those cards.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play the exiled cards.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Artifact|Enchantment
+DeckHas:Ability$Graveyard
+Oracle:Return up to one target artifact or enchantment card from your graveyard to the battlefield. Exile the top two cards of your library. Until the end of your next turn, you may play those cards.
