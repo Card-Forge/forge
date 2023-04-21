@@ -16,6 +16,7 @@ public class ItemEdit extends JComponent {
     EffectEditor effect=new EffectEditor(false);
     JTextField description=new JTextField();
     JCheckBox questItem=new JCheckBox();
+    JCheckBox unique = new JCheckBox();
     JSpinner cost= new JSpinner(new SpinnerNumberModel(0, 0, 100000, 1));
 
     private boolean updating=false;
@@ -32,6 +33,7 @@ public class ItemEdit extends JComponent {
         parameters.add("description:",description);
         parameters.add("iconName",iconName);
         parameters.add("questItem",questItem);
+        parameters.add("unique",unique);
         parameters.add("cost",cost);
 
         add(parameters);
@@ -44,6 +46,7 @@ public class ItemEdit extends JComponent {
         iconName.getDocument().addDocumentListener(new DocumentChangeListener(() -> ItemEdit.this.updateItem()));
         cost.addChangeListener(e -> ItemEdit.this.updateItem());
         questItem.addChangeListener(e -> ItemEdit.this.updateItem());
+        unique.addChangeListener(e -> ItemEdit.this.updateItem());
         effect.addChangeListener(e -> ItemEdit.this.updateItem());
         refresh();
     }
@@ -57,6 +60,7 @@ public class ItemEdit extends JComponent {
         currentData.description=description.getText();
         currentData.iconName=iconName.getText();
         currentData.questItem=questItem.isSelected();
+        currentData.unique=unique.isSelected();
         currentData.cost=((Integer)  cost.getValue()).intValue();
     }
 
@@ -79,6 +83,7 @@ public class ItemEdit extends JComponent {
         description.setText(currentData.description);
         iconName.setText(currentData.iconName);
         questItem.setSelected(currentData.questItem);
+        unique.setSelected(currentData.unique);
         cost.setValue(currentData.cost);
 
         updating=false;

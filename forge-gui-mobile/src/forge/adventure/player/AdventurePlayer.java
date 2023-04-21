@@ -299,7 +299,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             //Prevent items with wrong names from getting through. Hell breaks loose if it causes null pointers.
             //This only needs to be done on load.
             for (String i : inv) {
-                if (ItemData.getItem(i) != null) inventoryItems.add(i);
+                if (ItemData.getItem(i) != null) addItem(i);
                 else {
                     System.err.printf("Cannot find item name %s\n", i);
                     //Allow official© permission for the player to get a refund. We will allow it this time.
@@ -469,7 +469,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 break;
             case Item:
                 if (reward.getItem() != null)
-                    inventoryItems.add(reward.getItem().name);
+                    addItem(reward.getItem().name);
                 break;
             case Life:
                 addMaxLife(reward.getCount());
@@ -764,6 +764,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public boolean addItem(String name) {
         ItemData item = ItemData.getItem(name);
+        if (item.unique && inventoryItems.contains(name, false)) return false;
         if (item == null)
             return false;
         inventoryItems.add(name);

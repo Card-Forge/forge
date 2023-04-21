@@ -22,6 +22,7 @@ public class ItemData {
     public String description; //Manual description of the item.
     public String iconName;
     public boolean questItem=false;
+    public boolean unique=false;
     public int cost=1000;
 
     public boolean usableOnWorldMap;
@@ -92,6 +93,8 @@ public class ItemData {
             result += effect.getDescription();
         if(shardsNeeded != 0)
             result +=  shardsNeeded+" [+Shards]";
+        if (unique)
+            result += " (unique)";
         return result;
     }
 
