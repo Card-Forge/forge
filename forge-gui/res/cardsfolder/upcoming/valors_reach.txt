@@ -6,4 +6,4 @@ SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YourTeamCtrl+attacking | KW$
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, untap up to two target creatures your team controls. If it's a main phase, there is an additional combat phase after this phase, followed by an additional main phase.
 SVar:RolledChaos:DB$ Untap | ValidTgts$ Creature.YourTeamCtrl | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures your team controls | SubAbility$ DBAddCombat
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | FollowedBy$ Main2 | ConditionPhases$ Main1,Main2
-Oracle:Whenever you roll the planar die, put a +1/+1 counter on up to one target creature.\nWhenever chaos ensues, creatures you control gain flying until end of turn.
+Oracle:Whenever your team attacks with exactly two creatures, those creatures gain double strike until end of turn.\nWhenever chaos ensues, untap up to two target creatures your team controls. If it's a main phase, there is an additional combat phase after this phase, followed by an additional main phase.
