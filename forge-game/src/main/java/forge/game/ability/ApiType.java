@@ -27,7 +27,6 @@ public enum ApiType {
     BecomeMonarch (BecomeMonarchEffect.class),
     BecomesBlocked (BecomesBlockedEffect.class),
     BidLife (BidLifeEffect.class),
-    BlankLine (BlankLineEffect.class),
     Block (BlockEffect.class),
     Bond (BondEffect.class),
     Branch (BranchEffect.class),
@@ -191,7 +190,7 @@ public enum ApiType {
     Vote (VoteEffect.class),
     WinsGame (GameWinEffect.class),
 
-
+    BlankLine (BlankLineEffect.class),
     DamageResolve (DamageResolveEffect.class),
     ChangeZoneResolve (ChangeZoneResolveEffect.class),
     InternalLegendaryRule (CharmEffect.class),
