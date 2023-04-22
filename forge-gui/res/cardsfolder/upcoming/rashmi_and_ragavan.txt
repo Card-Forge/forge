@@ -1,0 +1,14 @@
+Name:Rashmi and Ragavan
+ManaCost:1 G U R
+Types:Legendary Creature Elf Monkey
+PT:2/4
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | PlayerTurn$ True | NoResolvingCheck$ True | ValidCard$ Card | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast your first spell during each of your turns, exile the top card of target opponent's library and create a Treasure token. Then you may cast the exiled card without paying its mana cost if it's a spell with mana value less than the number of artifacts you control. If you don't cast it this way, you may cast it this turn.
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ Targeted | ValidTgts$ Opponent | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidSA$ Spell.cmcLTX | ValidZone$ Exile | ImprintPlayed$ True | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ All | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | RememberObjects$ RememberedCard | ConditionDefined$ Imprinted | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | MayPlay$ True | AffectedZone$ Exile | Description$ Until the end of turn, you may play the exiled card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:X:Count$Valid Artifact.YouCtrl
+DeckHints:Type$Artifact
+Oracle:Whenever you cast your first spell during each of your turns, exile the top card of target opponent's library and create a Treasure token. Then you may cast the exiled card without paying its mana cost if it's a spell with mana value less than the number of artifacts you control. If you don't cast it this way, you may cast it this turn.
