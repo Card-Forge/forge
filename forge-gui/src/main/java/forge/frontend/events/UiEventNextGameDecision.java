@@ -1,4 +1,4 @@
-package forge.gui.events;
+package forge.frontend.events;
 
 import forge.gamemodes.match.NextGameDecision;
 import forge.player.PlayerControllerHuman;

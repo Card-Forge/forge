@@ -4,15 +4,15 @@ import java.io.File;
 import java.util.Collection;
 
 import forge.LobbyPlayer;
+import forge.frontend.events.IUiEventVisitor;
+import forge.frontend.events.UiEventAttackerDeclared;
+import forge.frontend.events.UiEventBlockerAssigned;
+import forge.frontend.events.UiEventNextGameDecision;
 import forge.game.card.Card;
 import forge.game.event.*;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.events.IUiEventVisitor;
-import forge.gui.events.UiEventAttackerDeclared;
-import forge.gui.events.UiEventBlockerAssigned;
-import forge.gui.events.UiEventNextGameDecision;
 import forge.util.TextUtil;
 import forge.util.maps.MapOfLists;
 

@@ -1,4 +1,4 @@
-package forge.gui.events;
+package forge.frontend.events;
 
 import forge.game.GameEntityView;
 import forge.game.card.CardView;

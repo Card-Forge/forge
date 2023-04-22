@@ -1,9 +1,10 @@
 package forge.sound;
 
 import com.google.common.eventbus.Subscribe;
+
+import forge.frontend.events.UiEvent;
 import forge.game.event.GameEvent;
 import forge.gui.GuiBase;
-import forge.gui.events.UiEvent;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;

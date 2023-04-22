@@ -23,6 +23,7 @@ import java.util.Set;
 
 import com.google.common.collect.Sets;
 
+import forge.frontend.events.UiEventAttackerDeclared;
 import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.card.Card;
@@ -36,7 +37,6 @@ import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
-import forge.gui.events.UiEventAttackerDeclared;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;

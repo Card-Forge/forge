@@ -1,4 +1,4 @@
-package forge.gui.events;
+package forge.frontend.events;
 
 public interface IUiEventVisitor<T> {
     T visit(UiEventBlockerAssigned event);

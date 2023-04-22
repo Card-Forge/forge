@@ -19,6 +19,7 @@ package forge.gamemodes.match.input;
 
 import java.util.List;
 
+import forge.frontend.events.UiEventBlockerAssigned;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.combat.Combat;
@@ -28,7 +29,6 @@ import forge.game.event.GameEventCombatUpdate;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
-import forge.gui.events.UiEventBlockerAssigned;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
