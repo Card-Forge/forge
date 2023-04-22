@@ -70,7 +70,14 @@
     "male":"sprites/heroes/werewolf_m.atlas",      
     "femaleAvatar":"Werewolf_f",      
     "maleAvatar":"Werewolf_m" 
-  }   
+  },
+  {
+    "name":"Leonin",
+    "female":"sprites/heroes/leonin_f.atlas",      
+    "male":"sprites/heroes/leonin_m.atlas",      
+    "femaleAvatar":"Leonin_f",      
+    "maleAvatar":"Leonin_m" 
+  }  
   
   
   ]
