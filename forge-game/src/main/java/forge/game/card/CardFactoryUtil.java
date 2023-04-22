@@ -816,26 +816,17 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Ascend")) {
             // Ascend trigger only for Permanent
             if (card.isPermanent() || card.isPlane()) {
-                final String trig = "Mode$ Always | TriggerZones$ Battlefield | Secondary$ True"
-                        + " | Static$ True | Blessing$ False | IsPresent$ Permanent.YouCtrl | PresentCompare$ GE10 "
+                final String trig = "Mode$ Always | TriggerZones$ " + (card.isPlane() ? "Command" : "Battlefield")
+                        + " | Secondary$ True | Static$ True | Blessing$ False | IsPresent$ Permanent.YouCtrl | PresentCompare$ GE10"
                         + " | TriggerDescription$ Ascend (" + inst.getReminderText() + ")";
 
-                final String trigbis = "Mode$ Always | TriggerZones$ Command | Secondary$ True"
-                        + " | Static$ True | Blessing$ False | IsPresent$ Permanent.YouCtrl | PresentCompare$ GE10 "
-                        + " | TriggerDescription$ Ascend (" + inst.getReminderText() + ")";
-                
                 final String effect = "DB$ Ascend | Defined$ You";
 
                 final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
                 trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
-                
-                final Trigger triggerbis = TriggerHandler.parseTrigger(trigbis, card, intrinsic);
-                triggerbis.setOverridingAbility(AbilityFactory.getAbility(effect, card));
-                
+
                 inst.addTrigger(trigger);
-                inst.addTrigger(triggerbis);
-            } 
-        	else {
+            } else {
                 SpellAbility sa = card.getFirstSpellAbility();
                 if (sa != null && sa.isSpell()) {
                     sa.setBlessing(true);
