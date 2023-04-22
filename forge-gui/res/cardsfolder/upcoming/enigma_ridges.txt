@@ -7,7 +7,7 @@ SVar:DBChangeZone:DB$ ChangeZone | ConditionCheckSVar$ X | ConditionSVarCompare$
 SVar:X:Count$Valid Land.RememberedPlayerCtrl
 SVar:Y:PlayerCountPlayers$HighestValid Land.YouCtrl
 SVar:Z:SVar$Y/Minus.X
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, draw a card, then you may put a land card from your hand onto the battlefield.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, draw a card, then you may put a land card from your hand onto the battlefield.
 SVar:RolledChaos:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBChangeZoneBis
 SVar:DBChangeZoneBis:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Land | ChangeNum$ 1
 Oracle:When you planeswalk to Enigma Ridges, each player who controls fewer lands than the player who controls the most lands searches their library for a number of basic land cards less than or equal to the difference, reveals them, puts them into their hand, then shuffles.\nWhenever chaos ensues, draw a card, then you may put a land card from your hand onto the battlefield.
