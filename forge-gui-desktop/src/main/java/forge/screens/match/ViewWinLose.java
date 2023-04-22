@@ -14,12 +14,12 @@ import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.frontend.components.widgets.IWinLoseView;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.game.GameView;
 import forge.gui.SOverlayUtils;
 import forge.gui.UiCommand;
-import forge.gui.interfaces.IWinLoseView;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;

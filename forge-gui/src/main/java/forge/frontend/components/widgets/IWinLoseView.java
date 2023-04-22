@@ -1,8 +1,7 @@
-package forge.gui.interfaces;
+package forge.frontend.components.widgets;
 
 import java.util.List;
 
-import forge.frontend.components.widgets.IButton;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 
