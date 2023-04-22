@@ -815,7 +815,7 @@ public class CardFactoryUtil {
             inst.addTrigger(trigger);
         } else if (keyword.equals("Ascend")) {
             // Ascend trigger only for Permanent
-            if (card.isPermanent()) {
+            if (card.isPermanent() || card.isPlane()) {
                 final String trig = "Mode$ Always | TriggerZones$ Battlefield | Secondary$ True"
                         + " | Static$ True | Blessing$ False | IsPresent$ Permanent.YouCtrl | PresentCompare$ GE10 "
                         + " | TriggerDescription$ Ascend (" + inst.getReminderText() + ")";
