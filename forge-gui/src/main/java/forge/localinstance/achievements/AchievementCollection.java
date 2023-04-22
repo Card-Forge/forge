@@ -17,11 +17,11 @@ import org.w3c.dom.NodeList;
 
 import com.google.common.collect.Maps;
 
+import forge.frontend.components.widgets.IComboBox;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.player.Player;
 import forge.gui.GuiBase;
-import forge.gui.interfaces.IComboBox;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;

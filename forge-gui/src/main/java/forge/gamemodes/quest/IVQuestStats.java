@@ -1,8 +1,8 @@
 package forge.gamemodes.quest;
 
-import forge.gui.interfaces.IButton;
-import forge.gui.interfaces.ICheckBox;
-import forge.gui.interfaces.IComboBox;
+import forge.frontend.components.widgets.IButton;
+import forge.frontend.components.widgets.ICheckBox;
+import forge.frontend.components.widgets.IComboBox;
 
 /** Dictates methods required for a panel with stats/pet display. */
 

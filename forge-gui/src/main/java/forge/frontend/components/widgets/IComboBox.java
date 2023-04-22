@@ -1,4 +1,4 @@
-package forge.gui.interfaces;
+package forge.frontend.components.widgets;
 
 public interface IComboBox<E> extends IComponent {
     void setSelectedItem(E item);

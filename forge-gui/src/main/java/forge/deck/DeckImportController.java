@@ -7,6 +7,8 @@ import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.deck.DeckRecognizer.TokenType;
+import forge.frontend.components.widgets.ICheckBox;
+import forge.frontend.components.widgets.IComboBox;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.deck.DeckRecognizer.Token;
@@ -14,8 +16,6 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import org.apache.commons.lang3.StringUtils;
 
-import forge.gui.interfaces.ICheckBox;
-import forge.gui.interfaces.IComboBox;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.util.Localizer;

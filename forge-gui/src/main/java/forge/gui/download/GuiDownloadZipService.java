@@ -2,9 +2,10 @@ package forge.gui.download;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.io.Files;
+
+import forge.frontend.components.widgets.IProgressBar;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
-import forge.gui.interfaces.IProgressBar;
 import forge.util.FileUtil;
 
 import java.io.*;

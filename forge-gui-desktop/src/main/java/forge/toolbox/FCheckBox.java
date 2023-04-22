@@ -1,6 +1,6 @@
 package forge.toolbox;
 
-import forge.gui.interfaces.ICheckBox;
+import forge.frontend.components.widgets.ICheckBox;
 import forge.toolbox.FSkin.SkinnedCheckBox;
 
 /**

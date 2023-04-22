@@ -7,9 +7,9 @@ import com.google.common.collect.Lists;
 
 import forge.LobbyPlayer;
 import forge.deck.Deck;
+import forge.frontend.components.widgets.IButton;
 import forge.game.GameView;
 import forge.game.player.RegisteredPlayer;
-import forge.gui.interfaces.IButton;
 import forge.gui.interfaces.IWinLoseView;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;

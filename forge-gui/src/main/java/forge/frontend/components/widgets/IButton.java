@@ -1,4 +1,4 @@
-package forge.gui.interfaces;
+package forge.frontend.components.widgets;
 
 import forge.gui.UiCommand;
 import forge.localinstance.skin.FSkinProp;

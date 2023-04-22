@@ -17,9 +17,9 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
+import forge.frontend.components.widgets.IButton;
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
-import forge.gui.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.itemmanager.AdvancedSearch;
 import forge.itemmanager.AdvancedSearch.IFilterControl;

@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
 import forge.assets.FSkinFont;
-import forge.gui.interfaces.IProgressBar;
+import forge.frontend.components.widgets.IProgressBar;
 import forge.util.Utils;
 
 public class FProgressBar extends FDisplayObject implements IProgressBar {

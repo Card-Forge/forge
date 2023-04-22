@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.assets.FSkinFont;
-import forge.gui.interfaces.IButton;
+import forge.frontend.components.widgets.IButton;
 import forge.model.FModel;
 import forge.toolbox.FLabel;
 

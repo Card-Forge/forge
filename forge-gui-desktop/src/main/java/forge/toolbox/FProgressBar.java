@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 
-import forge.gui.interfaces.IProgressBar;
+import forge.frontend.components.widgets.IProgressBar;
 
 /**
  * A simple progress bar component using the Forge skin.

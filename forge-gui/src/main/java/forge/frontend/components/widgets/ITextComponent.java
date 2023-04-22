@@ -1,4 +1,4 @@
-package forge.gui.interfaces;
+package forge.frontend.components.widgets;
 
 public interface ITextComponent extends IComponent {
     String getText();

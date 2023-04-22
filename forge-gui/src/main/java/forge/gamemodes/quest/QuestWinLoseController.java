@@ -14,6 +14,7 @@ import com.google.common.collect.ImmutableList;
 
 import forge.LobbyPlayer;
 import forge.card.CardEdition;
+import forge.frontend.components.widgets.IButton;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
 import forge.game.GameOutcome;
@@ -27,7 +28,6 @@ import forge.gamemodes.quest.bazaar.QuestItemType;
 import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gamemodes.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
-import forge.gui.interfaces.IButton;
 import forge.gui.interfaces.IWinLoseView;
 import forge.gui.util.SGuiChoose;
 import forge.item.BoosterPack;

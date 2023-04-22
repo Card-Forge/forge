@@ -28,9 +28,9 @@ import javax.swing.Timer;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
+import forge.frontend.components.widgets.IButton;
 import forge.gui.UiCommand;
 import forge.gui.framework.ILocalRepaint;
-import forge.gui.interfaces.IButton;
 import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinColor;

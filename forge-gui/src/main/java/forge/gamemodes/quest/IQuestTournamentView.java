@@ -1,9 +1,9 @@
 package forge.gamemodes.quest;
 
+import forge.frontend.components.widgets.IButton;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.quest.QuestDraftUtils.Mode;
 import forge.gamemodes.quest.data.QuestEventDraftContainer;
-import forge.gui.interfaces.IButton;
 
 public interface IQuestTournamentView {
     Mode getMode();

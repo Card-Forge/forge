@@ -7,7 +7,7 @@ import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
-import forge.gui.interfaces.ICheckBox;
+import forge.frontend.components.widgets.ICheckBox;
 import forge.util.Utils;
 
 public class FCheckBox extends FLabel implements ICheckBox {

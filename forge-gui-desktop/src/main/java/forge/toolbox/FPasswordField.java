@@ -13,8 +13,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import forge.frontend.components.widgets.ITextField;
 import forge.gui.MouseUtil;
-import forge.gui.interfaces.ITextField;
 import forge.toolbox.FSkin.SkinnedPasswordField;
 
 /** 

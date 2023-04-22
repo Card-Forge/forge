@@ -7,9 +7,9 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.assets.FSkinFont;
+import forge.frontend.components.widgets.IButton;
 import forge.gamemodes.quest.QuestEventDuel;
 import forge.gui.FThreads;
-import forge.gui.interfaces.IButton;
 import forge.model.FModel;
 import forge.screens.LoadingOverlay;
 import forge.toolbox.FLabel;

@@ -40,13 +40,13 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.frontend.components.widgets.IButton;
+import forge.frontend.components.widgets.IProgressBar;
+import forge.frontend.components.widgets.ITextField;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.UiCommand;
 import forge.gui.error.BugReporter;
-import forge.gui.interfaces.IButton;
-import forge.gui.interfaces.IProgressBar;
-import forge.gui.interfaces.ITextField;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;

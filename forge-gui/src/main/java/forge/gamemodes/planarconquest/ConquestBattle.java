@@ -4,9 +4,9 @@ import java.util.Set;
 
 import forge.LobbyPlayer;
 import forge.deck.Deck;
+import forge.frontend.components.widgets.IButton;
 import forge.game.GameType;
 import forge.game.GameView;
-import forge.gui.interfaces.IButton;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.IWinLoseView;
 import forge.item.PaperCard;

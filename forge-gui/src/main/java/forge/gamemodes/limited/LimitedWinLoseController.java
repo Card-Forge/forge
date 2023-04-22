@@ -1,7 +1,7 @@
 package forge.gamemodes.limited;
 
+import forge.frontend.components.widgets.IButton;
 import forge.game.GameView;
-import forge.gui.interfaces.IButton;
 import forge.gui.interfaces.IWinLoseView;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;

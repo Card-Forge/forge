@@ -2,6 +2,7 @@ package forge.gui.interfaces;
 
 import java.util.List;
 
+import forge.frontend.components.widgets.IButton;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 
