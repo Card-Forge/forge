@@ -68,6 +68,9 @@ public class RollDiceEffect extends SpellAbilityEffect {
         return rollDiceForPlayer(sa, player, amount, sides, 0, 0, null);
     }
     private static int rollDiceForPlayer(SpellAbility sa, Player player, int amount, int sides, int ignore, int modifier, List<Integer> rollsResult) {
+        if (amount == 0) {
+            return 0;
+        }
         int advantage = getRollAdvange(player);
         amount += advantage;
         int total = 0;

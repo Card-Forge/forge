@@ -209,6 +209,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Map<Card, Card> maingameCardsMap = Maps.newHashMap();
 
     private CardCollection currentPlanes = new CardCollection();
+    private CardCollection planeswalkedToThisTurn = new CardCollection();
 
     private PlayerStatistics stats = new PlayerStatistics();
     private PlayerController controller;
@@ -1918,6 +1919,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         completedDungeons.clear();
     }
 
+    public final List<Card> getPlaneswalkedToThisTurn() {
+        return planeswalkedToThisTurn;
+    }
+
     public final void altWinBySpellEffect(final String sourceName) {
         if (cantWin()) {
             System.out.println("Tried to win, but currently can't.");
@@ -2458,6 +2463,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setNumManaConversion(0);
 
         damageReceivedThisTurn.clear();
+        planeswalkedToThisTurn.clear();
 
         // set last turn nr
         if (game.getPhaseHandler().isPlayerTurn(this)) {
@@ -2617,7 +2623,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Then runs triggers.
      */
     public void planeswalkTo(SpellAbility sa, final CardCollectionView destinations) {
-        System.out.println(getName() + ": planeswalk to " + destinations.toString());
+        System.out.println(getName() + " planeswalks to " + destinations.toString());
         currentPlanes.addAll(destinations);
         game.getView().updatePlanarPlayer(getView());
 
@@ -2625,8 +2631,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
 
-        for (Card c : currentPlanes) {
+        for (Card c : destinations) {
             game.getAction().moveTo(ZoneType.Command, c, sa, moveParams);
+            planeswalkedToThisTurn.add(c);
             //getZone(ZoneType.PlanarDeck).remove(c);
             //getZone(ZoneType.Command).add(c);
         }
@@ -2634,7 +2641,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.setActivePlanes(currentPlanes);
         //Run PlaneswalkedTo triggers here.
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Cards, currentPlanes);
+        runParams.put(AbilityKey.Cards, destinations);
         game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedTo, runParams, false);
         view.updateCurrentPlaneName(currentPlanes.toString().replaceAll(" \\(.*","").replace("[",""));
     }

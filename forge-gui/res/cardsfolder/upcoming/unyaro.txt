@@ -1,0 +1,14 @@
+Name:Unyaro
+Types:Plane Zhalfir
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Command | ValidPlayer$ You | CheckSVar$ X | Execute$ TrigUntapAll | TriggerDescription$ At the beginning of your end step, if you planeswalked to Unyaro this turn, untap all creatures. They phase out until a player planeswalks. (Treat them and anything attached to them as though they didn't exist.)
+SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature | SubAbility$ DBPhaseOut
+SVar:DBPhaseOut:DB$ Phases | AllValid$ Creature | WontPhaseInNormal$ True | RememberAffected$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | Triggers$ PlaneswalkTrig | OneOff$ True | RememberObjects$ Remembered | Duration$ Permanent | ForgetOnPhasedIn$ True | SubAbility$ DBCleanup
+SVar:PlaneswalkTrig:Mode$ PlaneswalkedTo | Execute$ TrigPhaseIn | TriggerZones$ Command | Static$ True | TriggerDescription$ They phase out until a player planeswalks.
+SVar:TrigPhaseIn:DB$ Phases | Defined$ Remembered | PhaseInOrOut$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:PlayerCountPropertyYou$PlaneswalkedToThisTurn Unyaro
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever chaos ensues, create two 2/2 white and blue Knight creature tokens with vigilance.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ wu_2_2_knight_vigilance
+DeckHas:Ability$Token & Colors$White|Blue & Type$Knight
+Oracle:At the beginning of your end step, if you planeswalked to Unyaro this turn, untap all creatures. They phase out until a player planeswalks. (Treat them and anything attached to them as though they didn't exist.)\nWhenever chaos ensues, create two 2/2 white and blue Knight creature tokens with vigilance.

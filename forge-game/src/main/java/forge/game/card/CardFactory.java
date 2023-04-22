@@ -350,9 +350,17 @@ public class CardFactory {
         planesWalkTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledWalk, card));
         card.addTrigger(planesWalkTrigger);
 
+        String chaosTrig = "Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Static$ True";
+
+        String rolledChaos = "DB$ ChaosEnsues";
+
+        Trigger chaosTrigger = TriggerHandler.parseTrigger(chaosTrig, card, true);
+        chaosTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledChaos, card));
+        card.addTrigger(chaosTrigger);
+
         String specialA = "ST$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | Activator$ Player | SpecialAction$ True" +
                 " | ActivationZone$ Command | SpellDescription$ Roll the planar dice. X is equal to the number of " +
-                "times you have previously taken this action this turn.";
+                "times you have previously taken this action this turn. | CostDesc$ {X}: ";
 
         SpellAbility planarRoll = AbilityFactory.getAbility(specialA, card);
         planarRoll.setSVar("X", "Count$PlanarDiceSpecialActionThisTurn");

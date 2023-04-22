@@ -3580,6 +3580,18 @@ public class AbilityUtils {
             }
             return doXMath(amount, m, source, ctb);
         }
+        if (value.startsWith("PlaneswalkedToThisTurn")) {
+            int found = 0;
+            String name = value.split(" ")[1];
+            List<Card> pwTo = player.getPlaneswalkedToThisTurn();
+            for (Card c : pwTo) {
+                if (c.getName().equals(name)) {
+                    found++;
+                    break;
+                }
+            }
+            return doXMath(found, m, source, ctb);
+        }
 
         return doXMath(0, m, source, ctb);
     }
