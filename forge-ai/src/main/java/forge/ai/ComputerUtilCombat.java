@@ -2150,24 +2150,15 @@ public class ComputerUtilCombat {
      *            a boolean.
      * @return a int.
      */
-    public static final int getEnoughDamageToKill(final Card c, final int maxDamage, final Card source, final boolean isCombat,
-            final boolean noPrevention) {
-        final int killDamage = getDamageToKill(c, false);
+    public static final int getEnoughDamageToKill(final Card c, final int maxDamage, final Card source, final boolean isCombat, final boolean noPrevention) {
+        int killDamage = getDamageToKill(c, false);
 
         if (c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getCounters(CounterEnumType.SHIELD) > 0 || (c.getShieldCount() > 0 && c.canBeShielded())) {
             if (!(source.hasKeyword(Keyword.WITHER) || source.hasKeyword(Keyword.INFECT))) {
                 return maxDamage + 1;
             }
-        } else if (source.hasKeyword(Keyword.DEATHTOUCH) && !c.isPlaneswalker()) {
-            for (int i = 1; i <= maxDamage; i++) {
-                if (noPrevention) {
-                    if (c.staticReplaceDamage(i, source, isCombat) > 0) {
-                        return i;
-                    }
-                } else if (predictDamageTo(c, i, source, isCombat) > 0) {
-                    return i;
-                }
-            }
+        } else if (source.hasKeyword(Keyword.DEATHTOUCH) && c.isCreature()) {
+            killDamage = 1;
         }
 
         for (int i = 1; i <= maxDamage; i++) {
@@ -2195,14 +2186,7 @@ public class ComputerUtilCombat {
      */
     public final static int getDamageToKill(final Card c, boolean withShields) {
         int damageShield = withShields ? c.getPreventNextDamageTotalShields() : 0;
-        int killDamage = 0;
-        if (c.isCreature()) {
-            killDamage = Math.max(0, c.getLethalDamage());
-        }
-        if (c.isPlaneswalker()) {
-            int killDamagePW = c.getCurrentLoyalty();
-            killDamage = c.isCreature() ? Math.min(killDamage, killDamagePW) : killDamagePW;
-        }
+        int killDamage = c.getExcessDamageValue(false);
 
         if (killDamage > damageShield
                 && c.hasSVar("DestroyWhenDamaged")) {
@@ -2332,7 +2316,7 @@ public class ComputerUtilCombat {
      * @return transform creature if possible, original creature otherwise
      */
     private final static Card canTransform(Card original) {
-        if (original.isDoubleFaced() && !original.isInAlternateState()) {
+        if (original.isTransformable() && !original.isInAlternateState()) {
             for (SpellAbility sa : original.getSpellAbilities()) {
                 if (sa.getApi() == ApiType.SetState && ComputerUtilCost.canPayCost(sa, original.getController(), false)) {
                     Card transformed = CardUtil.getLKICopy(original);

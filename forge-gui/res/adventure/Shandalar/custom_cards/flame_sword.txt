@@ -1,0 +1,9 @@
+Name:Flame Sword
+Types:Artifact
+A:AB$ DealDamage | ActivationLimit$ 1 | Cost$ PayShards<3> | ActivationZone$ Command | ValidTgts$ Any | NumDmg$ Z | SubAbility$ Eject | SpellDescription$ Deal 3 damage to any target. If the target is a tapped creature, deal 5 damage to it instead.
+SVar:X:3
+SVar:Y:Targeted$Valid Creature.tapped/Times.2
+SVar:Z:SVar$X/Plus.Y
+SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:{M}{M}{M}: Flame Sword deals 3 damage to any target, or 5 damage to target tapped creature.
+

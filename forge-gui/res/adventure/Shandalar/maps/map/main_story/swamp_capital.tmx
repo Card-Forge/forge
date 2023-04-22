@@ -5,6 +5,7 @@
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJztw7ENAAAMAiB3l/5/rX80kNBLqqqqqqqq+ugA4iKowQ==
@@ -17,7 +18,7 @@
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztV0tOwzAQHQk2iZtcoWFJrgArRIPoniPAPShXgZYeClRacw88aqwMlv9x06rKk0ZxHNvzMs/jD8CIESPOBe8FwMeRbFm4+d2VAI2wn4FtJuy+9OPn0y41fP2m4LfLAX7zsD5D8ntlAG8srE9ffiExofy+aoDvOszvi6W9iR/6XGXmfpQ/tp2JcuNp2K9v/NaZXTP6Hfll4j132ILtn1eT/vxc8aP8XP8isSBtVL8mjWk71Iy39pB3mnHl2SjfsWz7Fxe/eW3mSNtNRdyriVkf+o1le02xjiWInwmx6wtqKmMm84PGlyuGdcjPlB9zD31duBFj3NYdJ1d+0HhXRJsU+aEDzRnKzzc/YvzKdhciLpdtbExllZ9NX1VnWo5Z/3bKmDofppyleSXzRqerfI/Rl/pQc1j6qBQeOk19tT50/ur2NJ77r4WHmH8Ua6KjGm/U7+k6LT+6d5jmH63DOIXmbCy/z6Kbf7o1S1fP2vU59v6yKvz4bQLvDVzYtuz2j01bF3MH2QbO+8f6/9MG25lZHcdnvFBuz44xXeevlNxiEHPnGBIxe+6QcOl7bNDz3yni1OfftD2HjBhxTvgDGpfgIw==
+   eJztV0tOwzAQHQk2iZtcoWFJrgArRIPoniPAPShXgZYeClRacw88aqwMlv9x06rKk0ZxHNvzMs/jD8CIESPOBe8FwMeRbFm4+d2VAI2wn4FtJuy+9OPn0y41fP2m4LfLAX7zsD5D8ntlAG8srE9ffiExkfy+aoDvOpzfi6WPiR/6XGXmfpQ/tp2JcuNp2K9v/NaZXTP6Hfll4j132ILtn1eT/vxc8aP8XP8isSBtVL8mjWk71Iy39pB3mnHl2SjfsWz7Fxe/eW3mSNtNRdyriVkf+o1le02xjiWInwmx6wtqKmMm84PGlyuGdcjPlB9zD31duBFj3NYdJ1d+0HhXRJsU+aEDzRnKzzc/YvzKdhciLpdtbExllZ9NX1VnWo5Z/3bKmDofppyleSXzRqerfI/Rl/pQc1j6qBQeOk19tT50/ur2NJ77r4WHmH8Ua6KjGm/U7+k6LT+6d5jmH63DOIXmbCy/z6Kbf7o1S1fP2vU59v6yKvz4bQLvDVzYtuz2j01bF3MH2QbO+8f6/9MG25lZHcdnvFBuz44xXeevlNxiEHPnGBIxe+6QcOl7bNDz3yni1OfftD2HjBhxTvgDItPgIw==
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -30,12 +31,12 @@
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt0sEJg0AQheHXgSWYm6ztRGOqibZmLqYHc0kuWkbmEGHBJeTgsiT+HwizD4SBeRIAAOkcS6kq13lv2dXLB5tv3nt00t3F3w9rtd3hFLhZY9k5kGNbfve/mfcmtw4efriHMe872T+z+zwjnkchPYvUW6RD/7C4ZFL7/ros9TYAAODfvQDOSyqr
+   eJzt0s0JwkAQhuGvg5Sgt7BLbinF32rUm/ahjehFe9CLXkwZzkEhGhGFLIP6PrAw88HCwIwEAEB681JalM28F6V+vM/W1m8esq31u1q2D9IhtD/nJ5aFtCp8Z/AwsD0MYzMfWTZ+kqNd9dt/p/43HbvB7hffYcr9nu1PFV7XSOeYS6fcewo/3B9uJpk0vb5Z5j0NAAD4dRedmS2/
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
   <object id="47" template="../../obj/inn.tx" x="361" y="371"/>
-  <object id="53" template="../../obj/spellsmith.tx" x="392" y="194"/>
+  <object id="53" template="../../obj/spellsmith.tx" x="376" y="194"/>
   <object id="55" template="../../obj/shop.tx" x="416" y="402">
    <properties>
     <property name="commonShopList" value="Swamp"/>
@@ -66,6 +67,7 @@
 	&quot;Dark Knight&quot;,
 	&quot;Death Knight&quot;,
 	&quot;Demon&quot;,
+	&quot;Dross Gladiator&quot;,
 	&quot;Ghoul&quot;,
 	&quot;Ghost&quot;,
 	&quot;Harpy&quot;,
@@ -83,16 +85,6 @@
     &quot;entryFee&quot;:100,
      &quot;rewards&quot;: [[
 		{
-			&quot;type&quot;: &quot;card&quot;,
-			&quot;probability&quot;: 1, 
-      			&quot;count&quot;:2,
-			&quot;rarity&quot;: [
-				&quot;Mythic Rare&quot;
-			],
-      			&quot;colors&quot;: [&quot;black&quot;] 
-		}
-		],[
-		{
 			&quot;type&quot;: &quot;gold&quot;,
 			&quot;probability&quot;: 1,
 			&quot;count&quot;: 500 
@@ -102,6 +94,17 @@
 			&quot;probability&quot;: 1,
 			&quot;count&quot;: 1,
 			&quot;itemNames&quot;: [&quot;Death Ring&quot;,&quot;Dark Armor&quot;,&quot;Dark Shield&quot;,&quot;Dark Boots&quot;]
+		}
+		],
+		[
+		{
+			&quot;type&quot;: &quot;card&quot;,
+			&quot;probability&quot;: 1, 
+      			&quot;count&quot;:2,
+			&quot;rarity&quot;: [
+				&quot;Rare&quot;,&quot;Mythic Rare&quot;
+			],
+      			&quot;colors&quot;: [&quot;black&quot;] 
 		}
 		]
 		] 

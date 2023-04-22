@@ -19,17 +19,19 @@ public class RollPlanarDiceEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        boolean countedTowardsCost = !sa.hasParam("NotCountedTowardsCost");
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
 
-        if(countedTowardsCost) {
-            game.getPhaseHandler().incPlanarDiceRolledthisTurn();
+        if (game.getActivePlanes() == null) { // not a planechase game, nothing happens
+            return;
         }
-        PlanarDice result = PlanarDice.roll(activator, null);
+        if (sa.hasParam("SpecialAction")) {
+            game.getPhaseHandler().incPlanarDiceSpecialActionThisTurn();
+        }
         // Play the die roll sound
-        activator.getGame().fireEvent(new GameEventRollDie());
-        String message = Localizer.getInstance().getMessage("lblPlayerRolledResult", activator.getName(), result.toString());
+        game.fireEvent(new GameEventRollDie());
+        PlanarDice result = PlanarDice.roll(activator, null);
+        String message = Localizer.getInstance().getMessage("lblPlanarDiceResult", result.toString());
         game.getAction().notifyOfValue(sa, activator, message, null);
 
     }

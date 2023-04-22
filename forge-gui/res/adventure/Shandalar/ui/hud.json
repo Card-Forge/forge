@@ -7,8 +7,8 @@
       "type": "Image",
       "name": "gamehud",
       "width": 64,
-      "height": 270,
-      "image": "ui/hud.png",
+      "height": 104,
+      "image": "ui/hud_portrait.png",
       "x": 416,
       "y": 0
     },
@@ -61,7 +61,7 @@
       "font": "default",
       "width": 64,
       "height": 16,
-      "x": 427,
+      "x": 425,
       "y": 56
     },
     {
@@ -70,8 +70,8 @@
       "font": "default",
       "width": 64,
       "height": 16,
-      "x": 427,
-      "y": 73
+      "x": 425,
+      "y": 70
     },
     {
       "type": "Label",
@@ -79,64 +79,48 @@
       "font": "default",
       "width": 64,
       "height": 16,
-      "x": 427,
-      "y": 90
-    },
-	{
-      "type": "TextButton",
-      "name": "exittoworldmap", 
-	  "style":"menu",
-      "text": "[%120][+ExitToWorldMap]",
-	  "binding": "ExitToWorldMap",
-      "width": 48,
-      "height": 36,
-      "x": 424,
-      "y": 66
+      "x": 425,
+      "y": 84
     },
     {
       "type": "TextButton",
       "name": "deck",
-	  "style":"menu",
       "text": "[%120][+Deck]",
       "binding": "Deck",
-      "width": 48,
-      "height": 36,
-      "x": 424,
-      "y": 106
-    }, 
+      "width": 45,
+      "height": 25,
+      "x": 175,
+      "y": 0
+    },
     {
       "type": "TextButton",
-      "name": "inventory", 
-	  "style":"menu",
+      "name": "inventory",
       "text": "[%120][+Item]",
       "binding": "Inventory",
-      "width": 48,
-      "height": 36,
-      "x": 424,
-      "y": 146
+      "width": 45,
+      "height": 25,
+      "x": 220,
+      "y": 0
     },
-    
     {
       "type": "TextButton",
-      "name": "statistic",
-	  "style":"menu",
-      "text": "[%120][+Status]",
-      "binding": "Status",
-      "width": 48,
-      "height": 36,
-      "x": 424,
-      "y": 186
+      "name": "logbook",
+      "text": "[%120][+Logbook]",
+	  "binding": "Status",
+      "width": 45,
+      "height": 25,
+      "x": 265,
+      "y": 0
     },
     {
       "type": "TextButton",
       "name": "menu",
-	  "style":"menu",
       "text": "[%120][+Menu]",
       "binding": "Menu",
-      "width": 48,
-      "height": 36,
-      "x": 424,
-      "y": 226
+      "width": 45,
+      "height": 25,
+      "x": 130,
+      "y": 0
     },
     {
       "type": "TextButton",
@@ -147,6 +131,16 @@
       "height": 20,
       "x": 0,
       "y": 80
+    },
+	{
+      "type": "TextButton",
+      "name": "exittoworldmap", 
+      "text": "[%120][+ExitToWorldMap]",
+	  "binding": "ExitToWorldMap",
+      "width": 45,
+      "height": 25,
+      "x": 310,
+      "y": 0
     }
   ]
 }

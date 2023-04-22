@@ -102,32 +102,34 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
 
     volatile boolean cardSelectLocked = false;
 
+    /**
+     * When a card selected at the time of mulligan (currently affects just Serum Powder).
+     */
     @Override
     protected boolean onCardSelected(final Card c0, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) { // the only place that would cause troubles - input is supposed only to confirm, not to fire abilities
+        if (cardSelectLocked) { return false; }
         final boolean fromHand = player.getZone(ZoneType.Hand).contains(c0);
         final boolean isSerumPowder = c0.getName().equals("Serum Powder");
-        final boolean isLegalChoice = fromHand && (isSerumPowder);
-        if (!isLegalChoice || cardSelectLocked) {
+        if (!isSerumPowder || !fromHand) {
             return false;
         }
 
         final CardView cView = c0.getView();
         //pfps leave this as is for now - it is confirming during another confirm so it might need the popup
-        if (isSerumPowder && getController().getGui().confirm(cView, "Use " + cView + "'s ability?")) {
+        if (getController().getGui().confirm(cView, "Use " + cView + "'s ability?")) {
             cardSelectLocked = true;
             ThreadUtil.invokeInGameThread(new Runnable() {
                 @Override public void run() {
                     final CardCollectionView hand = c0.getController().getCardsIn(ZoneType.Hand);
-                    for (final Card c : hand) {
+                    final int handSize = hand.size();
+                    for (final Card c : hand.threadSafeIterable()) {
                         player.getGame().getAction().exile(c, null);
                     }
-                    c0.getController().drawCards(hand.size());
+                    c0.getController().drawCards(handSize);
                     cardSelectLocked = false;
                 }
             });
-            return true;
         }
-
         return true;
     }
 

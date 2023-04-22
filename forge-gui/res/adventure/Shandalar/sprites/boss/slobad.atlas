@@ -1,0 +1,83 @@
+slobad.png
+size: 1280,480
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 556, 239
+  size: 12, 14      
+Idle 
+  xy: 48, 330
+  size: 100, 50      
+Idle 
+  xy: 208, 330
+  size: 100, 50 
+Idle 
+  xy: 368, 330
+  size: 100, 50 
+Idle 
+  xy: 528, 330
+  size: 100, 50    
+Walk
+  xy: 48, 140
+  size: 80, 50      
+Walk 
+  xy: 208, 140
+  size: 80, 50 
+Walk
+  xy: 368, 140
+  size: 80, 50      
+Walk 
+  xy: 528, 140
+  size: 80, 50 
+Walk
+  xy: 688, 140
+  size: 80, 50      
+Walk 
+  xy: 848, 140
+  size: 80, 50 
+Walk
+  xy: 1008, 140
+  size: 80, 50      
+Walk 
+  xy: 1168, 140
+  size: 80, 50 
+Attack 
+  xy: 40, 208
+  size: 130, 80
+Attack 
+  xy: 200, 208
+  size: 130, 80  
+Attack 
+  xy: 360, 208
+  size: 130, 80
+Attack 
+  xy: 520, 208
+  size: 130, 80  
+Attack 
+  xy: 680, 208
+  size: 130, 80  
+Attack 
+  xy: 840, 208
+  size: 130, 80      
+Attack 
+  xy: 1000, 208
+  size: 130, 80         
+Death 
+  xy: 48, 430
+  size: 100, 50   
+Death 
+  xy: 208, 430
+  size: 100,50
+Death 
+  xy: 368, 430
+  size: 100, 50
+Death 
+  xy: 528, 430
+  size:100, 50 
+Death 
+  xy: 688, 430
+  size: 100,50
+Death 
+  xy: 848, 430
+  size: 100, 50

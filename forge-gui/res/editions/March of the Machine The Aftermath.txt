@@ -6,5 +6,9 @@ Type=Expansion
 ScryfallCode=MAT
 
 [cards]
+33 R Jolrael, Voice of Zhalfir @Lorenzo Mastroianni
 34 R The Kenriths' Royal Funeral @Manuel Castañón
-230 Jolrael, Voice of Zhalfir @Ernanda Souza
+83 R Jolrael, Voice of Zhalfir @Scott M. Fischer
+133 R Jolrael, Voice of Zhalfir @Lorenzo Mastroianni
+168 R Jolrael, Voice of Zhalfir @Lorenzo Mastroianni
+230 R Jolrael, Voice of Zhalfir @Ernanda Souza

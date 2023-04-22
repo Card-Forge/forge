@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.game.GameObject;
+import forge.game.PlanarDice;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -41,6 +42,8 @@ public class ReplaceEffect extends SpellAbilityEffect {
             if (list.size() > 0) {
                 params.put(varName, list.get(0));
             }
+        } else if ("PlanarDice".equals(type)) {
+            params.put(varName, PlanarDice.smartValueOf(varValue));
         } else {
             params.put(varName, AbilityUtils.calculateAmount(card, varValue, sa));
         }

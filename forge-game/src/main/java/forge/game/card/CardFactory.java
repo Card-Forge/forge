@@ -188,15 +188,6 @@ public class CardFactory {
      * creates a copy of the Spell/ability `sa`, and puts it on the stack.
      * if sa is a spell, that spell's host is also copied.
      * </p>
-     *
-     * @param source
-     *            a {@link forge.game.card.Card} object. The card doing the copying.
-     * @param original
-     *            a {@link forge.game.card.Card} object. The host of the spell or ability being copied.
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object. The spell or ability being copied.
-     * @param bCopyDetails
-     *            a boolean.
      */
     public final static SpellAbility copySpellAbilityAndPossiblyHost(final SpellAbility sourceSA, final SpellAbility targetSA, final Player controller) {
         //it is only necessary to copy the host card if the SpellAbility is a spell, not an ability
@@ -262,7 +253,7 @@ public class CardFactory {
                 c.setState(CardStateName.Flipped, false);
                 c.setImageKey(cp.getImageKey(true));
             }
-            else if (c.hasBackSide() && cardRules != null) {
+            else if (c.isDoubleFaced() && cardRules != null) {
                 c.setState(cardRules.getSplitType().getChangedStateName(), false);
                 c.setImageKey(cp.getImageKey(true));
             }
@@ -309,7 +300,7 @@ public class CardFactory {
 
     private static void buildAbilities(final Card card) {
         for (final CardStateName state : card.getStates()) {
-            if (card.hasBackSide() && state == CardStateName.FaceDown) {
+            if (card.isDoubleFaced() && state == CardStateName.FaceDown) {
                 continue; // Ignore FaceDown for DFC since they have none.
             }
             card.setState(state, false);
@@ -326,7 +317,7 @@ public class CardFactory {
                 original.addIntrinsicKeywords(card.getCurrentState().getIntrinsicKeywords()); // Copy 'Fuse' to original side
                 original.getSVars().putAll(card.getCurrentState().getSVars()); // Unfortunately need to copy these to (Effect looks for sVars on execute)
             } else if (state != CardStateName.Original) {
-            	CardFactoryUtil.setupKeywordedAbilities(card);
+                CardFactoryUtil.setupKeywordedAbilities(card);
             }
             if (state == CardStateName.Adventure) {
                 CardFactoryUtil.setupAdventureAbility(card);
@@ -344,30 +335,49 @@ public class CardFactory {
         if (card.isPlane()) {
             buildPlaneAbilities(card);
         }
+        buildBattleAbilities(card);
         CardFactoryUtil.setupKeywordedAbilities(card); // Should happen AFTER setting left/right split abilities to set Fuse ability to both sides
         card.updateStateForView();
     }
 
     private static void buildPlaneAbilities(Card card) {
-        StringBuilder triggerSB = new StringBuilder();
-        triggerSB.append("Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Secondary$ True | ");
-        triggerSB.append("TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, ");
-        triggerSB.append("then move the top card of your planar deck off that planar deck and turn it face up");
+        String trigger = "Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Secondary$ True | " +
+                "TriggerDescription$ Whenever you roll the Planeswalker symbol on the planar die, planeswalk.";
 
         String rolledWalk = "DB$ Planeswalk";
 
-        Trigger planesWalkTrigger = TriggerHandler.parseTrigger(triggerSB.toString(), card, true);
+        Trigger planesWalkTrigger = TriggerHandler.parseTrigger(trigger, card, true);
         planesWalkTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledWalk, card));
         card.addTrigger(planesWalkTrigger);
 
-        StringBuilder saSB = new StringBuilder();
-        saSB.append("AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | Activator$ Player | ActivationZone$ Command | ");
-        saSB.append("SpellDescription$ Roll the planar dice. X is equal to the amount of times the planar die has been rolled this turn.");
+        String chaosTrig = "Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Static$ True";
 
-        SpellAbility planarRoll = AbilityFactory.getAbility(saSB.toString(), card);
-        planarRoll.setSVar("X", "Count$RolledThisTurn");
+        String rolledChaos = "DB$ ChaosEnsues";
+
+        Trigger chaosTrigger = TriggerHandler.parseTrigger(chaosTrig, card, true);
+        chaosTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledChaos, card));
+        card.addTrigger(chaosTrigger);
+
+        String specialA = "ST$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | Activator$ Player | SpecialAction$ True" +
+                " | ActivationZone$ Command | SpellDescription$ Roll the planar dice. X is equal to the number of " +
+                "times you have previously taken this action this turn. | CostDesc$ {X}: ";
+
+        SpellAbility planarRoll = AbilityFactory.getAbility(specialA, card);
+        planarRoll.setSVar("X", "Count$PlanarDiceSpecialActionThisTurn");
 
         card.addSpellAbility(planarRoll);
+    }
+
+    private static void buildBattleAbilities(Card card) {
+        if (!card.isBattle()) {
+            return;
+        }
+        // # The following commands should be pulled out into the codebase
+        //K:etbCounter:DEFENSE:3
+
+        if (card.getType().hasSubtype("Siege")) {
+            CardFactoryUtil.setupSiegeAbilities(card);
+        }
     }
 
     private static Card readCard(final CardRules rules, final IPaperCard paperCard, int cardId, Game game) {
@@ -463,6 +473,7 @@ public class CardFactory {
         c.setText(face.getNonAbilityText());
 
         c.getCurrentState().setBaseLoyalty(face.getInitialLoyalty());
+        c.getCurrentState().setBaseDefense(face.getDefense());
 
         c.setOracleText(face.getOracleText());
 
@@ -506,26 +517,26 @@ public class CardFactory {
      * @param to the {@link Card} to copy to.
      */
     public static void copyCopiableCharacteristics(final Card from, final Card to) {
-    	final boolean toIsFaceDown = to.isFaceDown();
-    	if (toIsFaceDown) {
-    		// If to is face down, copy to its front side
-    		to.setState(CardStateName.Original, false);
-    		copyCopiableCharacteristics(from, to);
-    		to.setState(CardStateName.FaceDown, false);
-    		return;
-    	}
+        final boolean toIsFaceDown = to.isFaceDown();
+        if (toIsFaceDown) {
+            // If to is face down, copy to its front side
+            to.setState(CardStateName.Original, false);
+            copyCopiableCharacteristics(from, to);
+            to.setState(CardStateName.FaceDown, false);
+            return;
+        }
 
-    	final boolean fromIsFlipCard = from.isFlipCard();
+        final boolean fromIsFlipCard = from.isFlipCard();
         final boolean fromIsTransformedCard = from.getCurrentStateName() == CardStateName.Transformed || from.getCurrentStateName() == CardStateName.Meld;
 
-    	if (fromIsFlipCard) {
-    		if (to.getCurrentStateName().equals(CardStateName.Flipped)) {
-    			copyState(from, CardStateName.Original, to, CardStateName.Original);
-    		} else {
-    			copyState(from, CardStateName.Original, to, to.getCurrentStateName());
-    		}
-    		copyState(from, CardStateName.Flipped, to, CardStateName.Flipped);
-    	} else if (fromIsTransformedCard) {
+        if (fromIsFlipCard) {
+            if (to.getCurrentStateName().equals(CardStateName.Flipped)) {
+                copyState(from, CardStateName.Original, to, CardStateName.Original);
+            } else {
+                copyState(from, CardStateName.Original, to, to.getCurrentStateName());
+            }
+            copyState(from, CardStateName.Flipped, to, CardStateName.Flipped);
+        } else if (fromIsTransformedCard) {
             copyState(from, from.getCurrentStateName(), to, CardStateName.Original);
         } else {
             copyState(from, from.getCurrentStateName(), to, to.getCurrentStateName());

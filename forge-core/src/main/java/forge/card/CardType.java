@@ -49,6 +49,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     public enum CoreType {
         Artifact(true, "artifacts"),
+        Battle(true, "battles"),
         Conspiracy(false, "conspiracies"),
         Enchantment(true, "enchantments"),
         Creature(true, "creatures"),
@@ -404,6 +405,11 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     @Override
+    public boolean isBattle() {
+        return coreTypes.contains(CoreType.Battle);
+    }
+
+    @Override
     public boolean isLand() {
         return coreTypes.contains(CoreType.Land);
     }
@@ -613,6 +619,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (!isDungeon()) {
             Iterables.removeIf(subtypes, Predicates.IS_DUNGEON_TYPE);
         }
+        if (!isBattle()) {
+            Iterables.removeIf(subtypes, Predicates.IS_BATTLE_TYPE);
+        }
     }
 
     @Override
@@ -785,6 +794,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         public static final Set<String> ARTIFACT_TYPES = Sets.newHashSet();
         public static final Set<String> WALKER_TYPES = Sets.newHashSet();
         public static final Set<String> DUNGEON_TYPES = Sets.newHashSet();
+        public static final Set<String> BATTLE_TYPES = Sets.newHashSet();
 
         // singular -> plural
         public static final BiMap<String,String> pluralTypes = HashBiMap.create();
@@ -850,6 +860,12 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 return CardType.isADungeonType(input);
             }
         };
+        public static Predicate<String> IS_BATTLE_TYPE = new Predicate<String>() {
+            @Override
+            public boolean apply(String input) {
+                return CardType.isABattleType(input);
+            }
+        };
     }
 
     ///////// Utility methods
@@ -883,6 +899,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             sortedSubTypes.addAll(Constant.ARTIFACT_TYPES);
             sortedSubTypes.addAll(Constant.WALKER_TYPES);
             sortedSubTypes.addAll(Constant.DUNGEON_TYPES);
+            sortedSubTypes.addAll(Constant.BATTLE_TYPES);
             Collections.sort(sortedSubTypes);
         }
         return sortedSubTypes;
@@ -911,11 +928,11 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     public static boolean isAnArtifactType(final String cardType) {
-        return (Constant.ARTIFACT_TYPES.contains(cardType));
+        return Constant.ARTIFACT_TYPES.contains(cardType);
     }
 
     public static boolean isACreatureType(final String cardType) {
-        return (Constant.CREATURE_TYPES.contains(cardType));
+        return Constant.CREATURE_TYPES.contains(cardType);
     }
 
     public static boolean isALandType(final String cardType) {
@@ -923,23 +940,26 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     public static boolean isAPlaneswalkerType(final String cardType) {
-        return (Constant.WALKER_TYPES.contains(cardType));
+        return Constant.WALKER_TYPES.contains(cardType);
     }
 
     public static boolean isABasicLandType(final String cardType) {
-        return (Constant.BASIC_TYPES.contains(cardType));
+        return Constant.BASIC_TYPES.contains(cardType);
     }
 
     public static boolean isAnEnchantmentType(final String cardType) {
-        return (Constant.ENCHANTMENT_TYPES.contains(cardType));
+        return Constant.ENCHANTMENT_TYPES.contains(cardType);
     }
 
     public static boolean isASpellType(final String cardType) {
-        return (Constant.SPELL_TYPES.contains(cardType));
+        return Constant.SPELL_TYPES.contains(cardType);
     }
 
     public static boolean isADungeonType(final String cardType) {
-        return (Constant.DUNGEON_TYPES.contains(cardType));
+        return Constant.DUNGEON_TYPES.contains(cardType);
+    }
+    public static boolean isABattleType(final String cardType) {
+        return Constant.BATTLE_TYPES.contains(cardType);
     }
     /**
      * If the input is a plural type, return the corresponding singular form.

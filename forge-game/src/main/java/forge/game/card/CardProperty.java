@@ -143,6 +143,10 @@ public class CardProperty {
             if (!card.isBackSide()) {
                 return false;
             }
+        } else if (property.equals("CanTransform")) {
+            if (!card.isTransformable()) {
+                return false;
+            }
         } else if (property.equals("Transformed")) {
             if (!card.isTransformed()) {
                 return false;
@@ -212,6 +216,19 @@ public class CardProperty {
                 if (combat.getDefendingPlayerRelatedTo(source) != controller) {
                     return false;
                 }
+            }
+        } else if (property.startsWith("OppProtect")) {
+            if (card.getProtectingPlayer() == null
+                    || !sourceController.getOpponents().contains(card.getProtectingPlayer())) {
+                return false;
+            }
+        } else if (property.startsWith("ProtectedBy")) {
+            if (card.getProtectingPlayer() == null) {
+                return false;
+            }
+            final List<Player> lp = AbilityUtils.getDefinedPlayers(source, property.substring(12), spellAbility);
+            if (!lp.contains(card.getProtectingPlayer())) {
+                return false;
             }
         } else if (property.startsWith("DefendingPlayer")) {
             Player p = property.endsWith("Ctrl") ? controller : card.getOwner();
@@ -341,6 +358,10 @@ public class CardProperty {
                 } else if (CardLists.getType(cards, type).isEmpty()) {
                     return false;
                 }
+            }
+        } else if (property.startsWith("StrictlyOther")) {
+            if (card.equalsWithTimestamp(source)) {
+                return false;
             }
         } else if (property.startsWith("Other")) {
             if (card.equals(source)) {
@@ -866,7 +887,7 @@ public class CardProperty {
                 } else if (restriction.equals(ZoneType.Battlefield.toString())) {
                     return Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("ThisTurnCast")) {
-                    return Iterables.any(CardUtil.getThisTurnCast("Card", source, spellAbility), CardPredicates.sharesNameWith(card));
+                    return Iterables.any(CardUtil.getThisTurnCast("Card", source, spellAbility, sourceController), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("MovedToGrave")) {
                     if (!(spellAbility instanceof SpellAbility)) {
                         final SpellAbility root = ((SpellAbility) spellAbility).getRootAbility();
@@ -958,7 +979,7 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("SecondSpellCastThisTurn")) {
-            final List<Card> cards = CardUtil.getThisTurnCast("Card", source, spellAbility);
+            final List<Card> cards = CardUtil.getThisTurnCast("Card", source, spellAbility, sourceController);
             if (cards.size() < 2) {
                 return false;
             }
@@ -966,7 +987,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("ThisTurnCast")) {
-            for (final Card c : CardUtil.getThisTurnCast("Card", source, spellAbility)) {
+            for (final Card c : CardUtil.getThisTurnCast("Card", source, spellAbility, sourceController)) {
                 if (card.equals(c)) {
                     return true;
                 }
@@ -1064,6 +1085,10 @@ public class CardProperty {
                 return false;
             }
             if (!property.startsWith("without") && !card.hasStartOfUnHiddenKeyword(property.substring(4))) {
+                return false;
+            }
+        } else if (property.startsWith("activated")) {
+            if (!card.activatedThisTurn()) {
                 return false;
             }
         } else if (property.startsWith("tapped")) {
@@ -1227,6 +1252,10 @@ public class CardProperty {
             return card.getDamageHistory().getHasdealtDamagetoAny();
         } else if (property.startsWith("attackedThisTurn")) {
             if (card.getDamageHistory().getCreatureAttacksThisTurn() == 0) {
+                return false;
+            }
+        } else if (property.startsWith("attackedBattleThisTurn")) {
+            if (!card.getDamageHistory().hasAttackedBattleThisTurn()) {
                 return false;
             }
         } else if (property.startsWith("attackedYouThisTurn")) {
@@ -1542,6 +1571,15 @@ public class CardProperty {
             if (property.equals("attackingSame")) {
                 final GameEntity attacked = combat.getDefenderByAttacker(source);
                 if (!combat.isAttacking(card, attacked)) {
+                    return false;
+                }
+            }
+            if (property.equals("attackingBattle")) {
+                final GameEntity attacked = combat.getDefenderByAttacker(source);
+                if (!(attacked instanceof Card)) {
+                    return false;
+                }
+                if (!((Card) attacked).isBattle()) {
                     return false;
                 }
             }
@@ -1961,7 +1999,8 @@ public class CardProperty {
         } else if (property.startsWith("Triggered")) {
             if (spellAbility instanceof SpellAbility) {
                 final String key = property.substring(9);
-                Object o = ((SpellAbility)spellAbility).getTriggeringObject(AbilityKey.fromString(key));
+                SpellAbility sa = (SpellAbility) spellAbility;
+                Object o = sa.getRootAbility().getTriggeringObject(AbilityKey.fromString(key));
                 boolean found = false;
                 if (o != null) {
                     if (o instanceof CardCollection) {
@@ -1979,7 +2018,8 @@ public class CardProperty {
         } else if (property.startsWith("NotTriggered")) {
             final String key = property.substring("NotTriggered".length());
             if (spellAbility instanceof SpellAbility) {
-                if (card.equals(((SpellAbility)spellAbility).getTriggeringObject(AbilityKey.fromString(key)))) {
+                SpellAbility sa = (SpellAbility) spellAbility;
+                if (card.equals(sa.getRootAbility().getTriggeringObject(AbilityKey.fromString(key)))) {
                     return false;
                 }
             } else {

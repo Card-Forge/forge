@@ -54,7 +54,6 @@
       "name": "Resume",
       "text": "tr(lblResume)",
       "selectable": true,
-      "binding": "Back",
       "width": 238,
       "height": 48,
       "x": 16,

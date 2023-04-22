@@ -10,7 +10,7 @@ ScryfallCode=MUL
 2 U Daxos, Blessed by the Sun @Jason A. Engle
 3 M Elesh Norn, Grand Cenobite @Flavio Girón
 4 M Kenrith, the Returned King @Aaron Miller
-5 U Kwende, Pride of Femeref
+5 U Kwende, Pride of Femeref @Jody Clark
 6 R Sram, Senior Edificer @Adam Paquette
 7 R Thalia, Guardian of Thraben @Joshua Alvarado
 8 R Baral, Chief of Compliance @Yeong-Hao Han
@@ -68,25 +68,55 @@ ScryfallCode=MUL
 60 R Taigam, Ojutai Master @Domenico Cava
 61 R Teysa Karlov @Barbara Rosiak
 62 R Umori, the Collector @Daniel Warren Johnson
-63 M Yarok, the Desecrated
+63 M Yarok, the Desecrated @Jessica Rossier
 64 R Yorion, Sky Nomad @Justine Mara Andersen
 65 R Zirda, the Dawnwaker @Justine Mara Andersen
+66 R Anafenza, Kin-Tree Spirit @Ryan Yee
+67 U Daxos, Blessed by the Sun @Lius Lasahido
 68 M Elesh Norn, Grand Cenobite @Igor Kieryluk
 69 M Kenrith, the Returned King @Kieran Yanner
+70 U Kwende, Pride of Femeref @Daarken
 71 R Sram, Senior Edificer @Chris Rahn
+72 R Thalia, Guardian of Thraben @Jana Schirmer & Johannes Voss
 73 R Baral, Chief of Compliance @Wesley Burt
+74 R Emry, Lurker of the Loch @Livia Prima
+75 U Inga Rune-Eyes @Bram Sels
 76 M Jin-Gitaxias, Core Augur @Eric Deschamps
+77 U Tetsuko Umezawa, Fugitive @Randy Vargas
+78 R Ayara, First of Locthwain @Ryan Pancoast
+79 R Horobi, Death's Wail @John Bolton
+80 R Seizan, Perverter of Truth @Kev Walker
 81 M Sheoldred, Whispering One @Jana Schirmer & Johannes Voss
 82 M Skithiryx, the Blight Dragon @Chippy
+83 U Tymaret, Chosen from Death @Chase Stone
 84 U Yargle, Glutton of Urborg @Jehan Choo
+85 R Captain Lannery Storm @Chris Rallis
+86 M Ragavan, Nimble Pilferer @Simon Dominic
+87 R Squee, the Immortal @Svetlin Velinov
 88 M Urabrask the Hidden @Brad Rigney
+89 U Valduk, Keeper of the Flame @Victor Adame Minguez
 90 U Zada, Hedron Grinder @Chris Rallis
+91 U Fynn, the Fangbearer @Lie Setiawan
+92 R Goreclaw, Terror of Qal Sisma @Svetlin Velinov
+93 U Renata, Called to the Hunt @Chris Rahn
 94 M Vorinclex, Voice of Hunger @Karl Kopinski
+95 R Yedora, Grave Gardener @Svetlin Velinov
+96 U Aegar, the Freezing Flame @Chris Rahn
 97 R Arixmethes, Slumbering Isle @Dimitar Marinski
+98 M Atraxa, Praetors' Voice @Victor Adame Minguez
+99 R Atris, Oracle of Half-Truths @Bastien L. Deharme
+100 M Aurelia, the Warleader @Slawomir Maniak
 101 R Brudiclad, Telchor Engineer @Daarken
 102 U Dina, Soul Steeper @Chris Rahn
+103 M Ezuri, Claw of Progress @James Ryman
+104 R Firesong and Sunspeaker @Zoltan Boros
 105 U Firja, Judge of Valor @Livia Prima
+106 M Grimgrin, Corpse-Born @Bartek Fedyczak
 107 R Gyruda, Doom of Depths @Tyler Jacobson
+108 U Imoti, Celebrant of Bounty @Ekaterina Burmak
+109 R Jegantha, the Wellspring @Chris Rahn
+110 R Judith, the Scourge Diva @Wesley Burt
+111 U Juri, Master of the Revue @Dmitry Burmak
 112 R Kaheera, the Orphanguard @Ryan Pancoast
 113 R Keruga, the Macrosage @Dan Scott
 114 M Kroxa, Titan of Death's Hunger @Vincent Proce
@@ -95,7 +125,13 @@ ScryfallCode=MUL
 117 R Lutri, the Spellchaser @Lie Setiawan
 118 M Niv-Mizzet Reborn @Raymond Swanland
 119 R Obosh, the Preypiercer @Daarken
+120 U Radha, Coalition Warlord @Randy Vargas
 121 U Raff, Weatherlight Stalwart @Eelis Kyttanen
+122 U Reyav, Master Smith @Scott Murphy
+123 U Rona, Sheoldred's Faithful @Ryan Alexander Lee
+124 U Shanna, Sisay's Legacy @Magali Villeneuve
+125 R Taigam, Ojutai Master @Simon Dominic
+126 R Teysa Karlov @Magali Villeneuve
 127 R Umori, the Collector @Jehan Choo
 128 M Yarok, the Desecrated @Daarken
 129 R Yorion, Sky Nomad @Steven Belledin
@@ -162,6 +198,10 @@ ScryfallCode=MUL
 190 R Taigam, Ojutai Master @Domenico Cava
 191 R Teysa Karlov @Barbara Rosiak
 192 R Umori, the Collector @Daniel Warren Johnson
-193 M Yarok, the Desecrated
+193 M Yarok, the Desecrated @Jessica Rossier
 194 R Yorion, Sky Nomad @Justine Mara Andersen
 195 R Zirda, the Dawnwaker @Justine Mara Andersen
+
+[tokens]
+r_3_1_elemental_trample_haste
+u_2_1_a_phyrexian_myr

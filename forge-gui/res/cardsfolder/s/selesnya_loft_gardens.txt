@@ -6,9 +6,9 @@ SVar:DoubleToken:DB$ ReplaceToken | Type$ Amount
 R:Event$ AddCounter | ActiveZones$ Command | ValidCard$ Permanent.inZoneBattlefield | EffectOnly$ True | ReplaceWith$ DoubleCounters | Description$ If an effect would put one or more counters on a permanent, it puts twice that many of those counters on that permanent instead.
 SVar:DoubleCounters:DB$ ReplaceCounter | Amount$ Z
 SVar:Z:ReplaceCount$CounterNum/Twice
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, until end of turn, whenever you tap a land for mana, add one mana of any type that land produced.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, until end of turn, whenever you tap a land for mana, add one mana of any type that land produced.
 SVar:RolledChaos:DB$ Effect | AILogic$ Always | Triggers$ TrigTapForMana
 SVar:TrigTapForMana:Mode$ TapsForMana | TriggerZones$ Command | ValidCard$ Land | Activator$ You | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever you tap a land for mana, add one mana of any type that land produced.
 SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ You
 SVar:AIRollPlanarDieParams:Mode$ Always | MinTurn$ 1 | RollInMain1$ True
-Oracle:If an effect would create one or more tokens, it creates twice that many of those tokens instead.\nIf an effect would put one or more counters on a permanent, it puts twice that many of those counters on that permanent instead.\nWhenever you roll {CHAOS}, until end of turn, whenever you tap a land for mana, add one mana of any type that land produced.
+Oracle:If an effect would create one or more tokens, it creates twice that many of those tokens instead.\nIf an effect would put one or more counters on a permanent, it puts twice that many of those counters on that permanent instead.\nWhenever chaos ensues, until end of turn, whenever you tap a land for mana, add one mana of any type that land produced.

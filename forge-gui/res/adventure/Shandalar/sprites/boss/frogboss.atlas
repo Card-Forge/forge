@@ -1,0 +1,98 @@
+frogboss.png
+size: 1152,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 33, 273
+  size: 39, 28
+Idle 
+  xy: 18,14
+  size: 65, 50   
+Idle 
+  xy: 114,14
+  size: 65, 50   
+Idle 
+  xy: 210,14
+  size: 65, 50   
+Idle 
+  xy: 306,14
+  size: 65, 50   
+Idle 
+  xy: 402,14
+  size: 65, 50   
+Walk 
+  xy: 18, 68
+  size: 70, 60  
+Walk 
+  xy: 114, 68
+  size: 70, 60
+Walk 
+  xy: 210, 68
+  size: 70, 60  
+Walk 
+  xy: 306, 68
+  size: 70, 60  
+Walk 
+  xy: 402, 68
+  size: 70, 60  
+Walk 
+  xy: 498, 68
+  size: 70, 60 
+Walk 
+  xy: 594, 68
+  size: 70, 60 
+Walk 
+  xy: 690, 68
+  size: 70, 60 
+Walk 
+  xy: 786, 68
+  size: 70, 60 
+Walk 
+  xy: 882, 68
+  size: 70, 60 
+Walk 
+  xy: 978, 68
+  size: 70, 60 
+Walk 
+  xy: 1074, 68
+  size: 70, 60
+Attack 
+  xy: 18, 200
+  size: 78, 57
+Attack 
+  xy: 114, 200
+  size: 78, 57  
+Attack 
+  xy: 210, 200
+  size: 78, 57  
+Attack 
+  xy: 306, 200
+  size: 78, 57 
+Death 
+  xy: 18,462
+  size: 70, 50   
+Death 
+  xy: 114,462
+  size: 70, 50   
+Death 
+  xy: 210,462
+  size: 70, 50   
+Death 
+  xy: 306,462
+  size: 70, 50   
+Death 
+  xy: 402,462
+  size: 70, 50   
+Death 
+  xy: 498,462
+  size: 70, 50   
+Death 
+  xy: 594,462
+  size: 70, 50   
+Death 
+  xy: 690,462
+  size: 70, 50   
+Death 
+  xy: 786,462
+  size: 70, 50 

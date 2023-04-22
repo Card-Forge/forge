@@ -997,3 +997,4 @@
 2022-07-11 Sealed Snc Block Super Qualifier (8 decks) | https://downloads.cardforge.org/decks/archive/block/2022-07-11-sealed-snc-block-super-qualifier.zip
 2022-08-22 Sealed 2X2 Block Mocs (1 decks) | https://downloads.cardforge.org/decks/archive/block/2022-08-22-sealed-2x2-block-mocs.zip
 2022-09-12 Sealed Dmu Block Super Qualifier (2 decks) | https://downloads.cardforge.org/decks/archive/block/2022-09-12-sealed-dmu-block-super-qualifier.zip
+2022-10-10 Sealed Dmu Block Super Qualifier (1 decks) | https://downloads.cardforge.org/decks/archive/block/2022-10-10-sealed-dmu-block-super-qualifier.zip

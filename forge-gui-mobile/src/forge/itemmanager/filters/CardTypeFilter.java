@@ -34,6 +34,7 @@ public class CardTypeFilter extends StatTypeFilter<PaperCard> {
         addToggleButton(widget, StatTypes.PLANESWALKER);
         addToggleButton(widget, StatTypes.INSTANT);
         addToggleButton(widget, StatTypes.SORCERY);
+        addToggleButton(widget, StatTypes.BATTLE);
     }
 
     @Override

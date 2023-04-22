@@ -1023,8 +1023,11 @@ public class Forge implements ApplicationListener {
         return ((Forge)Gdx.app.getApplicationListener()).assets;
     }
     public static boolean switchScene(Scene newScene) {
-        if (newScene instanceof RewardScene || newScene instanceof SpellSmithScene || newScene instanceof DeckSelectScene || newScene instanceof PlayerStatisticScene) {
-            if (!(currentScene instanceof ForgeScene)) //prevent overwriting the last preview if last scene is instance of ForgeScene
+        return switchScene(newScene, false);
+    }
+    public static boolean switchScene(Scene newScene, boolean skipPreview) {
+        if (newScene instanceof RewardScene || newScene instanceof SpellSmithScene || newScene instanceof DeckSelectScene || newScene instanceof PlayerStatisticScene || newScene instanceof QuestLogScene) {
+            if (!(currentScene instanceof ForgeScene || skipPreview)) //prevent overwriting the last preview if last scene is instance of ForgeScene
                 WorldSave.getCurrentSave().header.createPreview();
         }
         if (currentScene != null) {

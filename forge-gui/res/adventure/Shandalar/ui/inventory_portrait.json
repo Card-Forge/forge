@@ -16,7 +16,25 @@
       "y": 112,
       "width": 129,
       "height": 243
-    }, 
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Ability1",      
+      "style": "item_frame",      
+      "width": 20,
+      "height": 20,
+      "x": 17,
+      "y": 124
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Ability2",      
+      "style": "item_frame",      
+      "width": 20,
+      "height": 20,
+      "x": 107,
+      "y": 124
+    },
     {
       "type": "ImageButton",
       "name": "Equipment_Neck",      
@@ -25,7 +43,7 @@
       "height": 20,
       "x": 62,
       "y": 144
-    }   ,
+    },
     {
       "type": "ImageButton",
       "name": "Equipment_Body",      
@@ -34,7 +52,7 @@
       "height": 20,
       "x": 62,
       "y": 189
-    }   ,
+    },
     {
       "type": "ImageButton",
       "name": "Equipment_Boots",      
@@ -43,7 +61,7 @@
       "height": 20,
       "x": 62,
       "y": 324 
-    }   ,
+    },
     {
       "type": "ImageButton",
       "name": "Equipment_Left",      
@@ -84,12 +102,11 @@
       "y": 16,
       "width": 246,
       "height": 90
-    }   ,
+    },
     {
       "type": "TextButton",
       "name": "delete",
       "text": "tr(lblDispose)",
-      "binding": "Status",
       "width": 60,
       "height": 30,
       "x": 8,
@@ -99,7 +116,6 @@
       "type": "TextButton",
       "name": "equip",
       "text": "tr(lblEquip)",
-      "binding": "Equip",
       "width": 60,
       "height": 30,
       "x": 75,
@@ -109,7 +125,6 @@
       "type": "TextButton",
       "name": "use",
       "text": "tr(lblUse)",
-      "binding": "Use",
       "width": 60,
       "height": 30,
       "x": 140,
@@ -119,7 +134,6 @@
       "type": "TextButton",
       "name": "return",
       "text": "tr(lblBack)",
-      "binding": "Back",
       "width": 60,
       "height": 30,
       "x": 205,

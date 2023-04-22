@@ -1,0 +1,8 @@
+Name:Scrollshift
+ManaCost:2 W
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl,Enchantment.YouCtrl | Origin$ Battlefield | Destination$ Exile | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target artifact, creature, or enchantment you control | RememberTargets$ True | SubAbility$ DBReturn | StackDescription$ Exile {c:Targeted}, | SpellDescription$ Exile up to one target artifact, creature, or enchantment you control, then return it to the battlefield under its owner's control. Draw a card.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBDraw | StackDescription$ then return it to the battlefield under its owner's control.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Exile up to one target artifact, creature, or enchantment you control, then return it to the battlefield under its owner's control.\nDraw a card.

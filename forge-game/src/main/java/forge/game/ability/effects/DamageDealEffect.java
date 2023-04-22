@@ -173,7 +173,7 @@ public class DamageDealEffect extends DamageBaseEffect {
             } else { // only for Comet, Stellar Pup
                 final String prompt = sa.hasParam("ChoicePrompt") ? sa.getParam("ChoicePrompt") :
                         Localizer.getInstance().getMessage("lblChooseEntityDmg");
-                tgts.addAll(sa.getActivatingPlayer().getController().chooseEntitiesForEffect(choices, n, n, null, sa,
+                tgts.addAll(activator.getController().chooseEntitiesForEffect(choices, n, n, null, sa,
                         prompt, null, null));
             }
         } else {
@@ -288,18 +288,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         int excess = 0;
         int dmgToTarget = 0;
         if (sa.hasParam("ExcessDamage") || sa.hasParam("ExcessSVar")) {
-            int lethal = 0;
-            if (c.isCreature()) {
-                lethal = Math.max(0, c.getLethalDamage());
-                if (sourceLKI.hasKeyword(Keyword.DEATHTOUCH)) {
-                    lethal = Math.min(lethal, 1);
-                }
-            }
-            if (c.isPlaneswalker()) {
-                int lethalPW = c.getCurrentLoyalty();
-                // 120.4a
-                lethal = c.isCreature() ? Math.min(lethal, lethalPW) : lethalPW;
-            }
+            int lethal = c.getExcessDamageValue(sourceLKI.hasKeyword(Keyword.DEATHTOUCH));
             dmgToTarget = Math.min(lethal, dmg);
             excess = dmg - dmgToTarget;
         }

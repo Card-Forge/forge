@@ -237,6 +237,11 @@ public final class CardRules implements ICardCharacteristics {
     @Override public String getInitialLoyalty() { return mainPart.getInitialLoyalty(); }
 
     @Override
+    public String getDefense() {
+        return mainPart.getDefense();
+    }
+
+    @Override
     public String getOracleText() {
         switch (splitType.getAggregationMethod()) {
         case COMBINE:
@@ -495,6 +500,8 @@ public final class CardRules implements ICardCharacteristics {
                         needs = new DeckHints(value);
                     } else if ("DeckHas".equals(key)) {
                         has = new DeckHints(value);
+                    } else if ("Defense".equals(key)) {
+                        this.faces[this.curFace].setDefense(value);
                     }
                     break;
 

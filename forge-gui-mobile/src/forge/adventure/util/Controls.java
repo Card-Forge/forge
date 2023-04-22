@@ -104,6 +104,23 @@ public class Controls {
         return getBoundingRect(actor).contains(point);
     }
 
+    static public boolean actorContainsVector(Array<TextraButton> buttons, Vector2 point) {
+        boolean value = false;
+        if (buttons == null)
+            return false;
+        if (buttons.isEmpty())
+            return false;
+        for (Actor actor : buttons) {
+            if (actor == null)
+                return false;
+            if (!actor.isVisible())
+                return false;
+            if (getBoundingRect(actor).contains(point))
+                value = true;
+        }
+        return value;
+    }
+
     static public SelectBox<String> newComboBox(String[] text, String item, Function<Object, Void> func) {
         SelectBox<String> ret = newComboBox();
         ret.getStyle().listStyle.selection.setTopHeight(4);

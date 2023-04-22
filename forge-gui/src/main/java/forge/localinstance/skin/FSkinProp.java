@@ -363,6 +363,7 @@ public enum FSkinProp {
     IMG_PLANESWALKER    (new int[] {330, 740, 80, 80}, PropType.MANAICONS),
     IMG_PACK            (new int[] {80, 760, 40, 40}, PropType.IMAGE),
     IMG_SORCERY         (new int[] {412, 740, 80, 80}, PropType.MANAICONS),
+    IMG_BATTLE          (new int[] {330, 822, 80, 80}, PropType.MANAICONS),
     IMG_COMMANDER       (new int[] {120, 760, 40, 40}, PropType.IMAGE),
     IMG_ALCHEMY         (new int[] {248, 822, 80, 80}, PropType.MANAICONS),
 

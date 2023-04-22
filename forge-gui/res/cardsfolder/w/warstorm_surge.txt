@@ -2,6 +2,6 @@ Name:Warstorm Surge
 ManaCost:5 R
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature enters the battlefield under your control, it deals damage equal to its power to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | DamageSource$ TriggeredCard
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | DamageSource$ TriggeredCard
 SVar:X:TriggeredCard$CardPower
 Oracle:Whenever a creature enters the battlefield under your control, it deals damage equal to its power to any target.

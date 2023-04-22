@@ -19,35 +19,35 @@ Idle
   xy: 96, 10
   size: 32, 22   
 Idle 
-  xy: 0, 72
-  size: 32, 24   
+  xy: 0, 74
+  size: 32, 22   
 Idle 
-  xy: 32, 72
-  size: 32, 24   
+  xy: 32, 74
+  size: 32, 22   
 Idle 
-  xy: 64, 72
-  size: 32, 24   
+  xy: 64, 74
+  size: 32, 22   
 Idle 
-  xy: 96, 72
-  size: 32, 24   
+  xy: 96, 74
+  size: 32, 22   
 Idle 
-  xy: 128, 72
-  size: 32, 24  
+  xy: 128, 74
+  size: 32, 22  
 Idle 
-  xy: 160, 72
-  size: 32, 24   
+  xy: 160, 74
+  size: 32, 22   
 Idle 
-  xy: 192, 72
-  size: 32, 24   
+  xy: 192, 74
+  size: 32, 22   
 Idle 
-  xy: 224, 72
-  size: 32, 24   
+  xy: 224, 74
+  size: 32, 22   
 Idle 
-  xy: 256, 72
-  size: 32, 24    
+  xy: 256, 74
+  size: 32, 22  
 Idle 
-  xy: 288, 72
-  size: 32, 24
+  xy: 288, 74
+  size: 32, 22
 Walk
   xy: 0, 32
   size: 32, 32      

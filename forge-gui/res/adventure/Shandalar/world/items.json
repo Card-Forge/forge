@@ -183,6 +183,11 @@
     "questItem": true
   },
   {
+    "name": "Nahiri's Key",
+    "iconName": "RedKey",
+    "questItem": true
+  },
+  {
     "name": "White Key",
     "iconName": "WhiteKey",
     "questItem": true
@@ -209,6 +214,16 @@
   },
   {
     "name": "Torturer's Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Grolnoks Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Rusty Old Key",
     "iconName": "StrangeKey",
     "questItem": true
   },
@@ -429,9 +444,9 @@
     "equipmentSlot": "Left",
     "iconName": "FlameSword",
     "effect": {
-      "opponent": {
-        "lifeModifier": -5
-      }
+        "startBattleWithCardInCommandZone": [
+          "Flame Sword"
+        ]
     }
   },
   {
@@ -864,7 +879,8 @@
 },
 {
 	"name": "Colorless rune",
-	"usableOnWorldMap":true, 
+	"usableOnWorldMap":true,
+    "equipmentSlot": "Ability2",
 	"description": "Teleports you to the center",
 	"commandOnUse": "teleport to poi Spawn",
 	"iconName": "ColorlessRune",
@@ -875,6 +891,7 @@
 {
 	"name": "White rune",
 	"usableOnWorldMap":true,
+    "equipmentSlot": "Ability2",
 	"effect": {
 		"name": ""
 	},
@@ -888,6 +905,7 @@
 {
 	"name": "Black rune",
 	"usableOnWorldMap":true,
+    "equipmentSlot": "Ability2",
 	"effect": {
 		"name": ""
 	},
@@ -901,6 +919,7 @@
 {
 	"name": "Blue rune",
 	"usableOnWorldMap":true,
+    "equipmentSlot": "Ability2",
 	"effect": {
 		"name": ""
 	},
@@ -914,6 +933,7 @@
 {
 	"name": "Red rune",
 	"usableOnWorldMap":true,
+    "equipmentSlot": "Ability2",
 	"effect": {
 		"name": ""
 	},
@@ -927,6 +947,7 @@
 {
 	"name": "Green rune",
 	"usableOnWorldMap":true,
+    "equipmentSlot": "Ability2",
 	"effect": {
 		"name": ""
 	},
@@ -939,6 +960,7 @@
 },
 {
 	"name": "White Staff",
+    "equipmentSlot": "Ability1",
 	"usableOnWorldMap":true,
 	"usableInPoi":true,
 	"effect": {
@@ -953,6 +975,7 @@
 },
 {
 	"name": "Black Staff",
+    "equipmentSlot": "Ability1",
 	"usableOnWorldMap":true,
 	"usableInPoi":false,
 	"effect": {
@@ -968,6 +991,7 @@
 {
 	"name": "Blue Staff",
 	"usableOnWorldMap":true,
+    "equipmentSlot": "Ability1",
 	"effect": {
 		"name": ""
 	},
@@ -981,6 +1005,7 @@
 {
 	"name": "Red Staff",
 	"usableOnWorldMap":true,
+    "equipmentSlot": "Ability1",
 	"effect": {
 		"name": ""
 	},
@@ -993,6 +1018,7 @@
 },
 {
 	"name": "Green Staff",
+    "equipmentSlot": "Ability1",
 	"usableOnWorldMap":true,
 	"usableInPoi":true,
 	"effect": {

@@ -17,6 +17,7 @@ import forge.adventure.data.EnemyData;
 import forge.adventure.data.WorldData;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
+import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.gui.FThreads;
@@ -86,7 +87,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
             else
                 showAreYouSure();
         });
-        ui.onButtonPress("start", () -> startButton());
+        ui.onButtonPress("start", this::startButton);
         doneButton = ui.findActor("done");
         ScrollPane pane = ui.findActor("arena");
         arenaPlane = new Table();
@@ -112,10 +113,12 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     }
 
     private void loose() {
-        doneButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblLeave"));
+        doneButton.setText("[%80][+Exit]");
         doneButton.layout();
         startButton.setDisabled(true);
         arenaStarted = false;
+        AdventureQuestController.instance().updateArenaComplete(false);
+        AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
     }
 
     private void startDialog() {
@@ -146,9 +149,9 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         enable = false;
         goldLabel.setVisible(false);
         arenaStarted = true;
-        startButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblContinue"));
+        startButton.setText("[%80][+OK]");
         startButton.layout();
-        doneButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblConcede"));
+        doneButton.setText("[%80][+Exit]");
         doneButton.layout();
         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
         Current.player().takeGold(arenaData.entryFee);
@@ -161,7 +164,8 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         Array<ArenaRecord> winners = new Array<>();
         Array<EnemySprite> winnersEnemies = new Array<>();
         for (int i = 0; i < fighters.size - 2; i += 2) {
-            boolean leftWon = rand.nextBoolean();
+            int matchHP = enemies.get(i).getData().life + enemies.get(i+1).getData().life;
+            boolean leftWon = rand.nextInt(matchHP) < enemies.get(i).getData().life;
             if (leftWon) {
                 winners.add(fighters.get(i));
                 winnersEnemies.add(enemies.get(i));
@@ -191,8 +195,10 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         if (roundsWon >= arenaData.rounds) {
             arenaStarted = false;
             startButton.setDisabled(true);
-            doneButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblDone"));
+            doneButton.setText("[%80][+Exit]");
             doneButton.layout();
+            AdventureQuestController.instance().updateArenaComplete(true);
+            AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
         }
         if (!Forge.isLandscapeMode())
             drawArena();//update
@@ -257,7 +263,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
             Array<Reward> data = new Array<>();
             for (int i = 0; i < roundsWon; i++) {
                 for (int j = 0; j < arenaData.rewards[i].length; j++) {
-                    data.addAll(arenaData.rewards[i][j].generate(false, null));
+                    data.addAll(arenaData.rewards[i][j].generate(false, null, true));
                 }
             }
             RewardScene.instance().loadRewards(data, RewardScene.Type.Loot, null);
@@ -277,9 +283,9 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     Actor player;
 
     public void loadArenaData(ArenaData data, long seed) {
-        startButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblStart"));
+        startButton.setText("[%80][+OK]");
         startButton.layout();
-        doneButton.setText("[%80]" + Forge.getLocalizer().getMessage("lblDone"));
+        doneButton.setText("[%80][+Exit]");
         doneButton.layout();
         arenaData = data;
         //rand.setSeed(seed); allow to reshuffle arena enemies for now

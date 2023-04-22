@@ -2,7 +2,7 @@ Name:Glimmer Lens
 ManaCost:1 W
 Types:Artifact Equipment
 K:For Mirrodin
-T:Mode$ Attacks | ValidCard$ Card.EquippedBy | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+!EquippedBy | Execute$ TrigDraw | TriggerDescription$ Whenever equipped creature and at least one other creature attack, draw a card.
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+!EquippedBy | NoResolvingCheck$ True | Execute$ TrigDraw | TriggerDescription$ Whenever equipped creature and at least one other creature attack, draw a card.
 SVar:TrigDraw:DB$ Draw
 K:Equip:1 W
 DeckHas:Ability$Token & Type$Rebel & Color$Red

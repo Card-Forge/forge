@@ -35,14 +35,18 @@ public class EditorMainWindow extends JFrame {
         newButton.addActionListener(e -> EventQueue.invokeLater(() ->new ParticleEditor()));
         toolBar.add(newButton);
         setLayout(layout);
+        toolBar.setFloatable(false);
         add(toolBar, BorderLayout.NORTH);
         add(tabs, BorderLayout.CENTER);
         tabs.addTab("World",worldEditor);
         tabs.addTab("POI",new PointOfInterestEditor());
         tabs.addTab("Items",new ItemsEditor());
         tabs.addTab("Enemies",new EnemyEditor());
+        tabs.addTab("Quests",new QuestEditor());
 
         setVisible(true);
         setSize(800,600);
+        GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow( this );
+
     }
 }

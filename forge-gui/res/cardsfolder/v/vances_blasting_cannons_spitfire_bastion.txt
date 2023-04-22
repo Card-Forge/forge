@@ -18,5 +18,5 @@ Name:Spitfire Bastion
 ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ R | Amount$ 1 | SpellDescription$ Add {R}.
-A:AB$ DealDamage | Cost$ 2 R T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+A:AB$ DealDamage | Cost$ 2 R T | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
 Oracle:(Transforms from Vance's Blasting Cannons.)\n{T}: Add {R}.\n{2}{R}, {T}: Spitfire Bastion deals 3 damage to any target.

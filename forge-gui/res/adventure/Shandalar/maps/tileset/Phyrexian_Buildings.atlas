@@ -12,3 +12,9 @@ GitLabSmall
 CopperhostForest
  xy: 64,0
  size: 32, 32
+DrossOutpost
+ xy: 96,0
+ size: 32, 32
+FurnaceBase
+ xy: 128,0
+ size: 32, 32

@@ -169,7 +169,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         return stringBuilder.toString();
     }
 
-    protected void resolvePerType(SpellAbility sa, final Player placer, CounterType counterType, int counterAmount,
+    protected void resolvePerType(SpellAbility sa, Player placer, CounterType counterType, int counterAmount,
                                   GameEntityCounterTable table, boolean stopForTypes) {
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
@@ -251,9 +251,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         } else {
             if (sa.hasParam("Defined") && sa.getParam("Defined").contains(" & ")) {
-                for (String def : sa.getParam("Defined").split(" & ")) {
-                    tgtObjects.addAll(AbilityUtils.getDefinedEntities(card, def, sa));
-                }
+                tgtObjects.addAll(AbilityUtils.getDefinedEntities(card, sa.getParam("Defined").split(" & "), sa));
             } else {
                 tgtObjects.addAll(getDefinedEntitiesOrTargeted(sa, "Defined"));
             }
@@ -516,10 +514,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         String message = Localizer.getInstance().getMessage(
                                 "lblDoYouWantPutTargetP1P1CountersOnCard", String.valueOf(counterAmount),
                                 CardTranslation.getTranslatedName(gameCard.getName()));
-                        Player chooser = pc.chooseSingleEntityForEffect(activator.getOpponents(), sa,
+                        placer = pc.chooseSingleEntityForEffect(activator.getOpponents(), sa,
                                 Localizer.getInstance().getMessage("lblChooseAnOpponent"), params);
 
-                        if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message, null)) {
+                        if (placer.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message, null)) {
                             gameCard.setTributed(true);
                         } else {
                             continue;

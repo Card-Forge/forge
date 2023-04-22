@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | SubAbility$ DBChooseX | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ LE2
 SVar:DBChooseX:DB$ ChooseNumber | ChooseAnyNumber$ True | ListTitle$ X | SubAbility$ DBStore | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ GT2 | SubAbility$ DBImmediateTrig
 SVar:DBImmediateTrig:DB$ ImmediateTrigger | UnlessCost$ X | UnlessPayer$ You | UnlessSwitched$ True | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ GT2 | Execute$ TrigDamage | RememberSVarAmount$ X | TriggerDescription$ When you do, CARDNAME deals X damage to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ Y
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ Y
 SVar:Resolved:Count$ResolvedThisTurn
 SVar:X:Count$ChosenNumber
 SVar:Y:Count$TriggerRememberAmount

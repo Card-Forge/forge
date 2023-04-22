@@ -1,0 +1,10 @@
+Name:Sandsteppe War Riders
+ManaCost:3 G
+Types:Creature Human Warrior
+PT:4/4
+K:Trample
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, bolster X, where X is the number of differently named artifact tokens you control. (Choose a creature with the least toughness among creatures you control and put X + 1/+1 counters on it.)
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | Bolster$ True
+SVar:X:Count$DifferentCardNames_Artifact.YouCtrl+token+inZoneBattlefield
+DeckHas:Ability$Counters
+Oracle:Trample\nAt the beginning of combat on your turn, bolster X, where X is the number of differently named artifact tokens you control. (Choose a creature with the least toughness among creatures you control and put X + 1/+1 counters on it.)

@@ -1,0 +1,11 @@
+Name:Uncivil Unrest
+ManaCost:4 R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.nonToken+YouCtrl | AddKeyword$ Riot | Description$ Nontoken creatures you control have riot. (They enter the battlefield with your choice of a +1/+1 counter or haste.)
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.YouCtrl+counters_GE1_P1P1 | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwice | Description$ If a creature you control with a +1/+1 counter on it would deal damage to a permanent or player, it deals double that damage instead.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+DeckNeeds:Ability$Counters
+Oracle:Nontoken creatures you control have riot. (They enter the battlefield with your choice of a +1/+1 counter or haste.)\nIf a creature you control with a +1/+1 counter on it would deal damage to a permanent or player, it deals double that damage instead.

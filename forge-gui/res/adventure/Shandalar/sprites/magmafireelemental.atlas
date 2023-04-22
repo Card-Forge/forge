@@ -1,0 +1,98 @@
+magmafireelemental.png
+size: 256,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 73, 82
+  size: 15, 13 
+Idle
+  xy: 6, 45
+  size: 20, 20      
+Idle 
+  xy: 38, 45
+  size: 20, 20
+Idle 
+  xy: 70, 45
+  size: 20, 20
+Idle 
+  xy: 102, 45
+  size: 20, 20  
+Idle 
+  xy: 134, 45
+  size: 20, 20 
+Idle 
+  xy: 166, 45
+  size: 20, 20      
+Walk 
+  xy: 4, 17
+  size: 24,20
+Walk 
+  xy: 36, 17
+  size: 24, 20
+Walk 
+  xy: 68, 17
+  size: 24, 20
+Walk 
+  xy: 100, 17
+  size: 24, 20
+Walk 
+  xy: 132, 17
+  size: 24,20
+Walk 
+  xy: 164, 17
+  size: 24, 20
+Walk 
+  xy: 196, 17
+  size: 24, 20
+Walk 
+  xy: 228, 17
+  size: 24, 20
+Attack 
+  xy: 0, 79
+  size: 32,20
+Attack
+  xy: 32, 79
+  size: 32, 20
+Attack 
+  xy: 64, 79
+  size: 32, 20
+Attack 
+  xy: 96, 79
+  size: 32, 20
+Attack
+  xy: 128, 79
+  size: 32,20 
+Attack 
+  xy: 160, 79
+  size: 32, 20
+Attack 
+  xy: 192, 79
+  size: 32, 20
+Attack 
+  xy: 224, 79
+  size: 32, 20
+Death 
+  xy: 0, 140
+  size: 32, 20      
+Death 
+  xy: 32, 140
+  size: 32, 20 
+Death 
+  xy: 64, 140
+  size: 32, 20 
+Death 
+  xy: 96, 140
+  size: 32, 20
+Death
+  xy: 128, 140
+  size: 32,20 
+Death 
+  xy: 160, 140
+  size: 32, 20
+Death 
+  xy: 192, 140
+  size: 32, 20
+Death
+  xy: 224, 140
+  size: 32, 20

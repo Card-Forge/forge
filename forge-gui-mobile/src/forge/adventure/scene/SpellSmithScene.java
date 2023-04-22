@@ -368,8 +368,8 @@ public class SpellSmithScene extends UIScene {
         poolSize.setText(((cardPool.size() > 0 ? "[/][FOREST]" : "[/][RED]")) + cardPool.size() + " possible card" + (cardPool.size() != 1 ? "s" : ""));
         currentPrice = (int) totalCost;
         currentShardPrice = (int) (totalCost * 0.2f); //Intentionally rounding up via the cast to int
-        pullUsingGold.setText("Pull: " + currentPrice + "[+gold]");
-        pullUsingShards.setText("Pull: " + currentShardPrice + "[+shards]");
+        pullUsingGold.setText("[+Pull][+gold]"+ currentPrice);
+        pullUsingShards.setText("[+Pull][+shards]" + currentShardPrice);
         pullUsingGold.setDisabled(!(cardPool.size() > 0) || Current.player().getGold() < totalCost);
         pullUsingShards.setDisabled(!(cardPool.size() > 0) || Current.player().getShards() < currentShardPrice);
         editionList.setUserObject(edition);

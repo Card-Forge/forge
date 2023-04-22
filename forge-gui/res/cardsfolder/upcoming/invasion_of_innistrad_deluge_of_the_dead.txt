@@ -1,0 +1,22 @@
+Name:Invasion of Innistrad
+ManaCost:2 B B
+Types:Battle Siege
+Defense:4
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature an opponent controls gets -13/-13 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -13 | NumDef$ -13
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nFlash\nWhen Invasion of Innistrad enters the battlefield, target creature an opponent controls gets -13/-13 until end of turn.
+AlternateMode:DoubleFaced
+
+ALTERNATE
+
+Name:Deluge of the Dead
+ManaCost:no cost
+Colors:black
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 2/2 black Zombie creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ b_2_2_zombie
+A:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ DBToken | SpellDescription$ Exile target card from a graveyard. 
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | SpellDescription$ If it was a creature card, create a 2/2 black Zombie creature token.
+DeckHas:Ability$Counters|Token|Graveyard & Type$Zombie
+Oracle:When Deluge of the Dead enters the battlefield, create two 2/2 black Zombie creature tokens.\n{2}{B}: Exile target card from a graveyard. If it was a creature card, create a 2/2 black Zombie creature token.

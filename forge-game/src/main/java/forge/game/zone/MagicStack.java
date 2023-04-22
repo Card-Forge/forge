@@ -135,7 +135,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     public final void addAndUnfreeze(final SpellAbility ability) {
         final Card source = ability.getHostCard();
 
-        if (!ability.isCopied()) {
+        if (!ability.isCopied() && ability.isAbility()) {
             // Copied abilities aren't activated, so they shouldn't change these values
             source.addAbilityActivated(ability);
             ability.checkActivationResolveSubs();

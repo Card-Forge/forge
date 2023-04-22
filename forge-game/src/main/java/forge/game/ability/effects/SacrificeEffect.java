@@ -87,8 +87,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
         }
 
         // Expand Sacrifice keyword here depending on what we need out of it.
-        final String num = sa.getParamOrDefault("Amount", "1");
-        final int amount = AbilityUtils.calculateAmount(card, num, sa);
+        final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Amount", "1"), sa);
         final boolean devour = sa.hasParam("Devour");
         final boolean exploit = sa.hasParam("Exploit");
         final boolean sacEachValid = sa.hasParam("SacEachValid");
@@ -168,7 +167,10 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
                 Map<Integer, Card> cachedMap = Maps.newHashMap();
                 for (Card sac : choosenToSacrifice) {
-                    final Card lKICopy = CardUtil.getLKICopy(sac, cachedMap);
+                    Card lKICopy = null;
+                    if (devour || exploit || remSacrificed) {
+                        lKICopy = CardUtil.getLKICopy(sac, cachedMap);
+                    }
                     boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa, true, table, params) != null;
                     boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa, true, table, params);
                     // Run Devour Trigger

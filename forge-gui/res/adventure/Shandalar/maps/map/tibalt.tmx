@@ -42,7 +42,7 @@
   </object>
   <object id="118" template="../obj/enemy.tx" x="277.693" y="226.745">
    <properties>
-    <property name="enemy" value="Magma Elemental"/>
+    <property name="enemy" value="Magma Fire Elemental"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="true"/>
     <property name="threatRange" type="int" value="40"/>
@@ -73,7 +73,7 @@
   </object>
   <object id="150" template="../obj/enemy.tx" x="213.842" y="94.272">
    <properties>
-    <property name="enemy" value="Magma Elemental"/>
+    <property name="enemy" value="Magma Fire Elemental"/>
     <property name="spawn.Hard" type="bool" value="true"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="174,173"/>
@@ -95,7 +95,7 @@
   </object>
   <object id="169" template="../obj/enemy.tx" x="360.842" y="71.6053">
    <properties>
-    <property name="enemy" value="Magma Elemental"/>
+    <property name="enemy" value="Magma Fire Elemental"/>
     <property name="spawn.Hard" type="bool" value="true"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="175,176,177,176"/>

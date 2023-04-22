@@ -13,8 +13,14 @@ public class PlaneswalkEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         Game game = sa.getActivatingPlayer().getGame();
 
-        for (Player p : game.getPlayers()) {
-            p.leaveCurrentPlane();
+        if (game.getActivePlanes() == null) { // not a planechase game, nothing happens
+            return;
+        }
+
+        if (!sa.hasParam("DontPlaneswalkAway")) {
+            for (Player p : game.getPlayers()) {
+                p.leaveCurrentPlane();
+            }
         }
         if (sa.hasParam("Defined")) {
             CardCollectionView destinations = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);

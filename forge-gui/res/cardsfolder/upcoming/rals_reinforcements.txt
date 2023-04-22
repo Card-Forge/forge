@@ -1,0 +1,6 @@
+Name:Ral's Reinforcements
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ ur_1_1_elemental | SpellDescription$ Create two 1/1 blue and red Elemental creature tokens.
+DeckHas:Ability$Token & Type$Elemental
+Oracle:Create two 1/1 blue and red Elemental creature tokens.

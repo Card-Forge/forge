@@ -173,7 +173,7 @@ public class SetStateAi extends SpellAbilityAi {
             }            
         } else {
             // doublefaced or meld cards can't be turned face down
-            if (card.isDoubleFaced() || card.isMeldable()) {
+            if (card.isTransformable() || card.isMeldable()) {
                 return false;
             }
         }

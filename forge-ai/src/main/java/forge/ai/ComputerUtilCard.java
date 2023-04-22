@@ -1871,10 +1871,9 @@ public class ComputerUtilCard {
 
     public static int getMaxSAEnergyCostOnBattlefield(final Player ai) {
         // returns the maximum energy cost of an ability that permanents on the battlefield under AI's control have
-        CardCollectionView otb = ai.getCardsIn(ZoneType.Battlefield);
         int maxEnergyCost = 0;
 
-        for (Card c : otb) {
+        for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
             for (SpellAbility sa : c.getSpellAbilities()) {
                 CostPayEnergy energyCost = sa.getPayCosts().getCostEnergy();
                 if (energyCost != null) {

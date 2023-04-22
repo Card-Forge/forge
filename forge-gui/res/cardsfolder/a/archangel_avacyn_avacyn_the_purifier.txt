@@ -22,5 +22,5 @@ Types:Legendary Creature Angel
 PT:6/5
 K:Flying
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ Whenever this creature transforms into CARDNAME, it deals 3 damage to each other creature and each opponent.
-SVar:TrigDamageAll:DB$ DamageAll | NumDmg$ 3 | ValidCards$ Creature.Other | ValidPlayers$ Player.Opponent | ValidDescription$ each other creature and each opponent.
+SVar:TrigDamageAll:DB$ DamageAll | NumDmg$ 3 | ValidCards$ Creature.StrictlyOther | ValidPlayers$ Player.Opponent | ValidDescription$ each other creature and each opponent.
 Oracle:Flying\nWhen this creature transforms into Avacyn, the Purifier, it deals 3 damage to each other creature and each opponent.
