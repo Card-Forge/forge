@@ -409,3 +409,5 @@ Yanling
 Zariel
 [DungeonTypes]
 Undercity
+[BattleTypes]
+Siege

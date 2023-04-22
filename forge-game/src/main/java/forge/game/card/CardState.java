@@ -62,6 +62,7 @@ public class CardState extends GameObject implements IHasSVars {
     private String basePowerString = null;
     private String baseToughnessString = null;
     private String baseLoyalty = "";
+    private String baseDefense = "";
     private KeywordCollection intrinsicKeywords = new KeywordCollection();
 
     private final FCollection<SpellAbility> nonManaAbilities = new FCollection<>();
@@ -81,6 +82,8 @@ public class CardState extends GameObject implements IHasSVars {
     private final Card card;
 
     private ReplacementEffect loyaltyRep;
+    private ReplacementEffect defenseRep;
+    private ReplacementEffect battleTypeRep;
 
     public CardState(Card card, CardStateName name) {
         this(card.getView().createAlternateState(name), card);
@@ -222,6 +225,12 @@ public class CardState extends GameObject implements IHasSVars {
     public final void setBaseLoyalty(final String string) {
         baseLoyalty = string;
         view.updateLoyalty(this);
+    }
+
+    public String getBaseDefense() { return baseDefense; }
+    public final void setBaseDefense(final String string) {
+        baseDefense = string;
+        view.updateDefense(this);
     }
 
     public final Collection<KeywordInterface> getCachedKeywords() {
@@ -445,12 +454,28 @@ public class CardState extends GameObject implements IHasSVars {
 
     public FCollectionView<ReplacementEffect> getReplacementEffects() {
         FCollection<ReplacementEffect> result = new FCollection<>(replacementEffects);
-
-        if (getTypeWithChanges().isPlaneswalker()) {
+        CardTypeView type = getTypeWithChanges();
+        if (type.isPlaneswalker()) {
             if (loyaltyRep == null) {
                 loyaltyRep = CardFactoryUtil.makeEtbCounter("etbCounter:LOYALTY:" + this.baseLoyalty, this, true);
             }
             result.add(loyaltyRep);
+        }
+        if (type.isBattle()) {
+            // TODO This is currently breaking for Battle/Defense
+            // Going to script the cards to work but ideally it would happen here
+            if (defenseRep == null) {
+                defenseRep = CardFactoryUtil.makeEtbCounter("etbCounter:DEFENSE:" + this.baseDefense, this, true);
+            }
+            result.add(defenseRep);
+
+            if (battleTypeRep == null) {
+                if(type.hasSubtype("Siege")) {
+                    // battleTypeRep; // - Choose a player to protect it
+                }
+            }
+            //result.add(battleTypeRep);
+
         }
 
         card.updateReplacementEffects(result, this);
@@ -546,6 +571,7 @@ public class CardState extends GameObject implements IHasSVars {
         setBasePower(source.getBasePower());
         setBaseToughness(source.getBaseToughness());
         setBaseLoyalty(source.getBaseLoyalty());
+        setBaseDefense(source.getBaseDefense());
         setSVars(source.getSVars());
 
         manaAbilities.clear();
@@ -600,6 +626,9 @@ public class CardState extends GameObject implements IHasSVars {
         }
         if (lki && source.loyaltyRep != null) {
             this.loyaltyRep = source.loyaltyRep.copy(card, lki);
+        }
+        if (lki && source.defenseRep != null) {
+            this.defenseRep = source.defenseRep.copy(card, lki);
         }
     }
 

@@ -184,7 +184,7 @@ public class FCardImageRenderer {
             if (!card.isSplitCard() && !card.isFlipCard()) {
                 final CardStateView state = card.getState(card.isAdventureCard() ? false : altState);
                 if ((state.isCreature() && !state.getKeywordKey().contains("Level up"))
-                        || state.isPlaneswalker() || state.getType().hasSubtype("Vehicle"))
+                        || state.isPlaneswalker() || state.isVehicle())
                     hasPTBox = true;
             }
             if (hasPTBox) {
@@ -294,7 +294,7 @@ public class FCardImageRenderer {
         int headerHeight = NAME_SIZE + 2 * HEADER_PADDING;
         int typeBoxHeight = TYPE_SIZE + 2 * TYPE_PADDING;
         int ptBoxHeight = 0;
-        if (state.isCreature() || state.isPlaneswalker() || state.getType().hasSubtype("Vehicle")) {
+        if (state.isCreature() || state.isPlaneswalker() || state.isVehicle()) {
             //if P/T box needed, make room for it
             ptBoxHeight = headerHeight;
         }
@@ -839,7 +839,7 @@ public class FCardImageRenderer {
             TEXT_COLOR = Color.WHITE;
             pieces.add(String.valueOf(state.getLoyalty()));
         }
-        else if (state.getType().hasSubtype("Vehicle")) {
+        else if (state.isVehicle()) {
             Color [] vhColor = { new Color(128, 96, 64) };
             colors = vhColor;
             TEXT_COLOR = Color.WHITE;

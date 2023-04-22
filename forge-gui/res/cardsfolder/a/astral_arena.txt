@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Plane Kolbahan
 S:Mode$ AttackRestrict | EffectZone$ Command | MaxAttackers$ 1 | Description$ No more than one creature can attack each combat.
 S:Mode$ Continuous | EffectZone$ Command | GlobalRule$ No more than one creature can block each combat. | Description$ No more than one creature can block each combat.
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, CARDNAME deals 2 damage to each creature.
-SVar:RolledChaos:DB$ DamageAll | NumDmg$ 2 | ValidCards$ Creature | ValidDescription$ each creature.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, CARDNAME deals 2 damage to each creature.
+SVar:RolledChaos:DB$ DamageAll | NumDmg$ 2 | ValidCards$ Creature
 SVar:AIRollPlanarDieParams:Mode$ Random | MinTurn$ 5
-Oracle:No more than one creature can attack each combat.\nNo more than one creature can block each combat.\nWhenever you roll {CHAOS}, Astral Arena deals 2 damage to each creature.
+Oracle:No more than one creature can attack each combat.\nNo more than one creature can block each combat.\nWhenever chaos ensues, Astral Arena deals 2 damage to each creature.

@@ -13,6 +13,7 @@ Ajani, Wise Counselor|Ajani's Mega-growth|Let's just pile these on...
 Aminatou, the Fateshifter|Aminatou's Twist of Fate|Let's shuffle this a bit.
 Angrath, Minotaur Pirate|Angrath's Massacre|All we have to do is kill everyone who tries to steal Orazca from our grasp.
 Angrath, the Flame-Chained|Angrath's Torture|If you will not tell me where the Immortal Sun is, knight, then you will die.
+Archangel Elspeth|Elspeth's Mass Reanimation|Rise and Shine!
 Arlinn, Embraced by the Moon|Arlinn's Hunt|Fair fight? What fair fight?
 Ashiok, Nightmare Muse|Ashiok's Subconscious|It's wonderful what you find when you look to places that don't exist!
 Ashiok, Nightmare Weaver|Ashiok's Identity|I subscribe to the theory of blank slate!
@@ -30,6 +31,7 @@ Chandra, Flame's Catalyst|Chandra's Sudden Epiphany|Forget everything you know a
 Chandra, Flame's Fury|Chandra's Lake of Flame|Come in! The fire's great!
 Chandra, Flamecaller|Chandra's Sea of Flames|You didn't activate this for 0 just to get the achievement, did you?
 Chandra, Heart of Fire|Chandra's Fistfuls of Fire|Don't worry. I brought enough for everyone.
+Chandra, Hope's Beacon|Chandra's Dual Fire|Double the targets, double the fun!
 Chandra, Pyrogenius|Chandra's Warm Embrace|Did I say 'warm'? I meant 'red hot'.
 Chandra, Pyromaster|Chandra's Vengeance|Please file in triplicate!
 Chandra, Roaring Flame|Chandra's Roar|The opponent continues to burn...
@@ -211,6 +213,7 @@ Vraska, Regal Gorgon|Vraska's Scavenger Hunt|Death is not the opposite of life -
 Vraska, Relic Seeker|Vraska's Mark|Never play hide and seek with a Gorgon.
 Vraska, Scheming Gorgon|Vraska's Stone Gaze|I think we could use a new figurehead!
 Will, Scholar of Frost|Will's Elementics|I think it's better this way.
+Wrenn and Realmbreaker|Wrenn's Ultimate Resource|There are no more places I cannot reach.
 Wrenn and Seven|Wrenn's Wild Regrowth|The past is no burden for me.
 Wrenn and Six|Wrenn's Bountiful Land|Let's retrace our steps.
 Xenagos, the Reveler|Xenagos's Reveal|Mwahahaha! Now I'm a god!

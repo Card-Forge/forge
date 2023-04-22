@@ -1,6 +1,5 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -50,6 +49,7 @@ public class PlayerStatisticScene extends UIScene {
     Table root;
     boolean toggle = false;
     AchievementCollection planeswalkers, achievements;
+    Scene lastGameScene;
 
     private PlayerStatisticScene() {
         super(Forge.isLandscapeMode() ? "ui/statistic.json" : "ui/statistic_portrait.json");
@@ -59,10 +59,10 @@ public class PlayerStatisticScene extends UIScene {
         scrollContainer.row();
         achievementContainer = new Table(Controls.getSkin());
         blessingScroll = Controls.newTextraLabel("");
-        blessingScroll.setColor(Color.BLACK);
         blessingScroll.setAlignment(Align.topLeft);
         blessingScroll.setWrap(true);
         ui.onButtonPress("return", PlayerStatisticScene.this::back);
+        ui.onButtonPress("quests", PlayerStatisticScene.this::quests);
         avatar = ui.findActor("avatar");
         avatarBorder = ui.findActor("avatarBorder");
         playerName = ui.findActor("playerName");
@@ -104,12 +104,13 @@ public class PlayerStatisticScene extends UIScene {
 
     private static PlayerStatisticScene object;
 
-    public static PlayerStatisticScene instance() {
+    public static PlayerStatisticScene instance(Scene lastGameScene) {
         if (object == null)
             object = new PlayerStatisticScene();
+        if (lastGameScene != null)
+            object.lastGameScene=lastGameScene;
         return object;
     }
-
 
     @Override
     public void dispose() {
@@ -197,9 +198,9 @@ public class PlayerStatisticScene extends UIScene {
         }
         if (blessingScroll != null) {
             if (Current.player().getBlessing() != null) {
-                blessingScroll.setText(Current.player().getBlessing().getDescription());
+                blessingScroll.setText("[BLACK]" + Current.player().getBlessing().getDescription());
             } else {
-                blessingScroll.setText("No blessing.");
+                blessingScroll.setText("[BLACK]No blessing.");
             }
         }
 
@@ -243,4 +244,16 @@ public class PlayerStatisticScene extends UIScene {
             achievementContainer.row();
         }
     }
+
+    public boolean quests() {
+        Forge.switchScene(QuestLogScene.instance(lastGameScene),true);
+        return true;
+    }
+
+    @Override
+    public boolean back(){
+        Forge.switchScene(lastGameScene==null?GameScene.instance():lastGameScene);
+        return true;
+    }
+
 }

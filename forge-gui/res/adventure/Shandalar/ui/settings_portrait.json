@@ -21,7 +21,6 @@
       "type": "TextButton",
       "name": "return",
       "text": "tr(lblBack)",
-      "binding": "Back",
       "width": 250,
       "height": 32,
       "x": 10,

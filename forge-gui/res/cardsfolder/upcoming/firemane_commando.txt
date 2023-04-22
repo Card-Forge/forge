@@ -1,0 +1,11 @@
+Name:Firemane Commando
+ManaCost:3 W
+Types:Creature Angel Soldier
+PT:4/3
+K:Flying
+T:Mode$ AttackersDeclared | Execute$ TrigDraw | IsPresent$ Creature.attacking+YouCtrl | PresentCompare$ GE2 | NoResolvingCheck$ True | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with two or more creatures, draw a card.
+SVar:TrigDraw:DB$ Draw
+T:Mode$ AttackersDeclared | Execute$ TrigTheyDraw | IsPresent$ Creature.attacking | PresentCompare$ GE2 | NoResolvingCheck$ True | TriggerZones$ Battlefield | AttackingPlayer$ Player.Other | TriggerDescription$ Whenever another player attacks with two or more creatures, they draw a card if none of those creatures attacked you.
+SVar:TrigTheyDraw:DB$ Draw | Defined$ TriggeredAttackingPlayer | ConditionPresent$ Creature.attackingYou | ConditionCompare$ EQ0
+SVar:PlayMain1:TRUE
+Oracle:Flying\nWhenever you attack with two or more creatures, draw a card.\nWhenever another player attacks with two or more creatures, they draw a card if none of those creatures attacked you.

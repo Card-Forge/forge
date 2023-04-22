@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -35,13 +36,13 @@ public class VoteEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        sb.append(StringUtils.join(getDefinedPlayersOrTargeted(sa), ", "));
-        sb.append(" vote ");
+        sb.append(Lang.joinHomogenous(getDefinedPlayersOrTargeted(sa))).append(" vote ");
         if (sa.hasParam("VoteType")) {
-            sb.append(StringUtils.join(sa.getParam("VoteType").split(","), " or "));
+            sb.append("for ").append(StringUtils.join(sa.getParam("VoteType").split(","), " or "));
         } else if (sa.hasParam("VoteMessage")) {
             sb.append(sa.getParam("VoteMessage"));
         }
+        sb.append(".");
         return sb.toString();
     }
 

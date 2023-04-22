@@ -21,6 +21,7 @@ public class CharacterSprite extends MapActor {
     private final Array<Sprite> avatar=new Array<>();
     public boolean hidden = false;
     private String atlasPath;
+    private float wakeTimer = 0.0f;
 
     public CharacterSprite(int id,String path) {
         super(id);
@@ -168,7 +169,22 @@ public class CharacterSprite extends MapActor {
     }
 
     @Override
-    public void moveBy(float x, float y) {
+    public void moveBy(float x, float y){
+        moveBy(x,y,0.0f);
+    }
+
+    public void moveBy(float x, float y, float delta) {
+
+        if (hidden) {
+            setAnimation(AnimationTypes.Wake);
+            wakeTimer = 0.0f;
+            hidden = false;
+        }
+
+        if (currentAnimationType == AnimationTypes.Wake && wakeTimer <= currentAnimation.getAnimationDuration()){
+            wakeTimer += delta;
+            return;
+        }
         super.moveBy(x, y);
         if (x == 0 && y == 0) {
             return;
@@ -220,7 +236,17 @@ public class CharacterSprite extends MapActor {
         }
         super.draw(batch,parentAlpha);
         beforeDraw(batch,parentAlpha);
-        TextureRegion currentFrame = currentAnimation.getKeyFrame(timer, true);
+
+        TextureRegion currentFrame;
+        if (currentAnimationType.equals(AnimationTypes.Wake))
+        {
+            currentFrame = currentAnimation.getKeyFrame(wakeTimer, false);
+        }
+        else
+        {
+            currentFrame = currentAnimation.getKeyFrame(timer, true);
+        }
+
         setHeight(currentFrame.getRegionHeight());
         setWidth(currentFrame.getRegionWidth());
         Color oldColor=batch.getColor().cpy();
@@ -255,7 +281,9 @@ public class CharacterSprite extends MapActor {
         Death,
         Attack,
         Hit,
-        Avatar
+        Avatar,
+        Hidden,
+        Wake
     }
 
     public enum AnimationDirections {

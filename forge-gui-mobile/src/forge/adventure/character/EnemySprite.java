@@ -54,6 +54,7 @@ public class EnemySprite extends CharacterSprite {
     public float threatRange = 0.0f;
     public float fleeRange = 0.0f;
     public boolean ignoreDungeonEffect = false;
+    public String questStageID;
 
     public EnemySprite(EnemyData enemyData) {
         this(0,enemyData);
@@ -94,7 +95,7 @@ public class EnemySprite extends CharacterSprite {
         Vector2 diff = new Vector2(other.getX(), other.getY()).sub(pos());
 
         diff.setLength(data.speed*delta);
-        moveBy(diff.x, diff.y);
+        moveBy(diff.x, diff.y,delta);
     }
 
     public void freezeMovement(){
@@ -106,6 +107,7 @@ public class EnemySprite extends CharacterSprite {
     }
 
     public Vector2 getTargetVector(PlayerSprite player, float delta) {
+        //todo - this can be integrated into overworld movement as well, giving flee behaviors or moving to generated waypoints
         Vector2 target = pos();
         Vector2 routeToPlayer = new Vector2(player.pos()).sub(target);
 
@@ -227,14 +229,16 @@ public class EnemySprite extends CharacterSprite {
                 Deck enemyDeck = Current.latestDeck();
                 /*// By popular demand, remove basic lands from the reward pool.
                 CardPool deckNoBasicLands = enemyDeck.getMain().getFilteredPool(Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND), PaperCard.FN_GET_RULES));*/
+
                 for (RewardData rdata : data.rewards) {
-                    ret.addAll(rdata.generate(false,  enemyDeck == null ? null : enemyDeck.getMain().toFlatList() ));
+                    ret.addAll(rdata.generate(false,  enemyDeck == null ? null : enemyDeck.getMain().toFlatList(),true ));
                 }
             }
             if(rewards != null) { //Collect additional rewards.
                 for(RewardData rdata:rewards) {
                     //Do not filter in case we want to FORCE basic lands. If it ever becomes a problem just repeat the same as above.
-                    ret.addAll(rdata.generate(false,(Current.latestDeck() != null ? Current.latestDeck().getMain().toFlatList() : null)));
+
+                    ret.addAll(rdata.generate(false,(Current.latestDeck() != null ? Current.latestDeck().getMain().toFlatList() : null), true));
                 }
             }
         }
@@ -307,8 +311,21 @@ public class EnemySprite extends CharacterSprite {
         return data.speed;
     }
 
+    public float getLifetime() {
+        //default and minimum value for time to remain on overworld map
+        Float lifetime = 20f;
+        return Math.max(data.lifetime, lifetime);
+    }
+
 
     public class MovementBehavior {
+
+        //temporary placeholders for overworld behavior integration
+        public boolean wander = false;
+        public boolean flee = false;
+        public boolean stop = false;
+        //end temporary
+
         float duration = 0.0f;
         float x = 0.0f;
         float y = 0.0f;

@@ -1,0 +1,7 @@
+Name:Trailblazing Historian
+ManaCost:1 R
+Types:Creature Human Shaman
+PT:1/3
+K:Haste
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | KW$ Haste | SpellDescription$ Another target creature gains haste until end of turn.
+Oracle:Haste\n{T}: Another target creature gains haste until end of turn.

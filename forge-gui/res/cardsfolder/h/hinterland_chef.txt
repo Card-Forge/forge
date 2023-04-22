@@ -1,7 +1,7 @@
 Name:Hinterland Chef
 ManaCost:2 G
 Types:Creature Human Scout
-PT:3/3
+PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraft | TriggerDescription$ When CARDNAME enters the battlefield, draft a card from CARDNAME's spellbook. It perpetually becomes a Food artifact in addition to its other types and perpetually gains "{2}, {T}, Sacrifice this creature: You gain 3 life."
 SVar:TrigDraft:DB$ Draft | Spellbook$ Almighty Brushwagg,Frilled Sandwalla,Moss Viper,Brushstrider,Highland Game,Ironshell Beetle,Lotus Cobra,Kazandu Nectarpot,Gilded Goose,Nessian Hornbeetle,Scurrid Colony,Territorial Boar,Deathbonnet Sprout,Spore Crawler,Moldgraf Millipede | RememberDrafted$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Hinterland Chef's Perpetual Effect | SubAbility$ DBCleanup

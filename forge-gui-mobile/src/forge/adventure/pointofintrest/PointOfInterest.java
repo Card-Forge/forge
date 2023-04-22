@@ -9,13 +9,13 @@ import forge.adventure.util.Config;
 import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.SaveFileData;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
  * Point of interest stored in the world
  */
-public class PointOfInterest implements SaveFileContent {
-
+public class PointOfInterest implements Serializable, SaveFileContent {
 
     @Override
     public void load(SaveFileData saveFileData) {
@@ -24,7 +24,13 @@ public class PointOfInterest implements SaveFileContent {
         data=PointOfInterestData.getPointOfInterest(saveFileData.readString("name"));
         rectangle.set(saveFileData.readRectangle("rectangle"));
         spriteIndex=saveFileData.readInt("spriteIndex");
-
+        if (saveFileData.containsKey("active")){
+            active = saveFileData.readBool("active");
+        }
+        else
+        {
+            active = data.active;
+        }
 
         oldMapId="";
         Array<Sprite> textureAtlas = Config.instance().getAtlas(this.data.spriteAtlas).createSprites(this.data.sprite);
@@ -39,15 +45,17 @@ public class PointOfInterest implements SaveFileContent {
         data.store("position",position);
         data.store("rectangle",rectangle);
         data.store("spriteIndex",spriteIndex);
+        data.store("active",active);
         return data;
     }
 
     PointOfInterestData data;
     final Vector2 position=new Vector2();
-    Sprite sprite;
+    transient Sprite sprite;
     int spriteIndex;
     final Rectangle rectangle=new Rectangle();
     String oldMapId="";
+    boolean active = true;
     public PointOfInterest() {
     }
     public PointOfInterest(PointOfInterestData d, Vector2 pos, Random rand) {
@@ -58,6 +66,7 @@ public class PointOfInterest implements SaveFileContent {
         spriteIndex = rand.nextInt(Integer.SIZE - 1) % textureAtlas.size;
         sprite = textureAtlas.get(spriteIndex);
         data = d;
+        active = d.active;
         position.set(pos);
 
         rectangle.set(position.x, position.y, sprite.getWidth(), sprite.getHeight());
@@ -66,6 +75,7 @@ public class PointOfInterest implements SaveFileContent {
         spriteIndex = parent.spriteIndex;
         sprite = parent.sprite;
         data = d;
+        active = d.active;
         position.set(parent.position);
         oldMapId=parent.getID();
         rectangle.set(position.x, position.y, sprite.getWidth(), sprite.getHeight());
@@ -98,4 +108,14 @@ public class PointOfInterest implements SaveFileContent {
         return getSeedOffset()+data.name+"/"+oldMapId;
     }
 
+    public boolean getActive() {return active;}
+
+    public void setActive(boolean active) {this.active = active;}
+
+    public Vector2 getNavigationVector(Vector2 origin){
+        Vector2 navVector = new Vector2(rectangle.x + rectangle.getWidth() / 2, rectangle.y + rectangle.getHeight() / 2);
+        if (origin != null) navVector.sub(origin);
+
+        return navVector;
+    }
 }

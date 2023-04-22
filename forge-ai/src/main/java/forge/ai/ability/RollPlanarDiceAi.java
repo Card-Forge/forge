@@ -134,7 +134,7 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
                 decideToRoll = false;
             }
 
-            if (ai.getGame().getPhaseHandler().getPlanarDiceRolledthisTurn() >= maxActivations) {
+            if (ai.getGame().getPhaseHandler().getPlanarDiceSpecialActionThisTurn() >= maxActivations) {
                 decideToRoll = false;
             }
         

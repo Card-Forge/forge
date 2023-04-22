@@ -71,7 +71,6 @@
    <properties>
     <property name="enemy" value="Golem"/>
     <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="90,91,96,91"/>
    </properties>
   </object>
   <object id="72" template="../obj/gold.tx" x="330.667" y="179.333"/>

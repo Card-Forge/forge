@@ -4,7 +4,7 @@ Types:Creature Demon
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, all other creatures get -2/-2 until end of turn.
-SVar:TrigPumpAll:DB$ PumpAll | NumAtt$ -2 | NumDef$ -2 | ValidCards$ Creature.Other | IsCurse$ True
+SVar:TrigPumpAll:DB$ PumpAll | NumAtt$ -2 | NumDef$ -2 | ValidCards$ Creature.StrictlyOther | IsCurse$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigEnergy | TriggerDescription$ Whenever another creature dies, you get {E} (an energy counter).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1
 A:AB$ ChangeZone | Cost$ 2 B PayEnergy<4> | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Select target creature card in a graveyard | ValidTgts$ Creature | ChangeNum$ 1 | Tapped$ True | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control tapped.

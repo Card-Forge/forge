@@ -2,7 +2,7 @@ Name:Blighted Gorge
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ DealDamage | Cost$ 4 R T Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:AB$ DealDamage | Cost$ 4 R T Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 DeckHas:Ability$Mana.Colorless
 DeckNeeds:Color$Red
 Oracle:{T}: Add {C}.\n{4}{R}, {T}, Sacrifice Blighted Gorge: It deals 2 damage to any target.

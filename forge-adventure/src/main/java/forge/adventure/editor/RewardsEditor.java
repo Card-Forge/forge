@@ -16,7 +16,7 @@ public class RewardsEditor extends JComponent{
     JList<RewardData> list = new JList<>(model);
     JToolBar toolBar = new JToolBar("toolbar");
     RewardEdit edit=new RewardEdit();
-
+    boolean updating;
 
 
     public class RewardDataRenderer extends DefaultListCellRenderer {
@@ -67,14 +67,11 @@ public class RewardsEditor extends JComponent{
         add(edit,BorderLayout.CENTER);
 
 
-        edit.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                emitChanged();
-            }
-        });
+        edit.addChangeListener(e -> emitChanged());
     }
     protected void emitChanged() {
+        if (updating)
+            return;
         ChangeListener[] listeners = listenerList.getListeners(ChangeListener.class);
         if (listeners != null && listeners.length > 0) {
             ChangeEvent evt = new ChangeEvent(this);
@@ -130,6 +127,12 @@ public class RewardsEditor extends JComponent{
             rewards[i]=model.get(i);
         }
         return rewards;
+    }
+
+    public void clear(){
+        updating = true;
+        model.clear();
+        updating = false;
     }
     public void addChangeListener(ChangeListener listener) {
         listenerList.add(ChangeListener.class, listener);

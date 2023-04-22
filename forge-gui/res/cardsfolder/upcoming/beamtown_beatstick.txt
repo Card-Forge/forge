@@ -1,0 +1,9 @@
+Name:Beamtown Beatstick
+ManaCost:R
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Menace | AddPower$ 1 | Description$ Equipped creature gets +1/+0 and has menace. (It can't be blocked except by two or more creatures.)
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player,Battle | CombatDamage$ True | Execute$ TrigTreasure | TriggerDescription$ Whenever equipped creature deals combat damage to a player or battle, create a Treasure token.
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
+K:Equip:2
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
+Oracle:Equipped creature gets +1/+0 and has menace. (It can't be blocked except by two or more creatures.)\nWhenever equipped creature deals combat damage to a player or battle, create a Treasure token.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

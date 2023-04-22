@@ -112,12 +112,20 @@
       "type": "TextButton",
       "name": "return",
       "text": "tr(lblBack)",
-      "binding": "Back",
-      "width": 230,
+      "width": 115,
+      "height": 30,
+      "x": 155,
+      "y": 440
+    },
+	{
+      "type": "TextButton",
+      "name": "quests",
+      "text": "Quests",
+      "width": 115,
       "height": 30,
       "x": 35,
       "y": 440
-    },
+    }
     {
       "type": "TextButton",
       "name": "toggleAward",

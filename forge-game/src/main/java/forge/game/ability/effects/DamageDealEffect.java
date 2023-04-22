@@ -13,7 +13,6 @@ import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardDamageMap;
@@ -41,7 +40,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         final String damage = spellAbility.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(spellAbility.getHostCard(), damage, spellAbility);
 
-        List<GameObject> targets = SpellAbilityEffect.getTargets(spellAbility);
+        List<GameObject> targets = getTargets(spellAbility);
         final List<Card> definedSources = AbilityUtils.getDefinedCards(spellAbility.getHostCard(), spellAbility.getParam("DamageSource"), spellAbility);
 
         if (targets.isEmpty() || definedSources.isEmpty()) {
@@ -59,8 +58,8 @@ public class DamageDealEffect extends DamageBaseEffect {
             } else
                 stringBuilder.append("to ");
 
-            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
-            final List<Player> players = SpellAbilityEffect.getTargetPlayers(spellAbility);
+            final List<Card> targetCards = getTargetCards(spellAbility);
+            final List<Player> players = getTargetPlayers(spellAbility);
 
             int targetCount = targetCards.size() + players.size();
 
@@ -93,7 +92,6 @@ public class DamageDealEffect extends DamageBaseEffect {
                     stringBuilder.append(", ");
                 }
             }
-
         } else {
             if (spellAbility.hasParam("DivideEvenly")) {
                 stringBuilder.append("divided evenly (rounded down) ");
@@ -146,13 +144,12 @@ public class DamageDealEffect extends DamageBaseEffect {
             game.getReplacementHandler().run(ReplacementType.AssignDealDamage, AbilityKey.mapFromAffected(source));
         }
 
-        final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(hostCard, damage, sa);
+        int dmg = AbilityUtils.calculateAmount(hostCard, sa.getParam("NumDmg"), sa);
 
         final boolean removeDamage = sa.hasParam("Remove");
         final boolean divideOnResolution = sa.hasParam("DividerOnResolution");
 
-        List<GameObject> tgts = Lists.newArrayList();
+        List<GameEntity> tgts = Lists.newArrayList();
         if (sa.hasParam("CardChoices") || sa.hasParam("PlayerChoices")) { // choosing outside Defined/Targeted
             final Player activator = sa.getActivatingPlayer();
             FCollection<GameEntity> choices = new FCollection<>();
@@ -168,7 +165,7 @@ public class DamageDealEffect extends DamageBaseEffect {
                     AbilityUtils.calculateAmount(hostCard, sa.getParam("ChoiceAmount"), sa) : 1;
             if (sa.hasParam("Random")) { // only for Whimsy and Faerie Dragon
                 for (int i = 0; i < n; i++) {
-                    GameObject random = Aggregates.random(choices);
+                    GameEntity random = Aggregates.random(choices);
                     tgts.add(random);
                     choices.remove(random);
                     hostCard.addRemembered(random); // remember random choices for log
@@ -176,11 +173,11 @@ public class DamageDealEffect extends DamageBaseEffect {
             } else { // only for Comet, Stellar Pup
                 final String prompt = sa.hasParam("ChoicePrompt") ? sa.getParam("ChoicePrompt") :
                         Localizer.getInstance().getMessage("lblChooseEntityDmg");
-                tgts.addAll(sa.getActivatingPlayer().getController().chooseEntitiesForEffect(choices, n, n, null, sa,
+                tgts.addAll(activator.getController().chooseEntitiesForEffect(choices, n, n, null, sa,
                         prompt, null, null));
             }
         } else {
-            tgts = getTargets(sa);
+            tgts = getTargetEntities(sa);
         }
 
         if (sa.hasParam("OptionalDecider")) {
@@ -247,10 +244,10 @@ public class DamageDealEffect extends DamageBaseEffect {
             }
 
             if (sa.hasParam("RelativeTarget")) {
-                tgts = AbilityUtils.getDefinedObjects(source, sa.getParam("Defined"), sa);
+                tgts = AbilityUtils.getDefinedEntities(source, sa.getParam("Defined"), sa);
             }
 
-            for (final GameObject o : tgts) {
+            for (final GameEntity o : tgts) {
                 if (!removeDamage) {
                     dmg = (sa.usesTargeting() && sa.isDividedAsYouChoose()) ? sa.getDividedValue(o) : dmg;
                     if (dmg <= 0) {
@@ -291,18 +288,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         int excess = 0;
         int dmgToTarget = 0;
         if (sa.hasParam("ExcessDamage") || sa.hasParam("ExcessSVar")) {
-            int lethal = 0;
-            if (c.isCreature()) {
-                lethal = Math.max(0, c.getLethalDamage());
-                if (sourceLKI.hasKeyword(Keyword.DEATHTOUCH)) {
-                    lethal = Math.min(lethal, 1);
-                }
-            }
-            if (c.isPlaneswalker()) {
-                int lethalPW = c.getCurrentLoyalty();
-                // 120.4a
-                lethal = c.isCreature() ? Math.min(lethal, lethalPW) : lethalPW;
-            }
+            int lethal = c.getExcessDamageValue(sourceLKI.hasKeyword(Keyword.DEATHTOUCH));
             dmgToTarget = Math.min(lethal, dmg);
             excess = dmg - dmgToTarget;
         }

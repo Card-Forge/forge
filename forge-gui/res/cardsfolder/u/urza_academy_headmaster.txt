@@ -27,7 +27,7 @@ SVar:DBMana14:DB$ Mana | Produced$ Any | AILogic$ MostProminentInComputerHand
 SVar:Animate15:DB$ Animate | Power$ 4 | Toughness$ 4 | Types$ Creature,Legendary,Dragon | Colors$ Red | OverwriteColors$ True | RemoveCardTypes$ True | Keywords$ Flying & Indestructible & Haste | SpellDescription$ Until end of turn, NICKNAME becomes a legendary 4/4 red Dragon creature with flying, indestructible, and haste. (He doesn't lose loyalty while he's not a planeswalker.)
 SVar:PumpAll16:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ Lifelink | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, creatures you control get +1/+0 and gain lifelink.
 SVar:Dig17:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Artifact | SpellDescription$ Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
-SVar:DealDamage18:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SpellDescription$ NICKNAME deals 3 damage to any target.
+SVar:DealDamage18:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ NICKNAME deals 3 damage to any target.
 SVar:Animate19:DB$ Animate | Defined$ Self | Triggers$ DamageTrig19 | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, whenever a creature deals combat damage to NICKNAME, destroy that creature. | StackDescription$ SpellDescription
 SVar:DamageTrig19:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ Card.Self | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigDestroy19 | TriggerDescription$ Whenever a creature deals combat damage to NICKNAME, destroy that creature.
 SVar:TrigDestroy19:DB$ Destroy | Defined$ TriggeredSourceLKICopy
@@ -36,7 +36,7 @@ SVar:X20:Count$Valid Creature.YouCtrl
 A:AB$ GenericChoice | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | AtRandom$ Urza | ShowChoice$ Description | Choices$ DamageAll1M,GainControl2M,DealDamage3M,Destroy4M,Effect5M,ChangeZone6M,Draw7M,Mill8M,Dig9M,Exile10M,Reveal11M,Tutor12M,Sacrifice13M,Token14M,Token15M,SetLife16M,Destroy17M,Return18M,Token19M,Draw20M | ShowChoice$ Description | StackDescription$ SpellDescription | SpellDescription$ Head to AskUrza.com and click -1.
 SVar:DamageAll1M:DB$ DamageAll | NumDmg$ 3 | ValidCards$ Creature | SpellDescription$ NICKNAME deals 3 damage to each creature.
 SVar:GainControl2M:DB$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Gain control of target creature.
-SVar:DealDamage3M:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4 | SubAbility$ DBGainLife3M | SpellDescription$ NICKNAME deals 4 damage to any target and you gain 4 life.
+SVar:DealDamage3M:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBGainLife3M | SpellDescription$ NICKNAME deals 4 damage to any target and you gain 4 life.
 SVar:DBGainLife3M:DB$ GainLife | Defined$ You | LifeAmount$ 4
 SVar:Destroy4M:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife4M | SpellDescription$ Destroy target creature. You gain life equal to its toughness.
 SVar:DBGainLife4M:DB$ GainLife | Defined$ You | LifeAmount$ X4M

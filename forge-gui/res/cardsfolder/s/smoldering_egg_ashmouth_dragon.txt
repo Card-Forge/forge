@@ -8,7 +8,7 @@ SVar:TrigCharge:DB$ PutCounter | Defined$ Self | CounterType$ EMBER | CounterNum
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ Ember | TrueSubAbility$ DBRemoveCtrs
 SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ EMBER | CounterNum$ All | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
-SVar:X:Count$TriggeredManaSpent
+SVar:X:TriggeredCard$CastTotalManaSpent
 SVar:Ember:Count$Valid Card.Self+counters_GE7_EMBER
 DeckHas:Ability$Counters
 DeckNeeds:Type$Instant|Sorcery
@@ -24,6 +24,6 @@ Types:Creature Dragon
 PT:4/4
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME deals 2 damage to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
 DeckHints:Type$Instant|Sorcery
 Oracle:Flying\nWhenever you cast an instant or sorcery spell, Ashmouth Dragon deals 2 damage to any target.

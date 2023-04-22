@@ -84,53 +84,44 @@
     {
       "type": "TextButton",
       "name": "deck",
-	  "style":"menu",
       "text": "[%120][+Deck]",
-      "binding": "Deck",
-      "width": 64,
-      "height": 32,
-      "x": 206,
-      "y": 306
+      "width": 25,
+      "height": 25,
+      "x": 105,
+      "y": 450
     }, 
     {
       "type": "TextButton",
       "name": "inventory",
-	  "style":"menu",
       "text": "[%120][+Item]",
-      "binding": "Inventory",
-      "width": 64,
-      "height": 32,
-      "x": 206,
-      "y": 346
+      "width": 25,
+      "height": 25,
+      "x": 130,
+      "y": 450
     },
     
     {
       "type": "TextButton",
-      "name": "statistic",
-	  "style":"menu",
-      "text": "[%120][+Status]",
-      "binding": "Status",
-      "width": 64,
-      "height": 32,
-      "x": 206,
-      "y": 386
+      "name": "logbook",
+      "text": "[%120][+Logbook]",
+      "width": 25,
+      "height": 25,
+      "x": 155,
+      "y": 450
     },
     {
       "type": "TextButton",
       "name": "menu",
-	  "style":"menu",
       "text": "[%120][+Menu]",
-      "binding": "Menu",
-      "width": 64,
-      "height": 32,
-      "x": 206,
-      "y": 426
+      "width": 25,
+      "height": 25,
+      "x": 80,
+      "y": 450
     },
     {
       "type": "TextButton",
       "name": "openmap",
       "text": "[%80]tr(lblZoom)",
-      "binding": "Map",
       "width": 80,
       "height": 20,
       "x": 0,
@@ -138,14 +129,12 @@
     },
 	{
       "type": "TextButton",
-      "name": "exittoworldmap", 
-	  "style":"menu",
+      "name": "exittoworldmap",
       "text": "[%120][+ExitToWorldMap]",
-	  "binding": "ExitToWorldMap",
-      "width": 64,
-      "height": 32,
-      "x": 206,
-      "y": 266
+      "width": 25,
+      "height": 25,
+      "x": 180,
+      "y": 450
     }
   ]
 }

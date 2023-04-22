@@ -5,6 +5,6 @@ K:Enchant creature
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
 A:SP$ Attach | Cost$ 5 R | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 2 damage to any target.
-SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
 SVar:PlayMain1:TRUE
 Oracle:Enchant creature\nWhen Lightning Diadem enters the battlefield, it deals 2 damage to any target.\nEnchanted creature gets +2/+2.

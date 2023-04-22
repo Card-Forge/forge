@@ -14,10 +14,10 @@ Idle
   size: 47, 35 
 Idle 
   xy: 138, 28
-  size: 46, 36 
+  size: 47, 36 
 Idle 
   xy: 202, 28
-  size: 46, 36 
+  size: 47, 36 
 Walk
   xy: 8, 156
   size: 46, 36
@@ -43,7 +43,7 @@ Walk
   xy: 456, 156
   size: 46, 36
 Attack 
-  xy: 0, 192
+  xy: 8, 192
   size: 64, 64 
 Attack 
   xy: 64, 192

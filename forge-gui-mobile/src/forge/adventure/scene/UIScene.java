@@ -243,8 +243,11 @@ public class UIScene extends Scene {
         if (label != null)
             dialog.text(label);
         TextraButton yes = Controls.newTextButton(stringYes, runnableYes);
-        TextraButton no = Controls.newTextButton(stringNo, runnableNo);
-        dialog.button(yes).button(no);
+        dialog.button(yes);
+        if (stringNo != null) {
+            TextraButton no = Controls.newTextButton(stringNo, runnableNo);
+            dialog.button(no);
+        }
         return dialog;
     }
 

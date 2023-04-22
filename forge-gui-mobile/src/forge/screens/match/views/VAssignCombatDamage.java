@@ -88,14 +88,6 @@ public class VAssignCombatDamage extends FDialog {
         throw new RuntimeException("Asking to assign damage to object which is not present in defenders list");
     }
 
-    /** Constructor.
-     * 
-     * @param attacker0 {@link forge.game.card.Card}
-     * @param blockers List<{@link forge.game.card.Card}>
-     * @param damage0 int
-     * @param defender GameEntity that's bein attacked
-     * @param overrideOrder override combatant order
-     */
     public VAssignCombatDamage(final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender0, boolean overrideOrder, boolean maySkip, final WaitCallback<Map<CardView, Integer>> waitCallback) {
         super(Forge.getLocalizer().getMessage("lbLAssignDamageDealtBy").replace("%s",CardTranslation.getTranslatedName(attacker.getName())) , 3);
 
@@ -420,8 +412,6 @@ public class VAssignCombatDamage extends FDialog {
         return totalDamageToAssign - spent;
     }
 
-    /** Updates labels and other UI elements.
-     * @param index index of the last assigned damage*/
     private void updateLabels() {
         int damageLeft = totalDamageToAssign;
         boolean allHaveLethal = true;
@@ -469,13 +459,19 @@ public class VAssignCombatDamage extends FDialog {
             }
             else if (defender instanceof CardView) { // planeswalker
                 CardView pw = (CardView)defender;
-                lethalDamage = Integer.valueOf(pw.getCurrentState().getLoyalty());
+                if (((CardView) defender).getCurrentState().isPlaneswalker()) {
+                    lethalDamage = Integer.parseInt(pw.getCurrentState().getLoyalty());
+                } else {
+                    lethalDamage = Integer.parseInt(pw.getCurrentState().getDefense());
+                }
             }
         }
         else {
             lethalDamage = Math.max(0, source.getLethalDamage());
             if (source.getCurrentState().getType().isPlaneswalker()) {
-                lethalDamage = Integer.valueOf(source.getCurrentState().getLoyalty());
+                lethalDamage = Integer.parseInt(source.getCurrentState().getLoyalty());
+            } else if (source.getCurrentState().getType().isBattle()) {
+                lethalDamage = Integer.parseInt(source.getCurrentState().getDefense());
             } else if (attackerHasDeathtouch) {
                 lethalDamage = Math.min(lethalDamage, 1);
             }

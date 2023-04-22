@@ -1,0 +1,11 @@
+Name:A-Moon-Circuit Hacker
+ManaCost:1 U
+Types:Enchantment Creature Human Ninja
+PT:2/1
+K:Ninjutsu:U
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigScry | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, scry 2, then draw a card. Discard a card unless CARDNAME entered the battlefield this turn.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | ConditionDefined$ Self | ConditionPresent$ Card.ThisTurnEntered | ConditionCompare$ EQ0
+DeckHas:Ability$Discard
+Oracle:Ninjutsu {U}\nWhenever Moon-Circuit Hacker deals combat damage to a player, scry 2, then draw a card. Discard a card unless Moon-Circuit Hacker entered the battlefield this turn.

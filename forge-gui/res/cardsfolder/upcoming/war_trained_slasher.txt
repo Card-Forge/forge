@@ -1,0 +1,9 @@
+Name:War-Trained Slasher
+ManaCost:3 R
+Types:Creature Wolverine Dinosaur
+PT:4/3
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Battle | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks a battle, double its power until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +Y | Double$ True
+SVar:Y:TriggeredAttacker$CardPower
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever War-Trained Slasher attacks a battle, double its power until end of turn.

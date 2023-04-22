@@ -2,5 +2,5 @@ Name:Viashino Fangtail
 ManaCost:2 R R
 Types:Creature Viashino Warrior
 PT:3/3
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 Oracle:{T}: Viashino Fangtail deals 1 damage to any target.

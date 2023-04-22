@@ -1,0 +1,9 @@
+Name:Seed of Hope
+ManaCost:G
+Types:Instant
+A:SP$ Mill | NumCards$ 2 | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill two cards. You may put a permanent card from among the milled cards into your hand. You gain 2 life. (To mill two cards, put the top two cards of your library into your graveyard.)
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Card.IsRemembered+Permanent | SelectPrompt$ You may put a permanent card from among the milled cards into your hand | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBCleanup 
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Mill|LifeGain
+Oracle:Mill two cards. You may put a permanent card from among the milled cards into your hand. You gain 2 life. (To mill two cards, put the top two cards of your library into your graveyard.)

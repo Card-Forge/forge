@@ -1,0 +1,11 @@
+Name:Wildwood Escort
+ManaCost:4 G
+Types:Creature Elf Warrior
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return target creature or battle card from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature or battle card in your graveyard | ValidTgts$ Creature.YouOwn,Battle.YouOwn
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If CARDNAME would die, exile it instead.
+SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard
+DeckHints:Type$Battle
+DeckHas:Ability$Graveyard
+Oracle:When Wildwood Escort enters the battlefield, return target creature or battle card from your graveyard to your hand.\nIf Wildwood Escort would die, exile it instead.

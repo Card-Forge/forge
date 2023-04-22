@@ -46,6 +46,8 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
             if (null != chosen) {
                 if (sa.hasParam("Secretly")) {
                     card.setSecretChosenPlayer(chosen);
+                } else if (sa.hasParam("Protect")) {
+                    card.setProtectingPlayer(chosen);
                 } else {
                     card.setChosenPlayer(chosen);
                 }

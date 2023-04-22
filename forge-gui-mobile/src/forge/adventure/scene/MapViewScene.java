@@ -1,6 +1,5 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -32,7 +31,7 @@ public class MapViewScene extends UIScene   {
         super(Forge.isLandscapeMode() ? "ui/map.json" : "ui/map_portrait.json");
 
 
-        ui.onButtonPress("done", () -> done());
+        ui.onButtonPress("done", this::done);
 
         scroll = ui.findActor("map");
         Group table=new Group();
@@ -76,15 +75,6 @@ public class MapViewScene extends UIScene   {
 
 
         super.enter();
-    }
-
-
-    @Override
-    public boolean keyPressed(int keycode) {
-        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK || keycode == Input.Keys.BUTTON_B) {
-            done();
-        }
-        return true;
     }
 
 }

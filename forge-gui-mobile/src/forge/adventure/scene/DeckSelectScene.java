@@ -61,8 +61,46 @@ public class DeckSelectScene extends UIScene {
             textInput.setText(Current.player().getSelectedDeck().getName());
             showRenameDialog();
         });
+        ui.onButtonPress("copy", DeckSelectScene.this::copy);
+        ui.onButtonPress("delete", DeckSelectScene.this::maybeDelete);
         defColor = ui.findActor("return").getColor();
         window.add(root);
+    }
+
+    private void copy() {
+        if (Current.player().isEmptyDeck(currentSlot)) return;
+        int index = Current.player().copyDeck();
+        if (index == -1) {
+            showDialog(createGenericDialog(Forge.getLocalizer().getMessage("lblCopy"), Forge.getLocalizer().getMessage("lblNoAvailableSlots"),
+                Forge.getLocalizer().getMessage("lblOk"),
+                null, this::removeDialog, null));
+        }
+        else {
+            updateDeckButton(index);
+            select(index);
+            scrollPane.scrollTo(buttons.get(index).getX(), buttons.get(index).getY(), 0, 0);
+        }
+    }
+
+    private void maybeDelete() {
+        if (Current.player().isEmptyDeck(currentSlot)) return;
+        Dialog deleteDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblAreYouSureProceedDelete"),
+            Forge.getLocalizer().getMessage("lblOk"),
+            Forge.getLocalizer().getMessage("lblAbort"), this::delete, this::removeDialog);
+
+        showDialog(deleteDialog);
+    }
+
+    private void delete() {
+        Current.player().deleteDeck();
+        updateDeckButton(currentSlot);
+        removeDialog();
+    }
+
+    private void updateDeckButton(int index) {
+        buttons.get(index).setText(Current.player().getDeck(index).getName());
+        buttons.get(index).getTextraLabel().layout();
+        buttons.get(index).layout();
     }
 
     private void showRenameDialog() {

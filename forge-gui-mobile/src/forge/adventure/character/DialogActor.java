@@ -2,7 +2,11 @@ package forge.adventure.character;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import forge.adventure.data.AdventureQuestData;
 import forge.adventure.stage.MapStage;
+import forge.adventure.util.Current;
 import forge.adventure.util.MapDialog;
 
 /**
@@ -11,7 +15,8 @@ import forge.adventure.util.MapDialog;
 public class DialogActor extends CharacterSprite {
     private final MapStage stage;
     private final TextureRegion textureRegion;
-    private final MapDialog dialog;
+    private MapDialog dialog;
+    public AdventureQuestData questData;
 
     public DialogActor(MapStage stage, int id, String S, TextureRegion textureRegion) {
         super(id,"");
@@ -26,11 +31,42 @@ public class DialogActor extends CharacterSprite {
         this.textureRegion = null;
     }
 
+    public DialogActor(AdventureQuestData data, MapStage stage, int id){
+        super(id,"");
+        this.stage = stage;
+        dialog = new MapDialog(data.offerDialog, stage, id);
+        this.textureRegion = null;
+        this.questData = data;
+        ChangeListener listen = new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                acceptQuest();
+            }
+        };
+        dialog.addQuestAcceptedListener(listen);
+
+        ChangeListener finished = new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                removeFromMap();
+            }
+        };
+        dialog.addDialogCompleteListener(finished);
+    }
+
+    public void acceptQuest(){
+        Current.player().addQuest(questData);
+    }
+
+    public void removeFromMap() { dialog = null; }
+
     @Override
     public void onPlayerCollide() {
-        stage.resetPosition();
-        stage.showDialog();
-        dialog.activate();
+        if (dialog != null) {
+            stage.resetPosition();
+            stage.showDialog();
+            dialog.activate();
+        }
     }
 
     @Override

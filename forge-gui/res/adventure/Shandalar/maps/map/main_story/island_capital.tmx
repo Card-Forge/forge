@@ -5,14 +5,15 @@
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzNmEtOwzAQhrPIoxdhyUMFjsMJYAE36BGgbdpTcRmgtGwqMkp+MRnG9jhxCpVGVVPF/vzPwx5viix7z7PspuzbR/NsU/wP2zZ2l/et/gMOrhPX57/wcY7a8TyGD+t9U+JjSJy4+F4a++qe7xs7NLYM6E92W/5el7Trsr8GHy9xHBzzg92lG7FZeKy8sfkH9qVgwjhP1Xg2yTk2l9bN96po13tRtvyfiRmHaKn5kjhpHC2XUnBaGX1xVjty/VSMoRw4Vq1NwWdhDGkzNR/iaEz9IL6zBHXGZ7LGWdl2eVt/qBalzGNtjtD+q713zupBakbfvmXh47mbutbsHFwxviWmddHnjdGQGJ67PQo5Rt+Hzi/cn8RE+/UYDa7KuNiAPo9Vn49+0zrx/7z80WFovaX5Hqow307EFM4/nA9nGxlrWNMQvprNt/a8X7MzxmvDMZu54wH7PMaL8Y/Ug7QLsfGYJc77qn3POp/MQZo7FOs181GITc4F/11G1HbScOuJRfrgPIs4GppPqyLeX5xJqxf0OVb9c32Mbq64tdYkMPEc4z0AzgNjmDQ+i4b73F2zkZupzyqIX8t6fX3QWD9qhnpmHVfjs65tiMWcHV2+nersHsPni7sp+eAv5J4rh333FvweIbVh/4JRvyoZQzk7NaPUifvLwnZKRtITGlpqnezjUaen5MT+MDf2ldp9w1Racs34+VTTS+at7JNTatn1QQvf/R36Dd9+qOU5cXY9xILMwou+DL2HL84kR+3Qx5pLId/H5KTk097V7gBjxrT4wDpWqvvvlHza/e435SQojA==
+   eJzNmF1OwzAMxyvRj12ERz40xnE4ATzADXYE2JbtKJyCywBj42UiVmvhGidx2mRskjWtU5NfbP8dJ+uqKD7KopjVffu0z9bVadjG2l3ZN/MPHNRP1D+nwkc5jON5DB+u913IjyF54uJ7sfbdPd9Z21tbBPwPdlv/XRe3m7q/Bh8vcOwd8yO7y2/ApuHR8sbqD9kXjAnHeWrGs3HOsVpa2e9l1a73sm75vxIzDvGlFEvghHEkLaXg1DL68sw4tH4sxpAGDk1rOfg0jCHf5ObDPBpTP4DvPEGd8RmvcVq2bdnWH6hFKXUszRHaf6X3Lkg9SM3o27c0fFS7qWvN1sEVE1tgWlV93hgfAsNzt0ehxuB738WFxhOYYL8e44PrOi430D+PTZ8PfsM68f9p/euHofUW5ntownxbllPY/1A+7G14ruGahvAZMt/K874hPcab5ZhM3PmA+zyOFxMf7g/wXYiN5ixw3jfte9r5uAZh7lCuGxKjEBufC+N3FVHbwYcbTy7C5/Ws39MO1dOyio8XZZLqBXwOTb+vj/GbK2+1NQmZqMboGQD7gTFMkh+h1w0x7kp3zUZt5upVNHniOweNjaNkqP1Zp4/Q+BKfpmYMtZje0RXbXL17DJ8v73LyYbxQey59+O4t6D1CasP9C03ScEizuRm5n2i8NGzHZKR1UFPr+Dke63ROTtwfpspzpXTfkMuX1Ge0P5X8xXXLz8kpfdmdg+a++zs8b5hK5qP/8bzszhBzMA0vnsvw7OHLM85hHP7RaikU+xhNcj7pXekOMGZMTQy0Y6W6/07JJ93v/gBdLifn
   </data>
  </layer>
  <layer id="2" name="Ground" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzVWEtOwzAQ9SI1iAr1cwMQC1ilnIJLIMS+IEBC3If+1KogroDYp1yCg2CLDJ1OZmwnTlN40ogm2Jnn+ctK/S8c95Q66e2ahYyrvlLX/d3pPxJs89wsDRF7uyawZXydbj5rbc6si+vSRKnzxL23CWSGw2cS/r5plOHXJF3wK/CYqU2fNmk/To3V3zb8DvTP30Ei/x4wsVgnaKynuf6FkZuWX+aIK5dLZcDlGPWVfV6V8N+Q4cnZs0x+a+QbayvMBfTdtvi9M/J8ecbzjLEl2Ah8GMKFq3mub8fkT5Zzk3hJezidUyPLmviNBF1jI5OK/Ch88RECly46S6RJsaZQP0dQKSBlcsIF8BeW2No89+jjYm/EL/fyG8dR/QXMXmV700Sv6wbk+9RROyAepFx32a4Kv5B9I7IuJgagt8IZQ8to6Lkov9C6CRii3umrAdLM4tJp48HGgo0Brf25SPuelAccwNZ41grRmaEzLXKuuBfFzNrYNmCLNuKEdWqhHmb5OWBdnaBxBhxXwkzIcchIjcVnDq1HUAfo3Ib5vaB3uP7h2ZBySxneVWoGtQuet/B8BPGGuWHfDpBe2M99s0q9mWh5Jl4lm/pAsG+BL8A1Z8fMCxzvuS72NSq+Ga2u3ocBdQD3NY6Xr8/Vgf2ANdSWUs2AVzDvN4khmg/qjKMY2Hl6ip7/yp2GBBe/x0P/fleowr3gRcf9jTvz/3tGHjprfq41oXhizmO5SfeXgGXX9Awib0Zeu2t+y/wdXWfX+FD2frlMfcL+rVpW3g23jy3df9eRH9u6/4YeHHtvQfENf1fcDQ==
+   eJzVWE1KAzEUjjCNYpG23kBxoasZwTt4CRH3VVQQ72P/GKniFcR96w1ceQX3JjjPvr55+ZtMp/pBsBmTvC/vnwjxv7DfE+Kgt24WZpzvCnGxuz75ewbdPDRLw4jNdRNYMT4Pl+dSqjvL8ro0EeI4se9tAjPF4T3x/940Qvg1SRfsCjwmYtmmTeqPE6PltxW/bfnzN0vMvzPGF+sE9fW0kP+oxmXLPXLElYulEHAxRm2l5/MA+/UZnpw+Q+JbIttoXWEuIO+qxe+dkPnZEc8zRpegI7ChDxcu59nOjomfWcHNxMu0h5M5VmNaE7+BQdZQjVFFfhQu//CBTRbtJdKknFOonSOolJAyMWED2AuP2NycO+Rxvjfglzv5DeOo/gJ6r9DaNJKLvAHxPrbkDvAHU6zbdFeFn8++AVkX4wNQW+GOvmnU916Un2/eBPRR7XTlAFPPYpOp/SEv4k9KdyzSumeKAw6ga9xr+cjE/Y/2We2vuBbF9NpYN6CLNuIE8a9lSkM+hH2wrk5QPwNZc0NPiDl8Jfw5+M6++QjyAO3b8LlP6BvOf7g3xPr52BDiRJbPqZIzqF5wv4X7I/A3zA3bNkNys6R8DtfDhXA09cRzJAfrDssEvgBbnx3TL3C8c1mua3S4erS6ah8G5AFc1zherjpXB7Y81lBdmnIGfIJ+v0n0UX9Qpx/FQPfTYzT/K28aJtj43e2499tcFd4FTzv2M67V/2+YcdtZ8LOt8cU9cx/NzfR+CZh2Vc0g40WN5+6C37T4RtfpNS6Evi+H5Cds36pp5VVxe1vR+3cd8bGq92+owbHvFhTfiPTdaw==
   </data>
  </layer>
  <layer id="8" name="Bridges" width="40" height="40">
@@ -22,7 +23,7 @@
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztlU0OQDAUhN9xcAXuhHPgFH5K2Pk5kYN4i25EF0SbtsyXvIUumjHTdogAAKZoI6Iuur8O/ECVX8zfCbI2zh/8/OI/riHRFtpW4Re+9EcaEGVy8sC2misFayrlVIb0vclEsKZezuCgf8AeJu96zfs2ir0Fr/UOvS8uMbIv0wNvZu68xfPee3MGXesq8G129OcJ+GEfnRkgTwD0cABSpCk/
+   eJztlT0SQDAUhF/jLrgCd8I5UDmC/6HzcyIH8Yo0hoIhkrDfzCukiLUrWSIAgCxKl6hyz68DMzjKz+NnH1lL5w9+fvEbJ4dodlSrMAtT+iOwiUIxka1azZ6YNSViUkn67mRSs6ZGTKuhf0AdMs96zvsWB3vXvNZodL+cIbPeeU/HvvQXvBm480bDe+/OP6hbV4Fvs6A/N8AP9TyZAfIE4BlWYdkp1w==
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -35,7 +36,7 @@
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2DogBMaqPxOLQaGLi1MddjE0fWOgsELsMWfPJCvQGRcjwLyASXhOZB5jBS7h2OamanJwDBLc6BdMbQAKfXHKMAN8oF5rwCKC2lUBlASJ91AN/VAce9oO2AUIAFa5vV2oLkdWMzuBor1UMnOwdiupcRN/cBwmUBC2EwH1nkzhni9R0kaHK2rRgE9wWAsbwYSjIbHwANqxsFofGKCOn4GhnoobuAfaNeMglFAHQAAkqgpdw==
+   eJxjYBgFo2DogBMaqPxOLQaGLi1MddjE0fWOgsELsMWfPJCvQGRcjwLyASXhOZB5jBS7h2OamanJwDBLc6BdMbQAKfXHKMAN8oF5rwCKC2lUBlASJ91AN/VAce9oO2AUIAFa5vV2oLkdWMzuBor1UMnOwdiupcRN/cBwmUBC2EwH1nkz6FDvtRsD49KYfP2LgXqX4NBPSRocratGAT3BYCxvBhKMhsfAA2rGwWh8YoI6fgaGeihu4B9o14yCUUAdAADsPiyZ
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -136,6 +137,7 @@
 	&quot;Challenger 22&quot;,
 	&quot;Djinn&quot;,
 	&quot;Elemental&quot;,
+	&quot;Gitaxian Underling&quot;,
 	&quot;Merfolk&quot;,
 	&quot;Merfolk Avatar&quot;,
 	&quot;Merfolk Fighter&quot;,
@@ -155,16 +157,6 @@
     &quot;entryFee&quot;:100,
      &quot;rewards&quot;: [[
 		{
-			&quot;type&quot;: &quot;card&quot;,
-			&quot;probability&quot;: 1, 
-      			&quot;count&quot;:2,
-			&quot;rarity&quot;: [
-				&quot;Mythic Rare&quot;
-			],
-      			&quot;colors&quot;: [&quot;blue&quot;] 
-		}
-		],[
-		{
 			&quot;type&quot;: &quot;gold&quot;,
 			&quot;probability&quot;: 1,
 			&quot;count&quot;: 500 
@@ -174,6 +166,16 @@
 			&quot;probability&quot;: 1,
 			&quot;count&quot;: 1,
 			&quot;itemNames&quot;: [&quot;Mithril Armor&quot;,&quot;Mithril Shield&quot;,&quot;Mithril Boots&quot;,&quot;Dagger&quot;]
+		}
+		],[
+		{
+			&quot;type&quot;: &quot;card&quot;,
+			&quot;probability&quot;: 1, 
+      			&quot;count&quot;:2,
+			&quot;rarity&quot;: [
+				&quot;Rare&quot;,&quot;Mythic Rare&quot;
+			],
+      			&quot;colors&quot;: [&quot;blue&quot;] 
 		}
 		]
 		] 

@@ -180,7 +180,7 @@ public class TriggerHandler {
         return FileSection.parseToMap(trigParse, FileSection.DOLLAR_SIGN_KV_SEPARATOR);
     }
 
-    private void collectTriggerForWaiting() {
+    public void collectTriggerForWaiting() {
         for (final TriggerWaiting wt : waitingTriggers) {
             if (wt.getTriggers() != null)
                 continue;
@@ -207,7 +207,6 @@ public class TriggerHandler {
     public final void resetActiveTriggers() {
         resetActiveTriggers(true);
     }
-
     public final void resetActiveTriggers(boolean collect) {
         if (collect) {
             collectTriggerForWaiting();
@@ -281,11 +280,11 @@ public class TriggerHandler {
     }
 
     public final boolean runWaitingTriggers() {
-        final List<TriggerWaiting> waiting = new ArrayList<>(waitingTriggers);
-        waitingTriggers.clear();
-        if (waiting.isEmpty()) {
+        if (waitingTriggers.isEmpty()) {
             return false;
         }
+        final List<TriggerWaiting> waiting = new ArrayList<>(waitingTriggers);
+        waitingTriggers.clear();
 
         boolean haveWaiting = false;
         for (final TriggerWaiting wt : waiting) {

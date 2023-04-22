@@ -1,0 +1,23 @@
+Name:Skyclave Aerialist
+ManaCost:1 U
+Types:Creature Merfolk Scout
+PT:2/1
+K:Flying
+A:AB$ SetState | Cost$ 4 GP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ {4}{G/P}: Transform CARDNAME. Activate only as a sorcery. ({G/P} can be paid with either {G} or 2 life.)
+AlternateMode:DoubleFaced
+Oracle:{4}{G/P}: Transform Skyclave Aerialist. Activate only as a sorcery. ({G/P} can be paid with either {G} or 2 life.)
+
+ALTERNATE
+
+Name:Skyclave Invader
+ManaCost:no cost
+Colors:green,blue
+Types:Creature Phyrexian Merfolk Scout
+PT:2/4
+K:Flying
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigPeek |  TriggerDescription$ When this creature transforms into CARDNAME, look at the top card of your library. If it's a land card, you may put it onto the battlefield. If you don't put the card onto the battlefield, put it into your hand.
+SVar:TrigPeek:DB$ PeekAndReveal | PeekAmount$ 1 | NoReveal$ True | RememberPeeked$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Optional$ True | ForgetChanged$ True | Origin$ Library | Destination$ Battlefield | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ GE1 | SubAbility$ DBHand
+SVar:DBHand:DB$ ChangeZone | Origin$ Library | Destination$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying\nWhen this creature transforms into Skyclave Invader, look at the top card of your library. If it's a land card, you may put it onto the battlefield. If you don't put the card onto the battlefield, put it into your hand.

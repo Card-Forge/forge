@@ -5,6 +5,5 @@ PT:5/5
 K:Haste
 K:Echo:5 G
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all other creatures.
-SVar:TrigTapAll:DB$ TapAll | ValidCards$ Creature.Other
-SVar:EndOfTurnLeavePlay:True
+SVar:TrigTapAll:DB$ TapAll | ValidCards$ Creature.StrictlyOther
 Oracle:Haste\nEcho {5}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Timbermare enters the battlefield, tap all other creatures.

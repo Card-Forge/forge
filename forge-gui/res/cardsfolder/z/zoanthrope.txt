@@ -6,7 +6,7 @@ K:Ravenous
 K:Flying
 K:Ward:2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Warp Blast — When CARDNAME enters the battlefield, it deals X damage to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
 SVar:X:Count$xPaid
 DeckHas:Ability$Counters
 Oracle:Ravenous (This creature enters the battlefield with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nFlying, ward {2}\nWarp Blast — When Zoanthrope enters the battlefield, it deals X damage to any target.

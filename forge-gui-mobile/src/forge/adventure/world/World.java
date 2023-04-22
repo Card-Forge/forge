@@ -129,8 +129,6 @@ public class World implements Disposable, SaveFileContent {
         data.store("mapObjectIds", mapObjectIds.save());
         data.store("mapPoiIds", mapPoiIds.save());
         data.store("seed", seed);
-
-
         return data;
     }
 
@@ -897,6 +895,10 @@ public class World implements Disposable, SaveFileContent {
 
     public PointOfInterest findPointsOfInterest(String name) {
         return mapPoiIds.findPointsOfInterest(name);
+    }
+
+    public List<PointOfInterest> getAllPointOfInterest(){
+        return mapPoiIds.getAllPointOfInterest();
     }
 
     public int getChunkSize() {

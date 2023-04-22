@@ -11,17 +11,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import forge.Forge;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
-import forge.adventure.data.BiomeData;
-import forge.adventure.data.EnemyData;
-import forge.adventure.data.WorldData;
+import forge.adventure.data.*;
 import forge.adventure.scene.DuelScene;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.TileMapScene;
-import forge.adventure.util.Current;
-import forge.adventure.util.Paths;
-import forge.adventure.util.SaveFileContent;
-import forge.adventure.util.SaveFileData;
+import forge.adventure.util.*;
 import forge.adventure.world.World;
 import forge.adventure.world.WorldSave;
 import forge.gui.FThreads;
@@ -31,10 +26,7 @@ import forge.sound.SoundSystem;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 /**
@@ -52,11 +44,15 @@ public class WorldStage extends GameStage implements SaveFileContent {
     private final static Float dieTimer = 20f;//todo config
     private Float globalTimer = 0f;
 
+    NavArrowActor navArrow;
     public WorldStage() {
         super();
         background = new WorldBackground(this);
         addActor(background);
         background.setZIndex(0);
+        navArrow = new NavArrowActor();
+        addActor(navArrow);
+        navArrow.toFront();
     }
 
     public static WorldStage getInstance() {
@@ -68,6 +64,9 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
     @Override
     protected void onActing(float delta) {
+        if (isPaused() || MapStage.getInstance().isDialogOnlyInput())
+            return;
+        drawNavigationArrow();
         if (player.isMoving()) {
             handleMonsterSpawn(delta);
             handlePointsOfInterestCollision();
@@ -75,8 +74,9 @@ public class WorldStage extends GameStage implements SaveFileContent {
             Iterator<Pair<Float, EnemySprite>> it = enemies.iterator();
             while (it.hasNext()) {
                 Pair<Float, EnemySprite> pair = it.next();
-                if (globalTimer >= pair.getKey() + dieTimer) {
-
+                if (globalTimer >= pair.getKey() + pair.getValue().getLifetime()) {
+                    AdventureQuestController.instance().updateDespawn(pair.getValue());
+                    AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
                     foregroundSprites.removeActor(pair.getValue());
                     it.remove();
                     continue;
@@ -166,8 +166,10 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     startPause(0.3f, () -> {
                         RewardScene.instance().loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
                         WorldStage.this.removeEnemy(currentMob);
-                        currentMob = null;
+                        AdventureQuestController.instance().updateQuestsWin(currentMob);
+                        AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
                         Forge.switchScene(RewardScene.instance());
+                        currentMob = null;
                     });
                 }
             }, 1f);
@@ -178,6 +180,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
             startPause(0.5f, () -> {
                 currentMob.resetCollisionHeight();
                 Current.player().defeated();
+                AdventureQuestController.instance().updateQuestsLose(currentMob);
+                AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
                 WorldStage.this.removeEnemy(currentMob);
                 currentMob = null;
             });
@@ -188,6 +192,10 @@ public class WorldStage extends GameStage implements SaveFileContent {
         for (Actor actor : foregroundSprites.getChildren()) {
             if (actor.getClass() == PointOfInterestMapSprite.class) {
                 PointOfInterestMapSprite point = (PointOfInterestMapSprite) actor;
+                if (!point.getPointOfInterest().getActive())
+                {
+                    continue;
+                }
                 if (player.collideWith(point.getBoundingRect())) {
                     if (point == collidingPoint) {
                         continue;
@@ -222,6 +230,12 @@ public class WorldStage extends GameStage implements SaveFileContent {
     }
 
     private void handleMonsterSpawn(float delta) {
+        for (EnemySprite questSprite : AdventureQuestController.instance().getQuestSprites()) {
+            if (!foregroundSprites.getChildren().contains(questSprite, true)) {
+                spawnQuestSprite(questSprite,2.5f);
+            }
+        }
+
         World world = WorldSave.getCurrentSave().getWorld();
         int currentBiome = World.highestBiome(world.getBiome((int) player.getX() / world.getTileSize(), (int) player.getY() / world.getTileSize()));
         List<BiomeData> biomeData = WorldSave.getCurrentSave().getWorld().getData().GetBiomes();
@@ -245,10 +259,9 @@ public class WorldStage extends GameStage implements SaveFileContent {
         spawn(enemyData);
     }
 
-    private boolean spawn(EnemyData enemyData) {
-        if (enemyData == null)
+    private boolean spawn(EnemySprite sprite){
+        if (sprite == null)
             return false;
-        EnemySprite sprite = new EnemySprite(enemyData);
         float unit = Scene.getIntendedHeight() / 6f;
         Vector2 spawnPos = new Vector2(1, 1);
         for (int j = 0; j < 10; j++) {
@@ -264,7 +277,37 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     foregroundSprites.addActor(sprite);
                     return true;
                 }
-                int g = 0;
+            }
+        }
+        return false;
+    }
+
+    private boolean spawn(EnemyData enemyData) {
+        if (enemyData == null)
+            return false;
+        EnemySprite sprite = new EnemySprite(enemyData);
+        return spawn(sprite);
+
+    }
+
+    private boolean spawnQuestSprite(EnemySprite sprite, float distanceMultiplier){
+        if (sprite == null)
+            return false;
+        float unit = Scene.getIntendedHeight() / 6f;
+        Vector2 spawnPos = new Vector2(1, 1);
+        for (int j = 0; j < 10; j++) {
+            spawnPos.setLength((unit + (unit * 3) * rand.nextFloat()) * distanceMultiplier);
+            spawnPos.setAngleDeg(360 * rand.nextFloat());
+            for (int i = 0; i < 10; i++) {
+                boolean enemyXIsBigger = sprite.getX() > player.getX();
+                boolean enemyYIsBigger = sprite.getY() > player.getY();
+                sprite.setX(player.getX() + spawnPos.x + (i * sprite.getWidth() * (enemyXIsBigger ? 1 : -1)));//maybe find a better way to get spawn points
+                sprite.setY(player.getY() + spawnPos.y + (i * sprite.getHeight() * (enemyYIsBigger ? 1 : -1)));
+                if (sprite.getData().flying || !WorldSave.getCurrentSave().getWorld().collidingTile(sprite.boundingRect())) {
+                    enemies.add(Pair.of(globalTimer, sprite));
+                    foregroundSprites.addActor(sprite);
+                    return true;
+                }
             }
         }
         return false;
@@ -318,10 +361,14 @@ public class WorldStage extends GameStage implements SaveFileContent {
             List<String> names = (List<String>) data.readObject("names");
             List<Float> x = (List<Float>) data.readObject("x");
             List<Float> y = (List<Float>) data.readObject("y");
+            List<String> questStageIDs = (List<String>) data.readObject("questStageIDs");
             for (int i = 0; i < timeouts.size(); i++) {
                 EnemySprite sprite = new EnemySprite(WorldData.getEnemy(names.get(i)));
                 sprite.setX(x.get(i));
                 sprite.setY(y.get(i));
+                sprite.questStageID = questStageIDs.get(i);
+                if (sprite.questStageID != null)
+                    AdventureQuestController.instance().rematchQuestSprite(sprite);
                 enemies.add(Pair.of(timeouts.get(i), sprite));
                 foregroundSprites.addActor(sprite);
             }
@@ -346,16 +393,19 @@ public class WorldStage extends GameStage implements SaveFileContent {
         List<String> names = new ArrayList<>();
         List<Float> x = new ArrayList<>();
         List<Float> y = new ArrayList<>();
+        List<String> questStageIDs = new ArrayList<>();
         for (Pair<Float, EnemySprite> enemy : enemies) {
             timeouts.add(enemy.getKey());
             names.add(enemy.getValue().getData().name);
             x.add(enemy.getValue().getX());
             y.add(enemy.getValue().getY());
+            questStageIDs.add(enemy.getValue().questStageID);
         }
         data.storeObject("timeouts", timeouts);
         data.storeObject("names", names);
         data.storeObject("x", x);
         data.storeObject("y", y);
+        data.storeObject("questStageIDs", questStageIDs);
         data.store("globalTimer", globalTimer);
         return data;
     }
@@ -380,6 +430,40 @@ public class WorldStage extends GameStage implements SaveFileContent {
             enemy.playEffect(Paths.EFFECT_KILL);
             removeEnemy(enemy);
             player.playEffect(Paths.TRIGGER_KILL);
+        }
+    }
+
+    private void drawNavigationArrow(){
+        Vector2 navDirection = null;
+        for (AdventureQuestData adq: Current.player().getQuests())
+        {
+            if (adq.isTracked) {
+                if (adq.getTargetPOI() != null) {
+                    navDirection = adq.getTargetPOI().getNavigationVector(player.pos());
+
+                } else if (adq.getTargetEnemySprite() != null) {
+                    EnemySprite target = adq.getTargetEnemySprite();
+                    for (Pair<Float, EnemySprite> active :enemies)
+                    {
+                        EnemySprite sprite = active.getValue();
+                        if (sprite.equals(target)){
+                            navDirection = new Vector2(adq.getTargetEnemySprite().pos()).sub(player.getX(), player.getY());
+                            break;
+                        }
+                    }
+                }
+                break;
+            }
+        }
+        if (navDirection != null)
+        {
+            navArrow.navTargetAngle = navDirection.angleDeg();
+            navArrow.setVisible(true);
+            navArrow.setPosition(getPlayerSprite().getX() + (getPlayerSprite().getWidth()/2), getPlayerSprite().getY() + (getPlayerSprite().getHeight()/2));
+        }
+        else
+        {
+            navArrow.setVisible(false);
         }
     }
 }

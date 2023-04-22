@@ -20,7 +20,7 @@ ScryfallCode=MOC
 12 R Conjurer's Mantle @Fiona Hsieh
 13 R Darksteel Splicer @Steven Belledin
 14 R Excise the Imperfect @Denis Zhbankov
-15 R Filigree Vector
+15 R Filigree Vector @Lorenzo Mastroianni
 16 R Guardian Scalelord @Victor Adame Minguez
 17 R Nesting Dovehawk @Alessandra Pisano
 18 R Path of the Ghosthunter @Eli Minaya
@@ -56,13 +56,13 @@ ScryfallCode=MOC
 48 C Enigma Ridges @Eytan Zana
 49 C Esper @Bruce Brenneise
 50 C The Fertile Lands of Saulvinia @Lorenzo Lanfranconi
-51 C Ghirapur @David Alvarez
+51 C Ghirapur @David Álvarez
 52 C The Golden City of Orazca @Alayna Danner
 53 C The Great Aerie @Julian Kok Joon Wen
 54 C Inys Haen @Aldo Domínguez
 55 C Ketria @Piotr Dura
-56 C Littiara @Jonas De Ro
-57 C Megaflora Jungle
+56 C Littjara @Jonas De Ro
+57 C Megaflora Jungle @John Avon
 58 C Naktamun @Robin Olausson
 59 C New Argive @Leon Tukker
 60 C Norn's Seedcore @Alexander Forssberg
@@ -107,7 +107,7 @@ ScryfallCode=MOC
 99 R Conjurer's Mantle @Fiona Hsieh
 100 R Darksteel Splicer @Steven Belledin
 101 R Excise the Imperfect @Denis Zhbankov
-102 R Filigree Vector
+102 R Filigree Vector @Lorenzo Mastroianni
 103 R Guardian Scalelord @Victor Adame Minguez
 104 R Nesting Dovehawk @Alessandra Pisano
 105 R Path of the Ghosthunter @Eli Minaya
@@ -201,8 +201,8 @@ ScryfallCode=MOC
 193 R Knight of the White Orchid @Mark Zug
 194 U Master Splicer @Chippy
 195 R Maul of the Skyclaves @Joseph Meehan
-196 U Mentor of the Meek @Jana Schirmer & Johannes Voss
-197 R Mikaeus, the Lunarch @Steven Belledin
+196 R Mentor of the Meek @Jana Schirmer & Johannes Voss
+197 M Mikaeus, the Lunarch @Steven Belledin
 198 U Path to Exile @Todd Lockwood
 199 R Phyrexian Rebirth @Scott Chou
 200 R Promise of Loyalty @Sara Winters
@@ -225,7 +225,7 @@ ScryfallCode=MOC
 217 R Worthy Knight @Yongjae Choi
 218 R Chasm Skulker @Jack Wang
 219 C Cloud of Faeries @Iris Compiet
-220 C Distant Melody
+220 C Distant Melody @Sam Guay
 221 R Echo Storm @Mark Poole
 222 M Ethersworn Adjudicator @Dan Scott
 223 U Fallowsage @Paolo Parente
@@ -416,10 +416,10 @@ ScryfallCode=MOC
 408 U Jungle Shrine @Wayne Reynolds
 409 R Karn's Bastion @Adam Paquette
 410 R Kessig Wolf Run @Eytan Zana
-411 R Kher Keep @Paolo Parente
+411 R Kher Keep @Titus Lunter
 412 U Krosan Verge @Ruxing Gao
 413 U Llanowar Reborn @Philip Straub
-414 R Mossfire Valley @Yeong-Hao Han
+414 R Mossfire Valley @Sarah Finnigan
 415 R Mosswort Bridge @Jeremy Jarvis
 416 U Myriad Landscape @Jonas De Ro
 417 U Mystic Monastery @Florian de Gesincourt
@@ -456,3 +456,47 @@ ScryfallCode=MOC
 448 M Goro-Goro and Satoru @Yamada Rokkaku
 449 M Katilda and Lier @Sami Makkonen
 450 M Slimefoot and Squee @Ivan Shavrin
+
+[tokens]
+b_0_0_phyrexian_germ
+b_1_1_assassin_deathtouch_haste
+b_1_1_vampire_knight_lifelink
+b_2_2_zombie_knight_menace
+b_6_6_demon_flying_trample_aristocrat
+butterfly
+c_1_1_a_myr
+c_1_1_a_servo
+c_1_1_sliver
+c_3_3_a_golem
+c_3_3_a_phyrexian_golem
+c_6_12_a_construct_trample
+c_7_7_eldrazi_annihilator
+c_a_blood_draw
+c_a_clue_draw
+c_a_food_sac
+c_a_gold_sac
+c_x_x_a_phyrexian_horror
+feather
+g_3_3_elephant
+g_4_4_beast
+kobolds_of_kher_keep
+r_0_0_a_gremlin
+r_1_1_elemental_ping
+r_1_1_goblin
+r_1_1_human
+replicated_ring
+u_1_1_a_thopter_flying
+u_1_1_faerie_flying
+u_1_1_spirit_flying
+u_1_1_squid_islandwalk
+u_1_1_tentacle
+u_2_2_shapeshifter_changeling
+ur_1_1_insect_flying_haste
+w_1_1_bird_flying
+w_1_1_human
+w_1_1_soldier
+w_1_1_spirit_flying
+w_1_1_warrior
+w_2_2_knight_vigilance
+w_3_3_angel_flying
+w_4_4_angel_flying

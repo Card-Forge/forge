@@ -533,6 +533,8 @@ public class CardRenderer {
             type += " (" + loyalty + ")";
         } else if (card.getCurrentState().getType().hasSubtype("Vehicle")) {
             type += String.format(" [%s / %s]", power, toughness);
+        } else if (card.getCurrentState().isBattle()) {
+            type += " (" + card.getCurrentState().getDefense() + ")";
         }
         g.drawText(type, typeFont, foreColor, x, y, availableTypeWidth, lineHeight, false, Align.left, true);
     }
@@ -635,7 +637,7 @@ public class CardRenderer {
                     g.drawCardImage(image, crack_overlay, x, y, w, h, card.wasDestroyed(), magnify ? false : card.getDamage() > 0);
             } else {
                 if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
-                        && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()) && rotate) {
+                        && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane() || (card.getCurrentState().isBattle() && !showAltState) || (card.getAlternateState() != null && card.getAlternateState().isBattle() && showAltState)) && rotate) {
                     if (Forge.enableUIMask.equals("Full")) {
                         if (image.toString().contains(".fullborder."))
                             g.drawCardRoundRect(image, x, y, w, h, x + w / 2, y + h / 2, -90);
@@ -1358,6 +1360,11 @@ public class CardRenderer {
     }
 
     public static void drawFoilEffect(Graphics g, CardView card, float x, float y, float w, float h, boolean inZoomer) {
+        if (card.getCurrentState().isBattle())
+            return;
+        if (card.getAlternateState() != null && card.getCurrentState().isBattle())
+            return;
+        //todo add support for battle, better to move the render inside the draw method for card in the future or a general foil effect shader..
         float new_x = x;
         float new_y = y;
         float new_w = w;

@@ -84,6 +84,8 @@ public class CharmEffect extends SpellAbilityEffect {
 
         if (num == min || num == Integer.MAX_VALUE) {
             sb.append(Lang.getNumeral(min));
+        } else if (min == 0 && num == sa.getParam("Choices").split(",").length) {
+            sb.append("any number ");
         } else if (min == 0) {
             sb.append("up to ").append(Lang.getNumeral(num));
         } else {

@@ -285,7 +285,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 Sprite item = reward.getItem().sprite();
                 setItemTooltips(item, backSprite);
                 boolean isQuestItemLoot = RewardScene.Type.Loot.equals(type) && reward.getItem().questItem;
-                processSprite(backSprite, item, isQuestItemLoot ? Controls.newTextraLabel("[%]" + reward.getItem().name) : null, 0, isQuestItemLoot ? -10 : 0);
+                processSprite(backSprite, item, isQuestItemLoot ? Controls.newTextraLabel("[%110]" + reward.getItem().name) : null, 0, isQuestItemLoot ? -10 : 0);
                 needsToBeDisposed = true;
                 break;
             }
@@ -298,7 +298,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 setItemTooltips(item, backSprite);
                 boolean isShop = RewardScene.Type.Shop.equals(type);
                 processSprite(backSprite, item, isShop ? null :
-                        Controls.newTextraLabel("[%]" + reward.getCount() + " " + reward.type), 0, isShop ? 0 : -10);
+                        Controls.newTextraLabel("[%110]" + reward.getCount() + " " + reward.type), 0, isShop ? 0 : -10);
                 needsToBeDisposed = true;
                 break;
             }
@@ -819,8 +819,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             inset = cImage.getPrefWidth() * 0.13f;
             width = cImage.getPrefWidth() - inset * 2;
             x = cImage.getX() + inset;
-            y = cImage.getPrefHeight() / 2.5f;
-            ARP = Forge.isLandscapeMode() ? 125 : 175;
+            y = cImage.getPrefHeight() / 2.3f;
+            ARP = Forge.isLandscapeMode() ? 100 : 150;
             cLabel = new TextraLabel("[%" + ARP + "]" + description, Controls.getSkin(), Controls.getTextraFont());
             cLabel.setAlignment(align);
             cLabel.setWrap(true);
@@ -863,7 +863,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
         public HoldTooltip(ComplexTooltip complexTooltip) {
             tooltip_actor = complexTooltip;
-            switchButton = Controls.newTextButton("Flip");
+            switchButton = Controls.newTextButton("[+Flip]");
             switchButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {

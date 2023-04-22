@@ -13,7 +13,7 @@
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFQwHosw+MvWeB9pby0s78SWwMDJOx4AtI/tXHwSYHlBHwy1l2wmxagHPsCL/nciDYeRwQeULuJhfQyl/Y0ow+jvCEiaPTlAJYmF4gEKfoNKX2Z0PjLAcpHs9jiV90GhbX1AS0TrfIoIQXQdPTXmQwai9xAADlPiO/
+   eJxjYBgFQwHosw+MvWeB9pby0s78SWwMDJOx4AtI/tXHwSYHlBHwy1l2wmxagHPsCL/nciDYeRwQeULuJhfQyl/IaQZmhz6O8NRnx05TCmBheoFAnKLTlNoPMycHKR7PY4lfdBoW1+SCbCz6aZ1ukUEJL4Kmp73IYNRe4gAA1fMlZw==
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">
@@ -21,12 +21,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKAfKORgYCgC4mIOOloKBPycDAwCQCzISV97KQWdWgwMXVoQtrEOA4OJDu3s2qjOwLBJHcJeCrRzGRDrDZLwQvY7NcMhl4s8uZEI9I3I02cNTEc2BNIwTBydphUgFLfLuBkYDMn0L0z/YAUmUH8ZUOC/4QiusDMwXGWnv70DUR+CAABO1BOr
+   eJxjYKAfKORgYCgC4mIOOloKBPycDAwCQCzISV97KQWdWgwMXVoQtrEOA4OJDu3s2qjOwLBJHcJeCrRzGRDrDZLwQvY7NcMhl4s8uaEIrIHxaaNFvn59I8rdgCvuYOLoNK0Aobhdxs3AYEgF/9IbgNxNCJhA/WUwBP1HS3CFnYHhKjv97R2I+hAEAFsEE6s=
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFpABxHQYGCR3amT9VnYFhmjqE3anFwNClRTu7SAXIfqd1OIwC6gJ5YDpSgKYlXHEHE0enR8EoGAXDCwAAl/AHJQ==
+   eJxjYBgFpABxHQYGCR3amT9VnYFhmjqE3anFwNClRTu7SAXIfqd1OAxXIA+MT4UBjlNccQcTR6dHwSgYBcMLAADc2Acl
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -80,13 +80,13 @@
    </properties>
   </object>
   <object id="47" template="../obj/inn.tx" x="215" y="82"/>
-  <object id="48" template="../obj/shop.tx" x="176" y="192">
+  <object id="48" template="../obj/shop.tx" x="173.75" y="209.75" width="20.75" height="18.75">
    <properties>
     <property name="commonShopList" value="Island"/>
     <property name="noRestock" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="50" template="../obj/quest.tx" x="176" y="162">
+  <object id="50" template="../obj/quest.tx" x="158.5" y="146.25" width="33.75" height="36">
    <properties>
     <property name="questtype" value="island_town_generic"/>
    </properties>

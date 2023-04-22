@@ -39,6 +39,7 @@ public enum TriggerType {
     ChangesController(TriggerChangesController.class),
     ChangesZone(TriggerChangesZone.class),
     ChangesZoneAll(TriggerChangesZoneAll.class),
+    ChaosEnsues(TriggerChaosEnsues.class),
     Clashed(TriggerClashed.class),
     ClassLevelGained(TriggerClassLevelGained.class),
     ConjureAll(TriggerConjureAll.class),
