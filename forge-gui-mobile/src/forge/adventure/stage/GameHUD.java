@@ -335,6 +335,8 @@ public class GameHUD extends Stage {
             unloadAudio();
             SoundSystem.instance.resume(); // resume World BGM
         }
+        //unequip and reequip abilities
+        updateAbility();
     }
 
     void updateAbility() {
