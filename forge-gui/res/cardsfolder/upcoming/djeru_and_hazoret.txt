@@ -10,5 +10,6 @@ SVar:MayPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | E
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$InYourHand
 SVar:PlayMain1:TRUE
+SVar:HasAttackEffect:TRUE
 DeckNeeds:Type$Legendary
 Oracle:As long as you have one or fewer cards in hand, Dieru and Hazoret has vigilance and haste.\nWhenever Djeru and Hazoret attacks, look at the top six cards of your library. You may exile a legendary creature card from among them. Put the rest on the bottom of your library in a random order. Until end of turn, you may cast the exiled card without paying its mana cost.
