@@ -14,6 +14,7 @@ DeckNeeds:Type$Instant|Sorcery
 AlternateMode:DoubleFaced
 DeckHints:Type$Phyrexian
 SVar:BuffedBy:Instant,Sorcery
+DeckHas:Type$Treasure|Artifact
 Oracle:First strike\nWhenever you cast an instant or sorcery spell, Urabrask deals 1 damage to target opponent. Add {R}.\n{R}: Exile Urabrask, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery and only if you've cast three or more instant and/or sorcery spells this turn.
 
 
