@@ -17,8 +17,6 @@ Colors:white,blue
 Types:Legendary Enchantment Creature God
 PT:4/4
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Lifelink & Indestructible | IsPresent$ Enchantment.Other+YouCtrl | PresentCompare$ GE3 | Description$ CARDNAME has lifelink and indestructible as long as you control at least three other enchantments.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.Other+YouCtrl | Execute$ TrigDraw | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, draw a card.
-SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.Other+YouCtrl | Execute$ TrigDraw | TriggerDescription$ Whenever another enchantment enters the battlefield under your control, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:Ephara, Ever-Sheltering has lifelink and indestructible as long as you control at least three other enchantments.\nWhenever another enchantment enters the battlefield under your control, draw a card.
