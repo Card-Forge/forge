@@ -131,7 +131,7 @@ public class DuelScene extends ForgeScene {
                 @Override
                 public void run(Integer result) {
                     if (result == 0) {
-                        afterGameEnd(enemyName, finalWinner, true, true);
+                        afterGameEnd(enemyName, finalWinner);
                         if (Config.instance().getSettingData().disableWinLose)
                             exitDuelScene();
                     }
@@ -139,11 +139,11 @@ public class DuelScene extends ForgeScene {
                 }
             }));
         } else {
-            afterGameEnd(enemyName, winner, false, false);
+            afterGameEnd(enemyName, winner);
         }
     }
     Runnable endRunnable = null;
-    void afterGameEnd(String enemyName, boolean winner, boolean overlay, boolean alt) {
+    void afterGameEnd(String enemyName, boolean winner) {
         endRunnable = () -> Gdx.app.postRunnable(()-> {
             if (GameScene.instance().isNotInWorldMap()) {
                 SoundSystem.instance.pause();
