@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalTime;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
 
@@ -203,7 +202,6 @@ public class SettingsScene extends UIScene {
                     boolean value = ((CheckBox) actor).isChecked();
                     Config.instance().getSettingData().fullScreen = value;
                     Config.instance().saveSettings();
-                    setTargetTime(LocalTime.now().getHour());
                     //update
                     if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_FULLSCREEN_MODE) != value) {
                         FModel.getPreferences().setPref(ForgePreferences.FPref.UI_LANDSCAPE_MODE, value);
@@ -221,6 +219,14 @@ public class SettingsScene extends UIScene {
                 if (value) {
                     updateBG(true);
                 }
+            }
+        });
+        addSettingField(Forge.getLocalizer().getMessage("lblDisableWinLose"), Config.instance().getSettingData().disableWinLose, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                boolean value = ((CheckBox) actor).isChecked();
+                Config.instance().getSettingData().disableWinLose = value;
+                Config.instance().saveSettings();
             }
         });
         addCheckBox(Forge.getLocalizer().getMessage("lblCardName"), ForgePreferences.FPref.UI_OVERLAY_CARD_NAME);
