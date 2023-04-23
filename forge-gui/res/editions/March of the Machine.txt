@@ -482,7 +482,7 @@ c_a_treasure_sac
 c_a_treasure_sac
 first_mate_ragavan
 g_1_1_phyrexian_saproling
-g_x_x_dinosaur
+g_x_x_dinosaur_trample
 gw_3_3_phyrexian_hydra_lifelink
 gw_3_3_phyrexian_hydra_reach
 rw_3_2_spirit
