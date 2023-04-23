@@ -123,6 +123,9 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         }).build());
         lblTitle.setText(composeTitle(game0));
 
+        if (Forge.isMobileAdventureMode)
+            control = new AdventureWinLose(this, game0);
+
         showGameOutcomeSummary();
         showPlayerScores();
         control.showRewards();
@@ -150,6 +153,10 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
 
     public FButton getBtnQuit() {
         return this.btnQuit;
+    }
+
+    public FLabel getLabelShowBattlefield() {
+        return this.btnShowBattlefield;
     }
 
     private void showGameOutcomeSummary() {
@@ -191,12 +198,20 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         y += h + dy;
 
         h = height / 12;
-        btnContinue.setBounds(x, y, w, h);
-        y += h + dy;
-        btnRestart.setBounds(x, y, w, h);
-        y += h + dy;
-        btnQuit.setBounds(x, y, w, h);
-        y += h + dy;
+        if (Forge.isMobileAdventureMode) {
+            btnQuit.setBounds(x, y, w, h);
+            y += h + dy;
+            btnContinue.setVisible(false);
+            btnRestart.setVisible(false);
+        } else {
+            btnContinue.setBounds(x, y, w, h);
+            y += h + dy;
+            btnRestart.setBounds(x, y, w, h);
+            y += h + dy;
+            btnQuit.setBounds(x, y, w, h);
+            y += h + dy;
+        }
+
 
         h = lblLog.getAutoSizeBounds().height + dy;
         lblLog.setBounds(x, y, w, h);
