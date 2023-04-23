@@ -1,0 +1,13 @@
+Name:Enigma Ridges
+ManaCost:no cost
+Types:Plane Echoir
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigRepeatEach | TriggerDescription$ When you planeswalk to CARDNAME, each player who controls fewer lands than the player who controls the most lands searches their library for a number of basic land cards less than or equal to the difference, reveals them, puts them into their hand, then shuffles.
+SVar:TrigRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | ConditionCheckSVar$ X | ConditionSVarCompare$ LTY | DefinedPlayer$ Remembered | Chooser$ Remembered | ChangeType$ Land.Basic | ChangeNum$ Z | Origin$ Library | Destination$ Hand
+SVar:X:Count$Valid Land.RememberedPlayerCtrl
+SVar:Y:PlayerCountPlayers$HighestValid Land.YouCtrl
+SVar:Z:SVar$Y/Minus.X
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, draw a card, then you may put a land card from your hand onto the battlefield.
+SVar:RolledChaos:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBChangeZoneBis
+SVar:DBChangeZoneBis:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Land | ChangeNum$ 1
+Oracle:When you planeswalk to Enigma Ridges, each player who controls fewer lands than the player who controls the most lands searches their library for a number of basic land cards less than or equal to the difference, reveals them, puts them into their hand, then shuffles.\nWhenever chaos ensues, draw a card, then you may put a land card from your hand onto the battlefield.
