@@ -6,7 +6,7 @@ T:Mode$ SpellCast | ValidCard$ Card.Legendary | ValidActivatingPlayer$ You | Exe
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 A:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
-A:AB$ SetState | Cost$ 5 BP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform NICKNAME. Activate only as a sorcery.
+A:AB$ SetState | Cost$ 5 BP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform NICKNAME. Activate only as a sorcery. ({B/P} can be paid with either {B} or 2 life.)
 AlternateMode:DoubleFaced
 SVar:BuffedBy:Card.Legendary
 DeckHas:Ability$Discard|Graveyard
