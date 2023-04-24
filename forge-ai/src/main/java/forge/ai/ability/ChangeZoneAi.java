@@ -1216,7 +1216,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             if (choice == null) { // can't find anything left
-                if (sa.getTargets().size() == 0 || !sa.isTargetNumberValid()) {
+                if (sa.getTargets().isEmpty() || !sa.isTargetNumberValid()) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -1432,7 +1432,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        CardCollection list = new CardCollection(CardUtil.getValidCardsToTarget(tgt, sa));
+        List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
 
         if (list.isEmpty()) {
             return false;

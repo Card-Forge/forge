@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="76">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="77">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -13,7 +13,7 @@
  </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJy1lVEOhCAMRP01epYeYw9mun94H4+3IbFhtrYKFkgaIAiPMgNuyzRtFfGZ/aiZ/zYSldjpvz+KeayFx2eN7Tw+istnbkzXPfTm4nqoZ+Za+vbiW1zR2vJa/j7iM2vfieriS4Xf6nmPy6BvUnrfRYQrdwf99MTnDtyavEZwUT+dLz/kHeXqs9Uh49pXLX7GIncW3ym9D2xH7nEuUgvX83RSeUaYwpX3wdJO96Nc69y9f9EInsX1zrd1zR/ubyqt
+   eJy1lVEOhCAMRP3duGfhGB7MdP/Y++zxDIkTx24rCJVkAgTD67SA6zxNa0XLq021fXqU06FvOs85tkjm733wZO95XNbBjubK7k3SfwzR+WYfrGywisr3EWyLi1pb8YxywfPO1ZU+6cy/E4fHFapvVvW+0ggXd4fPU40vAdwWX09wuX7ar1R8j3J1brWwPnKuuOHO8jul4+CxFXerSkMPrnems+Gzlwku3gerdnoObq9XK+/evyjCZwvXy+/dPTf2kSWe
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="17">
@@ -26,7 +26,7 @@
  </layer>
  <layer id="2" name="Walls" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzbwcPAsIMI3K6HGxOjXwYNE6OnD2g2PjCBCLtH7SUOT9eD4GlQN8zQQ4jRKn6R01Ub1N4OEtMZLcIZHaC7iV72TtDD5NPDXmzuGGr2TkfCIIDMxxau9PAvuj3z0NxJy3IDnU+v8goEZujhLkdoaS++8pIW9uLzJ6X2wsoeZAATI6deAABIX/aO
+   eJzbwcPAsIMAbtNjYGjHgzv0CJshg4YJqQfhPqC5+MCEUXupYu80oLnToXgd1A0bkMRm0Mhe5HQ1D2rvAhLTGS3CGR3cxOIOetg7QQ+TTw97sbljKNl7CCntToe6AZm/DEu40sO/6PZcRHPnDDrZi60coaW9G/RwlyO0tBdfeUkLe88RUV6SY+8dpLIHGcDEbpNRPgMAC9v4YQ==
   </data>
  </layer>
  <layer id="8" name="Archway" width="30" height="17">
@@ -79,25 +79,25 @@
 ]</property>
    </properties>
   </object>
-  <object id="75" template="../obj/booster.tx" x="254.75" y="33.5">
+  <object id="75" template="../obj/booster.tx" x="216.75" y="32.8333">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;ONE&quot; ],
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
     &quot;colors&quot;: [ &quot;blue&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;ONE&quot; ],
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
     &quot;colors&quot;: [ &quot;blue&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;ONE&quot; ],
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
     &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
@@ -107,6 +107,7 @@
 </property>
    </properties>
   </object>
+  <object id="76" template="../obj/treasure.tx" x="256" y="32"/>
  </objectgroup>
  <objectgroup id="7" name="Waypoints">
   <object id="64" template="../obj/waypoint.tx" x="273" y="145"/>

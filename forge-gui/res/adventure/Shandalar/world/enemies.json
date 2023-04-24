@@ -3366,7 +3366,7 @@
 	"name": "Copper Host Brutalizer",
 	"sprite": "sprites/copperhostbrutalizer.atlas",
 	"deck": [
-		"deckscopperhostbrutalizer.json"
+		"decks/copperhostbrutalizer.dck" 
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -4680,7 +4680,7 @@
 	"name": "Dross Grimnarch",
 	"sprite": "sprites/drossgrimnarch.atlas",
 	"deck": [
-		"decks/drossgrimnarch.json"
+		"decks/drossgrimnarch.dck"
 	],
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -6197,7 +6197,7 @@
 	"name": "Furnace Tormentor",
 	"sprite": "sprites/furnacetormentor.atlas",
 	"deck": [
-		"decks/furnacetormentor.json"
+		"decks/furnacetormentor.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -6814,7 +6814,7 @@
 	"name": "Gitaxian Scientist",
 	"sprite": "sprites/gitaxianscientist.atlas",
 	"deck": [
-		"decks/gitaxianscientist.json"
+		"decks/gitaxianscientist.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -11471,7 +11471,7 @@
 	"name": "Orthodoxy Angel",
 	"sprite": "sprites/phyrexianangel.atlas",
 	"deck": [
-		"decks/phyrexianangel.json"
+		"decks/phyrexianangel.dck"
 	],
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -12441,16 +12441,6 @@
 	"scale": 0.4,
 	"life": 40,
 	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"uncommon"
-			]
-		},
 		{
 			"type": "deckCard",
 			"probability": 1,

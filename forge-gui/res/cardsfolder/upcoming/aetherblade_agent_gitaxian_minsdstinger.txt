@@ -2,10 +2,11 @@ Name:Aetherblade Agent
 ManaCost:1 B
 Types:Creature Human Rogue
 PT:1/1
+K:Deathtouch
 A:AB$ SetState | Cost$ 4 UP | Mode$ Transform | SorcerySpeed$ True | SpellDescription$ Transform CARDNAME. Activate only as a sorcery. ({U/P} can be paid with either {U} or 2 life.)
 AlternateMode:DoubleFaced
 DeckHints:Color$Blue
-Oracle:{4}{U/P}: Transform Aetherblade Agent. Activate only as a sorcery. ({U/P} can be paid with either {U} or 2 life.)
+Oracle:Deathtouch\n{4}{U/P}: Transform Aetherblade Agent. Activate only as a sorcery. ({U/P} can be paid with either {U} or 2 life.)
 
 ALTERNATE
 

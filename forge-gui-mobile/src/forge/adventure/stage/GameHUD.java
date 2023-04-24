@@ -335,13 +335,17 @@ public class GameHUD extends Stage {
             unloadAudio();
             SoundSystem.instance.resume(); // resume World BGM
         }
+        //unequip and reequip abilities
+        updateAbility();
     }
-
-    void updateAbility() {
+    void clearAbility() {
         for (TextraButton button : abilityButtonMap) {
             button.remove();
         }
         abilityButtonMap.clear();
+    }
+    void updateAbility() {
+        clearAbility();
         setAbilityButton(AdventurePlayer.current().getEquippedAbility1());
         setAbilityButton(AdventurePlayer.current().getEquippedAbility2());
         float x = Forge.isLandscapeMode() ? 426f : 216f;
@@ -568,6 +572,14 @@ public class GameHUD extends Stage {
         }
         opacity = visible ? 1f : 0.4f;
     }
+    void toggleConsole() {
+        console.toggle();
+        if (console.isVisible()) {
+            clearAbility();
+        } else {
+            updateAbility();
+        }
+    }
 
     @Override
     public boolean keyUp(int keycode) {
@@ -582,12 +594,12 @@ public class GameHUD extends Stage {
         }
         ui.pressDown(keycode);
         if (keycode == Input.Keys.F9 || keycode == Input.Keys.F10) {
-            console.toggle();
+            toggleConsole();
             return true;
         }
         if (keycode == Input.Keys.BACK) {
             if (console.isVisible()) {
-                console.toggle();
+                toggleConsole();
             }
         }
         if (console.isVisible())
@@ -699,7 +711,7 @@ public class GameHUD extends Stage {
 
         @Override
         public boolean longPress(Actor actor, float x, float y) {
-            console.toggle();
+            toggleConsole();
             return super.longPress(actor, x, y);
         }
     }

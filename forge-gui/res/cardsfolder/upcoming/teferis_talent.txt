@@ -1,0 +1,12 @@
+Name:Teferi's Talent
+ManaCost:3 U U
+Types:Enchantment Aura
+K:Enchant planeswalker
+A:SP$ Attach | AILogic$ Pump | ValidTgts$ Planeswalker
+S:Mode$ Continuous | Affected$ Planeswalker.EnchantedBy | AddAbility$ TeferiUlt | Description$ Enchanted planeswalker has "[-12]: You get an emblem with 'You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant.'"
+SVar:TeferiUlt:AB$ Effect | Cost$ SubCounter<12/LOYALTY> | Planeswalker$ True | Name$ Emblem - Teferi, Temporal Archmage | StaticAbilities$ InstantPlaneswalkers | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant."
+SVar:InstantPlaneswalkers:Mode$ CastWithFlash | ValidCard$ Planeswalker.YouCtrl | ValidSA$ Activated.Loyalty | Caster$ You | Description$ You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant.
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw a card, put a loyalty counter on enchanted planeswalker.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Enchanted | CounterType$ LOYALTY | CounterNum$ 1
+DeckNeeds:Type$Planeswalker
+Oracle:Enchant planeswalker\nEnchanted planeswalker has "[-12]: You get an emblem with 'You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant.'"\nWhenever you draw a card, put a loyalty counter on enchanted planeswalker.

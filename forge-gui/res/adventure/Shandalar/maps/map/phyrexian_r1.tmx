@@ -46,7 +46,6 @@
    <properties>
     <property name="enemy" value="Furnace Tormentor"/>
     <property name="threatRange" value="20"/>
-    <property name="waypoints" value="60,58,57,62,60,58,57,62,60,59,61,62"/>
    </properties>
   </object>
   <object id="78" template="../obj/enemy.tx" x="136.333" y="219.333">
@@ -99,21 +98,21 @@
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;ONE&quot; ],
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
     &quot;colors&quot;: [ &quot;red&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;ONE&quot; ],
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
     &quot;colors&quot;: [ &quot;red&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;ONE&quot; ],
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
     &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]

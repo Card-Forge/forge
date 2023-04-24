@@ -1,0 +1,9 @@
+Name:Ten Wizards Mountain
+ManaCost:no cost
+Types:Plane Shenmeng
+T:Mode$ PlanarDice | TriggerZones$ Command | Execute$ RolledDie | TriggerDescription$ Whenever you roll the planar die, put a +1/+1 counter on up to one target creature.
+SVar:RolledDie:DB$ PutCounter | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, creatures you control gain flying until end of turn.
+SVar:RolledChaos:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Flying
+DeckHas:Ability$Counters
+Oracle:Whenever you roll the planar die, put a +1/+1 counter on up to one target creature.\nWhenever chaos ensues, creatures you control gain flying until end of turn.

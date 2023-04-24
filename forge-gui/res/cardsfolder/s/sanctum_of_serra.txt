@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Plane Serra's Realm
 T:Mode$ PlaneswalkedFrom | ValidCard$ Plane.Self | Execute$ TrigDestroy | TriggerDescription$ When you planeswalk away from CARDNAME, destroy all nonland permanents.
 SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Permanent.nonLand | ValidDesc$ all nonland permanents
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | OptionalDecider$ You | TriggerDescription$ Whenever you roll {CHAOS}, you may have your life total become 20.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | OptionalDecider$ You | TriggerDescription$ Whenever chaos ensues, you may have your life total become 20.
 SVar:RolledChaos:DB$ SetLife | Defined$ You | LifeAmount$ 20
 SVar:AIRollPlanarDieParams:Mode$ Always
-Oracle:When you planeswalk away from Sanctum of Serra, destroy all nonland permanents.\nWhenever you roll {CHAOS}, you may have your life total become 20.
+Oracle:When you planeswalk away from Sanctum of Serra, destroy all nonland permanents.\nWhenever chaos ensues, you may have your life total become 20.
