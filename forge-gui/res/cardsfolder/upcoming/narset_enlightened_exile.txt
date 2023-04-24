@@ -1,0 +1,16 @@
+Name:Narset, Enlightened Exile
+ManaCost:1 U R W
+Types:Legendary Creature Human Monk
+PT:3/4
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Prowess | Description$ Creatures you control have prowess.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME attacks, exile target noncreature, nonland card with mana value less than NICKNAME's power from a graveyard and copy it. You may cast the copy without paying its mana cost.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.nonCreature+nonLand+cmcLTX | TgtPrompt$ Select target noncreature nonland card from a graveyard with mana value less then Narset's power | RememberChanged$ True | SubAbility$ DBCopy
+SVar:DBPlay:DB$ Play | Defined$ Remembered | CopyCard$ True | Controller$ You | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$CardPower
+DeckHints:Type$Instant|Sorcery|Artifact|Enchantment|Battle|Planeswalker
+DeckHas:Ability$Graveyard
+SVar:HasAttackEffect:TRUE
+SVar:EquipMe:Multiple
+SVar:EnchantMe:Multiple
+Oracle:Creatures you control have prowess.\nWhenever Narset, Enlightened Exile attacks, exile target noncreature, nonland card with mana value less than Narset's power from a graveyard and copy it. You may cast the copy without paying its mana cost.

@@ -1,0 +1,10 @@
+Name:Gold-Forged Thopteryx
+ManaCost:W U
+Types:Artifact Creature Dinosaur Thopter
+PT:1/3
+K:Flying
+K:Lifelink
+S:Mode$ Continuous | Affected$ Permanent.YouCtrl+Legendary | AddKeyword$ Ward:2 | Description$ Each legendary permanent you control has ward {2}.
+DeckHas:Ability$LifeGain
+DeckHints:Type$Legendary
+Oracle:Flying, lifelink\nEach legendary permanent you control has ward {2}.
