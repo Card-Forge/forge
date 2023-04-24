@@ -3,6 +3,7 @@ ManaCost:2 B
 Types:Instant
 A:SP$ ChooseCard | ValidTgts$ Opponent | Choices$ Creature.TargetedPlayerCtrl+cmcEQX,Planeswalker.TargetedPlayerCtrl+cmcEQX | ChoiceTitle$ Choose a creature or planeswalker with the highest mana value to sacrifice | Mandatory$ True | RememberChosen$ True | SubAbility$ DBExile | SpellDescription$ Target opponent exiles a creature or planeswalker they control with the greatest mana value among creatures and planeswalkers they control
 SVar:DBExile:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:X:SVar$Y/LimitMin.Z
 SVar:Y:Count$Valid Creature.TargetedPlayerCtrl$GreatestCMC
 SVar:Z:Count$Valid Planeswalker.TargetedCtrl$GreatestCMC
