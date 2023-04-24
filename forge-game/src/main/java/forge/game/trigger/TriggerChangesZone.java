@@ -135,8 +135,12 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
-        if (hasParam("ResolvedCard")) {
+        if (hasParam("Fizzle")) {
             if (!runParams.containsKey(AbilityKey.Fizzle)) {
+                return false;
+            }
+            Boolean val = (Boolean) runParams.get(AbilityKey.Fizzle);
+            if ("True".equals(getParam("Fizzle")) != val) {
                 return false;
             }
         }

@@ -86,7 +86,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public SpellAbility getAbilityToPlay(Card hostCard, List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
-        if (abilities.size() == 0) {
+        if (abilities.isEmpty()) {
             return null;
         }
         return abilities.get(0);
