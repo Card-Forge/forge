@@ -1,0 +1,19 @@
+Name:Kroxa and Kunoros
+ManaCost:3 R W B
+Types:Legendary Creature Elder Giant Dog
+PT:6/6
+K:Vigilance
+K:Menace
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you may exile five cards from your graveyard. When you do, return target creature card from your graveyard to the battlefield.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you may exile five cards from your graveyard. When you do, return target creature card from your graveyard to the battlefield.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ ExileFromGrave<5/Card> | Execute$ TrigReturn | SpellDescription$ When you do, return target creature card from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature to return from your graveyard
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Discard
+SVar:NeedsToPlayVar:Z EQ6
+SVar:X:Count$InYourYard/LimitMax.6
+SVar:Y:Count$TypeInYourYard.Creature/LimitMax.1
+SVar:Z:SVar$X/Times.Y
+DeckHas:Ability$Graveyard|LifeGain
+Oracle:Vigilance, menace, lifelink\nWhenever Kroxa and Kunoros enters the battlefield or attacks, you may exile five cards from your graveyard. When you do, return target creature card from your graveyard to the battlefield.

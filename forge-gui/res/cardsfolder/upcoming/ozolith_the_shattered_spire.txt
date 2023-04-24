@@ -1,0 +1,11 @@
+Name:Ozolith, the Shattered Spire
+ManaCost:1 G
+Types:Legendary Artifact
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Creature.YouCtrl+inZoneBattlefield,Artifact.YouCtrl+inZoneBattlefield | ValidCounterType$ P1P1 | ReplaceWith$ AddOneMoreCounters | Description$ If one or more +1/+1 counters would be put on an artifact or creature you control, that many plus one +1/+1 counters are put on it instead.
+SVar:AddOneMoreCounters:DB$ ReplaceCounter | ValidCounterType$ P1P1 | ChooseCounter$ True | Amount$ X
+SVar:X:ReplaceCount$CounterNum/Plus.1
+A:AB$ PutCounter | Cost$ 1 G T | ValidTgts$ Creature.YouCtrl,Artifact.YouCtrl | TgtPrompt$ Select target artifact or creature you control | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on target artifact or creature you control. Activate only as a sorcery.
+K:Cycling:2
+DeckHas:Ability$Counters|Discard
+DeckHints:Ability$Counters
+Oracle:If one or more +1/+1 counters would be put on an artifact or creature you control, that many plus one +1/+1 counters are put on it instead.\n{1}{G}, {T}: Put a +1/+1 counter on target artifact or creature you control. Activate only as a sorcery.\nCycling {2} ({2}, Discard this card: Draw a card.)
