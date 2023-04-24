@@ -1,0 +1,23 @@
+Name:Seraph of New Capenna
+ManaCost:2 W
+Types:Creature Angel Soldier
+PT:2/2
+K:Flying
+A:AB$ SetState | Cost$ 4 BP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery. ({B/P} can be paid with either {B} or 2 life.)
+AlternateMode:DoubleFaced
+Oracle:Flying\n{4}{B/P}: Transform Seraph of New Capenna. Activate only as a sorcery. ({B/P} can be paid with either {B} or 2 life.)
+
+ALTERNATE
+
+Name:Seraph of New Phyrexia
+ManaCost:no cost
+Colors:white,black
+Types:Creature Phyrexian Angel
+PT:3/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice another creature or artifact. If you do, CARDNAME gets +2/+1 until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | Defined$ Self | NumAtt$ 2 | NumDef$ 1
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Artifact
+Oracle:Flying\nWhenever Seraph of New Phyrexia attacks, you may sacrifice another creature or artifact. If you do, Seraph of New Phyrexia gets +2/+1 until end of turn.

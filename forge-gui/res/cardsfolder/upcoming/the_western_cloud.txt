@@ -1,0 +1,10 @@
+Name:The Western Cloud
+ManaCost:no cost
+Types:Plane Gobakhan
+R:Event$ DamageDone | ActiveZones$ Command | Prevent$ True | ValidTarget$ Planeswalker.YouCtrl,Creature.YouCtrl | Description$ Prevent all damage that would be dealt to creatures and planeswalkers you control.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, create three tapped Treasure tokens. They each deal 1 damage to each creature and each planeswalker.
+SVar:RolledChaos:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | RememberTokens$ True | TokenTapped$ True | SubAbility$ DBDamage
+SVar:DBDamage:DB$ EachDamage | DefinedDamagers$ Remembered | Defined$ Valid Creature,Planeswalker | NumDmg$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token & Type$Treasure
+Oracle:Prevent all damage that would be dealt to creatures and planeswalkers you control.\nWhenever chaos ensues, create three tapped Treasure tokens. They each deal 1 damage to each creature and each planeswalker.

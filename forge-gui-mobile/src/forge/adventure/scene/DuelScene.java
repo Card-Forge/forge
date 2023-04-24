@@ -34,6 +34,7 @@ import forge.player.GamePlayerUtil;
 import forge.player.PlayerControllerHuman;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
+import forge.screens.TransitionScreen;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
@@ -130,18 +131,20 @@ public class DuelScene extends ForgeScene {
                 @Override
                 public void run(Integer result) {
                     if (result == 0) {
-                        afterGameEnd(enemyName, finalWinner, true, true);
+                        afterGameEnd(enemyName, finalWinner);
+                        if (Config.instance().getSettingData().disableWinLose)
+                            exitDuelScene();
                     }
                     fb.dispose();
                 }
             }));
         } else {
-            afterGameEnd(enemyName, winner, false, false);
+            afterGameEnd(enemyName, winner);
         }
     }
-
-    void afterGameEnd(String enemyName, boolean winner, boolean showOverlay, boolean alternate) {
-        Runnable runnable = () -> Gdx.app.postRunnable(()-> {
+    Runnable endRunnable = null;
+    void afterGameEnd(String enemyName, boolean winner) {
+        endRunnable = () -> Gdx.app.postRunnable(()-> {
             if (GameScene.instance().isNotInWorldMap()) {
                 SoundSystem.instance.pause();
                 GameHUD.getInstance().playAudio();
@@ -160,14 +163,9 @@ public class DuelScene extends ForgeScene {
                 ((IAfterMatch) last).setWinner(winner);
             }
         });
-        if (showOverlay) {
-            FThreads.invokeInEdtNowOrLater(() -> {
-                matchOverlay = new LoadingOverlay(runnable, true, alternate);
-                matchOverlay.show();
-            });
-        } else {
-            runnable.run();
-        }
+    }
+    public void exitDuelScene() {
+        Forge.setTransitionScreen(new TransitionScreen(endRunnable, Forge.takeScreenshot(), false, false));
     }
 
     void addEffects(RegisteredPlayer player, Array<EffectData> effects) {

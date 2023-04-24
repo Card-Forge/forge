@@ -1745,12 +1745,12 @@ public class GameSimulationTest extends SimulationTest {
         Card giant = addCard(hillGiantName, p);
 
         AssertJUnit.assertFalse(outlaw.isCloned());
-        AssertJUnit.assertTrue(outlaw.isDoubleFaced());
+        AssertJUnit.assertTrue(outlaw.isTransformable());
         AssertJUnit.assertTrue(outlaw.hasState(CardStateName.Transformed));
         AssertJUnit.assertTrue(outlaw.canTransform(null));
         AssertJUnit.assertFalse(outlaw.isBackSide());
 
-        AssertJUnit.assertFalse(giant.isDoubleFaced());
+        AssertJUnit.assertFalse(giant.isTransformable());
         AssertJUnit.assertFalse(giant.canTransform(null));
 
         addCards("Forest", 4, p);
@@ -1778,14 +1778,14 @@ public class GameSimulationTest extends SimulationTest {
         Card clonedOutLaw = (Card) sim.getGameCopier().find(outlaw);
 
         AssertJUnit.assertTrue(clonedOutLaw.isCloned());
-        AssertJUnit.assertTrue(clonedOutLaw.isDoubleFaced());
+        AssertJUnit.assertTrue(clonedOutLaw.isTransformable());
         AssertJUnit.assertFalse(clonedOutLaw.hasState(CardStateName.Transformed));
         AssertJUnit.assertTrue(clonedOutLaw.canTransform(null));
         AssertJUnit.assertFalse(clonedOutLaw.isBackSide());
 
         AssertJUnit.assertEquals(clonedOutLaw.getName(), hillGiantName);
 
-        AssertJUnit.assertTrue(clonedOutLaw.isDoubleFaced());
+        AssertJUnit.assertTrue(clonedOutLaw.isTransformable());
 
         score = sim.simulateSpellAbility(moonmistSA).value;
         AssertJUnit.assertTrue(score > 0);
@@ -1799,7 +1799,7 @@ public class GameSimulationTest extends SimulationTest {
         Card transformOutLaw = (Card) sim.getGameCopier().find(outlaw);
 
         AssertJUnit.assertTrue(transformOutLaw.isCloned());
-        AssertJUnit.assertTrue(transformOutLaw.isDoubleFaced());
+        AssertJUnit.assertTrue(transformOutLaw.isTransformable());
         AssertJUnit.assertFalse(transformOutLaw.hasState(CardStateName.Transformed));
         AssertJUnit.assertTrue(transformOutLaw.canTransform(null));
         AssertJUnit.assertTrue(transformOutLaw.isBackSide());
@@ -1814,7 +1814,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(1, countCardsWithName(simGame, terrorName));
 
         AssertJUnit.assertFalse(transformOutLaw.isCloned());
-        AssertJUnit.assertTrue(transformOutLaw.isDoubleFaced());
+        AssertJUnit.assertTrue(transformOutLaw.isTransformable());
         AssertJUnit.assertTrue(transformOutLaw.hasState(CardStateName.Transformed));
         AssertJUnit.assertTrue(transformOutLaw.canTransform(null));
         AssertJUnit.assertTrue(transformOutLaw.isBackSide());

@@ -922,7 +922,7 @@ public class CardView extends GameEntityView {
             updateIntensity(c);
         }
 
-        if (getBackup() == null && !c.isFaceDown() && (c.hasBackSide()||c.isFlipCard()||c.isAdventureCard())) {
+        if (getBackup() == null && !c.isFaceDown() && (c.isDoubleFaced()||c.isFlipCard()||c.isAdventureCard())) {
             set(TrackableProperty.PaperCardBackup, c.getPaperCard());
         }
 
@@ -939,7 +939,7 @@ public class CardView extends GameEntityView {
 
         //backside
         if (c.getAlternateState() != null)
-            updateBackSide(c.getAlternateState().getName(), c.hasBackSide());
+            updateBackSide(c.getAlternateState().getName(), c.isDoubleFaced());
 
         final Card cloner = c.getCloner();
 
@@ -1005,7 +1005,7 @@ public class CardView extends GameEntityView {
             alternateState = c.getState(CardStateName.Original);
         }
 
-        if (c.hasBackSide() && isFaceDown()) //fixes facedown cards with backside...
+        if (c.isDoubleFaced() && isFaceDown()) //fixes facedown cards with backside...
             alternateState = c.getState(CardStateName.Original);
 
         if (alternateState == null) {

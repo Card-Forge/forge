@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import forge.adventure.scene.DuelScene;
+import forge.adventure.util.Config;
 import forge.ai.GameState;
 import forge.deck.Deck;
 import forge.game.player.Player;
 import forge.item.IPaperCard;
-import forge.screens.TransitionScreen;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
@@ -312,14 +312,12 @@ public class MatchController extends AbstractGuiGame {
     @Override
     public void finishGame() {
         if (Forge.isMobileAdventureMode) {
-            Forge.setCursor(null, "0");
-            if (DuelScene.instance().hasCallbackExit())
+            if (Config.instance().getSettingData().disableWinLose) {
+                Forge.setCursor(null, "0");
+                if (!DuelScene.instance().hasCallbackExit())
+                    DuelScene.instance().exitDuelScene();
                 return;
-            Forge.setTransitionScreen(new TransitionScreen(() -> {
-                Forge.clearTransitionScreen();
-                Forge.clearCurrentScreen();
-            }, Forge.takeScreenshot(), false, false));
-            return;
+            }
         }
         if (hasLocalPlayers() || getGameView().isMatchOver()) {
             view.setViewWinLose(new ViewWinLose(getGameView()));

@@ -1,0 +1,9 @@
+Name:The Fertile Lands of Saulvinia
+Types:Plane Antausia
+T:Mode$ TapsForMana | ValidCard$ Land | Execute$ AddMana | TriggerZones$ Command | Static$ True | TriggerDescription$ Whenever a player taps a land for mana, that player adds one mana of any type that land produced.
+SVar:AddMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ TriggeredActivator
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigDigUntil | TriggerDescription$ Whenever chaos ensues, reveal cards from the top of your planar deck until you reveal a plane card. Chaos ensues on that plane. Then put all cards revealed this way on the bottom of your planar deck in any order.
+SVar:TrigDigUntil:DB$ DigUntil | Valid$ Plane | DigZone$ PlanarDeck | RememberFound$ True | FoundDestination$ PlanarDeck | FoundLibraryPosition$ -1 | RevealedDestination$ PlanarDeck | RevealedLibraryPosition$ -1 | SubAbility$ DBChaosEnsues
+SVar:DBChaosEnsues:DB$ ChaosEnsues | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever a player taps a land for mana, that player adds one mana of any type that land produced.\nWhenever chaos ensues, reveal cards from the top of your planar deck until you reveal a plane card. Chaos ensues on that plane. Then put all cards revealed this way on the bottom of your planar deck in any order.

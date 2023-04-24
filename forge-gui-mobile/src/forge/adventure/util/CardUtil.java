@@ -350,7 +350,7 @@ public class CardUtil {
 
     public static Deck generateDeck(GeneratedDeckData data, CardEdition starterEdition, boolean discourageDuplicates)
     {
-        List<String> editionCodes = (starterEdition != null)?Arrays.asList(starterEdition.getCode(), starterEdition.getCode2()):Arrays.asList("JMP", "J22", "DMU","BRO");
+        List<String> editionCodes = (starterEdition != null)?Arrays.asList(starterEdition.getCode(), starterEdition.getCode2()):Arrays.asList("JMP", "J22", "DMU", "BRO", "ONE", "MOM");
         Deck deck= new Deck(data.name);
         if(data.mainDeck!=null)
         {

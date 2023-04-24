@@ -1,0 +1,23 @@
+Name:Invasion of Ulgrotha
+ManaCost:4 B
+Types:Battle Siege
+Defense:5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to any other target and you gain 3 life.
+SVar:TrigDrain:DB$ DealDamage | ValidTgts$ Creature.Other,Player,Planeswalker.Other,Battle.Other | TgtPrompt$ Select any other target | NumDmg$ 3 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
+DeckHas:Ability$Counters|LifeGain
+AlternateMode:DoubleFaced
+Oracle:When Invasion of Ulgrotha enters the battlefield, it deals 3 damage to any other target and you gain 3 life.
+
+ALTERNATE
+
+Name:Grandmother Ravi Sengir
+ManaCost:no cost
+Colors:black
+Types:Legendary Creature Human Wizard
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature.OppCtrl | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ DeathGift | TriggerDescription$ Whenever a creature an opponent controls dies, put a +1/+1 counter on CARDNAME and you gain 1 life.
+SVar:DeathGift:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBGainLifeBis
+SVar:DBGainLifeBis:DB$ GainLife | Defined$ You | LifeAmount$ 1  
+Oracle:Flying\nWhenever a creature an opponent controls dies, put a +1/+1 counter on Grandmother Ravi Sengir and you gain 1 life.

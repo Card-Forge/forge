@@ -203,6 +203,7 @@ public final class CardUtil {
         newCopy.getCurrentState().copyFrom(in.getState(in.getFaceupCardStateName()), true);
         if (in.isFaceDown()) {
             newCopy.turnFaceDownNoUpdate();
+            newCopy.setType(new CardType(in.getCurrentState().getType()));
             // prevent StackDescription from revealing face
             newCopy.updateStateForView();
         }

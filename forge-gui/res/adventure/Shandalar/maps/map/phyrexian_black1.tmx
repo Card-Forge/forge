@@ -58,21 +58,21 @@
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;ONE&quot; ],
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
     &quot;colors&quot;: [ &quot;black&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;ONE&quot; ],
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
     &quot;colors&quot;: [ &quot;black&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;ONE&quot; ],
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
     &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]

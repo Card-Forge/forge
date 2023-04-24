@@ -143,6 +143,10 @@ public class CardProperty {
             if (!card.isBackSide()) {
                 return false;
             }
+        } else if (property.equals("CanTransform")) {
+            if (!card.isTransformable()) {
+                return false;
+            }
         } else if (property.equals("Transformed")) {
             if (!card.isTransformed()) {
                 return false;

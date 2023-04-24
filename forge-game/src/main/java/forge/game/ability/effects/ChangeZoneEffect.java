@@ -339,7 +339,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final String fromGraveyard = " from the graveyard";
 
         if (destination.equals(ZoneType.Battlefield)) {
-            final boolean attacking = (sa.hasParam("Attacking"));
+            final boolean attacking = sa.hasParam("Attacking");
             if (ZoneType.Graveyard.equals(origin)) {
                 sb.append("Return").append(targetname).append(fromGraveyard).append(" to the battlefield");
             } else {
@@ -565,6 +565,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                 // If a card is moved to library from the stack, remove its spells from the stack
                 if (sa.hasParam("Fizzle")) {
+                    // TODO only AI still targets as card, try to remove it
                     if (gameCard.isInZone(ZoneType.Exile) || gameCard.isInZone(ZoneType.Hand) || gameCard.isInZone(ZoneType.Stack)) {
                         // This only fizzles spells, not anything else.
                         game.getStack().remove(gameCard);
@@ -592,7 +593,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         gameCard.setTapped(false);
                     }
                     if (sa.hasParam("Transformed")) {
-                        if (gameCard.isDoubleFaced()) {
+                        if (gameCard.isTransformable()) {
                             // need LKI before Animate does apply
                             if (!moveParams.containsKey(AbilityKey.CardLKI)) {
                                 moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(gameCard));
@@ -1320,7 +1321,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         c.addEtbCounter(cType, cAmount, player);
                     }
                     if (sa.hasParam("Transformed")) {
-                        if (c.isDoubleFaced()) {
+                        if (c.isTransformable()) {
                             // need LKI before Animate does apply
                             if (!moveParams.containsKey(AbilityKey.CardLKI)) {
                                 moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));

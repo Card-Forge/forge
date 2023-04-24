@@ -602,4 +602,64 @@ Werewolf_f
   size: 16, 16        
 Werewolf_f
   size: 16, 16        
-  xy: 144, 304
+  xy: 144, 304  
+Leonin_m
+  xy: 0, 320
+  size: 16, 16         
+Leonin_m
+  xy: 16, 320
+  size: 16, 16        
+Leonin_m
+  xy: 32, 320
+  size: 16, 16        
+Leonin_m
+  xy: 48, 320
+  size: 16, 16        
+Leonin_m
+  xy: 64, 320
+  size: 16, 16        
+Leonin_m
+  xy: 80, 320
+  size: 16, 16        
+Leonin_m
+  xy: 96, 320
+  size: 16, 16        
+Leonin_m
+  xy: 112, 320
+  size: 16, 16        
+Leonin_m
+  xy: 128, 320
+  size: 16, 16        
+Leonin_m
+  xy: 144, 320
+  size: 16, 16        
+Leonin_f
+  xy: 0, 336
+  size: 16, 16         
+Leonin_f
+  xy: 16, 336
+  size: 16, 16        
+Leonin_f
+  xy: 32, 336
+  size: 16, 16        
+Leonin_f
+  xy: 48, 336
+  size: 16, 16        
+Leonin_f
+  xy: 64, 336
+  size: 16, 16        
+Leonin_f
+  xy: 80, 336
+  size: 16, 16        
+Leonin_f
+  xy: 96, 336
+  size: 16, 16        
+Leonin_f
+  xy: 112, 336
+  size: 16, 16        
+Leonin_f
+  xy: 128, 336
+  size: 16, 16        
+Leonin_f
+  size: 16, 16        
+  xy: 144, 336

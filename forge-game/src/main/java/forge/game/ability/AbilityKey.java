@@ -74,6 +74,7 @@ public enum AbilityKey {
     FirstTime("FirstTime"),
     Fizzle("Fizzle"),
     FoundSearchingLibrary("FoundSearchingLibrary"),
+    Ignore("Ignore"),
     IsCombat("IsCombat"), // TODO confirm that this and IsCombatDamage can be merged
     IsCombatDamage("IsCombatDamage"),
     IsDamage("IsDamage"),

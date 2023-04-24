@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import forge.game.*;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -19,13 +20,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameObject;
 import forge.game.GameOutcome.AnteResult;
-import forge.game.GameType;
-import forge.game.GameView;
-import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -191,6 +186,8 @@ public abstract class PlayerController {
         final List<String> sectors = Arrays.asList("Alpha", "Beta", "Gamma");
         return chooseSector(assignee, ai, sectors);
     }
+
+    public abstract PlanarDice choosePDRollToIgnore(List<PlanarDice> rolls);
 
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer);
 

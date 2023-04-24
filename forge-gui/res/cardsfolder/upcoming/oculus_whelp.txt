@@ -1,0 +1,10 @@
+Name:Oculus Whelp
+ManaCost:3 U
+Types:Creature Phyrexian Dragon
+PT:3/2
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | IsPresent$ Permanent.Transformed+YouCtrl | AddTrigger$ DiesTrig | Description$ As long as you control a transformed permanent, CARDNAME has "When CARDNAME dies, draw a card."
+SVar:DiesTrig:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw a card.
+SVar:TrigDraw:DB$ Draw
+AI:RemoveDeck:Random
+Oracle:Flying\nAs long as you control a transformed permanent, Oculus Whelp has "When Oculus Whelp dies, draw a card."

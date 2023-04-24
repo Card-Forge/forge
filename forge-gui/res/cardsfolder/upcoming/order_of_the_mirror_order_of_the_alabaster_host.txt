@@ -1,0 +1,18 @@
+Name:Order of the Mirror
+ManaCost:1 U
+Types:Creature Human Knight
+PT:2/1
+A:AB$ SetState | Cost$ 3 WP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery. ({W/P} can be paid with either {W} or 2 life.)
+AlternateMode:DoubleFaced
+Oracle:{3}{W/P}: Transform Order of the Mirror. Activate only as a sorcery. ({W/P} can be paid with either {W} or 2 life.)
+
+ALTERNATE
+
+Name:Order of the Alabaster Host
+ManaCost:no cost
+Colors:white,blue
+Types:Creature Phyrexian Knight
+PT:3/3
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, that creature gets -1/-1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredBlockerLKICopy | NumAtt$ -1 | NumDef$ -1
+Oracle:Whenever Order of the Alabaster Host becomes blocked by a creature, that creature gets -1/-1 until end of turn.

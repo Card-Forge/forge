@@ -3366,7 +3366,7 @@
 	"name": "Copper Host Brutalizer",
 	"sprite": "sprites/copperhostbrutalizer.atlas",
 	"deck": [
-		"deckscopperhostbrutalizer.json"
+		"decks/copperhostbrutalizer.dck" 
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -4668,13 +4668,19 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "B"
+	"colors": "B",
+	"questTags": [
+		"Phyrexian",
+		"Dross",
+		"Humanoid",
+		"IdentityBlack"
+	]
 },
 {
 	"name": "Dross Grimnarch",
 	"sprite": "sprites/drossgrimnarch.atlas",
 	"deck": [
-		"decks/drossgrimnarch.json"
+		"decks/drossgrimnarch.dck"
 	],
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -4740,7 +4746,15 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BU"
+	"colors": "BU",
+	"questTags": [
+		"Phyrexian",
+		"Dross",
+		"Humanoid",
+		"IdentityBlack",
+		"IdentityBlue",
+		"IdentityDimir"
+	]
 },
 {
 	"name": "Dwarf",
@@ -6101,6 +6115,166 @@
 	]
 },
 {
+	"name": "Furnace Goblin",
+	"sprite": "sprites/furnacegoblin.atlas",
+	"deck": [
+		"decks/furnacegoblin.json"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 50,
+	"life": 16,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "R",
+	"questTags": [
+		"Furnace",
+		"Phyrexian",
+		"Humanoid",
+		"IdentityRed"
+	]
+},
+{
+	"name": "Furnace Tormentor",
+	"sprite": "sprites/furnacetormentor.atlas",
+	"deck": [
+		"decks/furnacetormentor.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 19,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.75,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "RG",
+	"questTags": [
+		"Phyrexian",
+		"Furnace",
+		"Humanoid",
+		"IdentityRed",
+		"IdentityGreen",
+		"IdentityGruul"
+	]
+},
+{
 	"name": "Gargoyle",
 	"sprite": "sprites/gargoyle.atlas",
 	"deck": [
@@ -6640,7 +6814,7 @@
 	"name": "Gitaxian Scientist",
 	"sprite": "sprites/gitaxianscientist.atlas",
 	"deck": [
-		"decks/gitaxianscientist.json"
+		"decks/gitaxianscientist.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -11297,7 +11471,7 @@
 	"name": "Orthodoxy Angel",
 	"sprite": "sprites/phyrexianangel.atlas",
 	"deck": [
-		"decks/phyrexianangel.json"
+		"decks/phyrexianangel.dck"
 	],
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -12267,16 +12441,6 @@
 	"scale": 0.4,
 	"life": 40,
 	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"uncommon"
-			]
-		},
 		{
 			"type": "deckCard",
 			"probability": 1,
