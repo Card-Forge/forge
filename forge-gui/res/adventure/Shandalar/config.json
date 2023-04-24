@@ -84,8 +84,8 @@
       "pileDecks": {
         "W":"decks/starter/pile_white_e.json",
         "B":"decks/starter/pile_black_e.json",
-         "U":"decks/starter/pile_blue_e.json",
-          "R":"decks/starter/pile_red_e.json",
+        "U":"decks/starter/pile_blue_e.json",
+        "R":"decks/starter/pile_red_e.json",
         "G":"decks/starter/pile_green_e.json"
       },
       "startItems": [
@@ -122,8 +122,8 @@
       "pileDecks": {
         "W":"decks/starter/pile_white_n.json",
         "B":"decks/starter/pile_black_n.json",
-         "U":"decks/starter/pile_blue_n.json",
-          "R":"decks/starter/pile_red_n.json",
+        "U":"decks/starter/pile_blue_n.json",
+        "R":"decks/starter/pile_red_n.json",
         "G":"decks/starter/pile_green_n.json"
       },
       "startItems": [
@@ -191,8 +191,8 @@
       "pileDecks": {
         "W":"decks/starter/pile_white_h.json",
         "B":"decks/starter/pile_black_h.json",
-         "U":"decks/starter/pile_blue_h.json",
-          "R":"decks/starter/pile_red_h.json",
+        "U":"decks/starter/pile_blue_h.json",
+        "R":"decks/starter/pile_red_h.json",
         "G":"decks/starter/pile_green_h.json"
       }
     }
@@ -203,6 +203,7 @@
 	"BRO",
 	"J22",
 	"ONE",
+	"MOM",
 	"(All)"
   ],
   "starterEditionNames": [
@@ -211,6 +212,7 @@
 	"Brother's War",
 	"Jumpstart 22",
 	"Phyrexia: ONE",
+	"MOM",
 	"(All)"
 	]
 }

@@ -6,9 +6,230 @@ Type=Expansion
 ScryfallCode=MAT
 
 [cards]
+1 U Coppercoat Vanguard @
+2 R Deification @
+3 U Harnessed Snubhorn @
+4 R Metropolis Reformer @
+5 R Spark Rupture @
+6 R Tazri, Stalward Survivor @
+7 U Filter Out @
+8 U Tolarian Contempt @
+9 R Training Grounds @
+10 R Vesuvan Drifter @
+11 R Ayara's Oathsworn @
+12 U Blot Out @
+13 U Death-Rattle Oni @
+14 U Markov Baron @
+15 R Urborg Scavengers @
+16 R Arni Metalbrow @
+17 U Kolaghan Warmonger @
+18 R Plargg and Nassari @
+19 U Reckless Handling @
+20 U Animist's Might @
+21 R Leyline Immersion @
+22 M Nissa, Resurgent Animist @
+23 R Open the Way @
+24 R Tranquil Frillback @
+25 U Undercity Upheaval @
+26 M Calix, Guided by Fate @
+27 U Campus Renovation @
+28 U Cosmic Rebirth @
+29 R Danitha, New Benalia's Light @
+30 U Feast of the Victorious Dead @
+31 U Gold-Forged Thopteryx @
+32 R Jirina, Dauntless General @
 33 R Jolrael, Voice of Zhalfir @Lorenzo Mastroianni
 34 R The Kenriths' Royal Funeral @Manuel Castañón
+35 M Kiora, Sovereign of the Deep @
+36 M Nahiri, Forged in Fury @
+37 R Nahiri's Resolve @
+38 M Narset, Enlightened Exile @
+39 R Nashi, Moon's Legacy @
+40 R Niv-Mizzet, Supreme @
+41 M Ob Nixilis, Captive Kingping @
+42 R Pia Nalaar, Consul of Revival @
+43 R Rebuild the City @
+44 R Rocco, Street Chef @
+45 M Samut, Vizier of Naktamun @
+46 M Sarkhan, Soul Aflame @
+47 R Sigarda, Font of Blessings @
+48 M Tyvar the Bellicose @
+49 M Karn, Legacy Reforged @
+50 R Drannith Ruins @
+51 U Coppercoat Vanguard @
+52 R Deification @
+53 U Harnessed Snubhorn @
+54 R Metropolis Reformer @
+55 R Spark Rupture @
+56 R Tazri, Stalward Survivor @
+57 U Filter Out @
+58 U Tolarian Contempt @
+59 R Training Grounds @
+60 R Vesuvan Drifter @
+61 R Ayara's Oathsworn @
+62 U Blot Out @
+63 U Death-Rattle Oni @
+64 U Markov Baron @
+65 R Urborg Scavengers @
+66 R Arni Metalbrow @
+67 U Kolaghan Warmonger @
+68 R Plargg and Nassari @
+69 U Reckless Handling @
+70 U Animist's Might @
+71 R Leyline Immersion @
+72 M Nissa, Resurgent Animist @
+73 R Open the Way @
+74 R Tranquil Frillback @
+75 U Undercity Upheaval @
+76 M Calix, Guided by Fate @
+77 U Campus Renovation @
+78 U Cosmic Rebirth @
+79 R Danitha, New Benalia's Light @
+80 U Feast of the Victorious Dead @
+81 U Gold-Forged Thopteryx @
+82 R Jirina, Dauntless General @
 83 R Jolrael, Voice of Zhalfir @Scott M. Fischer
+84 R The Kenriths' Royal Funeral @
+85 M Kiora, Sovereign of the Deep @
+86 M Nahiri, Forged in Fury @
+87 R Nahiri's Resolve @
+88 M Narset, Enlightened Exile @
+89 R Nashi, Moon's Legacy @
+90 R Niv-Mizzet, Supreme @
+91 M Ob Nixilis, Captive Kingping @
+92 R Pia Nalaar, Consul of Revival @
+93 R Rebuild the City @
+94 R Rocco, Street Chef @
+95 M Samut, Vizier of Naktamun @
+96 M Sarkhan, Soul Aflame @
+97 R Sigarda, Font of Blessings @
+98 M Tyvar the Bellicose @
+99 M Karn, Legacy Reforged @
+100 R Drannith Ruins @
+101 U Coppercoat Vanguard @
+102 R Deification @
+103 U Harnessed Snubhorn @
+104 R Metropolis Reformer @
+105 R Spark Rupture @
+106 R Tazri, Stalward Survivor @
+107 U Filter Out @
+108 U Tolarian Contempt @
+109 R Training Grounds @
+110 R Vesuvan Drifter @
+111 R Ayara's Oathsworn @
+112 U Blot Out @
+113 U Death-Rattle Oni @
+114 U Markov Baron @
+115 R Urborg Scavengers @
+116 R Arni Metalbrow @
+117 U Kolaghan Warmonger @
+118 R Plargg and Nassari @
+119 U Reckless Handling @
+120 U Animist's Might @
+121 R Leyline Immersion @
+122 M Nissa, Resurgent Animist @
+123 R Open the Way @
+124 R Tranquil Frillback @
+125 U Undercity Upheaval @
+126 M Calix, Guided by Fate @
+127 U Campus Renovation @
+128 U Cosmic Rebirth @
+129 R Danitha, New Benalia's Light @
+130 U Feast of the Victorious Dead @
+131 U Gold-Forged Thopteryx @
+132 R Jirina, Dauntless General @
 133 R Jolrael, Voice of Zhalfir @Lorenzo Mastroianni
+134 R The Kenriths' Royal Funeral @
+135 M Kiora, Sovereign of the Deep @
+136 M Nahiri, Forged in Fury @
+137 R Nahiri's Resolve @
+138 M Narset, Enlightened Exile @
+139 R Nashi, Moon's Legacy @
+140 R Niv-Mizzet, Supreme @
+141 M Ob Nixilis, Captive Kingping @
+142 R Pia Nalaar, Consul of Revival @
+143 R Rebuild the City @
+144 R Rocco, Street Chef @
+145 M Samut, Vizier of Naktamun @
+146 M Sarkhan, Soul Aflame @
+147 R Sigarda, Font of Blessings @
+148 M Tyvar the Bellicose @
+149 M Karn, Legacy Reforged @
+150 R Drannith Ruins @
+151 R Deification @
+152 R Metropolis Reformer @
+153 R Spark Rupture @
+154 R Tazri, Stalward Survivor @
+155 R Training Grounds @
+156 R Vesuvan Drifter @
+157 R Ayara's Oathsworn @
+158 R Urborg Scavengers @
+159 R Arni Metalbrow @
+160 R Plargg and Nassari @
+161 R Leyline Immersion @
+162 M Nissa, Resurgent Animist @
+163 R Open the Way @
+164 R Tranquil Frillback @
+165 M Calix, Guided by Fate @
+166 R Danitha, New Benalia's Light @
+167 R Jirina, Dauntless General @
 168 R Jolrael, Voice of Zhalfir @Lorenzo Mastroianni
+169 R The Kenriths' Royal Funeral @
+170 M Kiora, Sovereign of the Deep @
+171 M Nahiri, Forged in Fury @
+172 R Nahiri's Resolve @
+173 M Narset, Enlightened Exile @
+174 R Nashi, Moon's Legacy @
+175 R Niv-Mizzet, Supreme @
+176 M Ob Nixilis, Captive Kingping @
+177 R Pia Nalaar, Consul of Revival @
+178 R Rebuild the City @
+179 R Rocco, Street Chef @
+180 M Samut, Vizier of Naktamun @
+181 M Sarkhan, Soul Aflame @
+182 R Sigarda, Font of Blessings @
+183 M Tyvar the Bellicose @
+184 M Karn, Legacy Reforged @
+185 R Drannith Ruins @
+186 U Coppercoat Vanguard @
+187 R Deification @
+188 U Harnessed Snubhorn @
+189 R Metropolis Reformer @
+191 U Filter Out @
+192 U Tolarian Contempt @
+193 R Training Grounds @
+194 R Vesuvan Drifter @
+195 R Ayara's Oathsworn @
+196 U Blot Out @
+197 U Death-Rattle Oni @
+198 U Markov Baron @
+199 R Urborg Scavengers @
+200 R Arni Metalbrow @
+201 U Kolaghan Warmonger @
+202 R Plargg and Nassari @
+203 U Reckless Handling @
+205 U Undercity Upheaval @
+206 M Calix, Guided by Fate @
+207 U Campus Renovation @
+208 U Cosmic Rebirth @
+209 R Danitha, New Benalia's Light @
+210 U Feast of the Victorious Dead @
+211 U Gold-Forged Thopteryx @
+212 R Jirina, Dauntless General @
+213 R The Kenriths' Royal Funeral @
+214 M Kiora, Sovereign of the Deep @
+215 M Nahiri, Forged in Fury @
+216 R Nahiri's Resolve @
+217 M Narset, Enlightened Exile @
+218 R Nashi, Moon's Legacy @
+219 R Niv-Mizzet, Supreme @
+220 M Ob Nixilis, Captive Kingping @
+221 R Pia Nalaar, Consul of Revival @
+222 R Rebuild the City @
+223 R Rocco, Street Chef @
+224 M Samut, Vizier of Naktamun @
+225 M Sarkhan, Soul Aflame @
+226 R Sigarda, Font of Blessings @
+227 M Tyvar the Bellicose @
+228 R Drannith Ruins @
 230 R Jolrael, Voice of Zhalfir @Ernanda Souza
