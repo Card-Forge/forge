@@ -5996,7 +5996,6 @@ Kaya, Ghost Assassin|CN2|2
 1 Mondrak, Glory Dominus|ONE
 1 Phyrexian Vindicator|ONE
 
-
 [MOM Brood 1]
 1 Essence of Orthodoxy
 1 Norn's Inquisitor
