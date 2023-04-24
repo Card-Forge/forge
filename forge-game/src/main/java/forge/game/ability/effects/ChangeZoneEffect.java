@@ -339,7 +339,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final String fromGraveyard = " from the graveyard";
 
         if (destination.equals(ZoneType.Battlefield)) {
-            final boolean attacking = (sa.hasParam("Attacking"));
+            final boolean attacking = sa.hasParam("Attacking");
             if (ZoneType.Graveyard.equals(origin)) {
                 sb.append("Return").append(targetname).append(fromGraveyard).append(" to the battlefield");
             } else {
@@ -565,6 +565,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                 // If a card is moved to library from the stack, remove its spells from the stack
                 if (sa.hasParam("Fizzle")) {
+                    // TODO only AI still targets as card, try to remove it
                     if (gameCard.isInZone(ZoneType.Exile) || gameCard.isInZone(ZoneType.Hand) || gameCard.isInZone(ZoneType.Stack)) {
                         // This only fizzles spells, not anything else.
                         game.getStack().remove(gameCard);
