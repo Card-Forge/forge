@@ -1316,7 +1316,14 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("leastToughness")) {
-            final CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            if (property.contains("ControlledBy")) {
+                FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], spellAbility);
+                cards = CardLists.filterControlledBy(cards, p);
+                if (!cards.contains(card)) {
+                    return false;
+                }
+            }
             for (final Card crd : cards) {
                 if (crd.getNetToughness() < card.getNetToughness()) {
                     return false;
