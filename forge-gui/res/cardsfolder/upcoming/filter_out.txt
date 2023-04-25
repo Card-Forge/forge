@@ -1,0 +1,5 @@
+Name:Filter Out
+ManaCost:1 U U
+Types:Instant
+A:SP$ ChangeZoneAll | ChangeType$ Permanent.nonLand+nonCreature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all noncreature, nonland permanents to their owners' hands.
+Oracle:Return all noncreature, nonland permanents to their owners' hands.
