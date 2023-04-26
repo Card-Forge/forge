@@ -2059,31 +2059,23 @@ public class ComputerUtilCombat {
 
         if (block.size() == 1) {
             final Card blocker = block.getFirst();
+            int dmgToBlocker = dmgCanDeal;
 
-            if (hasTrample) {
-                int dmgToKill = getEnoughDamageToKill(blocker, dmgCanDeal, attacker, true);
+            if (hasTrample && isAttacking) { // otherwise no entity to deliver damage via trample
+                dmgToBlocker = getEnoughDamageToKill(blocker, dmgCanDeal, attacker, true);
 
-                if (dmgCanDeal < dmgToKill) {
-                    dmgToKill = Math.min(blocker.getLethalDamage(), dmgCanDeal);
-                } else {
-                    dmgToKill = Math.max(blocker.getLethalDamage(), dmgToKill);
+                if (dmgCanDeal < dmgToBlocker) {
+                    // can't kill so just put the lowest legal amount
+                    dmgToBlocker = Math.min(blocker.getLethalDamage(), dmgCanDeal);
                 }
 
-                if (!isAttacking) { // no entity to deliver damage via trample
-                    dmgToKill = dmgCanDeal;
-                }
-
-                final int remainingDmg = dmgCanDeal - dmgToKill;
-
+                final int remainingDmg = dmgCanDeal - dmgToBlocker;
                 // If Extra trample damage, assign to defending player/planeswalker (when there is one)
                 if (remainingDmg > 0) {
                     damageMap.put(null, remainingDmg);
                 }
-
-                damageMap.put(blocker, dmgToKill);
-            } else {
-                damageMap.put(blocker, dmgCanDeal);
             }
+            damageMap.put(blocker, dmgToBlocker);
         } // 1 blocker
         else {
             // Does the attacker deal lethal damage to all blockers
