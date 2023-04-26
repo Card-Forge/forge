@@ -3,5 +3,5 @@ ManaCost:1 G
 Types:Creature Snake
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, add one mana of any color.
-SVar:TrigMana:DB$ Mana | Produced$ Any | AILogic$ MostProminentInComputerHand
+SVar:TrigMana:DB$ Mana | Produced$ Any
 Oracle:Landfall — Whenever a land enters the battlefield under your control, add one mana of any color.
