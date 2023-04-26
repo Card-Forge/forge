@@ -146,6 +146,13 @@ public class ForgeScript {
                 }
             }
             return false;
+        } else if (property.equals("hasOtherActivatedAbility")) {
+            for (final SpellAbility sa : cardState.getSpellAbilities()) {
+                if (sa.isActivatedAbility() && !sa.equals(spellAbility)) {
+                    return true;
+                }
+            }
+            return false;
         } else if (property.equals("hasManaAbility")) {
             if (Iterables.any(cardState.getSpellAbilities(), SpellAbilityPredicates.isManaAbility())) {
                 return true;
