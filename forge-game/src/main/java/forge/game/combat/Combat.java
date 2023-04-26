@@ -47,6 +47,8 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
@@ -231,7 +233,11 @@ public class Combat {
     }
 
     public final CardCollection getDefendingPlaneswalkers() {
-        return new CardCollection(Iterables.filter(attackableEntries, Card.class));
+        return CardLists.filter(Iterables.filter(attackableEntries, Card.class), CardPredicates.isType("Planeswalker"));
+    }
+
+    public final CardCollection getDefendingBattles() {
+        return CardLists.filter(Iterables.filter(attackableEntries, Card.class), CardPredicates.isType("Battle"));
     }
 
     public final Map<Card, GameEntity> getAttackersAndDefenders() {
