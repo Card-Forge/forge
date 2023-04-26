@@ -2478,10 +2478,15 @@ public class ComputerUtilCombat {
     public static GameEntity addAttackerToCombat(SpellAbility sa, Card attacker, Iterable<? extends GameEntity> defenders) {
         Combat combat = sa.getHostCard().getGame().getCombat();
         if (combat != null) {
-            // 1. If the card that spawned the attacker was sent at a planeswalker, attack the same. Consider improving.
             GameEntity def = combat.getDefenderByAttacker(sa.getHostCard());
-            if (def instanceof Card && ((Card)def).isPlaneswalker() && Iterables.contains(defenders, def)) {
-                return def;
+            // 1. If the card that spawned the attacker was sent at a card, attack the same. Consider improving.
+            if (def instanceof Card && Iterables.contains(defenders, def)) {
+                if (((Card)def).isPlaneswalker()) {
+                    return def;
+                }
+                if (((Card)def).isBattle()) {
+                    return def;
+                }
             }
             // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.
             for (GameEntity p : defenders) {
