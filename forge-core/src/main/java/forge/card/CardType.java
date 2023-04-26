@@ -912,6 +912,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     public static Collection<String> getAllCreatureTypes() {
         return Collections.unmodifiableCollection(Constant.CREATURE_TYPES);
     }
+    public static Collection<String> getAllWalkerTypes() {
+        return Collections.unmodifiableCollection(Constant.WALKER_TYPES);
+    }
     public static List<String> getAllLandTypes() {
         return ImmutableList.<String>builder()
                 .addAll(getBasicTypes())
