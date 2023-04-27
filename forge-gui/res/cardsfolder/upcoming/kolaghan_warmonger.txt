@@ -1,0 +1,10 @@
+Name:Kolaghan Warmonger
+ManaCost:2 R
+Types:Creature Ogre Warrior
+PT:3/2
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME attacks, look at the top six cards of your library. You may reveal a Dragon card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Card.Dragon | RestRandomOrder$ True
+DeckNeeds:Type$Dragon
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Kolaghan Warmonger attacks, look at the top six cards of your library. You may reveal a Dragon card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
