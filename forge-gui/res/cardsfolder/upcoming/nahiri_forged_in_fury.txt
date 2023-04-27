@@ -13,4 +13,4 @@ SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ C
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Equipment
 DeckNeeds:Type$Equipment
-Oracle:Whenever an equipped creature you control attacks, exile the top card of your library. You may play that card this turn. You may cast Equipment spells this way without paying their mana costs.
+Oracle:Affinity for Equipment\nWhenever an equipped creature you control attacks, exile the top card of your library. You may play that card this turn. You may cast Equipment spells this way without paying their mana costs.
