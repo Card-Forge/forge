@@ -602,6 +602,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         runParams.put(AbilityKey.FirstTime, firstLost);
         game.getTriggerHandler().runTrigger(TriggerType.LifeLost, runParams, false);
 
+        if (damage) {
+            if (game.getAction().lifeLostAllDamageMapContains(this)) {
+                game.getAction().increaseValueLifeLostAllDamageMap(this, lifeLost);
+            } else {
+                game.getAction().addEntryToLifeLostAllDamageMap(this, lifeLost);
+            }
+        }
+
         return lifeLost;
     }
 
@@ -621,13 +629,19 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        loseLife(lifePayment, false, false);
+        final int lost = loseLife(lifePayment, false, false);
         cause.setPaidLife(lifePayment);
 
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.LifeAmount, lifePayment);
         game.getTriggerHandler().runTrigger(TriggerType.PayLife, runParams, false);
+        if (lost > 0) { // Run triggers if player actually lost life
+            final Map<Player, Integer> lossMap = Maps.newHashMap();
+            lossMap.put(this, lost);
+            final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromPIMap(lossMap);
+            game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams2, false);
+        }
 
         return true;
     }
