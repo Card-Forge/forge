@@ -27,7 +27,7 @@ Types:Enchantment Saga
 K:Saga:3:DBDamage,DBToken,DBCastAll
 SVar:DBDamage:DB$ DamageAll | ValidTgts$ Opponent | NumDmg$ 3 | ValidPlayers$ Targeted | ValidCards$ Creature.TargetedPlayerCtrl | ValidDescription$ target opponent and each creature they control. | SpellDescription$ CARDNAME deals 3 damage to target opponent and each creature they control.
 SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_treasure_sac | SpellDescription$ Create three Treasure tokens.
-SVar:DBCastAll:DB$ Effect | ReplacementEffects$ REExileOnResolve | StaticAbilities$ STPlay | AILogic$ YawgmothsWill | AINoRecursiveCheck$ True | SubAbility$ DBExileSelf | SpellDescription$ Until end of turn, you may cast instant and sorcery spells from any graveyard. If a spell cast this way would be put into a graveyard, exile it instead. Exile CARDNAME, then return it to the battlefield (front face up).
+SVar:DBCastAll:DB$ Effect | ReplacementEffects$ REExileOnResolve | StaticAbilities$ STPlay | AILogic$ YawgmothsWill | AINoRecursiveCheck$ True | Ultimate$ True | SubAbility$ DBExileSelf | SpellDescription$ Until end of turn, you may cast instant and sorcery spells from any graveyard. If a spell cast this way would be put into a graveyard, exile it instead. Exile CARDNAME, then return it to the battlefield (front face up).
 SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.Instant,Card.Sorcery | AffectedZone$ Graveyard | MayPlay$ True | Description$ You may play instant and sorcery spells from any graveyard.
 SVar:REExileOnResolve:Event$ Moved | ValidLKI$ Card.CastSa Spell.MayPlaySource | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile
 SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile
