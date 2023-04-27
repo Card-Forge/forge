@@ -4,5 +4,5 @@ Types:Enchantment Aura
 A:SP$ Attach | ValidTgts$ Creature.Legendary | TgtPrompt$ Select target legendary creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ AddMana | AddKeyword$ Ward:2 | Description$ Enchanted creature has ward {2} and "{T}: Add five mana in any combination of colors. Spend this mana only to cast spells."
 SVar:AddMana:AB$ Mana | Cost$ T | Amount$ 5 | Produced$ Combo Any | RestrictValid$ Spell | SpellDescription$ Add five mana in any combination of colors. Spend this mana only to cast spells.
-DeckNeeds:Type$Legendary|Creature
+DeckNeeds:Type$Legendary & Type$Creature
 Oracle:Enchant legendary creature\nEnchanted creature has ward {2} and "{T}: Add five mana in any combination of colors. Spend this mana only to cast spells."
