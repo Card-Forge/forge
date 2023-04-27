@@ -83,6 +83,7 @@ public class HumanPlaySpellAbility {
 
         boolean keywordColor = false;
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
+        boolean refreeze = game.getStack().isFrozen();
         game.getStack().freezeStack();
 
         if (ability.isSpell() && !c.isCopiedSpell()) {
@@ -175,6 +176,9 @@ public class HumanPlaySpellAbility {
                 payment.refundPayment();
             } else {
                 GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c);
+            }
+            if (!refreeze) {
+                game.getStack().unfreezeStack();
             }
 
             if (manaTypeConversion || manaColorConversion || keywordColor) {
