@@ -3180,7 +3180,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
                 // no Ability for this type yet, make a new one
                 if (sa == null) {
-                    sa = CardFactoryUtil.buildBasicLandAbility(state, c);
+                    sa = CardFactory.buildBasicLandAbility(state, c);
                     basicLandAbilities[i] = sa;
                 }
 

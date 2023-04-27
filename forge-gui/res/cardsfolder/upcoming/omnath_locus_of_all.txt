@@ -4,11 +4,11 @@ Types:Legendary Creature Phyrexian Elemental
 PT:4/4
 R:Event$ LoseMana | ValidPlayer$ You | ReplacementResult$ Replaced | ReplaceWith$ ConvertMana | ActiveZones$ Battlefield | Description$ If you would lose unspent mana, that mana becomes black instead.
 SVar:ConvertMana:DB$ ReplaceMana | ReplaceType$ Black
-T:Mode$ Phase | ValidPlayer$ You | Phase$ Main1 | TriggerZones$ Battlefield | Execute$ TrigPeek | TriggerDescription$ At the beginning of your precombat main phase, look at the top card of your library. You may reveal that card if it has three or more colored mana symbols in its mana cost. If you do, add three mana in any combination of colors and put it into your hand. If you don't reveal it, put it into your hand.
+T:Mode$ Phase | ValidPlayer$ You | Phase$ Main1 | TriggerZones$ Battlefield | Execute$ TrigPeek | TriggerDescription$ At the beginning of your precombat main phase, look at the top card of your library. You may reveal that card if it has three or more colored mana symbols in its mana cost. If you do, add three mana in any combination of its colors and put it into your hand. If you don't reveal it, put it into your hand.
 SVar:TrigPeek:DB$ PeekAndReveal | Defined$ You | NoReveal$ True | RememberPeeked$ True | SubAbility$ DBReveal
 SVar:DBReveal:DB$ PeekAndReveal | Defined$ You | NoPeek$ True | RevealOptional$ True | ImprintRevealed$ True | ConditionCheckSVar$ ColorAmount | ConditionSVarCompare$ GE3 | SubAbility$ DBMana
-SVar:DBMana:DB$ Mana | Produced$ Combo Any | Amount$ 3 | ConditionDefined$ Imprinted | ConditionPresent$ Card | SubAbility$ DBMove
+SVar:DBMana:DB$ ManaReflected | Produced$ Combo | ReflectProperty$ Is | ColorOrType$ Color | Amount$ 3 | Valid$ Defined.Imprinted | ConditionDefined$ Imprinted | ConditionPresent$ Card | SubAbility$ DBMove
 SVar:DBMove:DB$ ChangeZone | Origin$ Library | Destination$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:ColorAmount:Remembered$ChromaSource
-Oracle:If you would lose unspent mana, that mana becomes black instead.\nAt the beginning of your precombat main phase, look at the top card of your library. You may reveal that card if it has three or more colored mana symbols in its mana cost. If you do, add three mana in any combination of colors and put it into your hand. If you don't reveal it, put it into your hand.
+Oracle:If you would lose unspent mana, that mana becomes black instead.\nAt the beginning of your precombat main phase, look at the top card of your library. You may reveal that card if it has three or more colored mana symbols in its mana cost. If you do, add three mana in any combination of its colors and put it into your hand. If you don't reveal it, put it into your hand.

@@ -380,6 +380,15 @@ public class CardFactory {
         }
     }
 
+    public static SpellAbility buildBasicLandAbility(final CardState state, byte color) {
+        String strcolor = MagicColor.toShortString(color);
+        String abString  = "AB$ Mana | Cost$ T | Produced$ " + strcolor +
+                " | Secondary$ True | SpellDescription$ Add {" + strcolor + "}.";
+        SpellAbility sa = AbilityFactory.getAbility(abString, state);
+        sa.setIntrinsic(true); // always intrisic
+        return sa;
+    }
+
     private static Card readCard(final CardRules rules, final IPaperCard paperCard, int cardId, Game game) {
         final Card card = new Card(cardId, paperCard, game);
 
