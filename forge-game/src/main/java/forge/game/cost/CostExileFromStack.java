@@ -87,7 +87,7 @@ public class CostExileFromStack extends CostPart {
             return true; // this will always work
         }
 
-        CardCollectionView list = payer.getCardsIn(ZoneType.Stack);
+        CardCollectionView list = source.getGame().getCardsIn(ZoneType.Stack);
 
         list = CardLists.getValidCards(list, type.split(";"), payer, source, ability);
 
