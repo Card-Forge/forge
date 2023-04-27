@@ -11,7 +11,7 @@ ScryfallCode=MAT
 3 U Harnessed Snubhorn @
 4 R Metropolis Reformer @
 5 R Spark Rupture @
-6 R Tazri, Stalward Survivor @
+6 R Tazri, Stalwart Survivor @
 7 U Filter Out @
 8 U Tolarian Contempt @
 9 R Training Grounds @
@@ -61,7 +61,7 @@ ScryfallCode=MAT
 53 U Harnessed Snubhorn @
 54 R Metropolis Reformer @
 55 R Spark Rupture @
-56 R Tazri, Stalward Survivor @
+56 R Tazri, Stalwart Survivor @
 57 U Filter Out @
 58 U Tolarian Contempt @
 59 R Training Grounds @
@@ -111,7 +111,7 @@ ScryfallCode=MAT
 103 U Harnessed Snubhorn @
 104 R Metropolis Reformer @
 105 R Spark Rupture @
-106 R Tazri, Stalward Survivor @
+106 R Tazri, Stalwart Survivor @
 107 U Filter Out @
 108 U Tolarian Contempt @
 109 R Training Grounds @
@@ -159,7 +159,7 @@ ScryfallCode=MAT
 151 R Deification @
 152 R Metropolis Reformer @
 153 R Spark Rupture @
-154 R Tazri, Stalward Survivor @
+154 R Tazri, Stalwart Survivor @
 155 R Training Grounds @
 156 R Vesuvan Drifter @
 157 R Ayara's Oathsworn @
