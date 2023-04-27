@@ -30,6 +30,7 @@ import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardPlayOption;
@@ -82,6 +83,7 @@ public class HumanPlaySpellAbility {
 
         boolean keywordColor = false;
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
+        boolean refreeze = game.getStack().isFrozen();
         game.getStack().freezeStack();
 
         if (ability.isSpell() && !c.isCopiedSpell()) {
@@ -175,6 +177,9 @@ public class HumanPlaySpellAbility {
             } else {
                 GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c);
             }
+            if (!refreeze) {
+                game.getStack().unfreezeStack();
+            }
 
             if (manaTypeConversion || manaColorConversion || keywordColor) {
                 manapool.restoreColorReplacements();
@@ -192,8 +197,10 @@ public class HumanPlaySpellAbility {
 
             if (skipStack) {
                 AbilityUtils.resolve(ability);
-                // Should unfreeze stack
-                game.getStack().unfreezeStack();
+                // Should unfreeze stack (but if it was a RE with a cause better to let it be handled by that)
+                if (!ability.isReplacementAbility() || ability.getRootAbility().getReplacingObject(AbilityKey.Cause) == null) {
+                    game.getStack().unfreezeStack();
+                }
             } else {
                 ensureAbilityHasDescription(ability);
                 game.getStack().addAndUnfreeze(ability);

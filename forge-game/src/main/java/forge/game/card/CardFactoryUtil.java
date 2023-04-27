@@ -89,15 +89,6 @@ import io.sentry.Sentry;
  */
 public class CardFactoryUtil {
 
-    public static SpellAbility buildBasicLandAbility(final CardState state, byte color) {
-        String strcolor = MagicColor.toShortString(color);
-        String abString  = "AB$ Mana | Cost$ T | Produced$ " + strcolor +
-                " | Secondary$ True | SpellDescription$ Add {" + strcolor + "}.";
-        SpellAbility sa = AbilityFactory.getAbility(abString, state);
-        sa.setIntrinsic(true); // always intrisic
-        return sa;
-    }
-
     /**
      * <p>
      * abilityMorphDown.
@@ -3932,7 +3923,7 @@ public class CardFactoryUtil {
         StringBuilder chooseSB = new StringBuilder();
         chooseSB.append("Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated");
         chooseSB.append(" | Description$ (As a Siege enters the battlefield, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)");
-        String chooseProtector = "DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | Protect$ True | ChoiceTitle$ Choose an opponent to protect this battle | AILogic$ Curse";
+        String chooseProtector = "DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | Protect$ True | ChoiceTitle$ Choose an opponent to protect this battle";
 
         ReplacementEffect re = ReplacementHandler.parseReplacement(chooseSB.toString(), card, true);
         re.setOverridingAbility(AbilityFactory.getAbility(chooseProtector, card));

@@ -1,0 +1,11 @@
+Name:Arni Metalbrow
+ManaCost:2 R
+Types:Legendary Creature Human Berserker
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+attacking | Execute$ TrigChangeZoneBis | TriggerDescription$ Whenever a creature you control attacks or a creature enters the battlefield under your control attacking, you may pay {1}{R}. If you do, you may put a creature card with mana value less than that creature's mana value from your hand onto the battlefield tapped and attacking.
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Execute$ TrigChangeZone | Secondary$ True | TriggerDescription$ Whenever a creature you control attacks or a creature enters the battlefield under your control attacking, you may pay {1}{R}. If you do, you may put a creature card with mana value less than that creature's mana value from your hand onto the battlefield tapped and attacking.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 1 R | Origin$ Hand | ChangeNum$ 1 | Destination$ Battlefield | ChangeType$ Creature.cmcLTX+YouCtrl | ChangeNum$ 1 | Tapped$ True | Attacking$ True
+SVar:TrigChangeZoneBis:AB$ ChangeZone | Cost$ 1 R | Origin$ Hand | ChangeNum$ 1 | Destination$ Battlefield | ChangeType$ Creature.cmcLTY+YouCtrl | ChangeNum$ 1 | Tapped$ True | Attacking$ True
+SVar:X:TriggeredAttacker$CardManaCost
+SVar:Y:TriggeredCard$CardManaCost
+Oracle:Whenever a creature you control attacks or a creature enters the battlefield under your control attacking, you may pay {1}{R}. If you do, you may put a creature card with mana value less than that creature's mana value from your hand onto the battlefield tapped and attacking.

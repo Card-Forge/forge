@@ -1760,12 +1760,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
     }
 
     @Override
-    protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
+    protected GameEntity chooseSingleAttackableEntity(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
         if (params != null && params.containsKey("Attacker")) {
             return ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), options);
         }
         // should not be reached
-        return super.chooseSinglePlayerOrPlaneswalker(ai, sa, options, params);
+        return super.chooseSingleAttackableEntity(ai, sa, options, params);
     }
 
     private boolean doSacAndReturnFromGraveLogic(final Player ai, final SpellAbility sa) {

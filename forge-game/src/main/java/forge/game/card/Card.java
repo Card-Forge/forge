@@ -1541,8 +1541,28 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     @Override
     public final void subtractCounter(final CounterType counterName, final int n) {
+        subtractCounter(counterName, n, false);
+    }
+
+    public final void subtractCounter(final CounterType counterName, final int n, final boolean isDamage) {
         int oldValue = getCounters(counterName);
         int newValue = Math.max(oldValue - n, 0);
+
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.CounterType, counterName);
+        repParams.put(AbilityKey.Result, newValue);
+        repParams.put(AbilityKey.IsDamage, isDamage);
+        switch (getGame().getReplacementHandler().run(ReplacementType.RemoveCounter, repParams)) {
+            case NotReplaced:
+                break;
+            case Updated:
+                int result = (int) repParams.get(AbilityKey.Result);
+                newValue = result;
+                if (newValue <= 0) {
+                    newValue = 0;
+                }
+                break;
+        }
 
         final int delta = oldValue - newValue;
         if (delta == 0) { return; }
@@ -3160,7 +3180,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
                 // no Ability for this type yet, make a new one
                 if (sa == null) {
-                    sa = CardFactoryUtil.buildBasicLandAbility(state, c);
+                    sa = CardFactory.buildBasicLandAbility(state, c);
                     basicLandAbilities[i] = sa;
                 }
 
@@ -5794,10 +5814,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         DamageType damageType = DamageType.Normal;
         if (isPlaneswalker()) { // 120.3c
-            subtractCounter(CounterType.get(CounterEnumType.LOYALTY), damageIn);
+            subtractCounter(CounterType.get(CounterEnumType.LOYALTY), damageIn, true);
         }
         if (isBattle()) {
-            subtractCounter(CounterType.get(CounterEnumType.DEFENSE), damageIn);
+            subtractCounter(CounterType.get(CounterEnumType.DEFENSE), damageIn, true);
         }
         if (isCreature()) {
             boolean wither = game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.alwaysWither)
