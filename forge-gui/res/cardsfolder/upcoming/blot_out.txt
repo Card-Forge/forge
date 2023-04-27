@@ -1,0 +1,7 @@
+Name:Blot Out
+ManaCost:2 B
+Types:Instant
+A:SP$ ChooseCard | ValidTgts$ Opponent | Choices$ Creature.TargetedPlayerCtrl+cmcEQX,Planeswalker.TargetedPlayerCtrl+cmcEQX | ChoiceTitle$ Choose a creature or planeswalker with the highest mana value to sacrifice | Mandatory$ True | SubAbility$ DBExile | SpellDescription$ Target opponent exiles a creature or planeswalker they control with the greatest mana value among creatures and planeswalkers they control.
+SVar:DBExile:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Exile
+SVar:X:Count$Valid Creature.TargetedPlayerCtrl,Planeswalker.TargetedCtrl$GreatestCMC
+Oracle:Target opponent exiles a creature or planeswalker they control with the greatest mana value among creatures and planeswalkers they control.

@@ -1,0 +1,9 @@
+Name:Animist's Might
+ManaCost:2 G
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | ValidTarget$ Creature.Legendary+YouCtrl | EffectZone$ All | Description$ This spell costs {2} less to cast if it targets a legendary creature you control.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ BloodDamage | SpellDescription$ Target creature you control deals damage equal to twice its power to target creature or planeswalker you don't control.
+SVar:BloodDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | AILogic$ PowerDmg | NumDmg$ X | DamageSource$ ParentTarget
+SVar:X:ParentTargeted$CardPower/Times.2
+DeckHints:Type$Legendary
+Oracle:This spell costs {2} less to cast if it targets a legendary creature you control.\nTarget creature you control deals damage equal to twice its power to target creature or planeswalker you don't control.
