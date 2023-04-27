@@ -3,8 +3,8 @@ ManaCost:no cost
 Types:Phenomenon
 T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When you encounter CARDNAME, reveal cards from the top of your planar deck until you reveal five plane cards. Put a plane card from among them on top of your planar deck, then put the rest of the revealed cards on the bottom in a random order. (Then planeswalk away from this phenomenon.)
 SVar:TrigDig:DB$ DigUntil | Amount$ 5 | Valid$ Plane | DigZone$ PlanarDeck | ImprintFound$ True | RememberRevealed$ True | FoundDestination$ PlanarDeck | RevealedDestination$ PlanarDeck | SubAbility$ DBPutOnTop
-SVar:PutOnTop:DB$ ChangeZone | ChangeType$ Card.IsImprinted | Origin$ PlanarDeck | Destination$ PlanarDeck | LibraryPosition$ 0 | ForgetChanged$ True | SubAbility$ DBRestOnBottom
-SVar:RestOnBottom:DB$ ChangeZone | Defined$ Remembered | Origin$ PlanarDeck | Destination$ PlanarDeck | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ Replaneswalk
+SVar:DBPutOnTop:DB$ ChangeZone | ChangeType$ Card.IsImprinted | Origin$ PlanarDeck | Destination$ PlanarDeck | LibraryPosition$ 0 | ForgetChanged$ True | SubAbility$ DBRestOnBottom
+SVar:DBRestOnBottom:DB$ ChangeZone | Defined$ Remembered | Origin$ PlanarDeck | Destination$ PlanarDeck | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ Replaneswalk
 SVar:Replaneswalk:DB$ Planeswalk | Cost$ 0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 Oracle:When you encounter Interplanar Tunnel, reveal cards from the top of your planar deck until you reveal five plane cards. Put a plane card from among them on top of your planar deck, then put the rest of the revealed cards on the bottom in a random order. (Then planeswalk away from this phenomenon.)
