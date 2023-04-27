@@ -287,7 +287,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         final Player activationPlayer = sa.getActivatingPlayer();
         int excess = 0;
         int dmgToTarget = 0;
-        if (sa.hasParam("ExcessDamage") || sa.hasParam("ExcessSVar")) {
+        if (sa.hasParam("ExcessDamage")) {
             int lethal = c.getExcessDamageValue(sourceLKI.hasKeyword(Keyword.DEATHTOUCH));
             dmgToTarget = Math.min(lethal, dmg);
             excess = dmg - dmgToTarget;
@@ -307,11 +307,12 @@ public class DamageDealEffect extends DamageBaseEffect {
                 if (!list.isEmpty()) {
                     damageMap.put(sourceLKI, list.get(0), excess);
                 }
+
+                if (sa.hasParam("RememberRedirectedExcess")) {
+                    hostCard.addRemembered(excess);
+                }
             } else {
                 damageMap.put(sourceLKI, c, dmg);
-            }
-            if (sa.hasParam("ExcessSVar")) {
-                sa.setSVar(sa.getParam("ExcessSVar"), Integer.toString(excess));
             }
         }
     }
