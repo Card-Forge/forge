@@ -1,0 +1,10 @@
+Name:Plargg and Nassari
+ManaCost:3 R R
+Types:Legendary Creature Orc Efreet
+PT:5/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDigUntil | TriggerDescription$ At the beginning of your upkeep, each player exiles cards from the top of their library until they exile a nonland card. An opponent choses a nonland card exiled this way. You may cast up to two spells from among the other cards exiled this way without paying their mana costs.
+SVar:TrigDigUntil:DB$ DigUntil | Defined$ Opponent | Valid$ Card.nonLand | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ OppPickOne | StackDescription$ SpellDescription 
+SVar:OppPickOne:DB$ ChooseCard | ValidTgts$ Opponent | Amount$ 1 | Mandatory$ True | ChoiceTitle$ Choose a nonland card among the cards exiled (that can't be played) | Choices$ Card.IsRemembered+nonLand | ChoiceZone$ Exile | ImprintChosen$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Remembered+!Imprinted | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | Amount$ 2 | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+Oracle:At the beginning of your upkeep, each player exiles cards from the top of their library until they exile a nonland card. An opponent choses a nonland card exiled this way. You may cast up to two spells from among the other cards exiled this way without paying their mana costs.
