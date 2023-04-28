@@ -632,8 +632,8 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions) {
-        return SOptionPane.showInputDialog(message, title, icon, initialInput, inputOptions);
+    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions, boolean isNumeric) {
+        return SOptionPane.showInputDialog(message, title, icon, initialInput, inputOptions, isNumeric);
     }
 
     @Override
