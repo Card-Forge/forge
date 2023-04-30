@@ -255,8 +255,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             if (sp.isActivatedAbility()) {
                 game.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams, true);
             }
-
             AbilityUtils.resolve(sp);
+            game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams, false);
             game.getGameLog().add(GameLogEntryType.MANA, source + " - " + sp.getDescription());
             sp.resetOnceResolved();
             return;
@@ -538,7 +538,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         } else if (sa.getApi() != null) {
             AbilityUtils.handleRemembering(sa);
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
-            runParams.put(AbilityKey.SpellAbility, sa);
+            runParams.put(AbilityKey.CastSA, sa);
             game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams, false);
             AbilityUtils.resolve(sa);
         } else {
