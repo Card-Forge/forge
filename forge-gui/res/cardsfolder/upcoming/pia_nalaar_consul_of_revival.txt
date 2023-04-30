@@ -1,0 +1,11 @@
+Name:Pia Nalaar, Consul of Revival
+ManaCost:R W
+Types:Legendary Creature Human Artificer
+PT:2/3
+S:Mode$ Continuous | Affected$ Thopter.YouCtrl | AddKeyword$ Haste | Description$ Thopters you control have haste.
+T:Mode$ SpellCast | ValidCard$ Card.wasCastFromExile | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you play a land from exile or cast a spell from exile, create a 1/1 colorless Thopter artifact creature token with flying.
+T:Mode$ LandPlayed | Origin$ Exile | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever you play a land from exile or cast a spell from exile, create a 1/1 colorless Thopter artifact creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You
+DeckHints:Keyword$Cascade & Type$Thopter
+DeckHas:Ability$Token & Type$Thopter
+Oracle:Thopters you control have haste.\nWhenever you play a land from exile or cast a spell from exile, create a 1/1 colorless Thopter artifact creature token with flying.

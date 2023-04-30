@@ -12445,16 +12445,6 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"uncommon"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
 			"rarity": [
 				"rare"
 			],

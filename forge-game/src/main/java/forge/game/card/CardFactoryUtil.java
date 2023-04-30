@@ -89,15 +89,6 @@ import io.sentry.Sentry;
  */
 public class CardFactoryUtil {
 
-    public static SpellAbility buildBasicLandAbility(final CardState state, byte color) {
-        String strcolor = MagicColor.toShortString(color);
-        String abString  = "AB$ Mana | Cost$ T | Produced$ " + strcolor +
-                " | Secondary$ True | SpellDescription$ Add {" + strcolor + "}.";
-        SpellAbility sa = AbilityFactory.getAbility(abString, state);
-        sa.setIntrinsic(true); // always intrisic
-        return sa;
-    }
-
     /**
      * <p>
      * abilityMorphDown.
@@ -1318,8 +1309,8 @@ public class CardFactoryUtil {
 
             // Second, create the trigger that runs when the haunted creature dies
             final StringBuilder sbDies = new StringBuilder();
-            sbDies.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Exile |");
-            sbDies.append("ValidCard$ Creature.HauntedBy | Execute$ ").append(hauntSVarName);
+            sbDies.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Exile");
+            sbDies.append(" | ValidCard$ Creature.HauntedBy | Execute$ ").append(hauntSVarName);
             sbDies.append(" | TriggerDescription$ ").append(hauntDescription);
 
             final Trigger hauntedDies = TriggerHandler.parseTrigger(sbDies.toString(), card, intrinsic);
@@ -1369,7 +1360,7 @@ public class CardFactoryUtil {
             // First, create trigger that runs when the haunter goes to the graveyard
             final StringBuilder sbHaunter = new StringBuilder();
             sbHaunter.append("Mode$ ChangesZone | Origin$ ");
-            sbHaunter.append(card.isCreature() ? "Battlefield" : "Stack | ResolvedCard$ True");
+            sbHaunter.append(card.isCreature() ? "Battlefield" : "Stack | Fizzle$ False");
             sbHaunter.append(" | Destination$ Graveyard | ValidCard$ Card.Self");
             sbHaunter.append(" | Secondary$ True | TriggerDescription$ Haunt (").append(inst.getReminderText()).append(")");
 
@@ -3932,7 +3923,7 @@ public class CardFactoryUtil {
         StringBuilder chooseSB = new StringBuilder();
         chooseSB.append("Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated");
         chooseSB.append(" | Description$ (As a Siege enters the battlefield, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)");
-        String chooseProtector = "DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | Protect$ True | ChoiceTitle$ Choose an opponent to protect this battle | AILogic$ Curse";
+        String chooseProtector = "DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | Protect$ True | ChoiceTitle$ Choose an opponent to protect this battle";
 
         ReplacementEffect re = ReplacementHandler.parseReplacement(chooseSB.toString(), card, true);
         re.setOverridingAbility(AbilityFactory.getAbility(chooseProtector, card));

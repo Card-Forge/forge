@@ -89,7 +89,7 @@ public class RegenerateAi extends SpellAbilityAi {
             // filter AIs battlefield by what I can target
             List<Card> targetables = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
 
-            if (targetables.size() == 0) {
+            if (targetables.isEmpty()) {
                 return false;
             }
 
@@ -153,11 +153,11 @@ public class RegenerateAi extends SpellAbilityAi {
         CardCollectionView targetables = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
         final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);
 
-        if (targetables.size() == 0) {
+        if (targetables.isEmpty()) {
             return false;
         }
 
-        if (!mandatory && compTargetables.size() == 0) {
+        if (!mandatory && compTargetables.isEmpty()) {
             return false;
         }
 

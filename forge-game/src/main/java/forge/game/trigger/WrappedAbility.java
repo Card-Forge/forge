@@ -64,6 +64,7 @@ public class WrappedAbility extends Ability {
             ApiType.SetState,
             ApiType.Play,
             ApiType.SacrificeAll,
+            ApiType.Pump,
 
             ApiType.DelayedTrigger
             );

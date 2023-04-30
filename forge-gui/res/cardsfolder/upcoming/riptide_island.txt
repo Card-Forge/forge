@@ -1,0 +1,12 @@
+Name:Riptide Island
+ManaCost:no cost
+Types:Plane Dominaria
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, create two 1/1 colorless Sliver creature tokens.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, create two 1/1 colorless Sliver creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_sliver | TokenOwner$ You
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, Slivers you control gain haste and get +X/+X until end of turn, where X is the number of Slivers you control.
+SVar:RolledChaos:DB$ PumpAll | ValidCards$ Sliver.YouCtrl | NumAtt$ +X | NumDef$ +X | KW$ Haste
+SVar:X:Count$Valid Sliver.YouCtrl
+DeckHas:Ability$Token & Type$Sliver
+DeckHints:Type$Sliver
+Oracle:When you planeswalk to Riptide Island and at the beginning of your upkeep, create two 1/1 colorless Sliver creature tokens.\nWhenever chaos ensues, Slivers you control gain haste and get +X/+X until end of turn, where X is the number of Slivers you control.

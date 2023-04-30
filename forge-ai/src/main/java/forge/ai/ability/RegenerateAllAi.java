@@ -32,7 +32,7 @@ public class RegenerateAllAi extends SpellAbilityAi {
         list = CardLists.getValidCards(list, valid, hostCard.getController(), hostCard, sa);
         list = CardLists.filter(list, CardPredicates.isController(ai));
 
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             return false;
         }
 

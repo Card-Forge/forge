@@ -64,8 +64,7 @@ public class CounterAi extends SpellAbilityAi {
 
         if (sa.usesTargeting()) {
             final SpellAbility topSA = ComputerUtilAbility.getTopSpellAbilityOnStack(game, sa);
-            if ((topSA.isSpell() && !CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa)) || topSA.getActivatingPlayer() == ai
-                    || ai.getAllies().contains(topSA.getActivatingPlayer())) {
+            if ((topSA.isSpell() && !CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa)) || ai.getYourTeam().contains(topSA.getActivatingPlayer())) {
                 // might as well check for player's friendliness
                 return false;
             } else if (sa.hasParam("ConditionWouldDestroy") && !CounterEffect.checkForConditionWouldDestroy(sa, topSA)) {

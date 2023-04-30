@@ -1,0 +1,12 @@
+Name:Tazri, Stalwart Survivor
+ManaCost:2 W
+Types:Legendary Creature Human Warrior
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddAbility$ Mana | Description$ Each creature you control has "{T}: Add one mana of any of this creature's colors. Spend this mana only to activate an ability of a creature. Activate only if this creature has another activated ability."
+SVar:Mana:AB$ ManaReflected | Cost$ T | Valid$ Defined.Self | ColorOrType$ Color | ReflectProperty$ Is | RestrictValid$ Activated.Creature+inZoneBattlefield | IsPresent$ Card.Self+hasOtherActivatedAbility | SpellDescription$ Add one mana of any of this creature's colors. Spend this mana only to activate an ability of a creature. Activate only if this creature has another activated ability.
+A:AB$ Mill | Cost$ W U B R G | NumCards$ 5 | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill five cards.
+SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Creature.IsRemembered+hasNonManaActivatedAbility | Origin$ Graveyard,Exile | Destination$ Hand | SubAbility$ DBCleanup | SpellDescription$ Put all creature cards with activated abilities that aren't mana abilities from among the milled cards into your hand.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Mill
+AI:RemoveDeck:Random
+Oracle:Each creature you control has "{T}: Add one mana of any of this creature's colors. Spend this mana only to activate an ability of a creature. Activate only if this creature has another activated ability."\n{W}{U}{B}{R}{G}: Mill five cards. Put all creature cards with activated abilities that aren't mana abilities from among the milled cards into your hand.

@@ -1448,7 +1448,9 @@ public class GameAction {
             if (game.getCombat() != null) {
                 game.getCombat().removeAbsentCombatants();
             }
+
             table.triggerChangesZoneAll(game, null);
+
             if (!checkAgain) {
                 break; // do not continue the loop
             }
@@ -2440,7 +2442,7 @@ public class GameAction {
         }
 
         // for Zangief do this before runWaitingTriggers DamageDone
-        damageMap.triggerExcessDamage(isCombat, lethalDamage, game, lkiCache);
+        damageMap.triggerExcessDamage(isCombat, lethalDamage, game, cause, lkiCache);
 
         // lose life simultaneously
         if (isCombat) {

@@ -722,6 +722,11 @@ public class AiAttackController {
             return pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);
         }
 
+        List<Card> battleDefending = c.getDefendingBattles();
+        if (!battleDefending.isEmpty()) {
+            // TODO filter for team ones
+        }
+
         return prefDefender;
     }
 

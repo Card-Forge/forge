@@ -5995,3 +5995,228 @@ Kaya, Ghost Assassin|CN2|2
 1 Elesh Norn, Mother of Machines|ONE
 1 Mondrak, Glory Dominus|ONE
 1 Phyrexian Vindicator|ONE
+
+[MOM Brood 1]
+1 Essence of Orthodoxy
+1 Norn's Inquisitor
+1 Phyrexian Pegasus
+1 Alabaster Host Sanctifier
+1 Infected Defector
+1 Alabaster Host Intercessor
+1 Seedpod Caretaker
+1 Tiller of Flesh
+1 Sunder the Gateway
+1 Angelic Intervention
+1 Cut Short
+8 Plains
+
+[MOM Brood 2]
+1 Essence of Orthodoxy
+1 Phyrexian Pegasus
+1 Seedpod Caretaker
+1 Norn's Inquisitor
+1 Alabaster Host Sanctifier
+1 Infected Defector
+1 Alabaster Host Intercessor
+1 Tiller of Flesh
+1 Aerial Boost
+1 Inspired Charge
+1 Seal from Existence
+8 Plains
+
+[MOM Overachiever 1]
+1 Zephyr Winder
+1 Expedition Lookout
+1 Preening Champion
+1 Thunderhead Squadron
+1 Tidal Terror
+1 Referee Squad
+1 Oracle of Tragedy
+1 Interdisciplinary Mascot
+1 Temporal Cleansing
+1 Ephara's Dispersal
+1 Meeting of Minds
+8 Island
+
+[MOM Overachiever 2]
+1 Zephyr Winder
+1 Expedition Lookout
+1 Xerex Strobe-Knight
+1 Thunderhead Squadron
+1 Tidal Terror
+1 Referee Squad
+1 Oracle of Tragedy
+1 Interdisciplinary Mascot
+1 Ephara's Dispersal
+1 Wicked Slumber
+1 Astral Wingspan
+8 Island
+
+[MOM Expendable 1]
+1 Terror of Towashi|MOM
+1 Seer of Stolen Sight|MOM
+1 Injector Crocodile|MOM
+1 Dreg Recycler|MOM
+1 Etched Familiar|MOM
+1 Ichor Shade|MOM
+1 Scorn-Blade Berserker|MOM
+1 Final Flourish|MOM
+1 Unseal the Necropolis|MOM
+1 Deadly Derision|MOM
+1 Gift of Compleation|MOM
+8 Swamp|MOM
+
+[MOM Expendable 2]
+1 Terror of Towashi|MOM
+1 Injector Crocodile|MOM
+1 Seer of Stolen Sight|MOM
+1 Dreg Recycler|MOM
+1 Etched Familiar|MOM
+1 Scorn-Blade Berserker|MOM
+1 Compleated Huntmaster|MOM
+1 Corrupted Conviction|MOM
+1 Deadly Derision|MOM
+1 Failed Conversion|MOM
+1 Gift of Compleation|MOM
+8 Swamp|MOM
+
+[MOM Reinforcement 1]
+1 Orthion, Hero of Lavabrink|MOM
+1 Axgard Artisan|MOM
+1 Cragsmasher Yeti|MOM
+1 Fearless Skald|MOM
+1 Karsus Depthguard|MOM
+1 Hangar Scrounger|MOM
+1 Redcap Heelslasher|MOM
+1 Ral's Reinforcements|MOM
+1 Coming In Hot|MOM
+1 Volcanic Spite|MOM
+8 Mountain|MOM
+
+[MOM Reinforcement 2]
+1 Orthion, Hero of Lavabrink|MOM
+1 Axgard Artisan|MOM
+1 Cragsmasher Yeti|MOM
+1 Trailblazing Historian|MOM
+1 Karsus Depthguard|MOM
+1 Hangar Scrounger|MOM
+1 Redcap Heelslasher|MOM
+1 Fearless Skald|MOM
+1 Mirran Banesplitter|MOM
+1 Volcanic Spite|MOM
+1 Shatter the Source|MOM
+8 Mountain|MOM
+
+[MOM Buff 1]
+1 Surrak and Goreclaw|MOM
+1 Fairgrounds Trumpeter|MOM
+1 Ruins Recluse|MOM
+1 Placid Rottentail|MOM
+1 Wary Thespian|MOM
+1 Converter Beast|MOM
+1 Timberland Ancient|MOM
+1 Kami of Whispered Hopes|MOM
+1 Arachnoid Adaptation|MOM
+1 Cosmic Hunger|MOM
+1 Fertilid's Favor|MOM
+8 Forest
+
+[MOM Buff 2]
+1 Surrak and Goreclaw|MOM
+1 Fairgrounds Trumpeter|MOM
+1 Placid Rottentail|MOM
+1 Wary Thespian|MOM
+1 Converter Beast|MOM
+1 Timberland Ancient|MOM
+1 Ruins Recluse|MOM
+1 Kami of Whispered Hopes|MOM
+1 Arachnoid Adaptation|MOM
+1 Tandem Takedown|MOM
+1 Blighted Burgeoning|MOM
+8 Forest|MOM
+
+[MOM Black Inserts]
+1 Archpriest of Shadows|MOM
+1 Ayara, Widow of the Realm|MOM
+1 Bloated Processor|MOM
+1 Breach the Multiverse|MOM
+1 Grafted Butcher|MOM
+1 Hoarding Broodlord|MOM
+1 Invasion of Fiora|MOM
+1 Pile On|MOM
+1 Realmbreaker, the Invasion Tree|MOM
+1 Terror of Towashi|MOM
+1 Invasion of Innistrad|MOM
+1 Invasion of Ravnica|MOM
+1 Sheoldred|MOM
+1 Sword of Once and Future|MOM
+
+[MOM Blue Inserts]
+1 Chrome Host Seedshark|MOM
+1 Complete the Circuit|MOM
+1 Faerie Mastermind|MOM
+1 Interdisciplinary Mascot|MOM
+1 Invasion of Arcavios|MOM
+1 Invasion of Segovia|MOM
+1 Realmbreaker, the Invasion Tree|MOM
+1 Rona, Herald of Invasion|MOM
+1 See Double|MOM
+1 Transcendent Message|MOM
+1 Zephyr Singer|MOM
+1 Invasion of Ravnica|MOM
+1 Jin-Gitaxias|MOM
+1 Sword of Once and Future|MOM
+
+[MOM Green Inserts]
+1 Ancient Imperiosaur|MOM
+1 Deeproot Wayfinder|MOM
+1 Doomskar Warrior|MOM
+1 Glistening Dawn|MOM
+1 Invasion of Ikoria|MOM
+1 Invasion of Ixalan|MOM
+1 Ozolith, the Shattered Spire|MOM
+1 Polukranos Reborn|MOM
+1 Realmbreaker, the Invasion Tree|MOM
+1 Surrak and Goreclaw|MOM
+1 Tribute to the World Tree|MOM
+1 Invasion of Ravnica|MOM
+1 Invasion of Shandalar|MOM
+1 Sword of Once and Future|MOM
+1 Vorinclex|MOM
+1 Wrenn and Realmbreaker|MOM
+
+[MOM Red Inserts]
+1 Bloodfeather Phoenix|MOM
+1 City on Fire|MOM
+1 Etali, Primal Conquerer|MOM
+1 Into the Fire|MOM
+1 Invasion of Kaladheim|MOM
+1 Invasion of Karsus|MOM
+1 Nahiri's Warcrafting|MOM
+1 Orthion, Hero of Lavabrink|MOM
+1 Rampaging Raptor|MOM
+1 Realmbreaker, the Invasion Tree|MOM
+1 Voldaren Thrillseeker|MOM
+1 Chandra, Hope's Beacon|MOM
+1 Invasion of Ravnica|MOM
+1 Invasion of Tarkir|MOM
+1 Sword of Once and Future|MOM
+1 Urabrask|MOM
+
+[MOM White Inserts]
+1 Boon-Bringer Valkyrie|MOM
+1 Dusk Legion Duelist|MOM
+1 Essence of Orthodoxy|MOM
+1 Guardian of Ghirapur|MOM
+1 Heliod, the Radiant Dawn|MOM
+1 Invasion of Gobakhan|MOM
+1 Invasion of Theros|MOM
+1 Knight-Errant of Eos|MOM
+1 Realmbreaker, the Invasion Tree|MOM
+1 Progenitor Exarch|MOM
+1 Sunfall|MOM
+1 Archangel Elspeth|MOM
+1 Elesh Norn|MOM
+1 Invasion of Ravnica|MOM
+1 Monastery Mentor|MOM
+1 Sword of Once and Future|MOM

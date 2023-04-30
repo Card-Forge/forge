@@ -1,5 +1,5 @@
 Name:Invasion of Eldraine
-ManaCost:4 B
+ManaCost:3 B
 Types:Battle Siege
 Defense:4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target opponent discards two cards.

@@ -73,6 +73,9 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
             case "Land":
                 validTypes.addAll(CardType.getAllLandTypes());
                 break;
+            case "Planeswalker":
+                validTypes.addAll(CardType.getAllWalkerTypes());
+                break;
             case "CreatureInTargetedDeck":
                 for (final Player p : tgtPlayers) {
                     for (Card c : p.getAllCards()) {

@@ -1,0 +1,11 @@
+Name:Calix, Guided By Fate
+ManaCost:1 G W
+Types:Legendary Enchantment Creature Human Druid 
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 
+T:Mode$ DamageDone | ValidSource$ Card.Self,Creature.enchanted+YouCtrl | OptionalDecider$ You | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | ResolvedLimit$ 1 | TriggerDescription$ Whenever NICKNAME or an enchanted creature you control deals combat damage to a player, you may create a token that's a copy of a nonlegendary enchantment you control. Do this only once each turn.
+SVar:TrigToken:DB$ CopyPermanent | Choices$ Enchantment.nonLegendary+YouCtrl | NumCopies$ 1 | ChoiceTitle$ Choose a nonlegendary enchantment you control
+DeckHas:Ability$Token
+DeckNeeds:Type$Enchantment
+Oracle:Constellation — Whenever Calix, Guided by Fate or another enchantment enters the battlefield under your control, put a +1/+1 counter on target creature.\nWhenever Calix or an enchanted creature you control deals combat damage to a player, you may create a token that's a copy of a nonlegendary enchantment you control. Do this only once each turn.
