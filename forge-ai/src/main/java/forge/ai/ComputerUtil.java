@@ -2892,6 +2892,10 @@ public class ComputerUtil {
             }
             return c.getCounters(type) > e;
         }
+        // keyword counters
+        if (type.isKeywordCounter() && c.hasKeyword(type.toString())) {
+            return true;
+        }
 
         return type.is(CounterEnumType.AWAKENING) || type.is(CounterEnumType.MANIFESTATION) || type.is(CounterEnumType.PETRIFICATION)
                 || type.is(CounterEnumType.TRAINING) || type.is(CounterEnumType.GHOSTFORM);
