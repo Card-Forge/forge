@@ -283,8 +283,6 @@ ScryfallCode=AKH
 267 L Forest @Titus Lunter
 268 L Forest @Titus Lunter
 269 L Forest @Matt Stewart
-
-[Planeswalker Decks and Toolkit]
 270 M Gideon, Martial Paragon @Daarken
 271 U Companion of the Trials @Aaron Miller
 272 R Gideon's Resolve @Jakub Kasper
