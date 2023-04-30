@@ -61,7 +61,7 @@ public class Mana {
             return false;
         }
 
-        if (!sourceCard.equals(m2.sourceCard)) {
+        if (!sourceCard.equals(m2.sourceCard) && mp != null) {
             if (addsKeywords(null) != m2.addsKeywords(null)) {
                 return false;
             }
