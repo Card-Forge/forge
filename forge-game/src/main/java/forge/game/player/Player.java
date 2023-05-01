@@ -602,14 +602,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         runParams.put(AbilityKey.FirstTime, firstLost);
         game.getTriggerHandler().runTrigger(TriggerType.LifeLost, runParams, false);
 
-        if (damage) {
-            if (game.getAction().lifeLostAllDamageMapContains(this)) {
-                game.getAction().increaseValueLifeLostAllDamageMap(this, lifeLost);
-            } else {
-                game.getAction().addEntryToLifeLostAllDamageMap(this, lifeLost);
-            }
-        }
-
         return lifeLost;
     }
 
@@ -706,12 +698,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         else if (!hasKeyword("Damage doesn't cause you to lose life.")) {
             // rule 118.2. Damage dealt to a player normally causes that player to lose that much life.
-            if (isCombat) {
-                // currently all abilities treat is as single event
-                simultaneousDamage += amount;
-            } else {
-                loseLife(amount, true, false);
-            }
+            simultaneousDamage += amount;
         }
 
         if (isCombat) {
@@ -844,9 +831,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return restDamage;
     }
 
-    public final void dealCombatDamage() {
-        loseLife(simultaneousDamage, true, false);
+    public final int processDamage() {
+        int lost = loseLife(simultaneousDamage, true, false);
         simultaneousDamage = 0;
+        return lost;
     }
 
     /**

@@ -2397,20 +2397,6 @@ public class GameAction {
         }
     }
 
-    private Map<Player, Integer> lifeLostAllDamageMap = Maps.newHashMap();
-
-    public boolean lifeLostAllDamageMapContains(Player p) {
-        return lifeLostAllDamageMap.containsKey(p);
-    }
-
-    public void increaseValueLifeLostAllDamageMap(Player p, Integer increase) {
-        lifeLostAllDamageMap.put(p, lifeLostAllDamageMap.get(p) + increase);
-    }
-
-    public void addEntryToLifeLostAllDamageMap(Player p, Integer i) {
-        lifeLostAllDamageMap.put(p, i);
-    }
-
     public void dealDamage(final boolean isCombat, final CardDamageMap damageMap, final CardDamageMap preventMap,
             final GameEntityCounterTable counterTable, final SpellAbility cause) {
         // Clear assigned damage if is combat
@@ -2459,17 +2445,21 @@ public class GameAction {
         damageMap.triggerExcessDamage(isCombat, lethalDamage, game, cause, lkiCache);
 
         // lose life simultaneously
-        if (isCombat) {
-            for (Player p : game.getPlayers()) {
-                p.dealCombatDamage();
+        Map<Player, Integer> lifeLostAllDamageMap = Maps.newHashMap();
+        for (Player p : game.getPlayers()) {
+            int lost = p.processDamage();
+            if (lost > 0) {
+                lifeLostAllDamageMap.put(p, lost);
             }
+        }
+
+        if (isCombat) {
             game.getTriggerHandler().runWaitingTriggers();
         }
 
         if (!lifeLostAllDamageMap.isEmpty()) { // Run triggers if any player actually lost life
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lifeLostAllDamageMap);
             game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
-            lifeLostAllDamageMap = Maps.newHashMap();
         }
 
         if (cause != null) {
