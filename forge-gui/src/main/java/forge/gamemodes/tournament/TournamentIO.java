@@ -188,7 +188,11 @@ public class TournamentIO {
             final boolean foil = "1".equals(reader.getAttribute("foil"));
             PaperCard card = FModel.getMagicDb().getOrLoadCommonCard(name, set, index, foil);
             if (null == card) {
-                throw new RuntimeException("Unsupported card found in quest save: " + name + " from edition " + set);
+                //get same replacement card from any edition due to Edition updates/changes if it exists (ie  Ugin, the Ineffable from edition PSLD, Mana Crypt from edition FS, Timeless Lotus from edition ???).
+                card = FModel.getMagicDb().getCommonCards().getCard(name);
+                if (card == null) //if the card is not found, notify via log instead of crashing
+                    System.err.println("Warning: Unsupported card found in quest save: " + name + " from edition " + set +". It will be removed from the quest save.");
+                //throw new RuntimeException("Unsupported card found in quest save: " + name + " from edition " + set);
             }
             return card;
         }
