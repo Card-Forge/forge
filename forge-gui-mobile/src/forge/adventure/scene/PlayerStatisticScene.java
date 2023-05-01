@@ -27,6 +27,7 @@ import forge.card.ColorSet;
 import forge.game.GameType;
 import forge.localinstance.achievements.Achievement;
 import forge.localinstance.achievements.AchievementCollection;
+import forge.localinstance.achievements.CardActivationAchievements;
 import forge.localinstance.achievements.PlaneswalkerAchievements;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -48,13 +49,14 @@ public class PlayerStatisticScene extends UIScene {
     ScrollPane scroller;
     Table root;
     boolean toggle = false;
-    AchievementCollection planeswalkers, achievements;
+    AchievementCollection planeswalkers, achievements, cardActivation;
     Scene lastGameScene;
 
     private PlayerStatisticScene() {
         super(Forge.isLandscapeMode() ? "ui/statistic.json" : "ui/statistic_portrait.json");
         planeswalkers = PlaneswalkerAchievements.instance;
         achievements = FModel.getAchievements(GameType.Constructed);
+        cardActivation = CardActivationAchievements.instance;
         scrollContainer = new Table(Controls.getSkin());
         scrollContainer.row();
         achievementContainer = new Table(Controls.getSkin());
@@ -122,6 +124,10 @@ public class PlayerStatisticScene extends UIScene {
             for (Achievement a : planeswalkers)
                 ((FBufferedImage) a.getImage()).dispose();
         }
+        if (cardActivation != null) {
+            for (Achievement a : cardActivation)
+                ((FBufferedImage) a.getImage()).dispose();
+        }
     }
 
     private void toggleScroller() {
@@ -165,6 +171,7 @@ public class PlayerStatisticScene extends UIScene {
     public void enter() {
         super.enter();
         achievementContainer.clear();
+        updateAchievements(cardActivation, true);
         updateAchievements(planeswalkers, true);
         updateAchievements(achievements, false);
         scrollContainer.clear();
@@ -218,9 +225,9 @@ public class PlayerStatisticScene extends UIScene {
         performTouch(scrollPaneOfActor(scrollContainer)); //can use mouse wheel if available to scroll
     }
 
-    void updateAchievements(AchievementCollection achievementCollection, boolean isPW) {
+    void updateAchievements(AchievementCollection achievementCollection, boolean isActive) {
         for (Achievement a : achievementCollection) {
-            if (isPW) {
+            if (isActive) {
                 if (!a.isActive()) //skip inactive
                     continue;
             } else {
@@ -229,7 +236,7 @@ public class PlayerStatisticScene extends UIScene {
                     continue;
             }
             TextureRegion textureRegion = new TextureRegion(((FBufferedImage) a.getImage()).getTexture());
-            textureRegion.flip(true, true);
+            textureRegion.flip(false, true);
             Image image = new Image(textureRegion);
             float alpha = a.isActive() ? 1f : 0.25f;
             image.getColor().a = alpha;
