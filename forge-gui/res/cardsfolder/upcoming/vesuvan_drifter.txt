@@ -1,0 +1,10 @@
+Name:Vesuvan Drifter
+ManaCost:2 U
+Types:Creature Shapeshifter
+PT:2/4
+K:Flying
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigReveal | OptionalDecider$ You | TriggerDescription$ At the beginning of each combat, you may reveal the top card of your library. If you reveal a creature card this way, CARDNAME becomes a copy of that card until end of turn, except it has flying.
+SVar:TrigReveal:DB$ PeekAndReveal | NoPeek$ True | SubAbility$ DBClone
+SVar:DBClone:DB$ Clone | ConditionDefined$ TopOfLibrary | ConditionPresent$ Creature | Defined$ TopOfLibrary | CloneTarget$ Self | Duration$ UntilEndOfTurn | AddKeywords$ Flying
+Oracle:Flying\nYou may look at the top card of your library any time.\nAt the beginning of each combat, you may reveal the top card of your library. If you reveal a creature card this way, Vesuvan Drifter becomes a copy of that card until end of turn, except it has flying.
