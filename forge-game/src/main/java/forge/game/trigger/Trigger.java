@@ -191,15 +191,13 @@ public abstract class Trigger extends TriggerReplacementBase {
                         break;
                     }
                     if (ApiType.ImmediateTrigger.equals(api) || ApiType.DelayedTrigger.equals(api)) {
-                        if (sa.hasAdditionalAbility("Execute")) {
-                            SpellAbility trigSA = sa.getAdditionalAbility("Execute");
-                            while (trigSA != null) {
-                                if (ApiType.Charm.equals(trigSA.getApi())) {
-                                    saDesc = CharmEffect.makeFormatedDescription(trigSA, !forStack);
-                                    break;
-                                }
-                                trigSA = trigSA.getSubAbility();
+                        SpellAbility trigSA = sa.getAdditionalAbility("Execute");
+                        while (trigSA != null) {
+                            if (ApiType.Charm.equals(trigSA.getApi())) {
+                                saDesc = CharmEffect.makeFormatedDescription(trigSA, !forStack);
+                                break;
                             }
+                            trigSA = trigSA.getSubAbility();
                         }
                         break;
                     }
