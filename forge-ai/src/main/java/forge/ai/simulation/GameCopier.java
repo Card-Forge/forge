@@ -341,6 +341,10 @@ public class GameCopier {
             zoneOwner = playerMap.get(c.getController());
             newCard.setController(zoneOwner, 0);
 
+            if (c.isBattle()) {
+                newCard.setProtectingPlayer(playerMap.get(c.getProtectingPlayer()));
+            }
+
             newCard.setCameUnderControlSinceLastUpkeep(c.cameUnderControlSinceLastUpkeep());
 
             newCard.setPTTable(c.getSetPTTable());
