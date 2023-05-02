@@ -485,7 +485,7 @@ public class TriggerHandler {
                 abMana.setUndoable(false);
             }
         }
-        else if (regtrig instanceof TriggerSpellAbilityCastOrCopy) {
+        else if (regtrig instanceof TriggerSpellAbilityCastOrCopy || regtrig instanceof TriggerAbilityResolves) {
             final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.CastSA);
             if (null != abMana && null != abMana.getManaPart()) {
                 abMana.setUndoable(false);
