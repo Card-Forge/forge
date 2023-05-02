@@ -3,6 +3,6 @@ Name:Brawl
 Order:101
 Type:Casual
 Subtype:Commander
-Sets:MID, VOW, NEO, SNC, DMU, BRO, ONE, MOM
+Sets:MID, VOW, NEO, SNC, DMU, BRO, ONE, MOM, MAT
 Banned:Pithing Needle
 Additional:Arcane Signet; Command Tower

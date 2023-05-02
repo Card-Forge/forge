@@ -478,7 +478,7 @@ ScryfallCode=MOM
 
 [double-face]
 1 Elesh Norn|MOM
-2 Heliod, the Radian Dawn|MOM
+2 Heliod, the Radiant Dawn|MOM
 3 Seraph of New Capenna|MOM
 3 Sun-Blessed Guardian|MOM
 9 Tarkir Duneshaper|MOM
