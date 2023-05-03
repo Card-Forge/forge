@@ -225,7 +225,7 @@ ScryfallCode=MAT
 217 M Narset, Enlightened Exile @Domenico Cava
 218 R Nashi, Moon's Legacy @TAPIOCA
 219 R Niv-Mizzet, Supreme @Isis
-220 M Ob Nixilis, Captive Kingping @Krharts
+220 M Ob Nixilis, Captive Kingpin @Krharts
 221 R Pia Nalaar, Consul of Revival @Yeong-Hao Han
 222 R Rebuild the City @Shawn Pagels
 223 R Rocco, Street Chef @Jack Hughes
