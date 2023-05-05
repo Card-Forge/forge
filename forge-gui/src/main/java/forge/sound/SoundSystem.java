@@ -224,12 +224,17 @@ public class SoundSystem {
                     changeBackgroundTrack(); //change track when music completes on its own
                 }
             });
-            currentTrack.setVolume(FModel.getPreferences().getPrefInt(FPref.UI_VOL_MUSIC)/100f);
+            refreshVolume();
         } catch (final Exception ex) {
             System.err.println("Unable to load music file: " + filename);
         }
     }
 
+    public void refreshVolume() {
+        if (currentTrack != null) {
+            currentTrack.setVolume(FModel.getPreferences().getPrefInt(FPref.UI_VOL_MUSIC) / 100f);
+        }
+    }
     public void pause() {
         if (currentTrack != null) {
             currentTrack.pause();
