@@ -186,7 +186,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 movedCard = game.getAction().moveToPlay(c, sa.getActivatingPlayer(), sa, moveParams);
             } else {
                 movedCard = game.getAction().moveTo(destination, c, libraryPos, sa, moveParams);
-                if (destination == ZoneType.Exile && !c.isToken()) {
+                if (destination == ZoneType.Exile) {
                     handleExiledWith(movedCard, sa);
                 }
                 if (sa.hasParam("ExileFaceDown")) {
