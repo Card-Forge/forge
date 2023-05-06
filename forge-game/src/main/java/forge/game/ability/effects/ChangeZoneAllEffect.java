@@ -161,6 +161,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 }
             }
 
+            if (remLKI) {
+                source.addRemembered(CardUtil.getLKICopy(c));
+            }
+
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
             moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
             moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
@@ -218,13 +222,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                                 source.addRemembered(card);
                             }
                         }
-                    }
-                }
-                if (remLKI) {
-                    final Card lki = CardUtil.getLKICopy(c);
-                    game.getCardState(source).addRemembered(lki);
-                    if (!source.isRemembered(lki)) {
-                        source.addRemembered(lki);
                     }
                 }
                 if (forget != null) {
