@@ -271,6 +271,10 @@ public class GameAction {
                 copied.setExiledBy(c.getExiledBy());
                 copied.setDrawnThisTurn(c.getDrawnThisTurn());
 
+                if (c.isTransformed()) {
+                    copied.incrementTransformedTimestamp();
+                }
+
                 if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
                     copied.setCastSA(cause);
                     copied.setSplitStateToPlayAbility(cause);
