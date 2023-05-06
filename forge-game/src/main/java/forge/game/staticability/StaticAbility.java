@@ -604,6 +604,10 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             // reset to force refresh if needed
             clone.payingTrigSA = null;
 
+            if (!lki) {
+                clone.mayPlayTurn = 0;
+            }
+
             clone.layers = this.generateLayer();
         } catch (final CloneNotSupportedException e) {
             System.err.println(e);
