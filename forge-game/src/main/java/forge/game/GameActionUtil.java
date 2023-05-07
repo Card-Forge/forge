@@ -868,6 +868,9 @@ public final class GameActionUtil {
         final Game game = ability.getActivatingPlayer().getGame();
 
         if (fromZone != null) { // and not a copy
+            // might have been an alternative lki host
+            oldCard = ability.getCardState().getCard();
+ 
             oldCard.setCastSA(null);
             oldCard.setCastFrom(null);
             // add back to where it came from, hopefully old state
