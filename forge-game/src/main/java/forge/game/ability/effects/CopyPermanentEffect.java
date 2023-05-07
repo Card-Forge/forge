@@ -14,6 +14,7 @@ import com.google.common.collect.Lists;
 
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
+import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -267,17 +268,27 @@ public class CopyPermanentEffect extends TokenEffectBase {
         copy.setOwner(newOwner);
         copy.setSetCode(original.getSetCode());
 
-        if (sa.hasParam("Embalm")) {
-            copy.setEmbalmed(true);
-        }
-
-        if (sa.hasParam("Eternalize")) {
-            copy.setEternalized(true);
+        copy.setTokenSpawningAbility(sa);
+        // 707.8a If an effect creates a token that is a copy of a transforming permanent or a transforming double-faced card not on the battlefield,
+        // the resulting token is a transforming token that has both a front face and a back face.
+        // The characteristics of each face are determined by the copiable values of the same face of the permanent it is a copy of, as modified by any other copy effects that apply to that permanent.
+        // If the token is a copy of a transforming permanent with its back face up, the token enters the battlefield with its back face up.
+        // This rule does not apply to tokens that are created with their own set of characteristics and enter the battlefield as a copy of a transforming permanent due to a replacement effect.
+        if (original.isTransformable()) {
+            copy.setBackSide(original.isBackSide());
+            copy.setRules(original.getRules());
+            if (original.isTransformed()) {
+                copy.incrementTransformedTimestamp();
+            }
         }
 
         copy.setStates(CardFactory.getCloneStates(original, copy, sa));
         // force update the now set State
-        copy.setState(copy.getCurrentStateName(), true, true);
+        if (original.isTransformable()) {
+            copy.setState(original.isTransformed() ? CardStateName.Transformed : CardStateName.Original, true, true);
+        } else {
+            copy.setState(copy.getCurrentStateName(), true, true);
+        }
         copy.setToken(true);
 
         return copy;

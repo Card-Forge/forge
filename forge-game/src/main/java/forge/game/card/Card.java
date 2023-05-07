@@ -120,6 +120,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Card mergedTo;
 
     private SpellAbility effectSourceAbility;
+    private SpellAbility tokenSpawningAbility;
 
     private GameEntity entityAttachedTo;
 
@@ -223,8 +224,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private long prototypeTimestamp = -1;
     private int timesMutated = 0;
     private boolean tributed = false;
-    private boolean embalmed = false;
-    private boolean eternalized = false;
     private boolean discarded = false;
 
     private boolean flipped = false;
@@ -1561,6 +1560,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 if (newValue <= 0) {
                     newValue = 0;
                 }
+                break;
+            default:
                 break;
         }
 
@@ -5885,18 +5886,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         tributed = b;
     }
 
-    public final boolean isEmbalmed() {
-        return embalmed;
+    public final SpellAbility getTokenSpawningAbility() {
+        return tokenSpawningAbility;
     }
-    public final void setEmbalmed(final boolean b) {
-        embalmed = b;
+
+    public void setTokenSpawningAbility(SpellAbility sa) {
+        tokenSpawningAbility = sa;
+    }
+
+    public final boolean isEmbalmed() {
+        SpellAbility sa = getTokenSpawningAbility();
+        return sa != null && sa.hasParam("Embalm");
     }
 
     public final boolean isEternalized() {
-        return eternalized;
-    }
-    public final void setEternalized(final boolean b) {
-        eternalized = b;
+        SpellAbility sa = getTokenSpawningAbility();
+        return sa != null && sa.hasParam("Eternalize");
     }
 
     public final int getExertedThisTurn() {

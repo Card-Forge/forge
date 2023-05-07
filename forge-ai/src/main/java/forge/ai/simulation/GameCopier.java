@@ -294,7 +294,7 @@ public class GameCopier {
     private Card createCardCopy(Game newGame, Player newOwner, Card c) {
         if (c.isToken() && !c.isImmutable()) {
             Card result = new TokenInfo(c).makeOneToken(newOwner);
-            CardFactory.copyCopiableCharacteristics(c, result);
+            CardFactory.copyCopiableCharacteristics(c, result, null, null);
             return result;
         }
         if (USE_FROM_PAPER_CARD && !c.isImmutable() && c.getPaperCard() != null) {
