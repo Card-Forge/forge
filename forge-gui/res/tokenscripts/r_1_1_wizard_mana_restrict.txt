@@ -1,0 +1,7 @@
+Name:Wizard Token
+ManaCost:no cost
+Types:Creature Wizard
+Colors:red
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ R | RestrictValid$ Spell.Planeswalker | SpellDescription$ Add {R}. Spend this mana only to cast a planeswalker spell.
+Oracle:{T}: Add {R}. Spend this mana only to cast a planeswalker spell.
