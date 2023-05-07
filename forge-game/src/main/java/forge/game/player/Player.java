@@ -2667,17 +2667,19 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Sets up the first plane of a round.
      */
     public void initPlane() {
-        Card firstPlane = null;
+        if (game.isGameOver())
+            return;
+        Card firstPlane;
         view.updateCurrentPlaneName("");
         game.getView().updatePlanarPlayer(getView());
+        PlayerZone planarDeck = getZone(ZoneType.PlanarDeck);
 
-        while (true) {
-            firstPlane = getZone(ZoneType.PlanarDeck).get(0);
-            getZone(ZoneType.PlanarDeck).remove(firstPlane);
+        while (!planarDeck.isEmpty()) {
+            firstPlane = planarDeck.get(0);
+            planarDeck.remove(firstPlane);
             if (firstPlane.getType().isPhenomenon()) {
-                getZone(ZoneType.PlanarDeck).add(firstPlane);
-            }
-            else {
+                planarDeck.add(firstPlane);
+            } else {
                 currentPlanes.add(firstPlane);
                 getZone(ZoneType.Command).add(firstPlane);
                 break;

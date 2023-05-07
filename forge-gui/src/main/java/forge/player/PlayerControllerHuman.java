@@ -681,15 +681,23 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (min >= max) {
             return min;
         }
-        final ImmutableList.Builder<Integer> choices = ImmutableList.builder();
         // todo check for X cost or any max value for optional costs like multikicker, etc to determine the correct max value,
         // fixes crash for word of command OutOfMemoryError when selecting a card with announce X or Multikicker since
         // it will build from 0 to Integer.MAX_VALUE...
-        int size = max == Integer.MAX_VALUE ? 9 : max - min;
-        for (int i = 0; i <= size; i++) {
-            choices.add(Integer.valueOf(i + min));
+        if (max == Integer.MAX_VALUE) {
+            Integer choice = getGui().getInteger(title, min, max, 9);
+            if (choice != null)
+                return choice;
+            else
+                return 0;
+        } else {
+            final ImmutableList.Builder<Integer> choices = ImmutableList.builder();
+            int size = max - min;
+            for (int i = 0; i <= size; i++) {
+                choices.add(Integer.valueOf(i + min));
+            }
+            return getGui().one(title, choices.build()).intValue();
         }
-        return getGui().one(title, choices.build()).intValue();
     }
 
     @Override

@@ -9,9 +9,11 @@ import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
+import forge.assets.ImageCache;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.sound.SoundSystem;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -96,7 +98,7 @@ public class SettingsScene extends UIScene {
 
         settingGroup = new Table();
         if (Preference == null) {
-            Preference = new ForgePreferences();
+            Preference = FModel.getPreferences();
         }
         //temporary disable custom world until it works correctly on each update
         /*selectSourcePlane = Controls.newComboBox();
@@ -141,9 +143,9 @@ public class SettingsScene extends UIScene {
                 }
                 Config.instance().saveSettings();
                 //update preference for classic mode if needed
-                if (FModel.getPreferences().getPref(ForgePreferences.FPref.UI_VIDEO_MODE) != mode) {
-                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_VIDEO_MODE, mode);
-                    FModel.getPreferences().save();
+                if (Preference.getPref(ForgePreferences.FPref.UI_VIDEO_MODE).equals(mode)) {
+                    Preference.setPref(ForgePreferences.FPref.UI_VIDEO_MODE, mode);
+                    Preference.save();
                 }
                 return null;
             });
@@ -203,9 +205,9 @@ public class SettingsScene extends UIScene {
                     Config.instance().getSettingData().fullScreen = value;
                     Config.instance().saveSettings();
                     //update
-                    if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_FULLSCREEN_MODE) != value) {
-                        FModel.getPreferences().setPref(ForgePreferences.FPref.UI_LANDSCAPE_MODE, value);
-                        FModel.getPreferences().save();
+                    if (Preference.getPrefBoolean(ForgePreferences.FPref.UI_FULLSCREEN_MODE) != value) {
+                        Preference.setPref(ForgePreferences.FPref.UI_LANDSCAPE_MODE, value);
+                        Preference.save();
                     }
                 }
             });
@@ -224,8 +226,7 @@ public class SettingsScene extends UIScene {
         addSettingField(Forge.getLocalizer().getMessage("lblDisableWinLose"), Config.instance().getSettingData().disableWinLose, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                boolean value = ((CheckBox) actor).isChecked();
-                Config.instance().getSettingData().disableWinLose = value;
+                Config.instance().getSettingData().disableWinLose = ((CheckBox) actor).isChecked();
                 Config.instance().saveSettings();
             }
         });
@@ -247,11 +248,28 @@ public class SettingsScene extends UIScene {
         addCheckBox(Forge.getLocalizer().getMessage("lblLandscapeMode"), ForgePreferences.FPref.UI_LANDSCAPE_MODE);
         addCheckBox(Forge.getLocalizer().getMessage("lblAnimatedCardTapUntap"), ForgePreferences.FPref.UI_ANIMATED_CARD_TAPUNTAP);
         if (!GuiBase.isAndroid()) {
-            addCheckBox(Forge.getLocalizer().getMessage("lblBorderMaskOption"), ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
+            final String[] item = {Preference.getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING)};
+            SelectBox<String> borderMask = Controls.newComboBox(new String[]{"Off", "Crop", "Full", "Art"}, item[0], o -> {
+                String mode = (String) o;
+                if (mode == null)
+                    mode = "Crop";
+                item[0] = mode;
+                //update preference for classic mode if needed
+                if (Preference.getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING).equals(mode)) {
+                    Preference.setPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING, mode);
+                    Preference.save();
+                    Forge.enableUIMask = Preference.getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
+                    ImageCache.clearGeneratedCards();
+                    ImageCache.disposeTextures();
+                }
+                return null;
+            });
+            addLabel(Forge.getLocalizer().getMessage("lblBorderMaskOption"));
+            settingGroup.add(borderMask).align(Align.right).pad(2);
+
             addCheckBox(Forge.getLocalizer().getMessage("lblPreloadExtendedArtCards"), ForgePreferences.FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
             addCheckBox(Forge.getLocalizer().getMessage("lblAutoCacheSize"), ForgePreferences.FPref.UI_AUTO_CACHE_SIZE);
             addCheckBox(Forge.getLocalizer().getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_ENABLE_DISPOSE_TEXTURES);
-            //addInputField(Forge.getLocalizer().getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_LANGUAGE);
         }
 
 
@@ -308,6 +326,8 @@ public class SettingsScene extends UIScene {
             public void changed(ChangeEvent event, Actor actor) {
                 Preference.setPref(pref, String.valueOf((int) ((Slider) actor).getValue()));
                 Preference.save();
+                if (ForgePreferences.FPref.UI_VOL_MUSIC.equals(pref))
+                    SoundSystem.instance.refreshVolume();
             }
         });
         addLabel(name);

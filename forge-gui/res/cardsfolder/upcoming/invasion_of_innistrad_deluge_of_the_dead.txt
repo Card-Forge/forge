@@ -1,7 +1,7 @@
 Name:Invasion of Innistrad
 ManaCost:2 B B
 Types:Battle Siege
-Defense:4
+Defense:5
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature an opponent controls gets -13/-13 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -13 | NumDef$ -13

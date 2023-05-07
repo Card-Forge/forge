@@ -1,0 +1,15 @@
+Name:Filigree Vector
+ManaCost:3 W
+Types:Artifact Creature Phyrexian Construct
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on each of any number of target creatures and a charge counter on each of any number of target artifacts.
+SVar:TrigCounter:DB$ Pump | ValidTgts$ Creature | AILogic$ Pump | TgtPrompt$ Select any number of target creatures to distribute +1/+1 counters to | TargetMin$ 0 | TargetMax$ X | RememberTargets$ True | SubAbility$ DBChargeCounter
+SVar:DBChargeCounter:DB$ Pump | ValidTgts$ Artifact | AITgts$ Artifact.YouCtrl | TgtPrompt$ Select any number of target artifacts to distribute charge counters to | TargetMin$ 0 | TargetMax$ Y | ImprintCards$ ThisTargetedCard | SubAbility$ DBPutCounterAll
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.IsRemembered | CounterType$ P1P1 | CounterNum$ 1 | ValidCards2$ Artifact.IsImprinted | CounterType2$ CHARGE | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | ClearRemembered$ True
+SVar:X:Count$Valid Creature
+SVar:Y:Count$Valid Artifact
+A:AB$ Proliferate | Cost$ 1 T Sac<1/Artifact.Other/other artifact> | SpellDescription$ Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+DeckHas:Ability$Counters|Proliferate|Sacrifice
+DeckHints:Type$Artifact
+Oracle:When Filigree Vector enters the battlefield, put a +1/+1 counter on each of any number of target creatures and a charge counter on each of any number of target artifacts.\n{1}, {T}, Sacrifice another artifact: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

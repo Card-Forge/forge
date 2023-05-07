@@ -1,6 +1,7 @@
 package forge.adventure.stage;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -56,8 +57,11 @@ public class MapSprite extends Actor {
             BiomeSpriteData data = WorldSave.getCurrentSave().getWorld().getObject(entry.getValue());
             if (data.layer != layer)
                 continue;
-            Actor sprite = new MapSprite(entry.getKey(), WorldSave.getCurrentSave().getWorld().getData().GetBiomeSprites().getSprite(data.name, (int) entry.getKey().x + (int) entry.getKey().y * 11483), null);
-            actorGroup.add(sprite);
+            Sprite biomeSprite = WorldSave.getCurrentSave().getWorld().getData().GetBiomeSprites().getSprite(data.name, (int) entry.getKey().x + (int) entry.getKey().y * 11483);
+            if (biomeSprite != null) { //null means invalid and will cause blackscreen, investigate why this would happen...
+                Actor sprite = new MapSprite(entry.getKey(), biomeSprite, null);
+                actorGroup.add(sprite);
+            }
         }
         return actorGroup;
     }

@@ -11,10 +11,18 @@ ScryfallCode=LTR
 26 U Reprieve @Justyna Dura
 28 U Samwise the Stouthearted @Irvin Rodriguez
 38 U You Cannot Pass! @Leonardo Borazio
+50 U Gandalf, Friend of the Shire @Dmitry Burmak
+79 R Call of the Ring @Anato Finnstark
 84 U Gollum, Patient Plotter @Lorenzo Mastroianni
+93 R Lobelia Sackville-Baggins @Hristo D. Chukov
+106 R Sauron, the Necromancer @Yongjae Choi
+158 R Delighted Halfling @Inka Schulz
+196 U Bilbo, Retired Burglar @Anna Pavleeva
+203 U Frodo Baggins @Ekaterina Burmak
 207 R Gandalf the Grey @Aaron Miller
 234 M Tom Bombadil @Dmitry Burmak
 246 M The One Ring @Veli Nystrom
+252 C Wizard's Rockets @Yuriy Chemezov
 258 M Mount Doom @Jonas De Ro
 260 R The Shire @Jonas De Ro
 272 L Plains @Deven Rue
@@ -32,14 +40,22 @@ ScryfallCode=LTR
 304 R Frodo, Sauron's Bane @Andreas Rocha
 306 U Samwise the Stouthearted @Marko Manev
 309 U Gollum, Patient Plotter @Dominik Mayer
+310 R Sauron, the Necromancer @Anato Finnstark
 322 R Gandalf the Grey @Anato Finnstark
 331 M Tom Bombadil @Marko Manev
 343 M Mount Doom @Logan Feliciano
 345 R The Shire @Calder Moore
+355 R Call of the Ring @Anato Finnstark
 380 M The One Ring @Veli Nystrom
 394 M Aragorn and Arwen, Wed @Magali Villeneuve
 396 M Sauron, the Lidless Eye @Yigit Koroglu
 398 R Trailblazer's Boots @Alexander Gering
+399 R Lobelia Sackville-Baggins @Livia Prima
+400 C Wizard's Rockets @Livia Prima
+401 U Gandalf, Friend of the Shire @Livia Prima
+402 R Delighted Halfling @Livia Prima
+403 U Bilbo, Retired Burglar @Livia Prima
+404 U Frodo Baggins @Livia Prima
 448 R Frodo, Sauron's Bane @Marta Nael
 449 U Samwise the Stouthearted @Marta Nael
 450 U Gollum, Patient Plotter @Marta Nael

@@ -296,6 +296,7 @@ public class PlayEffect extends SpellAbilityEffect {
                     continue;
                 }
                 state = CardStateName.Transformed;
+                tgtCard.incrementTransformedTimestamp();
             }
 
             // TODO if cost isn't replaced should include alternative ones

@@ -718,7 +718,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 } else {
                     // might set before card is moved only for nontoken
-                    if (destination.equals(ZoneType.Exile) && !gameCard.isToken()) {
+                    if (destination.equals(ZoneType.Exile)) {
                         handleExiledWith(gameCard, sa);
                     }
 
@@ -741,11 +741,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             // This only fizzles spells, not anything else.
                             game.getStack().remove(gameCard);
                         }
-                    }
-
-                    // might set after card is moved again if something has changed
-                    if (destination.equals(ZoneType.Exile) && !movedCard.isToken()) {
-                        handleExiledWith(movedCard, sa);
                     }
 
                     if (sa.hasParam("WithCountersType")) {
@@ -779,11 +774,21 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (meld != null) {
                         triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), meld);
                     }
+                    if (sa.hasParam("WithCountersType")) {
+                        CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                        int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                        meld.addCounter(cType, cAmount, player, counterTable);
+                    }
                 }
                 if (gameCard.hasMergedCard()) {
                     for (final Card c : gameCard.getMergedCards()) {
                         if (c == gameCard) continue;
                         triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), c);
+                        if (sa.hasParam("WithCountersType")) {
+                            CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                            int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                            c.addCounter(cType, cAmount, player, counterTable);
+                        }
                     }
                 }
 
@@ -849,6 +854,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
         if ("UntilHostLeavesPlay".equals(sa.getParam("Duration"))) {
             addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, sa));
+        }
+
+        // might set after card is moved again if something has changed
+        if (destination.equals(ZoneType.Exile)) {
+            handleExiledWith(triggerList.allCards(), sa);
         }
 
         // for things like Gaea's Blessing
@@ -1399,12 +1409,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 else if (destination.equals(ZoneType.Exile)) {
                     movedCard = game.getAction().exile(c, sa, moveParams);
-                    if (!c.isToken()) {
-                        handleExiledWith(movedCard, sa);
-                    }
+
+                    handleExiledWith(movedCard, sa);
+
                     if (sa.hasParam("ExileFaceDown")) {
                         movedCard.turnFaceDown(true);
                     }
+
                     if (sa.hasParam("Foretold")) {
                         movedCard.setForetold(true);
                         movedCard.setForetoldThisTurn(true);
@@ -1426,12 +1437,18 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         Card meld = game.getCardState(c.getMeldedWith(), null);
                         if (meld != null) {
                             triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), meld);
+                            if (destination.equals(ZoneType.Exile)) {
+                                handleExiledWith(meld, sa);
+                            }
                         }
                     }
                     if (c.hasMergedCard()) {
                         for (final Card card : c.getMergedCards()) {
                             if (card == c) continue;
                             triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), card);
+                            if (destination.equals(ZoneType.Exile)) {
+                                handleExiledWith(c, sa);
+                            }
                         }
                     }
                 }

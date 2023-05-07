@@ -457,8 +457,7 @@ public class TriggerHandler {
             Card original = (Card) runParams.get(AbilityKey.Card);
             CardCollection mergedCards = (CardCollection) runParams.get(AbilityKey.MergedCards);
             mergedCards.set(mergedCards.indexOf(original), original);
-            Map<AbilityKey, Object> newParams = AbilityKey.mapFromCard(original);
-            newParams.putAll(runParams);
+            Map<AbilityKey, Object> newParams = AbilityKey.newMap(runParams);
             if ("Battlefield".equals(regtrig.getParam("Origin"))) {
                 // If yes, only trigger once
                 newParams.put(AbilityKey.Card, mergedCards);

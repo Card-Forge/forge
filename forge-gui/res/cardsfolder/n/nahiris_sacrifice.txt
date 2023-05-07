@@ -1,7 +1,7 @@
 Name:Nahiri's Sacrifice
 ManaCost:1 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 1 R Sac<1/Creature.cmcEQX;Artifact.cmcEQX/artifact or creature with mana value X> | Announce$ X | ValidTgts$ Creature | TgtPrompt$ Select any number of target creatures to distribute damage to | NumDmg$ X | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures.
+A:SP$ DealDamage | Cost$ 1 R Sac<1/Creature.cmcEQX;Artifact.cmcEQX/artifact or creature with mana value X> | Announce$ X | ValidTgts$ Creature | TgtPrompt$ Select any number of target creatures to distribute damage to | NumDmg$ X | TargetMin$ 0 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures.
 SVar:MaxTgts:Count$Valid Creature
 SVar:AIPreference:SacCost$Creature,Artifact
 #X needs to be set this way to allow cost checks to pass - will be overwritten by Announce

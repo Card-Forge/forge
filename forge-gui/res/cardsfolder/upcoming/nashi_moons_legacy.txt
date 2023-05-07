@@ -1,0 +1,15 @@
+Name:Nashi, Moon's Legacy
+ManaCost:B G U
+Types:Legendary Creature Rat Shaman
+PT:3/4
+K:Menace
+K:Ward:1
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ DBExile | TriggerDescription$ Whenever CARDNAME attacks, exile up to one target legendary or Rat card from your graveyard and copy it. You may cast the copy. (You still pay its costs. A copy of a permanent spell becomes a token.)
+SVar:DBExile:DB$ ChangeZone | DefinedPlayer$ You | TargetMin$ 0 | TargetMax$ 1 | Destination$ Exile | ChangeNum$ 1 | ValidTgts$ Rat.YouCtrl,Card.Legendary+YouCtrl | TgtPrompt$ Select target legendary or Rat card from your graveyard | Origin$ Graveyard | RememberChanged$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Remembered | Controller$ You | CopyCard$ True | ValidSA$ Spell | Optional$ True | CopyCard$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token|Graveyard
+DeckHints:Ability$Graveyard
+DeckNeeds:Type$Legendary|Rat
+Oracle:Menace, ward {1}\nWhenever Nashi, Moon's Legacy attacks, exile up to one target legendary or Rat card from your graveyard and copy it. You may cast the copy. (You still pay its costs. A copy of a permanent spell becomes a token.)

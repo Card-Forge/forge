@@ -12,7 +12,7 @@ Current Commander Metagame | https://downloads.cardforge.org/decks/currentcomman
 Daily Deck List | https://downloads.cardforge.org/decks/dailydecks-commander.zip
 Daily Magic Update | https://downloads.cardforge.org/decks/dailymagicupdate-commander.zip
 Dear Azami | https://downloads.cardforge.org/decks/dearazami.zip
-EDHREC Columms | https://downloads.cardforge.org/decks/edhrec.zip
+EDHREC Columns | https://downloads.cardforge.org/decks/edhrec.zip
 Fat Stacks | https://downloads.cardforge.org/decks/fatstacks.zip
 Feature Article | https://downloads.cardforge.org/decks/feature-commander.zip
 From the Lab | https://downloads.cardforge.org/decks/fromthelab-commander.zip

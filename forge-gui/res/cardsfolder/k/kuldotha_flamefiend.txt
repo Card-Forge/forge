@@ -3,6 +3,6 @@ ManaCost:4 R R
 Types:Creature Elemental
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice an artifact. If you do, CARDNAME deals 4 damage divided as you choose among any number of targets.
-SVar:TrigDealDamage:AB$ DealDamage | Cost$ Sac<1/Artifact> | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 4 | TargetMin$ 1 | TargetMax$ 4 | DividedAsYouChoose$ 4
+SVar:TrigDealDamage:AB$ DealDamage | Cost$ Sac<1/Artifact> | ValidTgts$ Any | TgtPrompt$ Select any number of targets to distribute damage to | NumDmg$ 4 | TargetMin$ 0 | TargetMax$ 4 | DividedAsYouChoose$ 4
 AI:RemoveDeck:All
 Oracle:When Kuldotha Flamefiend enters the battlefield, you may sacrifice an artifact. If you do, Kuldotha Flamefiend deals 4 damage divided as you choose among any number of targets.

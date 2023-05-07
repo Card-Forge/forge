@@ -251,7 +251,7 @@ public final class ForgeConstants {
     public static final String BG_89                  = "Ghirapur.jpg";
     public static final String BG_90                  = "Inys_Haen.jpg";
     public static final String BG_91                  = "Ketria.jpg";
-    public static final String BG_92                  = "Littiara.jpg";
+    public static final String BG_92                  = "Littjara.jpg";
     public static final String BG_93                  = "Megaflora_Jungle.jpg";
     public static final String BG_94                  = "Naktamun.jpg";
     public static final String BG_95                  = "New_Argive.jpg";

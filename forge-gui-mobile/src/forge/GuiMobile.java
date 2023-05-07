@@ -178,11 +178,11 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions) {
+    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions, boolean isNumeric) {
         return new WaitCallback<String>() {
             @Override
             public void run() {
-                FOptionPane.showInputDialog(message, title, initialInput, inputOptions, this);
+                FOptionPane.showInputDialog(message, title, initialInput, inputOptions, this, isNumeric);
             }
         }.invokeAndWait();
     }

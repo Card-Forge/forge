@@ -1,0 +1,9 @@
+Name:Sarkhan, Soul Aflame
+ManaCost:1 U R
+Types:Legendary Creature Human Shaman
+PT:2/4
+S:Mode$ ReduceCost | ValidCard$ Dragon | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Dragon spells you cast cost {1} less to cast.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dragon.YouCtrl | TriggerZones$ Battlefield | Execute$ SarkanCopy | TriggerDescription$ Whenever a Dragon enters the battlefield under your control, you may have CARDNAME become a copy of it until end of turn, except its name is Sarkhan, Soul Aflame and it's legendary in addition to its other types.
+SVar:SarkanCopy:DB$ Clone | Defined$ TriggeredCard | NewName$ Sarkhan, Soul Aflame | AddTypes$ Legendary | Duration$ UntilEndOfTurn | Optional$ True | AILogic$ IfDefinedCreatureIsBetter
+DeckNeeds:Type$Dragon
+Oracle:Dragon spells you cast cost {1} less to cast.\nWhenever a Dragon enters the battlefield under your control, you may have Sarkhan, Soul Aflame become a copy of it until end of turn, except its name is Sarkhan, Soul Aflame and it's legendary in addition to its other types.

@@ -32,7 +32,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
         List<Card> hList;
         List<Card> cList;
         final String type = sa.getParam("CounterType");
-        final String amountStr = sa.getParam("CounterNum");
+        final String amountStr = sa.getParamOrDefault("CounterNum", "1");
         final String valid = sa.getParam("ValidCards");
         final String logic = sa.getParamOrDefault("AILogic", "");
         final boolean curse = sa.isCurse();

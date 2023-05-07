@@ -271,6 +271,10 @@ public class GameAction {
                 copied.setExiledBy(c.getExiledBy());
                 copied.setDrawnThisTurn(c.getDrawnThisTurn());
 
+                if (c.isTransformed()) {
+                    copied.incrementTransformedTimestamp();
+                }
+
                 if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
                     copied.setCastSA(cause);
                     copied.setSplitStateToPlayAbility(cause);
@@ -2442,7 +2446,7 @@ public class GameAction {
         }
 
         // for Zangief do this before runWaitingTriggers DamageDone
-        damageMap.triggerExcessDamage(isCombat, lethalDamage, game, lkiCache);
+        damageMap.triggerExcessDamage(isCombat, lethalDamage, game, cause, lkiCache);
 
         // lose life simultaneously
         if (isCombat) {
