@@ -109,7 +109,7 @@ public class HumanPlay {
 
         final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
         if (!req.playAbility(true, false, false)) {
-            Card rollback = p.getGame().getCardState(sa.getHostCard());
+            Card rollback = p.getGame().getCardState(source);
             if (castFaceDown) {
                 rollback.setFaceDown(false);
             } else if (flippedToCast) {

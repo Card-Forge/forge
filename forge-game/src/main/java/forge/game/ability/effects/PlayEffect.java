@@ -296,7 +296,6 @@ public class PlayEffect extends SpellAbilityEffect {
                     continue;
                 }
                 state = CardStateName.Transformed;
-                tgtCard.incrementTransformedTimestamp();
             }
 
             // TODO if cost isn't replaced should include alternative ones
@@ -418,6 +417,10 @@ public class PlayEffect extends SpellAbilityEffect {
 
             if (sa.hasParam("Madness")) {
                 tgtSA.setAlternativeCost(AlternativeCost.Madness);
+            }
+
+            if (sa.hasParam("CastTransformed")) {
+                tgtSA.putParam("CastTransformed", "True");
             }
 
             if (tgtSA.usesTargeting() && !optional) {

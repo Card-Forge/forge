@@ -3183,7 +3183,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             {
                 final String drawTrig = "Mode$ Phase | Phase$ End of Turn | TriggerZones$ Command | " +
                 "ValidPlayer$ You |  TriggerDescription$ At the beginning of your end step, draw a card.";
-                final String drawEff = "AB$ Draw | Cost$ 0 | Defined$ You";
+                final String drawEff = "DB$ Draw | Defined$ You";
 
                 final Trigger drawTrigger = TriggerHandler.parseTrigger(drawTrig, monarchEffect, true);
 
@@ -3194,7 +3194,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             {
                 final String damageTrig = "Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | CombatDamage$ True | TriggerZones$ Command |" +
                 " TriggerDescription$ Whenever a creature deals combat damage to you, its controller becomes the monarch.";
-                final String damageEff = "AB$ BecomeMonarch | Cost$ 0 | Defined$ TriggeredSourceController";
+                final String damageEff = "DB$ BecomeMonarch | Defined$ TriggeredSourceController";
 
                 final Trigger damageTrigger = TriggerHandler.parseTrigger(damageTrig, monarchEffect, true);
 
