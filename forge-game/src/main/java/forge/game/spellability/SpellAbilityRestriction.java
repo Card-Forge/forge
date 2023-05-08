@@ -369,7 +369,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         // Explicit Aftermath check there
-        if (sa.isAftermath() && !c.isInZone(ZoneType.Graveyard)) {
+        if ((sa.isAftermath() || sa.isDisturb()) && !c.isInZone(ZoneType.Graveyard)) {
             return false;
         }
 
