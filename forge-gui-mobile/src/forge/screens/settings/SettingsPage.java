@@ -154,7 +154,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             lstSettings.addItem(new CustomSelectSetting(FPref.UI_VIDEO_MODE,
                 Forge.getLocalizer().getMessage("lblVideoMode"),
                 Forge.getLocalizer().getMessage("nlVideoMode"),
-                new String[]{"720p", "768p", "900p", "1080p"}) {
+                new String[]{"720p", "768p", "900p", "1080p", "1440p", "2160p"}) {
                 @Override
                 public void valueChanged(String newValue) {
                     super.valueChanged(newValue);
@@ -171,6 +171,12 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     } else if (mode.equalsIgnoreCase("1080p")) {
                         Config.instance().getSettingData().width = 1920;
                         Config.instance().getSettingData().height = 1080;
+                    } else if (mode.equalsIgnoreCase("1440p")) {
+                        Config.instance().getSettingData().width = 2560;
+                        Config.instance().getSettingData().height = 1440;
+                    } else if (mode.equalsIgnoreCase("2160p")) {
+                        Config.instance().getSettingData().width = 3840;
+                        Config.instance().getSettingData().height = 2160;
                     } else {
                         Config.instance().getSettingData().width = 1280;
                         Config.instance().getSettingData().height = 720;

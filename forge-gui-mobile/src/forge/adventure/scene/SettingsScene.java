@@ -123,7 +123,7 @@ public class SettingsScene extends UIScene {
         settingGroup.add(newPlane).align(Align.right).pad(2);*/
 
         if (!GuiBase.isAndroid()) {
-            SelectBox<String> videomode = Controls.newComboBox(new String[]{"720p", "768p", "900p", "1080p"}, Config.instance().getSettingData().videomode, o -> {
+            SelectBox<String> videomode = Controls.newComboBox(new String[]{"720p", "768p", "900p", "1080p", "1440p", "2160p"}, Config.instance().getSettingData().videomode, o -> {
                 String mode = (String) o;
                 if (mode == null)
                     mode = "720p";
@@ -137,6 +137,12 @@ public class SettingsScene extends UIScene {
                 } else if (mode.equalsIgnoreCase("1080p")) {
                     Config.instance().getSettingData().width = 1920;
                     Config.instance().getSettingData().height = 1080;
+                } else if (mode.equalsIgnoreCase("1440p")) {
+                    Config.instance().getSettingData().width = 2560;
+                    Config.instance().getSettingData().height = 1440;
+                } else if (mode.equalsIgnoreCase("2160p")) {
+                    Config.instance().getSettingData().width = 3840;
+                    Config.instance().getSettingData().height = 2160;
                 } else {
                     Config.instance().getSettingData().width = 1280;
                     Config.instance().getSettingData().height = 720;
