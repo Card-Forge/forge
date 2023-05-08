@@ -29,6 +29,7 @@ import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.cost.Cost;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -85,8 +86,7 @@ public class CardFactory {
             out.setToken(true);
 
             // need to copy this values for the tokens
-            out.setEmbalmed(in.isEmbalmed());
-            out.setEternalized(in.isEternalized());
+            out.setTokenSpawningAbility(in.getTokenSpawningAbility());
         }
 
         out.setZone(in.getZone());
@@ -125,7 +125,7 @@ public class CardFactory {
         final Card original = targetSA.getHostCard();
         final Game game = source.getGame();
         final Card c = new Card(game.nextCardId(), original.getPaperCard(), game);
-        copyCopiableCharacteristics(original, c);
+        copyCopiableCharacteristics(original, c, sourceSA, targetSA);
 
         if (sourceSA.hasParam("NonLegendary")) {
             c.removeType(CardType.Supertype.Legendary);
@@ -525,12 +525,12 @@ public class CardFactory {
      * @param from the {@link Card} to copy from.
      * @param to the {@link Card} to copy to.
      */
-    public static void copyCopiableCharacteristics(final Card from, final Card to) {
+    public static void copyCopiableCharacteristics(final Card from, final Card to, SpellAbility sourceSA, SpellAbility targetSA) {
         final boolean toIsFaceDown = to.isFaceDown();
         if (toIsFaceDown) {
             // If to is face down, copy to its front side
             to.setState(CardStateName.Original, false);
-            copyCopiableCharacteristics(from, to);
+            copyCopiableCharacteristics(from, to, sourceSA, targetSA);
             to.setState(CardStateName.FaceDown, false);
             return;
         }
@@ -545,6 +545,18 @@ public class CardFactory {
                 copyState(from, CardStateName.Original, to, to.getCurrentStateName());
             }
             copyState(from, CardStateName.Flipped, to, CardStateName.Flipped);
+        } else if (from.isTransformable()
+                && sourceSA != null && ApiType.CopySpellAbility.equals(sourceSA.getApi())
+                && targetSA != null && targetSA.isSpell() && targetSA.getHostCard().isPermanent()) {
+            copyState(from, CardStateName.Original, to, CardStateName.Original);
+            copyState(from, CardStateName.Transformed, to, CardStateName.Transformed);
+            // 707.10g If an effect creates a copy of a transforming permanent spell, the copy is also a transforming permanent spell that has both a front face and a back face.
+            // The characteristics of its front and back face are determined by the copiable values of the same face of the spell it is a copy of, as modified by any other copy effects.
+            // If the spell it is a copy of has its back face up, the copy is created with its back face up. The token that’s put onto the battlefield as that spell resolves is a transforming token.
+            to.setBackSide(from.isBackSide());
+            if (from.isTransformed()) {
+                to.incrementTransformedTimestamp();
+            }
         } else if (fromIsTransformedCard) {
             copyState(from, from.getCurrentStateName(), to, CardStateName.Original);
         } else {
@@ -585,6 +597,9 @@ public class CardFactory {
 
         c.setState(in.getCurrentStateName(), false);
         c.setRules(in.getRules());
+        if (in.isTransformed()) {
+            c.incrementTransformedTimestamp();
+        }
 
         return c;
     }
@@ -738,6 +753,15 @@ public class CardFactory {
             final CardState ret2 = new CardState(out, CardStateName.Adventure);
             ret2.copyFrom(in.getState(CardStateName.Adventure), false, sa);
             result.put(CardStateName.Adventure, ret2);
+        } else if (in.isTransformable() && sa instanceof SpellAbility && ApiType.CopyPermanent.equals(((SpellAbility)sa).getApi())) {
+            // CopyPermanent can copy token
+            final CardState ret1 = new CardState(out, CardStateName.Original);
+            ret1.copyFrom(in.getState(CardStateName.Original), false, sa);
+            result.put(CardStateName.Original, ret1);
+
+            final CardState ret2 = new CardState(out, CardStateName.Transformed);
+            ret2.copyFrom(in.getState(CardStateName.Transformed), false, sa);
+            result.put(CardStateName.Transformed, ret2);
         } else {
             // in all other cases just copy the current state to original
             final CardState ret = new CardState(out, CardStateName.Original);
@@ -866,16 +890,18 @@ public class CardFactory {
             }
 
             // Special Rules for Embalm and Eternalize
-            if (sa.hasParam("Embalm")  && out.isEmbalmed()) {
+            if (sa.hasParam("Embalm") && out.isEmbalmed()) {
                 state.addType("Zombie");
                 state.setColor(MagicColor.WHITE);
                 state.setManaCost(ManaCost.NO_COST);
 
-                String name = TextUtil.fastReplace(
-                        TextUtil.fastReplace(host.getName(), ",", ""),
-                        " ", "_").toLowerCase();
-                String set = host.getSetCode().toLowerCase();
-                state.setImageKey(ImageKeys.getTokenKey("embalm_" + name + "_" + set));
+                if (sa.isIntrinsic()) {
+                    String name = TextUtil.fastReplace(
+                            TextUtil.fastReplace(host.getName(), ",", ""),
+                            " ", "_").toLowerCase();
+                    String set = host.getSetCode().toLowerCase();
+                    state.setImageKey(ImageKeys.getTokenKey("embalm_" + name + "_" + set));
+                }
             }
 
             if (sa.hasParam("Eternalize") && out.isEternalized()) {
@@ -885,11 +911,13 @@ public class CardFactory {
                 state.setBasePower(4);
                 state.setBaseToughness(4);
 
-                String name = TextUtil.fastReplace(
-                    TextUtil.fastReplace(host.getName(), ",", ""),
-                        " ", "_").toLowerCase();
-                String set = host.getSetCode().toLowerCase();
-                state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
+                if (sa.isIntrinsic()) {
+                    String name = TextUtil.fastReplace(
+                        TextUtil.fastReplace(host.getName(), ",", ""),
+                            " ", "_").toLowerCase();
+                    String set = host.getSetCode().toLowerCase();
+                    state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
+                }
             }
 
             if (sa.hasParam("GainTextOf") && originalState != null) {

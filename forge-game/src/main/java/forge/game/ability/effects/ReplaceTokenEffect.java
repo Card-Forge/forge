@@ -84,6 +84,7 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
                         if (token == null) {
                             throw new RuntimeException("don't find Token for TokenScript: " + script);
                         }
+                        token.setTokenSpawningAbility((SpellAbility)repSA.getReplacingObject(AbilityKey.Cause));
                         token.setController(e.getKey(), timestamp);
                         table.put(p, token, e.getValue());
                     }
@@ -136,6 +137,7 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
                         throw new RuntimeException("don't find Token for TokenScript: " + script);
                     }
 
+                    token.setTokenSpawningAbility((SpellAbility)repSA.getReplacingObject(AbilityKey.Cause));
                     token.setController(pe.getKey(), timestamp);
                     // if token is created from ForEach keep that
                     token.addRemembered(pe.getValue().getRight());
