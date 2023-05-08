@@ -1452,7 +1452,7 @@ public class CardView extends GameEntityView {
         public boolean hasLandwalk() {
             return get(TrackableProperty.HasLandwalk);
         }
-        public boolean hasHasAftermath() {
+        public boolean hasAftermath() {
             return get(TrackableProperty.HasAftermath);
         }
 
