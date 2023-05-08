@@ -13,7 +13,7 @@ p0life=20
 p0landsplayed=0
 p0landsplayedlastturn=0
 p0hand=Cement Shoes;Prophetic Prism
-p0battlefield=Kaito, Dancing Shadow|Counters:LOYALTY=3;Tezzeret, Betrayer of Flesh|Counters:LOYALTY=2;Urza, Planeswalker|Meld|MeldedWith:The Mightstone and Weakstone|Counters:LOYALTY=7|Id:1;Levitating Statue;Ichormoon Gauntlet
+p0battlefield=Kaito, Dancing Shadow|Counters:LOYALTY=3;Tezzeret, Betrayer of Flesh|Counters:LOYALTY=2;Urza, Planeswalker|Meld|MeldedWith:The Mightstone and Weakstone|Counters:LOYALTY=7;Levitating Statue;Ichormoon Gauntlet
 p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
 p1life=21
 p1landsplayed=0
