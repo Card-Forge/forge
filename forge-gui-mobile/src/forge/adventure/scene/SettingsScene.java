@@ -7,10 +7,12 @@ import com.badlogic.gdx.utils.Align;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
+import forge.Graphics;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.assets.ImageCache;
 import forge.gui.GuiBase;
+import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.sound.SoundSystem;
@@ -123,25 +125,12 @@ public class SettingsScene extends UIScene {
         settingGroup.add(newPlane).align(Align.right).pad(2);*/
 
         if (!GuiBase.isAndroid()) {
-            SelectBox<String> videomode = Controls.newComboBox(new String[]{"720p", "768p", "900p", "1080p"}, Config.instance().getSettingData().videomode, o -> {
+            SelectBox<String> videomode = Controls.newComboBox(ForgeConstants.VIDEO_MODES, Config.instance().getSettingData().videomode, o -> {
                 String mode = (String) o;
                 if (mode == null)
                     mode = "720p";
-                Config.instance().getSettingData().videomode = mode;
-                if (mode.equalsIgnoreCase("768p")) {
-                    Config.instance().getSettingData().width = 1366;
-                    Config.instance().getSettingData().height = 768;
-                } else if (mode.equalsIgnoreCase("900p")) {
-                    Config.instance().getSettingData().width = 1600;
-                    Config.instance().getSettingData().height = 900;
-                } else if (mode.equalsIgnoreCase("1080p")) {
-                    Config.instance().getSettingData().width = 1920;
-                    Config.instance().getSettingData().height = 1080;
-                } else {
-                    Config.instance().getSettingData().width = 1280;
-                    Config.instance().getSettingData().height = 720;
-                }
-                Config.instance().saveSettings();
+                Graphics.setVideoMode(mode);
+
                 //update preference for classic mode if needed
                 if (Preference.getPref(ForgePreferences.FPref.UI_VIDEO_MODE).equals(mode)) {
                     Preference.setPref(ForgePreferences.FPref.UI_VIDEO_MODE, mode);
