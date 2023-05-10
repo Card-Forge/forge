@@ -72,7 +72,6 @@ import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -4658,7 +4657,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final KeywordInterface getKeywordForStaticAbility(String kw, final long staticId, final long idx) {
         KeywordInterface result;
-        Pair<Long, Long> pair = ImmutablePair.of(staticId, idx);
+        Pair<Long, Long> pair = Pair.of(staticId, idx);
         if (staticId < 1 || !storedKeywords.contains(kw, pair)) {
             result = Keyword.getInstance(kw);
             result.setStaticId(staticId);
@@ -4674,7 +4673,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final void addKeywordForStaticAbility(KeywordInterface kw) {
         if (kw.getStaticId() > 0) {
-            storedKeywords.put(kw.getOriginal(), ImmutablePair.of(kw.getStaticId(), 0l), kw);
+            storedKeywords.put(kw.getOriginal(), Pair.of(kw.getStaticId(), 0l), kw);
         }
     }
 
