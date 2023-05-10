@@ -15,7 +15,9 @@
       "count":2,
 	  "cardText": "(destroy|exile) target|sacrifice"
     }]
-},{                                      
+},
+
+{                                      
 "name":"Black2",                  
 "description":"March of the Returned",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
@@ -31,7 +33,8 @@
       "count":2,
 	  "cardText": "destroyed|dies|return.*(hand|battlefield|library|to play)|put.*battlefield from"
     }]
-},{                                      
+},
+{                                      
 "name":"Black3",                  
 "description":"Essence Extraction",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
@@ -4837,6 +4840,192 @@
 	  ] 
 	}]
 },
+{                                    
+"name":"PhyrexianColorless",                  
+"description":"A Compleat Bargain",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"PhyrexianShop",
+  "rewards": [
+    {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Phyrexian"]
+		},
+		{
+		  "count":1,
+		  "cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|for mirrodin"
+		}
+	  ]
+	}]
+},
+{                                    
+"name":"PhyrexianWhite",                  
+"description":"Orthodoxy Offerings",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"PhyrexianShop",
+  "rewards": [
+   {
+	"count":5
+	"type":"Union"
+	"cardUnion":[
+	{
+		"count":1,
+		"colors":["white"]
+		"subTypes": ["Phyrexian"]
+	},
+	{
+		"count":1,
+		"colors":["white"]
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
+	}]},
+	{
+		"count":3
+		"type":"Union"
+		"cardUnion":[
+		{
+		"count":1,
+		"subTypes": ["Phyrexian"]
+		},
+		{
+		"count":1,
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
+		}
+	]}]},
+{                                    
+"name":"PhyrexianBlue",                  
+"description":"Eyes for Quality",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"PhyrexianShop",
+  "rewards": [
+   {
+	"count":5
+	"type":"Union"
+	"cardUnion":[
+	{
+		"count":1,
+		"colors":["blue"]
+		"subTypes": ["Phyrexian"]
+	},
+	{
+		"count":1,
+		"colors":["blue"]
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
+	}]},
+	{
+		"count":3
+		"type":"Union"
+		"cardUnion":[
+		{
+		"count":1,
+		"subTypes": ["Phyrexian"]
+		},
+		{
+		"count":1,
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
+		}
+	]}]},
+{                                    
+"name":"PhyrexianGreen",                  
+"description":"A-Maze-ing Prices",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"PhyrexianShop",
+  "rewards": [
+   {
+	"count":5
+	"type":"Union"
+	"cardUnion":[
+	{
+		"count":1,
+		"colors":["green"]
+		"subTypes": ["Phyrexian"]
+	},
+	{
+		"count":1,
+		"colors":["green"]
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
+	}]},
+	{
+		"count":3
+		"type":"Union"
+		"cardUnion":[
+		{
+		"count":1,
+		"subTypes": ["Phyrexian"]
+		},
+		{
+		"count":1,
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
+		}
+	]}]},
+{                                    
+"name":"PhyrexianRed",                  
+"description":"Realmbreaker's Rebels",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"PhyrexianShop",
+  "rewards": [
+   {
+	"count":5
+	"type":"Union"
+	"cardUnion":[
+	{
+		"count":1,
+		"colors":["red"]
+		"subTypes": ["Phyrexian"]
+	},
+	{
+		"count":1,
+		"colors":["red"]
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|for mirrodin"
+	}]},
+	{
+		"count":3
+		"type":"Union"
+		"cardUnion":[
+		{
+		"count":1,
+		"subTypes": ["Phyrexian"]
+		},
+		{
+		"count":1,
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|for mirrodin"
+		}
+	]}]},
+{                                    
+"name":"PhyrexianBlack",                  
+"description":"Dross Bits",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"PhyrexianShop",
+  "rewards": [
+   {
+	"count":5
+	"type":"Union"
+	"cardUnion":[
+	{
+		"count":1,
+		"colors":["black"]
+		"subTypes": ["Phyrexian"]
+	},
+	{
+		"count":1,
+		"colors":["black"]
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
+	}]},
+	{
+		"count":3
+		"type":"Union"
+		"cardUnion":[
+		{
+		"count":1,
+		"subTypes": ["Phyrexian"]
+		},
+		{
+		"count":1,
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
+		}
+	]}]},
 {
   "name":"UnionTest",
   "description":"Soldier text OR Soldier type OR black goblin",

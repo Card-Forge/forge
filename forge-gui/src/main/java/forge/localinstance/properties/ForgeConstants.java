@@ -471,6 +471,9 @@ public final class ForgeConstants {
     // Set boolean constant for landscape mode for gdx port
     public static final boolean isGdxPortLandscape = FileUtil.doesFileExist(ASSETS_DIR + "switch_orientation.ini");
 
+    // Supported video mode names and dimensions (currently used in Adventure Mode)
+    public static final String[] VIDEO_MODES = {"720p", "768p", "900p", "1080p", "1440p", "2160p"};
+
     public enum CounterDisplayLocation {
 
         TOP("Top of Card"), BOTTOM("Bottom of Card");
