@@ -116,7 +116,7 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
     }
 
     public final Card getFirstTargetedCard() {
-        return Iterables.getFirst(Iterables.filter(targets, Card.class), null);
+        return Iterables.getFirst(getTargetCards(), null);
     }
 
     public final Player getFirstTargetedPlayer() {
