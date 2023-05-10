@@ -370,6 +370,9 @@ Overlay4White
 Overlay2White
   xy: 405, 848
   size: 5, 16  
+PhyrexianShop
+  xy: 304, 912
+  size: 16, 16
 Test
   xy: 128, 48
   size: 32, 32 

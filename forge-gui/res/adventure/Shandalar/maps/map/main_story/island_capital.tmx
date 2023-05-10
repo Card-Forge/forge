@@ -43,7 +43,7 @@
   <object id="41" template="../../obj/shop.tx" x="232" y="146">
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
-    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue"/>
     <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
@@ -52,7 +52,7 @@
   <object id="56" template="../../obj/shop.tx" x="106" y="210">
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
-    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue"/>
     <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
@@ -61,7 +61,7 @@
   <object id="57" template="../../obj/shop.tx" x="408" y="146">
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
-    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue"/>
     <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
@@ -70,7 +70,7 @@
   <object id="43" template="../../obj/shop.tx" x="152" y="435">
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
-    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue"/>
     <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
@@ -80,7 +80,7 @@
   <object id="49" template="../../obj/shop.tx" x="360" y="258">
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
-    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue"/>
     <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
@@ -89,7 +89,7 @@
   <object id="50" template="../../obj/shop.tx" x="536" y="354">
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
-    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue"/>
     <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
@@ -98,7 +98,7 @@
   <object id="51" template="../../obj/shop.tx" x="552" y="418">
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
-    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue"/>
     <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
@@ -107,7 +107,7 @@
   <object id="52" template="../../obj/shop.tx" x="56" y="306">
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
-    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue"/>
     <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
@@ -206,7 +206,7 @@
   <object id="66" template="../../obj/shop.tx" x="264" y="258">
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
-    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue"/>
     <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
@@ -215,7 +215,7 @@
   <object id="67" template="../../obj/shop.tx" x="472" y="178">
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
-    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue"/>
+    <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue"/>
     <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
