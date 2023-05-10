@@ -991,12 +991,7 @@ public class PhaseHandler implements java.io.Serializable {
 
     private final static boolean DEBUG_PHASES = false;
 
-    public void startFirstTurn(Player goesFirst) {
-        startFirstTurn(goesFirst, null);
-    }
-    public void startFirstTurn(Player goesFirst, Runnable startGameHook) {
-        StopWatch sw = new StopWatch();
-
+    public void setupFirstTurn(Player goesFirst, Runnable startGameHook) {
         if (phase != null) {
             throw new IllegalStateException("Turns already started, call this only once per game");
         }
@@ -1012,10 +1007,26 @@ public class PhaseHandler implements java.io.Serializable {
             startGameHook.run();
             givePriorityToPlayer = true;
         }
+    }
+
+    public void startFirstTurn(Player goesFirst) {
+        startFirstTurn(goesFirst, null);
+    }
+    public void startFirstTurn(Player goesFirst, Runnable startGameHook) {
+
+        // do setup
+        this.setupFirstTurn(goesFirst, startGameHook);
+
 
         // MAIN GAME LOOP
         while (!game.isGameOver()) {
-            if (givePriorityToPlayer) {
+           this.mainLoopStep();
+        }
+    }
+
+    public void mainLoopStep() {
+        StopWatch sw = new StopWatch();
+        if (givePriorityToPlayer) {
                 if (DEBUG_PHASES) {
                     sw.start();
                 }
@@ -1030,6 +1041,7 @@ public class PhaseHandler implements java.io.Serializable {
                         return;
                     }
 
+                    // TODO: Why does this return a list?
                     chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
 
                     // this needs to come after chosenSa so it sees you conceding on own turn
@@ -1050,6 +1062,7 @@ public class PhaseHandler implements java.io.Serializable {
                         Card saHost = sa.getHostCard();
                         final Zone originZone = saHost.getZone();
 
+                        // Note: this involves going back to the AI for choices
                         if (pPlayerPriority.getController().playChosenSpellAbility(sa)) {
                             pFirstPriority = pPlayerPriority; // all opponents have to pass before stack is allowed to resolve
                         }
@@ -1132,7 +1145,6 @@ public class PhaseHandler implements java.io.Serializable {
                 else
                     p.setHasPriority(false);
             }
-        }
     }
 
     private boolean checkStateBasedEffects() {

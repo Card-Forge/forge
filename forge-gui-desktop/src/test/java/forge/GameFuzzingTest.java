@@ -39,13 +39,13 @@ public class GameFuzzingTest {
         CardDb cardDb = FModel.getMagicDb().getCommonCards();
         final DeckGenerator5Color gen = new DeckGenerator5Color(cardDb, DeckFormat.Constructed);
         final Deck first_deck = new Deck("first", gen.getDeck(60, false));
-        final Deck second_deck = new Deck("first", gen.getDeck(60, false));
+        final Deck second_deck = new Deck("second", gen.getDeck(60, false));
 
         final RegisteredPlayer p1 = new RegisteredPlayer(first_deck);
         final RegisteredPlayer p2 = new RegisteredPlayer(second_deck);
 
         Set<AIOption> options = new HashSet<>();
-        options.add(AIOption.USE_SIMULATION);
+        // options.add(AIOption.USE_SIMULATION);
         p1.setPlayer(new LobbyPlayerAi("p1", options));
         p2.setPlayer(new LobbyPlayerAi("p2", options));
         GameRules rules = new GameRules(GameType.Constructed);
