@@ -73,6 +73,7 @@ import io.sentry.Sentry;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -140,7 +141,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final Table<Long, Long, KeywordsChange> changedCardKeywords = TreeBasedTable.create(); // Layer 6
 
     // stores the keywords created by static abilities
-    private final Table<String, Pair<Long, Long>, KeywordInterface> storedKeywords = TreeBasedTable.create();
+    private final Map<Triple<String, Long, Long>, KeywordInterface> storedKeywords = Maps.newHashMap();
 
     // x=timestamp y=StaticAbility id
     private final Table<Long, Long, CardTraitChanges> changedCardTraitsByText = TreeBasedTable.create(); // Layer 3 by Text Change
@@ -4657,44 +4658,44 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final KeywordInterface getKeywordForStaticAbility(String kw, final long staticId, final long idx) {
         KeywordInterface result;
-        Pair<Long, Long> pair = Pair.of(staticId, idx);
-        if (staticId < 1 || !storedKeywords.contains(kw, pair)) {
+        Triple<String, Long, Long> triple = Triple.of(kw, staticId, idx);
+        if (staticId < 1 || !storedKeywords.containsKey(triple)) {
             result = Keyword.getInstance(kw);
             result.setStaticId(staticId);
             result.createTraits(this, false);
             if (staticId > 0) {
-                storedKeywords.put(kw, pair, result);
+                storedKeywords.put(triple, result);
             }
         } else {
-            result = storedKeywords.get(kw, pair);
+            result = storedKeywords.get(triple);
         }
         return result;
     }
 
     public final void addKeywordForStaticAbility(KeywordInterface kw) {
         if (kw.getStaticId() > 0) {
-            storedKeywords.put(kw.getOriginal(), Pair.of(kw.getStaticId(), 0l), kw);
+            storedKeywords.put(Triple.of(kw.getOriginal(), kw.getStaticId(), 0l), kw);
         }
     }
 
-    public Table<String, Pair<Long, Long>, KeywordInterface> getStoredKeywords() {
+    public Map<Triple<String, Long, Long>, KeywordInterface> getStoredKeywords() {
         return storedKeywords;
     }
 
-    public void setStoredKeywords(Table<String, Pair<Long, Long>, KeywordInterface> table, boolean lki) {
+    public void setStoredKeywords(Map<Triple<String, Long, Long>, KeywordInterface> map, boolean lki) {
         storedKeywords.clear();
-        for (Table.Cell<String, Pair<Long, Long>, KeywordInterface> c : table.cellSet()) {
-            storedKeywords.put(c.getRowKey(), c.getColumnKey(), getCopyForStoredKeyword(c, lki));
+        for (Map.Entry<Triple<String, Long, Long>, KeywordInterface> e : table.entrySet()) {
+            storedKeywords.put(e.getKey(), getCopyForStoredKeyword(e, lki));
         }
     }
 
-    private final KeywordInterface getCopyForStoredKeyword(Table.Cell<String, Pair<Long, Long>, KeywordInterface> c, boolean lki) {
+    private final KeywordInterface getCopyForStoredKeyword(Map.Entry<Triple<String, Long, Long>, KeywordInterface> e, boolean lki) {
         // for performance check if we already copied this
         if (lki) {
-            for (KeywordsChange kc : changedCardKeywords.column(c.getColumnKey().getLeft()).values()) {
+            for (KeywordsChange kc : changedCardKeywords.column(e.getKey().getMiddle()).values()) {
                 // same static id
                 for (KeywordInterface kw : kc.getKeywords()) {
-                    if (kw.getOriginal().equals(c.getValue().getOriginal())) {
+                    if (kw.getOriginal().equals(e.getValue().getOriginal())) {
                         // same kw
                         return kw;
                     }
@@ -4702,7 +4703,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         }
 
-        return c.getValue().copy(this, lki);
+        return e.getValue().copy(this, lki);
     }
 
     public final void addChangedCardKeywordsByText(final List<KeywordInterface> keywords, final long timestamp, final long staticId, final boolean updateView) {
