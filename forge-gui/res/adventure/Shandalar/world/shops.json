@@ -4856,7 +4856,7 @@
 		},
 		{
 		  "count":1,
-		  "cardText": "infect|oil|proliferate|incubate|toxic|corrupted|incubator|phyrexian|poison|living weapon|for mirrodin"
+		  "cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|for mirrodin"
 		}
 	  ]
 	}]
@@ -4879,7 +4879,7 @@
 	{
 		"count":1,
 		"colors":["white"]
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|incubator|phyrexian|poison|living weapon"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
 	}]},
 	{
 		"count":3
@@ -4891,7 +4891,7 @@
 		},
 		{
 		"count":1,
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|incubator|phyrexian|poison|living weapon"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
 		}
 	]}]},
 {                                    
@@ -4912,7 +4912,7 @@
 	{
 		"count":1,
 		"colors":["blue"]
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|incubator|phyrexian|poison|living weapon"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
 	}]},
 	{
 		"count":3
@@ -4924,7 +4924,7 @@
 		},
 		{
 		"count":1,
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|incubator|phyrexian|poison|living weapon"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
 		}
 	]}]},
 {                                    
@@ -4945,7 +4945,7 @@
 	{
 		"count":1,
 		"colors":["green"]
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|incubator|phyrexian|poison|living weapon"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
 	}]},
 	{
 		"count":3
@@ -4957,7 +4957,7 @@
 		},
 		{
 		"count":1,
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|incubator|phyrexian|poison|living weapon"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
 		}
 	]}]},
 {                                    
@@ -4978,7 +4978,7 @@
 	{
 		"count":1,
 		"colors":["red"]
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|incubator|phyrexian|poison|living weapon|for mirrodin"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|for mirrodin"
 	}]},
 	{
 		"count":3
@@ -4990,7 +4990,7 @@
 		},
 		{
 		"count":1,
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|incubator|phyrexian|poison|living weapon|for mirrodin"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|for mirrodin"
 		}
 	]}]},
 {                                    
@@ -5011,7 +5011,7 @@
 	{
 		"count":1,
 		"colors":["black"]
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|incubator|phyrexian|poison|living weapon"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
 	}]},
 	{
 		"count":3
@@ -5023,7 +5023,7 @@
 		},
 		{
 		"count":1,
-		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|incubator|phyrexian|poison|living weapon"
+		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
 		}
 	]}]},
 {
