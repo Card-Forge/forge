@@ -4684,7 +4684,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public void setStoredKeywords(Map<Triple<String, Long, Long>, KeywordInterface> map, boolean lki) {
         storedKeywords.clear();
-        for (Map.Entry<Triple<String, Long, Long>, KeywordInterface> e : table.entrySet()) {
+        for (Map.Entry<Triple<String, Long, Long>, KeywordInterface> e : map.entrySet()) {
             storedKeywords.put(e.getKey(), getCopyForStoredKeyword(e, lki));
         }
     }
