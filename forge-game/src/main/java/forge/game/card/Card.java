@@ -72,6 +72,7 @@ import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -140,7 +141,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final Table<Long, Long, KeywordsChange> changedCardKeywords = TreeBasedTable.create(); // Layer 6
 
     // stores the keywords created by static abilities
-    private final Table<Long, String, KeywordInterface> storedKeywords = TreeBasedTable.create();
+    private final Table<String, Pair<Long, Long>, KeywordInterface> storedKeywords = TreeBasedTable.create();
 
     // x=timestamp y=StaticAbility id
     private final Table<Long, Long, CardTraitChanges> changedCardTraitsByText = TreeBasedTable.create(); // Layer 3 by Text Change
@@ -4638,8 +4639,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             final boolean removeAllKeywords, final long timestamp, final long staticId, final boolean updateView) {
         List<KeywordInterface> kws = Lists.newArrayList();
         if (keywords != null) {
+            long idx = 1;
             for (String kw : keywords) {
-                kws.add(getKeywordForStaticAbility(kw, staticId));
+                kws.add(getKeywordForStaticAbility(kw, staticId, idx));
+                idx++;
             }
         }
 
@@ -4653,14 +4656,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
 
-    public final KeywordInterface getKeywordForStaticAbility(String kw, final long staticId) {
+    public final KeywordInterface getKeywordForStaticAbility(String kw, final long staticId, final long idx) {
         KeywordInterface result;
         if (staticId < 1 || !storedKeywords.contains(staticId, kw)) {
             result = Keyword.getInstance(kw);
             result.setStaticId(staticId);
             result.createTraits(this, false);
             if (staticId > 0) {
-                storedKeywords.put(staticId, kw, result);
+                storedKeywords.put(kw, ImmutablePair.of(staticId, idx), result);
             }
         } else {
             result = storedKeywords.get(staticId, kw);
@@ -4670,25 +4673,25 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final void addKeywordForStaticAbility(KeywordInterface kw) {
         if (kw.getStaticId() > 0) {
-            storedKeywords.put(kw.getStaticId(), kw.getOriginal(), kw);
+            storedKeywords.put(kw.getOriginal(), ImmutablePair.of(kw.getStaticId(), 0l), kw);
         }
     }
 
-    public Table<Long, String, KeywordInterface> getStoredKeywords() {
+    public Table<String, Pair<Long, Long>, KeywordInterface> getStoredKeywords() {
         return storedKeywords;
     }
 
-    public void setStoredKeywords(Table<Long, String, KeywordInterface> table, boolean lki) {
+    public void setStoredKeywords(Table<String, Pair<Long, Long>, KeywordInterface> table, boolean lki) {
         storedKeywords.clear();
-        for (Table.Cell<Long, String, KeywordInterface> c : table.cellSet()) {
+        for (Table.Cell<String, Pair<Long, Long>, KeywordInterface> c : table.cellSet()) {
             storedKeywords.put(c.getRowKey(), c.getColumnKey(), getCopyForStoredKeyword(c, lki));
         }
     }
 
-    private final KeywordInterface getCopyForStoredKeyword(Table.Cell<Long, String, KeywordInterface> c, boolean lki) {
+    private final KeywordInterface getCopyForStoredKeyword(Table.Cell<String, Pair<Long, Long>, KeywordInterface> c, boolean lki) {
         // for performance check if we already copied this
         if (lki) {
-            for (KeywordsChange kc : changedCardKeywords.column(c.getRowKey()).values()) {
+            for (KeywordsChange kc : changedCardKeywords.column(c.getColumnKey().getLeft()).values()) {
                 // same static id
                 for (KeywordInterface kw : kc.getKeywords()) {
                     if (kw.getOriginal().equals(c.getValue().getOriginal())) {
