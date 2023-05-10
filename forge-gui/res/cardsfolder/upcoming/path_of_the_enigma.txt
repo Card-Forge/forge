@@ -1,0 +1,9 @@
+Name:Path of the Enigma
+ManaCost:4 U
+Types:Sorcery
+A:SP$ Draw | ValidTgts$ Player | NumCards$ 4 | SubAbility$ DBSpace | SpellDescription$ Target player draws four cards.
+SVar:DBSpace:DB$ BlankLine | SubAbility$ DBVote | SpellDescription$ ,,,,,,
+SVar:DBVote:DB$ Vote | Defined$ Player | VoteType$ Planeswalk,Chaos | VotePlaneswalk$ DBPlaneswalk | VoteChaos$ DBChaos | Tied$ DBChaos | StackDescription$ SpellDescription | SpellDescription$ Will of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues.
+SVar:DBPlaneswalk:DB$ Planeswalk
+SVar:DBChaos:DB$ ChaosEnsues
+Oracle:Target player draws four cards.\nWill of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues.

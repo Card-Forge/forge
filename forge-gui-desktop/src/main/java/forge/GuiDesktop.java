@@ -144,15 +144,21 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public ISkinImage createLayeredImage(final FSkinProp background, final String overlayFilename, final float opacity) {
+    public ISkinImage createLayeredImage(final PaperCard paperCard, final FSkinProp background, final String overlayFilename, final float opacity) {
         final BufferedImage image = new BufferedImage(background.getWidth(), background.getHeight(), BufferedImage.TYPE_INT_ARGB);
         final Graphics2D g = image.createGraphics();
         final FSkin.SkinImage backgroundImage = FSkin.getImage(background);
         FSkin.drawImage(g, backgroundImage, 0, 0, background.getWidth(), background.getHeight());
+        final int cardImageWidth = 90;
+        final int cardImageHeight = 128;
 
         if (FileUtil.doesFileExist(overlayFilename)) {
             final ImageIcon overlay = new ImageIcon(overlayFilename);
             g.drawImage(overlay.getImage(), (background.getWidth() - overlay.getIconWidth()) / 2, (background.getHeight() - overlay.getIconHeight()) / 2, overlay.getIconWidth(), overlay.getIconHeight(), null);
+        } else if (paperCard != null) {
+            BufferedImage cardImage = ImageCache.scaleImage(paperCard.getCardImageKey(), cardImageWidth, cardImageHeight, false, null);
+            if (cardImage != null)
+                g.drawImage(cardImage, (background.getWidth() - cardImageWidth) / 2, (background.getHeight() - cardImageHeight) / 4, cardImageWidth, cardImageHeight, null);
         }
         return new FSkin.UnskinnedIcon(image, opacity);
     }
@@ -168,7 +174,7 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions) {
+    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions, boolean isNumeric) {
         return FOptionPane.showInputDialog(message, title, icon == null ? null : FSkin.getImage(icon), initialInput, inputOptions);
     }
 

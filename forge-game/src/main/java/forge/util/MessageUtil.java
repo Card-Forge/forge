@@ -34,7 +34,9 @@ public class MessageUtil {
         }
         String choser = StringUtils.capitalize(mayBeYou(player, target));
         switch(sa.getApi()) {
+            case ChoosePlayer:
             case ChooseDirection:
+            case Clash:
             case DigMultiple:
                 return value;
             case ChooseColor:
@@ -66,6 +68,7 @@ public class MessageUtil {
             case Protection:
                 return Localizer.getInstance().getMessage("lblPlayerChooseValue", choser, value);
             case RollDice:
+            case RollPlanarDice:
             case PutCounter:// For Clay Golem cost text
                 return value;
             case Vote:

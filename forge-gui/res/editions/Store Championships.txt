@@ -11,7 +11,10 @@ ScryfallCode=SCH
 3 R Dark Confidant @Livia Prima
 4 R Spell Pierce @Andrew Mar
 5 R Gilded Goose @Chris Seaman
-6 C Omnath, Locus of Creation @John Tedrick
+6 M Omnath, Locus of Creation @John Tedrick
 7 R Annex Sentry @Sam Guay
 8 R Memory Deluge @Sam Guay
-9 M Koth, Fire of Resistance @Kieran Yanner
+9 R Koth, Fire of Resistance @Kieran Yanner
+10 R Strangle @Sidharth Chaturvedi
+11 R Aether Channeler @Olivier Bernard
+12 M Thalia and The Gitrog Monster @PINDURSKI

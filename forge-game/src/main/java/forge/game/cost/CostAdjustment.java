@@ -75,7 +75,7 @@ public class CostAdjustment {
         // Sort abilities to apply them in proper order
         for (Card c : cardsOnBattlefield) {
             for (final StaticAbility stAb : c.getStaticAbilities()) {
-                if (stAb.getParam("Mode").equals("RaiseCost")) {
+                if (stAb.checkMode("RaiseCost")) {
                     raiseAbilities.add(stAb);
                 }
             }
@@ -115,7 +115,13 @@ public class CostAdjustment {
         int count = 0;
 
         if (st.hasParam("ForEachShard")) {
-            ManaCost mc = sa.getHostCard().getManaCost();
+            ManaCost mc = ManaCost.ZERO;
+            if (sa.isSpell()) {
+                mc = sa.getHostCard().getManaCost();
+            } else if (sa.isAbility() && sa.getPayCosts().hasManaCost()) {
+                // TODO check for AlternateCost$, it should always be part of the activation cost too
+                mc = sa.getPayCosts().getCostMana().getMana();
+            }
             byte atom = ManaAtom.fromName(st.getParam("ForEachShard").toLowerCase());
             for (ManaCostShard shard : mc) {
                 if ((shard.getColorMask() & atom) != 0) {
@@ -155,7 +161,7 @@ public class CostAdjustment {
             count = 1;
         }
         if (count > 0) {
-            Cost part = new Cost(scost, sa.isAbility());
+            Cost part = new Cost(scost, sa.isAbility(), sa.getHostCard().equals(hostCard));
             cost.mergeTo(part, count);
         }
     }
@@ -191,10 +197,10 @@ public class CostAdjustment {
         // Sort abilities to apply them in proper order
         for (Card c : cardsOnBattlefield) {
             for (final StaticAbility stAb : c.getStaticAbilities()) {
-                if (stAb.getParam("Mode").equals("ReduceCost")) {
+                if (stAb.checkMode("ReduceCost")) {
                     reduceAbilities.add(stAb);
                 }
-                else if (stAb.getParam("Mode").equals("SetCost")) {
+                else if (stAb.checkMode("SetCost")) {
                     setAbilities.add(stAb);
                 }
             }
@@ -430,7 +436,7 @@ public class CostAdjustment {
     }    
 
     private static boolean checkRequirement(final SpellAbility sa, final StaticAbility st) {
-        if (st.isSuppressed() || !st.checkConditions()) {
+        if (!st.checkConditions()) {
             return false;
         }
 
@@ -462,7 +468,7 @@ public class CostAdjustment {
                     }
                     List<Card> list;
                     if (st.hasParam("ValidCard")) {
-                        list = CardUtil.getThisTurnCast(st.getParam("ValidCard"), hostCard, st);
+                        list = CardUtil.getThisTurnCast(st.getParam("ValidCard"), hostCard, st, controller);
                     } else {
                         list = game.getStack().getSpellsCastThisTurn();
                     }
@@ -546,25 +552,6 @@ public class CostAdjustment {
             } else if (!targetValid) {
                 return false;
             }
-        }
-        if (st.hasParam("ValidSpellTarget")) {
-            SpellAbility curSa = sa;
-            boolean targetValid = false;
-            outer: while (curSa != null) {
-                if (!curSa.usesTargeting()) {
-                    curSa = curSa.getSubAbility();
-                    continue;
-                }
-                for (SpellAbility target : curSa.getTargets().getTargetSpells()) {
-                    Card targetCard = target.getHostCard();
-                    if (targetCard.isValid(st.getParam("ValidSpellTarget").split(","), controller, hostCard, curSa)) {
-                        targetValid = true;
-                        break outer;
-                    }
-                }
-                curSa = curSa.getSubAbility();
-            }
-            return targetValid;
         }
         return true;
     }

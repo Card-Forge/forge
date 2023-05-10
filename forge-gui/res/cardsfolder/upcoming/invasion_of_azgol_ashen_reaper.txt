@@ -1,0 +1,23 @@
+Name:Invasion of Azgol
+ManaCost:B R
+Types:Battle Siege
+Defense:4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ When CARDNAME enters the battlefield, target player sacrifices a creature or planeswalker and loses 1 life.
+SVar:TrigSacrifice:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Creature,Planeswalker | SacMessage$ Creature or Planeswalker | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ TargetedPlayer | LifeAmount$ 1
+AlternateMode:DoubleFaced
+DeckHas:Ability$Sacrifice|Counters
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Azgol enters the battlefield, target player sacrifices a creature or planeswalker and loses 1 life.
+
+ALTERNATE
+
+Name:Ashen Reaper
+ManaCost:no cost
+Colors:black,red
+Types:Creature Zombie Elemental
+PT:2/1
+K:Menace
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a +1/+1 counter on CARDNAME if a permanent was put into a graveyard from the battlefield this turn.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ Morbid | ConditionSVarCompare$ GE1
+SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Permanent
+Oracle:Menace\nAt the beginning of your end step, put a +1/+1 counter on Ashen Reaper if a permanent was put into a graveyard from the battlefield this turn.

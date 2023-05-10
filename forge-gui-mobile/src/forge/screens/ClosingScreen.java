@@ -21,7 +21,7 @@ public class ClosingScreen extends FContainer {
     private boolean drawStatic = false;
     private FileHandle adv_logo = getSkinFile("adv_logo.png");
     private FileHandle existingLogo = adv_logo.exists() ? adv_logo : getDefaultSkinFile("adv_logo.png");
-    private Texture logo = existingLogo.exists() && Forge.advStartup ? new Texture(existingLogo) : FSkin.getLogo();
+    private Texture logo = existingLogo.exists() && Forge.advStartup ? Forge.getAssets().getTexture(existingLogo, true, false) : FSkin.getLogo();
 
     public ClosingScreen(boolean restart0) {
         bgAnimation = new BGAnimation();

@@ -32,7 +32,6 @@ import forge.game.card.*;
 import forge.game.event.*;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
-import forge.game.keyword.KeywordsChange;
 import forge.game.mulligan.MulliganService;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
@@ -89,7 +88,6 @@ public class GameAction {
     public Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause) {
         return changeZone(zoneFrom, zoneTo, c, position, cause, null);
     }
-
     private Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause, Map<AbilityKey, Object> params) {
         // 111.11. A copy of a permanent spell becomes a token as it resolves.
         // The token has the characteristics of the spell that became that token.
@@ -265,31 +263,24 @@ public class GameAction {
             copied.setTimestamp(c.getTimestamp());
 
             if (zoneTo.is(ZoneType.Stack)) {
-                // when moving to stack, copy changed card information
-                copied.setChangedCardColors(c.getChangedCardColorsTable());
-                copied.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningTable());
-                copied.setChangedCardKeywords(c.getChangedCardKeywords());
-                copied.setChangedCardTypes(c.getChangedCardTypesTable());
-                copied.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningTable());
-                copied.setChangedCardNames(c.getChangedCardNames());
-                copied.setChangedCardTraits(c.getChangedCardTraits());
-                copied.setDrawnThisTurn(c.getDrawnThisTurn());
-
-                copied.copyChangedTextFrom(c);
-
-                // clean up changes that come from its own static abilities
-                copied.cleanupCopiedChangesFrom(c);
+                // try not to copy changed stats when moving to stack
 
                 // copy exiled properties when adding to stack
                 // will be cleanup later in MagicStack
                 copied.setExiledWith(c.getExiledWith());
                 copied.setExiledBy(c.getExiledBy());
+                copied.setDrawnThisTurn(c.getDrawnThisTurn());
 
-                // copy bestow timestamp
-                copied.setBestowTimestamp(c.getBestowTimestamp());
+                if (c.isTransformed()) {
+                    copied.incrementTransformedTimestamp();
+                }
 
                 if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
                     copied.setCastSA(cause);
+                    copied.setSplitStateToPlayAbility(cause);
+
+                    // CR 112.2 A spell’s controller is, by default, the player who put it on the stack.
+                    copied.setController(cause.getActivatingPlayer(), 0);
                     KeywordInterface kw = cause.getKeyword();
                     if (kw != null) {
                         copied.addKeywordForStaticAbility(kw);
@@ -491,39 +482,17 @@ public class GameAction {
                 }
             }
 
-            if (!zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Stack)) {
-                c.cleanupExiledWith();
-            }
-
-            // 400.7a Effects from static abilities that give a permanent spell on the stack an ability
-            // that allows it to be cast for an alternative cost continue to apply to the permanent that spell becomes.
             if (zoneFrom.is(ZoneType.Stack) && toBattlefield) {
-                List<KeywordInterface> newKw = Lists.newArrayList();
-                for (Table.Cell<Long, Long, KeywordsChange> cell : c.getChangedCardKeywords().cellSet()) {
-                    // comes from a static ability
-                    if (cell.getColumnKey() == 0) {
-                        continue;
-                    }
-                    for (KeywordInterface ki : cell.getValue().getKeywords()) {
-                        boolean keepKeyword = false;
-                        for (SpellAbility sa : ki.getAbilities()) {
-                            if (!sa.isSpell()) {
-                                continue;
-                            }
-                            if (sa.getAlternativeCost() != null) {
-                                keepKeyword = true;
-                                break;
-                            }
-                        }
-                        if (keepKeyword) {
-                            ki.setHostCard(copied);
-                            newKw.add(ki);
-                        }
-                    }
+                // 400.7a Effects from static abilities that give a permanent spell on the stack an ability
+                // that allows it to be cast for an alternative cost continue to apply to the permanent that spell becomes.
+                if (c.getCastSA() != null && !c.getCastSA().isIntrinsic() && c.getCastSA().getKeyword() != null) {
+                    KeywordInterface ki = c.getCastSA().getKeyword();
+                    ki.setHostCard(copied);
+                    copied.addChangedCardKeywordsInternal(ImmutableList.of(ki), null, false, copied.getTimestamp(), 0, true);
                 }
-                if (!newKw.isEmpty()) {
-                    copied.addChangedCardKeywordsInternal(newKw, null, false, copied.getTimestamp(), 0, true);
-                }
+
+                // 607.2q linked ability can find cards exiled as cost while it was a spell
+                copied.addExiledCards(c.getExiledCards());
             }
         }
 
@@ -618,9 +587,23 @@ public class GameAction {
         // Need to apply any static effects to produce correct triggers
         checkStaticAbilities();
 
+        // 400.7g try adding keyword back into card if it doesn't already have it
+        if (zoneTo.is(ZoneType.Stack) && cause != null && cause.isSpell() && !cause.isIntrinsic() && c.equals(cause.getHostCard())) {
+            if (cause.getKeyword() != null && !copied.getKeywords().contains(cause.getKeyword())) {
+                copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, game.getNextTimestamp(), 0, false);
+                // update Keyword Cache
+                copied.updateKeywords();
+            }
+        }
+
         // CR 603.6b
         if (toBattlefield) {
             zoneTo.saveLKI(copied, lastKnownInfo);
+        }
+
+        // only now that the LKI preserved it
+        if (!zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Stack)) {
+            c.cleanupExiledWith();
         }
 
         game.getTriggerHandler().clearActiveTriggers(copied, null);
@@ -802,11 +785,11 @@ public class GameAction {
 
         // need to refresh ability text for affected cards
         for (final StaticAbility stAb : c.getStaticAbilities()) {
-            if (stAb.isSuppressed() || !stAb.checkConditions()) {
+            if (!stAb.checkConditions()) {
                 continue;
             }
 
-            if (stAb.getParam("Mode").equals("CantBlockBy")) {
+            if (stAb.checkMode("CantBlockBy")) {
                 if (!stAb.hasParam("ValidAttacker") || (stAb.hasParam("ValidBlocker") && stAb.getParam("ValidBlocker").equals("Creature.Self"))) {
                     continue;
                 }
@@ -816,7 +799,7 @@ public class GameAction {
                     }
                 }
             }
-            if (stAb.getParam("Mode").equals(StaticAbilityCantAttackBlock.MinMaxBlockerMode)) {
+            if (stAb.checkMode(StaticAbilityCantAttackBlock.MinMaxBlockerMode)) {
                 for (Card creature : Iterables.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)) {
                     if (stAb.matchesValidParam("ValidCard", creature)) {
                         creature.updateAbilityTextForView();
@@ -865,17 +848,7 @@ public class GameAction {
         return moveToStack(c, cause, params);
     }
     public final Card moveToStack(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
-        Card result = moveTo(game.getStackZone(), c, cause, params);
-        if (cause != null && cause.isSpell() && result.equals(cause.getHostCard())) {
-            result.setSplitStateToPlayAbility(cause);
-
-            // CR 112.2 A spell’s controller is, by default, the player who put it on the stack.
-            result.setController(cause.getActivatingPlayer(), 0);
-            // for triggers like from Wild-Magic Sorcerer
-            game.getAction().checkStaticAbilities(false);
-            game.getTriggerHandler().resetActiveTriggers();
-        }
-        return result;
+        return moveTo(game.getStackZone(), c, cause, params);
     }
 
     public final Card moveToGraveyard(final Card c, SpellAbility cause) {
@@ -928,9 +901,6 @@ public class GameAction {
         return changeZone(game.getZoneOf(c), library, c, libPosition, cause, params);
     }
 
-    public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition, SpellAbility cause) {
-        return moveToVariantDeck(c, zone, deckPosition, cause, null);
-    }
     public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
         final PlayerZone deck = c.getOwner().getZone(zone);
         if (deckPosition == -1 || deckPosition > deck.size()) {
@@ -1086,7 +1056,7 @@ public class GameAction {
     public boolean hasStaticAbilityAffectingZone(ZoneType zone, StaticAbilityLayer layer) {
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.getParam("Mode").equals("Continuous") || stAb.isSuppressed() || !stAb.checkConditions()) {
+                if (!stAb.checkConditions("Continuous")) {
                     continue;
                 }
                 if (layer != null && !stAb.getLayers().contains(layer)) {
@@ -1135,7 +1105,7 @@ public class GameAction {
                 // need to get Card from preList if able
                 final Card co = preList.get(c);
                 for (StaticAbility stAb : co.getStaticAbilities()) {
-                    if (stAb.getParam("Mode").equals("Continuous")) {
+                    if (stAb.checkMode("Continuous")) {
                         staticAbilities.add(stAb);
                     }
                  }
@@ -1316,8 +1286,7 @@ public class GameAction {
                     if (zt == ZoneType.Battlefield) {
                         continue;
                     }
-                    final Iterable<Card> cards = p.getCardsIn(zt).threadSafeIterable();
-                    for (final Card c : cards) {
+                    for (final Card c : p.getCardsIn(zt).threadSafeIterable()) {
                         checkAgain |= stateBasedAction704_5d(c);
                          // Dungeon Card won't affect other cards, so don't need to set checkAgain
                         stateBasedAction_Dungeon(c);
@@ -1330,6 +1299,7 @@ public class GameAction {
             CardCollection sacrificeList = new CardCollection();
             PlayerCollection spaceSculptors = new PlayerCollection();
             for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
+                boolean checkAgainCard = false;
                 if (c.hasKeyword(Keyword.SPACE_SCULPTOR)) {
                     spaceSculptors.add(c.getController());
                 }
@@ -1337,7 +1307,7 @@ public class GameAction {
                     // Rule 704.5f - Put into grave (no regeneration) for toughness <= 0
                     if (c.getNetToughness() <= 0) {
                         noRegCreats.add(c);
-                        checkAgain = true;
+                        checkAgainCard = true;
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
                         if (c.getLethal() <= c.getMaxDamageFromSource() || c.hasBeenDealtDeathtouchDamage()) {
                             if (desCreats == null) {
@@ -1345,7 +1315,7 @@ public class GameAction {
                             }
                             desCreats.add(c);
                             c.setHasBeenDealtDeathtouchDamage(false);
-                            checkAgain = true;
+                            checkAgainCard = true;
                         }
                     }
                     // Rule 704.5g - Destroy due to lethal damage
@@ -1356,20 +1326,21 @@ public class GameAction {
                         }
                         desCreats.add(c);
                         c.setHasBeenDealtDeathtouchDamage(false);
-                        checkAgain = true;
+                        checkAgainCard = true;
                     }
                 }
 
-                checkAgain |= stateBasedAction_Saga(c, sacrificeList);
-                checkAgain |= stateBasedAction704_attach(c, unAttachList); // Attachment
+                checkAgainCard |= stateBasedAction_Saga(c, sacrificeList);
+                checkAgainCard |= stateBasedAction_Battle(c, noRegCreats);
+                checkAgainCard |= stateBasedAction704_attach(c, unAttachList); // Attachment
 
-                checkAgain |= stateBasedAction704_5r(c); // annihilate +1/+1 counters with -1/-1 ones
+                checkAgainCard |= stateBasedAction704_5r(c); // annihilate +1/+1 counters with -1/-1 ones
 
                 final CounterType dreamType = CounterType.get(CounterEnumType.DREAM);
 
                 if (c.getCounters(dreamType) > 7 && c.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
                     c.subtractCounter(dreamType,  c.getCounters(dreamType) - 7);
-                    checkAgain = true;
+                    checkAgainCard = true;
                 }
 
                 if (c.hasKeyword("The number of loyalty counters on CARDNAME is equal to the number of Beebles you control.")) {
@@ -1384,17 +1355,18 @@ public class GameAction {
                     }
                     // Only check again if counters actually changed
                     if (c.getCounters(CounterEnumType.LOYALTY) != loyal) {
-                        checkAgain = true;
+                        checkAgainCard = true;
                     }
                 }
 
                 // cleanup aura
                 if (c.isAura() && c.isInPlay() && !c.isEnchanting()) {
                     noRegCreats.add(c);
-                    checkAgain = true;
+                    checkAgainCard = true;
                 }
-                if (checkAgain) {
+                if (checkAgainCard) {
                     cardsToUpdateLKI.add(c);
+                    checkAgain = true;
                 }
             }
             for (Card u : unAttachList) {
@@ -1471,6 +1443,8 @@ public class GameAction {
             }
             setHoldCheckingStaticAbilities(false);
 
+            // important to collect first otherwise if a static fires it will mess up registered ones from LKI
+            game.getTriggerHandler().collectTriggerForWaiting();
             if (game.getTriggerHandler().runWaitingTriggers()) {
                 checkAgain = true;
             }
@@ -1478,7 +1452,9 @@ public class GameAction {
             if (game.getCombat() != null) {
                 game.getCombat().removeAbsentCombatants();
             }
+
             table.triggerChangesZoneAll(game, null);
+
             if (!checkAgain) {
                 break; // do not continue the loop
             }
@@ -1537,6 +1513,23 @@ public class GameAction {
         return checkAgain;
     }
 
+    private boolean stateBasedAction_Battle(Card c, CardCollection removeList) {
+        boolean checkAgain = false;
+        if (!c.getType().isBattle()) {
+            return false;
+        }
+        if (c.getCounters(CounterEnumType.DEFENSE) > 0) {
+            return false;
+        }
+        // 704.5v If a battle has defense 0 and it isn’t the source of an ability that has triggered but not yet left the stack,
+        // it’s put into its owner’s graveyard.
+        if (!game.getStack().hasSourceOnStack(c, SpellAbilityPredicates.isTrigger())) {
+            removeList.add(c);
+            checkAgain = true;
+        }
+        return checkAgain;
+    }
+
     private void stateBasedAction_Dungeon(Card c) {
         if (!c.getType().isDungeon() || !c.isInLastRoom()) {
             return;
@@ -1565,7 +1558,7 @@ public class GameAction {
                 }
             }
         }
-        if (c.isCreature() && c.isAttachedToEntity()) { // Rule 704.5q - Creature attached to an object or player, becomes unattached
+        if ((c.isCreature() || c.isBattle()) && c.isAttachedToEntity()) { // Rule 704.5q - Creature attached to an object or player, becomes unattached
             unAttachList.add(c);
             checkAgain = true;
         }
@@ -1819,7 +1812,6 @@ public class GameAction {
         // remove the ones that got already removed by other legend rule above
         emptyNameAllNonLegendary.removeAll(removed);
         if (emptyNameAllNonLegendary.size() > 1) {
-
             recheck = true;
 
             Card toKeep = p.getController().chooseSingleEntityForEffect(emptyNameAllNonLegendary, new SpellAbility.EmptySa(ApiType.InternalLegendaryRule, new Card(-1, game), p),
@@ -2438,16 +2430,7 @@ public class GameAction {
 
                 if (e.getKey() instanceof Card && !lethalDamage.containsKey(e.getKey())) {
                     Card c = (Card) e.getKey();
-                    int lethal = 0;
-                    if (c.isCreature()) {
-                        lethal = Math.max(0, c.getLethalDamage());
-                    }
-                    if (c.isPlaneswalker()) {
-                        int lethalPW = c.getCurrentLoyalty();
-                        // CR 120.10
-                        lethal = c.isCreature() ? Math.min(lethal, lethalPW) : lethalPW;
-                    }
-                    lethalDamage.put(c, lethal);
+                    lethalDamage.put(c, c.getExcessDamageValue(false));
                 }
 
                 e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, isCombat, counterTable)));
@@ -2463,7 +2446,7 @@ public class GameAction {
         }
 
         // for Zangief do this before runWaitingTriggers DamageDone
-        damageMap.triggerExcessDamage(isCombat, lethalDamage, game, lkiCache);
+        damageMap.triggerExcessDamage(isCombat, lethalDamage, game, cause, lkiCache);
 
         // lose life simultaneously
         if (isCombat) {
@@ -2533,17 +2516,12 @@ public class GameAction {
 
         Player p = source.getController();
         if (tgt.canTgtPlayer()) {
-            final FCollection<Player> players = new FCollection<>();
+            final FCollection<Player> players = game.getPlayers().filter(PlayerPredicates.canBeAttached(source, aura));
 
-            for (Player player : game.getPlayers()) {
-                if (player.isValid(tgt.getValidTgts(), aura.getActivatingPlayer(), source, aura)) {
-                    players.add(player);
-                }
-            }
             final Player pa = p.getController().chooseSingleEntityForEffect(players, aura,
                     Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", CardTranslation.getTranslatedName(source.getName())), null);
             if (pa != null) {
-                source.attachToEntity(pa, null);
+                source.attachToEntity(pa, null, true);
                 return true;
             }
         } else {
@@ -2562,7 +2540,7 @@ public class GameAction {
             }
             list.addAll(game.getCardsIn(zones));
 
-            list = CardLists.getValidCards(list, tgt.getValidTgts(), aura.getActivatingPlayer(), source, aura);
+            list = CardLists.filter(list, CardPredicates.canBeAttached(source, aura));
             if (list.isEmpty()) {
                 return false;
             }

@@ -37,19 +37,18 @@ public class InvestigateEffect extends TokenEffectBase {
         final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Num", "1"), sa);
 
         // Investigate in Sequence
-        for (final Player p : getTargetPlayers(sa)) {
-            for (int i = 0; i < amount; i++) {
+        for (int i = 0; i < amount; i++) {
+            CardZoneTable triggerList = new CardZoneTable();
+            MutableBoolean combatChanged = new MutableBoolean(false);
+
+            for (final Player p : getTargetPlayers(sa)) {
                 if (sa.hasParam("Optional") && !p.getController().confirmAction(sa, null,
                         Localizer.getInstance().getMessage("lblWouldYouLikeInvestigate"), null)) {
-                    return;
+                    continue;
                 }
-
-                CardZoneTable triggerList = new CardZoneTable();
-                MutableBoolean combatChanged = new MutableBoolean(false);
 
                 makeTokenTable(makeTokenTableInternal(p, "c_a_clue_draw", 1, sa), false, triggerList, combatChanged, sa);
 
-                triggerList.triggerChangesZoneAll(game, sa);
                 p.addInvestigatedThisTurn();
 
                 if (sa.hasParam("RememberInvestigatingPlayers")) {
@@ -57,11 +56,12 @@ public class InvestigateEffect extends TokenEffectBase {
                 }
 
                 game.fireEvent(new GameEventTokenCreated());
+            }
 
-                if (combatChanged.isTrue()) {
-                    game.updateCombatForView();
-                    game.fireEvent(new GameEventCombatChanged());
-                }
+            triggerList.triggerChangesZoneAll(game, sa);
+            if (combatChanged.isTrue()) {
+                game.updateCombatForView();
+                game.fireEvent(new GameEventCombatChanged());
             }
         }
     }

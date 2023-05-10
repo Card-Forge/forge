@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class RewardEdit extends FormPanel {
     RewardData currentData;
 
-    JComboBox typeField =new JComboBox(new String[] { "card", "gold", "life", "deckCard", "item","mana"});
+    JComboBox typeField =new JComboBox(new String[] { "card", "gold", "life", "deckCard", "item","shards"});
     JSpinner probability = new JSpinner(new SpinnerNumberModel(0f, 0, 1, 0.1f));
     JSpinner count = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
     JSpinner addMaxCount = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));

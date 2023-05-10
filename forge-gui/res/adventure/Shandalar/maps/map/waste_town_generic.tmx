@@ -5,6 +5,7 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJzt1LEKACAIBND2fti5L291iLxAU+qG29SnBElvTRiGCc1QQWp0rdXnsdMulV10FmJluFn3VnAR+zXXsrPeN8KP/h883VWfNdPj1pN9boQuXbr/uhNtp9Ws
@@ -20,7 +21,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4B2YAcLA4M0jfEuFkx7Q1lJd+sUDtLUY7ODHHtJBdS211iHgcFEB5NtpA2hYeFCjr2khik2QK9wNoT610SbcnsnU+BvYuxFjicQsNZiYLDRwtSHK25R2FTwLyWAUnvfs6PShIAGI3Y7vpJgLyXpmhT/Hga61V2TgcEDiPU4MeWJiV9y7KUG2ME2MPYi24GeD2H2EhN/hPKwjjZue4kRI6aMgKVVYgA2O76wkleHklJvf0OyF91PhMIZ3c3kpAtyylpq2EsOIMVeatSd5NhLTUCuvZT6faj5d7DYCwAfmzHo
+   eJxjYBgFo4B2YAcLA4M0jfEuFkx7Q1lJd+sUDtLUY7ODHHtJBdS211iHgcFEB5NtpA2hYeFCjr2khik2QK9wNoT610SbcnsnU+BvYuxFjicQsNZiYLDRwtSHK25R2FTwLyWAUnvfs6PShIAGI3Y7vpJgLyXpmhT/Hga61V2TgcEDiPU4MeWJiV9y7KUG2ME2MPYi24GeD2H2EhN/hPKwjhFue4kRI6aMEDQmrAafHV9YyatDSam3vyHZi+4nQuGM7mZy0gU5ZS017CUHkGIvNepOcuylJiDXXkr9PtT8O1jsBQC4/jIK
   </data>
  </layer>
  <layer id="5" name="Overlay" width="30" height="30">
@@ -33,7 +34,7 @@
   <object id="41" template="../obj/shop.tx" x="256" y="208">
    <properties>
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
    </properties>
@@ -41,7 +42,7 @@
   <object id="55" template="../obj/shop.tx" x="272" y="144">
    <properties>
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
    </properties>
@@ -49,7 +50,7 @@
   <object id="57" template="../obj/shop.tx" x="320" y="144">
    <properties>
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
    </properties>
@@ -57,7 +58,7 @@
   <object id="50" template="../obj/shop.tx" x="304" y="208">
    <properties>
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
    </properties>
@@ -65,7 +66,7 @@
   <object id="51" template="../obj/shop.tx" x="352" y="208">
    <properties>
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
    </properties>
@@ -73,7 +74,7 @@
   <object id="52" template="../obj/shop.tx" x="352" y="272">
    <properties>
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
    </properties>
@@ -81,7 +82,7 @@
   <object id="53" template="../obj/shop.tx" x="304" y="272">
    <properties>
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
    </properties>
@@ -89,7 +90,7 @@
   <object id="54" template="../obj/shop.tx" x="256" y="272">
    <properties>
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
    </properties>
@@ -104,7 +105,7 @@
   <object id="58" template="../obj/shop.tx" x="97" y="209">
    <properties>
     <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
     <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
     <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
    </properties>

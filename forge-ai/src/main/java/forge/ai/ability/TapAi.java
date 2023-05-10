@@ -3,11 +3,14 @@ package forge.ai.ability;
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 
 public class TapAi extends TapAiBase {
     @Override
@@ -52,8 +55,15 @@ public class TapAi extends TapAiBase {
         }
 
         if (!sa.usesTargeting()) {
+            CardCollection untap;
+            if (sa.hasParam("CardChoices")) {
+                untap = CardLists.getValidCards(source.getGame().getCardsIn(ZoneType.Battlefield), sa.getParam("CardChoices"), ai, source, sa);
+            } else {
+                untap = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
+            }
+
             boolean bFlag = false;
-            for (final Card c : AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa)) {
+            for (final Card c : untap) {
                 bFlag |= c.isUntapped();
             }
 

@@ -287,9 +287,7 @@ public class CounterEffect extends SpellAbilityEffect {
         game.getStack().remove(si);
 
         // if the target card on stack was a spell with Bestow, then unbestow it
-        if (c.isBestowed()) {
-            c.unanimateBestow(true);
-        }
+        c.unanimateBestow();
 
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         params.put(AbilityKey.StackSa, tgtSA);

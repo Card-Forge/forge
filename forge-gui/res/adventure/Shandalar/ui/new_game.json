@@ -21,7 +21,7 @@
     {
       "type": "Label",
       "name" : "titleL",
-      "text": "{SIZE=150%}[BLACK]tr(lblCreateACharacter)",
+      "text": "[%150][BLACK]tr(lblCreateACharacter)",
       "width": 128,
       "height": 16,
       "scale": 2,
@@ -85,7 +85,7 @@
 	{
       "type": "Label",
       "name" : "starterEditionL",
-      "text": "[BLACK]Starter Edition",
+      "text": "[BLACK]tr(lblStarterEdition):",
       "width": 128,
       "height": 16,
       "x": 75,

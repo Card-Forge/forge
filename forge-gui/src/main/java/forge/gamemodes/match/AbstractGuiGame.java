@@ -711,7 +711,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
 
         while (true) {
-            final String str = showInputDialog(prompt, message);
+            final String str = showInputDialog(prompt, message, true);
             if (str == null) {
                 return null;
             } // that is 'cancel'
@@ -772,18 +772,18 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public String showInputDialog(final String message, final String title) {
-        return showInputDialog(message, title, null, "", null);
+    public String showInputDialog(final String message, final String title, boolean isNumeric) {
+        return showInputDialog(message, title, null, "", null, isNumeric);
     }
 
     @Override
     public String showInputDialog(final String message, final String title, final FSkinProp icon) {
-        return showInputDialog(message, title, icon, "", null);
+        return showInputDialog(message, title, icon, "", null, false);
     }
 
     @Override
     public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput) {
-        return showInputDialog(message, title, icon, initialInput, null);
+        return showInputDialog(message, title, icon, initialInput, null, false);
     }
 
     @Override

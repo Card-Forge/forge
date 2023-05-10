@@ -1,8 +1,0 @@
-Name:Predation Steward
-ManaCost:1 G
-Types:Creature Phyrexian Elf Warrior
-PT:2/2
-K:etbCounter:OIL:2
-A:AB$ Pump | Cost$ 2 G T SubCounter<1/OIL> | ValidTgts$ Creature | SorcerySpeed$ True | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ Target creature gets +2/+2 until end of turn. Activate only as a sorcery.
-DeckHas:Ability$Counter
-Oracle:Predation Steward enters the battlefield with two oil counters on it.\n{2}{G}, {T}, Remove an oil counter from Predation Steward: Target creature gets +2/+2 until end of turn. Activate only as a sorcery.

@@ -1,0 +1,10 @@
+Name:Andrios, Roaming Explorer
+ManaCost:5 G
+Types:Legendary Artifact Creature Wizard
+PT:4/3
+K:Reach
+S:Mode$ Continuous | SetPower$ 16 | SetToughness$ 9 | IsPresent$ Card.Self+attacking | Affected$ Creature.basePowerEQ4+baseToughnessEQ3+tapped+YouCtrl | Description$ As long as NICKNAME is attacking, tapped creatures you control with base power and toughness 4/3 have base power and toughness 16/9.
+A:AB$ Mana | Cost$ T | Produced$ W U B R G | TriggersWhenSpent$ TrigChange | SpellDescription$ Add {W}{U}{B}{R}{G}. Creature spells you spend this mana to cast have their base power and toughness become 4/3.
+SVar:TrigChange:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigAnimate | TriggerDescription$ Creature spells you spend this mana to cast have their base power and toughness become 4/3.
+SVar:TrigAnimate:DB$ Animate | Defined$ TriggeredCard | Duration$ Permanent | Power$ 4 | Toughness$ 3
+Oracle:Reach\nAs long as Andrios is attacking, tapped creatures you control with base power and toughness 4/3 have base power and toughness 16/9.\n{T}: Add {W}{U}{B}{R}{G}. Creature spells you spend this mana to cast have their base power and toughness become 4/3.

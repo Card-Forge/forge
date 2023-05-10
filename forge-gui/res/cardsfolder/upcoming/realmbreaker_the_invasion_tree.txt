@@ -1,0 +1,14 @@
+Name:Realmbreaker, the Invasion Tree
+ManaCost:3
+Types:Legendary Artifact
+A:AB$ Mill | Cost$ 2 T | NumCards$ 3 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBChangeZone | StackDescription$ {p:Targeted} mills three cards. {p:You} puts a land card from their graveyard onto the battlefield tapped under {p:You}'s control. It gains "If this land would leave the battlefield, exile it instead of putting it anywhere else." | SpellDescription$ Target opponent mills three cards. Put a land card from their graveyard onto the battlefield tapped under your control. It gains "If this land would leave the battlefield, exile it instead of putting it anywhere else."
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Hidden$ True | ChangeType$ Land.TargetedPlayerCtrl | Tapped$ True | RememberChanged$ True | SubAbility$ DBAnimate | TgtPrompt$ Select a land card from targeted opponent's graveyard | StackDescription$ None
+SVar:DBAnimate:DB$ Animate | Replacements$ ReplaceLeaves | Defined$ Remembered | Duration$ Permanent | SubAbility$ DBCleanup | StackDescription$ None
+SVar:ReplaceLeaves:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If this land would leave the battlefield, exile it instead of putting it anywhere else.
+SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard
+A:AB$ ChangeZone | Cost$ 10 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Praetor | ChangeNum$ XFetch | StackDescription$ {p:You} searches their library for any number of Praetor cards, puts them onto the battlefield, then shuffles. | SpellDescription$ Search your library for any number of Praetor cards, put them onto the battlefield, then shuffle.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:XFetch:Count$TypeInYourLibrary.Praetor
+DeckHas:Ability$Mill|Sacrifice
+DeckHints:Type$Praetor
+Oracle:{2}, {T}: Target opponent mills three cards. Put a land card from their graveyard onto the battlefield tapped under your control. It gains "If this land would leave the battlefield, exile it instead of putting it anywhere else."\n{10}, {T}, Sacrifice Realmbreaker, the Invasion Tree: Search your library for any number of Praetor cards, put them onto the battlefield, then shuffle.

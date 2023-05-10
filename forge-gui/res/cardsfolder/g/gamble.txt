@@ -1,9 +1,11 @@
 Name:Gamble
 ManaCost:R
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ R | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | SubAbility$ DBDiscard | Mandatory$ True | SpellDescription$ Search your library for a card, put that card into your hand, discard a card at random, then shuffle.
-SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ Random
+A:SP$ ChangeZone | Origin$ Library | NoShuffle$ True | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | SubAbility$ DBDiscard | Mandatory$ True | SpellDescription$ Search your library for a card, put that card into your hand, discard a card at random, then shuffle.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ Random | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ Shuffle | Defined$ You
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$InYourHand
 AI:RemoveDeck:Random
+DeckHas:Ability$Discard
 Oracle:Search your library for a card, put that card into your hand, discard a card at random, then shuffle.

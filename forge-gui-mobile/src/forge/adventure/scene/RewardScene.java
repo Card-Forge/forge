@@ -44,7 +44,8 @@ public class RewardScene extends UIScene {
     private boolean showTooltips = false;
     public enum Type {
         Shop,
-        Loot
+        Loot,
+        QuestReward
     }
 
     Type type;
@@ -60,9 +61,9 @@ public class RewardScene extends UIScene {
         playerGold = Controls.newAccountingLabel(ui.findActor("playerGold"), false);
         playerShards = Controls.newAccountingLabel(ui.findActor("playerShards"),true);
         shopNameLabel = ui.findActor("shopName");
-        ui.onButtonPress("done", () -> RewardScene.this.done());
-        ui.onButtonPress("detail",()->RewardScene.this.toggleToolTip());
-        ui.onButtonPress("restock",()-> RewardScene.this.restockShop());
+        ui.onButtonPress("done", this::done);
+        ui.onButtonPress("detail", this::toggleToolTip);
+        ui.onButtonPress("restock", this::restockShop);
         detailButton = ui.findActor("detail");
         detailButton.setVisible(false);
         doneButton = ui.findActor("done");
@@ -132,23 +133,30 @@ public class RewardScene extends UIScene {
         ImageCache.unloadCardTextures(true);
         Forge.switchToLast();
     }
+    public void reactivateInputs() {
+        Gdx.input.setInputProcessor(stage);
+        doneButton.toFront();
+    }
     public boolean done() {
         return done(false);
     }
     boolean done(boolean skipShowLoot) {
         GameHUD.getInstance().getTouchpad().setVisible(false);
         if (!skipShowLoot) {
-            doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
+            doneButton.setText("[+OK]");
             showLootOrDone();
             return true;
         }
-        switch (type) {
-            case Shop:
-                doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
-                break;
-            case Loot:
-                doneButton.setText(Forge.getLocalizer().getMessage("lblDone"));
-                break;
+		if (type != null) {
+			switch (type) {
+				case Shop:
+					doneButton.setText("[+OK]");
+					break;
+				case QuestReward:
+				case Loot:
+					doneButton.setText("[+OK]");
+					break;
+			}
         }
         shown = false;
         clearGenerated();
@@ -163,6 +171,8 @@ public class RewardScene extends UIScene {
             RewardActor reward = (RewardActor) actor;
             if (type == Type.Loot)
                 AdventurePlayer.current().addReward(reward.getReward());
+            if (type == Type.QuestReward)
+                AdventurePlayer.current().addReward(reward.getReward()); // Want to customize this soon to have selectable rewards which will be handled different here
             reward.clearHoldToolTip();
             try {
                 stage.getActors().removeValue(reward, true);
@@ -175,7 +185,7 @@ public class RewardScene extends UIScene {
         stage.act(delta);
         ImageCache.allowSingleLoad();
         if (doneClicked) {
-            if (type == Type.Loot) {
+            if (type == Type.Loot || type == Type.QuestReward) {
                 flipCountDown -= Gdx.graphics.getDeltaTime();
                 exitCountDown += Gdx.graphics.getDeltaTime();
             }
@@ -188,6 +198,7 @@ public class RewardScene extends UIScene {
 
     @Override
     public void enter() {
+        doneButton.setText("[+OK]");
         updateDetailButton();
         super.enter();
     }
@@ -206,7 +217,7 @@ public class RewardScene extends UIScene {
         }
         if (exit)
             done(true);
-        else if (type == Type.Loot && !shown) {
+        else if ((type == Type.Loot || type == Type.QuestReward) && !shown) {
             shown = true;
             float delay = 0.09f;
             generated.shuffle();
@@ -234,7 +245,7 @@ public class RewardScene extends UIScene {
         if (!shopActor.canRestock())
             return;
         int price = shopActor.getRestockPrice();
-        restockButton.setText("Refresh\n " + price + "[+shards]");
+        restockButton.setText("[+Refresh][+shards]" + price);
         restockButton.setDisabled(WorldSave.getCurrentSave().getPlayer().getShards() < price);
     }
 
@@ -262,7 +273,7 @@ public class RewardScene extends UIScene {
         long shopSeed = changes.getShopSeed(shopActor.getObjectId());
         WorldSave.getCurrentSave().getWorld().getRandom().setSeed(shopSeed);
         for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
-            ret.addAll(rdata.generate(false));
+            ret.addAll(rdata.generate(false, false));
         }
         shopActor.setRewardData(ret);
         loadRewards(ret, RewardScene.Type.Shop,shopActor);
@@ -305,7 +316,6 @@ public class RewardScene extends UIScene {
             if(background!=null)
                 background.setVisible(false);
         }
-        // card.setDrawable(new TextureRegionDrawable(new Texture(Res.CurrentRes.GetFile("ui/transition.png"))));
 
         float targetWidth = card.getWidth();
         float targetHeight = card.getHeight();
@@ -323,7 +333,7 @@ public class RewardScene extends UIScene {
 
         switch (type) {
             case Shop:
-                doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
+                doneButton.setText("[+OK]");
                 String shopName = shopActor.getDescription();
                 if ((shopName != null && !shopName.isEmpty())) {
                     shopNameLabel.setVisible(true);
@@ -338,11 +348,12 @@ public class RewardScene extends UIScene {
                     restockButton.setDisabled(true);
                 }
                 break;
+            case QuestReward:
             case Loot:
                 shopNameLabel.setVisible(false);
                 shopNameLabel.setText("");
                 restockButton.setVisible(false);
-                doneButton.setText(Forge.getLocalizer().getMessage("lblDone"));
+                doneButton.setText("[+OK]");
                 break;
         }
         for (int h = 1; h < targetHeight; h++) {
@@ -419,7 +430,9 @@ public class RewardScene extends UIScene {
                 if (lastRowCount != 0)
                     lastRowXAdjust = ((numberOfColumns * cardWidth) - (lastRowCount * cardWidth)) / 2;
             }
-            RewardActor actor = new RewardActor(reward, type == Type.Loot);
+
+            RewardActor actor = new RewardActor(reward, type == Type.Loot || type == Type.QuestReward,type);
+
             actor.setBounds(lastRowXAdjust + xOff + cardWidth * (i % numberOfColumns) + spacing, yOff + cardHeight * currentRow + spacing, cardWidth - spacing * 2, cardHeight - spacing * 2);
 
             if (type == Type.Shop) {

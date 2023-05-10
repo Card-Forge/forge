@@ -120,7 +120,6 @@ public class DigEffect extends SpellAbilityEffect {
 
         int libraryPosition = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : -1;
         int destZone1ChangeNum = 1;
-        final boolean mitosis = sa.hasParam("Mitosis");
         String changeValid = sa.getParamOrDefault("ChangeValid", "");
         final boolean anyNumber = sa.hasParam("AnyNumber");
 
@@ -245,9 +244,7 @@ public class DigEffect extends SpellAbilityEffect {
                     CardCollection movedCards;
                     rest.addAll(top);
                     CardCollection valid;
-                    if (mitosis) {
-                        valid = sharesNameWithCardOnBattlefield(game, top);
-                    } else if (!changeValid.isEmpty()) {
+                    if (!changeValid.isEmpty()) {
                         if (changeValid.contains("ChosenType")) {
                             changeValid = changeValid.replace("ChosenType", host.getChosenType());
                         }
@@ -390,19 +387,12 @@ public class DigEffect extends SpellAbilityEffect {
                         movedCards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, movedCards, destZone1, sa);
                     }
 
-                    Card effectHost = sa.getOriginalHost();
-                    if (effectHost == null) {
-                        effectHost = sa.getHostCard();
-                    }
                     for (Card c : movedCards) {
                         final ZoneType origin = c.getZone().getZoneType();
                         final PlayerZone zone = c.getOwner().getZone(destZone1);
 
                         if (zone.is(ZoneType.Library) || zone.is(ZoneType.PlanarDeck) || zone.is(ZoneType.SchemeDeck)) {
-                            if (libraryPosition == -1 || libraryPosition > zone.size()) {
-                                libraryPosition = zone.size();
-                            }
-                            c = game.getAction().moveTo(zone, c, libraryPosition, sa);
+                            c = game.getAction().moveTo(destZone1, c, libraryPosition, sa);
                         } else {
                             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                             moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
@@ -434,9 +424,7 @@ public class DigEffect extends SpellAbilityEffect {
                                 if (sa.hasParam("ExileWithCounter")) {
                                     c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")), 1, player, counterTable);
                                 }
-                                effectHost.addExiledCard(c);
-                                c.setExiledWith(effectHost);
-                                c.setExiledBy(effectHost.getController());
+                                handleExiledWith(c, sa);
                             }
                         }
                         if (!origin.equals(c.getZone().getZoneType())) {
@@ -478,14 +466,10 @@ public class DigEffect extends SpellAbilityEffect {
                             // Closest to top
                             Collections.reverse(afterOrder);
                         }
+
                         for (final Card c : afterOrder) {
                             final ZoneType origin = c.getZone().getZoneType();
-                            Card m;
-                            if (destZone2 == ZoneType.Library) {
-                                m = game.getAction().moveToLibrary(c, libraryPosition2, sa);
-                            } else {
-                                m = game.getAction().moveToVariantDeck(c, destZone2, libraryPosition2, sa);
-                            }
+                            Card m = game.getAction().moveTo(destZone2, c, libraryPosition2, sa);
                             if (m != null && !origin.equals(m.getZone().getZoneType())) {
                                 table.put(origin, m.getZone().getZoneType(), m);
                             }
@@ -507,9 +491,7 @@ public class DigEffect extends SpellAbilityEffect {
                                 if (sa.hasParam("ExileWithCounter")) {
                                     c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")), 1, player, counterTable);
                                 }
-                                effectHost.addExiledCard(c);
-                                c.setExiledWith(effectHost);
-                                c.setExiledBy(effectHost.getController());
+                                handleExiledWith(c, sa);
                                 if (remZone2) {
                                     host.addRemembered(c);
                                 }
@@ -528,19 +510,4 @@ public class DigEffect extends SpellAbilityEffect {
         counterTable.replaceCounterEffect(game, sa, true);
     }
 
-    // TODO This should be somewhere else, maybe like CardUtil or something like that
-    // returns a List<Card> that is a subset of list with cards that share a name
-    // with a permanent on the battlefield
-    private static CardCollection sharesNameWithCardOnBattlefield(final Game game, final List<Card> list) {
-        final CardCollection toReturn = new CardCollection();
-        final CardCollectionView play = game.getCardsIn(ZoneType.Battlefield);
-        for (final Card c : list) {
-            for (final Card p : play) {
-                if (p.sharesNameWith(c) && !toReturn.contains(c)) {
-                    toReturn.add(c);
-                }
-            }
-        }
-        return toReturn;
-    }
 }

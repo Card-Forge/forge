@@ -1,0 +1,12 @@
+Name:Halo Forager
+ManaCost:1 U B
+Types:Creature Faerie Rogue
+PT:3/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {X}. When you do, you may cast target instant or sorcery card with mana value X from a graveyard without paying its mana cost. If that spell would be put into a graveyard, exile it instead.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ X | Execute$ TrigCast | TriggerDescription$ When you do, you may cast target instant or sorcery card with mana value X from a graveyard without paying its mana cost. If that spell would be put into a graveyard, exile it instead.
+SVar:TrigCast:DB$ Play | TgtZone$ Graveyard | WithoutManaCost$ True | ValidSA$ Spell | ValidTgts$ Instant.cmcEQX,Sorcery.cmcEQX | Optional$ True | TgtPrompt$ Choose target instant or sorcery card from a graveyard with mana value X | ReplaceGraveyard$ Exile
+SVar:X:Count$xPaid
+DeckHints:Type$Instant|Sorcery
+AI:RemoveDeck:Random
+Oracle:Flying\nWhen Halo Forager enters the battlefield, you may pay {X}. When you do, you may cast target instant or sorcery card with mana value X from a graveyard without paying its mana cost. If that spell would be put into a graveyard, exile it instead.

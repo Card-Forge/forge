@@ -1,0 +1,13 @@
+Name:Kasla, the Broken Halo
+ManaCost:3 U R W
+Types:Legendary Creature Angel Ally
+PT:5/4
+K:Convoke
+K:Flying
+K:Vigilance
+K:Haste
+T:Mode$ SpellCast | ValidCard$ Card.hasKeywordConvoke+Other | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever you cast another spell that has convoke, scry 2, then draw a card.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+DeckNeeds:Keyword$Convoke
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFlying, vigilance, haste\nWhenever you cast another spell that has convoke, scry 2, then draw a card.

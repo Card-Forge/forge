@@ -1,0 +1,9 @@
+Name:Kethek, Crucible Goliath
+ManaCost:2 R B
+Types:Legendary Creature Phyrexian Beast
+PT:4/4
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, you may sacrifice another creature. If you do, reveal cards from the top of your library until you reveal a nonlegendary creature card with lesser mana value, put it onto the battlefield, then put the rest on the bottom of your library in a random order.
+SVar:TrigSac:AB$ DigUntil | Cost$ Sac<1/Creature.StrictlyOther/another creature> | Defined$ You | Valid$ Card.Creature+nonLegendary+cmcLTX | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealRandomOrder$ True
+SVar:X:Sacrificed$CardManaCost
+DeckHas:Ability$Sacrifice
+Oracle:At the beginning of your end step, you may sacrifice another creature. If you do, reveal cards from the top of your library until you reveal a nonlegendary creature card with lesser mana value, put it onto the battlefield, then put the rest on the bottom of your library in a random order.

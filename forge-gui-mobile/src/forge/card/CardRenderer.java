@@ -203,6 +203,13 @@ public class CardRenderer {
     }
 
     public static FImageComplex getCardArt(IPaperCard pc, boolean backFace) {
+        //missing papercard due to configchanges default to forgeart
+        if (pc == null)
+            return CardImageRenderer.forgeArt;
+        //token?
+        if (pc.getRules() == null)
+            return getCardArt(pc.getImageKey(backFace), false, false, false, false, false, false, false, false, true);
+
         CardType type = pc.getRules().getType();
         return getCardArt(pc.getImageKey(backFace), pc.getRules().getSplitType() == CardSplitType.Split,
                 type.isPlane() || type.isPhenomenon(), pc.getRules().getOracleText().contains("Aftermath"),
@@ -526,6 +533,8 @@ public class CardRenderer {
             type += " (" + loyalty + ")";
         } else if (card.getCurrentState().getType().hasSubtype("Vehicle")) {
             type += String.format(" [%s / %s]", power, toughness);
+        } else if (card.getCurrentState().isBattle()) {
+            type += " (" + card.getCurrentState().getDefense() + ")";
         }
         g.drawText(type, typeFont, foreColor, x, y, availableTypeWidth, lineHeight, false, Align.left, true);
     }
@@ -628,7 +637,7 @@ public class CardRenderer {
                     g.drawCardImage(image, crack_overlay, x, y, w, h, card.wasDestroyed(), magnify ? false : card.getDamage() > 0);
             } else {
                 if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
-                        && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()) && rotate) {
+                        && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane() || (card.getCurrentState().isBattle() && !showAltState) || (card.getAlternateState() != null && card.getAlternateState().isBattle() && showAltState)) && rotate) {
                     if (Forge.enableUIMask.equals("Full")) {
                         if (image.toString().contains(".fullborder."))
                             g.drawCardRoundRect(image, x, y, w, h, x + w / 2, y + h / 2, -90);
@@ -828,7 +837,10 @@ public class CardRenderer {
                             else
                                 drawManaCost(g, card.getLeftSplitState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
                         } else {
-                            drawManaCost(g, card.getCurrentState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
+                            ManaCost leftManaCost = card.getLeftSplitState().getManaCost();
+                            ManaCost rightManaCost = card.getRightSplitState().getManaCost();
+                            drawManaCost(g, leftManaCost, x - padding, y-(manaSymbolSize/1.5f), w + 2 * padding, h, manaSymbolSize);
+                            drawManaCost(g, rightManaCost, x - padding, y+(manaSymbolSize/1.5f), w + 2 * padding, h, manaSymbolSize);
                         }
                     }
                 } else {
@@ -877,6 +889,15 @@ public class CardRenderer {
                 abiX = cx + ((cw * 2) / 1.92f);
             }
             CardFaceSymbols.drawSymbol("deathtouch", g, abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+            abiCount += 1;
+        }
+        if (card.getCurrentState().hasToxic()) {
+            if (abiCount > 5) {
+                abiY = cy + (abiSpace * (abiCount - 6));
+                abiX = cx + ((cw * 2) / 1.92f);
+            }
+            CardFaceSymbols.drawSymbol("toxic", g, abiX, abiY, abiScale, abiScale);
             abiY += abiSpace;
             abiCount += 1;
         }
@@ -1339,6 +1360,11 @@ public class CardRenderer {
     }
 
     public static void drawFoilEffect(Graphics g, CardView card, float x, float y, float w, float h, boolean inZoomer) {
+        if (card.getCurrentState().isBattle())
+            return;
+        if (card.getAlternateState() != null && card.getCurrentState().isBattle())
+            return;
+        //todo add support for battle, better to move the render inside the draw method for card in the future or a general foil effect shader..
         float new_x = x;
         float new_y = y;
         float new_w = w;

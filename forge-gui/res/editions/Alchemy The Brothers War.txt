@@ -3,6 +3,7 @@ Code=YBRO
 Date=2022-12-13
 Name=Alchemy: The Brothers' War
 Type=Online
+Booster=1 UncommonRareMythic, 8 Common:fromsheet("BRO cards"), 3 Uncommon:fromSheet("BRO cards"), 1 RareMythic:fromSheet("BRO cards"), 1 fromSheet("BRO lands"), 1 fromSheet("BRR cards")
 ScryfallCode=YBRO
 
 [cards]

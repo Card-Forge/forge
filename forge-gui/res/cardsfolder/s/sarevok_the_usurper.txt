@@ -7,8 +7,8 @@ T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X
 SVar:X:Count$TypeInYourYard.Creature
 DeckHas:Ability$Graveyard
-Oracle:Specialize {3}\nAt the beginning of combat on your turn, target creature you control gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
 AlternateMode:Specialize
+Oracle:Specialize {3}\nAt the beginning of combat on your turn, target creature you control gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
 
 SPECIALIZE:WHITE
 
@@ -29,7 +29,6 @@ Name:Sarevok, Deceitful Usurper
 ManaCost:3 U B
 Types:Legendary Creature Human Knight
 PT:4/4
-K:First Strike
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gets +X/+0 until end of turn, where X is the number of creature, instant, and sorcery cards in your graveyard.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X 
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn,Creature.YouOwn
@@ -45,8 +44,10 @@ ManaCost:3 B B
 Types:Legendary Creature Human Knight
 PT:4/4
 T:Mode$ Specializes | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSeek | TriggerDescription$ When this creature specializes, seek a creature card and put it into your graveyard, then conjure two duplicates of it into your graveyard.
-SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | SubAbility$ DBConjure | RememberChanged$ True
-SVar:DBConjure:DB$ Makecard | Conjure$ True | DefinedName$ Remembered | Zone$ Graveyard | Amount$ 2
+SVar:TrigSeek:DB$ Seek | Type$ Card.Creature | RememberFound$ True | SubAbility$ DBPut
+SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Graveyard | Defined$ Remembered | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ Remembered | Zone$ Graveyard | Amount$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X
 SVar:X:Count$TypeInYourYard.Creature
@@ -64,7 +65,7 @@ T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X | KW$ Menace
 SVar:X:Count$TypeInYourYard.Creature
 DeckHas:Ability$Graveyard & Keyword$Menace
-Oracle:Menace\nAt the beginning of combat on your turn, target creature you control gains Menace and gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
+Oracle:Menace\nAt the beginning of combat on your turn, target creature you control gains menace and gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
 
 SPECIALIZE:GREEN
 

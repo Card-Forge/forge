@@ -1,0 +1,20 @@
+[metadata]
+Name:Possibility Storm - Phyrexia: All Will Be One #03
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/02/latest-1-scaled.jpg?ssl=1
+Goal:Win Before Opponent's Next Turn
+Turns:9999
+Difficulty:Mythic
+Description:Start in your first main phase and win before your opponent's next turn. Your opponent has no board, and you have no land! You have 20 cards remaining in your library. Assume any of them that you could draw are not relevant to the solution.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0landsplayed=0
+p0landsplayedlastturn=0
+p0hand=Cement Shoes;Prophetic Prism
+p0battlefield=Kaito, Dancing Shadow|Counters:LOYALTY=3;Tezzeret, Betrayer of Flesh|Counters:LOYALTY=2;Urza, Planeswalker|Meld:The Mightstone and Weakstone|Counters:LOYALTY=7;Levitating Statue;Ichormoon Gauntlet
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p1life=21
+p1landsplayed=0
+p1landsplayedlastturn=0

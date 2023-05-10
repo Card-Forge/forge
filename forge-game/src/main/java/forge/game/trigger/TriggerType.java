@@ -14,6 +14,7 @@ import forge.game.card.Card;
 public enum TriggerType {
     Abandoned(TriggerAbandoned.class),
     AbilityCast(TriggerSpellAbilityCastOrCopy.class),
+    AbilityResolves(TriggerAbilityResolves.class),
     AbilityTriggered(TriggerAbilityTriggered.class),
     Adapt(TriggerAdapt.class),
     Always(TriggerAlways.class),
@@ -38,6 +39,7 @@ public enum TriggerType {
     ChangesController(TriggerChangesController.class),
     ChangesZone(TriggerChangesZone.class),
     ChangesZoneAll(TriggerChangesZoneAll.class),
+    ChaosEnsues(TriggerChaosEnsues.class),
     Clashed(TriggerClashed.class),
     ClassLevelGained(TriggerClassLevelGained.class),
     ConjureAll(TriggerConjureAll.class),
@@ -104,6 +106,7 @@ public enum TriggerType {
     Sacrificed(TriggerSacrificed.class),
     Scry(TriggerScry.class),
     SearchedLibrary(TriggerSearchedLibrary.class),
+    SeekAll(TriggerSeekAll.class),
     SetInMotion(TriggerSetInMotion.class),
     Shuffled(TriggerShuffled.class),
     Specializes(TriggerSpecializes.class),

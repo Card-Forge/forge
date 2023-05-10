@@ -1,0 +1,22 @@
+[metadata]
+Code=LTC
+Date=2023-06-23
+Name=The Lord of the Rings: Tales of Middle-earth Commander
+Type=Commander
+ScryfallCode=LTC
+
+[cards]
+7 M Sam, Loyal Attendant @Campbell White
+66 R Radagast, Wizard of Wilds @Tomas Duchek
+90 M Sam, Loyal Attendant @Campbell White
+147 R Radagast, Wizard of Wilds @Tomas Duchek
+284 U Sol Ring @L J Koh
+348 M The Great Henge @Jeremy Paillotin
+350 M Ensnaring Bridge @Stephen Stark
+376 M Wasteland @Hristo D. Chukov
+378 M The Great Henge @Jeremy Paillotin
+380 M Ensnaring Bridge @Stephen Stark
+406 M Wasteland @Hristo D. Chukov
+408 M Sol Ring @Randy Gallegos
+409 M Sol Ring @Erikas Perl
+410 M Sol Ring @Anastasia Balakchina

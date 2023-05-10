@@ -1,0 +1,21 @@
+Name:Invasion of Lorwyn
+ManaCost:4 B G
+Types:Battle Siege
+Defense:5
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target non-Elf creature an opponent controls with power X or less, where X is the number of lands you control.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonElf+OppCtrl+powerLEX | TgtPrompt$ Select target non-Elf creature an opponent controls with power X or less, where X is the number of lands you control
+SVar:X:Count$Valid Land.YouCtrl
+AlternateMode:DoubleFaced
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Lorwyn enters the battlefield, destroy target non-Elf creature an opponent controls with power X or less, where X is the number of lands you control.
+
+ALTERNATE
+
+Name:Winnowing Forces
+ManaCost:no cost
+Colors:black,green
+Types:Creature Elf Warrior
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of lands you control.
+SVar:X:Count$Valid Land.YouCtrl
+SVar:BuffedBy:Land
+Oracle:Winnowing Forces's power and toughness are each equal to the number of lands you control.

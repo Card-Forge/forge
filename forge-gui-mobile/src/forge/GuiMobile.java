@@ -105,7 +105,7 @@ public class GuiMobile implements IGuiBase {
     @Override
     public ISkinImage getUnskinnedIcon(final String path) {
         if (isGuiThread()) {
-            return new FTextureImage(new Texture(Gdx.files.absolute(path)));
+            return new FTextureImage(Forge.getAssets().getTexture(Gdx.files.absolute(path)));
         }
 
         //use a delay load image to avoid an error if called from background thread
@@ -123,18 +123,24 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public ISkinImage createLayeredImage(final FSkinProp background, final String overlayFilename, final float opacity) {
+    public ISkinImage createLayeredImage(final PaperCard paperCard, final FSkinProp background, final String overlayFilename, final float opacity) {
         return new FBufferedImage(background.getWidth(), background.getHeight(), opacity) {
             @Override
             protected void draw(final Graphics g, final float w, final float h) {
                 g.drawImage(FSkin.getImages().get(background), 0, 0, background.getWidth(), background.getHeight());
+                final float cardImageWidth = 90f;
+                final float cardImageHeight = 128f;
 
                 if (FileUtil.doesFileExist(overlayFilename)) {
                     try {
-                        final Texture overlay = new Texture(Gdx.files.absolute(overlayFilename));
+                        final Texture overlay = Forge.getAssets().getTexture(Gdx.files.absolute(overlayFilename));
                         g.drawImage(overlay, (background.getWidth() - overlay.getWidth()) / 2, (background.getHeight() - overlay.getHeight()) / 2, overlay.getWidth(), overlay.getHeight());
                     } catch (final Exception e) {
                     }
+                } else if (paperCard != null) {
+                    Texture cardImage = ImageCache.getImage(paperCard.getCardImageKey(), false);
+                    if (cardImage != null)
+                        g.drawCardRoundRect(cardImage, null, (background.getWidth() - cardImageWidth) / 2, (background.getHeight() - cardImageHeight) / 3.8f, cardImageWidth, cardImageHeight, false, false);
                 }
 
                 Gdx.graphics.requestRendering(); //ensure image appears right away
@@ -148,7 +154,7 @@ public class GuiMobile implements IGuiBase {
             FThreads.invokeInEdtNowOrLater(new Runnable() {
                 @Override
                 public void run() {
-                    MapStage.getInstance().showImageDialog("Achievement Earned\n"+message, ((FBufferedImage)image).getTexture());
+                    MapStage.getInstance().showImageDialog("Achievement Earned\n"+message, (FBufferedImage)image);
                 }
             });
             return;
@@ -172,11 +178,11 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions) {
+    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions, boolean isNumeric) {
         return new WaitCallback<String>() {
             @Override
             public void run() {
-                FOptionPane.showInputDialog(message, title, initialInput, inputOptions, this);
+                FOptionPane.showInputDialog(message, title, initialInput, inputOptions, this, isNumeric);
             }
         }.invokeAndWait();
     }

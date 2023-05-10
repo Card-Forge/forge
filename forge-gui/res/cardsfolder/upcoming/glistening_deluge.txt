@@ -1,0 +1,6 @@
+Name:Glistening Deluge
+ManaCost:1 B B
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | SubAbility$ DBDebuff | SpellDescription$ All creatures get -1/-1 until end of turn. Creatures that are green and/or white get an additional -2/-2 until end of turn.
+SVar:DBDebuff:DB$ PumpAll | ValidCards$ Creature.White,Creature.Green | NumAtt$ -2 | NumDef$ -2 
+Oracle:All creatures get -1/-1 until end of turn. Creatures that are green and/or white get an additional -2/-2 until end of turn.

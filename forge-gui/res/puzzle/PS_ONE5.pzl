@@ -1,0 +1,21 @@
+[metadata]
+Name:Possibility Storm - Phyrexia: All Will Be One #05
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/03/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume that any cards that you could access from your library are irrelevant to the solution. Remember that your solution must satisfy all opponent decisions (including both blocking and activated abilities.)
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0landsplayed=0
+p0landsplayedlastturn=0
+p0hand=Annihilating Glare;Drown in Ichor;Charforger
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=Churning Reservoir;Cutthroat Centurion;Cutthroat Centurion;Furnace Strider|Counters:OIL=1;Swamp;Swamp;Mountain;Mountain;Mountain
+p1life=8
+p1landsplayed=0
+p1landsplayedlastturn=0
+p1battlefield=Drana and Linvala;Benalish Sleeper;Necrosquito|Counters:OIL=3

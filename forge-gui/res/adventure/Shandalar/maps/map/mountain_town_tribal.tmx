@@ -5,6 +5,7 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzFlN0KgCAMRr3N9+n3rbLoRTPqcdrASMS1RWoXB4Rcx28rbaWUDdiA3XFEniMdMOl7H8VK1HPvG2E9MGf76qUyxGpTeZ/65mfGfUbLesx5JbNCdy+caVhnHOG8pD37in+Gkl4f9M7gb3/wlspcA43j8pbITH3bOd2YddH0P5XLLbm3cril93Rqt9Sb0s3NNpf7TdaU92jMewIfOqPa
@@ -20,12 +21,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKAf+MdEW/MZmSE0EzOqeI8mkGDGUE5T8J8Gft3BwsAgjQfvYqFMPy78jRXVnF1sqPxQNHl0gE8e2axMYDxlAfF6dQaGDerQMATGm7EOA4MJEJ9lZ2Cw1mJgsNEi3l6YXhBAZsOAHicDQyvQzjZNiPmMSOkkh4OBYTLQfefZIXQeB/H26rMj+MhsZHCWHZXGJY9sLiF7YW4G4Qs4zD2H5h9K7f3CipoGkfUjhzkuceT4ReYTshfdjWdxhDkucX208IfxSbUXOcxzkdiwdIMuDmPDaGLTFTJADnP0MgDkH1LyOnr+JgXAynRY+MP8gF4G0wog20svO9HtpSeglr0AD9lFhQ==
+   eJy9VF0OwUAQ/qhqncEBpCKa4I1rOAJCcAuevDkIj+IOxWHEI1aaSWeHrTZsv2Q6szPd+XZmf4DicC/bzV9yYl12dP8mUB/n7XereFio9VAB6ilyrPw23yQ3Fxh3kjzHqp536KbzpsV5rqnap5mSXQPYKxkpzm4L6LXieOQB/SYwaGbn5fO5TWjXgJXiXAdx/gmrc+4DW7W+sxfrpZ+dN/SSMbc5Ik/XpjjP+42X1vySiyHvSdTzK+/V1c8gny/375OfbIrT+BuvXGNk6LnJH4r+0zgvL+/5gtl0bqSfbNJZzxUH77l8A1715Lnrtxy8EvSmU/+pBvkG2wLnLYpT8haJf/E+ARjrRkU=
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFowA7mKzOwDBFHcEX12FgkNCBsOW1GBgUtIg3C1kvMnsU0AfgCnN88TIaT6NgFAxPAAAOuQW6
+   eJxjYBgFowA7mKzOwDBFHcIW12FgkNBByMlrMTAoaBFvFrJ+dLNGAe0BrjDHFy+j8TQKRsHwBAAQ1QW6
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -34,7 +35,7 @@
    <properties>
     <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
-    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red"/>
+    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
     <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
    </properties>
   </object>
@@ -42,7 +43,7 @@
    <properties>
     <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
-    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red"/>
+    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
     <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
    </properties>
   </object>
@@ -50,7 +51,7 @@
    <properties>
     <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
-    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red"/>
+    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
     <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
    </properties>
   </object>
@@ -58,7 +59,7 @@
    <properties>
     <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
-    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red"/>
+    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
     <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
    </properties>
   </object>
@@ -66,7 +67,7 @@
    <properties>
     <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
-    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red"/>
+    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
     <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
    </properties>
   </object>
@@ -74,7 +75,7 @@
    <properties>
     <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
-    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red"/>
+    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
     <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
    </properties>
   </object>
@@ -100,7 +101,7 @@
    <properties>
     <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
-    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red"/>
+    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
     <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
    </properties>
   </object>
@@ -108,7 +109,7 @@
    <properties>
     <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
-    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red"/>
+    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
     <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
    </properties>
   </object>

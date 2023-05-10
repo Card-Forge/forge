@@ -3,6 +3,5 @@ ManaCost:R
 Types:Creature Human Soldier
 PT:2/2
 S:Mode$ CantAttack | ValidCard$ Card.Self | IfDefenderControls$ Land.untapped | Description$ CARDNAME can't attack if defending player controls an untapped land.
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | CheckSVar$ Y | SVarCompare$ GE1 | Description$ CARDNAME can't block if you control an untapped land.
-SVar:Y:Count$Valid Land.YouCtrl+untapped
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | IsPresent$ Land.YouCtrl+untapped | Description$ CARDNAME can't block if you control an untapped land.
 Oracle:Branded Brawlers can't attack if defending player controls an untapped land.\nBranded Brawlers can't block if you control an untapped land.

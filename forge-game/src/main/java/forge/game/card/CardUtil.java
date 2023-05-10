@@ -25,7 +25,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.common.collect.Table;
 
 import forge.ImageKeys;
 import forge.card.CardStateName;
@@ -35,7 +34,6 @@ import forge.card.MagicColor;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -63,7 +61,7 @@ public final class CardUtil {
             "Cycling", "Echo", "Kicker", "Flashback", "Madness", "Morph",
             "Affinity", "Entwine", "Splice", "Ninjutsu", "Presence",
             "Transmute", "Replicate", "Recover", "Squad", "Suspend", "Aura swap",
-            "Fortify", "Transfigure", "Champion", "Evoke", "Prowl", "IfReach",
+            "Fortify", "Transfigure", "Champion", "Evoke", "Prowl",
             "Reinforce", "Unearth", "Level up", "Miracle", "Overload", "Cleave",
             "Scavenge", "Encore", "Bestow", "Outlast", "Dash", "Surge", "Emerge", "Hexproof:",
             "etbCounter", "Reflect", "Ward").build();
@@ -103,9 +101,6 @@ public final class CardUtil {
      * @param src   a Card object
      * @return a CardCollection that matches the given criteria
      */
-    public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb) {
-        return getThisTurnEntered(to, from, valid, src, ctb, src.getController());
-    }
     public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
         List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
@@ -128,7 +123,7 @@ public final class CardUtil {
      * @param src   a Card object
      * @return a CardCollection that matches the given criteria
      */
-    public static List<Card> getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb) {
+    public static List<Card> getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
         List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
         if (to != ZoneType.Stack) {
@@ -138,15 +133,15 @@ public final class CardUtil {
         } else {
             res.addAll(game.getStackZone().getCardsAddedLastTurn(from));
         }
-        return CardLists.getValidCardsAsList(res, valid, src.getController(), src, ctb);
+        return CardLists.getValidCardsAsList(res, valid, controller, src, ctb);
     }
 
-    public static List<Card> getThisTurnCast(final String valid, final Card src, final CardTraitBase ctb) {
-        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, src.getController(), src, ctb);
+    public static List<Card> getThisTurnCast(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, controller, src, ctb);
     }
 
-    public static List<Card> getLastTurnCast(final String valid, final Card src, final CardTraitBase ctb) {
-        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, src.getController(), src, ctb);
+    public static List<Card> getLastTurnCast(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, controller, src, ctb);
     }
 
     public static List<Card> getLKICopyList(final Iterable<Card> in, Map<Integer, Card> cachedMap) {
@@ -208,6 +203,7 @@ public final class CardUtil {
         newCopy.getCurrentState().copyFrom(in.getState(in.getFaceupCardStateName()), true);
         if (in.isFaceDown()) {
             newCopy.turnFaceDownNoUpdate();
+            newCopy.setType(new CardType(in.getFaceDownState().getType()));
             // prevent StackDescription from revealing face
             newCopy.updateStateForView();
         }
@@ -222,7 +218,7 @@ public final class CardUtil {
             newCopy.addAlternateState(CardStateName.Cloner, false);
             newCopy.getState(CardStateName.Cloner).copyFrom(in.getState(CardStateName.Cloner), true);
         }
-        //*/
+        */
 
         newCopy.setToken(in.isToken());
         newCopy.setCopiedSpell(in.isCopiedSpell());
@@ -233,10 +229,18 @@ public final class CardUtil {
         newCopy.setBasePower(in.getCurrentPower());
         newCopy.setBaseToughness(in.getCurrentToughness());
 
+        // printed P/T
+        newCopy.setBasePowerString(in.getCurrentState().getBasePowerString());
+        newCopy.setBaseToughnessString(in.getCurrentState().getBaseToughnessString());
+
         // extra copy PT boost
         newCopy.setPTBoost(in.getPTBoostTable());
 
         newCopy.setCounters(Maps.newHashMap(in.getCounters()));
+
+        newCopy.setTributed(in.isTributed());
+        newCopy.setMonstrous(in.isMonstrous());
+        newCopy.setRenowned(in.isRenowned());
 
         newCopy.setColor(in.getColor().getColor());
         newCopy.setPhasedOut(in.getPhasedOut());
@@ -264,11 +268,18 @@ public final class CardUtil {
 
         newCopy.addRemembered(in.getRemembered());
         newCopy.addImprintedCards(in.getImprintedCards());
-        newCopy.setChosenCards(new CardCollection(in.getChosenCards()));
+        newCopy.setChosenCards(in.getChosenCards());
 
-        for (Table.Cell<Player, CounterType, Integer> cl : in.getEtbCounters()) {
-            newCopy.addEtbCounter(cl.getColumnKey(), cl.getValue(), cl.getRowKey());
+        newCopy.setChosenType(in.getChosenType());
+        newCopy.setChosenType2(in.getChosenType2());
+        newCopy.setChosenName(in.getChosenName());
+        newCopy.setChosenName2(in.getChosenName2());
+        newCopy.setChosenColors(Lists.newArrayList(in.getChosenColors()));
+        if (in.hasChosenNumber()) {
+            newCopy.setChosenNumber(in.getChosenNumber());
         }
+
+        newCopy.getEtbCounters().putAll(in.getEtbCounters());
 
         newCopy.setUnearthed(in.isUnearthed());
 
@@ -280,11 +291,18 @@ public final class CardUtil {
         newCopy.setChangedCardNames(in.getChangedCardNames());
         newCopy.setChangedCardTraits(in.getChangedCardTraits());
 
+        // for getReplacementList (run after setChangedCardKeywords for caching)
+        newCopy.setStoredKeywords(in.getStoredKeywords(), true);
+        newCopy.setStoredReplacements(in.getStoredReplacements());
+
         newCopy.copyChangedTextFrom(in);
 
         newCopy.setTimestamp(in.getTimestamp());
 
         newCopy.setBestowTimestamp(in.getBestowTimestamp());
+        if (in.isTransformed()) {
+            newCopy.incrementTransformedTimestamp();
+        }
 
         newCopy.setForetold(in.isForetold());
         newCopy.setForetoldThisTurn(in.isForetoldThisTurn());
@@ -531,9 +549,9 @@ public final class CardUtil {
         final Game game = ability.getActivatingPlayer().getGame();
         final List<ZoneType> zone = tgt.getZone();
 
-        final boolean canTgtStack = zone.contains(ZoneType.Stack);
         List<Card> validCards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), ability.getActivatingPlayer(), activatingCard, ability);
         List<Card> choices = CardLists.getTargetableCards(validCards, ability);
+        final boolean canTgtStack = zone.contains(ZoneType.Stack);
         if (canTgtStack) {
             // Since getTargetableCards doesn't have additional checks if one of the Zones is stack
             // Remove the activating card from targeting itself if its on the Stack
@@ -541,55 +559,10 @@ public final class CardUtil {
                 choices.remove(activatingCard);
             }
         }
-        List<GameObject> targetedObjects = ability.getUniqueTargets();
 
         // Remove cards already targeted
         final List<Card> targeted = Lists.newArrayList(ability.getTargets().getTargetCards());
         choices.removeAll(targeted);
-
-        // Remove cards exceeding total CMC
-        if (ability.hasParam("MaxTotalTargetCMC")) {
-            int totalCMCTargeted = 0;
-            for (final Card c : targeted) {
-                totalCMCTargeted += c.getCMC();
-            }
-
-            final List<Card> choicesCopy = Lists.newArrayList(choices);
-            for (final Card c : choicesCopy) {
-                if (c.getCMC() > tgt.getMaxTotalCMC(activatingCard, ability) - totalCMCTargeted) {
-                    choices.remove(c);
-                }
-            }
-        }
-
-        // Remove cards exceeding total power
-        if (ability.hasParam("MaxTotalTargetPower")) {
-            int totalPowerTargeted = 0;
-            for (final Card c : targeted) {
-                totalPowerTargeted += c.getNetPower();
-            }
-
-            final List<Card> choicesCopy = Lists.newArrayList(choices);
-            for (final Card c : choicesCopy) {
-                if (c.getNetPower() > tgt.getMaxTotalPower(activatingCard, ability) - totalPowerTargeted) {
-                    choices.remove(c);
-                }
-            }
-        }
-
-        // If all cards (including subability targets) must have the same controller
-        if (tgt.isSameController() && !targetedObjects.isEmpty()) {
-            final List<Card> list = Lists.newArrayList();
-            for (final Object o : targetedObjects) {
-                if (o instanceof Card) {
-                    list.add((Card) o);
-                }
-            }
-            if (!list.isEmpty()) {
-                final Card card = list.get(0);
-                choices = CardLists.filter(choices, CardPredicates.sharesControllerWith(card));
-            }
-        }
 
         return choices;
     }

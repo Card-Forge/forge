@@ -57,9 +57,9 @@ public class SoundSystem {
             final String resource = type.getResourceFileName();
             clip = GuiBase.getInterface().createAudioClip(resource);
             if (clip == null) {
-                clip = emptySound;
-            }
-            loadedClips.put(type, clip);
+                return emptySound;
+            } else
+                loadedClips.put(type, clip);
         }
         return clip;
     }
@@ -85,9 +85,9 @@ public class SoundSystem {
         if (null == clip) { // cache miss
             clip = GuiBase.getInterface().createAudioClip(fileName);
             if (clip == null) {
-                clip = emptySound;
-            }
-            loadedScriptClips.put(fileName, clip);
+                return emptySound;
+            } else
+                loadedScriptClips.put(fileName, clip);
         }
         return clip;
     }
@@ -192,6 +192,10 @@ public class SoundSystem {
         changeBackgroundTrack();
     }
 
+    public MusicPlaylist getCurrentPlaylist() {
+        return currentPlaylist;
+    }
+
     public void changeBackgroundTrack() {
         //ensure old track stopped and disposed of if needed
         if (currentTrack != null) {
@@ -220,12 +224,17 @@ public class SoundSystem {
                     changeBackgroundTrack(); //change track when music completes on its own
                 }
             });
-            currentTrack.setVolume(FModel.getPreferences().getPrefInt(FPref.UI_VOL_MUSIC)/100f);
+            refreshVolume();
         } catch (final Exception ex) {
             System.err.println("Unable to load music file: " + filename);
         }
     }
 
+    public void refreshVolume() {
+        if (currentTrack != null) {
+            currentTrack.setVolume(FModel.getPreferences().getPrefInt(FPref.UI_VOL_MUSIC) / 100f);
+        }
+    }
     public void pause() {
         if (currentTrack != null) {
             currentTrack.pause();
@@ -243,6 +252,7 @@ public class SoundSystem {
             currentTrack.dispose();
             currentTrack = null;
         }
+        invalidateSoundCache();
     }
 
     public void fadeModifier(float value) {
@@ -288,11 +298,19 @@ public class SoundSystem {
     }
 
     public void invalidateSoundCache() {
+        for (IAudioClip c : loadedClips.values()) {
+            c.dispose();
+        }
         loadedClips.clear();
+        for (IAudioClip c : loadedScriptClips.values()) {
+            c.dispose();
+        }
         loadedScriptClips.clear();
     }
 
     public String getMusicDirectory() {
+        if (GuiBase.isAdventureMode())
+            return ForgeConstants.ADVENTURE_MUSIC_DIR;
         String profileName = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CURRENT_MUSIC_SET);
         if (profileName.equals("Default")) {
             return ForgeConstants.MUSIC_DIR;

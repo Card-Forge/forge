@@ -1,0 +1,9 @@
+Name:Seal from Existence
+ManaCost:1 W W
+Types:Enchantment
+K:Ward:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | Duration$ UntilHostLeavesPlay
+SVar:PlayMain1:TRUE
+SVar:OblivionRing:TRUE
+Oracle:Ward {3}\nWhen Seal from Existence enters the battlefield, exile target nonland permanent an opponent controls until Seal from Existence leaves the battlefield.

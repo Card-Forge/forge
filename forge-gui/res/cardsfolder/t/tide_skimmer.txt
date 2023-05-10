@@ -3,7 +3,6 @@ ManaCost:3 U
 Types:Creature Drake
 PT:2/3
 K:Flying
-T:Mode$ AttackersDeclared | Execute$ TrigDraw | CheckSVar$ X | SVarCompare$ GE2 | NoResolvingCheck$ True | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with two or more creatures with flying, draw a card.
+T:Mode$ AttackersDeclared | Execute$ TrigDraw | IsPresent$ Creature.attacking+withFlying+YouCtrl | PresentCompare$ GE2 | NoResolvingCheck$ True | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with two or more creatures with flying, draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
-SVar:X:Count$Valid Creature.attacking+withFlying+YouCtrl
 Oracle:Flying\nWhenever you attack with two or more creatures with flying, draw a card.

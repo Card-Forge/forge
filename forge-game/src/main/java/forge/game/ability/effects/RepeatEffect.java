@@ -26,17 +26,9 @@ public class RepeatEffect extends SpellAbilityEffect {
         // setup subability to repeat
         SpellAbility repeat = sa.getAdditionalAbility("RepeatSubAbility");
 
-        if (repeat != null && !repeat.getHostCard().equals(source)) {
-            // TODO: for some reason, the host card of the original additional SA is set to the cloned card when
-            // the ability is copied (e.g. Clone Legion + Swarm Intelligence). Couldn't figure out why this happens,
-            // so this hack is necessary for now to work around this issue.
-            System.out.println("Warning: RepeatSubAbility had the wrong host set (potentially after cloning the root SA), attempting to correct...");
-            repeat.setHostCard(source);
-        }
-
         Integer maxRepeat = null;
         if (sa.hasParam("MaxRepeat")) {
-            maxRepeat = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("MaxRepeat"), sa);
+            maxRepeat = AbilityUtils.calculateAmount(source, sa.getParam("MaxRepeat"), sa);
             if (maxRepeat.intValue() == 0) return; // do nothing if maxRepeat is 0. the next loop will execute at least once
         }
 
@@ -50,7 +42,7 @@ public class RepeatEffect extends SpellAbilityEffect {
                 // Helm of Obedience vs Graveyard to Library replacement effect
 
                 if (source.getName().equals("Helm of Obedience")) {
-                StringBuilder infLoop = new StringBuilder(sa.getHostCard().toString());
+                StringBuilder infLoop = new StringBuilder(source.toString());
                     infLoop.append(" - To avoid an infinite loop, this repeat has been broken ");
                     infLoop.append(" and the game will now continue in the current state, ending the loop early. ");
                     infLoop.append("Once Draws are available this probably should change to a Draw.");
@@ -84,7 +76,7 @@ public class RepeatEffect extends SpellAbilityEffect {
             } else {
                 list = game.getCardsIn(ZoneType.Battlefield);
             }
-            list = CardLists.getValidCards(list, repeatPresent, sa.getActivatingPlayer(), sa.getHostCard(), sa);
+            list = CardLists.getValidCards(list, repeatPresent, activator, sa.getHostCard(), sa);
 
             final String rightString = repeatCompare.substring(2);
             int right = AbilityUtils.calculateAmount(sa.getHostCard(), rightString, sa);
@@ -114,7 +106,7 @@ public class RepeatEffect extends SpellAbilityEffect {
         if (sa.hasParam("RepeatOptional")) {
             Player decider = sa.hasParam("RepeatOptionalDecider")
                     ? AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("RepeatOptionalDecider"), sa).get(0)
-                    : sa.getActivatingPlayer();
+                    : activator;
             return decider.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantRepeatProcessAgain"), null);
         }
 

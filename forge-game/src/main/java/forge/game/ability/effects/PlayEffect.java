@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import forge.card.CardStateName;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -24,6 +25,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
@@ -82,10 +84,7 @@ public class PlayEffect extends SpellAbilityEffect {
     @Override
     public void resolve(final SpellAbility sa) {
         final Card source = sa.getHostCard();
-        Player activator = sa.getActivatingPlayer();
-        Player controlledByPlayer = null;
-        long controlledByTimeStamp = -1;
-        final Game game = activator.getGame();
+        final Game game = source.getGame();
         boolean optional = sa.hasParam("Optional");
         final boolean remember = sa.hasParam("RememberPlayed");
         final boolean imprint = sa.hasParam("ImprintPlayed");
@@ -96,27 +95,28 @@ public class PlayEffect extends SpellAbilityEffect {
         if (sa.hasParam("Amount") && !sa.getParam("Amount").equals("All")) {
             amount = AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa);
         }
-
+        final Player controller;
         if (sa.hasParam("Controller")) {
-            activator = AbilityUtils.getDefinedPlayers(source, sa.getParam("Controller"), sa).get(0);
+            controller = AbilityUtils.getDefinedPlayers(source, sa.getParam("Controller"), sa).get(0);
+        } else {
+            controller = sa.getActivatingPlayer();
         }
 
+        long controlledByTimeStamp = -1;
+        Player controlledByPlayer = null;
         if (sa.hasParam("ControlledByPlayer")) {
             controlledByTimeStamp = game.getNextTimestamp();
             controlledByPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("ControlledByPlayer"), sa).get(0);
         }
 
-        final Player controller = activator;
         CardCollection tgtCards;
-        CardCollection showCards = new CardCollection();
+        CardCollectionView showCards = new CardCollection();
 
         if (sa.hasParam("Valid")) {
             List<ZoneType> zones = sa.hasParam("ValidZone") ? ZoneType.listValueOf(sa.getParam("ValidZone")) : ImmutableList.of(ZoneType.Hand);
-            tgtCards = new CardCollection(
-                AbilityUtils.filterListByType(game.getCardsIn(zones), sa.getParam("Valid"), sa)
-            );
+            tgtCards = new CardCollection(AbilityUtils.filterListByType(game.getCardsIn(zones), sa.getParam("Valid"), sa));
             if (sa.hasParam("ShowCards")) {
-                showCards = new CardCollection(AbilityUtils.filterListByType(game.getCardsIn(zones), sa.getParam("ShowCards"), sa));
+                showCards = AbilityUtils.filterListByType(game.getCardsIn(zones), sa.getParam("ShowCards"), sa);
             }
         } else if (sa.hasParam("AnySupportedCard")) {
             final String valid = sa.getParam("AnySupportedCard");
@@ -152,7 +152,7 @@ public class PlayEffect extends SpellAbilityEffect {
                     System.err.println("Offering random spells to copy: " + choice.toString());
                     final int choicenum = AbilityUtils.calculateAmount(source, sa.getParam("ChoiceNum"), sa);
                     tgtCards = new CardCollection(
-                        activator.getController().chooseCardsForEffect(choice, sa,
+                        controller.getController().chooseCardsForEffect(choice, sa,
                             source + " - " + Localizer.getInstance().getMessage("lblChooseUpTo") + " " + Lang.nounWithNumeral(choicenum, "card"), 0, choicenum, true, null
                         )
                     );
@@ -213,7 +213,7 @@ public class PlayEffect extends SpellAbilityEffect {
         }
 
         if (controlledByPlayer != null) {
-            activator.addController(controlledByTimeStamp, controlledByPlayer);
+            controller.addController(controlledByTimeStamp, controlledByPlayer);
         }
 
         boolean singleOption = tgtCards.size() == 1 && amount == 1 && optional;
@@ -227,7 +227,7 @@ public class PlayEffect extends SpellAbilityEffect {
             if (hasTotalCMCLimit) {
                 // filter out cards with mana value greater than limit
                 Iterator<Card> it = tgtCards.iterator();
-                final String [] valid = {"Spell.cmcLE"+totalCMCLimit};
+                final String [] valid = {"Spell.cmcLE" + totalCMCLimit};
                 while (it.hasNext()) {
                     Card c = it.next();
                     if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , c, sa))) {
@@ -241,9 +241,9 @@ public class PlayEffect extends SpellAbilityEffect {
                 params.put("CMCLimit", totalCMCLimit);
             }
 
-            activator.getController().tempShowCards(showCards);
+            controller.getController().tempShowCards(showCards);
             Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), !singleOption && optional, params);
-            activator.getController().endTempShowCards();
+            controller.getController().endTempShowCards();
             if (tgtCard == null) {
                 break;
             }
@@ -255,11 +255,12 @@ public class PlayEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("ShowCardToActivator")) {
-                game.getAction().revealTo(tgtCard, activator);
+                game.getAction().revealTo(tgtCard, controller);
             }
+            String prompt = sa.hasParam("CastTransformed") ? "lblDoYouWantPlayCardTransformed" : "lblDoYouWantPlayCard";
             if (singleOption && sa.getTargetCard() == null)
                 sa.setPlayEffectCard(tgtCard);// show card to play rather than showing the source card
-            if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())), null)) {
+            if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage(prompt, CardTranslation.getTranslatedName(tgtCard.getName())), null)) {
                 if (wasFaceDown) {
                     tgtCard.turnFaceDownNoUpdate();
                     tgtCard.updateStateForView();
@@ -285,13 +286,26 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
             }
 
+            CardStateName state = CardStateName.Original;
+
+            if (sa.hasParam("CastTransformed")) {
+                if (!tgtCard.changeToState(CardStateName.Transformed)) {
+                    // Failed to transform. In the future, we might need to just remove this option and continue
+                    amount--;
+                    System.err.println("CastTransformed failed for '" + tgtCard + "'.");
+                    continue;
+                }
+                state = CardStateName.Transformed;
+            }
+
             // TODO if cost isn't replaced should include alternative ones
             // get basic spells (no flashback, etc.)
-            List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, controller);
+            List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, controller, state);
             if (sa.hasParam("ValidSA")) {
                 final String valid[] = sa.getParam("ValidSA").split(",");
-                sas = Lists.newArrayList(Iterables.filter(sas, SpellAbilityPredicates.isValid(valid, controller , source, sa)));
+                sas.removeIf(sp -> !sp.isValid(valid, controller , source, sa));
             }
+
             if (hasTotalCMCLimit) {
                 Iterator<SpellAbility> it = sas.iterator();
                 while (it.hasNext()) {
@@ -307,13 +321,13 @@ public class PlayEffect extends SpellAbilityEffect {
 
             SpellAbility tgtSA;
 
-            if (!sa.hasParam("CastFaceDown")) {
-                // only one mode can be used
-                tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(tgtCard, sas);
-            } else {
+            if (sa.hasParam("CastFaceDown")) {
                 // For Illusionary Mask effect
-                tgtSA = CardFactoryUtil.abilityMorphDown(tgtCard.getCurrentState());
+                tgtSA = CardFactoryUtil.abilityMorphDown(tgtCard.getCurrentState(), false);
+            } else {
+                tgtSA = controller.getController().getAbilityToPlay(tgtCard, sas);
             }
+
             // in case player canceled from choice dialog
             if (tgtSA == null) {
                 if (wasFaceDown) {
@@ -371,7 +385,7 @@ public class PlayEffect extends SpellAbilityEffect {
                     abCost = new Cost(cost, false);
                 }
 
-                tgtSA = tgtSA.copyWithDefinedCost(abCost);
+                tgtSA = tgtSA.copyWithManaCostReplaced(tgtSA.getActivatingPlayer(), abCost);
             }
 
             if (!optional) {
@@ -405,6 +419,10 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtSA.setAlternativeCost(AlternativeCost.Madness);
             }
 
+            if (sa.hasParam("CastTransformed")) {
+                tgtSA.putParam("CastTransformed", "True");
+            }
+
             if (tgtSA.usesTargeting() && !optional) {
                 tgtSA.getTargetRestrictions().setMandatory(true);
             }
@@ -412,7 +430,7 @@ public class PlayEffect extends SpellAbilityEffect {
             // can't be done later
             if (sa.hasParam("ReplaceGraveyard")) {
                 if (!sa.hasParam("ReplaceGraveyardValid")
-                        || tgtSA.isValid(sa.getParam("ReplaceGraveyardValid").split(","), activator, source, sa)) {
+                        || tgtSA.isValid(sa.getParam("ReplaceGraveyardValid").split(","), controller, source, sa)) {
                     addReplaceGraveyardEffect(tgtCard, sa, tgtSA, sa.getParam("ReplaceGraveyard"), moveParams);
                 }
             }
@@ -427,7 +445,7 @@ public class PlayEffect extends SpellAbilityEffect {
             // Add controlled by player to target SA so when the spell is resolving, the controller would be changed again
             if (controlledByPlayer != null) {
                 tgtSA.setControlledByPlayer(controlledByTimeStamp, controlledByPlayer);
-                activator.pushPaidForSA(tgtSA);
+                controller.pushPaidForSA(tgtSA);
                 tgtSA.setManaCostBeingPaid(new ManaCostBeingPaid(tgtSA.getPayCosts().getCostMana().getManaCostFor(tgtSA), tgtSA.getPayCosts().getCostMana().getRestriction()));
             }
 
@@ -461,10 +479,10 @@ public class PlayEffect extends SpellAbilityEffect {
 
         // Remove controlled by player if any
         if (controlledByPlayer != null) {
-            activator.removeController(controlledByTimeStamp);
-            activator.popPaidForSA();
+            controller.removeController(controlledByTimeStamp);
+            controller.popPaidForSA();
         }
-    } // end resolve
+    }
 
     protected void addReplaceGraveyardEffect(Card c, SpellAbility sa, SpellAbility tgtSA, String zone, Map<AbilityKey, Object> moveParams) {
         final Card hostCard = sa.getHostCard();

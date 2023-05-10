@@ -1,0 +1,9 @@
+Name:Grolnok's Skin
+ManaCost:no cost
+Colors:black,green,Blue
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep mill two cards
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 2
+A:AB$ Draft | Cost$ G U PayShards<2> | SubAbility$ DBExileSelf | ActivationZone$ Command | Spellbook$ Mystic Snake,Sporefrog,Froghemoth,Frilled Mystic,Whiptongue Frog,Excavating Anurid,Chub Toad,Satyr Wayfinder,Lotus Cobra,Endurance,Turn to Frog,Polymorphist's Jest,Mulch,Crawling Infestation,Arcane Adaption,Grolnok; the Omnivore | Zone$ Hand  | SubAbility $ Eject | SpellDescription$ Draft a card from Grolnok's SpellBook. Exile Grolnok's Skin
+SVar:DBExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:At the beginning of your upkeep mill two card\n{G}{U},{M}{M} Draft a card from Grolnok's SpellBook. Exile Grolnok's Skin

@@ -19,12 +19,20 @@
       "height": 200
     },
     {
-      "type": "Scroll",
-      "name": "enemies",
+      "type": "Window",
+      "name": "scrollWindow",
       "x": 15,
       "y": 18,
       "width": 256,
       "height": 235
+    },
+    {
+      "type": "Table",
+      "name": "enemies",
+      "x": 15,
+      "y": 22,
+      "width": 256,
+      "height": 220
     },
     {
       "type": "Image",
@@ -114,28 +122,19 @@
       "name": "return",
       "text": "tr(lblBack)",
       "binding": "Back",
-      "width": 100,
+      "width": 80,
       "height": 30,
-      "x": 335,
+      "x": 395,
       "y": 224
     },
     {
-      "type": "Image",
-      "name": "lifeIcon",
-      "image": "ui/life.png",
-      "x": 392,
-      "y": 40,
-      "width": 16,
-      "height": 16
-    },
-    {
-      "type": "Image",
-      "name": "goldIcon",
-      "image": "ui/money.png",
-      "x": 392,
-      "y": 60,
-      "width": 16,
-      "height": 16
+      "type": "TextButton",
+      "name": "toggleAward",
+      "text": "[%120][+AWARD]",
+      "width": 30,
+      "height": 30,
+      "x": 285,
+      "y": 224
     },
     {
       "type": "Label",
@@ -149,24 +148,36 @@
     {
       "type": "Label",
       "name": "lifePoints",
-      "fontColor":"black",
       "width": 64,
       "height": 16,
-      "x": 410,
+      "x": 394,
       "y": 40
     },
     {
       "type": "Label",
       "name": "money",
-      "fontColor":"black",
       "width": 64,
       "height": 16,
-      "x": 410,
-      "y": 60
+      "x": 394,
+      "y": 80
     },
     {
-      "type": "Table",
-      "font": "default"
+      "type": "Label",
+      "name": "shards",
+      "width": 64,
+      "height": 16,
+      "x": 394,
+      "y": 60
+    },
+	{
+      "type": "TextButton",
+      "name": "quests",
+      "text": "Quests",
+      "binding": "Status",
+      "width": 80,
+      "height": 30,
+      "x": 315,
+      "y": 224
     }
   ]
 }

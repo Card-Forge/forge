@@ -29,16 +29,19 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         List<AbilitySub> choices = Lists.newArrayList(sa.getAdditionalAbilityList("Choices"));
-        List<AbilitySub> toRemove = Lists.newArrayList();
-        for (AbilitySub ch : choices) {
-            // 603.3c If one of the modes would be illegal, that mode can't be chosen.
-            if ((ch.usesTargeting() && ch.isTrigger() && ch.getMinTargets() > 0 &&
-                    ch.getTargetRestrictions().getNumCandidates(ch, true) == 0) ||
-                    (restriction != null && restriction.contains(ch.getDescription()))) {
-                toRemove.add(ch);
+
+        if (source.getZone() != null) {
+            List<AbilitySub> toRemove = Lists.newArrayList();
+            for (AbilitySub ch : choices) {
+                // 603.3c If one of the modes would be illegal, that mode can't be chosen.
+                if ((ch.usesTargeting() && ch.isTrigger() && ch.getMinTargets() > 0 &&
+                        ch.getTargetRestrictions().getNumCandidates(ch, true) == 0) ||
+                        (restriction != null && restriction.contains(ch.getDescription()))) {
+                    toRemove.add(ch);
+                }
             }
+            choices.removeAll(toRemove);
         }
-        choices.removeAll(toRemove);
 
         int indx = 0;
         // set CharmOrder
@@ -81,6 +84,8 @@ public class CharmEffect extends SpellAbilityEffect {
 
         if (num == min || num == Integer.MAX_VALUE) {
             sb.append(Lang.getNumeral(min));
+        } else if (min == 0 && num == sa.getParam("Choices").split(",").length) {
+            sb.append("any number ");
         } else if (min == 0) {
             sb.append("up to ").append(Lang.getNumeral(num));
         } else {
@@ -99,7 +104,7 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         if (random) {
-            sb.append("at random.");
+            sb.append(" at random.");
         }
         if (repeat) {
             sb.append(". You may choose the same mode more than once.");

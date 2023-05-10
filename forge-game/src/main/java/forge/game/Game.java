@@ -297,7 +297,7 @@ public class Game {
             pl.setStartingHandSize(psc.getStartingHand());
 
             if (psc.getManaShards() > 0) {
-                pl.setCounters(CounterEnumType.MANASHARDS, psc.getManaShards(), true);
+                pl.setNumManaShards(psc.getManaShards());
             }
             int teamNum = psc.getTeamNumber();
             if (teamNum == -1) {
@@ -943,7 +943,6 @@ public class Game {
     public GameStage getAge() {
         return age;
     }
-
     public void setAge(GameStage value) {
         age = value;
     }
@@ -1130,6 +1129,20 @@ public class Game {
                    }
                }
            }
+        }
+        return result;
+    }
+    public int getCounterAddedThisTurn(CounterType cType, Card card) {
+        int result = 0;
+        if (!countersAddedThisTurn.containsRow(cType)) {
+            return result;
+        }
+        for (List<Pair<Card, Integer>> l : countersAddedThisTurn.row(cType).values()) {
+            for (Pair<Card, Integer> p : l) {
+                if (p.getKey().equalsWithTimestamp(card)) {
+                    result += p.getValue();
+                }
+            }
         }
         return result;
     }

@@ -5,33 +5,7 @@ import java.util.Collection;
 
 import forge.LobbyPlayer;
 import forge.game.card.Card;
-import forge.game.event.EventValueChangeType;
-import forge.game.event.GameEvent;
-import forge.game.event.GameEventBlockersDeclared;
-import forge.game.event.GameEventCardAttachment;
-import forge.game.event.GameEventCardChangeZone;
-import forge.game.event.GameEventCardCounters;
-import forge.game.event.GameEventCardDamaged;
-import forge.game.event.GameEventCardDestroyed;
-import forge.game.event.GameEventCardPhased;
-import forge.game.event.GameEventCardRegenerated;
-import forge.game.event.GameEventCardSacrificed;
-import forge.game.event.GameEventCardTapped;
-import forge.game.event.GameEventDayTimeChanged;
-import forge.game.event.GameEventFlipCoin;
-import forge.game.event.GameEventGameOutcome;
-import forge.game.event.GameEventGameStarted;
-import forge.game.event.GameEventLandPlayed;
-import forge.game.event.GameEventManaBurn;
-import forge.game.event.GameEventPlayerLivesChanged;
-import forge.game.event.GameEventPlayerPoisoned;
-import forge.game.event.GameEventRollDie;
-import forge.game.event.GameEventShuffle;
-import forge.game.event.GameEventSpellResolved;
-import forge.game.event.GameEventTokenCreated;
-import forge.game.event.GameEventTurnEnded;
-import forge.game.event.GameEventZone;
-import forge.game.event.IGameEventVisitor;
+import forge.game.event.*;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -77,6 +51,12 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
 
         return to == ZoneType.Exile ? SoundEffectType.Exile : null;
     }
+
+    @Override
+    public SoundEffectType visit(GameEventCardStatsChanged event) {
+        return event.transform ? SoundEffectType.FlipCard : null ;
+    }
+
     @Override
     public SoundEffectType visit(final GameEventCardRegenerated event) { return SoundEffectType.Regen; }
     @Override
@@ -91,6 +71,8 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     public SoundEffectType visit(final GameEventRollDie event) { return SoundEffectType.RollDie; }
     @Override
     public SoundEffectType visit(final GameEventPlayerLivesChanged event) { return event.newLives < event.oldLives ? SoundEffectType.LifeLoss : SoundEffectType.LifeGain; }
+    @Override
+    public SoundEffectType visit(final GameEventPlayerShardsChanged event) { return SoundEffectType.TakeShard; }
     @Override
     public SoundEffectType visit(final GameEventManaBurn event) { return SoundEffectType.ManaBurn; }
     @Override

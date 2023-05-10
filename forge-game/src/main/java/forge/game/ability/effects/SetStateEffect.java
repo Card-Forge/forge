@@ -18,7 +18,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
 
@@ -63,11 +62,8 @@ public class SetStateEffect extends SpellAbilityEffect {
             CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), p, host, sa);
 
-            final String numericAmount = sa.getParamOrDefault("Amount", "1");
-            final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) :
-                    AbilityUtils.calculateAmount(host, numericAmount, sa);
-            final int minAmount = sa.hasParam("MinAmount") ? Integer.parseInt(sa.getParam("MinAmount")) :
-                    validAmount;
+            final int validAmount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Amount", "1"), sa);
+            final int minAmount = sa.hasParam("MinAmount") ? Integer.parseInt(sa.getParam("MinAmount")) : validAmount;
 
             if (validAmount <= 0) {
                 return;
@@ -133,7 +129,7 @@ public class SetStateEffect extends SpellAbilityEffect {
                     && gameCard.hasMergedCard()) {
                 boolean hasBackSide = false;
                 for (final Card c : gameCard.getMergedCards()) {
-                    if (c.hasBackSide()) {
+                    if (c.isDoubleFaced()) {
                         hasBackSide = true;
                         break;
                     }
@@ -204,7 +200,7 @@ public class SetStateEffect extends SpellAbilityEffect {
                 if (remChanged) {
                     host.addRemembered(gameCard);
                 }
-                if (!gameCard.isDoubleFaced())
+                if (!gameCard.isTransformable())
                     transformedCards.add(gameCard);
                 if ("Specialize".equals(mode)) {
                     gameCard.setSpecialized(true);

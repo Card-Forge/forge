@@ -1,0 +1,12 @@
+Name:Surrak and Goreclaw
+ManaCost:4 G G
+Types:Legendary Creature Human Bear
+PT:6/5
+K:Trample
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Trample | Description$ Other creatures you control have trample.
+T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another nontoken creature enters the battlefield under your control, put a +1/+1 counter on it. It gains haste until end of turn.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | SubAbility$ DBHaste
+SVar:DBHaste:DB$ Pump | Defined$ TriggeredCardLKICopy | KW$ Haste
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+Oracle:Trample\nOther creatures you control have trample.\nWhenever another nontoken creature enters the battlefield under your control, put a +1/+1 counter on it. It gains haste until end of turn.

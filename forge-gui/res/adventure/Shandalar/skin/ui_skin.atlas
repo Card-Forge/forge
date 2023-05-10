@@ -260,6 +260,15 @@ thinwindow
   orig: 16, 16
   offset: 0, 0
   index: -1
+transwindow
+  rotate: false
+  xy: 305, 415
+  size: 16, 16
+  split: 2, 2, 2, 2
+  pad: 0, 0, 0, 0
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 uncheck
   rotate: false
   xy: 293, 375

@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 4 R | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, it deals 2 damage to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | DamageSource$ TriggeredAttacker | NumDmg$ 2
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | DamageSource$ TriggeredAttacker | NumDmg$ 2
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
 Oracle:Enchant creature\nWhenever enchanted creature attacks, it deals 2 damage to any target.

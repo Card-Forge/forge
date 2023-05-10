@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.utils.Align;
@@ -554,6 +555,7 @@ public class PlayerPanel extends FContainer {
                         && StringUtils.isAlphanumericSpace(newName) && prefs.getPref(FPref.PLAYER_NAME) != newName) {
                     prefs.setPref(FPref.PLAYER_NAME, newName);
                     prefs.save();
+                    screen.getLobby().applyToSlot(index, UpdateLobbyPlayerEvent.nameUpdate(newName));
                     if (allowNetworking) {
                         screen.firePlayerChangeListener(index);
                     }
@@ -848,6 +850,7 @@ public class PlayerPanel extends FContainer {
                         if (index == 0) {
                             prefs.setPref(FPref.PLAYER_NAME, newName);
                             prefs.save();
+                            screen.getLobby().applyToSlot(index, UpdateLobbyPlayerEvent.nameUpdate(newName));
                         }
                         if (allowNetworking) {
                             screen.firePlayerChangeListener(index);

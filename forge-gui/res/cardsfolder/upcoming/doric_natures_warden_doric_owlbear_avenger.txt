@@ -1,0 +1,28 @@
+Name:Doric, Nature's Warden
+ManaCost:3 G
+Types:Legendary Creature Tiefling Druid
+PT:3/3
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a Forest card, put it into the battlefield tapped, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Forest | ChangeNum$ 1
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ Whenever NICKNAME attacks, you may pay {1}{G}. If you do, transform her.
+SVar:TrigTransform:AB$ SetState | Cost$ 1 G | Defined$ Self | Mode$ Transform
+SVar:HasAttackEffect:TRUE
+AlternateMode:DoubleFaced
+Oracle:Vigilance\nWhen Doric, Nature's Warden enters the battlefield, search your library for a Forest card, put it into the battlefield tapped, then shuffle.\nWhenever Doric attacks, you may pay {1}{G}. If you do, transform her.
+
+ALTERNATE
+
+Name:Doric, Owlbear Avenger
+ManaCost:no cost
+Colors:green
+Types:Legendary Creature Bird Bear
+PT:6/6
+K:Vigilance
+K:Trample
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When this creature transforms into CARDNAME, other legendary creatures you control get +2/+2 and gain trample until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.StrictlyOther+Legendary+YouCtrl | NumAtt$ +2 | NumDef$ +2  | KW$ Trample
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigTransformBis | TriggerDescription$ At the beginning of your upkeep, transform NICKNAME.
+SVar:TrigTransformBis:DB$ SetState | Defined$ Self | Mode$ Transform
+DeckNeeds:Type$Legendary
+Oracle:Vigilance, trample\nWhen this creature transforms into Doric, Owlbear Avenger, other legendary creatures you control get +2/+2 and gain trample until end of turn.\nAt the beginning of your upkeep, transform Doric.

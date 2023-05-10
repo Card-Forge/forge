@@ -30,6 +30,7 @@ import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardPlayOption;
@@ -82,6 +83,7 @@ public class HumanPlaySpellAbility {
 
         boolean keywordColor = false;
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
+        boolean refreeze = game.getStack().isFrozen();
         game.getStack().freezeStack();
 
         if (ability.isSpell() && !c.isCopiedSpell()) {
@@ -90,6 +92,7 @@ public class HumanPlaySpellAbility {
                 zonePosition = fromZone.getCards().indexOf(c);
             }
             ability.setHostCard(game.getAction().moveToStack(c, ability));
+            ability.changeText();
         }
 
         if (!ability.isCopied()) {
@@ -164,20 +167,18 @@ public class HumanPlaySpellAbility {
                 && ability.canCastTiming(human)
                 && ability.checkRestrictions(human)
                 && ability.isLegalAfterStack()
-                && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, false, ability.getHostCard())));
+                && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, false)));
 
         game.clearTopLibsCast(ability);
 
         if (!prerequisitesMet) {
-            if (!ability.isTrigger()) {
-                GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c);
-                if (ability.getHostCard().isMadness()) {
-                    // if a player failed to play madness cost, move the card to graveyard
-                    Card newCard = game.getAction().moveToGraveyard(c, null);
-                    newCard.setDiscarded(true);
-                }
-            } else {
+            if (ability.isTrigger()) {
                 payment.refundPayment();
+            } else {
+                GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c);
+            }
+            if (!refreeze) {
+                game.getStack().unfreezeStack();
             }
 
             if (manaTypeConversion || manaColorConversion || keywordColor) {
@@ -192,12 +193,14 @@ public class HumanPlaySpellAbility {
 
         if (isFree || payment.isFullyPaid()) {
             //track when planeswalker ultimates are activated
-            ability.getActivatingPlayer().getAchievementTracker().onSpellAbilityPlayed(ability);
+            human.getAchievementTracker().onSpellAbilityPlayed(ability);
 
             if (skipStack) {
                 AbilityUtils.resolve(ability);
-                // Should unfreeze stack
-                game.getStack().unfreezeStack();
+                // Should unfreeze stack (but if it was a RE with a cause better to let it be handled by that)
+                if (!ability.isReplacementAbility() || ability.getRootAbility().getReplacingObject(AbilityKey.Cause) == null) {
+                    game.getStack().unfreezeStack();
+                }
             } else {
                 ensureAbilityHasDescription(ability);
                 game.getStack().addAndUnfreeze(ability);

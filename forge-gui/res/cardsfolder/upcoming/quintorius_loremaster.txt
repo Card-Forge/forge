@@ -1,0 +1,16 @@
+Name:Quintorius, Loremaster
+ManaCost:3 R W
+Types:Legendary Creature Elephant Cleric
+PT:3/5
+K:Vigilance
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your end step, exile target noncreature, nonland card from your graveyard. Create a 3/2 red and white Spirit creature token.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.nonCreature+nonLand+YouOwn | TgtPrompt$ Select target noncreature, nonland card in your graveyard | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ rw_3_2_spirit
+A:AB$ Pump | Cost$ 1 R W T Sac<1/Spirit> | ValidTgts$ Card.ExiledWithSource | TgtZone$ Exile | TgtPrompt$ Choose target card exiled with this creature | SubAbility$ DBEffect | StackDescription$ {p:You} chooses {c:Targeted} exiled with NICKNAME. {p:You} may cast that card this turn without paying its mana cost. If that spell would be put into a graveyard, put it on the bottom of its owner's library instead. | SpellDescription$ Choose target card exiled with NICKNAME. You may cast that card this turn without paying its mana cost. If that spell would be put into a graveyard, put it on the bottom of its owner's library instead.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ REQuintorius | StaticAbilities$ MayPlay | RememberObjects$ Targeted
+SVar:MayPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.nonLand+IsRemembered | AffectedZone$ Exile | Description$ Until end of turn, you may cast this card without paying its mana cost.
+SVar:REQuintorius:Event$ Moved | ValidLKI$ Card.CastSa Spell.MayPlaySource | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveLibrary
+SVar:MoveLibrary:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Library | LibraryPosition$ -1
+DeckHas:Ability$Token|Graveyard|Sacrifice & Type$Spirit
+DeckHints:Type$Spirit
+Oracle:Vigilance\nAt the beginning of your end step, exile target noncreature, nonland card from your graveyard. Create a 3/2 red and white Spirit creature token.\n{1}{R}{W}, {T}, Sacrifice a Spirit: Choose target card exiled with Quintorius. You may cast that card this turn without paying its mana cost. If that spell would be put into a graveyard, put it on the bottom of its owner's library instead.

@@ -3,7 +3,6 @@ ManaCost:4 U U
 Types:Creature Serpent
 PT:5/5
 K:Islandwalk
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ LT5 | Description$ CARDNAME can't attack unless there are five or more Islands on the battlefield.
-SVar:X:Count$Valid Island
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CARDNAME can't attack. | IsPresent$ Island | PresentCompare$ LT5 | Description$ CARDNAME can't attack unless there are five or more Islands on the battlefield.
 SVar:BuffedBy:Island
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nHarbor Serpent can't attack unless there are five or more Islands on the battlefield.

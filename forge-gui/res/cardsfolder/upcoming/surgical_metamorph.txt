@@ -1,0 +1,10 @@
+Name:Surgical Metamorph
+ManaCost:3 U
+Types:Artifact Creature Phyrexian Shapeshifter
+PT:0/0
+K:ETBReplacement:Copy:DBCopy:Optional
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | Description$ This spell costs {1} less to cast if you weren't the starting player.
+SVar:DBCopy:DB$ Clone | Choices$ Permanent | ChoiceZone$ Battlefield | AddTypes$ Artifact | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any permanent on the battlefield, except it's an artifact in addition to its other types.
+SVar:X:Count$StartingPlayer.1.0
+DeckHints:Type$Artifact
+Oracle:This spell costs {1} less to cast if you weren't the starting player.\nYou may have Surgical Metamorph enter the battlefield as a copy of any permanent on the battlefield, except it's an artifact in addition to its other types.

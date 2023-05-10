@@ -323,6 +323,7 @@ Equipment
 Food
 Fortification
 Gold
+Incubator:Incubators
 Key:Keys
 Powerstone
 Treasure
@@ -357,6 +358,7 @@ Freyalise
 Garruk
 Gideon
 Grist
+Guff
 Huatli
 Inzerva
 Jace
@@ -408,3 +410,5 @@ Yanling
 Zariel
 [DungeonTypes]
 Undercity
+[BattleTypes]
+Siege

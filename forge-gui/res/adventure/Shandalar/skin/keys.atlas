@@ -149,11 +149,11 @@ clearSquare_pressed
   xy: 336, 16
   size: 16, 16
 Enter
-  xy: 352, 16
-  size: 32, 16  
+  xy: 384, 112
+  size: 16, 16  
 Enter_pressed
-  xy: 384, 16
-  size: 32, 16
+  xy: 400, 112
+  size: 16, 16
 Tab
   xy: 416, 16
   size: 32, 16  

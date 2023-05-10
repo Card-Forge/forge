@@ -213,6 +213,20 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             }
         }
 
+        if (sa.hasParam("MaxTotalTargetPower")) {
+            int maxTotalPower = tgt.getMaxTotalPower(sa.getHostCard(), sa);
+            if (maxTotalPower > 0) {
+                int soFar = Aggregates.sum(sa.getTargets().getTargetCards(), CardPredicates.Accessors.fnGetNetPower);
+                if (!sa.isTargeting(card)) {
+                    soFar += card.getNetPower();
+                }
+                if (soFar > maxTotalPower) {
+                    showMessage(sa.getHostCard() + " - Cannot target this card (power limit exceeded)");
+                    return false;
+                }
+            }
+        }
+
         // If all cards must have same controllers
         if (tgt.isSameController()) {
             final List<Player> targetedControllers = new ArrayList<>();
@@ -225,20 +239,6 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             if (!targetedControllers.isEmpty() && !targetedControllers.contains(card.getController())) {
                 showMessage(sa.getHostCard() + " - Cannot target this card (must have same controller)");
                 return false;
-            }
-        }
-
-        if (sa.hasParam("MaxTotalTargetPower")) {
-            int maxTotalPower = tgt.getMaxTotalPower(sa.getHostCard(), sa);
-            if (maxTotalPower > 0) {
-                int soFar = Aggregates.sum(sa.getTargets().getTargetCards(), CardPredicates.Accessors.fnGetNetPower);
-                if (!sa.isTargeting(card)) {
-                    soFar += card.getNetPower();
-                }
-                if (soFar > maxTotalPower) {
-                    showMessage(sa.getHostCard() + " - Cannot target this card (power limit exceeded)");
-                    return false;
-                }
             }
         }
 

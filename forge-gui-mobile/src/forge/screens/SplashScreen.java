@@ -239,7 +239,10 @@ public class SplashScreen extends FContainer {
     }
 
     void drawTransition(Graphics g, boolean openAdventure, float percentage) {
-        TextureRegion tr = new TextureRegion(Forge.getAssets().fallback_skins().get(0));
+        Texture t = Forge.getAssets().fallback_skins().get("title");
+        TextureRegion tr = null;
+        if (t != null)
+            tr = new TextureRegion(t);
         float oldAlpha = g.getfloatAlphaComposite();
         g.setAlphaComposite(percentage);
         if (openAdventure) {

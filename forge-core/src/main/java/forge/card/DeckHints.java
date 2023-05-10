@@ -69,6 +69,7 @@ public class DeckHints {
     public boolean isValid() {
         return valid;
     }
+
     public boolean contains(Type type, String hint) {
         if (filters == null) {
             return false;
@@ -84,15 +85,19 @@ public class DeckHints {
         if (filters == null) {
             return false;
         }
+        int num = 0;
         for (String hint : hints) {
             for (Pair<Type, String> filter : filters) {
+                System.out.println(filter.getLeft() + " = type = " +  type + "    "+ filter.getRight() + " =filter=   " + hint);
                 if (filter.getLeft() == type && filter.getRight().equals(hint)) {
-                    continue;
+                    num++;
+                    if (num == hints.length) {
+                        return true;
+                    }
                 }
             }
-            return false;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -111,7 +116,7 @@ public class DeckHints {
             Iterable<PaperCard> cards = getCardsForFilter(cardList, type, param);
             if (cards != null) {
                 // if a type is used more than once intersect respective matches
-                if (ret.get(type) != null) {
+                if (ret.containsKey(type)) {
                     Iterables.retainAll(cards, new FCollection<>(ret.get(type)));
                 }
                 ret.put(type, cards);
@@ -128,17 +133,8 @@ public class DeckHints {
      *            list of cards to be filtered
      * @return List<PaperCard> of Cards that match this DeckHints.
      */
-    public List<PaperCard> filter(Iterable<PaperCard> cardList) {
-        List<PaperCard> ret = new ArrayList<>();
-        for (Pair<Type, String> pair : filters) {
-            Type type = pair.getLeft();
-            String param = pair.getRight();
-            Iterable<PaperCard> cards = getCardsForFilter(cardList, type, param);
-            if (cards != null) {
-                Iterables.addAll(ret, cards);
-            }
-        }
-        return ret;
+    public Iterable<PaperCard> filter(Iterable<PaperCard> cardList) {
+        return Iterables.concat(filterByType(cardList).values());
     }
 
     private Pair<Type, String> parseHint(String hint) {
@@ -164,53 +160,38 @@ public class DeckHints {
         List<PaperCard> cards = new ArrayList<>();
 
         // this is case ABILITY, but other types can also use this when the implicit parsing would miss
-        String[] abilities = param.split("\\|");
-        for (String ability : abilities) {
+        String[] params = param.split("\\|");
+        for (String ability : params) {
             Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.deckHas(type, ability), PaperCard.FN_GET_RULES));
         }
         // bonus if a DeckHas can satisfy the type with multiple ones
-        Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.deckHasExactly(type, abilities), PaperCard.FN_GET_RULES));
+        if (params.length > 1) {
+            Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.deckHasExactly(type, params), PaperCard.FN_GET_RULES));
+        }
 
-        switch (type) {
+        for (String p : params) {
+            switch (type) {
             case COLOR:
-                String[] colors = param.split("\\|");
-                for (String color : colors) {
-                    ColorSet cc = ColorSet.fromNames(color);
-                    if (cc.isColorless()) {
-                        Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.Presets.IS_COLORLESS, PaperCard.FN_GET_RULES));
-                    } else {
-                        Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.isColor(cc.getColor()), PaperCard.FN_GET_RULES));
-                    }
+                ColorSet cc = ColorSet.fromNames(p);
+                if (cc.isColorless()) {
+                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.Presets.IS_COLORLESS, PaperCard.FN_GET_RULES));
+                } else {
+                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.isColor(cc.getColor()), PaperCard.FN_GET_RULES));
                 }
                 break;
             case KEYWORD:
-                String[] keywords = param.split("\\|");
-                for (String keyword : keywords) {
-                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.hasKeyword(keyword), PaperCard.FN_GET_RULES));
-                }
+                Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.hasKeyword(p), PaperCard.FN_GET_RULES));
                 break;
             case NAME:
-                String[] names = param.split("\\|");
-                for (String name : names) {
-                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.name(StringOp.EQUALS, name), PaperCard.FN_GET_RULES));
-                }
+                Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.name(StringOp.EQUALS, p), PaperCard.FN_GET_RULES));
                 break;
             case TYPE:
-                String[] types = param.split("\\|");
-                for (String t : types) {
-                    Predicate<CardRules> op;
-                    if (t.contains(".")) {
-                        String[] typeParts = t.split("\\.");
-                        op = Predicates.and(CardRulesPredicates.coreType(true, typeParts[0]), CardRulesPredicates.subType(typeParts[1]));
-                    } else {
-                        op = CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, t);
-                    }
-                    Iterables.addAll(cards, getMatchingItems(cardList, op, PaperCard.FN_GET_RULES));
-                }
+                Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, p), PaperCard.FN_GET_RULES));
                 break;
             case NONE:
             case ABILITY: // already done above
                 break;
+            }
         }
         return cards;
     }

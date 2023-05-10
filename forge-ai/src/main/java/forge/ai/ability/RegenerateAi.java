@@ -87,11 +87,9 @@ public class RegenerateAi extends SpellAbilityAi {
         } else {
             sa.resetTargets();
             // filter AIs battlefield by what I can target
-            List<Card> targetables = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(),
-                    ai, hostCard, sa);
-            targetables = CardLists.getTargetableCards(targetables, sa);
+            List<Card> targetables = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
 
-            if (targetables.size() == 0) {
+            if (targetables.isEmpty()) {
                 return false;
             }
 
@@ -149,21 +147,17 @@ public class RegenerateAi extends SpellAbilityAi {
     }
 
     private static boolean regenMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final Card hostCard = sa.getHostCard();
         final Game game = ai.getGame();
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
         // filter AIs battlefield by what I can target
-        CardCollectionView targetables = game.getCardsIn(ZoneType.Battlefield);
-        targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard, sa);
-        targetables = CardLists.getTargetableCards(targetables, sa);
+        CardCollectionView targetables = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
         final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);
 
-        if (targetables.size() == 0) {
+        if (targetables.isEmpty()) {
             return false;
         }
 
-        if (!mandatory && compTargetables.size() == 0) {
+        if (!mandatory && compTargetables.isEmpty()) {
             return false;
         }
 

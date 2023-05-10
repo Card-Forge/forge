@@ -135,7 +135,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     public final void addAndUnfreeze(final SpellAbility ability) {
         final Card source = ability.getHostCard();
 
-        if (!ability.isCopied()) {
+        if (!ability.isCopied() && ability.isAbility()) {
             // Copied abilities aren't activated, so they shouldn't change these values
             source.addAbilityActivated(ability);
             ability.checkActivationResolveSubs();
@@ -199,19 +199,22 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         sa.undo();
         clearUndoStack(sa);
         sa.getActivatingPlayer().getManaPool().refundManaPaid(sa);
-        if (undoStack.isEmpty()) {
-            undoStackOwner = null;
-        }
         return true;
     }
-    private final void clearUndoStack(SpellAbility sa) {
+    public final void clearUndoStack(SpellAbility sa) {
         clearUndoStack(Lists.newArrayList(sa));
     }
     private final void clearUndoStack(List<SpellAbility> sas) {
         for (SpellAbility sa : sas) {
             // reset in case a trigger stopped it on a previous activation
             sa.setUndoable(true);
-            undoStack.remove(undoStack.lastIndexOf(sa));
+            int idx = undoStack.lastIndexOf(sa);
+            if (idx != -1) {
+                undoStack.remove(idx);
+            }
+        }
+        if (undoStack.isEmpty()) {
+            undoStackOwner = null;
         }
     }
     public final void clearUndoStack() {
@@ -359,7 +362,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             if (sp.hasParam("Crew")) {
                 // Trigger crews!
                 runParams.put(AbilityKey.Vehicle, sp.getHostCard());
-                runParams.put(AbilityKey.Crew, sp.getPaidList("TappedCards"));
+                runParams.put(AbilityKey.Crew, sp.getPaidList("TappedCards", true));
                 game.getTriggerHandler().runTrigger(TriggerType.Crewed, runParams, false);
             }
         } else {
@@ -503,8 +506,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         if (thisHasFizzled) { // Fizzle
             if (sa.isBestow()) {
-                // 702.102d: if its target is illegal,
-                // the effect making it an Aura spell ends.
+                // 702.102e: if its target is illegal, the effect making it an Aura spell ends.
                 // It continues resolving as a creature spell.
                 source.unanimateBestow();
                 SpellAbility first = source.getFirstSpellAbility();
@@ -524,6 +526,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         } else if (sa.getApi() != null) {
             AbilityUtils.handleRemembering(sa);
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
+            runParams.put(AbilityKey.SpellAbility, sa);
+            game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams, false);
             AbilityUtils.resolve(sa);
         } else {
             sa.resolve();
@@ -570,11 +575,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         curResolvingCard = null;
 
-        // TODO: this is a huge hack. Why is this necessary?
-        // hostCard in AF is not the same object that's on the battlefield
-        // verified by System.identityHashCode(card);
-        final Card tmp = sa.getHostCard();
-        if (!(sa instanceof WrappedAbility && sa.isTrigger())) { tmp.setCanCounter(true); } // reset mana pumped counter magic flag
         // xManaCostPaid will reset when cast the spell, comment out to fix Venarian Gold
         // sa.getHostCard().setXManaCostPaid(0);
     }
@@ -834,10 +834,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
 
             if (activator.equals(activePlayer)) {
+                adjustAuraHost(sa);
                 activePlayerSAs.add(sa);
             }
-
-            adjustAuraHost(sa);
         }
         simultaneousStackEntryList.removeAll(activePlayerSAs);
 

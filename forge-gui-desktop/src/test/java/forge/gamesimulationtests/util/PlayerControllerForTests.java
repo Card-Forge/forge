@@ -20,10 +20,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameObject;
-import forge.game.GameType;
+import forge.game.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.combat.Combat;
@@ -501,6 +498,11 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public String chooseSector(Card assignee, String ai, List<String> sectors) {
         return chooseItem(sectors);
+    }
+
+    @Override
+    public PlanarDice choosePDRollToIgnore(List<PlanarDice> rolls) {
+        return Aggregates.random(rolls);
     }
 
     @Override

@@ -1,9 +1,0 @@
-Name:Indoctrination Attendant
-ManaCost:3 W
-Types:Creature Phyrexian Cleric
-PT:3/4
-K:Toxic:1
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, you may return another permanent you control to its owner's hand. If you do, create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block."
-SVar:TrigToken:AB$ Token | Cost$ Return<1/Permanent.Other/other permanent> | TokenScript$ c_1_1_a_phyrexian_mite_toxic_noblock
-DeckHas:Ability$Token & Type$Artifact|Mite
-Oracle:Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)\nWhen Indoctrination Attendant enters the battlefield, you may return another permanent you control to its owner's hand. If you do, create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block."

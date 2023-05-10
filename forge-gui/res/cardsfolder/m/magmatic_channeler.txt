@@ -2,8 +2,7 @@ Name:Magmatic Channeler
 ManaCost:1 R
 Types:Creature Human Wizard
 PT:1/3
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE4 | Description$ As long as there are four or more instant and/or sorcery cards in your graveyard, CARDNAME gets +3/+1.
-SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 1 | IsPresent$ Instant.YouOwn,Sorcery.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE4 | Description$ As long as there are four or more instant and/or sorcery cards in your graveyard, CARDNAME gets +3/+1.
 A:AB$ Dig | Cost$ T Discard<1/Card> | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBChoose | StackDescription$ SpellDescription | SpellDescription$ Exile the top two cards of your library, then choose one of them. You may play that card this turn.
 SVar:DBChoose:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Card.IsRemembered | ChoiceZone$ Exile | ChoiceTitle$ Choose one of the exiled cards | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | RememberObjects$ ChosenCard | SubAbility$ DBCleanup

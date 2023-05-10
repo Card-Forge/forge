@@ -4,7 +4,7 @@ Types:Creature Demon
 PT:3/3
 A:AB$ Effect | PrecostDesc$ Jolly Gutpipes — | Cost$ 2 T Sac<1/Creature> | StaticAbilities$ GrantCascade | Triggers$ ExileEffect | SpellDescription$ The next creature spell you cast this turn has cascade. (When you cast your next creature spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)
 SVar:GrantCascade:Mode$ Continuous | EffectZone$ Command | Affected$ Card.Creature+YouCtrl | AffectedZone$ Stack | Execute$ ExileEff | AddKeyword$ Cascade | Description$ The next noncreature spell you cast this turn has cascade.
-SVar:ExileEffect:Mode$ SpellCast | EffectZone$ Command | Valid$ Card.Creature+YouCtrl | AffectedZone$ Stack | Execute$ RemoveEffect | Static$ True
+SVar:ExileEffect:Mode$ SpellCast | EffectZone$ Command | ValidCard$ Card.Creature+YouCtrl | Execute$ RemoveEffect | Static$ True
 SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 DeckHas:Keyword$Cascade & Ability$Sacrifice
 Oracle:Jolly Gutpipes — {2}, {T}, Sacrifice a creature: The next creature spell you cast this turn has cascade. (When you cast your next creature spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)

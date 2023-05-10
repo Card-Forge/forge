@@ -45,6 +45,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
@@ -341,7 +342,7 @@ public class CountersPutAi extends CountersAi {
 
         if (sa.hasParam("Bolster")) {
             CardCollection creatsYouCtrl = ai.getCreaturesInPlay();
-            CardCollection leastToughness = new CardCollection(Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetNetToughness));
+            List<Card> leastToughness = Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetNetToughness);
             if (leastToughness.isEmpty()) {
                 return false;
             }
@@ -456,25 +457,24 @@ public class CountersPutAi extends CountersAi {
             }
         }
 
-        if (!ai.getGame().getStack().isEmpty() && !SpellAbilityAi.isSorcerySpeed(sa, ai)) {
-            // only evaluates case where all tokens are placed on a single target
-            if (sa.usesTargeting() && sa.getMinTargets() < 2) {
-                if (ComputerUtilCard.canPumpAgainstRemoval(ai, sa)) {
-                    Card c = sa.getTargetCard();
-                    if (sa.getTargets().size() > 1) {
-                        sa.resetTargets();
-                        sa.getTargets().add(c);
+        if (sa.usesTargeting()) {
+            if (!ai.getGame().getStack().isEmpty() && !SpellAbilityAi.isSorcerySpeed(sa, ai)) {
+                // only evaluates case where all tokens are placed on a single target
+                if (sa.getMinTargets() < 2) {
+                    if (ComputerUtilCard.canPumpAgainstRemoval(ai, sa)) {
+                        Card c = sa.getTargetCard();
+                        if (sa.getTargets().size() > 1) {
+                            sa.resetTargets();
+                            sa.getTargets().add(c);
+                        }
+                        sa.addDividedAllocation(c, amount);
+                        return true;
+                    } else {
+                        return false;
                     }
-                    sa.addDividedAllocation(c, amount);
-                    return true;
-                } else {
-                    return false;
                 }
             }
-        }
 
-        // Targeting
-        if (sa.usesTargeting()) {
             sa.resetTargets();
 
             final boolean sacSelf = ComputerUtilCost.isSacrificeSelfCost(abCost);
@@ -482,7 +482,7 @@ public class CountersPutAi extends CountersAi {
             if (sa.isCurse()) {
                 list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
             } else {
-                list = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
+                list = ComputerUtil.getSafeTargets(ai, sa, ai.getCardsIn(ZoneType.Battlefield));
             }
 
             list = CardLists.filter(list, new Predicate<Card>() {
@@ -530,8 +530,7 @@ public class CountersPutAi extends CountersAi {
                 for (int i = 1; i < amount + 1; i++) {
                     int left = amount;
                     for (Card c : list) {
-                        if (ComputerUtilCard.shouldPumpCard(ai, sa, c, i, i,
-                                Lists.newArrayList())) {
+                        if (ComputerUtilCard.shouldPumpCard(ai, sa, c, i, i, Lists.newArrayList())) {
                             sa.getTargets().add(c);
                             sa.addDividedAllocation(c, i);
                             left -= i;
@@ -553,7 +552,7 @@ public class CountersPutAi extends CountersAi {
             // target loop
             while (sa.canAddMoreTarget()) {
                 if (list.isEmpty()) {
-                    if (!sa.isTargetNumberValid() || (sa.getTargets().size() == 0)) {
+                    if (!sa.isTargetNumberValid() || sa.getTargets().isEmpty()) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -567,23 +566,34 @@ public class CountersPutAi extends CountersAi {
                 } else {
                     if (type.equals("P1P1") && !SpellAbilityAi.isSorcerySpeed(sa, ai)) {
                         for (Card c : list) {
-                            if (ComputerUtilCard.shouldPumpCard(ai, sa, c, amount, amount,
-                                    Lists.newArrayList())) {
+                            if (ComputerUtilCard.shouldPumpCard(ai, sa, c, amount, amount, Lists.newArrayList())) {
                                 choice = c;
                                 break;
                             }
                         }
-                        if (!source.isSpell()) {    // does not cost a card
-                            if (choice == null) {   // find generic target
-                                if (abCost == null
+
+                        if (choice == null) {
+                            // try to use as cheap kill
+                            choice =  ComputerUtil.getKilledByTargeting(sa, CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), sa));
+                        }
+
+                        if (choice == null) {
+                            // find generic target
+                            boolean increasesCharmOutcome = false;
+                            if (sa.getRootAbility().getApi() == ApiType.Charm && source.getStaticAbilities().isEmpty()) {
+                                List<AbilitySub> choices = Lists.newArrayList(sa.getRootAbility().getAdditionalAbilityList("Choices"));
+                                choices.remove(sa);
+                                // check if other choice will already be played
+                                increasesCharmOutcome = !choices.get(0).getTargets().isEmpty(); 
+                            }
+                            if (!source.isSpell() || increasesCharmOutcome // does not cost a card or can buff charm for no expense
+                                    || ph.getTurn() - source.getTurnInZone() >= source.getGame().getPlayers().size() * 2) {
+                                if (abCost == null || abCost == Cost.Zero
                                         || (ph.is(PhaseType.END_OF_TURN) && ph.getPlayerTurn().isOpponentOf(ai))) {
                                     // only use at opponent EOT unless it is free
                                     choice = chooseBoonTarget(list, type);
                                 }
                             }
-                        }
-                        if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Dromoka's Command")) {
-                            choice = chooseBoonTarget(list, type);
                         }
                     } else {
                         choice = chooseBoonTarget(list, type);
@@ -591,7 +601,7 @@ public class CountersPutAi extends CountersAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if (!sa.isTargetNumberValid() || sa.getTargets().size() == 0) {
+                    if (!sa.isTargetNumberValid() || sa.getTargets().isEmpty()) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -907,7 +917,6 @@ public class CountersPutAi extends CountersAi {
                     // Didn't want to choose anything?
                     list.clear();
                 }
-
             }
         }
         return true;
@@ -985,7 +994,7 @@ public class CountersPutAi extends CountersAi {
             types.add((CounterType)params.get("CounterType"));
         } else {
             for (String s : sa.getParam("CounterType").split(",")) {
-                CounterType.getType(s);
+                types.add(CounterType.getType(s));
             }
         }
 
@@ -1210,6 +1219,14 @@ public class CountersPutAi extends CountersAi {
             }
         }
         return false;
+    }
+
+    @Override
+    public int chooseNumber(Player player, SpellAbility sa, int min, int max, Map<String, Object> params) {
+        if (sa.hasParam("ReadAhead")) {
+            return 1;
+        }
+        return max;
     }
 
 }

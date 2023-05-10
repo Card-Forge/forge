@@ -1,5 +1,8 @@
 Against the Odds | https://downloads.cardforge.org/decks/againsttheodds.zip
+An Uncommon Budget | https://downloads.cardforge.org/decks/uncommonbudget.zip
+Arena Championship | https://downloads.cardforge.org/decks/arenachampionship.zip
 Breaking Through | https://downloads.cardforge.org/decks/breakingthrough.zip
+Brewer's Kitchen | https://downloads.cardforge.org/decks/brewerskitchen.zip
 Brewing on a Budget | https://downloads.cardforge.org/decks/brewingonabudget.zip
 Budget Magic | https://downloads.cardforge.org/decks/budgetmagic.zip
 Budget Modern Metagame | https://downloads.cardforge.org/decks/budgetmodernmetagame.zip
@@ -24,7 +27,7 @@ Daily Deck List | https://downloads.cardforge.org/decks/dailydecks.zip
 Daily Magic Update | https://downloads.cardforge.org/decks/dailymagicupdate.zip
 Dear Azami | https://downloads.cardforge.org/decks/dearazami-standard.zip
 Deconstructing Famous | https://downloads.cardforge.org/decks/dfd.zip
-EDHREC Columms | https://downloads.cardforge.org/decks/edhrec-constructed.zip
+EDHREC Columns | https://downloads.cardforge.org/decks/edhrec-constructed.zip
 Feature Article | https://downloads.cardforge.org/decks/feature.zip
 Fish 5-0 | https://downloads.cardforge.org/decks/fish50.zip
 From the Lab | https://downloads.cardforge.org/decks/fromthelab.zip
@@ -62,6 +65,7 @@ Single Card Strategy | https://downloads.cardforge.org/decks/singlecardstrategy.
 Single Scoop | https://downloads.cardforge.org/decks/singlescoop.zip
 Squandered Resources | https://downloads.cardforge.org/decks/squanderedresources.zip
 Swimming with Sharks | https://downloads.cardforge.org/decks/swimmingwithsharks.zip
+The Command Zone | https://downloads.cardforge.org/decks/commandzone-constructed.zip
 The Fish Tank | https://downloads.cardforge.org/decks/fishtank.zip
 The Week That Was | https://downloads.cardforge.org/decks/theweekthatwas.zip
 Thirty Casual Decks under $20 | https://downloads.cardforge.org/decks/30casual20.zip

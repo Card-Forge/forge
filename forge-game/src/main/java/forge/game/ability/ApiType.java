@@ -37,6 +37,7 @@ public enum ApiType {
     ChangeX (ChangeXEffect.class),
     ChangeZone (ChangeZoneEffect.class),
     ChangeZoneAll (ChangeZoneAllEffect.class),
+    ChaosEnsues (ChaosEnsuesEffect.class),
     Charm (CharmEffect.class),
     ChooseCard (ChooseCardEffect.class),
     ChooseColor (ChooseColorEffect.class),
@@ -100,6 +101,7 @@ public enum ApiType {
     Investigate (InvestigateEffect.class),
     Intensify (IntensifyEffect.class),
     ImmediateTrigger (ImmediateTriggerEffect.class),
+    Incubate (IncubateEffect.class),
     Learn (LearnEffect.class),
     LookAt (LookAtEffect.class),
     LoseLife (LifeLoseEffect.class),
@@ -162,6 +164,7 @@ public enum ApiType {
     Sacrifice (SacrificeEffect.class),
     SacrificeAll (SacrificeAllEffect.class),
     Scry (ScryEffect.class),
+    Seek (SeekEffect.class),
     SetInMotion (SetInMotionEffect.class),
     SetLife (LifeSetEffect.class),
     SetState (SetStateEffect.class),
@@ -187,7 +190,7 @@ public enum ApiType {
     Vote (VoteEffect.class),
     WinsGame (GameWinEffect.class),
 
-
+    BlankLine (BlankLineEffect.class),
     DamageResolve (DamageResolveEffect.class),
     ChangeZoneResolve (ChangeZoneResolveEffect.class),
     InternalLegendaryRule (CharmEffect.class),

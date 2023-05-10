@@ -4,6 +4,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerAdapter;
@@ -17,6 +18,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
 import forge.adventure.scene.*;
+import forge.adventure.stage.GameHUD;
 import forge.adventure.util.Config;
 import forge.adventure.world.WorldSave;
 import forge.animation.ForgeAnimation;
@@ -35,6 +37,7 @@ import forge.screens.ClosingScreen;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
 import forge.screens.TransitionScreen;
+import forge.screens.home.AdventureScreen;
 import forge.screens.home.HomeScreen;
 import forge.screens.home.NewGameMenu;
 import forge.screens.match.MatchController;
@@ -50,7 +53,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.53.001";
+    public static final String CURRENT_VERSION = "1.6.56.001";
 
     private static ApplicationListener app = null;
     static Scene currentScene = null;
@@ -162,6 +165,9 @@ public class Forge implements ApplicationListener {
         frameRate = new FrameRate();
         animationBatch = new SpriteBatch();
         inputProcessor = new MainInputProcessor();
+        //screenWidth and screenHeight should be set initially and only change upon restarting the app
+        screenWidth = Gdx.app.getGraphics().getWidth();
+        screenHeight = Gdx.app.getGraphics().getHeight();
 
         Gdx.input.setInputProcessor(inputProcessor);
         /*
@@ -252,7 +258,7 @@ public class Forge implements ApplicationListener {
     public static boolean hasGamepad() {
         //Classic Mode Various Screen GUI are not yet supported, needs control mapping for each screens
         if (isMobileAdventureMode) {
-            return hasGamepad && Forge.isLandscapeMode(); //portrait is not supported for Gamepad
+            return hasGamepad && isLandscapeMode(); //portrait is not supported for Gamepad
         }
         return false;
     }
@@ -311,6 +317,8 @@ public class Forge implements ApplicationListener {
         GuiBase.setIsAdventureMode(false);
         openHomeScreen(-1, null); //default for startup
         isMobileAdventureMode = false;
+        MusicPlaylist.invalidateMusicPlaylist();
+        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
         if (isLandscapeMode()) { //open preferred new game screen by default if landscape mode
             NewGameMenu.getPreferredScreen().open();
         }
@@ -336,8 +344,13 @@ public class Forge implements ApplicationListener {
     private static void loadAdventureResources(boolean startScene) {
         try {
             Config.instance().loadResources();
-            if (startScene)
+            SpellSmithScene.instance().loadEditions();
+            GameHUD.getInstance().stopAudio();
+            if (startScene) {
+                MusicPlaylist.invalidateMusicPlaylist();
+                SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
                 switchScene(StartScene.instance());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -346,14 +359,15 @@ public class Forge implements ApplicationListener {
         //override transition & title bg
         try {
             FileHandle transitionFile = Config.instance().getFile("ui/transition.png");
-            FileHandle titleBGFile = Forge.isLandscapeMode() ? Config.instance().getFile("ui/title_bg.png") : Config.instance().getFile("ui/title_bg_portrait.png");
+            FileHandle titleBGFile = isLandscapeMode() ? Config.instance().getFile("ui/title_bg.png") : Config.instance().getFile("ui/title_bg_portrait.png");
             FileHandle vsIcon = Config.instance().getFile("ui/vs.png");
             if (vsIcon.exists())
-                Forge.getAssets().fallback_skins().put(2, new Texture(vsIcon));
+                getAssets().fallback_skins().put("vs", new Texture(vsIcon));
             if (transitionFile.exists())
-                Forge.getAssets().fallback_skins().put(1, new Texture(transitionFile));
+                getAssets().fallback_skins().put("transition", new Texture(transitionFile));
             if (titleBGFile.exists())
-                Forge.getAssets().fallback_skins().put(0, new Texture(titleBGFile));
+                getAssets().fallback_skins().put("title", new Texture(titleBGFile));
+            AdventureScreen.preload();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -380,7 +394,7 @@ public class Forge implements ApplicationListener {
                     if (selector.equals("Adventure")) {
                         //preload adventure resources to speedup startup if selector is adventure. Needs in edt when setting up worldstage
                         loadAdventureResources(false);
-                        Forge.isMobileAdventureMode = true;
+                        isMobileAdventureMode = true;
                     }
                     //selection transition
                     setTransitionScreen(new TransitionScreen(() -> {
@@ -401,11 +415,9 @@ public class Forge implements ApplicationListener {
                                 clearSplashScreen();
                             }
                         }
-                        //start background music
-                        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
                         safeToClose = true;
                         clearTransitionScreen();
-                    }, Forge.takeScreenshot(), false, false, true, false));
+                    }, takeScreenshot(), false, false, true, false));
                 });
             });
         }));
@@ -641,7 +653,6 @@ public class Forge implements ApplicationListener {
 
         final List<String> options = new ArrayList<>();
         options.add(getLocalizer().getMessage("lblExit"));
-        options.add(getLocalizer().getMessage("lblAdventure"));
         options.add(getLocalizer().getMessage("lblCancel"));
 
         Callback<Integer> callback = new Callback<Integer>() {
@@ -650,8 +661,6 @@ public class Forge implements ApplicationListener {
                 if (result == 0) {
                     exited = true;
                     exitAnimation(false);
-                } else if (result == 1) {
-                    switchToAdventure();
                 }
             }
         };
@@ -829,7 +838,7 @@ public class Forge implements ApplicationListener {
     @Override
     public void render() {
         if (showFPS)
-            frameRate.update(ImageCache.counter, Forge.getAssets().manager().getMemoryInMegabytes());
+            frameRate.update(ImageCache.counter, getAssets().manager().getMemoryInMegabytes());
 
         try {
             ImageCache.allowSingleLoad();
@@ -865,8 +874,8 @@ public class Forge implements ApplicationListener {
                                 animationBatch.setColor(1, 1, 1, 1);
                                 animationBatch.draw(lastScreenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.setColor(1, 1, 1, 1 - (1 / transitionTime) * animationTimeout);
-                                animationBatch.draw(getAssets().fallback_skins().get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                                animationBatch.draw(getAssets().fallback_skins().get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.end();
                                 if (animationTimeout < 0) {
                                     currentScene.render();
@@ -885,8 +894,8 @@ public class Forge implements ApplicationListener {
                                 animationBatch.setColor(1, 1, 1, 1);
                                 animationBatch.draw(lastScreenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.setColor(1, 1, 1, (1 / transitionTime) * (animationTimeout + transitionTime));
-                                animationBatch.draw(getAssets().fallback_skins().get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                                animationBatch.draw(getAssets().fallback_skins().get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins().get("transition"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.end();
                                 return;
                             }
@@ -953,15 +962,15 @@ public class Forge implements ApplicationListener {
     @Override
     public void resize(int width, int height) {
         try {
-            screenWidth = width;
-            screenHeight = height;
             if (currentScreen != null) {
                 currentScreen.setSize(width, height);
             } else if (splashScreen != null) {
                 splashScreen.setSize(width, height);
             }
+            if (currentScene != null)
+                currentScene.resize(width, height);
         } catch (Exception ex) {
-            graphics.end();
+            //graphics.end();
             //check if sentry is enabled, if not it will call the gui interface but here we end the graphics so we only send it via sentry..
             if (BugReporter.isSentryEnabled())
                 BugReporter.reportException(ex);
@@ -998,13 +1007,14 @@ public class Forge implements ApplicationListener {
             currentScreen = null;
         }
         FOverlay.hideAll();
-        assets.dispose();
         Dscreens.clear();
         graphics.dispose();
         SoundSystem.instance.dispose();
         try {
             ExceptionHandler.unregisterErrorHandling();
             lastPreview.dispose();
+            assets.dispose();
+            AdventureScreen.dispose();
         } catch (Exception e) {
         }
     }
@@ -1014,8 +1024,11 @@ public class Forge implements ApplicationListener {
         return ((Forge)Gdx.app.getApplicationListener()).assets;
     }
     public static boolean switchScene(Scene newScene) {
-        if (newScene instanceof RewardScene || newScene instanceof SpellSmithScene || newScene instanceof DeckSelectScene || newScene instanceof PlayerStatisticScene) {
-            if (!(currentScene instanceof ForgeScene)) //prevent overwriting the last preview if last scene is instance of ForgeScene
+        return switchScene(newScene, false);
+    }
+    public static boolean switchScene(Scene newScene, boolean skipPreview) {
+        if (newScene instanceof RewardScene || newScene instanceof SpellSmithScene || newScene instanceof DeckSelectScene || newScene instanceof PlayerStatisticScene || newScene instanceof QuestLogScene) {
+            if (!(currentScene instanceof ForgeScene || skipPreview)) //prevent overwriting the last preview if last scene is instance of ForgeScene
                 WorldSave.getCurrentSave().header.createPreview();
         }
         if (currentScene != null) {
@@ -1057,7 +1070,7 @@ public class Forge implements ApplicationListener {
         System.out.println(message);
     }
 
-    public static void startKeyInput(KeyInputAdapter adapter) {
+    public static void startKeyInput(KeyInputAdapter adapter, boolean numeric) {
         if (keyInputAdapter == adapter) {
             return;
         }
@@ -1065,7 +1078,7 @@ public class Forge implements ApplicationListener {
             keyInputAdapter.onInputEnd(); //make sure previous adapter is ended
         }
         keyInputAdapter = adapter;
-        Gdx.input.setOnscreenKeyboardVisible(true);
+        Gdx.input.setOnscreenKeyboardVisible(true, numeric ? Input.OnscreenKeyboardType.NumberPad : Input.OnscreenKeyboardType.Default);
     }
 
     public static boolean endKeyInput() {

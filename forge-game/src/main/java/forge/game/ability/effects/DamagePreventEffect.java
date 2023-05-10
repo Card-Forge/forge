@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 import forge.game.GameEntity;
-import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -22,7 +21,7 @@ public class DamagePreventEffect extends DamagePreventEffectBase {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<GameObject> tgts = getTargets(sa);
+        final List<GameEntity> tgts = getTargetEntities(sa);
 
         sb.append("Prevent the next ");
         sb.append(sa.getParam("Amount"));
@@ -71,7 +70,7 @@ public class DamagePreventEffect extends DamagePreventEffectBase {
         Card host = sa.getHostCard();
         int numDam = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
 
-        List<GameObject> tgts = Lists.newArrayList();
+        List<GameEntity> tgts = Lists.newArrayList();
         if (sa.hasParam("CardChoices") || sa.hasParam("PlayerChoices")) { // choosing outside Defined/Targeted
             // only for Whimsy, for more robust version see DamageDealEffect
             FCollection<GameEntity> choices = new FCollection<>();
@@ -83,17 +82,17 @@ public class DamagePreventEffect extends DamagePreventEffectBase {
                 choices.addAll(AbilityUtils.getDefinedPlayers(host, sa.getParam("PlayerChoices"), sa));
             }
             if (sa.hasParam("Random")) { // currently everything using Choices is random
-                GameObject random = Aggregates.random(choices);
+                GameEntity random = Aggregates.random(choices);
                 tgts.add(random);
                 host.addRemembered(random); // remember random choices for log
             }
         } else {
-            tgts = getTargets(sa);
+            tgts = getTargetEntities(sa);
         }
 
         final CardCollection untargetedCards = CardUtil.getRadiance(sa);
 
-        for (final GameObject o : tgts) {
+        for (final GameEntity o : tgts) {
             numDam = sa.usesTargeting() && sa.isDividedAsYouChoose() ? sa.getDividedValue(o) : numDam;
             if (o instanceof Card) {
                 final Card c = (Card) o;

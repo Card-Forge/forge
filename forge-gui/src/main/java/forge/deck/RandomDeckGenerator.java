@@ -65,75 +65,76 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
     @Override
     public Deck getDeck() {
         switch (type) {
-        case Generated:
-            return getGeneratedDeck();
-        case User:
-            return getUserDeck();
-        default:
-            return getFavoriteDeck();
+            case Generated:
+                return getGeneratedDeck();
+            case User:
+                return getUserDeck();
+            default:
+                return getFavoriteDeck();
         }
     }
 
     private Deck getGeneratedDeck() {
         switch (lstDecks.getGameType()) {
-        case Commander:
-            return DeckgenUtil.generateCommanderDeck(isAi, GameType.Commander);
-        case Oathbreaker:
-            return DeckgenUtil.generateCommanderDeck(isAi, GameType.Oathbreaker);
-        case TinyLeaders:
-            return DeckgenUtil.generateCommanderDeck(isAi, GameType.TinyLeaders);
-        case Brawl:
-            return DeckgenUtil.generateCommanderDeck(isAi, GameType.Brawl);
-        case Archenemy:
-            return DeckgenUtil.generateSchemeDeck();
-        case Planechase:
-            return DeckgenUtil.generatePlanarDeck();
-        default:
-            while (true) {
-                switch (Aggregates.random(DeckType.ConstructedOptions)) {
-                case PRECONSTRUCTED_DECK:
-                    return Aggregates.random(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons())).getDeck();
-                case QUEST_OPPONENT_DECK:
-                    return Aggregates.random(DeckProxy.getAllQuestEventAndChallenges()).getDeck();
-                case COLOR_DECK:
-                    List<String> colors = new ArrayList<>();
-                    int count = Aggregates.randomInt(1, 3);
-                    for (int i = 1; i <= count; i++) {
-                        colors.add("Random " + i);
+            case CommanderGauntlet:
+            case Commander:
+                return DeckgenUtil.generateCommanderDeck(isAi, GameType.Commander);
+            case Oathbreaker:
+                return DeckgenUtil.generateCommanderDeck(isAi, GameType.Oathbreaker);
+            case TinyLeaders:
+                return DeckgenUtil.generateCommanderDeck(isAi, GameType.TinyLeaders);
+            case Brawl:
+                return DeckgenUtil.generateCommanderDeck(isAi, GameType.Brawl);
+            case Archenemy:
+                return DeckgenUtil.generateSchemeDeck();
+            case Planechase:
+                return DeckgenUtil.generatePlanarDeck();
+            default:
+                while (true) {
+                    switch (Aggregates.random(DeckType.ConstructedOptions)) {
+                        case PRECONSTRUCTED_DECK:
+                            return Aggregates.random(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons())).getDeck();
+                        case QUEST_OPPONENT_DECK:
+                            return Aggregates.random(DeckProxy.getAllQuestEventAndChallenges()).getDeck();
+                        case COLOR_DECK:
+                            List<String> colors = new ArrayList<>();
+                            int count = Aggregates.randomInt(1, 3);
+                            for (int i = 1; i <= count; i++) {
+                                colors.add("Random " + i);
+                            }
+                            return DeckgenUtil.buildColorDeck(colors, null, isAi);
+                        case STANDARD_CARDGEN_DECK:
+                            return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getStandard(), isAi);
+                        case PIONEER_CARDGEN_DECK:
+                            return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getPioneer(), isAi);
+                        case HISTORIC_CARDGEN_DECK:
+                            return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getHistoric(), isAi);
+                        case MODERN_CARDGEN_DECK:
+                            return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getModern(), isAi);
+                        case LEGACY_CARDGEN_DECK:
+                            return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().get("Legacy"), isAi);
+                        case VINTAGE_CARDGEN_DECK:
+                            return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().get("Vintage"), isAi);
+                        case STANDARD_COLOR_DECK:
+                            colors = new ArrayList<>();
+                            count = Aggregates.randomInt(1, 3);
+                            for (int i = 1; i <= count; i++) {
+                                colors.add("Random " + i);
+                            }
+                            return DeckgenUtil.buildColorDeck(colors, FModel.getFormats().getStandard().getFilterPrinted(), isAi);
+                        case MODERN_COLOR_DECK:
+                            colors = new ArrayList<>();
+                            count = Aggregates.randomInt(1, 3);
+                            for (int i = 1; i <= count; i++) {
+                                colors.add("Random " + i);
+                            }
+                            return DeckgenUtil.buildColorDeck(colors, FModel.getFormats().getModern().getFilterPrinted(), isAi);
+                        case THEME_DECK:
+                            return Aggregates.random(DeckProxy.getAllThemeDecks()).getDeck();
+                        default:
+                            continue;
                     }
-                    return DeckgenUtil.buildColorDeck(colors, null, isAi);
-                case STANDARD_CARDGEN_DECK:
-                        return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getStandard(),isAi);
-                case PIONEER_CARDGEN_DECK:
-                        return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getPioneer(),isAi);
-                case HISTORIC_CARDGEN_DECK:
-                        return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getHistoric(),isAi);
-                case MODERN_CARDGEN_DECK:
-                        return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getModern(),isAi);
-                case LEGACY_CARDGEN_DECK:
-                        return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().get("Legacy"),isAi);
-                case VINTAGE_CARDGEN_DECK:
-                        return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().get("Vintage"),isAi);
-                case STANDARD_COLOR_DECK:
-                    colors = new ArrayList<>();
-                    count = Aggregates.randomInt(1, 3);
-                    for (int i = 1; i <= count; i++) {
-                        colors.add("Random " + i);
-                    }
-                    return DeckgenUtil.buildColorDeck(colors, FModel.getFormats().getStandard().getFilterPrinted(), isAi);
-                case MODERN_COLOR_DECK:
-                    colors = new ArrayList<>();
-                    count = Aggregates.randomInt(1, 3);
-                    for (int i = 1; i <= count; i++) {
-                        colors.add("Random " + i);
-                    }
-                    return DeckgenUtil.buildColorDeck(colors, FModel.getFormats().getModern().getFilterPrinted(), isAi);
-                case THEME_DECK:
-                    return Aggregates.random(DeckProxy.getAllThemeDecks()).getDeck();
-                default:
-                    continue;
                 }
-            }
         }
     }
 
@@ -141,27 +142,28 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
         Iterable<DeckProxy> decks;
         final GameType gameType = lstDecks.getGameType();
         switch (gameType) {
-        case Commander:
-            decks = DeckProxy.getAllCommanderDecks(DeckFormat.Commander.isLegalDeckPredicate());
-            break;
-        case Oathbreaker:
-            decks = DeckProxy.getAllOathbreakerDecks(DeckFormat.Oathbreaker.isLegalDeckPredicate());
-            break;
-        case TinyLeaders:
-            decks = DeckProxy.getAllTinyLeadersDecks(DeckFormat.TinyLeaders.isLegalDeckPredicate());
-            break;
-        case Brawl:
-            decks = DeckProxy.getAllBrawlDecks(DeckFormat.Brawl.isLegalDeckPredicate());
-            break;
-        case Archenemy:
-            decks = DeckProxy.getAllSchemeDecks(DeckFormat.Archenemy.isLegalDeckPredicate());
-            break;
-        case Planechase:
-            decks = DeckProxy.getAllPlanarDecks(DeckFormat.Planechase.isLegalDeckPredicate());
-            break;
-        default:
-            decks = DeckProxy.getAllConstructedDecks(gameType.getDeckFormat().isLegalDeckPredicate());
-            break;
+            case CommanderGauntlet:
+            case Commander:
+                decks = DeckProxy.getAllCommanderDecks(DeckFormat.Commander.isLegalDeckPredicate());
+                break;
+            case Oathbreaker:
+                decks = DeckProxy.getAllOathbreakerDecks(DeckFormat.Oathbreaker.isLegalDeckPredicate());
+                break;
+            case TinyLeaders:
+                decks = DeckProxy.getAllTinyLeadersDecks(DeckFormat.TinyLeaders.isLegalDeckPredicate());
+                break;
+            case Brawl:
+                decks = DeckProxy.getAllBrawlDecks(DeckFormat.Brawl.isLegalDeckPredicate());
+                break;
+            case Archenemy:
+                decks = DeckProxy.getAllSchemeDecks(DeckFormat.Archenemy.isLegalDeckPredicate());
+                break;
+            case Planechase:
+                decks = DeckProxy.getAllPlanarDecks(DeckFormat.Planechase.isLegalDeckPredicate());
+                break;
+            default:
+                decks = DeckProxy.getAllConstructedDecks(gameType.getDeckFormat().isLegalDeckPredicate());
+                break;
         }
         if (Iterables.isEmpty(decks)) {
             return getGeneratedDeck(); //fall back to generated deck if no decks in filtered list
@@ -175,27 +177,29 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
     private Deck getFavoriteDeck() {
         Iterable<DeckProxy> decks;
         switch (lstDecks.getGameType()) {
-        case Commander:
-            decks = DeckProxy.getAllCommanderDecks();
-            break;
-        case Oathbreaker:
-            decks = DeckProxy.getAllOathbreakerDecks();
-            break;
-        case TinyLeaders:
-            decks = DeckProxy.getAllTinyLeadersDecks();
-            break;
-        case Archenemy:
-            decks = DeckProxy.getAllSchemeDecks();
-            break;
-        case Planechase:
-            decks = DeckProxy.getAllPlanarDecks();
-            break;
-        default:
-            decks = DeckProxy.getAllConstructedDecks();
-            break;
+            case CommanderGauntlet:
+            case Commander:
+                decks = DeckProxy.getAllCommanderDecks();
+                break;
+            case Oathbreaker:
+                decks = DeckProxy.getAllOathbreakerDecks();
+                break;
+            case TinyLeaders:
+                decks = DeckProxy.getAllTinyLeadersDecks();
+                break;
+            case Archenemy:
+                decks = DeckProxy.getAllSchemeDecks();
+                break;
+            case Planechase:
+                decks = DeckProxy.getAllPlanarDecks();
+                break;
+            default:
+                decks = DeckProxy.getAllConstructedDecks();
+                break;
         }
         decks = Iterables.filter(decks, new Predicate<DeckProxy>() {
-            @Override public boolean apply(final DeckProxy deck) {
+            @Override
+            public boolean apply(final DeckProxy deck) {
                 return deck.isFavoriteDeck();
             }
         });

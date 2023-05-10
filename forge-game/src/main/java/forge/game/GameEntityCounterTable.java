@@ -166,11 +166,17 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
             for (Map.Entry<Optional<Player>, Map<CounterType, Integer>> e : values.entrySet()) {
                 boolean remember = cause != null && cause.hasParam("RememberPut");
                 for (Map.Entry<CounterType, Integer> ec : e.getValue().entrySet()) {
-                    gm.getKey().addCounterInternal(ec.getKey(), ec.getValue(), e.getKey().orNull(), true, result, runParams);
+                    Integer value = ec.getValue();
+                    if (value == null) {
+                        continue;
+                    }
+                    if (cause != null && cause.hasParam("MaxFromEffect")) {
+                        value = Math.min(value, Integer.parseInt(cause.getParam("MaxFromEffect")) - gm.getKey().getCounters(ec.getKey()));
+                    }
+                    gm.getKey().addCounterInternal(ec.getKey(), value, e.getKey().orNull(), true, result, runParams);
                     if (remember && ec.getValue() >= 1) {
                         cause.getHostCard().addRemembered(gm.getKey());
                     }
-
                 }
             }
         }

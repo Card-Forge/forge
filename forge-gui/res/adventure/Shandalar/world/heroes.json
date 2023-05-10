@@ -51,12 +51,33 @@
     "maleAvatar":"Viashino_m" 
   }   ,
   {
+    "name":"Phyrexian",
+    "female":"sprites/heroes/phyrexian_r.atlas",      
+    "male":"sprites/heroes/phyrexian_u.atlas",      
+    "femaleAvatar":"Phyrexian_f",      
+    "maleAvatar":"Phyrexian_m" 
+  }   ,
+  {
     "name":"Dwarf",
     "female":"sprites/heroes/dwarf_f.atlas",      
     "male":"sprites/heroes/dwarf_m.atlas",      
     "femaleAvatar":"Dwarf_f",      
     "maleAvatar":"Dwarf_m" 
-  }
+  },
+  {
+    "name":"Werewolf",
+    "female":"sprites/heroes/werewolf_f.atlas",      
+    "male":"sprites/heroes/werewolf_m.atlas",      
+    "femaleAvatar":"Werewolf_f",      
+    "maleAvatar":"Werewolf_m" 
+  },
+  {
+    "name":"Leonin",
+    "female":"sprites/heroes/leonin_f.atlas",      
+    "male":"sprites/heroes/leonin_m.atlas",      
+    "femaleAvatar":"Leonin_f",      
+    "maleAvatar":"Leonin_m" 
+  }  
   
   
   ]

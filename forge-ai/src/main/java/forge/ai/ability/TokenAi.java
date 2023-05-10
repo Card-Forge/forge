@@ -40,7 +40,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
-import forge.util.collect.FCollection;
 
 /**
  * <p>
@@ -146,7 +145,6 @@ public class TokenAi extends SpellAbilityAi {
         /*
          * readParameters() is called in checkPhaseRestrictions
          */
-        final Card source = sa.getHostCard();
         final Game game = ai.getGame();
         final Player opp = ai.getWeakestOpponent();
 
@@ -175,9 +173,7 @@ public class TokenAi extends SpellAbilityAi {
                     sa.getTargets().add(ai);
                 } else {
                     // Flash Foliage
-                    CardCollection list =  ai.getOpponents().getCardsIn(ZoneType.Battlefield);
-                    list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
-                    list = CardLists.getTargetableCards(list, sa);
+                    CardCollection list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
                     CardCollection betterList = CardLists.filter(list, new Predicate<Card>() {
                         @Override
                         public boolean apply(Card c) {
@@ -321,7 +317,7 @@ public class TokenAi extends SpellAbilityAi {
     @Override
     protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         if (params != null && params.containsKey("Attacker")) {
-            return (Player) ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
+            return (Player) ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), options);
         }
         return Iterables.getFirst(options, null);
     }
@@ -330,12 +326,12 @@ public class TokenAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayerOrPlaneswalker(forge.game.player.Player, forge.card.spellability.SpellAbility, Iterable<forge.game.GameEntity> options)
      */
     @Override
-    protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
+    protected GameEntity chooseSingleAttackableEntity(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
         if (params != null && params.containsKey("Attacker")) {
-            return ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
+            return ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), options);
         }
         // should not be reached
-        return super.chooseSinglePlayerOrPlaneswalker(ai, sa, options, params);
+        return super.chooseSingleAttackableEntity(ai, sa, options, params);
     }
 
     /**

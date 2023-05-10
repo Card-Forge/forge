@@ -1,0 +1,12 @@
+Name:Dance with Calamity
+ManaCost:7 R
+Types:Sorcery
+A:SP$ Shuffle | SubAbility$ DBChoose | StackDescription$ {p:You} shuffles their library, | SpellDescription$ Shuffle your library. As many times as you choose, you may exile the top card of your library. If the total mana value of the cards exiled this way is 13 or less, you may cast any number of spells from among those cards without paying their mana costs.
+SVar:DBChoose:DB$ GenericChoice | Choices$ DBRepeat,Play | Defined$ You
+SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ DBDig | RepeatOptional$ True | SubAbility$ Play  | SpellDescription$ As many times as you choose, you may exile the top card of your library
+SVar:DBDig:DB$ Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Exile | RememberChanged$ True
+SVar:Play:DB$ Play | Defined$ Remembered | Amount$ All | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ LE13 | SubAbility$ DBCleanup | SpellDescription$  If the total mana value of the cards exiled this way is 13 or less, you may cast any number of spells from among those cards without paying their mana costs.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$SumCMC
+AI:RemoveDeck:Random
+Oracle:Shuffle your library. As many times as you choose, you may exile the top card of your library. If the total mana value of the cards exiled this way is 13 or less, you may cast any number of spells from among those cards without paying their mana costs.

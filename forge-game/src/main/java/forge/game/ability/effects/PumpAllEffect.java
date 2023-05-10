@@ -115,7 +115,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
         sb.append(desc);
 
         return sb.toString();
-    } // pumpAllStackDescription()
+    }
 
     @Override
     public void resolve(final SpellAbility sa) {

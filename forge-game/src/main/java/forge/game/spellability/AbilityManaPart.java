@@ -33,11 +33,14 @@ import forge.game.GameActionUtil;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
+import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
 import forge.game.trigger.Trigger;
@@ -223,6 +226,36 @@ public class AbilityManaPart implements java.io.Serializable {
         return source.isValid(cannotCounterSpell, sourceCard.getController(), sourceCard, null);
     }
 
+    public boolean isCannotCounterPaidWith() {
+        return null != cannotCounterSpell;
+    }
+
+    public void addNoCounterEffect(SpellAbility saBeingPaid) {
+        final Game game = sourceCard.getGame();
+        final Card eff = new Card(game.nextCardId(), game);
+        eff.setTimestamp(game.getNextTimestamp());
+        eff.setName(sourceCard + "'s Effect");
+        eff.setOwner(sourceCard.getController());
+
+        eff.setImageKey(sourceCard.getImageKey());
+        eff.setColor(MagicColor.COLORLESS);
+        eff.setImmutable(true);
+
+        String cantcounterstr = "Event$ Counter | ValidCard$ Card.IsRemembered | Description$ That spell can't be countered.";
+        ReplacementEffect re = ReplacementHandler.parseReplacement(cantcounterstr, eff, true);
+        re.setLayer(ReplacementLayer.CantHappen);
+        eff.addReplacementEffect(re);
+
+        eff.addRemembered(saBeingPaid.getHostCard());
+
+        SpellAbilityEffect.addForgetOnMovedTrigger(eff, "Stack");
+
+        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        game.getAction().moveTo(ZoneType.Command, eff, null, null);
+        eff.updateStateForView();
+        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+    }
+
     /**
      * <p>
      * addKeywords.
@@ -345,7 +378,7 @@ public class AbilityManaPart implements java.io.Serializable {
                 if (restriction.endsWith("X") && sa.costHasManaX()) {
                     return true;
                 }
-                if (restriction.endsWith("C") && sa.getPayCosts().hasManaCost() && sa.getPayCosts().getCostMana().getManaToPay().getShardCount(ManaCostShard.COLORLESS) > 0) {
+                if (restriction.endsWith("C") && sa.getPayCosts().hasManaCost() && sa.getPayCosts().getCostMana().getMana().getShardCount(ManaCostShard.COLORLESS) > 0) {
                     return true;
                 }
                 continue;

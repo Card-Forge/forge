@@ -1,0 +1,6 @@
+Name:Omen Hawker
+ManaCost:U
+Types:Creature Cephalid Advisor
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ C U | RestrictValid$ Activated | SpellDescription$ Add {C}{U}. Spend this mana only to activate abilities.
+Oracle:{T}: Add {C}{U}. Spend this mana only to activate abilities.

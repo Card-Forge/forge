@@ -231,15 +231,15 @@ public class CardLists {
     }
 
     public static CardCollection getTargetableCards(Iterable<Card> cardList, SpellAbility source) {
-        CardCollection result = CardLists.filter(cardList, CardPredicates.isTargetableBy(source));
+        final CardCollection result = CardLists.filter(cardList, CardPredicates.isTargetableBy(source));
         // Filter more cards that can only be detected along with other candidates
         if (source.getTargets().isEmpty() && source.usesTargeting() && source.getMinTargets() >= 2) {
             CardCollection removeList = new CardCollection();
             TargetRestrictions tr = source.getTargetRestrictions();
-            for (final Card card : cardList) {
+            for (final Card card : result) {
                 if (tr.isSameController()) {
                     boolean found = false;
-                    for (final Card card2 : cardList) {
+                    for (final Card card2 : result) {
                         if (card != card2 && card.getController() == card2.getController()) {
                             found = true;
                             break;
@@ -252,7 +252,7 @@ public class CardLists {
 
                 if (tr.isWithoutSameCreatureType()) {
                     boolean found = false;
-                    for (final Card card2 : cardList) {
+                    for (final Card card2 : result) {
                         if (card != card2 && !card.sharesCreatureTypeWith(card2)) {
                             found = true;
                             break;
@@ -265,7 +265,7 @@ public class CardLists {
 
                 if (tr.isWithSameCreatureType()) {
                     boolean found = false;
-                    for (final Card card2 : cardList) {
+                    for (final Card card2 : result) {
                         if (card != card2 && card.sharesCreatureTypeWith(card2)) {
                             found = true;
                             break;
@@ -278,7 +278,7 @@ public class CardLists {
 
                 if (tr.isWithSameCardType()) {
                     boolean found = false;
-                    for (final Card card2 : cardList) {
+                    for (final Card card2 : result) {
                         if (card != card2 && card.sharesCardTypeWith(card2)) {
                             found = true;
                             break;

@@ -154,7 +154,7 @@ public final class ConquestData {
     }
     public void setPlaneswalker(PaperCard planeswalker0) {
         planeswalker = planeswalker0;
-        planeswalkerToken = PlaneswalkerAchievements.getTrophyImage(planeswalker.getName());
+        planeswalkerToken = PlaneswalkerAchievements.getTrophyImage(planeswalker.getName(), planeswalker);
     }
 
     public ISkinImage getPlaneswalkerToken() {

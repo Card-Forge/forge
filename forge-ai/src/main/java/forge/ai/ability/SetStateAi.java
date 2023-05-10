@@ -97,13 +97,13 @@ public class SetStateAi extends SpellAbilityAi {
                 for (final Card c : list) {
                     if (shouldTransformCard(c, ai, ph) || "Always".equals(logic)) {
                         sa.getTargets().add(c);
-                        if (sa.getTargets().size() == tgt.getMaxTargets(source, sa)) {
+                        if (sa.isMaxTargetChosen()) {
                             break;
                         }
                     }
                 }
 
-                return sa.getTargets().size() >= tgt.getMinTargets(source, sa);
+                return sa.isMinTargetChosen();
             }
         } else if ("TurnFace".equals(mode)) {
             if (!sa.usesTargeting()) {
@@ -173,7 +173,7 @@ public class SetStateAi extends SpellAbilityAi {
             }            
         } else {
             // doublefaced or meld cards can't be turned face down
-            if (card.isDoubleFaced() || card.isMeldable()) {
+            if (card.isTransformable() || card.isMeldable()) {
                 return false;
             }
         }

@@ -3,7 +3,9 @@ package forge.adventure.util;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -172,6 +174,7 @@ public class UIActor extends Group {
                     break;
             }
         }
+        newActor.setMovable(false);
     }
 
     private void readTextFieldProperties(TextField newActor, ObjectMap.Entries<String, String> entries) {
@@ -287,9 +290,40 @@ public class UIActor extends Group {
         for (ObjectMap.Entry property : entries) {
             switch (property.key.toString()) {
                 case "image":
-                    Texture t = new Texture(Config.instance().getFile(property.value.toString()));
+                    boolean is2D = property.value.toString().startsWith("ui");
+                    Texture t = Forge.getAssets().getTexture(Config.instance().getFile(property.value.toString()), is2D, false);
                     TextureRegion tr = new TextureRegion(t);
-                    newActor.setDrawable(new TextureRegionDrawable(tr));
+                    if (property.value.toString().contains("title_bg")) {
+                        ShaderProgram shaderNightDay = Forge.getGraphics().getShaderNightDay();
+                        newActor.setDrawable(new TextureRegionDrawable(tr) {
+                            @Override
+                            public void draw(Batch batch, float x, float y, float width, float height) {
+                                try {
+                                    if (Config.instance().getSettingData().dayNightBG) {
+                                        batch.end();
+                                        shaderNightDay.bind();
+                                        shaderNightDay.setUniformf("u_timeOfDay", UIScene.getTimeOfDay());
+                                        shaderNightDay.setUniformf("u_time", 0f);
+                                        shaderNightDay.setUniformf("u_bias", 0.9f);
+                                        batch.setShader(shaderNightDay);
+                                        batch.begin();
+                                        //draw
+                                        batch.draw(this.getRegion(), x, y, width, height);
+                                        //reset
+                                        batch.end();
+                                        batch.setShader(null);
+                                        batch.begin();
+                                    } else {
+                                        batch.draw(this.getRegion(), x, y, width, height);
+                                    }
+                                } catch (Exception e) {
+                                    //e.printStackTrace();
+                                }
+                            }
+                        });
+                    } else {
+                        newActor.setDrawable(new TextureRegionDrawable(tr));
+                    }
                     break;
             }
         }

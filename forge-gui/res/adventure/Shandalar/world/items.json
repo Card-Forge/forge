@@ -1,10 +1,54 @@
 [ 
   {
+    "name": "Challenge Coin",
+	"description": "A heavy coin made of unknown material.",
+    "iconName": "ChallengeCoin"
+  },
+  {
+    "name": "Chandra's Tome",
+	"description": "Draft a Chandra themed card that can be cast with mana of any color.",
+    "equipmentSlot": "Left",
+    "iconName": "ChandrasTome",
+    "effect": {
+      "startBattleWithCardInCommandZone": [
+        "Chandra's Tome"
+      ]
+    }
+  },
+  {
+  
+    "name": "Phoenix Charm",
+	"description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
+    "equipmentSlot": "Neck",
+    "iconName": "PhoenixCharm",
+    "effect": {
+      "startBattleWithCardInCommandZone": [
+        "Phoenix Charm"
+      ]
+    }
+  },
+  {
+    "name": "Chandra's Stone",
+	"description": "A small red gemstone recovered after your battle with Chandra.",
+    "iconName": "r"
+  },
+  {
+    "name": "Phoenix",
+	"description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
+    "equipmentSlot": "Neck",
+    "iconName": "PhoenixCharm",
+    "effect": {
+      "startBattleWithCardInCommandZone": [
+        "Phoenix Charm"
+      ]
+    }
+  },
+  {
     "name": "Piper's Charm",
     "equipmentSlot": "Neck",
     "iconName": "PipersCharm",
     "effect": {
-      "startBattleWithCard": [
+      "startBattleWithCardInCommandZone": [
         "Piper's Charm"
       ]
     }
@@ -13,7 +57,7 @@
     "equipmentSlot": "Left",
     "iconName": "SleepWand",
     "effect": {
-      "startBattleWithCard": [
+      "startBattleWithCardInCommandZone": [
         "Sleep Wand"
       ]
     }
@@ -22,7 +66,7 @@
     "equipmentSlot": "Right",
     "iconName": "HillGiantClub",
     "effect": {
-      "startBattleWithCard": [
+      "startBattleWithCardInCommandZone": [
         "Hill Giant Club"
       ]
     }
@@ -31,7 +75,7 @@
     "equipmentSlot": "Right",
     "iconName": "CursedTreasure",
     "effect": {
-      "startBattleWithCard": [
+      "startBattleWithCardInCommandZone": [
         "Cursed Treasure"
       ]
     }
@@ -40,7 +84,7 @@
     "equipmentSlot": "Left",
     "iconName": "FarmersTools",
     "effect": {
-      "startBattleWithCard": [
+      "startBattleWithCardInCommandZone": [
         "Farmer's Tools"
       ]
     }
@@ -139,6 +183,11 @@
     "questItem": true
   },
   {
+    "name": "Nahiri's Key",
+    "iconName": "RedKey",
+    "questItem": true
+  },
+  {
     "name": "White Key",
     "iconName": "WhiteKey",
     "questItem": true
@@ -160,6 +209,31 @@
   },
   {
     "name": "Strange Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Torturer's Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Grolnoks Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Rusty Old Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Illusionist's Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Tibalt's Key",
     "iconName": "StrangeKey",
     "questItem": true
   },
@@ -370,9 +444,9 @@
     "equipmentSlot": "Left",
     "iconName": "FlameSword",
     "effect": {
-      "opponent": {
-        "lifeModifier": -5
-      }
+        "startBattleWithCardInCommandZone": [
+          "Flame Sword"
+        ]
     }
   },
   {
@@ -805,7 +879,8 @@
 },
 {
 	"name": "Colorless rune",
-	"usableOnWorldMap":true, 
+	"usableOnWorldMap":true,
+    "equipmentSlot": "Ability2",
 	"description": "Teleports you to the center",
 	"commandOnUse": "teleport to poi Spawn",
 	"iconName": "ColorlessRune",
@@ -816,6 +891,7 @@
 {
 	"name": "White rune",
 	"usableOnWorldMap":true,
+    "equipmentSlot": "Ability2",
 	"effect": {
 		"name": ""
 	},
@@ -829,6 +905,7 @@
 {
 	"name": "Black rune",
 	"usableOnWorldMap":true,
+    "equipmentSlot": "Ability2",
 	"effect": {
 		"name": ""
 	},
@@ -842,6 +919,7 @@
 {
 	"name": "Blue rune",
 	"usableOnWorldMap":true,
+    "equipmentSlot": "Ability2",
 	"effect": {
 		"name": ""
 	},
@@ -855,6 +933,7 @@
 {
 	"name": "Red rune",
 	"usableOnWorldMap":true,
+    "equipmentSlot": "Ability2",
 	"effect": {
 		"name": ""
 	},
@@ -868,6 +947,7 @@
 {
 	"name": "Green rune",
 	"usableOnWorldMap":true,
+    "equipmentSlot": "Ability2",
 	"effect": {
 		"name": ""
 	},
@@ -880,6 +960,7 @@
 },
 {
 	"name": "White Staff",
+    "equipmentSlot": "Ability1",
 	"usableOnWorldMap":true,
 	"usableInPoi":true,
 	"effect": {
@@ -894,6 +975,7 @@
 },
 {
 	"name": "Black Staff",
+    "equipmentSlot": "Ability1",
 	"usableOnWorldMap":true,
 	"usableInPoi":false,
 	"effect": {
@@ -909,6 +991,7 @@
 {
 	"name": "Blue Staff",
 	"usableOnWorldMap":true,
+    "equipmentSlot": "Ability1",
 	"effect": {
 		"name": ""
 	},
@@ -922,6 +1005,7 @@
 {
 	"name": "Red Staff",
 	"usableOnWorldMap":true,
+    "equipmentSlot": "Ability1",
 	"effect": {
 		"name": ""
 	},
@@ -934,6 +1018,7 @@
 },
 {
 	"name": "Green Staff",
+    "equipmentSlot": "Ability1",
 	"usableOnWorldMap":true,
 	"usableInPoi":true,
 	"effect": {
@@ -945,5 +1030,154 @@
 	"questItem": true,
 	"shardsNeeded": 5,
 	"cost": 1000
+},
+{
+    "name": "Slimefoot's Slimy Staff",
+    "equipmentSlot": "Left",
+    "iconName": "GreenStaff",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCardInCommandZone":[
+        "Slimefoot's Slimy Staff"
+      ]
+}
+},
+{
+    "name": "Kiora's Bident",
+    "equipmentSlot": "Left",
+    "iconName": "SleepWand",
+    "effect": {
+      "lifeModifier": -1,
+      "startBattleWithCard": [
+        "Kraken Hatchling"
+      ],
+      "startBattleWithCardInCommandZone":[
+        "Kiora's Bident"
+      ]
+}
+},
+{
+    "name": "Slime-Covered Boots",
+    "equipmentSlot": "Boots",
+    "iconName": "SteelBoots",
+    "effect": {
+      "lifeModifier": -1,
+      "startBattleWithCard": [
+        "Ooze Flux"
+      ]
+}
+},
+{
+    "name": "Jace's Signature Hoodie",
+    "equipmentSlot": "Body",
+    "iconName": "BlueRobes",
+    "effect": {
+      "lifeModifier": -1,
+      "cardRewardBonus": 1,
+      "startBattleWithCardInCommandZone": [
+        "Jace's Signature Hoodie"
+      ]
+}
+},
+{
+    "name": "Teferi's Staff",
+    "equipmentSlot": "Left",
+    "iconName": "MadStaff",
+    "effect": {
+      "lifeModifier": 1,
+      "cardRewardBonus": 1,
+      "startBattleWithCardInCommandZone": [
+        "Teferi's Staff"
+      ]
+}
+},
+{
+    "name": "Garruk's Mighty Axe",
+    "equipmentSlot": "Left",
+    "iconName": "GarrukAxe",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCardInCommandZone": [
+        "Garruk's Mighty Axe"
+      ]
+}
+},
+{
+    "name": "Nahiri's Armory",
+    "equipmentSlot": "Right",
+    "iconName": "Armory",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCardInCommandZone": [
+        "Nahiri's Armory"
+      ]
+}
+},
+{
+    "name": "Giant Scythe",
+    "equipmentSlot": "Left",
+    "iconName": "Scythe",
+    "effect": {
+      "lifeModifier": 1,
+      "startBattleWithCardInCommandZone": [
+        "Giant Scythe"
+      ]
+}
+},
+{
+    "name": "Chicken Egg",
+    "equipmentSlot": "Right",
+    "iconName": "ChickenEgg",
+    "effect": {
+      "lifeModifier": 1,
+      "startBattleWithCard": [
+        "Chicken Egg"
+      ]
+}
+},
+{
+    "name": "Tibalt's Bag of Tricks",
+    "equipmentSlot": "Left",
+    "iconName": "BurningBook",
+    "effect": {
+      "lifeModifier": 1,
+      "startBattleWithCardInCommandZone": [
+        "Tibalt's Bag of Tricks"
+      ]
+}
+},
+{
+    "name": "Xira's Fancy Hat",
+    "equipmentSlot": "Neck",
+    "iconName": "BrownHat",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Xira's Hive"
+      ]
+}
+},
+{
+    "name": "Grolnok's Skin",
+    "equipmentSlot": "Right",
+    "iconName": "FrogSkin",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCardInCommandZone": [
+        "Grolnok's Skin"
+      ]
+}
+},
+{
+    "name": "Slobad's Iron Boots",
+    "equipmentSlot": "Boots",
+    "iconName": "MetallicBoots",
+    "effect": {
+      "lifeModifier": 1,
+      "moveSpeed": 1.35,
+      "startBattleWithCardInCommandZone": [
+        "Slobad's Iron Boots"
+      ]
+}
 }
 ]

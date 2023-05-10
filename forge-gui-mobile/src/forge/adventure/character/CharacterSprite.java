@@ -7,9 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import forge.adventure.stage.SpriteGroup;
 import forge.adventure.util.Config;
-
 import java.util.HashMap;
-
 /**
  * CharacterSprite base class for animated sprites on the map
  */
@@ -23,6 +21,7 @@ public class CharacterSprite extends MapActor {
     private final Array<Sprite> avatar=new Array<>();
     public boolean hidden = false;
     private String atlasPath;
+    private float wakeTimer = 0.0f;
 
     public CharacterSprite(int id,String path) {
         super(id);
@@ -35,7 +34,7 @@ public class CharacterSprite extends MapActor {
     }
 
     @Override
-    void updateBoundingRect() { //We want a slimmer box for the player entity so it can navigate terrain without getting stuck.
+    void updateBoundingRect() {//We want a slimmer box for the player entity so it can navigate terrain without getting stuck.
         boundingRect.set(getX() + 4, getY(), getWidth() - 6, getHeight() * collisionHeight);
     }
 
@@ -170,7 +169,22 @@ public class CharacterSprite extends MapActor {
     }
 
     @Override
-    public void moveBy(float x, float y) {
+    public void moveBy(float x, float y){
+        moveBy(x,y,0.0f);
+    }
+
+    public void moveBy(float x, float y, float delta) {
+
+        if (hidden) {
+            setAnimation(AnimationTypes.Wake);
+            wakeTimer = 0.0f;
+            hidden = false;
+        }
+
+        if (currentAnimationType == AnimationTypes.Wake && wakeTimer <= currentAnimation.getAnimationDuration()){
+            wakeTimer += delta;
+            return;
+        }
         super.moveBy(x, y);
         if (x == 0 && y == 0) {
             return;
@@ -222,12 +236,26 @@ public class CharacterSprite extends MapActor {
         }
         super.draw(batch,parentAlpha);
         beforeDraw(batch,parentAlpha);
-        TextureRegion currentFrame = currentAnimation.getKeyFrame(timer, true);
+
+        TextureRegion currentFrame;
+        if (currentAnimationType.equals(AnimationTypes.Wake))
+        {
+            currentFrame = currentAnimation.getKeyFrame(wakeTimer, false);
+        }
+        else
+        {
+            currentFrame = currentAnimation.getKeyFrame(timer, true);
+        }
+
         setHeight(currentFrame.getRegionHeight());
         setWidth(currentFrame.getRegionWidth());
         Color oldColor=batch.getColor().cpy();
         batch.setColor(getColor());
-        batch.draw(currentFrame, getX(), getY());
+        float scale = 1f;
+        if (this instanceof EnemySprite) {
+            scale = ((EnemySprite) this).getData().scale;
+        }
+        batch.draw(currentFrame, getX(), getY(), getWidth()*scale, getHeight()*scale);
         batch.setColor(oldColor);
         super.draw(batch,parentAlpha);
         //batch.draw(getDebugTexture(),getX(),getY());
@@ -253,7 +281,9 @@ public class CharacterSprite extends MapActor {
         Death,
         Attack,
         Hit,
-        Avatar
+        Avatar,
+        Hidden,
+        Wake
     }
 
     public enum AnimationDirections {

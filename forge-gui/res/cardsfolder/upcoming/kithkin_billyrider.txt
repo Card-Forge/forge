@@ -1,0 +1,6 @@
+Name:Kithkin Billyrider
+ManaCost:2 W
+Types:Creature Kithkin Knight
+PT:1/3
+K:Double Strike
+Oracle:Double strike

@@ -12,37 +12,38 @@ import forge.deck.Deck;
 import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.game.player.RegisteredPlayer;
+import forge.util.Aggregates;
 import forge.util.Localizer;
-import forge.util.MyRandom;
 
 public enum GameType {
 
-    Sealed          (DeckFormat.Limited, true, true, true, "lblSealed", ""),
-    Draft           (DeckFormat.Limited, true, true, true, "lblDraft", ""),
-    Winston         (DeckFormat.Limited, true, true, true, "lblWinston", ""),
-    Gauntlet        (DeckFormat.Constructed, false, true, true, "lblGauntlet", ""),
-    Tournament      (DeckFormat.Constructed, false, true, true, "lblTournament", ""),
-    Quest           (DeckFormat.QuestDeck, true, true, false, "lblQuest", ""),
-    QuestDraft      (DeckFormat.Limited, true, true, true, "lblQuestDraft", ""),
-    PlanarConquest  (DeckFormat.PlanarConquest, true, false, false, "lblPlanarConquest", ""),
-    Puzzle          (DeckFormat.Puzzle, false, false, false, "lblPuzzle", "lblPuzzleDesc"),
-    Constructed     (DeckFormat.Constructed, false, true, true, "lblConstructed", ""),
-    DeckManager     (DeckFormat.Constructed, false, true, true, "lblDeckManager", ""),
-    Vanguard        (DeckFormat.Vanguard, true, true, true, "lblVanguard", "lblVanguardDesc"),
-    Commander       (DeckFormat.Commander, false, false, false, "lblCommander", "lblCommanderDesc"),
-    Oathbreaker     (DeckFormat.Oathbreaker, false, false, false, "lblOathbreaker", "lblOathbreakerDesc"),
-    TinyLeaders     (DeckFormat.TinyLeaders, false, false, false, "lblTinyLeaders", "lblTinyLeadersDesc"),
-    Brawl           (DeckFormat.Brawl, false, false, false, "lblBrawl", "lblBrawlDesc"),
-    Planeswalker    (DeckFormat.PlanarConquest, false, false, true, "lblPlaneswalker", "lblPlaneswalkerDesc"),
-    Planechase      (DeckFormat.Planechase, false, false, true, "lblPlanechase", "lblPlanechaseDesc"),
-    Archenemy       (DeckFormat.Archenemy, false, false, true, "lblArchenemy", "lblArchenemyDesc"),
-    ArchenemyRumble (DeckFormat.Archenemy, false, false, true, "lblArchenemyRumble", "lblArchenemyRumbleDesc"),
-    MomirBasic      (DeckFormat.Constructed, false, false, false, "lblMomirBasic", "lblMomirBasicDesc", new Function<RegisteredPlayer, Deck>() {
+    Sealed              (DeckFormat.Limited, true, true, true, "lblSealed", ""),
+    Draft               (DeckFormat.Limited, true, true, true, "lblDraft", ""),
+    Winston             (DeckFormat.Limited, true, true, true, "lblWinston", ""),
+    Gauntlet            (DeckFormat.Constructed, false, true, true, "lblGauntlet", ""),
+    Tournament          (DeckFormat.Constructed, false, true, true, "lblTournament", ""),
+    CommanderGauntlet   (DeckFormat.Commander, false, false, false, "lblCommander", "lblCommanderDesc"),
+    Quest               (DeckFormat.QuestDeck, true, true, false, "lblQuest", ""),
+    QuestDraft          (DeckFormat.Limited, true, true, true, "lblQuestDraft", ""),
+    PlanarConquest      (DeckFormat.PlanarConquest, true, false, false, "lblPlanarConquest", ""),
+    Puzzle              (DeckFormat.Puzzle, false, false, false, "lblPuzzle", "lblPuzzleDesc"),
+    Constructed         (DeckFormat.Constructed, false, true, true, "lblConstructed", ""),
+    DeckManager         (DeckFormat.Constructed, false, true, true, "lblDeckManager", ""),
+    Vanguard            (DeckFormat.Vanguard, true, true, true, "lblVanguard", "lblVanguardDesc"),
+    Commander           (DeckFormat.Commander, false, false, false, "lblCommander", "lblCommanderDesc"),
+    Oathbreaker         (DeckFormat.Oathbreaker, false, false, false, "lblOathbreaker", "lblOathbreakerDesc"),
+    TinyLeaders         (DeckFormat.TinyLeaders, false, false, false, "lblTinyLeaders", "lblTinyLeadersDesc"),
+    Brawl               (DeckFormat.Brawl, false, false, false, "lblBrawl", "lblBrawlDesc"),
+    Planeswalker        (DeckFormat.PlanarConquest, false, false, true, "lblPlaneswalker", "lblPlaneswalkerDesc"),
+    Planechase          (DeckFormat.Planechase, false, false, true, "lblPlanechase", "lblPlanechaseDesc"),
+    Archenemy           (DeckFormat.Archenemy, false, false, true, "lblArchenemy", "lblArchenemyDesc"),
+    ArchenemyRumble     (DeckFormat.Archenemy, false, false, true, "lblArchenemyRumble", "lblArchenemyRumbleDesc"),
+    MomirBasic          (DeckFormat.Constructed, false, false, false, "lblMomirBasic", "lblMomirBasicDesc", new Function<RegisteredPlayer, Deck>() {
         @Override
         public Deck apply(RegisteredPlayer player) {
             Deck deck = new Deck();
             CardPool mainDeck = deck.getMain();
-            String setcode = StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size()));
+            String setcode = Aggregates.random(StaticData.instance().getBlockLands());
             mainDeck.add("Plains", setcode, 12, true);
             mainDeck.add("Island", setcode, 12, true);
             mainDeck.add("Swamp", setcode, 12, true);
@@ -58,7 +59,7 @@ public enum GameType {
         public Deck apply(RegisteredPlayer player) {
             Deck deck = new Deck();
             CardPool mainDeck = deck.getMain();
-            String setcode = StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size()));
+            String setcode = Aggregates.random(StaticData.instance().getBlockLands());
             mainDeck.add("Plains", setcode, 12, true);
             mainDeck.add("Island", setcode, 12, true);
             mainDeck.add("Swamp", setcode, 12, true);

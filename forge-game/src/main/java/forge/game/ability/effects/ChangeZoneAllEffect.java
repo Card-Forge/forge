@@ -136,7 +136,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         if (!random && !((destination == ZoneType.Library || destination == ZoneType.PlanarDeck) && sa.hasParam("Shuffle"))) {
             if ((destination == ZoneType.Library || destination == ZoneType.PlanarDeck) && cards.size() >= 2) {
-                Player p = AbilityUtils.getDefinedPlayers(source, sa.getParamOrDefault("DefinedPlayer", "You"), sa).get(0);
+                Player p = AbilityUtils.getDefinedPlayers(source, sa.getParam("DefinedPlayer"), sa).get(0);
                 cards = (CardCollection) p.getController().orderMoveToZoneList(cards, destination, sa);
                 //the last card in this list will be the closest to the top, but we want the first card to be closest.
                 //so reverse it here before moving them to the library.
@@ -159,6 +159,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 if (originZone.is(ZoneType.Exile) || originZone.is(ZoneType.Hand) || originZone.is(ZoneType.Stack)) {
                     game.getStack().remove(c);
                 }
+            }
+
+            if (remLKI) {
+                source.addRemembered(CardUtil.getLKICopy(c));
             }
 
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
@@ -186,14 +190,8 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 movedCard = game.getAction().moveToPlay(c, sa.getActivatingPlayer(), sa, moveParams);
             } else {
                 movedCard = game.getAction().moveTo(destination, c, libraryPos, sa, moveParams);
-                if (destination == ZoneType.Exile && !c.isToken()) {
-                    Card host = sa.getOriginalHost();
-                    if (host == null) {
-                        host = sa.getHostCard();
-                    }
-                    host.addExiledCard(movedCard);
-                    movedCard.setExiledWith(host);
-                    movedCard.setExiledBy(host.getController());
+                if (destination == ZoneType.Exile) {
+                    handleExiledWith(movedCard, sa);
                 }
                 if (sa.hasParam("ExileFaceDown")) {
                     movedCard.turnFaceDown(true);
@@ -224,13 +222,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                                 source.addRemembered(card);
                             }
                         }
-                    }
-                }
-                if (remLKI) {
-                    final Card lki = CardUtil.getLKICopy(c);
-                    game.getCardState(source).addRemembered(lki);
-                    if (!source.isRemembered(lki)) {
-                        source.addRemembered(lki);
                     }
                 }
                 if (forget != null) {

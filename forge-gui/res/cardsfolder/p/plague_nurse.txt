@@ -1,0 +1,8 @@
+Name:Plague Nurse
+ManaCost:3 G
+Types:Creature Phyrexian Cleric
+PT:3/4
+K:Toxic:2
+A:AB$ PumpAll | Cost$ 2 G | KW$ Toxic:1 | ValidCards$ Creature.withToxic+StrictlyOther+YouCtrl | ActivationLimit$ 1 | SpellDescription$ Each other creature you control with toxic gains toxic 1 until end of turn. Activate only once each turn. (A player dealt combat damage by a creature with toxic also gets poison counters equal to that creature's total toxic value.)
+DeckHints:Keyword$Toxic
+Oracle:Toxic 2\n{2}{G}: Each other creature you control with toxic gains toxic 1 until end of turn. Activate only once each turn. (A player dealt combat damage by a creature with toxic also gets poison counters equal to that creature's total toxic value.)

@@ -17,6 +17,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
     private final java.util.Map<String, Byte> mapFlags = new HashMap<>();
     private final java.util.Map<Integer, Long> shopSeeds = new HashMap<>();
     private final java.util.Map<Integer, Float> shopModifiers = new HashMap<>();
+    private final java.util.Map<Integer, Integer> reputation = new HashMap<>();
 
     public static class Map extends HashMap<String,PointOfInterestChanges> implements SaveFileContent {
         @Override
@@ -103,6 +104,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
     }
 
     public void generateNewShopSeed(int objectID){
+
         shopSeeds.put(objectID, Current.world().getRandom().nextLong());
         cardsBought.put(objectID, new HashSet<>()); //Allows cards to appear in slots of previous purchases
     }
@@ -134,8 +136,33 @@ public class PointOfInterestChanges implements SaveFileContent  {
         return shopModifiers.get(0);
     }
 
-    public void setTownModifier(float mod){
-        shopModifiers.put(0, mod);
+    public void addMapReputation(int delta)
+    {
+        addObjectReputation(0, delta);
     }
 
+    public void addObjectReputation(int id, int delta)
+    {
+        reputation.put(id, (reputation.containsKey(id)?reputation.get(id):0) + delta);
+    }
+
+    public int getMapReputation(){
+        return getObjectReputation(0);
+    }
+
+    public int getObjectReputation(int id){
+        if (!reputation.containsKey(id))
+        {
+            reputation.put(id, 0);
+        }
+        return reputation.get(id);
+    }
+    public boolean hasDeletedObjects() {
+        return deletedObjects != null && !deletedObjects.isEmpty();
+    }
+
+    public void clearDeletedObjects() {
+        // reset map when assigning as a quest target that needs enemies
+        deletedObjects.clear();
+    }
 }

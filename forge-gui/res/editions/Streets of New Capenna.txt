@@ -496,6 +496,7 @@ ScryfallCode=SNC
 [rebalanced]
 A6 C A-Buy Your Silence @Tony Foti
 A7 C A-Celebrity Fencer @Inka Schulz
+A20 U A-Knockout Blow @Zoltan Boros
 A32 C A-Speakeasy Server @Scott Murphy
 A37 C A-Case the Joint @Stella Spente
 A53 C A-Psionic Snoop @Marcela Medeiros

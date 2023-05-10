@@ -2,7 +2,6 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Function;
@@ -40,7 +39,6 @@ import java.util.Map;
  
     public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         private static final FileHandle deckIcon = Config.instance().getFile("ui/maindeck.png");
-        private static Texture deckTexture = deckIcon.exists() ? new Texture(deckIcon) : null;
         private static FImage MAIN_DECK_ICON = deckIcon.exists() ? new FImage() {
             @Override
             public float getWidth() {
@@ -52,11 +50,10 @@ import java.util.Map;
             }
             @Override
             public void draw(Graphics g, float x, float y, float w, float h) {
-                g.drawImage(deckTexture, x, y, w, h);
+                g.drawImage(Forge.getAssets().getTexture(deckIcon), x, y, w, h);
             }
         } : Forge.hdbuttons ? FSkinImage.HDLIBRARY :FSkinImage.DECKLIST;
         private static final FileHandle sideIcon = Config.instance().getFile("ui/sideboard.png");
-        private static Texture sideTexture = sideIcon.exists() ? new Texture(sideIcon) : null;
         private static FImage SIDEBOARD_ICON = sideIcon.exists() ? new FImage() {
             @Override
             public float getWidth() {
@@ -68,12 +65,11 @@ import java.util.Map;
             }
             @Override
             public void draw(Graphics g, float x, float y, float w, float h) {
-                g.drawImage(sideTexture, x, y, w, h);
+                g.drawImage(Forge.getAssets().getTexture(sideIcon), x, y, w, h);
             }
         } : Forge.hdbuttons ? FSkinImage.HDSIDEBOARD : FSkinImage.FLASHBACK;
         private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
         private static final FileHandle binderIcon = Config.instance().getFile("ui/binder.png");
-        private static Texture binderTexture = binderIcon.exists() ? new Texture(binderIcon) : null;
         private static FImage CATALOG_ICON = binderIcon.exists() ? new FImage() {
             @Override
             public float getWidth() {
@@ -85,12 +81,11 @@ import java.util.Map;
             }
             @Override
             public void draw(Graphics g, float x, float y, float w, float h) {
-                g.drawImage(binderTexture, x, y, w, h);
+                g.drawImage(Forge.getAssets().getTexture(binderIcon), x, y, w, h);
             }
         } : FSkinImage.QUEST_BOX;
         private static final FileHandle sellIcon = Config.instance().getFile("ui/sell.png");
-        private static Texture sellIconTexture = sellIcon.exists() ? new Texture(sellIcon) : null;
-        private static final FLabel lblGold = new FLabel.Builder().text("0").icon( sellIconTexture == null ? FSkinImage.QUEST_COINSTACK :
+        private static final FLabel lblGold = new FLabel.Builder().text("0").icon( Forge.getAssets().getTexture(sellIcon) == null ? FSkinImage.QUEST_COINSTACK :
                 new FImage() {
                     @Override
                     public float getWidth() {
@@ -102,7 +97,7 @@ import java.util.Map;
                     }
                     @Override
                     public void draw(Graphics g, float x, float y, float w, float h) {
-                        g.drawImage(sellIconTexture, x, y, w, h);
+                        g.drawImage(Forge.getAssets().getTexture(sellIcon), x, y, w, h);
                     }
                 }
         ).font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build();
@@ -453,7 +448,7 @@ import java.util.Map;
             }
 
             protected void addCommanderItems(final FDropDownMenu menu, final PaperCard card, boolean isAddMenu, boolean isAddSource) {
-                if (parentScreen.getCommanderPage() == null) {
+                if (parentScreen.getCommanderPage() == null || card == null) {
                     return;
                 }
                 boolean isLegalCommander;

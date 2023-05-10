@@ -1,0 +1,10 @@
+Name:Norn's Inquisitor
+ManaCost:1 W
+Types:Creature Phyrexian Knight
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigIncubate | TriggerDescription$ When CARDNAME enters the battlefield, incubate 2.
+SVar:TrigIncubate:DB$ Incubate | Amount$ 2
+T:Mode$ Transformed | ValidCard$ Phyrexian.YouCtrl+inZoneBattlefield | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a permanent you control transforms into a Phyrexian, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCard | CounterType$ P1P1
+DeckHas:Ability$Token|Counters & Type$Artifact
+Oracle:When Norn's Inquisitor enters the battlefield, incubate 2.\nWhenever a permanent you control transforms into a Phyrexian, put a +1/+1 counter on it.

@@ -3,6 +3,8 @@ package forge.game.ability.effects;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
@@ -298,40 +300,60 @@ public class PumpEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("DefinedKW")) {
             String defined = sa.getParam("DefinedKW");
-            String replaced = "";
-            String name = "";
             if (defined.equals("ChosenType")) {
-                replaced = host.getChosenType();
-            } else if (defined.equals("ActivatorName")) {
-                replaced = activator.getName();
+                if (!host.hasChosenType()) {
+                    return;
+                }
+                String replaced = host.getChosenType();
+                for (int i = 0; i < keywords.size(); i++) {
+                    String s = keywords.get(i);
+                    s = s.replaceAll(defined, replaced);
+                    keywords.set(i, s);
+                }
             } else if (defined.equals("ChosenPlayer")) {
-                replaced = host.getChosenPlayer().getName();
-            } else if (defined.endsWith("Player")) {
+                if (!host.hasChosenPlayer()) {
+                    return;
+                }
+                Player cp = host.getChosenPlayer();
+                for (int i = 0; i < keywords.size(); i++) {
+                    String s = keywords.get(i);
+                    s = s.replaceAll("ChosenPlayerUID", String.valueOf(cp.getId()));
+                    s = s.replaceAll("ChosenPlayerName", cp.getName());
+                    keywords.set(i, s);
+                }
+            } else if (defined.equals("ChosenColor")) {
+                if (!host.hasChosenColor()) {
+                    return;
+                }
+                for (int i = 0; i < keywords.size(); i++) {
+                    String s = keywords.get(i);
+                    s = s.replaceAll("ChosenColor", StringUtils.capitalize(host.getChosenColor()));
+                    s = s.replaceAll("chosenColor", host.getChosenColor().toLowerCase());
+                    keywords.set(i, s);
+                }
+            } else { // anything else needs to be defined players?
                 PlayerCollection players = AbilityUtils.getDefinedPlayers(host, defined, sa);
                 if (players.isEmpty()) return;
-                replaced = "PlayerUID_" + players.get(0).getId();
-                name = players.get(0).getName();
-            } else if (defined.equals("ChosenColor")) {
-                String color = host.getChosenColor();
-                replaced = color.substring(0, 1).toUpperCase() + color.substring(1);
-            }
-            for (int i = 0; i < keywords.size(); i++) {
-                keywords.set(i, TextUtil.fastReplace(keywords.get(i), defined, replaced));
-                if (keywords.get(i).startsWith("Protection:") && !name.equals("")) {
-                    List<String> parts = Arrays.asList(keywords.get(i).split(":"));
-                    String desc = parts.get(2);
-                    if (desc.contains("PlayerUID")) {
-                        parts.set(2, TextUtil.fastReplace(desc, replaced, name));
-                        StringBuilder mod = new StringBuilder();
-                        for (int n = 0; n < parts.size(); n++) {
-                            mod.append(parts.get(n));
-                            if (n + 1 < parts.size()) {
-                                mod.append(":");
-                            }
+                List<String> newKeywords = Lists.newArrayList();
+                Iterables.removeIf(keywords, new Predicate<String>() {
+
+                    @Override
+                    public boolean apply(String input) {
+                        if (!input.contains("ChosenPlayerUID") && !input.contains("ChosenPlayerName")) {
+                            return false;
                         }
-                        keywords.set(i, mod.toString());
+                        for (Player p : players) {
+                            String replacedID = String.valueOf(p.getId());
+                            String replacedName = p.getName();
+
+                            String s = input.replaceAll("ChosenPlayerUID", replacedID);
+                            s = s.replaceAll("ChosenPlayerName", replacedName);
+                            newKeywords.add(s);
+                        }
+                        return true;
                     }
-                }
+                });
+                keywords.addAll(newKeywords);
             }
         }
         if (sa.hasParam("DefinedLandwalk")) {
@@ -415,10 +437,7 @@ public class PumpEffect extends SpellAbilityEffect {
         final ZoneType pumpZone = sa.hasParam("PumpZone") ? ZoneType.smartValueOf(sa.getParam("PumpZone"))
                 : ZoneType.Battlefield;
 
-        final int size = tgtCards.size();
-        for (int j = 0; j < size; j++) {
-            final Card tgtC = tgtCards.get(j);
-
+        for (Card tgtC : tgtCards) {
             // CR 702.26e
             if (tgtC.isPhasedOut()) {
                 continue;

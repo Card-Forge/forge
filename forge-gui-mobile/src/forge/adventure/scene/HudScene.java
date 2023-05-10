@@ -13,7 +13,7 @@ import forge.adventure.util.KeyBinding;
 /**
  * Hud base scene
  */
-public abstract class HudScene extends Scene implements InputProcessor, IAfterMatch  {
+public abstract class HudScene extends Scene implements InputProcessor, IAfterMatch {
 
     GameHUD hud;
     GameStage stage;
@@ -27,10 +27,12 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     public void connected(final Controller controller) {
         hud.ui.controllerConnected();
     }
+
     @Override
     public void disconnected(final Controller controller) {
         hud.ui.controllerDisconnected();
     }
+
     @Override
     public boolean leave() {
         stage.leave();
@@ -51,18 +53,16 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     }
 
     @Override
-    public void act(float delta)
-    {
+    public void act(float delta) {
         stage.act(delta);
         hud.act(delta);
     }
+
     @Override
     public void render() {
-
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
         hud.draw();
-
     }
 
     @Override
@@ -72,38 +72,38 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
         }
         if (hud.keyDown(keycode))
             return true;
-        if(isInHudOnlyMode())
+        if (isInHudOnlyMode())
             return false;
         return stage.keyDown(keycode);
     }
 
     @Override
     public boolean keyUp(int keycode) {
-
         if (MapStage.getInstance().isDialogOnlyInput()) {
             return true;
         }
         if (hud.keyUp(keycode))
             return true;
-        if(isInHudOnlyMode())
+        if (isInHudOnlyMode())
             return false;
         return stage.keyUp(keycode);
     }
+
     @Override
     public boolean buttonDown(Controller var1, int var2) {
-            return keyDown(KeyBinding.controllerButtonToKey(var1,var2));
+        return keyDown(KeyBinding.controllerButtonToKey(var1, var2));
     }
+
     @Override
     public boolean buttonUp(Controller var1, int var2) {
-        return keyUp(KeyBinding.controllerButtonToKey(var1,var2));
+        return keyUp(KeyBinding.controllerButtonToKey(var1, var2));
     }
 
     @Override
     public boolean keyTyped(char character) {
-
         if (hud.keyTyped(character))
             return true;
-        if(isInHudOnlyMode())
+        if (isInHudOnlyMode())
             return false;
         return stage.keyTyped(character);
     }
@@ -112,7 +112,7 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if (hud.touchDown(screenX, screenY, pointer, button))
             return true;
-        if(isInHudOnlyMode())
+        if (isInHudOnlyMode())
             return false;
         return stage.touchDown(screenX, screenY, pointer, button);
     }
@@ -121,7 +121,7 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         if (hud.touchUp(screenX, screenY, pointer, button))
             return true;
-        if(isInHudOnlyMode())
+        if (isInHudOnlyMode())
             return false;
         return stage.touchUp(screenX, screenY, pointer, button);
     }
@@ -130,7 +130,7 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         if (hud.touchDragged(screenX, screenY, pointer))
             return true;
-        if(isInHudOnlyMode())
+        if (isInHudOnlyMode())
             return false;
         return stage.touchDragged(screenX, screenY, pointer);
     }
@@ -139,7 +139,7 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     public boolean mouseMoved(int screenX, int screenY) {
         if (hud.mouseMoved(screenX, screenY))
             return true;
-        if(isInHudOnlyMode())
+        if (isInHudOnlyMode())
             return false;
         return stage.mouseMoved(screenX, screenY);
     }
@@ -148,22 +148,22 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     public boolean scrolled(float amountX, float amountY) {
         if (hud.scrolled(amountX, amountY))
             return true;
-        if(isInHudOnlyMode())
+        if (isInHudOnlyMode())
             return false;
         return stage.scrolled(amountX, amountY);
     }
 
     @Override
     public boolean axisMoved(Controller controller, int axisIndex, float value) {
-
         return stage.axisMoved(controller, axisIndex, value);
     }
+
     @Override
     public void setWinner(boolean winner) {
         stage.setWinner(winner);
     }
-    public boolean isInHudOnlyMode()
-    {
+
+    public boolean isInHudOnlyMode() {
         return false;
     }
 }

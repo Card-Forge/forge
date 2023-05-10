@@ -69,19 +69,19 @@ public class SOptionPane {
     }
 
     public static String showInputDialog(final String message, final String title) {
-        return showInputDialog(message, title, null, "", null);
+        return showInputDialog(message, title, null, "", null, false);
     }
 
     public static String showInputDialog(final String message, final String title, final FSkinProp icon) {
-        return showInputDialog(message, title, icon, "", null);
+        return showInputDialog(message, title, icon, "", null, false);
     }
 
     public static String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput) {
-        return showInputDialog(message, title, icon, initialInput, null);
+        return showInputDialog(message, title, icon, initialInput, null, false);
     }
 
-    public static String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions) {
-        return GuiBase.getInterface().showInputDialog(message, title, icon, initialInput, inputOptions);
+    public static String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions, boolean isNumeric) {
+        return GuiBase.getInterface().showInputDialog(message, title, icon, initialInput, inputOptions, isNumeric);
     }
 
     private SOptionPane() {

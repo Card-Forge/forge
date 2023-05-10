@@ -32,6 +32,7 @@ import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 
 /**
  * The Class CostSacrifice.
@@ -97,7 +98,9 @@ public class CostSacrifice extends CostPartWithList {
             } else {
                 desc = this.getTypeDescription();
             }
-            sb.append(Cost.convertAmountTypeToWords(convertAmount(), getAmount(), desc));
+
+            sb.append(convertAmount() == null ? Lang.nounWithNumeralExceptOne(getAmount(), desc)
+                    : Lang.nounWithNumeralExceptOne(convertAmount(), desc));
         }
         return sb.toString();
     }
@@ -117,22 +120,25 @@ public class CostSacrifice extends CostPartWithList {
             Card originalEquipment = ability.getOriginalHost();
             return originalEquipment.isEquipping() && originalEquipment.canBeSacrificedBy(ability, effect);
         }
-        else if (!payCostFromSource()) { // You can always sac all
-            if ("All".equalsIgnoreCase(getAmount())) {
-                CardCollectionView typeList = activator.getCardsIn(ZoneType.Battlefield);
-                typeList = CardLists.getValidCards(typeList, getType().split(";"), activator, source, ability);
-                // it needs to check if everything can be sacrificed
-                return Iterables.all(typeList, CardPredicates.canBeSacrificedBy(ability, effect));
-            }
 
-            int amount = getAbilityAmount(ability);
-
-            return getMaxAmountX(ability, activator, effect) >= amount;
-            // If amount is null, it's either "ALL" or "X"
-            // if X is defined, it needs to be calculated and checked, if X is
-            // choice, it can be Paid even if it's 0
+        if (payCostFromSource()) {
+            return source.canBeSacrificedBy(ability, effect);
         }
-        else return source.canBeSacrificedBy(ability, effect);
+
+        // You can always sac all
+        if ("All".equalsIgnoreCase(getAmount())) {
+            CardCollectionView typeList = activator.getCardsIn(ZoneType.Battlefield);
+            typeList = CardLists.getValidCards(typeList, getType().split(";"), activator, source, ability);
+            // it needs to check if everything can be sacrificed
+            return Iterables.all(typeList, CardPredicates.canBeSacrificedBy(ability, effect));
+        }
+
+        int amount = getAbilityAmount(ability);
+
+        // If amount is null, it's either "ALL" or "X"
+        // if X is defined, it needs to be calculated and checked, if X is
+        // choice, it can be Paid even if it's 0
+        return getMaxAmountX(ability, activator, effect) >= amount;
     }
 
     @Override

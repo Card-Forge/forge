@@ -117,6 +117,9 @@ public class LoadSealedScreen extends LaunchScreen {
                 }
 
                 final DeckGroup opponentDecks = FModel.getDecks().getSealed().get(humanDeck.getName());
+                if (opponentDecks == null || opponentDecks.isEmpty()) {
+                    throw new IllegalStateException("Draft: Opponent decks is null!");
+                }
                 final Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex - 1);
                 if (aiDeck == null) {
                     throw new IllegalStateException("Draft: Computer deck is null!");

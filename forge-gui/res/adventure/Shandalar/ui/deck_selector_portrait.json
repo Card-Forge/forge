@@ -10,31 +10,48 @@
       "height": 480
     },
     {
-      "type": "Scroll",
+      "type": "Window",
       "name": "deckSlots",
       "x": 4,
       "y": 4,
       "width": 262,
-      "height": 442
+      "height": 414
+    },
+    {
+      "type": "TextButton",
+      "name": "delete",
+      "text": "tr(lblDelete)",
+      "width": 86,
+      "height": 30,
+      "x": 4,
+      "y": 418
+    },
+    {
+      "type": "TextButton",
+      "name": "copy",
+      "text": "tr(lblCopy)",
+      "width": 86,
+      "height": 30,
+      "x": 92,
+      "y": 418
+    },
+    {
+      "type": "TextButton",
+      "name": "rename",
+      "text": "tr(lblRename)",
+      "width": 86,
+      "height": 30,
+      "x": 180,
+      "y": 418
     },
     {
       "type": "TextButton",
       "name": "return",
       "text": "tr(lblBack)",
       "binding": "Back",
-      "width": 86,
+      "width": 130,
       "height": 30,
       "x": 4,
-      "y": 448
-    },
-    {
-      "type": "TextButton",
-      "name": "rename",
-      "text": "tr(lblRename)",
-      "binding": "Equip",
-      "width": 86,
-      "height": 30,
-      "x": 92,
       "y": 448
     },
     {
@@ -42,9 +59,9 @@
       "name": "edit",
       "text": "tr(lblEdit)",
       "binding": "Use",
-      "width": 86,
+      "width": 130,
       "height": 30,
-      "x": 180,
+      "x": 136,
       "y": 448
     }
   ]

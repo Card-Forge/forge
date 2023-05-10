@@ -1,0 +1,8 @@
+Name:Zhalfirin Lancer
+ManaCost:2 W
+Types:Creature Human Knight
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Knight.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another Knight enters the battlefield under your control, CARDNAME gets +1/+1 and gains vigilance until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1 | KW$ Vigilance
+DeckNeeds:Type$Knight
+Oracle:Whenever another Knight enters the battlefield under your control, Zhalfirin Lancer gets +1/+1 and gains vigilance until end of turn.

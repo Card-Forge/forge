@@ -3,10 +3,9 @@ ManaCost:1 R
 Types:Creature Human Wizard
 PT:2/2
 K:Prowess
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ Z | SVarCompare$ GE20 | Execute$ TrigSeek | TriggerDescription$ When CARDNAME enters the battlefield, if there are twenty or more instant and/or sorcery cards among cards in your graveyard, hand, and library, you may discard a card. If you do, seek an instant or sorcery card.
-SVar:TrigSeek:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ 1 | ChangeType$ Instant,Sorcery
-SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
-SVar:Y:Count$ValidLibrary Instant.YouOwn,Sorcery.YouOwn/Plus.X
-SVar:Z:Count$ValidHand Instant.YouOwn,Sorcery.YouOwn/Plus.Y
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE20 | Execute$ TrigSeek | TriggerDescription$ When CARDNAME enters the battlefield, if there are twenty or more instant and/or sorcery cards among cards in your graveyard, hand, and library, you may discard a card. If you do, seek an instant or sorcery card.
+SVar:TrigSeek:AB$ Seek | Cost$ Discard<1/Card> | Type$ Instant,Sorcery
+SVar:X:Count$ValidGraveyard,Library,Hand Instant.YouOwn,Sorcery.YouOwn
 DeckNeeds:Type$Instant|Sorcery
+DeckHas:Ability$Discard
 Oracle:When Frenzied Geistblaster enters the battlefield, if there are twenty or more instant and/or sorcery cards among cards in your graveyard, hand, and library, you may discard a card. If you do, seek an instant or sorcery card.

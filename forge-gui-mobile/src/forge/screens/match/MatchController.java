@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import forge.adventure.scene.DuelScene;
+import forge.adventure.util.Config;
 import forge.ai.GameState;
 import forge.deck.Deck;
 import forge.game.player.Player;
 import forge.item.IPaperCard;
-import forge.screens.TransitionScreen;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
@@ -312,14 +312,12 @@ public class MatchController extends AbstractGuiGame {
     @Override
     public void finishGame() {
         if (Forge.isMobileAdventureMode) {
-            Forge.setCursor(null, "0");
-            if (DuelScene.instance().hasCallbackExit())
+            if (Config.instance().getSettingData().disableWinLose) {
+                Forge.setCursor(null, "0");
+                if (!DuelScene.instance().hasCallbackExit())
+                    DuelScene.instance().exitDuelScene();
                 return;
-            Forge.setTransitionScreen(new TransitionScreen(() -> {
-                Forge.clearTransitionScreen();
-                Forge.clearCurrentScreen();
-            }, Forge.takeScreenshot(), false, false));
-            return;
+            }
         }
         if (hasLocalPlayers() || getGameView().isMatchOver()) {
             view.setViewWinLose(new ViewWinLose(getGameView()));
@@ -467,6 +465,13 @@ public class MatchController extends AbstractGuiGame {
     public void updateLives(final Iterable<PlayerView> livesUpdate) {
         for (final PlayerView p : livesUpdate) {
             view.getPlayerPanel(p).updateLife();
+        }
+    }
+
+    @Override
+    public void updateShards(final Iterable<PlayerView> livesUpdate) {
+        for (final PlayerView p : livesUpdate) {
+            view.getPlayerPanel(p).updateShards();
         }
     }
 
@@ -627,8 +632,8 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions) {
-        return SOptionPane.showInputDialog(message, title, icon, initialInput, inputOptions);
+    public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions, boolean isNumeric) {
+        return SOptionPane.showInputDialog(message, title, icon, initialInput, inputOptions, isNumeric);
     }
 
     @Override

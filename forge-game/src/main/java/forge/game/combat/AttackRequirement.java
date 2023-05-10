@@ -14,7 +14,6 @@ import com.google.common.collect.Lists;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.card.Card;
-import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
@@ -87,13 +86,14 @@ public class AttackRequirement {
         for (final GameEntity entity : combinedDefMap.keySet()) {
             boolean removeThis = false;
             if (entity instanceof Player) {
-                if (((Player) entity).hasLost()) {
+                if (!((Player) entity).isInGame()) {
                     removeThis = true;
                 }
             } else if (entity instanceof Card) {
                 final Card reqPW = (Card) entity;
-                final List<Card> actualPW = CardLists.getValidCards(attacker.getController().getOpponents().getCardsIn(ZoneType.Battlefield), "Card.StrictlySelf", null, reqPW, null);
-                if (reqPW.getController().hasLost() || actualPW.isEmpty()) {
+                final Card gamePW = game.getCardState(reqPW, null);
+                if (gamePW == null || !gamePW.getController().isInGame() || !gamePW.equalsWithTimestamp(reqPW)
+                        || (!gamePW.isBattle() && !gamePW.getController().isOpponentOf(attacker.getController()))) {
                     removeThis = true;
                 }
             }

@@ -596,6 +596,17 @@ public class BoosterGenerator {
 
             Predicate<PaperCard> predicateRare = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
             ps.addAll(Iterables.filter(src, predicateRare), 2);
+        } else if (mainCode.equalsIgnoreCase(BoosterSlots.UNCOMMON_RARE_MYTHIC)) {
+            // Extended version of RARE_MYTHIC, used for Alchemy slots
+
+            Predicate<PaperCard> predicateMythic = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_MYTHIC_RARE, extraPred);
+            ps.addAll(Iterables.filter(src, predicateMythic));
+
+            Predicate<PaperCard> predicateRare = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
+            ps.addAll(Iterables.filter(src, predicateRare), 2);
+
+            Predicate<PaperCard> predicateUncommon = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_UNCOMMON, extraPred);
+            ps.addAll(Iterables.filter(src, predicateUncommon), 4);
         } else {
             throw new IllegalArgumentException("Booster generator: operator could not be parsed - " + mainCode);
         }

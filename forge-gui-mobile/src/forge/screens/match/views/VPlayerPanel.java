@@ -260,6 +260,10 @@ public class VPlayerPanel extends FContainer {
         lblLife.update();
     }
 
+    public void updateShards() {
+        lblLife.updateShards();
+    }
+
     public void updateManaPool() {
         tabManaPool.update();
     }
@@ -468,7 +472,7 @@ public class VPlayerPanel extends FContainer {
         private int energyCounters = player.getCounters(CounterEnumType.ENERGY);
         private int experienceCounters = player.getCounters(CounterEnumType.EXPERIENCE);
         private int ticketCounters = player.getCounters(CounterEnumType.TICKET);
-        private int manaShards = player.getCounters(CounterEnumType.MANASHARDS);
+        private int manaShards = player.getNumManaShards();
         private String lifeStr = String.valueOf(life);
 
         private LifeLabel() {
@@ -497,7 +501,7 @@ public class VPlayerPanel extends FContainer {
 
             energyCounters = player.getCounters(CounterEnumType.ENERGY);
             experienceCounters = player.getCounters(CounterEnumType.EXPERIENCE);
-            manaShards = player.getCounters(CounterEnumType.MANASHARDS);
+            manaShards = player.getNumManaShards();
 
             //when gui player loses life, vibrate device for a length of time based on amount of life lost
             if (vibrateDuration > 0 && MatchController.instance.isLocalPlayer(player) &&
@@ -505,6 +509,9 @@ public class VPlayerPanel extends FContainer {
                 //never vibrate more than two seconds regardless of life lost or poison counters gained
                 Gdx.input.vibrate(Math.min(vibrateDuration, 2000));
             }
+        }
+        private void updateShards() {
+            manaShards = player.getNumManaShards();
         }
 
         @Override

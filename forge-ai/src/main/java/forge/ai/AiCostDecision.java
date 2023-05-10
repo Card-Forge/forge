@@ -35,16 +35,11 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
 public class AiCostDecision extends CostDecisionMakerBase {
-    private final SpellAbility ability;
-    private final Card source;
-
     private final CardCollection discarded;
     private final CardCollection tapped;
 
     public AiCostDecision(Player ai0, SpellAbility sa, final boolean effect) {
-        super(ai0, effect);
-        ability = sa;
-        source = ability.getHostCard();
+        super(ai0, effect, sa, sa.getHostCard());
 
         discarded = new CardCollection();
         tapped = new CardCollection();
@@ -173,11 +168,11 @@ public class AiCostDecision extends CostDecisionMakerBase {
         if (cost.getFrom().equals(ZoneType.Library)) {
             return PaymentDecision.card(player.getCardsIn(ZoneType.Library, c));
         }
-        else if (cost.sameZone) {
+        else if (cost.zoneRestriction == 0) {
             // TODO Determine exile from same zone for AI
             return null;
         } else {
-            CardCollectionView chosen = ComputerUtil.chooseExileFrom(player, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c, ability);
+            CardCollectionView chosen = ComputerUtil.chooseExileFrom(player, cost, source, c, ability);
             return null == chosen ? null : PaymentDecision.card(chosen);
         }
     }
@@ -265,7 +260,8 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         int c = cost.getAbilityAmount(ability);
 
-        final CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, source, ability);
+        CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, source, ability);
+        typeList = CardLists.filter(typeList, crd -> crd.canBeControlledBy(player));
 
         if (typeList.size() < c) {
             return null;
@@ -339,9 +335,9 @@ public class AiCostDecision extends CostDecisionMakerBase {
         CardCollectionView list;
 
         if (cost.isSameZone()) {
-            list = new CardCollection(game.getCardsIn(cost.getFrom()));
+            list = game.getCardsIn(cost.getFrom());
         } else {
-            list = new CardCollection(player.getCardsIn(cost.getFrom()));
+            list = player.getCardsIn(cost.getFrom());
         }
 
         int c = cost.getAbilityAmount(ability);

@@ -1,0 +1,17 @@
+treasure.png
+size: 64,144
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none           
+Idle 
+  xy: 0, 128
+  size: 16, 16      
+Idle 
+  xy: 16, 128
+  size: 16, 16 
+Idle 
+  xy: 32, 128
+  size: 16, 16 
+Idle 
+  xy: 48, 128
+  size: 16, 16     

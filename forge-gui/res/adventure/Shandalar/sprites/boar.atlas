@@ -1,0 +1,68 @@
+boar.png
+size: 256,192
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar      
+  xy: 98, 143
+  size: 16, 16     
+Idle 
+  xy: 00, 11
+  size: 32, 21 
+Idle 
+  xy: 32, 11
+  size: 32, 21  
+Idle 
+  xy: 64, 11
+  size: 32, 21  
+Idle 
+  xy: 96, 11
+  size: 32, 21  
+Walk
+  xy: 0, 40
+  size: 32, 24
+Walk
+  xy: 32, 40
+  size: 32, 24   
+Walk
+  xy: 64, 40
+  size: 32, 24   
+Walk
+  xy: 96, 40
+  size: 32, 24   
+Walk
+  xy: 128, 40
+  size: 32, 24   
+Walk 
+  xy: 160, 40
+  size: 32, 24
+Walk 
+  xy: 192, 40
+  size: 32, 24  
+Walk 
+  xy: 224, 40
+  size: 32, 24   
+Attack 
+  xy: 0, 64
+  size: 32, 32 
+Attack 
+  xy: 32, 64
+  size: 32, 32 
+Attack 
+  xy: 64, 64
+  size: 32, 32 
+Attack 
+  xy: 96, 64
+  size: 32, 32       
+Death 
+  xy: 0, 96
+  size: 32, 32      
+Death 
+  xy: 32, 96
+  size: 32, 32 
+Death 
+  xy: 64, 96
+  size: 32, 32 
+Death 
+  xy: 96, 96
+  size: 32, 32

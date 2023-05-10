@@ -8,7 +8,6 @@ import forge.StaticData;
 import forge.adventure.data.GeneratedDeckData;
 import forge.adventure.data.GeneratedDeckTemplateData;
 import forge.adventure.data.RewardData;
-import forge.adventure.world.WorldSave;
 import forge.card.*;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
@@ -19,6 +18,7 @@ import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
+import forge.util.Aggregates;
 
 import java.io.File;
 import java.util.*;
@@ -297,13 +297,14 @@ public class CardUtil {
         return result;
     }
 
-    public static List<PaperCard> generateCards(Iterable<PaperCard> cards,final RewardData data, final int count)
+    public static List<PaperCard> generateCards(Iterable<PaperCard> cards,final RewardData data, final int count, Random r)
     {
+
         final List<PaperCard> result = new ArrayList<>();
         List<PaperCard> pool = getPredicateResult(cards, data);
         if (pool.size() > 0) {
             for (int i = 0; i < count; i++) {
-                PaperCard candidate = pool.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(pool.size()));
+                PaperCard candidate = pool.get(r.nextInt(pool.size()));
                 if (candidate != null) {
                     result.add(candidate);
                 }
@@ -349,7 +350,7 @@ public class CardUtil {
 
     public static Deck generateDeck(GeneratedDeckData data, CardEdition starterEdition, boolean discourageDuplicates)
     {
-        List<String> editionCodes = (starterEdition != null)?Arrays.asList(starterEdition.getCode(), starterEdition.getCode2()):Arrays.asList("JMP", "J22", "DMU","BRO");
+        List<String> editionCodes = (starterEdition != null)?Arrays.asList(starterEdition.getCode(), starterEdition.getCode2()):Arrays.asList("JMP", "J22", "DMU", "BRO", "ONE", "MOM");
         Deck deck= new Deck(data.name);
         if(data.mainDeck!=null)
         {
@@ -386,7 +387,7 @@ public class CardUtil {
                     if (!editionCodes.contains(template.getEdition().split("\\s",2)[0]))
                         continue;
                     List<PaperCard> packContents = new UnOpenedProduct(template).get();
-                    if (packContents.size() < 20 | packContents.size() > 25)
+                    if (packContents.size() < 18 | packContents.size() > 25)
                         continue;
                     if (packContents.stream().filter(x -> x.getName().equals(targetName)).count() >=3)
                         packCandidates.putIfAbsent(template.getEdition(), packContents);
@@ -411,6 +412,11 @@ public class CardUtil {
                 else{
                     Object[] keys = packCandidates.keySet().toArray();
                     selectedPack = packCandidates.get((String)keys[Current.world().getRandom().nextInt(keys.length)]);
+                }
+                //if the packContents size above is below 20, just get random card
+                int size = 20 - selectedPack.size();
+                for (int c = 0; c < size; c++) {
+                    selectedPack.add(Aggregates.random(selectedPack));
                 }
                 deck.getOrCreate(DeckSection.Main).addAllFlat(selectedPack);
             }
@@ -642,7 +648,9 @@ public class CardUtil {
         FileHandle handle = Config.instance().getFile(path);
         if (handle.exists())
             return generateDeck(json.fromJson(GeneratedDeckData.class, handle), starterEdition, discourageDuplicates);
-        return null;
+        Deck deck = DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, true, false, true);
+        System.err.println("Error loading JSON: " + handle.path() + "\nGenerating random deck: "+deck.getName());
+        return deck;
 
     }
 

@@ -13,6 +13,10 @@ import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 
 public abstract class CostPartWithTrigger extends CostPartWithList {
+    /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
 
     public CostPartWithTrigger(final String amount, final String type, final String description) {
         super(amount, type, description);

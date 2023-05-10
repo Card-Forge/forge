@@ -9,6 +9,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardState;
+import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
@@ -145,6 +146,13 @@ public class ForgeScript {
                 }
             }
             return false;
+        } else if (property.equals("hasOtherActivatedAbility")) {
+            for (final SpellAbility sa : cardState.getSpellAbilities()) {
+                if (sa.isActivatedAbility() && !sa.equals(spellAbility)) {
+                    return true;
+                }
+            }
+            return false;
         } else if (property.equals("hasManaAbility")) {
             if (Iterables.any(cardState.getSpellAbilities(), SpellAbilityPredicates.isManaAbility())) {
                 return true;
@@ -188,10 +196,12 @@ public class ForgeScript {
         } else if (property.startsWith("XCost")) {
             String comparator = property.substring(5, 7);
             int y = AbilityUtils.calculateAmount(sa.getHostCard(), property.substring(7), sa);
-            return Expressions.compare(sa.getXManaCostPaid(), comparator, y);
+            return Expressions.compare(sa.getXManaCostPaid() == null ? 0 : sa.getXManaCostPaid(), comparator, y);
         } else if (property.equals("hasTapCost")) {
             Cost cost = sa.getPayCosts();
             return cost != null && cost.hasTapCost();
+        } else if (property.equals("Backup")) {
+            return sa.isBackup();
         } else if (property.equals("Blitz")) {
             return sa.isBlitz();
         } else if (property.equals("Buyback")) {
@@ -236,6 +246,13 @@ public class ForgeScript {
             return sa.hasParam("Nightbound");
         } else if (property.equals("paidPhyrexianMana")) {
             return sa.getSpendPhyrexianMana() > 0;
+        } else if (property.equals("ChapterNotLore")) {
+            if (!sa.isChapter()) {
+                return false;
+            }
+            if (sa.getChapter() == sa.getHostCard().getCounters(CounterEnumType.LORE)) {
+                return false;
+            }
         } else if (property.equals("LastChapter")) {
             return sa.isLastChapter();
         } else if (property.startsWith("ManaSpent")) {
@@ -244,18 +261,26 @@ public class ForgeScript {
             int y = AbilityUtils.calculateAmount(source, k[1].substring(2), spellAbility);
             return Expressions.compare(sa.getTotalManaSpent(), comparator, y);
         } else if (property.startsWith("ManaFrom")) {
-            final String fromWhat = property.substring(8);
-            boolean found = false;
+            String fromWhat = property.substring(8);
+            String[] parts = null;
+            if (fromWhat.contains("_")) {
+                parts = fromWhat.split("_");
+                fromWhat = parts[0];
+            }
+            int toFind = parts != null ? AbilityUtils.calculateAmount(source, parts[1], spellAbility) : 1;
+            int found = 0;
             for (Mana m : sa.getPayingMana()) {
                 final Card manaSource = m.getSourceCard();
                 if (manaSource != null) {
                     if (manaSource.isValid(fromWhat, sourceController, source, spellAbility)) {
-                        found = true;
-                        break;
+                        found++;
+                        if (found == toFind) {
+                            break;
+                        }
                     }
                 }
             }
-            return found;
+            return (found == toFind);
         } else if (property.equals("MayPlaySource")) {
             StaticAbility m = sa.getMayPlay();
             if (m == null) {

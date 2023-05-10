@@ -16,6 +16,10 @@ public class GifAnimation extends ForgeAnimation {
         animation = GifDecoder.loadGIFAnimation(PlayMode.NORMAL, Gdx.files.absolute(filename).read());
     }
 
+    public GifAnimation(String filename, PlayMode mode) {
+        animation = GifDecoder.loadGIFAnimation(mode, Gdx.files.absolute(filename).read());
+    }
+
     @Override
     public void start() {
         currentFrame = animation.getKeyFrame(0);
@@ -37,5 +41,15 @@ public class GifAnimation extends ForgeAnimation {
 
     @Override
     protected void onEnd(boolean endingAll) {
+    }
+
+    public void dispose() {
+        if (animation != null) {
+            for (TextureRegion tr: animation.getKeyFrames()) {
+                try {
+                    tr.getTexture().dispose();
+                } catch (Exception e) {}
+            }
+        }
     }
 }

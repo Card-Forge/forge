@@ -1,0 +1,12 @@
+Name:Nesting Dovehawk
+ManaCost:3 W
+Types:Creature Bird
+PT:2/2
+K:Flying
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigPopulate | TriggerDescription$ At the beginning of combat on your turn, populate. (Create a token that's a copy of a creature token you control.)
+SVar:TrigPopulate:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | Populate$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.token+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature token enters the battlefield under your control, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters & Ability$Token
+DeckNeeds:Ability$Token
+Oracle:Flying\nAt the beginning of combat on your turn, populate. (Create a token that's a copy of a creature token you control.)\nWhenever a creature token enters the battlefield under your control, put a +1/+1 counter on Nesting Dovehawk.

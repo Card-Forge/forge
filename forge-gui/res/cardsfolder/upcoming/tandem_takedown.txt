@@ -1,0 +1,6 @@
+Name:Tandem Takedown
+ManaCost:1 G G
+Types:Instant
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to two target creatures you control | NumAtt$ +1 | AILogic$ PowerDmg | SubAbility$ DBEachDamage | StackDescription$ REP Up to two target creatures you control_{c:ThisTargetedCard} | SpellDescription$ Up to two target creatures you control each get +1/+0 until end of turn.
+SVar:DBEachDamage:DB$ EachDamage | ValidTgts$ Creature,Planeswalker,Battle | TgtPrompt$ Select another target creature, planeswalker, or battle | TargetUnique$ True | DefinedDamagers$ ParentTarget | NumDmg$ Count$CardPower | StackDescription$ REP another target creature, planeswalker, or battle_{c:ThisTargetedCard} | SpellDescription$ They each deal damage equal to their power to another target creature, planeswalker, or battle.
+Oracle:Up to two target creatures you control each get +1/+0 until end of turn. They each deal damage equal to their power to another target creature, planeswalker, or battle.

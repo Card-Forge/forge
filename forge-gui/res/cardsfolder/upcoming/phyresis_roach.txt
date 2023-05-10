@@ -1,0 +1,12 @@
+Name:Phyresis Roach
+ManaCost:G
+Types:Creature Phyrexian Insect
+PT:1/1
+K:Toxic:1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, Insects you control and Insect cards in your graveyard, hand, and library perpetually gain toxic 1.
+SVar:TrigEffect:DB$ Effect | Name$ Phyresis Roach's Perpetual Effect | RememberObjects$ Valid Insect.YouCtrl,ValidGraveyard Insect.YouOwn,ValidHand Insect.YouOwn,ValidLibrary Insect.YouOwn | StaticAbilities$ PerpetualToxic | Duration$ Permanent | Triggers$ Update
+SVar:PerpetualToxic:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Toxic:1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ These cards perpetually gain toxic 1.
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+DeckHints:Type$Insect
+Oracle:Toxic 1\nWhenever Phyresis Roach deals combat damage to a player, Insects you control and Insect cards in your graveyard, hand, and library perpetually gain toxic 1.

@@ -1,0 +1,10 @@
+Name:Faerie Mastermind
+ManaCost:1 U
+Types:Creature Faerie Rogue
+PT:2/1
+K:Flash
+K:Flying
+T:Mode$ Drawn | ValidPlayer$ Opponent | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent draws their second card each turn, you draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+A:AB$ Draw | Cost$ 3 U | Defined$ Player | SpellDescription$ Each player draws a card.
+Oracle:Flash\nFlying\nWhenever an opponent draws their second card each turn, you draw a card.\n{3}{U}: Each player draws a card.

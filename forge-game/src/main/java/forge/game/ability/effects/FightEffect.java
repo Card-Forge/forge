@@ -10,12 +10,15 @@ import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.util.CardTranslation;
+import forge.util.Lang;
 import forge.util.Localizer;
 
 public class FightEffect extends DamageBaseEffect {
@@ -30,10 +33,17 @@ public class FightEffect extends DamageBaseEffect {
         List<Card> fighters = getFighters(sa);
 
         if (fighters.size() > 1) {
-            sb.append(fighters.get(0)).append(" fights ").append(fighters.get(1));
+            sb.append(fighters.get(0)).append(" fights ").append(fighters.get(1)).append(".");
         }
         else if (fighters.size() == 1) {
-            sb.append(fighters.get(0)).append(" fights unknown");
+            sb.append(fighters.get(0)).append(" fights.");
+        }
+        if (sa.hasParam("ReplaceDyingDefined")) {
+            CardCollection cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("ReplaceDyingDefined"), sa);
+            if (!cards.isEmpty()) {
+                sb.append(" If ").append(Lang.joinHomogenous(cards, null, "or"));
+                sb.append(" would die this turn, exile it instead.");
+            }
         }
         return sb.toString();
     }
@@ -84,10 +94,10 @@ public class FightEffect extends DamageBaseEffect {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
 
-        List<Card> tgts = null;
+        CardCollectionView tgts = null;
         if (sa.usesTargeting()) {
-            tgts = Lists.newArrayList(sa.getTargets().getTargetCards());
-            if (tgts.size() > 0) {
+            tgts = sa.getTargets().getTargetCards();
+            if (!tgts.isEmpty()) {
                 fighter1 = tgts.get(0);
             }
         }
@@ -104,7 +114,7 @@ public class FightEffect extends DamageBaseEffect {
                 // 701.12b If a creature instructed to fight is no longer on the battlefield or is no longer a creature,
                 // no damage is dealt. If a creature is an illegal target
                 // for a resolving spell or ability that instructs it to fight, no damage is dealt.
-                if (g == null || !g.equalsWithTimestamp(d) || !d.isInPlay() || !d.isCreature()) {
+                if (g == null || !g.equalsWithTimestamp(d) || !d.isInPlay() || d.isPhasedOut() || !d.isCreature()) {
                     // Test to see if the card we're trying to add is in the expected state
                     continue;
                 }
@@ -117,8 +127,9 @@ public class FightEffect extends DamageBaseEffect {
                 if (defined.size() > 1 && fighter1 == null) {
                     fighter1 = defined.get(0);
                     fighter2 = defined.get(1);
-                } else {
-                    fighter2 = defined.get(0);
+                } else { // template often Defined$ ParentTarget vs. Targeted - this yields good StackDesc order
+                    fighter2 = fighter1;
+                    fighter1 = defined.get(0);
                 }
             }
         } else if (tgts.size() > 1) {
@@ -136,7 +147,6 @@ public class FightEffect extends DamageBaseEffect {
     }
 
     private void dealDamage(final SpellAbility sa, Card fighterA, Card fighterB) {
-        boolean fightToughness = sa.hasParam("FightWithToughness");
 
         boolean usedDamageMap = true;
         CardDamageMap damageMap = sa.getDamageMap();
@@ -157,11 +167,11 @@ public class FightEffect extends DamageBaseEffect {
 
         // 701.12c If a creature fights itself, it deals damage to itself equal to twice its power.
 
-        final int dmg1 = fightToughness ? fighterA.getNetToughness() : fighterA.getNetPower();
+        final int dmg1 = fighterA.getNetPower();
         if (fighterA.equals(fighterB)) {
             damageMap.put(fighterA, fighterA, dmg1 * 2);
         } else {
-            final int dmg2 = fightToughness ? fighterB.getNetToughness() : fighterB.getNetPower();
+            final int dmg2 = fighterB.getNetPower();
 
             damageMap.put(fighterA, fighterB, dmg1);
             damageMap.put(fighterB, fighterA, dmg2);

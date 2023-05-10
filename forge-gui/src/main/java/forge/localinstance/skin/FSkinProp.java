@@ -268,7 +268,9 @@ public enum FSkinProp {
     ICO_QUEST_BIG_BAG     (new int[] {480, 1360, 160, 160}, PropType.ICON),
 
     //adventure icons
-    ICO_MANASHARD         (new int[] {0,0, 100,100}, PropType.ICON),
+    ICO_MANASHARD         (new int[] {2, 304, 100, 100}, PropType.ADVENTURE),
+    ICO_ADVLOGO           (new int[] {2, 2, 300, 300}, PropType.ADVENTURE),
+    ICO_ADVDECKBOX        (new int[] {111, 365, 192, 240}, PropType.ADVENTURE),
 
     //menu icon
     ICO_MENU_GALAXY       (new int[] {0, 1520, 80, 80}, PropType.ICON),
@@ -361,6 +363,7 @@ public enum FSkinProp {
     IMG_PLANESWALKER    (new int[] {330, 740, 80, 80}, PropType.MANAICONS),
     IMG_PACK            (new int[] {80, 760, 40, 40}, PropType.IMAGE),
     IMG_SORCERY         (new int[] {412, 740, 80, 80}, PropType.MANAICONS),
+    IMG_BATTLE          (new int[] {330, 822, 80, 80}, PropType.MANAICONS),
     IMG_COMMANDER       (new int[] {120, 760, 40, 40}, PropType.IMAGE),
     IMG_ALCHEMY         (new int[] {248, 822, 80, 80}, PropType.MANAICONS),
 
@@ -484,7 +487,9 @@ public enum FSkinProp {
 
     IMG_QUEST_DRAFT_DECK (new int[] {0, 0, 680, 475}, PropType.IMAGE),
     //COMMANDER
-    IMG_ABILITY_COMMANDER      (new int[] {330, 576, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_COMMANDER  (new int[] {330, 576, 80, 80}, PropType.ABILITY),
+    //TOXIC
+    IMG_ABILITY_TOXIC      (new int[] {630, 1536, 46, 46}, PropType.ICON),
     //Ability Icons
     IMG_ABILITY_DEATHTOUCH     (new int[] {2, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_DEFENDER       (new int[] {84, 2, 80, 80}, PropType.ABILITY),

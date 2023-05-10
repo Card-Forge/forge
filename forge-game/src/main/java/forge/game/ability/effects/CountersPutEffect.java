@@ -169,14 +169,13 @@ public class CountersPutEffect extends SpellAbilityEffect {
         return stringBuilder.toString();
     }
 
-    protected void resolvePerType(SpellAbility sa, final Player placer, CounterType counterType, int counterAmount,
+    protected void resolvePerType(SpellAbility sa, Player placer, CounterType counterType, int counterAmount,
                                   GameEntityCounterTable table, boolean stopForTypes) {
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
         final Player activator = sa.getActivatingPlayer();
         final PlayerController pc = activator.getController();
         final boolean etbcounter = sa.hasParam("ETB");
-        final int max = sa.hasParam("MaxFromEffect") ? Integer.parseInt(sa.getParam("MaxFromEffect")) : -1;
 
         boolean existingCounter = sa.hasParam("CounterType") && sa.getParam("CounterType").equals("ExistingCounter");
         boolean eachExistingCounter = sa.hasParam("EachExistingCounter");
@@ -252,9 +251,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         } else {
             if (sa.hasParam("Defined") && sa.getParam("Defined").contains(" & ")) {
-                for (String def : sa.getParam("Defined").split(" & ")) {
-                    tgtObjects.addAll(AbilityUtils.getDefinedEntities(card, def, sa));
-                }
+                tgtObjects.addAll(AbilityUtils.getDefinedEntities(card, sa.getParam("Defined").split(" & "), sa));
             } else {
                 tgtObjects.addAll(getDefinedEntitiesOrTargeted(sa, "Defined"));
             }
@@ -453,10 +450,6 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     }
                     counterAmount = sa.usesTargeting() && sa.isDividedAsYouChoose() ? sa.getDividedValue(gameCard)
                             : counterAmount;
-                    if (max != -1) {
-                        counterAmount = Math.max(Math.min(max - gameCard.getCounters(counterType), counterAmount),
-                                0);
-                    }
                     if (sa.hasParam("UpTo")) {
                         int min = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("UpToMin", "0"), sa);
                         Map<String, Object> params = Maps.newHashMap();
@@ -486,10 +479,6 @@ public class CountersPutEffect extends SpellAbilityEffect {
                                 || StaticAbilityAdapt.anyWithAdapt(sa, gameCard))) {
                             continue;
                         }
-                    }
-
-                    if (sa.hasParam("ReadAhead")) {
-                        gameCard.setReadAhead(counterAmount);
                     }
 
                     if (sa.hasParam("Tribute")) {
@@ -525,10 +514,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         String message = Localizer.getInstance().getMessage(
                                 "lblDoYouWantPutTargetP1P1CountersOnCard", String.valueOf(counterAmount),
                                 CardTranslation.getTranslatedName(gameCard.getName()));
-                        Player chooser = pc.chooseSingleEntityForEffect(activator.getOpponents(), sa,
+                        placer = pc.chooseSingleEntityForEffect(activator.getOpponents(), sa,
                                 Localizer.getInstance().getMessage("lblChooseAnOpponent"), params);
 
-                        if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message, null)) {
+                        if (placer.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message, null)) {
                             gameCard.setTributed(true);
                         } else {
                             continue;

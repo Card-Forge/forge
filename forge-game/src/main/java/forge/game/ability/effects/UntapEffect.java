@@ -43,20 +43,13 @@ public class UntapEffect extends SpellAbilityEffect {
         } else if (sa.hasParam("UntapExactly")) {
             untapChoose(sa, true);
         } else {
-            final CardCollection untargetedCards = CardUtil.getRadiance(sa);
-            for (final Card tgtC : getTargetCards(sa)) {
+            final CardCollection affectedCards = getTargetCards(sa);
+            affectedCards.addAll(CardUtil.getRadiance(sa));
+
+            for (final Card tgtC : affectedCards) {
                 if (tgtC.isPhasedOut()) {
                     continue;
                 }
-                if (tgtC.isInPlay()) {
-                    tgtC.untap(true);
-                }
-                if (sa.hasParam("ETB")) {
-                    // do not fire triggers
-                    tgtC.setTapped(false);
-                }
-            }
-            for (final Card tgtC : untargetedCards) {
                 if (tgtC.isInPlay()) {
                     tgtC.untap(true);
                 }
@@ -79,7 +72,7 @@ public class UntapEffect extends SpellAbilityEffect {
      *            whether the untapping is mandatory.
      */
     private static void untapChoose(final SpellAbility sa, final boolean mandatory) {
-        final int num = Integer.parseInt(sa.getParam("Amount"));
+        final int num = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
         final String valid = sa.getParam("UntapType");
 
         for (final Player p : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa)) {

@@ -1,0 +1,11 @@
+Name:Hangar Scrounger
+ManaCost:2 R
+Types:Creature Dwarf Pilot
+PT:2/1
+K:Backup:1:BackupAbility
+SVar:BackupAbility:DB$ Animate | Triggers$ TapTrig
+SVar:TapTrig:Mode$ Taps | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever this creature becomes tapped, you may discard a card. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card>
+T:Mode$ Taps | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever this creature becomes tapped, you may discard a card. If you do, draw a card.
+DeckHas:Ability$Counters|Discard
+Oracle:Backup 1 (When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following abilities until end of turn.)\nWhenever this creature becomes tapped, you may discard a card. If you do, draw a card.

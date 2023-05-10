@@ -123,20 +123,20 @@ public class GameStateEvaluator {
         int opponentIndex = 1;
         int opponentLife = 0;
         for (Player opponent : aiPlayer.getOpponents()) {
-                debugPrint("  Opponent " + opponentIndex + " life: -" + opponent.getLife());
-                opponentLife += opponent.getLife();
-                opponentIndex++;
+            debugPrint("  Opponent " + opponentIndex + " life: -" + opponent.getLife());
+            opponentLife += opponent.getLife();
+            opponentIndex++;
         }
         score -= 2* opponentLife / (game.getPlayers().size() - 1);
 
         // evaluate mana base quality
         score += evalManaBase(game, aiPlayer, AIDeckStatistics.fromPlayer(aiPlayer));
         // TODO deal with opponents. Do we want to use perfect information to evaluate their manabase?
-//        int opponentManaScore = 0;
-//        for (Player opponent : aiPlayer.getOpponents()) {
-//            opponentManaScore += evalManaBase(game, opponent);
-//        }
-//        score -= opponentManaScore / (game.getPlayers().size() - 1);
+        //int opponentManaScore = 0;
+        //for (Player opponent : aiPlayer.getOpponents()) {
+        //    opponentManaScore += evalManaBase(game, opponent);
+        //}
+        //score -= opponentManaScore / (game.getPlayers().size() - 1);
 
         // TODO evaluate holding mana open for counterspells
 
@@ -258,7 +258,6 @@ public class GameStateEvaluator {
         // The value should be more than the value of having a card in hand, so if a land has an
         // activated ability but not a mana ability, it will still be played.
         for (SpellAbility m: c.getNonManaAbilities()) {
-
             if (!m.getPayCosts().hasTapCost()) {
                 // probably a manland, rate it higher than a rainbow land
                 value += 25;

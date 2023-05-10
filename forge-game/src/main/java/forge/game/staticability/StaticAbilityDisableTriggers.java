@@ -33,7 +33,7 @@ public class StaticAbilityDisableTriggers {
 
         for (final Card ca : cardList) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
+                if (!stAb.checkConditions(MODE)) {
                     continue;
                 }
 
@@ -54,6 +54,11 @@ public class StaticAbilityDisableTriggers {
         }
 
         if (!stAb.matchesValidParam("ValidCard", regtrig.getHostCard())) {
+            return false;
+        }
+
+        // Trigger currently has no isValid, take Trigger Ability instead
+        if (!stAb.matchesValidParam("ValidTrigger", regtrig.getOverridingAbility())) {
             return false;
         }
 

@@ -1,0 +1,12 @@
+Name:Glissa, Herald of Predation
+ManaCost:3 B G
+Types:Legendary Creature Phyrexian Zombie Elf
+PT:3/5
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ Incubate,Transform,PumpAll | CharmNum$ 1
+SVar:Incubate:DB$ Incubate | Amount$ 2 | Times$ 2 | SpellDescription$ Incubate 2 twice. (To incubate 2, create an Incubator token with two +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+SVar:Transform:DB$ SetState | Defined$ Valid Incubator.token+YouCtrl | Mode$ Transform | SpellDescription$ Transform all Incubator tokens you control.
+SVar:PumpAll:DB$ PumpAll | ValidCards$ Phyrexian.YouCtrl | KW$ First Strike & Deathtouch | SpellDescription$ Phyrexians you control gain first strike and deathtouch until end of turn.
+DeckHas:Ability$Token|Counters & Type$Artifact
+DeckHints:Type$Phyrexian
+Oracle:At the beginning of combat on your turn, choose one —\n• Incubate 2 twice. (To incubate 2, create an Incubator token with two +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)\n• Transform all Incubator tokens you control.\n• Phyrexians you control gain first strike and deathtouch until end of turn.

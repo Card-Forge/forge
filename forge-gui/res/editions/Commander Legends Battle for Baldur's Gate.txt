@@ -3,6 +3,9 @@ Code=CLB
 Date=2022-06-10
 Name=Commander Legends: Battle for Baldur's Gate
 Type=Draft
+Booster=13 Common:fromSheet("CLB cards"), 3 Uncommon:fromSheet("CLB cards"), 1 RareMythic:!fromSheet("CLB legends"):fromSheet("CLB cards"), 1 fromSheet("CLB foils"), 1 fromSheet("CLB backgrounds"), 1 fromSheet("CLB legends")
+Foil=NotSupported
+DoublePick=Always
 ScryfallCode=CLB
 
 [cards]
@@ -957,6 +960,189 @@ ScryfallCode=CLB
 
 [dungeons]
 S Undercity
+
+[foils]
+Abdel Adrian, Gorion's Ward+|CLB
+Ellyn Harbreeze, Busybody+|CLB
+Far Traveler+|CLB
+Flaming Fist+|CLB
+Inspiring Leader+|CLB
+Lae'zel, Vlaakith's Champion+|CLB
+Lulu, Loyal Hollyphant+|CLB
+Noble Heritage+|CLB
+Rasaad yn Bashir+|CLB
+Veteran Soldier+|CLB
+Alora, Merry Thief+|CLB
+Candlekeep Sage+|CLB
+Dungeon Delver+|CLB
+Feywild Visitor+|CLB
+Gale, Waterdeep Prodigy+|CLB
+Imoen, Mystic Trickster+|CLB
+Renari, Merchant of Marvels+|CLB
+Shameless Charlatan+|CLB
+Sword Coast Sailor+|CLB
+Vhal, Candlekeep Researcher+|CLB
+Volo, Itinerant Scholar+|CLB
+Agent of the Iron Throne+|CLB
+Agent of the Shadow Thieves+|CLB
+Criminal Past+|CLB
+Cultist of the Absolute+|CLB
+Safana, Calimport Cutthroat+|CLB
+Sarevok, Deathbringer+|CLB
+Scion of Halaster+|CLB
+Shadowheart, Dark Justiciar+|CLB
+Sivriss, Nightmare Speaker+|CLB
+Viconia, Drow Apostate+|CLB
+Amber Gristle O'Maul+|CLB
+Dragon Cultist+|CLB
+Ganax, Astral Hunter+|CLB
+Guild Artisan+|CLB
+Gut, True Soul Zealot+|CLB
+Karlach, Fury of Avernus+|CLB
+Livaan, Cultist of Tiamat+|CLB
+Popular Entertainer+|CLB
+Street Urchin+|CLB
+Tavern Brawler+|CLB
+Wyll, Blade of Frontiers+|CLB
+Acolyte of Bahamut+|CLB
+Cloakwood Hermit+|CLB
+Erinis, Gloom Stalker+|CLB
+Halsin, Emerald Archdruid+|CLB
+Hardy Outlander+|CLB
+Jaheira, Friend of the Forest+|CLB
+Master Chef+|CLB
+Raised by Giants+|CLB
+Skanos Dragonheart+|CLB
+Wilson, Refined Grizzly+|CLB
+Alaundo the Seer+|CLB
+Astarion, the Decadent+|CLB
+Baba Lysaga, Night Witch+|CLB
+Bane, Lord of Darkness+|CLB
+Bhaal, Lord of Murder+|CLB
+Cadira, Caller of the Small+|CLB
+Commander Liara Portyr+|CLB
+The Council of Four+|CLB
+Duke Ulder Ravengard+|CLB
+Dynaheir, Invoker Adept+|CLB
+Gluntch, the Bestower+|CLB
+Gorion, Wise Mentor+|CLB
+Jan Jansen, Chaos Crafter+|CLB
+Jon Irenicus, Shattered One+|CLB
+Kagha, Shadow Archdruid+|CLB
+Korlessa, Scale Singer+|CLB
+Lozhan, Dragons' Legacy+|CLB
+Mahadi, Emporium Master+|CLB
+Mazzy, Truesword Paladin+|CLB
+Miirym, Sentinel Wyrm+|CLB
+Minthara, Merciless Soul+|CLB
+Myrkul, Lord of Bones+|CLB
+Neera, Wild Mage+|CLB
+Nine-Fingers Keene+|CLB
+Oji, the Exquisite Blade+|CLB
+Raggadragga, Goreguts Boss+|CLB
+Raphael, Fiendish Savior+|CLB
+Rilsa Rael, Kingpin+|CLB
+Thrakkus the Butcher+|CLB
+Zevlor, Elturel Exile+|CLB
+
+[backgrounds]
+Acolyte of Bahamut|CLB
+Agent of the Iron Throne|CLB
+Agent of the Shadow Thieves|CLB
+Candlekeep Sage|CLB
+Clan Crafter|CLB
+Cloakwood Hermit|CLB
+Criminal Past|CLB
+Cultist of the Absolute|CLB
+Dragon Cultist|CLB
+Dungeon Delver|CLB
+Faceless One|CLB
+Far Traveler|CLB
+Feywild Visitor|CLB
+Flaming Fist|CLB
+Folk Hero|CLB
+Guild Artisan|CLB
+Hardy Outlander|CLB
+Haunted One|CLB
+Inspiring Leader|CLB
+Master Chef|CLB
+Noble Heritage|CLB
+Passionate Archaeologist|CLB
+Popular Entertainer|CLB
+Raised by Giants|CLB
+Scion of Halaster|CLB
+Shameless Charlatan|CLB
+Street Urchin|CLB
+Sword Coast Sailor|CLB
+Tavern Brawler|CLB
+Veteran Soldier|CLB
+
+[legends]
+Abdel Adrian, Gorion's Ward|CLB
+Alaundo the Seer|CLB
+Astarion, the Decadent|CLB
+Baba Lysaga, Night Witch|CLB
+Baeloth Barrityl, Entertainer|CLB
+Bane, Lord of Darkness|CLB
+Bhaal, Lord of Murder|CLB
+Burakos, Party Leader|CLB
+Cadira, Caller of the Small|CLB
+Commander Liara Portyr|CLB
+Drakuseth, Maw of Flames|CLB
+Duke Ulder Ravengard|CLB
+Durnan of the Yawning Portal|CLB
+Eight-and-a-Half-Tails|CLB
+Erinis, Gloom Stalker|CLB
+Felisa, Fang of Silverquill|CLB
+Firkraag, Cunning Instigator|CLB
+Ganax, Astral Hunter|CLB
+Gluntch, the Bestower|CLB
+Gonti, Lord of Luxury|CLB
+Gorion, Wise Mentor|CLB
+Grazilaxx, Illithid Scholar|CLB
+Grumgully, the Generous|CLB
+Gut, True Soul Zealot|CLB
+Halsin, Emerald Archdruid|CLB
+Imoen, Mystic Trickster|CLB
+Jan Jansen, Chaos Crafter|CLB
+Jon Irenicus, Shattered One|CLB
+Kazuul, Tyrant of the Cliffs|CLB
+Keiga, the Tide Star|CLB
+Korlessa, Scale Singer|CLB
+Laelia, the Blade Reforged|CLB
+Lae'zel, Vlaakith's Champion|CLB
+Livaan, Cultist of Tiamat|CLB
+Lozhan, Dragons' Legacy|CLB
+Mahadi, Emporium Master|CLB
+Mazzy, Truesword Paladin|CLB
+Minsc & Boo, Timeless Heroes|CLB
+Myrkul, Lord of Bones|CLB
+Nalia de'Arnise|CLB
+Neera, Wild Mage|CLB
+Nine-Fingers Keene|CLB
+Niv-Mizzet, Parun|CLB
+Oji, the Exquisite Blade|CLB
+Raggadragga, Goreguts Boss|CLB
+Raphael, Fiendish Savior|CLB
+Renari, Merchant of Marvels|CLB
+Rilsa Rael, Kingpin|CLB
+Rowan Kenrith|CLB
+Ryusei, the Falling Star|CLB
+Safana, Calimport Cutthroat|CLB
+Sarevok, Deathbringer|CLB
+Shadowheart, Dark Justiciar|CLB
+Skanos Dragonheart|CLB
+Tasha, the Witch Queen|CLB
+The Council of Four|CLB
+Thrakkus the Butcher|CLB
+Urabrask the Hidden|CLB
+Vhal, Candlekeep Researcher|CLB
+Viconia, Drow Apostate|CLB
+Vivien, Champion of the Wilds|CLB
+Volo, Itinerant Scholar|CLB
+Will Kenrith|CLB
+Wyll, Blade of Frontiers|CLB
+Zevlor, Elturel Exile|CLB
 
 [tokens]
 b_1_1_horror

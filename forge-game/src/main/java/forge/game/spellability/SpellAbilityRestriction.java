@@ -168,10 +168,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (params.containsKey("PresentDefined")) {
             this.setPresentDefined(params.get("PresentDefined"));
         }
-        if (params.containsKey("IsNotPresent")) {
-            this.setIsPresent(params.get("IsNotPresent"));
-            this.setPresentCompare("EQ0");
-        }
 
         // basically PresentCompare for life totals:
         if (params.containsKey("ActivationLifeTotal")) {
@@ -223,9 +219,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     cp = CardUtil.getLKICopy(c);
                 }
 
-                if (!cp.isBestowed()) {
-                    cp.animateBestow(!cp.isLKI());
-                }
+                cp.animateBestow(!cp.isLKI());
             }
         }
 
@@ -375,7 +369,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         // Explicit Aftermath check there
-        if (sa.isAftermath() && !c.isInZone(ZoneType.Graveyard)) {
+        if ((sa.isAftermath() || sa.isDisturb()) && !c.isInZone(ZoneType.Graveyard)) {
             return false;
         }
 

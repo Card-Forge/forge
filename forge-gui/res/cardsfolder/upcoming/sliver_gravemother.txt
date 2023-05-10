@@ -1,0 +1,10 @@
+Name:Sliver Gravemother
+ManaCost:W U B R G
+Types:Legendary Creature Sliver
+PT:6/6
+K:Encore:5
+S:Mode$ IgnoreLegendRule | ValidCard$ Sliver.YouCtrl | Description$ The "legend rule" doesn't apply to Slivers you control.
+S:Mode$ Continuous | EffectZone$ Battlefield | AffectedZone$ Graveyard | Affected$ Sliver.Creature+YouCtrl | AddKeyword$ Encore:ConvertedManaCost  | Description$ Each Sliver creature card in your graveyard has encore {X}, where X is its mana value.
+DeckNeeds:Type$Sliver
+DeckHas:Ability$Token|Graveyard
+Oracle:The "legend rule" doesn't apply to Slivers you control.\nEach Sliver creature card in your graveyard has encore {X}, where X is its mana value.\nEncore {5} ({5}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

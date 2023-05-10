@@ -1,0 +1,16 @@
+Name:Sidar Jabari of Zhalfir
+ManaCost:1 W U B
+Types:Legendary Creature Human Knight
+PT:4/3
+T:Mode$ AttackersDeclared | ValidAttackers$ Card.Knight+YouCtrl | TriggerZones$ Command | PresentZone$ Command | IsPresent$ Card.StrictlySelf | Execute$ TrigLoot | TriggerDescription$ Eminence — Whenever you attack with one or more Knights, if CARDNAME is in the command zone or on the battlefield, draw a card, then discard a card.
+T:Mode$ AttackersDeclared | ValidAttackers$ Card.Knight+YouCtrl | TriggerZones$ Battlefield | PresentZone$ Battlefield | IsPresent$ Card.StrictlySelf | Execute$ TrigLoot | Secondary$ True | TriggerDescription$ Eminence — Whenever you attack with one or more Knights, if CARDNAME is in the command zone or on the battlefield, draw a card, then discard a card.
+SVar:TrigLoot:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+K:Flying
+K:First Strike
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, return target Knight creature card from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Select target Knight creature card in your graveyard | ChangeNum$ 1 | ValidTgts$ Creature.YouOwn+Knight
+DeckHas:Ability$Discard|Graveyard
+DeckHints:Type$Knight
+SVar:BuffedBy:Knight
+Oracle:Eminence — Whenever you attack with one or more Knights, if Sidar Jabari of Zhalfir is in the command zone or on the battlefield, draw a card, then discard a card.\nFlying, first strike\nWhenever Sidar Jabari deals combat damage to a player, return target Knight creature card from your graveyard to the battlefield.

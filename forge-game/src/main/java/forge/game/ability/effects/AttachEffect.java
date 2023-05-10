@@ -13,6 +13,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CardPredicates;
@@ -33,7 +34,7 @@ public class AttachEffect extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
 
-        CardCollection attachments;
+        CardCollectionView attachments;
 
         final Player p = sa.getActivatingPlayer();
 
@@ -129,7 +130,7 @@ public class AttachEffect extends SpellAbilityEffect {
             attachToName = attachTo.toString();
         }
 
-        attachments = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, attachments, ZoneType.Battlefield, sa);
+        attachments = GameActionUtil.orderCardsByTheirOwners(game, attachments, ZoneType.Battlefield, sa);
 
         // If Cast Targets will be checked on the Stack
         for (final Card attachment : attachments) {
@@ -150,12 +151,12 @@ public class AttachEffect extends SpellAbilityEffect {
 
             ZoneType previousZone = source.getZone().getZoneType();
 
-            //CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
-            //CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+            CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
+            CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
             Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
-            //moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-            //moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+            moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+            moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
 
             // The Spell_Permanent (Auras) version of this AF needs to
             // move the card into play before Attaching

@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
+import forge.Forge;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestMap;
@@ -21,9 +22,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.SaveFileData;
-import forge.gui.FThreads;
 import forge.gui.GuiBase;
-import forge.util.ThreadUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -32,7 +31,7 @@ import java.util.*;
  * Class that will create the world from the configuration
  */
 public class World implements Disposable, SaveFileContent {
-    private WorldData data; 
+    private WorldData data;
     private Pixmap biomeImage;
     private long[][] biomeMap;
     private int[][] terrainMap;
@@ -130,8 +129,6 @@ public class World implements Disposable, SaveFileContent {
         data.store("mapObjectIds", mapObjectIds.save());
         data.store("mapPoiIds", mapPoiIds.save());
         data.store("seed", seed);
-
-
         return data;
     }
 
@@ -237,6 +234,14 @@ public class World implements Disposable, SaveFileContent {
         }
     }
 
+    public long getBiomeMapXY(int x, int y) {
+        try {
+            return biomeMap[x][height - y - 1] & (~(0b1 << data.GetBiomes().size()));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return biomeMap[biomeMap.length - 1][biomeMap[biomeMap.length - 1].length - 1];
+        }
+    }
+
     public boolean isStructure(int x, int y) {
         try {
             return (terrainMap[x][height - y - 1] & ~isStructureBit) != 0;
@@ -329,13 +334,11 @@ public class World implements Disposable, SaveFileContent {
                 int biomeHeight = (int) Math.round(biome.height * (double) height);
                 for (BiomeStructureData data : biome.structures) {
                     long localSeed = seed;
-                    ThreadUtil.getServicePool().submit(() -> {
-                        long threadStartTime = System.currentTimeMillis();
-                        BiomeStructure structure = new BiomeStructure(data, localSeed, biomeWidth, biomeHeight);
-                        structure.initialize();
-                        structureDataMap.put(data, structure);
-                        measureGenerationTime("wavefunctioncollapse " + data.sourcePath, threadStartTime);
-                    });
+                    long threadStartTime = System.currentTimeMillis();
+                    BiomeStructure structure = new BiomeStructure(data, localSeed, biomeWidth, biomeHeight);
+                    structure.initialize();
+                    structureDataMap.put(data, structure);
+                    measureGenerationTime("wavefunctioncollapse " + data.sourcePath, threadStartTime);
                 }
             }
         }
@@ -343,109 +346,112 @@ public class World implements Disposable, SaveFileContent {
 //////////////////
 ///////// calculation each biome position based on noise and radius
 //////////////////
-        FThreads.invokeInEdtNowOrLater(() -> {
-            for (BiomeData biome : data.GetBiomes()) {
+        for (BiomeData biome : data.GetBiomes()) {
 
-                biomeIndex[0]++;
-                int biomeXStart = (int) Math.round(biome.startPointX * (double) width);
-                int biomeYStart = (int) Math.round(biome.startPointY * (double) height);
-                int biomeWidth = (int) Math.round(biome.width * (double) width);
-                int biomeHeight = (int) Math.round(biome.height * (double) height);
+            biomeIndex[0]++;
+            int biomeXStart = (int) Math.round(biome.startPointX * (double) width);
+            int biomeYStart = (int) Math.round(biome.startPointY * (double) height);
+            int biomeWidth = (int) Math.round(biome.width * (double) width);
+            int biomeHeight = (int) Math.round(biome.height * (double) height);
 
-                int beginX = Math.max(biomeXStart - biomeWidth / 2, 0);
-                int beginY = Math.max(biomeYStart - biomeHeight / 2, 0);
-                int endX = Math.min(biomeXStart + biomeWidth / 2, width);
-                int endY = Math.min(biomeYStart + biomeHeight / 2, height);
-                if (biome.width == 1.0 && biome.height == 1.0) {
-                    beginX = 0;
-                    beginY = 0;
-                    endX = width;
-                    endY = height;
-                }
-                for (int x = beginX; x < endX; x++) {
-                    for (int y = beginY; y < endY; y++) {
-                        //value 0-1 based on noise
-                        float noiseValue = ((float) noise.eval(x / (float) width * noiseZoom, y / (float) height * noiseZoom) + 1) / 2f;
-                        noiseValue *= biome.noiseWeight;
-                        //value 0-1 based on dist to origin
-                        float distanceValue = ((float) Math.sqrt((x - biomeXStart) * (x - biomeXStart) + (y - biomeYStart) * (y - biomeYStart))) / (Math.max(biomeWidth, biomeHeight) / 2f);
-                        distanceValue *= biome.distWeight;
-                        if (noiseValue + distanceValue < 1.0 || biome.invertHeight && (1 - noiseValue) + distanceValue < 1.0) {
-                            Color color = biome.GetColor();
-                            float[] hsv = new float[3];
-                            color.toHsv(hsv);
-                            int count = (int) ((noiseValue - 0.5) * 10 / 4);
-                            //hsv[2]+=(count*0.2);
-                            biomeMap[x][y] |= (1L << biomeIndex[0]);
-                            int terrainCounter = 1;
-                            terrainMap[x][y] = 0;
-                            if (biome.terrain != null) {
-                                for (BiomeTerrainData terrain : biome.terrain) {
-                                    float terrainNoise = ((float) noise.eval(x / (float) width * (noiseZoom * terrain.resolution), y / (float) height * (noiseZoom * terrain.resolution)) + 1) / 2;
-                                    if (terrainNoise >= terrain.min && terrainNoise <= terrain.max) {
-                                        terrainMap[x][y] = terrainCounter;
-                                        //pix.fillRectangle(x*data.miniMapTileSize, y*data.miniMapTileSize,data.miniMapTileSize,data.miniMapTileSize);
-                                    }
-                                    terrainCounter++;
+            int beginX = Math.max(biomeXStart - biomeWidth / 2, 0);
+            int beginY = Math.max(biomeYStart - biomeHeight / 2, 0);
+            int endX = Math.min(biomeXStart + biomeWidth / 2, width);
+            int endY = Math.min(biomeYStart + biomeHeight / 2, height);
+            if (biome.width == 1.0 && biome.height == 1.0) {
+                beginX = 0;
+                beginY = 0;
+                endX = width;
+                endY = height;
+            }
+            for (int x = beginX; x < endX; x++) {
+                for (int y = beginY; y < endY; y++) {
+                    //value 0-1 based on noise
+                    float noiseValue = ((float) noise.eval(x / (float) width * noiseZoom, y / (float) height * noiseZoom) + 1) / 2f;
+                    noiseValue *= biome.noiseWeight;
+                    //value 0-1 based on dist to origin
+                    float distanceValue = ((float) Math.sqrt((x - biomeXStart) * (x - biomeXStart) + (y - biomeYStart) * (y - biomeYStart))) / (Math.max(biomeWidth, biomeHeight) / 2f);
+                    distanceValue *= biome.distWeight;
+                    if (noiseValue + distanceValue < 1.0 || biome.invertHeight && (1 - noiseValue) + distanceValue < 1.0) {
+                        Color color = biome.GetColor();
+                        float[] hsv = new float[3];
+                        color.toHsv(hsv);
+                        int count = (int) ((noiseValue - 0.5) * 10 / 4);
+                        //hsv[2]+=(count*0.2);
+                        biomeMap[x][y] |= (1L << biomeIndex[0]);
+                        int terrainCounter = 1;
+                        terrainMap[x][y] = 0;
+                        if (biome.terrain != null) {
+                            for (BiomeTerrainData terrain : biome.terrain) {
+                                float terrainNoise = ((float) noise.eval(x / (float) width * (noiseZoom * terrain.resolution), y / (float) height * (noiseZoom * terrain.resolution)) + 1) / 2;
+                                if (terrainNoise >= terrain.min && terrainNoise <= terrain.max) {
+                                    terrainMap[x][y] = terrainCounter;
+                                    //pix.fillRectangle(x*data.miniMapTileSize, y*data.miniMapTileSize,data.miniMapTileSize,data.miniMapTileSize);
                                 }
-                            }
-                            if (biome.collision)
-                                terrainMap[x][y] |= collisionBit;
-                            if (biome.structures != null) {
-                                for (BiomeStructureData data : biome.structures) {
-                                    while (!structureDataMap.containsKey(data)) {
-                                        try {
-                                            Thread.sleep(10);
-                                        } catch (InterruptedException e) {
-                                            throw new RuntimeException(e);
-                                        }
-                                    }
-
-                                    BiomeStructure structure = structureDataMap.get(data);
-                                    int structureXStart = x - (biomeXStart - biomeWidth / 2) - (int) ((data.x * biomeWidth) - (data.width * biomeWidth / 2));
-                                    int structureYStart = y - (biomeYStart - biomeHeight / 2) - (int) ((data.y * biomeHeight) - (data.height * biomeHeight / 2));
-
-                                    int structureIndex = structure.objectID(structureXStart, structureYStart);
-                                    if (structureIndex >= 0) {
-
-                                        terrainMap[x][y] = terrainCounter + structureIndex;
-                                        if (structure.collision(structureXStart, structureYStart))
-                                            terrainMap[x][y] |= collisionBit;
-                                        terrainMap[x][y] |= isStructureBit;
-
-                                    }
-
-                                    terrainCounter += structure.structureObjectCount();
-                                }
+                                terrainCounter++;
                             }
                         }
+                        if (biome.collision)
+                            terrainMap[x][y] |= collisionBit;
+                        if (biome.structures != null) {
+                            for (BiomeStructureData data : biome.structures) {
+                                while (!structureDataMap.containsKey(data)) {
+                                    try {
+                                        Thread.sleep(10);
+                                    } catch (InterruptedException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
 
+                                BiomeStructure structure = structureDataMap.get(data);
+                                int structureXStart = x - (biomeXStart - biomeWidth / 2) - (int) ((data.x * biomeWidth) - (data.width * biomeWidth / 2));
+                                int structureYStart = y - (biomeYStart - biomeHeight / 2) - (int) ((data.y * biomeHeight) - (data.height * biomeHeight / 2));
+
+                                int structureIndex = structure.objectID(structureXStart, structureYStart);
+                                if (structureIndex >= 0) {
+
+                                    terrainMap[x][y] = terrainCounter + structureIndex;
+                                    if (structure.collision(structureXStart, structureYStart))
+                                        terrainMap[x][y] |= collisionBit;
+                                    terrainMap[x][y] |= isStructureBit;
+
+                                }
+
+                                terrainCounter += structure.structureObjectCount();
+                            }
+                        }
                     }
+
                 }
             }
-            currentTime[0] = measureGenerationTime("biomes in total", currentTime[0]);
+        }
+        currentTime[0] = measureGenerationTime("biomes in total", currentTime[0]);
 
 //////////////////
 ///////// set poi placement
 //////////////////
-            mapPoiIds = new PointOfInterestMap(getChunkSize(), data.tileSize, data.width / getChunkSize(), data.height / getChunkSize());
-            List<PointOfInterest> towns = new ArrayList<>();
-            List<PointOfInterest> notTowns = new ArrayList<>();
-            List<Rectangle> otherPoints = new ArrayList<>();
+        List<PointOfInterest> towns = new ArrayList<>();
+        List<PointOfInterest> notTowns = new ArrayList<>();
+        List<Rectangle> otherPoints = new ArrayList<>();
 
-            TextureAtlas mapMarker=Config.instance().getAtlas(Paths.MAP_MARKER);
-            TextureData texture=mapMarker.getTextures().first().getTextureData();
-            if(!texture.isPrepared())
-                texture.prepare();
-            Pixmap mapMarkerPixmap=texture.consumePixmap();
-            clearTerrain((int) (data.width * data.playerStartPosX), (int) (data.height * data.playerStartPosY), 10);
-            //otherPoints.add(new Rectangle(((float) data.width * data.playerStartPosX * (float) data.tileSize) - data.tileSize * 3, ((float) data.height * data.playerStartPosY * data.tileSize) - data.tileSize * 3, data.tileSize * 6, data.tileSize * 6));
+        TextureAtlas mapMarker = Config.instance().getAtlas(Paths.MAP_MARKER);
+        TextureData texture = mapMarker.getTextures().first().getTextureData();
+        if (!texture.isPrepared())
+            texture.prepare();
+        Pixmap mapMarkerPixmap = texture.consumePixmap();
+        clearTerrain((int) (data.width * data.playerStartPosX), (int) (data.height * data.playerStartPosY), 10);
+        //otherPoints.add(new Rectangle(((float) data.width * data.playerStartPosX * (float) data.tileSize) - data.tileSize * 3, ((float) data.height * data.playerStartPosY * data.tileSize) - data.tileSize * 3, data.tileSize * 6, data.tileSize * 6));
+        boolean running = true;
+        here:
+        while (running) {
+            mapPoiIds = new PointOfInterestMap(getChunkSize(), data.tileSize, data.width / getChunkSize(), data.height / getChunkSize());
             int biomeIndex2 = -1;
+            running = false;
             for (BiomeData biome : data.GetBiomes()) {
                 biomeIndex2++;
                 for (PointOfInterestData poi : biome.getPointsOfInterest()) {
                     for (int i = 0; i < poi.count; i++) {
-                        for (int counter = 0; counter < 500; counter++)//tries 100 times to find a free point
+                        for (int counter = 0; counter < 500; counter++)//tries 500 times to find a free point
                         {
                             float radius = (float) Math.sqrt(((random.nextDouble()) / 2 * poi.radiusFactor));
                             float theta = (float) (random.nextDouble() * 2 * Math.PI);
@@ -496,7 +502,14 @@ public class World implements Disposable, SaveFileContent {
                                 }
                                 if (!foundSolution) {
                                     if (counter == 499) {
-                                        System.err.print("Can not place POI " + poi.name + "\n");
+                                        System.err.print("Can not place POI " + poi.name + "...Rerunning..\n");
+                                        running = true;
+                                        towns.clear();
+                                        notTowns.clear();
+                                        otherPoints.clear();
+                                        clearTerrain((int) (data.width * data.playerStartPosX), (int) (data.height * data.playerStartPosY), 10);
+                                        storedInfo.clear();
+                                        continue here;
                                     }
                                     continue;
                                 }
@@ -506,318 +519,303 @@ public class World implements Disposable, SaveFileContent {
                             clearTerrain((int) (x / data.tileSize), (int) (y / data.tileSize), 3);
                             mapPoiIds.add(newPoint);
 
-                            TextureAtlas.AtlasRegion marker=mapMarker.findRegion(poi.type);
+                            TextureAtlas.AtlasRegion marker = mapMarker.findRegion(poi.type);
 
-                            if(marker!=null)
-                            {
-                                int xInPixels= (int) ((x / data.tileSize)*data.miniMapTileSize);
-                                int yInPixels= (int) ((height-(y / data.tileSize))*data.miniMapTileSize);
-                                xInPixels-=(marker.getRegionWidth() /2);
-                                yInPixels-=(marker.getRegionHeight() /2);
-                                drawPixmapLater(mapMarkerPixmap,marker.getRegionX(),marker.getRegionY(),
-                                        marker.getRegionWidth(),marker.getRegionHeight(),xInPixels,yInPixels,marker.getRegionWidth(),marker.getRegionHeight());
+                            if (marker != null) {
+                                int xInPixels = (int) ((x / data.tileSize) * data.miniMapTileSize);
+                                int yInPixels = (int) ((height - (y / data.tileSize)) * data.miniMapTileSize);
+                                xInPixels -= (marker.getRegionWidth() / 2);
+                                yInPixels -= (marker.getRegionHeight() / 2);
+                                drawPixmapLater(mapMarkerPixmap, marker.getRegionX(), marker.getRegionY(),
+                                        marker.getRegionWidth(), marker.getRegionHeight(), xInPixels, yInPixels, marker.getRegionWidth(), marker.getRegionHeight());
                             }
 
 
-                            if (poi.type != null && (poi.type.equals("town")|| poi.type.equals("capital"))) {
+                            if (poi.type != null && (poi.type.equals("town") || poi.type.equals("capital"))) {
                                 towns.add(newPoint);
                             } else {
                                 notTowns.add(newPoint);
                             }
                             break;
                         }
-
                     }
                 }
             }
-            currentTime[0] = measureGenerationTime("poi placement", currentTime[0]);
+        }
+        currentTime[0] = measureGenerationTime("poi placement", currentTime[0]);
 
 //////////////////
 ///////// sort towns and build roads in between
 //////////////////
-            List<Pair<PointOfInterest, PointOfInterest>> allSortedTowns = new ArrayList<>();
+        List<Pair<PointOfInterest, PointOfInterest>> allSortedTowns = new ArrayList<>();
 
-            HashSet<Long> usedEdges = new HashSet<>();//edge is first 32 bits id of first id and last 32 bits id of second
-            for (int i = 0; i < towns.size() - 1; i++) {
+        HashSet<Long> usedEdges = new HashSet<>();//edge is first 32 bits id of first id and last 32 bits id of second
+        for (int i = 0; i < towns.size() - 1; i++) {
 
-                PointOfInterest current = towns.get(i);
-                int smallestIndex = -1;
-                int secondSmallestIndex = -1;
-                float smallestDistance = Float.MAX_VALUE;
-                for (int j = 0; j < towns.size(); j++) {
+            PointOfInterest current = towns.get(i);
+            int smallestIndex = -1;
+            int secondSmallestIndex = -1;
+            float smallestDistance = Float.MAX_VALUE;
+            for (int j = 0; j < towns.size(); j++) {
 
-                    if (i == j || usedEdges.contains((long) i | ((long) j << 32)))
-                        continue;
-                    float dist = current.getPosition().dst(towns.get(j).getPosition());
-                    if (dist > data.maxRoadDistance)
-                        continue;
-                    if (dist < smallestDistance) {
-                        smallestDistance = dist;
-                        secondSmallestIndex = smallestIndex;
-                        smallestIndex = j;
-
-                    }
-                }
-                if (smallestIndex < 0)
+                if (i == j || usedEdges.contains((long) i | ((long) j << 32)))
                     continue;
-                usedEdges.add((long) i | ((long) smallestIndex << 32));
-                usedEdges.add((long) i << 32 | ((long) smallestIndex));
-                allSortedTowns.add(Pair.of(current, towns.get(smallestIndex)));
-
-                if (secondSmallestIndex < 0)
+                float dist = current.getPosition().dst(towns.get(j).getPosition());
+                if (dist > data.maxRoadDistance)
                     continue;
-                usedEdges.add((long) i | ((long) secondSmallestIndex << 32));
-                usedEdges.add((long) i << 32 | ((long) secondSmallestIndex));
-                //allSortedTowns.add(Pair.of(current, towns.get(secondSmallestIndex)));
-            }
-            List<Pair<PointOfInterest, PointOfInterest>> allPOIPathsToNextTown = new ArrayList<>();
-            for (int i = 0; i < notTowns.size() - 1; i++) {
+                if (dist < smallestDistance) {
+                    smallestDistance = dist;
+                    secondSmallestIndex = smallestIndex;
+                    smallestIndex = j;
 
-                PointOfInterest poi = notTowns.get(i);
-                int smallestIndex = -1;
-                float smallestDistance = Float.MAX_VALUE;
-                for (int j = 0; j < towns.size(); j++) {
-
-                    float dist = poi.getPosition().dst(towns.get(j).getPosition());
-                    if (dist < smallestDistance) {
-                        smallestDistance = dist;
-                        smallestIndex = j;
-
-                    }
-                }
-                if (smallestIndex < 0)
-                    continue;
-                allPOIPathsToNextTown.add(Pair.of(poi, towns.get(smallestIndex)));
-            }
-            biomeIndex[0]++;
-
-            //reset terrain path to the next town
-            for (Pair<PointOfInterest, PointOfInterest> poiToTown : allPOIPathsToNextTown) {
-
-                int startX = (int) poiToTown.getKey().getTilePosition(data.tileSize).x;
-                int startY = (int) poiToTown.getKey().getTilePosition(data.tileSize).y;
-                int x1 = (int) poiToTown.getValue().getTilePosition(data.tileSize).x;
-                int y1 = (int) poiToTown.getValue().getTilePosition(data.tileSize).y;
-                int dx = Math.abs(x1 - startX);
-                int dy = Math.abs(y1 - startY);
-                int sx = startX < x1 ? 1 : -1;
-                int sy = startY < y1 ? 1 : -1;
-                int err = dx - dy;
-                int e2;
-                for(int i=0;i<1000;i++) {
-                    if (startX < 0 || startY <= 0 || startX >= width || startY > height) continue;
-                    if ((terrainMap[startX][height - startY] & collisionBit) != 0)//clear terrain if it has collision
-                        terrainMap[startX][height - startY] = 0;
-
-                    if (startX == x1 && startY == y1)
-                        break;
-                    e2 = 2 * err;
-                    if (e2 > -dy) {
-                        err = err - dy;
-                        startX = startX + sx;
-                    } else if (e2 < dx) {
-                        err = err + dx;
-                        startY = startY + sy;
-                    }
                 }
             }
+            if (smallestIndex < 0)
+                continue;
+            usedEdges.add((long) i | ((long) smallestIndex << 32));
+            usedEdges.add((long) i << 32 | ((long) smallestIndex));
+            allSortedTowns.add(Pair.of(current, towns.get(smallestIndex)));
 
-            for (Pair<PointOfInterest, PointOfInterest> townPair : allSortedTowns) {
+            if (secondSmallestIndex < 0)
+                continue;
+            usedEdges.add((long) i | ((long) secondSmallestIndex << 32));
+            usedEdges.add((long) i << 32 | ((long) secondSmallestIndex));
+            //allSortedTowns.add(Pair.of(current, towns.get(secondSmallestIndex)));
+        }
+        List<Pair<PointOfInterest, PointOfInterest>> allPOIPathsToNextTown = new ArrayList<>();
+        for (int i = 0; i < notTowns.size() - 1; i++) {
 
-                int startX = (int) townPair.getKey().getTilePosition(data.tileSize).x;
-                int startY = (int) townPair.getKey().getTilePosition(data.tileSize).y;
-                int x1 = (int) townPair.getValue().getTilePosition(data.tileSize).x;
-                int y1 = (int) townPair.getValue().getTilePosition(data.tileSize).y;
-                for (int x = startX - 1; x < startX + 2; x++) {
-                    for (int y = startY - 1; y < startY + 2; y++) {
-                        if (x < 0 || y < 0 || x >= width || y >= height) continue;
-                        biomeMap[x][height - y - 1] |= (1L << biomeIndex[0]);
-                        terrainMap[x][height - y - 1] = 0;
-                    }
+            PointOfInterest poi = notTowns.get(i);
+            int smallestIndex = -1;
+            float smallestDistance = Float.MAX_VALUE;
+            for (int j = 0; j < towns.size(); j++) {
+
+                float dist = poi.getPosition().dst(towns.get(j).getPosition());
+                if (dist < smallestDistance) {
+                    smallestDistance = dist;
+                    smallestIndex = j;
+
                 }
-                int dx = Math.abs(x1 - startX);
-                int dy = Math.abs(y1 - startY);
-                int sx = startX < x1 ? 1 : -1;
-                int sy = startY < y1 ? 1 : -1;
-                int err = dx - dy;
-                int e2;
-                for (int i=0;i<1000;i++) {
-                    if (startX < 0 || startY <= 0 || startX >= width || startY > height) continue;
-                    biomeMap[startX][height - startY] |= (1L << biomeIndex[0]);
+            }
+            if (smallestIndex < 0)
+                continue;
+            allPOIPathsToNextTown.add(Pair.of(poi, towns.get(smallestIndex)));
+        }
+        biomeIndex[0]++;
+
+        //reset terrain path to the next town
+        for (Pair<PointOfInterest, PointOfInterest> poiToTown : allPOIPathsToNextTown) {
+
+            int startX = (int) poiToTown.getKey().getTilePosition(data.tileSize).x;
+            int startY = (int) poiToTown.getKey().getTilePosition(data.tileSize).y;
+            int x1 = (int) poiToTown.getValue().getTilePosition(data.tileSize).x;
+            int y1 = (int) poiToTown.getValue().getTilePosition(data.tileSize).y;
+            int dx = Math.abs(x1 - startX);
+            int dy = Math.abs(y1 - startY);
+            int sx = startX < x1 ? 1 : -1;
+            int sy = startY < y1 ? 1 : -1;
+            int err = dx - dy;
+            int e2;
+            for (int i = 0; i < 1000; i++) {
+                if (startX < 0 || startY <= 0 || startX >= width || startY > height) continue;
+                if ((terrainMap[startX][height - startY] & collisionBit) != 0)//clear terrain if it has collision
                     terrainMap[startX][height - startY] = 0;
 
-                    if (startX == x1 && startY == y1)
-                        break;
-                    e2 = 2 * err;
-                    if (e2 > -dy) {
-                        err = err - dy;
-                        startX = startX + sx;
-                    } else if (e2 < dx) {
-                        err = err + dx;
-                        startY = startY + sy;
-                    }
+                if (startX == x1 && startY == y1)
+                    break;
+                e2 = 2 * err;
+                if (e2 > -dy) {
+                    err = err - dy;
+                    startX = startX + sx;
+                } else if (e2 < dx) {
+                    err = err + dx;
+                    startY = startY + sy;
                 }
             }
-            currentTime[0] = measureGenerationTime("roads", currentTime[0]);
+        }
+
+        for (Pair<PointOfInterest, PointOfInterest> townPair : allSortedTowns) {
+
+            int startX = (int) townPair.getKey().getTilePosition(data.tileSize).x;
+            int startY = (int) townPair.getKey().getTilePosition(data.tileSize).y;
+            int x1 = (int) townPair.getValue().getTilePosition(data.tileSize).x;
+            int y1 = (int) townPair.getValue().getTilePosition(data.tileSize).y;
+            for (int x = startX - 1; x < startX + 2; x++) {
+                for (int y = startY - 1; y < startY + 2; y++) {
+                    if (x < 0 || y < 0 || x >= width || y >= height) continue;
+                    biomeMap[x][height - y - 1] |= (1L << biomeIndex[0]);
+                    terrainMap[x][height - y - 1] = 0;
+                }
+            }
+            int dx = Math.abs(x1 - startX);
+            int dy = Math.abs(y1 - startY);
+            int sx = startX < x1 ? 1 : -1;
+            int sy = startY < y1 ? 1 : -1;
+            int err = dx - dy;
+            int e2;
+            for (int i = 0; i < 1000; i++) {
+                if (startX < 0 || startY <= 0 || startX >= width || startY > height) continue;
+                biomeMap[startX][height - startY] |= (1L << biomeIndex[0]);
+                terrainMap[startX][height - startY] = 0;
+
+                if (startX == x1 && startY == y1)
+                    break;
+                e2 = 2 * err;
+                if (e2 > -dy) {
+                    err = err - dy;
+                    startX = startX + sx;
+                } else if (e2 < dx) {
+                    err = err + dx;
+                    startY = startY + sy;
+                }
+            }
+        }
+        currentTime[0] = measureGenerationTime("roads", currentTime[0]);
 
 //////////////////
 ///////// draw mini map
 //////////////////
 
-            Pixmap pix = new Pixmap(width*data.miniMapTileSize, height*data.miniMapTileSize, Pixmap.Format.RGBA8888);
-            pix.setColor(1, 0, 0, 1);
-            pix.fill();
-            for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++) {
-                    if(highestBiome(biomeMap[x][y])>=data.GetBiomes().size())
-                    {
-                        Pixmap smallPixmap=createSmallPixmap(data.roadTileset.tilesetAtlas,data.roadTileset.tilesetName,0);
-                        pix.drawPixmap(smallPixmap,x*data.miniMapTileSize, y*data.miniMapTileSize);
-                    }
-                    else
-                    {
+        Pixmap pix = new Pixmap(width * data.miniMapTileSize, height * data.miniMapTileSize, Pixmap.Format.RGBA8888);
+        pix.setColor(1, 0, 0, 1);
+        pix.fill();
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                if (highestBiome(biomeMap[x][y]) >= data.GetBiomes().size()) {
+                    Pixmap smallPixmap = createSmallPixmap(data.roadTileset.tilesetAtlas, data.roadTileset.tilesetName, 0);
+                    pix.drawPixmap(smallPixmap, x * data.miniMapTileSize, y * data.miniMapTileSize);
+                } else {
 
-                        BiomeData biome=data.GetBiomes().get( highestBiome(biomeMap[x][y]));
-                        int terrainIndex=terrainMap[x][y]&~terrainMask;
-                        if(terrainIndex>biome.terrain.length)
-                        {
-                            Pixmap smallPixmap=createSmallPixmap(biome.tilesetAtlas,biome.tilesetName,0);
-                            pix.drawPixmap(smallPixmap,x*data.miniMapTileSize, y*data.miniMapTileSize);
+                    BiomeData biome = data.GetBiomes().get(highestBiome(biomeMap[x][y]));
+                    int terrainIndex = terrainMap[x][y] & ~terrainMask;
+                    if (terrainIndex > biome.terrain.length) {
+                        Pixmap smallPixmap = createSmallPixmap(biome.tilesetAtlas, biome.tilesetName, 0);
+                        pix.drawPixmap(smallPixmap, x * data.miniMapTileSize, y * data.miniMapTileSize);
 
-                            terrainIndex-=biome.terrain.length;
-                            terrainIndex--;
-                            for(BiomeStructureData structData:biome.structures)
-                            {
-                                if(terrainIndex>=structData.mappingInfo.length)
-                                {
-                                    terrainIndex-=structData.mappingInfo.length;
-                                    continue;
-                                }
-                                smallPixmap=createSmallPixmap(structData.structureAtlasPath,structData.mappingInfo[terrainIndex].name,0);
-                                pix.drawPixmap(smallPixmap,x*data.miniMapTileSize, y*data.miniMapTileSize);
-                                break;
+                        terrainIndex -= biome.terrain.length;
+                        terrainIndex--;
+                        for (BiomeStructureData structData : biome.structures) {
+                            if (terrainIndex >= structData.mappingInfo.length) {
+                                terrainIndex -= structData.mappingInfo.length;
+                                continue;
                             }
+                            smallPixmap = createSmallPixmap(structData.structureAtlasPath, structData.mappingInfo[terrainIndex].name, 0);
+                            pix.drawPixmap(smallPixmap, x * data.miniMapTileSize, y * data.miniMapTileSize);
+                            break;
                         }
-                        else
-                        {
-                            Pixmap smallPixmap=createSmallPixmap(biome.tilesetAtlas,biome.tilesetName,terrainIndex);
-                            pix.drawPixmap(smallPixmap,x*data.miniMapTileSize, y*data.miniMapTileSize);
-                        }
-
+                    } else {
+                        Pixmap smallPixmap = createSmallPixmap(biome.tilesetAtlas, biome.tilesetName, terrainIndex);
+                        pix.drawPixmap(smallPixmap, x * data.miniMapTileSize, y * data.miniMapTileSize);
                     }
 
                 }
 
             }
-            for(Map.Entry<String, Pair<Pixmap, HashMap<String, Pixmap>>> entry:pixmapHash.entrySet())
-            {
-                try {
-                    entry.getValue().getLeft().dispose();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                for(Map.Entry<String, Pixmap> pairEntry:entry.getValue().getRight().entrySet())
-                {
-                    try {
-                        pairEntry.getValue().dispose();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            pixmapHash.clear();
+
+        }
+        for (Map.Entry<String, Pair<Pixmap, HashMap<String, Pixmap>>> entry : pixmapHash.entrySet()) {
             try {
-                drawPixmapNow(pix);
+                entry.getValue().getLeft().dispose();
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
-            currentTime[0] = measureGenerationTime("mini map", currentTime[0]);
+            for (Map.Entry<String, Pixmap> pairEntry : entry.getValue().getRight().entrySet()) {
+                try {
+                    pairEntry.getValue().dispose();
+                } catch (Exception e) {
+                    //e.printStackTrace();
+                }
+            }
+        }
+        pixmapHash.clear();
+        try {
+            drawPixmapNow(pix);
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+        currentTime[0] = measureGenerationTime("mini map", currentTime[0]);
 
 
 //////////////////
 ///////// distribute small rocks and trees across the map
 //////////////////
-            mapObjectIds = new SpritesDataMap(getChunkSize(), data.tileSize, data.width / getChunkSize());
-            for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++) {
-                    int invertedHeight = height - y - 1;
-                    int currentBiome = highestBiome(biomeMap[x][invertedHeight]);
-                    if (currentBiome >= data.GetBiomes().size())
-                        continue;//roads
-                    if (isStructure(x, y))
-                        continue;
-                    BiomeData biome = data.GetBiomes().get(currentBiome);
-                    for (String name : biome.spriteNames) {
-                        BiomeSpriteData sprite = data.GetBiomeSprites().getSpriteData(name);
-                        double spriteNoise = (noise.eval(x / (double) width * noiseZoom * sprite.resolution, y / (double) invertedHeight * noiseZoom * sprite.resolution) + 1) / 2;
-                        if (spriteNoise >= sprite.startArea && spriteNoise <= sprite.endArea) {
-                            if (random.nextFloat() <= sprite.density) {
-                                String spriteKey = sprite.key();
-                                int key;
-                                if (!mapObjectIds.containsKey(spriteKey)) {
+        mapObjectIds = new SpritesDataMap(getChunkSize(), data.tileSize, data.width / getChunkSize());
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                int invertedHeight = height - y - 1;
+                int currentBiome = highestBiome(biomeMap[x][invertedHeight]);
+                if (currentBiome >= data.GetBiomes().size())
+                    continue;//roads
+                if (isStructure(x, y))
+                    continue;
+                BiomeData biome = data.GetBiomes().get(currentBiome);
+                for (String name : biome.spriteNames) {
+                    BiomeSpriteData sprite = data.GetBiomeSprites().getSpriteData(name);
+                    double spriteNoise = (noise.eval(x / (double) width * noiseZoom * sprite.resolution, y / (double) invertedHeight * noiseZoom * sprite.resolution) + 1) / 2;
+                    if (spriteNoise >= sprite.startArea && spriteNoise <= sprite.endArea) {
+                        if (random.nextFloat() <= sprite.density) {
+                            String spriteKey = sprite.key();
+                            int key;
+                            if (!mapObjectIds.containsKey(spriteKey)) {
 
-                                    key = mapObjectIds.put(sprite.key(), sprite, data.GetBiomeSprites());
-                                } else {
-                                    key = mapObjectIds.intKey(spriteKey);
-                                }
-                                mapObjectIds.putPosition(key, new Vector2((((float) x) + .25f + random.nextFloat() / 2) * data.tileSize, (((float) y + .25f) - random.nextFloat() / 2) * data.tileSize));
-                                break;//only on sprite per point
+                                key = mapObjectIds.put(sprite.key(), sprite, data.GetBiomeSprites());
+                            } else {
+                                key = mapObjectIds.intKey(spriteKey);
                             }
+                            mapObjectIds.putPosition(key, new Vector2((((float) x) + .25f + random.nextFloat() / 2) * data.tileSize, (((float) y + .25f) - random.nextFloat() / 2) * data.tileSize));
+                            break;//only on sprite per point
                         }
                     }
                 }
             }
-            mapMarkerPixmap.dispose();
-            biomeImage = pix;
-            measureGenerationTime("sprites", currentTime[0]);
-        });
+        }
+        mapMarkerPixmap.dispose();
+        biomeImage = pix;
+        measureGenerationTime("sprites", currentTime[0]);
         System.out.println("Generating world took :\t\t" + ((System.currentTimeMillis() - startTime) / 1000f) + " s");
         WorldStage.getInstance().clearCache();
-        ThreadUtil.getServicePool().shutdownNow();
-        ThreadUtil.refreshServicePool();
+
         if (GuiBase.isAndroid())
             GuiBase.getInterface().preventSystemSleep(false);
         return this;
     }
 
-    HashMap<String,Pair<Pixmap,HashMap<String,Pixmap>>> pixmapHash=new HashMap<>();
+    HashMap<String, Pair<Pixmap, HashMap<String, Pixmap>>> pixmapHash = new HashMap<>();
+
     private Pixmap createSmallPixmap(String tilesetName, String key, int i) {
 
-        if(i>2)i=2;
+        if (i > 2) i = 2;
         String tileSetNameWithIndex;
-        if(i==0)
-            tileSetNameWithIndex=(key);
+        if (i == 0)
+            tileSetNameWithIndex = (key);
         else
-            tileSetNameWithIndex=(key+"_"+i);
-        if(!pixmapHash.containsKey(tilesetName))
-        {
+            tileSetNameWithIndex = (key + "_" + i);
+        if (!pixmapHash.containsKey(tilesetName)) {
             TextureAtlas.AtlasRegion region;
-            TextureAtlas atlas=Config.instance().getAtlas(tilesetName);
-            region=atlas.findRegion(tileSetNameWithIndex);
-            TextureData data=region.getTexture().getTextureData();
+            TextureAtlas atlas = Config.instance().getAtlas(tilesetName);
+            region = atlas.findRegion(tileSetNameWithIndex);
+            TextureData data = region.getTexture().getTextureData();
             if (!data.isPrepared()) {
                 data.prepare();
             }
-            pixmapHash.put(tilesetName,Pair.of(data.consumePixmap(),new HashMap<>()));
+            pixmapHash.put(tilesetName, Pair.of(data.consumePixmap(), new HashMap<>()));
         }
-        Pair<Pixmap,HashMap<String,Pixmap>> pair=pixmapHash.get(tilesetName);
-        if(!pair.getRight().containsKey(tileSetNameWithIndex))
-        {
-            TextureAtlas atlas=Config.instance().getAtlas(tilesetName);
-            TextureAtlas.AtlasRegion region=atlas.findRegion(tileSetNameWithIndex);
-            int tileSize=data.tileSize;
-            Pixmap smallPixmap=new Pixmap(data.miniMapTileSize,data.miniMapTileSize, Pixmap.Format.RGBA8888);
-            smallPixmap.setColor(0,0,0,0);
+        Pair<Pixmap, HashMap<String, Pixmap>> pair = pixmapHash.get(tilesetName);
+        if (!pair.getRight().containsKey(tileSetNameWithIndex)) {
+            TextureAtlas atlas = Config.instance().getAtlas(tilesetName);
+            TextureAtlas.AtlasRegion region = atlas.findRegion(tileSetNameWithIndex);
+            int tileSize = data.tileSize;
+            Pixmap smallPixmap = new Pixmap(data.miniMapTileSize, data.miniMapTileSize, Pixmap.Format.RGBA8888);
+            smallPixmap.setColor(0, 0, 0, 0);
             smallPixmap.fill();
-            smallPixmap.drawPixmap(pair.getLeft(),0,0,region.getRegionX(),region.getRegionY(),data.miniMapTileSize,data.miniMapTileSize);
-            pair.getRight().put(tileSetNameWithIndex,smallPixmap);
+            smallPixmap.drawPixmap(pair.getLeft(), 0, 0, region.getRegionX(), region.getRegionY(), data.miniMapTileSize, data.miniMapTileSize);
+            pair.getRight().put(tileSetNameWithIndex, smallPixmap);
         }
         return pair.getRight().get(tileSetNameWithIndex);
 
     }
 
-    static class DrawInfo
-    {
+    static class DrawInfo {
         Pixmap mapMarkerPixmap;
         int regionX;
         int regionY;
@@ -828,24 +826,26 @@ public class World implements Disposable, SaveFileContent {
         int regionWidth1;
         int regionHeight1;
     }
-    final Array<DrawInfo> storedInfo=new Array<>();
+
+    final Array<DrawInfo> storedInfo = new Array<>();
+
     private void drawPixmapLater(Pixmap mapMarkerPixmap, int regionX, int regionY, int regionWidth, int regionHeight, int x, int y, int regionWidth1, int regionHeight1) {
-        DrawInfo info= new DrawInfo();
-        info.mapMarkerPixmap=mapMarkerPixmap;
-        info.regionX=regionX;
-        info.regionY=regionY;
-        info.regionWidth=regionWidth;
-        info.regionHeight=regionHeight;
-        info.x=x;
-        info.y=y;
-        info.regionWidth1=regionWidth1;
-        info.regionHeight1=regionHeight1;
+        DrawInfo info = new DrawInfo();
+        info.mapMarkerPixmap = mapMarkerPixmap;
+        info.regionX = regionX;
+        info.regionY = regionY;
+        info.regionWidth = regionWidth;
+        info.regionHeight = regionHeight;
+        info.x = x;
+        info.y = y;
+        info.regionWidth1 = regionWidth1;
+        info.regionHeight1 = regionHeight1;
         storedInfo.add(info);
     }
-    private void drawPixmapNow(Pixmap map)
-    {
-        for(DrawInfo info:storedInfo)
-            map.drawPixmap(info.mapMarkerPixmap,info.regionX,info.regionY,info.regionWidth,info.regionHeight,info.x,info.y,info.regionWidth1,info.regionHeight1);
+
+    private void drawPixmapNow(Pixmap map) {
+        for (DrawInfo info : storedInfo)
+            map.drawPixmap(info.mapMarkerPixmap, info.regionX, info.regionY, info.regionWidth, info.regionHeight, info.x, info.y, info.regionWidth1, info.regionHeight1);
         storedInfo.clear();
     }
 
@@ -897,6 +897,10 @@ public class World implements Disposable, SaveFileContent {
         return mapPoiIds.findPointsOfInterest(name);
     }
 
+    public List<PointOfInterest> getAllPointOfInterest(){
+        return mapPoiIds.getAllPointOfInterest();
+    }
+
     public int getChunkSize() {
         return (Scene.getIntendedWidth() > Scene.getIntendedHeight() ? Scene.getIntendedWidth() : Scene.getIntendedHeight()) / data.tileSize;
     }
@@ -912,7 +916,7 @@ public class World implements Disposable, SaveFileContent {
 
     public Texture getGlobalTexture() {
         if (globalTexture == null) {
-            globalTexture = new Texture(Config.instance().getFile("ui/sprite_markers.png"));
+            globalTexture = Forge.getAssets().getTexture(Config.instance().getFile("ui/sprite_markers.png"), true, true);
             System.out.print("Loading auxiliary sprites.\n");
         }
         return globalTexture;

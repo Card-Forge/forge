@@ -360,6 +360,7 @@ public class FSkinFont {
             return langUniqueCharacterSet.get(langCode);
         }
         StringBuilder characters = new StringBuilder(FreeTypeFontGenerator.DEFAULT_CHARS);
+        characters.append("•").append("—");//add bullet and long dash to default characters
         IntSet characterSet = new IntSet();
         for (int offset = 0; offset < FreeTypeFontGenerator.DEFAULT_CHARS.length();) {
             final int codePoint = FreeTypeFontGenerator.DEFAULT_CHARS.codePointAt(offset);
@@ -411,12 +412,14 @@ public class FSkinFont {
         if (fontFile != null && fontFile.exists()) {
             FThreads.invokeInEdtNowOrLater(() -> { //font must be initialized on UI thread
                 try {
-                    if (!Forge.getAssets().manager().contains(fontFile.path(), BitmapFont.class) && fontFile.toString().endsWith(".fnt")) {
+                    font = Forge.getAssets().manager().get(fontFile.path(), BitmapFont.class, false);
+                    if (font == null && fontFile.toString().endsWith(".fnt")) {
                         Forge.getAssets().manager().load(fontFile.path(), BitmapFont.class);
                         Forge.getAssets().manager().finishLoadingAsset(fontFile.path());
+                        font = Forge.getAssets().manager().get(fontFile.path(), BitmapFont.class, false);
                     }
-                    font = Forge.getAssets().manager().get(fontFile.path(), BitmapFont.class);
-                    found[0] = true;
+                    if (font != null)
+                        found[0] = true;
                 } catch (Exception e) {
                     e.printStackTrace();
                     found[0] = false;

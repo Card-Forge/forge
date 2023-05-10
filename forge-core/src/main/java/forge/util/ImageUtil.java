@@ -169,6 +169,17 @@ public class ImageUtil {
         String cardCollectorNumber = cp.getCollectorNumber();
         // Hack to account for variations in Arabian Nights
         cardCollectorNumber = cardCollectorNumber.replace("+", "†");
+        // override old planechase sets from their modified id since scryfall move the planechase cards outside their original setcode
+        if (cardCollectorNumber.startsWith("OHOP")) {
+            editionCode = "ohop";
+            cardCollectorNumber = cardCollectorNumber.substring("OHOP".length());
+        } else if (cardCollectorNumber.startsWith("OPCA")) {
+            editionCode = "opca";
+            cardCollectorNumber = cardCollectorNumber.substring("OPCA".length());
+        } else if (cardCollectorNumber.startsWith("OPC2")) {
+            editionCode = "opc2";
+            cardCollectorNumber = cardCollectorNumber.substring("OPC2".length());
+        }
         String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
         if (cp.getRules().getOtherPart() != null) {

@@ -314,21 +314,21 @@ public abstract class SpellAbilityAi {
     public <T extends GameEntity> T chooseSingleEntity(Player ai, SpellAbility sa, Collection<T> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         boolean hasPlayer = false;
         boolean hasCard = false;
-        boolean hasPlaneswalker = false;
+        boolean hasAttackableCard = false;
 
         for (T ent : options) {
             if (ent instanceof Player) {
                 hasPlayer = true;
             } else if (ent instanceof Card) {
                 hasCard = true;
-                if (((Card)ent).isPlaneswalker()) {
-                    hasPlaneswalker = true;
+                if (((Card)ent).isPlaneswalker() || ((Card)ent).isBattle()) {
+                    hasAttackableCard = true;
                 }
             }
         }
 
-        if (hasPlayer && hasPlaneswalker) {
-            return (T) chooseSinglePlayerOrPlaneswalker(ai, sa, (Collection<GameEntity>) options, params);
+        if (hasPlayer && hasAttackableCard) {
+            return (T) chooseSingleAttackableEntity(ai, sa, (Collection<GameEntity>) options, params);
         } else if (hasCard) {
             return (T) chooseSingleCard(ai, sa, (Collection<Card>) options, isOptional, targetedPlayer, params);
         } else if (hasPlayer) {
@@ -353,7 +353,7 @@ public abstract class SpellAbilityAi {
         return Iterables.getFirst(options, null);
     }
 
-    protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
+    protected GameEntity chooseSingleAttackableEntity(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSinglePlayerOrPlaneswalker is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return Iterables.getFirst(options, null);
     }

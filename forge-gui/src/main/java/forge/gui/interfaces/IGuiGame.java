@@ -103,6 +103,7 @@ public interface IGuiGame {
     void updateManaPool(Iterable<PlayerView> manaPoolUpdate);
 
     void updateLives(Iterable<PlayerView> livesUpdate);
+    void updateShards(Iterable<PlayerView> shardsUpdate);
 
     void setPanelSelection(CardView hostCard);
 
@@ -131,13 +132,13 @@ public interface IGuiGame {
 
     int showOptionDialog(String message, String title, FSkinProp icon, List<String> options, int defaultOption);
 
-    String showInputDialog(String message, String title);
+    String showInputDialog(String message, String title, boolean isNumeric);
 
     String showInputDialog(String message, String title, FSkinProp icon);
 
     String showInputDialog(String message, String title, FSkinProp icon, String initialInput);
 
-    String showInputDialog(String message, String title, FSkinProp icon, String initialInput, List<String> inputOptions);
+    String showInputDialog(String message, String title, FSkinProp icon, String initialInput, List<String> inputOptions, boolean isNumeric);
 
     boolean confirm(CardView c, String question);
 

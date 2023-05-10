@@ -2,8 +2,6 @@ package forge.game.ability.effects;
 
 import java.util.Map.Entry;
 
-import forge.game.Game;
-import forge.game.GameEntityCounterTable;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
@@ -21,19 +19,16 @@ public class CountersNoteEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Card source = sa.getHostCard();
-        final Game game = source.getGame();
         Player p = sa.getActivatingPlayer();
         String mode = sa.getParamOrDefault("Mode", "Load");
 
-        GameEntityCounterTable table = new GameEntityCounterTable();
         for (Card c : getDefinedCardsOrTargeted(sa)) {
             if (mode.equals(MODE_STORE)) {
                 noteCounters(c, source);
             } else if (mode.equals(MODE_LOAD)) {
-                loadCounters(c, source, p, sa, table);
+                loadCounters(c, source, p, sa);
             }
         }
-        table.replaceCounterEffect(game, sa, false);
     }
 
     public static void noteCounters(Card notee, Card source) {
@@ -44,13 +39,13 @@ public class CountersNoteEffect extends SpellAbilityEffect {
         }
     }
 
-    private void loadCounters(Card notee, Card source, final Player p, final SpellAbility sa, GameEntityCounterTable table) {
+    private void loadCounters(Card notee, Card source, final Player p, final SpellAbility sa) {
         for (Entry<String, String> svar : source.getSVars().entrySet()) {
             String key = svar.getKey();
             if (key.startsWith(NOTE_COUNTERS)) {
-                notee.addCounter(
+                notee.addEtbCounter(
                         CounterType.getType(key.substring(NOTE_COUNTERS.length())),
-                        Integer.parseInt(svar.getValue()), p, table);
+                        Integer.parseInt(svar.getValue()), p);
             }
             // TODO Probably should "remove" the svars that were temporarily used
         }

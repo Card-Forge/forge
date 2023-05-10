@@ -89,7 +89,7 @@ public class TargetingOverlay {
         }
         if (null != combat) {
             final GameEntityView defender = combat.getDefender(c);
-            // if c is attacking a planeswalker
+            // if c is attacking a planeswalker or battle
             if (defender instanceof CardView) {
                 drawArrow(g, endpoints.get(defender.getId()), endpoints.get(c.getId()), ArcConnection.FoesAttacking);
             }

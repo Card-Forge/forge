@@ -32,14 +32,6 @@ public class RepeatEachEffect extends SpellAbilityEffect {
 
         final SpellAbility repeat = sa.getAdditionalAbility("RepeatSubAbility");
 
-        if (repeat != null && !repeat.getHostCard().equalsWithTimestamp(source)) {
-            // TODO: for some reason, the host card of the original additional SA is set to the cloned card when
-            // the ability is copied (e.g. Clone Legion + Swarm Intelligence). Couldn't figure out why this happens,
-            // so this hack is necessary for now to work around this issue.
-            System.out.println("Warning: RepeatSubAbility had the wrong host set (potentially after cloning the root SA or changing zones), attempting to correct...");
-            repeat.setHostCard(source);
-        }
-
         final Player player = sa.getActivatingPlayer();
         final Game game = player.getGame();
         if (sa.hasParam("Optional") && sa.hasParam("OptionPrompt") && //for now, OptionPrompt is needed
@@ -74,10 +66,6 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         }
         else if (sa.hasParam("DefinedCards")) {
             repeatCards = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
-            if (sa.hasParam("AdditionalRestriction")) { // lki cards might not be in game
-                repeatCards = CardLists.getValidCards(repeatCards,
-                        sa.getParam("AdditionalRestriction"), source.getController(), source, sa);
-            }
         }
         boolean loopOverCards = repeatCards != null && !repeatCards.isEmpty();
 
@@ -125,13 +113,10 @@ public class RepeatEachEffect extends SpellAbilityEffect {
 
         // for a mixed list of target permanents and players, e.g. Soulfire Eruption
         if (sa.hasParam("RepeatTargeted")) {
-            final List <GameObject> tgts = getTargets(sa);
-            if (tgts != null) {
-                for (final Object o : tgts) {
-                    source.addRemembered(o);
-                    AbilityUtils.resolve(repeat);
-                    source.removeRemembered(o);
-                }
+            for (final GameObject o : getTargets(sa)) {
+                source.addRemembered(o);
+                AbilityUtils.resolve(repeat);
+                source.removeRemembered(o);
             }
         }
 
@@ -142,7 +127,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             if (def.startsWith("ThisTurnCast")) {
                 final String[] workingCopy = def.split("_");
                 final String validFilter = workingCopy[1];
-                res = CardUtil.getThisTurnCast(validFilter, source, sa);
+                res = CardUtil.getThisTurnCast(validFilter, source, sa, player);
             } else if (def.startsWith("Defined ")) {
                 res = AbilityUtils.getDefinedCards(source, def.substring(8), sa);
             } else {
@@ -161,7 +146,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             if (sa.hasParam("ChooseOrder") && !sa.getParam("ChooseOrder").equals("True")) {
                 chooser = AbilityUtils.getDefinedPlayers(source, sa.getParam("ChooseOrder"), sa).get(0);
             }
-            while (validTypes.size() > 0) {
+            while (!validTypes.isEmpty()) {
                 String chosenT = chooser.getController().chooseSomeType("card", sa, validTypes, null);
                 source.setChosenType(chosenT);
                 AbilityUtils.resolve(repeat);
@@ -184,8 +169,12 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 }
             }
             for (final Player p : repeatPlayers) {
-                if (optional && !p.getController().confirmAction(repeat, null, sa.getParam("RepeatOptionalMessage"), null)) {
-                    continue;
+                if (optional) {
+                    if (!p.getController().confirmAction(repeat, null, sa.getParam("RepeatOptionalMessage"), null)) {
+                        continue;
+                    } else if (sa.hasParam("RememberDeciders")) {
+                        source.addRemembered(p);
+                    }
                 }
                 if (nextTurn) {
                     game.getCleanup().addUntil(p, new GameCommand() {

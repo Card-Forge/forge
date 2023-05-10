@@ -17,8 +17,8 @@ public class KeywordWithAmount extends KeywordInstance<KeywordWithAmount> {
             if (details.contains(":")) {
                 extra = details.split(":")[1];
             }
-        } else  {
-            amount = Integer.parseInt(details);
+        } else {
+            amount = details.contains(":") ? Integer.parseInt(details.split(":")[0]) : Integer.parseInt(details);
         }
     }
 

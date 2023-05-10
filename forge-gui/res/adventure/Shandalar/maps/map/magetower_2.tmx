@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="65">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="78">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Staff of the Death Magus&quot; ]}"/>
+ </properties>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgaYBcPAtMTyELtk6azvQPlX3oB5PCM5kX4cyeQjuJFyMlS2f/I9qKbjU9u1N7Bay8o7ewF4npuys0iB4zaTX8AKxupnW6JAdIDYC+2uoCS+gEAlQ0VTg==
+   eJxjYBgaYBcPAtMTyELtk6azvQPlX3oBYsNTlsr+R7YX3Wx8cqP2Dl57QXlkLxDXc1NuFjlg1G76A1jZSO10SwyQHgB7sdUFlNQPANR4EvQ=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -25,32 +28,95 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgaYAkvA8NSIF7GS197DwDtOwjEh+hs7x2gfXeB+B6d7aUX6OZnYFgAxSA2sXKUggX82NmE5CgFIH98B+IfOPyLS45SAPKHsAADg4gAdv/ikqMUIPsDm39xyZELbAWpYw45wJ5Eu39S0W5xNuLU/QDiOiqXJXZ4/B0Dte8Xda2Eg9n82MP9OxDXDNMyk5oAAKdwIzQ=
+   eJxjYBgaYII6A8NEIJ6kTl971wDtWwvE6+hs7wmgfSeB+BSd7aUXKNdkYOiBYhCbWDlKQY8mdjYhOUoByB+5wgwMecLY/YtLjlIA8ge3CAMDjwh2/+KSoxQg+wObf3HJkQs0taljDjlAm0S7f1LRbnE24tT9AOI6XipaDARaePwdA7XvF3WthIN2Tezh/h2Ia6jsz+EIAEjpIfA=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
+  <properties>
+   <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Staff of the Death Magus&quot; ]}"/>
+  </properties>
   <object id="38" template="../obj/entry_up.tx" x="208.333" y="270.665">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../obj/treasure.tx" x="163.833" y="45.8333"/>
-  <object id="50" template="../obj/enemy.tx" x="207.902" y="91.0586">
+  <object id="50" template="../obj/enemy.tx" x="208.402" y="125.559">
    <properties>
     <property name="enemy" value="Black Wiz1"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="68,71"/>
    </properties>
   </object>
-  <object id="54" template="../obj/enemy.tx" x="152" y="137">
+  <object id="54" template="../obj/enemy.tx" x="153" y="130.5">
    <properties>
     <property name="enemy" value="Demon"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="56" template="../obj/enemy.tx" x="263.333" y="138.167">
+  <object id="56" template="../obj/enemy.tx" x="264.833" y="135.167">
    <properties>
     <property name="enemy" value="Devil"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
   <object id="62" template="../obj/gold.tx" x="153" y="112.5"/>
-  <object id="64" template="../obj/gold.tx" x="264" y="114"/>
+  <object id="65" template="../obj/enemy.tx" x="175" y="191.5">
+   <properties>
+    <property name="enemy" value="Black Wiz1"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="74,72,74,68,70,73,69,73,70,68"/>
+   </properties>
+  </object>
+  <object id="66" template="../obj/enemy.tx" x="321.5" y="151">
+   <properties>
+    <property name="enemy" value="Black Wiz1"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="69,73,70,68,74,72,74,68,70,73"/>
+   </properties>
+  </object>
+  <object id="67" template="../obj/booster.tx" x="262" y="113.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MMQ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MMQ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MMQ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="68" template="../obj/waypoint.tx" x="209" y="190.5"/>
+  <object id="69" template="../obj/waypoint.tx" x="320" y="119"/>
+  <object id="70" template="../obj/waypoint.tx" x="278" y="212"/>
+  <object id="71" template="../obj/waypoint.tx" x="207.5" y="86.5"/>
+  <object id="72" template="../obj/waypoint.tx" x="150" y="160"/>
+  <object id="73" template="../obj/waypoint.tx" x="318" y="184.5"/>
+  <object id="74" template="../obj/waypoint.tx" x="152.5" y="195.5"/>
+  <object id="75" template="../obj/manashards.tx" x="258" y="45"/>
+  <object id="76" template="../obj/treasure.tx" x="161.5" y="48">
+   <properties>
+    <property name="reward">[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;Black&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Spell Book&quot;},
+{
+&quot;type&quot;: &quot;card&quot;,
+&quot;probability&quot;: 1,
+&quot;count&quot;: 1,
+&quot;cardName&quot;: &quot;Staff of the Death Magus&quot;}]</property>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

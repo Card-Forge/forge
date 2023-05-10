@@ -4,6 +4,7 @@ import forge.game.Game;
 import forge.game.player.Player;
 import forge.gui.GuiBase;
 import forge.item.IPaperCard;
+import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.skin.FSkinProp;
 import forge.localinstance.skin.ISkinImage;
@@ -123,6 +124,10 @@ public abstract class Achievement {
 
     protected abstract int evaluate(Player player, Game game);
 
+    public boolean isActive() {
+        return earnedSpecial() || earnedMythic() || earnedRare() || earnedUncommon() || earnedCommon();
+    }
+
     private void updateTrophyImage() {
         FSkinProp background;
         float opacity = 1;
@@ -150,7 +155,7 @@ public abstract class Achievement {
                 background = FSkinProp.IMG_COMMON_TROPHY;
             }
         }
-        image = GuiBase.getInterface().createLayeredImage(background, ForgeConstants.CACHE_ACHIEVEMENTS_DIR + "/" + key + ".png", opacity);
+        image = GuiBase.getInterface().createLayeredImage((PaperCard) getPaperCard(), background, ForgeConstants.CACHE_ACHIEVEMENTS_DIR + "/" + key + ".png", opacity);
     }
 
     public int update(final Player player) {

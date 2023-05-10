@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -404,8 +405,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         } else if ("Sacrificed".equals(condition)) {
             final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.CastSA);
-            if (trigSA != null &&
-                    (trigSA.getPaidList("Sacrificed") == null || trigSA.getPaidList("Sacrificed").isEmpty())) {
+            if (trigSA != null && Iterables.isEmpty(trigSA.getPaidList("Sacrificed"))) {
                 return false;
             }
         } else if ("AttackedPlayerWithMostLife".equals(condition)) {
@@ -612,5 +612,11 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     public SpellAbility ensureAbility() {
         return ensureAbility(this);
+    }
+
+    @Override
+    public void setOverridingAbility(SpellAbility overridingAbility0) {
+        super.setOverridingAbility(overridingAbility0);
+        overridingAbility0.setTrigger(this);
     }
 }

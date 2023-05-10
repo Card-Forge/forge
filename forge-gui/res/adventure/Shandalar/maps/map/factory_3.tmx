@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="74">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="88">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzFVVEOwyAI5X96ArOL2bOs91rT3m0z2UsZAQW3pC8hRgQfIijRdVgy0ZbGUnPfVltv86bXcE/+GHu2RVlr9pqe77W/x/VGdHxGLh4UIw8jXqwjRi5e3ogevDWfdyJjlraR/XdDf0ze7yb8nkqcqDcN8nxVOS9sIjUIjPKsxS1z/U9e7BvJt/S35r16Rm8vxj38Cm+egWg9a/4zvBFbGR+Hxau9T5aA9+G0b2L1r+dPQH/xt837n1h58KKkb96Znrqa9wUX/l4H
+   eJzFVe0NAiEM7X85FiA3hR/D3M2ic+goEl3CibxGGytpoUWTewm5AI++3qMNAOthHgByaI9pqHOlfZzjuoQx2HOscZOwh3xpncc6L3k9IsBl+e7ia3iQFB9auvu3zjZ+dD36WvyW7oHF1/S8PiNuyvq9835zce7KvOUcra7KGpyEmiWOpwYJLZ+lvHPxD//Upbgev8vz2rxWz9Tbs3IPv8LqM6H0uMbVzvfoerhlfhyaLt7raWMbpHs08nFo/Wt5E6i/Ruad9T3RfLAihW/dnp5aW/cJSmlZMw==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -35,7 +35,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBjZ4AYfZfo7+BkYvvIyMHwD4sNA9hF+0vTv4YfgiUB3TMLillYk86KRxH2B4oJA9UJAfB/IfkCivc+B6l8A8Vqg/nU4wqCYmTQziQHMAgwMLECcBnIvFjcj+/EP9a3HC26w0Ne+n2j8WCAOZoewY7DIEQueAsP1GT8mjQ6WkJhmsIH1QDM2kGlOIDDdBQFxMDT9qQoh/PlICL/e00A7zxBpbztU3W8oPxdoXx4Q5yOl+8VQNb94iTMTBUDzMLb0jA9EQukiIdR0jw20kxHG35HYusA8pycAYYPKFFje0iAQzqMAN4gbaAdQAABFjyvc
+   eJxjYBjZ4IgGZfpLNBkYHqozMDwC4vVA9gZN0vSv0ITgWqA76rC4pRDJvGgkcUug+F+gnf+A+DSQfYZEey8D1V8B4plAO2fhCINiZtLMJAa8B9r5AYiDgPgNFnuR/fiH+tbjBTdY6GvfTzR+LBAHs0PYMVjkiAUXgWF7SROTRgcTSEwz2MBsoBlzyDTHFhj/dkBsD00HgjoIf57Twa93O9DOHUTaWwxV9xvKjwTaFwXE0Ujprx+q5pk6cWYiA1A6XoEjPeMDkVA6Tgc13WMDxWSE8XcktqQWA4OUFoQNKlNgeUuEQDiPAtwgbqAdQAEAAEykNB8=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -44,29 +44,89 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../obj/enemy.tx" x="177.181" y="169.351">
+  <object id="50" template="../obj/enemy.tx" x="112.181" y="166.351">
    <properties>
     <property name="enemy" value="Red Wiz1"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="79,78"/>
    </properties>
   </object>
   <object id="62" template="../obj/gold.tx" x="21.1853" y="40.0443"/>
   <object id="65" template="../obj/gold.tx" x="321.724" y="170.529"/>
-  <object id="66" template="../obj/gold.tx" x="24.0001" y="136"/>
-  <object id="67" template="../obj/enemy.tx" x="208.171" y="229.525">
+  <object id="66" template="../obj/gold.tx" x="25.3334" y="144"/>
+  <object id="67" template="../obj/enemy.tx" x="214.171" y="208.358">
    <properties>
     <property name="enemy" value="ClayGolem"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="68" template="../obj/enemy.tx" x="181.678" y="75.0046">
+  <object id="68" template="../obj/enemy.tx" x="88.678" y="42.5046">
    <properties>
     <property name="enemy" value="Golem"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="82,85,86,87"/>
    </properties>
   </object>
-  <object id="69" template="../obj/enemy.tx" x="358.586" y="105.875">
+  <object id="69" template="../obj/enemy.tx" x="360.086" y="110.375">
    <properties>
     <property name="enemy" value="Blue Wiz1"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="83,81,83,84"/>
    </properties>
   </object>
   <object id="72" template="../obj/gold.tx" x="392.667" y="81.3333"/>
+  <object id="74" template="../obj/booster.tx" x="27.5" y="107.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;BRO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BRO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BRO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="75" template="../obj/treasure.tx" x="171.5" y="215.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;addMaxCount&quot;: 2
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="76" template="../obj/manashards.tx" x="289.333" y="52"/>
+  <object id="77" template="../obj/manashards.tx" x="324" y="83.3333"/>
+  <object id="78" template="../obj/waypoint.tx" x="67.3333" y="170.667"/>
+  <object id="79" template="../obj/waypoint.tx" x="171.333" y="168"/>
+  <object id="80" template="../obj/waypoint.tx" x="282" y="76.6667"/>
+  <object id="81" template="../obj/waypoint.tx" x="290.667" y="138"/>
+  <object id="82" template="../obj/waypoint.tx" x="176.833" y="41.5"/>
+  <object id="83" template="../obj/waypoint.tx" x="361.333" y="136.667"/>
+  <object id="84" template="../obj/waypoint.tx" x="361" y="86"/>
+  <object id="85" template="../obj/waypoint.tx" x="165" y="109.5"/>
+  <object id="86" template="../obj/waypoint.tx" x="30" y="103.5"/>
+  <object id="87" template="../obj/waypoint.tx" x="23" y="45.5"/>
  </objectgroup>
 </map>

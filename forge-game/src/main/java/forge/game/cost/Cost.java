@@ -174,7 +174,7 @@ public class Cost implements Serializable {
      */
     public final ManaCost getTotalMana() {
         CostPartMana manapart = getCostMana();
-        return manapart == null ? ManaCost.ZERO : manapart.getManaToPay();
+        return manapart == null ? ManaCost.ZERO : manapart.getMana();
     }
 
     /**
@@ -210,6 +210,10 @@ public class Cost implements Serializable {
         costParts.add(new CostPartMana(cost, null));
     }
 
+    public Cost(String parse, final boolean bAbility) {
+        this(parse, bAbility, true);
+    }
+
     /**
      * <p>
      * Constructor for Cost.
@@ -219,7 +223,7 @@ public class Cost implements Serializable {
      * @param bAbility
      *            a boolean.
      */
-    public Cost(String parse, final boolean bAbility) {
+    public Cost(String parse, final boolean bAbility, final boolean intrinsic) {
         this.isAbility = bAbility;
         // when adding new costs for cost string, place them here
 
@@ -249,6 +253,9 @@ public class Cost implements Serializable {
                     if (cp instanceof CostPartMana) {
                         parsedMana = (CostPartMana) cp;
                     } else {
+                        if (cp instanceof CostPartWithList) {
+                            ((CostPartWithList)cp).setIntrinsic(intrinsic);
+                        }
                         this.costParts.add(cp);
                     }
                 else
@@ -448,10 +455,16 @@ public class Cost implements Serializable {
             return new CostExile(splitStr[0], splitStr[1], description, ZoneType.Library);
         }
 
+        if (parse.startsWith("ExileAnyGrave<")) {
+            final String[] splitStr = abCostParse(parse, 3);
+            final String description = splitStr.length > 2 ? splitStr[2] : null;
+            return new CostExile(splitStr[0], splitStr[1], description, ZoneType.Graveyard, -1);
+        }
+
         if (parse.startsWith("ExileSameGrave<")) {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            return new CostExile(splitStr[0], splitStr[1], description, ZoneType.Graveyard, true);
+            return new CostExile(splitStr[0], splitStr[1], description, ZoneType.Graveyard, 0);
         }
 
         if (parse.startsWith("Return<")) {
@@ -937,7 +950,8 @@ public class Cost implements Serializable {
             } else if (part instanceof CostPutCounter || (mergeAdditional && // below usually not desired because they're from different causes
                     (part instanceof CostDiscard || part instanceof CostDraw ||
                     part instanceof CostAddMana || part instanceof CostPayLife ||
-                    part instanceof CostSacrifice || part instanceof CostTapType))) {
+                    part instanceof CostSacrifice || part instanceof CostTapType||
+                    part instanceof CostExile))) {
                 boolean alreadyAdded = false;
                 for (final CostPart other : costParts) {
                     if ((other.getClass().equals(part.getClass()) || (part instanceof CostPutCounter && ((CostPutCounter)part).getCounter().is(CounterEnumType.LOYALTY))) &&
@@ -946,6 +960,7 @@ public class Cost implements Serializable {
                             StringUtils.isNumeric(other.getAmount())) {
                         String amount = String.valueOf(part.convertAmount() + other.convertAmount());
                         if (part instanceof CostPutCounter) { // CR 606.5 path for Carth
+                            // TODO support X
                             if (other instanceof CostPutCounter && ((CostPutCounter)other).getCounter().equals(((CostPutCounter) part).getCounter())) {
                                 costParts.add(new CostPutCounter(amount, ((CostPutCounter) part).getCounter(), part.getType(), part.getTypeDescription()));
                             } else if (other instanceof CostRemoveCounter && ((CostRemoveCounter)other).counter.is(CounterEnumType.LOYALTY)) {
@@ -972,6 +987,8 @@ public class Cost implements Serializable {
                             costParts.add(new CostAddMana(amount, part.getType(), part.getTypeDescription()));
                         } else if (part instanceof CostPayLife) {
                             costParts.add(new CostPayLife(amount, part.getTypeDescription()));
+                        } else if (part instanceof CostExile) {
+                            costParts.add(new CostExile(amount, part.getType(), part.getTypeDescription(), ((CostExile) part).getFrom()));
                         }
                         toRemove.add(other);
                         alreadyAdded = true;

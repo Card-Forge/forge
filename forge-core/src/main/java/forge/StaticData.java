@@ -225,7 +225,7 @@ public class StaticData {
         return foil ? card.getFoiled() : card;
     }
 
-    public void attemptToLoadCard(String cardName){
+    public void attemptToLoadCard(String cardName) {
         this.attemptToLoadCard(cardName, null);
     }
     public void attemptToLoadCard(String cardName, String setCode) {
@@ -798,7 +798,7 @@ public class StaticData {
                     if (!loadNonLegalCards && CardEdition.Type.FUNNY.equals(e.getType()))
                         continue;
                     if (!cniHeader) {
-                        cardNotImplemented.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                        cardNotImplemented.append("\nEdition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
                         cniHeader = true;
                     }
                     cardNotImplemented.append(" ").append(c).append("\n");
@@ -904,4 +904,17 @@ public class StaticData {
         this.enableSmartCardArtSelection = isEnabled;
     }
 
+    public boolean isRebalanced(String name)
+    {
+        if (!name.startsWith("A-")) {
+            return false;
+        }
+        for(PaperCard pc : this.getCommonCards().getAllCards(name)) {
+            CardEdition e = this.editions.get(pc.getEdition());
+            if (e != null && e.isRebalanced(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

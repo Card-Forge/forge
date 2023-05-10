@@ -438,6 +438,10 @@ public class PumpAi extends PumpAiBase {
                 list = CardLists.getTargetableCards(list, sa);
                 CardLists.sortByPowerDesc(list);
 
+                if (list.contains(source) && source.hasKeyword("You may choose not to untap CARDNAME during your untap step.") && sa.getPayCosts().hasTapCost()) {
+                    list.remove(source); // don't tap a card that will be tapped as a part of the cost and won't untap normally.
+                }
+
                 // Try not to kill own creatures with this pump
                 CardCollection canDieToPump = new CardCollection();
                 for (Card c : list) {
@@ -612,23 +616,16 @@ public class PumpAi extends PumpAiBase {
     }
 
     private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa) {
-        final Game game = ai.getGame();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        CardCollection list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
+        List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
 
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();
             return false;
         }
 
-        // Remove anything that's already been targeted
-        for (final Card c : sa.getTargets().getTargetCards()) {
-            list.remove(c);
-        }
-
         CardCollection pref;
         CardCollection forced;
-        final Card source = sa.getHostCard();
 
         if (sa.isCurse()) {
             pref = CardLists.filterControlledBy(list, ai.getOpponents());
@@ -648,7 +645,7 @@ public class PumpAi extends PumpAiBase {
             sa.getTargets().add(c);
         }
 
-        while (sa.getTargets().size() < tgt.getMinTargets(source, sa)) {
+        while (!sa.isMinTargetChosen()) {
             if (forced.isEmpty()) {
                 break;
             }
@@ -664,7 +661,7 @@ public class PumpAi extends PumpAiBase {
             sa.getTargets().add(c);
         }
 
-        if (sa.getTargets().size() < tgt.getMinTargets(source, sa)) {
+        if (!sa.isMinTargetChosen()) {
             sa.resetTargets();
             return false;
         }

@@ -28,7 +28,8 @@ public class NewGameMenu extends FPopupMenu {
         QuestMode(Forge.getLocalizer().getMessageorUseDefault("lblQuestMode", "Quest Mode"), FSkinImage.QUEST_ZEP, NewQuestScreen.class),
         PuzzleMode(Forge.getLocalizer().getMessageorUseDefault("lblPuzzleMode", "Puzzle Mode"), FSkinImage.MENU_PUZZLE, PuzzleScreen.class),
         PlanarConquest(Forge.getLocalizer().getMessageorUseDefault("lblPlanarConquest", "Planar Conquest"), FSkinImage.MENU_GALAXY, NewConquestScreen.class),
-        Gauntlet(Forge.getLocalizer().getMessageorUseDefault("lblGauntlet", "Gauntlet"), FSkinImage.MENU_GAUNTLET, NewGauntletScreen.class);
+        Gauntlet(Forge.getLocalizer().getMessageorUseDefault("lblGauntlet", "Gauntlet"), FSkinImage.MENU_GAUNTLET, NewGauntletScreen.class),
+        Adventure(Forge.getLocalizer().getMessageorUseDefault("lblAdventureMode", "Adventure Mode"), FSkinImage.MENU_ADVLOGO, AdventureScreen.class);
 
         private final FMenuItem item;
         private final Class<? extends FScreen> screenClass;
@@ -98,7 +99,11 @@ public class NewGameMenu extends FPopupMenu {
     public static void setPreferredScreen(NewGameScreen preferredScreen0) {
         if (preferredScreen == preferredScreen0) { return; }
         preferredScreen = preferredScreen0;
-        prefs.setPref(FPref.NEW_GAME_SCREEN, preferredScreen.name());
+        String prefName = preferredScreen.name();
+        //don't save adventure mode launchscreen, default to constructed
+        if (NewGameScreen.Adventure.equals(preferredScreen))
+            prefName = NewGameScreen.Constructed.name();
+        prefs.setPref(FPref.NEW_GAME_SCREEN, prefName);
         prefs.save();
     }
 

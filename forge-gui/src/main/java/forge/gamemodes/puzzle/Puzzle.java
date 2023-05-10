@@ -196,6 +196,11 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
                 String countOTB = "Count$Valid " + targets;
                 clearSA.setSVar("PermCount", countOTB);
                 break;
+            case "win before opponent's next turn":
+                trig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Command | Static$ True | " +
+                        " | TriggerDescription$ At the beginning of your opponent's next turn, you lose the game.";
+                eff = "DB$ LosesGame | Defined$ You";
+                break;
             default:
                 break;
         }

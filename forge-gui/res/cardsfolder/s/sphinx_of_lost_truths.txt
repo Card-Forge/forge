@@ -4,9 +4,7 @@ Types:Creature Sphinx
 PT:3/5
 K:Flying
 K:Kicker:1 U
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notkicked | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw three cards. Then if it wasn't kicked, discard three cards.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Secondary$ True | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, draw three cards.
-SVar:TrigKicker:DB$ Draw | NumCards$ 3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw three cards. Then if it wasn't kicked, discard three cards.
 SVar:TrigDraw:DB$ Draw | NumCards$ 3 | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 3
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 3 | ConditionDefined$ Self | ConditionPresent$ Card.!kicked
 Oracle:Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nFlying\nWhen Sphinx of Lost Truths enters the battlefield, draw three cards. Then if it wasn't kicked, discard three cards.

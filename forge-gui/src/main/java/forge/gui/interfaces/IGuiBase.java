@@ -32,11 +32,11 @@ public interface IGuiBase {
     ISkinImage getUnskinnedIcon(String path);
     ISkinImage getCardArt(PaperCard card);
     ISkinImage getCardArt(PaperCard card, boolean backFace);
-    ISkinImage createLayeredImage(FSkinProp background, String overlayFilename, float opacity);
+    ISkinImage createLayeredImage(PaperCard card, FSkinProp background, String overlayFilename, float opacity);
     void showBugReportDialog(String title, String text, boolean showExitAppBtn);
     void showImageDialog(ISkinImage image, String message, String title);
     int showOptionDialog(String message, String title, FSkinProp icon, List<String> options, int defaultOption);
-    String showInputDialog(String message, String title, FSkinProp icon, String initialInput, List<String> inputOptions);
+    String showInputDialog(String message, String title, FSkinProp icon, String initialInput, List<String> inputOptions, boolean isNumeric);
     <T> List<T> getChoices(String message, int min, int max, Collection<T> choices, T selected, Function<T, String> display);
     <T> List<T> order(String title, String top, int remainingObjectsMin, int remainingObjectsMax, List<T> sourceChoices, List<T> destChoices);
     String showFileDialog(String title, String defaultDir);

@@ -10,7 +10,9 @@ import com.badlogic.gdx.graphics.Texture.TextureWrap;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
+import forge.util.ImageFetcher;
 
 public enum FSkinTexture implements FImage {
     BG_TEXTURE(ForgeConstants.TEXTURE_BG_FILE, true, false),
@@ -166,13 +168,39 @@ public enum FSkinTexture implements FImage {
     Interplanar_Tunnel(ForgeConstants.BG_83, false, true),
     Morphic_Tide(ForgeConstants.BG_84, false, true),
     Mutual_Epiphany(ForgeConstants.BG_85, false, true),
-    Time_Distortion(ForgeConstants.BG_86, false, true);
+    Time_Distortion(ForgeConstants.BG_86, false, true),
+    Enigma_Ridges(ForgeConstants.BG_87, false, true),
+    Esper(ForgeConstants.BG_88, false, true),
+    Ghirapur(ForgeConstants.BG_89, false, true),
+    Inys_Haen(ForgeConstants.BG_90, false, true),
+    Ketria(ForgeConstants.BG_91, false, true),
+    Littjara(ForgeConstants.BG_92, false, true),
+    Megaflora_Jungle(ForgeConstants.BG_93, false, true),
+    Naktamun(ForgeConstants.BG_94, false, true),
+    New_Argive(ForgeConstants.BG_95, false, true),
+    Norns_Seedcore(ForgeConstants.BG_96, false, true),
+    Nyx(ForgeConstants.BG_97, false, true),
+    Paliano(ForgeConstants.BG_98, false, true),
+    Riptide_Island(ForgeConstants.BG_99, false, true),
+    Strixhaven(ForgeConstants.BG_100, false, true),
+    Ten_Wizards_Mountain(ForgeConstants.BG_101, false, true),
+    The_Caldaia(ForgeConstants.BG_102, false, true),
+    The_Fertile_Lands_of_Saulvinia(ForgeConstants.BG_103, false, true),
+    The_Golden_City_of_Orazca(ForgeConstants.BG_104, false, true),
+    The_Great_Aerie(ForgeConstants.BG_105, false, true),
+    The_Pit(ForgeConstants.BG_106, false, true),
+    The_Western_Cloud(ForgeConstants.BG_107, false, true),
+    The_Wilds(ForgeConstants.BG_108, false, true),
+    Towashi(ForgeConstants.BG_109, false, true),
+    Unyaro(ForgeConstants.BG_110, false, true),
+    Valors_Reach(ForgeConstants.BG_111, false, true);
+
 
     private final String filename;
     private final boolean repeat;
     private Texture texture;
     private final boolean isPlanechaseBG;
-    private static List<String> PlanesValue;
+    private static List<String> planechaseString;
     private boolean isloaded = false;
     private boolean hasError = false;
 
@@ -181,19 +209,18 @@ public enum FSkinTexture implements FImage {
         repeat = repeat0;
         isPlanechaseBG = isPlanechaseBG0;
     }
-
-    static {
-        PlanesValue = new ArrayList<>();
-        for (FSkinTexture PlanesEnum : FSkinTexture.values()) {
-                PlanesValue.add(PlanesEnum.filename
-                        .replace(".jpg", "")
-                        .replace("'", "")
-                        .replace("-", ""));
-        }
-    }
-
     public static List<String> getValues() {
-        return Collections.unmodifiableList(PlanesValue);
+        if (planechaseString == null) {
+            planechaseString = new ArrayList<>();
+            for (FSkinTexture fskinTexture : FSkinTexture.values()) {
+                if (fskinTexture.isPlanechaseBG)
+                    planechaseString.add(fskinTexture.filename
+                            .replace(".jpg", "")
+                            .replace("'", "")
+                            .replace("-", ""));
+            }
+        }
+        return Collections.unmodifiableList(planechaseString);
     }
 
     public void load() {
@@ -202,14 +229,9 @@ public enum FSkinTexture implements FImage {
         FileHandle preferredFile = isPlanechaseBG ? FSkin.getCachePlanechaseFile(filename) : FSkin.getSkinFile(filename);
         if (preferredFile.exists()) {
             try {
-                if (preferredFile.path().contains("fallback_skin")) {
-                    texture = new Texture(preferredFile);
-                } else {
-                    Forge.getAssets().manager().load(preferredFile.path(), Texture.class);
-                    Forge.getAssets().manager().finishLoadingAsset(preferredFile.path());
-                    texture = Forge.getAssets().manager().get(preferredFile.path(), Texture.class);
-                }
-                isloaded = true;
+                texture = Forge.getAssets().getTexture(preferredFile, false);
+                if (texture != null)
+                    isloaded = true;
             }
             catch (final Exception e) {
                 System.err.println("Failed to load skin file: " + preferredFile);
@@ -222,6 +244,11 @@ public enum FSkinTexture implements FImage {
             //use default file if can't use preferred file
             FileHandle defaultFile = FSkin.getDefaultSkinFile(filename);
             if(isPlanechaseBG) {
+                ImageFetcher fetcher = GuiBase.getInterface().getImageFetcher();
+                fetcher.fetchImage("PLANECHASEBG:" + filename, () -> {
+                    hasError = false;
+                    load();
+                });
                 defaultFile = FSkin.getSkinFile(ForgeConstants.MATCH_BG_FILE);
                 if(!defaultFile.exists())
                     defaultFile = FSkin.getDefaultSkinFile(ForgeConstants.MATCH_BG_FILE);
@@ -229,13 +256,7 @@ public enum FSkinTexture implements FImage {
 
             if (defaultFile.exists()) {
                 try {
-                    if (defaultFile.path().contains("fallback_skin")) {
-                        texture = new Texture(defaultFile);
-                    } else {
-                        Forge.getAssets().manager().load(defaultFile.path(), Texture.class);
-                        Forge.getAssets().manager().finishLoadingAsset(defaultFile.path());
-                        texture = Forge.getAssets().manager().get(defaultFile.path(), Texture.class);
-                    }
+                    texture = Forge.getAssets().getTexture(defaultFile);
                     isloaded = true;
                 }
                 catch (final Exception e) {
@@ -254,7 +275,8 @@ public enum FSkinTexture implements FImage {
             }
         }
         if (repeat) {
-            texture.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
+            if (texture != null)
+                texture.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
         }
     }
 

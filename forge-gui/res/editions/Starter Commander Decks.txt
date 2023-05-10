@@ -358,3 +358,30 @@ ScryfallCode=SCD
 350 L Forest @Yeong-Hao Han
 351 L Forest @Titus Lunter
 352 L Forest @Titus Lunter
+
+[tokens]
+b_0_0_zombie_army
+b_2_2_zombie
+b_2_2_zombie_knight_menace
+b_x_x_demon_flying
+c_10_10_eldrazi
+c_1_1_a_thopter_flying
+c_a_treasure_sac
+g_1_1_elf_warrior
+g_1_1_insect_flying_deathtouch
+g_1_1_saproling
+g_3_3_beast
+g_3_3_elephant
+karox_bladewing
+r_3_3_ogre
+r_5_5_dragon_flying
+u_1_1_a_thopter_flying
+u_1_1_faerie_flying
+w_1_1_bird_flying
+w_1_1_cat_bird_flying
+w_1_1_human_warrior
+w_1_1_pegasus_flying
+w_1_1_soldier_lifelink
+w_1_1_spirit_flying
+w_2_2_cat
+w_2_2_cat_beast

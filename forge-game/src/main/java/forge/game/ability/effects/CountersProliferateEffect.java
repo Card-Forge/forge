@@ -9,10 +9,7 @@ import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerPredicates;
@@ -36,10 +33,10 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        int num = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa) : 1;
         final Player p = sa.getActivatingPlayer();
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
+        int num = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa) : 1;
 
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(p);
         repParams.put(AbilityKey.Source, sa);

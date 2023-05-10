@@ -1,0 +1,16 @@
+Name:Chiss-Goria, Forge Tyrant
+ManaCost:6 R R R
+Types:Legendary Creature Dragon
+PT:5/4
+K:Affinity:Artifact
+K:Flying
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME attacks, exile the top five cards of your library. You may cast an artifact spell from among them this turn. If you do, it has affinity for artifacts.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 5 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay,STAffinity | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Exile,Stack | Affected$ Card.IsRemembered+Artifact+nonLand | MayPlay$ True | MayPlayLimit$ 1 | Description$ You may cast an artifact spell from among them this turn. If you do, it has affinity for artifacts.
+SVar:STAffinity:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Stack | AddKeyword$ Affinity:Artifact | Affected$ Card.CastSa Spell.MayPlaySource
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:HasAttackEffect:TRUE
+DeckNeeds:Type$Artifact
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nFlying, haste\nWhenever Chiss-Goria, Forge Tyrant attacks, exile the top five cards of your library. You may cast an artifact spell from among them this turn. If you do, it has affinity for artifacts.

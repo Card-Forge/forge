@@ -61,7 +61,7 @@ public class DamageAllEffect extends DamageBaseEffect {
         //Remember params from this effect have been moved to dealDamage in GameAction
         Player targetPlayer = sa.getTargets().getFirstTargetedPlayer();
 
-        final String players = sa.getParamOrDefault("ValidPlayers", "");
+        final String players = sa.getParam("ValidPlayers");
 
         CardCollectionView list;
         if (sa.hasParam("ValidCards")) {
@@ -93,9 +93,8 @@ public class DamageAllEffect extends DamageBaseEffect {
             damageMap.put(sourceLKI, c, dmg);
         }
 
-        if (!players.equals("")) {
-            final List<Player> playerList = AbilityUtils.getDefinedPlayers(card, players, sa);
-            for (final Player p : playerList) {
+        if (players != null) {
+            for (final Player p : AbilityUtils.getDefinedPlayers(card, players, sa)) {
                 damageMap.put(sourceLKI, p, dmg);
             }
         }

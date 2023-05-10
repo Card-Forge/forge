@@ -27,12 +27,15 @@ public class TriggerEnlisted extends Trigger {
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
             return false;
         }
+        if (!matchesValidParam("ValidEnlisted", runParams.get(AbilityKey.Enlisted))) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Enlisted);
     }
 
     @Override

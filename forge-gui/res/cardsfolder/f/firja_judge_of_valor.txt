@@ -5,7 +5,7 @@ PT:2/4
 K:Flying
 K:Lifelink
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDig | CheckSVar$ YouCastThisTurn | SVarCompare$ EQ2 | NoResolvingCheck$ True | TriggerDescription$ Whenever you cast your second spell each turn, look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
-SVar:TrigDig:DB$ Dig | DigNum$ 3 | DestinationZone2$ Graveyard
+SVar:TrigDig:DB$ Dig | DigNum$ 3 | DestinationZone2$ Graveyard | NoReveal$ True
 SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
 DeckHas:Ability$Graveyard
 Oracle:Flying, lifelink\nWhenever you cast your second spell each turn, look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.

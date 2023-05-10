@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Creature Vampire Horror
 PT:3/3
 K:Flying
-A:AB$ SetState | Cost$ Sac<3/Creature.Other/another creature> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
+A:AB$ SetState | Cost$ Sac<3/Creature.Other/other creatures> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 K:Madness:B B B
 DeckHints:Ability$Discard
 AlternateMode:DoubleFaced

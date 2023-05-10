@@ -6,8 +6,7 @@ SVar:DBRepeatResources:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility
 SVar:CardChoice:DB$ ChooseCard | Defined$ Remembered | Amount$ 5 | Choices$ Land.RememberedPlayerCtrl | ChoiceTitle$ Choose a land | RememberChosen$ True | SubAbility$ SacRest
 SVar:SacRest:DB$ SacrificeAll | ValidCards$ Land.RememberedPlayerCtrl+IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-S:Mode$ CantPlayLand | CheckSVar$ X | SVarCompare$ GE10 | Description$ Players can't play lands as long as ten or more lands are on the battlefield.
-SVar:X:Count$Valid Land
+S:Mode$ CantPlayLand | IsPresent$ Land | PresentCompare$ GE10 | Description$ Players can't play lands as long as ten or more lands are on the battlefield.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

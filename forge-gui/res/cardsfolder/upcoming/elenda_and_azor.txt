@@ -1,0 +1,15 @@
+Name:Elenda and Azor
+ManaCost:3 W U B
+Types:Legendary Creature Vampire Knight Sphinx
+PT:6/6
+K:Flying
+K:Ward:2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME, you may pay {X}{W}{U}{B}. If you do, draw X cards.
+SVar:TrigDraw:AB$ Draw | Cost$ X W U U | NumCards$ X
+SVar:X:Count$xPaid
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each end step, you may pay 4 life. If you do, create a number of 1/1 black Vampire Knight creature tokens with lifelink equal to the number of cards you've drawn this turn.
+SVar:TrigToken:AB$ Token | Cost$ PayLife<4> | TokenAmount$ Y | TokenScript$ b_1_1_vampire_knight_lifelink | TokenOwner$ You
+SVar:Y:Count$YouDrewThisTurn
+DeckHas:Ability$Token|LifeGain
+SVar:HasAttackEffect:TRUE
+Oracle:Flying,ward {2}\nWhenever Elenda and Azor attacks, you may pay {X}{W}{U}{B}. If you do, draw X cards.\nAt the beginning of each end step, you may pay 4 life. If you do, create a number of 1/1 black Vampire Knight creature tokens with lifelink equal to the number of cards you've drawn this turn.

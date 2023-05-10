@@ -1,0 +1,6 @@
+Name:You Cannot Pass!
+ManaCost:W
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.blockedValidThisTurn Creature.Legendary,Creature.blockedByValidThisTurn Creature.Legendary | TgtPrompt$ Select target creature that blocked or was blocked by a legendary creature this turn | SpellDescription$ Destroy target creature that blocked or was blocked by a legendary creature this turn.
+DeckNeeds:Type$Legendary & Type$Creature
+Oracle:Destroy target creature that blocked or was blocked by a legendary creature this turn.

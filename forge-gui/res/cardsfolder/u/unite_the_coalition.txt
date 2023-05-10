@@ -5,6 +5,6 @@ A:SP$ Charm | Choices$ DBPhaseOut,DBDraw,DBExileGrave,DBDamage,DBDestroy | Charm
 SVar:DBPhaseOut:DB$ Phases | ValidTgts$ Permanent | SpellDescription$ Target permanent phases out.
 SVar:DBDraw:DB$ Draw | ValidTgts$ Player | SpellDescription$ Target player draws a card.
 SVar:DBExileGrave:DB$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | IsCurse$ True | SpellDescription$ Exile target player's graveyard.
-SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 Oracle:Choose five. You may choose the same mode more than once.\n• Target permanent phases out.\n• Target player draws a card.\n• Exile target player's graveyard.\n• Unite the Coalition deals 2 damage to any target.\n• Destroy target artifact or enchantment.

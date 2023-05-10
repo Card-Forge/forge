@@ -60,7 +60,7 @@
       "name": "lifePoints", 
       "width": 48,
       "height": 3,
-      "x": 234,
+      "x": 215,
       "y": 62
     },
     {
@@ -69,7 +69,7 @@
       "font": "default",
       "width": 48,
       "height": 3,
-      "x": 234,
+      "x": 215,
       "y": 76
     },
     {
@@ -78,74 +78,63 @@
       "font": "default",
       "width": 48,
       "height": 3,
-      "x": 234,
+      "x": 215,
       "y": 90
     },
     {
       "type": "TextButton",
       "name": "deck",
-	  "style":"menu",
-      "text": "{Scale=200%}[+Deck]",
-      "binding": "Deck",
-      "width": 64,
-      "height": 32,
-      "x": 206,
-      "y": 306
+      "text": "[%120][+Deck]",
+      "width": 25,
+      "height": 25,
+      "x": 105,
+      "y": 450
     }, 
     {
       "type": "TextButton",
       "name": "inventory",
-	  "style":"menu",
-      "text": "{Scale=200%}[+Item]",
-      "binding": "Inventory",
-      "width": 64,
-      "height": 32,
-      "x": 206,
-      "y": 346
+      "text": "[%120][+Item]",
+      "width": 25,
+      "height": 25,
+      "x": 130,
+      "y": 450
     },
     
     {
       "type": "TextButton",
-      "name": "statistic",
-	  "style":"menu",
-      "text": "{Scale=200%}[+Status]",
-      "binding": "Status",
-      "width": 64,
-      "height": 32,
-      "x": 206,
-      "y": 386
+      "name": "logbook",
+      "text": "[%120][+Logbook]",
+      "width": 25,
+      "height": 25,
+      "x": 155,
+      "y": 450
     },
     {
       "type": "TextButton",
       "name": "menu",
-	  "style":"menu",
-      "text": "{Scale=200%}[+Menu]",
-      "binding": "Menu",
-      "width": 64,
-      "height": 32,
-      "x": 206,
-      "y": 426
+      "text": "[%120][+Menu]",
+      "width": 25,
+      "height": 25,
+      "x": 80,
+      "y": 450
     },
     {
       "type": "TextButton",
       "name": "openmap",
-      "text": "{Scale=80%}tr(lblZoom)",
-      "binding": "Map",
+      "text": "[%80]tr(lblZoom)",
       "width": 80,
-      "height": 18,
+      "height": 20,
       "x": 0,
       "y": 80
     },
 	{
       "type": "TextButton",
-      "name": "exittoworldmap", 
-	  "style":"menu",
-      "text": "{Scale=200%}[+ExitToWorldMap]",
-	  "binding": "ExitToWorldMap",
-      "width": 64,
-      "height": 32,
-      "x": 206,
-      "y": 266
+      "name": "exittoworldmap",
+      "text": "[%120][+ExitToWorldMap]",
+      "width": 25,
+      "height": 25,
+      "x": 180,
+      "y": 450
     }
   ]
 }

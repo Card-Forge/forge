@@ -1,0 +1,11 @@
+Name:Ancient Imperiosaur
+ManaCost:5 G G
+Types:Creature Dinosaur
+PT:6/6
+K:Convoke
+K:Trample
+K:Ward:2
+K:etbCounter:P1P1:X
+SVar:X:Convoked$Amount/Twice
+DeckHas:Ability$Counters
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nTrample, ward {2}\nAncient Imperiosaur enters the battlefield with two +1/+1 counters on it for each creature that convoked it.

@@ -1,9 +1,0 @@
-Name:Gulping Scraptrap
-ManaCost:4 B
-Types:Creature Phyrexian Horror
-PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ When CARDNAME enters the battlefield or dies, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigProliferate | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or dies, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
-SVar:TrigProliferate:DB$ Proliferate
-DeckHas:Ability$Proliferate
-Oracle:When Gulping Scraptrap enters the battlefield or dies, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

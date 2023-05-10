@@ -144,11 +144,10 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     public KeywordInterface getKeyword() {
         return this.keyword;
     }
-    
     public void setKeyword(final KeywordInterface kw) {
         this.keyword = kw;
     }
-    
+
     /**
      * <p>
      * isSecondary.
@@ -212,6 +211,13 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         } else if (o instanceof String) {
             if (ArrayUtils.contains(valids, o)) {
                 return true;
+            }
+        } else if (o instanceof PlanarDice) {
+            for (String s : valids) {
+                PlanarDice valid = PlanarDice.smartValueOf(s);
+                if (((PlanarDice) o).name().equals(valid.name())) {
+                    return true;
+                }
             }
         }
 
@@ -451,6 +457,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         }
 
         if (params.containsKey("CheckSVar")) {
+            // TODO this provides only the card controller instead of the stack one
             final int sVar = AbilityUtils.calculateAmount(getHostCard(), params.get("CheckSVar"), this);
             final String comparator = getParamOrDefault("SVarCompare", "GE1");
             final String svarOperator = comparator.substring(0, 2);
@@ -464,7 +471,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
                 final String comparator2 = getParamOrDefault("SecondSVarCompare", "GE1");
                 final String svarOperator2 = comparator2.substring(0, 2);
                 final String svarOperand2 = comparator2.substring(2);
-                final int operandValue2 = AbilityUtils.calculateAmount(this.hostCard, svarOperand2, this);
+                final int operandValue2 = AbilityUtils.calculateAmount(getHostCard(), svarOperand2, this);
                 if (!Expressions.compare(sVar2, svarOperator2, operandValue2)) {
                     return false;
                 }
@@ -672,7 +679,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             } else if (descriptiveKeys.contains(key)) {
                 // change descriptions differently
                 newValue = AbilityUtils.applyTextChangeEffects(value, true, colorMap, typeMap);
-            }else if (this.getHostCard().hasSVar(value)) {
+            } else if (this.getHostCard().hasSVar(value)) {
                 // don't change literal SVar names!
                 continue;
             } else {

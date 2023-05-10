@@ -1,0 +1,13 @@
+Name:Blight Titan
+ManaCost:4 B B
+Types:Creature Phyrexian Giant
+PT:6/6
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, mill two cards, then incubate X, where X is the number of creature cards in your graveyard. (Create an Incubator token with X +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, mill two cards, then incubate X, where X is the number of creature cards in your graveyard. (Create an Incubator token with X +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 2 | SubAbility$ DBIncubate
+SVar:DBIncubate:DB$ Incubate | Amount$ X
+SVar:X:Count$ValidGraveyard Creature.YouCtrl
+DeckHints:Ability$Graveyard
+DeckHas:Ability$Counters|Token & Type$Artifact
+Oracle:Deathtouch\nWhenever Blight Titan enters the battlefield or attacks, mill two cards, then incubate X, where X is the number of creature cards in your graveyard. (Create an Incubator token with X +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)

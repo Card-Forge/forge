@@ -91,7 +91,7 @@ public class PhaseHandler implements java.io.Serializable {
     private int nUpkeepsThisGame = 0;
     private int nCombatsThisTurn = 0;
     private int nMain2sThisTurn = 0;
-    private int planarDiceRolledthisTurn = 0;
+    private int planarDiceSpecialActionThisTurn = 0;
 
     private transient Player playerTurn = null;
     private transient Player playerPreviousTurn = null;
@@ -522,7 +522,7 @@ public class PhaseHandler implements java.io.Serializable {
                     final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(playerTurn);
                     game.getTriggerHandler().runTrigger(TriggerType.TurnBegin, runParams, false);
                 }
-                planarDiceRolledthisTurn = 0;
+                planarDiceSpecialActionThisTurn = 0;
                 // Play the End Turn sound
                 game.fireEvent(new GameEventTurnEnded());
                 break;
@@ -825,9 +825,10 @@ public class PhaseHandler implements java.io.Serializable {
         game.fireEvent(new GameEventCombatChanged());
     }
 
-    public void resetExtra() {
+    public void restart() {
         extraPhases.clear();
         extraTurns.clear();
+        turn = 0;
     }
 
     private Player handleNextTurn() {
@@ -1211,11 +1212,11 @@ public class PhaseHandler implements java.io.Serializable {
         onPhaseBegin();
     }
 
-    public int getPlanarDiceRolledthisTurn() {
-        return planarDiceRolledthisTurn;
+    public int getPlanarDiceSpecialActionThisTurn() {
+        return planarDiceSpecialActionThisTurn;
     }
-    public void incPlanarDiceRolledthisTurn() {
-        planarDiceRolledthisTurn++;
+    public void incPlanarDiceSpecialActionThisTurn() {
+        planarDiceSpecialActionThisTurn++;
     }
 
     public String debugPrintState(boolean hasPriority) {

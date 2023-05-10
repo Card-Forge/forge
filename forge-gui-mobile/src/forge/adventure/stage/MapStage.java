@@ -3,7 +3,6 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controllers;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
@@ -23,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
@@ -38,15 +38,21 @@ import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.*;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
+import forge.assets.FBufferedImage;
+import forge.assets.FImageComplex;
+import forge.assets.FSkinImage;
+import forge.card.CardRenderer;
+import forge.card.ColorSet;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
+import forge.game.GameType;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 
-import java.util.Map;
-import java.util.Random;
+import java.time.LocalDate;
+import java.util.*;
 
 
 /**
@@ -62,10 +68,7 @@ public class MapStage extends GameStage {
     MapLayer spriteLayer;
     private PointOfInterestChanges changes;
     private EnemySprite currentMob;
-    private final Vector2 oldPosition = new Vector2();//todo
-    private final Vector2 oldPosition2 = new Vector2();
-    private final Vector2 oldPosition3 = new Vector2();
-    private final Vector2 oldPosition4 = new Vector2();
+    Queue<Vector2> positions = new LinkedList<>();
     private boolean isLoadingMatch = false;
     //private HashMap<String, Byte> mapFlags = new HashMap<>(); //Stores local map flags. These aren't available outside this map.
 
@@ -82,7 +85,9 @@ public class MapStage extends GameStage {
     public InputEvent eventTouchDown, eventTouchUp;
     TextraButton selectedKey;
     private boolean respawnEnemies;
-
+    private boolean canFailDungeon = false;
+    protected ArrayList<EnemySprite> enemies = new ArrayList<>();
+    protected Map<Integer, Vector2> waypoints = new HashMap<>();
 
     public boolean getDialogOnlyInput() {
         return dialogOnlyInput;
@@ -118,8 +123,9 @@ public class MapStage extends GameStage {
     public PointOfInterestChanges getChanges() {
         return changes;
     }
+    private boolean matchJustEnded = false;
 
-    private MapStage() {
+    protected MapStage() {
         dialog = Controls.newDialog("");
         eventTouchDown = new InputEvent();
         eventTouchDown.setPointer(-1);
@@ -155,6 +161,31 @@ public class MapStage extends GameStage {
             }
         }
         return false;
+    }
+
+    public float lengthWithoutCollision(EnemySprite mob, Vector2 end) {
+        Vector2 start = mob.pos();
+        Vector2 safeVector = start.cpy().add(end);
+
+        int segmentsToCheck = 100;
+        float safeLen = safeVector.len();
+        float partialLength = safeLen / segmentsToCheck;
+
+        for (Rectangle collision : collisionRect) {
+            float uncollidedLen = 0.0f;
+            while (uncollidedLen < safeLen) {
+                Rectangle mRect = new Rectangle(mob.navigationBoundingRect());
+                Vector2 testVector = new Vector2(end).setLength(uncollidedLen + partialLength);
+                mRect.setPosition(mRect.x + testVector.x, mRect.y + testVector.y);
+                if (mRect.overlaps(collision)) {
+                    break;
+                }
+                uncollidedLen += partialLength;
+            }
+            safeLen = Math.min(safeLen, uncollidedLen);
+        }
+
+        return safeLen;
     }
 
 
@@ -194,6 +225,7 @@ public class MapStage extends GameStage {
     private void effectDialog(EffectData effectData) {
         dialog.getButtonTable().clear();
         dialog.getContentTable().clear();
+        dialog.clearListeners();
         TextraButton ok = Controls.newTextButton("OK", this::hideDialog);
         ok.setVisible(false);
         TypingLabel L = Controls.newTypingLabel("{GRADIENT=CYAN;WHITE;1;1}Strange magical energies flow within this place...{ENDGRADIENT}\nAll opponents get:\n" + effectData.getDescription());
@@ -204,27 +236,40 @@ public class MapStage extends GameStage {
                 ok.setVisible(true);
             }
         });
-        dialog.getButtonTable().add(ok).width(250f);
+        dialog.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                L.skipToTheEnd();
+                super.clicked(event, x, y);
+            }
+        });
+        dialog.getButtonTable().add(ok).width(240f);
         dialog.getContentTable().add(L).width(250f);
         dialog.setKeepWithinStage(true);
         showDialog();
     }
 
-    public void showImageDialog(String message, Texture texture) {
+    public void showImageDialog(String message, FBufferedImage fb) {
         dialog.getContentTable().clear();
         dialog.getButtonTable().clear();
-        if (texture != null) {
-            TextureRegion tr = new TextureRegion(texture);
+        dialog.clearListeners();
+
+        if (fb.getTexture() != null) {
+            TextureRegion tr = new TextureRegion(fb.getTexture());
             tr.flip(true, true);
             Image image = new Image(tr);
             image.setScaling(Scaling.fit);
             dialog.getContentTable().add(image).height(100);
             dialog.getContentTable().add().row();
         }
-        TextraLabel L = Controls.newTextraLabel(message);
+        TypingLabel L = Controls.newTypingLabel(message);
         L.setWrap(true);
+        L.skipToTheEnd();
         dialog.getContentTable().add(L).width(250f);
-        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(250f);
+        dialog.getButtonTable().add(Controls.newTextButton("OK", () -> {
+            hideDialog();
+            fb.dispose();
+        })).width(240f);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
         showDialog();
@@ -233,15 +278,48 @@ public class MapStage extends GameStage {
     public void showDeckAwardDialog(String message, Deck deck) {
         dialog.getContentTable().clear();
         dialog.getButtonTable().clear();
-
-        dialog.getContentTable().add(Controls.newTypingLabel(Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)))).align(Align.center);
-        dialog.getContentTable().add().row();
+        dialog.clearListeners();
+        DeckProxy dp = new DeckProxy(deck, "Constructed", GameType.Constructed, null);
+        FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard());
+        if (cardArt != null) {
+            Image art = new Image(cardArt.getTextureRegion());
+            art.setWidth(58);
+            art.setHeight(46);
+            art.setPosition(25, 43);
+            Image image = new Image(FSkinImage.ADV_DECKBOX.getTextureRegion());
+            image.setWidth(60);
+            image.setHeight(80);
+            image.setPosition(24, 10);
+            ColorSet colorSet = DeckProxy.getColorIdentity(deck);
+            TypingLabel deckColors = Controls.newTypingLabel(Controls.colorIdToTypingString(colorSet, true).toUpperCase());
+            deckColors.skipToTheEnd();
+            deckColors.setAlignment(Align.center);
+            deckColors.setPosition(14, 44);
+            TextraLabel deckname = Controls.newTextraLabel(deck.getName());
+            deckname.setAlignment(Align.center);
+            deckname.setWrap(true);
+            deckname.setWidth(80);
+            deckname.setPosition(14, 28);
+            Group group = new Group();
+            group.addActor(art);
+            group.addActor(image);
+            group.addActor(deckColors);
+            group.addActor(deckname);
+            dialog.getContentTable().add(group).height(100).width(100).center();
+            dialog.getContentTable().add().row();
+        } else {
+            TypingLabel label = Controls.newTypingLabel("[%120]" + Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)).toUpperCase() + "\n[%]" + deck.getName());
+            label.skipToTheEnd();
+            label.setAlignment(Align.center);
+            dialog.getContentTable().add(label).align(Align.center);
+            dialog.getContentTable().add().row();
+        }
 
         TypingLabel L = Controls.newTypingLabel(message);
         L.setWrap(true);
         L.skipToTheEnd();
 
-        dialog.getContentTable().add(L).width(240);
+        dialog.getContentTable().add(L).width(250);
         dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(240);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
@@ -288,6 +366,11 @@ public class MapStage extends GameStage {
         } else {
             respawnEnemies = false;
         }
+        if (MP.get("canFailDungeon") != null && MP.get("canFailDungeon") instanceof Boolean && (Boolean) MP.get("canFailDungeon")) {
+            canFailDungeon = true;
+        } else {
+            canFailDungeon = false;
+        }
         if (MP.get("preventEscape") != null) preventEscape = (boolean) MP.get("preventEscape");
 
         if (MP.get("music") != null && !MP.get("music").toString().isEmpty()) {
@@ -299,6 +382,7 @@ public class MapStage extends GameStage {
         otherEntries.clear();
         spawnClassified.clear();
         sourceMapMatch.clear();
+        enemies.clear();
         for (MapLayer layer : map.getLayers()) {
             if (layer.getProperties().containsKey("spriteLayer") && layer.getProperties().get("spriteLayer", boolean.class)) {
                 spriteLayer = layer;
@@ -344,7 +428,20 @@ public class MapStage extends GameStage {
         } while (oldSize != collisionRect.size);
         if (spriteLayer == null) System.err.print("Warning: No spriteLayer present in map.\n");
 
+        replaceWaypoints();
+
         getPlayerSprite().stop();
+    }
+
+    void replaceWaypoints() {
+        for (EnemySprite enemy : enemies) {
+            for (EnemySprite.MovementBehavior behavior : enemy.movementBehaviors) {
+                if (behavior.getDestination() > 0 && waypoints.containsKey(behavior.getDestination())) {
+                    behavior.setX(waypoints.get(behavior.getDestination()).x);
+                    behavior.setY(waypoints.get(behavior.getDestination()).y);
+                }
+            }
+        }
     }
 
     static public boolean containsOrEquals(Rectangle r1, Rectangle r2) {
@@ -381,6 +478,7 @@ public class MapStage extends GameStage {
         if (difficultyData.spawnRank == 0 && !spawnEasy) return false;
         return true;
     }
+
     private void loadObjects(MapLayer layer, String sourceMap) {
         player.setMoveModifier(2);
         Array<String> shopsAlreadyPresent = new Array<>();
@@ -396,6 +494,16 @@ public class MapStage extends GameStage {
                 String rotatingShop = "";
 
                 switch (type) {
+                    case "collision":
+                        float cX = Float.parseFloat(prop.get("x").toString());
+                        float cY = Float.parseFloat(prop.get("y").toString());
+                        float cW = Float.parseFloat(prop.get("width").toString());
+                        float cH = Float.parseFloat(prop.get("height").toString());
+                        collisionRect.add(new Rectangle(cX, cY, cW, cH));
+                        break;
+                    case "waypoint":
+                        waypoints.put(id, new Vector2(Float.parseFloat(prop.get("x").toString()), Float.parseFloat(prop.get("y").toString())));
+                        break;
                     case "entry":
                         float x = Float.parseFloat(prop.get("x").toString());
                         float y = Float.parseFloat(prop.get("y").toString());
@@ -457,11 +565,36 @@ public class MapStage extends GameStage {
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.effect = JSONStringLoader.parse(EffectData.class, dialogObject.toString(), "");
                             }
+                            dialogObject = prop.get("ignoreDungeonEffect"); //Check for special effects.
+                            if (dialogObject != null && !dialogObject.toString().isEmpty()) {
+                                mob.ignoreDungeonEffect = Boolean.parseBoolean(dialogObject.toString());
+                            }
                             dialogObject = prop.get("reward"); //Check for additional rewards.
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.rewards = JSONStringLoader.parse(RewardData[].class, dialogObject.toString(), "[]");
                             }
-                            mob.hidden = hidden; //Evil.
+                            if (prop.containsKey("threatRange")) //Check for threat range.
+                            {
+                                mob.threatRange = Float.parseFloat(prop.get("threatRange").toString());
+                            }
+                            if (prop.containsKey("fleeRange")) //Check for flee range.
+                            {
+                                mob.fleeRange = Float.parseFloat(prop.get("fleeRange").toString());
+                            }
+                            if (prop.containsKey("hidden"))
+                            {
+                                mob.hidden = Boolean.parseBoolean(prop.get("hidden").toString());
+                            }
+                            if (hidden){
+                                mob.hidden = hidden; //Evil.
+                                mob.setAnimation(CharacterSprite.AnimationTypes.Hidden);
+                            }
+                            dialogObject = prop.get("waypoints");
+                            if (dialogObject != null && !dialogObject.toString().isEmpty()) {
+                                mob.parseWaypoints(dialogObject.toString());
+                            }
+
+                            enemies.add(mob);
                             addMapActor(obj, mob);
                         }
                         break;
@@ -501,7 +634,7 @@ public class MapStage extends GameStage {
                         }));
                         break;
                     case "exit":
-                        addMapActor(obj, new OnCollide(MapStage.this::exit));
+                        addMapActor(obj, new OnCollide(MapStage.this::exitDungeon));
                         break;
                     case "dialog":
                         if (obj instanceof TiledMapTileMapObject) {
@@ -515,28 +648,17 @@ public class MapStage extends GameStage {
                         }
                         break;
                     case "quest":
-                        DialogActor dialog;
-                        if (prop.containsKey("questtype")){
+
+                        if (prop.containsKey("questtype")) {
                             TiledMapTileMapObject tiledObj = (TiledMapTileMapObject) obj;
-
                             String questOrigin = prop.containsKey("questtype") ? prop.get("questtype").toString() : "";
+                            AdventureQuestData questInfo = AdventureQuestController.instance().getQuestNPCResponse(TileMapScene.instance().rootPoint.getID(), changes,questOrigin);
 
-                            String placeholderText = "[" +
-                                    "  {" +
-                                    "    \"name\":\"Quest Offer\"," +
-                                    "    \"text\":\"Please, help us!\\n((QUEST DESCRIPTION))\"," +
-                                    "    \"condition\":[]," +
-                                    "    \"options\":[" +
-                                    "        { \"name\":\"No, I'm not ready yet.\nMaybe next snapshot.\" }," +
-                                    "    ]" +
-                                    "  }" +
-                                    "]";
-
-                            {
-                                dialog = new DialogActor(this, id, placeholderText,tiledObj.getTextureRegion());
+                            if (questInfo != null) {
+                                DialogActor questActor = new DialogActor(questInfo, this, id);
+                                questActor.setVisible(false);
+                                addMapActor(obj, questActor);
                             }
-                            dialog.setVisible(false);
-                            addMapActor(obj, dialog);
                         }
                         break;
 
@@ -548,15 +670,15 @@ public class MapStage extends GameStage {
 
                         Array<String> possibleShops = new Array<>(rotation.split(","));
 
-                        if (possibleShops.size > 0){
-                            long rotatingRandomSeed = WorldSave.getCurrentSave().getWorld().getRandom().nextLong() + java.time.LocalDate.now().toEpochDay();
+                        if (possibleShops.size > 0) {
+                            long rotatingRandomSeed = WorldSave.getCurrentSave().getWorld().getRandom().nextLong() + LocalDate.now().toEpochDay();
                             Random rotatingShopRandom = new Random(rotatingRandomSeed);
                             rotatingShop = possibleShops.get(rotatingShopRandom.nextInt(possibleShops.size));
                             changes.setRotatingShopSeed(id, rotatingRandomSeed);
                         }
 
-                    //Intentionally not breaking here.
-                    //Flow continues into "shop" case with above data overriding base logic.
+                        //Intentionally not breaking here.
+                        //Flow continues into "shop" case with above data overriding base logic.
 
                     case "shop":
 
@@ -565,11 +687,10 @@ public class MapStage extends GameStage {
 
                         boolean isRotatingShop = !rotatingShop.isEmpty();
 
-                        if (isRotatingShop){
+                        if (isRotatingShop) {
                             shopList = rotatingShop;
                             restockPrice = 7;
-                        }
-                        else{
+                        } else {
                             int rarity = WorldSave.getCurrentSave().getWorld().getRandom().nextInt(100);
                             if (rarity > 95 & prop.containsKey("mythicShopList")) {
                                 shopList = prop.get("mythicShopList").toString();
@@ -595,20 +716,19 @@ public class MapStage extends GameStage {
 
                         }
 
-                        if (prop.containsKey("noRestock") && (boolean)prop.get("noRestock")){
+                        if (prop.containsKey("noRestock") && (boolean) prop.get("noRestock")) {
                             restockPrice = 0;
                         }
 
                         possibleShops = new Array<String>(shopList.split(","));
                         Array<String> filteredPossibleShops = new Array<>();
-                        if (!isRotatingShop){
-                            for (String candidate : possibleShops)
-                            {
+                        if (!isRotatingShop) {
+                            for (String candidate : possibleShops) {
                                 if (!shopsAlreadyPresent.contains(candidate, false))
                                     filteredPossibleShops.add(candidate);
                             }
                         }
-                        if (filteredPossibleShops.isEmpty()){
+                        if (filteredPossibleShops.isEmpty()) {
                             filteredPossibleShops = possibleShops;
                         }
                         Array<ShopData> shops;
@@ -630,18 +750,18 @@ public class MapStage extends GameStage {
                         Array<Reward> ret = new Array<>();
                         WorldSave.getCurrentSave().getWorld().getRandom().setSeed(changes.getShopSeed(id));
                         for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
-                            ret.addAll(rdata.generate(false));
+                            ret.addAll(rdata.generate(false, false));
                         }
                         ShopActor actor = new ShopActor(this, id, ret, data);
                         addMapActor(obj, actor);
-                        if (prop.containsKey("hasSign") && (boolean)prop.get("hasSign") && prop.containsKey("signYOffset") && prop.containsKey("signXOffset")) {
+                        if (prop.containsKey("hasSign") && (boolean) prop.get("hasSign") && prop.containsKey("signYOffset") && prop.containsKey("signXOffset")) {
                             try {
                                 TextureSprite sprite = new TextureSprite(Config.instance().getAtlas(data.spriteAtlas).createSprite(data.sprite));
                                 sprite.setX(actor.getX() + Float.parseFloat(prop.get("signXOffset").toString()));
                                 sprite.setY(actor.getY() + Float.parseFloat(prop.get("signYOffset").toString()));
                                 addMapActor(sprite);
 
-                                if (!(data.overlaySprite == null | data.overlaySprite.isEmpty())){
+                                if (!(data.overlaySprite == null | data.overlaySprite.isEmpty())) {
                                     TextureSprite overlay = new TextureSprite(Config.instance().getAtlas(data.spriteAtlas).createSprite(data.overlaySprite));
                                     overlay.setX(actor.getX() + Float.parseFloat(prop.get("signXOffset").toString()));
                                     overlay.setY(actor.getY() + Float.parseFloat(prop.get("signYOffset").toString()));
@@ -659,7 +779,9 @@ public class MapStage extends GameStage {
         }
     }
 
-    public boolean exit() {
+    public boolean exitDungeon() {
+        AdventureQuestController.instance().updateQuestsLeave();
+        AdventureQuestController.instance().showQuestDialogs(this);
         isLoadingMatch = false;
         effect = null; //Reset dungeon effects.
         clearIsInMap();
@@ -671,25 +793,75 @@ public class MapStage extends GameStage {
     @Override
     public void setWinner(boolean playerWins) {
         isLoadingMatch = false;
+        matchJustEnded = true;
         if (playerWins) {
-
+            currentMob.clearCollisionHeight();
             Current.player().win();
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
-            currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
-            startPause(0.3f, MapStage.this::getReward);
+            currentMob.playEffect(Paths.EFFECT_BLOOD, 0.5f);
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
+                    currentMob.resetCollisionHeight();
+                    startPause(0.3f, MapStage.this::getReward);
+                    AdventureQuestController.instance().updateQuestsWin(currentMob,enemies);
+                    AdventureQuestController.instance().showQuestDialogs(MapStage.this);
+                    player.setAnimation(CharacterSprite.AnimationTypes.Idle);
+                }
+            }, 1f);
         } else {
+            currentMob.clearCollisionHeight();
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
             startPause(0.3f, () -> {
                 player.setAnimation(CharacterSprite.AnimationTypes.Idle);
                 currentMob.setAnimation(CharacterSprite.AnimationTypes.Idle);
-                player.setPosition(oldPosition4);
-                Current.player().defeated();
+                currentMob.resetCollisionHeight();
+                if (positions.peek() != null) {
+                    player.setPosition(positions.peek());
+                }
+                currentMob.freezeMovement();
+                AdventureQuestController.instance().updateQuestsLose(currentMob);
+                AdventureQuestController.instance().showQuestDialogs(MapStage.this);
+                boolean defeated = Current.player().defeated();
+                if (canFailDungeon && defeated) {
+                    //If hardcore mode is added, check and redirect to game over screen here
+                    dungeonFailedDialog();
+                    exitDungeon();
+                }
                 MapStage.this.stop();
                 currentMob = null;
             });
         }
+    }
 
+    private void dungeonFailedDialog() {
+        dialog.getButtonTable().clear();
+        dialog.getContentTable().clear();
+        dialog.clearListeners();
+        TextraButton ok = Controls.newTextButton("OK", this::hideDialog);
+        ok.setVisible(false);
+        TypingLabel L = Controls.newTypingLabel("{GRADIENT=RED;WHITE;1;1}Defeated and unable to continue, you use the last of your power to escape the area.");
+        L.setWrap(true);
+        L.setTypingListener(new TypingAdapter() {
+            @Override
+            public void end() {
+                ok.setVisible(true);
+            }
+        });
+        dialog.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                L.skipToTheEnd();
+                super.clicked(event, x, y);
+                //exitDungeon();
+            }
+        });
+        dialog.getButtonTable().add(ok).width(240f);
+        dialog.getContentTable().add(L).width(250f);
+        dialog.setKeepWithinStage(true);
+        showDialog();
     }
 
     public boolean deleteObject(int id) {
@@ -717,6 +889,14 @@ public class MapStage extends GameStage {
         for (MapActor A : new Array.ArrayIterator<>(actors)) {
             if (A instanceof EnemySprite && A.getId() == id)
                 return ((EnemySprite) A);
+        }
+        return null;
+    }
+
+    public Actor getByID(int id) { //Search actor by ID.
+        for (MapActor A : new Array.ArrayIterator<>(actors)) {
+            if (A.getId() == id)
+                return A;
         }
         return null;
     }
@@ -750,17 +930,63 @@ public class MapStage extends GameStage {
 
     @Override
     protected void onActing(float delta) {
+        if (isPaused() || isDialogOnlyInput())
+            return;
+        Iterator<EnemySprite> it = enemies.iterator();
+
+        if (matchJustEnded){
+            if (!positions.contains(player.pos()))
+                matchJustEnded = false;
+        }
+
+        if (!matchJustEnded) {
+            while (it.hasNext()) {
+                EnemySprite mob = it.next();
+                mob.updatePositon();
+                mob.targetVector = mob.getTargetVector(player, delta);
+                Vector2 currentVector = new Vector2(mob.targetVector);
+                mob.clearActions();
+                if (mob.targetVector.len() == 0.0f) {
+                    mob.setAnimation(CharacterSprite.AnimationTypes.Idle);
+                    continue;
+                }
+
+                if (!mob.getData().flying)//if direct path is not possible
+                {
+                    //Todo: fix below for collision logic
+                    float safeLen = lengthWithoutCollision(mob, mob.targetVector);
+                    if (safeLen > 0.1f) {
+                        currentVector.setLength(Math.min(safeLen, mob.targetVector.len()));
+                    } else {
+                        currentVector = Vector2.Zero;
+                    }
+                }
+                currentVector.setLength(Math.min(mob.speed() * delta, mob.targetVector.len()));
+                mob.moveBy(currentVector.x, currentVector.y,delta);
+            }
+        }
+
         float sprintingMod = currentModifications.containsKey(PlayerModification.Sprint) ? 2 : 1;
         player.setMoveModifier(2 * sprintingMod);
-        oldPosition4.set(oldPosition3);
-        oldPosition3.set(oldPosition2);
-        oldPosition2.set(oldPosition);
-        oldPosition.set(player.pos());
+
+//        oldPosition4.set(oldPosition3);
+//        oldPosition3.set(oldPosition2);
+//        oldPosition2.set(oldPosition);
+//        oldPosition.set(player.pos());
+
+        positions.add(player.pos());
+        if (positions.size() > 4)
+            positions.remove();
+
+
+
+
         for (MapActor actor : new Array.ArrayIterator<>(actors)) {
             if (actor.collideWithPlayer(player)) {
                 if (actor instanceof EnemySprite) {
                     EnemySprite mob = (EnemySprite) actor;
                     currentMob = mob;
+                    currentMob.clearCollisionHeight();
                     resetPosition();
                     if (mob.dialog != null && mob.dialog.canShow()) { //This enemy has something to say. Display a dialog like if it was a DialogActor but only if dialogue is possible.
                         mob.dialog.activate();
@@ -790,6 +1016,7 @@ public class MapStage extends GameStage {
         if (mob == null) return;
         currentMob = mob;
         player.setAnimation(CharacterSprite.AnimationTypes.Attack);
+        player.playEffect(Paths.EFFECT_SPARKS, 0.5f);
         mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
         SoundSystem.instance.play(SoundEffectType.Block, false);
         Gdx.input.vibrate(50);
@@ -805,7 +1032,7 @@ public class MapStage extends GameStage {
                     isLoadingMatch = true;
                     Forge.setTransitionScreen(new TransitionScreen(() -> {
                         duelScene.initDuels(player, mob);
-                        if (isInMap && effect != null)
+                        if (isInMap && effect != null && !mob.ignoreDungeonEffect)
                             duelScene.setDungeonEffect(effect);
                         Forge.switchScene(duelScene);
                     }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.nameOverride.isEmpty() ? mob.getData().name : mob.nameOverride));
@@ -827,7 +1054,9 @@ public class MapStage extends GameStage {
     }
 
     public void showDialog() {
-
+        if (dialogStage == null){
+            setDialogStage(GameHUD.getInstance());
+        }
         dialogButtonMap.clear();
         for (int i = 0; i < dialog.getButtonTable().getCells().size; i++) {
             dialogButtonMap.add((TextraButton) dialog.getButtonTable().getCells().get(i).getActor());
@@ -843,6 +1072,7 @@ public class MapStage extends GameStage {
         dialog.hide(Actions.sequence(Actions.sizeTo(dialog.getOriginX(), dialog.getOriginY(), 0.3f), Actions.hide()));
         dialogOnlyInput = false;
         selectedKey = null;
+        dialog.clearListeners();
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -850,12 +1080,17 @@ public class MapStage extends GameStage {
     }
 
     public void resetPosition() {
-        player.setPosition(oldPosition4);
+        if (positions.peek() != null){
+            player.setPosition(positions.peek());
+        }
         stop();
     }
 
     public void setQuestFlag(String key, int value) {
         changes.getMapFlags().put(key, (byte) value);
+
+        AdventureQuestController.instance().updateQuestsMapFlag(key,value);
+        AdventureQuestController.instance().showQuestDialogs(this);
     }
 
     public void advanceQuestFlag(String key) {
@@ -865,6 +1100,9 @@ public class MapStage extends GameStage {
         } else {
             C.put(key, (byte) 1);
         }
+
+        AdventureQuestController.instance().updateQuestsMapFlag(key,changes.getMapFlags().get(key));
+        AdventureQuestController.instance().showQuestDialogs(this);
     }
 
     public boolean checkQuestFlag(String key) {

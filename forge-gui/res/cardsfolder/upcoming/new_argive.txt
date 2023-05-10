@@ -1,0 +1,9 @@
+Name:New Argive
+ManaCost:no cost
+Types:Plane Dominaria
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+Historic | TriggerZones$ Command | Execute$ TrigPump | TriggerDescription$ Whenever a historic creature you control attacks, it gets +2/+2 until end of turn. (Artifacts, legendaries, and Sagas are historic.)
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +2 | NumDef$ +2
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, reveal cards from the top of your library until you reveal a historic card. Put that card into your hand and the rest on the bottom of your library in a random order.
+SVar:RolledChaos:DB$ DigUntil | Valid$ Card.Historic | ValidDescription$ historic card | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | FoundDestination$ Hand
+DeckHints:Type$Legendary & Type$Artifact|Saga
+Oracle:Whenever a historic creature you control attacks, it gets +2/+2 until end of turn. (Artifacts, legendaries, and Sagas are historic.)\nWhenever chaos ensues, reveal cards from the top of your library until you reveal a historic card. Put that card into your hand and the rest on the bottom of your library in a random order.

@@ -5,7 +5,5 @@ A:SP$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBChoose |
 SVar:DBChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.RememberedPlayerCtrl+cmcEQX,Planeswalker.RememberedPlayerCtrl+cmcEQX | ChoiceTitle$ Choose a creature or planeswalker with the highest mana value to sacrifice | Mandatory$ True | RememberChosen$ True
 SVar:DBSac:DB$ SacrificeAll | ValidCards$ Card.IsRemembered | SubAbility$ DBCleanup | StackDescription$ sacrifices a creature or planeswalker with the highest mana value among creatures and planeswalkers they control.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:SVar$Y/LimitMin.Z
-SVar:Y:Count$Valid Creature.RememberedPlayerCtrl$GreatestCMC
-SVar:Z:Count$Valid Planeswalker.RememberedPlayerCtrl$GreatestCMC
+SVar:X:Count$Valid Creature.RememberedPlayerCtrl,Planeswalker.RememberedPlayerCtrl$GreatestCMC
 Oracle:Each opponent sacrifices a creature or planeswalker with the highest mana value among creatures and planeswalkers they control.

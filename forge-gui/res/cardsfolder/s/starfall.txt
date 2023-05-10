@@ -1,7 +1,6 @@
 Name:Starfall
 ManaCost:4 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 4 R | NumDmg$ 3 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDamage | SpellDescription$ CARDNAME deals 3 damage to target creature. If that creature is an enchantment, CARDNAME deals 3 damage to that creature's controller.
-SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1
-SVar:X:Targeted$Valid Creature.Enchantment
+A:SP$ DealDamage | NumDmg$ 3 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDamage | SpellDescription$ CARDNAME deals 3 damage to target creature. If that creature is an enchantment, CARDNAME deals 3 damage to that creature's controller.
+SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 3 | ConditionDefined$ Targeted | ConditionPresent$ Enchantment
 Oracle:Starfall deals 3 damage to target creature. If that creature is an enchantment, Starfall deals 3 damage to that creature's controller.

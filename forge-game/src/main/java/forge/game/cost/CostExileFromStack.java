@@ -87,7 +87,7 @@ public class CostExileFromStack extends CostPart {
             return true; // this will always work
         }
 
-        CardCollectionView list = payer.getCardsIn(ZoneType.Stack);
+        CardCollectionView list = source.getGame().getCardsIn(ZoneType.Stack);
 
         list = CardLists.getValidCards(list, type.split(";"), payer, source, ability);
 
@@ -105,7 +105,7 @@ public class CostExileFromStack extends CostPart {
     public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability, final boolean effect) {
         Game game = ai.getGame();
         for (final SpellAbility sa : decision.sp) {
-            ability.addCostToHashList(CardUtil.getLKICopy(sa.getHostCard()), "Exiled");
+            ability.addCostToHashList(CardUtil.getLKICopy(sa.getHostCard()), "Exiled", true);
             SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(sa);
             if (si != null) {
                 game.getStack().remove(si);

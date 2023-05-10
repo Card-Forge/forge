@@ -241,9 +241,7 @@ public class UntapAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        CardCollection list = CardLists.getValidCards(source.getGame().getCardsIn(ZoneType.Battlefield),
-                tgt.getValidTgts(), source.getController(), source, sa);
-        list = CardLists.getTargetableCards(list, sa);
+        CardCollection list = CardLists.getTargetableCards(source.getGame().getCardsIn(ZoneType.Battlefield), sa);
 
         // filter by enchantments and planeswalkers, their tapped state doesn't matter.
         final String[] tappablePermanents = { "Enchantment", "Planeswalker" };

@@ -2,8 +2,7 @@ Name:Nav Squad Commandos
 ManaCost:4 W
 Types:Creature Human Soldier
 PT:3/5
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | CheckSVar$ BattalionTest | NoResolvingCheck$ True | SVarCompare$ GE2 | Execute$ TrigBattalionPump | TriggerDescription$ Battalion — Whenever CARDNAME and at least two other creatures attack, CARDNAME gets +1/+1 until end of turn. Untap it.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | NoResolvingCheck$ True | PresentCompare$ GE2 | Execute$ TrigBattalionPump | TriggerDescription$ Battalion — Whenever CARDNAME and at least two other creatures attack, CARDNAME gets +1/+1 until end of turn. Untap it.
 SVar:TrigBattalionPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBUntap
 SVar:DBUntap:DB$ Untap | Defined$ Self
-SVar:BattalionTest:Count$Valid Creature.attacking+Other
 Oracle:Battalion — Whenever Nav Squad Commandos and at least two other creatures attack, Nav Squad Commandos gets +1/+1 until end of turn. Untap it.

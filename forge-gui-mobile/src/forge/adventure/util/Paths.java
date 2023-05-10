@@ -10,9 +10,11 @@ public class Paths {
     public static final String HEROES = "world/heroes.json";
     public static final String POINTS_OF_INTEREST = "world/points_of_interest.json";
     public static final String ITEMS = "world/items.json";
+    public static final String QUESTS = "world/quests.json";
     public static final String SKIN = "skin/ui_skin.json";
     public static final String ITEMS_EQUIP = "skin/equip.png";
     public static final String ITEMS_ATLAS = "sprites/items.atlas";
+    public static final String PIXELMANA_ATLAS = "sprites/pixelmana.atlas";
     public static final String KEYS_ATLAS = "skin/keys.atlas";
     public static final String COLOR_FRAME_ATLAS = "ui/color_frames.atlas";
     public static final String ARENA_ATLAS = "ui/arena.atlas";
@@ -26,6 +28,8 @@ public class Paths {
     public static final String EFFECT_SPRINT = "particle_effects/sprint.p";
     public static final String EFFECT_FLY = "particle_effects/fly.p";
     public static final String EFFECT_TELEPORT = "particle_effects/teleport.p";
+    public static final String EFFECT_BLOOD = "particle_effects/blood.p";
+    public static final String EFFECT_SPARKS = "particle_effects/sparks.p";
     public static final String CUSTOM_CARDS = "custom_cards";
     public static final String CUSTOM_CARDS_PICS = "custom_card_pics";
 }

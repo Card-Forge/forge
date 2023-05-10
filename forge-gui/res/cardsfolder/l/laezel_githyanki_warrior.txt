@@ -22,7 +22,7 @@ PT:3/6
 K:Double Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When this creature enters the battlefield or specializes, seek a nonland permanent card with mana value 3 or less.
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigSeek | Secondary$ True | TriggerDescription$ When this creature enters the battlefield or specializes, seek a nonland permanent card with mana value 3 or less.
-SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Permanent.nonLand+cmcLE3
+SVar:TrigSeek:DB$ Seek | Type$ Card.Permanent+nonLand+cmcLE3
 Oracle:Double strike\nWhen this creature enters the battlefield or specializes, seek a nonland permanent card with mana value 3 or less.
 
 SPECIALIZE:BLUE
@@ -79,7 +79,7 @@ PT:3/6
 K:Double Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When this creature enters the battlefield or specializes, other creatures you control and creature cards in your hand perpetually get +1/+1.
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigEffect | Secondary$ True | TriggerDescription$ When this creature enters the battlefield or specializes, other creatures you control and creature cards in your hand perpetually get +1/+1.
-SVar:TrigEffect:DB$ Effect | RememberObjects$ Creature.YouCtrl+Other,ValidHand Creature.YouOwn | StaticAbilities$ PerpetualP1P1 | Duration$ Permanent | Triggers$ Update | Name$ Lae'zel, Primal Warrior's Perpetual Effect
+SVar:TrigEffect:DB$ Effect | RememberObjects$ Valid Creature.YouCtrl+Other,ValidHand Creature.YouOwn | StaticAbilities$ PerpetualP1P1 | Duration$ Permanent | Triggers$ Update | Name$ Lae'zel, Primal Warrior's Perpetual Effect
 SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ These creature cards perpetually get +1/+1.
 SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
 SVar:DBUpdate:DB$ UpdateRemember

@@ -128,7 +128,7 @@ public class ComputerUtilCombat {
         //        || (attacker.hasKeyword(Keyword.FADING) && attacker.getCounters(CounterEnumType.FADE) == 0)
         //        || attacker.hasSVar("EndOfTurnLeavePlay"));
         // The creature won't untap next turn
-        return !attacker.isTapped() || Untap.canUntap(attacker);
+        return !attacker.isTapped() || (attacker.getCounters(CounterEnumType.STUN) == 0 && Untap.canUntap(attacker));
     }
 
     /**
@@ -919,7 +919,7 @@ public class ComputerUtilCombat {
         final CardCollectionView cardList = CardCollection.combine(game.getCardsIn(ZoneType.Battlefield), game.getCardsIn(ZoneType.Command));
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
-                if (!stAb.getParam("Mode").equals("Continuous")) {
+                if (!stAb.checkMode("Continuous")) {
                     continue;
                 }
                 if (!stAb.hasParam("Affected") || !stAb.getParam("Affected").contains("blocking")) {
@@ -1215,7 +1215,7 @@ public class ComputerUtilCombat {
             final CardCollectionView cardList = CardCollection.combine(game.getCardsIn(ZoneType.Battlefield), game.getCardsIn(ZoneType.Command));
             for (final Card card : cardList) {
                 for (final StaticAbility stAb : card.getStaticAbilities()) {
-                    if (!stAb.getParam("Mode").equals("Continuous")) {
+                    if (!stAb.checkMode("Continuous")) {
                         continue;
                     }
                     if (!stAb.hasParam("Affected") || !stAb.getParam("Affected").contains("attacking")) {
@@ -1628,14 +1628,18 @@ public class ComputerUtilCombat {
      *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
-    public static boolean combatantCantBeDestroyed(Player ai, final Card combatant) {
-        // either indestructible or may regenerate
-        if (combatant.hasKeyword(Keyword.INDESTRUCTIBLE) || ComputerUtil.canRegenerate(ai, combatant)) {
+    public static boolean combatantCantBeDestroyed(final Player ai, final Card combatant) {
+        if (combatant.getCounters(CounterEnumType.SHIELD) > 0) {
             return true;
         }
 
         // will regenerate
         if (combatant.getShieldCount() > 0 && combatant.canBeShielded()) {
+            return true;
+        }
+
+        // either indestructible or may regenerate
+        if (combatant.hasKeyword(Keyword.INDESTRUCTIBLE) || ComputerUtil.canRegenerate(ai, combatant)) {
             return true;
         }
 
@@ -2036,7 +2040,7 @@ public class ComputerUtilCombat {
 
         final boolean hasTrample = attacker.hasKeyword(Keyword.TRAMPLE);
 
-        if (combat != null && hasTrample && attacker.isAttacking()) {
+        if (combat != null && remaining != null && hasTrample && attacker.isAttacking()) {
             // if attacker has trample and some of its blockers are also blocking others it's generally a good idea
             // to assign those without trample first so we can maximize the damage to the defender
             for (final Card c : remaining) {
@@ -2055,31 +2059,23 @@ public class ComputerUtilCombat {
 
         if (block.size() == 1) {
             final Card blocker = block.getFirst();
+            int dmgToBlocker = dmgCanDeal;
 
-            if (hasTrample) {
-                int dmgToKill = getEnoughDamageToKill(blocker, dmgCanDeal, attacker, true);
+            if (hasTrample && isAttacking) { // otherwise no entity to deliver damage via trample
+                dmgToBlocker = getEnoughDamageToKill(blocker, dmgCanDeal, attacker, true);
 
-                if (dmgCanDeal < dmgToKill) {
-                    dmgToKill = Math.min(blocker.getLethalDamage(), dmgCanDeal);
-                } else {
-                    dmgToKill = Math.max(blocker.getLethalDamage(), dmgToKill);
+                if (dmgCanDeal < dmgToBlocker) {
+                    // can't kill so just put the lowest legal amount
+                    dmgToBlocker = Math.min(blocker.getLethalDamage(), dmgCanDeal);
                 }
 
-                if (!isAttacking) { // no entity to deliver damage via trample
-                    dmgToKill = dmgCanDeal;
-                }
-
-                final int remainingDmg = dmgCanDeal - dmgToKill;
-
+                final int remainingDmg = dmgCanDeal - dmgToBlocker;
                 // If Extra trample damage, assign to defending player/planeswalker (when there is one)
                 if (remainingDmg > 0) {
                     damageMap.put(null, remainingDmg);
                 }
-
-                damageMap.put(blocker, dmgToKill);
-            } else {
-                damageMap.put(blocker, dmgCanDeal);
             }
+            damageMap.put(blocker, dmgToBlocker);
         } // 1 blocker
         else {
             // Does the attacker deal lethal damage to all blockers
@@ -2146,24 +2142,15 @@ public class ComputerUtilCombat {
      *            a boolean.
      * @return a int.
      */
-    public static final int getEnoughDamageToKill(final Card c, final int maxDamage, final Card source, final boolean isCombat,
-            final boolean noPrevention) {
-        final int killDamage = getDamageToKill(c, false);
+    public static final int getEnoughDamageToKill(final Card c, final int maxDamage, final Card source, final boolean isCombat, final boolean noPrevention) {
+        int killDamage = getDamageToKill(c, false);
 
-        if (c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getShieldCount() > 0) {
+        if (c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getCounters(CounterEnumType.SHIELD) > 0 || (c.getShieldCount() > 0 && c.canBeShielded())) {
             if (!(source.hasKeyword(Keyword.WITHER) || source.hasKeyword(Keyword.INFECT))) {
                 return maxDamage + 1;
             }
-        } else if (source.hasKeyword(Keyword.DEATHTOUCH) && !c.isPlaneswalker()) {
-            for (int i = 1; i <= maxDamage; i++) {
-                if (noPrevention) {
-                    if (c.staticReplaceDamage(i, source, isCombat) > 0) {
-                        return i;
-                    }
-                } else if (predictDamageTo(c, i, source, isCombat) > 0) {
-                    return i;
-                }
-            }
+        } else if (source.hasKeyword(Keyword.DEATHTOUCH) && c.isCreature()) {
+            killDamage = 1;
         }
 
         for (int i = 1; i <= maxDamage; i++) {
@@ -2191,14 +2178,7 @@ public class ComputerUtilCombat {
      */
     public final static int getDamageToKill(final Card c, boolean withShields) {
         int damageShield = withShields ? c.getPreventNextDamageTotalShields() : 0;
-        int killDamage = 0;
-        if (c.isCreature()) {
-            killDamage = Math.max(0, c.getLethalDamage());
-        }
-        if (c.isPlaneswalker()) {
-            int killDamagePW = c.getCurrentLoyalty();
-            killDamage = c.isCreature() ? Math.min(killDamage, killDamagePW) : killDamagePW;
-        }
+        int killDamage = c.getExcessDamageValue(false);
 
         if (killDamage > damageShield
                 && c.hasSVar("DestroyWhenDamaged")) {
@@ -2328,7 +2308,7 @@ public class ComputerUtilCombat {
      * @return transform creature if possible, original creature otherwise
      */
     private final static Card canTransform(Card original) {
-        if (original.isDoubleFaced() && !original.isInAlternateState()) {
+        if (original.isTransformable() && !original.isInAlternateState()) {
             for (SpellAbility sa : original.getSpellAbilities()) {
                 if (sa.getApi() == ApiType.SetState && ComputerUtilCost.canPayCost(sa, original.getController(), false)) {
                     Card transformed = CardUtil.getLKICopy(original);
@@ -2406,7 +2386,6 @@ public class ComputerUtilCombat {
         // (currently looks for the creature with maximum raw power since that's what the AI usually judges by when
         // deciding whether the creature is worth blocking).
         // If the creature doesn't change into anything, returns the original creature.
-        if (attacker == null) { return null; }
         Card attackerAfterTrigs = attacker;
 
         // Test for some special triggers that can change the creature in combat
@@ -2488,13 +2467,18 @@ public class ComputerUtilCombat {
         return poison;
     }
 
-    public static GameEntity addAttackerToCombat(SpellAbility sa, Card attacker, FCollection<GameEntity> defenders) {
+    public static GameEntity addAttackerToCombat(SpellAbility sa, Card attacker, Iterable<? extends GameEntity> defenders) {
         Combat combat = sa.getHostCard().getGame().getCombat();
         if (combat != null) {
-            // 1. If the card that spawned the attacker was sent at a planeswalker, attack the same. Consider improving.
             GameEntity def = combat.getDefenderByAttacker(sa.getHostCard());
-            if (def instanceof Card && ((Card)def).isPlaneswalker() && defenders.contains(def)) {
-                return def;
+            // 1. If the card that spawned the attacker was sent at a card, attack the same. Consider improving.
+            if (def instanceof Card && Iterables.contains(defenders, def)) {
+                if (((Card)def).isPlaneswalker()) {
+                    return def;
+                }
+                if (((Card)def).isBattle()) {
+                    return def;
+                }
             }
             // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.
             for (GameEntity p : defenders) {

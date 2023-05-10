@@ -2,6 +2,7 @@ package forge.adventure.character;
 
 import com.badlogic.gdx.math.Vector2;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.scene.Scene;
 import forge.adventure.stage.GameStage;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
@@ -62,11 +63,19 @@ public class PlayerSprite extends CharacterSprite {
     public void act(float delta) {
         super.act(delta);
         direction.setLength(playerSpeed * delta * playerSpeedModifier*playerSpeedEquipmentModifier);
+        Vector2 previousDirection = getMovementDirection().cpy();
+        Scene previousScene = forge.Forge.getCurrentScene();
 
         if(!direction.isZero()) {
             gameStage.prepareCollision(pos(),direction,boundingRect);
             direction.set(gameStage.adjustMovement(direction,boundingRect));
             moveBy(direction.x, direction.y);
+
+            // If the player is blocked by an obstacle, and they haven't changed scenes,
+            // they will keep trying to move in that direction
+            if (previousScene == forge.Forge.getCurrentScene()) {
+                direction.set(previousDirection.cpy());
+            }
         }
     }
 

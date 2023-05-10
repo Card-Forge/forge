@@ -24,7 +24,6 @@ import java.util.Map;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ForwardingList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.game.GameEntity;
@@ -100,8 +99,8 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
         return Iterables.filter(targets, SpellAbility.class);
     }
 
-    public final List<GameEntity> getTargetEntities() {
-        return Lists.newArrayList(Iterables.filter(targets, GameEntity.class));
+    public final Iterable<GameEntity> getTargetEntities() {
+        return Iterables.filter(targets, GameEntity.class);
     }
 
     public final boolean isTargetingAnyCard() {
@@ -143,6 +142,14 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
     @Override
     protected List<GameObject> delegate() {
         return targets;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        if (o instanceof Card) {
+            return Iterables.any(Iterables.filter(targets, Card.class), c -> c.equalsWithTimestamp((Card) o));
+        }
+        return super.contains(o);
     }
 
     public final void addDividedAllocation(final GameObject tgt, final Integer portionAllocated) {

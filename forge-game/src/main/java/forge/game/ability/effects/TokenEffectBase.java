@@ -15,7 +15,6 @@ import com.google.common.collect.Table;
 import forge.GameCommand;
 import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -45,8 +44,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 if (result == null) {
                     throw new RuntimeException("don't find Token for TokenScript: " + script);
                 }
-                // set owner
-                result.setOwner(owner);
+                result.setTokenSpawningAbility(sa);
                 tokenTable.put(owner, result, finalAmount);
             }
         }
@@ -60,8 +58,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
         if (result == null) {
             throw new RuntimeException("don't find Token for TokenScript: " + script);
         }
-        // set owner
-        result.setOwner(owner);
+        result.setTokenSpawningAbility(sa);
         tokenTable.put(owner, result, finalAmount);
 
         return tokenTable;
@@ -79,9 +76,10 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
 
         // support PlayerCollection for affected
         Set<Player> toRemove = Sets.newHashSet();
-        for (Player p : tokenTable.rowKeySet()) {
+        for (Player p : Sets.newHashSet(tokenTable.rowKeySet())) {
             final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(p);
             repParams.put(AbilityKey.Token, tokenTable);
+            repParams.put(AbilityKey.Cause, sa);
             repParams.put(AbilityKey.EffectOnly, true); // currently only effects can create tokens?
 
             switch (game.getReplacementHandler().run(ReplacementType.CreateToken, repParams)) {
@@ -220,11 +218,10 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
 
-        GameObject aTo = Iterables.getFirst(
-                AbilityUtils.getDefinedObjects(host, sa.getParam("AttachedTo"), sa), null);
+        GameEntity aTo = Iterables.getFirst(
+                AbilityUtils.getDefinedEntities(host, sa.getParam("AttachedTo"), sa), null);
 
-        if (aTo instanceof GameEntity) {
-            GameEntity ge = (GameEntity)aTo;
+        if (aTo != null) {
             // check what the token would be on the battlefield
             Card lki = CardUtil.getLKICopy(tok);
 
@@ -237,7 +234,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
 
             boolean canAttach = lki.isAttachment();
 
-            if (canAttach && !ge.canBeAttached(lki, sa)) {
+            if (canAttach && !aTo.canBeAttached(lki, sa)) {
                 canAttach = false;
             }
 
@@ -253,7 +250,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 return false;
             }
 
-            tok.attachToEntity(ge, sa);
+            tok.attachToEntity(aTo, sa);
             return true;
         }
         // not a GameEntity, cant be attach

@@ -151,7 +151,7 @@ public class CostRemoveCounter extends CostPart {
             amount = getAbilityAmount(ability);
         }
         if (this.payCostFromSource()) {
-            return (source.getCounters(cntrs) - amount) >= 0;
+            return !source.isPhasedOut() && (source.getCounters(cntrs) - amount) >= 0;
         }
         else {
             List<Card> typeList;

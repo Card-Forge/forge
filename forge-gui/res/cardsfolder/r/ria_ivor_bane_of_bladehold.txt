@@ -1,0 +1,14 @@
+Name:Ria Ivor, Bane of Bladehold
+ManaCost:2 W B
+Types:Legendary Creature Phyrexian Knight
+PT:3/4
+K:Battle cry
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ At the beginning of combat on your turn, the next time target creature would deal combat damage to one or more players this combat, prevent that damage. If damage is prevented this way, create that many 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and "This creature can't block."
+SVar:TrigEffect:DB$ Effect | ValidTgts$ Creature | Duration$ UntilEndOfCombat | ReplacementEffects$ StrikeWithAwe | ExileOnMoved$ Battlefield | RememberObjects$ Targeted
+SVar:StrikeWithAwe:Event$ DamageDone | IsCombat$ True | ValidTarget$ Player | ValidSource$ Card.IsRemembered | ReplaceWith$ CreateTokensInstead | PreventionEffect$ True | Description$ The next time target creature would deal combat damage to one or more players this combat, prevent that damage. If damage is prevented this way, create that many 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and "This creature can't block."
+SVar:CreateTokensInstead:DB$ Token | TokenAmount$ X | TokenScript$ c_1_1_a_phyrexian_mite_toxic_noblock | TokenOwner$ You | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:X:ReplaceCount$DamageAmount
+AI:RemoveDeck:All
+DeckHas:Ability$Token & Type$Mite|Artifact
+Oracle:Battle cry\nAt the beginning of combat on your turn, the next time target creature would deal combat damage to one or more players this combat, prevent that damage. If damage is prevented this way, create that many 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and "This creature can't block."

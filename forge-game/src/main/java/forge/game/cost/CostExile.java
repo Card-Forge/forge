@@ -17,8 +17,8 @@
  */
 package forge.game.cost;
 
-import forge.card.CardType;
 import forge.game.Game;
+import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
@@ -45,20 +45,20 @@ public class CostExile extends CostPartWithList {
      */
     private static final long serialVersionUID = 1L;
     public final ZoneType from;
-    public final boolean sameZone;
+    public final int zoneRestriction;
 
     public final ZoneType getFrom() {
         return this.from;
     }
 
     public CostExile(final String amount, final String type, final String description, final ZoneType from) {
-        this(amount, type, description, from, false);
+        this(amount, type, description, from, 1);
     }
 
-    public CostExile(final String amount, final String type, final String description, final ZoneType from, final boolean sameZone) {
+    public CostExile(final String amount, final String type, final String description, final ZoneType from, final int zoneMode) {
         super(amount, type, description);
         this.from = from != null ? from : ZoneType.Battlefield;
-        this.sameZone = sameZone;
+        this.zoneRestriction = zoneMode;
     }
 
     @Override
@@ -67,7 +67,7 @@ public class CostExile extends CostPartWithList {
         final Game game = source.getGame();
 
         CardCollectionView typeList;
-        if (this.sameZone) {
+        if (zoneRestriction != 1) {
             typeList = game.getCardsIn(this.from);
         } else {
             typeList = payer.getCardsIn(this.from);
@@ -84,10 +84,7 @@ public class CostExile extends CostPartWithList {
     @Override
     public final String toString() {
         final Integer i = this.convertAmount();
-        String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
-        if (CardType.CoreType.isValidEnum(desc)) {
-            desc = desc.toLowerCase();
-        }
+        String desc = this.getDescriptiveType();
         String origin = this.from.name().toLowerCase();
 
         if (this.payCostFromSource()) {
@@ -100,32 +97,30 @@ public class CostExile extends CostPartWithList {
         }
 
         if (this.from.equals(ZoneType.Battlefield)) {
-            if (!this.payCostFromSource()) {
-                return String.format("Exile %s you control", Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
-            }
-            return String.format("Exile %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
+            return String.format("Exile %s you control", Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
         }
 
         if (!desc.equals("Card") && !desc.contains("card")) {
-            if (this.sameZone) {
-                return String.format("Exile %s from the same %s", Lang.nounWithNumeralExceptOne(this.getAmount(),
-                        desc + " card"), origin);
+            StringBuilder sb = new StringBuilder();
+            sb.append("Exile %s from ");
+            if (zoneRestriction == 0) {
+                sb.append("the same");
+            } else if (zoneRestriction == -1) {
+                sb.append("a");
+            } else {
+                sb.append("your");
             }
-            return String.format("Exile %s from your %s", Lang.nounWithNumeralExceptOne(this.getAmount(),
+            sb.append(" %s");
+            return String.format(sb.toString(), Lang.nounWithNumeralExceptOne(this.getAmount(),
                     desc + " card"), origin);
         }
 
-        if (this.sameZone) {
+        if (zoneRestriction == 0) {
             return String.format("Exile %s from the same %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
         }
 
         if (this.getAmount().equals("X")) {
             return String.format ("Exile any number of %s from your %s", desc, origin);
-        }
-
-        //for very specific situations like Timothar
-        if (desc.startsWith("the")) {
-            return String.format("Exile %s from your %s", desc, origin);
         }
 
         return String.format("Exile %s from your %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
@@ -145,7 +140,7 @@ public class CostExile extends CostPartWithList {
         }
 
         CardCollectionView list;
-        if (this.sameZone) {
+        if (zoneRestriction != 1) {
             list = game.getCardsIn(this.from);
         } else {
             list = payer.getCardsIn(this.from);
@@ -170,7 +165,7 @@ public class CostExile extends CostPartWithList {
             return false;
         }
 
-        if (this.sameZone) {
+        if (zoneRestriction == 0) {
             boolean foundPayable = false;
             FCollectionView<Player> players = game.getPlayers();
             for (Player p : players) {
@@ -187,11 +182,8 @@ public class CostExile extends CostPartWithList {
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
         final Game game = targetCard.getGame();
-        final Card host = ability.getHostCard();
         Card newCard = game.getAction().exile(targetCard, null);
-        host.addExiledCard(newCard);
-        newCard.setExiledWith(host);
-        newCard.setExiledBy(ability.getActivatingPlayer());
+        SpellAbilityEffect.handleExiledWith(newCard, ability);
         return newCard;
     }
 

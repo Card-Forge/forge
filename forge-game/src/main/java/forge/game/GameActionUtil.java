@@ -134,6 +134,11 @@ public final class GameActionUtil {
                 } else {
                     newSA = sa.copy(activator);
                 }
+
+                if (o.getAbility().hasParam("ValidAfterStack")) {
+                    newSA.getMapParams().put("ValidAfterStack", o.getAbility().getParam("ValidAfterStack"));
+                }
+
                 final SpellAbilityRestriction sar = newSA.getRestrictions();
                 if (o.isWithFlash()) {
                     sar.setInstantSpeed(true);
@@ -169,40 +174,7 @@ public final class GameActionUtil {
                 for (final KeywordInterface inst : source.getKeywords()) {
                     final String keyword = inst.getOriginal();
 
-                    if (keyword.startsWith("Disturb")) {
-                        if (!source.isInZone(ZoneType.Graveyard)) {
-                            continue;
-                        }
-
-                        final String[] k = keyword.split(":");
-                        final Cost disturbCost = new Cost(k[1], true);
-
-                        SpellAbility newSA;
-                        if (source.getAlternateState().getType().hasSubtype("Aura")) {
-                            newSA = source.getAlternateState().getFirstAbility().copyWithManaCostReplaced(activator, disturbCost);
-                        } else {
-                            newSA = new SpellPermanent(source);
-                            newSA.setCardState(source.getAlternateState());
-                            newSA.setPayCosts(disturbCost);
-                            newSA.setActivatingPlayer(activator);
-                        }
-
-                        newSA.putParam("PrecostDesc", "Disturb —");
-                        newSA.putParam("CostDesc", disturbCost.toString());
-
-                        // makes new SpellDescription
-                        final StringBuilder desc = new StringBuilder();
-                        desc.append(newSA.getCostDescription());
-                        desc.append("(").append(inst.getReminderText()).append(")");
-                        newSA.setDescription(desc.toString());
-                        newSA.putParam("AfterDescription", "(Disturbed)");
-
-                        newSA.setAlternativeCost(AlternativeCost.Disturb);
-                        newSA.getRestrictions().setZone(ZoneType.Graveyard);
-                        newSA.setCardState(source.getAlternateState());
-
-                        alternatives.add(newSA);
-                    } else if (keyword.startsWith("Escape")) {
+                    if (keyword.startsWith("Escape")) {
                         if (!source.isInZone(ZoneType.Graveyard)) {
                             continue;
                         }
@@ -224,6 +196,7 @@ public final class GameActionUtil {
 
                         newSA.setAlternativeCost(AlternativeCost.Escape);
                         newSA.getRestrictions().setZone(ZoneType.Graveyard);
+                        newSA.setIntrinsic(inst.isIntrinsic());
 
                         alternatives.add(newSA);
                     } else if (keyword.startsWith("Flashback")) {
@@ -254,6 +227,8 @@ public final class GameActionUtil {
                         }
                         flashback.setAlternativeCost(AlternativeCost.Flashback);
                         flashback.getRestrictions().setZone(ZoneType.Graveyard);
+                        flashback.setKeyword(inst);
+                        flashback.setIntrinsic(inst.isIntrinsic());
                         alternatives.add(flashback);
                     } else if (keyword.startsWith("Foretell")) {
                         // Foretell cast only from Exile
@@ -405,6 +380,8 @@ public final class GameActionUtil {
             return costs;
         }
 
+        sa.clearPipsToReduce();
+
         Card source = sa.getHostCard();
         final Game game = source.getGame();
         boolean lkicheck = false;
@@ -426,7 +403,7 @@ public final class GameActionUtil {
 
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.getParam("Mode").equals("OptionalCost") || stAb.isSuppressed() || !stAb.checkConditions()) {
+                if (!stAb.checkConditions("OptionalCost")) {
                     continue;
                 }
 
@@ -552,7 +529,7 @@ public final class GameActionUtil {
             for (KeywordInterface inst : source.getKeywords()) {
                 final String keyword = inst.getOriginal();
                 if (keyword.startsWith("AlternateAdditionalCost")) {
-                    final List<SpellAbility> newAbilities = Lists.newArrayList();
+                    abilities.clear();
 
                     for (String s : keyword.split(":", 2)[1].split(":")) {
                         final SpellAbility newSA = sa.copy();
@@ -562,24 +539,21 @@ public final class GameActionUtil {
                         newSA.setDescription(sa.getDescription() + " (Additional cost: " + cost.toSimpleString() + ")");
                         newSA.setPayCosts(cost.add(sa.getPayCosts()));
                         if (newSA.canPlay()) {
-                            newAbilities.add(newSA);
+                            abilities.add(newSA);
                         }
                     }
-
-                    abilities.clear();
-                    abilities.addAll(newAbilities);
                 }
             }
         } else if (sa.isActivatedAbility() && sa.hasParam("AlternateCost")) {
             // need to be handled there because it needs to rebuilt the description for the original ability
 
-            final List<SpellAbility> newAbilities = Lists.newArrayList();
+            abilities.clear();
 
             SpellAbility newSA = sa.copy();
             newSA.removeParam("AlternateCost");
             newSA.rebuiltDescription();
             if (newSA.canPlay()) {
-                newAbilities.add(newSA);
+                abilities.add(newSA);
             }
 
             // set the cost to this directly to bypass non mana cost
@@ -588,11 +562,8 @@ public final class GameActionUtil {
             newSA2.removeParam("AlternateCost");
             newSA2.rebuiltDescription();
             if (newSA2.canPlay()) {
-                newAbilities.add(newSA2);
+                abilities.add(newSA2);
             }
-
-            abilities.clear();
-            abilities.addAll(newAbilities);
         }
         return abilities;
     }
@@ -897,6 +868,9 @@ public final class GameActionUtil {
         final Game game = ability.getActivatingPlayer().getGame();
 
         if (fromZone != null) { // and not a copy
+            // might have been an alternative lki host
+            oldCard = ability.getCardState().getCard();
+ 
             oldCard.setCastSA(null);
             oldCard.setCastFrom(null);
             // add back to where it came from, hopefully old state
@@ -928,6 +902,9 @@ public final class GameActionUtil {
             oldCard.setBackSide(false);
             oldCard.setState(oldCard.getFaceupCardStateName(), true);
             oldCard.unanimateBestow();
+            if (ability.isDisturb() || ability.hasParam("CastTransformed")) {
+                oldCard.undoIncrementTransformedTimestamp();
+            }
 
             if (ability.hasParam("Prototype")) {
                 oldCard.removeCloneState(oldCard.getPrototypeTimestamp());

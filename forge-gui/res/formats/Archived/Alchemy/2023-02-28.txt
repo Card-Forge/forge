@@ -1,0 +1,6 @@
+[format]
+Name:Alchemy (YONE)
+Type:Archived
+Subtype:Arena
+Effective:2023-02-28
+Sets:ANA, ANB, MID, VOW, YMID, NEO, YNEO, SNC, YSNC, HBG, DMU, YDMU, BRO, YBRO, ONE, YONE

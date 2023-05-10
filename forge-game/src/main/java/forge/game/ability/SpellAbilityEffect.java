@@ -1,28 +1,15 @@
 package forge.game.ability;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.StringTokenizer;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
-
 import forge.GameCommand;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardUtil;
-import forge.game.card.CardZoneTable;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -41,6 +28,9 @@ import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 /**
  * <p>
@@ -80,14 +70,37 @@ public abstract class SpellAbilityEffect {
         // Own description
         String stackDesc = params.get("StackDescription");
         if (stackDesc != null) {
+            String[] reps = null;
+            if (stackDesc.startsWith("REP")) {
+                reps = stackDesc.substring(4).split(" & ");
+                stackDesc = "SpellDescription";
+            }
             // by typing "SpellDescription" they want to bypass the Effect's string builder
             if ("SpellDescription".equalsIgnoreCase(stackDesc)) {
-            	if (params.get("SpellDescription") != null) {
-            		sb.append(CardTranslation.translateSingleDescriptionText(params.get("SpellDescription"), sa.getHostCard().getName()));
-            	}
-            	if (sa.getTargets() != null && !sa.getTargets().isEmpty()) {
-            		sb.append(" (Targeting: ").append(sa.getTargets()).append(")");
-            	}
+                if (params.containsKey("SpellDescription")) {
+                    String spellDesc = CardTranslation.translateSingleDescriptionText(params.get("SpellDescription"),
+                            sa.getHostCard().getName());
+
+                    int idx = spellDesc.indexOf("(");
+                    if (idx > 0) { //trim reminder text from StackDesc
+                        spellDesc = spellDesc.substring(0, spellDesc.indexOf("(") - 1);
+                    }
+
+                    if (reps != null) {
+                        for (String s : reps) {
+                            String[] rep = s.split("_",2);
+                            if (spellDesc.contains(rep[0])) {
+                                spellDesc = spellDesc.replaceFirst(rep[0], rep[1]);
+                            }
+                        }
+                        tokenizeString(sa, sb, spellDesc);
+                    } else {
+                        sb.append(spellDesc);
+                    }
+                }
+                if (sa.getTargets() != null && !sa.getTargets().isEmpty() && reps == null) {
+                    sb.append(" (Targeting: ").append(Lang.joinHomogenous(sa.getTargets())).append(")");
+                }
             } else if (!"None".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
                 tokenizeString(sa, sb, stackDesc);
             }
@@ -169,7 +182,7 @@ public abstract class SpellAbilityEffect {
                     } else {
                         objs = AbilityUtils.getDefinedObjects(sa.getHostCard(), t, sa);
                     }
-                    sb.append(StringUtils.join(objs, ", "));
+                    sb.append(Lang.joinHomogenous(objs));
                 }
             } else {
                 sb.append(t);
@@ -186,6 +199,12 @@ public abstract class SpellAbilityEffect {
 
     private static CardCollection getCards(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
+        if (sa.hasParam("ThisDefinedAndTgts")) {
+            CardCollection cards =
+                    AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("ThisDefinedAndTgts"), sa);
+            cards.addAll(sa.getTargets().getTargetCards());
+            return cards;
+        }
         return useTargets ? new CardCollection(sa.getTargets().getTargetCards())
                 : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
@@ -396,23 +415,6 @@ public abstract class SpellAbilityEffect {
         parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
         final Trigger addedTrigger = card.addTrigger(parsedTrigger);
         addedTrigger.setIntrinsic(true);
-    }
-
-    protected static void addExileOnCastOrMoveTrigger(final Card card, final String zone) {
-        String trig = "Mode$ SpellCast | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Static$ True";
-        String effect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
-        final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
-        parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
-        final Trigger addedTrigger = card.addTrigger(parsedTrigger);
-        addedTrigger.setIntrinsic(true);
-        //Any on Destination will cause the effect to remove itself when cancelling to play the card
-        String trig2 = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | Destination$ Hand,Library,Graveyard,Battlefield,Command,Sideboard | TriggerZones$ Command | Static$ True";
-        String effect2 = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
-        final Trigger parsedTrigger2 = TriggerHandler.parseTrigger(trig2, card, true);
-        parsedTrigger2.setOverridingAbility(AbilityFactory.getAbility(effect2, card));
-        final Trigger addedTrigger2 = card.addTrigger(parsedTrigger2);
-        addedTrigger2.setIntrinsic(true);
-
     }
 
     protected static void addExileOnCounteredTrigger(final Card card) {
@@ -890,6 +892,35 @@ public abstract class SpellAbilityEffect {
         } else {
             options = activator.getAllOtherPlayers();
         }
-        return activator.getController().chooseSingleEntityForEffect(options, sa, Localizer.getInstance().getMessage("lblChoosePlayer") , null);
+        return activator.getController().chooseSingleEntityForEffect(options, sa, Localizer.getInstance().getMessage("lblChoosePlayer"), null);
+    }
+
+    public static void handleExiledWith(final Iterable<Card> movedCards, final SpellAbility cause) {
+        for (Card c : movedCards) {
+            handleExiledWith(c, cause);
+        }
+    }
+    public static void handleExiledWith(final Card movedCard, final SpellAbility cause) {
+        if (movedCard.isToken()) {
+            return;
+        }
+
+        Card exilingSource = cause.getHostCard();
+        // during replacement LKI might be used
+        if (cause.isReplacementAbility() && exilingSource.isLKI()) {
+            exilingSource = exilingSource.getGame().getCardState(exilingSource);
+        }
+        // avoid storing this on "inactive" cards
+        if (exilingSource.isImmutable() || exilingSource.isInPlay() || exilingSource.isInZone(ZoneType.Stack)) {
+            // make sure it gets updated
+            exilingSource.removeExiledCard(movedCard);
+            exilingSource.addExiledCard(movedCard);
+        }
+        // if ability was granted use that source so they can be kept apart later
+        if (cause.isCopiedTrait()) {
+            exilingSource = cause.getOriginalHost();
+        }
+        movedCard.setExiledWith(exilingSource);
+        movedCard.setExiledBy(cause.getActivatingPlayer());
     }
 }

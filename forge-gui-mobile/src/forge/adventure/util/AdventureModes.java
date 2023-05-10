@@ -1,13 +1,14 @@
 package forge.adventure.util;
 
 import com.badlogic.gdx.utils.Array;
+import forge.Forge;
 
 public enum AdventureModes {
-    Standard("Standard"),
-    Constructed("Constructed"),
-    Chaos("[RED]Chaos"),
-    Pile("Pile"),
-    Custom("Custom");
+    Standard(Forge.getLocalizer().getMessage("lblStandard")),
+    Constructed(Forge.getLocalizer().getMessage("lblConstructed")),
+    Chaos("[GOLD]"+Forge.getLocalizer().getMessage("lblChaos")),
+    Pile(Forge.getLocalizer().getMessage("lblPile")),
+    Custom(Forge.getLocalizer().getMessage("lblCustom"));
 
     private final String name;
     private  String selectionName;

@@ -1,0 +1,19 @@
+Name:Invasion of Kylem
+ManaCost:2 R W
+Types:Battle Siege
+Defense:5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, up to two target creatures each get +2/+0 and gain vigilance and haste until end of turn.
+SVar:TrigSearch:DB$ Pump | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | NumAtt$ 2 | KW$ Vigilance & Haste
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Kylem enters the battlefield, up to two target creatures each get +2/+0 and gain vigilance and haste until end of turn.
+
+AlternateMode:DoubleFaced
+
+ALTERNATE
+
+Name:Valor's Reach Tag Team
+ManaCost:no cost
+Colors:red,white
+Types:Sorcery
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ rw_3_2_warrior_symbiotic_attack | TokenAmount$ 2 | TokenOwner$ You | SpellDescription$ Create two 3/2 red and white Warrior creature tokens with "Whenever this creature and at least one other creature token attack, put a +1/+1 counter on this creature."
+DeckHas:Ability$Token & Type$Warrior
+Oracle:Create two 3/2 red and white Warrior creature tokens with "Whenever this creature and at least one other creature token attack, put a +1/+1 counter on this creature."

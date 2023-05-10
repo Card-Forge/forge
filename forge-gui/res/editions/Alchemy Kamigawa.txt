@@ -3,6 +3,7 @@ Code=YNEO
 Date=2022-03-17
 Name=Alchemy: Kamigawa
 Type=Online
+Booster=1 UncommonRareMythic, 8 Common:!dfc:!fromSheet("NEO lands"):fromSheet("NEO cards"), 3 Uncommon:!dfc:!fromSheet("NEO lands"):fromSheet("NEO cards"), 1 dfc:!Rare:!Mythic:fromSheet("NEO cards"), 1 RareMythic:fromSheet("NEO cards"), 1 fromSheet("NEO lands")
 ScryfallCode=YNEO
 
 [cards]

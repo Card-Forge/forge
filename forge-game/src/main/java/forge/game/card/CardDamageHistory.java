@@ -26,6 +26,7 @@ public class CardDamageHistory {
     private boolean creatureGotBlockedThisCombat = false;
 
     private List<GameEntity> attackedThisTurn = Lists.newArrayList();
+    private boolean attackedBattleThisTurn = false;
 
     private final List<Player> creatureAttackedLastTurnOf = Lists.newArrayList();
     private final List<Player> NotAttackedSinceLastUpkeepOf = Lists.newArrayList();
@@ -59,6 +60,12 @@ public class CardDamageHistory {
 
         if (defender != null) {
             attackedThisTurn.add(defender);
+            if (defender instanceof Card) {
+                final Card def = (Card) defender;
+                if (def.isBattle()) {
+                    attackedBattleThisTurn = true;
+                }
+            }
         }
     }
     /**
@@ -83,6 +90,9 @@ public class CardDamageHistory {
     }
     public final boolean hasAttackedThisTurn(GameEntity e) {
         return this.attackedThisTurn.contains(e);
+    }
+    public final boolean hasAttackedBattleThisTurn() {
+        return this.attackedBattleThisTurn;
     }
     /**
      * <p>
@@ -240,7 +250,11 @@ public class CardDamageHistory {
         damagedThisGame.add(target);
         hasdealtDamagetoAny = true;
         if (isCombat && target instanceof Player) {
-            damagedThisCombat.add((Player) target);
+            final Player pTgt = (Player) target;
+            damagedThisCombat.add(pTgt);
+            if (pTgt.getLastTurnNr() > 0 && !pTgt.getGame().getPhaseHandler().isPlayerTurn(pTgt)) {
+                pTgt.setBeenDealtCombatDamageSinceLastTurn(true);
+            }
         }
         Pair<Integer, Boolean> dmg = Pair.of(damage, isCombat);
         damageDoneThisTurn.add(dmg);
@@ -272,6 +286,7 @@ public class CardDamageHistory {
 
     public void newTurn() {
         attackedThisTurn.clear();
+        attackedBattleThisTurn = false;
         damagedThisCombat.clear();
         damageDoneThisTurn.clear();
 

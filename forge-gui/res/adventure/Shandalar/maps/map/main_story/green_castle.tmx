@@ -29,7 +29,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmH0OwiAMxTnBNo3uIu4WXsePHUt3FS+kiyOZhNI3RsFkJelfkr5fhm0fdJUxnYaGhoaGhoaGYLSNMU8wzjt877HJw3/46EisvfJvgr+vjbkCcau/XBdw/73OX8vIOeX6rlvhR/vnMPE/tH8qv/KL83N1aetLmh/pD75a57j2mfiR/L6ziuVH5ys1n1Px91NOisfOdzd/7P+WykP5kzkb5TXGnBwPpYvONaqOEF1qj9UeZyY3L19V/LmH9nO6cza3ftfUZCr+GE3l/w/+pXcSKX7pu45PMyX/Gg/h63/2/SPkHST4W0cfuSeE9BHNlPwIi/L//ub2AOr9gfIhpfmpfEv01vCH/Fvom1Fzn7u/DwvOcu7fQr2T829S3p/7thwb6t9c75Z6hbSl/FuJldL/lFix/ifmfhh7vyz91mvP9CSso/xl+d+e+Pwi
+   eJztmH0OgjAMxXcCQKKchFt4HT84lnIVL6REluCyro+xbiZ0yfvLpf2F2fZtfWVMr1KpVCqVSiWorjHmCep8wPeemjz8x08eidUq/y74h9qYK6Bb/eW6gPvvdf5aRs4p13fdCz/aP8eZ/6H9U/mVX5yfq0tbX9L8SH/w1TrH1WbiR+L7ziqWH52v1HxOxT/MMSkeO9/d+LH/WyoO5U+WbJTXmGJyPFRedK5RdYTkpfbY3NPM5Oblq4o/99B+Lu+Sza3fLTWZij8mp/L/B//aO4kUv/Rdx5czJf8WD+Hrf/b9I+QdJPg7Jz9yTwjlR3Km5EdYlP/3N7cHUO8PlA8pzU/FW5NvC3/Iv4W+GTX3ufv7uOIsl/4t1Ds5/ybl/blvy7Gh/s31bqlXKLeUfyuxUvqfEivW/8TcD2Pvl6Xfev/1/VP50+oNNlL7xQ==
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="48" height="48">

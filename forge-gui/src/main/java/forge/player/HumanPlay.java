@@ -1,13 +1,10 @@
 package forge.player;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import forge.ImageKeys;
 import forge.game.cost.*;
-import forge.game.spellability.SpellAbilityStackInstance;
-import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
 
@@ -68,10 +65,9 @@ public class HumanPlay {
         FThreads.assertExecutedByEdt(false);
 
         Card source = sa.getHostCard();
-        boolean isforetold = source.isForetold();
+        sa.setActivatingPlayer(p);
 
         if (sa instanceof LandAbility) {
-            sa.setActivatingPlayer(p);
             if (sa.canPlay()) {
                 sa.resolve();
                 p.getGame().updateLastStateForCard(source);
@@ -79,9 +75,8 @@ public class HumanPlay {
             return false;
         }
 
+        boolean isforetold = source.isForetold();
         boolean castFaceDown = sa.isCastFaceDown();
-
-        sa.setActivatingPlayer(p);
         boolean flippedToCast = sa.isSpell() && source.isFaceDown();
 
         sa = chooseOptionalAdditionalCosts(p, sa);
@@ -114,7 +109,7 @@ public class HumanPlay {
 
         final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
         if (!req.playAbility(true, false, false)) {
-            Card rollback = p.getGame().getCardState(sa.getHostCard());
+            Card rollback = p.getGame().getCardState(source);
             if (castFaceDown) {
                 rollback.setFaceDown(false);
             } else if (flippedToCast) {
@@ -200,24 +195,6 @@ public class HumanPlay {
         req.playAbility(!useOldTargets, false, true);
     }
 
-    private static int getAmountFromPart(CostPart part, Card source, SpellAbility sourceAbility) {
-        String amountString = part.getAmount();
-        return StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString) : AbilityUtils.calculateAmount(source, amountString, sourceAbility);
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param part
-     * @param source
-     * @param sourceAbility
-     * @return
-     */
-    private static int getAmountFromPartX(CostPart part, Card source, SpellAbility sourceAbility) {
-        String amountString = part.getAmount();
-        // Probably should just be -
-        return AbilityUtils.calculateAmount(source, amountString, sourceAbility);
-    }
-
     /**
      * <p>
      * payCostDuringAbilityResolve.
@@ -259,7 +236,7 @@ public class HumanPlay {
         }
         // 0 mana costs were slipping through because CostPart.getAmount returns 1
         else if (costPart instanceof CostPartMana && parts.size() < 2) {
-            if (((CostPartMana) costPart).getManaToPay().isZero()) {
+            if (((CostPartMana) costPart).getMana().isZero()) {
                 return p.getController().confirmPayment(costPart, Localizer.getInstance().getMessage("lblDoYouWantPay") + " {0}?" + orString, sourceAbility);
             }
         }
@@ -284,6 +261,7 @@ public class HumanPlay {
                     || part instanceof CostRollDice
                     || part instanceof CostDamage
                     || part instanceof CostEnlist
+                    || part instanceof CostExileFromStack
                     || part instanceof CostPutCounter
                     || part instanceof CostRemoveCounter
                     || part instanceof CostRemoveAnyCounter
@@ -322,8 +300,14 @@ public class HumanPlay {
                     costExile.payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Graveyard)), sourceAbility, hcd.isEffect());
                 } else {
                     from = costExile.getFrom();
-                    CardCollection list = CardLists.getValidCards(p.getCardsIn(from), part.getType().split(";"), p, source, sourceAbility);
-                    final int nNeeded = getAmountFromPart(part, source, sourceAbility);
+                    CardCollection list;
+                    if (costExile.zoneRestriction != 1) {
+                        list = new CardCollection(p.getGame().getCardsIn(from));
+                    } else {
+                        list = new CardCollection(p.getCardsIn(from));
+                    }
+                    list = CardLists.getValidCards(list, part.getType().split(";"), p, source, sourceAbility);
+                    final int nNeeded = part.getAbilityAmount(sourceAbility);
                     if (list.size() < nNeeded) {
                         return false;
                     }
@@ -352,53 +336,6 @@ public class HumanPlay {
                         costExile.payAsDecided(p, PaymentDecision.card(newList), sourceAbility, hcd.isEffect());
                     }
                 }
-            }
-            else if (part instanceof CostExileFromStack) {
-                CostExileFromStack costExile = (CostExileFromStack) part;
-
-                final List<SpellAbility> saList = new ArrayList<>();
-                final List<String> descList = new ArrayList<>();
-
-                for (final SpellAbilityStackInstance si : p.getGame().getStack()) {
-                    final Card stC = si.getSourceCard();
-                    final SpellAbility stSA = si.getSpellAbility(true).getRootAbility();
-                    if (stC.isValid(part.getType().split(";"), p, source, sourceAbility) && stSA.isSpell()) {
-                        saList.add(stSA);
-                        if (stC.isCopiedSpell()) {
-                            descList.add(stSA.getStackDescription() + " (Copied Spell)");
-                        } else {
-                            descList.add(stSA.getStackDescription());
-                        }
-                    }
-                }
-
-                List<SpellAbility> payList = new ArrayList<>();
-                if (part.getType().equals("All")) {
-                    payList.addAll(saList);
-                } else {
-                    final int c = getAmountFromPart(part, source, sourceAbility);
-
-                    if (saList.size() < c) {
-                        return false;
-                    }
-
-                    for (int i = 0; i < c; i++) {
-                        //Have to use the stack descriptions here because some copied spells have no description otherwise
-                        final String o = controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblExileFromStack"), descList);
-
-                        if (o == null) {
-                            return false;
-                        }
-                        final SpellAbility toExile = saList.get(descList.indexOf(o));
-
-                        saList.remove(toExile);
-                        descList.remove(o);
-
-                        payList.add(toExile);
-                    }
-                }
-
-                costExile.payAsDecided(p, PaymentDecision.spellabilities(payList), sourceAbility, hcd.isEffect());
             }
             else if (part instanceof CostPutCardToLib) {
                 int amount = Integer.parseInt(part.getAmount());
@@ -462,12 +399,12 @@ public class HumanPlay {
             }
             else if (part instanceof CostReturn) {
                 CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source, sourceAbility);
-                int amount = getAmountFromPartX(part, source, sourceAbility);
+                int amount = part.getAbilityAmount(sourceAbility);
                 boolean hasPaid = payCostPart(controller, p, sourceAbility, hcd.isEffect(), (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblReturnToHand") + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostDiscard) {
-                int amount = getAmountFromPartX(part, source, sourceAbility);
+                int amount = part.getAbilityAmount(sourceAbility);
                 if ("Hand".equals(part.getType())) {
                     if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantDiscardYourHand"), sourceAbility)) {
                         return false;
@@ -489,25 +426,25 @@ public class HumanPlay {
             else if (part instanceof CostReveal) {
                 CostReveal costReveal = (CostReveal) part;
                 CardCollectionView list = CardLists.getValidCards(p.getCardsIn(costReveal.getRevealFrom()), part.getType(), p, source, sourceAbility);
-                int amount = getAmountFromPartX(part, source, sourceAbility);
+                int amount = part.getAbilityAmount(sourceAbility);
                 boolean hasPaid = payCostPart(controller, p, sourceAbility, hcd.isEffect(), (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblReveal") + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostTapType) {
                 CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source, sourceAbility);
                 list = CardLists.filter(list, Presets.UNTAPPED);
-                int amount = getAmountFromPartX(part, source, sourceAbility);
+                int amount = part.getAbilityAmount(sourceAbility);
                 boolean hasPaid = payCostPart(controller, p, sourceAbility, hcd.isEffect(), (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblTap") + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostPartMana) {
-                if (!((CostPartMana) part).getManaToPay().isZero()) { // non-zero costs require input
+                if (!((CostPartMana) part).getMana().isZero()) { // non-zero costs require input
                     mayRemovePart = false;
                 }
             }
             else if (part instanceof CostPayEnergy) {
                 CounterType counterType = CounterType.get(CounterEnumType.ENERGY);
-                int amount = getAmountFromPartX(part, source, sourceAbility);
+                int amount = part.getAbilityAmount(sourceAbility);
 
                 if (!mandatory && !p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantSpendNTargetTypeCounter", String.valueOf(amount), counterType.getName()), sourceAbility)) {
                     return false;
@@ -520,10 +457,9 @@ public class HumanPlay {
             }
 
             else if (part instanceof CostPayShards) {
-                CounterType counterType = CounterType.get(CounterEnumType.MANASHARDS);
-                int amount = getAmountFromPartX(part, source, sourceAbility);
+                int amount = part.getAbilityAmount(sourceAbility);
 
-                if (!mandatory && !p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantSpendNTargetTypeCounter", String.valueOf(amount), counterType.getName()), sourceAbility)) {
+                if (!mandatory && !p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantPay") + " " + amount + " {M}?", sourceAbility)) {
                     return false;
                 }
 
@@ -634,7 +570,7 @@ public class HumanPlay {
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestriction());
 
         String xInCard = source.getSVar("X");
-        String xColor = ability.getParam("XColor");
+        String xColor = ability.getXColor();
         if (source.hasKeyword("Spend only colored mana on X. No more than one mana of each color may be spent this way.")) {
             xColor = "WUBRGX";
         }

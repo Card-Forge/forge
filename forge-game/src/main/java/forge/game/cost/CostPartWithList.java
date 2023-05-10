@@ -38,6 +38,8 @@ public abstract class CostPartWithList extends CostPart {
     private final CardCollection lkiList = new CardCollection();
     protected final CardCollection cardList = new CardCollection();
 
+    private boolean intrinsic = true;
+
     protected final CardZoneTable table = new CardZoneTable();
     // set is here because executePayment() adds card to list, while ai's decide payment does the same thing.
     // set allows to avoid duplication
@@ -48,6 +50,10 @@ public abstract class CostPartWithList extends CostPart {
 
     public final CardCollectionView getCardList() {
     	return cardList;
+    }
+
+    public final void setIntrinsic(boolean b) {
+        intrinsic = b;
     }
 
     /**
@@ -71,11 +77,11 @@ public abstract class CostPartWithList extends CostPart {
         }
         final String lkiPaymentMethod = getHashForLKIList();
         for (final Card card : lkiList) {
-            sa.addCostToHashList(card, lkiPaymentMethod);
+            sa.addCostToHashList(card, lkiPaymentMethod, intrinsic);
         }
         final String cardPaymentMethod = getHashForCardList();
         for (final Card card : cardList) {
-            sa.addCostToHashList(card, cardPaymentMethod);
+            sa.addCostToHashList(card, cardPaymentMethod, intrinsic);
         }
     }
 

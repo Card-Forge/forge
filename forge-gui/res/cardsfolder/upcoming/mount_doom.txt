@@ -1,0 +1,9 @@
+Name:Mount Doom
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ Combo B R | SpellDescription$ Add {B} or {R}.
+A:AB$ DealDamage | Cost$ 1 B R T | Defined$ Opponent | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each opponent.
+A:AB$ ChooseCard | Cost$ 5 B R T Sac<1/CARDNAME> Sac<1/Artifact.Legendary/legendary artifact> | Defined$ You | Amount$ 2 | Choices$ Creature | ChoiceTitle$ Choose up to two creatures | SorcerySpeed$ True | AILogic$ Duneblast | SubAbility$ DBDestroyAll | StackDescription$ {p:You} chooses up to two creatures. Destroy the rest. | SpellDescription$ Choose up to two creatures, then destroy the rest. Activate only as a sorcery.
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.nonChosenCard | StackDescription$ None
+DeckNeeds:Type$Legendary & Type$Artifact
+Oracle:{T}, Pay 1 life: Add {B} or {R}.\n{1}{B}{R}, {T}: Mount Doom deals 1 damage to each opponent.\n{5}{B}{R}, {T}, Sacrifice Mount Doom and a legendary artifact: Choose up to two creatures, then destroy the rest. Activate only as a sorcery.

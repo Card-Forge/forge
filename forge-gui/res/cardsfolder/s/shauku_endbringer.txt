@@ -3,12 +3,11 @@ ManaCost:5 B B
 Types:Legendary Creature Vampire
 PT:5/5
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ GT1 | Description$ CARDNAME can't attack if another creature is on the battlefield.
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack. | IsPresent$ Creature | PresentCompare$ GT1 | Description$ CARDNAME can't attack if another creature is on the battlefield.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 3 life.
 A:AB$ ChangeZone | Cost$ T | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature | SubAbility$ DBCounter | SpellDescription$ Exile target creature and put a +1/+1 counter on CARDNAME.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 3
 SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ Self
-SVar:X:Count$Valid Creature
 #TODO: This creature seems almost AI playable, except the AI won't play around it and will cast other creatures, which may not even be a necessarily bad thing. Maybe RemRandomDeck would suffice here.
 AI:RemoveDeck:All
 Oracle:Flying\nShauku, Endbringer can't attack if there's another creature on the battlefield.\nAt the beginning of your upkeep, you lose 3 life.\n{T}: Exile target creature and put a +1/+1 counter on Shauku.

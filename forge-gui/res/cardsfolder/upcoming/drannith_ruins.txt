@@ -1,0 +1,7 @@
+Name:Drannith Ruins
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ PutCounter | Cost$ 2 T | ValidTgts$ Creature.nonHuman+ThisTurnEntered | TgtPrompt$ Select target non-Human creature that entered the battlefield this turn | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on target non-Human creature that entered the battlefield this turn.
+DeckHas:Ability$Counters
+Oracle:{T}: Add {C}.\n{2}, {T}: Put two +1/+1 counters on target non-Human creature that entered the battlefield this turn.

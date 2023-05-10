@@ -681,11 +681,23 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (min >= max) {
             return min;
         }
-        final ImmutableList.Builder<Integer> choices = ImmutableList.builder();
-        for (int i = 0; i <= max - min; i++) {
-            choices.add(Integer.valueOf(i + min));
+        // todo check for X cost or any max value for optional costs like multikicker, etc to determine the correct max value,
+        // fixes crash for word of command OutOfMemoryError when selecting a card with announce X or Multikicker since
+        // it will build from 0 to Integer.MAX_VALUE...
+        if (max == Integer.MAX_VALUE) {
+            Integer choice = getGui().getInteger(title, min, max, 9);
+            if (choice != null)
+                return choice;
+            else
+                return 0;
+        } else {
+            final ImmutableList.Builder<Integer> choices = ImmutableList.builder();
+            int size = max - min;
+            for (int i = 0; i <= size; i++) {
+                choices.add(Integer.valueOf(i + min));
+            }
+            return getGui().one(title, choices.build()).intValue();
         }
-        return getGui().one(title, choices.build()).intValue();
     }
 
     @Override
@@ -743,14 +755,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             Card show = null;
             Object o = null;
             switch (sa.getParam("ShowCardInPrompt")) {
-                case "FirstRemembered":
+                case "RememberedFirst":
                     o = sa.getHostCard().getFirstRemembered();
                     if (o instanceof Card) {
                         show = (Card) o;
                     }
                     break;
-                case "LastRemembered":
-                    o = sa.getHostCard().getFirstRemembered();
+                case "RememberedLast":
+                    o = Iterables.getLast(sa.getHostCard().getRemembered(), null);
                     if (o instanceof Card) {
                         show = (Card) o;
                     }
@@ -1392,6 +1404,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public PlanarDice choosePDRollToIgnore(List<PlanarDice> rolls) {
+        return getGui().one(Localizer.getInstance().getMessage("lblChooseRollIgnore"), rolls);
+    }
+
+    @Override
     public Object vote(final SpellAbility sa, final String prompt, final List<Object> options,
                        final ListMultimap<Object, Player> votes, Player forPlayer) {
         return getGui().one(prompt, options);
@@ -1691,8 +1708,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (sa != null && sa.isManaAbility()) {
             getGame().getGameLog().add(GameLogEntryType.LAND, message);
         } else {
-            getGui().message(message,
-                    sa == null || sa.getHostCard() == null ? "" : CardView.get(sa.getHostCard()).toString());
+            if (sa != null && sa.getHostCard() != null && GuiBase.getInterface().isLibgdxPort()) {
+                CardView cardView;
+                IPaperCard iPaperCard = sa.getHostCard().getPaperCard();
+                if (iPaperCard != null)
+                    cardView = CardView.getCardForUi(iPaperCard);
+                else
+                    cardView = sa.getHostCard().getView();
+                getGui().confirm(cardView, message, ImmutableList.of(localizer.getMessage("lblOk")));
+            } else {
+                getGui().message(message, sa == null || sa.getHostCard() == null ? "" : CardView.get(sa.getHostCard()).toString());
+            }
         }
     }
 
@@ -1841,8 +1867,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public ReplacementEffect chooseSingleReplacementEffect(final String prompt,
-                                                           final List<ReplacementEffect> possibleReplacers) {
+    public ReplacementEffect chooseSingleReplacementEffect(final String prompt, final List<ReplacementEffect> possibleReplacers) {
         final ReplacementEffect first = possibleReplacers.get(0);
         if (possibleReplacers.size() == 1) {
             return first;
@@ -2004,17 +2029,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         boolean result = select.chooseTargets(null, null, null, false, canFilterMustTarget);
 
-        final List<GameEntity> targets = currentAbility.getTargets().getTargetEntities();
+        final Iterable<GameEntity> targets = currentAbility.getTargets().getTargetEntities();
+        final int size = Iterables.size(targets);
         int amount = currentAbility.getStillToDivide();
 
         // assign divided as you choose values
-        if (result && targets.size() > 0 && amount > 0) {
+        if (result && size > 0 && amount > 0) {
             if (currentAbility.hasParam("DividedUpTo")) {
-                amount = chooseNumber(currentAbility, localizer.getMessage("lblHowMany"), targets.size(), amount);
+                amount = chooseNumber(currentAbility, localizer.getMessage("lblHowMany"), size, amount);
             }
-            if (targets.size() == 1) {
-                currentAbility.addDividedAllocation(targets.get(0), amount);
-            } else if (targets.size() == amount) {
+            if (size == 1) {
+                currentAbility.addDividedAllocation(Iterables.get(targets, 0), amount);
+            } else if (size == amount) {
                 for (GameEntity e : targets) {
                     currentAbility.addDividedAllocation(e, 1);
                 }
@@ -2022,7 +2048,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 for (GameEntity e : targets) {
                     currentAbility.addDividedAllocation(e, 0);
                 }
-            } else if (targets.size() > amount) {
+            } else if (size > amount) {
                 return false;
             } else {
                 String label = "lblDamage";
@@ -2033,7 +2059,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 }
                 label = localizer.getMessage(label).toLowerCase();
                 final CardView vSource = CardView.get(currentAbility.getHostCard());
-                final Map<Object, Integer> vTargets = new HashMap<>(targets.size());
+                final Map<Object, Integer> vTargets = new HashMap<>(size);
                 for (GameEntity e : targets) {
                     vTargets.put(GameEntityView.get(e), amount);
                 }

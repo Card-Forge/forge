@@ -102,7 +102,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             if (hasParam("ActivatorThisTurnCast")) {
                 final String compare = getParam("ActivatorThisTurnCast");
                 final String valid = getParamOrDefault("ValidCard", "Card");
-                List<Card> thisTurnCast = CardUtil.getThisTurnCast(valid, getHostCard(), this);
+                List<Card> thisTurnCast = CardUtil.getThisTurnCast(valid, getHostCard(), this, getHostCard().getController());
                 thisTurnCast = CardLists.filterControlledByAsList(thisTurnCast, activator);
                 int left = thisTurnCast.size();
                 int right = Integer.parseInt(compare.substring(2));
@@ -126,15 +126,8 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
 
             boolean validTgtFound = false;
             while (sa != null && !validTgtFound) {
-                for (final Card tgt : sa.getTargets().getTargetCards()) {
-                    if (matchesValid(tgt, getParam("TargetsValid").split(","))) {
-                        validTgtFound = true;
-                        break;
-                    }
-                }
-
-                for (final Player p : sa.getTargets().getTargetPlayers()) {
-                    if (matchesValid(p, getParam("TargetsValid").split(","))) {
+                for (final GameEntity ge : sa.getTargets().getTargetEntities()) {
+                    if (matchesValid(ge, getParam("TargetsValid").split(","))) {
                         validTgtFound = true;
                         break;
                     }

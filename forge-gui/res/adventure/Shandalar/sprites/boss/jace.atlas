@@ -1,0 +1,11 @@
+jace.png
+size: 32,44
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 5,13
+  size: 22,17
+Idle 
+  xy: 3,1
+  size: 26, 41

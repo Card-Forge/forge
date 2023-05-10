@@ -71,12 +71,20 @@ import forge.util.maps.MapToAmount;
 public class CombatUtil {
 
     public static FCollectionView<GameEntity> getAllPossibleDefenders(final Player playerWhoAttacks) {
+        // Opponents, opposing planeswalkers, and any battle you don't protect
         final FCollection<GameEntity> defenders = new FCollection<>();
         for (final Player defender : playerWhoAttacks.getOpponents()) {
             defenders.add(defender);
             final CardCollection planeswalkers = defender.getPlaneswalkersInPlay();
             defenders.addAll(planeswalkers);
+            for (Card battle : defender.getBattlesInPlay()) {
+                if (!playerWhoAttacks.equals(battle.getProtectingPlayer()) && battle.getType().hasSubtype("Siege")) {
+                    defenders.add(battle);
+                }
+            }
         }
+        defenders.addAll(playerWhoAttacks.getBattlesInPlay());
+
         return defenders;
     }
 
@@ -255,38 +263,16 @@ public class CombatUtil {
             }
         }
 
-        // Keywords
-        // replace with Static Ability if able
-        if (attacker.hasKeyword("CARDNAME can't attack.") || attacker.hasKeyword("CARDNAME can't attack or block.")) {
-            return false;
-        }
-
         // CantAttack static abilities
-        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.applyAbility("CantAttack", attacker, defender)) {
-                    return false;
-                }
-            }
+        if (StaticAbilityCantAttackBlock.cantAttack(attacker, defender)) {
+            return false;
         }
 
         return true;
     }
 
     public static boolean isAttackerSick(final Card attacker, final GameEntity defender) {
-        final Game game = attacker.getGame();
-        if (!attacker.isSick()) {
-            return false;
-        }
-
-        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.applyAbility("CanAttackIfHaste", attacker, defender)) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return !StaticAbilityCantAttackBlock.canAttackHaste(attacker, defender);
     }
 
     /**
@@ -575,12 +561,8 @@ public class CombatUtil {
         }
 
         // Unblockable check
-        for (final Card ca : attacker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.applyAbility("CantBlockBy", attacker, null)) {
-                    return false;
-                }
-            }
+        if (StaticAbilityCantAttackBlock.cantBlockBy(attacker, null)) {
+            return false;
         }
 
         return canBeBlocked(attacker, defendingPlayer);
@@ -1146,7 +1128,6 @@ public class CombatUtil {
             return false;
         }
 
-        final Game game = attacker.getGame();
         if (!canBlock(blocker, nextTurn)) {
             return false;
         }
@@ -1172,12 +1153,8 @@ public class CombatUtil {
         }
 
         // CantBlockBy static abilities
-        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.applyAbility("CantBlockBy", attacker, blocker)) {
-                    return false;
-                }
-            }
+        if (StaticAbilityCantAttackBlock.cantBlockBy(attacker, blocker)) {
+            return false;
         }
 
         return true;

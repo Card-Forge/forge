@@ -1,7 +1,6 @@
 Name:Blessing of Belzenlok
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +1 | SubAbility$ DBPump | SpellDescription$ Target creature gets +2/+1 until end of turn. If it's legendary, it also gains lifelink until end of turn.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Lifelink | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
-SVar:X:Targeted$Valid Legendary
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +1 | SubAbility$ DBPump | SpellDescription$ Target creature gets +2/+1 until end of turn. If it's legendary, it also gains lifelink until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Lifelink | ConditionDefined$ Targeted | ConditionPresent$ Legendary
 Oracle:Target creature gets +2/+1 until end of turn. If it's legendary, it also gains lifelink until end of turn.

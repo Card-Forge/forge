@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Plane Moag
 T:Mode$ SpellCast | OptionalDecider$ TriggeredPlayer | TriggerZones$ Command | Execute$ LifeSummer | TriggerDescription$ Whenever a player casts a spell, that player may gain 2 life.
 SVar:LifeSummer:DB$ GainLife | Defined$ TriggeredPlayer | LifeAmount$ 2
-T:Mode$ PlanarDice | Result$ Chaos | OptionalDecider$ You | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, you may gain 10 life.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | OptionalDecider$ You | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, you may gain 10 life.
 SVar:RolledChaos:DB$ GainLife | LifeAmount$ 10 | Defined$ You
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
-Oracle:Whenever a player casts a spell, that player may gain 2 life.\nWhenever you roll {CHAOS}, you may gain 10 life.
+Oracle:Whenever a player casts a spell, that player may gain 2 life.\nWhenever chaos ensues, you may gain 10 life.

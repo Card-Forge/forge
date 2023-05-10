@@ -10,7 +10,7 @@
       "height": 480
     },
     {
-      "type": "Scroll",
+      "type": "Window",
       "name": "saveSlots",
       "x": 10,
       "y": 106,
@@ -45,7 +45,6 @@
       "type": "TextButton",
       "name": "return",
       "text": "tr(lblBack)",
-      "binding": "Back",
       "width": 120,
       "height": 32,
       "x": 10,
@@ -54,7 +53,6 @@
     {
       "type": "TextButton",
       "name": "save",
-      "binding": "Use",
       "width": 120,
       "height": 32,
       "x": 140,

@@ -155,7 +155,12 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
                 x = FList.PADDING;
                 y += IMAGE_SIZE + FList.PADDING + CardRenderer.SET_BOX_MARGIN;
-                String set = deck.getEdition().getCode();
+
+                String set = "";
+                if (deck != null & deck.getEdition() != null)
+                {
+                    set = deck.getEdition().getCode();
+                }
                 float setWidth = CardRenderer.getSetWidth(font, set);
                 float availableFormatWidth = w - setWidth + CardRenderer.SET_BOX_MARGIN;
 

@@ -1,0 +1,13 @@
+Name:Jace Boss Effect
+ManaCost:no cost
+Colors:Blue
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigChoose | TriggerDescription$ At the beginning of your end step, conjure a duplicate of a random creature card from your opponent's library unto the battlefield under your control. The duplicate perpetually becomes a blue Illusion creature with base power and toughness 2/2 and has "When this creature becomes the target of a spell or ability, sacrifice it."
+SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.OppCtrl | ChoiceZone$ Library | AtRandom$ True | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ ChosenCard | Zone$ Battlefield | RememberMade$ True | SubAbility$ DBClearChosen
+SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Name$ Jace Boss's Perpetual Effect | SubAbility$ DBCleanup
+SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.IsRemembered | AddTrigger$ DismissTarget | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | SetPower$ 2 | SetToughness$ 2 | RemoveCardTypes$ True | SetColor$ Blue | AddType$ Creature & Illusion | Description$ That duplicate perpetually has base power and toughness 2/2 and becomes an Illusion creature. 
+SVar:DismissTarget:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ DismissSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
+SVar:DismissSac:DB$ Sacrifice
+Oracle:At the beginning of your end step, conjure a duplicate of a random creature card from your opponent's library unto the battlefield under your control. The duplicate perpetually becomes a blue Illusion creature with base power and toughness 2/2 and has "When this creature becomes the target of a spell or ability, sacrifice it."

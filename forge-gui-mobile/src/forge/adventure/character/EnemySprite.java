@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
@@ -22,6 +23,7 @@ import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +39,22 @@ public class EnemySprite extends CharacterSprite {
     public String nameOverride = ""; //Override name of this enemy in battles.
     public RewardData[] rewards; //Additional rewards for this enemy.
     public DialogData.ConditionData spawnCondition; //Condition to spawn.
+    public LinkedList<MovementBehavior> movementBehaviors = new LinkedList<>();
+
+    public Vector2 targetVector;
+    private final Vector2 _previousPosition = new Vector2();
+    private final Vector2 _previousPosition2 = new Vector2();
+    private final Vector2 _previousPosition3 = new Vector2();
+    private final Vector2 _previousPosition4 = new Vector2();
+    private final Vector2 _previousPosition5 = new Vector2();
+    private final Vector2 _previousPosition6 = new Vector2();
+    private final Float _movementTimeout = 150.0f;
+    private boolean _freeze = false; //freeze movement after defeating player
+    public float unfreezeRange = 30.0f;
+    public float threatRange = 0.0f;
+    public float fleeRange = 0.0f;
+    public boolean ignoreDungeonEffect = false;
+    public String questStageID;
 
     public EnemySprite(EnemyData enemyData) {
         this(0,enemyData);
@@ -47,17 +65,123 @@ public class EnemySprite extends CharacterSprite {
         data = enemyData;
     }
 
+    public void parseWaypoints(String waypoints){
+        String[] wp = waypoints.replaceAll("\\s", "").split(",");
+        for (String s : wp) {
+            movementBehaviors.addLast(new MovementBehavior());
+            if (s.startsWith("wait")) {
+                movementBehaviors.peekLast().duration = Float.parseFloat(s.substring(4));
+            } else {
+                movementBehaviors.peekLast().destination = Integer.parseInt(s);
+            }
+        }
+    }
+
+    public Rectangle navigationBoundingRect() {
+        //This version of the bounds will be used for navigation purposes to allow mobile mobs to not need pixel perfect pathing
+        return new Rectangle(boundingRect).setSize(boundingRect.width * collisionHeight, boundingRect.height * collisionHeight);
+    }
+
     @Override
     void updateBoundingRect() { //We want enemies to take the full tile.
-        boundingRect.set(getX(), getY(), getWidth(), getHeight());
+        float scale = data == null ? 1f : data.scale;
+        if (scale < 0)
+            scale = 1f;
+        boundingRect.set(getX(), getY(), getWidth()*scale, getHeight()*scale);
+        unfreezeRange = 30f * scale;
     }
 
     public void moveTo(Actor other, float delta) {
         Vector2 diff = new Vector2(other.getX(), other.getY()).sub(pos());
 
         diff.setLength(data.speed*delta);
-        moveBy(diff.x, diff.y);
+        moveBy(diff.x, diff.y,delta);
     }
+
+    public void freezeMovement(){
+        _freeze = true;
+        setPosition(_previousPosition6.x, _previousPosition6.y);
+        targetVector.setZero();
+        // This will move the enemy back a few frames of movement.
+        // Combined with player doing the same, should no longer be colliding to immediately re-enter battle if mob still present
+    }
+
+    public Vector2 getTargetVector(PlayerSprite player, float delta) {
+        //todo - this can be integrated into overworld movement as well, giving flee behaviors or moving to generated waypoints
+        Vector2 target = pos();
+        Vector2 routeToPlayer = new Vector2(player.pos()).sub(target);
+
+        if (_freeze){
+            //Mob has defeated player in battle, hold still until player has a chance to move away.
+            //Without this moving enemies can immediately restart battle.
+            if (routeToPlayer.len() < unfreezeRange) {
+                timer += delta;
+                return Vector2.Zero;
+            }
+            else{
+                _freeze = false; //resume normal behavior
+            }
+        }
+
+        if (threatRange > 0 || fleeRange > 0){
+
+            if (routeToPlayer.len() <= threatRange)
+            {
+                return routeToPlayer;
+            }
+            if (routeToPlayer.len() <= fleeRange)
+            {
+                Float fleeDistance = fleeRange - routeToPlayer.len();
+                return new Vector2(target).sub(player.pos()).setLength(fleeDistance);
+            }
+        }
+
+        if (movementBehaviors.size() > 0){
+
+            if (movementBehaviors.peek().getDuration() == 0 && target.equals(_previousPosition6) && timer >= _movementTimeout)
+            {
+                //stationary in an untimed behavior, move on to next behavior attempt to get unstuck
+                if (movementBehaviors.size() > 1) {
+                    movementBehaviors.addLast(movementBehaviors.pop());
+                    timer = 0.0f;
+                }
+            }
+            else if (movementBehaviors.peek().pos().sub(pos()).len() < 0.3){
+                //this is a location based behavior that has been completed. Move on if there are more behaviors
+                if (movementBehaviors.size() > 1) {
+                    movementBehaviors.addLast(movementBehaviors.pop());
+                    timer = 0.0f;
+                }
+            }
+            else if ( movementBehaviors.peek().getDuration() > 0)
+            {
+                if (timer >= movementBehaviors.peek().getDuration() + delta)
+                {
+                    //this is a timed behavior that has been completed. Move to the next behavior and restart the timer
+                    movementBehaviors.addLast(movementBehaviors.pop());
+                    timer = 0.0f;
+                }
+                else{
+                    timer += delta;//this is a timed behavior that has not been completed, continue this behavior
+                }
+            }
+            if (movementBehaviors.peek().pos().len() > 0.3)
+                target = new Vector2(movementBehaviors.peek().pos()).sub(pos());
+            else target = Vector2.Zero;
+        }
+        else target = Vector2.Zero;
+        return target;
+    }
+    public void updatePositon()
+    {
+        _previousPosition6.set(_previousPosition5);
+        _previousPosition5.set(_previousPosition4);
+        _previousPosition4.set(_previousPosition3);
+        _previousPosition3.set(_previousPosition2);
+        _previousPosition2.set(_previousPosition);
+        _previousPosition.set(pos());
+    }
+
 
     public EnemyData getData() {
         return data;
@@ -105,14 +229,16 @@ public class EnemySprite extends CharacterSprite {
                 Deck enemyDeck = Current.latestDeck();
                 /*// By popular demand, remove basic lands from the reward pool.
                 CardPool deckNoBasicLands = enemyDeck.getMain().getFilteredPool(Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND), PaperCard.FN_GET_RULES));*/
+
                 for (RewardData rdata : data.rewards) {
-                    ret.addAll(rdata.generate(false,  enemyDeck == null ? null : enemyDeck.getMain().toFlatList() ));
+                    ret.addAll(rdata.generate(false,  enemyDeck == null ? null : enemyDeck.getMain().toFlatList(),true ));
                 }
             }
             if(rewards != null) { //Collect additional rewards.
                 for(RewardData rdata:rewards) {
                     //Do not filter in case we want to FORCE basic lands. If it ever becomes a problem just repeat the same as above.
-                    ret.addAll(rdata.generate(false,(Current.latestDeck() != null ? Current.latestDeck().getMain().toFlatList() : null)));
+
+                    ret.addAll(rdata.generate(false,(Current.latestDeck() != null ? Current.latestDeck().getMain().toFlatList() : null), true));
                 }
             }
         }
@@ -183,6 +309,52 @@ public class EnemySprite extends CharacterSprite {
 
     public float speed() {
         return data.speed;
+    }
+
+    public float getLifetime() {
+        //default and minimum value for time to remain on overworld map
+        Float lifetime = 20f;
+        return Math.max(data.lifetime, lifetime);
+    }
+
+
+    public class MovementBehavior {
+
+        //temporary placeholders for overworld behavior integration
+        public boolean wander = false;
+        public boolean flee = false;
+        public boolean stop = false;
+        //end temporary
+
+        float duration = 0.0f;
+        float x = 0.0f;
+        float y = 0.0f;
+
+        int destination = 0;
+
+        public float getX(){
+            return x;
+        }
+        public float getY(){
+            return y;
+        }
+        public float getDuration(){
+            return duration;
+        }
+        public int getDestination(){
+            return destination;
+        }
+
+        public void setX(float newVal){
+            x = newVal;
+        }
+        public void setY(float newVal){
+            y = newVal;
+        }
+
+        public Vector2 pos() {
+            return new Vector2(getX(), getY());
+        }
     }
 }
 

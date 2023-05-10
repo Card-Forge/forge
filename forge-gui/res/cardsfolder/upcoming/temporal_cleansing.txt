@@ -1,0 +1,6 @@
+Name:Temporal Cleansing
+ManaCost:3 U
+Types:Sorcery
+K:Convoke
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand |  TgtPrompt$ Select target nonland permanent | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 1 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | AlternativeDestinationMessage$ Would you like to put the card second from the top of your library (and not on the bottom)? | SpellDescription$ The owner of target nonland permanent puts it into their library second from the top or on the bottom.
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nThe owner of target nonland permanent puts it into their library second from the top or on the bottom.

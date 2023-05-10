@@ -14,15 +14,21 @@ public class PointOfInterestMapSprite extends MapSprite {
     PointOfInterest pointOfInterest;
     Texture debugTexture;
     Rectangle boundingRect;
+    MapSprite mapSprite;
 
     public PointOfInterestMapSprite(PointOfInterest point) {
-        super(point.getPosition(), point.getSprite());
+        super(point.getPosition(), point.getSprite(), point);
         pointOfInterest = point;
+        mapSprite = this;
         boundingRect = new Rectangle(getX(), getY(), texture.getRegionWidth(), texture.getRegionHeight());
     }
 
     public PointOfInterest getPointOfInterest() {
         return pointOfInterest;
+    }
+
+    public MapSprite getMapSprite() {
+        return mapSprite;
     }
 
     private Texture getDebugTexture() {
@@ -42,7 +48,8 @@ public class PointOfInterestMapSprite extends MapSprite {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
+        if (pointOfInterest.getActive())
+            super.draw(batch, parentAlpha);
         //batch.draw(getDebugTexture(),getX(),getY());
     }
 }

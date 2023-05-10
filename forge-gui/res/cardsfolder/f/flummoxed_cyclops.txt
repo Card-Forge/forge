@@ -3,7 +3,6 @@ ManaCost:3 R
 Types:Creature Cyclops
 PT:4/4
 K:Reach
-T:Mode$ AttackersDeclared | AttackingPlayer$ Player.Opponent | CheckSVar$ CheckAttackers | SVarCompare$ GE2 | NoResolvingCheck$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever two or more creatures your opponents control attack, CARDNAME can't block this combat.
+T:Mode$ AttackersDeclared | AttackingPlayer$ Player.Opponent | IsPresent$ Creature.OppCtrl+attacking | PresentCompare$ GE2 | NoResolvingCheck$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever two or more creatures your opponents control attack, CARDNAME can't block this combat.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME can't block. | Duration$ UntilEndOfCombat
-SVar:CheckAttackers:Count$Valid Creature.OppCtrl+attacking
 Oracle:Reach\nWhenever two or more creatures your opponents control attack, Flummoxed Cyclops can't block this combat.

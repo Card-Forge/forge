@@ -1,0 +1,15 @@
+Name:Djeru and Hazoret
+ManaCost:2 R R W
+Types:Legendary Creature Human God
+PT:5/4
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance & Haste | CheckSVar$ X | SVarCompare$ LE1 | Description$ As long as you have one or fewer cards in hand, CARDNAME has vigilance and haste.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME attacks, look at the top six cards of your library. You may exile a legendary creature card from among them. Put the rest on the bottom of your library in a random order. Until end of turn, you may cast the exiled card without paying its mana cost.
+SVar:TrigDig:DB$ Dig | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature.Legendary | DestinationZone$ Exile | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:MayPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ Until end of turn, you may cast this card without paying its mana cost.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$InYourHand
+SVar:PlayMain1:TRUE
+SVar:HasAttackEffect:TRUE
+DeckNeeds:Type$Legendary
+Oracle:As long as you have one or fewer cards in hand, Dieru and Hazoret has vigilance and haste.\nWhenever Djeru and Hazoret attacks, look at the top six cards of your library. You may exile a legendary creature card from among them. Put the rest on the bottom of your library in a random order. Until end of turn, you may cast the exiled card without paying its mana cost.

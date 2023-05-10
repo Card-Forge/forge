@@ -88,6 +88,14 @@ public class AudioClip implements IAudioClip {
     }
 
     @Override
+    public void dispose() {
+        for (byte[] b : audioClips.values()) {
+            b = null;
+        }
+        audioClips.clear();
+    }
+
+    @Override
     public final void stop() {
         for (ClipWrapper clip: clips) {
             clip.stop();

@@ -1,0 +1,28 @@
+Name:Invasion of Fiora
+ManaCost:4 B B
+Types:Battle Siege
+Defense:4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DestroyLegend,DestroyNonLegend
+SVar:DestroyLegend:DB$ DestroyAll | ValidCards$ Creature.Legendary | SpellDescription$ Destroy all legendary creatures.
+SVar:DestroyNonLegend:DB$ DestroyAll | ValidCards$ Creature.nonLegendary | SpellDescription$ Destroy all nonlegendary creatures.
+AlternateMode:DoubleFaced
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Fiora enters the battlefield, choose one or both —\n• Destroy all legendary creatures.\n• Destroy all nonlegendary creatures.
+
+ALTERNATE
+
+Name:Marchesa, Resolute Monarch
+ManaCost:no cost
+Colors:black
+Types:Legendary Creature Human Noble
+PT:3/6
+K:Menace
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever CARDNAME attacks, remove all counters from up to one target permanent.
+SVar:TrigRemoveCounter:DB$ RemoveCounter | ValidTgts$ Permanent | CounterType$ All | CounterNum$ All
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ0 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, if you haven't been dealt combat damage since your last turn, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+SVar:HasAttackEffect:TRUE
+SVar:X:PlayerCountPropertyYou$BeenDealtCombatDamageSinceLastTurn
+Oracle:Menace, deathtouch\nWhenever Marchesa, Resolute Monarch attacks, remove all counters from up to one target permanent.\nAt the beginning of your upkeep, if you haven't been dealt combat damage since your last turn, you draw a card and you lose 1 life.

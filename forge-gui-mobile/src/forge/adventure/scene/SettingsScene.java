@@ -1,20 +1,21 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
+import forge.Graphics;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
+import forge.assets.ImageCache;
 import forge.gui.GuiBase;
+import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.sound.SoundSystem;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -30,78 +31,88 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
  */
 public class SettingsScene extends UIScene {
     static public ForgePreferences Preference;
-    Texture Background;
     private final Table settingGroup;
     TextraButton backButton;
-    TextraButton newPlane;
+    //TextraButton newPlane;
     ScrollPane scrollPane;
 
-    SelectBox selectSourcePlane;
+    SelectBox<String> selectSourcePlane;
     TextField newPlaneName;
+    Dialog createNewPlane, copyPlane, errorDialog;
+
     private void copyNewPlane() {
-        String plane=(String) selectSourcePlane.getSelected();
-        Path source= Paths.get(Config.instance().getPlanePath(plane));
-        Path destination= Paths.get(Config.instance().getPlanePath("<user>"+newPlaneName.getText()));
-        AtomicBoolean somethingWentWrong= new AtomicBoolean(false);
-        try (Stream<Path> stream = Files.walk(source))
-        {
+        String plane = selectSourcePlane.getSelected();
+        Path source = Paths.get(Config.instance().getPlanePath(plane));
+        Path destination = Paths.get(Config.instance().getPlanePath("<user>" + newPlaneName.getText()));
+        AtomicBoolean somethingWentWrong = new AtomicBoolean(false);
+        try (Stream<Path> stream = Files.walk(source)) {
             Files.createDirectories(destination);
             stream.forEach(s -> {
-                try { Files.copy(s, destination.resolve(source.relativize(s)), REPLACE_EXISTING); }
-                catch (IOException e) {
+                try {
+                    Files.copy(s, destination.resolve(source.relativize(s)), REPLACE_EXISTING);
+                } catch (IOException e) {
                     somethingWentWrong.set(true);
                 }
             });
         } catch (IOException e) {
             somethingWentWrong.set(true);
         }
-        if(somethingWentWrong.get())
-        {
-            Dialog dialog=prepareDialog("Something went wrong", ButtonOk|ButtonAbort,null);
-            dialog.text("Copy was not successful check your access right\n and if the folder is in use");
-            showDialog(dialog);
-        }
-        else
-        {
-            Dialog dialog=prepareDialog("Copied plane", ButtonOk|ButtonAbort,null);
-            dialog.text("New plane "+newPlaneName.getText()+" was created\nYou can now start the editor to change the plane\n" +
-                    "or edit it manually from the folder\n" +
-                    Config.instance().getPlanePath("<user>"+newPlaneName.getText()));
-            Config.instance().getSettingData().plane = "<user>"+newPlaneName.getText();
+        if (somethingWentWrong.get()) {
+            if (errorDialog == null) {
+                errorDialog = createGenericDialog("Something went wrong", "Copy was not successful check your access right\n and if the folder is in use",
+                        Forge.getLocalizer().getMessage("lblOk"), Forge.getLocalizer().getMessage("lblAbort"), this::removeDialog, this::removeDialog);
+            }
+            showDialog(errorDialog);
+        } else {
+            if (copyPlane == null) {
+                copyPlane = createGenericDialog("Copied plane", "New plane " + newPlaneName.getText() +
+                                " was created\nYou can now start the editor to change the plane\n" +
+                                "or edit it manually from the folder\n" + Config.instance().getPlanePath("<user>" + newPlaneName.getText()),
+                        Forge.getLocalizer().getMessage("lblOk"), Forge.getLocalizer().getMessage("lblAbort"), this::removeDialog, this::removeDialog);
+            }
+            Config.instance().getSettingData().plane = "<user>" + newPlaneName.getText();
             Config.instance().saveSettings();
-            showDialog(dialog);
+            showDialog(copyPlane);
         }
-
     }
+
     private void createNewPlane() {
-        Dialog dialog=prepareDialog("Create your own Plane", ButtonOk|ButtonAbort,()->copyNewPlane());
-        dialog.text("Select a plane to copy");
-        dialog.getContentTable().row();
-        dialog.getContentTable().add(selectSourcePlane);
-        dialog.getContentTable().row();
-        dialog.text("Set new plane name");
-        dialog.getContentTable().row();
-        dialog.getContentTable().add(newPlaneName);
-        newPlaneName.setText(selectSourcePlane.getSelected().toString()+"_copy");
-        dialog.show(stage);
+        if (createNewPlane == null) {
+            createNewPlane = createGenericDialog("Create your own Plane", "Select a plane to copy",
+                    Forge.getLocalizer().getMessage("lblOk"),
+                    Forge.getLocalizer().getMessage("lblAbort"), () -> {
+                        this.copyNewPlane();
+                        removeDialog();
+                    }, this::removeDialog);
+            createNewPlane.getContentTable().row();
+            createNewPlane.getContentTable().add(selectSourcePlane);
+            createNewPlane.getContentTable().row();
+            createNewPlane.text("Set new plane name");
+            createNewPlane.getContentTable().row();
+            createNewPlane.getContentTable().add(newPlaneName);
+            newPlaneName.setText(selectSourcePlane.getSelected() + "_copy");
+        }
+        showDialog(createNewPlane);
     }
 
     private SettingsScene() {
         super(Forge.isLandscapeMode() ? "ui/settings.json" : "ui/settings_portrait.json");
 
-        selectSourcePlane = Controls.newComboBox();
-        newPlaneName = Controls.newTextField("");
         settingGroup = new Table();
         if (Preference == null) {
-            Preference = new ForgePreferences();
+            Preference = FModel.getPreferences();
         }
+        //temporary disable custom world until it works correctly on each update
+        /*selectSourcePlane = Controls.newComboBox();
+        newPlaneName = Controls.newTextField("");
+
         selectSourcePlane.setItems(Config.instance().getAllAdventures());
         SelectBox plane = Controls.newComboBox(Config.instance().getAllAdventures(), Config.instance().getSettingData().plane, o -> {
             Config.instance().getSettingData().plane = (String) o;
             Config.instance().saveSettings();
             return null;
         });
-        newPlane=Controls.newTextButton("Create own plane");
+        newPlane = Controls.newTextButton("Create own plane");
         newPlane.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -110,33 +121,20 @@ public class SettingsScene extends UIScene {
         });
         addLabel(Forge.getLocalizer().getMessage("lblWorld"));
         settingGroup.add(plane).align(Align.right).pad(2);
-        addLabel(Forge.getLocalizer().getMessage("lblCreate")+Forge.getLocalizer().getMessage("lblWorld"));
-        settingGroup.add(newPlane).align(Align.right).pad(2);
+        addLabel(Forge.getLocalizer().getMessage("lblCreate") + Forge.getLocalizer().getMessage("lblWorld"));
+        settingGroup.add(newPlane).align(Align.right).pad(2);*/
 
         if (!GuiBase.isAndroid()) {
-            SelectBox videomode = Controls.newComboBox(new String[]{"720p", "768p", "900p", "1080p"}, Config.instance().getSettingData().videomode, o -> {
+            SelectBox<String> videomode = Controls.newComboBox(ForgeConstants.VIDEO_MODES, Config.instance().getSettingData().videomode, o -> {
                 String mode = (String) o;
                 if (mode == null)
                     mode = "720p";
-                Config.instance().getSettingData().videomode = mode;
-                if (mode.equalsIgnoreCase("768p")) {
-                    Config.instance().getSettingData().width = 1366;
-                    Config.instance().getSettingData().height = 768;
-                } else if (mode.equalsIgnoreCase("900p")) {
-                    Config.instance().getSettingData().width = 1600;
-                    Config.instance().getSettingData().height = 900;
-                } else if (mode.equalsIgnoreCase("1080p")) {
-                    Config.instance().getSettingData().width = 1920;
-                    Config.instance().getSettingData().height = 1080;
-                } else {
-                    Config.instance().getSettingData().width = 1280;
-                    Config.instance().getSettingData().height = 720;
-                }
-                Config.instance().saveSettings();
+                Graphics.setVideoMode(mode);
+
                 //update preference for classic mode if needed
-                if (FModel.getPreferences().getPref(ForgePreferences.FPref.UI_VIDEO_MODE) != mode) {
-                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_VIDEO_MODE, mode);
-                    FModel.getPreferences().save();
+                if (Preference.getPref(ForgePreferences.FPref.UI_VIDEO_MODE).equals(mode)) {
+                    Preference.setPref(ForgePreferences.FPref.UI_VIDEO_MODE, mode);
+                    Preference.save();
                 }
                 return null;
             });
@@ -145,7 +143,7 @@ public class SettingsScene extends UIScene {
         }
         if (Forge.isLandscapeMode()) {
             //different adjustment to landscape
-            SelectBox rewardCardAdjLandscape = Controls.newComboBox(new Float[]{0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f, 1f, 1.05f, 1.1f, 1.15f, 1.2f, 1.25f, 1.3f, 1.35f, 1.4f, 1.45f, 1.5f, 1.55f, 1.6f}, Config.instance().getSettingData().rewardCardAdjLandscape, o -> {
+            SelectBox<Float> rewardCardAdjLandscape = Controls.newComboBox(new Float[]{0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f, 0.95f, 1f, 1.05f, 1.1f, 1.15f, 1.2f, 1.25f, 1.3f, 1.35f, 1.4f, 1.45f, 1.5f, 1.55f, 1.6f}, Config.instance().getSettingData().rewardCardAdjLandscape, o -> {
                 Float val = (Float) o;
                 if (val == null || val == 0f)
                     val = 1f;
@@ -155,7 +153,7 @@ public class SettingsScene extends UIScene {
             });
             addLabel("Reward/Shop Card Display Ratio");
             settingGroup.add(rewardCardAdjLandscape).align(Align.right).pad(2);
-            SelectBox tooltipAdjLandscape = Controls.newComboBox(new Float[]{0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f, 1f, 1.05f, 1.1f, 1.15f, 1.2f, 1.25f, 1.3f, 1.35f, 1.4f, 1.45f, 1.5f, 1.55f, 1.6f}, Config.instance().getSettingData().cardTooltipAdjLandscape, o -> {
+            SelectBox<Float> tooltipAdjLandscape = Controls.newComboBox(new Float[]{0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f, 0.95f, 1f, 1.05f, 1.1f, 1.15f, 1.2f, 1.25f, 1.3f, 1.35f, 1.4f, 1.45f, 1.5f, 1.55f, 1.6f}, Config.instance().getSettingData().cardTooltipAdjLandscape, o -> {
                 Float val = (Float) o;
                 if (val == null || val == 0f)
                     val = 1f;
@@ -167,7 +165,7 @@ public class SettingsScene extends UIScene {
             settingGroup.add(tooltipAdjLandscape).align(Align.right).pad(2);
         } else {
             //portrait adjustment
-            SelectBox rewardCardAdj = Controls.newComboBox(new Float[]{0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.8f, 1.9f, 2f}, Config.instance().getSettingData().rewardCardAdj, o -> {
+            SelectBox<Float> rewardCardAdj = Controls.newComboBox(new Float[]{0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.8f, 1.9f, 2f}, Config.instance().getSettingData().rewardCardAdj, o -> {
                 Float val = (Float) o;
                 if (val == null || val == 0f)
                     val = 1f;
@@ -177,7 +175,7 @@ public class SettingsScene extends UIScene {
             });
             addLabel("Reward/Shop Card Display Ratio");
             settingGroup.add(rewardCardAdj).align(Align.right).pad(2);
-            SelectBox tooltipAdj = Controls.newComboBox(new Float[]{0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.8f, 1.9f, 2f}, Config.instance().getSettingData().cardTooltipAdj, o -> {
+            SelectBox<Float> tooltipAdj = Controls.newComboBox(new Float[]{0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.8f, 1.9f, 2f}, Config.instance().getSettingData().cardTooltipAdj, o -> {
                 Float val = (Float) o;
                 if (val == null || val == 0f)
                     val = 1f;
@@ -196,13 +194,31 @@ public class SettingsScene extends UIScene {
                     Config.instance().getSettingData().fullScreen = value;
                     Config.instance().saveSettings();
                     //update
-                    if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_FULLSCREEN_MODE) != value) {
-                        FModel.getPreferences().setPref(ForgePreferences.FPref.UI_LANDSCAPE_MODE, value);
-                        FModel.getPreferences().save();
+                    if (Preference.getPrefBoolean(ForgePreferences.FPref.UI_FULLSCREEN_MODE) != value) {
+                        Preference.setPref(ForgePreferences.FPref.UI_LANDSCAPE_MODE, value);
+                        Preference.save();
                     }
                 }
             });
         }
+        addSettingField(Forge.getLocalizer().getMessage("lblDay") + " | " + Forge.getLocalizer().getMessage("lblNight") + " " + Forge.getLocalizer().getMessage("lblBackgroundImage"), Config.instance().getSettingData().dayNightBG, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                boolean value = ((CheckBox) actor).isChecked();
+                Config.instance().getSettingData().dayNightBG = value;
+                Config.instance().saveSettings();
+                if (value) {
+                    updateBG(true);
+                }
+            }
+        });
+        addSettingField(Forge.getLocalizer().getMessage("lblDisableWinLose"), Config.instance().getSettingData().disableWinLose, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Config.instance().getSettingData().disableWinLose = ((CheckBox) actor).isChecked();
+                Config.instance().saveSettings();
+            }
+        });
         addCheckBox(Forge.getLocalizer().getMessage("lblCardName"), ForgePreferences.FPref.UI_OVERLAY_CARD_NAME);
         addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustMusicVolume"), ForgePreferences.FPref.UI_VOL_MUSIC, 0, 100);
         addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustSoundsVolume"), ForgePreferences.FPref.UI_VOL_SOUNDS, 0, 100);
@@ -221,11 +237,28 @@ public class SettingsScene extends UIScene {
         addCheckBox(Forge.getLocalizer().getMessage("lblLandscapeMode"), ForgePreferences.FPref.UI_LANDSCAPE_MODE);
         addCheckBox(Forge.getLocalizer().getMessage("lblAnimatedCardTapUntap"), ForgePreferences.FPref.UI_ANIMATED_CARD_TAPUNTAP);
         if (!GuiBase.isAndroid()) {
-            addCheckBox(Forge.getLocalizer().getMessage("lblBorderMaskOption"), ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
+            final String[] item = {Preference.getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING)};
+            SelectBox<String> borderMask = Controls.newComboBox(new String[]{"Off", "Crop", "Full", "Art"}, item[0], o -> {
+                String mode = (String) o;
+                if (mode == null)
+                    mode = "Crop";
+                item[0] = mode;
+                //update preference for classic mode if needed
+                if (Preference.getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING).equals(mode)) {
+                    Preference.setPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING, mode);
+                    Preference.save();
+                    Forge.enableUIMask = Preference.getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
+                    ImageCache.clearGeneratedCards();
+                    ImageCache.disposeTextures();
+                }
+                return null;
+            });
+            addLabel(Forge.getLocalizer().getMessage("lblBorderMaskOption"));
+            settingGroup.add(borderMask).align(Align.right).pad(2);
+
             addCheckBox(Forge.getLocalizer().getMessage("lblPreloadExtendedArtCards"), ForgePreferences.FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
             addCheckBox(Forge.getLocalizer().getMessage("lblAutoCacheSize"), ForgePreferences.FPref.UI_AUTO_CACHE_SIZE);
             addCheckBox(Forge.getLocalizer().getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_ENABLE_DISPOSE_TEXTURES);
-            //addInputField(Forge.getLocalizer().getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_LANGUAGE);
         }
 
 
@@ -233,12 +266,10 @@ public class SettingsScene extends UIScene {
         backButton = ui.findActor("return");
         ui.onButtonPress("return", SettingsScene.this::back);
 
-        ScrollPane scrollPane = ui.findActor("settings");
+        scrollPane = ui.findActor("settings");
         scrollPane.setActor(settingGroup);
         addToSelectable(settingGroup);
     }
-
-
 
 
     public boolean back() {
@@ -284,6 +315,8 @@ public class SettingsScene extends UIScene {
             public void changed(ChangeEvent event, Actor actor) {
                 Preference.setPref(pref, String.valueOf((int) ((Slider) actor).getValue()));
                 Preference.save();
+                if (ForgePreferences.FPref.UI_VOL_MUSIC.equals(pref))
+                    SoundSystem.instance.refreshVolume();
             }
         });
         addLabel(name);
@@ -318,11 +351,10 @@ public class SettingsScene extends UIScene {
     private static SettingsScene object;
 
     public static SettingsScene instance() {
-        if(object==null)
-            object=new SettingsScene();
+        if (object == null)
+            object = new SettingsScene();
         return object;
     }
-
 
 
     @Override

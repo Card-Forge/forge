@@ -33,7 +33,6 @@ import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
-import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -1091,7 +1090,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // Exile and bounce opponents stuff
         if (destination.equals(ZoneType.Exile) || origin.contains(ZoneType.Battlefield)) {
-
             // don't rush bouncing stuff when not going to attack
             if (!immediately && game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                     && game.getPhaseHandler().isPlayerTurn(ai)
@@ -1218,7 +1216,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             if (choice == null) { // can't find anything left
-                if (sa.getTargets().size() == 0 || !sa.isTargetNumberValid()) {
+                if (sa.getTargets().isEmpty() || !sa.isTargetNumberValid()) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -1359,12 +1357,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 chance = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_CHANCE);
             }
             if (MyRandom.percentTrue(chance)) {
-                Collections.sort(aiPlaneswalkers, new Comparator<Card>() {
-                    @Override
-                    public int compare(final Card a, final Card b) {
-                        return a.getCounters(CounterEnumType.LOYALTY) - b.getCounters(CounterEnumType.LOYALTY);
-                    }
-                });
+                Collections.sort(aiPlaneswalkers, CardPredicates.compareByCounterType(CounterEnumType.LOYALTY));
                 for (Card pw : aiPlaneswalkers) {
                     int curLoyalty = pw.getCounters(CounterEnumType.LOYALTY);
                     int freshLoyalty = Integer.valueOf(pw.getCurrentState().getBaseLoyalty());
@@ -1439,17 +1432,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), ai, source, sa);
-        list = CardLists.getTargetableCards(list, sa);
-
-        list.removeAll(sa.getTargets().getTargetCards());
+        List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
 
         if (list.isEmpty()) {
             return false;
         }
 
         // target loop
-        while (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+        while (!sa.isMinTargetChosen()) {
             // AI Targeting
             Card choice = null;
 
@@ -1764,18 +1754,18 @@ public class ChangeZoneAi extends SpellAbilityAi {
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         // Called when attaching Aura to player or adding creature to combat
         if (params != null && params.containsKey("Attacker")) {
-            return (Player) ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
+            return (Player) ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), options);
         }
         return AttachAi.attachToPlayerAIPreferences(ai, sa, true, (List<Player>)options);
     }
 
     @Override
-    protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
+    protected GameEntity chooseSingleAttackableEntity(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
         if (params != null && params.containsKey("Attacker")) {
-            return ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
+            return ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), options);
         }
         // should not be reached
-        return super.chooseSinglePlayerOrPlaneswalker(ai, sa, options, params);
+        return super.chooseSingleAttackableEntity(ai, sa, options, params);
     }
 
     private boolean doSacAndReturnFromGraveLogic(final Player ai, final SpellAbility sa) {

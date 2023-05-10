@@ -29,6 +29,7 @@ public class RegisteredPlayer {
     private int manaShards = 0;
     private Iterable<IPaperCard> cardsOnBattlefield = null;
     private Iterable<IPaperCard> extraCardsOnBattlefield = null;
+    private Iterable<IPaperCard> extraCardsInCommandZone = null;
     private Iterable<? extends IPaperCard> schemes = null;
     private Iterable<PaperCard> planes = null;
     private Iterable<PaperCard> conspiracies = null;
@@ -37,6 +38,7 @@ public class RegisteredPlayer {
     private PaperCard planeswalker = null;
     private int teamNumber = -1; // members of teams with negative id will play FFA.
     private boolean randomFoil = false;
+    private boolean enableETBCountersEffect = false;
     
     public RegisteredPlayer(Deck deck0) {
         originalDeck = deck0;
@@ -55,6 +57,10 @@ public class RegisteredPlayer {
                 extraCardsOnBattlefield == null ? EmptyList : extraCardsOnBattlefield);
     }
 
+    public final Iterable<? extends IPaperCard> getExtraCardsInCommandZone() {
+        return extraCardsInCommandZone == null ? EmptyList : extraCardsInCommandZone;
+    }
+
     public final void setStartingLife(int startingLife) {
         this.startingLife = startingLife;
     }
@@ -67,6 +73,13 @@ public class RegisteredPlayer {
         this.manaShards = manaShards;
     }
 
+    public boolean hasEnableETBCountersEffect() {
+        return enableETBCountersEffect;
+    }
+    public void setEnableETBCountersEffect(boolean value) {
+        enableETBCountersEffect = value;
+    }
+
     public final void setCardsOnBattlefield(Iterable<IPaperCard> cardsOnTable) {
         this.cardsOnBattlefield = cardsOnTable;
     }
@@ -76,6 +89,13 @@ public class RegisteredPlayer {
             this.extraCardsOnBattlefield = extraCardsonTable;
         else
             this.extraCardsOnBattlefield = Iterables.concat(this.extraCardsOnBattlefield, extraCardsonTable);
+    }
+
+    public final void addExtraCardsInCommandZone(Iterable<IPaperCard> extraCardsInCommandZone) {
+        if (this.extraCardsInCommandZone == null)
+            this.extraCardsInCommandZone = extraCardsInCommandZone;
+        else
+            this.extraCardsInCommandZone = Iterables.concat(this.extraCardsInCommandZone, extraCardsInCommandZone);
     }
 
     public int getStartingHand() {

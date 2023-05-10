@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.IntMap;
@@ -25,25 +26,30 @@ public class DeckSelectScene extends UIScene {
     TextraButton back, edit, rename;
     int currentSlot = 0;
     ScrollPane scrollPane;
+    Dialog renameDialog;
 
     private static DeckSelectScene object;
 
     public static DeckSelectScene instance() {
-        if(object==null)
-            object=new DeckSelectScene();
+        if (object == null)
+            object = new DeckSelectScene();
         return object;
     }
+
     public DeckSelectScene() {
         super(Forge.isLandscapeMode() ? "ui/deck_selector.json" : "ui/deck_selector_portrait.json");
 
+        Window window = ui.findActor("deckSlots");
+        Table root = new Table();
         layout = new Table();
-        stage.addActor(layout);
-
+        scrollPane = new ScrollPane(layout);
         header = Controls.newTextraLabel(Forge.getLocalizer().getMessage("lblSelectYourDeck"));
-        layout.add(header).colspan(2).align(Align.center).pad(2, 5, 2, 5);
-        layout.row();
+        root.row();
+        root.add(header).colspan(2);
+        root.row();
+        root.add(scrollPane).expand().width(window.getWidth() - 20);
         for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++)
-            addDeckSlot(Forge.getLocalizer().getMessage("lblDeck")+": " + (i + 1), i);
+            addDeckSlot(Forge.getLocalizer().getMessage("lblDeck") + ": " + (i + 1), i);
 
         textInput = Controls.newTextField("");
         back = ui.findActor("return");
@@ -55,21 +61,63 @@ public class DeckSelectScene extends UIScene {
             textInput.setText(Current.player().getSelectedDeck().getName());
             showRenameDialog();
         });
+        ui.onButtonPress("copy", DeckSelectScene.this::copy);
+        ui.onButtonPress("delete", DeckSelectScene.this::maybeDelete);
         defColor = ui.findActor("return").getColor();
+        window.add(root);
+    }
 
-        scrollPane = ui.findActor("deckSlots");
-        scrollPane.setActor(layout);
+    private void copy() {
+        if (Current.player().isEmptyDeck(currentSlot)) return;
+        int index = Current.player().copyDeck();
+        if (index == -1) {
+            showDialog(createGenericDialog(Forge.getLocalizer().getMessage("lblCopy"), Forge.getLocalizer().getMessage("lblNoAvailableSlots"),
+                Forge.getLocalizer().getMessage("lblOk"),
+                null, this::removeDialog, null));
+        }
+        else {
+            updateDeckButton(index);
+            select(index);
+            scrollPane.scrollTo(buttons.get(index).getX(), buttons.get(index).getY(), 0, 0);
+        }
+    }
+
+    private void maybeDelete() {
+        if (Current.player().isEmptyDeck(currentSlot)) return;
+        Dialog deleteDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblAreYouSureProceedDelete"),
+            Forge.getLocalizer().getMessage("lblOk"),
+            Forge.getLocalizer().getMessage("lblAbort"), this::delete, this::removeDialog);
+
+        showDialog(deleteDialog);
+    }
+
+    private void delete() {
+        Current.player().deleteDeck();
+        updateDeckButton(currentSlot);
+        removeDialog();
+    }
+
+    private void updateDeckButton(int index) {
+        buttons.get(index).setText(Current.player().getDeck(index).getName());
+        buttons.get(index).getTextraLabel().layout();
+        buttons.get(index).layout();
     }
 
     private void showRenameDialog() {
-
-        Dialog dialog = prepareDialog(Forge.getLocalizer().getMessage("lblRenameDeck"),ButtonOk|ButtonAbort,()->DeckSelectScene.this.rename());
-        dialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2);
-        dialog.getContentTable().row();
-        dialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left);
-        dialog.getContentTable().add(textInput).fillX().expandX();
-        dialog.getContentTable().row();
-        showDialog(dialog);
+        if (renameDialog == null) {
+            renameDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblRenameDeck"), null,
+                    Forge.getLocalizer().getMessage("lblOk"),
+                    Forge.getLocalizer().getMessage("lblAbort"), () -> {
+                        this.rename();
+                        removeDialog();
+                    }, this::removeDialog);
+            renameDialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNewNameDeck"))).colspan(2);
+            renameDialog.getContentTable().row();
+            renameDialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName") + ": ")).align(Align.left);
+            renameDialog.getContentTable().add(textInput).fillX().expandX();
+            renameDialog.getContentTable().row();
+        }
+        showDialog(renameDialog);
     }
 
     private TextraButton addDeckSlot(String name, int i) {
@@ -86,8 +134,8 @@ public class DeckSelectScene extends UIScene {
             }
         });
 
-        layout.add(Controls.newLabel(name)).expandX().pad(2);
-        layout.add(button).expandX().pad(2);
+        layout.add(Controls.newLabel(name)).pad(2);
+        layout.add(button).fill(true, false).expand(true, false).align(Align.left).expandX().pad(2);
         buttons.put(i, button);
         addToSelectable(new Selectable(button));
         layout.row();
@@ -111,7 +159,6 @@ public class DeckSelectScene extends UIScene {
     }
 
 
-
     @Override
     public void enter() {
         for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++) {
@@ -122,9 +169,9 @@ public class DeckSelectScene extends UIScene {
             }
         }
         select(Current.player().getSelectedDeckIndex());
+        performTouch(scrollPane); //can use mouse wheel if available to scroll after selection
         super.enter();
     }
-
 
 
     private void rename() {

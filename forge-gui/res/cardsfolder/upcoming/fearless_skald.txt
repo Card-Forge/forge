@@ -1,0 +1,9 @@
+Name:Fearless Skald
+ManaCost:4 R
+Types:Creature Dwarf Berserker
+PT:3/2
+K:Backup:1:BackupAbility
+SVar:BackupAbility:DB$ Pump | KW$ Double Strike
+K:Double Strike
+DeckHas:Ability$Counters
+Oracle:Backup 1 (When this creature enters the battlefield, put a + 1/+ 1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)\nDouble strike
