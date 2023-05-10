@@ -63,7 +63,6 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
-        List<Player> controllers = Lists.newArrayList(sa.getActivatingPlayer());
 
         int amount = 1;
         if (sa.hasParam("Amount")) {
@@ -78,6 +77,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             return;
         }
 
+        List<Player> controllers = Lists.newArrayList(sa.getActivatingPlayer());
         if (sa.hasParam("Controller")) {
             controllers = AbilityUtils.getDefinedPlayers(card, sa.getParam("Controller"), sa);
         }
