@@ -4658,7 +4658,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final KeywordInterface getKeywordForStaticAbility(String kw, final long staticId, final long idx) {
         KeywordInterface result;
-        if (staticId < 1 || !storedKeywords.contains(staticId, kw)) {
+        if (staticId < 1 || !storedKeywords.contains(kw, ImmutablePair.of(staticId, idx))) {
             result = Keyword.getInstance(kw);
             result.setStaticId(staticId);
             result.createTraits(this, false);
