@@ -178,7 +178,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking street as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -203,9 +204,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="enemy" value="Necromancer"/>
@@ -222,7 +221,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;alley&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking alley as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -247,12 +247,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
-    <property name="enemy" value="Scarecrow Captain"/>
+    <property name="enemy" value="Scarecrow"/>
     <property name="reward">[
   {
     &quot;type&quot;: &quot;item&quot;,
@@ -284,7 +282,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;docks&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking docks as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -309,9 +308,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="effect">{
@@ -339,7 +336,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;warehouse&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking warehouse as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -364,9 +362,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="enemy" value="Demon"/>
@@ -391,7 +387,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;temple&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking temple as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -416,9 +413,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="enemy" value="Necromancer"/>
@@ -433,7 +428,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking street as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -458,9 +454,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="enemy" value="High Vampire"/>
@@ -610,7 +604,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;temple&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking temple as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -635,9 +630,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="enemy" value="Immersturm Demon"/>
@@ -661,7 +654,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;temple&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking temple as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -686,9 +680,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="enemy" value="Necromancer"/>
@@ -719,7 +711,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking street as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -744,9 +737,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="enemy" value="High Vampire"/>
@@ -787,7 +778,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;hut&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking hut as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -812,9 +804,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="enemy" value="Bog Witch"/>
@@ -838,7 +828,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;alley&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking alley as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -863,9 +854,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="enemy" value="Rogue"/>
@@ -889,7 +878,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking street as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -914,9 +904,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="enemy" value="Rakdos Wiz"/>
@@ -992,7 +980,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;alley&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking alley as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -1017,9 +1006,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="enemy" value="Rogue"/>
@@ -1044,7 +1031,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking street as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -1069,9 +1057,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="effect" value="{&quot;lifeModifier&quot;: 10, &quot;startBattleWithCard&quot;: [ &quot;Black Knight&quot; ]}"/>
@@ -1098,7 +1084,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;tavern&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking tavern as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -1123,11 +1110,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
+    <property name="enemy" value="Liliana's Alchemist"/>
     <property name="reward">[
   {
     &quot;type&quot;: &quot;item&quot;,
@@ -1148,7 +1134,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking street as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -1173,9 +1160,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="effect">{
@@ -1204,7 +1189,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;tavern&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking tavern as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -1229,9 +1215,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="enemy" value="Rakdos Wiz"/>
@@ -1256,7 +1240,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking street as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -1281,9 +1266,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="enemy" value="Skeleton Champion"/>
@@ -1409,7 +1392,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;archive&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking archive as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -1434,9 +1418,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="enemy" value="Lich"/>
@@ -1461,7 +1443,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking street as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -1486,9 +1469,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="effect" value="{&quot;lifeModifier&quot;: 10,&quot;startBattleWithCard&quot;: [ &quot;Captivating Vampire&quot; ]}"/>
@@ -1584,7 +1565,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;docks&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking docks as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -1609,9 +1591,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="enemy" value="Eye"/>
@@ -1663,7 +1643,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;graveyard&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking graveyard as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -1688,9 +1669,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
@@ -1719,7 +1698,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;graveyard&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking graveyard as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -1744,9 +1724,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Black Market&quot;]}"/>
@@ -1774,7 +1752,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;graveyard&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking graveyard as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -1799,9 +1778,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Death Pits of Rath&quot;]}"/>
@@ -1829,7 +1806,8 @@
       ],
    &quot;action&quot;: [
       {&quot;advanceMapFlag&quot;:&quot;graveyard&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;}
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
 ],
    &quot;text&quot;: &quot;Marking graveyard as checked&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
@@ -1854,9 +1832,7 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
-   },
-   {&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}
+   }
 ]
 </property>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
