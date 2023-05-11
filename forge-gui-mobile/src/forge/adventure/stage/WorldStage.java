@@ -201,6 +201,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                         continue;
                     }
                     try {
+                        WorldSave.getCurrentSave().autoSave();
                         TileMapScene.instance().load(point.getPointOfInterest());
                         stop();
                         Forge.switchScene(TileMapScene.instance());

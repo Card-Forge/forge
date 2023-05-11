@@ -37,6 +37,7 @@
 "enemies": [
 	"Beholder",
 	"Big Zombie",
+	"Black Sliver",
 	"Black Wiz1",
 	"Black Wiz2",
 	"Black Wiz3",
@@ -53,6 +54,7 @@
 	"Frog",
 	"Ghoul",
 	"Ghost",
+	"Golgari Fungus",
 	"Harpy",
 	"Harpy 2",
 	"High Vampire",
@@ -105,7 +107,8 @@
 	"CaveB6",
 	"CaveB8",
 	"CaveBA",
-	"Slimefoots Lair"
+	"Slimefoots Lair",
+	"Temple of Liliana"
 ],
 "structures": [
 	{

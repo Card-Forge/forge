@@ -721,10 +721,12 @@
 "unlimited":true,
   "rewards": [
     {
-      "count":1,
-      "superTypes": ["Basic"],
-      "cardTypes": ["Land"],
-      "subTypes": ["Swamp"]
+      "count":4,
+      "cardName":"Swamp"
+    },
+	{
+      "count":4,
+      "cardName":"Snow-Covered Swamp"
     }]
 
 },{                                      
@@ -735,10 +737,12 @@
 "unlimited":true,
   "rewards": [
     {
-      "count":1,
-      "superTypes": ["Basic"],
-      "cardTypes": ["Land"],
-      "subTypes": ["Forest"]
+      "count":4,
+      "cardName":"Forest"
+    },
+	{
+      "count":4,
+      "cardName":"Snow-Covered Forest"
     }]
 
 },{                                      
@@ -749,10 +753,12 @@
 "unlimited":true,
   "rewards": [
     {
-      "count":1,
-      "superTypes": ["Basic"],
-      "cardTypes": ["Land"],
-      "subTypes": ["Mountain"]
+      "count":4,
+      "cardName":"Mountain"
+    },
+	{
+      "count":4,
+      "cardName":"Snow-Covered Mountain"
     }]
 
 },{                                      
@@ -763,10 +769,12 @@
 "unlimited":true,
   "rewards": [
     {
-      "count":1,
-      "superTypes": ["Basic"],
-      "cardTypes": ["Land"],
-      "subTypes": ["Island"]
+      "count":4,
+      "cardName":"Island"
+    },
+	{
+      "count":4,
+      "cardName":"Snow-Covered Island"
     }]
 
 },{                                      
@@ -777,10 +785,12 @@
 "unlimited":true,
   "rewards": [
     {
-      "count":1,
-      "superTypes": ["Basic"],
-      "cardTypes": ["Land"],
-      "subTypes": ["Plains"]
+      "count":4,
+      "cardName":"Plains"
+    },
+	{
+      "count":4,
+      "cardName":"Snow-Covered Plains"
     }]
 
 },{                                      

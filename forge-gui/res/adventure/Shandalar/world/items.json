@@ -44,6 +44,22 @@
     }
   },
   {
+    "name": "Liliana's Stone",
+	"description": "A small black gemstone recovered after your battle with Liliana.",
+    "iconName": "b"
+  },
+  {
+    "name": "Demonic Contract",
+	"description": "Sign away your soul to know what the future holds",
+    "equipmentSlot": "Right",
+    "iconName": "DemonicContract",
+    "effect": {
+      "startBattleWithCardInCommandZone": [
+        "Demonic Contract"
+      ]
+    }
+  },
+  {
     "name": "Piper's Charm",
     "equipmentSlot": "Neck",
     "iconName": "PipersCharm",
@@ -430,13 +446,9 @@
     "equipmentSlot": "Right",
     "iconName": "DeathRing",
     "effect": {
-      "opponent": {
-        "startBattleWithCard": [
-          "c_0_1_a_goblin_construct_noblock_ping",
-          "c_0_1_a_goblin_construct_noblock_ping",
-          "c_0_1_a_goblin_construct_noblock_ping"
+        "startBattleWithCardInCommandZone": [
+          "Death Ring"
         ]
-      }
     }
   },
   {

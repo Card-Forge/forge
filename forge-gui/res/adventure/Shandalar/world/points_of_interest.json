@@ -3072,6 +3072,23 @@
 	]
 },
 {
+	"name": "Temple of Liliana",
+	"type": "dungeon",
+	"count": 1,
+	"radiusFactor": 0.8,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "hall_of_fear",
+	"map": "maps/map/main_story/temple_of_liliana/keep.tmx",
+	"questTags": [
+		"Story",
+		"BiomeBlack",
+		"Temple",
+		"DungeonEffect",
+		"Hostile",
+		"Boss"
+	]
+},
+{
 	"name": "Test",
 	"count": 100,
 	"spriteAtlas": "maps/tileset/buildings.atlas",

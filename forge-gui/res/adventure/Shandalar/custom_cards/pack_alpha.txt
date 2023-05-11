@@ -8,3 +8,4 @@ SVar:SelectAlpha:DB$ PutCounter | ValidTgts$ Creature.YouCtrl$GreatestPower | Ta
 
 SVar:BoostAlpha:DB$ Pump | Defined$ ParentTarget | KW$ Mentor & First Strike & Lifelink & Provoke  | ActivationZone$ Command
 #| SpellDescription$ Your Alpha gains First Strike, Lifelink, and Provoke until end of turn.
+Oracle:During your upkeep, randomly select a creature with the greatest power among creatures you control. Place a +1/+1 counter on that creature. That creature gains mentor, provoke, first strike, and lifelink until end of turn.

@@ -275,12 +275,15 @@ public class MapDialog {
         GameHUD.getInstance().fadeOut();
     }
 
-    public void activate() { //Method for actors to show their dialogues.
+    public boolean activate() { //Method for actors to show their dialogues.
+        boolean dialogShown = false;
         for (DialogData dialog : data) {
             if (isConditionOk(dialog.condition)) {
                 loadDialog(dialog);
+                dialogShown = true;
             }
         }
+        return dialogShown;
     }
 
     void setEffects(DialogData.ActionData[] data) {
@@ -314,6 +317,9 @@ public class MapDialog {
             if (E.deleteMapObject != 0) { //Removes a dummy object from the map.
                 if (E.deleteMapObject < 0) stage.deleteObject(parentID);
                 else stage.deleteObject(E.deleteMapObject);
+            }
+            if (E.activateMapObject != 0){
+                stage.activateMapObject(E.activateMapObject);
             }
             if (E.battleWithActorID != 0) { //Starts a battle with the given enemy ID.
                 if (E.battleWithActorID < 0) stage.beginDuel(stage.getEnemyByID(parentID));

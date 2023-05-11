@@ -1237,6 +1237,56 @@
 	]
 },
 {
+	"name": "Black Sliver",
+	"sprite": "sprites/sliver_black.atlas",
+	"deck": [
+		"decks/sliver_black.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.2,
+	"speed": 24,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"count": 2,
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1
+		},
+		{
+			"type": "randomCard",
+			"count": 2
+		},
+		{
+			"type": "gold",
+			"count": 150
+		}
+	],
+	"colors": "BUR",
+	"questTags": [
+		"Tribal",
+		"Inhuman",
+		"Territorial",
+		"Subterranean",
+		"Nesting",
+		"Swarm",
+		"IdentityBlack",
+		"IdentityRed",
+		"IdentityBlue",
+		"IdentityGrixis"
+	]
+},
+{
 	"name": "Black Wiz1",
 	"sprite": "sprites/black_wizard.atlas",
 	"deck": [
@@ -1711,6 +1761,80 @@
 		"Domesticated",
 		"IdentityGreen",
 		"BiomeRed"
+	]
+},
+{
+	"name": "Bog Witch",
+	"sprite": "sprites/black_wiz3.atlas",
+	"deck": [
+		"decks/witch.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 16,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+			    "common",
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.5,
+			"count": 2,
+			"rarity": [
+				"uncommon",
+				"rare",
+				"mythicrare"
+			],
+			"colors": [
+				"Black"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Mystic",
+		"Unholy",
+		"Wizard",
+		"Human",
+		"IdentityBlack"
 	]
 },
 {
@@ -3840,6 +3964,87 @@
 	]
 },
 {
+	"name": "Dark Spirit",
+	"sprite": "sprites/ghost.atlas",
+	"deck": [
+		"decks/dark_spirit.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"life": 15,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Undead",
+		"Spirit",
+		"Flying",
+		"Ghost",
+		"IdentityBlack"
+	]
+},
+{
 	"name": "Dawnhart Witch",
 	"sprite": "sprites/dawnhart_witch.atlas",
 	"deck": [
@@ -4138,6 +4343,83 @@
 		"Thief",
 		"IdentityRed",
 		"BiomeRed"
+	]
+},
+{
+	"name": "Dimir Faerie",
+	"sprite": "sprites/pixie_dimir.atlas",
+	"deck": [
+		"decks/dimir_faerie.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 20,
+	"life": 17,
+	"flying": true,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+			    "common",
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.5,
+			"count": 2,
+			"rarity": [
+				"uncommon",
+				"rare",
+				"mythicrare"
+			],
+			"colors": [
+				"Black",
+				"Blue"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "BU",
+	"questTags": [
+		"Mythical",
+		"Flying",
+		"Faerie",
+		"IdentityBlack",
+		"IdentityBlue",
+		"IdentityDimir"
 	]
 },
 {
@@ -4714,7 +4996,7 @@
 		},
 		{
 			"type": "deckCard",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"addMaxCount": 2,
 			"rarity": [
@@ -6972,6 +7254,49 @@
 	]
 },
 {
+	"name": "Greater Zombie",
+	"sprite": "sprites/zombie.atlas",
+	"deck": [
+		"decks/zombie_greater.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.2,
+	"speed": 15,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Undead",
+		"Zombie",
+		"Humanoid",
+		"IdentityBlack"
+	]
+},
+{
 	"name": "Griselbrand",
 	"sprite": "sprites/boss/griselbrand.atlas",
 	"deck": [
@@ -7612,6 +7937,217 @@
 	]
 },
 {
+	"name": "Golgari Elf",
+	"sprite": "sprites/elf_golgari.atlas",
+	"deck": [
+		"decks/elf_golgari.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.2,
+	"speed": 24,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 75,
+			"addMaxCount": 225
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"Green","Black"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+		
+	],
+	"colors": "BG",
+	"questTags": [
+		"Elf",
+		"Humanoid",
+		"Tribal",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityGolgari"
+	]
+},
+{
+	"name": "Golgari Fungus",
+	"sprite": "sprites/fungus_golgari.atlas",
+	"deck": [
+		"decks/fungus_golgari.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.75,
+	"life": 16,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "BG",
+	"questTags": [
+		"Fungus",
+		"Inhuman",
+		"Nature",
+		"Wild",
+		"Subterranean",
+		"IdentityGreen",
+		"IdentityBlack",
+		"IdentityGolgari"
+	]
+},
+{
+	"name": "Golgari Treefolk",
+	"sprite": "sprites/treant_golgari.atlas",
+	"deck": [
+		"decks/treefolk_golgari.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.2,
+	"speed": 16,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.3,
+			"count": 1,
+			"rarity": [
+				"rare","mythicrare"
+			],
+			"colors": ["black", "green"]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 150,
+			"addMaxCount": 150
+		}
+	],
+	"colors": "BG",
+	"questTags": [
+		"Humanoid",
+		"Nature",
+		"Giant",
+		"Warrior",
+		"Territorial",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityGolgari"
+	]
+},
+{
 	"name": "Gorgon",
 	"sprite": "sprites/gorgone.atlas",
 	"deck": [
@@ -8187,6 +8723,36 @@
 		"IdentityWhite",
 		"BiomeWhite"
 	]
+},
+{
+	"name": "Guardian Angel",
+	"sprite": "sprites/boss/akroma.atlas",
+	"deck": [
+		"decks/miniboss/angel_rainbow_encounter.dck"
+	],
+	"spawnRate": 0,
+	"difficulty": 0.2,
+	"speed": 20,
+	"life": 50,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "randomCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 4,
+			"rarity": [
+				"rare","mythicrare"
+			]
+		}
+	],
+	"colors": "WUBRG",
+	"questTags": ["Special Encounter"]
 },
 {
 	"name": "Harpy",
@@ -9982,6 +10548,270 @@
 	]
 },
 {
+	"name": "Liliana",
+	"sprite": "sprites/black_wiz3.atlas",
+	"deck": [
+		"decks/miniboss/liliana_zombies.dck"
+	],
+	"ai": "",
+	"boss": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"life": 70,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Liliana of the Dark Realms"
+		},
+		{
+			"type": "Union",
+			"probability": 1,
+			"count": 4,
+			"cardUnion": [
+				{
+					"count": 1,
+					"subTypes": [
+						"Liliana"
+					]
+				},
+				{
+					"count": 1,
+					"colors": [
+						"black"
+					],
+					"superTypes": [
+						"Legend",
+						"Legendary"
+					],
+					"cardText": "Liliana"
+				},
+				{
+					"count": 1,
+					"cardName": "Oath of Liliana"
+				},
+				{
+					"count": 1,
+					"cardName": "Pyromancer's Goggles"
+				},
+				{
+					"count": 1,
+					"cardName": "Pyromancer's Gauntlet"
+				},
+				{
+					"count": 1,
+					"cardName": "Chandra's Regulator"
+				}
+			]
+		},
+		{
+			"count": 1,
+			"cardName": "Liliana's Defeat"
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 4,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 1000,
+			"addMaxCount": 9000
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Liliana's Stone"
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Human",
+		"Wizard",
+		"Necromancer",
+		"Planeswalker",
+		"Boss",
+		"Liliana",
+		"Death",
+		"IdentityBlack"
+	]
+},
+{
+	"name": "Liliana's Alchemist",
+	"sprite": "sprites/dimir_wiz.atlas",
+	"deck": [
+		"decks/dimir_ninja.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.2,
+	"speed": 24,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.3,
+			"count": 1,
+			"rarity": [
+				"rare","mythicrare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 150,
+			"addMaxCount": 150
+		}
+	],
+	"colors": "BG",
+	"questTags": [
+		"Wizard",
+		"Necromancer",
+		"IdentityBlack",
+		"IdentityBlue",
+		"IdentityDimir",
+		"Poison",
+		"Liliana"
+	]
+},
+{
+	"name": "Liliana's Herbalist",
+	"sprite": "sprites/black_wizard.atlas",
+	"deck": [
+		"decks/lilianas_herbalist.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.2,
+	"speed": 24,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.3,
+			"count": 1,
+			"rarity": [
+				"rare","mythicrare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 150,
+			"addMaxCount": 150
+		}
+	],
+	"colors": "BG",
+	"questTags": [
+		"Wizard",
+		"Necromancer",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityGolgari",
+		"Poison",
+		"Liliana"
+	]
+},
+{
 	"name": "Lorthos",
 	"sprite": "sprites/boss/lorthos.atlas",
 	"deck": [
@@ -11328,6 +12158,91 @@
 	]
 },
 {
+	"name": "Orzhov Cleric",
+	"sprite": "sprites/cleric_orzhov.atlas",
+	"deck": [
+		"decks/cleric_orzhov.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.2,
+	"speed": 24,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 210,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "WB",
+	"questTags": [
+		"Human",
+		"Cleric",
+		"Religious",
+		"Wizard",
+		"Holy",
+		"Unholy"
+		"IdentityWhite",
+		"IdentityBlack",
+		"IdentityOrzhov"
+	]
+},
+{
 	"name": "Pirate",
 	"sprite": "sprites/pirate.atlas",
 	"deck": [
@@ -11768,6 +12683,85 @@
 		"IdentityBlack",
 		"IdentityRakdos",
 		"BiomeBlack"
+	]
+},
+{
+	"name": "Rakdos Wiz",
+	"sprite": "sprites/rakdos_wiz.atlas",
+	"deck": [
+		"decks/rakdos_vamps.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.2,
+	"speed": 24,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.3,
+			"count": 1,
+			"rarity": [
+				"rare","mythicrare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 150,
+			"addMaxCount": 150
+		}
+	],
+	"colors": "BG",
+	"questTags": [
+		"Wizard",
+		"Necromancer",
+		"Pyromancer",
+		"IdentityBlack",
+		"IdentityRed",
+		"IdentityRakdos"
 	]
 },
 {
@@ -12769,6 +13763,87 @@
 			"probability": 0.6,
 			"count": 7,
 			"addMaxCount": 32
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Undead",
+		"Skeleton",
+		"Soldier",
+		"Regenerating",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
+},
+{
+	"name": "Skeleton Champion",
+	"sprite": "sprites/skeleton_2.atlas",
+	"deck": [
+		"decks/skeleton_champion.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.2,
+	"speed": 20,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
 		}
 	],
 	"colors": "B",
@@ -15283,6 +16358,7 @@
 	"deck": [
 		"decks/yeti.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -15388,10 +16464,10 @@
 			"probability": 0.5,
 			"count": 3,
 			"colors": [
-				"Mythic Black"
+				"Black"
 			],
 			"rarity": [
-				"Rare"
+				"Common","Uncommon","Rare"
 			]
 		}
 	],
@@ -15410,6 +16486,7 @@
 	"deck": [
 		"decks/zombie_good.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 21,
@@ -15429,13 +16506,12 @@
 		},
 		{
 			"type": "card",
-			"probability": 0.5,
 			"count": 3,
 			"colors": [
 				"Black"
 			],
 			"rarity": [
-				"Rare"
+				"Uncommon","Rare"
 			]
 		}
 	],

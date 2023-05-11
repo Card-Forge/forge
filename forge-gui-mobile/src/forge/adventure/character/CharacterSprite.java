@@ -20,6 +20,7 @@ public class CharacterSprite extends MapActor {
     private AnimationDirections currentAnimationDir = AnimationDirections.None;
     private final Array<Sprite> avatar=new Array<>();
     public boolean hidden = false;
+    public boolean inactive = false;
     private String atlasPath;
     private float wakeTimer = 0.0f;
 
@@ -175,10 +176,18 @@ public class CharacterSprite extends MapActor {
 
     public void moveBy(float x, float y, float delta) {
 
+        if (inactive){
+            return;
+        }
+
         if (hidden) {
-            setAnimation(AnimationTypes.Wake);
-            wakeTimer = 0.0f;
-            hidden = false;
+            if (animations.containsKey(AnimationTypes.Wake)) {
+                //Todo: Need another check here if we want objects revealed by activateMapObject to play wake animation
+                setAnimation(AnimationTypes.Wake);
+                wakeTimer = 0.0f;
+                hidden = false;
+            }
+            else return;
         }
 
         if (currentAnimationType == AnimationTypes.Wake && wakeTimer <= currentAnimation.getAnimationDuration()){
@@ -192,7 +201,7 @@ public class CharacterSprite extends MapActor {
         Vector2 vec = new Vector2(x, y);
         float degree = vec.angleDeg();
 
-        setAnimation(AnimationTypes.Walk);
+        if (!hidden) setAnimation(AnimationTypes.Walk);
         if (degree < 22.5)
             setDirection(AnimationDirections.Right);
         else if (degree < 22.5 + 45)
@@ -229,9 +238,8 @@ public class CharacterSprite extends MapActor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (currentAnimation == null || hidden)
+        if (currentAnimation == null || hidden || inactive)
         {
-
             return;
         }
         super.draw(batch,parentAlpha);

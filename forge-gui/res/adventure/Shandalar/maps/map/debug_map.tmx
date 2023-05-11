@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="98">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="98">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -12,7 +12,7 @@
 }</property>
  </properties>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="6321" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJxjYGBgkBCiL4aBUXtH7R21d3ja+0AUFdPC3mmcEDwS7IXZaciFaTe5WAMN47MXm5+Hq71TBtC/Axm/IH4aJwIjm6UggImR5cs4ERjEn8CO3150TE17QRhXPqKVvdgwOeUzIXuJwaP2kmY/OfpG7R21dzjaCwBbaKfR
@@ -25,7 +25,7 @@
  </layer>
  <layer id="2" name="Ground" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztls1KAzEQgAcs/cPdrSLatYL4DOIP1VNfQfocRXvyp4dW7BuIFmlPHj3Xk/bq0SKI6EEfxRmSYIyT7abdeurAR36azbcTmmGLBYDiDJYS0mdYnbI3pHbxLyszb6I0AoAT5DQQvmM5Pgum6zXznnae/+ktyda8MzR3L70U3L2a5G6FsjWDm+PC5Sx2fIBt3917OwfQDAFaoei7eMn5ggylO9TOTIU5VlFJAXTR2QtFX3kXkDtJweLd8vnzOsjw/bjRTws8R29SEeV9yuF/Fd9tE/tLMf8/tqjgHoG2h83b8QCukEvk2hPe56xgmBXPNrEutRjOA/H7J677kpC3jvOHSA05iqhpHemkvp5vLSfadcsZbMj5Ru53vrQP5WzLlSMpb31Ervq9nMT7jvfoI/XjjYMZ83mBl4/nLeG6Nck4XlWvzBjl1UPVq3307zm8Q1LeMjp3I7xx4gHXPSJteW8uAjEeGM9XM8JLub4hrxE5u4TKm8vTFrack/RWmToeddY66ltKJ8prrqVvrrLv7uVYTvNemufW97D23Ui63vheom14aTzJfi7o3nH3+AaIP56Y
+   eJztljtLA0EQgAcMeeHdRRFNjCB26cUH0Sr/QCU/Q4Om8pFCxfwD0SBaWaaOldpaGgQRLfSnOMPu4rrOXm6Ti1UGPvaRvf1uluxw+RxAfgRLEekwzA7ZW6B28i8zI2+sNAKAA+QwEL59OT4Khus18x52nv/pLcrWvDM0dye9FNy9GuRuFWRrBjfHhctZrPgAy76793YMYKMEsFkSfRcvOV+QrnQXtDNTYY5VVBIA2+jcKYm+8k4gbUnO4l3y+fPaSvH9qNFJCjxHb1wR5n3K4H8V320R+1MR/z+2qOAegbaHzdvyAC6Qc+TSE97ntKCbFs8eY106YTgNxO+fuO5LQt46zu8iNWQvpKa1pJP6er61jGjnLWewIOcbmd/50j6Usy1Xjri89R656vdyEO873qOPxI83CmaMZwVeNpq3iOvmJP14Vb0yo5dXD1Wv1tG/5vAOcXnL6FwN8UaJe1z3gDTlvTkLxPjReL6aEl7K9Q15DcnZJVTeXJ62sOUcp7fK1PGws9ZR31I6YV5zLX1zlX13L8d0kvfSPLf+BmvfleTa699LNA0vjQfZzwXd2+8e3zU/nhQ=
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="30">
@@ -231,7 +231,7 @@
     <property name="enemy" value="Goblin"/>
    </properties>
   </object>
-  <object id="82" template="../obj/enemy.tx" gid="2147491275" x="48" y="224">
+  <object id="82" template="../obj/enemy.tx" gid="2147495067" x="48" y="224">
    <properties>
     <property name="dialog">[
   {
@@ -245,7 +245,7 @@
     <property name="enemy" value="Goblin"/>
    </properties>
   </object>
-  <object id="83" template="../obj/gate.tx" type="dummy" gid="3651" x="80" y="336" width="16" height="16"/>
+  <object id="83" template="../obj/gate.tx" class="dummy" gid="3651" x="80" y="336" width="16" height="16"/>
   <object id="84" template="../obj/enemy.tx" x="336" y="304">
    <properties>
     <property name="dialog">[
@@ -331,8 +331,10 @@
   <object id="87" template="../obj/enemy.tx" x="48" y="384">
    <properties>
     <property name="enemy" value="Geist"/>
+    <property name="pursueRange" type="int" value="80"/>
     <property name="spawn.Hard" type="bool" value="true"/>
     <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="88" template="../obj/enemy.tx" x="48" y="400">
@@ -407,6 +409,6 @@
     <property name="enemy" value="Doppelganger"/>
    </properties>
   </object>
-  <object id="97" template="../obj/inn.tx" type="spellsmith" gid="6707" x="224" y="368" width="16" height="16"/>
+  <object id="97" template="../obj/inn.tx" class="spellsmith" gid="10499" x="224" y="368" width="16" height="16"/>
  </objectgroup>
 </map>
