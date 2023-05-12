@@ -28,7 +28,7 @@ Oracle:Flying\nWhenever you attack with one or more other creatures with flying,
 SPECIALIZE:BLUE
 
 Name:Lulu, Curious Hollyphant
-ManaCost:2 W W
+ManaCost:2 W U
 Types:Legendary Creature Elephant Angel
 PT:2/4
 K:Flying
