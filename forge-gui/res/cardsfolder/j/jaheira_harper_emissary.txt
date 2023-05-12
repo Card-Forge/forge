@@ -66,7 +66,7 @@ Oracle:Hexproof from artifacts and enchantments\nWhen this creature specializes,
 
 SPECIALIZE:GREEN
 
-Name:Jaheira, Merciful Harper {1}{G}{G}
+Name:Jaheira, Merciful Harper
 ManaCost:1 R G
 Types:Legendary Creature Human Elf Druid
 PT:3/4
