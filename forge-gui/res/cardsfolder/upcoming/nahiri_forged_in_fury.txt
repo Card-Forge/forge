@@ -3,7 +3,7 @@ ManaCost:4 R W
 Types:Legendary Creature Kor Artificer
 PT:5/4
 K:Affinity:Artifact.Equipment:equipment
-T:Mode$ Attacks | ValidCard$ Creature.equipped | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever an equipped creature you control attacks, exile the top card of your library. You may play that card this turn. You may cast Equipment spells this way without paying their mana costs.
+T:Mode$ Attacks | ValidCard$ Creature.equipped+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever an equipped creature you control attacks, exile the top card of your library. You may play that card this turn. You may cast Equipment spells this way without paying their mana costs.
 SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBBranch
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | TrueSubAbility$ DBEffect2 | FalseSubAbility$ DBEffect | SubAbility$ DBCleanup
 SVar:DBEffect2:DB$ Effect | StaticAbilities$ STPlay2 | RememberObjects$ Remembered | ForgetOnMoved$ Exile
