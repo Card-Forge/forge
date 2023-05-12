@@ -264,19 +264,17 @@ public class CopyPermanentEffect extends TokenEffectBase {
     public static Card getProtoType(final SpellAbility sa, final Card original, final Player newOwner) {
         final Card host = sa.getHostCard();
         int id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
-        final Card copy = new Card(id, original.getPaperCard(), host.getGame());
-        copy.setOwner(newOwner);
-        copy.setSetCode(original.getSetCode());
+        // need to create a physical card first, i need the original card faces
+        final Card copy = CardFactory.getCard(original.getPaperCard(), newOwner, id, host.getGame());
 
         copy.setTokenSpawningAbility(sa);
-        // 707.8a If an effect creates a token that is a copy of a transforming permanent or a transforming double-faced card not on the battlefield,
-        // the resulting token is a transforming token that has both a front face and a back face.
-        // The characteristics of each face are determined by the copiable values of the same face of the permanent it is a copy of, as modified by any other copy effects that apply to that permanent.
-        // If the token is a copy of a transforming permanent with its back face up, the token enters the battlefield with its back face up.
-        // This rule does not apply to tokens that are created with their own set of characteristics and enter the battlefield as a copy of a transforming permanent due to a replacement effect.
         if (original.isTransformable()) {
+            // 707.8a If an effect creates a token that is a copy of a transforming permanent or a transforming double-faced card not on the battlefield,
+            // the resulting token is a transforming token that has both a front face and a back face.
+            // The characteristics of each face are determined by the copiable values of the same face of the permanent it is a copy of, as modified by any other copy effects that apply to that permanent.
+            // If the token is a copy of a transforming permanent with its back face up, the token enters the battlefield with its back face up.
+            // This rule does not apply to tokens that are created with their own set of characteristics and enter the battlefield as a copy of a transforming permanent due to a replacement effect.
             copy.setBackSide(original.isBackSide());
-            copy.setRules(original.getRules());
             if (original.isTransformed()) {
                 copy.incrementTransformedTimestamp();
             }

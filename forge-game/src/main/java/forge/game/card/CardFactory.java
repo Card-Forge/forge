@@ -809,7 +809,8 @@ public class CardFactory {
 
             // CR 208.3 A noncreature object not on the battlefield has power or toughness only if it has a power and toughness printed on it.
             // currently only LKI can be trusted?
-            if (state.getType().isCreature() || in.getOriginalState(originalState.getStateName()).getBasePowerString() != null) {
+            if ((sa.hasParam("SetPower") || sa.hasParam("SetToughness")) &&
+                (state.getType().isCreature() || (originalState != null && in.getOriginalState(originalState.getStateName()).getBasePowerString() != null))) {
                 if (sa.hasParam("SetPower")) {
                     state.setBasePower(AbilityUtils.calculateAmount(host, sa.getParam("SetPower"), sa));
                 }
