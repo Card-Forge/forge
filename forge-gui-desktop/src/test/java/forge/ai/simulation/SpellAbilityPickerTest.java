@@ -93,6 +93,8 @@ public class SpellAbilityPickerTest extends AITest {
         AssertJUnit.assertEquals(mountain, sa.getHostCard());
 
         playUntilStackClear(game);
+        game.getPhaseHandler().mainLoopStep();
+        System.out.println(gameStateToString(game));
         sa = p.getController().chooseSpellAbilityToPlay().get(0);
 
         AssertJUnit.assertEquals("Shock deals 2 damage to any target.", sa.toString());

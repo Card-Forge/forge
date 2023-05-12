@@ -14,6 +14,7 @@ import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -23,6 +24,7 @@ import java.util.Set;
 import static forge.view.SimulateMatch.simulateSingleGameOfMatch;
 
 public class GameFuzzingTest {
+//    @Ignore
     @Test
     public void PlayGameWithRandomDecks() {
         GuiBase.setInterface(new GuiDesktop());

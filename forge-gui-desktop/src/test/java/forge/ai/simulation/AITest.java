@@ -46,6 +46,7 @@ public class AITest {
         Player p = game.getPlayers().get(1);
         game.setAge(GameStage.Play);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getPhaseHandler().onStackResolved();
         // game.getAction().checkStateEffects(true);
 
         return game;
