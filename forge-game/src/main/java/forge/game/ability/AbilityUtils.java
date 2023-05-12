@@ -79,8 +79,6 @@ import io.sentry.Sentry;
 public class AbilityUtils {
     private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
 
-    static public final String WITH_DELIMITER = "((?<=%1$s)|(?=%1$s))";
-
     // should the three getDefined functions be merged into one? Or better to
     // have separate?
     // If we only have one, each function needs to Cast the Object to the
@@ -3012,10 +3010,8 @@ public class AbilityUtils {
     public static final String applyDescriptionTextChangeEffects(final String def, final Card card) {
         return applyTextChangeEffects(def, card, true);
     }
-
     private static final String applyTextChangeEffects(final String def, final Card card, final boolean isDescriptive) {
-        return applyTextChangeEffects(def, isDescriptive,
-                card.getChangedTextColorWords(), card.getChangedTextTypeWords());
+        return applyTextChangeEffects(def, isDescriptive, card.getChangedTextColorWords(), card.getChangedTextTypeWords());
     }
 
     public static final String applyTextChangeEffects(final String def, final boolean isDescriptive,
@@ -3027,7 +3023,6 @@ public class AbilityUtils {
         String replaced = def;
         for (final Entry<String, String> e : colorMap.entrySet()) {
             final String key = e.getKey();
-            String value;
             if (key.equals("Any")) {
                 for (final byte c : MagicColor.WUBRG) {
                     final String colorLowerCase = MagicColor.toLongString(c).toLowerCase(),
@@ -3036,38 +3031,28 @@ public class AbilityUtils {
                     if (e.getValue().equalsIgnoreCase(colorLowerCase)) {
                         continue;
                     }
-                    value = getReplacedText(colorLowerCase, e.getValue(), isDescriptive);
-                    replaced = replaced.replaceAll("(?<!>)" + colorLowerCase, value.toLowerCase());
-                    value = getReplacedText(colorCaptCase, e.getValue(), isDescriptive);
-                    replaced = replaced.replaceAll("(?<!>)" + colorCaptCase, StringUtils.capitalize(value));
+                    replaced = getReplacedText(replaced, colorLowerCase, e.getValue().toLowerCase(), isDescriptive);
+                    replaced = getReplacedText(replaced, colorCaptCase, e.getValue(), isDescriptive);
                 }
             } else {
-                value = getReplacedText(key, e.getValue(), isDescriptive);
-                replaced = replaced.replaceAll("(?<!>)" + key, value);
+                replaced = getReplacedText(replaced, key, e.getValue(), isDescriptive);
             }
         }
-        StringBuilder sb = new StringBuilder();
-        for (String replacedPart : replaced.split(String.format(WITH_DELIMITER, "\\."))) {
-            if (!replacedPart.equals("Self") && !replacedPart.equals(".")) {
-                for (final Entry<String, String> e : typeMap.entrySet()) {
-                    final String key = e.getKey();
-                    final String pkey = CardType.getPluralType(key);
-                    final String pvalue = getReplacedText(pkey, CardType.getPluralType(e.getValue()), isDescriptive);
-                    replacedPart = replacedPart.replaceAll("(?<!>)" + pkey, pvalue);
-                    final String value = getReplacedText(key, e.getValue(), isDescriptive);
-                    replacedPart = replacedPart.replaceAll("(?<!>)" + key, value);
-                }
-            }
-            sb.append(replacedPart);
+        for (final Entry<String, String> e : typeMap.entrySet()) {
+            final String key = e.getKey();
+            replaced = getReplacedText(replaced, CardType.getPluralType(key), CardType.getPluralType(e.getValue()), isDescriptive);
+            replaced = getReplacedText(replaced, key, e.getValue(), isDescriptive);
         }
-        return sb.toString();
+
+        return replaced;
     }
 
-    private static final String getReplacedText(final String originalWord, final String newWord, final boolean isDescriptive) {
+    private static final String getReplacedText(final String text, final String originalWord, String newWord, final boolean isDescriptive) {
         if (isDescriptive) {
-            return "<strike>" + originalWord + "</strike> " + newWord;
+            newWord = "<strike>" + originalWord + "</strike> " + newWord;
         }
-        return newWord;
+        // use word boundaries and keep negations
+        return text.replaceAll((isDescriptive ? "(?<!>)" : "") + "\\b(non)?" + originalWord, "$1" + newWord);
     }
 
     public static final String getSVar(final CardTraitBase ability, final String sVarName) {
