@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.deck.ArchetypeDeckGenerator;
 import forge.deck.CardThemedDeckGenerator;
