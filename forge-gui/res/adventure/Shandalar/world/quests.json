@@ -549,60 +549,13 @@
 				"text": "Upon arriving at the pickup point, you find a rather modest looking spellbook among the supplies. Presumably, this is the merchandise your employer is planning to sell",
 				"options": [
 					{
-						"name": "You pick up the goods and begin your journey back. (Leave)"
-					}
-				]
-			},
-			"POIToken": ""
-		},
-		{
-			"id": 3,
-			"name": "Leave",
-			"description": "Leave $(poi_2) and take the merchant's supplies back to him",
-			"mapFlag": "",
-			"mapFlagValue": 1,
-			"count1": 50,
-			"count2": 20,
-			"prologue": {},
-			"epilogue": {
-				"text": "Just as you leave town, the spellbook slides out of a rip you hadn't noticed in the sack of goods. It opens as it lands on the ground.\t ",
-				"options": [
-					{
-						"name": "You decide to investigate the spellbook.",
-						"text": "As would suit a brand new shop, the contents are mostly common spells.",
+						"name": "You pick up the goods and begin your journey back.",
+						"text": "Just as you begin to pick everything up, a spellbook slides out of a rip you hadn't noticed in the sack of goods. It opens as it lands on the ground.\t ",
 						"options": [
 							{
-								"action": [
-									{
-										"grantRewards": [
-											{
-												"type": "card",
-												"count": 1,
-												"rarity": [
-													"Uncommon"
-												]
-											}
-										]
-									}
-								],
-								"name": "Quickly and discretely help yourself to a spell before continuing",
-								"text": "You receive a spell of dubious quality.",
+								"name": "You decide to investigate the spellbook.",
+								"text": "As would suit a brand new shop, the contents are mostly common spells.",
 								"options": [
-									{
-										"name": "I do get a sample of the merchandise, after all... (Leave)"
-									}
-								]
-							},
-							{
-								"name": "Move the items to another bag and carry on"
-							},
-							{
-								"name": "Search for something more useful",
-								"text": "Toward the back of the collection, you find some things that are at least a little more uncommon. And you also notice a young boy watching you from beneath a tree near the road.",
-								"options": [
-									{
-										"name": "Move the items to another bag and carry on (Continue quest)"
-									},
 									{
 										"action": [
 											{
@@ -615,55 +568,89 @@
 														]
 													}
 												]
-											},
-											{
-												"removeItem": "",
-												"setColorIdentity": "",
-												"advanceQuestFlag": "",
-												"advanceMapFlag": "",
-												"setQuestFlag": {
-													"key": ""
-												},
-												"setMapFlag": {
-													"key": ""
-												},
-												"issueQuest": "",
-												"addMapReputation": -2,
-												"POIReference": "$(poi_2)"
-											},
-											{
-												"grantRewards": [
-													{
-														"type": "card",
-														"count": 4,
-														"rarity": [
-															"Uncommon"
-														]
-													}
-												]
 											}
 										],
-										"name": "\"It's just a kid. Whatever.\" You take one of the cards and leave.",
-										"text": "(-2 local reputation)",
+										"name": "Quickly and discretely help yourself to a spell before continuing",
+										"text": "You receive a spell of dubious quality.",
 										"options": [
 											{
-												"name": "(Continue your quest)"
+												"name": "I do get a sample of the merchandise, after all... (Leave)"
+											}
+										]
+									},
+									{
+										"name": "Move the items to another bag and carry on"
+									},
+									{
+										"name": "Search for something more useful",
+										"text": "Toward the back of the collection, you find some things that are at least a little more uncommon. And you also notice a young boy watching you from beneath a tree near the road.",
+										"options": [
+											{
+												"name": "Move the items to another bag and carry on (Continue quest)"
+											},
+											{
+												"action": [
+													{
+														"grantRewards": [
+															{
+																"type": "card",
+																"count": 1,
+																"rarity": [
+																	"Uncommon"
+																]
+															}
+														]
+													},
+													{
+														"removeItem": "",
+														"setColorIdentity": "",
+														"advanceQuestFlag": "",
+														"advanceMapFlag": "",
+														"setQuestFlag": {
+															"key": ""
+														},
+														"setMapFlag": {
+															"key": ""
+														},
+														"issueQuest": "",
+														"addMapReputation": -2,
+														"POIReference": "$(poi_2)"
+													},
+													{
+														"grantRewards": [
+															{
+																"type": "card",
+																"count": 4,
+																"rarity": [
+																	"Uncommon"
+																]
+															}
+														]
+													}
+												],
+												"name": "\"It's just a kid. Whatever.\" You take one of the cards and leave.",
+												"text": "(-2 local reputation)",
+												"options": [
+													{
+														"name": "(Continue your quest)"
+													}
+												]
 											}
 										]
 									}
 								]
+							},
+							{
+								"name": "You move the items to another bag and carry on. (Continue Quest)"
 							}
 						]
-					},
-					{
-						"name": "You move the items to another bag and carry on. (Continue Quest)"
 					}
 				]
 			},
 			"POIToken": ""
 		},
 		{
-			"id": 4,
+			"id": 3,
 			"name": "Travel",
 			"description": "Return to $(poi_1)",
 			"mapFlag": "",

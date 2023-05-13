@@ -163,32 +163,6 @@ public class MapStage extends GameStage {
         return false;
     }
 
-    public float lengthWithoutCollision(EnemySprite mob, Vector2 end) {
-        Vector2 start = mob.pos();
-        Vector2 safeVector = start.cpy().add(end);
-
-        int segmentsToCheck = 100;
-        float safeLen = safeVector.len();
-        float partialLength = safeLen / segmentsToCheck;
-
-        for (Rectangle collision : collisionRect) {
-            float uncollidedLen = 0.0f;
-            while (uncollidedLen < safeLen) {
-                Rectangle mRect = new Rectangle(mob.navigationBoundingRect());
-                Vector2 testVector = new Vector2(end).setLength(uncollidedLen + partialLength);
-                mRect.setPosition(mRect.x + testVector.x, mRect.y + testVector.y);
-                if (mRect.overlaps(collision)) {
-                    break;
-                }
-                uncollidedLen += partialLength;
-            }
-            safeLen = Math.min(safeLen, uncollidedLen);
-        }
-
-        return safeLen;
-    }
-
-
     @Override
     public void prepareCollision(Vector2 pos, Vector2 direction, Rectangle boundingRect) {
 
@@ -330,7 +304,11 @@ public class MapStage extends GameStage {
     Array<EntryActor> spawnClassified = new Array<>();
     Array<EntryActor> sourceMapMatch = new Array<>();
 
-    public void loadMap(TiledMap map, String sourceMap) {
+    public void loadMap(TiledMap map, String sourceMap, String targetMap) {
+        loadMap(map, sourceMap, targetMap, 0);
+    }
+
+    public void loadMap(TiledMap map, String sourceMap, String targetMap, int spawnTargetId) {
         isLoadingMatch = false;
         isInMap = true;
         GameHUD.getInstance().showHideMap(false);
@@ -339,7 +317,7 @@ public class MapStage extends GameStage {
             actor.remove();
             foregroundSprites.removeActor(actor);
         }
-
+        positions.clear();
         actors.clear();
         collisionRect.clear();
 
@@ -390,15 +368,10 @@ public class MapStage extends GameStage {
             if (layer instanceof TiledMapTileLayer) {
                 loadCollision((TiledMapTileLayer) layer);
             } else {
-                loadObjects(layer, sourceMap);
+                loadObjects(layer, sourceMap, targetMap);
             }
         }
-        if (!spawnClassified.isEmpty())
-            spawnClassified.first().spawn();
-        else if (!sourceMapMatch.isEmpty())
-            sourceMapMatch.first().spawn();
-        else if (!otherEntries.isEmpty())
-            otherEntries.first().spawn();
+        spawn(spawnTargetId);
 
         //reduce geometry in collision rectangles
         int oldSize;
@@ -431,6 +404,28 @@ public class MapStage extends GameStage {
         replaceWaypoints();
 
         getPlayerSprite().stop();
+    }
+
+    public void spawn(int targetId){
+        boolean hasSpawned = false;
+        if (targetId > 0){
+            for (int i = 0; i < actors.size; i++) {
+                if (actors.get(i).getObjectId() == targetId) {
+                    if (actors.get(i) instanceof EntryActor) {
+                        ((EntryActor)(actors.get(i))).spawn();
+                        hasSpawned = true;
+                    }
+                }
+            }
+        }
+        if (!hasSpawned){
+            if (!spawnClassified.isEmpty())
+                spawnClassified.first().spawn();
+            else if (!sourceMapMatch.isEmpty())
+                sourceMapMatch.first().spawn();
+            else if (!otherEntries.isEmpty())
+                otherEntries.first().spawn();
+        }
     }
 
     void replaceWaypoints() {
@@ -479,7 +474,7 @@ public class MapStage extends GameStage {
         return true;
     }
 
-    private void loadObjects(MapLayer layer, String sourceMap) {
+    private void loadObjects(MapLayer layer, String sourceMap, String currentMap) {
         player.setMoveModifier(2);
         Array<String> shopsAlreadyPresent = new Array<>();
         for (MapObject obj : layer.getObjects()) {
@@ -489,6 +484,7 @@ public class MapStage extends GameStage {
                 int id = prop.get("id", int.class);
                 if (changes.isObjectDeleted(id))
                     continue;
+
                 boolean hidden = !obj.isVisible(); //Check if the object is invisible.
 
                 String rotatingShop = "";
@@ -511,18 +507,50 @@ public class MapStage extends GameStage {
                         float h = Float.parseFloat(prop.get("height").toString());
 
                         String targetMap = prop.get("teleport").toString();
-                        boolean spawnPlayerThere = (targetMap == null || targetMap.isEmpty() && sourceMap.isEmpty()) ||//if target is null and "from world"
+                        boolean canStillSpawnPlayerThere = (targetMap == null || targetMap.isEmpty() && sourceMap.isEmpty()) ||//if target is null and "from world"
                                 !sourceMap.isEmpty() && targetMap.equals(sourceMap);
 
-                        EntryActor entry = new EntryActor(this, id, prop.get("teleport").toString(), x, y, w, h, prop.get("direction").toString());
-                        if ((prop.containsKey("spawn") && prop.get("spawn").toString().equals("true")) && spawnPlayerThere) {
+                        int entryTargetId = (!prop.containsKey("teleportObjectId") || prop.get("teleportObjectId") ==null || prop.get("teleportObjectId").toString().isEmpty())? 0: Integer.parseInt(prop.get("teleportObjectId").toString());
+
+                        EntryActor entry = new EntryActor(this, id, prop.get("teleport").toString(), x, y, w, h, prop.get("direction").toString(), currentMap, entryTargetId);
+                        if (prop.containsKey("spawn") && prop.get("spawn").toString().equals("true")) {
                             spawnClassified.add(entry);
-                        } else if (spawnPlayerThere) {
+                        } else if (canStillSpawnPlayerThere) {
                             sourceMapMatch.add(entry);
                         } else {
                             otherEntries.add(entry);
                         }
                         addMapActor(obj, entry);
+                        break;
+                    case "portal":
+                        float px = Float.parseFloat(prop.get("x").toString());
+                        float py = Float.parseFloat(prop.get("y").toString());
+                        float pw = Float.parseFloat(prop.get("width").toString());
+                        float ph = Float.parseFloat(prop.get("height").toString());
+
+                        Object portalSpriteProvided = prop.get("sprite");
+                        String portalSpriteToUse;
+                        portalSpriteToUse = "sprites/portal.atlas";
+                        if (portalSpriteProvided != null && !portalSpriteProvided.toString().isEmpty()) portalSpriteToUse = portalSpriteProvided.toString();
+                        else
+                            System.err.printf("No sprite defined for portal (ID:%s), defaulting to \"sprites/portal.atlas\"", id);
+
+                        String portalTargetMap = prop.get("teleport").toString();
+                        boolean validSpawnPoint = (portalTargetMap == null || portalTargetMap.isEmpty() && sourceMap.isEmpty()) ||//if target is null and "from world"
+                                !sourceMap.isEmpty() && portalTargetMap.equals(sourceMap);
+
+                        int portalTargetId = (!prop.containsKey("teleportObjectId") || prop.get("teleportObjectId") ==null || prop.get("teleportObjectId").toString().isEmpty())? 0: Integer.parseInt(prop.get("teleportObjectId").toString());
+
+                        PortalActor portal = new PortalActor(this, id, prop.get("teleport").toString(), px, py, pw, ph, prop.get("direction").toString(), currentMap, portalTargetId, portalSpriteToUse);
+                        portal.setAnimation(prop.get("portalState").toString());
+                        if (prop.containsKey("spawn") && prop.get("spawn").toString().equals("true")) {
+                            spawnClassified.add(portal);
+                        } else if (validSpawnPoint) {
+                            sourceMapMatch.add(portal);
+                        } else {
+                            otherEntries.add(portal);
+                        }
+                        addMapActor(obj, portal);
                         break;
                     case "reward":
                         if (!canSpawn(prop)) break;
@@ -577,13 +605,30 @@ public class MapStage extends GameStage {
                             {
                                 mob.threatRange = Float.parseFloat(prop.get("threatRange").toString());
                             }
+                            if (prop.containsKey("threatRange")) //Check for threat range.
+                            {
+                                mob.pursueRange = Float.parseFloat(prop.get("pursueRange").toString());
+                            }
                             if (prop.containsKey("fleeRange")) //Check for flee range.
                             {
                                 mob.fleeRange = Float.parseFloat(prop.get("fleeRange").toString());
                             }
+                            if (prop.containsKey("speed")) //Check for flee range.
+                            {
+                                mob.getData().speed = Float.parseFloat(prop.get("speed").toString());
+                            }
+                            if (prop.containsKey("flying"))
+                            {
+                                mob.getData().flying = Boolean.parseBoolean(prop.get("flying").toString());
+                            }
                             if (prop.containsKey("hidden"))
                             {
-                                mob.hidden = Boolean.parseBoolean(prop.get("hidden").toString());
+                                hidden = Boolean.parseBoolean(prop.get("hidden").toString());
+                            }
+                            if (prop.containsKey("inactive"))
+                            {
+                                mob.inactive = Boolean.parseBoolean(prop.get("inactive").toString());
+                                if (mob.inactive) mob.clearCollisionHeight();
                             }
                             if (hidden){
                                 mob.hidden = hidden; //Evil.
@@ -601,6 +646,9 @@ public class MapStage extends GameStage {
                     case "dummy": //Does nothing. Mostly obstacles to be removed by ID by switches or such.
                         TiledMapTileMapObject obj2 = (TiledMapTileMapObject) obj;
                         DummySprite D = new DummySprite(id, obj2.getTextureRegion(), this);
+                        if (prop.containsKey("hidden")){
+                            D.setVisible(!Boolean.parseBoolean(prop.get("hidden").toString()));
+                        }
                         addMapActor(obj, D);
                         //TODO: Ability to toggle their solid state.
                         //TODO: Ability to move them (using a sequence such as "UULU" for up, up, left, up).
@@ -642,8 +690,10 @@ public class MapStage extends GameStage {
                             DialogActor dialog;
                             if (prop.containsKey("sprite"))
                                 dialog = new DialogActor(this, id, prop.get("dialog").toString(), prop.get("sprite").toString());
-                            else
+                            else {
                                 dialog = new DialogActor(this, id, prop.get("dialog").toString(), tiledObj.getTextureRegion());
+                                dialog.setVisible(false);
+                            }
                             addMapActor(obj, dialog);
                         }
                         break;
@@ -780,6 +830,7 @@ public class MapStage extends GameStage {
     }
 
     public boolean exitDungeon() {
+        WorldSave.getCurrentSave().autoSave();
         AdventureQuestController.instance().updateQuestsLeave();
         AdventureQuestController.instance().showQuestDialogs(this);
         isLoadingMatch = false;
@@ -876,6 +927,22 @@ public class MapStage extends GameStage {
         return false;
     }
 
+    public boolean activateMapObject(int id){
+        if (changes.isObjectDeleted(id)){
+            return false;
+        }
+        for (int i = 0; i < actors.size; i++) {
+            if (actors.get(i).getObjectId() == id && id > 0) {
+                if (actors.get(i) instanceof EnemySprite) {
+                    ((EnemySprite)(actors.get(i))).inactive = false;
+                    (actors.get(i)).resetCollisionHeight();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public boolean lookForID(int id) { //Search actor by ID.
 
         for (MapActor A : new Array.ArrayIterator<>(actors)) {
@@ -928,6 +995,8 @@ public class MapStage extends GameStage {
         for (Integer i : idsToRemove) deleteObject(i);
     }
 
+    final Rectangle tempBoundingRect = new Rectangle();
+
     @Override
     protected void onActing(float delta) {
         if (isPaused() || isDialogOnlyInput())
@@ -942,6 +1011,9 @@ public class MapStage extends GameStage {
         if (!matchJustEnded) {
             while (it.hasNext()) {
                 EnemySprite mob = it.next();
+                if (mob.inactive){
+                    continue;
+                }
                 mob.updatePositon();
                 mob.targetVector = mob.getTargetVector(player, delta);
                 Vector2 currentVector = new Vector2(mob.targetVector);
@@ -951,28 +1023,32 @@ public class MapStage extends GameStage {
                     continue;
                 }
 
-                if (!mob.getData().flying)//if direct path is not possible
-                {
-                    //Todo: fix below for collision logic
-                    float safeLen = lengthWithoutCollision(mob, mob.targetVector);
-                    if (safeLen > 0.1f) {
-                        currentVector.setLength(Math.min(safeLen, mob.targetVector.len()));
-                    } else {
-                        currentVector = Vector2.Zero;
-                    }
-                }
                 currentVector.setLength(Math.min(mob.speed() * delta, mob.targetVector.len()));
-                mob.moveBy(currentVector.x, currentVector.y,delta);
+
+                tempBoundingRect.set(mob.getX() + currentVector.x, mob.getY() + currentVector.y, mob.getWidth() * 0.4f, mob.getHeight() * 0.4f);
+
+                if (!mob.getData().flying && isColliding(tempBoundingRect))//if direct path is not possible
+                {
+                    currentVector = adjustMovement(currentVector,tempBoundingRect);
+                    tempBoundingRect.set(mob.getX() + currentVector.x, mob.getY(), mob.getWidth() * 0.4f, mob.getHeight() * 0.4f);
+                    if (isColliding(tempBoundingRect))//if only x path is not possible
+                    {
+                        tempBoundingRect.set(mob.getX(), mob.getY() + currentVector.y, mob.getWidth() * 0.4f, mob.getHeight() * 0.4f);
+                        if (!isColliding(tempBoundingRect))//if y path is possible
+                        {
+                            mob.moveBy(0, currentVector.y, delta);
+                        }
+                    } else {
+                        mob.moveBy(currentVector.x, 0, delta);
+                    }
+                } else {
+                    mob.moveBy(currentVector.x, currentVector.y, delta);
+                }
             }
         }
 
         float sprintingMod = currentModifications.containsKey(PlayerModification.Sprint) ? 2 : 1;
         player.setMoveModifier(2 * sprintingMod);
-
-//        oldPosition4.set(oldPosition3);
-//        oldPosition3.set(oldPosition2);
-//        oldPosition2.set(oldPosition);
-//        oldPosition.set(player.pos());
 
         positions.add(player.pos());
         if (positions.size() > 4)

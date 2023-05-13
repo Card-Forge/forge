@@ -54,6 +54,7 @@ public class DialogData implements Serializable {
         public int addGold = 0;           //Gives the player X gold. Negative to take.
 
         public int deleteMapObject = 0;   //Remove ID from the map. -1 for self.
+        public int activateMapObject = 0; //Remove inactive state from ID.
         public int battleWithActorID = 0; //Start a battle with enemy ID. -1 for self if possible.
         public EffectData giveBlessing;   //Give a blessing to the player.
         public String setColorIdentity;   //Change player's color identity.
@@ -77,6 +78,7 @@ public class DialogData implements Serializable {
             addLife = other.addLife;
             addGold = other.addGold;
             deleteMapObject = other.deleteMapObject;
+            activateMapObject = other.activateMapObject;
             battleWithActorID = other.battleWithActorID;
             giveBlessing = other.giveBlessing;
             setColorIdentity = other.setColorIdentity;

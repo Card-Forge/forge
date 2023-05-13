@@ -5,7 +5,34 @@ filter: Nearest,Nearest
 repeat: none          
 Avatar
   xy: 0, 0
-  size: 16, 16      
+  size: 16, 16    
+Hidden
+  xy: 16, 0
+  size: 16, 16   
+Wake 
+  xy: 48, 80
+  size: 16, 16 
+Wake 
+  xy: 48, 80
+  size: 16, 16
+Wake 
+  xy: 32, 80
+  size: 16, 16 
+Wake 
+  xy: 32, 80
+  size: 16, 16
+Wake 
+  xy: 16, 80
+  size: 16, 16 
+Wake 
+  xy: 16, 80
+  size: 16, 16
+Wake 
+  xy: 0, 80
+  size: 16, 16 
+Wake 
+  xy: 0, 80
+  size: 16, 16   
 Idle 
   xy: 0, 16
   size: 16, 16      

@@ -595,3 +595,6 @@ farm
 hall_of_flame
   xy: 194, 864
   size: 32, 32     
+hall_of_fear
+  xy: 320, 464
+  size: 32, 32     

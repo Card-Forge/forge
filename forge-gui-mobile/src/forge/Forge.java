@@ -1034,6 +1034,13 @@ public class Forge implements ApplicationListener {
         if (currentScene != null) {
             if (!currentScene.leave())
                 return false;
+            if (lastScene.contains(currentScene, false))
+            {
+                int i = lastScene.indexOf(currentScene, false);
+                if (i > -1){
+                    lastScene.setSize(i);
+                }
+            }
             lastScene.add(currentScene);
         }
         storeScreen();

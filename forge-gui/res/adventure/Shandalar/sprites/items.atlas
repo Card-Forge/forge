@@ -96,9 +96,9 @@ PhoenixCharm
 ChandrasTome
   xy: 240, 816
   size: 16, 16  
-ChandrasStone
-  xy: 16, 768
-  size: 16,16
+DemonicContract
+  xy: 208, 832
+  size: 16, 16  
 SolRing
   xy: 320, 144
   size: 16, 16          
