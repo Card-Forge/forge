@@ -106,6 +106,21 @@ public class EffectEffect extends SpellAbilityEffect {
             }
         }
 
+        if (sa.hasParam("RememberLKI")) {
+            rememberList = new FCollection<>();
+            for (final String rem : sa.getParam("RememberLKI").split(",")) {
+                CardCollection def = AbilityUtils.getDefinedCards(hostCard, rem, sa);
+                for (Card c : def) {
+                    rememberList.add(CardUtil.getLKICopy(c));
+                }
+            }
+
+            // don't create Effect if there is no remembered Objects
+            if (rememberList.isEmpty() && (sa.hasParam("ForgetOnMoved") || sa.hasParam("ExileOnMoved"))) {
+                return;
+            }
+        }
+
         if (sa.hasParam("ImprintCards")) {
             effectImprinted = sa.getParam("ImprintCards");
         }
@@ -202,7 +217,6 @@ public class EffectEffect extends SpellAbilityEffect {
 
             // Remember Keywords
             if (sa.hasParam("RememberKeywords")) {
-                rememberList = new FCollection<>();
                 List<String> effectKeywords = Arrays.asList(sa.getParam("RememberKeywords").split(","));
                 if (sa.hasParam("SharedKeywordsZone")) {
                     List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
