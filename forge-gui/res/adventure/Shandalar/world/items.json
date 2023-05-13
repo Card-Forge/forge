@@ -199,6 +199,16 @@
     "questItem": true
   },
   {
+    "name": "Basement Key",
+    "iconName": "RedKey",
+    "questItem": true
+  },
+  {
+    "name": "Outer Gate Key",
+    "iconName": "RedKey",
+    "questItem": true
+  },
+  {
     "name": "Nahiri's Key",
     "iconName": "RedKey",
     "questItem": true
@@ -1166,6 +1176,39 @@
       "lifeModifier": 2,
       "startBattleWithCard": [
         "Xira's Hive"
+      ]
+}
+},
+{
+    "name": "The Underworld Cookbook",
+    "equipmentSlot": "Left",
+    "iconName": "UnderworldCookbook",
+    "effect": {
+      "startBattleWithCard": [
+        "The Underworld Cookbook",
+	    "c_a_food_sac"
+      ]
+}
+},
+{
+    "name": "Mantle of Ancient Lore",
+    "equipmentSlot": "Body",
+    "iconName": "Conjurer's Mantle",
+    "effect": {
+      "lifeModifier": 1,
+      "startBattleWithCardInCommandZone": [
+        "Mantle of Ancient Lore"
+      ]
+}
+},
+{
+    "name": "Zedruu's Lantern",
+    "equipmentSlot": "Left",
+    "iconName": "ZedruuLantern",
+    "effect": {
+      "lifeModifier": 1,
+      "startBattleWithCardInCommandZone": [
+        "Zedruu's Lantern"
       ]
 }
 },

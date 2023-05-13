@@ -29,6 +29,7 @@
 ],
 "enemies": [
 	"Bandit",
+	"Bat",
 	"Black Wiz1",
 	"Black Wiz2",
 	"Black Wiz3",
@@ -59,7 +60,6 @@
 	"Red Wiz1",
 	"Red Wiz2",
 	"Red Wiz3",
-	"Scarecrow",
 	"Sliver",
 	"White Wiz1",
 	"White Wiz2",

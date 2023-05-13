@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="60">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="68">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -29,22 +29,64 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="54" template="../obj/enemy.tx" x="248.665" y="86.584">
+  <object id="54" template="../obj/enemy.tx" x="227.847" y="118.678">
    <properties>
-    <property name="enemy" value="Merfolk"/>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Sky Diamond&quot;]
+}</property>
+    <property name="enemy" value="Storm Titan"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
   <object id="56" template="../obj/gold.tx" x="242.75" y="25"/>
-  <object id="57" template="../obj/enemy.tx" x="330.25" y="80.25">
+  <object id="57" template="../obj/enemy.tx" x="425.231" y="108.441">
    <properties>
     <property name="enemy" value="Water Elemental"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="67,65,66"/>
    </properties>
   </object>
   <object id="58" template="../obj/enemy.tx" x="42" y="62">
    <properties>
     <property name="enemy" value="Water Elemental"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="62,63,64"/>
    </properties>
   </object>
-  <object id="59" template="../obj/treasure.tx" x="248.5" y="55.5"/>
+  <object id="59" template="../obj/treasure.tx" x="241.994" y="93.6658"/>
+  <object id="60" template="../obj/booster.tx" x="214.489" y="93.92">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="61" template="../obj/manashards.tx" x="417.896" y="47.9476"/>
+  <object id="62" template="../obj/waypoint.tx" x="39.2735" y="113.437"/>
+  <object id="63" template="../obj/waypoint.tx" x="37.105" y="173.288"/>
+  <object id="64" template="../obj/waypoint.tx" x="32.768" y="233.138"/>
+  <object id="65" template="../obj/waypoint.tx" x="405.752" y="123.412"/>
+  <object id="66" template="../obj/waypoint.tx" x="415.293" y="222.73"/>
+  <object id="67" template="../obj/waypoint.tx" x="415.727" y="74.8371"/>
  </objectgroup>
 </map>

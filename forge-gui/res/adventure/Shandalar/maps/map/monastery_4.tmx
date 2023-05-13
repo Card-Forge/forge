@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="57">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="62">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -7,7 +7,7 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlmEKgCAMhfe/OsHqYnWX7qXV3UpyMKSMmhbSHgzBl+9DRRaASvWe2lpWEu7QAOA2WlZ9s8/TyL3O+1LuWO3ZXMgyuyDfMd0aKTfMdTJsbjrwMcE5H3GvVDoXb2TQ9yXv929cvd/83OXB+jlRX7Asg/oC6czPcc6xvkB+yVwTZMS4U6J3tPgezGtmmWe+lPvFf45KJdEKqL4qnA==
+   eJztlmEKgCAMhf0b1Qms63SIukv3quxuJTZYkkZtGcI+GIMt38NFLKUEIR1NRQuK71Arpfc8o+hrV4eMe+3Rp/qOpdPGaKTZevrW056h+vq6lgnVlou+Zpjzle8dufvqBxrwPOd9u+KcQ7Xc5wykvq+83zgcvuuL84ZpL8xIA/YCEOp/MefYXoB+zr6TpxHzXZi+o/XYwTgM0gz1qb5//OcIAoUNp+8uUA==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="30">
@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzFls0NwjAMhXtDPWQSRoErs0DpnSUYql2DToGqNpKx/POcROW7BDVO7PgFx123MfXbOKZOZe71uSdbZ+2DzOd4PgWxcHJskTWcuxJvju9Kvk2CH+p7SL9raC40P5xHkn9rcH0kln287CM9B6rnQr5R7XhOarTQ1q95QHLxD26nMltEt4ynURSq5cD2jsQVQfrvWNTeIw8aj1WT3md8T27bWrdSqKZSTWqtOaLd4pvAeDXciqdG3witclxSw4+mxbscIVpbUHhtRHqpllh+pHe5Bu9+au9y5hXwpdlKvdSR0BwcpbXWS1nnz3aSZkidifZSpbULrQODkHcUrz/njMCbh95DL4+WjzVWbb6kN7TqwHqeL4WySDo=
+   eJzFljsOwjAMhruhDjlGJ44CKysSp4DSnUtwqHINcgYkUNVaci3bsZOofIshj8b23zpumpmxne0QGpFXK8/dyT7tOZZ58Oed4QsFfPPsoVwFf8G/IxobmXPw2X1Y78G5kM6h3AL/W4LqwxEXe1gsjsOqZ0RjWDuakxItpP1THiy5+AenXd5ai25ASiMvWMuePNvjlwfu29EofY9SYH+0mvTcz/bSrS03BmuBGrp9u7WVxjSwplxNwvNnEpMWr4RFu0j+f0hMnnhTNVzzp0RfD9J35Y03p4ZvTY172YO3tlihtdHSS9VEO4e7l0tI1X3pXgYejrOktVwvtSU4B1tpLfVSWvywjtPMcn97e6ncnsBaB3om71ZS/TllYO48ivU9TOVRO2PyVZrP6Q21OjDF8wNht13W
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -35,21 +35,70 @@
    </properties>
   </object>
   <object id="48" template="../obj/treasure.tx" x="279.5" y="375"/>
-  <object id="50" template="../obj/enemy.tx" x="199.02" y="304.092">
+  <object id="50" template="../obj/enemy.tx" x="159.006" y="286.459">
    <properties>
-    <property name="enemy" value="Gargoyle"/>
+    <property name="enemy" value="Cleric"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="51" template="../obj/treasure.tx" x="216.171" y="122.719"/>
   <object id="52" template="../obj/gold.tx" x="152.5" y="374.5"/>
-  <object id="53" template="../obj/enemy.tx" x="215.505" y="142.945">
+  <object id="53" template="../obj/enemy.tx" x="214.827" y="151.762">
    <properties>
-    <property name="enemy" value="Monk"/>
+    <property name="enemy" value="Sun Giant"/>
    </properties>
   </object>
-  <object id="56" template="../obj/enemy.tx" x="233.5" y="304.25">
+  <object id="56" template="../obj/enemy.tx" x="280.296" y="316.458">
    <properties>
-    <property name="enemy" value="Gargoyle"/>
+    <property name="enemy" value="White Dwarf"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="57" template="../obj/booster.tx" x="127.641" y="236.154">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;UDS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;colors&quot;: [ &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;UDS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;UDS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="58" template="../obj/manashards.tx" x="303.975" y="224.625"/>
+  <object id="59" template="../obj/enemy.tx" x="238.878" y="221.935">
+   <properties>
+    <property name="enemy" value="Monk"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="60" template="../obj/enemy.tx" x="191.392" y="220.555">
+   <properties>
+    <property name="enemy" value="Cleric"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="61" template="../obj/enemy.tx" x="272.777" y="254.466">
+   <properties>
+    <property name="enemy" value="Monk"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
  </objectgroup>

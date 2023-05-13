@@ -8,5 +8,8 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Permanent.nam
 SVar:TrigSacrifice:DB$ Sacrifice | SacValid$ Permanent.namedScrap | Defined$ You | Amount$ 5 | RememberSacrificed$ True | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | ConditionDefined$ Remembered | ConditionPresent Card | ConditionCompare$ GE5 | TokenScript$ c_0_0_a_construct_total_artifacts | TokenOwner$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Permanent.namedScrap | PresentCompare$ GE10 | TriggerZones$ Command | Execute$ TrigSacrificeAll | TriggerDescription$ At the beginning you upkeep, if Slobad has ten or more Scrap tokens, Slobad conjures a Darksteel Colossus unto the battlefield 
+SVar:TrigSacrificeAll:DB$ SacrificeAll | ValidCards$ Permanent.namedScrap | Defined$ You | SubAbility$ DBConjure
+SVar:DBConjure:DB$MakeCard | Conjure$ True | Name$ Darksteel Colossus | Zone$ Battlefield 
 SVar:X:TriggerCount$DamageAmount
 Oracle:Artifact Creatures you control get +0/+2.\nWhenever Slobad is dealt damage, Slobad creates X scrap tokens, where X is the amount of damage dealt. \nAt the beginning of Slobads end step, if Solbad has five or more scrap tokens, Slobad creates a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."Then Slobad sacrifices five scrap tokens

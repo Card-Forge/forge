@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="68">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="69">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="50" height="50">
   <data encoding="base64" compression="zlib">
    eJzt2UEKgzAURVGnQpfQ9bj/JZUMikHUxuSF3Py+Aw5b/5WkSt3WZdk6Hrme5zmeq0Tt51r9uj6zuJp3to4rLWuLRLFXFN6v/agxsiOfXdUxgmL+L8LeaG1I3KHjdbUjdCi4g8UdLP/UQXiOvFM6G+WZ+EztXFE6qNzB4g6WKHvdHSwRGpIIHVHWVOIOFnewuGMcxXtOQndNh+r9bg9ROvL/t0vnojUckWd7wh0s7mBRdBCuRet9oefv8ZPvvrvHz3Z8ALNsVV4=
@@ -42,7 +42,7 @@
     <property name="enemy" value="Death Knight"/>
    </properties>
   </object>
-  <object id="54" template="../obj/enemy.tx" x="142.583" y="338.417">
+  <object id="54" template="../obj/enemy.tx" x="130.778" y="174.128">
    <properties>
     <property name="enemy" value="Lich"/>
    </properties>
@@ -82,6 +82,11 @@
   <object id="66" template="../obj/enemy.tx" x="276" y="208">
    <properties>
     <property name="enemy" value="Skeleton"/>
+   </properties>
+  </object>
+  <object id="68" template="../obj/enemy.tx" x="140.549" y="338.286">
+   <properties>
+    <property name="enemy" value="Grave Titan"/>
    </properties>
   </object>
  </objectgroup>
