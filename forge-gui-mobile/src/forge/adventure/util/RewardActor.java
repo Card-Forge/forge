@@ -266,8 +266,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                             File file = ImageKeys.getImageFile(imagePath);
                             try {
                                 if (file != null) {
-                                    Forge.getAssets().manager().load(file.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
-                                    Forge.getAssets().manager().finishLoadingAsset(file.getPath());
+                                    Texture check = Forge.getAssets().manager().get(file.getPath(), Texture.class, false);
+                                    if (check == null) {
+                                        Forge.getAssets().manager().load(file.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
+                                        Forge.getAssets().manager().finishLoadingAsset(file.getPath());
+                                    }
+                                    ImageCache.updateSynqCount(file, 1);
                                 }
                             } catch (Exception e) {}
                         }
