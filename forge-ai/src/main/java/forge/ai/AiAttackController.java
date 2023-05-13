@@ -119,10 +119,11 @@ public class AiAttackController {
     } // overloaded constructor to evaluate single specified attacker
 
     private void refreshCombatants(GameEntity defender) {
-        this.oppList = getOpponentCreatures(defendingOpponent);
         if (defender instanceof Card && ((Card) defender).isBattle()) {
-            this.oppList.clear();
+            // for a Battle, assume the protecting player is the defending opponent
             this.oppList.addAll(getOpponentCreatures(((Card) defender).getProtectingPlayer()));
+        } else {
+            this.oppList = getOpponentCreatures(defendingOpponent);
         }
         this.attackers = new ArrayList<>();
         for (Card c : myList) {
