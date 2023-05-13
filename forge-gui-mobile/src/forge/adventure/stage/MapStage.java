@@ -692,6 +692,9 @@ public class MapStage extends GameStage {
                                 dialog = new DialogActor(this, id, prop.get("dialog").toString(), prop.get("sprite").toString());
                             else {
                                 dialog = new DialogActor(this, id, prop.get("dialog").toString(), tiledObj.getTextureRegion());
+                            }
+                            if (prop.containsKey("hidden") && Boolean.parseBoolean(prop.get("hidden").toString()))
+                            {
                                 dialog.setVisible(false);
                             }
                             addMapActor(obj, dialog);
