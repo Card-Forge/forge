@@ -97,7 +97,6 @@ public class CostReveal extends CostPartWithList {
         } else {
             return amount <= getMaxAmountX(ability, payer, effect);
         }
-
     }
 
     @Override
