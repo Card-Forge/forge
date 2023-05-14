@@ -606,6 +606,8 @@ public class GameFormat implements Comparable<GameFormat> {
             return this.map.get("Vintage");
         }
 
+        public GameFormat getPremodern() { return this.map.get("Premodern"); }
+
         public GameFormat getFormat(String format) {
             return this.map.get(format);
         }
