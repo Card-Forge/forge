@@ -75,14 +75,14 @@ public class CombatUtil {
         final FCollection<GameEntity> defenders = new FCollection<>();
         for (final Player defender : playerWhoAttacks.getOpponents()) {
             defenders.add(defender);
-            final CardCollection planeswalkers = defender.getPlaneswalkersInPlay();
-            defenders.addAll(planeswalkers);
+            defenders.addAll(defender.getPlaneswalkersInPlay());
             for (Card battle : defender.getBattlesInPlay()) {
                 if (!playerWhoAttacks.equals(battle.getProtectingPlayer()) && battle.getType().hasSubtype("Siege")) {
                     defenders.add(battle);
                 }
             }
         }
+        // TODO add battles of allies
         defenders.addAll(playerWhoAttacks.getBattlesInPlay());
 
         return defenders;

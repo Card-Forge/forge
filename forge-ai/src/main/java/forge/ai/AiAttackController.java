@@ -121,7 +121,7 @@ public class AiAttackController {
     private void refreshCombatants(GameEntity defender) {
         if (defender instanceof Card && ((Card) defender).isBattle()) {
             // for a Battle, assume the protecting player is the defending opponent
-            this.oppList.addAll(getOpponentCreatures(((Card) defender).getProtectingPlayer()));
+            this.oppList = getOpponentCreatures(((Card) defender).getProtectingPlayer());
         } else {
             this.oppList = getOpponentCreatures(defendingOpponent);
         }
@@ -727,21 +727,10 @@ public class AiAttackController {
             return pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);
         }
 
-        List<Card> battleDefending = CardLists.filter(c.getDefendingBattles(),
-                Predicates.or(CardPredicates.isControlledByAnyOf(ai.getAllies()), CardPredicates.isController(ai)));
-        Card bestBattle = null;
+        List<Card> battleDefending = CardLists.filter(c.getDefendingBattles(), CardPredicates.isControlledByAnyOf(ai.getYourTeam()));
         if (!battleDefending.isEmpty()) {
             // Get the battle that is the closest to triggering
-            int defCounters = Integer.MAX_VALUE;
-            for (Card battle : battleDefending) {
-                if (battle.getCounters(CounterEnumType.DEFENSE) < defCounters) {
-                    defCounters = battle.getCounters(CounterEnumType.DEFENSE);
-                    bestBattle = battle;
-                }
-            }
-            if (bestBattle != null) {
-                return bestBattle;
-            }
+            return Collections.min(battleDefending, CardPredicates.compareByCounterType(CounterEnumType.DEFENSE));
         }
 
         return prefDefender;
