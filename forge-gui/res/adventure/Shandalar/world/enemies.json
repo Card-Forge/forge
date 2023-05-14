@@ -592,6 +592,53 @@
 	]
 },
 {
+	"name": "Archaeologist",
+	"nameOverride": "",
+	"sprite": "sprites/dungeon/archaeologist.atlas",
+	"deck": [
+		"decks/archeologist.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 21,
+	"life": 18,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 100,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"count": 3,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"Uncommon",
+				"Rare"
+			]
+		}
+	],
+	"colors": "UW",
+	"questTags": [
+		"Human",
+		"IdentityAzorius",
+		"Archaeologist",
+		"Scientist",
+		"Artificer",
+		null
+	]
+},
+{
 	"name": "Armored Knight",
 	"sprite": "sprites/knight.atlas",
 	"deck": [
@@ -1022,8 +1069,8 @@
 	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"scale":0.5,
 	"speed": 21,
+	"scale": 0.5,
 	"life": 20,
 	"rewards": [
 		{
@@ -5495,9 +5542,9 @@
 	],
 	"ai": "",
 	"spawnRate": 1,
-	"scale":0.75,
 	"difficulty": 0.1,
 	"speed": 35,
+	"scale": 0.75,
 	"life": 20,
 	"rewards": [
 		{
@@ -14249,6 +14296,54 @@
 		"Prey",
 		"IdentityGreen",
 		"BiomeGreen"
+	]
+},
+{
+	"name": "Pyromancer",
+	"nameOverride": "",
+	"sprite": "sprites/dungeon/pyromancer.atlas",
+	"deck": [
+		"decks/pyromancer.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 21,
+	"life": 18,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 100,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"count": 3,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"Uncommon",
+				"Rare"
+			]
+		}
+	],
+	"colors": "R",
+	"questTags": [
+		"Human",
+		"Fire",
+		"Pyromancer",
+		"Wizard",
+		"IdentityRed",
+		"Lightning",
+		"Magic"
 	]
 },
 {

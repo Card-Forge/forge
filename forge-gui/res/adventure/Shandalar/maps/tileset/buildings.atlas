@@ -140,13 +140,13 @@ GolemShop
   xy: 352, 784
   size: 16, 16
 SphinxShop
-  xy: 321, 784
+  xy: 320, 912
   size: 16, 16
 HydraShop
-  xy: 337, 784
+  xy: 336, 912
   size: 16, 16
 InsectSpiderShop
-  xy: 353, 784
+  xy: 352, 912
   size: 16, 16
 SliverShop
   xy: 368, 784
