@@ -602,6 +602,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 21,
+	"scale":0.75,
 	"life": 18,
 	"rewards": [
 		{
@@ -14309,6 +14310,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 21,
+	"scale":0.75,
 	"life": 18,
 	"rewards": [
 		{
