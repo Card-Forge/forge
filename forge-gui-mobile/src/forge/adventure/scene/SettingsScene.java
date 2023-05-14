@@ -244,13 +244,11 @@ public class SettingsScene extends UIScene {
                     mode = "Crop";
                 item[0] = mode;
                 //update preference for classic mode if needed
-                if (Preference.getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING).equals(mode)) {
-                    Preference.setPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING, mode);
-                    Preference.save();
-                    Forge.enableUIMask = Preference.getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
-                    ImageCache.clearGeneratedCards();
-                    ImageCache.disposeTextures();
-                }
+                Preference.setPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING, mode);
+                Preference.save();
+                Forge.enableUIMask = Preference.getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
+                ImageCache.clearGeneratedCards();
+                ImageCache.disposeTextures();
                 return null;
             });
             addLabel(Forge.getLocalizer().getMessage("lblBorderMaskOption"));

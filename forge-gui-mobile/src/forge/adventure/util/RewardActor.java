@@ -173,7 +173,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
         switch (reward.type) {
             case Card: {
-                if (ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false))) {
+                if (ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false)) && !Forge.enableUIMask.equals("Art")) {
                     int count = 0;
                     PaperCard card = ImageUtil.getPaperCardFromImageKey(reward.getCard().getImageKey(false));
                     File frontFace = ImageKeys.getImageFile(card.getCardImageKey());
@@ -240,7 +240,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     String imagePath = ImageUtil.getImageRelativePath(reward.getCard(), "", true, false);
                     File lookup = ImageKeys.hasSetLookup(imagePath) ? ImageKeys.setLookUpFile(imagePath, imagePath + "border") : null;
                     int count = 0;
-                    if (lookup != null) {
+                    if (lookup != null && !Forge.enableUIMask.equals("Art")) {
                         try {
                             Texture replacement = Forge.getAssets().manager().get(lookup.getPath(), Texture.class, false);
                             if (replacement == null) {
@@ -259,12 +259,27 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                             System.err.println("Failed to load image: " + lookup.getPath());
                             loaded = false;
                         }
-                    } else if (!ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false))) {
+                    } else {
                         //Cannot find an image file, set up a rendered card until (if) a file is downloaded.
+                        String imageRelativePath = ImageUtil.getImageRelativePath(reward.getCard(), "", true, false);
+                        if (imageRelativePath != null) {
+                            File file = ImageKeys.getImageFile(imagePath);
+                            try {
+                                if (file != null) {
+                                    Texture check = Forge.getAssets().manager().get(file.getPath(), Texture.class, false);
+                                    if (check == null) {
+                                        Forge.getAssets().manager().load(file.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
+                                        Forge.getAssets().manager().finishLoadingAsset(file.getPath());
+                                    }
+                                    ImageCache.updateSynqCount(file, 1);
+                                }
+                            } catch (Exception e) {}
+                        }
                         T = renderPlaceholder(new Graphics(), reward.getCard(), false); //Now we can render the card.
                         setCardImage(T);
                         loaded = false;
-                        fetcher.fetchImage(reward.getCard().getImageKey(false), this);
+                        if (!ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false)))
+                            fetcher.fetchImage(reward.getCard().getImageKey(false), this);
                         if (reward.getCard().hasBackFace()) {
                             if (!ImageCache.imageKeyFileExists(reward.getCard().getImageKey(true))) {
                                 fetcher.fetchImage(reward.getCard().getImageKey(true), null);
