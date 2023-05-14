@@ -967,7 +967,7 @@ public class Combat {
     public boolean isPlayerAttacked(Player who) {
         for (GameEntity defender : attackedByBands.keySet()) {
             Card defenderAsCard = defender instanceof Card ? (Card)defender : null;
-            if ((null != defenderAsCard && defenderAsCard.getController() != who) ||
+            if ((null != defenderAsCard && (defenderAsCard.getController() != who && defenderAsCard.getProtectingPlayer() != who)) ||
                 (null == defenderAsCard && defender != who)) {
                 continue; // defender is not related to player 'who'
             }
