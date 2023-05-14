@@ -1,26 +1,20 @@
 scarecrow.png
-size: 44,420
+size: 64,16
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
-  xy: 9, 149
-  size: 24, 23     
+  xy: 2, 0
+  size: 12, 9  
 Idle 
   xy: 0, 0
-  size: 44, 70   
+  size: 16, 16   
 Idle 
-  xy: 0, 70
-  size: 44, 70
+  xy: 16, 0
+  size: 16, 16   
 Idle 
-  xy: 0, 140
-  size: 44, 70
+  xy: 32, 0
+  size: 16, 16   
 Idle 
-  xy: 0, 210
-  size: 44, 70
-Idle 
-  xy: 0, 280
-  size: 44, 70      
-Idle 
-  xy: 0, 350
-  size: 44, 70 
+  xy: 48, 0
+  size: 16, 16  

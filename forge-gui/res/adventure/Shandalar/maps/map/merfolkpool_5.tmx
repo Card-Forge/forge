@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="57">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -20,7 +20,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy9lV0OAUEMxysIJvHKA66AY+xldh/E2kt55AG3EFfYE3j1YJrdRlU7GRa/pJk1H/233c4CAMiHAJkDWPuxgMomLYCxYlNvM29EUY/nHsCo3oPrBdigjsXBnz162wvDuZPiF3/v2LrlP3XVmLnXtcJ4Jj/yzHaga9za1Yi1IPJArnxfouhr8HU6Q7qcVMScvG6J4tqP2xd6pwTWrSnkQ8uZ2CixlM2lTV3Si6nBp5SG9j/geWn3B+G93BTyxfPNI2L4FqjL74u8S7/UtaB4qP9lj899jIvals6ek2fRn9R9t4+pPpfO83woH2tN5qXdWxnfqvt4tr5zoW8lx+otbZ7rEtSnoW+d9GXVO/TfEQv55nXF93UH+kk9DQ==
+   eJy9VU0OAVEMrr8Mk9iS+NlihWPMESxdgIUYcylLFriFuIIT2Fp4zUyjU+0LGXxJ80xf3/e11Tcz7wDETYBlCLB2awKpdUsAbcV6zvrOCEm2ngOAVhaD+wnYQB0LB3f26GwvDH0nhRefd2zf4l+E6Yp1litP/yxIOUalfD2cZxnmubYNXeOe8WIvCLESNwte4yJWjw98n87cK69xC5EzxZaVWB9u9ffitH4MXE+HbFawb0VBHFrNhI2Sy7W4tKlLer65Loqrof0P8LrkXSDwWS4K4uL1xm/k8C2gbsSe5V36pa4FyofmX8742OU4yWwa2j55Fvmk7qdzTP25VPN+Xz3WnqxLu7cyv1Xt+TsCHb53JYc1W5qf6xJoTn3vOsll9Vv7dnwK4uZ9xf/rAeAwPsc=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -30,14 +30,72 @@
    </properties>
   </object>
   <object id="48" template="../obj/treasure.tx" x="249.063" y="45.7116"/>
-  <object id="54" template="../obj/enemy.tx" x="247.332" y="79.8336">
+  <object id="54" template="../obj/enemy.tx" x="53.3652" y="123.239">
    <properties>
-    <property name="enemy" value="Merfolk warrior"/>
+    <property name="enemy" value="Pirate"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="67,64,65,66"/>
    </properties>
   </object>
-  <object id="56" template="../obj/enemy.tx" x="369.333" y="45.6667">
+  <object id="56" template="../obj/enemy.tx" x="418.842" y="127.051">
+   <properties>
+    <property name="enemy" value="Sandwurm"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="70,69,68"/>
+   </properties>
+  </object>
+  <object id="57" template="../obj/booster.tx" x="38.118" y="48.2911">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;XLN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;XLN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;XLN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="58" template="../obj/manashards.tx" x="417.913" y="49.6475"/>
+  <object id="59" template="../obj/enemy.tx" x="18.45" y="77.4539">
+   <properties>
+    <property name="enemy" value="Pirate"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="60" template="../obj/enemy.tx" x="97.8001" y="77.4539">
+   <properties>
+    <property name="enemy" value="Pirate"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="64" template="../obj/waypoint.tx" x="78.8103" y="125.606"/>
+  <object id="65" template="../obj/waypoint.tx" x="93.7308" y="181.898"/>
+  <object id="66" template="../obj/waypoint.tx" x="41.509" y="183.254"/>
+  <object id="67" template="../obj/waypoint.tx" x="31.3359" y="125.606"/>
+  <object id="68" template="../obj/waypoint.tx" x="434.19" y="118.146"/>
+  <object id="69" template="../obj/waypoint.tx" x="374.508" y="90.3398"/>
+  <object id="70" template="../obj/waypoint.tx" x="456.571" y="84.236"/>
+  <object id="71" template="../obj/enemy.tx" x="225.981" y="121.537">
    <properties>
     <property name="enemy" value="Merfolk warrior"/>
+    <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
  </objectgroup>
