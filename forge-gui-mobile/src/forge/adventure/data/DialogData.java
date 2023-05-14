@@ -44,6 +44,7 @@ public class DialogData implements Serializable {
     public String voiceFile;
 
     static public class ActionData implements Serializable {
+        public static final long serialVersionUID = 2848523275822677205L;
         static public class QuestFlag implements Serializable{
             public String key;
             public int val;
