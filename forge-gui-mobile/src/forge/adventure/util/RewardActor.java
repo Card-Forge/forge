@@ -616,7 +616,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     public void removeTooltip() {
         if (tooltip != null) {
-            tooltip.getActor().remove();
+            if (tooltip.getActor() != null)
+                tooltip.getActor().remove();
         }
     }
 
@@ -934,8 +935,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
 
         public void hide() {
-            tooltip_actor.remove();
-            switchButton.remove();
+            if (tooltip_actor != null)
+                tooltip_actor.remove();
+            if (switchButton != null)
+                switchButton.remove();
             shown = false;
         }
     }
