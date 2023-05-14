@@ -2646,14 +2646,6 @@
 										"count": 15
 									}
 								]
-							},
-							{
-								"grantRewards": [
-									{
-										"type": "shards",
-										"count": 15
-									}
-								]
 							}
 						],
 						"name": "(Complete Quest)"
