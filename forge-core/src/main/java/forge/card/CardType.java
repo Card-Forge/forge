@@ -45,7 +45,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     private static final long serialVersionUID = 4629853583167022151L;
 
     public static final CardTypeView EMPTY = new CardType(false);
-    private static final Set<String> multiWordTypes = ImmutableSet.of("Serra's Realm", "Bolas's Meditation Realm", "Dungeon Master");
+    private static final Set<String> multiWordTypes = ImmutableSet.of("Serra's Realm", "Bolas's Meditation Realm", "Dungeon Master","The Library");
 
     public enum CoreType {
         Artifact(true, "artifacts"),
