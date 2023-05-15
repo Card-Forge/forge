@@ -139,17 +139,25 @@ public class PlayAi extends SpellAbilityAi {
     @Override
     public Card chooseSingleCard(final Player ai, final SpellAbility sa, Iterable<Card> options,
             final boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
+        final CardStateName state;
+        if (sa.hasParam("CastTransformed")) {
+            state = CardStateName.Transformed;
+            options.forEach(c -> c.changeToState(CardStateName.Transformed));
+        } else {
+            state = CardStateName.Original; 
+        }
+
         List<Card> tgtCards = CardLists.filter(options, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 // TODO needs to be aligned for MDFC along with getAbilityToPlay so the knowledge
                 // of which spell was the reason for the choice can be used there
-                for (SpellAbility s : c.getBasicSpells(c.getState(CardStateName.Original))) {
+                for (SpellAbility s : AbilityUtils.getBasicSpellsFromPlayEffect(c, ai, state)) {
+                    if (!(s instanceof Spell)) {
+                        continue;
+                    }
                     Spell spell = (Spell) s;
                     s.setActivatingPlayer(ai, true);
-                    // timing restrictions still apply
-                    if (!s.getRestrictions().checkTimingRestrictions(c, s))
-                        continue;
                     if (params != null && params.containsKey("CMCLimit")) {
                         Integer cmcLimit = (Integer) params.get("CMCLimit");
                         if (spell.getPayCosts().getTotalMana().getCMC() > cmcLimit)
@@ -188,6 +196,11 @@ public class PlayAi extends SpellAbilityAi {
                 return false;
             }
         });
+
+        if (sa.hasParam("CastTransformed")) {
+            options.forEach(c -> c.changeToState(CardStateName.Original));
+        }
+
         final Card best = ComputerUtilCard.getBestAI(tgtCards);
         if (sa.usesTargeting() && !sa.isTargetNumberValid()) {
             sa.getTargets().add(best);

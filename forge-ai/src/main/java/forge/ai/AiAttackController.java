@@ -119,7 +119,11 @@ public class AiAttackController {
     } // overloaded constructor to evaluate single specified attacker
 
     private void refreshCombatants(GameEntity defender) {
-        this.oppList = getOpponentCreatures(defendingOpponent);
+        if (defender instanceof Card && ((Card) defender).isBattle()) {
+            this.oppList = getOpponentCreatures(((Card) defender).getProtectingPlayer());
+        } else {
+            this.oppList = getOpponentCreatures(defendingOpponent);
+        }
         this.attackers = new ArrayList<>();
         for (Card c : myList) {
             if (canAttackWrapper(c, defender)) {
@@ -722,9 +726,14 @@ public class AiAttackController {
             return pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);
         }
 
-        List<Card> battleDefending = c.getDefendingBattles();
-        if (!battleDefending.isEmpty()) {
-            // TODO filter for team ones
+        // Get the preferred battle (prefer own battles, then ally battles)
+        final CardCollection defBattles = c.getDefendingBattles();
+        List<Card> ownBattleDefending = CardLists.filter(defBattles, CardPredicates.isController(ai));
+        List<Card> allyBattleDefending = CardLists.filter(defBattles, CardPredicates.isControlledByAnyOf(ai.getAllies()));
+        List<Card> prefBattleList = ownBattleDefending.isEmpty() ? allyBattleDefending : ownBattleDefending;
+        if (!prefBattleList.isEmpty()) {
+            // TODO try to be less predictable here, should really check if something would make the back uncastable
+            return Collections.min(prefBattleList, CardPredicates.compareByCounterType(CounterEnumType.DEFENSE));
         }
 
         return prefDefender;
@@ -756,7 +765,17 @@ public class AiAttackController {
         // decided to attack another defender so related lists need to be updated
         // (though usually rather try to avoid this situation for performance reasons)
         if (defender != defendingOpponent) {
-            defendingOpponent = defender instanceof Player ? (Player) defender : ((Card)defender).getController();
+            if (defender instanceof Player) {
+                defendingOpponent = (Player) defender;
+            } else if (defender instanceof Card) {
+                Card defCard = (Card) defender;
+                if (defCard.isBattle()) {
+                    defendingOpponent = defCard.getProtectingPlayer();
+                } else {
+                    // TODO: assume Planeswalker for now, may need to be updated later if more unique mechanics appear like Battle
+                    defendingOpponent = defCard.getController();
+                }
+            }
             refreshCombatants(defender);
         }
         if (this.attackers.isEmpty()) {

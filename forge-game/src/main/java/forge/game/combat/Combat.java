@@ -17,50 +17,28 @@
  */
 package forge.game.combat;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
-import com.google.common.collect.Table;
-
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameEntityCounterTable;
-import forge.game.GameLogEntryType;
-import forge.game.GameObjectMap;
+import com.google.common.collect.*;
+import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageMap;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.trigger.TriggerType;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <p>
@@ -652,9 +630,7 @@ public class Combat {
         // iterate all attackers and remove illegal declarations
         CardCollection missingCombatants = new CardCollection();
         for (Entry<GameEntity, AttackingBand> ee : attackedByBands.entries()) {
-            CardCollectionView atk = ee.getValue().getAttackers();
-            for (int i = atk.size() - 1; i >= 0; i--) { // might remove items from collection, so no iterators
-                Card c = atk.get(i);
+            for (Card c : ee.getValue().getAttackers()) {
                 if (!c.isInPlay() || !c.isCreature()) {
                     missingCombatants.add(c);
                 }
@@ -967,7 +943,7 @@ public class Combat {
     public boolean isPlayerAttacked(Player who) {
         for (GameEntity defender : attackedByBands.keySet()) {
             Card defenderAsCard = defender instanceof Card ? (Card)defender : null;
-            if ((null != defenderAsCard && defenderAsCard.getController() != who) ||
+            if ((null != defenderAsCard && (defenderAsCard.getController() != who && defenderAsCard.getProtectingPlayer() != who)) ||
                 (null == defenderAsCard && defender != who)) {
                 continue; // defender is not related to player 'who'
             }

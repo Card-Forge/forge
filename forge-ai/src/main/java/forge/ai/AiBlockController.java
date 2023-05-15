@@ -165,10 +165,12 @@ public class AiBlockController {
         }
 
         // TODO Add creatures attacking Planeswalkers in order of which we want to protect
-        // defend planeswalkers with more loyalty before planeswalkers with less loyalty
-        // if planeswalker will be too difficult to defend don't even bother
+        // defend planeswalkers with more loyalty before planeswalkers with less loyalty,
+        // defend battles with fewer defense counters before battles with more defense counters,
+        // if planeswalker/battle will be too difficult to defend don't even bother
         for (GameEntity defender : defenders) {
-            if (defender instanceof Card && ((Card) defender).getController().equals(ai)) {
+            if ((defender instanceof Card && ((Card) defender).getController().equals(ai))
+                    || (defender instanceof Card && ((Card) defender).isBattle() && ((Card) defender).getProtectingPlayer().equals(ai))) {
                 final CardCollection attackers = combat.getAttackersOf(defender);
                 // Begin with the attackers that pose the biggest threat
                 CardLists.sortByPowerDesc(attackers);
