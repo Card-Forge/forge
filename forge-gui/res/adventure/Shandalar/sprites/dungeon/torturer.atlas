@@ -1,20 +1,17 @@
 torturer.png
-size: 26,200
+size: 78,144
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
-  xy: 0, 51
-  size: 24, 19   
+  xy: 3, 6
+  size: 20, 20     
 Idle 
-  xy: 00, 00
-  size: 26, 50   
+  xy: 0, 0
+  size: 26, 36 
 Idle 
-  xy: 00, 50
-  size: 26, 50   
+  xy: 26, 0
+  size: 26, 36 
 Idle 
-  xy: 00, 100
-  size: 26, 50  
-Idle 
-  xy: 00, 150
-  size: 26, 50
+  xy: 52, 0
+  size: 26, 36 

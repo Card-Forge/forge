@@ -35,6 +35,7 @@
 	"Shroom2"
 ],
 "enemies": [
+	"Bat",
 	"Beholder",
 	"Big Zombie",
 	"Black Sliver",

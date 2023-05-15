@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="56">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="67">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -30,21 +30,73 @@
    </properties>
   </object>
   <object id="48" template="../obj/treasure.tx" x="240.729" y="64.3787"/>
-  <object id="50" template="../obj/enemy.tx" x="215.123" y="212.273">
+  <object id="50" template="../obj/enemy.tx" x="183.029" y="187.552">
    <properties>
-    <property name="enemy" value="Merfolk"/>
+    <property name="enemy" value="Water Elemental"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="64,62,66,63,65,63,66,62"/>
    </properties>
   </object>
   <object id="53" template="../obj/enemy.tx" x="249.96" y="79.2584">
    <properties>
-    <property name="enemy" value="Merfolk warrior"/>
+    <property name="enemy" value="Crab"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="54" template="../obj/enemy.tx" x="129.5" y="90.917">
+  <object id="54" template="../obj/enemy.tx" x="240.961" y="136.022">
    <properties>
     <property name="enemy" value="Merfolk Avatar"/>
+    <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="55" template="../obj/gold.tx" x="257" y="62.5"/>
+  <object id="55" template="../obj/gold.tx" x="43.6185" y="157.915"/>
+  <object id="56" template="../obj/enemy.tx" x="309.47" y="103.028">
+   <properties>
+    <property name="enemy" value="Water Elemental"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="63,66,62,64,62,66,63,65"/>
+   </properties>
+  </object>
+  <object id="57" template="../obj/enemy.tx" x="95.2211" y="109.967">
+   <properties>
+    <property name="enemy" value="Water Elemental"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="62,66,63,65,63,66,62,64"/>
+   </properties>
+  </object>
+  <object id="58" template="../obj/manashards.tx" x="345.034" y="154.638"/>
+  <object id="59" template="../obj/booster.tx" x="270.003" y="64.862">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ZEN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ZEN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ZEN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="62" template="../obj/waypoint.tx" x="129.484" y="76.1382"/>
+  <object id="63" template="../obj/waypoint.tx" x="283.014" y="176.323"/>
+  <object id="64" template="../obj/waypoint.tx" x="79.1742" y="210.152"/>
+  <object id="65" template="../obj/waypoint.tx" x="329.854" y="84.8123"/>
+  <object id="66" template="../obj/waypoint.tx" x="219.26" y="131.218"/>
  </objectgroup>
 </map>

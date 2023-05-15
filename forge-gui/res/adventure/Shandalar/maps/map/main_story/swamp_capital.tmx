@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="94">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="94">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/buildings-nocollide.tsx"/>
- <layer id="1" name="Background" width="40" height="40">
+ <layer id="1" name="Background" width="40" height="40" opacity="0.9">
   <data encoding="base64" compression="zlib">
    eJztw7ENAAAMAiB3l/5/rX80kNBLqqqqqqqq+ugA4iKowQ==
   </data>
@@ -56,30 +56,26 @@
     <property name="arena">{
 
     &quot;enemyPool&quot;:[
-	&quot;Beholder&quot;,
-	&quot;Big Zombie&quot;,
-	&quot;Black Wiz1&quot;,
+	&quot;Black Wiz1&quot;
 	&quot;Black Wiz2&quot;,
 	&quot;Black Wiz3&quot;,
 	&quot;Challenger 20&quot;,
 	&quot;Challenger 21&quot;,
 	&quot;Challenger 22&quot;,
+	&quot;Curselord&quot;,
 	&quot;Dark Knight&quot;,
+	&quot;Dawnhart Witch&quot;,
 	&quot;Death Knight&quot;,
-	&quot;Demon&quot;,
 	&quot;Dross Gladiator&quot;,
-	&quot;Ghoul&quot;,
-	&quot;Ghost&quot;,
 	&quot;Harpy&quot;,
 	&quot;Harpy 2&quot;,
 	&quot;High Vampire&quot;,
 	&quot;Lich&quot;,
-	&quot;Rakdos Devil&quot;,
-	&quot;Skeleton&quot;,
-	&quot;Skeleton Soldier&quot;,
+	&quot;Necromancer&quot;,
+	&quot;Rat Ninja&quot;,
 	&quot;Vampire&quot;,
-	&quot;Zombie&quot;,
-	&quot;Zombie Lord&quot;
+	&quot;Vampire Lord&quot;
+	&quot;Witch&quot;,
 	],
     &quot;rounds&quot;:3,
     &quot;entryFee&quot;:100,
@@ -129,7 +125,7 @@
   </object>
   <object id="65" template="../../obj/shop.tx" x="376" y="322">
    <properties>
-    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
@@ -138,7 +134,7 @@
   </object>
   <object id="66" template="../../obj/shop.tx" x="424" y="274">
    <properties>
-    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
@@ -147,7 +143,7 @@
   </object>
   <object id="67" template="../../obj/shop.tx" x="424" y="322">
    <properties>
-    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signXOffset" type="float" value="18"/>
@@ -157,7 +153,7 @@
   </object>
   <object id="68" template="../../obj/shop.tx" x="472" y="274">
    <properties>
-    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
@@ -166,7 +162,7 @@
   </object>
   <object id="69" template="../../obj/shop.tx" x="472" y="322">
    <properties>
-    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
@@ -175,7 +171,7 @@
   </object>
   <object id="70" template="../../obj/shop.tx" x="520" y="274">
    <properties>
-    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
@@ -184,7 +180,7 @@
   </object>
   <object id="71" template="../../obj/shop.tx" x="520" y="322">
    <properties>
-    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
@@ -193,21 +189,21 @@
   </object>
   <object id="77" template="../../obj/shop.tx" x="376" y="274">
    <properties>
-    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
    </properties>
   </object>
-  <object id="81" template="../../obj/quest.tx" class="quest" x="248" y="306">
+  <object id="81" template="../../obj/quest.tx" type="quest" x="248" y="306">
    <properties>
     <property name="questtype" value="swamp_capital"/>
    </properties>
   </object>
   <object id="83" template="../../obj/shop.tx" x="519" y="194">
    <properties>
-    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
@@ -216,26 +212,26 @@
   </object>
   <object id="84" template="../../obj/shop.tx" x="456" y="194">
    <properties>
-    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon"/>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
    </properties>
   </object>
-  <object id="90" template="../../obj/RotatingShop.tx" class="RotatingShop" x="200" y="402">
+  <object id="90" template="../../obj/RotatingShop.tx" type="RotatingShop" x="200" y="402">
    <properties>
     <property name="rotation" value="Black1,Black2,Black3,Black4,Black5,Black6"/>
     <property name="signYOffset" type="float" value="-8"/>
    </properties>
   </object>
-  <object id="91" template="../../obj/RotatingShop.tx" class="RotatingShop" x="153" y="402">
+  <object id="91" template="../../obj/RotatingShop.tx" type="RotatingShop" x="153" y="402">
    <properties>
     <property name="rotation" value="Black1,Black2,Black3,Black4,Black5,Black6"/>
     <property name="signYOffset" type="float" value="-8"/>
    </properties>
   </object>
-  <object id="92" template="../../obj/RotatingShop.tx" class="RotatingShop" x="106" y="402">
+  <object id="92" template="../../obj/RotatingShop.tx" type="RotatingShop" x="106" y="402">
    <properties>
     <property name="rotation" value="Black1,Black2,Black3,Black4,Black5,Black6"/>
     <property name="signYOffset" type="float" value="-8"/>

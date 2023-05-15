@@ -139,6 +139,15 @@ AngelShop
 GolemShop
   xy: 352, 784
   size: 16, 16
+SphinxShop
+  xy: 320, 912
+  size: 16, 16
+HydraShop
+  xy: 336, 912
+  size: 16, 16
+InsectSpiderShop
+  xy: 352, 912
+  size: 16, 16
 SliverShop
   xy: 368, 784
   size: 16, 16
@@ -598,3 +607,6 @@ hall_of_flame
 hall_of_fear
   xy: 320, 464
   size: 32, 32     
+ruinedcity
+  xy: 321, 96
+  size: 45, 32
