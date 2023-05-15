@@ -414,6 +414,7 @@ public enum CounterEnumType {
     REACH("Reach"),
     TRAMPLE("Trample"),
     VIGILANCE("Vigilance")
+    SHADOW("Shadow")
 //*/
     ;
 
