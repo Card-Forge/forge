@@ -139,17 +139,22 @@ public class PlayAi extends SpellAbilityAi {
     @Override
     public Card chooseSingleCard(final Player ai, final SpellAbility sa, Iterable<Card> options,
             final boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
+        final CardStateName state;
+        if (sa.hasParam("CastTransformed")) {
+            state = CardStateName.Transformed;
+            options.forEach(c -> c.changeToState(CardStateName.Transformed));
+        } else {
+            state = CardStateName.Original; 
+        }
+
         List<Card> tgtCards = CardLists.filter(options, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 // TODO needs to be aligned for MDFC along with getAbilityToPlay so the knowledge
                 // of which spell was the reason for the choice can be used there
-                for (SpellAbility s : c.getBasicSpells(c.getState(CardStateName.Original))) {
+                for (SpellAbility s : AbilityUtils.getBasicSpellsFromPlayEffect(c, ai, state)) {
                     Spell spell = (Spell) s;
                     s.setActivatingPlayer(ai, true);
-                    // timing restrictions still apply
-                    if (!s.getRestrictions().checkTimingRestrictions(c, s))
-                        continue;
                     if (params != null && params.containsKey("CMCLimit")) {
                         Integer cmcLimit = (Integer) params.get("CMCLimit");
                         if (spell.getPayCosts().getTotalMana().getCMC() > cmcLimit)
@@ -185,15 +190,14 @@ public class PlayAi extends SpellAbilityAi {
                         return true;
                     }
                 }
-                // FIXME: This is an ugly hack, ideally the TODO above needs to be resolved regarding MDFC so the AI knows it's casting the other face of the card
-                // (useful not only for battles, but for other DFC stuff as well)
-                if (c.isBattle() && sa.hasParam("CastTransformed") && sa.hasParam("WithoutManaCost")) {
-                    return true; // TODO: This needs to actually test playability of the transformed side (especially if it's a Sorcery, but permanents may need a test as well)
-                                 // However, I don't see a way to grab the spell/SA-like object from the transformed side so that canPlayFromEffectAI can evaluate it.
-                }
                 return false;
             }
         });
+
+        if (sa.hasParam("CastTransformed")) {
+            options.forEach(c -> c.changeToState(CardStateName.Original));
+        }
+
         final Card best = ComputerUtilCard.getBestAI(tgtCards);
         if (sa.usesTargeting() && !sa.isTargetNumberValid()) {
             sa.getTargets().add(best);
