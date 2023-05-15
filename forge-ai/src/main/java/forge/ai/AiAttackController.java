@@ -729,6 +729,7 @@ public class AiAttackController {
         List<Card> battleDefending = CardLists.filter(c.getDefendingBattles(), CardPredicates.isControlledByAnyOf(ai.getYourTeam()));
         if (!battleDefending.isEmpty()) {
             // Get the battle that is the closest to triggering
+            // TODO try to be less predictable here, should really check if something would make the back uncastable
             return Collections.min(battleDefending, CardPredicates.compareByCounterType(CounterEnumType.DEFENSE));
         }
 
