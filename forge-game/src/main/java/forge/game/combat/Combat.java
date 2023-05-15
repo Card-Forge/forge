@@ -652,8 +652,7 @@ public class Combat {
         // iterate all attackers and remove illegal declarations
         CardCollection missingCombatants = new CardCollection();
         for (Entry<GameEntity, AttackingBand> ee : attackedByBands.entries()) {
-            CardCollectionView atk = ee.getValue().getAttackers();
-            for (Card c : atk) {
+            for (Card c : ee.getValue().getAttackers()) {
                 if (!c.isInPlay() || !c.isCreature()) {
                     missingCombatants.add(c);
                 }
