@@ -36,6 +36,7 @@
  <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="2.65789" offsety="6.89474">
   <object id="114" template="../obj/entry_up.tx" x="254.465" y="426.886">
    <properties>
+    <property name="direction" value="down"/>
     <property name="teleport" value="maps/map/tibalt.tmx"/>
    </properties>
   </object>

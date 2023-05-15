@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="159">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="161">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBicoF2DgaFDY+DsXwy0e8kA2o8NdALd04Xkpvua9LV/KdDuZYMsTJABrzb1zPoDpZ14IPQCHoScMw+GchT5OCD+yE49txACEVjsMqVz2hgFgxPcBaaDe5qUlRWcOtjTPDpwwqLmJ9DeX1Swn1ywH1heHQDiVC3K7dfWhmBSwG2g3XcGsMys0kFgcgGXDirGBzaxkW8PNcECItLrKGBgAAAKVx0W
+   eJxjYBicoF2DgaFDY+DsXwy0e8kA2o8NdALd04Xkpvua9LV/KdDuZYMsTGgF/kBpJx4IvYAHv3pk+Tgg/shOC1dhBxFY7DKlc9oYBYMT3AWmg3ualJUVnDoMDM4E0j8IOGFR8xNo7y8q2E8u2A8srw4AcaoW5fZra0MwKeA20O47A1hmVukgMLmASwcV4wOb2Mi3h5qAUHk9CiAAAF3+HI8=
   </data>
  </layer>
  <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
@@ -67,22 +67,6 @@
     <property name="enemy" value="Kobold"/>
    </properties>
   </object>
-  <object id="140" template="../obj/treasure.tx" x="347.175" y="80.7719">
-   <properties>
-    <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
-},{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 4,
-  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
-  &quot;addMaxCount&quot;: 2
-}]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-   </properties>
-  </object>
   <object id="141" template="../obj/treasure.tx" x="272.842" y="82.1053">
    <properties>
     <property name="reward">[{
@@ -121,5 +105,31 @@
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
+  <object id="159" template="../obj/booster.tx" x="335.359" y="82.7761">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;SHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;SHM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="160" template="../obj/manashards.tx" x="215.177" y="53.3151"/>
  </objectgroup>
 </map>

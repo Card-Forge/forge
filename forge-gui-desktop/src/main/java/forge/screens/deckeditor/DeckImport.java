@@ -318,7 +318,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         closedOptsPanel.add(new JSeparator(JSeparator.HORIZONTAL), "w 100%, hidemode 2");
 
         // == B. (Actual) Options Panel
-        JPanel optionsPanel = new JPanel(new MigLayout("insets 10, gap 5, left, h 130!"));
+        JPanel optionsPanel = new JPanel(new MigLayout("insets 10, gap 5, left, h 150!"));
         final TitledBorder border = new TitledBorder(BorderFactory.createEtchedBorder(),
                 String.format("\u25BC %s", Localizer.getInstance().getMessage("lblHideOptions")));
         border.setTitleColor(foreColor.getColor());
@@ -346,7 +346,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         // OPTIONS PANEL COMPONENTS
         // ------------------------
 
-        String optPanelsConstrains = "w 130!, h 120!, left, insets 0";
+        String optPanelsConstrains = "w 130!, h 135!, left, insets 0";
 
         // B1. Date filter
         this.monthDropdown.setEnabled(false);
@@ -387,7 +387,6 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         optionsPanel.add(dateFilterPanel, "cell 0 0, w 90%, left");
 
         // B2. Card Art Preference Filter
-
         final String latestOpt = Localizer.getInstance().getMessage("latestArtOpt");
         final String originalOpt = Localizer.getInstance().getMessage("originalArtOpt");
         final String [] choices = {latestOpt, originalOpt};
@@ -395,6 +394,13 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         final String selectedItem = StaticData.instance().cardArtPreferenceIsLatest() ? latestOpt : originalOpt;
         this.cardArtPrefsComboBox.setSelectedItem(selectedItem);
         this.cardArtPrefsComboBox.setToolTipText(Localizer.getInstance().getMessage("nlPreferredArt"));
+
+        FSkin.SkinnedLabel formatArtInfoLabel = new FSkin.SkinnedLabel(
+                Localizer.getInstance().getMessage("nlCardArtPreferenceWithFormat")
+        );
+        formatArtInfoLabel.setFont(FSkin.getItalicFont());
+        formatArtInfoLabel.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+
         // Info Label
         FSkin.SkinnedLabel artPrefInfoLabel = new FSkin.SkinnedLabel(
                 Localizer.getInstance().getMessage("nlPreferredArt"));
@@ -410,11 +416,21 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
 
         JPanel cardArtPanel = new JPanel(new MigLayout(optPanelsConstrains));
         cardArtPanel.setOpaque(false);
-        cardArtPanel.add(this.cardArtPrefsLabel,    "cell 0 0, w 25%, left, split 2");
-        cardArtPanel.add(this.cardArtPrefsComboBox, "cell 0 0, w 10%, left, split 2");
-        cardArtPanel.add(this.cardArtPrefHasFilterCheckBox,    "cell 0 1, w 15%, left, gaptop 5");
-        cardArtPanel.add(this.smartCardArtCheckBox,    "cell 0 2, w 15%, left, gaptop 5");
-        cardArtPanel.add(artPrefInfoLabel, "cell 0 3, w 90%, left");
+        if (this.controller.hasNoDefaultGameFormat()) {
+            cardArtPanel.add(this.cardArtPrefsLabel, "cell 0 0, w 25%, left, split 2");
+            cardArtPanel.add(this.cardArtPrefsComboBox, "cell 0 0, w 10%, left, split 2");
+            cardArtPanel.add(formatArtInfoLabel, "cell 0 1, w 85%, center");
+            cardArtPanel.add(this.cardArtPrefHasFilterCheckBox, "cell 0 2, w 15%, left, gaptop 5");
+            cardArtPanel.add(this.smartCardArtCheckBox, "cell 0 3, w 15%, left, gaptop 5");
+            cardArtPanel.add(artPrefInfoLabel, "cell 0 4, w 90%, left");
+        } else {
+            cardArtPanel.add(this.cardArtPrefsLabel, "cell 0 0, w 25%, left, split 2");
+            cardArtPanel.add(this.cardArtPrefsComboBox, "cell 0 0, w 10%, left, split 2");
+            cardArtPanel.add(this.cardArtPrefHasFilterCheckBox, "cell 0 1, w 15%, left, gaptop 5");
+            cardArtPanel.add(this.smartCardArtCheckBox, "cell 0 2, w 15%, left, gaptop 5");
+            cardArtPanel.add(artPrefInfoLabel, "cell 0 3, w 90%, left");
+        }
+
 
         // Action Listeners
         // ----------------

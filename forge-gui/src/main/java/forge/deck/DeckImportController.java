@@ -138,6 +138,13 @@ public class DeckImportController {
             for (final GameFormat f : sanctionedFormats)
                 formatsDropdown.addItem(f);
 
+            // Casual Formats
+            // Add Block Formats
+            formatsDropdown.addItem(SEPARATOR);
+            final Iterable<GameFormat> casualFormats = FModel.getFormats().getCasualList();
+            for (final GameFormat f : casualFormats)
+                formatsDropdown.addItem(f);
+
             if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_ARCHIVED_FORMATS)) {
                 // Add Block Formats
                 formatsDropdown.addItem(SEPARATOR);

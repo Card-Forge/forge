@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="69">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="108">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJzNlWEKgzAMhft32J3A7joewp1l7F7V3c0GHYRH0tRCqw9CwPr6JRHb4J0LFXFG76dzc4ro90zS9suxclzJt6QYD88/az1Y3NJZBOAh1xK982IerMHqv5ZbI2kO1pxbsDVuK/4V/XI2cnuoNzf3fXvoTtyWbPxXRi+vWfWWPsd1PK9IseJumB5lZ3SOqzEoeE3fQfZg3Rif5FsVblT8keWfUKvmwz14kDbVtimh
-  </data>
- </layer>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJyrZWFgqB3Fo3gUj+JRPIpH8YjAADIiAQ4=
@@ -36,16 +31,108 @@
   </object>
   <object id="48" template="../obj/treasure.tx" x="176.334" y="32.5833"/>
   <object id="63" template="../obj/gold.tx" x="192.333" y="29.167"/>
-  <object id="65" template="../obj/enemy.tx" x="207.25" y="229.833">
+  <object id="65" template="../obj/enemy.tx" x="185.415" y="-58.8264">
    <properties>
     <property name="enemy" value="Hydra"/>
    </properties>
   </object>
-  <object id="66" template="../obj/enemy.tx" x="188.083" y="72.6667">
+  <object id="66" template="../obj/enemy.tx" x="190.267" y="79.6539">
    <properties>
-    <property name="enemy" value="Hydra"/>
+    <property name="enemy" value="Hidden Bush"/>
    </properties>
   </object>
   <object id="68" template="../obj/gold.tx" x="177.667" y="45.6667"/>
+  <object id="69" template="../obj/enemy.tx" x="83.2705" y="149.649">
+   <properties>
+    <property name="enemy" value="Hydra"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="106,93,88,93"/>
+   </properties>
+  </object>
+  <object id="70" template="../obj/enemy.tx" x="354.899" y="144.409">
+   <properties>
+    <property name="enemy" value="Hydra"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="100,101,103,101"/>
+   </properties>
+  </object>
+  <object id="71" template="../obj/manashards.tx" x="335.247" y="47.8977"/>
+  <object id="72" template="../obj/booster.tx" x="96.8083" y="64.9291">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;BFZ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;colors&quot;: [&quot;Green&quot;],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BFZ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [&quot;Green&quot;],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BFZ&quot; ],
+    &quot;type&quot;: &quot;Green&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [&quot;Colorless&quot;],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="73" template="../obj/enemy.tx" x="312.102" y="203.8">
+   <properties>
+    <property name="enemy" value="Hydra"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="100,99,78,99"/>
+   </properties>
+  </object>
+  <object id="74" template="../obj/waypoint.tx" x="205.11" y="208.167"/>
+  <object id="75" template="../obj/waypoint.tx" x="205.11" y="208.167"/>
+  <object id="76" template="../obj/waypoint.tx" x="205.11" y="208.167"/>
+  <object id="77" template="../obj/waypoint.tx" x="205.11" y="208.167"/>
+  <object id="78" template="../obj/waypoint.tx" x="205.11" y="208.167"/>
+  <object id="79" template="../obj/waypoint.tx" x="202.49" y="97.6817"/>
+  <object id="80" template="../obj/waypoint.tx" x="202.49" y="97.6817"/>
+  <object id="81" template="../obj/waypoint.tx" x="202.49" y="97.6817"/>
+  <object id="82" template="../obj/waypoint.tx" x="202.49" y="97.6817"/>
+  <object id="83" template="../obj/waypoint.tx" x="202.49" y="97.6817"/>
+  <object id="84" template="../obj/waypoint.tx" x="136.985" y="99.8652"/>
+  <object id="85" template="../obj/waypoint.tx" x="136.985" y="99.8652"/>
+  <object id="86" template="../obj/waypoint.tx" x="136.985" y="99.8652"/>
+  <object id="87" template="../obj/waypoint.tx" x="136.985" y="99.8652"/>
+  <object id="88" template="../obj/waypoint.tx" x="136.985" y="99.8652"/>
+  <object id="93" template="../obj/waypoint.tx" x="150.086" y="151.396"/>
+  <object id="94" template="../obj/waypoint.tx" x="198.123" y="158.383"/>
+  <object id="95" template="../obj/waypoint.tx" x="198.123" y="158.383"/>
+  <object id="96" template="../obj/waypoint.tx" x="198.123" y="158.383"/>
+  <object id="97" template="../obj/waypoint.tx" x="198.123" y="158.383"/>
+  <object id="98" template="../obj/waypoint.tx" x="198.123" y="158.383"/>
+  <object id="99" template="../obj/waypoint.tx" x="256.641" y="183.712"/>
+  <object id="100" template="../obj/waypoint.tx" x="354.025" y="205.11"/>
+  <object id="101" template="../obj/waypoint.tx" x="356.645" y="105.542"/>
+  <object id="102" template="../obj/waypoint.tx" x="308.608" y="71.9163"/>
+  <object id="103" template="../obj/waypoint.tx" x="311.665" y="136.985"/>
+  <object id="104" template="../obj/waypoint.tx" x="267.122" y="142.662"/>
+  <object id="105" template="../obj/enemy.tx" x="208.167" y="123.01">
+   <properties>
+    <property name="enemy" value="Hydra"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="83,98,78,98"/>
+   </properties>
+  </object>
+  <object id="106" template="../obj/waypoint.tx" x="32.6132" y="154.016"/>
+  <object id="107" template="../obj/enemy.tx" x="182.402" y="180.655">
+   <properties>
+    <property name="enemy" value="Hydra"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="78,99,78,98,93,98,78"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

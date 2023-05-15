@@ -1127,19 +1127,19 @@
 	"name": "CopperhostForest",
 	"type": "dungeon",
 	"count": 2,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/Phyrexian_Buildings.atlas",
 	"sprite": "CopperhostForest",
-	"map": "maps/map/phyrexian_g1.tmx"
+	"map": "maps/map/phyrexian_g1.tmx",
+	"radiusFactor": 0.8
 },
 {
 	"name": "Crawlspace",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Mine",
 	"map": "maps/map/crawlspace.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"DungeonEffect",
 		"Dungeon",
@@ -1186,10 +1186,10 @@
 	"name": "Dream Halls",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "StonePyramid",
 	"map": "maps/map/dreamhalls.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"DungeonEffect",
 		"Dungeon",
@@ -1200,10 +1200,10 @@
 	"name": "DrossOutpost",
 	"type": "dungeon",
 	"count": 2,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/Phyrexian_Buildings.atlas",
 	"sprite": "DrossOutpost",
-	"map": "maps/map/phyrexian_black1.tmx"
+	"map": "maps/map/phyrexian_black1.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
 		"Phyrexian",
@@ -1598,10 +1598,10 @@
 	"name": "FurnaceBase",
 	"type": "dungeon",
 	"count": 2,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/Phyrexian_Buildings.atlas",
 	"sprite": "FurnaceBase",
 	"map": "maps/map/phyrexian_r1.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
 		"Phyrexian",
@@ -1613,10 +1613,10 @@
 	"name": "Garruk Forest",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "EvilGrove",
 	"map": "maps/map/garruk.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Boss",
 		"Planeswalker",
@@ -1627,10 +1627,10 @@
 	"name": "GitaxianLab",
 	"type": "dungeon",
 	"count": 2,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/Phyrexian_Buildings.atlas",
 	"sprite": "GitLabSmall",
 	"map": "maps/map/phyrexian_b1.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
 		"Phyrexian",
@@ -1735,10 +1735,10 @@
 	"name": "Grolnoks Bog",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "EvilGrove",
 	"map": "maps/map/grolnok.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Boss",
 		"Hostile"
@@ -1893,7 +1893,6 @@
 	]
 },
 {
-
 	"name": "Island Town Generic",
 	"type": "town",
 	"count": 30,
@@ -1951,10 +1950,10 @@
 	"name": "Jacehold",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
 	"map": "maps/map/jacehold.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Boss",
 		"Planeswalker",
@@ -1965,10 +1964,10 @@
 	"name": "Kavu Lair",
 	"type": "cave",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
 	"map": "maps/map/kavulair.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
 		"DungeonEffect",
@@ -1979,10 +1978,10 @@
 	"name": "Kiora Island",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MerfolkPool",
 	"map": "maps/map/kiora_island.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Boss",
 		"Planeswalker",
@@ -1993,10 +1992,10 @@
 	"name": "Kobold Mine",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "LavaForge",
 	"map": "maps/map/kobold_mine.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
 		"Dungeon",
@@ -2007,10 +2006,10 @@
 	"name": "LavaForge1",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "LavaForge",
 	"map": "maps/map/lavaforge_1.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"DungeonEffect",
 		"Dungeon",
@@ -2023,10 +2022,10 @@
 	"name": "LavaForge2",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "LavaForge",
 	"map": "maps/map/lavaforge_2.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"DungeonEffect",
 		"Dungeon",
@@ -2039,10 +2038,10 @@
 	"name": "Lich's Mirror",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "StonePyramid",
 	"map": "maps/map/lichsmirror.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
 		"DungeonEffect",
@@ -2597,10 +2596,10 @@
 	"name": "Nahiri Encampment",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Castle",
 	"map": "maps/map/nahiri.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Boss",
 		"Planeswalker",
@@ -2641,10 +2640,10 @@
 	"name": "OrthodoxyBasilica",
 	"type": "dungeon",
 	"count": 2,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/Phyrexian_Buildings.atlas",
 	"sprite": "BasilicaSmall",
 	"map": "maps/map/phyrexian_w1.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
 		"Phyrexian",
@@ -2850,10 +2849,10 @@
 	"name": "Slimefoots Lair",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "EvilGrove",
 	"map": "maps/map/slimefoot_boss.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
 		"DungeonEffect",
@@ -2864,10 +2863,10 @@
 	"name": "Slime Cave",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
 	"map": "maps/map/slime_hive.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Cave",
 		"Hostile",
@@ -2878,10 +2877,10 @@
 	"name": "Scarecrow Farm",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "farm",
 	"map": "maps/map/scarecrow_farm.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Boss",
 		"Farm",
@@ -2892,10 +2891,10 @@
 	"name": "Slobads Factory",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Factory",
 	"map": "maps/map/slobad_factory.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Boss",
 		"Factory",
@@ -3044,10 +3043,10 @@
 	"name": "Teferi Hideout",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MerfolkPool",
 	"map": "maps/map/teferi.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
 		"Boss",
@@ -3058,10 +3057,10 @@
 	"name": "Temple of Chandra",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "hall_of_flame",
 	"map": "maps/map/main_story/TempleOfChandra.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Story",
 		"BiomeRed",
@@ -3100,10 +3099,10 @@
 	"name": "Tibalts Fortress",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "LavaForge",
 	"map": "maps/map/tibalt.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
 		"Boss",
@@ -3158,7 +3157,6 @@
 		"Sidequest"
 	]
 },
-
 {
 	"name": "Waste Town Generic",
 	"type": "town",
@@ -3238,10 +3236,10 @@
 	"name": "Xiras Hive",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
 	"map": "maps/map/xira.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
 		"Boss",
@@ -3262,6 +3260,23 @@
 	]
 },
 {
+	"name": "Zedruu City",
+	"type": "cave",
+	"count": 2,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "ruinedcity",
+	"map": "maps/map/zedruu.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"BiomeRed",
+		"Boss",
+		"Zedruu",
+		"Sidequest",
+		"Hostile",
+		"City"
+	]
+},
+{
 	"name": "Zombie Town",
 	"type": "dungeon",
 	"count": 1,
@@ -3275,6 +3290,5 @@
 		"BiomeBlack",
 		"Sidequest"
 	]
-
 }
 ]

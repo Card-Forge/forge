@@ -208,23 +208,23 @@ public class CardRenderer {
             return CardImageRenderer.forgeArt;
         //token?
         if (pc.getRules() == null)
-            return getCardArt(pc.getImageKey(backFace), false, false, false, false, false, false, false, false, true);
+            return getCardArt(pc.getImageKey(backFace), false, false, false, false, false, false, false, false, true, false);
 
         CardType type = pc.getRules().getType();
         return getCardArt(pc.getImageKey(backFace), pc.getRules().getSplitType() == CardSplitType.Split,
                 type.isPlane() || type.isPhenomenon(), pc.getRules().getOracleText().contains("Aftermath"),
                 type.hasSubtype("Saga"), type.hasSubtype("Class"), type.isDungeon(), CardSplitType.Flip.equals(pc.getRules().getSplitType()),
-                type.isPlaneswalker(), isModernFrame(pc));
+                type.isPlaneswalker(), isModernFrame(pc), type.isBattle());
     }
 
     public static FImageComplex getCardArt(CardView card) {
         CardTypeView type = card.getCurrentState().getType();
         return getCardArt(card.getCurrentState().getImageKey(), card.isSplitCard(), type.isPlane() || type.isPhenomenon(),
                 card.getText().contains("Aftermath"), type.hasSubtype("Saga"), type.hasSubtype("Class"), type.isDungeon(),
-                card.isFlipCard(), type.isPlaneswalker(), isModernFrame(card));
+                card.isFlipCard(), type.isPlaneswalker(), isModernFrame(card), type.isBattle());
     }
 
-    public static FImageComplex getCardArt(String imageKey, boolean isSplitCard, boolean isHorizontalCard, boolean isAftermathCard, boolean isSaga, boolean isClass, boolean isDungeon, boolean isFlipCard, boolean isPlanesWalker, boolean isModernFrame) {
+    public static FImageComplex getCardArt(String imageKey, boolean isSplitCard, boolean isHorizontalCard, boolean isAftermathCard, boolean isSaga, boolean isClass, boolean isDungeon, boolean isFlipCard, boolean isPlanesWalker, boolean isModernFrame, boolean isBattle) {
         FImageComplex cardArt = Forge.getAssets().cardArtCache().get(imageKey);
         boolean isClassicModule = imageKey != null && imageKey.length() > 2 && classicModuleCardtoCrop.contains(imageKey.substring(ImageKeys.CARD_PREFIX.length()).replace(".jpg", "").replace(".png", ""));
         if (cardArt == null) {
@@ -261,6 +261,14 @@ public class CardRenderer {
                         y = h * 0.11f;
                         w -= 1.1f * x + w / 2;
                         h -= 2.45f * y;
+                    } else if (isBattle) {
+                        x = w * 0.14f;
+                        y = h * 0.1f;
+                        w -= 0.5f * x + w / 2;
+                        h -= 2.35f * y;
+                        cardArt = new FRotatedImage(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h), true);
+                        Forge.getAssets().cardArtCache().put(imageKey, cardArt);
+                        return cardArt;
                     } else if (isSaga) {
                         x = (w * 0.1f) + (w * 0.8f / 2);
                         y = h * 0.11f;
