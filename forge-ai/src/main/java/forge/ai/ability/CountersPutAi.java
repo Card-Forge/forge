@@ -777,38 +777,6 @@ public class CountersPutAi extends CountersAi {
             // No target. So must be defined
             list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
 
-            if (amountStr.equals("X")
-                    && root.getXManaCostPaid() == null
-                    && source.getXManaCostPaid() == 0 /* SubAbility on something that already had set PayX, e.g. Endless One ETB counters */
-                    && sa.hasSVar(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) {
-
-                // detect if there's more than one X in the cost (Hangarback Walker, Walking Ballista, etc.)
-                SpellAbility testSa = sa;
-                int countX = 0;
-                int nonXGlyphs = 0;
-                while (testSa != null && countX == 0) {
-                    countX = testSa.getPayCosts().getTotalMana().countX();
-                    nonXGlyphs = testSa.getPayCosts().getTotalMana().getGlyphCount() - countX;
-                    testSa = testSa.getSubAbility();
-                }
-                if (countX == 0) {
-                    // try determining it from the card itself if neither SA has "X" in the cost
-                    countX = source.getState(CardStateName.Original).getManaCost().countX();
-                    nonXGlyphs = source.getState(CardStateName.Original).getManaCost().getGlyphCount() - countX;
-                }
-
-                // Spend all remaining mana to add X counters (eg. Hero of Leina Tower)
-                int payX = ComputerUtilCost.getMaxXValue(sa, ai, true);
-
-                // Account for the possible presence of additional glyphs in cost (e.g. Mikaeus, the Lunarch; Primordial Hydra)
-                payX -= nonXGlyphs;
-
-                // Account for the multiple X in cost
-                if (countX > 1) { payX /= countX; }
-
-                root.setXManaCostPaid(payX);
-            }
-
             if (!mandatory) {
                 // TODO - If Trigger isn't mandatory, when wouldn't we want to
                 // put a counter?
