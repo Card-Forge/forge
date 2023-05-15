@@ -187,7 +187,7 @@ public class PlayAi extends SpellAbilityAi {
                 }
                 // FIXME: This is an ugly hack, ideally the TODO above needs to be resolved regarding MDFC so the AI knows it's casting the other face of the card
                 // (useful not only for battles, but for other DFC stuff as well)
-                if (sa.hasParam("CastTransformed") && sa.hasParam("WithoutManaCost") && c.isBattle()) {
+                if (c.isBattle() && sa.hasParam("CastTransformed") && sa.hasParam("WithoutManaCost")) {
                     return true; // TODO: This needs to actually test playability of the transformed side (especially if it's a Sorcery, but permanents may need a test as well)
                                  // However, I don't see a way to grab the spell/SA-like object from the transformed side so that canPlayFromEffectAI can evaluate it.
                 }

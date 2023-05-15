@@ -120,7 +120,6 @@ public class AiAttackController {
 
     private void refreshCombatants(GameEntity defender) {
         if (defender instanceof Card && ((Card) defender).isBattle()) {
-            // for a Battle, assume the protecting player is the defending opponent
             this.oppList = getOpponentCreatures(((Card) defender).getProtectingPlayer());
         } else {
             this.oppList = getOpponentCreatures(defendingOpponent);
