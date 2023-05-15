@@ -17,50 +17,28 @@
  */
 package forge.game.combat;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
-import com.google.common.collect.Table;
-
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameEntityCounterTable;
-import forge.game.GameLogEntryType;
-import forge.game.GameObjectMap;
+import com.google.common.collect.*;
+import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageMap;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.trigger.TriggerType;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <p>
