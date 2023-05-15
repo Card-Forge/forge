@@ -19,7 +19,7 @@ PT:3/6
 K:Menace
 K:Deathtouch
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever CARDNAME attacks, remove all counters from up to one target permanent.
-SVar:TrigRemoveCounter:DB$ RemoveCounter | ValidTgts$ Permanent | CounterType$ All | CounterNum$ All
+SVar:TrigRemoveCounter:DB$ RemoveCounter | ValidTgts$ Permanent | TargetMin$ 0 | TargetMax$ 1 | CounterType$ All | CounterNum$ All
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ0 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, if you haven't been dealt combat damage since your last turn, you draw a card and you lose 1 life.
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
