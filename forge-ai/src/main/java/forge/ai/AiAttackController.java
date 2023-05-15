@@ -726,11 +726,14 @@ public class AiAttackController {
             return pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);
         }
 
-        List<Card> battleDefending = CardLists.filter(c.getDefendingBattles(), CardPredicates.isControlledByAnyOf(ai.getYourTeam()));
-        if (!battleDefending.isEmpty()) {
-            // Get the battle that is the closest to triggering
+        // Get the preferred battle (prefer own battles, then ally battles)
+        final CardCollection defBattles = c.getDefendingBattles();
+        List<Card> ownBattleDefending = CardLists.filter(defBattles, CardPredicates.isController(ai));
+        List<Card> allyBattleDefending = CardLists.filter(defBattles, CardPredicates.isControlledByAnyOf(ai.getAllies()));
+        List<Card> prefBattleList = ownBattleDefending.isEmpty() ? allyBattleDefending : ownBattleDefending;
+        if (!prefBattleList.isEmpty()) {
             // TODO try to be less predictable here, should really check if something would make the back uncastable
-            return Collections.min(battleDefending, CardPredicates.compareByCounterType(CounterEnumType.DEFENSE));
+            return Collections.min(prefBattleList, CardPredicates.compareByCounterType(CounterEnumType.DEFENSE));
         }
 
         return prefDefender;
