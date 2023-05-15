@@ -412,7 +412,7 @@ Zariel
 Undercity
 [BattleTypes]
 Siege
-[PlaneTypes]
+[PlanarTypes]
 Alara
 Amonkhet
 Antausia
