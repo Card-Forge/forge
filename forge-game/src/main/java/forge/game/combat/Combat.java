@@ -653,8 +653,7 @@ public class Combat {
         CardCollection missingCombatants = new CardCollection();
         for (Entry<GameEntity, AttackingBand> ee : attackedByBands.entries()) {
             CardCollectionView atk = ee.getValue().getAttackers();
-            for (int i = atk.size() - 1; i >= 0; i--) { // might remove items from collection, so no iterators
-                Card c = atk.get(i);
+            for (Card c : atk) {
                 if (!c.isInPlay() || !c.isCreature()) {
                     missingCombatants.add(c);
                 }

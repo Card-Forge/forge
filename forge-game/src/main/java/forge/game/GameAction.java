@@ -452,7 +452,7 @@ public class GameAction {
         }
 
         if (zoneFrom != null) {
-            if (fromBattlefield && c.isCreature() && game.getCombat() != null) {
+            if (fromBattlefield && game.getCombat() != null) {
                 if (!toBattlefield) {
                     game.getCombat().saveLKI(lastKnownInfo);
                 }
