@@ -153,6 +153,9 @@ public class PlayAi extends SpellAbilityAi {
                 // TODO needs to be aligned for MDFC along with getAbilityToPlay so the knowledge
                 // of which spell was the reason for the choice can be used there
                 for (SpellAbility s : AbilityUtils.getBasicSpellsFromPlayEffect(c, ai, state)) {
+                    if (!(s instanceof Spell)) {
+                        continue;
+                    }
                     Spell spell = (Spell) s;
                     s.setActivatingPlayer(ai, true);
                     if (params != null && params.containsKey("CMCLimit")) {
