@@ -759,8 +759,8 @@ public class CountersPutAi extends CountersAi {
 
             if (amountStr.equals("X")
                     && root.getXManaCostPaid() == null
-                    && source.getXManaCostPaid() == 0 /* SubAbility on something that already had set PayX, e.g. Endless One ETB counters */
-                    && amount == 0 /* Wasn't set previously by something */
+                    && source.getXManaCostPaid() == 0 // SubAbility on something that already had set PayX, e.g. Endless One ETB counters
+                    && amount == 0 // And counter amount wasn't set previously by something (e.g. Wildborn Preserver)
                     && sa.hasSVar(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) {
 
                 // detect if there's more than one X in the cost (Hangarback Walker, Walking Ballista, etc.)
