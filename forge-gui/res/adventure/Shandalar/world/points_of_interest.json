@@ -3012,7 +3012,7 @@
 	"count": 35,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "SwampTown",
-	"map": "maps/map/Swamp_town_tribal.tmx",
+	"map": "maps/map/swamp_town_tribal.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Town",
