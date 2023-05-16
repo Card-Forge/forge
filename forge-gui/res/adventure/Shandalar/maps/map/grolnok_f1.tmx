@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="189">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="189">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../tileset/main-nocollide.tsx"/>
  <layer id="17" name="Collision" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJxjYEAAN04EJgeQqg/ZPhM+0jCyXmIxue6kBIzaS397QeljIOwdSuFMrv7B4F96AmrZ+4ECe4dSuqK2G0gBHxgGLpznkVH3UcNeUgHMLkrqeWrYC8PzOFHl0QGx4cooysDABMW46n1sZuOzFxdG9xc57SZCbZhpBNoy6PqJBejpDpd+XHLk+pdYe4nRTwogNZ9h8y817QXFm6YEgg2Tp4e92Nj42snk2kusemqUQfjSKDY+tco9XOUZsX0QagJq2gsAMiw9tA==
@@ -12,7 +13,7 @@
  </layer>
  <layer id="13" name="background" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzF10sOgjAQBuBGF9U1j7jRHcdQ48ZbqAuPpRGNh3DrisTbeAN1AhOGUfuihUn+iND2K5WEKkSzBon/2FYR+UnXXijXtJ9P17SvTYVYQxu3bRsXt4/qw92MhJhJIe6a8NJd11Um7W2TeZm4pvZTlPHpor1V+KFc7vNQdyrr8y71y/0XdMHaOXoubiab/bp093E/rm4dfPmmc7Ot9Vjv4nXVPC+W+xtwIa+43h/RY8yVfedtho5untTHh6R8fvB9Qe8dzp+q9vCJ70fX+4VxzlVyhQvnwFul3y6Ohb+dqXublKEuBF1wMHi/aPt0qcPTpYtrDDmy52yZursw7iNqjk9DC58jarVxC4VL93a+3PlnnRYsqv9AfF1d3dB93wGw61A=
+   eJzF190OwTAUB/CGi3JtEzc+Etlj4Ea8BS48FjGewhXhRuJtvAE72U52VrSnXTcn+cd0bX9rLdkIUaxG6D+2de/4Sd1eVS53nE+XO9amqthDG7dsHxf3H8VxLzI/Psvf/bi1bAkxSOa5GqKW6bypIsmzR2TuIeO6OC7Xfoo0nP3gumivNH5VruqroW5f5u0u9c39FXTBWjt6Lm4ki+PqdDfBf1zTPvjyuddmW4u22cXzuus8Wr7fgAt5Bfn7ET3GjOfF72qfpqMbh/nxNkzvH3xe0LVD+z7rD5/4fHRdL8xzyBJrXGgD7zb/dHEu/O247qmXhroQdMHB4HrR9ulSR02dLu4xZKfcd7OuuwvzPjrF+Wlo4X1ErTLuXePSdztf7iTZp6kS3X8gdV9d3arHvgH1Jev1
   </data>
  </layer>
  <layer id="18" name="Tilelaag 4" width="30" height="30">
@@ -20,10 +21,10 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzdlsFKw0AQhkdL2fbiRVtzU7AWvPcqHvQg+AxaxKM+hs/gRan0QawW8UEU9FrfQHcZhozTTTLdDlH84YMJu803u9mSDNYABr/ESgdgtSYandx77+vzjTQ04fPHid6i+5X1ofHetJEtB3DctGHb6b3vfv6TW44ZINN/4D3042ctpC5vcE5cPvfB10eR+aneokyZk3h0OGbhnRV4X/3YVQPgE5BLX7+xPsPvPpp6L++/zEtrJi+t1dIr0Xo5KftMyDMjvbHnSmtexBvOKP1PYgxbufe0ZF5govQumpf1+fMtqfKmJHhDRu2cOryxkF++r7h3vxt/P1uF3/egW/4NMjb0hlR981DumPcrYf9Hom+tV2a3h1ywHkJ90keqkup97iHSq02qN8Vl6d3L5uvrTTvvbcF53sl+1tr1L7tenuAkLL1y//oZIq+tvZb5K95vDh8hYA==
+   eJzdlsFKw0AQhrdK2fbipbbmpmAteO9VPNhDwWdQEV/FZ/CiVPogVkX6IAp6rW/QZtgOGaebZDodovjDBxsy3W92syXp7zjX/yVqbee2KmK7nXkf0/H1rg5JaP1Y6c2br6gPifeuGdj3zg3rNhx4ufczrX/xmzFzgdd/4D1L7182AlV5wQnBWsggUq/15gXmwTrk2Yd7Ft5Zjvd92dP3EsgH6RN+91WXe2n/RV5cM3pxrZZejtRL0ewzws8M98aeK655He+Tz/4nMa4amfeioA6YCL3rZtpaPd+cMq8m4IWMmhlVeGNBP39fUe9JJ/5+tgqd97RT/A0yNvRCyr55MA/EO1fs/4j1LfXyHHUDN6QHGJ/3AmXRet+6Ae6VRuvVuCy9x8nq+HbPznufc54Pk59j6fo3XS8NOBFLL9+/XhLg19Zey/wV7wK0wx76
   </data>
  </layer>
- <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+ <objectgroup id="12" name="Kopie van Objects" opacity="0.9">
   <object id="140" template="../obj/treasure.tx" x="308.807" y="387.623">
    <properties>
     <property name="reward">[{
@@ -66,7 +67,7 @@
 </property>
    </properties>
   </object>
-  <object id="168" template="../obj/gate.tx" gid="3221229597" x="287.624" y="361.405" width="13.6923" height="20.7576" rotation="90.4687" visible="1">
+  <object id="168" template="../obj/gate.tx" gid="3221229597" x="288.001" y="351.869" width="15.9995" height="20.7576" rotation="90.4687" visible="1">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This door is locked&quot;,
@@ -136,7 +137,7 @@
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="183" template="../obj/gate.tx" gid="3221229597" x="221.022" y="337.886" width="15.7579" height="22.3749" rotation="359.183">
+  <object id="183" template="../obj/gate.tx" gid="3221229597" x="221.022" y="337.886" width="15.7579" height="22.3749" rotation="0">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This door is locked&quot;,
