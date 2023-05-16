@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="55">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="55">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../tileset/main-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJztlMEOgyAMhpsdBB9Js3DcI/k2MPeeJm6NEGtHGVXjaYc/IeSnX0sLowEYL9Cj3UpzNlzIdXZdw0eDMte9XOR4s2XPzTlcjE1VE6ezOn6OC4StidXZY1zULWrv3OT0IvPAuZ55gzA7uPeM67uiThDqxXi9Xe+N95j2oCc8ie0ED+fyfoKQM/c5gYtez3yh0F/q/fU/pF6k+qUcUn+HVubSd8rrm5pFufqD+X7jPL8Sl2uqeE90XkvScCX5eK9JteeOcrX/2p+76A0VDiWG
+   eJztlE0OgjAQhbvy5wxSEw7RLjyAR3KFaLyHyi0MRvFo2pcycSgtFjGsXLxAaDvf/LxSTIUoRtB63lTsua0SYqnH41aGlRvmwjz35rnpkesQLjiS1Qn2c/IbLmJzdZ1H3YlRaXTt0Xcfl/oH7VRcHOIP4SLGQVnBP1VHPKznkblxP7jcY83lnvX1Gt/O9d6bjmOTF31cxFvN7Fqp2zMWbP40T2KH/E/vfI/LhTcT3c7P7Zc799AssFey/mEfehi6R5L17vTBQzQLqj+UQ8r6F+Lye+rWlykrt/6LfucgPexHBNdV1uEbqj8NeNDnyW//z6S7tn2luQ25v30U+1/7c5t6ARl5LSs=
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzFldsKgkAQhucmUnqMHsGgoHuRXlQ6vEwoQdeR+Rjt0g5OP7OruwkN/BfqON+cVsucqBzRKSM6G12ycV+f0KYwn+69QyIzhVsZbYzf1uiRp9ccy+2MXk7H7MNO6bnG5fmNxescmxJqR5PzmxKvcr5t5LzRKuWeLx7mGOLiGfBxd+668MRDZqg32hnQuIW4rs07vZK3ZEp/ZDPzDs/ReF/tvmgz0+YgraFhx61s3hzvRkPNaDL+evWdP+feCP82wJe9krsf4sq6OX/urTy/0q401GfVQ686cd/H1b4TGItr4P7hLsz5vfKd3xjmXNw9xf8j5uA2f+Iulr9z381Ord4=
+   eJzFlV0OgjAMx/tihHgEHz0Ciia+E8KdPI/x4wBew0C8gHFyDLe4htJ0g00Sm/wfgNJfvwZFClAM6JwAXLSuybCvS9zGMF/2vSqSGcMttdbab6v1TONrDuUqrbfVKfmyY3oucXF+Q/GUZUNE7dzo/MbEK61vEzhvbqVwzxWP5+jj8jPg4u7sdeaIx5m+3hjfwwbglnexJG5Gro/6nVbImzKpP2djfsu8/5wb7qvZF2lm0hyo1dDtuJHJG+M9rE/lOUcm/mrRzx9zr4l/4+HTXtHd93Fp3Zg/9paeX2p36OozalmvFLnv4krfCR4La8D+8V2Y8nvlOr8hzKm4ewj/R0zBrf/Enc1/534Avz2uCA==
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">
@@ -20,7 +21,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+   eJxjYBgFo2AUjIJRMFRAuhEDQ4bRQLtiFAxlAAC81gE0
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

@@ -416,6 +416,8 @@ public final class FModel {
                     addTo = CardType.Constant.DUNGEON_TYPES;
                 } else if (s.equals("[BattleTypes]")) {
                     addTo = CardType.Constant.BATTLE_TYPES;
+                } else if (s.equals("[PlanarTypes]")) {
+                    addTo = CardType.Constant.PLANAR_TYPES;
                 } else if (s.length() > 1) {
                     if (addTo != null) {
                         if (s.contains(":")) {

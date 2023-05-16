@@ -795,6 +795,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         public static final Set<String> WALKER_TYPES = Sets.newHashSet();
         public static final Set<String> DUNGEON_TYPES = Sets.newHashSet();
         public static final Set<String> BATTLE_TYPES = Sets.newHashSet();
+        public static final Set<String> PLANAR_TYPES = Sets.newHashSet();
 
         // singular -> plural
         public static final BiMap<String,String> pluralTypes = HashBiMap.create();
