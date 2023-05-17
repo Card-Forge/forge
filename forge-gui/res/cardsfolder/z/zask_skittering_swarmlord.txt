@@ -2,7 +2,7 @@ Name:Zask, Skittering Swarmlord
 ManaCost:3 G G
 Types:Legendary Creature Insect
 PT:5/5
-S:Mode$ Continuous | Affected$ Land.YouOwn,Insect.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands and cast Insect spells from your graveyard.
+S:Mode$ Continuous | Affected$ Land.YouOwn,Insect.YouOwn | ValidAfterStack$ Spell.Insect | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands and cast Insect spells from your graveyard.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Insect.YouCtrl+Other | Execute$ TrigChange | TriggerDescription$ Whenever another Insect you control dies, put it on the bottom of its owner's library, then mill two cards. (Put the top two cards of your library into your graveyard.)
 SVar:TrigChange:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | SubAbility$ DBMill
 SVar:DBMill:DB$ Mill | NumCards$ 2
