@@ -56,6 +56,7 @@ public class GameFormat implements Comparable<GameFormat> {
         BLOCK,
         STANDARD,
         EXTENDED,
+        PAUPER,
         PIONEER,
         MODERN,
         LEGACY,
@@ -365,6 +366,7 @@ public class GameFormat implements Comparable<GameFormat> {
             coreFormats.add("Brawl.txt");
             coreFormats.add("Oathbreaker.txt");
             coreFormats.add("Premodern.txt");
+            coreFormats.add("Pauper.txt");
         }
         
         public Reader(File forgeFormats, File customFormats, boolean includeArchived) {
