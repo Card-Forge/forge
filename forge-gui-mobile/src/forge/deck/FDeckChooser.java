@@ -993,6 +993,11 @@ public class FDeckChooser extends FScreen {
             pool = ColorDeckGenerator.getColorDecks(lstDecks, FModel.getFormats().getModern().getFilterPrinted(), isAi);
             config = ItemManagerConfig.STRING_ONLY;
             break;
+        case PAUPER_COLOR_DECK:
+            maxSelections = 3;
+            pool = ColorDeckGenerator.getColorDecks(lstDecks, FModel.getFormats().getPauper().getFilterPrinted(), isAi);
+            config = ItemManagerConfig.STRING_ONLY;
+            break;
         case THEME_DECK:
             pool = DeckProxy.getAllThemeDecks();
             config = ItemManagerConfig.STRING_ONLY;
@@ -1419,6 +1424,7 @@ public class FDeckChooser extends FScreen {
                         DeckType.STANDARD_COLOR_DECK,
                         DeckType.STANDARD_CARDGEN_DECK,
                         DeckType.MODERN_COLOR_DECK,
+                        DeckType.PAUPER_COLOR_DECK,
                         DeckType.PIONEER_CARDGEN_DECK,
                         DeckType.HISTORIC_CARDGEN_DECK,
                         DeckType.MODERN_CARDGEN_DECK,
