@@ -153,11 +153,14 @@ public class PlayAi extends SpellAbilityAi {
                 // TODO needs to be aligned for MDFC along with getAbilityToPlay so the knowledge
                 // of which spell was the reason for the choice can be used there
                 for (SpellAbility s : AbilityUtils.getBasicSpellsFromPlayEffect(c, ai, state)) {
-                    if (!(s instanceof Spell)) {
+                    if (!sa.matchesValidParam("ValidSA", s)) {
                         continue;
                     }
+                    if (s instanceof LandAbility) {
+                        // might want to run some checks here but it's rare anyway
+                        return true;
+                    }
                     Spell spell = (Spell) s;
-                    s.setActivatingPlayer(ai, true);
                     if (params != null && params.containsKey("CMCLimit")) {
                         Integer cmcLimit = (Integer) params.get("CMCLimit");
                         if (spell.getPayCosts().getTotalMana().getCMC() > cmcLimit)
