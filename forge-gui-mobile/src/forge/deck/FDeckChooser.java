@@ -146,7 +146,7 @@ public class FDeckChooser extends FScreen {
                     && selectedDeckType != DeckType.PIONEER_CARDGEN_DECK && selectedDeckType != DeckType.HISTORIC_CARDGEN_DECK
                     && selectedDeckType != DeckType.MODERN_CARDGEN_DECK && selectedDeckType != DeckType.LEGACY_CARDGEN_DECK
                     && selectedDeckType != DeckType.VINTAGE_CARDGEN_DECK && selectedDeckType != DeckType.MODERN_COLOR_DECK
-                    && selectedDeckType != DeckType.PAUPER_CARDGEN_DECK && selectedDeckType != DeckType.PAUPER_COLOR_DECK
+                    && selectedDeckType != DeckType.PAUPER_COLOR_DECK
                     && selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK
                     && selectedDeckType != DeckType.RANDOM_COMMANDER_DECK && selectedDeckType != DeckType.RANDOM_CARDGEN_COMMANDER_DECK) {
                 FDeckViewer.show(getDeck(), false, DeckType.DRAFT_DECK.equals(selectedDeckType));
@@ -320,7 +320,6 @@ public class FDeckChooser extends FScreen {
             case STANDARD_COLOR_DECK:
             case STANDARD_CARDGEN_DECK:
             case PAUPER_COLOR_DECK:
-            case PAUPER_CARDGEN_DECK:
             case RANDOM_CARDGEN_COMMANDER_DECK:
             case RANDOM_COMMANDER_DECK:
             case MODERN_CARDGEN_DECK:
@@ -552,7 +551,6 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.THEME_DECK);
                 if(FModel.isdeckGenMatrixLoaded()) {
                     cmbDeckTypes.addItem(DeckType.STANDARD_CARDGEN_DECK);
-                    cmbDeckTypes.addItem(DeckType.PAUPER_CARDGEN_DECK);
                     cmbDeckTypes.addItem(DeckType.PIONEER_CARDGEN_DECK);
                     cmbDeckTypes.addItem(DeckType.HISTORIC_CARDGEN_DECK);
                     cmbDeckTypes.addItem(DeckType.MODERN_CARDGEN_DECK);

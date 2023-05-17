@@ -116,8 +116,6 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
                             return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().get("Legacy"), isAi);
                         case VINTAGE_CARDGEN_DECK:
                             return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().get("Vintage"), isAi);
-                        case PAUPER_CARDGEN_DECK:
-                            return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().get("Pauper"), isAi);
                         case STANDARD_COLOR_DECK:
                             return generateRandomColorDeckOfFormat(FModel.getFormats().getStandard());
                         case MODERN_COLOR_DECK:

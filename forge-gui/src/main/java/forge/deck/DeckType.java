@@ -26,7 +26,6 @@ public enum DeckType {
     MODERN_CARDGEN_DECK("lblRandomModernArchetypeDecks"),
     LEGACY_CARDGEN_DECK("lblRandomLegacyArchetypeDecks"),
     VINTAGE_CARDGEN_DECK("lblRandomVintageArchetypeDecks"),
-    PAUPER_CARDGEN_DECK("lblRandomPauperArchetypeDecks"),
     STANDARD_COLOR_DECK("lblRandomStandardColorDecks"),
     MODERN_COLOR_DECK("lblRandomModernColorDecks"),
     PAUPER_COLOR_DECK("lblRandomPauperColorDecks"),
