@@ -145,8 +145,9 @@ public class FDeckChooser extends FScreen {
             if (selectedDeckType != DeckType.STANDARD_COLOR_DECK && selectedDeckType != DeckType.STANDARD_CARDGEN_DECK
                     && selectedDeckType != DeckType.PIONEER_CARDGEN_DECK && selectedDeckType != DeckType.HISTORIC_CARDGEN_DECK
                     && selectedDeckType != DeckType.MODERN_CARDGEN_DECK && selectedDeckType != DeckType.LEGACY_CARDGEN_DECK
-                    && selectedDeckType != DeckType.VINTAGE_CARDGEN_DECK && selectedDeckType != DeckType.MODERN_COLOR_DECK &&
-                    selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK
+                    && selectedDeckType != DeckType.VINTAGE_CARDGEN_DECK && selectedDeckType != DeckType.MODERN_COLOR_DECK
+                    && selectedDeckType != DeckType.PAUPER_CARDGEN_DECK && selectedDeckType != DeckType.PAUPER_COLOR_DECK
+                    && selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK
                     && selectedDeckType != DeckType.RANDOM_COMMANDER_DECK && selectedDeckType != DeckType.RANDOM_CARDGEN_COMMANDER_DECK) {
                 FDeckViewer.show(getDeck(), false, DeckType.DRAFT_DECK.equals(selectedDeckType));
             }
@@ -158,7 +159,7 @@ public class FDeckChooser extends FScreen {
                 return;
             }
             if (selectedDeckType == DeckType.COLOR_DECK || selectedDeckType == DeckType.STANDARD_COLOR_DECK
-                    || selectedDeckType == DeckType.MODERN_COLOR_DECK) {
+                    || selectedDeckType == DeckType.MODERN_COLOR_DECK || selectedDeckType == DeckType.PAUPER_COLOR_DECK) {
                 DeckgenUtil.randomSelectColors(lstDecks);
             }
             else if (selectedDeckType == DeckType.STANDARD_CARDGEN_DECK){
@@ -318,6 +319,8 @@ public class FDeckChooser extends FScreen {
             case COLOR_DECK:
             case STANDARD_COLOR_DECK:
             case STANDARD_CARDGEN_DECK:
+            case PAUPER_COLOR_DECK:
+            case PAUPER_CARDGEN_DECK:
             case RANDOM_CARDGEN_COMMANDER_DECK:
             case RANDOM_COMMANDER_DECK:
             case MODERN_CARDGEN_DECK:
@@ -543,17 +546,19 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.QUEST_OPPONENT_DECK);
                 cmbDeckTypes.addItem(DeckType.COLOR_DECK);
                 cmbDeckTypes.addItem(DeckType.STANDARD_COLOR_DECK);
+                cmbDeckTypes.addItem(DeckType.MODERN_COLOR_DECK);
+                cmbDeckTypes.addItem(DeckType.PAUPER_COLOR_DECK);
+                cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
+                cmbDeckTypes.addItem(DeckType.THEME_DECK);
                 if(FModel.isdeckGenMatrixLoaded()) {
                     cmbDeckTypes.addItem(DeckType.STANDARD_CARDGEN_DECK);
+                    cmbDeckTypes.addItem(DeckType.PAUPER_CARDGEN_DECK);
                     cmbDeckTypes.addItem(DeckType.PIONEER_CARDGEN_DECK);
                     cmbDeckTypes.addItem(DeckType.HISTORIC_CARDGEN_DECK);
                     cmbDeckTypes.addItem(DeckType.MODERN_CARDGEN_DECK);
                     cmbDeckTypes.addItem(DeckType.LEGACY_CARDGEN_DECK);
                     cmbDeckTypes.addItem(DeckType.VINTAGE_CARDGEN_DECK);
                 }
-                cmbDeckTypes.addItem(DeckType.MODERN_COLOR_DECK);
-                cmbDeckTypes.addItem(DeckType.THEME_DECK);
-                cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_STANDARD_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_PIONEER_DECK);
