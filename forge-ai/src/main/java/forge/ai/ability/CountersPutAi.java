@@ -788,6 +788,17 @@ public class CountersPutAi extends CountersAi {
                 sa.getTargets().add(choice);
             }
         } else {
+            // TODO: Unify the AI logic checking code elsewhere so that it can be checked similarly
+            // for AB, DB, or trigger PutCounter alike.
+            String logic = sa.getParam("AILogic");
+            if ("Fight".equals(logic) || "PowerDmg".equals(logic)) {
+                int nPump = 0;
+                if (type.equals("P1P1")) {
+                    nPump = amount;
+                }
+                return FightAi.canFightAi(ai, sa, nPump, nPump);
+            }
+
             if (sa.isCurse()) {
                 list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
             } else {
@@ -876,17 +887,6 @@ public class CountersPutAi extends CountersAi {
                     list.clear();
                 }
             }
-        }
-
-        // TODO: Unify the AI logic checking code elsewhere so that it can be checked similarly
-        // for AB, DB, or trigger PutCounter alike.
-        String logic = sa.getParam("AILogic");
-        if ("Fight".equals(logic) || "PowerDmg".equals(logic)) {
-            int nPump = 0;
-            if (type.equals("P1P1")) {
-                nPump = amount;
-            }
-            return FightAi.canFightAi(ai, sa, nPump, nPump);
         }
 
         return true;
