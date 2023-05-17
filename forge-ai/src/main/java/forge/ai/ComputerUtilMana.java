@@ -962,6 +962,7 @@ public class ComputerUtilMana {
             ManaCostShard toPay, SpellAbility saPayment) {
         AbilityManaPart m = saPayment.getManaPart();
         if (m.isComboMana()) {
+            m.setExpressChoice(ColorSet.fromMask(toPay.getColorMask()));
             getComboManaChoice(ai, saPayment, sa, cost);
         }
         else if (saPayment.getApi() == ApiType.ManaReflected) {
