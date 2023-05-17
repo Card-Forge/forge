@@ -4721,7 +4721,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         final List<KeywordInterface> keywords, final List<KeywordInterface> removeKeywords,
         final boolean removeAllKeywords,
         final long timestamp, final long staticId, final boolean updateView) {
-
         final KeywordsChange newCks = new KeywordsChange(keywords, removeKeywords, removeAllKeywords);
         changedCardKeywords.put(timestamp, staticId, newCks);
 
