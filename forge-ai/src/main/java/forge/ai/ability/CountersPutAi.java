@@ -796,7 +796,9 @@ public class CountersPutAi extends CountersAi {
                 if (type.equals("P1P1")) {
                     nPump = amount;
                 }
-                return FightAi.canFightAi(ai, sa, nPump, nPump);
+                if (FightAi.canFightAi(ai, sa, nPump, nPump)) {
+                    return true;
+                }
             }
 
             if (sa.isCurse()) {
