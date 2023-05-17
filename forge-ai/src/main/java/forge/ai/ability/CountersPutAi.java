@@ -788,6 +788,17 @@ public class CountersPutAi extends CountersAi {
                 sa.getTargets().add(choice);
             }
         } else {
+            String logic = sa.getParam("AILogic");
+            if ("Fight".equals(logic) || "PowerDmg".equals(logic)) {
+                int nPump = 0;
+                if (type.equals("P1P1")) {
+                    nPump = amount;
+                }
+                if (FightAi.canFightAi(ai, sa, nPump, nPump)) {
+                    return true;
+                }
+            }
+
             if (sa.isCurse()) {
                 list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
             } else {
@@ -877,6 +888,7 @@ public class CountersPutAi extends CountersAi {
                 }
             }
         }
+
         return true;
     }
 
