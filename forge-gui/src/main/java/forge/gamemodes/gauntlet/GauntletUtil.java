@@ -58,6 +58,9 @@ public class GauntletUtil {
             case MODERN_COLOR_DECK:
                 deck = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getModern().getFilterPrinted(),true);
                 break;
+            case PAUPER_COLOR_DECK:
+                deck = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getPauper().getFilterPrinted(), true);
+                break;
             case CUSTOM_DECK:
                 deck = DeckgenUtil.getRandomCustomDeck();
                 if (deck != null) { // fall back to precon if none available
