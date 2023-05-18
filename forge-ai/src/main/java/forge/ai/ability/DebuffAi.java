@@ -195,7 +195,7 @@ public class DebuffAi extends SpellAbilityAi {
      */
     private boolean debuffMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
+        List<Card> list = CardUtil.getValidCardsToTarget(sa);
 
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();

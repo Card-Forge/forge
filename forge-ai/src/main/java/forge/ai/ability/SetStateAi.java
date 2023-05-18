@@ -23,7 +23,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 public class SetStateAi extends SpellAbilityAi {
@@ -79,11 +78,10 @@ public class SetStateAi extends SpellAbilityAi {
                 }
                 return shouldTransformCard(source, ai, ph) || "Always".equals(logic);
             } else {
-                final TargetRestrictions tgt = sa.getTargetRestrictions();
                 sa.resetTargets();
 
                 // select only the ones that can transform
-                CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(tgt, sa), CardPredicates.Presets.CREATURES, new Predicate<Card>() {
+                CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(sa), CardPredicates.Presets.CREATURES, new Predicate<Card>() {
                     @Override
                     public boolean apply(Card c) {
                         return c.canTransform(sa);
@@ -106,17 +104,10 @@ public class SetStateAi extends SpellAbilityAi {
                 return sa.isMinTargetChosen();
             }
         } else if ("TurnFace".equals(mode)) {
-            if (!sa.usesTargeting()) {
-                CardCollection list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
-                if (list.isEmpty()) {
-                    return false;
-                }
-                return shouldTurnFace(list.get(0), ai, ph) || "Always".equals(logic);
-            } else {
-                final TargetRestrictions tgt = sa.getTargetRestrictions();
+            if (sa.usesTargeting()) {
                 sa.resetTargets();
 
-                List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
+                List<Card> list = CardUtil.getValidCardsToTarget(sa);
 
                 if (list.isEmpty()) {
                     return false;
@@ -132,6 +123,12 @@ public class SetStateAi extends SpellAbilityAi {
                 }
 
                 return sa.isTargetNumberValid();
+            } else {
+                CardCollection list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+                if (list.isEmpty()) {
+                    return false;
+                }
+                return shouldTurnFace(list.get(0), ai, ph) || "Always".equals(logic);
             }
         }
         return true;
