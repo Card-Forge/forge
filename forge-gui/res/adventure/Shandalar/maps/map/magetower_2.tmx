@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="78">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="78">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -8,6 +8,7 @@
  </properties>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../tileset/buildings-nocollide.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgaYBcPAtMTyELtk6azvQPlX3oBYsNTlsr+R7YX3Wx8cqP2Dl57QXlkLxDXc1NuFjlg1G76A1jZSO10SwyQHgB7sdUFlNQPANR4EvQ=
@@ -20,7 +21,7 @@
  </layer>
  <layer id="2" name="Walls" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzt1G0KgCAMBuD9t06QXazOUl1L+7hbRoxCSt+N6EckvATGejYMXUHkXoiNgtS0JdFY3Kcpn3P5/WZO4ZlaHrAl8yImaqOuxERsxE2dJ/fiheeNuLVwznhVynl/99vuEjIYndmFulnpWqXN5tV3JfekxE6Z0nsStXOm1D3bvdnDPXTm2MuZGjeu4X+9UvR/zgpdJdaB
+   eJzt1O0JhDAMBuD8r06gt4Ou482iruXnNLrHXeUISon1TRB/XSEIDemTUGmXEHUPRB4EUvNOiYbkPKr0Ppfzmzn6b2z1gK2ZFzFRG3U1JmIjbuw+uZdeed+I+wrmXAqitZBnlHKZcd7Q/WznlrIr5e5ytevvYu7so3U2s/Z1k9HNjTab0rmad1Jjx0ztO4naV6bWPdqN+wX3ULt978q0uGEN/+uZof9jfAEI7d2P
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="17">

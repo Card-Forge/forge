@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="54">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="54">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxr42RgaBvFo3gUj+JRPIpH8YjAAIblHPI=
@@ -12,7 +12,7 @@
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxz42RgcBvFo3gE4lUcDAxrOOhvrwcQP+akr90gvz4F0iAAsns1jf0Osm811E5RBgRgY6Ct30Fh6wnFdbwQOooBIeZFI/8+A+LnQLySA2EXAx3sRbYfZPdyaDjXAP2+HMh/QWN7ke0GAXrZCcPu0HB2paOdsHQGArSOV1rZCwDMGKdq
+   eJxz42RgcBvFo3gE4lUcDAxrOOhvrwcQP+akr90gvz4F0iAAsns1jf0Osm811E5RBgRgY6Ct3z04EXbV8ULoKCT7vWjk32dA/ByIV3IwYAW0shfZfpDdy6H21QD9vhzIf0GHtAWzGwToZScMu0Pj25WOdiKnM1rHK63sBQB/oaSI
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="22" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="174">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="22" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="174">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../tileset/main-nocollide.tsx"/>
  <layer id="16" name="Collision" width="22" height="21">
   <data encoding="base64" compression="zlib">
    eJxjYBhY4MaJwJTqJ4RJNdeEjzAmx1xK/EWpuaTqHWhzsakjZC6yPIyNLkZO+OJSR0k6QzcHn93UNpeQHDnm0jIcCMkNBnOR/U6Nsg2fHdQ2FxufEnPx2UMNc6mRzsitLwAC3x8G
@@ -25,7 +26,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxz42RgcMOCKQXYzKSFuYyiDAxMQJwoycCQBMTJQJyCBTOLkmbufKB6LikGhv9AvQxAmhGImbDghWSYSwyYA/UXMkb2A6nmJotAaGzqFhJhLkw/LuAoRp65tHDvWyxuQQZsatjD1x5JH7q5tlA5OzHMtHRDDKIfJDePxPSALUyUBFD1tIiTns6IMRcEqG3uP2B+UZGgrXvx6R1Icw8IIMqjxVB6HoXmbpeAYOTwhKUHaptLjXBANldNgnrmwtjUNBeUp+2g2BqJDcKgsgCfXgA/4GxS
+   eJxz42RgcMOCKQXYzKSFuYyiDAxMQJwoycCQBMTJQJyCBTOLkmbufKB6LikGhv9AvQxAmhGImbDghWSYSwyYA/UXMkb2A6nmJotAaGzqFhJhLkw/LnDQhTxzaeHet2L4zWZTwx6+9kj60M21hcrZiWGmpRtiEP0guXkkpgdsYaIkgKqnRZz0dEaMuSBAbXP/AfOLigRt3YtP70Cae0AAUR4pu0DoeRSau10CgpHDE5YeqG0uNcIB2Vw1CeqZC2NT01xQnraDYmskNgiDygJ8egEC8Gyv
   </data>
  </layer>
  <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">

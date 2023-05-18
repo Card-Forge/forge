@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="55">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="55">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFowA3qOMeGHt38QyMvaNgFIyCUTDcAQBRIgFQ
@@ -25,12 +25,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy1lTtOAzEQhieAREy8ZFuE6Ol4RSLUXIEKFA4AEi1spCQS4gIIzsCjouZ1CECUy1mY0dryrHds1gWfNLLHa+8/42fZBSjRfIasPsmq8tvrcy2MoT4nxr/vADwYe0RTaEvGyoBuiEkPYCrYrBcfR7Fw3VRWNcAR5v+inR2iv6br/TaFf4d09+fq/nqnWSddX4O3SWNiuv7ahSCNd+3mleb9zYvlvA9w0W+OXfZ0B6bdz1fi2cztK9q8qvuWG9S8FXSfUK8bWN+VharcUvHY23KZ1X0l6H4I40Kxc8oW+vZsSbo+UxbrOAco0A4WK5/qxHHufNvHMsvcvFm47leLeFMZBtpC+Q5Yne/xInc5ESOWJ0HtlPuI5SvBdXeE7z/sDmt7xmLsodYplmcQX1/StUaMc5eT9YmClQX7vpFwXxF8rT8h7e7+i5T7mfK9yuJ9pD20rZpt9D5pT1c6u/9Bm/NL8P1N8+6/uRI8/11wdwbtqzuj+wte+0UQ
+   eJy1lTtOAzEQhieAREx26RGiJ9vwikSoqUJNBSVsCpC4QRKEuACX4FFR8zoEIMrlLMxobTzrHRu74JNG9njt/Wf8rLoAFZrLkNUneV1+OX1uhDHU50z7dx2Ae20PaAptSVvl0fUx6QFMBZv1wuMoFq6bymoGcIz5P2fWjtBfy5r9NoV/+3T355r+eqddJ11Xg7dJY0K67tr5II23zM4rzfurE8tJH+C03x677OgOdLubr8STntsXtHnV9A0z1LwUdB9Rr+tZ35WFutxS4dhjucqbvhJ034Vxvtg5VYS+OVuSrsuUxTouAEq0w8XapzpxUFjf9PmNObfzZuC6nxHxpjL0tPnyHbA63+NlYXMiRixPgtop9xHLV4Lr7gjfv9kdFnvGQuyh1jmWFxBeX9I1RowLm5PxiZKVJfu+kXBfEXytPyDt7v6LlPuZ8r3Ow32kPbSt2m30PmWOrnR2/4OY80vw/U3z7r65Ejz/XbB3Bu2rW637A/IDRco=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
   <object id="38" template="../obj/entry_up.tx" x="239" y="273"/>
-  <object id="49" template="../obj/entry_down.tx" x="240.5" y="64">
+  <object id="49" template="../obj/entry_down.tx" x="237.5" y="66" width="21.5" height="21">
    <properties>
     <property name="teleport" value="maps/map/crypt_3.tmx"/>
    </properties>
