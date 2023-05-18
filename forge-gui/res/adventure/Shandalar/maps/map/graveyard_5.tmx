@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="55">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="55">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJzt0EEKgFAIBUC3gZ2guk7X6uot3BZF8EFoZqOCiLwIAADgz475uj7tUb7mNzrHfep1507X/BhnzYgtq1+y5k66/wcAvHcC5iYLKw==
@@ -25,11 +25,11 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../obj/entry_up.tx" x="320" y="432"/>
+  <object id="38" template="../obj/entry_up.tx" x="304" y="432" width="48" height="16"/>
   <object id="49" template="../obj/entry_down.tx" x="416.5" y="235.5">
    <properties>
     <property name="teleport" value="maps/map/crypt_5.tmx"/>

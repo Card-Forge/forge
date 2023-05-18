@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="59">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="59">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUEAJ7eBgY9vLQ394oXgaGaF762zsKRsEoGL4AABCfAmE=
@@ -30,22 +30,22 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztkm0KwjAMhqMw3VDa9QB+bL8V9QCK4iU8lV6id9M/egbTH4Us/ZidIAq+MNaN5H2SNAB/+bRXABn7Z751IP6ourMy9vbJcE9DkiMBBrI7M9THSgCshVufja+QWSdyad1Gd/R/iHgd+oVzm+w89cg/2zpyZ5rm43POAS55ApzI9s9rj/VicxYFwLJoZ9D+NDTrD/FmeI/zwF2mzHmCHlMZz+Mz2IzdmNj+h2R9rH8P96ovXD/ufcWYG9vzFPl2kvZEeQfVrJHnp6oqcXdLl+PTOxyuLTJ35WdY365f7/UJRYodJw==
+   eJztk00OgjAQhd+GCPJzAd1DC8R4G0+ll+iNdKN30ERP4LBoLENbLBqjiS8hUMK8b960AH/Z1NRAxN51a+X4flVPZ0XsblPH3cwe62sF3KrpTFeOBXkuma+ZOxdAIcJYZt+djuR/qvx9qCeex6TnqVL7bAvPnimznq5tDOziALghnZ/37suia5oEaJNxhplPod+/i5fSPmaOvQyZc0Iec+Gv4zNYZ8NvfOffJe2j/c8lcCmHftx7T+fv8Kb/x5bJ5LV1v0deH6pc0tmVQ45Nr3C4BDGl/Azr2/XrWe9nsSGz
   </data>
  </layer>
  <layer id="5" name="Rooftops" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFgxEI8zEwiPDR1o6LQPMv4bBDj5O2do8CBGDmZ2Bg4afcHEagGUxUMIca4CkvA8MzXsLqTgPT3xkap/NRMApGASoAAE/KBhg=
+   eJxjYBgFgxH8VwcSGrS1Yy/Q/H047NDjpK3dowAB3gPj4AMV4vot0Ix3NE4zxIKLwPR7SZ2wuu1A9+4YJG4eBaNgpAAAINYLWw==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
   <object id="38" template="../obj/entry_up.tx" x="194" y="273.333"/>
-  <object id="41" template="../obj/shop.tx" x="64" y="160.5"/>
+  <object id="41" template="../obj/shop.tx" x="64" y="163.5"/>
   <object id="42" template="../obj/shop.tx" x="336.5" y="80"/>
   <object id="43" template="../obj/shop.tx" x="304.5" y="177.5"/>
-  <object id="44" template="../obj/shop.tx" x="127.5" y="95.5"/>
-  <object id="45" template="../obj/shop.tx" x="256.5" y="143.5"/>
-  <object id="46" template="../obj/shop.tx" x="145" y="175.5"/>
+  <object id="44" template="../obj/shop.tx" x="127.5" y="98.5"/>
+  <object id="45" template="../obj/shop.tx" x="256.5" y="146.5"/>
+  <object id="46" template="../obj/shop.tx" x="145" y="178.5"/>
   <object id="47" template="../obj/inn.tx" x="207.5" y="79"/>
   <object id="49" template="../obj/enemy.tx" x="96" y="164.5">
    <properties>

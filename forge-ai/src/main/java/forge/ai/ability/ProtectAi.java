@@ -258,7 +258,7 @@ public class ProtectAi extends SpellAbilityAi {
     private static boolean protectMandatoryTarget(final Player ai, final SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
-        final List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
+        final List<Card> list = CardUtil.getValidCardsToTarget(sa);
 
         if (list.size() < tgt.getMinTargets(source, sa)) {
             sa.resetTargets();

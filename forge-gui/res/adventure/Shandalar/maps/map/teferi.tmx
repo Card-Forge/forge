@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="96">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="96">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -7,12 +7,12 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzVkkEKwkAMRQd0LC7s0sMIgzvP46ZXmZWgR/A03dizFBtkaJpJalJHxA+fdgaal/zUuanulcsEd8lXV8YSg2P+iluKOceV3PrcqVb03+ECI864NXBx3xZus8l7xlx4p/vB9WlmWu5+ON92L0c/so81EyIjLbdHXFCoxyfe11KuZODiuQKqf9rauX019ZmcJe5jqN8xDI4Lu7CI9hQUs1Bu+kaTw2XF32u4nLhcOB3W/D3MjHcJgnMnZP5OlvwTYykLC7LX/ocl9Wnf/6Qn2dqjTw==
+   eJzVkk0KwjAQhQMaiwu79DBCced53PQqWQl6BE/TjT1LsIMdOk1f2kkNiA8e+YHMl3mJMWM9CzMR7bHvJo9jDMT8FTcXc44bc2On5lrOLp9fwyWGm7GsHc6Zx3N57xRuvcN35vqNxT3GctNyj936cfjY2YF9LkGIQClcMjOqchjle2m5mj8UMiWXdNmnc31f0/e+Knolvbr6LWAgLr1FinwxdqXoJeTyGU0Otw3e13CRUC5Ipy3ep57lW5Jo3UYyX1JK/sxYy5Ki7LX/MKe+vfc/6Q0WVaCR
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJwrYGdgKBgkGASQ2djAQNlLC7tJAeh6W/gQmBZ2fuCAYH0uCA2y5yMHwj5s9qKHIzpNDChlY2AQZUfFHDwI96BjdPeSA0TZETQ67uOE4DYCmBTwixlhPjZ7QYAYe0kF11lJ14MLXGMlHCe0sBcf0OOCpFcYnk8fazGAKIH0TkieXABKE9toZPYoGF4AAFCLWRE=
+   eJwrYGdgKBgkGASQ2djAQNlLC7tJAehuJdddxIIPHBCszwWhQeAjB6r9hMIRl3vxgVI2BgZRdlTMwYNwDzpGdy85QJQdQaPjPk4IbiOASQG/mBHmY7MXBIixl1RwnZV0PbjANVbCcUILe/EBPS5IeoXh+fSxFgOIEkjvhOTJBaA0sY1GZo+C4QUA1S5VLg==
   </data>
  </layer>
  <layer id="2" name="Grass" width="30" height="17">

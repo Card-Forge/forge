@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="60">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="60">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../tileset/main-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJw7x8LAcG4Uj+JRPIpH8SgexSMCAwCNIqJs
@@ -12,7 +13,7 @@
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzNlEsKwjAURW/9YIvNKlyGTi3SNYk70an1syt/nTsVMZeXR1txYIkNFi6EJuS+8z7JEiD7Y+1j4GB1jJvrrn0fKTAZAye7vljdR7Lu0pt89JoDWBrxV+U/zOV7Dq9Wu1gY19Z7g8rXl1mZePfKyH31enKP3zQCZpGc4dmt3Ss9WBeJxM9c8q4iFsZ6PZVR/frWe2j8csxc3pzKD/8YAz0z+DN+q2cqzPSrx9W1tAa/6N02/U1W7bUQbwU5tYe0z0Iwa1+VSTVLZO559nAbDUxzts5Ood5p5h5ulvQNC5F7+nKGc1eHItAsK68v4wslRMd7
+   eJzNlEsKwjAURW/9QIvNKtyDE51apNtxKu5Ep9bPrvx1ESLm8vJoKw4sscHChdCE3HfeJ1kCZH+sQwwcrU5xc9217yMFxiPgbNdXq+VE1l16k49ecwArI/6q/Ie5fM/hzWofC+PGem9R+foyKxPvXhu5r15P7vGbRsAskjM8u7N7pQfrIpH4mUveVcTCWK+nMqpf33oPjV+Omcu7U/nhH2OgZwZ/xm/1TIWZfvW4upbW4Be926a/yaq9FuKtIKf2kPZZCGbtqzKpZonMPc8ebqOBac7WxSnUO83cw82SvmEhck9fznDu6lAEmmXl9WV8AUbcxPM=
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">
