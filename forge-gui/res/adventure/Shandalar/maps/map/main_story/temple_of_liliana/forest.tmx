@@ -426,7 +426,7 @@
     <property name="spawn.Normal" type="bool" value="true"/>
     <property name="speed" type="float" value="42"/>
     <property name="threatRange" type="float" value="50"/>
-    <property name="waypoints" value="254,258,258,257,256,259,260,259,256,257,258"/>
+    <property name="waypoints" value="254,258,257,256,259,260,259,256,257,258"/>
    </properties>
   </object>
   <object id="270" template="../../../obj/gate.tx" x="112" y="48">
@@ -434,22 +434,33 @@
     <property name="dialog">[
   {
     &quot;name&quot;:&quot;&quot;,
-    &quot;condition&quot;: [ { &quot;actorID&quot;: 187 } ],
+    &quot;condition&quot;: [ {&quot;checkMapFlag&quot;:&quot;cemeteryKey&quot;, &quot;not&quot;:true} ],
     &quot;text&quot;:&quot;A large gate stands between you and the area to the north. Above the gate is an inscription that reads \&quot;DONT DEAD OPEN INSIDE\&quot;.&quot;,
     &quot;loctext&quot;:&quot;&quot;,
     &quot;options&quot;:
 	[ 
 	{ &quot;name&quot;:&quot;Open the gate&quot;,
-	  &quot;condition&quot;: [{&quot;checkMapFlag&quot;:&quot;cemeteryKey&quot;}],
-              &quot;action&quot;: [{&quot;deleteMapObject&quot;:270}],
-	   &quot;text&quot;: &quot;With a screeching sound that could wake the dead, the gate swings open. You are now free to pass.&quot;,
-	  &quot;options&quot;:[{&quot;name&quot;:&quot;(continue)&quot;}]
-	 },
-	{ &quot;name&quot;:&quot;Open the gate&quot;,
 	  &quot;condition&quot;: [{&quot;checkMapFlag&quot;:&quot;cemeteryKey&quot;, &quot;not&quot;:true}],
 	  &quot;text&quot;: &quot;The gate is closed with a large and elaborate lock.&quot;,
 	  &quot;options&quot;: [{ &quot;name&quot;:&quot;Walk away in search of a key.&quot; }]
 	}, 
+	{ 
+	  &quot;name&quot;:&quot;Walk away.&quot; 
+	} 
+	]
+  },
+{
+    &quot;name&quot;:&quot;&quot;,
+    &quot;condition&quot;: [{&quot;checkMapFlag&quot;:&quot;cemeteryKey&quot;}],
+    &quot;text&quot;:&quot;A large gate stands between you and the area to the north. Above the gate is an inscription that reads \&quot;DONT DEAD OPEN INSIDE\&quot;.&quot;,
+    &quot;loctext&quot;:&quot;&quot;,
+    &quot;options&quot;:
+	[ 
+	{ &quot;name&quot;:&quot;Open the gate&quot;,
+              &quot;action&quot;: [{&quot;deleteMapObject&quot;:270}],
+	   &quot;text&quot;: &quot;With a screeching sound that could wake the dead, the gate swings open. You are now free to pass.&quot;,
+	  &quot;options&quot;:[{&quot;name&quot;:&quot;(continue)&quot;}]
+	 },
 	{ 
 	  &quot;name&quot;:&quot;Walk away.&quot; 
 	} 
@@ -473,8 +484,8 @@
   <object id="256" template="../../../obj/waypoint.tx" x="80" y="304"/>
   <object id="257" template="../../../obj/waypoint.tx" x="110" y="304"/>
   <object id="258" template="../../../obj/waypoint.tx" x="118" y="288"/>
-  <object id="259" template="../../../obj/waypoint.tx" x="80" y="240"/>
-  <object id="260" template="../../../obj/waypoint.tx" x="48" y="240"/>
+  <object id="259" template="../../../obj/waypoint.tx" x="80" y="239"/>
+  <object id="260" template="../../../obj/waypoint.tx" x="48" y="237"/>
   <object id="261" template="../../../obj/waypoint.tx" x="48" y="144"/>
   <object id="262" template="../../../obj/waypoint.tx" x="128" y="144"/>
   <object id="263" template="../../../obj/waypoint.tx" x="128" y="80"/>
