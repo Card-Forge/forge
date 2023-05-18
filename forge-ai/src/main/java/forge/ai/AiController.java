@@ -1084,8 +1084,8 @@ public class AiController {
 
             // If both are permanent creature spells, prefer the one that evaluates higher
             if (a1 == b1 && a.getApi() == ApiType.PermanentCreature && b.getApi() == ApiType.PermanentCreature) {
-                int evalA = ComputerUtilCard.evaluateCreature(a.getHostCard()); // TODO: what if it's the flip side of a DFC?
-                int evalB = ComputerUtilCard.evaluateCreature(b.getHostCard());
+                int evalA = ComputerUtilCard.evaluateCreature(a.getCardState().getCard());
+                int evalB = ComputerUtilCard.evaluateCreature(b.getCardState().getCard());
                 if (evalA > evalB) {
                     a1++;
                 } else if (evalB > evalA) {
