@@ -213,11 +213,10 @@ public class PlayAi extends SpellAbilityAi {
 
     private static List<Card> getPlayableCards(SpellAbility sa, Player ai) {
         List<Card> cards = null;
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
 
-        if (tgt != null) {
-            cards = CardUtil.getValidCardsToTarget(tgt, sa);
+        if (sa.usesTargeting()) {
+            cards = CardUtil.getValidCardsToTarget(sa);
         } else if (!sa.hasParam("Valid")) {
             cards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
         }

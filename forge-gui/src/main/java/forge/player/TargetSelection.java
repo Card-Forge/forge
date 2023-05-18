@@ -140,7 +140,7 @@ public class TargetSelection {
             return ability.getTargets().addAll(choices);
         }
 
-        List<Card> validTargets = CardUtil.getValidCardsToTarget(tgt, ability);
+        List<Card> validTargets = CardUtil.getValidCardsToTarget(ability);
         boolean mustTargetFiltered = false;
         if (canFilterMustTarget) {
             mustTargetFiltered = StaticAbilityMustTarget.filterMustTargetCards(controller.getPlayer(), validTargets, ability);

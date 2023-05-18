@@ -460,7 +460,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (ability.usesTargeting()) {
             // if announce is used as min targets, check what the max possible number would be
             if (announce.equals(ability.getTargetRestrictions().getMinTargets())) {
-                max = Math.min(max, CardUtil.getValidCardsToTarget(ability.getTargetRestrictions(), ability).size());
+                max = Math.min(max, CardUtil.getValidCardsToTarget(ability).size());
             }
         }
         if (min > max) {

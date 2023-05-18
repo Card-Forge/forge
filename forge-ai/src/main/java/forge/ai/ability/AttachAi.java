@@ -123,8 +123,7 @@ public class AttachAi extends SpellAbilityAi {
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Chained to the Rocks")) {
             final SpellAbility effectExile = AbilityFactory.getAbility(source.getSVar("TrigExile"), source);
             effectExile.setActivatingPlayer(ai, true);
-            final TargetRestrictions exile_tgt = effectExile.getTargetRestrictions();
-            final List<Card> targets = CardUtil.getValidCardsToTarget(exile_tgt, effectExile);
+            final List<Card> targets = CardUtil.getValidCardsToTarget(effectExile);
             return !targets.isEmpty();
         }
 
@@ -1328,11 +1327,9 @@ public class AttachAi extends SpellAbilityAi {
             return null;
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
         // Is a SA that moves target attachment
         if ("MoveTgtAura".equals(sa.getParam("AILogic"))) {
-            CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(tgt, sa), Predicates.or(CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()), new Predicate<Card>() {
+            CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(sa), Predicates.or(CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()), new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card card) {
                     return ComputerUtilCard.isUselessCreature(aiPlayer, card.getAttachedTo());
@@ -1341,7 +1338,7 @@ public class AttachAi extends SpellAbilityAi {
 
             return !list.isEmpty() ? ComputerUtilCard.getBestAI(list) : null;
         } else if ("Unenchanted".equals(sa.getParam("AILogic"))) {
-            List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
+            List<Card> list = CardUtil.getValidCardsToTarget(sa);
             CardCollection preferred = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card card) {
@@ -1358,10 +1355,10 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         List<Card> list = null;
-        if (tgt == null) {
-            list = AbilityUtils.getDefinedCards(attachSource, sa.getParam("Defined"), sa);
+        if (sa.usesTargeting()) {
+            list = CardUtil.getValidCardsToTarget(sa);
         } else {
-            list = CardUtil.getValidCardsToTarget(tgt, sa);
+            list = AbilityUtils.getDefinedCards(attachSource, sa.getParam("Defined"), sa);
         }
 
         if (list.isEmpty()) {

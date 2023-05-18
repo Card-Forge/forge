@@ -544,7 +544,8 @@ public final class CardUtil {
     // parameters for target selection.
     // however, due to the changes necessary for SA_Requirements this is much
     // different than the original
-    public static List<Card> getValidCardsToTarget(TargetRestrictions tgt, SpellAbility ability) {
+    public static List<Card> getValidCardsToTarget(final SpellAbility ability) {
+        final TargetRestrictions tgt = ability.getTargetRestrictions();
         final Card activatingCard = ability.getHostCard();
         final Game game = ability.getActivatingPlayer().getGame();
         final List<ZoneType> zone = tgt.getZone();
