@@ -424,8 +424,15 @@ public final class FModel {
                             String[] k = s.split(":");
                             addTo.add(k[0]);
                             CardType.Constant.pluralTypes.put(k[0], k[1]);
+
+                            if (k[0].contains(" ")) {
+                                CardType.Constant.MultiwordTypes.add(k[0]);
+                            }
                         } else {
                             addTo.add(s);
+                            if (s.contains(" ")) {
+                                CardType.Constant.MultiwordTypes.add(s);
+                            }
                         }
                     }
                 }
