@@ -7,6 +7,7 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../tileset/dungeon.tsx"/>
  <tileset firstgid="16001" source="../tileset/FarmFood.tsx"/>
+ <tileset firstgid="20097" source="../tileset/main-nocollide.tsx"/>
  <layer id="27" name="Colission" width="31" height="22">
   <data encoding="base64" compression="zlib">
    eJxjYBgFAwn4BFAxNYAbJ3Y80gAuf9MizPHZRw9AjN208jep7qA3oKW/B5tfkQE94pteQFsTN0YH1PY3zJ7nnAiMy25agdUcCIwLUNPfyOmalnUIITOJsRubvylxK676cyDy+mAuX+gJAOSYFiY=
@@ -37,7 +38,7 @@
  </layer>
  <layer id="26" name="AboveSprites" width="31" height="22">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFowACHMUG2gWjYKSA0bQGAYtF8fOHCxiNb9LBYAmzdj0IZtcnXg+13M4CtJMViNlIsBsEWsRJt4scPaOAPgAAEkMGlg==
+   eJxjYBgFowACDqQMtAtGwUgBo2kNApRT8POHCxiNb9LBYAmzdj0IZtcnXg+13M4CtJMViNlIsBsEWsRJt4scPaOAPgAApiYKNQ==
   </data>
  </layer>
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">

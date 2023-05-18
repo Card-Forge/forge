@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="200">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="200">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../tileset/main-nocollide.tsx"/>
  <layer id="17" name="Collision" width="46" height="28">
   <data encoding="base64" compression="zlib">
    eJzVllEOwjAIhhvffFlM1Jt4Bu/hYb3PjmDIJKkEKKxQOxKyWij7/EPRUuLseS7ldNcdciyO9bR4JLeVCfO9Z7O4X7df53K4tZd9BHf9WeOWao7khvVy2Rz3Kav1/SO5kRkc7CjcyFqvufzHontGn3D1aH9rdxS4NPsHt8Vm4/acXxO4vb8F3pkLXKO5raadre8fx9zLTU3rBdRPqk33JW6MRXF7Nae5Vu4IvcHfV38va/H1G8/SG+pzd6d3FtVs0n6Lu6VLJreXh+ZJNS3ctI70lN4BVvdLS+sebuh3iRv/S1m4tfk9u950juMzgpvy7+lvzzzq7e9S4u7laG5vbAbu1tkMJg+3hU3Te+937+HeYy29M5kzuUf0yRG5P3f9ziI=
@@ -30,7 +31,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBhAIDqQlo+CgQQOPAPtglGADCzFBtoFIxtoM0LwYAAf2SG0oBym3Fde+rplOID/ItjFrQdRnitUgWBOVQQGgaPCCAwCP6EYHbxjJ2wHNn2UApCbYW7DBk5ikZsFrHsW8EBoZL3IbOR0LsoGobHlB3IByN3YQIs4phjMXmR3/5FkYGBTw2/HDyxizMwkORMFzKFTe02cjT720AP8orN9lKbRxVSMY0JuOSSBShMSxwbIrTcpCaeVoqi0pgQqXwvKx1b2OKCV+XFkugVfmYcLKEug0ujipAJ6p+1RMArQwbxBPobgxkmc2FAAo+6mLxgM7gYA5lspjw==
+   eJxjYBhAIDqQlo+CgQQOPAPtglGADCzFBtoFIxtoM0LwYAAf2SG0oBym3Fde+rplOID/ItjFrQdRnitUgWBOVQQGgaPCCAwCP6EYHbxjJ2wHNn2UApCbYW7DBk5ikZsFrHsW8EBoZL3IbOR0LsoGobHlB3IByN3YQIs4phjMXmR3/5FkYGBTw2/HDyxizMwkORMFzEFqrym7kKaXkHpkeXE20swezOAXne2jNI2SGq/4ACG3HJJApQmJYwPk1pukhtNBpHBZKYpKa0qg8rWgfGxljwNamR9HhltAAF+ZhwsoS6DS6OKkAkrT9kEqprVRMDLBvEE+huDGSZzYUACj7qYvGAzuBgD1pix9
   </data>
  </layer>
  <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="2.65789" offsety="6.89474">

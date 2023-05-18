@@ -7,6 +7,7 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../tileset/dungeon.tsx"/>
  <tileset firstgid="16001" source="../tileset/FarmFood.tsx"/>
+ <tileset firstgid="20097" source="../tileset/main-nocollide.tsx"/>
  <layer id="25" name="Colision" width="31" height="22">
   <data encoding="base64" compression="zlib">
    eJxjYBgF1AJ8AvgxJfrpYTc2mhhAyG5SzCIVDKTdhNxFL3uI8SctwgJbWsFmB7obsbHxuY8YM8lxN6XmkAMIhRUhfcTm08GQB6gBSPX3QAFC5Q85cvjUkutGUuSpGcb0tjtEcuDsHgXUBwCRlA5C
@@ -24,7 +25,7 @@
  </layer>
  <layer id="26" name="AboveSprites" width="31" height="22">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFQxU08jMwNBGBFQWob7c80EwFIjCt7CYGDEd/Dye7F4vS325i8wwMq1DRbkL+QAbE2Dlc7EZ2AzXtBqnZC8T7aID3k5DOQyRxyxGbB0hVO5LBQx5UehQMfQAAvSA8LA==
+   eJxjYBgFQxU08jMwNBGBFQWob7c80EwFIjCt7CYGDEd/Dye7F4vS1+4DKcTnGRhWoaK/CfkDGRBj51CwGxTmxMYfte0GqdkLxPtogPeTkM5DJHHLKacQbw4pakcyeMiDSo+CoQ8A+/w+Eg==
   </data>
  </layer>
  <layer id="24" name="Clutter" width="31" height="22">
@@ -32,7 +33,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztlL9OAkEQhwdsUSCREy1Qo4elFYWlFhqVxsTKwkTR1v+1hbFTG21VIFa+gZUPoZUxFr6APbHA3+Rus8uwt3hAyZd82du5vZub2bsjGqBI5ogOxokO4RE8hifwFJ7B5mjrenNewfm9DkpWPe35JFFqgmgYjsA0zMAsLBeIqni2miHPFQmsSXZQsuZpOfdMPojLkXHlZuLWve5pOXcvxK277Gl7ze1iNt8e+y5ot6b7k6fio8dw33ev21gK7JZdy/0TRfQYDhV1TNZ9L94V+Q0pbktEd6X2+AL2iYrt8SpiNVi3nDP5DccV3GfR08dkxN+Q9z3MfZHWSnZ89yjZhrUU0dV88M3cYHw2+mEeT2XsKpq+e5Twv0z5mLOv6ZRb5Y9bN/eU626Q7nk3eV31RtVtIv9TNl4z2n7yEObm/j8Zz8Hvv7k3ao2Sz396wTVfjt5JVM/5navj2mVxrZpfjtmvj4rPGd/zD+5h+Z23ELXf/9kLyYtxfB3xfEwjHOtd5IiC69zM6nlUf0w+YuzXgHj8AfcOYrY=
+   eJztlL9OAkEQhwdsUSCREy1Qg4elFYWlFhqVxsTKwkTB1v+1hbFTG21VIFa+gZUPoZUxFr6APbHA34Tb7DLsLR5Q8iVf9nZu7+Zm9u6IhijiGaKDSaJDeASP4Qk8hWewOd6+3pyXcb7SRcmapz2fJkpMEY3CMZiEKZiGpRxRFc9WM+S5IoY18S5K1j0t585nW3E5Mq7cTNS6Nzwt5+6HqHWXPG2/uV3MZTtj3znt9uxg8pR99Bju++51m8ste2XPcv9YAT2GIwUdk3Xfi3dFfkOK2yLRXbEzvoh9okJnvIpYDdYt50x+g3EV91ny9DEZ8TfkfQ9yXyS1kl3fPUp2YC1BdLXQ+mZuMD4b/TCPZ1J2FU3fPUr4X6Z8zNjXdMut8ketm3vKdTdI97yXvK56w+o2kf8pG68p7SB5CHJz//MVHef339wbtUbJ5z/Rsyccfzl6J1E953eujmtXxLVqfjlhvz4sPm98zz+4h+V33kbYfv9nLyQvxvF1yPMxjWCs95AjDK5zK63nYf0x+YiwX0Oi8QdWu2KF
   </data>
  </layer>
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">

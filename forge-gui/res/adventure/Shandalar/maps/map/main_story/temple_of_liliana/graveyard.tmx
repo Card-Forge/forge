@@ -390,7 +390,7 @@
 	  &quot;text&quot;:&quot;After a moment, you feel a shift in the energy of your surroundings. The ethereal haze that had accompanied the graveyard's fences dissapates. Shapes begin to move at the edge of your vision. It seems there might have been something true about the guardian's role here.&quot;
 	  &quot;options&quot;:[
 		{&quot;name&quot;: &quot;(Continue)&quot;,
-	    	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: 254},{&quot;deleteMapObject&quot;: 258}, {&quot;activateMapObject&quot;: 230},{&quot;activateMapObject&quot;: 238},{&quot;activateMapObject&quot;: 246},{&quot;activateMapObject&quot;: 247}]
+	    	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: 258}, {&quot;activateMapObject&quot;: 230},{&quot;activateMapObject&quot;: 248},{&quot;activateMapObject&quot;: 246},{&quot;activateMapObject&quot;: 247}]
 		}
 		]
 	}
@@ -455,7 +455,7 @@
   </object>
   <object id="258" template="../../../obj/dialog.tx" x="17" y="176">
    <properties>
-    <property name="dialog" value="[{&quot;text&quot;: &quot;You are unable to continue any further, a mystical force pushes you backwards no matter how hard you try to move forward.&quot;, &quot;condition&quot;: [ { &quot;actorID&quot;: 254 } ], &quot;options&quot;:[{&quot;name&quot;: &quot;(Continue)&quot;}]}]"/>
+    <property name="dialog" value="[{&quot;text&quot;: &quot;You are unable to continue any further, a mystical force pushes you backwards no matter how hard you try to move forward, and you have a vision of an angel in your mind barring your path.&quot;, &quot;condition&quot;: [ { &quot;actorID&quot;: 254 } ], &quot;options&quot;:[{&quot;name&quot;: &quot;(Continue)&quot;}]}]"/>
    </properties>
   </object>
   <object id="259" template="../../../obj/gold.tx" x="161" y="48"/>

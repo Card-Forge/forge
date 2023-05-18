@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="90">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="90">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -29,13 +29,13 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="87" template="../obj/door_down.tx" x="319.717" y="143.596">
+  <object id="87" template="../obj/door_down.tx" x="317.717" y="145.596" width="20.283" height="19.596">
    <properties>
     <property name="teleport" value="maps/map/aerie_1.tmx"/>
     <property name="teleportObjectId" value="83"/>
    </properties>
   </object>
-  <object id="88" template="../obj/door_right.tx" x="208.5" y="144">
+  <object id="88" template="../obj/door_right.tx" x="206" y="146" width="20.5" height="20">
    <properties>
     <property name="teleport" value="maps/map/aerie_1C.tmx"/>
     <property name="teleportObjectId" value="90"/>
