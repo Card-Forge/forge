@@ -506,13 +506,14 @@ public class MapStage extends GameStage {
                         float w = Float.parseFloat(prop.get("width").toString());
                         float h = Float.parseFloat(prop.get("height").toString());
 
-                        String targetMap = prop.get("teleport").toString();
+                        String targetMap = prop.containsKey("teleport")?prop.get("teleport").toString():"";
+                        String direction = prop.containsKey("direction")?prop.get("direction").toString():"";
                         boolean canStillSpawnPlayerThere = (targetMap == null || targetMap.isEmpty() && sourceMap.isEmpty()) ||//if target is null and "from world"
                                 !sourceMap.isEmpty() && targetMap.equals(sourceMap);
 
                         int entryTargetId = (!prop.containsKey("teleportObjectId") || prop.get("teleportObjectId") ==null || prop.get("teleportObjectId").toString().isEmpty())? 0: Integer.parseInt(prop.get("teleportObjectId").toString());
 
-                        EntryActor entry = new EntryActor(this, id, prop.get("teleport").toString(), x, y, w, h, prop.get("direction").toString(), currentMap, entryTargetId);
+                        EntryActor entry = new EntryActor(this, id, targetMap, x, y, w, h, direction, currentMap, entryTargetId);
                         if (prop.containsKey("spawn") && prop.get("spawn").toString().equals("true")) {
                             spawnClassified.add(entry);
                         } else if (canStillSpawnPlayerThere) {
@@ -520,7 +521,8 @@ public class MapStage extends GameStage {
                         } else {
                             otherEntries.add(entry);
                         }
-                        addMapActor(obj, entry);
+                        if (!prop.containsKey("noExit") || prop.get("noExit").toString().equals("false"))
+                            addMapActor(obj, entry);
                         break;
                     case "portal":
                         float px = Float.parseFloat(prop.get("x").toString());
