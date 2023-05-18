@@ -47,7 +47,7 @@
   </object>
   <object id="202" template="../obj/door_up.tx" x="221.663" y="176.805">
    <properties>
-    <property name="teleport" value="maps/map/zedruu.tmx"/>
+    <property name="teleport" value="maps/map/zedruu_f4.tmx"/>
     <property name="teleportObjectId" value="114"/>
    </properties>
   </object>
