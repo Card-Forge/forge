@@ -26,6 +26,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     private Keyword keyword;
     private String original;
     private long staticId = 0;
+    private long idx = -1;
 
     private List<Trigger> triggers = Lists.newArrayList();
     private List<ReplacementEffect> replacements = Lists.newArrayList();
@@ -364,4 +365,12 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     public void setStaticId(long v) {
         this.staticId = v;
     }
+
+    public long getIdx() {
+        return idx;
+    }
+    public void setIdx(long i) {
+        idx = i;
+    }
+
 }
