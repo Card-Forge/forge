@@ -66,7 +66,7 @@ public class ConniveEffect extends SpellAbilityEffect {
 
         for (final Player p : controllers) {
             CardCollection connivers = CardLists.filterControlledBy(toConnive, p);
-            while (connivers.size() > 0) {
+            while (!connivers.isEmpty()) {
                 GameEntityCounterTable table = new GameEntityCounterTable();
                 final CardZoneTable triggerList = new CardZoneTable();
                 Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
@@ -76,18 +76,18 @@ public class ConniveEffect extends SpellAbilityEffect {
 
                 Card conniver = connivers.size() > 1 ? p.getController().chooseSingleEntityForEffect(connivers, sa,
                         Localizer.getInstance().getMessage("lblChooseConniver"), null) : connivers.get(0);
+                connivers.remove(conniver);
 
                 p.drawCards(num, sa, moveParams);
 
-                CardCollection validDisards =
-                        CardLists.filter(p.getCardsIn(ZoneType.Hand), CardPredicates.Presets.NON_TOKEN);
-                if (validDisards.isEmpty() || !p.canDiscardBy(sa, true)) { // hand being empty unlikely, just to be safe
+                CardCollection validDiscards = CardLists.filter(p.getCardsIn(ZoneType.Hand), CardPredicates.Presets.NON_TOKEN);
+                if (validDiscards.isEmpty() || !p.canDiscardBy(sa, true)) { // hand being empty unlikely, just to be safe
                     continue;
                 }
 
-                int amt = Math.min(validDisards.size(), num);
+                int amt = Math.min(validDiscards.size(), num);
                 CardCollectionView toBeDiscarded = amt == 0 ? CardCollection.EMPTY :
-                        p.getController().chooseCardsToDiscardFrom(p, sa, validDisards, amt, amt);
+                        p.getController().chooseCardsToDiscardFrom(p, sa, validDiscards, amt, amt);
 
                 if (toBeDiscarded.size() > 1) {
                     toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
@@ -101,7 +101,6 @@ public class ConniveEffect extends SpellAbilityEffect {
                 if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithTimestamp(conniver)) {
                     conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, table);
                 }
-                connivers.remove(conniver);
                 discardedMap.put(p, CardCollection.getView(toBeDiscarded));
                 discard(sa, triggerList, true, discardedMap, moveParams);
                 table.replaceCounterEffect(game, sa, true);
