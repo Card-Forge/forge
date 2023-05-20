@@ -60,6 +60,7 @@ public final class LDAModelGenetrator {
         formatStrings.add(FModel.getFormats().getPioneer().getName());
         formatStrings.add(FModel.getFormats().getHistoric().getName());
         formatStrings.add(FModel.getFormats().getModern().getName());
+        formatStrings.add(FModel.getFormats().getPauper().getName());
         formatStrings.add("Legacy");
         formatStrings.add("Vintage");
         formatStrings.add(DeckFormat.Commander.toString());
@@ -85,6 +86,8 @@ public final class LDAModelGenetrator {
                             lda = initializeFormat(FModel.getFormats().getStandard());
                         } else if (format.equals(FModel.getFormats().getModern().getName())) {
                             lda = initializeFormat(FModel.getFormats().getModern());
+                        } else if (format.equals(FModel.getFormats().getPauper().getName())) {
+                            lda = initializeFormat(FModel.getFormats().getPauper());
                         } else if (format != DeckFormat.Commander.toString()) {
                             lda = initializeFormat(FModel.getFormats().get(format));
                         }
@@ -97,6 +100,8 @@ public final class LDAModelGenetrator {
                     formatMap = loadFormat(FModel.getFormats().getStandard(), lda);
                 } else if (format.equals(FModel.getFormats().getModern().getName())) {
                     formatMap = loadFormat(FModel.getFormats().getModern(), lda);
+                } else if (format.equals(FModel.getFormats().getPauper().getName())) {
+                    formatMap = loadFormat(FModel.getFormats().getPauper(), lda);
                 } else if (format != DeckFormat.Commander.toString()) {
                     formatMap = loadFormat(FModel.getFormats().get(format), lda);;
                 }
