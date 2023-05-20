@@ -64,6 +64,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     private final JCheckBox boxModernCardgenDecks = new FCheckBox(DeckType.MODERN_CARDGEN_DECK.toString());
     private final JCheckBox boxLegacyCardgenDecks = new FCheckBox(DeckType.LEGACY_CARDGEN_DECK.toString());
     private final JCheckBox boxVintageCardgenDecks = new FCheckBox(DeckType.VINTAGE_CARDGEN_DECK.toString());
+    private final JCheckBox boxPauperCardgenDecks = new FCheckBox(DeckType.PAUPER_CARDGEN_DECK.toString());
     private final JCheckBox boxModernColorDecks = new FCheckBox(DeckType.MODERN_COLOR_DECK.toString());
     private final JCheckBox boxPauperColorDecks = new FCheckBox(DeckType.PAUPER_COLOR_DECK.toString());
     private final JCheckBox boxThemeDecks = new FCheckBox(DeckType.THEME_DECK.toString());
@@ -245,9 +246,8 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     public JCheckBox getBoxLegacyGenDecks() {
         return boxLegacyCardgenDecks;
     }
-    public JCheckBox getBoxVintageGenDecks() {
-        return boxVintageCardgenDecks;
-    }
+    public JCheckBox getBoxVintageGenDecks() { return boxVintageCardgenDecks; }
+    public JCheckBox getBoxPauperGenDecks() { return boxPauperCardgenDecks; }
 
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getBoxThemeDecks() {
