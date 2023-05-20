@@ -68,7 +68,7 @@
   <object id="55" template="../../obj/gate.tx" x="368" y="640">
    <properties>
     <property name="dialog">[{
-    &quot;text&quot;:&quot;A gate is blocking the path. I looks like it is open elsewhere&quot;,
+    &quot;text&quot;:&quot;A gate is blocking the path. It looks like it is opened elsewhere.&quot;,
     &quot;options&quot;:[
     { &quot;name&quot;:&quot;continue&quot; } 
     ]
@@ -84,12 +84,12 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall&quot;, 
+    &quot;text&quot;:&quot;Hmm... A big switch is embedded into the wall.&quot;,
     &quot;options&quot;:[ 
 	{ 
-		&quot;text&quot;:&quot;You hear some loud sounds from the center&quot;,
+		&quot;text&quot;:&quot;You hear some loud sounds coming from the center.&quot;,
 		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
-		&quot;name&quot;:&quot;flip the switch&quot; 
+		&quot;name&quot;:&quot;flip the switch&quot;
 			&quot;options&quot;:[{
 			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:3}}],
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:55}],
@@ -106,12 +106,12 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall&quot;, 
+    &quot;text&quot;:&quot;Hmm... A big switch is embedded into the wall.&quot;,
     &quot;options&quot;:[ 
 	{ 
-		&quot;text&quot;:&quot;You hear some loud sounds from the center&quot;,
+		&quot;text&quot;:&quot;You hear some loud sounds coming from the center.&quot;,
 		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
-		&quot;name&quot;:&quot;flip the switch&quot; 
+		&quot;name&quot;:&quot;flip the switch&quot;
 			&quot;options&quot;:[{
 			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:3}}],
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:55}],
@@ -128,12 +128,12 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall&quot;, 
+    &quot;text&quot;:&quot;Hmm... A big switch is embedded into the wall.&quot;,
     &quot;options&quot;:[ 
 	{ 
-		&quot;text&quot;:&quot;You hear some loud sounds from the center&quot;,
+		&quot;text&quot;:&quot;You hear some loud sounds coming from the center.&quot;,
 		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
-		&quot;name&quot;:&quot;flip the switch&quot; 
+		&quot;name&quot;:&quot;flip the switch&quot;
 			&quot;options&quot;:[{
 			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:3}}],
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:55}],
