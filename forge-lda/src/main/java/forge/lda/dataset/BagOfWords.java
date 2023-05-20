@@ -156,10 +156,10 @@ public final class BagOfWords {
         this.numNNZ    = numNNZ;
         this.numWords  = numWords;
 
-        System.out.println("Num Decks" + this.numDocs);
-        System.out.println("Num Vocabs" + this.numVocabs);
-        System.out.println("Num NNZ" + this.numNNZ);
-        System.out.println("Num Cards" + this.numWords);
+        System.out.println("Num Decks: " + this.numDocs);
+        System.out.println("Num Vocabs: " + this.numVocabs);
+        System.out.println("Num NNZ: " + this.numNNZ);
+        System.out.println("Num Cards: " + this.numWords);
     }
 
     public int getNumDocs() {
