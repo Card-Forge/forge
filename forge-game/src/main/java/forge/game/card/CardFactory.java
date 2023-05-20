@@ -124,62 +124,49 @@ public class CardFactory {
         final Card source = sourceSA.getHostCard();
         final Card original = targetSA.getHostCard();
         final Game game = source.getGame();
-        final Card c = new Card(game.nextCardId(), original.getPaperCard(), game);
-        copyCopiableCharacteristics(original, c, sourceSA, targetSA);
+        int id = game.nextCardId();
 
-        if (sourceSA.hasParam("NonLegendary")) {
-            c.removeType(CardType.Supertype.Legendary);
-        }
+        // need to create a physical card first, i need the original card faces
+        final Card copy = CardFactory.getCard(original.getPaperCard(), controller, id, game);
 
-        if (sourceSA.hasParam("CopySetPower")) {
-            c.setBasePower(Integer.parseInt(sourceSA.getParam("CopySetPower")));
-        }
-
-        if (sourceSA.hasParam("CopySetToughness")) {
-            c.setBaseToughness(Integer.parseInt(sourceSA.getParam("CopySetToughness")));
-        }
-
-        if (sourceSA.hasParam("CopySetLoyalty")) {
-            c.setBaseLoyalty(AbilityUtils.calculateAmount(source, sourceSA.getParam("CopySetLoyalty"), sourceSA));
-        }
-
-        if (sourceSA.hasParam("CopyAddTypes")) {
-            c.addType(Arrays.asList(sourceSA.getParam("CopyAddTypes").split(" & ")));
-        }
-
-        // change the color of the copy (eg: Fork)
-        if (sourceSA.hasParam("CopyIsColor")) {
-            ColorSet finalColors;
-            final String newColor = sourceSA.getParam("CopyIsColor");
-            if (newColor.equals("ChosenColor")) {
-                finalColors = ColorSet.fromNames(source.getChosenColors());
-            } else {
-                finalColors = ColorSet.fromNames(newColor.split(","));
+        if (original.isTransformable()) {
+            // 707.8a If an effect creates a token that is a copy of a transforming permanent or a transforming double-faced card not on the battlefield,
+            // the resulting token is a transforming token that has both a front face and a back face.
+            // The characteristics of each face are determined by the copiable values of the same face of the permanent it is a copy of, as modified by any other copy effects that apply to that permanent.
+            // If the token is a copy of a transforming permanent with its back face up, the token enters the battlefield with its back face up.
+            // This rule does not apply to tokens that are created with their own set of characteristics and enter the battlefield as a copy of a transforming permanent due to a replacement effect.
+            copy.setBackSide(original.isBackSide());
+            if (original.isTransformed()) {
+                copy.incrementTransformedTimestamp();
             }
-
-            c.addColor(finalColors, !sourceSA.hasParam("OverwriteColors"), c.getTimestamp(), 0, false);
         }
 
-        c.clearControllers();
-        c.setOwner(controller);
-        c.setCopiedSpell(true);
-        c.setCopiedPermanent(original);
+        copy.setStates(getCloneStates(original, copy, sourceSA));
+        // force update the now set State
+        if (original.isTransformable()) {
+            copy.setState(original.isTransformed() ? CardStateName.Transformed : CardStateName.Original, true, true);
+        } else {
+            copy.setState(copy.getCurrentStateName(), true, true);
+        }
 
-        c.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
-        c.setKickerMagnitude(original.getKickerMagnitude());
+        copy.setCopiedSpell(true);
+        copy.setCopiedPermanent(original);
+
+        copy.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
+        copy.setKickerMagnitude(original.getKickerMagnitude());
 
         for (OptionalCost cost : original.getOptionalCostsPaid()) {
-            c.addOptionalCostPaid(cost);
+            copy.addOptionalCostPaid(cost);
         }
         if (targetSA.isBestow()) {
-            c.animateBestow();
+            copy.animateBestow();
         }
 
         if (sourceSA.hasParam("RememberNewCard")) {
-            source.addRemembered(c);
+            source.addRemembered(copy);
         }
         
-        return c;
+        return copy;
     }
 
     /**
@@ -525,6 +512,7 @@ public class CardFactory {
      * @param from the {@link Card} to copy from.
      * @param to the {@link Card} to copy to.
      */
+    @Deprecated
     public static void copyCopiableCharacteristics(final Card from, final Card to, SpellAbility sourceSA, SpellAbility targetSA) {
         final boolean toIsFaceDown = to.isFaceDown();
         if (toIsFaceDown) {
@@ -753,7 +741,10 @@ public class CardFactory {
             final CardState ret2 = new CardState(out, CardStateName.Adventure);
             ret2.copyFrom(in.getState(CardStateName.Adventure), false, sa);
             result.put(CardStateName.Adventure, ret2);
-        } else if (in.isTransformable() && sa instanceof SpellAbility && ApiType.CopyPermanent.equals(((SpellAbility)sa).getApi())) {
+        } else if (in.isTransformable() && sa instanceof SpellAbility && (
+                ApiType.CopyPermanent.equals(((SpellAbility)sa).getApi()) ||
+                ApiType.CopySpellAbility.equals(((SpellAbility)sa).getApi())
+                )) {
             // CopyPermanent can copy token
             final CardState ret1 = new CardState(out, CardStateName.Original);
             ret1.copyFrom(in.getState(CardStateName.Original), false, sa);
@@ -820,7 +811,7 @@ public class CardFactory {
             }
 
             if (state.getType().isPlaneswalker() && sa.hasParam("SetLoyalty")) {
-                state.setBaseLoyalty(String.valueOf(sa.getParam("SetLoyalty")));
+                state.setBaseLoyalty(String.valueOf(AbilityUtils.calculateAmount(host, sa.getParam("SetLoyalty"), sa)));
             }
 
             // Planning a Vizier of Many Faces rework; always might come in handy
