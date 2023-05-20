@@ -264,7 +264,6 @@ public class GameAction {
 
             if (zoneTo.is(ZoneType.Stack)) {
                 // try not to copy changed stats when moving to stack
-                copied.setChangedCardKeywords(c.getChangedCardKeywords());
 
                 // copy exiled properties when adding to stack
                 // will be cleanup later in MagicStack
