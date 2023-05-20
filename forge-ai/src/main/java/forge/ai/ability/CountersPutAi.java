@@ -471,6 +471,13 @@ public class CountersPutAi extends CountersAi {
                     if (sacSelf && c.equals(source)) {
                         return false;
                     }
+                    if ("NoCounterOfType".equals(sa.getParam("AILogic"))) {
+                        for (String ctrType : types) {
+                            if (c.getCounters(CounterType.getType(ctrType)) > 0) {
+                                return false;
+                            }
+                        }
+                    }
                     return sa.canTarget(c) && c.canReceiveCounters(CounterType.getType(type));
                 }
             });
