@@ -450,3 +450,19 @@ Conjurer's Mantle
 ZedruuLantern
   xy: 336, 128
   size: 16, 16
+CartoucheOfSolidarity
+  xy:320,176
+  size:16,16
+CartoucheOfKnowledge
+  xy:320,192
+  size:16,16
+CartoucheOfStrength
+  xy:320,208
+  size:16,16
+CartoucheOfAmbition
+  xy:320,224
+  size:16,16
+CartoucheOfZeal
+  xy:320,240
+  size:16,16
+

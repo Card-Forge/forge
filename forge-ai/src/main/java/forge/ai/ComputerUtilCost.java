@@ -868,7 +868,7 @@ public class ComputerUtilCost {
         if (sa.usesTargeting()) {
             // if announce is used as min targets, check what the max possible number would be
             if ("X".equals(sa.getTargetRestrictions().getMinTargets())) {
-                val = ObjectUtils.min(val, CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa).size());
+                val = ObjectUtils.min(val, CardUtil.getValidCardsToTarget(sa).size());
             }
 
             if (sa.hasParam("AIMaxTgtsCount")) {

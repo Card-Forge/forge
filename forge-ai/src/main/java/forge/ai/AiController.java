@@ -644,7 +644,6 @@ public class AiController {
     public SpellAbility predictSpellToCastInMain2(ApiType exceptSA) {
         return predictSpellToCastInMain2(exceptSA, true);
     }
-
     private SpellAbility predictSpellToCastInMain2(ApiType exceptSA, boolean handOnly) {
         if (!getBooleanProperty(AiProps.PREDICT_SPELLS_FOR_MAIN2)) {
             return null;
@@ -684,15 +683,12 @@ public class AiController {
     public boolean reserveManaSourcesForNextSpell(SpellAbility sa, SpellAbility exceptForSa) {
         return reserveManaSources(sa, null, false, true, exceptForSa);
     }
-
     public boolean reserveManaSources(SpellAbility sa) {
         return reserveManaSources(sa, PhaseType.MAIN2, false, false, null);
     }
-
     public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy) {
         return reserveManaSources(sa, phaseType, enemy, true, null);
     }
-
     public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy, boolean forNextSpell, SpellAbility exceptForThisSa) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
         CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
@@ -1083,6 +1079,17 @@ public class AiController {
                     return 1;
                 } else if (b.isSpectacle() && !a.isSpectacle() && b1 < a1) {
                     return 1;
+                }
+            }
+
+            // If both are permanent creature spells, prefer the one that evaluates higher
+            if (a1 == b1 && a.getApi() == ApiType.PermanentCreature && b.getApi() == ApiType.PermanentCreature) {
+                int evalA = ComputerUtilCard.evaluateCreature(a);
+                int evalB = ComputerUtilCard.evaluateCreature(b);
+                if (evalA > evalB) {
+                    a1++;
+                } else if (evalB > evalA) {
+                    b1++;
                 }
             }
 

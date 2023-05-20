@@ -25,6 +25,8 @@ public interface KeywordInterface extends Cloneable {
     int getAmount();
     long getStaticId();
     void setStaticId(long v);
+    long getIdx();
+    void setIdx(long i);
 
     void createTraits(final Card host, final boolean intrinsic);
     void createTraits(final Card host, final boolean intrinsic, final boolean clear);

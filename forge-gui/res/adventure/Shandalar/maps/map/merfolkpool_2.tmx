@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="67">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="67">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -7,7 +7,7 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzr42Rg6BuE+BgrBNPLvgXsEAyzF8QmVe8DBtL14MPY/A9zGzIG2UuM3cTYic1ubHbCwona9hLjLmLspaadpIQzLe3FZzct7CXGz6P2Dr34beNEtZPSNA1To8iKwOj+QsdtFJSThPTgs5fcMppYPej2E+tPemMAaWRHOA==
+   eJzr42Rg6BuE+BgrBNPLvgXsEAyzF8QmVe8DBtL14MPY/A9zGzIG2UuM3cTYic1ubHbCwona9hLjLmLspaadpIQzLe3FZzct7CXGz6P2Dr34beNEtZPSNI1LDbodyLiNgnKSkB589pJbRhOrB91+Yv1JbwwA6nRIuw==
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
@@ -20,7 +20,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy9lVEOgjAMhpvtxXAY41VQCHoo0US9piIRebVNbCxlnWiAJs1gNP34u6wF6FrhAPYe4Irrwff9iF7ht7tyiqdvpYgj0+9kqevytug5+hO9dWAa57oppmWpkasQPMpxxhyXSB7NJ6aVW3LXuGYirhH/PYT3izGTz68W3JMfrvFfbhM4v1iNxmJPqS3Glat+npKrOXNwLc5cmudmhjh0l3cTs4mxUT2j9PEeNwYvf/elOqAvplvWaJngXFh8fJXYXJ4fPGNC+izdxAzVSerJ1D3hfeqLjy8zg4xnEuvmXJVRJ72v6zqEKfO0rt/PQ9xGcClez+XQebK9AL0kW6M=
+   eJy9ld0OgjAMhZvtxtdDIehDiSbqayoSkVvbhCaltBMNcJJm/Cz9OF1oAYYqA8AxAtxxPcVxnDFqfPdUQfvpXSX2kfQ9KQtD3h6jwHhjdAFcca6HYnrKnFyl4FGOK+a4JfJoPjG93JK7xTUX+1rx3VN4v4iZfH6N4F7idI//clvj/FI1mou9pLcUV676ekmu5qzB9ThreV6baXHoXz4szCbGTvWMKqZ73By8ou9LjeEv5VvWqN6MwxPPD54xlj/PNzGtOkk/ufpP+Dn1xdeXmUHimcS+OVft1Ek/13WdwpR5ujDu5xa3FVzar+eydZ6sDzYVXSE=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

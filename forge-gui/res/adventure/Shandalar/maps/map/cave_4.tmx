@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="60">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="60">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
@@ -12,7 +12,7 @@
  </layer>
  <layer id="2" name="Walls" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzVU9EJwjAUfNSKBpMpnMWqBVdyCycQFKuf3cUBpCroAKKgviMJqdX+lKRg4GjSJu9yd6+JIEr+BFmfaMvY9dvlHTO6RHQQ7XIfGRvmGw6I0kBe1vkJzcsAmieMGde91NS2mteMs0e9sSI6CQ3UB3dVPzT79rl6B5snkbtDEZi37CvGlOc9fr4k97UKy2szx7iS/1wzk9+TtURGC+Z3qX21XqelvfYcvI8a6ocm5HeT+gk+zOErOPfkMi7EZ9YL874Jt80xN/l1lMZDOq1zXq+M1+h3fMvNGnub+h+r7/OxcvWpku+v/T5huTFGgXu4rqdD/7eheN8YK786
+   eJzVU9EJwjAUfNSKDSZTOItVCq7kFk4gKFY/u4sDSFXQAURBfUcSUqv9KUnBwNGkTd7l7l5TQZT+CfKEaMvYJd3yThh9IjqIbrmPjA3zjYZEWSAvm/yE5mUAzVPGjOteGmpbzWvG2aPeWBGdhAbqg7uuH5p9+1y/g82TyN2hDMxb9dWOAeMlua9VWF6bOcaV/Oeam/yerCUyWjC/S+2r9Tqr7LXn4H3UUj80Ib+b1E/wYQ5fwbknl3EpPrNemPdtuG2OhcmvpzQe0mmd83plvEa/41th1tjb1v9YfZ+PlatPtXx/7fcJy40xDtzDTT0d+r8NxfsGzs6+6A==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="17">
