@@ -1087,9 +1087,9 @@ public class AiController {
                 int evalA = ComputerUtilCard.evaluateCreature(a);
                 int evalB = ComputerUtilCard.evaluateCreature(b);
                 if (evalA > evalB) {
-                    a1++;
+                    a1 = b1 + 1;
                 } else if (evalB > evalA) {
-                    b1++;
+                    b1 = a1 + 1;
                 }
             }
 
