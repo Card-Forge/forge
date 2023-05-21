@@ -120,12 +120,14 @@ public class GauntletUtil {
                     break;
                 case COMMANDER_DECK:
                     deck = DeckgenUtil.getCommanderDeck();
-                    eventNames.add(deck.getName());
+                    if (deck != null)
+                        eventNames.add(deck.getName());
                     break;
                 default:
                     continue;
             }
-            decks.add(deck);
+            if (deck != null)
+                decks.add(deck);
         }
 
         gauntlet.setDecks(decks);
