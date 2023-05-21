@@ -567,6 +567,18 @@ public class ComputerUtilCard {
             return evaluateCreature(b) - evaluateCreature(a);
         }
     };
+    public static final Comparator<SpellAbility> EvaluateCreatureSpellComparator = new Comparator<SpellAbility>() {
+        @Override
+        public int compare(final SpellAbility a, final SpellAbility b) {
+            // only reorder if generic priorities can't decide
+            // TODO ideally we could reuse the value
+            int comp = ComputerUtilAbility.saEvaluator.compareEvaluator(a, b, true);
+            if (comp == 0) {
+                return evaluateCreature(b) - evaluateCreature(a);
+            }
+            return comp;
+        }
+    };
 
     private static final CreatureEvaluator creatureEvaluator = new CreatureEvaluator();
     private static final LandEvaluator landEvaluator = new LandEvaluator();
@@ -596,7 +608,7 @@ public class ComputerUtilCard {
             host.setState(sa.getCardStateName(), false);
         }
 
-        int eval = creatureEvaluator.evaluateCreature(host);
+        int eval = evaluateCreature(host);
 
         if (currentState != null) {
             host.setState(currentState, false);
