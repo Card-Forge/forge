@@ -164,6 +164,8 @@ public final class FModel {
         if (new AutoUpdater(true).attemptToUpdate()) {
             //
         }
+        // load types before loading cards
+        loadDynamicGamedata();
 
         //load card database
         final CardStorageReader reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, progressBarBridge,
@@ -242,8 +244,6 @@ public final class FModel {
         worlds = new StorageBase<>("Quest worlds", null, standardWorlds);
 
         Spell.setPerformanceMode(preferences.getPrefBoolean(FPref.PERFORMANCE_MODE));
-
-        loadDynamicGamedata();
 
         if (progressBar != null) {
             FThreads.invokeInEdtLater(new Runnable() {
