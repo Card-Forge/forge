@@ -1083,7 +1083,7 @@ public class AiController {
             }
 
             // If both are permanent creature spells, prefer the one that evaluates higher
-            if (a1 == b1 && a.getApi() == ApiType.PermanentCreature && b.getApi() == ApiType.PermanentCreature) {
+            if (a.getApi() == ApiType.PermanentCreature && b.getApi() == ApiType.PermanentCreature) {
                 int evalA = ComputerUtilCard.evaluateCreature(a);
                 int evalB = ComputerUtilCard.evaluateCreature(b);
                 if (evalA > evalB) {
