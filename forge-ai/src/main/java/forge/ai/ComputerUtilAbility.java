@@ -306,17 +306,16 @@ public class ComputerUtilAbility {
             a1 += getSpellAbilityPriority(a);
             b1 += getSpellAbilityPriority(b);
 
-            int diff = b1 - a1;
-
-            // If both are creature spells with roughly the same priority sort them after
-            if (safeToEvaluateCreatures && Math.abs(diff) < 4 && a.getApi() == ApiType.PermanentCreature && b.getApi() == ApiType.PermanentCreature) {
-                return 0;
+            // If both are creature spells sort them after
+            if (safeToEvaluateCreatures) {
+                a1 += Math.round(ComputerUtilCard.evaluateCreature(a) / 100f);
+                b1 += Math.round(ComputerUtilCard.evaluateCreature(b) / 100f);
             }
 
-            return diff;
+            return b1 - a1;
         }
 
-        private int getSpellAbilityPriority(SpellAbility sa) {
+        private static int getSpellAbilityPriority(SpellAbility sa) {
             int p = 0;
             Card source = sa.getHostCard();
             final Player ai = source == null ? sa.getActivatingPlayer() : source.getController();
@@ -395,6 +394,7 @@ public class ComputerUtilAbility {
     };
 
     public static List<SpellAbility> sortCreatureSpells(List<SpellAbility> all) {
+        // try to smoothen power creeping by making CMC less of a factor
         List<SpellAbility> creatures = AiController.filterListByApi(Lists.newArrayList(all), ApiType.PermanentCreature);
         Collections.sort(creatures, ComputerUtilCard.EvaluateCreatureSpellComparator);
         int idx = 0;

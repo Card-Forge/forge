@@ -570,13 +570,8 @@ public class ComputerUtilCard {
     public static final Comparator<SpellAbility> EvaluateCreatureSpellComparator = new Comparator<SpellAbility>() {
         @Override
         public int compare(final SpellAbility a, final SpellAbility b) {
-            // only reorder if generic priorities can't decide
-            // TODO ideally we could reuse the value
-            int comp = ComputerUtilAbility.saEvaluator.compareEvaluator(a, b, true);
-            if (comp == 0) {
-                return evaluateCreature(b) - evaluateCreature(a);
-            }
-            return comp;
+            // TODO ideally we could reuse the value from the previous pass with false
+            return ComputerUtilAbility.saEvaluator.compareEvaluator(a, b, true);
         }
     };
 
