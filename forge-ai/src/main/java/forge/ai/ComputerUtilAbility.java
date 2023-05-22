@@ -393,9 +393,13 @@ public class ComputerUtilAbility {
         }
     };
 
-    public static List<SpellAbility> sortCreatureSpells(List<SpellAbility> all) {
-        // try to smoothen power creeping by making CMC less of a factor
-        List<SpellAbility> creatures = AiController.filterListByApi(Lists.newArrayList(all), ApiType.PermanentCreature);
+    public static List<SpellAbility> sortCreatureSpells(final List<SpellAbility> all) {
+        // try to smoothen power creep by making CMC less of a factor
+        final List<SpellAbility> creatures = AiController.filterListByApi(Lists.newArrayList(all), ApiType.PermanentCreature);
+        if (creatures.size() <= 1) {
+            return all;
+        }
+        // TODO this doesn't account for nearly identical creatures where one is a newer but more cost efficient variant
         Collections.sort(creatures, ComputerUtilCard.EvaluateCreatureSpellComparator);
         int idx = 0;
         for (int i = 0; i < all.size(); i++) {
