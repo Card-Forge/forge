@@ -52,3 +52,4 @@ ScryfallCode=PMEI
 49 R Usher of the Fallen @Anastasia Ovchinnikova
 50 R Frantic Search @Jeff Miracola
 51 R Mental Misstep @Erica Yang
+52 R Worn Powerstone @Henry G. Higginbotham
