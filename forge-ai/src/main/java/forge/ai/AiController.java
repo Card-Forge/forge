@@ -655,10 +655,11 @@ public class AiController {
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
 
         try {
-            Collections.sort(all, saComparator); // put best spells first
+            Collections.sort(all, ComputerUtilAbility.saEvaluator); // put best spells first
+            ComputerUtilAbility.sortCreatureSpells(all);
         } catch (IllegalArgumentException ex) {
             System.err.println(ex.getMessage());
-            String assertex = ComparatorUtil.verifyTransitivity(saComparator, all);
+            String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
             Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
@@ -1015,167 +1016,6 @@ public class AiController {
 
         return false;
     }
-
-    // not sure "playing biggest spell" matters?
-    private final static Comparator<SpellAbility> saComparator = new Comparator<SpellAbility>() {
-        @Override
-        public int compare(final SpellAbility a, final SpellAbility b) {
-            // sort from highest cost to lowest
-            // we want the highest costs first
-            int a1 = a.getPayCosts().getTotalMana().getCMC();
-            int b1 = b.getPayCosts().getTotalMana().getCMC();
-
-            // deprioritize SAs explicitly marked as preferred to be activated last compared to all other SAs
-            if (a.hasParam("AIActivateLast") && !b.hasParam("AIActivateLast")) {
-                return 1;
-            } else if (b.hasParam("AIActivateLast") && !a.hasParam("AIActivateLast")) {
-                return -1;
-            }
-
-            // deprioritize planar die roll marked with AIRollPlanarDieParams:LowPriority$ True
-            if (ApiType.RollPlanarDice == a.getApi() && a.getHostCard() != null && a.getHostCard().hasSVar("AIRollPlanarDieParams") && a.getHostCard().getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
-                return 1;
-            } else if (ApiType.RollPlanarDice == b.getApi() && b.getHostCard() != null && b.getHostCard().hasSVar("AIRollPlanarDieParams") && b.getHostCard().getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
-                return -1;
-            }
-
-            // deprioritize pump spells with pure energy cost (can be activated last,
-            // since energy is generally scarce, plus can benefit e.g. Electrostatic Pummeler)
-            int a2 = 0, b2 = 0;
-            if (a.getApi() == ApiType.Pump && a.getPayCosts().getCostEnergy() != null) {
-                if (a.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
-                    a2 = a.getPayCosts().getCostEnergy().convertAmount();
-                }
-            }
-            if (b.getApi() == ApiType.Pump && b.getPayCosts().getCostEnergy() != null) {
-                if (b.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
-                    b2 = b.getPayCosts().getCostEnergy().convertAmount();
-                }
-            }
-            if (a2 == 0 && b2 > 0) {
-                return -1;
-            } else if (b2 == 0 && a2 > 0) {
-                return 1;
-            }
-
-            // cast 0 mana cost spells first (might be a Mox)
-            if (a1 == 0 && b1 > 0 && ApiType.Mana != a.getApi()) {
-                return -1;
-            } else if (a1 > 0 && b1 == 0 && ApiType.Mana != b.getApi()) {
-                return 1;
-            }
-
-            if (a.getHostCard() != null && a.getHostCard().hasSVar("FreeSpellAI")) {
-                return -1;
-            } else if (b.getHostCard() != null && b.getHostCard().hasSVar("FreeSpellAI")) {
-                return 1;
-            }
-
-            if (a.getHostCard().equals(b.getHostCard()) && a.getApi() == b.getApi()) {
-                // Cheaper Spectacle costs should be preferred
-                // FIXME: Any better way to identify that these are the same ability, one with Spectacle and one not?
-                // (looks like it's not a full-fledged alternative cost as such, and is not processed with other alt costs)
-                if (a.isSpectacle() && !b.isSpectacle() && a1 < b1) {
-                    return 1;
-                } else if (b.isSpectacle() && !a.isSpectacle() && b1 < a1) {
-                    return 1;
-                }
-            }
-
-            // If both are permanent creature spells, prefer the one that evaluates higher
-            if (a.getApi() == ApiType.PermanentCreature && b.getApi() == ApiType.PermanentCreature) {
-                int evalA = ComputerUtilCard.evaluateCreature(a);
-                int evalB = ComputerUtilCard.evaluateCreature(b);
-                if (evalA > evalB) {
-                    a1++;
-                } else if (evalB > evalA) {
-                    b1++;
-                }
-            }
-
-            a1 += getSpellAbilityPriority(a);
-            b1 += getSpellAbilityPriority(b);
-
-            return b1 - a1;
-        }
-
-        private int getSpellAbilityPriority(SpellAbility sa) {
-            int p = 0;
-            Card source = sa.getHostCard();
-            final Player ai = source == null ? sa.getActivatingPlayer() : source.getController();
-            if (ai == null) {
-                System.err.println("Error: couldn't figure out the activating player and host card for SA: " + sa);
-                return 0;
-            }
-            final boolean noCreatures = ai.getCreaturesInPlay().isEmpty();
-
-            if (source != null) {
-                // puts creatures in front of spells
-                if (source.isCreature()) {
-                    p += 1;
-                }
-                if (source.hasSVar("AIPriorityModifier")) {
-                    p += Integer.parseInt(source.getSVar("AIPriorityModifier"));
-                }
-                if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
-                    p -= 10;
-                }
-                // don't play equipments before having any creatures
-                if (source.isEquipment() && noCreatures) {
-                    p -= 9;
-                }
-                // don't equip stuff in main 2 if there's more stuff to cast at the moment
-                if (sa.getApi() == ApiType.Attach && !sa.isCurse() && source.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                    p -= 1;
-                }
-                // 1. increase chance of using Surge effects
-                // 2. non-surged versions are usually inefficient
-                if (source.getOracleText().contains("surge cost") && !sa.isSurged()) {
-                    p -= 9;
-                }
-                // move snap-casted spells to front
-                if (source.isInZone(ZoneType.Graveyard)) {
-                    if (sa.getMayPlay() != null && source.mayPlay(sa.getMayPlay()) != null) {
-                        p += 50;
-                    }
-                }
-                // if the profile specifies it, deprioritize Storm spells in an attempt to build up storm count
-                if (source.hasKeyword(Keyword.STORM) && ai.getController() instanceof PlayerControllerAi) {
-                    p -= (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.PRIORITY_REDUCTION_FOR_STORM_SPELLS));
-                }
-            }
-
-            // use Surge and Prowl costs when able to
-            if (sa.isSurged() || sa.isProwl()) {
-                p += 9;
-            }
-            // sort planeswalker abilities with most costly first
-            if (sa.isPwAbility()) {
-                final CostPart cost = sa.getPayCosts().getCostParts().get(0);
-                if (cost instanceof CostRemoveCounter) {
-                    p += cost.convertAmount() == null ? 1 : cost.convertAmount();
-                } else if (cost instanceof CostPutCounter) {
-                    p -= cost.convertAmount();
-                }
-                if (sa.hasParam("Ultimate")) {
-                    p += 9;
-                }
-            }
-
-            if (ApiType.DestroyAll == sa.getApi()) {
-                p += 4;
-            } else if (ApiType.Mana == sa.getApi()) {
-                p -= 9;
-            }
-
-            // try to cast mana ritual spells before casting spells to maximize potential mana
-            if ("ManaRitual".equals(sa.getParam("AILogic"))) {
-                p += 9;
-            }
-
-            return p;
-        }
-    };
 
     public CardCollection getCardsToDiscard(final int numDiscard, final String[] uTypes, final SpellAbility sa) {
         return getCardsToDiscard(numDiscard, uTypes, sa, CardCollection.EMPTY);
@@ -1744,10 +1584,11 @@ public class AiController {
             return null;
 
         try {
-            Collections.sort(all, saComparator); // put best spells first
+            Collections.sort(all, ComputerUtilAbility.saEvaluator); // put best spells first
+            ComputerUtilAbility.sortCreatureSpells(all);
         } catch (IllegalArgumentException ex) {
             System.err.println(ex.getMessage());
-            String assertex = ComparatorUtil.verifyTransitivity(saComparator, all);
+            String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
             Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
@@ -2292,14 +2133,14 @@ public class AiController {
     }
 
     // TODO move to more common place
-    private <T> List<T> filterList(List<T> input, Predicate<? super T> pred) {
+    private static <T> List<T> filterList(List<T> input, Predicate<? super T> pred) {
         List<T> filtered = Lists.newArrayList(Iterables.filter(input, pred));
         input.removeAll(filtered);
         return filtered;
     }
 
     // TODO move to more common place
-    private List<SpellAbility> filterListByApi(List<SpellAbility> input, ApiType type) {
+    public static List<SpellAbility> filterListByApi(List<SpellAbility> input, ApiType type) {
         return filterList(input, SpellAbilityPredicates.isApi(type));
     }
 
