@@ -636,10 +636,8 @@ public abstract class SpellAbilityEffect {
             combat.initConstraints();
             if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
                 PlayerCollection defendingPlayers = AbilityUtils.getDefinedPlayers(sa.hasParam("ForEach") ? c : host, attacking, sa);
-                defs = new FCollection<>();
-                for (Player p : defendingPlayers) {
-                    defs.addAll(combat.getDefendersControlledBy(p));
-                }
+                defs = new FCollection<>(defendingPlayers);
+                defs.addAll(Iterables.filter(combat.getDefendingPlaneswalkers(), CardPredicates.isControlledByAnyOf(defendingPlayers)));
             } else if ("True".equalsIgnoreCase(attacking)) {
                 defs = (FCollection<GameEntity>) combat.getDefenders();
             } else {

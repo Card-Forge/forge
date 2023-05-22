@@ -590,9 +590,7 @@ public class GameAction {
         // 400.7g try adding keyword back into card if it doesn't already have it
         if (zoneTo.is(ZoneType.Stack) && cause != null && cause.isSpell() && !cause.isIntrinsic() && c.equals(cause.getHostCard())) {
             if (cause.getKeyword() != null && !copied.getKeywords().contains(cause.getKeyword())) {
-                copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, game.getNextTimestamp(), 0, false);
-                // update Keyword Cache
-                copied.updateKeywords();
+                copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, game.getNextTimestamp(), 0, true);
             }
         }
 
