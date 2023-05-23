@@ -201,7 +201,9 @@ public final class CardUtil {
         newCopy.setLKICMC(in.getCMC());
         // used for the purpose of cards that care about the zone the card was known to be in last
         newCopy.setLastKnownZone(in.getLastKnownZone());
-        
+        // copy EffectSource for description
+        newCopy.setEffectSource(getLKICopy(in.getEffectSource(), cachedMap));
+
         if (in.isFlipCard()) {
             newCopy.getState(CardStateName.Original).copyFrom(in.getState(CardStateName.Original), true);
             newCopy.addAlternateState(CardStateName.Flipped, false);
