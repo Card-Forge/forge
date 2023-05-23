@@ -10,5 +10,4 @@ SVar:X:Count$TriggerRememberAmount
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ Z | AddToughness$ Z | Description$ Creatures you control get +1/+1 for each valor counter on CARDNAME.
 SVar:Z:Count$CardCounters.VALOR
 DeckHas:Ability$LifeGain|Counters
-AI:RemoveDeck:All
 Oracle:Lifelink\nWhen Intrepid Adversary enters the battlefield, you may pay {1}{W} any number of times. When you pay this cost one or more times, put that many valor counters on Intrepid Adversary.\nCreatures you control get +1/+1 for each valor counter on Intrepid Adversary.
