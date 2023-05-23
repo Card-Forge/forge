@@ -217,12 +217,17 @@ public final class CardUtil {
         } else {
             newCopy.getCurrentState().copyFrom(in.getState(in.getFaceupCardStateName()), true);
         }
+        newCopy.setFlipped(in.isFlipped());
+        if (in.isTransformed()) {
+            newCopy.incrementTransformedTimestamp();
+        }
+        newCopy.setState(getFaceupCardStateName(), false, true);
         if (in.isFaceDown()) {
             newCopy.turnFaceDownNoUpdate();
             newCopy.setType(new CardType(in.getFaceDownState().getType()));
-            // prevent StackDescription from revealing face
-            newCopy.updateStateForView();
         }
+        // prevent StackDescription from revealing face
+        newCopy.updateStateForView();
 
         /*
         if (in.isCloned()) {
@@ -257,7 +262,6 @@ public final class CardUtil {
         newCopy.setPhasedOut(in.getPhasedOut());
 
         newCopy.setTapped(in.isTapped());
-        newCopy.setFlipped(in.isFlipped());
 
         newCopy.setDamageHistory(in.getDamageHistory());
         newCopy.setDamageReceivedThisTurn(in.getDamageReceivedThisTurn());
@@ -312,9 +316,6 @@ public final class CardUtil {
         newCopy.setTimestamp(in.getTimestamp());
 
         newCopy.setBestowTimestamp(in.getBestowTimestamp());
-        if (in.isTransformed()) {
-            newCopy.incrementTransformedTimestamp();
-        }
 
         newCopy.setForetold(in.isForetold());
         newCopy.setForetoldThisTurn(in.isForetoldThisTurn());
