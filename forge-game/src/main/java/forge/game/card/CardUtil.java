@@ -218,10 +218,11 @@ public final class CardUtil {
             newCopy.getCurrentState().copyFrom(in.getState(in.getFaceupCardStateName()), true);
         }
         newCopy.setFlipped(in.isFlipped());
+        newCopy.setBackSide(in.isBackSide());
         if (in.isTransformed()) {
             newCopy.incrementTransformedTimestamp();
         }
-        newCopy.setState(getFaceupCardStateName(), false, true);
+        newCopy.setState(newCopy.getFaceupCardStateName(), false, true);
         if (in.isFaceDown()) {
             newCopy.turnFaceDownNoUpdate();
             newCopy.setType(new CardType(in.getFaceDownState().getType()));
