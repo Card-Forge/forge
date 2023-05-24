@@ -4,13 +4,10 @@ Types:Legendary Creature Kor Artificer
 PT:5/4
 K:Affinity:Artifact.Equipment:equipment
 T:Mode$ Attacks | ValidCard$ Creature.equipped+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever an equipped creature you control attacks, exile the top card of your library. You may play that card this turn. You may cast Equipment spells this way without paying their mana costs.
-SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBBranch
-SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | TrueSubAbility$ DBEffect2 | FalseSubAbility$ DBEffect | SubAbility$ DBCleanup
-SVar:DBEffect2:DB$ Effect | StaticAbilities$ STPlay2 | RememberObjects$ Remembered | ForgetOnMoved$ Exile
-SVar:STPlay2:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card this turn without paying its mana cost.
-SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay,STPlay2 | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card this turn.
+SVar:STPlay2:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Equipment.IsRemembered | ValidAfterStack$ Spell.Equipment | AffectedZone$ Exile | Description$ You may cast Equipment spells this way without paying their mana costs.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Valid Equipment
 DeckNeeds:Type$Equipment
 Oracle:Affinity for Equipment\nWhenever an equipped creature you control attacks, exile the top card of your library. You may play that card this turn. You may cast Equipment spells this way without paying their mana costs.

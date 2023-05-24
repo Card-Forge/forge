@@ -239,7 +239,7 @@ public class CombatUtil {
                     if (!defender.equals(ge) && ge instanceof Player) {
                         // found a player which does not goad that creature
                         // and creature can attack this player or planeswalker
-                        if (!attacker.isGoadedBy((Player) ge) && canAttack(attacker, ge)) {
+                        if (!attacker.isGoadedBy((Player) ge) && !ge.hasKeyword("Creatures your opponents control attack a player other than you if able.") && canAttack(attacker, ge)) {
                             return false;
                         }
                     }
@@ -251,7 +251,7 @@ public class CombatUtil {
         if (defender != null && defender.hasKeyword("Creatures your opponents control attack a player other than you if able.")) {
             for (GameEntity ge : getAllPossibleDefenders(attacker.getController())) {
                 if (!defender.equals(ge) && ge instanceof Player) {
-                    if (canAttack(attacker, ge)) {
+                    if (!ge.hasKeyword("Creatures your opponents control attack a player other than you if able.") && canAttack(attacker, ge)) {
                         return false;
                     }
                 }
