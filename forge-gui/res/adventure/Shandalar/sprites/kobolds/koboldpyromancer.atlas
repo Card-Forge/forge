@@ -127,16 +127,16 @@ Walk
   xy: 224, 76
   size: 32, 20      
 Attack 
-  xy: 2, 170
+  xy: 7, 170
   size: 55, 21 
 Attack 
-  xy: 66, 170
+  xy: 76, 170
   size: 55, 21
 Attack 
-  xy: 130, 170
+  xy: 136, 170
   size: 55, 21
 Attack 
-  xy: 194, 170
+  xy: 198, 170
   size: 55, 21
 Death 
   xy: 0, 236

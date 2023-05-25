@@ -87,35 +87,5 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="72" template="../../obj/shop.tx" x="305.612" y="270.766">
-   <properties>
-    <property name="commonShopList" value="Eldrazi"/>
-    <property name="signYOffset" type="float" value="-8"/>
-   </properties>
-  </object>
-  <object id="73" template="../../obj/shop.tx" x="118.838" y="270.766">
-   <properties>
-    <property name="commonShopList" value="SmallCats"/>
-    <property name="signYOffset" type="float" value="-8"/>
-   </properties>
-  </object>
-  <object id="74" template="../../obj/shop.tx" x="205.256" y="318.853">
-   <properties>
-    <property name="commonShopList" value="Shapeshifter"/>
-    <property name="signYOffset" type="float" value="-8"/>
-   </properties>
-  </object>
-  <object id="75" template="../../obj/shop.tx" x="265.887" y="308.399">
-   <properties>
-    <property name="commonShopList" value="Gods"/>
-    <property name="signYOffset" type="float" value="-8"/>
-   </properties>
-  </object>
-  <object id="76" template="../../obj/shop.tx" x="203.165" y="240.102">
-   <properties>
-    <property name="commonShopList" value="Insects"/>
-    <property name="signYOffset" type="float" value="-8"/>
-   </properties>
-  </object>
  </objectgroup>
 </map>

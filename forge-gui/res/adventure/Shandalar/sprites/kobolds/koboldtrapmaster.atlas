@@ -4,98 +4,80 @@ format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
-  xy: 103, 75
-  size: 16, 16     
+  xy: 140, 148
+  size: 14, 14     
 Idle 
-  xy: 7, 82
-  size: 21, 23   
+  xy: 6, 19
+  size: 20, 22   
 Idle 
-  xy: 39, 82
-  size: 21, 23   
+  xy: 38, 19
+  size: 20, 22  
 Idle 
-  xy: 71, 82
-  size: 21, 23    
+  xy: 70, 19
+  size: 20, 22  
 Idle 
-  xy: 103, 82
-  size: 21, 23    
-Idle 
-  xy: 135, 82
-  size: 21, 23   
-Idle 
-  xy: 167, 82
-  size: 21, 23   
-Idle 
-  xy: 199, 82
-  size: 21, 23    
-Idle 
-  xy: 231, 82
-  size: 21, 23    
+  xy: 102, 19
+  size: 20, 22     
 Walk
-  xy: 0, 32
-  size: 32, 32      
+  xy: 6, 77
+  size: 22, 28      
 Walk
-  xy: 32, 32
-  size: 32, 32      
+  xy: 38, 77
+  size: 22, 28      
 Walk
-  xy: 64, 32
-  size: 32, 32      
+  xy: 70, 77
+  size: 22, 28      
 Walk
-  xy: 96, 32
-  size: 32, 32      
+  xy: 102, 77
+  size: 22, 28      
 Walk
-  xy: 128, 32
-  size: 32, 32      
+  xy: 134, 77
+  size: 22, 28     
 Walk
-  xy: 160, 32
-  size: 32, 32      
+  xy: 166, 77
+  size: 22, 28      
 Walk
-  xy: 192, 32
-  size: 32, 32      
+  xy: 198, 77
+  size: 22, 28      
 Walk
-  xy: 224, 32
-  size: 32, 32      
+  xy: 230, 77
+  size: 22, 28   
 Attack 
-  xy: 0, 64
-  size: 32, 32  
+  xy: 38, 141
+  size: 22, 28  
 Attack 
-  xy: 32, 64
-  size: 32, 32  
+  xy: 70, 141
+  size: 22, 28 
 Attack 
-  xy: 64, 64
-  size: 32, 32  
+  xy: 70, 141
+  size: 22, 28 
 Attack 
-  xy: 96, 64
-  size: 32, 32  
+  xy: 102, 141
+  size: 22, 28 
 Attack 
-  xy: 128, 64
-  size: 32, 32  
+  xy: 134, 141
+  size: 22, 28
 Attack 
-  xy: 160, 64
-  size: 32, 32  
-Attack 
-  xy: 192, 64
-  size: 32, 32  
-Attack 
-  xy: 224, 64
-  size: 32, 32           
+  xy: 166, 141
+  size: 22, 28          
 Death 
-  xy: 0, 128
-  size: 32, 32  
+  xy: 0, 406
+  size: 32, 19  
 Death 
-  xy: 32, 128
-  size: 32, 32  
+  xy: 32, 406
+  size: 32, 19  
 Death 
-  xy: 64, 128
-  size: 32, 32  
+  xy: 64, 406
+  size: 32, 19 
 Death 
-  xy: 96, 128
-  size: 32, 32  
+  xy: 96, 406
+  size: 32, 19  
 Death 
-  xy: 128, 128
-  size: 32, 32  
+  xy: 128, 406
+  size: 32, 19  
 Death 
-  xy: 160, 128
-  size: 32, 32  
+  xy: 160, 406
+  size: 32, 19  
 Death 
-  xy: 192, 128
-  size: 32, 32  
+  xy: 192, 406
+  size: 32, 19  

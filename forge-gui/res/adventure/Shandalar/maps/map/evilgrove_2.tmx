@@ -5,11 +5,6 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJyL5mVg2MVDXxwFtFMWSNMbSPMg7JWho/3I9tITjNo7au+ovaP2Dhd7aVVmg+zdC8T13LQxHxuoBdq1h8R6cy+a/0nVj4wBr6Qysg==
-  </data>
- </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJyr42RgqBvFo3gUj+JRPIpH8YjAAOMFDQI=
@@ -48,7 +43,7 @@
   </object>
   <object id="57" template="../obj/enemy.tx" x="203.5" y="215.834">
    <properties>
-    <property name="enemy" value="ClayGolem"/>
+    <property name="enemy" value="Clay Golem"/>
    </properties>
   </object>
   <object id="60" template="../obj/enemy.tx" x="121.562" y="108.029">
