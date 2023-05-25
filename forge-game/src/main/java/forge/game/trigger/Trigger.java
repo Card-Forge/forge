@@ -223,7 +223,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
             result = TextUtil.fastReplace(result, "ABILITY", saDesc);
 
-            String currentName = sa.getHostCard().getName();
+            String currentName = sa == null ? "" : sa.getHostCard().getName();
             result = CardTranslation.translateMultipleDescriptionText(result, currentName);
             result = TextUtil.fastReplace(result,"CARDNAME", CardTranslation.getTranslatedName(currentName));
             result = TextUtil.fastReplace(result,"NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
