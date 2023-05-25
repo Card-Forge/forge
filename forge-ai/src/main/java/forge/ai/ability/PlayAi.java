@@ -120,7 +120,7 @@ public class PlayAi extends SpellAbilityAi {
 
             if ("ReplaySpell".equals(sa.getParam("AILogic"))) {
                 return ComputerUtil.targetPlayableSpellCard(ai, getPlayableCards(sa, ai), sa, sa.hasParam("WithoutManaCost"), mandatory);
-            } 
+            }
 
             return checkApiLogic(ai, sa);
         }
