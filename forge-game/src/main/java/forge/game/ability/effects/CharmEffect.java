@@ -53,6 +53,10 @@ public class CharmEffect extends SpellAbilityEffect {
     }
 
     public static String makeFormatedDescription(SpellAbility sa) {
+        return makeFormatedDescription(sa, true);
+    }
+
+    public static String makeFormatedDescription(SpellAbility sa, boolean includeChosen) {
         Card source = sa.getHostCard();
 
         List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
@@ -83,7 +87,7 @@ public class CharmEffect extends SpellAbilityEffect {
         sb.append(oppChooses ? "An opponent chooses " : "Choose ");
 
         if (num == min || num == Integer.MAX_VALUE) {
-            sb.append(Lang.getNumeral(min));
+            sb.append(num == 0 ? "up to that many" : Lang.getNumeral(min));
         } else if (min == 0 && num == sa.getParam("Choices").split(",").length) {
             sb.append("any number ");
         } else if (min == 0) {
@@ -137,7 +141,9 @@ public class CharmEffect extends SpellAbilityEffect {
             }
         }
 
-        if (!list.isEmpty()) {
+        if (!includeChosen) {
+            sb.append(num == 1 ? " mode." : " modes.");
+        } else if (!list.isEmpty()) {
             if (!repeat && !additionalDesc && !limit && !gameLimit) {
                 sb.append(" \u2014");
             }
@@ -146,6 +152,7 @@ public class CharmEffect extends SpellAbilityEffect {
                 sb.append("\u2022 ").append(sub.getParam("SpellDescription"));
                 sb.append("\r\n");
             }
+            sb.append("\r\n");
         }
         return sb.toString();
     }

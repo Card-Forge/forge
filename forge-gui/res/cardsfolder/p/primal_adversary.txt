@@ -9,4 +9,5 @@ SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | SubAbil
 SVar:DBAnimate:DB$ Animate | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select up to that many target lands you control | Power$ 3 | Toughness$ 3 | Types$ Wolf,Creature | Keywords$ Haste | Duration$ Permanent
 SVar:X:Count$TriggerRememberAmount
 DeckHas:Ability$Counters
+AI:RemoveDeck:All
 Oracle:Trample\nWhen Primal Adversary enters the battlefield, you may pay {1}{G} any number of times. When you pay this cost one or more times, put that many +1/+1 counters on Primal Adversary, then up to that many target lands you control become 3/3 Wolf creatures with haste that are still lands.
