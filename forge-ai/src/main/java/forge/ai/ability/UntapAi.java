@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
@@ -307,11 +308,18 @@ public class UntapAi extends SpellAbilityAi {
 
         return true;
     }
-    
+
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> list, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
-        PlayerCollection pl = ai.getYourTeam();
-        return ComputerUtilCard.getBestAI(CardLists.filterControlledBy(list, pl));
+        CardCollection pref = CardLists.filterControlledBy(list, ai.getYourTeam());
+        if (Iterables.isEmpty(pref)) {
+            if (isOptional) {
+                return null;
+            }
+        } else {
+            list = pref;
+        }
+        return ComputerUtilCard.getBestAI(list);
     }
 
     private static Card detectPriorityUntapTargets(final List<Card> untapList) {

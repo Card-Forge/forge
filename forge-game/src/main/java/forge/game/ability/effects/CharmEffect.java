@@ -55,7 +55,6 @@ public class CharmEffect extends SpellAbilityEffect {
     public static String makeFormatedDescription(SpellAbility sa) {
         return makeFormatedDescription(sa, true);
     }
-
     public static String makeFormatedDescription(SpellAbility sa, boolean includeChosen) {
         Card source = sa.getHostCard();
 

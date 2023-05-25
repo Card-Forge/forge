@@ -158,7 +158,6 @@ public abstract class Trigger extends TriggerReplacementBase {
     public final String replaceAbilityText(final String desc, SpellAbility sa) {
         return replaceAbilityText(desc, sa, false);
     }
-
     public final String replaceAbilityText(final String desc, SpellAbility sa, boolean forStack) {
         String result = desc;
 
@@ -184,29 +183,22 @@ public abstract class Trigger extends TriggerReplacementBase {
                 }
             }
             if (digMore) { // if ABILITY is used, there is probably Charm somewhere
-                while (sa != null) {
-                    ApiType api = sa.getApi();
+                SpellAbility trigSA = sa;
+                while (trigSA != null) {
+                    ApiType api = trigSA.getApi();
                     if (ApiType.Charm.equals(api)) {
-                        saDesc = CharmEffect.makeFormatedDescription(sa, !forStack);
+                        saDesc = CharmEffect.makeFormatedDescription(trigSA, !forStack);
                         break;
                     }
                     if (ApiType.ImmediateTrigger.equals(api) || ApiType.DelayedTrigger.equals(api)) {
-                        SpellAbility trigSA = sa.getAdditionalAbility("Execute");
-                        while (trigSA != null) {
-                            if (ApiType.Charm.equals(trigSA.getApi())) {
-                                saDesc = CharmEffect.makeFormatedDescription(trigSA, !forStack);
-                                break;
-                            }
-                            trigSA = trigSA.getSubAbility();
-                        }
-                        break;
+                        trigSA = sa.getAdditionalAbility("Execute");
+                    } else {
+                        trigSA = sa.getSubAbility();
                     }
-                    sa = sa.getSubAbility();
                 }
             }
             if (saDesc.equals("")) { // in case we haven't found anything better
-                if (sa != null)
-                    saDesc = sa.toString();
+                saDesc = sa.toString();
             }
             // string might have leading whitespace
             saDesc = saDesc.trim();
@@ -223,7 +215,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
             result = TextUtil.fastReplace(result, "ABILITY", saDesc);
 
-            String currentName = sa == null ? "" : sa.getHostCard().getName();
+            String currentName = sa.getHostCard().getName();
             result = CardTranslation.translateMultipleDescriptionText(result, currentName);
             result = TextUtil.fastReplace(result,"CARDNAME", CardTranslation.getTranslatedName(currentName));
             result = TextUtil.fastReplace(result,"NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
