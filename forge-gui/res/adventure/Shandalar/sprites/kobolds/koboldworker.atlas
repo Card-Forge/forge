@@ -1,0 +1,92 @@
+koboldworker.png
+size: 256,192
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 12, 109
+  size: 14, 14     
+Idle 
+  xy: 6, 12
+  size: 20, 20   
+Idle 
+  xy: 38, 12
+  size: 20, 20   
+Idle 
+  xy: 70, 12
+  size: 20, 20   
+Idle 
+  xy: 102, 12
+  size: 20, 20   
+Idle 
+  xy: 134, 12
+  size: 20, 20     
+Idle 
+  xy: 6, 140
+  size: 20, 20   
+Idle 
+  xy: 38, 140
+  size: 20, 20   
+Idle 
+  xy: 70, 140
+  size: 20, 20   
+Idle 
+  xy: 102, 140
+  size: 20, 20     
+Walk
+  xy: 6, 42
+  size: 22, 22      
+Walk
+  xy: 38, 42
+  size: 22, 22     
+Walk
+  xy: 70, 42
+  size: 22, 22     
+Walk
+  xy: 102, 42
+  size: 22, 22      
+Walk
+  xy: 134, 42
+  size: 22, 22      
+Walk
+  xy: 166, 42
+  size: 22, 22      
+Walk
+  xy: 198, 42
+  size: 22, 22      
+Walk
+  xy: 224, 32
+  size: 32, 32      
+Attack 
+  xy: 6, 74
+  size: 22, 22  
+Attack 
+  xy: 38, 74
+  size: 22, 22  
+Attack 
+  xy: 70, 74
+  size: 22, 22  
+Attack 
+  xy: 102, 74
+  size: 22, 22          
+Death 
+  xy: 0, 170
+  size: 32, 22  
+Death 
+  xy: 32, 170
+  size: 32, 22  
+Death 
+  xy: 64, 170
+  size: 32, 22    
+Death 
+  xy: 96, 170
+  size: 32, 22   
+Death 
+  xy: 128, 170
+  size: 32, 22  
+Death 
+  xy: 160, 170
+  size: 32, 22  
+Death 
+  xy: 192, 170
+  size: 32, 22   

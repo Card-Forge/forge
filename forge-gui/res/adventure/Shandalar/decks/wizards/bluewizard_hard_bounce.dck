@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=R2-D2 3
+Title=R2-D2
+Difficulty=hard
+Description=Mono U Black Vise deck with bounce spells and Howling Mine
+Icon=R2-D2.jpg
+Deck Type=constructed
+[main]
+20 Island|M11
+1 The Tabernacle at Pendrell Vale
+1 Mox Sapphire
+4 Evacuation
+4 Upheaval
+4 Trinket Mage
+4 Black Vise
+1 Echoing Truth
+3 Boomerang
+1 Repulse
+4 Hoodwink
+3 Words of Wisdom
+1 Ancestral Recall
+4 Vision Skeins
+3 Howling Mine
+1 Remand
+1 Frozen AEther
+[sideboard]

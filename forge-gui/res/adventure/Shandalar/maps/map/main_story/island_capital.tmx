@@ -44,7 +44,7 @@
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
     <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
-    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue,Gods"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
    </properties>
@@ -53,7 +53,7 @@
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
     <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
-    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue,Gods"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
    </properties>
@@ -62,7 +62,7 @@
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
     <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
-    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue,Gods"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
    </properties>
@@ -90,7 +90,7 @@
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
     <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
-    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue,Gods"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
    </properties>
@@ -99,7 +99,7 @@
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
     <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
-    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue,Gods"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
    </properties>
@@ -108,7 +108,7 @@
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
     <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
-    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue,Gods"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
    </properties>
@@ -131,10 +131,9 @@
     <property name="arena">{
 
     &quot;enemyPool&quot;:[
+	&quot;Adept Blue Wizard&quot;,
 	&quot;Aether Channeler&quot;,
-	&quot;Blue Wiz1&quot;,
-	&quot;Blue Wiz2&quot;,
-	&quot;Blue Wiz3&quot;,
+	&quot;Apprentice Blue Wizard&quot;,
 	&quot;Cephalid&quot;,
 	&quot;Challenger 20&quot;,
 	&quot;Challenger 21&quot;,
@@ -146,6 +145,7 @@
 	&quot;Illusionist&quot;
 	&quot;Knight Mercenary&quot;,
 	&quot;Loamcaller&quot;,
+	&quot;Master Blue Wizard&quot;,
 	&quot;Merfolk&quot;,
 	&quot;Merfolk Avatar&quot;,
 	&quot;Merfolk Fighter&quot;,
@@ -154,6 +154,7 @@
 	&quot;Merfolk warrior&quot;,
 	&quot;Pirate&quot;,
 	&quot;Rogue&quot;,
+	&quot;Simic Wizard&quot;,
 	&quot;Tarkir Djinn&quot;
 	],
     &quot;rounds&quot;:3,
@@ -210,7 +211,7 @@
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
     <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
-    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue,Gods"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
    </properties>
@@ -219,7 +220,7 @@
    <properties>
     <property name="commonShopList" value="Enchantment6Blue,Creature6Blue,Instant6Blue,Merfolk,Wizard"/>
     <property name="mythicShopList" value="Planeswalker4Blue,WUBRG,RWU,RGU,UWG,RUB,UWB,UGB,Legend4Blue,PhyrexianBlue,Sphinx"/>
-    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue"/>
+    <property name="rareShopList" value="Artifact4Blue,Land4Blue,Azorius,Izzet,Simic,Dimir,Vehicle2Blue,Wand4Blue,Gods"/>
     <property name="signYOffset" type="float" value="-4"/>
     <property name="uncommonShopList" value="Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Multicolor8Blue"/>
    </properties>

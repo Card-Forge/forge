@@ -5970,45 +5970,5 @@
 		"waste_town_identity",
 		"waste_town_tribal"
 	]
-},
-{
-	"id": 24,
-	"isTemplate": true,
-	"name": "Zedruu's Downfall",
-	"description": "Defeat Zedruu and her leutenants",
-	"offerDialog": {},
-	"prologue": {},
-	"epilogue": {},
-	"failureDialog": {},
-	"declinedDialog": {
-		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
-		"options": [
-			{
-				"name": "(Catching the not so subtle hint, you leave.)"
-			}
-		]
-	},
-	"stages": [
-		{
-			"id": 1,
-			"name": "Leave",
-			"mapFlag": "",
-			"mapFlagValue": 1,
-			"objective": "Leave",
-			"prologue": {},
-			"epilogue": {},
-			"POIToken": ""
-		},
-		{
-			"id": 2,
-			"name": "New Stage",
-			"mapFlag": "",
-			"mapFlagValue": 1,
-			"objective": "Travel",
-			"prologue": {},
-			"epilogue": {},
-			"POIToken": ""
-		}
-	]
 }
 ]

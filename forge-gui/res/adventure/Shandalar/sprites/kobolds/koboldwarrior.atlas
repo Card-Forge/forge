@@ -1,0 +1,119 @@
+koboldwarrior.png
+size: 512,224
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 152, 74
+  size: 14, 14     
+Idle 
+  xy: 16, 4
+  size: 25, 28
+Idle 
+  xy: 83, 4
+  size: 25, 28 
+Idle 
+  xy: 147, 4
+  size: 25, 28
+Idle 
+  xy: 211, 4
+  size: 25, 28
+Idle 
+  xy: 275, 4
+  size: 25, 28
+Idle 
+  xy: 19, 68
+  size: 25, 28
+Idle 
+  xy: 83, 68
+  size: 25, 28 
+Idle 
+  xy: 147, 68
+  size: 25, 28
+Idle 
+  xy: 211, 68
+  size: 25, 28
+Idle 
+  xy: 275, 68
+  size: 25, 28
+Idle 
+  xy: 339, 68
+  size: 25, 28
+Idle 
+  xy: 19, 132
+  size: 25, 28
+Idle 
+  xy: 83, 132
+  size: 25, 28 
+Idle 
+  xy: 147, 132
+  size: 25, 28
+Idle 
+  xy: 211, 132
+  size: 25, 28
+Idle 
+  xy: 275, 132
+  size: 25, 28
+Idle 
+  xy: 339, 132
+  size: 25, 28
+Walk 
+  xy: 19, 40
+  size: 25, 25
+Walk 
+  xy: 83, 40
+  size: 25, 25
+Walk
+  xy: 147, 40
+  size: 25, 25      
+Walk
+  xy: 211, 40
+  size: 25, 25      
+Walk
+  xy: 275, 40
+  size: 25, 25   
+Walk
+  xy: 339, 40
+  size: 25, 25     
+Walk
+  xy: 403, 40
+  size: 25, 25      
+Walk
+  xy: 467, 40
+  size: 25, 25            
+Attack 
+  xy: 18, 107
+  size: 35, 22  
+Attack 
+  xy: 82, 107
+  size: 35, 22  
+Attack 
+  xy: 146, 107
+  size: 35, 22  
+Attack 
+  xy: 210, 107
+  size: 35, 22  
+Attack 
+  xy: 274, 107
+  size: 35, 22   
+Attack 
+  xy: 338, 107
+  size: 35, 22           
+Death 
+  xy: 23,200
+  size: 30, 24  
+Death 
+  xy: 87,200
+  size: 30, 24  
+Death 
+  xy: 151,200
+  size: 30, 24  
+Death 
+  xy: 215,200
+  size: 30, 24  
+Death 
+  xy: 279,200
+  size: 30, 24  
+Death 
+  xy: 343,200
+  size: 30, 24  

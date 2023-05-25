@@ -1,0 +1,161 @@
+koboldpyromancer.png
+size: 256,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 16, 173
+  size: 14, 14     
+Idle 
+  xy: 0, 12
+  size: 32,20 
+Idle 
+  xy: 32, 12
+  size: 32,20   
+Idle 
+  xy: 64, 12
+  size: 32,20 
+Idle 
+  xy: 96, 12
+  size: 32,20 
+Idle 
+  xy: 0, 44
+  size: 32,20 
+Idle 
+  xy: 32, 44
+  size: 32,20   
+Idle 
+  xy: 64, 44
+  size: 32,20 
+Idle 
+  xy: 96, 44
+  size: 32,20  
+Idle 
+  xy: 128, 44
+  size: 32,20 
+Idle 
+  xy: 160, 44
+  size: 32,20   
+Idle 
+  xy: 192, 44
+  size: 32,20 
+Idle 
+  xy: 224, 44
+  size: 32,20
+Idle 
+  xy: 0, 108
+  size: 32,20 
+Idle 
+  xy: 32, 108
+  size: 32,20   
+Idle 
+  xy: 64, 108
+  size: 32,20 
+Idle 
+  xy: 96, 108
+  size: 32,20  
+Idle 
+  xy: 128, 108
+  size: 32,20 
+Idle 
+  xy: 160, 108
+  size: 32,20   
+Idle 
+  xy: 192, 108
+  size: 32,20 
+Idle 
+  xy: 224, 108
+  size: 32,20
+Idle 
+  xy: 0, 140
+  size: 32,20 
+Idle 
+  xy: 32, 140
+  size: 32,20   
+Idle 
+  xy: 64, 140
+  size: 32,20 
+Idle 
+  xy: 96, 140
+  size: 32,20  
+Idle 
+  xy: 128, 140
+  size: 32,20 
+Idle 
+  xy: 160, 140
+  size: 32,20   
+Idle 
+  xy: 192, 140
+  size: 32,20 
+Idle 
+  xy: 224, 140
+  size: 32,20
+Idle 
+  xy: 0, 204
+  size: 32,20 
+Idle 
+  xy: 32, 204
+  size: 32,20   
+Idle 
+  xy: 64, 204
+  size: 32,20 
+Idle 
+  xy: 96, 204
+  size: 32,20  
+Walk
+  xy: 0, 76
+  size: 32, 20      
+Walk
+  xy: 32, 76
+  size: 32, 20      
+Walk
+  xy: 64, 76
+  size: 32, 20      
+Walk
+  xy: 96, 76
+  size: 32, 20      
+Walk
+  xy: 128, 76
+  size: 32, 20      
+Walk
+  xy: 160, 76
+  size: 32, 20      
+Walk
+  xy: 192, 76
+  size: 32, 20      
+Walk
+  xy: 224, 76
+  size: 32, 20      
+Attack 
+  xy: 2, 170
+  size: 55, 21 
+Attack 
+  xy: 66, 170
+  size: 55, 21
+Attack 
+  xy: 130, 170
+  size: 55, 21
+Attack 
+  xy: 194, 170
+  size: 55, 21
+Death 
+  xy: 0, 236
+  size: 32, 20
+Death 
+  xy: 32, 236
+  size: 32, 20
+Death 
+  xy: 64, 236
+  size: 32, 20
+Death 
+  xy: 96, 236
+  size: 32, 20 
+Death 
+  xy: 128, 236
+  size: 32, 20
+Death 
+  xy: 160, 236
+  size: 32, 20 
+Death 
+  xy: 192, 236
+  size: 32, 20

@@ -150,7 +150,7 @@
 		}]
 	}]
 } ]</property>
-    <property name="enemy" value="Black Wiz2"/>
+    <property name="enemy" value="Adept Black Wizard"/>
    </properties>
   </object>
   <object id="226" template="../../../obj/portal.tx" type="portal" x="112" y="112">

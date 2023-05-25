@@ -43,7 +43,7 @@
   </object>
   <object id="50" template="../obj/enemy.tx" x="208.402" y="125.559">
    <properties>
-    <property name="enemy" value="Black Wiz1"/>
+    <property name="enemy" value="Adept Black Wizard"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="68,71"/>
    </properties>
@@ -63,14 +63,14 @@
   <object id="62" template="../obj/gold.tx" x="153" y="112.5"/>
   <object id="65" template="../obj/enemy.tx" x="175" y="191.5">
    <properties>
-    <property name="enemy" value="Black Wiz1"/>
+    <property name="enemy" value="Apprentice Black Wizard"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="74,72,74,68,70,73,69,73,70,68"/>
    </properties>
   </object>
   <object id="66" template="../obj/enemy.tx" x="321.5" y="151">
    <properties>
-    <property name="enemy" value="Black Wiz1"/>
+    <property name="enemy" value="Apprentice Black Wizard"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="69,73,70,68,74,72,74,68,70,73"/>
    </properties>

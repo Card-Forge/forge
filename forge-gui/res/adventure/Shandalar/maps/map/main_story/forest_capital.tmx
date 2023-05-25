@@ -39,7 +39,7 @@
    <properties>
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
     <property name="signYOffset" type="float" value="-2"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
@@ -80,7 +80,7 @@
    <properties>
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
     <property name="signYOffset" type="float" value="-2"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
@@ -89,7 +89,7 @@
    <properties>
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
     <property name="signYOffset" type="float" value="-2"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
@@ -98,7 +98,7 @@
    <properties>
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
     <property name="signYOffset" type="float" value="-2"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
@@ -107,7 +107,7 @@
    <properties>
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
     <property name="signYOffset" type="float" value="-2"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
@@ -116,7 +116,7 @@
    <properties>
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
     <property name="signYOffset" type="float" value="-2"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
@@ -134,7 +134,7 @@
    <properties>
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
     <property name="signYOffset" type="float" value="-2"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
@@ -144,6 +144,8 @@
     <property name="arena">{
 
     &quot;enemyPool&quot;:[
+	&quot;Adept Green Wizard&quot;,
+	&quot;Apprentice Green Wizard&quot;,
 	&quot;Beastmaster&quot;,
 	&quot;Centaur&quot;,
 	&quot;Centaur Warrior&quot;,
@@ -156,13 +158,13 @@
 	&quot;Elf&quot;,
 	&quot;Elf warrior&quot;,
 	&quot;Faerie&quot;,
-	&quot;Green Wiz1&quot;,
-	&quot;Green Wiz2&quot;,
-	&quot;Green Wiz3&quot;,
 	&quot;High Elf&quot;,
 	&quot;Loamspeaker&quot;,
+	&quot;Master Green Wizard&quot;,
 	&quot;Mindclaw Shaman&quot;,
+	&quot;Runelord&quot;,
 	&quot;Satyr&quot;,
+	&quot;Simic Wizard&quot;,
 	&quot;Shaman&quot;,
 	&quot;Shaman of Zedruu&quot;,
 	&quot;Treefolk&quot;,
@@ -209,7 +211,7 @@
    <properties>
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Hydra"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
     <property name="signXOffset" type="float" value="-16"/>
     <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
@@ -219,7 +221,7 @@
    <properties>
     <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
     <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
     <property name="signXOffset" type="float" value="-16"/>
     <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>

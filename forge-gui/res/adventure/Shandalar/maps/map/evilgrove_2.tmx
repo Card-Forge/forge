@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="61">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="61">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJyL5mVg2MVDXxwFtFMWSNMbSPMg7JWho/3I9tITjNo7au+ovaP2Dhd7aVVmg+zdC8T13LQxHxuoBdq1h8R6cy+a/0nVj4wBr6Qysg==
@@ -38,12 +38,12 @@
   <object id="52" template="../obj/gold.tx" x="143.634" y="54.4911"/>
   <object id="53" template="../obj/enemy.tx" x="356" y="143.667">
    <properties>
-    <property name="enemy" value="ClayGolem"/>
+    <property name="enemy" value="Clay Golem"/>
    </properties>
   </object>
   <object id="55" template="../obj/enemy.tx" x="119.667" y="81.4997">
    <properties>
-    <property name="enemy" value="Black Wiz1"/>
+    <property name="enemy" value="Apprentice Black Wizard"/>
    </properties>
   </object>
   <object id="57" template="../obj/enemy.tx" x="203.5" y="215.834">

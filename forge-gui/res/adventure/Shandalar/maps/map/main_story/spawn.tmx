@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="77">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -37,7 +37,7 @@
   <object id="61" template="../../obj/entry_left.tx" x="0" y="465" width="16" height="465"/>
   <object id="65" template="../../obj/entry_left.tx" x="464" y="463" width="16" height="462"/>
   <object id="66" template="../../obj/entry_down.tx" x="16" y="17" width="447" height="16"/>
-  <object id="69" template="../../obj/enemy.tx" gid="2147495067" x="238" y="208">
+  <object id="69" template="../../obj/enemy.tx" gid="2147495067" x="260.998" y="224.029">
    <properties>
     <property name="dialog">[{
   &quot;text&quot;:&quot;Hello, planeswalker {var=player_name}&quot;,
@@ -76,7 +76,7 @@
     { &quot;name&quot;:&quot;Bye&quot; }
   ]
 }]</property>
-    <property name="enemy" value="Black Wiz2"/>
+    <property name="enemy" value="Adept Black Wizard"/>
    </properties>
   </object>
   <object id="70" template="../../obj/entry_up.tx" x="240" y="272" width="16" height="16">
@@ -85,6 +85,36 @@
     <property name="noExit" type="bool" value="true"/>
     <property name="spawn" type="bool" value="true"/>
     <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/shop.tx" x="305.612" y="270.766">
+   <properties>
+    <property name="commonShopList" value="Eldrazi"/>
+    <property name="signYOffset" type="float" value="-8"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/shop.tx" x="118.838" y="270.766">
+   <properties>
+    <property name="commonShopList" value="SmallCats"/>
+    <property name="signYOffset" type="float" value="-8"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/shop.tx" x="205.256" y="318.853">
+   <properties>
+    <property name="commonShopList" value="Shapeshifter"/>
+    <property name="signYOffset" type="float" value="-8"/>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/shop.tx" x="265.887" y="308.399">
+   <properties>
+    <property name="commonShopList" value="Gods"/>
+    <property name="signYOffset" type="float" value="-8"/>
+   </properties>
+  </object>
+  <object id="76" template="../../obj/shop.tx" x="203.165" y="240.102">
+   <properties>
+    <property name="commonShopList" value="Insects"/>
+    <property name="signYOffset" type="float" value="-8"/>
    </properties>
   </object>
  </objectgroup>

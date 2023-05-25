@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="112">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="112">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -36,7 +36,7 @@
   </object>
   <object id="50" template="../obj/enemy.tx" x="106.181" y="166.685">
    <properties>
-    <property name="enemy" value="Red Wiz2"/>
+    <property name="enemy" value="Adept Red Wizard"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="90,91,92,93"/>
    </properties>
@@ -52,7 +52,7 @@
   </object>
   <object id="69" template="../obj/enemy.tx" x="679.919" y="131.209">
    <properties>
-    <property name="enemy" value="Blue Wiz2"/>
+    <property name="enemy" value="Adept Blue Wizard"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="111,99,98"/>
    </properties>
@@ -91,7 +91,7 @@
   </object>
   <object id="75" template="../obj/enemy.tx" x="642" y="303.333">
    <properties>
-    <property name="enemy" value="Blue Wiz2"/>
+    <property name="enemy" value="Adept Blue Wizard"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="101,100,102"/>
    </properties>

@@ -4461,6 +4461,125 @@
 	  ]
 	}
 	]
+		},{
+  "name":"SmallCats",
+  "description":"The Feline Kingdom",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"CatShop",
+  "rewards": [
+  {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Cat"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Cat"
+		}
+	  ]
+	}
+	]
+			},{
+  "name":"Shapeshifter",
+  "description":"Proteus' Endless Shapes",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"ShapeshifterShop",
+  "rewards": [
+  {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Shapeshifter"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Shapeshifter"
+		}
+	  ]
+	}
+	]
+			},{
+  "name":"Gods",
+  "description":"Al's Dose of Apotheosis",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"GodMinigodShop",
+  "rewards": [
+  {
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["God"]
+		},
+		{
+		  "count":1,
+		  "cardText": "God"
+		}
+	  ]
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Demigod"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Demigod"
+		}
+	  ]
+	  }
+	  ]
+},{
+  "name":"Insects",
+  "description":"Grist's Bug Greenhouse",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"InsectShop",
+  "rewards": [
+  {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Insect"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Insect"
+		}
+	  ]
+	}
+	]
+},{
+  "name":"Eldrazi",
+  "description":"Eldritch Emissaries",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EldraziShop",
+  "rewards": [
+  {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Eldrazi"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Eldrazi"
+		}
+	  ]
+	}
+	]
 },{
   "name":"Pirate",
   "description":"Marauding Looters",

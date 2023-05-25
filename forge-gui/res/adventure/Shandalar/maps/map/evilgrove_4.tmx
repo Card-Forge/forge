@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="62">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="62">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="50" height="50">
   <data encoding="base64" compression="zlib">
    eJzt2UEKwCAMRFG3hR6h5/H+RyouRDcWNCmZDPPAZUs+KEJbr1Iqydp1+pzVauaoeU6t5s3WsWLZW0g8zoqH5x7rRGTHPLtXRwSP+TuEs2FtaNThR/tqQOjwoA4s6sCiDhxMDerAwtKiDixsHdlb1IGFoaFh6GDZU406sKgDizrieP7njMTS0bF0zN+3M3fM1IFFHVjU4fsOK+s98ucdtPPurzs+23oBwepMug==
@@ -32,7 +32,7 @@
   <object id="48" template="../obj/treasure.tx" x="16.1667" y="769.917"/>
   <object id="50" template="../obj/enemy.tx" x="33.1667" y="766.917">
    <properties>
-    <property name="enemy" value="Black Wiz3"/>
+    <property name="enemy" value="Master Black Wizard"/>
    </properties>
   </object>
   <object id="51" template="../obj/treasure.tx" x="544.166" y="128.5"/>
@@ -54,7 +54,7 @@
   </object>
   <object id="56" template="../obj/enemy.tx" x="438.667" y="631.667">
    <properties>
-    <property name="enemy" value="Black Wiz2"/>
+    <property name="enemy" value="Adept Black Wizard"/>
    </properties>
   </object>
   <object id="57" template="../obj/enemy.tx" x="643.333" y="337.5">
