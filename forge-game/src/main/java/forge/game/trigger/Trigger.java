@@ -205,7 +205,8 @@ public abstract class Trigger extends TriggerReplacementBase {
                 }
             }
             if (saDesc.equals("")) { // in case we haven't found anything better
-                saDesc = sa.toString();
+                if (sa != null)
+                    saDesc = sa.toString();
             }
             // string might have leading whitespace
             saDesc = saDesc.trim();
