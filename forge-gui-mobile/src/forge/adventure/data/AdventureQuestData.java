@@ -179,6 +179,9 @@ public class AdventureQuestData implements Serializable {
         stage.initialize();
 
         switch  (stage.objective){
+            case Arena:
+                stage.setTargetPOI(poiTokens);
+                break;
             case Clear:
                 stage.setTargetPOI(poiTokens);
                 break;
