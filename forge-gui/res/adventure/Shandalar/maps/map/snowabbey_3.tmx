@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="57">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="57">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBicYA8PA8NeHvLlyQW7eCCYXPlRMDiBDA8CU1MtuYBW6ZcQiOJlYIjmpZ35gy2cR8HwBdJI6UaWxmkIOb9is5fa+RlWz6BjYuUJAQDRPxeF
@@ -30,7 +30,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy1lU0KwjAQhUPFlYW6cSUeKiKIl/EE/oG3tKC2INWdGeLgc5ymoT8fDC2ZNi8vmSQ2MeYwMubmnlcXJ/dOLFLzxxzaQvkcchb6LyCI59jnWBMpMmPKrF4X8wj1iZyFtk2+uVzxoPlB3RhIg8aB2k1abUE/2PaAeSZYX85PV6Qv8nxU1rMvcPzs/ZL+zgN/g220ftuJjyb4O62eY2n655X56NIn+bSwl5A6v7OpD0T61bQYTW+I2tbqdanUeh+E9sTaae5dPa8G0tb0yfv9s39LMd9971/WY1h3N5BnrVaopvjckNqh2oo9n2NqtQDfG8V32/soNBYr7sQK7qcu96/UQdj/G8u0WtA=
+   eJy1lU0KwjAQhWPFlb2BeIB6m4ggXsYT+AeeT3duLKgVRJdmiIPPcZqG/nwwtGTavLxkktjEmE3fmKt7Xlzs3DsxTs0fI2gL5XPIWei/gCBeA59jTeSQGXPMynUxj1CfyF5o2+SbyxUPmh/UjYE0aByoXaVVF/SDbQ+YZ4L15fw0Rfoiz1tlPdsCx8/ez+nvPPA32Ebrtxz6qIK/0+o5lqp/TpmPJn2STwt7CSnz25v4QKRfTYvR9Lqoba1ep0qtt0FoT8yd5trV86wjbU2fvN8++/cu5rvt/ct6DOuuOvKs1QrVFJ8bUjtUW7Hnc0ytFuB7ofiuex+FxmLFnfiE+6nJ/St1EPb/BvHbWxg=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -43,17 +43,17 @@
   <object id="51" template="../obj/treasure.tx" x="101.527" y="134.913"/>
   <object id="53" template="../obj/enemy.tx" x="139.382" y="133.036">
    <properties>
-    <property name="enemy" value="Red Wiz1"/>
+    <property name="enemy" value="Apprentice Red Wizard"/>
    </properties>
   </object>
   <object id="54" template="../obj/enemy.tx" x="257.009" y="131.827">
    <properties>
-    <property name="enemy" value="Red Wiz1"/>
+    <property name="enemy" value="Apprentice Red Wizard"/>
    </properties>
   </object>
   <object id="55" template="../obj/enemy.tx" x="199.429" y="56.5249">
    <properties>
-    <property name="enemy" value="Red Wiz1"/>
+    <property name="enemy" value="Apprentice Red Wizard"/>
    </properties>
   </object>
   <object id="56" template="../obj/gold.tx" x="199.84" y="21.8333"/>

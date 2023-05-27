@@ -118,7 +118,7 @@
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="105" template="../obj/gate.tx" x="46.211" y="119.111" width="19.1841" height="22">
+  <object id="105" template="../obj/gate.tx" x="45.711" y="118.611" width="19.1841" height="22">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This gate is locked&quot;,

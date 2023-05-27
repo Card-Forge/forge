@@ -37,8 +37,8 @@
  <objectgroup id="4" name="Objects">
   <object id="41" template="../../obj/shop.tx" x="465" y="260">
    <properties>
-    <property name="commonShopList" value="Enchantment6White,Creature6White,Instant6White,Angel,Human4White,Soldier4White"/>
-    <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite"/>
+    <property name="commonShopList" value="Enchantment6White,Creature6White,Instant6White,Angel,Human4White,Soldier4White,SmallCats,"/>
+    <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite,Eldrazi"/>
     <property name="rareShopList" value="Artifact4White,Land4White,Dimir,Rakdos,Orzhov,Golgari,Vehicle2White,Wand4White"/>
     <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Bird4White,Spirit4White,Sliver4White,Knight4White,Multicolor8White"/>
@@ -46,8 +46,8 @@
   </object>
   <object id="56" template="../../obj/shop.tx" x="416" y="260">
    <properties>
-    <property name="commonShopList" value="Enchantment6White,Creature6White,Instant6White,Angel,Human4White,Soldier4White"/>
-    <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite"/>
+    <property name="commonShopList" value="Enchantment6White,Creature6White,Instant6White,Angel,Human4White,Soldier4White,SmallCats,"/>
+    <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite,Eldrazi"/>
     <property name="rareShopList" value="Artifact4White,Land4White,Dimir,Rakdos,Orzhov,Golgari,Vehicle2White,Wand4White"/>
     <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Bird4White,Spirit4White,Sliver4White,Knight4White,Multicolor8White"/>
@@ -64,8 +64,8 @@
   </object>
   <object id="43" template="../../obj/shop.tx" x="370" y="325">
    <properties>
-    <property name="commonShopList" value="Enchantment6White,Creature6White,Instant6White,Angel,Human4White,Soldier4White"/>
-    <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite"/>
+    <property name="commonShopList" value="Enchantment6White,Creature6White,Instant6White,Angel,Human4White,Soldier4White,SmallCats,"/>
+    <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite,Eldrazi"/>
     <property name="rareShopList" value="Artifact4White,Land4White,Dimir,Rakdos,Orzhov,Golgari,Vehicle2White,Wand4White"/>
     <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Bird4White,Spirit4White,Sliver4White,Knight4White,Multicolor8White"/>
@@ -74,8 +74,8 @@
   <object id="47" template="../../obj/inn.tx" x="536" y="144"/>
   <object id="49" template="../../obj/shop.tx" x="417" y="324">
    <properties>
-    <property name="commonShopList" value="Enchantment6White,Creature6White,Instant6White,Angel,Human4White,Soldier4White"/>
-    <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite"/>
+    <property name="commonShopList" value="Enchantment6White,Creature6White,Instant6White,Angel,Human4White,Soldier4White,SmallCats,"/>
+    <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite,Eldrazi"/>
     <property name="rareShopList" value="Artifact4White,Land4White,Dimir,Rakdos,Orzhov,Golgari,Vehicle2White,Wand4White"/>
     <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Bird4White,Spirit4White,Sliver4White,Knight4White,Multicolor8White"/>
@@ -83,8 +83,8 @@
   </object>
   <object id="50" template="../../obj/shop.tx" x="465" y="323">
    <properties>
-    <property name="commonShopList" value="Enchantment6White,Creature6White,Instant6White,Angel,Human4White,Soldier4White"/>
-    <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite"/>
+    <property name="commonShopList" value="Enchantment6White,Creature6White,Instant6White,Angel,Human4White,Soldier4White,SmallCats,"/>
+    <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite,Eldrazi"/>
     <property name="rareShopList" value="Artifact4White,Land4White,Dimir,Rakdos,Orzhov,Golgari,Vehicle2White,Wand4White"/>
     <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Bird4White,Spirit4White,Sliver4White,Knight4White,Multicolor8White"/>
@@ -101,8 +101,8 @@
   </object>
   <object id="52" template="../../obj/shop.tx" x="369" y="261">
    <properties>
-    <property name="commonShopList" value="Enchantment6White,Creature6White,Instant6White,Angel,Human4White,Soldier4White"/>
-    <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite"/>
+    <property name="commonShopList" value="Enchantment6White,Creature6White,Instant6White,Angel,Human4White,Soldier4White,SmallCats,"/>
+    <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite,Eldrazi"/>
     <property name="rareShopList" value="Artifact4White,Land4White,Dimir,Rakdos,Orzhov,Golgari,Vehicle2White,Wand4White"/>
     <property name="signYOffset" type="float" value="-8"/>
     <property name="uncommonShopList" value="Bird4White,Spirit4White,Sliver4White,Knight4White,Multicolor8White"/>
@@ -128,7 +128,9 @@
     <property name="arena">{
 
     &quot;enemyPool&quot;:[
+	&quot;Adept White Wizard&quot;,
 	&quot;Adventurer&quot;,
+	&quot;Apprentice White Wizard&quot;,
 	&quot;Archer&quot;,
 	&quot;Archer Elite&quot;,
 	&quot;Archaeologist&quot;,
@@ -150,13 +152,12 @@
 	&quot;Knight&quot;,
 	&quot;Knight Mercenary&quot;,
 	&quot;Kor Warrior&quot;,
+	&quot;Master White Wizard&quot;,
 	&quot;Monk&quot;,
+	&quot;Runelord&quot;,
 	&quot;Orthodoxy Duelist&quot;,
 	&quot;Orzhov Cleric&quot;,
-	&quot;White Dwarf&quot;,
-	&quot;White Wiz1&quot;,
-	&quot;White Wiz2&quot;,
-	&quot;White Wiz3&quot;
+	&quot;White Dwarf&quot;
 	],
     &quot;rounds&quot;:3,
     &quot;entryFee&quot;:100,

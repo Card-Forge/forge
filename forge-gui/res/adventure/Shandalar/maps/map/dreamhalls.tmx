@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="57">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="57">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -121,7 +121,7 @@
  &quot;lifeModifier&quot;: 4,
  &quot;startBattleWithCard&quot;: [ &quot;Arcane Encyclopedia|M19|1&quot; ]
 }</property>
-    <property name="enemy" value="Green Wiz3"/>
+    <property name="enemy" value="Master Green Wizard"/>
    </properties>
   </object>
   <object id="51" template="../obj/enemy.tx" x="351.877" y="205.729">

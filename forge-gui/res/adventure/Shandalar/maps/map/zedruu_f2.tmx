@@ -62,7 +62,7 @@
   </object>
   <object id="122" template="../obj/enemy.tx" x="378.102" y="117.958">
    <properties>
-    <property name="enemy" value="Red Wiz1"/>
+    <property name="enemy" value="Apprentice Red Wizard"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
@@ -200,7 +200,7 @@
   <object id="216" template="../obj/waypoint.tx" x="131.175" y="79.4386"/>
   <object id="217" template="../obj/enemy.tx" x="324.842" y="243.105">
    <properties>
-    <property name="enemy" value="Blue Wiz3"/>
+    <property name="enemy" value="Master Blue Wizard"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="192,173"/>
    </properties>

@@ -148,7 +148,7 @@
  &quot;lifeModifier&quot;: 6,
  &quot;startBattleWithCard&quot;: [ &quot;c_a_treasure_sac&quot; ]
 }</property>
-    <property name="enemy" value="Red Wiz2"/>
+    <property name="enemy" value="Adept Red Wizard"/>
    </properties>
   </object>
   <object id="59" template="../obj/enemy.tx" x="366" y="125.5">

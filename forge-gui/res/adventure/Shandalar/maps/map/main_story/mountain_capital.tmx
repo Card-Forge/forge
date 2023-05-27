@@ -119,6 +119,8 @@
     <property name="arena">{
 
     &quot;enemyPool&quot;:[
+	&quot;Adept Red Wizard&quot;,
+	&quot;Apprentice Red Wizard&quot;,
 	&quot;Ashmouth Devil&quot;,
 	&quot;Axgard Dwarf&quot;,
 	&quot;Barbarian&quot;,
@@ -138,11 +140,11 @@
 	&quot;Goblin Chief&quot;,
 	&quot;Goblin Warrior&quot;,
 	&quot;Khan&quot;,
+	&quot;Kobold Dragoncaller&quot;,
+	&quot;Kobold Shaman&quot;,
+	&quot;Master Red Wizard&quot;,
 	&quot;Minotaur Flayer&quot;,
 	&quot;Pyromancer&quot;,
-	&quot;Red Wiz1&quot;,
-	&quot;Red Wiz2&quot;,
-	&quot;Red Wiz3&quot;,
 	&quot;Shaman&quot;,
 	&quot;Shaman of Zedruu&quot;,
 	&quot;Troll&quot;,
