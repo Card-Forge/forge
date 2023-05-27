@@ -39,11 +39,6 @@ public class PlayAi extends SpellAbilityAi {
             return false; // prevent infinite loop
         }
 
-        List<Card> cards = getPlayableCards(sa, ai);
-        if (cards.isEmpty()) {
-            return false;
-        }
-
         if (game.getRules().hasAppliedVariant(GameType.MoJhoSto) && source.getName().equals("Jhoira of the Ghitu Avatar")) {
             // Additional logic for MoJhoSto:
             // Do not activate Jhoira too early, usually there are few good targets
@@ -58,6 +53,12 @@ public class PlayAi extends SpellAbilityAi {
             if ("Instant".equals(sa.getParam("AnySupportedCard")) && MyRandom.percentTrue(chanceToActivateInst)) {
                 return false;
             }
+            return true;
+        }
+
+        List<Card> cards = getPlayableCards(sa, ai);
+        if (cards.isEmpty()) {
+            return false;
         }
 
         if ("ReplaySpell".equals(logic)) {
