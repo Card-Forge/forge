@@ -191,9 +191,9 @@ public abstract class Trigger extends TriggerReplacementBase {
                         break;
                     }
                     if (ApiType.ImmediateTrigger.equals(api) || ApiType.DelayedTrigger.equals(api)) {
-                        trigSA = sa.getAdditionalAbility("Execute");
+                        trigSA = trigSA.getAdditionalAbility("Execute");
                     } else {
-                        trigSA = sa.getSubAbility();
+                        trigSA = trigSA.getSubAbility();
                     }
                 }
             }
