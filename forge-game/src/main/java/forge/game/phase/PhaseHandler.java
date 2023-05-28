@@ -470,7 +470,7 @@ public class PhaseHandler implements java.io.Serializable {
             int burn = p.getManaPool().clearPool(true).size();
 
             if (p.getManaPool().hasBurn()) {
-                final int lost = p.loseLife(burn, false, false);
+                final int lost = p.loseLife(burn, false, true);
                 if (lost > 0) {
                     lossMap.put(p, lost);
                 }
