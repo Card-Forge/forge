@@ -12,6 +12,7 @@ import forge.deck.FDeckViewer;
 import forge.error.BugReportDialog;
 import forge.gamemodes.match.HostedMatch;
 import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.gui.download.GuiDownloadService;
 import forge.gui.interfaces.IGuiBase;
 import forge.gui.interfaces.IGuiGame;
@@ -29,6 +30,7 @@ import forge.toolbox.GuiChoose;
 import forge.util.*;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -256,12 +258,22 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public String showFileDialog(final String title, final String defaultDir) {
-        return ForgeConstants.USER_GAMES_DIR + "Test.fgs"; //TODO: Show dialog
+        //TODO Android FilePicker varies, since we cant test all possible android versions, just return a selection..
+        List<Integer> choice = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        List<Integer> v = getChoices(title, 0, 1, choice, null, null);
+        if (v == null || v.isEmpty())
+            return null;
+        return defaultDir + "state" + v.get(0) + ".txt";
     }
 
     @Override
     public File getSaveFile(final File defaultFile) {
-        return defaultFile; //TODO: Show dialog
+        //TODO Android FilePicker varies, since we cant test all possible android versions, just return a selection..
+        List<Integer> choice = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        List<Integer> v = GuiBase.getInterface().getChoices(Localizer.getInstance().getMessage("lblSelectGameStateFile"), 0, 1, choice, null, null);
+        if (v == null || v.isEmpty())
+            return null;
+        return new File(ForgeConstants.USER_GAMES_DIR + "state" + v.get(0) + ".txt");
     }
 
     @Override
