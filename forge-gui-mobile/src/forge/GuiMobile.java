@@ -12,7 +12,6 @@ import forge.deck.FDeckViewer;
 import forge.error.BugReportDialog;
 import forge.gamemodes.match.HostedMatch;
 import forge.gui.FThreads;
-import forge.gui.GuiBase;
 import forge.gui.download.GuiDownloadService;
 import forge.gui.interfaces.IGuiBase;
 import forge.gui.interfaces.IGuiGame;
@@ -270,7 +269,7 @@ public class GuiMobile implements IGuiBase {
     public File getSaveFile(final File defaultFile) {
         //TODO Android FilePicker varies, since we cant test all possible android versions, just return a selection..
         List<Integer> choice = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-        List<Integer> v = GuiBase.getInterface().getChoices(Localizer.getInstance().getMessage("lblSelectGameStateFile"), 0, 1, choice, null, null);
+        List<Integer> v = getChoices(Localizer.getInstance().getMessage("lblSelectGameStateFile"), 0, 1, choice, null, null);
         if (v == null || v.isEmpty())
             return null;
         return new File(ForgeConstants.USER_GAMES_DIR + "state" + v.get(0) + ".txt");
