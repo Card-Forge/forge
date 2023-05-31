@@ -7,4 +7,4 @@ SVar:CheatBattlefield:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield |
 SVar:X:Count$Valid Creature.YouCtrl$GreatestToughness
 SVar:Y:Count$ValidHand Creature.YouCtrl
 DeckHints:Type$Wall|Plant|Treefolk
-Oracle:This spell can’t be countered.\nDraw cards equal to the greatest toughness among creatures you control, then put any number of creature cards from your hand onto the battlefield.
+Oracle:This spell can't be countered.\nDraw cards equal to the greatest toughness among creatures you control, then put any number of creature cards from your hand onto the battlefield.
