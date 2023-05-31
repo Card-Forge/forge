@@ -13935,7 +13935,7 @@
 	"name": "Mimic",
 	"sprite": "sprites/dungeon/mimic.atlas",
 	"deck": [
-		"decks/dungeon/mimic.dck"
+		"decks/monsters/mimic.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
