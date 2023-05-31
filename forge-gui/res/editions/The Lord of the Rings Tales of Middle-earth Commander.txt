@@ -6,13 +6,43 @@ Type=Commander
 ScryfallCode=LTC
 
 [cards]
+1 M Eowyn, Shieldmaiden @Craig Elliott
+2 M Frodo, Adventurous Hobbit @Axel Sauerwald
+3 M Galadriel, Elven-Queen @Axel Sauerwald
+4 M Sauron, Lord of the Rings @Alex Brock
 7 M Sam, Loyal Attendant @Campbell White
+48 R Bilbo, Birthday Celebrant @
 66 R Radagast, Wizard of Wilds @Tomas Duchek
+81 M Eowyn, Shieldmaiden @Craig Elliott
+82 M Frodo, Adventurous Hobbit @Axel Sauerwald
+83 M Galadriel, Elven-Queen @Axel Sauerwald
+84 M Sauron, Lord of the Rings @Alex Brock
+86 M Eowyn, Shieldmaiden @Craig Elliott
+87 M Frodo, Adventurous Hobbit @Axel Sauerwald
+88 M Galadriel, Elven-Queen @Axel Sauerwald
 90 M Sam, Loyal Attendant @Campbell White
+92 M Sauron, Lord of the Rings @Alex Brock
 147 R Radagast, Wizard of Wilds @Tomas Duchek
+161 U Banishing Light @Joseph Meehan
+282 U Mind Stone @Maxim Kostin
 284 U Sol Ring @L J Koh
+306 C Evolving Wilds @Pavel Kolomeyets
+308 U Field of Ruin @
+316 U Graypelt Refuge @Erikas Perl
+337 M Yavimaya, Cradle of Growth @Samuel Perin
 348 M The Great Henge @Jeremy Paillotin
+349 M Cloudstone Curio @Erikas Perl
 350 M Ensnaring Bridge @Stephen Stark
+351 M The Ozolith @Calder Moore
+352 M Rings of Brighthearth @Jonas De Ro
+353 M Shadowspear @Campbell White
+357 M Ancient Tomb @Anastasia Balakchina
+358 M Bojuka Bog @Calder Moore
+359 M Boseiju, Who Shelters All @Jeremy Paillotin
+362 M Cavern of Souls @Logan Feliciano
+363 R Deserted Temple @Calder Moore
+365 M Homeward Path @Erikas Perl
+369 M Minamo, School at Water's Edge @Stephen Stark
 376 M Wasteland @Hristo D. Chukov
 378 M The Great Henge @Jeremy Paillotin
 380 M Ensnaring Bridge @Stephen Stark
