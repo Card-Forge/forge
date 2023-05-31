@@ -2451,8 +2451,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         private GameState createGameStateObject() {
             return new GameState() {
                 @Override
-                public IPaperCard getPaperCard(final String cardName) {
-                    return FModel.getMagicDb().getCommonCards().getCard(cardName);
+                public IPaperCard getPaperCard(final String cardName, final String setCode, final int artID) {
+                    return FModel.getMagicDb().getCommonCards().getCard(cardName, setCode, artID);
                 }
             };
         }
