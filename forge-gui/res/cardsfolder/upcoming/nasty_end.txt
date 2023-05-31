@@ -1,4 +1,4 @@
-Name:Nasty end
+Name:Nasty End
 ManaCost:1 B
 Types:Instant
 A:SP$ Draw | Cost$ 1 B Sac<1/Creature> | NumCards$ X | SpellDescription$ Draw two cards. If the sacrificed creature was legendary, draw three cards instead.
