@@ -36,6 +36,7 @@ import java.util.List;
 public class GuiMobile implements IGuiBase {
     private final String assetsDir;
     private ImageFetcher imageFetcher = new LibGDXImageFetcher();
+    private List<Integer> integerChoices = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
     public GuiMobile(final String assetsDir0) {
         assetsDir = assetsDir0;
@@ -258,8 +259,7 @@ public class GuiMobile implements IGuiBase {
     @Override
     public String showFileDialog(final String title, final String defaultDir) {
         //TODO Android FilePicker varies, since we cant test all possible android versions, just return a selection..
-        List<Integer> choice = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-        List<Integer> v = getChoices(title, 0, 1, choice, null, null);
+        List<Integer> v = getChoices(title, 0, 1, integerChoices, null, null);
         if (v == null || v.isEmpty())
             return null;
         return defaultDir + "state" + v.get(0) + ".txt";
@@ -268,8 +268,7 @@ public class GuiMobile implements IGuiBase {
     @Override
     public File getSaveFile(final File defaultFile) {
         //TODO Android FilePicker varies, since we cant test all possible android versions, just return a selection..
-        List<Integer> choice = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-        List<Integer> v = getChoices(Localizer.getInstance().getMessage("lblSelectGameStateFile"), 0, 1, choice, null, null);
+        List<Integer> v = getChoices(Localizer.getInstance().getMessage("lblSelectGameStateFile"), 0, 1, integerChoices, null, null);
         if (v == null || v.isEmpty())
             return null;
         return new File(ForgeConstants.USER_GAMES_DIR + "state" + v.get(0) + ".txt");
