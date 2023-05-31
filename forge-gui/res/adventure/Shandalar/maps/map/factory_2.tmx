@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="89">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="89">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -46,7 +46,7 @@
   </object>
   <object id="50" template="../obj/enemy.tx" x="117.217" y="90.704">
    <properties>
-    <property name="enemy" value="ClayGolem"/>
+    <property name="enemy" value="Clay Golem"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="88,87,86,85,83"/>
    </properties>
@@ -55,7 +55,7 @@
   <object id="66" template="../obj/gold.tx" x="19.3334" y="46.6666"/>
   <object id="67" template="../obj/enemy.tx" x="241.504" y="212.858">
    <properties>
-    <property name="enemy" value="ClayGolem"/>
+    <property name="enemy" value="Clay Golem"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="84,82,81,82"/>
    </properties>
@@ -101,7 +101,7 @@
   </object>
   <object id="74" template="../obj/enemy.tx" x="96.5" y="218">
    <properties>
-    <property name="enemy" value="ClayGolem"/>
+    <property name="enemy" value="Clay Golem"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="83,85,86,87,88"/>
    </properties>

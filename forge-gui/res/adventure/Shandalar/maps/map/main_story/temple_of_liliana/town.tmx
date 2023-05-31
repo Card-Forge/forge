@@ -907,7 +907,7 @@
    }
 ]
 </property>
-    <property name="enemy" value="Rakdos Wiz"/>
+    <property name="enemy" value="Rakdos Wizard"/>
     <property name="reward">[
   {
     &quot;type&quot;: &quot;item&quot;,

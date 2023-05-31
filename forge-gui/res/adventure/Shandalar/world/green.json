@@ -33,7 +33,9 @@
 	"Wood"
 ],
 "enemies": [
+	"Adept Green Wizard",
 	"Ape",
+	"Apprentice Green Wizard",
 	"Badger",
 	"Bear",
 	"Beastmaster",
@@ -55,12 +57,10 @@
 	"Gorgon",
 	"Gorgon 2",
 	"Green Beast",
-	"Green Wiz1",
-	"Green Wiz2",
-	"Green Wiz3",
 	"High Elf",
 	"Hydra",
 	"Kavu",
+	"Master Green Wizard",
 	"Ooze",
 	"Owl",
 	"Plant",

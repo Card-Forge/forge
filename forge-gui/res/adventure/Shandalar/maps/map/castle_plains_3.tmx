@@ -60,7 +60,7 @@
   <object id="56" template="../obj/gold.tx" x="271" y="49"/>
   <object id="57" template="../obj/enemy.tx" x="153" y="134.333">
    <properties>
-    <property name="enemy" value="White Wiz1"/>
+    <property name="enemy" value="Apprentice White Wizard"/>
    </properties>
   </object>
  </objectgroup>

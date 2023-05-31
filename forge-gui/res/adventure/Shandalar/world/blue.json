@@ -28,11 +28,10 @@
 	"Shell"
 ],
 "enemies": [
+	"Adept Blue Wizard",
 	"Aether Channeler",
+	"Apprentice Blue Wizard",
 	"Bird",
-	"Blue Wiz1",
-	"Blue Wiz2",
-	"Blue Wiz3",
 	"Cephalid",
 	"Challenger 20",
 	"Challenger 21",
@@ -61,6 +60,7 @@
 	"Rogue",
 	"Scorpion",
 	"Sea Monster",
+	"Simic Wizard",
 	"Tarkir Djinn",
 	"Turtle",
 	"Walking Brain",

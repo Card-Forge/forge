@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="96">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="97">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../tileset/main-nocollide.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzVkk0KwjAQhQMaiwu79DBCced53PQqWQl6BE/TjT1LsIMdOk1f2kkNiA8e+YHMl3mJMWM9CzMR7bHvJo9jDMT8FTcXc44bc2On5lrOLp9fwyWGm7GsHc6Zx3N57xRuvcN35vqNxT3GctNyj936cfjY2YF9LkGIQClcMjOqchjle2m5mj8UMiWXdNmnc31f0/e+Knolvbr6LWAgLr1FinwxdqXoJeTyGU0Otw3e13CRUC5Ipy3ep57lW5Jo3UYyX1JK/sxYy5Ki7LX/MKe+vfc/6Q0WVaCR
+   eJzbwM7AsGEUD3ksZkJd86axYmJs6rbgsPcaKwKTYq8ohRjZXmLtptROUTLClxp2kmovtewk1U30sncUUw+XsTEwlANxBRt97RWB0mJ09u8mIN4MxFsGQdjTAwMArIa2fg==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJwrYGdgKBgkGASQ2djAQNlLC7tJAehuJdddxIIPHBCszwWhQeAjB6r9hMIRl3vxgVI2BgZRdlTMwYNwDzpGdy85QJQdQaPjPk4IbiOASQG/mBHmY7MXBIixl1RwnZV0PbjANVbCcUILe/EBPS5IeoXh+fSxFgOIEkjvhOTJBaA0sY1GZo+C4QUA1S5VLg==
+   eJxjYECAekYGhgZGhgEBckwDY+9QBJHMDAxRzKTLkQpmsaDiX0BzfzKjisHUocuRCkDu/kUld5NiJ70Btf0ZwczQgBwfEUhxgJwO/tLRr8jpgN5xOgpGwSggDABapRie
   </data>
  </layer>
  <layer id="2" name="Grass" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgaYAM7Kh7q9rYxEqfuGisqpjUA2fGeg4FhFgsDgz4XKsYHPnBAMCX29nIyMIhiCeN2PGHVxwnB5AIDoL9UmDDt9SQQPyD12NxKLAD5CWYGslmEzEVXSypAt5NcTGpcU8tefBgZwNIsPexFxyIDYCd6+qEUl7ExMJQDcQUb/f3xgE7pZSRjAHobMkU=
+   eJxjYEAF9YwMDA2MDKNgBIM2YPzPYqG/vSpM2MXbaZgefzEzMBzHYq8njfMANjtHwSgYBaOAHgAAE7oFrg==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="17" opacity="0.9">
@@ -25,7 +26,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYICAlewMDKuAeDUQrwHiaayomBCoY8Qvbwg0wwiLOe4cDAweQOwJxF4cmPYSsluGCb/8eaD+C3jMINZ/QwUsZMYUm8FCmhltwLhsx4I7sMTxK3YIbU+CHbjcowKNy2peCF0FpdWA4h5odsPspRTA/AoCyP40Btq9hpOB4RmSvUuR9BnzUmYnyK+iQD+IIPlDDSktI9tbjcWupZhCBAHIrm1sCDYM7EBiP8MSx9js/8BBmr0wcAjox8NArAnEYVAzQPGMbm8Z0J3lQFzBBokHZIDOxwYMuCD2wtIQLj3I9oLiFKQHFC9iSG5eBsTlSGEwhxlVD6kAZH4HE6q7NgHFNgPxFnZUu5DtsMKSb2D6QTTIDE0mVD0a0PAGYVWgu9XQywdmKEYDk9mIx0bsCPc3M0FwC1JaBrnNgJ04s7CF/1JuBBs5bHI4IHoM8Zidx4EII+S4Qk/TyOGPDyCno7NklkGE0i8heVz2outDT0fIAACuW1e6
+   eJxjYGBgiGRmYIgC4m9ALMvEwCAHxKSAekYGhjogbmDEryaCGVXNdyB/MgsDwxQgngrE01hIsxfkVhkC7gWpAfkLXQ3I7h9k+pccAAtjWgEfdgi9EM0OkD9nsGDGDT73gOKqHQvuwBK/r6D22mOJO2xhi889MFDNC6GroLQaE6bdHRzY3Y4PYHNPGyOCRvanMdDuNZwQu2FgKZI+Y17S7Ue3EwRUkMxXw8GuxmLXUkwhggBk1zY2THtP4LAXn/2k2gsDh4Dsw0CsiSQGimd0e9uQ4gIUD8gAnY/PXlgawqUH2V5QnIL0qDKhii8D4nKkMJjDjKoHm72EACzMYe6ChcsRJlS7kO2wwpLHYPpB9CGkcIXp0YCaCwtzNfQ8zwzFaGAyG/HYiB3h/sNI/kB2owE7cWZhA0u5EWzksMnhgOgxxGN2HgcijJDjitw0jZyOzrJTbgY58rjsRdeHno6QAQCJOVVS
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -53,6 +54,7 @@
   <object id="64" template="../obj/enemy.tx" x="437.255" y="107.437" width="15.5419" height="16.9162">
    <properties>
     <property name="enemy" value="Crab"/>
+    <property name="threatRange" type="int" value="35"/>
    </properties>
   </object>
   <object id="65" template="../obj/enemy.tx" x="315.789" y="236.349">
@@ -102,10 +104,9 @@
   <object id="85" template="../obj/waypoint.tx" x="461" y="214.333"/>
   <object id="86" template="../obj/waypoint.tx" x="332.667" y="172.667"/>
   <object id="88" template="../obj/waypoint.tx" x="329.333" y="110.333"/>
-  <object id="91" template="../obj/collision.tx" x="-2.13163e-14" y="272.333" width="212" height="16"/>
-  <object id="92" template="../obj/collision.tx" x="211" y="271.667" width="295" height="16"/>
-  <object id="93" template="../obj/collision.tx" x="480" y="87.3333" width="30.6667" height="185.333"/>
-  <object id="94" template="../obj/collision.tx" x="-38" y="149.667" width="38" height="131.667"/>
+  <object id="92" template="../obj/collision.tx" x="0" y="271.667" width="480" height="16"/>
+  <object id="93" template="../obj/collision.tx" x="480" y="-16" width="16" height="304"/>
+  <object id="94" template="../obj/collision.tx" x="-16" y="-16" width="16" height="304"/>
   <object id="95" template="../obj/booster.tx" x="431" y="93.3333">
    <properties>
     <property name="reward">[
@@ -131,5 +132,6 @@
 </property>
    </properties>
   </object>
+  <object id="96" template="../obj/collision.tx" x="0" y="-16" width="480" height="16"/>
  </objectgroup>
 </map>

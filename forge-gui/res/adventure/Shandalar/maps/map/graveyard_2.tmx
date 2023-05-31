@@ -32,7 +32,7 @@
   </object>
   <object id="52" template="../obj/enemy.tx" x="151.5" y="90.083">
    <properties>
-    <property name="enemy" value="Black Wiz1"/>
+    <property name="enemy" value="Apprentice Black Wizard"/>
    </properties>
   </object>
   <object id="53" template="../obj/enemy.tx" x="328.5" y="86.5">

@@ -29,12 +29,13 @@
 	"DarkGras"
 ],
 "enemies": [
+	"Adept White Wizard",
 	"Adventurer",
 	"Aether Channeler",
+	"Apprentice White Wizard",
 	"Archer",
 	"Armored Knight",
 	"Beastmaster",
-	"Cat",
 	"Cathar",
 	"Challenger 20",
 	"Challenger 21",
@@ -51,19 +52,19 @@
 	"Human elite",
 	"Human guard",
 	"Insect",
+	"Leonin Warrior",
 	"Knight",
 	"Kor Warrior",
+	"Master White Wizard",
 	"Monk",
 	"Orthodoxy Duelist",
 	"Owl",
 	"Raven",
+	"Runelord",
 	"Scorpion",
 	"Scarab",
 	"Stray Cat",
-	"White Dwarf",
-	"White Wiz1",
-	"White Wiz2",
-	"White Wiz3"
+	"White Dwarf"
 ],
 "pointsOfInterest": [
 	"White Castle",

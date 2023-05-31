@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="57">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="57">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2BkAmkeBFuWB7e6UUA52AMM3700DmNpLOZH8TIwRPNiio/G99AHwzn/7uLBjomVJwQAhfEMmQ==
@@ -17,7 +17,7 @@
  </layer>
  <layer id="7" name="Background2" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYIAAJ04GhhouBoZaIK7jYqAqqASa58gJseMOFCMDXOLUBCA7HNDMR3YXrQDIjmoqh+dIB7bA+LKnQpx182Nn4wIPoHmE3uABNG/A8ic1/E4MAKVd5LxJT78j501s+QdbGiAmDslRi2wnqGysoWMcwOyExcE9GttbC01jD5Di3QFHHFALIPsPBJyItJPU/AsD6GFKSr3ziwuCcfHxAUL1IK3sRQawsAUAAUozuQ==
+   eJzllUsKgDAMRLO1N/EQ4udSIn5OKtJzuLKhDQRptZW0Gx8EVKRjMh0LYBkqgEUBrKY2BaJMZr2+shq7K07ouSSo0d3W59+VC9SYhef5dxrjVyvg2Vj7r0Nol5HSaJcNyqdE7zHg3uXZLNk7z6YvP749EOPhl3e5Jv4bl4IekCZ5cGTWXd0e08z3LuCBFLw/ZIjUTM0vcZ9pyrlzKluh+yfezsFcuhya7QVvxjPd
   </data>
  </layer>
  <layer id="2" name="Walls" width="30" height="17">
@@ -30,7 +30,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy1lUEKwjAQRUPElYEeQDxUVRCPogtPoOJGD+ORLGh1o0vzKYPTcaa1JX4Y0iRNXn6TTHPv3H7g3C2W1xiH+DwOzk1CVUpRnxS9j7IQ/a9hVea+XkcJNpg0d1/RmmhuKVoTrYG3WZ7apI3j8/O1gMX7aHxfgSu9yrrmFe9w7jn8Fpyr6RLqHE2p95f7s757Cm6TJ0uFcX+6cLU5IfI69d9nCkrBtTyDV3r9njVxV5lz66ydSyqU/S6ZV37emrjHyDy1cK2cAS0icxfz09z4zqnyBhc8wes9xkNw5f3tKs6Vd4a8grtVPP/rXJFXCslOnSfhm3uV7KW3z5X8L1r/SW1/LSbF03/8bkb1sajzNlmnNp4nwZsZzDcA4F5d
+   eJy1lUEKwjAQRUPElbmBeIAepyqIB9BjCLpW8TweyYJWN7o0nzI4HWdaW+KHIU3S5OU3yTT3zh0Hzt1ieY1xis/j4NwkVKUU9UnR+ygL0f8aVmXu63WUYINJc/cVrYnmlqI10Rp4m+WpTdo4Pj9fC1i8j8b3FbjSq6xrXvEO557Db8G5mi6hztGUen+5P+u7p+A2ebJUGPenC1ebEyKvU/99pqAUXMszeKXX71kTd5U5t87auaRC2e+SeeXnrYm7jcxdC9fKGdAiMg8xP82N75wqb3DBE7zeYzwEV97fruJceWfIK7h7xfO/zhV5pZDs1HkSvrlXyV56+1zJ/6L1n9T212JSPP3H72ZUH4s6b5N1auN5EryZwXwDUChedQ==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -44,12 +44,12 @@
   <object id="52" template="../obj/gold.tx" x="168" y="25"/>
   <object id="53" template="../obj/enemy.tx" x="107.75" y="61">
    <properties>
-    <property name="enemy" value="Red Wiz1"/>
+    <property name="enemy" value="Apprentice Red Wizard"/>
    </properties>
   </object>
   <object id="54" template="../obj/enemy.tx" x="291.833" y="59.5">
    <properties>
-    <property name="enemy" value="Red Wiz1"/>
+    <property name="enemy" value="Apprentice Red Wizard"/>
    </properties>
   </object>
   <object id="55" template="../obj/enemy.tx" x="199.333" y="232">

@@ -56,9 +56,8 @@
     <property name="arena">{
 
     &quot;enemyPool&quot;:[
-	&quot;Black Wiz1&quot;
-	&quot;Black Wiz2&quot;,
-	&quot;Black Wiz3&quot;,
+	&quot;Adept Black Wizard&quot;,
+	&quot;Apprentice Black Wizard&quot;,
 	&quot;Challenger 20&quot;,
 	&quot;Challenger 21&quot;,
 	&quot;Challenger 22&quot;,
@@ -71,6 +70,7 @@
 	&quot;Harpy 2&quot;,
 	&quot;High Vampire&quot;,
 	&quot;Lich&quot;,
+	&quot;Master Black Wizard&quot;,
 	&quot;Necromancer&quot;,
 	&quot;Rat Ninja&quot;,
 	&quot;Vampire&quot;,
