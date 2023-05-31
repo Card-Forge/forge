@@ -262,9 +262,9 @@ public class MatchController extends AbstractGuiGame {
 
         if (ph != null && saveState && ph.isMain()) {
             phaseGameState = new GameState() {
-                @Override //todo get specific card edition for this function?
-                public IPaperCard getPaperCard(final String cardName) {
-                    return FModel.getMagicDb().getCommonCards().getCard(cardName);
+                @Override
+                public IPaperCard getPaperCard(final String cardName, final String setCode, final int artID) {
+                    return FModel.getMagicDb().getCommonCards().getCard(cardName, setCode, artID);
                 }
             };
             try {

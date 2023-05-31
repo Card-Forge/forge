@@ -98,8 +98,8 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
         this.parse(stateLines);
     }
 
-    public IPaperCard getPaperCard(final String cardName) {
-        return FModel.getMagicDb().getCommonCards().getCard(cardName);
+    public IPaperCard getPaperCard(final String cardName, final String setCode, final int artID) {
+        return FModel.getMagicDb().getCommonCards().getCard(cardName, setCode, artID);
     }
 
     public void setupMaxPlayerHandSize(Game game, int maxHandSize) {
