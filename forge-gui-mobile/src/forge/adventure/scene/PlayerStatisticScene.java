@@ -55,7 +55,7 @@ public class PlayerStatisticScene extends UIScene {
     private PlayerStatisticScene() {
         super(Forge.isLandscapeMode() ? "ui/statistic.json" : "ui/statistic_portrait.json");
         planeswalkers = PlaneswalkerAchievements.instance;
-        achievements = FModel.getAchievements(GameType.Constructed);
+        achievements = FModel.getAchievements(GameType.Adventure);
         cardActivation = CardActivationAchievements.instance;
         scrollContainer = new Table(Controls.getSkin());
         scrollContainer.row();

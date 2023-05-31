@@ -32,7 +32,6 @@ import forge.adventure.data.ItemData;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.UIScene;
-import forge.assets.FImageComplex;
 import forge.assets.FSkin;
 import forge.assets.ImageCache;
 import forge.card.CardImageRenderer;
@@ -47,9 +46,7 @@ import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 
 import static forge.adventure.util.Paths.ITEMS_ATLAS;

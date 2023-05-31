@@ -7,6 +7,7 @@ import forge.Forge;
 import forge.adventure.data.AdventureEventData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
+import forge.adventure.stage.GameHUD;
 import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
@@ -69,6 +70,7 @@ public class InnScene extends UIScene {
 
 
     public void done() {
+        GameHUD.getInstance().getTouchpad().setVisible(false);
         Forge.switchScene(lastGameScene==null?GameScene.instance():lastGameScene);
     }
 

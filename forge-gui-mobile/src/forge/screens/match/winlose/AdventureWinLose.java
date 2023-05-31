@@ -19,7 +19,7 @@ public class AdventureWinLose extends ControlWinLose {
         else{
             v.getBtnContinue().setVisible(true);
             v.getBtnContinue().setEnabled(true);
-            v.getBtnContinue().setText("CONTINUE MATCH");
+            v.getBtnContinue().setText(Forge.getLocalizer().getMessage("btnNextGame"));
             v.getBtnQuit().setText(Forge.getLocalizer().getMessage("lblQuitAdventureEventMatch"));
         }
         v.getBtnRestart().setVisible(false);

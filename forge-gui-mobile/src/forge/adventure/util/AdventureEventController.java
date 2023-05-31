@@ -1,8 +1,6 @@
 package forge.adventure.util;
 
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Json;
 import forge.StaticData;
 import forge.adventure.data.AdventureEventData;
 import forge.adventure.player.AdventurePlayer;

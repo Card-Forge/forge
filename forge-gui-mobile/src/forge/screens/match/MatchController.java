@@ -313,10 +313,19 @@ public class MatchController extends AbstractGuiGame {
     public void finishGame() {
         if (Forge.isMobileAdventureMode) {
             if (Config.instance().getSettingData().disableWinLose) {
-                Forge.setCursor(null, "0");
-                if (!DuelScene.instance().hasCallbackExit())
-                    DuelScene.instance().exitDuelScene();
-                return;
+                if (getGameView().isMatchOver()){
+                    Forge.setCursor(null, "0");
+                    if (!DuelScene.instance().hasCallbackExit()){
+                        DuelScene.instance().GameEnd();
+                        DuelScene.instance().exitDuelScene();
+                    }
+                    return;
+                }
+                else{
+                    try { MatchController.getHostedMatch().continueMatch();
+                    } catch (NullPointerException e) {}
+                    return;
+                }
             }
         }
         if (hasLocalPlayers() || getGameView().isMatchOver()) {
