@@ -338,7 +338,9 @@ public class BoosterDraft implements IBoosterDraft {
         this.computerChoose();
 
         final CardPool result = new CardPool();
-        result.addAllFlat(localPlayer.nextChoice());
+
+        if (localPlayer.nextChoice() != null && !localPlayer.nextChoice().isEmpty())
+            result.addAllFlat(localPlayer.nextChoice());
 
         if (result.isEmpty()) {
             // Can't set a card, since none are available. Just pass "empty" packs.
@@ -396,6 +398,9 @@ public class BoosterDraft implements IBoosterDraft {
 
         for (int i = 0; i < N_PLAYERS; i++) {
             List<PaperCard> passingPack = this.players.get(i).passPack();
+
+            if (passingPack == null)
+                continue;
 
             if (!passingPack.isEmpty()) {
                 // TODO Canal Dredger for passing a pack with a single card in it

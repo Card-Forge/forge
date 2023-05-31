@@ -42,7 +42,7 @@ public class DeckEditScene extends ForgeScene {
     }
     @Override
     public FScreen getScreen() {
-        return screen==null?screen = new AdventureDeckEditor(false):screen;
+        return screen==null?screen = new AdventureDeckEditor(false, null):screen;
     }
 
 }

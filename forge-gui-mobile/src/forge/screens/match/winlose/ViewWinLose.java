@@ -2,6 +2,7 @@ package forge.screens.match.winlose;
 
 import java.util.List;
 
+import forge.game.GameType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Input.Keys;
@@ -68,6 +69,10 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         case PlanarConquest:
             control = new ConquestWinLose(this, game0);
             break;
+        case Adventure:
+        case AdventureEvent:
+            control = new AdventureWinLose(this, game0);
+            break;
         case Draft:
             if (!FModel.getGauntletMini().isGauntletDraft()) {
                 break;
@@ -92,7 +97,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         btnContinue.setFont(FSkinFont.get(22));
         btnRestart.setText(Forge.getLocalizer().getMessage("btnStartNewMatch"));
         btnRestart.setFont(btnContinue.getFont());
-        btnQuit.setText(Forge.getLocalizer().getMessage("btnQuitMatch"));
+        //btnQuit.setText(Forge.getLocalizer().getMessage("btnQuitMatch"));
         btnQuit.setFont(btnContinue.getFont());
         btnContinue.setEnabled(!game0.isMatchOver());
 
@@ -123,8 +128,8 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         }).build());
         lblTitle.setText(composeTitle(game0));
 
-        if (Forge.isMobileAdventureMode)
-            control = new AdventureWinLose(this, game0);
+//        if (Forge.isMobileAdventureMode)
+//            control = new AdventureWinLose(this, game0);
 
         showGameOutcomeSummary();
         showPlayerScores();
@@ -199,9 +204,16 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
 
         h = height / 12;
         if (Forge.isMobileAdventureMode) {
+            if (game.getGameType() == GameType.AdventureEvent) {
+                btnContinue.setBounds(x, y, w, h);
+                y += h + dy;
+            }
+            else{
+                btnContinue.setVisible(false);
+            }
             btnQuit.setBounds(x, y, w, h);
             y += h + dy;
-            btnContinue.setVisible(false);
+
             btnRestart.setVisible(false);
         } else {
             btnContinue.setBounds(x, y, w, h);

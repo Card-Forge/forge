@@ -27,10 +27,12 @@ import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
+import forge.StaticData;
 import forge.adventure.data.ItemData;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.UIScene;
+import forge.assets.FImageComplex;
 import forge.assets.FSkin;
 import forge.assets.ImageCache;
 import forge.card.CardImageRenderer;
@@ -38,12 +40,16 @@ import forge.card.CardRenderer;
 import forge.game.card.CardView;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
+import forge.item.SealedProduct;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
+import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 import static forge.adventure.util.Paths.ITEMS_ATLAS;
@@ -301,6 +307,45 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 setItemTooltips(item, backSprite);
                 boolean isQuestItemLoot = RewardScene.Type.Loot.equals(type) && reward.getItem().questItem;
                 processSprite(backSprite, item, isQuestItemLoot ? Controls.newTextraLabel("[%110]" + reward.getItem().name) : null, 0, isQuestItemLoot ? -10 : 0);
+                needsToBeDisposed = true;
+                break;
+            }
+            case CardPack: {
+                TextureAtlas atlas = Config.instance().getAtlas(ITEMS_ATLAS);
+                Sprite backSprite = atlas.createSprite("CardBack");
+                if (reward.getDeck() == null) {
+                    needsToBeDisposed = true;
+                    processSprite(backSprite, null, null, 0, 0);
+                    break;
+                }
+
+
+
+                String imageKey;
+                try {
+                    String editionCode = reward.getDeck().getComment();
+                    int artIndex = 1;
+                    if (SealedProduct.specialSets.contains(editionCode) || editionCode.equals("?")) {
+                        imageKey = "b:" + getName().substring(0, getName().indexOf("Booster Pack") - 1);
+                    } else {
+                        int maxIdx = StaticData.instance().getEditions().get(editionCode).getCntBoosterPictures();
+                        artIndex = MyRandom.getRandom().nextInt(maxIdx) + 1;
+                        imageKey = ImageKeys.BOOSTER_PREFIX + editionCode + ((1 >= maxIdx) ? "" : ("_" + artIndex));
+                    }
+                }
+                catch (Exception e){
+                    //Comment did not contain the edition code, this is not a basic booster pack
+                }
+
+
+
+                //FImageComplex cardArt = CardRenderer.getCardArt(imageKey, false, false, false, false, false,false,false,false,false,false);
+
+                //Sprite item = new Sprite(cardArt.getTexture());
+
+                Sprite item = atlas.createSprite("Deck");
+                setItemTooltips(item, backSprite);
+                processSprite(backSprite, item,  Controls.newTextraLabel("[80%]Booster"), 0, -10);
                 needsToBeDisposed = true;
                 break;
             }
@@ -567,6 +612,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 if (itemExists) {
                     description = item.getDescription();
                     layout.reset();
+                } else if (getReward().getDeck() != null) {
+                    description = getReward().getDeck().getName();
                 } else {
                     description = "Adds " + getReward().getCount() + " " + getReward().type;
                 }

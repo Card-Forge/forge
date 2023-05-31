@@ -3,10 +3,12 @@ package forge.adventure.util;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.adventure.data.GeneratedDeckData;
 import forge.adventure.data.GeneratedDeckTemplateData;
+import forge.adventure.data.ItemData;
 import forge.adventure.data.RewardData;
 import forge.card.*;
 import forge.card.mana.ManaCostShard;
@@ -14,11 +16,16 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
 import forge.deck.io.DeckSerializer;
+import forge.game.GameFormat;
+import forge.gamemodes.quest.QuestController;
+import forge.item.BoosterPack;
+import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
 
 import java.io.File;
 import java.util.*;
@@ -654,6 +661,62 @@ public class CardUtil {
 
     }
 
+    private static final GameFormat.Collection  formats   = FModel.getFormats();
 
+
+
+
+
+    private static final Predicate<CardEdition> filterPioneer = formats.getPioneer().editionLegalPredicate;
+    private static final Predicate<CardEdition> filterModern= formats.getModern().editionLegalPredicate;
+    private static final Predicate<CardEdition> filterVintage = formats.getVintage().editionLegalPredicate;
+    private static final Predicate<CardEdition> filterStandard = formats.getStandard().editionLegalPredicate;
+    public static Deck generateStandardBoosterAsDeck(){
+        return generateRandomBoosterPackAsDeck(filterStandard);
+    }
+    public static Deck generatePioneerBoosterAsDeck(){
+        return generateRandomBoosterPackAsDeck(filterPioneer);
+    }
+    public static Deck generateModernBoosterAsDeck(){
+        return generateRandomBoosterPackAsDeck(filterModern);
+    }
+    public static Deck generateVintageBoosterAsDeck(){
+        return generateRandomBoosterPackAsDeck(filterVintage);
+    }
+
+    public static Deck generateBoosterPackAsDeck(String code){
+
+        if (Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(code)){
+            System.err.println("Cannot generate booster pack, '" + code + "' is a restricted edition");
+        }
+
+        CardEdition edition = StaticData.instance().getEditions().get(code);
+        if (edition == null){
+            System.err.println("Set code '" + code + "' not found.");
+            return new Deck();
+        }
+        BoosterPack cards = BoosterPack.FN_FROM_SET.apply(edition);
+        return generateBoosterPackAsDeck(edition);
+    }
+
+    public static Deck generateBoosterPackAsDeck(CardEdition edition){
+        Deck d = new Deck("Booster pack");
+        d.setComment(edition.getCode());
+        d.getMain().add(BoosterPack.FN_FROM_SET.apply(edition).getCards());
+        return d;
+    }
+
+    public static Deck generateRandomBoosterPackAsDeck(final Predicate<CardEdition> editionFilter) {
+        Predicate<CardEdition> filter = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, editionFilter);
+        Iterable<CardEdition> possibleEditions = Iterables.filter(FModel.getMagicDb().getEditions(), filter);
+
+        if (!possibleEditions.iterator().hasNext()) {
+            System.err.println("No sets found matching edition filter that can create boosters.");
+            return null;
+        }
+
+        CardEdition edition = Aggregates.random(possibleEditions);
+        return generateBoosterPackAsDeck(edition);
+    }
 }
 

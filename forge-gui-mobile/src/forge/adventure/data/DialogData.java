@@ -1,5 +1,7 @@
 package forge.adventure.data;
 
+import forge.util.Callback;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,8 @@ import java.util.List;
  * Carries all text, branches and effects of dialogs.
  */
 public class DialogData implements Serializable {
+    //private static final long SerialVersionUID = 1; // TODO: set to current value
+
     public ActionData[] action = new ActionData[0];       //List of effects to cause when the dialog shows.
     public ConditionData[] condition = new ConditionData[0]; //List of conditions for the action to show.
     public String name = "";               //Text to display when action is listed as a button.
@@ -16,6 +20,8 @@ public class DialogData implements Serializable {
     public String text = "";               //The text body.
     public String loctext= "";            //References a localized string for the text body.
     public DialogData[] options = new DialogData[0];      //List of sub-dialogs. Show up as options in the current one.
+
+    public transient Callback callback;
 
     public DialogData(){}
     public DialogData(DialogData other){
@@ -53,6 +59,7 @@ public class DialogData implements Serializable {
         public String addItem;            //Add item name to inventory.
         public int addLife = 0;           //Gives the player X health. Negative to take.
         public int addGold = 0;           //Gives the player X gold. Negative to take.
+        public int addShards = 0;           //Gives the player X shards. Negative to take.
 
         public int deleteMapObject = 0;   //Remove ID from the map. -1 for self.
         public int activateMapObject = 0; //Remove inactive state from ID.
@@ -78,6 +85,7 @@ public class DialogData implements Serializable {
             addItem = other.removeItem;
             addLife = other.addLife;
             addGold = other.addGold;
+            addShards = other.addShards;
             deleteMapObject = other.deleteMapObject;
             activateMapObject = other.activateMapObject;
             battleWithActorID = other.battleWithActorID;
@@ -103,7 +111,8 @@ public class DialogData implements Serializable {
         }
     }
 
-    static public class ConditionData {
+    static public class ConditionData implements Serializable {
+        private static final long SerialVersionUID = 1L; // TODO: set to current value?
         static public class QueryQuestFlag{
             public String key;
             public String op;
@@ -113,6 +122,7 @@ public class DialogData implements Serializable {
         public int actorID = 0;                    //Check for an actor ID.
         public String hasBlessing = null;          //Check for specific blessing, if named.
         public int hasGold = 0;                    //Check for player gold. True if gold is equal or higher than X.
+        public int hasShards = 0;                  //Check player's mana shards. True if equal or higher than X.
         public int hasMapReputation = Integer.MIN_VALUE; //Check for player reputation in this POI. True if reputation is equal or higher than X.
         public int hasLife = 0;                    //Check for player life. True if life is equal or higher than X.
         public String colorIdentity = null;        //Check for player's current color identity.

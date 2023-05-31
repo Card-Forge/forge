@@ -27,6 +27,9 @@ public class AdventureQuestController implements Serializable {
         Defeat,
         Delivery,
         Escort,
+        EventFinish,
+        EventWin,
+        EventWinMatches,
         Fetch,
         Find,
         Gather,
@@ -171,6 +174,10 @@ public class AdventureQuestController implements Serializable {
         return object;
     }
 
+    public static void clear(){
+        object = null;
+    }
+
     private AdventureQuestController(){
 
     }
@@ -277,6 +284,12 @@ public class AdventureQuestController implements Serializable {
     public void updateArenaComplete(boolean winner){
         for(AdventureQuestData currentQuest: Current.player().getQuests()) {
             currentQuest.updateArenaComplete(winner);
+        }
+    }
+
+    public void updateEventComplete(AdventureEventData completedEvent) {
+        for(AdventureQuestData currentQuest: Current.player().getQuests()) {
+            currentQuest.updateEventComplete(completedEvent);
         }
     }
 

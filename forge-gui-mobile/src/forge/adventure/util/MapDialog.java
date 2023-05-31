@@ -305,6 +305,10 @@ public class MapDialog {
                 if (E.addGold > 0) Current.player().giveGold(E.addGold);
                 else Current.player().takeGold(-E.addGold);
             }
+            if (E.addShards != 0) { //Gives (positive or negative) mana shards to the player.
+                if (E.addShards > 0) Current.player().giveGold(E.addShards);
+                else Current.player().takeGold(-E.addShards);
+            }
             if (E.addMapReputation != 0) {
                 PointOfInterestChanges p;
                 if (E.POIReference.length()>0 && !E.POIReference.contains("$"))
@@ -388,6 +392,11 @@ public class MapDialog {
             }
             if (condition.hasGold != 0) { //Check for at least X gold.
                 if (player.getGold() < condition.hasGold) {
+                    if (!condition.not) return false;
+                } else if (condition.not) return false;
+            }
+            if (condition.hasShards != 0) { //Check for at least X gold.
+                if (player.getShards() < condition.hasShards) {
                     if (!condition.not) return false;
                 } else if (condition.not) return false;
             }
