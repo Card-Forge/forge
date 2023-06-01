@@ -4502,8 +4502,9 @@
 		}
 	  ]
 	}
-	]
-			},{
+	]		
+},
+{
   "name":"Gods",
   "description":"Al's Dose of Apotheosis",
   "spriteAtlas":"maps/tileset/buildings.atlas",
@@ -4537,8 +4538,9 @@
 		}
 	  ]
 	  }
-	  ]
-},{
+	  ]	  
+},
+{
   "name":"Insects",
   "description":"Grist's Bug Greenhouse",
   "spriteAtlas":"maps/tileset/buildings.atlas",
@@ -4555,6 +4557,50 @@
 		{
 		  "count":1,
 		  "cardText": "Insect"
+		}
+	  ]
+	}
+	]
+},
+{
+  "name":"Horrors",
+  "description":"Horrific Horrors",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"HorrorShop",
+  "rewards": [
+  {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Horror"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Horror"
+		}
+	  ]
+	}
+	]
+},
+{
+  "name":"Mutants",
+  "description":"",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"Marching Mutants",
+  "rewards": [
+  {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Mutant"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Mutant"
 		}
 	  ]
 	}

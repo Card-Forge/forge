@@ -2231,6 +2231,7 @@
 	"deck": [
 		"decks/monsters/sliver_black.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.2,
 	"speed": 24,
@@ -2518,6 +2519,87 @@
 		"Wizard",
 		"Human",
 		"IdentityBlack"
+	]
+},
+{
+	"name": "Bone Dragon",
+	"nameOverride": "",
+	"sprite": "sprites/monsters/bonedragon.atlas",
+	"deck": [
+		"decks/monsters/bonedragon.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.3,
+	"speed": 20,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"common",
+				"uncommon",
+				"rare",
+				"Mythic Rare"
+			],
+			"subTypes": [
+				"Dragon"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.4,
+			"count": 1,
+			"rarity": [
+				"Rare",
+				"Mythic Rare"
+			],
+			"cardTypes": [
+				"Planeswalker"
+			],
+			"colorType": "Any",
+			"cardText": "Sarkhan"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common",
+				"Rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"colorType": "Colorless",
+			"cardText": "{R}"
+		}
+	],
+	"colors": "R",
+	"questTags": [
+		"Dragon",
+		"Flyer",
+		"Monster",
+		"Zombie",
+		"IdentityBlack",
+		"IdentityRakdos",
+		"Huge",
+		"Territorial",
+		"Undead",
+		"Skeleton"
 	]
 },
 {
@@ -5779,6 +5861,67 @@
 	]
 },
 {
+	"name": "Dragonfly",
+	"sprite": "sprites/arachnida/dragonfly.atlas",
+	"deck": [
+		"decks/arachnida/insect.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 0.8,
+	"difficulty": 0.1,
+	"speed": 30,
+	"scale": 0.5,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "WBG",
+	"questTags": [
+		"Insect",
+		"Animal",
+		"Wild",
+		"Nesting",
+		"Swarming",
+		"Flying",
+		"Tiny",
+		"IdentityWhite",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityAbzan",
+		"BiomeColorless",
+		"BiomeWhite",
+		"BiomeBlack"
+	]
+},
+{
 	"name": "Dross Gladiator",
 	"sprite": "sprites/phyrexians/drossgladiator.atlas",
 	"deck": [
@@ -6897,7 +7040,7 @@
 	],
 	"ai": "",
 	"flying": true,
-	"spawnRate": 1,
+	"spawnRate": 0.6,
 	"difficulty": 0.1,
 	"speed": 25,
 	"scale": 0.85,
@@ -8536,6 +8679,68 @@
 	]
 },
 {
+	"name": "Giant Fly",
+	"sprite": "sprites/arachnida/giantfly.atlas",
+	"deck": [
+		"decks/arachnida/insect.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 0.8,
+	"difficulty": 0.1,
+	"speed": 30,
+	"scale": 0.5,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Insect",
+		"Animal",
+		"Wild",
+		"Nesting",
+		"Swarming",
+		"Flying",
+		"Tiny",
+		"IdentityWhite",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityAbzan",
+		"BiomeGreen",
+		null,
+		null
+	]
+},
+{
 	"name": "Giant Spider",
 	"sprite": "sprites/arachnida/spider_purple.atlas",
 	"deck": [
@@ -10162,6 +10367,7 @@
 	"deck": [
 		"decks/miniboss/angel_rainbow_encounter.dck"
 	],
+	"ai": "",
 	"difficulty": 0.2,
 	"speed": 20,
 	"life": 50,
@@ -10198,7 +10404,7 @@
 	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"speed": 31,
+	"speed": 28,
 	"life": 13,
 	"rewards": [
 		{
@@ -10281,7 +10487,7 @@
 	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"speed": 31,
+	"speed": 28,
 	"life": 13,
 	"rewards": [
 		{
@@ -10692,7 +10898,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
-	"scale": 0.5,
+	"scale": 0.6,
 	"life": 12,
 	"rewards": [
 		{
@@ -10877,7 +11083,7 @@
 },
 {
 	"name": "Horse",
-	"sprite": "sprites/animals/horse.atlas",
+	"sprite": "sprites/animals/horseblack.atlas",
 	"deck": [
 		"decks/animals/horse.dck"
 	],
@@ -11298,67 +11504,6 @@
 		"Scientist",
 		"IdentityBlue",
 		"BiomeBlue"
-	]
-},
-{
-	"name": "Insect",
-	"sprite": "sprites/arachnida/dragonfly.atlas",
-	"deck": [
-		"decks/arachnida/insect.dck"
-	],
-	"ai": "",
-	"flying": true,
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 30,
-	"scale": 0.5,
-	"life": 14,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"uncommon"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.7,
-			"count": 10,
-			"addMaxCount": 90
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"uncommon",
-				"common"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		}
-	],
-	"colors": "WBG",
-	"questTags": [
-		"Insect",
-		"Animal",
-		"Wild",
-		"Nesting",
-		"Swarming",
-		"Flying",
-		"Tiny",
-		"IdentityWhite",
-		"IdentityBlack",
-		"IdentityGreen",
-		"IdentityAbzan",
-		"BiomeColorless",
-		"BiomeWhite",
-		"BiomeBlack"
 	]
 },
 {
@@ -12555,6 +12700,68 @@
 	]
 },
 {
+	"name": "Ladybug",
+	"sprite": "sprites/arachnida/ladybug.atlas",
+	"deck": [
+		"decks/arachnida/insect.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 0.8,
+	"difficulty": 0.1,
+	"speed": 30,
+	"scale": 0.5,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Insect",
+		"Animal",
+		"Wild",
+		"Nesting",
+		"Swarming",
+		"Flying",
+		"Tiny",
+		"IdentityWhite",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityAbzan",
+		"BiomeGreen",
+		null,
+		null
+	]
+},
+{
 	"name": "Lich",
 	"sprite": "sprites/unholy/lich_2.atlas",
 	"deck": [
@@ -12681,10 +12888,11 @@
 	]
 },
 {
-	"name": "Leonin Warrior",
-	"sprite": "sprites/leonin/lion.atlas",
+	"name": "Leonin Weaponmaster",
+	"nameOverride": "",
+	"sprite": "sprites/leonin/lion_2.atlas",
 	"deck": [
-		"decks/animals/cat.json"
+		"decks/leonin/leoninswordsmith.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -12699,55 +12907,24 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
 				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
 			]
 		},
 		{
-			"type": "deckCard",
-			"probability": 0.25,
+			"type": "card",
+			"probability": 1,
 			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
+			"addMaxCount": 3,
+			"subTypes": [
+				"Equipment"
 			],
 			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
+				"Artifact"
 			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.3,
+			"probability": 1,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -12760,7 +12937,59 @@
 		"IdentityGreen",
 		"IdentityWhite",
 		"IdentitySelesnya",
-		"BiomeWhite"
+		"BiomeWhite",
+		"Leonin",
+		"Armorer",
+		"Equipments"
+		]
+},
+{
+	"name": "Leonin Warrior",
+	"sprite": "sprites/leonin/lion.atlas",
+	"deck": [
+		"decks/leonin/leoninwarrior.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 27,
+	"life": 15,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 1,
+			"cardText": "Leonin"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "GW",
+	"questTags": [
+		"Cat",
+		"Humanoid",
+		"Soldier",
+		"IdentityGreen",
+		"IdentityWhite",
+		"IdentitySelesnya",
+		"BiomeWhite",
+		"Leonin"
 	]
 },
 {
@@ -14609,6 +14838,68 @@
 	]
 },
 {
+	"name": "Nightmare",
+	"sprite": "sprites/monsters/nightmare.atlas",
+	"deck": [
+		"decks/monsters/nightmare.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.3,
+	"difficulty": 0.8,
+	"speed": 18,
+	"scale": 0.65,
+	"life": 30,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"Rare",
+				"Uncommon",
+				"Common"
+			],
+			"subTypes": [
+				"Nightmare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 200,
+			"addMaxCount": 100
+		}
+	],
+	"colors": "RG",
+	"questTags": [
+		"Monster",
+		"Horror",
+		"Hidden",
+		"IdentityBlack",
+		"Humanoid",
+		"Huge",
+		"Magic",
+		"Sneaky",
+		"Unholy"
+	]
+},
+{
 	"name": "Octopus",
 	"sprite": "sprites/animals/octopus.atlas",
 	"deck": [
@@ -15075,7 +15366,8 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
-	"life": 10,
+	"scale": 0.8,
+	"life": 15,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -15121,6 +15413,81 @@
 		"Prey",
 		"IdentityGreen",
 		"BiomeGreen"
+	]
+},
+{
+	"name": "Poisonous Snake",
+	"nameOverride": "",
+	"sprite": "sprites/lizards/snake_cobra.atlas",
+	"deck": [
+		"decks/lizards/poisonoussnake.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale":0.9,
+	"life": 15,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Rare",
+				"common",
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Animal",
+		"Beast",
+		"Snake",
+		"Cobra",
+		"Lizard",
+		"Sneaky",
+		"IdentityGreen",
+		null,
+		null,
+		null
 	]
 },
 {
@@ -16341,6 +16708,70 @@
 	]
 },
 {
+	"name": "Shade",
+	"sprite": "sprites/monsters/shade.atlas",
+	"deck": [
+		"decks/monsters/shade.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.3,
+	"difficulty": 0.8,
+	"speed": 18,
+	"scale": 0.45,
+	"life": 30,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"Rare",
+				"Uncommon",
+				"Common"
+			],
+			"subTypes": [
+				"Shade"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 200,
+			"addMaxCount": 100
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Shade",
+		"Monster",
+		"Horror",
+		"Unholy",
+		"Sneaky",
+		"Hidden",
+		"Shadow",
+		"Mystic",
+		"Magic",
+		"IdentityBlack",
+		"Humanoid"
+	]
+},
+{
 	"name": "Shaman",
 	"sprite": "sprites/lizards/shaman_2.atlas",
 	"deck": [
@@ -16639,6 +17070,7 @@
 	"deck": [
 		"decks/unholy/skeleton_champion.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.2,
 	"speed": 20,
@@ -17372,7 +17804,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
-	"scale": 0.8,
+	"scale": 0.65,
 	"life": 35,
 	"rewards": [
 		{
@@ -18620,13 +19052,14 @@
 	"name": "Wasp",
 	"sprite": "sprites/arachnida/wasp.atlas",
 	"deck": [
-		"decks/arachnida/insect.dck"
+		"decks/arachnida/wasp.dck"
 	],
 	"ai": "",
 	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
+	"scale": 0.75,
 	"life": 10,
 	"rewards": [
 		{

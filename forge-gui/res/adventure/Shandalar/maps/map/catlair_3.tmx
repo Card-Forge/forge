@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="60">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="80">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -20,7 +20,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy9VTkSwjAMdEvBO8JP4pnwH3I8kcL8ADom+QIUoCGaLJqVbRq2wZZkWV4tSggbLrvP7wK2RGzj/tsfiV0wmT3e4fkt9N4eYrvysSq0xFZTk0DrGtb447pXLhK8M5q9PeMhVtoHU7Ptg4X6sRfnw7aWWpEH9JWAOplhjXch7pnc6NO8mkc5sFpAnWB/FxOH+2sTwq3ZeOl/4NPq5URiNR/6pP7H+85n4+dmYJq1eihpGHWHZxfjR47YuxSjeRcipx3mS45OcmBnVDtsbonP9jgH0VwH65nEWH2VgJxpv1hva9CGfM+nytnJONF3aY7oxGLfUV8eL2wesNq882Kv+d5gvKdh7ac3o/6J3H/JmzWMN7Ul53v7ApCcShM=
+   eJy9VTkSwjAMdEvBO8JPkpnwH3I8kcL8ADom+QIUoCGaLDuSIxq2ia3LsrRWUlpx2X2+M8iyIRv23/rGkAtG2uMZnp6h53Zg2267hVAbskhOAs2rX+yPy15rkeGeDe3Zx0MTlPeUM/eBoXrsxfmwriVXrAPqtoA8mWCNZyHuhdio07gaR2vAXECeYH9nssP9tUrpVq116X6oJ/PlZNhqPNRJ/o/3mc/Kjx0F82GLw8g79J1JzzXzMNC9ECXuWLrs8KQEy0e5Y80t0XGPSxDOtbCeDJtorTgXgfbLmkcR1Knc8zE4O62a6L00RuPYYt+RX15drHlg5eb5izzyv0F7620KtJ/ejPonSm/JmzVW3VSWnf/tC2lESUg=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -29,25 +29,94 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../obj/enemy.tx" x="232.333" y="90.2576">
-   <properties>
-    <property name="enemy" value="Leonin Warrior"/>
-   </properties>
-  </object>
-  <object id="51" template="../obj/treasure.tx" x="215.71" y="92.3978"/>
-  <object id="53" template="../obj/enemy.tx" x="207.833" y="225.167">
-   <properties>
-    <property name="enemy" value="Cat"/>
-   </properties>
-  </object>
-  <object id="54" template="../obj/enemy.tx" x="199.284" y="90.7572">
-   <properties>
-    <property name="enemy" value="Leonin Warrior"/>
-   </properties>
-  </object>
+  <object id="51" template="../obj/treasure.tx" x="247.923" y="92.8391"/>
   <object id="56" template="../obj/collision.tx" x="-16" y="0" width="16" height="272"/>
   <object id="57" template="../obj/collision.tx" x="480" y="0" width="16" height="272"/>
   <object id="58" template="../obj/collision.tx" x="-16" y="272" width="512" height="16"/>
   <object id="59" template="../obj/collision.tx" x="-16" y="-16" width="512" height="16"/>
+  <object id="60" template="../obj/booster.tx" x="186.604" y="93.0526">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [  &quot;MH2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot;]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="65" template="../obj/enemy.tx" x="82.9032" y="115.999">
+   <properties>
+    <property name="enemy" value="Scarab"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="66" template="../obj/enemy.tx" x="362.673" y="135.857">
+   <properties>
+    <property name="enemy" value="Scarab"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="67,70"/>
+   </properties>
+  </object>
+  <object id="67" template="../obj/waypoint.tx" x="300.895" y="134.533"/>
+  <object id="70" template="../obj/waypoint.tx" x="441.662" y="135.415"/>
+  <object id="71" template="../obj/enemy.tx" x="216.169" y="52.0138" visible="1">
+   <properties>
+    <property name="enemy" value="Leonin Warrior"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="74,75"/>
+   </properties>
+  </object>
+  <object id="73" template="../obj/enemy.tx" x="164.098" y="129.237" visible="1">
+   <properties>
+    <property name="enemy" value="Leonin Weaponmaster"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="74" template="../obj/waypoint.tx" x="157.038" y="51.5725"/>
+  <object id="75" template="../obj/waypoint.tx" x="292.51" y="53.3376"/>
+  <object id="76" template="../obj/enemy.tx" x="266.034" y="131.444" visible="1">
+   <properties>
+    <property name="enemy" value="Leonin Weaponmaster"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="77" template="../obj/enemy.tx" x="210.433" y="176.895" visible="1">
+   <properties>
+    <property name="enemy" value="Stray Cat"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="78" template="../obj/manashards.tx" x="241.322" y="151.743"/>
+  <object id="79" template="../obj/manashards.tx" x="193.223" y="150.419"/>
  </objectgroup>
 </map>

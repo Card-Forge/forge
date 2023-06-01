@@ -146,7 +146,7 @@
 {
 	"name": "CatLairG",
 	"type": "dungeon",
-	"count": 4,
+	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "CatLair",
 	"map": "maps/map/catlair_1.tmx",
@@ -161,7 +161,7 @@
 {
 	"name": "CatLairG1",
 	"type": "dungeon",
-	"count": 4,
+	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "CatLair",
 	"map": "maps/map/catlair_2.tmx",
@@ -176,7 +176,7 @@
 {
 	"name": "CatLairG2",
 	"type": "dungeon",
-	"count": 4,
+	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "CatLair",
 	"map": "maps/map/catlair_3.tmx",
@@ -191,7 +191,7 @@
 {
 	"name": "CatLairW",
 	"type": "dungeon",
-	"count": 5,
+	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "CatLair",
 	"map": "maps/map/catlair_1.tmx",
@@ -207,7 +207,7 @@
 {
 	"name": "CatLairW1",
 	"type": "dungeon",
-	"count": 5,
+	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "CatLair",
 	"map": "maps/map/catlair_2.tmx",
@@ -223,7 +223,7 @@
 {
 	"name": "CatLairW2",
 	"type": "dungeon",
-	"count": 5,
+	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "CatLair",
 	"map": "maps/map/catlair_3.tmx",
