@@ -127,6 +127,10 @@ public class PortalActor extends EntryActor{
         }
     }
 
+    public String getAnimation() {
+        return currentAnimationType.toString().toLowerCase();
+    }
+
     private void updateAnimation() {
         PortalAnimationTypes aniType = currentAnimationType;
         if (!animations.containsKey(aniType)) {

@@ -823,7 +823,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     // Quest functions.
     public void setQuestFlag(String key, int value) {
-        questFlags.put(key, (byte) value);
+        if (value != 0)
+            questFlags.put(key, (byte) value);
+        else
+            questFlags.remove(key);
     }
 
     public void advanceQuestFlag(String key) {

@@ -63,9 +63,8 @@ public class DialogActor extends CharacterSprite {
     @Override
     public void onPlayerCollide() {
         if (dialog != null) {
-            stage.resetPosition();
-
             if (dialog.activate()){
+                stage.resetPosition();
                 stage.showDialog();
             }
         }

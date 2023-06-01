@@ -134,8 +134,14 @@ public class MapDialog {
         }
     }
 
-    private void loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
+    private boolean loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
         setEffects(dialog.action);
+        if (dialog.options.length == 0 && dialog.text.isEmpty() && dialog.action.length > 0){
+            stage.hideDialog();
+            emitDialogFinished();
+            return false; //Allows for use of empty dialogs as area-based effect triggers
+        }
+
         Dialog D = stage.getDialog();
         Localizer L = Forge.getLocalizer();
         D.getTitleTable().clear();
@@ -231,11 +237,15 @@ public class MapDialog {
             if (i == 0) {
                 stage.hideDialog();
                 emitDialogFinished();
+                return false;
             }
-            else
+            else{
                 stage.showDialog();
+                return true;
+            }
         } else {
             stage.hideDialog();
+            return false;
         }
     }
 
@@ -279,8 +289,8 @@ public class MapDialog {
         boolean dialogShown = false;
         for (DialogData dialog : data) {
             if (isConditionOk(dialog.condition)) {
-                loadDialog(dialog);
-                dialogShown = true;
+                if (loadDialog(dialog))
+                    dialogShown = true;
             }
         }
         return dialogShown;

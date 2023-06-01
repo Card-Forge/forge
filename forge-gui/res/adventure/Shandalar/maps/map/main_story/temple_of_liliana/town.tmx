@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="287">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="290">
  <properties>
   <property name="canFailDungeon" type="bool" value="true"/>
   <property name="respawnEnemies" type="bool" value="true"/>
@@ -1643,7 +1643,7 @@
     <property name="waypoints" value="245,248"/>
    </properties>
   </object>
-  <object id="237" template="../../../obj/dialog.tx" x="0" y="478" width="144" height="16">
+  <object id="237" template="../../../obj/dialog.tx" x="0" y="464" width="144" height="16">
    <properties>
     <property name="dialog">[
 {
@@ -2095,7 +2095,8 @@
   </object>
   <object id="279" template="../../../obj/portal.tx" x="864" y="32">
    <properties>
-    <property name="portalState" value="active"/>
+    <property name="activeQuestFlag" value="lilianaBossPortal"/>
+    <property name="portalState" value="inactive"/>
     <property name="teleport" value="maps/map/main_story/temple_of_liliana/keep.tmx"/>
     <property name="teleportObjectId" value="239"/>
    </properties>
@@ -2275,6 +2276,30 @@
 }]</property>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="287" template="../../../obj/dialog.tx" x="0" y="496" width="144" height="16">
+   <properties>
+    <property name="dialog">[{ 
+&quot;condition&quot;: [{&quot;checkQuestFlag&quot;:&quot;lilianaTownPortal&quot;, &quot;not&quot;:true}],
+&quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;lilianaTownPortal&quot;, &quot;val&quot;: 1}, &quot;activateMapObject&quot;: 288}]
+}]</property>
+   </properties>
+  </object>
+  <object id="288" template="../../../obj/portal.tx" x="128" y="480">
+   <properties>
+    <property name="activeQuestFlag" value="lilianaTownPortal"/>
+    <property name="portalState" value="closed"/>
+    <property name="teleport" value="maps/map/main_story/temple_of_liliana/keep.tmx"/>
+    <property name="teleportObjectId" value="238"/>
+   </properties>
+  </object>
+  <object id="289" template="../../../obj/dialog.tx" x="800" y="64" width="144" height="16">
+   <properties>
+    <property name="dialog">[{ 
+&quot;condition&quot;: [{&quot;checkQuestFlag&quot;:&quot;lilianaBossPortal&quot;, &quot;not&quot;:true}],
+&quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;lilianaBossPortal&quot;, &quot;val&quot;: 1}, &quot;activateMapObject&quot;: 279}]
+}]</property>
    </properties>
   </object>
  </objectgroup>
