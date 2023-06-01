@@ -4,8 +4,8 @@ Types:Legendary Creature Human Knight
 PT:3/4
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature an opponent controls with greater power. Legendary creatures you control gain protection from each of that creature's colors until end of turn.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl+powerGEX | RememberLKI$ True | TgtPrompt$ Select target creature an opponent controls with greater power | RememberChanged$ True | SubAbility$ DBPumpAll
-SVar:DBProtection:ProtectionAll | ValidCards$ Creature.YouCtrl+Legendary | Gains$ Defined Remembered
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl+powerGEX | TgtPrompt$ Select target creature an opponent controls with greater power | RememberChanged$ True | SubAbility$ DBProtection
+SVar:DBProtection:DB$ ProtectionAll | ValidCards$ Creature.YouCtrl+Legendary | Gains$ TargetedCardColor
 SVar:X:Count$CardPower
 DeckHints:Type$Legendary
 Oracle:Haste\nWhen Eowyn, Fearless Knight enters the battlefield, exile target creature an opponent controls with greater power. Legendary creatures you control gain protection from each of that creature's colors until end of turn.
