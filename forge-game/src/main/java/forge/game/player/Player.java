@@ -620,7 +620,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!canPayLife(lifePayment, effect, cause)) {
             return false;
         }
-
+        
         final int lost = loseLife(lifePayment, false, false);
         cause.setPaidLife(lifePayment);
 
@@ -629,10 +629,17 @@ public class Player extends GameEntity implements Comparable<Player> {
         runParams.put(AbilityKey.LifeAmount, lifePayment);
         game.getTriggerHandler().runTrigger(TriggerType.PayLife, runParams, false);
         if (lost > 0) { // Run triggers if player actually lost life
-            final Map<Player, Integer> lossMap = Maps.newHashMap();
+            boolean runAll = false;
+            Map<Player, Integer> lossMap = cause.getLoseLifeMap();
+            if (lossMap == null) {
+                lossMap = Maps.newHashMap();
+                runAll = true;
+            }
             lossMap.put(this, lost);
-            final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromPIMap(lossMap);
-            game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams2, false);
+            if (runAll) {
+                final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromPIMap(lossMap);
+                game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams2, false);
+            }
         }
 
         return true;

@@ -186,6 +186,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private CardDamageMap preventMap;
     private GameEntityCounterTable counterTable;
     private CardZoneTable changeZoneTable;
+    private Map<Player, Integer> loseLifeMap;
 
     public CardCollection getLastStateBattlefield() {
         return lastStateBattlefield;
@@ -2355,6 +2356,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return null;
     }
 
+    public Map<Player, Integer> getLoseLifeMap() {
+        if (loseLifeMap != null) {
+            return loseLifeMap;
+        } else if (getParent() != null) {
+            return getParent().getLoseLifeMap();
+        }
+        return null;
+    }
+
     public void setDamageMap(final CardDamageMap map) {
         damageMap = map;
     }
@@ -2366,6 +2376,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setChangeZoneTable(final CardZoneTable table) {
         changeZoneTable = table;
+    }
+    public void setLoseLifeMap(final Map<Player, Integer> map) {
+        loseLifeMap = map;
     }
 
     public SpellAbility getOriginalAbility() {
