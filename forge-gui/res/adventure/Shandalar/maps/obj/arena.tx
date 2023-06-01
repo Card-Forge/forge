@@ -21,9 +21,9 @@
 	&quot;Knight&quot;,
 	&quot;Monk&quot;,
 	&quot;White Dwarf&quot;,
-	&quot;White Wiz1&quot;,
-	&quot;White Wiz2&quot;,
-	&quot;White Wiz3&quot;
+	&quot;Apprentice White Wizard&quot;,
+	&quot;Adept White Wizard&quot;,
+	&quot;Master White Wizard&quot;
 ],
     &quot;rounds&quot;:3,
     &quot;entryFee&quot;:100,

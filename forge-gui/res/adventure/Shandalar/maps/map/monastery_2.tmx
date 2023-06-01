@@ -43,7 +43,7 @@
   <object id="66" template="../obj/gold.tx" x="216.501" y="48.2141"/>
   <object id="67" template="../obj/enemy.tx" x="172.923" y="219.563">
    <properties>
-    <property name="enemy" value="White Wiz1"/>
+    <property name="enemy" value="Apprentice White Wizard"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
