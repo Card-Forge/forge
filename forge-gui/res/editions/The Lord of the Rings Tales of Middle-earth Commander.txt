@@ -27,7 +27,7 @@ ScryfallCode=LTC
 282 U Mind Stone @Maxim Kostin
 284 U Sol Ring @L J Koh
 306 C Evolving Wilds @Pavel Kolomeyets
-308 U Field of Ruin @
+308 U Field of Ruin @Shahab Alizadeh
 316 U Graypelt Refuge @Erikas Perl
 337 M Yavimaya, Cradle of Growth @Samuel Perin
 348 M The Great Henge @Jeremy Paillotin
