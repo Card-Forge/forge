@@ -1,6 +1,5 @@
 package forge.localinstance.achievements;
 
-import forge.game.GameType;
 import forge.localinstance.properties.ForgeConstants;
 
 public class AdventureAchievements extends AchievementCollection {
