@@ -1,0 +1,13 @@
+Name:Galadriel, Gift-Giver
+ManaCost:3 G G
+Types:Legendary Creature Elf Noble
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, ABILITY
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBCounter,DBTreasure,DBFood
+SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on another target creature.
+SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:DBFood:DB$ Token | TokenScript$ c_a_food_sac | SpellDescription$ Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token|Counters|LifeGain|Sacrifice & Type$Food|Treasure
+Oracle:Whenever Galadriel, Gift-Giver enters the battlefield or attacks, choose one —\n• Put a +1/+1 counter on another target creature.\n• Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\n• Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
