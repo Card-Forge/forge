@@ -54,7 +54,7 @@
   </object>
   <object id="55" template="../obj/enemy.tx" x="199.333" y="232">
    <properties>
-    <property name="enemy" value="Red Wiz1"/>
+    <property name="enemy" value="Apprentice Red Wizard"/>
    </properties>
   </object>
   <object id="56" template="../obj/gold.tx" x="232" y="24.5"/>

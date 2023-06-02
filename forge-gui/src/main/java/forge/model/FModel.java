@@ -270,6 +270,7 @@ public final class FModel {
         achievements.put(GameType.Quest, new QuestAchievements());
         achievements.put(GameType.PlanarConquest, new PlanarConquestAchievements());
         achievements.put(GameType.Puzzle, new PuzzleAchievements());
+        achievements.put(GameType.Adventure, new AdventureAchievements());
 
         //preload AI profiles
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
@@ -470,6 +471,10 @@ public final class FModel {
         case Quest:
         case PlanarConquest:
         case Puzzle:
+        case Adventure:
+            break;
+        case AdventureEvent:
+            gameType = GameType.Adventure;
             break;
         case QuestDraft:
             gameType = GameType.Quest;

@@ -134,8 +134,14 @@ public class MapDialog {
         }
     }
 
-    private void loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
+    private boolean loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
         setEffects(dialog.action);
+        if (dialog.options.length == 0 && dialog.text.isEmpty() && dialog.action.length > 0){
+            stage.hideDialog();
+            emitDialogFinished();
+            return false; //Allows for use of empty dialogs as area-based effect triggers
+        }
+
         Dialog D = stage.getDialog();
         Localizer L = Forge.getLocalizer();
         D.getTitleTable().clear();
@@ -231,11 +237,15 @@ public class MapDialog {
             if (i == 0) {
                 stage.hideDialog();
                 emitDialogFinished();
+                return false;
             }
-            else
+            else{
                 stage.showDialog();
+                return true;
+            }
         } else {
             stage.hideDialog();
+            return false;
         }
     }
 
@@ -279,8 +289,8 @@ public class MapDialog {
         boolean dialogShown = false;
         for (DialogData dialog : data) {
             if (isConditionOk(dialog.condition)) {
-                loadDialog(dialog);
-                dialogShown = true;
+                if (loadDialog(dialog))
+                    dialogShown = true;
             }
         }
         return dialogShown;
@@ -304,6 +314,10 @@ public class MapDialog {
             if (E.addGold != 0) { //Gives (positive or negative) gold to the player.
                 if (E.addGold > 0) Current.player().giveGold(E.addGold);
                 else Current.player().takeGold(-E.addGold);
+            }
+            if (E.addShards != 0) { //Gives (positive or negative) mana shards to the player.
+                if (E.addShards > 0) Current.player().giveGold(E.addShards);
+                else Current.player().takeGold(-E.addShards);
             }
             if (E.addMapReputation != 0) {
                 PointOfInterestChanges p;
@@ -388,6 +402,11 @@ public class MapDialog {
             }
             if (condition.hasGold != 0) { //Check for at least X gold.
                 if (player.getGold() < condition.hasGold) {
+                    if (!condition.not) return false;
+                } else if (condition.not) return false;
+            }
+            if (condition.hasShards != 0) { //Check for at least X gold.
+                if (player.getShards() < condition.hasShards) {
                     if (!condition.not) return false;
                 } else if (condition.not) return false;
             }

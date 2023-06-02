@@ -86,7 +86,7 @@
   &quot;options&quot;:[ { &quot;name&quot;:&quot;Okay...&quot; } ],
   &quot;action&quot;: [ { &quot;setMapFlag&quot;: {&quot;key&quot;: &quot;gate&quot;, &quot;val&quot;: 1} } ]
 }]</property>
-    <property name="enemy" value="White Wiz1"/>
+    <property name="enemy" value="Apprentice White Wizard"/>
    </properties>
   </object>
   <object id="55" template="../obj/shop.tx" x="160" y="151">

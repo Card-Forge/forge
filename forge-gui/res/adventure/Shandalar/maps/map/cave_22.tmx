@@ -158,7 +158,7 @@
   </object>
   <object id="125" template="../obj/enemy.tx" x="2983" y="2602">
    <properties>
-    <property name="enemy" value="Black Wiz1"/>
+    <property name="enemy" value="Apprentice Black Wizard"/>
    </properties>
   </object>
   <object id="126" template="../obj/enemy.tx" x="2089.5" y="3097.5">
@@ -178,7 +178,7 @@
   </object>
   <object id="129" template="../obj/enemy.tx" x="2211.5" y="3104">
    <properties>
-    <property name="enemy" value="Green Wiz1"/>
+    <property name="enemy" value="Apprentice Green Wizard"/>
    </properties>
   </object>
   <object id="130" template="../obj/treasure.tx" x="2144.5" y="3149"/>

@@ -163,6 +163,7 @@
   </object>
   <object id="227" template="../../../obj/portal.tx" type="portal" x="272" y="112">
    <properties>
+    <property name="activeQuestFlag" value="lilianaGraveyardPortal"/>
     <property name="portalState" value="closed"/>
     <property name="sprite" value="sprites/portal.atlas"/>
     <property name="teleport" value="maps/map/main_story/temple_of_liliana/graveyard.tmx"/>
@@ -171,6 +172,7 @@
   </object>
   <object id="228" template="../../../obj/portal.tx" type="portal" x="432" y="112">
    <properties>
+    <property name="activeQuestFlag" value="lilianaBogPortal"/>
     <property name="portalState" value="closed"/>
     <property name="sprite" value="sprites/portal.atlas"/>
     <property name="teleport" value="maps/map/main_story/temple_of_liliana/bog.tmx"/>
@@ -179,14 +181,16 @@
   </object>
   <object id="238" template="../../../obj/portal.tx" type="portal" x="592" y="112">
    <properties>
+    <property name="activeQuestFlag" value="lilianaTownPortal"/>
     <property name="portalState" value="closed"/>
     <property name="sprite" value="sprites/portal.atlas"/>
     <property name="teleport" value="maps/map/main_story/temple_of_liliana/town.tmx"/>
-    <property name="teleportObjectId" value="183"/>
+    <property name="teleportObjectId" value="288"/>
    </properties>
   </object>
   <object id="239" template="../../../obj/portal.tx" type="portal" x="752" y="112">
    <properties>
+    <property name="activeQuestFlag" value="lilianaBossPortal"/>
     <property name="portalState" value="inactive"/>
     <property name="sprite" value="sprites/portal.atlas"/>
     <property name="teleport" value="maps/map/main_story/temple_of_liliana/town.tmx"/>

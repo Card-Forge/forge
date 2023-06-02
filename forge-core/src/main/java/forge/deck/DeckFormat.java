@@ -106,6 +106,7 @@ public enum DeckFormat {
         }
     },
     PlanarConquest ( Range.between(40, Integer.MAX_VALUE), Range.is(0), 1),
+    Adventure      ( Range.between(40, Integer.MAX_VALUE), Range.between(0, 15), 4),
     Vanguard       ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
     Planechase     ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
     Archenemy      ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),

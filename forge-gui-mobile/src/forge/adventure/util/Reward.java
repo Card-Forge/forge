@@ -1,6 +1,7 @@
 package forge.adventure.util;
 
 import forge.adventure.data.ItemData;
+import forge.deck.Deck;
 import forge.item.PaperCard;
 
 /**
@@ -12,11 +13,13 @@ public class Reward {
         Gold,
         Item,
         Life,
-        Shards
+        Shards,
+        CardPack
     }
     Type type;
     PaperCard card;
     ItemData item;
+    Deck deck;
     private final int count;
 
     public Reward(ItemData item) {
@@ -37,8 +40,14 @@ public class Reward {
         this.type  = type;
         this.count = count;
     }
+    public Reward(Deck deck) {
+        type      = Type.CardPack;
+        this.deck = deck;
+        count     = 0;
+    }
     public PaperCard getCard() { return card;  }
     public ItemData getItem()  { return item;  }
+    public Deck getDeck()      { return deck;  }
     public Type getType()      { return type;  }
     public int getCount()      { return count; }
 }

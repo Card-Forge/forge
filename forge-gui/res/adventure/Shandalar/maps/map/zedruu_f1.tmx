@@ -54,7 +54,7 @@
   </object>
   <object id="119" template="../obj/enemy.tx" x="109.031" y="115.107">
    <properties>
-    <property name="enemy" value="Black Wiz2"/>
+    <property name="enemy" value="Adept Black Wizard"/>
     <property name="spawn.Hard" type="bool" value="true"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="179,204,183"/>
@@ -95,7 +95,7 @@
   <object id="171" template="../obj/waypoint.tx" x="296.676" y="89.7713"/>
   <object id="178" template="../obj/enemy.tx" x="333.342" y="200.272">
    <properties>
-    <property name="enemy" value="White Wiz2"/>
+    <property name="enemy" value="Adept White Wizard"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="287">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="290">
  <properties>
   <property name="canFailDungeon" type="bool" value="true"/>
   <property name="respawnEnemies" type="bool" value="true"/>
@@ -204,6 +204,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -247,6 +251,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -308,6 +316,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -362,6 +374,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -413,6 +429,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -454,6 +474,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -630,6 +654,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -680,6 +708,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -688,6 +720,46 @@
   </object>
   <object id="211" template="../../../obj/enemy.tx" x="704" y="80">
    <properties>
+    <property name="defeatDialog">[
+{&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
+      {&quot;checkMapFlag&quot;:&quot;warehouse&quot;, &quot;not&quot;:true}
+      ],
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;warehouse&quot;},
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+],
+   &quot;text&quot;: &quot;Marking warehouse as checked&quot;,
+   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
+      {&quot;deleteMapObject&quot;: -1}]}]
+   },
+
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
+      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+      ],
+   &quot;text&quot;: &quot;The mayor does not appear to be in the warehouse&quot;,
+   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
+      {&quot;deleteMapObject&quot;: -1}]}]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
+      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+      ],
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
+   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
+      {&quot;deleteMapObject&quot;: -1}]
+   }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   }
+]
+</property>
     <property name="enemy" value="Volcano Elemental"/>
     <property name="pursueRange" type="int" value="80"/>
     <property name="reward">[
@@ -737,6 +809,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -756,6 +832,46 @@
   </object>
   <object id="213" template="../../../obj/enemy.tx" x="544" y="64">
    <properties>
+    <property name="defeatDialog">[
+{&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
+      {&quot;checkMapFlag&quot;:&quot;hut&quot;, &quot;not&quot;:true}
+      ],
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;hut&quot;},
+      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+],
+   &quot;text&quot;: &quot;Marking hut as checked&quot;,
+   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
+      {&quot;deleteMapObject&quot;: -1}]}]
+   },
+
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
+      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+      ],
+   &quot;text&quot;: &quot;The mayor does not appear to be in the witch's hut&quot;,
+   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
+      {&quot;deleteMapObject&quot;: -1}]}]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
+      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+      ],
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
+   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
+   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
+      {&quot;deleteMapObject&quot;: -1}]
+   }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   }
+]
+</property>
     <property name="enemy" value="Bog Witch"/>
     <property name="reward">[
   {
@@ -804,6 +920,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -854,6 +974,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -904,6 +1028,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -956,6 +1084,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -1006,6 +1138,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -1057,6 +1193,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -1110,6 +1250,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -1160,6 +1304,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -1215,10 +1363,14 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Rakdos Wiz"/>
+    <property name="enemy" value="Rakdos Wizard"/>
     <property name="reward">[
   {
     &quot;type&quot;: &quot;item&quot;,
@@ -1266,6 +1418,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -1291,6 +1447,7 @@
    &quot;options&quot;:[
 	{&quot;name&quot;:&quot;(continue)&quot;
 	}
+	{&quot;action&quot;:[{&quot;deleteMapObject&quot;: 278}, {&quot;deleteMapObject&quot;: -1}]}
 	]
 }
 ]</property>
@@ -1299,18 +1456,9 @@
     &quot;text&quot;:&quot;The mayor can only keep away from you for so long before you manage to fight through the crowd and reach him.&quot;,
     &quot;options&quot;:[
       { &quot;name&quot;:&quot;Walk away&quot; },
-      { &quot;name&quot;:&quot;Attack the witch&quot;,
-	  &quot;action&quot;:[{&quot;battleWithActorID&quot;:-1}]},
-      {
-        &quot;name&quot;:&quot;Approach her slowly&quot;,
-        &quot;text&quot;: &quot;\&quot;Be gone with you! You will not have them!\&quot; She steps back, dropping some of the herbs and mushrooms that she appears to have been gathering.&quot;,
-        &quot;options&quot;: [
-	{ &quot;name&quot;:&quot;Walk away&quot; },
-	{ &quot;name&quot;:&quot;Attack the witch&quot;,
-	  &quot;action&quot;:[{&quot;battleWithActorID&quot;:-1}]
-	}
-	]
-      }]
+      { &quot;name&quot;:&quot;Attack the Mayor&quot;,
+	  &quot;action&quot;:[{&quot;battleWithActorID&quot;:-1}]}
+        
    }
 ]</property>
     <property name="effect">{
@@ -1319,8 +1467,8 @@
 }</property>
     <property name="enemy" value="Zombie Lord"/>
     <property name="fleeRange" type="float" value="125"/>
-    <property name="hidden" type="bool" value="true"/>
-    <property name="inactive" type="bool" value="true"/>
+    <property name="hidden" type="bool" value="false"/>
+    <property name="inactive" type="bool" value="false"/>
     <property name="reward">[
   {
     &quot;type&quot;: &quot;item&quot;,
@@ -1418,6 +1566,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -1469,6 +1621,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -1487,7 +1643,7 @@
     <property name="waypoints" value="245,248"/>
    </properties>
   </object>
-  <object id="237" template="../../../obj/dialog.tx" x="0" y="478" width="144" height="16">
+  <object id="237" template="../../../obj/dialog.tx" x="0" y="464" width="144" height="16">
    <properties>
     <property name="dialog">[
 {
@@ -1591,6 +1747,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -1669,6 +1829,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -1724,6 +1888,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -1778,6 +1946,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -1832,6 +2004,10 @@
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]
    }]
+   },
+   {&quot;condition&quot;: [
+      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
+	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
    }
 ]
 </property>
@@ -1919,7 +2095,8 @@
   </object>
   <object id="279" template="../../../obj/portal.tx" x="864" y="32">
    <properties>
-    <property name="portalState" value="active"/>
+    <property name="activeQuestFlag" value="lilianaBossPortal"/>
+    <property name="portalState" value="inactive"/>
     <property name="teleport" value="maps/map/main_story/temple_of_liliana/keep.tmx"/>
     <property name="teleportObjectId" value="239"/>
    </properties>
@@ -2099,6 +2276,30 @@
 }]</property>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="287" template="../../../obj/dialog.tx" x="0" y="496" width="144" height="16">
+   <properties>
+    <property name="dialog">[{ 
+&quot;condition&quot;: [{&quot;checkQuestFlag&quot;:&quot;lilianaTownPortal&quot;, &quot;not&quot;:true}],
+&quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;lilianaTownPortal&quot;, &quot;val&quot;: 1}, &quot;activateMapObject&quot;: 288}]
+}]</property>
+   </properties>
+  </object>
+  <object id="288" template="../../../obj/portal.tx" x="128" y="480">
+   <properties>
+    <property name="activeQuestFlag" value="lilianaTownPortal"/>
+    <property name="portalState" value="closed"/>
+    <property name="teleport" value="maps/map/main_story/temple_of_liliana/keep.tmx"/>
+    <property name="teleportObjectId" value="238"/>
+   </properties>
+  </object>
+  <object id="289" template="../../../obj/dialog.tx" x="800" y="64" width="144" height="16">
+   <properties>
+    <property name="dialog">[{ 
+&quot;condition&quot;: [{&quot;checkQuestFlag&quot;:&quot;lilianaBossPortal&quot;, &quot;not&quot;:true}],
+&quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;lilianaBossPortal&quot;, &quot;val&quot;: 1}, &quot;activateMapObject&quot;: 279}]
+}]</property>
    </properties>
   </object>
  </objectgroup>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="31" height="37" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="271">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="31" height="37" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="273">
  <properties>
   <property name="canFailDungeon" type="bool" value="true"/>
   <property name="respawnEnemies" type="bool" value="true"/>
@@ -586,9 +586,26 @@
   </object>
   <object id="270" template="../../../obj/portal.tx" x="450" y="343">
    <properties>
+    <property name="activeQuestFlag" value="lilianaBogPortal"/>
     <property name="direction" value="up"/>
     <property name="teleport" value="maps/map/main_story/temple_of_liliana/keep.tmx"/>
     <property name="teleportObjectId" value=""/>
+   </properties>
+  </object>
+  <object id="271" template="../../../obj/dialog.tx" x="416" y="288" width="16" height="48">
+   <properties>
+    <property name="dialog">[{ 
+&quot;condition&quot;: [{&quot;checkQuestFlag&quot;:&quot;lilianaBogPortal&quot;, &quot;not&quot;:true}],
+&quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;lilianaBogPortal&quot;, &quot;val&quot;: 1}, &quot;activateMapObject&quot;: 270}]
+}]</property>
+   </properties>
+  </object>
+  <object id="272" template="../../../obj/dialog.tx" x="432" y="256" width="32" height="16">
+   <properties>
+    <property name="dialog">[{ 
+&quot;condition&quot;: [{&quot;checkQuestFlag&quot;:&quot;lilianaBog&quot;, &quot;not&quot;:true}],
+&quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;lilianaBog&quot;, &quot;val&quot;: 1}, &quot;activateMapObject&quot;: 270}]
+}]</property>
    </properties>
   </object>
  </objectgroup>
