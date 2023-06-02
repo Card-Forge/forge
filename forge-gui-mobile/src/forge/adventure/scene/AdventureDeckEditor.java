@@ -192,7 +192,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         private int selected = 0;
         public static void leave() {
             if(EventScene.currentEvent != null && EventScene.currentEvent.getDraft() != null && !EventScene.currentEvent.isDraftComplete){
-                FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblEndAdventureEventConfirm"), Forge.getLocalizer().getMessage("lblLeaveDraft"), Forge.getLocalizer().getMessage("lblLeave"), Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<Boolean>() {
+                FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessageorUseDefault("lblEndAdventureEventConfirm", "This will end the current event, and your entry fee will not be refunded.\n\nLeave anyway?"), Forge.getLocalizer().getMessage("lblLeaveDraft"), Forge.getLocalizer().getMessage("lblLeave"), Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<Boolean>() {
                     @Override
                     public void run(Boolean result) {
                         if (result) {
@@ -405,7 +405,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                 }
 
 
-                FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblEndAdventureEventConfirm"), Forge.getLocalizer().getMessage("lblLeaveDraft"), Forge.getLocalizer().getMessage("lblLeave"), Forge.getLocalizer().getMessage("lblCancel"), false, canCloseCallback);
+                FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessageorUseDefault("lblEndAdventureEventConfirm", "This will end the current event, and your entry fee will not be refunded.\n\nLeave anyway?"), Forge.getLocalizer().getMessage("lblLeaveDraft"), Forge.getLocalizer().getMessage("lblLeave"), Forge.getLocalizer().getMessage("lblCancel"), false, canCloseCallback);
             }
         }
 
