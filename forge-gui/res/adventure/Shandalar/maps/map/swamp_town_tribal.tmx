@@ -36,7 +36,7 @@
     <property name="commonShopList" value="Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand"/>
     <property name="rareShopList" value="Dimir,Rakdos,Orzhov,Golgari,Multicolor,Land4Black,Creature6Black,PhyrexianBlack"/>
-    <property name="uncommonShopList" value="Creature2Black,Creature,Black"/>
+    <property name="uncommonShopList" value="Creature2Black,Creature,Black,Horrors,Insects,Spiders"/>
    </properties>
   </object>
   <object id="42" template="../obj/shop.tx" x="177" y="145">
@@ -44,7 +44,7 @@
     <property name="commonShopList" value="Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand"/>
     <property name="rareShopList" value="Dimir,Rakdos,Orzhov,Golgari,Multicolor,Land4Black,Creature6Black,PhyrexianBlack"/>
-    <property name="uncommonShopList" value="Creature2Black,Creature,Black"/>
+    <property name="uncommonShopList" value="Creature2Black,Creature,Black,Horrors,Insects,Spiders"/>
    </properties>
   </object>
   <object id="43" template="../obj/shop.tx" x="321" y="129">
@@ -52,7 +52,7 @@
     <property name="commonShopList" value="Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand"/>
     <property name="rareShopList" value="Dimir,Rakdos,Orzhov,Golgari,Multicolor,Land4Black,Creature6Black,PhyrexianBlack"/>
-    <property name="uncommonShopList" value="Creature2Black,Creature,Black"/>
+    <property name="uncommonShopList" value="Creature2Black,Creature,Black,Horrors,Insects,Spiders"/>
    </properties>
   </object>
   <object id="44" template="../obj/shop.tx" x="114" y="194">
@@ -60,7 +60,7 @@
     <property name="commonShopList" value="Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand"/>
     <property name="rareShopList" value="Dimir,Rakdos,Orzhov,Golgari,Multicolor,Land4Black,Creature6Black,PhyrexianBlack"/>
-    <property name="uncommonShopList" value="Creature2Black,Creature,Black"/>
+    <property name="uncommonShopList" value="Creature2Black,Creature,Black,Horrors,Insects,Spiders"/>
    </properties>
   </object>
   <object id="45" template="../obj/shop.tx" x="273" y="130">
@@ -68,7 +68,7 @@
     <property name="commonShopList" value="Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand"/>
     <property name="rareShopList" value="Dimir,Rakdos,Orzhov,Golgari,Multicolor,Land4Black,Creature6Black,PhyrexianBlack"/>
-    <property name="uncommonShopList" value="Creature2Black,Creature,Black"/>
+    <property name="uncommonShopList" value="Creature2Black,Creature,Black,Horrors,Insects,Spiders"/>
    </properties>
   </object>
   <object id="46" template="../obj/shop.tx" x="337" y="177">
@@ -76,7 +76,7 @@
     <property name="commonShopList" value="Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand"/>
     <property name="rareShopList" value="Dimir,Rakdos,Orzhov,Golgari,Multicolor,Land4Black,Creature6Black,PhyrexianBlack"/>
-    <property name="uncommonShopList" value="Creature2Black,Creature,Black"/>
+    <property name="uncommonShopList" value="Creature2Black,Creature,Black,Horrors,Insects,Spiders"/>
    </properties>
   </object>
   <object id="47" template="../obj/inn.tx" x="230" y="98"/>

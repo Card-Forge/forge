@@ -193,6 +193,12 @@ ShapeshifterShop
 GodMinigodShop
   xy: 320, 928
   size: 16, 16
+MutantShop
+  xy: 336, 928
+  size: 16, 16
+HorrorShop
+  xy: 352, 928
+  size: 16, 16
 EldraziShop
   xy: 304, 928
   size: 16, 16

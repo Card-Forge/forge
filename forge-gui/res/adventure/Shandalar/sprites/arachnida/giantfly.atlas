@@ -4,8 +4,8 @@ format: RGBA8888
 filter: Nearest,Nearest
 repeat: none    
 Avatar      
-  xy: 78, 42
-  size: 9, 11     
+  xy: 76, 8
+  size: 13, 13    
 Idle 
   xy: 4, 7
   size: 23, 18  
@@ -19,17 +19,17 @@ Idle
   xy: 100, 7
   size: 23, 18  
 Walk
-  xy: 4, 36
-  size: 23, 23
+  xy: 2, 36
+  size: 24, 26
 Walk
-  xy: 68, 36
-  size: 23, 23   
+  xy: 34, 36
+  size: 24, 26
 Walk
-  xy: 68, 36
-  size: 23, 23   
+  xy: 66, 36
+  size: 24, 26 
 Walk
-  xy: 100, 36
-  size: 23, 23     
+  xy: 98, 36
+  size: 24, 26   
 Attack 
   xy: 0, 64
   size: 32, 32 
