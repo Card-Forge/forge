@@ -9,5 +9,5 @@ SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | Triggers$ TriggerCastDoM | 
 SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True | ClearRemembered$ True
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card this turn. When you play a card this way, Fires of Mount Doom deals 2 damage to each player.
 SVar:TriggerCastDoM:Mode$ SpellCast | ValidCard$ Card.IsRemembered | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ When you play a card this way, Fires of Mount Doom deals 2 damage to each player.
-SVar:TrigDealDamage:DB$ DBDamage | Defined$ Player | NumDmg$ 2
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Player | NumDmg$ 2
 Oracle:When Fires of Mount Doom enters the battlefield, it deals 2 damage to target creature an opponent controls. Destroy all Equipment attached to that creature.\n{2}{R}: Exile the top card of your library. You may play that card this turn. When you play a card this way, Fires of Mount Doom deals 2 damage to each player.
