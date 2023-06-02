@@ -10899,7 +10899,7 @@
 	"difficulty": 0.1,
 	"speed": 23,
 	"scale": 0.6,
-	"life": 12,
+	"life": 20,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -10918,14 +10918,14 @@
 			"probability": 0.5,
 			"count": 3,
 			"colors": [
-				"White"
+				"Green"
 			],
 			"rarity": [
 				"Rare"
 			]
 		}
 	],
-	"colors": "W",
+	"colors": "G",
 	"questTags": [
 		"Beast",
 		"Wild",

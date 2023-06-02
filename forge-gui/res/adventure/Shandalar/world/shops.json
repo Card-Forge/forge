@@ -4586,12 +4586,12 @@
 },
 {
   "name":"Mutants",
-  "description":"",
+  "description":"Marching Mutants",
   "spriteAtlas":"maps/tileset/buildings.atlas",
-  "sprite":"Marching Mutants",
+  "sprite":"MutantShop",
   "rewards": [
-  {
-	  "count":8,
+    {
+	  "count":4,
 	  "type":"Union",
 	  "cardUnion": [
 		{
@@ -4603,9 +4603,20 @@
 		  "cardText": "Mutant"
 		}
 	  ]
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "cardText": "Mutate"
+		}
+	  ]
 	}
-	]
-},{
+]
+},
+{
   "name":"Eldrazi",
   "description":"Eldritch Emissaries",
   "spriteAtlas":"maps/tileset/buildings.atlas",
