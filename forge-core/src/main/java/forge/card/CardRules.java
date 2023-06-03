@@ -671,6 +671,16 @@ public final class CardRules implements ICardCharacteristics {
         return Iterables.contains(mainPart.getKeywords(), k);
     }
 
+    public boolean hasStartOfKeyword(final String k) {
+        for (final String inst : mainPart.getKeywords()) {
+            final String[] parts = inst.split(":");
+            if (parts[0].equals(k)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Integer getKeywordMagnitude(final String k) {
         for (final String inst : mainPart.getKeywords()) {
             final String[] parts = inst.split(":");
