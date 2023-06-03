@@ -297,13 +297,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 Sprite backSprite = atlas.createSprite("CardBack");
                 if (reward.getItem() == null) {
                     needsToBeDisposed = true;
-                    processSprite(backSprite, null, null, 0, 0);
+                    processSprite(backSprite, null, null, 0, 0, false);
                     break;
                 }
                 Sprite item = reward.getItem().sprite();
-                setItemTooltips(item, backSprite);
+                setItemTooltips(item, backSprite, false);
                 boolean isQuestItemLoot = RewardScene.Type.Loot.equals(type) && reward.getItem().questItem;
-                processSprite(backSprite, item, isQuestItemLoot ? Controls.newTextraLabel("[%110]" + reward.getItem().name) : null, 0, isQuestItemLoot ? -10 : 0);
+                processSprite(backSprite, item, isQuestItemLoot ? Controls.newTextraLabel("[%110]" + reward.getItem().name) : null, 0, isQuestItemLoot ? -10 : 0, false);
                 needsToBeDisposed = true;
                 break;
             }
@@ -312,13 +312,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 Sprite backSprite = atlas.createSprite("CardBack");
                 if (reward.getDeck() == null) {
                     needsToBeDisposed = true;
-                    processSprite(backSprite, null, null, 0, 0);
+                    processSprite(backSprite, null, null, 0, 0, false);
                     break;
                 }
 
 
 
-                String imageKey;
+                String imageKey = "";
                 try {
                     String editionCode = reward.getDeck().getComment();
                     int artIndex = 1;
@@ -333,16 +333,18 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 catch (Exception e){
                     //Comment did not contain the edition code, this is not a basic booster pack
                 }
+                boolean isBooster = false;
+                Sprite item;
+                Texture t = ImageCache.getImage(imageKey, false, true);
+                if (t != null) {
+                    item = new Sprite(new TextureRegion(t));
+                    isBooster = true;
+                } else {
+                    item = atlas.createSprite("Deck");
+                }
 
-
-
-                //FImageComplex cardArt = CardRenderer.getCardArt(imageKey, false, false, false, false, false,false,false,false,false,false);
-
-                //Sprite item = new Sprite(cardArt.getTexture());
-
-                Sprite item = atlas.createSprite("Deck");
-                setItemTooltips(item, backSprite);
-                processSprite(backSprite, item,  Controls.newTextraLabel("[80%]Booster"), 0, -10);
+                setItemTooltips(item, backSprite, isBooster);
+                processSprite(backSprite, item,  Controls.newTextraLabel("[80%]Booster"), 0, -10, isBooster);
                 needsToBeDisposed = true;
                 break;
             }
@@ -352,10 +354,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 TextureAtlas atlas = Config.instance().getAtlas(ITEMS_ATLAS);
                 Sprite backSprite = atlas.createSprite("CardBack");
                 Sprite item = atlas.createSprite(reward.type.toString());
-                setItemTooltips(item, backSprite);
+                setItemTooltips(item, backSprite, false);
                 boolean isShop = RewardScene.Type.Shop.equals(type);
                 processSprite(backSprite, item, isShop ? null :
-                        Controls.newTextraLabel("[%110]" + reward.getCount() + " " + reward.type), 0, isShop ? 0 : -10);
+                        Controls.newTextraLabel("[%110]" + reward.getCount() + " " + reward.type), 0, isShop ? 0 : -10, false);
                 needsToBeDisposed = true;
                 break;
             }
@@ -551,7 +553,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         return result;
     }
 
-    private void processSprite(Sprite sprite, Sprite item, TextraLabel itemText, int modX, int modY) {
+    private void processSprite(Sprite sprite, Sprite item, TextraLabel itemText, int modX, int modY, boolean isBooster) {
         FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, (int) sprite.getWidth(), (int) sprite.getHeight(), false);
         SpriteBatch batch = new SpriteBatch();
 
@@ -566,8 +568,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
         batch.begin();
         batch.draw(sprite, 0, 0);
-        if (item != null)
-            batch.draw(item, sprite.getWidth() / 2 - item.getWidth() / 2, (sprite.getHeight() / 2 - item.getHeight() / 2) - modY);
+        if (item != null) {
+            if (!isBooster)
+                batch.draw(item, sprite.getWidth() / 2 - item.getWidth() / 2, (sprite.getHeight() / 2 - item.getHeight() / 2) - modY);
+            else
+                batch.draw(item, sprite.getWidth() / 4, sprite.getHeight() / 4, sprite.getWidth()/2, sprite.getHeight()/2);
+        }
         if (itemText != null) {
             itemText.setWrap(true);
             itemText.setAlignment(1);
@@ -586,7 +592,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         frameBuffer.dispose();
     }
 
-    private void setItemTooltips(Sprite icon, Sprite backSprite) {
+    private void setItemTooltips(Sprite icon, Sprite backSprite, boolean isBooster) {
         int align = Align.left;
         if (generatedTooltip == null) {
             Matrix4 m = new Matrix4();
@@ -601,7 +607,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 getGraphics().setProjectionMatrix(m);
                 getGraphics().startClip();
                 getGraphics().drawImage(backSprite, 0, 0, preview_w, preview_h);
-                getGraphics().drawImage(icon, preview_w / 2 - 75, 160, 160, 160);
+                if (!isBooster)
+                    getGraphics().drawImage(icon, preview_w / 2 - 75, 160, 160, 160);
+                else
+                    getGraphics().drawImage(icon, 0, 0, preview_w, preview_h);
                 BitmapFont font = Controls.getBitmapFont("default", 4 / (preview_h / preview_w));
                 layout.setText(font, itemExists ? item.name : getReward().type.name(), Color.WHITE, preview_w - 64, Align.center, true);
                 getGraphics().drawText(font, layout, 32, preview_h - 70);
