@@ -240,7 +240,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             for(TabPage<AdventureDeckEditor> page:tabPages)
             {
                 if(page instanceof CardManagerPage)
-                    ((CardManagerPage)page).initialize();
+                    ((CardManagerPage)page).refresh();
             }
             for (TabPage<AdventureDeckEditor> tabPage : tabPages) {
                 ((DeckEditorPage)tabPage).initialize();
