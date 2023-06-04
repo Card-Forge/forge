@@ -1,0 +1,16 @@
+Name:Hew the Entwood
+ManaCost:3 R R
+Types:Sorcery
+A:SP$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Land | RememberSacrificed$ True | SubAbility$ DBReveal | SpellDescription$Sacrifice any number of lands. Reveal the top X cards of your library, where X is the number of lands sacrificed this way. Choose any number of artifact and/or land cards revealed this way. Put all nonland cards chosen this way onto the battlefield, then put all land cards chosen this way onto the battlefield tapped, then put the rest on the bottom of your library in a random order.
+SVar:SacX:Count$Valid Land.YouCtrl
+SVar:DBReveal:DB$ Dig | DigNum$ ShiftX | Reveal$ True | NoMove$ True | DestinationZone$ Library | Imprint$ True | SubAbility$ DBChoose
+SVar:ShiftX:Remembered$Amount
+SVar:DBChoose:DB$ ChooseCard | Choices$ Artifact.IsImprinted,Land.IsImprinted | ChoiceZone$ Library | Amount$ ShiftX | ForgetOtherRemembered$ True | RememberChosen$ True | SubAbility$ DBPutArtifact
+SVar:DBPutArtifact:DB$ ChangeZoneAll | ChangeType$ Artifact.IsRemembered | Origin$ Library | Destination$ Battlefield | SubAbility$ DBPutLands
+SVar:DBPutLands:DB$ ChangeZoneAll | ChangeType$ Land.IsRemembered | Origin$ Library | Destination$ Battlefield | Tapped$ True | SubAbility$ ShuffleRest
+SVar:ShuffleRest:DB$ ChangeZoneAll | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | Hidden$ True | Mandatory$ True | NoReveal$ True | NoLooking$ True | ChangeType$ Card.IsImprinted+!IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Artifact
+AI:RemoveDeck:All
+Oracle:Sacrifice any number of lands. Reveal the top X cards of your library, where X is the number of lands sacrificed this way. Choose any number of artifact and/or land cards revealed this way. Put all nonland cards chosen this way onto the battlefield, then put all land cards chosen this way onto the battlefield tapped, then put the rest on the bottom of your library in a random order.

@@ -1,0 +1,10 @@
+Name:Horn of Gondor
+ManaCost:3
+Types:Legendary Artifact
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Human Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You
+A:AB$ Token | Cost$ 3 T | TokenAmount$ X | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | SpellDescription$ Create X 1/1 white Human Soldier creature tokens, where X is the number of Humans you control.
+SVar:X:Count$Valid Creature.Human+YouCtrl
+DeckHas:Ability$Token & Type$Soldier|Human
+DeckHints:Type$Human
+Oracle:When Horn of Gondor enters the battlefield, create a 1/1 white Human Soldier creature token.\n{3}, {T}: Create X 1/1 white Human Soldier creature tokens, where X is the number of Humans you control.
