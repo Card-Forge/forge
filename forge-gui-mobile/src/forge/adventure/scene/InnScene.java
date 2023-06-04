@@ -12,6 +12,7 @@ import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
+import forge.sound.SoundSystem;
 
 /**
  * Scene for the Inn in towns
@@ -98,6 +99,7 @@ public class InnScene extends UIScene {
     public void enter() {
         super.enter();
         refreshStatus();
+        SoundSystem.instance.pause();
     }
 
     private void refreshStatus(){
