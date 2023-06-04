@@ -1779,7 +1779,7 @@ public class GameSimulationTest extends SimulationTest {
 
         AssertJUnit.assertTrue(clonedOutLaw.isCloned());
         AssertJUnit.assertTrue(clonedOutLaw.isTransformable());
-        AssertJUnit.assertFalse(clonedOutLaw.hasState(CardStateName.Transformed));
+        AssertJUnit.assertTrue(clonedOutLaw.hasState(CardStateName.Transformed));
         AssertJUnit.assertTrue(clonedOutLaw.canTransform(null));
         AssertJUnit.assertFalse(clonedOutLaw.isBackSide());
 
@@ -1800,7 +1800,7 @@ public class GameSimulationTest extends SimulationTest {
 
         AssertJUnit.assertTrue(transformOutLaw.isCloned());
         AssertJUnit.assertTrue(transformOutLaw.isTransformable());
-        AssertJUnit.assertFalse(transformOutLaw.hasState(CardStateName.Transformed));
+        AssertJUnit.assertTrue(transformOutLaw.hasState(CardStateName.Transformed));
         AssertJUnit.assertTrue(transformOutLaw.canTransform(null));
         AssertJUnit.assertTrue(transformOutLaw.isBackSide());
 
