@@ -31,6 +31,7 @@ public class ShopScene extends ForgeScene {
     @Override
     public void enter() {
         GameHUD.getInstance().getTouchpad().setVisible(false);
+        screen = null;
         getScreen();
         screen.refresh();
         super.enter();

@@ -35,6 +35,7 @@ public class DeckEditScene extends ForgeScene {
 
     @Override
     public void enter() {
+        screen = null;
         getScreen();
         screen.refresh();
         super.enter();
@@ -42,7 +43,11 @@ public class DeckEditScene extends ForgeScene {
     }
     @Override
     public FScreen getScreen() {
-        return screen==null?screen = new AdventureDeckEditor(false, null):screen;
+        if (screen==null){
+            screen = new AdventureDeckEditor(false, null);
+        }
+        screen.setEvent(null);
+        return screen;
     }
 
 }
