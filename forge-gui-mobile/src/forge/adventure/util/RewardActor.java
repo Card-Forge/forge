@@ -345,7 +345,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 }
 
                 setItemTooltips(item, backSprite, isBooster);
-                processSprite(backSprite, item,  Controls.newTextraLabel("[%200]" + editionCode + " Booster"), 0, isBooster ? -40 : -10, isBooster);
+                processSprite(backSprite, item,  Controls.newTextraLabel("[%200]" + editionCode + " Booster"), 0, -10, isBooster);
                 needsToBeDisposed = true;
                 break;
             }
@@ -574,7 +574,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (!isBooster) {
                 float iw = item.getWidth() * 4;
                 float ih = item.getHeight() * 4;
-                batch.draw(item, pw / 2 - iw / 2, (ph / 2 - ih / 2) - modY, iw, ih);
+                batch.draw(item, pw / 2 - iw / 2, (ph / 2 - ih / 2), iw, ih);
             } else
                 batch.draw(item, pw / 4, ph / 4, pw / 2, ph / 2);
         }
@@ -583,8 +583,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             itemText.setAlignment(1);
             itemText.setWidth(pw);
             itemText.setHeight(ph);
-            itemText.setX(itemText.getX() + modX);
-            itemText.setY(itemText.getY() + modY);
+            itemText.setX(itemText.getX() + (modX * 4));
+            itemText.setY(itemText.getY() + (modY * 8));
             itemText.draw(batch, 1);
         }
         batch.end();
