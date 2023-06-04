@@ -1884,8 +1884,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final List<Player> getAttackedPlayersMyLastTurn() {
         return attackedPlayersLastTurn;
     }
-    public final Iterable<Player> getAttackedPlayersTheirCurrentTurn() {
-       return Iterables.filter(attackedThisTurn.keySet(), Player.class);
+    public final List<Player> getAttackedPlayersTheirCurrentTurn() {
+        return attackedPlayersLastTurn;
     }
     public final void clearAttackedMyTurn() {
         attackedThisTurn.clear();
