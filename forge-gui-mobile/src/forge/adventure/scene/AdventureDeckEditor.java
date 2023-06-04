@@ -105,7 +105,11 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             return currentEvent.getDraft();
         }
 
-        private AdventureEventData currentEvent;
+        public static AdventureEventData currentEvent;
+
+        public void setEvent(AdventureEventData event){
+            currentEvent = event;
+        }
 
         public void completeDraft(){
             currentEvent.isDraftComplete = true;
@@ -191,12 +195,12 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         private static ItemPool<InventoryItem> decksUsingMyCards=new ItemPool<>(InventoryItem.class);
         private int selected = 0;
         public static void leave() {
-            if(EventScene.currentEvent != null && EventScene.currentEvent.getDraft() != null && !EventScene.currentEvent.isDraftComplete){
+            if(currentEvent != null && currentEvent.getDraft() != null && !currentEvent.isDraftComplete){
                 FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessageorUseDefault("lblEndAdventureEventConfirm", "This will end the current event, and your entry fee will not be refunded.\n\nLeave anyway?"), Forge.getLocalizer().getMessage("lblLeaveDraft"), Forge.getLocalizer().getMessage("lblLeave"), Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<Boolean>() {
                     @Override
                     public void run(Boolean result) {
                         if (result) {
-                            EventScene.currentEvent.eventStatus = AdventureEventController.EventStatus.Abandoned;
+                            currentEvent.eventStatus = AdventureEventController.EventStatus.Abandoned;
                             AdventurePlayer.current().getNewCards().clear();
                             Forge.clearCurrentScreen();
                             Forge.switchToLast();
@@ -237,13 +241,13 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 //            }
         }
         public void refresh() {
+            for (TabPage<AdventureDeckEditor> tabPage : tabPages) {
+                ((DeckEditorPage)tabPage).initialize();
+            }
             for(TabPage<AdventureDeckEditor> page:tabPages)
             {
                 if(page instanceof CardManagerPage)
                     ((CardManagerPage)page).refresh();
-            }
-            for (TabPage<AdventureDeckEditor> tabPage : tabPages) {
-                ((DeckEditorPage)tabPage).initialize();
             }
         }
         private static DeckEditorPage[] getPages(AdventureEventData event) {
@@ -398,7 +402,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         @Override
         public void onClose(final Callback<Boolean> canCloseCallback) {
 
-            if (currentEvent.getDraft() != null) {
+            if (currentEvent.getDraft() != null && isShop) {
                 if (currentEvent.isDraftComplete || canCloseCallback == null) {
                     super.onClose(canCloseCallback); //can skip prompt if draft saved
                     return;
@@ -771,7 +775,6 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                     needRefreshWhenShown = true;
                     return;
                 }
-                refresh();
             }
 
             @Override
