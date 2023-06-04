@@ -1,0 +1,8 @@
+Name:Gimli's Axe
+ManaCost:2 R
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | Description$ Equipped creature gets +3/+0.
+S:Mode$ Continuous | Affected$ Card.EquippedBy+Legendary | AddKeyword$ Menace | Description$ As long as equipped creature is legendary, it has menace. (It can't be blocked except by two or more creatures.)
+DeckHints:Type$Legendary
+Oracle:Equipped creature gets +3/+0.\nAs long as equipped creature is legendary, it has menace. (It can't be blocked except by two or more creatures.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

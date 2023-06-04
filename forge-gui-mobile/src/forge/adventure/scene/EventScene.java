@@ -19,6 +19,7 @@ import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
+import forge.sound.SoundSystem;
 import forge.util.Callback;
 import forge.util.MyRandom;
 
@@ -377,6 +378,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
     @Override
     public void enter() {
         super.enter();
+        SoundSystem.instance.pause();
         scrollContainer.clear();
 
         if (money != null) {

@@ -1,0 +1,14 @@
+Name:Gimli, Mournful Avenger
+ManaCost:1 R G
+Types:Legendary Creature Dwarf Warrior
+PT:3/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | CheckSVar$ X | SVarCompare$ GE2 | Description$ CARDNAME has indestructible as long as two or more creatures died under your control this turn.
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature you control dies, put a +1/+1 counter on NICKNAME. When this ability resolves for the third time this turn, NICKNAME fights up to one target creature you don't control.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigFight | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ3
+SVar:TrigFight:DB$ Fight | Defined$ Self | ValidTgts$ Creature.YouDontCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you don't control 
+SVar:Y:Count$ResolvedThisTurn
+DeckHas:Ability$Counters
+DeckHints:Ability$Sacrifice
+Oracle:Gimli, Mournful Avenger has indestructible as long as two or more creatures died under your control this turn.\nWhenever another creature you control dies, put a +1/+1 counter on Gimli. When this ability resolves for the third time this turn, Gimli fights up to one target creature you don't control.

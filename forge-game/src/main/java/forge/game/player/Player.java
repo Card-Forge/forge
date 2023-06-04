@@ -509,13 +509,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        boolean newLifeSet = false;
-
         if (lifeGain > 0) {
             int oldLife = life;
             life += lifeGain;
             view.updateLife(this);
-            newLifeSet = true;
+            boolean firstGain = lifeGainedTimesThisTurn == 0;
             lifeGainedThisTurn += lifeGain;
             lifeGainedTimesThisTurn++;
 
@@ -529,13 +527,15 @@ public class Player extends GameEntity implements Comparable<Player> {
             runParams.put(AbilityKey.LifeAmount, lifeGain);
             runParams.put(AbilityKey.Source, source);
             runParams.put(AbilityKey.SourceSA, sa);
+            runParams.put(AbilityKey.FirstTime, firstGain);
             game.getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams, false);
 
             game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
-        } else {
-            System.out.println("Player - trying to gain negative or 0 life");
+            return true;
         }
-        return newLifeSet;
+
+        System.out.println("Player - trying to gain negative or 0 life");
+        return false;
     }
 
     public final boolean canGainLife() {
