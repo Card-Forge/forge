@@ -181,8 +181,16 @@ public class AdventureEventData implements Serializable {
         Predicate<CardEdition> filter = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, selectSetPool());
         List<CardEdition> allEditions = new ArrayList<>();
         StreamSupport.stream(FModel.getMagicDb().getEditions().spliterator(), false).filter(filter::apply).filter(CardEdition::hasBoosterTemplate).collect(Collectors.toList()).iterator().forEachRemaining(allEditions::add);
-        List<CardBlock> legalBlocks = new ArrayList<>();
 
+        //Temporary restriction until rewards are more diverse - don't want to award restricted cards so these editions need different rewards added.
+        List<String> restrictedDrafts = new ArrayList<>();
+        restrictedDrafts.add("LEA");
+        restrictedDrafts.add("LEB");
+        restrictedDrafts.add("2ED");
+        restrictedDrafts.add("30A");
+        allEditions.removeIf(q -> restrictedDrafts.contains(q.getCode()));
+
+        List<CardBlock> legalBlocks = new ArrayList<>();
         for (CardBlock b : src) { // for each block
             boolean isOkay = !b.getSets().isEmpty();
             for (CardEdition c : b.getSets()) {
