@@ -2,13 +2,14 @@ Name:Faramir, Prince of Ithilien
 ManaCost:2 W U
 Types:Legendary Creature Human Noble
 PT:3/3
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of your end step, choose an opponent. At the beginning of that player's next end step, you draw a card if they didn't attack you that turn. Otherwise, create three 1/1 white Human Soldier creature tokens.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | RememberTargets$ True | SubAbility$ DBDelayTrig
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChooseOpp | TriggerDescription$ At the beginning of your end step, choose an opponent. At the beginning of that player's next end step, you draw a card if they didn't attack you that turn. Otherwise, create three 1/1 white Human Soldier creature tokens.
+SVar:TrigChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | RememberChosen$ True | SubAbility$ DBDelayTrig
 SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player.IsTriggerRemembered | RememberObjects$ Remembered | Execute$ TrigBranch | TriggerDescription$ At the beginning of that player's next end step, you draw a card if they didn't attack you that turn. Otherwise, create three 1/1 white Human Soldier creature tokens.
-SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ DBDraw | FalseSubAbility$ DBToken
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ DBToken | FalseSubAbility$ DBDraw | SubAbility$ DBCleanup
 SVar:DBDraw:DB$ Draw
 SVar:DBToken:DB$ Token | TokenScript$ w_1_1_human_soldier | TokenAmount$ 3 
-SVar:X:RememberedPlayer$HasPropertyattackedYouTheirLastTurn
+SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True
+SVar:X:TriggeredPlayer$HasPropertyattackedYouTheirCurrentTurn 
 AI:RemoveDeck:All
 DeckHas:Ability$Token & Type$Soldier
 Oracle:At the beginning of your end step, choose an opponent.\n At the beginning of that player's next end step, you draw a card if they didn't attack you that turn. Otherwise, create three 1/1 white Human Soldier creature tokens.

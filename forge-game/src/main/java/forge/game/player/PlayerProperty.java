@@ -411,6 +411,10 @@ public class PlayerProperty {
             if (!player.getAttackedPlayersMyLastTurn().contains(sourceController)) {
                 return false;
             }
+        } else if (property.equals("attackedYouTheirCurrentTurn")) {
+            if (!player.getAttackedPlayersTheirCurrentTurn().contains(sourceController)) {
+                return false;
+            }
         } else if (property.equals("BeenAttackedThisCombat")) {
             for (Player p : game.getRegisteredPlayers()) {
                 if (p.getAttackedPlayersMyCombat().contains(sourceController)) {
