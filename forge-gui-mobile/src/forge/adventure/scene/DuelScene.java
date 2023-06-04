@@ -238,7 +238,7 @@ public class DuelScene extends ForgeScene {
         humanPlayer.setPlayer(playerObject);
         humanPlayer.setTeamNumber(0);
         humanPlayer.setStartingLife(eventData!=null?eventData.eventRules.startingLife:advPlayer.getLife());
-        if (eventData!=null && eventData.eventRules.allowsShards)
+        if (eventData==null || eventData.eventRules.allowsShards)
             humanPlayer.setManaShards(advPlayer.getShards());
 
         Array<EffectData> playerEffects = new Array<>();
