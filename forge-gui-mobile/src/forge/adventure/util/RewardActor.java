@@ -358,7 +358,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 setItemTooltips(item, backSprite, false);
                 boolean isShop = RewardScene.Type.Shop.equals(type);
                 processSprite(backSprite, item, isShop ? null :
-                        Controls.newTextraLabel("[%110]" + reward.getCount() + " " + reward.type), 0, isShop ? 0 : -10, false);
+                        Controls.newTextraLabel("[%200]" + reward.getCount() + " " + reward.type), 0, isShop ? 0 : -10, false);
                 needsToBeDisposed = true;
                 break;
             }
