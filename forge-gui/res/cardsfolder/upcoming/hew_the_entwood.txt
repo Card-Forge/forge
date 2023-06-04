@@ -1,7 +1,7 @@
 Name:Hew the Entwood
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Land | RememberSacrificed$ True | SubAbility$ DBReveal | SpellDescription$Sacrifice any number of lands. Reveal the top X cards of your library, where X is the number of lands sacrificed this way. Choose any number of artifact and/or land cards revealed this way. Put all nonland cards chosen this way onto the battlefield, then put all land cards chosen this way onto the battlefield tapped, then put the rest on the bottom of your library in a random order.
+A:SP$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Land | RememberSacrificed$ True | SubAbility$ DBReveal | Optional$ True | SpellDescription$ Sacrifice any number of lands. Reveal the top X cards of your library, where X is the number of lands sacrificed this way. Choose any number of artifact and/or land cards revealed this way. Put all nonland cards chosen this way onto the battlefield, then put all land cards chosen this way onto the battlefield tapped, then put the rest on the bottom of your library in a random order.
 SVar:SacX:Count$Valid Land.YouCtrl
 SVar:DBReveal:DB$ PeekAndReveal | PeekAmount$ ShiftX | Reveal$ True | NoMove$ True | DestinationZone$ Library | RememberRevealed$ True | ForgetOtherRemembered$ True | SubAbility$ DBChoose
 SVar:ShiftX:Remembered$Amount
