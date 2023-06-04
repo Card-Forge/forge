@@ -216,6 +216,12 @@ public final class CardUtil {
             newCopy.getState(CardStateName.Original).copyFrom(in.getState(CardStateName.Original), true);
             newCopy.addAlternateState(CardStateName.Adventure, false);
             newCopy.getState(CardStateName.Adventure).copyFrom(in.getState(CardStateName.Adventure), true);
+        } else if (in.isSplitCard()) {
+            newCopy.getState(CardStateName.Original).copyFrom(in.getState(CardStateName.Original), true);
+            newCopy.addAlternateState(CardStateName.LeftSplit, false);
+            newCopy.getState(CardStateName.LeftSplit).copyFrom(in.getState(CardStateName.LeftSplit), true);
+            newCopy.addAlternateState(CardStateName.RightSplit, false);
+            newCopy.getState(CardStateName.RightSplit).copyFrom(in.getState(CardStateName.RightSplit), true);
         } else {
             newCopy.getCurrentState().copyFrom(in.getState(in.getFaceupCardStateName()), true);
         }
