@@ -42,9 +42,9 @@ import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
+import forge.util.Aggregates;
 import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
-import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -303,7 +303,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 Sprite item = reward.getItem().sprite();
                 setItemTooltips(item, backSprite, false);
                 boolean isQuestItemLoot = RewardScene.Type.Loot.equals(type) && reward.getItem().questItem;
-                processSprite(backSprite, item, isQuestItemLoot ? Controls.newTextraLabel("[%110]" + reward.getItem().name) : null, 0, isQuestItemLoot ? -10 : 0, false);
+                processSprite(backSprite, item, isQuestItemLoot ? Controls.newTextraLabel("[%200]" + reward.getItem().name) : null, 0, isQuestItemLoot ? -10 : 0, false);
                 needsToBeDisposed = true;
                 break;
             }
@@ -319,14 +319,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
 
                 String imageKey = "";
+                String editionCode = "";
                 try {
-                    String editionCode = reward.getDeck().getComment();
+                    editionCode = reward.getDeck().getComment();
                     int artIndex = 1;
                     if (SealedProduct.specialSets.contains(editionCode) || editionCode.equals("?")) {
                         imageKey = "b:" + getName().substring(0, getName().indexOf("Booster Pack") - 1);
                     } else {
                         int maxIdx = StaticData.instance().getEditions().get(editionCode).getCntBoosterPictures();
-                        artIndex = MyRandom.getRandom().nextInt(maxIdx) + 1;
+                        artIndex = Aggregates.randomInt(1, 2);//MyRandom.getRandom().nextInt(maxIdx) + 1;
                         imageKey = ImageKeys.BOOSTER_PREFIX + editionCode + ((1 >= maxIdx) ? "" : ("_" + artIndex));
                     }
                 }
@@ -344,7 +345,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 }
 
                 setItemTooltips(item, backSprite, isBooster);
-                processSprite(backSprite, item,  Controls.newTextraLabel("[80%]Booster"), 0, -10, isBooster);
+                processSprite(backSprite, item,  Controls.newTextraLabel("[%200]" + editionCode + " Booster"), 0, isBooster ? -40 : -10, isBooster);
                 needsToBeDisposed = true;
                 break;
             }
@@ -554,7 +555,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
 
     private void processSprite(Sprite sprite, Sprite item, TextraLabel itemText, int modX, int modY, boolean isBooster) {
-        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, (int) sprite.getWidth(), (int) sprite.getHeight(), false);
+        int pw = 192; int ph = 256;
+        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, pw, ph, false);
         SpriteBatch batch = new SpriteBatch();
 
         frameBuffer.begin();
@@ -563,28 +565,30 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         Matrix4 matrix = new Matrix4();
-        matrix.setToOrtho2D(0, sprite.getHeight(), sprite.getWidth(), -sprite.getHeight());
+        matrix.setToOrtho2D(0, ph, pw, -ph);
         batch.setProjectionMatrix(matrix);
 
         batch.begin();
-        batch.draw(sprite, 0, 0);
+        batch.draw(sprite, 0, 0, pw, ph);
         if (item != null) {
-            if (!isBooster)
-                batch.draw(item, sprite.getWidth() / 2 - item.getWidth() / 2, (sprite.getHeight() / 2 - item.getHeight() / 2) - modY);
-            else
-                batch.draw(item, sprite.getWidth() / 4, sprite.getHeight() / 4, sprite.getWidth()/2, sprite.getHeight()/2);
+            if (!isBooster) {
+                float iw = item.getWidth() * 4;
+                float ih = item.getHeight() * 4;
+                batch.draw(item, pw / 2 - iw / 2, (ph / 2 - ih / 2) - modY, iw, ih);
+            } else
+                batch.draw(item, pw / 4, ph / 4, pw / 2, ph / 2);
         }
         if (itemText != null) {
             itemText.setWrap(true);
             itemText.setAlignment(1);
-            itemText.setWidth(sprite.getWidth());
-            itemText.setHeight(sprite.getHeight());
+            itemText.setWidth(pw);
+            itemText.setHeight(ph);
             itemText.setX(itemText.getX() + modX);
             itemText.setY(itemText.getY() + modY);
             itemText.draw(batch, 1);
         }
         batch.end();
-        Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, (int) sprite.getWidth(), (int) sprite.getHeight());
+        Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, pw, ph);
         image = new Texture(pixmap);
         frameBuffer.end();
         batch.dispose();
