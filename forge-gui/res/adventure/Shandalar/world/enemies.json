@@ -2213,57 +2213,6 @@
 	]
 },
 {
-	"name": "Black Sliver",
-	"sprite": "sprites/monsters/sliver_black.atlas",
-	"deck": [
-		"decks/monsters/sliver_black.dck"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.2,
-	"speed": 24,
-	"life": 20,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"count": 2,
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1
-		},
-		{
-			"type": "randomCard",
-			"count": 2
-		},
-		{
-			"type": "gold",
-			"count": 150
-		}
-	],
-	"colors": "BUR",
-	"questTags": [
-		"Tribal",
-		"Inhuman",
-		"Territorial",
-		"Subterranean",
-		"Nesting",
-		"Swarm",
-		"IdentityBlack",
-		"IdentityRed",
-		"IdentityBlue",
-		"IdentityGrixis"
-	]
-},
-{
 	"name": "Boar",
 	"sprite": "sprites/animals/boar.atlas",
 	"deck": [
@@ -8149,6 +8098,7 @@
 },
 {
 	"name": "Gargoyle",
+	"nameOverride": "Obsidian Gargoyle",
 	"sprite": "sprites/monsters/gargoyle.atlas",
 	"deck": [
 		"decks/monsters/gargoyle.json"
@@ -8239,6 +8189,7 @@
 },
 {
 	"name": "Gargoyle 2",
+	"nameOverride": "Granite Gargoyle",
 	"sprite": "sprites/monsters/gargoyle_2.atlas",
 	"deck": [
 		"decks/monsters/gargoyle.dck"
@@ -9715,6 +9666,7 @@
 },
 {
 	"name": "Golem that is Generous",
+	"nameOverride": "Shiny Golem",
 	"sprite": "sprites/constructs/golem.atlas",
 	"deck": [
 		"decks/constructs/golem.json"
@@ -10075,6 +10027,7 @@
 },
 {
 	"name": "Gorgon 2",
+	"nameOverride": "Gorgon Sculptor",
 	"sprite": "sprites/monsters/gorgonen.atlas",
 	"deck": [
 		"decks/monsters/gorgon_2.dck"
@@ -10444,6 +10397,7 @@
 },
 {
 	"name": "Harpy 2",
+	"nameOverride": "Harpy Crone",
 	"sprite": "sprites/monsters/harpy_2.atlas",
 	"deck": [
 		"decks/monsters/harpy_2.dck"
@@ -11194,6 +11148,7 @@
 },
 {
 	"name": "Human elite",
+	"nameOverride": "Legionaire",
 	"sprite": "sprites/humans/legionite.atlas",
 	"deck": [
 		"decks/humans/human_good.json"
@@ -11240,6 +11195,7 @@
 },
 {
 	"name": "Human guard",
+	"nameOverride": "Human Guard",
 	"sprite": "sprites/humans/swordsman.atlas",
 	"deck": [
 		"decks/humans/human_mid.json"
@@ -14068,6 +14024,7 @@
 },
 {
 	"name": "Merfolk warrior",
+	"nameOverride": "Merfok Warrior",
 	"sprite": "sprites/elementals/airelemental.atlas",
 	"deck": [
 		"decks/merfolk/merfolk_mid.json"
@@ -17215,6 +17172,281 @@
 		"IdentityRed",
 		"IdentityWhite",
 		"BiomeColorless"
+	]
+},
+{
+	"name": "Sliver_Black",
+	"nameOverride": "Black Sliver",
+	"sprite": "sprites/monsters/sliver_black.atlas",
+	"deck": [
+		"decks/monsters/sliver_black.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.2,
+	"speed": 24,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"count": 2,
+			"cardTypes": [
+				"Creature"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.05,
+			"count": 1,
+			"cardTypes": [
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "randomCard",
+			"count": 2
+		},
+		{
+			"type": "gold",
+			"count": 150
+		}
+	],
+	"colors": "BUR",
+	"questTags": [
+		"Tribal",
+		"Inhuman",
+		"Territorial",
+		"Subterranean",
+		"Nesting",
+		"Swarm",
+		"IdentityBlack",
+		"IdentityRed",
+		"IdentityBlue",
+		"IdentityGrixis",
+		"BiomeBlack"
+	]
+},
+{
+	"name": "Sliver_Blue",
+	"nameOverride": "Blue Sliver",
+	"sprite": "sprites/monsters/sliver_blue.atlas",
+	"deck": [
+		"decks/monsters/sliver_blue.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.2,
+	"speed": 24,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"count": 2,
+			"cardTypes": [
+				"Creature"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.05,
+			"count": 1,
+			"cardTypes": [
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "randomCard",
+			"count": 2
+		},
+		{
+			"type": "gold",
+			"count": 150
+		}
+	],
+	"colors": "UWB",
+	"questTags": [
+		"Tribal",
+		"Inhuman",
+		"Territorial",
+		"Subterranean",
+		"Nesting",
+		"Swarm",
+		"IdentityBlack",
+		"IdentityWhite",
+		"IdentityBlue",
+		"IdentityEsper",
+		"BiomeBlue"
+	]
+},
+{
+	"name": "Sliver_Green",
+	"nameOverride": "Green Sliver",
+	"sprite": "sprites/monsters/sliver_green.atlas",
+	"deck": [
+		"decks/monsters/sliver_green.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.2,
+	"speed": 24,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"count": 2,
+			"cardTypes": [
+				"Creature"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.05,
+			"count": 1,
+			"cardTypes": [
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "randomCard",
+			"count": 2
+		},
+		{
+			"type": "gold",
+			"count": 150
+		}
+	],
+	"colors": "GWRBU",
+	"questTags": [
+		"Tribal",
+		"Inhuman",
+		"Territorial",
+		"Subterranean",
+		"Nesting",
+		"Swarm",
+		"IdentityBlack",
+		"IdentityRed",
+		"IdentityBlue",
+		"IdentityNaya",
+		"BiomeGreen"
+	]
+},
+{
+	"name": "Sliver_Red",
+	"nameOverride": "Red Sliver",
+	"sprite": "sprites/monsters/sliver_red.atlas",
+	"deck": [
+		"decks/monsters/sliver_red.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.2,
+	"speed": 24,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"count": 2,
+			"cardTypes": [
+				"Creature"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.05,
+			"count": 1,
+			"cardTypes": [
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "randomCard",
+			"count": 2
+		},
+		{
+			"type": "gold",
+			"count": 150
+		}
+	],
+	"colors": "RBG",
+	"questTags": [
+		"Tribal",
+		"Inhuman",
+		"Territorial",
+		"Subterranean",
+		"Nesting",
+		"Swarm",
+		"IdentityBlack",
+		"IdentityRed",
+		"IdentityGreen",
+		"IdentityJund",
+		"BiomeRed"
+	]
+},
+{
+	"name": "Sliver_White",
+	"nameOverride": "White Sliver",
+	"sprite": "sprites/monsters/sliver_white.atlas",
+	"deck": [
+		"decks/monsters/sliver_white.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.2,
+	"speed": 24,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"count": 2,
+			"cardTypes": [
+				"Creature"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.05,
+			"count": 1,
+			"cardTypes": [
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "randomCard",
+			"count": 2
+		},
+		{
+			"type": "gold",
+			"count": 150
+		}
+	],
+	"colors": "WGU",
+	"questTags": [
+		"Tribal",
+		"Inhuman",
+		"Territorial",
+		"Subterranean",
+		"Nesting",
+		"Swarm",
+		"IdentityWhite",
+		"IdentityGreen",
+		"IdentityBlue",
+		"IdentityBant",
+		"BiomeWhite"
 	]
 },
 {

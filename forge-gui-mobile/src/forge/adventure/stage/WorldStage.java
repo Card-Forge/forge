@@ -124,7 +124,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                             Forge.setTransitionScreen(new TransitionScreen(() -> {
                                 duelScene.initDuels(player, mob);
                                 Forge.switchScene(duelScene);
-                            }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.nameOverride.isEmpty() ? mob.getData().name : mob.nameOverride));
+                            }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.getName()));
                             currentMob = mob;
                             WorldSave.getCurrentSave().autoSave();
                         });
@@ -397,7 +397,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         List<String> questStageIDs = new ArrayList<>();
         for (Pair<Float, EnemySprite> enemy : enemies) {
             timeouts.add(enemy.getKey());
-            names.add(enemy.getValue().getData().name);
+            names.add(enemy.getValue().getData().getName());
             x.add(enemy.getValue().getX());
             y.add(enemy.getValue().getY());
             questStageIDs.add(enemy.getValue().questStageID);
