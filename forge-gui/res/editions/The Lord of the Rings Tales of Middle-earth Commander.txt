@@ -29,7 +29,6 @@ ScryfallCode=LTC
 306 C Evolving Wilds @Pavel Kolomeyets
 308 U Field of Ruin @Shahab Alizadeh
 316 U Graypelt Refuge @Erikas Perl
-337 M Yavimaya, Cradle of Growth @Samuel Perin
 348 M The Great Henge @Jeremy Paillotin
 349 M Cloudstone Curio @Erikas Perl
 350 M Ensnaring Bridge @Stephen Stark
@@ -44,6 +43,7 @@ ScryfallCode=LTC
 365 M Homeward Path @Erikas Perl
 369 M Minamo, School at Water's Edge @Stephen Stark
 376 M Wasteland @Hristo D. Chukov
+377 M Yavimaya, Cradle of Growth @Samuel Perin
 378 M The Great Henge @Jeremy Paillotin
 380 M Ensnaring Bridge @Stephen Stark
 406 M Wasteland @Hristo D. Chukov
