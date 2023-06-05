@@ -23,6 +23,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPutCounter;
 import forge.game.cost.CostTap;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
@@ -190,6 +191,12 @@ public class UntapAi extends SpellAbilityAi {
                         && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     choice = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
                 } else if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
+                    // for Planeswalker +Loyalty abilities, activate them even if no good targets are present
+                    if (sa.getRootAbility().isPwAbility()
+                            && sa.getRootAbility().getPayCosts().hasSpecificCostType(CostPutCounter.class)
+                            && sa.isMinTargetChosen()) {
+                        return true;
+                    }
                     sa.resetTargets();
                     return false;
                 } else {
