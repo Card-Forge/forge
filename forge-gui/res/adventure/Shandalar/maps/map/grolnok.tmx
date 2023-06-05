@@ -39,7 +39,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../obj/entry_up.tx" x="544.988" y="958.508">
+  <object id="38" template="../obj/entry_up.tx" x="546.121" y="949.445">
    <properties>
     <property name="teleport" value=""/>
    </properties>
@@ -420,46 +420,6 @@
   <object id="179" template="../obj/collision.tx" x="1040.5" y="-18.472" width="16" height="978.944"/>
   <object id="187" template="../obj/enemy.tx" x="786.5" y="140.664" width="16" height="17.6724">
    <properties>
-    <property name="dialog">[ {
-  &quot;text&quot;:&quot;Wait, you're here to save me from these goons ? &quot; You're not gonna put me into the cauldron, 
-   &quot;options&quot;:[
-    { 
-	&quot;name&quot;:&quot;Yeah, yeah, defeat Liliana. Got it.&quot;,
-		&quot;condition&quot;:[ { &quot;checkMapFlag&quot;: &quot;intro&quot; }] 
-	},
-	{
-	  &quot;name&quot;:&quot;Why am I here?&quot;,
-	  &quot;text&quot;:&quot;YOU HAVE FREED THE LEGENDARY PLANESWALKER LILIANA FROM CAPTIVITY...&quot;,
-	  &quot;options&quot;:[
-		{ 
-			&quot;name&quot;:&quot;Okay, yeah, I remember this now.&quot;,
-			&quot;condition&quot;:[ { &quot;checkMapFlag&quot;: &quot;intro&quot; }] 
-		},   
-		{      
-			&quot;name&quot;:&quot;I did, just like you asked.&quot;,
-			&quot;text&quot;:&quot;...BUT HER MIND IS STILL IMPRISONED.&quot;
-			&quot;options&quot;:[
-			{ 	
-				&quot;name&quot;:&quot;Okay, yeah, I remember this now.&quot;,
-				&quot;condition&quot;:[ { &quot;checkMapFlag&quot;: &quot;intro&quot; }] 
-			},
-			{      
-				&quot;name&quot;:&quot;So... what now?&quot;,
-				&quot;text&quot;:&quot;DEFEAT LILIANA AND I CAN HELP HER RECOVER, SO THAT SHE MAY AID YOU IN BATTLES YET TO COME. TAKE HEED, {var=player_name}, THIS WILL BE A DIFFICULT TASK.&quot;,
-				&quot;options&quot;:[
-				{
-					&quot;text&quot;:&quot;THE PORTALS BEHIND ME LEAD TO PARTS OF HER REALM. ONCE ACTIVATED, YOU MAY USE THEM TO TRAVEL MORE QUICKLY.&quot;
-					&quot;name&quot;:&quot;Thank you for the warning.&quot;,
-					&quot;options&quot;:[
-					{
-						&quot;name&quot;:&quot;(Continue)&quot;,
-						&quot;action&quot;:[{&quot;advanceMapFlag&quot;:&quot;intro&quot;}]
-					}]
-				}]
-			}]
-		}]
-	}]
-} ]</property>
     <property name="enemy" value="Farmer"/>
     <property name="waypoints" value=""/>
    </properties>
@@ -600,46 +560,6 @@
   </object>
   <object id="215" template="../obj/enemy.tx" x="736.333" y="140.164" width="16" height="17.6724">
    <properties>
-    <property name="dialog">[ {
-  &quot;text&quot;:&quot;Wait, you're here to save me from these goons ? &quot; You're not gonna put me into the cauldron, 
-   &quot;options&quot;:[
-    { 
-	&quot;name&quot;:&quot;Yeah, yeah, defeat Liliana. Got it.&quot;,
-		&quot;condition&quot;:[ { &quot;checkMapFlag&quot;: &quot;intro&quot; }] 
-	},
-	{
-	  &quot;name&quot;:&quot;Why am I here?&quot;,
-	  &quot;text&quot;:&quot;YOU HAVE FREED THE LEGENDARY PLANESWALKER LILIANA FROM CAPTIVITY...&quot;,
-	  &quot;options&quot;:[
-		{ 
-			&quot;name&quot;:&quot;Okay, yeah, I remember this now.&quot;,
-			&quot;condition&quot;:[ { &quot;checkMapFlag&quot;: &quot;intro&quot; }] 
-		},   
-		{      
-			&quot;name&quot;:&quot;I did, just like you asked.&quot;,
-			&quot;text&quot;:&quot;...BUT HER MIND IS STILL IMPRISONED.&quot;
-			&quot;options&quot;:[
-			{ 	
-				&quot;name&quot;:&quot;Okay, yeah, I remember this now.&quot;,
-				&quot;condition&quot;:[ { &quot;checkMapFlag&quot;: &quot;intro&quot; }] 
-			},
-			{      
-				&quot;name&quot;:&quot;So... what now?&quot;,
-				&quot;text&quot;:&quot;DEFEAT LILIANA AND I CAN HELP HER RECOVER, SO THAT SHE MAY AID YOU IN BATTLES YET TO COME. TAKE HEED, {var=player_name}, THIS WILL BE A DIFFICULT TASK.&quot;,
-				&quot;options&quot;:[
-				{
-					&quot;text&quot;:&quot;THE PORTALS BEHIND ME LEAD TO PARTS OF HER REALM. ONCE ACTIVATED, YOU MAY USE THEM TO TRAVEL MORE QUICKLY.&quot;
-					&quot;name&quot;:&quot;Thank you for the warning.&quot;,
-					&quot;options&quot;:[
-					{
-						&quot;name&quot;:&quot;(Continue)&quot;,
-						&quot;action&quot;:[{&quot;advanceMapFlag&quot;:&quot;intro&quot;}]
-					}]
-				}]
-			}]
-		}]
-	}]
-} ]</property>
     <property name="enemy" value="Farmer"/>
     <property name="waypoints" value=""/>
    </properties>
