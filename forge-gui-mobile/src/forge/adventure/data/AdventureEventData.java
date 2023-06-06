@@ -269,6 +269,7 @@ public class AdventureEventData implements Serializable {
 
     public void generateParticipants(int numberOfOpponents){
         participants = new AdventureEventParticipant[numberOfOpponents+1];
+
         List<EnemyData> data =  Aggregates.random(WorldData.getAllEnemies(),numberOfOpponents);
         for (int i = 0; i < numberOfOpponents; i++){
             participants[i] = new AdventureEventParticipant().generate(data.get(i));
@@ -280,12 +281,6 @@ public class AdventureEventData implements Serializable {
     private transient AdventureEventHuman humanPlayerInstance;
     public AdventureEventHuman getHumanPlayer(){
         if (humanPlayerInstance == null){
-            for (AdventureEventParticipant p: participants){
-                if (p instanceof AdventureEventHuman) {
-                    humanPlayerInstance = (AdventureEventHuman) p;
-                    break;
-                }
-            }
             humanPlayerInstance = new AdventureEventHuman();
         }
         return humanPlayerInstance;
@@ -438,15 +433,14 @@ public class AdventureEventData implements Serializable {
         }
 
         public String getName(){
-            return enemyDataName;
+            return WorldData.getEnemy(enemyDataName).getName();
         }
 
         public Image getAvatar(){
             if (sprite == null){
                 sprite = new EnemySprite(WorldData.getEnemy(enemyDataName));
             }
-
-            return sprite == null?new Image():new Image(sprite.getAvatar());
+            return sprite.getAvatar() == null?new Image():new Image(sprite.getAvatar());
         }
 
         public String getAtlasPath(){

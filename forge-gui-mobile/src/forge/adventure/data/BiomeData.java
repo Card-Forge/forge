@@ -48,7 +48,7 @@ public class BiomeData implements Serializable {
                 return enemyList;
             for (EnemyData data : new Array.ArrayIterator<>(WorldData.getAllEnemies())) {
                 for (String enemyName : enemies) {
-                    if (data.name.equals(enemyName)) {
+                    if (data.getName().equals(enemyName)) {
                         enemyList.add(data);
                         break;
                     }

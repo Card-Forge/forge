@@ -195,9 +195,7 @@ public class MapDialog {
         float width;
         if (sprite != null) {
             if (actor instanceof EnemySprite) {
-                String name = ((EnemySprite) actor).nameOverride;
-                if (name.isEmpty())
-                    name = ((EnemySprite) actor).getData().name;
+                String name = actor.getName();
                 TextraLabel label = Controls.newTextraLabel("[%?black outline][ORANGE]" + name);
                 D.getTitleTable().add(label).left().expand();
             }

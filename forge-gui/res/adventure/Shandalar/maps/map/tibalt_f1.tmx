@@ -18,7 +18,7 @@
  </layer>
  <layer id="13" name="background" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJzNmE1OwzAQhd0WFmwqpCaGZM8pqvAjJO4RCVhxDG4Baqm64QacoEjsOAC9AzcoHbmjTCZjO7Wc0JGeZCeO/eV57Lgdnyo1jqRBqtR9ZlRmVXlIrm8SUwdBmQftzxWxmEFz4MmNNllVVnlVhjZ3J0YvaZ1RKtv4Y3PzWE3qgjZvO81TuR+Jr09u4CwTI6xDm49zIxu371264P6emH6fz5R62ObKY2bKx3k4dx95gtwQoy3rUd7Mk0PkxgCPeZnn+mta7S2gta7XR8J6icHNQ1qXNDj3Ytv+V1WS7v8nN+excXP2PrltjKhPIuB6Sqp7X5H8hu/fpa5E824oqCBtfnQ9X0dpkx25XPMRwm2bd+jvncjnMajYvTvlL1jdx03n2Me9mjQ9udb2sXhbWsd35mxd+G3rr43HbZ7tihtze0nKU10/10laWq5PWX+zjrgxpPNRqOd4ZgG5+vFxDyzezBzrPYS7TJrc+M1cC/M683Dbcsy1T7XlLhP5Wgy/Q7hvHHtKX3lCuTcX8nN0rEPJb5vf6ClyU34Yj76HjYtKWkdTbd+TrnR4nlBu7pPExrnb+rdvtOGWPDxkbn6up1qk/hzYZ95DuAtdP/ehcJzbcVPcb6jT+67fWDEC/8ugwjElXhCExM396DIkbpCNuS1317Gv16486TP+AFSVvBM=
+   eJzNmEFOwzAQRd0WFmwqpCaGZM8pqgASEveIBKw4BrcoaumOG3CCIrHjAPQO3KB05I48mYydxHJCR/qS7Tj2y/c4cTs9V2oaSaNUqYfMqMxseUzad4mpg6DMg47ni1jMoBXw5Ea7zJZVbsvQ5/7MaJFWGaWyiz82N4/NrCro83bQKpXHkfiG5AbOMjHCOvT5uDRycTc9Sx/c3zMz7suFUo/7XHnKTPk0D+ceIk+QG2KyZz3J63lyjNwY4DEv81x/Te27BbTV1fpE2C8xuHlI+5IG517v+/8qK+n6f3JzHhc3Zx+S28WI+iQCrufEXvuK5Dd8/661Fc27saCC9PnR1XydpHV25PKtRwi3a91hvHeiJo9BxeHZKX/B6k3cdI2buDezuie32j0X70vr+MycrQ+/XeO18bjNvX1xY25DYHmuq+c6SRBS+5yNt+yJG0M6H4V6jmcWkG+cJu6Rw7OlZ7+HcJdJnRu/mVthXZcN3K4c872n2nKXidwWw+8Qbld71zzxjdOFe3cl30fnOpb8dvmNXiA35Yf56HO4uKikfTTX7nfSjQ7PE8rNfZLYOHdb/7pGG27Jw2Pm5ud6qnXanANd1j2Eu9DVcx8K57mb1sX9hjq97vuNFSPwvwwqnFPiBUFI3NyPPkPiBrmY23L3HV299uXJkPEHioq30Q==
   </data>
  </layer>
  <layer id="15" name="Tilelaag 3" width="46" height="28">
@@ -31,7 +31,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBhAIDqQlo+CgQQOPAPtglGADCzFBtoFIxtoM0LwYAAf2SG0oBym3Fde+rplOID/ItjFrQdRnitUgWBOVQQGgaPCCAwCP6EYHbxjJ2wHNn2UApCbYW7DBk5ikZsFrHsW8EBoZL3IbOR0LsoGobHlB3IByN3YQIs4phjMXmR3/5FkYGBTw2/HDyxizMwkORMFzEFqrym7kKaXkHpkeXE20swezOAXne2jNI2SGq/4ACG3HJJApQmJYwPk1pukhtNBpHBZKYpKa0qg8rWgfGxljwNamR9HhltAAF+ZhwsoS6DS6OKkAkrT9kEqprVRMDLBvEE+huDGSZzYUACj7qYvGAzuBgD1pix9
+   eJxjYBhAIDqQlo+CgQQOPAPtglGADCzFBtoFIxtoM0LwYAAf2SG0oBym3Fde+rplOID/ItjFrQdRnitUgWBOVQQGgaPCCAwCP6EYHbxjJ2wHNn2UApCbYW7DBk5ikZsFrHsW8EBoZL3IbOR0LsoGobHlB3IByN3YQIs4phjMXmR3/5FkYGBTw2/HDyxizMwkORMFzEFqrym7kKaXkHpkeXE20swezOAXne2jNI2SGq/4ACG3HJJApQmJYwPk1pukhtNBpHBZKYpKa0qg8rWgfGxlz0G08I0jwy0ggK/MwwWUJVBpdHFSAaVpGz0sRsEoIBXMG+RjCG6cxIkNBTDqbvqCweBuAIgTLSw=
   </data>
  </layer>
  <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="2.65789" offsety="6.89474">
@@ -180,7 +180,7 @@
   <object id="195" template="../obj/waypoint.tx" x="130.009" y="360.105"/>
   <object id="196" template="../obj/waypoint.tx" x="344.342" y="253.772"/>
   <object id="197" template="../obj/waypoint.tx" x="470.342" y="121.439"/>
-  <object id="198" template="../obj/door_up.tx" x="460.684" y="69.2103" width="24.0134" height="23.6704" rotation="359.74">
+  <object id="198" template="../obj/door_up.tx" x="460.629" y="57.1811" width="32.7127" height="15.9998" rotation="359.74">
    <properties>
     <property name="direction" value="left"/>
     <property name="teleport" value="maps/map/tibalt_f2.tmx"/>

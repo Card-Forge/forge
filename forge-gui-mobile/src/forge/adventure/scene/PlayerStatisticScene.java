@@ -253,7 +253,7 @@ public class PlayerStatisticScene extends UIScene {
             enemyImage.setScaling(Scaling.stretch);
             scrollContainer.add(enemyImage).pad(5).size(16).fillY();
             scrollContainer.add().width(16);
-            scrollContainer.add((data.name)).fillX().pad(5).width(120);
+            scrollContainer.add(data.getName()).fillX().pad(5).width(120);
             scrollContainer.add(entry.getValue().getLeft().toString() + "/" + entry.getValue().getRight().toString()).pad(5);
             scrollContainer.row();
         }
