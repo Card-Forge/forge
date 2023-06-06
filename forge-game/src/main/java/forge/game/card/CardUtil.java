@@ -194,24 +194,49 @@ public final class CardUtil {
         newCopy.setController(in.getController(), 0);
         newCopy.setCommander(in.isCommander());
 
+        newCopy.setRules(in.getRules());
+        
         // needed to ensure that the LKI object has correct CMC info no matter what state the original card was in
         // (e.g. Scrap Trawler + transformed Harvest Hand)
         newCopy.setLKICMC(in.getCMC());
         // used for the purpose of cards that care about the zone the card was known to be in last
         newCopy.setLastKnownZone(in.getLastKnownZone());
+        // copy EffectSource for description
+        newCopy.setEffectSource(getLKICopy(in.getEffectSource(), cachedMap));
 
-        newCopy.getCurrentState().copyFrom(in.getState(in.getFaceupCardStateName()), true);
+        if (in.isFlipCard()) {
+            newCopy.getState(CardStateName.Original).copyFrom(in.getState(CardStateName.Original), true);
+            newCopy.addAlternateState(CardStateName.Flipped, false);
+            newCopy.getState(CardStateName.Flipped).copyFrom(in.getState(CardStateName.Flipped), true);
+        } else if (in.isTransformable()) {
+            newCopy.getState(CardStateName.Original).copyFrom(in.getState(CardStateName.Original), true);
+            newCopy.addAlternateState(CardStateName.Transformed, false);
+            newCopy.getState(CardStateName.Transformed).copyFrom(in.getState(CardStateName.Transformed), true);
+        } else if (in.isAdventureCard()) {
+            newCopy.getState(CardStateName.Original).copyFrom(in.getState(CardStateName.Original), true);
+            newCopy.addAlternateState(CardStateName.Adventure, false);
+            newCopy.getState(CardStateName.Adventure).copyFrom(in.getState(CardStateName.Adventure), true);
+        } else if (in.isSplitCard()) {
+            newCopy.getState(CardStateName.Original).copyFrom(in.getState(CardStateName.Original), true);
+            newCopy.addAlternateState(CardStateName.LeftSplit, false);
+            newCopy.getState(CardStateName.LeftSplit).copyFrom(in.getState(CardStateName.LeftSplit), true);
+            newCopy.addAlternateState(CardStateName.RightSplit, false);
+            newCopy.getState(CardStateName.RightSplit).copyFrom(in.getState(CardStateName.RightSplit), true);
+        } else {
+            newCopy.getCurrentState().copyFrom(in.getState(in.getFaceupCardStateName()), true);
+        }
+        newCopy.setFlipped(in.isFlipped());
+        newCopy.setBackSide(in.isBackSide());
+        if (in.isTransformed()) {
+            newCopy.incrementTransformedTimestamp();
+        }
+        newCopy.setState(newCopy.getFaceupCardStateName(), false, true);
         if (in.isFaceDown()) {
             newCopy.turnFaceDownNoUpdate();
             newCopy.setType(new CardType(in.getFaceDownState().getType()));
-            // prevent StackDescription from revealing face
-            newCopy.updateStateForView();
         }
-
-        if (in.isAdventureCard() && in.getFaceupCardStateName().equals(CardStateName.Original)) {
-            newCopy.addAlternateState(CardStateName.Adventure, false);
-            newCopy.getState(CardStateName.Adventure).copyFrom(in.getState(CardStateName.Adventure), true);
-        }
+        // prevent StackDescription from revealing face
+        newCopy.updateStateForView();
 
         /*
         if (in.isCloned()) {
@@ -300,9 +325,6 @@ public final class CardUtil {
         newCopy.setTimestamp(in.getTimestamp());
 
         newCopy.setBestowTimestamp(in.getBestowTimestamp());
-        if (in.isTransformed()) {
-            newCopy.incrementTransformedTimestamp();
-        }
 
         newCopy.setForetold(in.isForetold());
         newCopy.setForetoldThisTurn(in.isForetoldThisTurn());
