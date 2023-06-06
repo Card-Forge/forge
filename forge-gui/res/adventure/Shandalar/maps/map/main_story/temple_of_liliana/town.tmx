@@ -1445,9 +1445,8 @@
 {
    &quot;text&quot;:&quot;You pry the key away from the mayor's cold dead (and dead again) hands. Having that, there's not much between you and Liliana now.&quot;,
    &quot;options&quot;:[
-	{&quot;name&quot;:&quot;(continue)&quot;
-	}
-	{&quot;action&quot;:[{&quot;deleteMapObject&quot;: 278}, {&quot;deleteMapObject&quot;: -1}]}
+	{&quot;name&quot;:&quot;(continue)&quot;,
+&quot;action&quot;:[{&quot;deleteMapObject&quot;: 278}, {&quot;deleteMapObject&quot;: -1}]}
 	]
 }
 ]</property>
@@ -1458,7 +1457,7 @@
       { &quot;name&quot;:&quot;Walk away&quot; },
       { &quot;name&quot;:&quot;Attack the Mayor&quot;,
 	  &quot;action&quot;:[{&quot;battleWithActorID&quot;:-1}]}
-        
+      ]   
    }
 ]</property>
     <property name="effect">{
