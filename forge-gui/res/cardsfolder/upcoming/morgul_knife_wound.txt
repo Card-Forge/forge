@@ -1,0 +1,11 @@
+Name:Morgul-Knife Wound
+ManaCost:1 B
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -3 | Description$ Enchanted creature gets -3/-0
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Enchanted creature gets -3/-0 and has "At the beginning of your upkeep, exile this creature unless you pay 2 life."
+SVar:TrigDestroy:DB$ GenericChoice | Choices$ Pay1,Pay1Life | AILogic$ PayUnlessCost | Defined$ TriggeredPlayer
+SVar:Pay1:DB$ Destroy | Defined$ Enchanted | UnlessCost$ 1 | UnlessPayer$ TriggeredPlayer | SpellDescription$ Destroy enchanted land unless you pay {1}
+SVar:TrigExile:DB$ ChangeZone | Defined$ Enchanted | Origin$ Battlefield | Destination$ Exile | UnlessCost$ PayLife<2> | UnlessPayer$ TriggeredPlayer | SpellDescription$ Exile this creature unless you pay 2 life
+Oracle:Enchant creature\nEnchanted creature gets -3/-0 and has "At the beginning of your upkeep, exile this creature unless you pay 2 life."
