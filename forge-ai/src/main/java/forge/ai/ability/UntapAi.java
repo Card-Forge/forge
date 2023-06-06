@@ -125,6 +125,7 @@ public class UntapAi extends SpellAbilityAi {
      */
     private static boolean untapPrefTargeting(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getHostCard();
+        sa.resetTargets();
 
         final PlayerCollection targetController = new PlayerCollection();
         if (sa.isCurse()) {
@@ -181,7 +182,6 @@ public class UntapAi extends SpellAbilityAi {
             untapList.removeAll(toExclude);
         }
 
-        sa.resetTargets();
         while (sa.canAddMoreTarget()) {
             Card choice = null;
 
@@ -191,10 +191,8 @@ public class UntapAi extends SpellAbilityAi {
                         && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     choice = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
                 } else if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
-                    // for Planeswalker +Loyalty abilities, activate them even if no good targets are present
-                    if (sa.getRootAbility().isPwAbility()
-                            && sa.getRootAbility().getPayCosts().hasSpecificCostType(CostPutCounter.class)
-                            && sa.isMinTargetChosen()) {
+                    // check if the cost is acceptable anyway (e.g. Planeswalker +Loyalty)
+                    if (ComputerUtil.activateForCost(sa, ai)) {
                         return true;
                     }
                     sa.resetTargets();
