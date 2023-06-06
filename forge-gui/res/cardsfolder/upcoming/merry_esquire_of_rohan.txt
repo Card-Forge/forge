@@ -3,7 +3,7 @@ ManaCost:R W
 Types:Legendary Creature Halfling Knight
 PT:2/2
 K:Haste
-S:Mode$ Continuous | Affected$ Card.Self+equipped | AddKeyword$ First strike | Description$ CARDNAME has first strike as long as it's equipped.
+S:Mode$ Continuous | Affected$ Card.Self+equipped | AddKeyword$ First Strike | Description$ CARDNAME has first strike as long as it's equipped.
 T:Mode$ AttackersDeclared | ValidAttackers$ Card.Self | IsPresent$ Creature.attacking+Other+YouCtrl+Legendary | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you attack with NICKNAME and another legendary creature, draw a card.
 SVar:TrigDraw:DB$ Draw
 SVar:EquipMe:Once
