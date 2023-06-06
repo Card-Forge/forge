@@ -1,5 +1,6 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
@@ -12,6 +13,7 @@ import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
+import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 
 /**
@@ -99,7 +101,8 @@ public class InnScene extends UIScene {
     public void enter() {
         super.enter();
         refreshStatus();
-        SoundSystem.instance.pause();
+        GameHUD.getInstance().pauseMusic();
+        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.TOWN);
     }
 
     private void refreshStatus(){
