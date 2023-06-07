@@ -339,8 +339,9 @@ public class BoosterDraft implements IBoosterDraft {
 
         final CardPool result = new CardPool();
 
-        if (localPlayer.nextChoice() != null && !localPlayer.nextChoice().isEmpty())
-            result.addAllFlat(localPlayer.nextChoice());
+        List<PaperCard> nextChoice = localPlayer.nextChoice();
+        if (nextChoice != null && !nextChoice.isEmpty())
+            result.addAllFlat(nextChoice);
 
         if (result.isEmpty()) {
             // Can't set a card, since none are available. Just pass "empty" packs.
