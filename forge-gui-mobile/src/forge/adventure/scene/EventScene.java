@@ -13,12 +13,14 @@ import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.*;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
+import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.util.Callback;
 import forge.util.MyRandom;
@@ -378,7 +380,8 @@ public class EventScene extends MenuScene implements IAfterMatch {
     @Override
     public void enter() {
         super.enter();
-        SoundSystem.instance.pause();
+        GameHUD.getInstance().pauseMusic();
+        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
         scrollContainer.clear();
 
         if (money != null) {
