@@ -5,4 +5,4 @@ S:Mode$ Continuous | Affected$ Creature.Legendary+YouCtrl | AddPower$ 2 | AddTou
 S:Mode$ Continuous | Affected$ Creature.nonLegendary+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Nonlegendary creatures you control get +1/+1.
 SVar:PlayMain1:TRUE
 DeckHints:Type$Legendary
-Oracle:Legendary creatures you control get +2/+1 and have ward {1}./nNonlegendary creatures you control get +1/+1.
+Oracle:Legendary creatures you control get +2/+1 and have ward {1}.\nNonlegendary creatures you control get +1/+1.
