@@ -1,0 +1,8 @@
+Name:Troll of Khazad-dum
+ManaCost:5 B
+Types:Creature Troll
+PT:6/5
+S:Mode$ MinMaxBlocker | ValidCard$ Creature.Self | Min$ 3 | Description$ CARDNAME can't be blocked except by three or more creatures.
+K:TypeCycling:Swamp:1
+DeckHas:Ability$Discard
+Oracle:Troll of Khazad-dûm can't be blocked except by three or more creatures.\nSwampcycling {1} ({1}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)
