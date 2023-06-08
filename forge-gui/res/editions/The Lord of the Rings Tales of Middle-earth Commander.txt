@@ -11,7 +11,9 @@ ScryfallCode=LTC
 3 M Galadriel, Elven-Queen @Axel Sauerwald
 4 M Sauron, Lord of the Rings @Alex Brock
 7 M Sam, Loyal Attendant @Campbell White
+45 R Pippin, Warden of Isengard @Viko Menezes
 48 R Bilbo, Birthday Celebrant @
+51 R Merry, Warden of Isengard @Viko Menezes
 66 R Radagast, Wizard of Wilds @Tomas Duchek
 81 M Eowyn, Shieldmaiden @Craig Elliott
 82 M Frodo, Adventurous Hobbit @Axel Sauerwald
@@ -35,15 +37,30 @@ ScryfallCode=LTC
 351 M The Ozolith @Calder Moore
 352 M Rings of Brighthearth @Jonas De Ro
 353 M Shadowspear @Campbell White
+354 M Sword of Hearth and Home @Randy Gallegos
+355 M Sword of the Animist @Pavel Kolomeyets
+356 M Thorn of Amethyst @Igor Krstic
 357 M Ancient Tomb @Anastasia Balakchina
 358 M Bojuka Bog @Calder Moore
 359 M Boseiju, Who Shelters All @Jeremy Paillotin
+360 M Cabal Coffers @Sean Vo
+361 M Castle Ardenvale @Jeremy Paillotin
 362 M Cavern of Souls @Logan Feliciano
-363 R Deserted Temple @Calder Moore
+363 M Deserted Temple @Calder Moore
+364 M Gemstone Caverns @Jonas De Ro
 365 M Homeward Path @Erikas Perl
+366 M Horizon Canopy @Randy Gallegos
+367 M Karakas @Stephen Stark
+368 M Kor Haven @Erikas Perl
 369 M Minamo, School at Water's Edge @Stephen Stark
+370 M Mouth of Ronom @Marina Ortega Lorente
+371 M Oboro, Palace in the Clouds @Jonas De Ro
+372 M Pillar of the Paruns @Randy Gallegos
+373 M Reflecting Pool @Marco Gorlei
+374 M Shinka, the Bloodsoaked Keep @Logan Feliciano
+375 M Urborg, Tomb of Yawgmoth @Erikas Perl
 376 M Wasteland @Hristo D. Chukov
-377 M Yavimaya, Cradle of Growth @Samuel Perin
+377 M Yavimaya, Cradle of Growth @Erikas Perl
 378 M The Great Henge @Jeremy Paillotin
 380 M Ensnaring Bridge @Stephen Stark
 406 M Wasteland @Hristo D. Chukov
