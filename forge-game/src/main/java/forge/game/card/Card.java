@@ -351,7 +351,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // Enumeration for CMC request types
     public enum SplitCMCMode {
         CurrentSideCMC,
-        CombinedCMC,
         LeftSplitCMC,
         RightSplitCMC
     }
@@ -2419,7 +2418,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return CardTranslation.translateMultipleDescriptionText(sb.toString(), getName());
     }
 
-    private String kickerDesc (String keyword, String remText) {
+    private String kickerDesc(String keyword, String remText) {
         final StringBuilder sbx = new StringBuilder();
         final String[] n = keyword.split(":");
         final Cost cost = new Cost(n[1], false);
@@ -2467,7 +2466,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public String getAbilityText() {
         return getAbilityText(currentState);
     }
-
     public String getAbilityText(final CardState state) {
         final String linebreak = "\r\n\r\n";
         boolean useGrayTag = true;
@@ -2574,7 +2572,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             boolean hasMeldEffect = hasSVar("Meld")
                     || Iterables.any(state.getNonManaAbilities(), SpellAbilityPredicates.isApi(ApiType.Meld));
             String meld = this.getRules().getMeldWith();
-            if (meld != "" && (!hasMeldEffect)) {
+            if (meld != "" && !hasMeldEffect) {
                 sb.append("\r\n");
                 sb.append("(Melds with ").append(meld).append(".)");
                 sb.append("\r\n");
@@ -2694,8 +2692,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         final Card host = stAb.getHostCard();
 
                         String currentName = host.getName();
-                        String desc1 = TextUtil.fastReplace(stAb.toString(), "CARDNAME", currentName);
-                        String desc = TextUtil.fastReplace(desc1, "NICKNAME", currentName.split(" ")[0].replace(",", ""));
+                        String desc = TextUtil.fastReplace(stAb.toString(), "CARDNAME", currentName);
+                        desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(currentName));
                         if (host.getEffectSource() != null) {
                             desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", host.getEffectSource().getName());
                         }
@@ -5916,7 +5914,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final SpellAbility getTokenSpawningAbility() {
         return tokenSpawningAbility;
     }
-
     public void setTokenSpawningAbility(SpellAbility sa) {
         tokenSpawningAbility = sa;
     }
@@ -6606,7 +6603,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (isSplitCard()) {
             switch(mode) {
                 case CurrentSideCMC:
-                    // TODO: test if this returns combined CMC for the full face (then get rid of CombinedCMC mode?)
                     requestedCMC = getManaCost().getCMC() + xPaid;
                     break;
                 case LeftSplitCMC:
@@ -6614,11 +6610,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     break;
                 case RightSplitCMC:
                     requestedCMC = getState(CardStateName.RightSplit).getManaCost().getCMC() + xPaid;
-                    break;
-                case CombinedCMC:
-                    requestedCMC += getState(CardStateName.LeftSplit).getManaCost().getCMC();
-                    requestedCMC += getState(CardStateName.RightSplit).getManaCost().getCMC();
-                    requestedCMC += xPaid;
                     break;
                 default:
                     System.out.println(TextUtil.concatWithSpace("Illegal Split Card CMC mode", mode.toString(),"passed to getCMC!"));

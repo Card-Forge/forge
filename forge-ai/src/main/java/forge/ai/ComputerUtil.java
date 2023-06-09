@@ -1293,7 +1293,6 @@ public class ComputerUtil {
                 && !sa.hasParam("ActivationPhases");
     }
 
-    //returns true if it's better to wait until blockers are declared).
     public static boolean castSpellInMain1(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final SpellAbility sub = sa.getSubAbility();
@@ -1315,6 +1314,7 @@ public class ComputerUtil {
                 return true;
             }
         }
+
         final CardCollectionView buffed = ai.getCardsIn(ZoneType.Battlefield);
         boolean checkThreshold = sa.isSpell() && !ai.hasThreshold() && !source.isInZone(ZoneType.Graveyard);
         for (Card buffedCard : buffed) {
@@ -2716,12 +2716,11 @@ public class ComputerUtil {
         return ComputerUtilCard.getBestCreatureAI(killables);
     }
 
-    public static int predictDamageFromSpell(final SpellAbility sa, final Player targetPlayer) {
+    public static int predictDamageFromSpell(SpellAbility ab, final Player targetPlayer) {
         int damage = -1; // returns -1 if the spell does not deal damage
-        final Card card = sa.getHostCard();
+        final Card card = ab.getHostCard();
 
-        SpellAbility ab = sa;
-        while (ab != null) {
+        while (ab != null && targetPlayer.canLoseLife()) {
             if (ab.getApi() == ApiType.DealDamage) {
                 if (damage == -1) { damage = 0; } // found a damage-dealing spell
                 if (!ab.hasParam("NumDmg")) {

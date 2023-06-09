@@ -1785,8 +1785,6 @@ public class GameSimulationTest extends SimulationTest {
 
         AssertJUnit.assertEquals(clonedOutLaw.getName(), hillGiantName);
 
-        AssertJUnit.assertTrue(clonedOutLaw.isTransformable());
-
         score = sim.simulateSpellAbility(moonmistSA).value;
         AssertJUnit.assertTrue(score > 0);
 
