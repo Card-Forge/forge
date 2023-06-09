@@ -4,7 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -208,7 +210,7 @@ public enum CSubmenuDraft implements ICDoc {
     private void setupDraft() {
         final Localizer localizer = Localizer.getInstance();
         // Determine what kind of booster draft to run
-        final LimitedPoolType poolType = GuiChoose.oneOrNone(localizer.getMessage("lblChooseDraftFormat"), LimitedPoolType.values());
+        final LimitedPoolType poolType = GuiChoose.oneOrNone(localizer.getMessage("lblChooseDraftFormat"), EnumSet.allOf(LimitedPoolType.class).stream().filter(limitedPoolType -> !LimitedPoolType.Prerelease.equals(limitedPoolType)).collect(Collectors.toSet()));
         if (poolType == null) { return; }
 
         final BoosterDraft draft = BoosterDraft.createDraft(poolType);
