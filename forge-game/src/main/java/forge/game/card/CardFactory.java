@@ -781,6 +781,7 @@ public class CardFactory {
             if (sa.hasParam("KeepName")) {
                 state.setName(originalState.getName());
             } else if (newName != null) {
+                // convert NICKNAME descriptions?
                 state.setName(newName);
             }
 

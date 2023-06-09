@@ -1197,7 +1197,7 @@ public class AbilityUtils {
         }
         else if (defined.startsWith("Non")) {
             players.addAll(game.getPlayersInTurnOrder());
-            players.removeAll((FCollectionView<Player>)getDefinedPlayers(card, defined.substring(3), sa));
+            players.removeAll(getDefinedPlayers(card, defined.substring(3), sa));
         }
         else if (defined.equals("EnchantedPlayer")) {
             final Object o = sa.getHostCard().getEntityAttachedTo();
@@ -2699,8 +2699,7 @@ public class AbilityUtils {
         }
         if (sq[0].startsWith("OppTypesInGrave")) {
             final PlayerCollection opponents = player.getOpponents();
-            CardCollection oppCards = new CardCollection();
-            oppCards.addAll(opponents.getCardsIn(ZoneType.Graveyard));
+            CardCollection oppCards = opponents.getCardsIn(ZoneType.Graveyard);
             return doXMath(getCardTypesFromList(oppCards), expr, c, ctb);
         }
 
@@ -3053,7 +3052,7 @@ public class AbilityUtils {
             newWord = "<strike>" + originalWord + "</strike> " + newWord;
         }
         // use word boundaries and keep negations
-        return text.replaceAll((isDescriptive ? "(?<!>)" : "") + "\\b(non)?" + originalWord, "$1" + newWord);
+        return text.replaceAll((isDescriptive ? "(?<!>)" : "") + "(?<!named.*)\\b(non)?" + originalWord, "$1" + newWord);
     }
 
     public static final String getSVar(final CardTraitBase ability, final String sVarName) {
@@ -3780,34 +3779,6 @@ public class AbilityUtils {
         if (sq[0].contains("InTargetedLibrary")) {
             for (Player tgtP : getDefinedPlayers(c, "TargetedPlayer", ctb)) {
                 someCards.addAll(tgtP.getCardsIn(ZoneType.Library));
-            }
-        }
-
-        //  Count$InEnchantedHand (targeted player's cards in hand)
-        if (sq[0].contains("InEnchantedHand")) {
-            GameEntity o = c.getEntityAttachedTo();
-            Player controller = null;
-            if (o instanceof Card) {
-                controller = ((Card) o).getController();
-            }
-            else {
-                controller = (Player) o;
-            }
-            if (controller != null) {
-                someCards.addAll(controller.getCardsIn(ZoneType.Hand));
-            }
-        }
-        if (sq[0].contains("InEnchantedYard")) {
-            GameEntity o = c.getEntityAttachedTo();
-            Player controller = null;
-            if (o instanceof Card) {
-                controller = ((Card) o).getController();
-            }
-            else {
-                controller = (Player) o;
-            }
-            if (controller != null) {
-                someCards.addAll(controller.getCardsIn(ZoneType.Graveyard));
             }
         }
 
