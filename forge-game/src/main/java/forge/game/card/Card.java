@@ -1504,7 +1504,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             long timestamp = game.getNextTimestamp();
             counterTypeTimestamps.put(counterType, timestamp);
             // becomes land in instead of other card types
-            addChangedCardTypes(new CardType(ImmutableList.of("Land"), false), null, false, false, true, true, false, false, false, false, timestamp, 0, updateView, false);
+            addChangedCardTypes(new CardType(ImmutableList.of("Land"), false), null, false,
+                    EnumSet.of(CardChangedType.Remove.CardTypes, CardChangedType.Remove.SubTypes),
+                    timestamp, 0, updateView, false);
 
             String abStr = "AB$ ManaReflected | Cost$ T | Valid$ Defined.Self | ColorOrType$ Color | ReflectProperty$ Is | SpellDescription$ Add one mana of any of this card's colors.";
 
@@ -3727,7 +3729,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             long ts = getGame().getNextTimestamp();
             // 702.151b Attaching an Equipment with reconfigure to another creature causes the Equipment to stop being a creature until it becomes unattached from that creature.
             // it is not a Static Ability
-            addChangedCardTypes(null, CardType.parse("Creature", true), false, false, false, false, false, false, false, false, ts, 0, true, false);
+            addChangedCardTypes(null, CardType.parse("Creature", true), false, EnumSet.noneOf(CardChangedType.Remove.class), ts, 0, true, false);
 
             GameCommand unattach = new GameCommand() {
                 private static final long serialVersionUID = 1L;
@@ -3914,7 +3916,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void addChangedCardTypesByText(final CardType addType, final long timestamp, final long staticId, final boolean updateView) {
-        changedCardTypesByText.put(timestamp, staticId, new CardChangedType(addType, null, false, true, true, true, false, false, false, false));
+        changedCardTypesByText.put(timestamp, staticId, new CardChangedType(addType, null, false,
+                EnumSet.of(CardChangedType.Remove.SuperTypes,
+                        CardChangedType.Remove.CardTypes,
+                        CardChangedType.Remove.SubTypes)));
 
         // setting card type via text, does overwrite any other word change effects?
         this.changedTextColors.addEmpty(timestamp, staticId);
@@ -3926,22 +3931,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void addChangedCardTypes(final CardType addType, final CardType removeType, final boolean addAllCreatureTypes,
-            final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
-            final boolean removeLandTypes, final boolean removeCreatureTypes, final boolean removeArtifactTypes,
-            final boolean removeEnchantmentTypes,
+            final Set<CardChangedType.Remove> remove,
             final long timestamp, final long staticId, final boolean updateView, final boolean cda) {
         (cda ? changedCardTypesCharacterDefining : changedCardTypes).put(timestamp, staticId, new CardChangedType(
-                addType, removeType, addAllCreatureTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
-                removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes));
+                addType, removeType, addAllCreatureTypes, remove));
         if (updateView) {
             updateTypesForView();
         }
     }
 
     public final void addChangedCardTypes(final Iterable<String> types, final Iterable<String> removeTypes, final boolean addAllCreatureTypes,
-            final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
-            final boolean removeLandTypes, final boolean removeCreatureTypes, final boolean removeArtifactTypes,
-            final boolean removeEnchantmentTypes,
+            final Set<CardChangedType.Remove> remove,
             final long timestamp, final long staticId, final boolean updateView, final boolean cda) {
         CardType addType = null;
         CardType removeType = null;
@@ -3953,9 +3953,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             removeType = new CardType(removeTypes, true);
         }
 
-        addChangedCardTypes(addType, removeType, addAllCreatureTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
-                removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes,
-                timestamp, staticId, updateView, cda);
+        addChangedCardTypes(addType, removeType, addAllCreatureTypes, remove, timestamp, staticId, updateView, cda);
     }
 
     public final void removeChangedCardTypes(final long timestamp, final long staticId) {
@@ -4857,7 +4855,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         }
 
-        this.changedTypeByText = new CardChangedType(new CardType(toAdd, true), new CardType(toRemove, true), false, false, false, false, false, false, false, false);
+        this.changedTypeByText = new CardChangedType(new CardType(toAdd, true), new CardType(toRemove, true), false, EnumSet.noneOf(CardChangedType.Remove.class));
 
         currentState.updateChangedText();
 
@@ -6070,7 +6068,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         bestowTimestamp = getGame().getNextTimestamp();
         addChangedCardTypes(new CardType(Collections.singletonList("Aura"), true),
                 new CardType(Collections.singletonList("Creature"), true),
-                false, false, false, false, false, false, false, true, bestowTimestamp, 0, updateView, false);
+                false, EnumSet.of(CardChangedType.Remove.EnchantmentTypes), bestowTimestamp, 0, updateView, false);
         addChangedCardKeywords(Collections.singletonList("Enchant creature"), Lists.newArrayList(),
                 false, bestowTimestamp, 0, updateView);
     }

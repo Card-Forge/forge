@@ -19,6 +19,7 @@ package forge.game.staticability;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -33,6 +34,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.GameCommand;
+import forge.card.CardChangedType;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -146,13 +148,7 @@ public final class StaticAbilityContinuous {
         boolean removeAllAbilities = false;
         boolean removeNonMana = false;
         boolean addAllCreatureTypes = false;
-        boolean removeSuperTypes = false;
-        boolean removeCardTypes = false;
-        boolean removeSubTypes = false;
-        boolean removeLandTypes = false;
-        boolean removeCreatureTypes = false;
-        boolean removeArtifactTypes = false;
-        boolean removeEnchantmentTypes = false;
+        Set<CardChangedType.Remove> remove = EnumSet.noneOf(CardChangedType.Remove.class);
 
         boolean overwriteColors = false;
 
@@ -453,25 +449,25 @@ public final class StaticAbilityContinuous {
                 addAllCreatureTypes = true;
             }
             if (params.containsKey("RemoveSuperTypes")) {
-                removeSuperTypes = true;
+                remove.add(CardChangedType.Remove.SuperTypes);
             }
             if (params.containsKey("RemoveCardTypes")) {
-                removeCardTypes = true;
+                remove.add(CardChangedType.Remove.CardTypes);
             }
             if (params.containsKey("RemoveSubTypes")) {
-                removeSubTypes = true;
+                remove.add(CardChangedType.Remove.SubTypes);
             }
             if (params.containsKey("RemoveLandTypes")) {
-                removeLandTypes = true;
+                remove.add(CardChangedType.Remove.LandTypes);
             }
             if (params.containsKey("RemoveCreatureTypes")) {
-                removeCreatureTypes = true;
+                remove.add(CardChangedType.Remove.CreatureTypes);
             }
             if (params.containsKey("RemoveArtifactTypes")) {
-                removeArtifactTypes = true;
+                remove.add(CardChangedType.Remove.ArtifactTypes);
             }
             if (params.containsKey("RemoveEnchantmentTypes")) {
-                removeEnchantmentTypes = true;
+                remove.add(CardChangedType.Remove.EnchantmentTypes);
             }
         }
 
@@ -915,9 +911,8 @@ public final class StaticAbilityContinuous {
 
             // add Types
             if (addTypes != null || removeTypes != null || addAllCreatureTypes
-                    || removeSuperTypes || removeCardTypes || removeLandTypes || removeCreatureTypes || removeArtifactTypes || removeEnchantmentTypes) {
-                affectedCard.addChangedCardTypes(addTypes, removeTypes, addAllCreatureTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
-                        removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes,
+                    || !remove.isEmpty()) {
+                affectedCard.addChangedCardTypes(addTypes, removeTypes, addAllCreatureTypes, remove,
                         hostCard.getTimestamp(), stAb.getId(), true, stAb.hasParam("CharacteristicDefining"));
             }
 

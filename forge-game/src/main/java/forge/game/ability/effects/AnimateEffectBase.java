@@ -17,11 +17,14 @@
  */
 package forge.game.ability.effects;
 
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
+import forge.card.CardChangedType;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
@@ -51,13 +54,23 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         final Game game = source.getGame();
 
         boolean addAllCreatureTypes = sa.hasParam("AddAllCreatureTypes");
-        boolean removeSuperTypes = sa.hasParam("RemoveSuperTypes");
-        boolean removeCardTypes = sa.hasParam("RemoveCardTypes");
-        boolean removeSubTypes = sa.hasParam("RemoveSubTypes");
-        boolean removeLandTypes = sa.hasParam("RemoveLandTypes");
-        boolean removeCreatureTypes = sa.hasParam("RemoveCreatureTypes");
-        boolean removeArtifactTypes = sa.hasParam("RemoveArtifactTypes");
-        boolean removeEnchantmentTypes = sa.hasParam("RemoveEnchantmentTypes");
+
+        Set<CardChangedType.Remove> remove = EnumSet.noneOf(CardChangedType.Remove.class);
+        if (sa.hasParam("RemoveSuperTypes"))
+            remove.add(CardChangedType.Remove.SuperTypes);
+        if (sa.hasParam("RemoveCardTypes"))
+            remove.add(CardChangedType.Remove.CardTypes);
+        if (sa.hasParam("RemoveSubTypes"))
+            remove.add(CardChangedType.Remove.SubTypes);
+        if (sa.hasParam("RemoveLandTypes"))
+            remove.add(CardChangedType.Remove.LandTypes);
+        if (sa.hasParam("RemoveCreatureTypes"))
+            remove.add(CardChangedType.Remove.CreatureTypes);
+        if (sa.hasParam("RemoveArtifactTypes"))
+            remove.add(CardChangedType.Remove.ArtifactTypes);
+        if (sa.hasParam("RemoveEnchantmentTypes"))
+            remove.add(CardChangedType.Remove.EnchantmentTypes);
+
         boolean removeNonManaAbilities = sa.hasParam("RemoveNonManaAbilities");
         boolean removeAll = sa.hasParam("RemoveAllAbilities");
 
@@ -65,10 +78,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             source.addRemembered(c);
         }
 
-        if (!addType.isEmpty() || !removeType.isEmpty() || addAllCreatureTypes || removeSuperTypes
-                || removeCardTypes || removeSubTypes || removeLandTypes || removeCreatureTypes || removeArtifactTypes || removeEnchantmentTypes) {
-            c.addChangedCardTypes(addType, removeType, addAllCreatureTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
-                    removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes, timestamp, 0, true, false);
+        if (!addType.isEmpty() || !removeType.isEmpty() || addAllCreatureTypes || !remove.isEmpty()) {
+            c.addChangedCardTypes(addType, removeType, addAllCreatureTypes, remove, timestamp, 0, true, false);
         }
 
         c.addChangedCardKeywords(keywords, removeKeywords, removeAll, timestamp, 0);
@@ -167,7 +178,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         }
 
         // after unanimate to add RevertCost
-        if (removeAll || removeLandTypes
+        if (removeAll || removeNonManaAbilities
                 || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
                 || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
             c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
