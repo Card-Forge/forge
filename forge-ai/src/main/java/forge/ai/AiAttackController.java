@@ -127,6 +127,8 @@ public class AiAttackController {
 
     public static List<Card> getOpponentCreatures(final Player defender) {
         List<Card> defenders = defender.getCreaturesInPlay();
+        int totalMana = ComputerUtilMana.getAvailableManaEstimate(defender, true);
+        int manaReserved = 0; // for paying the cost to transform
         Predicate<Card> canAnimate = new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
@@ -150,7 +152,11 @@ public class AiAttackController {
             for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.SetState))) {
                 Card transformedCopy = ComputerUtilCombat.canTransform(c);
                 if (transformedCopy.isCreature()) {
-                    defenders.add(transformedCopy);
+                    int saCMC = sa.getPayCosts().getTotalMana().getCMC(); // FIXME: imprecise, only works 100% for colorless mana
+                    if (totalMana - manaReserved >= saCMC) {
+                        manaReserved += saCMC;
+                        defenders.add(transformedCopy);
+                    }
                 }
             }
         }
