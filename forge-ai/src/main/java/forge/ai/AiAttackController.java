@@ -153,7 +153,9 @@ public class AiAttackController {
                         && sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
                     Card transformedCopy = CardUtil.getLKICopy(c);
                     transformedCopy.setState(CardStateName.Transformed, false);
-                    defenders.add(transformedCopy);
+                    if (transformedCopy.isCreature()) {
+                        defenders.add(transformedCopy);
+                    }
                 }
             }
         }
