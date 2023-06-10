@@ -17,28 +17,17 @@
  */
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import forge.card.CardStateName;
-import forge.game.card.*;
-import forge.game.staticability.StaticAbility;
-import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.ai.ability.AnimateAi;
 import forge.card.CardTypeView;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.ProtectEffect;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.combat.GlobalAttackRestrictions;
@@ -48,6 +37,8 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
+import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
@@ -57,6 +48,12 @@ import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 
 /**
@@ -137,9 +134,11 @@ public class AiAttackController {
             }
         };
         for (Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), canAnimate)) {
+            /* TODO: is the commented out code still necessary for anything?
             if (c.isToken() && c.getCopiedPermanent() == null && !c.canTransform(null)) {
                 continue;
             }
+            */
             for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.Animate))) {
                 if (ComputerUtilCost.canPayCost(sa, defender, false)
                         && sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
@@ -149,13 +148,9 @@ public class AiAttackController {
             }
             // Transform (e.g. Incubator tokens)
             for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.SetState))) {
-                if ("Transform".equals(sa.getParam("Mode")) && ComputerUtilCost.canPayCost(sa, defender, false)
-                        && sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
-                    Card transformedCopy = CardUtil.getLKICopy(c);
-                    transformedCopy.setState(CardStateName.Transformed, false);
-                    if (transformedCopy.isCreature()) {
+                Card transformedCopy = ComputerUtilCombat.canTransform(c);
+                if (transformedCopy.isCreature()) {
                         defenders.add(transformedCopy);
-                    }
                 }
             }
         }
