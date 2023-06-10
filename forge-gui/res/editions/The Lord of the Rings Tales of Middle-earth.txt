@@ -7,20 +7,30 @@ ScryfallCode=LTR
 
 [cards]
 0 M The One Ring @Veli Nyström
+1 C Banish from Edoras @Veli Nyström
 2 R The Battle of Bywater @Tomas Duchek
 3 U Bill the Pony @Christina Kraus
 4 R Boromir, Warden of the Tower @Yigit Koroglu
+5 M Dawn of a New Age @Anato Finnstark
 6 C Dunedain Blade @Jarel Threat
 7 C Eagles of the North @Axel Sauerwald
 8 C Eastfarthing Farmer @Iga Oliwiak
 9 C East-Mark Cavalier @Viko Menezes
 10 U Eowyn, Lady of Rohan @Sean Vo
+11 C Errand-Rider of Gondor @YW Tang
+12 C Escape from Orthanc @Anthony Devine
+13 C Esquire of the King @Tyukina Tatiana
+14 U Faramir, Field Commander @Sidharth Chaturvedi
 15 R Flowering of the White Tree @Erikas Perl
+16 C Fog on the Barrow-Downs @Marco Gorlei
 17 R Forge Anew @Craig J Spearing
 18 R Frodo, Sauron's Bane @Dmitry Burmak
 19 M Gandalf the White @Magali Villeneuve
+20 C Hobbit's Sting @Viko Menezes
 21 U Landroval, Horizon Witness @John Tedrick
 22 U Lost to Legend @Kasia 'Kafis' Zielińska
+23 C Nimble Hobbit @JB Casacop
+24 C Now for Wrath, Now for Ruin! @Valera Lutfullina
 25 C Protector of Gondor @Ilker Yildiz
 26 U Reprieve @Justyna Dura
 27 U Rosie Cotton of South Lane @Claudiu-Antoniu Magherusan
@@ -28,6 +38,8 @@ ScryfallCode=LTR
 29 C Second Breakfast @Christina Kraus
 30 U Shire Shirriff @Craig J Spearing
 31 C Slip On the Ring @Iga Oliwiak
+32 C Soldier of the Grey Host @Chris Cold
+33 C Stalwarts of Osgiliath @Lixin Yin
 34 U Tale of Tinuviel @Anthony Devine
 35 C Took Reaper @Tatiana Veryayskaya
 36 R War of the Last Alliance @Alexander Forssberg
@@ -35,30 +47,46 @@ ScryfallCode=LTR
 38 U You Cannot Pass! @Leonardo Borazio
 39 C Arwen's Gift @Wangjie Li
 40 U The Bath Song @JB Casacop
+41 C Bewitching Leechcraft @Wei Guan
 42 U Bill Ferny, Bree Swindler @Hristo D. Chukov
 43 C Birthday Escape @David Álvarez
 44 R Borne Upon a Wind @Alexander Mokhov
+45 C Captain of Umbar @Wei Guan
 46 U Council's Deliberation @
+47 C Deceive the Messenger @Tomas Duchek
+48 C Dreadful as the Storm @Daniel Correia
 49 U Elrond, Lord of Rivendell @Ryan Yee
 50 U Gandalf, Friend of the Shire @Dmitry Burmak
+51 C Glorious Gale @Ekaterina Burmak
 52 R Goldberry, River-Daughter @Marie Magny
+53 C Grey Havens Navigator @Henry Peters
+54 C Hithlain Knots @Viko Menezes
 55 U Horses of the Bruinen @Kasia 'Kafis' Zielińska
 56 U Ioreth of the Healing House @Wei Guan
+57 C Isolation at Orthanc @Erikas Perl
+58 C Ithilien Kingfisher @Alexander Ostrowski
 59 C Knights of Dol Amroth @Eelis Kyttanen
+60 C Lorien Revealed @Randy Gallegos
 61 R Lost Isle Calling @Wangjie Li
 62 U Meneldor, Swift Savior @Axel Sauerwald
+63 C Nimrodel Watcher @Justyna Dura
+64 C Pelargir Survivor @Craig J Spearing
 65 R Press the Enemy @Valera Lutfullina
 66 R Rangers of Ithilien @Torgeir Fjereide
 67 U Saruman the White @Matt Stewart
 68 U Saruman's Trickery @Yongjae Choi
 69 R Scroll of Isildur @Audrey Benjaminsen
+70 C Soothing of Smeagol @Lixin Yin
 71 U Stern Scolding @Valera Lutfullina
 72 M Storm of Saruman @Lorenzo Lanfranconi
 73 C Surrounded by Orcs @Anna Pavleeva
 74 C Treason of Isengard @Pavel Kolomeyets
 75 M The Watcher in the Water @Chris Cold
+76 C Willow-Wind @Ignis Bruno
 77 U Bitter Downfall @John Di Giovanni
+78 C The Black Breath @Chris Cold
 79 R Call of the Ring @Anato Finnstark
+80 C Cirith Ungol Patrol @
 81 C Claim the Precious @Artur Treffner
 82 C Dunland Crebain @Alexander Ostrowski
 83 C Easterling Vanguard @Javier Charro
@@ -68,10 +96,13 @@ ScryfallCode=LTR
 87 U Gothmog, Morgul Lieutenant @Ilker Yildiz
 88 U Grima Wormtongue @Alex Brock
 89 U Grond, the Gatebreaker @Ramazan Kazaliev
+90 C Haunt of the Dead Marshes @Miklós Ligeti
 91 R Isildur's Fateful Strike @John Di Giovanni
+92 C Lash of the Balrog @Antonio José Manzanedo
 93 R Lobelia Sackville-Baggins @Hristo D. Chukov
 94 U March from the Black Gate @Victor Harmatiuk
 95 C Mirkwood Bats @John Tedrick
+96 C Mordor Muster @Pavel Kolomeyets
 97 C Mordor Trebuchet @Alexander Forssberg
 98 C Morgul-Knife Wound @Axel Sauerwald
 99 C Nasty End @Valera Lutfullina
@@ -79,6 +110,8 @@ ScryfallCode=LTR
 101 U Oath of the Grey Host @Miklós Ligeti
 102 R One Ring to Rule Them All @L J Koh
 103 R Orcish Bowmasters @Maxim Kostin
+104 C Orcish Medicine @Irvin Rodriguez
+105 C Sam's Desperate Rescue @Lixin Yin
 106 R Sauron, the Necromancer @Yongjae Choi
 107 M Shadow of the Enemy @Shahab Alizadeh
 108 C Shelob's Ambush @Simon Dominic
@@ -95,7 +128,8 @@ ScryfallCode=LTR
 119 R Display of Power @Shahab Alizadeh
 120 R Eomer, Marshal of Rohan @Jesper Ejsing
 121 U Eomer of the Riddermark @John Di Giovanni
-123 U Erkenbrand, Lord of the Westfold @Alexander Mokhov
+122 C Erebor Flamesmith @L J Koh
+123 U Erkenbrand, Lord of Westfold @Alexander Mokhov
 124 R Fall of Cair Andros @Shahab Alizadeh
 125 U Fear, Fire, Foes! @Hristo D. Chukov
 126 U Fiery Inscription @John Di Giovanni
@@ -107,12 +141,19 @@ ScryfallCode=LTR
 132 R Gloin, Dwarf Emissary @Tomas Duchek
 133 U Goblin Fireleaper @Javier Charro
 134 U Grishnakh, Brash Instigator @Victor Harmatiuk
+135 C Haradrim Spearmaster @Maxim Kostin
 136 M Hew the Entwood @Manuel Castañón
+137 C Improvised Club @Pablo Mendoza
 138 R Moria Marauder @Andrea Piparo
 139 C Oliphaunt @John Di Giovanni
 140 C Olog-hai Crusher @Andrea Piparo
+141 C Quarrel's End @Javier Charro
 142 C Rally at the Hornburg @Ekaterina Burmak
+143 U Ranger's Firebrand @Pavel Kolomeyets
+144 C Relentless Rohirrim @John Di Giovanni
 145 U Rising of the Day @Wei Guan
+146 C Rohirrim Lancer @Anastasia Balakchina
+147 C Rush the Room @Warren Mahy
 148 C Smite the Deathless @Alexander Mokhov
 149 M Spiteful Banditry @Manuel Castañón
 150 C Swarming of Moria @Pavel Kolomeyets
@@ -120,23 +161,31 @@ ScryfallCode=LTR
 152 C Warbeast of Gorgoroth @Oleg Shekhovtsov
 153 C Bag End Porter @Daniel Correia
 154 C Bombadil's Song @Marie Magny
+155 C Brandywine Farmer @Yuriy Chemezov
 156 U Celeborn the Wise @Wangjie Li
+157 C Chance-Met Elves @Irvin Rodriguez
 158 R Delighted Halfling @Inka Schulz
 159 U Dunedain Rangers @Eric Wilkerson
 160 R Elven Chorus @Anato Finnstark
+161 C Elven Farsight @Irina Nordsol
+162 C Enraged Huorn @David Álvarez
 163 U Entish Restoration @Calder Moore
 164 C Ent's Fury @Hristo D. Chukov
 165 R Fall of Gil-galad @Craig Elliott
 166 R Fangorn, Tree Shepherd @Jesper Ejsing
 167 C Galadhrim Bow @Daniel Correia
+168 C Galadhrim Guide @Inka Schulz
 169 C Generous Ent @Simon Dominic
 170 U Gift of Strands @Ignis Bruno
 171 U Glorfindel, Dauntless Rescuer @Viko Menezes
 172 M Last March of the Ents @John Tedrick
 173 R Legolas, Master Archer @Campbell White
 174 U Long List of the Ents @Logan Feliciano
+175 C Lothlorien Lookout @Daniel Correia
 176 C Many Partings @Dmitry Burmak
 177 U Meriadoc Brandybuck @Marie Magny
+178 C Mirkwood Spider @Alexander Ostrowski
+179 C Mirrormere Guardian @Anton Solovianchyk
 180 C Mushroom Watchdogs @Alexander Ostrowski
 181 U Peregrin Took @Campbell White
 182 C Pippin's Bravery @John Tedrick
@@ -145,11 +194,14 @@ ScryfallCode=LTR
 185 C Revive the Shire @Craig Elliott
 186 R The Ring Goes South @Wangjie Li
 187 U Shortcut to Mushrooms @Jonas De Ro
+188 C Shower of Arrows @Manuel Castañón
 189 U Stew the Coneys @Eelis Kyttanen
 190 C Wose Pathfinder @Iga Oliwiak
+191 R Aragorn, Company Leader @Anna Steinbauer
 192 M Aragorn, the Uniter @Javier Charro
 193 M Arwen, Mortal Queen @Miranda Meeks
-194 U Arwen Undomiel @Christine Choi
+194 U Arwen Undomiel @Yongjae Choi
+195 R The Balrog, Durin's Bane @Kekai Kotaki
 196 U Bilbo, Retired Burglar @Anna Pavleeva
 197 U Butterbur, Bree Innkeeper @Ryan Yee
 198 U Denethor, Ruling Steward @Campbell White
@@ -157,11 +209,13 @@ ScryfallCode=LTR
 200 R Elrond, Master of Healing @Wangjie Li
 201 R Eowyn, Fearless Knight @Magali Villeneuve
 202 R Faramir, Prince of Ithilien @Tomas Duchek
+203 R Flame of Anor @Yigit Koroglu
 204 U Friendly Rivalry @Marc Simonetti
 205 U Frodo Baggins @Ekaterina Burmak
 206 R Galadriel of Lothlorien @Magali Villeneuve
 207 R Gandalf the Grey @Aaron Miller
-209 R Gimli, Mournful Avenger @Bartlomiej Gawel
+208 U Gandalf's Sanction @Tatiana Veryayskaya
+209 R Gimli, Mournful Avenger @Bartłomiej Gaweł
 210 U Gwaihir the Windlord @Axel Sauerwald
 211 R King of the Oathbreakers @Tatiana Veryayskaya
 212 U Legolas, Counter of Kills @Yongjae Choi
@@ -170,13 +224,14 @@ ScryfallCode=LTR
 215 R Merry, Esquire of Rohan @Tomas Duchek
 216 U The Mouth of Sauron @Alex Brock
 217 U Old Man Willow @Miklós Ligeti
-218 R Pippin, Guard of the Citadel @Bartlomiej Gawel
+218 R Pippin, Guard of the Citadel @Bartłomiej Gaweł
 219 U Prince Imrahil the Fair @Justyna Dura
 220 U Ringsight @Campbell White
 221 U Rise of the Witch-king @
 222 R Samwise Gamgee @Ekaterina Burmak
 223 M Saruman of Many Colors @Alexander Mokhov
 224 M Sauron, the Dark Lord @Kieran Yanner
+225 R Sauron's Ransom @Alex Brock
 226 U Shadow Summoning @Campbell White
 227 U Shadowfax, Lord of Horses @Valera Lutfullina
 228 R Shagrat, Loot Bearer @Tatiana Veryayskaya
@@ -186,19 +241,22 @@ ScryfallCode=LTR
 232 U Strider, Ranger of the North @Jarel Threat
 233 U Theoden, King of Rohan @Kieran Yanner
 234 M Tom Bombadil @Dmitry Burmak
-235 U Ugluk of the White Hand @Bartlomiej Gawel
+235 U Ugluk of the White Hand @Bartłomiej Gaweł
 236 M Anduril, Flame of the West @Irvin Rodriguez
 237 U Barrow-Blade @Alexander Mokhov
 238 U Ent-Draught Basin @Torgeir Fjereide
 239 M Glamdring @Andrea Piparo
 240 R Horn of Gondor @Yigit Koroglu
 241 R Horn of the Mark @Anastasia Balakchina
+242 C Inherited Envelope @Ramazan Kazaliev
 243 C Lembas @Viko Menezes
 244 U Mirror of Galadriel @Kasia 'Kafis' Zielińska
 245 R Mithril Coat @Igor Krstic
 246 M The One Ring @Veli Nyström
 247 M Palantir of Orthanc @Tatiana Veryayskaya
 248 R Phial of Galadriel @Andrea Piparo
+249 C Shire Scarecrow @Alexander Mokhov
+250 R Sting, the Glinting Dagger @Nino Is
 251 U Stone of Erech @Jonas De Ro
 252 C Wizard's Rockets @Yuriy Chemezov
 253 R Barad-dur @Sean Vo
@@ -207,6 +265,7 @@ ScryfallCode=LTR
 256 R Minas Tirith @
 257 R Mines of Moria @Arthur Yuan
 258 M Mount Doom @Jonas De Ro
+259 R Rivendell @Jonas De Ro
 260 R The Shire @Jonas De Ro
 261 C Shire Terrace @Jeremy Paillotin
 262 L Plains @Tomáš Honz
@@ -236,12 +295,20 @@ ScryfallCode=LTR
 286 R Elanor Gardner @Torgeir Fjereide
 287 M Aragorn and Arwen, Wed @Magali Villeneuve
 288 M Sauron, the Lidless Eye @Yigit Koroglu
+289 R Frodo, Determined Hero @Magali Villeneuve
+290 R Gandalf, White Rider @Ekaterina Burmak
 291 C Knight of the Keep @Nicholas Gregory
+292 R Gollum, Scheming Guide @Dmitry Burmak
+293 R Witch-king, Bringer of Ruin @Denman Rooke
+294 R Fires of Mount Doom @Shahab Alizadeh
 295 C Goblin Assailant @Anton Solovianchyk
 296 R Galadriel, Gift-Giver @Alexander Mokhov
+297 R The Balrog, Flame of Udun @John Tedrick
+298 R Bilbo's Ring @Randy Gallegos
 299 M Gandalf the White @Leonardo Borazio
 300 M Saruman of Many Colors @
 302 R Boromir, Warden of the Tower @Anato Finnstark
+303 U Faramir, Field Commander @Dominik Mayer
 304 R Frodo, Sauron's Bane @Andreas Rocha
 305 M Gandalf the White @Dominik Mayer
 306 U Samwise the Stouthearted @Marko Manev
@@ -254,9 +321,12 @@ ScryfallCode=LTR
 313 R Legolas, Master Archer @Dominik Mayer
 314 U Meriadoc Brandybuck @Marko Manev
 315 U Peregrin Took @Anato Finnstark
+316 R Aragorn, Company Leader @Andreas Rocha
 317 M Aragorn, the Uniter @Dominik Mayer
+318 R Elrond, Master of Healing @Andreas Rocha
 319 R Faramir, Prince of Ithilien
 320 U Frodo Baggins @Dominik Mayer
+321 R Galadriel of Lothlorien @Anato Finnstark
 322 R Gandalf the Grey @Anato Finnstark
 323 R Gimli, Mournful Avenger @Marko Manev
 324 U Legolas, Counter of Kills @Anato Finnstark
@@ -277,31 +347,47 @@ ScryfallCode=LTR
 339 U Nazgul @Lorenzo Mastroianni
 340 R Barad-dur @Jonas De Ro
 341 R Minas Tirith @Sean Vo
+342 R Mines of Moria @Lucas Terryn
 343 M Mount Doom @Logan Feliciano
 344 R Rivendell @Josu Solano
 345 R The Shire @Calder Moore
 346 R The Battle of Bywater @Tomas Duchek
+347 M Dawn of a New Age @Anato Finnstark
 348 R Flowering of the White Tree @Erikas Perl
+349 R Forge Anew @Craig J Spearing
 350 R Borne Upon a Wind @Alexander Mokhov
 351 R Goldberry, River-Daughter @Marie Magny
+352 R Press the Enemy @Valera Lutfullina
+353 R Rangers of Ithilien @Torgeir Fjereide
+354 M The Watcher in the Water @Chris Cold
 355 R Call of the Ring @Anato Finnstark
+356 R Isildur's Fateful Strike @John Di Giovanni
 357 R Lobelia Sackville-Baggins @Hristo D. Chukov
 358 R Display of Power @Shahab Alizadeh
+359 R Fall of Cair Andros @Shahab Alizadeh
 360 R Gloin, Dwarf Emissary @Tomas Duchek
 361 M Hew the Entwood @Manuel Castañón
 362 R Moria Marauder @Andrea Piparo
 363 R Delighted Halfling @Inka Schulz
+364 R Elven Chorus @Anato Finnstark
 365 M Radagast the Brown @Alexander Mokhov
 366 R The Ring Goes South @Wangjie Li
 367 M Arwen, Mortal Queen @Miranda Meeks
+368 R Doors of Durin @Marc Simonetti
+369 R King of the Oathbreakers @Tatiana Veryayskaya
 370 R Lotho, Corrupt Shirriff @Ilker Yildiz
+371 R Sauron's Ransom @Alex Brock
 372 R Shagrat, Loot Bearer @Tatiana Veryayskaya
 373 R Sharkey, Tyrant of the Shire @Matt Stewart
+374 R Shelob, Child of Ungoliant @Lorenzo Mastroianni
 375 M Anduril, Flame of the West @Irvin Rodriguez
+376 M Glamdring @Andrea Piparo
 377 R Horn of Gondor @Yigit Koroglu
 378 R Horn of the Mark @Anastasia Balakchina
+379 R Mithril Coat @Igor Krstic
 380 M The One Ring @Veli Nyström
 381 M Palantir of Orthanc @Tatiana Veryayskaya
+382 R Phial of Galadriel @Andrea Piparo
 383 R Saradoc, Master of Buckland @Sean Vo
 384 R Elvish Mariner @Axel Sauerwald
 385 R Ringwraiths @Warren Mahy
@@ -312,9 +398,11 @@ ScryfallCode=LTR
 390 R Gollum, Scheming Guide @Dmitry Burmak
 391 R Witch-king, Bringer of Ruin @Denman Rooke
 392 R Fires of Mount Doom @Shahab Alizadeh
+393 R Galadriel, Gift-Giver @Alexander Mokhov
 394 M Aragorn and Arwen, Wed @Magali Villeneuve
 395 R The Balrog, Flame of Udun @John Tedrick
 396 M Sauron, the Lidless Eye @Yigit Koroglu
+397 R Bilbo's Ring @Randy Gallegos
 398 R Trailblazer's Boots @Alexander Gering
 399 R Lobelia Sackville-Baggins @Livia Prima
 400 C Wizard's Rockets @Livia Prima
@@ -322,7 +410,12 @@ ScryfallCode=LTR
 402 R Delighted Halfling @Livia Prima
 403 U Bilbo, Retired Burglar @Livia Prima
 404 U Frodo Baggins @Livia Prima
+405 R The Balrog, Durin's Bane @Colin Boyer
+406 R Flame of Anor @Colin Boyer
 407 R Boromir, Warden of the Tower @Colin Boyer
+408 C Lash of the Balrog @Colin Boyer
+409 R Sting, the Glinting Dagger @Colin Boyer
+410 R Aragorn, Company Leader @Colin Boyer
 411 C Dunland Crebain @David Rapoza
 412 M Saruman of Many Colors @David Rapoza
 413 M Storm of Saruman @David Rapoza
@@ -336,11 +429,14 @@ ScryfallCode=LTR
 421 C Mirkwood Bats @Tyler Jacobson
 422 U Voracious Fell Beast @Tyler Jacobson
 423 M Witch-king of Angmar @Tyler Jacobson
+424 M Shadow of the Enemy @Tyler Jacobson
 425 R Barad-dur @Tyler Jacobson
 426 C Oliphaunt @Tyler Jacobson
 427 U Rising of the Day @Tyler Jacobson
 428 R Eomer, Marshal of Rohan @Tyler Jacobson
 429 U Gothmog, Morgul Lieutenant @Tyler Jacobson
+430 R Eowyn, Fearless Knight @Tyler Jacobson
+431 U Prince Imrahil the Fair @Tyler Jacobson
 432 C Knights of Dol Amroth @Tyler Jacobson
 433 R Orcish Bowmasters @Tyler Jacobson
 434 M Aragorn, the Uniter @Tyler Jacobson
