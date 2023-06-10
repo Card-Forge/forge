@@ -412,3 +412,67 @@ Zariel
 Undercity
 [BattleTypes]
 Siege
+[PlanarTypes]
+Alara
+Amonkhet
+Antausia
+Arcavios
+Arkhos
+Azgol
+Belenon
+Bolas's Meditation Realm
+Capenna
+Cridhe
+Dominaria
+Echoir
+Eldraine
+Equilor
+Ergamon
+Fabacin
+Fiora
+Gargantikar
+Gobakhan
+Ikoria
+Innistrad
+Iquatana
+Ir
+Ixalan
+Kaladesh
+Kaldheim
+Kamigawa
+Karsus
+Kephalai
+Kinshala
+Kolbahan
+Kylem
+Kyneth
+Lorwyn
+Luvion
+Mercadia
+Mirrodin
+Moag
+Mongseng
+Muraganda
+New Phyrexia
+Phyrexia
+Pyrulea
+Rabiah
+Rath
+Ravnica
+Regatha
+Segovia
+Serra's Realm
+Shadowmoor
+Shandalar
+Shenmeng
+Tarkir
+The Abyss
+The Library
+Theros
+Ulgrotha
+Valla
+Vryn
+Wildfire
+Xerex
+Zendikar
+Zhalfir

@@ -31,8 +31,8 @@ public class PointOfInterestMapRenderer extends OrthogonalTiledMapRendererBleedi
         endRender();
     }
 
-    public void loadMap(TiledMap map, String sourceMap) {
-        stage.loadMap(map, sourceMap);
+    public void loadMap(TiledMap map, String sourceMap, String targetMap, int spawnPoint) {
+        stage.loadMap(map, sourceMap, targetMap, spawnPoint);
 
         super.setMap(map);
     }

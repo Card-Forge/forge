@@ -31,6 +31,7 @@ public class ShopScene extends ForgeScene {
     @Override
     public void enter() {
         GameHUD.getInstance().getTouchpad().setVisible(false);
+        screen = null;
         getScreen();
         screen.refresh();
         super.enter();
@@ -38,7 +39,7 @@ public class ShopScene extends ForgeScene {
     } 
     @Override
     public FScreen getScreen() {
-        return screen==null?screen = new AdventureDeckEditor(true):screen;
+        return screen==null?screen = new AdventureDeckEditor(true, null):screen;
     }
 
 }

@@ -179,6 +179,9 @@ public class AdventureQuestData implements Serializable {
         stage.initialize();
 
         switch  (stage.objective){
+            case Arena:
+                stage.setTargetPOI(poiTokens);
+                break;
             case Clear:
                 stage.setTargetPOI(poiTokens);
                 break;
@@ -402,6 +405,17 @@ public class AdventureQuestData implements Serializable {
             if(failed)
                 break;
             stage.updateArenaComplete(winner);
+            failed = failed || stage.getStatus() == AdventureQuestController.QuestStatus.Failed;
+        }
+        if (!failed)
+            updateStatus();
+    }
+
+    public void updateEventComplete(AdventureEventData completedEvent) {
+        for (AdventureQuestStage stage: stages) {
+            if(failed)
+                break;
+            stage.updateEventComplete(completedEvent);
             failed = failed || stage.getStatus() == AdventureQuestController.QuestStatus.Failed;
         }
         if (!failed)

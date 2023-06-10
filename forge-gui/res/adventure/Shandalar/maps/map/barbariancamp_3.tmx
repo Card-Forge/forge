@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="60">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="60">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="30" height="17">
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17" locked="1">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFpAJpHlR6ONsbxQuxr56bvvbuBNq1C4h38yDYo2AUUAJkhmEaGs0XtAG7eBAYmzixYoM1fgDHIQ5j
+   eJxjYBgFpAJpHlR6ONsbxQuxr56bvvbuBNq1C4h38yDYo2AUUAJkhmEaGqn5Yg/Q33t5CIuRC3bxIDA2cWLFBmv8AACMERGF
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBg8YDvbwOpHB7I8qHxpHuzqqAG0GVH5OoyotBmQjoHK/aadMzBANBDv4YewY/CqpD74CaV/0dnecChtxohXGVXBHyh9F4g7qGDeLjLTKrn6kEE05UZQBTig8WHpaTGUpnd6pgX4zI5gD5Zw/4PGdxgAN1CjjBxs9RE1AQDYIhNo
+   eJxjYBg8YDvbwOpHB7I8qHxpHuzqqAG0GVH5OoyotBmQjoHK/aadMzBANBCv0ISwY/CqpD74CaV/0dnecChtxohXGVXBHyh9F4g7qGDeLjLTKrn6kEE05UZQBTig8WHpaTGUpnd6pgX4zI5gD5Zw/4PGdxgAN1CjjBxs9RE1AQD7ABNu
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

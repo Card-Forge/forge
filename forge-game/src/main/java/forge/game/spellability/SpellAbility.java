@@ -1825,6 +1825,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         targetChosen.add(card);
         setStackDescription(getHostCard().getName() + " - targeting " + card);
     }
+
     public void setPlayEffectCard(final Card card) {
         playEffectCard = card;
     }

@@ -9,4 +9,5 @@ SVar:DBDelayTrig:DB$ DelayedTrigger | TriggerZones$ Graveyard | Mode$ Phase | Ph
 SVar:DBChange:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Graveyard | Destination$ Battlefield | GainControl$ DelayTriggerRemembered
 AI:RemoveDeck:All
 DeckHas:Ability$Discard|Sacrifice
+SVar:DonateMe:3
 Oracle:At the beginning of your end step, sacrifice each other creature you control.\nDiscard two cards, Sacrifice Plague Reaver: Choose target opponent. Return Plague Reaver to the battlefield under that player's control at the beginning of their next upkeep.

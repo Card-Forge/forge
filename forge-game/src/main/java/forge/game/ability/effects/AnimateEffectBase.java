@@ -109,6 +109,10 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         for (final String s : abilities) {
             SpellAbility sSA = AbilityFactory.getAbility(c, s, sa);
             addedAbilities.add(sSA);
+
+            if (sa.hasParam("TransferActivator")) {
+                sSA.getRestrictions().setActivator("Player.PlayerUID_" + sa.getActivatingPlayer().getId());
+            }
         }
 
         // Grant triggers

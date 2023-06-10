@@ -38,6 +38,7 @@ import static forge.lda.lda.inference.InferenceMethod.CGS;
  */
 public final class LDAModelGenetrator {
 
+    public static final String SUPPORTED_LDA_FORMATS = "Historic|Modern|Pioneer|Standard|Legacy|Vintage|Pauper";
     public static Map<String, Map<String,List<List<Pair<String, Double>>>>> ldaPools = new HashMap<>();
     public static Map<String, List<Archetype>> ldaArchetypes = new HashMap<>();
 
@@ -60,6 +61,7 @@ public final class LDAModelGenetrator {
         formatStrings.add(FModel.getFormats().getPioneer().getName());
         formatStrings.add(FModel.getFormats().getHistoric().getName());
         formatStrings.add(FModel.getFormats().getModern().getName());
+        formatStrings.add(FModel.getFormats().getPauper().getName());
         formatStrings.add("Legacy");
         formatStrings.add("Vintage");
         formatStrings.add(DeckFormat.Commander.toString());
@@ -85,6 +87,8 @@ public final class LDAModelGenetrator {
                             lda = initializeFormat(FModel.getFormats().getStandard());
                         } else if (format.equals(FModel.getFormats().getModern().getName())) {
                             lda = initializeFormat(FModel.getFormats().getModern());
+                        } else if (format.equals(FModel.getFormats().getPauper().getName())) {
+                            lda = initializeFormat(FModel.getFormats().getPauper());
                         } else if (format != DeckFormat.Commander.toString()) {
                             lda = initializeFormat(FModel.getFormats().get(format));
                         }
@@ -97,6 +101,8 @@ public final class LDAModelGenetrator {
                     formatMap = loadFormat(FModel.getFormats().getStandard(), lda);
                 } else if (format.equals(FModel.getFormats().getModern().getName())) {
                     formatMap = loadFormat(FModel.getFormats().getModern(), lda);
+                } else if (format.equals(FModel.getFormats().getPauper().getName())) {
+                    formatMap = loadFormat(FModel.getFormats().getPauper(), lda);
                 } else if (format != DeckFormat.Commander.toString()) {
                     formatMap = loadFormat(FModel.getFormats().get(format), lda);;
                 }
@@ -162,7 +168,6 @@ public final class LDAModelGenetrator {
 
     public static List<Archetype> initializeFormat(GameFormat format) throws Exception{
         Dataset dataset = new Dataset(format);
-
         //estimate number of topics to attempt to find using power law
         final int numTopics = Float.valueOf(347f*dataset.getNumDocs()/(2892f + dataset.getNumDocs())).intValue();
         System.out.println("Num Topics = " + numTopics);
@@ -218,8 +223,8 @@ public final class LDAModelGenetrator {
             }
             LinkedHashMap<String, Integer> wordCounts = new LinkedHashMap<>();
             for( Deck deck: decks){
-                String name = deck.getName().replaceAll(".* Version - ","").replaceAll(" \\((Historic|Modern|Pioneer|Standard|Legacy|Vintage), #[0-9]+\\)","");
-                name = name.replaceAll("\\(Historic|Modern|Pioneer|Standard|Legacy|Vintage|Fuck|Shit|Cunt\\)","");
+                String name = deck.getName().replaceAll(".* Version - ","").replaceAll(" \\((" + SUPPORTED_LDA_FORMATS + "), #[0-9]+\\)","");
+                name = name.replaceAll("\\(" + SUPPORTED_LDA_FORMATS + "|Fuck|Shit|Cunt|Ass|Arse|Dick|Pussy\\)","");
                 String[] tokens = name.split(" ");
                 for(String rawtoken: tokens){
                     String token = rawtoken.toLowerCase();
@@ -251,7 +256,7 @@ public final class LDAModelGenetrator {
             System.out.println("============ " + deckName);
             System.out.println(decks.toString());
 
-            unfilteredTopics.add(new Archetype(topRankVocabs,deckName,decks.size()));
+            unfilteredTopics.add(new Archetype(topRankVocabs, deckName, decks.size()));
         }
         Comparator<Archetype> archetypeComparator = new Comparator<Archetype>() {
             @Override
@@ -371,7 +376,7 @@ public final class LDAModelGenetrator {
                     int old = matrix[legendIntegerMap.get(legend.getName())][cardIntegerMap.get(pairCard.getName())];
                     matrix[legendIntegerMap.get(legend.getName())][cardIntegerMap.get(pairCard.getName())] = old + 1;
                 }catch (NullPointerException ne){
-                    //Todo: Not sure what was failing here
+                    //TODO: Not sure what was failing here
                     ne.printStackTrace();
                 }
             }

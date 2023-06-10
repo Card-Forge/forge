@@ -11,16 +11,26 @@ public class AdventureWinLose extends ControlWinLose {
      */
     public AdventureWinLose(ViewWinLose v, GameView game) {
         super(v, game);
-        v.getBtnContinue().setVisible(false);
+
+        if (lastGame.isMatchOver()) {
+            v.getBtnQuit().setText(Forge.getLocalizer().getMessage("lblBackToAdventure"));
+            //v.getBtnContinue().setVisible(false);
+        }
+        else{
+            v.getBtnContinue().setVisible(true);
+            v.getBtnContinue().setEnabled(true);
+            v.getBtnContinue().setText(Forge.getLocalizer().getMessage("btnNextGame"));
+            v.getBtnQuit().setText(Forge.getLocalizer().getMessageorUseDefault("lblQuitAdventureEventMatch", "Quit Match (will count as a loss)"));
+        }
         v.getBtnRestart().setVisible(false);
-        v.getLabelShowBattlefield().setVisible(false);
-        v.getBtnQuit().setText(Forge.getLocalizer().getMessage("lblBackToAdventure"));
+        v.getBtnRestart().setEnabled(false);
+        //v.getBtnQuit().setText(Forge.getLocalizer().getMessage("lblBackToAdventure"));
         Forge.setCursor(null, "0");
     }
 
     @Override
     public void actionOnContinue() {
-        //Do Nothing
+        super.actionOnContinue();
     }
 
     @Override
@@ -31,6 +41,7 @@ public class AdventureWinLose extends ControlWinLose {
     @Override
     public void actionOnQuit() {
         getView().hide();
+        DuelScene.instance().GameEnd();
         DuelScene.instance().exitDuelScene();
     }
 

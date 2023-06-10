@@ -9,7 +9,7 @@ OUT_DECKFOLDER = "./ForgeDecks"
 
 import argparse, os, re
 
-print("Agetian's MtgDecks.net DEC to MTG Forge Deck Converter v4.0\n")
+print("Agetian's MtgDecks.net DEC to MTG Forge Deck Converter v4.1\n")
 
 parser = argparse.ArgumentParser(description="Convert MtgDecks.net DEC to Forge DCK.")
 
@@ -50,27 +50,27 @@ for root, dirs, files in os.walk(CARDSFOLDER):
             for line in cardname_lines:
                 if line.strip().lower().startswith("name:"):
                     if line.count(':') == 1:
-                        cardname = line.split(':')[1].strip()
+                        cardname = line.split(':')[1].strip().lower()
                     break
             if cardname == "":
                 cardname_literal = cardtext.replace('\r','').split('\n')[0].split(':')
-                cardname = ":".join(cardname_literal[1:]).strip()
+                cardname = ":".join(cardname_literal[1:]).strip().lower()
             if (cardtext_lower.find("alternatemode:split") != -1) or (cardtext_lower.find("alternatemode: split") != -1):
                 # split card, special handling needed
                 cardsplittext = cardtext.replace('\r','').split('\n')
                 cardnames = []
                 for line in cardsplittext:
                     if line.lower().find("name:") != -1:
-                        cardnames.extend([line.split('\n')[0].split(':')[1]])
-                cardname = " // ".join(cardnames)
+                        cardnames.extend([line.split('\n')[0].split(':')[1].lower()])
+                cardname = " // ".join(cardnames).lower()
             if (cardtext_lower.find("alternatemode:modal") != -1) or (cardtext_lower.find("alternatemode: modal") != -1):
                 # ZNR modal card, special handling needed
                 cardsplittext = cardtext.replace('\r','').split('\n')
                 cardnames = []
                 for line in cardsplittext:
                     if line.lower().find("name:") != -1:
-                        cardnames.extend([line.split('\n')[0].split(':')[1]])
-                cardname = cardnames[0].strip()
+                        cardnames.extend([line.split('\n')[0].split(':')[1].lower()])
+                cardname = cardnames[0].strip().lower()
             if cardtext.lower().find("remaideck") != -1:
                 cardlist[cardname] = 0
             else:
@@ -174,7 +174,7 @@ for root, dirs, files in os.walk(DECKFOLDER):
                     if cardName == "":
                         continue
                     altModalKey = cardName.split(" // ")[0].strip()
-                    if not cardName in cardlist.keys() and not cardName.replace("Aether", "AEther") in cardlist.keys() and not cardName.replace("AEther", "Aether") in cardlist.keys() and not altModalKey in cardlist.keys():
+                    if not cardName.lower() in cardlist.keys() and not cardName.replace("Aether", "AEther").lower() in cardlist.keys() and not cardName.replace("AEther", "Aether").lower() in cardlist.keys() and not altModalKey.lower() in cardlist.keys():
                         print("Unsupported card (MAIN): " + cardName)
                         if args.f:
                             supported = False
@@ -183,14 +183,10 @@ for root, dirs, files in os.walk(DECKFOLDER):
                             deckHasUnsupportedCards = True
                             if not cardName in unsupportedList:
                                 unsupportedList.extend([cardName])
-                    if altModalKey in cardlist.keys():
+                    if altModalKey.lower() in cardlist.keys():
                         mdline = cardAmount + " " + altModalKey # ZNR modal cards with //
-                    elif cardName in cardlist.keys():
+                    elif cardName.lower() in cardlist.keys():
                         mdline = cardAmount + " " + cardName
-                    elif cardName.replace("Aether", "AEther") in cardlist.keys():
-                        mdline = cardAmount + " " + cardName.replace("Aether", "AEther")
-                    elif cardName.replace("AEther", "Aether") in cardlist.keys():
-                        mdline = cardAmount + " " + cardName.replace("AEther", "Aether")
                     else:
                         mdline = cardAmount + " " + cardName # for the purposes of unsupported cards
                     if isCardSupported:
@@ -206,7 +202,7 @@ for root, dirs, files in os.walk(DECKFOLDER):
                     if cardName == "":
                         continue
                     altModalKey = cardName.split(" // ")[0].strip()
-                    if not cardName in cardlist.keys() and not cardName.replace("Aether", "AEther") in cardlist.keys() and not cardName.replace("AEther", "Aether") in cardlist.keys() and not altModalKey in cardlist.keys():
+                    if not cardName.lower() in cardlist.keys() and not cardName.replace("Aether", "AEther").lower() in cardlist.keys() and not cardName.replace("AEther", "Aether").lower() in cardlist.keys() and not altModalKey.lower() in cardlist.keys():
                         print("Unsupported card (SIDE): " + cardName)
                         if args.f:
                             supported = False
@@ -215,14 +211,10 @@ for root, dirs, files in os.walk(DECKFOLDER):
                             deckHasUnsupportedCards = True
                             if not cardName in unsupportedList:
                                 unsupportedList.extend([cardName])
-                    if altModalKey in cardlist.keys():
+                    if altModalKey.lower() in cardlist.keys():
                         sdline = cardAmount + " " + altModalKey # ZNR modal cards with //
-                    elif cardName in cardlist.keys():
+                    elif cardName.lower() in cardlist.keys():
                         sdline = cardAmount + " " + cardName
-                    elif cardName.replace("Aether", "AEther") in cardlist.keys():
-                        sdline = cardAmount + " " + cardName.replace("Aether", "AEther")
-                    elif cardName.replace("AEther", "Aether") in cardlist.keys():
-                        sdline = cardAmount + " " + cardName.replace("AEther", "Aether")
                     else:
                         sdline = cardAmount + " " + cardName # for the purposes of unsupported cards
                     if isCardSupported:

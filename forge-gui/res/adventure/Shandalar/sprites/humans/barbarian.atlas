@@ -1,0 +1,107 @@
+barbarian.png
+size: 768,576
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar          
+  xy: 232, 125
+  size: 16, 16      
+Idle 
+  xy: 34,32
+  size: 26,30 
+Idle 
+  xy: 130,32
+  size: 26,30 
+Idle 
+  xy: 226,32
+  size: 26,30  
+Idle 
+  xy: 322,32
+  size: 26,30 
+Idle 
+  xy: 418,32
+  size: 26,30 
+Idle 
+  xy: 514,32
+  size: 26,30 
+Idle 
+  xy: 610,32
+  size: 26,30 
+Idle 
+  xy: 706,32
+  size: 26,30 
+Idle 
+  xy: 34,416
+  size: 26,30 
+Idle 
+  xy: 130,416
+  size: 26,30 
+Idle 
+  xy: 226,416
+  size: 26,30 
+Idle 
+  xy: 322,416
+  size: 26,30 
+Walk
+  xy: 34,125
+  size: 26,33 
+Walk
+  xy: 130,125
+  size: 26,33 
+Walk
+  xy: 226,125
+  size: 26,33
+Walk
+  xy: 322,125
+  size: 26,33 
+Walk
+  xy: 418,125
+  size: 26,33 
+Walk
+  xy: 514,125
+  size: 26,33 
+Walk
+  xy: 610,125
+  size: 26,33 
+Walk
+  xy: 706,125
+  size: 26,33 
+Attack 
+  xy: 22, 208
+  size: 60, 56
+Attack 
+  xy: 118, 208
+  size: 60, 56
+Attack 
+  xy: 214, 208
+  size: 60, 56
+Attack 
+  xy: 310, 208
+  size: 60, 56
+Attack 
+  xy: 406, 208
+  size: 60, 56
+Attack 
+  xy: 502, 208
+  size: 60, 56
+Attack 
+  xy: 598, 208
+  size: 60, 56
+Attack 
+  xy: 694, 208
+  size: 60, 56
+Death 
+  xy: 34,512
+  size: 35,30 
+Death 
+  xy: 130,512
+  size: 35,30 
+Death 
+  xy: 226, 512
+  size: 35,30 
+Death 
+  xy: 322,512
+  size: 35,30 
+Death 
+  xy: 418,512
+  size: 35,30

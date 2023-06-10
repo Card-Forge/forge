@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Ratbert 2
+Title=Ratbert
+Difficulty=medium
+Description=Mono B Fear deck with Thran Lens
+Icon=Ratbert.jpg
+Deck Type=constructed
+[main]
+23 Swamp|M11
+4 Thran Lens
+1 Dread
+1 Gluttonous Zombie
+1 Guiltfeeder
+1 Lingering Tormentor
+3 Nezumi Cutthroat
+2 Order of Yawgmoth
+2 Prickly Boggart
+2 Severed Legion
+1 Dross Prowler
+1 Razortooth Rats
+3 Shriekmaw
+1 Woebearer
+3 Halo Hunter
+1 Crowd of Cinders
+4 Dross Golem
+1 Geth, Lord of the Vault
+2 Wrench Mind
+2 Death Stroke
+1 Grasp of Darkness
+[sideboard]

@@ -7,6 +7,7 @@ import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
+@Deprecated
 public class TriggerRevealed extends Trigger {
 
     public TriggerRevealed(Map<String, String> params, Card host, boolean intrinsic) {

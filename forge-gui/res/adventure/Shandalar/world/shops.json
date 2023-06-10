@@ -721,10 +721,12 @@
 "unlimited":true,
   "rewards": [
     {
-      "count":1,
-      "superTypes": ["Basic"],
-      "cardTypes": ["Land"],
-      "subTypes": ["Swamp"]
+      "count":4,
+      "cardName":"Swamp"
+    },
+	{
+      "count":4,
+      "cardName":"Snow-Covered Swamp"
     }]
 
 },{                                      
@@ -735,10 +737,12 @@
 "unlimited":true,
   "rewards": [
     {
-      "count":1,
-      "superTypes": ["Basic"],
-      "cardTypes": ["Land"],
-      "subTypes": ["Forest"]
+      "count":4,
+      "cardName":"Forest"
+    },
+	{
+      "count":4,
+      "cardName":"Snow-Covered Forest"
     }]
 
 },{                                      
@@ -749,10 +753,12 @@
 "unlimited":true,
   "rewards": [
     {
-      "count":1,
-      "superTypes": ["Basic"],
-      "cardTypes": ["Land"],
-      "subTypes": ["Mountain"]
+      "count":4,
+      "cardName":"Mountain"
+    },
+	{
+      "count":4,
+      "cardName":"Snow-Covered Mountain"
     }]
 
 },{                                      
@@ -763,10 +769,12 @@
 "unlimited":true,
   "rewards": [
     {
-      "count":1,
-      "superTypes": ["Basic"],
-      "cardTypes": ["Land"],
-      "subTypes": ["Island"]
+      "count":4,
+      "cardName":"Island"
+    },
+	{
+      "count":4,
+      "cardName":"Snow-Covered Island"
     }]
 
 },{                                      
@@ -777,10 +785,12 @@
 "unlimited":true,
   "rewards": [
     {
-      "count":1,
-      "superTypes": ["Basic"],
-      "cardTypes": ["Land"],
-      "subTypes": ["Plains"]
+      "count":4,
+      "cardName":"Plains"
+    },
+	{
+      "count":4,
+      "cardName":"Snow-Covered Plains"
     }]
 
 },{                                      
@@ -4389,6 +4399,245 @@
 	  ]
 	}]
 },{
+  "name":"Sphinx",
+  "description":"Cryptic Sphinxes",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SphinxShop",
+  "rewards": [
+  {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Sphinx"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Sphinx"
+		}
+	  ]
+	}
+	]
+	},{
+  "name":"Hydra",
+  "description":"Huryle's Hydra Shop",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"HydraShop",
+  "rewards": [
+  {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Hydra"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Hydra"
+		}
+	  ]
+	}
+	]
+		},{
+  "name":"Spiders",
+  "description":"Exotic Bugs and Creepers",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"InsectSpiderShop",
+  "rewards": [
+  {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Spider"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Spider"
+		}
+	  ]
+	}
+	]
+		},{
+  "name":"SmallCats",
+  "description":"The Feline Kingdom",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"CatShop",
+  "rewards": [
+  {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Cat"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Cat"
+		}
+	  ]
+	}
+	]
+			},{
+  "name":"Shapeshifter",
+  "description":"Proteus' Endless Shapes",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"ShapeshifterShop",
+  "rewards": [
+  {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Shapeshifter"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Shapeshifter"
+		}
+	  ]
+	}
+	]		
+},
+{
+  "name":"Gods",
+  "description":"Al's Dose of Apotheosis",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"GodMinigodShop",
+  "rewards": [
+  {
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["God"]
+		},
+		{
+		  "count":1,
+		  "cardText": "God"
+		}
+	  ]
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Demigod"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Demigod"
+		}
+	  ]
+	  }
+	  ]	  
+},
+{
+  "name":"Insects",
+  "description":"Grist's Bug Greenhouse",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"InsectShop",
+  "rewards": [
+  {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Insect"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Insect"
+		}
+	  ]
+	}
+	]
+},
+{
+  "name":"Horrors",
+  "description":"Horrific Horrors",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"HorrorShop",
+  "rewards": [
+  {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Horror"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Horror"
+		}
+	  ]
+	}
+	]
+},
+{
+  "name":"Mutants",
+  "description":"Marching Mutants",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"MutantShop",
+  "rewards": [
+    {
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Mutant"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Mutant"
+		}
+	  ]
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "cardText": "Mutate"
+		}
+	  ]
+	}
+]
+},
+{
+  "name":"Eldrazi",
+  "description":"Eldritch Emissaries",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EldraziShop",
+  "rewards": [
+  {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Eldrazi"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Eldrazi"
+		}
+	  ]
+	}
+	]
+},{
   "name":"Pirate",
   "description":"Marauding Looters",
   "spriteAtlas":"maps/tileset/buildings.atlas",
@@ -4868,22 +5117,22 @@
 "sprite":"PhyrexianShop",
   "rewards": [
    {
-	"count":5
-	"type":"Union"
+	"count":5,
+	"type":"Union",
 	"cardUnion":[
 	{
 		"count":1,
-		"colors":["white"]
+		"colors":["white"],
 		"subTypes": ["Phyrexian"]
 	},
 	{
 		"count":1,
-		"colors":["white"]
+		"colors":["white"],
 		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
 	}]},
 	{
-		"count":3
-		"type":"Union"
+		"count":3,
+		"type":"Union",
 		"cardUnion":[
 		{
 		"count":1,
@@ -4901,22 +5150,22 @@
 "sprite":"PhyrexianShop",
   "rewards": [
    {
-	"count":5
-	"type":"Union"
+	"count":5,
+	"type":"Union",
 	"cardUnion":[
 	{
 		"count":1,
-		"colors":["blue"]
+		"colors":["blue"],
 		"subTypes": ["Phyrexian"]
 	},
 	{
 		"count":1,
-		"colors":["blue"]
+		"colors":["blue"],
 		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
 	}]},
 	{
-		"count":3
-		"type":"Union"
+		"count":3,
+		"type":"Union",
 		"cardUnion":[
 		{
 		"count":1,
@@ -4934,22 +5183,22 @@
 "sprite":"PhyrexianShop",
   "rewards": [
    {
-	"count":5
-	"type":"Union"
+	"count":5,
+	"type":"Union",
 	"cardUnion":[
 	{
 		"count":1,
-		"colors":["green"]
+		"colors":["green"],
 		"subTypes": ["Phyrexian"]
 	},
 	{
 		"count":1,
-		"colors":["green"]
+		"colors":["green"],
 		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
 	}]},
 	{
-		"count":3
-		"type":"Union"
+		"count":3,
+		"type":"Union",
 		"cardUnion":[
 		{
 		"count":1,
@@ -4967,22 +5216,22 @@
 "sprite":"PhyrexianShop",
   "rewards": [
    {
-	"count":5
-	"type":"Union"
+	"count":5,
+	"type":"Union",
 	"cardUnion":[
 	{
 		"count":1,
-		"colors":["red"]
+		"colors":["red"],
 		"subTypes": ["Phyrexian"]
 	},
 	{
 		"count":1,
-		"colors":["red"]
+		"colors":["red"],
 		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon|for mirrodin"
 	}]},
 	{
-		"count":3
-		"type":"Union"
+		"count":3,
+		"type":"Union",
 		"cardUnion":[
 		{
 		"count":1,
@@ -5000,22 +5249,22 @@
 "sprite":"PhyrexianShop",
   "rewards": [
    {
-	"count":5
-	"type":"Union"
+	"count":5,
+	"type":"Union",
 	"cardUnion":[
 	{
 		"count":1,
-		"colors":["black"]
+		"colors":["black"],
 		"subTypes": ["Phyrexian"]
 	},
 	{
 		"count":1,
-		"colors":["black"]
+		"colors":["black"],
 		"cardText": "infect|oil|proliferate|incubate|toxic|corrupted|phyrexian|poison|living weapon"
 	}]},
 	{
-		"count":3
-		"type":"Union"
+		"count":3,
+		"type":"Union",
 		"cardUnion":[
 		{
 		"count":1,

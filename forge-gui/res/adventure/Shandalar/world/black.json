@@ -35,11 +35,12 @@
 	"Shroom2"
 ],
 "enemies": [
+	"Adept Black Wizard",
+	"Apprentice Black Wizard",
+	"Bat",
 	"Beholder",
 	"Big Zombie",
-	"Black Wiz1",
-	"Black Wiz2",
-	"Black Wiz3",
+	"Black Sliver",
 	"Challenger 20",
 	"Challenger 21",
 	"Challenger 22",
@@ -53,16 +54,20 @@
 	"Frog",
 	"Ghoul",
 	"Ghost",
+	"Golgari Fungus",
 	"Harpy",
 	"Harpy 2",
 	"High Vampire",
 	"Horror",
-	"Insect",
+	"Giant Fly",
 	"Lich",
+	"Master Black Wizard",
 	"Mindclaw Shaman",
 	"Mummy",
+	"Nezumi Ninja",
+	"Nightmare",
 	"Rakdos Devil",
-	"Rat Ninja",
+	"Shade",
 	"Skeleton",
 	"Skeleton Soldier",
 	"Vampire",
@@ -105,7 +110,8 @@
 	"CaveB6",
 	"CaveB8",
 	"CaveBA",
-	"Slimefoots Lair"
+	"Slimefoots Lair",
+	"Temple of Liliana"
 ],
 "structures": [
 	{

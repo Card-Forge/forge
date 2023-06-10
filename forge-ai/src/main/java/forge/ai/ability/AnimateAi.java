@@ -228,7 +228,7 @@ public class AnimateAi extends SpellAbilityAi {
         } else if (sa.usesTargeting() && mandatory) {
             // fallback if animate is mandatory
             sa.resetTargets();
-            List<Card> list = CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa);
+            List<Card> list = CardUtil.getValidCardsToTarget(sa);
             if (list.isEmpty()) {
                 return false;
             }

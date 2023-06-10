@@ -1,0 +1,11 @@
+Name:Fangorn, Tree Shepherd
+ManaCost:4 G G G
+Types:Legendary Creature Treefolk
+PT:4/10
+S:Mode$ Continuous | Affected$ Treefolk.YouCtrl | AddKeyword$ Vigilance | Description$ Treefolk you control have vigilance.
+T:Mode$ AttackersDeclared | ValidAttackers$ Treefolk.YouCtrl | Execute$ TrigMana | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more Treefolk you control attack, add twice that much {G}.
+SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ X
+S:Mode$ UnspentMana | ValidPlayer$ You | ManaType$ Green | Description$ You don't lose unspent green mana as steps and phases end.
+SVar:X:TriggerObjectsAttackers$Amount/Twice
+DeckHints:Type$Treefolk
+Oracle:Treefolk you control have vigilance.\nWhenever one or more Treefolk you control attack, add twice that much {G}.\nYou don't lose unspent green mana as steps and phases end.

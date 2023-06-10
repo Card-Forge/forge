@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="58">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="73">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -20,7 +20,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy9lT0OwjAMhV0xICqxwsQVEMfgMnSicClGJrgFd+gtGEgET32ybBPaik+q0r+8Z7tOKiLSLkWaWuSYRrAXn8uiPz9/xsdcZFWJrNOxqfr7Fuxjcaj9Z1o3X1+T3y0d98rXh2YTaGugo+fk/C2P5+w95lqANsiV34vqzXD+mANfRtewVH8o375phvtmKNCwcgYnI5ZuvLXrC7+SGgylc7z/AeflrR/u5bFAi/NtC2KYiuzL6yXaj6b29UA86H+rxzVbintH5zw362nfX/vYq0+Uj/dM52Wt2yg+b5+L9krG663SnkOfRnud1vLyif4dpUCb65q/1wu8fTGE
+   eJy9lUEOgjAQRT9xYSRxqyuvYDyGl4EV6KVcutJbeAdu4cI2OOFn0hkLqC8hRaX/z5TfCgDtGqhLoAmjcITNZTXcn9/jYwlsCmAbrl0xfJ+CfcaidePna/C7hete2PpV2Y91me8lOnpO7D/l8Vz0Y1wLoXV65ee89Wa4f5kjvkylas7Vn0rOO+XcTEU0Uj0Lp0Qt3Xxr01f85uT6E53h/Q+4L2v/cJbnIlrcb5tRw7eIvrxf9F76pa+F1CP5T2Vcs6e6D3TPc6Oe9h2bY2t9vH6s33RfqX3r1Wedc95ZyVjZys2c5NQ767SW1Y/335GLaPO6xvf1AkzeMQ0=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -30,20 +30,65 @@
    </properties>
   </object>
   <object id="48" template="../obj/treasure.tx" x="254.063" y="34.9616"/>
-  <object id="54" template="../obj/enemy.tx" x="248.915" y="90.8336">
+  <object id="54" template="../obj/enemy.tx" x="226.796" y="135.071">
    <properties>
-    <property name="enemy" value="Merfolk Avatar"/>
+    <property name="enemy" value="Hippo"/>
    </properties>
   </object>
   <object id="56" template="../obj/enemy.tx" x="105.75" y="54.25">
    <properties>
     <property name="enemy" value="Crab"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="62,63,64,65"/>
    </properties>
   </object>
-  <object id="57" template="../obj/enemy.tx" x="428.25" y="50.25">
+  <object id="57" template="../obj/enemy.tx" x="408.733" y="86.681">
    <properties>
-    <property name="enemy" value="Crab"/>
+    <property name="enemy" value="Scorpion"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="66,70,66,69"/>
    </properties>
   </object>
+  <object id="61" template="../obj/enemy.tx" x="254.824" y="65.2957">
+   <properties>
+    <property name="enemy" value="Elephant"/>
+   </properties>
+  </object>
+  <object id="62" template="../obj/waypoint.tx" x="93.4863" y="129.484"/>
+  <object id="63" template="../obj/waypoint.tx" x="5.01107" y="132.953"/>
+  <object id="64" template="../obj/waypoint.tx" x="69.199" y="16.2873"/>
+  <object id="65" template="../obj/waypoint.tx" x="163.746" y="18.8895"/>
+  <object id="66" template="../obj/waypoint.tx" x="398.379" y="130.785"/>
+  <object id="69" template="../obj/waypoint.tx" x="426.57" y="50.1161"/>
+  <object id="70" template="../obj/waypoint.tx" x="423.534" y="218.393"/>
+  <object id="71" template="../obj/booster.tx" x="420.932" y="20.1906">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ROE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ROE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ROE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="72" template="../obj/manashards.tx" x="2.40885" y="17.5884"/>
  </objectgroup>
 </map>

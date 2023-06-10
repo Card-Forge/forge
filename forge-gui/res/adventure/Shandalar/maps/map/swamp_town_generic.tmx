@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="54">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="54">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -8,7 +8,7 @@
  <tileset firstgid="11905" source="../tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJyL4GZgiBjFo3gUj+JRPIpH8YjAAH23xTs=
+   eJyL4GZgiBjFo3gUj+JRPCIwCAy0G0bxwGIAtifE2A==
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
@@ -21,7 +21,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKAcNPJSJk9tQG/7KAUNQPc6MDEwLGYkDzsxkW5nPTSM7kL1emqhYnxgETeqXmIBsh/rmKH2GiLkQezP6gwMX9Rxm6FjRLq9IPXWQD/Z4PGXPjtx5hALQHEKU4/P7LNIcsY6DAwmOphscvwLMxuXmcj26uNgU2IvLjOR7T0HZE9mg+A8DsrtzQGakQvERuwIPowNs1fXCNUNIAALF3LthekH2QfzzwU0ew3YEX6E5R9YuJBrL7Z0dRbNXpibDLGENSXhDDIHFLYgf4FodHuR3YNetsHyPqn2wgDIfpAfYPEN8lsuUtjD/Eiq/9BBDTP+Mheb30jxXx0Z9dRdqL2U+g0AMXdYcw==
+   eJy9ldENgjAQhk9IxMQ4B4nBINU3fTC+uYs4gUGdwQ10HowLMIUOYC/2Qiktoa3xTxqOlN53/xUKgL8uE7/5X+vfPF+deb2bAOA+cBvbwJ55Ej2qxNrdtDlU3cbtuLLkyh6LUHCzeh7jVwzwjs05EmbPxedX3NNa44uURv3y9BXuKT3flbuU5hYJwDJpxy5+Kbcpp8xNDbEP15RT5j54fB1+x2Hkz93zHDkfLKrvKSbujDVrQFFfXLm0Hnnk56lw51HTI4r64srVvVelwqWaMk2vffqMebC36AuvKleuRz3b6Nu35ZKQjx5ov9FbLvWePNr6U3UMu89cnTcbf4XDf6oSXF9vH2vxWHM=
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
@@ -86,7 +86,7 @@
     <property name="noRestock" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="50" template="../obj/shardtrader.tx" x="304" y="194"/>
+  <object id="50" template="../obj/shardtrader.tx" x="288" y="82"/>
   <object id="51" template="../obj/quest.tx" x="114" y="114">
    <properties>
     <property name="questtype" value="swamp_town_generic"/>

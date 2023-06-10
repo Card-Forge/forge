@@ -32,6 +32,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.RasterFormatException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -1199,11 +1200,19 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                             //draw generic box
                             FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_DECK_GENERIC), bounds.x, bounds.y, bounds.width - 2 * cornerSize, bounds.height - 2 * cornerSize);
                         } else {
-                            //draw card art
-                            g.drawImage(ImageCache.getCroppedArt(cardImage,bounds.x, bounds.y,bounds.width, bounds.height).getScaledInstance(scaleArt*3,  Math.round(scaleArt*2.5f), Image.SCALE_SMOOTH),
-                                    bounds.x+bounds.width/9, 2*cornerSize+bounds.y+bounds.height/7, null);
-                            //draw deck box
-                            FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_DECK_CARD_ART), bounds.x, bounds.y, bounds.width - 2 * cornerSize, bounds.height - 2 * cornerSize);
+                            Image art = null;
+                            try {
+                                art = ImageCache.getCroppedArt(cardImage,bounds.x, bounds.y,bounds.width, bounds.height).getScaledInstance(scaleArt*3,  Math.round(scaleArt*2.5f), Image.SCALE_SMOOTH);
+                            } catch (RasterFormatException e) {} //invalid subimage ie out of bounds via zooming in/out etc..
+                            if (art != null) {
+                                //draw card art
+                                g.drawImage(art,bounds.x+bounds.width/9, 2*cornerSize+bounds.y+bounds.height/7, null);
+                                //draw deck box
+                                FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_DECK_CARD_ART), bounds.x, bounds.y, bounds.width - 2 * cornerSize, bounds.height - 2 * cornerSize);
+                            } else {
+                                //draw generic box
+                                FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_DECK_GENERIC), bounds.x, bounds.y, bounds.width - 2 * cornerSize, bounds.height - 2 * cornerSize);
+                            }
                         }
 
                         //deck colors

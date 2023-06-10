@@ -376,7 +376,7 @@ public class CardImageRenderer {
                                 altArt = CardRenderer.getAlternateCardArt(cv.getAlternateState().getImageKey(), cv.getAlternateState().isPlaneswalker());
                             else {
                                 altArt = CardRenderer.getCardArt(cv.getAlternateState().getImageKey(), cv.isSplitCard(), cv.getAlternateState().isPlane() || cv.getAlternateState().isPhenomenon(), cv.getText().contains("Aftermath"),
-                                        cv.getAlternateState().getType().hasSubtype("Saga"), cv.getAlternateState().getType().hasSubtype("Class"), cv.getAlternateState().getType().isDungeon(), cv.isFlipCard(), cv.getAlternateState().isPlaneswalker(), CardRenderer.isModernFrame(cv));
+                                        cv.getAlternateState().getType().hasSubtype("Saga"), cv.getAlternateState().getType().hasSubtype("Class"), cv.getAlternateState().getType().isDungeon(), cv.isFlipCard(), cv.getAlternateState().isPlaneswalker(), CardRenderer.isModernFrame(cv), cv.getAlternateState().getType().isBattle());
                             }
                         }
                     }

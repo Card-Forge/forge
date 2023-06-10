@@ -2,6 +2,7 @@ package forge.screens.match.winlose;
 
 import java.util.List;
 
+import forge.game.GameType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Input.Keys;
@@ -55,6 +56,14 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         btnRestart = add(new FButton());
         btnQuit = add(new FButton());
 
+        btnContinue.setText(Forge.getLocalizer().getMessage("btnNextGame"));
+        btnContinue.setFont(FSkinFont.get(22));
+        btnRestart.setText(Forge.getLocalizer().getMessage("btnStartNewMatch"));
+        btnRestart.setFont(btnContinue.getFont());
+        btnQuit.setText(Forge.getLocalizer().getMessage("btnQuitMatch"));
+        btnQuit.setFont(btnContinue.getFont());
+        btnContinue.setEnabled(!game0.isMatchOver());
+
         // Control of the win/lose is handled differently for various game
         // modes.
         ControlWinLose control = null;
@@ -67,6 +76,10 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
             break;
         case PlanarConquest:
             control = new ConquestWinLose(this, game0);
+            break;
+        case Adventure:
+        case AdventureEvent:
+            control = new AdventureWinLose(this, game0);
             break;
         case Draft:
             if (!FModel.getGauntletMini().isGauntletDraft()) {
@@ -87,14 +100,6 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         if (control == null) {
             control = new ControlWinLose(this, game0);
         }
-
-        btnContinue.setText(Forge.getLocalizer().getMessage("btnNextGame"));
-        btnContinue.setFont(FSkinFont.get(22));
-        btnRestart.setText(Forge.getLocalizer().getMessage("btnStartNewMatch"));
-        btnRestart.setFont(btnContinue.getFont());
-        btnQuit.setText(Forge.getLocalizer().getMessage("btnQuitMatch"));
-        btnQuit.setFont(btnContinue.getFont());
-        btnContinue.setEnabled(!game0.isMatchOver());
 
         lblLog = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblGameLog")).align(Align.center).font(FSkinFont.get(18)).build());
         txtLog = add(new FTextArea(true, StringUtils.join(game.getGameLog().getLogEntries(null), "\r\n").replace("[COMPUTER]", "[AI]")) {
@@ -122,9 +127,6 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
             }
         }).build());
         lblTitle.setText(composeTitle(game0));
-
-        if (Forge.isMobileAdventureMode)
-            control = new AdventureWinLose(this, game0);
 
         showGameOutcomeSummary();
         showPlayerScores();
@@ -199,17 +201,36 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
 
         h = height / 12;
         if (Forge.isMobileAdventureMode) {
+            if (game.getGameType() == GameType.AdventureEvent) {
+                btnContinue.setBounds(x, y, w, h);
+                y += h + dy;
+            }
+            else{
+                btnContinue.setVisible(false);
+            }
             btnQuit.setBounds(x, y, w, h);
             y += h + dy;
-            btnContinue.setVisible(false);
+
             btnRestart.setVisible(false);
         } else {
-            btnContinue.setBounds(x, y, w, h);
-            y += h + dy;
-            btnRestart.setBounds(x, y, w, h);
-            y += h + dy;
-            btnQuit.setBounds(x, y, w, h);
-            y += h + dy;
+            if (btnContinue.isEnabled()) {
+                btnContinue.setBounds(x, y, w, h);
+                y += h + dy;
+            } else {
+                btnContinue.setBounds(-w, -w, 0, 0);
+            }
+            if (btnRestart.isEnabled()) {
+                btnRestart.setBounds(x, y, w, h);
+                y += h + dy;
+            } else {
+                btnRestart.setBounds(-w, -w, 0, 0);
+            }
+            if (btnQuit.isEnabled()) {
+                btnQuit.setBounds(x, y, w, h);
+                y += h + dy;
+            } else {
+                btnQuit.setBounds(-w, -w, 0, 0);
+            }
         }
 
 

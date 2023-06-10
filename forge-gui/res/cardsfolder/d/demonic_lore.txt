@@ -6,4 +6,5 @@ SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 3
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, you lose 2 life for each card in your hand.
 SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ X
 SVar:X:Count$InYourHand/Times.2
+SVar:DonateMe:5
 Oracle:When Demonic Lore enters the battlefield, draw three cards.\nAt the beginning of your end step, you lose 2 life for each card in your hand.

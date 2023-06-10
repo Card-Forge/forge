@@ -1,0 +1,11 @@
+Name:Pain Distributor
+ManaCost:2 R
+Types:Creature Devil Citizen
+PT:2/3
+K:Menace
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | ActivatorThisTurnCast$ EQ1 | Execute$ TrigTreasure | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts their first spell each turn, they create a Treasure token.
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ TriggeredActivator
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever an artifact an opponent controls is put into a graveyard from the battlefield, CARDNAME deals 1 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 1
+DeckHas:Ability$Token & Type$Treasure|Artifact
+Oracle:Menace\nWhenever a player casts their first spell each turn, they create a Treasure token.\nWhenever an artifact an opponent controls is put into a graveyard from the battlefield, Pain Distributor deals 1 damage to that player.

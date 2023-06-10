@@ -30,19 +30,22 @@ public class TransitionScreen extends FContainer {
     TextureRegion textureRegion, screenUIBackground, playerAvatar;
     Texture vsTexture;
     String enemyAtlasPath, playerAvatarName, enemyAvatarName;
-    private String message = "";
+    private String message = "", playerRecord = "", enemyRecord = "";
     boolean matchTransition, isloading, isIntro, isFadeMusic, isArenaScene;
     GlyphLayout layout;
     public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading) {
         this(proc, screen, enterMatch, loading, false, false);
     }
     public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading, String loadingMessage) {
-        this(proc, screen, enterMatch, loading, false, false, loadingMessage, null, "", "", "");
+        this(proc, screen, enterMatch, loading, false, false, loadingMessage, null, "", "", "", "", "");
     }
     public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading, boolean intro, boolean fadeMusic) {
-        this(proc, screen, enterMatch, loading, intro, fadeMusic, "", null, "", "", "");
+        this(proc, screen, enterMatch, loading, intro, fadeMusic, "", null, "", "", "", "", "");
     }
     public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading, boolean intro, boolean fadeMusic, String loadingMessage, TextureRegion player, String enemyAtlas, String playerName, String enemyName) {
+        this(proc, screen, enterMatch, loading, intro, fadeMusic, loadingMessage, player, enemyAtlas, playerName, enemyName, "", "");
+    }
+    public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading, boolean intro, boolean fadeMusic, String loadingMessage, TextureRegion player, String enemyAtlas, String playerName, String enemyName, String playerRecord, String enemyRecord) {
         progressBar = new FProgressBar();
         progressBar.setMaximum(100);
         progressBar.setPercentMode(true);
@@ -55,6 +58,8 @@ public class TransitionScreen extends FContainer {
         isIntro = intro;
         isFadeMusic = fadeMusic;
         message = loadingMessage;
+        this.playerRecord = playerRecord;
+        this.enemyRecord = enemyRecord;
         Forge.advStartup = intro && Forge.selector.equals("Adventure");
         if (Forge.getCurrentScene() instanceof ArenaScene) {
             isArenaScene = true;
@@ -156,13 +161,17 @@ public class TransitionScreen extends FContainer {
                     g.drawImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
                     g.setAlphaComposite(oldAlpha);
                 }
-                String wins = "0 - 0";
-                String loss = "0 - 0";
+                String p1Record = "0 - 0";
+                String p2Record = "0 - 0";
                 //stats
+                if (playerRecord.length() > 0 && enemyRecord.length() > 0) {
+                    p1Record = playerRecord;
+                    p2Record = enemyRecord;
+                }
                 Pair<Integer, Integer> winloss = Current.player().getStatistic().getWinLossRecord().get(enemyAvatarName);
                 if (winloss != null) {
-                    wins = "" + winloss.getKey() + " - " + winloss.getValue();
-                    loss = "" + winloss.getValue() + " - " + winloss.getKey();
+                    p1Record = "" + winloss.getKey() + " - " + winloss.getValue();
+                    p2Record = "" + winloss.getValue() + " - " + winloss.getKey();
                 }
                 if (Forge.isLandscapeMode()) {
                     //player
@@ -171,16 +180,16 @@ public class TransitionScreen extends FContainer {
                     g.drawImage(playerAvatar, playerAvatarX, playerAvatarY, scale, scale);
                     layout.setText(font, playerAvatarName);
                     g.drawText(playerAvatarName, font, screenW/4 - layout.width/2, playerAvatarY - layout.height, Color.WHITE, percentage);
-                    layout.setText(font, wins);
-                    g.drawText(wins, font, screenW/4 - layout.width/2, playerAvatarY - layout.height*2.5f, Color.WHITE, percentage);
+                    layout.setText(font, p1Record);
+                    g.drawText(p1Record, font, screenW/4 - layout.width/2, playerAvatarY - layout.height*2.5f, Color.WHITE, percentage);
                     //enemy
                     float enemyAvatarX = screenW - screenW/4 - (scale/2 * percentage);
                     float enemyAvatarY = centerY - scale/2;
                     g.drawImage(enemyAvatar, enemyAvatarX, enemyAvatarY, scale, scale);
                     layout.setText(font, enemyAvatarName);
                     g.drawText(enemyAvatarName, font,  screenW - screenW/4 - layout.width/2, enemyAvatarY - layout.height, Color.WHITE, percentage);
-                    layout.setText(font, loss);
-                    g.drawText(loss, font,  screenW - screenW/4 - layout.width/2, enemyAvatarY - layout.height*2.5f, Color.WHITE, percentage);
+                    layout.setText(font, p2Record);
+                    g.drawText(p2Record, font,  screenW - screenW/4 - layout.width/2, enemyAvatarY - layout.height*2.5f, Color.WHITE, percentage);
                     //vs
                     float vsScale = (screenW / 3.2f);
                     g.drawHueShift(vsTexture, centerX - vsScale / 2, centerY - vsScale / 2, vsScale, vsScale, percentage*4);

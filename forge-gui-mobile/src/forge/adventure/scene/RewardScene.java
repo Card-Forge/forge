@@ -20,6 +20,8 @@ import forge.adventure.stage.GameHUD;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.assets.ImageCache;
+import forge.deck.Deck;
+import forge.item.PaperCard;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 
@@ -277,6 +279,14 @@ public class RewardScene extends UIScene {
         }
         shopActor.setRewardData(ret);
         loadRewards(ret, RewardScene.Type.Shop,shopActor);
+    }
+
+    public void loadRewards(Deck deck, Type type, ShopActor shopActor){
+        Array<Reward> rewards = new Array<>();
+        for (PaperCard card : deck.getAllCardsInASinglePool().toFlatList()){
+            rewards.add(new Reward(card));
+        }
+        loadRewards(rewards, type, shopActor);
     }
 
     public void loadRewards(Array<Reward> newRewards, Type type, ShopActor shopActor) {

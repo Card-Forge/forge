@@ -215,7 +215,7 @@ public class EffectAi extends SpellAbilityAi {
             } else if (logic.equals("Fight")) {
                 return FightAi.canFightAi(ai, sa, 0, 0);
             } else if (logic.equals("Pump")) {
-                List<Card> options = CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa);
+                List<Card> options = CardUtil.getValidCardsToTarget(sa);
                 options = CardLists.filterControlledBy(options, ai);
                 if (sa.getPayCosts().hasTapCost()) {
                     options.remove(sa.getHostCard());

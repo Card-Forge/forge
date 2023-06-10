@@ -59,18 +59,37 @@
     },
     {
       "type": "Image",
-      "name": "leaveIcon",
-      "image": "ui/leave.png",
+      "name": "tavernEvent",
+      "image": "ui/tavernevent.png",
       "x": 320,
       "y": 85,
       "width": 100,
       "height": 100
     },
     {
+      "type": "Label",
+      "name": "eventDescription",
+      "text": "Booster Draft Available",
+      "font": "default",
+      "width": 100,
+      "height": 30,
+      "x": 320,
+      "y": 170
+    },
+	{
       "type": "TextButton",
       "name": "done",
       "text": "tr(lblBack)",
       "binding": "Back",
+      "width": 48,
+      "height": 30,
+      "x": 5,
+      "y": 235
+    },
+	{
+      "type": "TextButton",
+      "name": "event",
+      "text": "Info",
       "width": 100,
       "height": 30,
       "x": 320,

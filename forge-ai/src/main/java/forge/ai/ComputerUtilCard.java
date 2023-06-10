@@ -567,6 +567,13 @@ public class ComputerUtilCard {
             return evaluateCreature(b) - evaluateCreature(a);
         }
     };
+    public static final Comparator<SpellAbility> EvaluateCreatureSpellComparator = new Comparator<SpellAbility>() {
+        @Override
+        public int compare(final SpellAbility a, final SpellAbility b) {
+            // TODO ideally we could reuse the value from the previous pass with false
+            return ComputerUtilAbility.saEvaluator.compareEvaluator(a, b, true);
+        }
+    };
 
     private static final CreatureEvaluator creatureEvaluator = new CreatureEvaluator();
     private static final LandEvaluator landEvaluator = new LandEvaluator();
@@ -582,7 +589,28 @@ public class ComputerUtilCard {
     public static int evaluateCreature(final Card c) {
         return creatureEvaluator.evaluateCreature(c);
     }
+    public static int evaluateCreature(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
 
+        if (sa.getApi() != ApiType.PermanentCreature) {
+            System.err.println("Warning: tried to evaluate a non-creature spell with evaluateCreature for card " + host + " via SA " + sa);
+            return 0;
+        }
+
+        // switch to the needed card face
+        CardStateName currentState = sa.getCardState() != null && host.getCurrentStateName() != sa.getCardStateName() && !host.isInPlay() ? host.getCurrentStateName() : null;
+        if (currentState != null) {
+            host.setState(sa.getCardStateName(), false);
+        }
+
+        int eval = evaluateCreature(host);
+
+        if (currentState != null) {
+            host.setState(currentState, false);
+        }
+
+        return eval;
+    }
     public static int evaluateCreature(final Card c, final boolean considerPT, final boolean considerCMC) {
         return creatureEvaluator.evaluateCreature(c, considerPT, considerCMC);
     }

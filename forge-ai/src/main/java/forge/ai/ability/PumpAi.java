@@ -617,7 +617,7 @@ public class PumpAi extends PumpAiBase {
 
     private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
+        List<Card> list = CardUtil.getValidCardsToTarget(sa);
 
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();

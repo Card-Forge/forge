@@ -1,0 +1,11 @@
+Name:Niv-Mizzet, Supreme
+ManaCost:W U B R G
+Types:Legendary Creature Dragon Avatar
+PT:5/5
+K:Flying
+K:Hexproof:Card.MonoColor:monocolored
+# TODO the AffectedZone Stack is needed for now but should be handled by the engine instead
+S:Mode$ Continuous | Affected$ Instant.YouCtrl+numColorsEQ2,Sorcery.YouCtrl+numColorsEQ2 | AffectedZone$ Graveyard,Stack | AddKeyword$ Jump-start | Description$ Each instant and sorcery card in your graveyard that's exactly two colors has jump-start.
+DeckHints:Type$Instant|Sorcery & Ability$Mill|Graveyard
+DeckHas:Ability$Graveyard|Discard
+Oracle:Flying, hexproof from monocolored\nEach instant and sorcery card in your graveyard that's exactly two colors has jump-start.
