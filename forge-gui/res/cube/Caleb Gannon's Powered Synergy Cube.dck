@@ -168,7 +168,7 @@ name=Caleb Gannon's Powered Synergy Cube
 1 Raven's Crime|MMA
 1 Thoughtseize|IMA
 1 Collective Brutality|EMN
-1 Demonic Tutor|CED
+1 Demonic Tutor|UMA
 1 Diabolic Intent|PLS
 1 Night's Whisper|DDM
 1 Yawgmoth's Will|USG
@@ -185,7 +185,7 @@ name=Caleb Gannon's Powered Synergy Cube
 1 Goblin Welder|DDU
 1 Greater Gargadon|MMA
 1 Grim Lavamancer|PD2
-1 Mons's Goblin Waiters|UNH
+#1 Mons's Goblin Waiters|UNH
 1 Rabbit Battery|NEO
 1 Conspiracy Theorist|STX
 1 Dockside Extortionist|C19
@@ -209,7 +209,7 @@ name=Caleb Gannon's Powered Synergy Cube
 1 Burst Lightning|ZEN
 1 Galvanic Blast|2XM
 1 Lava Dart|MH1
-1 Lightning Bolt|CED
+1 Lightning Bolt|A25
 1 Tarfire|DDT
 1 Unholy Heat|MH2
 1 Abrade|2XM
@@ -304,7 +304,7 @@ name=Caleb Gannon's Powered Synergy Cube
 1 Exploration|CNS
 1 Fastbond|VMA
 1 Earthcraft|TMP
-1 Ineffable Blessing|UST
+#1 Ineffable Blessing|UST
 1 Survival of the Fittest|EXO
 1 Fecundity|USG
 1 Ulvenwald Mysteries|2XM
@@ -461,11 +461,11 @@ name=Caleb Gannon's Powered Synergy Cube
 1 Polluted Delta|ONS
 1 Polluted Delta|ZNE
 1 Underground Sea|VMA
-1 Underground Sea|SUM
+1 Underground Sea|30A
 1 Watery Grave|GTC
 1 Watery Grave|RAV
 1 Badlands|VMA
-1 Badlands|SUM
+1 Badlands|30A
 1 Blood Crypt|RTR
 1 Blood Crypt|RNA
 1 Bloodstained Mire|KTK
@@ -474,12 +474,12 @@ name=Caleb Gannon's Powered Synergy Cube
 1 Stomping Ground|GTC
 1 Stomping Ground|RNA
 1 Taiga|VMA
-1 Taiga|2ED
+1 Taiga|30A
 1 Wooded Foothills|ZNE
 1 Wooded Foothills|ONS
 1 Wooded Foothills|ZNE
 1 Savannah|VMA
-1 Savannah|LEB
+1 Savannah|30A
 1 Temple Garden|RAV
 1 Temple Garden|GRN
 1 Windswept Heath|ONS
@@ -491,16 +491,16 @@ name=Caleb Gannon's Powered Synergy Cube
 1 Marsh Flats|ZEN
 1 Marsh Flats|ZNE
 1 Scrubland|VMA
-1 Scrubland|CEI
+1 Scrubland|30A
 1 Scalding Tarn|ZEN
 1 Scalding Tarn|MH2
 1 Scalding Tarn|ZNE
 1 Steam Vents|RTR
 1 Steam Vents|GPT
 1 Volcanic Island|VMA
-1 Volcanic Island|LEB
+1 Volcanic Island|30A
 1 Bayou|VMA
-1 Bayou|LEB
+1 Bayou|30A
 1 Overgrown Tomb|RAV
 1 Overgrown Tomb|RTR
 1 Verdant Catacombs|MH2
@@ -510,7 +510,7 @@ name=Caleb Gannon's Powered Synergy Cube
 1 Arid Mesa|ZEN
 1 Arid Mesa|ZNE
 1 Plateau|VMA
-1 Plateau|CEI
+1 Plateau|30A
 1 Sacred Foundry|RAV
 1 Sacred Foundry|GTC
 1 Breeding Pool|DIS
@@ -519,7 +519,7 @@ name=Caleb Gannon's Powered Synergy Cube
 1 Misty Rainforest|ZEN
 1 Misty Rainforest|ZNE
 1 Tropical Island|VMA
-1 Tropical Island|CEI
+1 Tropical Island|30A
 1 Spara's Headquarters|SNC
 1 Raffine's Tower|SNC
 1 Xander's Lounge|SNC
