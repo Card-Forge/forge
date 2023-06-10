@@ -15,9 +15,6 @@ import forge.toolbox.FTextArea;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 
-import java.util.EnumSet;
-import java.util.stream.Collectors;
-
 public class NewDraftScreen extends LaunchScreen {
     private static final float PADDING = Utils.scale(10);
 
@@ -46,7 +43,7 @@ public class NewDraftScreen extends LaunchScreen {
     protected void startMatch() {
         //must run in game thread to prevent blocking UI thread
         ThreadUtil.invokeInGameThread(() -> {
-            final LimitedPoolType poolType = SGuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblChooseDraftFormat"), EnumSet.allOf(LimitedPoolType.class).stream().filter(limitedPoolType -> !LimitedPoolType.Prerelease.equals(limitedPoolType)).collect(Collectors.toSet()));
+            final LimitedPoolType poolType = SGuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblChooseDraftFormat"), LimitedPoolType.values(true));
             if (poolType == null) { return; }
 
             final BoosterDraft draft = BoosterDraft.createDraft(poolType);
