@@ -150,7 +150,7 @@ public class AiAttackController {
             for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.SetState))) {
                 Card transformedCopy = ComputerUtilCombat.canTransform(c);
                 if (transformedCopy.isCreature()) {
-                        defenders.add(transformedCopy);
+                    defenders.add(transformedCopy);
                 }
             }
         }
