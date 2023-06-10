@@ -208,7 +208,7 @@ public enum CSubmenuDraft implements ICDoc {
     private void setupDraft() {
         final Localizer localizer = Localizer.getInstance();
         // Determine what kind of booster draft to run
-        final LimitedPoolType poolType = GuiChoose.oneOrNone(localizer.getMessage("lblChooseDraftFormat"), LimitedPoolType.values());
+        final LimitedPoolType poolType = GuiChoose.oneOrNone(localizer.getMessage("lblChooseDraftFormat"), LimitedPoolType.values(true));
         if (poolType == null) { return; }
 
         final BoosterDraft draft = BoosterDraft.createDraft(poolType);
