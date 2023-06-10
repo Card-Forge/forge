@@ -29,25 +29,14 @@ import java.util.Set;
  */
 public class CardChangedType {
 
-    public enum Remove {
-        SuperTypes,
-        CardTypes,
-        SubTypes,
-        LandTypes,
-        CreatureTypes,
-        ArtifactTypes,
-        EnchantmentTypes,
-        ;
-    }
-
     // takes care of individual card types
     private final CardType addType;
     private final CardType removeType;
     private final boolean addAllCreatureTypes;
-    private final Set<Remove> remove;
+    private final Set<RemoveType> remove;
 
     public CardChangedType(final CardType addType0, final CardType removeType0, final boolean addAllCreatureTypes0,
-            final Set<Remove> remove0) {
+            final Set<RemoveType> remove0) {
         addType = addType0;
         removeType = removeType0;
         addAllCreatureTypes = addAllCreatureTypes0;
@@ -67,30 +56,30 @@ public class CardChangedType {
     }
 
     public final boolean isRemoveSuperTypes() {
-        return remove.contains(Remove.SuperTypes);
+        return remove.contains(RemoveType.SuperTypes);
     }
 
     public final boolean isRemoveCardTypes() {
-        return remove.contains(Remove.CardTypes);
+        return remove.contains(RemoveType.CardTypes);
     }
 
     public final boolean isRemoveSubTypes() {
-        return remove.contains(Remove.SubTypes);
+        return remove.contains(RemoveType.SubTypes);
     }
 
     public final boolean isRemoveLandTypes() {
-        return remove.contains(Remove.LandTypes);
+        return remove.contains(RemoveType.LandTypes);
     }
 
     public final boolean isRemoveCreatureTypes() {
-        return remove.contains(Remove.CreatureTypes);
+        return remove.contains(RemoveType.CreatureTypes);
     }
 
     public final boolean isRemoveArtifactTypes() {
-        return remove.contains(Remove.ArtifactTypes);
+        return remove.contains(RemoveType.ArtifactTypes);
     }
 
     public final boolean isRemoveEnchantmentTypes() {
-        return remove.contains(Remove.EnchantmentTypes);
+        return remove.contains(RemoveType.EnchantmentTypes);
     }
 }

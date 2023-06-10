@@ -1505,7 +1505,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             counterTypeTimestamps.put(counterType, timestamp);
             // becomes land in instead of other card types
             addChangedCardTypes(new CardType(ImmutableList.of("Land"), false), null, false,
-                    EnumSet.of(CardChangedType.Remove.CardTypes, CardChangedType.Remove.SubTypes),
+                    EnumSet.of(RemoveType.CardTypes, RemoveType.SubTypes),
                     timestamp, 0, updateView, false);
 
             String abStr = "AB$ ManaReflected | Cost$ T | Valid$ Defined.Self | ColorOrType$ Color | ReflectProperty$ Is | SpellDescription$ Add one mana of any of this card's colors.";
@@ -3729,7 +3729,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             long ts = getGame().getNextTimestamp();
             // 702.151b Attaching an Equipment with reconfigure to another creature causes the Equipment to stop being a creature until it becomes unattached from that creature.
             // it is not a Static Ability
-            addChangedCardTypes(null, CardType.parse("Creature", true), false, EnumSet.noneOf(CardChangedType.Remove.class), ts, 0, true, false);
+            addChangedCardTypes(null, CardType.parse("Creature", true), false, EnumSet.noneOf(RemoveType.class), ts, 0, true, false);
 
             GameCommand unattach = new GameCommand() {
                 private static final long serialVersionUID = 1L;
@@ -3917,9 +3917,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final void addChangedCardTypesByText(final CardType addType, final long timestamp, final long staticId, final boolean updateView) {
         changedCardTypesByText.put(timestamp, staticId, new CardChangedType(addType, null, false,
-                EnumSet.of(CardChangedType.Remove.SuperTypes,
-                        CardChangedType.Remove.CardTypes,
-                        CardChangedType.Remove.SubTypes)));
+                EnumSet.of(RemoveType.SuperTypes,
+                        RemoveType.CardTypes,
+                        RemoveType.SubTypes)));
 
         // setting card type via text, does overwrite any other word change effects?
         this.changedTextColors.addEmpty(timestamp, staticId);
@@ -3931,7 +3931,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void addChangedCardTypes(final CardType addType, final CardType removeType, final boolean addAllCreatureTypes,
-            final Set<CardChangedType.Remove> remove,
+            final Set<RemoveType> remove,
             final long timestamp, final long staticId, final boolean updateView, final boolean cda) {
         (cda ? changedCardTypesCharacterDefining : changedCardTypes).put(timestamp, staticId, new CardChangedType(
                 addType, removeType, addAllCreatureTypes, remove));
@@ -3941,7 +3941,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void addChangedCardTypes(final Iterable<String> types, final Iterable<String> removeTypes, final boolean addAllCreatureTypes,
-            final Set<CardChangedType.Remove> remove,
+            final Set<RemoveType> remove,
             final long timestamp, final long staticId, final boolean updateView, final boolean cda) {
         CardType addType = null;
         CardType removeType = null;
@@ -4855,7 +4855,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         }
 
-        this.changedTypeByText = new CardChangedType(new CardType(toAdd, true), new CardType(toRemove, true), false, EnumSet.noneOf(CardChangedType.Remove.class));
+        this.changedTypeByText = new CardChangedType(new CardType(toAdd, true), new CardType(toRemove, true), false, EnumSet.noneOf(RemoveType.class));
 
         currentState.updateChangedText();
 
@@ -6068,7 +6068,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         bestowTimestamp = getGame().getNextTimestamp();
         addChangedCardTypes(new CardType(Collections.singletonList("Aura"), true),
                 new CardType(Collections.singletonList("Creature"), true),
-                false, EnumSet.of(CardChangedType.Remove.EnchantmentTypes), bestowTimestamp, 0, updateView, false);
+                false, EnumSet.of(RemoveType.EnchantmentTypes), bestowTimestamp, 0, updateView, false);
         addChangedCardKeywords(Collections.singletonList("Enchant creature"), Lists.newArrayList(),
                 false, bestowTimestamp, 0, updateView);
     }

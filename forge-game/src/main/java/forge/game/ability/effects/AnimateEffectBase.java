@@ -24,9 +24,9 @@ import java.util.Set;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
-import forge.card.CardChangedType;
 import forge.card.CardType;
 import forge.card.ColorSet;
+import forge.card.RemoveType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.Game;
@@ -55,21 +55,21 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         boolean addAllCreatureTypes = sa.hasParam("AddAllCreatureTypes");
 
-        Set<CardChangedType.Remove> remove = EnumSet.noneOf(CardChangedType.Remove.class);
+        Set<RemoveType> remove = EnumSet.noneOf(RemoveType.class);
         if (sa.hasParam("RemoveSuperTypes"))
-            remove.add(CardChangedType.Remove.SuperTypes);
+            remove.add(RemoveType.SuperTypes);
         if (sa.hasParam("RemoveCardTypes"))
-            remove.add(CardChangedType.Remove.CardTypes);
+            remove.add(RemoveType.CardTypes);
         if (sa.hasParam("RemoveSubTypes"))
-            remove.add(CardChangedType.Remove.SubTypes);
+            remove.add(RemoveType.SubTypes);
         if (sa.hasParam("RemoveLandTypes"))
-            remove.add(CardChangedType.Remove.LandTypes);
+            remove.add(RemoveType.LandTypes);
         if (sa.hasParam("RemoveCreatureTypes"))
-            remove.add(CardChangedType.Remove.CreatureTypes);
+            remove.add(RemoveType.CreatureTypes);
         if (sa.hasParam("RemoveArtifactTypes"))
-            remove.add(CardChangedType.Remove.ArtifactTypes);
+            remove.add(RemoveType.ArtifactTypes);
         if (sa.hasParam("RemoveEnchantmentTypes"))
-            remove.add(CardChangedType.Remove.EnchantmentTypes);
+            remove.add(RemoveType.EnchantmentTypes);
 
         boolean removeNonManaAbilities = sa.hasParam("RemoveNonManaAbilities");
         boolean removeAll = sa.hasParam("RemoveAllAbilities");

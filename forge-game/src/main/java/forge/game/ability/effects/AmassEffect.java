@@ -9,8 +9,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import forge.card.CardChangedType;
 import forge.card.CardType;
+import forge.card.RemoveType;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
@@ -106,7 +106,7 @@ public class AmassEffect extends TokenEffectBase {
         // change type after counters
         long ts = game.getNextTimestamp();
         for (final Card tgtCard : tgtCards) {
-            tgtCard.addChangedCardTypes(CardType.parse(type, true), null, false, EnumSet.noneOf(CardChangedType.Remove.class), ts, 0, true, false);
+            tgtCard.addChangedCardTypes(CardType.parse(type, true), null, false, EnumSet.noneOf(RemoveType.class), ts, 0, true, false);
         }
     }
 

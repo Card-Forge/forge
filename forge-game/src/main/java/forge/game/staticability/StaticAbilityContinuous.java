@@ -34,11 +34,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.GameCommand;
-import forge.card.CardChangedType;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.RemoveType;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.StaticEffect;
@@ -148,7 +148,7 @@ public final class StaticAbilityContinuous {
         boolean removeAllAbilities = false;
         boolean removeNonMana = false;
         boolean addAllCreatureTypes = false;
-        Set<CardChangedType.Remove> remove = EnumSet.noneOf(CardChangedType.Remove.class);
+        Set<RemoveType> remove = EnumSet.noneOf(RemoveType.class);
 
         boolean overwriteColors = false;
 
@@ -449,25 +449,25 @@ public final class StaticAbilityContinuous {
                 addAllCreatureTypes = true;
             }
             if (params.containsKey("RemoveSuperTypes")) {
-                remove.add(CardChangedType.Remove.SuperTypes);
+                remove.add(RemoveType.SuperTypes);
             }
             if (params.containsKey("RemoveCardTypes")) {
-                remove.add(CardChangedType.Remove.CardTypes);
+                remove.add(RemoveType.CardTypes);
             }
             if (params.containsKey("RemoveSubTypes")) {
-                remove.add(CardChangedType.Remove.SubTypes);
+                remove.add(RemoveType.SubTypes);
             }
             if (params.containsKey("RemoveLandTypes")) {
-                remove.add(CardChangedType.Remove.LandTypes);
+                remove.add(RemoveType.LandTypes);
             }
             if (params.containsKey("RemoveCreatureTypes")) {
-                remove.add(CardChangedType.Remove.CreatureTypes);
+                remove.add(RemoveType.CreatureTypes);
             }
             if (params.containsKey("RemoveArtifactTypes")) {
-                remove.add(CardChangedType.Remove.ArtifactTypes);
+                remove.add(RemoveType.ArtifactTypes);
             }
             if (params.containsKey("RemoveEnchantmentTypes")) {
-                remove.add(CardChangedType.Remove.EnchantmentTypes);
+                remove.add(RemoveType.EnchantmentTypes);
             }
         }
 
