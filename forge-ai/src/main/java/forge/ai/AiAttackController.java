@@ -22,6 +22,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import forge.card.CardStateName;
+import forge.game.card.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import org.apache.commons.lang3.tuple.Pair;
@@ -37,13 +39,6 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.ProtectEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.combat.GlobalAttackRestrictions;
@@ -142,7 +137,7 @@ public class AiAttackController {
             }
         };
         for (Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), canAnimate)) {
-            if (c.isToken() && c.getCopiedPermanent() == null) {
+            if (c.isToken() && c.getCopiedPermanent() == null && !c.canTransform(null)) {
                 continue;
             }
             for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.Animate))) {
@@ -150,6 +145,15 @@ public class AiAttackController {
                         && sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
                     Card animatedCopy = AnimateAi.becomeAnimated(c, sa);
                     defenders.add(animatedCopy);
+                }
+            }
+            // Transform (e.g. Incubator tokens)
+            for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.SetState))) {
+                if ("Transform".equals(sa.getParam("Mode")) && ComputerUtilCost.canPayCost(sa, defender, false)
+                        && sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
+                    Card transformedCopy = CardUtil.getLKICopy(c);
+                    transformedCopy.setState(CardStateName.Transformed, false);
+                    defenders.add(transformedCopy);
                 }
             }
         }
