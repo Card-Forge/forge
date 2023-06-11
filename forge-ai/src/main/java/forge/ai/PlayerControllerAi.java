@@ -341,12 +341,24 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix) {
-        // We don't know how to reveal cards to AI
+        AiCardMemory.clearMemorySet(player, AiCardMemory.MemorySet.REVEALED_CARDS);
+        for (Card c : cards) {
+            AiCardMemory.rememberCard(player, c, AiCardMemory.MemorySet.REVEALED_CARDS);
+        }
     }
 
     @Override
     public void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix) {
-        // We don't know how to reveal cards to AI
+        AiCardMemory.clearMemorySet(player, AiCardMemory.MemorySet.REVEALED_CARDS);
+        // TODO: this is slow, iterating over all the cards in game for every CardView passed. Optimize?
+        for (CardView cv : cards) {
+            for (Card c : player.getGame().getCardsInGame()) {
+                if (c.getId() == cv.getId()) {
+                    AiCardMemory.rememberCard(player, c, AiCardMemory.MemorySet.REVEALED_CARDS);
+                    break;
+                }
+            }
+        }
     }
 
     @Override

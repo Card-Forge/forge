@@ -1,8 +1,10 @@
 package forge.ai.ability;
 
 import java.util.Map;
+import java.util.Set;
 
 import forge.ai.AiAttackController;
+import forge.ai.AiCardMemory;
 import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
 import forge.game.card.Card;
@@ -73,6 +75,15 @@ public class PeekAndRevealAi extends SpellAbilityAi {
      */
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+        if ("InstantOrSorcery".equals(sa.getParam("AILogic"))) {
+            Set<Card> revealed = AiCardMemory.getMemorySet(player, AiCardMemory.MemorySet.REVEALED_CARDS);
+            for (Card c : revealed) {
+                if (!c.isInstant() && !c.isSorcery()) {
+                    return false;
+                }
+            }
+        }
+
         AbilitySub subAb = sa.getSubAbility();
         return subAb != null && SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(player, subAb);
     }
