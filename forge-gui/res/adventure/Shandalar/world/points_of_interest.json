@@ -65,7 +65,7 @@
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "black_castle",
-	"map": "maps/map/main_story/black_castle.tmx",
+	"map": "maps/map/castles/black_castle.tmx",
 	"radiusFactor": 0.01,
 	"offsetX": 0.1,
 	"offsetY": -0.1,
@@ -83,7 +83,7 @@
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "blue_castle",
-	"map": "maps/map/main_story/blue_castle.tmx",
+	"map": "maps/map/castles/blue_castle.tmx",
 	"radiusFactor": 0.01,
 	"offsetX": 0.1,
 	"offsetY": 0.1,
@@ -1110,12 +1110,12 @@
 	]
 },
 {
-	"name": "Colorless Castle",
+	"name": "Emrakul",
 	"type": "castle",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "colorless_castle",
-	"map": "maps/map/main_story/colorless_castle.tmx",
+	"map": "maps/map/minibosses/colorless_castle.tmx",
 	"radiusFactor": 0.4,
 	"questTags": [
 		"Story",
@@ -1362,12 +1362,12 @@
 	]
 },
 {
-	"name": "Final Castle",
+	"name": "Sliver Queen",
 	"type": "castle",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "final_castle",
-	"map": "maps/map/main_story/final_castle.tmx",
+	"map": "maps/map/minibosses/sliverqueen.tmx",
 	"offsetY": 0.025,
 	"questTags": [
 		"Story",
@@ -1644,7 +1644,7 @@
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "green_castle",
-	"map": "maps/map/main_story/green_castle.tmx",
+	"map": "maps/map/castles/green_castle.tmx",
 	"radiusFactor": 0.01,
 	"offsetX": -0.1,
 	"offsetY": 0.1,
@@ -2724,7 +2724,7 @@
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "red_castle",
-	"map": "maps/map/main_story/red_castle.tmx",
+	"map": "maps/map/castles/red_castle.tmx",
 	"radiusFactor": 0.01,
 	"offsetX": -0.1,
 	"offsetY": -0.1,
@@ -2851,7 +2851,7 @@
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "EvilGrove",
-	"map": "maps/map/slimefoot_boss.tmx",
+	"map": "maps/map/minibosses/slimefoot_boss.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
@@ -2893,7 +2893,7 @@
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Factory",
-	"map": "maps/map/slobad_factory.tmx",
+	"map": "maps/map/minibosses/slobad_factory.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Boss",
@@ -2907,7 +2907,7 @@
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
-	"map": "maps/map/main_story/skep.tmx",
+	"map": "maps/map/minibosses/skep.tmx",
 	"radiusFactor": 0.5,
 	"questTags": [
 		"Boss",
@@ -3208,7 +3208,7 @@
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "white_castle",
-	"map": "maps/map/main_story/white_castle.tmx",
+	"map": "maps/map/castles/white_castle.tmx",
 	"radiusFactor": 0.01,
 	"offsetY": 0.1,
 	"questTags": [
@@ -3238,7 +3238,7 @@
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
-	"map": "maps/map/xira.tmx",
+	"map": "maps/map/minibosses/xira.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
