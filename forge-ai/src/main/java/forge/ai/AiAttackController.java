@@ -145,14 +145,20 @@ public class AiAttackController {
                 if (ComputerUtilCost.canPayCost(sa, defender, false)
                         && sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
                     Card animatedCopy = AnimateAi.becomeAnimated(c, sa);
-                    defenders.add(animatedCopy);
+                    int saCMC = sa.getPayCosts() != null && sa.getPayCosts().hasManaCost() ?
+                            sa.getPayCosts().getTotalMana().getCMC() : 0; // FIXME: imprecise, only works 100% for colorless mana
+                    if (totalMana - manaReserved >= saCMC) {
+                        manaReserved += saCMC;
+                        defenders.add(animatedCopy);
+                    }
                 }
             }
             // Transform (e.g. Incubator tokens)
             for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.SetState))) {
                 Card transformedCopy = ComputerUtilCombat.canTransform(c);
                 if (transformedCopy.isCreature()) {
-                    int saCMC = sa.getPayCosts().getTotalMana().getCMC(); // FIXME: imprecise, only works 100% for colorless mana
+                    int saCMC = sa.getPayCosts() != null && sa.getPayCosts().hasManaCost() ?
+                            sa.getPayCosts().getTotalMana().getCMC() : 0; // FIXME: imprecise, only works 100% for colorless mana
                     if (totalMana - manaReserved >= saCMC) {
                         manaReserved += saCMC;
                         defenders.add(transformedCopy);
