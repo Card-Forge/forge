@@ -130,7 +130,7 @@ public class AnimateAi extends SpellAbilityAi {
                 return true;  // interrupt sacrifice
             }
         }
-        if (!ComputerUtilCost.checkTapTypeCost(aiPlayer, sa.getPayCosts(), source, sa)) {
+        if (!ComputerUtilCost.checkTapTypeCost(aiPlayer, sa.getPayCosts(), source, sa, new CardCollection())) {
             return false; // prevent crewing with equal or better creatures
         }
 
@@ -379,7 +379,7 @@ public class AnimateAi extends SpellAbilityAi {
         return copy;
     }
     
-    public static void becomeAnimated(final Card card, final boolean hasOriginalCardSickness, final SpellAbility sa) {
+    private static void becomeAnimated(final Card card, final boolean hasOriginalCardSickness, final SpellAbility sa) {
         // duplicating AnimateEffect.resolve
         final Card source = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();

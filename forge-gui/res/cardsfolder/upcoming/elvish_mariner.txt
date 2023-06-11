@@ -1,0 +1,11 @@
+Name:Elvish Mariner
+ManaCost:2 U
+Types:Creature Elf Pilot
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigScry | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, scry 1.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
+T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever you scry, tap up to X target nonland permanents, where X is the number of cards looked at while scrying this way.
+SVar:TrigTap:DB$ Tap | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Select up to X target nonland permanents | ValidTgts$ Permanent.nonLand
+SVar:X:TriggerCount$ScryNum
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Elvish Mariner attacks, scry 1.\nWhenever you scry, tap up to X target nonland permanents, where X is the number of cards looked at while scrying this way.
