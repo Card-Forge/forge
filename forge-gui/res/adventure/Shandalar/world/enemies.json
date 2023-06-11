@@ -4611,7 +4611,8 @@
 			"count": 1,
 			"addMaxCount": 2,
 			"rarity": [
-				"rare"
+				"rare",
+				"mythicrare"
 			],
 			"cardTypes": [
 				"Creature",
@@ -4689,7 +4690,8 @@
 			"count": 1,
 			"addMaxCount": 1,
 			"rarity": [
-				"rare"
+				"rare",
+				"mythicrare"
 			],
 			"cardTypes": [
 				"Creature",
@@ -6082,7 +6084,8 @@
 			"count": 1,
 			"addMaxCount": 1,
 			"rarity": [
-				"rare"
+				"rare",
+				"mythicrare"
 			],
 			"cardTypes": [
 				"Creature",
@@ -6161,7 +6164,8 @@
 			"count": 1,
 			"addMaxCount": 2,
 			"rarity": [
-				"rare"
+				"rare",
+				"mythicrare"
 			],
 			"cardTypes": [
 				"Creature",
@@ -8226,7 +8230,8 @@
 			"count": 1,
 			"addMaxCount": 1,
 			"rarity": [
-				"rare"
+				"rare",
+				"mythicrare"
 			],
 			"cardTypes": [
 				"Creature",
@@ -8305,7 +8310,8 @@
 			"count": 1,
 			"addMaxCount": 2,
 			"rarity": [
-				"rare"
+				"rare",
+				"mythicrare"
 			],
 			"cardTypes": [
 				"Creature",
@@ -9062,7 +9068,8 @@
 			"count": 1,
 			"addMaxCount": 2,
 			"rarity": [
-				"rare"
+				"rare",
+				"mythicrare"
 			],
 			"cardTypes": [
 				"Creature",
@@ -9144,7 +9151,8 @@
 			"count": 1,
 			"addMaxCount": 1,
 			"rarity": [
-				"rare"
+				"rare",
+				"mythicrare"
 			],
 			"cardTypes": [
 				"Creature",
@@ -16192,7 +16200,8 @@
 			"count": 1,
 			"addMaxCount": 2,
 			"rarity": [
-				"rare"
+				"rare",
+				"mythicrare"
 			],
 			"cardTypes": [
 				"Creature",
@@ -16272,7 +16281,8 @@
 			"count": 1,
 			"addMaxCount": 1,
 			"rarity": [
-				"rare"
+				"rare",
+				"mythicrare"
 			],
 			"cardTypes": [
 				"Creature",
