@@ -3037,8 +3037,8 @@ public class AbilityUtils {
         if (isDescriptive) {
             newWord = "<strike>" + originalWord + "</strike> " + newWord;
         }
-        // use word boundaries and keep negations
-        return text.replaceAll((isDescriptive ? "(?<!>)" : "") + "(?<!named.*)\\b(non)?" + originalWord, "$1" + newWord);
+        // use word boundaries and keep negations - java only supports bounded maximum length in negative lookbehind
+        return text.replaceAll((isDescriptive ? "(?<!>)" : "") + "(?<!named.{0,100})\\b(non)?" + originalWord, "$1" + newWord);
     }
 
     public static final String getSVar(final CardTraitBase ability, final String sVarName) {
