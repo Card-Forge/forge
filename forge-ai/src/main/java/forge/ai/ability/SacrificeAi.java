@@ -78,15 +78,7 @@ public class SacrificeAi extends SpellAbilityAi {
             String num = sa.getParamOrDefault("Amount" , "1");
             final int amount = AbilityUtils.calculateAmount(source, num, sa);
 
-            List<Card> list = null;
-            try {
-                list = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
-            } catch (NullPointerException e) {
-                return false;
-            } finally {
-                if (list == null)
-                    return false;
-            }//prevent NPE on MoJhoSto
+            List<Card> list = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
 
             for (Card c : list) {
                 if (c.hasSVar("SacMe") && Integer.parseInt(c.getSVar("SacMe")) > 3) {
@@ -140,30 +132,13 @@ public class SacrificeAi extends SpellAbilityAi {
                 amount = Math.min(ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()), amount);
             }
 
-            List<Card> humanList = null;
-            try {
-                humanList = CardLists.getValidCards(ai.getStrongestOpponent().getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
-            } catch (NullPointerException e) {
-                return false;
-            } finally {
-                if (humanList == null)
-                    return false;
-            }//prevent NPE on MoJhoSto
+            List<Card> humanList = CardLists.getValidCards(ai.getStrongestOpponent().getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
 
             // Since all of the cards have AI:RemoveDeck:All, I enabled 1 for 1
             // (or X for X) trades for special decks
             return humanList.size() >= amount;
         } else if (defined.equals("You")) {
-            List<Card> computerList = null;
-            try {
-                computerList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
-            } catch (NullPointerException e) {
-                return false;
-            } finally {
-                if (computerList == null)
-                    return false;
-            }//prevent NPE on MoJhoSto
-
+            List<Card> computerList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
             for (Card c : computerList) {
                 if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) <= 135) {
                     return true;

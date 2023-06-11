@@ -694,10 +694,8 @@ public class ComputerUtil {
     public static CardCollection chooseTapType(final Player ai, final String type, final Card activate, final boolean tap, final int amount, final CardCollectionView exclude, SpellAbility sa) {
         CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
         all.removeAll(exclude);
-        CardCollection typeList =
-                CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, sa);
+        CardCollection typeList = CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, sa);
 
-        // is this needed?
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
 
         if (tap) {
@@ -733,7 +731,6 @@ public class ComputerUtil {
             typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
         }
 
-        // is this needed?
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
 
         if (tap) {
@@ -772,7 +769,6 @@ public class ComputerUtil {
         CardCollection typeList =
                 CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, sa);
 
-        // is this needed?
         typeList = CardLists.filter(typeList, Presets.TAPPED);
 
         if (untap) {
