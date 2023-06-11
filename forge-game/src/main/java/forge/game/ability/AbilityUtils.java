@@ -2180,34 +2180,20 @@ public class AbilityUtils {
             return doXMath(Integer.parseInt(sq[isMyMain ? 1 : 2]), expr, c, ctb);
         }
 
-        // Count$AttachedTo <DefinedCards related to spellability> <restriction>
+        // Count$AttachedTo <restriction>
         if (sq[0].startsWith("AttachedTo")) {
             final String[] k = l[0].split(" ");
-            int sum = 0;
-            for (Card card : getDefinedCards(c, k[1], ctb)) {
-                // Hateful Eidolon: the script uses LKI so that the attached cards have to be defined
-                // This card needs the spellability ("Auras You control",  you refers to the activating player)
-                // CardFactoryUtils.xCount doesn't have the sa parameter, SVar:X:TriggeredCard$Valid <restriction> cannot handle this
-                sum += CardLists.getValidCardCount(card.getAttachedCards(), k[2], player, c, ctb);
-            }
+            int sum = CardLists.getValidCardCount(c.getAttachedCards(), k[1], player, c, ctb);
             return doXMath(sum, expr, c, ctb);
         }
 
         // Count$CardManaCost
         if (sq[0].contains("CardManaCost")) {
-            Card ce;
-            if (sq[0].contains("Remembered")) {
-                ce = (Card) c.getFirstRemembered();
-            }
-            else {
-                ce = c;
-            }
+            int cmc = c.getCMC();
 
-            int cmc = ce == null ? 0 : ce.getCMC();
-
-            if (sq[0].contains("LKI") && ctb instanceof SpellAbility && ce != null && !ce.isInZone(ZoneType.Stack) && ce.getManaCost() != null) {
+            if (sq[0].contains("LKI") && ctb instanceof SpellAbility && !c.isInZone(ZoneType.Stack) && c.getManaCost() != null) {
                 if (((SpellAbility) ctb).getXManaCostPaid() != null) {
-                    cmc += ((SpellAbility) ctb).getXManaCostPaid() * ce.getManaCost().countX();
+                    cmc += ((SpellAbility) ctb).getXManaCostPaid() * c.getManaCost().countX();
                 }
             }
 
