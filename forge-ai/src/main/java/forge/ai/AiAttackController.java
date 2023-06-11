@@ -135,16 +135,20 @@ public class AiAttackController {
                 return !c.isTapped() && !c.isCreature() && !c.isPlaneswalker();
             }
         };
+
+        CardCollection tappedDefenders = new CardCollection();
         for (Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), canAnimate)) {
-            /* TODO: is the commented out code still necessary for anything?
-            if (c.isToken() && c.getCopiedPermanent() == null && !c.canTransform(null)) {
-                continue;
-            }
-            */
             for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.Animate))) {
-                if (ComputerUtilCost.canPayCost(sa, defender, false)
-                        && sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
-                    Card animatedCopy = AnimateAi.becomeAnimated(c, sa);
+                if (sa.usesTargeting() || !sa.getParamOrDefault("Defined", "Self").equals("Self")) {
+                    continue;
+                }
+                if (sa.hasParam("Crew") && !ComputerUtilCost.checkTapTypeCost(defender, sa.getPayCosts(), c, sa, tappedDefenders)) {
+                    continue;
+                } else if (!ComputerUtilCost.canPayCost(sa, defender, false) || !sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
+                    continue;
+                }
+                Card animatedCopy = AnimateAi.becomeAnimated(c, sa);
+                if (animatedCopy.isCreature()) {
                     int saCMC = sa.getPayCosts() != null && sa.getPayCosts().hasManaCost() ?
                             sa.getPayCosts().getTotalMana().getCMC() : 0; // FIXME: imprecise, only works 100% for colorless mana
                     if (totalMana - manaReserved >= saCMC) {
@@ -153,6 +157,8 @@ public class AiAttackController {
                     }
                 }
             }
+            defenders.removeAll(tappedDefenders);
+
             // Transform (e.g. Incubator tokens)
             for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.SetState))) {
                 Card transformedCopy = ComputerUtilCombat.canTransform(c);
