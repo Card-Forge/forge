@@ -60,7 +60,7 @@ public class AiCardMemory {
         MARKED_TO_AVOID_REENTRY, // These cards may cause a stack smash when processed recursively, and are thus marked to avoid a crash
         PAYS_TAP_COST, // These cards will be tapped as part of a cost and cannot be chosen in another part
         PAYS_SAC_COST, // These cards will be sacrificed as part of a cost and cannot be chosen in another part
-        REVEALED_CARDS // stub, not linked to AI code yet
+        REVEALED_CARDS // These cards were recently revealed to the AI by a call to PlayerControllerAi.reveal
     }
 
     private final Set<Card> memMandatoryAttackers;
