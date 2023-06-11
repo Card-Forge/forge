@@ -5316,16 +5316,6 @@
 	"rewards": [
 		{
 			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
 			"probability": 0.5,
 			"count": 1,
 			"addMaxCount": 2,
@@ -5334,7 +5324,6 @@
 			],
 			"cardTypes": [
 				"Creature",
-				"Artifact",
 				"Enchantment",
 				"Instant",
 				"Sorcery"
@@ -5372,6 +5361,33 @@
 			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Black",
+				"Red",
+				"Blue"
+			],
+			"rarity": [
+				"Rare",
+				"Mythic Rare"
+			],
+			"subTypes": [
+				"Demon"
+			],
+			"cardTypes": [
+				"Creature"
+			]
 		}
 	],
 	"colors": "B",
@@ -7824,9 +7840,9 @@
 	],
 	"ai": "",
 	"spawnRate": 1,
-	"scale":1.3,
 	"difficulty": 0.1,
 	"speed": 23,
+	"scale": 1.3,
 	"life": 25,
 	"rewards": [
 		{
@@ -9910,9 +9926,9 @@
 	],
 	"ai": "",
 	"spawnRate": 1,
-	"scale":0.5,
 	"difficulty": 0.1,
 	"speed": 27,
+	"scale": 0.5,
 	"life": 20,
 	"rewards": [
 		{
