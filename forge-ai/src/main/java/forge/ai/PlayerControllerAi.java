@@ -341,12 +341,18 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix) {
-        // We don't know how to reveal cards to AI
+        AiCardMemory.clearMemorySet(player, AiCardMemory.MemorySet.REVEALED_CARDS);
+        for (Card c : cards) {
+            AiCardMemory.rememberCard(player, c, AiCardMemory.MemorySet.REVEALED_CARDS);
+        }
     }
 
     @Override
     public void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix) {
-        // We don't know how to reveal cards to AI
+        AiCardMemory.clearMemorySet(player, AiCardMemory.MemorySet.REVEALED_CARDS);
+        for (CardView cv : cards) {
+            AiCardMemory.rememberCard(player, player.getGame().findByView(cv), AiCardMemory.MemorySet.REVEALED_CARDS);
+        }
     }
 
     @Override
