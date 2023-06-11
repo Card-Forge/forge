@@ -8,5 +8,5 @@ A:AB$ Amass | Cost$ X X B T | Type$ Orc | Num$ X | CheckSVar$ Morbid | SVarCompa
 SVar:Morbid:Count$Morbid.1.0
 SVar:X:Count$xPaid
 DeckHints:Type$Legendary & Type$Creature
-DeckHas:Ability$Tokens|Counters & Type$Orc
+DeckHas:Ability$Token|Counters & Type$Orc
 Oracle:Barad-Dur enters the battlefield tapped unless you control a legendary creature.\n{T}: Add {B}.\n{X}{X}{B}, {T}: Amass Orcs X. Activate only if a creature died this turn.
