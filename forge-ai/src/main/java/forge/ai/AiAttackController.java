@@ -22,7 +22,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.ability.AnimateAi;
-import forge.card.CardTypeView;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -41,7 +40,6 @@ import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Expressions;
@@ -142,6 +140,7 @@ public class AiAttackController {
                 if (sa.usesTargeting() || !sa.getParamOrDefault("Defined", "Self").equals("Self")) {
                     continue;
                 }
+                sa.setActivatingPlayer(defender);
                 if (sa.hasParam("Crew") && !ComputerUtilCost.checkTapTypeCost(defender, sa.getPayCosts(), c, sa, tappedDefenders)) {
                     continue;
                 } else if (!ComputerUtilCost.canPayCost(sa, defender, false) || !sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
@@ -154,6 +153,7 @@ public class AiAttackController {
                     if (totalMana - manaReserved >= saCMC) {
                         manaReserved += saCMC;
                         defenders.add(animatedCopy);
+                        break;
                     }
                 }
             }
@@ -532,31 +532,15 @@ public class AiAttackController {
         final CardCollection remainingBlockers = new CardCollection(this.blockers);
         final CardCollection blockedAttackers = new CardCollection();
 
-        // Conservative prediction for vehicles: the AI tries to acknowledge the fact that
-        // at least one creature will tap to crew a blocking vehicle when predicting if an
-        // alpha strike for lethal is viable
         int maxBlockersAfterCrew = remainingBlockers.size();
-        for (Card c : this.blockers) {
-            CardTypeView cardType = c.getCurrentState().getType();
-            Zone oppBattlefield = c.getController().getZone(ZoneType.Battlefield);
-
-            if (c.getName().equals("Heart of Kiran")) {
-                if (Iterables.any(oppBattlefield, CardPredicates.Presets.PLANESWALKERS)) {
-                    // can be activated by removing a loyalty counter instead of tapping a creature
-                    continue;
-                }
-            } else if (c.getName().equals("Peacewalker Colossus")) {
-                // can activate other vehicles for {1}{W}
-                // TODO: the AI should ideally predict how many times it can activate
-                // for now, unless the opponent is tapped out, break at this point
-                // and do not predict the blocker limit (which is safer)
-                if (Iterables.any(oppBattlefield, Predicates.and(CardPredicates.Presets.UNTAPPED, CardPredicates.Presets.LANDS))) {
-                    maxBlockersAfterCrew = Integer.MAX_VALUE;
-                    break;
-                }
-                maxBlockersAfterCrew--;
-            } else if (cardType.hasSubtype("Vehicle") && !cardType.isCreature()) {
-                maxBlockersAfterCrew--;
+        if (defendingOpponent.isCardInPlay("Peacewalker Colossus")) {
+            // can activate other vehicles for {1}{W}
+            // TODO: the AI should ideally predict how many times it can activate
+            // for now, unless the opponent is tapped out, break at this point
+            // and do not predict the blocker limit (which is safer)
+            if (Iterables.any(defendingOpponent.getLandsInPlay(), CardPredicates.Presets.UNTAPPED)) {
+                maxBlockersAfterCrew += CardLists.count(CardLists.getNotType(defendingOpponent.getCardsIn(ZoneType.Battlefield), "Creature"),
+                        Predicates.and(CardPredicates.isType("Vehicle"), CardPredicates.Presets.UNTAPPED));
             }
         }
 
@@ -615,12 +599,9 @@ public class AiAttackController {
             }
 
             int numExtraBlocks = blocker.canBlockAdditional();
-            if (numExtraBlocks > 0) {
-                // TODO should be limited to how much getBlockCost the opp can pay
-                while (numExtraBlocks-- > 0 && !remainingAttackers.isEmpty()) {
-                    blockedAttackers.add(remainingAttackers.remove(0));
-                    maxBlockersAfterCrew--;
-                }
+            // TODO should be limited to how much getBlockCost the opp can pay
+            while (numExtraBlocks-- > 0 && !remainingAttackers.isEmpty()) {
+                blockedAttackers.add(remainingAttackers.remove(0));
             }
 
             if (remainingAttackers.isEmpty()) {
