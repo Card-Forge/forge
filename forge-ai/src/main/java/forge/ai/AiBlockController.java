@@ -1087,7 +1087,7 @@ public class AiBlockController {
         makeGangBlocks(combat);
 
         // When the AI holds some Fog effect, don't bother about lifeInDanger
-        if (!ComputerUtil.hasAFogEffect(ai, checkingOther)) {
+        if (!ComputerUtil.hasAFogEffect(ai, ai, checkingOther)) {
             lifeInDanger = ComputerUtilCombat.lifeInDanger(ai, combat);
             makeTradeBlocks(combat); // choose necessary trade blocks
 

@@ -512,7 +512,6 @@ public class AiAttackController {
     }
 
     private boolean doAssault() {
-        // Beastmaster Ascension
         if (ai.isCardInPlay("Beastmaster Ascension") && this.attackers.size() > 1) {
             final CardCollectionView beastions = ai.getCardsIn(ZoneType.Battlefield, "Beastmaster Ascension");
             int minCreatures = 7;
@@ -523,6 +522,12 @@ public class AiAttackController {
             if (this.attackers.size() >= minCreatures) {
                 return true;
             }
+        }
+
+        // the real AI (running this AttackController) doesn't track if cards only get revealed to a subset of players
+        // - therefore in the few cases AI runs this for others conclusions might be wrong
+        if (ComputerUtil.hasAFogEffect(defendingOpponent, ai, true)) {
+            return false;
         }
 
         CardLists.sortByPowerDesc(this.attackers);
