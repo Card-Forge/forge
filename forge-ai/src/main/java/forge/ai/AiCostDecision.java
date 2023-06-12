@@ -2,10 +2,7 @@ package forge.ai;
 
 import static forge.ai.ComputerUtilCard.getBestCreatureAI;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import forge.card.MagicColor;
 import forge.game.cost.*;
@@ -479,6 +476,14 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         if (cost.getType().equals("Hand")) {
             return PaymentDecision.card(hand);
+        }
+
+        if (cost.getRevealFrom().containsAll(Arrays.asList(ZoneType.Hand, ZoneType.Battlefield))) { // RevealOrChoose
+            CardCollection battlefieldOrHand = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield),
+                    type.split(";"), player, source, ability);
+            hand = CardLists.getValidCards(hand, type.split(";"), player, source, ability);
+            battlefieldOrHand.addAll(hand);
+            return PaymentDecision.card(getBestCreatureAI(battlefieldOrHand));
         }
 
         if (cost.getType().equals("SameColor")) {
