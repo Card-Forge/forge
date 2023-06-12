@@ -24,6 +24,7 @@ public class AdventureWinLose extends ControlWinLose {
         }
         v.getBtnRestart().setVisible(false);
         v.getBtnRestart().setEnabled(false);
+        v.getLabelShowBattlefield().setVisible(false);
         //v.getBtnQuit().setText(Forge.getLocalizer().getMessage("lblBackToAdventure"));
         Forge.setCursor(null, "0");
     }
