@@ -2,10 +2,12 @@ package forge.adventure.data;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;
+import forge.adventure.util.AdventureQuestController;
 import forge.util.MyRandom;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -85,10 +87,12 @@ public class BiomeData implements Serializable {
     }
 
     public EnemyData getEnemy(float difficultyFactor) {
+        Map<String, Float> boostedSpawns = AdventureQuestController.instance().getBoostedSpawns(enemyList);
         EnemyData bestData = null;
         float biggestNumber = 0.0f;
         for (EnemyData data : enemyList) {
-            float newNumber = (1.0f + (data.spawnRate * rand.nextFloat())) * difficultyFactor;
+            float boost = boostedSpawns.getOrDefault(data.getName(), 0.0f); //Each active quest stage will divide 1.0f across any valid enemies to defeat
+            float newNumber = (1.0f + ((data.spawnRate + boost) * rand.nextFloat())) * difficultyFactor;
             if (newNumber > biggestNumber) {
                 biggestNumber = newNumber;
                 bestData = data;
