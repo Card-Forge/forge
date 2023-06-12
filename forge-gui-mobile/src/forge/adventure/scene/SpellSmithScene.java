@@ -18,6 +18,7 @@ import forge.card.ColorSet;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.MyRandom;
+import org.checkerframework.checker.units.qual.C;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -152,6 +153,11 @@ public class SpellSmithScene extends UIScene {
             if (it.size() == 0)
                 return false;
             return (!Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getCode()));
+        }).sorted(new Comparator<CardEdition>() {
+            @Override
+            public int compare(CardEdition e1, CardEdition e2) {
+                return e1.getName().compareTo(e2.getName());
+            }
         }).collect(Collectors.toList());
     }
 
