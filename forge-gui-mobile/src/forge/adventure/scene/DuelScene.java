@@ -108,7 +108,7 @@ public class DuelScene extends ForgeScene {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String enemyName = (enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride);
+        String enemyName = enemy.getName();
         boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
         Current.player().clearBlessing();
         if ((chaosBattle || showMessages) && !winner) {
@@ -315,9 +315,8 @@ public class DuelScene extends ForgeScene {
             }
             RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, deck, null, false, null, null);
 
-            LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(currentEnemy.name, selectAI(currentEnemy.ai));
-            if (!enemy.nameOverride.isEmpty())
-                enemyPlayer.setName(enemy.nameOverride); //Override name if defined in the map.(only supported for 1 enemy atm)
+            LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(currentEnemy.getName(), selectAI(currentEnemy.ai));
+            enemyPlayer.setName(enemy.getName()); //Override name if defined in the map.(only supported for 1 enemy atm)
             TextureRegion enemyAvatar = enemy.getAvatar(i);
             enemyAvatar.flip(true, false); //flip facing left
             FSkin.getAvatars().put(90001 + i, enemyAvatar);
@@ -398,7 +397,7 @@ public class DuelScene extends ForgeScene {
                     "Don't blink!", "You can't lose here!", "There's no turning back!", "It's all or nothing now!");
             String message = Aggregates.random(list);
             matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, () -> FThreads.invokeInEdtNowOrLater(() ->
-                    FOptionPane.showMessageDialog(message, enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride, fb, new Callback<Integer>() {
+                    FOptionPane.showMessageDialog(message, enemy.getName(), fb, new Callback<Integer>() {
                         @Override
                         public void run(Integer result) {
                             fb.dispose();

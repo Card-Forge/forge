@@ -247,7 +247,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
             Forge.setTransitionScreen(new TransitionScreen(() -> {
                 duelScene.initDuels(WorldStage.getInstance().getPlayerSprite(), enemy);
                 Forge.switchScene(duelScene);
-            }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), enemy.getAtlasPath(), Current.player().getName(), enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride));
+            }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), enemy.getAtlasPath(), Current.player().getName(), enemy.getName()));
         });
     }
 
@@ -303,7 +303,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
                 enemyData = WorldData.getEnemy(data.enemyPool[rand.nextInt(data.enemyPool.length)]);
             EnemySprite enemy = new EnemySprite(enemyData);
             enemies.add(enemy);
-            fighters.add(new ArenaRecord(new Image(enemy.getAvatar()), enemyData.name));
+            fighters.add(new ArenaRecord(new Image(enemy.getAvatar()), enemyData.getName()));
         }
         fighters.add(new ArenaRecord(new Image(Current.player().avatar()), Current.player().getName()));
         player = fighters.get(fighters.size - 1).actor;

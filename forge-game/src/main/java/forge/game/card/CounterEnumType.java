@@ -172,6 +172,8 @@ public enum CounterEnumType {
     HIT("HIT", 255, 245, 195),
 
     HONE("HONE", 51, 227, 255),
+    
+    HOPE("HOPE", 232, 245, 245),
 
     HOOFPRINT("HOOF", 233, 189, 170),
 

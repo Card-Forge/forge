@@ -63,13 +63,11 @@
 	"Pirate",
 	"Raven",
 	"Sliver",
+	"Wandering Giant",
 	"Wild Rat"
 ],
 "pointsOfInterest": [
 	"Spawn",
-	"Final Castle",
-	"Colorless Castle",
-	"Skep",
 	"Waste Town Generic",
 	"Waste Town Identity",
 	"Waste Town Tribal",
@@ -108,7 +106,6 @@
 	"Crawlspace",
 	"Dream Halls",
 	"Lich's Mirror",
-	"Kobold Mine",
 	"Slime Cave",
 	"Slobads Factory"
 ],

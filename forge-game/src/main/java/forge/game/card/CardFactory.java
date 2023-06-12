@@ -753,6 +753,19 @@ public class CardFactory {
             final CardState ret2 = new CardState(out, CardStateName.Transformed);
             ret2.copyFrom(in.getState(CardStateName.Transformed), false, sa);
             result.put(CardStateName.Transformed, ret2);
+        } else if (in.isSplitCard()) {
+            // for split cards, copy all three states
+            final CardState ret1 = new CardState(out, CardStateName.Original);
+            ret1.copyFrom(in.getState(CardStateName.Original), false, sa);
+            result.put(CardStateName.Original, ret1);
+
+            final CardState ret2 = new CardState(out, CardStateName.LeftSplit);
+            ret2.copyFrom(in.getState(CardStateName.LeftSplit), false, sa);
+            result.put(CardStateName.LeftSplit, ret2);
+
+            final CardState ret3 = new CardState(out, CardStateName.RightSplit);
+            ret3.copyFrom(in.getState(CardStateName.RightSplit), false, sa);
+            result.put(CardStateName.RightSplit, ret3);
         } else {
             // in all other cases just copy the current state to original
             final CardState ret = new CardState(out, CardStateName.Original);
@@ -768,6 +781,7 @@ public class CardFactory {
             if (sa.hasParam("KeepName")) {
                 state.setName(originalState.getName());
             } else if (newName != null) {
+                // convert NICKNAME descriptions?
                 state.setName(newName);
             }
 

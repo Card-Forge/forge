@@ -52,15 +52,18 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
     }
 
     protected TokenCreateTable makeTokenTableInternal(Player owner, String script, final int finalAmount, final SpellAbility sa) {
-        TokenCreateTable tokenTable = new TokenCreateTable();
         final Card result = TokenInfo.getProtoType(script, sa, owner, false);
 
         if (result == null) {
             throw new RuntimeException("don't find Token for TokenScript: " + script);
         }
         result.setTokenSpawningAbility(sa);
-        tokenTable.put(owner, result, finalAmount);
+        return makeTokenTableInternal(owner, result, finalAmount);
+    }
 
+    protected TokenCreateTable makeTokenTableInternal(Player owner, Card result, final int finalAmount) {
+        TokenCreateTable tokenTable = new TokenCreateTable();
+        tokenTable.put(owner, result, finalAmount);
         return tokenTable;
     }
 

@@ -183,6 +183,13 @@ public class EnemySprite extends CharacterSprite {
         return data;
     }
 
+    @Override
+    public String getName() {
+        if (nameOverride == null || nameOverride.isEmpty())
+            return data.getName();
+        return nameOverride;
+    }
+
     public Array<Reward> getRewards() {
         Array<Reward> ret=new Array<>();
         //Collect custom rewards for chaos battles

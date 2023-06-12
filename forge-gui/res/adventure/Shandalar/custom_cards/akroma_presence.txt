@@ -1,8 +1,7 @@
-Name:Akroma presence
+Name:Akroma's Presence
 ManaCost:no cost
 Colors:White
 Types:Enchantment
-K:Hexproof
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep you gain 4 life.
-SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
-Oracle: At the beginning of your upkeep gain 4 life.
+R:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card.OppCtrl,Emblem.OppCtrl | ValidTarget$ You,Permanent.YouCtrl | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ If a source an opponent controls would deal damage to you or a permanent you control, prevent 1 of that damage.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ 1
+Oracle:If a source an opponent controls would deal damage to you or a permanent you control, prevent 1 of that damage.

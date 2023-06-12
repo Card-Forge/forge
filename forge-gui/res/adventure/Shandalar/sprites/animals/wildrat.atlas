@@ -4,8 +4,8 @@ format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
-  xy: 15, 20
-  size: 12, 12  
+  xy: 40, 48
+  size: 16, 16  
 Idle 
   xy: 0, 10
   size: 32, 22    

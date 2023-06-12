@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="69">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Thallid Shell-Dweller&quot; ]
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxbwM7AsGAUj+JRPIpH8SgexSMCAwB2ckzC
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy9lVlOAzEMhg2TNuIMZRGHmJyh0KrH4YlFQkJUcAXoUeYMnIKlVY/AEjexxrHipPShv+SXJOPPvx1NBhZgsIe4OkqjtEdx4PfuWwAQ536HYZ0CbD7vtjVhvkMbYtoAfPl4MrAR57xYSDRyKb/kWa7dxXyPps+H7DcIfE1jtrf5VnjX+ow89Cc9kGY+77vCXWfqmjN2iXvme3Td6n5qop6sGPvc6Z45l2bJxftdEs5W9gPXNM+cS3Uj+5LlGLN79V+RZ437avsacZafkbuM/ZuwNU0Xsb5n09fOPWv3mTyTHkzgzSq8Zdz/aPo58zr5nHPzllys9Vis3fi717kQt21gTpr0G1lnjXsSc+VEvFOXnu9c/jzp2/+DFpU+a2y80+hL+4/i3fgZpt/MTepVu1eS3bEoMUts1MLm/dXejdI7IkOyJXNX7jZvC7KxRzlmibuvN/gPJXCKuA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1VcFOwzAMzQGk7cCJK+wfRrNuQkLwN3zFaBlfx2VSuq1c+BjyND/NcZMBKjwpSuw4fraTupNrN8Dm6rQOcXRqbzE0d15sKlkDE+P3burcUq2BfRw7ZdspPsyvi6O/VkhXcTzF0agguM8zwFJ8I49edI3kNJ+mfF78bWTkYidu6qGuE/6gdDiPvGolA4wlyIA/Xdtz3DkEN8x9ZWzuZcbdIL9cDj+BjYt5233UHrWm7DNnx3Kzfr5gU9KPBXPmneEtPcia7+u/uAHe8UHp8M4+vzk3No7WfBfsD399r1ZmLfk9k7t3aZ3Pocr4+w12mdhC1vII9hSuyb+dl/nBsY41ntXlmkJP3srsdUqv+68X+Tb6fck1bgPdIwG0CvYT+A6KO6hZ52xR4mauB4nV9i3eN986+bnWffNR5t6l9bPcs0Lvwxn2bMpEY976m/o3vl+kfvhfIzc5+d8j/YfhZ70b5VvHw/1W9p8vTzLiod3epYAP7RNYi/wFqRhYWQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="208" y="281">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="49" template="../../obj/gold.tx" x="209.038" y="33.8697"/>
+  <object id="53" template="../../obj/enemy.tx" x="215.938" y="102.194" width="16" height="17.6724">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Slimefoot's Boss Effect&quot;]
+}</property>
+    <property name="enemy" value="Slimefoot"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/manashards.tx" x="194.986" y="34.0645"/>
+  <object id="56" template="../../obj/booster.tx" x="221.398" y="34.5536">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ICE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/enemy.tx" x="101.074" y="98.2815" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Fungus"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="59,60,61,62,61,60"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/enemy.tx" x="322.647" y="204.91" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Fungus"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="63,66,64,65,68,65,64,66"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/waypoint.tx" x="135.802" y="84.4441"/>
+  <object id="60" template="../../obj/waypoint.tx" x="117.215" y="148.519"/>
+  <object id="61" template="../../obj/waypoint.tx" x="96.6721" y="193.518"/>
+  <object id="62" template="../../obj/waypoint.tx" x="36.9992" y="142.65"/>
+  <object id="63" template="../../obj/waypoint.tx" x="340.744" y="243.898"/>
+  <object id="64" template="../../obj/waypoint.tx" x="376.45" y="163.193"/>
+  <object id="65" template="../../obj/waypoint.tx" x="346.614" y="98.6286"/>
+  <object id="66" template="../../obj/waypoint.tx" x="363.733" y="201.344"/>
+  <object id="67" template="../../obj/waypoint.tx" x="249.278" y="44.3361"/>
+  <object id="68" template="../../obj/waypoint.tx" x="333.407" y="37.4884"/>
+ </objectgroup>
+</map>
