@@ -2,7 +2,7 @@ Name:Druid of the Emerald Grove
 ManaCost:3 G
 Types:Creature Dwarf Druid
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, search your library for up to two basic land cards and reveal them,
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, search your library for up to two basic land cards and reveal them, then ABILITY
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Hidden$ True | ChangeNum$ 2 | ChangeType$ Land.Basic | Destination$ Library | RememberChanged$ True | Reveal$ True | Shuffle$ False | SubAbility$ DBRollDice
 SVar:DBRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:TutuDaDome,10-19:WonTwoField,20:ToFourField | SpellDescription$ then roll a d20.
 SVar:TutuDaDome:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.IsRemembered | ChangeNum$ 2 | SubAbility$ DBCleanup | SpellDescription$ 1-9 VERT Put those cards into your hand, then shuffle.
