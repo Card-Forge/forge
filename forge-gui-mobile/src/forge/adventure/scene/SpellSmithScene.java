@@ -18,7 +18,6 @@ import forge.card.ColorSet;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.MyRandom;
-import org.checkerframework.checker.units.qual.C;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
