@@ -1,27 +1,14 @@
 package forge.ai;
 
-import static forge.ai.ComputerUtilCard.getBestCreatureAI;
-
-import java.util.*;
-
-import forge.card.MagicColor;
-import forge.game.cost.*;
-import org.apache.commons.lang3.ObjectUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
-
 import forge.card.CardType;
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
+import forge.game.card.*;
+import forge.game.cost.*;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -30,6 +17,11 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.ObjectUtils;
+
+import java.util.*;
+
+import static forge.ai.ComputerUtilCard.getBestCreatureAI;
 
 public class AiCostDecision extends CostDecisionMakerBase {
     private final CardCollection discarded;
@@ -481,8 +473,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         if (cost.getRevealFrom().containsAll(Arrays.asList(ZoneType.Hand, ZoneType.Battlefield))) { // RevealOrChoose
             CardCollection battlefieldOrHand = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield),
                     type.split(";"), player, source, ability);
-            hand = CardLists.getValidCards(hand, type.split(";"), player, source, ability);
-            battlefieldOrHand.addAll(hand);
+            battlefieldOrHand.addAll(CardLists.getValidCards(hand, type.split(";"), player, source, ability));
             return PaymentDecision.card(getBestCreatureAI(battlefieldOrHand));
         }
 
