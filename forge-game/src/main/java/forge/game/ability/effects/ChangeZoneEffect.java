@@ -589,9 +589,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("Tapped") || sa.isNinjutsu()) {
                         gameCard.setTapped(true);
                     }
-                    if (sa.hasParam("Untapped")) {
-                        gameCard.setTapped(false);
-                    }
                     if (sa.hasParam("Transformed")) {
                         if (gameCard.isTransformable()) {
                             // need LKI before Animate does apply
@@ -1302,8 +1299,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 else if (destination.equals(ZoneType.Battlefield)) {
                     if (sa.hasParam("Tapped")) {
                         c.setTapped(true);
-                    } else if (sa.hasParam("Untapped")) {
-                        c.setTapped(false);
                     }
                     if (sa.hasAdditionalAbility("AnimateSubAbility")) {
                         // need LKI before Animate does apply
