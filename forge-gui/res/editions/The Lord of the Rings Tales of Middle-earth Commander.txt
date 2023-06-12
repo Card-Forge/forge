@@ -181,7 +181,10 @@ ScryfallCode=LTC
 173 R Mentor of the Meek @Wei Guan
 174 U Palace Jailer @Brian Valeza
 175 U Path to Exile @Torgeir Fjereide
+176 R Selfless Squire @Kim Sokol
+177 U Sunset Revelry @Viko Menezes
 178 U Swords to Plowshares @Christina Kraus
+179 R Unbreakable Formation @Ben Wootten
 180 R Verge Rangers @Miguel Mercado
 181 C Village Bell-Ringer @Brian Valeza
 182 R Visions of Glory @Justyna Dura
