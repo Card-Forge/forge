@@ -1,6 +1,6 @@
 Name:Slobad's Boss Effect
 ManaCost:no cost
-Types:Artifact
+Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+Artifact | AddToughness$ 2 | EffectZone$ Command | Description$ Artifact Creatures you control get +0/+2
 T:Mode$ DamageDoneOnce | ValidTarget$ You | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever you are dealt damage, create X scrap tokens, where X is the amount of damage dealt.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ scrap 
