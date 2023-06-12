@@ -470,7 +470,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(hand);
         }
 
-        if (cost.getRevealFrom().containsAll(Arrays.asList(ZoneType.Hand, ZoneType.Battlefield))) { // RevealOrChoose
+        if (cost.getRevealFrom().size() == 2 && cost.getRevealFrom().containsAll(Arrays.asList(ZoneType.Hand, ZoneType.Battlefield))) { // RevealOrChoose
             CardCollection battlefieldOrHand = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield),
                     type.split(";"), player, source, ability);
             battlefieldOrHand.addAll(CardLists.getValidCards(hand, type.split(";"), player, source, ability));
