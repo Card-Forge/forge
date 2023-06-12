@@ -472,16 +472,14 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         if (cost.getRevealFrom().size() == 2 && cost.getRevealFrom().containsAll(Arrays.asList(ZoneType.Hand, ZoneType.Battlefield))) { // RevealOrChoose
             String aiLogic = ability.getParamOrDefault("AILogic", "");
-            CardCollection battlefieldOrHand = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield),
-                    type.split(";"), player, source, ability);
-            battlefieldOrHand.addAll(CardLists.getValidCards(hand, type.split(";"), player, source, ability));
+            hand = CardLists.getValidCards(hand, type.split(";"), player, source, ability);
 
             if (aiLogic.startsWith("PowerAtLeast.")) {
                 int minPower = Integer.parseInt(aiLogic.substring(aiLogic.indexOf(".") + 1));
-                battlefieldOrHand = CardLists.filterPower(battlefieldOrHand, minPower);
+                hand = CardLists.filterPower(hand, minPower);
             }
 
-            return battlefieldOrHand.isEmpty() ? null : PaymentDecision.card(getBestCreatureAI(battlefieldOrHand));
+            return hand.isEmpty() ? null : PaymentDecision.card(getBestCreatureAI(hand));
         }
 
         if (cost.getType().equals("SameColor")) {
