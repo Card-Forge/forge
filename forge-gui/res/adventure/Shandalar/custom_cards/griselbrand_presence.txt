@@ -1,10 +1,8 @@
-Name:Griselbrand presence
+Name:Griselbrand's Presence
 ManaCost:no cost
 Colors:Black
 Types:Enchantment
-K:Hexproof
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ At the beginning of your end step, each opponent loses 1 life and you gain 1 life.
-SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainOneLife
-SVar:DBGainOneLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
-DeckHas:Ability$LifeGain
-Oracle:At the beginning of your end step, each opponent loses 1 life and you gain 1 life.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, you draw a card and each opponent loses 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1
+Oracle:At the beginning of your upkeep, you draw a card and each opponent loses 1 life.

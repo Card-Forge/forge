@@ -1,8 +1,8 @@
-Name:Lathliss presence
+Name:Lathliss' Presence
 ManaCost:no cost
 Colors:Red
 Types:Enchantment
-K:Hexproof
-T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each upkeep, CARDNAME deals 2 damage to every none red creature.
-SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature.nonRed  | NumDmg$ 2
-Oracle:At the beginning of each upkeep, Lathliss presence deals 2 damage to every none red creature.
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Command | Execute$ TrigDamage | ValidPlayer$ You | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to each creature and planeswalker you don't control.
+SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | ValidDescription$ each creature and each planeswalker | NumDmg$ 1
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | EffectZone$ Command | AddHiddenKeyword$ Damage isn't removed from CARDNAME during cleanup steps. | Description$ Damage isn't removed from creatures and planeswalkers your opponents control during cleanup steps.
+Oracle:At the beginning of your upkeep, Lathliss's Presence deals 1 damage to each creature and planeswalker you don't control\nDamage isn't removed from creatures and planeswalkers your opponents control during cleanup steps.

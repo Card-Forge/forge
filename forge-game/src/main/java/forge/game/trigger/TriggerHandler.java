@@ -575,11 +575,8 @@ public class TriggerHandler {
 
         regtrig.triggerRun();
 
-        if (regtrig.hasParam("OneOff")) {
-            if (regtrig.getHostCard().isImmutable()) {
-                Player p = regtrig.getHostCard().getController();
-                p.getZone(ZoneType.Command).remove(regtrig.getHostCard());
-            }
+        if (regtrig.hasParam("OneOff") && host.isImmutable()) {
+            host.getController().getZone(ZoneType.Command).remove(host);
         }
     }
 

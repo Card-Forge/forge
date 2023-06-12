@@ -1197,7 +1197,7 @@ public class AbilityUtils {
         }
         else if (defined.startsWith("Non")) {
             players.addAll(game.getPlayersInTurnOrder());
-            players.removeAll((FCollectionView<Player>)getDefinedPlayers(card, defined.substring(3), sa));
+            players.removeAll(getDefinedPlayers(card, defined.substring(3), sa));
         }
         else if (defined.equals("EnchantedPlayer")) {
             final Object o = sa.getHostCard().getEntityAttachedTo();
@@ -2180,34 +2180,20 @@ public class AbilityUtils {
             return doXMath(Integer.parseInt(sq[isMyMain ? 1 : 2]), expr, c, ctb);
         }
 
-        // Count$AttachedTo <DefinedCards related to spellability> <restriction>
+        // Count$AttachedTo <restriction>
         if (sq[0].startsWith("AttachedTo")) {
             final String[] k = l[0].split(" ");
-            int sum = 0;
-            for (Card card : getDefinedCards(c, k[1], ctb)) {
-                // Hateful Eidolon: the script uses LKI so that the attached cards have to be defined
-                // This card needs the spellability ("Auras You control",  you refers to the activating player)
-                // CardFactoryUtils.xCount doesn't have the sa parameter, SVar:X:TriggeredCard$Valid <restriction> cannot handle this
-                sum += CardLists.getValidCardCount(card.getAttachedCards(), k[2], player, c, ctb);
-            }
+            int sum = CardLists.getValidCardCount(c.getAttachedCards(), k[1], player, c, ctb);
             return doXMath(sum, expr, c, ctb);
         }
 
         // Count$CardManaCost
         if (sq[0].contains("CardManaCost")) {
-            Card ce;
-            if (sq[0].contains("Remembered")) {
-                ce = (Card) c.getFirstRemembered();
-            }
-            else {
-                ce = c;
-            }
+            int cmc = c.getCMC();
 
-            int cmc = ce == null ? 0 : ce.getCMC();
-
-            if (sq[0].contains("LKI") && ctb instanceof SpellAbility && ce != null && !ce.isInZone(ZoneType.Stack) && ce.getManaCost() != null) {
+            if (sq[0].contains("LKI") && ctb instanceof SpellAbility && !c.isInZone(ZoneType.Stack) && c.getManaCost() != null) {
                 if (((SpellAbility) ctb).getXManaCostPaid() != null) {
-                    cmc += ((SpellAbility) ctb).getXManaCostPaid() * ce.getManaCost().countX();
+                    cmc += ((SpellAbility) ctb).getXManaCostPaid() * c.getManaCost().countX();
                 }
             }
 
@@ -2699,8 +2685,7 @@ public class AbilityUtils {
         }
         if (sq[0].startsWith("OppTypesInGrave")) {
             final PlayerCollection opponents = player.getOpponents();
-            CardCollection oppCards = new CardCollection();
-            oppCards.addAll(opponents.getCardsIn(ZoneType.Graveyard));
+            CardCollection oppCards = opponents.getCardsIn(ZoneType.Graveyard);
             return doXMath(getCardTypesFromList(oppCards), expr, c, ctb);
         }
 
@@ -3052,8 +3037,8 @@ public class AbilityUtils {
         if (isDescriptive) {
             newWord = "<strike>" + originalWord + "</strike> " + newWord;
         }
-        // use word boundaries and keep negations
-        return text.replaceAll((isDescriptive ? "(?<!>)" : "") + "\\b(non)?" + originalWord, "$1" + newWord);
+        // use word boundaries and keep negations - java only supports bounded maximum length in negative lookbehind
+        return text.replaceAll((isDescriptive ? "(?<!>)" : "") + "(?<!named.{0,100})\\b(non)?" + originalWord, "$1" + newWord);
     }
 
     public static final String getSVar(final CardTraitBase ability, final String sVarName) {
@@ -3780,34 +3765,6 @@ public class AbilityUtils {
         if (sq[0].contains("InTargetedLibrary")) {
             for (Player tgtP : getDefinedPlayers(c, "TargetedPlayer", ctb)) {
                 someCards.addAll(tgtP.getCardsIn(ZoneType.Library));
-            }
-        }
-
-        //  Count$InEnchantedHand (targeted player's cards in hand)
-        if (sq[0].contains("InEnchantedHand")) {
-            GameEntity o = c.getEntityAttachedTo();
-            Player controller = null;
-            if (o instanceof Card) {
-                controller = ((Card) o).getController();
-            }
-            else {
-                controller = (Player) o;
-            }
-            if (controller != null) {
-                someCards.addAll(controller.getCardsIn(ZoneType.Hand));
-            }
-        }
-        if (sq[0].contains("InEnchantedYard")) {
-            GameEntity o = c.getEntityAttachedTo();
-            Player controller = null;
-            if (o instanceof Card) {
-                controller = ((Card) o).getController();
-            }
-            else {
-                controller = (Player) o;
-            }
-            if (controller != null) {
-                someCards.addAll(controller.getCardsIn(ZoneType.Graveyard));
             }
         }
 

@@ -1,0 +1,65 @@
+brainmole.png
+size: 512,488
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar          
+  xy: 12, 8
+  size: 16, 16      
+Idle 
+  xy: 0,0
+  size: 32,32 
+Idle 
+  xy: 32,0
+  size: 32,32 
+Idle 
+  xy: 64,0
+  size: 32,32 
+Idle 
+  xy: 96,0
+  size: 32,32 
+Walk
+  xy: 0,32
+  size: 32,32 
+Walk
+  xy: 32,32
+  size: 32,32 
+Walk
+  xy: 64,32
+  size: 32,32 
+Walk
+  xy: 96,32
+  size: 32,32 
+Attack 
+  xy: 0, 64
+  size: 32,32 
+Attack 
+  xy: 32, 64
+  size: 32,32 
+Attack 
+  xy: 64, 64
+  size: 32,32 
+Attack 
+  xy: 96, 64
+  size: 32,32 
+Death 
+  xy: 0, 96
+  size: 32,32 
+Death 
+  xy: 32, 96
+  size: 32,32 
+Death 
+  xy: 64, 96
+  size: 32,32 
+Death 
+  xy: 96, 96
+  size: 32,32 
+Death 
+  xy: 128, 96
+  size: 32,32 
+Death 
+  xy: 160, 96
+  size: 32,32 
+Death 
+  xy: 192, 96
+  size: 32,32 

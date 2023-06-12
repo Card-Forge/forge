@@ -823,7 +823,7 @@ public class ComputerUtilCard {
             }
             // Changeling are all creature types, they are not interesting for
             // counting creature types
-            if (c.hasStartOfKeyword(Keyword.CHANGELING.toString())) {
+            if (c.getType().hasAllCreatureTypes()) {
                 continue;
             }
             // ignore cards that does enter the battlefield as clones

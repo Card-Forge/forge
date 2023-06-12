@@ -1,0 +1,14 @@
+Name:Dawn of a New Age
+ManaCost:1 W
+Types:Enchantment
+K:etbCounter:HOPE:X:no Condition:CARDNAME enters the battlefield with a hope counter on it for each creature you control.
+SVar:X:Count$Valid Creature.YouCtrl
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCtr | TriggerDescription$ At the beginning of your end step, remove a hope counter from CARDNAME. If you do, draw a card. Then if CARDNAME has no hope counters on it, sacrifice it and you gain 4 life.
+SVar:TrigRemoveCtr:DB$ RemoveCounter | Defined$ Self | CounterType$ HOPE | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ CheckRemoved | ConditionSVarCompare$ GE1 | SubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ Sacrifice | ConditionDefined$ Self | ConditionPresent$ Card.counters_EQ0_HOPE | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4 | ConditionDefined$ Self | ConditionPresent$ Card.counters_EQ0_HOPE | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:CheckRemoved:Count$RememberedSize
+DeckHas:Ability$Counters|LifeGain|Sacrifice
+Oracle:Dawn of a New Age enters the battlefield with a hope counter on it for each creature you control.\nAt the beginning of your end step, remove a hope counter from Dawn of a New Age. If you do, draw a card. Then if Dawn of a New Age has no hope counters on it, sacrifice it and you gain 4 life.

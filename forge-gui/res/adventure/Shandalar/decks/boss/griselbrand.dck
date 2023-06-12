@@ -1,29 +1,41 @@
 [metadata]
 Name=Griselbrand
 [Main]
-1 All Hallow's Eve  
-1 Bottomless Vault  
-3 Cabal Coffers  
-4 Cabal Ritual  
-1 Carnifex Demon 
-4 Consume Spirit 
-2 Corrupt
-2 Damnation  
-4 Dark Ritual  
-1 Demon of Death's Gate  
-3 Demonic Tutor   
-1 Havoc Demon  
-1 Griselbrand
-1 Mutilate 
-1 Pestilence Demon  
-1 Promise of Power  
-2 Reiver Demon  
-4 Sign in Blood  
-2 Soot Imp  
-2 Stronghold Overseer  
-15 Swamp                      
-4 Mox Jet  
-2 Tendrils of Corruption 
-1 Urborg, Tomb of Yawgmoth  
-3 Will-o'-the-Wisp 
+4 Animate Dead|VMA|1
+4 Archfiend of Depravity|SCD|1
+2 Archfiend of Despair|BBD|1
+3 Cabal Coffers|MH2|1
+1 Carnifex Demon|AJMP|1
+4 Damnation|2X2|1
+1 Demon of Death's Gate|PLIST|1
+4 Demon's Disciple|ZNR|1
+2 Demonlord Belzenlok|DOM|1
+4 Doom Blade|GN3|1
+4 Griselbrand|PGPX|1
+3 Harvester of Souls|JMP|1
+4 Infernal Grasp|PSVC|1
+3 Infernal Sovereign|MOC|1
+4 Liliana's Contract|SLD|1
+4 Manor Guardian|J21|1
+4 Master of the Feast|JOU|1
+4 Nightmare Shepherd|THB|1
+2 Ob Nixilis of the Black Oath|PZ1|1
+4 Ob Nixilis, the Fallen|PLIST|1
+2 Ob Nixilis, Unshackled|2X2|1
+4 Overseer of the Damned|SCD|1
+1 Pestilence Demon|DDR|1
+4 Reanimate|UMA|1
+4 Reaper from the Abyss|J22|1
+2 Reiver Demon|CMA|1
+2 Reiver Demon|COM|1
+2 Seizan, Perverter of Truth|CHK|1
+2 Soulhunter Rakshasa|ANB|1
+2 Stronghold Overseer|TSP|1
+15 Swamp|MOM|1
+9 Swamp|SCD|1
+7 Swamp|SCD|2
+4 Swamp|SCD|3
+9 Swamp|SCD|4
+1 Urborg, Tomb of Yawgmoth|TSR|1
+2 Vilis, Broker of Blood|M20|1
 
