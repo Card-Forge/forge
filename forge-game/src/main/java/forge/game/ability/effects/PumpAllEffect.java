@@ -87,12 +87,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
                         game.fireEvent(new GameEventCardStatsChanged(tgtC));
                     }
                 };
-                if ("UntilLoseControlOfHost".equals(sa.getParam("Duration"))) {
-                    tgtC.addLeavesPlayCommand(untilEOT);
-                    tgtC.addChangeControllerCommand(untilEOT);
-                } else {
-                    addUntilCommand(sa, untilEOT);
-                }
+                addUntilCommand(sa, untilEOT);
             }
 
             game.fireEvent(new GameEventCardStatsChanged(tgtC));
