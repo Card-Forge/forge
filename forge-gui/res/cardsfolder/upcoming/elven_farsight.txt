@@ -1,9 +1,8 @@
 Name:Elven Farsight
 ManaCost:G
 Types:Sorcery
-A:SP$ Scry | ScryNum$ 3 | SubAbility$ DBReveal | SpellDescription$ Scry 3, then you may reveal the top card of your library. If it's a creature card, draw a card.
-SVar:DBReveal:DB$ Dig | DigNum$ 1 | Reveal$ True | RememberRevealed$ True | DestinationZone$ Library | LibraryPosition$ 0 | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ Z | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
+A:SP$ Scry | ScryNum$ 3 | SubAbility$ DBPeekAndReveal | SpellDescription$ Scry 3, then you may reveal the top card of your library. If it's a creature card, draw a card.
+SVar:DBPeekAndReveal:DB$ PeekAndReveal | PeekAmount$ 1 | RevealOptional$ True | RememberRevealed$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Z:Remembered$Valid Creature
 Oracle:Scry 3, then you may reveal the top card of your library. If it's a creature card, draw a card.

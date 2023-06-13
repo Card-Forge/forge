@@ -7,6 +7,6 @@ SVar:TrigBranch:DB$ Branch | ValidTgts$ Creature | BranchConditionSVar$ X | Bran
 SVar:Equipped:DB$ Pump | Defined$ Targeted | KW$ First Strike & Vigilance
 SVar:NotEquipped:DB$ Pump | KWChoice$ First Strike,Vigilance | Defined$ Targeted
 SVar:X:Targeted$Valid Card.equipped
-S:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Activated.Equip | Activator$ You | Amount$ 1 | Condition$ PlayerTurn | Description$ Equip abilities you activate cost {1} less to activate.
+S:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Activated.Equip | Activator$ You | Amount$ 1 | Description$ Equip abilities you activate cost {1} less to activate.
 DeckHints:Type$Equipment
 Oracle:At the beginning of combat on your turn, target creature gains your choice of first strike or vigilance until end of turn. If that creature is equipped, it gains first strike and vigilance until end of turn instead.\nEquip abilities you activate cost {1} less to activate.
