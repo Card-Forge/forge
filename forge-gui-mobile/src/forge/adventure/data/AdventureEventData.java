@@ -44,7 +44,7 @@ public class AdventureEventData implements Serializable {
     public AdventureEventController.EventStyle style;
     public AdventureEventController.EventStatus eventStatus;
     public AdventureEventController.EventFormat format;
-    private transient final Random random = new Random();
+    private transient Random random = new Random();
     public Deck registeredDeck;
     public Deck draftedDeck; //Copy of registered before basic lands are added for event reward purposes
     public boolean isDraftComplete = false;
@@ -81,16 +81,18 @@ public class AdventureEventData implements Serializable {
     public Deck[] getRewardPacks(int count) {
         Deck[] ret = new Deck[count];
         for (int i = 0; i < count; i++){
-            ret[i] = AdventureEventController.instance().generateBooster(Aggregates.random(cardBlock.getSets()).getCode());
+            ret[i] = AdventureEventController.instance().generateBooster(Aggregates.random(getCardBlock().getSets()).getCode());
         }
         return ret;
     }
 
-
+    private Random getEventRandom(){
+        if (random == null)
+            random = (eventSeed > 0? new Random(eventSeed): new Random());
+        return random;
+    }
     public AdventureEventData(Long seed){
         setEventSeed(seed);
-
-        random.setSeed(eventSeed);
         eventStatus = AdventureEventController.EventStatus.Available;
         registeredDeck = new Deck();
         cardBlock = pickWeightedCardBlock();
@@ -128,7 +130,7 @@ public class AdventureEventData implements Serializable {
     }
 
     public void setEventSeed(long seed){
-        random.setSeed(seed);
+        getEventRandom().setSeed(seed);
     }
 
     public CardBlock getCardBlock() {
@@ -140,14 +142,14 @@ public class AdventureEventData implements Serializable {
 
     public BoosterDraft getDraft(){
         Random placeholder = MyRandom.getRandom();
-        MyRandom.setRandom(random);
+        MyRandom.setRandom(getEventRandom());
         if (draft == null && (eventStatus == AdventureEventController.EventStatus.Available || eventStatus == AdventureEventController.EventStatus.Entered)){
             draft = BoosterDraft.createDraft(LimitedPoolType.Block, getCardBlock(), packConfiguration);
         }
         if (packConfiguration == null){
-            packConfiguration = getBoosterConfiguration(cardBlock);
+            packConfiguration = getBoosterConfiguration(getCardBlock());
         }
-        MyRandom.setRandom(random);
+        MyRandom.setRandom(placeholder);
         return draft;
     }
 
@@ -247,7 +249,7 @@ public class AdventureEventData implements Serializable {
 
     public String[] getBoosterConfiguration(CardBlock selectedBlock) {
         Random placeholder = MyRandom.getRandom();
-        MyRandom.setRandom(random);
+        MyRandom.setRandom(getEventRandom());
         String[] ret = new String[selectedBlock.getCntBoostersDraft()];
 
         for (int i = 0; i < selectedBlock.getCntBoostersDraft(); i++) {
@@ -295,30 +297,30 @@ public class AdventureEventData implements Serializable {
 
         List<AdventureEventParticipant> activePlayers = new ArrayList<>();
         if (style == AdventureEventController.EventStyle.Bracket){
-             if (round == 1){
-                 activePlayers = Arrays.stream(participants).collect(Collectors.toList());
-             }
-             else{
-                 if (matches.get(round-1) ==null){
-                     return null;
-                 }
-                 for (int i = 0; i < matches.get(round-1).size(); i++){
-                     AdventureEventParticipant w = matches.get(round-1).get(i).winner;
-                     if (w == null)
-                         return null;
-                     else
-                         activePlayers.add(w);
-                 }
-             }
+            if (round == 1){
+                activePlayers = Arrays.stream(participants).collect(Collectors.toList());
+            }
+            else{
+                if (matches.get(round-1) ==null){
+                    return null;
+                }
+                for (int i = 0; i < matches.get(round-1).size(); i++){
+                    AdventureEventParticipant w = matches.get(round-1).get(i).winner;
+                    if (w == null)
+                        return null;
+                    else
+                        activePlayers.add(w);
+                }
+            }
             matches.put(round, new ArrayList<>());
-             while (!activePlayers.isEmpty()){
-                 AdventureEventMatch match = new AdventureEventMatch();
-                 match.p1 = activePlayers.remove(MyRandom.getRandom().nextInt(activePlayers.size()));
-                 if (!activePlayers.isEmpty()) {
-                     match.p2 = activePlayers.remove(MyRandom.getRandom().nextInt(activePlayers.size()));
-                 }
+            while (!activePlayers.isEmpty()){
+                AdventureEventMatch match = new AdventureEventMatch();
+                match.p1 = activePlayers.remove(MyRandom.getRandom().nextInt(activePlayers.size()));
+                if (!activePlayers.isEmpty()) {
+                    match.p2 = activePlayers.remove(MyRandom.getRandom().nextInt(activePlayers.size()));
+                }
                 matches.get(round).add(match);
-             }
+            }
         }
         return matches.get(currentRound);
     }
@@ -393,7 +395,7 @@ public class AdventureEventData implements Serializable {
 
     public String getDescription(){
         description = "Event Type: Booster Draft\n";
-        description += "Block: " + cardBlock + "\n";
+        description += "Block: " + getCardBlock() + "\n";
         description += "Boosters: " + String.join(", ", packConfiguration) + "\n";
         description += "Competition Style: " + participants.length + " players, matches played as best of " + eventRules.gamesPerMatch + ", " + (getPairingDescription()) + "\n\n";
         description += String.format("Entry Fee (incl. reputation)\nGold %d[][+Gold][BLACK]\nMana Shards %d[][+Shards][BLACK]\n\n",eventRules.goldToEnter,eventRules.shardsToEnter);
