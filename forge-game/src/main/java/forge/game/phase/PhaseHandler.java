@@ -1040,16 +1040,13 @@ public class PhaseHandler implements java.io.Serializable {
 
             game.fireEvent(new GameEventPlayerPriority(playerTurn, phase, getPriorityPlayer()));
 
-            // loop here to be able to rollback if an invalid spellability is chosen
-            // or just roll it into the main loop with a flag!
-            List<SpellAbility> chosenSa = null;
             if (checkStateBasedEffects()) {
                 // state-based effects check could lead to game over
                 return;
             }
 
             // TODO: Why does this return a list?
-            chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
+            List<SpellAbility> chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
 
             // this needs to come after chosenSa so it sees you conceding on own turn
             if (playerTurn.hasLost() && pPlayerPriority.equals(playerTurn) && pFirstPriority.equals(playerTurn)) {
@@ -1067,7 +1064,7 @@ public class PhaseHandler implements java.io.Serializable {
                     Card saHost = sa.getHostCard();
                     final Zone originZone = saHost.getZone();
 
-                    // Note: this involves going back to the AI for choices
+                    // Note: this involves going back to the controller (player or AI) for choices
                     if (pPlayerPriority.getController().playChosenSpellAbility(sa)) {
                         pFirstPriority = pPlayerPriority; // all opponents have to pass before stack is allowed to resolve
                     }
@@ -1091,7 +1088,6 @@ public class PhaseHandler implements java.io.Serializable {
                 keep_looping = loopCount < 999 || !pPlayerPriority.getController().isAI();
             }
 
-
             // reset the loop counter and stopwatch
             if (!keep_looping) {
                 loopCount = 0;
@@ -1107,6 +1103,7 @@ public class PhaseHandler implements java.io.Serializable {
             System.out.print(" >> (no priority given to " + getPriorityPlayer() + ")\n");
         }
 
+        // skip these to be able to rollback if an invalid spellability is chosen
         if (!keep_looping) {
             // actingPlayer is the player who may act
             // the firstAction is the player who gained Priority First in this segment
