@@ -111,6 +111,10 @@ public class PhaseHandler implements java.io.Serializable {
 
     private final transient Game game;
 
+    private int loopCount = 0;
+    private StopWatch sw = new StopWatch();
+
+
     public PhaseHandler(final Game game0) {
         game = game0;
     }
@@ -1028,37 +1032,34 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public void mainLoopStep() {
-        StopWatch sw = new StopWatch();
+        boolean keep_looping = false;
         if (givePriorityToPlayer) {
-            if (DEBUG_PHASES) {
+            if (DEBUG_PHASES && !sw.isStarted()) {
                 sw.start();
             }
 
             game.fireEvent(new GameEventPlayerPriority(playerTurn, phase, getPriorityPlayer()));
-            List<SpellAbility> chosenSa = null;
 
             // loop here to be able to rollback if an invalid spellability is chosen
-            int loopCount = 0;
-            do {
-                if (checkStateBasedEffects()) {
-                    // state-based effects check could lead to game over
-                    return;
-                }
+            // or just roll it into the main loop with a flag!
+            List<SpellAbility> chosenSa = null;
+            if (checkStateBasedEffects()) {
+                // state-based effects check could lead to game over
+                return;
+            }
 
-                // TODO: Why does this return a list?
-                chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
+            // TODO: Why does this return a list?
+            chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
 
-                // this needs to come after chosenSa so it sees you conceding on own turn
-                if (playerTurn.hasLost() && pPlayerPriority.equals(playerTurn) && pFirstPriority.equals(playerTurn)) {
-                    // If the active player has lost, and they have priority, set the next player to have priority
-                    System.out.println("Active player is no longer in the game...");
-                    pPlayerPriority = game.getNextPlayerAfter(getPriorityPlayer());
-                    pFirstPriority = pPlayerPriority;
-                }
+            // this needs to come after chosenSa so it sees you conceding on own turn
+            if (playerTurn.hasLost() && pPlayerPriority.equals(playerTurn) && pFirstPriority.equals(playerTurn)) {
+                // If the active player has lost, and they have priority, set the next player to have priority
+                System.out.println("Active player is no longer in the game...");
+                pPlayerPriority = game.getNextPlayerAfter(getPriorityPlayer());
+                pFirstPriority = pPlayerPriority;
+            }
 
-                if (chosenSa == null) {
-                    break; // that means 'I pass'
-                }
+            if (chosenSa != null) {
                 if (DEBUG_PHASES) {
                     System.out.print("... " + pPlayerPriority + " plays " + chosenSa);
                 }
@@ -1081,72 +1082,76 @@ public class PhaseHandler implements java.io.Serializable {
                         triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), saHost);
                         triggerList.triggerChangesZoneAll(game, sa);
                     }
-
                 }
                 game.copyLastState();
                 loopCount++;
-            } while (loopCount < 999 || !pPlayerPriority.getController().isAI());
-
-            if (loopCount >= 999 && pPlayerPriority.getController().isAI()) {
-                System.out.print("AI looped too much with: " + chosenSa);
+                if (loopCount >= 999 && pPlayerPriority.getController().isAI()) {
+                    System.out.print("AI looped too much with: " + chosenSa);
+                }
+                keep_looping = loopCount < 999 || !pPlayerPriority.getController().isAI();
             }
 
-            if (DEBUG_PHASES) {
-                sw.stop();
-                System.out.print("... passed in " + sw.getTime() / 1000f + " s\n");
-                System.out.println("\t\tStack: " + game.getStack());
-                sw.reset();
+
+            // reset the loop counter and stopwatch
+            if (!keep_looping) {
+                loopCount = 0;
+                if (DEBUG_PHASES) {
+                    sw.stop();
+                    System.out.print("... passed in " + sw.getTime() / 1000f + " s\n");
+                    System.out.println("\t\tStack: " + game.getStack());
+                    sw.reset();
+                }
             }
+
         } else if (DEBUG_PHASES) {
             System.out.print(" >> (no priority given to " + getPriorityPlayer() + ")\n");
         }
 
-        // actingPlayer is the player who may act
-        // the firstAction is the player who gained Priority First in this segment
-        // of Priority
-        Player nextPlayer = game.getNextPlayerAfter(getPriorityPlayer());
+        if (!keep_looping) {
+            // actingPlayer is the player who may act
+            // the firstAction is the player who gained Priority First in this segment
+            // of Priority
+            Player nextPlayer = game.getNextPlayerAfter(getPriorityPlayer());
 
-        if (game.isGameOver() || nextPlayer == null) {
-            return;
-        } // conceded?
+            if (game.isGameOver() || nextPlayer == null) {
+                return;
+            } // conceded?
 
-        if (DEBUG_PHASES) {
-            System.out.println(TextUtil.concatWithSpace(playerTurn.toString(), TextUtil.addSuffix(phase.toString(), ":"), pPlayerPriority.toString(), "is active, previous was", nextPlayer.toString()));
-        }
-        if (pFirstPriority == nextPlayer) {
-            if (game.getStack().isEmpty()) {
-                if (playerTurn.hasLost()) {
-                    setPriority(game.getNextPlayerAfter(playerTurn));
-                } else {
-                    setPriority(playerTurn);
-                }
-
-                // end phase
-                onPhaseEnd();
-                advanceToNextPhase();
-                onPhaseBegin();
-            } else if (!game.getStack().hasSimultaneousStackEntries()) {
-                game.getStack().resolveStack();
+            if (DEBUG_PHASES) {
+                System.out.println(TextUtil.concatWithSpace(playerTurn.toString(), TextUtil.addSuffix(phase.toString(), ":"), pPlayerPriority.toString(), "is active, previous was", nextPlayer.toString()));
             }
-        } else {
-            // pass the priority to other player
-            pPlayerPriority = nextPlayer;
-        }
+            if (pFirstPriority == nextPlayer) {
+                if (game.getStack().isEmpty()) {
+                    if (playerTurn.hasLost()) {
+                        setPriority(game.getNextPlayerAfter(playerTurn));
+                    } else {
+                        setPriority(playerTurn);
+                    }
 
-        // If ever the karn's ultimate resolved
-        if (game.getAge() == GameStage.RestartedByKarn) {
-            setPhase(null);
-            game.updatePhaseForView();
-            game.fireEvent(new GameEventGameRestarted(playerTurn));
-            return;
-        }
+                    // end phase
+                    onPhaseEnd();
+                    advanceToNextPhase();
+                    onPhaseBegin();
+                } else if (!game.getStack().hasSimultaneousStackEntries()) {
+                    game.getStack().resolveStack();
+                }
+            } else {
+                // pass the priority to other player
+                pPlayerPriority = nextPlayer;
+            }
 
-        // update Priority for all players
-        for (final Player p : game.getPlayers()) {
-            if (getPriorityPlayer() == p)
-                p.setHasPriority(true);
-            else
-                p.setHasPriority(false);
+            // If ever the karn's ultimate resolved
+            if (game.getAge() == GameStage.RestartedByKarn) {
+                setPhase(null);
+                game.updatePhaseForView();
+                game.fireEvent(new GameEventGameRestarted(playerTurn));
+                return;
+            }
+
+            // update Priority for all players
+            for (final Player p : game.getPlayers()) {
+                p.setHasPriority(getPriorityPlayer() == p);
+            }
         }
     }
 
