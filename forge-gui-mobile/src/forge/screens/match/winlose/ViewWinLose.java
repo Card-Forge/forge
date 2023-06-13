@@ -64,6 +64,33 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         btnQuit.setFont(btnContinue.getFont());
         btnContinue.setEnabled(!game0.isMatchOver());
 
+        lblLog = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblGameLog")).align(Align.center).font(FSkinFont.get(18)).build());
+        txtLog = add(new FTextArea(true, StringUtils.join(game.getGameLog().getLogEntries(null), "\r\n").replace("[COMPUTER]", "[AI]")) {
+            @Override
+            public boolean tap(float x, float y, int count) {
+                if (txtLog.getMaxScrollTop() > 0) {
+                    FMagnifyView.show(txtLog, txtLog.getText(), txtLog.getTextColor(), ViewWinLose.this.getBackColor(), txtLog.getFont(), true);
+                }
+                return true;
+            }
+        });
+        txtLog.setFont(FSkinFont.get(12));
+
+        btnCopyLog = add(new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("btnCopyToClipboard")).selectable().command(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                Forge.getClipboard().setContents(txtLog.getText());
+            }
+        }).build());
+
+        btnShowBattlefield = add(new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblShowBattlefield")).font(FSkinFont.get(12)).selectable().command(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                hide();
+            }
+        }).build());
+        lblTitle.setText(composeTitle(game0));
+
         // Control of the win/lose is handled differently for various game
         // modes.
         ControlWinLose control = null;
@@ -100,33 +127,6 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         if (control == null) {
             control = new ControlWinLose(this, game0);
         }
-
-        lblLog = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblGameLog")).align(Align.center).font(FSkinFont.get(18)).build());
-        txtLog = add(new FTextArea(true, StringUtils.join(game.getGameLog().getLogEntries(null), "\r\n").replace("[COMPUTER]", "[AI]")) {
-            @Override
-            public boolean tap(float x, float y, int count) {
-                if (txtLog.getMaxScrollTop() > 0) {
-                    FMagnifyView.show(txtLog, txtLog.getText(), txtLog.getTextColor(), ViewWinLose.this.getBackColor(), txtLog.getFont(), true);
-                }
-                return true;
-            }
-        });
-        txtLog.setFont(FSkinFont.get(12));
-
-        btnCopyLog = add(new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("btnCopyToClipboard")).selectable().command(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.getClipboard().setContents(txtLog.getText());
-            }
-        }).build());
-
-        btnShowBattlefield = add(new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblShowBattlefield")).font(FSkinFont.get(12)).selectable().command(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                hide();
-            }
-        }).build());
-        lblTitle.setText(composeTitle(game0));
 
         showGameOutcomeSummary();
         showPlayerScores();

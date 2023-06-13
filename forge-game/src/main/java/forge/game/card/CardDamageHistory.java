@@ -270,11 +270,13 @@ public class CardDamageHistory {
             if (isCombat != null && damage.getRight() != isCombat) {
                 continue;
             }
-            if (validSourceCard != null && !sourceToTarget.getLeft().isValid(validSourceCard.split(","), sourceController, source == null ? sourceToTarget.getLeft() : source, ctb)) {
-                continue;
-            }
-            if (validTargetEntity != null && !sourceToTarget.getRight().isValid(validTargetEntity.split(","), sourceController, source, ctb)) {
-                continue;
+            if (sourceToTarget != null) {
+                if (validSourceCard != null && !sourceToTarget.getLeft().isValid(validSourceCard.split(","), sourceController, source == null ? sourceToTarget.getLeft() : source, ctb)) {
+                    continue;
+                }
+                if (validTargetEntity != null && !sourceToTarget.getRight().isValid(validTargetEntity.split(","), sourceController, source, ctb)) {
+                    continue;
+                }
             }
             sum += damage.getLeft();
             if (anyIsEnough) {

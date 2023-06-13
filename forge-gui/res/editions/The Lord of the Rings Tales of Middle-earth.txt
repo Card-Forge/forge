@@ -52,7 +52,7 @@ ScryfallCode=LTR
 43 C Birthday Escape @David Álvarez
 44 R Borne Upon a Wind @Alexander Mokhov
 45 C Captain of Umbar @Wei Guan
-46 U Council's Deliberation @
+46 U Council's Deliberation @Viko Menezes
 47 C Deceive the Messenger @Tomas Duchek
 48 C Dreadful as the Storm @Daniel Correia
 49 U Elrond, Lord of Rivendell @Ryan Yee
@@ -227,7 +227,7 @@ ScryfallCode=LTR
 218 R Pippin, Guard of the Citadel @Bartłomiej Gaweł
 219 U Prince Imrahil the Fair @Justyna Dura
 220 U Ringsight @Campbell White
-221 U Rise of the Witch-king @
+221 U Rise of the Witch-king @Andrea Piparo
 222 R Samwise Gamgee @Ekaterina Burmak
 223 M Saruman of Many Colors @Alexander Mokhov
 224 M Sauron, the Dark Lord @Kieran Yanner
@@ -306,7 +306,7 @@ ScryfallCode=LTR
 297 R The Balrog, Flame of Udun @John Tedrick
 298 R Bilbo's Ring @Randy Gallegos
 299 M Gandalf the White @Leonardo Borazio
-300 M Saruman of Many Colors @
+300 M Saruman of Many Colors @Wonchun Choi
 302 R Boromir, Warden of the Tower @Anato Finnstark
 303 U Faramir, Field Commander @Dominik Mayer
 304 R Frodo, Sauron's Bane @Andreas Rocha
@@ -332,10 +332,10 @@ ScryfallCode=LTR
 324 U Legolas, Counter of Kills @Anato Finnstark
 325 R Merry, Esquire of Rohan @Dominik Mayer
 326 R Pippin, Guard of the Citadel @Anato Finnstark
-327 R Samwise Gamgee @
+327 R Samwise Gamgee @Marko Manev
 328 M Saruman of Many Colors @Marko Manev
 329 M Sauron, the Dark Lord @Dominik Mayer & Anato Finnstark
-330 R Smeagol, Helpful Guide
+330 R Smeagol, Helpful Guide @Andreas Rocha
 331 M Tom Bombadil @Marko Manev
 332 U Nazgul @Wonchun Choi
 333 U Nazgul @Chris Cold
@@ -458,7 +458,7 @@ ScryfallCode=LTR
 450 U Gollum, Patient Plotter @Marta Nael
 451 M The One Ring @Marta Nael
 649 U Denethor, Ruling Steward @Campbell White
-753 R Mines of Moria @
+753 R Mines of Moria @Lucas Terryn
 760 R Forge Anew @Craig J Spearing
 763 R Press the Enemy @
 764 R Rangers of Ithilien @Torgeir Fjereide

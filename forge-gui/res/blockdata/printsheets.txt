@@ -6190,7 +6190,7 @@ Kaya, Ghost Assassin|CN2|2
 1 City on Fire|MOM
 1 Etali, Primal Conquerer|MOM
 1 Into the Fire|MOM
-1 Invasion of Kaladheim|MOM
+1 Invasion of Kaldheim|MOM
 1 Invasion of Karsus|MOM
 1 Nahiri's Warcrafting|MOM
 1 Orthion, Hero of Lavabrink|MOM
