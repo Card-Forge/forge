@@ -101,7 +101,7 @@ public class InnScene extends UIScene {
         super.enter();
         refreshStatus();
         GameHUD.getInstance().pauseMusic();
-        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.TOWN);
+        GameHUD.getInstance().playAudio();
     }
 
     private void refreshStatus(){
