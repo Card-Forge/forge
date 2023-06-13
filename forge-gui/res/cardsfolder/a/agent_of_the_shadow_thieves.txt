@@ -3,8 +3,8 @@ ManaCost:1 B
 Types:Legendary Enchantment Background
 S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ AttacksPlayer | Description$ Commander creatures you own have "Whenever this creature attacks a player, if no opponent has more life than that player, put a +1/+1 counter on this creature. It gains deathtouch and indestructible until end of turn."
 SVar:AttacksPlayer:Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player | Condition$ NoOpponentHasMoreLifeThanAttacked | Execute$ TrigPutCounter | TriggerDescription$ Whenever this creature attacks a player, if no opponent has more life than that player, put a +1/+1 counter on this creature. It gains deathtouch and indestructible until end of turn.
-SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | KW$ Deathtouch & Indestructible
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ Self | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Deathtouch & Indestructible
 DeckHas:Ability$Counters
 AI:RemoveDeck:NonCommander
 Oracle:Commander creatures you own have "Whenever this creature attacks a player, if no opponent has more life than that player, put a +1/+1 counter on this creature. It gains deathtouch and indestructible until end of turn."
