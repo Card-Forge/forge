@@ -1,0 +1,7 @@
+Name:Ent-Draught Basin
+ManaCost:2
+Types:Artifact
+A:AB$ PutCounter | Cost$ X | CounterType$ P1P1 | ValidTgts$ Creature.powerEQX | TgtPrompt$ Select target creature with power X | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on target creature with power X. Activate only as a sorcery.
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters
+Oracle:{X}, {T}: Put a +1/+1 counter on target creature with power X. Activate only as a sorcery.
