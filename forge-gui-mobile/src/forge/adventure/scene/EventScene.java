@@ -381,7 +381,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
     public void enter() {
         super.enter();
         GameHUD.getInstance().pauseMusic();
-        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
+        GameHUD.getInstance().playAudio();
         scrollContainer.clear();
 
         if (money != null) {

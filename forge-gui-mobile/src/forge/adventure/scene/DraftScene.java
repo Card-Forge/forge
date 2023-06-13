@@ -34,7 +34,7 @@ public class DraftScene extends ForgeScene {
     public void enter() {
         GameHUD.getInstance().getTouchpad().setVisible(false);
         GameHUD.getInstance().pauseMusic();
-        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
+        GameHUD.getInstance().playAudio();
         screen = null;
         getScreen();
         screen.refresh();

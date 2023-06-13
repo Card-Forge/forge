@@ -191,7 +191,7 @@ public class PlayerStatisticScene extends UIScene {
         super.enter();
 
         GameHUD.getInstance().pauseMusic();
-        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
+        GameHUD.getInstance().playAudio();
 
         achievementContainer.clear();
         updateAchievements(cardActivation, true);
