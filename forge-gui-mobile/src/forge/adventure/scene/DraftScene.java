@@ -3,8 +3,6 @@ package forge.adventure.scene;
 import forge.adventure.data.AdventureEventData;
 import forge.adventure.stage.GameHUD;
 import forge.screens.FScreen;
-import forge.sound.MusicPlaylist;
-import forge.sound.SoundSystem;
 
 /**
  * DraftScene
