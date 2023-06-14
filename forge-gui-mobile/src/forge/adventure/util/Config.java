@@ -41,6 +41,7 @@ import java.util.List;
 public class Config {
     private static Config currentConfig;
     private final String prefix;
+    private final String commonPrefix;
     private final HashMap<String, FileHandle> Cache = new HashMap<String, FileHandle>();
     private ConfigData configData;
     private final String[] adventures;
@@ -97,6 +98,7 @@ public class Config {
 
         //prefix = "forge-gui/res/adventure/Shandalar/";
         prefix = getPlanePath(settingsData.plane);
+        commonPrefix = getPlanePath("common");
 
         currentConfig = this;
         if (FModel.getPreferences() != null)
@@ -144,18 +146,33 @@ public class Config {
     }
 
     public FileHandle getFile(String path) {
-        String fullPath = prefix + path;
-        fullPath = fullPath.replace("//","/");
-        if (!Cache.containsKey(fullPath)) {
-
-            String fileName = fullPath.replaceFirst("[.][^.]+$", "");
-            String ext = fullPath.substring(fullPath.lastIndexOf('.'));
-            String langFile = fileName + "-" + Lang + ext;
-            if (Files.exists(Paths.get(langFile))) {
-                Cache.put(fullPath, new FileHandle(langFile));
-            } else {
-                Cache.put(fullPath, new FileHandle(fullPath));
-            }
+        String fullPath = (prefix + path).replace("//","/");
+        String commonPath= (commonPrefix+path).replace("//","/");
+        int x=0;
+        if(Cache.containsKey(fullPath)) x=1;
+        else if(Cache.containsKey(commonPath)) x=2;
+        switch(x) {
+            case 2:
+                return Cache.get(commonPath);
+            case 0:
+                String fileName = fullPath.replaceFirst("[.][^.]+$", "");
+                String commonFileName = commonPath.replaceFirst("[.][^.]+$", "");
+                String ext = fullPath.substring(fullPath.lastIndexOf('.'));
+                String langFile = fileName + "-" + Lang + ext;
+                String commonLangFile = commonFileName + "-" + Lang + ext;
+                boolean isCommon = false;
+                if (Files.exists(Paths.get(langFile))) {
+                    Cache.put(fullPath, new FileHandle(langFile));
+                } else if (Files.exists(Paths.get(commonLangFile))) {
+                    Cache.put(commonPath, new FileHandle(langFile));
+                    isCommon = true;
+                } else if (Files.exists(Paths.get(fullPath))) {
+                    Cache.put(fullPath, new FileHandle(fullPath));
+                } else if (Files.exists(Paths.get(commonPath))) {
+                    Cache.put(commonPath, new FileHandle(commonPath));
+                    isCommon = true;
+                }
+                if (isCommon) return Cache.get(commonPath);
         }
         return Cache.get(fullPath);
     }
