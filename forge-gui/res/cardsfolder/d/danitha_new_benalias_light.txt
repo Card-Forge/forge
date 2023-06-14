@@ -1,7 +1,7 @@
 Name:Danitha, New Benalia's Light
 ManaCost:1 G W
 Types:Legendary Creature Human Knight
-PT:2/3
+PT:2/2
 K:Vigilance
 K:Trample
 K:Lifelink

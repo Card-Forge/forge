@@ -55,18 +55,18 @@ public class VoteEffect extends SpellAbilityEffect {
         final List<Object> voteType = Lists.newArrayList();
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
+        final Player activator = sa.getActivatingPlayer();
 
         if (sa.hasParam("VoteType")) {
             voteType.addAll(Arrays.asList(sa.getParam("VoteType").split(",")));
         } else if (sa.hasParam("VoteCard")) {
             ZoneType zone = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Battlefield;
-            voteType.addAll(CardLists.getValidCards(game.getCardsIn(zone), sa.getParam("VoteCard"), host.getController(), host, sa));
+            voteType.addAll(CardLists.getValidCards(game.getCardsIn(zone), sa.getParam("VoteCard"), activator, host, sa));
         }
         if (voteType.isEmpty()) {
             return;
         }
 
-        Player activator = sa.getActivatingPlayer();
 
         // starting with the activator
         int aidx = tgtPlayers.indexOf(activator);
