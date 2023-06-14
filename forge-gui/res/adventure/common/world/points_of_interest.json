@@ -2607,6 +2607,17 @@
 	]
 },
 {
+	"name": "Naktamun",
+	"type": "capital",
+	"count": 1,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "final_castle",
+	"map": "maps/map/naktamun.tmx",
+	"questTags": [
+		"Capital"
+	]
+},
+{
 	"name": "NestW",
 	"type": "cave",
 	"count": 3,
@@ -2636,6 +2647,15 @@
 		"Sidequest"
 	]
 },
+{
+	"name": "Oasis",
+	"type": "cave",
+	"count": 10,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "MerfolkPool",
+	"map": "maps/map/oasis.tmx"
+	"radiusFactor": 0.8,
+}
 {
 	"name": "OrthodoxyBasilica",
 	"type": "dungeon",

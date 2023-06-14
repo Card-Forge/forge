@@ -11530,6 +11530,63 @@
 	]
 },
 {
+	"name": "Sunmare",
+	"sprite": "sprites/animals/horsearabian.atlas",
+	"deck": [
+		"decks/horse.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"scale": 0.5,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "GW",
+	"questTags": [
+		"Animal",
+		"Domesticated",
+		"Farm",
+		"Prey",
+		"IdentityGreen",
+		"IdentityWhite",
+		"IdentitySelesnya"
+	]
+},
+{
 	"name": "Horseman",
 	"sprite": "sprites/humans/cavalier_2.atlas",
 	"deck": [

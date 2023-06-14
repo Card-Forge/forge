@@ -1,0 +1,15 @@
+[metadata]
+Name=ratswarm
+[Main]
+4 Burglar Rat|JMP|1
+4 Drainpipe Vermin|JMP|1
+4 Muck Rats|PO2|1
+4 Plague Rats|30A|1
+4 Plaguecrafter's Familiar|J21|1
+4 Spawning Pool|10E|1
+16 Swamp|GNT|1
+4 Swarm of Rats|8ED|1
+4 Swarmyard|TSR|1
+4 Typhoid Rats|M15|1
+4 Wave of Rats|NCC|1
+4 Zodiac Rat|PRM|1

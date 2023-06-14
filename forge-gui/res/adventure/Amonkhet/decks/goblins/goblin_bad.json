@@ -1,0 +1,10 @@
+{                                    
+"name":"Goblin bad",
+  "template":
+  {
+   "count":80,
+   "colors":["Red"],
+   "tribe":"Goblin",
+   "rares":0.1
+  }
+}

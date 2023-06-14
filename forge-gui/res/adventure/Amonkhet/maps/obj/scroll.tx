@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../tileset/buildings.tsx"/>
+ <object name="Scroll" type="reward" gid="1363" width="16" height="16">
+  <properties>
+   <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Black Lotus&quot;, &quot;count&quot;: 1 } ]"/>
+   <property name="spawn.Easy" type="bool" value="true"/>
+   <property name="spawn.Hard" type="bool" value="true"/>
+   <property name="spawn.Normal" type="bool" value="true"/>
+   <property name="sprite" value="sprites/scroll.atlas"/>
+  </properties>
+ </object>
+</template>

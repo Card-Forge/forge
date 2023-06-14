@@ -1,0 +1,10 @@
+{                                    
+"name":"Human good",
+  "template":
+  {
+   "count":60,
+   "colors":["White"],
+   "tribe":"Human",
+   "rares":0.8
+  }
+}
