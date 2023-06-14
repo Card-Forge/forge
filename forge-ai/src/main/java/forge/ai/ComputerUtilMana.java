@@ -1019,8 +1019,6 @@ public class ComputerUtilMana {
             // if the AI can't pay the additional costs skip the mana ability
             if (!CostPayment.canPayAdditionalCosts(ma.getPayCosts(), ma)) {
                 return false;
-            } else if (sourceCard.isTapped()) {
-                return false;
             } else if (ma.getRestrictions() != null && ma.getRestrictions().isInstantSpeed()) {
                 return false;
             }
