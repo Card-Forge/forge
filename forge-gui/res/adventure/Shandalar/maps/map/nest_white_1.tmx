@@ -121,7 +121,7 @@
   </object>
   <object id="86" template="../obj/enemy.tx" x="118" y="751.5">
    <properties>
-    <property name="enemy" value="Sand Wurm"/>
+    <property name="enemy" value="Sandwurm"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="79,75,76,77"/>
    </properties>
@@ -252,7 +252,7 @@
   </object>
   <object id="120" template="../obj/enemy.tx" x="443" y="732">
    <properties>
-    <property name="enemy" value="Sand Wurm"/>
+    <property name="enemy" value="Sandwurm"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>

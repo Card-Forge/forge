@@ -11635,7 +11635,7 @@
 },
 {
 	"name": "Human",
-	"sprite": "sprites/enemy/humanoid/human/soldier/legeman.atlas",
+	"sprite": "sprites/enemy/humanoid/human/soldier/pikeman.atlas",
 	"deck": [
 		"decks/standard/human_bad.json"
 	],
