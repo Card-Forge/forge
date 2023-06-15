@@ -482,10 +482,12 @@ public enum DeckFormat {
         };
     }
 
-    public Predicate<Deck> hasLegalCardsPredicate() {
+    public Predicate<Deck> hasLegalCardsPredicate(boolean enforceDeckLegality) {
         return new Predicate<Deck>() {
             @Override
             public boolean apply(Deck deck) {
+                if (!enforceDeckLegality)
+                    return true;
                 if (cardPoolFilter != null) {
                     for (final Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
                         if (!cardPoolFilter.apply(cp.getKey().getRules())) {
