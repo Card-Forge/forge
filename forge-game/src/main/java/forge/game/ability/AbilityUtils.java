@@ -1450,7 +1450,11 @@ public class AbilityUtils {
 
         // Needed - Equip an untapped creature with Sword of the Paruns then cast Deadshot on it. Should deal 2 more damage.
         game.getAction().checkStaticAbilities(); // this will refresh continuous abilities for players and permanents.
-        game.getTriggerHandler().collectTriggerForWaiting();
+        if (sa.isReplacementAbility()) {
+            game.getTriggerHandler().collectTriggerForWaiting();
+        } else {
+            game.getTriggerHandler().resetActiveTriggers();
+        }
         AbilityUtils.resolveApiAbility(abSub, game);
     }
 
