@@ -1,0 +1,10 @@
+Name:Entish Restoration
+ManaCost:2 G
+Types:Instant
+A:SP$ Sacrifice | Defined$ You | SacValid$ Land | SubAbility$ DBChangeZone | SpellDescription$ Sacrifice a land. Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle. If you control a creature with power 4 or greater, instead search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ X | Tapped$ True
+SVar:AIPreference:SacCost$Land.Basic+tapped
+SVar:X:Count$Compare Y GE1.3.2
+SVar:Y:Count$Valid Creature.YouCtrl+powerGE4
+DeckHas:Ability$Sacrifice
+Oracle:Sacrifice a land. Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle. If you control a creature with power 4 or greater, instead search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle.

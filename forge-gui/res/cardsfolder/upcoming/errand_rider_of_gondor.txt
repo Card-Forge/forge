@@ -1,0 +1,9 @@
+Name:Errand-Rider of Gondor
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card. Then if you don't control a legendary creature, put a card from your hand on the bottom of your library.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeNum$ 1 | Mandatory$ True | LibraryPosition$ -1 | ConditionPresent$ Creature.Legendary+YouCtrl | ConditionCompare$ EQ0
+DeckHints:Type$Legendary & Type$Creature
+Oracle:When Errand-Rider of Gondor enters the battlefield, draw a card. Then if you don't control a legendary creature, put a card from your hand on the bottom of your library.
