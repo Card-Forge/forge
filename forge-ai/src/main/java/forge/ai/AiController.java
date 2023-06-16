@@ -514,6 +514,8 @@ public class AiController {
             landList = unreflectedLands;
         }
 
+        // TODO If there's nothing to do with the mana, then play a tapland
+
         //try to skip lands that enter the battlefield tapped
         if (!nonLandsInHand.isEmpty()) {
             CardCollection nonTappedLands = new CardCollection();
@@ -1336,7 +1338,6 @@ public class AiController {
     }
 
     public List<SpellAbility> chooseSpellAbilityToPlay() {
-        System.out.println("in chooseSpellAbilityToPlay");
         // Reset cached predicted combat, as it may be stale. It will be
         // re-created if needed and used for any AI logic that needs it.
         predictedCombat = null;
