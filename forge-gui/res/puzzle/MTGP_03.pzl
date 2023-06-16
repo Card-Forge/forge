@@ -1,0 +1,20 @@
+[metadata]
+Name:MTG Puzzles #03 - Crews Control
+URL:https://mtgpuzzles.com/puzzle/3
+Goal:Win
+Turns:1
+Difficulty:Medium
+Description:Win this turn. The Illusions are winning! Saddle up your creatures and become victorious!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=3
+p0landsplayed=0
+p0landsplayedlastturn=0
+p0hand=Renegade Wheelsmith;Chaos Charm
+p0battlefield=Mobile Garrison;Granger Guildmage;Knotvine Paladin;Mountain;Mountain;Mountain;Temple Garden|NoETBTrigs;Temple Garden|NoETBTrigs
+p1life=8
+p1landsplayed=0
+p1landsplayedlastturn=0
+p1battlefield=T:u_1_1_illusion_flying;T:u_1_1_illusion_flying;T:u_1_1_illusion_flying

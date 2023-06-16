@@ -3,8 +3,6 @@ package forge.adventure.scene;
 import forge.adventure.data.AdventureEventData;
 import forge.adventure.stage.GameHUD;
 import forge.screens.FScreen;
-import forge.sound.MusicPlaylist;
-import forge.sound.SoundSystem;
 
 /**
  * DraftScene
@@ -34,7 +32,7 @@ public class DraftScene extends ForgeScene {
     public void enter() {
         GameHUD.getInstance().getTouchpad().setVisible(false);
         GameHUD.getInstance().pauseMusic();
-        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
+        GameHUD.getInstance().playAudio();
         screen = null;
         getScreen();
         screen.refresh();
