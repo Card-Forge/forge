@@ -1,7 +1,10 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -11,17 +14,18 @@ import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
-import forge.adventure.data.*;
+import forge.adventure.data.AdventureEventData;
+import forge.adventure.data.DialogData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
 import forge.adventure.stage.WorldStage;
-import forge.adventure.util.*;
+import forge.adventure.util.AdventureEventController;
+import forge.adventure.util.Controls;
+import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
-import forge.sound.MusicPlaylist;
-import forge.sound.SoundSystem;
 import forge.util.Callback;
 import forge.util.MyRandom;
 
@@ -381,7 +385,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
     public void enter() {
         super.enter();
         GameHUD.getInstance().pauseMusic();
-        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
+        GameHUD.getInstance().playAudio();
         scrollContainer.clear();
 
         if (money != null) {

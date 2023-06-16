@@ -32,8 +32,6 @@ import forge.localinstance.achievements.CardActivationAchievements;
 import forge.localinstance.achievements.PlaneswalkerAchievements;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
-import forge.sound.MusicPlaylist;
-import forge.sound.SoundSystem;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Map;
@@ -191,7 +189,7 @@ public class PlayerStatisticScene extends UIScene {
         super.enter();
 
         GameHUD.getInstance().pauseMusic();
-        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
+        GameHUD.getInstance().playAudio();
 
         achievementContainer.clear();
         updateAchievements(cardActivation, true);
