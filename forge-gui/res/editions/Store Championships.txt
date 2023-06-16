@@ -18,3 +18,5 @@ ScryfallCode=SCH
 10 R Strangle @Sidharth Chaturvedi
 11 R Aether Channeler @Olivier Bernard
 12 M Thalia and The Gitrog Monster @PINDURSKI
+13 R Gifted Aetherborn @Lie Setiawan
+14 R Eidolon of the Great Revel @Yigit Koroglu
