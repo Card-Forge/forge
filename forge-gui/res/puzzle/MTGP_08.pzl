@@ -1,11 +1,12 @@
-# Needs AI support for Ashling the Pilgrim to work correctly.
 [metadata]
-Name:MTG Puzzles #08 - Counter Intelligence
+Name:MTG Puzzles #08 - Counter Intelligence (*Human controlled*)
 URL:https://mtgpuzzles.com/puzzle/8
 Goal:Win
 Turns:1
 Difficulty:Medium
 Description:Win this turn. It's the eternal struggle between +1/+1 counters and -1/-1 counters, can you force your opponent's hand to secure the victory? Your opponent could activate Ashling at any point they have priority.
+# Needs AI support for Ashling the Pilgrim to work correctly (without human control).
+HumanControl:True
 [state]
 turn=1
 activeplayer=p0
