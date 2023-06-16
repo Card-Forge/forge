@@ -12,8 +12,6 @@ import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
-import forge.sound.MusicPlaylist;
-import forge.sound.SoundSystem;
 
 /**
  * Scene for the Inn in towns
@@ -101,7 +99,7 @@ public class InnScene extends UIScene {
         super.enter();
         refreshStatus();
         GameHUD.getInstance().pauseMusic();
-        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.TOWN);
+        GameHUD.getInstance().playAudio();
     }
 
     private void refreshStatus(){
