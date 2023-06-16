@@ -81,8 +81,8 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
         String diff = this.difficulty == null ? "(Unspecified)" : this.difficulty;
 
         if (humanControl) { // TODO: localization
-            desc.append("\nWARNING: This puzzle is fully controlled by the human player due to poor AI support. ");
-            desc.append("You can make all decisions for your opponent. Please verify that your solution works for ");
+            desc.append("\nWARNING: This puzzle is human-controlled (it does not have an active AI player). ");
+            desc.append("This means you will be making all decisions for your opponent. Make sure your solution works for ");
             desc.append("all possible opponent's decisions.\n\n");
         }
 
