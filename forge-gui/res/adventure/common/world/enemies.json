@@ -620,8 +620,8 @@
 	]
 },
 {
-	"name": "Amonkhet Minotaur",
-	"sprite": "sprites/enemy/fiend/warden.atlas",
+	"name": "Amonkhet Minotaur Warrior",
+	"sprite": "sprites/enemy/humanoid/minotaur/amonkhet_minotaur.atlas",
 	"deck": [
 		"decks/standard/amonkhet_minotaur.dck"
 	],
@@ -2004,7 +2004,7 @@
 },
 {
 	"name": "Beastmaster",
-	"sprite": "sprites/enemy/humanoid/human/calibou_elite.atlas",
+	"sprite": "sprites/enemy/humanoid/human/warrior/caribou_elite.atlas",
 	"deck": [
 		"decks/standard/beastmaster.dck"
 	],
@@ -7371,6 +7371,143 @@
 	]
 },
 {
+	"name": "Falcon",
+	"sprite": "sprites/enemy/beast/falcon.atlas",
+	"deck": [
+		"decks/standard/falcon_w.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"scale": 0.6,
+	"life": 11,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Bird",
+		"Wild",
+		"Flying",
+		"IdentityWhite"
+	]
+},
+{
+	"name": "Falcon-headed Aven Warrior",
+	"sprite": "sprites/enemy/humanoid/aven/falconheadedaven.atlas",
+	"deck": [
+		"decks/standard/amonkhet_aven_w.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 16,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Humanoid",
+		"Initiate",
+		"Aggressive",
+		"Aven",
+		"Flying",
+		"Warrior",
+		"Tribal",
+		"IdentityWhite",
+		"BiomeWhite"
+	]
+},
+{
 	"name": "Farmer",
 	"nameOverride": "",
 	"sprite": "sprites/enemy/humanoid/human/peasant/farmer.atlas",
@@ -7770,7 +7907,7 @@
 },
 {
 	"name": "Flying Witch",
-	"sprite": "sprites/enemy/humanoid/human/peasant/flyingwitch.atlas",
+	"sprite": "sprites/enemy/humanoid/human/warlock/flyingwitch.atlas",
 	"deck": [
 		"decks/standard/witch.dck"
 	],
@@ -9975,7 +10112,7 @@
 	]
 },
 {
-	"name": "Goblin pack",
+	"name": "Goblin Pack",
 	"sprite": "sprites/enemy/humanoid/goblin/goblin_group.atlas",
 	"deck": [
 		"decks/standard/goblin_bad.json"
@@ -11955,6 +12092,147 @@
 	]
 },
 {
+	"name": "Ibis",
+	"sprite": "sprites/enemy/beast/ibis.atlas",
+	"deck": [
+		"decks/standard/bird_gu.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"scale": 0.6,
+	"life": 11,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "GU",
+	"questTags": [
+		"Bird",
+		"Wild",
+		"Flying",
+		"IdentityGreen",
+		"IdentityBlue",
+		"IdentitySimic",
+		"BiomeGreen",
+		"BiomeBlue"
+	]
+},
+{
+	"name": "Ibis-headed Aven Warrior",
+	"sprite": "sprites/enemy/humanoid/aven/ibisheadedaven.atlas",
+	"deck": [
+		"decks/standard/amonkhet_aven_u.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 16,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "U",
+	"questTags": [
+		"Humanoid",
+		"Initiate",
+		"Aggressive",
+		"Aven",
+		"Flying",
+		"Tribal",
+		"IdentityBlue",
+		"BiomeBlue",
+		"Warrior"
+	]
+},
+{
 	"name": "Illusionist",
 	"sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
 	"deck": [
@@ -12089,7 +12367,7 @@
 	]
 },
 {
-	"name": "Jackal Warrior",
+	"name": "Khenra Warrior",
 	"sprite": "sprites/enemy/humanoid/khenra/jackalwarrior.atlas",
 	"deck": [
 		"decks/standard/jackal.dck"
@@ -15253,7 +15531,7 @@
 	]
 },
 {
-	"name": "Naga Initiate",
+	"name": "Naga Warrior",
 	"sprite": "sprites/enemy/humanoid/naga/nagawarrior.atlas",
 	"deck": [
 		"decks/standard/nagawarrior.dck"
@@ -20344,12 +20622,78 @@
 	]
 },
 {
+	"name": "Plague Rat Swarm",
+	"sprite": "sprites/enemy/beast/wildrat.atlas",
+	"deck": [
+		"decks/standard/rat_realmagic.dck"
+	],
+	"ai": "",
+	"randomizeDeck": true,
+	"spawnRate": 0.6,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.8,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Subterranean",
+		"Animal",
+		"Wild",
+		"Sneaky",
+		"Small",
+		"Scavenger",
+		"Swarm",
+		"IdentityBlack",
+		"BiomeColorless",
+		"BiomeBlack"
+	]
+},
+{
 	"name": "Wild Rat",
 	"sprite": "sprites/enemy/beast/wildrat.atlas",
 	"deck": [
 		"decks/standard/infectrat.dck",
 		"decks/standard/rat.json",
-		"decks/standard/ratswarm.dck"
+		"decks/standard/ratswarm.dck",
+		"decks/standard/rat_realmagic.dck"
 	],
 	"ai": "",
 	"randomizeDeck": true,

@@ -1003,7 +1003,7 @@
  <objectgroup id="15" name="Enemies">
   <object id="42" template="../obj/enemy.tx" name="Khenra" x="137" y="396">
    <properties>
-    <property name="enemy" value="Jackal Warrior"/>
+    <property name="enemy" value="Khenra Warrior"/>
    </properties>
   </object>
   <object id="43" template="../obj/enemy.tx" name="QuestGiver" x="594" y="112" visible="1">

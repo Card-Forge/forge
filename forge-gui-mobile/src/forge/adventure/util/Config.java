@@ -155,6 +155,7 @@ public class Config {
             case 2:
                 return Cache.get(commonPath);
             case 0:
+                System.out.println("Looking for resource "+path);
                 String fileName = fullPath.replaceFirst("[.][^.]+$", "");
                 String commonFileName = commonPath.replaceFirst("[.][^.]+$", "");
                 String ext = fullPath.substring(fullPath.lastIndexOf('.'));
@@ -172,7 +173,10 @@ public class Config {
                     Cache.put(commonPath, new FileHandle(commonPath));
                     isCommon = true;
                 }
-                if (isCommon) return Cache.get(commonPath);
+                if (isCommon) {
+                    System.out.println("Found at " + commonPath);
+                    return Cache.get(commonPath);
+                }
         }
         return Cache.get(fullPath);
     }
