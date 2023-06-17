@@ -629,7 +629,7 @@ public class SpecialCardAi {
     public static class GrislySigil {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             // TODO: improve targeting support for Casualty 1
-            List<Card> validTgts = CardUtil.getValidCardsToTarget(sa);
+            CardCollection validTgts = CardLists.filterControlledBy(CardUtil.getValidCardsToTarget(sa), ai.getOpponents());
             CardCollection potentialTgts = new CardCollection();
 
             for (Card c : validTgts) {
