@@ -3,6 +3,7 @@ package forge.app;
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.Normalizer;
 import java.util.ArrayList;
 
 import android.graphics.Point;
@@ -62,11 +63,44 @@ import org.apache.commons.lang3.tuple.Pair;
 public class Main extends AndroidApplication {
     AndroidAdapter Gadapter;
     ArrayList<String> gamepads;
+    AndroidClipboard androidClipboard;
+    boolean hasLaunched;
+
+    private AndroidClipboard getAndroidClipboard() {
+        if (androidClipboard == null)
+            androidClipboard = new AndroidClipboard();
+        return androidClipboard;
+    }
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        String action = intent.getAction();
+        String type = intent.getType();
+
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            if ("text/plain".equals(type)) {
+                getAndroidClipboard().setContents(intent.getStringExtra(Intent.EXTRA_TEXT));
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gamepads = getGameControllers();
+
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            if ("text/plain".equals(type)) {
+                getAndroidClipboard().setContents(intent.getStringExtra(Intent.EXTRA_TEXT));
+            }
+        }
+        if (hasLaunched)
+            return;
+        hasLaunched = true;
         //init Sentry
         //SentryAndroid.init(this);
 
@@ -262,6 +296,7 @@ public class Main extends AndroidApplication {
 
     @Override
     protected void onDestroy() {
+        hasLaunched = false;
         try {
             final Forge forge = (Forge) Gdx.app.getApplicationListener();
             if (forge != null)
@@ -315,7 +350,8 @@ public class Main extends AndroidApplication {
         public String getContents() {
             if (cm.getPrimaryClip().getItemCount() > 0) {
                 try {
-                    return cm.getPrimaryClip().getItemAt(0).coerceToText(getContext()).toString();
+                    String text = cm.getPrimaryClip().getItemAt(0).coerceToText(getContext()).toString();
+                    return Normalizer.normalize(text, Normalizer.Form.NFD);
                 }
                 catch (Exception ex) {
                     ex.printStackTrace();
