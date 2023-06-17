@@ -632,7 +632,6 @@ public class SpecialCardAi {
             CardCollection potentialTgts = CardLists.filterControlledBy(CardUtil.getValidCardsToTarget(sa), ai.getOpponents());
 
             for (Card c : potentialTgts) {
-
                 int potentialDamage = c.getAssignedDamage(false, null) > 0 ? 3 : 1; // TODO: account for damage reduction
                 if (c.canBeDestroyed()) {
                     int damageToDeal = c.isCreature() ? c.getNetToughness() : c.getCurrentLoyalty();
