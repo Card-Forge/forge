@@ -32,6 +32,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
     String description;
     String targets;
     int targetCount = 1;
+    boolean humanControl = false;
     int turns;
     boolean completed;
 
@@ -66,6 +67,8 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
                 this.targets = split[1].trim();
             } else if ("TargetCount".equalsIgnoreCase(split[0])) {
                 this.targetCount = Integer.parseInt(split[1]);
+            } else if ("HumanControl".equalsIgnoreCase(split[0])) {
+                this.humanControl = "true".equalsIgnoreCase(split[1].trim());
             }
         }
     }
@@ -76,6 +79,12 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
         String name = this.name == null ? "Unnamed Puzzle" : this.name;
         String goal = this.goal == null ? "(Unspecified)" : this.goal;
         String diff = this.difficulty == null ? "(Unspecified)" : this.difficulty;
+
+        if (humanControl) { // TODO: localization
+            desc.append("\nWARNING: This puzzle is human-controlled (it does not have an active AI player). ");
+            desc.append("This means you will be making all decisions for your opponent. Make sure your solution works for ");
+            desc.append("all possible opponent's decisions.\n\n");
+        }
 
         desc.append(name);
         desc.append("\nDifficulty: ");
@@ -219,6 +228,11 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
         super.applyGameOnThread(game);
         addGoalEnforcement(game);
         game.getRules().setAppliedVariants(Sets.newHashSet(GameType.Puzzle));
+
+        // for puzzles that are tricky to implement for the AI, they can be fully controlled by the human player
+        if (humanControl) {
+            game.getPlayers().get(1).addController(game.getNextTimestamp(), game.getPlayers().get(0));
+        }
     }
 
     @Override
