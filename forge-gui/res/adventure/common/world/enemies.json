@@ -8256,7 +8256,7 @@
 },
 {
 	"name": "Fungus",
-	"sprite": "sprites/enemy/plants/fungus.atlas",
+	"sprite": "sprites/enemy/plant/fungus.atlas",
 	"deck": [
 		"decks/standard/fungus.json"
 	],
@@ -10405,7 +10405,7 @@
 },
 {
 	"name": "Golgari Fungus",
-	"sprite": "sprites/enemy/plants/fungus_golgari.atlas",
+	"sprite": "sprites/enemy/plant/fungus_golgari.atlas",
 	"deck": [
 		"decks/standard/fungus_golgari.dck"
 	],
@@ -10467,7 +10467,7 @@
 },
 {
 	"name": "Golgari Treefolk",
-	"sprite": "sprites/enemy/plants/treant_golgari.atlas",
+	"sprite": "sprites/enemy/plant/treant_golgari.atlas",
 	"deck": [
 		"decks/standard/treefolk_golgari.dck"
 	],
@@ -11178,7 +11178,7 @@
 },
 {
 	"name": "Hidden Bush",
-	"sprite": "sprites/enemy/plants/hiddenbush.atlas",
+	"sprite": "sprites/enemy/plant/hiddenbush.atlas",
 	"deck": [
 		"decks/standard/plant.dck"
 	],
@@ -16325,7 +16325,7 @@
 },
 {
 	"name": "Plant",
-	"sprite": "sprites/enemy/plants/plant.atlas",
+	"sprite": "sprites/enemy/plant/plant.atlas",
 	"deck": [
 		"decks/standard/plant.json",
 		"decks/standard/plant.dck"
@@ -18180,7 +18180,7 @@
 },
 {
 	"name": "Slimefoot",
-	"sprite": "sprites/enemy/plants/slimefoot.atlas",
+	"sprite": "sprites/enemy/plant/slimefoot.atlas",
 	"deck": [
 		"decks/miniboss/slimefoot.dck"
 	],
@@ -19793,7 +19793,7 @@
 },
 {
 	"name": "Treefolk",
-	"sprite": "sprites/enemy/plants/treant.atlas",
+	"sprite": "sprites/enemy/plant/treant.atlas",
 	"deck": [
 		"decks/standard/treefolk.json"
 	],
@@ -19849,7 +19849,7 @@
 },
 {
 	"name": "Treefolk Guardian",
-	"sprite": "sprites/enemy/plants/treant_2.atlas",
+	"sprite": "sprites/enemy/plant/treant_2.atlas",
 	"deck": [
 		"decks/standard/treefolk.dck"
 	],
@@ -20484,61 +20484,6 @@
 		"IdentityBoros"
 	]
 },
-	{
-		"name": "Warrior",
-		"nameOverride": "",
-		"sprite": "sprites/enemy/humanoid/human/warrior/warrior.atlas",
-		"deck": [
-			"decks/standard/gladiator.dck"
-		],
-		"ai": "",
-		"spawnRate": 1,
-		"difficulty": 0.1,
-		"speed": 21,
-		"life": 18,
-		"rewards": [
-			{
-				"type": "deckCard",
-				"probability": 1,
-				"count": 2,
-				"addMaxCount": 4
-			},
-			{
-				"type": "gold",
-				"probability": 0.7,
-				"count": 100,
-				"addMaxCount": 90
-			},
-			{
-				"type": "card",
-				"probability": 0.9,
-				"count": 3,
-				"addMaxCount": 4,
-				"colors": [
-					"Red",
-					"White"
-				],
-				"rarity": [
-					"Uncommon",
-					"Rare"
-				],
-				"colorType": "MultiColor"
-			}
-		],
-		"colors": "RW",
-		"questTags": [
-			"Humanoid",
-			"Aggressive",
-			"Fighter",
-			"Human",
-			"Warrior",
-			"Initiate",
-			"IdentityRed",
-			"IdentityBoros",
-			"IdentityWhite",
-			"BiomeWhite"
-		]
-	},
 {
 	"name": "Wasp",
 	"sprite": "sprites/enemy/beast/wasp.atlas",
