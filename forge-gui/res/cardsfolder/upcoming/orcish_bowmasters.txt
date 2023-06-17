@@ -8,4 +8,4 @@ T:Mode$ Drawn | ValidCard$ Card.OppOwn | FirstCardInDrawStep$ False | Secondary$
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ 1 | ValidTgts$ Any | SubAbility$ DBAmass
 SVar:DBAmass:DB$ Amass | Type$ Orc | Num$ 1
 DeckHas:Ability$Token|Counters & Type$Orc|Army
-Oracle:When Orcish Bowmasters enters the battlefield and whenever an opponent draws a card except the first one they draw in each of their draw steps, Orcish Bowmasters deals 1 damage to any target. Then amass Orcs 1.
+Oracle:Flash\nWhen Orcish Bowmasters enters the battlefield and whenever an opponent draws a card except the first one they draw in each of their draw steps, Orcish Bowmasters deals 1 damage to any target. Then amass Orcs 1.
