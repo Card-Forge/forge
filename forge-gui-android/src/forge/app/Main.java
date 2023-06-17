@@ -245,7 +245,7 @@ public class Main extends AndroidApplication {
             String message = getDeviceName()+"\n"+"Android "+AndroidRelease+"\n"+"RAM "+ totalRAM+"MB" +"\n"+"LibGDX "+ Version.VERSION+"\n"+"Can't access external storage";
             Sentry.addBreadcrumb(new Breadcrumb(message));
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, true, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
+            initialize(Forge.getApp(getAndroidClipboard(), adapter, "", false, true, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
             displayMessage(adapter, true, message);
             return;
         }
@@ -258,7 +258,7 @@ public class Main extends AndroidApplication {
             String message = getDeviceName()+"\n"+"Android "+AndroidRelease+"\n"+"RAM "+ totalRAM+"MB" +"\n"+"LibGDX "+ Version.VERSION+"\n"+"Can't access external storage\nPath: " + assetsDir;
             Sentry.addBreadcrumb(new Breadcrumb(message));
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, true, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
+            initialize(Forge.getApp(getAndroidClipboard(), adapter, "", false, true, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
             displayMessage(adapter, true, message);
             return;
         }
@@ -284,12 +284,12 @@ public class Main extends AndroidApplication {
                 isPortrait = true;
                 Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
-            initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir, propertyConfig, isPortrait, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
+            initialize(Forge.getApp(getAndroidClipboard(), adapter, assetsDir, propertyConfig, isPortrait, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
         } else {
             isPortrait = true;
             //fake init for permission instruction
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, isPortrait, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
+            initialize(Forge.getApp(getAndroidClipboard(), adapter, "", false, isPortrait, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
             displayMessage(adapter, false, "");
         }
     }
