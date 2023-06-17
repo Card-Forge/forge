@@ -79,6 +79,11 @@ public class PermanentCreatureAi extends PermanentAi {
             }
         }
 
+        // Blitz Keyword: avoid casting in Main2
+        if (sa.isBlitz() && ph.getPhase().isAfter(PhaseType.MAIN1)) {
+            return false;
+        }
+
         // Prevent the computer from summoning Ball Lightning type creatures
         // after attacking
         if (card.hasSVar("EndOfTurnLeavePlay")
