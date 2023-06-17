@@ -4731,7 +4731,7 @@
 	"sprite": "sprites/enemy/beast/crab.atlas",
 	"deck": [
 		"decks/standard/crab.json",
-		"decks/standard/giant_crab"
+		"decks/standard/giant_crab.dck"
 	],
 	"ai": "",
 	"randomizeDeck": true,
@@ -8041,7 +8041,7 @@
 	"sprite": "sprites/enemy/beast/fox.atlas",
 	"deck": [
 		"decks/standard/fox.json",
-		"decks/standard/fox_greenwhite.json"
+		"decks/standard/fox_greenwhite.dck"
 	],
 	"ai": "",
 	"randomizeDeck": true,
