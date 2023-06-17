@@ -629,10 +629,9 @@ public class SpecialCardAi {
     public static class GrislySigil {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             // TODO: improve targeting support for Casualty 1
-            CardCollection validTgts = CardLists.filterControlledBy(CardUtil.getValidCardsToTarget(sa), ai.getOpponents());
-            CardCollection potentialTgts = new CardCollection();
+            CardCollection potentialTgts = CardLists.filterControlledBy(CardUtil.getValidCardsToTarget(sa), ai.getOpponents());
 
-            for (Card c : validTgts) {
+            for (Card c : potentialTgts) {
 
                 int potentialDamage = c.getAssignedDamage(false, null) > 0 ? 3 : 1; // TODO: account for damage reduction
                 if (c.canBeDestroyed()) {
