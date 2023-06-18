@@ -1,5 +1,5 @@
 Name:Dunland Crebain
-ManaCost:2 R
+ManaCost:2 B
 Types:Creature Bird Horror
 PT:1/1
 K:Flying

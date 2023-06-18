@@ -34,7 +34,7 @@ public enum SpellApiToAi {
             .put(ApiType.BidLife, BidLifeAi.class)
             .put(ApiType.BlankLine, AlwaysPlayAi.class)
             .put(ApiType.Bond, BondAi.class)
-            .put(ApiType.Branch, AlwaysPlayAi.class)
+            .put(ApiType.Branch, BranchAi.class)
             .put(ApiType.Camouflage, ChooseCardAi.class)
             .put(ApiType.ChangeCombatants, ChangeCombatantsAi.class)
             .put(ApiType.ChangeTargets, ChangeTargetsAi.class)
