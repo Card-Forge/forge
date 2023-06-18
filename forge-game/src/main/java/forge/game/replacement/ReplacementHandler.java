@@ -29,7 +29,6 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.game.CardTraitBase;
@@ -251,7 +250,7 @@ public class ReplacementHandler {
 
         // if its updated, try to call event again
         if (res == ReplacementResult.Updated) {
-            Map<AbilityKey, Object> params = Maps.newHashMap(runParams);
+            Map<AbilityKey, Object> params = AbilityKey.newMap(runParams);
 
             if (params.containsKey(AbilityKey.EffectOnly)) {
                 params.put(AbilityKey.EffectOnly, true);
@@ -260,15 +259,14 @@ public class ReplacementHandler {
             switch (result) {
             case NotReplaced:
             case Updated: {
-                for (Map.Entry<AbilityKey, Object> e : params.entrySet()) {
-                    runParams.put(e.getKey(), e.getValue());
-                }
+                runParams.putAll(params);
                 // effect was updated
                 runParams.put(AbilityKey.ReplacementResult, ReplacementResult.Updated);
                 break;
             }
             default:
                 // effect was replaced with something else
+                res = result;
                 runParams.put(AbilityKey.ReplacementResult, result);
                 break;
             }
