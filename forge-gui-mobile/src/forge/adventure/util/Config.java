@@ -105,7 +105,7 @@ public class Config {
             Lang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_LANGUAGE);
         try
         {
-            configData = new Json().fromJson(ConfigData.class, new FileHandle(prefix + "config.json"));
+            configData = new Json().fromJson(ConfigData.class, new FileHandle(commonPrefix + "config.json"));
 
         }
         catch (Exception e)
