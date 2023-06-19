@@ -106,7 +106,7 @@ public class Config {
 
         //prefix = "forge-gui/res/adventure/Shandalar/";
         prefix = getPlanePath(settingsData.plane);
-        commonPrefix = getPlanePath(commonDirectoryName);
+        commonPrefix = resPath() + "/res/adventure/" + commonDirectoryName + "/";
 
         currentConfig = this;
         if (FModel.getPreferences() != null)
