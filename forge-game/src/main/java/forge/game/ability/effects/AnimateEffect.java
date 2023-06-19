@@ -26,16 +26,17 @@ public class AnimateEffect extends AnimateEffectBase {
     @Override
     public void resolve(final SpellAbility sa) {
         final Card source = sa.getHostCard();
+        String duration = sa.getParam("Duration");
 
         String animateRemembered = null;
         String animateImprinted = null;
 
         //if host is not on the battlefield don't apply
-        if (("UntilHostLeavesPlay".equals(sa.getParam("Duration")) || "UntilLoseControlOfHost".equals(sa.getParam("Duration")))
+        if (("UntilHostLeavesPlay".equals(duration) || "UntilLoseControlOfHost".equals(duration))
                 && !source.isInPlay()) {
             return;
         }
-        if ("UntilLoseControlOfHost".equals(sa.getParam("Duration")) && source.getController() != sa.getActivatingPlayer()) {
+        if ("UntilLoseControlOfHost".equals(duration) && source.getController() != sa.getActivatingPlayer()) {
             return;
         }
 
@@ -175,7 +176,7 @@ public class AnimateEffect extends AnimateEffectBase {
 
             doAnimate(c, sa, power, toughness, types, removeTypes, finalColors,
                     keywords, removeKeywords, hiddenKeywords,
-                    abilities, triggers, replacements, stAbs, timestamp);
+                    abilities, triggers, replacements, stAbs, timestamp, duration);
 
             if (sa.hasParam("Name")) {
                 c.addChangedName(sa.getParam("Name"), false, timestamp, 0);
