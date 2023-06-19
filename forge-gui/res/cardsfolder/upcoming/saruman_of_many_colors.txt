@@ -1,0 +1,15 @@
+Name:Saruman of Many Colors
+ManaCost:3 W U B
+Types:Legendary Creature Avatar Wizard
+PT:5/4
+K:Ward:Discard<1/Card.Enchantment;Card.Instant;Card.Sorcery/enchantment, instant or sorcery card>
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, each opponent mills two cards. When one or more cards are milled this way, exile target enchantment, instant, or sorcery card with equal or lesser mana value than that spell from an opponent's graveyard. Copy the exiled card. You may cast the copy without paying its mana cost.
+SVar:TrigMill:DB$ Mill | Defined$ Opponent | NumCards$ 2 | RememberMilled$ True | SubAbility DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target instant or sorcery card in a graveyard | ValidTgts$ Instant.OppOwn+CMCLEX,Sorcery.OppOwn+CMCLEX | TgtPrompt$ Select target instant or sorcery card from an opponent's graveyard | ConditionDefined$ Remembered | ConditionPresent$ Card | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBPlay 
+SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | Controller$ You | CopyCard$ True | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | Amount$ All | SubAbility$ ExileMe
+SVar:ExileMe:DB$ ChangeZoneAll | Origin$ Stack | Destination$ Exile | ChangeType$ Card.Self | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggeredCard$CardManaCost
+DeckHints:Type$Enchantment|Instant|Sorcery
+DeckHas:Ability$Token|Graveyard|Mill
+Oracle:Ward—Discard an enchantment, instant, or sorcery card.\nWhenever you cast your second spell each turn, each opponent mills two cards. When one or more cards are milled this way, exile target enchantment, instant, or sorcery card with equal or lesser mana value than that spell from an opponent's graveyard. Copy the exiled card. You may cast the copy without paying its mana cost.

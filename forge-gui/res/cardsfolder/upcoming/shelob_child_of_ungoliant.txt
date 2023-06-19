@@ -1,0 +1,6 @@
+Name:Shadow Summoning
+ManaCost:W B 
+Types:Sorcery
+A:SP$ Token | TokenAmount$ 2 | TokenTapped$ True | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Create two tapped 1/1 white Spirit creature tokens with flying.
+DeckHas:Ability$Token & Type$Spirit
+Oracle:Create two tapped 1/1 white Spirit creature tokens with flying.
