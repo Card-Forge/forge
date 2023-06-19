@@ -1,0 +1,14 @@
+Name:Sting, the Glinting Dagger
+ManaCost:2
+Types:Legendary Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 1 | AddKeyword$ Haste | Description$ Equipped creature gets +1/+1 and has haste.
+S:Mode$ Continuous | Affected$ Card.EquippedBy+Legendary | AddKeyword$ Menace | Description$ As long as equipped creature is legendary, it has menace. (It can't be blocked except by two or more creatures.)
+DeckHints:Type$Legendary
+Oracle:Equipped creature gets +1/+1 and has haste.
+
+At the beginning of each combat, untap equipped creature.
+
+Equipped creature has first strike as long as it’s blocking or blocked by a Goblin or Orc.
+
+Equip {2}
