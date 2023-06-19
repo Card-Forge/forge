@@ -378,7 +378,6 @@ public class AnimateAi extends SpellAbilityAi {
         becomeAnimated(copy, card.hasSickness(), sa);
         return copy;
     }
-    
     private static void becomeAnimated(final Card card, final boolean hasOriginalCardSickness, final SpellAbility sa) {
         // duplicating AnimateEffect.resolve
         final Card source = sa.getHostCard();
