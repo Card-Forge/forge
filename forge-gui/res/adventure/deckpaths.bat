@@ -1,1 +1,0 @@
-dir *.json *.dck /b /s
