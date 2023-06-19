@@ -20,6 +20,9 @@ public class PlayerProperty {
 
     public static boolean playerHasProperty(Player player, String property, Player sourceController, Card source, CardTraitBase spellAbility) {
         Game game = player.getGame();
+        if (property.endsWith("Activator")) {
+            sourceController = spellAbility.getHostCard().getController();
+        }
         if (property.equals("You")) {
             if (!player.equals(sourceController)) {
                 return false;
@@ -178,13 +181,6 @@ public class PlayerProperty {
         } else if (property.equals("CardsInHandAtBeginningOfTurn")) {
             if (player.getNumCardsInHandStartedThisTurnWith() <= 0) {
                 return false;
-            }
-        } else if (property.startsWith("WithCardsInHand")) {
-            if (property.contains("AtLeast")) {
-                int amount = Integer.parseInt(property.split("AtLeast")[1]);
-                if (player.getCardsIn(ZoneType.Hand).size() < amount) {
-                    return false;
-                }
             }
         } else if (property.equals("IsRemembered")) {
             if (!source.isRemembered(player)) {

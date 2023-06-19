@@ -275,7 +275,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             }
         }
 
-        if (oppsThatCanGainLife.size() == 0) {
+        if (oppsThatCanGainLife.isEmpty()) {
             return null;
         }
 

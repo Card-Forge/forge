@@ -1223,18 +1223,7 @@ public class AbilityUtils {
         else if (defined.equals("DefendingPlayer")) {
             players.add(game.getCombat().getDefendingPlayerRelatedTo(card));
         }
-        else if (defined.equals("OpponentsOtherThanDefendingPlayer")) {
-            players.addAll(player.getOpponents());
-            players.remove(game.getCombat().getDefendingPlayerRelatedTo(card));
-        }
         else if (defined.equals("ChosenPlayer")) {
-            final Player p = card.getChosenPlayer();
-            if (p != null) {
-                players.add(p);
-            }
-        }
-        else if (defined.equals("ChosenAndYou")) {
-            players.add(player);
             final Player p = card.getChosenPlayer();
             if (p != null) {
                 players.add(p);
@@ -3372,19 +3361,19 @@ public class AbilityUtils {
 
         final Game game = player.getGame();
 
-        // count valid cards in any specified zone/s
-        if (l[0].startsWith("Valid") && !l[0].contains("Valid ")) {
-            String[] lparts = l[0].split(" ", 2);
-            final List<ZoneType> vZone = ZoneType.listValueOf(lparts[0].split("Valid")[1]);
-            String restrictions = TextUtil.fastReplace(l[0], TextUtil.addSuffix(lparts[0]," "), "");
-            int num = CardLists.getValidCardCount(game.getCardsIn(vZone), restrictions, player, source, ctb);
-            return doXMath(num, m, source, ctb);
-        }
-
         // count valid cards on the battlefield
         if (l[0].startsWith("Valid ")) {
             final String restrictions = l[0].substring(6);
             int num = CardLists.getValidCardCount(game.getCardsIn(ZoneType.Battlefield), restrictions, player, source, ctb);
+            return doXMath(num, m, source, ctb);
+        }
+
+        // count valid cards in any specified zone/s
+        if (l[0].startsWith("Valid")) {
+            String[] lparts = l[0].split(" ", 2);
+            final List<ZoneType> vZone = ZoneType.listValueOf(lparts[0].split("Valid")[1]);
+            String restrictions = TextUtil.fastReplace(l[0], TextUtil.addSuffix(lparts[0]," "), "");
+            int num = CardLists.getValidCardCount(game.getCardsIn(vZone), restrictions, player, source, ctb);
             return doXMath(num, m, source, ctb);
         }
 

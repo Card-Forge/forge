@@ -1,0 +1,11 @@
+Name:Glorfindel, Dauntless Rescuer
+ManaCost:2 G
+Types:Legendary Creature Elf Noble
+PT:3/2
+T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Whenever you scry, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBMustBeBlocked,DBEffect | SubAbility$ DBPump | AdditionalDescription$ and CARDNAME gets +1/+1 until end of turn. 
+SVar:DBMustBeBlocked:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME must be blocked if able. | SpellDescription$ NICKNAME must be blocked this turn if able.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ MinMaxBlocked | ExileOnMoved$ Battlefield | SpellDescription$ NICKNAME can't be blocked by more than one creature each combat this turn.
+SVar:MinMaxBlocked:Mode$ MinMaxBlocker | ValidCard$ Card.EffectSource | Max$ 1 | Description$ NICKNAME can't be blocked by more than one creature each combat this turn.
+SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
+Oracle:Whenever you scry, choose one and Glorfindel, Dauntless Rescuer gets +1/+1 until end of turn.\n• Glorfindel must be blocked this turn if able.\n• Glorfindel can't be blocked by more than one creature each combat this turn.

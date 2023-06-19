@@ -378,7 +378,6 @@ public class AnimateAi extends SpellAbilityAi {
         becomeAnimated(copy, card.hasSickness(), sa);
         return copy;
     }
-    
     private static void becomeAnimated(final Card card, final boolean hasOriginalCardSickness, final SpellAbility sa) {
         // duplicating AnimateEffect.resolve
         final Card source = sa.getHostCard();
@@ -485,7 +484,7 @@ public class AnimateAi extends SpellAbilityAi {
         AnimateEffectBase.doAnimate(card, sa, power, toughness, types, removeTypes, finalColors,
                 keywords, removeKeywords, hiddenKeywords,
                 abilities, triggers, replacements, stAbs,
-                timestamp);
+                timestamp, "Permanent");
 
         // check if animate added static Abilities
         CardTraitChanges traits = card.getChangedCardTraits().get(timestamp, 0);
