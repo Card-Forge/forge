@@ -25,10 +25,7 @@ import forge.localinstance.properties.ForgeProfileProperties;
 import forge.model.FModel;
 import forge.util.FileUtil;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -40,6 +37,7 @@ import java.util.List;
  */
 public class Config {
     private static Config currentConfig;
+    private final String commonDirectoryName="common";
     private final String prefix;
     private final String commonPrefix;
     private final HashMap<String, FileHandle> Cache = new HashMap<String, FileHandle>();
@@ -58,7 +56,17 @@ public class Config {
     private Config() {
 
         String path= resPath();
-         adventures = new File(GuiBase.isAndroid() ? ForgeConstants.ADVENTURE_DIR : path + "/res/adventure").list();
+        FilenameFilter planesFilter = new FilenameFilter() {
+            @Override
+            public boolean accept(File file, String s) {
+                if (!s.contains(".") && !s.equals(commonDirectoryName)) {
+                    return true;
+                }
+                return false;
+            }
+        };
+
+        adventures = new File(GuiBase.isAndroid() ? ForgeConstants.ADVENTURE_DIR : path + "/res/adventure").list(planesFilter);
         try
         {
             settingsData = new Json().fromJson(SettingData.class, new FileHandle(ForgeConstants.USER_ADVENTURE_DIR +  "settings.json"));
@@ -98,7 +106,7 @@ public class Config {
 
         //prefix = "forge-gui/res/adventure/Shandalar/";
         prefix = getPlanePath(settingsData.plane);
-        commonPrefix = getPlanePath("common");
+        commonPrefix = getPlanePath(commonDirectoryName);
 
         currentConfig = this;
         if (FModel.getPreferences() != null)
