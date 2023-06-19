@@ -485,7 +485,7 @@ public class AnimateAi extends SpellAbilityAi {
         AnimateEffectBase.doAnimate(card, sa, power, toughness, types, removeTypes, finalColors,
                 keywords, removeKeywords, hiddenKeywords,
                 abilities, triggers, replacements, stAbs,
-                timestamp);
+                timestamp, "Permanent");
 
         // check if animate added static Abilities
         CardTraitChanges traits = card.getChangedCardTraits().get(timestamp, 0);
