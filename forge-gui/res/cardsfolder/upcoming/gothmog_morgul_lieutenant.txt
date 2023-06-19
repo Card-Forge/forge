@@ -1,0 +1,10 @@
+Name:Gothmog, Morgul Lieutenant
+ManaCost:3 B
+Types:Legendary Creature Human Soldier
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAmass | TriggerDescription$When CARDNAME enters the battlefield, amass Orcs 1. (Put a +1/+1 counter on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)
+SVar:TrigAmass:DB$ Amass | Type$ Orc | Num$ 1
+S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddKeyword$ Deathtouch | Description$ Creature tokens you control have deathtouch.
+DeckHas:Ability$Token|Counters & Type$Orc|Army
+DeckHints:Ability$Token
+Oracle:When Gothmog, Morgul Lieutenant enters the battlefield, amass Orcs 1. (Put a +1/+1 counter on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)\nCreature tokens you control have deathtouch.
