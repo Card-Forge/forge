@@ -1,0 +1,5 @@
+Name:Rise of the Witch-king
+ManaCost:2 B G
+Types:Sorcery
+DeckHas:Ability$Graveyard|Sacrifice
+Oracle:Each player sacrifices a creature. If you sacrificed a creature this way, you may return another permanent card from your graveyard to the battlefield.
