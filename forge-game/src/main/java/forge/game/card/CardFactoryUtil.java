@@ -2639,30 +2639,6 @@ public class CardFactoryUtil {
             ReplacementEffect re = ReplacementHandler.parseReplacement(rep, host, intrinsic, card);
             inst.addReplacement(re);
         }
-        else if (keyword.startsWith("If CARDNAME would be put into a graveyard "
-                + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
-            StringBuilder sb = new StringBuilder("Event$ Moved | Destination$ Graveyard | ValidCard$ Card.Self ");
-
-            // to show it on Nexus
-            if (host.isPermanent()) {
-                sb.append("| Secondary$ True");
-            }
-            sb.append("| Description$ ").append(keyword);
-
-            String ab =  "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Library | Defined$ ReplacedCard | Reveal$ True | Shuffle$ True";
-
-            SpellAbility sa = AbilityFactory.getAbility(ab, card);
-
-            if (!intrinsic) {
-                sa.setIntrinsic(false);
-            }
-
-            ReplacementEffect re = ReplacementHandler.parseReplacement(sb.toString(), host, intrinsic, card);
-
-            re.setOverridingAbility(sa);
-
-            inst.addReplacement(re);
-        }
 
         if (keyword.equals("CARDNAME enters the battlefield tapped.")) {
             String effect = "DB$ Tap | Defined$ Self | ETB$ True "
