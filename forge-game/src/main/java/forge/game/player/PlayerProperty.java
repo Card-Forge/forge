@@ -22,6 +22,7 @@ public class PlayerProperty {
         Game game = player.getGame();
         if (property.endsWith("Activator")) {
             sourceController = spellAbility.getHostCard().getController();
+            property = property.substring(0, property.length() - 9);
         }
         if (property.equals("You")) {
             if (!player.equals(sourceController)) {
