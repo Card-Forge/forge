@@ -1,15 +1,6 @@
-Name:Shelob, Child of Ungoliant
-ManaCost:4 B G
-Types:Legendary Creature Spider Demon
-PT:8/8
-K:Deathtouch
-K:Ward:2
-S:Mode$ Continuous | Affected$ Spider.Other+YouCtrl | AddKeyword$ Deathtouch & Ward:2 | Description$ Other Spiders you control have deathtouch and ward {2}.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+DamagedByCard Spider.YouCtrl | RememberChanged$ True | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever another creature dealt damage this turn by a Spider you controlled dies, create a token that's a copy of that creature, except it's a Food artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life," and it loses all other card types.
-SVar:TrigCopy:DB$ CopyPermanent | Defined$ Remembered | AddAbility$ FoodSac | AddTypes$ Artifact & Food | RemoveCardTypes$ True | SubAbility$ DBCleanup
-SVar:FoodSac:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this creature> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:PlayMain1:TRUE
-DeckHas:Ability$Token|LifeGain & Type$Artifact|Food
-DeckHints:Type$Spider
-Oracle:Deathtouch, ward {2}\nOther Spiders you control have deathtouch and ward {2}.\nWhenever another creature dealt damage this turn by a Spider you controlled dies, create a token that's a copy of that creature, except it's a Food artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life," and it loses all other card types.
+Name:Shadow Summoning
+ManaCost:W B 
+Types:Sorcery
+A:SP$ Token | TokenAmount$ 2 | TokenTapped$ True | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Create two tapped 1/1 white Spirit creature tokens with flying.
+DeckHas:Ability$Token & Type$Spirit
+Oracle:Create two tapped 1/1 white Spirit creature tokens with flying.
