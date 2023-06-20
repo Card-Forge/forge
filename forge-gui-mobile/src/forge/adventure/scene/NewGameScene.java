@@ -193,7 +193,7 @@ public class NewGameScene extends UIScene {
                     gender.getCurrentIndex() == 0,
                     race.getCurrentIndex(),
                     avatarIndex,
-                    colorIds[custom.isEmpty() ? colorId.getCurrentIndex() : 0],
+                    colorIds[custom.isEmpty() || !AdventureModes.Custom.equals(modes.get(mode.getCurrentIndex())) ? colorId.getCurrentIndex() : 0],
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
                     editionIds[starterEdition.getCurrentIndex()], 0);//maybe replace with enum
