@@ -61,7 +61,6 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-import forge.game.trigger.WrappedAbility;
 import forge.util.TextUtil;
 
 /**
@@ -617,11 +616,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     private final boolean hasFizzled(final SpellAbility sa, final Card source, final Boolean parentFizzled) {
-        // Check if the spellability is a trigger that was invalidated with fizzleTriggersOnStackTargeting
-        if (sa.getSVar("TriggerFizzled").equals("True")) {
-            return true;
-        }
-
         // Can't fizzle unless there are some targets
         Boolean fizzle = null;
         boolean rememberTgt = sa.getRootAbility().hasParam("RememberOriginalTargets");
@@ -728,20 +722,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             } else {
                 if (activator.equals(p)) {
                     simultaneousStackEntryList.remove(sa);
-                }
-            }
-        }
-    }
-
-    public void fizzleTriggersOnStackTargeting(Card c, TriggerType t) {
-        for (SpellAbilityStackInstance si : stack) {
-            SpellAbility sa = si.getSpellAbility(false);
-            if (sa.getTriggeringObjects().containsKey(AbilityKey.Target) && sa.getTriggeringObjects().get(AbilityKey.Target).equals(c)) {
-                if (sa instanceof WrappedAbility) {
-                    WrappedAbility wi = (WrappedAbility)sa;
-                    if (wi.getTrigger().getMode() == t) {
-                        ((WrappedAbility)sa).getWrappedAbility().setSVar("TriggerFizzled", "True");
-                    }
                 }
             }
         }
