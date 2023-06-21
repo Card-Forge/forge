@@ -40,7 +40,7 @@ import java.util.List;
  */
 public class Config {
     private static Config currentConfig;
-    private final String commonDirectoryName="common";
+    private final String commonDirectoryName = "common";
     private final String prefix;
     private final String commonPrefix;
     private final HashMap<String, FileHandle> Cache = new HashMap<String, FileHandle>();
@@ -50,15 +50,15 @@ public class Config {
     private String Lang = "en-us";
     private final String plane;
 
-    static public Config instance()
-    {
-        if(currentConfig==null)
-            currentConfig=new Config();
+    static public Config instance() {
+        if (currentConfig == null)
+            currentConfig = new Config();
         return currentConfig;
     }
+
     private Config() {
 
-        String path= resPath();
+        String path = resPath();
         FilenameFilter planesFilter = new FilenameFilter() {
             @Override
             public boolean accept(File file, String s) {
@@ -67,41 +67,36 @@ public class Config {
         };
 
         adventures = new File(GuiBase.isAndroid() ? ForgeConstants.ADVENTURE_DIR : path + "/res/adventure").list(planesFilter);
-        try
-        {
-            settingsData = new Json().fromJson(SettingData.class, new FileHandle(ForgeConstants.USER_ADVENTURE_DIR +  "settings.json"));
+        try {
+            settingsData = new Json().fromJson(SettingData.class, new FileHandle(ForgeConstants.USER_ADVENTURE_DIR + "settings.json"));
 
+        } catch (Exception e) {
+            settingsData = new SettingData();
         }
-        catch (Exception e)
-        {
-            settingsData=new SettingData();
+        if (settingsData.plane == null || settingsData.plane.isEmpty()) {
+            if (adventures != null && adventures.length >= 1)
+                settingsData.plane = adventures[0];
         }
-        if(settingsData.plane==null||settingsData.plane.isEmpty())
-        {
-            if(adventures!=null&&adventures.length>=1)
-                settingsData.plane=adventures[0];
-        }
-        plane=settingsData.plane;
+        plane = settingsData.plane;
 
-        if(settingsData.width==0||settingsData.height==0)
-        {
-            settingsData.width=1280;
-            settingsData.height=720;
+        if (settingsData.width == 0 || settingsData.height == 0) {
+            settingsData.width = 1280;
+            settingsData.height = 720;
         }
-        if(settingsData.videomode == null || settingsData.videomode.isEmpty())
-            settingsData.videomode="720p";
+        if (settingsData.videomode == null || settingsData.videomode.isEmpty())
+            settingsData.videomode = "720p";
         //reward card display fine tune
-        if(settingsData.rewardCardAdj == null || settingsData.rewardCardAdj == 0f)
-            settingsData.rewardCardAdj=1f;
+        if (settingsData.rewardCardAdj == null || settingsData.rewardCardAdj == 0f)
+            settingsData.rewardCardAdj = 1f;
         //tooltip fine tune
-        if(settingsData.cardTooltipAdj == null || settingsData.cardTooltipAdj == 0f)
-            settingsData.cardTooltipAdj=1f;
+        if (settingsData.cardTooltipAdj == null || settingsData.cardTooltipAdj == 0f)
+            settingsData.cardTooltipAdj = 1f;
         //reward card display fine tune landscape
-        if(settingsData.rewardCardAdjLandscape == null || settingsData.rewardCardAdjLandscape == 0f)
-            settingsData.rewardCardAdjLandscape=1f;
+        if (settingsData.rewardCardAdjLandscape == null || settingsData.rewardCardAdjLandscape == 0f)
+            settingsData.rewardCardAdjLandscape = 1f;
         //tooltip fine tune landscape
-        if(settingsData.cardTooltipAdjLandscape == null || settingsData.cardTooltipAdjLandscape == 0f)
-            settingsData.cardTooltipAdjLandscape=1f;
+        if (settingsData.cardTooltipAdjLandscape == null || settingsData.cardTooltipAdjLandscape == 0f)
+            settingsData.cardTooltipAdjLandscape = 1f;
 
 
         //prefix = "forge-gui/res/adventure/Shandalar/";
@@ -111,15 +106,12 @@ public class Config {
         currentConfig = this;
         if (FModel.getPreferences() != null)
             Lang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_LANGUAGE);
-        try
-        {
+        try {
             configData = new Json().fromJson(ConfigData.class, new FileHandle(commonPrefix + "config.json"));
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-            configData=new ConfigData();
+            configData = new ConfigData();
         }
 
 
@@ -127,16 +119,13 @@ public class Config {
 
     private String resPath() {
 
-        return GuiBase.isAndroid() ? ForgeConstants.ASSETS_DIR : Files.exists(Paths.get("./res"))?"./":Files.exists(Paths.get("./forge-gui/"))?"./forge-gui/":"../forge-gui";
+        return GuiBase.isAndroid() ? ForgeConstants.ASSETS_DIR : Files.exists(Paths.get("./res")) ? "./" : Files.exists(Paths.get("./forge-gui/")) ? "./forge-gui/" : "../forge-gui";
     }
 
     public String getPlanePath(String plane) {
-        if(plane.startsWith("<user>"))
-        {
+        if (plane.startsWith("<user>")) {
             return ForgeConstants.USER_ADVENTURE_DIR + "/userplanes/" + plane.substring("<user>".length()) + "/";
-        }
-        else
-        {
+        } else {
             return resPath() + "/res/adventure/" + plane + "/";
         }
     }
@@ -154,43 +143,36 @@ public class Config {
     }
 
     public FileHandle getFile(String path) {
-        String fullPath = (prefix + path).replace("//","/");
-        String commonPath= (commonPrefix+path).replace("//","/");
+        String fullPath = (prefix + path).replace("//", "/");
+        String commonPath = (commonPrefix + path).replace("//", "/");
 
-        CacheStatus cacheStatus=CacheStatus.UNCACHED;
-        if(Cache.containsKey(fullPath)) cacheStatus=CacheStatus.CACHED_CURRENT_PLANE;
-        else if(Cache.containsKey(commonPath)) cacheStatus=CacheStatus.CACHED_COMMON;
-        switch(cacheStatus) {
-            case CACHED_COMMON:
-                return Cache.get(commonPath);
-            case UNCACHED:
-                System.out.println("Looking for resource "+path);
-                String fileName = fullPath.replaceFirst("[.][^.]+$", "");
-                String commonFileName = commonPath.replaceFirst("[.][^.]+$", "");
-                String ext = fullPath.substring(fullPath.lastIndexOf('.'));
-                String langFile = fileName + "-" + Lang + ext;
-                String commonLangFile = commonFileName + "-" + Lang + ext;
-                boolean isCommon = false;
-                if (Files.exists(Paths.get(langFile))) {
-                    Cache.put(fullPath, new FileHandle(langFile));
-                } else if (Files.exists(Paths.get(commonLangFile))) {
-                    Cache.put(commonPath, new FileHandle(langFile));
-                    isCommon = true;
-                } else if (Files.exists(Paths.get(fullPath))) {
-                    Cache.put(fullPath, new FileHandle(fullPath));
-                } else if (Files.exists(Paths.get(commonPath))) {
-                    Cache.put(commonPath, new FileHandle(commonPath));
-                    isCommon = true;
-                }
-                if (isCommon) {
-                    System.out.println("Found at " + commonPath);
-                    return Cache.get(commonPath);
-                }
+        if (Cache.containsKey(fullPath)) return Cache.get(fullPath);
+
+        if (Cache.containsKey(commonPath)) return Cache.get(commonPath);
+
+        System.out.print("Looking for resource " + path+"... ");
+        String fileName = fullPath.replaceFirst("[.][^.]+$", "");
+        String commonFileName = commonPath.replaceFirst("[.][^.]+$", "");
+        String ext = fullPath.substring(fullPath.lastIndexOf('.'));
+        String langFile = fileName + "-" + Lang + ext;
+        String commonLangFile = commonFileName + "-" + Lang + ext;
+
+        if (Files.exists(Paths.get(langFile))) {
+            Cache.put(fullPath, new FileHandle(langFile));
+            System.out.println("Found in local resources");
+            return Cache.get(fullPath);
+        } else if (Files.exists(Paths.get(fullPath))) {
+            Cache.put(fullPath, new FileHandle(fullPath));
+            System.out.println("Found in local resources");
+            return Cache.get(fullPath);
+        }else if (Files.exists(Paths.get(commonLangFile))) {
+            Cache.put(commonPath, new FileHandle(langFile));
+        }else{
+            Cache.put(commonPath, new FileHandle(commonPath));
         }
-        return Cache.get(fullPath);
+        System.out.println("Found in common resources");
+        return Cache.get(commonPath);
     }
-
-
     public String getPlane() {
         return plane.replace("<user>","user_");
     }
