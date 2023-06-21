@@ -13,7 +13,10 @@ import forge.adventure.data.ConfigData;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.data.RewardData;
 import forge.adventure.data.SettingData;
-import forge.card.*;
+import forge.card.CardEdition;
+import forge.card.CardRarity;
+import forge.card.CardRules;
+import forge.card.ColorSet;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.deck.DeckgenUtil;
@@ -59,10 +62,7 @@ public class Config {
         FilenameFilter planesFilter = new FilenameFilter() {
             @Override
             public boolean accept(File file, String s) {
-                if (!s.contains(".") && !s.equals(commonDirectoryName)) {
-                    return true;
-                }
-                return false;
+                return (!s.contains(".") && !s.equals(commonDirectoryName));
             }
         };
 
@@ -156,13 +156,14 @@ public class Config {
     public FileHandle getFile(String path) {
         String fullPath = (prefix + path).replace("//","/");
         String commonPath= (commonPrefix+path).replace("//","/");
-        int x=0;
-        if(Cache.containsKey(fullPath)) x=1;
-        else if(Cache.containsKey(commonPath)) x=2;
-        switch(x) {
-            case 2:
+
+        CacheStatus cacheStatus=CacheStatus.UNCACHED;
+        if(Cache.containsKey(fullPath)) cacheStatus=CacheStatus.CACHED_CURRENT_PLANE;
+        else if(Cache.containsKey(commonPath)) cacheStatus=CacheStatus.CACHED_COMMON;
+        switch(cacheStatus) {
+            case CACHED_COMMON:
                 return Cache.get(commonPath);
-            case 0:
+            case UNCACHED:
                 System.out.println("Looking for resource "+path);
                 String fileName = fullPath.replaceFirst("[.][^.]+$", "");
                 String commonFileName = commonPath.replaceFirst("[.][^.]+$", "");
