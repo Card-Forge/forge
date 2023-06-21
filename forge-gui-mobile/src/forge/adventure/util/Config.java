@@ -143,35 +143,34 @@ public class Config {
     }
 
     public FileHandle getFile(String path) {
-        String fullPath = (prefix + path).replace("//", "/");
-        String commonPath = (commonPrefix + path).replace("//", "/");
+        if (Cache.containsKey(path)) return Cache.get(path);
 
-        if (Cache.containsKey(fullPath)) return Cache.get(fullPath);
+        //if (Cache.containsKey(commonPath)) return Cache.get(commonPath);
 
-        if (Cache.containsKey(commonPath)) return Cache.get(commonPath);
-
+        //not cached, look for resource
         System.out.print("Looking for resource " + path+"... ");
+        String fullPath = (prefix + path).replace("//", "/");
         String fileName = fullPath.replaceFirst("[.][^.]+$", "");
-        String commonFileName = commonPath.replaceFirst("[.][^.]+$", "");
         String ext = fullPath.substring(fullPath.lastIndexOf('.'));
         String langFile = fileName + "-" + Lang + ext;
-        String commonLangFile = commonFileName + "-" + Lang + ext;
+
+        for (int iter=1; iter<=2; iter++){
 
         if (Files.exists(Paths.get(langFile))) {
-            Cache.put(fullPath, new FileHandle(langFile));
-            System.out.println("Found in local resources");
-            return Cache.get(fullPath);
+            System.out.println("Found!");
+            Cache.put(path, new FileHandle(langFile));
+            break;
         } else if (Files.exists(Paths.get(fullPath))) {
-            Cache.put(fullPath, new FileHandle(fullPath));
-            System.out.println("Found in local resources");
-            return Cache.get(fullPath);
-        }else if (Files.exists(Paths.get(commonLangFile))) {
-            Cache.put(commonPath, new FileHandle(langFile));
-        }else{
-            Cache.put(commonPath, new FileHandle(commonPath));
+            System.out.println("Found!");
+            Cache.put(path, new FileHandle(fullPath));
+             break;
         }
-        System.out.println("Found in common resources");
-        return Cache.get(commonPath);
+        //no local resource, check common resources
+        fullPath = (commonPrefix + path).replace("//", "/");
+        fileName = fullPath.replaceFirst("[.][^.]+$", "");
+        langFile = fileName + "-" + Lang + ext;
+        }
+        return Cache.get(path);
     }
     public String getPlane() {
         return plane.replace("<user>","user_");
