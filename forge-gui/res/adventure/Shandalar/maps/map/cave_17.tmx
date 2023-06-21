@@ -39,7 +39,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../obj/entry_up.tx" x="194" y="273.333"/>
+  <object id="38" template="../obj/entry_up.tx" x="176" y="273.333" width="48" height="16"/>
   <object id="41" template="../obj/shop.tx" x="64" y="163.5"/>
   <object id="42" template="../obj/shop.tx" x="336.5" y="80"/>
   <object id="43" template="../obj/shop.tx" x="304.5" y="177.5"/>

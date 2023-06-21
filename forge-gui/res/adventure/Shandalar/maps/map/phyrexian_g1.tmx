@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="29" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="75">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="29" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="75">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -18,7 +18,7 @@
  </layer>
  <layer id="2" name="Ground" width="29" height="34">
   <data encoding="base64" compression="zlib">
-   eJztklEKgDAMQ/creBaPMfAmXsOb+zUQ3WrKmtXCAvkaa8pL85JSnnbzuWGOntnawYN19Ey0P8t+vTN7GFn+Q96isf1Ln2y2Hjc0kq2kHdxLy6jmWqbF3PvslhhsETEzPe5WerfM/BLjbktfo/ssmRK/Y32blcm4P4ntk58k6z4RaRlpbrl39syMnXkBHSpevQ==
+   eJztk0EOgCAMBLma+BafwVv8hj/3DlJa2LI2ocmeiB2Y1nyklHdoeS5dojNbd2C4js7Uzg85XzZzxhHyO81ZNLd/mae3W8YOrXTbKzSzlS8mom/Ze/SN1vtoypPJ2FvpHMlkue39L55Myd991vFieuyf5Lb0JxV6npqyOrLs8mzvzYzNfAHr9F3H
   </data>
  </layer>
  <layer id="3" name="Clutter" width="29" height="34">
@@ -30,7 +30,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../obj/entry_up.tx" x="209.619" y="534.582">
+  <object id="38" template="../obj/entry_up.tx" x="160" y="546.582" width="112" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>

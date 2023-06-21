@@ -88,7 +88,7 @@
   </object>
   <object id="163" template="../obj/waypoint.tx" x="427.842" y="297.105"/>
   <object id="165" template="../obj/waypoint.tx" x="345.569" y="296.378"/>
-  <object id="167" template="../obj/entry_up.tx" x="222.342" y="344.605">
+  <object id="167" template="../obj/entry_up.tx" x="221.342" y="350.605">
    <properties>
     <property name="teleport" value=""/>
    </properties>

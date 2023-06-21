@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="200" height="200" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="144">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="200" height="200" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="144">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="200" height="200">
   <data encoding="base64" compression="zlib">
    eJztzgENAAAIA6AHsH8Y0xnDOSEBCQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANzVtT0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+GUAkeQAxw==
@@ -39,7 +39,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="135" template="../obj/entry_down.tx" x="1552.67" y="17.3333"/>
+  <object id="135" template="../obj/entry_down.tx" x="1536" y="12.3333" width="48" height="16"/>
   <object id="136" template="../obj/treasure.tx" x="1585" y="170.5"/>
   <object id="137" template="../obj/treasure.tx" x="1520" y="171"/>
   <object id="138" template="../obj/treasure.tx" x="1552.5" y="171"/>
