@@ -1248,11 +1248,30 @@ public class AttachAi extends SpellAbilityAi {
         	}
 
         	// should not attach Auras to creatures that does leave the play
-        	// TODO also should not attach Auras to creatures cast with Dash
             prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return !c.hasSVar("EndOfTurnLeavePlay");
+                }
+            });
+        }
+
+        // Should not attach things to crewed vehicles that will stop being creatures soon
+        // Equipping in Main 1 on creatures that actually attack is probably fine though
+        // TODO Somehow test for definitive advantage (e.g. opponent low on health, AI is attacking)
+        // to be able to deal the final blow with an enchanted vehicle like that
+        boolean canOnlyTargetCreatures = true;
+        for (String valid : sa.getTargetRestrictions().getValidTgts()) {
+            if (!valid.startsWith("Creature")) {
+                canOnlyTargetCreatures = false;
+                break;
+            }
+        }
+        if (canOnlyTargetCreatures && (attachSource.isAura() || attachSource.isEquipment())) {
+            prefList = CardLists.filter(prefList, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    return card.getTimesCrewedThisTurn() == 0 || (attachSource.isEquipment() && attachSource.getGame().getPhaseHandler().is(PhaseType.MAIN1, ai));
                 }
             });
         }
