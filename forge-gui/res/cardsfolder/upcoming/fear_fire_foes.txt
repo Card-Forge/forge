@@ -1,0 +1,10 @@
+Name:Fear, Fire, Foes!
+ManaCost:X R
+Types:Sorcery
+A:SP$ Effect | StaticAbilities$ STCantPrevent | AILogic$ Burn | SubAbility$ DBDealDamage | SpellDescription$ Damage can't be prevented this turn. CARDNAME deals X damage to target creature and 1 damage to each other creature with the same controller.
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ X | DamageMap$ True | SubAbility$ DBDamageAll 
+SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature.NotDefinedTargeted+ControlledBy TargetedController | NumDmg$ 1 | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+SVar:STCantPrevent:Mode$ CantPreventDamage | EffectZone$ Command | Description$ Damage can't be prevented this turn.
+SVar:X:Count$xPaid
+Oracle:Damage can't be prevented this turn. Fear, Fire, Foes! deals X damage to target creature and 1 damage to each other creature with the same controller.

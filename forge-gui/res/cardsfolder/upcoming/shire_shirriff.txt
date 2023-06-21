@@ -8,4 +8,4 @@ SVar:TrigSac:AB$ ImmediateTrigger | Cost$ Sac<1/Card.token/token> | Execute$ Tri
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Duration$ UntilHostLeavesPlay
 DeckHas:Ability$Sacrifice
 DeckHints:Ability$Token
-Oracle:When CARDNAME enters the battlefield, you may sacrifice a token. When you do, exile target creature an opponent controls until Shire Shirriff leaves the battlefield.
+Oracle:Vigilance\nWhen Shire Shirriff enters the battlefield, you may sacrifice a token. When you do, exile target creature an opponent controls until Shire Shirriff leaves the battlefield.

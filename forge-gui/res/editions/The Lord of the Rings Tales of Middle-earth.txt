@@ -86,7 +86,7 @@ ScryfallCode=LTR
 77 U Bitter Downfall @John Di Giovanni
 78 C The Black Breath @Chris Cold
 79 R Call of the Ring @Anato Finnstark
-80 C Cirith Ungol Patrol @
+80 C Cirith Ungol Patrol @Bruno Biazotto
 81 C Claim the Precious @Artur Treffner
 82 C Dunland Crebain @Alexander Ostrowski
 83 C Easterling Vanguard @Javier Charro
@@ -262,7 +262,7 @@ ScryfallCode=LTR
 253 R Barad-dur @Sean Vo
 254 C Great Hall of the Citadel @Campbell White
 255 U The Grey Havens @Alayna Danner
-256 R Minas Tirith @
+256 R Minas Tirith @Arthur Yuan
 257 R Mines of Moria @Arthur Yuan
 258 M Mount Doom @Jonas De Ro
 259 R Rivendell @Jonas De Ro
@@ -324,7 +324,7 @@ ScryfallCode=LTR
 316 R Aragorn, Company Leader @Andreas Rocha
 317 M Aragorn, the Uniter @Dominik Mayer
 318 R Elrond, Master of Healing @Andreas Rocha
-319 R Faramir, Prince of Ithilien
+319 R Faramir, Prince of Ithilien @Andreas Rocha
 320 U Frodo Baggins @Dominik Mayer
 321 R Galadriel of Lothlorien @Anato Finnstark
 322 R Gandalf the Grey @Anato Finnstark
@@ -460,7 +460,7 @@ ScryfallCode=LTR
 649 U Denethor, Ruling Steward @Campbell White
 753 R Mines of Moria @Lucas Terryn
 760 R Forge Anew @Craig J Spearing
-763 R Press the Enemy @
+763 R Press the Enemy @Valera Lutfullina
 764 R Rangers of Ithilien @Torgeir Fjereide
 765 M The Watcher in the Water @Chris Cold
 767 R Isildur's Fateful Strike @John Di Giovanni
@@ -468,3 +468,17 @@ ScryfallCode=LTR
 780 R King of the Oathbreakers @Tatiana Veryayskaya
 785 R Shelob, Child of Ungoliant @Lorenzo Mastroianni
 787 M Glamdring @Andrea Piparo
+
+[tokens]
+b_0_0_orc_army
+b_0_0_orc_army
+ballistic_boulder
+c_a_food_sac
+c_a_food_sac
+c_a_food_sac
+c_a_treasure_sac
+smaug
+u_1_1_tentacle
+w_1_1_human_soldier
+w_1_1_human_soldier
+w_1_1_spirit_flying

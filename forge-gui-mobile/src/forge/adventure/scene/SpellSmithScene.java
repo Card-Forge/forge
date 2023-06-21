@@ -152,6 +152,11 @@ public class SpellSmithScene extends UIScene {
             if (it.size() == 0)
                 return false;
             return (!Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getCode()));
+        }).sorted(new Comparator<CardEdition>() {
+            @Override
+            public int compare(CardEdition e1, CardEdition e2) {
+                return e1.getName().compareTo(e2.getName());
+            }
         }).collect(Collectors.toList());
     }
 

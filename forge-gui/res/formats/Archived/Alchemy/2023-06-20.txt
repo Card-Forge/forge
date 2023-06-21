@@ -1,0 +1,6 @@
+[format]
+Name:Alchemy (LTR)
+Type:Archived
+Subtype:Arena
+Effective:2023-06-20
+Sets:ANA, ANB, MID, VOW, YMID, NEO, YNEO, SNC, YSNC, HBG, DMU, YDMU, BRO, YBRO, ONE, YONE, MOM, MAT, LTR

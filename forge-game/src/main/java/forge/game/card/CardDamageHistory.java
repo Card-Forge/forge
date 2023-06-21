@@ -247,6 +247,9 @@ public class CardDamageHistory {
      * @param player
      */
     public void registerDamage(int damage, boolean isCombat, Card sourceLKI, GameEntity target, Map<Integer, Card> lkiCache) {
+        if (damage <= 0) {
+            return;
+        }
         damagedThisGame.add(target);
         hasdealtDamagetoAny = true;
         if (isCombat && target instanceof Player) {

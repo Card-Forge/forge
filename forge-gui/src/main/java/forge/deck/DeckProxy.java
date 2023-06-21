@@ -473,9 +473,9 @@ public class DeckProxy implements InventoryItem {
     public static Iterable<DeckProxy> getAllTinyLeadersDecks(Predicate<Deck> filter) {
         final List<DeckProxy> result = new ArrayList<>();
         if (filter == null) {
-            filter = DeckFormat.TinyLeaders.hasLegalCardsPredicate();
+            filter = DeckFormat.TinyLeaders.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY));
         } else {
-            filter = Predicates.and(DeckFormat.TinyLeaders.hasLegalCardsPredicate(), filter);
+            filter = Predicates.and(DeckFormat.TinyLeaders.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)), filter);
         }
         addDecksRecursivelly("Tiny Leaders", GameType.TinyLeaders, result, "", FModel.getDecks().getTinyLeaders(), filter);
         return result;
@@ -487,9 +487,9 @@ public class DeckProxy implements InventoryItem {
     public static Iterable<DeckProxy> getAllBrawlDecks(Predicate<Deck> filter) {
         final List<DeckProxy> result = new ArrayList<>();
         if (filter == null) {
-            filter = DeckFormat.Brawl.hasLegalCardsPredicate();
+            filter = DeckFormat.Brawl.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY));
         } else {
-            filter = Predicates.and(DeckFormat.Brawl.hasLegalCardsPredicate(), filter);
+            filter = Predicates.and(DeckFormat.Brawl.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)), filter);
         }
         addDecksRecursivelly("Brawl", GameType.Brawl, result, "", FModel.getDecks().getBrawl(), filter);
         return result;
