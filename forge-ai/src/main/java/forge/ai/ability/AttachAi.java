@@ -1260,7 +1260,14 @@ public class AttachAi extends SpellAbilityAi {
         // Equipping in Main 1 on creatures that actually attack is probably fine though
         // TODO Somehow test for definitive advantage (e.g. opponent low on health, AI is attacking)
         // to be able to deal the final blow with an enchanted vehicle like that
-        if (attachSource.isAura() || attachSource.isEquipment()) {
+        boolean canOnlyTargetCreatures = true;
+        for (String valid : sa.getTargetRestrictions().getValidTgts()) {
+            if (!valid.startsWith("Creature")) {
+                canOnlyTargetCreatures = false;
+                break;
+            }
+        }
+        if (canOnlyTargetCreatures && (attachSource.isAura() || attachSource.isEquipment())) {
             prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
