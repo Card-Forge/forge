@@ -699,11 +699,6 @@ public class GameAction {
                 copied.getDamageHistory().setNotBlockedSinceLastUpkeepOf(p);
                 copied.getDamageHistory().setNotBeenBlockedSinceLastUpkeepOf(p);
             }
-            if (zoneFrom.is(ZoneType.Graveyard)) {
-                // fizzle all "damage done" triggers for cards returning to battlefield from graveyard
-                game.getStack().fizzleTriggersOnStackTargeting(copied, TriggerType.DamageDone);
-                game.getStack().fizzleTriggersOnStackTargeting(copied, TriggerType.DamageDoneOnce);
-            }
         } else if (zoneTo.is(ZoneType.Graveyard)
                 || zoneTo.is(ZoneType.Hand)
                 || zoneTo.is(ZoneType.Library)
