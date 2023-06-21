@@ -4803,6 +4803,58 @@
 		"BiomeBlue"
 	]
 },
+	{
+		"name": "Criosphinx",
+		"sprite": "sprites/enemy/monstrosity/criosphinx.atlas",
+		"deck": [
+			"decks/standard/sphinx amonkhet.dck"
+		],
+		"ai": "",
+		"spawnRate": 1,
+		"difficulty": 0.1,
+		"speed": 15,
+		"life": 19,
+		"flying": "true",
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 4
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 10,
+				"addMaxCount": 90
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 3,
+				"colors": [
+					"White","Blue"
+				],
+				"rarity": [
+					"Mythic Rare"
+				]
+			}
+		],
+		"colors": "WU",
+		"questTags": [
+			"Sphinx",
+			"Dissenter",
+			"Mythical",
+			"Oracle",
+			"Giant",
+			"Monster",
+			"Flying",
+			"IdentityWhite",
+			"IdentityBlue",
+			"IdentityAzorius",
+			"BiomeWhite"
+		]
+	},
 {
 	"name": "Curselord",
 	"sprite": "sprites/enemy/humanoid/human/wizard/black_wiz2.atlas",
@@ -18786,6 +18838,58 @@
 		"IdentitySimic"
 	]
 },
+	{
+		"name": "Sphinx",
+		"sprite": "sprites/enemy/monstrosity/androsphinx.atlas",
+		"deck": [
+			"decks/standard/sphinx amonkhet.dck"
+		],
+		"ai": "",
+		"spawnRate": 1,
+		"difficulty": 0.1,
+		"speed": 15,
+		"life": 19,
+		"flying": "true",
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 4
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 10,
+				"addMaxCount": 90
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 3,
+				"colors": [
+					"White","Blue"
+				],
+				"rarity": [
+					"Mythic Rare"
+				]
+			}
+		],
+		"colors": "WU",
+		"questTags": [
+			"Sphinx",
+			"Dissenter",
+			"Mythical",
+			"Oracle",
+			"Giant",
+			"Monster",
+			"Flying",
+			"IdentityWhite",
+			"IdentityBlue",
+			"IdentityAzorius",
+			"BiomeWhite"
+		]
+	},
 {
 	"name": "Spider",
 	"sprite": "sprites/enemy/beast/spider_black.atlas",
