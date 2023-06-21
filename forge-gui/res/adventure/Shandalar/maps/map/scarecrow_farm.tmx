@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="33" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="121">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="33" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="125">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -189,5 +189,9 @@
 </property>
    </properties>
   </object>
+  <object id="121" template="../obj/collision.tx" x="-16" y="-16" width="16" height="416"/>
+  <object id="122" template="../obj/collision.tx" x="528" y="-16" width="16" height="416"/>
+  <object id="123" template="../obj/collision.tx" x="0" y="-16" width="528" height="16"/>
+  <object id="124" template="../obj/collision.tx" x="0" y="384" width="528" height="16"/>
  </objectgroup>
 </map>

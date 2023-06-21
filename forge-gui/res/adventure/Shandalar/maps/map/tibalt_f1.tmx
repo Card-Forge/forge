@@ -35,7 +35,7 @@
   </data>
  </layer>
  <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="2.65789" offsety="6.89474">
-  <object id="114" template="../obj/entry_up.tx" x="254.465" y="426.886">
+  <object id="114" template="../obj/entry_up.tx" x="237.342" y="448.886" width="48" height="16">
    <properties>
     <property name="direction" value="down"/>
     <property name="teleport" value="maps/map/tibalt.tmx"/>
