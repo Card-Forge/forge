@@ -1,0 +1,8 @@
+Name:Prince Imrahil the Fair
+ManaCost:W U
+Types:Legendary Creature Human Noble
+PT:2/2
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you draw your second card each turn, create a 1/1 white Human Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Whenever you draw your second card each turn, create a 1/1 white Human Soldier creature token.
