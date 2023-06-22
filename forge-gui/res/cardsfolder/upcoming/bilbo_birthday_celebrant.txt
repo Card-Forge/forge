@@ -5,7 +5,6 @@ PT:2/3
 R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GainLife | AiLogic$ DoubleLife | Description$ If you would gain life, you gain that much life plus 1 instead.
 SVar:GainLife:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X
 SVar:X:ReplaceCount$LifeGained/Plus.1
-SVar:PlayMain1:True
 DeckHints:Ability$LifeGain
 A:AB$ ChangeZone | Cost$ 2 W B G T | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ Y | Shuffle$ True | CheckSVar$ Z | SVarCompare$ GE111 | Description$ Search your library for any number of creature cards, put them onto the battlefield, then shuffle. Activate only if you have 111 or more life.
 SVar:Y:Count$InYourLibrary.Creature
