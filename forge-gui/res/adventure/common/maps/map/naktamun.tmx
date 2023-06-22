@@ -518,7 +518,7 @@
   </tile>
  </tileset>
  <tileset firstgid="10581" source="../tileset/buildings.tsx"/>
- <tileset firstgid="12373" source="../../../Shandalar/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="12373" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Ground" width="64" height="64" locked="1">
   <data encoding="csv">
 74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,4657,32,4184,4184,4184,4184,4184,4184,4184,32,4657,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,

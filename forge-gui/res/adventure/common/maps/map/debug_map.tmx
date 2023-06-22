@@ -14,8 +14,8 @@
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../tileset/buildings-nocollide.tsx"/>
- <tileset firstgid="13697" source="../../../../../../../../Program Files/Forge/res/adventure/Shandalar/maps/tileset/buildings.tsx"/>
- <tileset firstgid="15489" source="../../../../../../../../Program Files/Forge/res/adventure/Amonkhet/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="13697" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="15489" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJxjYGBgkBCiL4aBUXtH7R21d3ja+0AUFdPC3mmcEDwS7IXZaciFaTe5WAMN47MXm5+Hq71TBtC/Axm/IH4aJwIjm6UggImR5cs4ERjEn8CO3150TE17QRhXPqKVvdgwOeUzIXuJwaP2kmY/OfpG7R21dzjaCwBbaKfR
