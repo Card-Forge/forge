@@ -17338,16 +17338,17 @@
 	]
 },
 {
-	"name": "Sandwurm",
+	"name": "Hellion",
 	"sprite": "sprites/enemy/monstrosity/sandwurm.atlas",
 	"deck": [
-		"decks/standard/sandwurm.dck"
+		"decks/standard/hellion.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 13,
 	"life": 12,
+	"scale": 2,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -17366,19 +17367,22 @@
 			"probability": 0.5,
 			"count": 3,
 			"colors": [
-				"White"
+				"Red"
 			],
 			"rarity": [
 				"Rare"
 			]
 		}
 	],
-	"colors": "G",
+	"colors": "R",
 	"questTags": [
-		"Wurm",
+		"Hellion",
+		"Monster",
 		"Nature",
 		"Subterranean",
-		"IdentityGreen"
+		"IdentityRed",
+		"BiomeRed",
+		"BiomeWhite"
 	]
 },
 {

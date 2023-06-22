@@ -24,60 +24,60 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="50" template="../obj/enemy.tx" x="468.333" y="324.667">
+  <object id="50" template="../obj/enemy.tx" name="Sand Golem" x="468.333" y="324.667">
    <properties>
     <property name="enemy" value="Sand Golem"/>
    </properties>
   </object>
   <object id="51" template="../obj/treasure.tx" x="459" y="479"/>
-  <object id="53" template="../obj/enemy.tx" x="310.583" y="440.917">
+  <object id="53" template="../obj/enemy.tx" name="Griffin" x="310.583" y="440.917">
    <properties>
     <property name="enemy" value="Griffin"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value="110,82,75,71"/>
    </properties>
   </object>
-  <object id="54" template="../obj/enemy.tx" x="407.751" y="441.583">
+  <object id="54" template="../obj/enemy.tx" name="Griffin" x="407.751" y="441.583">
    <properties>
     <property name="enemy" value="Griffin"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="56" template="../obj/entry_down.tx" x="352" y="18.6342" width="80" height="16"/>
-  <object id="58" template="../obj/enemy.tx" x="322" y="306.917">
+  <object id="58" template="../obj/enemy.tx" name="Griffin" x="322" y="306.917">
    <properties>
     <property name="enemy" value="Griffin"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="59" template="../obj/enemy.tx" x="145.802" y="183.221">
+  <object id="59" template="../obj/enemy.tx" name="Hellion" x="145.802" y="183.221">
    <properties>
-    <property name="enemy" value="Sandwurm"/>
+    <property name="enemy" value="Hellion"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value="112,108,109,110,111"/>
    </properties>
   </object>
-  <object id="60" template="../obj/enemy.tx" x="561.495" y="298.815">
+  <object id="60" template="../obj/enemy.tx" name="Scorpion" x="561.495" y="298.815">
    <properties>
     <property name="enemy" value="Scorpion"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value="69,66,68"/>
    </properties>
   </object>
-  <object id="61" template="../obj/enemy.tx" x="639.495" y="255.815">
+  <object id="61" template="../obj/enemy.tx" name="Vulture" x="639.495" y="255.815">
    <properties>
     <property name="enemy" value="Vulture"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="62" template="../obj/enemy.tx" x="54.8411" y="429.189">
+  <object id="62" template="../obj/enemy.tx" name="Scorpion" x="54.8411" y="429.189">
    <properties>
     <property name="enemy" value="Scorpion"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value="80,81,82,83,84"/>
    </properties>
   </object>
-  <object id="64" template="../obj/enemy.tx" x="689" y="560.5">
+  <object id="64" template="../obj/enemy.tx" name="Vulture" x="689" y="560.5">
    <properties>
     <property name="enemy" value="Vulture"/>
     <property name="threatRange" type="int" value="60"/>
@@ -90,7 +90,7 @@
   <object id="71" template="../obj/waypoint.tx" x="712.5" y="174"/>
   <object id="72" template="../obj/waypoint.tx" x="647.5" y="161"/>
   <object id="73" template="../obj/waypoint.tx" x="605.5" y="231.5"/>
-  <object id="74" template="../obj/enemy.tx" x="677" y="502">
+  <object id="74" template="../obj/enemy.tx" name="Scorpion" x="677" y="502">
    <properties>
     <property name="enemy" value="Scorpion"/>
     <property name="threatRange" type="int" value="20"/>
@@ -101,9 +101,9 @@
   <object id="76" template="../obj/waypoint.tx" x="752.5" y="579"/>
   <object id="77" template="../obj/waypoint.tx" x="597" y="563"/>
   <object id="78" template="../obj/waypoint.tx" x="599.5" y="504.5"/>
-  <object id="79" template="../obj/enemy.tx" x="371.5" y="630">
+  <object id="79" template="../obj/enemy.tx" name="Hellion" x="371.5" y="630">
    <properties>
-    <property name="enemy" value="Sandwurm"/>
+    <property name="enemy" value="Hellion"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="79,75,76,77"/>
    </properties>
@@ -113,22 +113,22 @@
   <object id="82" template="../obj/waypoint.tx" x="160" y="614"/>
   <object id="83" template="../obj/waypoint.tx" x="1.5" y="602"/>
   <object id="84" template="../obj/waypoint.tx" x="24" y="505"/>
-  <object id="85" template="../obj/enemy.tx" x="79" y="544">
+  <object id="85" template="../obj/enemy.tx" name="Griffin" x="79" y="544">
    <properties>
     <property name="enemy" value="Griffin"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="86" template="../obj/enemy.tx" x="118" y="751.5">
+  <object id="86" template="../obj/enemy.tx" name="Hellion" x="118" y="751.5">
    <properties>
-    <property name="enemy" value="Sandwurm"/>
+    <property name="enemy" value="Hellion"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="79,75,76,77"/>
    </properties>
   </object>
-  <object id="87" template="../obj/enemy.tx" x="579.5" y="699.5">
+  <object id="87" template="../obj/enemy.tx" name="Hellion" x="579.5" y="699.5">
    <properties>
-    <property name="enemy" value="Sandwurm"/>
+    <property name="enemy" value="Hellion"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="79,75,76,77"/>
    </properties>
@@ -222,7 +222,7 @@
 </property>
    </properties>
   </object>
-  <object id="106" template="../obj/enemy.tx" x="378.5" y="377">
+  <object id="106" template="../obj/enemy.tx" name="Sand Golem" x="378.5" y="377">
    <properties>
     <property name="enemy" value="Sand Golem"/>
    </properties>
@@ -232,9 +232,9 @@
   <object id="110" template="../obj/waypoint.tx" x="123.5" y="105.5"/>
   <object id="111" template="../obj/waypoint.tx" x="211.5" y="106.5"/>
   <object id="112" template="../obj/waypoint.tx" x="200.5" y="232"/>
-  <object id="113" template="../obj/enemy.tx" x="571" y="127">
+  <object id="113" template="../obj/enemy.tx" name="Hellion" x="571" y="127">
    <properties>
-    <property name="enemy" value="Sandwurm"/>
+    <property name="enemy" value="Hellion"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value="118,115,72,71,67"/>
    </properties>
@@ -244,19 +244,17 @@
   <object id="116" template="../obj/waypoint.tx" x="345" y="237"/>
   <object id="117" template="../obj/waypoint.tx" x="352.5" y="84"/>
   <object id="118" template="../obj/waypoint.tx" x="472" y="85.5"/>
-  <object id="119" template="../obj/enemy.tx" x="190" y="675">
+  <object id="119" template="../obj/enemy.tx" name="Greater Sandwurm" x="190" y="675">
    <properties>
-    <property name="enemy" value="Sandwurm"/>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="enemy" value="Greater Sandwurm"/>
    </properties>
   </object>
-  <object id="120" template="../obj/enemy.tx" x="443" y="732">
+  <object id="120" template="../obj/enemy.tx" name="Greater Sandwurm" x="443" y="732">
    <properties>
-    <property name="enemy" value="Sandwurm"/>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="enemy" value="Greater Sandwurm"/>
    </properties>
   </object>
-  <object id="121" template="../obj/enemy.tx" x="561" y="427">
+  <object id="121" template="../obj/enemy.tx" name="Griffin" x="561" y="427">
    <properties>
     <property name="enemy" value="Griffin"/>
     <property name="threatRange" type="int" value="40"/>
