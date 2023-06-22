@@ -20593,7 +20593,7 @@
 		"nameOverride": "",
 		"sprite": "sprites/enemy/humanoid/human/warrior/warrior.atlas",
 		"deck": [
-			"decks/standard/gladiator.dck"
+			"decks/standard/human_warrior_amonkhet.dck"
 		],
 		"ai": "",
 		"spawnRate": 1,
@@ -20629,7 +20629,7 @@
 				"colorType": "MultiColor"
 			}
 		],
-		"colors": "R",
+		"colors": "RGW",
 		"questTags": [
 			"Humanoid",
 			"Initiate",
@@ -20639,7 +20639,11 @@
 			"Warrior",
 			"IdentityRed",
 			"IdentityBoros",
+			"IdentityGruul",
+			"IdentitySelesnya",
 			"IdentityWhite",
+			"IdentityGreen",
+			"IdentityNaya",
 			"BiomeWhite"
 		]
 	},
