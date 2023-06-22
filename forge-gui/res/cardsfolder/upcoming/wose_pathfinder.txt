@@ -1,0 +1,7 @@
+Name:Wose Pathfinder
+ManaCost:1 G
+Types:Creature Human Shaman
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Pump | Cost$ 6 G T | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | NumAtt$ 3 | NumDef$ 3 | KW$ Trample | SpellDescription$ Another target creature gets +3/+3 and gains trample until end of turn.
+Oracle:{T}: Add one mana of any color.\n{6}{G}, {T}: Another target creature gets +3/+3 and gains trample until end of turn.

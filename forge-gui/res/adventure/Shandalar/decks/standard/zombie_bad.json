@@ -1,0 +1,11 @@
+{                                    
+"name":"Zombie bad",
+  "template":
+  {
+   "count":80,
+   "colors":["Black"],
+   "tribe":"Zombie",    
+   "tribeCards":1.0,
+   "rares":0.1
+  }
+}

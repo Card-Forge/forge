@@ -1,0 +1,12 @@
+{                                    
+"name":"Sliver",
+  "template":
+  {
+   "count":60,
+   "colors":["White","Red","Green"],
+   "tribe":"Sliver",        
+   "tribeCards":1.0,
+   "tribeSynergyCards":0.2,
+   "rares":0.4
+  }
+}

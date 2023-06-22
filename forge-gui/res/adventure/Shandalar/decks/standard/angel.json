@@ -1,0 +1,10 @@
+{                                    
+"name":"Angel",
+  "template":
+  {
+   "count":60,
+   "colors":["White"],
+   "tribe":"Angel",
+   "rares":0.5
+  }
+}
