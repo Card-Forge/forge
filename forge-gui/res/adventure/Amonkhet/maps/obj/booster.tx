@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../tileset/buildings.tsx"/>
+ <object name="Booster Pack" type="reward" gid="909" width="16" height="16">
+  <properties>
+   <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;M22&quot;, &quot;M21&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M22&quot;, &quot;M21&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M22&quot;, &quot;M21&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   <property name="spawn.Easy" type="bool" value="true"/>
+   <property name="spawn.Hard" type="bool" value="true"/>
+   <property name="spawn.Normal" type="bool" value="true"/>
+   <property name="sprite" value="sprites/booster.atlas"/>
+  </properties>
+ </object>
+</template>

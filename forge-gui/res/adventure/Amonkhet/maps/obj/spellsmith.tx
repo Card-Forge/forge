@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../tileset/buildings.tsx"/>
+ <object name="Spellsmith" class="spellsmith" gid="1391" width="16" height="16">
+  <properties>
+   <property name="hasSign" type="bool" value="true"/>
+   <property name="signXOffset" type="float" value="16"/>
+   <property name="signYOffset" type="float" value="-16"/>
+   <property name="type" value="spellsmith"/>
+  </properties>
+ </object>
+</template>

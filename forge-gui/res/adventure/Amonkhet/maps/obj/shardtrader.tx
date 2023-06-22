@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../tileset/buildings.tsx"/>
+ <object name="Shardtrader" class="shardtrader" gid="1446" width="16" height="16">
+  <properties>
+   <property name="hasSign" type="bool" value="true"/>
+   <property name="signXOffset" type="float" value="16"/>
+   <property name="signYOffset" type="float" value="-16"/>
+   <property name="type" value="shardtrader"/>
+  </properties>
+ </object>
+</template>

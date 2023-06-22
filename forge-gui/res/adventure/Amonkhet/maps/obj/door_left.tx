@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../tileset/buildings.tsx"/>
+ <object name="DoorLeft" type="entry" gid="1232" width="16" height="16">
+  <properties>
+   <property name="direction" value="right"/>
+   <property name="teleportObjectId" value=""/>
+   <property name="teleport" value=""/>
+  </properties>
+ </object>
+</template>

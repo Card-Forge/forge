@@ -1,0 +1,11 @@
+Name:Slimefoot's Boss Effect
+ManaCost:no cost
+Colors:black,green
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Forest,Saproling | SetPower$ 1 | SetToughness$ 1 | EffectZone$ Command | AddType$ Land & Creature & Forest & Saproling | SetColor$ Green | Description$ All Forests and all Saprolings are 1/1 green Saproling creatures and Forest lands in addition to their other types. (They're affected by summoning sickness.)
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever a creature dies, that creature's controller creates a 1/1 green Saproling creature token.
+SVar:TrigToken:DB$ Token | TokenOwner$ TriggeredCardController | TokenAmount$ 1 | TokenScript$ g_1_1_saproling
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Saproling | TriggerZones$ Command | Execute$ TrigDealDamage | TriggerDescription$ Whenever a Saproling dies, Slimefoot deals 1 damage to each opponent and you gain 1 life.
+SVar:TrigDealDamage:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:Whenever a Saproling dies, Slimefoot deals 1 damage to each opponent and gains 1 life.\nAll Forests and all Saprolings are 1/1 green Saproling creatures and Forest lands in addition to their other types. (They’re affected by summoning sickness.)\nWhenever a creature dies, that creature's controller creates a 1/1 green Saproling creature token.\n
