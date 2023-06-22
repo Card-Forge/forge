@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="31" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="90">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="31" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="90">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -38,7 +38,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../obj/entry_left.tx" x="0.706867" y="162.682"/>
+  <object id="38" template="../obj/entry_left.tx" x="0.706867" y="192" width="16" height="80"/>
   <object id="48" template="../obj/treasure.tx" x="432.239" y="155.641"/>
   <object id="50" template="../obj/enemy.tx" x="96.485" y="173.992">
    <properties>

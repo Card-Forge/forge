@@ -3,6 +3,7 @@ package forge.adventure.data;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;
 import forge.adventure.util.AdventureQuestController;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 import java.io.Serializable;
@@ -87,17 +88,21 @@ public class BiomeData implements Serializable {
     }
 
     public EnemyData getEnemy(float difficultyFactor) {
+        //todo: implement difficultyFactor
         Map<String, Float> boostedSpawns = AdventureQuestController.instance().getBoostedSpawns(enemyList);
-        EnemyData bestData = null;
-        float biggestNumber = 0.0f;
+        float totalDistribution = 0.0f;
         for (EnemyData data : enemyList) {
-            float boost = boostedSpawns.getOrDefault(data.getName(), 0.0f); //Each active quest stage will divide 1.0f across any valid enemies to defeat
-            float newNumber = (1.0f + ((data.spawnRate + boost) * rand.nextFloat())) * difficultyFactor;
-            if (newNumber > biggestNumber) {
-                biggestNumber = newNumber;
-                bestData = data;
+            float boost = boostedSpawns.getOrDefault(data.getName(), 0.0f); //Each active quest stage will divide 2.0f across any valid enemies to defeat
+            totalDistribution += data.spawnRate + boost;
+        }
+        int i = 0;
+        for (float f = totalDistribution * rand.nextFloat(); i < enemyList.size(); i++)
+        {
+            f -= ( enemyList.get(i).spawnRate + boostedSpawns.getOrDefault(enemyList.get(i).getName(), 0.0f));
+            if (f <= 0.0f){
+                return enemyList.get(i);
             }
         }
-        return bestData;
+        return Aggregates.random(enemyList); //fallback, shouldn't reach this point but guarantee that we return something
     }
 }

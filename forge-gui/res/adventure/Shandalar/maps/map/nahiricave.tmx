@@ -10,7 +10,7 @@
    eJztlEsOgCAMRFm48WIc3zMZFybEFJzpB4gySXelvNIOeU8pr1jx46hpNJeWe+YeUB1bXwZr/sV7R6uedP6NoyWPHktuKU+qUauNCuFGZllyazgYoXul2cMoboZD4x0Ls+XtWL9K/vTkZtlZPT2KMLH3ezMjYt/Sk1vbI+Jj1DuR+Uy/Xn8Ec7fXfLWBKKL2rMxeM7Tu8azckfyetXtyR85vNM+XuU+hLQG1
   </data>
  </layer>
- <layer id="9" name="Tilelaag 4" width="46" height="25" visible="0">
+ <layer id="9" name="Tilelaag 4" width="46" height="25">
   <data encoding="base64" compression="zlib">
    eJzt0sENABAMQFEHB4YwlCltYwvmEBGJq6Stg/8ubu1Pwzk7ORkuA4AHqn9dcKfH9c5u7fYSZHfM9t2t1a41+7y7JO17tCg/0+LvAQAA/GwApHYRJw==
   </data>
@@ -68,12 +68,7 @@
   <object id="64" template="../obj/gold.tx" x="681" y="244"/>
   <object id="65" template="../obj/gold.tx" x="498" y="322"/>
   <object id="66" template="../obj/gold.tx" x="147" y="312"/>
-  <object id="71" template="../obj/door_up.tx" x="716" y="133">
-   <properties>
-    <property name="teleport" value="maps/map/nahiri.tmx"/>
-    <property name="teleportObjectId" value="79"/>
-   </properties>
-  </object>
+  <object id="71" template="../obj/door_left.tx" gid="2147494992" x="720" y="144" width="16" height="48" rotation="0"/>
   <object id="74" template="../obj/manashards.tx" x="520" y="263"/>
   <object id="75" template="../obj/manashards.tx" x="484" y="321"/>
   <object id="76" template="../obj/manashards.tx" x="152" y="298"/>
