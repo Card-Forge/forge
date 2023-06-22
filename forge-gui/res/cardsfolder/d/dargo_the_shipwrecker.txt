@@ -7,7 +7,7 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Y | EffectZone
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Z | EffectZone$ All | Secondary$ True | Description$ This spell costs {2} less to cast for each permanent sacrificed this way and {2} less to cast for each other artifact or creature you've sacrificed this turn.
 SVar:X:Count$xPaid
 SVar:Y:SVar$X/Times.2
-SVar:Z:Count$SacrificedThisTurn Artifact,Creature/Times.2
+SVar:Z:PlayerCountPropertyYou$SacrificedThisTurn Artifact,Creature/Times.2
 SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE2
 DeckHas:Ability$Sacrifice
 DeckHints:Type$Artifact
