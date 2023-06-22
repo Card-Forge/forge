@@ -1,0 +1,11 @@
+Name:Press the Enemy
+ManaCost:2 U U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand+OppCtrl,Card.inZoneStack+OppCtrl | TgtZone$ Stack,Battlefield | Origin$ Battlefield,Stack | Fizzle$ True | Destination$ Hand | SubAbility$ DBMayPlay | SpellDescription$ Return target spell or nonland permanent an opponent controls to its owner's hand.
+SVar:DBMayPlay:DB$ Play | Valid$ Card.YouOwn | ValidZone$ Hand| ValidSA$ Instant.cmcLEZ,Sorcery.cmcLEZ | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup | SpellDescription$ You may cast an instant or sorcery spell with equal or lesser mana value from your hand without paying its mana cost.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Sorcery|Instant
+SVar:X:SpellTargeted$CardManaCostLKI
+SVar:Y:Targeted$CardManaCostLKI
+SVar:Z:SVar$X/Plus.Y
+Oracle:Return target spell or nonland permanent an opponent controls to its owner's hand. You may cast an instant or sorcery spell with equal or lesser mana value from your hand without paying its mana cost.
