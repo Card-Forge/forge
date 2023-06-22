@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<template>
- <tileset firstgid="1" source="../tileset/buildings.tsx"/>
- <object name="Treasure" type="enemy" gid="504" width="16" height="16">
-  <properties>
-   <property name="enemy" value="Treasure"/>
-  </properties>
- </object>
-</template>
