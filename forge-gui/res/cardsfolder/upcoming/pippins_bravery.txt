@@ -1,0 +1,11 @@
+Name:Pippin's Bravery
+ManaCost:G
+Types:Instant
+A:SP$ Sacrifice | SacValid$ Food | Optional$ True | RememberSacrificed$ True | SubAbility$ DBPump | SpellDescription$ You may sacrifice a Food. If you do, target creature gets +4/+4 until end of turn. Otherwise, that creature gets +2/+2 until end of turn.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target Creature | NumAtt$ +X | NumDef$ +X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Compare Y GE1.4.2
+SVar:Y:Remembered$Amount
+DeckHints:Type$Food
+DeckHas:Ability$Sacrifice
+Oracle:You may sacrifice a Food. If you do, target creature gets +4/+4 until end of turn. Otherwise, that creature gets +2/+2 until end of turn.
