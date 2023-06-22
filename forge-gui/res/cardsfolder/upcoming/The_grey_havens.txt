@@ -1,0 +1,8 @@
+Name:The Grey Havens
+ManaCost:no cost
+Types:Legendary Land
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 1.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
+A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Defined.ValidGraveyard Card.Legendary+YouOwn | ReflectProperty$ Is | SpellDescription$ Add one mana of any color among legendary creature cards in your graveyard.
+DeckHints:Type$Legendary
+Oracle:When The Grey Havens enters the battlefield, scry 1.{T}: Add {C}.\n{T}: Add one mana of any color among legendary creature cards in your graveyard.
