@@ -72,6 +72,6 @@
     <property name="enemy" value="Ashmouth Devil"/>
    </properties>
   </object>
-  <object id="61" template="../obj/door_right.tx" x="0.333333" y="336.333"/>
+  <object id="61" template="../obj/door_right.tx" x="0.333333" y="352" width="16" height="48"/>
  </objectgroup>
 </map>

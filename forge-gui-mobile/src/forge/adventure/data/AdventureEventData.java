@@ -187,7 +187,7 @@ public class AdventureEventData implements Serializable {
 
         List<CardBlock> legalBlocks = new ArrayList<>();
         for (CardBlock b : src) { // for each block
-            boolean isOkay = !b.getSets().isEmpty();
+            boolean isOkay = !(b.getSets().isEmpty() && b.getCntBoostersDraft() > 0);
             for (CardEdition c : b.getSets()) {
                 if (!allEditions.contains(c)) {
                     isOkay = false;

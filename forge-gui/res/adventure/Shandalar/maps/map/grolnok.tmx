@@ -39,7 +39,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../obj/entry_up.tx" x="546.121" y="949.445">
+  <object id="38" template="../obj/entry_up.tx" x="528" y="960" width="48" height="26.555">
    <properties>
     <property name="teleport" value=""/>
    </properties>

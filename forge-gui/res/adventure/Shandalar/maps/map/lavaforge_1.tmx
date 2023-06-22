@@ -15,7 +15,7 @@
    eJxjYMAOVnNg4uEOVgH9uIuHgWENHfwKswuEd/NAxHby0NZ+kJ0wu7CBnTSyWxaPnch2U8PvHpwINj6/YrOfHvGODUiT4E58gJhwRgY7B8heYsFyYHw8B8bnShzx8gwoV89NvHnUCmdS7SYmbblxQjCMTcjuFRyoGFsY1QLd94KAWZQCkFueI9kBYtPazuEOnnPixiug8byCA7caYgAA2K8zEQ==
   </data>
  </layer>
- <layer id="1" name="Background" width="30" height="17">
+ <layer id="1" name="Background" width="30" height="17" visible="0">
   <data encoding="base64" compression="zlib">
    eJy1lLkRwyAQRQmUQD/W4a6sq1Fh2T24CS3DbKIRy18LgpcxPB6Xt8b4Ez0xOWN+jcyLxozE82IOLagz8LGR7YZrsHHt7AzzIW7u1jaf+7iBQd3aZsmZ8l6N0zZLc2nRuHMdWtD9Lu3ltxXuqdRe2ovuO3JnarjR+1r6zJH/qIZ3oX3oKnd/E2e8Z7rvriH1tmYnd9fyIv5/fA+iJVaH/SXvQl6p8wBa/68t
   </data>
@@ -39,7 +39,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../obj/entry_up.tx" x="208" y="272"/>
+  <object id="38" template="../obj/entry_up.tx" x="176" y="272" width="80" height="16"/>
   <object id="50" template="../obj/treasure.tx" x="378.5" y="93">
    <properties>
     <property name="reward">[{
