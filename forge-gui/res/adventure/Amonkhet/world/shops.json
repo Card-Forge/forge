@@ -1,0 +1,2753 @@
+[
+{                                      
+"name":"Black1",                  
+"description":"Certain Death",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Black",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "(destroy|exile) target|sacrifice",
+	  "colors": ["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "(destroy|exile) target|sacrifice",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                      
+"name":"Black2",                  
+"description":"March of the Returned",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Black",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "destroyed|dies|return.*(hand|battlefield|library|to play)|put.*battlefield from",
+	  "colors": ["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "destroyed|dies|return.*(hand|battlefield|library|to play)|put.*battlefield from",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                      
+"name":"Black3",                  
+"description":"Essence Extraction",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Black",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "pay.*life.*:|(lose|gain).*life|deal.*damage",
+	  "colors": ["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "pay.*life.*:|(lose|gain).*life|deal.*damage",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                      
+"name":"Black4",                  
+"description":"Demonic Tutor",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Black",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "search|seek|reveal.*library|choose|choice|unless",
+	  "colors": ["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "search|seek|reveal.*library|choose|choice|unless",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                      
+"name":"Black5",                  
+"description":"Grotesque Mutations",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Black",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "deathtouch|fear|intimidate|menace|ninjutsu|regenerate\b",
+	  "colors": ["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "deathtouch|fear|intimidate|menace|ninjutsu|regenerate\b",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                      
+"name":"Black6",                  
+"description":"Phyrexian Boons",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Black",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "([+-])\\d?/([+-])\\d?",
+	  "colors": ["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "([+-])\\d?/([+-])\\d?",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                      
+"name":"Blue1",                  
+"description":"Control Magic",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Blue",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "return.*to.*(hand|top of.*library)|gain(s)? control of|mill|tap |untap|counter target",
+	  "colors": ["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "return.*to.*(hand|top of.*library)|gain(s)? control of|mill|tap |untap|counter target",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                      
+"name":"Blue3",                  
+"description":"Cloaks of Invisibility",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Blue",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "flying|prowess|unblockable|hexproof|shroud|morph|ninjutsu|phas(ing|(es (in|out)))",
+	  "colors": ["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "flying|prowess|unblockable|hexproof|shroud|morph|ninjutsu|phas(ing|(es (in|out)))",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+"name":"Blue4",                  
+"description":"Sleights of Mind",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Blue",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "(change|copy).*(that|target)|color(s|ed)?\\b|land type|mana|name|flashback|overload|splice|rebound|buyback|morph|madness|delve|instead",
+	  "colors": ["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "(change|copy).*(that|target)|color(s|ed)?\\b|land type|mana|name|flashback|overload|splice|rebound|buyback|morph|madness|delve|instead",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{     
+"name":"Blue5",                  
+"description":"Library of Lat-Nam",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Blue",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "draw(s)?|(exile|reveal|look|search).*library|scry|seek|conjure ",
+	  "colors": ["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "draw(s)?|(exile|reveal|look|search).*library|scry|seek|conjure ",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},
+{     
+"name":"Blue6",                  
+"description":"Rules & Regulations",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Blue",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "can't|must|whenever|unless|becomes|until|upkeep|(leave|enter)(s)|doesn't? .*(play|battlefield)|each",
+	  "colors": ["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "can't|must|whenever|unless|becomes|until|upkeep|(leave|enter)(s)|doesn't? .*(play|battlefield)|each",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{     
+"name":"Green1",                  
+"description":"Explosive Growth",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Green",
+  "rewards": [
+    {
+      "count":6,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "cardText": "counter.*on |counter.*distribute|distribute.*counter|proliferate|creature(s)? from",
+		  "colors": ["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "([+-])\\d?/([+-])\\d?",
+		  "colors": ["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+      
+    },
+	{
+      "count":2,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "cardText": "counter.*on |counter.*distribute|distribute.*counter|proliferate|creature(s)? from",
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "([+-])\\d?/([+-])\\d?",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+    }]
+},{                                      
+"name":"Green2",                  
+"description":"Jungle Expeditions",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Green",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "still a land|(exile|reveal|look|search).*library|scry|explores|additional land|land from.*(graveyard|hand)|put.*land(s)?from|landfall",
+	  "colors": ["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+
+    },
+	{
+      "count":2,
+	  "cardText": "still a land|(exile|reveal|look|search).*library|scry|explores|additional land|land from.*(graveyard|hand)|put.*land(s)?from|landfall",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                      
+"name":"Green4",                  
+"description":"Natural Selection",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Green",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "trample|reach|hexproof|regenerate|shroud|deathtouch",
+	  "colors": ["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+
+    },
+	{
+      "count":2,
+	  "cardText": "trample|reach|hexproof|regenerate|shroud|deathtouch",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                      
+"name":"Green5",                  
+"description":"Cycle of Life",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Green",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "gain.*life|token|draw|food",
+	  "colors": ["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "gain.*life|token|draw|food",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+"name":"Green6",                  
+"description":"Verdant Haven",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Green",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "tap.*mana|:.*add.*(\\{[gburw]\\}|to your mana)|untap",
+	  "colors": ["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "tap.*mana|:.*add.*(\\{[gburw]\\}|to your mana)|untap",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+"name":"Red1",                  
+"description":"Burn Baby Burn",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Red",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "deal.*damage|destroy",
+	  "colors": ["red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+
+    },
+	{
+      "count":2,
+	  "cardText": "deal.*damage|destroy",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},
+{                                      
+"name":"Red2",                  
+"description":"Weaponize the Monsters",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Red",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "haste|(first |double )strike | prowess|return .* to hand at end of turn|At the beginning of (your|the) end step, (sacrifice|return .* to (your|its owner).*hand)",
+	  "colors": ["red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+
+    },
+	{
+      "count":2,
+	  "cardText": "haste|(first |double )strike | prowess|return .* to hand at end of turn|At the beginning of (your|the) end step, (sacrifice|return .* to (your|its owner).*hand)",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                      
+"name":"Red3",                  
+"description":"Mana Cache",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Red",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "each creature|each player|any player may|unless|choose|choice",
+	  "colors": ["red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "each creature|each player|any player may|unless|choose|choice",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{	
+"name":"Red5",                  
+"description":"Destructive Urge",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Red",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "gain control of|when.*(cast|copy).*spell|if able",
+	  "colors": ["red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "gain control of|when.*(cast|copy).*spell|if able",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{	
+"name":"White1",                  
+"description":"Ounce of Prevention",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6White",
+    "rewards": [
+    {
+      "count":6,
+	  "cardText": "Prevent.*Damage",
+	  "colors": ["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "Prevent.*Damage",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+ 
+},{	
+"name":"White2",                  
+"description":"Pound of Cure",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6White",
+    "rewards": [
+    {
+      "count":6,
+	  "cardText": "gain.*life|life total",
+	  "colors": ["white"] ,
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "gain.*life|life total",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                      
+"name":"White4",                  
+"description":"Only mostly dead",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6White",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText": "Return.*to.*(your hand|battlefield|play)",
+	  "colors": ["white"] ,
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+	  "cardText": "Return.*to.*(your hand|battlefield|play)",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                      
+"name":"White5",                  
+"description":"Weights and Measures",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6White",
+  "rewards": [
+    {
+      "count":6,
+	  "cardText":"pays|more|less|tap target creature",
+	  "colors": ["white"] ,
+      "editions":["AKH","HOU","MP2","AKR"]
+
+    },
+	{
+      "count":2,
+	  "cardText": "pays|more|less|tap target creature",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                      
+"name":"White6",                  
+"description":"Strict dogma",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6White",
+  "rewards": [
+    {
+      "count":6,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "cardText": "(Vigilance|Lifelink|Protection|First Strike|Double Strike|Flying)",
+		  "colors": ["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "([+-])\\d?/([+-])\\d?",
+		  "colors": ["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+      
+    },
+	{
+      "count":2,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "cardText": "(Vigilance|Lifelink|Protection|First Strike|Double Strike|Flying)",
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "([+-])\\d?/([+-])\\d?",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+    }]
+},{                                      
+"name":"Graveyard",                  
+"description":"Better Call Sol",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"BlackShop",
+"overlaySprite":"Overlay8Red",
+  "rewards": [
+    {
+      "count":8,
+	  "deckNeeds": ["Ability$Graveyard"]
+    }]
+},{                                      
+"name":"WhiteEquipment",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"EquipmentShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Life Amulet"  },
+    { "type": "item","count":1, "itemName": "Gold Armor"  },
+    { "type": "item","count":1, "itemName": "Mirror Shield"  },
+    { "type": "item","count":1, "itemName": "Entrancing Lyre"  },
+    { "type": "item","count":1, "itemName": "Nine-Ringed Bo"  },
+    { "type": "item","count":1, "itemName": "Kite Shield"  }
+    
+    ]
+
+},{                                      
+"name":"WhiteItems",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"ItemShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "White rune"  },
+    { "type": "item","count":1, "itemName": "White Staff"  },
+	{ "type": "item","count":1, "itemName": "Cursed Treasure"  },
+	{ "type": "item","count":1, "itemName": "Farmer's Tools"  },
+	{ "type": "item","count":1, "itemName": "Piper's Charm"  },
+	{ "type": "item","count":1, "itemName": "Sleep Wand"  },
+	{ "type": "item","count":1, "itemName": "Hill Giant Club"  },
+    { "type": "life","count":1    }
+    
+    ]
+
+},{                                      
+"name":"RedEquipment",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"EquipmentShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Axt"  },
+    { "type": "item","count":1, "itemName": "Aladdin's Ring"  },
+    { "type": "item","count":1, "itemName": "Flame Sword"  },
+    { "type": "item","count":1, "itemName": "Heavy Arbalest"  },
+    { "type": "item","count":1, "itemName": "Jeweled Amulet"  },
+    { "type": "item","count":1, "itemName": "Ring of Immortals"  }
+    
+    ]
+
+},{                                      
+"name":"RedItems",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",    
+"sprite":"ItemShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Red rune"  },
+    { "type": "item","count":1, "itemName": "Red Staff"  },
+	{ "type": "item","count":1, "itemName": "Cursed Treasure"  },
+	{ "type": "item","count":1, "itemName": "Farmer's Tools"  },
+	{ "type": "item","count":1, "itemName": "Piper's Charm"  },
+	{ "type": "item","count":1, "itemName": "Sleep Wand"  },
+	{ "type": "item","count":1, "itemName": "Hill Giant Club"  },
+    { "type": "life","count":1    }
+    ]
+
+},{                                      
+"name":"BlueEquipment",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"EquipmentShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Traveler's Amulet"  },
+    { "type": "item","count":1, "itemName": "Magic Shard"  },
+    { "type": "item","count":1, "itemName": "Spell Book"  },
+    { "type": "item","count":1, "itemName": "Mithril Armor"  },
+    { "type": "item","count":1, "itemName": "Mithril Boots"  },
+    { "type": "item","count":1, "itemName": "Mithril Shield"  }
+    
+    ]
+
+},{                                      
+"name":"BlueItems",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",    
+"sprite":"ItemShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Blue rune"  },
+    { "type": "item","count":1, "itemName": "Blue Staff"  },
+	{ "type": "item","count":1, "itemName": "Cursed Treasure"  },
+	{ "type": "item","count":1, "itemName": "Farmer's Tools"  },
+	{ "type": "item","count":1, "itemName": "Piper's Charm"  },
+	{ "type": "item","count":1, "itemName": "Sleep Wand"  },
+	{ "type": "item","count":1, "itemName": "Hill Giant Club"  },
+    { "type": "life","count":1    }
+    
+    ]
+
+},
+{                                      
+"name":"BlackEquipment",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"EquipmentShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Death Ring"  },
+    { "type": "item","count":1, "itemName": "Dark Amulet"  },
+    { "type": "item","count":1, "itemName": "Mad Staff"  },
+    { "type": "item","count":1, "itemName": "Dark Armor"  },
+    { "type": "item","count":1, "itemName": "Dark Boots"  },
+    { "type": "item","count":1, "itemName": "Dark Shield"  }
+    
+    ]
+
+},{                                      
+"name":"BlackItems",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",    
+"sprite":"ItemShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Black rune"  },
+    { "type": "item","count":1, "itemName": "Black Staff"  },
+	{ "type": "item","count":1, "itemName": "Cursed Treasure"  },
+	{ "type": "item","count":1, "itemName": "Farmer's Tools"  },
+	{ "type": "item","count":1, "itemName": "Piper's Charm"  },
+	{ "type": "item","count":1, "itemName": "Sleep Wand"  },
+	{ "type": "item","count":1, "itemName": "Hill Giant Club"  },
+    { "type": "life","count":1    }
+    
+    ]
+
+},
+{                                      
+"name":"GreenEquipment",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"EquipmentShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Jungle Shield"  },
+    { "type": "item","count":1, "itemName": "Ring of Three Wishes"  },
+    { "type": "item","count":1, "itemName": "Heart-Piercer"  },
+    { "type": "item","count":1, "itemName": "Wood Bow"  },
+    { "type": "item","count":1, "itemName": "Steel Sword"  },
+    { "type": "item","count":1, "itemName": "Unerring Sling"  }
+    
+    ]
+
+},{                                      
+"name":"GreenItems",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",    
+"sprite":"ItemShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Green rune"  },
+    { "type": "item","count":1, "itemName": "Green Staff"  },
+	{ "type": "item","count":1, "itemName": "Cursed Treasure"  },
+	{ "type": "item","count":1, "itemName": "Farmer's Tools"  },
+	{ "type": "item","count":1, "itemName": "Piper's Charm"  },
+	{ "type": "item","count":1, "itemName": "Sleep Wand"  },
+	{ "type": "item","count":1, "itemName": "Hill Giant Club"  },
+    { "type": "life","count":1   }
+    
+    ]
+
+},{
+"name":"Equipment",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"EquipmentShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Steel Boots"  },
+    { "type": "item","count":1, "itemName": "Steel Shield"  },
+    { "type": "item","count":1, "itemName": "Steel Armor"  },
+    { "type": "item","count":1, "itemName": "Iron Boots"  },
+    { "type": "item","count":1, "itemName": "Iron Shield"  },
+    { "type": "item","count":1, "itemName": "Iron Armor"  }
+    
+    ]
+
+},
+{                                      
+"name":"Swamp",    
+"description":"The Cartographer's Guild",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"LandShop",      
+"unlimited":true,
+  "rewards": [
+    {
+      "count":1,
+      "superTypes": ["Basic"],
+      "cardTypes": ["Land"],
+      "subTypes": ["Swamp"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+
+},{                                      
+"name":"Forest",
+"description":"The Cartographer's Guild",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"LandShop",      
+"unlimited":true,
+  "rewards": [
+    {
+      "count":1,
+      "superTypes": ["Basic"],
+      "cardTypes": ["Land"],
+      "subTypes": ["Forest"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+
+},{                                      
+"name":"Mountain",   
+"description":"The Cartographer's Guild",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"LandShop",      
+"unlimited":true,
+  "rewards": [
+    {
+      "count":1,
+      "superTypes": ["Basic"],
+      "cardTypes": ["Land"],
+      "subTypes": ["Mountain"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+
+},{                                      
+"name":"Island",                  
+"description":"The Cartographer's Guild",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"LandShop",      
+"unlimited":true,
+  "rewards": [
+    {
+      "count":1,
+      "superTypes": ["Basic"],
+      "cardTypes": ["Land"],
+      "subTypes": ["Island"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+
+},{                                      
+"name":"Plains",                  
+"description":"The Cartographer's Guild",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"LandShop",      
+"unlimited":true,
+  "rewards": [
+    {
+      "count":1,
+      "superTypes": ["Basic"],
+      "cardTypes": ["Land"],
+      "subTypes": ["Plains"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+
+},{                                      
+"name":"Instant",                  
+"description":"Buy-it-now!!!",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"InstantShop",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Instant","Sorcery"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+
+},{                                      
+"name":"Instant4Black",                  
+"description":"Sudden Death",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"InstantShop",
+"overlaySprite":"Overlay4Black",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"],
+	  "colors": ["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+
+},{                                      
+"name":"Instant4Blue",                  
+"description":"Mind Games",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"InstantShop",
+"overlaySprite":"Overlay4Blue",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"],
+	  "colors": ["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+
+},{                                      
+"name":"Instant4Green",                  
+"description":"Primal Commands",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"InstantShop",
+"overlaySprite":"Overlay4Green",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"],
+	  "colors": ["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+
+},{                                      
+"name":"Instant4Red",                  
+"description":"Furnace of Rath",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"InstantShop",
+"overlaySprite":"Overlay4Red",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"],
+	  "colors": ["red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+
+},{                                      
+"name":"Instant4White",                  
+"description":"Gerrard's Wisdom",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"InstantShop",
+"overlaySprite":"Overlay4White",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"],
+	  "colors": ["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+
+},{                                      
+"name":"Instant8Black",                  
+"description":"Sudden Death",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"InstantShop",
+"overlaySprite":"Overlay8Black",
+  "rewards": [
+	{
+      "count":8,
+      "cardTypes": ["Instant","Sorcery"],
+	  "colors": ["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+
+},{                                      
+"name":"Instant8Blue",                  
+"description":"Mind Games",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"InstantShop",
+"overlaySprite":"Overlay8Blue",
+  "rewards": [
+	{
+      "count":8,
+      "cardTypes": ["Instant","Sorcery"],
+	  "colors": ["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+
+},{                                      
+"name":"Instant8Green",                  
+"description":"Primal Commands",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"InstantShop",
+"overlaySprite":"Overlay8Green",
+  "rewards": [
+	{
+      "count":8,
+      "cardTypes": ["Instant","Sorcery"],
+	  "colors": ["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+
+},{                                      
+"name":"Instant8Red",                  
+"description":"Furnace of Rath",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"InstantShop",
+"overlaySprite":"Overlay8Red",
+  "rewards": [
+	{
+      "count":8,
+      "cardTypes": ["Instant","Sorcery"],
+	  "colors": ["red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+
+},{                                      
+"name":"Instant8White",                  
+"description":"Gerrard's Wisdom",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"InstantShop",
+"overlaySprite":"Overlay8White",
+  "rewards": [
+	{
+      "count":8,
+      "cardTypes": ["Instant","Sorcery"],
+	  "colors": ["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+
+},{                                    
+"name":"Creature",                  
+"description":"The Menagerie",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Creature"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Creature2Colorless",                  
+"description":"Junk Market",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay2Colorless",
+  "rewards": [
+    {
+      "count":6,
+      "cardTypes": ["Creature"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+      "cardTypes": ["Creature"],
+	  "colorType": "Colorless",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Creature2Black",                  
+"description":"The Boneyard",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay2Black",
+  "rewards": [
+    {
+      "count":6,
+      "cardTypes": ["Creature"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+      "cardTypes": ["Creature"],
+	  "colors": ["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Creature6Black",                  
+"description":"Tomb Of Yawgmoth",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay6Black",
+  "rewards": [
+    {
+      "count":2,
+      "cardTypes": ["Creature"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":6,
+      "cardTypes": ["Creature"],
+	  "colors": ["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Creature8Black",                  
+"description":"Tomb Of Yawgmoth",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay8Black",
+  "rewards": [
+	{
+      "count":8,
+      "cardTypes": ["Creature"],
+	  "colors": ["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},
+{                                    
+"name":"Creature2Blue",                  
+"description":"Riverside Market",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay2Blue",
+  "rewards": [
+    {
+      "count":6,
+      "cardTypes": ["Creature"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+      "cardTypes": ["Creature"],
+	  "colors": ["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Creature6Blue",                  
+"description":"The Yawning Depths",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay6Blue",
+  "rewards": [
+    {
+      "count":2,
+      "cardTypes": ["Creature"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":6,
+      "cardTypes": ["Creature"],
+	  "colors": ["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Creature8Blue",                  
+"description":"The Yawning Depths",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay8Blue",
+  "rewards": [
+	{
+      "count":8,
+      "cardTypes": ["Creature"],
+	  "colors": ["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Creature2Green",                  
+"description":"Hunter's Glade",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay2Green",
+  "rewards": [
+    {
+      "count":6,
+      "cardTypes": ["Creature"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+      "cardTypes": ["Creature"],
+	  "colors": ["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Creature6Green",                  
+"description":"Natural Order",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay6Green",
+  "rewards": [
+    {
+      "count":2,
+      "cardTypes": ["Creature"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":6,
+      "cardTypes": ["Creature"],
+	  "colors": ["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Creature8Green",                  
+"description":"Natural Order",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay8Green",
+  "rewards": [
+	{
+      "count":8,
+      "cardTypes": ["Creature"],
+	  "colors": ["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Creature2Red",
+"description":"Hillside Traders",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay2Red",
+  "rewards": [
+    {
+      "count":6,
+      "cardTypes": ["Creature"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+      "cardTypes": ["Creature"],
+	  "colors": ["red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Creature6Red",                  
+"description":"Furious Assault",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay6Red",
+  "rewards": [
+    {
+      "count":2,
+      "cardTypes": ["Creature"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":6,
+      "cardTypes": ["Creature"],
+	  "colors": ["red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Creature8Red",                  
+"description":"Furious Assault",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay8Red",
+  "rewards": [
+    {
+      "count":2,
+      "cardTypes": ["Creature"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":8,
+      "cardTypes": ["Creature"],
+	  "colors": ["red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Creature2White",                  
+"description":"Countryside Farms",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay2White",
+  "rewards": [
+    {
+      "count":6,
+      "cardTypes": ["Creature"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+      "cardTypes": ["Creature"],
+	  "colors": ["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Creature6White",                  
+"description":"Heavenly Host",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay6White",
+  "rewards": [
+    {
+      "count":2,
+      "cardTypes": ["Creature"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":6,
+      "cardTypes": ["Creature"],
+	  "colors": ["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Creature8White",                  
+"description":"Heavenly Host",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay8White",
+  "rewards": [
+	{
+      "count":8,
+      "cardTypes": ["Creature"],
+	  "colors": ["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Land4Blue",
+  "description":"Oceanside Property",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "overlaySprite":"Overlay4Blue",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Land"],
+	  "cardText": "\\Q{\\EU\\Q}\\E",
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Land"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Land4Black",
+  "description":"Boggy Depths",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "overlaySprite":"Overlay4Black",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Land"],
+	  "cardText": "\\Q{\\EB\\Q}\\E",
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Land"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Land4Red",
+  "description":"Mon's Warrens",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "overlaySprite":"Overlay4Red",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Land"],
+	  "cardText": "\\Q{\\ER\\Q}\\E",
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Land"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Land4Green",
+  "description":"Green Acres",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "overlaySprite":"Overlay4Green",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Land"],
+	  "cardText": "\\Q{\\EG\\Q}\\E",
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Land"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Land4White",
+  "description":"Planes & Plowshares",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "overlaySprite":"Overlay4White",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Land"],
+	  "cardText": "\\Q{\\EW\\Q}\\E",
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Land"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Land4Colorless",
+  "description":"The Flowering Wastes",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "overlaySprite":"Overlay4Colorless",
+  "rewards": [
+    {
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "cardTypes": ["Land"],
+		  "cardText": "\\Q{\\EC\\Q}\\E",
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardTypes": ["Land"],
+		  "cardText": "\\Q{\\E1\\Q}\\E",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	},
+	{
+	  "count":4,
+	  "cardTypes": ["Land"],
+      "editions":["AKH","HOU","MP2","AKR"]
+	}]
+},{                                    
+"name":"Green",                  
+"description":"Abundant Growth",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"GreenShop",
+  "rewards": [
+    {
+      "count":8,
+      "colors": ["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Red",                  
+"description":"Circle of Flame",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RedShop",
+  "rewards": [
+    {
+      "count":8,
+      "colors": ["red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Black",                  
+"description":"Font of Agonies",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"BlackShop",
+  "rewards": [
+    {
+      "count":8,
+      "colors": ["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"White",                  
+"description":"Circle of Protection",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"WhiteShop",
+  "rewards": [
+    {
+      "count":8,
+      "colors": ["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Blue",                  
+"description":"Hermitic Study",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"BlueShop",
+  "rewards": [
+    {
+      "count":8,
+      "colors": ["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Azorius",      
+"description":"Azorious Shop, LLC",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"AzoriusShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["white","blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+    {
+      "count":4,
+      "colors": ["white","blue"],
+      "colorType": "MultiColor",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Dimir",                  
+"description":"Dimir Prospects",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"DimirShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["black","blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+    {
+      "count":4,
+      "colors": ["black","blue"],
+      "colorType": "MultiColor",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Rakdos",                  
+"description":"The Rakdos Carnival",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RakdosShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["black","red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+    {
+      "count":4,
+      "colors": ["black","red"],
+      "colorType": "MultiColor",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Gruul",                  
+"description":"Gruul Fire Sale",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"GruulShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["red","green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+    {
+      "count":4,
+      "colors": ["red","green"],
+      "colorType": "MultiColor",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Orzhov",                  
+"description":"Orzhov Extortion",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"OrzhovShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["black","white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+    {
+      "count":4,
+      "colors": ["black","white"],
+      "colorType": "MultiColor",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Izzet",                  
+"description":"Izzet For Sale?",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"IzzetShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["red","blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+    {
+      "count":4,
+      "colors": ["red","blue"],
+      "colorType": "MultiColor",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+}  ,{                                    
+"name":"Golgari",                  
+"description":"The Golgari Graveyard",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"GolgariShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["black","green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+    {
+      "count":4,
+      "colors": ["black","green"],
+      "colorType": "MultiColor",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Boros",                  
+"description":"Ravnican Foreign Legion",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"BorosShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["red","white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+    {
+      "count":4,
+      "colors": ["red","white"],
+      "colorType": "MultiColor",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Simic",                  
+"description":"Simic Research Lab",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"SimicShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["blue","green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+    {
+      "count":4,
+      "colors": ["blue","green"],
+      "colorType": "MultiColor",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"RUB",
+  "description":"Grixis General Store",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"RUBShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["red","blue","black"],
+      "colorType": "MultiColor",
+	  "matchAllColors": "true",
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "colors": ["red","blue","black"],
+      "colorType": "MultiColor",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Zombie",                  
+"description":"Braaaaaains???",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"ZombieShop",
+  "rewards": [
+    {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Zombie"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Zombie",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	}]
+},{                                    
+"name":"Human",                  
+"description":"Adam & Eve's",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"HumanShop",
+  "rewards": [
+    {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Human"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Human",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	}]
+},
+{                                    
+"name":"Human4White",                  
+"description":"Fresh Volunteers",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"HumanShop",
+  "rewards": [
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Human"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Human",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Human"],
+		  "colors": ["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Human",
+		  "colors": ["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	}]
+},{
+  "name":"Enchantment",
+  "description":"Charms and Curiosities",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EnchantmentShop",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Enchantment"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Enchantment4Black",
+  "description":"Open the Graves",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EnchantmentShop",
+  "overlaySprite":"Overlay4Black",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Enchantment"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Enchantment"],
+	  "colors": ["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Enchantment4Blue",
+  "description":"Dream Halls",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EnchantmentShop",
+  "overlaySprite":"Overlay4Blue",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Enchantment"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Enchantment"],
+	  "colors": ["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Enchantment4Green",
+  "description":"Familiar Ground",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EnchantmentShop",
+  "overlaySprite":"Overlay4Green",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Enchantment"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Enchantment"],
+	  "colors": ["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Enchantment4Red",
+  "description":"Crucible of Fire",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EnchantmentShop",
+  "overlaySprite":"Overlay4Red",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Enchantment"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Enchantment"],
+	  "colors": ["red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Enchantment4White",
+  "description":"Holy Strength",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EnchantmentShop",
+  "overlaySprite":"Overlay4White",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Enchantment"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Enchantment"],
+	  "colors": ["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Enchantment6Black",
+  "description":"Open the Graves",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EnchantmentShop",
+  "overlaySprite":"Overlay6Black",
+  "rewards": [
+    {
+      "count":2,
+      "cardTypes": ["Enchantment"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":6,
+      "cardTypes": ["Enchantment"],
+	  "colors": ["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Enchantment6Blue",
+  "description":"Dream Halls",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EnchantmentShop",
+  "overlaySprite":"Overlay6Blue",
+  "rewards": [
+    {
+      "count":2,
+      "cardTypes": ["Enchantment"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":6,
+      "cardTypes": ["Enchantment"],
+	  "colors": ["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Enchantment6Green",
+  "description":"Familiar Ground",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EnchantmentShop",
+  "overlaySprite":"Overlay6Green",
+  "rewards": [
+    {
+      "count":2,
+      "cardTypes": ["Enchantment"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":6,
+      "cardTypes": ["Enchantment"],
+	  "colors": ["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Enchantment6Red",
+  "description":"Crucible of Fire",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EnchantmentShop",
+  "overlaySprite":"Overlay6Red",
+  "rewards": [
+    {
+      "count":2,
+      "cardTypes": ["Enchantment"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":6,
+      "cardTypes": ["Enchantment"],
+	  "colors": ["red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Enchantment6White",
+  "description":"Holy Strength",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EnchantmentShop",
+  "overlaySprite":"Overlay6White",
+  "rewards": [
+    {
+      "count":2,
+      "cardTypes": ["Enchantment"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":6,
+      "cardTypes": ["Enchantment"],
+	  "colors": ["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Land",
+  "description":"Exotic Lands",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Land"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Colorless",     
+"description":"One Size Fits All",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"ColorlessShop",
+  "rewards": [
+    {
+      "count":8,
+      "colorType": "Colorless",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Artifact",
+"description":"Antiquities",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"ArtifactShop",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Artifact"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Multicolor",                  
+"description":"The Goldsmith",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"MultiColorShop",
+  "rewards": [
+    {
+      "count":8,
+      "colorType": "MultiColor",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{                                    
+"name":"Multicolor8Black",                  
+"description":"The Goldsmith",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"MultiColorShop",
+"overlaySprite":"Overlay8Black",
+  "rewards": [
+	{
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Black","Blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Black","Green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Black","Red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Black","White"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	}]
+},{                                    
+"name":"Multicolor8Blue",                  
+"description":"The Goldsmith",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"MultiColorShop",
+"overlaySprite":"Overlay8Blue",
+  "rewards": [
+	{
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Blue","Black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Blue","Green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Blue","Red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Blue","White"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	}]
+},{                                    
+"name":"Multicolor8Green",                  
+"description":"The Goldsmith",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"MultiColorShop",
+"overlaySprite":"Overlay8Green",
+  "rewards": [
+	{
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Green","Black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Green","Blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Green","Red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Green","White"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	}]
+},{                                    
+"name":"Multicolor8Red",                  
+"description":"The Goldsmith",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"MultiColorShop",
+"overlaySprite":"Overlay8Red",
+  "rewards": [
+	{
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Red","Black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Red","Blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Red","Green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["Red","White"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	}]
+},{                                    
+"name":"Multicolor8White",                  
+"description":"The Goldsmith",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"MultiColorShop",
+"overlaySprite":"Overlay8White",
+  "rewards": [
+	{
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["White","Black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["White","Blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["White","Green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "colorType": "MultiColor",
+		  "colors": ["White","Red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	}]
+},{
+  "name":"Minotaur",
+  "description":"Ye Olde China Shoppe",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"MinotaurShop",
+  "rewards": [
+  {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Minotaur"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Minotaur",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	}
+	]
+},{
+  "name":"Card",
+  "description":"Sleight of Hand",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"CardShop",
+  "rewards": [
+    {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "cardText": "Draw",
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Discard",
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Hand",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	}]
+},{
+  "name":"Druid",
+  "description":"Discount Druids",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"DruidShop",
+  "rewards": [
+    {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Druid"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Druid",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	}]
+},{
+  "name":"Wand",
+  "description":"Ashnod's Artifacts",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"WandShop",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Artifact"],
+	  "cardText": "\\Q{\\ET\\Q}\\E",
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Wand2Black",
+  "description":"Vault of Whispers",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"WandShop",
+  "overlaySprite":"Overlay2Black",
+  "rewards": [
+    {
+      "count":6,
+      "cardTypes": ["Artifact"],
+	  "cardText": "\\Q{\\ET\\Q}\\E",
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+      "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "cardTypes": ["Artifact"],
+		  "cardText": "\\Q{\\EB\\Q}\\E",
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardTypes": ["Artifact"],
+		  "cardText": "Black",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+    }]
+},{
+  "name":"Wand2Blue",
+  "description":"Seat of the Synod",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"WandShop",
+  "overlaySprite":"Overlay2Blue",
+  "rewards": [
+    {
+      "count":6,
+      "cardTypes": ["Artifact"],
+	  "cardText": "\\Q{\\ET\\Q}\\E",
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+      "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "cardTypes": ["Artifact"],
+		  "cardText": "\\Q{\\EU\\Q}\\E",
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardTypes": ["Artifact"],
+		  "cardText": "Blue",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	]
+	}]
+},{
+  "name":"Wand2Red",
+  "description":"The Great Furnace",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"WandShop",
+  "overlaySprite":"Overlay2Red",
+  "rewards": [
+    {
+      "count":6,
+      "cardTypes": ["Artifact"],
+	  "cardText": "\\Q{\\ET\\Q}\\E",
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":2,
+      "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "cardTypes": ["Artifact"],
+		  "cardText": "\\Q{\\ER\\Q}\\E",
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardTypes": ["Artifact"],
+		  "cardText": "Red",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	]
+	}]
+},{
+  "name":"Bird",
+  "description":"Birds Of A Feather",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"BirdShop",
+  "rewards": [
+    {
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Bird"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Bird",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	}]
+},{
+  "name":"Bird4Blue",
+  "description":"Aven Windreaders",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"BirdShop",
+  "overlaySprite":"Overlay4Blue",
+  "rewards": [
+    {
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Bird"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Bird",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Bird"],
+		  "colors": ["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Bird",
+		  "colors": ["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	}]
+},{
+  "name":"Bird4White",
+  "description":"Wing Stop",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"BirdShop",
+  "overlaySprite":"Overlay4White",
+  "rewards": [
+    {
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Bird"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Bird",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Bird"],
+		  "colors": ["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Bird",
+		  "colors": ["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	}]
+},{
+  "name":"Random",
+  "description":"Pack Shop (?)",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"RandomShop",
+  "rewards": [
+    {
+      "count":8,
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Planeswalker",
+  "description":"Plain ol' Planeswalkers",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"PlaneswalkerShop",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Planeswalker"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Planeswalker4Black",
+  "description":"Sorin's Guidance",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"PlaneswalkerShop",
+  "overlaySprite":"Overlay4Black",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Planeswalker"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Planeswalker"],
+	  "colors": ["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Planeswalker4Blue",
+  "description":"Teferi's Isle",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"PlaneswalkerShop",
+  "overlaySprite":"Overlay4Blue",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Planeswalker"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Planeswalker"],
+	  "colors": ["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Planeswalker4Green",
+  "description":"Garruk's Companions",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"PlaneswalkerShop",
+  "overlaySprite":"Overlay4Green",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Planeswalker"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Planeswalker"],
+	  "colors": ["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Planeswalker4Red",
+  "description":"Oath of Chandra",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"PlaneswalkerShop",
+  "overlaySprite":"Overlay4Red",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Planeswalker"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Planeswalker"],
+	  "colors": ["red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Planeswalker4White",
+  "description":"Gideon's Company",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"PlaneswalkerShop",
+  "overlaySprite":"Overlay4White",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Planeswalker"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Planeswalker"],
+	  "colors": ["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+    }]
+},{
+  "name":"Wizard",
+  "description":"Tim's Prestidigitation",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"WizardShop",
+  "rewards": [
+	{
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Wizard"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Wizard",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	}
+	]
+},{
+  "name":"Legend",
+  "description":"Tome of Legends",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"LegendShop",
+  "rewards": [
+	{
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "superTypes": ["Legend","Legendary"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Legendary",
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Historic",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ]
+	}
+	]
+},{
+  "name":"Legend4Black",
+  "description":"Phyrexian Tower",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"LegendShop",
+  "overlaySprite":"Overlay4Black",
+  "rewards": [
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "superTypes": ["Legend","Legendary"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Legendary",
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Historic",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ] 
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "superTypes": ["Legend","Legendary"],
+		  "colors":["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Legendary",
+		  "colors":["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Historic",
+		  "colors":["black"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ] 
+	}]
+},{
+  "name":"Legend4Blue",
+  "description":"Teferi's Insight",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"LegendShop",
+  "overlaySprite":"Overlay4Blue",
+  "rewards": [
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "superTypes": ["Legend","Legendary"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Legendary",
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Historic",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ] 
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "superTypes": ["Legend","Legendary"],
+		  "colors":["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Legendary",
+		  "colors":["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Historic",
+		  "colors":["blue"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ] 
+	}]
+},{
+  "name":"Legend4Green",
+  "description":"History of Kamigawa",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"LegendShop",
+  "overlaySprite":"Overlay4Green",
+  "rewards": [
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "superTypes": ["Legend","Legendary"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Legendary",
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Historic",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ] 
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "superTypes": ["Legend","Legendary"],
+		  "colors":["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Legendary",
+		  "colors":["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Historic",
+		  "colors":["green"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ] 
+	}]
+},{
+  "name":"Legend4Red",
+  "description":"Crucible of Defiance",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"LegendShop",
+  "overlaySprite":"Overlay4Red",
+  "rewards": [
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "superTypes": ["Legend","Legendary"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Legendary",
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Historic",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ] 
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "superTypes": ["Legend","Legendary"],
+		  "colors":["red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Legendary",
+		  "colors":["red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Historic",
+		  "colors":["red"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ] 
+	}]
+},{
+  "name":"Legend4White",
+  "description":"Avacyn's Memorial",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"LegendShop",
+  "overlaySprite":"Overlay4White",
+	"rewards": [
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "superTypes": ["Legend","Legendary"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Legendary",
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Historic",
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ] 
+	},
+	{
+	  "count":4,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "superTypes": ["Legend","Legendary"],
+		  "colors":["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Legendary",
+		  "colors":["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Historic",
+		  "colors":["white"],
+      "editions":["AKH","HOU","MP2","AKR"]
+		}
+	  ] 
+	}]
+}
+]   

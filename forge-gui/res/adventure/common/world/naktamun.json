@@ -1,0 +1,28 @@
+{
+"startPointX": 0.515,
+"startPointY": 0.5,
+"noiseWeight": 0.5,
+"distWeight": 1.5,
+"name": "naktamun",
+"tilesetAtlas": "world/tilesets/terrain.atlas",
+"tilesetName": "White",
+"terrain": [
+	{
+		"spriteName": "White_1",
+		"max": 0.2,
+		"resolution": 10
+	},
+	{
+		"spriteName": "White_2",
+		"min": 0.8,
+		"max": 1,
+		"resolution": 10
+	}
+],
+"width": 0.01,
+"height": 0.01,
+"color": "efe697",
+"spriteNames": [],
+"enemies": [],
+"pointsOfInterest": ["Naktamun"]
+}

@@ -134,7 +134,7 @@
   </object>
   <object id="56" template="../obj/enemy.tx" x="45.1667" y="121.833">
    <properties>
-    <property name="enemy" value="Amonkhet Minotaur"/>
+    <property name="enemy" value="Amonkhet Minotaur Warrior"/>
    </properties>
   </object>
   <object id="57" template="../obj/enemy.tx" x="266.333" y="222.167">

@@ -1,0 +1,11 @@
+{                                    
+"name":"Hydra",
+  "template":
+  {
+   "count":60,
+   "colors":["Green"],
+   "tribe":"Hydra",        
+   "tribeCards":8.0,
+   "rares":0.8
+  }
+}
