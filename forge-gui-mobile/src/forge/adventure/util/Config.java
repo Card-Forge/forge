@@ -43,7 +43,7 @@ public class Config {
     private final String commonDirectoryName = "common";
     private final String prefix;
     private final String commonPrefix;
-    private final HashMap<String, FileHandle> Cache = new HashMap<String, FileHandle>();
+    private final HashMap<String, FileHandle> Cache = new HashMap<>();
     private ConfigData configData;
     private final String[] adventures;
     private SettingData settingsData;
@@ -59,12 +59,7 @@ public class Config {
     private Config() {
 
         String path = resPath();
-        FilenameFilter planesFilter = new FilenameFilter() {
-            @Override
-            public boolean accept(File file, String s) {
-                return (!s.contains(".") && !s.equals(commonDirectoryName));
-            }
-        };
+        FilenameFilter planesFilter = (file, s) -> (!s.contains(".") && !s.equals(commonDirectoryName));
 
         adventures = new File(GuiBase.isAndroid() ? ForgeConstants.ADVENTURE_DIR : path + "/res/adventure").list(planesFilter);
         try {
@@ -142,73 +137,77 @@ public class Config {
         return prefix + path;
     }
 
+    public String getCommonFilePath(String path) {
+        return commonPrefix + path;
+    }
+
     public FileHandle getFile(String path) {
         if (Cache.containsKey(path)) return Cache.get(path);
 
         //if (Cache.containsKey(commonPath)) return Cache.get(commonPath);
 
         //not cached, look for resource
-        System.out.print("Looking for resource " + path+"... ");
+        System.out.print("Looking for resource " + path + "... ");
         String fullPath = (prefix + path).replace("//", "/");
         String fileName = fullPath.replaceFirst("[.][^.]+$", "");
         String ext = fullPath.substring(fullPath.lastIndexOf('.'));
         String langFile = fileName + "-" + Lang + ext;
 
-        for (int iter=1; iter<=2; iter++){
+        for (int iter = 1; iter <= 2; iter++) {
 
-        if (Files.exists(Paths.get(langFile))) {
-            System.out.println("Found!");
-            Cache.put(path, new FileHandle(langFile));
-            break;
-        } else if (Files.exists(Paths.get(fullPath))) {
-            System.out.println("Found!");
-            Cache.put(path, new FileHandle(fullPath));
-             break;
-        }
-        //no local resource, check common resources
-        fullPath = (commonPrefix + path).replace("//", "/");
-        fileName = fullPath.replaceFirst("[.][^.]+$", "");
-        langFile = fileName + "-" + Lang + ext;
+            if (Files.exists(Paths.get(langFile))) {
+                System.out.println("Found!");
+                Cache.put(path, new FileHandle(langFile));
+                break;
+            } else if (Files.exists(Paths.get(fullPath))) {
+                System.out.println("Found!");
+                Cache.put(path, new FileHandle(fullPath));
+                break;
+            }
+            //no local resource, check common resources
+            fullPath = (commonPrefix + path).replace("//", "/");
+            fileName = fullPath.replaceFirst("[.][^.]+$", "");
+            langFile = fileName + "-" + Lang + ext;
         }
         return Cache.get(path);
     }
+
     public String getPlane() {
-        return plane.replace("<user>","user_");
+        return plane.replace("<user>", "user_");
     }
 
     public String[] colorIdNames() {
 
         return configData.colorIdNames;
     }
+
     public String[] colorIds() {
 
         return configData.colorIds;
     }
+
     public String[] starterEditionNames() {
 
         return configData.starterEditionNames;
     }
+
     public String[] starterEditions() {
 
         return configData.starterEditions;
     }
-    public Deck starterDeck(ColorSet color, DifficultyData difficultyData, AdventureModes mode,int index,CardEdition starterEdition) {
-        switch (mode)
-        {
+
+    public Deck starterDeck(ColorSet color, DifficultyData difficultyData, AdventureModes mode, int index, CardEdition starterEdition) {
+        switch (mode) {
             case Constructed:
-                for(ObjectMap.Entry<String, String> entry:difficultyData.constructedStarterDecks)
-                {
-                    if(ColorSet.fromNames(entry.key.toCharArray()).getColor()==color.getColor())
-                    {
+                for (ObjectMap.Entry<String, String> entry : difficultyData.constructedStarterDecks) {
+                    if (ColorSet.fromNames(entry.key.toCharArray()).getColor() == color.getColor()) {
                         return CardUtil.getDeck(entry.value, false, false, "", false, false);
                     }
                 }
             case Standard:
 
-                for(ObjectMap.Entry<String, String> entry:difficultyData.starterDecks)
-                {
-                    if(ColorSet.fromNames(entry.key.toCharArray()).getColor()==color.getColor())
-                    {
+                for (ObjectMap.Entry<String, String> entry : difficultyData.starterDecks) {
+                    if (ColorSet.fromNames(entry.key.toCharArray()).getColor() == color.getColor()) {
                         return CardUtil.getDeck(entry.value, false, false, "", false, false, starterEdition, true);
                     }
                 }
@@ -217,10 +216,8 @@ public class Config {
             case Custom:
                 return DeckProxy.getAllCustomStarterDecks().get(index).getDeck();
             case Pile:
-                for(ObjectMap.Entry<String, String> entry:difficultyData.pileDecks)
-                {
-                    if(ColorSet.fromNames(entry.key.toCharArray()).getColor()==color.getColor())
-                    {
+                for (ObjectMap.Entry<String, String> entry : difficultyData.pileDecks) {
+                    if (ColorSet.fromNames(entry.key.toCharArray()).getColor() == color.getColor()) {
                         return CardUtil.getDeck(entry.value, false, false, "", false, false);
                     }
                 }
@@ -238,19 +235,18 @@ public class Config {
         }
         return atlas;
     }
-    public SettingData getSettingData()
-    {
+
+    public SettingData getSettingData() {
         return settingsData;
     }
-    public Array<String> getAllAdventures()
-    {
-        String path=ForgeConstants.USER_ADVENTURE_DIR + "/userplanes/";
-        Array<String> adventures = new Array<String>();
-        if(new File(path).exists())
+
+    public Array<String> getAllAdventures() {
+        String path = ForgeConstants.USER_ADVENTURE_DIR + "/userplanes/";
+        Array<String> adventures = new Array<>();
+        if (new File(path).exists())
             adventures.addAll(new File(path).list());
-        for(int i=0;i<adventures.size;i++)
-        {
-            adventures.set(i,"<user>"+adventures.get(i));
+        for (int i = 0; i < adventures.size; i++) {
+            adventures.set(i, "<user>" + adventures.get(i));
         }
         adventures.addAll(this.adventures);
         return adventures;
@@ -259,26 +255,27 @@ public class Config {
     public void saveSettings() {
 
         Json json = new Json(JsonWriter.OutputType.json);
-        FileHandle handle = new FileHandle(ForgeProfileProperties.getUserDir() +  "/adventure/settings.json");
-        handle.writeString(json.prettyPrint(json.toJson(settingsData, SettingData.class)),false);
+        FileHandle handle = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure/settings.json");
+        handle.writeString(json.prettyPrint(json.toJson(settingsData, SettingData.class)), false);
 
     }
 
     public void loadResources() {
         RewardData.getAllCards();//initialize before loading custom cards
         final CardRules.Reader rulesReader = new CardRules.Reader();
-        ImageKeys.ADVENTURE_CARD_PICS_DIR=Config.currentConfig.getFilePath(forge.adventure.util.Paths.CUSTOM_CARDS_PICS);// not the cleanest solution
-        for(File cardFile:new File(getFilePath(forge.adventure.util.Paths.CUSTOM_CARDS)).listFiles())
-        {
-
+        ImageKeys.ADVENTURE_CARD_PICS_DIR = Config.currentConfig.getCommonFilePath(forge.adventure.util.Paths.CUSTOM_CARDS_PICS);// not the cleanest solution
+        File[] customCards = new File(getCommonFilePath(forge.adventure.util.Paths.CUSTOM_CARDS)).listFiles();
+        if (customCards == null)
+            return;
+        for (File cardFile : customCards) {
             FileInputStream fileInputStream;
             try {
                 fileInputStream = new FileInputStream(cardFile);
                 rulesReader.reset();
-                final List<String> lines =  FileUtil.readAllLines(new InputStreamReader(fileInputStream, Charset.forName(CardStorageReader.DEFAULT_CHARSET_NAME)), true);
-                CardRules rules=  rulesReader.readCard(lines, com.google.common.io.Files.getNameWithoutExtension(cardFile.getName()));
+                final List<String> lines = FileUtil.readAllLines(new InputStreamReader(fileInputStream, Charset.forName(CardStorageReader.DEFAULT_CHARSET_NAME)), true);
+                CardRules rules = rulesReader.readCard(lines, com.google.common.io.Files.getNameWithoutExtension(cardFile.getName()));
                 rules.setCustom();
-                PaperCard card=new PaperCard(rules, CardEdition.UNKNOWN.getCode(), CardRarity.Special){
+                PaperCard card = new PaperCard(rules, CardEdition.UNKNOWN.getCode(), CardRarity.Special) {
                     @Override
                     public String getImageKey(boolean altState) {
                         return ImageKeys.ADVENTURECARD_PREFIX + getName();
