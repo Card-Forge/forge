@@ -1,7 +1,6 @@
 Name:Smite the Deathless
 ManaCost:1 R
 Types:Instant
-A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 3 | RememberDamaged$ True | ReplaceDyingDefined$ Remembered.Creature | SubAbility$ DBDebuff | SpellDescription$ CARDNAME deals 3 damage to target creature. That creature loses indestructible until end of turn. If that creature would die this turn, exile it instead.
-SVar:DBDebuff:DB$ Debuff | Defined$ Remembered | Keywords$ Indestructible | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 3 |  ReplaceDyingDefined$ Remembered.Creature | SubAbility$ DBDebuff | SpellDescription$ CARDNAME deals 3 damage to target creature. That creature loses indestructible until end of turn. If that creature would die this turn, exile it instead.
+SVar:DBDebuff:DB$ Debuff | Defined$ Targeted | Keywords$ Indestructible
 Oracle:Smite the Deathless deals 3 damage to target creature. That creature loses indestructible until end of turn. If that creature would die this turn, exile it instead.
