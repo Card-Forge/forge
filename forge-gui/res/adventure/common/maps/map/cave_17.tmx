@@ -5,11 +5,6 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUEAJ7eBgY9vLQ394oXgaGaF762zsKRsEoGL4AABCfAmE=
-  </data>
- </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJybycnAMHMUj+JRPIpH8SgexSMCAwCsCkLM
