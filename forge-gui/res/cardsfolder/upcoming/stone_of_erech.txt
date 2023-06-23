@@ -1,7 +1,7 @@
 Name:Stone of Erech
 ManaCost:1
 Types:Legendary Artifact
-R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppOwn | ReplaceWith$ Exile | Description$ If a creature an opponent controls would die, exile it instead.
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | ReplaceWith$ Exile | Description$ If a creature an opponent controls would die, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 A:AB$ ChangeZoneAll | Cost$ 2 T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | SubAbility$ DBDraw | SpellDescription$ Exile target player's graveyard. Draw a card.
 SVar:DBDraw:DB$ Draw
