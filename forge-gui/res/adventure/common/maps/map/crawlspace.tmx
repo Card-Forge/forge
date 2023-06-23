@@ -10,14 +10,9 @@
  </properties>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJztlEEOgzAMBM0NfwwhPlo18KuqhWc0VruSiRyokWkvXWmVS+KJNwaiv0o1yr/iWo5UaolG5an9DrdnoktmzXm95vXGazadyB34VfdRYYs7XjuCqzlg4y4WM4Ldv+trjs5gi5vUTHgk5+4VrmSgZ83iYv/g7B29ylwtBXfvm4Jx1iPrLfHGUktWzLmV8cx+pu4ZOdV6WoyMcdej+oRbzlY6kO0Wd0+R/w8PN1Jnc5+JeTWg
-  </data>
- </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxby8LAsHYUo+CZnBA80O5AxkwiEDxQ9lLLbnMuCCbVv5TGRxIHBBPrV2r5WZUdgXGpaRVkYGgThNjXIkgdu4mxV1mIgUFFCGKXEpQGuUUNyJ7GCcHk2onPXlUhhH9h+CBQbBYnbe0Fma8hhGqvBpJfybE3mQOC8am7LcrAoI5mLyiMjbnIsxeEPzFAMD417YKI+AVhTSGIWyhN08RgdL/Sy150N9DbzqGCAQFePTw=
+   eJxby8LAsHYUo+CZnBA80O5AxkwiEDxQ9lLLbnMuCCbVv5TGRxIHBBPrV2r5WZUdgXGpaRVkYGgThNjXIkgdu4mxV1mIgUFFCGKXEpQGuUUNyJ7GCcHk2onPXlUhiH83sCPwQaDYLE7a2gsyX0MINX41kPxKjr3JHBCMT91tUQYGdSFU/4LC2JiLPHtB+BMDBONT0y6IiF8Q1hSCuIXSNE0MRg5jNTrai+4Gets5VDAAVFFBAg==
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="17">

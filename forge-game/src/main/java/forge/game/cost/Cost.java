@@ -950,7 +950,7 @@ public class Cost implements Serializable {
             } else if (part instanceof CostPutCounter || (mergeAdditional && // below usually not desired because they're from different causes
                     (part instanceof CostDiscard || part instanceof CostDraw ||
                     part instanceof CostAddMana || part instanceof CostPayLife ||
-                    part instanceof CostSacrifice || part instanceof CostTapType||
+                    part instanceof CostSacrifice || part instanceof CostTapType ||
                     part instanceof CostExile))) {
                 boolean alreadyAdded = false;
                 for (final CostPart other : costParts) {

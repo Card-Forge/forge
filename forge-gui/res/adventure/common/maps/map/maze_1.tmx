@@ -5,11 +5,6 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMBzAXh4Ghnpu+tsbzcvAsJuH/vaOAvIAAN0IAoM=
-  </data>
- </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJwL42RgCBvFo3gUj+JRPIpH8YjAAK/DvUM=
@@ -35,9 +30,10 @@
    </properties>
   </object>
   <object id="49" template="../obj/gold.tx" x="15.8713" y="122.37"/>
-  <object id="50" template="../obj/enemy.tx" x="210.797" y="217.515">
+  <object id="50" template="../obj/enemy.tx" x="208" y="176">
    <properties>
     <property name="enemy" value="Minotaur"/>
+    <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
   <object id="51" template="../obj/treasure.tx" x="384.492" y="232.777"/>
