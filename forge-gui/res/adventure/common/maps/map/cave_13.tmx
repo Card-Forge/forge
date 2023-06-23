@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="53">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="5" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFIwXUcjMw1EFxPTf97JXmYWDYBcWyPPS1Fwboae9OJP/upqO9o2AUjIJRQAwAACH9B2k=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8BvFNMerOAbeDaN4FI/iUTyKRzEAYUGtrg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNk0sKwjAQhgcU2pyltxBsgwtXXs3HAQSxuvFxDR930La+1q79QzO0RFqQJsXAx0AZ5uvfSUNBFP4BsU+0Amu/XWeCOvKILsK9mzMq5xCoo6pLd1zyjQOiCZiCGYgod7v47lI7JRwbuLZgB/ZB/pyxnV2WZh/gOoITOGvv2yveS7mvlvxl7x2uB3iCl5F3AVeGuvTtZE/1rJQKB98rlZF9N6Pfxt55VqR98863r6q/aXaepby9LtGgppf/AT79hrtW7kxU5zSdvIeqXluYOdtwmntty8lEws5Of0Vqb929c+VNLHg/PdvIbA==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="49" template="../obj/gold.tx" x="7.66667" y="102"/>
+  <object id="50" template="../obj/enemy.tx" x="176" y="120.333">
+   <properties>
+    <property name="enemy" value="Djinn"/>
+   </properties>
+  </object>
+  <object id="52" template="../obj/gold.tx" x="7.66667" y="119.333"/>
+ </objectgroup>
+</map>

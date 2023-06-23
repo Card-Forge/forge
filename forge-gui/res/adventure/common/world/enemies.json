@@ -9188,7 +9188,7 @@
 		"IdentityBlack",
 		"IdentityGreen",
 		"IdentityAbzan",
-		"BiomeGreen",
+		"BiomeBlack",
 		null,
 		null
 	]
@@ -17338,16 +17338,17 @@
 	]
 },
 {
-	"name": "Sandwurm",
+	"name": "Hellion",
 	"sprite": "sprites/enemy/monstrosity/sandwurm.atlas",
 	"deck": [
-		"decks/standard/sandwurm.dck"
+		"decks/standard/hellion.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 13,
 	"life": 12,
+	"scale": 2,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -17366,19 +17367,22 @@
 			"probability": 0.5,
 			"count": 3,
 			"colors": [
-				"White"
+				"Red"
 			],
 			"rarity": [
 				"Rare"
 			]
 		}
 	],
-	"colors": "G",
+	"colors": "R",
 	"questTags": [
-		"Wurm",
+		"Hellion",
+		"Monster",
 		"Nature",
 		"Subterranean",
-		"IdentityGreen"
+		"IdentityRed",
+		"BiomeRed",
+		"BiomeWhite"
 	]
 },
 {
@@ -20593,7 +20597,7 @@
 		"nameOverride": "",
 		"sprite": "sprites/enemy/humanoid/human/warrior/warrior.atlas",
 		"deck": [
-			"decks/standard/gladiator.dck"
+			"decks/standard/human_warrior_amonkhet.dck"
 		],
 		"ai": "",
 		"spawnRate": 1,
@@ -20629,7 +20633,7 @@
 				"colorType": "MultiColor"
 			}
 		],
-		"colors": "R",
+		"colors": "RGW",
 		"questTags": [
 			"Humanoid",
 			"Initiate",
@@ -20639,7 +20643,11 @@
 			"Warrior",
 			"IdentityRed",
 			"IdentityBoros",
+			"IdentityGruul",
+			"IdentitySelesnya",
 			"IdentityWhite",
+			"IdentityGreen",
+			"IdentityNaya",
 			"BiomeWhite"
 		]
 	},

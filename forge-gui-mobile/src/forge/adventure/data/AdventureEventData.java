@@ -322,7 +322,7 @@ public class AdventureEventData implements Serializable {
     public Map<Integer, List<AdventureEventMatch>> matches = new HashMap<>();
 
     public void giveRewards() {
-        int wins = getHumanPlayer().wins;
+        int wins = matchesWon;
         Array<Reward> ret = new Array<>();
 
         //Todo: this should be automatic... "somehow"
