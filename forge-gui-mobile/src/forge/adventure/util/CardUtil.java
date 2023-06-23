@@ -640,7 +640,7 @@ public class CardUtil {
     public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme, boolean useGeneticAI, CardEdition starterEdition, boolean discourageDuplicates)
     {
         if(path.endsWith(".dck"))
-            return DeckSerializer.fromFile(new File(Config.instance().getFilePath(path)));
+            return DeckSerializer.fromFile(new File(Config.instance().getCommonFilePath(path)));
 
         if(forAI && (isFantasyMode||useGeneticAI)) {
             Deck deck = DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, forAI, isTheme, useGeneticAI);

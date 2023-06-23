@@ -14,10 +14,10 @@
 "biomesSprites": "world/sprites/map_sprites.json",
 "maxRoadDistance": 1000,
 "biomesNames": [
-	"world/outlands.json",
-	"world/ifnir.json",
-	"world/ramunap.json",
-	"world/shefet.json",
-	"world/naktamun.json"
+	"world/biomes/outlands.json",
+	"world/biomes/ifnir.json",
+	"world/biomes/ramunap.json",
+	"world/biomes/shefet.json",
+	"world/biomes/naktamun.json"
 ]
 }

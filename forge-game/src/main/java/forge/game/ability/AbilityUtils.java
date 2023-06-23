@@ -2474,17 +2474,6 @@ public class AbilityUtils {
             return doXMath(n, expr, c, ctb);
         }
 
-        //SacrificedThisTurn <type>
-        if (sq[0].startsWith("SacrificedThisTurn")) {
-            List<Card> list = player.getSacrificedThisTurn();
-            if (l[0].contains(" ")) {
-                String[] lparts = l[0].split(" ", 2);
-                String restrictions = TextUtil.fastReplace(l[0], TextUtil.addSuffix(lparts[0]," "), "");
-                list = CardLists.getValidCardsAsList(list, restrictions, player, c, ctb);
-            }
-            return doXMath(list.size(), expr, c, ctb);
-        }
-
         if (sq[0].contains("AbilityYouCtrl")) {
             CardCollection all = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), "Creature", player,
                     c, ctb);
@@ -3387,6 +3376,17 @@ public class AbilityUtils {
 
             final List<Card> res = CardUtil.getThisTurnEntered(destination, origin, validFilter, source, ctb, player);
             return doXMath(res.size(), m, source, ctb);
+        }
+
+        //SacrificedThisTurn <type>
+        if (l[0].startsWith("SacrificedThisTurn")) {
+            List<Card> list = player.getSacrificedThisTurn();
+            if (l[0].contains(" ")) {
+                String[] lparts = l[0].split(" ", 2);
+                String restrictions = TextUtil.fastReplace(l[0], TextUtil.addSuffix(lparts[0]," "), "");
+                list = CardLists.getValidCardsAsList(list, restrictions, player, source, ctb);
+            }
+            return doXMath(list.size(), m, source, ctb);
         }
 
         final String[] sq = l[0].split("\\.");
