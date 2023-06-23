@@ -1,0 +1,12 @@
+Name:Bilbo, Birthday Celebrant
+ManaCost:W B G
+Types:Legendary Creature Halfling Rogue
+PT:2/3
+R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GainLife | AiLogic$ DoubleLife | Description$ If you would gain life, you gain that much life plus 1 instead.
+SVar:GainLife:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X
+SVar:X:ReplaceCount$LifeGained/Plus.1
+A:AB$ ChangeZone | Cost$ 2 W B G T Exile<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ Y | Shuffle$ True | CheckSVar$ Z | SVarCompare$ GE111 | SpellDescription$ Search your library for any number of creature cards, put them onto the battlefield, then shuffle. Activate only if you have 111 or more life.
+SVar:Y:Count$InYourLibrary.Creature
+SVar:Z:Count$YourLifeTotal
+Oracle:If you would gain life, you gain that much life plus 1 instead.\n{2}{W}{B}{G}, {T}, Exile Bilbo, Birthday Celebrant: Search your library for any number of creature cards, put them onto the battlefield, then shuffle. Activate only if you have 111 or more life.
+DeckHints:Ability$LifeGain
