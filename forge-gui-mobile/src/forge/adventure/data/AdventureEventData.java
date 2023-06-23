@@ -429,6 +429,11 @@ public class AdventureEventData implements Serializable {
 
         public Image getAvatar() {
             if (sprite == null) {
+                EnemyData data = WorldData.getEnemy(enemyDataName);
+                if (data == null){
+                    //enemyDataName was not found, replace with something valid.
+                    enemyDataName = Aggregates.random(WorldData.getAllEnemies()).getName();
+                }
                 sprite = new EnemySprite(WorldData.getEnemy(enemyDataName));
             }
             return sprite.getAvatar() == null ? new Image() : new Image(sprite.getAvatar());
