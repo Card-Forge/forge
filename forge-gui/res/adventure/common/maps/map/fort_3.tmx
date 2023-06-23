@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="61">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNlGEOQDAMhfcfJ8DFOAvOZeZutvCSqY1IXsNLFlrSr2/p1pTGND9dfWWMLffVVecYOQ3m4p/Q7N/bKEaOyZbMOzHZ0teTapLf1a+puNbP9cPiyvmBUv0MPnYkbs4X+oHYc53jau/zV9w1Ud/d9KM1VzaTwxnX2Gc5S9r7PBY780kj8RwFf8FD6u6IFc5ue/zP4IIN36m7Aj6ZTHBtxI/lxPc3dTdbjWQp
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyT4WFgkMGCm7gRGJs8peqJMaeCCDzU7QVhYuxDx5TaOWrvqL2j9o7aO1TsHWn1Ai5zcIUpqfYCAApbnpc=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzVlVEOgzAIhrH6MLmSm+6iRjd3T9dGiQxbp2vo4peQGoL9QUsB8GNKgNxaUQYCIuND9Pb9h7XnvB834/Hx+BhqBGis3XHxvVhOe+J/Re5PuoNYidhat3QHtkq0dLlfU1een2/5aNdrRB6UV2wPEd3Gd/bRJvi/PlKcqxS6Fa7vpytO5p5vqKO7lzPr/nMeOVwNDS6Wzf7x8unXnEcO6mnZq0fn0RvB9yiB
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF+AAbDjYtASMnA8N/Dgi25qKTpUCwGGq3LReEpiegV9iOglFAC1DFO3D2VvMiaHoBmJ2jYGgCAExpByI=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="124.5" y="123.5"/>
+  <object id="51" template="../obj/treasure.tx" x="123.5" y="149.833"/>
+  <object id="52" template="../obj/gold.tx" x="144" y="122"/>
+  <object id="53" template="../obj/enemy.tx" x="182" y="106.5">
+   <properties>
+    <property name="enemy" value="Minotaur"/>
+   </properties>
+  </object>
+  <object id="59" template="../obj/enemy.tx" x="204.5" y="71">
+   <properties>
+    <property name="enemy" value="Minotaur"/>
+   </properties>
+  </object>
+  <object id="60" template="../obj/enemy.tx" x="248" y="123">
+   <properties>
+    <property name="enemy" value="Minotaur"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

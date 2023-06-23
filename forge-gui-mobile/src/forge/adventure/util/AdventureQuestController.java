@@ -43,7 +43,7 @@ public class AdventureQuestController implements Serializable {
                         toBoost.add(c.getTargetEnemyData().getName());
                     }
                     if (!toBoost.isEmpty()) {
-                        float value = 1.0f / toBoost.size();
+                        float value = 2.0f / toBoost.size();
                         for (String key : toBoost) {
                             float existingValue = boostedSpawns.getOrDefault(key, 0.0f);
                                 boostedSpawns.put(key, value + existingValue);

@@ -1,0 +1,151 @@
+{
+"startPointX": 0.5,
+"startPointY": 0.22,
+"noiseWeight": 0.5,
+"distWeight": 1.5,
+"name": "white",
+"tilesetAtlas": "world/tilesets/terrain.atlas",
+"tilesetName": "White",
+"terrain": [
+	{
+		"spriteName": "White_1",
+		"max": 0.2,
+		"resolution": 10
+	},
+	{
+		"spriteName": "White_2",
+		"min": 0.8,
+		"max": 1,
+		"resolution": 10
+	}
+],
+"width": 0.7,
+"height": 0.7,
+"color": "efe697",
+"spriteNames": [
+	"PlainsTree",
+	"Cactus",
+	"PlainsRock",
+	"DarkGras"
+],
+"enemies": [
+	"Adept White Wizard",
+	"Adventurer",
+	"Aether Channeler",
+	"Apprentice White Wizard",
+	"Archer",
+	"Armored Knight",
+	"Camel",
+	"Cathar",
+	"Challenger 20",
+	"Challenger 21",
+	"Challenger 22",
+	"Cleric",
+	"Criosphinx",
+	"Dawnhart Witch",
+	"Dog",
+	"Eldraine Knight",
+	"Elephant",
+	"Falcon",
+	"Falcon-headed Aven Warrior",
+	"Fox",
+	"Frost Titan",
+	"Griffin",
+	"Hellion",
+	"Horseman",
+	"Human",
+	"Human elite",
+	"Human guard",
+	"Ibis-headed Aven Warrior",
+	"Khenra Warrior",
+	"Leonin Warrior",
+	"Lion",
+	"Knight",
+	"Kor Warrior",
+	"Master White Wizard",
+	"Monk",
+	"Naga Warrior",
+	"Orthodoxy Duelist",
+	"Owl",
+	"Raven",
+	"Rhino",
+	"Runelord",
+	"Greater Sandwurm",
+	"Scorpion",
+	"Scarab",
+	"Sphinx",
+	"Stray Cat",
+	"Warrior",
+	"White Dwarf",
+	"White Sliver"
+],
+"pointsOfInterest": [
+	"White Castle",
+	"Plains Capital",
+	"Plains Town Generic",
+	"Plains Town Identity",
+	"Plains Town Tribal",
+	"Monastery",
+	"Monastery1",
+	"Monastery2",
+	"Monastery3",
+	"Monastery4",
+	"Castle",
+	"Castle1",
+	"Castle2",
+	"Fort7",
+	"Fort8",
+	"Fort9",
+	"CatLairW",
+	"CatLairW1",
+	"CatLairW2",
+	"NestW",
+	"CaveW",
+	"CaveW1",
+	"CaveW2",
+	"CaveW3",
+	"CaveW4",
+	"CaveW5",
+	"CaveW6",
+	"OrthodoxyBasilica",
+	"Nahiri Encampment",
+	"MageTower White"
+],
+"structures": [
+	{
+		"N": 2,
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/tilesets/structures.atlas",
+		"sourcePath": "world/models/plains_forest.png",
+		"maskPath": "world/masks/circle.png",
+		"height": 0.20000002,
+		"width": 0.20000002,
+		"symmetry": 8,
+		"mappingInfo": [
+			{
+				"name": "plains_forest",
+				"color": "9c4000",
+				"collision": true
+			}
+		]
+	},
+	{
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/tilesets/structures.atlas",
+		"sourcePath": "world/models/plateau.png",
+		"maskPath": "world/masks/ring.png",
+		"height": 0.5,
+		"width": 0.5,
+		"periodicOutput": false,
+		"mappingInfo": [
+			{
+				"name": "plateau",
+				"color": "caaa66",
+				"collision": true
+			}
+		]
+	}
+]
+}

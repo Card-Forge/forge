@@ -187,7 +187,7 @@ public class AdventureEventData implements Serializable {
 
         List<CardBlock> legalBlocks = new ArrayList<>();
         for (CardBlock b : src) { // for each block
-            boolean isOkay = !b.getSets().isEmpty();
+            boolean isOkay = !(b.getSets().isEmpty() && b.getCntBoostersDraft() > 0);
             for (CardEdition c : b.getSets()) {
                 if (!allEditions.contains(c)) {
                     isOkay = false;
@@ -322,7 +322,7 @@ public class AdventureEventData implements Serializable {
     public Map<Integer, List<AdventureEventMatch>> matches = new HashMap<>();
 
     public void giveRewards() {
-        int wins = getHumanPlayer().wins;
+        int wins = matchesWon;
         Array<Reward> ret = new Array<>();
 
         //Todo: this should be automatic... "somehow"
