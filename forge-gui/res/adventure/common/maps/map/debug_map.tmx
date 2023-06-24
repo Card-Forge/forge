@@ -14,8 +14,6 @@
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../tileset/buildings-nocollide.tsx"/>
- <tileset firstgid="13697" source="../tileset/buildings.tsx"/>
- <tileset firstgid="15489" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJxjYGBgkBCiL4aBUXtH7R21d3ja+0AUFdPC3mmcEDwS7IXZaciFaTe5WAMN47MXm5+Hq71TBtC/Axm/IH4aJwIjm6UggImR5cs4ERjEn8CO3150TE17QRhXPqKVvdgwOeUzIXuJwaP2kmY/OfpG7R21dzjaCwBbaKfR
@@ -41,7 +39,7 @@
  </layer>
  <objectgroup id="4" name="Objects">
   <object id="47" template="../obj/gold.tx" x="48" y="352"/>
-  <object id="50" template="../obj/enemy.tx" x="128" y="192" width="64" height="64">
+  <object id="50" template="../obj/enemy.tx" name="Emrakul" x="128" y="192" width="64" height="64">
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: -25,
@@ -92,7 +90,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="80" template="../obj/enemy.tx" x="112" y="304">
+  <object id="80" template="../obj/enemy.tx" name="Debug Elf" x="112" y="304">
    <properties>
     <property name="defeatDialog">[
   {
@@ -200,7 +198,7 @@
     <property name="name" value="Debug Elf"/>
    </properties>
   </object>
-  <object id="81" template="../obj/enemy.tx" x="64" y="224">
+  <object id="81" template="../obj/enemy.tx" name="Grog" x="64" y="224">
    <properties>
     <property name="dialog">[
   {
@@ -234,7 +232,7 @@
     <property name="enemy" value="Goblin"/>
    </properties>
   </object>
-  <object id="82" template="../obj/enemy.tx" gid="2147495067" x="48" y="224">
+  <object id="82" template="../obj/enemy.tx" name="Goblin" gid="2147495067" x="48" y="224">
    <properties>
     <property name="dialog">[
   {
@@ -249,7 +247,7 @@
    </properties>
   </object>
   <object id="83" template="../obj/gate.tx" type="dummy" gid="3651" x="80" y="336" width="16" height="16"/>
-  <object id="84" template="../obj/enemy.tx" x="336" y="304">
+  <object id="84" template="../obj/enemy.tx" name="Debug Demon" x="336" y="304">
    <properties>
     <property name="dialog">[
   {
@@ -331,7 +329,7 @@
 </property>
    </properties>
   </object>
-  <object id="87" template="../obj/enemy.tx" x="48" y="384">
+  <object id="87" template="../obj/enemy.tx" name="Geist" x="48" y="384">
    <properties>
     <property name="enemy" value="Geist"/>
     <property name="pursueRange" type="int" value="80"/>
@@ -340,23 +338,23 @@
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="88" template="../obj/enemy.tx" x="48" y="400">
+  <object id="88" template="../obj/enemy.tx" name="Geist" x="48" y="400">
    <properties>
     <property name="enemy" value="Geist"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="89" template="../obj/enemy.tx" x="48" y="416">
+  <object id="89" template="../obj/enemy.tx" name="Geist" x="48" y="416">
    <properties>
     <property name="enemy" value="Geist"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="93" template="../obj/enemy.tx" x="304" y="400">
+  <object id="93" template="../obj/enemy.tx" name="Drake" x="304" y="400">
    <properties>
-    <property name="enemy" value="Geist"/>
+    <property name="enemy" value="Drake"/>
     <property name="reward">[
  { &quot;cardName&quot;: &quot;Black Lotus&quot;, &quot;type&quot;:&quot;card&quot;, &quot;count&quot;:1 }
 ]</property>
@@ -376,7 +374,7 @@
    </properties>
   </object>
   <object id="91" template="../obj/treasure.tx" x="32" y="384"/>
-  <object id="94" template="../obj/enemy.tx" x="400" y="240">
+  <object id="94" template="../obj/enemy.tx" name="Merfolk Sodlier" x="400" y="240">
    <properties>
     <property name="dialog">[
   {
@@ -402,12 +400,12 @@
     <property name="enemy" value="Merfolk Soldier"/>
    </properties>
   </object>
-  <object id="95" template="../obj/enemy.tx" x="288" y="224">
+  <object id="95" template="../obj/enemy.tx" name="Doppelganger" x="288" y="224">
    <properties>
     <property name="enemy" value="Doppelganger"/>
    </properties>
   </object>
-  <object id="96" template="../obj/enemy.tx" x="304" y="224">
+  <object id="96" template="../obj/enemy.tx" name="Doppelganger" x="304" y="224">
    <properties>
     <property name="enemy" value="Doppelganger"/>
    </properties>
@@ -429,37 +427,37 @@
     <property name="teleportObjectId" value="98"/>
    </properties>
   </object>
-  <object id="101" template="../obj/enemy.tx" x="128" y="400">
+  <object id="101" template="../obj/enemy.tx" name="Plague Rat Swarm" x="128" y="400">
    <properties>
     <property name="enemy" value="Plague Rat Swarm"/>
    </properties>
   </object>
-  <object id="102" template="../obj/enemy.tx" x="224" y="304">
+  <object id="102" template="../obj/enemy.tx" name="Khenra Warrior" x="224" y="304">
    <properties>
     <property name="enemy" value="Khenra Warrior"/>
    </properties>
   </object>
-  <object id="103" template="../obj/enemy.tx" x="192" y="304">
+  <object id="103" template="../obj/enemy.tx" name="Falcon-headed Aven Warrior" x="192" y="304">
    <properties>
     <property name="enemy" value="Falcon-headed Aven Warrior"/>
    </properties>
   </object>
-  <object id="104" template="../obj/enemy.tx" x="208" y="304">
+  <object id="104" template="../obj/enemy.tx" name="Ibis-headed Aven Warrior" x="208" y="304">
    <properties>
     <property name="enemy" value="Ibis-headed Aven Warrior"/>
    </properties>
   </object>
-  <object id="105" template="../obj/enemy.tx" x="240" y="304">
+  <object id="105" template="../obj/enemy.tx" name="Amonkhet Minotaur Warrior" x="240" y="304">
    <properties>
     <property name="enemy" value="Amonkhet Minotaur Warrior"/>
    </properties>
   </object>
-  <object id="106" template="../obj/enemy.tx" x="256" y="304">
+  <object id="106" template="../obj/enemy.tx" name="Naga Warrior" x="256" y="304">
    <properties>
     <property name="enemy" value="Naga Warrior"/>
    </properties>
   </object>
-  <object id="107" template="../obj/enemy.tx" x="224" y="320">
+  <object id="107" template="../obj/enemy.tx" name="Warrior" x="224" y="320">
    <properties>
     <property name="enemy" value="Warrior"/>
    </properties>
