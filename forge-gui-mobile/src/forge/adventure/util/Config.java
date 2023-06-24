@@ -26,6 +26,7 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgeProfileProperties;
 import forge.model.FModel;
+import forge.util.Aggregates;
 import forge.util.FileUtil;
 
 import java.io.*;
@@ -69,8 +70,16 @@ public class Config {
             settingsData = new SettingData();
         }
         if (settingsData.plane == null || settingsData.plane.isEmpty()) {
-            if (adventures != null && adventures.length >= 1)
-                settingsData.plane = adventures[0];
+            if (adventures != null && adventures.length >= 1) {
+                //init Shandalar as default plane if found...
+                for (String plane : adventures) {
+                    if (plane.equalsIgnoreCase("Shandalar"))
+                        settingsData.plane = plane;
+                }
+                //if can't find shandalar, just get any random plane available
+                if (settingsData.plane == null || settingsData.plane.isEmpty())
+                    settingsData.plane = Aggregates.random(adventures);
+            }
         }
         plane = settingsData.plane;
 
