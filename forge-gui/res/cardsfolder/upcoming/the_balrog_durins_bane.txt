@@ -2,7 +2,7 @@ Name:The Balrog, Durin's Bane
 ManaCost:5 B R
 Types:Legendary Creature Avatar Demon
 PT:7/5
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | Relative$ True | EffectZone$ All | Description$ This spell costs {1} less to cast for each permanent sacrificed this turn.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each permanent sacrificed this turn.
 SVar:X:PlayerCount$SacrificedThisTurn Permanent
 K:Haste
 S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | ValidBlocker$ Creature.nonLegendary | Description$ CARDNAME can't be blocked except by legendary creatures.
