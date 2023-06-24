@@ -2653,9 +2653,9 @@
 	"count": 10,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MerfolkPool",
-	"map": "maps/map/oasis.tmx"
-	"radiusFactor": 0.8,
-}
+	"map": "maps/map/oasis.tmx",
+	"radiusFactor": 0.8
+},
 {
 	"name": "OrthodoxyBasilica",
 	"type": "dungeon",
