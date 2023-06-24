@@ -138,7 +138,7 @@
   <object id="196" template="../obj/collision.tx" x="-17.6579" y="-19.9362" width="16" height="382.083"/>
   <object id="197" template="../obj/door_up.tx" x="285.738" y="77.8274" width="16" height="21.3779">
    <properties>
-    <property name="teleport" value="maps/map/tibalt_f1.tmx"/>
+    <property name="teleport" value="../common/maps/map/tibalt_f1.tmx"/>
     <property name="teleportObjectId" value="114"/>
    </properties>
   </object>

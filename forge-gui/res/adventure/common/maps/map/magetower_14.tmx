@@ -42,7 +42,7 @@
   <object id="70" template="../obj/entry_up.tx" x="272.342" y="211.743" width="17.0844" height="22.8929" rotation="267.698">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="maps/map/magetower_8.tmx"/>
+    <property name="teleport" value="../common/maps/map/magetower_8.tmx"/>
    </properties>
   </object>
   <object id="71" template="../obj/treasure.tx" x="210.851" y="46.2797">

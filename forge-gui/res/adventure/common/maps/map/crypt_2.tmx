@@ -26,7 +26,7 @@
  <objectgroup id="4" name="Objects">
   <object id="38" template="../obj/entry_up.tx" x="208" y="260">
    <properties>
-    <property name="teleport" value="maps/map/graveyard_2.tmx"/>
+    <property name="teleport" value="../common/maps/map/graveyard_2.tmx"/>
    </properties>
   </object>
   <object id="47" template="../obj/gold.tx" x="363.5" y="66.5"/>

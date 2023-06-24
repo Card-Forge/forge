@@ -188,7 +188,7 @@
    <properties>
     <property name="direction" value="up"/>
     <property name="portalState" value="active"/>
-    <property name="teleport" value="maps/map/main_story/temple_of_liliana/keep.tmx"/>
+    <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/keep.tmx"/>
     <property name="teleportObjectId" value="226"/>
    </properties>
   </object>
@@ -388,7 +388,7 @@
   </object>
   <object id="240" template="../../../obj/entry_down.tx" x="71.75" y="16.5" width="103" height="16">
    <properties>
-    <property name="teleport" value="maps/map/main_story/temple_of_liliana/graveyard.tmx"/>
+    <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/graveyard.tmx"/>
     <property name="teleportObjectId" value="183"/>
    </properties>
   </object>

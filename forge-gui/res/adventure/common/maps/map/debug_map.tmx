@@ -417,7 +417,7 @@
    <properties>
     <property name="portalState" value="active"/>
     <property name="sprite" value="sprites/portal.atlas"/>
-    <property name="teleport" value="maps/map/debug_map.tmx"/>
+    <property name="teleport" value="../common/maps/map/debug_map.tmx"/>
     <property name="teleportObjectId" value="99"/>
    </properties>
   </object>
@@ -425,41 +425,41 @@
    <properties>
     <property name="portalState" value="active"/>
     <property name="sprite" value="sprites/portal.atlas"/>
-    <property name="teleport" value="maps/map/debug_map.tmx"/>
+    <property name="teleport" value="../common/maps/map/debug_map.tmx"/>
     <property name="teleportObjectId" value="98"/>
    </properties>
   </object>
-  <object id="101" template="../../../../../../../../Program Files/Forge/res/adventure/Amonkhet/maps/obj/enemy.tx" x="128" y="400">
+  <object id="101" template="../obj/enemy.tx" x="128" y="400">
    <properties>
     <property name="enemy" value="Plague Rat Swarm"/>
    </properties>
   </object>
-  <object id="102" template="../../../../../../../../Program Files/Forge/res/adventure/Amonkhet/maps/obj/enemy.tx" x="224" y="304">
+  <object id="102" template="../obj/enemy.tx" x="224" y="304">
    <properties>
     <property name="enemy" value="Khenra Warrior"/>
    </properties>
   </object>
-  <object id="103" template="../../../../../../../../Program Files/Forge/res/adventure/Amonkhet/maps/obj/enemy.tx" x="192" y="304">
+  <object id="103" template="../obj/enemy.tx" x="192" y="304">
    <properties>
     <property name="enemy" value="Falcon-headed Aven Warrior"/>
    </properties>
   </object>
-  <object id="104" template="../../../../../../../../Program Files/Forge/res/adventure/Amonkhet/maps/obj/enemy.tx" x="208" y="304">
+  <object id="104" template="../obj/enemy.tx" x="208" y="304">
    <properties>
     <property name="enemy" value="Ibis-headed Aven Warrior"/>
    </properties>
   </object>
-  <object id="105" template="../../../../../../../../Program Files/Forge/res/adventure/Amonkhet/maps/obj/enemy.tx" x="240" y="304">
+  <object id="105" template="../obj/enemy.tx" x="240" y="304">
    <properties>
     <property name="enemy" value="Amonkhet Minotaur Warrior"/>
    </properties>
   </object>
-  <object id="106" template="../../../../../../../../Program Files/Forge/res/adventure/Amonkhet/maps/obj/enemy.tx" x="256" y="304">
+  <object id="106" template="../obj/enemy.tx" x="256" y="304">
    <properties>
     <property name="enemy" value="Naga Warrior"/>
    </properties>
   </object>
-  <object id="107" template="../../../../../../../../Program Files/Forge/res/adventure/Amonkhet/maps/obj/enemy.tx" x="224" y="320">
+  <object id="107" template="../obj/enemy.tx" x="224" y="320">
    <properties>
     <property name="enemy" value="Warrior"/>
    </properties>

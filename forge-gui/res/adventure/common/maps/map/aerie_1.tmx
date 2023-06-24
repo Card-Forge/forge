@@ -41,7 +41,7 @@
   </object>
   <object id="83" template="../obj/door_up.tx" x="321.833" y="144.167">
    <properties>
-    <property name="teleport" value="maps/map/aerie_1B.tmx"/>
+    <property name="teleport" value="../common/maps/map/aerie_1B.tmx"/>
     <property name="teleportObjectId" value="87"/>
    </properties>
   </object>
