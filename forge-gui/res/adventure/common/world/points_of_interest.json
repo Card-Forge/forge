@@ -1115,10 +1115,9 @@
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "colorless_castle",
-	"map": "maps/map/minibosses/colorless_castle.tmx",
+	"map": "maps/map/minibosses/emrakul.tmx",
 	"radiusFactor": 0.4,
 	"questTags": [
-		"Story",
 		"Castle",
 		"BiomeColorless"
 	]
@@ -1370,7 +1369,6 @@
 	"map": "maps/map/minibosses/sliverqueen.tmx",
 	"offsetY": 0.025,
 	"questTags": [
-		"Story",
 		"Boss",
 		"RespawnEnemies",
 		"Castle",

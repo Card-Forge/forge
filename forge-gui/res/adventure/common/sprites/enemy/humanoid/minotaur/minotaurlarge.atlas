@@ -1,0 +1,89 @@
+minotaurlarge.png
+size: 1024,1920
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 426, 23
+  size: 20, 20     
+Idle 
+  xy: 26, 21
+  size: 54, 43   
+Idle 
+  xy: 122, 21
+  size: 54, 43   
+Idle 
+  xy: 218, 21
+  size: 54, 43   
+Idle 
+  xy: 314, 21
+  size: 54, 43   
+Idle 
+  xy: 410, 21
+  size: 54, 43
+Walk 
+  xy: 26, 115
+  size: 54, 43   
+Walk 
+  xy: 122, 115
+  size: 54, 43   
+Walk 
+  xy: 218, 115
+  size: 54, 43   
+Walk 
+  xy: 314, 115
+  size: 54, 43   
+Walk 
+  xy: 410, 115
+  size: 54, 43 
+Walk 
+  xy: 506, 115
+  size: 54, 43   
+Walk 
+  xy: 602, 115
+  size: 54, 43   
+Walk 
+  xy: 698, 115
+  size: 54, 43 
+Attack 
+  xy: 0, 262
+  size: 96, 96  
+Attack 
+  xy: 96, 262
+  size: 96, 96  
+Attack 
+  xy: 192, 262
+  size: 96, 96  
+Attack 
+  xy: 288, 262
+  size: 96, 96  
+Attack 
+  xy: 384, 262
+  size: 96, 96   
+Attack 
+  xy: 480, 262
+  size: 96, 96   
+Attack 
+  xy: 576, 262
+  size: 96, 96   
+Attack 
+  xy: 672, 262
+  size: 96, 96              
+Death 
+  xy: 0, 832
+  size: 96, 96  
+Death 
+  xy: 96, 832
+  size: 96, 96  
+Death 
+  xy: 192, 832
+  size: 96, 96  
+Death 
+  xy: 288, 832
+  size: 96, 96  
+Death 
+  xy: 384, 832
+  size: 96, 96  
+Death 
+  xy: 480, 832
+  size: 96, 96  
