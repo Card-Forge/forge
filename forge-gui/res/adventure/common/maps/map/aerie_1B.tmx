@@ -31,13 +31,13 @@
  <objectgroup id="4" name="Objects">
   <object id="87" template="../obj/door_down.tx" x="317.717" y="145.596" width="20.283" height="19.596">
    <properties>
-    <property name="teleport" value="maps/map/aerie_1.tmx"/>
+    <property name="teleport" value="../common/maps/map/aerie_1.tmx"/>
     <property name="teleportObjectId" value="83"/>
    </properties>
   </object>
   <object id="88" template="../obj/door_right.tx" x="206" y="146" width="20.5" height="20">
    <properties>
-    <property name="teleport" value="maps/map/aerie_1C.tmx"/>
+    <property name="teleport" value="../common/maps/map/aerie_1C.tmx"/>
     <property name="teleportObjectId" value="90"/>
    </properties>
   </object>

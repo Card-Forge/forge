@@ -38,7 +38,7 @@
   <object id="114" template="../obj/entry_up.tx" x="237.342" y="448.886" width="48" height="16">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="maps/map/tibalt.tmx"/>
+    <property name="teleport" value="../common/maps/map/tibalt.tmx"/>
    </properties>
   </object>
   <object id="115" template="../obj/gold.tx" x="587.213" y="138.537"/>
@@ -183,7 +183,7 @@
   <object id="198" template="../obj/door_up.tx" x="460.629" y="57.1811" width="32.7127" height="15.9998" rotation="359.74">
    <properties>
     <property name="direction" value="left"/>
-    <property name="teleport" value="maps/map/tibalt_f2.tmx"/>
+    <property name="teleport" value="../common/maps/map/tibalt_f2.tmx"/>
     <property name="teleportObjectId" value="114"/>
    </properties>
   </object>

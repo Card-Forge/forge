@@ -86,7 +86,7 @@
   <object id="170" template="../obj/door_down.tx" x="115.686" y="405.017" width="20.0022" height="20.8327" rotation="0.284412">
    <properties>
     <property name="direction" value="left"/>
-    <property name="teleport" value="maps/map/grolnok.tmx"/>
+    <property name="teleport" value="../common/maps/map/grolnok.tmx"/>
    </properties>
   </object>
   <object id="177" template="../obj/booster.tx" x="326.782" y="347.092">

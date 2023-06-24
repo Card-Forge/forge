@@ -114,7 +114,7 @@
   </object>
   <object id="65" template="../../obj/entry_down.tx" x="347.5" y="544.5" width="56.5" height="16">
    <properties>
-    <property name="teleport" value="maps/map/castles/green_castle_f1.tmx"/>
+    <property name="teleport" value="../common/maps/map/castles/green_castle_f1.tmx"/>
    </properties>
   </object>
   <object id="66" template="../../obj/enemy.tx" x="79.3333" y="603">
