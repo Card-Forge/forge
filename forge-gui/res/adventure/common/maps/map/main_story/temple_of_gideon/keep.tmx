@@ -157,7 +157,7 @@
    <properties>
     <property name="portalState" value="active"/>
     <property name="sprite" value="sprites/portal.atlas"/>
-    <property name="teleport" value="maps/map/main_story/temple_of_gideon/steppe.tmx"/>
+    <property name="teleport" value="../common/maps/map/main_story/temple_of_gideon/steppe.tmx"/>
     <property name="teleportObjectId" value="270"/>
    </properties>
   </object>
@@ -165,7 +165,7 @@
    <properties>
     <property name="portalState" value="closed"/>
     <property name="sprite" value="sprites/portal.atlas"/>
-    <property name="teleport" value="maps/map/main_story/temple_of_liliana/graveyard.tmx"/>
+    <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/graveyard.tmx"/>
     <property name="teleportObjectId" value="269"/>
    </properties>
   </object>
@@ -173,7 +173,7 @@
    <properties>
     <property name="portalState" value="closed"/>
     <property name="sprite" value="sprites/portal.atlas"/>
-    <property name="teleport" value="maps/map/main_story/temple_of_liliana/bog.tmx"/>
+    <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/bog.tmx"/>
     <property name="teleportObjectId" value="270"/>
    </properties>
   </object>
@@ -181,7 +181,7 @@
    <properties>
     <property name="portalState" value="closed"/>
     <property name="sprite" value="sprites/portal.atlas"/>
-    <property name="teleport" value="maps/map/main_story/temple_of_liliana/town.tmx"/>
+    <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/town.tmx"/>
     <property name="teleportObjectId" value="183"/>
    </properties>
   </object>
@@ -189,7 +189,7 @@
    <properties>
     <property name="portalState" value="inactive"/>
     <property name="sprite" value="sprites/portal.atlas"/>
-    <property name="teleport" value="maps/map/main_story/temple_of_liliana/town.tmx"/>
+    <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/town.tmx"/>
     <property name="teleportObjectId" value="279"/>
    </properties>
   </object>

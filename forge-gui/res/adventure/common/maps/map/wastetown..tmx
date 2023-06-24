@@ -85,14 +85,14 @@
   <object id="75" template="../obj/entry_right.tx" x="120.5" y="288.5">
    <properties>
     <property name="direction" value="right"/>
-    <property name="teleport" value="maps/map/nahiricave.tmx"/>
+    <property name="teleport" value="../common/maps/map/nahiricave.tmx"/>
     <property name="teleportObjectId" value="57"/>
    </properties>
   </object>
   <object id="76" template="../obj/entry_right.tx" x="472" y="61">
    <properties>
     <property name="direction" value="right"/>
-    <property name="teleport" value="maps/map/nahiricave.tmx"/>
+    <property name="teleport" value="../common/maps/map/nahiricave.tmx"/>
     <property name="teleportObjectId" value="58"/>
    </properties>
   </object>

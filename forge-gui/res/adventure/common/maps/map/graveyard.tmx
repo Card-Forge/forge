@@ -32,7 +32,7 @@
   <object id="38" template="../obj/entry_up.tx" x="208" y="272"/>
   <object id="49" template="../obj/entry_down.tx" x="207" y="50" width="19" height="20">
    <properties>
-    <property name="teleport" value="maps/map/crypt.tmx"/>
+    <property name="teleport" value="../common/maps/map/crypt.tmx"/>
    </properties>
   </object>
   <object id="52" template="../obj/enemy.tx" x="215" y="80">

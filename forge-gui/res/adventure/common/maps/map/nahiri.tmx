@@ -94,7 +94,7 @@
   </object>
   <object id="79" template="../obj/door_down.tx" x="471" y="57.1667">
    <properties>
-    <property name="teleport" value="maps/map/nahiricave.tmx"/>
+    <property name="teleport" value="../common/maps/map/nahiricave.tmx"/>
     <property name="teleportObjectId" value="71"/>
    </properties>
   </object>
