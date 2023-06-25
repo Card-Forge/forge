@@ -71,33 +71,12 @@ public class Main extends AndroidApplication {
             androidClipboard = new AndroidClipboard();
         return androidClipboard;
     }
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        String action = intent.getAction();
-        String type = intent.getType();
-
-        if (Intent.ACTION_SEND.equals(action) && type != null) {
-            if ("text/plain".equals(type)) {
-                getAndroidClipboard().setContents(intent.getStringExtra(Intent.EXTRA_TEXT));
-            }
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gamepads = getGameControllers();
 
-        Intent intent = getIntent();
-        String action = intent.getAction();
-        String type = intent.getType();
-
-        if (Intent.ACTION_SEND.equals(action) && type != null) {
-            if ("text/plain".equals(type)) {
-                getAndroidClipboard().setContents(intent.getStringExtra(Intent.EXTRA_TEXT));
-            }
-        }
         if (hasLaunched)
             return;
         hasLaunched = true;
