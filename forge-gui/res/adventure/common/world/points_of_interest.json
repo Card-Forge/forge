@@ -3119,7 +3119,7 @@
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "LavaForge",
-	"map": "maps/map/tibalt.tmx",
+	"map": "maps/map/tibalt/tibalt.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",

@@ -11,67 +11,67 @@ Idle
   size: 24, 16
 Idle 
   xy: 32, 4
-  size: 24, 16
+  size: 26, 16
 Idle 
   xy: 64, 4
-  size: 24, 16
+  size: 26, 16
 Idle 
   xy: 96, 4
-  size: 24, 16
+  size: 26, 16
 Idle 
   xy: 128, 4
-  size: 24, 16
+  size: 26, 16
 Idle 
   xy: 160, 4
-  size: 24, 16
+  size: 26, 16
 Idle 
   xy: 192, 4
-  size: 24, 16
+  size: 26, 16
 Idle 
   xy: 224, 4
-  size: 24, 16
+  size: 26, 16
 Idle 
   xy: 256, 4
-  size: 24, 16
+  size: 26, 16
 Idle 
   xy: 288, 4
-  size: 24, 16
+  size: 26, 16
 Idle 
   xy: 320, 4
-  size: 24, 16
+  size: 26, 16
 Idle 
   xy: 352, 4
-  size: 24, 16
+  size: 26, 16
 Idle 
   xy: 384, 4
-  size: 24, 16
+  size: 26, 16
 Idle 
   xy: 416, 4
-  size: 24, 16
+  size: 26, 16
 Idle 
   xy: 448, 4
-  size: 24, 16
+  size: 26, 16
 Idle 
   xy: 480, 4
-  size: 24, 16
+  size: 26, 16
 Walk
   xy: 0, 29
-  size: 24, 16
+  size: 26, 16
 Walk
   xy: 32, 29
-  size: 24, 16
+  size: 26, 16
 Walk
   xy: 64, 29
-  size: 24, 16
+  size: 26, 16
 Walk
   xy: 96, 29
-  size: 24, 16
+  size: 26, 16
 Walk
   xy: 128, 29
-  size: 24, 16
+  size: 26, 16
 Walk
   xy: 160, 29
-  size: 24, 16
+  size: 26, 16
 Attack
   xy: 3, 56
   size: 26, 17
@@ -86,9 +86,6 @@ Attack
   size: 26, 17
 Attack
   xy: 131, 56
-  size: 26, 17
-Attack
-  xy: 163, 56
   size: 26, 17
 Death
   xy: 0, 83

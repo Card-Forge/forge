@@ -85,23 +85,23 @@ Walk
   xy: 395,0
   size: 16, 16   
 Attack 
-  xy: 4,33
-  size: 24, 18          
+  xy: 2,33
+  size: 26, 18          
 Attack 
-  xy: 36,33
-  size: 24, 18    
+  xy: 34,33
+  size: 26, 18    
 Attack 
-  xy: 68,33
-  size: 24, 18    
+  xy: 66,33
+  size: 26, 18    
 Attack 
-  xy: 100,33
-  size: 24, 18      
+  xy: 98,33
+  size: 26, 18      
 Attack 
-  xy: 132,33
-  size: 24, 18    
+  xy: 130,33
+  size: 26, 18    
 Attack 
-  xy: 164,33
-  size: 24, 18           
+  xy: 162,33
+  size: 26, 18           
 Death 
   xy: 2, 62
   size: 24, 18      

@@ -450,6 +450,12 @@
 			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "WU",
@@ -1221,6 +1227,12 @@
 			"probability": 1,
 			"count": 30,
 			"addMaxCount": 120
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "GW",
@@ -1272,6 +1284,12 @@
 				"Uncommon",
 				"Rare"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "UW",
@@ -1389,6 +1407,12 @@
 			"rarity": [
 				"Rare"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "GR",
@@ -1634,6 +1658,12 @@
 				"Uncommon",
 				"Rare"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "UW",
@@ -1838,6 +1868,12 @@
 				"Uncommon",
 				"Rare"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "R",
@@ -2655,6 +2691,12 @@
 			],
 			"colorType": "Colorless",
 			"cardText": "{R}"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "R",
@@ -2706,6 +2748,12 @@
 			"rarity": [
 				"Rare"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "GR",
@@ -3080,6 +3128,12 @@
 				"Rare"
 			],
 			"colorType": "MultiColor"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 15,
+			"addMaxCount": 15
 		}
 	],
 	"questTags": [
@@ -4485,6 +4539,12 @@
 			"itemNames": [
 				"Mantle of Ancient Lore"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 20,
+			"addMaxCount": 20
 		}
 	],
 	"colors": "UB",
@@ -4860,13 +4920,13 @@
 	"name": "Crocodile",
 	"sprite": "sprites/enemy/beast/crocodile_water.atlas",
 	"deck": [
-		"decks/standard/crodile.dck"
+		"decks/standard/crocodile.dck"
 	],
 	"ai": "",
-	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
+	"scale": 0.9,
 	"life": 19,
 	"rewards": [
 		{
@@ -4885,28 +4945,27 @@
 			"type": "card",
 			"probability": 0.5,
 			"count": 3,
-			"colors": [
-				"White",
-				"Blue"
+			"subTypes": [
+				"Crocodile"
 			],
-			"rarity": [
-				"Mythic Rare"
+			"cardTypes": [
+				"Creature"
 			]
 		}
 	],
 	"colors": "WU",
 	"questTags": [
-		"Sphinx",
-		"Dissenter",
-		"Mythical",
-		"Oracle",
-		"Giant",
-		"Monster",
-		"Flying",
-		"IdentityWhite",
-		"IdentityBlue",
-		"IdentityAzorius",
-		"BiomeWhite"
+		"Bog",
+		"Animal",
+		"Lizard",
+		"Beast",
+		"Aggressive",
+		"IdentityGolgari",
+		"Large",
+		"Sneaky",
+		"Crocodile",
+		null,
+		null
 	]
 },
 {
@@ -4956,6 +5015,12 @@
 			"probability": 1,
 			"count": 50,
 			"addMaxCount": 100
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "RBU",
@@ -5060,6 +5125,12 @@
 			"probability": 1,
 			"count": 1,
 			"cardName": "Enchantress's Presence"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "GB",
@@ -5506,6 +5577,105 @@
 	]
 },
 {
+	"name": "Demon of Tibalt",
+	"sprite": "sprites/enemy/fiend/cacodaemon.atlas",
+	"deck": [
+		"decks/standard/tibalt_demon.dck"
+	],
+	"ai": "",
+	"randomizeDeck": true,
+	"spawnRate": 1,
+	"scale":0.5,
+	"difficulty": 0.1,
+	"speed": 31,
+	"life": 30,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Black",
+				"Red",
+				"Blue"
+			],
+			"rarity": [
+				"Rare",
+				"Mythic Rare"
+			],
+			"subTypes": [
+				"Demon"
+			],
+			"cardTypes": [
+				"Creature"
+			]
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Demon",
+		"Humanoid",
+		"Unholy",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
+},
+{
 	"name": "Devil",
 	"sprite": "sprites/enemy/fiend/imp.atlas",
 	"deck": [
@@ -5516,6 +5686,61 @@
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 11,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "R",
+	"questTags": [
+		"Devil",
+		"Humanoid",
+		"Small",
+		"Thief",
+		"IdentityRed",
+		"BiomeRed"
+	]
+},
+{
+	"name": "Devil of Tibalt",
+	"sprite": "sprites/enemy/fiend/implarge.atlas",
+	"deck": [
+		"decks/standard/tibalt_devil.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 20,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -5802,6 +6027,12 @@
 				"Instant",
 				"Sorcery"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "WUR",
@@ -6680,6 +6911,12 @@
 				"Uncommon",
 				"Rare"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "W",
@@ -7930,6 +8167,12 @@
 			"cardTypes": [
 				"Land"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "R",
@@ -8142,6 +8385,12 @@
 			"cardTypes": [
 				"Land"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "G",
@@ -8932,6 +9181,17 @@
 			"probability": 1,
 			"count": 1,
 			"itemName": "Garruk's Mighty Axe"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 20,
+			"addMaxCount": 10
+		},
+		{
+			"type": "life",
+			"probability": 1,
+			"count": 1
 		}
 	],
 	"colors": "GB",
@@ -9099,6 +9359,12 @@
 				"Mythic Rare"
 			],
 			"colorType": "MonoColor"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
 		}
 	],
 	"colors": "BU",
@@ -9501,6 +9767,12 @@
 			"cardTypes": [
 				"Land"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
 		}
 	],
 	"colors": "B",
@@ -9773,6 +10045,17 @@
 			"probability": 1,
 			"count": 1,
 			"itemName": "Grolnok's Skin"
+		},
+		{
+			"type": "life",
+			"probability": 1,
+			"count": 1
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 50
 		}
 	],
 	"colors": "BGU",
@@ -9834,7 +10117,7 @@
 			"type": "gold",
 			"probability": 1,
 			"count": 200,
-			"addMaxCount": 500
+			"addMaxCount": 100
 		},
 		{
 			"type": "card",
@@ -9847,6 +10130,12 @@
 			"cardTypes": [
 				"Land"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 20,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "RG",
@@ -10211,6 +10500,12 @@
 			"cardTypes": [
 				"land"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 20
 		}
 	],
 	"colors": "R",
@@ -11727,6 +12022,90 @@
 	]
 },
 {
+	"name": "Horror of Tibalt",
+	"sprite": "sprites/enemy/fiend/akaname.atlas",
+	"deck": [
+		"decks/standard/tibalt_horror.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 17,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery",
+				"Land"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "BU",
+	"questTags": [
+		"Aberration",
+		"Inhuman",
+		"IdentityBlue",
+		"IdentityBlack",
+		"IdentityDimir",
+		"BiomeBlue",
+		"BiomeBlack"
+	]
+},
+{
 	"name": "Horse",
 	"sprite": "sprites/enemy/beast/horseblack.atlas",
 	"deck": [
@@ -11970,6 +12349,12 @@
 				"Uncommon",
 				"Rare"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 20
 		}
 	],
 	"colors": "UW",
@@ -12600,6 +12985,17 @@
 			"probability": 1,
 			"count": 1,
 			"itemName": "Jace's Signature Hoodie"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 30,
+			"addMaxCount": 30
+		},
+		{
+			"type": "life",
+			"probability": 1,
+			"count": 1
 		}
 	],
 	"colors": "UW",
@@ -12926,6 +13322,17 @@
 			"probability": 1,
 			"count": 1,
 			"itemName": "Kiora's Bident"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 20,
+			"addMaxCount": 30
+		},
+		{
+			"type": "life",
+			"probability": 1,
+			"count": 1
 		}
 	],
 	"colors": "UG",
@@ -15602,71 +16009,43 @@
 	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"scale": 0.5,
 	"speed": 25,
+	"scale": 0.5,
 	"life": 20,
 	"rewards": [
 		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
+			"addMaxCount": 4
 		},
 		{
 			"type": "gold",
 			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 4,
+			"colors": [
+				"Red"
+			],
+			"rarity": [
+				"Rare"
+			],
+			"colorType": "MonoColor"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
 		}
 	],
-	"colors": "BR",
+	"colors": "R",
 	"questTags": [
 		"Territorial",
 		"Tribal",
@@ -15966,6 +16345,17 @@
 			"probability": 1,
 			"count": 1,
 			"itemName": "Nahiri's Armory"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "life",
+			"probability": 1,
+			"count": 1
 		}
 	],
 	"colors": "RW",
@@ -16144,6 +16534,12 @@
 			"probability": 1,
 			"count": 200,
 			"addMaxCount": 100
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
 		}
 	],
 	"colors": "RG",
@@ -16302,8 +16698,8 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
-	"scale": 0.5,
-	"life": 30,
+	"scale": 1,
+	"life": 50,
 	"rewards": [
 		{
 			"type": "item",
@@ -16364,6 +16760,17 @@
 			"probability": 0.5,
 			"count": 1,
 			"cardName": "Cultivate"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 50
+		},
+		{
+			"type": "life",
+			"probability": 1,
+			"count": 1
 		}
 	],
 	"colors": "GB",
@@ -16786,6 +17193,12 @@
 				"Uncommon",
 				"Rare"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 5,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "R",
@@ -17112,40 +17525,20 @@
 	"name": "Raptor",
 	"sprite": "sprites/enemy/beast/dinosaur/dinosaur_raptor.atlas",
 	"deck": [
-		"decks/standard/raven.dck"
+		"decks/standard/dinosaur_rw_enrage.dck"
 	],
 	"ai": "",
-	"flying": true,
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
-	"speed": 20,
+	"speed": 25,
 	"scale": 0.9,
-	"life": 12,
+	"life": 20,
 	"rewards": [
 		{
-			"type": "card",
+			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
-			"colors": [
-				"Black",
-				"Blue"
-			],
-			"rarity": [
-				"common",
-				"uncommon",
-				"Rare"
-			],
-			"colorType": "MonoColor",
-			"cardText": "Raven"
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 1,
-			"rarity": [
-				"Rare"
-			]
+			"addMaxCount": 4
 		},
 		{
 			"type": "gold",
@@ -17157,28 +17550,37 @@
 			"type": "card",
 			"probability": 1,
 			"count": 1,
+			"addMaxCount": 5,
+			"colors": [
+				"White",
+				"Red"
+			],
 			"rarity": [
-				"uncommon",
-				"common"
+				"Common",
+				"Rare",
+				"Uncommon"
+			],
+			"subTypes": [
+				"Dinosaur"
 			],
 			"cardTypes": [
-				"Land"
+				"Creature"
 			]
 		}
 	],
-	"colors": "BU",
+	"colors": "RW",
 	"questTags": [
-		"Bird",
-		"Flying",
 		"Animal",
 		"Wild",
-		"Domesticated",
 		"Scavenger",
-		"IdentityBlack",
-		"IdentityBlue",
-		"IdentityDimir",
-		"BiomeColorless",
-		"BiomeWhite"
+		"BiomeRed",
+		"Lizard",
+		"Dinosaur",
+		"Beast",
+		null,
+		null,
+		null,
+		null
 	]
 },
 {
@@ -17471,7 +17873,8 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"uncommon"
+				"uncommon",
+				"Rare"
 			]
 		},
 		{
@@ -17589,6 +17992,12 @@
 			"probability": 1,
 			"count": 50,
 			"addMaxCount": 100
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 5,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "B",
@@ -17954,6 +18363,12 @@
 			"probability": 1,
 			"count": 1,
 			"itemName": "Giant Scythe"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 20,
+			"addMaxCount": 30
 		}
 	],
 	"colors": "WUBRG",
@@ -18154,6 +18569,12 @@
 			"probability": 1,
 			"count": 200,
 			"addMaxCount": 100
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 5,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "B",
@@ -18386,6 +18807,12 @@
 			"probability": 1,
 			"count": 50,
 			"addMaxCount": 100
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "B",
@@ -18618,6 +19045,17 @@
 			"probability": 1,
 			"count": 1,
 			"itemName": "Slimefoot's Slimy Staff"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 50
+		},
+		{
+			"type": "life",
+			"probability": 1,
+			"count": 1
 		}
 	],
 	"colors": "BG",
@@ -19013,6 +19451,17 @@
 			"probability": 1,
 			"count": 1,
 			"itemName": "Slobad's Iron Boots"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 50
+		},
+		{
+			"type": "life",
+			"probability": 1,
+			"count": 1
 		}
 	],
 	"colors": "R",
@@ -19059,6 +19508,12 @@
 			"type": "life",
 			"probability": 1,
 			"count": 1
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 50
 		}
 	],
 	"equipment": [
@@ -19301,14 +19756,13 @@
 	"name": "Stegosaurus",
 	"sprite": "sprites/enemy/beast/dinosaur/dinosaur_stegosaurus.atlas",
 	"deck": [
-		"decks/standard/dinosaur_gw_ramp.dck"
+		"decks/standard/dinosaur_gruul_etali.dck"
 	],
 	"ai": "",
-	"flying": true,
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 20,
-	"scale": 0.9,
+	"scale": 0.8,
 	"life": 12,
 	"rewards": [
 		{
@@ -19317,16 +19771,20 @@
 			"count": 2,
 			"addMaxCount": 4,
 			"colors": [
-				"Black",
-				"Blue"
+				"Red,Green"
 			],
 			"rarity": [
 				"common",
 				"uncommon",
 				"Rare"
 			],
-			"colorType": "MonoColor",
-			"cardText": "Raven"
+			"subTypes": [
+				"Dinosaur"
+			],
+			"cardTypes": [
+				"Creature"
+			],
+			"colorType": "MonoColor"
 		},
 		{
 			"type": "card",
@@ -19337,15 +19795,10 @@
 			]
 		},
 		{
-			"type": "gold",
-			"probability": 1,
-			"count": 50,
-			"addMaxCount": 100
-		},
-		{
 			"type": "card",
 			"probability": 1,
 			"count": 1,
+			"addMaxCount": 5,
 			"rarity": [
 				"uncommon",
 				"common"
@@ -19353,21 +19806,27 @@
 			"cardTypes": [
 				"Land"
 			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 20,
+			"addMaxCount": 50
 		}
 	],
-	"colors": "BU",
+	"colors": "RG",
 	"questTags": [
-		"Bird",
-		"Flying",
-		"Animal",
+		"Dinosaur",
+		"Aggressive",
 		"Wild",
-		"Domesticated",
-		"Scavenger",
-		"IdentityBlack",
-		"IdentityBlue",
-		"IdentityDimir",
-		"BiomeColorless",
-		"BiomeWhite"
+		"Beast",
+		"BiomeGreen",
+		"IdentityGruul",
+		null,
+		null,
+		null,
+		null,
+		null
 	]
 },
 {
@@ -19411,6 +19870,12 @@
 			"rarity": [
 				"Rare"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "U",
@@ -19538,6 +20003,12 @@
 			"cardTypes": [
 				"Land"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 30,
+			"addMaxCount": 20
 		}
 	],
 	"colors": "W",
@@ -19883,6 +20354,17 @@
 			"probability": 1,
 			"count": 1,
 			"itemName": "Teferi's Staff"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 50
+		},
+		{
+			"type": "life",
+			"probability": 1,
+			"count": 1
 		}
 	],
 	"colors": "WU",
@@ -20004,6 +20486,12 @@
 			"probability": 1,
 			"count": 1,
 			"itemName": "The Underworld Cookbook"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 30
 		}
 	],
 	"colors": "GBR",
@@ -20095,7 +20583,22 @@
 			"type": "item",
 			"probability": 1,
 			"count": 1,
-			"itemName": "Tibalt's Bag of Tricks"
+			"addMaxCount": 100,
+			"itemName": "Tibalt's Bag of Tricks",
+			"itemNames": [
+				"Tibalt's Bag of Tricks"
+			]
+		},
+		{
+			"type": "life",
+			"probability": 1,
+			"count": 1
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 50
 		}
 	],
 	"colors": "R",
@@ -20180,7 +20683,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 20,
-	"scale": 0.5,
+	"scale": 0.7,
 	"life": 30,
 	"rewards": [
 		{
@@ -20214,6 +20717,12 @@
 			"cardTypes": [
 				"Land"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 20,
+			"addMaxCount": 20
 		}
 	],
 	"colors": "B",
@@ -20436,12 +20945,11 @@
 		"decks/standard/dinosaur_gw_ramp.dck"
 	],
 	"ai": "",
-	"flying": true,
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 20,
-	"scale": 0.9,
-	"life": 12,
+	"scale": 0.8,
+	"life": 20,
 	"rewards": [
 		{
 			"type": "card",
@@ -20449,16 +20957,21 @@
 			"count": 2,
 			"addMaxCount": 4,
 			"colors": [
-				"Black",
-				"Blue"
+				"White",
+				"Green"
 			],
 			"rarity": [
 				"common",
 				"uncommon",
 				"Rare"
 			],
-			"colorType": "MonoColor",
-			"cardText": "Raven"
+			"subTypes": [
+				"Dinosaur"
+			],
+			"cardTypes": [
+				"Creature"
+			],
+			"colorType": "MonoColor"
 		},
 		{
 			"type": "card",
@@ -20487,19 +21000,19 @@
 			]
 		}
 	],
-	"colors": "BU",
+	"colors": "GW",
 	"questTags": [
-		"Bird",
-		"Flying",
+		"BiomeWhite",
 		"Animal",
+		"Beast",
+		"Dinosaur",
 		"Wild",
-		"Domesticated",
-		"Scavenger",
-		"IdentityBlack",
-		"IdentityBlue",
-		"IdentityDimir",
-		"BiomeColorless",
-		"BiomeWhite"
+		"Aggressive",
+		"IdentitySelesnya",
+		null,
+		null,
+		null,
+		null
 	]
 },
 {
@@ -20975,6 +21488,12 @@
 			"cardTypes": [
 				"Land"
 			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "U",
@@ -21517,6 +22036,12 @@
 			"type": "randomCard",
 			"count": 2,
 			"addMaxCount": 5
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 15,
+			"addMaxCount": 10
 		}
 	],
 	"colors": "G",
@@ -21858,7 +22383,7 @@
 		{
 			"type": "gold",
 			"probability": 1,
-			"count": 100,
+			"count": 1000,
 			"addMaxCount": 5000
 		},
 		{
@@ -21908,6 +22433,17 @@
 			"probability": 1,
 			"count": 1,
 			"itemName": "Xira's Fancy Hat"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 50
+		},
+		{
+			"type": "life",
+			"probability": 1,
+			"count": 1
 		}
 	],
 	"colors": "BGR",
@@ -22066,6 +22602,17 @@
 			"probability": 1,
 			"count": 1,
 			"itemName": "Zedruu's Lantern"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "life",
+			"probability": 1,
+			"count": 1
 		}
 	],
 	"colors": "WUBR",
