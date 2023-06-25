@@ -2,10 +2,9 @@ Name:Call for Aid
 ManaCost:4 R
 Types:Socery
 A:SP$ GainControl | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | AllValid$ Creature.TargetedPlayerCtrl | AddKWs$ Haste | Untap$ True | NewController$ You | LoseControl$ EOT | RememberControlled$ True | SubAbility$ DBEffect | SpellDescription$ Gain control of all creatures target opponent controls until end of turn. Untap those creatures.They gain haste until end of turn. You can't attack that player this turn. You can't sacrifice those creatures this turn.
-SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedController,Remembered | StaticAbilities$ Static | SubAbility$ DBCleanup
-SVar:Static:Mode$ Continuous | Affected$ Creature.IsRemembered | AddStaticAbility$ CantSac & CantAttack | Description$ Those creatures can't attack that player this turn. You can't sacrifice those creatures this turn.
-SVar:CantSac:Mode$ CantSacrifice | ValidCard$ Card.Self | Description$ This creature cannot be sacrificed.
-SVar:CantAttack:Mode$ CantAttack | ValidCard$ Card.Self | Target$ Player.IsRemembered | Description$ This creature can't attack that player this turn
+SVar:DBEffect:DB$ Effect | RememberObjects$ TargetedPlayer,RememberedCard | StaticAbilities$ CantSac,CantAttack | SubAbility$ DBCleanup | Description$ Those creatures can't attack that player this turn. You can't sacrifice those creatures this turn.
+SVar:CantSac:Mode$ CantSacrifice | ValidCard$ Card.IsRemembered | Description$ EFFECTSOURCE cannot be sacrificed.
+SVar:CantAttack:Mode$ CantAttack | ValidCard$ Card.IsRemembered+YouCtrl | Target$ Player.IsRemembered | Description$ This creature can't attack that player this turn
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 Oracle:Gain control of all creatures target opponent controls until end of turn. Untap those creatures.They gain haste until end of turn. You can't attack that player this turn. You can't sacrifice those creatures this turn.
