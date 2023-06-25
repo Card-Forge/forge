@@ -1,0 +1,10 @@
+Name:Call for Aid
+ManaCost:4 R
+Types:Socery
+A:SP$ GainControl | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | AllValid$ Creature.TargetedPlayerCtrl | RememberObjects$ RememberedController | AddKWs$ Haste | Untap$ True | NewController$ You | LoseControl$ EOT | RememberControlled$ True | SubAbility$ DBEffect | SpellDescription$ Gain control of all creatures target opponent controls until end of turn. Untap those creatures. They gain haste until end of turn. You can't attack that player this turn. You can’t sacrifice those creatures this turn.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Player.IsRemembered,Remembered | StaticAbilities$ Static | SubAbility$ DBCleanup
+S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddStaticAbility$ CantSac & CantAttack | Description$ Those creatures can't attack that player this turn. You can't sacrifice those creatures this turn.
+SVar:CantSac:Mode$ CantSacrifice | ValidCard$ Card.Self | Description$ This creature cannot be sacrificed.
+SVar:CantAttack:Mode$ CantAttack | ValidCard$ Card.Self | Target$ RememberedPlayer | Description$ This creature can't attack that player this turn
+AI:RemoveDeck:All
+Oracle:Gain control of all creatures target opponent controls until end of turn. Untap those creatures.They gain haste until end of turn. You can't attack that player this turn. You can't sacrifice those creatures this turn.

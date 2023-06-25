@@ -1,0 +1,9 @@
+Name:Champions of Minas Tirith
+ManaCost:5 W
+Types:Creature Human Soldier
+PT:4/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | CheckDefinedPlayer$ You.isMonarch | Execute$ TrigCantAttack | TriggerDescription$ At the beginning of combat on each opponent's turn, if you're the monarch, that opponent may pay {X}, where X is the number of cards in their hand. If they don't, they can't attack you this combat.
+
+Oracle:When Champions of Minas Tirith enters the battlefield, you become the monarch.\nAt the beginning of combat on each opponent's turn, if you're the monarch, that opponent may pay {X}, where X is the number of cards in their hand. If they don't, they can't attack you this combat.
