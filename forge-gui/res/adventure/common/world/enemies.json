@@ -6121,7 +6121,7 @@
 		"flying": true,
 		"spawnRate": 0.95,
 		"difficulty": 0.1,
-		"speed": 31,
+		"speed": 50,
 		"life": 19,
 		"rewards": [
 			{
