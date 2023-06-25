@@ -9,4 +9,4 @@ SVar:PlayMain1:TRUE
 SVar:X:Count$LifeYouGainedThisTurn
 DeckHas:Ability$Sacrifice|Token & Type$Treefolk
 DeckNeeds:Ability$LifeGain
-Oracle:Affinity for Food (This spell costs 1 less to cast for each Food you control.)\nTrample\nBanquet Guests enters the battlefield with twice X +1/+1 counters on it.\n{2}, Sacrifice a Food: Banquet Guests gains indestructible until end of turn.
+Oracle:Creatures you control have reach.\nSacrifice Assemble the Entmoot: Create three tapped X/X green Treefolk creature tokens, where X is the amount of life you gained this turn. Put a reach counter on each of them.
