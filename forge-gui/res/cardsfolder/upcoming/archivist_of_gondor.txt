@@ -6,6 +6,6 @@ T:Mode$ DamageDone | ValidSource$ Card.IsCommander+YouCtrl | ValidTarget$ Player
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You 
 At the beginning of the monarch's end step, that player draws a card.
 SVar:Monarch:PlayerCountPlayers$HasPropertyisMonarch
-T:Mode$ Phase | Phase$ End of Turn | CheckDefinedPlayer$ TriggeredPlayer.isMonarch | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of the monarch's end step, that player draws a card.
-SVar:TrigDraw:DB$ Draw
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player.IsMonarch | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of the monarch's end step, that player draws a card.
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredPlayer
 Oracle:When your commander deals combat damage to a player, if there is no monarch, you become the monarch.\nAt the beginning of the monarch's end step, that player draws a card.

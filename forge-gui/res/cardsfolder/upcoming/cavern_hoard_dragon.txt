@@ -6,7 +6,7 @@ K:Flying
 K:Trample
 K:Haste
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {X} less to cast, where X is the greatest number of artifacts an opponent controls.
-SVar:X:PlayerCountOpponents$HighestValid Artifact.OppCtrl
+SVar:X:PlayerCountOpponents$HighestValid Artifact
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTreasure | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you create a Treasure token for each artifact that player controls.
 SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ Y
 SVar:Y:Count$Valid Artifact.ControlledBy TriggeredTarget

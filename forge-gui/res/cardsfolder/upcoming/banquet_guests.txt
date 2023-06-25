@@ -4,8 +4,9 @@ Types:Creature Halfling Citizen
 PT:0/0
 K:Affinity:Food
 K:Trample
-K:etbCounter:P1P1:X
-SVar:X:Count$xPaid/Twice
+K:etbCounter:P1P1:Y
+SVar:X:Count$xPaid
+SVar:Y:SVar$X/Twice
 A:AB$ Pump | Cost$ 2 Sac<1/Food> | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn.
 DeckHints:Type$Food
 DeckHas:Ability$Counters|Sacrifice

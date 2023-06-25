@@ -6,8 +6,9 @@ K:Vigilance
 K:Lifelink
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigNoBlock | TriggerDescription$ Whenever NICKNAME attacks, up to one target creature can't block this turn. If you’re the monarch, creatures can't block this turn.
-SVar:TrigNoBlock:DB$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | TargetMin$ 0 | TargetMax$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ AllNoBlock | TgtPrompt$ Select up to one target creature | StackDescription$ {c:Targeted} can't block this turn. 
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigBranch | TriggerDescription$ Whenever NICKNAME attacks, up to one target creature can't block this turn. If you’re the monarch, creatures can't block this turn.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | TrueSubAbility$ AllNoBlock | FalseSubAbility$ TgtNoBlock
+SVar:TgtNoBlock:DB$ Pump | ValidTgts$ Creature | Hidden$ True | KW$ HIDDEN CARDNAME can't block. | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | StackDescription$ {c:Targeted} can't block this turn. 
 SVar:AllNoBlock:DB$ Effect | StaticAbilities$ KWPump | AILogic$ Evasion
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature | AddHiddenKeyword$ CARDNAME can't block. | Description$ creatures can't block this turn.
 SVar:X:Count$Monarch.1.0
