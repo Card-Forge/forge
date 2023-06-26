@@ -1735,11 +1735,12 @@
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "EvilGrove",
-	"map": "maps/map/grolnok.tmx",
+	"map": "maps/map/grolnok/grolnok.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Boss",
-		"Hostile"
+		"Hostile",
+		"Grolnok"
 	]
 },
 {
@@ -2596,7 +2597,7 @@
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Castle",
-	"map": "maps/map/nahiri.tmx",
+	"map": "maps/map/nahiri/nahiri.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Boss",
@@ -2874,7 +2875,8 @@
 	"questTags": [
 		"Hostile",
 		"DungeonEffect",
-		"Boss"
+		"Boss",
+		"Slimefoot"
 	]
 },
 {
@@ -2883,12 +2885,13 @@
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
-	"map": "maps/map/slime_hive.tmx",
+	"map": "maps/map/minibosses/slime_hive.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Cave",
 		"Hostile",
-		"Sidequest"
+		"Sidequest",
+		"SlimeCave"
 	]
 },
 {
@@ -2916,7 +2919,8 @@
 	"questTags": [
 		"Boss",
 		"Factory",
-		"Hostile"
+		"Hostile",
+		"Slobad"
 	]
 },
 {
@@ -3092,10 +3096,10 @@
 	"name": "Temple of Liliana",
 	"type": "dungeon",
 	"count": 1,
-	"radiusFactor": 0.8,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "hall_of_fear",
 	"map": "maps/map/main_story/temple_of_liliana/keep.tmx",
+	"radiusFactor": 0.8,
 	"questTags": [
 		"Story",
 		"BiomeBlack",
@@ -3117,8 +3121,8 @@
 	"name": "Tibalts Fortress",
 	"type": "dungeon",
 	"count": 1,
-	"spriteAtlas": "maps/tileset/buildings.atlas",
-	"sprite": "LavaForge",
+	"spriteAtlas": "maps/tileset/buildingsbosses.atlas",
+	"sprite": "Tibalt",
 	"map": "maps/map/tibalt/tibalt.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -3254,14 +3258,15 @@
 	"name": "Xiras Hive",
 	"type": "dungeon",
 	"count": 1,
-	"spriteAtlas": "maps/tileset/buildings.atlas",
-	"sprite": "Cave",
+	"spriteAtlas": "maps/tileset/buildingsbosses.atlas",
+	"sprite": "Xira",
 	"map": "maps/map/minibosses/xira.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
 		"Boss",
-		"DungeonEffect"
+		"DungeonEffect",
+		"Xira"
 	]
 },
 {
@@ -3281,9 +3286,9 @@
 	"name": "Zedruu City",
 	"type": "cave",
 	"count": 2,
-	"spriteAtlas": "maps/tileset/buildings.atlas",
-	"sprite": "ruinedcity",
-	"map": "maps/map/zedruu.tmx",
+	"spriteAtlas": "maps/tileset/buildingsbosses.atlas",
+	"sprite": "Zedruu",
+	"map": "maps/map/zedruu/zedruu.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeRed",

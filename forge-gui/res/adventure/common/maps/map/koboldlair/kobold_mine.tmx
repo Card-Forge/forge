@@ -3,8 +3,8 @@
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="11" name="Tilelaag 4" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJzVlWEOQDAMhR2BCL/dyDGczwElstB4adqunSGavBiTfn2dzdY1zXZq6a/xF/ojfx3q8TFXqqVWPzAvRc5vmvNEym3NkTC0ftO7WOfbfN6nO3w+T2Pre6N6af1pHdJ1ag/hvNUvzMf52veFPeNCHyipZ/hc42MvuCQvVs+1+rg3ZHr5nJe71yJyVuTykObRxy7le719wY94L+FbbNybT/Clc+tuRPnoVcsXqbPUv7QfPHtQO0ci65/Tk/xISP84KThnB3wNZyA=
@@ -29,45 +29,45 @@
   </data>
  </layer>
  <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
-  <object id="114" template="../obj/entry_up.tx" x="300.842" y="317.718" width="48" height="16">
+  <object id="114" template="../../obj/entry_up.tx" x="300.842" y="317.718" width="48" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="115" template="../obj/gold.tx" x="315.713" y="81.5369"/>
-  <object id="117" template="../obj/enemy.tx" x="332.76" y="260.476">
+  <object id="115" template="../../obj/gold.tx" x="315.713" y="81.5369"/>
+  <object id="117" template="../../obj/enemy.tx" x="332.76" y="260.476">
    <properties>
     <property name="enemy" value="Kobold"/>
    </properties>
   </object>
-  <object id="118" template="../obj/enemy.tx" x="363.693" y="217.245">
+  <object id="118" template="../../obj/enemy.tx" x="363.693" y="217.245">
    <properties>
     <property name="enemy" value="Kobold"/>
     <property name="spawn.Easy" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="119" template="../obj/enemy.tx" x="316.531" y="196.107">
+  <object id="119" template="../../obj/enemy.tx" x="316.531" y="196.107">
    <properties>
     <property name="enemy" value="Kobold"/>
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="122" template="../obj/enemy.tx" x="173.042" y="195.771">
+  <object id="122" template="../../obj/enemy.tx" x="173.042" y="195.771">
    <properties>
     <property name="enemy" value="Kobold"/>
    </properties>
   </object>
-  <object id="136" template="../obj/enemy.tx" x="219.712" y="98.4812">
+  <object id="136" template="../../obj/enemy.tx" x="219.712" y="98.4812">
    <properties>
     <property name="enemy" value="Kobold"/>
    </properties>
   </object>
-  <object id="137" template="../obj/enemy.tx" x="139.263" y="98.7299">
+  <object id="137" template="../../obj/enemy.tx" x="139.263" y="98.7299">
    <properties>
     <property name="enemy" value="Kobold"/>
    </properties>
   </object>
-  <object id="141" template="../obj/treasure.tx" x="272.842" y="82.1053">
+  <object id="141" template="../../obj/treasure.tx" x="272.842" y="82.1053">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -83,7 +83,7 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="142" template="../obj/treasure.tx" x="100.176" y="78.4386">
+  <object id="142" template="../../obj/treasure.tx" x="100.176" y="78.4386">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -99,13 +99,13 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="150" template="../obj/enemy.tx" x="307.842" y="123.772">
+  <object id="150" template="../../obj/enemy.tx" x="307.842" y="123.772">
    <properties>
     <property name="enemy" value="Curselord"/>
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="159" template="../obj/booster.tx" x="335.359" y="82.7761">
+  <object id="159" template="../../obj/booster.tx" x="335.359" y="82.7761">
    <properties>
     <property name="reward">[
   {
@@ -130,6 +130,6 @@
 </property>
    </properties>
   </object>
-  <object id="160" template="../obj/manashards.tx" x="215.177" y="53.3151"/>
+  <object id="160" template="../../obj/manashards.tx" x="215.177" y="53.3151"/>
  </objectgroup>
 </map>
