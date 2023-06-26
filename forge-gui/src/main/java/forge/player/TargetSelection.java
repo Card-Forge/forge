@@ -103,16 +103,18 @@ public class TargetSelection {
             return true;
         }
 
-        List<GameEntity> candidates = tgt.getAllCandidates(this.ability, true);
-        final boolean hasEnoughCandidates = candidates.size() >= minTargets;
         final List<ZoneType> zones = tgt.getZone();
-        final boolean mandatory = isMandatory() && hasEnoughCandidates && !optional;
+        boolean mandatory = isMandatory() && !optional;
 
         if (zones.size() == 1 && zones.get(0) == ZoneType.Stack) {
             // If Zone is Stack, the choices are handled slightly differently.
             // Handle everything inside function due to interaction with StackInstance
             return chooseCardFromStack(mandatory);
         }
+
+        List<GameEntity> candidates = tgt.getAllCandidates(this.ability, true);
+        final boolean hasEnoughCandidates = candidates.size() >= minTargets;
+        mandatory &= hasEnoughCandidates;
 
         if (!hasEnoughCandidates && !hasEnoughTargets) {
             // Cancel ability if there aren't any valid Candidates

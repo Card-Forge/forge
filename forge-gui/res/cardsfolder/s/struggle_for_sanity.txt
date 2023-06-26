@@ -12,5 +12,5 @@ SVar:DBGoYard:DB$ ChangeZoneAll | ChangeType$ Card.IsNotImprinted+IsRemembered |
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Count$ValidHand Card.IsRemembered
 SVar:NeedsToPlayVar:Y GE1
-SVar:Y:PlayerCountPropertyOpponent$HasPropertyHasCardsInHand_Card_GE2
+SVar:Y:PlayerCountPropertyOpponents$HasPropertyHasCardsInHand_Card_GE2
 Oracle:Target opponent reveals their hand. That player exiles a card from it, then you exile a card from it. Repeat this process until all cards in that hand have been exiled. That player returns the cards they exiled this way to their hand and puts the rest into their graveyard.
