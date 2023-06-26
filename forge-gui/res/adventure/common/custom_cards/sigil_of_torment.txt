@@ -1,7 +1,7 @@
 Name:Sigil of Torment
 ManaCost:no cost
 Types:Artifact
-A:AB$ Destroy | Cost$ 3 B T PayShards<5> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBLifeGain | SpellDescription$ Destroy target creature. You gain 3 life. Exile Sigil of Torment.
+A:AB$ Destroy | Cost$ 3 B T PayShards<5> | ValidTgts$ Creature | TgtPrompt$ Select target creature | ActivationLimit$ 1 | SubAbility$ DBLifeGain | SpellDescription$ Destroy target creature. You gain 3 life. Exile Sigil of Torment.
 SVar:DBLifeGain:DB$ GainLife | Defined$ You | LifeAmount$ 3 | SubAbility$ Eject 
 SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
 Oracle:{M},{T}: Destroy target creature. You gain 3 life. Exile Sigil of Torment.
