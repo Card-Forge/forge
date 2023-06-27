@@ -93,6 +93,19 @@ public class AbilityUtils {
         String defined = incR[0];
         final Game game = hostCard.getGame();
 
+        // script wants to switch to previous trigger context
+        if (changedDef.startsWith("Spawner>") && sa instanceof SpellAbility) {
+            Trigger trig = ((SpellAbility) sa).getTrigger();
+            if (trig == null) {
+                return cards;
+            }
+            SpellAbility spawner = trig.getSpawningAbility();
+            if (spawner == null) {
+                return cards;
+            }
+            return getDefinedCards(hostCard, changedDef.substring(8), spawner);
+        }
+
         Card c = null;
         Player player = null;
         if (sa instanceof SpellAbility) {
@@ -495,6 +508,19 @@ public class AbilityUtils {
                 val = Math.max(val, 0);
             }
             return val * multiplier;
+        }
+
+        // script wants to switch to previous trigger context
+        if (svarval.startsWith("Spawner>") && ability instanceof SpellAbility) {
+            Trigger trig = ((SpellAbility) ability).getTrigger();
+            if (trig == null) {
+                return 0;
+            }
+            SpellAbility spawner = trig.getSpawningAbility();
+            if (spawner == null) {
+                return 0;
+            }
+            return calculateAmount(card, svarval.substring(8), spawner);
         }
 
         // Parse Object$Property string
@@ -995,8 +1021,20 @@ public class AbilityUtils {
         final String[] incR = changedDef.split("\\.", 2);
         String defined = incR[0];
 
-        final Game game = card == null ? null : card.getGame();
+        // script wants to switch to previous trigger context
+        if (changedDef.startsWith("Spawner>") && sa instanceof SpellAbility) {
+            Trigger trig = ((SpellAbility) sa).getTrigger();
+            if (trig == null) {
+                return players;
+            }
+            SpellAbility spawner = trig.getSpawningAbility();
+            if (spawner == null) {
+                return players;
+            }
+            return getDefinedPlayers(card, changedDef.substring(8), spawner);
+        }
 
+        final Game game = card == null ? null : card.getGame();
         final Player player = sa instanceof SpellAbility ? ((SpellAbility)sa).getActivatingPlayer() : card.getController();
 
         if (defined.equals("Self") || defined.equals("TargetedCard") || defined.equals("ThisTargetedCard")
