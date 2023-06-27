@@ -9,7 +9,7 @@
  <tileset firstgid="13697" source="../../tileset/main-nocollide.tsx"/>
  <layer id="17" name="Collision" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJzVllEOwjAIhhvffFl80Jt4Bt88hHfyoB7BkIWkEqDQFuxIyLqWsm//KFrKPHucSznddIcYi2M+bX0mt5UJ4717o7hf11/nYrixlz2Du77XuKWcmdww3i674zxltT4/kxuZwcGOwo2s9ZiLv2+6R9QJl4/Wt3ZGgUuzf3BbbDVuz/5PALf3t8Dbc4Erm9tq2t76/HHMo9zU3k95D+on5abzEjeuzeL2ak5jrdwz9AYHjT213IrH9Si94btzZ2e0F9Vs0nyLW9Mlmtv7nSi3lNPCTfNIV+kZYHW9tLQe4a57Cs2D/6Us3Fr/Xl1v2sfx2ssNmiI35e+pb08/Gq3vUuady2xu79oK3K29EUwebgubpnfvu49w91hL70jmSO6MOjki9xcb5dDl
+   eJzVllEOwjAIhhvffFlM1Jt4Bt88hHfyTJ7HIyzEkFQCFEqpGwlZtwJ++0s7Sxln92Mph6vuEGNxrKfNj+S2MmG8NzeL+3n5dS6GG3vZZ3DX9xq3VHMmN4yX09fxOWW1/v5MbmQGB9sLN7LWYy7+tuie0SdcPdrf2h4FLs3+wW2xrXF78j8J3N5vgffMBa7Z3FbTcuv9xzFHuam9HnIO6ifVps8lbpwbxe3VnMZauUfoDQ4ae3q5FY/zWXrDur/P/NwI05hb3Jou0n4fxe1dJ8ot1bRw0zrSVatT90tL6wh3fabQOvhfysKtnd9R7lZ/R/Wm5zhee7lBU+CuneO2muc8ivZ3Kfxa7oHbO7cF7lZuBpOH28Km6d377hHuHmvpncmcyT2jT/bIvQLd383n
   </data>
  </layer>
  <layer id="18" name="BackgroundSub" width="46" height="28">
@@ -104,15 +104,15 @@
   <object id="166" template="../../obj/enemy.tx" x="56.8421" y="320.605">
    <properties>
     <property name="enemy" value="Demon of Tibalt"/>
-    <property name="threatRange" type="int" value="60"/>
+    <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="191,190"/>
    </properties>
   </object>
   <object id="167" template="../../obj/enemy.tx" x="162.342" y="302.105">
    <properties>
     <property name="enemy" value="Demon of Tibalt"/>
-    <property name="threatRange" type="int" value="60"/>
-    <property name="waypoints" value="192,193,194,195"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="193,195"/>
    </properties>
   </object>
   <object id="168" template="../../obj/gold.tx" x="584.842" y="148.605"/>
@@ -179,11 +179,9 @@
   <object id="188" template="../../obj/waypoint.tx" x="405.675" y="356.105"/>
   <object id="189" template="../../obj/waypoint.tx" x="244.009" y="352.772"/>
   <object id="190" template="../../obj/waypoint.tx" x="35.3421" y="369.105"/>
-  <object id="191" template="../../obj/waypoint.tx" x="63.3421" y="289.439"/>
-  <object id="192" template="../../obj/waypoint.tx" x="138.675" y="258.105"/>
-  <object id="193" template="../../obj/waypoint.tx" x="200.009" y="289.439"/>
-  <object id="194" template="../../obj/waypoint.tx" x="202.009" y="355.105"/>
-  <object id="195" template="../../obj/waypoint.tx" x="130.009" y="360.105"/>
+  <object id="191" template="../../obj/waypoint.tx" x="90.6754" y="302.106"/>
+  <object id="193" template="../../obj/waypoint.tx" x="188.009" y="268.772"/>
+  <object id="195" template="../../obj/waypoint.tx" x="142.676" y="344.772"/>
   <object id="196" template="../../obj/waypoint.tx" x="344.342" y="253.772"/>
   <object id="197" template="../../obj/waypoint.tx" x="470.342" y="121.439"/>
   <object id="198" template="../../obj/door_up.tx" x="460.629" y="57.1811" width="32.7127" height="15.9998" rotation="359.74">

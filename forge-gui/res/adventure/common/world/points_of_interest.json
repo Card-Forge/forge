@@ -1611,8 +1611,8 @@
 	"name": "Garruk Forest",
 	"type": "dungeon",
 	"count": 1,
-	"spriteAtlas": "maps/tileset/buildings.atlas",
-	"sprite": "EvilGrove",
+	"spriteAtlas": "maps/tileset/buildingsbosses.atlas",
+	"sprite": "Garruk",
 	"map": "maps/map/garruk.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -1733,8 +1733,8 @@
 	"name": "Grolnoks Bog",
 	"type": "dungeon",
 	"count": 1,
-	"spriteAtlas": "maps/tileset/buildings.atlas",
-	"sprite": "EvilGrove",
+	"spriteAtlas": "maps/tileset/buildingsbosses.atlas",
+	"sprite": "Grolnok",
 	"map": "maps/map/grolnok/grolnok.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -1950,7 +1950,7 @@
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
-	"sprite": "Cave",
+	"sprite": "Jace",
 	"map": "maps/map/jacehold.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -1977,8 +1977,8 @@
 	"name": "Kiora Island",
 	"type": "dungeon",
 	"count": 1,
-	"spriteAtlas": "maps/tileset/buildings.atlas",
-	"sprite": "MerfolkPool",
+	"spriteAtlas": "maps/tileset/buildingsbosses.atlas",
+	"sprite": "Kiora",
 	"map": "maps/map/kiora_island.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2595,8 +2595,8 @@
 	"name": "Nahiri Encampment",
 	"type": "dungeon",
 	"count": 1,
-	"spriteAtlas": "maps/tileset/buildings.atlas",
-	"sprite": "Castle",
+	"spriteAtlas": "maps/tileset/buildingsbosses.atlas",
+	"sprite": "Nahiri",
 	"map": "maps/map/nahiri/nahiri.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2868,8 +2868,8 @@
 	"name": "Slimefoots Lair",
 	"type": "dungeon",
 	"count": 1,
-	"spriteAtlas": "maps/tileset/buildings.atlas",
-	"sprite": "EvilGrove",
+	"spriteAtlas": "maps/tileset/buildingsbosses.atlas",
+	"sprite": "Slimefoot",
 	"map": "maps/map/minibosses/slimefoot_boss.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -2883,14 +2883,13 @@
 	"name": "Slime Cave",
 	"type": "dungeon",
 	"count": 1,
-	"spriteAtlas": "maps/tileset/buildings.atlas",
-	"sprite": "Cave",
+	"spriteAtlas": "maps/tileset/buildingsbosses.atlas",
+	"sprite": "SlimeCave",
 	"map": "maps/map/minibosses/slime_hive.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Cave",
 		"Hostile",
-		"Sidequest",
 		"SlimeCave"
 	]
 },
@@ -2913,7 +2912,7 @@
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
-	"sprite": "Factory",
+	"sprite": "Slobad",
 	"map": "maps/map/minibosses/slobad_factory.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
@@ -3066,7 +3065,7 @@
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
-	"sprite": "MerfolkPool",
+	"sprite": "Jace",
 	"map": "maps/map/teferi.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [

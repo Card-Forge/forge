@@ -67,7 +67,7 @@
 </property>
    </properties>
   </object>
-  <object id="168" template="../../obj/gate.tx" gid="3221229597" x="283.85" y="353.055" width="15.9995" height="20.7576" rotation="90.4687" visible="1">
+  <object id="168" template="../../obj/gate.tx" gid="3221229597" x="287.943" y="363.397" width="14.0077" height="18.6486" rotation="90.4687" visible="1">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This door is locked&quot;,
@@ -137,7 +137,7 @@
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="183" template="../../obj/gate.tx" gid="3221229597" x="221.022" y="337.886" width="15.7579" height="22.3749" rotation="0">
+  <object id="183" template="../../obj/gate.tx" gid="3221229597" x="223.022" y="333.553" width="15.7579" height="22.3749" rotation="0">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This door is locked&quot;,

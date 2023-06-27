@@ -5,7 +5,10 @@
 	"deck": [
 		"decks/standard/blackwizard_medium_demonicpact.dck",
 		"decks/standard/blackwizard_medium_fear.dck",
-		"decks/standard/blackwizard_medium_goblins.dck"
+		"decks/standard/blackwizard_medium_goblins.dck",
+		"decks/standard/blackwizard_easy_artifact.dck",
+		"decks/standard/blackwizard_easy_badmoon.dck",
+		"decks/standard/blackwizard_easy_mill.dck"
 	],
 	"ai": "",
 	"randomizeDeck": true,
@@ -798,9 +801,10 @@
 	"name": "Apprentice Black Wizard",
 	"sprite": "sprites/enemy/humanoid/human/wizard/black_wizard.atlas",
 	"deck": [
-		"decks/standard/blackwizard_easy_artifact.dck",
-		"decks/standard/blackwizard_easy_badmoon.dck",
-		"decks/standard/blackwizard_easy_mill.dck",
+		"decks/standard/blackwizard_easy_bog.dck",
+		"decks/standard/blackwizard_easy_humans.dck",
+		"decks/standard/blackwizard_easy_pile.dck",
+		"decks/standard/blackwizard_easy_thrull.dck",
 		"decks/standard/blackwizard_easy.json"
 	],
 	"ai": "",
@@ -2937,6 +2941,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
+	"scale": 0.8,
 	"life": 18,
 	"rewards": [
 		{
@@ -4923,6 +4928,7 @@
 		"decks/standard/crocodile.dck"
 	],
 	"ai": "",
+	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
@@ -5583,53 +5589,22 @@
 		"decks/standard/tibalt_demon.dck"
 	],
 	"ai": "",
+	"flying": true,
 	"randomizeDeck": true,
 	"spawnRate": 1,
-	"scale":0.5,
 	"difficulty": 0.1,
 	"speed": 31,
+	"scale": 0.4,
 	"life": 30,
 	"rewards": [
 		{
 			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5,
 			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
+				"rare",
+				"Mythic Rare"
 			]
 		},
 		{
@@ -5740,13 +5715,19 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
+	"scale": 0.7,
 	"life": 20,
 	"rewards": [
 		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4
+			"addMaxCount": 4,
+			"rarity": [
+				"Uncommon",
+				"Rare",
+				"Mythic Rare"
+			]
 		},
 		{
 			"type": "card",
@@ -12031,60 +12012,19 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
+	"scale": 0.7,
 	"life": 17,
 	"rewards": [
 		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
+			"addMaxCount": 5,
 			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery",
-				"Land"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
+				"rare",
+				"Mythic Rare",
+				"Rare",
+				"Uncommon"
 			]
 		},
 		{
@@ -16698,7 +16638,6 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
-	"scale": 1,
 	"life": 50,
 	"rewards": [
 		{
