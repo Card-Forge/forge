@@ -1,0 +1,14 @@
+Name:Gilraen, Dunedain Protector
+ManaCost:2 W
+Types:Legendary Creature Human Noble
+PT:2/3
+A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Creature.Other+YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select another target creature you control | RememberTargets$ True | SubAbility$ DBReturn | SpellDescription$ Exile another target creature you control. You may return that card to the battlefield under its owner's control. If you don't, at the beginning of the next end step, return that card to the battlefield under its owner's control with a vigilance counter and a lifelink counter on it.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBReturn:DB$ ChangeZone | ConditionCheckSVar$ Y | ConditionSVarCompare$ LT1 | Defined$ Self | Origin$ Exile | Destination$ Battlefield | RememberLKI$ True | WithCountersType$ P1P1 | WithCountersAmount$ X | SubAbility$ DBDraw
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigGhostReturn | TriggerDescription$ Return exiled creatures to the battlefield. | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup
+SVar:TrigGhostReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Battlefield
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters|LifeGain
+Oracle:{2}, {T}:
+ Exile another target creature you control. You may return that card to the battlefield under its owner's control. If you don't, at the beginning of the next end step, return that card to the battlefield under its owner's control with a vigilance counter and a lifelink counter on it.
