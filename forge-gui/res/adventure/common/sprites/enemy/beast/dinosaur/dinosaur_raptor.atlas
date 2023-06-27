@@ -1,0 +1,147 @@
+dinosaur_raptor.png
+size: 640,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar 
+  xy: 385, 46
+  size: 36, 32
+Idle 
+  xy: 4, 2
+  size: 20, 17
+Idle 
+  xy: 36, 2
+  size: 20, 17
+Idle 
+  xy: 68, 2
+  size: 20, 17
+Idle 
+  xy: 100, 2
+  size: 20, 17
+Idle 
+  xy: 132, 2
+  size: 20, 17
+Idle 
+  xy: 164, 2
+  size: 20, 17
+Idle 
+  xy: 196, 2
+  size: 20, 17
+Idle 
+  xy: 228, 2
+  size: 20, 17
+Idle 
+  xy: 260, 2
+  size: 20, 17
+Idle 
+  xy: 292, 2
+  size: 20, 17
+Idle 
+  xy: 324, 2
+  size: 20, 17
+Idle 
+  xy: 356, 2
+  size: 20, 17
+Idle 
+  xy: 388, 2
+  size: 20, 17
+Idle 
+  xy: 420, 2
+  size: 20, 17
+Idle 
+  xy: 452, 2
+  size: 20, 17
+Idle 
+  xy: 484, 2
+  size: 20, 17
+Idle 
+  xy: 516, 2
+  size: 20, 17
+Idle 
+  xy: 548, 2
+  size: 20, 17
+Idle 
+  xy: 580, 2
+  size: 20, 17
+Idle 
+  xy: 612, 2
+  size: 20, 17
+Walk
+  xy: 4, 25
+  size: 20, 17
+Walk
+  xy: 36, 25
+  size: 20, 17
+Walk
+  xy: 68, 25
+  size: 20, 17
+Walk
+  xy: 100, 25
+  size: 20, 17
+Walk
+  xy: 132, 25
+  size: 20, 17
+Walk
+  xy: 164, 25
+  size: 20, 17
+Attack
+  xy: 0, 62
+  size: 26, 18
+Attack
+  xy: 28, 62
+  size: 26, 18
+Attack
+  xy: 62, 62
+  size: 26, 18
+Attack
+  xy: 94, 62
+  size: 26, 18
+Attack
+  xy: 126,62
+  size: 26,18
+Attack
+  xy: 158,62
+  size: 26,18
+Death
+  xy: 0, 100
+  size: 30, 28
+Death
+  xy: 32, 100
+  size: 30, 28
+Death
+  xy: 64, 100
+  size: 30, 28
+Death
+  xy:96, 100
+  size: 30, 28
+Death
+  xy: 128, 100
+  size: 30, 28
+Death
+  xy: 160, 100
+  size: 30, 28
+Death
+  xy: 192, 100
+  size: 30, 28
+Death
+  xy: 224, 100
+  size: 30, 28
+Death
+  xy: 256, 100
+  size: 30, 28
+Death
+  xy:288, 100
+  size: 30, 28
+Death
+  xy: 320, 100
+  size: 30, 28
+Death
+  xy: 352, 100
+  size: 30, 28
+Death
+  xy: 384, 100
+  size: 30, 28
+Death
+  xy: 416, 100
+  size: 30, 28
+  

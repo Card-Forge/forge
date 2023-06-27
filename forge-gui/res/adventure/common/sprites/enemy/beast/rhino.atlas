@@ -61,19 +61,19 @@ Walk
   xy: 164, 25
   size: 22, 16
 Attack
-  xy: 4, 47
+  xy: 4, 48
   size: 25, 16
 Attack
-  xy: 36, 47
+  xy: 36, 48
   size: 25, 16
 Attack
-  xy: 68, 47
+  xy: 68, 48
   size: 25, 16
 Attack
-  xy: 100, 47
+  xy: 100, 48
   size: 25, 16
 Attack
-  xy: 132, 47
+  xy: 132, 48
   size: 25, 16
 Death
   xy: 4, 70

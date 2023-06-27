@@ -183,11 +183,7 @@
     ]
    }
 ]</property>
-    <property name="effect">{
- &quot;lifeModifier&quot;: 15,
- &quot;startBattleWithCard&quot;: [ &quot;Kher Keep&quot;,&quot;Kobolds of Kher Keep&quot; ]
-}</property>
-    <property name="enemy" value="Kobold Dragoncaller"/>
+    <property name="enemy" value="Minotaur Warcaller"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>

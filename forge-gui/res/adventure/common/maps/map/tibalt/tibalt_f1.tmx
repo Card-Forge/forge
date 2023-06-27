@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="200">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="13697" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="17" name="Collision" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzVllEOwjAIhhvffFlM1Jt4Bt88hHfyTJ7HIyzEkFQCFEqpGwlZtwJ++0s7Sxln92Mph6vuEGNxrKfNj+S2MmG8NzeL+3n5dS6GG3vZZ3DX9xq3VHMmN4yX09fxOWW1/v5MbmQGB9sLN7LWYy7+tuie0SdcPdrf2h4FLs3+wW2xrXF78j8J3N5vgffMBa7Z3FbTcuv9xzFHuam9HnIO6ifVps8lbpwbxe3VnMZauUfoDQ4ae3q5FY/zWXrDur/P/NwI05hb3Jou0n4fxe1dJ8ot1bRw0zrSVatT90tL6wh3fabQOvhfysKtnd9R7lZ/R/Wm5zhee7lBU+CuneO2muc8ivZ3Kfxa7oHbO7cF7lZuBpOH28Km6d377hHuHmvpncmcyT2jT/bIvQLd383n
+  </data>
+ </layer>
+ <layer id="18" name="BackgroundSub" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzt1LEJACAMAMEM4YLuv4TYiVhpEYJ3EEj5TRIBeXrLLrgzu9eponL3aQfe7X/BjQEAwH8GQCYHUQ==
+  </data>
+ </layer>
+ <layer id="13" name="Background" width="46" height="28" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJzNmEFOwzAQRd0WFmwqpCaGZM8pqsACiXtEAlYcg1uAUrrjBpygSOw4AL0DNygduaNMJmM7sZzQkb5kO4798j1O3M7PlZpH0iRV6j4zKrO6PCXtu8TUQVDmQcdzRSxm0Ap4cqNdVpdVXpehz92Z0UvaZJTKNv7Y3Dw2i6agz9tBq1QeR+Ibkxs4y8QI69Dn49LIxu17liG4vxdm3OcLpR72ufKYmfJpHs49Rp4gN8Rsz3qSt/PkGLkxwGNe5rn+mtbvFtBWN+szYb/E4OYh7UsanHu97/+raknX/5Ob89i4OfuY3DZG1CcRcD0l9bWvSH7D9+9a16J5NxVUkD4/upmvs7TNjlyu9Qjhtq07jPdO5PMYVByenfIXrO7jpmvs494s2p64PHL1xWfmbEP4bRuvi8dd7h2KG3MbAstL3TzXSYKQ2pdsvGogbgzpfBTqOZ5ZQK5xfNwTi2eVY7+HcJdJmxu/mVthXSsPty3HXO+prtxlIrfF8DuE29beN09c4/Th3l3J99G5jiW/bX6jF8hN+WE++hw2LippHy21/Z10o8PzhHJznyQ2zt3Vv77RhVvy8Ji5+bmeap36c6DPuodwF7p57kPhPLfztrjfUKfXXb+xYgT+l0GFc0q8IAiJm/sxZEjcIBtzV+6ho6/XrjwZM/4Avty3ew==
+  </data>
+ </layer>
+ <layer id="15" name="Walls" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAoQIFEEgUfBKCAGtIjTRw+xoI4XlUYG/ySxiw8UIDYcsLl5MPljKAFapr2hCpS9KdNPSZgeksDPRweqaPJqEhBMb7BSFD9/sAJlCfx8dAAL39F8MwpGwSgYBcMfAADz4w4Z
+  </data>
+ </layer>
+ <layer id="16" name="Clutter" width="46" height="28">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBhAIDqQlo+CgQQOPAPtglGADCzFBtoFIxtoM0LwYAAf2SG0oBym3Fde+rplOID/ItjFrQdRnitUgWBOVQQGgaPCCAwCP6EYHbxjJ2wHNn2UApCbYW7DBk5ikZsFrHsW8EBoZL3IbOR0LsoGobHlB3IByN3YQIs4phjMXmR3/5FkYGBTw2/HDyxizMwkORMFzKFhe03ZG8EWZ6OdPfQGv+hsH6VpFDkeKAWE3HJIApUmJI4NkFtvUhJOK0VRaU0JVL4WlI+t7DmAFr5xZLoFX5mHCyhLoNLo4qQCeqftUTAK0MG8QT6G4MZJnNhQAKPupi8YDO4GAGsuKmg=
+  </data>
+ </layer>
+ <layer id="19" name="AboveSprites" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzt0dsJACAMA0B3cRyX1s1cQJCC4oO77xJCmhIAwPtaOd3gfzm48ew+msce/jBWF+2yKucHtgC4VwcNXAXm
+  </data>
+ </layer>
+ <objectgroup id="12" name="Objects" opacity="0.9" offsetx="2.65789" offsety="6.89474">
+  <object id="114" template="../../obj/entry_up.tx" x="238.009" y="408.886" width="48" height="31.3333">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="../common/maps/map/tibalt/tibalt.tmx"/>
+   </properties>
+  </object>
+  <object id="115" template="../../obj/gold.tx" x="587.213" y="138.537"/>
+  <object id="117" template="../../obj/enemy.tx" x="159.319" y="212.121">
+   <properties>
+    <property name="enemy" value="Imp of Tibalt"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="119" template="../../obj/enemy.tx" x="349.865" y="189.94">
+   <properties>
+    <property name="enemy" value="Torturer"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Torturer's Key&quot;
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="136" template="../../obj/enemy.tx" x="434.191" y="249.907">
+   <properties>
+    <property name="enemy" value="Horror of Tibalt"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="196,185,186,185"/>
+   </properties>
+  </object>
+  <object id="141" template="../../obj/treasure.tx" x="545.836" y="124.508">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;addMaxCount&quot;: 2
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="150" template="../../obj/enemy.tx" x="373.676" y="136.772">
+   <properties>
+    <property name="enemy" value="Necromancer"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="183,181,182,181"/>
+   </properties>
+  </object>
+  <object id="166" template="../../obj/enemy.tx" x="56.8421" y="320.605">
+   <properties>
+    <property name="enemy" value="Demon of Tibalt"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="191,190"/>
+   </properties>
+  </object>
+  <object id="167" template="../../obj/enemy.tx" x="162.342" y="302.105">
+   <properties>
+    <property name="enemy" value="Demon of Tibalt"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="193,195"/>
+   </properties>
+  </object>
+  <object id="168" template="../../obj/gold.tx" x="584.842" y="148.605"/>
+  <object id="169" template="../../obj/gold.tx" x="598.342" y="158.605"/>
+  <object id="170" template="../../obj/gold.tx" x="597.842" y="141.605"/>
+  <object id="171" template="../../obj/gold.tx" x="586.842" y="164.105"/>
+  <object id="172" template="../../obj/manashards.tx" x="317.675" y="40.7719"/>
+  <object id="173" template="../../obj/manashards.tx" x="412.342" y="216.105"/>
+  <object id="174" template="../../obj/manashards.tx" x="511.009" y="169.105"/>
+  <object id="178" template="../../obj/enemy.tx" x="339.342" y="334.439">
+   <properties>
+    <property name="enemy" value="Devil of Tibalt"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="188,189,187,189"/>
+   </properties>
+  </object>
+  <object id="179" template="../../obj/booster.tx" x="570.009" y="124.105">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="181" template="../../obj/waypoint.tx" x="423.009" y="57.1053"/>
+  <object id="182" template="../../obj/waypoint.tx" x="347.342" y="45.1053"/>
+  <object id="183" template="../../obj/waypoint.tx" x="421.008" y="138.105"/>
+  <object id="184" template="../../obj/gate.tx" x="577.342" y="285.439" width="11.6666" height="22">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This door is locked&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;go away&quot; },
+    {      
+        &quot;name&quot;:&quot;unlock with Torturer's key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Torturer's Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Torturer's Key&quot;}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="185" template="../../obj/waypoint.tx" x="486.342" y="253.772"/>
+  <object id="186" template="../../obj/waypoint.tx" x="486.675" y="307.772"/>
+  <object id="187" template="../../obj/waypoint.tx" x="242.009" y="253.105"/>
+  <object id="188" template="../../obj/waypoint.tx" x="405.675" y="356.105"/>
+  <object id="189" template="../../obj/waypoint.tx" x="244.009" y="352.772"/>
+  <object id="190" template="../../obj/waypoint.tx" x="35.3421" y="369.105"/>
+  <object id="191" template="../../obj/waypoint.tx" x="90.6754" y="302.106"/>
+  <object id="193" template="../../obj/waypoint.tx" x="188.009" y="268.772"/>
+  <object id="195" template="../../obj/waypoint.tx" x="142.676" y="344.772"/>
+  <object id="196" template="../../obj/waypoint.tx" x="344.342" y="253.772"/>
+  <object id="197" template="../../obj/waypoint.tx" x="470.342" y="121.439"/>
+  <object id="198" template="../../obj/door_up.tx" x="460.629" y="57.1811" width="32.7127" height="15.9998" rotation="359.74">
+   <properties>
+    <property name="direction" value="left"/>
+    <property name="teleport" value="../common/maps/map/tibalt/tibalt_f2.tmx"/>
+    <property name="teleportObjectId" value="114"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

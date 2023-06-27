@@ -3,8 +3,8 @@
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="15" name="Collision" width="31" height="22">
   <data encoding="base64" compression="zlib">
    eJxjYMAEbpwQDGMTAqs5EBjGHylgFdCvu3gQ/HhB+tgHwv5iCHEQfw0Nwx1k724e3PI7ibD/ORFpCQaQ050s0OynQD4jAwTjsh8UBjdEEWIcAsTZdR2Hu0B2gvwMsxOf/eiAWLtpAWhlNzF+x2U3KIxhmN4A2W5k++nhFnR7yQmDTaKE1RCyHxsbG9iIZtdRYfLspWVZRKz96OUNyM+vWejvDoJAaIDtpyGA2c89gOXhKBj6AACuZC0P
@@ -34,13 +34,14 @@
   </data>
  </layer>
  <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
-  <object id="115" template="../obj/gold.tx" x="460.713" y="311.037"/>
-  <object id="117" template="../obj/enemy.tx" x="336.76" y="199.976">
+  <object id="115" template="../../obj/gold.tx" x="460.713" y="311.037"/>
+  <object id="117" template="../../obj/enemy.tx" x="336.76" y="199.976">
    <properties>
-    <property name="enemy" value="Fire Giant"/>
+    <property name="enemy" value="Devil of Tibalt"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="118" template="../obj/enemy.tx" x="277.693" y="226.745">
+  <object id="118" template="../../obj/enemy.tx" x="277.693" y="226.745">
    <properties>
     <property name="enemy" value="Magma Fire Elemental"/>
     <property name="spawn.Easy" type="bool" value="false"/>
@@ -49,7 +50,7 @@
     <property name="waypoints" value="172,171"/>
    </properties>
   </object>
-  <object id="119" template="../obj/enemy.tx" x="157.031" y="119.107">
+  <object id="119" template="../../obj/enemy.tx" x="157.031" y="119.107">
    <properties>
     <property name="enemy" value="Phoenix"/>
     <property name="spawn.Hard" type="bool" value="true"/>
@@ -57,21 +58,21 @@
     <property name="waypoints" value="179,180,198,171,176,174,191"/>
    </properties>
   </object>
-  <object id="122" template="../obj/enemy.tx" x="101.042" y="176.271">
+  <object id="122" template="../../obj/enemy.tx" x="101.042" y="176.271">
    <properties>
-    <property name="enemy" value="Adept Red Wizard"/>
+    <property name="enemy" value="Devil of Tibalt"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value="183,184"/>
    </properties>
   </object>
-  <object id="137" template="../obj/enemy.tx" x="42.263" y="48.2299">
+  <object id="137" template="../../obj/enemy.tx" x="42.263" y="48.2299">
    <properties>
     <property name="enemy" value="Bandit"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value="181,192"/>
    </properties>
   </object>
-  <object id="150" template="../obj/enemy.tx" x="213.842" y="94.272">
+  <object id="150" template="../../obj/enemy.tx" x="213.842" y="94.272">
    <properties>
     <property name="enemy" value="Magma Fire Elemental"/>
     <property name="spawn.Hard" type="bool" value="true"/>
@@ -79,21 +80,21 @@
     <property name="waypoints" value="174,173"/>
    </properties>
   </object>
-  <object id="162" template="../obj/enemy.tx" x="382.842" y="294.105">
+  <object id="162" template="../../obj/enemy.tx" x="382.842" y="294.105">
    <properties>
     <property name="enemy" value="Bear"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value="163,165"/>
    </properties>
   </object>
-  <object id="163" template="../obj/waypoint.tx" x="427.842" y="297.105"/>
-  <object id="165" template="../obj/waypoint.tx" x="345.569" y="296.378"/>
-  <object id="167" template="../obj/entry_up.tx" x="221.342" y="350.605">
+  <object id="163" template="../../obj/waypoint.tx" x="427.842" y="297.105"/>
+  <object id="165" template="../../obj/waypoint.tx" x="345.569" y="296.378"/>
+  <object id="167" template="../../obj/entry_up.tx" x="221.342" y="350.605">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="169" template="../obj/enemy.tx" x="360.842" y="71.6053">
+  <object id="169" template="../../obj/enemy.tx" x="360.842" y="71.6053">
    <properties>
     <property name="enemy" value="Magma Fire Elemental"/>
     <property name="spawn.Hard" type="bool" value="true"/>
@@ -101,48 +102,49 @@
     <property name="waypoints" value="175,176,177,176"/>
    </properties>
   </object>
-  <object id="170" template="../obj/enemy.tx" x="236.842" y="199.605">
+  <object id="170" template="../../obj/enemy.tx" x="236.842" y="199.605">
    <properties>
     <property name="enemy" value="Fire Giant"/>
    </properties>
   </object>
-  <object id="171" template="../obj/waypoint.tx" x="271.342" y="264.105"/>
-  <object id="172" template="../obj/waypoint.tx" x="274.842" y="162.105"/>
-  <object id="173" template="../obj/waypoint.tx" x="244.342" y="135.605"/>
-  <object id="174" template="../obj/waypoint.tx" x="242.342" y="55.1053"/>
-  <object id="175" template="../obj/waypoint.tx" x="308.842" y="51.1053"/>
-  <object id="176" template="../obj/waypoint.tx" x="394.342" y="83.1053"/>
-  <object id="177" template="../obj/waypoint.tx" x="404.842" y="129.605"/>
-  <object id="178" template="../obj/enemy.tx" x="363.342" y="141.605">
+  <object id="171" template="../../obj/waypoint.tx" x="271.342" y="264.105"/>
+  <object id="172" template="../../obj/waypoint.tx" x="274.842" y="162.105"/>
+  <object id="173" template="../../obj/waypoint.tx" x="244.342" y="135.605"/>
+  <object id="174" template="../../obj/waypoint.tx" x="242.342" y="55.1053"/>
+  <object id="175" template="../../obj/waypoint.tx" x="308.842" y="51.1053"/>
+  <object id="176" template="../../obj/waypoint.tx" x="394.342" y="83.1053"/>
+  <object id="177" template="../../obj/waypoint.tx" x="404.842" y="129.605"/>
+  <object id="178" template="../../obj/enemy.tx" x="363.342" y="141.605">
    <properties>
-    <property name="enemy" value="Devil"/>
+    <property name="enemy" value="Devil of Tibalt"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="191,190,189"/>
    </properties>
   </object>
-  <object id="179" template="../obj/waypoint.tx" x="180.342" y="117.105"/>
-  <object id="180" template="../obj/waypoint.tx" x="199.842" y="162.105"/>
-  <object id="181" template="../obj/waypoint.tx" x="32.3421" y="14.1053"/>
-  <object id="183" template="../obj/waypoint.tx" x="105.842" y="139.605"/>
-  <object id="184" template="../obj/waypoint.tx" x="105.342" y="221.105"/>
-  <object id="185" template="../obj/manashards.tx" x="402.887" y="196.423"/>
-  <object id="186" template="../obj/manashards.tx" x="66.2966" y="27.7871"/>
-  <object id="188" template="../obj/manashards.tx" x="50.2966" y="261.878"/>
-  <object id="189" template="../obj/waypoint.tx" x="359.842" y="117.605"/>
-  <object id="190" template="../obj/waypoint.tx" x="379.342" y="183.605"/>
-  <object id="191" template="../obj/waypoint.tx" x="325.842" y="135.105"/>
-  <object id="192" template="../obj/waypoint.tx" x="20.3421" y="77.1053"/>
-  <object id="193" template="../obj/collision.tx" x="-14.9079" y="-24.3947" width="524.5" height="16"/>
-  <object id="194" template="../obj/collision.tx" x="-16.4079" y="346.105" width="527.5" height="16"/>
-  <object id="195" template="../obj/collision.tx" x="492.342" y="-22.9362" width="16" height="387.083"/>
-  <object id="196" template="../obj/collision.tx" x="-17.6579" y="-19.9362" width="16" height="382.083"/>
-  <object id="197" template="../obj/door_up.tx" x="285.738" y="77.8274" width="16" height="21.3779">
+  <object id="179" template="../../obj/waypoint.tx" x="180.342" y="117.105"/>
+  <object id="180" template="../../obj/waypoint.tx" x="199.842" y="162.105"/>
+  <object id="181" template="../../obj/waypoint.tx" x="32.3421" y="14.1053"/>
+  <object id="183" template="../../obj/waypoint.tx" x="105.842" y="139.605"/>
+  <object id="184" template="../../obj/waypoint.tx" x="105.342" y="221.105"/>
+  <object id="185" template="../../obj/manashards.tx" x="402.887" y="196.423"/>
+  <object id="186" template="../../obj/manashards.tx" x="66.2966" y="27.7871"/>
+  <object id="188" template="../../obj/manashards.tx" x="50.2966" y="261.878"/>
+  <object id="189" template="../../obj/waypoint.tx" x="359.842" y="117.605"/>
+  <object id="190" template="../../obj/waypoint.tx" x="379.342" y="183.605"/>
+  <object id="191" template="../../obj/waypoint.tx" x="325.842" y="135.105"/>
+  <object id="192" template="../../obj/waypoint.tx" x="20.3421" y="77.1053"/>
+  <object id="193" template="../../obj/collision.tx" x="-14.9079" y="-24.3947" width="524.5" height="16"/>
+  <object id="194" template="../../obj/collision.tx" x="-16.4079" y="346.105" width="527.5" height="16"/>
+  <object id="195" template="../../obj/collision.tx" x="492.342" y="-22.9362" width="16" height="387.083"/>
+  <object id="196" template="../../obj/collision.tx" x="-17.6579" y="-19.9362" width="16" height="382.083"/>
+  <object id="197" template="../../obj/door_up.tx" x="284.738" y="75.1607" width="19.6667" height="20.7112">
    <properties>
-    <property name="teleport" value="../common/maps/map/tibalt_f1.tmx"/>
+    <property name="direction" value="down"/>
+    <property name="teleport" value="../common/maps/map/tibalt/tibalt_f1.tmx"/>
     <property name="teleportObjectId" value="114"/>
    </properties>
   </object>
-  <object id="198" template="../obj/waypoint.tx" x="225.342" y="221.105"/>
-  <object id="199" template="../obj/waypoint.tx" x="202.342" y="251.605"/>
+  <object id="198" template="../../obj/waypoint.tx" x="225.342" y="221.105"/>
+  <object id="199" template="../../obj/waypoint.tx" x="202.342" y="251.605"/>
  </objectgroup>
 </map>

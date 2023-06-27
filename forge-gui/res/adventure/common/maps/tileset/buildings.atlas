@@ -532,8 +532,11 @@ EvilGrove
 EvilGrove 
   xy: 96, 274
   size: 32, 32
-VampireCastle 
+Slobad 
   xy: 416, 336
+  size: 32, 32
+Jace 
+  xy: 416, 432
   size: 32, 32
 VampireCastle 
   xy: 416, 464
