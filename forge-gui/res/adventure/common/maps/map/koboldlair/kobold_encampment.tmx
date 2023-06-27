@@ -3,10 +3,10 @@
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../tileset/FarmFood.tsx"/>
- <tileset firstgid="16001" source="../tileset/dungeon.tsx"/>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../tileset/dungeon.tsx"/>
  <layer id="33" name="Background" width="35" height="28">
   <data encoding="base64" compression="zlib">
    eJztk01uwjAQhc0mgWXCz5XKrtuyIXTTHoE9qtIztOUSvQHHYMcGIThAlrS15YzsWGPHzjhClXjSU/7f+zSOq4SxqsUvI2W4t58qv47tDhFkm9eufDDGY+MLZfHt1fswlq4zamPBGGxctln58phrdLB0talt7ULn8s2/XWUyY8mPRSavIWs2lcYU458Blmsm/VOzfOaMfeXNLME2ccyIuqeARcxEsPzW8wA2PQuef+TynaI+h1nGYAEOzCJjPVEsmLe5m8GXRXC4WOA5vPOcybXTHYvF1a37cabs09uFx2QBUfpis/TBsxj5rxMmSi9misT31P5YLMCjO7Q/Jl/MrodEep7gXX2zHHlvmTL2nqrM0w1ZTHVlofJs+DwuWveZn7+l9q5Qjt2w6aeBHw+FA2PBVHrkCx4Kh8nkEvDAXqHumbvu+i/6AzQIJW0=
