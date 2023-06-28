@@ -16,7 +16,9 @@
 
     <application
         android:allowBackup="true"
-        android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize|screenLayout"
+        android:isGame="true"
+        android:appCategory="game"
+        android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
@@ -24,8 +26,14 @@
         <activity
             android:name=".Main"
             android:label="@string/app_name"
-            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize|screenLayout"
+            android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode"
             android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Black.NoTitleBar"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".Launcher"
+            android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode"
             android:theme="@android:style/Theme.Black.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,7 +45,6 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-        <activity android:name=".Exiter" android:theme="@android:style/Theme.NoDisplay"/>
         <meta-data android:name="io.sentry.dsn" android:value="https://a0b8dbad9b8a49cfa51bf65d462e8dae:b3f27d7461224cb8836eb5c6050c666c@sentry.cardforge.org/2?buffer.enabled=false" />
 
         <!-- manually added -->

@@ -165,7 +165,7 @@
   <object id="102" template="../obj/waypoint.tx" x="197.57" y="89.588"/>
   <object id="104" template="../obj/entry_up.tx" x="320.565" y="158.304">
    <properties>
-    <property name="teleport" value="maps/map/magetower_14.tmx"/>
+    <property name="teleport" value="../common/maps/map/magetower_14.tmx"/>
    </properties>
   </object>
   <object id="105" template="../obj/manashards.tx" x="158.667" y="68.6667"/>

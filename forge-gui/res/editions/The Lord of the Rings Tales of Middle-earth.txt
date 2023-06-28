@@ -3,10 +3,13 @@ Code=LTR
 Date=2023-06-23
 Name=The Lord of the Rings: Tales of Middle-earth
 Type=Draft
+BoosterCovers=3
+Booster=10 Common:fromsheet("LTR cards"), 3 Uncommon:fromSheet("LTR cards"), 1 RareMythic:fromSheet("LTR cards"), 1 BasicLand:fromSheet("LTR cards")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=LTR
 
 [cards]
-0 M The One Ring @Veli Nyström
 1 C Banish from Edoras @Veli Nyström
 2 R The Battle of Bywater @Tomas Duchek
 3 U Bill the Pony @Christina Kraus
@@ -288,11 +291,28 @@ ScryfallCode=LTR
 279 L Mountain @Deven Rue
 280 L Forest @Deven Rue
 281 L Forest @Deven Rue
+332 U Nazgul @Wonchun Choi
+333 U Nazgul @Chris Cold
+334 U Nazgul @Nino Is
+335 U Nazgul @Yigit Koroglu
+336 U Nazgul @Igor Krstic
+337 U Nazgul @Miklós Ligeti
+338 U Nazgul @Antonio José Manzanedo
+339 U Nazgul @Lorenzo Mastroianni
+
+[jumpstart]
 282 R Saradoc, Master of Buckland @Sean Vo
 283 R Elvish Mariner @Axel Sauerwald
 284 R Ringwraiths @Warren Mahy
 285 R Assault on Osgiliath @Warren Mahy
 286 R Elanor Gardner @Torgeir Fjereide
+383 R Saradoc, Master of Buckland @Sean Vo
+384 R Elvish Mariner @Axel Sauerwald
+385 R Ringwraiths @Warren Mahy
+386 R Assault on Osgiliath @Warren Mahy
+387 R Elanor Gardner @Torgeir Fjereide
+
+[bundle]
 287 M Aragorn and Arwen, Wed @Magali Villeneuve
 288 M Sauron, the Lidless Eye @Yigit Koroglu
 289 R Frodo, Determined Hero @Magali Villeneuve
@@ -305,8 +325,9 @@ ScryfallCode=LTR
 296 R Galadriel, Gift-Giver @Alexander Mokhov
 297 R The Balrog, Flame of Udun @John Tedrick
 298 R Bilbo's Ring @Randy Gallegos
-299 M Gandalf the White @Leonardo Borazio
-300 M Saruman of Many Colors @Wonchun Choi
+
+[showcase]
+0 M The One Ring @Veli Nyström
 302 R Boromir, Warden of the Tower @Anato Finnstark
 303 U Faramir, Field Commander @Dominik Mayer
 304 R Frodo, Sauron's Bane @Andreas Rocha
@@ -337,73 +358,15 @@ ScryfallCode=LTR
 329 M Sauron, the Dark Lord @Dominik Mayer & Anato Finnstark
 330 R Smeagol, Helpful Guide @Andreas Rocha
 331 M Tom Bombadil @Marko Manev
-332 U Nazgul @Wonchun Choi
-333 U Nazgul @Chris Cold
-334 U Nazgul @Nino Is
-335 U Nazgul @Yigit Koroglu
-336 U Nazgul @Igor Krstic
-337 U Nazgul @Miklós Ligeti
-338 U Nazgul @Antonio José Manzanedo
-339 U Nazgul @Lorenzo Mastroianni
+649 U Denethor, Ruling Steward @Campbell White
+
+[borderless]
 340 R Barad-dur @Jonas De Ro
 341 R Minas Tirith @Sean Vo
 342 R Mines of Moria @Lucas Terryn
 343 M Mount Doom @Logan Feliciano
 344 R Rivendell @Josu Solano
 345 R The Shire @Calder Moore
-346 R The Battle of Bywater @Tomas Duchek
-347 M Dawn of a New Age @Anato Finnstark
-348 R Flowering of the White Tree @Erikas Perl
-349 R Forge Anew @Craig J Spearing
-350 R Borne Upon a Wind @Alexander Mokhov
-351 R Goldberry, River-Daughter @Marie Magny
-352 R Press the Enemy @Valera Lutfullina
-353 R Rangers of Ithilien @Torgeir Fjereide
-354 M The Watcher in the Water @Chris Cold
-355 R Call of the Ring @Anato Finnstark
-356 R Isildur's Fateful Strike @John Di Giovanni
-357 R Lobelia Sackville-Baggins @Hristo D. Chukov
-358 R Display of Power @Shahab Alizadeh
-359 R Fall of Cair Andros @Shahab Alizadeh
-360 R Gloin, Dwarf Emissary @Tomas Duchek
-361 M Hew the Entwood @Manuel Castañón
-362 R Moria Marauder @Andrea Piparo
-363 R Delighted Halfling @Inka Schulz
-364 R Elven Chorus @Anato Finnstark
-365 M Radagast the Brown @Alexander Mokhov
-366 R The Ring Goes South @Wangjie Li
-367 M Arwen, Mortal Queen @Miranda Meeks
-368 R Doors of Durin @Marc Simonetti
-369 R King of the Oathbreakers @Tatiana Veryayskaya
-370 R Lotho, Corrupt Shirriff @Ilker Yildiz
-371 R Sauron's Ransom @Alex Brock
-372 R Shagrat, Loot Bearer @Tatiana Veryayskaya
-373 R Sharkey, Tyrant of the Shire @Matt Stewart
-374 R Shelob, Child of Ungoliant @Lorenzo Mastroianni
-375 M Anduril, Flame of the West @Irvin Rodriguez
-376 M Glamdring @Andrea Piparo
-377 R Horn of Gondor @Yigit Koroglu
-378 R Horn of the Mark @Anastasia Balakchina
-379 R Mithril Coat @Igor Krstic
-380 M The One Ring @Veli Nyström
-381 M Palantir of Orthanc @Tatiana Veryayskaya
-382 R Phial of Galadriel @Andrea Piparo
-383 R Saradoc, Master of Buckland @Sean Vo
-384 R Elvish Mariner @Axel Sauerwald
-385 R Ringwraiths @Warren Mahy
-386 R Assault on Osgiliath @Warren Mahy
-387 R Elanor Gardner @Torgeir Fjereide
-388 R Frodo, Determined Hero @Magali Villeneuve
-389 R Gandalf, White Rider @Ekaterina Burmak
-390 R Gollum, Scheming Guide @Dmitry Burmak
-391 R Witch-king, Bringer of Ruin @Denman Rooke
-392 R Fires of Mount Doom @Shahab Alizadeh
-393 R Galadriel, Gift-Giver @Alexander Mokhov
-394 M Aragorn and Arwen, Wed @Magali Villeneuve
-395 R The Balrog, Flame of Udun @John Tedrick
-396 M Sauron, the Lidless Eye @Yigit Koroglu
-397 R Bilbo's Ring @Randy Gallegos
-398 R Trailblazer's Boots @Alexander Gering
 399 R Lobelia Sackville-Baggins @Livia Prima
 400 C Wizard's Rockets @Livia Prima
 401 U Gandalf, Friend of the Shire @Livia Prima
@@ -457,8 +420,56 @@ ScryfallCode=LTR
 449 U Samwise the Stouthearted @Marta Nael
 450 U Gollum, Patient Plotter @Marta Nael
 451 M The One Ring @Marta Nael
-649 U Denethor, Ruling Steward @Campbell White
 753 R Mines of Moria @Lucas Terryn
+
+[extended art]
+346 R The Battle of Bywater @Tomas Duchek
+347 M Dawn of a New Age @Anato Finnstark
+348 R Flowering of the White Tree @Erikas Perl
+349 R Forge Anew @Craig J Spearing
+350 R Borne Upon a Wind @Alexander Mokhov
+351 R Goldberry, River-Daughter @Marie Magny
+352 R Press the Enemy @Valera Lutfullina
+353 R Rangers of Ithilien @Torgeir Fjereide
+354 M The Watcher in the Water @Chris Cold
+355 R Call of the Ring @Anato Finnstark
+356 R Isildur's Fateful Strike @John Di Giovanni
+357 R Lobelia Sackville-Baggins @Hristo D. Chukov
+358 R Display of Power @Shahab Alizadeh
+359 R Fall of Cair Andros @Shahab Alizadeh
+360 R Gloin, Dwarf Emissary @Tomas Duchek
+361 M Hew the Entwood @Manuel Castañón
+362 R Moria Marauder @Andrea Piparo
+363 R Delighted Halfling @Inka Schulz
+364 R Elven Chorus @Anato Finnstark
+365 M Radagast the Brown @Alexander Mokhov
+366 R The Ring Goes South @Wangjie Li
+367 M Arwen, Mortal Queen @Miranda Meeks
+368 R Doors of Durin @Marc Simonetti
+369 R King of the Oathbreakers @Tatiana Veryayskaya
+370 R Lotho, Corrupt Shirriff @Ilker Yildiz
+371 R Sauron's Ransom @Alex Brock
+372 R Shagrat, Loot Bearer @Tatiana Veryayskaya
+373 R Sharkey, Tyrant of the Shire @Matt Stewart
+374 R Shelob, Child of Ungoliant @Lorenzo Mastroianni
+375 M Anduril, Flame of the West @Irvin Rodriguez
+376 M Glamdring @Andrea Piparo
+377 R Horn of Gondor @Yigit Koroglu
+378 R Horn of the Mark @Anastasia Balakchina
+379 R Mithril Coat @Igor Krstic
+380 M The One Ring @Veli Nyström
+381 M Palantir of Orthanc @Tatiana Veryayskaya
+382 R Phial of Galadriel @Andrea Piparo
+388 R Frodo, Determined Hero @Magali Villeneuve
+389 R Gandalf, White Rider @Ekaterina Burmak
+390 R Gollum, Scheming Guide @Dmitry Burmak
+391 R Witch-king, Bringer of Ruin @Denman Rooke
+392 R Fires of Mount Doom @Shahab Alizadeh
+393 R Galadriel, Gift-Giver @Alexander Mokhov
+394 M Aragorn and Arwen, Wed @Magali Villeneuve
+395 R The Balrog, Flame of Udun @John Tedrick
+396 M Sauron, the Lidless Eye @Yigit Koroglu
+397 R Bilbo's Ring @Randy Gallegos
 760 R Forge Anew @Craig J Spearing
 763 R Press the Enemy @Valera Lutfullina
 764 R Rangers of Ithilien @Torgeir Fjereide
@@ -468,6 +479,13 @@ ScryfallCode=LTR
 780 R King of the Oathbreakers @Tatiana Veryayskaya
 785 R Shelob, Child of Ungoliant @Lorenzo Mastroianni
 787 M Glamdring @Andrea Piparo
+
+[buy a box]
+398 R Trailblazer's Boots @Alexander Gering
+
+[promo]
+299 M Gandalf the White @Leonardo Borazio
+300 M Saruman of Many Colors @Wonchun Choi
 
 [tokens]
 b_0_0_orc_army

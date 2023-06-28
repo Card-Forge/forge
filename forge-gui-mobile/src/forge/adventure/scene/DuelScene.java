@@ -151,6 +151,7 @@ public class DuelScene extends ForgeScene {
     }
     Runnable endRunnable = null;
     void afterGameEnd(String enemyName, boolean winner) {
+        Forge.restrictAdvMenus = winner;
         endRunnable = () -> Gdx.app.postRunnable(()-> {
             if (GameScene.instance().isNotInWorldMap()) {
                 SoundSystem.instance.pause();

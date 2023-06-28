@@ -58,31 +58,31 @@
   </object>
   <object id="62" template="../obj/door_left.tx" x="448.75" y="69.1667">
    <properties>
-    <property name="teleport" value="maps/map/barbariancamp_4.tmx"/>
+    <property name="teleport" value="../common/maps/map/barbariancamp_4.tmx"/>
     <property name="teleportObjectId" value="61"/>
    </properties>
   </object>
   <object id="63" template="../obj/door_left.tx" x="525.5" y="214">
    <properties>
-    <property name="teleport" value="maps/map/barbariancamp_4.tmx"/>
+    <property name="teleport" value="../common/maps/map/barbariancamp_4.tmx"/>
     <property name="teleportObjectId" value="61"/>
    </properties>
   </object>
   <object id="64" template="../obj/door_left.tx" x="510.25" y="150.5">
    <properties>
-    <property name="teleport" value="maps/map/barbariancamp_4.tmx"/>
+    <property name="teleport" value="../common/maps/map/barbariancamp_4.tmx"/>
     <property name="teleportObjectId" value="61"/>
    </properties>
   </object>
   <object id="65" template="../obj/door_left.tx" x="494.417" y="102.25">
    <properties>
-    <property name="teleport" value="maps/map/barbariancamp_4.tmx"/>
+    <property name="teleport" value="../common/maps/map/barbariancamp_4.tmx"/>
     <property name="teleportObjectId" value="61"/>
    </properties>
   </object>
   <object id="66" template="../obj/door_left.tx" x="532.083" y="292.5">
    <properties>
-    <property name="teleport" value="maps/map/barbariancamp_4.tmx"/>
+    <property name="teleport" value="../common/maps/map/barbariancamp_4.tmx"/>
     <property name="teleportObjectId" value="61"/>
    </properties>
   </object>

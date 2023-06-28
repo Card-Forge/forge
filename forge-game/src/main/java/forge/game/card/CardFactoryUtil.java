@@ -3371,7 +3371,7 @@ public class CardFactoryUtil {
             final String manacost = k[1];
 
             final String effect = "AB$ CopyPermanent | Cost$ " + manacost + " ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard" +
-                    "| Defined$ Self | PumpKeywords$ Haste | RememberTokens$ True | ForEach$ Opponent" +
+                    "| SorcerySpeed$ True | Defined$ Self | PumpKeywords$ Haste | RememberTokens$ True | ForEach$ Opponent" +
                     "| AtEOT$ Sacrifice | PrecostDesc$ Encore | CostDesc$ " + ManaCostParser.parse(manacost) +
                     "| SpellDescription$ (" + inst.getReminderText() + ")";
 

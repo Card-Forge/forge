@@ -25,7 +25,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
 
         sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
 
-        sb.append("takes ");
+        sb.append(" takes ");
         sb.append(numTurns > 1 ? numTurns : "an");
         sb.append(" extra turn");
 

@@ -58,6 +58,7 @@ import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
@@ -606,7 +607,10 @@ public final class StaticAbilityContinuous {
 
             // Gain control
             if (layer == StaticAbilityLayer.CONTROL && params.containsKey("GainControl")) {
-                affectedCard.addTempController(hostCard.getController(), hostCard.getTimestamp());
+                final PlayerCollection gain = AbilityUtils.getDefinedPlayers(hostCard, params.get("GainControl"), stAb);
+                if (!gain.isEmpty()) {
+                    affectedCard.addTempController(gain.get(0), hostCard.getTimestamp());
+                }
             }
 
             // Gain text from another card
