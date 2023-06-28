@@ -621,7 +621,7 @@ public abstract class SpellAbilityEffect {
     protected static boolean addToCombat(Card c, Player controller, SpellAbility sa, String attackingParam, String blockingParam) {
         final Card host = sa.getHostCard();
         final Game game = controller.getGame();
-        if (!game.getPhaseHandler().inCombat()) {
+        if (!c.isCreature() || !game.getPhaseHandler().inCombat()) {
             return false;
         }
         boolean combatChanged = false;
