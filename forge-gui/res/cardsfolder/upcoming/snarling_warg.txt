@@ -1,0 +1,8 @@
+Name:Snarling Warg
+ManaCost:3 B
+Types:Creature Wolf
+PT:3/4
+K:Menace
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | IsPresent$ Orc.YouCtrl,Goblin.YouCtrl | Description$ As long as you control a Goblin or Orc, CARDNAME gets +1/+0.
+DeckHints:Type$Goblin|Orc
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nAs long as you control a Goblin or Orc, Snarling Warg gets +1/+0.
