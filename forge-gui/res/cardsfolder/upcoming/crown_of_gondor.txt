@@ -6,6 +6,6 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddToughness$
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Legendary+YouCtrl+cmcGE4 | CheckSVar$ Monarch | SVarCompare$ EQ0 | Execute$ TrigMonarch | TriggerDescription$ When a legendary creature enters the battlefield under your control, if there is no monarch, you become the monarch.
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
 SVar:X:Count$Valid Creature.YouCtrl
-SVar:Monarch:Count$Monarch.3.0
+SVar:Monarch:PlayerCountPlayers$HasPropertyisMonarch
 DeckHints:Type$Creature & Type$Legendary
 Oracle:Equipped creature gets +1/+1 for each creature you control.\nWhen a legendary creature enters the battlefield under your control, if there is no monarch, you become the monarch.\nEquip {4}. This ability costs {3} less to activate if you're the monarch.
