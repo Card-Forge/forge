@@ -166,8 +166,6 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             }
 
             game.updateLastStateForCard(dest);
-            table.replaceCounterEffect(game, sa, true);
-            return;
         } else if (sa.hasParam("ValidDefined")) {
             // one Source to many Targets
             // need given CounterType
@@ -231,9 +229,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             if (updateSource) {
                 // update source
                 game.updateLastStateForCard(source);
-                table.replaceCounterEffect(game, sa, true);
             }
-            return;
         } else {
             Card source = null;
             List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
@@ -276,7 +272,14 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                         for (Map.Entry<CounterType, Integer> e : tgtCounters.entrySet()) {
                             removeCounter(sa, source, cur, e.getKey(), counterNum, countersToAdd);
                         }
-
+                    } else if ("EachNotOn".equals(counterName)) {
+                        final Map<CounterType, Integer> tgtCounters = Maps.newHashMap(source.getCounters());
+                        for (Map.Entry<CounterType, Integer> e : tgtCounters.entrySet()) {
+                            if (cur.getCounters(e.getKey()) > 0) {
+                                continue;
+                            }
+                            removeCounter(sa, source, cur, e.getKey(), counterNum, countersToAdd);
+                        }
                     } else if ("Any".equals(counterName)) {
                         // any counterType currently only Leech Bonder
                         final Map<CounterType, Integer> tgtCounters = source.getCounters();
@@ -300,10 +303,6 @@ public class CountersMoveEffect extends SpellAbilityEffect {
 
                         removeCounter(sa, source, cur, chosenType, counterNum, countersToAdd);
                     } else {
-                        if (!cur.canReceiveCounters(cType)) {
-                            continue;
-                        }
-
                         removeCounter(sa, source, cur, cType, counterNum, countersToAdd);
                     }
 
