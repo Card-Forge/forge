@@ -113,9 +113,9 @@ public class SacrificeAi extends SpellAbilityAi {
             }
         }
 
-        final String defined = sa.getParam("Defined");
-        final String valid = sa.getParam("SacValid");
-        if (defined == null) {
+        final String defined = sa.getParamOrDefault("Defined", "You");
+        final String valid = sa.getParamOrDefault("SacValid", "Self");
+        if (valid.equals("Self")) {
             // Self Sacrifice.
         } else if (defined.equals("Player")
                 || ((defined.equals("Player.Opponent") || defined.equals("Opponent")) && !sa.isTrigger())) {
