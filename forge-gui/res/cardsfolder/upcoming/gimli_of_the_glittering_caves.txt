@@ -9,4 +9,4 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 SVar:BuffedBy:Creature.Legendary
 DeckHas:Ability$Token
-Oracle:First strike\nWhenever another legendary creature enters the battlefield under your control, put a +1/+1 counter on Gimli of the Glittering Caves.\nWhenever Gimli deals combat damage to a player, create a Treasure token.
+Oracle:Double strike\nWhenever another legendary creature enters the battlefield under your control, put a +1/+1 counter on Gimli of the Glittering Caves.\nWhenever Gimli deals combat damage to a player, create a Treasure token.
