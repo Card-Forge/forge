@@ -1,0 +1,8 @@
+Name:Friendly Rivalry
+ManaCost:R G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBPump | RememberTargets$ True | SpellDescription$ Target creature you control and up to one other target legendary creature you control each deal damage equal to their power to target creature you don't control.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.Legendary+YouCtrl | TgtPrompt$ Select up to one target legendary creature you control | RememberTargets$ True | TargetMin$ 0 | TargetMax$ 1 | TargetUnique$ True | SubAbility$ DBEachDamage 
+SVar:DBEachDamage:DB$ EachDamage | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | DefinedDamagers$ Remembered | NumDmg$ Count$CardPower | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Target creature you control and up to one other target legendary creature you control each deal damage equal to their power to target creature you don't control.

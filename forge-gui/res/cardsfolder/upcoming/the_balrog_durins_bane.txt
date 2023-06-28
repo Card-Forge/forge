@@ -1,0 +1,12 @@
+Name:The Balrog, Durin's Bane
+ManaCost:5 B R
+Types:Legendary Creature Avatar Demon
+PT:7/5
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each permanent sacrificed this turn.
+SVar:X:PlayerCount$SacrificedThisTurn Permanent
+K:Haste
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | ValidBlocker$ Creature.nonLegendary | Description$ CARDNAME can't be blocked except by legendary creatures.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When NICKNAME dies, destroy target artifact or creature an opponent controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.OppCtrl,Creature.OppCtrl | TgtPrompt$ Select target artifact or creature an opponent controls.
+DeckHints:Ability$Sacrifice
+Oracle:This spell costs {1} less to cast for each permanent sacrificed this turn.\nHaste\nThe Balrog, Durin's Bane can't be blocked except by legendary creatures.\nWhen The Balrog dies, destroy target artifact or creature an opponent controls.
