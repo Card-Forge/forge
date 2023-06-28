@@ -121,7 +121,6 @@ public class WorldStage extends GameStage implements SaveFileContent {
                         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
                         SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
                         DuelScene duelScene = DuelScene.instance();
-                        Forge.restrictAdvMenus = false;
                         FThreads.invokeInEdtNowOrLater(() -> {
                             Forge.setTransitionScreen(new TransitionScreen(() -> {
                                 duelScene.initDuels(player, mob);

@@ -1130,7 +1130,6 @@ public class MapStage extends GameStage {
             Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
             SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
             DuelScene duelScene = DuelScene.instance();
-            Forge.restrictAdvMenus = false;
             FThreads.invokeInEdtNowOrLater(() -> {
                 if (!isLoadingMatch) {
                     isLoadingMatch = true;
