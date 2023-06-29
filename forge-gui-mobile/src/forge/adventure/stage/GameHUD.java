@@ -156,11 +156,15 @@ public class GameHUD extends Stage {
     private void openMap() {
         if (console.isVisible())
             return;
+        if (Forge.restrictAdvMenus)
+            return;
         Forge.switchScene(MapViewScene.instance());
     }
 
     private void logbook() {
         if (console.isVisible())
+            return;
+        if (Forge.restrictAdvMenus)
             return;
         Forge.switchScene(QuestLogScene.instance(Forge.getCurrentScene()));
     }
@@ -381,6 +385,12 @@ public class GameHUD extends Stage {
 
     private Pair<FileHandle, Music> audio = null;
 
+    public void switchAudio() {
+        if (GameScene.instance().isNotInWorldMap()) {
+            pauseMusic();
+            playAudio();
+        }
+    }
     public void playAudio() {
         switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
             case "capital":
@@ -484,11 +494,15 @@ public class GameHUD extends Stage {
     private void openDeck() {
         if (console.isVisible())
             return;
+        if (Forge.restrictAdvMenus)
+            return;
         Forge.switchScene(DeckSelectScene.instance());
     }
 
     private void openInventory() {
         if (console.isVisible())
+            return;
+        if (Forge.restrictAdvMenus)
             return;
         WorldSave.getCurrentSave().header.createPreview();
         Forge.switchScene(InventoryScene.instance());
@@ -524,6 +538,8 @@ public class GameHUD extends Stage {
 
     private void menu() {
         if (console.isVisible())
+            return;
+        if (Forge.restrictAdvMenus)
             return;
         gameStage.openMenu();
     }

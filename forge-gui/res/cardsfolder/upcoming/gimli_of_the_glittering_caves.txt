@@ -1,0 +1,12 @@
+Name:Gimli of the Glittering Caves
+ManaCost:2 R
+Types:Legendary Creature Dwarf Warrior
+PT:1/1
+K:Double strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Legendary+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another legendary creature enters the battlefield under your control, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTreasure | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, create a Treasure token.
+SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:BuffedBy:Creature.Legendary
+DeckHas:Ability$Counters|Token
+Oracle:Double strike\nWhenever another legendary creature enters the battlefield under your control, put a +1/+1 counter on Gimli of the Glittering Caves.\nWhenever Gimli deals combat damage to a player, create a Treasure token.

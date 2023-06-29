@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import java.util.*;
 
+import org.apache.commons.lang3.ObjectUtils;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -1260,7 +1261,7 @@ public class AttachAi extends SpellAbilityAi {
         // TODO Somehow test for definitive advantage (e.g. opponent low on health, AI is attacking)
         // to be able to deal the final blow with an enchanted vehicle like that
         boolean canOnlyTargetCreatures = true;
-        for (String valid : attachSource.getFirstAttachSpell().getTargetRestrictions().getValidTgts()) {
+        for (String valid : ObjectUtils.firstNonNull(attachSource.getFirstAttachSpell(), sa).getTargetRestrictions().getValidTgts()) {
             if (!valid.startsWith("Creature")) {
                 canOnlyTargetCreatures = false;
                 break;

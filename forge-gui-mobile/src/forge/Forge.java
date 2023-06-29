@@ -62,6 +62,7 @@ public class Forge implements ApplicationListener {
     static Batch animationBatch;
     static TextureRegion lastScreenTexture;
     private static boolean sceneWasSwapped = false;
+    public static boolean restrictAdvMenus = false;
     private static Clipboard clipboard;
     private static IDeviceAdapter deviceAdapter;
     private static int screenWidth;
@@ -1060,7 +1061,6 @@ public class Forge implements ApplicationListener {
     }
 
     public static Scene switchToLast() {
-
         if (lastScene.size != 0) {
             storeScreen();
             currentScene = lastScene.get(lastScene.size - 1);
