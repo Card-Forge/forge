@@ -441,6 +441,9 @@ Flip
 LogBook
   xy: 240, 912
   size: 16, 16
+GPS
+  xy: 464, 0
+  size: 16, 16
 UnderworldCookbook
   xy: 304, 960
   size: 16, 16
