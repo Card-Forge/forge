@@ -1160,6 +1160,7 @@ public class MapStage extends GameStage {
         if (dialogStage == null){
             setDialogStage(GameHUD.getInstance());
         }
+        GameHUD.getInstance().playerIdle();
         dialogButtonMap.clear();
         for (int i = 0; i < dialog.getButtonTable().getCells().size; i++) {
             dialogButtonMap.add((TextraButton) dialog.getButtonTable().getCells().get(i).getActor());
