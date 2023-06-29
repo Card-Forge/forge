@@ -75,7 +75,7 @@ public class TriggerTapsForMana extends Trigger {
                     return false;
                 }
             } else if (!produced.contains(MagicColor.toShortString(this.getParam("Produced")))) {
-                    return false;
+                return false;
             }
         }
 
