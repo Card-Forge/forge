@@ -165,8 +165,7 @@ public class DeckSelectScene extends UIScene {
                 buttons.get(i).layout();
             }
         }
-        GameHUD.getInstance().pauseMusic();
-        GameHUD.getInstance().playAudio();
+        GameHUD.getInstance().switchAudio();
         select(Current.player().getSelectedDeckIndex());
         performTouch(scrollPane); //can use mouse wheel if available to scroll after selection
         super.enter();

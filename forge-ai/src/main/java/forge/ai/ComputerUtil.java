@@ -825,6 +825,31 @@ public class ComputerUtil {
             if (!SpecialCardAi.DesecrationDemon.considerSacrificingCreature(ai, source)) {
                 return sacrificed; // don't sacrifice unless in special conditions specified by DesecrationDemon AI
             }
+        } else if ("Lethal".equals(source.getParam("AILogic"))) {
+            for (Card c : cardlist) {
+                boolean isLethal = false;
+                for (Player opp : ai.getOpponents()) {
+                    if (opp.canLoseLife() && !opp.cantLoseForZeroOrLessLife() && c.getNetPower() >= opp.getLife()) {
+                        isLethal = true;
+                        break;
+                    }
+                }
+                for (Card creature : ai.getOpponents().getCreaturesInPlay()) {
+                    if (creature.canBeDestroyed() && c.getNetPower() >= creature.getNetToughness()) {
+                        isLethal = true;
+                        break;
+                    }
+                }
+                if (c.hasSVar("SacMe") || isLethal) {
+                    sacrificed.add(c);
+                    if (sacrificed.size() == amount) {
+                        return sacrificed;
+                    }
+                }
+            }
+            if (sacrificed.size() < amount) {
+                System.err.println("Warning: AILogic Lethal could not meaningfully select enough cards for the AF Sacrifice on " + source.getHostCard());
+            }
         } else if (isOptional && source.getActivatingPlayer().isOpponentOf(ai)) {
             if ("Pillar Tombs of Aku".equals(host.getName())) {
                 if (!ai.canLoseLife() || ai.cantLose()) {
