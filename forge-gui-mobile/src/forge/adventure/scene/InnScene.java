@@ -98,8 +98,7 @@ public class InnScene extends UIScene {
     public void enter() {
         super.enter();
         refreshStatus();
-        GameHUD.getInstance().pauseMusic();
-        GameHUD.getInstance().playAudio();
+        GameHUD.getInstance().switchAudio();
     }
 
     private void refreshStatus(){

@@ -385,6 +385,12 @@ public class GameHUD extends Stage {
 
     private Pair<FileHandle, Music> audio = null;
 
+    public void switchAudio() {
+        if (GameScene.instance().isNotInWorldMap()) {
+            pauseMusic();
+            playAudio();
+        }
+    }
     public void playAudio() {
         switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
             case "capital":

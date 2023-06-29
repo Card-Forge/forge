@@ -31,8 +31,7 @@ public class DraftScene extends ForgeScene {
     @Override
     public void enter() {
         GameHUD.getInstance().getTouchpad().setVisible(false);
-        GameHUD.getInstance().pauseMusic();
-        GameHUD.getInstance().playAudio();
+        GameHUD.getInstance().switchAudio();
         screen = null;
         getScreen();
         screen.refresh();
