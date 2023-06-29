@@ -21871,8 +21871,7 @@
 	"deck": [
 		"decks/standard/infectrat.dck",
 		"decks/standard/rat.json",
-		"decks/standard/ratswarm.dck",
-		"decks/standard/rat_realmagic.dck"
+		"decks/standard/ratswarm.dck"
 	],
 	"ai": "",
 	"randomizeDeck": true,
