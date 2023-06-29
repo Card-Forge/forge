@@ -5,4 +5,4 @@ Colors:red
 PT:2/2
 K:Trample
 K:Haste
-Oracle:Trample\nHaste
+Oracle:Trample, haste
