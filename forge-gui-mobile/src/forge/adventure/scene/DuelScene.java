@@ -38,7 +38,6 @@ import forge.screens.LoadingOverlay;
 import forge.screens.TransitionScreen;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
-import forge.sound.SoundSystem;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.Aggregates;
@@ -153,13 +152,7 @@ public class DuelScene extends ForgeScene {
     void afterGameEnd(String enemyName, boolean winner) {
         Forge.restrictAdvMenus = winner;
         endRunnable = () -> Gdx.app.postRunnable(()-> {
-            if (GameScene.instance().isNotInWorldMap()) {
-                SoundSystem.instance.pause();
-                GameHUD.getInstance().playAudio();
-            } else {
-                SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
-                SoundSystem.instance.resume();
-            }
+            GameHUD.getInstance().switchAudio();
             dungeonEffect = null;
             callbackExit = false;
             Forge.clearTransitionScreen();
