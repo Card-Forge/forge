@@ -62,6 +62,7 @@ public class MapViewScene extends UIScene {
                 a.remove();
         }
         labels.clear();
+        index = -1;
         Forge.switchToLast();
         return true;
     }
