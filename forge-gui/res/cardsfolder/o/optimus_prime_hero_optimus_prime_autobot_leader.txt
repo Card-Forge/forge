@@ -21,7 +21,7 @@ PT:6/8
 K:Living metal
 K:Trample
 T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBolster | TriggerDescription$ Whenever you attack, bolster 2. The chosen creature gains trample until end of turn. When that creature deals combat damage to a player this turn, convert NICKNAME.
-SVar:TrigBolster:DB$ PutCounter | Bolster$ True | CounterType$ P1P1 | CounterNum$ 2 | RememberPut$ True | SubAbility$ DBPump
+SVar:TrigBolster:DB$ PutCounter | Bolster$ True | CounterType$ P1P1 | CounterNum$ 2 | RememberCards$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Trample | SubAbility$ DBDelayedTrigger
 SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ DamageDone | RememberObjects$ Remembered | ValidSource$ Card.IsTriggerRemembered | ValidTarget$ Player | CombatDamage$ True | ThisTurn$ True | Execute$ TrigConvert | TriggerDescription$ When that creature deals combat damage to a player this turn, convert NICKNAME.
 SVar:TrigConvert:DB$ SetState | Mode$ Transform | SubAbility$ DBCleanup
