@@ -1,0 +1,6 @@
+Name:Raise the Palisade
+ManaCost:4 U
+Types:Sorcery
+A:SP$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ DBReturnAll | AILogic$ MostProminentComputerControls | SpellDescription$ Choose a creature type. Return all creatures that aren't of the chosen type to their owners' hands.
+SVar:DBReturnAll:DB$ ChangeZoneAll | ChangeType$ Creature.IsNotChosenType | Origin$ Battlefield | Destination$ Hand
+Oracle:Choose a creature type. Return all creatures that aren't of the chosen type to their owners' hands.
