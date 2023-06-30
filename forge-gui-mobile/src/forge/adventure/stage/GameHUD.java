@@ -22,6 +22,7 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.data.AdventureQuestData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.scene.*;
@@ -132,7 +133,7 @@ public class GameHUD extends Stage {
         AdventurePlayer.current().onShardsChange(() -> shards.setText("[%95][+Shards] " + AdventurePlayer.current().getShards()));
         AdventurePlayer.current().onEquipmentChanged(this::updateAbility);
 
-        WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("[%95][+Gold] " + String.valueOf(AdventurePlayer.current().getGold())));
+        WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("[%95][+Gold] " + AdventurePlayer.current().getGold()));
         addActor(ui);
         addActor(miniMapPlayer);
         console = new Console();
@@ -341,6 +342,17 @@ public class GameHUD extends Stage {
         }
         //unequip and reequip abilities
         updateAbility();
+        if (openMapActor != null) {
+            String val = "[%80]" + Forge.getLocalizer().getMessageorUseDefault("lblZoom", "Zoom");
+            for (AdventureQuestData adq: Current.player().getQuests()) {
+                if (adq.getTargetPOI() !=null) {
+                    val = "[%80][+GPS] " + Forge.getLocalizer().getMessageorUseDefault("lblZoom", "Zoom");
+                    break;
+                }
+            }
+            openMapActor.setText(val);
+            openMapActor.layout();
+        }
     }
     void clearAbility() {
         for (TextraButton button : abilityButtonMap) {
