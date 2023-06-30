@@ -9,4 +9,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | TokenAmount$ 1
 SVar:BuffedBy:Creature
 SVar:PlayMain1:TRUE
+DeckHints:Type$Human
+DeckHas:Ability$Token
 Oracle:First strike\nWhenever Lossarnach Captain or another Human enters the battlefield under your control, tap target creature an opponent controls.\nAt the beginning of your upkeep, create a 1/1 white Human Soldier creature token.
