@@ -3267,7 +3267,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean canBeShielded() {
-        return !hasKeyword("CARDNAME can't be regenerated.");
+        return !StaticAbilityCantRegenerate.cantRegenerate(this);
     }
 
     // is this "Card" supposed to be a token?
