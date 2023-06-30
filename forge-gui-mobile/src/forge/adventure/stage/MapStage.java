@@ -828,7 +828,7 @@ public class MapStage extends GameStage {
                                 sprite.setY(actor.getY() + Float.parseFloat(prop.get("signYOffset").toString()));
                                 addMapActor(sprite);
 
-                                if (!(data.overlaySprite == null | data.overlaySprite.isEmpty())) {
+                                if (!(data.overlaySprite == null || data.overlaySprite.isEmpty())) {
                                     TextureSprite overlay = new TextureSprite(Config.instance().getAtlas(data.spriteAtlas).createSprite(data.overlaySprite));
                                     overlay.setX(actor.getX() + Float.parseFloat(prop.get("signXOffset").toString()));
                                     overlay.setY(actor.getY() + Float.parseFloat(prop.get("signYOffset").toString()));
