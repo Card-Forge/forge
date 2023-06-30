@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import java.util.*;
 
+import org.apache.commons.lang3.ObjectUtils;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -1036,8 +1037,7 @@ public class AttachAi extends SpellAbilityAi {
      *            the attach source
      * @return the card
      */
-    private static Card attachAIPumpPreference(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory,
-            final Card attachSource) {
+    private static Card attachAIPumpPreference(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory, final Card attachSource) {
         // AI For choosing a Card to Pump
         Card c = null;
         List<Card> magnetList = null;
@@ -1184,7 +1184,7 @@ public class AttachAi extends SpellAbilityAi {
         CardCollection prefList = new CardCollection(list);
 
         // Filter AI-specific targets if provided
-        prefList = ComputerUtil.filterAITgts(sa, ai, (CardCollection)list, false);
+        prefList = ComputerUtil.filterAITgts(sa, ai, prefList, false);
 
         if (totToughness < 0) {
             // Don't kill my own stuff with Negative toughness Auras
@@ -1261,7 +1261,7 @@ public class AttachAi extends SpellAbilityAi {
         // TODO Somehow test for definitive advantage (e.g. opponent low on health, AI is attacking)
         // to be able to deal the final blow with an enchanted vehicle like that
         boolean canOnlyTargetCreatures = true;
-        for (String valid : sa.getTargetRestrictions().getValidTgts()) {
+        for (String valid : ObjectUtils.firstNonNull(attachSource.getFirstAttachSpell(), sa).getTargetRestrictions().getValidTgts()) {
             if (!valid.startsWith("Creature")) {
                 canOnlyTargetCreatures = false;
                 break;

@@ -1,0 +1,14 @@
+Name:Eomer, King of Rohan
+ManaCost:3 R W
+Types:Legendary Creature Human Noble
+PT:2/2
+K:Double strike
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with a +1/+1 counter on it for each other Human you control.
+SVar:X:Count$Valid Human.Other+YouCtrl
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When NICKNAME enters the battlefield, target player becomes the monarch. NICKNAME deals damage equal to its power to any target.
+SVar:TrigMonarch:DB$ BecomeMonarch | ValidTgts$ Player | SubAbility$ DBPower
+SVar:DBPower:DB$ DealDamage | ValidTgts$ Any | NumDmg$ Y
+SVar:Y:Count$CardPower
+DeckNeeds:Type$Human
+DeckHas:Ability$Counters
+Oracle:Double strike\nEomer, King of Rohan enters the battlefield with a +1/+1 counter on it for each other Human you control.\nWhen Eomer enters the battlefield, target player becomes the monarch. Éomer deals damage equal to its power to any target.

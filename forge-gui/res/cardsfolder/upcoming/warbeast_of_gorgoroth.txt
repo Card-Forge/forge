@@ -2,7 +2,7 @@ Name:Warbeast of Gorgoroth
 ManaCost:4 R
 Types:Creature Beast
 PT:5/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.Other+powerGE4+YouCtrl | Execute$ TrigAmass | TriggerDescription$ Whenever CARDNAME or another creature you control with power 4 or greater dies, amass Orcs 2. (Put two +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Other+powerGE4+YouCtrl | Execute$ TrigAmass | TriggerDescription$ Whenever CARDNAME or another creature you control with power 4 or greater dies, amass Orcs 2. (Put two +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)
 SVar:TrigAmass:DB$ Amass | Type$ Orc | Num$ 2 
 DeckHas:Ability$Token|Counters & Type$Orc|Army
 Oracle:Whenever Warbeast of Gorgoroth or another creature you control with power 4 or greater dies, amass Orcs 2. (Put two +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)

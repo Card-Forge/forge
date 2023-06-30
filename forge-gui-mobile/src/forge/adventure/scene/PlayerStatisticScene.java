@@ -187,10 +187,7 @@ public class PlayerStatisticScene extends UIScene {
     @Override
     public void enter() {
         super.enter();
-
-        GameHUD.getInstance().pauseMusic();
-        GameHUD.getInstance().playAudio();
-
+        GameHUD.getInstance().switchAudio();
         achievementContainer.clear();
         updateAchievements(cardActivation, true);
         updateAchievements(planeswalkers, true);

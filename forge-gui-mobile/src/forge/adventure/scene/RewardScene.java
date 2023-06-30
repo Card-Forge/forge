@@ -133,6 +133,7 @@ public class RewardScene extends UIScene {
         }
         //save RAM
         ImageCache.unloadCardTextures(true);
+        Forge.restrictAdvMenus = false;
         Forge.switchToLast();
     }
     public void reactivateInputs() {

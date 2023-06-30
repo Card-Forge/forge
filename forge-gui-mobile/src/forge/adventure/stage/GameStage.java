@@ -376,7 +376,8 @@ public abstract class GameStage extends Stage {
     }
 
     public void openMenu() {
-
+        if (Forge.restrictAdvMenus)
+            return;
         WorldSave.getCurrentSave().header.createPreview();
         Forge.switchScene(StartScene.instance());
     }

@@ -1,0 +1,9 @@
+Name:Farmer Cotton
+ManaCost:X G W
+Types:Legendary Creature Halfling Peasant
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create X 1/1 white Halfling creature tokens and X Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_halfling,c_a_food_sac | TokenOwner$ You
+SVar:X:Count$xPaid
+DeckHas:Ability$Token|Sacrifice|LifeGain & Type$Artifact|Food
+Oracle:When Farmer Cotton enters the battlefield, create X 1/1 white Halfling creature tokens and X Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
