@@ -5,7 +5,7 @@ PT:2/3
 A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Creature.Other+YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select another target creature you control | SubAbility$ DBReturn | SpellDescription$ Exile another target creature you control. You may return that card to the battlefield under its owner's control. If you don't, at the beginning of the next end step, return that card to the battlefield under its owner's control with a vigilance counter and a lifelink counter on it.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Targeted | Origin$ All | Optional$ True | Destination$ Battlefield | RememberChanged$ True | SubAbility$ DBDelayedTrigger
 SVar:DBDelayedTrigger:DB$ DelayedTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | RememberObjects$ RememberedLKI | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigReturn | SubAbility$ DBCleanup | SpellDescription$ If you don't, at the beginning of the next end step, return that card to the battlefield under its owner's control with a vigilance counter and a lifelink counter on it.
-SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Battlefield
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Battlefield | WithCountersType$ Lifelink & Vigilance
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters|LifeGain
 Oracle:{2}, {T}: Exile another target creature you control. You may return that card to the battlefield under its owner's control. If you don't, at the beginning of the next end step, return that card to the battlefield under its owner's control with a vigilance counter and a lifelink counter on it.
