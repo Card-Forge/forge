@@ -23,11 +23,8 @@
 "height": 0.7,
 "color": "110903",
 "spriteNames": [
-	"SwampTree",
-	"SwampTree2",
 	"DarkGras",
 	"Skull",
-	"SwampRock",
 	"DarkWood",
 	"Reed",
 	"Waterlily",
@@ -119,22 +116,46 @@
 		"N": 2,
 		"x": 0.5,
 		"y": 0.5,
-		"structureAtlasPath": "world/tilesets/structures.atlas",
-		"sourcePath": "world/models/swamp_forest.png",
-		"maskPath": "world/masks/ring.png",
+		"structureAtlasPath": "world/structures/black_structures.atlas",
+		"sourcePath": "world/structures/models/black.png",
+		"maskPath": "world/structures/masks/ring.png",
 		"height": 0.5,
 		"width": 0.5,
 		"symmetry": 8,
-		"periodicOutput": false,
 		"mappingInfo": [
 			{
-				"name": "swamp_forest",
-				"color": "007000",
+				"name": "water",
+				"color": "00ffff",
 				"collision": true
 			},
 			{
-				"name": "swamp_water",
-				"color": "005050",
+				"name": "tree",
+				"color": "004000",
+				"collision": true
+			},
+			{
+				"name": "tree2",
+				"color": "008000",
+				"collision": true
+			},
+			{
+				"name": "tree3",
+				"color": "ff00ff",
+				"collision": true
+			},
+			{
+				"name": "tree4",
+				"color": "00f000",
+				"collision": true
+			},
+			{
+				"name": "rock",
+				"color": "808080",
+				"collision": true
+			},
+			{
+				"name": "rock2",
+				"color": "ff0000",
 				"collision": true
 			}
 		]
@@ -143,27 +164,41 @@
 		"N": 2,
 		"x": 0.5,
 		"y": 0.5,
-		"structureAtlasPath": "world/tilesets/structures.atlas",
-		"sourcePath": "world/models/swamp_ruins.png",
-		"maskPath": "world/masks/circle.png",
+		"structureAtlasPath": "world/structures/black_structures.atlas",
+		"sourcePath": "world/structures/models/black.png",
+		"maskPath": "world/structures/masks/circle.png",
 		"height": 0.20000002,
 		"width": 0.20000002,
-		"symmetry": 1,
-		"periodicOutput": false,
+		"symmetry": 8,
 		"mappingInfo": [
 			{
-				"name": "deep_swamp",
-				"color": "002000",
+				"name": "muck",
+				"color": "00ffff",
 				"collision": true
 			},
 			{
-				"name": "structure",
-				"color": "505050",
+				"name": "dead_tree",
+				"color": "004000",
 				"collision": true
 			},
 			{
-				"name": "swamp_forest2",
-				"color": "007000",
+				"name": "dead_tree2",
+				"color": "008000",
+				"collision": true
+			},
+			{
+				"name": "dead_tree3",
+				"color": "ff00ff",
+				"collision": true
+			},
+			{
+				"name": "rock",
+				"color": "808080",
+				"collision": true
+			},
+			{
+				"name": "rock2",
+				"color": "ff0000",
 				"collision": true
 			}
 		]

@@ -5,15 +5,15 @@
 "distWeight": 1,
 "name": "waste",
 "tilesetAtlas": "world/tilesets/terrain.atlas",
-"tilesetName": "Waste",
+"tilesetName": "Colorless",
 "terrain": [
 	{
-		"spriteName": "Waste_1",
+		"spriteName": "Colorless_1",
 		"max": 0.2,
 		"resolution": 5
 	},
 	{
-		"spriteName": "Waste_2",
+		"spriteName": "Colorless_2",
 		"min": 0.8,
 		"max": 1,
 		"resolution": 5
@@ -23,9 +23,7 @@
 "height": 0.85,
 "color": "aeaeae",
 "spriteNames": [
-	"WasteTree",
-	"Stone",
-	"WasteRock"
+	"Stone"
 ],
 "enemies": [
 	"Adept Black Wizard",
@@ -115,44 +113,94 @@
 		"N": 2,
 		"x": 0.5,
 		"y": 0.5,
-		"structureAtlasPath": "world/tilesets/structures.atlas",
-		"sourcePath": "world/models/waste_structure.png",
-		"maskPath": "world/masks/circle.png",
-		"periodicInput": false,
-		"height": 0.20000002,
-		"width": 0.20000002,
-		"symmetry": 4,
+		"structureAtlasPath": "world/structures/colorless_structures.atlas",
+		"sourcePath": "world/structures/models/colorless.png",
+		"maskPath": "world/structures/masks/circle.png",
+		"height": 0.25,
+		"width": 0.25,
+		"symmetry": 8,
 		"mappingInfo": [
 			{
-				"name": "waste_structure",
-				"color": "444444",
+				"name": "crater",
+				"color": "808080",
 				"collision": true
 			},
 			{
-				"name": "waste_mountain",
-				"color": "9a9a9a",
+				"name": "tree",
+				"color": "ff0000",
+				"collision": true
+			},
+			{
+				"name": "tree2",
+				"color": "00ff00",
+				"collision": true
+			},
+			{
+				"name": "tree3",
+				"color": "0000ff",
+				"collision": true
+			},
+			{
+				"name": "tree4",
+				"color": "00ffff",
+				"collision": true
+			},
+			{
+				"name": "rock",
+				"color": "ff00ff",
+				"collision": true
+			},
+			{
+				"name": "mountain",
+				"color": "000000",
 				"collision": true
 			}
 		]
 	},
 	{
+		"N": 2,
 		"x": 0.5,
 		"y": 0.5,
-		"structureAtlasPath": "world/tilesets/structures.atlas",
-		"sourcePath": "world/models/hole.png",
-		"maskPath": "world/masks/ring.png",
+		"structureAtlasPath": "world/structures/colorless_structures.atlas",
+		"sourcePath": "world/structures/models/colorless.png",
+		"maskPath": "world/structures/masks/ring.png",
 		"height": 0.5,
 		"width": 0.5,
-		"periodicOutput": false,
+		"symmetry": 8,
 		"mappingInfo": [
 			{
 				"name": "hole",
-				"color": "111111",
+				"color": "808080",
 				"collision": true
 			},
 			{
-				"name": "waste_mountain",
-				"color": "9a9a9a",
+				"name": "tree",
+				"color": "ff0000",
+				"collision": true
+			},
+			{
+				"name": "tree2",
+				"color": "00ff00",
+				"collision": true
+			},
+			{
+				"name": "tree3",
+				"color": "0000ff",
+				"collision": true
+			},
+			{
+				"name": "tree4",
+				"color": "00ffff",
+				"collision": true
+			},
+			{
+				"name": "rock",
+				"color": "ff00ff",
+				"collision": true
+			},
+			{
+				"name": "mountain",
+				"color": "000000",
 				"collision": true
 			}
 		]
