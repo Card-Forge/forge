@@ -513,6 +513,8 @@ public class GameHUD extends Stage {
             return;
         if (!GameScene.instance().isNotInWorldMap()) //prevent showing this dialog to WorldMap
             return;
+        if (Forge.restrictAdvMenus)
+            return;
         dialog.getButtonTable().clear();
         dialog.getContentTable().clear();
         dialog.clearListeners();
@@ -657,8 +659,15 @@ public class GameHUD extends Stage {
     public void setDebug(boolean b) {
         debugMap = b;
     }
-
+    public void playerIdle() {
+        if (MapStage.getInstance().isInMap()) {
+            MapStage.getInstance().getPlayerSprite().stop();
+        } else {
+            WorldStage.getInstance().getPlayerSprite().stop();
+        }
+    }
     private void showDialog() {
+        playerIdle();
         dialogButtonMap.clear();
         for (int i = 0; i < dialog.getButtonTable().getCells().size; i++) {
             dialogButtonMap.add((TextraButton) dialog.getButtonTable().getCells().get(i).getActor());
