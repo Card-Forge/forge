@@ -1,10 +1,10 @@
 package forge.game.ability.effects;
 
-import java.util.Iterator;
 import java.util.List;
 
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Lang;
 
 public class RegenerateEffect extends RegenerateBaseEffect {
 
@@ -15,24 +15,12 @@ public class RegenerateEffect extends RegenerateBaseEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final List<Card> tgtCards = getTargetCards(sa);
+        final List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
 
-        if (tgtCards.size() > 0) {
+        if (!tgtCards.isEmpty()) {
             sb.append("Regenerate ");
-
-            final Iterator<Card> it = tgtCards.iterator();
-            while (it.hasNext()) {
-                final Card tgtC = it.next();
-                if (tgtC.isFaceDown()) {
-                    sb.append("Morph");
-                } else {
-                    sb.append(tgtC);
-                }
-
-                if (it.hasNext()) {
-                    sb.append(", ");
-                }
-            }
+            sb.append(Lang.joinHomogenous(tgtCards));
+            sb.append(".");
         }
         sb.append(".");
 

@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import java.util.Collection;
+
 import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
@@ -18,7 +20,10 @@ import forge.game.zone.ZoneType;
 
 public abstract class RegenerateBaseEffect extends SpellAbilityEffect {
 
-    public void createRegenerationEffect(SpellAbility sa, final Iterable<Card> list) {
+    public void createRegenerationEffect(SpellAbility sa, final Collection<Card> list) {
+        if (list.isEmpty()) {
+            return;
+        }
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
 

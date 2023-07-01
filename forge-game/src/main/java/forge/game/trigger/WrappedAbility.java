@@ -66,6 +66,8 @@ public class WrappedAbility extends Ability {
             ApiType.SacrificeAll,
             ApiType.Pump,
 
+            ApiType.Regeneration, // Replacement Effect only
+
             ApiType.DelayedTrigger
             );
 
