@@ -23,6 +23,7 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.character.CharacterSprite;
 import forge.adventure.data.AdventureQuestData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
@@ -787,36 +788,25 @@ public class GameHUD extends Stage {
             SoundSystem.instance.setBackgroundMusic(playlist);
         }
     }
+    void flicker(CharacterSprite sprite) {
+        if (sprite.getCollisionHeight() == 0f) {
+            SequenceAction flicker = new SequenceAction(Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), new Action() {
+                @Override
+                public boolean act(float v) {
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
+                            sprite.resetCollisionHeight();
+                        }
+                    }, 0.5f);
+                    return true;
+                }
+            });
+            sprite.addAction(flicker);
+        }
+    }
     void restorePlayerCollision() {
-        if (MapStage.getInstance().getPlayerSprite().getCollisionHeight() == 0f) {
-            SequenceAction flicker = new SequenceAction(Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), new Action() {
-                @Override
-                public boolean act(float v) {
-                    Timer.schedule(new Timer.Task() {
-                        @Override
-                        public void run() {
-                            MapStage.getInstance().getPlayerSprite().resetCollisionHeight();
-                        }
-                    }, 0.5f);
-                    return true;
-                }
-            });
-            MapStage.getInstance().getPlayerSprite().addAction(flicker);
-        }
-        if (WorldStage.getInstance().getPlayerSprite().getCollisionHeight() == 0f) {
-            SequenceAction flicker = new SequenceAction(Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), Actions.fadeOut(0.25f), Actions.fadeIn(0.25f), new Action() {
-                @Override
-                public boolean act(float v) {
-                    Timer.schedule(new Timer.Task() {
-                        @Override
-                        public void run() {
-                            WorldStage.getInstance().getPlayerSprite().resetCollisionHeight();
-                        }
-                    }, 0.5f);
-                    return true;
-                }
-            });
-            WorldStage.getInstance().getPlayerSprite().addAction(flicker);
-        }
+        flicker(MapStage.getInstance().getPlayerSprite());
+        flicker(WorldStage.getInstance().getPlayerSprite());
     }
 }
